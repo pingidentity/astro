@@ -72,11 +72,11 @@ describe("FormTimeZone", function () {
     }
 
     function getRows (component) {
-        return ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "tooltip-menu-option");
+        return ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "button-menu__button");
     }
 
     function getMenu (component) {
-        return TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-menu-options");
+        return TestUtils.findRenderedDOMNodeWithClass(component, "button-menu__scroller");
     }
 
     function getCountryZones (countryAbbr) {

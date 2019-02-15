@@ -1,6 +1,7 @@
 // INCLUDE PARTIALS ----------------------------------------------------------------------------------------------------
 
 @import 'code-view';
+@import 'forms/dropdown-button';
 @import 'forms/_keyword-search';
 @import 'forms/_translation-picker';
 @import 'list/column-selector.scss';
@@ -3126,93 +3127,6 @@ label {
     }
 }
 
-
-@mixin tooltip-menu {
-    .tooltip-menu {
-        display: block;
-        position: absolute;
-        left: 0;
-        z-index: $zindex__menu;
-        border: 1px solid $color-input-border;
-        background: $color-white;
-
-        @include border-radius(3px);
-        @include animation(fade-in 0.2s);
-
-        &:before,
-        &:after {
-            content: '';
-            position: absolute;
-            border-style: solid;
-            border-width: 10px;
-            left: 15px;
-        }
-        &:before {
-            top: -21px;
-            border-color: transparent transparent $color-input-border transparent;
-        }
-        &:after {
-            top: -20px;
-            border-color: transparent transparent $color-white transparent;
-        }
-
-        .tooltip-menu-options {
-            position: relative;
-            box-sizing: border-box;
-            max-height: 285px;
-            width: 202px;
-            overflow: auto;
-            margin: 0 0 10px;
-
-            &--no-title {
-                margin-top: 10px;
-            }
-        }
-        .tooltip-menu-option {
-            display: block;
-            position: relative;
-            cursor: pointer;
-
-            &:hover,
-            &.selected {
-                background-color: $color-elderly;
-            }
-
-            @include transition(all 0.1s);
-        }
-        .tooltip-menu-search {
-            position: relative;
-            margin: 10px;
-
-            &:before {
-                font-family: $icon-font;
-                content: '\73';
-                position: absolute;
-                top: 12px;
-                left: 10px;
-                font-size: 17px;
-                line-height: 1em;
-                text-transform: none;
-            }
-
-            input {
-                padding-left: 35px;
-            }
-        }
-        .tooltip-menu-search-clear {
-            position: absolute;
-            top: 12px;
-            right: 14px;
-            font-size: 12px;
-
-            &:before {
-                content: 'X';
-                font-family: $icon-font;
-            }
-        }
-    }
-}
-
 .input-timezone {
     position: relative;
     display: inline-block;
@@ -3249,51 +3163,6 @@ label {
     }
     &__search .input-text {
         margin-bottom: 0;
-    }
-}
-
-.input-menu-button {
-    position: relative;
-    display: inline-block;
-
-    @include tooltip-menu;
-
-    .tooltip-menu {
-        top: 41px;
-
-        .tooltip-menu-options-title {
-            margin: 20px 0 7px 22px;
-        }
-        .tooltip-menu-option {
-            padding: 8px 15px 7px 22px;
-            line-height: 20px;
-
-            &:before {
-                font-family: $icon-font;
-                content: '\2b';
-                font-size: 10px;
-                position: absolute;
-                left: 7px;
-                top: 8px;
-                color: $color-white;
-
-                @include transition($default-input-transition);
-            }
-            &:hover {
-                background: $color-elderly;
-                text-decoration: none;
-
-                &:before {
-                    color: inherit;
-                }
-            }
-        }
-    }
-    .tooltip-menu-description {
-        position: absolute;
-        top: 0;
-        padding: 20px;
-        color: $color-rhino;
     }
 }
 

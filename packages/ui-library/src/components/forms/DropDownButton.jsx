@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import classnames from "classnames";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import _ from "underscore";
 import Utils from "../../util/Utils.js";
+import Popover from "../tooltips/Popover";
 
 /**
  * @callback DropDownButton~onValueChange
@@ -156,6 +156,15 @@ class Stateless extends Component {
         }
     };
 
+    _renderOptionNodes = () => _.map(this.props.options, (value, key) => (
+        <a
+            data-id={key}
+            onClick={_.partial(this._onValueChanged, key)}
+            key={key}
+            className="dropdown-button__option">
+            {value}
+        </a>
+    ));
 
     componentDidMount() {
         window.addEventListener("click", this._handleGlobalClick);
@@ -170,60 +179,33 @@ class Stateless extends Component {
     render() {
         const {
             label,
+            open,
             renderButton,
             title
         } = this.props;
-        const classNames = classnames(
-            "input-menu-button",
-            this.props.className
-        );
-
-        let content = null;
-
-        if (this.props.open) {
-            const optionNodes = _.map(this.props.options, (value, key) => {
-
-                return (
-                    <a
-                        data-id={key}
-                        onClick={_.partial(this._onValueChanged, key)}
-                        key={key}
-                        className="tooltip-menu-option">
-                        {value}
-                    </a>
-                );
-            });
-
-            const menuClassNames = classnames(
-                "tooltip-menu-options",
-                {
-                    "tooltip-menu-options--no-title": !title
-                }
-            );
-
-            content = (
-                <div className="tooltip-menu" ref="menu" data-id="menu">
-                    {title &&
-                        <div className="tooltip-menu-options-title" data-id="options-title">{title}</div>}
-                    <div className={menuClassNames} data-id="options">
-                        {optionNodes}
-                    </div>
-                </div>
-            );
-        }
 
         return (
-            <div className={classNames} data-id={this.props["data-id"]}>
-                {renderButton
-                    ? renderButton({
-                        onClick: this._toggle,
-                        label
-                    })
-                    : <a data-id="action" className="add button inline" onClick={this._toggle}>
-                        {label}
-                    </a>}
-                {content}
-            </div>
+            <Popover
+                className={this.props.className}
+                data-id={this.props["data-id"]}
+                label={
+                    renderButton
+                        ? renderButton({
+                            onClick: this._toggle,
+                            label
+                        })
+                        : <div data-id="action" className="add button inline" onClick={this._toggle}>
+                            {label}
+                        </div>
+                }
+                open={open}
+            >
+                <div className="dropdown-button__options" data-id="options">
+                    {title &&
+                        <div className="dropdown-button__title" data-id="options-title">{title}</div>}
+                    {open && this._renderOptionNodes()}
+                </div>
+            </Popover>
         );
     }
 }

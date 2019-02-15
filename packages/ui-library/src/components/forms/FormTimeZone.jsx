@@ -1,17 +1,17 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    moment = require("moment-timezone"),
-    zonesMetadata = require("moment-timezone/data/meta/latest.json"),
-    classnames = require("classnames"),
-    CollapsibleLink = require("../general/CollapsibleLink"),
-    EventUtils = require("../../util/EventUtils.js"),
-    FormError = require("./FormError"),
-    FormLabel = require("./FormLabel"),
-    FormSearchBox = require("./FormSearchBox"),
-    KeyCodes = require("../../util/KeyboardUtils.js").KeyCodes,
-    Utils = require("../../util/Utils.js"),
-    _ = require("underscore");
+import PropTypes from "prop-types";
+import React from "react";
+import ReactDOM from "react-dom";
+import moment from "moment-timezone";
+import zonesMetadata from "moment-timezone/data/meta/latest.json";
+import classnames from "classnames";
+import CollapsibleLink from "../general/CollapsibleLink";
+import EventUtils from "../../util/EventUtils.js";
+import FormError from "./FormError";
+import FormLabel from "./FormLabel";
+import FormSearchBox from "./FormSearchBox";
+import { KeyCodes } from "../../util/KeyboardUtils.js";
+import Utils from "../../util/Utils.js";
+import _ from "underscore";
 
 import Popover from "../tooltips/Popover";
 
@@ -181,6 +181,7 @@ class TimeZoneStateless extends React.Component {
         value: PropTypes.string,
         flags: PropTypes.arrayOf(PropTypes.string),
     };
+
     static defaultProps = {
         clearLabel: LABEL_DEFAULTS.CLEAR,
         countryLabel: LABEL_DEFAULTS.COUNTRY,
@@ -194,6 +195,7 @@ class TimeZoneStateless extends React.Component {
         value: moment.tz.guess(),
         flags: [],
     };
+
     state = {
         countryData: null,
         renderedCountries: [],
@@ -295,7 +297,7 @@ class TimeZoneStateless extends React.Component {
             <div
                 key="country-menu"
                 ref="country-menu"
-                className="tooltip-menu-options button-menu__scroller"
+                className="button-menu__scroller"
                 data-id={`${this.props["data-id"]}-tooltip-menu-options`}>
                 {this.state.renderedCountries.map((country, i) => {
                     const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
@@ -306,7 +308,6 @@ class TimeZoneStateless extends React.Component {
                             ref={"country-option-" + i}
                             key={"country-option-" + i}
                             className={classnames(
-                                "tooltip-menu-option",
                                 "button-menu__button button-menu__button button-menu__button--nopad",
                                 rowCss
                             )}>
@@ -338,10 +339,10 @@ class TimeZoneStateless extends React.Component {
                     </div>
                 )}
                 <div
-                    className="tooltip-menu-options button-menu__scroller"
+                    className="button-menu__scroller"
                     ref="zone-menu"
                     data-id={`${this.props["data-id"]}-tooltip-menu-options`}>
-                    {this.state.renderedZones.map(function (tz, i) {
+                    {this.state.renderedZones.map((tz, i) => {
                         const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
                         return (
                             <button
@@ -350,8 +351,7 @@ class TimeZoneStateless extends React.Component {
                                 ref={"zone-option-" + i}
                                 key={"zone-option-" + i}
                                 className={classnames(
-                                    "tooltip-menu-option",
-                                    "button-menu__button button-menu__button button-menu__button--nopad",
+                                    "button-menu__button button-menu__button--nopad",
                                     rowCss
                                 )}>
                                 <span className="timezone-abbr">{tz.abbr}</span>
@@ -360,7 +360,7 @@ class TimeZoneStateless extends React.Component {
                                 <span className="timezone-offset input-timezone__offset">{tz.time}</span>
                             </button>
                         );
-                    }.bind(this))}
+                    })}
                 </div>
             </div>
         );
@@ -378,49 +378,51 @@ class TimeZoneStateless extends React.Component {
     }
 
     _refreshData = (nextProps) => {
-        let newState = {};
-        const searchString = nextProps.searchString ? nextProps.searchString.toLowerCase() : "";
-        const currentUtcTime = moment().utc();
+        this.setState(({ countryData, zoneData }) => {
+            let newState = {};
+            const searchString = nextProps.searchString ? nextProps.searchString.toLowerCase() : "";
+            const currentUtcTime = moment().utc();
 
-        // refresh the time for each of the zones
-        newState.zoneData = this.state.zoneData.map(function (tz) {
-            return {
-                abbr: tz.abbr,
-                name: tz.name,
-                time: moment.tz(currentUtcTime, tz.name).format("h:mm A"),
-                offset: tz.offset
-            };
-        });
-
-        // if a country is passed-in/selected, get the zones for that country ordered by the time offset
-        if (nextProps.filterByCountry && zonesMetadata.countries[nextProps.filterByCountry]) {
-            const countryZoneNames = zonesMetadata.countries[nextProps.filterByCountry].zones.reverse();
-
-            let countryZones = this.state.zoneData.filter(function (zone) {
-                return countryZoneNames.indexOf(zone.name) > -1;
-            });
-            countryZones = _.sortBy(countryZones, function (country) {
-                return country.offset;
+            // refresh the time for each of the zones
+            newState.zoneData = zoneData.map(function (tz) {
+                return {
+                    abbr: tz.abbr,
+                    name: tz.name,
+                    time: moment.tz(currentUtcTime, tz.name).format("h:mm A"),
+                    offset: tz.offset
+                };
             });
 
-            newState.renderedZones = countryZones;
+            // if a country is passed-in/selected, get the zones for that country ordered by the time offset
+            if (nextProps.filterByCountry && zonesMetadata.countries[nextProps.filterByCountry]) {
+                const countryZoneNames = zonesMetadata.countries[nextProps.filterByCountry].zones.reverse();
 
-        // if a country is not yet selected, filter the all countries by the search text has been entered
-        } else {
-            let filteredCountries;
-
-            if (searchString) {
-                filteredCountries = this.state.countryData.filter(function (country) {
-                    return country.name.toLowerCase().indexOf(searchString) > -1;
+                let countryZones = zoneData.filter(function (zone) {
+                    return countryZoneNames.indexOf(zone.name) > -1;
+                });
+                countryZones = _.sortBy(countryZones, function (country) {
+                    return country.offset;
                 });
 
-            } else {
-                filteredCountries = this.state.countryData;
-            }
-            newState.renderedCountries = filteredCountries;
-        }
+                newState.renderedZones = countryZones;
 
-        this.setState(newState);
+            // if a country is not yet selected, filter the all countries by the search text has been entered
+            } else {
+                let filteredCountries;
+
+                if (searchString) {
+                    filteredCountries = countryData.filter(function (country) {
+                        return country.name.toLowerCase().indexOf(searchString) > -1;
+                    });
+
+                } else {
+                    filteredCountries = countryData;
+                }
+                newState.renderedCountries = filteredCountries;
+            }
+
+            return newState;
+        });
     };
 
     _setListPosition = () => {
@@ -524,8 +526,7 @@ class TimeZoneStateless extends React.Component {
                             ref="searchString"
                         />
                     </div>
-                    {this.props.filterByCountry && this._renderZones()}
-                    {!this.props.filterByCountry && this._renderCountries()}
+                    {this.props.filterByCountry ? this._renderZones() : this._renderCountries()}
                     {this.props.onClear && this.props.value && (
                         <div className="button-menu__options">
                             <a className="button-menu__option-link" onClick={this.props.onClear}>
@@ -557,11 +558,10 @@ class TimeZoneStateful extends React.Component {
         value: this.props.value
     };
 
-    _toggleMenu = () => {
-        this.setState({
-            open: !this.state.open
-        });
-    };
+    _toggleMenu = () =>
+        this.setState(({ open }) => ({
+            open: !open
+        }));
 
     _onSearch = (searchString, selectedIndex) => {
         this.setState({
@@ -612,4 +612,4 @@ class TimeZoneStateful extends React.Component {
 
 FormTimeZone.getZoneNameDisplayValue = getZoneNameDisplayValue;
 
-module.exports = FormTimeZone;
+export default FormTimeZone;
