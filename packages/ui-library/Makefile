@@ -181,8 +181,8 @@ log-config:
 	@echo "Coverage status code: $(COVERAGE_STATUS_CODE)"
 
 install-node-npm:
-	npm prune
-	npm install
+	npm cache clean --force
+	npm install --no-shrinkwrap --update-binary
 	npm rebuild node-sass
 
 clean-mvn:
