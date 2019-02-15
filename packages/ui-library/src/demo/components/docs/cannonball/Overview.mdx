@@ -1,0 +1,41 @@
+# V4: Cannonball Overview
+
+## Why a major release?
+
+- Update outdated React methodologies
+- Design standards have evolved
+- New approaches to the developer experience
+- Untangle legacy CSS and markup
+- Standardize component APIs
+
+## Developer Impact
+
+- Use components and props instead of CSS classes
+- Reduce custom CSS - should be applied only to custom classNames and should have a removal date
+- Tests should target test hooks (eg, data-ids) instead of classNames or tag names
+- Some default functionality changes (Stateful vs Stateless)
+
+## Developer Experience Improvements
+
+- No import paths necessary – components can be imported by name (import TextField from ui-library/TextField)
+- More flexibility: Render props and HOCs
+- Easier to use documentation site
+- Patch releases for automatic bug fixes
+- Better process for pull requests
+- More developer outreach
+
+## Revamping CSS
+
+- Components and props take the place of commonly-used className
+- Better testing hooks that don’t require certain classNames and DOM structure
+- Continued support of custom classNames
+- Start rewriting all CSS with BEM classNames to better encapsulate styles
+
+## New and Better Templates
+- More templates with complete integration testing
+- Templates are built only with components – no class names needed
+
+## Stronger Testing
+- More screenshot tests
+- Cross-browser screenshot testing
+- Snapshot tests to ensure reliability of testing hooks

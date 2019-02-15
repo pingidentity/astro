@@ -163,3 +163,14 @@ $sidenav-lineheight: 22px;
     background: $color-elderly;
     @include font-pn-regular;
 }
+
+.ui-library-logo {
+    height: auto;
+    width: auto;
+    &--dark {
+        fill: $color-slate;
+    }
+    &--light {
+        fill: $color-white;
+    }
+}

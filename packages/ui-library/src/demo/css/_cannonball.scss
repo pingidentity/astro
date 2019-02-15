@@ -1,0 +1,65 @@
+.cannonball-container {
+    top: -25px;
+    bottom: -40px;
+    right: -40px;
+    left: -40px;
+    box-sizing: border-box;
+    min-height: unset;
+    position: absolute;
+}
+
+.slide {
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.cannonball-bg--1 {
+    background-image: url('../images/cannonball/escher-style.png');
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: calc(100% + 350px) calc(100% + 40px);
+    background-attachment: fixed;
+    background-color: linear-gradient(to right, $color-accent-neutral-60,  $color-white);
+    width: 100%;
+    &:before {
+        content: '';
+        background-image: url('../images/cannonball/pinginverse.svg');
+        background-color: white;
+        background-size: cover;
+        height: 60px;
+        width: 60px;
+        position: fixed;
+        top: 70px;
+        right: 40px;
+    }
+}
+.background-overlay {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, $color-accent-neutral-60,  rgba($color-white, 0.2), rgba($color-white, 0.2));
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.overlay--light {
+    background-color: white;
+    padding: 40px;
+    margin: 60px 120px;
+    max-width: 50%;
+}
+
+.ui-lib-landing-page {
+    &__info {
+        padding: 160px;
+        flex-basis: 33%;
+    }
+    &__logo {
+        width: 100%;
+    }
+}

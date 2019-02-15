@@ -1,0 +1,21 @@
+# Behavior Changes and the ‘flags’ Prop
+
+## Deprecation Messages
+
+We will be adding deprecation messages in v3 to encourage code changes that will make upgrading seamless. The messages will contain specific instructions to address changing behaviors, props, and components as well as links to detailed documentation on the UI Library documentation site.
+
+Beginning on February 22 (v3.33.0), developers will begin to see these deprecation messages in the console. If your app has no warnings, you are ready to move directly to v4. No new warnings will be added after the May 3 release of the UI Library to give developers an extra 3 months to address deprecations ahead of the v4 release.
+
+## Flags
+We will be changing the default behavior for several components. To help with transition, we are introducing a prop called ‘flags’ that allows developers to opt into future behaviors early and ensure a smooth upgrade to v4.
+
+These flags will appear on a feature-by-feature basis until the May 3 deprecation freeze, at which point you’ll be able to add the ‘v4’ flag to a component to get any and and all new behaviors regardless of your library version.
+
+Example: `flags={[ "new-behavior" ]}`
+
+
+## Progressive Statelessness
+
+We’re eliminating the distinction between the stateful and stateless versions of components. Currently, a lot of our components require an all-or-nothing approach to statelessness that requires you to take total control over a component when you might want to control just a small bit.
+
+Instead, we’ll use a model of progressive statelessness. Components will be stateful by default but will use props in place of state when those props are defined.

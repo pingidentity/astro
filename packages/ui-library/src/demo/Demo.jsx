@@ -259,7 +259,7 @@ class DemoApp extends React.Component {
             path = this._demoItem.pathToSource,
             demoPath = this._demoItem.pathToDemoSource,
             watch = _.pick(this.props.nav, "selectedSection", "selectedNode", "root");
-        
+
         return (
             <AppFrame
                 autoSelectItemFromRoot={true}

@@ -36,6 +36,12 @@ module.exports = [
                 icon: "chat"
             },
             {
+                label: "UI Library 4.0.0",
+                demo: require("../components/docs/cannonball/Cannonball"),
+                fullscreen: true,
+                icon: "circle"
+            },
+            {
                 label: "UI Library 101",
                 demo: contentPage(UILibrary101),
                 fullscreen: true,

@@ -1,0 +1,19 @@
+# CSS Classes, Markup, and Data IDs
+
+## Separating Components from DOM
+
+Starting in UI Library v3, an effort was made to separate the testing of the UI Library components and the underlying DOM. We introduced data-ids as a way to keep tests from breaking when we updated component DOM.
+
+In v4 ,we are taking the separation of Components from their underlying DOM a step further. In order to fully ensure that our markup changes do not break existing UIs, we are removing support for targeting UI Library CSS classes. Starting with v4, we will not guarantee consistent classNames or markup, and we will discourage using these as the basis for custom styling or testing.
+
+Instead of string className props we will use positioning and styling props decoupled from our CSS classes. Styling that was only previously available using classNames (eg. input-row) will be only be supported using layout components.
+
+For Integration Testing, we will guarantee the availability and consistency of data-ids on crucial elements for testing user interactions.
+
+
+
+## Building from Sass (scss) vs using the CDN / precompiled CSS
+
+Previously, the recommended way of using the UI Library styles was for developers to compile the CSS from the Sass source files. Going forward, we recommend using our precompiled CSS file at `ui-library/lib/css/ui-library.css` or the CDN https://assets.pingone.com/ux/ui-library/3.32.0/css/ui-library.css.
+
+If you still wish to build from the Sass, a build process change will be required. The UI Library currently uses browser-specific mixins in its Sass source files. For V4, we want to simplify our Sass code and use Post-CSS and Autoprefixer to add the prefixes only to our processed CSS. You will need to add this step to your build process for full browser support of your CSS.
