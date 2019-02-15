@@ -156,8 +156,14 @@ describe("StatAreaCard", () => {
                 <StatAreaCard.CustomTooltip
                     onMouseOver={onMouseOver}
                     yAxisKey={"value"}
+                    xAxisKey={"id"}
                     payload={[
-                        { payload: { value: "foobar" } }
+                        {
+                            payload: {
+                                id: "my-id",
+                                value: "my-value",
+                            }
+                        }
                     ]}
                 />
             </div>

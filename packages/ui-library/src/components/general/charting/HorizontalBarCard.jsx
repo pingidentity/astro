@@ -51,7 +51,8 @@ import Color from "color";
 
 const highlightColor = "#E12F51";
 
-const defaultColor = Color(highlightColor).lighten(0.5);
+const defaultColor = Color(highlightColor).lighten(0.5).hex();
+
 
 export default class HorizontalBarCard extends Component {
 
@@ -123,7 +124,7 @@ export default class HorizontalBarCard extends Component {
                             {this.props.title}
                         </div>
                         {!this.props.loading && ([
-                            <div className="horizontalBar-card__scroll">
+                            <div key="chart" className="horizontalBar-card__scroll">
                                 <BarChart
                                     data-id={`${this.props["data-id"]}-chart`}
                                     className="horizontalBar-card__horizontal-card"
@@ -151,7 +152,7 @@ export default class HorizontalBarCard extends Component {
                                     </Bar>
                                 </BarChart>
                             </div>,
-                            <div className="horizontalBar-card__number-container">
+                            <div key="stats" className="horizontalBar-card__number-container">
                                 <div key="barTotalKey" className="horizontalBar-card__number-info">
                                     <div
                                         data-id={`${this.props["data-id"]}-number`}

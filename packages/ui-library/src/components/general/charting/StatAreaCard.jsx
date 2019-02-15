@@ -156,14 +156,19 @@ class StatAreaCard extends React.Component {
 }
 
 // No tooltip is displayed. This code is used only to trigger an onMouseOver event.
-const CustomTooltip = (props) => {
-    const payload = props.payload[0] && props.payload[0].payload;
+const CustomTooltip = ({
+    onMouseOver,
+    payload: [
+        { payload } = {}
+    ],
+    yAxisKey
+}) => {
 
-    if (payload && payload[props.yAxisKey] && props.onMouseOver) {
-        props.onMouseOver(payload[props.yAxisKey]);
+    if (payload && payload.id && payload[yAxisKey] && onMouseOver) {
+        onMouseOver(payload[yAxisKey], payload.id);
     }
 
-    return true; // since a return is required, return an empty element
+    return true;
 };
 
 
