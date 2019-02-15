@@ -615,7 +615,8 @@ module.exports = [
                         demo: require("../components/wizard-v2/WizardDemo"),
                         pathToDoc: "components/wizard-v2/Wizard.jsx",
                         pathToSource: "components_wizard-v2_Wizard.jsx.html",
-                        pathToDemoSource: "demo_components_wizard-v2_WizardDemo.jsx.html"
+                        pathToDemoSource: "demo_components_wizard-v2_WizardDemo.jsx.html",
+                        docName: "Wizard_v2",
                     },
                 ]
             },

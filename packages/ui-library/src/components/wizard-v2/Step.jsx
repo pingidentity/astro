@@ -1,21 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Step(props) {
-    const stepDataId = `${props["data-id"]}`;
-
-    return (
-        <div data-id={stepDataId}>
-            <div className="wizard2-step__title" data-id={`${stepDataId}-title`}>{props.title || props.menuTitle}</div>
-            <div className="wizard2-step__description" data-id={`${stepDataId}-description`}>
-                {props.description || props.menuDescription}
-            </div>
-            <div className="wizard2-step__content" data-id={`${stepDataId}-content`}>
-                {props.children}
-            </div>
+const Step = ({
+    children,
+    "data-id": stepDataId,
+    description,
+    menuDescription,
+    menuTitle,
+    title,
+}) => (
+    <div data-id={stepDataId}>
+        <div className="wizard2-step__title" data-id={`${stepDataId}-title`}>{title || menuTitle}</div>
+        <div className="wizard2-step__description" data-id={`${stepDataId}-description`}>
+            {description || menuDescription}
         </div>
-    );
-}
+        <div className="wizard2-step__content" data-id={`${stepDataId}-content`}>
+            {children}
+        </div>
+    </div>
+);
 
 Step.propTypes = {
     completed: PropTypes.bool,
@@ -27,6 +30,7 @@ Step.propTypes = {
     onSave: PropTypes.func,
     required: PropTypes.bool,
     title: PropTypes.string,
+    menuTitle: PropTypes.string,
 };
 
 export default Step;

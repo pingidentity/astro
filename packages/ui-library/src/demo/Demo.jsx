@@ -90,11 +90,14 @@ class DemoApp extends React.Component {
         const {
             _demoItem: {
                 module,
-                pathToDoc
+                pathToDoc,
+                docName,
             }
         } = this;
 
-        if (module && pathToDoc) {
+        if (docName) {
+            return docName;
+        } else if (module && pathToDoc) {
             return "module-" + pathToDoc.match(/(\w*)\//)[1] + "_" +
                 pathToDoc.match(/(\w*).js/)[1];
         } else if (pathToDoc) {

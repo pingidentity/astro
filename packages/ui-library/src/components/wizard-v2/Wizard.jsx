@@ -20,25 +20,66 @@ import { lightInputs } from "../../util/CSSModifiers";
  *     Value of the "data-id" assigned to the top-level HTML container.
  * @param {number} [activeStep=0]
  *     The zero-based index of the step to display.
- * @param {Object.Wizard_v2~Messages} [messageProps]
+ * @param {Messages} [messageProps]
  *     An object containing the props for the Messages displayed in the active step. Any props specified
  *     in the Messages will override the default behavior.  Any unassigned properties
  *     will take the wizard defaults. See the Message component for full documentation of these props.
- * @param {Object.Wizard_v2~ButtonBar} [buttonBarProps]
+ * @param {ButtonBar} [buttonBarProps]
  *     An object containing the props for the buttonBar displayed in the active step. Any props specified
  *     in the buttonBar will override the default behavior as well as the step-level onSave.  Any unassigned properties
  *     will take the wizard defaults. See the ButtonBar component for full documentation of these props.
- * @param {Object.Wizard_v2} [strings]
+ * @param {Array.<StringEntry>} [strings]
  *     An object containing key/text pairs of the text (menuTitle, dividerTitle) in the wizard menu.
- * @param {Array.Wizard} [headerItems]
+ * @param {Array.<TitleValuePair>} [headerItems]
  *     An array of objects containing the information to display horizontally along the top of the wizard. This data
  *     usually relates to information saved in a previous step.
  * @param {Wizard_v2~onCancel} [onCancel]
  *     Handler function triggered when the cancel button is clicked. Note that this function is not triggered when a
  *     skip button is clicked.
+ * @param {Wizard_v2~onClose} [onClose]
+ *     Handler function triggered when the close "x" button in the top cornder is clicked.
+ * @param {Wizard_v2~onMenuClick} [onMenuClick]
+ *     Handle clicks on the menu items in the sidebar. Called with the index of the step.
  * @param {Wizard_v2~onNext} [onNext]
  *     Handler function triggered when the next button is clicked. Note that this funtion is not triggered when a save
  *     button is clicked.
+ * @param {ButtonBar~onSave} [onSave]
+ *     Handler function triggered when the save button is clicked.
+ * @param {string|boolean} [loading]
+ *     Whether to show the spinner. If it's a string, that will be the message shown while loading.
+ */
+
+/**
+ * @typedef {object} StringEntry
+ *
+ * @property {string} [key]
+ * @property {string} [text]
+ */
+
+/**
+ * @typedef {object} TitleValuePair
+ *
+ * @property {string} [title]
+ * @property {string} [value]
+ */
+
+/**
+ * @typedef {function} Wizard_v2~onClose
+ */
+
+/**
+ * @typedef {function} Wizard_v2~onCancel
+ */
+
+/**
+ * @typedef {function} Wizard_v2~onMenuClick
+ *
+ * @param {number} step
+ *     Index of the step
+ */
+
+/**
+ * @typedef {function} Wizard_v2~onNext
  */
 
 /**
@@ -60,7 +101,7 @@ import { lightInputs } from "../../util/CSSModifiers";
  */
 
 /**
-  * @class Step
+  * @class Wizard_v2~Step
   * @desc Displays a single wizard step.
   * @param {string} [data-id="wizard"]
   *     Value of the "data-id" assigned to the top-level HTML container of the step.
@@ -86,7 +127,7 @@ import { lightInputs } from "../../util/CSSModifiers";
   *     The text displayed at the top of the wizard body when the step is active.
   * @param {string} [menuTitle]
   *     The text displayed below the menu title in the menu for this step.
-  * @param {Step~onSave} [onSave]
+  * @param {ButtonBar~onSave} [onSave]
   *     Handler function triggered when the save button is clicked. When specified a save button is rendered in place of
   *     the next button.
  */
@@ -105,6 +146,34 @@ class Wizard extends React.Component {
 
     static displayName = "Wizard";
 
+    static propTypes = {
+        activeStep: PropTypes.number,
+        buttonBarProps: PropTypes.object,
+        messageProps: PropTypes.object,
+        "data-id": PropTypes.string,
+        headerItems: PropTypes.arrayOf(
+            PropTypes.shape({
+                title: PropTypes.string,
+                value: PropTypes.string,
+            })
+        ),
+        strings: PropTypes.arrayOf(
+            PropTypes.shape({
+                key: PropTypes.string,
+                text: PropTypes.string,
+            })
+        ),
+        onCancel: PropTypes.func,
+        onClose: PropTypes.func,
+        onMenuClick: PropTypes.func,
+        onNext: PropTypes.func,
+        onSave: PropTypes.func,
+        loading: PropTypes.oneOfType([
+            PropTypes.bool,
+            PropTypes.string
+        ])
+    };
+
     static defaultProps = {
         activeStep: 1,
         buttonBarProps: {},
@@ -113,6 +182,7 @@ class Wizard extends React.Component {
         loading: false,
         messageProps: null,
         onCancel: _.noop,
+        onMenuClick: _.noop,
         onNext: _.noop,
         required: false,
     };
@@ -150,6 +220,7 @@ class Wizard extends React.Component {
             headerItems,
             messageProps,
             onCancel,
+            onClose,
             onMenuClick,
             onNext,
             onSave,
@@ -159,7 +230,7 @@ class Wizard extends React.Component {
         let activeStep;
         let requiredSteps = [];
         let optionalSteps = [];
-        let hasHeaderItems = this.props.headerItems && this.props.headerItems.length > 0;
+        let hasHeaderItems = headerItems && headerItems.length > 0;
 
         React.Children.forEach(children, (child, index) => {
             if (child && typeof(child) === "object" && child.hasOwnProperty("props")) {
@@ -196,7 +267,7 @@ class Wizard extends React.Component {
                 {hasHeaderItems && <Header data-id={dataId} sections={headerItems}/> }
                 <button
                     className="wizard2-close-btn"
-                    onClick={this.props.onClose}
+                    onClick={onClose}
                     data-id={`${dataId}-close-button`}
                 />
                 <div className={classnames("wizard2__content", lightInputs)}>
@@ -324,34 +395,6 @@ function Header(props) {
         </div>
     );
 }
-
-Wizard.propTypes = {
-    activeStep: PropTypes.number,
-    buttonBarProps: PropTypes.object,
-    messageProps: PropTypes.object,
-    "data-id": PropTypes.string,
-    headerItems: PropTypes.arrayOf(
-        PropTypes.shape({
-            title: PropTypes.string,
-            value: PropTypes.string,
-        })
-    ),
-    strings: PropTypes.arrayOf(
-        PropTypes.shape({
-            key: PropTypes.string,
-            text: PropTypes.string,
-        })
-    ),
-    onCancel: PropTypes.func,
-    onClose: PropTypes.func,
-    onNext: PropTypes.func,
-    onSave: PropTypes.func,
-    stepTotal: PropTypes.number,
-    loading: PropTypes.oneOfType([
-        PropTypes.bool,
-        PropTypes.string
-    ])
-};
 
 Wizard.Step = Step;
 Wizard.DefaultText = DEFAULT_TEXT;
