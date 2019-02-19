@@ -55,6 +55,7 @@ class DemoItem extends React.Component {
 
     render() {
         const {
+            contentPage,
             demoCodePathUrl,
             description,
             fullscreen,
@@ -87,10 +88,10 @@ class DemoItem extends React.Component {
 
         const markdown = description && marked(description),
             props = _.extend({}, this.props, this.state.store, { flags: this.state.flags }),
-            containerClassName = classnames({ fullscreen }),
+            containerClassName = classnames({ "fullscreen": (fullscreen || contentPage) }),
             headerClassName = "doc";
 
-        const OutputComponent = fullscreen ? StretchContent : "div";
+        const OutputComponent = (fullscreen || contentPage) ? StretchContent : "div";
 
         return (
             <StretchContent className={containerClassName}>
@@ -135,7 +136,7 @@ class DemoItem extends React.Component {
                         }
                     </OutputComponent>
 
-                    {!fullscreen && <Markup content={this.props.code} />}
+                    {!(fullscreen || contentPage) && <Markup content={this.props.code} />}
                 </StretchContent>
             </StretchContent>
         );

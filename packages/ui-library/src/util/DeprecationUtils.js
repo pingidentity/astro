@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { isProduction } from "./Utils";
 
 function getSubstituteMessage(sub) {
     return sub ? ` Use "${sub}" instead.` : "";
@@ -250,4 +251,26 @@ export function deprecationError({
         `The ${type} "${name}" is deprecated and has been removed.${
             getSubstituteMessage(substitute)}${renderMessage(message)}`
     );
+}
+
+/**
+ * @desc Function specifically for the v4 Cannonball release. Shows a warning about changing behavior
+ * @param {string} message - The message that will appear between the two pieces of boilerplate.
+ *
+ * @returns {} No return value.
+ *
+ * @example: cannonballChangeWarning({
+ *      message: "This component will act much differently. Add 'much-differently' flag to preview.",
+ *  })
+ */
+export function cannonballChangeWarning({
+    message
+}) {
+    if (!isProduction()) {
+        console.warn(
+            `WARNING potential 4.0.0 breaking change: ` +
+            message +
+            ` For more information: http://uilibrary.ping-eng.com/3.33.0-SNAPSHOT/index.html#/?selectedSection=V4BreakingChanges&selectedNode=V4BreakingChanges&root=Documentation`
+        );
+    }
 }

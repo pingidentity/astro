@@ -8,6 +8,7 @@ import SubmittingCode from "../components/docs/contributing/SubmittingCode.mdx";
 import ComponentRequirements from "../components/docs/contributing/ComponentRequirements.mdx";
 import StandardProps from "../components/docs/contributing/StandardProps.mdx";
 import ClassNames from "../components/docs/contributing/ClassNames.mdx";
+import Changes from "../components/docs/cannonball/Changes.mdx";
 
 const contentPage = WrappedComponent => (props) => (
     <PageSection>
@@ -32,7 +33,7 @@ module.exports = [
             {
                 label: "Release Notes",
                 demo: require("../components/docs/ReleaseNotes"),
-                fullscreen: true,
+                contentPage: true,
                 icon: "chat"
             },
             {
@@ -42,27 +43,33 @@ module.exports = [
                 icon: "circle"
             },
             {
+                label: "V4 Breaking Changes",
+                demo: contentPage(Changes),
+                contentPage: true,
+                icon: "walkthrough",
+            },
+            {
                 label: "UI Library 101",
                 demo: contentPage(UILibrary101),
-                fullscreen: true,
+                contentPage: true,
                 icon: "clipboard"
             },
             {
                 label: "Using Components",
                 demo: contentPage(UsingComponents),
-                fullscreen: true,
+                contentPage: true,
                 icon: "curly-braces"
             },
             {
                 label: "Using Templates",
                 demo: contentPage(UsingTemplates),
-                fullscreen: true,
+                contentPage: true,
                 icon: "apps"
             },
             {
                 label: "Content",
                 demo: require("../components/docs/Content"),
-                fullscreen: true,
+                contentPage: true,
                 icon: "notepad"
             },
             {
@@ -72,25 +79,25 @@ module.exports = [
                     {
                         label: "Text Styles",
                         demo: require("../components/docs/TextStyles"),
-                        fullscreen: true,
+                        contentPage: true,
                         icon: "details"
                     },
                     {
                         label: "Colors",
                         demo: require("../components/tutorials/Colors"),
-                        fullscreen: true,
+                        contentPage: true,
                         icon: "clipboard"
                     },
                     {
                         label: "Icons",
                         demo: require("../components/tutorials/Icons"),
-                        fullscreen: true,
+                        contentPage: true,
                         icon: "clipboard"
                     },
                     {
                         label: "Inputs",
                         demo: require("../components/tutorials/Inputs"),
-                        fullscreen: true,
+                        contentPage: true,
                         icon: "clipboard"
                     },
                     {
@@ -109,22 +116,22 @@ module.exports = [
                     {
                         label: "Submitting Code",
                         demo: contentPage(SubmittingCode),
-                        fullscreen: true,
+                        contentPage: true,
                     },
                     {
                         label: "Component Requirements",
                         demo: contentPage(ComponentRequirements),
-                        fullscreen: true,
+                        contentPage: true,
                     },
                     {
                         label: "Standard Props",
                         demo: contentPage(StandardProps),
-                        fullscreen: true,
+                        contentPage: true,
                     },
                     {
                         label: "Class Names",
                         demo: contentPage(ClassNames),
-                        fullscreen: true,
+                        contentPage: true,
                     },
                 ]
             }

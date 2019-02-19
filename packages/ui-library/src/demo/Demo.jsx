@@ -310,6 +310,7 @@ class DemoApp extends React.Component {
                         code={this.props.code[id]}
                         status={this._demoItem.status}
                         fullscreen={this._demoItem.fullscreen}
+                        contentPage={this._demoItem.contentPage}
                         flags={this._demo && this._demo.flags}
                     />
                 </div>
