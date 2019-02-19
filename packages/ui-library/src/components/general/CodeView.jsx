@@ -12,12 +12,19 @@ import Utils from "../../util/Utils";
  * @param {string} [data-id="code-view"]
  *          To define the base "data-id" value for the top-level HTML container.
  * @param {string} [language]
- *          defines the type of language to highlight. auto if none provided.
+ *          Defines the type of language to highlight. auto if none provided.
  * @param {string} [value]
- *          string value shown in the codeview
+ *          The value passed in to display the code. The value will not format the code which means
+ *          you will have to format it yourself in the html, or pass value a JSON.stringify().
  * @param {string} [className]
- *      css paramanter
- * @example <Code data=id="code-view" value={markup} className="code-view" />
+ *           CSS class to set on the top-level HTML container.
+ *
+ * @example <CodeView value={markup}/>
+ *  Basic example of using CodeView.
+ * @example <CodeView value={JSON.stringify()}/>
+ *  Example using JSON.stringify to format the code.
+ * @example <CodeView value={markup} langauge="JSON" />
+ *  Example setting the language prop.
  */
 
 class Code extends Component {
