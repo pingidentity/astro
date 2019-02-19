@@ -37,4 +37,14 @@ describe("Icon", function () {
         expect(iconContent.textContent).toBe(childContent);
     });
 
+    it("renders the inline version of the component", function () {
+        const dataId = "myicon";
+        const component = getComponent({ "data-id": dataId, iconName: "cog", type: "inline" });
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, dataId);
+        const noElement = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-graphic");
+
+        expect(element).toBeTruthy();
+        expect(noElement).toBeFalsy();
+    });
+
 });
