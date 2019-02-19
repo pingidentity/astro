@@ -9,13 +9,13 @@ var Link = require("./../../../components/general/Link");
 const LinkDemo = () => {
     return (
         <div>
-            <Link title="A link" url="#" />
+            <Link title="A link" url="#" type="block"/>
             &nbsp;
-            <Link title="A link with a count" url="#" count="1" />
+            <Link title="A link with a count" url="#" count="1" type="block" />
             &nbsp;
-            <Link title="A link with an icon" url="#" icon="cog" />
+            <Link title="A link with an icon" url="#" icon="cog" type="block" />
             &nbsp;
-            <Link className="more-on-topic" title="More on this topic" url="#" icon="alert" />
+            <Link className="more-on-topic" title="More on this topic" url="#" icon="alert" type="block" />
             <hr className="hr" />
             <p>
                 Here's a <Link url="https:/pingidentity.com" target="_blank">simple link</Link> in a block of text.

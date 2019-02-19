@@ -104,4 +104,23 @@ describe("Link", function () {
         expect(element).toBeTruthy();
     });
 
+    it("renders a block type when type is set to block", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><Link type="block" /></div>
+        );
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "content-link");
+        expect(element).toBeTruthy();
+    });
+
+    it("throws warning when no type is set but it's also not obvious that it's a simple link", function() {
+        console.warn = jest.fn();
+
+        expect(console.warn).not.toBeCalled();
+        ReactTestUtils.renderIntoDocument(
+            <div><Link title="What Kind?" /></div>
+        );
+        expect(console.warn).toBeCalled();
+    });
+
 });

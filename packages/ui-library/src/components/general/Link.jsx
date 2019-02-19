@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Icon from "./Icon";
 import Anchor from "./Anchor";
 import classnames from "classnames";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 
 /**
@@ -45,16 +46,33 @@ import classnames from "classnames";
  */
 
 const Link = (props) => {
-    if ((props.children || props.type) && !(props.title || props.count)) {
-        return <Anchor href={props.url} {...props} />;
+    const {
+        children,
+        className,
+        count,
+        target,
+        type,
+        title,
+        url,
+        "data-id": dataId,
+    } = props;
+
+    const isNotBlock = type !== "block";
+
+    if ((children || (type && isNotBlock)) && !(title || count)) {
+        return <Anchor className={className} data-id={dataId} href={url} {...props} />;
+    }
+
+    if (isNotBlock) {
+        cannonballChangeWarning({
+            message: "Link will be used mainly for simple links. For block links, set the 'type' prop to 'block'."
+        });
     }
 
     const {
-        count,
         disabled,
         icon,
         onClick,
-        title
     } = props;
 
     const _handleClick = (event) => {
@@ -63,7 +81,7 @@ const Link = (props) => {
         }
     };
 
-    const linkCss = classnames(props.className, {
+    const linkCss = classnames(className, {
         disabled
     });
 
@@ -82,10 +100,10 @@ const Link = (props) => {
     };
 
     return (
-        <div data-id={props["data-id"]} className="content-link">
+        <div data-id={dataId} className="content-link">
             <a
-                href={props.url}
-                target={props.target}
+                href={url}
+                target={target}
                 className={linkCss}
                 onClick={_handleClick}>
                 { _renderTitle() }
@@ -106,7 +124,8 @@ Link.propTypes = {
     ]),
     type: PropTypes.oneOf([
         "add",
-        "remove"
+        "remove",
+        "block",
     ]),
     disabled: PropTypes.bool,
     onClick: PropTypes.func,

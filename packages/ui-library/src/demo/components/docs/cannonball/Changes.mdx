@@ -29,3 +29,11 @@
 **V3 Behavior:** Buttons with the icon "add" have their margin removed.
 
 **Recommendation:** Set the 'add-button-margin' flag to keep the margin or set the `noSpacing` prop to true on a button to keep it removed.
+
+### Link
+
+**V4 Behavior:** Displays a link with only an A tag unless `type` is set to "block".
+
+**V3 Behavior:** Displays a block element with a link inside it unless it:
+* has `children` or some `type` other than block is set
+* doesn't have `title` or `count` set
