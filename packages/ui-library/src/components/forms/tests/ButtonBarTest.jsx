@@ -303,4 +303,30 @@ describe("ButtonBar", function () {
         expect(tooltipTitle.textContent).toBe(buttonBarParams.saveTooltip.title);
         expect(tooltipText.textContent).toContain(buttonBarParams.saveTooltip.messageText);
     });
+
+    it("renders a cancel button in place of a discard button when the flag is set", function() {
+        const component = getComponent({ onDiscard: jest.fn(), flags: [ "fix-discard-button" ] });
+
+        const cancelBtn = TestUtils.findRenderedDOMNodeWithClass(component, "cancel");
+        const discardBtn = getDiscardButton(component);
+
+        expect(cancelBtn).toBeTruthy();
+        expect(discardBtn).toBeTruthy();
+    });
+
+    it("fires the Cannonball warning when the discard props are used but no flag is set", function() {
+        console.warn = jest.fn();
+
+        expect(console.warn).not.toBeCalled();
+        getComponent({ onDiscard: jest.fn() });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("does not fire the Cannonball warning when either the flag is set or discard props aren't set", function() {
+        console.warn = jest.fn();
+
+        getComponent({ onDiscard: jest.fn(), flags: [ "fix-discard-button" ] });
+        getComponent();
+        expect(console.warn).not.toBeCalled();
+    });
 });

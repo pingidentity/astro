@@ -10,7 +10,7 @@ import Button from "../../../components/buttons/Button";
 * @desc A demo for ButtonBar
 */
 class ButtonBarDemo extends React.Component {
-    static flags = [ "use-portal" ];
+    static flags = [ "use-portal", "fix-discard-button" ];
 
     state = {
         saving: false,

@@ -7,6 +7,7 @@ import CancelTooltip from "./../tooltips/CancelTooltip";
 import ConfirmTooltip from "../tooltips/ConfirmTooltip";
 import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
 import Translator from "../../util/i18n/Translator.js";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 /**
 * @callback ButtonBar~onCancel
@@ -214,7 +215,8 @@ class ButtonBar extends React.Component {
         saveText: "Save",
         enableSavingAnimation: false,
         unfixed: false,
-        visible: true
+        visible: true,
+        flags: [],
     };
 
     _handleSave = (e) => {
@@ -293,6 +295,19 @@ class ButtonBar extends React.Component {
             : this._getSaveButtonMarkup();
     }
 
+    _fixedProps = () => this.props.flags.findIndex(flag => flag === "fix-discard-button") >= 0;
+
+    componentDidMount() {
+        if (this.props.discardText && this.props.onDiscard && !this._fixedProps()) {
+            cannonballChangeWarning({
+                message: (
+                    `The discard button will be styled like a cancel button. ` +
+                    `To use this style now, add the 'fix-discard-button' flag.`
+                ),
+            });
+        }
+    }
+
     render() {
         const discardText = this.props.discardText || Translator.translate("discard"),
             containerClassName = {
@@ -300,7 +315,7 @@ class ButtonBar extends React.Component {
                 hidden: !this.props.visible
             },
             discardClassName = classnames(
-                this.props.discardClassName || null,
+                this.props.discardClassName || (this._fixedProps() && "cancel") || null,
                 { disabled: this.props.enableSavingAnimation }
             ),
             unfixedClassName = { "page-controls-primary--unfixed": this.props.unfixed };
