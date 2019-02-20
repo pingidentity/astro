@@ -81,18 +81,6 @@
                 fill-opacity: 1 !important;
             }
         }
-        .hero-tooltip {
-            &:before {
-                content: '▼';
-
-                position: absolute;
-                top: auto;
-                bottom: -$arrow-height;
-                left: $arrow-offset;
-                right: auto;
-                color: $color-white;
-            }
-        }
         .recharts-tooltip-wrapper {
             margin-top: -5px;
         }
@@ -103,18 +91,6 @@
             fill-opacity: 0.6 !important;
             &:hover {
                 fill-opacity: 1 !important;
-            }
-        }
-        .hero-tooltip {
-            &:before {
-                content: '▲';
-
-                position: absolute;
-                top: -$arrow-height;
-                bottom: auto;
-                left: $arrow-offset;
-                right: auto;
-                color: $color-white;
             }
         }
         .recharts-tooltip-wrapper {
