@@ -1506,6 +1506,34 @@ a {
     }
 }
 
+.checkbox-description {
+    padding-left: 36px;
+}
+
+.value-item {
+    @include flexbox;
+    @include flexbox-direction(row);
+    align-items: center;
+
+    font-size: 14px;
+    color: $color-midnight;
+
+    &__icon {
+        line-height: 1em;
+    }
+
+    &__value {
+        margin-left: $spacing-sm;
+    }
+
+    &__inline {
+        display: inline-block;
+    }
+}
+
+
+// DEPRECATED CLASSES --------------------------------------------------------------------------------------------------
+
 .search-bar {
     $animation-timing: ease-out 0.2s;
 
@@ -1521,10 +1549,7 @@ a {
     }
     .input-text {
         margin: 0;
-
-        input[type=text] {
-            width: 460px;
-        }
+        width: 460px !important;
     }
     .filters {
         display: none;
@@ -1550,30 +1575,5 @@ a {
 
             @include animation(fade-in $animation-timing);
         }
-    }
-}
-
-.checkbox-description {
-    padding-left: 36px;
-}
-
-.value-item {
-    @include flexbox;
-    @include flexbox-direction(row);
-    align-items: center;
-
-    font-size: 14px;
-    color: $color-midnight;
-
-    &__icon {
-        line-height: 1em;
-    }
-
-    &__value {
-        margin-left: $spacing-sm;
-    }
-
-    &__inline {
-        display: inline-block;
     }
 }
