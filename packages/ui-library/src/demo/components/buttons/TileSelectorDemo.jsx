@@ -1,5 +1,6 @@
 import React from "react";
 import TileSelector from "../../../components/buttons/TileSelector";
+import LibraryLogo from "../../core/LibraryLogo";
 
 /**
  * @name TileSelectorDemo
@@ -40,7 +41,7 @@ class TileSelectorDemo extends React.Component {
                     ]}>
                         Just a bit of text.
                     </TileSelector.TileButton>
-                    <TileSelector.TileButton title="Non-Interactive" iconName="server">
+                    <TileSelector.TileButton title="Non-Interactive" icon={<LibraryLogo variant="dark" />}>
                         Cloud-based apps that are accessed within a browser.
                     </TileSelector.TileButton>
                 </TileSelector>
@@ -132,7 +133,7 @@ class TileSelectorDemo extends React.Component {
                         {
                             id: "noninteractive",
                             title: "Non-Interactive",
-                            iconName: "server",
+                            icon: <img src="./images/src/images/logo-pingidentity.png" />,
                             description: "Cloud-based apps that are accessed within a browser.",
                             panel: {
                                 label: "CHOOSE CONNECTION TYPE",

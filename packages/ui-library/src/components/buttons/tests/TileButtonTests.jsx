@@ -73,4 +73,24 @@ describe("TileButton", () => {
 
         expect(title.exists()).toEqual(true);
     });
+
+    it("renders icon if icon is passed in", () => {
+        const component = getComponent({
+            icon: <div className="special-icon"></div>
+        });
+
+        const iconContainer = component.find(".tile-button__icon-container");
+        const icon = component.find(".special-icon");
+
+        expect(iconContainer.exists()).toEqual(true);
+        expect(icon.exists()).toEqual(true);
+    });
+
+    it("prevents default on mouse down", () => {
+        const mockE = { preventDefault: jest.fn() };
+        const component = getComponent();
+
+        component.find("button").simulate("mousedown", mockE);
+        expect(mockE.preventDefault).toHaveBeenCalled();
+    });
 });

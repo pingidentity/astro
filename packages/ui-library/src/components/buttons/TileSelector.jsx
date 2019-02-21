@@ -15,6 +15,8 @@ const getPanelPosition = (options, selected) => {
  * @typedef {Object} TileSelector~ButtonData
  * @param {string} [description]
  *     The blob of text between the icon and the title
+ * @param {node} [icon]
+ *     Node for custom icon
  * @param {string} [iconName]
  *     The name of the icon
  * @param {string} [id]
@@ -70,6 +72,7 @@ const TileSelector = ({
         [buttonsAcc, activePanel],
         {
             description,
+            icon,
             iconName,
             id,
             title,
@@ -88,6 +91,7 @@ const TileSelector = ({
                         key={id}
                         data-id={`${dataId}-button-${id}`}
                         title={title}
+                        icon={icon}
                         iconName={iconName}
                         selected={isSelected}
                         onClick={handleChange}
@@ -127,6 +131,7 @@ TileSelector.propTypes = {
         PropTypes.shape({
             description: PropTypes.string,
             details: PropTypes.arrayOf(PropTypes.string),
+            icon: PropTypes.node,
             iconName: PropTypes.string,
             panel: PropTypes.shape({
                 className: PropTypes.string,

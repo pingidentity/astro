@@ -4,6 +4,8 @@ import { getIconClassName } from "../../util/PropUtils";
 import classnames from "classnames";
 
 
+const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking
+
 /**
  * @class TileButton
  * @desc A single-selection component with big icons and titles.
@@ -18,6 +20,8 @@ import classnames from "classnames";
  *     A list of details displayed below the main content.
  * @param {string} [iconName]
  *     The name of the icon
+ * @param {node} [icon]
+ *     Node for Icon
  * @param {function} [onClick]
  *     Click handler
  * @param {bool} [panel]
@@ -43,6 +47,10 @@ const TileButton = ({
     ...props
 }) => {
     const iconClassName = getIconClassName(props);
+    const renderedIcon = iconClassName
+        ? <div className={classnames("tile-button__icon", iconClassName)}/>
+        : props.icon;
+
     const classNames = classnames("tile-button", className, {
         "tile-button--selected": selected
     },
@@ -50,9 +58,11 @@ const TileButton = ({
     );
 
     return (
-        <button className={classNames} data-id={dataId} onClick={onClick}>
-            {iconClassName &&
-                <div className={classnames("tile-button__icon", iconClassName)}/>
+        <button className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown}>
+            {renderedIcon &&
+                <div className="tile-button__icon-container">
+                    {renderedIcon}
+                </div>
             }
             <div className="tile-button__content">
                 {children}
@@ -77,6 +87,7 @@ TileButton.propTypes = {
     "data-id": PropTypes.string,
     description: PropTypes.string,
     details: PropTypes.arrayOf(PropTypes.string),
+    icon: PropTypes.node,
     iconName: PropTypes.string,
     onClick: PropTypes.func,
     panel: PropTypes.bool,

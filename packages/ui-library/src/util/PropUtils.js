@@ -23,16 +23,14 @@
  */
 
 export const getIconClassName = (props, options = {}) => {
-    if (props.iconClassName) {
-        return props.iconClassName;
-    } else if (props.iconName) {
-        return "icon-" + props.iconName;
-    } else if (props.icon) {
-        return "icon-" + props.icon;
-    } else if (options.useId && props.id) {
-        return "icon-" + props.id;
+    const icon = props.iconClassName || props.iconName || props.icon || (options.useId && props.id);
+    if (!icon || typeof icon !== "string") {
+        return null;
     }
-    return null;
+    if (props.iconClassName) {
+        return icon;
+    }
+    return `icon-${icon}`;
 };
 
 export default {
