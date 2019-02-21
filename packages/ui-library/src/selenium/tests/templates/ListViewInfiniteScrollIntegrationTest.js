@@ -60,6 +60,8 @@ describe("List View Infinite Scroll Integration", function () {
         ListViewInfiniteScrollPage.clickExpandRow(4);
         // verify result
         expect(ListViewInfiniteScrollPage.verifyRowIsOpen(4)).toBeTruthy();
+
+        ListViewInfiniteScrollPage.pause(1000);
         ListViewInfiniteScrollPage.takeScreenshotAndCompare("TemplatesListView_ExpandedItem");
     });
 
