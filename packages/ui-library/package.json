@@ -1,6 +1,6 @@
 {
   "name": "ui-library",
-  "version": "3.33.0",
+  "version": "3.34.0-SNAPSHOT",
   "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons)",
   "author": "UX Front-End Development Team",
   "license": "ISC",
