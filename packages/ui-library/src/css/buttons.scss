@@ -84,10 +84,10 @@ button,
         }
     }
     &.cancel {
-        background-color: $color-stratus;
+        background-color: $color-neutral-40;
 
         &:hover {
-            background-color: tint($color-stratus, 10%);
+            background-color: tint($color-neutral-40, 10%);
         }
     }
     &.danger {
