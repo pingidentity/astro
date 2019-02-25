@@ -355,7 +355,8 @@ $expandable-row-gap: 12px;
             margin-right: 10px;
         }
     }
-    &--ordering {
+    &--ordering,
+    &.item--ordering {
         @include grab-cursor;
         position: relative;
 
@@ -447,7 +448,8 @@ $expandable-row-gap: 12px;
 .draggable-item--drop-target {
     margin-top: $spacing-xl;
 
-    .item--ordering {
+    .item--ordering,
+    .expandable-row--ordering {
         border-top: 2px solid $color-active-blue;
 
         &:before {
@@ -468,13 +470,15 @@ $expandable-row-gap: 12px;
     margin-top: 0;
     margin-bottom: $spacing-xl;
 
-    .item--ordering {
+    .item--ordering,
+    .expandable-row--ordering {
         border-top: none;
         border-bottom: 2px solid $color-active-blue;
     }
 }
 
-.draggable-item--is-dragging .item--ordering {
+.draggable-item--is-dragging .item--ordering,
+.draggable-item--is-dragging .expandable-row--ordering {
     &:after {
         content: '';
         position: absolute;
