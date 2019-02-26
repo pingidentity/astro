@@ -44,6 +44,17 @@ describe("PageHeader", () => {
         expect(element).toBeTruthy();
     });
 
+    it("renders the component with a subtitle", () => {
+        const opts = {
+            iconName: "globe"
+        };
+
+        const component = getComponent(opts);
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "page-header__icon");
+        expect(element).toBeTruthy();
+    });
+
     it("renders the component with accessories", () => {
         const opts = {
             accessories: <div></div>

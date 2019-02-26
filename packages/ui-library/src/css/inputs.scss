@@ -860,7 +860,6 @@ input[type=file] {
 @import 'inputs/dropdown';
 
 .input-custom-select {
-    padding: $borderSize;   // prevent the highlighted child from overlapping the input border
     display: inline-block;
     vertical-align: top;
     text-align: left;
@@ -2645,7 +2644,7 @@ input[type=file] {
     }
 
     > .input-text {
-        margin: 0 !important;
+        margin-right: 0 !important;
 
         input[type=text] {
             text-align: right;

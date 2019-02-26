@@ -530,6 +530,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_StackDemo.jsx.html"
                     },
                     {
+                        label: "Report Filters",
+                        demo: require("../components/layout/ReportFiltersDemo.jsx"),
+                        pathToDoc: "components/layout/ReportFilters.jsx",
+                        pathToSource: "components_layout_ReportFilters.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ReportFiltersDemo.jsx.html"
+                    },
+                    {
                         label: "Value Item",
                         demo: require("../components/layout/ValueItemDemo"),
                         pathToDoc: "components/layout/ValueItem.jsx",
@@ -1095,6 +1102,11 @@ module.exports = [
                         label: "End User Devices",
                         demo: require("../components/templates/EndUserDevicesDemo"),
                         pathToSource: "templates_EndUserDevices.jsx.html",
+                    },
+                    {
+                        label: "Reports",
+                        demo: require("../components/templates/ReportsDemo"),
+                        pathToSource: "templates_reports-page_Reports.jsx.html",
                         fullscreen: true,
                         icon: "details"
                     },
