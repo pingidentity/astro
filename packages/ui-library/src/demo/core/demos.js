@@ -6,6 +6,7 @@ import UsingComponents from "../components/docs/UsingComponents.mdx";
 import UsingTemplates from "../components/docs/UsingTemplates.mdx";
 import SubmittingCode from "../components/docs/contributing/SubmittingCode.mdx";
 import ComponentRequirements from "../components/docs/contributing/ComponentRequirements.mdx";
+import UnitTesting from "../components/docs/contributing/UnitTesting.mdx";
 import StandardProps from "../components/docs/contributing/StandardProps.mdx";
 import ClassNames from "../components/docs/contributing/ClassNames.mdx";
 import Changes from "../components/docs/cannonball/Changes.mdx";
@@ -122,6 +123,11 @@ module.exports = [
                         label: "Component Requirements",
                         demo: contentPage(ComponentRequirements),
                         contentPage: true,
+                    },
+                    {
+                        label: "Unit Testing",
+                        demo: contentPage(UnitTesting),
+                        contentPage: true
                     },
                     {
                         label: "Standard Props",

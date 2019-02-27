@@ -1,0 +1,8 @@
+We strive for 100% unit test coverage for our code base, so contributed code should also have unit tests. These are our testing guidelines:
+
+* Only test using a component’s public API (ie props) unless there’s an extenuating circumstance. A component's internal methods, for example, should not be tested directly.
+* Don’t test that libraries work. For example, don't test that a native React component has a non-conditional class.
+* Try to only test the functionality of the component you're working on and not its sub-components. Shallow rendering in Enzyme, which is used by the library, can make this easier.
+* If you’re simulating an interaction event, like a click or a text input, select the element with a data-id instead of a class or other selector. If there’s no data-id, create one or put in a ticket for the UI Library team to create one.
+* Always make sure that your test fails if you give it conditions under which it should fail, either by passing in incorrect data or by reversing your assert.
+* Try to write tests for specific cases rather than just trying to hit coverage.
