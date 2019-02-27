@@ -52,9 +52,11 @@ class StatAreaCardDemo extends React.Component {
         });
     };
 
-    _handleOnMouseOver = value => {
+    _handleOnMouseOver = (yvalue, xvalue) => {
+        console.log(`Additional data can be passed back in the onHover when the xAxisKey is defined: ${xvalue}`);
+
         this.setState(
-            () => ({ value })
+            () => ({ yvalue })
         );
     };
 
@@ -99,6 +101,7 @@ class StatAreaCardDemo extends React.Component {
                         subtitle={this.state.subtitle}
                         title="MFA Users"
                         value={`${percent}%`}
+                        xAxisKey="id"
                         yAxisKey="value"
                         defaultChecked={false}
                     />

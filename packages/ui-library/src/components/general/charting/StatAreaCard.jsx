@@ -49,6 +49,9 @@ import _ from "underscore";
  *    Title of the card. Displayed at top of front and back
  * @param {string} [value]
  *    The single value shown on the front of the card
+ * @param {string} [xAxisKey]
+ *    The object property can be associated other data in the object and can be used to pass additional information in
+ *    in the onMouseOver callback.
  * @param {string} yAxisKey
  *    The object property that contains the y-axis data in the "data" prop
  */
@@ -61,10 +64,10 @@ class StatAreaCard extends React.Component {
 
     lastValue = 0;
 
-    _onMouseOver = /* istanbul ignore next  */(value) => {
+    _onMouseOver = /* istanbul ignore next  */(value, id) => {
         /* istanbul ignore next  */
         if (this.lastValue !== value) {
-            this.props.onMouseOver(value);
+            this.props.onMouseOver(value, id);
             this.lastValue = value;
         }
     }
@@ -142,6 +145,7 @@ class StatAreaCard extends React.Component {
                                     content={<CustomTooltip />}
                                     cursor={false}
                                     onMouseOver={this._onMouseOver}
+                                    xAxisKey={this.props.xAxisKey}
                                     yAxisKey={this.props.yAxisKey}
                                 />
                             </AreaChart>
@@ -161,11 +165,16 @@ const CustomTooltip = ({
     payload: [
         { payload } = {}
     ],
+    xAxisKey,
     yAxisKey
 }) => {
 
-    if (payload && payload.id && payload[yAxisKey] && onMouseOver) {
-        onMouseOver(payload[yAxisKey], payload.id);
+    if (payload && payload[yAxisKey] && onMouseOver) {
+        if (payload[xAxisKey]) {
+            onMouseOver(payload[yAxisKey], payload[xAxisKey]);
+        } else {
+            onMouseOver(payload[yAxisKey]);
+        }
     }
 
     return true;
