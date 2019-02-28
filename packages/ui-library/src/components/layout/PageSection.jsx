@@ -7,15 +7,15 @@ import classnames from "classnames";
 * @desc Layout component for sections with titles
 *
 * @param {string} [data-id=page-section]
-*     The data-id of the component
+*     The data-id of the component.
 * @param {string} [className]
-*     Class name(s) to add to the top-level container/div
+*     Class name(s) to add to the top-level container/div.
 * @param {string} description
-*     Intro paragraph to the section
+*     Intro paragraph to the section.
 * @param {string|node} title
-*     Title of section
-* @param {string|node} rightContent
-*     label that sits on the right side of the page
+*     Title of section.
+* @param {string|node} titleAccessories
+*     Label that sits on the right side of the page.
 */
 const PageSection = ({
     children,
