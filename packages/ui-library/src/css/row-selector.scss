@@ -28,7 +28,7 @@
     }
 
     &__category-selector {
-        margin-right: $spacing-sm;
+        padding-left: $spacing-xs;
     }
 
     &__column-count {
@@ -86,17 +86,26 @@
         }
     }
     &__column-header {
+        display: flex;
         margin-bottom: $spacing-md;
     }
-    &__column-title {
+
+    &__column-title,
+    &__filters {
         color: $color-slate;
         text-transform: uppercase;
-        margin-right: $spacing-sm;
+        margin-right: 10px;
     }
+
+    &__filters {
+        margin-left: auto; //align filters to right in flexbox
+        margin-right: 0;
+    }
+
     &__filter-label {
         display: inline-block;
-        margin-left: $spacing-sm;
     }
+
     &__column-helptext {
         margin: 0 0 0 $spacing-xs;
     }

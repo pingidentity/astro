@@ -262,11 +262,15 @@ module.exports = class extends React.Component {
                     <span className="row-selector__column-title">
                         {name}
                         {helpHint}
+                    </span>
+                    {showCount &&
+                        <span className="row-selector__column-count">{rows.length}</span>
+                    }
+                    <span className="row-selector__filters">
                         {filterLabel && (
                             <span className="row-selector__filter-label">{filterLabel}:</span>
                         )}
-                    </span>
-                    {categoryList &&
+                        {categoryList &&
                         <LinkDropDownList
                             className="row-selector__category-selector"
                             open={showCategoryList}
@@ -277,10 +281,9 @@ module.exports = class extends React.Component {
                             options={categoryOptions}
                             flags={this.props.flags}
                         />
-                    }
-                    {showCount &&
-                        <span className="row-selector__column-count">{rows.length}</span>
-                    }
+                        }
+                    </span>
+
                 </div>
 
                 <div className="items" onScroll={this._handleScroll} ref="items">
