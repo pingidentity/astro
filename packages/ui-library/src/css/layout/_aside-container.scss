@@ -12,6 +12,22 @@
         @include flexbox-grow(1);
 
         margin-left: $spacing-lg;
+        box-sizing: border-box;
+    }
+
+    &--sm > :last-child {
+        @include flexbox-shrink(0);
+        width: 250px;
+    }
+
+    &--md > :last-child {
+        @include flexbox-shrink(0);
+        width: 400px;
+    }
+
+    &--lg > :last-child {
+        @include flexbox-shrink(0);
+        width: 600px;
     }
 
     &__aside {

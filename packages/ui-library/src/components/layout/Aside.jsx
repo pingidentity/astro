@@ -16,6 +16,8 @@ import classnames from "classnames";
 *     When true, stretch the aside element to the full height of the main element
 * @param {string} [position]
 *     Can specify behavior like "right-top"
+* @param {string} [width="AUTO"]
+*     Can hard-code the with to "SM" "MD" or "LG"
 */
 
 const Aside = ({
@@ -25,10 +27,14 @@ const Aside = ({
     "data-id": dataId,
     fullHeight,
     position,
+    width,
 }) => (
     <div
         className={classnames("aside-container", className, {
             "aside-container--full-height": fullHeight,
+            "aside-container--sm": width === "SM",
+            "aside-container--md": width === "MD",
+            "aside-container--lg": width === "LG",
         })}
         data-id={dataId}
     >
@@ -45,10 +51,13 @@ Aside.propTypes = {
     "data-id": PropTypes.string,
     aside: PropTypes.element,
     fullHeight: PropTypes.bool,
+    position: PropTypes.oneOf(["right-top"]),
+    width: PropTypes.oneOf([ "AUTO", "SM", "MD", "LG" ]),
 };
 
 Aside.defaultProps = {
     "data-id": "aside",
+    width: "AUTO",
 };
 
 export default Aside;

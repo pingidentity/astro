@@ -31,4 +31,12 @@ describe("Aside", function () {
 
         expect(element).toBeTruthy();
     });
+
+    it("renders with a width", function () {
+        const component = getComponent({ width: "LG" });
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "aside-container--lg");
+
+        expect(element).toBeTruthy();
+    });
 });
