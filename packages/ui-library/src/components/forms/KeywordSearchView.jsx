@@ -58,6 +58,7 @@ const KeywordSearchView = ({
                     key={`Result ${idx}`}
                     title={title}
                     onClick={resultClicked}
+                    type="block"
                 />
             </li>
         );
