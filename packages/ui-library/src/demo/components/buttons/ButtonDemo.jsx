@@ -96,7 +96,7 @@ class ButtonsDemo extends Component {
                     iconName="next"
                     inline
                 />
-                <br /> <br />
+                <hr className="hr" />
                 <Button
                     label="Ellipsis Loader Primary Button"
                     type="primary"
@@ -120,6 +120,16 @@ class ButtonsDemo extends Component {
                     label="Documentation"
                     href="/build-doc/ui-library/3.5.0-SNAPSHOT/index.html"
                     target="_blank"
+                />
+                <hr className="hr" />
+                <Button
+                    label="Activated"
+                    active
+                />
+                <Button
+                    label="Activated"
+                    active
+                    inline
                 />
             </div>
         );

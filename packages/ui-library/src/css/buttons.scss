@@ -352,6 +352,16 @@ button,
     }
 }
 
+.button--active {
+    background: $color-midnight;
+    border-color: $color-midnight;
+    color: $color-white;
+
+    &:hover {
+        color: $color-white;
+        background: tint($color-midnight, 10%);
+    }
+}
 
 button.ellipsis-loader-button {
     .icon-ellipsis {

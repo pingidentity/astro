@@ -23,11 +23,13 @@ import _ from "underscore";
  *     Html name of the button
  * @param {boolean} [disabled=false]
  *     Button will not function when true
- *  @param {boolean} [inline]
- *  @param {boolean} loading
- *       While true, loading animation will be shown
+ * @param {boolean} [inline]
+ * @param {boolean} loading
+ *     While true, loading animation will be shown
  *  @param {boolean} [noSpacing]
  *     Don't include the right margin
+ * @param {boolean} active
+ *     Active style of the button for when it's being used as a toggle
  * @param {array} [flags]
  *     Set the flag for "add-button-margin" to override the special add button margin styling.
  * @example
@@ -55,6 +57,7 @@ class Button extends Component {
         href: PropTypes.string,
         target: PropTypes.string,
         noSpacing: PropTypes.bool,
+        active: PropTypes.bool,
         flags: PropTypes.arrayOf(PropTypes.string),
     };
 
@@ -64,6 +67,7 @@ class Button extends Component {
         loading: false,
         submit: false,
         noSpacing: false,
+        active: false,
         flags: [],
     };
 
@@ -94,6 +98,7 @@ class Button extends Component {
                 inline: this.props.inline,
                 loading: this.props.loading,
                 disabled: this.props.disabled,
+                "button--active": this.props.active,
                 "ellipsis-loader-button": this.props.loading,
                 [this.props.type]: _.indexOf(["primary", "success", "cancel", "danger"], this.props.type) !== -1
             }
