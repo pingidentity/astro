@@ -8,6 +8,7 @@ import ConfirmTooltip from "../tooltips/ConfirmTooltip";
 import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
 import Translator from "../../util/i18n/Translator.js";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import _ from "underscore";
 
 /**
 * @callback ButtonBar~onCancel
@@ -188,7 +189,7 @@ class ButtonBar extends React.Component {
         "data-id": PropTypes.string,
         onCancel: PropTypes.func,
         onDiscard: PropTypes.func,
-        onSave: PropTypes.func.isRequired,
+        onSave: PropTypes.func,
         saveClassName: PropTypes.string,
         saveDisabled: PropTypes.bool,
         saveText: PropTypes.string.isRequired,
@@ -217,6 +218,7 @@ class ButtonBar extends React.Component {
         unfixed: false,
         visible: true,
         flags: [],
+        onSave: _.noop,
     };
 
     _handleSave = (e) => {
