@@ -496,6 +496,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_SectionDemo.jsx.html"
                     },
                     {
+                        label: "Stack",
+                        demo: require("../components/layout/StackDemo"),
+                        pathToDoc: "components/layout/Stack.jsx",
+                        pathToSource: "components_layout_Stack.jsx.html",
+                        pathToDemoSource: "demo_components_layout_StackDemo.jsx.html"
+                    },
+                    {
                         label: "Value Item",
                         demo: require("../components/layout/ValueItemDemo"),
                         pathToDoc: "components/layout/ValueItem.jsx",

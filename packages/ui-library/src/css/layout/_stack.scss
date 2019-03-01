@@ -7,3 +7,35 @@
         }
     }
 }
+
+div.stack,
+.stack {
+    > * {
+        display: block;
+        margin: 0 0 $spacing-md 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &--xs > * {
+        margin-bottom: $spacing-xs;
+    }
+
+    &--sm > * {
+        margin-bottom: $spacing-sm;
+    }
+
+    &--lg > * {
+        margin-bottom: $spacing-lg;
+    }
+
+    &--xl > * {
+        margin-bottom: $spacing-xl;
+    }
+
+    &--xx > * {
+        margin-bottom: $spacing-xx;
+    }
+}
