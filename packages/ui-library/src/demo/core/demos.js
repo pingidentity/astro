@@ -984,7 +984,7 @@ module.exports = [
             {
                 label: "Edit Template",
                 demo: require("../components/templates/EditPageDemo"),
-                pathToSource: "templates_edit-view-sectioned_EditPage.jsx.html",
+                pathToSource: "templates_edit-page_EditPage.jsx.html",
                 fullscreen: true,
                 icon: "circle-o",
             },
