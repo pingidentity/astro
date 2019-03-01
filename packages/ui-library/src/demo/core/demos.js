@@ -396,6 +396,13 @@ module.exports = [
                         pathToDoc: "components/general/FormattedContent.jsx",
                         pathToSource: "components_general_FormattedContent.jsx.html",
                         pathToDemoSource: "demo_components_general_FormattedContentDemo.jsx.html"
+                    },
+                    {
+                        label: "Text",
+                        demo: require("../components/general/TextDemo"),
+                        pathToDoc: "components/general/Text.jsx",
+                        pathToSource: "components_general_Text.jsx.html",
+                        pathToDemoSource: "demo_components_general_TextDemo.jsx.html"
                     }
                 ]
             },
