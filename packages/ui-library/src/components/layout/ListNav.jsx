@@ -13,11 +13,11 @@ import classnames from "classnames";
 * @param {array} [labels]
 *     Array of label strings to use as button titles.
 * @param {string} [selectedlabel]
-*     corresponding id for selcted label to match the ListNav to the array labels
+*     Corresponding id for selcted label to match the ListNav to the array labels.
 * @param {function} [onSelect]
-*     function that corresponds to the Id to figure out which item is clicked
+*     Function that corresponds to the Id to figure out which item is clicked.
 * @param {node} [listButton]
-*     node that allows anything to be passed in to add to the list
+*     Node that allows anything to be passed in to add to the list.
 * @example
 *
 *    <ListNav
