@@ -269,6 +269,18 @@ $wizard-close-button-color: $color-strong-neutral-40;
                         color: $color-white;
                     }
                 }
+
+                &--editable {
+                    @extend .icon-edit;
+                    font-family: 'iconfont';
+                    background-color: $color-white;
+                    border-color: $color-white;
+                    font-size: 12px;
+                    &:before {
+                        display: block;
+                        color: $wizard-progress-menu-bgcolor;
+                    }
+                }
             }
 
             &--completed {
@@ -375,11 +387,6 @@ $wizard-close-button-color: $color-strong-neutral-40;
             }
         }
 
-        &__editable {
-            .wizard-progress-menu__item-title-text {
-                max-width: 165px;
-            }
-        }
     }
 
     &__page-loader {

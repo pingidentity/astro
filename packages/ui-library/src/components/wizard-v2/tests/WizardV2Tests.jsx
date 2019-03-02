@@ -332,11 +332,11 @@ describe("WizardV2", function () {
                 expect(itemIcon.className).toContain("wizard2-progress-menu__step-icon--optional");
             }
 
-            // check if the completed step has the right class
+            // check if the completed editable step has the right class
             if (itemIndex === completedStep) {
-                expect(itemIcon.className).toContain("wizard2-progress-menu__step-icon--completed");
+                expect(itemIcon.className).toContain("wizard2-progress-menu__step-icon--editable");
             } else {
-                expect(itemIcon.className).not.toContain("wizard2-progress-menu__step-icon--completed");
+                expect(itemIcon.className).not.toContain("wizard2-progress-menu__step-icon--editable");
             }
 
             // check if the disabled step has the right class

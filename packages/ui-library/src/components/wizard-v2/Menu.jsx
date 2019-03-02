@@ -111,14 +111,14 @@ function Item(props) {
         { "wizard2-progress-menu__step-icon--required": required },
         { "wizard2-progress-menu__step-icon--optional": !required },
         { "wizard2-progress-menu__step-icon--optional-active": props.active && !props.completed && !required },
-        { "wizard2-progress-menu__step-icon--completed": props.completed }
+        { "wizard2-progress-menu__step-icon--completed": props.completed && props.clickDisabled },
+        { "wizard2-progress-menu__step-icon--editable": props.completed && !props.clickDisabled }
     );
     const stepClassNames = classnames(
         "wizard2-progress-menu__step",
         { "wizard2-progress-menu__step--active": props.active },
         { "wizard2-progress-menu__step--click-disabled": props.clickDisabled },
         { "wizard2-progress-menu__step--completed": props.completed },
-        { "wizard2-progress-menu__editable": props.completed && !props.clickDisabled }
     );
 
     const content = required && !props.completed ? props.number : null;
@@ -136,9 +136,6 @@ function Item(props) {
             <div className={iconClassNames}>{content}</div>
             <div className="wizard2-progress-menu__item-title">
                 <div className="wizard2-progress-menu__item-title-text">{props.menuTitle || props.title}</div>
-                {props.completed && !props.clickDisabled && (
-                    <div className="wizard2-progress-menu__item-title-icon icon-edit" />
-                )}
             </div>
             <div className="wizard2-progress-menu__item-description">{props.menuDescription || props.description}</div>
         </div>
