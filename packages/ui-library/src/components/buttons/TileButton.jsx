@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { getIconClassName } from "../../util/PropUtils";
 import classnames from "classnames";
+import Link from "../general/Link";
 
 
 const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking
@@ -28,6 +29,12 @@ const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when cli
  *     A boolean that indicates whether to show an arrow for the TilePanel
  * @param {string} [title]
  *     Title of the button
+ * @param {string} [type]
+ *     Format of the tile can be "top-icon" or "side-icon"
+ * @param {object} [link]
+ *     Object with text and onClick that becomes a link below the content
+ * @param {string} [note]
+ *     A bit of gray text that shows up in the top-right corner of a side-icon tile
  *
  * @example
  * <TileButton title="Non-Interactive" iconName="server">
@@ -40,21 +47,57 @@ const TileButton = ({
     className,
     "data-id": dataId,
     details,
+    link,
+    note,
     onClick,
     panel,
     selected,
     title,
+    type,
     ...props
 }) => {
+    const sideIcon = type === "side-icon";
     const iconClassName = getIconClassName(props);
     const renderedIcon = iconClassName
         ? <div className={classnames("tile-button__icon", iconClassName)}/>
         : props.icon;
 
     const classNames = classnames("tile-button", className, {
-        "tile-button--selected": selected
+        "tile-button--selected": selected,
+        "tile-button--side-icon": sideIcon,
     },
     (panel && selected) ? "tile-button--panel" : ""
+    );
+
+    const renderedDetails = (
+        details && [
+            <div className="tile-button__divider" key="divider" />,
+            <ul key="details" className="tile-button__details">
+                {details.map(detail => <li key={detail}>{detail}</li>)}
+            </ul>
+        ]
+    );
+
+    const renderedNote = (
+        note && <div className="tile-button__note">{note}</div>
+    );
+
+    const renderedTitle = (
+        title &&
+            <div key="title" className="tile-button__title">
+                {title}
+                {renderedNote}
+            </div>
+    );
+
+    const renderedContent = (
+        <div key="content" className="tile-button__content">
+            {children}
+        </div>
+    );
+
+    const renderLink = (
+        link && <Link className="tile-button__link" onClick={link.onClick} data-id={`${dataId}-link`}>{link.text}</Link>
     );
 
     return (
@@ -64,19 +107,17 @@ const TileButton = ({
                     {renderedIcon}
                 </div>
             }
-            <div className="tile-button__content">
-                {children}
-            </div>
-            {details && [
-                <div className="tile-button__divider" key="divider" />,
-                <ul key="details" className="tile-button__details">
-                    {details.map(detail => <li>{detail}</li>)}
-                </ul>
-            ]}
-            {title &&
-                <div className="tile-button__title">
-                    {title}
-                </div>
+            {sideIcon
+                ? (
+                    <div className="tile-button__content-container">
+                        {renderedTitle}
+                        {renderedContent}
+                        {renderLink}
+                        {renderedDetails}
+                    </div>
+                ) : (
+                    [renderedContent, renderedDetails, renderedTitle]
+                )
             }
         </button>
     );
@@ -91,11 +132,18 @@ TileButton.propTypes = {
     iconName: PropTypes.string,
     onClick: PropTypes.func,
     panel: PropTypes.bool,
-    title: PropTypes.string
+    title: PropTypes.string,
+    type: PropTypes.oneOf([ "side-icon", "top-icon" ]),
+    note: PropTypes.string,
+    link: PropTypes.shape({
+        text: PropTypes.string,
+        onClick: PropTypes.func,
+    })
 };
 
 TileButton.defaultProps = {
-    "data-id": "tile-button"
+    "data-id": "tile-button",
+    type: "top-icon",
 };
 
 export default TileButton;

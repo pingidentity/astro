@@ -23,6 +23,10 @@ const getPanelPosition = (options, selected) => {
  *     Identifier for this option
  * @param {string} [title]
  *     Title of the button
+ * @param {object} [link]
+ *     Object with text and onClick that becomes a link below the content
+ * @param {string} [note]
+ *     A bit of gray text that shows up in the top-right corner of a side-icon tile
  *
  * @class TileSelector
  * @desc A single-selection component with big icons and titles.
@@ -38,6 +42,8 @@ const getPanelPosition = (options, selected) => {
  *     List of options
  * @param {string} [selected]
  *     Id of the selected option.
+ * @param {string} [type="row"]
+ *     If "stacked", the tiles will be full width and arranged in a column
  *
  * @example
  * <TileSelector
@@ -66,8 +72,10 @@ const TileSelector = ({
     children,
     onValueChange,
     options,
-    selected
+    selected,
+    type,
 }) => {
+    const stacked = type === "stacked";
     const [buttons, panel] = options.reduce((
         [buttonsAcc, activePanel],
         {
@@ -75,7 +83,9 @@ const TileSelector = ({
             icon,
             iconName,
             id,
+            note,
             title,
+            link,
             panel: optionPanel,
             details,
         }
@@ -97,6 +107,9 @@ const TileSelector = ({
                         onClick={handleChange}
                         panel={optionPanel ? true : false}
                         details={details}
+                        type={stacked ? "side-icon" : "top-icon"}
+                        link={link}
+                        note={note}
                     >
                         {description}
                     </TileButton>
@@ -114,7 +127,9 @@ const TileSelector = ({
 
     return (
         <div data-id={dataId}>
-            <div className={classnames("tile-selector", className)}>
+            <div className={classnames("tile-selector", className, {
+                "tile-selector--stacked": stacked,
+            })}>
                 {children}
                 {buttons}
             </div>
@@ -150,7 +165,12 @@ TileSelector.propTypes = {
                                 PropTypes.string,
                             ]),
                             label: PropTypes.string.isRequired,
-                            onButtonClick: PropTypes.func
+                            onButtonClick: PropTypes.func,
+                            note: PropTypes.string,
+                            link: PropTypes.shape({
+                                text: PropTypes.string,
+                                onClick: PropTypes.func,
+                            })
                         })
                     ),
                     PropTypes.node
@@ -159,12 +179,14 @@ TileSelector.propTypes = {
             title: PropTypes.string
         })
     ),
-    selected: PropTypes.string
+    selected: PropTypes.string,
+    type: PropTypes.oneOf([ "stacked", "row" ]),
 };
 
 TileSelector.defaultProps = {
     "data-id": "tile-selector",
-    options: []
+    options: [],
+    type: "row",
 };
 
 TileSelector.TileButton = TileButton;

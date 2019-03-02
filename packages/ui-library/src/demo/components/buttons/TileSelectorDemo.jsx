@@ -157,6 +157,45 @@ class TileSelectorDemo extends React.Component {
                         }
                     ]}
                 />
+                <hr className="hr" />
+                <TileSelector
+                    type="stacked"
+                    options={[
+                        {
+                            id: "webapp",
+                            title: "Web App",
+                            iconName: "network",
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            link: { text: "Read More" },
+                            note: "A Good Tile",
+                        },
+                        {
+                            id: "native",
+                            title: "Native App",
+                            iconName: "device",
+                            description: "Applications that are stored and run from a device or desktop.",
+                            details: [
+                                "Cloud-based",
+                                "Easily accessible"
+                            ],
+                            note: "A Good Tile",
+                        },
+                        {
+                            id: "spa",
+                            title: "Single Page App",
+                            iconName: "apps",
+                            description: "Just a bit of text.",
+                            note: "A Bad Tile",
+                        },
+                        {
+                            id: "noninteractive",
+                            title: "Non-Interactive",
+                            icon: <img src="./images/src/images/logo-pingidentity.png" />,
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            note: "A Good Tile",
+                        }
+                    ]}
+                />
             </div>
         );
     }

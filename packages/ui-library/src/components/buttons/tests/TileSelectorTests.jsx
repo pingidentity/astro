@@ -18,7 +18,9 @@ describe("TileSelector", function() {
                     id: "webapp",
                     title: "Web App",
                     iconName: "network",
-                    description: "Cloud-based apps that are accessed within a browser."
+                    description: "Cloud-based apps that are accessed within a browser.",
+                    link: { text: "read more" },
+                    note: "a note",
                 },
                 {
                     id: "native",
@@ -152,5 +154,13 @@ describe("TileSelector", function() {
         const panel = TestUtils.findRenderedDOMNodeWithClass(component, "tile-panel--right");
 
         expect(panel).toBeTruthy();
+    });
+
+    it("renders a link in a stacked tile button", function() {
+        const component = getComponent({ type: "stacked" });
+
+        const note = TestUtils.findRenderedDOMNodeWithDataId(component, "tile-selector-button-webapp-link");
+
+        expect(note).toBeTruthy();
     });
 });
