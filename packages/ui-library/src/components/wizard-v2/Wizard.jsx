@@ -267,7 +267,7 @@ class Wizard extends React.Component {
                 {hasHeaderItems && <Header data-id={dataId} sections={headerItems}/> }
                 <button
                     className="wizard2-close-btn"
-                    onClick={onClose}
+                    onClick={onClose || onCancel}
                     data-id={`${dataId}-close-button`}
                 />
                 <div className={classnames("wizard2__content", lightInputs)}>
