@@ -59,6 +59,27 @@ $body-text-color: $color-neutral-20;
     @include text-value;
 }
 
+@mixin text-no-value {
+    @include text-style($color-accent-neutral-30);
+
+    font-style: italic;
+}
+
+.text-no-value {
+    @include text-no-value;
+}
+
+@mixin text-placeholder {
+    @include text-value;
+
+    opacity: 0.4;
+    font-style: italic;
+}
+
+.text-placeholder {
+    @include text-placeholder;
+}
+
 // BODY
 @mixin text-body {
     @include text-style($body-text-color);
