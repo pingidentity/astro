@@ -68,4 +68,28 @@ describe("ReduxUtils", function () {
         Utils.noFocus(e);
         expect(e.preventDefault).toBeCalled();
     });
+
+    it("prevents default on specified keys and not on others", function() {
+        const map = { 13: () => true };
+
+        const event = {
+            preventDefault: jest.fn(),
+            stopPropagation: jest.fn(),
+            keyCode: 12
+        };
+
+        const event2 = {
+            preventDefault: jest.fn(),
+            stopPropagation: jest.fn(),
+            keyCode: 13
+        };
+
+        expect(event.preventDefault).not.toBeCalled();
+        Utils.handleKeydowns(map, true)(event);
+        expect(event.preventDefault).not.toBeCalled();
+
+        expect(event2.preventDefault).not.toBeCalled();
+        Utils.handleKeydowns(map, true)(event2);
+        expect(event2.preventDefault).toBeCalled();
+    });
 });

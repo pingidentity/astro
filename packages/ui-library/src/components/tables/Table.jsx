@@ -16,6 +16,8 @@ import classnames from "classnames";
  *          An array of values for the table head
  * @param {array} [bodyData]
  *          An array of arrays for the body that are ordered in the same was as the headData
+ * @param {string} [verticalAlignment]
+ *          Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM
  * @param {string} [className]
  *          CSS class name for Table
  */
@@ -23,6 +25,13 @@ import classnames from "classnames";
 
 const getHeadData = data => _.reduce(data, (headings, item) => _.union(headings, _.keys(item)), []);
 const getBodyData = (data, headData) => _.map(data, item => _.map(headData, heading => item[heading]));
+
+const cellClasses = {
+    "TOP": "grid__cell--top",
+    "MIDDLE": "grid__cell--middle",
+    "BOTTOM": "grid__cell--bottom",
+    "AUTO": "",
+};
 
 const Table = ({
     cellRenderers,
@@ -33,6 +42,7 @@ const Table = ({
     rowLabels,
     headData = getHeadData(data),
     bodyData = getBodyData(data, headData),
+    verticalAlignment,
 }) => {
     const classes = classnames("grid", className, {
         "grid--no-lines": !lines
@@ -64,7 +74,11 @@ const Table = ({
                                 ? cellRenderers[entryIndex](entry, item)
                                 : entry;
 
-                            return <Cell key={index+"-"+entryIndex}>{cellValue}{isLabel && ":"}</Cell>;
+                            return (
+                                <Cell key={index+"-"+entryIndex} className={cellClasses[verticalAlignment]}>
+                                    {cellValue}{isLabel && ":"}
+                                </Cell>
+                            );
                         })}
                     </tr>
                 ))}
@@ -82,6 +96,7 @@ Table.propTypes = {
     headData: PropTypes.array,
     line: PropTypes.bool,
     rowLabels: PropTypes.bool,
+    verticalAlignment: PropTypes.oneOf([ "AUTO", "TOP", "MIDDLE", "BOTTOM" ])
 };
 
 Table.defaultProps = {
@@ -89,6 +104,7 @@ Table.defaultProps = {
     "data-id": "table",
     lines: true,
     rowLabels: false,
+    verticalAlignment: "AUTO",
 };
 
 module.exports = Table;

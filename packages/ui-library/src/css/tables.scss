@@ -228,6 +228,18 @@ table {
     }
 }
 
+table.grid td.grid__cell {
+    &--top {
+        vertical-align: top;
+    }
+    &--middle {
+        vertical-align: middle;
+    }
+    &--bottom {
+        vertical-align: bottom;
+    }
+}
+
 // DEPRECATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
 table {
     &.basic {

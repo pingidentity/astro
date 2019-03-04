@@ -24,7 +24,7 @@ const TableDemo = () => {
             [
                 "jane",
                 "36",
-                "breckenridge"
+                <span>breckenridge<br />montrose</span>
             ],
             [
                 "roy",
@@ -42,7 +42,7 @@ const TableDemo = () => {
         {
             name: "jane",
             age: 36,
-            city: "breckenridge"
+            city: <span>breckenridge<br />montrose</span>
         },
         {
             name: "roy",
@@ -59,9 +59,11 @@ const TableDemo = () => {
                     bodyData={mockData.body} />
             </div>
             <div className="input-row">
-                <FormLabel className="detached" value="<Table> with data array of objects." />
+                <FormLabel className="detached" value="<Table> with data array of objects and vertical align middle." />
                 <Table
-                    data={dataObjects} />
+                    data={dataObjects}
+                    verticalAlignment="MIDDLE"
+                />
             </div>
             <hr className="hr"/>
             <div className="input-row">
