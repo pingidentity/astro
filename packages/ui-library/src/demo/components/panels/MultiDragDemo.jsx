@@ -1,18 +1,19 @@
-var React = require("react"),
-    Redux = require("redux"),
-    deepClone = require("clone"),
-    FormLabel = require("../../../components/forms/FormLabel"),
-    FormRadioGroup = require("../../../components/forms/FormRadioGroup"),
-    Layout = require("../../../components/general/ColumnLayout"),
-    MultiDrag = require("../../../components/panels/multi-drag"),
-    Messages = require("../../../components/general/messages/"),
-    Toggle = require("../../../components/forms/form-toggle"),
-    classnames = require("classnames"),
-    update = require("re-mutable"),
-    keyMirror = require("fbjs/lib/keyMirror"),
-    data = require("./MultiDragData.js"),
-    dragScroll = require("../../../util/dragScroll"),
-    _ = require("underscore");
+import React from "react";
+const Redux = require("redux");
+import deepClone from "clone";
+import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
+import FormLabel from "../../../components/forms/FormLabel";
+import FormRadioGroup from "../../../components/forms/FormRadioGroup";
+import Layout from "../../../components/general/ColumnLayout";
+import MultiDrag, { MultiDragRow } from "../../../components/panels/multi-drag";
+import Messages from "../../../components/general/messages/";
+import Toggle from "../../../components/forms/form-toggle";
+import classnames from "classnames";
+import update from "re-mutable";
+import keyMirror from "fbjs/lib/keyMirror";
+import data from "./MultiDragData.js";
+import dragScroll from "../../../util/dragScroll";
+import _ from "underscore";
 
 import Button from "../../../components/buttons/Button";
 /**
@@ -309,6 +310,33 @@ class MultiDragDemo extends React.Component {
         }));
 
     render() {
+        const renderCustomButton = ({
+            onClick,
+            type,
+            ...props
+        }, RowButton) => type === "remove" ? (
+            <ConfirmTooltip
+                buttonLabel="Confirm"
+                cancelText="Cancel"
+                flags={["use-portal"]}
+                label={
+                    <RowButton {...props} />
+                }
+                onConfirm={onClick}
+                positionClassName="bottom"
+                title="Remove entry"
+            >
+                Are you sure you want to remove this entry?
+            </ ConfirmTooltip>
+        ) : <RowButton onClick={onClick} {...props} />;
+
+        const contentTypeWithTooltip = (props) => (
+            <MultiDragRow
+                renderButton={renderCustomButton}
+                {...props}
+            />
+        );
+
         const contentTypeStateful = (
             <Row
                 onAdd={this._handleAddStateful}
@@ -392,7 +420,8 @@ class MultiDragDemo extends React.Component {
                                 { id: "none", name: "none" },
                                 { id: "iconSrc", name: "with image" },
                                 { id: "icon", name: "with icon" },
-                                { id: "count", name: "with count" }
+                                { id: "count", name: "with count" },
+                                { id: "tooltip", name: "with delete tooltip" }
                             ]}
                         />
                     </Layout.Column>
@@ -441,6 +470,9 @@ class MultiDragDemo extends React.Component {
                             labelEmpty="No Items Available"
                             disabled={this.state.disabled}
                             flags={flags}
+                            {...this.props.demo.style === "tooltip" ? {
+                                contentType: contentTypeWithTooltip
+                            } : {}}
                         />
                     </div>
                 }

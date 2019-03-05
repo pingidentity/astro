@@ -1,11 +1,12 @@
 window.__DEV__ = true;
 
 jest.dontMock("../MultiDragRow");
+jest.dontMock("../../../buttons/Button.jsx");
+import { mount } from "enzyme";
 
 describe("MultiDragRow", function() {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../../testutil/TestUtils"),
         MultiDragRow = require("../MultiDragRow"),
         _ = require("underscore");
 
@@ -17,21 +18,31 @@ describe("MultiDragRow", function() {
 
     it("triggers add event", function() {
         const callback = jest.fn();
-        const component = getComponent({ onAdd: callback, column: 0 });
-        const button = TestUtils.findRenderedDOMNodeWithDataId(component, "row-button-add");
+        const component = mount(
+            <MultiDragRow
+                column={0}
+                onAdd={callback}
+            />
+        );
 
+        const button = component.find("button[data-id=\"row-button-add\"]");
         expect(callback).not.toBeCalled();
-        ReactTestUtils.Simulate.click(button);
+        button.simulate("click");
         expect(callback).toBeCalled();
     });
 
     it("triggers remove event", function() {
         const callback = jest.fn();
-        const component = getComponent({ onRemove: callback, column: 1 });
-        const button = TestUtils.findRenderedDOMNodeWithDataId(component, "row-button-remove");
+        const component = mount(
+            <MultiDragRow
+                column={1}
+                onRemove={callback}
+            />
+        );
 
+        const button = component.find("button[data-id=\"row-button-remove\"]");
         expect(callback).not.toBeCalled();
-        ReactTestUtils.Simulate.click(button);
+        button.simulate("click");
         expect(callback).toBeCalled();
     });
 

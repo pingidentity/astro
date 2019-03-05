@@ -137,13 +137,15 @@ module.exports = class extends React.Component {
             inner =
                 _.isFunction(contentType)
                     ? contentType({
+                        // It was a mistake to include this props object; only including for backward compatibility
+                        ...props,
                         column: propsIndex,
                         "data-id": row.id,
                         index,
-                        ...props
+                        ...row
                     })
                     : React.cloneElement(contentType, {
-                        column: this.props.index,
+                        column: propsIndex,
                         "data-id": row.id,
                         index,
                         onAdd: this.props.onAdd,
@@ -156,7 +158,7 @@ module.exports = class extends React.Component {
             <DragDropRow id={row.id} key={row.id} index={index}
                 className={row.preview ? "selector-row--drop-preview" : ""}
                 disabled={opts && opts.disabled}
-                column={this.props.index}
+                column={propsIndex}
                 onDrag={this._handleDrag}
                 onDrop={this.props.onDrop}
                 onDragStart={this.props.onDragStart}

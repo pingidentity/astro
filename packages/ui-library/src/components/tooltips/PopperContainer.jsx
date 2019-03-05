@@ -49,6 +49,13 @@ class PopperContainer extends React.Component {
             computeStyle: {
                 gpuAcceleration: false,
             },
+            modifiers: {
+                // Let tooltip escape scrolling container, but not app frame
+                preventOverflow: {
+                    boundariesElement: "viewport",
+                    padding: 35
+                },
+            }
         };
 
 

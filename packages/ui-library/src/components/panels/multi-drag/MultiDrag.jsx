@@ -649,7 +649,7 @@ class MultiDrag extends React.Component {
     }
 }
 
-
+MultiDrag.MultiDragRow = MultiDragRow;
 MultiDrag.Reducer = require("./MultiDragReducer");
 MultiDrag.Actions = require("./MultiDragActions");
 MultiDrag.convertFilteredIndexes = convertFilteredIndexes;
