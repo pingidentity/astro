@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "underscore";
@@ -11,8 +11,8 @@ import _ from "underscore";
  *
  * @param {string} [data-id="file-drop"]
  *     Defines the "data-id" for top-level HTML container.
- * @param {Array} [accept]
- *     An optional array of the the allowed file mime types.
+ * @param {string[]} [accept]
+ *     An optional array of the the allowed file mime types or file extensions.
  * @param {string} [fileName]
  *     The name of the currently selected file.
  * @param {function} [onRemove]
@@ -32,41 +32,43 @@ import _ from "underscore";
  *
  */
 
+export default class FileDrop extends Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        accept: PropTypes.array,
+        fileName: PropTypes.string,
+        onRemove: PropTypes.func,
+        onValueChange: PropTypes.func,
+        strings: PropTypes.objectOf(PropTypes.string),
+    };
 
-class FileDrop extends React.Component {
+    static defaultProps = {
+        "data-id": "input-filedrop",
+        accept: [],
+        onValidateFile: _.noop,
+        onValueChange: _.noop,
+        strings: {},
+    };
 
-    constructor(props) {
-        super(props);
+    state = {
+        hovered: false,
+    };
 
-        this.state = {
-            hovered: false,
-        };
-
-        this.defaultStrings = {
-            drop: "Drag and drop a file here to upload",
-            separator: "or",
-            select: "Select a file",
-            change: "Change file",
-            remove: "Remove file",
-        };
-    }
+    defaultStrings = {
+        drop: "Drag and drop a file here to upload",
+        separator: "or",
+        select: "Select a file",
+        change: "Change file",
+        remove: "Remove file",
+    };
 
     _preventDefaults (e) {
         e.preventDefault();
         e.stopPropagation();
     }
 
-    _onHover = () => {
-        if (!this.state.hovered) {
-            this.setState({ hovered: true });
-        }
-    }
-
-    _onExit = () => {
-        if (this.state.hovered) {
-            this.setState({ hovered: false });
-        }
-    }
+    _onHover = () => this.setState({ hovered: true })
+    _onExit = () => this.setState({ hovered: false });
 
     _onInputChange = (e) => {
         const file = e.target.files ? e.target.files[0] : null;
@@ -81,8 +83,20 @@ class FileDrop extends React.Component {
         this._handleFileChange(file, e);
     }
 
+    _validateFile = ({ name = "", type }) => {
+        const {
+            accept
+        } = this.props;
+        if (accept.length > 0) {
+            const extension = name.substring(name.lastIndexOf(".") + 1, name.length);
+            return accept.some(acc => acc === type || acc === extension);
+        } else {
+            return true;
+        }
+    }
+
     _handleFileChange = (file, e) => {
-        const isValidFile = this.props.accept.length ? this.props.accept.indexOf(file.type) > -1 : true;
+        const isValidFile = this._validateFile(file);
 
         this.props.onValidateFile(isValidFile, file, e);
 
@@ -210,22 +224,3 @@ class FileDrop extends React.Component {
     }
 
 }
-
-FileDrop.propTypes = {
-    "data-id": PropTypes.string,
-    accept: PropTypes.array,
-    fileName: PropTypes.string,
-    onRemove: PropTypes.func,
-    onValueChange: PropTypes.func,
-    strings: PropTypes.objectOf(PropTypes.string),
-};
-
-FileDrop.defaultProps = {
-    "data-id": "input-filedrop",
-    accept: [],
-    onValidateFile: _.noop,
-    onValueChange: _.noop,
-    strings: {},
-};
-
-export default FileDrop;

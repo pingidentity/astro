@@ -8,14 +8,9 @@ import FileDrop from "../../../components/forms/FileDrop";
 * @desc A demo for FileDrop
 */
 class FileDropDemo extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            selectedFile: null,
-            fileStatus: null,
-        };
+    state = {
+        selectedFile: null,
+        fileStatus: null,
     }
 
     _handleChange = (file) => {
@@ -55,7 +50,7 @@ class FileDropDemo extends React.Component {
                     onRemove={this._handleRemove}
                     onValidateFile={this._handleFileValidation}
                     fileName={this.state.selectedFile}
-                    accept={["text/csv", "image/jpeg", "image/png"]}
+                    accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
                 />
             </div>
         );
