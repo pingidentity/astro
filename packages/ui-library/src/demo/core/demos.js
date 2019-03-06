@@ -617,7 +617,12 @@ module.exports = [
                         demo: require("../components/general/ModalButtonDemo"),
                         pathToDoc: "components/general/ModalButton.jsx",
                         pathToSource: "components_general_ModalButton.jsx.html",
-                        pathToDemoSource: "demo_components_general_ModalButtonDemo.jsx.html"
+                        pathToDemoSource: "demo_components_general_ModalButtonDemo.jsx.html",
+                        status: {
+                            message: "Usage of the ModalButton without the use-portal flag has been deprecated." +
+                                " When using this component, pass in flags=[\"use-portal\"] as a prop.",
+                            type: "version"
+                        }
                     },
                     {
                         label: "Popover Menu",

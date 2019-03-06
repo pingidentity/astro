@@ -1,13 +1,13 @@
-"use strict";
 import { Portal } from "react-portal";
 
-var PropTypes = require("prop-types");
+import PropTypes from "prop-types";
 
-var React = require("react"),
-    _ = require("underscore"),
-    Utils = require("../../util/Utils"),
-    Button = require("../buttons/Button"),
-    Modal = require("./Modal");
+import React from "react";
+import _ from "underscore";
+import Utils from "../../util/Utils";
+import Button from "../buttons/Button";
+import Modal from "./Modal";
+import { deprecatedPropValues } from "../../util/DeprecationUtils";
 
 /**
  * @callback ModalButton~contentCallback
@@ -82,7 +82,7 @@ var React = require("react"),
  *     Title of the modal.
  * @param {boolean} [showHeader=true]
  *     Controls modal header rendering.
- *     If set to false, making modal effectivly a 'light box' for previews.
+ *     If set to false, making modal effectively a 'light box' for previews.
  * @param {boolean} [maximize=false]
  *     When true, modal content will fill the screen.
  * @param {string} [type=Modal.Type.BASIC]
@@ -138,7 +138,14 @@ class ModalButtonStateless extends React.Component {
         activatorButtonLabel: PropTypes.string,
         value: PropTypes.string,
         activatorButtonClassName: PropTypes.string,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: deprecatedPropValues({
+            customMessage: "Usage of the ModalButton without the use-portal flag has been deprecated." +
+            " When using this component, pass in flags=[\"use-portal\"] as a prop.",
+            propType: PropTypes.arrayOf(PropTypes.string),
+            values: [{
+                value: []
+            }]
+        }),
 
         // Modal/ModalButton props (passed through to modal component)
         modalClassName: PropTypes.string,
@@ -245,7 +252,7 @@ class ModalButtonStateless extends React.Component {
             </Modal>
         );
 
-        const renderedModal = this._usePortal() ? <Portal>{modal}</Portal> : modal;
+        const renderedModal = this._usePortal() ? <Portal key="portal" >{modal}</Portal> : modal;
 
         return React.createElement(
             this.props.inline ? "span" : "div",

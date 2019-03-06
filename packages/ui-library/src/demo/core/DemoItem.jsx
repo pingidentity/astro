@@ -30,6 +30,27 @@ class DemoItem extends React.Component {
 
     _handleUpdateFlags = flags => this.setState({ flags });
 
+    _renderMessage= ({ message, type, use } = {}) => {
+        if (!type) {
+            return null;
+        } else if (message) {
+            return (
+                <InlineMessage type={InlineMessage.MessageTypes.WARNING}>
+                    {message}
+                </InlineMessage>
+            );
+        } else if (type === "design-deprecated") {
+            return (
+                <InlineMessage type={InlineMessage.MessageTypes.WARNING}>
+                    This component is <strong>design-deprecated</strong>.
+                    It should not appear in new designs,
+                    and when possible, we should replace existing uses of it.
+                    {use && ` Please use ${use} instead.`}
+                </InlineMessage>
+            );
+        }
+    }
+
     /*
      * When a new demo is selected, inspect the properties of the demo and determine if it's requesting an
      * isolated store.  If so, connect the demo class to the store before rendering.
@@ -109,14 +130,7 @@ class DemoItem extends React.Component {
 
                 </div>
                 <StretchContent className="section-content">
-                    {status && (status === "design-deprecated" || status.type === "design-deprecated") &&
-                        <InlineMessage type={InlineMessage.MessageTypes.WARNING}>
-                            This component is <strong>design-deprecated</strong>.
-                            It should not appear in new designs,
-                            and when possible, we should replace existing uses of it.
-                            {status.use && ` Please use ${status.use} instead.`}
-                        </InlineMessage>
-                    }
+                    {this._renderMessage(status)}
                     <div className="demo-description"
                         dangerouslySetInnerHTML={{ __html: markdown }}></div>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { isEqual } from "underscore";
 import { isProduction } from "./Utils";
 
 function getSubstituteMessage(sub) {
@@ -15,7 +16,7 @@ function renderMessage(message) {
 }
 
 const isDeprecatedValue = propValue =>
-    ({ contains, value }) => contains ? (value.indexOf(propValue) > -1) : (value === propValue);
+    ({ contains, value }) => contains ? (value.indexOf(propValue) > -1) : isEqual(value, propValue);
 
 /**
  * @desc Fires prop deprecation warning with optional substitute and version to be removed.
@@ -58,7 +59,7 @@ export const deprecatedProp = ({
  *       and removal version. Use this as though it were a propType.
  *
  * @param {Object[]} propType - The regular propType validator to use. Required.
- * @param {Object[]} values - An array of deprecated value objects.
+ * @param {Object[]} values - An array of deprecated value objects. These are checked for deep equality, not reference equality.
  * @param {string} value.message - An optional message tacked on to the end of the warning.
  * @param {*} values.value - The actual value being deprecated.
  * @param {*} values.substitute - The value to use instead.
@@ -93,6 +94,7 @@ export const deprecatedProp = ({
  */
 
 export const deprecatedPropValues = ({
+    customMessage,
     propType,
     values,
     version
@@ -109,6 +111,7 @@ export const deprecatedPropValues = ({
     const { message, substitute } = deprecatedValue;
     const versionMessage = getVersionMessage(version);
     return new Error(
+        customMessage ||
         `The prop value "${propValue}" is deprecated and will be removed in ${versionMessage}.` +
             `${substitute ? ` Use "${substitute}" instead.` : ""}` +
             `${renderMessage(message)}`);
