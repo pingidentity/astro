@@ -21,7 +21,7 @@ const Text = ({
     type,
 }) => (
     <div
-        className={classnames("textblock", className, `text-${type}`)}
+        className={classnames("text-component", className, `text-${type}`)}
         data-id={dataId}
     >
         {children}

@@ -64,6 +64,14 @@
     text-align: center;
 }
 
+.text-component {
+    margin: 0 0 10px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
 .textblock {
     color: $color-elephant;
     font-size: 14px;
