@@ -1,0 +1,182 @@
+// the point of this file is to refactor the select-list styles into a BEM structure
+
+$option-padding: 7px $spacing-xl 7px $spacing-md;
+
+@mixin option-list {
+    list-style: none;
+    position: relative;
+    background: $color-white;
+    padding: 8px 0;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+@mixin option-popover {
+    @include box-shadow(0 3px 4px rgba($color-black, 0.1));
+
+    border: 1px solid $color-rabbit-fur;
+}
+
+@mixin option-list__item {
+    // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
+    // will overlap, and also looks bad if one item overflows onto 2 lines
+    @include text-value;
+
+    box-sizing: border-box;
+    padding: $option-padding;
+    position: relative;
+    line-height: 13px;
+    cursor: pointer;
+    white-space: normal;
+}
+
+@mixin option-list__item--active {
+    background-color: $color-active-blue;
+    color: $color-white;
+    display: block;
+    min-width: 100%;
+
+    &:before {
+        background-color: $color-white;
+    }
+}
+
+@mixin option-list__item--selected {
+    @include font-pn-semibold;
+
+    &:before {
+        content: '';
+        width: 3px;
+        height: 3px;
+        background-color: $color-midnight;
+        display: inline-block;
+        position: absolute;
+        top: 12px;
+        left: 7px;
+
+        @include border-radius(1.5px);
+    }
+}
+
+@mixin option-list__item--disabled {
+    background: none;
+    color: $color-rabbit-fur;
+}
+
+@mixin drop-down-styles {
+
+    .select-list {
+        @include option-list;
+
+        div {
+            display: inline-block;
+        }
+
+        // each item in dropdown
+        .select-option,
+        .none-option {
+            @include option-list__item;
+
+            .country-name {
+                white-space: nowrap;
+            }
+
+            &:hover,
+            &.highlighted {
+                @include option-list__item--active;
+            }
+            &.disabled {
+                @include option-list__item--disabled;
+            }
+
+
+            &__placeholder {
+                padding-left: 37px;
+            }
+        }
+        .help-hint-option {
+            &.select-option {
+                padding: 0;
+
+                .help-tooltip {
+                    display: block;
+                }
+                .help-tooltip-target {
+                    display: block;
+                    padding: $option-padding;
+                    color: $color-midnight;
+                    &:hover,
+                    &.highlighted {
+                        background-color: $color-active-blue;
+                        color: $color-white;
+                    }
+                }
+                &:hover,
+                &.highlighted {
+                    .help-tooltip-target {
+                        color: $color-white;
+                    }
+                }
+                &__placeholder {
+                    padding-left: 23px;
+                }
+            }
+        }
+        .selected {
+            @include option-list__item--selected;
+        }
+        .none-option {
+            //@include text-no-value;
+        }
+    }
+}
+
+.option-list {
+    @include option-list;
+
+    &__item {
+        @include option-list__item;
+
+        &--active,
+        &:hover {
+            @include option-list__item--active;
+        }
+
+        &--disabled {
+            @include option-list__item--disabled;
+        }
+
+        &--selected {
+            @include option-list__item--selected;
+        }
+    }
+
+    &__icon {
+        width: 20px;
+    }
+
+    &__helphint-trigger {
+        margin: -7px 0;
+        padding: 7px 0;
+    }
+
+    * + &__heading {
+        @include text-label;
+        margin: 0 $spacing-xl 0 $spacing-sm;
+        padding: 7px 0;
+
+        &.disabled {
+            color: $color-rabbit-fur;
+        }
+    }
+
+    * + &__heading {
+        border-top: 1px dotted $color-rabbit-fur;
+        margin-top: $spacing-sm - 6px;
+        padding-top: $spacing-sm +1px;
+    }
+
+    &--popover {
+        @include option-popover;
+    }
+}

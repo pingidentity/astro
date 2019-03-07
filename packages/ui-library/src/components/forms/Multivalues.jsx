@@ -7,12 +7,28 @@ import _ from "underscore";
 import Utils from "../../util/Utils.js";
 import FormLabel from "./FormLabel";
 import FormError from "./FormError";
+import OptionList from "./OptionList";
+import PopperContainer from "../tooltips/PopperContainer";
+import { containsString } from "../../util/SearchUtils";
+import {
+    isBackSpace,
+    isComma,
+    isEnter,
+    isEsc,
+    isSpace,
+    isTab,
+    isArrowUp,
+    isArrowDown,
+    isArrowLeft,
+    isArrowRight,
+} from "../../util/KeyboardUtils.js";
+import { noFocus } from "../../util/EventUtils";
+import Icon from "../general/Icon";
 
 const placeholder = document.createElement("span");
 placeholder.className = "placeholder";
 
-import Icon from "../general/Icon";
-
+const dontPropagate = e => e.stopPropagation();
 
 /**
  * @class MultivaluesOption
@@ -34,18 +50,29 @@ class MultivaluesOption extends Component {
     * @ignore
     */
     _delete = () => {
-        this.props.onDelete(this.props.id);
+        const { onDelete, id } = this.props;
+        onDelete(id);
     };
 
     render() {
+        const {
+            active,
+            iconName,
+            id,
+            label,
+        } = this.props;
 
         return (
-            <label data-id={this.props.id} className="entry" title={this.props.label}>
-                {this.props.label}
-                {this.props.iconName && <Icon iconName={this.props.iconName}/>}
+            <label
+                data-id={id}
+                className={classnames("entry", { "entry--active": active })}
+                title={label}
+            >
+                {label}
+                {iconName && <Icon iconName={iconName} type="leading" />}
                 <a className="delete"
                     data-id="delete"
-                    id={this.props.id}
+                    id={id}
                     onClick={this._delete}
                 />
             </label>
@@ -79,7 +106,7 @@ class MultivaluesOption extends Component {
  *     To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {array<string>} [entries=[]]
+ * @param {array<string|Object>} [entries=[]]
  *     Array of strings used to display initial entry boxes.
  * @param {string} [name]
  *     Name attribute for the input.
@@ -96,8 +123,15 @@ class MultivaluesOption extends Component {
  *     Whether or not to auto-focus the element.
  * @param {string} [errorMessage]
  *     An error message to be displayed below the component body.
+ * @param {boolean} [autoHeight=false]
+ *     Is only as high as its entries
+ * @param {array.OptionList~Option} [options]
+ *     An array of value-label pairs. When supplied, the behavior changes a bit.
+ *     - The entries prop will be a list of values
+ *     - The component will display the corresponding labels
+ *     - Only valid options can be added as entries
+ *     - An auto-complete list will appear while focused
  *
-
  *
  * @example
  *
@@ -113,6 +147,7 @@ class MultivaluesOption extends Component {
  *
  **/
 
+
 class Multivalues extends Component {
 
     static displayName = "Multivalues";
@@ -123,18 +158,28 @@ class Multivalues extends Component {
         autoFocus: PropTypes.bool,
         entries: PropTypes.arrayOf(PropTypes.oneOfType([
             PropTypes.string,
+            PropTypes.number,
             PropTypes.shape({
                 label: PropTypes.string.isRequired,
                 icon: PropTypes.string.isRequired
             })
         ])),
         errorMessage: PropTypes.string,
-        iconName: PropTypes.string,
         name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                heading: PropTypes.bool,
+                helpHintText: PropTypes.string,
+                iconName: PropTypes.string,
+                label: PropTypes.string,
+                value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+            })
+        ),
         required: PropTypes.bool,
         stacked: PropTypes.bool,
+        autoHeight: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -144,12 +189,11 @@ class Multivalues extends Component {
         stacked: false,
         required: false,
         autoFocus: false,
-        onNewValue: function (keyCode) {
-            if (keyCode === 13 || keyCode === 188 || keyCode === 9 || keyCode === 32) {
-                return true;
-            }
-            return false;
-        }
+        autoHeight: false,
+        onNewValue: (keyCode, value) => (
+            value !== "" && (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode) || isSpace(keyCode))
+        ),
+        onValueChange: _.noop,
     };
 
     constructor(props) {
@@ -171,122 +215,328 @@ class Multivalues extends Component {
 
     state = {
         inputWidth: "20px",
-        validValue: true
+        validValue: true,
+        listOpen: false,
+        draft: "",
+        highlightedOption: -1,
+        focused: false,
+        activeEntry: -1,
     };
 
     /**
     * Dynamically expand the input as the user types
-    *
-    *
     * @param {object} e - the event
     * @private
     */
-    _handleChange = (e) => {
+    _handleChange = ({ target: { value } }) => {
         //Sets the html of a hidden div to calculate exact pixel width of the input string
-        this.hiddenDiv.innerHTML = e.target.value;
+        this.hiddenDiv.innerHTML = value;
         //add 20 pixels so input has room for next character
-        this.setState({
-            inputWidth: this.hiddenDiv.offsetWidth + 20 + "px"
-        });
+
+        const { options } = this.props;
+
+        // manage the input element, open the list if applicable, make sure we're highlighting a valid item, unselect entries
+        this.setState(({ highlightedOption }) => ({
+            inputWidth: this.hiddenDiv.offsetWidth + 20 + "px",
+            draft: value,
+            listOpen: options ? true : false,
+            highlightedOption: (highlightedOption < 0 && value !== "") ? 0 : highlightedOption,
+            activeEntry: -1,
+        }));
     };
 
     /**
      * add the last entered value to the multivalue list if enter/comma/tab wasn't used
-     * @param {object} e - the event
+     * Manage focused state
      * @private
      */
-    _handleBlur = (e) => {
-        // simulate a tab key press
-        const syntheticEvent = {
-            target: e.target,
-            preventDefault: _.noop,
-            keyCode: 9
-        };
-        this._handleKeyDown(syntheticEvent);
+    _handleBlur = () => {
+        this.setState({ focused: false });
+
+        const { draft } = this.state;
+
+        if (draft) {
+            this._addInputValue(draft);
+        }
+        this._hideList();
     };
 
     /**
+     * Manage focused state
+     * @private
+     */
+    _handleFocus = () => {
+        this.setState({ focused: true });
+    }
+
+    /**
+     * fire the onValueChange event with the new entry added to the existing list
+     * @param {string|number} value - the new entry
+     * @private
+     */
+    _addInputValue = value => {
+        const {
+            onValueChange,
+            entries,
+        } = this.props;
+
+        onValueChange([
+            ...entries,
+            value
+        ]);
+
+        //reset the input width
+        this.setState({
+            inputWidth: "20px",
+            draft: "",
+            highlightedOption: -1,
+            listOpen: false,
+        });
+    }
+
+    /**
+    * Move the highlighted index
+    * @param {number} step - how much to move it by
+    * @private
+    */
+    _moveHighlight = step => this.setState(({ highlightedOption }) => {
+        const newHighlight = highlightedOption + step;
+
+        // make sure the highlight index is valid
+        return (newHighlight >= 0 && newHighlight < this._getFilteredOptions().length)
+            ? { highlightedOption: newHighlight }
+            : {};
+    });
+
+    /**
     * Add string to array and pass to parent
-    *
-    *
     * @param {object} e - the event
     * @private
     */
     _handleKeyDown = (e) => {
+        const { keyCode } = e;
         const {
-            keyCode,
-            target: {
-                value = ""
-            }
-        } = e;
+            draft,
+            activeEntry,
+            highlightedOption,
+        } = this.state;
+        const {
+            entries,
+            onNewValue,
+        } = this.props;
 
         //When delete key is pressed, delete previous string if nothing is entered
-        if (keyCode === 8 && value.length < 1) {
+        if (isBackSpace(keyCode) && draft === "") {
             e.preventDefault(); //keeps the browser from going back after last item is deleted
-            const id = this.props.entries.length - 1;
-            this._handleDelete(id);
+            if (activeEntry < 0) {
+                this._handleDelete(entries.length - 1);
+            } else {
+                this._handleDelete(activeEntry);
+            }
             return;
         }
 
-        //Adds input value to array when Enter and Comma key are pressed
-        if (this.props.onNewValue(keyCode, value)) {
-            const trimmedValue = value.trim();
-            if (!trimmedValue) {
-                if (keyCode !== 9) { //let key tab take you to the next field if input is empty
+        // escape key clears any entered text
+        if (isEsc(keyCode)) {
+            this.setState({ draft: "" });
+        }
+
+        const { options } = this.props;
+        if (options) {
+            // different behavior when options are involved
+            const { listOpen } = this.state;
+
+            if (listOpen) {
+                // Close the dropdown when escape is pressed
+                if (isEsc(keyCode)) {
+                    this._hideList();
                     e.preventDefault();
+                    return;
                 }
+
+                // Up/down arrows change selected item on dropdown list
+                if (isArrowUp(keyCode)) {
+                    if (highlightedOption > 0) {
+                        this._moveHighlight(-1);
+                    } else {
+                        this._hideList();
+                    }
+                    e.preventDefault();
+                    return;
+                } else if (isArrowDown(keyCode)) {
+                    this._moveHighlight(1);
+                    e.preventDefault();
+                    return;
+                }
+            }
+
+            // if options are provided, translate the value
+            const filteredOptions = this._getFilteredOptions();
+            const value = (listOpen && highlightedOption < filteredOptions.length && highlightedOption >= 0)
+                ? filteredOptions[highlightedOption].value : draft;
+
+            // if an item is selected and it's valid, add it
+            if (highlightedOption >= 0 && highlightedOption < filteredOptions.length) {
+                if (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode)) {
+                    e.preventDefault();
+                    this._addInputValue(value);
+                }
+            }
+        } else {
+            //Adds input value to array when Enter and Comma key are pressed
+            if (onNewValue(keyCode, draft)) {
+                e.preventDefault();
+                this._addInputValue(draft);
                 return;
             }
-            e.preventDefault();
-            e.target.value = "";
+        }
 
-            if (this.props.onValueChange) {
-                this.props.onValueChange([
-                    ...this.props.entries,
-                    trimmedValue
-                ]);
+        if (draft === "") {
+            // the draft is empty
+            if (isSpace(keyCode)) {
+                // when no text is entered, space should toggle the dropdown
+                e.preventDefault();
+                this._toggleList();
+            } else if (isArrowDown(keyCode)) {
+                // pressing the down arrow opens the list
+                this._showList();
+            } else if (isArrowLeft(keyCode)) {
+                // pressing the left arrow selects an entry
+                this.setState(({ activeEntry: active }) => (
+                    active === 0
+                        ? {} : {
+                            activeEntry: active < 0 ? entries.length - 1 : active - 1,
+                            listOpen: false,
+                            highlightedOption: -1,
+                        }
+                ));
+                e.preventDefault();
+            } else if (isArrowRight(keyCode)) {
+                // pressing the right arrow selects a later entry
+                this.setState(({ activeEntry: active }) => (
+                    active >= 0
+                        ? {
+                            activeEntry: active < entries.length - 1 ? active + 1 : -1,
+                        } : {}
+                ));
+                e.preventDefault();
             }
-
-            //reset the input width
-            this.setState({
-                inputWidth: "20px"
-            });
         }
     };
 
     /**
     * Delete string from array based on index and returns array to parent
-    *
-    *
     * @param {number} index - index of item to be deleted
     * @private
     */
     _handleDelete = (index) => {
-        var entries = this.props.entries;
-        entries.splice(index,1);
+        const { entries, onValueChange } = this.props;
+        onValueChange([...entries.slice(0, index), ...entries.slice(index + 1)]);
 
-        if (this.props.onValueChange) {
-            this.props.onValueChange(entries);
-        }
+        // make sure active entry index isn't out of range now
+        this.setState(({ activeEntry }) => activeEntry >= entries.length - 1 ? { activeEntry: -1 } : {});
+    };
+
+    /**
+    * Toggle the open state of the dropdown list
+    * @private
+    */
+    _toggleList = () => this.setState(({ listOpen }) => ({ listOpen: !listOpen }));
+
+    /**
+    * Close the dropdown list
+    * @private
+    */
+    _hideList = () => this.setState({ listOpen: false, highlightedOption: -1 });
+
+    /**
+    * Open the dropdown list
+    * @private
+    */
+    _showList = () => this.setState({ listOpen: true });
+
+    /**
+    * When the user clicks, toggle the list
+    * @private
+    */
+    _handleClick = e => {
+        this._toggleList();
+        e.stopPropagation();
+    }
+
+    /**
+    * Return the input box element so the popper can attach to it
+    * @private
+    */
+    _getTrigger = () => this.inputBox;
+
+    /**
+    * Return the width of the dropdown list
+    * @private
+    */
+    _dropdownWidth = data => {
+        data.styles.minWidth = data.offsets.reference.width + "px";
+        return data;
+    }
+
+    /**
+    * When the user clicks the dropdown list item, add that entry
+    * @private
+    */
+    _handleChooseOption = this._addInputValue;
+
+    /**
+    * Apply the filter to options
+    * @private
+    */
+    _getFilteredOptions = () => {
+        const { options } = this.props;
+        const { draft } = this.state;
+
+        return options
+            ? options.filter(
+                ({ label }) => containsString(label, draft)
+            )
+            : [];
     };
 
     render() {
         const {
+            autoFocus,
+            autoHeight,
+            className: classNameProp,
             entries,
             errorMessage,
-            onValueChange
+            label,
+            labelText,
+            name,
+            options,
+            onValueChange,
+            required,
+            stacked,
         } = this.props;
 
-        const className = classnames(this.props.className, "input-multivalues", {
-            required: this.props.required && entries.length === 0,
+        const {
+            activeEntry,
+            draft,
+            focused,
+            highlightedOption,
+            inputWidth,
+            listOpen,
+        } = this.state;
+
+        const className = classnames(classNameProp, "input-multivalues", {
+            required: required && entries.length === 0,
             "value-entered": (entries.length !== 0),
-            stacked: this.props.stacked
+            stacked: stacked,
+            "input-multivalues--focused": focused,
         });
 
         const entryClassNames = classnames(
             "entries",
             {
-                "entries--error": errorMessage
+                "entries--error": errorMessage,
+                "entries--auto-height": autoHeight,
             }
         );
 
@@ -303,53 +553,91 @@ class Multivalues extends Component {
         };
 
         const inputStyle = {
-            width: [this.state.inputWidth]
+            width: [inputWidth]
         };
 
-        const entryNodes = _.map(entries, (entry, index) => _.isString(entry)
-            ? (
+        const entryNodes = _.map(entries, (entryValue, index) => {
+            const entry = options
+                ? options.find(option => option.value === entryValue)
+                : entryValue;
+
+            if (!entry) {
+                return null;
+            }
+
+            return (
                 <MultivaluesOption
                     id={index}
-                    label={entry}
-                    onChange={onValueChange}
-                    onDelete = {this._handleDelete}
-                    key={index}
-                />
-            )
-            : (
-                <MultivaluesOption
-                    id={index}
-                    label={entry.label}
+                    label={entry.label || entry}
                     onChange={onValueChange}
                     onDelete = {this._handleDelete}
                     key={index}
                     iconName={entry.icon}
+                    active={index === activeEntry}
                 />
-            ));
+            );
+        });
+
+        const filteredOptions = this._getFilteredOptions();
 
         return (
             <FormLabel
-                value={this.props.labelText || this.props.label}
+                value={labelText || label}
                 className={className}
                 data-id={this.props["data-id"]}
             >
-                <div className={entryClassNames} data-id="entries">
+                <div className={entryClassNames} data-id="entries" ref={el => this.inputBox = el} onMouseDown={noFocus}>
                     {entryNodes}
-                    <div className="value-input">
+                    <div
+                        className="value-input"
+                    >
                         <input
                             data-id="value-entry"
                             style={inputStyle}
                             type="text"
                             tabIndex="0"
-                            name={this.props.name}
+                            name={name}
                             onBlur={this._handleBlur}
                             onChange={this._handleChange}
+                            onClick={this._handleClick}
                             onKeyDown={this._handleKeyDown}
-                            autoFocus={this.props.autoFocus}
+                            onMouseDown={dontPropagate}
+                            autoFocus={autoFocus}
+                            onFocus={this._handleFocus}
+                            value={draft}
+                            autoComplete="off"
                         />
                     </div>
                     <div ref={ref => this.hiddenDiv = ref} style={hiddenStyle} />
                 </div>
+                {filteredOptions && (filteredOptions.length > 0) && (listOpen) && (
+                    <PopperContainer
+                        key={`popper-${entries.length}-${draft}`}
+                        className="input-multivalues__popper"
+                        getReference={this._getTrigger}
+                        config={{
+                            placement: "bottom-start",
+                            modifiers: {
+                                autoWidth: {
+                                    enabled: true,
+                                    order: 650,
+                                    fn: this._dropdownWidth,
+                                },
+                                computeStyle: {
+                                    gpuAcceleration: false,
+                                },
+                            }
+                        }}
+                    >
+                        <OptionList
+                            data-id="multivalue-options"
+                            options={this._getFilteredOptions()}
+                            className="option-list--popover"
+                            onValueChange={this._handleChooseOption}
+                            highlightedIndex={highlightedOption}
+                        />
+                    </PopperContainer>
+                )}
                 {errorMessage &&
                     <div className="form-error">
                         <FormError.Message

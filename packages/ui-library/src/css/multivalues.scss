@@ -21,7 +21,7 @@
         display: block;
         min-height: 36px;
         outline: none;
-        overflow: scroll;
+        overflow-y: auto;
         background-color: $color-input-fill;
         padding: 12px;
         width: 100%;
@@ -30,6 +30,14 @@
 
         &--error {
             border: 1px solid $color-critical-red;
+        }
+
+        &--auto-height {
+            height: auto;
+        }
+
+        &:hover {
+            border: 1px solid $color-input-border;
         }
 
         @include box-sizing(border-box);
@@ -73,6 +81,16 @@
                 display: block;
                 overflow: hidden;
             }
+
+            &--active {
+                @include box-shadow(0 1px 2px rgba($color-black, 0.1));
+
+                border-color: $color-active-blue;
+
+                .delete:before {
+                    color: $color-active-blue;
+                }
+            }
         }
         [draggable] {
             @include grab-cursor;
@@ -102,7 +120,7 @@
                 background: none transparent;
                 border: 0 none;
                 box-shadow: none;
-                cursor: default;
+                cursor: text;
                 display: inline-block;
                 font-family: inherit;
                 font-size: inherit;
@@ -129,5 +147,15 @@
     .icon__graphic {
         padding: 0;
         margin-left: 8px;
+    }
+
+    &__popper.popper-container {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    &--focused .entries,
+    &--focused .entries:hover {
+        border-color: $color-active-blue;
     }
 }

@@ -59,6 +59,8 @@ var Types = {
  *
  * @param {string} link
  *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
+ * @param {bool} [unstyleTrigger=false]
+ *     When set, don't apply any styling to the helphint trigger.
  *
  *  @example
  *     <HelpHint className="short-tooltip right" hintText="My first HelpHint!">SomeTextWithHelp</HelpHint>
@@ -82,6 +84,7 @@ class HelpHint extends React.Component {
         hintText: PropTypes.any.isRequired,
         link: PropTypes.string,
         tooltipProps: PropTypes.object,
+        unstyleTrigger: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -90,6 +93,7 @@ class HelpHint extends React.Component {
         delayShow: 0,
         className: "",
         leftMargin: false,
+        unstyleTrigger: false,
     };
 
     constructor(props) {
@@ -157,6 +161,12 @@ class HelpHint extends React.Component {
         return link && <Link title="More on this topic" url={link} icon="info"/>;
     }
 
+    maybeRenderExtraContainer = children => (
+        this.props.unstyleTrigger
+            ? <div className="help-tooltip help-tooltip--extra">{children}</div>
+            : children
+    );
+
     show = () => {
         ReactTooltip.show(this.target);
     };
@@ -167,7 +177,8 @@ class HelpHint extends React.Component {
         const {
             "data-id": dataId,
             children,
-            leftMargin
+            leftMargin,
+            unstyleTrigger,
         } = this.props;
 
         const iconName = this.getIconName(),
@@ -177,9 +188,9 @@ class HelpHint extends React.Component {
                 : <span className={iconName} data-id={dataId + "-icon"} />;
 
         const containerClassNames = classnames(
-            "help-tooltip",
             this._getTypeClass(),
             {
+                "help-tooltip": !unstyleTrigger,
                 "help-tooltip--left-margin": leftMargin
             }
         );
@@ -197,17 +208,19 @@ class HelpHint extends React.Component {
                     ref={((target) => { this.target = target; }).bind(this)}>
                     {display}
                 </div>
-                <ReactTooltip
-                    id={uid}
-                    place={this._getPlacement()}
-                    className={this.tooltipClassName}
-                    effect="solid"
-                    delayShow={this.props.delayShow}
-                    delayHide={this.props.delayHide}
-                    {...this.props.tooltipProps}>
-                    {this.props.hintText}
-                    {this.maybeRenderLink()}
-                </ReactTooltip>
+                {this.maybeRenderExtraContainer(
+                    <ReactTooltip
+                        id={uid}
+                        place={this._getPlacement()}
+                        className={this.tooltipClassName}
+                        effect="solid"
+                        delayShow={this.props.delayShow}
+                        delayHide={this.props.delayHide}
+                        {...this.props.tooltipProps}>
+                        {this.props.hintText}
+                        {this.maybeRenderLink()}
+                    </ReactTooltip>
+                )}
             </div>
         );
     }

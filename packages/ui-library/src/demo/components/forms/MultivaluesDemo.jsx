@@ -1,6 +1,7 @@
 import React from "react";
 import Multivalues from "../../../components/forms/Multivalues";
 import InputRow from "../../../components/layout/InputRow";
+import userOptions from "./data/userOptions";
 
 /**
 * @name MultivaluesDemo
@@ -43,6 +44,7 @@ class MultivaluesDemo extends React.Component {
             "is",
             "repeated"
         ],
+        optionsEntries: [],
         error: null
     };
 
@@ -90,6 +92,8 @@ class MultivaluesDemo extends React.Component {
             return false;
         }
     }
+
+    _onOptionsChange = optionsEntries => this.setState({ optionsEntries });
 
     render() {
         return (
@@ -139,6 +143,17 @@ class MultivaluesDemo extends React.Component {
                         onNewValue={this._onNewErrorEntry}
                         onValueChange={this._handleErrorEntryChange}
                         errorMessage={this.state.error}
+                    />
+                </InputRow>
+
+                <InputRow>
+                    <Multivalues
+                        labelText="With list of options"
+                        stateless={false}
+                        entries={this.state.optionsEntries}
+                        onValueChange={this._onOptionsChange}
+                        options={userOptions}
+                        autoHeight
                     />
                 </InputRow>
 

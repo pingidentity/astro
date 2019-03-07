@@ -60,4 +60,12 @@ describe("ReduxUtils", function () {
         expect(callback).not.toBeCalled();
         callback.mockClear();
     });
+
+    it("prevents default behavior with noFocus", function() {
+        const e = { preventDefault: jest.fn() };
+
+        expect(e.preventDefault).not.toBeCalled();
+        Utils.noFocus(e);
+        expect(e.preventDefault).toBeCalled();
+    });
 });
