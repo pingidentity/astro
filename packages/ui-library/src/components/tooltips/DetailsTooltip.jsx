@@ -5,7 +5,9 @@ import ReactDOM from "react-dom";
 import classnames from "classnames";
 import _ from "underscore";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
+import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import Utils from "../../util/Utils";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
@@ -73,79 +75,6 @@ import PopperContainer from "./PopperContainer";
  *           <p>what ever callout content is</p>
  *     </DetailsTooltip>
  **/
-
-class DetailsTooltip extends React.Component {
-
-    static displayName = "DetailsTooltip";
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: true //TODO: change to stateless with false default in new version
-    };
-
-    constructor(props) {
-        super(props);
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (props.id) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            /* istanbul ignore if  */
-            if (props.controlled !== undefined) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
-            }
-            /* istanbul ignore if  */
-            if (props.contentClassNames) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("contentClassNames", "contentClassName"));
-            }
-            /* istanbul ignore if  */
-            if (props.titleClassNames) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("titleClassNames", "titleClassName"));
-            }
-            /* istanbul ignore if  */
-            if (props.labelStyle) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("labelStyle", "labelClassName"));
-            }
-            /* istanbul ignore if  */
-            if (props.positionStyle) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("positionStyle", "positionClassName"));
-            }
-            if (props.secondaryLabels && props.secondaryLabels.length > 2) {
-                console.warn(
-                    "DetailsTooltip expecting two or less secondary button labels.",
-                    props.secondaryLabels.length
-                );
-            }
-        }
-    }
-
-    close = () => {
-        if (!this.props.stateless) {
-            this.refs.manager.close();
-        }
-    };
-
-    render() {
-        return (
-            this.props.stateless
-                ? React.createElement(DetailsTooltipStateless, //eslint-disable-line
-                    _.defaults({ ref: "tooltip" }, this.props), this.props.children)
-                : React.createElement(DetailsTooltipStateful, //eslint-disable-line
-                    _.defaults({ ref: "manager" }, this.props), this.props.children)
-        );
-    }
-}
 
 class DetailsTooltipStateless extends React.Component {
     static displayName = "DetailsTooltipStateless";
@@ -469,6 +398,104 @@ class DetailsTooltipStateful extends React.Component {
     }
 }
 
+const PStatefulDetailsTooltip = inStateContainer([
+    {
+        name: "open",
+        initial: false,
+        callbacks: [{
+            name: "onToggle",
+            transform: toggleTransform,
+        }],
+    }
+])(DetailsTooltipStateless);
+
+class DetailsTooltip extends React.Component {
+    static displayName = "DetailsTooltip";
+
+    static propTypes = {
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful", "use-portal" ])),
+    };
+
+    static defaultProps = {
+        stateless: true,
+        flags: [],
+    };
+
+    componentDidMount() {
+        if (!this.props.flags.includes("p-stateful")) {
+            cannonballChangeWarning({
+                message: `The 'open' prop will no longer serve as an initial state. ` +
+                `If it is present, it will control the current value of the component. ` +
+                `Set the 'p-stateful' flag to switch to this behavior now.`,
+            });
+        }
+
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction()) {
+            /* istanbul ignore if  */
+            if (this.props.id) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.controlled !== undefined) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.contentClassNames) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("contentClassNames", "contentClassName"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.titleClassNames) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("titleClassNames", "titleClassName"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.labelStyle) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("labelStyle", "labelClassName"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.positionStyle) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("positionStyle", "positionClassName"));
+            }
+            if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
+                console.warn(
+                    "DetailsTooltip expecting two or less secondary button labels.",
+                    this.props.secondaryLabels.length
+                );
+            }
+        }
+    }
+
+    // Remove this once V4 is released. Calling component methods is a bad look.
+    // Only here for backward compatibility.
+    close = () => {
+        if (!this.props.stateless) {
+            this.refs.manager.close();
+        }
+    };
+
+    render() {
+        if (this.props.flags.includes("p-stateful")) {
+            return <PStatefulDetailsTooltip {...this.props} />;
+        }
+
+        return (
+            this.props.stateless
+                ? React.createElement(DetailsTooltipStateless, //eslint-disable-line
+                    _.defaults({ ref: "tooltip" }, this.props), this.props.children)
+                : React.createElement(DetailsTooltipStateful, //eslint-disable-line
+                    _.defaults({ ref: "manager" }, this.props), this.props.children)
+        );
+    }
+}
+
 /**
  * @enum {string}
  * @desc Enum for the different styles for DetailsTooltip position.
@@ -484,4 +511,4 @@ DetailsTooltip.positionStyles = {
     BOTTOM: "bottom"
 };
 
-module.exports = DetailsTooltip;
+export default DetailsTooltip;

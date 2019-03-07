@@ -3,6 +3,8 @@ window.__DEV__ = true;
 jest.mock("popper.js");
 jest.mock("react-portal");
 
+import { shallow } from "enzyme";
+
 describe("DetailsTooltip", function () {
 
     var React = require("react"),
@@ -191,6 +193,7 @@ describe("DetailsTooltip", function () {
         expect(callback).toBeCalled(); //make sure callback was triggered
     });
 
+    // Remove this once V4 is released. Calling component methods is a bad look.
     it("when stateless, close method doesn't fire an error", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -223,6 +226,7 @@ describe("DetailsTooltip", function () {
         expect(callback).not.toBeCalled(); //make sure callback was not triggered
     });
 
+    // Remove this once V4 is released. Calling component methods is a bad look.
     it("is closing stateful component programatically", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <DetailsTooltip title="Title" label="Action" stateless={false} open={true}>
@@ -518,4 +522,23 @@ describe("DetailsTooltip", function () {
         expect(positioningProp("bottom center")).toBe("bottom");
     });
 
+    it("fires progressively stateful warning when p-stateful flag is not passed in", () => {
+        console.warn = jest.fn();
+        shallow(
+            <DetailsTooltip />
+        );
+
+        expect(console.warn).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not fire progressively stateful warning when p-stateful flag is passed in", () => {
+        console.warn = jest.fn();
+        shallow(
+            <DetailsTooltip
+                flags={["p-stateful"]}
+            />
+        );
+
+        expect(console.warn).toHaveBeenCalledTimes(0);
+    });
 });

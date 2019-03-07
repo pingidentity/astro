@@ -24,7 +24,7 @@ class DetailsTooltipDemo extends React.Component {
         this.state = initState;
     }
 
-    static flags = ["use-portal"];
+    static flags = ["p-stateful", "use-portal"];
 
     numDemos = 9;
 
