@@ -48,13 +48,14 @@ describe("If component", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Wrapper type={TabbedSections}
                 onValueChange={jest.fn()}
+                data-id={"myId"}
                 selectedIndex={-1}>
                 <div data-id="section1" title="section 1">section 1</div>
                 <div data-id="section2" title="section 2">section 2</div>
             </Wrapper>
         );
 
-        var tabs = ReactDOM.findDOMNode(component.refs.wrapper.refs.tabs);
+        var tabs = TestUtils.findRenderedDOMNodeWithDataId(component, "tabs");
         var content = ReactDOM.findDOMNode(component.refs.wrapper.refs.content);
         var before = tabs.childNodes[0].outerHTML;
 
@@ -84,7 +85,7 @@ describe("If component", function () {
                 <div data-id="section1" title="section 1">section 1</div>
                 <div data-id="section2" title="section 2">section 2</div>
             </TabbedSections>);
-        var tabs = ReactDOM.findDOMNode(component.refs.tabs);
+        var tabs = TestUtils.findRenderedDOMNodeWithDataId(component, "tabs");
         ReactTestUtils.Simulate.click(tabs.childNodes[1]);
 
         expect(onValueChange).toBeCalled();

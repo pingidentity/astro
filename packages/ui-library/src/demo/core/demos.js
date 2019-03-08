@@ -1070,6 +1070,13 @@ module.exports = [
                         pathToSource: "templates_oasis_ApplicationWizard.jsx.html",
                         fullscreen: true,
                         icon: "details"
+                    },
+                    {
+                        label: "End User Devices",
+                        demo: require("../components/templates/EndUserDevicesDemo"),
+                        pathToSource: "templates_EndUserDevices.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
                     }
                 ]
             }

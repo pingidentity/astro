@@ -1,0 +1,38 @@
+table.device-table {
+    td {
+        padding-top: $spacing-lg;
+        padding-bottom: $spacing-lg;
+    }
+
+    th,
+    td {
+        border-bottom-style: solid;
+        &:first-child {
+            padding-left: $spacing-md;
+        }
+    }
+    .device-icon {
+        margin-right: $spacing-sm;
+    }
+}
+//based on Dock menu breakpoints
+@media (max-width: 600px) {
+    table.device-table {
+        th {
+            font-size: 0; //hide fields but not the line below
+            flex: 1;
+            border-bottom: 1px solid $color-rabbit-fur;
+        }
+        tr {
+            display: flex;
+            align-items: stretch;
+            border-bottom: 1px solid $color-rabbit-fur;
+        }
+        td {
+            border-bottom: none;
+            &:last-child {
+                margin-left: auto;
+            }
+        }
+    }
+}

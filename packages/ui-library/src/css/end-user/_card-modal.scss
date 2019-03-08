@@ -1,0 +1,23 @@
+.modal.card-modal {
+    .modal-body {
+        background: #fff;
+        -webkit-box-shadow: 1px 1px 4px rgba(77, 77, 77, 0.25);
+        box-shadow: 1px 1px 4px rgba(77, 77, 77, 0.25);
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border-radius: 0;
+        text-align: center;
+    }
+
+}
+
+//based on Dock menu breakpoints
+@media (max-width: 600px) {
+    .modal.card-modal {
+        .modal-content {
+            min-width: unset;
+            max-width: 350px;
+            width: 100%;
+        }
+    }
+}

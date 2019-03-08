@@ -96,24 +96,13 @@ class TabbedSections extends React.Component {
         /* jshint ignore:start */
         return (
             <div data-id={this.props["data-id"]} className={this.props.className}>
-                <div className="tabs">
-                    <ul ref="tabs">
-                        {
-                            React.Children.map(this.props.children, function (child, index) {
-                                return (
-                                    <TabbedSectionChild
-                                        className={this.props.selectedIndex === index ? "active" : ""}
-                                        data-id={this.props["data-id"] + "-" + index}
-                                        onClick={this.props.onValueChange}
-                                        key={index}
-                                        index={index}
-                                        content={child.props.title}
-                                    />
-                                );
-                            }.bind(this))
-                        }
-                    </ul>
-                </div>
+                <Tabs
+                    data-id={`${this.props["data-id"]}-tabs`}
+                    onChange={this.props.onValueChange}
+                    selectedIndex={this.props.selectedIndex}
+                    tabs={React.Children.map(this.props.children, child => child.props.title)}
+                    activeTab={this.props.selectedIndex}
+                />
                 <div ref="content">
                     { this.props.renderHidden ? this._renderAllChildren() : this._renderSelectedChild() }
                 </div>
@@ -145,4 +134,45 @@ TabbedSectionChild.propTypes = {
     content: PropTypes.node
 };
 
-module.exports = TabbedSections;
+const Tabs = ({
+    "data-id": dataId,
+    tabs,
+    onChange,
+    activeTab,
+}) => {
+    return (
+        <div className="tabs">
+            <ul data-id="tabs">
+                {
+                    tabs.map((tab, index) => (
+                        <TabbedSectionChild
+                            className={activeTab === index ? "active" : ""}
+                            data-id={dataId + "-" + index}
+                            onClick={onChange}
+                            key={tab}
+                            index={index}
+                            content={tab}
+                        />
+                    ))
+                }
+            </ul>
+        </div>
+
+    );
+};
+
+Tabs.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    tabs: PropTypes.arrayOf(PropTypes.string),
+    onChange: PropTypes.func,
+    activeTab: PropTypes.number,
+};
+Tabs.defaultProps = {
+    "data-id": "tabs",
+    tabs: [],
+};
+
+TabbedSections.Tabs = Tabs;
+
+export default TabbedSections;
