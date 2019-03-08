@@ -8,7 +8,7 @@ You can install the module from Ping's Artifactory.
 npm i @pingux/end-user
 ```
 
-The module consists of a `package.json` file and `end-user.css` + assets.
+The module consists of a `package.json` file and `end-user.css` + assets at the root. The source `css` folder is also included.
 
 #### Demo Site
 

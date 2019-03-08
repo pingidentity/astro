@@ -70,7 +70,7 @@
     "server": "webpack-dev-server --config webpack.config.server.js",
     "lint": "eslint src/** && stylelint src/**/*.scss",
     "host": "npm run static && chmod 600 ./hosting/FARM-33-341f336d.us-west-2.pem && scp -i ./hosting/FARM-33-341f336d.us-west-2.pem static/* ubuntu@uilibrary.ping-eng.com:/var/www/html/end-user",
-    "build-dist": "rm -rf ./dist && mkdir dist && cp ./static/end-user.css ./dist && cp ./static/*.otf ./dist && cp ./static/*.svg ./dist && cp ./package.json ./dist",
+    "build-dist": "rm -rf ./dist && mkdir dist && cp ./static/end-user.css ./dist && cp ./static/*.otf ./dist && cp ./static/*.svg ./dist && cp ./package.json ./dist && cp -R ./src/css ./dist",
     "build": "npm run static && npm run build-dist",
     "prepublishOnly": "[[ \"$PWD\" =~ ./dist ]]"
   }
