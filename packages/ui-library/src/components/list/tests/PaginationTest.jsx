@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+import { mount } from "enzyme";
+import StateContainer from "../../utils/StateContainer";
+
 jest.dontMock("../Pagination");
 jest.dontMock("../../rows/expandable-row/ExpandableRow");
 
@@ -258,6 +261,50 @@ describe("Pagination", function () {
                 </Pagination>
             );
         }).toThrow(expectedError);
+    });
+
+    it("does not throw error when deprecated prop 'id' is passed in in production", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
+        process.env.NODE_ENV = "production";
+
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <Pagination id="foo" totalPages={2} perPage={1} onValueChange={jest.fn()}>
+                    <ExpandableRow className="row" key={1} />
+                    <ExpandableRow className="row" key={2} />
+                </Pagination>
+            );
+        }).not.toThrow(expectedError);
+
+        process.env.NODE_ENV = "";
+    });
+
+    // Progressively stateful tests
+    it("renders a progressively stateful component when the p-stateful flag is passed in", () => {
+        const pagination = mount(
+            <Pagination
+                flags={["p-stateful"]}
+                totalPages={1}
+            />
+        );
+
+        expect(pagination.find(StateContainer).exists()).toBeTruthy();
+    });
+
+    it("updates page in p-stateful version", () => {
+        const pagination = mount(
+            <Pagination
+                flags={["p-stateful"]}
+                totalPages={10}
+            />
+        );
+
+        expect(pagination.find("[data-id=\"bottomPageLinksfirst\"]").hasClass("active")).toBeTruthy();
+
+        pagination.find("[data-id=\"bottomPageLinks2\"]").simulate("click");
+
+        expect(pagination.find("[data-id=\"bottomPageLinksfirst\"]").hasClass("active")).toBeFalsy();
+        expect(pagination.find("[data-id=\"bottomPageLinks2\"]").hasClass("active")).toBeTruthy();
     });
 
 });

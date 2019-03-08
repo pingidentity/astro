@@ -1,34 +1,30 @@
-var React = require("react"),
-    Pagination = require("../../../components/list/Pagination"),
-    ExpandableRow = require("../../../components/rows/ExpandableRow");
+import React, { Component } from "react";
+import Pagination from "../../../components/list/Pagination";
+import ExpandableRow from "../../../components/rows/ExpandableRow";
 
 /**
 * @name PaginationDemo
 * @memberof Pagination
 * @desc A demo for Pagination
 */
-class PaginationDemo extends React.Component {
-    constructor(props) {
-        super(props);
-        var items = [];
-        for (var i = 0; i < 100; i = i + 1) {
-            items.push(<ExpandableRow title = {"Entry " + (i + 1)} data-id={"expandable-row" + i} key = {i}/>);
-        }
+export default class PaginationDemo extends Component {
+    static flags = ["p-stateful"]
 
-        this.state = {
-            total: items.length,
-            perPage: 5,
-            items: items,
-            display: items.slice(0, 5),
-            first: 0,
-            last: 5,
-            currentPage: 1
-        };
+    items = new Array(100).fill("").map(
+        (str, idx) => <ExpandableRow title = {"Entry " + (idx + 1)} data-id={"expandable-row" + idx} key = {idx}/>
+    )
+
+    state = {
+        perPage: 5,
+        display: this.items.slice(0, 5),
+        first: 0,
+        last: 5,
+        currentPage: 1
     }
 
     _changeCallback = (pagingDetails) => {
         this.setState({
-            display: this.state.items.slice(pagingDetails.first,pagingDetails.last),
+            display: this.items.slice(pagingDetails.first,pagingDetails.last),
             first: pagingDetails.first,
             last: pagingDetails.last,
             currentPage: pagingDetails.page
@@ -36,7 +32,6 @@ class PaginationDemo extends React.Component {
     };
 
     render() {
-
         return (
             <div>
                 <label>Callback to Parent</label>
@@ -45,17 +40,18 @@ class PaginationDemo extends React.Component {
                     Slice To: {this.state.last},
                     Current Page: {this.state.currentPage},
                 </div>
-                <Pagination stateless={true}
-                    className = "result-set"
-                    perPage = {this.state.perPage}
-                    page = {this.state.currentPage}
-                    total = {this.state.items.length}
-                    onValueChange = {this._changeCallback}>
+                <Pagination
+                    flags={this.props.flags}
+                    stateless={true}
+                    className="result-set"
+                    perPage={this.state.perPage}
+                    page={this.state.currentPage}
+                    total={this.items.length}
+                    onValueChange={this._changeCallback}
+                >
                     {this.state.display}
                 </Pagination>
             </div>
         );
     }
 }
-
-module.exports = PaginationDemo;

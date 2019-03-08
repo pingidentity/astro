@@ -14,6 +14,9 @@ class StateContainer extends React.Component {
                 callbacks: PropTypes.arrayOf( // when you need something different than a simple setter
                     PropTypes.shape({
                         name: PropTypes.string,
+                        // Decides whether to pass the transformed value to the callback or just the value that
+                        // the base component passes.
+                        passTransformedValue: PropTypes.bool,
                         transform: PropTypes.func, // this function will be applied to the value and current state
                     })
                 ),
@@ -65,25 +68,23 @@ class StateContainer extends React.Component {
         this.state = { ...controlledState, ...initialState };
 
         // generate custom callbacks with transform functions
-        const makeTransformCallbacks = (name, callbacks = []) => {
-            let transformCallbacks = {};
-
-            callbacks.forEach(callback => {
-                transformCallbacks[callback.name] = (value, e) => {
-                    // set the state with the transformed value
-                    this.setState(state => ({ [name]: callback.transform(value, state[name], this.props.passedProps) }),
-                        () => {
-                            // if a callback is provided, we'll still execute it
-                            if (passedProps[callback.name]) {
-                                passedProps[callback.name](this.state[name], e);
+        const makeTransformCallbacks = (name, callbacks = []) =>
+            callbacks.reduce(
+                (transformCallbacks, { name: cbName, transform, passTransformedValue = false, }) => ({
+                    ...transformCallbacks,
+                    [cbName]: (value, e) => {
+                        // set the state with the transformed value
+                        this.setState(state => ({ [name]: transform(value, state[name], this.props.passedProps) }),
+                            () => {
+                                // if a callback is provided, we'll still execute it
+                                if (passedProps[cbName]) {
+                                    passedProps[cbName](passTransformedValue ? this.state[name] : value, e);
+                                }
                             }
-                        }
-                    );
-                };
-            });
-
-            return transformCallbacks;
-        };
+                        );
+                    }
+                }), {}
+            );
 
         // get the callbacks for a single state definition
         const makeCallbacksFromDef = ({ name, setter, callbacks }) => {

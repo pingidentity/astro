@@ -1,4 +1,5 @@
 import React from "react";
+import { mount } from "enzyme";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import StateContainer, { toggleTransform, inStateContainer } from "../StateContainer";
@@ -143,4 +144,30 @@ describe("StateContainer", function () {
         expect(console.warn).toBeCalled();
     });
 
+    it("Passes back transformed value if passedTransformedValue is true", () => {
+        const onClick = jest.fn();
+        const Component = props => <StateContainer
+            stateDefs={[
+                {
+                    name: "turnedOn",
+                    initial: false,
+                    callbacks: [
+                        {
+                            name: "onClick",
+                            passTransformedValue: true,
+                            transform: () => "test val",
+                        }
+                    ]
+                }
+            ]}
+            passedProps={props}
+        >
+            {passed => <TestComponent {...passed} />}
+        </StateContainer>;
+
+        const instance = mount(<Component onClick={onClick} />);
+
+        instance.find("a").simulate("click");
+        expect(onClick).toHaveBeenCalledWith("test val", undefined);
+    });
 });

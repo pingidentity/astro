@@ -44,3 +44,9 @@
 * **V4 Behavior:** The component controls the state of `value` if it's not defined as a prop. The initial value can be set with `initialState.value`.
 * **V3 Behavior:** The `stateless` prop determines whether `value` is controlled by the component or not.
 * **Recommendation:** Make sure `value` is only set when the component is stateless. If you want the component to be stateful and also want to set an initial value, use the `initialState` prop. (Or set a flag for "p-stateful".)
+
+### Pagination
+
+* **V4 Behavior:** When provided, the `page` prop will control the current page of the component. Otherwise, the component will handle paging internally.
+* **V3 Behavior:** The `stateless` prop decides whether or not paging will be controlled by the component.
+* **Recommendation:** Set the 'p-stateful' flag.

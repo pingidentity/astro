@@ -1,108 +1,9 @@
-"use strict";
-
-var PropTypes = require("prop-types");
-
-var React = require("react"),
-    _ = require("underscore"),
-    Utils = require("../../util/Utils");
-
-/**
- * @typedef Pagination~pagingDetails
- * @property {number} first
- *          First item index for newly selected page
- * @property {number} last
- *          Last item index for newly selected page
- * @property {number} page
- *          Newly selected page number
- */
-
-/**
- * @callback Pagination~onValueChange
- * @param {Pagination~pagingDetails} pagingDetails
- *          The first item index, last item index, and selected page number in an object.
- */
-
-/**
- * @class Pagination
- *
- * @desc Pagination displays paging controls around its children content. Page navigation rulers are displayed above and
- * beyond content.
- *
- * @param {string} [data-id="pagination"]
- *          To define the base "data-id" value for the top-level HTML container.
- * @param {string} [className]
- *          CSS classes to set on the top-level HTML container
- * @param {boolean} [stateless]
- *          To enable the component to be externally managed. True will relinquish control to the component's owner.
- *          False or not specified will cause the component to manage state internally.
- * @param {number} [perPage=10]
- *          Number of results per page
- * @param {number} total
- *          Total number of items to paginate
- * @param {number} totalPages
- *          Total number of pages (alternate to passing total records)
- * @param {number} [page]
- *          Currently selected page number. Respected only with externally managed variant.
- * @param {Pagination~onValueChange} onValueChange
- *          Callback to be triggered when a new page selected.
- *
- * @example
- *
- *    <Pagination
- *        data-id="my-pagination"
- *        className="result-set"
- *        onValueChange={this._onPageChanged}
- *        page={this.state.currentPage}
- *        perPage={5}
- *        total={this.state.items.length} >
- *        {itemNodes}
- *    </Pagination>
- *    // OR (pass totalPages instead of total)
- *    <Pagination
- *        className="result-set"
- *        onValueChange={this._onPageChanged}
- *        page={this.state.currentPage}
- *        perPage={5}
- *        totalPages={Math.ceil(this.state.items.length/5)} >
- *        {itemNodes}
- *    </Pagination>
- *
- */
-
-module.exports = class extends React.Component {
-
-    static displayName = "Pagination";
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: false
-    };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-    }
-
-    render() {
-        return (
-            this.props.stateless
-                ? <PaginationStateless ref="PaginationStateless" {...this.props} />
-                : <PaginationStateful ref="PaginationStateful" {...this.props} />);
-    }
-};
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import _ from "underscore";
+import Utils from "../../util/Utils";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { inStateContainer } from "../utils/StateContainer";
 
 /**
  * @callback PageLinks~onValueChange
@@ -128,7 +29,7 @@ module.exports = class extends React.Component {
  *       onValueChange = {this._handlePageChange}/>
  */
 
-class PageLinks extends React.Component {
+class PageLinks extends Component {
     static displayName = "PageLinks";
 
     static propTypes = {
@@ -244,7 +145,7 @@ class PageLinks extends React.Component {
     }
 }
 
-class PaginationStateless extends React.Component {
+class PaginationStateless extends Component {
     static displayName = "PaginationStateless";
 
     static propTypes = {
@@ -260,6 +161,7 @@ class PaginationStateless extends React.Component {
 
     static defaultProps = {
         "data-id": "pagination",
+        page: 1,
         perPage: 10,
         totalPages: null
     };
@@ -312,27 +214,146 @@ class PaginationStateless extends React.Component {
     }
 }
 
-class PaginationStateful extends React.Component {
+class PaginationStateful extends Component {
     static displayName = "PaginationStateful";
 
     state = {
         page: 0
     };
 
-    _onPageChange = (pagingDetails) => {
-        var self = this;
-        this.setState({
-            page: pagingDetails.page
-        }, function () {
-            self.props.onValueChange(
-                { first: pagingDetails.first, last: pagingDetails.last, page: pagingDetails.page }
-            );
-        });
-    };
+    _onPageChange = ({ first, last, page }) => this.setState({
+        page
+    }, () => this.props.onValueChange(
+        { first, last, page }
+    ));
 
     render() {
         return (
             <PaginationStateless {...this.props} page={this.state.page} onValueChange={this._onPageChange}/>
         );
+    }
+}
+
+const PStatefulPagination = inStateContainer([
+    {
+        name: "page",
+        initial: 1,
+        callbacks: [{
+            name: "onValueChange",
+            transform: ({
+                page
+            }) => page
+        }]
+    }
+])(PaginationStateless);
+
+/**
+ * @typedef Pagination~pagingDetails
+ * @property {number} first
+ *          First item index for newly selected page
+ * @property {number} last
+ *          Last item index for newly selected page
+ * @property {number} page
+ *          Newly selected page number
+ */
+
+/**
+ * @callback Pagination~onValueChange
+ * @param {Pagination~pagingDetails} pagingDetails
+ *          The first item index, last item index, and selected page number in an object.
+ */
+
+/**
+ * @class Pagination
+ *
+ * @desc Pagination displays paging controls around its children content. Page navigation rulers are displayed above and
+ * beyond content.
+ *
+ * @param {string} [data-id="pagination"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [className]
+ *          CSS classes to set on the top-level HTML container
+ * @param {boolean} [stateless]
+ *          To enable the component to be externally managed. True will relinquish control to the component's owner.
+ *          False or not specified will cause the component to manage state internally.
+ * @param {number} [perPage=10]
+ *          Number of results per page
+ * @param {number} total
+ *          Total number of items to paginate
+ * @param {number} totalPages
+ *          Total number of pages (alternate to passing total records)
+ * @param {number} [page]
+ *          Currently selected page number. Respected only with externally managed variant.
+ * @param {Pagination~onValueChange} onValueChange
+ *          Callback to be triggered when a new page selected.
+ *
+ * @example
+ *
+ *    <Pagination
+ *        data-id="my-pagination"
+ *        className="result-set"
+ *        onValueChange={this._onPageChanged}
+ *        page={this.state.currentPage}
+ *        perPage={5}
+ *        total={this.state.items.length} >
+ *        {itemNodes}
+ *    </Pagination>
+ *    // OR (pass totalPages instead of total)
+ *    <Pagination
+ *        className="result-set"
+ *        onValueChange={this._onPageChanged}
+ *        page={this.state.currentPage}
+ *        perPage={5}
+ *        totalPages={Math.ceil(this.state.items.length/5)} >
+ *        {itemNodes}
+ *    </Pagination>
+ *
+ */
+
+export default class Pagination extends Component {
+
+    static displayName = "Pagination";
+
+    static propTypes = {
+        flags: PropTypes.arrayOf(
+            PropTypes.string
+        ),
+        stateless: PropTypes.bool
+    };
+
+    static defaultProps = {
+        flags: [],
+        stateless: false
+    };
+
+    componentDidMount() {
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.onChange) {
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+        }
+    }
+
+    render() {
+        if (this.props.flags.includes("p-stateful")) {
+            return <PStatefulPagination {...this.props} />;
+        }
+
+        cannonballChangeWarning({
+            message: `The 'page' prop will no longer serve as an initial state. ` +
+            `If it is present, it will control the current value of the component. ` +
+            `Set the 'p-stateful' flag to switch to this behavior now.`,
+        });
+
+        return (
+            this.props.stateless
+                ? <PaginationStateless ref="PaginationStateless" {...this.props} />
+                : <PaginationStateful ref="PaginationStateful" {...this.props} />);
     }
 }
