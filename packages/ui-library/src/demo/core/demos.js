@@ -1067,7 +1067,7 @@ module.exports = [
                     {
                         label: "Oasis - Add Application Wizard",
                         demo: require("../../templates/oasis/ApplicationWizard"),
-                        pathToSource: "oasis_ApplicationWizard.jsx.html",
+                        pathToSource: "templates_oasis_ApplicationWizard.jsx.html",
                         fullscreen: true,
                         icon: "details"
                     }

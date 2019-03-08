@@ -18,7 +18,7 @@ import InputRow from "ui-library/lib/components/layout/InputRow";
 import Multivalues from "ui-library/lib/components/forms/Multivalues";
 
 /**
- * @class Oasis - Add Application
+ * @class ApplicationWizard
  * @desc This is a template to demonstrate how to build the charting dashboard.
  */
 
