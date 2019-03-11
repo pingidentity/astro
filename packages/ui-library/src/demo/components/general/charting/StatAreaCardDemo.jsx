@@ -17,7 +17,7 @@ class StatAreaCardDemo extends React.Component {
         data: demoChartData.days,
         loading: false,
         subtitle: "AS OF TODAY",
-        value: 72,
+        yvalue: 72,
     };
 
     _toggleLoading = () => {
@@ -53,7 +53,7 @@ class StatAreaCardDemo extends React.Component {
     };
 
     _handleOnMouseOver = (yvalue, xvalue) => {
-        console.log(`Additional data can be passed back in the onHover when the xAxisKey is defined: ${xvalue}`);
+        console.log(`onMouseOver called with: ${yvalue}, ${xvalue}`);
 
         this.setState(
             () => ({ yvalue })
@@ -66,7 +66,7 @@ class StatAreaCardDemo extends React.Component {
 
     render () {
         const max = _.max(this.state.data, item => item.value).value;
-        const percent = parseInt(parseInt(this.state.value) * 100/ max);
+        const percent = parseInt(parseInt(this.state.yvalue) * 100/ max);
         const rangeLabels = ["60D", "3M", "1YR"];
 
         return (

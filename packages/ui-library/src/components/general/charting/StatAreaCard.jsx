@@ -62,13 +62,12 @@ class StatAreaCard extends React.Component {
         this._onMouseOver = _.debounce(this._onMouseOver, 10);
     }
 
-    lastValue = 0;
+    lastHover = null;
 
-    _onMouseOver = /* istanbul ignore next  */(value, id) => {
-        /* istanbul ignore next  */
-        if (this.lastValue !== value) {
-            this.props.onMouseOver(value, id);
-            this.lastValue = value;
+    _onMouseOver = (data) => {
+        if (!_.isEqual(data, this.lastHover)) {
+            this.props.onMouseOver(data.value, data.id);
+            this.lastHover = data;
         }
     }
 
@@ -170,15 +169,12 @@ const CustomTooltip = ({
     xAxisKey,
     yAxisKey
 }) => {
-
-    if (payload && payload[yAxisKey] && onMouseOver) {
-        if (payload[xAxisKey]) {
-            onMouseOver(payload[yAxisKey], payload[xAxisKey]);
-        } else {
-            onMouseOver(payload[yAxisKey]);
-        }
+    if (payload && onMouseOver) {
+        onMouseOver({
+            value: _.has(payload, yAxisKey) && payload[yAxisKey],
+            id: _.has(payload, xAxisKey) && payload[xAxisKey]
+        });
     }
-
     return true;
 };
 
@@ -219,6 +215,7 @@ StatAreaCard.propTypes = {
         PropTypes.number,
         PropTypes.string,
     ]),
+    xAxisKey: PropTypes.string,
     yAxisKey: PropTypes.string,
 };
 
@@ -230,8 +227,9 @@ StatAreaCard.defaultProps = {
     onFlip: _.noop,
     onMouseOver: _.noop,
     onValueChange: _.noop,
-    rockerButtonProps: null,
-    yAxisKey: "id",
+    rockerButtonProps: {},
+    xAxisKey: "id",
+    yAxisKey: "value",
 };
 
 StatAreaCard.CustomTooltip = CustomTooltip;

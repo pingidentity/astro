@@ -1,10 +1,10 @@
 window.__DEV__ = true;
 
 jest.dontMock("../StatAreaCard");
-jest.dontMock("../AreaChart");
 jest.dontMock("../Cards/DashboardCard");
 jest.dontMock("../../../forms/RockerButton");
 jest.dontMock("../../../forms/FormCheckbox");
+jest.useFakeTimers();
 
 describe("StatAreaCard", () => {
     const React = require("react");
@@ -21,6 +21,7 @@ describe("StatAreaCard", () => {
         { id: "Fri", value: 555 },
         { id: "Sat", value: 666 },
         { id: "Sun", value: 777 },
+        { id: "Sun", value: 0 },
     ];
 
     const rockerButtonProps = {
@@ -149,26 +150,57 @@ describe("StatAreaCard", () => {
     });
 
     it("calls onMouseOver", function () {
-        let onMouseOver = jest.fn();
+        const myFunction = jest.fn();
+
+        const testData = {
+            id: "my-id",
+            value: "my-value",
+        };
 
         ReactTestUtils.renderIntoDocument(
             <div>
                 <StatAreaCard.CustomTooltip
-                    onMouseOver={onMouseOver}
+                    onMouseOver={myFunction}
                     yAxisKey={"value"}
                     xAxisKey={"id"}
                     payload={[
                         {
-                            payload: {
-                                id: "my-id",
-                                value: "my-value",
-                            }
+                            payload: testData
                         }
                     ]}
                 />
             </div>
         );
 
-        expect(onMouseOver).toBeCalled();
+        expect(myFunction).toBeCalledWith({ value: testData.value, id: testData.id });
+    });
+
+    it("calls onMouseOver only if data has changed", function () {
+        const myFunction = jest.fn();
+        const data1 = {
+            id: 1,
+            value: "one"
+        };
+        const data2 = {
+            id: 2,
+            value: "two"
+        };
+        const component = ReactTestUtils.renderIntoDocument(
+            <StatAreaCard {...defaultProps} onMouseOver={myFunction} />
+        );
+
+        component._onMouseOver(data1);
+        jest.runAllTimers();
+        expect(myFunction).toBeCalledTimes(1);
+
+        // same data as before
+        component._onMouseOver(data1);
+        jest.runAllTimers();
+        expect(myFunction).toBeCalledTimes(1);
+
+        // diff data
+        component._onMouseOver(data2);
+        jest.runAllTimers();
+        expect(myFunction).toBeCalledTimes(2);
     });
 });
