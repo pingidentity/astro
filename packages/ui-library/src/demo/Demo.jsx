@@ -25,7 +25,6 @@ const React = require("react"),
 // the SCSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
 require("../css/ui-library.scss");
-require("../css/end-user.scss");
 require("./css/ui-library-demo.scss");
 
 class DemoApp extends React.Component {

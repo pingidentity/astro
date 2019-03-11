@@ -11,6 +11,15 @@
 @import 'tutorial';
 @import 'cannonball';
 
+
+// End User files need to be included but end-user.scss itself will override some defaults from ui-library.scss
+// Just the individual files need to be included
+@import '../../css/end-user/_user-nav.scss';
+@import '../../css/end-user/_device-table.scss';
+@import '../../css/end-user/_card-modal.scss';
+@import '../../css/end-user/_device-icon.scss';
+
+
 // COMPONENTS
 #content {
 

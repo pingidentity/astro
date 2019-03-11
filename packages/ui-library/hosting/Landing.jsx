@@ -11,7 +11,6 @@ var React = require("react"),
 // the CSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
 require("../src/css/ui-library.scss"); // UI Library styles
-require("../src/css/end-user.scss"); // UI Library styles
 require("../src/demo/css/ui-library-demo.scss"); // UI Library demo styles
 require("./assets/css/landing.css"); // Override undesired styles from ui-library.scss and ui-library-demo.scss
 
