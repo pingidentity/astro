@@ -150,7 +150,9 @@ class StatAreaCard extends React.Component {
                                 />
                             </AreaChart>
                         ])}
-                        <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
+                        {this.props.rockerButtonProps
+                            ? <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
+                            : null}
                     </div>
                 }
             />
@@ -228,7 +230,7 @@ StatAreaCard.defaultProps = {
     onFlip: _.noop,
     onMouseOver: _.noop,
     onValueChange: _.noop,
-    rockerButtonProps: {},
+    rockerButtonProps: null,
     yAxisKey: "id",
 };
 

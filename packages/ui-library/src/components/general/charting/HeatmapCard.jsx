@@ -130,7 +130,7 @@ class HeatMapCard extends React.Component {
         heatColor: "#193967",
         labelKey: "label",
         onValueChange: _.noop,
-        rockerButtonProps: {},
+        rockerButtonProps: null,
         tooltipRenderer: _defaultRender,
         valueKey: "value",
         xAxisLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, "00"],
@@ -256,10 +256,9 @@ class HeatMapCard extends React.Component {
                                     {this._renderCells()}
                                 </div>
                                 <div>
-                                    <RockerButton
-                                        {...rockerButtonDefaults}
-                                        {...this.props.rockerButtonProps}
-                                    />
+                                    {this.props.rockerButtonProps
+                                        ? <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
+                                        : null}
                                 </div>
                             </div>,
                             <div className="heatmap-card__data" key="heatmap-data">
