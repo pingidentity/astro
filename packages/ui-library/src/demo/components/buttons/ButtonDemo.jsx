@@ -131,6 +131,13 @@ class ButtonsDemo extends Component {
                     active
                     inline
                 />
+                <hr className="hr" />
+                <Button
+                    type="primary"
+                    disabled={true}
+                    label="Disabled with Help Hint"
+                    disabledText="helphint"
+                />
             </div>
         );
     }

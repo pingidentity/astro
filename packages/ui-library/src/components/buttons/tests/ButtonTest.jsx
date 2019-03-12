@@ -41,6 +41,17 @@ describe("Button", function () {
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
+    it("renders a help hint if disableText has a string and disabled is true ", function () {
+        let component = getComponent({
+            disabledText: "hello",
+            disabled: true
+        });
+
+        let element = TestUtils.findRenderedDOMNodeWithDataId(component, "button_help-hint");
+
+        expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
+    });
+
 
     it("renders the button with click callback", function () {
         let onClick = jest.fn();

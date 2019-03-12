@@ -30,7 +30,7 @@ describe("Ellipsis loader button", function () {
         );
 
         var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
-        expect(button.className).toEqual("ellipsis-loader-button loading " + buttonCss);
+        expect(button.className).toEqual("button ellipsis-loader-button loading " + buttonCss);
     });
 
     it("does not render anything when the loading flag is set to false", function () {
@@ -43,7 +43,7 @@ describe("Ellipsis loader button", function () {
         );
 
         var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
-        expect(button.className).toEqual("ellipsis-loader-button");
+        expect(button.className).toEqual("button ellipsis-loader-button");
     });
 
     it("renders the button text", function () {

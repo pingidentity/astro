@@ -43,6 +43,8 @@ import _ from "underscore";
 * @param {string} discardText
 *     Text to display on the "discard" button. Note that the onDiscard callback and discardText props are required to
 *     display the discard button. If either is not provided, the button will not display.
+* @param {string} [saveDisabledText]
+*      Text for the help hint will be rendered when the same button has a the prop disabled set to true.
 * @param {string} [saveClassName]
 *     Class name(s) to add to the "save" button
 * @param {string} saveText
@@ -166,6 +168,23 @@ import _ from "underscore";
 *            Child content can added and will display to the left of the buttons by default.
 *        </span>
 *    </ButtonBar>
+* @example example with helphint on disabled button
+*     <ButtonBar
+*         onCancel={this._handleCancel}
+*         onDiscard={this._handleDiscard}
+*         onSave={this._handleSave}
+*         cancelText="Cancel"
+*         discardText="Discard"
+*         saveText="Save"
+*         enableSavingAnimation={this.state.saving}
+*         visible={this.state.showBar}
+*         saveDisabled={this.state.saveDisabled}
+*         savedDisabledText="this is disabled">
+*
+*         <span style={{margin: "0 30px 0 0"}}>
+*              Child content can added and will display to the left of the buttons by default.
+*         </span>
+*      </ButtonBar>
 *
 **/
 
@@ -187,6 +206,7 @@ class ButtonBar extends React.Component {
         discardClassName: PropTypes.string,
         discardText: PropTypes.string,
         "data-id": PropTypes.string,
+        saveDisabledText: PropTypes.string,
         onCancel: PropTypes.func,
         onDiscard: PropTypes.func,
         onSave: PropTypes.func,
@@ -254,6 +274,7 @@ class ButtonBar extends React.Component {
                 { disabled: this.props.saveDisabled },
             )}
             disabled={this.props.saveDisabled}
+            disabledText={this.props.saveDisabledText}
             loading={this.props.enableSavingAnimation}
             onClick={this._handleSave}
             text={this.props.saveText || Translator.translate("save")}

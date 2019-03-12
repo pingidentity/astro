@@ -55,6 +55,14 @@ class EllipsisLoaderDemo extends React.Component {
                     onClick={this._toggleLoadingButton3}
                     className="inline"
                 />
+                <EllipsisLoaderButton
+                    data-id="demo-ellipsis-loader-button-inline"
+                    loading={this.state.loading3}
+                    text="Disabled with Help Hint"
+                    onClick={this._toggleLoadingButton3}
+                    disabled={true}
+                    disabledText="hello"
+                />
             </div>
         );
     }

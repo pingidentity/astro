@@ -18,6 +18,7 @@ class ButtonBarDemo extends React.Component {
         statusText: "-",
         showCancelTooltip: false,
         showSaveTooltip: false,
+        saveDisabledText: null,
     };
 
     _handleCancel = () => {
@@ -57,8 +58,24 @@ class ButtonBarDemo extends React.Component {
     _toggleDisabled = () => {
         this.setState({
             saveDisabled: !this.state.saveDisabled,
-            statusText: this.state.saveDisabled ? '"saveDisabled" prop set to FALSE' : '"saveDisabled" prop set to TRUE'
+            saveDisabledText: null,
+            statusText: this.state.saveDisabled && !this.state.saveDisabledText
+                ? '"saveDisabled" prop set to FALSE'
+                : '"saveDisabled" prop set to TRUE'
         });
+    };
+
+    _toggleDisabledHelpHint = () => {
+        this.setState(({
+            saveDisabled,
+            saveDisabledText
+        }) => ({
+            saveDisabled: !saveDisabled,
+            saveDisabledText: "this is disabled texted",
+            statusText: saveDisabled && saveDisabledText
+                ? '"saveDisabledText" prop set to FALSE'
+                : '"saveDisabledText" prop set to TRUE'
+        }));
     };
 
     _openCancelTooltip = () => {
@@ -84,7 +101,8 @@ class ButtonBarDemo extends React.Component {
     render() {
         var toggleButtonText = this.state.showBar ? "FALSE" : "TRUE",
             saveButtonSaving = this.state.saving ? "FALSE" : "TRUE",
-            saveButtonStatus = this.state.saveDisabled ? "FALSE" : "TRUE";
+            saveButtonStatus = this.state.saveDisabled && !this.state.saveDisabledText ? "FALSE" : "TRUE",
+            saveButtonHelpHint = this.state.saveDisabled && this.state.saveDisabledText ? "FALSE" : "TRUE";
 
         return (
             <div>
@@ -93,6 +111,10 @@ class ButtonBarDemo extends React.Component {
                 <Button onClick={this._toggleSaving}>Set "saving" prop to {saveButtonSaving}</Button>
                 <br /><br />
                 <Button onClick={this._toggleDisabled}>Set "saveDisabled" prop to {saveButtonStatus}</Button>
+                <br /><br />
+                <Button onClick={this._toggleDisabledHelpHint}>
+                    Set "saveDisabled with helphint" prop to {saveButtonHelpHint}
+                </Button>
                 <br /><br />
                 <button onClick={this._toggleUnfix}>Unfix button bar</button>
                 <br /><br />
@@ -110,10 +132,12 @@ class ButtonBarDemo extends React.Component {
                     onDiscard={this._handleDiscard}
                     onSave={this._openSaveTooltip}
 
+
                     enableSavingAnimation={this.state.saving}
                     visible={this.state.showBar}
                     saveDisabled={this.state.saveDisabled}
                     unfixed={this.state.unfixed}
+                    saveDisabledText={this.state.saveDisabledText}
 
                     cancelTooltip={{
                         title: "Cancel Confirmation",

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import HelpHint from "../tooltips/HelpHint";
 import EllipsisLoader from "../general/EllipsisLoader";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import _ from "underscore";
@@ -10,26 +11,28 @@ import _ from "underscore";
  * @desc button component
  *
  * @param {string} [type]
- *      css class applied to html
+ *      CSS class applied to html.
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {string} [data-id="button"]
  *     Defines the "data-id" for top-level HTML container.
  * @param {string} [iconName]
- *     The name and CSS of the icon
+ *     The name and CSS of the icon.
  * @param {function} [onClick]
- *     Click handler
+ *     Click handler.
  * @param {string} [label]
- *     Html name of the button
+ *     Html name of the button.
  * @param {boolean} [disabled=false]
- *     Button will not function when true
+ *     Button will not function when true.
+ * @param {string} [disabledText]
+ *     Text for the help hint will be rendered when the same button has a the prop disabled set to true.
  * @param {boolean} [inline]
  * @param {boolean} loading
- *     While true, loading animation will be shown
+ *     While true, loading animation will be shown.
  *  @param {boolean} [noSpacing]
  *     Don't include the right margin
  * @param {boolean} active
- *     Active style of the button for when it's being used as a toggle
+ *     Active style of the button for when it's being used as a toggle.
  * @param {array} [flags]
  *     Set the flag for "add-button-margin" to override the special add button margin styling.
  * @example
@@ -47,6 +50,7 @@ class Button extends Component {
         "data-id": PropTypes.string,
         onClick: PropTypes.func,
         disabled: PropTypes.bool,
+        disabledText: PropTypes.string,
         className: PropTypes.string,
         label: PropTypes.string,
         iconName: PropTypes.string,
@@ -106,7 +110,7 @@ class Button extends Component {
 
         const TagName = this.props.href ? "a" : "button";
 
-        return (
+        const Tags = (
             <TagName
                 className = {classes}
                 data-id={this.props["data-id"]}
@@ -121,6 +125,18 @@ class Button extends Component {
                 {this.props.children}
                 <EllipsisLoader loading={this.props.loading}/>
             </TagName>
+        );
+
+        return (
+            this.props.disabled && this.props.disabledText
+                ? <HelpHint
+                    data-id="button_help-hint"
+                    hintText={this.props.disabledText}
+                    placement="top"
+                >
+                    {Tags}
+                </HelpHint>
+                : Tags
         );
     }
 }

@@ -4,6 +4,8 @@ var React = require("react"),
     Utils = require("../../util/Utils"),
     EllipsisLoader = require("../general/EllipsisLoader");
 
+import Button from "../buttons/Button";
+
 
 /**
  * @callback EllipsisLoaderButton~onClick
@@ -21,6 +23,8 @@ var React = require("react"),
  *          Text to display in the button when not loading
  * @param {boolean} [disabled=false]
  *          Button will not function when true
+ * @param {string} [disabledText]
+ *          Text for the help hint will be rendered when the same button has a the prop disabled set to true.
  * @param {boolean} loading
  *          While true, loading animation will be shown
  * @param {string} [className]
@@ -42,6 +46,7 @@ class EllipsisLoaderButton extends React.Component {
         className: PropTypes.string,
         text: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
+        disabledText: PropTypes.string,
         loading: PropTypes.bool.isRequired,
         onClick: PropTypes.func.isRequired
     };
@@ -74,14 +79,16 @@ class EllipsisLoaderButton extends React.Component {
         };
 
         return (
-            <button
+            <Button
                 className={css("ellipsis-loader-button", buttonCss, this.props.className)}
                 data-id={this.props["data-id"]}
                 onClick={this.props.onClick}
-                disabled={this.props.disabled}>
+                disabled={this.props.disabled}
+                disabledText={this.props.disabledText}
+            >
                 {this.props.text}
                 <EllipsisLoader loading={this.props.loading}/>
-            </button>
+            </Button>
         );
     }
 }
