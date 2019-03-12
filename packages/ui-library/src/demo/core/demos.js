@@ -10,6 +10,7 @@ import ComponentRequirements from "../components/docs/contributing/ComponentRequ
 import UnitTesting from "../components/docs/contributing/UnitTesting.mdx";
 import StandardProps from "../components/docs/contributing/StandardProps.mdx";
 import ClassNames from "../components/docs/contributing/ClassNames.mdx";
+import DataIDs from "../components/docs/contributing/DataIDs.mdx";
 import Changes from "../components/docs/cannonball/Changes.mdx";
 
 const contentPage = WrappedComponent => (props) => (
@@ -145,6 +146,11 @@ module.exports = [
                         label: "Class Names",
                         demo: contentPage(ClassNames),
                         contentPage: true,
+                    },
+                    {
+                        label: "Data ID's",
+                        demo: contentPage(DataIDs),
+                        contentPage: true
                     },
                 ]
             }

@@ -1,0 +1,7 @@
+To facilitate integration testing and to avoid reliance on markup, the interactive elements of our components are set up with data-id's. A data-id is simply an HTML attribute, named data-id, set on an element. For example, &lt;div data-id="my-id">&lt;div/>.
+
+* All components should take a data-id prop.
+* The data-id prop should be attached to the top-level element of a component.
+* Any element that can be interacted with using browser actions (like clicking or typing) should have a data-id.
+* Data-id's not set at the top level of a component should be both static (ie not based directly on the data-id prop) and contextual. If a complex component has a dropdown, for example, it would make more sense to give that component a data-id of "dropdown" than "form-dropdown-list".
+* Data-id's should be kebab cased. For example, use "text-field" instead of "textField".
