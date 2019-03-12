@@ -1,0 +1,17 @@
+As a user of our components, you'll likely be testing them as well. In order to facilitate this, we've set up test hooks and general testing guidelines.
+
+## Data-ID's
+
+In order to avoid having to rely on pieces of markup like HTML elements and class names, our components are set up with data-id attributes specifically built for testing.
+
+* Interactive elements on all new components (think buttons, inputs, etc.) are set up with data-id attributes. However, older components may not have these hooks. If you do find yourself in need of a new data-id in a component, feel free to log a ticket or create a changeset to add one.
+* Each component in the library takes a data-id prop.
+* Going forward, components will have a top-level data-id that can be customized with a prop and static data-id's for interactive elements. For example, a dropdown in a complex charting component might have a data-id of "charting-dropdown". Some older components also follow this pattern.
+* Since the Library is an evolving product, you may find other data-id patterns for library components.
+
+## Testing guidelines
+
+* Since data-id's are intended to decrease reliance on HTML markup, we encourage constructing test selectors (like XPATH queries) using only data-id's where possible.
+* As data-id's are intended to represent the conceptual structure of a component, we encourage chaining data-id's to find the elements that you want.
+* Your tests should not have to worry about whether Library components work as intended. We try to keep our unit test coverage high (current 93.8%) so that you can concentrate on testing your application instead of ours.
+* Internal component methods should not be tested directly, since these can change frequently and may not reflect the full functionality of the component. Instead, we encourage testing using a component's props and browser interactions.

@@ -4,6 +4,7 @@ import FormattedContent from "ui-library/lib/components/general/FormattedContent
 import UILibrary101 from "../components/docs/UILibrary101.mdx";
 import UsingComponents from "../components/docs/UsingComponents.mdx";
 import UsingTemplates from "../components/docs/UsingTemplates.mdx";
+import TestingComponents from "../components/docs/TestingComponents.mdx";
 import SubmittingCode from "../components/docs/contributing/SubmittingCode.mdx";
 import ComponentRequirements from "../components/docs/contributing/ComponentRequirements.mdx";
 import UnitTesting from "../components/docs/contributing/UnitTesting.mdx";
@@ -60,6 +61,12 @@ module.exports = [
                 demo: contentPage(UsingComponents),
                 contentPage: true,
                 icon: "curly-braces"
+            },
+            {
+                label: "Testing Components",
+                demo: contentPage(TestingComponents),
+                contentPage: true,
+                icon: "radar"
             },
             {
                 label: "Using Templates",
