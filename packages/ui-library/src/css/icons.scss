@@ -62,10 +62,32 @@ a.icon-clear {
 
 .icon {
     @include inline-flex;
+    &__graphic {
+        padding: 0 8px 0 0;
+        &--size-sm {
+            font-size: 100%;
+        }
+        &--size-md {
+            font-size: 150%;
+        }
+        &--size-lg {
+            font-size: 200%;
+        }
+        &--size-xl {
+            font-size: 250%;
+        }
+        &--size-xxl {
+            font-size: 300%;
+        }
+    }
 }
 
-.icon__graphic {
-    padding: 0 8px 0 0;
+.icon__container {
+    @include inline-flex;
+    align-items: flex-start;
+    .icon__content {
+        padding-left: $spacing-xs;
+    }
 }
 
 .icon__rounded {

@@ -40,5 +40,5 @@ describe("PageGroup", function () {
 
         expect(element.length).toEqual(1);
     });
-    
+
 });

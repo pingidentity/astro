@@ -1123,6 +1123,13 @@ module.exports = [
                         pathToSource: "templates_oasis_ApplicationWizard.jsx.html",
                         fullscreen: true,
                         icon: "details"
+                    },
+                    {
+                        label: "License",
+                        demo: require("../components/templates/LicenseDemo"),
+                        pathToSource: "templates_License.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
                     }
                 ]
             }

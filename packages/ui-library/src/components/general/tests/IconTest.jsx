@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Icon");
+
+import { iconSizes } from "../Icon";
 
 describe("Icon", function () {
     var React = require("react"),
@@ -45,6 +46,22 @@ describe("Icon", function () {
 
         expect(element).toBeTruthy();
         expect(noElement).toBeFalsy();
+    });
+
+    it("renders component with correct and expects iconSize to be rendered", function () {
+        const dataId = "icon";
+        const childContent = <div />;
+        const component = getComponent({
+            iconSize: iconSizes.XL,
+            dataId,
+            children: childContent,
+        });
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
+        const icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon__graphic");
+
+        expect(element).toBeTruthy();
+        expect(icon.className).toContain("xl");
     });
 
 });

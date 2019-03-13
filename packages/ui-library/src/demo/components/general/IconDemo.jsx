@@ -1,6 +1,8 @@
 import React from "react";
-import Icon from "ui-library/lib/components/general/Icon";
+import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
 import InputRow from "ui-library/lib/components/layout/InputRow";
+import Text from "ui-library/lib/components/general/Text";
+
 
 /**
 * @name IconDemo
@@ -19,12 +21,20 @@ const IconDemo = () => {
                     <br/> even if the it wraps to the following line(s).
                 </Icon>
             </InputRow>
-            <Icon iconName="earth">
-                <div className="textblock textblock--primary">Special Icon Styling</div>
-                <div className="textblock">
-                    Special icon title and description styling exists for targeted use.
-                </div>
-            </Icon>
+            <InputRow>
+                <Icon iconName="earth">
+                    <div className="textblock textblock--primary">Special Icon Styling</div>
+                    <div className="textblock">
+                        Special icon title and description styling exists for targeted use.
+                    </div>
+                </Icon>
+            </InputRow>
+            <InputRow>
+                <Icon iconName="globe" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">
+                    <Text type="value">Icon with multiple lines and title</Text>
+                    <Text type="error">Number of failed attempts 1/000</Text>
+                </Icon>
+            </InputRow>
             <hr className="hr" />
             <InputRow>
                 We can also render simple icons:

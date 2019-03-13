@@ -11,7 +11,7 @@ import classnames from "classnames";
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 * @param {string} [gap="MD"]
-*     Space items in the stack by XS, SM, MD, LG, XL, or XX
+*     Space items in the stack by ZERO, XS, SM, MD, LG, XL, or XX
 */
 
 const Stack = ({
@@ -31,7 +31,7 @@ const Stack = ({
 Stack.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
-    gap: PropTypes.oneOf([ "XS", "SM", "MD", "LG", "XL", "XX" ]),
+    gap: PropTypes.oneOf([ "ZERO","XS", "SM", "MD", "LG", "XL", "XX" ]),
 };
 
 Stack.defaultProps = {
