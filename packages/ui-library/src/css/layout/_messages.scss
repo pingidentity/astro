@@ -1,0 +1,369 @@
+.page-messages {
+    position: fixed;
+    z-index: $zindex__message;
+    top: $layout-header-height;
+    left: $layout-nav-width;
+    right: 0;
+    color: $color-white;
+    padding: 0;
+    height: 0; // to keep the larger container from ever blocking clicks
+
+    &--sidebar-fix {
+        // temporary class to fix Messages for the new sidebar
+        // this will be the default in our next major version
+        left: 205px;
+    }
+
+    &.full {
+        left: 0;
+        .message {
+            padding-left: 25px;
+        }
+    }
+    &.inline {
+        position: relative;
+        margin: 0 -40px 0 -40px;
+        top: auto;
+        left: auto;
+        right: auto;
+        z-index: zindex__base;
+    }
+    .close {
+        $size: 16px;
+
+        color: rgba($color-white, 0.7);
+        line-height: 1em;
+        margin-left: $spacing-lg;
+
+        &:after {
+            content: '\78';
+            font-size: 20px;
+            font-family: 'iconfont';
+            vertical-align: middle;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .message {
+        @include flexbox();
+
+        align-items: center;
+        clear: both;
+        position: relative;
+        overflow: hidden;
+        padding: $spacing-sm $spacing-sm $spacing-sm $spacing-xl;
+        border-bottom: 1px solid rgba($color-black, 0.1);
+        font-size: 14px;
+        line-height: 1.3;
+        margin: 0 auto;
+        min-width: 75%;
+
+        @include animation(fade-in 0.7s);
+
+        &--corner {
+            max-width: 400px;
+            min-width: auto;
+            margin-right: $spacing-sm;
+            margin-top: $spacing-sm;
+            padding: $spacing-md;
+
+            @media (max-width: 600px) {
+                max-width: auto;
+                margin: 0;
+            }
+
+            .message__icon {
+                display: inline-block;
+                width: 33px;
+                height: 33px;
+                border-radius: 17px;
+                line-height: 35px;
+                font-size: 16px;
+                margin-right: $spacing-md;
+            }
+        }
+        input[type=button] {
+            $height: 24px;
+
+            height: $height;
+            line-height: $height - 1;
+            margin: 0 0 0 17px;
+            border: none;
+        }
+        &.warning,
+        &.error {
+            background-color: $color-critical-red;
+            @include message-primary-button-css ($color-critical-red);
+
+            .message__icon {
+                color: $color-critical-red;
+            }
+        }
+        &.success {
+            background-color: $color-success;
+            @include message-primary-button-css ($color-success);
+
+            .message__icon {
+                color: $color-success;
+            }
+        }
+        &.notice {
+            background-color: $color-warning-yellow;
+            @include message-primary-button-css ($color-warning-yellow);
+
+            .message__icon {
+                color: $color-warning-yellow;
+            }
+        }
+        &.feature {
+            background-color: $color-active-blue;
+            @include message-primary-button-css ($color-active-blue);
+
+            .message__icon {
+                color: $color-active-blue;
+            }
+        }
+
+        &__text {
+            @include flexbox-grow(1);
+        }
+
+        &__icon {
+            @include flexbox-shrink(0);
+
+            margin-right: $spacing-sm;
+            background: $color-white;
+            width: 19px;
+            height: 19px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 20px;
+
+            font-size: 10px;
+        }
+
+        &__progress {
+            @include flexbox();
+            @include flexbox-direction(row);
+
+            align-items: center;
+
+            &-icon {
+                font-size: 10px;
+                line-height: 19px;
+                margin-right: $spacing-xs;
+            }
+
+            &-text {
+                @include font-pn-light;
+                font-size: 13px;
+                line-height: 19px;
+                vertical-align: middle;
+            }
+
+            &-border {
+                @include border-radius(2px);
+
+                border: 1px solid $color-white;
+                height: 19px;
+                margin-left: $spacing-md;
+                position: relative;
+                width: 90px;
+            }
+
+            &-bar {
+                background: $color-white;
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 0;
+            }
+        }
+
+        &--minimized {
+            float: right;
+            min-width: 0;
+            transition: min-width 0.2s;
+            justify-content: flex-end;
+        }
+    }
+    .show {
+        .text {
+            margin-top: 0;
+            border-bottom: 1px solid rgba($color-black, 0.1);
+
+            @include transition(margin-top 0.1s);
+        }
+    }
+
+    @include message-button-css;
+    .button,
+    button {
+        &.inline {
+            margin: 0 0 0 $spacing-md;
+        }
+    }
+}
+
+.inline-message {
+    @include text-body;
+
+    position: relative;
+    display: table;
+    padding: 15px;
+    margin: 15px 0 30px;
+    border: 1px solid $color-rabbit-fur;
+
+    @include border-radius(3px);
+
+    // TODO: determine primary button styling in non-alternate inline message
+    button,
+    .button {
+        &.inline.primary {
+            background: $color-white;
+            color: $color-strong-neutral-10;
+            border: 1px solid $color-neutral-50;
+
+            &:hover {
+                color: $color-active-blue-highlighted;
+                border-color: $color-active-blue-highlighted;
+            }
+        }
+    }
+
+    .inline-message-icon,
+    .inline-message-text,
+    .inline-message-btn {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .inline-message-btn {
+        margin: 0 0 0 20px;
+
+        .input,
+        .button,
+        button {
+            display: block;
+            margin: 0 auto 0 15px;
+        }
+    }
+
+    &.warning,
+    &.success,
+    &.notice,
+    &.error {
+        padding-left: 55px;
+
+        &:before {
+            position: absolute;
+            left: 15px;
+            font-family: $icon-font;
+            line-height: 1em;
+        }
+    }
+    &.error {
+        $icon-size: 25px;
+
+        &:before {
+            content: '!';
+            top: calc(50% - #{floor($icon-size/2)});
+            font-size: $icon-size;
+            color: $color-critical-red;
+        }
+    }
+    &.success {
+        $icon-size: 20px;
+
+        &:before {
+            content: 'y';
+            top: calc(50% - #{floor($icon-size/2)});
+            font-size: $icon-size;
+            color: $color-success;
+        }
+    }
+    &.notice,
+    &.warning {
+        $icon-size: 25px;
+
+        &:before {
+            content: '!';
+            top: calc(50% - #{floor($icon-size/2)});
+            font-size: $icon-size;
+        }
+    }
+    &.warning {
+        &:before {
+            color: $color-warning-icon-yellow;
+        }
+    }
+    &.notice {
+        &:before {
+            color: $color-active-blue;
+        }
+    }
+
+    &--alternate {
+        &.warning {
+            background-color: $color-warning-icon-yellow;
+            @include message-primary-button-css($color-warning-icon-yellow);
+        }
+        &.error {
+            background-color: $color-critical-red;
+            @include message-primary-button-css($color-critical-red);
+        }
+        &.success {
+            background-color: $color-success;
+            @include message-primary-button-css($color-success);
+        }
+        &.notice {
+            background-color: $color-active-blue;
+            @include message-primary-button-css($color-active-blue);
+        }
+
+        &.error,
+        &.warning,
+        &.notice,
+        &.success {
+            color: $color-white;
+            padding-left: 15px;
+            border: none;
+
+            &:before {
+                content: none;
+            }
+
+            .button,
+            button {
+                &.secondary {
+                    background: transparent;
+                    border-color: $color-white;
+                    color: $color-white;
+                }
+            }
+        }
+
+        @include message-button-css;
+    }
+
+    &--fullwidth {
+        display: block;
+    }
+
+    &--borderless {
+        &,
+        &.warning,
+        &.notice,
+        &.error,
+        &.success {
+            border: none;
+            padding: 0 0 0 40px;
+
+            &:before {
+                left: 0;
+            }
+        }
+    }
+}
+

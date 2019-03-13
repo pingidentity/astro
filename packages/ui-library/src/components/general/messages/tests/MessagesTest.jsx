@@ -142,6 +142,17 @@ describe("Messages", function () {
         expect(progress).not.toBe(null);
     });
 
+    it("Renders icon", function () {
+        const component = getComponent({
+            messages: [{ text: "Test message text", iconName: "success" }]
+        });
+
+        const messages = TestUtils.findRenderedDOMNodeWithDataId(component, "messages");
+        const icon = TestUtils.findRenderedDOMNodeWithClass(messages, "message__icon");
+
+        expect(icon).toBeTruthy();
+    });
+
     it("Renders 100% progress bar", function () {
         const component = getComponent({
             messages: [{ text: "Test message text", progress: { percent: 100 } }]

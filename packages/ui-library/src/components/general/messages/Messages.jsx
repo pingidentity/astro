@@ -8,7 +8,7 @@ import Utils from "../../../util/Utils";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import _ from "underscore";
 
-import { MessageTypes } from "./MessagesConstants";
+import { MessageTypes, Layouts } from "./MessagesConstants";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -38,6 +38,12 @@ import { MessageTypes } from "./MessagesConstants";
  *     Number of milli seconds after which message should be removed
  * @property {number|string} index
  *     Message index.
+ * @property {string} iconName
+ *     When provided, show this icon on the left of the message
+ * @property {boolean} hideClose
+ *     When true, we don't display the close button
+ * @property {Messages.Layouts} [layout=BANNER]
+ *     When set to CORNER, displays the message in the top right corner
  * @property {boolean} isHtml
  *     DEPRICATED: no longer needed. You can now simply use html in your messages as needed.
  * @property {Messages~ProgressSpec}
@@ -157,6 +163,7 @@ class Message extends React.Component {
     static propTypes = {
         flags: PropTypes.arrayOf(PropTypes.string),
         onRemoveMessage: PropTypes.func,
+        iconName: PropTypes.string,
     }
 
     static defaultProps = {
@@ -241,16 +248,31 @@ class Message extends React.Component {
     );
 
     render() {
-        const text = this.props.message.text || this.props.onI18n(this.props.message.key, this.props.message.params);
-        const classes = classnames("message show", this._transformType(this.props.message.type), {
-            "message--minimized": this.props.message.minimized
+        const {
+            message: {
+                iconName,
+                key,
+                hideClose,
+                layout,
+                minimized,
+                params,
+                progress,
+                type,
+                ...message
+            }
+        } = this.props;
+        const text = message.text || this.props.onI18n(key, params);
+        const classes = classnames("message show", this._transformType(type), {
+            "message--minimized": minimized,
+            "message--corner": layout === Layouts.CORNER,
         });
 
         return (
             <div className={classes} data-id={this.props["data-id"]}>
-                {!this.props.message.minimized && text && (<span className="message__text">{text}</span>)}
-                {this.props.message.progress && this._renderProgress()}
-                <a className="close" onClick={this._handleRemove}></a>
+                {iconName && <div className={classnames("message__icon", `icon-${iconName}`)} />}
+                {!minimized && text && (<span className="message__text">{text}</span>)}
+                {progress && this._renderProgress()}
+                {!hideClose && <a className="close" onClick={this._handleRemove}></a>}
             </div>
         );
     }

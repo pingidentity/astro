@@ -20,6 +20,11 @@ exports.MessageTypes = {
     FEATURE: "feature",
 };
 
+exports.Layouts = {
+    BANNER: "banner",
+    CORNER: "corner",
+};
+
 /*
  * For convenience also expose the MessageTypes as an array
  */

@@ -14,15 +14,23 @@ import InputRow from "../../../components/layout/InputRow";
  */
 class MessagesDemo extends React.Component {
     static flags = [ "fixed-messages-constants" ];
-    
+
     actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
 
     _addSuccessMessage = () => {
-        this.actions.addMessage(`New Success Message Added at ${new Date().toString()}`, Messages.MessageTypes.SUCCESS);
+        this.actions.addMessage({
+            message: `New Success Message Added at ${new Date().toString()}`,
+            status: Messages.MessageTypes.SUCCESS,
+            iconName: "success",
+        });
     };
 
     _addErrorMessage = () => {
-        this.actions.addMessage(`New Error Message Added at ${new Date().toString()}`, Messages.MessageTypes.ERROR);
+        this.actions.addMessage({
+            message: `New Error Message Added at ${new Date().toString()}`,
+            status: Messages.MessageTypes.ERROR,
+            iconName: "clear",
+        });
     };
 
     _addWarningMessage = () => {
@@ -40,6 +48,38 @@ class MessagesDemo extends React.Component {
     _addInfoConstantMessage = () => {
         this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.INFO);
     };
+
+    _addCornerSuccessMessage = () => {
+        this.actions.addMessage({
+            message: `New Success Message Added at ${new Date().toString()}`,
+            status: Messages.MessageTypes.SUCCESS,
+            layout: Messages.Layouts.CORNER,
+            iconName: "success",
+            hideClose: true,
+            removeAfterMs: 10000,
+        });
+    }
+
+    _addCornerWarningMessage = () => {
+        this.actions.addMessage({
+            message: `New Warning Message Added at ${new Date().toString()}`,
+            status: Messages.MessageTypes.NOTICE,
+            layout: Messages.Layouts.CORNER,
+            iconName: "error-triangle",
+            removeAfterMs: 0,
+        });
+    }
+
+    _addCornerDeletedMessage = () => {
+        this.actions.addMessage({
+            message: "You've successfully removed (email address) from your authentication methods.",
+            status: Messages.MessageTypes.FEATURE,
+            layout: Messages.Layouts.CORNER,
+            iconName: "delete",
+            hideClose: true,
+            removeAfterMs: 10000,
+        });
+    }
 
     _testButtonClick = () => {
         console.log("Button clicked");
@@ -148,15 +188,18 @@ class MessagesDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addSuccessMessage}>Add success message - MessageTypes.SUCCESS</Button>
+                    <Button onClick={this._addCornerSuccessMessage}>Add corner success message</Button>
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addErrorMessage}>Add error message - MessageTypes.ERROR</Button>
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addWarningMessage}>Add warning message - MessageTypes.NOTICE</Button>
+                    <Button onClick={this._addCornerWarningMessage}>Add corner warning message</Button>
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addInfoMessage}>Add info message - MessageTypes.FEATURE</Button>
+                    <Button onClick={this._addCornerDeletedMessage}>Add corner deleted message</Button>
                 </InputRow>
                 <InputRow>
                     <Button

@@ -77,7 +77,7 @@ exports.pushMessage = function (containerId, text, status, timer, index, isHtml)
  *     The action
  */
 exports.addMessage = function (containerId, message, status, removeAfterMs) {
-    let isHtml, progress, messageId, minimized, minimizeAfterMS = 0;
+    let isHtml, progress, messageId, minimized, minimizeAfterMS = 0, iconName, layout, hideClose;
 
     if ((arguments.length === 1 && typeof(containerId) !== "object") ||
         (arguments.length === 2 && MessageTypeValues.indexOf(message) > -1) ||
@@ -97,11 +97,15 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         messageId = arguments[0].messageId;
         minimized = arguments[0].minimized;
         minimizeAfterMS = arguments[0].minimizeAfterMS;
+        iconName = arguments[0].iconName;
+        layout = arguments[0].layout;
+        hideClose = arguments[0].hideClose;
     }
     // error messages should stay until dismissed
     if (typeof(removeAfterMs) === "undefined" ) {
         //OUR NAMES ARE REALLY TERRIBLE SO WE HAVE TO DO THIS
-        const isError = status === MessageTypes.WARNING || status === MessageTypes.ERROR;
+        const isError = status === MessageTypes.NOTICE ||
+            status === MessageTypes.WARNING || status === MessageTypes.ERROR;
         removeAfterMs = isError ? 0 : 5000;
     }
 
@@ -132,7 +136,10 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
             index: messageId,
             isHtml,
             progress,
-            minimized
+            minimized,
+            iconName,
+            layout,
+            hideClose,
         });
     };
 };
