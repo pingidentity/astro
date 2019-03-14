@@ -10,6 +10,8 @@ import CalendarUtils from "./Utils";
 import Translator from "../../util/i18n/Translator.js";
 import Utils from "../../util/Utils.js";
 import PopperContainer from "../tooltips/PopperContainer";
+import { inStateContainer } from "../utils/StateContainer";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -90,7 +92,8 @@ var Views = {
  * @param {boolean} [required=false]
  *    If true, the user must select a date for the calendar.
  * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
+ *     Set the flag for "use-portal" to render with popper.js and react-portal.
+ *     Set the flag for "p-stateful" to use this component in a progressively stateful mode.
  *
  * @example
  *
@@ -118,7 +121,7 @@ var Views = {
  *     }
  */
 
-class Calendar extends React.Component {
+class BaseCalendar extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
@@ -143,19 +146,22 @@ class Calendar extends React.Component {
         required: PropTypes.bool,
         tight: PropTypes.bool,
 
-        onValueChange: PropTypes.func.isRequired,
+        onValueChange: PropTypes.func,
         flags: PropTypes.arrayOf(PropTypes.string),
+
+        statelessDate: PropTypes.bool,
     };
 
     static defaultProps = {
         "data-id": "calendar",
         computableFormat: "MM-DD-YYYY",
-        minView: Views.DAYS,
         closeOnSelect: false,
+        minView: Views.DAYS,
         required: false,
         format: Translator.translate("dateformat"),
         tight: false,
         flags: [],
+        statelessDate: false,
     };
 
     constructor(props) {
@@ -163,6 +169,7 @@ class Calendar extends React.Component {
 
         moment.locale(Translator.currentLanguage);
 
+        /* istanbul ignore next  */
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
@@ -175,16 +182,33 @@ class Calendar extends React.Component {
             }
         }
 
-        var date = props.date ? moment(props.date) : null;
+        if (!this.props.statelessDate) {
+            // doing this just to keep from defining the deprecated hook unless we need it
+            this.componentWillReceiveProps = this._maybeComponentWillReceiveProps;
+        }
 
         this.state = {
-            date: date,
-            inputValue: date ? date.format(props.format) : "",
+            date: props.date || moment(),
             currentView: props.minView,
             isVisible: false
         };
     }
 
+    _getDateValue = () => this.props.statelessDate ? this.props.date : this.state.date;
+
+    // runs the date through moment
+    _getDate = (date = this._getDateValue()) => {
+        // we have a habit of passing back stringified time numbers
+        if (date && date.match && date.match(/^\-?[0-9]+$/)) {
+            return moment(parseInt(date));
+        }
+        return date ? moment(date) : null;
+    };
+
+    // formats the date according to the supplied viewing format
+    _getFormattedDate = (date = this._getDate(), format = this.props.format) => {
+        return date ? date.format(format) : "";
+    };
 
     componentDidMount() {
         document.addEventListener("click", this.documentClick);
@@ -192,13 +216,6 @@ class Calendar extends React.Component {
 
     componentWillUnmount() {
         document.removeEventListener("click", this.documentClick);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            date: nextProps.date ? moment(nextProps.date) : this.state.date,
-            inputValue: nextProps.date ? moment(nextProps.date).format(this.props.format) : ""
-        });
     }
 
     /**
@@ -229,20 +246,15 @@ class Calendar extends React.Component {
     prevView = (date) => {
         if (this.state.currentView === this.props.minView) {
             this.setState({
-                date: date,
-                inputValue: date.format(this.props.format),
                 isVisible: false
             });
-
-            if (CalendarUtils.inDateRange(date, this.props.dateRange) && this.props.onValueChange) {
-                this.props.onValueChange(date.format(this.props.computableFormat));
-            }
-
         } else {
             this.setState({
-                date: date,
                 currentView: this.state.currentView - 1
             });
+        }
+        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+            this._handleValueChange(date);
         }
     };
 
@@ -253,19 +265,19 @@ class Calendar extends React.Component {
      * @param {Boolean} isDayView [description]
      */
     setDate = (date, isDayView) => {
-        this.setState({
-            date: date,
-            inputValue: date.format(this.props.format),
-            isVisible: this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
-        });
+        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+            this._handleValueChange(date);
 
-        if (CalendarUtils.inDateRange(date, this.props.dateRange) && this.props.onValueChange) {
-            this.props.onValueChange(date.format(this.props.computableFormat));
+            if (this.props.closeOnSelect && isDayView) {
+                this.setState({
+                    isVisible: false,
+                });
+            }
         }
     };
 
     /**
-     * Sets the inputValue state
+     * Handles the value showing in the text input
      * @method Calendar#changeDate
      * @param  {Object} e The event object
      */
@@ -275,49 +287,57 @@ class Calendar extends React.Component {
         });
     };
 
+    // handles when a new date is selected
+    // updates the text input as well
+    _handleValueChange = value => {
+        const { onValueChange } = this.props;
+
+        this.setState({
+            date: value,
+            inputValue: undefined,
+        });
+
+        if (onValueChange) {
+            onValueChange(this._getComputableDate(moment(value)));
+        }
+    }
+
+    // keeping the code for this deprecated hook here
+    // the constructor will decide if it needs it
+    _maybeComponentWillReceiveProps = (nextProps) => {
+        const { date } = nextProps;
+
+        if (date) {
+            this.setState({ date });
+        }
+    }
+
+    // formats the date according to the provided computable format
+    _getComputableDate = (date) => date.format(this.props.computableFormat);
+
     /**
-     * Handles input blur
+     * When the input blurs, use it to set the value for the component
      * @method Calendar#inputBlur
      */
     inputBlur = () => {
         var date = this.state.inputValue,
             newDate = null,
-            computableDate = null,
             format = this.props.format;
 
         if (date) {
             // format, with strict parsing true, so we catch bad dates
             newDate = moment(date, format, true);
 
-            // if the new date didn't match our format, see if the native
-            // js date can parse it
+            // if the new date didn't match our format, parse it otherwise
             if (!newDate.isValid()) {
-                var d = new Date(date);
-
-                // if native js cannot parse, just make a new date
-                if (isNaN(d.getTime())) {
-                    d = new Date();
-                }
-
-                newDate = moment(d);
+                newDate = moment(date);
             }
 
-            computableDate = newDate.format(this.props.computableFormat);
-        }
-
-        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
-            this.setState({
-                date: newDate,
-                inputValue: newDate ? newDate.format(format) : null
-            });
-
-            if (this.props.onValueChange) {
-                this.props.onValueChange(computableDate);
+            if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+                this._handleValueChange(newDate);
             }
-        } else {
             this.setState({
-                date: this.state.date,
-                inputValue: this.state.date.format(format)
+                inputValue: undefined,
             });
         }
     };
@@ -385,16 +405,11 @@ class Calendar extends React.Component {
 
     render() {
 
-        // its ok for this.state.date to be null, but we should never
-        // pass null for the date into the calendar pop up, as we want
-        // it to just start on todays date if there is no date set
-        var calendarDate = this.state.date || moment();
-        var view;
+        const calendarDate = this._getDate() || moment();
+        let view;
         switch (this.state.currentView) {
             case Views.DAYS:
-                if (typeof calendarDate === "object") {
-                    calendarDate.locale(Translator.currentLanguage);
-                }
+                calendarDate.locale(Translator.currentLanguage);
                 view = (<DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView}
                     dateRange={this.props.dateRange} />);
                 break;
@@ -431,17 +446,22 @@ class Calendar extends React.Component {
             : calendar
         );
 
+        const inputValue = this.state.inputValue === undefined
+            ? this._getFormattedDate()
+            : this.state.inputValue;
+
         const className = classnames("input-calendar", this.props.className, {
             active: this.state.isVisible,
             required: this.props.required,
-            "value-entered": !!this.state.inputValue,
+            "value-entered": !!inputValue,
             "input-calendar--width-tight": this.props.tight,
         });
 
         return (
             <div
                 className={className}
-                onClick={this.toggleClick}>
+                onClick={this.toggleClick}
+            >
 
                 <FormLabel
                     className={classnames(this.props.labelClassName)}
@@ -455,7 +475,7 @@ class Calendar extends React.Component {
                         data-id={this.props["data-id"]}
                         className="input-calendar-value"
                         name={this.props.name}
-                        value={this.state.inputValue}
+                        value={inputValue}
                         onBlur={this.inputBlur}
                         onChange={this.changeDate}
                         onClick={this.inputClick}
@@ -468,6 +488,26 @@ class Calendar extends React.Component {
         );
     }
 }
+
+const PStatefulCalendar = inStateContainer([
+    {
+        name: "date",
+        initial: moment(),
+        setter: "onValueChange",
+    },
+])(BaseCalendar);
+
+const Calendar = props => {
+    if (props.flags && props.flags.includes("p-stateful")) {
+        return <PStatefulCalendar {...props} statelessDate />;
+    }
+    cannonballChangeWarning({
+        message: `The 'date' prop will no longer serve as an initial state. ` +
+        `If it is present, it will control the current value of the component. ` +
+        `Set the 'p-stateful' flag to switch to this behavior now.`,
+    });
+    return <BaseCalendar {...props} />;
+};
 
 Calendar.Views = Views;
 

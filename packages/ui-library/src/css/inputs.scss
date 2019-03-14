@@ -1611,7 +1611,8 @@ input[type=file] {
 
 // make styles work for popper container version
 .calendar-popup {
-    &.popper-container {
+    &.popper-container[x-placement^='bottom'],
+    &.popper-container[x-placement^='top'] {
         margin-top: 0;
         margin-bottom: 0;
     }

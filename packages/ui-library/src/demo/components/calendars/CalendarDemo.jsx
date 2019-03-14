@@ -9,7 +9,7 @@ var React = require("react"),
 */
 class CalendarDemo extends React.Component {
 
-    numDemos = 2;
+    numDemos = 3;
 
     constructor(props) {
         super(props);
@@ -18,14 +18,15 @@ class CalendarDemo extends React.Component {
         }
     }
 
-    static flags = [ "use-portal" ];
+    static flags = [ "use-portal", "p-stateful" ];
 
     state = {
         selectedDate1: moment(new Date()), //current date
-        selectedDate2: new Date(2017, 1, 20), //Feb 20 2017
+        selectedDate2: moment("2015-10-15"), //Feb 20 2017
+        selectedDate3: moment(new Date()),
         dateRange: {
-            startDate: new Date(2017, 1, 14), //Feb 14 2017
-            endDate: new Date(2018, 3, 28) //Apr 28 2018
+            startDate: new Date(2015, 9, 10), //Oct 10 2015
+            endDate: new Date(2015, 10, 20) //Nov 20 2015
         }
     };
 
@@ -76,6 +77,38 @@ class CalendarDemo extends React.Component {
                     flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
+
+                <br /><br />
+
+                <Calendar data-id="calendar-3"
+                    closeOnSelect={true}
+                    computableFormat="x"
+                    date={this.state.selectedDate3}
+                    format="YYYY-MM-DD"
+                    labelText="Date only showing months"
+                    onValueChange={this._onEnrollmentDateChanged3}
+                    minView={Calendar.Views.MONTHS}
+                    flags={flags}
+                />
+                <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
+
+                <br /><br />
+
+                <Calendar data-id="calendar-4"
+                    closeOnSelect={true}
+                    computableFormat="x"
+                    labelText="Internally managed state"
+                    flags={flags}
+                />
+                <br /><br />
+
+                <Calendar data-id="calendar-5"
+                    date={new Date(2017, 1, 20)}
+                    computableFormat="x"
+                    labelText="Sets date prop / no handler"
+                    flags={flags}
+                    required
+                />
             </div>
         );
     }

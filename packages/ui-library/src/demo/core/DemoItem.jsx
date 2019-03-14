@@ -11,7 +11,7 @@ import FormLabel from "ui-library/lib/components/forms/FormLabel";
 
 const flagHelp = (
     `Use the flags prop on your component to specify custom behaviors.
-    Example: flag={["new-behavior", "something-else"]}`
+    Example: flags={["new-behavior", "something-else"]}`
 );
 
 class DemoItem extends React.Component {
