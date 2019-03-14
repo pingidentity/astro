@@ -307,6 +307,13 @@ module.exports = [
                         pathToSource: "components_general_UnitInput.jsx.html",
                         pathToDemoSource: "demo_components_general_UnitInputDemo.jsx.html"
                     },
+                    {
+                        label: "Icon Selector",
+                        demo: require("../components/forms/IconSelectorDemo"),
+                        pathToDoc: "components/forms/IconSelector.jsx",
+                        pathToSource: "components_forms_IconSelector.jsx.html",
+                        pathToDemoSource: "demo_components_forms_IconSelectorDemo.jsx.html"
+                    },
                 ]
             },
             {

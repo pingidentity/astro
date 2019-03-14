@@ -4,6 +4,7 @@ import classnames from "classnames";
 import Utils from "../../util/Utils";
 import FormRadioInput from "./FormRadioInput";
 import FormLabel from "./FormLabel";
+import { defaultRender } from "../../util/PropUtils";
 
 /**
  * @callback FormRadioGroup~onValueChange
@@ -50,6 +51,9 @@ import FormLabel from "./FormLabel";
  *     and wrap when out of space.
  * @param {boolean} [disabled=false]
  *     If radio buttons are disabled
+ * @param {FormRadioGroup~radioRenderer} renderRadio
+ *     Renders a single radio button
+ *
  *
  * @example
  *
@@ -68,7 +72,7 @@ import FormLabel from "./FormLabel";
  *             id: PolicyConditionsConstants.ConditionType.APS_CUSTOMERS,
  *             name: "Customers",
  *             hidden: !this.props.apsCustomersEnabled,
-               helpHintText: "Sample help hint text"
+ *             helpHintText: "Sample help hint text"
  *         },
  *         {
  *             id: PolicyConditionsConstants.ConditionType.APS_WHATEVER,
@@ -86,6 +90,15 @@ import FormLabel from "./FormLabel";
  *         items={apsConditionTypes} />
  */
 
+/**
+ *  @typedef {function} FormRadioGroup~RadioRenderer
+ *  @desc Function for overriding default rendering
+ *  @param {FormRadioInput} props
+ *      Object of props that can be passed to the component
+ *  @param {object} [DefaultComponent=FormRadioInput]
+ *      The component that encompasses the default rendering. Accepts props from the props parameter
+ */
+
 class FormRadioGroup extends React.Component {
 
     static propTypes = {
@@ -100,12 +113,14 @@ class FormRadioGroup extends React.Component {
         label: PropTypes.string,
         labelText: PropTypes.string,
         labelHelpText: PropTypes.string,
+        renderRadio: PropTypes.func,
     };
 
     static defaultProps = {
         "data-id": "radio-btn",
         stacked: true,
-        disabled: false
+        disabled: false,
+        renderRadio: defaultRender,
     };
 
     constructor(props) {
@@ -125,30 +140,39 @@ class FormRadioGroup extends React.Component {
     };
 
     _getRadioButtons = () => {
-        return this.props.items.map((item) => {
-            var radioDisabled = this.props.disabled || item.disabled;
+        const {
+            className,
+            "data-id": dataId,
+            disabled,
+            groupName,
+            items,
+            renderRadio,
+            selected,
+            stacked,
+        } = this.props;
 
-            var className = classnames("input-radio", "group", this.props.className, {
-                stacked: this.props.stacked,
+        return items.map((item) => {
+            var radioDisabled = disabled || item.disabled;
+
+            const radioClassName = classnames("input-radio", "group", className, {
+                stacked: stacked,
                 disabled: radioDisabled,
                 hidden: item.hidden
             });
 
-            return (
-                <FormRadioInput
-                    className={className}
-                    key={item.id}
-                    label={item.name}
-                    hint={item.helpHintText}
-                    data-id={this.props["data-id"]}
-                    name={this.props.groupName}
-                    value={item.id}
-                    checked={String(item.id) === String(this.props.selected)}
-                    onValueChange={this._handleChange}
-                    disabled={radioDisabled}
-                    helpTarget={item.helpTarget}
-                />
-            );
+            return renderRadio({
+                className: radioClassName,
+                key: item.id,
+                label: item.name,
+                hint: item.helpHintText,
+                "data-id": dataId,
+                name: groupName,
+                value: item.id,
+                checked: String(item.id) === String(selected),
+                onValueChange: this._handleChange,
+                disabled: radioDisabled,
+                helpTarget: item.helpTarget,
+            }, FormRadioInput);
         });
     };
 

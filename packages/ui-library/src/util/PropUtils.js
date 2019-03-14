@@ -1,3 +1,5 @@
+import React from "react";
+
 /**
  * @module util/PropUtils
  * @desc The module contains common utility functions for use with props and prop names
@@ -33,6 +35,23 @@ export const getIconClassName = (props, options = {}) => {
     return `icon-${icon}`;
 };
 
+/**
+ * @alias module:util/PropUtils.defaultRender
+ *
+ * @desc This can be the default value for any simple render function.
+ *    It will simply pass the props to the default component
+ *
+ * @param {object} props
+ *    The props.
+ * @param {object} DefaultComponent
+ *    The default component that is rendered unless this function is overridden.
+ * @returns {node}
+ *    A rendered node.
+ *
+ */
+export const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
+
 export default {
-    getIconClassName
+    getIconClassName,
+    defaultRender,
 };

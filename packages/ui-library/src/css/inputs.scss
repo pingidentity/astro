@@ -2885,6 +2885,35 @@ label {
     }
 }
 
+// CUSTOM STYLES
+
+.icon-selector-button {
+    background: transparent;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    height: auto;
+    line-height: 15px;
+    padding: $spacing-xs;
+    margin-right: $spacing-xs;
+    font-size: 18px;
+    color: $color-accent-neutral-10;
+
+    &:hover {
+        color: $color-accent-neutral-10;
+        background: $color-accent-neutral-90;
+        border-color: $color-accent-neutral-90;
+    }
+
+    &--selected,
+    &--selected:hover,
+    &:active {
+        @include border-radius(2px);
+
+        background: $color-white;
+        border-color: $color-active-blue;
+    }
+}
+
 
 // DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
 // TODO : move WP styles to WP
