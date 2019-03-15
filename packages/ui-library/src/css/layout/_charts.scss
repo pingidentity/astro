@@ -80,12 +80,11 @@
 .rocker-button--chart-rocker-small {
     $button-width: 64px;
     $button-height: 22px;
-
-    font-family: 'ProximaNova-Medium';
+    @include font-pn-regular;
     font-size: 10px;
     height: $button-height;
     label {
-        line-height: 25px;
+        line-height: $button-height + 1;
         width: $button-width;
     }
     &.sel-0,
