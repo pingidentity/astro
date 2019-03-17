@@ -440,6 +440,26 @@ TestUtils.UpdatePropsWrapper = class extends React.Component {
     }
 };
 
+/**
+ * @class StateWrapper
+ *
+ * @desc A replacement for the UpdatePropsWrapper that uses a render prop that simply passes all of its state
+ *
+ * @example
+ *     // initial render
+ *     var component = ReactTestUtils.renderIntoDocument(
+ *         <StateWrapper initialState={{ open: false }}>
+ *              state => <Door {...state} />
+ *         </StateWrapper>
+ *     );
+ *     component.setState({ open: true });
+ */
+TestUtils.StateWrapper = class extends React.Component {
+    state = this.props.initialState;
+
+    render = () => this.props.children(this.state);
+};
+
 TestUtils.checkForDataIds = function (component, ids) {
     return _.reduce(ids, (result, id) => {
         if (!result) {

@@ -491,27 +491,59 @@ describe("FormDropDownList", function () {
         expect(componentRef._orderedOptions).toEqual(orderedOptions);
     });
 
-    it("sets up groups and options on componentWillReceiveProps when options are different", function () {
-        var component = getComponent({
-            open: true,
-            groups: groups
-        });
-        var componentRef = component.refs.FormDropDownListStateless;
+    it("sets up groups and options when options change", function () {
+        const wrapper = ReactTestUtils.renderIntoDocument(
+            <TestUtils.StateWrapper
+                initialState={{ options }}
+            >
+                {({ options: passOptions }) => (
+                    <FormDropDownList
+                        stateless={true}
+                        options={passOptions}
+                        selectedOption={options[0]}
+                        onToggle={jest.fn()}
+                        onSearch={jest.fn()}
+                        onValueChange={jest.fn()}
+                        open={true}
+                        groups={groups}
+                    />
+                )}
+            </TestUtils.StateWrapper>
+        );
+
+        const component = ReactTestUtils.findRenderedComponentWithType(wrapper, FormDropDownList);
+        const componentRef = component.refs.FormDropDownListStateless;
 
         componentRef._setupGroups = jest.fn();
-        componentRef.componentWillReceiveProps({ options: [] });
+        wrapper.setState({ options: [] });
         expect(componentRef._setupGroups).toBeCalled();
     });
 
-    it("sets up groups and options on componentWillReceiveProps when groups are different", function () {
-        var component = getComponent({
-            open: true,
-            groups: groups
-        });
-        var componentRef = component.refs.FormDropDownListStateless;
+    it("sets up groups and options when groups change", function () {
+        const wrapper = ReactTestUtils.renderIntoDocument(
+            <TestUtils.StateWrapper
+                initialState={{ groups }}
+            >
+                {({ groups: passGroups }) => (
+                    <FormDropDownList
+                        stateless={true}
+                        options={options}
+                        selectedOption={options[0]}
+                        onToggle={jest.fn()}
+                        onSearch={jest.fn()}
+                        onValueChange={jest.fn()}
+                        open={true}
+                        groups={passGroups}
+                    />
+                )}
+            </TestUtils.StateWrapper>
+        );
+
+        const component = ReactTestUtils.findRenderedComponentWithType(wrapper, FormDropDownList);
+        const componentRef = component.refs.FormDropDownListStateless;
 
         componentRef._setupGroups = jest.fn();
-        componentRef.componentWillReceiveProps({ groups: [] });
+        wrapper.setState({ groups: [] });
         expect(componentRef._setupGroups).toBeCalled();
     });
 

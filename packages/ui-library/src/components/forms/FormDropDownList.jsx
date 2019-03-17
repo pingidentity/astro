@@ -384,15 +384,6 @@ class FormDropDownListStateless extends React.Component {
         this._setupGroups(props);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!_.isEqual(this.props.options, nextProps.options) || !_.isEqual(this.props.groups, nextProps.groups)) {
-            this._setupGroups(nextProps);
-        }
-        if (this.props.open && !nextProps.open) {
-            this.didPressKey = false;
-        }
-    }
-
     componentDidUpdate() {
         this._setSearchListPosition(this.props.options);
     }
@@ -771,6 +762,12 @@ class FormDropDownListStateless extends React.Component {
     _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
 
     render() {
+        this._setupGroups(this.props);
+
+        if (this.didPressKey && !this.props.open) {
+            this.didPressKey = false;
+        }
+
         const hasIcon = this.props.options.some((option) => option.iconName);
         const containerClassName = classnames(
                 "input-custom-select",
