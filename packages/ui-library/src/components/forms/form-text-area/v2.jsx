@@ -11,6 +11,8 @@ import classnames from "classnames";
 import Utils from "../../../util/Utils.js";
 import _ from "underscore";
 
+import { inStateContainer } from "../../utils/StateContainer";
+import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
 
 /**
 * @callback FormTextArea~onChange
@@ -70,6 +72,11 @@ import _ from "underscore";
 * @param {string} [value=""]
 *     The current text field value, used when state is managed outside of component.
 *     Must be used with onValueChange handle to get updates.
+* @param {array} [flags=[]]
+*     Use progressively stateful behavior by providing the 'p-stateful' flag.
+* @param {object} [initialState]
+*     When the 'p-stateful' flag is set and 'value' is not being set as a prop,
+*     initialState.value determines the initial state of 'value'.
 * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
 *    Specifies the width of the input.
 *
@@ -113,34 +120,6 @@ import _ from "underscore";
 *         onValueChange={myFunction}
 *     />
 */
-
-module.exports = class extends React.Component {
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: true
-    };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-        }
-    }
-
-    render() {
-        return (
-            this.props.stateless
-                ? React.createElement(FormTextAreaStateless, //eslint-disable-line no-use-before-define
-                    _.defaults({ ref: "FormTextAreaStateless" }, this.props), this.props.children)
-                : React.createElement(FormTextAreaStateful, //eslint-disable-line no-use-before-define
-                    _.defaults({ ref: "FormTextAreaStateful" }, this.props), this.props.children)
-        );
-    }
-};
 
 class FormTextAreaStateless extends React.Component {
     static propTypes = {
@@ -314,5 +293,75 @@ class FormTextAreaStateful extends React.Component {
         }, this.props);
 
         return React.createElement(FormTextAreaStateless, props, this.props.children);
+    }
+}
+
+const resetToOriginal = (value, current, { originalValue }) => originalValue;
+
+const isEdited = ({ value }, { originalValue }) => {
+    if (value !== undefined && originalValue !== undefined) {
+        return { edited: (value !== originalValue) };
+    }
+    return {};
+};
+
+const PStatefulFormTextArea = inStateContainer([
+    {
+        name: "value",
+        initial: "",
+        setter: "onValueChange",
+        callbacks: [{
+            name: "onUndo",
+            transform: resetToOriginal,
+        }],
+    },
+], isEdited)(FormTextAreaStateless);
+
+export default class FormTextArea extends React.Component {
+
+    static propTypes = {
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful" ])),
+    };
+
+    static defaultProps = {
+        stateless: true,
+        flags: [],
+    };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.controlled !== undefined) {
+            throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+        }
+    }
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    _cannonballWarning = () => cannonballProgressivleyStatefulWarning({ name: "FormTextArea" });
+
+    render() {
+        if (this._usePStateful()) {
+            return (
+                <PStatefulFormTextArea
+                    {...this.props}
+                />);
+        }
+
+        const { stateless, children, value } = this.props;
+        // figure out if we need a cannonball warning here
+        if (stateless && value === undefined) {
+            this._cannonballWarning();
+        } else if (!stateless && value !== undefined) {
+            this._cannonballWarning();
+        }
+
+        return (
+            stateless
+                ? React.createElement(FormTextAreaStateless,
+                    _.defaults({ ref: "FormTextAreaStateless" }, this.props), children)
+                : React.createElement(FormTextAreaStateful,
+                    _.defaults({ ref: "FormTextAreaStateful" }, this.props), children)
+        );
     }
 }

@@ -45,3 +45,8 @@
 **V3 Behavior:** The WARNING message type shows a red error banner.
 
 **Recommendation:** Use NOTICE instead of WARNING. (Or set a flag for "fixed-messages-constants".)
+
+### FormTextArea
+* **V4 Behavior:** The component controls the state of `value` if it's not defined as a prop. The initial value can be set with `initialState.value`.
+* **V3 Behavior:** The `stateless` prop determines whether `value` is controlled by the component or not.
+* **Recommendation:** Make sure `value` is only set when the component is stateless. If you want the component to be stateful and also want to set an initial value, use the `initialState` prop. (Or set a flag for "p-stateful".)

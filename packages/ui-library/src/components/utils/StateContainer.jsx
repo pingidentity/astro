@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Utils from "../../util/Utils";
 
+const mapNothing = () => ({});
+
 class StateContainer extends React.Component {
     static propTypes = {
         stateDefs: PropTypes.arrayOf(
@@ -19,12 +21,14 @@ class StateContainer extends React.Component {
         ),
         initialState: PropTypes.object,
         passedProps: PropTypes.object,
+        mapToProps: PropTypes.func,
     };
 
     static defaultProps = {
         stateDefs: [],
         initialState: {},
         passedProps: {},
+        mapToProps: mapNothing,
     };
 
     constructor({ stateDefs, initialState, passedProps }) {
@@ -67,7 +71,7 @@ class StateContainer extends React.Component {
             callbacks.forEach(callback => {
                 transformCallbacks[callback.name] = (value, e) => {
                     // set the state with the transformed value
-                    this.setState(state => ({ [name]: callback.transform(value, state[name]) }),
+                    this.setState(state => ({ [name]: callback.transform(value, state[name], this.props.passedProps) }),
                         () => {
                             // if a callback is provided, we'll still execute it
                             if (passedProps[callback.name]) {
@@ -109,7 +113,7 @@ class StateContainer extends React.Component {
     }
 
     render() {
-        const { children, passedProps } = this.props;
+        const { children, mapToProps, passedProps } = this.props;
 
         // alert dev if there are state/prop conflicts
         if (!Utils.isProduction()) {
@@ -123,12 +127,12 @@ class StateContainer extends React.Component {
             });
         }
 
-        return children({ ...passedProps, ...this.callbacks, ...this.state });
+        return children({ ...passedProps, ...this.callbacks, ...this.state, ...mapToProps(this.state, passedProps) });
     }
 }
 
-export const inStateContainer = stateDefs => WrappedComponent => ({ initialState, ...props }) => (
-    <StateContainer stateDefs={stateDefs} initialState={initialState} passedProps={props}>
+export const inStateContainer = (stateDefs, mapToProps) => WrappedComponent => ({ initialState, ...props }) => (
+    <StateContainer stateDefs={stateDefs} mapToProps={mapToProps} initialState={initialState} passedProps={props}>
         {containerProps => <WrappedComponent {...containerProps} />}
     </StateContainer>
 );

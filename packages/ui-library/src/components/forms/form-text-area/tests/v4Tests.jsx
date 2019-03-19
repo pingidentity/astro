@@ -1,25 +1,22 @@
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../../testutil/TestUtils";
+import FormTextArea from "../v2";
+import HelpHint from "../../../tooltips/HelpHint";
+import Utils from "../../../../util/Utils";
+import _ from "underscore";
+import StateContainer from "../../../utils/StateContainer";
 
-jest.dontMock("../v2");
-jest.dontMock("../../FormLabel");
-jest.dontMock("../../FormError");
-jest.dontMock("../../../tooltips/HelpHint");
 
-describe("FormTextArea", function () {
-
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../../testutil/TestUtils"),
-        FormTextArea = require("../v2"),
-        HelpHint = require("../../../tooltips/HelpHint"),
-        Utils = require("../../../../util/Utils"),
-        _ = require("underscore");
+describe("FormTextArea v4", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
             stateless: true,
             onChange: jest.fn(),
             onValueChange: jest.fn(),
-            onBlur: jest.fn()
+            onBlur: jest.fn(),
+            flags: [ "p-stateful" ],
         });
 
         return ReactTestUtils.renderIntoDocument(<FormTextArea {...props} />);
@@ -191,10 +188,10 @@ describe("FormTextArea", function () {
     });
 
     it("stateful: assigns empty string to value state when no value or defaultValue given", function () {
-        var component = getComponent({ stateless: false }),
-            componentRef = component.refs.FormTextAreaStateful;
+        const component = getComponent();
+        const stateContainer = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
 
-        expect(componentRef.state.value).toBe("");
+        expect(stateContainer.state.value).toBe("");
     });
 
     it("stateful: does not show the undo button if the originalValue param is not passed in", function () {
@@ -211,16 +208,16 @@ describe("FormTextArea", function () {
     });
 
     it("stateful: shows the undo icon when text changes", function () {
-        var originalValue = "my original value";
-        var component = getComponent({
-            stateless: false,
-            defaultValue: originalValue,
-            originalValue: originalValue
+        const originalValue = "my original value";
+        const component = getComponent({
+            initialState: { value: originalValue },
+            originalValue: originalValue,
+            showUndo: true,
         });
 
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
+        const field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
+        const undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
     });
 
@@ -229,7 +226,8 @@ describe("FormTextArea", function () {
         var component = getComponent({
             stateless: false,
             defaultValue: originalValue,
-            originalValue: originalValue
+            originalValue: originalValue,
+            showUndo: true,
         });
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
@@ -250,7 +248,8 @@ describe("FormTextArea", function () {
         var component = getComponent({
             stateless: false,
             defaultValue: originalValue,
-            originalValue: originalValue
+            originalValue: originalValue,
+            showUndo: true,
         });
 
         // make the undo icon appear by changing the field
@@ -275,7 +274,8 @@ describe("FormTextArea", function () {
         var component = getComponent({
             labelText: "label",
             labelHelpText: helpText,
-            helpClassName: "bottom right"
+            helpClassName: "bottom right",
+            showUndo: true,
         });
 
         var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
@@ -290,31 +290,6 @@ describe("FormTextArea", function () {
         expect(function () {
             getComponent({ controlled: true });
         }).toThrow(expectedError);
-    });
-
-    it ("throws the Cannonball warning when value is provided to a stateful text area", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: false, value: "something" });
-        expect(console.warn).toBeCalled();
-    });
-
-    it ("throws the Cannonball warning when value is not provided to a stateless text area", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: true });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("does not throw Cannonball warnings when the 'p-stateful' flag is set", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: true, flags: [ "p-stateful" ] });
-        getComponent({ stateless: false, value: "something", flags: [ "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

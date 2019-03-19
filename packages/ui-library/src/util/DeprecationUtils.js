@@ -273,7 +273,28 @@ export function cannonballChangeWarning({
         console.warn(
             `WARNING potential 4.0.0 breaking change: ` +
             message +
-            ` For more information: http://uilibrary.ping-eng.com/3.33.0-SNAPSHOT/index.html#/?selectedSection=V4BreakingChanges&selectedNode=V4BreakingChanges&root=Documentation`
+            ` For more information: http://uilibrary.ping-eng.com/3.34.0-SNAPSHOT/index.html#/?selectedSection=V4BreakingChanges&selectedNode=V4BreakingChanges&root=Documentation`
         );
     }
+}
+
+/**
+ * @desc Function specifically for the v4 Cannonball release. Shows a warning about this specific behavior change
+ * @param {string} name - The the name of the component
+ *
+ * @returns {} No return value.
+ *
+ * @example: cannonballProgressivleyStatefulWarning({
+ *      name: "FormTextArea",
+ *  })
+ */
+export function cannonballProgressivleyStatefulWarning({
+    name
+}) {
+    cannonballChangeWarning({
+        message: `The stateless prop will be removed from ${name}. ` +
+            `Instead of distinguishing between stateless and stateful versions, ` +
+            `the component will instead control the state of a subset of its props when those ` +
+            `have not been defined.`
+    });
 }
