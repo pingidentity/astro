@@ -1,5 +1,6 @@
-var React = require("react"),
-    FormRadioGroup = require("../../../components/forms/FormRadioGroup");
+import React from "react";
+import FormRadioGroup from "../../../components/forms/FormRadioGroup";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name FormRadioGroupDemo
@@ -33,7 +34,7 @@ class FormRadioGroupDemo extends React.Component {
             { id: "2", name: "Radio 2", helpHintText: "Radio 2 help hint" },
             { id: "3", name: "Radio 3", disabled: true }
         ];
- 
+
         var radioItemsWithHidden = [
             { id: "1", name: "Radio A" },
             { id: "2", name: "Radio B" },
@@ -44,7 +45,7 @@ class FormRadioGroupDemo extends React.Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <label className="detached">Horizonal Alignment</label>
                     <FormRadioGroup
                         groupName="horizontal-group"
@@ -53,13 +54,13 @@ class FormRadioGroupDemo extends React.Component {
                         items={radioItems}
                         stacked={false}
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     selected id = {this.state.selectedId1}
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <label className="detached">Stacked/Vertical Alignment</label>
                     <FormRadioGroup
                         groupName="stacked-group"
@@ -67,13 +68,13 @@ class FormRadioGroupDemo extends React.Component {
                         onValueChange={this._handleChange2}
                         items={radioItems}
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     selected id = {this.state.selectedId2}
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <label className="detached">Disabled Radio Group</label>
                     <FormRadioGroup
                         groupName="disabled-stacked-group"
@@ -82,9 +83,9 @@ class FormRadioGroupDemo extends React.Component {
                         items={radioItems}
                         disabled={true}
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <label className="detached">Radio Group With Random Hidden</label>
                     <FormRadioGroup
                         groupName="hidden-stacked-group"
@@ -92,7 +93,7 @@ class FormRadioGroupDemo extends React.Component {
                         onValueChange={this._handleChange4}
                         items={radioItemsWithHidden}
                     />
-                </div>
+                </InputRow>
 
             </div>
         );

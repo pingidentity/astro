@@ -6,6 +6,7 @@ import FormTextArea from "../../../components/forms/form-text-area";
 import FileUpload from "../../../components/forms/file-upload";
 import Multivalues from "../../../components/forms/Multivalues";
 import Button from "../../../components/buttons/Button";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 import _ from "underscore";
 
 import DataTableScreen from "./screens/DataTableScreen";
@@ -282,7 +283,7 @@ class WizardDemo extends React.Component {
                         onSave={this.onNext}
                         loading={this.state.loading && "loading step 1"}
                         required>
-                        <div className="input-row">
+                        <InputRow>
                             <FormTextField
                                 width={InputWidths.MD}
                                 labelText="Application Name"
@@ -290,8 +291,8 @@ class WizardDemo extends React.Component {
                                 onValueChange={this._onAppNameChange}
                                 required
                             />
-                        </div>
-                        <div className="input-row">
+                        </InputRow>
+                        <InputRow>
                             <FormTextArea
                                 width={InputWidths.XL}
                                 rows={4}
@@ -300,7 +301,7 @@ class WizardDemo extends React.Component {
                                 value={this.state.currentApp.appDesc}
                                 onValueChange={this._onAppDescChange}
                             />
-                        </div>
+                        </InputRow>
                         <FileUpload
                             accept="image/jpeg, image/jpg, image/png"
                             labelText="Icon"

@@ -8,6 +8,7 @@ import RockerButton from "../components/forms/RockerButton";
 import Section from "../components/general/Section";
 import Toggle from "../components/forms/form-toggle";
 import PageHeader from "../components/general/PageHeader";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 
 /**
  * @class User Edit
@@ -57,7 +58,7 @@ const UserEdit = () => {
                             <Link title="Permissions" url="#"/>
                         </Column>
                         <Column>
-                            <div className="input-row">
+                            <InputRow>
                                 <Icon iconName="earth">
                                     <div className="textblock textblock--primary">
                                         GM Corporate
@@ -66,8 +67,8 @@ const UserEdit = () => {
                                         CA Employees, Contractors, EU Employees, US Employees
                                     </div>
                                 </ Icon>
-                            </div>
-                            <div className="input-row">
+                            </InputRow>
+                            <InputRow>
                                 <Icon iconName="earth">
                                     <div className="textblock textblock--primary">
                                         GM sandbox
@@ -76,7 +77,7 @@ const UserEdit = () => {
                                         CA Employees, Contractors, EU Employees, US Employees, China Region
                                     </div>
                                 </ Icon>
-                            </div>
+                            </InputRow>
                         </Column>
                     </Row>
                 </Section>
@@ -115,7 +116,7 @@ const UserEdit = () => {
                             <Link title="Permissions" url="#"/>
                         </Column>
                         <Column>
-                            <div className="input-row">
+                            <InputRow>
                                 <Icon iconName="earth">
                                     <div className="textblock textblock--primary">
                                         GM Corporate
@@ -124,8 +125,8 @@ const UserEdit = () => {
                                         CA Employees, Contractors, EU Employees, US Employees
                                     </div>
                                 </ Icon>
-                            </div>
-                            <div className="input-row">
+                            </InputRow>
+                            <InputRow>
                                 <Icon iconName="earth">
                                     <div className="textblock textblock--primary">
                                         GM sandbox
@@ -134,7 +135,7 @@ const UserEdit = () => {
                                         CA Employees, Contractors, EU Employees, US Employees, China Region
                                     </div>
                                 </ Icon>
-                            </div>
+                            </InputRow>
                         </Column>
                     </Row>
                 </Section>
@@ -168,13 +169,13 @@ const UserEdit = () => {
                             <Link title="Qualifications" url="#"/>
                         </Column>
                         <Column>
-                            <div className="input-row">
+                            <InputRow>
                                 <Icon iconName="earth">
                                     <div className="textblock textblock--primary">
                                         World-class moves
                                     </div>
                                 </ Icon>
-                            </div>
+                            </InputRow>
                         </Column>
                     </Row>
                 </Section>

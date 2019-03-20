@@ -1,6 +1,7 @@
 import React from "react";
 import TranslationPicker from "../../../components/forms/TranslationPicker";
 import Link from "../../../components/general/Link";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name TranslationPickerDemo
@@ -45,7 +46,7 @@ class TranslationPickerDemo extends React.Component {
 
     render() {
         return (
-            <div className="input-row">
+            <InputRow>
                 <TranslationPicker
                     flags={this.props.flags}
                     options={OPTIONS}
@@ -53,7 +54,7 @@ class TranslationPickerDemo extends React.Component {
                     onClick={this._handleClick}
                     bottomPanel={<Link title="Upload Translation File" />}
                 />
-            </div>
+            </InputRow>
         );
     }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import UnitInput from "./../../../components/general/UnitInput";
 import { InputWidths } from "./../../../components/forms/InputWidths";
+import InputRow from "../../../components/layout/InputRow";
 
 const OPTIONS = [
     { label: "--", value: "" },
@@ -45,7 +46,7 @@ class UnitInputDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <UnitInput
                         labelText="Unit Input Text"
                         textFieldProps={{
@@ -65,7 +66,7 @@ class UnitInputDemo extends React.Component {
                     />
                     <br /><br />
                     Selected Value: <strong>{this.state.a} {this.state.selectedValue.value}</strong>
-                </div>
+                </InputRow>
             </div>
         );
     }

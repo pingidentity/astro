@@ -1,6 +1,7 @@
-var React = require("react"),
-    _ = require("underscore"),
-    FormRadioInput = require("../../../components/forms/FormRadioInput");
+import React from "react";
+import _ from "underscore";
+import FormRadioInput from "../../../components/forms/FormRadioInput";
+import InputRow from "../../../components/layout/InputRow";
 
 var ROWS = { one: "Row 1", two: "Row 2", three: "Row 3" };
 var VALUES = { one: "Choice 1", two: "Choice 2", three: "Choice 3" };
@@ -44,7 +45,7 @@ class FormRadioInputDemo extends React.Component {
                     cannot share the same parent node like in a table cell. <br />
                 <strong>This is for very specific cases and most of
                     the time FormRadioGroup should be used instead.</strong></p>
-                <div className="input-row">
+                <InputRow>
                     <table className="grid">
                         <thead>
                             <tr>
@@ -140,7 +141,7 @@ class FormRadioInputDemo extends React.Component {
                         <p>Row 3 Selection: { this.state[ROWS.three] }</p>
                     </div>
 
-                </div>
+                </InputRow>
             </div>
         );
     }

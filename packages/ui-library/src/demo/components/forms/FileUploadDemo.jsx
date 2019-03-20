@@ -1,7 +1,8 @@
-var React = require("react"),
-    FileUpload = require("../../../components/forms/file-upload").v2,
-    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip"),
-    Button = require("../../../components/buttons/Button");
+import React from "react";
+import { v2 as FileUpload } from "../../../components/forms/file-upload";
+import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
+import Button from "../../../components/buttons/Button";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name FileUploadDemo
@@ -93,7 +94,7 @@ class FileUploadDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FileUpload
                         labelText="Basic File Input"
                         onError={this._onError}
@@ -102,9 +103,9 @@ class FileUploadDemo extends React.Component {
                         labelRemove="Remove"
                         fileName="first-one"
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <FileUpload
                         labelText="Image File Input with a Max Size"
                         data-id="fileUpload"
@@ -121,9 +122,9 @@ class FileUploadDemo extends React.Component {
                     />
                     <br /><br />
                     Selected file = {this.state.file1}
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <FileUpload
                         ref={function (component) {
                             if (component) {
@@ -143,21 +144,20 @@ class FileUploadDemo extends React.Component {
                     />
                     <br /><br />
                     Selected file = {this.state.file2}
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <label className="detached">
                         File Input in a Tooltip
                     </label>
                     <DetailsTooltip
                         positionClassName="top right"
-                        labelClassName="my-css-class"
                         title="File Input in a Details Tooltip"
                         open={this.state.tooltipOpen}
                         onToggle={this._toggleTooltip}
                         label="Toggle Tooltip">
 
-                        <div className="input-row">
+                        <InputRow>
                             <FileUpload
                                 labelText="Select a File"
                                 onError={this._onError}
@@ -168,7 +168,7 @@ class FileUploadDemo extends React.Component {
                                 labelSelect="Choose a File"
                                 labelRemove="Remove"
                             />
-                        </div>
+                        </InputRow>
                         <div className="button-group" data-id="delete-confirmation">
                             <Button
                                 label="Confirm"
@@ -180,9 +180,9 @@ class FileUploadDemo extends React.Component {
                             <a className="cancel" onClick={this._toggleTooltip}>Cancel</a>
                         </div>
                     </DetailsTooltip>
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <label className="detached">
                         Stateless File Input
                     </label>
@@ -229,7 +229,7 @@ class FileUploadDemo extends React.Component {
                             See the source code for the above demo for an example of this being used.
                         </p>
                     </div>
-                </div>
+                </InputRow>
 
             </div>
         );

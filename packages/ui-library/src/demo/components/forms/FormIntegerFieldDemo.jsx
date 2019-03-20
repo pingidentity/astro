@@ -1,6 +1,7 @@
 var React = require("react");
 var FormIntegerField = require("./../../../components/forms/form-integer-field/");
 const InputWidths = require("./../../../components/forms/InputWidths");
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name FormIntegerFieldDemo
@@ -104,7 +105,7 @@ class FormIntegerFieldDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormIntegerField
                         labelText={"Basic - Value : " + this.state.integerField0}
                         onValueChange = {this._handleValueChange0}
@@ -113,8 +114,8 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         name="demo"
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormIntegerField
                         labelText={"Basic stateless with validation helper and with hidden controls - Value : " +
                                 this.state.integerField1}
@@ -124,8 +125,8 @@ class FormIntegerFieldDemo extends React.Component {
                         stateless={true}
                         hideControls={true}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormIntegerField
                         showUndo = {true}
                         labelText={"With default value and undo - Value : " + this.state.integerField2}
@@ -134,8 +135,8 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={false}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormIntegerField
                         onValueChange = {this._handleValueChange3}
                         data-id = "integerField3"
@@ -146,8 +147,8 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={false}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormIntegerField
                         onValueChange = {this._handleValueChange6}
                         data-id = "integerField6"
@@ -162,8 +163,8 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={false}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormIntegerField
                         onValueChange = {this._changeCallback4}
                         data-id = "integerField4"
@@ -183,8 +184,8 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={false}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormIntegerField
                         onValueChange = {this._changeCallback5}
                         onBlur={this._handleBlur5}
@@ -197,9 +198,9 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={false}
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <FormIntegerField
                         readOnly={true}
                         labelText = {"Read Only"}
@@ -210,9 +211,9 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={false}
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <FormIntegerField
                         labelText = {"Disabled with help text"}
                         mode = {this.state.integerField8Mode}
@@ -223,7 +224,7 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={false}
                     />
-                </div>
+                </InputRow>
 
             </div>
         );

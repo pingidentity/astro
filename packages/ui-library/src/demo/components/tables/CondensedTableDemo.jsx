@@ -1,6 +1,7 @@
-var React = require("react"),
-    FormLabel = require("../../../components/forms/FormLabel"),
-    CondensedTable = require("../../../components/tables/CondensedTable");
+import React from "react";
+import FormLabel from "../../../components/forms/FormLabel";
+import CondensedTable from "../../../components/tables/CondensedTable";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name CondensedTable Demo
@@ -53,17 +54,17 @@ class CondensedTableDemo extends React.Component {
         ];
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormLabel className="detached" value="<CondensedTable> with headData and bodyData arrays." />
                     <CondensedTable
                         headData={mockData.head}
                         bodyData={mockData.body} />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormLabel className="detached" value="<CondensedTable> with data array of objects." />
                     <CondensedTable
                         data={dataObjects} />
-                </div>
+                </InputRow>
             </div>
         );
     }

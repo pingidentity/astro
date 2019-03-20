@@ -2,7 +2,7 @@ import React from "react";
 import FormTextField from "../../../components/forms/form-text-field";
 import ValidationMessages from "./../../../components/forms/ValidationMessages";
 import InputWidths from "../../../components/forms/InputWidths";
-
+import InputRow from "../../../components/layout/InputRow";
 
 const _testLength = (value) => {
     return value && value.length > 5 ? ValidationMessages.Status.PASS : ValidationMessages.Status.FAIL;
@@ -47,7 +47,7 @@ class ValidationMessagesDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormTextField
                         width={InputWidths.MD}
                         labelText="Validation always visible"
@@ -60,8 +60,8 @@ class ValidationMessagesDemo extends React.Component {
                         className="show"
                         messages={this.state.messages1}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextField
                         width={InputWidths.MD}
                         labelText="Validation only visibile when required"
@@ -74,7 +74,7 @@ class ValidationMessagesDemo extends React.Component {
                         className={this.state.showValidateMessages}
                         messages={this.state.messages2}
                     />
-                </div>
+                </InputRow>
             </div>
         );
     }

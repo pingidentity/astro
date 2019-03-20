@@ -1,5 +1,6 @@
-var React = require("react");
-var FormCheckbox = require("./../../../components/forms/FormCheckbox");
+import React from "react";
+import FormCheckbox from "./../../../components/forms/FormCheckbox";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name FormCheckboxDemo
@@ -30,15 +31,15 @@ class FormCheckboxDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormCheckbox
                         label = {"Regular Checkbox; checked: " + this.state.checkboxChecked1}
                         value = ""
                         onChange = {this._onChange1}
                         checked = {this.state.checkboxChecked1}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormCheckbox
                         label = {"Default Checked; checked: " + this.state.checkboxChecked2}
                         value = ""
@@ -46,8 +47,8 @@ class FormCheckboxDemo extends React.Component {
                         checked = {this.state.checkboxChecked2}
                         name = "default-checked"
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormCheckbox
                         label = {"Disabled; checked: " + this.state.checkboxChecked3}
                         value = ""
@@ -56,8 +57,8 @@ class FormCheckboxDemo extends React.Component {
                         disabled = {true}
                         labelHelpText = "Disabled with help"
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormCheckbox
                         label = {"With added Help Text; checked: " + this.state.checkboxChecked4}
                         value = ""
@@ -65,8 +66,8 @@ class FormCheckboxDemo extends React.Component {
                         checked = {this.state.checkboxChecked4}
                         labelHelpText = "Check this box!"
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <label className="detached">
                         Example of Stacked Options
                     </label>
@@ -88,8 +89,8 @@ class FormCheckboxDemo extends React.Component {
                         checked={this.state.checkboxChecked7}
                         stacked
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <label className="detached">
                         Example of Inline Options together and alone
                     </label>
@@ -111,16 +112,16 @@ class FormCheckboxDemo extends React.Component {
                         checked={this.state.checkboxChecked10}
                         inline
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormCheckbox
                         label="Single Inline Checkbox"
                         onChange={this._onChange11}
                         checked={this.state.checkboxChecked11}
                         inline
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormCheckbox
                         label={"With Error Message; checked: " + this.state.checkboxChecked12}
                         value=""
@@ -128,7 +129,7 @@ class FormCheckboxDemo extends React.Component {
                         checked={this.state.checkboxChecked12}
                         errorMessage="An error has occurred"
                     />
-                </div>
+                </InputRow>
             </div>
         );
     }

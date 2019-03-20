@@ -1,7 +1,7 @@
-var React = require("react");
-var TimePicker = require("./../../../components/general/TimePicker");
-
-var Calendar = require("./../../../components/calendars/Calendar");
+import React from "react";
+import TimePicker from "./../../../components/general/TimePicker";
+import Calendar from "./../../../components/calendars/Calendar";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name TimePickerDemo
@@ -44,7 +44,7 @@ class TimePickerDemo extends React.Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <TimePicker
                         onValueChange={this._handleValueChangeA}
                         increments={30}
@@ -55,8 +55,8 @@ class TimePickerDemo extends React.Component {
                     />
                     <br /><br />
                     12hr (w/30m): <strong>{this.state.a}</strong>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <TimePicker
                         onValueChange={this._handleValueChangeB}
                         increments={60}
@@ -67,7 +67,7 @@ class TimePickerDemo extends React.Component {
                     />
                     <br /><br />
                     24hr: <strong>{this.state.b}</strong>
-                </div>
+                </InputRow>
 
                 <label className="stand-alone">
                     Date/Time Picker Combo

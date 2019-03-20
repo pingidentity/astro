@@ -1,5 +1,6 @@
-var React = require("react"),
-    ColorPicker = require("../../../components/general/ColorPicker");
+import React from "react";
+import ColorPicker from "../../../components/general/ColorPicker";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name ColorPickerDemo
@@ -40,7 +41,7 @@ class ColorPickerDemo extends React.Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <ColorPicker
                         data-id="color-picker1"
                         color={this.state.picker1color}
@@ -50,8 +51,8 @@ class ColorPickerDemo extends React.Component {
                         hintText="Pick a color or type in the hex code"
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ColorPicker
                         data-id="color-picker2"
                         color={this.state.picker2color}
@@ -65,7 +66,7 @@ class ColorPickerDemo extends React.Component {
                         stateless={true}
                         flags={flags}
                     />
-                </div>
+                </InputRow>
             </div>);
     }
 }

@@ -1,6 +1,7 @@
-var PropTypes = require("prop-types");
-var React = require("react");
-var ContextCloseButton = require("./../../../components/general/context-close-button");
+import PropTypes from "prop-types";
+import React from "react";
+import ContextCloseButton from "./../../../components/general/context-close-button";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name ContextCloseButtonDemo
@@ -59,27 +60,27 @@ class ContextCloseButtonDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <ContextCloseButton
                         onClick={this._handleClick}
                         value="ContextCloseButton with no context" />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ContextComponent
                         closeCallback={this._handleContextClose}
                         value="ContextCloseButton with context only" />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ContextComponent
                         clickCallback={this._handleClick}
                         closeCallback={this._handleContextClose}
                         value="ContextCloseButton with callback and context" />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ContextCloseButton
                         disabled={true}
                         value="Disabled ContextCloseButton" />
-                </div>
+                </InputRow>
                 {this.state.clickCallbackCalled
                     ? <div id="clickCallback">
                         <span>onClick callback called</span>

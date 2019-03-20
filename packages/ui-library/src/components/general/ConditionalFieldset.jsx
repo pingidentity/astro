@@ -217,7 +217,7 @@ class ConditionalFieldsetStateful extends React.Component {
  *     and select for 3 or more.
  *
  * @example
- *     <div className="input-row">
+ *     <InputRow>
  *         <label className="detached">ConditionalFieldset with empty support, set through props</label>
  *         <ConditionalFieldset
  *             data-id="fieldset-1"
@@ -230,10 +230,10 @@ class ConditionalFieldsetStateful extends React.Component {
  *             <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
  *             <div title="Option 2">Option 2</div>
  *         </ConditionalFieldset>
- *     </div>
+ *     </InputRow>
  *
  * @example
- *     <div className="input-row">
+ *     <InputRow>
  *         <label className="detached">ConditionalFieldset with empty support, set through dom, stateful</label>
  *         <ConditionalFieldset
  *             data-id="fieldset-4"
@@ -242,7 +242,7 @@ class ConditionalFieldsetStateful extends React.Component {
  *             <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
  *             <div title="Option 2">Option 2</div>
  *         </ConditionalFieldset>
- *     </div>
+ *     </InputRow>
  *
  */
 class ConditionalFieldset extends React.Component {

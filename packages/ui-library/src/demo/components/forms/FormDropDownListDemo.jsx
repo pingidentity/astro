@@ -1,6 +1,7 @@
 import React from "react";
 import FormDropDownList from "../../../components/forms/FormDropDownList";
 import InputWidths from "../../../components/forms/InputWidths";
+import InputRow from "../../../components/layout/InputRow";
 
 
 const NUM_DEMOS = 12,
@@ -98,7 +99,7 @@ class FormDropDownListDemo extends React.Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={[
@@ -111,11 +112,11 @@ class FormDropDownListDemo extends React.Component {
                         selectedOption={this.state.selectedValue1}
                         onValueChange={this._handleValueChange1}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue1.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={[
@@ -128,11 +129,11 @@ class FormDropDownListDemo extends React.Component {
                         selectedOption={this.state.selectedValue11}
                         onValueChange={this._handleValueChange11}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue11.value}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={OPTIONS}
@@ -144,11 +145,11 @@ class FormDropDownListDemo extends React.Component {
                         width={InputWidths.MD}
                         name="custom-content-type"
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue2.value}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={OPTIONS}
@@ -158,11 +159,11 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this._handleValueChange3}
                         width={InputWidths.SM}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue3.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={OPTIONS}
@@ -172,11 +173,11 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this._handleValueChange4}
                         width={InputWidths.SM}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue4.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={OPTIONS}
@@ -186,11 +187,11 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this._handleValueChange5}
                         width={InputWidths.SM}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue5.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={OPTIONS}
@@ -200,11 +201,11 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this._handleValueChange6}
                         width={InputWidths.SM}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue6.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={this.state.addOptions7}
@@ -218,11 +219,11 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this._handleValueChange7}
                         width={InputWidths.SM}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue7.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={OPTIONS}
@@ -233,13 +234,13 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this._handleValueChange8}
                         width={InputWidths.SM}
                     />
-                </div>
+                </InputRow>
                 {/* It's possible for this selected option value to be null, so we need to handle
                 that case. */}
                 <div>Selected value: {this.state.selectedValue8 && this.state.selectedValue8.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         groups={GROUPS}
@@ -253,11 +254,11 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this._handleValueChange9}
                         width={InputWidths.MD}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state.selectedValue9.label}</div>
                 <br/>
 
-                <div className="input-row">
+                <InputRow>
                     <FormDropDownList
                         flags={flags}
                         options={OPTIONS}
@@ -268,7 +269,7 @@ class FormDropDownListDemo extends React.Component {
                         onValueChange={this["_handleValueChange" + NUM_DEMOS]}
                         width={InputWidths.SM}
                     />
-                </div>
+                </InputRow>
                 <div>Selected value: {this.state["selectedValue" + NUM_DEMOS] &&
                     this.state["selectedValue" + NUM_DEMOS].label}
                 </div>

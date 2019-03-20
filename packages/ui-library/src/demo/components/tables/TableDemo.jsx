@@ -1,6 +1,7 @@
-var React = require("react"),
-    FormLabel = require("../../../components/forms/FormLabel"),
-    Table = require("../../../components/tables/Table");
+import React from "react";
+import FormLabel from "../../../components/forms/FormLabel";
+import Table from "../../../components/tables/Table";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name TableDemo
@@ -52,32 +53,32 @@ const TableDemo = () => {
     ];
     return (
         <div>
-            <div className="input-row">
+            <InputRow>
                 <FormLabel className="detached" value="<Table> with headData and bodyData arrays." />
                 <Table
                     headData={mockData.head}
                     bodyData={mockData.body} />
-            </div>
-            <div className="input-row">
+            </InputRow>
+            <InputRow>
                 <FormLabel className="detached" value="<Table> with data array of objects and vertical align middle." />
                 <Table
                     data={dataObjects}
                     verticalAlignment="MIDDLE"
                 />
-            </div>
+            </InputRow>
             <hr className="hr"/>
-            <div className="input-row">
+            <InputRow>
                 <FormLabel className="detached" value="<Table> with row labels." />
                 <Table
                     headData={mockData.head}
                     bodyData={mockData.body}
                     rowLabels={true} />
-            </div>
-            <div className="input-row">
+            </InputRow>
+            <InputRow>
                 <FormLabel className="detached" value="<Table> row labels." />
                 <Table
                     data={dataObjects} rowLabels={true} className="grid--no-lines"/>
-            </div>
+            </InputRow>
         </div>
     );
 };

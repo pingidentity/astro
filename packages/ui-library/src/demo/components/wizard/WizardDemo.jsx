@@ -5,6 +5,8 @@ var React = require("react"),
     Step = Wizard.Step,
     Choose = Wizard.Choose;
 
+import InputRow from "../../../components/layout/InputRow";
+
 var BUTTON_LABELS = {
     labelNext: "Next",
     labelCancel: "Cancel",
@@ -111,14 +113,14 @@ class WizardDemo extends React.Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormCheckbox
                         label="Demonstrate saving animation"
                         onChange={this.toggleUsePulsing}
                         checked={this.state.usePulsing}
                         className="stacked"
                     />
-                </div>
+                </InputRow>
 
                 <Choose
                     title="Choose a wizard"

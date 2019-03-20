@@ -1,6 +1,7 @@
 
-var React = require("react"),
-    LinkDropDownList = require("../../../components/forms/LinkDropDownList");
+import React from "react";
+import LinkDropDownList from "../../../components/forms/LinkDropDownList";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name LinkDropDownListDemo
@@ -45,7 +46,7 @@ class LinkDropDownListDemo extends React.Component {
         const { flags } = this.props;
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <LinkDropDownList
                         flags={flags}
                         closeOnClick={true}
@@ -57,7 +58,7 @@ class LinkDropDownListDemo extends React.Component {
                         selectedOption={this.state.selectedOption}
                         bottomPanel={<a href="#">Link</a>}
                     />
-                </div>
+                </InputRow>
                 <LinkDropDownList
                     flags={flags}
                     stateless={false}

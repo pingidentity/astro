@@ -1,6 +1,7 @@
 import React from "react";
 import FormTextArea from "./../../../components/forms/form-text-area";
 import InputWidths from "./../../../components/forms/InputWidths";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name FormTextAreaDemo
@@ -41,15 +42,15 @@ class FormTextAreaDemo extends React.Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText="Basic"
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText="Required with placeholder and change callback"
@@ -62,8 +63,8 @@ class FormTextAreaDemo extends React.Component {
                     >
                         {this.state.onValueChangeFieldValue}
                     </FormTextArea>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText="With maxLength and defined size"
@@ -74,8 +75,8 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText="With defaultValue and undo (stateful)"
@@ -88,8 +89,8 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={true}
                         labelText="With defaultValue and undo (stateless)"
@@ -101,8 +102,8 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         mode="read_only"
                         labelText="Read-only"
@@ -110,8 +111,8 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText="With error message"
@@ -121,8 +122,8 @@ class FormTextAreaDemo extends React.Component {
                         required={true}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText="With help tooltip"
@@ -130,8 +131,8 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText="Disabled With help tooltip"
@@ -140,8 +141,8 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTextArea
                         stateless={false}
                         labelText={heightOptions}
@@ -150,7 +151,7 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                         flags={flags}
                     />
-                </div>
+                </InputRow>
             </div>
         );
     }

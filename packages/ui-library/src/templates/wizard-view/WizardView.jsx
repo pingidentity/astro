@@ -13,6 +13,7 @@ import Button from "../../components/buttons/Button";
 import Modal from "../../components/general/Modal";
 import InputWidths from "../../components/forms/InputWidths";
 import PageHeader from "../../components/general/PageHeader";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 
 
 /**
@@ -255,28 +256,28 @@ class TwoColumnStep extends React.Component {
             <Wizard.Step {...this.props} title="Two Column Step">
                 <Layout.Row>
                     <Layout.Column>
-                        <div className="input-row">
+                        <InputRow>
                             <FormCheckbox label="Checkbox without a value"
                                 checked={this.props.fields.checkbox1}
                                 onValueChange={this._handleCheckboxChange1} />
-                        </div>
-                        <div className="input-row">
+                        </InputRow>
+                        <InputRow>
                             <FormLabel value="Stacked radio button group" />
                             <FormRadioGroup groupName="stackedRadioGroup"
                                 selected={this.props.fields.radio}
                                 onValueChange={this._handleRadioChange}
                                 items={RADIO_OPTS} />
-                        </div>
+                        </InputRow>
                     </Layout.Column>
                     <Layout.Column>
-                        <div className="input-row">
+                        <InputRow>
                             <FormCheckbox label="Checkbox without a value"
                                 checked={this.props.fields.checkbox2}
                                 onValueChange={this._handleCheckboxChange2} />
-                        </div>
-                        <div className="input-row">
+                        </InputRow>
+                        <InputRow>
                             <FileUpload buttonText="Image upload" labelRemove="Remove" labelSelect="Image upload" />
-                        </div>
+                        </InputRow>
                     </Layout.Column>
                 </Layout.Row>
             </Wizard.Step>);
@@ -294,17 +295,17 @@ class FormStep extends React.Component {
     render() {
         return (
             <Wizard.Step {...this.props} title="Wizard Form">
-                <div className="input-row">
+                <InputRow>
                     <FormTextField labelText="Text field"
                         data-id="field1"
                         value={this.props.fields.field1}
                         onValueChange={this._handleField1Change} />
-                </div>
+                </InputRow>
 
                 <label className="input-group">
                     Complex Fields
                 </label>
-                <div className="input-row">
+                <InputRow>
                     {
                         this.props.fields.complex.map(function (row, index) {
                             return (
@@ -316,12 +317,12 @@ class FormStep extends React.Component {
                         }.bind(this))
                     }
                     <a onClick={this.props.onAddComplexFieldsRow}>Add Line +</a>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormCheckbox label="Checkbox without a value"
                         checked={this.props.fields.checkbox}
                         onValueChange={this._handleCheckboxChange} />
-                </div>
+                </InputRow>
             </Wizard.Step>);
     }
 }
@@ -347,7 +348,7 @@ class ComplexField extends React.Component {
 
     render() {
         return (
-            <div className="input-row">
+            <InputRow>
                 <FormTextField labelText="First part"
                     data-id="field1"
                     value={this.props.field1}
@@ -366,7 +367,7 @@ class ComplexField extends React.Component {
                     width={InputWidths.XS}
                     onValueChange={this._handleField3Change}
                 />
-            </div>
+            </InputRow>
         );
     }
 }

@@ -1,6 +1,7 @@
-var React = require("react");
-var ModalButton = require("./../../../components/general/ModalButton");
-var Button = require("../../../components/buttons/Button");
+import React from "react";
+import ModalButton from "./../../../components/general/ModalButton";
+import Button from "../../../components/buttons/Button";
+import InputRow from "../../../components/layout/InputRow";
 
 const NUM_STATELESS_DEMOS = 3;
 
@@ -45,7 +46,7 @@ class ModalButtonDemo extends React.Component {
         const { flags } = this.props;
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <ModalButton data-id="default-example"
                         activatorButtonLabel="Open Default Modal"
                         modalTitle="Default Modal"
@@ -64,8 +65,8 @@ class ModalButtonDemo extends React.Component {
                             </p>
                         </div>
                     </ModalButton>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ModalButton data-id="stateless-example"
                         activatorButtonLabel="Open Stateless Modal"
                         modalTitle="Stateless Modal"
@@ -81,8 +82,8 @@ class ModalButtonDemo extends React.Component {
                             the modal will display.
                         </div>
                     </ModalButton>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ModalButton activatorButtonLabel="Open Maximized Modal"
                         data-id="maximized-modal"
                         modalTitle="Maximized Modal"
@@ -94,8 +95,8 @@ class ModalButtonDemo extends React.Component {
                             regardless of content.
                         </div>
                     </ModalButton>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ModalButton activatorButtonLabel="Open BG Click Enabled Modal"
                         data-id="bgclick-modal"
                         modalTitle="Closing a Modal with a Background Click"
@@ -109,8 +110,8 @@ class ModalButtonDemo extends React.Component {
                             is not required.
                         </div>
                     </ModalButton>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ModalButton activatorButtonLabel="Open Dialog Modal"
                         data-id="dialog-modal"
                         modalTitle="Dialog Modal"
@@ -139,8 +140,8 @@ class ModalButtonDemo extends React.Component {
                             </div>
                         </div>
                     </ModalButton>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <ModalButton activatorButtonLabel="Open Alert Modal"
                         data-id="alert-modal"
                         modalTitle=""
@@ -171,7 +172,7 @@ class ModalButtonDemo extends React.Component {
                             <a className="cancel" data-id="cancelLink" onClick={this._handleClose3}>Cancel</a>
                         </div>
                     </ModalButton>
-                </div>
+                </InputRow>
             </div>
         );
     }

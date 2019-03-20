@@ -4,6 +4,7 @@ import FormDropDownList from "../../../components/forms/FormDropDownList";
 import FormTextField from "../../../components/forms/form-text-field";
 import RowBuilder from "../../../components/rows/RowBuilder";
 import { omit } from "underscore";
+import InputRow from "../../../components/layout/InputRow";
 
 export default class RowBuilderDemo extends Component {
     state = {
@@ -50,7 +51,7 @@ export default class RowBuilderDemo extends Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <RowBuilder
                         onAdd={this.addFirst}
                         onRemove={this.removeRow(true)}
@@ -75,8 +76,8 @@ export default class RowBuilderDemo extends Component {
                         )}
                         showRemoveLabel={true}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <RowBuilder
                         onAdd={this.addSecond}
                         onRemove={this.removeRow(false)}
@@ -88,7 +89,7 @@ export default class RowBuilderDemo extends Component {
                             nonRemovable
                         ]}
                     />
-                </div>
+                </InputRow>
             </div>
         );
     }

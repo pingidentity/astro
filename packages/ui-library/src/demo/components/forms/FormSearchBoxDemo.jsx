@@ -1,7 +1,8 @@
-const React = require("react"),
-    FilterUtils = require("../../../util/FilterUtils.js"),
-    FormSearchBox = require("../../../components/forms/FormSearchBox"),
-    InputWidths = require("../../../components/forms/InputWidths");
+import React from "react";
+import FilterUtils from "../../../util/FilterUtils.js";
+import FormSearchBox from "../../../components/forms/FormSearchBox";
+import InputWidths from "../../../components/forms/InputWidths";
+import InputRow from "../../../components/layout/InputRow";
 
 const ITEMS = [
     { id: 1, name: "apples" },
@@ -81,7 +82,7 @@ class FormSearchBoxDemo extends React.Component {
             <div>
                 <div>Items: {this._renderItems()}</div>
                 <br />
-                <div className="input-row">
+                <InputRow>
                     <FormSearchBox
                         queryString={this.state.queryString}
                         onValueChange={this._handleValueChange}
@@ -93,7 +94,7 @@ class FormSearchBoxDemo extends React.Component {
                         width={InputWidths.MD}
                         name="search-box"
                     />
-                </div>
+                </InputRow>
                 {this._renderMessages()}
             </div>
         );

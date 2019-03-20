@@ -1,5 +1,6 @@
-var React = require("react");
-var Toggle = require("../../../components/forms/form-toggle");
+import React from "react";
+import Toggle from "../../../components/forms/form-toggle";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name ToggleDemo
@@ -49,7 +50,7 @@ class ToggleDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <Toggle
                         data-id="user-toggle"
                         className="row-status-toggle"
@@ -60,8 +61,8 @@ class ToggleDemo extends React.Component {
                     />
                     <br/><br/>
                     Value = {this.state.userStatus1}
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <p>Optional locked styling:</p>
                     <Toggle
                         data-id="user-toggle"
@@ -73,7 +74,7 @@ class ToggleDemo extends React.Component {
                     />
                     <br/><br/>
                     State = {this.state.userStatus2}
-                </div>
+                </InputRow>
                 <p>Stateful toggle with onToggle callback:</p>
                 <Toggle
                     data-id="user-toggle"

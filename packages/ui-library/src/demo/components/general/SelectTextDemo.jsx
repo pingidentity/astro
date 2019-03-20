@@ -1,7 +1,8 @@
-var React = require("react");
-var SelectText = require("./../../../components/general/SelectText");
-var FormTextField = require("./../../../components/forms/form-text-field");
-var FormFieldConstants = require("./../../../constants/FormFieldConstants");
+import React from "react";
+import SelectText from "./../../../components/general/SelectText";
+import FormTextField from "./../../../components/forms/form-text-field";
+import FormFieldConstants from "./../../../constants/FormFieldConstants";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name SelectTextDemo
@@ -12,19 +13,19 @@ class SelectTextDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <SelectText>
                         This text will be selected when clicked
                     </SelectText>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <SelectText>
                         <FormTextField
                             mode={FormFieldConstants.FormFieldMode.READ_ONLY}
                             value="The text in this input will be selected when clicked"
                         />
                     </SelectText>
-                </div>
+                </InputRow>
             </div>
         );
     }

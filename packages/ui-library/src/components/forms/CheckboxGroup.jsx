@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
-import classnames from "classnames";
 import FormCheckbox from "./FormCheckbox";
+import InputRow from "../layout/InputRow";
 
 /**
  * @class CheckboxGroup
@@ -88,7 +88,7 @@ const CheckboxGroup = ({
                 const checked = isChecked(option, values);
 
                 return (
-                    <div className={classnames("input-row", className)} key={option.value}>
+                    <InputRow className={className} key={option.value}>
                         <FormCheckbox
                             stacked
                             data-id={dataId + "-" + index}
@@ -101,7 +101,7 @@ const CheckboxGroup = ({
                         {checked && option.conditionalContent &&
                             <div className="checkbox-description">{option.conditionalContent}</div>
                         }
-                    </div>
+                    </InputRow>
                 );
             })}
         </div>

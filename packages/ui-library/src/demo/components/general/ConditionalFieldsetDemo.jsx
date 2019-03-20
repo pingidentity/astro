@@ -3,6 +3,7 @@ import ConditionalFieldset from "./../../../components/general/ConditionalFields
 import FormRadioGroup from "./../../../components/forms/FormRadioGroup";
 import _ from "underscore";
 import InputWidths from "../../../components/forms/InputWidths";
+import InputRow from "../../../components/layout/InputRow";
 
 const typeOptions = [
     { id: 0, name: ConditionalFieldset.Types.SELECT },
@@ -52,7 +53,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <hr className="hr"/>
 
-                <div className="input-row">
+                <InputRow>
                     <ConditionalFieldset
                         flags={flags}
                         data-id="demo-1"
@@ -65,9 +66,9 @@ class ConditionalFieldsetDemo extends React.Component {
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <ConditionalFieldset
                         flags={flags}
                         data-id="demo-2"
@@ -76,9 +77,9 @@ class ConditionalFieldsetDemo extends React.Component {
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <ConditionalFieldset
                         flags={flags}
                         data-id="demo-4"
@@ -89,9 +90,9 @@ class ConditionalFieldsetDemo extends React.Component {
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <ConditionalFieldset
                         flags={flags}
                         data-id="demo-3"
@@ -101,9 +102,9 @@ class ConditionalFieldsetDemo extends React.Component {
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <ConditionalFieldset
                         flags={flags}
                         data-id="demo-5"
@@ -113,9 +114,9 @@ class ConditionalFieldsetDemo extends React.Component {
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <ConditionalFieldset
                         flags={flags}
                         data-id="demo-6"
@@ -125,9 +126,9 @@ class ConditionalFieldsetDemo extends React.Component {
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <ConditionalFieldset
                         flags={flags}
                         data-id="demo-7"
@@ -139,7 +140,7 @@ class ConditionalFieldsetDemo extends React.Component {
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>
-                </div>
+                </InputRow>
             </div>
         );
     }

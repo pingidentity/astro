@@ -1,6 +1,7 @@
-var React = require("react"),
-    ExpandableRow = require("../../../components/rows/ExpandableRow"),
-    RowIndexNav = require("../../../components/general/RowIndexNav");
+import React from "react";
+import ExpandableRow from "../../../components/rows/ExpandableRow";
+import RowIndexNav from "../../../components/general/RowIndexNav";
+import InputRow from "../../../components/layout/InputRow";
 
 var createReactClass = require("create-react-class");
 
@@ -36,13 +37,13 @@ var RowIndexNavDemo = createReactClass({
     render: function () {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <button
                         onClick={this._selectNewIndex}
                         className="inline">
                         Randomly Select New Index
                     </button> - illustrates autoscroll when selection is out of view.
-                </div>
+                </InputRow>
                 <div className="instructions">
                     Note that the rows below are not tied in anyway to the Index Nav on the right. The are present
                     only to show how the layout of the nav is acheived.

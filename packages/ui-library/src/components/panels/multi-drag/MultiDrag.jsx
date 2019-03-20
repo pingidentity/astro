@@ -7,6 +7,7 @@ import { move, reapplyFilters, search } from "./MultiDragReducer.js";
 import update from "re-mutable";
 import Utils from "../../../util/Utils.js";
 import FormSearchBox from "../../forms/FormSearchBox";
+import InputRow from "../../layout/InputRow";
 import _ from "underscore";
 
 /**
@@ -423,7 +424,7 @@ class MultiDragStateless extends React.Component {
 
     render() {
         const className = classnames(
-            "input-row row-selector",
+            "row-selector",
             this.props.className, {
                 "row-selector--disabled": this.props.disabled
             }
@@ -437,7 +438,7 @@ class MultiDragStateless extends React.Component {
         } = this.props;
 
         return (
-            <div data-id={dataId} className={className}>
+            <InputRow data-id={dataId} className={className}>
                 <div key="search-row" className="row-selector__search-row">
                     {columns.map((column, index) => (
                         (showSearch && index === 0) || showSearchOnAllColumns
@@ -450,7 +451,7 @@ class MultiDragStateless extends React.Component {
                         columns.map(this._renderColumn)
                     }
                 </div>
-            </div>
+            </InputRow>
         );
     }
 }

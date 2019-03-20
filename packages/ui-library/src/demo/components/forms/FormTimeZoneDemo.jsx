@@ -1,6 +1,7 @@
 
-var React = require("react"),
-    FormTimeZone = require("../../../components/forms/FormTimeZone");
+import React from "react";
+import FormTimeZone from "../../../components/forms/FormTimeZone";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name FormTimeZoneDemo
@@ -86,7 +87,7 @@ class FormTimeZoneDemo extends React.Component {
 
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <FormTimeZone
                         data-id="timezone-stateless"
                         stateless={true}
@@ -104,8 +105,8 @@ class FormTimeZoneDemo extends React.Component {
                         ref="tzStateless"
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTimeZone
                         data-id="timezone-stateless"
                         stateless={true}
@@ -122,8 +123,8 @@ class FormTimeZoneDemo extends React.Component {
                         ref="tzStateless"
                         flags={flags}
                     />
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <FormTimeZone
                         data-id="timezone-stateful"
                         stateless={false}
@@ -132,7 +133,7 @@ class FormTimeZoneDemo extends React.Component {
                         helpClassName="bottom right"
                         flags={flags}
                     />
-                </div>
+                </InputRow>
                 <p>
                     * Note that the browser's timezone is guessed if the passed value is undefined.
                 </p>

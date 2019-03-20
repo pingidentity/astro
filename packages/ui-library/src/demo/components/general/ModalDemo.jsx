@@ -1,7 +1,8 @@
-var React = require("react");
-var Modal = require("./../../../components/general/Modal");
+import React from "react";
+import Modal from "./../../../components/general/Modal";
 
 import Button from "../../../components/buttons/Button";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name ModalDemo
@@ -57,7 +58,7 @@ class ModalDemo extends React.Component {
     render() {
         return (
             <div>
-                <div className="input-row">
+                <InputRow>
                     <a onClick={this._toggle1}>Open Default Modal</a>
 
                     <Modal
@@ -79,8 +80,8 @@ class ModalDemo extends React.Component {
                             </p>
                         </div>
                     </Modal>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <a onClick={this._toggle2}>Open Maximized Modal</a>
 
                     <Modal
@@ -96,8 +97,8 @@ class ModalDemo extends React.Component {
                             content until it reaches a specified distance from the bottom of the browser window.
                         </div>
                     </Modal>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <a onClick={this._toggle3}>Open BG Click Enabled Modal</a>
 
                     <Modal
@@ -114,8 +115,8 @@ class ModalDemo extends React.Component {
                             is not required.
                         </div>
                     </Modal>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <a onClick={this._toggle7}>Open Modal with Developer Controlled Close</a>
 
                     <Modal
@@ -123,18 +124,18 @@ class ModalDemo extends React.Component {
                         maximize={false}
                         expanded={this.state.expanded7}
                         onOpen={this._toggle7}>
-                        <div className="input-row">
+                        <InputRow>
                             This modal has no onClose prop, so it is up to the developer to
                              provide the closing behavior as with the buttons below. <br/>
                              This also removes the close button at the top of the modal, and centers the header.
-                        </div>
+                        </InputRow>
                         <div className="button-group">
                             <Button type="primary" onClick={this._toggle7}>Save</Button><br/>
                             <a className="cancel" onClick={this._toggle7}>Cancel</a>
                         </div>
                     </Modal>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <a onClick={this._toggle4}>Open Dialog Modal</a>
 
                     <Modal
@@ -158,8 +159,8 @@ class ModalDemo extends React.Component {
                             </div>
                         </div>
                     </Modal>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <a onClick={this._toggle5}>Open Alert Modal</a>
 
                     <Modal
@@ -181,8 +182,8 @@ class ModalDemo extends React.Component {
                             <a className="cancel" onClick={this._toggle5}>Cancel</a>
                         </div>
                     </Modal>
-                </div>
-                <div className="input-row">
+                </InputRow>
+                <InputRow>
                     <a onClick={this._toggle6}>Open Modal with Close Confirmation</a>
 
                     <Modal
@@ -207,7 +208,7 @@ class ModalDemo extends React.Component {
                             content until it reaches a specified distance from the bottom of the browser window.
                         </div>
                     </Modal>
-                </div>
+                </InputRow>
             </div>
         );
     }
