@@ -47,6 +47,7 @@ InputRow.propTypes = {
     "data-id": PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
+    strict: PropTypes.bool
 };
 
 InputRow.defaultProps = {

@@ -36,5 +36,11 @@
 
             text-align: right;
         }
+
+        &--right {
+            @include flexbox-grow(0);
+
+            margin-left: auto;
+        }
     }
 }

@@ -51,7 +51,7 @@ Aside.propTypes = {
     "data-id": PropTypes.string,
     aside: PropTypes.element,
     fullHeight: PropTypes.bool,
-    position: PropTypes.oneOf(["right-top"]),
+    position: PropTypes.oneOf(["right", "top-right"]),
     width: PropTypes.oneOf([ "AUTO", "SM", "MD", "LG" ]),
 };
 

@@ -9,5 +9,6 @@ exports.ListType = {
     ADD: "add",
     SINGLE: "single",
     MULTI: "multi",
+    MULTIADD: "multiadd",
     VIEWONLY: "viewonly"
 };

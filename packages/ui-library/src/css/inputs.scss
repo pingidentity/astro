@@ -1696,6 +1696,10 @@ input[type=file] {
         border: none;
     }
 
+    &__multi-add-panel {
+        margin-top: $spacing-xs;
+    }
+
     &__note {
         color: $color-strong-neutral-50;
         font-size: $font-size-reduced;

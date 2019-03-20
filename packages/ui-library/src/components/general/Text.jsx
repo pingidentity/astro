@@ -2,6 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
+const textTypes = {
+    BODY: "body",
+    ERROR: "error",
+    LABEL: "label",
+    NOTE: "note",
+    NOVALUE: "no-value",
+    PAGESUBTITLE: "page-subtitle",
+    PAGETITLE: "page-title",
+    PLACEHOLDER: "placeholder",
+    PRIMARY: "primary",
+    SECTIONTITLE: "section-title",
+    SUCCESS: "success",
+    VALUE: "value",
+    WARNING: "warning",
+};
+
 /**
 * @class Text
 * @desc A block of text
@@ -31,12 +47,28 @@ const Text = ({
 Text.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.oneOf([
+        textTypes.BODY,
+        textTypes.ERROR,
+        textTypes.LABEL,
+        textTypes.NOTE,
+        textTypes.NOVALUE,
+        textTypes.PAGESUBTITLE,
+        textTypes.PAGETITLE,
+        textTypes.PLACEHOLDER,
+        textTypes.PRIMARY,
+        textTypes.SECTIONTITLE,
+        textTypes.SUCCESS,
+        textTypes.VALUE,
+        textTypes.WARNING
+    ]),
 };
 
 Text.defaultProps = {
     "data-id": "styled-text",
-    type: "body",
+    type: textTypes.BODY,
 };
+
+Text.textTypes = textTypes;
 
 export default Text;

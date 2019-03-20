@@ -20,6 +20,8 @@ import classnames from "classnames";
  *          Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM
  * @param {string} [className]
  *          CSS class name for Table
+ * @param {bool} [fullWidth]
+ *          Whether or not the table is full-width.
  */
 
 
@@ -38,6 +40,7 @@ const Table = ({
     className,
     data = [],
     "data-id": dataId,
+    fullWidth,
     lines,
     rowLabels,
     headData = getHeadData(data),
@@ -45,7 +48,8 @@ const Table = ({
     verticalAlignment,
 }) => {
     const classes = classnames("grid", className, {
-        "grid--no-lines": !lines
+        "grid--no-lines": !lines,
+        "width-full": fullWidth
     });
 
     // if we're showing labels along the left side of the table, make sure the first column heading is empty
@@ -88,7 +92,9 @@ const Table = ({
 };
 
 Table.propTypes = {
-    bodyData: PropTypes.array,
+    bodyData: PropTypes.arrayOf(
+        PropTypes.array,
+    ),
     cellRenderers: PropTypes.arrayOf(PropTypes.func),
     className: PropTypes.string,
     data: PropTypes.array,
@@ -102,6 +108,7 @@ Table.propTypes = {
 Table.defaultProps = {
     cellRenderers: [],
     "data-id": "table",
+    fullWidth: false,
     lines: true,
     rowLabels: false,
     verticalAlignment: "AUTO",

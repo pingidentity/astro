@@ -72,6 +72,7 @@ class SelectionList extends React.Component {
     };
 
     static defaultProps = {
+        onValueChange: _.noop,
         stateless: false
     };
 

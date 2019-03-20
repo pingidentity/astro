@@ -1,33 +1,33 @@
-import { v4 as uuidV4 } from "uuid";
 import Button from "../../buttons/Button";
-
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    _ = require("underscore"),
-    If = require("../../general/If"),
-    FormRadioGroup = require("../FormRadioGroup"),
-    FormCheckbox = require("../FormCheckbox"),
-    FormSearchBox = require("../FormSearchBox"),
-    HelpHint = require("../../tooltips/HelpHint"),
-    Constants = require("./v2-constants");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import _ from "underscore";
+import If from "../../general/If";
+import FlexRow, { justifyOptions } from "../../layout/FlexRow";
+import FormRadioGroup from "../FormRadioGroup";
+import FormCheckbox from "../FormCheckbox";
+import FormSearchBox from "../FormSearchBox";
+import HelpHint from "../../tooltips/HelpHint";
+import { ListType } from "./v2-constants";
 
 /**
  * @name SelectionListStateless
  * @memberof SelectionList
  * @desc This is a wrapper around the stateful (stateless=true) SelectionList.
  */
-module.exports = class extends React.Component {
+export default class SelectionListStateless extends React.Component {
     static displayName = "SelectionListStateless";
 
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         type: PropTypes.oneOf([
-            Constants.ListType.ADD,
-            Constants.ListType.SINGLE,
-            Constants.ListType.MULTI,
-            Constants.ListType.VIEWONLY
+            ListType.ADD,
+            ListType.SINGLE,
+            ListType.MULTI,
+            ListType.MULTIADD,
+            ListType.VIEWONLY
         ]),
         items: PropTypes.arrayOf(
             PropTypes.shape({
@@ -60,17 +60,21 @@ module.exports = class extends React.Component {
         optionsNote: PropTypes.node,
         requiredText: PropTypes.string,
         "no-border": PropTypes.bool,
-        bottomPanel: PropTypes.node
+        bottomPanel: PropTypes.node,
+        multiAddButtonLabel: PropTypes.string,
+        onMultiAdd: PropTypes.func,
     };
 
     static defaultProps = {
         "data-id": "selection-list",
         showSearchBox: true,
-        type: Constants.ListType.SINGLE,
+        type: ListType.SINGLE,
         showSelectionOptions: false,
         showOnlySelected: false,
         items: [],
-        "no-border": false
+        "no-border": false,
+        multiAddButtonLabel: "Add",
+        onMultiAdd: _.noop,
     };
 
     /**
@@ -137,24 +141,50 @@ module.exports = class extends React.Component {
         );
     };
 
+    _renderMultiAddPanel = () => {
+        const onClick = () => this.props.onMultiAdd(this.props.selectedItemIds);
+        return (
+            <FlexRow
+                className="input-selection-list__multi-add-panel"
+                justify={justifyOptions.CENTER}
+            >
+                <Button
+                    data-id="add-button"
+                    label={this.props.multiAddButtonLabel}
+                    onClick={onClick}
+                    type="primary"
+                />
+            </FlexRow>
+        );
+    }
+
     render() {
-        var className = classnames(this.props.className, {
-                "input-selection-list": true,
+        const {
+            "data-id": dataId,
+            optionsNote,
+            requiredText,
+            showSelectionOptions,
+            type
+        } = this.props;
+        const className = classnames(
+            this.props.className,
+            "input-selection-list",
+            {
                 searchable: this.props.showSearchBox,
-                "show-selection-options": this.props.showSelectionOptions,
+                "show-selection-options": showSelectionOptions,
                 "input-selection-list--no-border": this.props["no-border"]
-            }),
-            visibleItems = this.props.showOnlySelected ? this._filterVisible() : this.props.items;
+            });
+        const visibleItems = this.props.showOnlySelected ? this._filterVisible() : this.props.items;
 
         return (
-            <div data-id={this.props["data-id"]} className={className}>
-                {this.props.requiredText && (
-                    <div data-id={this.props["data-id"] + "-required-message"} className="required-message">
-                        <span>{this.props.requiredText}</span>
+            <div data-id={dataId} className={className}>
+                {requiredText && (
+                    <div data-id={dataId + "-required-message"} className="required-message">
+                        <span>{requiredText}</span>
                     </div>
                 )}
                 {this.props.showSearchBox && (
-                    <div data-id={this.props["data-id"] + "-search-box"} className="selection-list-search">
+                    <div data-id={dataId + "-search-box"} className="selection-list-search">
                         <FormSearchBox
                             queryString={this.props.queryString}
                             placeholder={this.props.searchPlaceholder}
@@ -164,23 +194,27 @@ module.exports = class extends React.Component {
                         />
                     </div>
                 )}
-                {this.props.optionsNote && <div className="input-selection-list__note">{this.props.optionsNote}</div>}
+                {optionsNote && <div className="input-selection-list__note">{optionsNote}</div>}
                 <ListOptions
-                    data-id={this.props["data-id"] + "-options"}
-                    type={this.props.type}
+                    data-id={dataId + "-options"}
+                    type={type}
                     selectedItemIds={this.props.selectedItemIds}
                     items={visibleItems}
                     onValueChange={this.props.onValueChange}
                     name={this.props.name}
                 />
-                <If test={this.props.showSelectionOptions}>
+                <If test={showSelectionOptions}>
                     {this._getSelectionOptions(visibleItems)}
                 </If>
-                {this.props.bottomPanel && this.props.bottomPanel}
+                {
+                    type === ListType.MULTIADD
+                        ? this._renderMultiAddPanel()
+                        : this.props.bottomPanel
+                }
             </div>
         );
     }
-};
+}
 
 /**
  * @class ListOptions
@@ -193,7 +227,7 @@ module.exports = class extends React.Component {
  * @param {SelectionList.types} [type=SelectionList.types.SINGLE]
  *     Enum to specify the type of list items to render
  *         SINGLE for radio inputs next to each list item
- *         MULTI for checkboxe inputs next to each list item
+ *         MULTI for checkbox inputs next to each list item
  *         VIEWONLY for text only list items
  * @param {SelectionListItem[]} items
  *     Actual data to display in the component
@@ -207,10 +241,11 @@ class ListOptions extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         type: PropTypes.oneOf([
-            Constants.ListType.ADD,
-            Constants.ListType.SINGLE,
-            Constants.ListType.MULTI,
-            Constants.ListType.VIEWONLY
+            ListType.ADD,
+            ListType.SINGLE,
+            ListType.MULTI,
+            ListType.MULTIADD,
+            ListType.VIEWONLY
         ]),
         items: PropTypes.arrayOf(
             PropTypes.shape({
@@ -231,7 +266,7 @@ class ListOptions extends React.Component {
 
     static defaultProps = {
         "data-id": "list-options",
-        type: Constants.ListType.SINGLE,
+        type: ListType.SINGLE,
         onValueChange: _.noop
     };
 
@@ -245,7 +280,7 @@ class ListOptions extends React.Component {
     _genAddOptions = () => {
         const valueChange = item => e => this.props.onValueChange(item, e);
         return this.props.items.map(item => (
-            <div className="input-selection-list__add-option" key={uuidV4()} onClick={valueChange(item)}>
+            <div className="input-selection-list__add-option" key={item.id} onClick={valueChange(item)}>
                 <Button
                     inline
                     iconName="plus"
@@ -285,20 +320,20 @@ class ListOptions extends React.Component {
     * @ignore
     */
     _genCheckboxOptions = () => {
-        var isSelected = function (item) {
+        const isSelected = item => {
             return _.contains(this.props.selectedItemIds, item.id);
-        }.bind(this);
+        };
 
         // add to the array of selected items (if it does not exist) or remove it (if it exists)
-        var onSelectionValueChange = (item, checked) => {
-            var updateFunction = checked ? _.union : _.difference;
-            var updatedSelection = updateFunction(this.props.selectedItemIds, [item.id]);
+        const onSelectionValueChange = (item, checked) => () => {
+            const updateFunction = checked ? _.union : _.difference;
+            const updatedSelection = updateFunction(this.props.selectedItemIds, [item.id]);
             this.props.onValueChange(updatedSelection);
         };
 
         return this.props.items.map((item, index) => {
-            var checked = isSelected(item);
-            var onValueChangeFunc = onSelectionValueChange.bind(this, item, !checked);
+            const checked = isSelected(item);
+            const onValueChangeFunc = onSelectionValueChange(item, !checked);
 
             return (
                 <FormCheckbox
@@ -361,13 +396,14 @@ class ListOptions extends React.Component {
     */
     _genListOptions = () => {
         switch (this.props.type) {
-            case Constants.ListType.ADD:
+            case ListType.ADD:
                 return this._genAddOptions();
-            case Constants.ListType.SINGLE:
+            case ListType.SINGLE:
                 return this._genRadioOptions();
-            case Constants.ListType.MULTI:
+            case ListType.MULTI:
+            case ListType.MULTIADD:
                 return this._genCheckboxOptions();
-            case Constants.ListType.VIEWONLY:
+            case ListType.VIEWONLY:
                 return this._genViewonlyOptions();
         }
     };

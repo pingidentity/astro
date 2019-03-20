@@ -1105,6 +1105,13 @@ module.exports = [
                         fullscreen: true,
                         icon: "details"
                     },
+                    {
+                        label: "Sandbox Whitelist",
+                        demo: require("../../templates/SandboxWhitelist"),
+                        pathToSource: "templates_oasis_ApplicationWizard.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    }
                 ]
             }
         ]
