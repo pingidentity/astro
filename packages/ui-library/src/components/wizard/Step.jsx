@@ -1,18 +1,19 @@
 "use strict";
 
-var PropTypes = require("prop-types");
 
-var React = require("react"),
-    CancelTooltip = require("../tooltips/CancelTooltip"),
-    ConfirmTooltip = require("../tooltips/ConfirmTooltip"),
-    ContextButton = require("../general/context-close-button").v2,
-    EllipsisLoaderButton = require("../general/EllipsisLoaderButton"),
-    HelpHint = require("../tooltips/HelpHint"),
-    Progress = require("./Progress"),
-    classnames = require("classnames"),
-    Utils = require("../../util/Utils"),
-    Translator = require("../../util/i18n/Translator.js"),
-    _ = require("underscore");
+import React from "react";
+import PropTypes from "prop-types";
+import CancelTooltip from "../tooltips/CancelTooltip";
+import ConfirmTooltip from "../tooltips/ConfirmTooltip";
+import { v2 as ContextButton } from "../general/context-close-button";
+import EllipsisLoaderButton from "../general/EllipsisLoaderButton";
+import HelpHint from "../tooltips/HelpHint";
+import Progress from "./Progress";
+import classnames from "classnames";
+import Utils from "../../util/Utils";
+import Translator from "../../util/i18n/Translator.js";
+import _ from "underscore";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 /**
  * @callback Wizard#Step~onNext
@@ -149,6 +150,10 @@ class Step extends React.Component {
             if (props.nextButtonStyle) {
                 throw new Error(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
             }
+        }
+
+        if (!props.flags || !props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "Step" });
         }
     }
 

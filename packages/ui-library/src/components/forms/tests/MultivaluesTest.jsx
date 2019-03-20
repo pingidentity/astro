@@ -522,22 +522,4 @@ describe("Multivalues", function () {
         expect(wrapper.state().listOpen).toBeTruthy();
     });
 
-    it("gives popper.js the correct width with _dropdownWidth", function() {
-        const widthComponent = getComponent({ options });
-        const width = 1234;
-
-        const data = {
-            styles: {},
-            offsets: {
-                reference: {
-                    width: width
-                }
-            }
-        };
-
-        const newData = widthComponent._dropdownWidth(data);
-
-        expect(newData.styles.minWidth).toEqual(`${width}px`);
-    });
-
 });

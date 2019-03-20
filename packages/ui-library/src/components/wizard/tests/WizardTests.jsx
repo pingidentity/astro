@@ -251,4 +251,19 @@ describe("Wizard", function () {
         expect(progress).toBeFalsy();
         expect(content).toBeFalsy(); // testing that the task-content class is not added
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getRenderedComponent({}, [<Step title="step 1" flags={[ "use-portal" ]}>Step 1</Step>]);
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+        getRenderedComponent(
+            { flags: [ "use-portal" ] }, [<Step title="step 1" flags={[ "use-portal" ]}>Step 1</Step>]
+        );
+        expect(console.warn).not.toBeCalled();
+    });
+
 });

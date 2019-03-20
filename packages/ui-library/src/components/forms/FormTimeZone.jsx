@@ -16,6 +16,7 @@ import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 
 import Popover from "../tooltips/Popover";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 const PopoverBase = Popover.Base;
 
@@ -709,6 +710,9 @@ export default class FormTimeZone extends React.Component {
         }
         if (!this._usePStateful()) {
             cannonballProgressivelyStatefulWarning({ name: "FormTimeZone" });
+        }
+        if (!this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "FormTimeZone" });
         }
     }
 

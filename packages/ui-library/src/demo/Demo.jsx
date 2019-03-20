@@ -295,6 +295,7 @@ class DemoApp extends React.Component {
                 onRootChange={this.navActions.setRoot}
                 onItemChange={this.navActions.selectItem}
                 onSectionChange={this.navActions.toggleSection}
+                flags={[ "use-portal" ]}
             >
                 <div id="content" data-id="components">
                     <DemoItem label={this._demoItem.label}

@@ -17,7 +17,14 @@ const flagHelp = (
 
 class DemoItem extends React.Component {
     state = {
-        flags: [],
+        flags: [
+            "add-button-margin",
+            "expandable-row-class",
+            "fix-discard-button",
+            "fix-message-constants",
+            "p-stateful",
+            "use-portal",
+        ],
     };
 
     static propTypes = {

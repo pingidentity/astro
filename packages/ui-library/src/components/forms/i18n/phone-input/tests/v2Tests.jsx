@@ -297,4 +297,17 @@ describe("I18nPhoneInput", function () {
 
         expect(usFlag).toBeTruthy();
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: ["p-stateful"] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal", "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
 });

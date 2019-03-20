@@ -230,7 +230,7 @@ describe("I18nCountrySelector v4", function () {
         expect(console.warn).toBeCalled();
     });
 
-    it("doesn't fire cannonball warning when p-stateful flag is set", function() {
+    it("doesn't fire cannonball warning when p-stateful and use-portal flags are set", function() {
         console.warn = jest.fn();
         getComponent({ flags: [ "use-portal", "p-stateful" ] });
         expect(console.warn).not.toBeCalled();

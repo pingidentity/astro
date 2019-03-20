@@ -13,7 +13,10 @@ var ColorPickerDemoPage = Object.create(HomePage, {
 
     xpathColorWrapper: {
         value: function (index) {
-            return this.formatXpath("//div[@data-id='color-picker{index}']/div/span[2]", { index: index });
+            return this.formatXpath(
+                "//*[@data-parent='color-picker{index}' and @data-id='colorpicker-container']",
+                { index: index }
+            );
         }
     },
 

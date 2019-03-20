@@ -315,14 +315,17 @@ describe("ButtonBar", function () {
         expect(discardBtn).toBeTruthy();
     });
 
-    it("fires the Cannonball warning when the discard props are used but no flag is set", function() {
+    it("fires the Cannonball warning when the discard props" +
+        "are used but no fix-discard-button flag is set", function() {
         console.warn = jest.fn();
 
-        getComponent({ onDiscard: jest.fn() });
+        expect(console.warn).not.toBeCalled();
+        getComponent({ onDiscard: jest.fn(), flags: [ "use-portal" ] });
         expect(console.warn).toBeCalled();
     });
 
-    it("does not fire the Cannonball warning when either the flag is set or discard props aren't set", function() {
+    it("doesn't fire the warning when either the fix-discard-button" +
+        "flag is set or discard props aren't set", function() {
         console.warn = jest.fn();
 
         shallow(
@@ -332,6 +335,7 @@ describe("ButtonBar", function () {
                 discardTex={discardText}
                 onSave={jest.fn()}
                 saveText={saveText}
+                flags={["use-portal"]}
             />
         );
 
@@ -345,9 +349,24 @@ describe("ButtonBar", function () {
                 onSave={jest.fn()}
                 saveText={saveText}
                 onDiscard={jest.fn()}
-                flags={["fix-discard-button"]}
+                flags={["fix-discard-button","use-portal"]}
             />
         );
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+
+        getComponent({ flags: [ "fix-discard-button" ] });
+
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+
+        getComponent({ flags: [ "use-portal", "fix-discard-button" ] });
 
         expect(console.warn).not.toBeCalled();
     });

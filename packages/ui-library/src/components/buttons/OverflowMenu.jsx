@@ -1,7 +1,9 @@
 "use strict";
 
 import React from "react";
+import PropTypes from "prop-types";
 import PopoverMenu from "../tooltips/PopoverMenu";
+import { deprecatedPropValues } from "../../util/DeprecationUtils";
 
 /**
  * @class Page Header
@@ -21,6 +23,14 @@ const OverflowMenu = (props) => {
 
 OverflowMenu.propTypes = {
     ...PopoverMenu.propTypes,
+    flags: deprecatedPropValues({
+        customMessage: "Usage of the OverflowMenu without the use-portal flag has been deprecated." +
+        " When using this component, pass in flags=[\"use-portal\"] as a prop.",
+        propType: PropTypes.arrayOf(PropTypes.string),
+        values: [{
+            value: []
+        }]
+    }),
 };
 
 OverflowMenu.defaultProps = {

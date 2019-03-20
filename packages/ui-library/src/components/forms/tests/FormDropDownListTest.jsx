@@ -833,24 +833,6 @@ describe("FormDropDownList", function () {
         expect(selectedIcon).toBeTruthy();
     });
 
-    it("gives popper.js the correct width with _dropdownWidth", function() {
-        const component = getComponent({ flags: [ "use-portal" ] });
-        const width = 1234;
-
-        const data = {
-            styles: {},
-            offsets: {
-                reference: {
-                    width: width
-                }
-            }
-        };
-
-        const newData = component.refs.FormDropDownListStateless._dropdownWidth(data);
-
-        expect(newData.styles.minWidth).toEqual(`${width}px`);
-    });
-
     it("shows selected option", function () {
         const selectedOption= { label: "Two", value: 2 };
         const component = getComponent({
@@ -862,7 +844,22 @@ describe("FormDropDownList", function () {
         const secondOption = TestUtils.findRenderedDOMNodeWithDataId(component, "option-1");
 
         expect(selected).toEqual(secondOption);
+    });
 
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+
+        getComponent({ flags: ["p-stateful"] });
+
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
+        console.warn = jest.fn();
+
+        getComponent({ flags: [ "use-portal", "p-stateful" ] });
+
+        expect(console.warn).not.toBeCalled();
     });
 
     it("fires a cannonball warning when the p-stateful flag is not set", function() {

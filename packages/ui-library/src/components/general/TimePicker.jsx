@@ -1,13 +1,15 @@
 "use strict";
 
-var PropTypes = require("prop-types");
 
-var React = require("react"),
-    FormDropDownList = require("../forms/FormDropDownList"),
-    Utils = require("../../util/Utils"),
-    moment = require("moment-range"),
-    Translator = require("../../util/i18n/Translator.js"),
-    classnames = require("classnames");
+import React from "react";
+import PropTypes from "prop-types";
+import FormDropDownList from "../forms/FormDropDownList";
+import Utils from "../../util/Utils";
+import moment from "moment-range";
+import Translator from "../../util/i18n/Translator.js";
+import classnames from "classnames";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+
 
 /**
  * @callback TimePicker~onValueChange
@@ -62,7 +64,8 @@ module.exports = class extends React.Component {
         increments: 15,
         format: "12",
         value: "12:00pm",
-        "data-id": "time-picker"
+        "data-id": "time-picker",
+        flags: [],
     };
 
     constructor(props) {
@@ -71,6 +74,10 @@ module.exports = class extends React.Component {
 
         if (!Utils.isProduction() && props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
+        }
+
+        if (!props.flags || !props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "TimePicker" });
         }
     }
 
@@ -232,7 +239,7 @@ module.exports = class extends React.Component {
                 validSearchCharsRegex="/[^\d:\s]+/"
                 title={value}
                 noneOption={noTime}
-                flags={this.props.flags}
+                flags={[...this.props.flags, "p-stateful"]}
             />
         );
     }

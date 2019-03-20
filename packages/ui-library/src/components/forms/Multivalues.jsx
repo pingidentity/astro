@@ -471,15 +471,6 @@ class Multivalues extends Component {
     _getTrigger = () => this.inputBox;
 
     /**
-    * Return the width of the dropdown list
-    * @private
-    */
-    _dropdownWidth = data => {
-        data.styles.minWidth = data.offsets.reference.width + "px";
-        return data;
-    }
-
-    /**
     * When the user clicks the dropdown list item, add that entry
     * @private
     */
@@ -615,19 +606,8 @@ class Multivalues extends Component {
                         key={`popper-${entries.length}-${draft}`}
                         className="input-multivalues__popper"
                         getReference={this._getTrigger}
-                        config={{
-                            placement: "bottom-start",
-                            modifiers: {
-                                autoWidth: {
-                                    enabled: true,
-                                    order: 650,
-                                    fn: this._dropdownWidth,
-                                },
-                                computeStyle: {
-                                    gpuAcceleration: false,
-                                },
-                            }
-                        }}
+                        matchWidth
+                        noGPUAcceleration
                     >
                         <OptionList
                             data-id="multivalue-options"

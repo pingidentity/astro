@@ -1,11 +1,11 @@
 
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import CollapsibleLink from "../general/CollapsibleLink";
 import DetailsTooltip from "../tooltips/DetailsTooltip";
 import classnames from "classnames";
 import _ from "underscore";
-import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 
 
@@ -78,8 +78,15 @@ class LinkDropDownListStateless extends React.Component {
 
     static defaultProps = {
         closeOnSelection: true,
-        "data-id": "link-dropdown-list"
+        "data-id": "link-dropdown-list",
+        flags: [],
     };
+
+    componentDidMount() {
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "LinkDropDownList" });
+        }
+    }
 
     _handleClick = (selectedOption) => {
         if (this.props.closeOnSelection) {
@@ -125,7 +132,7 @@ class LinkDropDownListStateless extends React.Component {
                 showClose={false}
                 open={this.props.open}
                 onToggle={this.props.onToggle}
-                flags={this.props.flags}
+                flags={[...this.props.flags, "p-stateful"]}
             >
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}

@@ -826,24 +826,6 @@ describe("FormDropDownList", function () {
         expect(selectedIcon).toBeTruthy();
     });
 
-    it("gives popper.js the correct width with _dropdownWidth", function() {
-        const component = getComponent({ flags: [ "use-portal" ] });
-        const width = 1234;
-
-        const data = {
-            styles: {},
-            offsets: {
-                reference: {
-                    width: width
-                }
-            }
-        };
-
-        const newData = component.refs.FormDropDownListStateless._dropdownWidth(data);
-
-        expect(newData.styles.minWidth).toEqual(`${width}px`);
-    });
-
     it("shows selected option", function () {
         const selectedOption= { label: "Two", value: 2 };
         const component = getComponent({

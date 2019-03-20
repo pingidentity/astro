@@ -29,7 +29,6 @@ describe("UnitInput", function () {
         var callback1 = jest.fn();
         return ReactTestUtils.renderIntoDocument(
             <UnitInput
-                {...props}
                 labelText="Unit Input Text"
                 className="custom-container-class"
                 textFieldProps={{
@@ -43,6 +42,7 @@ describe("UnitInput", function () {
                     selectedOption: options[0],
                     className: InputWidthClasses.SM
                 }}
+                {...props}
             />
         );
     }
@@ -145,4 +145,17 @@ describe("UnitInput", function () {
         const label = TestUtils.findRenderedDOMNodeWithDataId(component, "unit-input-label");
         expect(label.textContent).toEqual("Unit Input Text");
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        render({ textFieldProps: {}, dropDownListProps: { options }, flags: ["p-stateful"] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
+        console.warn = jest.fn();
+        render({ textFieldProps: {}, dropDownListProps: { options }, flags: [ "use-portal", "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
 });

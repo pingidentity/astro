@@ -25,11 +25,24 @@ describe("OverflowMenuTests", function () {
             onClick: () => this.setState({ message: "Option 4 Clicked" })
         }
     ];
+
     it("rendered component with data-id=overflow-menu", function () {
         const component = ReactTestUtils.renderIntoDocument(<div><OverflowMenu buttons={buttons} /></div>);
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, "overflow-menu");
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
+    });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        ReactTestUtils.renderIntoDocument(<div><OverflowMenu buttons={buttons} /></div>);
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+        ReactTestUtils.renderIntoDocument(<div><OverflowMenu buttons={buttons} flags={[ "use-portal" ]} /></div>);
+        expect(console.warn).not.toBeCalled();
     });
 
 });

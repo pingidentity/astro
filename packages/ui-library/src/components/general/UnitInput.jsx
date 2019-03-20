@@ -1,11 +1,12 @@
 "use strict";
 
-var PropTypes = require("prop-types");
 
-var React = require("react"),
-    FormDropDownList = require("../forms/FormDropDownList"),
-    FormTextField = require("../forms/form-text-field"),
-    classnames = require("classnames");
+import React from "react";
+import PropTypes from "prop-types";
+import FormDropDownList from "../forms/FormDropDownList";
+import FormTextField from "../forms/form-text-field";
+import classnames from "classnames";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 /**
  * @class UnitInput
@@ -42,6 +43,12 @@ module.exports = class extends React.Component {
         "data-id": "unit-input"
     };
 
+    componentDidMount() {
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "UnitInput" });
+        }
+    }
+
     render() {
         var containerClassName = classnames(
             "input-textselect",
@@ -55,6 +62,7 @@ module.exports = class extends React.Component {
                     {this.props.labelText || this.props.label}
                 </label>
                 <FormTextField
+                    flags={[ "p-stateful" ]}
                     {...this.props.textFieldProps}
                 />
                 <FormDropDownList

@@ -1,15 +1,14 @@
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
-
-var React = require("react"),
-    PropTypes = require("prop-types"),
-    classnames = require("classnames"),
-    _ = require("underscore"),
-    PopoverNavMenu = require("../../tooltips/PopoverNavMenu"),
-    HeaderNav = require("./HeaderNav"),
-    EnvironmentSelector = require("./EnvironmentSelector"),
-    MarketSelector = require("./MarketSelector"),
-    Logo = require("./logos/Logo"),
-    getIconClassName = require("../../../util/PropUtils").getIconClassName;
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import _ from "underscore";
+import PopoverNavMenu from "../../tooltips/PopoverNavMenu";
+import HeaderNav from "./HeaderNav";
+import EnvironmentSelector from "./EnvironmentSelector";
+import MarketSelector from "./MarketSelector";
+import Logo from "./logos/Logo";
+import { getIconClassName } from "../../../util/PropUtils";
+import { cannonballChangeWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
 
 const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
 
@@ -447,6 +446,12 @@ class HeaderBar extends React.Component {
         legacy: false,
         updated: false
     };
+
+    componentDidMount() {
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "HeaderBar" });
+        }
+    }
 
     /**
      * @method

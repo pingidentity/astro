@@ -24,6 +24,12 @@ import classnames from "classnames";
  *     Click event for the container
  * @param {string} [placement]
  *     Where we'll try to put the container. Passed to popper.js
+ * @param {boolean} [matchWidth=false]
+ *     Should the popper match the width of its reference? (Like a dropdown does)
+ * @param {boolean} [noGPUacceleration=false]
+ *     Turns off a popper.js feature that conflicts with rendering helphint inside dropdowns
+ * @param {boolean} [positionFixed=false]
+ *     Turns on a popper.js feature
  **/
 
 class PopperContainer extends React.Component {
@@ -35,17 +41,56 @@ class PopperContainer extends React.Component {
         role: PropTypes.string,
         onClick: PropTypes.func,
         placement: PropTypes.string,
+        matchWidth: PropTypes.bool,
+        noGPUAcceleration: PropTypes.bool,
+        positionFixed: PropTypes.bool,
     }
 
     static defaultProps = {
         "data-id": "popper-container",
         placement: "bottom",
+        matchWidth: false,
+        noGPUAcceleration: false,
+        positionFixed: false,
     }
 
+    _getComputedZIndex = node => {
+        if (node && window.getComputedStyle) {
+            let parentZIndex = "auto";
+            if (node.parentNode && node.parentNode !== document.body) {
+                parentZIndex = this._getComputedZIndex(node.parentNode);
+            }
+            if (parentZIndex === "auto") {
+                return window.getComputedStyle(node).zIndex;
+            }
+            return parentZIndex;
+        }
+        return "auto";
+    }
+
+    _matchReferenceWidth = data => {
+        data.styles.minWidth = data.offsets.reference.width + "px";
+        return data;
+    }
+
+    _setZIndex = zIndex => data => ({
+        ...data,
+        styles: {
+            ...data.styles,
+            zIndex,
+        },
+    });
+
     componentDidMount() {
+        const { placement } = this.props;
+        const flipBehavior = placement.search(/top/) >= 0
+            ? ["top", "bottom", "top"]
+            : ["bottom", "top", "bottom"];
         const reference = this.props.getReference();
+        const zIndex = this._getComputedZIndex(ReactDOM.findDOMNode(reference));
+
         const config = this.props.config || {
-            placement: this.props.placement,
+            placement,
             computeStyle: {
                 gpuAcceleration: false,
             },
@@ -53,8 +98,26 @@ class PopperContainer extends React.Component {
                 // Let tooltip escape scrolling container, but not app frame
                 preventOverflow: {
                     boundariesElement: "viewport",
-                    padding: 35
+                    padding: 35,
+                    escapeWithReference: true,
                 },
+                addZIndex: {
+                    enabled: (zIndex !== "auto"),
+                    order: 810,
+                    fn: this._setZIndex(zIndex),
+                },
+                flip: {
+                    behavior: flipBehavior,
+                },
+                autoWidth: {
+                    enabled: this.props.matchWidth,
+                    order: 650,
+                    fn: this._matchReferenceWidth,
+                },
+                computeStyle: {
+                    gpuAcceleration: !this.props.noGPUAcceleration,
+                },
+                positionFixed: this.props.positionFixed,
             }
         };
 
@@ -73,6 +136,8 @@ class PopperContainer extends React.Component {
     render() {
         const classes = classnames("popper-container", this.props.className);
         const {
+            "data-id": dataId,
+            "data-parent": dataParent,
             children,
             pointerClassName,
             role,
@@ -81,7 +146,8 @@ class PopperContainer extends React.Component {
 
         const rendered = (
             <div
-                data-id={this.props["data-id"]}
+                data-id={dataId}
+                data-parent={dataParent}
                 className={classes}
                 ref={el => this.popper = el}
                 role={role}

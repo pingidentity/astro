@@ -292,4 +292,17 @@ describe("Step", function () {
         expect(tooltipTitle.textContent).toBe(saveTooltipParams.title);
         expect(tooltipText.textContent).toContain(saveTooltipParams.messageText);
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getRenderedComponent();
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+        getRenderedComponent({ flags: [ "use-portal" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
 });

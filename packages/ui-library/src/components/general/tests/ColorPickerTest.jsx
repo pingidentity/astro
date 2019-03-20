@@ -622,5 +622,17 @@ describe("ColorPicker", function () {
         getComponent({ stateless: true, color: "#ffffff", flags: [ "use-portal" ] });
         expect(console.warn).toBeCalled();
     });
+    
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getComponent();
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal", "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
+    });
 
 });

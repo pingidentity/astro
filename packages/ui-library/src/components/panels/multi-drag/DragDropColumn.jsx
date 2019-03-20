@@ -1,11 +1,12 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    DragDropRow = require("../../rows/DragDropRow"),
-    HelpHint = require("../../tooltips/HelpHint"),
-    LinkDropDownList = require("../../forms/LinkDropDownList"),
-    classnames = require("classnames"),
-    _ = require("underscore");
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import DragDropRow from "../../rows/DragDropRow";
+import HelpHint from "../../tooltips/HelpHint";
+import LinkDropDownList from "../../forms/LinkDropDownList";
+import classnames from "classnames";
+import _ from "underscore";
+import { cannonballPortalWarning } from "../../../util/DeprecationUtils";
 
 /**
  * @class MultiDrag#DragDropColumn
@@ -107,6 +108,12 @@ module.exports = class extends React.Component {
         dragToEdge: false,
         strings: {}
     };
+
+    componentDidMount() {
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "MultiDrag" });
+        }
+    }
 
     /*
      * Handler for scrolls.  This is useful for implementing lazy loading of rows

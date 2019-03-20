@@ -650,13 +650,13 @@ class FormTextField extends React.Component {
         }
 
         cannonballChangeWarning({
-            message: `The 'reveal' prop will no longer serve as an initial state. ` +
+            message: `The 'reveal' prop will no longer serve as an initial state for FormTextField. ` +
             `If it is present, it will control the current value of the component. ` +
             `Set the 'p-stateful' flag to switch to this behavior now.`,
         });
 
         cannonballChangeWarning({
-            message: `The 'value' prop will no longer serve as an initial state. ` +
+            message: `The 'value' prop will no longer serve as an initial state for FormTextField. ` +
             `If it is present, it will control the current value of the component. ` +
             `Set the 'p-stateful' flag to switch to this behavior now.`,
         });

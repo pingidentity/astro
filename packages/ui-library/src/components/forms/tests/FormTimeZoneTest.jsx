@@ -423,10 +423,9 @@ describe("FormTimeZone", function () {
         expect(console.warn).toBeCalled();
     });
 
-    it("doesn't fire cannonball warning when p-stateful flag is set", function() {
+    it("doesn't fire cannonball warning when p-stateful and use-portal flag are set", function() {
         console.warn = jest.fn();
 
-        expect(console.warn).not.toBeCalled();
         getComponent({ flags: [ "use-portal", "p-stateful" ] });
         expect(console.warn).not.toBeCalled();
     });
@@ -450,6 +449,12 @@ describe("FormTimeZone", function () {
         expect(renderedLabelText.textContent).toContain(labelText);
         expect(renderedHelpIcon).toBeTruthy();
         // expect(renderedHelpText.textContent).toEqual(labelHelpText);
+    });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "p-stateful" ] });
+        expect(console.warn).toBeCalled();
     });
 
 });

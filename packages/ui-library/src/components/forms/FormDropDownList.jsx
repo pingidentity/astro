@@ -21,6 +21,7 @@ import {
 } from "../../util/KeyboardUtils.js";
 import Utils from "../../util/Utils.js";
 import _ from "underscore";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
@@ -389,6 +390,10 @@ class FormDropDownListStateless extends React.Component {
     constructor(props) {
         super(props);
         this._setupGroups(props);
+
+        if (!this._usePortal()) {
+            cannonballPortalWarning({ name: "FormDropDownList" });
+        }
     }
 
     componentDidUpdate() {
@@ -778,12 +783,7 @@ class FormDropDownListStateless extends React.Component {
 
     _getReference = () => this.reference;
 
-    _dropdownWidth = data => {
-        data.styles.minWidth = data.offsets.reference.width + "px";
-        return data;
-    }
-
-    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+    _usePortal = () => this.props.flags.includes("use-portal");
 
     render() {
         this._setupGroups(this.props);
@@ -875,6 +875,7 @@ class FormDropDownListStateless extends React.Component {
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                                 width={InputWidths.MAX}
                                 ref={el => this.reference = el}
+                                flags={[ "p-stateful" ]}
                             />
                             {!this.props.disabled && <div className="arrow" /> }
                         </div>
@@ -884,19 +885,9 @@ class FormDropDownListStateless extends React.Component {
                                     data-id={this.props["data-id"]+"-dropdown"}
                                     getReference={this._getReference}
                                     className={containerClassName}
-                                    config={{
-                                        placement: "bottom-start",
-                                        modifiers: {
-                                            autoWidth: {
-                                                enabled: true,
-                                                order: 650,
-                                                fn: this._dropdownWidth,
-                                            },
-                                            computeStyle: {
-                                                gpuAcceleration: false,
-                                            },
-                                        }
-                                    }}
+                                    placement="bottom-start"
+                                    matchWidth
+                                    noGPUAcceleration
                                 >
                                     {menuList}
                                 </PopperContainer>

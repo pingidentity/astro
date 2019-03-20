@@ -12,6 +12,7 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
 import ButtonGroup from "../layout/ButtonGroup.jsx";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 /**
  * @callback DetailsTooltip~onToggle
@@ -301,6 +302,7 @@ class DetailsTooltipStateless extends React.Component {
                 className={classnames("details-tooltip-display", contentClassName, this.props.className)}
                 pointerClassName="details-tooltip-display__pointer"
                 data-id="details-content"
+                data-parent={this.props["data-id"]}
                 placement={getPlacement()}
                 onClick={hide}
                 ref={el => this.popperContainer = el}
@@ -309,6 +311,7 @@ class DetailsTooltipStateless extends React.Component {
             <div
                 className={contentClassName}
                 data-id="details-content"
+                data-parent={this.props["data-id"]}
                 onClick={hide}
             >{contents}</div>
         );
@@ -479,6 +482,9 @@ class DetailsTooltip extends React.Component {
                 `If it is present, it will control the current value of the component. ` +
                 `Set the 'p-stateful' flag to switch to this behavior now.`,
             });
+        }
+        if (!this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "DetailsTooltip" });
         }
 
         if (this.props.positionClassName) {

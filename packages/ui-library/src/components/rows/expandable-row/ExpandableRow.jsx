@@ -15,7 +15,11 @@ import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
 import ButtonGroup from "../../layout/ButtonGroup";
-import { cannonballChangeWarning, cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
+import {
+    cannonballChangeWarning,
+    cannonballProgressivelyStatefulWarning,
+    cannonballPortalWarning
+} from "../../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 
 /**
@@ -429,6 +433,10 @@ class StatelessExpandableRow extends React.Component {
                     `add the flag 'expandable-row-class' to ExpandableRow.`
                 ),
             });
+        }
+
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "ExpandableRow" });
         }
     }
 

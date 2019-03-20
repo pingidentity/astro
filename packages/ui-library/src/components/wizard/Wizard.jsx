@@ -1,11 +1,12 @@
 "use strict";
 
-var PropTypes = require("prop-types");
 
-var React = require("react"),
-    ButtonBar = require("../forms/ButtonBar"),
-    Utils = require("../../util/Utils"),
-    _ = require("underscore");
+import React from "react";
+import PropTypes from "prop-types";
+import ButtonBar from "../forms/ButtonBar";
+import Utils from "../../util/Utils";
+import _ from "underscore";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 var INHERIT_PROPS = [
     "activeStep",
@@ -187,6 +188,10 @@ class Wizard extends React.Component {
             if (props.onChange) {
                 throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
+        }
+
+        if (!props.flags || !props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "Wizard" });
         }
     }
 

@@ -7,6 +7,7 @@ import CountryFlagList from "../CountryFlagList";
 import { v2 as FormTextField } from "../../form-text-field";
 import Validators from "../../../../util/Validators";
 import Utils from "../../../../util/Utils.js";
+import { cannonballPortalWarning } from "../../../../util/DeprecationUtils";
 
 /**
  * @typedef I18nPhoneInput~PhoneInputValues
@@ -170,6 +171,10 @@ class I18nPhoneInputStateless extends Component {
                 throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
             }
         }
+
+        if (!props.flags || !props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "Phone" });
+        }
     }
 
     _getCountryCode() {
@@ -255,7 +260,9 @@ class I18nPhoneInputStateless extends Component {
                             : this.props.errorMessage
                     }
                     autoFocus={this.props.autoFocus}
-                    useAutocomplete={this.props.useAutocomplete} />
+                    useAutocomplete={this.props.useAutocomplete}
+                    flags={[ "p-stateful" ]}
+                />
             </div>
         );
     }

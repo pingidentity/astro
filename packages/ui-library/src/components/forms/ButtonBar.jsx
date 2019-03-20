@@ -7,7 +7,7 @@ import CancelTooltip from "./../tooltips/CancelTooltip";
 import ConfirmTooltip from "../tooltips/ConfirmTooltip";
 import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
 import Translator from "../../util/i18n/Translator.js";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import _ from "underscore";
 
 /**
@@ -328,6 +328,9 @@ class ButtonBar extends React.Component {
                     `To use this style now, add the 'fix-discard-button' flag.`
                 ),
             });
+        }
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "ButtonBar" });
         }
     }
 

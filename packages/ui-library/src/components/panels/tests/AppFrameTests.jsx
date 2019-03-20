@@ -423,4 +423,17 @@ describe("AppFrame", () => {
         expect(component.props.onRootChange).lastCalledWith(rootId);
         expect(component.state.searchOpen).toEqual(false);
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getWrappedComponent();
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+        getWrappedComponent({ flags: [ "use-portal" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
 });

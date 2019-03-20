@@ -16,10 +16,10 @@ import Utils from "../../util/Utils";
 import Validator from "validator";
 import If from "./If";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
-
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 /**
  * @callback ColorPicker~onValueChange
@@ -315,16 +315,24 @@ class Stateless extends React.Component {
                         {this._usePortal()
                             ? (
                                 <PopperContainer
+                                    data-id="colorpicker-container"
+                                    data-parent={this.props["data-id"]}
                                     className="popover-display"
                                     getReference={this._getReference}
                                     pointerClassName="popup-frame__pointer"
                                     ref={el => this.popperContainer = el}
-                                    config={{ positionFixed: true }}
+                                    positionFixed
                                 >
                                     <div className="popup-frame popup-frame--padded">{picker}</div>
                                 </PopperContainer>
                             )
-                            : <span className="colorpicker-container">{picker}</span>
+                            : (
+                                <span
+                                    className="colorpicker-container"
+                                    data-id="colorpicker-container"
+                                    data-parent={this.props["data-id"]}
+                                >{picker}</span>
+                            )
                         }
                     </If>
                 </div>
@@ -414,6 +422,11 @@ export default class ColorPicker extends React.Component {
                 cannonballProgressivelyStatefulWarning({ name: "ColorPicker" });
             }
         }
+
+        if (!this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "ColorPicker" });
+        }
+
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
         /* istanbul ignore if  */
         if (!Utils.isProduction()) {

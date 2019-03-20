@@ -4,7 +4,7 @@ import Popover from "./Popover";
 import _ from "underscore";
 
 import popsOver from "../../util/behaviors/popsOver";
-
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 const PopoverBase = Popover.Base;
 
@@ -49,6 +49,12 @@ class PopoverMenuBase extends PopoverBase {
             items: [],
             buttons: []
         });
+
+    componentDidMount() {
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "PopoverMenu" });
+        }
+    }
 
     renderItem = (item, handleClick, index) => (
         <button

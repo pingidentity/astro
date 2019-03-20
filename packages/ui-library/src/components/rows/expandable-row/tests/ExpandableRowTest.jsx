@@ -898,8 +898,8 @@ describe("ExpandableRow", function() {
         expect(element).not.toBeNull();
     });
 
-    it("renders with new class when flag is set", function() {
-        const component = getComponent({ flags: [ "expandable-row-class" ] });
+    it("renders with new class when flags are set", function() {
+        const component = getComponent({ flags: [ "expandable-row-class", "usePortal" ] });
 
         const row = TestUtils.findRenderedDOMNodeWithClass(component, "expandable-row");
 
@@ -918,7 +918,7 @@ describe("ExpandableRow", function() {
         console.warn = jest.fn();
 
         expect(console.warn).not.toHaveBeenCalled();
-        getComponent();
+        getComponent({ flags: [ "use-portal" ] });
         expect(console.warn).toHaveBeenCalled();
     });
 
@@ -931,11 +931,18 @@ describe("ExpandableRow", function() {
         expect(console.warn).toHaveBeenCalled();
     });
 
-    it("does not fire Cannonball warning when p-stateful flag is set", () => {
+    it("does not fire Cannonball warning when p-stateful and use-portal flags are set", () => {
         console.warn = jest.fn();
 
         // Shallow mount to avoid triggering other warnings.
         shallow(<ExpandableRow flags={["p-stateful"]} />);
         expect(console.warn).not.toHaveBeenCalled();
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "expandable-row-class", "p-stateful" ] });
+        expect(console.warn).toBeCalled();
+    });
+
 });

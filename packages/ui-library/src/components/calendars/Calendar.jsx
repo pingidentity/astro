@@ -11,7 +11,7 @@ import Translator from "../../util/i18n/Translator.js";
 import Utils from "../../util/Utils.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -185,6 +185,10 @@ class BaseCalendar extends React.Component {
         if (!this.props.statelessDate) {
             // doing this just to keep from defining the deprecated hook unless we need it
             this.componentWillReceiveProps = this._maybeComponentWillReceiveProps;
+        }
+
+        if (!this._usePortal()) {
+            cannonballPortalWarning({ name: "Calendar" });
         }
 
         this.state = {
@@ -399,7 +403,7 @@ class BaseCalendar extends React.Component {
         e.stopPropagation();
     };
 
-    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+    _usePortal = () => this.props.flags.includes("use-portal");
 
     _getReference = () => this.reference;
 

@@ -266,11 +266,11 @@ var WizardDemoPage = Object.create(HomePage, {
             switch (which) {
                 case "done":
                     return (
-                        this.isExisting("//span[@data-id='button-bar-save-tooltip']//div[@data-id='details-content']")
+                        this.isExisting("//div[@data-parent='button-bar-save-tooltip' and @data-id='details-content']")
                     );
                 case "step":
                     return (
-                        this.isExisting("//span[@data-id='confirm-tooltip']//div[@data-id='details-content']")
+                        this.isExisting("//div[@data-parent='confirm-tooltip' and @data-id='details-content']")
                     );
                 default:
                     return;

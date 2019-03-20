@@ -238,13 +238,13 @@ describe("ConditionalFieldset", function () {
 
     it("fires cannonball warning when the p-stateful flag is not set", function () {
         console.warn = jest.fn();
-        getComponent({ flags: [] });
+        getComponent({ flags: ["use-portal"] });
         expect(console.warn).toBeCalled();
     });
 
-    it("does not fire cannonball warning when the p-stateful flag is set", function () {
+    it("does not fire cannonball warning when the p-stateful and use-portal flags are set", function () {
         console.warn = jest.fn();
-        getComponent({ flags: ["p-stateful"] });
+        getComponent({ flags: ["p-stateful", "use-portal"] });
         expect(console.warn).not.toBeCalled();
     });
 
@@ -269,4 +269,11 @@ describe("ConditionalFieldset", function () {
         expect(wrapper.find(r1).prop("checked")).toEqual(false);
         expect(wrapper.find(r2).prop("checked")).toEqual(true);
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: ["p-stateful"] });
+        expect(console.warn).toBeCalled();
+    });
+
 });

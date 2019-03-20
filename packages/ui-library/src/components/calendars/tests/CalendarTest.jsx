@@ -55,6 +55,26 @@ describe("Calendar", function () {
         expect(calendar.length).toBe(1);
     });
 
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+
+        ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} flags={[ "p-stateful" ]} />
+        );
+
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+
+        ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} flags={[ "use-portal", "p-stateful" ]} />
+        );
+
+        expect(console.warn).not.toBeCalled();
+    });
+
     it("renders with given data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar data-id="myCalendar" date={selectedDate} />
@@ -916,7 +936,7 @@ describe("Calendar", function () {
 
     it("doesn't fire Cannonball warnings if required flags are provided", function() {
         console.warn = jest.fn();
-        getComponent({ flags: [ "p-stateful" ] });
+        getComponent({ flags: [ "p-stateful", "use-portal" ] });
         expect(console.warn).not.toBeCalled();
     });
 

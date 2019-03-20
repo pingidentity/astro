@@ -5,6 +5,7 @@ import LeftNav from "./left-nav";
 import KeywordSearch from "../forms/KeywordSearch";
 import Modal from "../general/Modal";
 import { deprecatedProp } from "../../util/DeprecationUtils";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 import _ from "underscore";
 
@@ -39,6 +40,8 @@ import _ from "underscore";
  *          Handler for when a section is toggled. Accepts the id of the section.
  * @param {bool} [searchable]
  *          This is an experimental prop that is not ready for production.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  */
 
 /**
@@ -79,7 +82,8 @@ class AppFrame extends React.Component {
         onSectionChange: PropTypes.func,
         navTree: PropTypes.array.isRequired,
         root: PropTypes.string,
-        searchable: PropTypes.bool
+        searchable: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -101,6 +105,10 @@ class AppFrame extends React.Component {
         this.state = {
             searchOpen: false
         };
+
+        if (!props.flags || !props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "AppFrame" });
+        }
     }
 
     /**
@@ -349,6 +357,7 @@ class AppFrame extends React.Component {
                 data-id={this.props["data-id"]}
             >
                 <HeaderBar
+                    flags={this.props.flags}
                     {...this._buildHeaderProps()}
                     navOptions={navOptions}
                     navSelected={this.props.root}

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import List from "./LinkDropDownList";
+import { deprecatedPropValues } from "../../util/DeprecationUtils";
 
 
 const TranslationIcon = (props) => {
@@ -22,6 +23,14 @@ const TranslationPicker = (props) => {
 
 TranslationPicker.propTypes = {
     "data-id": PropTypes.string,
+    flags: deprecatedPropValues({
+        customMessage: "Usage of the TranslationPicker without the use-portal flag has been deprecated." +
+        " When using this component, pass in flags=[\"use-portal\"] as a prop.",
+        propType: PropTypes.arrayOf(PropTypes.string),
+        values: [{
+            value: []
+        }]
+    }),
 };
 
 TranslationPicker.defaultProps = {

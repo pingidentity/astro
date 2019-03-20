@@ -549,21 +549,22 @@ describe("DetailsTooltip", function () {
     it("fires progressively stateful warning when p-stateful flag is not passed in", () => {
         console.warn = jest.fn();
         shallow(
-            <DetailsTooltip />
+            <DetailsTooltip flags={["use-portal"]} />
         );
 
         expect(console.warn).toHaveBeenCalledTimes(1);
     });
 
-    it("does not fire progressively stateful warning when p-stateful flag is passed in", () => {
+    it("fires Cannonball warning when use-portal isn't set", function() {
         console.warn = jest.fn();
-        shallow(
-            <DetailsTooltip
-                flags={["p-stateful"]}
-            />
-        );
+        getComponent({ flags: ["p-stateful"] });
+        expect(console.warn).toBeCalled();
+    });
 
-        expect(console.warn).toHaveBeenCalledTimes(0);
+    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal", "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
     });
 
     it("fires cannonball warning when using positionClassName prop", function() {

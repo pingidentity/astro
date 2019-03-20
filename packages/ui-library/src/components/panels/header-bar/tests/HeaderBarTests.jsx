@@ -541,4 +541,17 @@ describe("HeaderBar", function() {
         getWrappedComponent();
         expect(console.warn).toBeCalled();
     });
+
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getWrappedComponent();
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+        getWrappedComponent({ updated: true, flags: [ "use-portal" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
 });

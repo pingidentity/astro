@@ -8,6 +8,7 @@ import FormRadioGroup from "../forms/FormRadioGroup";
 
 import Utils from "../../util/Utils.js";
 import _ from "underscore";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
@@ -50,6 +51,12 @@ class ConditionalFieldsetStateless extends React.Component {
         selectedIndex: 0,
         supportEmpty: false,
     };
+
+    componentDidMount() {
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "ConditionalFieldset" });
+        }
+    }
 
     _handleSelectValueChange = (option) => {
         this.props.onValueChange(option.value);

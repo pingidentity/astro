@@ -1,6 +1,6 @@
 .popper-container {
     box-sizing: content-box;
-    z-index: 1500;
+    z-index: $zindex__popover;
 
     &[x-placement^='bottom'] {
         margin-top: 10px + $spacing-xs;
@@ -40,10 +40,6 @@
             left: 0;
             transform: translateX(-100%);
         }
-    }
-
-    &[x-out-of-boundaries] &__pointer {
-        visibility: hidden;
     }
 
     &.input-select {

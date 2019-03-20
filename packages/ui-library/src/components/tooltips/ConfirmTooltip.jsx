@@ -5,6 +5,7 @@ import DetailsTooltip, { DetailsTooltipStateless } from "../tooltips/DetailsTool
 
 import popsOver from "../../util/behaviors/popsOver";
 import ButtonGroup from "../layout/ButtonGroup";
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 /**
  * @class ConfirmTooltip
@@ -83,7 +84,14 @@ class ConfirmTooltipBase extends Component {
     static defaultProps = {
         "data-id": "confirm-tooltip",
         closeOnConfirm: false,
+        flags: [],
     };
+
+    componentDidMount() {
+        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+            cannonballPortalWarning({ name: "ConfirmTooltip" });
+        }
+    }
 
     _handleConfirm = e => {
         if (this.props.onConfirm) {

@@ -68,4 +68,16 @@ describe("FilterSelector", function () {
         expect(element.textContent).toEqual(labelText);
     });
 
+    it("fires Cannonball warning when use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getComponent();
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when use-portal is set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
 });
