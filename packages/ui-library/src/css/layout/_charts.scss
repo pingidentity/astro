@@ -130,6 +130,8 @@
     }
 
     .help-tooltip {
+        box-sizing: border-box;
+        padding-top: 12px;
         position: relative;
         height: $cell-size;
         width: $cell-size;
