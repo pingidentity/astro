@@ -142,5 +142,4 @@ describe("InlineMessage", function () {
             getComponent({ callback: jest.fn() });
         }).toThrow(expectedError);
     });
-
 });

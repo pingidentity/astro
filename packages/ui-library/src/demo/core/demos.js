@@ -1097,7 +1097,14 @@ module.exports = [
                         pathToSource: "templates_EndUserDevices.jsx.html",
                         fullscreen: true,
                         icon: "details"
-                    }
+                    },
+                    {
+                        label: "Notifications Whitelist User",
+                        demo: require("../../templates/NotificationsWhitelistUser"),
+                        pathToSource: "templates_NotificationsWhitelistUser.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
                 ]
             }
         ]

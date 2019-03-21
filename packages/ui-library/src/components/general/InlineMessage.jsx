@@ -40,11 +40,11 @@ var React = require("react"),
  *     Whether or not to surround the inline message with a border.
  * @param {boolean} [alternate]
  *     Warning message with full background color and no icon.
- *  @param {boolean} [fullwidth]
+ * @param {boolean} [fullwidth]
  *     when true creates a full page width inline message.
  * @param {InlineMessage~onClick} [onClick]
  *     Callback to be triggered when the button is clicked.
- *  @param {Array.InlineMessage~secondaryButtons} [secondaryButtons]
+ * @param {Array.InlineMessage~secondaryButtons} [secondaryButtons]
  *     List of secondary buttons
  *
  *
@@ -81,6 +81,7 @@ class InlineMessage extends React.Component {
 
     static defaultProps = {
         "data-id": "inline-message",
+        fullWidth: false,
         bordered: true,
         type: MessageTypes.NOTICE,
         secondaryButtons: []
@@ -103,15 +104,22 @@ class InlineMessage extends React.Component {
     };
 
     render() {
-        var className = classnames("inline-message", this.props.type, {
+        const className = classnames("inline-message", this.props.type, {
             "inline-message--borderless": !this.props.bordered,
             "inline-message--alternate": this.props.alternate,
             "inline-message--fullwidth": this.props.fullwidth
         });
 
+        const messageClassName = classnames(
+            "inline-message-text",
+            {
+                "inline-message-text--full-width": this.props.fullwidth
+            }
+        );
+
         return (
             <div data-id={this.props["data-id"]} className={classnames(className, this.props.className)}>
-                <div data-id="inline-message-text" className="inline-message-text">
+                <div data-id="inline-message-text" className={messageClassName}>
                     {this.props.children}
                 </div>
                 {
