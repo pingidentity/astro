@@ -1,6 +1,7 @@
 import Checkbox from '../components/Checkbox';
 import Dropdown from '../components/Dropdown';
 import DropdownCustom from '../components/DropdownCustom';
+import DropdownCustomSearchable from '../components/DropdownCustomSearchable';
 import Feedback from '../components/Feedback';
 import FloatLabelDropdown from '../components/FloatLabelDropdown';
 import FloatLabelDropdownCustom from '../components/FloatLabelDropdownCustom';
@@ -169,3 +170,29 @@ With a float label:
         value="Third Value"
     />
 </ComponentDemo>
+
+With searchable options:
+
+<ComponentDemo>
+    <DropdownCustomSearchable
+        id="dropdownCustom1"
+        open={false}
+        placeholder="Select one"
+        options={[ "+1 United States", "+44 United Kingdom", "+61 Australia" ]}
+    />
+</ComponentDemo>
+
+<ComponentDemo>
+    <DropdownCustomSearchable
+        id="dropdownCustom1"
+        open={true}
+        options={[ "+1 United States", "+44 United Kingdom", "+61 Australia" ]}
+    />
+</ComponentDemo>
+
+## Checkbox
+
+<ComponentDemo>
+    <Checkbox id="checkbox1" label="Label"/>
+</ComponentDemo>
+

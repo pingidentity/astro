@@ -37,4 +37,9 @@
             background-image: none;
         }
     }
+
+    &--dropdown-search {
+        border-width: 0 0 1px 0;
+        border-color: $color-neutral-70;
+    }
 }

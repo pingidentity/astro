@@ -1,5 +1,25 @@
 $caret-height: 16px;
 
+@mixin caret {
+    &:after {
+        content: '';
+        position: absolute;
+        right: $spacing-sm;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url('images/caret.svg') center no-repeat;
+        height: 8px;
+        width: 10px;
+        pointer-events: none;
+    }
+}
+
+@mixin rotate-caret {
+    &:after {
+        transform: translateY(-50%) rotate(180deg);
+    }
+}
+
 .dropdown {
     background: $color-neutral-100;
 
@@ -9,19 +29,10 @@ $caret-height: 16px;
 
     position: relative;
 
-    &:after {
-        content: '';
-        background: url('images/caret.svg') center no-repeat;
-        position: absolute;
-        height: $caret-height;
-        width: $caret-height;
-        right: $spacing-sm;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+    @include caret;
 
-    &--open:after {
-        transform: translateY(-50%) rotate(180deg);
+    &--open {
+        @include rotate-caret;
     }
 
     &__select,
@@ -72,6 +83,12 @@ $caret-height: 16px;
         list-style: none;
     }
 
+    &--cardwidth {
+        .dropdown__list {
+            width: 320px;
+        }
+    }
+
     &__option {
         @extend %option-text;
 
@@ -96,6 +113,37 @@ $caret-height: 16px;
                 vertical-align: middle;
             }
         }
+        &--search {
+            position: relative;
+        }
     }
 
+    &--search {
+        .dropdown__list {
+            position: absolute;
+            top: 0;
+        }
+        &.dropdown--open {
+            &:after {
+                content: none;
+            }
+            .dropdown__close {
+                @include caret();
+                @include rotate-caret;
+
+                display: block;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                width: 30px;
+                cursor: pointer;
+                background: none;
+                border: none;
+            }
+        }
+        .dropdown__close {
+            display: none;
+        }
+    }
 }

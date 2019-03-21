@@ -60,3 +60,39 @@ $input-placeholder-color: $color-neutral-30;
     font-size: $input-font-size;
     font-weight: 400;
 }
+
+// WIDTHS
+.input {
+    $divisions: 6;
+    $margin: $spacing-xs;
+
+    @mixin inputwidth($factor) {
+        $perc: round(100% * $factor/$divisions);
+
+        display: inline-block;
+        width: $perc;
+        &.input--margin {
+            width: calc(#{$perc} - #{$margin});
+            margin-right: $margin;
+        }
+    }
+
+    &--width-xs {
+        @include inputwidth(1);
+    }
+    &--width-sm {
+        @include inputwidth(2);
+    }
+    &--width-md {
+        @include inputwidth(3);
+    }
+    &--width-lg {
+        @include inputwidth(4);
+    }
+    &--width-xl {
+        @include inputwidth(5);
+    }
+    &--width-xx {
+        @include inputwidth(6);
+    }
+}

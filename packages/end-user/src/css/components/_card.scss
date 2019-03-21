@@ -20,6 +20,10 @@ $card-mobile-padding: $spacing-xx;
     &--wide {
         max-width: 550px;
     }
+    &--auto-height {
+        min-height: auto;
+    }
+
 }
 
 @media (max-width: $breakpoint-mobile) {

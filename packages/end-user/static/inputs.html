@@ -648,6 +648,126 @@
                 </div>
             </div>
         </div>
+        <p>With searchable options:</p>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="dropdown  dropdown--search">
+                    <input type="text"
+                        class="dropdown__input"
+                        id="dropdownCustom1"
+                        name="dropdownCustom1"
+                        placeholder="Select one"
+                        readonly="" /></div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustomSearchable</span>
+  <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom1"</span>
+  <span class="hljs-attr">open</span>=<span class="hljs-string">{false}</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"+<span class="hljs-attr">1</span> <span class="hljs-attr">United</span> <span class="hljs-attr">States</span>","+<span class="hljs-attr">44</span> <span class="hljs-attr">United</span> <span class="hljs-attr">Kingdom</span>","+<span class="hljs-attr">61</span> <span class="hljs-attr">Australia</span>"]}
+  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+ /&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown  dropdown--search"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
+        <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom1"</span>
+        <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom1"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div
+                    class="dropdown  dropdown--search dropdown--open">
+                    <input type="text"
+                        class="dropdown__input"
+                        id="dropdownCustom1"
+                        name="dropdownCustom1"
+                        readonly="" />
+                    <ul class="dropdown__list">
+                        <li
+                            class="dropdown__option--search">
+                            <input type="text"
+                                class="text-input text-input--dropdown-search"
+                                placeholder="Search" /><button
+                                class="dropdown__close"></button>
+                        </li>
+                        <li class="dropdown__option"
+                            value="+1 United States">+1
+                            United States</li>
+                        <li class="dropdown__option"
+                            value="+44 United Kingdom">+44
+                            United Kingdom</li>
+                        <li class="dropdown__option"
+                            value="+61 Australia">+61
+                            Australia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustomSearchable</span>
+  <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom1"</span>
+  <span class="hljs-attr">open</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"+<span class="hljs-attr">1</span> <span class="hljs-attr">United</span> <span class="hljs-attr">States</span>","+<span class="hljs-attr">44</span> <span class="hljs-attr">United</span> <span class="hljs-attr">Kingdom</span>","+<span class="hljs-attr">61</span> <span class="hljs-attr">Australia</span>"]}
+ /&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown  dropdown--search dropdown--open"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom1"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom1"</span>
+        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__list"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option--search"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+                <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--dropdown-search"</span>
+                <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Search"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__close"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">"+1 United States"</span>&gt;</span>+1 United States<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">"+44 United Kingdom"</span>&gt;</span>+44 United Kingdom
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"+61 Australia"</span>&gt;</span>
+            +61 Australia<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <h2 id="Checkbox">Checkbox</h2>
+        <div class="component-demo">
+            <div class="component-demo__preview"><label
+                    class="checkbox" for="checkbox1"><input
+                        type="checkbox"
+                        class="checkbox__input"
+                        id="checkbox1" /><span
+                        class="checkbox__standin"></span><span
+                        class="checkbox__label">Label</span></label>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">Checkbox</span>
+  <span class="hljs-attr">id</span>=<span class="hljs-string">"checkbox1"</span>
+  <span class="hljs-attr">label</span>=<span class="hljs-string">"Label"</span>
+ /&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"checkbox"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"checkbox1"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">"checkbox"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"checkbox__input"</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"checkbox1"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+        <span class="hljs-attr">class</span>=<span class="hljs-string">"checkbox__standin"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+        <span class="hljs-attr">class</span>=<span class="hljs-string">"checkbox__label"</span>&gt;</span>Label<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
     </div>
