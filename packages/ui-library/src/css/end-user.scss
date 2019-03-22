@@ -9,6 +9,33 @@
 @import './tables.scss';
 @import './tabs.scss';
 @import './details-tooltip.scss';
+
+//from Layout. Needed for messages but don't want to include everything else
+$layout-header-height: 46px;
+
+
+@mixin message-button-css {
+    button,
+    .button {
+        background-color: transparent;
+        color: $color-white;
+        border-color: $color-white;
+        vertical-align: baseline;
+    }
+}
+@mixin message-primary-button-css ($color) {
+    .button,
+    button {
+        &.inline.primary {
+            border: 1px solid $color-white;
+            background-color: $color-white;
+            color: $color;
+        }
+    }
+}
+
+@import './layout/messages';
+
 @import 'end-user/_user-nav.scss';
 @import 'end-user/_device-table.scss';
 @import 'end-user/_card-modal.scss';
