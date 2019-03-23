@@ -5,6 +5,9 @@ var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils");
 
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { inStateContainer } from "../utils/StateContainer";
+
 /**
 * @typedef RockerButton~labelValues
 * @property {string} label
@@ -36,6 +39,8 @@ var React = require("react"),
 *
 * @param {array} labels
 *     Array of label strings to use as button titles.
+* @param {array} [flags]
+*     Set the flag to use Pstateful
 *
 * @param {RockerButton~onValueChange} [onValueChange]
 *     Callback to be triggered when selection changes.
@@ -57,44 +62,61 @@ var React = require("react"),
 *      }
 */
 
-module.exports = class extends React.Component {
+export default class RockerButton extends React.Component {
 
     static propTypes = {
-        stateless: PropTypes.bool
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful"])),
     };
 
     static defaultProps = {
-        stateless: false
+        stateless: false,
+        flags: [],
     };
 
-    constructor(props) {
-        super(props);
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballChangeWarning({
+                message: `The 'selectedIndex' prop will no longer serve as an initial state. ` +
+                `If it is present, it will control the current value of the component. ` +
+                `Set the 'p-stateful' flag to switch to this behavior now.`,
+            });
+        }
+
         if (!Utils.isProduction()) {
-            if (props.controlled !== undefined) {
+            if (this.props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (props.id) {
+            if (this.props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (props.onChange) {
+            if (this.props.onChange) {
                 throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
-            if (props.labels && (props.labels.length < 2 || props.labels.length > 4)) {
-                console.warn("RockerButton expecting two to four labels, but was given ", props.labels.length);
+            if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
+                console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
             }
-            if (props.stateless === false) {
+            if (this.props.stateless === false) {
                 console.warn("Deprecated: the stateful option for this component will be removed in next version");
             }
         }
     }
 
+
     render() {
+        if (this.props.flags.includes("p-stateful")) {
+            return <PStatefulRockerButton {...this.props} />;
+        }
+
         return (
             this.props.stateless
                 ? <RockerButtonStateless ref="RockerButtonStateless" {...this.props} />
                 : <RockerButtonStateful ref="RockerButtonStateful" {...this.props} />);
     }
-};
+}
+
 
 class RockerButtonStateless extends React.Component {
     static propTypes = {
@@ -122,9 +144,8 @@ class RockerButtonStateless extends React.Component {
             return;
         }
 
-        if (this.props.onValueChange) {
-            this.props.onValueChange({ label: label, index: index });
-        }
+        this.props.onValueChange({ label: label, index: index });
+
     };
 
     render() {
@@ -175,6 +196,7 @@ RockerButtonLabel.propTypes = {
     index: PropTypes.number
 };
 
+
 class RockerButtonStateful extends React.Component {
     state = {
         selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected))
@@ -205,3 +227,19 @@ class RockerButtonStateful extends React.Component {
         return <RockerButtonStateless {...props} />;
     }
 }
+
+const PStatefulRockerButton = inStateContainer([
+    {
+        name: "selectedIndex",
+        initial: 0,
+        callbacks: [
+            {
+                name: "onValueChange",
+                transform: ({ index }) => index
+            }
+        ],
+    }
+])(RockerButtonStateless);
+
+PStatefulRockerButton.displayName = "PStatefulRockerButton";
+

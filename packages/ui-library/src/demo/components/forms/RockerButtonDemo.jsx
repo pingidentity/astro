@@ -6,7 +6,13 @@ var React = require("react"),
 * @memberof RockerButton
 * @desc A demo for RockerButton
 */
+
+const labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
+const years = ["3M", "6M", "1Y"];
+const days = ["1D", "1W", "1M"];
 class RockerButtonDemo extends React.Component {
+    static flags = ["p-stateful"]
+
     state = {
         selectedLabel: "Label One",
         selectedIndex: 0
@@ -20,16 +26,13 @@ class RockerButtonDemo extends React.Component {
     };
 
     render() {
-        var labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
-        var years = ["3M", "6M", "1Y"];
-        var days = ["1D", "1W", "1M"];
-
         return (
             <div>
                 <RockerButton
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={labels}
+                    flags={this.props.flags}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
 
@@ -39,6 +42,7 @@ class RockerButtonDemo extends React.Component {
                     stateless={false}
                     disabled={true}
                     labels={labels}
+                    flags={this.props.flags}
                 />
                 <div>Disabled rocker button.</div>
 
@@ -49,6 +53,7 @@ class RockerButtonDemo extends React.Component {
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={years}
+                    flags={this.props.flags}
                 />
                 <div>chart rocker button</div>
 
@@ -59,6 +64,7 @@ class RockerButtonDemo extends React.Component {
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={days}
+                    flags={this.props.flags}
                 />
                 <div>small chart rocker button</div>
             </div>
