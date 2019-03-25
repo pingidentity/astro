@@ -688,7 +688,7 @@ class FormDropDownListStateless extends React.Component {
             disabled = group && group.disabled,
             className = classnames("select-option", {
                 highlighted: !disabled && index === this.props.searchIndex,
-                selected: option.value === (this.props.selectedOption && this.props.selectedOption.label),
+                selected: option.value === (this.props.selectedOption && this.props.selectedOption.value),
                 disabled: disabled
             });
 

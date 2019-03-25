@@ -850,4 +850,18 @@ describe("FormDropDownList", function () {
 
         expect(newData.styles.minWidth).toEqual(`${width}px`);
     });
+
+    it("shows selected option", function () {
+        const selectedOption= { label: "Two", value: 2 };
+        const component = getComponent({
+            open: true,
+            selectedOption
+        });
+
+        const selected = TestUtils.findRenderedDOMNodeWithClass(component, "selected");
+        const secondOption = TestUtils.findRenderedDOMNodeWithDataId(component, "option-1");
+
+        expect(selected).toEqual(secondOption);
+
+    });
 });
