@@ -4,7 +4,9 @@ import ReactDOM from "react-dom";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import _ from "underscore";
 import Utils from "../../util/Utils.js";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import Popover from "../tooltips/Popover";
+import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 
 /**
  * @callback DropDownButton~onValueChange
@@ -244,7 +246,20 @@ class Stateful extends Component {
     }
 }
 
-module.exports = class DropDownButton extends Component {
+const PStatefulDropDownButton = inStateContainer([
+    {
+        name: "open",
+        initial: false,
+        callbacks: [
+            {
+                name: "onToggle",
+                transform: toggleTransform,
+            }
+        ],
+    }
+])(Stateless);
+
+export default class DropDownButton extends Component {
     static displayName = "DropDownButton";
 
     static propTypes = {
@@ -257,18 +272,29 @@ module.exports = class DropDownButton extends Component {
         open: PropTypes.bool,
         renderButton: PropTypes.func,
         label: PropTypes.string,
-        title: PropTypes.string
+        title: PropTypes.string,
+        flags: PropTypes.arrayOf(PropTypes.string)
     };
 
     static defaultProps = {
         "data-id": "drop-down-button",
         stateless: false,
-        open: false
+        flags: []
     };
 
     render() {
+        if (this.props.flags.includes("p-stateful")) {
+            return <PStatefulDropDownButton {...this.props} />;
+        }
+
+        cannonballChangeWarning({
+            message: `The 'open' prop will no longer serve as an initial state. ` +
+            `If it is present, it will control the current value of the component. ` +
+            `Set the 'p-stateful' flag to switch to this behavior now.`,
+        });
+
         return this.props.stateless
             ? <Stateless {..._.defaults({ ref: "Stateless" }, this.props)} />
             : <Stateful {..._.defaults({ ref: "Stateful" }, this.props)} />;
     }
-};
+}

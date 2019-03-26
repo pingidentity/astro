@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 jest.dontMock("../DropDownButton");
 jest.dontMock("../../../util/EventUtils.js");
+import { mount } from "enzyme";
 
 describe("DropDownButton", function () {
 
@@ -454,5 +455,23 @@ describe("DropDownButton", function () {
 
         const option = TestUtils.findRenderedDOMNodeWithDataId(component, "one");
         expect(option).toBeTruthy();
+    });
+
+    it("p-stateful version of component correctly opens and closes", () => {
+        const component = mount(
+            <DropDownButton
+                flags={["p-stateful"]}
+                label="Label"
+                options={{
+                    one: "one"
+                }}
+            />
+        );
+
+        expect(component.find(".dropdown-button__options").exists()).toEqual(false);
+
+        component.find("[data-id=\"action\"]").simulate("click");
+
+        expect(component.find(".dropdown-button__options").exists()).toEqual(true);
     });
 });

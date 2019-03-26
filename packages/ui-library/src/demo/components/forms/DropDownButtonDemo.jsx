@@ -1,15 +1,27 @@
-var React = require("react"),
-    DropDownButton = require("../../../components/forms/DropDownButton");
+import React, { Component } from "react";
+import DropDownButton from "../../../components/forms/DropDownButton";
 
 /**
 * @name DropDownButtonDemo
 * @memberof DropDownButton
 * @desc A demo for DropDownButton
 */
-class DropDownButtonDemo extends React.Component {
+export default class DropDownButtonDemo extends Component {
+    static flags = ["p-stateful"]
+
     state = {
         selectedLabel: "None.",
         open: false
+    };
+
+    _dropDownOptions = {
+        optionOne: "Option One",
+        optionTwo: "Option Two",
+        optionThree: "Option Three",
+        optionFour: "Option Four",
+        optionFive: "Option Five",
+        optionSix: "Option Six",
+        optionSeven: "Option Seven"
     };
 
     _onToggle = () => {
@@ -18,42 +30,24 @@ class DropDownButtonDemo extends React.Component {
         });
     };
 
-    _onValueChange = (selectedLabel) => {
+    _onValueChange = (selectedLabel) =>
         this.setState({
-            selectedLabel: this._dropDownOptions()[selectedLabel],
+            selectedLabel: this._dropDownOptions[selectedLabel],
             open: false
         });
-    };
-
-    _dropDownOptions = () => {
-
-        var menu = {
-            optionOne: "Option One",
-            optionTwo: "Option Two",
-            optionThree: "Option Three",
-            optionFour: "Option Four",
-            optionFive: "Option Five",
-            optionSix: "Option Six",
-            optionSeven: "Option Seven"
-        };
-
-        return menu;
-    };
 
     render() {
-
-        var optionsMenu = this._dropDownOptions();
-
         return (
             <div>
                 <DropDownButton
+                    flags={this.props.flags}
                     title="Options Title"
                     label="New Option"
                     onValueChange={this._onValueChange}
                     onToggle={this._onToggle}
                     open={this.state.open}
                     stateless={true}
-                    options={optionsMenu}
+                    options={this._dropDownOptions}
                 />
                 <br/><br/>
                 <div>
@@ -63,5 +57,3 @@ class DropDownButtonDemo extends React.Component {
         );
     }
 }
-
-module.exports = DropDownButtonDemo;
