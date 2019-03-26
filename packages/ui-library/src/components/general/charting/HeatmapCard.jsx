@@ -151,57 +151,54 @@ class HeatMapCard extends React.Component {
         };
     }
 
-    _renderCells() {
-        const dataMinMax = this._getDataMinMax();
-        const dataMin = dataMinMax.min;
-        const dataRange = dataMinMax.max - dataMinMax.min;
+    _renderCells = (dataRange, min) => this.props.data.map((rowData, rowIndex) => {
+        return (
+            <div className="heatmap__row" key={`row-${rowIndex}`}>
+                {rowData.map((cellData, cellIndex) => {
+                    const rowLabel = cellIndex === 0 ? (
+                        <div
+                            className="heatmap__ylabel"
+                            data-id={`${this.props["data-id"]}-chart-ylabel-${rowIndex}`}
+                            key={`row-label-${rowIndex}`}>
+                            {this.props.yAxisLabels[rowIndex]}
+                        </div>
+                    ) : null;
+                    let cellContent, cellValue;
 
-        return this.props.data.map((rowData, rowIndex) => {
-            return (
-                <div className="heatmap__row" key={`row-${rowIndex}`}>
-                    {rowData.map((cellData, cellIndex) => {
-                        const rowLabel = cellIndex === 0 ? (
+                    if (typeof cellData === "object") {
+                        cellContent = this.props.tooltipRenderer(cellData, this.props);
+                        cellValue = cellData[this.props.valueKey];
+                    } else {
+                        cellContent = cellData;
+                        cellValue = cellData;
+                    }
+
+                    const cellAlpha = (dataRange === 0 && min === 0) ? 0 : (cellValue - min) / dataRange;
+
+
+                    return ([
+                        rowLabel,
+                        <HelpHint
+                            delayHide={0}
+                            hintText={cellContent}
+                            key={`cell-${rowIndex}-${cellIndex}`}
+                            placement={HelpHint.Placements.BOTTOM}
+                            type={HelpHint.Types.LIGHT}
+                            triggerClassName="heatmap__cell-color">
                             <div
-                                className="heatmap__ylabel"
-                                data-id={`${this.props["data-id"]}-chart-ylabel-${rowIndex}`}
-                                key={`row-label-${rowIndex}`}>
-                                {this.props.yAxisLabels[rowIndex]}
-                            </div>
-                        ) : null;
-                        let cellContent, cellValue;
-
-                        if (typeof cellData === "object") {
-                            cellContent = this.props.tooltipRenderer(cellData, this.props);
-                            cellValue = cellData[this.props.valueKey];
-                        } else {
-                            cellContent = cellData;
-                            cellValue = cellData;
-                        }
-
-                        const cellApha = (cellValue - dataMin) / dataRange;
-
-                        return ([
-                            rowLabel,
-                            <HelpHint
-                                delayHide={0}
-                                hintText={cellContent}
-                                key={`cell-${rowIndex}-${cellIndex}`}
-                                placement={HelpHint.Placements.BOTTOM}
-                                type={HelpHint.Types.LIGHT}
-                                triggerClassName="heatmap__cell-color">
-                                <div
-                                    className="heatmap__cell-color"
-                                    style={{
-                                        backgroundColor: Utils.HexToRgba(this.props.heatColor, cellApha)
-                                    }}
-                                />
-                            </HelpHint>
-                        ]);
-                    })}
-                </div>
-            );
-        });
-    }
+                                className="heatmap__cell-color"
+                                style={{
+                                    backgroundColor: Utils.HexToRgba(
+                                        this.props.heatColor, cellAlpha
+                                    )
+                                }}
+                            />
+                        </HelpHint>
+                    ]);
+                })}
+            </div>
+        );
+    });
 
     _renderXAxis() {
         //  first/hard-coded div is a spacer to clear the y-axis labels
@@ -226,6 +223,8 @@ class HeatMapCard extends React.Component {
 
     render() {
         const dataId = this.props["data-id"];
+        const { min, max } = this._getDataMinMax();
+        const dataRange = max - min;
         const rockerButtonDefaults = {
             "data-id": `${dataId}-range-selector`,
             className: "rocker-button--chart-rocker heatmap-card__range-selector",
@@ -251,9 +250,11 @@ class HeatMapCard extends React.Component {
                                 <div
                                     className="heatmap"
                                     data-id={`${dataId}-chart`}
-                                    style={{ backgroundColor: Utils.HexToRgba(this.props.heatColor, 0.1) }}>
+                                    style={{ backgroundColor: Utils.HexToRgba(
+                                        this.props.heatColor, 0.1)
+                                    }}>
                                     {this._renderXAxis()}
-                                    {this._renderCells()}
+                                    {this._renderCells(dataRange, min)}
                                 </div>
                                 <div>
                                     {this.props.rockerButtonProps

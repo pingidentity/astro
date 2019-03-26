@@ -212,4 +212,23 @@ describe("HeatmapCard", function () {
         const lastCellColor = TestUtils.findRenderedDOMNodeWithClass(lastCell, "heatmap__cell-color");
         expect(JSON.stringify(lastCellColor.style)).toContain("rgb(255, 0, 0)");
     });
+
+    it("renders cells if value are all 0's", function () {
+        const zeroData = [
+            [0, 0, 0, 0],
+
+        ];
+        const component = getComponent({
+            data: zeroData,
+        });
+        const rows = TestUtils.scryRenderedDOMNodesWithClass(component, "heatmap__row");
+
+        const firstRow = rows[1]; // skip x-axis labels (+1)
+        const zeroRowCells = TestUtils.scryRenderedDOMNodesWithClass(firstRow, "help-tooltip");
+        const zeroCell = zeroRowCells[0];
+        const zeroCellColor = TestUtils.findRenderedDOMNodeWithClass(zeroCell, "heatmap__cell-color");
+
+        expect(zeroCellColor.style._values["background-color"]).toEqual("rgba(255, 0, 0, 0)");
+
+    });
 });
