@@ -12,19 +12,19 @@ describe("Flex Row", () => {
     it("renders with correct center alignment class", () => {
         const component = shallow(<FlexRow alignment={alignments.CENTER} />);
 
-        expect(component.find(".flex-row--center-aligned").exists()).toBeTruthy();
+        expect(component.find(".flex-row--align-center").exists()).toBeTruthy();
     });
 
     it("renders with correct top alignment class", () => {
         const component = shallow(<FlexRow alignment={alignments.TOP} />);
 
-        expect(component.find(".flex-row--top-aligned").exists()).toBeTruthy();
+        expect(component.find(".flex-row--align-top").exists()).toBeTruthy();
     });
 
     it("renders with correct bottom alignment class", () => {
         const component = shallow(<FlexRow alignment={alignments.BOTTOM} />);
 
-        expect(component.find(".flex-row--bottom-aligned").exists()).toBeTruthy();
+        expect(component.find(".flex-row--align-bottom").exists()).toBeTruthy();
     });
 
     it("renders with correct center justify class", () => {

@@ -18,12 +18,12 @@ export const justifyOptions = {
 const getAlignmentClass = alignment => {
     switch (alignment) {
         case alignments.CENTER:
-            return "flex-row--center-aligned";
+            return "flex-row--align-center";
         case alignments.TOP:
-            return "flex-row--top-aligned";
+            return "flex-row--align-top";
         case alignments.BOTTOM:
         default:
-            return "flex-row--bottom-aligned";
+            return "flex-row--align-bottom";
     }
 };
 

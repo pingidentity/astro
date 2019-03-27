@@ -3,7 +3,6 @@ import FormTextField from "../../../components/forms/form-text-field";
 import InputWidths from "../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
 
-
 /**
 * @name FormTextFieldDemo
 * @memberof FormTextField
@@ -236,7 +235,23 @@ class FormTextFieldDemo extends React.Component {
                         flags={flags}
                         labelText="Read-only"
                         value="text content cannot be edited"
-                        readOnly={true}
+                        readOnly
+                        width={InputWidths.MD}
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextField
+                        flags={flags}
+                        labelText="Read-only with arrow"
+                        value="text content cannot be edited"
+                        readOnly
+                        width={InputWidths.MD}
+                        withArrow
+                    />
+                    <FormTextField
+                        flags={flags}
+                        labelText="Other text"
+                        stateless={false}
                         width={InputWidths.MD}
                     />
                 </InputRow>

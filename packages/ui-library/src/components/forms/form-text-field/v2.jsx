@@ -12,6 +12,7 @@ import Translator from "../../../util/i18n/Translator.js";
 
 import _ from "underscore";
 import Utils from "../../../util/Utils.js";
+import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 
@@ -112,7 +113,7 @@ import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 * @param {string} [placeholder]
 *     Placeholder text for the input field.
 * @param {number} [type]
-*     An input type to be applied to the input. The input type often adds easily accessable and type-specific input
+*     An input type to be applied to the input. The input type often adds easily accessible and type-specific input
 *     controls that often makes it easier to enter the field data.
 * @param {string|number} [value=""]
 *     Current text field value.
@@ -163,9 +164,9 @@ import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 * @param {FormTextField~onSave} [onSave]
 *     Callback to be triggered when the 'save' icon is clicked.
 * @param {FormTextField~onUndo} [onUndo]
-*     Callback to be triggred when the 'undo' icon is clicked.
+*     Callback to be triggered when the 'undo' icon is clicked.
 * @param {FormTextField~onToggleReveal} [onToggleReveal]
-*    Callack to be triggered when the 'reveal' button is clicked.
+*    Callback to be triggered when the 'reveal' button is clicked.
 *
 * @param {object} [controls]
 *    Accepts a React object for extra controls. Used with FormIntegerField.
@@ -239,6 +240,7 @@ class Stateless extends React.Component {
         showSave: PropTypes.bool,
         showUndo: PropTypes.bool,
         width: PropTypes.oneOf(InputWidthProptypes),
+        withArrow: PropTypes.bool
     };
 
     static defaultProps = {
@@ -384,7 +386,7 @@ class Stateless extends React.Component {
             this.contentMeasurerContainer.setAttribute("style", containerStyles);
             this.contentMeasurerInput.setAttribute("style", inputStyles);
 
-            // get intitial width for later use
+            // get initial width for later use
             this.initialInputWidth = label.offsetWidth;
 
             // detect if IE and set password character for later use
@@ -397,10 +399,10 @@ class Stateless extends React.Component {
 
             this.lastValue = this.props.value;
 
-            // initial call with long content was measuring wrong width - delay allows for comnplete loading of DOM
-            setTimeout(function () {
+            // initial call with long content was measuring wrong width - delay allows for complete loading of DOM
+            setTimeout(() => {
                 this._setFlexWidth();
-            }.bind(this), 10);
+            }, 10);
         }
     }
 
@@ -450,6 +452,7 @@ class Stateless extends React.Component {
                 "value-entered": this.props.value || this.props.value !== "",
                 "input-text--right-icon": this.props.iconRight,
                 "input-text--left-icon": this.props.iconLeft,
+                "input-text--right-arrow": this.props.withArrow
             }
         );
 
@@ -464,7 +467,18 @@ class Stateless extends React.Component {
                 helpClassName={this.props.helpClassName}
                 style={this.state.labelWidth ? { width: this.state.labelWidth } : null}>
 
-                <span className="input-container" ref="input-container" onClick={this.props.onClick}>
+                <span
+                    className={
+                        classnames(
+                            "input-container",
+                            {
+                                "input-text__container--right-arrow": this.props.withArrow
+                            }
+                        )
+                    }
+                    ref="input-container"
+                    onClick={this.props.onClick}
+                >
                     <input
                         className={this.props.inputClassName}
                         onFocus={this._handleFocus}
@@ -490,13 +504,13 @@ class Stateless extends React.Component {
                         <div
                             data-id={dataId + "-content-measurer"}
                             className="content-measurer"
-                            ref={function (node) { this.contentMeasurerLabel = node; }.bind(this)}>
+                            ref={node => { this.contentMeasurerLabel = node; }}>
                             <div
                                 className="content-measurer-container"
-                                ref={function (node) { this.contentMeasurerContainer = node; }.bind(this)}>
+                                ref={node => { this.contentMeasurerContainer = node; }}>
                                 <div
                                     className="content-measurer-input"
-                                    ref={function (node) { this.contentMeasurerInput = node; }.bind(this)}
+                                    ref={node => { this.contentMeasurerInput = node; }}
                                 />
                             </div>
                         </div>
@@ -590,7 +604,7 @@ class Stateful extends React.Component {
             onValueChange: this._handleValueChange
         }, this.props);
 
-        return React.createElement(Stateless, props);
+        return <Stateless {...props} />;
     }
 }
 
@@ -631,18 +645,30 @@ class FormTextField extends React.Component {
         }
     }
 
-    _usePStateful = () => this.props.flags.findIndex(item => item === "p-stateful") >= 0;
+    _usePStateful = () => this.props.flags.includes("p-stateful");
 
     render() {
         if (this._usePStateful()) {
             return <PStatefulFormTextField {...this.props} />;
         }
 
+        cannonballChangeWarning({
+            message: `The 'reveal' prop will no longer serve as an initial state. ` +
+            `If it is present, it will control the current value of the component. ` +
+            `Set the 'p-stateful' flag to switch to this behavior now.`,
+        });
+
+        cannonballChangeWarning({
+            message: `The 'value' prop will no longer serve as an initial state. ` +
+            `If it is present, it will control the current value of the component. ` +
+            `Set the 'p-stateful' flag to switch to this behavior now.`,
+        });
+
         return (this.props.stateless
-            ? React.createElement(Stateless, _.defaults({ ref: "stateless" }, this.props)) //eslint-disable-line no-use-before-define
-            : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line no-use-before-define
+            ? <Stateless ref="stateless" {...this.props} />
+            : <Stateful ref="stateful" {...this.props} />
+        );
     }
 }
-
 
 export default FormTextField;

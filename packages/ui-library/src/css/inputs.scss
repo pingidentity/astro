@@ -3188,3 +3188,37 @@ label.input-text--right-icon {
         padding-right: $spacing-xl;
     }
 }
+
+.input-text {
+    &--right-arrow {
+        margin-right: calc(#{$spacing-xl} + #{$spacing-md});
+    }
+
+    &__container {
+        &--right-arrow {
+            //margin-right: $spacing-xl;
+            width: 100%;
+            &:after {
+                @include transform(rotate(-135deg));
+                content: '';
+                border: solid $color-neutral-70;
+                border-width: 0 0 1px 1px;
+                width: 10px;
+                height: 10px;
+                line-height: 0;
+                font-size: 0;
+                position: absolute;
+                right: -$spacing-xl;
+                bottom: 37%;
+            }
+            &:before {
+                content: '';
+                border: 0.5px solid $color-neutral-70;
+                position: absolute;
+                bottom: 50%;
+                width: $spacing-xl;
+                right: -$spacing-xl;
+            }
+        }
+    }
+}
