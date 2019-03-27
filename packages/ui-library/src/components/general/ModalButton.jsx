@@ -8,6 +8,8 @@ import Utils from "../../util/Utils";
 import Button from "../buttons/Button";
 import Modal from "./Modal";
 import { deprecatedPropValues } from "../../util/DeprecationUtils";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { inStateContainer } from "../utils/StateContainer";
 
 /**
  * @callback ModalButton~contentCallback
@@ -41,7 +43,8 @@ import { deprecatedPropValues } from "../../util/DeprecationUtils";
  *     and closing the modal must be managed externally.
  *
  *  @param {array} [flags]
- *     Set the flag for "use-portal" to render with react-portal
+ *     Set the flag for "use-portal" to render with react-portal and/or
+ *     set "p-stateful" to render the component progressively stateful.
  * @param {function} [onOpen]
  *     Callback to be triggered when the activator is clicked and the modal is about to open.
  *     If this function returns false, the opening will be prevented.
@@ -164,7 +167,7 @@ class ModalButtonStateless extends React.Component {
         showHeader: true,
         maximize: false,
         type: Modal.Type.BASIC,
-        flags: [],
+        flags: []
     };
 
     constructor(props) {
@@ -197,7 +200,7 @@ class ModalButtonStateless extends React.Component {
         }
     }
 
-    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+    _usePortal = () => this.props.flags.includes(item => item === "use-portal");
 
     close = () => {
         this.props.onClose();
@@ -305,9 +308,7 @@ class ModalButtonStateful extends React.Component {
      */
     _handleOpen = () => {
         if (!this.props.disabled && !this._isExpanded()) {
-            if (this.props.onOpen) {
-                this.props.onOpen();
-            }
+            this.props.onOpen();
 
             this.setState({
                 expanded: true
@@ -321,7 +322,7 @@ class ModalButtonStateful extends React.Component {
      */
     _handleClose = () => {
         if (!this.props.disabled && this._isExpanded()) {
-            var doClose = this.props.onClose ? this.props.onClose() : true;
+            const doClose = this.props.onClose() !== false;
 
             // Prevent closing if close callback returned false
             if (doClose) {
@@ -362,22 +363,43 @@ class ModalButtonStateful extends React.Component {
             this.props
         );
 
-        return React.createElement(ModalButtonStateless, props);
+        return <ModalButtonStateless {...props} />;
     }
 }
 
-class ModalButton extends React.Component {
+export default class ModalButton extends React.Component {
     static displayName = "ModalButton";
 
     static propTypes = {
-        stateless: PropTypes.bool
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful", "use-portal"])),
     };
 
     static defaultProps = {
-        stateless: false
-    };
+        stateless: false,
+        flags: [],
+        onOpen: () => {},
+        onClose: () => {}
+    }
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballChangeWarning({
+                message: `The 'onOpen' prop will no longer serve as an initial state. ` +
+                `If it is present, it will control the current value of the component. ` +
+                `Set the 'p-stateful' flag to switch to this behavior now.`,
+            });
+        }
+    }
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
 
     render() {
+
+        if (this._usePStateful()) {
+            return <PStatefulModalButton {...this.props} />;
+        }
+
         return (
             this.props.stateless
                 ? React.createElement(
@@ -391,6 +413,24 @@ class ModalButton extends React.Component {
         );
     }
 }
+
+const PStatefulModalButton = inStateContainer([
+    {
+        name: "expanded",
+        initial: false,
+        callbacks: [
+            {
+                name: "onOpen",
+                transform: () => true
+            },
+            {
+                name: "onClose",
+                transform: () => false
+            }
+        ],
+    },
+
+])(ModalButtonStateless);
 
 /**
 * @callback ModalButton#ModalActivator~onOpen
@@ -507,5 +547,3 @@ class ModalActivator extends React.Component {
 }
 
 ModalButton.Modal = Modal;
-
-module.exports = ModalButton;

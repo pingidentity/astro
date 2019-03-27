@@ -11,7 +11,7 @@ const NUM_STATELESS_DEMOS = 3;
 * @desc A demo for ModalButton
 */
 class ModalButtonDemo extends React.Component {
-    static flags = [ "use-portal" ];
+    static flags = [ "use-portal", "p-stateful" ];
 
     constructor(props) {
         super(props);

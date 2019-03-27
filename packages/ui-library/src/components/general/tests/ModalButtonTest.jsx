@@ -1,5 +1,8 @@
 "use strict";
 
+import { mount } from "enzyme";
+import StateContainer from "../../utils/StateContainer";
+
 jest.dontMock("../ModalButton");
 jest.dontMock("../Modal");
 jest.dontMock("../If");
@@ -415,6 +418,110 @@ describe("ModalButtonTest", function () {
         expect(function () {
             getComponent({ buttonStyle: "foo" });
         }).toThrow(expectedError);
+    });
+
+    it ("throws the Cannonball warning when value is provided to a stateful rocker button", function() {
+        console.warn = jest.fn();
+
+        expect(console.warn).not.toBeCalled();
+        getComponent({ stateless: false, activatorButtonLabel: "something" });
+        expect(console.warn).toBeCalled();
+    });
+
+    it ("throws the Cannonball warning when value is not provided to a stateless rocker button", function() {
+        console.warn = jest.fn();
+
+        expect(console.warn).not.toBeCalled();
+        getComponent({ stateless: true });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("fires Cannonball warning for p-stateful", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal" ] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warnings if required flags are provided", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it(" renders p-stateful version of component", () => {
+        const modal = mount(
+            <ModalButton
+                flags={["p-stateful"]}
+                activatorButtonLabel="Open Default Modal"
+            />
+        );
+        expect(modal.find(StateContainer).exists()).toBeTruthy();
+
+    });
+
+    it("p-stateful opened on click", function () {
+        const component = getComponent({
+            flags: [ "p-stateful" ]
+        });
+
+        // Expect a single button to be rendered.
+        const button = TestUtils.findRenderedDOMNodeWithClass(component, "buttonClass");
+
+        // Expect no modal to be rendered.
+        const modals = TestUtils.scryRenderedDOMNodesWithClass(component, "modal");
+        expect(modals.length).toEqual(0);
+
+        // Callback should not have been called yet
+        expect(component.props.onOpen.mock.calls.length).toBe(0);
+
+        ReactTestUtils.Simulate.click(button);
+
+        // Expect a single shown modal to be rendered after click.
+        const modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
+        TestUtils.findRenderedDOMNodeWithClass(modal, "show");
+
+        // Callback should have been called one time for the one click
+        expect(component.props.onOpen.mock.calls.length).toBe(1);
+    });
+
+    it("p-stateful open and closes modal", function () {
+        const component = getComponent({
+            flags: [ "p-stateful" ]
+        });
+
+        const button = TestUtils.findRenderedDOMNodeWithClass(component, "buttonClass");
+
+        // Expect no modal to be rendered.
+        let modals = TestUtils.scryRenderedDOMNodesWithClass(component, "modal");
+        expect(modals.length).toBe(0);
+
+        // Callback should not have been called yet
+        expect(component.props.onOpen.mock.calls.length).toBe(0);
+        expect(component.props.onClose.mock.calls.length).toBe(0);
+
+
+        // --- Open Modal
+        ReactTestUtils.Simulate.click(button);
+
+        // Expect a single shown modal to be rendered after click.
+        const modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
+        TestUtils.findRenderedDOMNodeWithClass(modal, "show");
+
+        // Open callback should have been called one time for the one click
+        expect(component.props.onOpen.mock.calls.length).toBe(1);
+        expect(component.props.onClose.mock.calls.length).toBe(0);
+
+        // --- Close modal
+        const closeLink = TestUtils.findRenderedDOMNodeWithClass(component, "close-modal");
+        ReactTestUtils.Simulate.click(closeLink);
+
+        // Expect no modal to be rendered
+        modals = TestUtils.scryRenderedDOMNodesWithClass(component, "modal");
+        expect(modals.length).toBe(0);
+
+        // Should be a single call to each callback now
+        expect(component.props.onOpen.mock.calls.length).toBe(1);
+        expect(component.props.onClose.mock.calls.length).toBe(1);
     });
 
 });
