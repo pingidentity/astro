@@ -71,7 +71,7 @@ const Icon = ({
         });
 
     if (type === "inline") {
-        return <span data-id={dataId} className={iconClassName} />;
+        return <span data-id={dataId} className={getIconClassName(props)} />;
     } else if (type !== "leading" && !children) {
         cannonballChangeWarning({
             message: (
