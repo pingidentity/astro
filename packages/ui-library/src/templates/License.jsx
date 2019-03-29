@@ -9,6 +9,7 @@ import Stack from "../components/layout/Stack";
 import Icon from "../components/general/Icon";
 import Link from "../components/general/Link";
 import FormattedContent from "../components/general/FormattedContent";
+import HR from "../components/general/HR";
 
 export default class License extends Component {
     render () {
@@ -30,7 +31,7 @@ export default class License extends Component {
                             </Text>
                         </Layout.Column>
                     </Stack>
-                    <hr className="hr" />
+                    <HR />
                     <Layout.Row className="columns-width-auto">
                         <Layout.Column>
                             <Icon iconName="earth" iconSize="xl" title="environments">
@@ -56,7 +57,7 @@ export default class License extends Component {
                             </Icon>
                         </Layout.Column>
                     </Layout.Row>
-                    <hr className="hr" />
+                    <HR />
                     <Stack gap="SM">
                         <Link title="Compare plans" url="#" type="block"/>
                         <Link title="Terms of service" url="#" type="block"/>

@@ -1,6 +1,7 @@
 import React from "react";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name PageSectionDemo
@@ -32,7 +33,7 @@ class PageSectionDemo extends React.Component {
                     first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
                     from a line in section 1.10.32.
                 </PageSection>
-                <hr className="hr"/>
+                <HR />
                 <PageSection>
                     This section is merely indented. This section is merely indented
                      This section is merely indented. This section is merely indented.
@@ -40,13 +41,13 @@ class PageSectionDemo extends React.Component {
                      This section is merely indented. This section is merely indented.
                      This section is merely indented. This section is merely indented.
                 </PageSection>
-                <hr className="hr"/>
+                <HR />
                 <PageSection description="No title, but with a description">
                     This section is merely indented. This section is merely indented.
                      This section is merely indented. This section is merely indented.
                      This section is merely indented. This section is merely indented.
                 </PageSection>
-                <hr className="hr" />
+                <HR />
                 <PageSection title={helpHint}>
                     You can put markup in the title prop as well.
                 </PageSection>

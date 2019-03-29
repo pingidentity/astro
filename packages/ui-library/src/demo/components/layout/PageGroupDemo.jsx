@@ -1,6 +1,7 @@
 import React from "react";
 import PageGroup from "../../../components/layout/PageGroup";
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name PageGroupDemo
@@ -22,7 +23,7 @@ const PageGroupDemo = () => {
                 steak pork loin boudin porchetta frankfurter beef.
                 Buffalo ham hock meatloaf kielbasa.
             </PageGroup>
-            <hr className="hr" />
+            <HR />
             <PageGroup title={helpHint}>
                 You can put markup in the title.
             </PageGroup>

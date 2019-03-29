@@ -1,5 +1,6 @@
 var React = require("react");
 var Link = require("./../../../components/general/Link");
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name LinkDemo
@@ -16,7 +17,7 @@ const LinkDemo = () => {
             <Link title="A link with an icon" url="#" icon="cog" type="block" />
             &nbsp;
             <Link className="more-on-topic" title="More on this topic" url="#" icon="alert" type="block" />
-            <hr className="hr" />
+            <HR />
             <p>
                 Here's a <Link url="https:/pingidentity.com" target="_blank">simple link</Link> in a block of text.
             </p>

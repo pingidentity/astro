@@ -2,6 +2,7 @@
 import React from "react";
 import LinkDropDownList from "../../../components/forms/LinkDropDownList";
 import InputRow from "../../../components/layout/InputRow";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name LinkDropDownListDemo
@@ -68,7 +69,7 @@ class LinkDropDownListDemo extends React.Component {
                     options={_options}
                     selectedOption={_options[0]}
                 />
-                <hr className="hr" />
+                <HR />
                 <LinkDropDownList
                     flags={flags}
                     stateless={false}

@@ -2,6 +2,7 @@ import React from "react";
 import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Text from "ui-library/lib/components/general/Text";
+import HR from "ui-library/lib/components/general/HR";
 
 
 /**
@@ -35,7 +36,7 @@ const IconDemo = () => {
                     <Text type="error">Number of failed attempts 1/000</Text>
                 </Icon>
             </InputRow>
-            <hr className="hr" />
+            <HR />
             <InputRow>
                 We can also render simple icons:
                 <Icon iconName="user-directory" type="inline" />

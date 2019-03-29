@@ -1,5 +1,6 @@
 import React from "react";
 import CopyIcon from "./../../../components/utils/CopyIcon";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name CopyIconDemo
@@ -14,7 +15,7 @@ const CopyIconDemo = () => (
             "copied": "You did it",
             "cant-copy": "It didn't work",
         }} /></div>
-        <hr className="hr" />
+        <HR />
         <textarea placeholder="Paste in here after clicking a button"/>
     </div>
 );

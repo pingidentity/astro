@@ -8,6 +8,7 @@ import StretchContent from "ui-library/lib/components/layout/StretchContent";
 import InlineMessage from "ui-library/lib/components/general/InlineMessage";
 import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import HR from "ui-library/lib/components/general/HR";
 
 const flagHelp = (
     `Use the flags prop on your component to specify custom behaviors.
@@ -139,7 +140,7 @@ class DemoItem extends React.Component {
 
                         {flags &&
                             <div>
-                                <hr className="hr" />
+                                <HR />
                                 <FormLabel value="Flags" hint={flagHelp} />
                                 <CheckboxGroup
                                     options={flags.map(flag => ({ value: flag, label: flag }))}

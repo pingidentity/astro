@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "ui-library/lib/components/forms/FormSearchBar";
 import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import Button from "ui-library/lib/components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name SearchBarDemo
@@ -59,7 +60,7 @@ class SearchBarDemo extends React.Component {
                     <FormCheckbox label="Filter 2" className="inline" key="dos" />
                     <FormCheckbox label="Filter 3" className="inline" key="tres" />
                 </SearchBar>
-                <hr className="hr" />
+                <HR />
                 <p>Passing the search box props directly:</p>
                 <SearchBar
                     onValueChange={this._handleValueChange}
@@ -73,7 +74,7 @@ class SearchBarDemo extends React.Component {
                     <FormCheckbox label="Filter 2" className="inline" key="dos" />
                     <FormCheckbox label="Filter 3" className="inline" key="tres" />
                 </SearchBar>
-                <hr className="hr" />
+                <HR />
                 <p>No filters</p>
                 <SearchBar
                     onValueChange={this._handleValueChange}
@@ -82,7 +83,7 @@ class SearchBarDemo extends React.Component {
                     value={this.state.value}
                     name="demo-search"
                 />
-                <hr className="hr" />
+                <HR />
                 <p>With a button on the right</p>
                 <SearchBar
                     onValueChange={this._handleValueChange}
@@ -93,7 +94,7 @@ class SearchBarDemo extends React.Component {
                     centerControl={<FormCheckbox className="inline" label="Hide disabled"/>}
                     rightControl={<Button label="Add" iconName="add"/>}
                 />
-                <hr className="hr" />
+                <HR />
                 <p>With documentation link</p>
                 <SearchBar
                     onValueChange={this._handleValueChange}
@@ -112,7 +113,7 @@ class SearchBarDemo extends React.Component {
                     <FormCheckbox label="Filter 2" className="inline" key="dos" />
                     <FormCheckbox label="Filter 3" className="inline" key="tres" />
                 </SearchBar>
-                <hr className="hr" />
+                <HR />
                 <p>With documentation link and showwithFilters is True</p>
                 <SearchBar
                     onValueChange={this._handleValueChange}

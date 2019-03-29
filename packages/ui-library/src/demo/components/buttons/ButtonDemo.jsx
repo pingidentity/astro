@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "../../../components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
  * @name ButtonDemo
@@ -96,7 +97,7 @@ class ButtonsDemo extends Component {
                     iconName="next"
                     inline
                 />
-                <hr className="hr" />
+                <HR />
                 <Button
                     label="Ellipsis Loader Primary Button"
                     type="primary"
@@ -121,7 +122,7 @@ class ButtonsDemo extends Component {
                     href="/build-doc/ui-library/3.5.0-SNAPSHOT/index.html"
                     target="_blank"
                 />
-                <hr className="hr" />
+                <HR />
                 <Button
                     label="Activated"
                     active
@@ -131,7 +132,7 @@ class ButtonsDemo extends Component {
                     active
                     inline
                 />
-                <hr className="hr" />
+                <HR />
                 <Button
                     type="primary"
                     disabled={true}

@@ -1,5 +1,6 @@
 var React = require("react"),
     InlineMessage = require("../../../components/general/InlineMessage");
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name InlineMessageDemo
@@ -24,7 +25,7 @@ class InlineMessageDemo extends React.Component {
                 </p>
 
 
-                <div className="hr" />
+                <HR />
                 <h2>Inline Message Types</h2>
 
                 <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
@@ -68,7 +69,7 @@ class InlineMessageDemo extends React.Component {
                 </InlineMessage>
 
 
-                <div className="hr" />
+                <HR />
                 <h2>Other Variations</h2>
 
                 <InlineMessage

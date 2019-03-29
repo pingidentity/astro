@@ -10,6 +10,7 @@ var React = require("react"),
     _ = require("underscore"),
     Color = require("color"),
     Toggle = require("../../../components/forms/form-toggle").v2;
+import HR from "ui-library/lib/components/general/HR";
 
 const COLORS = [
     {
@@ -517,7 +518,7 @@ class cssTips extends React.Component {
                         <FormCheckbox name="nothing" value="nothing" checked={true} />
                     </div>
                 </div>
-                <hr className="hr" />
+                <HR />
                 <div className="modifier_light-inputs" style={{ background: "#f8f8f8", padding: 15 }}>
                     <FormTextField labelText="White BG Text Input" value="Content of white input" />
                     <div>
@@ -539,7 +540,7 @@ class cssTips extends React.Component {
                             '        <FormCheckbox name="nothing" value="nothing" checked={true} />',
                             '    </div>',
                             '</div>',
-                            '<hr className="hr" />',
+                            '<HR />',
                             '<div className="modifier_light-inputs" style={{background: "#f8f8f8", padding: 15}}>',
                             '    <FormTextField labelText="White BG Text Input" value="Content of white input" />',
                             '    <div>',

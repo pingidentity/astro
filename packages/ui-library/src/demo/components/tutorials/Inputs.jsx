@@ -7,6 +7,7 @@ import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 var FormTextField = require("./../../../components/forms/form-text-field").v2,
     Toggle = require("../../../components/forms/form-toggle").v2;
+import HR from "ui-library/lib/components/general/HR";
 
 class Inputs extends Component {
     state = {
@@ -90,7 +91,7 @@ class Inputs extends Component {
                         <FormCheckbox name="nothing" value="nothing" checked={true} />
                     </div>
                 </div>
-                <hr className="hr" />
+                <HR />
                 <div className="modifier_light-inputs" style={{ background: "#f8f8f8", padding: 15 }}>
                     <FormTextField labelText="White BG Text Input" value="Content of white input" />
                     <div>
@@ -111,7 +112,7 @@ class Inputs extends Component {
                             '        <FormCheckbox name="nothing" value="nothing" checked={true} />',
                             '    </div>',
                             '</div>',
-                            '<hr className="hr" />',
+                            '<HR />',
                             '<div className="modifier_light-inputs" style={{background: "#f8f8f8", padding: 15}}>',
                             '    <FormTextField labelText="White BG Text Input" value="Content of white input" />',
                             '    <div>',

@@ -8,6 +8,7 @@ import FormTextField from "./../../../components/forms/form-text-field";
 import FormCheckbox from "./../../../components/forms/FormCheckbox";
 import FormDropDownList from "./../../../components/forms/FormDropDownList";
 import InputWidths from "./../../../components/forms/InputWidths";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name FormInputWidthsDemo
@@ -30,7 +31,7 @@ class FormInputWidthsDemo extends React.Component {
                 this usage is depricated.  Widths should now be specified using the "width" prop on each input.  See the
                 examples below:
 
-                <hr className="hr" />
+                <HR />
 
                 <div>
                     <FormTextField labelText="X-Large" width={InputWidths.XL} />
@@ -62,7 +63,7 @@ class FormInputWidthsDemo extends React.Component {
                     <FormTextField labelText="X-Small and with a veryvery longlabelname" width={InputWidths.XS} />
                 </div>
 
-                <hr className="hr" />
+                <HR />
 
                 <div>
                     <FormDropDownList selectedOption={{}} options={selectOptions} label="Full"
@@ -114,7 +115,7 @@ class FormInputWidthsDemo extends React.Component {
                         width={InputWidths.MAX} />
                 </div>
 
-                <hr className="hr" />
+                <HR />
 
                 <div>
                     <FormTextArea labelText="Full" width={InputWidths.XX} />
@@ -148,7 +149,7 @@ class FormInputWidthsDemo extends React.Component {
                     <FormTextArea labelText="Maximum/100%" width={InputWidths.MAX} />
                 </div>
 
-                <hr className="hr" />
+                <HR />
 
                 <div>
                     <FormCheckbox label="Full" width={InputWidths.XX} />

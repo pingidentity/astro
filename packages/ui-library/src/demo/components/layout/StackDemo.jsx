@@ -1,6 +1,7 @@
 import React from "react";
 import Stack from "ui-library/lib/components/layout/Stack";
 import Button from "ui-library/lib/components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name StackDemo
@@ -16,7 +17,7 @@ const StackDemo = () => (
             <Button label="Medium" type="danger" />
             <Button label="Gap" inline />
         </Stack>
-        <hr className="hr" />
+        <HR />
         <Stack gap="XL">
             <div>Stack</div>
             <div>With</div>

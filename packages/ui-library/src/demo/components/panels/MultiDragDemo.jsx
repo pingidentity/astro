@@ -16,6 +16,7 @@ import dragScroll from "../../../util/dragScroll";
 import _ from "underscore";
 
 import Button from "../../../components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
 /**
 * @name MultiDragDemo
 * @memberof MultiDrag
@@ -510,7 +511,7 @@ class MultiDragDemo extends React.Component {
                         />
                     </div>
                 }
-                <hr className="hr"/>
+                <HR />
                 <div>
                     <h2>Classic Style</h2>
                     <MultiDrag

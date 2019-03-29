@@ -1,5 +1,6 @@
 import React from "react";
 import CopyField from "./../../../components/utils/CopyField";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name CopyFieldDemo
@@ -10,7 +11,7 @@ const CopyFieldDemo = () => (
     <div>
         <CopyField text="This is the first line of text"/>
         <CopyField text="This line of text is the second"/>
-        <hr className="hr" />
+        <HR />
         <textarea placeholder="Paste in here after clicking a button"/>
     </div>
 );

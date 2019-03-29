@@ -3,6 +3,8 @@ import FormLabel from "../../../components/forms/FormLabel";
 import Table from "../../../components/tables/Table";
 import InputRow from "../../../components/layout/InputRow";
 
+import HR from "ui-library/lib/components/general/HR";
+
 /**
 * @name TableDemo
 * @memberof Table
@@ -66,7 +68,7 @@ const TableDemo = () => {
                     verticalAlignment="MIDDLE"
                 />
             </InputRow>
-            <hr className="hr"/>
+            <HR />
             <InputRow>
                 <FormLabel className="detached" value="<Table> with row labels." />
                 <Table

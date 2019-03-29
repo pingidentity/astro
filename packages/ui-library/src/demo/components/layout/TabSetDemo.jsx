@@ -5,6 +5,7 @@ import PageGroup from "../../../components/layout/PageGroup";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
 import Layout from "../../../components/general/ColumnLayout";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name TabSetDemo
@@ -122,7 +123,7 @@ export default class TabSetDemo extends Component {
 
                 </TabSet>
 
-                <hr className="hr" />
+                <HR />
                 <h3>Labels with right content</h3>
                 <br />
 

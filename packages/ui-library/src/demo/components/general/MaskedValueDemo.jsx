@@ -1,5 +1,6 @@
 var React = require("react");
 var MaskedValue = require("ui-library/lib/components/general/MaskedValue");
+import HR from "ui-library/lib/components/general/HR";
 
 /**
  * @name MaskedValueDemo
@@ -19,10 +20,10 @@ class MaskedValueDemo extends React.Component {
                 <MaskedValue onToggleReveal={this._handleToggleReveal} maskValue={this.state.hide}>
                     Some Value
                 </MaskedValue>
-                <hr className="hr" />
+                <HR />
                 <p>If no handler or value prop is provided, the component will manage its own state:</p>
                 <MaskedValue>Another Value</MaskedValue>
-                <hr className="hr" />
+                <HR />
                 <p>Starting unmasked</p>
                 <MaskedValue initialState={{ maskValue: false }}>I'm showing</MaskedValue>
             </div>

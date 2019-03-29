@@ -2,6 +2,7 @@ import React from "react";
 import _ from "underscore";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 import Button from "ui-library/lib/components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name DetailsTooltipDemo
@@ -325,7 +326,7 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                 </DetailsTooltip>
 
-                <hr className="hr" />
+                <HR />
 
                 <DetailsTooltip
                     flags={flags}

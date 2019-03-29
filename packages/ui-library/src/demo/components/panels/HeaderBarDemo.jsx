@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderBar from "../../../components/panels/header-bar";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+import HR from "ui-library/lib/components/general/HR";
 
 const environments = [
     {
@@ -151,7 +152,7 @@ class HeaderBarDemo extends React.Component {
                     flags={flags}
                 />
                 {this.state.newEnvironment && <p>Clicked +New Environment</p>}
-                <hr className="hr" />
+                <HR />
                 <HeaderBar
                     inline={true}
                     siteLogo="pingone"
@@ -176,7 +177,7 @@ class HeaderBarDemo extends React.Component {
                         ]
                     }]}
                 />
-                <hr className="hr" />
+                <HR />
                 <p>With the PingAccess logo</p>
                 <HeaderBar
                     inline={true}
@@ -187,7 +188,7 @@ class HeaderBarDemo extends React.Component {
 
                     userMenu={userMenuItems}
                 />
-                <hr className="hr" />
+                <HR />
                 <HeaderBar
                     inline={true}
                     environmentOptions={environments}
@@ -199,7 +200,7 @@ class HeaderBarDemo extends React.Component {
                     flags={flags}
 
                     siteTitle="UI Library" />
-                <hr className="hr" />
+                <HR />
                 <HeaderBar
                     inline={true}
                     environmentOptions={environments}
@@ -215,7 +216,7 @@ class HeaderBarDemo extends React.Component {
                     additionalContent="Additional Content"
 
                     siteTitle="UI Library" />
-                <hr className="hr" />
+                <HR />
                 <HeaderBar
                     inline={true}
                     siteLogo="pingone"

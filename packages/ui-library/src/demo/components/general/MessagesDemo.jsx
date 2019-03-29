@@ -6,6 +6,7 @@ var React = require("react"),
 
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
  * @name MessagesDemo
@@ -212,7 +213,7 @@ class MessagesDemo extends React.Component {
                     </InputRow>
                 }
 
-                <hr className="hr" />
+                <HR />
 
                 <Button onClick={this._addHtmlMessage}>Add HTML message</Button>
                 <Button onClick={this._addProgressMessage}>Add progress message</Button>

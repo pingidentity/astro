@@ -4,6 +4,7 @@ import FormRadioGroup from "./../../../components/forms/FormRadioGroup";
 import _ from "underscore";
 import InputWidths from "../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
+import HR from "ui-library/lib/components/general/HR";
 
 const typeOptions = [
     { id: 0, name: ConditionalFieldset.Types.SELECT },
@@ -51,7 +52,7 @@ class ConditionalFieldsetDemo extends React.Component {
                     selected={this.state.typeId}
                 />
 
-                <hr className="hr"/>
+                <HR />
 
                 <InputRow>
                     <ConditionalFieldset
