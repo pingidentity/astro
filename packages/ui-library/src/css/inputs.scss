@@ -860,6 +860,7 @@ input[type=file] {
 @import 'inputs/dropdown';
 
 .input-custom-select {
+    padding: $borderSize;
     display: inline-block;
     vertical-align: top;
     text-align: left;
