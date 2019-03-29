@@ -4,6 +4,7 @@ jest.dontMock("../../general/EllipsisLoaderButton");
 jest.dontMock("../../tooltips/CancelTooltip");
 jest.dontMock("../../tooltips/DetailsTooltip");
 
+import { shallow } from "enzyme";
 
 describe("ButtonBar", function () {
 
@@ -317,7 +318,6 @@ describe("ButtonBar", function () {
     it("fires the Cannonball warning when the discard props are used but no flag is set", function() {
         console.warn = jest.fn();
 
-        expect(console.warn).not.toBeCalled();
         getComponent({ onDiscard: jest.fn() });
         expect(console.warn).toBeCalled();
     });
@@ -325,8 +325,30 @@ describe("ButtonBar", function () {
     it("does not fire the Cannonball warning when either the flag is set or discard props aren't set", function() {
         console.warn = jest.fn();
 
-        getComponent({ onDiscard: jest.fn(), flags: [ "fix-discard-button" ] });
-        getComponent();
+        shallow(
+            <ButtonBar
+                data-id={componentId}
+                cancelText={cancelText}
+                discardTex={discardText}
+                onSave={jest.fn()}
+                saveText={saveText}
+            />
+        );
+
+        expect(console.warn).not.toBeCalled();
+
+        shallow(
+            <ButtonBar
+                data-id={componentId}
+                cancelText={cancelText}
+                discardTex={discardText}
+                onSave={jest.fn()}
+                saveText={saveText}
+                onDiscard={jest.fn()}
+                flags={["fix-discard-button"]}
+            />
+        );
+
         expect(console.warn).not.toBeCalled();
     });
 });

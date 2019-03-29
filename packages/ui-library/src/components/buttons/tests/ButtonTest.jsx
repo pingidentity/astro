@@ -2,14 +2,15 @@ window.__DEV__ = true;
 
 jest.dontMock("../Button");
 
-describe("Button", function () {
-    let React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        Button = require("../Button"),
-        _ = require("underscore");
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import _ from "underscore";
+import TestUtils from "../../../testutil/TestUtils";
+import Button from "../Button";
 
-    let componentId = "button";
+describe("Button", function () {
+
+    const componentId = "button";
 
 
 
@@ -18,7 +19,7 @@ describe("Button", function () {
             "data-id": componentId
         });
 
-        return ReactTestUtils.renderIntoDocument(<Button {...opts} />);
+        return ReactTestUtils.renderIntoDocument(<div><Button {...opts} /></div>);
     }
 
     it("rendered component with data-id=button", function () {
@@ -65,6 +66,14 @@ describe("Button", function () {
         expect(onClick).toBeCalled();
     });
 
+    it("does not throw error with default onClick", () => {
+        const component = getComponent();
+        const button = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+
+        ReactTestUtils.Simulate.click(button);
+        expect(button).toBeTruthy();
+    });
+
     it("prevents default for a mouse down event", function() {
         const callback = jest.fn();
         const component = getComponent();
@@ -105,5 +114,4 @@ describe("Button", function () {
         getComponent({ iconName: "add", flags: [ "add-button-margin" ] });
         expect(console.warn).not.toBeCalled();
     });
-
 });

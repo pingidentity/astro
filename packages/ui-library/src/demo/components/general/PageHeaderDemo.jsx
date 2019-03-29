@@ -1,4 +1,9 @@
 const React = require("react");
+import Padding, { sizes as paddingSizes } from "../../../components/layout/Padding";
+import Button from "../../../components/buttons/Button";
+import TutorialButton from "../../../components/buttons/TutorialButton";
+import Icon from "../../../components/general/Icon";
+import FlexRow from "../../../components/layout/FlexRow";
 const PageHeader = require("./../../../components/general/PageHeader");
 const HelpHint = require("./../../../components/tooltips/HelpHint");
 const Link = require("./../../../components/general/Link");
@@ -30,13 +35,23 @@ const PageHeaderDemo = () => {
                 title="A Page Header with accessories"
                 accessories={[
                     <Link title="Link" key="link" />,
-                    <span className="icon-cog" key="icon" />,
+                    <Icon iconName="cog" key="icon" />,
                     <HelpHint className="width-auto bottom" hintText="Provisioning" key="hint">
                         <label className="row-help">PROV</label>
                     </HelpHint>,
-                    <button className="inline" key="button">Inline Button</button>,
+                    <Button inline key="button" label="inline" />,
                     <span className="count" key="count">2</span>
                 ]}
+            />
+            <PageHeader
+                title={
+                    <FlexRow inline>
+                        <Padding right={paddingSizes.LG}>
+                            A Page Header with components in title
+                        </Padding>
+                        <TutorialButton />
+                    </FlexRow>
+                }
             />
         </div>
     );

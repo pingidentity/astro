@@ -14,11 +14,11 @@
  * @param {Object[]} keys
  *    The keys to use for substitution.
  * @returns {string}
- *    The formattted string.
+ *    The formatted string.
  *
  * @example
  *   var p = new Person('mr', 'okhtay', 'shoghi')
- *   'Hello {saluation.capitalize} {lastName.capitalize}'.format(p);
+ *   'Hello {salutation.capitalize} {lastName.capitalize}'.format(p);
  *   //'Hello Mr. Shoghi'
  * @example
  *   '{0} + {1} = {2}'.format(1, 2, 3);

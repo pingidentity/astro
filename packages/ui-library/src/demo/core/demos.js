@@ -612,6 +612,13 @@ module.exports = [
                         pathToSource: "components_forms_form-toggle_v2.jsx.html",
                         pathToDemoSource: "demo_components_forms_ToggleDemo.jsx.html"
                     },
+                    {
+                        label: "Tutorial Button",
+                        demo: require("../components/buttons/TutorialButtonDemo"),
+                        pathToDoc: "components/buttons/TutorialButton.jsx",
+                        pathToSource: "components_buttons_TutorialButton.jsx.html",
+                        pathToDemoSource: "demo_components_buttons_TutorialButtonDemo.jsx.html"
+                    },
                 ]
             },
             {

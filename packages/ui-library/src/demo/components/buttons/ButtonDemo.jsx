@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "../../../components/buttons/Button";
+import Button, { buttonTypes } from "../../../components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 
 /**
@@ -44,19 +44,19 @@ class ButtonsDemo extends Component {
                 />
                 <Button
                     label="Primary"
-                    type="primary"
+                    type={buttonTypes.PRIMARY}
                 />
                 <Button
                     label="Success"
-                    type="success"
+                    type={buttonTypes.SUCCESS}
                 />
                 <Button
                     label="Cancel"
-                    type="cancel"
+                    type={buttonTypes.CANCEL}
                 />
                 <Button
                     label="Danger"
-                    type="danger"
+                    type={buttonTypes.DANGER}
                 />
                 <Button
                     label="Inline"
@@ -100,19 +100,19 @@ class ButtonsDemo extends Component {
                 <HR />
                 <Button
                     label="Ellipsis Loader Primary Button"
-                    type="primary"
+                    type={buttonTypes.PRIMARY}
                     loading={this.state.loading1}
                     onClick={this._toggleLoadingButton1}
                 />
                 <Button
                     label="Ellipsis Loader Secondary Button"
-                    type="secondary"
+                    type={buttonTypes.SECONDARY}
                     loading={this.state.loading2}
                     onClick={this._toggleLoadingButton2}
                 />
                 <Button
                     label="Inline Ellipsis Button"
-                    type="secondary"
+                    type={buttonTypes.SECONDARY}
                     inline
                     loading={this.state.loading3}
                     onClick={this._toggleLoadingButton3}
@@ -134,7 +134,7 @@ class ButtonsDemo extends Component {
                 />
                 <HR />
                 <Button
-                    type="primary"
+                    type={buttonTypes.PRIMARY}
                     disabled={true}
                     label="Disabled with Help Hint"
                     disabledText="helphint"

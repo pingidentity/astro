@@ -359,14 +359,27 @@ button,
     }
 }
 
-.button--active {
-    background: $color-midnight;
-    border-color: $color-midnight;
-    color: $color-white;
-
-    &:hover {
+.button {
+    &--active {
+        background: $color-midnight;
+        border-color: $color-midnight;
         color: $color-white;
-        background: tint($color-midnight, 10%);
+
+        &:hover {
+            color: $color-white;
+            background: tint($color-midnight, 10%);
+        }
+    }
+
+    &--tutorial {
+        height: $spacing-lg;
+        line-height: $spacing-lg;
+        font-size: $font-size-normal;
+        font-weight: 100;
+        padding: 0 $spacing-sm;
+        text-transform: uppercase;
+
+        border-radius: 3px;
     }
 }
 

@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 import EllipsisLoader from "../general/EllipsisLoader";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
-import _ from "underscore";
 
 /**
  * @class Button
@@ -45,125 +44,134 @@ import _ from "underscore";
  *
  */
 
+const buttonTypes = {
+    PRIMARY: "primary",
+    SECONDARY: "secondary",
+    STANDARD: "standard",
+    SUCCESS: "success",
+    CANCEL: "cancel",
+    DANGER: "danger"
+};
 
+const buttonTypeList = Object.values(buttonTypes);
 
-class Button extends Component {
-    static propTypes = {
-        alignInputs: PropTypes.bool,
-        className: PropTypes.string,
-        disabled: PropTypes.bool,
-        disabledText: PropTypes.string,
-        "data-id": PropTypes.string,
-        href: PropTypes.string,
-        iconName: PropTypes.string,
-        inline: PropTypes.bool,
-        label: PropTypes.string,
-        loading: PropTypes.bool,
-        onClick: PropTypes.func,
-        submit: PropTypes.bool,
-        target: PropTypes.string,
-        noSpacing: PropTypes.bool,
-        active: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.string),
-        type: PropTypes.string,
-    };
+const dontFocus = event => event.preventDefault();
 
-    static defaultProps = {
-        alignInputs: false,
-        "data-id": "button",
-        disabled: false,
-        loading: false,
-        submit: false,
-        noSpacing: false,
-        active: false,
-        flags: [],
-    };
+const checkFixAddMargin = flags => flags.includes("add-button-margin");
 
-    _dontFocus = event => event.preventDefault();
+function Button ({
+    active,
+    alignInputs,
+    children,
+    className,
+    "data-id": dataId,
+    disabled,
+    disabledText,
+    flags,
+    href,
+    iconName,
+    inline,
+    label,
+    loading,
+    noSpacing,
+    onClick,
+    submit,
+    target,
+    type
+}) {
+    const fixAddMargin = checkFixAddMargin(flags);
 
-    _fixAddMargin = () => this.props.flags.includes("add-button-margin");
-
-    componentDidMount() {
-        if (this.props.iconName === "add" && !this._fixAddMargin() && !this.props.noSpacing) {
-            cannonballChangeWarning({
-                message: (
-                    `Add buttons will no longer automatically have their right margin stripped. ` +
+    if (iconName === "add" && !fixAddMargin && !noSpacing) {
+        cannonballChangeWarning({
+            message: (
+                `Add buttons will no longer automatically have their right margin stripped. ` +
                     `Instead, the 'noSpacing' prop will manually do it. ` +
                     `Switch over by adding the 'add-button-margin' flag to Add buttons.`
-                ),
-            });
-        }
+            ),
+        });
     }
 
-    render() {
-        const {
-            active,
-            alignInputs,
-            children,
-            className,
-            "data-id": dataId,
-            disabled,
-            href,
-            iconName,
+    const classes = classnames(
+        "button",
+        className,
+        iconName,
+        {
+            "align-inputs": alignInputs,
+            "button--add-margin-fix": iconName === "add" && fixAddMargin,
+            "button--no-spacing": noSpacing,
             inline,
-            label,
-            loading,
-            noSpacing,
-            onClick,
-            submit,
-            target,
-            type,
-        } = this.props;
+            loading: loading,
+            disabled: disabled,
+            "button--active": active,
+            "ellipsis-loader-button": loading,
+            [type]: buttonTypeList.includes(type)
+        }
+    );
 
-        const classes = classnames(
-            "button",
-            className,
-            iconName,
-            {
-                "align-inputs": alignInputs,
-                "button--add-margin-fix": iconName === "add" && this._fixAddMargin(),
-                "button--no-spacing": noSpacing,
-                inline: inline,
-                loading: loading,
-                disabled: disabled,
-                "button--active": active,
-                "ellipsis-loader-button": loading,
-                [type]: _.indexOf(["primary", "success", "cancel", "danger"], type) !== -1
-            }
-        );
+    const TagName = href ? "a" : "button";
 
-        const TagName = href ? "a" : "button";
+    const Tags = (
+        <TagName
+            className = {classes}
+            data-id={dataId}
+            onMouseDown={dontFocus}
+            onClick={onClick}
+            disabled={disabled}
+            type={submit ? "submit" : "button"}
+            href={href}
+            target={target}
+        >
+            {label}
+            {children}
+            <EllipsisLoader loading={loading}/>
+        </TagName>
+    );
 
-        const Tags = (
-            <TagName
-                className = {classes}
-                data-id={dataId}
-                onMouseDown={this._dontFocus}
-                onClick={onClick}
-                disabled={disabled}
-                type={submit ? "submit" : "button"}
-                href={href}
-                target={target}
+    return (
+        disabled && disabledText
+            ? <HelpHint
+                data-id="button_help-hint"
+                hintText={disabledText}
+                placement="top"
             >
-                {label}
-                {children}
-                <EllipsisLoader loading={loading}/>
-            </TagName>
-        );
-
-        return (
-            this.props.disabled && this.props.disabledText
-                ? <HelpHint
-                    data-id="button_help-hint"
-                    hintText={this.props.disabledText}
-                    placement="top"
-                >
-                    {Tags}
-                </HelpHint>
-                : Tags
-        );
-    }
+                {Tags}
+            </HelpHint>
+            : Tags
+    );
 }
 
+Button.propTypes = {
+    active: PropTypes.bool,
+    alignInputs: PropTypes.bool,
+    className: PropTypes.string,
+    "data-id": PropTypes.string,
+    disabled: PropTypes.bool,
+    disabledText: PropTypes.string,
+    flags: PropTypes.arrayOf(PropTypes.string),
+    href: PropTypes.string,
+    iconName: PropTypes.string,
+    inline: PropTypes.bool,
+    label: PropTypes.node,
+    loading: PropTypes.bool,
+    noSpacing: PropTypes.bool,
+    onClick: PropTypes.func,
+    submit: PropTypes.bool,
+    target: PropTypes.string,
+    type: PropTypes.oneOf(buttonTypeList),
+};
 
-module.exports = Button;
+Button.defaultProps = {
+    active: false,
+    alignInputs: false,
+    "data-id": "button",
+    disabled: false,
+    flags: [],
+    loading: false,
+    noSpacing: false,
+    onClick: () => {},
+    submit: false,
+};
+
+Button.buttonTypes = buttonTypes;
+
+export default Button;
