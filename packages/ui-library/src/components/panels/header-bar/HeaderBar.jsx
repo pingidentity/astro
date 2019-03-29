@@ -1,3 +1,5 @@
+import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
+
 var React = require("react"),
     PropTypes = require("prop-types"),
     classnames = require("classnames"),
@@ -334,12 +336,14 @@ ProductNav.defaultProps = {
  *          Alternative to the tree prop. If you just want a single user menu, provide the options here
  * @param {string} [userName]
  *          Used as the label for the user menu
- * @param {boolean} [updated]
- *          Flag to explicitly indicate you're using the new style of the header bar. (Without the Ping logo)
+  * @param {boolean} [updated=false]
+ *          Flag to explicitly indicate you're using the new style of the header bar.
+ * @param {boolean} [legacy]
+ *          Flag to explicitly indicate you're using the old style of the header bar.
  * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
+ *          Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {HeaderBar~ProductNavRenderer} renderProductNav
- *     Function that renders the product nav. Accepts props as the first argument and the default component as the second.
+ *          Function that renders the product nav. Accepts props as the first argument and the default component as the second.
  *
  **/
 
@@ -417,9 +421,10 @@ class HeaderBar extends React.Component {
         tree: PropTypes.arrayOf(PropTypes.object),
         userMenu: PropTypes.arrayOf(PropTypes.object),
         userName: PropTypes.string,
-        updated: PropTypes.bool,
         flags: PropTypes.arrayOf(PropTypes.string),
         renderProductNav: PropTypes.func,
+        legacy: PropTypes.bool,
+        updated: PropTypes.bool
     };
 
     static defaultProps = {
@@ -430,8 +435,9 @@ class HeaderBar extends React.Component {
         onMenuValueChange: _.noop,
         onMarketChange: _.noop,
         "data-id": "header",
-        updated: false,
         renderProductNav: defaultRender,
+        legacy: false,
+        updated: false
     };
 
     /**
@@ -444,6 +450,7 @@ class HeaderBar extends React.Component {
      */
     _handleMenuToggle = id => this.props.onItemValueChange(id);
 
+
     /**
      * @method
      * @name HeaderBar#_isUpdated
@@ -455,8 +462,15 @@ class HeaderBar extends React.Component {
         this.props.navOptions ||
         this.props.marketOptions ||
         this.props.updated
-            ? true
-            : false;
+
+    componentDidMount() {
+        if (!this.props.legacy && !this._isUpdated() ) {
+            cannonballChangeWarning({
+                message: `The Header Bar and Left Nav will default to the update style ` +
+                `unless the prop "legacy" is set to true.`,
+            });
+        }
+    }
 
     render() {
         var tree = this.props.tree;
@@ -479,7 +493,7 @@ class HeaderBar extends React.Component {
                 data-id={this.props["data-id"]}
             >
                 <div className="header-bar__left">
-                    {!this._isUpdated() && (
+                    {(!this._isUpdated() || this.props.legacy) && (
                         <div
                             className="header-bar__ping-logo"
                             data-id="header-logo"

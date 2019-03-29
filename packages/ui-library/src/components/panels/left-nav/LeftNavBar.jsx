@@ -1,3 +1,5 @@
+import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
+
 var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
@@ -79,7 +81,9 @@ var React = require("react"),
  * @param {object} [openSections={}]
  *     A hash map of ids and their open state. This is used internally by the Reducer to maintain expand/collapse state.
  * @param {boolean} [updated=false]
- *     If true, will return the new left nav.
+ *      *     Flag to explicitly indicate you're using the old style of the left nav bar.
+ *  @param {boolean} [legacy=false]
+ *     Flag to explicitly indicate you're using the old style of the left nav bar.
  * @param {boolean} [collapsible=false]
  *     If false, will have all sections open at once by default and disable the collapse feature.
  * @param {boolean} [autocollapse=false]
@@ -104,7 +108,7 @@ var React = require("react"),
  * var section1 = {label: "Section 1", id: "section1", children: [item1, item2]};
  * var section2 = {label: "Empty Section", id: "empty"};
  *
- * <LeftNavBar updated={true} tree={[section1, section2]} />
+ * <LeftNavBar tree={[section1, section2]} />
  */
 class LeftNavBar extends React.Component {
 
@@ -116,6 +120,7 @@ class LeftNavBar extends React.Component {
         openSections: PropTypes.object,
         collapsible: PropTypes.bool,
         updated: PropTypes.bool,
+        legacy: PropTypes.bool,
         autocollapse: PropTypes.bool,
         onSectionValueChange: PropTypes.func,
         onItemValueChange: PropTypes.func,
@@ -132,6 +137,7 @@ class LeftNavBar extends React.Component {
         autocollapse: false,
         pingoneLogo: false,
         updated: false,
+        legacy: false
     };
 
     constructor(props) {
@@ -324,6 +330,15 @@ class LeftNavBar extends React.Component {
                 this.setState({ selectorStyle: style });
             }
             /* eslint-enable react/no-did-update-set-state */
+        }
+    }
+
+    componentDidMount() {
+        if (!this.props.legacy && !this.props.updated ) {
+            cannonballChangeWarning({
+                message: `The Header Bar and Left Nav will default to the update style ` +
+                `unless the prop "legacy" is set to true.`,
+            });
         }
     }
 

@@ -463,4 +463,11 @@ describe("HeaderBar", function() {
         ReactTestUtils.Simulate.click(newLink);
         expect(callback).toBeCalled();
     });
+
+    it ("throws the Cannonball warning when either legacy or updated is not provided", function() {
+        console.warn = jest.fn();
+
+        getWrappedComponent();
+        expect(console.warn).toBeCalled();
+    });
 });

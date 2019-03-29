@@ -398,4 +398,11 @@ describe("LeftNavBar", function () {
         }).toThrow(expectedError);
     });
 
+    it ("throws the Cannonball warning when either legacy or updated is not provided", function() {
+        console.warn = jest.fn();
+
+        getWrappedComponent();
+        expect(console.warn).toBeCalled();
+    });
+
 });
