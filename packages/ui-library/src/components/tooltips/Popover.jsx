@@ -32,6 +32,10 @@ import popsOver from "../../util/behaviors/popsOver";
  *     If true, tooltip is open or else closed.
  * @param {function} [onToggle]
  *     Callback to be triggered when trigger is clicked.
+ * @param {function} [onPopperClick]
+ *     If using a portal, the callback that's triggered then the PopperContainer is clicked
+ * @param {string} [popperClassName]
+ *     If using a portal, a className that's added to the PopperContainer
  **/
 
 class PopoverBase extends React.Component {
@@ -43,22 +47,26 @@ class PopoverBase extends React.Component {
         className: PropTypes.string,
         flags: PropTypes.arrayOf(PropTypes.string),
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+        onPopperClick: PropTypes.func,
         onKeyDown: PropTypes.func,
         onToggle: PropTypes.func,
         padded: PropTypes.bool,
         open: PropTypes.bool,
         placement: PropTypes.string,
         triggerClassName: PropTypes.string,
+        popperClassName: PropTypes.string,
     };
 
     static defaultProps = {
         "data-id": "popover",
         flags: [],
         label: "Link",
+        onPopperClick: _.noop,
         onKeyDown: _.noop,
         onToggle: _.noop,
         placement: "",
         triggerClassName: "",
+        popperClassName: "",
         padded: false,
     };
 
@@ -128,11 +136,12 @@ class PopoverBase extends React.Component {
 
         return this._usePortal() ? (
             <PopperContainer
-                className="popover-display"
+                className={classnames("popover-display", this.props.popperClassName)}
                 getReference={this._getReference}
                 pointerClassName="popup-frame__pointer"
                 placement={getPlacement()}
                 ref={el => this.popperContainer = el}
+                onClick={this.props.onPopperClick}
             >
                 {contents}
             </PopperContainer>

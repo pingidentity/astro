@@ -12,11 +12,46 @@ import FormSearchBox from "./FormSearchBox";
 import { isEnter, isArrowDown, isArrowUp } from "../../util/KeyboardUtils.js";
 import Utils from "../../util/Utils.js";
 import _ from "underscore";
+import { inStateContainer, toggleTransform } from "../utils/StateContainer";
+import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
 
 import Popover from "../tooltips/Popover";
 
 const PopoverBase = Popover.Base;
 
+const getCountryData = () => {
+    let countryCode;
+    let countryData = [];
+
+    for (countryCode in zonesMetadata.countries) {
+        countryData.push(zonesMetadata.countries[countryCode]);
+    }
+
+    return _.sortBy(countryData, function (country) {
+        return country.name;
+    });
+};
+
+const getZoneData = () => {
+    const currentUtcTime = moment().utc();
+    const zoneNames = moment.tz.names();
+
+    return zoneNames.map(function (tz) {
+        return {
+            abbr: moment.tz(tz).zoneAbbr(),
+            name: tz,
+            time: moment.tz(currentUtcTime, tz).format("h:mm A"),
+            offset: moment.tz(currentUtcTime, tz).format("Z")
+        };
+    });
+};
+
+const isValidTimeZone = (zoneName, zoneData = getZoneData()) => {
+    var matchedZone = zoneData.filter(function (tz) {
+        return zoneName === tz.name;
+    });
+    return matchedZone[0] ? matchedZone[0] : false;
+};
 
 /**
 * @function FormTimeZone~getZoneNameDisplayValue
@@ -57,6 +92,41 @@ var getZoneNameDisplayValue = function (zoneName) {
 */
 
 /**
+* @callback FormTimeZone~onZoneChange
+*
+* @param {value} value
+*       The name of the time zone
+*/
+
+/**
+* @callback FormTimeZone~onCountryChange
+*
+* @param {value} value
+*       The abbreviation of the country
+*/
+
+/**
+* @callback FormTimeZone~setSearchString
+*
+* @param {value} value
+*       New search string
+*/
+
+/**
+* @callback FormTimeZone~setSelectedIndex
+*
+* @param {value} value
+*       New selected index
+*/
+
+/**
+* @callback FormTimeZone~setOpen
+*
+* @param {value} value
+*       New open state
+*/
+
+/**
 * @class FormTimeZone
 * @desc Input for selecting a time zone
 *
@@ -93,6 +163,8 @@ var getZoneNameDisplayValue = function (zoneName) {
 *     Text to used filter the full list of time zone options
 * @param {string} [selectCountryLabel="Select a Country"]
 *     The text prompt/label that is displayed above the list of countries
+* @param {string} [selectLabel="Select a Time Zone"]
+*     The text that shows when there's no value
 * @param {string} value
 *     The initial value of the input
 *
@@ -102,6 +174,16 @@ var getZoneNameDisplayValue = function (zoneName) {
 *     Callback that is triggered when search text is entered
 * @param {FormTimeZone~onToggle} onToggle
 *     Callback that will be triggered when the timezone menu is to open or close
+* @param {FormTimeZone~onZoneChange} onZoneChange
+*     Callback that will be triggered when the selected timezone changes
+* @param {FormTimeZone~onCountryChange} onCountryChange
+*     Callback that will be triggered when the country filter changes
+* @param {FormTimeZone~setSearchString} setSearchString
+*     Callback that will be triggered when the search string is changed
+* @param {FormTimeZone~setSelectedIndex} setSelectedIndex
+*     Callback that will be triggered when the selected index changes
+* @param {FormTimeZone~setOpen} setOpen
+*     Callback that will be triggered when the open state is set directly
 *
 * @example
 *     <FormTimeZone
@@ -119,44 +201,11 @@ var getZoneNameDisplayValue = function (zoneName) {
 **/
 
 
-class FormTimeZone extends React.Component {
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: true
-    };
-
-    constructor(props) {
-        super(props);
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction() && props.controlled !== undefined) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-        }
-    }
-
-    isValidTimeZone = (zoneText) => {
-        return this.props.stateless
-            ? this.refs.TimeZoneStateless.isValidTimeZone(zoneText)
-            : this.refs.TimeZoneStateful.isValidTimeZone(zoneText);
-    };
-
-    render() {
-        return this.props.stateless
-            ? <TimeZoneStateless {..._.defaults({ ref: "TimeZoneStateless" }, this.props)} />
-            : <TimeZoneStateful {..._.defaults({ ref: "TimeZoneStateful" }, this.props)} />;
-
-    }
-}
-
 var LABEL_DEFAULTS = {
     COUNTRY: "Country",
     "SELECT-COUNTRY": "Select a Country",
     CLEAR: "Clear timezone",
+    "SELECT-TIME-ZONE": "Select a Time Zone",
 };
 
 class TimeZoneStateless extends React.Component {
@@ -172,11 +221,17 @@ class TimeZoneStateless extends React.Component {
         labelText: PropTypes.string,
         label: PropTypes.string,
         onValueChange: PropTypes.func,
+        onZoneChange: PropTypes.func,
+        onCountryChange: PropTypes.func,
         onSearch: PropTypes.func,
+        setSearchString: PropTypes.func,
+        setSelectedIndex: PropTypes.func,
+        setOpen: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         searchString: PropTypes.string,
         selectCountryLabel: PropTypes.string.isRequired,
+        selectLabel: PropTypes.string,
         selectedIndex: PropTypes.number,
         value: PropTypes.string,
         flags: PropTypes.arrayOf(PropTypes.string),
@@ -187,10 +242,16 @@ class TimeZoneStateless extends React.Component {
         countryLabel: LABEL_DEFAULTS.COUNTRY,
         filterByCountry: undefined,
         onValueChange: _.noop,
+        onZoneChange: _.noop,
+        onCountryChange: _.noop,
         onSearch: _.noop,
         onToggle: _.noop,
+        setSearchString: _.noop,
+        setSelectedIndex: _.noop,
+        setOpen: _.noop,
         open: false,
         selectCountryLabel: LABEL_DEFAULTS["SELECT-COUNTRY"],
+        selectLabel: LABEL_DEFAULTS["SELECT-TIME-ZONE"],
         selectedIndex: 0,
         value: moment.tz.guess(),
         flags: [],
@@ -199,12 +260,18 @@ class TimeZoneStateless extends React.Component {
     constructor(props) {
         super(props);
 
-        this.zoneData = this._getZoneData();
-        this.countryData = this._getCountryData();
+        this.zoneData = getZoneData();
+        this.countryData = getCountryData();
+    }
+
+    _handleSearch = (searchString, selectedIndex = this.props.selectedIndex) => {
+        this.props.onSearch(searchString, selectedIndex);
+        this.props.setSearchString(searchString);
+        this.props.setSelectedIndex(selectedIndex);
     }
 
     _clearSearchString = () => {
-        this.props.onSearch("", this.props.selectedIndex);
+        this._handleSearch("");
     };
 
     _onCountryChange = (e) => {
@@ -220,7 +287,13 @@ class TimeZoneStateless extends React.Component {
 
     _onValueChange = (type, value) => {
         this.props.onValueChange(type, value);
-        this.props.onSearch(this.props.searchString, 0);
+        if (type === "country") {
+            this.props.onCountryChange(value);
+        } else if (type === "zone") {
+            this.props.onZoneChange(value.name);
+            this.props.setOpen(false);
+        }
+        this._handleSearch(this.props.searchString, 0);
     };
 
     _onGlobalClick = (e) => {
@@ -241,7 +314,6 @@ class TimeZoneStateless extends React.Component {
         const {
             selectedIndex,
             filterByCountry,
-            onSearch,
             searchString,
         } = this.props;
 
@@ -262,7 +334,7 @@ class TimeZoneStateless extends React.Component {
             newIndex = newIndex < 0 ? 0 : newIndex;
 
             if (newIndex !== selectedIndex) {
-                onSearch(searchString, newIndex);
+                this._handleSearch(searchString, newIndex);
             }
 
         } else if (isArrowDown(keyCode)) {
@@ -273,7 +345,7 @@ class TimeZoneStateless extends React.Component {
                 ? items.length - 1 : newIndex;
 
             if (newIndex !== selectedIndex) {
-                onSearch(searchString, newIndex);
+                this._handleSearch(searchString, newIndex);
             }
         }
     };
@@ -284,7 +356,7 @@ class TimeZoneStateless extends React.Component {
     };
 
     _onSearch = (value) => {
-        this.props.onSearch(value, this.props.selectedIndex);
+        this._handleSearch(value);
     };
 
     _renderCountries = () => {
@@ -372,7 +444,7 @@ class TimeZoneStateless extends React.Component {
         return (
             <CollapsibleLink
                 data-id={`${this.props["data-id"]}-collapsible-link`}
-                title={this.props.displayValue || this.props.value}
+                title={this.props.displayValue || getZoneNameDisplayValue(this.props.value) || this.props.selectLabel}
                 expanded={this.props.open}
                 onToggle={this.props.onToggle}
             />
@@ -429,39 +501,17 @@ class TimeZoneStateless extends React.Component {
         }
     };
 
-    isValidTimeZone = (zoneName) => {
-        var matchedZone = this.zoneData.filter(function (tz) {
-            return zoneName === tz.name;
-        });
-        return matchedZone[0] ? matchedZone[0] : false;
-    };
-
-    _getCountryData = () => {
-        let countryCode;
-        let countryData = [];
-
-        for (countryCode in zonesMetadata.countries) {
-            countryData.push(zonesMetadata.countries[countryCode]);
+    _handleClear = () => {
+        if (this.props.onClear) {
+            this.props.onClear();
         }
+        this.props.setOpen(false);
+        this.props.onCountryChange("");
+        this.props.onZoneChange("");
+        this.props.setSearchString("");
+    }
 
-        return _.sortBy(countryData, function (country) {
-            return country.name;
-        });
-    };
-
-    _getZoneData = () => {
-        const currentUtcTime = moment().utc();
-        const zoneNames = moment.tz.names();
-
-        return zoneNames.map(function (tz) {
-            return {
-                abbr: moment.tz(tz).zoneAbbr(),
-                name: tz,
-                time: moment.tz(currentUtcTime, tz).format("h:mm A"),
-                offset: moment.tz(currentUtcTime, tz).format("Z")
-            };
-        });
-    };
+    isValidTimeZone = (zoneName) => isValidTimeZone(zoneName, this.zoneData);
 
     componentDidMount() {
         window.addEventListener("click", this._onGlobalClick);
@@ -477,6 +527,8 @@ class TimeZoneStateless extends React.Component {
         }
         this._setListPosition();
     }
+
+    _focusSearch = () => this.refs.searchString.searchBoxFocus();
 
     render() {
         const classNames = {
@@ -501,6 +553,8 @@ class TimeZoneStateless extends React.Component {
                     placement="right"
                     padded
                     flags={this.props.flags}
+                    popperClassName={classnames("input-timezone", classNames)}
+                    onPopperClick={this._focusSearch}
                 >
                     <div className="popover-search" onClick={this._killEvent}>
                         <FormSearchBox
@@ -511,12 +565,13 @@ class TimeZoneStateless extends React.Component {
                             onKeyDown={this._onKeyDown}
                             onClear={this._clearSearchString}
                             ref="searchString"
+                            autoFocus
                         />
                     </div>
                     {this.props.filterByCountry ? this._renderZones() : this._renderCountries()}
-                    {this.props.onClear && this.props.value && (
+                    {(this.props.onClear || this.props.showClear) && this.props.value && (
                         <div className="button-menu__options">
-                            <a className="button-menu__option-link" onClick={this.props.onClear}>
+                            <a className="button-menu__option-link" onClick={this._handleClear}>
                                 {this.props.clearLabel}
                             </a>
                         </div>
@@ -597,6 +652,85 @@ class TimeZoneStateful extends React.Component {
     }
 }
 
-FormTimeZone.getZoneNameDisplayValue = getZoneNameDisplayValue;
+const PStatefulFormTimeZone = inStateContainer([
+    {
+        name: "filterByCountry",
+        initial: "",
+        setter: "onCountryChange",
+    },
+    {
+        name: "open",
+        initial: false,
+        setter: "setOpen",
+        callbacks: [{
+            name: "onToggle",
+            transform: toggleTransform,
+        }],
+    },
+    {
+        name: "searchString",
+        initial: "",
+        setter: "setSearchString",
+    },
+    {
+        name: "selectedIndex",
+        initial: 0,
+        setter: "setSelectedIndex",
+    },
+    {
+        name: "value",
+        initial: moment.tz.guess(),
+        setter: "onZoneChange",
+    },
+])(TimeZoneStateless);
+PStatefulFormTimeZone.displayName = PStatefulFormTimeZone;
 
-export default FormTimeZone;
+export default class FormTimeZone extends React.Component {
+
+    static propTypes = {
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful", "use-portal" ])),
+    };
+
+    static defaultProps = {
+        stateless: true,
+        flags: [],
+    };
+
+    static _statelessComponent = TimeZoneStateless; // this is to enable testing
+
+    static getZoneNameDisplayValue = getZoneNameDisplayValue;
+
+    componentDidMount() {
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+            /* istanbul ignore next  */
+            throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+        }
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "FormTextArea" });
+        }
+    }
+
+    _usePStateful = () => this.props.flags.findIndex(item => item === "p-stateful") >= 0;
+
+    isValidTimeZone = (zoneText) => {
+        if (this._usePStateful()) {
+            return isValidTimeZone(zoneText);
+        }
+
+        return this.props.stateless
+            ? this.refs.TimeZoneStateless.isValidTimeZone(zoneText)
+            : this.refs.TimeZoneStateful.isValidTimeZone(zoneText);
+    };
+
+    render() {
+        if (this._usePStateful()) {
+            return <PStatefulFormTimeZone {...this.props} />;
+        }
+
+        return this.props.stateless
+            ? <TimeZoneStateless {..._.defaults({ ref: "TimeZoneStateless" }, this.props)} />
+            : <TimeZoneStateful {..._.defaults({ ref: "TimeZoneStateful" }, this.props)} />;
+    }
+}

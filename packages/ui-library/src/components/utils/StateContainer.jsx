@@ -43,11 +43,13 @@ class StateContainer extends React.Component {
         const isControlled = name => passedProps[name] === undefined;
 
         // figure out which props will be controlled and create initial state for those
-        const controlledState = stateDefs.reduce((state, { name, initial }) => {
+        this.state = stateDefs.reduce((state, { name, initial }) => {
             if (isControlled(name)) {
                 return {
                     ...state,
-                    [name]: initial,
+                    [name]: initialState[name] === undefined ? initial : initialState[name],
+                    // the initialState prop should override the defined initial value
+                    // but only if this is a controlled prop
                 };
             }
             return state;
@@ -56,16 +58,13 @@ class StateContainer extends React.Component {
         // make sure the keys provided in initialState are actually being controlled
         if (!Utils.isProduction()) {
             Object.keys(initialState).forEach(key => {
-                if (controlledState[key] === undefined) {
+                if (this.state[key] === undefined) {
                     console.warn(
                         `Initial state provided for prop "${key}" that is not being controlled by the component`
                     );
                 }
             });
         }
-
-        // combine with any provided initial state
-        this.state = { ...controlledState, ...initialState };
 
         // generate custom callbacks with transform functions
         const makeTransformCallbacks = (name, callbacks = []) =>

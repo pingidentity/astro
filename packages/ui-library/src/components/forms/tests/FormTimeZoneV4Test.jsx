@@ -1,30 +1,21 @@
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import ReactDOM from "react-dom";
+import TestUtils from "../../../testutil/TestUtils";
+import FormTimeZone from "../FormTimeZone";
+import KeyboardUtils from "../../../util/KeyboardUtils.js";
+import moment from "moment-timezone";
+import momentMetadata from "../../../../node_modules/moment-timezone/data/meta/latest.json";
+import _ from "underscore";
 
-jest.dontMock("../FormTimeZone");
-jest.dontMock("../FormError");
-jest.dontMock("../FormLabel");
-jest.dontMock("../FormSearchBox");
-jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2");
-jest.dontMock("../../general/CollapsibleLink");
-jest.dontMock("../../tooltips/HelpHint");
-jest.dontMock("../../../util/KeyboardUtils.js");
+jest.mock("popper.js");
+jest.mock("react-portal");
 
-
-describe("FormTimeZone", function () {
-
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        ReactDOM = require("react-dom"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FormTimeZone = require("../FormTimeZone"),
-        KeyboardUtils = require("../../../util/KeyboardUtils.js"),
-        moment = require("moment-timezone"),
-        momentMetadata = require("../../../../node_modules/moment-timezone/data/meta/latest.json"),
-        _ = require("underscore");
-
-    var componentId = "timezone",
-        initialValue = "America/Denver",
-        countryLabel="select a Country";
+// This file is a copy of the standard Time Zone tests with all the v4 flags set by default
+describe("FormTimeZone v4", function () {
+    const componentId = "timezone";
+    const initialValue = "America/Denver";
+    const countryLabel="select a Country";
 
     function prepCountryMetaData () {
         var countryMetadata = [];
@@ -55,10 +46,12 @@ describe("FormTimeZone", function () {
 
     function getComponent (opts) {
         const options = _.defaults(opts || {}, {
-            stateless: false,
             countryLabel: countryLabel,
             "data-id": componentId,
-            value: initialValue
+            initialState: {
+                value: initialValue,
+            },
+            flags: [ "use-portal", "p-stateful" ],
         });
         return ReactTestUtils.renderIntoDocument(<FormTimeZone {...options} />);
     }
@@ -168,7 +161,7 @@ describe("FormTimeZone", function () {
         const searchString = "United";
         const component = getComponent({
             open: true,
-            searchString: searchString
+            initialState: { searchString }
         });
         const searchInput = getSearchInput(component);
         const clearSearch = TestUtils.findRenderedDOMNodeWithClass(component, "clear-search");
@@ -248,9 +241,11 @@ describe("FormTimeZone", function () {
 
     it("selects the zone when the zone is clicked", function () {
         const countryAbbr = "US";
+        const callback = jest.fn();
         const component = getComponent({
             open: true,
-            filterByCountry: countryAbbr
+            filterByCountry: countryAbbr,
+            onZoneChange: callback,
         });
         const testIndex = 4;
         const zoneRows = getRows(component);
@@ -281,10 +276,12 @@ describe("FormTimeZone", function () {
     });
 
     it("selects the second zone when the DOWN-ARROW key is pressed then ENTER key is pressed", function () {
+        const callback = jest.fn();
         const countryAbbr = "US";
         const component = getComponent({
             open: true,
-            filterByCountry: countryAbbr
+            filterByCountry: countryAbbr,
+            onZoneChange: callback,
         });
         const searchInput = getSearchInput(component);
         const zoneRows = getRows(component);
@@ -292,10 +289,10 @@ describe("FormTimeZone", function () {
         let valueLink;
 
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_DOWN });
+        expect(zoneRows[1].className).toContain("selected");
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
         valueLink = getValueLink(component);
         expect(valueLink.textContent).toEqual(zoneRowName);
-        expect(zoneRows[1].className).toContain("selected");
     });
 
     it("calls global click handler when a click occurs outside of component", function () {
@@ -306,7 +303,8 @@ describe("FormTimeZone", function () {
             onToggle: jest.fn(),
             onValueChange: jest.fn()
         });
-        const handler = component.refs.TimeZoneStateless._onGlobalClick;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTimeZone._statelessComponent);
+        const handler = stateless._onGlobalClick;
 
         expect(component.props.onToggle).not.toBeCalled();
 
@@ -342,12 +340,12 @@ describe("FormTimeZone", function () {
             onSearch: jest.fn(),
             onValueChange: jest.fn()
         });
-        const componentRef = component.refs.TimeZoneStateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTimeZone._statelessComponent);
 
-        expect(window.addEventListener).toBeCalledWith("click", componentRef._onGlobalClick);
+        expect(window.addEventListener).toBeCalledWith("click", stateless._onGlobalClick);
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
-        expect(window.removeEventListener).toBeCalledWith("click", componentRef._onGlobalClick);
+        expect(window.removeEventListener).toBeCalledWith("click", stateless._onGlobalClick);
     });
 
     it("calls function for list placement on componentDidUpdate", function () {
@@ -355,11 +353,11 @@ describe("FormTimeZone", function () {
             open: true,
             stateless: true
         });
-        const componentRef = component.refs.TimeZoneStateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTimeZone._statelessComponent);
 
-        componentRef._setListPosition = jest.fn();
-        componentRef.componentDidUpdate();
-        expect(componentRef._setListPosition).toBeCalled();
+        stateless._setListPosition = jest.fn();
+        stateless.componentDidUpdate();
+        expect(stateless._setListPosition).toBeCalled();
     });
 
     it("does not render the error when not provided", function () {
@@ -387,11 +385,11 @@ describe("FormTimeZone", function () {
     it("public function isValidTimeZone works properly", function () {
         const component = getComponent();
         const realZoneName = zoneMetadata[10].name;
-        let checkZone = component.refs.TimeZoneStateful.isValidTimeZone("badZoneName");
+        let checkZone = component.isValidTimeZone("badZoneName");
 
         expect(checkZone).toEqual(false);
 
-        checkZone = component.refs.TimeZoneStateful.isValidTimeZone(realZoneName);
+        checkZone = component.isValidTimeZone(realZoneName);
         expect(checkZone).toBeTruthy();
         expect(checkZone.name).toEqual(realZoneName);
     });

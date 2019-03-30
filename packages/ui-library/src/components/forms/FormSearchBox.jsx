@@ -76,6 +76,8 @@ import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 *     Callback to be triggered when the search field is cleared.
 * @param {number} [maxLength]
 *     Maximum length supported by the text field.
+* @param {boolean} [autoFocus=false]
+*     Whether or not to auto-focus the element.
 *
 * @example
 *     <FormSearchBox data-id="mySearchBox"
@@ -106,6 +108,7 @@ class FormSearchBox extends React.Component {
         placeholder: PropTypes.string,
         queryString: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
+        autoFocus: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -117,6 +120,7 @@ class FormSearchBox extends React.Component {
         onClear: _.noop,
         errorMessage: null,
         width: InputWidths.MD,
+        autoFocus: false,
     };
 
     /**
@@ -170,6 +174,7 @@ class FormSearchBox extends React.Component {
         const inputClasses = classnames("search", {
             "input-text--mono": this.props.monospaced,
         });
+        const { autoFocus } = this.props;
 
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
@@ -188,6 +193,7 @@ class FormSearchBox extends React.Component {
                     onFocus={this.props.onFocus}
                     onBlur={this.props.onBlur}
                     maxLength={this.props.maxLength}
+                    autoFocus={autoFocus}
                     controls={showClear
                         ? <a data-id="clear" className="clear-search" onClick={this._clear} />
                         : null

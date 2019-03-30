@@ -22,6 +22,16 @@
 * **V3 Behavior:** ExpandableRows get their styling from a surrounding element.
 * **Recommendation:** Add the flag 'expandable-row-class' to each ExpandableRow.
 
+### FormTextArea
+* **V4 Behavior:** The component controls the state of `value` if it's not defined as a prop. The initial value can be set with `initialState.value`.
+* **V3 Behavior:** The `stateless` prop determines whether `value` is controlled by the component or not.
+* **Recommendation:** Make sure `value` is only set when the component is stateless. If you want the component to be stateful and also want to set an initial value, use the `initialState` prop. (Or set a flag for "p-stateful".)
+
+### FormTimeZone
+* **V4 Behavior:** The component controls the state of `filterByCountry`, `open`, `searchString`, `selectedIndex`, and `value` if they're not defined as props. The initial values can be set with `initialState`.
+* **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
+* **Recommendation:** Set the 'p-stateful' flag.
+
 ### Icon
 
 * **V4 Behavior:** Displays an icon with only a SPAN tag unless it contains `children` or `type` is set to "leading".
