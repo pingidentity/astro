@@ -31,7 +31,7 @@ const NUM_DEMOS = 12,
 * @desc A demo for FormDropDownList
 */
 class FormDropDownListDemo extends React.Component {
-    static flags = [ "use-portal" ];
+    static flags = [ "use-portal", "p-stateful" ];
 
     constructor(props) {
         super(props);

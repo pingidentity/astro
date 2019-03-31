@@ -1,25 +1,17 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../util/KeyboardUtils.js");
-jest.dontMock("../../../util/EventUtils.js");
-jest.dontMock("../../../util/FilterUtils.js");
-jest.dontMock("../FormDropDownList");
-jest.dontMock("../FormLabel");
-jest.dontMock("../FormError");
-jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2");
+import React from "react";
+import ReactDOM from "react-dom";
+import _ from "underscore";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import KeyBoardUtils from "../../../util/KeyboardUtils.js";
+import FormDropDownList from "../FormDropDownList";
 
 jest.mock("popper.js");
 jest.mock("react-portal");
 
 describe("FormDropDownList", function () {
-    var React = require("react"),
-        ReactDOM = require("react-dom"),
-        _ = require("underscore"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        KeyBoardUtils = require("../../../util/KeyboardUtils.js"),
-        FormDropDownList = require("../FormDropDownList");
 
     var options = [
         { label: "One", value: 1 },
@@ -42,7 +34,8 @@ describe("FormDropDownList", function () {
             selectedOption: options[0],
             onToggle: jest.fn(),
             onSearch: jest.fn(),
-            onValueChange: jest.fn()
+            onValueChange: jest.fn(),
+            flags: [ "use-portal", "p-stateless" ],
         });
         return ReactTestUtils.renderIntoDocument(<FormDropDownList {...props} />);
     }
@@ -863,19 +856,5 @@ describe("FormDropDownList", function () {
 
         expect(selected).toEqual(secondOption);
 
-    });
-
-    it("fires a cannonball warning when the p-stateful flag is not set", function() {
-        console.warn = jest.fn();
-        expect(console.warn).not.toBeCalled();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("fires no cannonball warning when the p-stateful flag is set", function() {
-        console.warn = jest.fn();
-        expect(console.warn).not.toBeCalled();
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
     });
 });

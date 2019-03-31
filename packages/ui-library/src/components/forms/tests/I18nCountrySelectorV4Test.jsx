@@ -138,7 +138,7 @@ describe("I18nCountrySelector v4", function () {
 
     it("stateful: onToggle callback changes open/close state", function () {
         const component = getComponent();
-        const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
+        const container = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
 
         expect(container.state.open).toBe(false);
         container.callbacks.onToggle();
@@ -149,7 +149,7 @@ describe("I18nCountrySelector v4", function () {
         const component = getComponent({
             open: true
         });
-        const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
+        const container = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
 
         const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         // var currentCountryIso = componentRef.state.selected.iso2;
@@ -181,7 +181,7 @@ describe("I18nCountrySelector v4", function () {
         var component = getComponent({
             open: true
         });
-        const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
+        const container = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
 
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
 

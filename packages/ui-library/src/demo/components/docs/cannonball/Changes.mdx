@@ -54,6 +54,10 @@
 * **V3 Behavior:** Defaults to legacy style unless prop "updated" is set to true.
 * **Recommendation:** Set either updated or legacy to true.
 
+### FormDropDownList
+* **V4 Behavior:** The component controls the state of `open`, `searchIndex`, `searchString`, and `searchTime` if they're not defined as props. The initial values can be set with `initialState`.
+* **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
+* **Recommendation:** Set the 'p-stateful' flag.
 
 ### Icon
 
