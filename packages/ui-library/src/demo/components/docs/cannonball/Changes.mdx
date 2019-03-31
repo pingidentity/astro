@@ -21,6 +21,11 @@
 * **V3 Behavior:** The `stateless` prop determines whether `open` and `errorMessage` are controlled by the component or not.
 * **Recommendation:** Set the 'p-stateful' flag.
 
+### CountrySelector
+* **V4 Behavior:** The component controls the state of `open`, `searchIndex`, `searchString`, and `searchTime` if they're not defined as props. The initial values can be set with `initialState`.
+* **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
+* **Recommendation:** Set the 'p-stateful' flag.
+
 ### ExpandableRow
 
 * **V4 Behavior:** Each ExpandableRow will use a standalone CSS class to style them even out of context.

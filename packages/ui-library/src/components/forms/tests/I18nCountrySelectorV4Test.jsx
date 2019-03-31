@@ -1,5 +1,16 @@
 window.__DEV__ = true;
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import Utils from "../../../util/Utils";
+import TestUtils from "../../../testutil/TestUtils";
+import I18nCountrySelector from "../i18n/I18nCountrySelector";
+import StateContainer from "../../utils/StateContainer";
+import _ from "underscore";
+
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.setMock("../i18n/countryCodes", [
     {
         name: "Afghanistan (‫افغانستان‬‎)",
@@ -27,27 +38,14 @@ jest.setMock("../i18n/countryCodes", [
     }
 ]);
 
-jest.dontMock("../i18n/I18nCountrySelector");
-jest.dontMock("../i18n/CountryFlagList");
-jest.dontMock("../FormDropDownList");
-jest.dontMock("../FormError");
-jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2");
-jest.dontMock("../../../util/i18n/Translator.js");
-
-describe("I18nCountrySelector", function () {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        Utils = require("../../../util/Utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        I18nCountrySelector = require("../i18n/I18nCountrySelector"),
-        _ = require("underscore");
+describe("I18nCountrySelector v4", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
             onValueChange: jest.fn(),
             onToggle: jest.fn(),
-            onSearch: jest.fn()
+            onSearch: jest.fn(),
+            flags: [ "use-portal", "p-stateful" ],
         });
         return ReactTestUtils.renderIntoDocument(<I18nCountrySelector {...props} />);
     }
@@ -139,33 +137,33 @@ describe("I18nCountrySelector", function () {
     });
 
     it("stateful: onToggle callback changes open/close state", function () {
-        var component = getComponent();
-        var componentRef = component.refs.I18nCountrySelectorStateful;
+        const component = getComponent();
+        const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
 
-        expect(componentRef.state.open).toBe(false);
-        componentRef._handleToggle();
-        expect(componentRef.state.open).toBe(true);
+        expect(container.state.open).toBe(false);
+        container.callbacks.onToggle();
+        expect(container.state.open).toBe(true);
     });
 
     it("find and select country by typing", function () {
-        var component = getComponent({
+        const component = getComponent({
             open: true
         });
-        var componentRef = component.refs.I18nCountrySelectorStateful;
+        const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
+        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         // var currentCountryIso = componentRef.state.selected.iso2;
         // enter can, validate still not selected, hit enter, validate Canada now selected
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 78 }); // n
-        expect(componentRef.state.searchString).toBe("can");
+        expect(container.state.searchString).toBe("can");
         // expect(componentRef.state.selected.iso2).toBe(currentCountryIso);
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter - select canada
         expect(component.props.onValueChange).toBeCalledWith("124"); //canada
         // open flag, enter afg, hit enter, validate Afganistan now selected
         ReactTestUtils.Simulate.click(flag);
-        expect(componentRef.state.searchString).toBe("");
+        expect(container.state.searchString).toBe("");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 70 }); // f
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 71 }); // g
@@ -173,27 +171,27 @@ describe("I18nCountrySelector", function () {
         expect(component.props.onValueChange).toBeCalledWith("004"); //afganistan
         // open flag, enter ag, validate that no country found
         ReactTestUtils.Simulate.click(flag);
-        expect(componentRef.state.searchString).toBe("");
+        expect(container.state.searchString).toBe("");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 71 }); // g
-        expect(componentRef.state.searchString).toBe("");
+        expect(container.state.searchString).toBe("");
     });
 
     it("find and select country by typing empty with esc", function () {
         var component = getComponent({
             open: true
         });
-        var componentRef = component.refs.I18nCountrySelectorStateful;
+        const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
 
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 78 }); // n
-        expect(componentRef.state.searchString).toBe("can");
+        expect(container.state.searchString).toBe("can");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 27 }); // esc
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter - don't do anything because empty
-        expect(componentRef.state.searchString).toBe("");
+        expect(container.state.searchString).toBe("");
     });
 
     it("stateless: triggers onSearch callback when typing and search string provided", function () {
@@ -234,7 +232,6 @@ describe("I18nCountrySelector", function () {
 
     it("doesn't fire cannonball warning when p-stateful flag is set", function() {
         console.warn = jest.fn();
-        expect(console.warn).not.toBeCalled();
         getComponent({ flags: [ "use-portal", "p-stateful" ] });
         expect(console.warn).not.toBeCalled();
     });

@@ -1,13 +1,13 @@
-var React = require("react"),
-    I18nCountrySelector = require("../../../../components/forms/i18n/I18nCountrySelector");
+import React from "react";
+import I18nCountrySelector from "../../../../components/forms/i18n/I18nCountrySelector";
 
 /**
 * @name I18nCountrySelectorDemo
 * @memberof I18nCountrySelector
 * @desc A demo for I18nCountrySelector
 */
-class I18nCountrySelectorDemo extends React.Component {
-    static flags = [ "use-portal" ];
+export default class I18nCountrySelectorDemo extends React.Component {
+    static flags = [ "use-portal", "p-stateful" ];
 
     state = {
         countryCode: "840"
@@ -34,5 +34,3 @@ class I18nCountrySelectorDemo extends React.Component {
         );
     }
 }
-
-module.exports = I18nCountrySelectorDemo;

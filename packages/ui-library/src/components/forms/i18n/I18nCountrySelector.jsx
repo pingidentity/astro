@@ -1,12 +1,13 @@
 "use strict";
 
-var PropTypes = require("prop-types");
-
-var React = require("react"),
-    _ = require("underscore"),
-    classnames = require("classnames"),
-    CountryFlagList = require("./CountryFlagList"),
-    Utils = require("../../../util/Utils.js");
+import React from "react";
+import PropTypes from "prop-types";
+import _ from "underscore";
+import classnames from "classnames";
+import CountryFlagList from "./CountryFlagList";
+import Utils from "../../../util/Utils.js";
+import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
+import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
 
 /**
 * @callback I18nCountrySelector~onValueChange
@@ -64,37 +65,6 @@ var React = require("react"),
 *    Callback to be triggered when the state of the search of a country when the flag dropdown is expanded changes.
 */
 
-module.exports = class extends React.Component {
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: false
-    };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (props.onCountrySearch) {
-                throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
-            }
-        }
-    }
-
-    render() {
-        return this.props.stateless
-            ? React.createElement(I18nCountrySelectorStateless, //eslint-disable-line
-                _.defaults({ ref: "I18nCountrySelectorStateless" }, this.props))
-            : React.createElement(I18nCountrySelectorStateful, //eslint-disable-line
-                _.defaults({ ref: "I18nCountrySelectorStateful" }, this.props));
-    }
-};
-
 class I18nCountrySelectorStateless extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
@@ -111,6 +81,9 @@ class I18nCountrySelectorStateless extends React.Component {
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
         onSearch: PropTypes.func,
+        setSearchIndex: PropTypes.func,
+        setSearchString: PropTypes.func,
+        setSearchTime: PropTypes.func,
         flags: PropTypes.arrayOf(PropTypes.string),
     };
 
@@ -124,7 +97,26 @@ class I18nCountrySelectorStateless extends React.Component {
         searchIndex: -1,
         searchString: "",
         searchTime: 0,
-        onSearch: _.noop
+        onSearch: _.noop,
+        setSearchIndex: _.noop,
+        setSearchString: _.noop,
+        setSearchTime: _.noop,
+    };
+
+    // moving the complexity from the stateful version
+    _onToggleProxy = () => {
+        this.props.onToggle();
+        this.props.setSearchIndex(-1);
+        this.props.setSearchString("");
+        this.props.setSearchTime(0);
+    }
+
+    // moving the complexity from the stateful version
+    _onSearchProxy = (search, time, index) => {
+        this.props.onSearch(search, time, index);
+        this.props.setSearchString(search);
+        this.props.setSearchTime(time);
+        this.props.setSearchIndex(index);
     };
 
     /**
@@ -140,7 +132,6 @@ class I18nCountrySelectorStateless extends React.Component {
     */
     _handleValueChange = (country) => {
         this.props.onValueChange(country.isoNum || "");
-        this.props.onToggle();
     };
 
     render() {
@@ -157,8 +148,8 @@ class I18nCountrySelectorStateless extends React.Component {
                     selectedCountryCode={this.props.countryCode}
                     open={this.props.open}
                     onValueChange={this._handleValueChange}
-                    onToggle={this.props.onToggle}
-                    onSearch={this.props.onSearch}
+                    onToggle={this._onToggleProxy}
+                    onSearch={this._onSearchProxy}
                     searchIndex={this.props.searchIndex}
                     searchString={this.props.searchString}
                     searchTime={this.props.searchTime}
@@ -220,5 +211,75 @@ class I18nCountrySelectorStateful extends React.Component {
         }, this.props);
 
         return React.createElement(I18nCountrySelectorStateless, props);
+    }
+}
+
+const PStatefulCountrySelector = inStateContainer([
+    {
+        name: "open",
+        initial: false,
+        callbacks: [
+            {
+                name: "onToggle",
+                transform: toggleTransform,
+            }
+        ],
+    },
+    {
+        name: "searchIndex",
+        initial: -1,
+        setter: "setSearchIndex",
+    },
+    {
+        name: "searchString",
+        initial: "",
+        setter: "setSearchString",
+    },
+    {
+        name: "searchTime",
+        initial: 0,
+        setter: "setSearchTime",
+    },
+])(I18nCountrySelectorStateless);
+PStatefulCountrySelector.displayName = PStatefulCountrySelector;
+
+export default class I18nCountrySelector extends React.Component {
+
+    static propTypes = {
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "use-portal", "p-stateful" ])),
+    };
+
+    static defaultProps = {
+        stateless: false,
+        flags: [],
+    };
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "CountrySelector" });
+        }
+        if (!Utils.isProduction()) {
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.onCountrySearch) {
+                throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
+            }
+        }
+    }
+
+    render() {
+        if (this._usePStateful()) {
+            return <PStatefulCountrySelector {...this.props} />;
+        }
+
+        return this.props.stateless
+            ? React.createElement(I18nCountrySelectorStateless,
+                _.defaults({ ref: "I18nCountrySelectorStateless" }, this.props))
+            : React.createElement(I18nCountrySelectorStateful,
+                _.defaults({ ref: "I18nCountrySelectorStateful" }, this.props));
     }
 }

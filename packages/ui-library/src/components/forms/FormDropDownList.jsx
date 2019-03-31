@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
 import FormLabel from "./FormLabel";
-import { v2 as FormTextField } from "./form-text-field";
+import { FormTextFieldStateless } from "./form-text-field/index";
 import HelpHint from "../tooltips/HelpHint";
 import { InputWidths, InputWidthProptypes, getInputWidthClass } from "./InputWidths";
 
@@ -832,7 +832,7 @@ class FormDropDownListStateless extends React.Component {
                                 // for auto-sized dropdowns, it pushes out the width of the input
                             }
 
-                            <FormTextField
+                            <FormTextFieldStateless
                                 data-id="selected-input"
                                 disabled={this.props.disabled}
                                 inputClassName={selectedOptionLabelClassName}
