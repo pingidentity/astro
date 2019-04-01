@@ -218,6 +218,10 @@ label {
         &--mono input {
             font-family: 'Consolas', 'Monaco', 'Andale Mono', monospace;
         }
+
+        .password-meter {
+            margin: 6px 0 0;
+        }
     }
 
     &.input-textarea {

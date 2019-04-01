@@ -851,6 +851,13 @@ module.exports = [
                         pathToSource: "components_forms_ValidationMessages.jsx.html",
                         pathToDemoSource: "demo_components_forms_ValidationMessagesDemo.jsx.html"
                     },
+                    {
+                        label: "Password Strength Meter",
+                        demo: require("../components/general/PasswordStrengthMeterDemo"),
+                        pathToDoc: "components/general/PasswordStrengthMeter.jsx",
+                        pathToSource: "PasswordStrengthMeter.jsx.html",
+                        pathToDemoSource: "demo_components_general_PasswordStrengthMeterDemo.jsx.html"
+                    },
                 ]
             },
             {
