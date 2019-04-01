@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import License from "../../../templates/License";
 
-export default class LicensingDemo extends Component {
+export default class LicenseDemo extends Component {
     render () {
         return (
             <License />

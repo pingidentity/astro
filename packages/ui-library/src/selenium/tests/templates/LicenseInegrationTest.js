@@ -3,7 +3,7 @@ var LicenseTemplatePage = require("../../pages/templates/LicenseTemplatePage.js"
 describe("Edit Page Sectioned Integration", function () {
 
     beforeEach(function () {
-        LicenseTemplatePage.LiscenseDemoPage();
+        LicenseTemplatePage.LicenseDemoPage();
     });
 
     afterAll(function (done) {

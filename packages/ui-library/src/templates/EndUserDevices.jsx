@@ -9,6 +9,10 @@ import PageHeader from "ui-library/lib/components/general/PageHeader";
 import TileSelector from "ui-library/lib/components/buttons/TileSelector";
 
 
+/**
+* @name EndUserDevices
+* @desc This is a template to demonstrate how to build a End User Devices
+*/
 class PairingModalContainer extends React.Component {
 
     constructor(props) {

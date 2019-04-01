@@ -11,6 +11,11 @@ import Link from "../components/general/Link";
 import FormattedContent from "../components/general/FormattedContent";
 import HR from "../components/general/HR";
 
+
+/**
+* @name License
+* @desc This is a template to demonstrate how to build a License Template.
+*/
 export default class License extends Component {
     render () {
         return (
