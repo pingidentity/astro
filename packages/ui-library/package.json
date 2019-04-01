@@ -5,9 +5,10 @@
   "author": "UX Front-End Development Team",
   "license": "ISC",
   "files": [
-    "lib"
+    "lib",
+    "index.js"
   ],
-  "main": "./lib/MainIndex.js",
+  "main": "./index.js",
   "publishConfig": {
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
@@ -47,6 +48,7 @@
     "validator": "5.2.0"
   },
   "devDependencies": {
+    "@pingux/gulp-export": "^2.2.0",
     "acorn": "^6.0.4",
     "babel-cli": "~6.26.0",
     "babel-core": "6.26.0",
@@ -172,7 +174,6 @@
   "scripts": {
     "pack": "webpack --progress --colors --config webpack.config.js",
     "package-library": "gulp package-lib",
-    "package-index": "gulp package-index",
     "pack-landing": "webpack --progress --colors --config webpack.landing.config.js",
     "webpack-start-landing": "webpack-dev-server --content-base hosting/ -d --hot --port 8082 --host 0.0.0.0 --inline --progress --colors --config webpack.landing.config.js",
     "webpack-start": "webpack-dev-server -d --hot --host 0.0.0.0 --inline --progress --colors --config webpack.dev.config.js",

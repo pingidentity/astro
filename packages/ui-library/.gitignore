@@ -23,6 +23,9 @@ npm-debug.log
 **/coverage
 **/coverage-reference
 
+# index.js
+index.js
+
 # IDEA
 *.iml
 .idea/

@@ -2,6 +2,7 @@
 
 const gulp = require("gulp");
 const babel = require("gulp-babel");
+const exporter = require("@pingux/gulp-export");
 const debug = require("gulp-debug");
 const rename = require("gulp-rename");
 const fs = require("fs");
@@ -23,7 +24,7 @@ const demoComponentSrcPaths = fs.readFileSync("./src/demo/core/demos.js")
         const end = value.lastIndexOf(`"`);
         return `src/${value.substring(start, end)}`;
     })
-;
+    ;
 const renameFiles = [
     { name: "charting/Cards/DashboardCard.jsx", rename: "Card.jsx" },
     { name: "charting/Cards/index.js", rename: "Cards.jsx" },
@@ -56,19 +57,18 @@ const demolessSrcPaths = [
     "src/util/Utils.js",
 ];
 const allFlatfileSrcPaths = demoComponentSrcPaths.concat(demolessSrcPaths);
-const componentFlatfileNames = allFlatfileSrcPaths.map(componentPath => {
 
-    const renameFile = _.find(renameFiles, file => componentPath.includes(file.name) );
+const componentFlatfileNames = allFlatfileSrcPaths.map(componentPath => {
+    const renameFile = _.find(renameFiles, file => componentPath.includes(file.name));
     const filePath = renameFile ? renameFile.rename : componentPath;
 
     return path
         .basename(filePath)
         .replace(".jsx", "")
-        .replace(".js", "")
-    ;
+        .replace(".js", "");
 });
-let componentIndex = 0;
 
+let componentIndex = 0;
 
 gulp.task("transpile-lib", () =>
     gulp.src([
@@ -84,6 +84,23 @@ gulp.task("transpile-lib", () =>
         .pipe(gulp.dest("lib"))
 );
 
+gulp.task("build-index", () =>
+    gulp
+        .src([
+            "./lib/components/**/*.js",
+            "!./lib/components/**/__mocks__/**/*.js",
+            "!./lib/components/**/tests/**/*.js",
+            "./lib/util/TreeShakeWarn.js"
+        ])
+        .pipe(exporter({
+            exportType: "default",
+            relativeNames: false,
+            exportModules: false
+        }))
+        .pipe(babel())
+        .pipe(gulp.dest("./"))
+);
+
 gulp.task("create-flatfiles", () =>
     gulp
         .src(allFlatfileSrcPaths)
@@ -95,9 +112,9 @@ gulp.task("create-flatfiles", () =>
                 .replace("src/", "")
                 .replace(".jsx", "")
                 .replace(".js", "")
-            ;
+                ;
             /* jshint ignore:start */
-            file.contents = new Buffer(`module.exports = require(".${componentPath}");`);
+            file.contents = new Buffer(`module.exports = require(".${componentPath}.js");`);
             /* jshint ignore:end */
         }))
         .pipe(rename(file => {
@@ -127,7 +144,7 @@ gulp.task("move-files", () =>
 );
 
 gulp.task("build-css", () =>
-    gulp.src(["./src/css/ui-library.scss", "./src/css/end-user.scss" ])
+    gulp.src(["./src/css/ui-library.scss", "./src/css/end-user.scss"])
         .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
         .pipe(gulp.dest("lib/css"))
 );
@@ -138,6 +155,7 @@ gulp.task("package-lib", () => {
         ["transpile-lib"],
         ["create-flatfiles"],
         ["move-files"],
-        ["build-css"]
+        ["build-css"],
+        ["build-index"],
     );
 });
