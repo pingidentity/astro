@@ -4,21 +4,22 @@
 import { ChromePicker } from "react-color";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 
-var PropTypes = require("prop-types");
-
-var React = require("react");
-var ReactDOM = require("react-dom");
-var css = require("classnames");
-var _ = require("underscore");
-var FormLabel = require("../forms/FormLabel");
-var FormTextField = require("../forms/form-text-field");
-var Validators = require("../../util/Validators");
-var Utils = require("../../util/Utils");
-var Validator = require("validator");
-var If = require("./If");
-var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import css from "classnames";
+import _ from "underscore";
+import FormLabel from "../forms/FormLabel";
+import FormTextField from "../forms/form-text-field";
+import Validators from "../../util/Validators";
+import Utils from "../../util/Utils";
+import Validator from "validator";
+import If from "./If";
+import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 
 import PopperContainer from "../tooltips/PopperContainer";
+import { inStateContainer, toggleTransform } from "../utils/StateContainer";
+import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
 
 /**
  * @callback ColorPicker~onValueChange
@@ -63,6 +64,8 @@ import PopperContainer from "../tooltips/PopperContainer";
  *     A hexcode of chosen color
  * @param {boolean} [disabled=false]
  *     A property to disable the component
+ * @param {boolean} [useInternalError=true]
+ *     When using the p-stateful version, turn on or off the internal hex format error
  * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX")} [width]
 *      Specifies the width of the input.
  * @param {ColorPicker~onValueChange} onValueChange
@@ -94,49 +97,6 @@ import PopperContainer from "../tooltips/PopperContainer";
  *       stateless={true} />
  */
 
-module.exports = class extends React.Component {
-
-    static displayName = "ColorPicker";
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: false
-    };
-
-    constructor(props) {
-        super(props);
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (props.controlled !== undefined) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            /* istanbul ignore if  */
-            if (props.id) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            /* istanbul ignore if  */
-            if (props.onChange) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-    }
-
-    render() {
-        return (
-            this.props.stateless
-                ? <Stateless ref="stateless" {...this.props} />
-                : <Stateful ref="stateful" {...this.props} />);
-    }
-};
-
 class Stateless extends React.Component {
     static displayName = "ColorPickerStateless";
 
@@ -150,10 +110,11 @@ class Stateless extends React.Component {
         label: PropTypes.string,
         color: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
-        onValueChange: PropTypes.func.isRequired,
+        onValueChange: PropTypes.func,
         open: PropTypes.bool,
         onToggle: PropTypes.func.isRequired,
         errorMessage: PropTypes.string,
+        internalError: PropTypes.string, // internal use only, leaving out of JSDocs on purpose
         onError: PropTypes.func,
         width: PropTypes.oneOf(InputWidthProptypes),
         flags: PropTypes.arrayOf(PropTypes.string),
@@ -164,8 +125,10 @@ class Stateless extends React.Component {
         open: false,
         disabled: false,
         cpid: Math.random(),
+        onValueChange: _.noop,
         onError: _.noop,
         errorMessage: "",
+        internalError: "",
         width: InputWidths.SM,
         flags: [],
     };
@@ -300,11 +263,13 @@ class Stateless extends React.Component {
 
     _getReference = () => this.refs.swatch;
 
+    _errorMessage = () => this.props.errorMessage || this.props.internalError;
+
     render() {
         var containerCss = {
             "input-color-picker": true,
             open: this.props.open,
-            "color-picker-error": this.props.errorMessage
+            "color-picker-error": this._errorMessage(),
         };
         containerCss[this.props.className] = !!this.props.className;
 
@@ -335,11 +300,12 @@ class Stateless extends React.Component {
                             maxLength={7}
                             name={this.props.name}
                             disabled={this.props.disabled}
-                            errorMessage={this.props.errorMessage}
+                            errorMessage={this._errorMessage()}
                             onValueChange={this._handleColorInputChange}
                             onKeyDown={this._handleColorInputKeyDown}
                             onBlur={this._handleColorInputBlur}
                             width={this.props.width}
+                            flags={[ "p-stateful" ]}
                         />
                         <span className="colors-swatch" data-id={this.props["data-id"] + "-colors-swatch"} >
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
@@ -395,5 +361,89 @@ class Stateful extends React.Component {
                 onValueChange={this.props.onValueChange}
                 open={this.state.open}/>
         );
+    }
+}
+
+const PStatefulColorPicker = inStateContainer([
+    {
+        name: "color",
+        initial: "",
+        setter: "onValueChange",
+    },
+    {
+        name: "open",
+        initial: false,
+        callbacks: [{
+            name: "onToggle",
+            transform: toggleTransform,
+        }],
+    },
+    {
+        name: "internalError",
+        initial: "",
+        setter: "onError",
+    },
+])(Stateless);
+PStatefulColorPicker.displayName = "PStatefulColorPicker";
+
+export default class ColorPicker extends React.Component {
+
+    static displayName = "ColorPicker";
+
+    static propTypes = {
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "use-portal", "p-stateful" ])),
+        useInternalError: PropTypes.bool, // this appears in the JSDocs for the main component
+    };
+
+    static defaultProps = {
+        stateless: false,
+        flags: [],
+        useInternalError: true,
+    };
+
+    static _statelessComponent = Stateless; // this is to enable testing
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            if (!this.props.stateless && (this.props.open !== undefined && this.props.errorMessage !== undefined)) {
+                cannonballProgressivleyStatefulWarning({ name: "ColorPicker" });
+            } else if (this.props.stateless) {
+                cannonballProgressivleyStatefulWarning({ name: "ColorPicker" });
+            }
+        }
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction()) {
+            /* istanbul ignore if  */
+            if (this.props.controlled !== undefined) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.id) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.onChange) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+        }
+    }
+
+    render() {
+        if (this._usePStateful()) {
+            const { useInternalError, ...props } = this.props;
+            return <PStatefulColorPicker {...props} internalError={useInternalError ? undefined : ""}/>;
+        }
+
+        return (
+            this.props.stateless
+                ? <Stateless ref="stateless" {...this.props} />
+                : <Stateful ref="stateful" {...this.props} />);
     }
 }

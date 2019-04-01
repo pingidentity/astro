@@ -10,7 +10,7 @@ jest.dontMock("react-color");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-describe("ColorPicker", function () {
+describe("ColorPicker v4", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -27,16 +27,17 @@ describe("ColorPicker", function () {
             onToggle: jest.fn(),
             onValueChange: jest.fn(),
             onError: jest.fn(),
-            color: "#fff"
+            color: "#fff",
+            flags: [ "use-portal", "p-stateful" ],
         });
         return ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
     }
 
     function getParts (component) {
-        var componentRef = component.refs.stateless || component.refs.stateful.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
         return {
             input: TestUtils.scryRenderedDOMNodesWithTag(component, "input")[0],
-            picker: componentRef.reactColorPicker
+            picker: stateless.reactColorPicker
         };
     }
 
@@ -52,7 +53,7 @@ describe("ColorPicker", function () {
             hintText: "dont touch me",
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // check the form label properties
         var label = TestUtils.scryRenderedComponentsWithType(component, FormLabel)
@@ -65,7 +66,7 @@ describe("ColorPicker", function () {
         expect(label.props.value).toEqual("my color picker");
         expect(label.props.hint).toEqual("dont touch me");
 
-        var colorSample = componentRef.refs.colorSample;
+        var colorSample = stateless.refs.colorSample;
         expect(colorSample.style.backgroundColor).toEqual("rgb(255, 0, 255)");
 
         var colorInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -73,7 +74,7 @@ describe("ColorPicker", function () {
         expect(colorInput.value).toEqual("#ff00ff");
 
         // the picker is not visible by default
-        var picker = componentRef.reactColorPicker;
+        var picker = stateless.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -114,7 +115,8 @@ describe("ColorPicker", function () {
 
     it("stateless: skips the global click handler if not open and click inside picker", function () {
         var component = getComponent({ stateless: true });
-        var innerSwatch = component.refs.stateless.refs.innerSwatch;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
+        const innerSwatch = stateless.refs.innerSwatch;
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
         //click on the inner swatch
@@ -137,14 +139,14 @@ describe("ColorPicker", function () {
             color: "#ff00ff",
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // input should be enabled
         var colorInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(colorInput.disabled).toBe(false);
 
         // the picker should not be visible
-        var picker = componentRef.reactColorPicker;
+        var picker = stateless.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -155,9 +157,9 @@ describe("ColorPicker", function () {
             open: true,
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
-        var picker = componentRef.reactColorPicker;
+        var picker = stateless.reactColorPicker;
         expect(picker).toBeTruthy();
 
         var container = TestUtils.findRenderedDOMNodeWithDataId(component, "container");
@@ -169,13 +171,13 @@ describe("ColorPicker", function () {
             disabled: true,
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
         expect(input.disabled).toBeTruthy();
 
         // the picker should not be rendered (due to the disable state), even after forcibly toggling it
-        var picker = componentRef.reactColorPicker;
+        var picker = stateless.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -185,24 +187,24 @@ describe("ColorPicker", function () {
             disabled: true,
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
-        var picker = componentRef.reactColorPicker;
+        var picker = stateless.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
     it("stateful: disables component if disabled=true", function () {
         var component = getComponent({ disabled: true });
-        var componentRef = component.refs.stateful.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
         expect(input.disabled).toBeTruthy();
 
         // the picker should not be rendered (due to the disable state), even after forcibly toggling it
-        var picker = componentRef.reactColorPicker;
+        var picker = stateless.reactColorPicker;
         expect(picker).toBeUndefined();
-        component.refs.stateful._handleToggle();
-        var picker = componentRef.reactColorPicker;
+        stateless.props.onToggle();
+        var picker = stateless.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -296,24 +298,24 @@ describe("ColorPicker", function () {
         var component = getComponent({
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
-        expect(window.addEventListener).toBeCalledWith("click", componentRef._handleGlobalClick);
-        expect(window.addEventListener).toBeCalledWith("keydown", componentRef._handleGlobalKeyDown);
+        expect(window.addEventListener).toBeCalledWith("click", stateless._handleGlobalClick);
+        expect(window.addEventListener).toBeCalledWith("keydown", stateless._handleGlobalKeyDown);
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
-        expect(window.removeEventListener).toBeCalledWith("click", componentRef._handleGlobalClick);
-        expect(window.removeEventListener).toBeCalledWith("keydown", componentRef._handleGlobalKeyDown);
+        expect(window.removeEventListener).toBeCalledWith("click", stateless._handleGlobalClick);
+        expect(window.removeEventListener).toBeCalledWith("keydown", stateless._handleGlobalKeyDown);
     });
 
     it("stateless: handle global key down when closed", function () {
         var component = getComponent({
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         var e = { keyCode: 27 };
-        componentRef._handleGlobalKeyDown(e);
+        stateless._handleGlobalKeyDown(e);
 
         expect(component.props.onToggle.mock.calls.length).toBe(0);
     });
@@ -323,61 +325,61 @@ describe("ColorPicker", function () {
             stateless: true,
             open: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // nothing happens when pressing any key other than ESC
         var e = { keyCode: 13 };
-        componentRef._handleGlobalKeyDown(e);
+        stateless._handleGlobalKeyDown(e);
         expect(component.props.onToggle.mock.calls.length).toBe(0);
 
         // should call the onToggle callback on ESC key press
         e = { keyCode: 27 };
-        componentRef._handleGlobalKeyDown(e);
+        stateless._handleGlobalKeyDown(e);
         expect(component.props.onToggle.mock.calls.length).toBe(1);
     });
 
     it("stateful: handle global key down", function () {
         var component = getComponent();
-        var componentRef = component.refs.stateful.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // nothing happens when pressing ESC and picker is not open
         var e = { keyCode: 27 };
-        componentRef._handleGlobalKeyDown(e);
-        expect(componentRef.props.open).toBe(false);
+        stateless._handleGlobalKeyDown(e);
+        expect(stateless.props.open).toBe(false);
 
         // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+        ReactTestUtils.Simulate.click(stateless.refs.innerSwatch);
 
         // should close
         e = { keyCode: 27 };
-        componentRef._handleGlobalKeyDown(e);
-        expect(componentRef.props.open).toBe(false);
+        stateless._handleGlobalKeyDown(e);
+        expect(stateless.props.open).toBe(false);
     });
 
     it("stateful: expands and collapses with key presses", function () {
         var component = getComponent();
-        var componentRef = component.refs.stateful.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
         var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
-        expect(componentRef.props.open).toBe(true);
+        expect(stateless.props.open).toBe(true);
         //esc key will close the picker
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 27 });
-        expect(componentRef.props.open).toBe(false);
+        expect(stateless.props.open).toBe(false);
         //esc key again will have no effect
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 27 });
-        expect(componentRef.props.open).toBe(false);
+        expect(stateless.props.open).toBe(false);
 
         //return key should make it expand
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
-        expect(componentRef.props.open).toBe(true);
+        expect(stateless.props.open).toBe(true);
         //tab key will close the picker
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 9 });
-        expect(componentRef.props.open).toBe(false);
+        expect(stateless.props.open).toBe(false);
         //tab key again will have no effect
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 9 });
-        expect(componentRef.props.open).toBe(false);
+        expect(stateless.props.open).toBe(false);
 
     });
 
@@ -385,7 +387,8 @@ describe("ColorPicker", function () {
         var onToggle = jest.fn();
         var component = getComponent({
             stateless: true,
-            onToggle: onToggle
+            onToggle: onToggle,
+            open: false,
         });
         var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
@@ -440,10 +443,10 @@ describe("ColorPicker", function () {
             stateless: true,
             onToggle: onToggle
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+        ReactTestUtils.Simulate.click(stateless.refs.innerSwatch);
 
         expect(onToggle.mock.calls.length).toBe(1);
     });
@@ -455,40 +458,40 @@ describe("ColorPicker", function () {
             disabled: true,
             onToggle: onToggle
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+        ReactTestUtils.Simulate.click(stateless.refs.innerSwatch);
 
         expect(onToggle.mock.calls.length).toBe(0);
     });
 
     it("stateless: doesn't open when the inner swatch is focused on", function () {
         var component = getComponent({ stateless: true });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
-        ReactTestUtils.Simulate.focus(componentRef.refs.innerSwatch, { nativeEvent: { relatedTarget: {} } });
+        ReactTestUtils.Simulate.focus(stateless.refs.innerSwatch, { nativeEvent: { relatedTarget: {} } });
 
         expect(component.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: open when the inner swatch is focused on", function () {
         var component = getComponent({ stateless: true });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
-        ReactTestUtils.Simulate.focus(componentRef.refs.innerSwatch, { nativeEvent: { relatedTarget: false } });
+        ReactTestUtils.Simulate.focus(stateless.refs.innerSwatch, { nativeEvent: { relatedTarget: false } });
 
         expect(component.props.onToggle).not.toBeCalled();
     });
 
     it("stateful: open when the inner swatch is clicked", function () {
         var component = getComponent();
-        var componentRef = component.refs.stateful.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+        ReactTestUtils.Simulate.click(stateless.refs.innerSwatch);
 
-        expect(componentRef.props.open).toBe(true);
+        expect(stateless.props.open).toBe(true);
     });
 
     it("stateless: trigger onValueChange when color is picked", function () {
@@ -496,10 +499,10 @@ describe("ColorPicker", function () {
             stateless: true,
             open: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // simulate a call back from the react color picker component
-        componentRef._handleValueChange({ hex: "#aaa" });
+        stateless._handleValueChange({ hex: "#aaa" });
 
         expect(component.props.onValueChange.mock.calls.length).toBe(1);
         expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
@@ -508,13 +511,13 @@ describe("ColorPicker", function () {
 
     it("stateful: trigger onValueChange when color is picked", function () {
         var component = getComponent();
-        var componentRef = component.refs.stateful.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+        ReactTestUtils.Simulate.click(stateless.refs.innerSwatch);
 
         // simulate a call back from the react color picker component
-        componentRef._handleValueChange("#aaa");
+        stateless._handleValueChange("#aaa");
         expect(component.props.onValueChange.mock.calls.length).toBe(1);
     });
 
@@ -523,10 +526,10 @@ describe("ColorPicker", function () {
             stateless: true,
             open: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // simulate a call back from the react color picker component
-        componentRef._handleDrag({ hex: "#aaa" });
+        stateless._handleDrag({ hex: "#aaa" });
 
         expect(component.props.onValueChange.mock.calls.length).toBe(1);
         expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
@@ -534,17 +537,17 @@ describe("ColorPicker", function () {
 
     it("stateful: trigger onValueChange when mouse is dragged on the color picker", function () {
         var component = getComponent();
-        var componentRef = component.refs.stateful.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+        ReactTestUtils.Simulate.click(stateless.refs.innerSwatch);
 
         // simulate a call back from the react color picker component
-        componentRef._handleDrag("#aaa");
+        stateless._handleDrag("#aaa");
 
         expect(component.props.onValueChange.mock.calls.length).toBe(1);
         // and the color picker should not close
-        expect(componentRef.props.open).toBe(true);
+        expect(stateless.props.open).toBe(true);
     });
 
     it("stateless: sets the provided color on the color picker", function () {
@@ -553,10 +556,10 @@ describe("ColorPicker", function () {
             open: true,
             stateless: true
         });
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
         // the picker is not visible by default
-        var picker = componentRef.reactColorPicker;
+        var picker = stateless.reactColorPicker;
 
         expect(picker.props.color).toBe("#ff00ff");
     });
@@ -585,9 +588,9 @@ describe("ColorPicker", function () {
             stateless: true
         });
 
-        var componentRef = component.refs.stateless;
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, ColorPicker._statelessComponent);
 
-        var colorSample = componentRef.refs.colorSample;
+        var colorSample = stateless.refs.colorSample;
         expect(colorSample.style.backgroundColor).toEqual("");
 
         var colorInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -605,22 +608,6 @@ describe("ColorPicker", function () {
         var element = TestUtils.findRenderedDOMNodeWithClass(component, "popover-display");
 
         expect(element).toBeDefined();
-    });
-
-    it("fires Cannonball warning when stateless and p-stateful isn't set", function() {
-        console.warn = jest.fn();
-        getComponent({ stateless: true, flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: true, flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("fires Cannonball warning when stateful and color prop is provided and p-stateful isn't set", function() {
-        console.warn = jest.fn();
-        getComponent({ stateless: true, color: "#ffffff", flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: true, color: "#ffffff", flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
     });
 
 });
