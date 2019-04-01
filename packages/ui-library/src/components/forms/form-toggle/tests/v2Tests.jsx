@@ -1,15 +1,15 @@
 jest.dontMock("../v2");
 
 describe("Toggle", function () {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        _ = require("underscore"),
-        TestUtils = require("../../../../testutil/TestUtils"),
-        Utils = require("../../../../util/Utils"),
-        Toggle = require("../v2");
+    const React = require("react");
+    const ReactTestUtils = require("react-dom/test-utils");
+    const _ = require("underscore");
+    const TestUtils = require("../../../../testutil/TestUtils");
+    const Utils = require("../../../../util/Utils");
+    const Toggle = require("../v2");
 
-    function getComponent (props) {
-        var props = _.defaults(props || {}, {
+    function getComponent (p) {
+        const props = _.defaults(p || {}, {
             stateless: true,
             onToggle: jest.fn()
         });
@@ -18,19 +18,27 @@ describe("Toggle", function () {
     }
 
     it("stateless: renders the component with default data-id", function () {
-        var component = getComponent();
+        const component = getComponent();
+
+        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
+    });
+
+    it("progressively stateless: renders the component with default data-id", function () {
+        const component = getComponent({
+            flags: ["p-stateful"]
+        });
 
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
     });
 
     it("stateful: renders the component with default data-id", function () {
-        var component = getComponent({ stateless: false });
+        const component = getComponent({ stateless: false });
 
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
     });
 
     it("stateless: renders additional CSS classes from className prop", function () {
-        var component = getComponent({ className: "someClass" }),
+        const component = getComponent({ className: "someClass" }),
             toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle"),
             toggleCSS = toggle.className.split(" ");
 
@@ -38,43 +46,43 @@ describe("Toggle", function () {
     });
 
     it("stateless: defaults to toggled false", function () {
-        var component = getComponent(),
-            toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle"),
-            toggleCSS = toggle.className.split(" ");
+        const component = getComponent();
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+        const toggleCSS = toggle.className.split(" ");
 
         expect(_.contains(toggleCSS, "selected")).toBe(false);
     });
 
     it("stateful: defaluts to toggled false", function () {
-        var component = getComponent({ stateless: false }),
-            toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle"),
-            toggleCSS = toggle.className.split(" ");
+        const component = getComponent({ stateless: false });
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+        const toggleCSS = toggle.className.split(" ");
 
         expect(_.contains(toggleCSS, "selected")).toBe(false);
     });
 
     it("stateless: accepts default toggled state", function () {
-        var component = getComponent({ toggled: true }),
-            toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle"),
-            toggleCSS = toggle.className.split(" ");
+        const component = getComponent({ toggled: true });
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+        const toggleCSS = toggle.className.split(" ");
 
         expect(_.contains(toggleCSS, "selected")).toBe(true);
     });
 
     it("stateful: accepts default toggled state", function () {
-        var component = getComponent({
-                stateless: false,
-                toggled: true
-            }),
-            toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle"),
-            toggleCSS = toggle.className.split(" ");
+        const component = getComponent({
+            stateless: false,
+            toggled: true
+        });
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+        const toggleCSS = toggle.className.split(" ");
 
         expect(_.contains(toggleCSS, "selected")).toBe(true);
     });
 
     it("stateless: triggers onToggle callback when clicked", function () {
-        var component = getComponent(),
-            toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+        const component = getComponent();
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
 
         ReactTestUtils.Simulate.click(toggle);
 
@@ -82,9 +90,9 @@ describe("Toggle", function () {
     });
 
     it("stateful: _handleToggle callback changes toggled state when clicked", function () {
-        var component = getComponent({ stateless: false }),
-            componentRef = component.refs.ToggleStateful,
-            toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+        const component = getComponent({ stateless: false });
+        const componentRef = component.refs.ToggleStateful;
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
 
         expect(componentRef.state.toggled).toBe(false);
 
@@ -94,8 +102,8 @@ describe("Toggle", function () {
     });
 
     it("stateless: does not trigger onToggle callback when disabled", function () {
-        var component = getComponent({ disabled: true }),
-            toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+        const component = getComponent({ disabled: true, "data-id": "toggle" });
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
 
         ReactTestUtils.Simulate.click(toggle);
 
@@ -103,7 +111,7 @@ describe("Toggle", function () {
     });
 
     it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
+        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
         expect(function () {
             getComponent({ id: "foo" });
@@ -111,11 +119,10 @@ describe("Toggle", function () {
     });
 
     it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
 
         expect(function () {
             getComponent({ controlled: true });
         }).toThrow(expectedError);
     });
-
 });

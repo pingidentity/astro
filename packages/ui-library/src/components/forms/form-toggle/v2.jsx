@@ -1,14 +1,16 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    Utils = require("../../../util/Utils"),
-    _ = require("underscore");
+import React, { Component } from "react";
+import PropTypes from "prop-types" ;
+import classnames from "classnames";
+import Utils from "../../../util/Utils";
+import _ from "underscore";
+import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
+import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 
 /**
  * @enum {string}
  * @alias Toggle.Status
  */
-var Status = {
+const Status = {
     LOCKED: "locked"
 };
 
@@ -47,65 +49,47 @@ var Status = {
 *     <Toggle className="small" onToggle={this._handleToggle} toggled={true} />
 */
 
-class Toggle extends React.Component {
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: true
-    };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-            }
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-        }
-    }
-
-    render() {
-        return this.props.stateless
-            ? React.createElement(ToggleStateless, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "ToggleStateless" }, this.props))
-            : React.createElement(ToggleStateful, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "ToggleStateful" }, this.props));
-
-    }
-}
-
-class ToggleStateless extends React.Component {
+class Stateless extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         toggled: PropTypes.bool,
         onToggle: PropTypes.func,
         disabled: PropTypes.bool,
-        name: PropTypes.string
+        name: PropTypes.string,
     };
 
     static defaultProps = {
         "data-id": "toggle",
         className: "",
-        toggled: false,
-        onToggle: _.noop,
-        disabled: false
+        disabled: false,
     };
+
+    componentDidMount() {
+        if (!this.props.flags.includes("p-stateful")) {
+            if (
+                (typeof this.props.toggled === "undefined" && this.props.stateless) ||
+                (typeof this.props.toggled !== "undefined" && !this.props.stateless)
+            ) {
+                cannonballChangeWarning({
+                    message: `The 'toggled' prop will no longer serve as an initial state. ` +
+                        `If it is present, it will control the current value of the component. ` +
+                        `Set the 'p-stateful' flag to switch to this behavior now.`,
+                });
+            }
+        }
+    }
 
     _handleToggle = () => {
         if (this.props.disabled) {
             return;
         }
+
         this.props.onToggle();
     };
 
     render() {
-        var status = this.props.status ? Status[this.props.status.toUpperCase()] : null,
+        const status = this.props.status ? Status[this.props.status.toUpperCase()] : null,
             className = classnames("input-toggle", this.props.className, status, {
                 selected: this.props.toggled,
                 disabled: this.props.disabled
@@ -121,9 +105,9 @@ class ToggleStateless extends React.Component {
     }
 }
 
-class ToggleStateful extends React.Component {
+class Stateful extends React.Component {
     static defaultProps = {
-        onToggle: _.noop
+        onToggle: /* istanbul ignore next  */ () => { }
     };
 
     state = {
@@ -138,13 +122,64 @@ class ToggleStateful extends React.Component {
     };
 
     render() {
-        var props = _.defaults({
+        const props = _.defaults({
             ref: "ToggleStateless",
             toggled: this.state.toggled,
             onToggle: this._handleToggle
         }, this.props);
 
-        return React.createElement(ToggleStateless, props);
+        return <Stateless {...props} />;
+    }
+}
+
+const PStatefulToggle = inStateContainer([
+    {
+        name: "toggled",
+        initial: false,
+        callbacks: [
+            {
+                name: "onToggle",
+                transform: toggleTransform,
+            }
+        ],
+    }
+])(Stateless);
+
+PStatefulToggle.displayName = "PStatefulToggle";
+
+export default class Toggle extends Component {
+    static propTypes = {
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.string),
+    };
+
+    static defaultProps = {
+        flags: [],
+        stateless: true,
+    };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            if (props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+            }
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+        }
+    }
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    render() {
+        if (this._usePStateful()) {
+            return <PStatefulToggle { ...this.props } />;
+        }
+
+        return this.props.stateless
+            ? <Stateless ref="ToggleStateless" { ...this.props } />
+            : <Stateful ref="ToggleStateful" { ...this.props } />;
     }
 }
 
