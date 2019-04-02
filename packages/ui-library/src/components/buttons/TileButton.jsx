@@ -6,6 +6,11 @@ import Link from "../general/Link";
 
 
 const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking
+export const types = {
+    SIDEICON: "side-icon",
+    SQUARE: "square",
+    TOPICON: "top-icon"
+};
 
 /**
  * @class TileButton
@@ -56,7 +61,8 @@ const TileButton = ({
     type,
     ...props
 }) => {
-    const sideIcon = type === "side-icon";
+    const isSquare = type === types.SQUARE;
+    const isSideIcon = type === types.SIDEICON;
     const iconClassName = getIconClassName(props);
     const renderedIcon = iconClassName
         ? <div className={classnames("tile-button__icon", iconClassName)}/>
@@ -64,7 +70,8 @@ const TileButton = ({
 
     const classNames = classnames("tile-button", className, {
         "tile-button--selected": selected,
-        "tile-button--side-icon": sideIcon,
+        "tile-button--side-icon": isSideIcon,
+        "tile-button--square": isSquare
     },
     (panel && selected) ? "tile-button--panel" : ""
     );
@@ -84,7 +91,13 @@ const TileButton = ({
 
     const renderedTitle = (
         title &&
-            <div key="title" className="tile-button__title">
+            <div
+                key="title"
+                className={classnames(
+                    "tile-button__title",
+                    isSquare ? "tile-button__title--square" : ""
+                )}
+            >
                 {title}
                 {renderedNote}
             </div>
@@ -103,11 +116,16 @@ const TileButton = ({
     return (
         <button className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown}>
             {renderedIcon &&
-                <div className="tile-button__icon-container">
+                <div
+                    className={classnames(
+                        "tile-button__icon-container",
+                        isSquare ? "tile-button__icon-container--square" : ""
+                    )}
+                >
                     {renderedIcon}
                 </div>
             }
-            {sideIcon
+            {isSideIcon
                 ? (
                     <div className="tile-button__content-container">
                         {renderedTitle}
@@ -133,7 +151,7 @@ TileButton.propTypes = {
     onClick: PropTypes.func,
     panel: PropTypes.bool,
     title: PropTypes.string,
-    type: PropTypes.oneOf([ "side-icon", "top-icon" ]),
+    type: PropTypes.oneOf(Object.values(types)),
     note: PropTypes.string,
     link: PropTypes.shape({
         text: PropTypes.string,
@@ -143,7 +161,7 @@ TileButton.propTypes = {
 
 TileButton.defaultProps = {
     "data-id": "tile-button",
-    type: "top-icon",
+    type: types.TOPICON,
 };
 
 export default TileButton;

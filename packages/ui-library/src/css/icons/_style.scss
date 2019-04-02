@@ -253,6 +253,11 @@
     content: $icon-expand-arrow;
   }
 }
+.icon-facebook {
+  &:before {
+    content: $icon-facebook;
+  }
+}
 .icon-file {
   &:before {
     content: $icon-file;
@@ -326,6 +331,11 @@
 .icon-link {
   &:before {
     content: $icon-link;
+  }
+}
+.icon-linkedin {
+  &:before {
+    content: $icon-linkedin;
   }
 }
 .icon-lock {
@@ -636,6 +646,11 @@
 .icon-thumb {
   &:before {
     content: $icon-thumb;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
   }
 }
 .icon-undo {

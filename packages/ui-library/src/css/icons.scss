@@ -157,3 +157,24 @@ a.icon-clear {
         }
     }
 }
+
+// Colors for social icons
+
+.icon-facebook {
+    &:before {
+        color: #3c5c99; // Facebook blue
+    }
+}
+
+.icon-linkedin {
+    &:before {
+        color: #0077b5; // LinkedIn brand blue
+    }
+}
+
+.icon-twitter {
+    &:before {
+        color: #1da1f2; // Twitter blue
+        content: $icon-twitter;
+    }
+}

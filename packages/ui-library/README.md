@@ -119,3 +119,8 @@ for details on various topics, such as:
 * How to contribute to the library
 * How to integrate the library into other npm based projects
 * How to build/release the library
+
+## Licenses
+
+The Library icons for Facebook, Twitter and LinkedIn are provided by Font Awesome. Their usage is governed
+by the Font Awesome Pro License (https://fontawesome.com/license).

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import TileButton from "./TileButton";
+import TileButton, { types as buttonTypes } from "./TileButton";
 import TilePanel from "./TilePanel";
 
 const getPanelPosition = (options, selected) => {
@@ -190,5 +190,6 @@ TileSelector.defaultProps = {
 };
 
 TileSelector.TileButton = TileButton;
+TileSelector.tileButtonTypes = buttonTypes;
 
 export default TileSelector;

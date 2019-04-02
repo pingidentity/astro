@@ -44,6 +44,16 @@ const IconDemo = () => {
                 <Icon iconName="code" type="inline" />
                 <Icon iconName="puzzle" type="inline" />
             </InputRow>
+            <InputRow>
+                <Icon iconName="facebook" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">
+                    <Text type="value">Icon with multiple lines and title</Text>
+                    <Text type="error">Number of failed attempts 1/000</Text>
+                </Icon>
+                <Icon iconName="twitter" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">
+                    <Text type="value">Icon with multiple lines and title</Text>
+                    <Text type="error">Number of failed attempts 1/000</Text>
+                </Icon>
+            </InputRow>
         </div>
     );
 };

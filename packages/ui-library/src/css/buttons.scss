@@ -576,6 +576,11 @@ button.tile-button {
         display: flex;
         align-items: center;
         justify-content: center;
+
+        &--square {
+            margin-bottom: $spacing-md;
+        }
+
         img,
         svg {
             width: auto;
@@ -598,6 +603,10 @@ button.tile-button {
         margin-top: $spacing-lg;
         text-transform: uppercase;
         word-break: break-word;
+
+        &--square {
+            margin-top: 0;
+        }
     }
 
     &--panel {
@@ -608,6 +617,13 @@ button.tile-button {
             transform: rotate(180deg);
             transform-origin: 25%;
         }
+    }
+
+    &--square {
+        flex-grow: 0;
+        min-height: 165px;
+        min-width: 165px;
+        padding: 25px;
     }
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
-import TileSelector from "../../../components/buttons/TileSelector";
+import HR from "../../../components/general/HR";
+import TileSelector, { TileButton, tileButtonTypes } from "../../../components/buttons/TileSelector";
 import LibraryLogo from "../../core/LibraryLogo";
 
 /**
@@ -22,7 +23,7 @@ class TileSelectorDemo extends React.Component {
         return (
             <div>
                 <TileSelector>
-                    <TileSelector.TileButton
+                    <TileButton
                         details={[
                             "Cloud-based",
                             "Easily accessible"
@@ -31,21 +32,21 @@ class TileSelectorDemo extends React.Component {
                         title="Web App"
                     >
                         Cloud-based apps that are accessed within a browser.
-                    </TileSelector.TileButton>
-                    <TileSelector.TileButton title="Native App" iconName="device" selected >
+                    </TileButton>
+                    <TileButton title="Native App" iconName="device" selected >
                         Applications that are stored and run from a device or desktop.
-                    </TileSelector.TileButton>
-                    <TileSelector.TileButton title="Single Page App" iconName="apps" details={[
+                    </TileButton>
+                    <TileButton title="Single Page App" iconName="apps" details={[
                         "Cloud-based",
                         "Easily accessible"
                     ]}>
                         Just a bit of text.
-                    </TileSelector.TileButton>
-                    <TileSelector.TileButton title="Non-Interactive" icon={<LibraryLogo variant="dark" />}>
+                    </TileButton>
+                    <TileButton title="Non-Interactive" icon={<LibraryLogo variant="dark" />}>
                         Cloud-based apps that are accessed within a browser.
-                    </TileSelector.TileButton>
+                    </TileButton>
                 </TileSelector>
-                <hr className="hr" />
+                <HR />
                 <TileSelector
                     data-id="second-one"
                     onValueChange={onValueChange}
@@ -157,7 +158,7 @@ class TileSelectorDemo extends React.Component {
                         }
                     ]}
                 />
-                <hr className="hr" />
+                <HR />
                 <TileSelector
                     type="stacked"
                     options={[
@@ -196,6 +197,24 @@ class TileSelectorDemo extends React.Component {
                         }
                     ]}
                 />
+                <HR />
+                <TileSelector>
+                    <TileButton
+                        title="Facebook"
+                        iconName="facebook"
+                        type={tileButtonTypes.SQUARE}
+                    />
+                    <TileButton
+                        title="Twitter"
+                        iconName="twitter"
+                        type={tileButtonTypes.SQUARE}
+                    />
+                    <TileButton
+                        title="LinkedIn"
+                        iconName="linkedin"
+                        type={tileButtonTypes.SQUARE}
+                    />
+                </TileSelector>
             </div>
         );
     }
