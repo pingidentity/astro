@@ -1,6 +1,6 @@
-var React = require("react");
-var FormIntegerField = require("./../../../components/forms/form-integer-field/");
-const InputWidths = require("./../../../components/forms/InputWidths");
+import React from "react";
+import FormIntegerField from "./../../../components/forms/form-integer-field/";
+import InputWidths from "./../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
 
 /**
@@ -9,6 +9,8 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for FormIntegerField
 */
 class FormIntegerFieldDemo extends React.Component {
+    static flags = ["p-stateful"];
+
     state = {
         integerField1: undefined,
         integerField4Error: "",
@@ -18,14 +20,16 @@ class FormIntegerFieldDemo extends React.Component {
     };
 
     _handleValueChange = (index, value) => {
-        var newState = {};
-        newState["integerField" + index] = value;
-        this.setState(newState);
+        if (FormIntegerField.isValid(value)) {
+            let newState = {};
+            newState["integerField" + index] = value;
+            this.setState(newState);
+        }
     };
 
     _handleBlur = (index, min, max) => {
-        var value = this.state["integerField" + index];
-        var newState = {};
+        const value = this.state["integerField" + index];
+        let newState = {};
 
         if (value < min | value > max) {
             newState["integerField" + index + "Error"] = "Please enter a number between " + min + " and " + max;
@@ -61,6 +65,7 @@ class FormIntegerFieldDemo extends React.Component {
         this.setState({
             integerField4: value
         });
+
         if (value >= 0 && value <= 25) {
             this.setState({
                 integerField4Error: ""
@@ -86,7 +91,7 @@ class FormIntegerFieldDemo extends React.Component {
     };
 
     _changeMode = (value, event) => {
-        var name = event.target.name;
+        const name = event.target.name;
         if (name === "read-only") {
             this.setState({
                 integerField7Mode: "read_only",
@@ -113,6 +118,7 @@ class FormIntegerFieldDemo extends React.Component {
                         stateless={false}
                         width={InputWidths.MD}
                         name="demo"
+                        flags={this.props.flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -124,6 +130,7 @@ class FormIntegerFieldDemo extends React.Component {
                         width={InputWidths.MD}
                         stateless={true}
                         hideControls={true}
+                        flags={this.props.flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -134,6 +141,7 @@ class FormIntegerFieldDemo extends React.Component {
                         onValueChange = {this._handleValueChange2}
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -146,6 +154,7 @@ class FormIntegerFieldDemo extends React.Component {
                         placeholder = "This field is required"
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -162,6 +171,7 @@ class FormIntegerFieldDemo extends React.Component {
                                 above the maximum range."
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -183,6 +193,7 @@ class FormIntegerFieldDemo extends React.Component {
                         }
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -197,6 +208,7 @@ class FormIntegerFieldDemo extends React.Component {
                         max = {300}
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
                     />
                 </InputRow>
 
@@ -210,6 +222,7 @@ class FormIntegerFieldDemo extends React.Component {
                         initialValue = {30}
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
                     />
                 </InputRow>
 
@@ -223,13 +236,13 @@ class FormIntegerFieldDemo extends React.Component {
                         initialValue = {40}
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
                     />
                 </InputRow>
-
             </div>
         );
     }
 }
 
 
-module.exports = FormIntegerFieldDemo;
+export default FormIntegerFieldDemo;

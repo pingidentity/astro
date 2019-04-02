@@ -1,5 +1,11 @@
 window.__DEV__ = true;
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import FormIntegerField from "../v2";
+import TestUtils from "../../../../testutil/TestUtils";
+import Utils from "../../../../util/Utils";
+
 jest.dontMock("../v2");
 jest.dontMock("../../form-text-field/index.js");
 jest.dontMock("../../form-text-field/v2");
@@ -7,14 +13,9 @@ jest.dontMock("../../FormLabel");
 jest.dontMock("../../FormError");
 
 describe("FormIntegerField", function () {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        FormIntegerField= require("../v2"),
-        TestUtils = require("../../../../testutil/TestUtils"),
-        Utils = require("../../../../util/Utils"),
-        callback;
+    let callback;
 
-    function getComponent (opts) {
+    function getComponent (opts={}) {
         opts.onValueChange = jest.fn();
         return ReactTestUtils.renderIntoDocument(<FormIntegerField {...opts} />);
     }
@@ -40,6 +41,16 @@ describe("FormIntegerField", function () {
         //Expect properly named labelText
         var textField = stateless.refs.formTextField;
         expect(textField.props.labelText).toBe("Default Integer Box");
+    });
+
+    it("renders p-stateful version of component", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField flags={["p-stateful"]} labelText="Default Integer Box" onValueChange={callback} />
+        );
+
+        //Expect a single checkbox to be rendered with default data-id.
+        var integerNode = TestUtils.findRenderedDOMNodeWithDataId(component, "form-integer-field");
+        expect(integerNode).toBeDefined();
     });
 
     it("test up/down key press and up/down spinner press", function () {
@@ -476,4 +487,31 @@ describe("FormIntegerField", function () {
         }).toThrow(expectedError);
     });
 
+    it("fires cannonball warning when p-stateful flag isn't set", function () {
+        console.warn = jest.fn();
+        expect(console.warn).not.toBeCalled();
+        getComponent();
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire cannonball warning when p-stateful flag is set", function () {
+        console.warn = jest.fn();
+        getComponent();
+        expect(console.warn).toBeCalled();
+
+        console.warn = jest.fn();
+        getComponent({ flags: ["p-stateful"] });
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("undos in p-stateful component", function () {
+        const val = FormIntegerField.resetToOriginal(4, 3, { originalValue: 4 });
+
+        expect(val).toEqual(4);
+    });
+
+    it("validates a value in p-stateful component", function () {
+        expect(FormIntegerField.validateInt("1234", 0, {})).toEqual(1234);
+        expect(FormIntegerField.validateInt("1234a", 0, {})).toEqual("1234");
+    });
 });

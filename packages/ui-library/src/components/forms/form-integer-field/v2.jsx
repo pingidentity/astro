@@ -1,22 +1,24 @@
 "use strict";
 
-var PropTypes = require("prop-types");
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import FormTextField from "../form-text-field";
+import classnames from "classnames";
+import Utils from "../../../util/Utils.js";
+import _ from "underscore";
+import validator from "validator";
+import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
+import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
 
-var React = require("react"),
-    FormTextField = require("../form-text-field").v2,
-    classnames = require("classnames"),
-    Utils = require("../../../util/Utils.js"),
-    _ = require("underscore"),
-    validator = require("validator");
-
-var isValid = function (value, enforceRange, min, max) {
+const isValid = (value, enforceRange, min, max) => {
     if (value === "") {
         return true;
     }
 
-    var options = { allow_leading_zeroes: false }; //eslint-disable-line camelcase
+    const options = { allow_leading_zeroes: false }; //eslint-disable-line camelcase
+
     if (enforceRange) {
-        return validator.isInt(value.toString(), _.extend(options, { min: min, max: max }));
+        return validator.isInt(value.toString(), { ...options, min: min, max: max });
     } else {
         return validator.isInt(value.toString(), options);
     }
@@ -132,7 +134,7 @@ var isValid = function (value, enforceRange, min, max) {
  */
 
 
-class Stateless extends React.Component {
+class Stateless extends Component {
     static displayName = "FormIntegerFieldStateless";
 
     static propTypes = {
@@ -189,7 +191,7 @@ class Stateless extends React.Component {
         min: PropTypes.number,
         enforceRange: PropTypes.bool,
 
-        tabIndex: PropTypes.number
+        tabIndex: PropTypes.number,
     };
 
     static defaultProps = {
@@ -235,15 +237,15 @@ class Stateless extends React.Component {
      * @ignore
      */
     _handleSpinnerPress = (e) => {
-        var inc = this.props.increment;
+        let inc = this.props.increment;
 
-        //set negative increment for down spinner
+        // Set negative increment for down spinner
         inc = (e.target.getAttribute("data-direction") === "down") ? -inc : inc;
 
-        //preform addition or subraction
+        // Preform addition or subraction
         this._counter(inc);
 
-        //set timeout for rapid addition or subtraction when held
+        // Set timeout for rapid addition or subtraction when held
         this.timeout = setTimeout(this._interval.bind(this, inc), 700);
     };
 
@@ -280,10 +282,10 @@ class Stateless extends React.Component {
      * @ignore
      */
     _counter = (inc) => {
-        var value = this.props.value;
-        var newValue = isNaN(parseInt(value)) ? this.props.min : parseInt(value) + inc;
+        const value = this.props.value;
+        let newValue = isNaN(parseInt(value)) ? this.props.min : parseInt(value) + inc;
 
-        //Always enforce range for spinner buttons and up and down keys
+        // Always enforce range for spinner buttons and up and down keys
         if (newValue < this.props.min) {
             newValue = this.props.min;
         }
@@ -302,7 +304,7 @@ class Stateless extends React.Component {
      * @ignore
      */
     _handleKeyDown = (e) => {
-        var key = e.keyCode;
+        const key = e.keyCode;
 
         if (this.props.readOnly) {
             return;
@@ -315,15 +317,15 @@ class Stateless extends React.Component {
 
         e.stopPropagation();
 
-        // increment/decrement the existing value and send out a notification
-        var intValue = parseInt(this.props.value) || this.props.min;
-        var newValue = intValue + (key === 38 ? 1 : -1) * this.props.increment;
+        // Increment/decrement the existing value and send out a notification
+        const intValue = parseInt(this.props.value) || this.props.min;
+        const newValue = intValue + (key === 38 ? 1 : -1) * this.props.increment;
 
         this.props.onValueChange(newValue);
     };
 
     render() {
-        var integerControls;
+        let integerControls;
 
         if (!this.props.disabled && !this.props.readOnly && !this.props.hideControls) {
             integerControls = (
@@ -364,7 +366,7 @@ class Stateless extends React.Component {
     }
 }
 
-class Stateful extends React.Component {
+class Stateful extends Component {
     static displayName = "FormIntegerFieldStateful";
 
     static propTypes = {
@@ -373,13 +375,15 @@ class Stateful extends React.Component {
         min: PropTypes.number,
         enforceRange: PropTypes.bool,
         outOfRangeErrorMessage: PropTypes.string,
+        onBlur: PropTypes.func,
     };
 
     static defaultProps = {
         initialValue: "",
         max: 999999999999999,
         min: 0,
-        enforceRange: true
+        enforceRange: true,
+        onBlur: _.noop,
     };
 
     state = {
@@ -396,16 +400,19 @@ class Stateful extends React.Component {
      * @ignore
      */
     _handleValueChange = (value) => {
+
         // Don't restrict "min" when checking typing so that numbers outside range can be inputed
         // e.g. If range is restricted to 3 - 30, we want users to be able to input 2 and 1 for 21
         if (!isValid(value, this.props.enforceRange, null, this.props.max)) {
-            // reset the field to the previous valid value
+
+            // Reset the field to the previous valid value
             this.setState({
                 value: this.state.value
             });
             return;
         } else {
-            var intValue = value === "" ? value : parseInt(value);
+            let intValue = value === "" ? value : parseInt(value);
+
             this.setState({
                 value: intValue,
                 lastValue: this.state.value,
@@ -417,18 +424,19 @@ class Stateful extends React.Component {
     };
 
     _handleBlur = () => {
+
         // Check validity of value onBlur to enforce min restriction that's not checked onValueChange above
         if (!isValid(this.state.value, this.props.enforceRange, this.props.min, this.props.max)) {
-            // reset the field to the previous valid value
-            // set error message
+
+            // Reset the field to the previous valid value
+            // Set error message
             this.setState({
                 value: this.state.lastValue,
                 errorMessage: this.props.outOfRangeErrorMessage
             });
         }
-        if (this.props.onBlur) {
-            this.props.onBlur();
-        }
+
+        this.props.onBlur();
     };
 
     _toggleReveal = () => {
@@ -439,7 +447,7 @@ class Stateful extends React.Component {
 
     _handleUndo = () => {
         if (this.props.initialValue) {
-            var value = this.props.initialValue;
+            const value = this.props.initialValue;
             this.setState({
                 value: value
             }, function () {
@@ -449,7 +457,7 @@ class Stateful extends React.Component {
     };
 
     render() {
-        var defaultProps = {
+        const defaultProps = {
             ref: "stateless",
             reveal: this.state.reveal,
             onToggleReveal: this._toggleReveal,
@@ -459,20 +467,30 @@ class Stateful extends React.Component {
             onBlur: this._handleBlur,
             errorMessage: this.state.errorMessage
         };
-        var props = _.defaults(defaultProps, this.props);
-        return React.createElement(Stateless, props);
+        const props = _.defaults(defaultProps, this.props);
+
+        return <Stateless {...props} />;
     }
 }
 
-class FormIntegerFieldV2 extends React.Component {
-
+export default class FormIntegerFieldV2 extends Component {
     static propTypes = {
-        stateless: PropTypes.bool
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful"])),
     };
 
     static defaultProps = {
-        stateless: true
+        stateless: true,
+        flags: [],
     };
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "FormIntegerField" });
+        }
+    }
 
     constructor(props) {
         super(props);
@@ -482,9 +500,15 @@ class FormIntegerFieldV2 extends React.Component {
     }
 
     render() {
-        return (this.props.stateless
-            ? React.createElement(Stateless, _.defaults({ ref: "formIntegerFieldStateless" }, this.props))
-            : React.createElement(Stateful, _.defaults({ ref: "formIntegerFieldStateful" }, this.props)));
+        if (this._usePStateful()) {
+            return (
+                <PStatefulFormIntegerField {...this.props} />
+            );
+        }
+
+        return this.props.stateless
+            ? <Stateless { ...{ ref: "formIntegerFieldStateless", ...this.props }} />
+            : <Stateful {...{ ref: "formIntegerFieldStateful", ...this.props }} />;
     }
 }
 
@@ -505,4 +529,39 @@ class FormIntegerFieldV2 extends React.Component {
  */
 FormIntegerFieldV2.isValid = isValid;
 
-module.exports = FormIntegerFieldV2;
+FormIntegerFieldV2.resetToOriginal = (value, current, { originalValue }) => originalValue;
+
+FormIntegerFieldV2.validateInt = (value, current, { enforceRange, max }) => {
+    if (!isValid(value, enforceRange, null, max)) {
+        return value.substring(0, value.length - 1);
+    } else {
+        const intValue = value === "" ? value : parseInt(value);
+        return intValue;
+    }
+};
+
+const PStatefulFormIntegerField = inStateContainer([
+    {
+        name: "value",
+        initial: "",
+        callbacks: [
+            {
+                name: "onValueChange",
+                transform: FormIntegerFieldV2.validateInt
+            },
+            {
+                name: "onUndo",
+                transform: FormIntegerFieldV2.resetToOriginal
+            },
+        ],
+    }, {
+        name: "reveal",
+        initial: false,
+        callbacks: [
+            {
+                name: "onToggleReveal",
+                transform: toggleTransform,
+            }
+        ],
+    }
+])(Stateless);
