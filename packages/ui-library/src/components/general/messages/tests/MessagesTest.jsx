@@ -13,16 +13,11 @@ describe("Messages", function () {
         Utils = require("../../../../util/Utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Messages = require("../index.js"),
-        setTimeout = window.setTimeout,
+
         _ = require("underscore");
 
     beforeEach(function () {
         jest.useFakeTimers();
-        window.setTimeout = jest.fn();
-    });
-
-    afterEach(function () {
-        window.setTimeout = setTimeout;
     });
 
     function getComponent (props) {
@@ -90,7 +85,7 @@ describe("Messages", function () {
         var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
 
         expect(messages.length).toEqual(1);
-        expect(setInterval.mock.calls[0][1]).toBe(3000);
+        expect(global.setInterval).toHaveBeenLastCalledWith(expect.any(Function), 3000);
     });
 
     it("Test unmount clears timers", function () {

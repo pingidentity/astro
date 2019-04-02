@@ -20,6 +20,7 @@ describe("FormIntegerField", function () {
     }
 
     beforeEach(function () {
+        jest.useFakeTimers();
         callback = jest.fn();
     });
 
@@ -259,6 +260,7 @@ describe("FormIntegerField", function () {
     });
 
     it("is autoincrementing field while spinner is pressed", function () {
+        jest.useFakeTimers();
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField data-id="int" onValueChange={callback} value={1} />
@@ -268,12 +270,10 @@ describe("FormIntegerField", function () {
 
         ReactTestUtils.Simulate.mouseDown(spinnerUp);
 
-        // this to run the this._interval timer
         jest.runOnlyPendingTimers();
-        // this to run the this._counter interval set by the expiration of the previous timer
         jest.runOnlyPendingTimers();
 
-        expect(callback.mock.calls.length).toEqual(2);
+        expect(callback).toHaveBeenCalledTimes(2);
     });
 
     it("it assigns tabIndex when specified", function () {
