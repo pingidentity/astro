@@ -1,0 +1,49 @@
+pipeline {
+  agent {
+    label 'ui-library-cdn-deploy'
+  }
+  stages {
+    stage('npm-publish') {
+      steps {
+        container('node-builder') {
+          sh "make GIT_BRANCH=${params.BUILD_BRANCH} deploy package-and-upload-for-hosting"
+          echo 'Publishing ui-library'
+          dir("${env.WORKSPACE}") {
+            sh 'npm version $(node -p "require(\'./package.json\').version+\'.\'+process.env.BUILD_NUMBER") --no-git-tag-version'
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              sh 'npm publish'
+            }
+          }
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "build-css/**", fingerprint: true
+        }
+      }
+    }
+  }
+  post {
+    success {
+      container('node-builder') {
+        withAWS(region: 'us-east-2', role: 'k8s-cdn-deployer', roleAccount: '208980577242') {
+          withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+          }
+          withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+          }
+          withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+          }
+        }
+      }
+    }
+    unsuccessful {
+      mail(subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+           body: """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':
+             Check console output at ${env.BUILD_URL}""",
+           to: 'ux-dev@pingidentity.com')
+    }
+  }
+}

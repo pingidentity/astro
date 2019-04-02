@@ -1,4 +1,4 @@
-COVERAGE_ADDRESS=http://art01.corp.pingidentity.com:8080/artifactory/inhouse/com/pingone/ui-library/ui-library-coverage
+COVERAGE_ADDRESS=https://art01.corp.pingidentity.com/artifactory/inhouse/com/pingone/ui-library/ui-library-coverage
 HOSTING_SERVER_ADDRESS=uilibrary.ping-eng.com
 HOSTING_SERVER_USERNAME=ubuntu
 
@@ -146,7 +146,7 @@ define deploy
 		-DuniqueVersion=false \
 		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
+		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse
 endef
 
 define deploy_coverage
@@ -158,7 +158,7 @@ define deploy_coverage
 		-DuniqueVersion=false \
 		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
+		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse
 endef
 
 define install_reference_coverage_report

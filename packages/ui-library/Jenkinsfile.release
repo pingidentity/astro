@@ -1,0 +1,51 @@
+pipeline {
+  agent {
+    label 'ui-library-cdn-deploy'
+  }
+  stages {
+    stage('npm-publish') {
+      steps {
+        container('node-builder') {
+          echo 'Building & publishing ui-library'
+          sh "make GIT_BRANCH=${params.RELEASE_BRANCH} dist package-and-upload-for-hosting"
+          sh 'source ./version'
+          sh "npm version ${env.UI_LIBRARY_FINAL_VERSION} --no-git-tag-version"
+          configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+            sh 'npm publish'
+          }
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "build-css/**", fingerprint: true
+        }
+      }
+    }
+  }
+  post {
+    success {
+      container('node-builder') {
+        withAWS(region: 'us-east-2', role: 'k8s-cdn-deployer', roleAccount: '208980577242') {
+          withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+          }
+          withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+          }
+          withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+          }
+        }
+        mail(subject: "UI-library ${env.UI_LIBRARY_FINAL_VERSION} released",
+             body: """The UI-library ${env.UI_LIBRARY_FINAL_VERSION} has been released.
+The new development version is ${env.UI_LIBRARY_SNAPSHOT_VERSION}.
+
+
+--------
+
+The UI-library team""",
+             to: 'interface-development@pingidentity.com,ui-library-release@pingidentity.com,pingaccessdev@pingidentity.com')
+      }
+    }
+  }
+}

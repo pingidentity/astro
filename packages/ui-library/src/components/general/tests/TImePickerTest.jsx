@@ -154,7 +154,7 @@ describe("TimePicker", function () {
     it("takes a `moment` object as a value", function () {
         component = render({
             increments: 60,
-            format: "12",
+            format: "24",
             value: moment("2016-04-01T14:00:00.000Z")
         });
 
@@ -162,7 +162,18 @@ describe("TimePicker", function () {
         var offset = date.getTimezoneOffset() / 60;
         var selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
         // subtract time zone ofset from 1400 hours eg: 14 - 7 (PDT -700)
-        expect(selected.value).toEqual((14 - offset) + ":00am");
+        expect(selected.value).toEqual((14 - offset) + ":00");
+    });
+
+    it("takes a `moment` object as a value", function () {
+        component = render({
+            increments: 60,
+            format: "12",
+            value: moment("2019-04-04T14:00:00.000Z").utc()
+        });
+
+        var selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+        expect(selected.value).toEqual("2:00pm");
     });
 
     it("verify default data-id", function () {
