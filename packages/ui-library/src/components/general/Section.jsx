@@ -1,11 +1,15 @@
 "use strict";
 
-var React = require("react"),
-    PropTypes = require("prop-types"),
-    classnames = require("classnames"),
-    CollapsibleLink = require("./CollapsibleLink"),
-    Utils = require("../../util/Utils"),
-    _ = require("underscore");
+import React from "react";
+import PropTypes from "prop-types";
+
+import CollapsibleLink from "./CollapsibleLink";
+
+import classnames from "classnames";
+import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { inStateContainer, toggleTransform } from "../utils/StateContainer";
+import Utils from "../../util/Utils";
+import _ from "underscore";
 
 /**
  * @callback Section~onToggle
@@ -60,14 +64,17 @@ var React = require("react"),
  *
  **/
 
-class Section extends React.Component {
+
+export default class Section extends React.Component {
 
     static propTypes = {
-        stateless: PropTypes.bool
+        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful"])),
+        stateless: PropTypes.bool,
     };
 
     static defaultProps = {
-        stateless: true
+        flags: [],
+        stateless: true,
     };
 
     constructor(props) {
@@ -82,7 +89,23 @@ class Section extends React.Component {
         }
     }
 
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "Section" });
+        }
+    }
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
     render() {
+        if (this._usePStateful()) {
+            return (
+                <PStatefulSection
+                    {...this.props}
+                />
+            );
+        }
+
         return this.props.stateless
             ? <SectionStateless {..._.defaults({ ref: "SectionStateless" }, this.props)}>
                 {this.props.children}
@@ -227,4 +250,14 @@ class SectionStateful extends React.Component {
     }
 }
 
-module.exports = Section;
+const PStatefulSection = inStateContainer([
+    {
+        name: "expanded",
+        initial: false,
+        callbacks: [{
+            name: "onToggle",
+            passTransformedValue: true,
+            transform: toggleTransform,
+        }],
+    },
+])(SectionStateless);

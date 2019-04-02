@@ -1,6 +1,5 @@
-var React = require("react"),
-    Section = require("../../../components/general/Section");
-
+import React from "react";
+import Section from "../../../components/general/Section";
 import Button from "../../../components/buttons/Button";
 
 /**
@@ -9,6 +8,8 @@ import Button from "../../../components/buttons/Button";
 * @desc A demo for Section
 */
 class SectionDemo extends React.Component {
+    static flags = ["p-stateful"];
+
     state = {
         firstSectionOpen: false
     };
@@ -31,6 +32,10 @@ class SectionDemo extends React.Component {
     }
 
     render() {
+        const {
+            flags
+        } = this.props;
+
         return (
             <div>
 
@@ -44,7 +49,8 @@ class SectionDemo extends React.Component {
                     title="Stateless section"
                     collapsedText="Test"
                     onToggle={this._toggleFirst}
-                    expanded={this.state.firstSectionOpen}>
+                    expanded={this.state.firstSectionOpen}
+                    flags={flags}>
                     {this._getContent()}
                 </Section>
                 <Section

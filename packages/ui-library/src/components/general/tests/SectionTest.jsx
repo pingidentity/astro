@@ -104,9 +104,6 @@ describe("Section", function () {
             }),
             root = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]);
 
-        TestUtils.findRenderedDOMNodeWithDataId(view, "my-section-title");
-        TestUtils.scryRenderedDOMNodesWithDataId(view, "my-section-content");
-
         expect(root.className).toContain("extra");
     });
 
@@ -115,7 +112,7 @@ describe("Section", function () {
                 disableExpand: true
             }),
             root = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]),
-            title = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]);
+            title = TestUtils.findRenderedDOMNodeWithDataId(view, "my-section-title");
 
         expect(root.className).toContain("disable-expand");
 
@@ -265,4 +262,30 @@ describe("Section", function () {
 
         expect(detailsText.textContent).toEqual("Expanded");
     });
+
+    it("does not throw Cannonball warnings when the 'p-stateful' flag is set", function () {
+        console.warn = jest.fn();
+
+        getComponent({ stateless: true, flags: ["p-stateful"] });
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("Cannonball warning is thrown when component is statefull but the 'p-stateful' flag is not set", function () {
+        console.warn = jest.fn();
+
+        getComponent({ stateless: true });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("does not throw Cannonball warnings when the 'p-stateful' flag is set", function () {
+        const component = getComponent({ flags: ["p-stateful"] });
+        const title = TestUtils.findRenderedDOMNodeWithDataId(component, "my-section-title");
+
+        expect(title.className).not.toContain("open");
+
+        ReactTestUtils.Simulate.click(title);
+
+        expect(title.className).toContain("open");
+    });
+
 });
