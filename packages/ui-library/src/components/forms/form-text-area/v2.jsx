@@ -318,7 +318,6 @@ const PStatefulFormTextArea = inStateContainer([
 ], isEdited)(FormTextAreaStateless);
 
 export default class FormTextArea extends React.Component {
-
     static propTypes = {
         stateless: PropTypes.bool,
         flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful" ])),
@@ -329,16 +328,17 @@ export default class FormTextArea extends React.Component {
         flags: [],
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "FormTextArea" });
+        }
+
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
         }
     }
-
-    _usePStateful = () => this.props.flags.includes("p-stateful");
-
-    _cannonballWarning = () => cannonballProgressivleyStatefulWarning({ name: "FormTextArea" });
 
     render() {
         if (this._usePStateful()) {
@@ -348,13 +348,7 @@ export default class FormTextArea extends React.Component {
                 />);
         }
 
-        const { stateless, children, value } = this.props;
-        // figure out if we need a cannonball warning here
-        if (stateless && value === undefined) {
-            this._cannonballWarning();
-        } else if (!stateless && value !== undefined) {
-            this._cannonballWarning();
-        }
+        const { stateless, children } = this.props;
 
         return (
             stateless

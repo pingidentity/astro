@@ -292,4 +292,15 @@ describe("FormTextArea v4", function () {
         }).toThrow(expectedError);
     });
 
+    it("fires cannonball warning when p-stateful flag isn't set", function () {
+        console.warn = jest.fn();
+        getComponent({ flags: [] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire cannonball warning when p-stateful flag is set", function () {
+        console.warn = jest.fn();
+        getComponent({ flags: ["p-stateful"] });
+        expect(console.warn).not.toBeCalled();
+    });
 });
