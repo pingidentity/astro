@@ -288,26 +288,24 @@ class Stateless extends React.Component {
     };
 
     _setFlexWidth = () => {
-        if (this.props.flexWidth) {
-            const content = this._getInputType() === "password"
-                ? Array(this.props.value.length + 1).join(this.pwChar)
-                : this.props.value;
-            let newWidth;
+        const content = this._getInputType() === "password"
+            ? Array(this.props.value.length + 1).join(this.pwChar)
+            : this.props.value;
+        let newWidth;
 
-            this._contentMeasurerInput.innerHTML = content;
-            const contentWidth = this._contentMeasurerLabel.offsetWidth;
+        this._contentMeasurerInput.innerHTML = content;
+        const contentWidth = this._contentMeasurerLabel.offsetWidth;
 
-            if (contentWidth > this.initialInputWidth) {
-                newWidth = contentWidth + 10;
+        if (contentWidth > this.initialInputWidth) {
+            newWidth = contentWidth + 10;
 
-            } else if (contentWidth < this.initialInputWidth) {
-                newWidth = this.initialInputWidth;
-            }
-
-            this.setState({
-                labelWidth: newWidth
-            });
+        } else if (contentWidth < this.initialInputWidth) {
+            newWidth = this.initialInputWidth;
         }
+
+        this.setState({
+            labelWidth: newWidth
+        });
     };
 
     _getInputType = () => {
@@ -400,9 +398,7 @@ class Stateless extends React.Component {
             this.lastValue = this.props.value;
 
             // initial call with long content was measuring wrong width - delay allows for complete loading of DOM
-            setTimeout(() => {
-                this._setFlexWidth();
-            }, 10);
+            setTimeout(this._setFlexWidth, 10);
         }
     }
 
@@ -547,7 +543,7 @@ class Stateless extends React.Component {
                         <span className={`input-icon input-icon--right icon-${this.props.iconRight}`}/>
                     }
                     {this.props.iconLeft &&
-                        <span className={`input-icon input-icon--Left icon-${this.props.iconLeft}`}/>
+                        <span className={`input-icon input-icon--left icon-${this.props.iconLeft}`}/>
                     }
                     {message && (
                         <FormMessage

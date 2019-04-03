@@ -75,7 +75,8 @@ class SelectionListDemo extends React.Component {
         }
     }
 
-    static flags = [ "use-portal" ];
+    static flags = [ "use-portal", "p-stateful" ];
+
     state = {
         singleSelectId1: 1,
         singleSelectId2: 3,
@@ -154,6 +155,7 @@ class SelectionListDemo extends React.Component {
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange2}
                     requiredText={this.state.required ? "Select at least one" : ""}
+                    flags={flags}
                 />
 
                 <hr />
@@ -174,6 +176,7 @@ class SelectionListDemo extends React.Component {
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange3}
                     name="second-demo"
+                    flags={flags}
                 />
 
                 <hr />
@@ -202,6 +205,7 @@ class SelectionListDemo extends React.Component {
                         showSearchBox={true}
                         searchPlaceholder="Search..."
                         onValueChange={this._onSingleSelectChange1}
+                        flags={flags}
                     />
                 </DetailsTooltip>
 
@@ -226,6 +230,7 @@ class SelectionListDemo extends React.Component {
                     selectedItemIds={this.state.multiSelectIds3}
                     onValueChange={this._onMultiSelectChange3}
                     onSelectAll={this._onMultiSelectAll3}
+                    flags={flags}
                 />
 
                 <hr />
@@ -247,6 +252,7 @@ class SelectionListDemo extends React.Component {
                     onValueChange={this._onMultiSelectChange2}
                     onSelectAll={this._onMultiSelectAll2}
                     {...LABELS}
+                    flags={flags}
                 />
 
                 <hr />
@@ -277,6 +283,7 @@ class SelectionListDemo extends React.Component {
                         onValueChange={this._onMultiSelectChange1}
                         onSelectAll={this._onMultiSelectAll1}
                         {...LABELS}
+                        flags={flags}
                     />
                 </DetailsTooltip>
 
@@ -312,6 +319,7 @@ class SelectionListDemo extends React.Component {
                         onSelectAll={this._onMultiSelectAll4}
                         {...LABELS}
                         name="multi-select"
+                        flags={flags}
                     />
                 </DetailsTooltip>
 
@@ -321,12 +329,14 @@ class SelectionListDemo extends React.Component {
                     Inline View-Only List
                 </h3>
                 <SelectionList
+                    name="view-only"
                     stateless={false}
                     type={SelectionList.ListType.VIEWONLY}
                     items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId1}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
+                    flags={flags}
                 />
 
                 <hr />
@@ -335,6 +345,7 @@ class SelectionListDemo extends React.Component {
                     Fluid-Width Selection List (grows to max-width of 400px)
                 </h3>
                 <SelectionList
+                    name="fluid-width"
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS}
@@ -344,6 +355,23 @@ class SelectionListDemo extends React.Component {
                     onValueChange={this._onSingleSelectChange2}
                     requiredText={this.state.required ? "Select at least one" : ""}
                     className="fluid-width"
+                    flags={flags}
+                />
+
+                <hr />
+
+                <h3>
+                    Stateful with Multi-add mode
+                </h3>
+                <SelectionList
+                    name="fully-stateful"
+                    stateless={false}
+                    type={SelectionList.ListType.MULTIADD}
+                    items={SINGLE_SELECT_ITEMS}
+                    showSearchBox={true}
+                    searchPlaceholder="Search..."
+                    flags={flags}
+                    autoFilter
                 />
             </div>
         );

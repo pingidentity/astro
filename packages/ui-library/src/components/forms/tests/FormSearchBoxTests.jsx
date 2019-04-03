@@ -1,23 +1,14 @@
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import _ from "underscore";
+import TestUtils from "../../../testutil/TestUtils";
+import FormSearchBox from "../FormSearchBox";
+import { FormTextFieldStateless } from "../form-text-field/index";
+import KeyboardUtils from "../../../util/KeyboardUtils.js";
+
 window.__DEV__ = true;
 
-jest.dontMock("underscore");
-jest.dontMock("../FormSearchBox");
-jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2");
-jest.dontMock("../FormError");
-jest.dontMock("../../tooltips/HelpHint");
-jest.dontMock("../../../testutil/TestUtils");
-jest.dontMock("../../../util/KeyboardUtils.js");
-
 describe("FormSearchBox", function () {
-    var React = require("react");
-    var ReactTestUtils = require("react-dom/test-utils");
-    var _ = require("underscore");
-    var TestUtils = require("../../../testutil/TestUtils");
-    var FormSearchBox = require("../FormSearchBox");
-    var FormTextField = require("../form-text-field/index");
-    var KeyboardUtils = require("../../../util/KeyboardUtils.js");
-
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             stateless: false,
@@ -46,7 +37,7 @@ describe("FormSearchBox", function () {
             maxLength: 10
         });
 
-        const formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+        const formTextField = TestUtils.findRenderedComponentWithType(component, FormTextFieldStateless);
         expect(formTextField.props.maxLength).toEqual(10);
     });
 
@@ -60,7 +51,7 @@ describe("FormSearchBox", function () {
     it("should have default placeholder", function () {
         var component = getComponent();
 
-        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextFieldStateless);
         expect(formTextField.props.placeholder).toBeUndefined();
     });
 
@@ -69,7 +60,7 @@ describe("FormSearchBox", function () {
             placeholder: "Search text box"
         });
 
-        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextFieldStateless);
         expect(formTextField.props.placeholder).toEqual("Search text box");
     });
 

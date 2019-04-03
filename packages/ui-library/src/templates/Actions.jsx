@@ -7,7 +7,7 @@ import FormLabel from "../components/forms/FormLabel";
 import FormTextField from "../components/forms/form-text-field/";
 import InputRow from "../components/layout/InputRow";
 import { InputWidths } from "../components/forms/InputWidths";
-import Messages from "../components/general/Messages";
+import Messages from "../components/general/messages/Messages";
 import Modal from "../components/general/Modal";
 import PageGroup from "../components/layout/PageGroup";
 import PageHeader from "../components/general/PageHeader";

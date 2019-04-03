@@ -1,36 +1,20 @@
-window.__DEV__ = true;
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import _ from "underscore";
+import Utils from "../../../../util/Utils";
+import TestUtils from "../../../../testutil/TestUtils";
+import SelectionList from "../v2";
+import FormCheckbox from "../../FormCheckbox";
+import FormRadioGroup from "../../FormRadioGroup";
+import FormLabel from "../../FormLabel";
+import KeyboardUtils from "../../../../util/KeyboardUtils.js";
+import StateContainer from "../../../utils/StateContainer";
 
-jest.dontMock("../v2");
-jest.dontMock("../../FormSearchBox");
-jest.dontMock("../v2-constants.js");
-jest.dontMock("../v2-reducer.js");
-jest.dontMock("../v2-stateless");
-jest.dontMock("../v2-stateful");
-jest.dontMock("../../form-text-field/index.js");
-jest.dontMock("../../form-text-field/v2");
-jest.dontMock("../../FormRadioGroup");
-jest.dontMock("../../FormRadioInput");
-jest.dontMock("../../FormCheckbox");
-jest.dontMock("../../FormError");
-jest.dontMock("../../FormLabel");
-jest.dontMock("../../../general/If");
-jest.dontMock("../../../tooltips/HelpHint");
-jest.dontMock("../../../../util/FilterUtils.js");
-jest.dontMock("../../../../util/KeyboardUtils.js");
+window.__DEV__ = true;
 
 const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString.length) === littleString);
 
 describe("SelectionList", function () {
-    var React = require("react");
-    var ReactTestUtils = require("react-dom/test-utils");
-    var _ = require("underscore");
-    var Utils = require("../../../../util/Utils");
-    var TestUtils = require("../../../../testutil/TestUtils");
-    var SelectionList = require("../v2");
-    var FormCheckbox = require("../../FormCheckbox");
-    var FormRadioGroup = require("../../FormRadioGroup");
-    var FormLabel = require("../../FormLabel");
-    var KeyboardUtils = require("../../../../util/KeyboardUtils.js");
 
     // just so that they are included in the coverage report
     require("../v2-stateful");
@@ -159,7 +143,8 @@ describe("SelectionList", function () {
         var radios = TestUtils.scryRenderedDOMNodesWithTag(formRadioGroup, "input");
 
         ReactTestUtils.Simulate.change(radios[0]);
-        expect(component.props.onValueChange).toBeCalledWith(1);
+        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.onValueChange.mock.calls[0][0]).toBe(1);
     });
 
     it("should render with few checked checkboxes and uncheck all when selected", function () {
@@ -198,7 +183,7 @@ describe("SelectionList", function () {
         expect(callback).toBeCalledWith([]);
     });
 
-    it("should render with no checked checkboxes and check all when selected", function () {
+    it("v3: should render with no checked checkboxes and check all when selected", function () {
         var callback = jest.fn();
         var props = {
             stateless: false,
@@ -212,6 +197,39 @@ describe("SelectionList", function () {
             onValueChange: jest.fn(),
             onSelectAll: callback,
             onSearch: jest.fn()
+        };
+        var component = getComponent(props);
+        var selectAll = TestUtils.findRenderedDOMNodeWithDataId(component, "select-all");
+        var allCheckboxIds = listItems.map(function (item) {
+            return item.id;
+        });
+
+        expect(selectAll.textContent).toBe(props.labelSelectAll);
+
+        ReactTestUtils.Simulate.click(selectAll);
+
+        expect(callback).toBeCalled();
+
+        var formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
+        expect(formCheckboxes.length).toBe(allCheckboxIds.length);
+    });
+
+    it("v4: should render with no checked checkboxes and check all when selected", function () {
+        var callback = jest.fn();
+        var props = {
+            stateless: false,
+            selectedItemIds: [],
+            type: SelectionList.ListType.MULTI,
+            showSelectionOptions: true,
+            labelSelectAll: "Select All",
+            labelUnselectAll: "Unselect All",
+            labelOnlySelected: "Show Only Selected",
+            labelShowAll: "Show All",
+            onValueChange: jest.fn(),
+            onSelectAll: callback,
+            onSearch: jest.fn(),
+            flags: [ "p-stateful" ],
+            autoSelectAll: true,
         };
         var component = getComponent(props);
         var selectAll = TestUtils.findRenderedDOMNodeWithDataId(component, "select-all");
@@ -319,7 +337,7 @@ describe("SelectionList", function () {
 
     it("should do a start search with 2 chars keyword", function () {
         var component = getComponent({
-            showSearchBox: true
+            showSearchBox: true,
         });
 
         var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
@@ -405,7 +423,8 @@ describe("SelectionList", function () {
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "foo" } });
-        expect(component.props.onSearch).toBeCalledWith("foo");
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("foo");
     });
 
     it("stateless: triggers onSearch callback when search input changes", function () {
@@ -414,7 +433,8 @@ describe("SelectionList", function () {
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "foo" } });
-        expect(component.props.onSearch).toBeCalledWith("foo");
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("foo");
     });
 
     it("should trim space before performing a start search", function () {
@@ -432,7 +452,7 @@ describe("SelectionList", function () {
         expect(checkboxes.length).toEqual(1);
     });
 
-    it("clears search on ESC", function () {
+    it("v3: clears search on ESC", function () {
         var component = getComponent({
             showSearchBox: true
         });
@@ -459,7 +479,30 @@ describe("SelectionList", function () {
         expect(componentRef.state.matchedItems).toEqual(listItems);
     });
 
-    it("does not clear search when not ESC", function () {
+    it("v4: clears search on ESC", function () {
+        const component = getComponent({
+            showSearchBox: true,
+            flags: [ "p-stateful" ],
+        });
+        const stateful = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
+
+        const queryString = "Nam";
+        const searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
+        const searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(stateful.state.queryString).toBe(queryString);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "esc",
+            keyCode: KeyboardUtils.KeyCodes.ESC,
+            which: KeyboardUtils.KeyCodes.ESC
+        });
+
+        expect(stateful.state.queryString).toBe("");
+    });
+
+    it("v3: does not clear search when not ESC", function () {
         var component = getComponent({
             showSearchBox: true
         });
@@ -489,7 +532,30 @@ describe("SelectionList", function () {
         ]);
     });
 
-    it("clears search on (X) button click", function () {
+    it("v4: does not clear search when not ESC", function () {
+        var component = getComponent({
+            showSearchBox: true,
+            flags: [ "p-stateful" ],
+        });
+        const stateful = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
+
+        var queryString = "Tran",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(stateful.state.queryString).toBe(queryString);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "enter",
+            keyCode: KeyboardUtils.KeyCodes.ENTER,
+            which: KeyboardUtils.KeyCodes.ENTER
+        });
+
+        expect(stateful.state.queryString).toBe(queryString);
+    });
+
+    it("v3: clears search on (X) button click", function () {
         var component = getComponent({
             showSearchBox: true
         });
@@ -510,6 +576,26 @@ describe("SelectionList", function () {
 
         expect(componentRef.state.queryString).toBe("");
         expect(componentRef.state.matchedItems).toEqual(listItems);
+    });
+
+    it("v4: clears search on (X) button click", function () {
+        var component = getComponent({
+            showSearchBox: true,
+            flags: [ "p-stateful" ],
+        });
+        const stateful = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
+
+        var queryString = "Chi",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(stateful.state.queryString).toBe(queryString);
+
+        var clearButton = TestUtils.findRenderedDOMNodeWithDataId(searchBoxDiv, "clear");
+        ReactTestUtils.Simulate.click(clearButton);
+
+        expect(stateful.state.queryString).toBe("");
     });
 
     it("check stateless rendering", function () {
@@ -533,7 +619,8 @@ describe("SelectionList", function () {
         expect(searchBox.getAttribute("value")).toEqual("my query");
     });
 
-    it("check that rendered items update if changed", function () {
+    it("v3: check that rendered items update if changed", function () {
+        // no v4 version of this because it doesn't do any sketchy componentDidUpdate biz
         var component = getComponent({
             type: SelectionList.ListType.MULTI
         });
@@ -596,6 +683,29 @@ describe("SelectionList", function () {
         });
     });
 
+    it("renders multi-add mode and fires callback", () => {
+        const callback = jest.fn();
+        const component = getComponent({
+            type: SelectionList.ListType.MULTIADD,
+            onMultiAdd: callback,
+        });
+        const addButton = TestUtils.findRenderedDOMNodeWithDataId(component, "add-button");
+
+        expect(callback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(addButton);
+        expect(callback).toBeCalled();
+    });
+
+    it("renders help hint in view-only", function() {
+        const component = getComponent({
+            type: SelectionList.ListType.VIEWONLY,
+            items: [ { name: "Long Tran", id: 1, helpHintText: "nothing" } ]
+        });
+
+        const helpHint = TestUtils.findRenderedDOMNodeWithDataId(component, "helpHint");
+        expect(helpHint).toBeTruthy();
+    });
+
     it("calls onValueChange in add mode", () => {
         const onValueChange = jest.fn();
         const component = getComponent({
@@ -608,5 +718,18 @@ describe("SelectionList", function () {
         ReactTestUtils.Simulate.click(firstItem);
 
         expect(onValueChange).toHaveBeenCalled();
+    });
+
+    it("fires Cannonball warning when p-stateful flag is not set", function() {
+        console.warn = jest.fn();
+        expect(console.warn).not.toBeCalled();
+        getComponent({});
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire Cannonball warning when p-stateful flag is set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
     });
 });

@@ -79,7 +79,7 @@ class FormCheckbox extends React.Component {
         disabled: PropTypes.bool,
         errorMessage: PropTypes.string,
         helpClassName: PropTypes.string,
-        helpTarget: PropTypes.bool,
+        helpTarget: PropTypes.node,
         inline: PropTypes.bool,
         label: PropTypes.string,
         labelHelpText: PropTypes.string,

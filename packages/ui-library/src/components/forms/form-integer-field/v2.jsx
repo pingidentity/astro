@@ -2,7 +2,7 @@
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import FormTextField from "../form-text-field";
+import { FormTextFieldStateless } from "../form-text-field/index";
 import classnames from "classnames";
 import Utils from "../../../util/Utils.js";
 import _ from "underscore";
@@ -351,7 +351,7 @@ class Stateless extends Component {
         }
         return (
             <div onKeyDown={this._handleKeyDown} className="form-integer-container input-integer">
-                <FormTextField {...this.props}
+                <FormTextFieldStateless {...this.props}
                     ref="formTextField"
                     data-id={this.props["data-id"] + "-text-field"}
                     name={this.props.name}

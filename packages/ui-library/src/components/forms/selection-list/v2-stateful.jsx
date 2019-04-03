@@ -12,6 +12,11 @@ var React = require("react"),
 module.exports = class extends React.Component {
     static displayName = "SelectionListStateful";
 
+    static defaultProps = {
+        onValueChange: _.noop,
+        onSelectAll: _.noop,
+    };
+
     state = {
         queryString: "",
         matchedItems: this.props.items
@@ -32,10 +37,6 @@ module.exports = class extends React.Component {
         if (this.props.onSearch) {
             matchedItems = this.props.onSearch(queryString);
         } else {
-            /*
-             * The default search function does a "startsWith" search for query strings
-             * less than or equal to 3 chars, otherwise is does a "contains" search.
-             */
             matchedItems = filterItemsFunction(this.props.items, queryString);
         }
 

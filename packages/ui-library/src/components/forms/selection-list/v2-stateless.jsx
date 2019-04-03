@@ -10,6 +10,7 @@ import FormCheckbox from "../FormCheckbox";
 import FormSearchBox from "../FormSearchBox";
 import HelpHint from "../../tooltips/HelpHint";
 import { ListType } from "./v2-constants";
+import { filterItemsFunction } from "./v2-reducer";
 
 /**
  * @name SelectionListStateless
@@ -44,7 +45,7 @@ export default class SelectionListStateless extends React.Component {
             PropTypes.number
         ]),
         name: PropTypes.string,
-        onValueChange: PropTypes.func.isRequired,
+        onValueChange: PropTypes.func,
         onSelectAll: PropTypes.func,
         showSearchBox: PropTypes.bool,
         searchPlaceholder: PropTypes.string,
@@ -63,6 +64,8 @@ export default class SelectionListStateless extends React.Component {
         bottomPanel: PropTypes.node,
         multiAddButtonLabel: PropTypes.string,
         onMultiAdd: PropTypes.func,
+        autoSelectAll: PropTypes.bool,
+        autoFilter: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -75,6 +78,10 @@ export default class SelectionListStateless extends React.Component {
         "no-border": false,
         multiAddButtonLabel: "Add",
         onMultiAdd: _.noop,
+        onValueChange: _.noop,
+        onSelectAll: _.noop,
+        autoSelectAll: false,
+        autoFilter: false,
     };
 
     /**
@@ -84,6 +91,9 @@ export default class SelectionListStateless extends React.Component {
      */
     _selectAll = () => {
         this.props.onSelectAll();
+        if (this.props.autoSelectAll) {
+            this.props.onValueChange(this._getItems().map(({ id }) => id));
+        }
     };
 
     /**
@@ -112,7 +122,7 @@ export default class SelectionListStateless extends React.Component {
      * @private
      */
     _filterVisible = () => {
-        return _.filter(this.props.items, (item) => {
+        return _.filter(this._getItems(), (item) => {
             return this.props.selectedItemIds.indexOf(item.id) > -1;
         });
     };
@@ -158,6 +168,11 @@ export default class SelectionListStateless extends React.Component {
         );
     }
 
+    // filter items if necessary
+    _getItems = () => this.props.autoFilter
+        ? filterItemsFunction(this.props.items, this.props.queryString)
+        : this.props.items;
+
     render() {
         const {
             "data-id": dataId,
@@ -174,7 +189,7 @@ export default class SelectionListStateless extends React.Component {
                 "show-selection-options": showSelectionOptions,
                 "input-selection-list--no-border": this.props["no-border"]
             });
-        const visibleItems = this.props.showOnlySelected ? this._filterVisible() : this.props.items;
+        const visibleItems = this.props.showOnlySelected ? this._filterVisible() : this._getItems();
 
         return (
             <div data-id={dataId} className={className}>
@@ -190,6 +205,7 @@ export default class SelectionListStateless extends React.Component {
                             placeholder={this.props.searchPlaceholder}
                             onValueChange={this.props.onSearch}
                             width="MAX"
+                            flags={[ "p-stateful" ]}
                             {...this.props.searchBoxProps} // band-aid fix to allow overriding the stateful text field
                         />
                     </div>

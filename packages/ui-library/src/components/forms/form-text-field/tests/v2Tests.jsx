@@ -6,6 +6,8 @@ jest.dontMock("../../FormLabel");
 jest.dontMock("../../FormError");
 jest.dontMock("../../../tooltips/HelpHint");
 
+import StateContainer from "../../../utils/StateContainer";
+
 describe("FormTextField", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -34,15 +36,27 @@ describe("FormTextField", function () {
         opts = _.defaults(opts || {}, {
             stateless: false,
             labelText: "",
-            required: legacyProp(opts, "required", "isRequired", false)
+            required: legacyProp(opts, "required", "isRequired", false),
         });
 
         return ReactTestUtils.renderIntoDocument(<FormTextField {...opts} />);
     }
 
 
-    it("renders the component", function () {
+    it("v3: renders the component", function () {
         var component = getComponent();
+
+        // verify that the component is rendered
+        var input = ReactDOM.findDOMNode(component);
+        expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
+
+        // make sure that the input is not required by default
+        var elements = TestUtils.scryRenderedDOMNodesWithClass(component, "required");
+        expect(elements.length).toBe(0);
+    });
+
+    it("v4: renders the component", function () {
+        var component = getComponent({ flags: ["p-stateful" ] });
 
         // verify that the component is rendered
         var input = ReactDOM.findDOMNode(component);
@@ -225,7 +239,7 @@ describe("FormTextField", function () {
         expect(handleReveal).toBeCalled();
     });
 
-    it("stateful: toggles reveal state", function () {
+    it("v3 stateful: toggles reveal state", function () {
         var component = getComponent(),
             componentRef = component.refs.stateful;
 
@@ -234,6 +248,18 @@ describe("FormTextField", function () {
         componentRef._handleToggleReveal();
 
         expect(componentRef.state.reveal).toBe(true);
+    });
+
+    it("v4 stateful: toggles reveal state", function () {
+        const component = getComponent({ flags: [ "p-stateful" ] });
+        const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+
+        expect(container.state.reveal).toBe(false);
+
+        stateless.props.onToggleReveal();
+
+        expect(container.state.reveal).toBe(true);
     });
 
     it("fires onKeyPress when key is pressed", function () {
@@ -267,7 +293,8 @@ describe("FormTextField", function () {
 
         ReactTestUtils.Simulate.change(input, { target: { value: "abc" } });
 
-        expect(callback).toBeCalledWith("abc");
+        expect(callback).toBeCalled();
+        expect(callback.mock.calls[0][0]).toBe("abc");
     });
 
     it("does not render undo button by default", function () {
@@ -446,26 +473,58 @@ describe("FormTextField", function () {
         expect(input.getAttribute("type")).toEqual(type);
     });
 
-    it("shows content measuring DOM when flexWidth is true", function () {
-        var initialValue = "initial input text",
-            newValue = "something really long entered into the text input for testing purposes",
-            component = getComponent({
-                "data-id": "ftf",
-                stateless: false,
-                flexWidth: true,
-                required: false,
-                label: "test",
-                value: initialValue
-            }),
-            input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input"),
-            componentRef = component.refs.stateful.refs.stateless,
-            contentMeasurer = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-content-measurer");
+    it("v3: shows content measuring DOM when flexWidth is true", function () {
+        const initialValue = "initial input text";
+        const newValue = "something really long entered into the text input for testing purposes";
+        const component = getComponent({
+            "data-id": "ftf",
+            stateless: false,
+            flexWidth: true,
+            required: false,
+            label: "test",
+            value: initialValue
+        });
+        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+        const contentMeasurer = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-content-measurer");
 
         jest.runAllTimers();
 
         expect(input.value).toEqual(initialValue);
         expect(contentMeasurer).toBeTruthy();
-        expect(componentRef.pwChar).toEqual("•");
+        expect(stateless.pwChar).toEqual("•");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: newValue } });
+        expect(input.value).toEqual(newValue);
+
+        // Im not able get any information from the content-measurer and it seems that the style attribute of the
+        // input is not updating in the test even though it does so in a browser
+        // TODO: figure out a way to test this functionality
+    });
+
+    it("v4: shows content measuring DOM when flexWidth is true", function () {
+        const initialValue = "initial input text";
+        const newValue = "something really long entered into the text input for testing purposes";
+        const component = getComponent({
+            "data-id": "ftf",
+            stateless: false,
+            flexWidth: true,
+            required: false,
+            label: "test",
+            initialState: {
+                value: initialValue
+            },
+            flags: [ "p-stateful" ],
+        });
+        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+        const contentMeasurer = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-content-measurer");
+
+        jest.runAllTimers();
+
+        expect(input.value).toEqual(initialValue);
+        expect(contentMeasurer).toBeTruthy();
+        expect(stateless.pwChar).toEqual("•");
 
         ReactTestUtils.Simulate.change(input, { target: { value: newValue } });
         expect(input.value).toEqual(newValue);
@@ -490,13 +549,13 @@ describe("FormTextField", function () {
             return "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
         });
 
-        var component = getComponent({
-                "data-id": "ftf",
-                flexWidth: true
-            }),
-            componentRef = component.refs.stateful.refs.stateless;
+        const component = getComponent({
+            "data-id": "ftf",
+            flexWidth: true
+        });
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
 
-        expect(componentRef.pwChar).toEqual("●");
+        expect(stateless.pwChar).toEqual("●");
     });
 
     it("logs warning for type color when not in production", function () {
@@ -523,6 +582,65 @@ describe("FormTextField", function () {
         expect(function () {
             getComponent({ controlled: true });
         }).toThrow(expectedError);
+    });
+
+    it("renders right and left icons", function() {
+        const component = getComponent({ iconRight: "globe", iconLeft: "settings" });
+
+        const leftIcon = TestUtils.findRenderedDOMNodeWithClass(component, "input-icon--left");
+        const rightIcon = TestUtils.findRenderedDOMNodeWithClass(component, "input-icon--left");
+
+        expect(leftIcon).toBeTruthy();
+        expect(rightIcon).toBeTruthy();
+    });
+
+    it("selects on focus", function() {
+        const component = getComponent({ value: "something", selectOnFocus: true });
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        input.select = jest.fn();
+
+        expect(input.select).not.toBeCalled();
+        ReactTestUtils.Simulate.focus(input);
+        expect(input.select).toBeCalled();
+    });
+
+    it("makes width bigger", function() {
+        const component = getComponent({ value: "something", flexWidth: true });
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+
+        stateless.initialInputWidth = 100;
+        stateless._contentMeasurerLabel = { offsetWidth: 150 };
+        stateless.lastValue = "something else";
+        stateless.setState({ nothing: "nothing" }); // force update
+
+        expect(stateless.state.labelWidth).toBe(160);
+    });
+
+    it("makes width initial for a password field", function() {
+        const component = getComponent({ value: "something", flexWidth: true, maskValue: true, reveal: false });
+        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
+
+        stateless.initialInputWidth = 100;
+        stateless._contentMeasurerLabel = { offsetWidth: 90 };
+        stateless.lastValue = "something else";
+        stateless.setState({ nothing: "nothing" }); // force update
+
+        expect(stateless.state.labelWidth).toBe(100);
+    });
+
+    it("doesn't fire toggle callback when disabled", function() {
+        var handleReveal = jest.fn();
+        var component = getComponent({
+            showReveal: true,
+            stateless: true,
+            disabled: true,
+            onToggleReveal: handleReveal
+        });
+        var reveal = TestUtils.findRenderedDOMNodeWithDataId(component, "reveal");
+
+        ReactTestUtils.Simulate.click(reveal);
+
+        expect(handleReveal).not.toBeCalled();
     });
 
 });

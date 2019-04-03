@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import _ from "underscore";
-import FormTextField, { FormTextFieldStateless } from "./form-text-field/index";
+import FormTextField, { messageTypes, FormTextFieldStateless } from "./form-text-field/index";
 import KeyboardUtils from "../../util/KeyboardUtils.js";
 import classnames from "classnames";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
@@ -97,7 +97,7 @@ const searchBoxProgressiveState = createProgressiveState([{
 class FormSearchBox extends React.Component {
     static displayName = "FormSearchBox";
 
-    static messageTypes = FormTextField.messageTypes;
+    static messageTypes = messageTypes;
 
     static propTypes = {
         "data-id": PropTypes.string,

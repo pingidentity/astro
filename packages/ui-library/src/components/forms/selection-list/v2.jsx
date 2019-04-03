@@ -1,10 +1,13 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    _ = require("underscore"),
-    Utils = require("../../../util/Utils.js"),
-    Constants = require("./v2-constants"),
-    Stateless = require("./v2-stateless"),
-    Stateful = require("./v2-stateful");
+import React from "react";
+import PropTypes from "prop-types";
+import _ from "underscore";
+import Utils from "../../../util/Utils.js";
+import Constants from "./v2-constants";
+import Stateless from "./v2-stateless";
+import Stateful from "./v2-stateful";
+import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
+import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
+import SelectionListStateless from "./v2-stateless";
 
 /**
  * @typedef SelectionList~SelectionListItem
@@ -27,6 +30,10 @@ var React = require("react"),
  * @callback SelectionList~onValueChange
  * @param {Array.<number|string>} selectedIds
  *     The list of selected IDs
+ */
+
+/**
+ * @callback SelectionList~onMultiAdd
  */
 
 /**
@@ -54,8 +61,17 @@ var React = require("react"),
  *     Callback to be triggered when the item selection changes
  * @param {SelectionList~onVisibilityChange} onVisibilityChange
  *     Callback to be triggered when toggled to show selected or all items
- * @param {SelectionList~onSelectAll} onValueonSelectAllChange
+ * @param {SelectionList~onSelectAll} onSelectAll
  *     Callback to be triggered when the select-all link is clicked
+ * @param {SelectionList~onMultiAdd} onMultiAdd
+ *     Callback to be triggered when the add button is clicked
+ * @param {string} [multiAddButtonLabel="Add"]
+ *     Label for the multi-add button
+ * @param {boolean} [autoSelectAll=false]
+ *     When true, selecting all will trigger onValueChange with all the items
+ * @param {boolean} [autoFilter=false]
+ *     When true, the items will be filtered by the queryString.
+ *     This is set to true when in p-stateful mode if the queryString is being controlled by the component.
  * @param {boolean} [showSearchBox=true]
  *     Flag to determine the visibility of the search box
  * @param {string} [searchPlaceholder]
@@ -63,36 +79,78 @@ var React = require("react"),
  * @param {SelectionList~onSearch} [onSearch]
  *     Callback to be triggered when the value in the search box changes;
  *     if not provided, the default search function will be used
- *     (for the first 3 chars is uses the "startsWith" operator, then "contains" from there on).
+ * @param {string} [queryString]
+ *     The value of the search field
  */
-class SelectionList extends React.Component {
+
+const PStatefulSelectionList = inStateContainer([
+    {
+        name: "queryString",
+        initial: "",
+        setter: "onSearch",
+    },
+    {
+        name: "showOnlySelected",
+        initial: false,
+        callbacks: [
+            {
+                name: "onVisibilityChange",
+                transform: toggleTransform,
+            },
+        ]
+    },
+    {
+        name: "selectedItemIds",
+        initial: [],
+        setter: "onValueChange",
+    },
+])(SelectionListStateless);
+PStatefulSelectionList.displayName = "PStatefulSelectionList";
+
+export default class SelectionList extends React.Component {
 
     static propTypes = {
-        stateless: PropTypes.bool
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful", "use-portal" ])),
     };
 
     static defaultProps = {
-        onValueChange: _.noop,
-        stateless: false
+        stateless: false,
+        flags: [],
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
+    static Actions = require("./v2-actions");
+    static actions = require("./v2-actions"); // according to our new standard
+
+    static Reducer = require("./v2-reducer");
+    static reducer = require("./v2-reducer"); // according to our new standard
+
+    static ListType = Constants.ListType;
+    static listType = Constants.ListType; // according to our new standard
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+        }
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "SelectionList" });
         }
     }
 
     render() {
+        if (this._usePStateful()) {
+            return (
+                <PStatefulSelectionList
+                    autoFilter={this.props.queryString === undefined ? true : false}
+                    {...this.props}
+                />
+            );
+        }
+
         return this.props.stateless
             ? <Stateless {..._.defaults({ ref: "SelectionListStateless" }, this.props)} />
             : <Stateful {..._.defaults({ ref: "SelectionListStateful" }, this.props)} />;
     }
 }
-
-SelectionList.ListType = Constants.ListType;
-
-SelectionList.Actions = require("./v2-actions");
-SelectionList.Reducer = require("./v2-reducer");
-
-module.exports = SelectionList;

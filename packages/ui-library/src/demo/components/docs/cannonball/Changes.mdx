@@ -106,3 +106,8 @@
 * **V4 Behavior:** When provided, the `defaultImage` prop will show an image with opacity when no `thumbnailSrc` prop is provided.
 * **V3 Behavior:** The `defaultImage` prop worked roughly the same as `thumbnailSrc` and took precedence over it, but only in the stateful version of the component. There was no additional styling.
 * **Recommendation:** Set the "true-default" flag.
+
+### SelectionList
+* **V4 Behavior:** The component controls `queryString`, `showOnlySelected`, and `selectedItemIds` if they aren't defined as props. The initial values can be set with `initialState`.
+* **V3 Behavior:** The `stateless` prop determines whether they are controlled by the component or not.
+* **Recommendation:** Set the 'p-stateful' flag.
