@@ -27,6 +27,10 @@ describe("ColorPicker Integration", function () {
         //verify the color wrapper display
         ColorPickerPage.waitForColorWrapperEnabled(1);
         expect(ColorPickerPage.verifyColorWrapperExisting(1)).toBeTruthy();
+
+        // Wait for transitions to complete
+        ColorPickerPage.pause(400);
+
         //take screenshot and compare
         ColorPickerPage.takeScreenshotAndCompare("ComponentColorPicker_Wrapper1");
 

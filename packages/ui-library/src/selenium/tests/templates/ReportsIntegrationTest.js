@@ -56,6 +56,9 @@ describe("Reports Template Integration", function () {
 
         ReportsTemplatePage.clickUnitText();
 
+        // Wait for animations to complete
+        ReportsTemplatePage.pause(400);
+
         ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_ReportUnitInputText");
 
 
@@ -89,6 +92,9 @@ describe("Reports Template Integration", function () {
         //take screenshot and compare
 
         ReportsTemplatePage.clickButton();
+
+        // Wait for click state to be removed
+        ReportsTemplatePage.pause(400);
 
         ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_ReportButton");
 

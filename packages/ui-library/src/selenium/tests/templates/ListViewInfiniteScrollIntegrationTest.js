@@ -55,13 +55,17 @@ describe("List View Infinite Scroll Integration", function () {
      */
     it("should expand item in list", function () {
         // row not opened yet
-        expect(ListViewInfiniteScrollPage.verifyRowIsOpen(4)).not.toBeTruthy();
+        expect(ListViewInfiniteScrollPage.verifyRowIsOpen(1)).not.toBeTruthy();
         // open row
-        ListViewInfiniteScrollPage.clickExpandRow(4);
+        ListViewInfiniteScrollPage.clickExpandRow(1);
         // verify result
-        expect(ListViewInfiniteScrollPage.verifyRowIsOpen(4)).toBeTruthy();
+        expect(ListViewInfiniteScrollPage.verifyRowIsOpen(1)).toBeTruthy();
 
+        // Finish animations
         ListViewInfiniteScrollPage.pause(2000);
+
+        ListViewInfiniteScrollPage.scrollToTop();
+
         ListViewInfiniteScrollPage.takeScreenshotAndCompare("TemplatesListView_ExpandedItem");
     });
 

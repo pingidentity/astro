@@ -33,6 +33,15 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
     },
 
     /**
+     * @desc this function scrolls to the top
+     */
+    scrollToTop: {
+        value: function () {
+            this.scrollElementToTop(`//div`, 0);
+        }
+    },
+
+    /**
      * @desc this function clicks the clear button on the search field
      */
     clickClearSearch: {
