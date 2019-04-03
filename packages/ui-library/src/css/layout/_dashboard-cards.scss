@@ -424,13 +424,13 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__back-info {
-        display: flex;
+        @include flexbox;
         justify-content: space-between;
         height: 30px;
     }
 
     &__drop-down {
-        display: flex;
+        @include flexbox;
         justify-content: center;
         padding-left: 10px;
         bottom: 21px;
@@ -451,6 +451,169 @@ $fullwidthBreakpoint: 950px;
 
     &__donut-chart {
         top: 10px;
+    }
+}
+
+.clearstuff {
+    opacity: 0.5;
+}
+
+.frequency-card {
+    overflow: visible;
+    display: block;
+
+    .dashboard-card__front {
+        align-items: center;
+    }
+
+    .dashboard-card__back {
+        position: absolute;
+        overflow: visible;
+        display: block;
+    }
+
+    &__holder {
+        @include flexbox;
+        @include flexbox-direction(row);
+        align-items: center;
+        margin-top: 25px;
+        justify-content: center;
+    }
+
+    &__nav-holder {
+        @include flexbox;
+        @include flexbox-direction(row);
+        align-items: center;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    &__title {
+        position: absolute;
+        font-size: 18px;
+        top: 19px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-transform: uppercase;
+        color: $color-neutral-10;
+        width: 100%;
+        text-align: center;
+    }
+
+    &__wrapper {
+        display: inline-block;
+        position: relative;
+        flex: 2;
+    }
+
+    &__center-info {
+        position: absolute;
+        top: 95px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: $color-neutral-10;
+    }
+
+    &__front-line {
+        border-bottom: 2px solid $color-neutral-10;
+        width: 70px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &__center-number {
+        position: relative;
+        font-size: 35px;
+        bottom: 10px;
+    }
+
+    &__center-label {
+        position: relative;
+        font-size: 12px;
+        top: 2px;
+    }
+
+    &__back-info {
+        @include flexbox;
+        justify-content: space-between;
+        height: 30px;
+    }
+
+    &__drop-down {
+        @include flexbox;
+        justify-content: center;
+        padding-left: 10px;
+        bottom: 21px;
+        margin: inherit;
+
+        .input-container {
+            width: 135px;
+        }
+    }
+
+    &__back-line {
+        padding-top: 20px;
+
+        &:after {
+            content: '';
+            display: block;
+            border-bottom: 1px solid $color-neutral-90;
+        }
+    }
+}
+
+.legend {
+    &__aside {
+        margin-left: 40px;
+        flex: 1;
+    }
+
+    &__aside-label {
+        font-size: 15px;
+        color: $color-neutral-10;
+        margin-bottom: 5px;
+    }
+
+    &__aside-key-color {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+    }
+
+    &__aside-key-label {
+        display: inline-block;
+        font-size: 13px;
+        line-height: 21px;
+        color: $color-neutral-10;
+        margin-left: 15px;
+        white-space: nowrap;
+
+        // So text doesn't shift when bolded on hover
+        &:after {
+            display: block;
+            content: attr(title);
+            font-weight: 600;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+    }
+
+    &__aside-keys {
+        position: relative;
+    }
+
+    &__aside-key {
+        padding: 5px 0;
+        cursor: pointer;
+        @include flexbox;
+        @include flexbox-direction(row);
+        align-content: center;
+    }
+
+    &__aside-key-selected {
+        font-weight: 600;
     }
 }
 

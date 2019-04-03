@@ -14,7 +14,8 @@
     border-radius: $border-radius;
     padding: 1px;
 
-    label {
+    label,
+    .help-tooltip > .help-tooltip-target > label {
         z-index: $zindex__elevated;
         border: none;
         height: 100%;
@@ -36,14 +37,28 @@
         border-radius: $border-radius;
     }
 
-    &.sel-0 label:nth-of-type(1),
-    &.sel-1 label:nth-of-type(2),
-    &.sel-2 label:nth-of-type(3),
-    &.sel-3 label:nth-of-type(4) {
+    &.sel-0 > label:nth-of-type(1),
+    &.sel-1 > label:nth-of-type(2),
+    &.sel-2 > label:nth-of-type(3),
+    &.sel-3 > label:nth-of-type(4) {
         @include transition($transition-timing color ease-out);
 
         background-color: transparent;
         color: $color-white;
+    }
+
+    &.sel-0 > .help-tooltip:nth-of-type(1),
+    &.sel-1 > .help-tooltip:nth-of-type(2),
+    &.sel-2 > .help-tooltip:nth-of-type(3),
+    &.sel-3 > .help-tooltip:nth-of-type(4) {
+        .help-tooltip-target {
+            label {
+                @include transition($transition-timing color ease-out);
+
+                background-color: transparent;
+                color: $color-white;
+            }
+        }
     }
 
     &.sel-0,
@@ -60,6 +75,14 @@
             background-color: $selected-color;
             border-radius: $border-radius;
         }
+    }
+
+    &.sel-0 label:nth-of-type(1),
+    &.sel-1 label:nth-of-type(2),
+    &.sel-2 label:nth-of-type(3),
+    &.sel-3 label:nth-of-type(4),
+    &.sel-4 label:nth-of-type(5) {
+        background: transparent;
     }
 
     @for $i from 0 through 3 {

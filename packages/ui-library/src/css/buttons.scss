@@ -423,7 +423,8 @@ button.ellipsis-loader-button {
     @include border-radius(3px);
     @include base-button-styles;
 
-    label {
+    label,
+    .help-tooltip > .helphint-button-target > label {
         @include text-style();
 
         position: relative;
@@ -441,7 +442,9 @@ button.ellipsis-loader-button {
         border-width: 1px 0 1px 1px;
 
         cursor: pointer;
+    }
 
+    label {
         &:first-of-type {
             @include border-radius(3px 0 0 3px);
         }
@@ -450,6 +453,18 @@ button.ellipsis-loader-button {
             border-width: 1px;
         }
     }
+
+    .help-tooltip > .helphint-button-target > label {
+        &:first-of-type {
+            @include border-radius(3px 0 0 3px);
+        }
+
+        &:last-of-type {
+            @include border-radius(0 3px 3px 0);
+            border-width: 1px;
+        }
+    }
+
     &.disabled {
         @include opacity(0.4);
         cursor: default;

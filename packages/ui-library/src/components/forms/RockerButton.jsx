@@ -1,6 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
+    HelpHint = require("../tooltips/HelpHint"),
     _ = require("underscore"),
     Utils = require("../../util/Utils");
 
@@ -100,10 +101,11 @@ class RockerButtonStateless extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         labels: PropTypes.array.isRequired,
+        labelHints: PropTypes.arrayOf(PropTypes.string),
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
         selectedIndex: PropTypes.number,
-        disabled: PropTypes.bool
+        disabled: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -134,14 +136,16 @@ class RockerButtonStateless extends React.Component {
             <div ref="container" data-id={this.props["data-id"]} className={className}>
                 {
                     this.props.labels.map(function (text, index) {
+                        const props = {
+                            "data-id": text,
+                            onClick: this._handleClick,
+                            key: index,
+                            text,
+                            index,
+                            helpText: this.props.labelHints ? this.props.labelHints[index] : undefined,
+                        };
                         return (
-                            <RockerButtonLabel
-                                data-id={text}
-                                onClick={this._handleClick}
-                                key={index}
-                                text={text}
-                                index={index}
-                            />);
+                            <RockerButtonLabel {...props} />);
                     }.bind(this))
                 }
             </div>
@@ -154,7 +158,14 @@ var RockerButtonLabel = function (props) {
         props.onClick(props.text, props.index, event);
     };
 
-    return <label data-id={props["data-id"]} onClick={_handleClick}>{props.text}</label>;
+    return props.helpText
+        ? <HelpHint
+            data-id="helphint-button"
+            placement = "top"
+            delayShow={500}
+            hintText={props.helpText} ><label data-id={props["data-id"]} onClick={_handleClick}>{props.text}</label>
+        </HelpHint>
+        : <label data-id={props["data-id"]} onClick={_handleClick}>{props.text}</label>;
 };
 
 RockerButtonLabel.propTypes = {
