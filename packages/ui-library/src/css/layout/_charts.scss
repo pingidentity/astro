@@ -134,6 +134,7 @@
         position: relative;
         height: $cell-size;
         width: $cell-size;
+        min-width: $cell-size;
         border-color: $color-white;
     }
 
@@ -153,7 +154,7 @@
 
     &__ylabel {
         padding: 0 15px 0 0;
-        line-height: $cell-size;
+        line-height: $cell-size - 1;
     }
 
     &__cell-color,
