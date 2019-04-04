@@ -30,7 +30,7 @@ import { createSearch } from "../../util/SearchUtils";
 export default class KeywordSearch extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        classname: PropTypes.string,
+        className: PropTypes.string,
         searchBuffer: PropTypes.number,
         tree: PropTypes.arrayOf(
             PropTypes.shape({
@@ -44,16 +44,22 @@ export default class KeywordSearch extends React.Component {
 
     static defaultProps = {
         "data-id": "keyword-search",
-        searchBuffer: 1
+        searchBuffer: 0
     }
 
     checkForMatch = createSearch(this.props.tree)
 
     state = {
         query: "",
-        results: [],
+        results: this.checkForMatch(""),
         selectedIndex: 0
     }
+
+    _resetSearch = () => this.setState({
+        query: "",
+        results: this.checkForMatch(""),
+        selectedIndex: 0
+    })
 
     _onKeyDown = ({ keyCode }) => {
         if (isArrowUp(keyCode)) {
@@ -73,7 +79,14 @@ export default class KeywordSearch extends React.Component {
                 selectedIndex
             } = this.state;
 
-            this._resultClicked(results[selectedIndex]);
+            const result = results[selectedIndex];
+
+            if (result) {
+                this._resultClicked(result);
+            } else {
+                this._resetSearch();
+            }
+
         }
     }
 
@@ -92,10 +105,7 @@ export default class KeywordSearch extends React.Component {
 
     _resultClicked = (result) => {
         const { onResultClick } = this.props;
-        this.setState(() => ({
-            query: "",
-            results: []
-        }));
+        this._resetSearch();
 
         /* istanbul ignore next */
         if (onResultClick) {

@@ -233,8 +233,7 @@ class AppFrame extends React.Component {
     _onSearchClick = ({
         id,
         root,
-        section,
-        hasChildren
+        section
     }) => {
         const {
             leftNavBarProps: {
@@ -262,14 +261,9 @@ class AppFrame extends React.Component {
 
         if (section) {
             openSection(section);
-            onItemChange(id);
-        } else if (root && hasChildren) {
-            const { children } = this._getNode(id);
-            openSection(id);
-            onItemChange(children[0].id);
-        } else if (root) {
-            onItemChange(id);
         }
+        onItemChange(id);
+
         this.setState({
             searchOpen: false
         });

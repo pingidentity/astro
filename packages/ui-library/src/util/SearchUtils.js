@@ -45,6 +45,8 @@ const _getSearchProps = ({
     keywords = [],
     children = []
 }, possibleResults, searchTerms) => {
+    // Give children information on their parents. Setting section
+    // on end nodes doesn't matter because they have no children.
     const ancestorProps = root && !section && children.length > 0
         ? {
             root,
@@ -54,6 +56,7 @@ const _getSearchProps = ({
             root
         };
 
+    // Get results and search terms for all children
     const { possibleResults: newResults, searchTerms: childSearchTerms } = children.reduce(
         ({ possibleResults: accResults, searchTerms: accSearch }, child) =>
             _getSearchProps({ ...child, ...ancestorProps }, accResults, accSearch)
@@ -64,21 +67,30 @@ const _getSearchProps = ({
         id,
         label,
         root,
-        ...section && { section }
+        section
     };
 
+    const isEndNode = !!section || root && children.length === 0;
+
     return {
-        possibleResults: {
-            [id]: {
-                ...result
-            },
-            ...newResults
-        },
-        searchTerms: _addToSearchTerms({
-            id,
-            keywords,
-            ...result
-        }, childSearchTerms)
+        // Don't add results unless they're end nodes
+        possibleResults:
+            isEndNode
+                ? {
+                    [id]: {
+                        ...result
+                    },
+                    ...newResults
+                }
+                : newResults,
+        searchTerms:
+            isEndNode
+                ? _addToSearchTerms({
+                    id,
+                    keywords,
+                    ...result
+                }, childSearchTerms)
+                : childSearchTerms
     };
 };
 
@@ -122,8 +134,11 @@ const _checkForMatch = searchTerms => possibleResults => query => {
         startsWith,
         contains
     } = Object.keys(searchTerms).reduce(({ startsWith: startsAcc, contains: containsAcc }, key) => {
-        const keyIndex = key.indexOf(query.toLowerCase());
-        if (keyIndex === 0) {
+        // Return all results for empty query
+        const keyIndex = query ? key.indexOf(query.toLowerCase()) : 0;
+
+        // Put results that start with the search term before results that just contain it.
+        if (keyIndex === 0 || !query) {
             const { [key]: idResults } = searchTerms;
             return {
                 startsWith: [

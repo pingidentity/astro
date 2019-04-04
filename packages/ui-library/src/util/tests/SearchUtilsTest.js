@@ -54,6 +54,13 @@ describe("SearchUtils", () => {
         expect(results).toEqual([]);
     });
 
+    it("returns all results when given empty query", () => {
+        const search = createSearch(tree);
+        const results = search("item");
+
+        expect(results.length).toEqual(2);
+    });
+
     it("it sorts matches starting with query before matches containing query", () => {
         const search = createSearch(tree);
 

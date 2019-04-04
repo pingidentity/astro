@@ -19,7 +19,10 @@ describe("KeywordSearch", () => {
                     {
                         label: "Section",
                         id: "section",
-                        children: [{ label: "Item", id: "item" }]
+                        children: [
+                            { label: "Item", id: "item" },
+                            { label: "Item2", id: "item2" }
+                        ]
                     }
                 ],
                 keywords: ["test"]
@@ -56,7 +59,7 @@ describe("KeywordSearch", () => {
         );
 
         expect(component.state.query).toEqual("");
-        expect(component.state.results).toEqual([]);
+        expect(component.state.results.length).toEqual(2);
     });
 
     it("_resultClicked should call onResultClick prop if passed in", () => {
@@ -75,7 +78,9 @@ describe("KeywordSearch", () => {
     });
 
     it("should not get results if query is shorter than buffer length", () => {
-        const component = getComponent();
+        const component = getComponent({
+            searchBuffer: 2
+        });
         component._onValueChange("");
 
         expect(component.state.results.length).toEqual(0);
@@ -85,7 +90,7 @@ describe("KeywordSearch", () => {
         const component = getComponent();
         component._onValueChange("item");
 
-        expect(component.state.results.length).toEqual(1);
+        expect(component.state.results.length).toEqual(2);
     });
 
     it("should not have results if a query doesn't match one of its search terms", () => {
