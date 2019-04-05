@@ -223,7 +223,7 @@ class Wizard extends React.Component {
                 number: idx,
                 total: this.props.numSteps,
                 completed: this.props.activeStep > idx,
-                showEdit: this.props.activeStep > idx,
+                showEdit: step.props.showEdit || this.props.activeStep > idx,
                 hideCancel: this.props.activeStep === this.props.numSteps,
                 onNext: step.props.onNext,
                 saveTooltip: step.props.saveTooltip,

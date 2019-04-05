@@ -197,6 +197,7 @@ class Choose extends React.Component {
         props.total = this.props.numSteps;
         props.titleSelection = this._getChoiceTitle();
         props.canProceed = this._getChoice() >= 0;
+        props.showEdit = true;
 
         return (
             <div data-id={this.props["data-id"]} className={this.props.className}>

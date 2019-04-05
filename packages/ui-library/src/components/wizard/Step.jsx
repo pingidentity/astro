@@ -66,8 +66,8 @@ var React = require("react"),
  *     Indicates if navigation should be hidden
  * @param {boolean} [hideCancel=false]
  *     Hides the cancel button
- * @param {boolean} [showEdit=true]
- *     Controls edit label visibility, ideally step[n-1].canProceed === step[n].showEdit to be consistent defaults to true
+ * @param {boolean} [showEdit=false]
+ *     Controls edit label visibility, ideally step[n-1].canProceed === step[n].
  * @param {boolean} [completed=false]
  *     Indicates if step have been completed, used to external state management
  * @param {boolean} [isModal=true]
@@ -128,7 +128,7 @@ class Step extends React.Component {
         renderHidden: false,
         canProceed: true,
         isModal: true,
-        showEdit: true,
+        showEdit: false,
         when: true,
         onCancel: _.noop,
         showPulsing: false,

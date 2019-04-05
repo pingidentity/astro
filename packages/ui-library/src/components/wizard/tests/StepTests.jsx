@@ -71,7 +71,7 @@ describe("Step", function () {
         expect(ReactDOM.findDOMNode(component.refs.nextButton).textContent).toBe("xxxnext");
         expect(ReactDOM.findDOMNode(component.refs.cancelButton).value).toBe("xxxcancel");
 
-        component = getRenderedComponent({ active: false });
+        component = getRenderedComponent({ active: false, showEdit: true });
         expect(ReactDOM.findDOMNode(component.refs.editButton).textContent).toBe("xxxedit");
     });
 
@@ -89,7 +89,8 @@ describe("Step", function () {
 
         component = getRenderedComponent({
             ...props,
-            active: false
+            active: false,
+            showEdit: true,
         });
         expect(ReactDOM.findDOMNode(component.refs.editButton).textContent).toBe("Edit");
     });
@@ -104,7 +105,7 @@ describe("Step", function () {
     });
 
     it("Edit button executes callback", function () {
-        var component = getRenderedComponent({ active: false, canProceed: true });
+        var component = getRenderedComponent({ active: false, canProceed: true, showEdit: true, });
 
         ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(component.refs.editButton));
 
@@ -113,7 +114,7 @@ describe("Step", function () {
     });
 
     it("Inactive step is collapsed", function () {
-        var component = getRenderedComponent({ active: false , number: 2 });
+        var component = getRenderedComponent({ active: false , number: 2, showEdit: true, });
 
         expect(component.refs.nextButton).toBeFalsy();
         expect(component.refs.cancelButton).toBeFalsy();
