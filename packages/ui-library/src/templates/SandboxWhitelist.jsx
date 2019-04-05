@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { partition } from "underscore";
 import Button from "../components/buttons/Button";
-import FlexRow, { justifyOptions } from "../components/layout/FlexRow";
+import FlexRow, { alignments, justifyOptions } from "../components/layout/FlexRow";
 import InputRow from "../components/layout/InputRow";
 import PageHeader from "../components/general/PageHeader";
 import Popover from "../components/tooltips/Popover";
@@ -143,6 +143,7 @@ export default class SandboxWhitelist extends Component {
                     As a safeguard, only users added to this whitelist will receive notifications from this environment.
                     </InputRow>
                     <FlexRow
+                        alignment={alignments.TOP}
                         justify={justifyOptions.SPACEBETWEEN}
                     >
                         <SearchBox

@@ -1,10 +1,10 @@
 jest.dontMock("../PageSection");
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import PageSection from "../PageSection";
 
 describe("PageSection", function () {
-    const React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        PageSection = require("../PageSection");
 
     function getComponent (props) {
         return ReactTestUtils.renderIntoDocument(

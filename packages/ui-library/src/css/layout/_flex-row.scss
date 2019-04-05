@@ -17,14 +17,17 @@
     }
 
     &--align-bottom {
+        align-content: flex-end;
         align-items: flex-end;
     }
 
     &--align-center {
+        align-content: center;
         align-items: center;
     }
 
     &--align-top {
+        align-content: flex-start;
         align-items: flex-start;
     }
 }

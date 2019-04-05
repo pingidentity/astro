@@ -26,7 +26,13 @@ const PageSection = ({
     title,
     titleAccessories
 }) => {
-    const props = { className: classnames("page-section", className), "data-id": dataId };
+    const props = {
+        className:
+            classnames(
+                "page-section",
+                className,
+            ),
+        "data-id": dataId };
 
     return title || titleAccessories
         ? <div {...props}>
@@ -56,7 +62,7 @@ PageSection.propTypes = {
 };
 
 PageSection.defaultProps = {
-    "data-id": "page-section"
+    "data-id": "page-section",
 };
 
 export default PageSection;

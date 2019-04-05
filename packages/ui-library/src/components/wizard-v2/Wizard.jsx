@@ -232,9 +232,9 @@ class Wizard extends React.Component {
         let optionalSteps = [];
         let hasHeaderItems = headerItems && headerItems.length > 0;
 
-        React.Children.forEach(children, (child, index) => {
-            if (child && typeof(child) === "object" && child.hasOwnProperty("props")) {
-
+        React.Children.toArray(children)
+            .filter(({ props } = {}) => props !== undefined)
+            .forEach((child, index) => {
                 const childProps = _.defaults(
                     {
                         "data-id": child.props["data-id"] || `${dataId}-step`,
@@ -253,8 +253,7 @@ class Wizard extends React.Component {
                 } else {
                     optionalSteps.push(childProps);
                 }
-            }
-        });
+            });
 
         const classNames = classnames("wizard2", {
             "wizard2--header-shown": hasHeaderItems,

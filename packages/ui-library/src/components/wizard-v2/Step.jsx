@@ -29,7 +29,7 @@ Step.propTypes = {
     menuDescription: PropTypes.string,
     onSave: PropTypes.func,
     required: PropTypes.bool,
-    title: PropTypes.string,
+    title: PropTypes.node,
     menuTitle: PropTypes.string,
 };
 

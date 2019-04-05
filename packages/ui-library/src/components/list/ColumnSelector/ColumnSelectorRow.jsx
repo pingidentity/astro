@@ -61,6 +61,7 @@ export default class ColumnSelectorRow extends Component {
         className: PropTypes.string,
         customButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
         "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
         expandable: PropTypes.bool,
         id: PropTypes.string,
         onButtonClick: PropTypes.func,
@@ -78,6 +79,7 @@ export default class ColumnSelectorRow extends Component {
         children: noop,
         className: "",
         "data-id": "column-selector-row",
+        disabled: false,
         expandable: false,
         onButtonClick: noop,
         onToggle: noop
@@ -122,19 +124,42 @@ export default class ColumnSelectorRow extends Component {
         }
     }
 
+    _renderButton = ({
+        buttonType,
+        customButton,
+        disabled,
+        draggable,
+        expandable
+    }) => {
+        const button = this._renderCustomButton(customButton);
+        if (button) {
+            return button;
+        }
+
+        return (
+            disabled || draggable
+                ? <div />
+                : <RowButton
+                    buttonType={buttonType}
+                    expandable={expandable}
+                    onClick={this._handleButtonClick}
+                />
+        );
+    }
+
     _renderCustomButton = button =>
         isFunction(button)
-            ? button({ handleOnButtonClick: this._handleButtonClick })
+            ? button({
+                handleOnButtonClick: this._handleButtonClick,
+                ...this.props
+            }, RowButton)
             : button
 
     render() {
         const {
-            buttonType,
             children,
             className,
-            customButton,
             "data-id": dataId,
-            draggable,
             expandable,
             subtitle,
             title,
@@ -153,7 +178,8 @@ export default class ColumnSelectorRow extends Component {
                         className,
                         {
                             [`${baseClassName}--open`]: expandableOpen,
-                            [`${baseClassName}--closed`]: expandable && !this.state.open
+                            [`${baseClassName}--closed`]: expandable && !this.state.open,
+                            [`${baseClassName}--disabled`]: this.props.disabled
                         }
                     )}
                 data-id={dataId}
@@ -193,15 +219,7 @@ export default class ColumnSelectorRow extends Component {
                             </div>
                         }
                     </div>
-                    {
-                        !draggable && (this._renderCustomButton(customButton) ||
-                            <RowButton
-                                buttonType={buttonType}
-                                expandable={expandable}
-                                onClick={this._handleButtonClick}
-                            />
-                        )
-                    }
+                    {this._renderButton(this.props)}
                 </div>
                 {renderedChildren &&
                     <div className={`${baseClassName}-options`}>

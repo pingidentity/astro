@@ -89,6 +89,11 @@
             }
         }
 
+        &--disabled {
+            background-color: transparent;
+            cursor: default;
+        }
+
         & .column-selector {
             &__row {
                 border: none;

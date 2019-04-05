@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import { isFunction } from "underscore";
 import Button from "../buttons/Button";
@@ -152,30 +152,28 @@ RowBuilder.defaultProps = {
 };
 
 RowBuilder.propTypes = {
-    addButton: propTypes.node,
-    addLabel: propTypes.node,
-    className: propTypes.string,
-    "data-id": propTypes.string,
-    onAdd: propTypes.func,
-    onRemove: propTypes.func,
-    renderAddButton: propTypes.oneOfType([
-        propTypes.node,
-        propTypes.func
+    addButton: PropTypes.node,
+    addLabel: PropTypes.node,
+    className: PropTypes.string,
+    "data-id": PropTypes.string,
+    onAdd: PropTypes.func,
+    onRemove: PropTypes.func,
+    renderAddButton: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.func
     ]),
-    renderRemoveButton: propTypes.oneOfType([
-        propTypes.node,
-        propTypes.func
+    renderRemoveButton: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.func
     ]),
-    rows: propTypes.arrayOf(
-        propTypes.shape({
-            id: propTypes.string,
-            content: propTypes.arrayOf(
-                propTypes.node
-            ),
-            removable: propTypes.bool
+    rows: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            content: PropTypes.node,
+            removable: PropTypes.bool
         })
     ),
-    showRemoveLabel: propTypes.bool,
+    showRemoveLabel: PropTypes.bool,
 };
 
 RowBuilder.Row = Row;

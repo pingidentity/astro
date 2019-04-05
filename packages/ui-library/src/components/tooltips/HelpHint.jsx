@@ -11,7 +11,7 @@ var _ = require("underscore");
  * @enum {string}
  * @alias HelpHint.Positions
  */
-var Placements = {
+const Placements = {
     TOP: "top",
     BOTTOM: "bottom",
     LEFT: "left",
@@ -22,7 +22,7 @@ var Placements = {
  * @enum {string}
  * @alias HelpHint.Types
  */
-var Types = {
+const Types = {
     DEFAULT: "",
     ERROR: "error",
     LIGHT: "light",

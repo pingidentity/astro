@@ -151,7 +151,7 @@ var ConfirmDeletePositions = {
  * @param {boolean} [showDelete=true]
  *     Whether or not the 'delete' button will be shown at all.
  * @param {object} [deleteButton]
- *     If defined, will replace the default delet button implementation.
+ *     If defined, will replace the default delete button implementation.
  *     For example, a ModalButton can be passed as shown here:
  *         <...deleteButton={
  *             <ModalButton
@@ -356,7 +356,10 @@ class StatelessExpandableRow extends React.Component {
             PropTypes.string
         ]),
         image: PropTypes.string,
-        icon: PropTypes.string,
+        icon: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.string
+        ]),
         children: PropTypes.node,
         content: PropTypes.object,
         editViewRoute: PropTypes.string,
@@ -513,6 +516,7 @@ class StatelessExpandableRow extends React.Component {
     _useNewClassName = () => this.props.flags.findIndex(flag => flag === "expandable-row-class") >= 0;
 
     render() {
+        const { icon } = this.props;
         const baseClassName = this._useNewClassName() ? "expandable-row" : "item";
         var showEditIcon = this.props.showEdit && this.props.isEditEnabled,
             showViewIcon = this.props.showEdit && !this.props.isEditEnabled,
@@ -521,7 +525,7 @@ class StatelessExpandableRow extends React.Component {
                 waiting: this.props.waiting,
                 [`${baseClassName}--ordering`]: this.props.ordering,
                 "has-image": !!this.props.image,
-                "has-icon": !!this.props.icon,
+                "has-icon": icon,
                 "no-delete": !this.props.showDelete,
                 "has-subtitle": this.props.subtitle,
                 "no-edit": !showEditIcon
@@ -606,12 +610,21 @@ class StatelessExpandableRow extends React.Component {
                         / {this.props.ordering.total}
                     </div>
                 )}
-                <div className="collapsed-content">
+                <div
+                    className={
+                        classnames(
+                            "collapsed-content",
+                            icon && _.isString(icon) ? "" : "collapsed-content--with-icon"
+                        )
+                    }
+                >
                     {this.props.image && (
                         <img src={this.props.image} className="item-image" />
                     )}
-                    {this.props.icon && (
-                        <span className={"item-icon " + this.props.icon} />
+                    {icon && (
+                        _.isString(icon)
+                            ? <span className={"item-icon " + icon} />
+                            : <span className="collapsed-content__icon">{icon}</span>
                     )}
                     <div className={titleClassName}>{this.props.title}</div>
                     {this.props.subtitle && (

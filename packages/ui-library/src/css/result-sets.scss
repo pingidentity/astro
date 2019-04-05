@@ -45,6 +45,17 @@ $expandable-row-gap: 12px;
         min-height: $expandable-row-height;
         padding: 23px 0 0 $spacing-lg;
         margin: 0 45px 0 0;
+
+        &__icon {
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 60px;
+            width: 76px;
+        }
     }
     &.has-subtitle {
         .collapsed-content {

@@ -167,6 +167,10 @@ $wizard-close-button-color: $color-strong-neutral-40;
             display: block;
             height: $wizard-v-spacing;
         }
+
+        .page-section {
+            margin-left: 0;
+        }
     }
 
     &-step {
@@ -397,4 +401,5 @@ $wizard-close-button-color: $color-strong-neutral-40;
         z-index: zindex__page-overlay;
         transform: translateX(-50%) translateY(-50%);
     }
+
 }

@@ -124,6 +124,7 @@ export default class ColumnSelector extends Component {
                 })
             ),
             customButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+            disabled: PropTypes.bool,
             open: PropTypes.bool,
             subtitle: PropTypes.string,
             title: PropTypes.node,
@@ -145,6 +146,7 @@ export default class ColumnSelector extends Component {
                 })
             ),
             customButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+            disabled: PropTypes.bool,
             open: PropTypes.bool,
             subtitle: PropTypes.string,
             title: PropTypes.node,

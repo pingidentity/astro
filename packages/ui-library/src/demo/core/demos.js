@@ -1075,7 +1075,7 @@ module.exports = [
                         icon: "details"
                     },
 
-                    // TEMPORARILY DISABLED UNTIL MARKUP CAN BE REPLACED WITH COMPONTENTS
+                    // TEMPORARILY DISABLED UNTIL MARKUP CAN BE REPLACED WITH COMPONENTS
                     // {
                     //     label: "User MFA",
                     //     demo: require("../components/templates/UserMFADemo"),
@@ -1156,6 +1156,13 @@ module.exports = [
                         label: "License",
                         demo: require("../components/templates/LicenseDemo"),
                         pathToSource: "templates_License.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
+                        label: "Social Login",
+                        demo: require("../../templates/SocialLogin"),
+                        pathToSource: "templates_SocialLogin.jsx.html",
                         fullscreen: true,
                         icon: "details"
                     }
