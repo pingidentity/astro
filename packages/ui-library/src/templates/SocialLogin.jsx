@@ -277,7 +277,7 @@ export default class SocialLogin extends Component {
                                         labelRemove="Remove"
                                         labelSelect="Choose a File"
                                         showThumbnail
-                                        thumbnailSrc="src/demo/images/favicon.png"
+                                        thumbnailSrc="src/demo/images/logo-facebook.png"
                                     />
                                 </InputRow>
                             </Step>,
