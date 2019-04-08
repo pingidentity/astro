@@ -46,12 +46,12 @@ class FormRadioGroupDemo extends React.Component {
         return (
             <div>
                 <InputRow>
-                    <label className="detached">Horizonal Alignment</label>
                     <FormRadioGroup
                         groupName="horizontal-group"
                         selected={this.state.selectedId1}
                         onValueChange={this._handleChange1}
                         items={radioItems}
+                        labelText="Horizonal Alignment"
                         stacked={false}
                     />
                 </InputRow>
@@ -61,11 +61,11 @@ class FormRadioGroupDemo extends React.Component {
                 </InputRow>
 
                 <InputRow>
-                    <label className="detached">Stacked/Vertical Alignment</label>
                     <FormRadioGroup
                         groupName="stacked-group"
                         selected={this.state.selectedId2}
                         onValueChange={this._handleChange2}
+                        labelText="Stacked/Vertical Alignment"
                         items={radioItems}
                     />
                 </InputRow>
@@ -75,22 +75,22 @@ class FormRadioGroupDemo extends React.Component {
                 </InputRow>
 
                 <InputRow>
-                    <label className="detached">Disabled Radio Group</label>
                     <FormRadioGroup
                         groupName="disabled-stacked-group"
                         selected={this.state.selectedId3}
                         onValueChange={this._handleChange3}
                         items={radioItems}
+                        labelText="Disabled Radio Group"
                         disabled={true}
                     />
                 </InputRow>
 
                 <InputRow>
-                    <label className="detached">Radio Group With Random Hidden</label>
                     <FormRadioGroup
                         groupName="hidden-stacked-group"
                         selected={this.state.selectedId4}
                         onValueChange={this._handleChange4}
+                        labelText="Radio Group With Random Hidden"
                         items={radioItemsWithHidden}
                     />
                 </InputRow>

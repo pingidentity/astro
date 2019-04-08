@@ -278,5 +278,21 @@ describe("FormRadioGroup", function () {
         expect(element).toEqual(null);
     });
 
+
+    it("renders a form label when labelText is provided", function () {
+
+        const component = ReactTestUtils.renderIntoDocument (
+            <FormRadioGroup
+                groupName="test_radio_group"
+                onValueChange={callback}
+                items={items}
+                labelText="hello"
+            />
+        );
+
+        const label = TestUtils.scryRenderedDOMNodesWithDataId(component, "label");
+        expect(label[0].textContent).toEqual("hello");
+    });
+
 });
 

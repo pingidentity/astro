@@ -19,6 +19,7 @@ describe("IconSelector", function () {
         return mount(
             <IconSelector
                 items={radioItems}
+                labelText="hello"
                 {...props}
             />
         );

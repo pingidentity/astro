@@ -15,17 +15,21 @@ import { defaultRender } from "../../util/PropUtils";
 /**
  * @typedef FormRadioGroup~RadioGroupItem
  * @property {string} id
- *     The item's identifier
+ *     The item's identifier.
  * @property {string} name
- *     The item's display text
+ *     The item's display text.
  * @property {string} helpHintText
- *     Text to display in help hint next to the item's name
+ *     Text to display in help hint next to the item's name.
  * @param {object} [helpTarget]
- *     An optional icon or image to replace standard help hint icon
+ *     An optional icon or image to replace standard help hint icon.
  * @property {boolean} disabled
- *     Disables the input
+ *     Disables the input.
  * @property {boolean} hidden
- *     Hides the input
+ *     Hides the input.
+ * @property {string} labelText
+ *     Text to display the label for the radio button.
+ * @property {string} label
+ *     Text to display the label for the radio button.
  */
 
 /**
@@ -38,7 +42,7 @@ import { defaultRender } from "../../util/PropUtils";
  *     CSS classes to set on the top-level HTML container.
  *
  * @param {string} groupName
- *     Name of the radio group
+ *     Name of the radio group.
  * @param {FormRadioGroup~RadioGroupItem[]} items
  *     Array of RadioGroupItem objects to render.
  * @param {*} [selected]
@@ -50,9 +54,9 @@ import { defaultRender } from "../../util/PropUtils";
  *     When true, radios inputs are stacked vertically. When false radio inputs appear on same line
  *     and wrap when out of space.
  * @param {boolean} [disabled=false]
- *     If radio buttons are disabled
+ *     If radio buttons are disabled.
  * @param {FormRadioGroup~radioRenderer} renderRadio
- *     Renders a single radio button
+ *     Renders a single radio button.
  *
  *
  * @example
@@ -178,7 +182,7 @@ class FormRadioGroup extends React.Component {
 
     render() {
         return (
-            this.props.label ? (
+            this.props.label || this.props.labelText ? (
                 <FormLabel data-id={this.props["data-id"]}
                     disabled={this.props.disabled}
                     value={this.props.label || this.props.labelText}

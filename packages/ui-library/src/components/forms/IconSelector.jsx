@@ -12,6 +12,8 @@ import classnames from "classnames";
  * @param {IconSelector~RadioGroupItem[]} items
  *     Array of RadioGroupItem objects to render.
  *
+ * @param {IconSelector~RadioGroup} labelText
+ *     A string for to display a label above the icons.
  * @see FormRadioGroup
 **/
 

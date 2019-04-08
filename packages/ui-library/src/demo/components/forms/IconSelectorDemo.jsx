@@ -24,7 +24,7 @@ const stateDefs = [
 const IconSelectorDemo = () => (
     <div>
         <StateContainer stateDefs={stateDefs}>
-            {props => <IconSelector items={radioItems} {...props} groupName="icon" />}
+            {props => <IconSelector items={radioItems} {...props} groupName="icon"/>}
         </StateContainer>
     </div>
 );
