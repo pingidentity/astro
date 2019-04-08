@@ -2589,6 +2589,7 @@ input[type=file] {
 
     // UnitInput Component
     &.unit-input {
+        white-space: nowrap;
         .input-custom-select {
             padding-top: 0;
             padding-bottom: 0;
