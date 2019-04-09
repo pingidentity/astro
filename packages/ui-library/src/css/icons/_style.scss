@@ -328,6 +328,11 @@
     content: $icon-left;
   }
 }
+.icon-line-chart {
+  &:before {
+    content: $icon-line-chart;
+  }
+}
 .icon-link {
   &:before {
     content: $icon-link;
