@@ -64,6 +64,11 @@ const users = [
     },
 ];
 
+/**
+ * @class Sandbox Whitelist
+ * @desc This is a template to demonstrate how to build a Sandbox Whitelist screen.
+ */
+
 export default class SandboxWhitelist extends Component {
     state={
         activeIds: [

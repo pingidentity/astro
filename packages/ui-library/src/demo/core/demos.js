@@ -330,7 +330,7 @@ module.exports = [
                         label: "Column Selector",
                         demo: require("../components/list/ColumnSelectorDemo"),
                         pathToDoc: "components/list/ColumnSelector.jsx",
-                        pathToSource: "components_list_ColumnSelector.jsx.html",
+                        pathToSource: "components_list_ColumnSelector_ColumnSelector.jsx.html",
                         pathToDemoSource: "demo_components_list_ColumnSelectorDemo.jsx.html"
                     },
                     {

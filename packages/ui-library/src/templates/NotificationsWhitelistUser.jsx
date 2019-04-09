@@ -10,6 +10,11 @@ import RockerButton from "../components/forms/RockerButton";
 import Table from "../components/tables/Table";
 import ValueItem from "../components/layout/ValueItem";
 
+/**
+ * @class Notifications Whitelist
+ * @desc This is a template to demonstrate how to build a Notifications Whitelist screen.
+ */
+
 export default function NotificationsWhitelistUser() {
     return (
         <ExpandableRow

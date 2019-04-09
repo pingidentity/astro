@@ -43,6 +43,11 @@ const possibleProviders = {
     }
 };
 
+/**
+ * @class Social Login
+ * @desc This is a template for Social Login.
+ */
+
 export default class SocialLogin extends Component {
     state = {
         activeProvider: null,
@@ -80,7 +85,8 @@ export default class SocialLogin extends Component {
         providers: [
             ...providers.filter(({ id }) => id !== activeProvider.id),
             activeProvider
-        ]
+        ],
+        wizardStep: 0
     }))
 
     // Not wired in yet

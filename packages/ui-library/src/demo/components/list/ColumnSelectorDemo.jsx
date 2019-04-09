@@ -5,6 +5,11 @@ import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
 import Icon from "../../../components/general/Icon";
 import LinkDropDownList from "../../../components/forms/LinkDropDownList";
 
+/**
+ * @class Column Selector Demo
+ * @desc A demo for the Column Selector component.
+ */
+
 export default class ColumnSelectorDemo extends Component {
     static flags = [ "use-portal" ];
 
