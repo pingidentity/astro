@@ -207,4 +207,42 @@ describe("LinkDropDownList", function () {
         var label = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-bottom-links");
         expect(label).toBeTruthy();
     });
+
+
+    it("fires a cannonball warning when the p-stateful flag is not set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal" ] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("fires no cannonball warning when the p-stateful flag is set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal", "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("P-stateful renders the component in open state", function () {
+        var component = getComponent({ open: true, flags: [ "p-stateful" ] }),
+            label = getLabel(component),
+            menu = getMenu(component);
+
+        expect(component).toBeTruthy();
+
+        expect(label).toBeTruthy();
+        expect(label.getAttribute("class")).toContain("open");
+
+        expect(menu).toBeTruthy();
+        expect(menu.getAttribute("class")).toContain("select-list");
+    });
+
+    it("P-statful triggers onClick callback when menu item is clicked ", function () {
+        var clickIndex = 1,
+            component = getComponent({ open: true, flags: [ "p-stateful" ] }),
+            menuItems = getMenu(component).children;
+
+        ReactTestUtils.Simulate.click(menuItems[clickIndex]);
+        expect(component.props.onClick).toBeCalledWith(options[clickIndex]);
+        expect(component.props.onToggle).not.toBeCalled();
+    });
+
 });

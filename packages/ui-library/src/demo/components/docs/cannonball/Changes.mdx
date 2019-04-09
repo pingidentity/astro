@@ -91,3 +91,9 @@
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the index state will be controlled by the component.
 * **Recommendation:** Set the "p-stateful" flag.
+
+### LinkDropDownList
+* **V4 Behavior:** The component controls the state of `open` and `selectedOption` if they're not defined as props. The initial values can be set with `initialState`.
+* **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
+* **Recommendation:** Set the 'p-stateful' flag.
+

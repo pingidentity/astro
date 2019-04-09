@@ -24,7 +24,7 @@ var _options = [
 ];
 
 class LinkDropDownListDemo extends React.Component {
-    static flags = [ "use-portal" ];
+    static flags = [ "use-portal", "p-stateful" ];
 
     state = {
         open: false,
@@ -67,7 +67,9 @@ class LinkDropDownListDemo extends React.Component {
                     label="Stateful Version"
                     onClick={this._handleClick}
                     options={_options}
-                    selectedOption={_options[0]}
+                    initialState={{
+                        selectedOption: _options[0]
+                    }}
                 />
                 <HR />
                 <LinkDropDownList
@@ -76,7 +78,9 @@ class LinkDropDownListDemo extends React.Component {
                     closeOnClick={true}
                     label="Right-aligned"
                     options={_options}
-                    selectedOption={_options[0]}
+                    initialState={{
+                        selectedOption: _options[0]
+                    }}
                     className="left"
                 />
             </div>
