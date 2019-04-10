@@ -234,9 +234,7 @@ class DragDropTable extends React.Component {
 
     _setWidths = () => {
         //this function reads the width of the initial table columns and uses it to set widths for the fixed table
-        const thisElement = ReactDOM.findDOMNode(this);
-        const tableHead = thisElement.getElementsByClassName("thead");
-        const headerTh = tableHead[0].getElementsByClassName("th");
+        const headerTh = this.tableHead.getElementsByClassName("th");
 
         this.setState({
             columnWidths: this.props.headData.map(
@@ -272,15 +270,10 @@ class DragDropTable extends React.Component {
     };
 
     componentDidMount() {
+        this.tableHead = ReactDOM.findDOMNode(this.rootElement.getElementsByClassName("thead")[0]);
         if (this.props.fixedHead && !this.state.columnWidths) {
-            //Because componentDidMount is called before the dom is painted, the timeout is required to make sure the measured widths are accurate
-            setTimeout(() => {
-                this._setWidths();
-            }, 0);
+            this._setWidths();
         }
-        const thisElement = ReactDOM.findDOMNode(this);
-        this.tableHead = ReactDOM.findDOMNode(thisElement.getElementsByClassName("thead")[0]);
-        this.intialY = 0;
     }
 
     render() {
@@ -320,7 +313,11 @@ class DragDropTable extends React.Component {
         );
 
         return (
-            <div data-id={this.props["data-id"]} className={className}>
+            <div
+                data-id={this.props["data-id"]}
+                className={className}
+                ref={ref => this.rootElement = ref}
+            >
                 <div className="dd-table-container" onScroll={onScroll} data-id={this.props["data-id"] + "-container"}>
                     <div className="table" data-id={this.props["data-id"] + "-table"}>
                         {tableHead}

@@ -188,12 +188,8 @@ describe("DragDropTable", function () {
 
     it("sets widths for fixed header", function () {
         getComponent({ fixedHead: true });
-        var component = thisComponent;
 
-        expect(component.state.columnWidths).toBe(null);
-        //setWidths is on a timeout so need to run timers
-        jest.runAllTimers();
-        expect(component.state.columnWidths.length).toBe(3);
+        expect(thisComponent.state.columnWidths.length).toBe(3);
     });
 
     it("handles headData with specific widths", () => {
@@ -270,6 +266,4 @@ describe("DragDropTable", function () {
         expect(component._handleHorizontalScroll.mock.calls.length).toBe(1);
 
     });
-
-
 });
