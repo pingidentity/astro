@@ -526,8 +526,10 @@ button.button--overflow {
 
 .tile-button,
 button.tile-button {
-    border-color: $color-accent-neutral-70;
+    background: $color-white;
+    border: 1px solid $color-accent-neutral-70;
     color: $color-slate;
+    cursor: pointer;
     font-size: 15px;
     padding: $spacing-xl $spacing-lg $spacing-lg $spacing-lg;
     line-height: normal;
@@ -687,6 +689,8 @@ button.tile-button {
 .tile-button--side-icon,
 button.tile-button--side-icon {
     @include flexbox-direction(row);
+
+    box-sizing: border-box;
 
     padding: $spacing-md $spacing-lg;
 

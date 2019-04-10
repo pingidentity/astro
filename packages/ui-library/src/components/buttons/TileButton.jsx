@@ -113,8 +113,10 @@ const TileButton = ({
         link && <Link className="tile-button__link" onClick={link.onClick} data-id={`${dataId}-link`}>{link.text}</Link>
     );
 
+    const TagName = link ? "div" : "button";
+
     return (
-        <button className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown}>
+        <TagName className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown} role="button">
             {renderedIcon &&
                 <div
                     className={classnames(
@@ -137,7 +139,7 @@ const TileButton = ({
                     [renderedContent, renderedDetails, renderedTitle]
                 )
             }
-        </button>
+        </TagName>
     );
 };
 
