@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { AreaChart, Area, Tooltip, XAxis, YAxis } from "recharts";
+import { AreaChart, Area, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import DashboardColors from "./Cards/dashboardColors";
 import DashboardCard from "./Cards/DashboardCard";
 import DashboardCardList from "./Cards/DashboardCardList";
@@ -67,6 +67,7 @@ class StatAreaCard extends React.Component {
         }
     }, 10);
 
+    /* istanbul ignore next*/
     _onMouseOut = () => _.debounce(this.props.onMouseOut(), 10);
 
     render() {
@@ -119,34 +120,33 @@ class StatAreaCard extends React.Component {
                             <div key="subtitle" className="dashboard-card__subtitle">
                                 {this.props.subtitle}
                             </div>,
-                            <AreaChart
-                                key="chart"
-                                width={200}
-                                height={80}
-                                className="stat-area-card__chart"
-                                data={this.props.data}
-                                margin={chartMargin}>
-                                <XAxis hide={true} />
-                                <YAxis hide={true} />
-                                <Area
-                                    connectNulls={false}
-                                    dataKey={this.props.yAxisKey}
-                                    fill={hexColor}
-                                    stroke={hexColor}
-                                    fillOpacity={1}
-                                    isAnimationActive={false}
-                                    legendType={"none"}
-                                    name={1}
-                                />
-                                <Tooltip
-                                    content={<CustomTooltip />}
-                                    cursor={false}
-                                    onMouseOver={this._onMouseOver}
-                                    onMouseOut={this._onMouseOut}
-                                    xAxisKey={this.props.xAxisKey}
-                                    yAxisKey={this.props.yAxisKey}
-                                />
-                            </AreaChart>
+                            <ResponsiveContainer width="100%" height={80}>
+                                <AreaChart
+                                    key="chart"
+                                    className="stat-area-card__chart"
+                                    data={this.props.data}
+                                    margin={chartMargin}>
+                                    <XAxis hide={true} />
+                                    <YAxis hide={true} />
+                                    <Area
+                                        connectNulls={false}
+                                        dataKey={this.props.yAxisKey}
+                                        fill={hexColor}
+                                        stroke={hexColor}
+                                        fillOpacity={1}
+                                        isAnimationActive={false}
+                                        legendType={"none"}
+                                        name={1}
+                                    />
+                                    <Tooltip
+                                        content={<CustomTooltip />}
+                                        cursor={false}
+                                        onMouseOver={this._onMouseOver}
+                                        xAxisKey={this.props.xAxisKey}
+                                        yAxisKey={this.props.yAxisKey}
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
                         ])}
                         {this.props.rockerButtonProps
                             ? <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
