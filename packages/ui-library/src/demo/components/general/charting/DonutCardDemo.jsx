@@ -98,7 +98,7 @@ class DonutCardDemo extends React.Component {
                 </Layout.Row>
                 <CardRow>
                     <DonutCard
-                        title={"User States"}
+                        title="Users"
                         loading={this.state.loading}
                         errorMessage={this.state.errorMessage}
                         data={this.data}
@@ -109,7 +109,7 @@ class DonutCardDemo extends React.Component {
                         label={this.state.label}
                         value={this.state.value}
                         onMakeDefault={this._handleMakeDefault}
-                        makeDefaultLabel={"Make Default View"}
+                        makeDefaultLabel="Make Default View"
                         options={this.options}
                         selectOption={this.state.selectedValue}
                         onSelect={this._onSelect}

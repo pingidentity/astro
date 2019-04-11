@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { PieChart, Pie, Cell } from "recharts";
 import DashboardCard from "./Cards/DashboardCard";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
 import Colors from "../charting/Cards/dashboardColors";
@@ -20,34 +21,34 @@ import Colors from "../charting/Cards/dashboardColors";
  * @desc A card that displays a donut chart on a dashboard card.
  *
  * @param {string} [className]
- *    Custom class name(s) applied to the top-level container
+ *    Custom class name(s) applied to the top-level container.
  * @param {array} [data-id="donut-card"]
- *  The data-id attribute applied to the top-level container
+ *     The data-id attribute applied to the top-level container.
  * @param {string} [label]
- *     label for the card
+ *     label for the card.
  * @param {string} [title]
- *     Title of the card. Displayed at top of front and back
+ *     Title of the card. Displayed at top of front and back.
  * @param {number} [value]
- *     The valuee shown on the front and back of the card
+ *     The valuee shown on the front and back of the card.
  * @param {string} [errorMessage]
  *    When provided, the error message and icon will display in place of the regular front/back content.
  * @param {boolean} [loading=false]
- *    When true the splinner animation shows in place of the stats
+ *    When true the splinner animation shows in place of the stats.
  * @param {function} [onMouseOver]
- *     Callback triggered when a chart data-point is hovered over
+ *     Callback triggered when a chart data-point is hovered over.
  * @param {function} [onMouseOut]
- *     Callback triggered when the mouse is hovered out of the chart
+ *     Callback triggered when the mouse is hovered out of the chart.
  * @param {object} [options]
- *     provides the list of objects for the drop down
+ *     Provides the list of objects for the drop down.
  * @param {object} [selectedOption]
- *     highlightes selected option
+ *     Highlightes selected option.
  * @param {object} [onSelect]
- *     selects from the list of options
+ *     Selects from the list of options.
  * @param {function} [onMakeDefault]
- *    Callback triggered when the make-default checkbox is changed.  When provided a checkbox will render on the back
- *    of the card.
+ *     Callback triggered when the make-default checkbox is changed.  When provided a checkbox will render on the back
+ *     of the card.
  * @param {object} [Array.DonutCard~data]
- *     A list of objects that provides the data for the chart
+ *     A list of objects that provides the data for the chart.
  *  @param {bool} [defaultChecked]
  *     state of the checkbox set to false. If set to true will render with onMakeDefault already checked.
  * */
@@ -173,9 +174,10 @@ class DonutCard extends Component {
             <DashboardCard {...this.props} data-id={this.props["data-id"]} className={classes}
                 front={(
                     <div>
-                        <div className="donut-card__title">
-                            {this.props.title}
-                        </div>
+                        <DashboardCardTitle
+                            className="dashboard-card__title--donut"
+                            title={this.props.title}
+                        />
                         {!this.props.loading && ([
                             <PieChart
                                 key="chartKey"
@@ -214,12 +216,11 @@ class DonutCard extends Component {
                 )}
                 back={(
                     <div>
-                        <div
-                            data-id={`${this.props["data-id"]}-back-title`}
-                            className="dashboard-card__back-title donut-card__back-title"
-                        >
-                            {this.props.title}
-                        </div>
+                        <DashboardCardTitle
+                            backTitle
+                            title={this.props.title}
+
+                        />
                         {!this.props.loading && ([
                             <div key="backLineKey" className="donut-card__back-line" />,
                             <FormDropDownList
@@ -244,7 +245,7 @@ class DonutCard extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         label: PropTypes.string,
-        title: PropTypes.string,
+        title: PropTypes.node,
         className: PropTypes.string,
         value: PropTypes.number,
         onMouseOver: PropTypes.func,

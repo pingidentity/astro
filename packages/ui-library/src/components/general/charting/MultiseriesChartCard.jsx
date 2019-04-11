@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import MultiseriesChart, { chartTypes, propTypes as chartPropTypes } from "./MultiseriesChart";
 import { DashboardCard } from "./Cards";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 
 /**
 * @class Multiseries Chart Card
@@ -50,8 +51,8 @@ import { DashboardCard } from "./Cards";
 *     will manage selected IDs internally.
 * @param {number} [selectedLimit=3]
 *     The maximum number of datasets that can be selected at one time.
-* @param {Object} [title]
-*     The title of the chart. Can be any valid React node.
+* @param {string} [title]
+*     The title of the chart.
 * @param {boolean|function} [tooltip]
 *     Controls display of tooltip in chart. If false, no tooltip is displayed; if true, default tooltip
 *     is displayed. If a render function is passed in, will render custom tooltip.
@@ -70,11 +71,21 @@ import { DashboardCard } from "./Cards";
 const MultiseriesChartCard = ({
     errorMessage,
     loading,
+    title,
     ...props
 }) => (
     <DashboardCard
         errorMessage={errorMessage}
-        front={<MultiseriesChart {...props} />}
+        front={(
+            <div>
+                {title ? <DashboardCardTitle
+                    title={title}
+                    className="dashboard-card__title--multiseries"
+                /> : null}
+                <MultiseriesChart {...props}
+                />
+            </div>
+        )}
         loading={loading}
     />
 );
@@ -83,6 +94,7 @@ MultiseriesChartCard.propTypes = {
     ...chartPropTypes,
     errorMessage: PropTypes.string,
     loading: PropTypes.bool,
+    title: PropTypes.string,
 };
 
 MultiseriesChartCard.chartTypes = chartTypes;

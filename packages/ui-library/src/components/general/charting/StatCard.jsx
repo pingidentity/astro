@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import DashboardCard from "./Cards/DashboardCard";
 import DashboardCardList from "./Cards/DashboardCardList";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 
 /**
  * @class StatCard
@@ -99,7 +100,11 @@ class StatCard extends React.Component {
                 size={this.props.size}
                 back={
                     <div>
-                        <div className="dashboard-card__back-title" accent={this.props.accent}>{this.props.title}</div>
+                        <DashboardCardTitle
+                            accent={this.props.accent}
+                            title={this.props.title}
+                            backTitle
+                        />
                         {!this.props.loading && (
                             <DashboardCardList data={this.props.data} data-id={`${this.props["data-id"]}-list`} />
                         )}
@@ -107,11 +112,13 @@ class StatCard extends React.Component {
                 }
                 front={
                     <div>
-                        <div className="dashboard-card__front-title">
+                        <div className="dashboard-card__front-title stat-card__front-title">
                             <div className="dashboard-card__title-icon" accent={this.props.accent}>
                                 <span className={classnames("icon", "icon-" + this.props.iconName)}/>
                             </div>
-                            <div className="dashboard-card__title-text">{this.props.title}</div>
+                            <DashboardCardTitle
+                                title={this.props.title}
+                            />
                         </div>
                         {!this.props.loading &&
                             <div className="stat-card__primary-number" accent={this.props.accent}>

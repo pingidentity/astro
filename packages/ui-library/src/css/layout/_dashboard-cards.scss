@@ -106,13 +106,42 @@ $fullwidthBreakpoint: 950px;
         @include flippedTo;
     }
 
-    &__front-title {
-        @include flexbox;
-        @include flexbox-grow(1);
 
-        align-items: center;
+    &__title {
+        font-size: 18px;
+        text-transform: uppercase;
+        color: $color-neutral-10;
+        display: flex;
         justify-content: center;
+
+        &--donut,
+        &--multiseries,
+        &--horizontal-bar-card {
+            margin-top: -24px;
+            margin-bottom: 6px;
+        }
+
+        &--frequency-card {
+            margin-top: -20px;
+            margin-bottom: 6px;
+        }
+
+        &--heatmap {
+            margin-bottom: 10px;
+        }
+
+        &--stat-area {
+            margin-top: -24px;
+            margin-bottom: 40px;
+        }
+
     }
+
+    &__title-accessories {
+        display: flex;
+        padding-left: 5px;
+    }
+
 
     &__title-icon {
         margin-right: $spacing-sm;
@@ -127,14 +156,6 @@ $fullwidthBreakpoint: 950px;
         @media (max-width: $condensedBreakpoint) and (min-width: $fullwidthBreakpoint) {
             display: none;
         }
-    }
-
-    &__title-text {
-        text-transform: uppercase;
-        font-size: 18px;
-        color: $color-neutral-10;
-        display: inline-block;
-        vertical-align: middle;
     }
 
     &__value {
@@ -182,7 +203,7 @@ $fullwidthBreakpoint: 950px;
         }
     }
 
-    &__back-title {
+    &--back-title {
         @include standoutText;
 
         display: inline-block;
@@ -244,7 +265,7 @@ $fullwidthBreakpoint: 950px;
         .stat-area-card__value, {
             color: $color-charting-magenta;
         }
-        .dashboard-card__back-title,
+        .dashboard-card--back-title,
         .stat-card__primary-number {
             background-color: $color-charting-magenta;
         }
@@ -256,7 +277,7 @@ $fullwidthBreakpoint: 950px;
         .stat-area-card__value {
             color: $color-charting-blue;
         }
-        .dashboard-card__back-title,
+        .dashboard-card--back-title,
         .stat-card__primary-number {
             background-color: $color-charting-blue;
         }
@@ -268,7 +289,7 @@ $fullwidthBreakpoint: 950px;
         .stat-area-card__value {
             color: $color-charting-cyan;
         }
-        .dashboard-card__back-title,
+        .dashboard-card--back-title,
         .stat-card__primary-number {
             background-color: $color-charting-cyan;
         }
@@ -313,6 +334,15 @@ $fullwidthBreakpoint: 950px;
 }
 
 .stat-card {
+
+    &__front-title {
+        @include flexbox;
+        @include flexbox-grow(1);
+
+        align-items: center;
+        justify-content: center;
+    }
+
     &__primary-number {
         @include standoutText;
 
@@ -330,6 +360,7 @@ $fullwidthBreakpoint: 950px;
         transform: translateX(-50%);
         bottom: 40px;
     }
+
 }
 
 .stat-area-card {
@@ -385,19 +416,9 @@ $fullwidthBreakpoint: 950px;
         align-items: center;
     }
 
-    &__title {
-        position: absolute;
-        font-size: 18px;
-        top: 19px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-transform: uppercase;
-        color: $color-neutral-10;
-    }
-
     &__center-info {
         position: absolute;
-        top: 145px;
+        top: 140px;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
@@ -463,6 +484,10 @@ $fullwidthBreakpoint: 950px;
     overflow: visible;
     display: block;
 
+    &__title {
+        margin-bottom: -24px;
+    }
+
     .recharts-layer.recharts-bar-rectangle .recharts-rectangle {
         stroke-width: 0;
     }
@@ -490,6 +515,7 @@ $fullwidthBreakpoint: 950px;
         display: block;
     }
 
+
     &__holder {
         @include flexbox;
         @include flexbox-direction(row);
@@ -504,18 +530,6 @@ $fullwidthBreakpoint: 950px;
         @include flexbox-direction(row);
         align-items: center;
         justify-content: center;
-    }
-
-    &__title {
-        position: absolute;
-        font-size: 18px;
-        top: 19px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-transform: uppercase;
-        color: $color-neutral-10;
-        width: 100%;
-        text-align: center;
     }
 
     &__wrapper {
@@ -696,14 +710,6 @@ $fullwidthBreakpoint: 950px;
         text-transform: uppercase;
     }
 
-    &__title {
-        font-size: 18px;
-        line-height: 18px;
-        border-bottom: 2px solid $color-neutral-10;
-        margin: 0 0 $spacing-sm;
-        padding: 0 0 $spacing-sm;
-        width: 100%;
-    }
     &__value,
     &__subtitle {
         display: inline-block;
@@ -740,16 +746,6 @@ $fullwidthBreakpoint: 950px;
     &__horizontal-card {
         padding-right: 50px;
         margin-right: 10px;
-    }
-
-    &__title {
-        position: absolute;
-        font-size: 18px;
-        top: 19px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-transform: uppercase;
-        color: $color-neutral-10;
     }
 
     &__number-container {

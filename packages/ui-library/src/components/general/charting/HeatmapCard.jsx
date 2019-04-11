@@ -5,6 +5,7 @@ import ChartTooltip, { textAlignments } from "./ChartTooltip";
 import DashboardCard from "./Cards/DashboardCard";
 import HelpHint from "../../tooltips/HelpHint";
 import RockerButton from "../../forms/RockerButton";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 
 import classnames from "classnames";
 import Utils from "../../../util/Utils";
@@ -38,7 +39,7 @@ import _ from "underscore";
 * @param {string} [className]
 *    The classname(s) applied to the top-level container of the component.
 * @param {object|string} chartTitle
-*    The text that displays along the top of the heat map card.
+*    The text that displays along the top of the heat map card.x
 * @param {string} [data-id="heatmap-card"]
 *    The data-id applied to the top-level container of the component.
 * @param {string} [errorMessage]
@@ -87,7 +88,7 @@ class HeatMapCard extends React.Component {
 
     static propTypes = {
         className: PropTypes.string,
-        chartTitle: PropTypes.node,
+        chartTitle: PropTypes.string,
         data: PropTypes.oneOfType([
             PropTypes.arrayOf(
                 PropTypes.array
@@ -244,9 +245,10 @@ class HeatMapCard extends React.Component {
                     <div>
                         {!this.props.loading && ([
                             <div className="heatmap-card__chart" key="heatmap-chart">
-                                <div className="heatmap-card__chart-title" data-id={`${dataId}-chart-title`}>
-                                    {this.props.chartTitle}
-                                </div>
+                                <DashboardCardTitle
+                                    className="dashboard-card__title--heatmap"
+                                    title={this.props.chartTitle}
+                                />
                                 <div
                                     className="heatmap"
                                     data-id={`${dataId}-chart`}

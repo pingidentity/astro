@@ -15,7 +15,6 @@ import colorLib from "color";
 import { chartingColors } from "../../../constants/DashboardConstants";
 import ChartTooltip, { textAlignments } from "./ChartTooltip";
 import DropDownSelector from "./DropDownSelector";
-import PageHeader from "../PageHeader";
 
 const baseClass = "multiseries-chart";
 
@@ -81,8 +80,6 @@ export const renderDefaultTooltip = ({
 *     will manage selected IDs internally.
 * @param {number} [selectedLimit=3]
 *     The maximum number of datasets that can be selected at one time.
-* @param {Object} [title]
-*     The title of the chart. Can be any valid React node.
 * @param {boolean|function} [tooltip]
 *     Controls display of tooltip in chart. If false, no tooltip is displayed; if true, default tooltip
 *     is displayed. If a render function is passed in, will render custom tooltip.
@@ -127,7 +124,6 @@ export default class MultiseriesChart extends Component {
             ])
         ),
         selectedLimit: PropTypes.number,
-        title: PropTypes.node,
         tooltip: PropTypes.oneOfType([
             PropTypes.bool,
             PropTypes.func
@@ -260,7 +256,6 @@ export default class MultiseriesChart extends Component {
             bottomPanel,
             data,
             menuRequiredText,
-            title,
             tooltip,
             type,
             yAxisLabel,
@@ -285,7 +280,6 @@ export default class MultiseriesChart extends Component {
                 baseClass,
                 { [`${baseClass}--line`]: isLine }
             )} data-id={dataId}>
-                {title && <PageHeader className={`${baseClass}__title`} title={title} />}
                 <div className={`${baseClass}__content`}>
                     <DropDownSelector
                         className={`${baseClass}__selector`}

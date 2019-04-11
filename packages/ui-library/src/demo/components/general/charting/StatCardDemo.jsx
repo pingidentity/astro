@@ -57,7 +57,7 @@ class StatCardDemo extends React.Component {
                         value="1,056"
                     />
                     <StatCard
-                        accent={1}
+                        accent={2}
                         data={demoChartData.listData}
                         description="February 2016"
                         errorMessage={this.state.errorMessage}
@@ -87,7 +87,7 @@ class StatCardDemo extends React.Component {
                         value="1,056"
                     />
                     <StatCard
-                        accent={1}
+                        accent={2}
                         data={demoChartData.listData}
                         description="February 2016"
                         errorMessage={this.state.errorMessage}

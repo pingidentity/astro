@@ -100,7 +100,7 @@ export default class HorizontalBarCardDemo extends Component {
                 <CardRow>
                     <HorizontalBarCard
                         data={this.mockData}
-                        title={"Api Error Rate"}
+                        title="Api Error Rate"
                         loading={this.state.loading}
                         errorMessage={this.state.errorMessage}
                         onMouseOver={this._onHover}

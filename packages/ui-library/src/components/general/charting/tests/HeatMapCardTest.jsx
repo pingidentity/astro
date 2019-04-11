@@ -79,9 +79,9 @@ describe("HeatmapCard", function () {
 
     it("renders the chart title", function () {
         const component = getComponent();
-        const chartTitle = TestUtils.findRenderedDOMNodeWithDataId(component, `${dataId}-chart-title`);
+        const title = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__title");
 
-        expect(chartTitle.textContent).toBe(defaultProps.chartTitle);
+        expect(title.textContent).toBe(defaultProps.chartTitle);
     });
 
     it("renders the value", function () {

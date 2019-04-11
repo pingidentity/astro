@@ -126,15 +126,6 @@ describe("MultiseriesChart", () => {
         expect(isDOMComponent(bottomPanel)).toEqual(false);
     });
 
-    it("renders title if there is a title prop", () => {
-        const component = getComponent({
-            title: <div data-id="title"/>,
-            type: chartTypes.LINE
-        });
-        const title = TestUtils.findRenderedDOMNodeWithDataId(component, "title");
-        expect(isDOMComponent(title)).toEqual(true);
-    });
-
     it("does not render title if there is not a title prop", () => {
         const component = getComponent({
             type: chartTypes.LINE

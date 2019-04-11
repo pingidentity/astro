@@ -5,6 +5,7 @@ import { DashboardCard } from "./Cards/index";
 import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
 import Color from "color";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 
 import Colors from "../charting/Cards/dashboardColors";
 
@@ -28,7 +29,7 @@ import Colors from "../charting/Cards/dashboardColors";
  * @param {string} [label]
  *     label for the card
  * @param {string} [title]
- *     Title of the card. Displayed at top of front and back
+ *     Title of the card. Displayed at top of front and back.
  * @param {number} [value]
  *     The valuee shown on the front and back of the card
  * @param {string} [errorMessage]
@@ -121,9 +122,10 @@ export default class HorizontalBarCard extends Component {
                 size = {2}
                 front= {(
                     <div className="horizontalBar-card__top-level-container">
-                        <div className="horizontalBar-card__title">
-                            {this.props.title}
-                        </div>
+                        <DashboardCardTitle
+                            className="dashboard-card__title--horizontal-bar-card"
+                            title={this.props.title}
+                        />
                         {!this.props.loading && ([
                             <div key="chart" className="horizontalBar-card__scroll">
                                 <BarChart
@@ -195,6 +197,7 @@ export default class HorizontalBarCard extends Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         label: PropTypes.string,
+        title: PropTypes.string,
         value: PropTypes.number,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,

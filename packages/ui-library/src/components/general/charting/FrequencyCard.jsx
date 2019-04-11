@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import RockerButton from "../../forms/RockerButton";
 import HelpHint from "../../tooltips/HelpHint";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import DashboardCard from "./Cards/DashboardCard";
 import StackedChart from "./StackedChart";
 import classnames from "classnames";
@@ -23,38 +24,40 @@ import Colors from "../../general/charting/Cards/dashboardColors";
  * @desc A card that displays a donut chart on a dashboard card.
  *
  * @param {string} [className]
- *    Custom class name(s) applied to the top-level container
+ *    Custom class name(s) applied to the top-level container.
  * @param {array} [data-id="frequency-card"]
- *     The data-id attribute applied to the top-level container
+ *     The data-id attribute applied to the top-level container.
  * @param {string} [label]
- *     Label for the card
+ *     Label for the card.
  * @param {string} [keyLabel]
- *     Label for the key
+ *     Label for the key.
  * @param {string} [units]
- *     Used for hover-state label
- * @param {string} [title]
- *     Title of the card. Displayed at top of front and back
+ *     Used for hover-state label.
+ * @param {string} [frontTitle]
+ *     Title of the card. Displayed at top of the front card.
+ * @param {string} [backTitle]
+ *     Title of the card. Displayed at top of the back.
  * @param {number} [value]
- *     The valuee shown on the front and back of the card
+ *     The valuee shown on the front and back of the card.
  * @param {string} [errorMessage]
  *     When provided, the error message and icon will display in place of the regular front/back content.
  * @param {boolean} [loading=false]
- *     When true the splinner animation shows in place of the stats
+ *     When true the splinner animation shows in place of the stats.
  * @param {function} [onMouseOver]
- *     Callback triggered when a chart data-point is hovered over
+ *     Callback triggered when a chart data-point is hovered over.
  * @param {function} [onMouseOut]
- *     Callback triggered when the mouse is hovered out of the chart
+ *     Callback triggered when the mouse is hovered out of the chart.
  * @param {object} [options]
- *     Provides the list of objects for the drop down
+ *     Provides the list of objects for the drop down.
  * @param {object} [selectedOption]
- *     Highlightes selected option
+ *     Highlightes selected option.
  * @param {object} [onSelect]
- *     Selects from the list of options
+ *     Selects from the list of options.
  * @param {function} [onMakeDefault]
  *     Callback triggered when the make-default checkbox is changed.  When provided a checkbox will render on the back
  *     of the card.
  * @param {object} [Array.DonutCard~data]
- *     A list of objects that provides the data for the chart
+ *     A list of objects that provides the data for the chart.
  * @param {bool} [defaultChecked]
  *     state of the checkbox set to false. If set to true will render with onMakeDefault already checked.
  * */
@@ -291,18 +294,19 @@ export default class FrequencyCard extends Component {
             <DashboardCard {...this.props} data-id={this.props["data-id"]} className={classes}
                 front={(
                     <div>
-                        <div className="frequency-card__title">
-                            {this.props.frontTitle}
-
+                        <DashboardCardTitle
+                            className="dashboard-card__title--frequency-card"
+                            title={this.props.frontTitle}
+                        >
                             {this.props.frontTitleHelpHint &&
-                                <HelpHint
-                                    data-id="helphint-bottomplacement"
-                                    placement="bottom"
-                                    leftMargin
-                                    hintText={this.props.frontTitleHelpHint}
-                                />
+                            <HelpHint
+                                data-id="helphint-bottomplacement"
+                                placement="bottom"
+                                leftMargin
+                                hintText={this.props.frontTitleHelpHint}
+                            />
                             }
-                        </div>
+                        </DashboardCardTitle>
                         <div className="frequency-card__holder">
                             {!this.props.loading && ([
                                 <div key="chartKey" className="frequency-card__wrapper">
@@ -380,16 +384,18 @@ export default class FrequencyCard extends Component {
                 back={(
                     <div>
                         <div className="frequency-card__title" style={{ zIndex: 100 }}>
-                            {this.props.backTitle}
-
-                            {this.props.backTitleHelpHint &&
+                            <DashboardCardTitle
+                                title={this.props.backTitle}
+                            >
+                                {this.props.backTitleHelpHint &&
                                 <HelpHint
                                     data-id="helphint-bottomplacement"
                                     placement="bottom"
                                     leftMargin
                                     hintText={this.props.backTitleHelpHint}
                                 />
-                            }
+                                }
+                            </DashboardCardTitle>
                         </div>
                         {!this.props.loading && ([
                             <div key="freqCardHolder">

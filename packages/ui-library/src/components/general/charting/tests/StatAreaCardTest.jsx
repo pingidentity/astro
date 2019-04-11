@@ -55,8 +55,8 @@ describe("StatAreaCard", () => {
     it("renders the strings", () => {
         const component = getComponent();
 
-        const greeting = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__title-text");
-        expect(greeting.textContent).toBe(defaultProps.title);
+        const greeting = TestUtils.scryRenderedDOMNodesWithClass(component, "dashboard-card__title");
+        expect(greeting[0].textContent).toBe(defaultProps.title);
 
         const value = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__value");
         expect(value.textContent).toBe(defaultProps.value);
@@ -70,7 +70,7 @@ describe("StatAreaCard", () => {
             flipped: true
         });
 
-        const title = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__back-title");
+        const title = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card--back-title");
         expect(title.textContent).toBe(defaultProps.title);
     });
 
@@ -109,7 +109,7 @@ describe("StatAreaCard", () => {
         const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__loader");
         expect(spinnerContainer).toBeTruthy();
 
-        const greeting = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__title-text");
+        const greeting = TestUtils.scryRenderedDOMNodesWithClass(component, "dashboard-card__title");
         expect(greeting).toBeTruthy();
 
         const value = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__value");

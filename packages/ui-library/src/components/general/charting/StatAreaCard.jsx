@@ -6,6 +6,7 @@ import DashboardColors from "./Cards/dashboardColors";
 import DashboardCard from "./Cards/DashboardCard";
 import DashboardCardList from "./Cards/DashboardCardList";
 import RockerButton from "../../forms/RockerButton";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 
 import classnames from "classnames";
 import _ from "underscore";
@@ -96,9 +97,10 @@ class StatAreaCard extends React.Component {
                 className={classes}
                 back={
                     <div>
-                        <div className="dashboard-card__back-title">
-                            {this.props.title}
-                        </div>
+                        <DashboardCardTitle
+                            title={this.props.title}
+                            backTitle
+                        />
                         {!this.props.loading && (
                             <DashboardCardList data={this.props.listData} />
                         )}
@@ -106,11 +108,10 @@ class StatAreaCard extends React.Component {
                 }
                 front={
                     <div>
-                        <div className="dashboard-card__front-title">
-                            <div className="dashboard-card__title-text">
-                                {this.props.title}
-                            </div>
-                        </div>
+                        <DashboardCardTitle
+                            className="dashboard-card__title--stat-area"
+                            title={this.props.title}
+                        />
                         {!this.props.loading && ([
                             <div key="value" className="dashboard-card__value stat-area-card__value">
                                 {this.props.value}

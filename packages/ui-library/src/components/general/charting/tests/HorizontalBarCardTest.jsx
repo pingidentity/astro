@@ -48,7 +48,7 @@ describe("HorizontalBarCard", function () {
             title: "Api Error Rate"
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "horizontalBar-card__title");
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__title");
 
         expect(element.textContent).toEqual("Api Error Rate");
     });
