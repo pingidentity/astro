@@ -1,13 +1,14 @@
 const COLORS = {
     indigo: "#193967",
     blue: "#4c8dca",
-    cyan: "#77e6eb",
     magenta: "#e12f51",
+    cyan: "#77e6eb",
+    orange: "#ef6a04",
+    green: "#6eb600",
 };
-const KEYS = ["indigo", "magenta", "blue", "cyan"];
 
 export default {
     COLORS: COLORS,
-    KEYS: KEYS,
-    getKey: (key) => KEYS[key] || key,
+    KEYS: Object.keys(COLORS),
+    getKey: (key) => Object.keys(COLORS)[key] || key,
 };

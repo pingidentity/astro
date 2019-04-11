@@ -3,6 +3,7 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import _ from "underscore";
 import ChartLegend from "../ChartLegend";
+import Colors from "../Cards/dashboardColors";
 
 
 describe("ChartLegend", function () {
@@ -12,7 +13,7 @@ describe("ChartLegend", function () {
         const withDefaults = _.defaults(opts || {}, {
             "data-id": componentId,
             label: "Test Legend",
-            data: [
+            legend: [
                 {
                     id: "Red",
                     color: "#FF0000"
@@ -21,7 +22,8 @@ describe("ChartLegend", function () {
                     id: "Blue",
                     color: "#FF0000"
                 }
-            ]
+            ],
+            colors: Object.values(Colors.COLORS)
         });
 
         return ReactTestUtils.renderIntoDocument(<div><ChartLegend {...withDefaults} /></div>);

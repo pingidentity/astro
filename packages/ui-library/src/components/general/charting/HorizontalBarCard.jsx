@@ -6,6 +6,8 @@ import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
 import Color from "color";
 
+import Colors from "../charting/Cards/dashboardColors";
+
 /**
  * @typedef {Object} HorizontalBarCard~data
  * @param {string} [id]
@@ -49,10 +51,9 @@ import Color from "color";
 
 
 
-const highlightColor = "#E12F51";
+const highlightColor = Object.values(Colors.COLORS)[0];
 
 const defaultColor = Color(highlightColor).lighten(0.5).hex();
-
 
 export default class HorizontalBarCard extends Component {
 

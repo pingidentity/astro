@@ -14,8 +14,8 @@ describe("DonutCard", function () {
             "data-id": componentId,
             data: [
                 { id: "Enabled Users", value: 120543 , color: "#E12F51" },
-                { id: "Inactive Users", value: 51233, color: "green" },
-                { id: "Disabled Users", value: 3000, color: "pink" },
+                { id: "Inactive Users", value: 51233 },
+                { id: "Disabled Users", value: 3000 },
             ],
             options: [
                 { label: "Current", value: "1" },

@@ -3,12 +3,32 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import Utils from "../../../util/Utils";
 
-import { BarChart, CartesianGrid, XAxis, YAxis, Bar, ResponsiveContainer } from "recharts";
+import { BarChart, XAxis, YAxis, Bar, ResponsiveContainer, Tooltip, ReferenceLine } from "recharts";
 
 class StackedChart extends Component {
+    // Convert UI-Lib API-style data to something Rechart-readable
+    _digestData = (data) => data.map(({ id, data: d }) => (
+        {
+            name: id,
+            ...d.reduce((a, value, i) => ({
+                ...a,
+                [i]: value
+            }), {})
+        }
+    ));
+
+
     state = {
-        legend: this.props.legend.map(i => i.id)
+        legend: this.props.legend.map(i => i.id),
+        selected: {},
+        data: this._digestData(this.props.data)
     };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data !== this.state.data) {
+            this.setState({ data: this._digestData(nextProps.data) });
+        }
+    }
 
     _handleMouseOver = (id) => (value, index, e) => {
         const data = {
@@ -21,6 +41,8 @@ class StackedChart extends Component {
                 label: id
             }
         };
+
+        this.setState({ selected: data });
 
         this.props.onMouseOver(data, e);
     }
@@ -40,16 +62,23 @@ class StackedChart extends Component {
         this.props.onClick(data, e);
     }
 
-    // Convert UI-Lib API-style data to something Rechart-readable
-    _digestData = (data) => data.map(({ id, data: d }) => (
-        {
-            name: id,
-            ...d.reduce((a, value, i) => ({
-                ...a,
-                [i]: value
-            }), {})
+    _renderTooltip = (data) => {
+        if (data.payload[0] && this.state.selected.y) {
+            return (
+                <div className="frequency-tooltip">
+                    <div className="frequency-tooltip__title">
+                        {data.payload[this.state.selected.y.index].payload.name}
+                    </div>
+                    <div className="frequency-tooltip__data">
+                        {`${data.payload[this.state.selected.y.index].value}% of ${this.props.units}`}
+                    </div>
+                    <div className="frequency-tooltip__link">
+                        Click segment to view report
+                    </div>
+                </div>
+            );
         }
-    ));
+    };
 
     shouldComponentUpdate = (nextProps) =>
         this.state.legend.includes(nextProps.selectedId) &&
@@ -59,41 +88,72 @@ class StackedChart extends Component {
     render() {
         const {
             legend,
-            data,
             selectedId,
+            colors,
             "data-id": dataId,
             onMouseOut,
+            terminateLabel,
+            highlightRow,
         } = this.props;
 
         const classes = classnames(
             this.props.className,
         );
 
+        /**
+         * This is used to get the last empty data object provided
+         * to display the termination label at
+         */
+        const lastEmpty = this.state.data.slice(0).reverse().map(o => o.name).indexOf("");
+
         return (
-            <div data-id={dataId} style={{ height: "200px", minWidth: "300px", width: "100%" }}>
-                <ResponsiveContainer height={200} width="100%">
+            <div data-id={dataId} style={{ height: "220px", minWidth: "300px", width: "100%" }}>
+                <ResponsiveContainer height={220} width="100%">
                     <BarChart
-                        data={this._digestData(data)}
-                        margin={{ top: 50, right: 30, left: 0, bottom: 5 }}
+                        data={this.state.data}
+                        margin={{ top: 10, right: 30, left: 0, bottom: 5 }}
                         className={classes}
+                        barCategoryGap={"25%"}
+                        reverseStackOrder={true}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <Tooltip
+                            isAnimationActive={false}
+                            content={this._renderTooltip}
+                            cursor={{ fill: "transparent" }}
+                        />
+                        {lastEmpty > -1 &&
+                            <ReferenceLine
+                                x={this.state.data.length - 1 - lastEmpty}
+                                stroke="#686f77"
+                                strokeDasharray="3 3"
+                                label={{
+                                    value: terminateLabel,
+                                    fontSize: "12px",
+                                    angle: -90,
+                                    dx: -8
+                                }}
+                            />
+                        }
                         <XAxis
                             dataKey="name"
                             tick={{ fontSize: 12 }}
+                            tickLine={false}
                         />
-                        <YAxis />
+                        <YAxis width={40} />
                         {
-                            legend.map(({ id, color }, key) => (
+                            legend.map(({ id }, key) => (
                                 <Bar
                                     key={key}
-                                    data-id="stacked-chart"
+                                    data-id="stacked-chart-bar"
                                     dataKey={key}
                                     stackId="a"
                                     onMouseOver={this._handleMouseOver(id)}
                                     onMouseOut={onMouseOut}
                                     onClick={this._handleOnClick(id)}
-                                    fill={`${selectedId && selectedId !== id ? Utils.HexToRgba(color, 0.25) : color}`}
+                                    stroke={colors[key]}
+                                    fill={`${selectedId &&
+                                        selectedId !== id &&
+                                        highlightRow ? Utils.HexToRgba(colors[key], 0.25) : colors[key]}`}
                                 />
                             ))
                         }
@@ -117,6 +177,9 @@ class StackedChart extends Component {
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
         onClick: PropTypes.func,
+        units: PropTypes.string,
+        terminateLabel: PropTypes.string,
+        highlightRow: PropTypes.bool,
     };
 
     static defaultProps = {

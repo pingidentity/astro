@@ -30,11 +30,23 @@ export default class FrequencyCardDemo extends React.Component {
         });
     };
 
+    _onFrequencyChartClick = () => {
+        window.open("https://pingidentity.com", "_blank");
+    }
+
+    _onDonutChartClick = () => {
+        window.open("https://pingidentity.com", "_blank");
+    }
+
+    _onFrontLegendClick = () => {
+        window.open("https://pingidentity.com", "_blank");
+    }
+
     render() {
         const donutData = [
-            { id: "Within the last 24 hours", value: 1205, color: "#E12F51" },
-            { id: "1 day - 1 week ago", value: 512, color: "#193967" },
-            { id: "1 week - 4 weeks ago", value: 200, color: "#4C8DCA" },
+            { id: "Within the last 24 hours", value: 1205 },
+            { id: "1 day - 1 week ago", value: 512 },
+            { id: "1 week - 4 weeks ago", value: 200 },
         ];
 
         const exampleData = [
@@ -54,11 +66,11 @@ export default class FrequencyCardDemo extends React.Component {
         ];
 
         const legend = [
-            { id: "At least daily", color: "#193967" },
-            { id: "At least weekly", color: "#4C8DCA" },
-            { id: "At least monthly", color: "#E12F50" },
-            { id: "At least quarterly", color: "#6ACCE0" },
-            { id: "Less than quarterly", color: "#EF6A04" },
+            { id: "At least daily" },
+            { id: "At least weekly" },
+            { id: "At least monthly" },
+            { id: "At least quarterly" },
+            { id: "Less than quarterly" },
         ];
 
         const barData = [
@@ -67,6 +79,18 @@ export default class FrequencyCardDemo extends React.Component {
                 helpText: "This is by week",
                 legend: legend,
                 data: [
+                    {
+                        id: "",
+                        data: []
+                    },
+                    {
+                        id: "",
+                        data: []
+                    },
+                    {
+                        id: "",
+                        data: []
+                    },
                     {
                         id: "Feb 2018",
                         data: exampleData
@@ -259,6 +283,8 @@ export default class FrequencyCardDemo extends React.Component {
 
                         backTitle="Average distribution of user activity"
                         backTitleHelpHint="This is the back title help hint"
+                        backTerminateLabel="No Previous Data Available"
+                        barUnits="Users"
                         backLegendLabel="Active on average:"
                         barData={barData}
 
@@ -266,6 +292,10 @@ export default class FrequencyCardDemo extends React.Component {
                         onMakeDefault={this._handleMakeDefault}
                         makeDefaultLabel="Make Default View"
                         defaultChecked={false}
+
+                        onBarChartClick={this._onFrequencyChartClick}
+                        onDonutChartClick={this._onDonutChartClick}
+                        onFrontLegendClick={this._onFrontLegendClick}
 
                         size={2}
                     />

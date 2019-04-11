@@ -1,13 +1,14 @@
 /* eslint-disable max-len */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import RockerButton from "../../forms/RockerButton";
 import HelpHint from "../../tooltips/HelpHint";
 import DashboardCard from "./Cards/DashboardCard";
 import StackedChart from "./StackedChart";
 import classnames from "classnames";
 import ChartLegend from "./ChartLegend";
+import Colors from "../../general/charting/Cards/dashboardColors";
 
 /**
  * @typedef {Object} FrequencyCard~data
@@ -60,8 +61,30 @@ import ChartLegend from "./ChartLegend";
  * */
 
 export default class FrequencyCard extends Component {
+    _getColors = (a) => {
+        let colors = [];
+        let defaultIndex = 0;
+
+        a.map(({ color }) => {
+            if (color) {
+                colors.push(color);
+            } else {
+                colors.push(Object.values(Colors.COLORS)[defaultIndex]);
+
+                if (defaultIndex === Object.values(Colors.COLORS).length - 1) {
+                    defaultIndex = 0;
+                } else {
+                    defaultIndex = defaultIndex + 1;
+                }
+            }
+        });
+
+        return colors;
+    }
+
     state = {
         hoveredItem: {},
+        hoverBarChart: false,
         selectedStacked: 0,
         originalDonutValue: this._sumValues(this.props.donutData),
     };
@@ -94,8 +117,8 @@ export default class FrequencyCard extends Component {
         const o = this._findItemById(hoveredItem.id, this.props.donutData);
 
         this._itemSelect(hoveredItem.id, {
-            color: hoveredItem.color,
-            strokeWidth: 2,
+            color: this._getColors(this.props.donutData)[this.props.donutData.map((e) => e.value).indexOf(o.value)],
+            strokeWidth: 4,
             value: o.value
         });
     }
@@ -106,10 +129,12 @@ export default class FrequencyCard extends Component {
 
     _barChartMouseOver = ({ y }) => {
         this._itemSelect(y.label);
+        this.setState({ hoverBarChart: true });
     }
 
     _barChartMouseOut = () => {
         this._itemClearSelection();
+        this.setState({ hoverBarChart: false });
     }
 
     /**
@@ -118,7 +143,11 @@ export default class FrequencyCard extends Component {
     _frontLegendMouseOver = ({ index, label }, e) => {
         e.preventDefault();
 
-        this._itemSelect(label, this.props.donutData[index]);
+        this._itemSelect(label, {
+            color: this._getColors(this.props.donutData)[index],
+            strokeWidth: 4,
+            value: this.props.donutData[index].value
+        });
     };
 
     _backLegendMouseOver = ({ index, label }, e) => {
@@ -155,12 +184,12 @@ export default class FrequencyCard extends Component {
         this.props.onBackLegendClick({ index, label }, e);
 
     // Renders donut pieces
-    _renderCells = (data) =>
-        data.map(({ id, color }) =>
+    _renderCells = (data, colors) =>
+        data.map(({ id }, key) =>
             this.state.hoveredItem.id === id ? (
-                <Cell className="frequency-card__hovered" data-id="donut-pie-cell" key={id} fill={color} style={{ strokeWidth: this.state.hoveredItem ? this.state.hoveredItem.strokeWidth : 0 }}/>
+                <Cell className="frequency-card__hovered" data-id="donut-pie-cell" key={id} fill={colors[key]} style={{ strokeWidth: this.state.hoveredItem ? this.state.hoveredItem.strokeWidth : 0 }}/>
             ) : (
-                <Cell data-id="donut-pie-cell" key={id} fill={color}/>
+                <Cell data-id="donut-pie-cell" key={id} fill={colors[key]}/>
             )
         );
 
@@ -197,6 +226,18 @@ export default class FrequencyCard extends Component {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
+    _renderTooltip = (data) => {
+        if (data.payload[0]) {
+            return (
+                <div className="frequency-tooltip">
+                    <div className="frequency-tooltip__data">
+                        Click to view report
+                    </div>
+                </div>
+            );
+        }
+    };
+
     // Handle rocker change
     _handleRockerChange = ({ index }) => this._selectDataSet(index);
 
@@ -224,12 +265,15 @@ export default class FrequencyCard extends Component {
 
             backLegendLabel,
             barData,
+            barUnits,
+            backTerminateLabel,
         } = this.props;
 
         const {
             hoveredItem,
             originalDonutValue,
             selectedStacked,
+            hoverBarChart,
         } = this.state;
 
         return (
@@ -256,10 +300,13 @@ export default class FrequencyCard extends Component {
                                         width={202}
                                         data-id={`${this.props["data-id"]}-chart`}
                                         className="frequency-card__donut-chart"
+                                        cursor="pointer"
                                     >
                                         <Pie
                                             innerRadius={donutInnerRadius}
                                             outerRadius={donutOuterRadius}
+                                            startAngle={90}
+                                            endAngle={450}
                                             paddingAngle={1}
                                             data={donutData}
                                             dataKey="value"
@@ -268,8 +315,14 @@ export default class FrequencyCard extends Component {
                                             onMouseOut={this._donutChartMouseOut}
                                             onClick={this._handleDonutChartClick}
                                         >
-                                            {this._renderCells(donutData)}
+                                            {this._renderCells(donutData, this._getColors(donutData).reverse())}
                                         </Pie>
+                                        <Tooltip
+                                            wrapperStyle={{ zIndex: 1000 }}
+                                            isAnimationActive={false}
+                                            content={this._renderTooltip}
+                                            cursor={{ fill: "transparent" }}
+                                        />
                                     </PieChart>
                                     <div key="centerLabelKey" className="frequency-card__center-info">
                                         <div
@@ -298,12 +351,15 @@ export default class FrequencyCard extends Component {
                                 <ChartLegend
                                     key="asideKey"
                                     data-id="donut-chart-legend"
-                                    data={donutData}
+                                    reverseKeys={true}
+                                    legend={donutData}
+                                    colors={this._getColors(donutData).reverse()}
                                     label={frontLegendLabel}
                                     selectedId={hoveredItem.id}
                                     onMouseOver={this._frontLegendMouseOver}
                                     onMouseOut={this._legendMouseOut}
                                     onClick={this._handleFrontLegendClick}
+                                    helpLabel="Click to view report"
                                 />
                             ])}
                         </div>
@@ -311,7 +367,7 @@ export default class FrequencyCard extends Component {
                 )}
                 back={(
                     <div>
-                        <div className="frequency-card__title">
+                        <div className="frequency-card__title" style={{ zIndex: 100 }}>
                             {this.props.backTitle}
 
                             {this.props.backTitleHelpHint &&
@@ -329,8 +385,12 @@ export default class FrequencyCard extends Component {
                                     <div key="chartKey" className="frequency-card__wrapper" style={{ width: 0 }}>
                                         <StackedChart
                                             data={barData[selectedStacked].data}
+                                            units={barUnits}
                                             legend={barData[selectedStacked].legend}
+                                            colors={this._getColors(barData[selectedStacked].legend)}
+                                            terminateLabel={backTerminateLabel}
                                             selectedId={hoveredItem.id}
+                                            highlightRow={!hoverBarChart}
                                             onMouseOver={this._barChartMouseOver}
                                             onMouseOut={this._barChartMouseOut}
                                             onClick={this._handleBarChartClick}
@@ -339,7 +399,8 @@ export default class FrequencyCard extends Component {
                                     <ChartLegend
                                         key="asideKey"
                                         data-id="stacked-chart-legend"
-                                        data={barData[selectedStacked].legend}
+                                        legend={barData[selectedStacked].legend}
+                                        colors={this._getColors(barData[selectedStacked].legend)}
                                         label={backLegendLabel}
                                         selectedId={hoveredItem.id}
                                         onMouseOver={this._backLegendMouseOver}
@@ -380,6 +441,8 @@ export default class FrequencyCard extends Component {
         backTitle: PropTypes.string,
         backTitleHelpHint: PropTypes.string,
         backLegendLabel: PropTypes.string,
+        backTerminateLabel: PropTypes.string,
+        barUnits: PropTypes.string,
         onBackLegendClick: PropTypes.func, // Clicked on back legend,
         onBarChartClick: PropTypes.func, // Clicked on bar chart
 

@@ -402,6 +402,7 @@ $fullwidthBreakpoint: 950px;
         transform: translateX(-50%);
         text-align: center;
         color: $color-neutral-10;
+        z-index: 10;
     }
 
     &__front-line {
@@ -462,6 +463,17 @@ $fullwidthBreakpoint: 950px;
     overflow: visible;
     display: block;
 
+    .recharts-layer.recharts-bar-rectangle .recharts-rectangle {
+        stroke-width: 0;
+    }
+
+    .recharts-layer.recharts-bar-rectangle .recharts-rectangle:hover {
+        cursor: pointer;
+        stroke-width: 4;
+        transform: translateY(-1px);
+        transition: all 0.3s;
+    }
+
     .dashboard-card__front {
         align-items: center;
     }
@@ -478,13 +490,13 @@ $fullwidthBreakpoint: 950px;
         align-items: center;
         margin-top: 25px;
         justify-content: center;
+        align-content: center;
     }
 
     &__nav-holder {
         @include flexbox;
         @include flexbox-direction(row);
         align-items: center;
-        margin-top: 20px;
         justify-content: center;
     }
 
@@ -503,7 +515,7 @@ $fullwidthBreakpoint: 950px;
     &__wrapper {
         display: inline-block;
         position: relative;
-        flex: 2;
+        @include flexbox-grow(1);
     }
 
     &__center-info {
@@ -566,7 +578,8 @@ $fullwidthBreakpoint: 950px;
 .legend {
     &__aside {
         margin-left: 40px;
-        flex: 1;
+        margin-top: -20px;
+        width: 200px;
     }
 
     &__aside-label {
@@ -602,6 +615,12 @@ $fullwidthBreakpoint: 950px;
 
     &__aside-keys {
         position: relative;
+        @include flexbox;
+        @include flexbox-direction(column);
+    }
+
+    &__aside-keys-revese {
+        @include flexbox-direction(column-reverse);
     }
 
     &__aside-key {
@@ -614,6 +633,28 @@ $fullwidthBreakpoint: 950px;
 
     &__aside-key-selected {
         font-weight: 600;
+    }
+}
+
+.frequency-tooltip {
+    border-radius: 4px;
+    background-color: $color-white;
+    border: 1px solid #d5d8db;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 12px;
+
+    &__title {
+        color: #4b637c;
+        font-weight: bold;
+    }
+
+    &__data {
+        color: #4b637c;
+    }
+
+    &__link {
+        color: #4b637c;
     }
 }
 

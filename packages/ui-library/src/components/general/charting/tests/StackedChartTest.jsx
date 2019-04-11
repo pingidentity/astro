@@ -3,6 +3,7 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import _ from "underscore";
 import StackedChart from "../StackedChart";
+import Colors from "../Cards/dashboardColors";
 
 describe("StackedChart", function () {
     const componentId = "stacked-chart";
@@ -10,17 +11,20 @@ describe("StackedChart", function () {
     function getComponent(opts) {
         const exampleData = [10, 20, 30, 40];
         const legend = [
-            { id: "At least daily", color: "#193967" },
-            { id: "At least weekly", color: "#4C8DCA" },
-            { id: "At least monthly", color: "#E12F50" },
-            { id: "At least quarterly", color: "#6ACCE0" },
-            { id: "Less than quarterly", color: "#EF6A04" },
+            { id: "At least daily" },
+            { id: "At least weekly" },
+            { id: "At least monthly" },
+            { id: "At least quarterly" },
+            { id: "Less than quarterly" },
         ];
+
+        const colors = Object.values(Colors.COLORS);
 
         const withDefaults = _.defaults(opts || {}, {
             "data-id": componentId,
             id: "Test Chart",
-            legend: legend,
+            legend,
+            colors,
             selectedId: "Col 2",
             data: [
                 {
@@ -43,6 +47,19 @@ describe("StackedChart", function () {
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
+    });
+
+    it("renders tooltip", function () {
+        const component = getComponent();
+
+        component.setState({
+            selected: { y: { index: 0 } }
+        }, () => {
+            const tooltip = component._renderTooltip({ payload: [{ payload: { name: "foo" } }] });
+
+            expect(typeof tooltip).toBeTruthy();
+        });
+
     });
 
     it("properly digests API-style data into Rechart data", function () {

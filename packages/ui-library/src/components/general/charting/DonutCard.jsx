@@ -4,6 +4,7 @@ import { PieChart, Pie, Cell } from "recharts";
 import DashboardCard from "./Cards/DashboardCard";
 import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
+import Colors from "../charting/Cards/dashboardColors";
 
 /**
  * @typedef {Object} DonutCard~data
@@ -55,6 +56,26 @@ import classnames from "classnames";
 
 
 class DonutCard extends Component {
+    _getColors = (a) => {
+        let colors = [];
+        let defaultIndex = 0;
+
+        a.map(({ color }) => {
+            if (color) {
+                colors.push(color);
+            } else {
+                colors.push(Object.values(Colors.COLORS)[defaultIndex]);
+
+                if (defaultIndex === Object.values(Colors.COLORS).length - 1) {
+                    defaultIndex = 0;
+                } else {
+                    defaultIndex = defaultIndex + 1;
+                }
+            }
+        });
+
+        return colors;
+    }
 
     state = {
         statColor: null,
@@ -70,8 +91,7 @@ class DonutCard extends Component {
             this.props.onMouseOver(e, value);
         }
 
-        const dataItem = this.props.data[index];
-        const color = dataItem.hasOwnProperty("color") ? dataItem.color : null;
+        const color = this._getColors(this.props.data)[index];
 
         this.setState({
             hoveredSection: value.id,
@@ -93,17 +113,17 @@ class DonutCard extends Component {
         });
     };
 
-    _renderCells = (data) => {
-        return data.map(({ id, color }) => {
+    _renderCells = (data, colors) => {
+        return data.map(({ id }, key) => {
             return this.state.hoveredSection === id ? (
                 <Cell
                     className="donut-card__hovered" key={id}
-                    fill={color}
+                    fill={colors[key]}
                     style={{
                         stroke: this.state.strokeColor,
                         strokeWidth: this.state.strokeWidth,
                     }}
-                />) : (<Cell key={id} fill={color}/>);
+                />) : (<Cell key={id} fill={colors[key]} />);
         });
     };
 
@@ -128,12 +148,12 @@ class DonutCard extends Component {
     _renderBack = (data) => {
         return (
             <div className="dashboard-card__stat-list" data-id={`${this.props["data-id"]}-list`} key="dashKey">
-                {data.map(({ id, label, value, color }) => (
+                {data.map(({ id, label, value }, key) => (
                     <div key={id} className="donut-card__back-info">
                         <div className="dashboard-card__stat-row-label">{label || id}</div>
                         <div
                             className="dashboard-card__stat-row-number"
-                            style={{ color: color }}>
+                            style={{ color: this._getColors(data)[key] }}>
                             {this._renderCommas(value)}
                         </div>
                     </div>
@@ -168,6 +188,8 @@ class DonutCard extends Component {
                                     innerRadius={60}
                                     outerRadius={100}
                                     paddingAngle={1}
+                                    startAngle={90}
+                                    endAngle={450}
                                     key="pieKey"
                                     data={this.props.data}
                                     dataKey="value"
@@ -175,7 +197,7 @@ class DonutCard extends Component {
                                     onMouseOver={this._mouseOver}
                                     onMouseOut={this._mouseOut}
                                 >
-                                    {this._renderCells(this.props.data)}
+                                    {this._renderCells(this.props.data, this._getColors(this.props.data))}
                                 </Pie>
                             </PieChart>,
                             <div key="centerLabelKey" className="donut-card__center-info">

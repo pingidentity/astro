@@ -12,7 +12,7 @@ describe("FrequencyCard", function () {
         const legend = [
             { id: "At least daily", color: "#193967" },
             { id: "At least weekly", color: "#4C8DCA" },
-            { id: "At least monthly", color: "#E12F50" },
+            { id: "At least monthly" },
             { id: "At least quarterly", color: "#6ACCE0" },
             { id: "Less than quarterly", color: "#EF6A04" },
         ];
@@ -21,8 +21,8 @@ describe("FrequencyCard", function () {
             "data-id": componentId,
             donutData: [
                 { id: "Enabled Users", value: 120543, color: "#E12F51" },
-                { id: "Inactive Users", value: 51233, color: "green" },
-                { id: "Disabled Users", value: 3000, color: "pink" },
+                { id: "Inactive Users", value: 51233 },
+                { id: "Disabled Users", value: 3000 },
             ],
             barData: [
                 {
@@ -193,7 +193,12 @@ describe("FrequencyCard", function () {
 
         ReactTestUtils.Simulate.mouseOver(legend);
 
-        expect(component.state.hoveredItem).toEqual({ id: "Enabled Users", value: 120543, color: "#E12F51" });
+        expect(component.state.hoveredItem).toEqual({
+            id: "Enabled Users",
+            value: 120543,
+            "strokeWidth": 4,
+            color: "#E12F51"
+        });
     });
 
     it("populates the selected item on bar chart legend mouseover", () => {
@@ -248,7 +253,7 @@ describe("FrequencyCard", function () {
 
         component._donutChartMouseOver(item);
 
-        expect(component.state.hoveredItem).toEqual({ ...item, strokeWidth: 2 });
+        expect(component.state.hoveredItem).toEqual({ ...item, strokeWidth: 4 });
     });
 
     it("clears the selected item from the donut cell on mouseout", () => {
