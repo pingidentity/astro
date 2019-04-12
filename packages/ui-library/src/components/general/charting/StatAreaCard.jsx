@@ -57,19 +57,16 @@ import _ from "underscore";
  */
 
 class StatAreaCard extends React.Component {
-    constructor() {
-        super();
-        this._onMouseOver = _.debounce(this._onMouseOver, 10);
-    }
-
     lastHover = null;
 
-    _onMouseOver = (data) => {
+    _onMouseOver = _.debounce((data) => {
         if (!_.isEqual(data, this.lastHover)) {
             this.props.onMouseOver(data.value, data.id);
             this.lastHover = data;
         }
-    }
+    }, 10);
+
+    _onMouseOut = () => _.debounce(this.props.onMouseOut(), 10);
 
     render() {
         const dataId = this.props["data-id"];
@@ -144,6 +141,7 @@ class StatAreaCard extends React.Component {
                                     content={<CustomTooltip />}
                                     cursor={false}
                                     onMouseOver={this._onMouseOver}
+                                    onMouseOut={this._onMouseOut}
                                     xAxisKey={this.props.xAxisKey}
                                     yAxisKey={this.props.yAxisKey}
                                 />
@@ -163,6 +161,8 @@ class StatAreaCard extends React.Component {
 // No tooltip is displayed. This code is used only to trigger an onMouseOver event.
 const CustomTooltip = ({
     onMouseOver,
+    onMouseOut,
+    active,
     payload: [
         { payload } = {}
     ],
@@ -174,6 +174,10 @@ const CustomTooltip = ({
             value: _.has(payload, yAxisKey) && payload[yAxisKey],
             id: _.has(payload, xAxisKey) && payload[xAxisKey]
         });
+    }
+
+    if (!active && onMouseOut) {
+        onMouseOut();
     }
     return true;
 };
@@ -207,6 +211,7 @@ StatAreaCard.propTypes = {
     makeDefaultLabel: PropTypes.string,
     onFlip: PropTypes.func,
     onMouseOver: PropTypes.func,
+    onMouseOut: PropTypes.func,
     onMakeDefault: PropTypes.func,
     rockerButtonProps: PropTypes.object,
     subTitle: PropTypes.string,
@@ -226,6 +231,7 @@ StatAreaCard.defaultProps = {
     listData: [],
     onFlip: _.noop,
     onMouseOver: _.noop,
+    onMouseOut: _.noop,
     onValueChange: _.noop,
     rockerButtonProps: {},
     xAxisKey: "id",

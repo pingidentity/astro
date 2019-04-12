@@ -203,4 +203,30 @@ describe("StatAreaCard", () => {
         jest.runAllTimers();
         expect(myFunction).toBeCalledTimes(2);
     });
+
+    it("calls onMouseOut", function () {
+        const myFunction = jest.fn();
+
+        const testData = {
+            id: "my-id",
+            value: "my-value",
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <div>
+                <StatAreaCard.CustomTooltip
+                    onMouseOut={myFunction}
+                    yAxisKey={"value"}
+                    xAxisKey={"id"}
+                    payload={[
+                        {
+                            payload: testData
+                        }
+                    ]}
+                />
+            </div>
+        );
+
+        expect(myFunction).toBeCalled();
+    });
 });

@@ -60,6 +60,10 @@ class StatAreaCardDemo extends React.Component {
         );
     };
 
+    _handleOnMouseOut = () => {
+        console.log("onMouseOut called");
+    };
+
     _handleMakeDefault = () => {
         console.log("Make default clicked");
     }
@@ -94,6 +98,7 @@ class StatAreaCardDemo extends React.Component {
                         listData={demoChartData.listData}
                         loading={this.state.loading}
                         onMouseOver={this._handleOnMouseOver}
+                        onMouseOut={this._handleOnMouseOut}
                         onMakeDefault={this._handleMakeDefault}
                         onValueChange={this._handleRangeChange}
                         rockerButtonProps={{ labels: rangeLabels }}
