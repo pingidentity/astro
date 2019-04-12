@@ -15,14 +15,15 @@ import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
 import ButtonGroup from "../../layout/ButtonGroup";
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
+import { cannonballChangeWarning, cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
+import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 
 /**
 * @enum {string}
 * @alias ExpandableRow.Statuses
 * @desc An enum of expandable row statuses.
 */
-var Statuses = {
+const Statuses = {
     GOOD: "good",
     WARNING: "warning",
     ERROR: "error"
@@ -38,7 +39,7 @@ const StatusTypes = {
  * @enum {string}
  * @alias ExpandableRow.RowMessageTypes
  */
-var RowMessageTypes = {
+const RowMessageTypes = {
     WARNING: "warning"
 };
 
@@ -46,7 +47,7 @@ var RowMessageTypes = {
  * @enum {string}
  * @alias ExpandableRow.ConfirmDeletePositions
  */
-var ConfirmDeletePositions = {
+const ConfirmDeletePositions = {
     TOP: "top",
     BOTTOM: "bottom"
 };
@@ -224,22 +225,33 @@ class ExpandableRow extends React.Component {
     };
 
     static defaultProps = {
+        flags: [],
         stateless: false
     };
 
-    constructor(props) {
-        super(props);
+    _usePStateful = () => this.props.flags.includes("p-stateful")
+
+    componentDidMount() {
         if (!Utils.isProduction()) {
-            if (props.controlled !== undefined) {
+            if (!this._usePStateful()) {
+                cannonballProgressivelyStatefulWarning({
+                    name: "ExpandableRow"
+                });
+            }
+            if (this.props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (props.defaultToExpanded !== undefined) {
+            if (this.props.defaultToExpanded !== undefined) {
                 throw new Error(Utils.deprecatePropError("defaultToExpanded", "expanded"));
             }
         }
     }
 
     render() {
+        if (this._usePStateful()) {
+            return <PStatefulExpandableRow {...this.props} />;
+        }
+
         return this.props.stateless
             ? React.createElement(StatelessExpandableRow, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "StatelessExpandableRow" }, this.props), this.props.children)
@@ -335,7 +347,7 @@ class StatefulExpandableRow extends React.Component {
             ordering
         }, this.props);
 
-        return React.createElement(StatelessExpandableRow, props, this.props.children); //eslint-disable-line no-use-before-define
+        return <StatelessExpandableRow {...props} />;
     }
 }
 
@@ -737,6 +749,38 @@ class ConfirmDeleteDialog extends React.Component {
         );
     }
 }
+
+const PStatefulExpandableRow = inStateContainer([
+    {
+        name: "expanded",
+        initial: false,
+        callbacks: [
+            {
+                name: "onToggle",
+                passTransformedValue: true,
+                transform: toggleTransform
+            }
+        ]
+    },
+    {
+        name: "showDeleteConfirm",
+        initial: false,
+        callbacks: [
+            {
+                name: "onDelete",
+                transform: (e, showDeleteConfirm, { confirmDelete }) => confirmDelete ? !showDeleteConfirm : false
+            },
+            {
+                name: "onDeleteConfirmClick",
+                transform: () => false
+            },
+            {
+                name: "onDeleteCancelClick",
+                transform: () => false
+            }
+        ]
+    }
+])(StatelessExpandableRow);
 
 /**
 * @class ScrollingWrapper

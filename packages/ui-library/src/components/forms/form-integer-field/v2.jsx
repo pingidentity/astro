@@ -8,7 +8,7 @@ import Utils from "../../../util/Utils.js";
 import _ from "underscore";
 import validator from "validator";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 
 const isValid = (value, enforceRange, min, max) => {
     if (value === "") {
@@ -488,7 +488,7 @@ export default class FormIntegerFieldV2 extends Component {
 
     componentDidMount() {
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "FormIntegerField" });
+            cannonballProgressivelyStatefulWarning({ name: "FormIntegerField" });
         }
     }
 

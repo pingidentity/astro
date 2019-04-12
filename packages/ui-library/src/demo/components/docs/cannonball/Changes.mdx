@@ -28,6 +28,14 @@
 * **V3 Behavior:** ExpandableRows get their styling from a surrounding element.
 * **Recommendation:** Add the flag 'expandable-row-class' to each ExpandableRow.
 
+* **V4 Behavior:** When provided, the `expanded` prop will control whether the component is open. Otherwise, the component will handle open and closing internally.
+* **V3 Behavior:** The `stateless` prop decides whether or not the open state will be controlled by the component.
+* **Recommendation:** Set the "p-stateful" flag.
+
+* **V4 Behavior:** When provided, the `showDeleteConfirm` prop will control whether the confirm delete tooltip is shown. Otherwise, the component will the tooltip.
+* **V3 Behavior:** The `stateless` prop decides whether or not the confirm delete tooltip state will be controlled by the component.
+* **Recommendation:** Set the "p-stateful" flag.
+
 ### FormTextArea
 * **V4 Behavior:** The component controls the state of `value` if it's not defined as a prop. The initial value can be set with `initialState.value`.
 * **V3 Behavior:** The `stateless` prop determines whether `value` is controlled by the component or not.

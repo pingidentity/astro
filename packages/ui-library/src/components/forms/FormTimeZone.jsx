@@ -13,7 +13,7 @@ import { isEnter, isArrowDown, isArrowUp } from "../../util/KeyboardUtils.js";
 import Utils from "../../util/Utils.js";
 import _ from "underscore";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 
 import Popover from "../tooltips/Popover";
 
@@ -708,7 +708,7 @@ export default class FormTimeZone extends React.Component {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "FormTextArea" });
+            cannonballProgressivelyStatefulWarning({ name: "FormTimeZone" });
         }
     }
 

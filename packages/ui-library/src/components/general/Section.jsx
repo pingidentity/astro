@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import CollapsibleLink from "./CollapsibleLink";
 
 import classnames from "classnames";
-import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import Utils from "../../util/Utils";
 import _ from "underscore";
@@ -91,7 +91,7 @@ export default class Section extends React.Component {
 
     componentDidMount() {
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "Section" });
+            cannonballProgressivelyStatefulWarning({ name: "Section" });
         }
     }
 

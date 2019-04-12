@@ -284,11 +284,11 @@ export function cannonballChangeWarning({
  *
  * @returns {} No return value.
  *
- * @example: cannonballProgressivleyStatefulWarning({
+ * @example: cannonballProgressivelyStatefulWarning({
  *      name: "FormTextArea",
  *  })
  */
-export function cannonballProgressivleyStatefulWarning({
+export function cannonballProgressivelyStatefulWarning({
     name
 }) {
     cannonballChangeWarning({

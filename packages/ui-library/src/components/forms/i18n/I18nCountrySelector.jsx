@@ -7,7 +7,7 @@ import classnames from "classnames";
 import CountryFlagList from "./CountryFlagList";
 import Utils from "../../../util/Utils.js";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 
 /**
 * @callback I18nCountrySelector~onValueChange
@@ -259,7 +259,7 @@ export default class I18nCountrySelector extends React.Component {
 
     componentDidMount() {
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "CountrySelector" });
+            cannonballProgressivelyStatefulWarning({ name: "CountrySelector" });
         }
         if (!Utils.isProduction()) {
             if (this.props.controlled !== undefined) {

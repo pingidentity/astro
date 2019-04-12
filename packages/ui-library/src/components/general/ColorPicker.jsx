@@ -19,7 +19,7 @@ import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 
 /**
  * @callback ColorPicker~onValueChange
@@ -409,9 +409,9 @@ export default class ColorPicker extends React.Component {
     componentDidMount() {
         if (!this._usePStateful()) {
             if (!this.props.stateless && (this.props.open !== undefined && this.props.errorMessage !== undefined)) {
-                cannonballProgressivleyStatefulWarning({ name: "ColorPicker" });
+                cannonballProgressivelyStatefulWarning({ name: "ColorPicker" });
             } else if (this.props.stateless) {
-                cannonballProgressivleyStatefulWarning({ name: "ColorPicker" });
+                cannonballProgressivelyStatefulWarning({ name: "ColorPicker" });
             }
         }
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws

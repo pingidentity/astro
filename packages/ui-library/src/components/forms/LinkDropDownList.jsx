@@ -5,7 +5,7 @@ import CollapsibleLink from "../general/CollapsibleLink";
 import DetailsTooltip from "../tooltips/DetailsTooltip";
 import classnames from "classnames";
 import _ from "underscore";
-import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 
 
@@ -206,7 +206,7 @@ export default class LinkDropDownList extends React.Component {
 
     componentDidMount() {
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({
+            cannonballProgressivelyStatefulWarning({
                 name: "LinkDropDownList"
             });
         }

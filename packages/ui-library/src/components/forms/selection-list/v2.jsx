@@ -6,7 +6,7 @@ import Constants from "./v2-constants";
 import Stateless from "./v2-stateless";
 import Stateful from "./v2-stateful";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 import SelectionListStateless from "./v2-stateless";
 
 /**
@@ -135,7 +135,7 @@ export default class SelectionList extends React.Component {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "SelectionList" });
+            cannonballProgressivelyStatefulWarning({ name: "SelectionList" });
         }
     }
 

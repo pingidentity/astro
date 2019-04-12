@@ -9,7 +9,7 @@ import FormRadioGroup from "../forms/FormRadioGroup";
 import Utils from "../../util/Utils.js";
 import _ from "underscore";
 
-import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
 
 
@@ -277,7 +277,7 @@ export default class ConditionalFieldset extends React.Component {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "ConditionalFieldset" });
+            cannonballProgressivelyStatefulWarning({ name: "ConditionalFieldset" });
         }
     }
 

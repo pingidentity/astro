@@ -6,7 +6,7 @@ import KeyboardUtils from "../../util/KeyboardUtils.js";
 import classnames from "classnames";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 import { createProgressiveState } from "../utils/StateContainer";
-import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -208,7 +208,7 @@ class FormSearchBox extends React.Component {
 
     componentDidMount() {
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "FormSearchBox" });
+            cannonballProgressivelyStatefulWarning({ name: "FormSearchBox" });
         }
     }
 

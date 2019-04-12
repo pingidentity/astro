@@ -12,7 +12,7 @@ import Utils from "../../../util/Utils.js";
 import _ from "underscore";
 
 import { inStateContainer } from "../../utils/StateContainer";
-import { cannonballProgressivleyStatefulWarning } from "../../../util/DeprecationUtils";
+import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 
 /**
 * @callback FormTextArea~onChange
@@ -332,7 +332,7 @@ export default class FormTextArea extends React.Component {
 
     componentDidMount() {
         if (!this._usePStateful()) {
-            cannonballProgressivleyStatefulWarning({ name: "FormTextArea" });
+            cannonballProgressivelyStatefulWarning({ name: "FormTextArea" });
         }
 
         if (!Utils.isProduction() && this.props.controlled !== undefined) {

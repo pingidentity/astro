@@ -20,7 +20,7 @@ class ExpandableRowDemo extends React.Component {
         rowDeleted: false
     };
 
-    static flags = ["use-portal", "expandable-row-class"];
+    static flags = ["use-portal", "expandable-row-class", "p-stateful"];
 
     _onToggle = (index) => () => {
         var newState = {},
@@ -147,7 +147,20 @@ class ExpandableRowDemo extends React.Component {
                         ]),
                         type: ExpandableRow.RowMessageTypes.WARNING
                     }}
-                    expanded={true}
+                    // When using the p-stateful flag, you can define an initial state for your component;
+                    // it will still control the prop internally, but will initialize with the value you
+                    // selected.
+                    {
+                    ...this.props.flags.includes("p-stateful")
+                        ? {
+                            initialState: {
+                                expanded: true
+                            }
+                        }
+                        : {
+                            expanded: true
+                        }
+                    }
                 />
                 <ExpandableRow
                     flags={flags}
@@ -161,7 +174,6 @@ class ExpandableRowDemo extends React.Component {
                     stateless={false}
                     title="Row with Toggle"
                     subtitle="stateful"
-                    expanded={false}
                     rowAccessories={<Toggle stateless={false} />}
                 />
                 <ExpandableRow
@@ -216,7 +228,6 @@ class ExpandableRowDemo extends React.Component {
                             />
                         </div>
                     }
-                    expanded={false}
                 />
                 <ExpandableRow
                     flags={flags}
@@ -253,7 +264,6 @@ class ExpandableRowDemo extends React.Component {
                     stateless={false}
                     title="Row With Invited Styling"
                     className="invited"
-                    expanded={false}
                     rowAccessories={[
                         <div key="invite-info" className="invite-info">
                             <div className="invite-status">Invited (Open)</div>
@@ -266,14 +276,15 @@ class ExpandableRowDemo extends React.Component {
                     flags={flags}
                     editButton={
                         <ConfirmTooltip
-                            flags={flags}
+                            // Only passing in portal because ConfirmTooltip doesn't handle
+                            // p-stateful correctly yet. This is being addressed in UX-565
+                            flags={flags.includes("use-portal") ? ["use-portal"]: []}
                             label=" "
                             className="edit-btn left"
                         >Confirm?</ConfirmTooltip>
                     }
                     stateless={false}
                     title="Row With Custom Edit Button"
-                    expanded={false}
                 />
                 {!this.state.rowDeleted && (
                     <ExpandableRow
