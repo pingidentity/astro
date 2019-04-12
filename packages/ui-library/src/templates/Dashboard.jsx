@@ -4,12 +4,38 @@ import { CardRow, DonutCard, PlaceHolderCard, StatCard, StatAreaCard } from "../
 import { HorizontalBarCard } from "../components/general/charting/Cards";
 import demoChartData from "../demo/components/general/charting/demoChartData";
 import _ from "underscore";
+import MultiseriesChartCard, { chartTypes } from "../components/general/charting/MultiseriesChartCard";
+import HeatmapCard from "../components/general/charting/HeatmapCard";
+import FrequencyCard from "../components/general/charting/FrequencyCard";
+import RockerButton from "../components/forms/RockerButton";
+import { toRechartsDataFormat } from "../util/ChartingUtils";
+
+Math.seed = 123;
+Math.seededRandom = function(max, min) {
+    max = max || 1;
+    min = min || 0;
+
+    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+    var rnd = Math.seed / 233280;
+
+    return min + rnd * (max - min);
+};
 
 /**
  * @class Dashboard
  * @desc This is a template to demonstrate how to build the charting dashboard.
  */
 class Dashboard extends React.Component {
+
+    days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+    hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, "00"];
+    demoValues = [651, 739, 594, 476];
+    valueTitles = [
+        "1 Week Average",
+        "1 Month Average",
+        "3 Month Average",
+        "6 Month Average",
+    ];
 
     heroData = [
         { id: "Sat 12/8", successes: 4000, failures: 200 },
@@ -30,9 +56,9 @@ class Dashboard extends React.Component {
         { label: "90 DAYS", value: "4" },
     ]
     donutData = [
-        { id: "Enabled Users", value: 120543, color: "#E12F51" },
-        { id: "Inactive Users", value: 51233, color: "#193967" },
-        { id: "Disabled Users", value: 20000, color: "#4C8DCA" },
+        { id: "Enabled Users", value: 120543 },
+        { id: "Inactive Users", value: 51233 },
+        { id: "Disabled Users", value: 20000 },
     ]
 
     horizontalBarData = [
@@ -53,10 +79,289 @@ class Dashboard extends React.Component {
         { label: "This Week", value: "4" },
     ]
 
+    MultiseriesInitialOptions = [
+        {
+            id: "Confluence",
+            name: "Confluence"
+        },
+        {
+            id: "DataDog",
+            name: "DataDog"
+        },
+        {
+            id: "DocuSign",
+            name: "DocuSign"
+        },
+        {
+            id: "Google Calendar",
+            name: "Google Calendar"
+        },
+        {
+            id: "Google Drive",
+            name: "Google Drive"
+        },
+    ]
+
+    timeSpans = [
+        [
+            "Jan 1",
+            "Jan 8",
+            "Jan 15",
+            "Jan 22",
+            "Feb 1",
+            "Feb 8",
+            "Feb 15",
+            "Feb 22",
+            "Mar 1",
+            "Mar 8",
+            "Mar 15",
+            "Mar 22",
+        ],
+        [
+            "Jan 1",
+            "Jan 15",
+            "Feb 1",
+            "Feb 15",
+            "Mar 1",
+            "Mar 15",
+            "Apr 1",
+            "Apr 15",
+            "May 1",
+            "May 15",
+            "Jun 1",
+            "Jun 15",
+        ],
+        [
+            "Jan '18",
+            "Feb '18",
+            "Mar '18",
+            "Apr '18",
+            "May '18",
+            "June '18",
+            "July '18",
+            "Aug '18",
+            "Sept '18",
+            "Oct '18",
+            "Nov '18",
+            "Dec '18"
+        ]
+    ]
+
+    frequencyData = [
+        { id: "Within the last 24 hours", value: 1205 },
+        { id: "1 day - 1 week ago", value: 512 },
+        { id: "1 week - 4 weeks ago", value: 200 },
+    ];
+
+    exampleData = [
+        60,
+        20,
+        10,
+        5,
+        5
+    ];
+
+    exampleData2 = [
+        30,
+        10,
+        35,
+        15,
+        10
+    ];
+
+    legend = [
+        { id: "At least daily" },
+        { id: "At least weekly" },
+        { id: "At least monthly" },
+        { id: "At least quarterly" },
+        { id: "Less than quarterly" },
+    ];
+
+    barData = [
+        {
+            id: "By Week",
+            helpText: "This is by week",
+            legend: this.legend,
+            data: [
+                {
+                    id: "Feb 2018",
+                    data: this.exampleData
+                },
+                {
+                    id: "March 2018",
+                    data: this.exampleData2
+                },
+                {
+                    id: "April 2018",
+                    data: this.exampleData
+                },
+                {
+                    id: "May 2018",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Jun 2018",
+                    data: this.exampleData
+                },
+                {
+                    id: "Jul 2018",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Aug 2018",
+                    data: this.exampleData
+                },
+                {
+                    id: "Sept 2018",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Oct 2018",
+                    data: this.exampleData
+                },
+                {
+                    id: "Nov 2018",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Dec 2018",
+                    data: this.exampleData
+                },
+                {
+                    id: "Jan 2019",
+                    data: this.exampleData2
+                },
+            ]
+        },
+        {
+            id: "By Month",
+            helpText: "This is by month",
+            legend: this.legend,
+            data: [
+                {
+                    id: "Feb 2017",
+                    data: this. exampleData2
+                },
+                {
+                    id: "March 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "April 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "May 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Jun 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Jul 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Aug 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Sept 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Oct 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Nov 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Dec 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Jan 2019",
+                    data: this.exampleData2
+                },
+            ]
+        },
+        {
+            id: "By Quarter",
+            helpText: "This is by quarter",
+            legend: this.legend,
+            data: [
+                {
+                    id: "Feb 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "March 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "April 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "May 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Jun 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Jul 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Aug 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Sept 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Oct 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Nov 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Dec 2017",
+                    data: this.exampleData2
+                },
+                {
+                    id: "Jan 2019",
+                    data: this.exampleData2
+                },
+            ]
+        }
+    ];
+
     _sumTotal = (data) => {
         return data.reduce((acc, { value }) => {
             return acc + value;
         }, 0);
+    }
+
+
+    _heatmapGenerateDemoData = () => {
+        return this.days.map((day) => {
+            return this.hours.map((hour) => {
+                console.log(day.charCodeAt(1));
+                return {
+                    value: parseInt(Math.seededRandom(1, 1000)),
+                    label: `${day.toUpperCase()} ${hour}:00${hour < 12 ? "am" : "pm"} MST`
+                };
+            });
+        });
     }
 
     state = {
@@ -73,6 +378,15 @@ class Dashboard extends React.Component {
         horizontalLabel: "Api Errors",
         horizontalValue: this._sumTotal(this.horizontalBarData),
         horizontalSelectedValue: this.horizontalBarOptions[0],
+
+        multiseriesOptions: this. MultiseriesInitialOptions,
+        multiseriesTimeSpanIndex: 0,
+        multiseriesTypeIndex: 0,
+
+        heatmapData: this._heatmapGenerateDemoData(),
+        heatmapValue: this.demoValues[0],
+        heatmapValueTitle: this.valueTitles[0],
+
     }
 
     _handleMakeDefault = () => {
@@ -85,6 +399,7 @@ class Dashboard extends React.Component {
     };
 
 
+    //area card
     _areaHandleRangeChange = (range) => {
         let rangeData;
         let subtitle;
@@ -111,7 +426,7 @@ class Dashboard extends React.Component {
         });
     };
 
-
+    //donutcard
     _donutOnMouseOver = (e, { id }) => {
         const matchingData = this.donutData.find(data => {
             return id === data.id;
@@ -134,6 +449,8 @@ class Dashboard extends React.Component {
         });
     }
 
+
+    //Horizontalbar card
     _horizontalOnHover = (e, { id }) => {
         const matchingData = this.horizontalBarData.find(data => {
             return id === data.id;
@@ -157,9 +474,91 @@ class Dashboard extends React.Component {
         });
     }
 
+    //frequcney card
+    _frequencyHandleMakeDefault = () => {
+        console.log("Make default clicked");
+    }
+
+    //heatmap card
+
+    _heatmapHandleRangeChange = range => {
+        this.setState({
+            data: this._heatmapGenerateDemoData(),
+            value: this.demoValues[range.index],
+            valueTitle: this.valueTitles[range.index],
+        });
+    }
+
+
+    //multiseries card
+    _multiseriesGenerateData = () => new Array(12).fill(undefined).map(() => Math.floor(Math.random() * 30))
+
+    _multiseriesGetTimeSpan = index => this.timeSpans[index]
+
+    _multiseriesHandleSelectOption = (id, event) => console.log("onMenuSelect called with: ", id, event);
+
+    _multiseriesHandleDeselectOption = (id, event) => console.log("onMenuDeselect called with: ", id, event);
+
+    _multiseriesHandleToggle = open => console.log("onToggle called with", open)
+
+    _multiseriesSetChartType = ({ index }) => this.setState({
+        typeIndex: index
+    })
+
+    _multiseriesSetTimeSpan = ({ index }) => this.setState(() => ({
+        multiseriesTimeSpanIndex: index
+    }))
+
+
+
+
     render = () => {
         const areaMax = _.max(this.state.areaData, item => item.value).value;
         const areaPercent = parseInt(parseInt(this.state.areaValue) * 100 / areaMax);
+
+        const data = [
+            {
+                id: "confluence",
+                name: "Confluence",
+                data: this._multiseriesGenerateData()
+            },
+            {
+                id: "dataDog",
+                name: "DataDog",
+                data: this._multiseriesGenerateData()
+            },
+            {
+                id: "docuSign",
+                name: "DocuSign",
+                data: this._multiseriesGenerateData()
+            },
+            {
+                id: "googleCalendar",
+                name: "Google Calendar",
+                data: this._multiseriesGenerateData()
+            },
+            {
+                id: "googleDrive",
+                name: "Google Drive",
+                data: this._multiseriesGenerateData()
+            },
+            {
+                id: "time",
+                name: "Time",
+                data: this._multiseriesGetTimeSpan(this.state.multiseriesTimeSpanIndex)
+            }
+        ];
+
+        // Data is put into the Recharts format here using a helper function available from
+        // src/util/ChartingUtils
+        const multiseriesFormattedData = toRechartsDataFormat(data);
+        // Don't include Time in options, since this will be used for the x-axis
+        const multiseriesOptions = data.slice(0, data.length - 1).map(point => _.omit(point, "data"));
+
+        // menuRequiredText can either be a string or a function, which is passed the current state
+        // of the component.
+        const renderRequiredText = ({ selectedDataSets }) =>
+            selectedDataSets.length === 0 ? "Minimum of 1 application required." : null;
 
         return (
             <div>
@@ -277,9 +676,78 @@ class Dashboard extends React.Component {
                         message="We're building more data widgets. Check back soon!"
                     />
                 </CardRow>
-                <PlaceHolderCard
-                    message="We're building more data widgets. Check back soon!"
-                />
+                <CardRow>
+                    <FrequencyCard
+                        errorMessage={this.state.errorMessage}
+
+                        frontTitle="Users By Last Activity"
+                        frontLegendLabel="Last activity was:"
+                        donutData={this.frequencyData}
+                        donutLabel="Total Users"
+                        donutUnits="Users"
+
+                        backTitle="Average distribution of user activity"
+                        backTitleHelpHint="This is the back title help hint"
+                        backLegendLabel="Active on average:"
+                        barData={this.barData}
+
+                        loading={this.state.frequencyLoading}
+                        onMakeDefault={this.frequencyHandleMakeDefault}
+                        makeDefaultLabel="Make Default View"
+                        defaultChecked={false}
+
+                        size={2}
+                    />
+                    <PlaceHolderCard
+                        message="We're building more data widgets. Check back soon!"
+                    />
+                </CardRow>
+                <CardRow>
+                    <MultiseriesChartCard
+                        bottomPanel={
+                            <RockerButton
+                                className={`rocker-button--chart-rocker`}
+                                labels={["3M", "6M", "1Y"]}
+                                onValueChange={this._setTimeSpan}
+                                stateless
+                                selectedIndex={this.state.multiseriesTimeSpanIndex}
+                            />
+                        }
+                        data={multiseriesFormattedData}
+                        menuNote={<p>Limit of 3 applications.</p>}
+                        menuRequiredText={renderRequiredText}
+                        // menuSelectedIds can be passed in here; if so, the DropDownSelector will not manage its internal
+                        // selection state. IDs should be the same as the IDs used for data. If not passed in, the component
+                        // will manage its own selection state.
+                        onDeselectOption={this._multiseriesHandleDeselectOption}
+                        onMenuToggle={this._multiseriesHandleToggle}
+                        onSelectOption={this._multiseriesHandleSelectOption}
+                        options={multiseriesOptions}
+                        // selectedDataSets can be passed in as a prop here; if it is, the selection state must be handled
+                        // in a parent component. If it's not passed in, the component will handle that state internally.
+                        type={this.state.typeIndex === 0 ? chartTypes.LINE : chartTypes.AREA}
+                        title="Application Traffic"
+                        xAxisKey="time"
+                        yAxisLabel="# of Requests"
+                    />
+                </CardRow>
+                <CardRow>
+                    <HeatmapCard
+                        data={this.state.heatmapData}
+                        chartTitle="Sign-ons by day/hour"
+                        errorMessage={this.state.errorMessage}
+                        loading={this.state.loading}
+                        value={this.state.heatmapValue}
+                        xAxisLabels={this.hours}
+                        yAxisLabels={this.days}
+                        onValueChange={this._handleRangeChange}
+                        labelKey="label"
+                        valueKey="value"
+                        valueTitle={this.state.heatmapValueTitle}
+                        valueSubtitle={<span>Sign-ons<br />per day</span>}
+                        tooltipSubtitle="Average sign-ons"
+                    />
+                </CardRow>
             </div>
         );
     }

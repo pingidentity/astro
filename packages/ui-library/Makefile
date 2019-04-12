@@ -182,7 +182,7 @@ log-config:
 
 install-node-npm:
 	npm cache clean --force
-	npm install --no-shrinkwrap --update-binary
+	npm install
 	npm rebuild node-sass
 
 clean-mvn:

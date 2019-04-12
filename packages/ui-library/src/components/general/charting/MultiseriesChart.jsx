@@ -26,7 +26,7 @@ export const chartTypes = {
 
 export const renderDefaultTooltip = ({
     data,
-    xAxisValue
+    xAxisValue,
 }) => (
     <div className={`${baseClass}__tooltip`}>
         <ChartTooltip
@@ -141,6 +141,7 @@ export default class MultiseriesChart extends Component {
     };
 
     static defaultProps = {
+        "data-id": "multiseries-chart",
         height: 225,
         width: 500,
         onDeselectOption: noop,
@@ -262,7 +263,8 @@ export default class MultiseriesChart extends Component {
             title,
             tooltip,
             type,
-            yAxisLabel
+            yAxisLabel,
+            "data-id": dataId
         } = this.props;
 
         const chartProps = {
@@ -282,7 +284,7 @@ export default class MultiseriesChart extends Component {
             <div className={classnames(
                 baseClass,
                 { [`${baseClass}--line`]: isLine }
-            )}>
+            )} data-id={dataId}>
                 {title && <PageHeader className={`${baseClass}__title`} title={title} />}
                 <div className={`${baseClass}__content`}>
                     <DropDownSelector

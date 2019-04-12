@@ -51,9 +51,9 @@ import Colors from "../charting/Cards/dashboardColors";
 
 
 
-const highlightColor = Object.values(Colors.COLORS)[0];
+const magenta = Object.values(Colors.COLORS)[2];
 
-const defaultColor = Color(highlightColor).lighten(0.5).hex();
+const defaultColor = Color(magenta).lighten(0.5).hex();
 
 export default class HorizontalBarCard extends Component {
 
@@ -73,8 +73,8 @@ export default class HorizontalBarCard extends Component {
 
         this.setState({
             hoveredSection: value.id,
-            statColor: highlightColor,
-            strokeColor: highlightColor,
+            statColor: magenta,
+            strokeColor: magenta,
             strokeWidth: 1,
         });
     };
