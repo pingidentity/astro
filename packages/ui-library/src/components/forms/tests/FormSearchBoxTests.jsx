@@ -25,7 +25,7 @@ describe("FormSearchBox", function () {
             onKeyDown: jest.fn(),
             onFocus: jest.fn(),
             onBlur: jest.fn(),
-            onClear: jest.fn()
+            onClear: jest.fn(),
         });
 
         return ReactTestUtils.renderIntoDocument(<FormSearchBox {...opts} />);
@@ -46,7 +46,7 @@ describe("FormSearchBox", function () {
             maxLength: 10
         });
 
-        const formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField);
+        const formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
         expect(formTextField.props.maxLength).toEqual(10);
     });
 
@@ -60,7 +60,7 @@ describe("FormSearchBox", function () {
     it("should have default placeholder", function () {
         var component = getComponent();
 
-        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField);
+        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
         expect(formTextField.props.placeholder).toBeUndefined();
     });
 
@@ -69,14 +69,26 @@ describe("FormSearchBox", function () {
             placeholder: "Search text box"
         });
 
-        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField);
+        var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
         expect(formTextField.props.placeholder).toEqual("Search text box");
     });
 
-    it("should fire onChange when field changes", function () {
+    it("v3: should fire onChange when field changes", function () {
         var handleOnChange = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <FormSearchBox onValueChange={handleOnChange} />
+        );
+
+        var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component, "FormSearchBox");
+        var searchInput = TestUtils.findRenderedDOMNodeWithTag(formTextField, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: "something" } });
+        expect(handleOnChange.mock.calls.length).toBe(1);
+    });
+
+    it("v4: should fire onChange when field changes", function () {
+        var handleOnChange = jest.fn();
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormSearchBox onValueChange={handleOnChange} flags={["p-stateful"]} />
         );
 
         var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component, "FormSearchBox");
@@ -248,8 +260,19 @@ describe("FormSearchBox", function () {
         expect(component.props.onClear).toBeCalled();
     });
 
-    it("searchBoxFocus should focus search input field", function () {
+    it("v3: searchBoxFocus should focus search input field", function () {
+        document.activeElement.blur();
         var component = getComponent(),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(document.activeElement).toBe(document.body);
+        component.searchBoxFocus();
+        expect(document.activeElement).toBe(searchInput);
+    });
+
+    it("v4: searchBoxFocus should focus search input field", function () {
+        document.activeElement.blur();
+        var component = getComponent({ queryString: "test", flags: [ "p-stateful" ] }),
             searchInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         expect(document.activeElement).toBe(document.body);
@@ -269,5 +292,17 @@ describe("FormSearchBox", function () {
         component.searchBoxFocus();
         expect(document.activeElement).toBe(searchInput);
         expect(component.isFocused()).toBe(true);
+    });
+
+    it("fires cannonball warning when the p-stateful flag is not set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire cannonball warning when the p-stateful flag is set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "p-stateful" ] });
+        expect(console.warn).not.toBeCalled();
     });
 });

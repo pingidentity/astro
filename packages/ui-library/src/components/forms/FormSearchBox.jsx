@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
 import _ from "underscore";
-import FormTextField from "./form-text-field/index";
+import FormTextField, { FormTextFieldStateless } from "./form-text-field/index";
 import KeyboardUtils from "../../util/KeyboardUtils.js";
 import classnames from "classnames";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
+import { createProgressiveState } from "../utils/StateContainer";
+import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -85,6 +87,13 @@ import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 *         placeholder="Search"
 *         onChange={this._filterOptions} />
 **/
+
+const searchBoxProgressiveState = createProgressiveState([{
+    name: "queryString",
+    initial: "",
+    setter: "onValueChange",
+}]);
+
 class FormSearchBox extends React.Component {
     static displayName = "FormSearchBox";
 
@@ -109,6 +118,8 @@ class FormSearchBox extends React.Component {
         queryString: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
         autoFocus: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful" ])),
+        initialState: PropTypes.object,
     };
 
     static defaultProps = {
@@ -121,7 +132,30 @@ class FormSearchBox extends React.Component {
         errorMessage: null,
         width: InputWidths.MD,
         autoFocus: false,
+        flags: [],
+        initialState: {},
     };
+
+    constructor(props) {
+        super(props);
+        const { queryString, value, onValueChange } = props;
+
+        if (this._usePStateful(props)) {
+            const passedProps = {
+                queryString: queryString !== undefined ? queryString : value,
+                onValueChange,
+            };
+
+            const [ state, callbacks ] = searchBoxProgressiveState({
+                initialState: props.initialState, passedProps, boundSetState: this.setState.bind(this),
+            });
+
+            this.state = state;
+            this.callbacks = { onValueChange, ...callbacks };
+        } else {
+            this.callbacks = { onValueChange };
+        }
+    }
 
     /**
      * @desc Search when the searchBox has a new value.
@@ -131,11 +165,11 @@ class FormSearchBox extends React.Component {
      * @ignore
      */
     _search = (value) => {
-        this.props.onValueChange(value);
+        this.callbacks.onValueChange(value);
     };
 
     _clear = () => {
-        this.props.onValueChange("");
+        this._search("");
         this.props.onClear();
     };
 
@@ -147,6 +181,9 @@ class FormSearchBox extends React.Component {
     };
 
     _getSearchInputRef = () => {
+        if (this._usePStateful()) {
+            return this.refs.searchBox.refs["searchBox-input"];
+        }
         return this.refs.searchBox.refs.stateful.refs.stateless.refs["searchBox-input"];
     };
 
@@ -167,8 +204,16 @@ class FormSearchBox extends React.Component {
         return document.activeElement === this._getSearchInputRef();
     };
 
+    _usePStateful = (props = this.props) => props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "FormSearchBox" });
+        }
+    }
+
     render() {
-        const value = this.props.queryString || this.props.value || "";
+        const value = (this.state && this.state.queryString) || this.props.queryString || this.props.value || "";
         const showClear = value !== "";
         const iconClasses = classnames("input-icon", "icon-" + this.props.iconName);
         const inputClasses = classnames("search", {
@@ -176,9 +221,11 @@ class FormSearchBox extends React.Component {
         });
         const { autoFocus } = this.props;
 
+        const TextFieldComponent = this._usePStateful() ? FormTextFieldStateless : FormTextField;
+
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
-                <FormTextField
+                <TextFieldComponent
                     data-id="searchBox"
                     stateless={false}
                     ref="searchBox"
@@ -199,7 +246,7 @@ class FormSearchBox extends React.Component {
                         : null
                     }
                     width={this.props.width}
-                ><span className={iconClasses}/></FormTextField>
+                ><span className={iconClasses}/></TextFieldComponent>
             </div>
         );
     }

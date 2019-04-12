@@ -627,6 +627,7 @@ const PStatefulFormTextField = inStateContainer([
 class FormTextField extends React.Component {
 
     static messageTypes = FormMessage.messageTypes;
+    static FormTextFieldStateless = Stateless; // we'd rather this were a named export, but the index.js/v2.jsx scheme prevents that
 
     static propTypes = {
         stateless: PropTypes.bool,

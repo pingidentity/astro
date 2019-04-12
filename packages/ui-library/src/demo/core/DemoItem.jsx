@@ -135,7 +135,10 @@ class DemoItem extends React.Component {
                     <div className="demo-description"
                         dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
-                    <OutputComponent className="output">
+                    <OutputComponent
+                        className="output"
+                        key={this.state.flags ? this.state.flags.join("_") : "demo"}
+                    >
                         {React.createElement(type, props)}
 
                         {flags &&

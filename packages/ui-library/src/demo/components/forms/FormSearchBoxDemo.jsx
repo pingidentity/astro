@@ -19,6 +19,8 @@ const ITEMS = [
 * @desc A demo for FormSearchBox
 */
 class FormSearchBoxDemo extends React.Component {
+    static flags = [ "p-stateful" ];
+
     state = {
         items: ITEMS,
         queryString: "",
@@ -93,6 +95,7 @@ class FormSearchBoxDemo extends React.Component {
                         onClear={this._handleClear}
                         width={InputWidths.MD}
                         name="search-box"
+                        flags={this.props.flags}
                     />
                 </InputRow>
                 {this._renderMessages()}
