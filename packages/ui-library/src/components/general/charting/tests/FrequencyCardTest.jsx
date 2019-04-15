@@ -8,22 +8,24 @@ import FrequencyCard from "../FrequencyCard";
 describe("FrequencyCard", function () {
     const componentId = "frequency-card";
 
-    function getComponent(opts) {
-        const legend = [
-            { id: "At least daily", color: "#193967" },
-            { id: "At least weekly", color: "#4C8DCA" },
-            { id: "At least monthly" },
-            { id: "At least quarterly", color: "#6ACCE0" },
-            { id: "Less than quarterly", color: "#EF6A04" },
-        ];
+    const legend = [
+        { id: "At least daily", color: "#193967" },
+        { id: "At least weekly", color: "#4C8DCA" },
+        { id: "At least monthly" },
+        { id: "At least quarterly", color: "#6ACCE0" },
+        { id: "Less than quarterly", color: "#EF6A04" },
+    ];
 
+    const donutData = [
+        { id: "Enabled Users", value: 120543, color: "#E12F51" },
+        { id: "Inactive Users", value: 51233 },
+        { id: "Disabled Users", value: 3000 },
+    ];
+
+    function getComponent(opts) {
         const withDefaults = _.defaults(opts || {}, {
             "data-id": componentId,
-            donutData: [
-                { id: "Enabled Users", value: 120543, color: "#E12F51" },
-                { id: "Inactive Users", value: 51233 },
-                { id: "Disabled Users", value: 3000 },
-            ],
+            donutData: donutData,
             barData: [
                 {
                     id: "First",
@@ -189,15 +191,13 @@ describe("FrequencyCard", function () {
         const component = getComponent();
 
         const parent = TestUtils.findRenderedDOMNodeWithDataId(component, "donut-chart-legend");
-        const legend = TestUtils.scryRenderedDOMNodesWithDataId(parent, "chart-legend-key")[0];
+        const legendElem = TestUtils.scryRenderedDOMNodesWithDataId(parent, "chart-legend-key")[0];
 
-        ReactTestUtils.Simulate.mouseOver(legend);
+        ReactTestUtils.Simulate.mouseOver(legendElem);
 
         expect(component.state.hoveredItem).toEqual({
-            id: "Enabled Users",
-            value: 120543,
+            ...donutData[0],
             "strokeWidth": 4,
-            color: "#E12F51"
         });
     });
 
@@ -205,11 +205,11 @@ describe("FrequencyCard", function () {
         const component = getComponent();
 
         const parent = TestUtils.findRenderedDOMNodeWithDataId(component, "stacked-chart-legend");
-        const legend = TestUtils.scryRenderedDOMNodesWithDataId(parent, "chart-legend-key")[0];
+        const legendElem = TestUtils.scryRenderedDOMNodesWithDataId(parent, "chart-legend-key")[0];
 
-        ReactTestUtils.Simulate.mouseOver(legend);
+        ReactTestUtils.Simulate.mouseOver(legendElem);
 
-        expect(component.state.hoveredItem).toEqual({ id: "At least daily", color: "#193967" });
+        expect(component.state.hoveredItem).toEqual(legend[0]);
     });
 
     it("clears the selected item on legend mouseout", () => {
@@ -218,9 +218,9 @@ describe("FrequencyCard", function () {
         component._itemSelect("Test item");
 
         const parent = TestUtils.findRenderedDOMNodeWithDataId(component, "donut-chart-legend");
-        const legend = TestUtils.scryRenderedDOMNodesWithDataId(parent, "chart-legend-key")[0];
+        const legendElem = TestUtils.scryRenderedDOMNodesWithDataId(parent, "chart-legend-key")[0];
 
-        ReactTestUtils.Simulate.mouseOut(legend);
+        ReactTestUtils.Simulate.mouseOut(legendElem);
 
         expect(component.state.hoveredItem).toEqual({});
     });

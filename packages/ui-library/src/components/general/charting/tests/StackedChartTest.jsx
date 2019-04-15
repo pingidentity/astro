@@ -122,4 +122,16 @@ describe("StackedChart", function () {
 
         expect(fn).toHaveBeenCalled();
     });
+
+    it("fires the onMouseOut event", function () {
+        const fn = jest.fn();
+
+        const component = getComponent({
+            onMouseOut: fn
+        });
+
+        component._handleMouseOut();
+
+        expect(fn).toHaveBeenCalled();
+    });
 });

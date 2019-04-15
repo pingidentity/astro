@@ -319,8 +319,9 @@ export default class FrequencyCard extends Component {
                                         </Pie>
                                         <Tooltip
                                             wrapperStyle={{ zIndex: 1000 }}
-                                            isAnimationActive={false}
+                                            isAnimationActive={true}
                                             content={this._renderTooltip}
+                                            active={hoveredItem.id !== undefined ? true : false}
                                             cursor={{ fill: "transparent" }}
                                         />
                                     </PieChart>

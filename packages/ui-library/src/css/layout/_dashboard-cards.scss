@@ -474,6 +474,12 @@ $fullwidthBreakpoint: 950px;
         transition: all 0.3s;
     }
 
+    .recharts-layer.recharts-bar {
+        .recharts-bar-rectangle:last-child {
+            opacity: 0.75;
+        }
+    }
+
     .dashboard-card__front {
         align-items: center;
     }
@@ -571,6 +577,14 @@ $fullwidthBreakpoint: 950px;
             content: '';
             display: block;
             border-bottom: 1px solid $color-neutral-90;
+        }
+    }
+
+    &__donut-chart.recharts-wrapper {
+        .recharts-tooltip-wrapper {
+
+            // Make tooltip transparent to mouse events
+            pointer-events: none;
         }
     }
 }

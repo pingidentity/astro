@@ -17,9 +17,8 @@ class StackedChart extends Component {
         }
     ));
 
-
     state = {
-        legend: this.props.legend.map(i => i.id),
+        legend: this.props.legend.reverse().map(i => i.id),
         selected: {},
         data: this._digestData(this.props.data)
     };
@@ -28,6 +27,12 @@ class StackedChart extends Component {
         if (nextProps.data !== this.state.data) {
             this.setState({ data: this._digestData(nextProps.data) });
         }
+    }
+
+    _handleMouseOut = (...args) => {
+        this.setState({ selected: {} });
+
+        this.props.onMouseOut(...args);
     }
 
     _handleMouseOver = (id) => (value, index, e) => {
@@ -91,7 +96,6 @@ class StackedChart extends Component {
             selectedId,
             colors,
             "data-id": dataId,
-            onMouseOut,
             terminateLabel,
             highlightRow,
         } = this.props;
@@ -119,7 +123,7 @@ class StackedChart extends Component {
                         <Tooltip
                             isAnimationActive={false}
                             content={this._renderTooltip}
-                            cursor={{ fill: "transparent" }}
+                            cursor={false}
                         />
                         {lastEmpty > -1 &&
                             <ReferenceLine
@@ -148,7 +152,7 @@ class StackedChart extends Component {
                                     dataKey={key}
                                     stackId="a"
                                     onMouseOver={this._handleMouseOver(id)}
-                                    onMouseOut={onMouseOut}
+                                    onMouseOut={this._handleMouseOut}
                                     onClick={this._handleOnClick(id)}
                                     stroke={colors[key]}
                                     fill={`${selectedId &&
