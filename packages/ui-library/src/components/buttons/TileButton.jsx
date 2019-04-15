@@ -4,8 +4,6 @@ import { getIconClassName } from "../../util/PropUtils";
 import classnames from "classnames";
 import Link from "../general/Link";
 
-
-const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking
 export const types = {
     SIDEICON: "side-icon",
     SQUARE: "square",
@@ -116,7 +114,7 @@ const TileButton = ({
     const TagName = link ? "div" : "button";
 
     return (
-        <TagName className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown} role="button">
+        <TagName className={classNames} data-id={dataId} onClick={onClick} role="button">
             {renderedIcon &&
                 <div
                     className={classnames(

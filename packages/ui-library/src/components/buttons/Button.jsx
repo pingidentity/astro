@@ -55,8 +55,6 @@ const buttonTypes = {
 
 const buttonTypeList = Object.values(buttonTypes);
 
-const dontFocus = event => event.preventDefault();
-
 const checkFixAddMargin = flags => flags.includes("add-button-margin");
 
 function Button ({
@@ -114,7 +112,6 @@ function Button ({
         <TagName
             className = {classes}
             data-id={dataId}
-            onMouseDown={dontFocus}
             onClick={onClick}
             disabled={disabled}
             type={submit ? "submit" : "button"}
