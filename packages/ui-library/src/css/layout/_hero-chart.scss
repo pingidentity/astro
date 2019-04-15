@@ -75,24 +75,12 @@
     }
 
     &__top-chart {
-        path.recharts-rectangle {
-            fill-opacity: 0.6 !important;
-            &:hover {
-                fill-opacity: 1 !important;
-            }
-        }
         .recharts-tooltip-wrapper {
             margin-top: -5px;
         }
     }
 
     &__bottom-chart {
-        path.recharts-rectangle {
-            fill-opacity: 0.6 !important;
-            &:hover {
-                fill-opacity: 1 !important;
-            }
-        }
         .recharts-tooltip-wrapper {
             margin-top: 8px;
         }

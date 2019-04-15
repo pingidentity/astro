@@ -42,7 +42,7 @@ describe("HeroChart", function () {
     function getComponent(props) {
         const componentProps = _.defaults(props || {}, defaultProps);
         return ReactTestUtils.renderIntoDocument(
-            <div><HeroChart {...componentProps} /></div>
+            <HeroChart {...componentProps} />
         );
     }
     it("renders with the default data-id", function () {
@@ -221,6 +221,25 @@ describe("HeroChart", function () {
             const textTag = TestUtils.findRenderedDOMNodeWithTag(xAxisTick, "text");
             expect(textTag.getAttribute("font-size")).toEqual(item.size);
         });
+    });
 
+    it("sets the selected element on mouse over", function () {
+        const component = getComponent();
+
+        component._handleBarMouseOver("test", 0)();
+
+        expect(component.state.barSelected).toEqual("test-0");
+    });
+
+    it("clears the selected element on mouse out", function () {
+        const component = getComponent();
+
+        component._handleBarMouseOver("test", 0)();
+
+        expect(component.state.barSelected).toEqual("test-0");
+
+        component._handleBarMouseOut();
+
+        expect(component.state.barSelected).toEqual(null);
     });
 });

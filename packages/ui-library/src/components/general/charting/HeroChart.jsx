@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import RockerButton from "../../forms/RockerButton";
 import PageSpinner from "../../general/PageSpinner";
-import { BarChart, XAxis, Tooltip, Bar } from "recharts";
+import { BarChart, XAxis, Tooltip, Bar, Cell } from "recharts";
 import _ from "underscore";
 
 
@@ -65,176 +65,6 @@ import _ from "underscore";
 
 const xAxisHeight = 30;
 
-const _renderBars = (key, color) => {
-    return (
-        <Bar
-            key={"bar-" + key}
-            dataKey={key}
-            name={key}
-            fill={color}
-            isAnimationActive={false}
-            minPointSize={1}
-        />
-    );
-};
-
-const _renderXAxis = (xAxisKey, numDataPoints) => {
-
-    // resize the font based on the number of datapoints (until we can find a more elegant fix)
-    let fontSize = 15;
-
-    if (numDataPoints > 25) {
-        fontSize = 11;
-    } else if (numDataPoints > 23) {
-        fontSize = 12;
-    } else if (numDataPoints > 21) {
-        fontSize = 13;
-    } else if (numDataPoints > 18) {
-        fontSize = 14;
-    }
-
-    return (
-        <XAxis
-            axisLine={false}
-            dataKey={xAxisKey}
-            domain={["dataMin", "dataMax"]}
-            dy={4}
-            stroke={"rgba(255, 255, 255, 0.9)"}
-            tick={{ fontSize: fontSize }}
-            tickLine={false}
-            height={xAxisHeight}
-            interval={0}
-        />
-    );
-};
-
-const _getSeriesMax = (data, series) => {
-    return _.max(data, function (item) { return item[series]; })[series];
-};
-const HeroChart = ({
-    "data-id": dataId,
-    bgImage,
-    bottomSeriesKey,
-    data,
-    chartHeight,
-    chartWidth,
-    errorMessage,
-    greeting,
-    greetingText,
-    loading,
-    loadingMessage,
-    onValueChange,
-    rockerButtonProps,
-    selected,
-    subtitle,
-    subtitleText,
-    title,
-    titleText,
-    tooltipBottomLabel,
-    tooltipTopLabel,
-    topSeriesKey,
-    totalValue,
-    value,
-    xAxisKey,
-}) => {
-
-    const rockerButtonDefaults = {
-        "data-id": `${dataId}-range-selector`,
-        className: "rocker-button--chart-rocker hero-chart__rocker",
-        stateless: false,
-        labels: ["1D", "1W", "1M", "3M"],
-        selected: selected,
-        onValueChange: onValueChange,
-    };
-
-    const topSeriesMax = _getSeriesMax(data, topSeriesKey);
-    const botSeriesMax = _getSeriesMax(data, bottomSeriesKey);
-
-    const topChartPercent = topSeriesMax / (topSeriesMax + botSeriesMax);
-    const botChartPercent = 1 - topChartPercent;
-
-    const hMinusX = chartHeight - xAxisHeight;
-    const topChartHeight = Math.round(topChartPercent * hMinusX) + xAxisHeight;
-    const botChartHeight = Math.round(botChartPercent * hMinusX);
-
-    const chartProps = {
-        barCategoryGap: 7,
-        data: data,
-        width: chartWidth,
-        margin: { top: 0, right: 0, bottom: 0, left: 0 },
-    };
-    const tooltipProps = {
-        cursor: {
-            fill: "transparent",
-            fillOpacity: "0",
-            color: "#fff",
-        },
-        isAnimationActive: false,
-        animationDuration: 100,
-        wrapperStyle: {
-            backgroundColor: "#fff",
-            borderRadius: "2px",
-            borderWidth: 0,
-            padding: "10px",
-        },
-        content: <CustomTooltip
-            bottomSeriesKey={bottomSeriesKey}
-            topSeriesKey={topSeriesKey}
-            tooltipTopLabel={tooltipTopLabel}
-            tooltipBottomLabel={tooltipBottomLabel}
-        />,
-        offset: -55,
-    };
-
-    const heroStyles = { backgroundImage: bgImage ? `url("${bgImage}")` : null };
-
-    return (
-        <div data-id={dataId} className="hero-chart" style={heroStyles}>
-            {(greeting || greetingText) && <div className="hero-chart__greeting">{greeting || greetingText}</div>}
-            {!errorMessage &&
-                <div key="center-text" className="hero-chart__center-text">
-                    <div className="hero-chart__title">{title || titleText}</div>
-                    <div className="hero-chart__value">{value || totalValue}</div>
-                    <div className="hero-chart__subtitle">{subtitle || subtitleText}</div>
-                </div>
-            }
-            {!errorMessage && !loading && [
-                <div key="top-chart" className="hero-chart__top-chart">
-                    <BarChart
-                        {...chartProps}
-                        data-id={`${dataId}-top-chart`}
-                        height={topChartHeight}>
-                        {_renderXAxis(xAxisKey, data.length)}
-                        <Tooltip {...tooltipProps} position={{ y: -25 }}/>
-                        {_renderBars(topSeriesKey, "#fff")}
-                    </BarChart>
-                </div>,
-                <div key="bottom-chart" className="hero-chart__bottom-chart">
-                    <BarChart
-                        {...chartProps}
-                        data-id={`${dataId}-bottom-chart`}
-                        height={botChartHeight}>
-                        <Tooltip {...tooltipProps} position={{ y: botChartHeight }} />
-                        {_renderBars(bottomSeriesKey, "#ffa500")}
-                    </BarChart>
-                </div>
-            ]}
-            <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
-            {!errorMessage && loading &&
-                <PageSpinner className="hero-chart__loader" show>{loadingMessage}</PageSpinner>
-            }
-            {errorMessage &&
-                <div className="hero-chart__error">
-                    <div className="icon-cogs hero-chart__error-icon" />
-                    <div className="hero-chart__error-text">
-                        {errorMessage}
-                    </div>
-                </div>
-            }
-        </div>
-    );
-};
-
 const CustomTooltip = (props) => {
     /* istanbul ignore next  */
     const payload = props.payload[0] && props.payload[0].payload;
@@ -243,48 +73,252 @@ const CustomTooltip = (props) => {
     if (!payload) { return false; }
 
     /* istanbul ignore next  */
+    if (!props.selected) { return false; }
+
+    /* istanbul ignore next  */
     return (
-        <div className="hero-tooltip">
-            <div>
-                {payload[props.topSeriesKey].toLocaleString("en")} {props.tooltipTopLabel}
-            </div>
-            <div className="hero-tooltip__bottom-value">
-                {payload[props.bottomSeriesKey].toLocaleString("en")} {props.tooltipBottomLabel}
+        <div style={{
+            backgroundColor: "#fff",
+            borderRadius: "2px",
+            borderWidth: 0,
+            padding: "10px",
+        }}>
+            <div className="hero-tooltip">
+                <div>
+                    {payload[props.topSeriesKey].toLocaleString("en")} {props.tooltipTopLabel}
+                </div>
+                <div className="hero-tooltip__bottom-value">
+                    {payload[props.bottomSeriesKey].toLocaleString("en")} {props.tooltipBottomLabel}
+                </div>
             </div>
         </div>
     );
 };
 
-HeroChart.propTypes = {
-    "data-id": PropTypes.string,
-    bgImage: PropTypes.string,
-    bottomSeriesKey: PropTypes.string,
-    chartWidth: PropTypes.number,
-    chartHeight: PropTypes.number,
-    chartStatistic: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]),
-    data: PropTypes.array,
-    errorMessage: PropTypes.string,
-    loading: PropTypes.bool,
-    loadingMessage: PropTypes.string,
-    rockerButtonProps: PropTypes.object,
-    selected: PropTypes.string,
-    strings: PropTypes.object,
-    topSeriesKey: PropTypes.string,
-    xAxisKey: PropTypes.string,
-};
+export default class HeroChart extends Component {
+    state = {
+        barSelected: null,
+    };
 
-HeroChart.defaultProps = {
-    "data-id": "hero-chart",
-    bgImage: "",
-    chartWidth: 800,
-    chartHeight: 200,
-    loading: false,
-    onValueChange: _.noop,
-    rockerButtonProps: {},
-    xAxisKey: "id",
-};
+    _handleBarMouseOver = (key, index) => () => {
+        this.setState({ barSelected: `${key}-${index}` });
+    }
 
-module.exports = HeroChart;
+    _handleBarMouseOut = () => {
+        this.setState({ barSelected: null });
+    }
+
+    _renderBars = (data, key, color) => {
+        return (
+            <Bar
+                key={"bar-" + key}
+                dataKey={key}
+                name={key}
+                isAnimationActive={false}
+                minPointSize={1}
+            >
+                {data.map((entry, index) => (
+                    <Cell
+                        onMouseOver={this._handleBarMouseOver(key, index)}
+                        onMouseOut={this._handleBarMouseOut}
+                        cursor="pointer"
+                        fill={color}
+                        style={{
+                            opacity: this.state.barSelected === `${key}-${index}` ? 1 : 0.6
+                        }}
+                        key={`cell-${index}`}
+                    />
+                ))}
+            </Bar>
+        );
+    };
+
+    _renderXAxis = (xAxisKey, numDataPoints) => {
+
+        // resize the font based on the number of datapoints (until we can find a more elegant fix)
+        let fontSize = 15;
+
+        if (numDataPoints > 25) {
+            fontSize = 11;
+        } else if (numDataPoints > 23) {
+            fontSize = 12;
+        } else if (numDataPoints > 21) {
+            fontSize = 13;
+        } else if (numDataPoints > 18) {
+            fontSize = 14;
+        }
+
+        return (
+            <XAxis
+                axisLine={false}
+                dataKey={xAxisKey}
+                domain={["dataMin", "dataMax"]}
+                dy={4}
+                stroke={"rgba(255, 255, 255, 0.9)"}
+                tick={{ fontSize: fontSize }}
+                tickLine={false}
+                height={xAxisHeight}
+                interval={0}
+            />
+        );
+    };
+
+    _getSeriesMax = (data, series) => {
+        return _.max(data, function (item) { return item[series]; })[series];
+    };
+
+    render() {
+        const {
+            "data-id": dataId,
+            bgImage,
+            bottomSeriesKey,
+            data,
+            chartHeight,
+            chartWidth,
+            errorMessage,
+            greeting,
+            greetingText,
+            loading,
+            loadingMessage,
+            onValueChange,
+            rockerButtonProps,
+            selected,
+            subtitle,
+            subtitleText,
+            title,
+            titleText,
+            tooltipBottomLabel,
+            tooltipTopLabel,
+            topSeriesKey,
+            totalValue,
+            value,
+            xAxisKey,
+        } = this.props;
+
+        const rockerButtonDefaults = {
+            "data-id": `${dataId}-range-selector`,
+            className: "rocker-button--chart-rocker hero-chart__rocker",
+            stateless: false,
+            labels: ["1D", "1W", "1M", "3M"],
+            selected: selected,
+            onValueChange: onValueChange,
+        };
+
+        const topSeriesMax = this._getSeriesMax(data, topSeriesKey);
+        const botSeriesMax = this._getSeriesMax(data, bottomSeriesKey);
+
+        const topChartPercent = topSeriesMax / (topSeriesMax + botSeriesMax);
+        const botChartPercent = 1 - topChartPercent;
+
+        const hMinusX = chartHeight - xAxisHeight;
+        const topChartHeight = Math.round(topChartPercent * hMinusX) + xAxisHeight;
+        const botChartHeight = Math.round(botChartPercent * hMinusX);
+
+        const chartProps = {
+            barCategoryGap: 7,
+            data: data,
+            width: chartWidth,
+            margin: { top: 0, right: 0, bottom: 0, left: 0 },
+        };
+        const tooltipProps = {
+            cursor: {
+                fill: "transparent",
+                fillOpacity: "0",
+                color: "#fff",
+            },
+            isAnimationActive: false,
+            animationDuration: 100,
+            content: <CustomTooltip
+                bottomSeriesKey={bottomSeriesKey}
+                topSeriesKey={topSeriesKey}
+                tooltipTopLabel={tooltipTopLabel}
+                tooltipBottomLabel={tooltipBottomLabel}
+            />,
+            offset: -55,
+        };
+
+        const heroStyles = { backgroundImage: bgImage ? `url("${bgImage}")` : null };
+
+        return (
+            <div data-id={dataId} className="hero-chart" style={heroStyles}>
+                {(greeting || greetingText) && <div className="hero-chart__greeting">{greeting || greetingText}</div>}
+                {!errorMessage &&
+                    <div key="center-text" className="hero-chart__center-text">
+                        <div className="hero-chart__title">{title || titleText}</div>
+                        <div className="hero-chart__value">{value || totalValue}</div>
+                        <div className="hero-chart__subtitle">{subtitle || subtitleText}</div>
+                    </div>
+                }
+                {!errorMessage && !loading && [
+                    <div key="top-chart" className="hero-chart__top-chart">
+                        <BarChart
+                            {...chartProps}
+                            data-id={`${dataId}-top-chart`}
+                            height={topChartHeight}>
+                            {this._renderXAxis(xAxisKey, data.length)}
+                            <Tooltip {...tooltipProps} position={{ y: -25 }} selected={this.state.barSelected} />
+                            {this._renderBars(data, topSeriesKey, "#fff")}
+                        </BarChart>
+                    </div>,
+                    <div key="bottom-chart" className="hero-chart__bottom-chart">
+                        <BarChart
+                            {...chartProps}
+                            data-id={`${dataId}-bottom-chart`}
+                            height={botChartHeight}>
+                            <Tooltip
+                                {...tooltipProps}
+                                position={{ y: botChartHeight }}
+                                selected={this.state.barSelected}
+                            />
+                            {this._renderBars(data, bottomSeriesKey, "#ffa500")}
+                        </BarChart>
+                    </div>
+                ]}
+                <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
+                {!errorMessage && loading &&
+                    <PageSpinner className="hero-chart__loader" show>{loadingMessage}</PageSpinner>
+                }
+                {errorMessage &&
+                    <div className="hero-chart__error">
+                        <div className="icon-cogs hero-chart__error-icon" />
+                        <div className="hero-chart__error-text">
+                            {errorMessage}
+                        </div>
+                    </div>
+                }
+            </div>
+        );
+    }
+
+    static propTypes = {
+        "data-id": PropTypes.string,
+        bgImage: PropTypes.string,
+        bottomSeriesKey: PropTypes.string,
+        chartWidth: PropTypes.number,
+        chartHeight: PropTypes.number,
+        chartStatistic: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        data: PropTypes.array,
+        errorMessage: PropTypes.string,
+        loading: PropTypes.bool,
+        loadingMessage: PropTypes.string,
+        rockerButtonProps: PropTypes.object,
+        selected: PropTypes.string,
+        strings: PropTypes.object,
+        topSeriesKey: PropTypes.string,
+        xAxisKey: PropTypes.string,
+    };
+
+    static defaultProps = {
+        "data-id": "hero-chart",
+        bgImage: "",
+        chartWidth: 800,
+        chartHeight: 200,
+        loading: false,
+        onValueChange: _.noop,
+        rockerButtonProps: {},
+        xAxisKey: "id",
+    };
+}
