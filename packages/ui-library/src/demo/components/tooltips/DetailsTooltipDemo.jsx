@@ -196,10 +196,12 @@ class DetailsTooltipDemo extends React.Component {
                     flags={flags}
                     stateless={true}
                     label="With alert styling"
-                    positionClassName="alert"
+                    type="alert"
+                    positionClassName="" // this is to override the default positionClassName
                     title="Title won't display"
                     open={this.state.open5}
-                    onToggle={this._handleToggle(5)}>
+                    onToggle={this._handleToggle(5)}
+                >
                     <div className="title">
                         Alert Title
                     </div>
@@ -260,7 +262,7 @@ class DetailsTooltipDemo extends React.Component {
                     flags={flags}
                     stateless={true}
                     label="Alert styling with three buttons"
-                    positionClassName="alert"
+                    type="alert"
                     title="Tooltip Title"
                     open={this.state.open7}
                     onToggle={this._handleToggle(7)}>

@@ -574,4 +574,25 @@ describe("DetailsTooltip", function () {
 
         expect(console.warn).toHaveBeenCalled();
     });
+
+    it("shows alert style when type is 'alert'", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip title="Title" label="Action" open={true} type="alert">
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        //make sure root div got position CSS classes
+        expect(TestUtils.findRenderedDOMNodeWithClass(component, "alert")).toBeTruthy();
+    });
+
+    it("fires cannonball warning when positionClassName is set to alert", () => {
+        console.warn = jest.fn();
+        shallow(
+            <DetailsTooltip positionClassName="alert" />
+        );
+
+        expect(console.warn).toHaveBeenCalled();
+    });
+
 });

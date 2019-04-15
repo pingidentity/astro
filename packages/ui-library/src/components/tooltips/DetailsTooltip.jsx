@@ -67,6 +67,8 @@ import ButtonGroup from "../layout/ButtonGroup.jsx";
  *     Callback to be triggered when escape key is clicked. Closes DetailsTooltip.
  * @param {boolean} [showClose=true]
  *     Show close control.
+ * @param {("basic" | "alert")} [type="basic"]
+ *     Determines basic appearance
  *
  * @example
  *     <DetailsTooltip position={DetailsTooltip.tooltipPositions.BOTTOM_LEFT} labelClassName="resend-btn"
@@ -87,6 +89,12 @@ const tooltipPlacements = {
     BOTTOM_RIGHT: "bottom right",
 };
 
+const popupTypes = {
+    BASIC: "basic",
+    DIALOG: "dialog",
+    ALERT: "alert"
+};
+
 class DetailsTooltipStateless extends React.Component {
     static displayName = "DetailsTooltipStateless";
 
@@ -100,6 +108,7 @@ class DetailsTooltipStateless extends React.Component {
         placement: PropTypes.oneOf(Object.values(tooltipPlacements)),
         label: PropTypes.node,
         title: PropTypes.string,
+        type: PropTypes.oneOf(Object.values(popupTypes)),
         disabled: PropTypes.bool,
         hideOnClick: PropTypes.bool,
         open: PropTypes.bool,
@@ -115,14 +124,18 @@ class DetailsTooltipStateless extends React.Component {
 
     static defaultProps = {
         "data-id": "details-tooltip",
+        positionClassName: "top", // revisit this after v4
         titleClassName: "details-title",
         onToggle: _.noop,
         open: false,
         disabled: false,
         showClose: true,
         hideOnClick: false,
+        type: popupTypes.BASIC,
         flags: [],
     };
+
+    static popupTypes = popupTypes;
 
     /*
      * Call the props toggle() function .
@@ -233,7 +246,10 @@ class DetailsTooltipStateless extends React.Component {
         const contentClassName = classnames(
             "details-content",
             this.props.contentClassName,
-            this._getPositionClassName()
+            this._getPositionClassName(),
+            {
+                alert: this.props.type === popupTypes.ALERT,
+            },
         );
 
         const positionList = (this._getPositionClassName() + " " + this.props.className).split(" ");
@@ -375,6 +391,9 @@ class DetailsTooltipStateless extends React.Component {
             containerCss,
             this.props.className,
             this._getPositionClassName(),
+            {
+                alert: this.props.type === popupTypes.ALERT,
+            },
         );
 
         return (
@@ -467,6 +486,12 @@ class DetailsTooltip extends React.Component {
                 message: `DetailsTooltip will not be positioned using classNames. ` +
                 `Instead, the 'placement' prop will accept "top", "bottom", top left", ` +
                 `"top right", "bottom left", and "bottom right".`
+            });
+        }
+        if (this.props.positionClassName && this.props.positionClassName.split(/\s/).includes("alert")) {
+            cannonballChangeWarning({
+                message: `The alert style of DetailsTooltip will not be activated by ` +
+                `setting 'type' to 'alert', not with 'positionClassName'.`
             });
         }
 

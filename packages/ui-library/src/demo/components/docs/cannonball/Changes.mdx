@@ -88,6 +88,10 @@
 * **V3 Behavior:** `positionClassName` is added to classes of component. CSS does the positioning.
 * **Recommendation:** Use `placement` instead of `positionClassName`.
 
+* **V4 Behavior:** The alert style of the DetailsTooltip will be triggered only by setting `type` to "alert".
+* **V3 Behavior:** Adding "alert" to `positionClassName` triggers alert styling.
+* **Recommendation:** Use `type` = "alert" instead of `positionClassName`.
+
 ### RockerButton
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the index state will be controlled by the component.
