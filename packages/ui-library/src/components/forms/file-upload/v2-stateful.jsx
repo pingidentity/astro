@@ -1,10 +1,10 @@
-var React = require("react"),
-    Constants = require("./v2-constants.js"),
-    StatelessFileUpload = require("./v2-stateless"),
-    Utils = require("../../../util/Utils"),
-    fixOrientation = require("fix-orientation"),
-    readExif = require("exif-js"),
-    _ = require("underscore");
+import React, { Component } from "react";
+import Constants from "./v2-constants.js";
+import StatelessFileUpload from "./v2-stateless";
+import Utils from "../../../util/Utils";
+import fixOrientation from "fix-orientation";
+import readExif from "exif-js";
+import _ from "underscore";
 
 /**
  * @name FileUploadStateful
@@ -12,16 +12,20 @@ var React = require("react"),
  * @desc This is a wrapper around the stateful (stateless=false) FileUpload to give the user image preview
  *    and error messages without having to implement that logic.
  */
-module.exports = class extends React.Component {
+export default class FileUpload extends Component {
     static displayName = "FileUploadStateful";
 
     static defaultProps = {
         onPreviewReady: _.noop
     };
 
+    _useTrueDefault = () => this.props.flags.includes("true-default")
+
     state = {
         errorMessage: "",
-        thumbnailSrc: this.props.defaultImage || this.props.thumbnailSrc,
+        thumbnailSrc: this._useTrueDefault()
+            ? this.props.thumbnailSrc
+            : this.props.defaultImage || this.props.thumbnailSrc,
         labelAcceptedFileTypes: this.props.labelAcceptedFileTypes || this.props.accept.split("image/").join("")
     };
 
@@ -155,4 +159,4 @@ module.exports = class extends React.Component {
 
         return <StatelessFileUpload {...props} />;
     }
-};
+}

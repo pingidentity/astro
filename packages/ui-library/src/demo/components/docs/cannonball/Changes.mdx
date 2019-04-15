@@ -85,7 +85,6 @@
 * **V3 Behavior:** The `stateless` prop decides whether or not the open state will be controlled by the component.
 * **Recommendation:** Set the "p-stateful" flag.
 
-
 ### RockerButton
 
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
@@ -97,3 +96,8 @@
 * **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
 * **Recommendation:** Set the 'p-stateful' flag.
 
+### FileUpload
+
+* **V4 Behavior:** When provided, the `defaultImage` prop will show an image with opacity when no `thumbnailSrc` prop is provided.
+* **V3 Behavior:** The `defaultImage` prop worked roughly the same as `thumbnailSrc` and took precedence over it, but only in the stateful version of the component. There was no additional styling.
+* **Recommendation:** Set the "true-default" flag.

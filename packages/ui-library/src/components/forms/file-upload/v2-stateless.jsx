@@ -1,17 +1,18 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    classnames = require("classnames"),
-    FormLabel = require("../FormLabel"),
-    FormError = require("../FormError"),
-    Button = require("../../buttons/Button");
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import classnames from "classnames";
+import FormLabel from "../FormLabel";
+import FormError from "../FormError";
+import Button from "../../buttons/Button";
+import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 /**
  * @name FileUploadStateless
  * @memberof FileUpload
  * @desc This is a wrapper around the stateless (stateless=true) FileUpload.
  */
-module.exports = class extends React.Component {
+export default class extends Component {
     static displayName = "FileUploadStateless";
 
     static propTypes = {
@@ -31,14 +32,31 @@ module.exports = class extends React.Component {
         showThumbnail: PropTypes.bool,
         showRemoveButton: PropTypes.bool,
         //properties
+        defaultImage: PropTypes.string,
         errorMessage: PropTypes.string,
         filesAcceptedMessage: PropTypes.string,
         fileName: PropTypes.string,
         name: PropTypes.string,
         accept: PropTypes.string,
         "data-id": PropTypes.string,
-        thumbnailSrc: PropTypes.string
+        thumbnailSrc: PropTypes.string,
+
+        flags: PropTypes.arrayOf(PropTypes.string)
     };
+
+    _useTrueDefault = () => this.props.flags.includes("true-default")
+
+    componentDidMount() {
+        if (!this._useTrueDefault() && this.props.defaultImage) {
+            cannonballChangeWarning({
+                message: "The \"defaultImage\" parameter will no longer " +
+                    "be the same as passing in thumbnailSrc. Instead, " +
+                    "defaultImage will show an image when there is no " +
+                    "current thumbnail, either due to not passing the prop " +
+                    "or due to removing the image in the stateful version."
+            });
+        }
+    }
 
     /*
      * Reset the input to the original state
@@ -48,13 +66,20 @@ module.exports = class extends React.Component {
     };
 
     render() {
-        var fileSelected = !!(this.props.thumbnailSrc || this.props.fileName);
-        var containerClass = classnames(this.props.className, "input-file-upload", {
+        const fileSelected = !!(this.props.thumbnailSrc || this.props.fileName);
+        const containerClass = classnames(this.props.className, "input-file-upload", {
             "image-upload": this.props.showThumbnail,
             "file-selected": fileSelected,
             disabled: this.props.disabled,
             "form-error": !!this.props.errorMessage
         });
+
+        const {
+            defaultImage,
+            thumbnailSrc
+        } = this.props;
+
+        const useDefault = this._useTrueDefault() && defaultImage && !thumbnailSrc;
 
         return (
             <div className={containerClass} data-id={this.props["data-id"]}>
@@ -62,8 +87,9 @@ module.exports = class extends React.Component {
                     className={classnames({ "form-error": this.props.errorMessage }) }
                     value={this.props.labelText || this.props.label}>
                     <ImagePreview
+                        isDefault={useDefault}
                         show={this.props.showThumbnail}
-                        src={this.props.thumbnailSrc}
+                        src={useDefault ? defaultImage : thumbnailSrc}
                     />
                     <input
                         disabled={this.props.disabled}
@@ -114,57 +140,65 @@ module.exports = class extends React.Component {
             </div>
         );
     }
-};
-
-class ImagePreview extends React.Component {
-    render() {
-        if (!this.props.show) { return null; }
-
-        return (
-            <div>
-                <span className="image-icon"></span>
-                <span className="input-image-thumb">
-                    <img src={this.props.src} ref="imageThumb" data-id="imageThumb" />
-                </span>
-            </div>);
-    }
 }
 
-class FileRestrictions extends React.Component {
-    render() {
-        if (!this.props.show) { return null; }
-
-        return (
-            <span className="file-size">
-                <span className="max-size" data-id={this.props["data-id"] + "-max-size"}>
-                    {this.props.labelMaxFileSize}
-                </span>
-                <span className="accepted-types" data-id={this.props["data-id"] + "-accepted-types"}>
-                    {this.props.labelAcceptedFileTypes}
-                </span>
-            </span>);
-    }
+function ImagePreview({
+    isDefault,
+    src,
+    show,
+}) {
+    return show ? (
+        <div>
+            {!isDefault && <span className="image-icon"></span>}
+            <span
+                className={classnames(
+                    "input-image-thumb",
+                    isDefault ? "input-image-thumb--default" : ""
+                )}>
+                <img src={src} data-id="imageThumb" alt="Thumbnail" />
+            </span>
+        </div>
+    ) : null;
 }
 
-class AcceptMessage extends React.Component {
-    render() {
-        if (!this.props.value) { return null; }
-
-        return (
-            <div className="image-types" data-id={this.props["data-id"]}>
-                {this.props.value}
-            </div>);
-    }
+function FileRestrictions({
+    "data-id": dataId,
+    labelAcceptedFileTypes,
+    labelMaxFileSize,
+    show
+}) {
+    return show ? (
+        <span className="file-size">
+            <span className="max-size" data-id={dataId + "-max-size"}>
+                {labelMaxFileSize}
+            </span>
+            <span className="accepted-types" data-id={dataId + "-accepted-types"}>
+                {labelAcceptedFileTypes}
+            </span>
+        </span>
+    ) : null;
 }
 
-class Filename extends React.Component {
-    render() {
-        if (!this.props.show) { return null; }
+function AcceptMessage({
+    "data-id": dataId,
+    value
+}) {
+    return value ? (
+        <div className="image-types" data-id={dataId}>
+            {value}
+        </div>
+    ) : null;
+}
 
-        return (
-            <span className="file-name" data-id={this.props["data-id"]}>
-                <span className="icon-file"></span>
-                {this.props.value}
-            </span>);
-    }
+function Filename({
+    "data-id": dataId,
+    show,
+    value
+}) {
+    return show ? (
+        <span className="file-name" data-id={dataId}>
+            <span className="icon-file"></span>
+            {value}
+        </span>
+    ) : null;
 }

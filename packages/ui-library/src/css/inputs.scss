@@ -1129,8 +1129,8 @@ input[type=file] {
         }
         .image-icon {
             display: block;
-            width: 67px;
-            height: 67px;
+            width: $img-width;
+            height: $img-width;
             border: 1px solid $color-stratus;
             padding: 0;
             position: relative;
@@ -1138,6 +1138,8 @@ input[type=file] {
 
             @include border-radius(2px);
 
+            // This should probably be refactored to not rely on absolute positioning,
+            // but leaving it in place because of impending redesign.
             &:before {
                 display: block;
                 position: absolute;
@@ -1146,20 +1148,20 @@ input[type=file] {
                 font-family: $icon-font;
                 text-transform: none;
                 content: '\69';
-                font-size: 60px;
-                height: 67px;
+                font-size: 85px;
+                height: $img-width;
                 line-height: 1.3em;
             }
             &:after {
                 line-height: 1em;
                 position: absolute;
-                width: 15px;
+                width: 22px;
                 font-family: $icon-font;
                 text-transform: none;
                 right: 5px;
                 bottom: 5px;
                 content: '*';
-                font-size: 15px;
+                font-size: 22px;
                 padding: 5px;
                 color: $color-slate;
                 background-color: $color-white;
@@ -1189,6 +1191,11 @@ input[type=file] {
                 width: $img-width;
                 border: 1px solid $color-timberwolf;
             }
+
+            &--default {
+                display: block;
+                opacity: 0.5;
+            }
         }
         button.inline.choose {
             display: none;
@@ -1196,7 +1203,7 @@ input[type=file] {
         .file-size {
             position: absolute;
             bottom: 4px;
-            left: $img-width - 1px;
+            left: $img-width + $spacing-sm;
             min-width: 300px;
             color: $color-stratus;
             line-height: 1em;

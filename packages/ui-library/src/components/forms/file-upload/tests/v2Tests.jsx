@@ -14,14 +14,14 @@ jest.setMock("exif-js", { getData: jest.fn() });
 jest.setMock("fix-orientation", jest.fn() );
 
 describe("FileUpload", function () {
-    var React = require("react"),
-        ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../../testutil/TestUtils"),
-        FileUpload = require("../index.js"),
-        CommonTests = require("./commonTests"),
-        Utils = require("../../../../util/Utils"),
-        _ = require("underscore");
+    const React = require("react");
+    const ReactDOM = require("react-dom");
+    const ReactTestUtils = require("react-dom/test-utils");
+    const TestUtils = require("../../../../testutil/TestUtils");
+    const FileUpload = require("../index.js");
+    const CommonTests = require("./commonTests");
+    const Utils = require("../../../../util/Utils");
+    const _ = require("underscore");
 
     //require these files so that jest will count them in coverage
     require("../v2-stateful");
@@ -194,4 +194,35 @@ describe("FileUpload", function () {
         }).toThrow(expectedError);
     });
 
+    it("true default: renders default image if no thumbnail is passed in", () => {
+        const component = getComponent({
+            defaultImage: "pictureofanuglydog.png",
+            flags: ["true-default"]
+        });
+
+        const defaultImage = TestUtils.findRenderedDOMNodeWithClass(component, "input-image-thumb--default");
+
+        expect(defaultImage).toBeTruthy();
+    });
+
+    it("true default: throws a warning when defaultImage is passed in without flag enabled", () => {
+        console.warn = jest.fn();
+
+        getComponent({
+            defaultImage: "stuff.png"
+        });
+
+        expect(console.warn).toHaveBeenCalled();
+    });
+
+    it("true default: does not throw a warning when defaultImage is passed in with flag enabled", () => {
+        console.warn = jest.fn();
+
+        getComponent({
+            defaultImage: "stuff.png",
+            flags: ["true-default"]
+        });
+
+        expect(console.warn).not.toHaveBeenCalled();
+    });
 });

@@ -133,7 +133,8 @@ class FileUpload extends React.Component {
         accept: Constants.Accept.IMAGE,
         showThumbnail: false,
         showRemoveButton: true,
-        disabled: false
+        disabled: false,
+        flags: []
     };
 
     constructor(props) {
