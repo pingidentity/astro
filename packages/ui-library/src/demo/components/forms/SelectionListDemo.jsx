@@ -189,7 +189,7 @@ class SelectionListDemo extends React.Component {
                 </p>
                 <DetailsTooltip
                     flags={flags}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     className="input-selection-list-tooltip"
                     label="Single Selection List"
                     showClose={false}
@@ -265,7 +265,7 @@ class SelectionListDemo extends React.Component {
                 </div>
                 <DetailsTooltip
                     flags={flags}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     className="input-selection-list-tooltip filter"
                     label="Multi Selection List"
                     showClose={false}
@@ -296,7 +296,7 @@ class SelectionListDemo extends React.Component {
                 </div>
                 <DetailsTooltip
                     flags={flags}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     className="input-selection-list-tooltip filter"
                     label={(
                         <SelectionFilterLabel

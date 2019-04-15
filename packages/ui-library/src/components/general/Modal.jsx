@@ -150,7 +150,7 @@ class Modal extends React.Component {
                     onConfirm={this.props.cancelTooltip.onConfirm}
                     onCancel={this.props.cancelTooltip.onCancel}
                     open={this.props.cancelTooltip.open}
-                    positionClassName="bottom left"
+                    placement="bottom left"
                     title={this.props.cancelTooltip.title}
                 />
             );

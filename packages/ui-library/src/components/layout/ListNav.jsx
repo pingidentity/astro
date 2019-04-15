@@ -26,7 +26,7 @@ import classnames from "classnames";
 *       onSelect={this._onSelect}
 *       listButton={
 *           <ConfirmToolTip
-*               positionClassName="bottom center"
+*               placement="bottom"
 *               labelClassName="my-css-class"
 *               label="+ Add Language"
 *               title="Add Language"

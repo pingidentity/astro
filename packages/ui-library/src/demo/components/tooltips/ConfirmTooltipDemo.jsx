@@ -35,7 +35,7 @@ class ConfirmTooltipDemo extends Component {
         return (
             <div>
                 <ConfirmTooltip
-                    positionClassName="bottom"
+                    placement="bottom right"
                     label="Confirm Cancel"
                     title="Confirm Cancel"
                     onToggle={this._handleToggle}
@@ -51,7 +51,7 @@ class ConfirmTooltipDemo extends Component {
                 </ConfirmTooltip>
                 <HR />
                 <ConfirmTooltip
-                    positionClassName="bottom"
+                    placement="bottom right"
                     label="Stateful Version"
                     title="Stateful Version"
                     buttonLabel="Confirm"

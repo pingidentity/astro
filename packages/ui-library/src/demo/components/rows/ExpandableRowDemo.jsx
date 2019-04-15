@@ -109,7 +109,7 @@ class ExpandableRowDemo extends React.Component {
                 flags={flags}
                 stateless={false}
                 label={(<button type="button" className="delete-btn" onClick={this._toggleCustomDelete}/>)}
-                positionClassName="top left"
+                placement="top left"
                 title="Tooltip Title"
                 open={this.state.showCustomDeleteConfirm}
                 onToggle={this._toggleCustomDelete}>

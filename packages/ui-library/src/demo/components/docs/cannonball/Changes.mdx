@@ -90,6 +90,10 @@
 * **V3 Behavior:** The `stateless` prop decides whether or not the open state will be controlled by the component.
 * **Recommendation:** Set the "p-stateful" flag.
 
+* **V4 Behavior:** `placement` prop accepts "top", "bottom", "top left", "top right", "bottom left", and "bottom right" to position.
+* **V3 Behavior:** `positionClassName` is added to classes of component. CSS does the positioning.
+* **Recommendation:** Use `placement` instead of `positionClassName`.
+
 ### RockerButton
 
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.

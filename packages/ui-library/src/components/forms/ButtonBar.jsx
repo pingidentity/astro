@@ -286,7 +286,7 @@ class ButtonBar extends React.Component {
             ? <CancelTooltip
                 data-id={this.props["data-id"]}
                 label={this._getCancelButtonMarkup()}
-                positionClassName="top left"
+                placement="top left"
                 flags={this.props.flags}
                 {...this.props.cancelTooltip}
             />
@@ -308,7 +308,7 @@ class ButtonBar extends React.Component {
                 data-id={this.props["data-id"] + "-save-tooltip"}
                 label={this._getSaveButtonMarkup()}
                 onConfirm={this._handleSave}
-                positionClassName="top left"
+                placement="top left"
                 flags={this.props.flags}
                 showClose={false}
                 {...props}

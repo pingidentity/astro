@@ -86,7 +86,7 @@ export default class ListNavDemo extends Component {
                 listButton={
                     <ConfirmToolTip
                         flags={["use-portal"]}
-                        positionClassName="bottom center"
+                        placement="bottom"
                         labelClassName="my-css-class"
                         label="+ Add Language"
                         title="Add Language"

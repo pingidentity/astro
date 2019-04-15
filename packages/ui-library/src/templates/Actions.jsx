@@ -249,7 +249,7 @@ class Actions extends React.Component {
                         onConfirm={this._popupConfirm}
                         open={this.state.popupOpen}
                         onToggle={this._togglePopup}
-                        positionClassName="bottom"
+                        placement="bottom right"
                         title="Tooltip Title"
                     >
                         Hi, this is a popover with a simple action.

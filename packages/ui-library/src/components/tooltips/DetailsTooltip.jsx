@@ -41,7 +41,8 @@ import ButtonGroup from "../layout/ButtonGroup.jsx";
  * @param {DetailsTooltip.positionStyles|string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
  *     DetailsTooltip.positionStyles enum and/or any extra css styling if needed.
- *
+ * @param {("top" | "bottom" | "top left" | "top right" | "bottom left" | "bottom right")} [placement]
+ *     How the tooltip is placed off of its trigger.
  * @param {node} [label]
  *     A string or JSX object that serves as the trigger label.
  * @param {string} [title]
@@ -68,7 +69,7 @@ import ButtonGroup from "../layout/ButtonGroup.jsx";
  *     Show close control.
  *
  * @example
- *     <DetailsTooltip positionClassName="resend-tooltip bottom left" labelClassName="resend-btn"
+ *     <DetailsTooltip position={DetailsTooltip.tooltipPositions.BOTTOM_LEFT} labelClassName="resend-btn"
  *          title={this.im("pingid.policies.deleterule.label")}
  *          label={this.im("pingid.policies.deleterule.title")}
  *          open={this.state.isInviteOpen} onToggle={this._handleToggle}
@@ -76,6 +77,15 @@ import ButtonGroup from "../layout/ButtonGroup.jsx";
  *           <p>what ever callout content is</p>
  *     </DetailsTooltip>
  **/
+
+const tooltipPlacements = {
+    TOP: "top",
+    BOTTOM: "bottom",
+    TOP_LEFT: "top left",
+    TOP_RIGHT: "top right",
+    BOTTOM_LEFT: "bottom left",
+    BOTTOM_RIGHT: "bottom right",
+};
 
 class DetailsTooltipStateless extends React.Component {
     static displayName = "DetailsTooltipStateless";
@@ -86,7 +96,8 @@ class DetailsTooltipStateless extends React.Component {
         contentClassName: PropTypes.string,
         titleClassName: PropTypes.string,
         labelClassname: PropTypes.string,
-        positionClassname: PropTypes.string,
+        positionClassName: PropTypes.string,
+        placement: PropTypes.oneOf(Object.values(tooltipPlacements)),
         label: PropTypes.node,
         title: PropTypes.string,
         disabled: PropTypes.bool,
@@ -104,7 +115,6 @@ class DetailsTooltipStateless extends React.Component {
 
     static defaultProps = {
         "data-id": "details-tooltip",
-        positionClassName: "top",
         titleClassName: "details-title",
         onToggle: _.noop,
         open: false,
@@ -223,10 +233,10 @@ class DetailsTooltipStateless extends React.Component {
         const contentClassName = classnames(
             "details-content",
             this.props.contentClassName,
-            this.props.positionClassName
+            this._getPositionClassName()
         );
 
-        const positionList = (this.props.positionClassName + " " + this.props.className).split(" ");
+        const positionList = (this._getPositionClassName() + " " + this.props.className).split(" ");
 
         const getHorizontalPlacement = vertical => {
             if (_.find(positionList, v => v === "left")) {
@@ -239,6 +249,9 @@ class DetailsTooltipStateless extends React.Component {
         };
 
         const getPlacement = () => {
+            if (this.props.placement) {
+                return this.props.placement.replace(/left/, "end").replace(/right/, "start").replace(/\s/, "-");
+            }
             if (_.find(positionList, v => v === "top")) {
                 return getHorizontalPlacement("top");
             } else {
@@ -335,6 +348,20 @@ class DetailsTooltipStateless extends React.Component {
 
     _getTrigger = () => this.trigger;
 
+    _getPositionClassName = () => {
+        // this is sort of the reverse of getPlacement, and should be eliminated in v4
+        if (this.props.placement) {
+            const wordList = this.props.placement.split(/\s/);
+            if (wordList.length === 1) {
+                return `${wordList[0]} center`;
+            } if (wordList[1] === "right") {
+                return wordList[0];
+            }
+            return this.props.placement;
+        }
+        return this.props.positionClassName || "top";
+    }
+
     render() {
         var containerCss = {
                 show: this.props.open
@@ -347,7 +374,7 @@ class DetailsTooltipStateless extends React.Component {
             "details-tooltip",
             containerCss,
             this.props.className,
-            this.props.positionClassName
+            this._getPositionClassName(),
         );
 
         return (
@@ -423,12 +450,22 @@ class DetailsTooltip extends React.Component {
         flags: [],
     };
 
+    static tooltipPlacements = tooltipPlacements;
+
     componentDidMount() {
         if (!this.props.flags.includes("p-stateful")) {
             cannonballChangeWarning({
                 message: `The 'open' prop will no longer serve as an initial state. ` +
                 `If it is present, it will control the current value of the component. ` +
                 `Set the 'p-stateful' flag to switch to this behavior now.`,
+            });
+        }
+
+        if (this.props.positionClassName) {
+            cannonballChangeWarning({
+                message: `DetailsTooltip will not be positioned using classNames. ` +
+                `Instead, the 'placement' prop will accept "top", "bottom", top left", ` +
+                `"top right", "bottom left", and "bottom right".`
             });
         }
 

@@ -522,6 +522,30 @@ describe("DetailsTooltip", function () {
         expect(positioningProp("bottom center")).toBe("bottom");
     });
 
+    it("is rendering with the right x-placement attribute based on the placement prop", function() {
+        const positionedComponent = placement => ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip
+                stateless={true}
+                title="Title"
+                label="Action"
+                open={true}
+                placement={placement}
+                flags={[ "use-portal" ]}
+            >
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        const positioningProp = position => positionedComponent(position).refs.tooltip.popperContainer.props.placement;
+
+        expect(positioningProp("top right")).toBe("top-start");
+        expect(positioningProp("bottom right")).toBe("bottom-start");
+        expect(positioningProp("top left")).toBe("top-end");
+        expect(positioningProp("bottom left")).toBe("bottom-end");
+        expect(positioningProp("top")).toBe("top");
+        expect(positioningProp("bottom")).toBe("bottom");
+    });
+
     it("fires progressively stateful warning when p-stateful flag is not passed in", () => {
         console.warn = jest.fn();
         shallow(
@@ -540,5 +564,14 @@ describe("DetailsTooltip", function () {
         );
 
         expect(console.warn).toHaveBeenCalledTimes(0);
+    });
+
+    it("fires cannonball warning when using positionClassName prop", function() {
+        console.warn = jest.fn();
+        shallow(
+            <DetailsTooltip positionClassName="anything" />
+        );
+
+        expect(console.warn).toHaveBeenCalled();
     });
 });

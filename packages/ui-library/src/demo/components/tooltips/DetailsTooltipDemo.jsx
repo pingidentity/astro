@@ -91,7 +91,7 @@ class DetailsTooltipDemo extends React.Component {
                 <DetailsTooltip
                     flags={flags}
                     stateless={true}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     label="With a label (label is passed into component)"
                     title="Tooltip Title"
                     open={this.state.open1}
@@ -120,7 +120,7 @@ class DetailsTooltipDemo extends React.Component {
                 <DetailsTooltip
                     flags={flags}
                     stateless={true}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open2}
                     onToggle={this._handleToggle2}>
@@ -149,7 +149,7 @@ class DetailsTooltipDemo extends React.Component {
                     flags={flags}
                     stateless={true}
                     label={(<button type="button" className="delete-btn">Label as button</button>)}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open3}
                     onToggle={this._handleToggle3}>
@@ -176,7 +176,7 @@ class DetailsTooltipDemo extends React.Component {
                 <DetailsTooltip
                     flags={flags}
                     stateless={true}
-                    positionClassName="bottom"
+                    placement="bottom right"
                     label="Open by default"
                     title="Tooltip Title"
                     open={this.state.open4}
@@ -234,7 +234,7 @@ class DetailsTooltipDemo extends React.Component {
                 <DetailsTooltip
                     flags={flags}
                     stateless={true}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     label="Three Buttons"
                     title="Three Buttons"
                     open={this.state.open6}
@@ -303,7 +303,7 @@ class DetailsTooltipDemo extends React.Component {
                     flags={flags}
                     stateless={true}
                     label="Test passing buttons"
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open8}
                     onToggle={this._handleToggle8}
@@ -322,7 +322,7 @@ class DetailsTooltipDemo extends React.Component {
                 <br/>
                 <DetailsTooltip
                     flags={flags}
-                    positionClassName="bottom right"
+                    placement="bottom right"
                     labelClassName="my-css-class"
                     label="Stateful tooltip"
                     title="Tooltip Title"
@@ -338,7 +338,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <DetailsTooltip
                     flags={flags}
-                    positionClassName="bottom left"
+                    placement="bottom left"
                     labelClassName="my-css-class"
                     label="Hang on the left"
                     title="Tooltip Title"
@@ -353,7 +353,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <DetailsTooltip
                     flags={flags}
-                    positionClassName="bottom center"
+                    placement="bottom"
                     labelClassName="my-css-class"
                     label="Hang center"
                     title="Tooltip Title"

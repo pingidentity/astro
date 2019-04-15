@@ -30,6 +30,8 @@ import ButtonGroup from "../layout/ButtonGroup";
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
  *     CancelTooltip.positionStyles enum and/or any extra css styling if needed.
+ * @param {("top" | "bottom" | "top left" | "top right" | "bottom left" | "bottom right")} [placement]
+ *     How the tooltip is placed off of its trigger.
  * @param {string} title
  *     The title of the details tooltip.
  *
@@ -63,6 +65,7 @@ class CancelTooltip extends React.Component {
         onConfirm: PropTypes.func.isRequired,
         onCancel: PropTypes.func.isRequired,
         positionClassName: PropTypes.string,
+        placement: PropTypes.oneOf(DetailsTooltip.tooltipPlacements),
         flags: PropTypes.arrayOf(PropTypes.string),
     };
 
@@ -75,6 +78,7 @@ class CancelTooltip extends React.Component {
                 label={this.props.label}
                 open={this.props.open}
                 positionClassName={this.props.positionClassName}
+                placement={this.props.placement}
                 stateless={true}
                 showClose={false}
                 title={this.props.title}>

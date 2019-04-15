@@ -266,7 +266,7 @@ export default class ColumnSelectorDemo extends Component {
                             onConfirm={clickAndCloseTooltip}
                             onToggle={this._toggleTooltip}
                             open={this.state.tooltipOpen}
-                            positionClassName="top left"
+                            placement="top left"
                             title="Inherit future populations"
                         >
                             You have selected an environment, including all

@@ -324,7 +324,7 @@ class MultiDragDemo extends React.Component {
                     <RowButton {...props} />
                 }
                 onConfirm={onClick}
-                positionClassName="bottom"
+                placement="bottom right"
                 title="Remove entry"
             >
                 Are you sure you want to remove this entry?

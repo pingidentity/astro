@@ -19,6 +19,8 @@ import ButtonGroup from "../layout/ButtonGroup";
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning.
  *      When using multiple positions like "top left" or "bottom right" do not use dashes as it will not work.
+ * @param {("top" | "bottom" | "top left" | "top right" | "bottom left" | "bottom right")} [placement]
+ *     How the tooltip is placed off of its trigger.
  * @param {string} title
  *     The title of the ConfirmTooltip tooltip.
  * @param {string} type
@@ -42,17 +44,9 @@ import ButtonGroup from "../layout/ButtonGroup";
  * @param {ConfirmTooltip~onToggle}
  *      the callback to open and close the modal.
  *
- * @example positionClassName does not use dashes for positioning.
- * "bottom"
- * "top"
- * "top right"
- * "top left"
- * "bottom right"
- * "bottom left"
- *
  * @example
  *     <ConfirmTooltip
- *          positionClassName="bottom right"
+ *          placement="bottom right"
  *          label="Confirm Delete Cancel"
  *          title="Confirm Delete Cancel"
  *          onToggle={this._handleToggle}
@@ -82,6 +76,7 @@ class ConfirmTooltipBase extends Component {
         buttonType: PropTypes.string,
         disableSave: PropTypes.bool,
         closeOnConfirm: PropTypes.bool,
+        placement: PropTypes.oneOf(Object.values(DetailsTooltip.tooltipPlacements)),
         flags: PropTypes.arrayOf(PropTypes.string),
     }
 

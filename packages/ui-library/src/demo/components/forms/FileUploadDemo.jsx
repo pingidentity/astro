@@ -158,7 +158,7 @@ export default class FileUploadDemo extends React.Component {
                         File Input in a Tooltip
                     </label>
                     <DetailsTooltip
-                        positionClassName="top right"
+                        placement={DetailsTooltip.tooltipPlacements.TOP_RIGHT}
                         title="File Input in a Details Tooltip"
                         open={this.state.tooltipOpen}
                         onToggle={this._toggleTooltip}

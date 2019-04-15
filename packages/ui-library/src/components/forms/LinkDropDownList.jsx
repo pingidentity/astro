@@ -118,7 +118,7 @@ class LinkDropDownListStateless extends React.Component {
         return (
             <DetailsTooltip
                 data-id={this.props["data-id"]}
-                positionClassName="bottom right"
+                placement={DetailsTooltip.tooltipPlacements.BOTTOM_RIGHT}
                 contentClassName="link-dropdown-list"
                 className={classnames(this.props.className, "link-dropdown-list")}
                 label={this._renderLabel()}

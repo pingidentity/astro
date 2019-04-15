@@ -724,7 +724,7 @@ class ConfirmDeleteDialog extends React.Component {
     render() {
         return (
             <DetailsTooltip
-                positionClassName={classnames("left", this.props.confirmDeletePosition)}
+                placement={`${this.props.confirmDeletePosition} left`}
                 data-id="delete-confirm-dialog"
                 title={this.props.confirmDeleteTitle}
                 label={this.props.trigger}
