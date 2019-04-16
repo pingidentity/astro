@@ -1,23 +1,23 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Step");
-jest.dontMock("../Wizard");
+jest.dontMock("../PageWizard");
 jest.dontMock("../Menu");
-jest.dontMock("../../general/messages/");
-jest.dontMock("../../forms/ButtonBar");
-jest.dontMock("../../general/EllipsisLoaderButton");
-jest.dontMock("../../general/PageSpinner");
+jest.dontMock("../../../general/messages/");
+jest.dontMock("../../../forms/ButtonBar");
+jest.dontMock("../../../general/EllipsisLoaderButton");
+jest.dontMock("../../../general/PageSpinner");
 
 
-describe("WizardV2", function () {
+describe("Page Wizard", function () {
 
     const React = require("react"),
-        TestUtils = require("../../../testutil/TestUtils"),
+        TestUtils = require("../../../../testutil/TestUtils"),
         ReactTestUtils = require("react-dom/test-utils"),
         ReactDOM = require("react-dom"),
-        Wizard = require("../Wizard"),
+        PageWizard = require("../PageWizard"),
         Wrapper = TestUtils.UpdatePropsWrapper,
-        Step = Wizard.Step,
+        Step = PageWizard.Step,
         _ = require("underscore");
 
 
@@ -78,9 +78,9 @@ describe("WizardV2", function () {
         });
 
         return ReactTestUtils.renderIntoDocument(
-            <Wizard {..._.extend({}, wizardDefaultProps, optionalProps)}>
+            <PageWizard {..._.extend({}, wizardDefaultProps, optionalProps)}>
                 {defaultSteps}
-            </Wizard>
+            </PageWizard>
         );
     }
 
@@ -394,7 +394,7 @@ describe("WizardV2", function () {
         myProps.activeStep = initialActiveStep;
 
         const component = ReactTestUtils.renderIntoDocument(
-            <Wrapper type={Wizard} {...myProps}>
+            <Wrapper type={PageWizard} {...myProps}>
                 {mySteps.map(function (stepdata, index) {
                     return <Step {...mySteps[index]} />;
                 })}
@@ -507,7 +507,7 @@ describe("WizardV2", function () {
     });
 
     it("emits open and close events in IE", function () {
-        const UtilsMock = require("../../../util/Utils");
+        const UtilsMock = require("../../../../util/Utils");
         UtilsMock.isIE = () => { return true; };
 
         const openListenerCallback = jest.fn();

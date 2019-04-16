@@ -23,7 +23,7 @@ import RowBuilder, { Row as RowBuilderRow, Separator } from "../components/rows/
 import { TabSet, TabContent } from "../components/layout/TabSet";
 import TileSelector, { TileButton, tileButtonTypes } from "../components/buttons/TileSelector";
 import TutorialButton from "../components/buttons/TutorialButton";
-import Wizard, { Step } from "../components/wizard-v2/";
+import PageWizard, { Step } from "../components/panels/PageWizard/";
 
 const possibleProviders = {
     FACEBOOK: {
@@ -192,7 +192,7 @@ export default class SocialLogin extends Component {
                 />
                 {providers}
                 {activeProvider &&
-                    <Wizard
+                    <PageWizard
                         activeStep={this.state.wizardStep}
                         onCancel={this.goToLastStep}
                         onClose={this.closeWizard}
@@ -526,7 +526,7 @@ export default class SocialLogin extends Component {
                                 </PageSection>
                             </Step>,
                         ]}
-                    </Wizard>
+                    </PageWizard>
                 }
             </div>
         );

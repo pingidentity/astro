@@ -1,5 +1,5 @@
 import React from "react";
-import Wizard, { Step } from "../../../components/wizard-v2/Wizard";
+import PageWizard, { Step } from "../../../components/panels/PageWizard";
 import TileSelector from "../../../components/buttons/TileSelector";
 import FormTextField from "../../../components/forms/form-text-field";
 import FormTextArea from "../../../components/forms/form-text-area";
@@ -9,8 +9,8 @@ import Button from "../../../components/buttons/Button";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import _ from "underscore";
 
-import DataTableScreen from "./screens/DataTableScreen";
-import DragScreen from "./screens/DragScreen";
+import DataTableScreen from "./page-wizard-screens/DataTableScreen";
+import DragScreen from "./page-wizard-screens/DragScreen";
 
 import Utils from "ui-library/lib//util/Utils";
 import fixOrientation from "fix-orientation";
@@ -18,13 +18,13 @@ import readExif from "exif-js";
 import InputWidths from "../../../components/forms/InputWidths";
 
 /**
-* @name WizardDemo2
-* @memberof Wizard
-* @desc A demo for Wizard v2
+* @name PageWizard Demo
+* @memberof PageWizard
+* @desc A demo for the PageWizard
 */
 
 
-class WizardDemo extends React.Component {
+class PageWizardDemo extends React.Component {
     state = {
         activeStep: 0,
         numSteps: 5,
@@ -54,7 +54,6 @@ class WizardDemo extends React.Component {
                     //correct and display the image according to the exif orientation
                     fixOrientation(contentUrl, { image: true }, function (fixedImgContentUrl) {
                         self._updateCurrentApp("thumbnailSrc", fixedImgContentUrl);
-                        //self.props.onPreviewReady(fixedImgContentUrl);
                     });
                 }
             });
@@ -239,7 +238,7 @@ class WizardDemo extends React.Component {
         return ([
             <Button key="wizard-button" onClick={this._onOpen}>Show Wizard Example</Button>,
             (this.state.open &&
-                <Wizard
+                <PageWizard
                     data-id="wizard-demo"
                     key="wizard"
                     onNext={this.onNext}
@@ -278,7 +277,7 @@ class WizardDemo extends React.Component {
                         title="Create App Profile"
                         menuDescription="Personalize your application."
                         description="Personalize your application by creating a unique profile. The description will
-                            help your customers identify the purpose of the application andprovide important
+                            help your customers identify the purpose of the application and provide important
                             information to misguided connections."
                         onSave={this.onNext}
                         loading={this.state.loading && "loading step 1"}
@@ -348,10 +347,10 @@ class WizardDemo extends React.Component {
                         required>
                         <DataTableScreen {...this.state.currentApp} />
                     </Step>
-                </Wizard>
+                </PageWizard>
             )
         ]);
     }
 }
 
-module.exports = WizardDemo;
+export default PageWizardDemo;

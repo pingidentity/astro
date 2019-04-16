@@ -1,36 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { Step } from "./../panels/PageWizard";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
-const Step = ({
-    children,
-    "data-id": stepDataId,
-    description,
-    menuDescription,
-    menuTitle,
-    title,
-}) => (
-    <div data-id={stepDataId}>
-        <div className="wizard2-step__title" data-id={`${stepDataId}-title`}>{title || menuTitle}</div>
-        <div className="wizard2-step__description" data-id={`${stepDataId}-description`}>
-            {description || menuDescription}
-        </div>
-        <div className="wizard2-step__content" data-id={`${stepDataId}-content`}>
-            {children}
-        </div>
-    </div>
-);
-
-Step.propTypes = {
-    completed: PropTypes.bool,
-    "data-id": PropTypes.string,
-    description: PropTypes.string,
-    hideButtonBar: PropTypes.bool,
-    hideMenu: PropTypes.bool,
-    menuDescription: PropTypes.string,
-    onSave: PropTypes.func,
-    required: PropTypes.bool,
-    title: PropTypes.node,
-    menuTitle: PropTypes.string,
-};
+cannonballChangeWarning({
+    message: "The Wizard-V2 component's name has been changed to PageWizard. " +
+        "To use this component, import it from lib/components/panels/PageWizard.Step."
+});
 
 export default Step;

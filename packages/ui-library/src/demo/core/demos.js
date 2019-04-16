@@ -680,16 +680,15 @@ module.exports = [
                         pathToDemoSource: "demo_components_wizard_WizardDemo.jsx.html",
                         status: {
                             type: "design-deprecated",
-                            use: "Wizard V2",
+                            use: "Page Wizard",
                         },
                     },
                     {
-                        label: "Wizard - v2",
-                        demo: require("../components/wizard-v2/WizardDemo"),
-                        pathToDoc: "components/wizard-v2/Wizard.jsx",
-                        pathToSource: "components_wizard-v2_Wizard.jsx.html",
-                        pathToDemoSource: "demo_components_wizard-v2_WizardDemo.jsx.html",
-                        docName: "Wizard_v2",
+                        label: "Page Wizard (Wizard V2)",
+                        demo: require("../components/panels/PageWizardDemo"),
+                        pathToDoc: "components/panels/PageWizard.jsx",
+                        pathToSource: "components_panels_PageWizard_PageWizard.jsx.html",
+                        pathToDemoSource: "demo_components_panels_PageWizardDemo.jsx.html",
                     },
                 ]
             },

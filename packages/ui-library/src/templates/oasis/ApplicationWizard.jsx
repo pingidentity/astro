@@ -2,7 +2,7 @@ import React from "react";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import Button from "ui-library/lib/components/buttons/Button";
-import Wizard, { Step } from "ui-library/lib/components/wizard-v2/Wizard";
+import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard";
 import TileSelector from "ui-library/lib/components/buttons/TileSelector";
 import Aside from "ui-library/lib/components/layout/Aside";
 import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
@@ -338,7 +338,7 @@ class AddApplication extends React.Component {
                     />
                 </PageSection>
                 {showingWizard &&
-                    <Wizard
+                    <PageWizard
                         activeStep={activeStep}
                         onCancel={this._hideWizard}
                         onNext={this._handleNext}
@@ -373,7 +373,7 @@ class AddApplication extends React.Component {
                             required
                             onSave={this._handleSave}
                         />
-                    </Wizard>
+                    </PageWizard>
                 }
             </div>);
     }

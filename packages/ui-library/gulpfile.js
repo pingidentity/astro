@@ -33,7 +33,6 @@ const renameFiles = [
     { name: "grid/cells/ButtonCell", rename: "GridButtonCell.jsx" },
     { name: "grid/cells/CheckboxCell", rename: "GridCheckboxCell.jsx" },
     { name: "grid/cells/TextFieldCell", rename: "GridTextFieldCell.jsx" },
-    { name: "wizard-v2/Wizard.jsx", rename: "WizardV2.jsx" },
 ];
 const demolessSrcPaths = [
     "src/components/forms/FormLabel.jsx",
