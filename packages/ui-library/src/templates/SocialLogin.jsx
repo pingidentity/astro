@@ -1,17 +1,19 @@
 import React, { Component } from "react";
+import { v4 as uuidV4 } from "uuid";
 import Button from "../components/buttons/Button";
 import ColumnSelector, {
     ColumnTitle,
 } from "../components/list/ColumnSelector";
 import ExpandableRow from "../components/rows/ExpandableRow";
 import FileUpload from "../components/forms/FileUpload";
-import FlexRow, { justifyOptions, alignments } from "../components/layout/FlexRow";
+import FlexRow, { alignments } from "../components/layout/FlexRow";
 import FormDropDownList from "../components/forms/FormDropDownList";
 import FormTextArea from "../components/forms/FormTextArea";
 import FormTextField from "../components/forms/FormTextField";
 import FormToggle from "../components/forms/form-toggle";
 import HelpHint, { Placements as HelpHintPlacements } from "../components/tooltips/HelpHint";
 import Icon, { iconSizes } from "../components/general/Icon";
+import Image, { imageSizes, imageTypes } from "../components/general/Image";
 import InputRow from "../components/layout/InputRow";
 import { InputWidths } from "../components/forms/InputWidths";
 import LabelValuePairs from "../components/layout/LabelValuePairs";
@@ -25,18 +27,27 @@ import TileSelector, { TileButton, tileButtonTypes } from "../components/buttons
 import TutorialButton from "../components/buttons/TutorialButton";
 import PageWizard, { Step } from "../components/panels/PageWizard/";
 
+const initialState = {
+    attributes: [],
+    description: "",
+    name: ""
+};
+
 const possibleProviders = {
     FACEBOOK: {
         token: "facebook",
-        label: "Facebook"
+        label: "Facebook",
+        ...initialState
     },
     LINKEDIN: {
         token: "linkedin",
-        label: "LinkedIn"
+        label: "LinkedIn",
+        ...initialState
     },
     TWITTER: {
         token: "twitter",
-        label: "Twitter"
+        label: "Twitter",
+        ...initialState
     },
     INITIAL: {
         token: "initial"
@@ -53,16 +64,41 @@ export default class SocialLogin extends Component {
         activeProvider: null,
         providers: [{
             description: "Supervillain",
-            id: 0,
+            id: uuidV4(),
+            logo: "src/demo/images/logo-facebook.png",
             name: "Facebook",
             type: "facebook"
         }],
         wizardStep: 0
     }
 
+    addAttribute = () => this.setState(({ activeProvider: { attributes, ...activeProvider } }) => ({
+        activeProvider: {
+            ...activeProvider,
+            attributes: [
+                ...attributes,
+                {
+                    id: uuidV4(),
+                    providerAttr: "",
+                }
+            ]
+        }
+    }))
+
+    removeAttribute = (e, id) => this.setState(({ activeProvider: { attributes, ...activeProvider } }) => ({
+        activeProvider: {
+            ...activeProvider,
+            attributes: attributes.filter(attr => attr.id !== id)
+        }
+    }))
+
     closeWizard = () => this.setState(({
         activeProvider: null,
         wizardStep: 0
+    }))
+
+    deleteProvider = id => () => this.setState(({ providers }) => ({
+        providers: providers.filter(prov => prov.id !== id)
     }))
 
     goToLastStep = () => this.setState(({ activeProvider, wizardStep }) => ({
@@ -74,12 +110,15 @@ export default class SocialLogin extends Component {
         wizardStep: wizardStep + 1
     }))
 
-    openProviderWizard = provider => () => this.setState({
-        activeProvider: provider,
+    openProviderWizard = ({ id = uuidV4(), ...provider }) => () => this.setState({
+        activeProvider: {
+            id,
+            attributes: [],
+            ...provider
+        },
         wizardStep: 0
     })
 
-    // Not wired in yet
     saveActiveProvider = () => this.setState(({ activeProvider, providers }) => ({
         activeProvider: null,
         providers: [
@@ -89,30 +128,62 @@ export default class SocialLogin extends Component {
         wizardStep: 0
     }))
 
-    // Not wired in yet
-    setStepState = (stateName) => val => ({ activeProvider }) => ({
+    setAttrValue = id => value => this.setState(({ activeProvider: { attributes, ...provider } }) => ({
+        activeProvider: {
+            ...provider,
+            attributes: attributes.map(attr =>
+                attr.id === id
+                    ? {
+                        ...attr,
+                        providerAttr: value
+                    }
+                    : attr
+            )
+        }
+    }))
+
+    setProviderImage = ({
+        target: {
+            files: [file] = []
+        } = {}
+    }) => {
+        const reader = new FileReader();
+        reader.onloadend = ({ target: { result } }) => this.setState(({ activeProvider }) => ({
+            activeProvider: {
+                ...activeProvider,
+                logo: result
+            }
+        }));
+        reader.readAsDataURL(file);
+    };
+
+    setStepState = stateName => val => this.setState(({ activeProvider }) => ({
         activeProvider: {
             ...activeProvider,
             [stateName]: val
         }
-    })
+    }))
 
     render() {
-        // NOTE: State has not been wired in yet, but will be wired in at a later time.
-        // Also, many of these properties- including the following function- should be
+        // NOTE: any of these properties- including the following function- should be
         // functions that are part of the class rather than in render to avoid them
         // being recreated on each render. Shown here for clarity.
-        const providers = this.state.providers.map(({
-            description,
-            name,
-            type // Facebook, LinkedIn or Twitter
-        }) => {
-            const icon = <Icon iconName={type} iconSize={iconSizes.XL} inline />;
+        const providers = this.state.providers.map(provider => {
+            const {
+                description,
+                id,
+                logo,
+                name,
+                type, // Facebook, LinkedIn or Twitter
+            } = provider;
+
             return (
                 <ExpandableRow
                     flags={["expandable-row-class"]}
-                    icon={icon}
-                    key={name}
+                    icon={<Image source={logo} type={imageTypes.SQUARE} size={imageSizes.AUTO} />}
+                    key={id}
+                    onDelete={this.deleteProvider(id)}
+                    onEditButtonClick={this.openProviderWizard(provider)}
                     rowAccessories={
                         <FormToggle
                             flags={["p-stateful"]}
@@ -131,16 +202,16 @@ export default class SocialLogin extends Component {
                             <LabelValuePairs
                                 dataPairs={[
                                     {
-                                        label: "Name:",
+                                        label: "Name",
                                         value: name
                                     },
                                     {
-                                        label: "Description:",
+                                        label: "Description",
                                         value: description
                                     },
                                     {
-                                        label: "Logo:",
-                                        value: icon
+                                        label: "Logo",
+                                        value: <Image size={imageSizes.SM} source={logo} />
                                     },
                                 ]}
                             />
@@ -154,38 +225,30 @@ export default class SocialLogin extends Component {
                         <TabContent label="Attributes">
                             Attributes
                         </TabContent>
-                        <TabContent label="Populations">
-                            Populations
-                        </TabContent>
                     </TabSet>
                 </ExpandableRow>
             );
         });
 
         const { activeProvider, wizardStep } = this.state;
-        const renderRowBuilderAdd = () => (
-            <LinkDropDownList
-                key="filter"
-                label="+ ADD ATTRIBUTE"
-                options={[]}
-                stateless
-            />
-        );
+
         return (
             <div>
                 <PageHeader
+                    accessories={
+                        <Button
+                            label="Provider"
+                            noSpacing
+                            onClick={this.openProviderWizard(possibleProviders.INITIAL)}
+                            iconName="add"
+                        />
+                    }
                     title={
-                        <FlexRow alignment={alignments.CENTER} justify={justifyOptions.SPACEBETWEEN}>
-                            <FlexRow inline>
-                                <Padding right={paddingSizes.LG}>
+                        <FlexRow inline>
+                            <Padding right={paddingSizes.LG}>
                                     Social Identity Providers
-                                </Padding>
-                                <TutorialButton />
-                            </FlexRow>
-                            <Button
-                                label="+ Provider"
-                                onClick={this.openProviderWizard(possibleProviders.INITIAL)}
-                            />
+                            </Padding>
+                            <TutorialButton />
                         </FlexRow>
                     }
                     underlined
@@ -198,7 +261,7 @@ export default class SocialLogin extends Component {
                         onClose={this.closeWizard}
                         onNext={this.goToNextStep}
                     >
-                        {this.state.activeProvider === possibleProviders.INITIAL &&
+                        {activeProvider.token === possibleProviders.INITIAL.token &&
                         <Step
                             title="Add a Social or Custom Identity Provider"
                             description={"Make login and registration frictionless, easy," +
@@ -235,7 +298,7 @@ export default class SocialLogin extends Component {
                             {/* TODO: Add "social" with faded out styling */}
                         </Step>
                         }
-                        {this.state.activeProvider !== possibleProviders.INITIAL && [
+                        {activeProvider.token !== possibleProviders.INITIAL.token && [
                             <Step
                                 title={
                                     <FlexRow
@@ -245,7 +308,7 @@ export default class SocialLogin extends Component {
                                             right={paddingSizes.MD}
                                         >
                                             <Icon
-                                                iconName={this.state.activeProvider.token}
+                                                iconName={activeProvider.token}
                                                 iconSize={iconSizes.LG}
                                                 inline
                                             />
@@ -268,22 +331,30 @@ export default class SocialLogin extends Component {
                                     <FormTextField
                                         flags={["p-stateful"]}
                                         labelText="Name"
+                                        onValueChange={this.setStepState("name")}
+                                        value={activeProvider.name}
                                     />
                                 </InputRow>
                                 <InputRow>
                                     <FormTextArea
                                         flags={["p-stateful"]}
                                         labelText="Description"
+                                        onValueChange={this.setStepState("description")}
+                                        value={activeProvider.description}
                                     />
                                 </InputRow>
                                 <InputRow>
                                     <FileUpload
-                                        defaultImage=""
+                                        accepts={[".jpg"]}
+                                        defaultImage="src/demo/images/logo-facebook.png"
+                                        flags={["true-default"]}
                                         label="Logo"
                                         labelRemove="Remove"
                                         labelSelect="Choose a File"
+                                        onChange={this.setProviderImage}
                                         showThumbnail
-                                        thumbnailSrc="src/demo/images/logo-facebook.png"
+                                        stateless={false}
+                                        thumbnailSrc={activeProvider.logo || ""}
                                     />
                                 </InputRow>
                             </Step>,
@@ -296,7 +367,7 @@ export default class SocialLogin extends Component {
                                             right={paddingSizes.MD}
                                         >
                                             <Icon
-                                                iconName={this.state.activeProvider.token}
+                                                iconName={activeProvider.token}
                                                 iconSize={iconSizes.LG}
                                                 inline
                                             />
@@ -311,7 +382,7 @@ export default class SocialLogin extends Component {
                                 }
                                 required
                                 menuDescription={
-                                    `Configure connection between ${this.state.activeProvider.label} and PingOne`
+                                    `Configure connection between ${activeProvider.label} and PingOne`
                                 }
                                 menuTitle="Configure Connection"
                                 completed={wizardStep > 1}
@@ -321,6 +392,8 @@ export default class SocialLogin extends Component {
                                     <FormTextField
                                         flags={["p-stateful"]}
                                         labelText="App ID"
+                                        onValueChange={this.setStepState("appId")}
+                                        value={activeProvider.appId}
                                     />
                                 </InputRow>
                                 <InputRow>
@@ -328,7 +401,9 @@ export default class SocialLogin extends Component {
                                         flags={["p-stateful"]}
                                         labelText="App secret"
                                         maskValue
+                                        onValueChange={this.setStepState("secret")}
                                         showReveal
+                                        value={activeProvider.secret}
                                     />
                                 </InputRow>
                             </Step>,
@@ -341,7 +416,7 @@ export default class SocialLogin extends Component {
                                             right={paddingSizes.MD}
                                         >
                                             <Icon
-                                                iconName={this.state.activeProvider.token}
+                                                iconName={activeProvider.token}
                                                 iconSize={iconSizes.LG}
                                                 inline
                                             />
@@ -359,14 +434,15 @@ export default class SocialLogin extends Component {
                                 menuDescription="Request OAuth scopes so they can access PingOne resources"
                                 menuTitle="Request Access"
                                 completed={wizardStep > 2}
-                                key="configure"
+                                key="request"
                             >
                                 <ColumnSelector
+                                    onAdd={this.addScope}
                                     options={[
                                         {
-                                            id: "sandbox",
-                                            subtitle: "scopeID",
-                                            title: `${activeProvider.label}`
+                                            id: "default",
+                                            subtitle: "default",
+                                            title: `${activeProvider.name}`
                                         },
                                     ]}
                                     optionsTitle={
@@ -388,7 +464,7 @@ export default class SocialLogin extends Component {
                                             disabled: true,
                                             id: "sandbox",
                                             subtitle: "Email",
-                                            title: `${activeProvider.label}`,
+                                            title: `${activeProvider.name}`,
                                             customButton: () => (
                                                 <HelpHint
                                                     hintText="Scope cannot be removed"
@@ -415,7 +491,7 @@ export default class SocialLogin extends Component {
                                             right={paddingSizes.MD}
                                         >
                                             <Icon
-                                                iconName={this.state.activeProvider.token}
+                                                iconName={activeProvider.token}
                                                 iconSize={iconSizes.LG}
                                                 inline
                                             />
@@ -432,20 +508,21 @@ export default class SocialLogin extends Component {
                                 required
                                 menuDescription="Provide access to your application for customers to authenticate"
                                 menuTitle="ID Linking"
-                                onSave={this.closeWizard}
+                                onSave={this.saveActiveProvider}
                                 completed={wizardStep > 4}
-                                key="configure"
+                                key="linking"
                             >
                                 <PageSection
                                     title={
-                                        `Link ${activeProvider.label}'s attribute to your PingOne Identity Attribute`
+                                        `Link ${activeProvider.name}'s attribute to your PingOne Identity Attribute`
                                     }
                                 >
                                     <InputRow>
                                         <FormTextField
                                             flags={["p-stateful"]}
                                             labelText="Facebook ID Attribute"
-                                            readonly
+                                            readOnly
+                                            placeholder="email"
                                             withArrow
                                         />
                                         <FormDropDownList
@@ -467,7 +544,9 @@ export default class SocialLogin extends Component {
                                     title="Map Attributes"
                                 >
                                     <RowBuilder
-                                        renderAddButton={renderRowBuilderAdd}
+                                        addLabel="+ Add Attribute"
+                                        onAdd={this.addAttribute}
+                                        onRemove={this.removeAttribute}
                                         rows={[
                                             {
                                                 id: "first",
@@ -476,7 +555,7 @@ export default class SocialLogin extends Component {
                                                         <FormTextField
                                                             labelText={
                                                                 <div>
-                                                                    {`${activeProvider.label} Attribute`}
+                                                                    {`${activeProvider.name} Attribute`}
                                                                     <HelpHint hintText="Hint" />
                                                                 </div>
                                                             }
@@ -520,7 +599,58 @@ export default class SocialLogin extends Component {
                                                         <Padding right={paddingSizes.MD} />
                                                     </RowBuilderRow>
                                                 )
-                                            }
+                                            },
+                                            ...activeProvider.attributes.map(({ id, providerAttr }) => ({
+                                                id,
+                                                content: (
+                                                    <RowBuilderRow key="first" showRemoveLabel>
+                                                        <FormTextField
+                                                            labelText={
+                                                                <div>
+                                                                    {`${activeProvider.name} Attribute`}
+                                                                    <HelpHint hintText="Hint" />
+                                                                </div>
+                                                            }
+                                                            onValueChange={this.setAttrValue(id)}
+                                                            stateless={false}
+                                                            width={InputWidths.MD}
+                                                            value={providerAttr}
+                                                        />
+                                                        <Separator>=</Separator>
+                                                        <FormDropDownList
+                                                            label="PingOne User Attribute"
+                                                            onValueChange={this.firstDropDownChange}
+                                                            options={[
+                                                                {
+                                                                    label: "attributeExample",
+                                                                    value: "attributeExample"
+                                                                },
+                                                            ]}
+                                                            selectedOption={{
+                                                                label: "attributeExample",
+                                                                value: "attributeExample"
+                                                            }}
+                                                            width={InputWidths.MD}
+                                                        />
+                                                        <Padding right={paddingSizes.SM} />
+                                                        <FormDropDownList
+                                                            label={
+                                                                <div>
+                                                                Sync Frequency
+                                                                    <HelpHint hintText="Hint" />
+                                                                </div>
+                                                            }
+                                                            onValueChange={this.firstDropDownChange}
+                                                            options={[
+                                                                { label: "None", value: "none" },
+                                                            ]}
+                                                            selectedOption={{ label: "None", value: "none" }}
+                                                            width={InputWidths.SM}
+                                                        />
+                                                        <Padding right={paddingSizes.MD} />
+                                                    </RowBuilderRow>
+                                                )
+                                            }))
                                         ]}
                                     />
                                 </PageSection>

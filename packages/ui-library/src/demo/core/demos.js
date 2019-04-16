@@ -430,6 +430,13 @@ module.exports = [
                         pathToDoc: "components/general/HR.jsx",
                         pathToSource: "components_general_HR.jsx.html",
                         pathToDemoSource: "demo_components_general_HRDemo.jsx.html"
+                    },
+                    {
+                        label: "Image",
+                        demo: require("../components/general/ImageDemo"),
+                        pathToDoc: "components/general/Image.jsx",
+                        pathToSource: "components_general_Image.jsx.html",
+                        pathToDemoSource: "demo_components_general_ImageDemo.jsx.html"
                     }
                 ]
             },

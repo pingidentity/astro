@@ -50,11 +50,12 @@ $expandable-row-gap: 12px;
             align-items: center;
             display: inline-flex;
             justify-content: center;
+            margin: $spacing-sm;
             position: absolute;
             left: 0;
             top: 0;
-            height: 60px;
-            width: 76px;
+            height: 40px;
+            width: 40px;
         }
     }
     &.has-subtitle {

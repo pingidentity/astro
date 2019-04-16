@@ -1,0 +1,19 @@
+.image-component {
+    width: auto;
+
+    &--auto {
+        height: 100%;
+
+        &-square {
+            width: 100%;
+        }
+    }
+
+    &--sm {
+        height: 35px;
+
+        &-square {
+            width: 35px;
+        }
+    }
+}
