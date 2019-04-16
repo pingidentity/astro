@@ -9,7 +9,7 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
  * @class Button
  * @desc button component
  *
- * @param {string} [type]
+ * @param {("primary" | "secondary" | "standard" | "success" | "cancel" | "danger")} [type]
  *      CSS class applied to html.
  * @param {string} [alignInputs]
  *     When true, aligns a  button with text fields in the same row

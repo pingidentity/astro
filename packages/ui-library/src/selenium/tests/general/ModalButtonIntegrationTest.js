@@ -89,7 +89,7 @@ describe("ModalButtonPage Integration", function () {
      * GIVEN: Goes to component Modal button
      * WHEN: Clicks on Open Alert Modal button
      * THEN: The modal dialog should display
-     * WHEN: Clicks on DisgardChanges button
+     * WHEN: Clicks on DiscardChanges button
      * THEN: The dialog should close
      * WHEN: Clicks on OpenAlertModal button
      * AND: Clicks on Save button
@@ -109,8 +109,8 @@ describe("ModalButtonPage Integration", function () {
         //take screenshot and compare
         var alertModalFileName = "ComponentModalButton_AlertModalDialog";
         ModalButtonPage.takeScreenshotAndCompare(alertModalFileName);
-        //click on Disgard Changes button
-        ModalButtonPage.clickDisgardChangesButton();
+        //click on Discard Changes button
+        ModalButtonPage.clickDiscardChangesButton();
         expect(ModalButtonPage.isModalDialogClosed).toBeTruthy();
         //open the dialog again
         ModalButtonPage.clickOpenAlertModalButton();

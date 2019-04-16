@@ -146,11 +146,11 @@ var ModalButtonDemoPage = Object.create(HomePage, {
     },
 
     /**
-     * @desc this function is to click on Disgard Changes Button
+     * @desc this function is to click on Discard Changes Button
      */
-    clickDisgardChangesButton: {
+    clickDiscardChangesButton: {
         value: function () {
-            this.click("//button[@data-id='disgardChangesButton']");
+            this.click("//button[@data-id='discardChangesButton']");
         }
     },
 

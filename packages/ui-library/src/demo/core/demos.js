@@ -445,6 +445,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_AsideDemo.jsx.html"
                     },
                     {
+                        label: "Button Group",
+                        demo: require("../components/layout/ButtonGroupDemo"),
+                        pathToDoc: "components/layout/ButtonGroup.jsx",
+                        pathToSource: "components_layout_ButtonGroup.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ButtonGroupDemo.jsx.html"
+                    },
+                    {
                         label: "Collapsible Link",
                         demo: require("../components/general/CollapsibleLinkDemo"),
                         pathToDoc: "components/general/CollapsibleLink.jsx",

@@ -3,6 +3,7 @@ import { v2 as FileUpload } from "../../../components/forms/file-upload";
 import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
+import ButtonGroup from "../../../components/layout/ButtonGroup";
 
 /**
 * @name FileUploadDemo
@@ -176,16 +177,17 @@ export default class FileUploadDemo extends React.Component {
                                 flags={this.props.flags}
                             />
                         </InputRow>
-                        <div className="button-group" data-id="delete-confirmation">
+                        <ButtonGroup
+                            data-id="delete-confirmation"
+                            onCancel={this._toggleTooltip}
+                        >
                             <Button
                                 label="Confirm"
                                 data-id="confirm-action"
                                 type="primary"
                                 onClick={this._toggleTooltip}
                             />
-                            <br />
-                            <a className="cancel" onClick={this._toggleTooltip}>Cancel</a>
-                        </div>
+                        </ButtonGroup>
                     </DetailsTooltip>
                 </InputRow>
 

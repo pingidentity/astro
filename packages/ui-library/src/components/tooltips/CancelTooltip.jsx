@@ -4,6 +4,7 @@ var React = require("react"),
     DetailsTooltip = require("./DetailsTooltip");
 
 import Button from "../buttons/Button";
+import ButtonGroup from "../layout/ButtonGroup";
 /**
 * @callback CancelTooltip~onCancel
 */
@@ -80,22 +81,21 @@ class CancelTooltip extends React.Component {
                 <p data-id={this.props["data-id"] + "-cancel-tooltip-text"}>
                     {this.props.messageText}
                 </p>
-                <div className="button-group">
+                <ButtonGroup>
                     <Button
                         type="cancel"
                         data-id={this.props["data-id"] + "-cancel-confirm-btn"}
                         onClick={this.props.onConfirm}>
                         {this.props.confirmButtonText}
                     </Button>
-                    <div>
-                        <a
-                            className="cancel"
-                            data-id={this.props["data-id"] + "-cancel-deny-btn"}
-                            onClick={this.props.onCancel}>
-                            {this.props.cancelButtonText}
-                        </a>
-                    </div>
-                </div>
+                    <br />
+                    <a
+                        className="cancel"
+                        data-id={this.props["data-id"] + "-cancel-deny-btn"}
+                        onClick={this.props.onCancel}>
+                        {this.props.cancelButtonText}
+                    </a>
+                </ButtonGroup>
             </DetailsTooltip>
         );
     }

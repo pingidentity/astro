@@ -7,6 +7,7 @@ import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
 import Button from "../../../components/buttons/Button";
 import LabelValuePairs from "../../../components/layout/LabelValuePairs";
 import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
+import ButtonGroup from "../../../components/layout/ButtonGroup";
 
 /**
 * @name ExpandableRowDemo
@@ -116,16 +117,17 @@ class ExpandableRowDemo extends React.Component {
                     Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                     sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                 </p>
-                <div className="button-group" data-id="delete-confirmation">
-                    <button
-                        type="button"
-                        data-id="confirm-action"
-                        onClick={this._customConfirm} >
+                <ButtonGroup
+                    data-id="delete-confirmation"
+                    onCancel={this._toggleCustomDelete}
+                >
+                    <Button
+                        data-id-primary="confirm-action"
+                        onClick={this._customConfirm}
+                    >
                         Confirm
-                    </button>
-                    <br />
-                    <a className="cancel" onClick={this._toggleCustomDelete}>Cancel</a>
-                </div>
+                    </Button>
+                </ButtonGroup>
             </DetailsTooltip>
         );
         return (

@@ -2,6 +2,7 @@ import React from "react";
 import ModalButton from "./../../../components/general/ModalButton";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
+import ButtonGroup from "../../../components/layout/ButtonGroup";
 
 const NUM_STATELESS_DEMOS = 3;
 
@@ -131,13 +132,13 @@ class ModalButtonDemo extends React.Component {
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis eu eros id
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
-                            <div className="button-group">
+                            <ButtonGroup>
                                 <Button data-id="nopeButton" onClick={this._handleClose2}>Nope</Button>
                                 <Button type="primary" data-id="yupButton"
                                     onClick={this._handleClose2} >
                                     Yup
                                 </Button>
-                            </div>
+                            </ButtonGroup>
                         </div>
                     </ModalButton>
                 </InputRow>
@@ -159,10 +160,10 @@ class ModalButtonDemo extends React.Component {
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>
-                        <div className="button-group">
+                        <ButtonGroup>
                             <Button type="cancel"
-                                onClick={this._handleClose3} data-id="disgardChangesButton" >
-                                Disgard Changes
+                                onClick={this._handleClose3} data-id="discardChangesButton" >
+                                Discard Changes
                             </Button>
                             <Button type="primary"
                                 onClick={this._handleClose3} data-id="saveButton">
@@ -170,7 +171,7 @@ class ModalButtonDemo extends React.Component {
                             </Button>
                             <br />
                             <a className="cancel" data-id="cancelLink" onClick={this._handleClose3}>Cancel</a>
-                        </div>
+                        </ButtonGroup>
                     </ModalButton>
                 </InputRow>
             </div>

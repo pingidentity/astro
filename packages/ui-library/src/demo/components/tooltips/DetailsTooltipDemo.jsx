@@ -3,6 +3,7 @@ import _ from "underscore";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 
 /**
 * @name DetailsTooltipDemo
@@ -100,16 +101,17 @@ class DetailsTooltipDemo extends React.Component {
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="button-group" data-id="delete-confirmation">
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel1}
+                    >
                         <Button
                             data-id="confirm-action"
                             type="primary"
                             onClick={this._handleConfirm1} >
                             Confirm
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this._handleCancel1}>Cancel</a>
-                    </div>
+                    </ButtonGroup>
                 </DetailsTooltip>
                 <div>{this.state.status1}</div>
 
@@ -127,16 +129,17 @@ class DetailsTooltipDemo extends React.Component {
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="button-group" data-id="delete-confirmation">
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel2}
+                    >
                         <Button
                             data-id="confirm-action"
                             type="primary"
                             onClick={this._handleConfirm2} >
                             Confirm
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this._handleCancel2}>Cancel</a>
-                    </div>
+                    </ButtonGroup>
                 </DetailsTooltip>
 
                 <div>{this.state.status2}</div>
@@ -155,16 +158,17 @@ class DetailsTooltipDemo extends React.Component {
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="button-group" data-id="delete-confirmation">
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel3}
+                    >
                         <Button
                             data-id="confirm-action"
                             type="primary"
                             onClick={this._handleConfirm3} >
                             Confirm
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this._handleCancel3}>Cancel</a>
-                    </div>
+                    </ButtonGroup>
                 </DetailsTooltip>
                 <div>{this.state.status3}</div>
 
@@ -182,16 +186,17 @@ class DetailsTooltipDemo extends React.Component {
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="button-group" data-id="delete-confirmation">
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel4}
+                    >
                         <Button
                             data-id="confirm-action"
                             type="primary"
                             onClick={this._handleConfirm4} >
                             Confirm
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this._handleCancel4}>Cancel</a>
-                    </div>
+                    </ButtonGroup>
                 </DetailsTooltip>
                 <div>{this.state.status4}</div>
 
@@ -211,16 +216,17 @@ class DetailsTooltipDemo extends React.Component {
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="button-group" data-id="delete-confirmation">
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel5}
+                    >
                         <Button
                             data-id="confirm-action"
                             type="primary"
                             onClick={this._handleConfirm5} >
                             Confirm
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this._handleCancel5}>Cancel</a>
-                    </div>
+                    </ButtonGroup>
                 </DetailsTooltip>
                 <div>{this.state.status5}</div>
 
@@ -238,7 +244,10 @@ class DetailsTooltipDemo extends React.Component {
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="button-group" data-id="delete-confirmation">
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel6}
+                    >
                         <Button
                             data-id="confirm-action"
                             type="cancel"
@@ -251,9 +260,7 @@ class DetailsTooltipDemo extends React.Component {
                             onClick={this._handleConfirm6} >
                             Confirm
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this._handleCancel6}>Cancel</a>
-                    </div>
+                    </ButtonGroup>
                 </DetailsTooltip>
                 <div>{this.state.status6}</div>
 
@@ -271,7 +278,10 @@ class DetailsTooltipDemo extends React.Component {
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="button-group" data-id="delete-confirmation">
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel7}
+                    >
                         <Button
                             data-id="confirm-action"
                             type="cancel"
@@ -284,9 +294,7 @@ class DetailsTooltipDemo extends React.Component {
                             onClick={this._handleConfirm7} >
                             Confirm
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this._handleCancel7}>Cancel</a>
-                    </div>
+                    </ButtonGroup>
                 </DetailsTooltip>
                 <div>{this.state.status7}</div>
 

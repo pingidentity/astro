@@ -14,6 +14,7 @@ import InlineMessage from "../../general/InlineMessage";
 import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
+import ButtonGroup from "../../layout/ButtonGroup";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 /**
@@ -707,15 +708,14 @@ class ConfirmDeleteDialog extends React.Component {
                     <p>
                         {this.props.label}
                     </p>
-                    <div className="button-group">
-                        <Button
-                            data-id="confirm-delete"
-                            onClick={this.props.onDeleteConfirm}>
+                    <ButtonGroup
+                        cancelLabel={Translator.translate("cancel")}
+                        onCancel={this.props.onCancel}
+                    >
+                        <Button data-id="confirm-delete" onClick={this.props.onDeleteConfirm}>
                             {Translator.translate("delete")}
                         </Button>
-                        <br />
-                        <a className="cancel" onClick={this.props.onCancel}>{Translator.translate("cancel")}</a>
-                    </div>
+                    </ButtonGroup>
                 </div>
             );
         }

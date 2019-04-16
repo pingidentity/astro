@@ -4,6 +4,7 @@ import Button from "../buttons/Button";
 import DetailsTooltip from "../tooltips/DetailsTooltip";
 
 import popsOver from "../../util/behaviors/popsOver";
+import ButtonGroup from "../layout/ButtonGroup";
 
 /**
  * @class ConfirmTooltip
@@ -107,7 +108,7 @@ class ConfirmTooltipBase extends Component {
                 data-id={this.props["data-id"]}
             >
                 {this.props.children}
-                <div className="button-group">
+                <ButtonGroup>
                     <Button
                         data-id={`${this.props["data-id"]}-button`}
                         label={this.props.buttonLabel || "Confirm"}
@@ -115,14 +116,16 @@ class ConfirmTooltipBase extends Component {
                         onClick={this._handleConfirm}
                         disabled={this.props.disableSave}
                     />
-                    <br /> <br />
+                    <br />
                     <a
-                        label="Cancel" data-id={`${this.props["data-id"]}-cancel`}
+                        className="cancel"
+                        label="Cancel"
+                        data-id={`${this.props["data-id"]}-cancel`}
                         onClick={this.props.onCancel || this.props.onClose}
                     >
                         {this.props.cancelText || "Cancel"}
                     </a>
-                </div>
+                </ButtonGroup>
             </DetailsTooltip>
         );
     }

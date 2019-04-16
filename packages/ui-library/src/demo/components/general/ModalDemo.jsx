@@ -3,6 +3,7 @@ import Modal from "./../../../components/general/Modal";
 
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
+import ButtonGroup from "../../../components/layout/ButtonGroup";
 
 /**
 * @name ModalDemo
@@ -114,10 +115,9 @@ class ModalDemo extends React.Component {
                              provide the closing behavior as with the buttons below. <br/>
                              This also removes the close button at the top of the modal, and centers the header.
                         </InputRow>
-                        <div className="button-group">
-                            <Button type="primary" onClick={this._makeToggle(7)}>Save</Button><br/>
-                            <a className="cancel" onClick={this._makeToggle(7)}>Cancel</a>
-                        </div>
+                        <ButtonGroup onCancel={this._makeToggle(7)}>
+                            <Button type="primary" onClick={this._makeToggle(7)}>Save</Button>
+                        </ButtonGroup>
                     </Modal>
                 </InputRow>
                 <InputRow>
@@ -162,12 +162,10 @@ class ModalDemo extends React.Component {
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>
-                        <div className="buttons">
-                            <Button type="cancel" onClick={this._makeToggle(5)}>Disgard Changes</Button>
+                        <ButtonGroup onCancel={this._makeToggle(5)}>
+                            <Button type="cancel" onClick={this._makeToggle(5)}>Discard Changes</Button>
                             <Button type="primary" onClick={this._makeToggle(5)}>Save</Button>
-                            <br />
-                            <a className="cancel" onClick={this._makeToggle(5)}>Cancel</a>
-                        </div>
+                        </ButtonGroup>
                     </Modal>
                 </InputRow>
                 <InputRow>

@@ -13,6 +13,7 @@ import PageGroup from "../components/layout/PageGroup";
 import PageHeader from "../components/general/PageHeader";
 import PageSection from "../components/layout/PageSection";
 import RowBuilder from "../components/rows/RowBuilder";
+import ButtonGroup from "../components/layout/ButtonGroup";
 import { v4 as uuidV4 } from "uuid";
 import _ from "underscore";
 
@@ -265,20 +266,17 @@ class Actions extends React.Component {
                     >
                         Hi, this is a popup with a simple action.
 
-                        <div className="button-group">
+                        <ButtonGroup>
                             <Button
                                 data-id="popover-confirm-button"
                                 label="Confirm"
                                 onClick={this._popoverConfirm} type="primary"
                             />
-                            <br /><br />
-                            <Anchor
-                                data-id="popover-cancel-button"
-                                onClick={this._togglePopover}
-                            >
+                            <br />
+                            <a className="cancel" data-id="popover-cancel-button" onClick={this._togglePopover}>
                                 Cancel
-                            </Anchor>
-                        </div>
+                            </a>
+                        </ButtonGroup>
                     </Modal>
                 </PageSection>
 

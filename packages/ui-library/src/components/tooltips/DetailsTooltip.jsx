@@ -11,6 +11,7 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
+import ButtonGroup from "../layout/ButtonGroup.jsx";
 
 /**
  * @callback DetailsTooltip~onToggle
@@ -186,7 +187,7 @@ class DetailsTooltipStateless extends React.Component {
 
         // only display if buttons present
         if (this.props.primaryLabels || this.props.secondaryLabels) {
-            buttons = (<div className="button-group" data-id="buttons">
+            buttons = (<ButtonGroup data-id="buttons">
                 {secondaryButtons}
                 {primaryButtons}
                 {this.props.cancelLabel && (
@@ -200,7 +201,7 @@ class DetailsTooltipStateless extends React.Component {
                         </a>
                     </span>
                 )}
-            </div>);
+            </ButtonGroup>);
         }
         return buttons;
     };
