@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Button from "../buttons/Button";
-import DetailsTooltip from "../tooltips/DetailsTooltip";
+import DetailsTooltip, { DetailsTooltipStateless } from "../tooltips/DetailsTooltip";
 
 import popsOver from "../../util/behaviors/popsOver";
 import ButtonGroup from "../layout/ButtonGroup";
@@ -97,9 +97,8 @@ class ConfirmTooltipBase extends Component {
 
     render() {
         return (
-            <DetailsTooltip
+            <DetailsTooltipStateless
                 {...this.props}
-                stateless={true}
                 data-id={this.props["data-id"]}
             >
                 {this.props.children}
@@ -121,7 +120,7 @@ class ConfirmTooltipBase extends Component {
                         {this.props.cancelText || "Cancel"}
                     </a>
                 </ButtonGroup>
-            </DetailsTooltip>
+            </DetailsTooltipStateless>
         );
     }
 }

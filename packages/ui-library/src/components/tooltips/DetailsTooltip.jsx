@@ -451,11 +451,12 @@ class DetailsTooltip extends React.Component {
     };
 
     static tooltipPlacements = tooltipPlacements;
+    static DetailsTooltipStateless = DetailsTooltipStateless;
 
     componentDidMount() {
         if (!this.props.flags.includes("p-stateful")) {
             cannonballChangeWarning({
-                message: `The 'open' prop will no longer serve as an initial state. ` +
+                message: `The 'open' prop will no longer serve as an initial state for DetailsTooltip. ` +
                 `If it is present, it will control the current value of the component. ` +
                 `Set the 'p-stateful' flag to switch to this behavior now.`,
             });
