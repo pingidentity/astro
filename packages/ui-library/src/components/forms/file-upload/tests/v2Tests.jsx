@@ -225,4 +225,16 @@ describe("FileUpload", function () {
 
         expect(console.warn).not.toHaveBeenCalled();
     });
+
+    it("fires cannonball warning for the stateless veraion", function() {
+        console.warn = jest.fn();
+        getComponent({ stateless: true });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire cannonball warning for the stateful veraion", function() {
+        console.warn = jest.fn();
+        getComponent({ stateless: false });
+        expect(console.warn).not.toBeCalled();
+    });
 });
