@@ -255,4 +255,16 @@ describe("ModalTest", function () {
         expect(tooltipText.textContent).toBe(modalParams.cancelTooltip.messageText);
     });
 
+    it("fires cannonball warning if use-portal isn't set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("doesn't fire cannonball warning if use-portal is set", function() {
+        console.warn = jest.fn();
+        getComponent({ flags: [ "use-portal" ], expanded: true });
+        expect(console.warn).not.toBeCalled();
+    });
+
 });

@@ -298,3 +298,21 @@ export function cannonballProgressivleyStatefulWarning({
             `have not been defined.`
     });
 }
+
+/**
+ * @desc Function specifically for the v4 Cannonball release. Shows a warning about portal behavior
+ * @param {string} name - The name of the component
+ *
+ * @returns {} No return value.
+ *
+ * @example: cannonballPortalWarning({
+ *      name: "Calendar",
+ *  })
+ */
+export function cannonballPortalWarning({
+    name
+}) {
+    cannonballChangeWarning({
+        message: `${name} will render using a portal and auto-positioning.`
+    });
+}

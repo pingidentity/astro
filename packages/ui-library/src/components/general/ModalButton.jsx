@@ -1,5 +1,3 @@
-import { Portal } from "react-portal";
-
 import PropTypes from "prop-types";
 
 import React from "react";
@@ -200,8 +198,6 @@ class ModalButtonStateless extends React.Component {
         }
     }
 
-    _usePortal = () => this.props.flags.includes(item => item === "use-portal");
-
     close = () => {
         this.props.onClose();
     };
@@ -250,12 +246,12 @@ class ModalButtonStateless extends React.Component {
                 onClose={this.close}
                 maximize={this.props.maximize}
                 type={this.props.type}
-                closeOnBgClick={this.props.closeOnBgClick}>
+                closeOnBgClick={this.props.closeOnBgClick}
+                flags={this.props.flags}
+            >
                 {this.props.children || modalBodyContent}
             </Modal>
         );
-
-        const renderedModal = this._usePortal() ? <Portal key="portal" >{modal}</Portal> : modal;
 
         return React.createElement(
             this.props.inline ? "span" : "div",
@@ -264,7 +260,7 @@ class ModalButtonStateless extends React.Component {
                 "data-id": this.props["data-id"],
                 className: this.props.className
             },
-            [activator, renderedModal]
+            [activator, modal]
         );
     }
 }

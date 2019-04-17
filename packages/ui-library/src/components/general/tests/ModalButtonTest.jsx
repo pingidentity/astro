@@ -444,7 +444,7 @@ describe("ModalButtonTest", function () {
 
     it("doesn't fire Cannonball warnings if required flags are provided", function() {
         console.warn = jest.fn();
-        getComponent({ flags: [ "p-stateful" ] });
+        getComponent({ flags: [ "p-stateful", "use-portal" ] });
         expect(console.warn).not.toBeCalled();
     });
 

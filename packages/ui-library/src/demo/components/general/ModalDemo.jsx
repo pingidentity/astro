@@ -10,28 +10,13 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for Modal
 */
 class ModalDemo extends React.Component {
-    constructor(props) {
-        super(props);
-        var initState = {};
+    static flags = [ "use-portal" ];
 
-        for (var i=1; i<=this.numDemos; i+=1) {
-            initState["expanded" + i] = false;
-        }
-
-        initState["showCloseTooltip"] = false;
-
-        this.state = initState;
-    }
+    state = {};
 
     numDemos = 7;
 
-    _toggle = (index) => {
-        var newState = {};
-
-        newState["expanded" + index] = !this.state["expanded" + index];
-
-        this.setState(newState);
-    };
+    _makeToggle = index => () => this.setState(state => ({ [`expanded${index}`]: !state[`expanded${index}`] }));
 
     _openTooltip = () => {
         this.setState({ showCancelTooltip: true });
@@ -46,27 +31,24 @@ class ModalDemo extends React.Component {
         console.log("_resetModal");
 
         this._closeTooltip();
-        this._toggle(6);
+        this._makeToggle(6)();
     };
 
-    componentDidMount() {
-        for (var i=1; i<=this.numDemos; i+=1) {
-            this["_toggle" + i] = this._toggle.bind(null, i);
-        }
-    }
-
     render() {
+        const { flags } = this.props;
+
         return (
             <div>
                 <InputRow>
-                    <a onClick={this._toggle1}>Open Default Modal</a>
+                    <a onClick={this._makeToggle(1)}>Open Default Modal</a>
 
                     <Modal
+                        flags={flags}
                         data-id="default-example"
                         modalTitle="Default Modal"
                         expanded={this.state.expanded1}
-                        onOpen={this._toggle1}
-                        onClose={this._toggle1}>
+                        onOpen={this._makeToggle(1)}
+                        onClose={this._makeToggle(1)}>
 
                         <div>
                             <p>
@@ -82,14 +64,15 @@ class ModalDemo extends React.Component {
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._toggle2}>Open Maximized Modal</a>
+                    <a onClick={this._makeToggle(2)}>Open Maximized Modal</a>
 
                     <Modal
+                        flags={flags}
                         modalTitle="Maximized Modal"
                         maximize={true}
                         expanded={this.state.expanded2}
-                        onOpen={this._toggle2}
-                        onClose={this._toggle2}>
+                        onOpen={this._makeToggle(2)}
+                        onClose={this._makeToggle(2)}>
 
                         <div>
                             A maximized modal always occupies the full width that a modal may have, regardless of
@@ -99,14 +82,15 @@ class ModalDemo extends React.Component {
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._toggle3}>Open BG Click Enabled Modal</a>
+                    <a onClick={this._makeToggle(3)}>Open BG Click Enabled Modal</a>
 
                     <Modal
+                        flags={flags}
                         modalTitle="Closing a Modal with a Background Click"
                         closeOnBgClick={true}
                         expanded={this.state.expanded3}
-                        onOpen={this._toggle3}
-                        onClose={this._toggle3}>
+                        onOpen={this._makeToggle(3)}
+                        onClose={this._makeToggle(3)}>
 
                         <div>
                             When you set the "closeOnBgClick" prop to "true", clicking the modal background will trigger
@@ -117,33 +101,35 @@ class ModalDemo extends React.Component {
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._toggle7}>Open Modal with Developer Controlled Close</a>
+                    <a onClick={this._makeToggle(7)}>Open Modal with Developer Controlled Close</a>
 
                     <Modal
+                        flags={flags}
                         modalTitle="Dev Controlled Close"
                         maximize={false}
                         expanded={this.state.expanded7}
-                        onOpen={this._toggle7}>
+                        onOpen={this._makeToggle(7)}>
                         <InputRow>
                             This modal has no onClose prop, so it is up to the developer to
                              provide the closing behavior as with the buttons below. <br/>
                              This also removes the close button at the top of the modal, and centers the header.
                         </InputRow>
                         <div className="button-group">
-                            <Button type="primary" onClick={this._toggle7}>Save</Button><br/>
-                            <a className="cancel" onClick={this._toggle7}>Cancel</a>
+                            <Button type="primary" onClick={this._makeToggle(7)}>Save</Button><br/>
+                            <a className="cancel" onClick={this._makeToggle(7)}>Cancel</a>
                         </div>
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._toggle4}>Open Dialog Modal</a>
+                    <a onClick={this._makeToggle(4)}>Open Dialog Modal</a>
 
                     <Modal
+                        flags={flags}
                         modalTitle="Dialog Modal"
                         type="dialog"
                         ref="dialogModal"
                         expanded={this.state.expanded4}
-                        onOpen={this._toggle4}>
+                        onOpen={this._makeToggle(4)}>
 
                         <div>
                             <div className="modal-title">
@@ -154,20 +140,21 @@ class ModalDemo extends React.Component {
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="buttons">
-                                <Button onClick={this._toggle4}>Nope</Button>
-                                <Button type="primary" onClick={this._toggle4}>Yup</Button>
+                                <Button onClick={this._makeToggle(4)}>Nope</Button>
+                                <Button type="primary" onClick={this._makeToggle(4)}>Yup</Button>
                             </div>
                         </div>
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._toggle5}>Open Alert Modal</a>
+                    <a onClick={this._makeToggle(5)}>Open Alert Modal</a>
 
                     <Modal
+                        flags={flags}
                         type="alert"
                         ref="alertModal"
                         expanded={this.state.expanded5}
-                        onOpen={this._toggle5}>
+                        onOpen={this._makeToggle(5)}>
 
                         <div className = "title">
                             Alert Modal
@@ -176,21 +163,22 @@ class ModalDemo extends React.Component {
                             This modal copies the look of details tooltip with alert class.
                         </div>
                         <div className="buttons">
-                            <Button type="cancel" onClick={this._toggle5}>Disgard Changes</Button>
-                            <Button type="primary" onClick={this._toggle5}>Save</Button>
+                            <Button type="cancel" onClick={this._makeToggle(5)}>Disgard Changes</Button>
+                            <Button type="primary" onClick={this._makeToggle(5)}>Save</Button>
                             <br />
-                            <a className="cancel" onClick={this._toggle5}>Cancel</a>
+                            <a className="cancel" onClick={this._makeToggle(5)}>Cancel</a>
                         </div>
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._toggle6}>Open Modal with Close Confirmation</a>
+                    <a onClick={this._makeToggle(6)}>Open Modal with Close Confirmation</a>
 
                     <Modal
+                        flags={flags}
                         modalTitle="Modal with Close Confirmation"
                         maximize={true}
                         expanded={this.state.expanded6}
-                        onOpen={this._toggle6}
+                        onOpen={this._makeToggle(6)}
                         onClose={this._openTooltip}
                         cancelTooltip={{
                             title: "Close Modal Confirmation",
