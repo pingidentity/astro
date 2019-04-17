@@ -19,7 +19,6 @@ import Colors from "../../general/charting/Cards/dashboardColors";
  * @param {string} [color]
  *     color of the data
  *
- *
  * @class FrequencyCard
  * @desc A card that displays a donut chart on a dashboard card.
  *
@@ -113,12 +112,14 @@ export default class FrequencyCard extends Component {
     /**
      * Handle mouse over/out events for charts
      */
-    _donutChartMouseOver = (hoveredItem) => {
-        const o = this._findItemById(hoveredItem.id, this.props.donutData);
+    _donutChartMouseOver = ({ id }) => {
+        const o = this._findItemById(id, this.props.donutData);
 
-        this._itemSelect(hoveredItem.id, {
-            color: this._getColors(this.props.donutData)[this.props.donutData.map((e) => e.value).indexOf(o.value)],
-            strokeWidth: 4,
+        const color = this._getColors(this.props.donutData)[this.props.donutData.map((e) => e.value).indexOf(o.value)];
+
+        this._itemSelect(id, {
+            color,
+            strokeWidth: 2,
             value: o.value
         });
     }
@@ -143,9 +144,11 @@ export default class FrequencyCard extends Component {
     _frontLegendMouseOver = ({ index, label }, e) => {
         e.preventDefault();
 
+        const color = this._getColors(this.props.donutData)[index];
+
         this._itemSelect(label, {
-            color: this._getColors(this.props.donutData)[index],
-            strokeWidth: 4,
+            color,
+            strokeWidth: 2,
             value: this.props.donutData[index].value
         });
     };
@@ -187,7 +190,15 @@ export default class FrequencyCard extends Component {
     _renderCells = (data, colors) =>
         data.map(({ id }, key) =>
             this.state.hoveredItem.id === id ? (
-                <Cell className="frequency-card__hovered" data-id="donut-pie-cell" key={id} fill={colors[key]} style={{ strokeWidth: this.state.hoveredItem ? this.state.hoveredItem.strokeWidth : 0 }}/>
+                <Cell
+                    className="frequency-card__hovered"
+                    data-id="donut-pie-cell"
+                    key={id}
+                    fill={colors[key]}
+                    style={{
+                        strokeWidth: this.state.hoveredItem ? this.state.hoveredItem.strokeWidth : 0,
+                        stroke: this.state.hoveredItem ? colors[key] : null,
+                    }}/>
             ) : (
                 <Cell data-id="donut-pie-cell" key={id} fill={colors[key]}/>
             )
@@ -311,8 +322,8 @@ export default class FrequencyCard extends Component {
                                             data={donutData}
                                             dataKey="value"
                                             nameKey="id"
-                                            onMouseOver={this._donutChartMouseOver}
-                                            onMouseOut={this._donutChartMouseOut}
+                                            onMouseEnter={this._donutChartMouseOver}
+                                            onMouseLeave={this._donutChartMouseOut}
                                             onClick={this._handleDonutChartClick}
                                         >
                                             {this._renderCells(donutData, this._getColors(donutData).reverse())}

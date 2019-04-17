@@ -197,7 +197,7 @@ describe("FrequencyCard", function () {
 
         expect(component.state.hoveredItem).toEqual({
             ...donutData[0],
-            "strokeWidth": 4,
+            "strokeWidth": 2,
         });
     });
 
@@ -253,7 +253,7 @@ describe("FrequencyCard", function () {
 
         component._donutChartMouseOver(item);
 
-        expect(component.state.hoveredItem).toEqual({ ...item, strokeWidth: 4 });
+        expect(component.state.hoveredItem).toEqual({ ...item, strokeWidth: 2 });
     });
 
     it("clears the selected item from the donut cell on mouseout", () => {
