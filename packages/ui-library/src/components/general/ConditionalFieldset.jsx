@@ -9,6 +9,9 @@ import FormRadioGroup from "../forms/FormRadioGroup";
 import Utils from "../../util/Utils.js";
 import _ from "underscore";
 
+import { cannonballProgressivleyStatefulWarning } from "../../util/DeprecationUtils";
+import { inStateContainer } from "../utils/StateContainer";
+
 
 /**
  * @enum {string}
@@ -125,19 +128,27 @@ class ConditionalFieldsetStateless extends React.Component {
     }
 
     render() {
-        const type = this.props.type || ((this.props.children.length > 2) ? Types.SELECT : Types.RADIO);
-        const options = this._getOptions(type);
+        const {
+            children,
+            "data-id": dataId,
+            label,
+            selectedIndex,
+            supportEmpty,
+            type,
+        } = this.props;
+
+        const checkedType = type || ((children.length > 2) ? Types.SELECT : Types.RADIO);
+        const options = this._getOptions(checkedType);
         const index = this._getConvertedIndex();
-        const showFieldset = !(this.props.supportEmpty && this.props.selectedIndex === 0) &&
-            this.props.children[index].props.children;
+        const showFieldset = !(supportEmpty && selectedIndex === 0) && children[index].props.children;
         const className = classNames({ focused: showFieldset, unfocused: !showFieldset }, "conditional-fieldset");
 
         return (
             <div>
-                <FormLabel data-id={`${this.props["data-id"]}-label`} className="detached">
-                    {this.props.label}
+                <FormLabel data-id={`${dataId}-label`} className="detached">
+                    {label}
                 </FormLabel>
-                <fieldset data-id={this.props["data-id"]} className={className}>
+                <fieldset data-id={dataId} className={className}>
                     <legend>
                         {options}
                     </legend>
@@ -204,7 +215,8 @@ class ConditionalFieldsetStateful extends React.Component {
  * @param {number} selectedIndex
  *     The index of the currently selected option. If using the stateless=false option this is not required.
  * @param {array} [flags]
- *     Set the flag for "use-portal" to render dropdown with popper.js and react-portal
+ *     Add the "use-portal" flag to render dropdown with popper.js and react-portal
+ *     Add the "p-stateful" flag to use the progressivly stateful version of this component.
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally. If True, onValueChange and
@@ -245,24 +257,36 @@ class ConditionalFieldsetStateful extends React.Component {
  *     </InputRow>
  *
  */
-class ConditionalFieldset extends React.Component {
+export default class ConditionalFieldset extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        stateless: false
+        flags: [],
+        stateless: false,
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
+    static Types = Types;
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount () {
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+        }
+        if (!this._usePStateful()) {
+            cannonballProgressivleyStatefulWarning({ name: "ConditionalFieldset" });
         }
     }
 
     render() {
+
+        if (this._usePStateful()) {
+            return <PStatefulConditionalFieldset {...this.props} />;
+        }
+
         return this.props.stateless
             ? React.createElement(ConditionalFieldsetStateless,
                 _.defaults({ ref: "ConditionalFieldsetStateless" }, this.props), this.props.children)
@@ -271,6 +295,11 @@ class ConditionalFieldset extends React.Component {
     }
 }
 
-ConditionalFieldset.Types = Types;
-
-module.exports = ConditionalFieldset;
+const PStatefulConditionalFieldset = inStateContainer([
+    {
+        name: "selectedIndex",
+        initial: 0,
+        setter: "onValueChange",
+    }
+])(ConditionalFieldsetStateless);
+PStatefulConditionalFieldset.displayName = "PStatefulConditionalFieldset";

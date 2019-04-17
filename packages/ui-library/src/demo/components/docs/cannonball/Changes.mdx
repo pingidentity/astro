@@ -1,17 +1,14 @@
 ### Button
-
 * **V4 Behavior:** All buttons, including those with the 'add' icon, will have margin on their right side unless other styles from, for instance, a container remove it.
 * **V3 Behavior:** Buttons with the icon "add" have their margin removed.
 * **Recommendation:** Set the 'add-button-margin' flag to keep the margin or set the `noSpacing` prop to true on a button to keep it removed.
 
 ### ButtonBar
-
 * **V4 Behavior:** The discard button will be styled the same as a cancel button.
 * **V3 Behavior:** The discard button is styled like a standard button.
 * **Recommendation:** Set the 'fix-discard-button' flag for ButtonBar or use the props for a cancel button instead.
 
 ### Calendar
-
 * **V4 Behavior:** When provided, the `date` prop will control the value of the component.
 * **V3 Behavior:** The `date` prop only updates the component when it changes.
 * **Recommendation:** Set the 'p-stateful' flag.
@@ -27,7 +24,6 @@
 * **Recommendation:** Set the 'p-stateful' flag.
 
 ### ExpandableRow
-
 * **V4 Behavior:** Each ExpandableRow will use a standalone CSS class to style them even out of context.
 * **V3 Behavior:** ExpandableRows get their styling from a surrounding element.
 * **Recommendation:** Add the flag 'expandable-row-class' to each ExpandableRow.
@@ -43,13 +39,11 @@
 * **Recommendation:** Set the 'p-stateful' flag.
 
 ### HeaderBar
-
 * **V4 Behavior:** Will default to updated style unless prop "legacy" is set to true.
 * **V3 Behavior:** Defaults to legacy style unless prop "updated" is set to true.
 * **Recommendation:** Set either updated or legacy to true.
 
 ### LeftNavBar
-
 * **V4 Behavior:** Will default to updated style unless prop "legacy" is set to true.
 * **V3 Behavior:** Defaults to legacy style unless prop "updated" is set to true.
 * **Recommendation:** Set either updated or legacy to true.
@@ -60,13 +54,11 @@
 * **Recommendation:** Set the 'p-stateful' flag.
 
 ### Icon
-
 * **V4 Behavior:** Displays an icon with only a SPAN tag unless it contains `children` or `type` is set to "leading".
 * **V3 Behavior:** Displays a block element with an icon that has right margin unless `type` is set to "inline".
 * **Recommendation:** Set `type` to either "leading" or "inline".
 
 ### Link
-
 * **V4 Behavior:** Displays a link with only an A tag unless `type` is set to "block".
 * **V3 Behavior:** Displays a block element with a link inside it unless it:
     * has `children` or some `type` other than block is set
@@ -83,13 +75,11 @@
 * **Recommendation:** Make sure `value` is only set when the component is stateless. If you want the component to be stateful and also want to set an initial value, use the `initialState` prop. (Or set a flag for "p-stateful".)
 
 ### Pagination
-
 * **V4 Behavior:** When provided, the `page` prop will control the current page of the component. Otherwise, the component will handle paging internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not paging will be controlled by the component.
 * **Recommendation:** Set the 'p-stateful' flag.
 
 ### DetailsTooltip
-
 * **V4 Behavior:** When provided, the `open` prop will control whether the component is open. Otherwise, the component will handle open and closing internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the open state will be controlled by the component.
 * **Recommendation:** Set the "p-stateful" flag.
@@ -99,7 +89,6 @@
 * **Recommendation:** Use `placement` instead of `positionClassName`.
 
 ### RockerButton
-
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the index state will be controlled by the component.
 * **Recommendation:** Set the "p-stateful" flag.
@@ -110,7 +99,6 @@
 * **Recommendation:** Set the 'p-stateful' flag.
 
 ### FileUpload
-
 * **V4 Behavior:** When provided, the `defaultImage` prop will show an image with opacity when no `thumbnailSrc` prop is provided.
 * **V3 Behavior:** The `defaultImage` prop worked roughly the same as `thumbnailSrc` and took precedence over it, but only in the stateful version of the component. There was no additional styling.
 * **Recommendation:** Set the "true-default" flag.
@@ -119,3 +107,8 @@
 * **V4 Behavior:** The component controls `queryString`, `showOnlySelected`, and `selectedItemIds` if they aren't defined as props. The initial values can be set with `initialState`.
 * **V3 Behavior:** The `stateless` prop determines whether they are controlled by the component or not.
 * **Recommendation:** Set the 'p-stateful' flag.
+
+### ConditionalFieldset
+* **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
+* **V3 Behavior:** The `stateless` prop decides whether or not the index state will be controlled by the component.
+* **Recommendation:** Set the "p-stateful" flag.

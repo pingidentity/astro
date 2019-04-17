@@ -8,30 +8,39 @@ jest.dontMock("../../forms/FormRadioGroup");
 jest.dontMock("../../forms/FormRadioInput");
 jest.dontMock("../../forms/InputWidths");
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import Utils from "../../../util/Utils";
+import FormDropDownList from "../../forms/FormDropDownList";
+import FormRadioGroup from "../../forms/FormRadioGroup";
+import ConditionalFieldset from "../ConditionalFieldset";
 import { InputWidths, InputWidthClasses } from "../../forms/InputWidths";
+import { mount } from "enzyme";
 
 describe("ConditionalFieldset", function () {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        Utils = require("../../../util/Utils"),
-        FormDropDownList = require("../../forms/FormDropDownList"),
-        FormRadioGroup = require("../../forms/FormRadioGroup"),
-        ConditionalFieldset = require("../ConditionalFieldset"),
-        callback,
-        dataId = "fieldset",
-        selectedIndex = 0;
+    const dataId = "fieldset";
+    const selectedIndex = 0;
+    const defaultProps = {
+        "data-id": dataId
+    };
+    let callback;
 
     beforeEach(function () {
         callback = jest.fn();
     });
 
     function getComponent (props) {
-        const defaultProps = {
-            "data-id": dataId
-        };
-
         return ReactTestUtils.renderIntoDocument(
+            <ConditionalFieldset {...defaultProps} {...props}>
+                <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
+                <div data-id="option2" title="Option 2">Option 2</div>
+            </ConditionalFieldset>
+        );
+    }
+
+    function getEnzymeWrapper (props) {
+        return mount(
             <ConditionalFieldset {...defaultProps} {...props}>
                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                 <div data-id="option2" title="Option 2">Option 2</div>
@@ -225,5 +234,39 @@ describe("ConditionalFieldset", function () {
 
         const label = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
         expect(label.className).toContain("required");
+    });
+
+    it("fires cannonball warning when the p-stateful flag is not set", function () {
+        console.warn = jest.fn();
+        getComponent({ flags: [] });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("does not fire cannonball warning when the p-stateful flag is set", function () {
+        console.warn = jest.fn();
+        getComponent({ flags: ["p-stateful"] });
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("sets the selectedIndex automatically when p-statful flag is set", function () {
+        const cb = jest.fn();
+        const wrapper = getEnzymeWrapper({
+            flags: ["p-stateful"],
+            onValueChange: cb,
+        });
+
+        const r1 = { "data-id": "fieldset-options_0" };
+        const r2 = { "data-id": "fieldset-options_1" };
+
+        expect(cb).not.toBeCalled();
+        expect(wrapper.find(r1).prop("checked")).toEqual(true);
+        expect(wrapper.find(r2).prop("checked")).toEqual(false);
+
+        // used "change" since "click" event does not trigger the onChange on the input in Enzyme
+        wrapper.find(r2).simulate("change");
+
+        expect(cb).toHaveBeenCalled();
+        expect(wrapper.find(r1).prop("checked")).toEqual(false);
+        expect(wrapper.find(r2).prop("checked")).toEqual(true);
     });
 });
