@@ -201,7 +201,9 @@ class HeaderBarDemo extends React.Component {
 
                     siteTitle="UI Library" />
                 <HR />
+                <p> With Mode signifier </p>
                 <HeaderBar
+                    mode="Sandbox"
                     inline={true}
                     environmentOptions={environments}
                     environmentSelected="production"
@@ -218,6 +220,28 @@ class HeaderBarDemo extends React.Component {
                     siteTitle="UI Library" />
                 <HR />
                 <HeaderBar
+                    inline={true}
+                    siteLogo="pingone"
+                    flags={flags}
+
+                    tree={[{
+                        id: "account",
+                        label: "John Doe",
+                        children: [{
+                            id: "globe",
+                            iconClassName: "icon-globe",
+                            title: "Internet",
+                            label: "Internet" }
+                        ]
+                    }]}
+
+                    additionalContent="Additional Content"
+                    renderProductNav={customRenderProductNav}
+                />
+                <HR />
+                <p>With the Mode signifier</p>
+                <HeaderBar
+                    mode="Sandbox"
                     inline={true}
                     siteLogo="pingone"
                     flags={flags}

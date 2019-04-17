@@ -344,7 +344,8 @@ ProductNav.defaultProps = {
  *          Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {HeaderBar~ProductNavRenderer} renderProductNav
  *          Function that renders the product nav. Accepts props as the first argument and the default component as the second.
- *
+ * @param {string|object} [mode]
+ *          Mode of the app "sandbox". Eiher title of the mode or object with title and color.
  **/
 
 /**
@@ -398,6 +399,13 @@ class HeaderBar extends React.Component {
             PropTypes.number
         ]),
         inline: PropTypes.bool,
+        mode: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.shape({
+                title: PropTypes.string,
+                color: PropTypes.string,
+            }),
+        ]),
         navOptions: PropTypes.arrayOf(PropTypes.object),
         navSelected: PropTypes.oneOfType([
             PropTypes.string,
@@ -472,6 +480,34 @@ class HeaderBar extends React.Component {
         }
     }
 
+    _getModeNodes() {
+        const { mode } = this.props;
+
+        if (!mode) {
+            return {};
+        }
+
+        const bar = (
+            <div className="header-bar__mode-bar"
+                style={{ backgroundColor: mode.color }}
+            />
+        );
+
+        const title = (
+            <div className="header-bar__mode-title"
+                style={{ borderColor: mode.color }}
+            >
+                { //pull the property from an object if it is one, otherwise assume mode is string (proptypes)
+                    mode.title || mode
+                }
+            </div>
+        );
+
+        return ({
+            bar,
+            title
+        });
+    }
     render() {
         var tree = this.props.tree;
         if (this.props.tree === undefined && this.props.userMenu) {
@@ -486,12 +522,15 @@ class HeaderBar extends React.Component {
 
         const { flags, renderProductNav, openNode } = this.props;
 
+        const modeNodes = this._getModeNodes();
+
         return (
             <div
                 className="header-bar"
                 id={!this.props.inline ? "header" : ""}
                 data-id={this.props["data-id"]}
             >
+                {modeNodes.bar}
                 <div className="header-bar__left">
                     {(!this._isUpdated() || this.props.legacy) && (
                         <div
@@ -552,6 +591,7 @@ class HeaderBar extends React.Component {
                     )}
                 </div>
                 <div className="header-bar__right">
+                    {modeNodes.title}
                     {this.props.environmentOptions && (
                         <EnvironmentSelector
                             options={this.props.environmentOptions}

@@ -464,6 +464,77 @@ describe("HeaderBar", function() {
         expect(callback).toBeCalled();
     });
 
+    it("renders mode styling with string", function() {
+
+        const modeTitle = "Sandbox";
+        const wrapper = getWrappedComponent({
+            mode: modeTitle,
+        });
+        const component = wrapper.refs.target;
+        const bar = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "header-bar__mode-bar"
+        );
+
+        const title = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "header-bar__mode-title"
+        );
+
+
+        expect(bar).toBeTruthy();
+        expect(title.textContent).toEqual(modeTitle);
+
+    });
+
+    it("renders mode styling with object", function() {
+
+        const mode = {
+            title: "My Sandbox",
+            color: "black",
+        };
+
+        const wrapper = getWrappedComponent({
+            mode,
+        });
+        const component = wrapper.refs.target;
+        const bar = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "header-bar__mode-bar"
+        );
+
+        const title = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "header-bar__mode-title"
+        );
+
+        expect(bar.style["background-color"]).toEqual(mode.color);
+        expect(title.style["border-color"]).toEqual(mode.color);
+        expect(title.textContent).toEqual(mode.title);
+    });
+
+    it("does not render mode with no prop", function() {
+
+        const wrapper = getWrappedComponent();
+        const component = wrapper.refs.target;
+        const bar = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "header-bar__mode-bar"
+        );
+
+        const title = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "header-bar__mode-title"
+        );
+
+
+        expect(bar).toBeFalsy();
+        expect(title).toBeFalsy();
+
+    });
+
+
+
     it ("throws the Cannonball warning when either legacy or updated is not provided", function() {
         console.warn = jest.fn();
 

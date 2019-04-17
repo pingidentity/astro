@@ -20,6 +20,7 @@ $topnav-bg: $color-neutral-10;
 .header-bar {
     @include displayFlexRow;
 
+    position: relative;
     background: $topnav-bg;
     height: $topnav-height;
     padding-left: $spacing-md;
@@ -93,6 +94,27 @@ $topnav-bg: $color-neutral-10;
 
 .header-bar__additional-content {
     @include font-pn-light;
+}
+
+.header-bar__mode {
+    $mode-color: #38c0d1; //teal
+    &-bar {
+        background-color: $mode-color;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 4px;
+    }
+    &-title {
+        border: 1px solid $mode-color;
+        border-radius: 3px;
+        font-size: 11px;
+        color: $color-white;
+        padding: 0 $spacing-sm;
+        height: 20px;
+        line-height: 20px;
+    }
 }
 
 .market-selector.input-custom-select {
@@ -233,7 +255,8 @@ $topnav-bg: $color-neutral-10;
     border: 1px solid $color-neutral-30;
     border-style: none solid;
     line-height: 30px;
-    padding: 0 10px;
+    margin-left: $spacing-sm;
+    padding: 0 $spacing-sm;
     vertical-align: middle;
 
     // compensate for this class being passed on
