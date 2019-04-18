@@ -65,7 +65,7 @@ class CancelTooltip extends React.Component {
         onConfirm: PropTypes.func.isRequired,
         onCancel: PropTypes.func.isRequired,
         positionClassName: PropTypes.string,
-        placement: PropTypes.oneOf(DetailsTooltip.tooltipPlacements),
+        placement: PropTypes.oneOf(Object.values(DetailsTooltip.tooltipPlacements)),
         flags: PropTypes.arrayOf(PropTypes.string),
     };
 
