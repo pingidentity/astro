@@ -11,15 +11,6 @@ import HR from "ui-library/lib/components/general/HR";
 class ButtonsDemo extends Component {
     static flags = [ "add-button-margin" ];
 
-    constructor(props) {
-        super(props);
-        var i;
-
-        for (i=1; i<=this.numDemos; i+=1) {
-            this["_toggleLoadingButton" + i] = this._toggleLoadingButton.bind(null, i);
-        }
-    }
-
     state = {
         loading1: false,
         loading2: false
@@ -27,7 +18,7 @@ class ButtonsDemo extends Component {
 
     numDemos = 3;
 
-    _toggleLoadingButton = (i) => {
+    _toggleLoadingButton = i => () => {
         var newState = {};
 
         newState["loading" + i] = !this.state["loading" + i];
@@ -102,20 +93,20 @@ class ButtonsDemo extends Component {
                     label="Ellipsis Loader Primary Button"
                     type={buttonTypes.PRIMARY}
                     loading={this.state.loading1}
-                    onClick={this._toggleLoadingButton1}
+                    onClick={this._toggleLoadingButton(1)}
                 />
                 <Button
                     label="Ellipsis Loader Secondary Button"
                     type={buttonTypes.SECONDARY}
                     loading={this.state.loading2}
-                    onClick={this._toggleLoadingButton2}
+                    onClick={this._toggleLoadingButton(2)}
                 />
                 <Button
                     label="Inline Ellipsis Button"
                     type={buttonTypes.SECONDARY}
                     inline
                     loading={this.state.loading3}
-                    onClick={this._toggleLoadingButton3}
+                    onClick={this._toggleLoadingButton(3)}
                 />
                 <Button
                     label="Documentation"

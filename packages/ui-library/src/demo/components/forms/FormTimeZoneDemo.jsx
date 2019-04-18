@@ -36,14 +36,14 @@ class FormTimeZoneDemo extends React.Component {
     _numDemos = 2;
     _selectText = "Select a timezone";
 
-    _handleSearch = (demoIndex, value, index) => {
+    _handleSearch = demoIndex => (value, index) => {
         this.setState({
             ["searchString" + demoIndex]: value,
             ["selectedIndex" + demoIndex]: index,
         });
     };
 
-    _handleChange = (demoIndex, type, value) => {
+    _handleChange = demoIndex => (type, value) => {
         let newState = {};
 
         if (type === "country") {
@@ -62,26 +62,17 @@ class FormTimeZoneDemo extends React.Component {
         this.setState(newState);
     };
 
-    _handleToggle = (demoIndex) => {
+    _handleToggle = demoIndex => () =>{
         this.setState({ [`open${demoIndex}`]: !this.state[`open${demoIndex}`] });
     };
 
-    _handleClear = (demoIndex) => {
+    _handleClear = demoIndex => () => {
         this.setState({
             [`open${demoIndex}`]: false,
             [`displayValue${demoIndex}`]: this._selectText,
             [`filterByCountry${demoIndex}`]: "",
             [`searchString${demoIndex}`]: "",
         });
-    }
-
-    componentDidMount() {
-        for (var i = 0; i < this._numDemos; i += 1) {
-            this["_handleSearch" + i] = this._handleSearch.bind(null, i);
-            this["_handleChange" + i] = this._handleChange.bind(null, i);
-            this["_handleClear" + i] = this._handleClear.bind(null, i);
-            this["_handleToggle" + i] = this._handleToggle.bind(null, i);
-        }
     }
 
     render() {
@@ -95,10 +86,10 @@ class FormTimeZoneDemo extends React.Component {
                         stateless={true}
                         filterByCountry={this.state.filterByCountry0}
                         labelText="Stateless Version with clear"
-                        onValueChange={this._handleChange0}
-                        onSearch={this._handleSearch0}
-                        onToggle={this._handleToggle0}
-                        onClear={this.state.displayValue0 !== this._selectText && this._handleClear0}
+                        onValueChange={this._handleChange(0)}
+                        onSearch={this._handleSearch(0)}
+                        onToggle={this._handleToggle(0)}
+                        onClear={this.state.displayValue0 !== this._selectText && this._handleClear(0)}
                         open={this.state.open0}
                         searchString={this.state.searchString0}
                         selectedIndex={this.state.selectedIndex0}
@@ -114,9 +105,9 @@ class FormTimeZoneDemo extends React.Component {
                         stateless={true}
                         filterByCountry={this.state.filterByCountry1}
                         labelText="Stateless Version (where abbreviation is displayed instead)"
-                        onValueChange={this._handleChange1}
-                        onSearch={this._handleSearch1}
-                        onToggle={this._handleToggle1}
+                        onValueChange={this._handleChange(1)}
+                        onSearch={this._handleSearch(1)}
+                        onToggle={this._handleToggle(1)}
                         open={this.state.open1}
                         searchString={this.state.searchString1}
                         selectedIndex={this.state.selectedIndex1}
@@ -133,7 +124,7 @@ class FormTimeZoneDemo extends React.Component {
                         labelText="Stateful Version"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"
-                        open={true}
+                        {...this.props.flags.includes("p-stateful") ? { initialState: { open: true } } : { open: true }}
                         filterByCountry="US"
                         flags={flags}
                     />

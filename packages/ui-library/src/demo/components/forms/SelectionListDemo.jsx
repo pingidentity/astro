@@ -11,9 +11,7 @@ const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString
 var testIcon = <span className="icon-cog inline-icon"></span>;
 var testImage = <img src="./favicon.png" />;
 
-var NUM_SINGLE_SELECT_DEMOS = 3,
-    NUM_MULTI_SELECT_DEMOS = 4,
-    SINGLE_SELECT_ITEMS = [
+var SINGLE_SELECT_ITEMS = [
         { name: "Hockey", id: 1 },
         { name: "Soccer", id: 2,
             helpHintText: "Selection List items may have Help Hints" },
@@ -62,19 +60,6 @@ var NUM_SINGLE_SELECT_DEMOS = 3,
 */
 class SelectionListDemo extends React.Component {
 
-    constructor(props) {
-        super(props);
-        var i;
-
-        for (i=1; i<=NUM_SINGLE_SELECT_DEMOS; i+=1) {
-            this["_onSingleSelectChange" + i] = this._onSingleSelectChange.bind(null, i);
-        }
-        for (i=1; i<=NUM_MULTI_SELECT_DEMOS; i+=1) {
-            this["_onMultiSelectChange" + i] = this._onMultiSelectChange.bind(null, i);
-            this["_onMultiSelectAll" + i] = this._onMultiSelectAll.bind(null, i);
-        }
-    }
-
     static flags = [ "use-portal", "p-stateful" ];
 
     state = {
@@ -90,19 +75,19 @@ class SelectionListDemo extends React.Component {
         required: false
     };
 
-    _onSingleSelectChange = (index, selectedItemId) => {
+    _onSingleSelectChange = index => selectedItemId => {
         var newState = {};
         newState["singleSelectId" + index] = selectedItemId;
         this.setState(newState);
     };
 
-    _onMultiSelectChange = (index, selectedItemIds) => {
+    _onMultiSelectChange = index => selectedItemIds => {
         var newState = {};
         newState["multiSelectIds" + index] = selectedItemIds;
         this.setState(newState);
     };
 
-    _onMultiSelectAll = (index) => {
+    _onMultiSelectAll = index => () => {
         var newState = {};
         newState["multiSelectIds" + index] = MULTI_SELECT_ITEMS.map(function (item) {
             return item.id;
@@ -153,7 +138,7 @@ class SelectionListDemo extends React.Component {
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
-                    onValueChange={this._onSingleSelectChange2}
+                    onValueChange={this._onSingleSelectChange(2)}
                     requiredText={this.state.required ? "Select at least one" : ""}
                     flags={flags}
                 />
@@ -174,7 +159,7 @@ class SelectionListDemo extends React.Component {
                     selectedItemIds={this.state.singleSelectId3}
                     showSearchBox={false}
                     searchPlaceholder="Search..."
-                    onValueChange={this._onSingleSelectChange3}
+                    onValueChange={this._onSingleSelectChange(3)}
                     name="second-demo"
                     flags={flags}
                 />
@@ -204,7 +189,7 @@ class SelectionListDemo extends React.Component {
                         selectedItemIds={this.state.singleSelectId1}
                         showSearchBox={true}
                         searchPlaceholder="Search..."
-                        onValueChange={this._onSingleSelectChange1}
+                        onValueChange={this._onSingleSelectChange(1)}
                         flags={flags}
                     />
                 </DetailsTooltip>
@@ -228,8 +213,8 @@ class SelectionListDemo extends React.Component {
                     type={SelectionList.ListType.MULTI}
                     items={MULTI_SELECT_ITEMS}
                     selectedItemIds={this.state.multiSelectIds3}
-                    onValueChange={this._onMultiSelectChange3}
-                    onSelectAll={this._onMultiSelectAll3}
+                    onValueChange={this._onMultiSelectChange(3)}
+                    onSelectAll={this._onMultiSelectAll(3)}
                     flags={flags}
                 />
 
@@ -249,8 +234,8 @@ class SelectionListDemo extends React.Component {
                     searchPlaceholder={"Search..."}
                     onSearch={this._myCustomSearch}
                     showSelectionOptions={true}
-                    onValueChange={this._onMultiSelectChange2}
-                    onSelectAll={this._onMultiSelectAll2}
+                    onValueChange={this._onMultiSelectChange(2)}
+                    onSelectAll={this._onMultiSelectAll(2)}
                     {...LABELS}
                     flags={flags}
                 />
@@ -280,8 +265,8 @@ class SelectionListDemo extends React.Component {
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
                         showSelectionOptions={true}
-                        onValueChange={this._onMultiSelectChange1}
-                        onSelectAll={this._onMultiSelectAll1}
+                        onValueChange={this._onMultiSelectChange(1)}
+                        onSelectAll={this._onMultiSelectAll(1)}
                         {...LABELS}
                         flags={flags}
                     />
@@ -315,8 +300,8 @@ class SelectionListDemo extends React.Component {
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
                         showSelectionOptions={true}
-                        onValueChange={this._onMultiSelectChange4}
-                        onSelectAll={this._onMultiSelectAll4}
+                        onValueChange={this._onMultiSelectChange(4)}
+                        onSelectAll={this._onMultiSelectAll(4)}
                         {...LABELS}
                         name="multi-select"
                         flags={flags}
@@ -352,7 +337,7 @@ class SelectionListDemo extends React.Component {
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
-                    onValueChange={this._onSingleSelectChange2}
+                    onValueChange={this._onSingleSelectChange(2)}
                     requiredText={this.state.required ? "Select at least one" : ""}
                     className="fluid-width"
                     flags={flags}

@@ -11,13 +11,6 @@ class CalendarDemo extends React.Component {
 
     numDemos = 3;
 
-    constructor(props) {
-        super(props);
-        for (var i=1; i<=this.numDemos; i+=1) {
-            this["_onEnrollmentDateChanged" + i] = this._onEnrollmentDateChanged.bind(null, i);
-        }
-    }
-
     static flags = [ "use-portal", "p-stateful" ];
 
     state = {
@@ -30,7 +23,7 @@ class CalendarDemo extends React.Component {
         }
     };
 
-    _onEnrollmentDateChanged = (index, newValue) => {
+    _onEnrollmentDateChanged = index => newValue => {
         var newState = {};
 
         newState["selectedDate" + index] = parseInt(newValue);
@@ -56,7 +49,7 @@ class CalendarDemo extends React.Component {
                     labelText="Date"
                     labelHelpText="Help text can go here"
                     name="calendar-demo"
-                    onValueChange={this._onEnrollmentDateChanged1}
+                    onValueChange={this._onEnrollmentDateChanged(1)}
                     flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate1)}</div>
@@ -73,7 +66,7 @@ class CalendarDemo extends React.Component {
                     required={true}
                     labelText="Date with date range"
                     labelHelpText="Selection outside of date range is not permitted"
-                    onValueChange={this._onEnrollmentDateChanged2}
+                    onValueChange={this._onEnrollmentDateChanged(2)}
                     flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
@@ -86,7 +79,7 @@ class CalendarDemo extends React.Component {
                     date={this.state.selectedDate3}
                     format="YYYY-MM-DD"
                     labelText="Date only showing months"
-                    onValueChange={this._onEnrollmentDateChanged3}
+                    onValueChange={this._onEnrollmentDateChanged(3)}
                     minView={Calendar.Views.MONTHS}
                     flags={flags}
                 />

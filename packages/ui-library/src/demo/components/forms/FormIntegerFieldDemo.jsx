@@ -19,7 +19,7 @@ class FormIntegerFieldDemo extends React.Component {
         integerField7Disabled: false
     };
 
-    _handleValueChange = (index, value) => {
+    _handleValueChange = index => value => {
         if (FormIntegerField.isValid(value)) {
             let newState = {};
             newState["integerField" + index] = value;
@@ -27,7 +27,7 @@ class FormIntegerFieldDemo extends React.Component {
         }
     };
 
-    _handleBlur = (index, min, max) => {
+    _handleBlur = (index, min, max) => () => {
         const value = this.state["integerField" + index];
         let newState = {};
 
@@ -39,18 +39,6 @@ class FormIntegerFieldDemo extends React.Component {
             this.setState(newState);
         }
     };
-
-    componentDidMount() {
-        // Bind "onValueChange" callbacks
-        this._handleValueChange0 = this._handleValueChange.bind(null, 0);
-        this._handleValueChange2 = this._handleValueChange.bind(null, 2);
-        this._handleValueChange3 = this._handleValueChange.bind(null, 3);
-        this._handleValueChange6 = this._handleValueChange.bind(null, 6);
-
-        // Bind "onBlur" callbacks
-        this._handleBlur4 = this._handleBlur.bind(null, 4, 0, 25);
-        this._handleBlur5 = this._handleBlur.bind(null, 5, 50, 300);
-    }
 
     _changeCallback = (value) => {
         if (FormIntegerField.isValid(value)) {
@@ -113,7 +101,7 @@ class FormIntegerFieldDemo extends React.Component {
                 <InputRow>
                     <FormIntegerField
                         labelText={"Basic - Value : " + this.state.integerField0}
-                        onValueChange = {this._handleValueChange0}
+                        onValueChange = {this._handleValueChange(0)}
                         initialValue = ""
                         stateless={false}
                         width={InputWidths.MD}
@@ -138,7 +126,7 @@ class FormIntegerFieldDemo extends React.Component {
                         showUndo = {true}
                         labelText={"With default value and undo - Value : " + this.state.integerField2}
                         initialValue = {8800}
-                        onValueChange = {this._handleValueChange2}
+                        onValueChange = {this._handleValueChange(2)}
                         width={InputWidths.MD}
                         stateless={false}
                         flags={this.props.flags}
@@ -146,7 +134,7 @@ class FormIntegerFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormIntegerField
-                        onValueChange = {this._handleValueChange3}
+                        onValueChange = {this._handleValueChange(3)}
                         data-id = "integerField3"
                         labelText={"Required - Value : " + this.state.integerField3}
                         initialValue = ""
@@ -159,7 +147,7 @@ class FormIntegerFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormIntegerField
-                        onValueChange = {this._handleValueChange6}
+                        onValueChange = {this._handleValueChange(6)}
                         data-id = "integerField6"
                         labelText={"Range 1 - 15 - Value : " + this.state.integerField6}
                         initialValue = {this.state.integerField6}
@@ -183,7 +171,7 @@ class FormIntegerFieldDemo extends React.Component {
                                 this.state.integerField4
                         }
                         enforceRange={false}
-                        onBlur = {this._handleBlur4}
+                        onBlur = {this._handleBlur(4, 0, 25)}
                         errorMessage = {this.state.integerField4Error}
                         max = {25}
                         min = {0}
@@ -199,7 +187,7 @@ class FormIntegerFieldDemo extends React.Component {
                 <InputRow>
                     <FormIntegerField
                         onValueChange = {this._changeCallback5}
-                        onBlur={this._handleBlur5}
+                        onBlur={this._handleBlur(5, 50, 300)}
                         data-id = "integerField5"
                         labelText={"Range 50 - 300, Increment 5 - Value : " + this.state.integerField5}
                         errorMessage = {this.state.integerField5Error}

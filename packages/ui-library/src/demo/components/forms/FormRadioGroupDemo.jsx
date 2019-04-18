@@ -14,7 +14,6 @@ class FormRadioGroupDemo extends React.Component {
 
         for (var i=1; i<=this._numDemos; i+=1) {
             initialState["selectedId" + i] = i;
-            this["_handleChange" + i] = this._handleChange.bind(this, i);
         }
 
         this.state = initialState;
@@ -22,7 +21,7 @@ class FormRadioGroupDemo extends React.Component {
 
     _numDemos = 4;
 
-    _handleChange = (i, value) => {
+    _handleChange = i => value => {
         var newState = {};
         newState["selectedId" + i] = value;
         this.setState(newState);
@@ -49,7 +48,7 @@ class FormRadioGroupDemo extends React.Component {
                     <FormRadioGroup
                         groupName="horizontal-group"
                         selected={this.state.selectedId1}
-                        onValueChange={this._handleChange1}
+                        onValueChange={this._handleChange(1)}
                         items={radioItems}
                         labelText="Horizonal Alignment"
                         stacked={false}
@@ -64,7 +63,7 @@ class FormRadioGroupDemo extends React.Component {
                     <FormRadioGroup
                         groupName="stacked-group"
                         selected={this.state.selectedId2}
-                        onValueChange={this._handleChange2}
+                        onValueChange={this._handleChange(2)}
                         labelText="Stacked/Vertical Alignment"
                         items={radioItems}
                     />
@@ -78,7 +77,7 @@ class FormRadioGroupDemo extends React.Component {
                     <FormRadioGroup
                         groupName="disabled-stacked-group"
                         selected={this.state.selectedId3}
-                        onValueChange={this._handleChange3}
+                        onValueChange={this._handleChange(3)}
                         items={radioItems}
                         labelText="Disabled Radio Group"
                         disabled={true}
@@ -89,7 +88,7 @@ class FormRadioGroupDemo extends React.Component {
                     <FormRadioGroup
                         groupName="hidden-stacked-group"
                         selected={this.state.selectedId4}
-                        onValueChange={this._handleChange4}
+                        onValueChange={this._handleChange(4)}
                         labelText="Radio Group With Random Hidden"
                         items={radioItemsWithHidden}
                     />

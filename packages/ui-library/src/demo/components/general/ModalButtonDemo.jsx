@@ -20,14 +20,12 @@ class ModalButtonDemo extends React.Component {
 
         for (var i=1; i<=NUM_STATELESS_DEMOS; i+=1) {
             initialState["modalExpanded" + i] = false;
-            this["_handleOpen" + i] = this._handleOpen.bind(null, i);
-            this["_handleClose" + i] = this._handleClose.bind(null, i);
         }
 
         this.state = initialState;
     }
 
-    _handleOpen = (index) => {
+    _handleOpen = (index) => () => {
         var newState = {};
 
         newState["modalExpanded" + index] = true;
@@ -35,7 +33,7 @@ class ModalButtonDemo extends React.Component {
         this.setState(newState);
     };
 
-    _handleClose = (index) => {
+    _handleClose = (index) => () => {
         var newState = {};
 
         newState["modalExpanded" + index] = false;
@@ -72,8 +70,8 @@ class ModalButtonDemo extends React.Component {
                         activatorButtonLabel="Open Stateless Modal"
                         modalTitle="Stateless Modal"
                         stateless={true}
-                        onOpen={this._handleOpen1}
-                        onClose={this._handleClose1}
+                        onOpen={this._handleOpen(1)}
+                        onClose={this._handleClose(1)}
                         initiallyExpanded={false}
                         expanded={this.state.modalExpanded1}
                         flags={flags}
@@ -119,8 +117,8 @@ class ModalButtonDemo extends React.Component {
                         type={ModalButton.Modal.Type.DIALOG}
                         ref="dialogModal"
                         stateless={true}
-                        onOpen={this._handleOpen2}
-                        onClose={this._handleClose2}
+                        onOpen={this._handleOpen(2)}
+                        onClose={this._handleClose(2)}
                         expanded={this.state.modalExpanded2}
                         flags={flags}
                     >
@@ -133,9 +131,9 @@ class ModalButtonDemo extends React.Component {
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <ButtonGroup>
-                                <Button data-id="nopeButton" onClick={this._handleClose2}>Nope</Button>
+                                <Button data-id="nopeButton" onClick={this._handleClose(2)}>Nope</Button>
                                 <Button type="primary" data-id="yupButton"
-                                    onClick={this._handleClose2} >
+                                    onClick={this._handleClose(2)} >
                                     Yup
                                 </Button>
                             </ButtonGroup>
@@ -149,8 +147,8 @@ class ModalButtonDemo extends React.Component {
                         type={ModalButton.Modal.Type.ALERT}
                         ref="alertModal"
                         stateless={true}
-                        onOpen={this._handleOpen3}
-                        onClose={this._handleClose3}
+                        onOpen={this._handleOpen(3)}
+                        onClose={this._handleClose(3)}
                         expanded={this.state.modalExpanded3}
                         flags={flags}
                     >
@@ -162,15 +160,15 @@ class ModalButtonDemo extends React.Component {
                         </div>
                         <ButtonGroup>
                             <Button type="cancel"
-                                onClick={this._handleClose3} data-id="discardChangesButton" >
+                                onClick={this._handleClose(3)} data-id="discardChangesButton" >
                                 Discard Changes
                             </Button>
                             <Button type="primary"
-                                onClick={this._handleClose3} data-id="saveButton">
+                                onClick={this._handleClose(3)} data-id="saveButton">
                                 Save
                             </Button>
                             <br />
-                            <a className="cancel" data-id="cancelLink" onClick={this._handleClose3}>Cancel</a>
+                            <a className="cancel" data-id="cancelLink" onClick={this._handleClose(3)}>Cancel</a>
                         </ButtonGroup>
                     </ModalButton>
                 </InputRow>

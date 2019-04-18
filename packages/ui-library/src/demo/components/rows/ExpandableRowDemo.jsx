@@ -15,21 +15,14 @@ import ButtonGroup from "../../../components/layout/ButtonGroup";
 * @desc A demo for ExpandableRow
 */
 class ExpandableRowDemo extends React.Component {
-    constructor(props) {
-        super(props);
-        this._onToggle1 = this._onToggle.bind(null, 1);
-        this._onToggle3 = this._onToggle.bind(null, 3);
-        this._onToggle4 = this._onToggle.bind(null, 4);
-
-        this.state = {
-            expanded: false,
-            rowDeleted: false
-        };
-    }
+    state = {
+        expanded: false,
+        rowDeleted: false
+    };
 
     static flags = ["use-portal", "expandable-row-class"];
 
-    _onToggle = (index) => {
+    _onToggle = (index) => () => {
         var newState = {},
             key = "expanded" + index;
 
@@ -177,7 +170,7 @@ class ExpandableRowDemo extends React.Component {
                     subtitle="stateless"
                     stateless={false}
                     expanded={this.state.expanded1}
-                    onToggle={this._onToggle1}
+                    onToggle={this._onToggle(1)}
                     rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
                 />
                 <ExpandableRow
@@ -289,7 +282,7 @@ class ExpandableRowDemo extends React.Component {
                         subtitle="stateless"
                         stateless={false}
                         expanded={this.state.expanded3}
-                        onToggle={this._onToggle3}
+                        onToggle={this._onToggle(3)}
                         onDeleteCancelClick={this._handleDeleteCancel}
                         onDeleteConfirmClick={this._handleDeleteConfirm}
                         showDelete={true}
@@ -307,7 +300,7 @@ class ExpandableRowDemo extends React.Component {
                         subtitle="stateless"
                         stateless={false}
                         expanded={this.state.expanded4}
-                        onToggle={this._onToggle4}
+                        onToggle={this._onToggle(4)}
                         deleteButton={customDeleteButton}
                     />
                 )}

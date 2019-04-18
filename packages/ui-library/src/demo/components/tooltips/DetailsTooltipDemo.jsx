@@ -29,7 +29,7 @@ class DetailsTooltipDemo extends React.Component {
 
     numDemos = 9;
 
-    _toggle = (index) => {
+    _handleToggle = index => () => {
         var newState = {};
 
         newState["open" + index] = !this.state["open" + index];
@@ -37,51 +37,42 @@ class DetailsTooltipDemo extends React.Component {
         this.setState(newState);
     };
 
-    _confirm = (index) => {
+    _handleConfirm = index => () => {
         var newState = {};
 
         newState["status" + index] = "confirmed";
-        this._toggle(index);
+        this._handleToggle(index)();
 
         this.setState(newState);
     };
 
-    _cancel = (index) => {
+    _handleCancel = index => () => {
         var newState = {};
 
         newState["status" + index] = "cancelled";
-        this._toggle(index);
+        this._handleToggle(index)();
 
         this.setState(newState);
     };
 
-    _discard = (index) => {
+    _handleDiscard = index => () => {
         var newState = {};
 
         newState["status" + index] = "changes discarded";
-        this._toggle(index);
+        this._handleToggle(index)();
 
         this.setState(newState);
     };
-
-    componentDidMount() {
-        for (var i=1; i<=this.numDemos; i+=1) {
-            this["_handleToggle" + i] = this._toggle.bind(null, i);
-            this["_handleCancel" + i] = this._cancel.bind(null, i);
-            this["_handleConfirm" + i] = this._confirm.bind(null, i);
-            this["_handleDiscard" + i] = this._discard.bind(null, i);
-        }
-    }
 
     render() {
 
         const secondaryArr = [
-            { value: this._handleCancel8, label: "One" },
-            { value: this._handleCancel8, label: "Two" }
+            { value: this._handleCancel(8), label: "One" },
+            { value: this._handleCancel(8), label: "Two" }
         ];
 
         const primaryArr = [
-            { value: this._handleConfirm8, label: "Save" }
+            { value: this._handleConfirm(8), label: "Save" }
         ];
 
         const { flags } = this.props;
@@ -95,7 +86,7 @@ class DetailsTooltipDemo extends React.Component {
                     label="With a label (label is passed into component)"
                     title="Tooltip Title"
                     open={this.state.open1}
-                    onToggle={this._handleToggle1}>
+                    onToggle={this._handleToggle(1)}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -103,12 +94,12 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <ButtonGroup
                         data-id="delete-confirmation"
-                        onCancel={this._handleCancel1}
+                        onCancel={this._handleCancel(1)}
                     >
                         <Button
                             data-id="confirm-action"
                             type="primary"
-                            onClick={this._handleConfirm1} >
+                            onClick={this._handleConfirm(1)} >
                             Confirm
                         </Button>
                     </ButtonGroup>
@@ -116,14 +107,14 @@ class DetailsTooltipDemo extends React.Component {
                 <div>{this.state.status1}</div>
 
                 <br/>
-                <a onClick={this._handleToggle2}>Without label (label is outside component)</a>
+                <a onClick={this._handleToggle(2)}>Without label (label is outside component)</a>
                 <DetailsTooltip
                     flags={flags}
                     stateless={true}
                     placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open2}
-                    onToggle={this._handleToggle2}>
+                    onToggle={this._handleToggle(2)}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -131,12 +122,12 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <ButtonGroup
                         data-id="delete-confirmation"
-                        onCancel={this._handleCancel2}
+                        onCancel={this._handleCancel(2)}
                     >
                         <Button
                             data-id="confirm-action"
                             type="primary"
-                            onClick={this._handleConfirm2} >
+                            onClick={this._handleConfirm(2)} >
                             Confirm
                         </Button>
                     </ButtonGroup>
@@ -152,7 +143,7 @@ class DetailsTooltipDemo extends React.Component {
                     placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open3}
-                    onToggle={this._handleToggle3}>
+                    onToggle={this._handleToggle(3)}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -160,12 +151,12 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <ButtonGroup
                         data-id="delete-confirmation"
-                        onCancel={this._handleCancel3}
+                        onCancel={this._handleCancel(3)}
                     >
                         <Button
                             data-id="confirm-action"
                             type="primary"
-                            onClick={this._handleConfirm3} >
+                            onClick={this._handleConfirm(3)} >
                             Confirm
                         </Button>
                     </ButtonGroup>
@@ -180,7 +171,7 @@ class DetailsTooltipDemo extends React.Component {
                     label="Open by default"
                     title="Tooltip Title"
                     open={this.state.open4}
-                    onToggle={this._handleToggle4}>
+                    onToggle={this._handleToggle(4)}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -188,12 +179,12 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <ButtonGroup
                         data-id="delete-confirmation"
-                        onCancel={this._handleCancel4}
+                        onCancel={this._handleCancel(4)}
                     >
                         <Button
                             data-id="confirm-action"
                             type="primary"
-                            onClick={this._handleConfirm4} >
+                            onClick={this._handleConfirm(4)} >
                             Confirm
                         </Button>
                     </ButtonGroup>
@@ -208,7 +199,7 @@ class DetailsTooltipDemo extends React.Component {
                     positionClassName="alert"
                     title="Title won't display"
                     open={this.state.open5}
-                    onToggle={this._handleToggle5}>
+                    onToggle={this._handleToggle(5)}>
                     <div className="title">
                         Alert Title
                     </div>
@@ -218,12 +209,12 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <ButtonGroup
                         data-id="delete-confirmation"
-                        onCancel={this._handleCancel5}
+                        onCancel={this._handleCancel(5)}
                     >
                         <Button
                             data-id="confirm-action"
                             type="primary"
-                            onClick={this._handleConfirm5} >
+                            onClick={this._handleConfirm(5)} >
                             Confirm
                         </Button>
                     </ButtonGroup>
@@ -238,7 +229,7 @@ class DetailsTooltipDemo extends React.Component {
                     label="Three Buttons"
                     title="Three Buttons"
                     open={this.state.open6}
-                    onToggle={this._handleToggle6}>
+                    onToggle={this._handleToggle(6)}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -246,18 +237,18 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <ButtonGroup
                         data-id="delete-confirmation"
-                        onCancel={this._handleCancel6}
+                        onCancel={this._handleCancel(6)}
                     >
                         <Button
                             data-id="confirm-action"
                             type="cancel"
-                            onClick={this._handleDiscard6} >
+                            onClick={this._handleDiscard(6)} >
                             Discard Changes
                         </Button>
                         <Button
                             data-id="confirm-action"
                             type="primary"
-                            onClick={this._handleConfirm6} >
+                            onClick={this._handleConfirm(6)} >
                             Confirm
                         </Button>
                     </ButtonGroup>
@@ -272,7 +263,7 @@ class DetailsTooltipDemo extends React.Component {
                     positionClassName="alert"
                     title="Tooltip Title"
                     open={this.state.open7}
-                    onToggle={this._handleToggle7}>
+                    onToggle={this._handleToggle(7)}>
                     <div className="title">Save Changes</div>
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -280,18 +271,18 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <ButtonGroup
                         data-id="delete-confirmation"
-                        onCancel={this._handleCancel7}
+                        onCancel={this._handleCancel(7)}
                     >
                         <Button
                             data-id="confirm-action"
                             type="cancel"
-                            onClick={this._handleDiscard7} >
+                            onClick={this._handleDiscard(7)} >
                             Discard Changes
                         </Button>
                         <Button
                             data-id="confirm-action"
                             type="primary"
-                            onClick={this._handleConfirm7} >
+                            onClick={this._handleConfirm(7)} >
                             Confirm
                         </Button>
                     </ButtonGroup>
@@ -306,7 +297,7 @@ class DetailsTooltipDemo extends React.Component {
                     placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open8}
-                    onToggle={this._handleToggle8}
+                    onToggle={this._handleToggle(8)}
                     secondaryLabels={secondaryArr}
                     primaryLabels={primaryArr}
                     cancelLabel="Cancel"

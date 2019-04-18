@@ -48,7 +48,7 @@ class FormDropDownListDemo extends React.Component {
         this.state = initState;
     }
 
-    _handleValueChange = (index, option) => {
+    _handleValueChange = index => option => {
         let newState = {};
 
         newState["selectedValue" + index] = option;
@@ -80,12 +80,6 @@ class FormDropDownListDemo extends React.Component {
         });
     };
 
-    componentDidMount() {
-        for (var i=1; i<=NUM_DEMOS; i+=1) {
-            this["_handleValueChange" + i] = this._handleValueChange.bind(null, i);
-        }
-    }
-
     render() {
         class CustomType extends React.Component {
             render() {
@@ -110,7 +104,7 @@ class FormDropDownListDemo extends React.Component {
                         autofocus={true}
                         label="Autofocus with auto-width"
                         selectedOption={this.state.selectedValue1}
-                        onValueChange={this._handleValueChange1}
+                        onValueChange={this._handleValueChange(1)}
                     />
                 </InputRow>
                 <div>Selected value: {this.state.selectedValue1.label}</div>
@@ -127,7 +121,7 @@ class FormDropDownListDemo extends React.Component {
                         autofocus={true}
                         label="input row with icons"
                         selectedOption={this.state.selectedValue11}
-                        onValueChange={this._handleValueChange11}
+                        onValueChange={this._handleValueChange(11)}
                     />
                 </InputRow>
                 <div>Selected value: {this.state.selectedValue11.value}</div>
@@ -141,7 +135,7 @@ class FormDropDownListDemo extends React.Component {
                         label="Custom content type and search field"
                         searchField="value"
                         selectedOption={this.state.selectedValue2}
-                        onValueChange={this._handleValueChange2}
+                        onValueChange={this._handleValueChange(2)}
                         width={InputWidths.MD}
                         name="custom-content-type"
                     />
@@ -156,7 +150,7 @@ class FormDropDownListDemo extends React.Component {
                         label="With a help hint"
                         labelHelpText="Some help tip"
                         selectedOption={this.state.selectedValue3}
-                        onValueChange={this._handleValueChange3}
+                        onValueChange={this._handleValueChange(3)}
                         width={InputWidths.SM}
                     />
                 </InputRow>
@@ -170,7 +164,7 @@ class FormDropDownListDemo extends React.Component {
                         label="With error"
                         errorMessage="The error message appears when hovering over the input or the error icon."
                         selectedOption={this.state.selectedValue4}
-                        onValueChange={this._handleValueChange4}
+                        onValueChange={this._handleValueChange(4)}
                         width={InputWidths.SM}
                     />
                 </InputRow>
@@ -184,7 +178,7 @@ class FormDropDownListDemo extends React.Component {
                         label="Disabled"
                         disabled={true}
                         selectedOption={this.state.selectedValue5}
-                        onValueChange={this._handleValueChange5}
+                        onValueChange={this._handleValueChange(5)}
                         width={InputWidths.SM}
                     />
                 </InputRow>
@@ -198,7 +192,7 @@ class FormDropDownListDemo extends React.Component {
                         groups={GROUPS}
                         label="With groups"
                         selectedOption={this.state.selectedValue6}
-                        onValueChange={this._handleValueChange6}
+                        onValueChange={this._handleValueChange(6)}
                         width={InputWidths.SM}
                     />
                 </InputRow>
@@ -216,7 +210,7 @@ class FormDropDownListDemo extends React.Component {
                         labelAdd="ADD"
                         labelPrompt="Type to search or add"
                         selectedOption={this.state.selectedValue7}
-                        onValueChange={this._handleValueChange7}
+                        onValueChange={this._handleValueChange(7)}
                         width={InputWidths.SM}
                     />
                 </InputRow>
@@ -231,7 +225,7 @@ class FormDropDownListDemo extends React.Component {
                         labelPrompt="Type to search"
                         searchType={FormDropDownList.SearchTypes.BOX}
                         selectedOption={this.state.selectedValue8}
-                        onValueChange={this._handleValueChange8}
+                        onValueChange={this._handleValueChange(8)}
                         width={InputWidths.SM}
                     />
                 </InputRow>
@@ -251,7 +245,7 @@ class FormDropDownListDemo extends React.Component {
                         labelAdd="ADD"
                         labelPrompt="Type to search or add"
                         selectedOption={this.state.selectedValue9}
-                        onValueChange={this._handleValueChange9}
+                        onValueChange={this._handleValueChange(9)}
                         width={InputWidths.MD}
                     />
                 </InputRow>
@@ -266,7 +260,7 @@ class FormDropDownListDemo extends React.Component {
                         required
                         selectedOption={this.state["selectedValue" + NUM_DEMOS]}
                         noneOption={NONEOPTION}
-                        onValueChange={this["_handleValueChange" + NUM_DEMOS]}
+                        onValueChange={this._handleValueChange(NUM_DEMOS)}
                         width={InputWidths.SM}
                     />
                 </InputRow>

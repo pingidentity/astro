@@ -11,23 +11,14 @@ import InputRow from "../../../components/layout/InputRow";
 class TimePickerDemo extends React.Component {
     static flags = [ "use-portal" ];
 
-    constructor(props) {
-        super(props);
-        var initialState = {
-            a: "--",
-            b: "--",
-            c1: "",
-            c2: ""
-        };
+    state = {
+        a: "--",
+        b: "--",
+        c1: "",
+        c2: ""
+    };
 
-        for (var key in initialState) {
-            this["_handleValueChange" + key.toUpperCase()] = this._handleValueChange.bind(null, key);
-        }
-
-        this.state = initialState;
-    }
-
-    _handleValueChange = (index, value) => {
+    _handleValueChange = index => value => {
         var newState = {};
 
         // special handling for the calendar value
@@ -46,7 +37,7 @@ class TimePickerDemo extends React.Component {
             <div>
                 <InputRow>
                     <TimePicker
-                        onValueChange={this._handleValueChangeA}
+                        onValueChange={this._handleValueChange("a")}
                         increments={30}
                         labelText="12 Hour Format"
                         value={this.state.a}
@@ -58,7 +49,7 @@ class TimePickerDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <TimePicker
-                        onValueChange={this._handleValueChangeB}
+                        onValueChange={this._handleValueChange("b")}
                         increments={60}
                         format="24"
                         labelText="24 Hour Format"
@@ -77,12 +68,12 @@ class TimePickerDemo extends React.Component {
                         format="YYYY-MM-DD"
                         computableFormat="x"
                         closeOnSelect={true}
-                        onValueChange={this._handleValueChangeC1}
+                        onValueChange={this._handleValueChange("c1")}
                         date={this.state.c1}
                         flags={flags}
                     />
                     <TimePicker
-                        onValueChange={this._handleValueChangeC2}
+                        onValueChange={this._handleValueChange("c2")}
                         increments={60}
                         format="24"
                         value={this.state.c2}

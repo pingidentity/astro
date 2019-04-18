@@ -14,7 +14,6 @@ class FormCheckboxDemo extends React.Component {
 
         for (var i=1; i<=this._numDemos; i+=1) {
             initialState["checkboxChecked" + i] = Math.random() < 0.5;
-            this["_onChange" + i] = this._onChange.bind(this, i);
         }
 
         this.state = initialState;
@@ -22,7 +21,7 @@ class FormCheckboxDemo extends React.Component {
 
     _numDemos = 12;
 
-    _onChange = (i, event) => {
+    _onChange = i => event => {
         var newState = {};
         newState["checkboxChecked" + i] = event.target.checked;
         this.setState(newState);
@@ -35,7 +34,7 @@ class FormCheckboxDemo extends React.Component {
                     <FormCheckbox
                         label = {"Regular Checkbox; checked: " + this.state.checkboxChecked1}
                         value = ""
-                        onChange = {this._onChange1}
+                        onChange = {this._onChange(1)}
                         checked = {this.state.checkboxChecked1}
                     />
                 </InputRow>
@@ -43,7 +42,7 @@ class FormCheckboxDemo extends React.Component {
                     <FormCheckbox
                         label = {"Default Checked; checked: " + this.state.checkboxChecked2}
                         value = ""
-                        onChange = {this._onChange2}
+                        onChange = {this._onChange(2)}
                         checked = {this.state.checkboxChecked2}
                         name = "default-checked"
                     />
@@ -52,7 +51,7 @@ class FormCheckboxDemo extends React.Component {
                     <FormCheckbox
                         label = {"Disabled; checked: " + this.state.checkboxChecked3}
                         value = ""
-                        onChange = {this._onChange3}
+                        onChange = {this._onChange(3)}
                         checked = {this.state.checkboxChecked3}
                         disabled = {true}
                         labelHelpText = "Disabled with help"
@@ -62,7 +61,7 @@ class FormCheckboxDemo extends React.Component {
                     <FormCheckbox
                         label = {"With added Help Text; checked: " + this.state.checkboxChecked4}
                         value = ""
-                        onChange = {this._onChange4}
+                        onChange = {this._onChange(4)}
                         checked = {this.state.checkboxChecked4}
                         labelHelpText = "Check this box!"
                     />
@@ -73,19 +72,19 @@ class FormCheckboxDemo extends React.Component {
                     </label>
                     <FormCheckbox
                         label="Stacked Checkbox"
-                        onChange={this._onChange5}
+                        onChange={this._onChange(5)}
                         checked={this.state.checkboxChecked5}
                         stacked
                     />
                     <FormCheckbox
                         label="Stacked Checkbox"
-                        onChange={this._onChange6}
+                        onChange={this._onChange(6)}
                         checked={this.state.checkboxChecked6}
                         stacked
                     />
                     <FormCheckbox
                         label="Stacked Checkbox"
-                        onChange={this._onChange7}
+                        onChange={this._onChange(7)}
                         checked={this.state.checkboxChecked7}
                         stacked
                     />
@@ -96,19 +95,19 @@ class FormCheckboxDemo extends React.Component {
                     </label>
                     <FormCheckbox
                         label="Inline Checkbox"
-                        onChange={this._onChange8}
+                        onChange={this._onChange(8)}
                         checked={this.state.checkboxChecked8}
                         inline
                     />
                     <FormCheckbox
                         label="Inline Checkbox"
-                        onChange={this._onChange9}
+                        onChange={this._onChange(9)}
                         checked={this.state.checkboxChecked9}
                         inline
                     />
                     <FormCheckbox
                         label="Inline Checkbox"
-                        onChange={this._onChange10}
+                        onChange={this._onChange(10)}
                         checked={this.state.checkboxChecked10}
                         inline
                     />
@@ -116,7 +115,7 @@ class FormCheckboxDemo extends React.Component {
                 <InputRow>
                     <FormCheckbox
                         label="Single Inline Checkbox"
-                        onChange={this._onChange11}
+                        onChange={this._onChange(11)}
                         checked={this.state.checkboxChecked11}
                         inline
                     />
@@ -125,7 +124,7 @@ class FormCheckboxDemo extends React.Component {
                     <FormCheckbox
                         label={"With Error Message; checked: " + this.state.checkboxChecked12}
                         value=""
-                        onChange={this._onChange12}
+                        onChange={this._onChange(12)}
                         checked={this.state.checkboxChecked12}
                         errorMessage="An error has occurred"
                     />
