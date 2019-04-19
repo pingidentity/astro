@@ -1,0 +1,6 @@
+.no-devices {
+    @include flexbox;
+    align-items: center;
+    @include flexbox-direction(column);
+    padding: $spacing-xl 0;
+}

@@ -36,6 +36,7 @@ $layout-header-height: 46px;
 
 @import './layout/messages';
 
+@import 'end-user/_no-devices.scss';
 @import 'end-user/_user-nav.scss';
 @import 'end-user/_device-table.scss';
 @import 'end-user/_card-modal.scss';
