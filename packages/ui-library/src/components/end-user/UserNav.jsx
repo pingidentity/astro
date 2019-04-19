@@ -12,9 +12,10 @@ const UserInfo = ({
     <div className="user-info">
         {
             user.imageSrc
-                ? (<div className="user-info__image">
-                    <img src={user.imageSrc} />
-                </div>)
+                ? (<div
+                    className="user-info__image"
+                    style={{ backgroundImage: `url(${user.imageSrc})` }}
+                />)
                 : <span className="user-info__icon" />
         }
         { user.name }

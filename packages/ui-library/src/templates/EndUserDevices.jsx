@@ -163,6 +163,7 @@ export default class extends React.Component {
                     onSignOut={this._signOut}
                     user={{
                         name: "Tyler Grove",
+                        imageSrc: "src/demo/images/jordan.jpg"
                     }}
                 />
                 {
