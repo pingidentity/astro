@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import classnames from "classnames";
 import Icon from "../general/Icon";
 import HelpHint from "../tooltips/HelpHint";
+import { noFocus } from "../../util/EventUtils";
 import _ from "underscore";
 
 /**
@@ -166,6 +167,7 @@ const OptionList = ({
             className={classnames("option-list", className)}
             onKeyDown={onKeyDown}
             onFocus={onFocus}
+            onMouseDown={noFocus}
             data-id={dataId}
         >
             {options.map((option, index) => (

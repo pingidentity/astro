@@ -85,4 +85,12 @@ describe("TileButton", () => {
         expect(iconContainer.exists()).toEqual(true);
         expect(icon.exists()).toEqual(true);
     });
+
+    it("prevents default on mouse down", () => {
+        const mockE = { preventDefault: jest.fn() };
+        const component = getComponent();
+
+        component.find("button").simulate("mousedown", mockE);
+        expect(mockE.preventDefault).toHaveBeenCalled();
+    });
 });
