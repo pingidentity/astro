@@ -32,6 +32,15 @@ var ReportsDemoPage = Object.create(HomePage, {
     },
 
     /**
+     * @desc this function is to click on the text filter
+     */
+    clickFilter: {
+        value: function () {
+            this.click("//input[@name='filter']");
+        }
+    },
+
+    /**
      * @desc this function is to get the textfield filter
      */
     getFilter: {
@@ -47,15 +56,6 @@ var ReportsDemoPage = Object.create(HomePage, {
     setFilterValue: {
         value: function (inputValue) {
             this.getFilter.setValue(inputValue);
-        }
-    },
-
-    /**
-     * @desc this function is to click on run Button
-     */
-    clickButton: {
-        value: function () {
-            this.click("//button[@data-id='button']");
         }
     },
 

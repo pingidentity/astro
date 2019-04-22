@@ -2,7 +2,7 @@ var ReportsTemplatePage = require("../../pages/templates/ReportsTemplatePage.js"
 
 describe("Reports Template Integration", function () {
 
-    beforeEach(function () {
+    beforeAll(function () {
         ReportsTemplatePage.openReportsDemoPage();
     });
 
@@ -57,7 +57,6 @@ describe("Reports Template Integration", function () {
         ReportsTemplatePage.clickUnitText();
 
         // Wait for animations to complete
-        ReportsTemplatePage.pause(400);
 
         ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_ReportUnitInputText");
 
@@ -70,15 +69,16 @@ describe("Reports Template Integration", function () {
 
         ReportsTemplatePage.clickUnitTime();
 
+
         ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_ReportUnitInputTime");
 
 
     }));
 
-    it("it clicks on the time range", ReportsTemplatePage.retriable(function () {
+    it("it clicks on the filter", ReportsTemplatePage.retriable(function () {
 
+        ReportsTemplatePage.clickFilter();
         //take screenshot and compare
-
         ReportsTemplatePage.setFilterValue("tracking ID");
 
 
@@ -87,23 +87,11 @@ describe("Reports Template Integration", function () {
 
     }));
 
-    it("clicks the run button", ReportsTemplatePage.retriable(function () {
-
-        //take screenshot and compare
-
-        ReportsTemplatePage.clickButton();
-
-        // Wait for click state to be removed
-        ReportsTemplatePage.pause(400);
-
-        ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_ReportButton");
-
-    }));
-
     it("scroll down page", ReportsTemplatePage.retriable(function () {
 
         //take screenshot and compare
         ReportsTemplatePage.scrollDownPage(800);
+
 
         ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_Scroll");
 
