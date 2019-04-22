@@ -232,6 +232,7 @@ $flagsImageExtension: 'png' !default;
         }
         .arrow {
             position: absolute;
+            pointer-events: none;
             // split the difference between the flag and the arrow height to verically center
             top: 50%;
             margin-top: -1 * ($arrowHeight / 2);
