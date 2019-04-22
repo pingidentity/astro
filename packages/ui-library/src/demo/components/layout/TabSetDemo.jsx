@@ -96,7 +96,6 @@ export default class TabSetDemo extends Component {
             <div>
                 <TabSet
                     onValueChange={this._handleValueChange1}
-                    stateless={false}
                     selectedIndex={this.state.selectedIndex1}
                 >
                     <TabContent label="Label One">
@@ -131,7 +130,6 @@ export default class TabSetDemo extends Component {
                     onValueChange={this._handleValueChange2}
                     renderLabels={this.renderLabelsRightContent}
                     selectedIndex={this.state.selectedIndex2}
-                    stateless={true}
                 >
                     <TabContent label="Label 1">
                         Label one content
