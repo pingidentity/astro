@@ -125,6 +125,7 @@ $flagsImageExtension: 'png' !default;
         }
         .form-error-message {
             width: 100%;
+            z-index: $zindex__popover;
         }
     }
 }
