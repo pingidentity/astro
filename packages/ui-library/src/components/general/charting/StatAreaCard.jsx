@@ -67,7 +67,6 @@ class StatAreaCard extends React.Component {
         }
     }, 10);
 
-    /* istanbul ignore next*/
     _onMouseOut = () => _.debounce(this.props.onMouseOut(), 10);
 
     render() {
@@ -142,6 +141,7 @@ class StatAreaCard extends React.Component {
                                         content={<CustomTooltip />}
                                         cursor={false}
                                         onMouseOver={this._onMouseOver}
+                                        onMouseOut={this._onMouseOut}
                                         xAxisKey={this.props.xAxisKey}
                                         yAxisKey={this.props.yAxisKey}
                                     />
