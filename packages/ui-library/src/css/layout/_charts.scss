@@ -14,9 +14,9 @@
     border-radius: $border-radius;
     padding: 1px;
 
-    label,
-    .help-tooltip > .help-tooltip-target > label {
-        z-index: $zindex__elevated;
+    button,
+    .help-tooltip > .help-tooltip-target > button {
+        z-index: $zindex__elevated + 1;
         border: none;
         height: 100%;
         line-height: $button-height + 2;
@@ -24,6 +24,7 @@
         width: $button-width;
         color: $selected-color;
         font-size: 14px;
+        background-color: transparent;
     }
 
     &:before {
@@ -37,10 +38,10 @@
         border-radius: $border-radius;
     }
 
-    &.sel-0 > label:nth-of-type(1),
-    &.sel-1 > label:nth-of-type(2),
-    &.sel-2 > label:nth-of-type(3),
-    &.sel-3 > label:nth-of-type(4) {
+    &.sel-0 > button:nth-of-type(1),
+    &.sel-1 > button:nth-of-type(2),
+    &.sel-2 > button:nth-of-type(3),
+    &.sel-3 > button:nth-of-type(4) {
         @include transition($transition-timing color ease-out);
 
         background-color: transparent;
@@ -52,7 +53,7 @@
     &.sel-2 > .help-tooltip:nth-of-type(3),
     &.sel-3 > .help-tooltip:nth-of-type(4) {
         .help-tooltip-target {
-            label {
+            button {
                 @include transition($transition-timing color ease-out);
 
                 background-color: transparent;
@@ -69,6 +70,7 @@
             @include transition($transition-timing left ease-out);
 
             content: '';
+            //z-index: $zindex__elevated;
             position: absolute;
             height: $button-height;
             width: $button-width;
@@ -77,11 +79,11 @@
         }
     }
 
-    &.sel-0 label:nth-of-type(1),
-    &.sel-1 label:nth-of-type(2),
-    &.sel-2 label:nth-of-type(3),
-    &.sel-3 label:nth-of-type(4),
-    &.sel-4 label:nth-of-type(5) {
+    &.sel-0 button:nth-of-type(1),
+    &.sel-1 button:nth-of-type(2),
+    &.sel-2 button:nth-of-type(3),
+    &.sel-3 button:nth-of-type(4),
+    &.sel-4 button:nth-of-type(5) {
         background: transparent;
     }
 
@@ -106,7 +108,7 @@
     @include font-pn-regular;
     font-size: 10px;
     height: $button-height;
-    label {
+    button {
         line-height: $button-height + 1;
         width: $button-width;
     }

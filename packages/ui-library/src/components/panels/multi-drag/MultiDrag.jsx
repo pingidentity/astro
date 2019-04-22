@@ -166,6 +166,9 @@ function convertFilteredIndexes (columns, desc) {
  *    An array of field names of the row properties to use in a search where array index corresponds to each column index.
  *    If unset for any column index, search will use all row properties that have a string representation for that column.
  *    Only used when stateless=false.
+ *
+ * @param {boolean} [autoFocus=false]
+ *     Whether or not to auto-focus the element.
  * @param {boolean} [disabled=false]
  *    Disables the MultiDrag component
  * @param {string} [labelEmpty]
@@ -255,6 +258,7 @@ class MultiDragStateless extends React.Component {
         onScrolledToBottom: PropTypes.func,
         onScrolledToTop: PropTypes.func,
         // optional items
+        autoFocus: PropTypes.bool,
         labelEmpty: PropTypes.string,
         customSort: PropTypes.func,
         disabled: PropTypes.bool,
@@ -269,6 +273,7 @@ class MultiDragStateless extends React.Component {
         classNames: ["row-selector__available", "row-selector__added"],
         showSearchOnAllColumns: false,
         showSearch: false,
+        autoFocus: false,
         disabled: false,
         showCategoryFilter: true,
         showCategoryFilterOnAllColumns: false,
@@ -418,6 +423,7 @@ class MultiDragStateless extends React.Component {
                 className="input-search row-selector__search"
                 placeholder={`Search ${column.searchName || column.name}`}
                 showClear={true}
+                autoFocus={this.props.autoFocus}
                 value={column.search}
             />
         );

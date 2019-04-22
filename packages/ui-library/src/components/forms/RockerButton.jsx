@@ -79,8 +79,8 @@ export default class RockerButton extends React.Component {
         if (!this._usePStateful()) {
             cannonballChangeWarning({
                 message: `The 'selectedIndex' prop will no longer serve as an initial state. ` +
-                `If it is present, it will control the current value of the component. ` +
-                `Set the 'p-stateful' flag to switch to this behavior now.`,
+                    `If it is present, it will control the current value of the component. ` +
+                    `Set the 'p-stateful' flag to switch to this behavior now.`,
             });
         }
 
@@ -126,6 +126,7 @@ class RockerButtonStateless extends React.Component {
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
         selectedIndex: PropTypes.number,
+        autoFocus: PropTypes.bool,
         disabled: PropTypes.bool,
     };
 
@@ -135,6 +136,7 @@ class RockerButtonStateless extends React.Component {
         onValueChange: _.noop,
         selected: "",
         selectedIndex: 0,
+        autoFocus: false,
         disabled: false
     };
 
@@ -162,6 +164,8 @@ class RockerButtonStateless extends React.Component {
                             key: index,
                             text,
                             index,
+                            autoFocus: index === this.props.selectedIndex &&
+                                this.props.autoFocus === true,
                             helpText: this.props.labelHints ? this.props.labelHints[index] : undefined,
                         };
                         return (
@@ -173,6 +177,8 @@ class RockerButtonStateless extends React.Component {
     }
 }
 
+const dontFocus = event => event.preventDefault();
+
 var RockerButtonLabel = function (props) {
     var _handleClick = function (event) {
         props.onClick(props.text, props.index, event);
@@ -181,20 +187,35 @@ var RockerButtonLabel = function (props) {
     return props.helpText
         ? <HelpHint
             data-id="helphint-button"
-            placement = "top"
+            placement="top"
             delayShow={500}
-            hintText={props.helpText} ><label data-id={props["data-id"]} onClick={_handleClick}>{props.text}</label>
+            hintText={props.helpText} >
+            <button
+                data-id={props["data-id"]}
+                onMouseDown={dontFocus}
+                onClick={_handleClick}
+                autoFocus={props.autoFocus}
+            >
+                {props.text}
+            </button>
         </HelpHint>
-        : <label data-id={props["data-id"]} onClick={_handleClick}>{props.text}</label>;
+        : <button
+            data-id={props["data-id"]}
+            onMouseDown={dontFocus}
+            onClick={_handleClick}
+            autoFocus={props.autoFocus}
+        >
+            {props.text}
+        </button>;
 };
 
 RockerButtonLabel.propTypes = {
     "data-id": PropTypes.string,
     onClick: PropTypes.func,
+    autoFocus: PropTypes.bool,
     text: PropTypes.string,
     index: PropTypes.number
 };
-
 
 class RockerButtonStateful extends React.Component {
     state = {
@@ -241,4 +262,3 @@ const PStatefulRockerButton = inStateContainer([
 ])(RockerButtonStateless);
 
 PStatefulRockerButton.displayName = "PStatefulRockerButton";
-

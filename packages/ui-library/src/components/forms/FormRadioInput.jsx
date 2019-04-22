@@ -23,6 +23,8 @@ var React = require("react"),
  * @param {string} [className]
  *    CSS class(es) added on the top-level component container.
  *
+ * @param {boolean} [autoFocus=false]
+ *     Whether or not to auto-focus the element.
  * @param {boolean} [checked]
  *    Whether or not the radio input is selected.
  * @param {FormRadioInput~onValueChange} [onValueChange]
@@ -56,6 +58,7 @@ class FormRadioInput extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         checked: PropTypes.bool,
+        autoFocus: PropTypes.bool,
         className: PropTypes.string,
         disabled: PropTypes.bool,
         label: PropTypes.oneOfType([
@@ -72,7 +75,8 @@ class FormRadioInput extends React.Component {
     };
 
     static defaultProps = {
-        "data-id": "FormRadioInput"
+        "data-id": "FormRadioInput",
+        autoFocus: false,
     };
 
     _handleValueChange = (e) => {
@@ -96,6 +100,7 @@ class FormRadioInput extends React.Component {
                     name={this.props.name}
                     value={this.props.value}
                     checked={this.props.checked}
+                    autoFocus={this.props.autoFocus}
                     onChange={this._handleValueChange}
                     disabled={this.props.disabled} />
                 <div className="circle"></div>

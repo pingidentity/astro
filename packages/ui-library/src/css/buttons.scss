@@ -416,19 +416,20 @@ button.ellipsis-loader-button {
     $height: 35px;
     $transition: left 0.4s ease-out;
 
+    @include flexbox;
+    align-content: center;
+    justify-content: center;
+
     height: $height;
-    line-height: $height;
+    line-height: 10px;
     margin-bottom: $spacing-lg;
 
     @include border-radius(3px);
     @include base-button-styles;
 
-    label,
-    .help-tooltip > .helphint-button-target > label {
+    button,
+    .help-tooltip > .helphint-button-target > button {
         @include text-style();
-
-        position: relative;
-        float: left;
         padding: 0 30px;
 
         width: auto;
@@ -444,7 +445,7 @@ button.ellipsis-loader-button {
         cursor: pointer;
     }
 
-    label {
+    button {
         &:first-of-type {
             @include border-radius(3px 0 0 3px);
         }
@@ -454,7 +455,7 @@ button.ellipsis-loader-button {
         }
     }
 
-    .help-tooltip > .helphint-button-target > label {
+    .help-tooltip > .helphint-button-target > button {
         &:first-of-type {
             @include border-radius(3px 0 0 3px);
         }
@@ -468,15 +469,16 @@ button.ellipsis-loader-button {
     &.disabled {
         @include opacity(0.4);
         cursor: default;
-        label {
+        button {
             pointer-events: none;
         }
     }
-    &.sel-0 label:nth-of-type(1),
-    &.sel-1 label:nth-of-type(2),
-    &.sel-2 label:nth-of-type(3),
-    &.sel-3 label:nth-of-type(4),
-    &.sel-4 label:nth-of-type(5) {
+    &.sel-0 button:nth-of-type(1),
+    &.sel-1 button:nth-of-type(2),
+    &.sel-2 button:nth-of-type(3),
+    &.sel-3 button:nth-of-type(4),
+    &.sel-4 button:nth-of-type(5),
+    &.sel-4 button:nth-of-type(6) {
         @include transition($transition);
         background: $color-timberwolf;
     }
@@ -501,7 +503,7 @@ button.button--overflow {
         }
     }
 }
-//Consolidates styles for centered group of buttons with optional cancel link
+// Consolidates styles for centered group of buttons with optional cancel link
 .button-group {
     margin: 25px 0 0;
     text-align: center;
