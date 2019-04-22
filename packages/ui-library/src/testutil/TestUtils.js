@@ -48,7 +48,7 @@ var TestUtils = {
                 .replace(/\[/g, "\\[")
                 .replace(/\]/g, "\\]")
                 .replace(/'/g, "\\'");
-            nodes = parentNode.querySelectorAll("[data-id=" + selectorValue + "]");
+            nodes = parentNode.querySelectorAll(`[data-id="${selectorValue}"]`);
         }
 
         return nodes;
