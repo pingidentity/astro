@@ -16,6 +16,14 @@ $default-input-font-size: 14px;
 $borderSize: 1px !default;
 $default-input-border-radius: 2px;
 
+/*
+  This will hide the focus indicator if the element receives focus via the mouse,
+  but it will still show up on keyboard focus.
+*/
+.js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
+}
+
 
 // CORE INPUT STYLES ---------------------------------------------------------------------------------------------------
 
