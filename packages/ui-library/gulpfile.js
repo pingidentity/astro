@@ -118,6 +118,7 @@ gulp.task("create-flatfiles", () =>
         }))
         .pipe(rename(file => {
             file.basename = componentFlatfileNames[componentIndex];
+            file.extname = ".js";
             componentIndex += 1;
         }))
         .pipe(gulp.dest("lib"))
@@ -147,7 +148,6 @@ gulp.task("build-css", () =>
         .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
         .pipe(gulp.dest("lib/css"))
 );
-
 
 gulp.task("package-lib", () => {
     runSequence(
