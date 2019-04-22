@@ -1757,6 +1757,8 @@ input[type=file] {
 
             .label-text {
                 text-transform: none;
+                word-break: break-word;
+                word-wrap: break-word;
             }
         }
     }
