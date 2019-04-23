@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import FormDropDownList from "../../forms/FormDropDownList";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 class MarketSelector extends React.Component {
     static propTypes = {
@@ -17,6 +17,7 @@ class MarketSelector extends React.Component {
         "data-id": "market-selector",
         onMarketChange: _.noop,
         market: "",
+        flags: [],
         options: []
     };
 
@@ -47,7 +48,7 @@ class MarketSelector extends React.Component {
             selectedOption={this._getSelectedOption()}
             onValueChange={this._handleMarketChange}
             options={this._getOptions()}
-            flags={getFlags(this)}
+            flags={["use-portal", "p-stateful"]}
         />
     );
 }

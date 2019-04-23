@@ -4,6 +4,9 @@ jest.dontMock("../HeaderBar");
 jest.dontMock("../../../../util/EventUtils");
 jest.dontMock("../../../../util/Utils");
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 describe("HeaderBar", function() {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
