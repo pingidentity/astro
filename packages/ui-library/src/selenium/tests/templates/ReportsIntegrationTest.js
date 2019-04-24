@@ -45,6 +45,8 @@ describe("Reports Template Integration", function () {
 
         ReportsTemplatePage.clickTimeRange();
 
+        ReportsTemplatePage.blurElement();
+
         ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_ReportTimeRange");
 
 
@@ -55,6 +57,8 @@ describe("Reports Template Integration", function () {
         //take screenshot and compare
 
         ReportsTemplatePage.clickUnitText();
+
+        ReportsTemplatePage.blurElement();
 
         // Wait for animations to complete
 
@@ -68,6 +72,8 @@ describe("Reports Template Integration", function () {
         //take screenshot and compare
 
         ReportsTemplatePage.clickUnitTime();
+
+        ReportsTemplatePage.blurElement();
 
 
         ReportsTemplatePage.takeScreenshotAndCompare("TemplatesReports_ReportUnitInputTime");
