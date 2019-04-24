@@ -11,7 +11,7 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
-import ButtonGroup from "../layout/ButtonGroup.jsx";
+import ButtonGroup from "../layout/ButtonGroup";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 /**
