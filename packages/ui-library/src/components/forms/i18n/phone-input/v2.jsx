@@ -7,8 +7,9 @@ import CountryFlagList from "../CountryFlagList";
 import { v2 as FormTextField } from "../../form-text-field";
 import Validators from "../../../../util/Validators";
 import Utils from "../../../../util/Utils.js";
-import { cannonballPortalWarning } from "../../../../util/DeprecationUtils";
+import { cannonballPortalWarning, cannonballProgressivelyStatefulWarning } from "../../../../util/DeprecationUtils";
 import { flagsPropType } from "../../../../util/FlagUtils";
+import { inStateContainer, toggleTransform } from "../../../utils/StateContainer";
 
 /**
  * @typedef I18nPhoneInput~PhoneInputValues
@@ -97,24 +98,6 @@ import { flagsPropType } from "../../../../util/FlagUtils";
 *           phoneNumber={this.state.phoneNumberStateful} />
 */
 
-export default class I18nPhoneInput extends Component {
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: false
-    };
-
-    render() {
-        return this.props.stateless
-            ? React.createElement(I18nPhoneInputStateless, //eslint-disable-line
-                _.defaults({ ref: "I18nPhoneInputStateless" }, this.props))
-            : React.createElement(I18nPhoneInputStateful, //eslint-disable-line
-                _.defaults({ ref: "I18nPhoneInputStateful" }, this.props));
-    }
-}
-
 class I18nPhoneInputStateless extends Component {
 
     static propTypes = {
@@ -133,6 +116,9 @@ class I18nPhoneInputStateless extends Component {
         searchIndex: PropTypes.number,
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
+        setSearchIndex: PropTypes.func,
+        setSearchString: PropTypes.func,
+        setSearchTime: PropTypes.func,
         onSearch: PropTypes.func,
         errorMessage: PropTypes.string,
         placeholder: PropTypes.string,
@@ -244,6 +230,9 @@ class I18nPhoneInputStateless extends Component {
                     searchIndex={this.props.searchIndex}
                     searchString={this.props.searchString}
                     searchTime={this.props.searchTime}
+                    setSearchIndex={this.props.setSearchIndex}
+                    setSearchString={this.props.setSearchString}
+                    setSearchTime={this.props.setSearchTime}
                     name={this.props.name ? this.props.name+"-country" : null}
                     onSearch={this.props.onSearch}
                     flags={this.props.flags}
@@ -323,3 +312,65 @@ class I18nPhoneInputStateful extends Component {
         return <I18nPhoneInputStateless {...props} />;
     }
 }
+
+const PStatefulPhoneInput = inStateContainer([
+    {
+        name: "open",
+        initial: false,
+        callbacks: [{
+            name: "onToggle",
+            transform: toggleTransform
+        }]
+    },
+    {
+        name: "searchIndex",
+        initial: -1,
+        setter: "setSearchIndex",
+    },
+    {
+        name: "searchString",
+        initial: "",
+        setter: "setSearchString",
+    },
+    {
+        name: "searchTime",
+        initial: 0,
+        setter: "setSearchTime",
+    },
+])(I18nPhoneInputStateless);
+PStatefulPhoneInput.displayName = "PStatefulPhoneInput";
+
+class I18nPhoneInput extends Component {
+    static propTypes = {
+        stateless: PropTypes.bool
+    };
+
+    static defaultProps = {
+        flags: [],
+        stateless: false
+    };
+
+    _usePStateful = () => this.props.flags.includes("p-stateful");
+
+    componentDidMount() {
+        if (!this._usePStateful()) {
+            cannonballProgressivelyStatefulWarning({
+                name: "I18nPhoneInput"
+            });
+        }
+    }
+
+    render() {
+        if (this._usePStateful()) {
+            return <PStatefulPhoneInput {...this.props} />;
+        }
+
+        return this.props.stateless
+            ? <I18nPhoneInputStateless ref="I18nPhoneInputStateless" {...this.props} />
+            : <I18nPhoneInputStateful ref="I18nPhoneInputStateful" {...this.props} />;
+    }
+}
+
+I18nPhoneInput.I18nPhoneInputStateless = I18nPhoneInputStateless;
+
+export default I18nPhoneInput;

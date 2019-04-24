@@ -110,6 +110,9 @@ class CountryFlagList extends React.Component {
         onToggle: PropTypes.func,
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
+        setSearchIndex: PropTypes.func,
+        setSearchString: PropTypes.func,
+        setSearchTime: PropTypes.func,
         onSearch: PropTypes.func,
         flags: flagsPropType,
     };
@@ -204,6 +207,9 @@ class CountryFlagList extends React.Component {
                 searchField="name"
                 searchTime={this.props.searchTime}
                 searchType={FormDropDownList.SearchTypes.KEYBOARD}
+                setSearchIndex={this.props.setSearchIndex}
+                setSearchString={this.props.setSearchString}
+                setSearchTime={this.props.setSearchTime}
                 onSearch={this.props.onSearch}
                 validSearchCharsRegex="/[^a-zA-Z\s]+/"
                 title={title}

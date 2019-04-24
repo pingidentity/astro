@@ -7,7 +7,7 @@ var React = require("react"),
 * @desc A demo for I18nPhoneInput
 */
 class I18nPhoneInputDemo extends React.Component {
-    static flags = [ "use-portal" ];
+    static flags = [ "p-stateful", "use-portal" ];
 
     state = {
         countryCodeStateful: "dj",
