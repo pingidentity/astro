@@ -114,7 +114,7 @@ module.exports = class extends React.Component {
     static defaultProps = {
         "data-id": "messages",
         onRemoveMessage: null,
-        onI18n: function (key) { return key; },
+        onI18n: (key) => key,
     };
 
     constructor(props) {
@@ -133,22 +133,35 @@ module.exports = class extends React.Component {
     }
 
     render() {
-        const { flags } = this.props;
-        var className = classnames("page-messages", this.props.containerType );
+        const {
+            containerType,
+            "data-id": dataId,
+            defaultMessageTimeout,
+            flags,
+            key,
+            messages,
+            onI18n,
+            onRemoveMessage,
+        } = this.props;
+        const className = classnames("page-messages", containerType );
 
         return (
-            <div data-id={this.props["data-id"]} className={className}>
+            <div data-id={dataId} className={className}>
                 {
-                    this.props.messages && this.props.messages.map(function (item, i) {
+                    messages && messages.map((item, i) => {
                         return (
-                            <Message key={i} index={i} message={item}
-                                onI18n={this.props.onI18n}
-                                onRemoveMessage={this.props.onRemoveMessage}
-                                defaultTimeout={this.props.defaultMessageTimeout}
-                                data-id={this.props["data-id"]+"-message-"+i}
+                            <Message
+                                key={key || i}
+                                index={i}
+                                message={item}
+                                onI18n={onI18n}
+                                onRemoveMessage={onRemoveMessage}
+                                defaultTimeout={defaultMessageTimeout}
+                                data-id={`${dataId}-message-${i}`}
                                 flags={flags}
-                            />);
-                    }.bind(this))
+                            />
+                        );
+                    })
                 }
             </div>
         );
@@ -181,7 +194,7 @@ class Message extends React.Component {
     componentDidMount() {
         // Close after configured time interval
         // Interval of 0 (or undefined) will result in no automatic message clearing (which is intended).
-        var interval = (this.props.message.duration) ? this.props.message.duration : this.props.defaultTimeout;
+        const interval = (this.props.message.duration) ? this.props.message.duration : this.props.defaultTimeout;
 
         if (interval) {
             this.interval = global.setInterval(this._handleRemove, interval);
@@ -261,6 +274,7 @@ class Message extends React.Component {
                 ...message
             }
         } = this.props;
+
         const text = message.text || this.props.onI18n(key, params);
         const classes = classnames("message show", this._transformType(type), {
             "message--minimized": minimized,

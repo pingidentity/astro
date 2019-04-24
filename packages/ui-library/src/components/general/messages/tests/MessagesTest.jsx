@@ -5,16 +5,15 @@ jest.dontMock("../Messages");
 jest.dontMock("../MessagesConstants.js");
 
 import { MessageTypes } from "../MessagesConstants";
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactTestUtils from "react-dom/test-utils";
+import Utils from "../../../../util/Utils";
+import TestUtils from "../../../../testutil/TestUtils";
+import Messages from "../index.js";
+const setTimeout = window.setTimeout;
 
 describe("Messages", function () {
-    var React = require("react"),
-        ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        Utils = require("../../../../util/Utils"),
-        TestUtils = require("../../../../testutil/TestUtils"),
-        Messages = require("../index.js"),
-        setTimeout = window.setTimeout,
-        _ = require("underscore");
 
     beforeEach(function () {
         jest.useFakeTimers();
@@ -25,16 +24,16 @@ describe("Messages", function () {
         window.setTimeout = setTimeout;
     });
 
-    function getComponent (props) {
-        props = _.defaults(props || {}, {
-            messages: [{
-                text: "Test message text",
-                type: MessageTypes.SUCCESS,
-            }],
-            onRemoveMessage: jest.fn()
-        });
+    const defaultProps = {
+        messages: [{
+            text: "Test message text",
+            type: MessageTypes.SUCCESS,
+        }],
+        onRemoveMessage: jest.fn()
+    };
 
-        return ReactTestUtils.renderIntoDocument(<Messages {...props} />);
+    function getComponent (props) {
+        return ReactTestUtils.renderIntoDocument(<Messages {...defaultProps} {...props} />);
     }
 
     it("Render empty messages", function () {
@@ -81,6 +80,29 @@ describe("Messages", function () {
 
         expect(messages.length).toEqual(1);
         expect(messages[0].textContent).toEqual("Test message text");
+    });
+
+    it("Render single message with a passed i18n function using the supplied key", function () {
+        const myKey = "m1";
+        const myText = "Test message!";
+        const _onI18n = (key) => {
+            const myMessages = {
+                [myKey]: myText
+            };
+            return myMessages[key];
+        };
+        const component = getComponent({
+            messages: [{
+                key: myKey,
+                type: MessageTypes.SUCCESS,
+            }],
+            onI18n: _onI18n,
+        });
+
+        const messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
+
+        expect(messages.length).toEqual(1);
+        expect(messages[0].textContent).toEqual(myText);
     });
 
     it("Render single message with custom interval", function () {

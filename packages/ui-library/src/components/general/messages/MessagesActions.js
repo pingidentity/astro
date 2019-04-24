@@ -77,7 +77,7 @@ exports.pushMessage = function (containerId, text, status, timer, index, isHtml)
  *     The action
  */
 exports.addMessage = function (containerId, message, status, removeAfterMs) {
-    let isHtml, progress, messageId, minimized, minimizeAfterMS = 0, iconName, layout, hideClose;
+    let isHtml, progress, messageId, minimized, minimizeAfterMS = 0, iconName, layout, hideClose, key;
 
     if ((arguments.length === 1 && typeof(containerId) !== "object") ||
         (arguments.length === 2 && MessageTypeValues.indexOf(message) > -1) ||
@@ -100,6 +100,7 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         iconName = arguments[0].iconName;
         layout = arguments[0].layout;
         hideClose = arguments[0].hideClose;
+        key = arguments[0].key;
     }
     // error messages should stay until dismissed
     if (typeof(removeAfterMs) === "undefined" ) {
@@ -140,6 +141,7 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
             iconName,
             layout,
             hideClose,
+            key,
         });
     };
 };

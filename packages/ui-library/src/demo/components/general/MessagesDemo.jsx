@@ -1,8 +1,8 @@
-var React = require("react"),
-    Redux = require("redux"),
-    Messages = require("./../../../components/general/messages/"),
-    InlineMessage = require("../../../components/general/InlineMessage"),
-    uuid = require("uuid");
+import React from "react";
+import { bindActionCreators } from "redux";
+import Messages from "./../../../components/general/messages/";
+import InlineMessage from "../../../components/general/InlineMessage";
+import uuid from "uuid";
 
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
@@ -16,13 +16,22 @@ import HR from "ui-library/lib/components/general/HR";
 class MessagesDemo extends React.Component {
     static flags = [ "fixed-messages-constants" ];
 
-    actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
+    actions = bindActionCreators(Messages.Actions, this.props.store.dispatch);
 
     _addSuccessMessage = () => {
         this.actions.addMessage({
-            message: `New Success Message Added at ${new Date().toString()}`,
+            message: `New Error Message Added at ${new Date().toString()}`,
             status: Messages.MessageTypes.SUCCESS,
             iconName: "success",
+        });
+    };
+
+    _addI18nInfoMessage = () => {
+        this.actions.addMessage({
+            containerId: "messages-i18n",
+            status: Messages.MessageTypes.FEATURE,
+            iconName: "globe",
+            key: "my.i18n.key",
         });
     };
 
@@ -158,10 +167,33 @@ class MessagesDemo extends React.Component {
         );
     };
 
+    _onI18n(key) {
+        const mssgs = {
+            "my.i18n.key": `New i18n Message Added at ${new Date().toString()}`
+        };
+        return mssgs[key] || "i18n key key not found";
+    }
+
     render() {
         const fixedConstants = this.props.flags.includes("fixed-messages-constants");
+
         return (
             <div>
+                <Messages
+                    data-id="messages"
+                    messages={this.props.messages}
+                    onRemoveMessage={this.actions.removeAt}
+                    flags={this.props.flags}
+                />
+                <Messages
+                    data-id="messages-i18n"
+                    containerId="messages-i18n"
+                    messages={this.props["messages-i18n"]}
+                    onRemoveMessage={this.actions.removeAt}
+                    flags={this.props.flags}
+                    onI18n={this._onI18n}
+                />
+
                 {!fixedConstants &&
                     <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
                         There is a discrepency between the message types and the constant name.
@@ -179,14 +211,6 @@ class MessagesDemo extends React.Component {
                     Wizards, add 'className=&#123;Messages.ContainerTypes.MODAL&#125;'.For messages that will appear in
                     pages with a left-nav, do not set the containerType prop.
                 </InputRow>
-
-                <InputRow>
-                    <Messages
-                        messages={this.props.messages}
-                        onRemoveMessage={this.actions.removeAt}
-                        flags={this.props.flags}
-                    />
-                </InputRow>
                 <InputRow>
                     <Button onClick={this._addSuccessMessage}>Add success message - MessageTypes.SUCCESS</Button>
                     <Button onClick={this._addCornerSuccessMessage}>Add corner success message</Button>
@@ -203,9 +227,12 @@ class MessagesDemo extends React.Component {
                     <Button onClick={this._addCornerDeletedMessage}>Add corner deleted message</Button>
                 </InputRow>
                 <InputRow>
-                    <Button
-                        onClick={this._addWarningConstantMessage}
-                    >Add warning message - MessageTypes.WARNING</Button>
+                    <Button onClick={this._addWarningConstantMessage}>
+                        Add warning message - MessageTypes.WARNING
+                    </Button>
+                </InputRow>
+                <InputRow>
+                    <Button onClick={this._addI18nInfoMessage}>Add an i18n message - MessageTypes.NOTICE</Button>
                 </InputRow>
                 {fixedConstants &&
                     <InputRow>
