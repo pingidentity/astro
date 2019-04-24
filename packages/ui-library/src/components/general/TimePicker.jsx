@@ -9,6 +9,7 @@ import moment from "moment-range";
 import Translator from "../../util/i18n/Translator.js";
 import classnames from "classnames";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 
 /**
@@ -57,7 +58,7 @@ module.exports = class extends React.Component {
             PropTypes.object
         ]),
         onValueChange: PropTypes.func.isRequired,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

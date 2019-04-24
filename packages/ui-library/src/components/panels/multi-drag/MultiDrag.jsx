@@ -9,6 +9,7 @@ import Utils from "../../../util/Utils.js";
 import FormSearchBox from "../../forms/FormSearchBox";
 import InputRow from "../../layout/InputRow";
 import _ from "underscore";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
  * @typedef {object} MultiDrag~IndexesDescriptor
@@ -260,7 +261,7 @@ class MultiDragStateless extends React.Component {
         onDragStart: PropTypes.func,
         onDragEnd: PropTypes.func,
         strings: PropTypes.objectOf(PropTypes.string),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

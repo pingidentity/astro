@@ -9,6 +9,7 @@ import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
 import { darkInputs } from "../../util/CSSModifiers";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 const optionsSelector = createSelector(
     state => state.search,
@@ -75,7 +76,7 @@ class FilterSelector extends React.Component {
             SelectionList.ListType.ADD,
             SelectionList.ListType.MULTI
         ]),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -12,6 +12,7 @@ import Utils from "../../util/Utils.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
 import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -147,7 +148,7 @@ class BaseCalendar extends React.Component {
         tight: PropTypes.bool,
 
         onValueChange: PropTypes.func,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
 
         statelessDate: PropTypes.bool,
     };

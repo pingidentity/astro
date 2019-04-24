@@ -14,6 +14,7 @@ import Utils from "../../util/Utils";
 import Translator from "../../util/i18n/Translator.js";
 import _ from "underscore";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @callback Wizard#Step~onNext
@@ -117,7 +118,7 @@ class Step extends React.Component {
         onEdit: PropTypes.func,
         onNext: PropTypes.func,
         children: PropTypes.node,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

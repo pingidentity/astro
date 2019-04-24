@@ -1,13 +1,14 @@
 "use strict";
 
-var PropTypes = require("prop-types");
 
-var React = require("react"),
-    _ = require("underscore"),
-    classnames = require("classnames"),
-    Translator = require("../../../util/i18n/Translator.js"),
-    countryCodes = require("./countryCodes.js"),
-    FormDropDownList = require("../FormDropDownList");
+import React from "react";
+import PropTypes from "prop-types";
+import _ from "underscore";
+import classnames from "classnames";
+import Translator from "../../../util/i18n/Translator.js";
+import FormDropDownList from "../FormDropDownList";
+import { flagsPropType } from "../../../util/FlagUtils";
+let countryCodes = require("./countryCodes.js");
 
 /**
 * @enum {string}
@@ -110,7 +111,7 @@ class CountryFlagList extends React.Component {
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
         onSearch: PropTypes.func,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

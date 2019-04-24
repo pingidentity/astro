@@ -21,6 +21,7 @@ import {
     cannonballPortalWarning
 } from "../../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
 * @enum {string}
@@ -404,7 +405,7 @@ class StatelessExpandableRow extends React.Component {
             onReorder: PropTypes.func,
             onPositionValueChange: PropTypes.func,
         }),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -709,7 +710,7 @@ class ConfirmDeleteDialog extends React.Component {
         confirmDeleteTitle: PropTypes.string,
         onCancel: PropTypes.func,
         onDeleteConfirm: PropTypes.func,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

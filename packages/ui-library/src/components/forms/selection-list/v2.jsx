@@ -8,6 +8,7 @@ import Stateful from "./v2-stateful";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 import SelectionListStateless from "./v2-stateless";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
  * @typedef SelectionList~SelectionListItem
@@ -111,7 +112,7 @@ export default class SelectionList extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful", "use-portal" ])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

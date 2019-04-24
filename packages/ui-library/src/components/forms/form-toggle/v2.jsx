@@ -5,6 +5,7 @@ import Utils from "../../../util/Utils";
 import _ from "underscore";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
  * @enum {string}
@@ -150,7 +151,7 @@ PStatefulToggle.displayName = "PStatefulToggle";
 export default class Toggle extends Component {
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -13,6 +13,7 @@ import _ from "underscore";
 
 import { inStateContainer } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
 * @callback FormTextArea~onChange
@@ -320,7 +321,7 @@ const PStatefulFormTextArea = inStateContainer([
 export default class FormTextArea extends React.Component {
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful" ])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -9,6 +9,7 @@ import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import _ from "underscore";
 
 import { MessageTypes, Layouts } from "./MessagesConstants";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -107,7 +108,7 @@ module.exports = class extends React.Component {
         onI18n: PropTypes.func,
         i18n: PropTypes.func,
         defaultMessageTimeout: PropTypes.number,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -161,7 +162,7 @@ module.exports = class extends React.Component {
  */
 class Message extends React.Component {
     static propTypes = {
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
         onRemoveMessage: PropTypes.func,
         iconName: PropTypes.string,
     }

@@ -7,6 +7,7 @@ import LinkDropDownList from "../../forms/LinkDropDownList";
 import classnames from "classnames";
 import _ from "underscore";
 import { cannonballPortalWarning } from "../../../util/DeprecationUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
  * @class MultiDrag#DragDropColumn
@@ -95,7 +96,7 @@ module.exports = class extends React.Component {
         onDragEnd: PropTypes.func,
         onAdd: PropTypes.func,
         onRemove: PropTypes.func,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

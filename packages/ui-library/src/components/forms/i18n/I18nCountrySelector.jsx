@@ -8,6 +8,7 @@ import CountryFlagList from "./CountryFlagList";
 import Utils from "../../../util/Utils.js";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
 * @callback I18nCountrySelector~onValueChange
@@ -84,7 +85,7 @@ class I18nCountrySelectorStateless extends React.Component {
         setSearchIndex: PropTypes.func,
         setSearchString: PropTypes.func,
         setSearchTime: PropTypes.func,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -247,7 +248,7 @@ export default class I18nCountrySelector extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "use-portal", "p-stateful" ])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -17,6 +17,7 @@ import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUt
 
 import Popover from "../tooltips/Popover";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 const PopoverBase = Popover.Base;
 
@@ -235,7 +236,7 @@ class TimeZoneStateless extends React.Component {
         selectLabel: PropTypes.string,
         selectedIndex: PropTypes.number,
         value: PropTypes.string,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -690,7 +691,7 @@ export default class FormTimeZone extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful", "use-portal" ])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

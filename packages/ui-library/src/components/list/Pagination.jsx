@@ -4,6 +4,7 @@ import _ from "underscore";
 import Utils from "../../util/Utils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @callback PageLinks~onValueChange
@@ -315,9 +316,7 @@ export default class Pagination extends Component {
     static displayName = "Pagination";
 
     static propTypes = {
-        flags: PropTypes.arrayOf(
-            PropTypes.string
-        ),
+        flags: flagsPropType,
         stateless: PropTypes.bool
     };
 

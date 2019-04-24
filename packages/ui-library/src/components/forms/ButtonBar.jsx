@@ -9,6 +9,7 @@ import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
 import Translator from "../../util/i18n/Translator.js";
 import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import _ from "underscore";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
 * @callback ButtonBar~onCancel
@@ -226,7 +227,7 @@ class ButtonBar extends React.Component {
         enableSavingAnimation: PropTypes.bool,
         unfixed: PropTypes.bool,
         visible: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -7,6 +7,7 @@ import FormDropDownList from "../forms/FormDropDownList";
 import FormTextField from "../forms/form-text-field";
 import classnames from "classnames";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class UnitInput
@@ -36,7 +37,7 @@ module.exports = class extends React.Component {
         labelHelpText: PropTypes.string,
         textFieldProps: PropTypes.object,
         dropDownListProps: PropTypes.object,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

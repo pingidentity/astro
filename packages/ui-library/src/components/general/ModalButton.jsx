@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import { deprecatedPropValues } from "../../util/DeprecationUtils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @callback ModalButton~contentCallback
@@ -368,7 +369,7 @@ export default class ModalButton extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful", "use-portal"])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

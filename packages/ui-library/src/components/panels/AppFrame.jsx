@@ -6,6 +6,7 @@ import KeywordSearch from "../forms/KeywordSearch";
 import Modal from "../general/Modal";
 import { deprecatedProp } from "../../util/DeprecationUtils";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 import _ from "underscore";
 
@@ -83,7 +84,7 @@ class AppFrame extends React.Component {
         navTree: PropTypes.array.isRequired,
         root: PropTypes.string,
         searchable: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -20,6 +20,7 @@ import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @callback ColorPicker~onValueChange
@@ -117,7 +118,7 @@ class Stateless extends React.Component {
         internalError: PropTypes.string, // internal use only, leaving out of JSDocs on purpose
         onError: PropTypes.func,
         width: PropTypes.oneOf(InputWidthProptypes),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -400,7 +401,7 @@ export default class ColorPicker extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "use-portal", "p-stateful" ])),
+        flags: flagsPropType,
         useInternalError: PropTypes.bool, // this appears in the JSDocs for the main component
     };
 

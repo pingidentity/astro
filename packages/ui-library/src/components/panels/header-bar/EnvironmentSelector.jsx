@@ -5,6 +5,7 @@ import Anchor from "../../general/Anchor";
 
 import _ from "underscore";
 import { getIconClassName } from "../../../util/PropUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 class EnvironmentSelector extends React.Component {
     state = { open: false };
@@ -16,7 +17,7 @@ class EnvironmentSelector extends React.Component {
         options: PropTypes.array,
         environment: PropTypes.string,
         newEnvironmentLabel: PropTypes.string,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -9,6 +9,7 @@ import _ from "underscore";
 import validator from "validator";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 const isValid = (value, enforceRange, min, max) => {
     if (value === "") {
@@ -476,7 +477,7 @@ class Stateful extends Component {
 export default class FormIntegerFieldV2 extends Component {
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful"])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

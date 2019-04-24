@@ -9,6 +9,7 @@ import MarketSelector from "./MarketSelector";
 import Logo from "./logos/Logo";
 import { getIconClassName } from "../../../util/PropUtils";
 import { cannonballChangeWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
 
@@ -63,7 +64,7 @@ class NavItem extends React.Component {
         onMenuToggle: PropTypes.func,
         onMenuValueChange: PropTypes.func,
         renderMenu: PropTypes.func,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -428,7 +429,7 @@ class HeaderBar extends React.Component {
         tree: PropTypes.arrayOf(PropTypes.object),
         userMenu: PropTypes.arrayOf(PropTypes.object),
         userName: PropTypes.string,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
         renderProductNav: PropTypes.func,
         legacy: PropTypes.bool,
         updated: PropTypes.bool

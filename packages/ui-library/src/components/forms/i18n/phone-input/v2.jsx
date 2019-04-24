@@ -8,6 +8,7 @@ import { v2 as FormTextField } from "../../form-text-field";
 import Validators from "../../../../util/Validators";
 import Utils from "../../../../util/Utils.js";
 import { cannonballPortalWarning } from "../../../../util/DeprecationUtils";
+import { flagsPropType } from "../../../../util/FlagUtils";
 
 /**
  * @typedef I18nPhoneInput~PhoneInputValues
@@ -138,7 +139,7 @@ class I18nPhoneInputStateless extends Component {
         autoFocus: PropTypes.bool,
         useAutoComplete: PropTypes.bool,
         disabled: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

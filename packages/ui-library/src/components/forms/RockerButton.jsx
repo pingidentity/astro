@@ -1,12 +1,12 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    HelpHint = require("../tooltips/HelpHint"),
-    _ = require("underscore"),
-    Utils = require("../../util/Utils");
-
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import HelpHint from "../tooltips/HelpHint";
+import _ from "underscore";
+import Utils from "../../util/Utils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
 * @typedef RockerButton~labelValues
@@ -66,7 +66,7 @@ export default class RockerButton extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful"])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

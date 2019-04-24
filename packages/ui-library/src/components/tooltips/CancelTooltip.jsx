@@ -5,6 +5,8 @@ var React = require("react"),
 
 import Button from "../buttons/Button";
 import ButtonGroup from "../layout/ButtonGroup";
+import { flagsPropType } from "../../util/FlagUtils";
+
 /**
 * @callback CancelTooltip~onCancel
 */
@@ -66,7 +68,7 @@ class CancelTooltip extends React.Component {
         onCancel: PropTypes.func.isRequired,
         positionClassName: PropTypes.string,
         placement: PropTypes.oneOf(Object.values(DetailsTooltip.tooltipPlacements)),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     render() {

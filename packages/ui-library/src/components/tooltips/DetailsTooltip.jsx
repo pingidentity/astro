@@ -13,6 +13,7 @@ import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
 import ButtonGroup from "../layout/ButtonGroup";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @callback DetailsTooltip~onToggle
@@ -120,7 +121,7 @@ class DetailsTooltipStateless extends React.Component {
         secondaryLabels: PropTypes.array,
         primaryLabels: PropTypes.array,
         cancelLabel: PropTypes.string,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType
     };
 
     static defaultProps = {
@@ -464,7 +465,7 @@ class DetailsTooltip extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful", "use-portal" ])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

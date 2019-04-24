@@ -9,6 +9,7 @@ import If from "./If";
 import classnames from "classnames";
 import { Portal } from "react-portal";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @enum {string}
@@ -85,7 +86,7 @@ class Modal extends React.Component {
         ]),
         cancelTooltip: PropTypes.object,
         children: PropTypes.node,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static childContextTypes = {

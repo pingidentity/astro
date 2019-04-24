@@ -6,6 +6,7 @@ import DetailsTooltip, { DetailsTooltipStateless } from "../tooltips/DetailsTool
 import popsOver from "../../util/behaviors/popsOver";
 import ButtonGroup from "../layout/ButtonGroup";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class ConfirmTooltip
@@ -78,7 +79,7 @@ class ConfirmTooltipBase extends Component {
         disableSave: PropTypes.bool,
         closeOnConfirm: PropTypes.bool,
         placement: PropTypes.oneOf(Object.values(DetailsTooltip.tooltipPlacements)),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     }
 
     static defaultProps = {

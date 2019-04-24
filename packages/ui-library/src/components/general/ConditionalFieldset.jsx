@@ -12,6 +12,7 @@ import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
+import { flagsPropType } from "../../util/FlagUtils";
 
 
 /**
@@ -40,7 +41,7 @@ class ConditionalFieldsetStateless extends React.Component {
         selectedIndex: PropTypes.number,
         supportEmpty: PropTypes.bool,
         type: PropTypes.string,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

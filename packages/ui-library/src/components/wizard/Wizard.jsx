@@ -7,6 +7,7 @@ import ButtonBar from "../forms/ButtonBar";
 import Utils from "../../util/Utils";
 import _ from "underscore";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 var INHERIT_PROPS = [
     "activeStep",
@@ -168,7 +169,7 @@ class Wizard extends React.Component {
         onEdit: PropTypes.func,
         onDone: PropTypes.func,
         children: PropTypes.node,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

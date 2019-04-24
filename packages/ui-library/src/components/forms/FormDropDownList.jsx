@@ -26,6 +26,7 @@ import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
 * @function FormDropDownList~filterOptions
@@ -356,7 +357,7 @@ class FormDropDownListStateless extends React.Component {
         title: PropTypes.string,
         validSearchCharsRegex: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -991,7 +992,7 @@ export default class FormDropDownList extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "use-portal", "p-stateful" ])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

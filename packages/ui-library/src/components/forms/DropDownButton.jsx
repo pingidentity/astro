@@ -7,6 +7,7 @@ import Utils from "../../util/Utils.js";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import Popover from "../tooltips/Popover";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @callback DropDownButton~onValueChange
@@ -273,7 +274,7 @@ export default class DropDownButton extends Component {
         renderButton: PropTypes.func,
         label: PropTypes.string,
         title: PropTypes.string,
-        flags: PropTypes.arrayOf(PropTypes.string)
+        flags: flagsPropType
     };
 
     static defaultProps = {

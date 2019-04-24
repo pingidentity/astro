@@ -7,6 +7,7 @@ import classnames from "classnames";
 import _ from "underscore";
 import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
+import { flagsPropType } from "../../util/FlagUtils";
 
 
 /**
@@ -73,7 +74,7 @@ class LinkDropDownListStateless extends React.Component {
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.object,
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -203,7 +204,7 @@ class LinkDropDownListStateful extends React.Component {
 export default class LinkDropDownList extends React.Component {
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf(["p-stateful", "use-portal"])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

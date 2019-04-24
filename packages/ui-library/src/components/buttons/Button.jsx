@@ -4,6 +4,7 @@ import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 import EllipsisLoader from "../general/EllipsisLoader";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class Button
@@ -147,7 +148,7 @@ Button.propTypes = {
     "data-id": PropTypes.string,
     disabled: PropTypes.bool,
     disabledText: PropTypes.string,
-    flags: PropTypes.arrayOf(PropTypes.string),
+    flags: flagsPropType,
     href: PropTypes.string,
     iconName: PropTypes.string,
     inline: PropTypes.bool,

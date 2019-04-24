@@ -15,6 +15,7 @@ import Utils from "../../../util/Utils.js";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 /**
 /**
@@ -627,7 +628,7 @@ class FormTextField extends React.Component {
 
     static propTypes = {
         stateless: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful" ])),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

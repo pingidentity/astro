@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import FormDropDownList from "../../forms/FormDropDownList";
+import { flagsPropType } from "../../../util/FlagUtils";
 
 class MarketSelector extends React.Component {
     static propTypes = {
@@ -9,7 +10,7 @@ class MarketSelector extends React.Component {
         onMarketChange: PropTypes.func,
         market: PropTypes.string,
         options: PropTypes.arrayOf(PropTypes.object),
-        flags: PropTypes.arrayOf(PropTypes.string),
+        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -7,6 +7,7 @@ import classnames from "classnames";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 import { createProgressiveState } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -118,7 +119,7 @@ class FormSearchBox extends React.Component {
         queryString: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
         autoFocus: PropTypes.bool,
-        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful" ])),
+        flags: flagsPropType,
         initialState: PropTypes.object,
     };
 
