@@ -7,7 +7,7 @@ import Utils from "../../util/Utils.js";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import Popover from "../tooltips/Popover";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @callback DropDownButton~onValueChange
@@ -280,11 +280,10 @@ export default class DropDownButton extends Component {
     static defaultProps = {
         "data-id": "drop-down-button",
         stateless: false,
-        flags: []
     };
 
     render() {
-        if (this.props.flags.includes("p-stateful")) {
+        if (hasFlag(this, "p-stateful")) {
             return <PStatefulDropDownButton {...this.props} />;
         }
 

@@ -12,7 +12,7 @@ import Utils from "../../util/Utils.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
 import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -161,7 +161,6 @@ class BaseCalendar extends React.Component {
         required: false,
         format: Translator.translate("dateformat"),
         tight: false,
-        flags: [],
         statelessDate: false,
     };
 
@@ -404,7 +403,7 @@ class BaseCalendar extends React.Component {
         e.stopPropagation();
     };
 
-    _usePortal = () => this.props.flags.includes("use-portal");
+    _usePortal = () => hasFlag(this, "use-portal");
 
     _getReference = () => this.reference;
 
@@ -503,7 +502,7 @@ const PStatefulCalendar = inStateContainer([
 ])(BaseCalendar);
 
 const Calendar = props => {
-    if (props.flags && props.flags.includes("p-stateful")) {
+    if (hasFlag({ props }, "p-stateful")) {
         return <PStatefulCalendar {...props} statelessDate />;
     }
     cannonballChangeWarning({

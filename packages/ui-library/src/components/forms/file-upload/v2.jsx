@@ -136,7 +136,6 @@ class FileUpload extends React.Component {
         showThumbnail: false,
         showRemoveButton: true,
         disabled: false,
-        flags: []
     };
 
     componentDidMount() {

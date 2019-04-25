@@ -14,7 +14,7 @@ import Utils from "../../util/Utils";
 import Translator from "../../util/i18n/Translator.js";
 import _ from "underscore";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 /**
  * @callback Wizard#Step~onNext
@@ -138,22 +138,21 @@ class Step extends React.Component {
         doneButtonClassName: "primary final-step"
     };
 
-    constructor(props) {
-        super(props);
+    componentDidMount() {
         /* istanbul ignore if  */
         if (!Utils.isProduction()) {
-            if (props.id) {
+            if (this.props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (props.doneButtonStyle) {
+            if (this.props.doneButtonStyle) {
                 throw new Error(Utils.deprecatePropError("doneButtonStyle", "doneButtonClassName"));
             }
-            if (props.nextButtonStyle) {
+            if (this.props.nextButtonStyle) {
                 throw new Error(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
             }
         }
 
-        if (!props.flags || !props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "Step" });
         }
     }
@@ -188,7 +187,7 @@ class Step extends React.Component {
                     data-id={this.props["data-id"]}
                     label={this._getCancelButtonMarkup()}
                     positionClassName="top left"
-                    flags={this.props.flags}
+                    flags={getFlags(this)}
                     {...this.props.cancelTooltip}
                 />
             ) : this._getCancelButtonMarkup();
@@ -215,7 +214,7 @@ class Step extends React.Component {
                 data-id={this.props.saveTooltip["data-id"]}
                 label={this._getNextButtonMarkup()}
                 positionClassName="top left"
-                flags={this.props.flags}
+                flags={getFlags(this)}
 
                 {...this.props.saveTooltip}
             >

@@ -6,7 +6,7 @@ import KeywordSearch from "../forms/KeywordSearch";
 import Modal from "../general/Modal";
 import { deprecatedProp } from "../../util/DeprecationUtils";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 import _ from "underscore";
 
@@ -100,14 +100,12 @@ class AppFrame extends React.Component {
         searchable: false
     };
 
-    constructor(props) {
-        super(props);
+    state = {
+        searchOpen: false
+    }
 
-        this.state = {
-            searchOpen: false
-        };
-
-        if (!props.flags || !props.flags.includes("use-portal")) {
+    componentDidMount() {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "AppFrame" });
         }
     }
@@ -352,7 +350,7 @@ class AppFrame extends React.Component {
                 data-id={this.props["data-id"]}
             >
                 <HeaderBar
-                    flags={this.props.flags}
+                    flags={getFlags(this)}
                     {...this._buildHeaderProps()}
                     navOptions={navOptions}
                     navSelected={this.props.root}

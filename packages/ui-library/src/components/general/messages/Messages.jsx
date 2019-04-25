@@ -9,7 +9,7 @@ import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import _ from "underscore";
 
 import { MessageTypes, Layouts } from "./MessagesConstants";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -168,7 +168,6 @@ class Message extends React.Component {
     }
 
     static defaultProps = {
-        flags: [],
         onRemoveMessage: _.noop,
     }
 
@@ -240,7 +239,7 @@ class Message extends React.Component {
         [MessageTypes.INFO]: MessageTypes.FEATURE,
     };
 
-    _fixedConstants = () => this.props.flags.includes("fixed-messages-constants");
+    _fixedConstants = () => hasFlag(this, "fixed-messages-constants");
 
     _transformType = type => (
         this._fixedConstants()

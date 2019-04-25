@@ -15,7 +15,7 @@ import Utils from "../../../util/Utils.js";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
 /**
@@ -633,7 +633,6 @@ class FormTextField extends React.Component {
 
     static defaultProps = {
         stateless: true,
-        flags: [],
     };
 
     constructor(props) {
@@ -643,7 +642,7 @@ class FormTextField extends React.Component {
         }
     }
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     render() {
         if (this._usePStateful()) {

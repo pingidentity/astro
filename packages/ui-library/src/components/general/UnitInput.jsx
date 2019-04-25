@@ -7,7 +7,7 @@ import FormDropDownList from "../forms/FormDropDownList";
 import FormTextField from "../forms/form-text-field";
 import classnames from "classnames";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 /**
  * @class UnitInput
@@ -45,7 +45,7 @@ module.exports = class extends React.Component {
     };
 
     componentDidMount() {
-        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "UnitInput" });
         }
     }
@@ -68,7 +68,7 @@ module.exports = class extends React.Component {
                 />
                 <FormDropDownList
                     {...this.props.dropDownListProps}
-                    flags={this.props.flags}
+                    flags={getFlags(this)}
                 />
             </div>
         );

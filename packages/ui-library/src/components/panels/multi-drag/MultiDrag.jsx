@@ -9,7 +9,7 @@ import Utils from "../../../util/Utils.js";
 import FormSearchBox from "../../forms/FormSearchBox";
 import InputRow from "../../layout/InputRow";
 import _ from "underscore";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @typedef {object} MultiDrag~IndexesDescriptor
@@ -402,7 +402,7 @@ class MultiDragStateless extends React.Component {
                 data-id={"DragDropColumn-" + index}
                 showCount={index > 0}
                 strings={this.props.strings}
-                flags={this.props.flags}
+                flags={getFlags(this)}
             />
         );
     }

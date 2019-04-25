@@ -12,7 +12,7 @@ import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 
 /**
@@ -54,7 +54,7 @@ class ConditionalFieldsetStateless extends React.Component {
     };
 
     componentDidMount() {
-        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "ConditionalFieldset" });
         }
     }
@@ -272,13 +272,12 @@ export default class ConditionalFieldset extends React.Component {
     };
 
     static defaultProps = {
-        flags: [],
         stateless: false,
     };
 
     static Types = Types;
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount () {
         if (!Utils.isProduction() && this.props.controlled !== undefined) {

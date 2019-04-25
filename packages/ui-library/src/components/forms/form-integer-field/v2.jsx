@@ -9,7 +9,7 @@ import _ from "underscore";
 import validator from "validator";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 const isValid = (value, enforceRange, min, max) => {
     if (value === "") {
@@ -482,10 +482,9 @@ export default class FormIntegerFieldV2 extends Component {
 
     static defaultProps = {
         stateless: true,
-        flags: [],
     };
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {

@@ -17,7 +17,7 @@ import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUt
 
 import Popover from "../tooltips/Popover";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 const PopoverBase = Popover.Base;
 
@@ -256,7 +256,6 @@ class TimeZoneStateless extends React.Component {
         selectLabel: LABEL_DEFAULTS["SELECT-TIME-ZONE"],
         selectedIndex: 0,
         value: moment.tz.guess(),
-        flags: [],
     };
 
     constructor(props) {
@@ -554,7 +553,7 @@ class TimeZoneStateless extends React.Component {
                     open={this.props.open}
                     placement="right"
                     padded
-                    flags={this.props.flags}
+                    flags={getFlags(this)}
                     popperClassName={classnames("input-timezone", classNames)}
                     onPopperClick={this._focusSearch}
                 >
@@ -696,7 +695,6 @@ export default class FormTimeZone extends React.Component {
 
     static defaultProps = {
         stateless: true,
-        flags: [],
     };
 
     static _statelessComponent = TimeZoneStateless; // this is to enable testing
@@ -712,12 +710,12 @@ export default class FormTimeZone extends React.Component {
         if (!this._usePStateful()) {
             cannonballProgressivelyStatefulWarning({ name: "FormTimeZone" });
         }
-        if (!this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "FormTimeZone" });
         }
     }
 
-    _usePStateful = () => this.props.flags.findIndex(item => item === "p-stateful") >= 0;
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     isValidTimeZone = (zoneText) => {
         if (this._usePStateful()) {

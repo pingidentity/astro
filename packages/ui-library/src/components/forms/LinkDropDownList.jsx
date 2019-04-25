@@ -7,7 +7,7 @@ import classnames from "classnames";
 import _ from "underscore";
 import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 
 /**
@@ -80,11 +80,10 @@ class LinkDropDownListStateless extends React.Component {
     static defaultProps = {
         closeOnSelection: true,
         "data-id": "link-dropdown-list",
-        flags: [],
     };
 
     componentDidMount() {
-        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "LinkDropDownList" });
         }
     }
@@ -133,7 +132,7 @@ class LinkDropDownListStateless extends React.Component {
                 showClose={false}
                 open={this.props.open}
                 onToggle={this.props.onToggle}
-                flags={[...this.props.flags, "p-stateful"]}
+                flags={[...getFlags(this), "p-stateful"]}
             >
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}
@@ -209,7 +208,6 @@ export default class LinkDropDownList extends React.Component {
 
     static defaultProps = {
         stateless: false,
-        flags: [],
     };
 
     componentDidMount() {
@@ -220,7 +218,7 @@ export default class LinkDropDownList extends React.Component {
         }
     }
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     render() {
 

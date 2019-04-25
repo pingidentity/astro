@@ -9,7 +9,7 @@ import If from "./If";
 import classnames from "classnames";
 import { Portal } from "react-portal";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @enum {string}
@@ -99,7 +99,6 @@ class Modal extends React.Component {
         showHeader: true,
         maximize: false,
         type: Type.BASIC,
-        flags: [],
     };
 
     /*
@@ -224,7 +223,7 @@ class Modal extends React.Component {
         }
     }
 
-    _usePortal = () => this.props.flags.includes("use-portal");
+    _usePortal = () => hasFlag(this, "use-portal");
 
     render() {
         if (!this.props.expanded) {

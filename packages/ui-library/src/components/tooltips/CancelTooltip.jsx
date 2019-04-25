@@ -1,11 +1,11 @@
 "use strict";
-var PropTypes = require("prop-types");
-var React = require("react"),
-    DetailsTooltip = require("./DetailsTooltip");
+import PropTypes from "prop-types";
+import React from "react";
+import DetailsTooltip from "./DetailsTooltip";
 
 import Button from "../buttons/Button";
 import ButtonGroup from "../layout/ButtonGroup";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
 * @callback CancelTooltip~onCancel
@@ -76,7 +76,7 @@ class CancelTooltip extends React.Component {
             <DetailsTooltip
                 data-id={this.props["data-id"] + "-cancel-tooltip"}
                 className="cancel-tooltip"
-                flags={this.props.flags}
+                flags={getFlags(this)}
                 label={this.props.label}
                 open={this.props.open}
                 positionClassName={this.props.positionClassName}

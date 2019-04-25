@@ -13,7 +13,7 @@ import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
 import ButtonGroup from "../layout/ButtonGroup";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @callback DetailsTooltip~onToggle
@@ -134,7 +134,6 @@ class DetailsTooltipStateless extends React.Component {
         showClose: true,
         hideOnClick: false,
         type: popupTypes.BASIC,
-        flags: [],
     };
 
     static popupTypes = popupTypes;
@@ -231,7 +230,7 @@ class DetailsTooltipStateless extends React.Component {
         return buttons;
     };
 
-    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+    _usePortal = () => hasFlag(this, "use-portal");
 
     /*
      * Return of content based on props.open.
@@ -470,21 +469,20 @@ class DetailsTooltip extends React.Component {
 
     static defaultProps = {
         stateless: true,
-        flags: [],
     };
 
     static tooltipPlacements = tooltipPlacements;
     static DetailsTooltipStateless = DetailsTooltipStateless;
 
     componentDidMount() {
-        if (!this.props.flags.includes("p-stateful")) {
+        if (!hasFlag(this, "p-stateful")) {
             cannonballChangeWarning({
                 message: `The 'open' prop will no longer serve as an initial state for DetailsTooltip. ` +
                 `If it is present, it will control the current value of the component. ` +
                 `Set the 'p-stateful' flag to switch to this behavior now.`,
             });
         }
-        if (!this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "DetailsTooltip" });
         }
 
@@ -553,7 +551,7 @@ class DetailsTooltip extends React.Component {
     };
 
     render() {
-        if (this.props.flags.includes("p-stateful")) {
+        if (hasFlag(this, "p-stateful")) {
             return <PStatefulDetailsTooltip {...this.props} />;
         }
 

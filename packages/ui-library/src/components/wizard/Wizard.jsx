@@ -7,7 +7,7 @@ import ButtonBar from "../forms/ButtonBar";
 import Utils from "../../util/Utils";
 import _ from "underscore";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 var INHERIT_PROPS = [
     "activeStep",
@@ -180,22 +180,6 @@ class Wizard extends React.Component {
         onValueChange: _.noop,
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-
-        if (!props.flags || !props.flags.includes("use-portal")) {
-            cannonballPortalWarning({ name: "Wizard" });
-        }
-    }
-
     _filter = (children) => {
         var result = [];
 
@@ -208,8 +192,21 @@ class Wizard extends React.Component {
         return result;
     };
 
-    //if this is the root wizard, report the number of steps up to the reducer
     componentDidMount() {
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (this.props.onChange) {
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+        }
+
+        if (!hasFlag(this, "use-portal")) {
+            cannonballPortalWarning({ name: "Wizard" });
+        }
+
+        //if this is the root wizard, report the number of steps up to the reducer
         if (this.props.number === 1) {
             this.props.onValueChange({ choice: 0, numSteps: this._filter(this.props.children).length });
         }
@@ -251,7 +248,7 @@ class Wizard extends React.Component {
                         saveClassName="success"
                         cancelTooltip={this.props.cancelTooltip}
                         saveTooltip={this.props.saveTooltip}
-                        flags={this.props.flags}
+                        flags={getFlags(this)}
                     />
                 ) : null}
             </div>

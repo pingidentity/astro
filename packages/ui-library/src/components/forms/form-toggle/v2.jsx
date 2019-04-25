@@ -5,7 +5,7 @@ import Utils from "../../../util/Utils";
 import _ from "underscore";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
  * @enum {string}
@@ -67,7 +67,7 @@ class Stateless extends Component {
     };
 
     componentDidMount() {
-        if (!this.props.flags.includes("p-stateful")) {
+        if (!hasFlag(this, "p-stateful")) {
             if (
                 (typeof this.props.toggled === "undefined" && this.props.stateless) ||
                 (typeof this.props.toggled !== "undefined" && !this.props.stateless)
@@ -155,7 +155,6 @@ export default class Toggle extends Component {
     };
 
     static defaultProps = {
-        flags: [],
         stateless: true,
     };
 
@@ -171,7 +170,7 @@ export default class Toggle extends Component {
         }
     }
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     render() {
         if (this._usePStateful()) {

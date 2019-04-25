@@ -20,7 +20,7 @@ import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @callback ColorPicker~onValueChange
@@ -131,7 +131,6 @@ class Stateless extends React.Component {
         errorMessage: "",
         internalError: "",
         width: InputWidths.SM,
-        flags: [],
     };
 
     /*
@@ -260,7 +259,7 @@ class Stateless extends React.Component {
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
     }
 
-    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+    _usePortal = () => hasFlag(this, "use-portal");
 
     _getReference = () => this.refs.swatch;
 
@@ -407,13 +406,12 @@ export default class ColorPicker extends React.Component {
 
     static defaultProps = {
         stateless: false,
-        flags: [],
         useInternalError: true,
     };
 
     static _statelessComponent = Stateless; // this is to enable testing
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {
@@ -424,7 +422,7 @@ export default class ColorPicker extends React.Component {
             }
         }
 
-        if (!this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "ColorPicker" });
         }
 

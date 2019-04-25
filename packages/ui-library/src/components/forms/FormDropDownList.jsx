@@ -26,7 +26,7 @@ import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
 * @function FormDropDownList~filterOptions
@@ -382,7 +382,6 @@ class FormDropDownListStateless extends React.Component {
         required: false,
         disabled: false,
         autofocus: false,
-        flags: [],
     };
 
     didPressKey = false;
@@ -784,7 +783,7 @@ class FormDropDownListStateless extends React.Component {
 
     _getReference = () => this.reference;
 
-    _usePortal = () => this.props.flags.includes("use-portal");
+    _usePortal = () => hasFlag(this, "use-portal");
 
     render() {
         this._setupGroups(this.props);
@@ -997,14 +996,13 @@ export default class FormDropDownList extends React.Component {
 
     static defaultProps = {
         stateless: false,
-        flags: [],
     };
 
     static SearchTypes = SearchTypes;
     static searchTypes = SearchTypes; // we agreed on a new naming standard, but I'm also preserving bw compat
     static filterOptions = filterOptions;
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {

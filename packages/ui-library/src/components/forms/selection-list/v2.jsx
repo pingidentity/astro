@@ -8,7 +8,7 @@ import Stateful from "./v2-stateful";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 import SelectionListStateless from "./v2-stateless";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
  * @typedef SelectionList~SelectionListItem
@@ -117,7 +117,6 @@ export default class SelectionList extends React.Component {
 
     static defaultProps = {
         stateless: false,
-        flags: [],
     };
 
     static Actions = require("./v2-actions");
@@ -129,7 +128,7 @@ export default class SelectionList extends React.Component {
     static ListType = Constants.ListType;
     static listType = Constants.ListType; // according to our new standard
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!Utils.isProduction() && this.props.controlled !== undefined) {

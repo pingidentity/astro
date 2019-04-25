@@ -7,6 +7,11 @@ export const allFlags = [
     "expandable-row-class",
     "fix-discard-button",
     "fix-message-constants",
+    "true-default",
 ];
 
 export const flagsPropType = PropTypes.arrayOf(PropTypes.oneOf(allFlags));
+
+export const getFlags = ({ props }) => props.flags || [];
+
+export const hasFlag = (component, flag) => getFlags(component).includes(flag);

@@ -8,7 +8,7 @@ import Modal from "./Modal";
 import { deprecatedPropValues } from "../../util/DeprecationUtils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, getFlags, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @callback ModalButton~contentCallback
@@ -166,7 +166,6 @@ class ModalButtonStateless extends React.Component {
         showHeader: true,
         maximize: false,
         type: Modal.Type.BASIC,
-        flags: []
     };
 
     constructor(props) {
@@ -248,7 +247,7 @@ class ModalButtonStateless extends React.Component {
                 maximize={this.props.maximize}
                 type={this.props.type}
                 closeOnBgClick={this.props.closeOnBgClick}
-                flags={this.props.flags}
+                flags={getFlags(this)}
             >
                 {this.props.children || modalBodyContent}
             </Modal>
@@ -374,7 +373,6 @@ export default class ModalButton extends React.Component {
 
     static defaultProps = {
         stateless: false,
-        flags: [],
         onOpen: () => {},
         onClose: () => {}
     }
@@ -389,7 +387,7 @@ export default class ModalButton extends React.Component {
         }
     }
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     render() {
 

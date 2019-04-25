@@ -7,7 +7,7 @@ import LinkDropDownList from "../../forms/LinkDropDownList";
 import classnames from "classnames";
 import _ from "underscore";
 import { cannonballPortalWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @class MultiDrag#DragDropColumn
@@ -111,7 +111,7 @@ module.exports = class extends React.Component {
     };
 
     componentDidMount() {
-        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "MultiDrag" });
         }
     }
@@ -289,7 +289,7 @@ module.exports = class extends React.Component {
                             onClick={this._handleCategoryClick}
                             onToggle={this._handleCategoryToggle}
                             options={categoryOptions}
-                            flags={this.props.flags}
+                            flags={getFlags(this)}
                         />
                         }
                     </span>

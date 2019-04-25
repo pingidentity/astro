@@ -124,7 +124,7 @@ class FormTimeZoneDemo extends React.Component {
                         labelText="Stateful Version"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"
-                        {...this.props.flags.includes("p-stateful") ? { initialState: { open: true } } : { open: true }}
+                        {...flags.includes("p-stateful") ? { initialState: { open: true } } : { open: true }}
                         filterByCountry="US"
                         flags={flags}
                     />

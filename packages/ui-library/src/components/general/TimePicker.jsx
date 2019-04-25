@@ -9,7 +9,7 @@ import moment from "moment-range";
 import Translator from "../../util/i18n/Translator.js";
 import classnames from "classnames";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 
 /**
@@ -66,18 +66,19 @@ module.exports = class extends React.Component {
         format: "12",
         value: "12:00pm",
         "data-id": "time-picker",
-        flags: [],
     };
 
     constructor(props) {
         super(props);
         moment.locale(Translator.currentLanguage);
+    }
 
-        if (!Utils.isProduction() && props.id) {
+    componentDidMount() {
+        if (!Utils.isProduction() && this.props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
 
-        if (!props.flags || !props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "TimePicker" });
         }
     }
@@ -240,7 +241,7 @@ module.exports = class extends React.Component {
                 validSearchCharsRegex="/[^\d:\s]+/"
                 title={value}
                 noneOption={noTime}
-                flags={[...this.props.flags, "p-stateful"]}
+                flags={[...getFlags(this), "p-stateful"]}
             />
         );
     }

@@ -5,7 +5,7 @@ import _ from "underscore";
 import PopperContainer from "./PopperContainer";
 
 import popsOver from "../../util/behaviors/popsOver";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @class Popover
@@ -60,7 +60,6 @@ class PopoverBase extends React.Component {
 
     static defaultProps = {
         "data-id": "popover",
-        flags: [],
         label: "Link",
         onPopperClick: _.noop,
         onKeyDown: _.noop,
@@ -71,7 +70,7 @@ class PopoverBase extends React.Component {
         padded: false,
     };
 
-    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+    _usePortal = () => hasFlag(this, "use-portal");
 
     /*
      * Check if placement contains a word (like top, right, or left)

@@ -13,7 +13,7 @@ import _ from "underscore";
 
 import { inStateContainer } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
 * @callback FormTextArea~onChange
@@ -326,10 +326,9 @@ export default class FormTextArea extends React.Component {
 
     static defaultProps = {
         stateless: true,
-        flags: [],
     };
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {

@@ -8,7 +8,7 @@ import CountryFlagList from "./CountryFlagList";
 import Utils from "../../../util/Utils.js";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
 * @callback I18nCountrySelector~onValueChange
@@ -253,16 +253,15 @@ export default class I18nCountrySelector extends React.Component {
 
     static defaultProps = {
         stateless: false,
-        flags: [],
     };
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {
             cannonballProgressivelyStatefulWarning({ name: "CountrySelector" });
         }
-        if (!this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "I18nCountrySelector" });
         }
         if (!Utils.isProduction()) {

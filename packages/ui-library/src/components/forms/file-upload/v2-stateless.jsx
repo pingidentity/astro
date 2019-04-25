@@ -6,7 +6,7 @@ import FormLabel from "../FormLabel";
 import FormError from "../FormError";
 import Button from "../../buttons/Button";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
  * @name FileUploadStateless
@@ -45,7 +45,7 @@ export default class extends Component {
         flags: flagsPropType
     };
 
-    _useTrueDefault = () => this.props.flags.includes("true-default")
+    _useTrueDefault = () => hasFlag(this, "true-default");
 
     componentDidMount() {
         if (!this._useTrueDefault() && this.props.defaultImage) {

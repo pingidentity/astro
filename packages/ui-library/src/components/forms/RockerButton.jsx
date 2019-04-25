@@ -6,7 +6,7 @@ import _ from "underscore";
 import Utils from "../../util/Utils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
 * @typedef RockerButton~labelValues
@@ -71,10 +71,9 @@ export default class RockerButton extends React.Component {
 
     static defaultProps = {
         stateless: false,
-        flags: [],
     };
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {
@@ -106,7 +105,7 @@ export default class RockerButton extends React.Component {
 
 
     render() {
-        if (this.props.flags.includes("p-stateful")) {
+        if (hasFlag(this, "p-stateful")) {
             return <PStatefulRockerButton {...this.props} />;
         }
 

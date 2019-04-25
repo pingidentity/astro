@@ -9,7 +9,7 @@ import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
 import Translator from "../../util/i18n/Translator.js";
 import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import _ from "underscore";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 /**
 * @callback ButtonBar~onCancel
@@ -130,7 +130,6 @@ import { flagsPropType } from "../../util/FlagUtils";
 * @example button bar with tooltips
 *     <ButtonBar
 *        data-id="buttonbar"
-*        flags={this.props.flags}
 *
 *        cancelText="Cancel"
 *        discardText="Discard"
@@ -238,7 +237,6 @@ class ButtonBar extends React.Component {
         enableSavingAnimation: false,
         unfixed: false,
         visible: true,
-        flags: [],
         onSave: _.noop,
     };
 
@@ -288,7 +286,7 @@ class ButtonBar extends React.Component {
                 data-id={this.props["data-id"]}
                 label={this._getCancelButtonMarkup()}
                 placement="top left"
-                flags={this.props.flags}
+                flags={getFlags(this)}
                 {...this.props.cancelTooltip}
             />
             : this._getCancelButtonMarkup()
@@ -310,7 +308,7 @@ class ButtonBar extends React.Component {
                 label={this._getSaveButtonMarkup()}
                 onConfirm={this._handleSave}
                 placement="top left"
-                flags={this.props.flags}
+                flags={getFlags(this)}
                 showClose={false}
                 {...props}
             >
@@ -319,7 +317,7 @@ class ButtonBar extends React.Component {
             : this._getSaveButtonMarkup();
     }
 
-    _fixedProps = () => this.props.flags.findIndex(flag => flag === "fix-discard-button") >= 0;
+    _fixedProps = () => hasFlag(this, "fix-discard-button");
 
     componentDidMount() {
         if (this.props.discardText && this.props.onDiscard && !this._fixedProps()) {
@@ -330,7 +328,7 @@ class ButtonBar extends React.Component {
                 ),
             });
         }
-        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "ButtonBar" });
         }
     }

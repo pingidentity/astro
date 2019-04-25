@@ -9,7 +9,7 @@ import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
 import { darkInputs } from "../../util/CSSModifiers";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 const optionsSelector = createSelector(
     state => state.search,
@@ -88,7 +88,7 @@ class FilterSelector extends React.Component {
         type: SelectionList.ListType.MULTI
     };
 
-    _usePortal = () => this.props.flags && this.props.flags.includes("use-portal");
+    _usePortal = () => hasFlag(this, "use-portal");
 
     componentDidMount() {
         if (!this._usePortal()) {

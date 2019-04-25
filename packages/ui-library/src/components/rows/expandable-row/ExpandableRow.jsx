@@ -21,7 +21,7 @@ import {
     cannonballPortalWarning
 } from "../../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
 
 /**
 * @enum {string}
@@ -230,11 +230,10 @@ class ExpandableRow extends React.Component {
     };
 
     static defaultProps = {
-        flags: [],
         stateless: false
     };
 
-    _usePStateful = () => this.props.flags.includes("p-stateful")
+    _usePStateful = () => hasFlag(this, "p-stateful")
 
     componentDidMount() {
         if (!Utils.isProduction()) {
@@ -423,7 +422,6 @@ class StatelessExpandableRow extends React.Component {
         onDeleteCancelClick: _.noop,
         onDeleteConfirmClick: _.noop,
         waiting: false,
-        flags: [],
     };
 
     componentDidMount() {
@@ -436,7 +434,7 @@ class StatelessExpandableRow extends React.Component {
             });
         }
 
-        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "ExpandableRow" });
         }
     }
@@ -535,7 +533,7 @@ class StatelessExpandableRow extends React.Component {
         }
     }
 
-    _useNewClassName = () => this.props.flags.findIndex(flag => flag === "expandable-row-class") >= 0;
+    _useNewClassName = () => hasFlag(this, "expandable-row-class");
 
     render() {
         const { icon } = this.props;
@@ -590,7 +588,7 @@ class StatelessExpandableRow extends React.Component {
                     confirmDeleteTitle={this.props.confirmDeleteTitle}
                     onDeleteConfirm={this.props.onDeleteConfirmClick}
                     confirmDeletePosition={this.props.confirmDeletePosition}
-                    flags={this.props.flags}
+                    flags={getFlags(this)}
                 >
                     {this.props.confirmDeleteContent}
                 </ConfirmDeleteDialog>);
@@ -751,7 +749,7 @@ class ConfirmDeleteDialog extends React.Component {
                 label={this.props.trigger}
                 open={this.props.open}
                 onToggle={this.props.open ? this.props.onCancel : _.noop}
-                flags={this.props.flags}
+                flags={getFlags(this)}
             >
                 {this._renderTooltipContent()}
             </DetailsTooltip>

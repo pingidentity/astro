@@ -5,7 +5,7 @@ import Anchor from "../../general/Anchor";
 
 import _ from "underscore";
 import { getIconClassName } from "../../../util/PropUtils";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 class EnvironmentSelector extends React.Component {
     state = { open: false };
@@ -93,7 +93,7 @@ class EnvironmentSelector extends React.Component {
                 selectedOption={selectedOption}
                 className="environment-selector left"
                 bottomPanel={bottomPanel}
-                flags={this.props.flags}
+                flags={getFlags(this)}
             />
         );
     };

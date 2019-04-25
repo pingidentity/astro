@@ -9,7 +9,7 @@ import MarketSelector from "./MarketSelector";
 import Logo from "./logos/Logo";
 import { getIconClassName } from "../../../util/PropUtils";
 import { cannonballChangeWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, getFlags, hasFlag } from "../../../util/FlagUtils";
 
 const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
 
@@ -152,7 +152,7 @@ class NavItem extends React.Component {
                             onOpen: this._handleMenuToggle,
                             onClose: this._handleMenuToggle,
                             triggerClassName: "product-nav__menu-trigger",
-                            flags: this.props.flags,
+                            flags: getFlags(this),
                         },
                         PopoverNavMenu
                     )
@@ -449,7 +449,7 @@ class HeaderBar extends React.Component {
     };
 
     componentDidMount() {
-        if (!this.props.flags || !this.props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "HeaderBar" });
         }
     }

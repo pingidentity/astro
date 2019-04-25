@@ -8,8 +8,8 @@ import { v2 as FormTextField } from "../../form-text-field";
 import Validators from "../../../../util/Validators";
 import Utils from "../../../../util/Utils.js";
 import { cannonballPortalWarning, cannonballProgressivelyStatefulWarning } from "../../../../util/DeprecationUtils";
-import { flagsPropType } from "../../../../util/FlagUtils";
 import { inStateContainer, toggleTransform } from "../../../utils/StateContainer";
+import { flagsPropType, hasFlag, getFlags } from "../../../../util/FlagUtils";
 
 /**
  * @typedef I18nPhoneInput~PhoneInputValues
@@ -148,18 +148,17 @@ class I18nPhoneInputStateless extends Component {
         disabled: false
     };
 
-    constructor(props) {
-        super(props);
+    componentDidMount() {
         if (!Utils.isProduction()) {
-            if (props.controlled !== undefined) {
+            if (this.props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (props.onCountrySearch) {
+            if (this.props.onCountrySearch) {
                 throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
             }
         }
 
-        if (!props.flags || !props.flags.includes("use-portal")) {
+        if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "Phone" });
         }
     }
@@ -235,7 +234,7 @@ class I18nPhoneInputStateless extends Component {
                     setSearchTime={this.props.setSearchTime}
                     name={this.props.name ? this.props.name+"-country" : null}
                     onSearch={this.props.onSearch}
-                    flags={this.props.flags}
+                    flags={getFlags(this)}
                 />
                 <FormTextField
                     data-id={this.props["data-id"] + "-phoneNumber"}

@@ -7,7 +7,7 @@ import classnames from "classnames";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 import { createProgressiveState } from "../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -133,7 +133,6 @@ class FormSearchBox extends React.Component {
         errorMessage: null,
         width: InputWidths.MD,
         autoFocus: false,
-        flags: [],
         initialState: {},
     };
 
@@ -141,7 +140,7 @@ class FormSearchBox extends React.Component {
         super(props);
         const { queryString, value, onValueChange } = props;
 
-        if (this._usePStateful(props)) {
+        if (this._usePStateful({ props })) {
             const passedProps = {
                 queryString: queryString !== undefined ? queryString : value,
                 onValueChange,
@@ -205,7 +204,7 @@ class FormSearchBox extends React.Component {
         return document.activeElement === this._getSearchInputRef();
     };
 
-    _usePStateful = (props = this.props) => props.flags.includes("p-stateful");
+    _usePStateful = (component = this) => hasFlag(component, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {

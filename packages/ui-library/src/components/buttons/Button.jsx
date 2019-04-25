@@ -4,7 +4,7 @@ import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 import EllipsisLoader from "../general/EllipsisLoader";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @class Button
@@ -58,8 +58,6 @@ const buttonTypeList = Object.values(buttonTypes);
 
 const dontFocus = event => event.preventDefault();
 
-const checkFixAddMargin = flags => flags.includes("add-button-margin");
-
 function Button ({
     active,
     alignInputs,
@@ -68,7 +66,6 @@ function Button ({
     "data-id": dataId,
     disabled,
     disabledText,
-    flags,
     href,
     iconName,
     inline,
@@ -78,9 +75,10 @@ function Button ({
     onClick,
     submit,
     target,
-    type
+    type,
+    ...props
 }) {
-    const fixAddMargin = checkFixAddMargin(flags);
+    const fixAddMargin = hasFlag({ props }, "add-button-margin");
 
     if (iconName === "add" && !fixAddMargin && !noSpacing) {
         cannonballChangeWarning({
@@ -166,7 +164,6 @@ Button.defaultProps = {
     alignInputs: false,
     "data-id": "button",
     disabled: false,
-    flags: [],
     loading: false,
     noSpacing: false,
     onClick: () => {},

@@ -10,7 +10,7 @@ import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUt
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import Utils from "../../util/Utils";
 import _ from "underscore";
-import { flagsPropType } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @callback Section~onToggle
@@ -74,7 +74,6 @@ export default class Section extends React.Component {
     };
 
     static defaultProps = {
-        flags: [],
         stateless: true,
     };
 
@@ -96,7 +95,7 @@ export default class Section extends React.Component {
         }
     }
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     render() {
         if (this._usePStateful()) {
