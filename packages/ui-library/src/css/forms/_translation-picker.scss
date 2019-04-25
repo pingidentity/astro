@@ -7,13 +7,20 @@
     .collapsible-link:after {
         color: $color-value-text !important;
     }
+    .collapsible-link.right:after {
+        right: -18px;
+    }
+    .details-content-inner {
+        min-height: unset;
+    }
 }
 
 .translation-picker__label {
     $width: 21px;
     font-size: 13px;
     text-align: center;
-    width: $width;
+    width: 15px;
+    padding-left: 3px;
     height: 1em;
     overflow: hidden;
     &:before {

@@ -10,7 +10,7 @@ import InputRow from "../../../components/layout/InputRow";
 */
 
 const OPTIONS = [
-    { label: "en", value: "en" },
+    { label: "en-gb", value: "en-gb" },
     { label: "fr", value: "fr" },
     { label: "fr-ca", value: "fr" },
     { label: "es", value: "es" },
