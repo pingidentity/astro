@@ -164,6 +164,8 @@ class BaseCalendar extends React.Component {
         statelessDate: false,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
 

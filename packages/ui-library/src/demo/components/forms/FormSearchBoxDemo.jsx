@@ -95,7 +95,6 @@ class FormSearchBoxDemo extends React.Component {
                         onClear={this._handleClear}
                         width={InputWidths.MD}
                         name="search-box"
-                        flags={this.props.flags}
                     />
                 </InputRow>
                 {this._renderMessages()}

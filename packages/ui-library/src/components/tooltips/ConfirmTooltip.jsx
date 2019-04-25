@@ -87,6 +87,8 @@ class ConfirmTooltipBase extends Component {
         closeOnConfirm: false,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "ConfirmTooltip" });

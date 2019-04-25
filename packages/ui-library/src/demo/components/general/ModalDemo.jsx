@@ -36,15 +36,12 @@ class ModalDemo extends React.Component {
     };
 
     render() {
-        const { flags } = this.props;
-
         return (
             <div>
                 <InputRow>
                     <a onClick={this._makeToggle(1)}>Open Default Modal</a>
 
                     <Modal
-                        flags={flags}
                         data-id="default-example"
                         modalTitle="Default Modal"
                         expanded={this.state.expanded1}
@@ -68,7 +65,6 @@ class ModalDemo extends React.Component {
                     <a onClick={this._makeToggle(2)}>Open Maximized Modal</a>
 
                     <Modal
-                        flags={flags}
                         modalTitle="Maximized Modal"
                         maximize={true}
                         expanded={this.state.expanded2}
@@ -86,7 +82,6 @@ class ModalDemo extends React.Component {
                     <a onClick={this._makeToggle(3)}>Open BG Click Enabled Modal</a>
 
                     <Modal
-                        flags={flags}
                         modalTitle="Closing a Modal with a Background Click"
                         closeOnBgClick={true}
                         expanded={this.state.expanded3}
@@ -105,7 +100,6 @@ class ModalDemo extends React.Component {
                     <a onClick={this._makeToggle(7)}>Open Modal with Developer Controlled Close</a>
 
                     <Modal
-                        flags={flags}
                         modalTitle="Dev Controlled Close"
                         maximize={false}
                         expanded={this.state.expanded7}
@@ -124,7 +118,6 @@ class ModalDemo extends React.Component {
                     <a onClick={this._makeToggle(4)}>Open Dialog Modal</a>
 
                     <Modal
-                        flags={flags}
                         modalTitle="Dialog Modal"
                         type="dialog"
                         ref="dialogModal"
@@ -150,7 +143,6 @@ class ModalDemo extends React.Component {
                     <a onClick={this._makeToggle(5)}>Open Alert Modal</a>
 
                     <Modal
-                        flags={flags}
                         type="alert"
                         ref="alertModal"
                         expanded={this.state.expanded5}
@@ -172,7 +164,6 @@ class ModalDemo extends React.Component {
                     <a onClick={this._makeToggle(6)}>Open Modal with Close Confirmation</a>
 
                     <Modal
-                        flags={flags}
                         modalTitle="Modal with Close Confirmation"
                         maximize={true}
                         expanded={this.state.expanded6}

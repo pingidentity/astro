@@ -62,7 +62,6 @@ class ButtonsDemo extends Component {
                 <Button
                     label="Add"
                     iconName="add"
-                    flags={this.props.flags}
                 />
                 <Button
                     label="Download"

@@ -280,6 +280,8 @@ class MultiDragStateless extends React.Component {
         strings: {}
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     /*
      * This function will compare the current move to the last reported drag and if there is no change
      * return null, otherwise the MoveDescriptor

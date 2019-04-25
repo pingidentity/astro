@@ -1,5 +1,5 @@
-var React = require("react"),
-    RockerButton = require("../../../components/forms/RockerButton");
+import React from "react";
+import RockerButton from "../../../components/forms/RockerButton";
 
 /**
 * @name RockerButtonDemo
@@ -32,7 +32,6 @@ class RockerButtonDemo extends React.Component {
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={labels}
-                    flags={this.props.flags}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
 
@@ -42,7 +41,6 @@ class RockerButtonDemo extends React.Component {
                     stateless={false}
                     disabled={true}
                     labels={labels}
-                    flags={this.props.flags}
                 />
                 <div>Disabled rocker button.</div>
 
@@ -53,7 +51,6 @@ class RockerButtonDemo extends React.Component {
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={years}
-                    flags={this.props.flags}
                 />
                 <div>chart rocker button</div>
 
@@ -64,7 +61,6 @@ class RockerButtonDemo extends React.Component {
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={days}
-                    flags={this.props.flags}
                 />
                 <div>small chart rocker button</div>
             </div>

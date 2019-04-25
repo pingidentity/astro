@@ -9,7 +9,7 @@ import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import _ from "underscore";
 
 import { MessageTypes, Layouts } from "./MessagesConstants";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -117,6 +117,8 @@ module.exports = class extends React.Component {
         onI18n: (key) => key,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
         if (!Utils.isProduction()) {
@@ -137,7 +139,6 @@ module.exports = class extends React.Component {
             containerType,
             "data-id": dataId,
             defaultMessageTimeout,
-            flags,
             key,
             messages,
             onI18n,
@@ -158,7 +159,7 @@ module.exports = class extends React.Component {
                                 onRemoveMessage={onRemoveMessage}
                                 defaultTimeout={defaultMessageTimeout}
                                 data-id={`${dataId}-message-${i}`}
-                                flags={flags}
+                                flags={getFlags(this)}
                             />
                         );
                     })
@@ -183,6 +184,8 @@ class Message extends React.Component {
     static defaultProps = {
         onRemoveMessage: _.noop,
     }
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * Remove the message by calling the removeMessage callback if it exists.

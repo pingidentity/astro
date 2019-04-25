@@ -12,7 +12,7 @@ import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 
 /**
@@ -53,6 +53,8 @@ class ConditionalFieldsetStateless extends React.Component {
         supportEmpty: false,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "ConditionalFieldset" });
@@ -69,7 +71,6 @@ class ConditionalFieldsetStateless extends React.Component {
 
     _getOptions = type => {
         const dataId = this.props["data-id"] + "-options";
-        const { flags } = this.props;
 
         if (this.props.required || type === Types.SELECT) {
             const indexOffset = this.props.supportEmpty ? 1 : 0;
@@ -100,7 +101,7 @@ class ConditionalFieldsetStateless extends React.Component {
                     selectedOption={selectedOption}
                     title={selectedOption.label}
                     width={this.props.inputWidth}
-                    flags={flags}
+                    flags={getFlags(this)}
                 />
             );
         } else {

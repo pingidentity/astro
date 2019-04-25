@@ -109,7 +109,6 @@ class WizardDemo extends React.Component {
             showClose: false,
             title: "Are you sure?",
         };
-        const { flags } = this.props;
 
         return (
             <div>
@@ -144,7 +143,6 @@ class WizardDemo extends React.Component {
                             onCancel: this._closeSaveTooltip,
                             open: this.state.showSaveTooltip,
                         }}
-                        flags={flags}
                     >
                         <Step
                             title="Wizard 1 - Step 1"
@@ -157,11 +155,10 @@ class WizardDemo extends React.Component {
                                 onCancel: this._closeSaveTooltip,
                                 open: this.state.showSaveTooltip,
                             }}
-                            flags={flags}
                         >
                             Step 1 content goes here.
                         </Step>
-                        <Step title="Wizard 1 - Step 2" cancelTooltip={cancelTooltipParams} flags={flags}>
+                        <Step title="Wizard 1 - Step 2" cancelTooltip={cancelTooltipParams}>
                             Step 2 content goes here.
                         </Step>
                     </Wizard>
@@ -170,11 +167,10 @@ class WizardDemo extends React.Component {
 
                     <Wizard
                         title="Wizard 2"
-                        flags={flags}
                     >
-                        <Step title="Wizard 2 - Step 1" flags={flags}>Step 1 content goes here.</Step>
-                        <Step title="Wizard 2 - Step 2" flags={flags}>Step 2 content goes here.</Step>
-                        <Step title="Wizard 2 - Step 3" flags={flags}>Step 3 content goes here.</Step>
+                        <Step title="Wizard 2 - Step 1">Step 1 content goes here.</Step>
+                        <Step title="Wizard 2 - Step 2">Step 2 content goes here.</Step>
+                        <Step title="Wizard 2 - Step 3">Step 3 content goes here.</Step>
                     </Wizard>
                 </Choose>
                 <div>{this.state.isLoading && "Making some async call..."}</div>

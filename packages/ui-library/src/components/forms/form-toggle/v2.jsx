@@ -158,6 +158,8 @@ export default class Toggle extends Component {
         stateless: true,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
         if (!Utils.isProduction()) {

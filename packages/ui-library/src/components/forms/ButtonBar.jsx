@@ -240,6 +240,8 @@ class ButtonBar extends React.Component {
         onSave: _.noop,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _handleSave = (e) => {
         if (!this.props.enableSavingAnimation) {
             this.props.onSave(e);

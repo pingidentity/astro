@@ -133,6 +133,8 @@ class Stateless extends React.Component {
         width: InputWidths.SM,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     /*
      * Toggle the color picker. If a mouse click happens outside the color picker area and if the color picker is open.
      * @param {MouseEvent} e
@@ -410,6 +412,8 @@ export default class ColorPicker extends React.Component {
     };
 
     static _statelessComponent = Stateless; // this is to enable testing
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _usePStateful = () => hasFlag(this, "p-stateful");
 

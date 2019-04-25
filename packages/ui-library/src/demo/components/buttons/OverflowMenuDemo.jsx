@@ -39,7 +39,6 @@ class OverflowMenuDemo extends React.Component {
             <div>
                 <Button>Regular Button</Button>
                 <OverflowMenu
-                    flags={this.props.flags}
                     buttons={this._buttons}
                 />
                 <br />

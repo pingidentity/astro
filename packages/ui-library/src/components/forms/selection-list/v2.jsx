@@ -130,6 +130,8 @@ export default class SelectionList extends React.Component {
     static ListType = Constants.ListType;
     static listType = Constants.ListType; // according to our new standard
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {

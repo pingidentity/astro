@@ -43,7 +43,6 @@ class PopoverMenuDemo extends React.Component {
                     buttons={this._buttons}
                     open={this.state.open1}
                     onToggle={this._toggle1}
-                    flags={this.props.flags}
                 />
             </div>
         );

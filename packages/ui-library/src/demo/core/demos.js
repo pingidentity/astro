@@ -1035,6 +1035,13 @@ module.exports = [
                         pathToSource: "components_utils_CopyIcon.jsx.html",
                         pathToDemoSource: "demo_components_utils_CopyIconDemo.jsx.html"
                     },
+                    {
+                        label: "Flags Provider",
+                        demo: require("../components/utils/FlagsProviderDemo"),
+                        pathToDoc: "components/utils/FlagsProvider.jsx",
+                        pathToSource: "components_utils_FlagsProvider.jsx.html",
+                        pathToDemoSource: "demo_components_utils_FlagsProviderDemo.jsx.html"
+                    },
                 ]
             },
             {

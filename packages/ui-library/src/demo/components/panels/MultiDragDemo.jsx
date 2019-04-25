@@ -17,6 +17,7 @@ import _ from "underscore";
 
 import Button from "../../../components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
+
 /**
 * @name MultiDragDemo
 * @memberof MultiDrag
@@ -362,174 +363,171 @@ class MultiDragDemo extends React.Component {
 
         const sortRow = row => _.sortBy(row, ({ name }) => name);
 
-        const { flags } = this.props;
-
         return (
-            <div className="multidrag-demo" data-id="multidragDemoDiv">
-                <Messages messages={this.props.messages.messages} onRemoveMessage={this.messageActions.removeAt} />
+            <div>
+                <div className="multidrag-demo" data-id="multidragDemoDiv">
+                    <Messages messages={this.props.messages.messages} onRemoveMessage={this.messageActions.removeAt} />
 
-                <Layout.Row className="columns-nopad">
-                    <Layout.Column>
-                        <FormLabel>Select the type of demo</FormLabel>
-                        <FormRadioGroup
-                            stacked={false}
-                            groupName="stateless-stateful-choice"
-                            selected={this.state.demoType}
-                            onValueChange={this._handleDemoTypeValueChange}
-                            items={[
-                                { id: "STATELESS", name: "Stateless demo" },
-                                { id: "STATEFUL", name: "Stateful demo" }
-                            ]}
-                        />
-                    </Layout.Column>
-                    <Layout.Column>
-                        <FormLabel>Disable Component?</FormLabel>
-                        <br/>
-                        <Toggle
-                            data-id="disable-toggle"
-                            className="row-status-toggle"
-                            stateless={true}
-                            toggled={this.state.disabled}
-                            onToggle={this._handleDisabledToggle}
-                        />
-                    </Layout.Column>
-                </Layout.Row>
-                <Layout.Row className="columns-nopad">
-                    <Layout.Column>
-                        <FormLabel value="Search options" />
-                        <FormRadioGroup
-                            onValueChange={this.demoActions.setSearch}
-                            selected={this.props.demo.search}
-                            groupName="search-opts"
-                            stacked={false}
-                            items={[
-                                { id: "none", name: "none" },
-                                { id: "first", name: "first column only" },
-                                { id: "all", name: "all" }
-                            ]}
-                        />
-                    </Layout.Column>
-                    <Layout.Column>
-                        <FormLabel value="row options" />
-                        <FormRadioGroup
-                            onValueChange={this.demoActions.setStyle}
-                            selected={this.props.demo.style}
-                            groupName="row-opts"
-                            stacked={false}
-                            items={[
-                                { id: "none", name: "none" },
-                                { id: "iconSrc", name: "with image" },
-                                { id: "icon", name: "with icon" },
-                                { id: "count", name: "with count" },
-                                { id: "tooltip", name: "with delete tooltip" }
-                            ]}
-                        />
-                    </Layout.Column>
-                </Layout.Row>
-                <Layout.Row className="columns-nopad">
-                    <Layout.Column>
-                        <FormLabel>Toggle custom sort (stateful only)</FormLabel>
-                        <FormRadioGroup
-                            stacked={false}
-                            groupName="sorted"
-                            selected={this.state.sorted ? CUSTOMSORTVALS.SORTED : CUSTOMSORTVALS.UNSORTED }
-                            onValueChange={this._toggleSort}
-                            items={[
-                                { id: CUSTOMSORTVALS.UNSORTED, name: "Unsorted" },
-                                { id: CUSTOMSORTVALS.SORTED, name: "Custom sort" }
-                            ]}
-                        />
-                    </Layout.Column>
-                </Layout.Row>
+                    <Layout.Row className="columns-nopad">
+                        <Layout.Column>
+                            <FormLabel>Select the type of demo</FormLabel>
+                            <FormRadioGroup
+                                stacked={false}
+                                groupName="stateless-stateful-choice"
+                                selected={this.state.demoType}
+                                onValueChange={this._handleDemoTypeValueChange}
+                                items={[
+                                    { id: "STATELESS", name: "Stateless demo" },
+                                    { id: "STATEFUL", name: "Stateful demo" }
+                                ]}
+                            />
+                        </Layout.Column>
+                        <Layout.Column>
+                            <FormLabel>Disable Component?</FormLabel>
+                            <br/>
+                            <Toggle
+                                data-id="disable-toggle"
+                                className="row-status-toggle"
+                                stateless={true}
+                                toggled={this.state.disabled}
+                                onToggle={this._handleDisabledToggle}
+                            />
+                        </Layout.Column>
+                    </Layout.Row>
+                    <Layout.Row className="columns-nopad">
+                        <Layout.Column>
+                            <FormLabel value="Search options" />
+                            <FormRadioGroup
+                                onValueChange={this.demoActions.setSearch}
+                                selected={this.props.demo.search}
+                                groupName="search-opts"
+                                stacked={false}
+                                items={[
+                                    { id: "none", name: "none" },
+                                    { id: "first", name: "first column only" },
+                                    { id: "all", name: "all" }
+                                ]}
+                            />
+                        </Layout.Column>
+                        <Layout.Column>
+                            <FormLabel value="row options" />
+                            <FormRadioGroup
+                                onValueChange={this.demoActions.setStyle}
+                                selected={this.props.demo.style}
+                                groupName="row-opts"
+                                stacked={false}
+                                items={[
+                                    { id: "none", name: "none" },
+                                    { id: "iconSrc", name: "with image" },
+                                    { id: "icon", name: "with icon" },
+                                    { id: "count", name: "with count" },
+                                    { id: "tooltip", name: "with delete tooltip" }
+                                ]}
+                            />
+                        </Layout.Column>
+                    </Layout.Row>
+                    <Layout.Row className="columns-nopad">
+                        <Layout.Column>
+                            <FormLabel>Toggle custom sort (stateful only)</FormLabel>
+                            <FormRadioGroup
+                                stacked={false}
+                                groupName="sorted"
+                                selected={this.state.sorted ? CUSTOMSORTVALS.SORTED : CUSTOMSORTVALS.UNSORTED }
+                                onValueChange={this._toggleSort}
+                                items={[
+                                    { id: CUSTOMSORTVALS.UNSORTED, name: "Unsorted" },
+                                    { id: CUSTOMSORTVALS.SORTED, name: "Custom sort" }
+                                ]}
+                            />
+                        </Layout.Column>
+                    </Layout.Row>
 
-                {this.state.demoType === "STATELESS" &&
+                    {this.state.demoType === "STATELESS" &&
+                        <div>
+                            <h2>
+                                Stateless (stateless=true), Empty Label Set.
+                                First column has sort within column disabled.
+                            </h2>
+                            <MultiDrag
+                                stateless={true}
+                                showSearchOnAllColumns={this.props.demo.search === "all"}
+                                showSearch={this.props.demo.search === "first"}
+                                onSearch={this._handleSearchStateless}
+                                categoryList={this._getCategoryOptions()}
+                                columns={columnsStateless}
+                                previewMove={this.props.drag.placeholder}
+                                onScrolledToTop={this._handleScrolledToTop}
+                                onScrolledToBottom={this._handleScrolledToBottomStateless}
+                                onCancel={this._handleCancelStateless}
+                                onCategoryClick={this._handleCategoryClick}
+                                onCategoryToggle={this._handleCategoryToggle}
+                                onDrop={this._handleDropStateless}
+                                onDrag={this._handleDragStateless}
+                                onDragStart={dragScroll.start}
+                                onDragEnd={dragScroll.end}
+                                onAdd={this._handleAddStateless}
+                                onRemove={this._handleRemoveStateless}
+                                labelEmpty="No Items Available"
+                                disabled={this.state.disabled}
+                                {...this.props.demo.style === "tooltip" ? {
+                                    contentType: contentTypeWithTooltip
+                                } : {}}
+                            />
+                        </div>
+                    }
+                    {
+                        /*
+                        * The Stateful MultiDrag does not use the MultiDrag Reducer.
+                        */
+                    }
+                    {this.state.demoType === "STATEFUL" &&
+                        <div>
+                            <h2>Stateful (stateless=false)</h2>
+                            <MultiDrag
+                                ref="multi-drag-demo-stateful"
+                                showSearchOnAllColumns={this.props.demo.search === "all"}
+                                showSearch={this.props.demo.search === "first"}
+                                onSearch={this._handleSearchStateful}
+                                onCategoryClick={this._handleCategoryClickStateful}
+                                categoryList={this._getCategoryOptions()}
+                                columns={columnsStateful}
+                                onScrolledToTop={this._handleScrolledToTop}
+                                onScrolledToBottom={this._handleScrollToBottomStateful}
+                                onCancel={this._handleCancelStateful}
+                                onDrop={this._handleDropStateful}
+                                onDrag={this._handleDragStateful}
+                                onDragStart={dragScroll.start}
+                                onDragEnd={dragScroll.end}
+                                labelEmpty="No Items Available"
+                                disabled={this.state.disabled}
+                                strings={{
+                                    defaultCategoryOption: "Everything",
+                                    filteredByLabel: "but only"
+                                }}
+                                {...this.state.sorted && { customSort: sortRow }}
+                            />
+                        </div>
+                    }
+                    <HR />
                     <div>
-                        <h2>
-                            Stateless (stateless=true), Empty Label Set.
-                            First column has sort within column disabled.
-                        </h2>
+                        <h2>Classic Style</h2>
                         <MultiDrag
-                            stateless={true}
-                            showSearchOnAllColumns={this.props.demo.search === "all"}
-                            showSearch={this.props.demo.search === "first"}
-                            onSearch={this._handleSearchStateless}
-                            categoryList={this._getCategoryOptions()}
-                            columns={columnsStateless}
-                            previewMove={this.props.drag.placeholder}
-                            onScrolledToTop={this._handleScrolledToTop}
-                            onScrolledToBottom={this._handleScrolledToBottomStateless}
-                            onCancel={this._handleCancelStateless}
-                            onCategoryClick={this._handleCategoryClick}
-                            onCategoryToggle={this._handleCategoryToggle}
-                            onDrop={this._handleDropStateless}
-                            onDrag={this._handleDragStateless}
-                            onDragStart={dragScroll.start}
-                            onDragEnd={dragScroll.end}
-                            onAdd={this._handleAddStateless}
-                            onRemove={this._handleRemoveStateless}
+                            ref="multi-drag-demo-classic"
+                            showSearchOnAllColumns={false}
+                            showSearch={true}
+                            onSearch={_.noop}
+                            onCategoryClick={_.noop}
+                            columns={this.state.columns}
+                            onCancel={_.noop}
+                            onDrop={_.noop}
+                            onDrag={_.noop}
+                            onDragStart={_.noop}
+                            onDragEnd={_.noop}
+                            contentType={contentTypeStateful}
                             labelEmpty="No Items Available"
-                            disabled={this.state.disabled}
-                            flags={flags}
-                            {...this.props.demo.style === "tooltip" ? {
-                                contentType: contentTypeWithTooltip
-                            } : {}}
+                            disabled={false}
                         />
                     </div>
-                }
-                {
-                    /*
-                     * The Stateful MultiDrag does not use the MultiDrag Reducer.
-                     */
-                }
-                {this.state.demoType === "STATEFUL" &&
-                    <div>
-                        <h2>Stateful (stateless=false)</h2>
-                        <MultiDrag
-                            ref="multi-drag-demo-stateful"
-                            showSearchOnAllColumns={this.props.demo.search === "all"}
-                            showSearch={this.props.demo.search === "first"}
-                            onSearch={this._handleSearchStateful}
-                            onCategoryClick={this._handleCategoryClickStateful}
-                            categoryList={this._getCategoryOptions()}
-                            columns={columnsStateful}
-                            onScrolledToTop={this._handleScrolledToTop}
-                            onScrolledToBottom={this._handleScrollToBottomStateful}
-                            onCancel={this._handleCancelStateful}
-                            onDrop={this._handleDropStateful}
-                            onDrag={this._handleDragStateful}
-                            onDragStart={dragScroll.start}
-                            onDragEnd={dragScroll.end}
-                            labelEmpty="No Items Available"
-                            disabled={this.state.disabled}
-                            strings={{
-                                defaultCategoryOption: "Everything",
-                                filteredByLabel: "but only"
-                            }}
-                            {...this.state.sorted && { customSort: sortRow }}
-                            flags={flags}
-                        />
-                    </div>
-                }
-                <HR />
-                <div>
-                    <h2>Classic Style</h2>
-                    <MultiDrag
-                        ref="multi-drag-demo-classic"
-                        showSearchOnAllColumns={false}
-                        showSearch={true}
-                        onSearch={_.noop}
-                        onCategoryClick={_.noop}
-                        columns={this.state.columns}
-                        onCancel={_.noop}
-                        onDrop={_.noop}
-                        onDrag={_.noop}
-                        onDragStart={_.noop}
-                        onDragEnd={_.noop}
-                        contentType={contentTypeStateful}
-                        labelEmpty="No Items Available"
-                        disabled={false}
-                        flags={flags}
-                    />
                 </div>
             </div>);
     }

@@ -51,7 +51,6 @@ class ToggleDemo extends React.Component {
                         toggled={this.state.toggled1}
                         onToggle={this._handleToggle1}
                         name="the-toggle"
-                        flags={this.props.flags}
                     />
                     <br/><br/>
                     Value = {this.state.userStatus1}
@@ -65,7 +64,6 @@ class ToggleDemo extends React.Component {
                         status={Toggle.Status.LOCKED}
                         toggled={this.state.toggled2}
                         onToggle={this._handleToggle2}
-                        flags={this.props.flags}
                     />
                     <br/><br/>
                     Value = {this.state.userStatus2}
@@ -78,7 +76,6 @@ class ToggleDemo extends React.Component {
                         stateless={true}
                         onToggle={this._handleToggle3}
                         toggled={this.state.toggled3}
-                        flags={this.props.flags}
                     />
                     <br /><br />
                     State = {this.state.userStatus3}

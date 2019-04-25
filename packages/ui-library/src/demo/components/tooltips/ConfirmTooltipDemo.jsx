@@ -45,7 +45,6 @@ class ConfirmTooltipDemo extends Component {
                     buttonLabel="Confirm"
                     cancelText="Cancel"
                     disableSave={false}
-                    flags={this.props.flags}
                 >
                     {markup}
                 </ConfirmTooltip>
@@ -58,7 +57,6 @@ class ConfirmTooltipDemo extends Component {
                     cancelText="Cancel"
                     disableSave={false}
                     closeOnConfirm={true}
-                    flags={this.props.flags}
                 >
                     {markup}
                 </ConfirmTooltip>

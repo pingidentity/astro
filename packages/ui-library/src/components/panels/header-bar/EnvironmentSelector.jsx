@@ -28,6 +28,8 @@ class EnvironmentSelector extends React.Component {
         newEnvironmentLabel: "+ New environment",
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _handleToggle = () => this.setState({ open: !this.state.open });
 
     // The LinkDropDownList uses labels & values. We want to use labels & ids

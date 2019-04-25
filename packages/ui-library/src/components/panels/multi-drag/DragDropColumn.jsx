@@ -112,6 +112,8 @@ module.exports = class extends React.Component {
         strings: {}
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "MultiDrag" });

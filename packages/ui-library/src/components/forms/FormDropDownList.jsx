@@ -392,6 +392,8 @@ class FormDropDownListStateless extends React.Component {
         autofocus: false,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     didPressKey = false;
     inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
 
@@ -1010,6 +1012,8 @@ export default class FormDropDownList extends React.Component {
     static searchTypes = SearchTypes; // we agreed on a new naming standard, but I'm also preserving bw compat
     static filterOptions = filterOptions;
     static _statelessComponent = FormDropDownListStateless;
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _usePStateful = () => hasFlag(this, "p-stateful");
 

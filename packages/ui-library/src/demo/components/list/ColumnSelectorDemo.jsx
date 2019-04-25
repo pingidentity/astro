@@ -298,44 +298,45 @@ export default class ColumnSelectorDemo extends Component {
         const filteredOptions = this._filterOptions(options);
 
         return (
-            <ColumnSelector
-                onAdd={this._handleAdd}
-                onRemove={this._handleRemove}
-                onSearch={this._handleSearch}
-                onToggleOption={this._handleToggleOption}
-                options={
-                    this.state.selectedFilter && this.state.selectedFilter.value === "pops"
-                        ? this._flattenOptions(filteredOptions)
-                        : filteredOptions
-                }
-                optionsTitle={
-                    <div>
+            <div>
+                <ColumnSelector
+                    onAdd={this._handleAdd}
+                    onRemove={this._handleRemove}
+                    onSearch={this._handleSearch}
+                    onToggleOption={this._handleToggleOption}
+                    options={
+                        this.state.selectedFilter && this.state.selectedFilter.value === "pops"
+                            ? this._flattenOptions(filteredOptions)
+                            : filteredOptions
+                    }
+                    optionsTitle={
+                        <div>
+                            <ColumnTitle
+                                title={<div key="label">Organization filtered by:</div>}
+                            />
+                            <LinkDropDownList
+                                key="filter"
+                                label={this.state.selectedFilter ? this.state.selectedFilter.label : "None"}
+                                onClick={this._handleFilter}
+                                onToggle={this._toggleFilter}
+                                open={this.state.filterOpen}
+                                options={filterOptions}
+                                selectedOption={this.state.selectedFilter}
+                                stateless
+                            />
+                        </div>
+                    }
+                    searchPlaceHolder="Search for environments and populations"
+                    // Search box will manage its own state unless a query prop is passed in
+                    selectedOptions={this._filterSelected(options)}
+                    selectedTitle={
                         <ColumnTitle
-                            title={<div key="label">Organization filtered by:</div>}
+                            subtitle={`(${this.state.selectedRowIds.length} populations)`}
+                            title="Memberships"
                         />
-                        <LinkDropDownList
-                            key="filter"
-                            label={this.state.selectedFilter ? this.state.selectedFilter.label : "None"}
-                            onClick={this._handleFilter}
-                            onToggle={this._toggleFilter}
-                            open={this.state.filterOpen}
-                            options={filterOptions}
-                            selectedOption={this.state.selectedFilter}
-                            stateless
-                            flags={this.props.flags}
-                        />
-                    </div>
-                }
-                searchPlaceHolder="Search for environments and populations"
-                // Search box will manage its own state unless a query prop is passed in
-                selectedOptions={this._filterSelected(options)}
-                selectedTitle={
-                    <ColumnTitle
-                        subtitle={`(${this.state.selectedRowIds.length} populations)`}
-                        title="Memberships"
-                    />
-                }
-            />
+                    }
+                />
+            </div>
         );
     }
 }

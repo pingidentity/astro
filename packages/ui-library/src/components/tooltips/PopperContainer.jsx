@@ -118,6 +118,9 @@ class PopperContainer extends React.Component {
                     gpuAcceleration: !this.props.noGPUAcceleration,
                 },
                 positionFixed: this.props.positionFixed,
+                arrow: {
+                    element: "[data-x-arrow]",
+                },
             }
         };
 
@@ -157,7 +160,7 @@ class PopperContainer extends React.Component {
                 {pointerClassName &&
                     <div
                         className={classnames("popper-container__pointer", pointerClassName)}
-                        x-arrow=""
+                        data-x-arrow=""
                     />
                 }
             </div>

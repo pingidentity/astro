@@ -589,6 +589,7 @@ export default class FormIntegerFieldV2 extends Component {
     };
 
     static _statelessComponent = Stateless;
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _usePStateful = () => hasFlag(this, "p-stateful");
 

@@ -45,6 +45,8 @@ export default class extends Component {
         flags: flagsPropType
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _useTrueDefault = () => hasFlag(this, "true-default");
 
     componentDidMount() {

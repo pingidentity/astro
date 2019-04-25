@@ -18,12 +18,9 @@ class FilterSelectorDemo extends React.Component {
     _handleChange1 = value => this.setState({ values1: value });
 
     render() {
-        const { flags } = this.props;
-
         return (
             <div>
                 <FilterSelector
-                    flags={flags}
                     labelText="A Filter"
                     options={[
                         {

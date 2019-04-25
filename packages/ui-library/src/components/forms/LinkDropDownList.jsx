@@ -82,6 +82,8 @@ class LinkDropDownListStateless extends React.Component {
         "data-id": "link-dropdown-list",
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "LinkDropDownList" });
@@ -210,6 +212,8 @@ export default class LinkDropDownList extends React.Component {
     static defaultProps = {
         stateless: false,
     };
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     componentDidMount() {
         if (!this._usePStateful()) {

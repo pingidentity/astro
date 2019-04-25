@@ -74,6 +74,8 @@ export default class RockerButton extends React.Component {
         stateless: false,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {

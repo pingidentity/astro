@@ -46,15 +46,16 @@ class TranslationPickerDemo extends React.Component {
 
     render() {
         return (
-            <InputRow>
-                <TranslationPicker
-                    flags={this.props.flags}
-                    options={OPTIONS}
-                    label={this.state.text.value}
-                    onClick={this._handleClick}
-                    bottomPanel={<Link title="Upload Translation File" />}
-                />
-            </InputRow>
+            <div>
+                <InputRow>
+                    <TranslationPicker
+                        options={OPTIONS}
+                        label={this.state.text.value}
+                        onClick={this._handleClick}
+                        bottomPanel={<Link title="Upload Translation File" />}
+                    />
+                </InputRow>
+            </div>
         );
     }
 }

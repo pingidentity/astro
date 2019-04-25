@@ -138,6 +138,8 @@ class DetailsTooltipStateless extends React.Component {
 
     static popupTypes = popupTypes;
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     /*
      * Call the props toggle() function .
      */
@@ -473,6 +475,8 @@ class DetailsTooltip extends React.Component {
 
     static tooltipPlacements = tooltipPlacements;
     static DetailsTooltipStateless = DetailsTooltipStateless;
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     componentDidMount() {
         if (!hasFlag(this, "p-stateful")) {

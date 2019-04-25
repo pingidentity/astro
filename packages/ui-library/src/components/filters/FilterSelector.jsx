@@ -9,7 +9,7 @@ import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
 import { darkInputs } from "../../util/CSSModifiers";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
 const optionsSelector = createSelector(
     state => state.search,
@@ -88,6 +88,8 @@ class FilterSelector extends React.Component {
         type: SelectionList.ListType.MULTI
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _usePortal = () => hasFlag(this, "use-portal");
 
     componentDidMount() {
@@ -127,7 +129,6 @@ class FilterSelector extends React.Component {
             "data-id": dataId,
             bottomPanel,
             className,
-            flags,
             labelText,
             label,
             selected,
@@ -154,7 +155,7 @@ class FilterSelector extends React.Component {
                     }
                     open={open}
                     onToggle={onToggle}
-                    flags={flags}
+                    flags={getFlags(this)}
                 >
                     <SelectionList
                         className={darkInputs}

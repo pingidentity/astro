@@ -378,6 +378,7 @@ export default class ModalButton extends React.Component {
     }
 
     static _statelessComponent = ModalButtonStateless;
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     componentDidMount() {
         if (!this._usePStateful()) {

@@ -106,7 +106,6 @@ export default class FileUploadDemo extends React.Component {
                         labelSelect="Choose a File"
                         labelRemove="Remove"
                         fileName="first-one"
-                        flags={this.props.flags}
                     />
                 </InputRow>
 
@@ -124,7 +123,6 @@ export default class FileUploadDemo extends React.Component {
                         labelSelect="Choose a File"
                         labelRemove="Remove"
                         name="second-one"
-                        flags={this.props.flags}
                         defaultImage="src/demo/images/favicon.png"
                     />
                     <br /><br />
@@ -148,7 +146,6 @@ export default class FileUploadDemo extends React.Component {
                         defaultImage="src/demo/images/favicon.png"
                         labelSelect="Choose a File"
                         labelRemove="Remove"
-                        flags={this.props.flags}
                     />
                     <br /><br />
                     Selected file = {this.state.file2}
@@ -177,7 +174,6 @@ export default class FileUploadDemo extends React.Component {
                                 stacked={true}
                                 labelSelect="Choose a File"
                                 labelRemove="Remove"
-                                flags={this.props.flags}
                             />
                         </InputRow>
                         <ButtonGroup
@@ -222,7 +218,6 @@ export default class FileUploadDemo extends React.Component {
                         accept="image/jpeg, image/jpg, image/png"
                         labelSelect="Choose a File"
                         labelRemove="Remove"
-                        flags={this.props.flags}
                     />
                     <br /><br />
                     Input status = {this.state.status3}

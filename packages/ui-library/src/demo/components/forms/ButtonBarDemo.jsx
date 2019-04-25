@@ -1,7 +1,6 @@
 
-var React = require("react"),
-    ButtonBar = require("../../../components/forms/ButtonBar");
-
+import React from "react";
+import ButtonBar from "../../../components/forms/ButtonBar";
 import Button from "../../../components/buttons/Button";
 
 /**
@@ -122,7 +121,6 @@ class ButtonBarDemo extends React.Component {
 
                 <ButtonBar
                     data-id="buttonbar"
-                    flags={this.props.flags}
 
                     cancelText="Cancel"
                     discardText="Discard"

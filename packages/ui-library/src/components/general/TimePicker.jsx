@@ -68,6 +68,8 @@ module.exports = class extends React.Component {
         "data-id": "time-picker",
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
         moment.locale(Translator.currentLanguage);

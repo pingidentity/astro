@@ -77,6 +77,8 @@ export default class Section extends React.Component {
         stateless: true,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
         if (!Utils.isProduction()) {

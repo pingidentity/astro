@@ -328,6 +328,8 @@ export default class FormTextArea extends React.Component {
         stateless: true,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {

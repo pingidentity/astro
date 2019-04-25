@@ -75,6 +75,8 @@ class NavItem extends React.Component {
         renderMenu: defaultRender,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     /**
      * @method
      * @name NavItem#_handleMenuToggle
@@ -449,6 +451,8 @@ class HeaderBar extends React.Component {
         updated: false
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "HeaderBar" });
@@ -584,7 +588,7 @@ class HeaderBar extends React.Component {
                             options={this.props.marketOptions}
                             market={this.props.marketSelected}
                             onMarketChange={this.props.onMarketChange}
-                            flags={flags}
+                            flags={getFlags(this)}
                         />
                     )}
                 </div>
@@ -607,7 +611,7 @@ class HeaderBar extends React.Component {
                             onEnvironmentChange={this.props.onEnvironmentChange}
                             onNewEnvironment={this.props.onNewEnvironment}
                             newEnvironmentLabel={this.props.newEnvironmentLabel}
-                            flags={flags}
+                            flags={getFlags(this)}
                         />
                     )}
 

@@ -23,7 +23,6 @@ export default class I18nCountrySelectorDemo extends React.Component {
         return (
             <div>
                 <I18nCountrySelector
-                    flags={this.props.flags}
                     countryCode={this.state.countryCode}
                     onValueChange={this._handleValueChange}
                     name="country-selector"

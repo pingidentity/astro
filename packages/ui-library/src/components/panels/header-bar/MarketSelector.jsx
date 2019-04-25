@@ -21,6 +21,8 @@ class MarketSelector extends React.Component {
         options: []
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     // The FormDropDownList uses labels & values. We want to use labels & ids
     _getDDLOption = option => ({ label: option.label, value: option.id })
 

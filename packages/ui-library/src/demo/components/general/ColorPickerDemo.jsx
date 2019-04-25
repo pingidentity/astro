@@ -37,8 +37,6 @@ class ColorPickerDemo extends React.Component {
     };
 
     render() {
-        const { flags } = this.props;
-
         return (
             <div>
                 <InputRow>
@@ -49,7 +47,6 @@ class ColorPickerDemo extends React.Component {
                         labelText="Background color"
                         name="stateful-demo"
                         hintText="Pick a color or type in the hex code"
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -64,7 +61,6 @@ class ColorPickerDemo extends React.Component {
                         errorMessage={this.state.errorMessage}
                         open={this.state.picker2open}
                         stateless={true}
-                        flags={flags}
                     />
                 </InputRow>
             </div>);

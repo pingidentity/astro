@@ -44,6 +44,8 @@ module.exports = class extends React.Component {
         "data-id": "unit-input"
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!hasFlag(this, "use-portal")) {
             cannonballPortalWarning({ name: "UnitInput" });

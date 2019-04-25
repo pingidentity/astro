@@ -1,5 +1,5 @@
-var React = require("react"),
-    I18nPhoneInput = require("../../../../components/forms/i18n/phone-input");
+import React from "react";
+import I18nPhoneInput from "../../../../components/forms/i18n/phone-input";
 
 /**
 * @name I18nPhoneInputDemo
@@ -69,8 +69,6 @@ class I18nPhoneInputDemo extends React.Component {
     };
 
     render() {
-        const { flags } = this.props;
-
         return (
             <div>
                 <label className="detached">Stateful Phone Input</label>
@@ -79,7 +77,6 @@ class I18nPhoneInputDemo extends React.Component {
                     countryCode={this.state.countryCodeStateful}
                     dialCode={this.state.dialCodeStateful}
                     phoneNumber={this.state.phoneNumberStateful}
-                    flags={flags}
                 />
                 <br/>
                 <div>
@@ -102,7 +99,6 @@ class I18nPhoneInputDemo extends React.Component {
                     countryCode={this.state.countryCodeStateless}
                     dialCode={this.state.dialCodeStateless}
                     phoneNumber={this.state.phoneNumberStateless}
-                    flags={flags}
                 />
                 <br/>
                 <div>
@@ -118,7 +114,6 @@ class I18nPhoneInputDemo extends React.Component {
                     countryCode={this.state.countryCodeStateless2}
                     dialCode={this.state.dialCodeStateless1}
                     phoneNumber={this.state.phoneNumberStateless2}
-                    flags={flags}
                 />
                 <br/>
 
@@ -130,7 +125,6 @@ class I18nPhoneInputDemo extends React.Component {
                     dialCode={this.state.dialCodeStateless1}
                     phoneNumber={this.state.phoneNumberStateless1}
                     disabled={true}
-                    flags={flags}
                 />
                 <br/>
                 <div>

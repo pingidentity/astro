@@ -8,6 +8,7 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import Popover from "../tooltips/Popover";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { FlagsProvider } from "../utils/FlagsProvider";
 
 /**
  * @callback DropDownButton~onValueChange
@@ -281,6 +282,8 @@ export default class DropDownButton extends Component {
         "data-id": "drop-down-button",
         stateless: false,
     };
+
+    static contextType = FlagsProvider;
 
     render() {
         if (hasFlag(this, "p-stateful")) {

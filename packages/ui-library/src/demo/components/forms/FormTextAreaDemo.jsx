@@ -47,7 +47,6 @@ class FormTextAreaDemo extends React.Component {
                         stateless={false}
                         labelText="Basic"
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -59,7 +58,6 @@ class FormTextAreaDemo extends React.Component {
                         required={true}
                         name="reqd-textarea"
                         width={InputWidths.MD}
-                        flags={flags}
                     >
                         {this.state.onValueChangeFieldValue}
                     </FormTextArea>
@@ -73,7 +71,6 @@ class FormTextAreaDemo extends React.Component {
                         rows={3}
                         maxLength={25}
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -87,7 +84,6 @@ class FormTextAreaDemo extends React.Component {
                         originalValue="Lorem ipsum dolor sit amet"
                         showUndo={true}
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -100,7 +96,6 @@ class FormTextAreaDemo extends React.Component {
                         showUndo={true}
                         onUndo={this._handleUndo}
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -109,7 +104,6 @@ class FormTextAreaDemo extends React.Component {
                         labelText="Read-only"
                         value="Can't touch this"
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -120,7 +114,6 @@ class FormTextAreaDemo extends React.Component {
                             placed on the textarea."
                         width={InputWidths.MD}
                         required={true}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -129,7 +122,6 @@ class FormTextAreaDemo extends React.Component {
                         labelText="With help tooltip"
                         labelHelpText="This is my help text."
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -139,7 +131,6 @@ class FormTextAreaDemo extends React.Component {
                         labelHelpText="This is my help text."
                         disabled={true}
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -149,7 +140,6 @@ class FormTextAreaDemo extends React.Component {
                         labelHelpText="This is the default medium height."
                         className="textarea-height--medium"
                         width={InputWidths.MD}
-                        flags={flags}
                     />
                 </InputRow>
             </div>

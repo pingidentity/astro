@@ -10,6 +10,7 @@ import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import HR from "ui-library/lib/components/general/HR";
 import { allFlags } from "ui-library/lib/util/FlagUtils";
+import FlagsProvider from "ui-library/lib/components/utils/FlagsProvider";
 
 const flagHelp = (
     `Use the flags prop on your component to specify custom behaviors.
@@ -140,7 +141,9 @@ class DemoItem extends React.Component {
                         className="output"
                         key={this.state.flags ? this.state.flags.join("_") : "demo"}
                     >
-                        {React.createElement(type, props)}
+                        <FlagsProvider flags={_.intersection(this.state.flags, flags)}>
+                            {React.createElement(type, props)}
+                        </FlagsProvider>
 
                         {flags &&
                             <div>

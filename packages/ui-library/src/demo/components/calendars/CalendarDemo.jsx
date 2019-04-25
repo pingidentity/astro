@@ -1,6 +1,6 @@
-var React = require("react"),
-    moment = require("moment-range"),
-    Calendar = require("./../../../components/calendars/Calendar");
+import React from "react";
+import moment from "moment-range";
+import Calendar from "../../../components/calendars/Calendar";
 
 /**
 * @name CalendarDemo
@@ -36,8 +36,6 @@ class CalendarDemo extends React.Component {
     };
 
     render() {
-        const { flags } = this.props;
-
         return (
             <div>
                 <Calendar data-id="calendar"
@@ -50,7 +48,6 @@ class CalendarDemo extends React.Component {
                     labelHelpText="Help text can go here"
                     name="calendar-demo"
                     onValueChange={this._onEnrollmentDateChanged(1)}
-                    flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate1)}</div>
 
@@ -67,7 +64,6 @@ class CalendarDemo extends React.Component {
                     labelText="Date with date range"
                     labelHelpText="Selection outside of date range is not permitted"
                     onValueChange={this._onEnrollmentDateChanged(2)}
-                    flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
 
@@ -81,7 +77,6 @@ class CalendarDemo extends React.Component {
                     labelText="Date only showing months"
                     onValueChange={this._onEnrollmentDateChanged(3)}
                     minView={Calendar.Views.MONTHS}
-                    flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
 
@@ -91,7 +86,6 @@ class CalendarDemo extends React.Component {
                     closeOnSelect={true}
                     computableFormat="x"
                     labelText="Internally managed state"
-                    flags={flags}
                 />
                 <br /><br />
 
@@ -99,7 +93,6 @@ class CalendarDemo extends React.Component {
                     date={new Date(2017, 1, 20)}
                     computableFormat="x"
                     labelText="Sets date prop / no handler"
-                    flags={flags}
                     required
                 />
             </div>

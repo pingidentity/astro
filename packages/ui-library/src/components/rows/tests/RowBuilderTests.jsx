@@ -85,7 +85,7 @@ describe("RowBuilder", () => {
     it("does not call onRemove prop when not passed in", () => {
         const onRemove = jest.fn();
         const component = getComponent();
-        const removeButton = TestUtils.scryRenderedDOMNodesWithClass(
+        const removeButton = TestUtils.findRenderedDOMNodeWithDataId(
             component,
             "row-builder-test-first-delete"
         );

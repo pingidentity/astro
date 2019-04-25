@@ -74,8 +74,8 @@ function Button ({
     target,
     type,
     ...props
-}) {
-    const fixAddMargin = hasFlag({ props }, "add-button-margin");
+}, context) {
+    const fixAddMargin = hasFlag({ props, context }, "add-button-margin");
 
     if (iconName === "add" && !fixAddMargin && !noSpacing) {
         cannonballChangeWarning({
@@ -165,5 +165,7 @@ Button.defaultProps = {
 };
 
 Button.buttonTypes = buttonTypes;
+
+Button.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default Button;

@@ -258,6 +258,8 @@ class TimeZoneStateless extends React.Component {
         value: moment.tz.guess(),
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
 
@@ -701,6 +703,8 @@ export default class FormTimeZone extends React.Component {
     static _statelessComponent = TimeZoneStateless; // this is to enable testing
 
     static getZoneNameDisplayValue = getZoneNameDisplayValue;
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     componentDidMount() {
         /* istanbul ignore if  */

@@ -324,6 +324,8 @@ export default class Pagination extends Component {
         stateless: false
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {

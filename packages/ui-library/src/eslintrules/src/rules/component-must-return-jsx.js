@@ -43,7 +43,7 @@ const isValidReturnType = (statement = {}) => {
 
             // createElement and children will both probably be valid JSX.
             // This rule currently does not check if private class methods return JSX, however.
-            if (name === "createElement" || name === "children" || name.startsWith("_")) {
+            if (name === "createElement" || name === "children" || name.startsWith("_") || name === "only") {
                 return true;
             } else {
                 return false;

@@ -136,6 +136,8 @@ class FormSearchBox extends React.Component {
         initialState: {},
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
         const { queryString, value, onValueChange } = props;

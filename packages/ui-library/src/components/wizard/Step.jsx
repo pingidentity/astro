@@ -138,6 +138,8 @@ class Step extends React.Component {
         doneButtonClassName: "primary final-step"
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         /* istanbul ignore if  */
         if (!Utils.isProduction()) {

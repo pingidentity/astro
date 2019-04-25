@@ -133,8 +133,6 @@ class HeaderBarDemo extends React.Component {
     }
 
     render() {
-        const { flags } = this.props;
-
         return (
             <div>
                 <p>Using the provided reducer:</p>
@@ -149,7 +147,6 @@ class HeaderBarDemo extends React.Component {
                     onNavChange={this._handleNav}
                     onMarketChange={this._handleMarket}
                     marketOptions={markets}
-                    flags={flags}
                 />
                 {this.state.newEnvironment && <p>Clicked +New Environment</p>}
                 <HR />
@@ -164,7 +161,6 @@ class HeaderBarDemo extends React.Component {
                     navSelected="connections"
                     marketOptions={markets}
                     marketSelected="customers"
-                    flags={flags}
 
                     tree={[{
                         id: "account",
@@ -184,7 +180,6 @@ class HeaderBarDemo extends React.Component {
                     siteLogo="pingaccess"
                     marketOptions={markets}
                     marketSelected="customers"
-                    flags={flags}
 
                     userMenu={userMenuItems}
                 />
@@ -197,7 +192,6 @@ class HeaderBarDemo extends React.Component {
                     navSelected="connections"
                     marketOptions={markets}
                     marketSelected="customers"
-                    flags={flags}
 
                     siteTitle="UI Library" />
                 <HR />
@@ -213,7 +207,6 @@ class HeaderBarDemo extends React.Component {
                     marketSelected="customers"
                     userMenu={userMenuItems}
                     userName="The User's Name"
-                    flags={flags}
 
                     additionalContent="Additional Content"
 
@@ -222,7 +215,6 @@ class HeaderBarDemo extends React.Component {
                 <HeaderBar
                     inline={true}
                     siteLogo="pingone"
-                    flags={flags}
 
                     tree={[{
                         id: "account",
@@ -245,7 +237,6 @@ class HeaderBarDemo extends React.Component {
                     mode="Sandbox"
                     inline={true}
                     siteLogo="pingone"
-                    flags={flags}
 
                     tree={[{
                         id: "account",

@@ -62,7 +62,6 @@ class UnitInputDemo extends React.Component {
                             width: InputWidths.XS,
                             name: "dropdown"
                         }}
-                        flags={this.props.flags}
                     />
                     <br /><br />
                     Selected Value: <strong>{this.state.a} {this.state.selectedValue.value}</strong>

@@ -42,108 +42,101 @@ class ConditionalFieldsetDemo extends React.Component {
     _usePstateful = () => this.props.flags.includes("p-stateful");
 
     render() {
-        const { flags } = this.props;
-
         return (
-            <div style = {{ marginLeft: "20px" }}>
-                <FormRadioGroup
-                    groupName="type-selector"
-                    items={typeOptions}
-                    label="Select conditional fieldset input type"
-                    onValueChange={this._onTypeChange}
-                    selected={this.state.typeId}
-                />
+            <div>
+                <div style = {{ marginLeft: "20px" }}>
+                    <FormRadioGroup
+                        groupName="type-selector"
+                        items={typeOptions}
+                        label="Select conditional fieldset input type"
+                        onValueChange={this._onTypeChange}
+                        selected={this.state.typeId}
+                    />
 
-                <HR />
+                    <HR />
 
-                <InputRow>
-                    <ConditionalFieldset
-                        flags={flags}
-                        data-id="demo-1"
-                        emptyMessage={"Do nothing"}
-                        label="Stateless version"
-                        onValueChange={this._onValueChange}
-                        selectedIndex={this._usePstateful() ? undefined : this.state.selectedIndex}
-                        stateless
-                        type={this.state.type}>
-                        <div title="Option 1">Option 1 content</div>
-                        <div title="Option 2">Option 2 content</div>
-                    </ConditionalFieldset>
-                </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            data-id="demo-1"
+                            emptyMessage={"Do nothing"}
+                            label="Stateless version"
+                            onValueChange={this._onValueChange}
+                            selectedIndex={this._usePstateful() ? undefined : this.state.selectedIndex}
+                            stateless
+                            type={this.state.type}>
+                            <div title="Option 1">Option 1 content</div>
+                            <div title="Option 2">Option 2 content</div>
+                        </ConditionalFieldset>
+                    </InputRow>
 
-                <InputRow>
-                    <ConditionalFieldset
-                        flags={flags}
-                        data-id="demo-2"
-                        label="Stateful version"
-                        type={this.state.type}>
-                        <div title="Option 1">Option 1 content</div>
-                        <div title="Option 2">Option 2 content</div>
-                    </ConditionalFieldset>
-                </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            data-id="demo-2"
+                            label="Stateful version"
+                            type={this.state.type}>
+                            <div title="Option 1">Option 1 content</div>
+                            <div title="Option 2">Option 2 content</div>
+                        </ConditionalFieldset>
+                    </InputRow>
 
-                <InputRow>
-                    <ConditionalFieldset
-                        flags={flags}
-                        data-id="demo-4"
-                        emptyMessage="Do nothing"
-                        label="Empty option - declared with prop"
-                        supportEmpty
-                        type={this.state.type}>
-                        <div title="Option 1">Option 1 content</div>
-                        <div title="Option 2">Option 2 content</div>
-                    </ConditionalFieldset>
-                </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            data-id="demo-4"
+                            emptyMessage="Do nothing"
+                            label="Empty option - declared with prop"
+                            supportEmpty
+                            type={this.state.type}>
+                            <div title="Option 1">Option 1 content</div>
+                            <div title="Option 2">Option 2 content</div>
+                        </ConditionalFieldset>
+                    </InputRow>
 
-                <InputRow>
-                    <ConditionalFieldset
-                        flags={flags}
-                        data-id="demo-3"
-                        label="Empty option - declared with empty child div"
-                        type={this.state.type}>
-                        <div title="Do nothing" />
-                        <div title="Option 1">Option 1 content</div>
-                        <div title="Option 2">Option 2 content</div>
-                    </ConditionalFieldset>
-                </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            data-id="demo-3"
+                            label="Empty option - declared with empty child div"
+                            type={this.state.type}>
+                            <div title="Do nothing" />
+                            <div title="Option 1">Option 1 content</div>
+                            <div title="Option 2">Option 2 content</div>
+                        </ConditionalFieldset>
+                    </InputRow>
 
-                <InputRow>
-                    <ConditionalFieldset
-                        flags={flags}
-                        data-id="demo-5"
-                        label="Input width specified (medium)"
-                        type={this.state.type}
-                        inputWidth={InputWidths.MD}>
-                        <div title="Option 1">Option 1 content</div>
-                        <div title="Option 2">Option 2 content</div>
-                    </ConditionalFieldset>
-                </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            data-id="demo-5"
+                            label="Input width specified (medium)"
+                            type={this.state.type}
+                            inputWidth={InputWidths.MD}>
+                            <div title="Option 1">Option 1 content</div>
+                            <div title="Option 2">Option 2 content</div>
+                        </ConditionalFieldset>
+                    </InputRow>
 
-                <InputRow>
-                    <ConditionalFieldset
-                        flags={flags}
-                        data-id="demo-6"
-                        label="Disabled"
-                        type={this.state.type}
-                        disabled>
-                        <div title="Option 1">Option 1 content</div>
-                        <div title="Option 2">Option 2 content</div>
-                    </ConditionalFieldset>
-                </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            data-id="demo-6"
+                            label="Disabled"
+                            type={this.state.type}
+                            disabled>
+                            <div title="Option 1">Option 1 content</div>
+                            <div title="Option 2">Option 2 content</div>
+                        </ConditionalFieldset>
+                    </InputRow>
 
-                <InputRow>
-                    <ConditionalFieldset
-                        flags={flags}
-                        data-id="demo-7"
-                        emptyMessage="select option"
-                        label="Required - only applicable for the drop-down/select"
-                        required
-                        supportEmpty
-                        type={ConditionalFieldset.Types.SELECT}>
-                        <div title="Option 1">Option 1 content</div>
-                        <div title="Option 2">Option 2 content</div>
-                    </ConditionalFieldset>
-                </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            data-id="demo-7"
+                            emptyMessage="select option"
+                            label="Required - only applicable for the drop-down/select"
+                            required
+                            supportEmpty
+                            type={ConditionalFieldset.Types.SELECT}>
+                            <div title="Option 1">Option 1 content</div>
+                            <div title="Option 2">Option 2 content</div>
+                        </ConditionalFieldset>
+                    </InputRow>
+                </div>
             </div>
         );
     }

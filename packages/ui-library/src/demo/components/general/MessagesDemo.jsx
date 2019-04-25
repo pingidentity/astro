@@ -211,6 +211,7 @@ class MessagesDemo extends React.Component {
                     Wizards, add 'className=&#123;Messages.ContainerTypes.MODAL&#125;'.For messages that will appear in
                     pages with a left-nav, do not set the containerType prop.
                 </InputRow>
+
                 <InputRow>
                     <Button onClick={this._addSuccessMessage}>Add success message - MessageTypes.SUCCESS</Button>
                     <Button onClick={this._addCornerSuccessMessage}>Add corner success message</Button>

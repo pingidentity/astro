@@ -548,6 +548,8 @@ class StatelessExpandableRow extends React.Component {
         waiting: false,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!this._useNewClassName()) {
             cannonballChangeWarning({
@@ -783,6 +785,8 @@ class ConfirmDeleteDialog extends React.Component {
         onDeleteConfirm: _.noop,
         confirmDeleteTitle: Translator.translate("confirmdelete")
     };
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _renderTooltipContent = () => {
         if (this.props.children) {

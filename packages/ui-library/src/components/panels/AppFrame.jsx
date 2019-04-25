@@ -100,6 +100,8 @@ class AppFrame extends React.Component {
         searchable: false
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     state = {
         searchOpen: false
     }

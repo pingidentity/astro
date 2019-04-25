@@ -49,7 +49,6 @@ export default class PaginationDemo extends Component {
                     Current Page: {this.state.currentPage},
                 </div>
                 <Pagination
-                    flags={this.props.flags}
                     stateless={true}
                     className="result-set"
                     perPage={this.state.perPage}

@@ -8,7 +8,7 @@ import CountryFlagList from "./CountryFlagList";
 import Utils from "../../../util/Utils.js";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
 
 /**
 * @callback I18nCountrySelector~onValueChange
@@ -104,6 +104,8 @@ class I18nCountrySelectorStateless extends React.Component {
         setSearchTime: _.noop,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     // moving the complexity from the stateful version
     _onToggleProxy = () => {
         this.props.onToggle();
@@ -137,14 +139,13 @@ class I18nCountrySelectorStateless extends React.Component {
 
     render() {
         var classname = classnames("intl-country-selector", this.props.className);
-        const { flags } = this.props;
 
         return (
             <div className={classname} data-id={this.props["data-id"]}>
                 <CountryFlagList
                     countryCodeClassName="isoNum-code"
                     countryCodeDisplayType={CountryFlagList.CountryCodeTypes.ISO_NUM}
-                    flags={flags}
+                    flags={getFlags(this)}
                     name={this.props.name}
                     selectedCountryCode={this.props.countryCode}
                     open={this.props.open}
@@ -254,6 +255,8 @@ export default class I18nCountrySelector extends React.Component {
     static defaultProps = {
         stateless: false,
     };
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _usePStateful = () => hasFlag(this, "p-stateful");
 

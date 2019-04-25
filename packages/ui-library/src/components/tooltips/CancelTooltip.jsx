@@ -71,6 +71,8 @@ class CancelTooltip extends React.Component {
         flags: flagsPropType,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     render() {
         return (
             <DetailsTooltip

@@ -148,6 +148,8 @@ class I18nPhoneInputStateless extends Component {
         disabled: false
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!Utils.isProduction()) {
             if (this.props.controlled !== undefined) {

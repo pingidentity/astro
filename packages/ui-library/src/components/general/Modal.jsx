@@ -101,6 +101,8 @@ class Modal extends React.Component {
         type: Type.BASIC,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     /*
      * Set close method into context to allow children
      * to easily close modal.

@@ -12,6 +12,6 @@ export const allFlags = [
 
 export const flagsPropType = PropTypes.arrayOf(PropTypes.oneOf(allFlags));
 
-export const getFlags = ({ props }) => props.flags || [];
+export const getFlags = ({ props, context }) => props.flags || (context && context.flags) || [];
 
 export const hasFlag = (component, flag) => getFlags(component).includes(flag);

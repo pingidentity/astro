@@ -96,7 +96,6 @@ class FormTimeZoneDemo extends React.Component {
                         value={this.state.value0.name}
                         displayValue={this.state.displayValue0}
                         ref="tzStateless"
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -114,7 +113,6 @@ class FormTimeZoneDemo extends React.Component {
                         value={this.state.value1.name}
                         displayValue={this.state.value1.abbr}
                         ref="tzStateless"
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -126,7 +124,6 @@ class FormTimeZoneDemo extends React.Component {
                         helpClassName="bottom right"
                         {...flags.includes("p-stateful") ? { initialState: { open: true } } : { open: true }}
                         filterByCountry="US"
-                        flags={flags}
                     />
                 </InputRow>
                 <InputRow>
@@ -137,7 +134,6 @@ class FormTimeZoneDemo extends React.Component {
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"
                         showClear={true}
-                        flags={flags}
                     />
                 </InputRow>
                 <p>

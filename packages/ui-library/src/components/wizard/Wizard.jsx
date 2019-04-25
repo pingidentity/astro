@@ -180,6 +180,8 @@ class Wizard extends React.Component {
         onValueChange: _.noop,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _filter = (children) => {
         var result = [];
 

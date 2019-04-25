@@ -44,12 +44,10 @@ class LinkDropDownListDemo extends React.Component {
     };
 
     render() {
-        const { flags } = this.props;
         return (
             <div>
                 <InputRow>
                     <LinkDropDownList
-                        flags={flags}
                         closeOnClick={true}
                         label="Stateless Version"
                         onClick={this._handleClick}
@@ -61,7 +59,6 @@ class LinkDropDownListDemo extends React.Component {
                     />
                 </InputRow>
                 <LinkDropDownList
-                    flags={flags}
                     stateless={false}
                     closeOnClick={true}
                     label="Stateful Version"
@@ -73,7 +70,6 @@ class LinkDropDownListDemo extends React.Component {
                 />
                 <HR />
                 <LinkDropDownList
-                    flags={flags}
                     stateless={false}
                     closeOnClick={true}
                     label="Right-aligned"

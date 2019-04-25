@@ -70,6 +70,8 @@ class PopoverBase extends React.Component {
         padded: false,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _usePortal = () => hasFlag(this, "use-portal");
 
     /*

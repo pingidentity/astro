@@ -40,7 +40,6 @@ export default class DropDownButtonDemo extends Component {
         return (
             <div>
                 <DropDownButton
-                    flags={this.props.flags}
                     title="Options Title"
                     label="New Option"
                     onValueChange={this._onValueChange}

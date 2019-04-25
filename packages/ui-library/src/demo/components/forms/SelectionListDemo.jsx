@@ -109,8 +109,6 @@ class SelectionListDemo extends React.Component {
     };
 
     render() {
-        const { flags } = this.props;
-
         return (
             <div>
                 <h2>
@@ -140,7 +138,6 @@ class SelectionListDemo extends React.Component {
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange(2)}
                     requiredText={this.state.required ? "Select at least one" : ""}
-                    flags={flags}
                 />
 
                 <hr />
@@ -161,7 +158,6 @@ class SelectionListDemo extends React.Component {
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange(3)}
                     name="second-demo"
-                    flags={flags}
                 />
 
                 <hr />
@@ -173,7 +169,6 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.singleSelectId1}
                 </p>
                 <DetailsTooltip
-                    flags={flags}
                     placement="bottom right"
                     className="input-selection-list-tooltip"
                     label="Single Selection List"
@@ -190,7 +185,6 @@ class SelectionListDemo extends React.Component {
                         showSearchBox={true}
                         searchPlaceholder="Search..."
                         onValueChange={this._onSingleSelectChange(1)}
-                        flags={flags}
                     />
                 </DetailsTooltip>
 
@@ -215,7 +209,6 @@ class SelectionListDemo extends React.Component {
                     selectedItemIds={this.state.multiSelectIds3}
                     onValueChange={this._onMultiSelectChange(3)}
                     onSelectAll={this._onMultiSelectAll(3)}
-                    flags={flags}
                 />
 
                 <hr />
@@ -237,7 +230,6 @@ class SelectionListDemo extends React.Component {
                     onValueChange={this._onMultiSelectChange(2)}
                     onSelectAll={this._onMultiSelectAll(2)}
                     {...LABELS}
-                    flags={flags}
                 />
 
                 <hr />
@@ -249,7 +241,6 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.multiSelectIds1.join()}
                 </div>
                 <DetailsTooltip
-                    flags={flags}
                     placement="bottom right"
                     className="input-selection-list-tooltip filter"
                     label="Multi Selection List"
@@ -268,7 +259,6 @@ class SelectionListDemo extends React.Component {
                         onValueChange={this._onMultiSelectChange(1)}
                         onSelectAll={this._onMultiSelectAll(1)}
                         {...LABELS}
-                        flags={flags}
                     />
                 </DetailsTooltip>
 
@@ -280,7 +270,6 @@ class SelectionListDemo extends React.Component {
                     Selected Radio IDs = {this.state.multiSelectIds4.join()}
                 </div>
                 <DetailsTooltip
-                    flags={flags}
                     placement="bottom right"
                     className="input-selection-list-tooltip filter"
                     label={(
@@ -304,7 +293,6 @@ class SelectionListDemo extends React.Component {
                         onSelectAll={this._onMultiSelectAll(4)}
                         {...LABELS}
                         name="multi-select"
-                        flags={flags}
                     />
                 </DetailsTooltip>
 
@@ -321,7 +309,6 @@ class SelectionListDemo extends React.Component {
                     selectedItemIds={this.state.singleSelectId1}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
-                    flags={flags}
                 />
 
                 <hr />
@@ -340,7 +327,6 @@ class SelectionListDemo extends React.Component {
                     onValueChange={this._onSingleSelectChange(2)}
                     requiredText={this.state.required ? "Select at least one" : ""}
                     className="fluid-width"
-                    flags={flags}
                 />
 
                 <hr />
@@ -355,7 +341,6 @@ class SelectionListDemo extends React.Component {
                     items={SINGLE_SELECT_ITEMS}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
-                    flags={flags}
                     autoFilter
                 />
             </div>

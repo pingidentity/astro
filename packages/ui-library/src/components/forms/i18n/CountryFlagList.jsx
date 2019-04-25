@@ -7,7 +7,7 @@ import _ from "underscore";
 import classnames from "classnames";
 import Translator from "../../../util/i18n/Translator.js";
 import FormDropDownList from "../FormDropDownList";
-import { flagsPropType } from "../../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 let countryCodes = require("./countryCodes.js");
 
 /**
@@ -129,6 +129,8 @@ class CountryFlagList extends React.Component {
         onToggle: _.noop
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     constructor(props) {
         super(props);
         countryCodes = this._translateCountryNames(countryCodes);
@@ -161,7 +163,6 @@ class CountryFlagList extends React.Component {
         const {
             countryCodeDisplayType,
             selectedCountryCode,
-            flags,
             open
         } = this.props;
         var containerClassName = classnames(
@@ -193,7 +194,7 @@ class CountryFlagList extends React.Component {
 
         return (
             <FormDropDownList
-                flags={flags}
+                flags={getFlags(this)}
                 stateless={true}
                 data-id={this.props["data-id"]}
                 className={containerClassName}

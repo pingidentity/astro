@@ -635,6 +635,8 @@ class FormTextField extends React.Component {
         stateless: true,
     };
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     componentDidMount() {
         if (!Utils.isProduction() && this.props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
