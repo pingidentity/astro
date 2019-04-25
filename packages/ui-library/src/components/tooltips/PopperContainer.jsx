@@ -97,9 +97,9 @@ class PopperContainer extends React.Component {
             modifiers: {
                 // Let tooltip escape scrolling container, but not app frame
                 preventOverflow: {
-                    boundariesElement: "viewport",
-                    padding: 35,
-                    escapeWithReference: true,
+                    boundariesElement: "scrollParent",
+                    padding: 40,
+                    priority: ["right", "left"],
                 },
                 addZIndex: {
                     enabled: (zIndex !== "auto"),
