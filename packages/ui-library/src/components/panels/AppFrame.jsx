@@ -252,18 +252,17 @@ class AppFrame extends React.Component {
                     onSectionChange(key);
                 }
             });
-            const { [sec]: isOpen } = openSections;
-            if (!isOpen) {
-                onSectionChange(sec);
-            }
+            onSectionChange(sec);
         };
 
         onRootChange(root || id);
 
         if (section) {
             openSection(section);
+            onItemChange(id, section, root);
+        } else {
+            onItemChange(id, id, root);
         }
-        onItemChange(id);
 
         this.setState({
             searchOpen: false

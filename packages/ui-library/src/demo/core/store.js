@@ -1,28 +1,32 @@
-var Redux = require("redux"),
-    ReactRouter = require("react-router"),
-    ReactRouterRedux = require("react-router-redux"),
-    AppReducer = require("./Reducer.js"),
-    NavReducer = require("../../components/panels/left-nav").Reducer,
-    HeaderReducer = require("../../components/panels/header-bar").Reducer,
-    thunk = require("redux-thunk");
+import { createBrowserHistory } from "history";
+import { applyMiddleware, createStore, combineReducers } from "redux";
+import { hashHistory } from "react-router";
+import { routerMiddleware, connectRouter } from "connected-react-router";
+import AppReducer from "./Reducer.js";
 
-var createStoreWithMiddleware = Redux.applyMiddleware(
-    ReactRouterRedux.routerMiddleware(ReactRouter.hashHistory),
+import NavReducer from "../../components/panels/left-nav";
+import HeaderReducer from "../../components/panels/header-bar";
+import thunk from "redux-thunk";
+
+export const history = createBrowserHistory();
+
+const createStoreWithMiddleware = applyMiddleware(
+    routerMiddleware(hashHistory),
     thunk
-)(Redux.createStore);
+)(createStore);
 
-var baseReducers = {
-    routing: ReactRouterRedux.routerReducer,
-    nav: NavReducer,
-    header: HeaderReducer,
-    app: AppReducer
+const baseReducers = {
+    router: connectRouter(history),
+    nav: NavReducer.Reducer,
+    header: HeaderReducer.Reducer,
+    app: AppReducer,
 };
 
-var store = (function configureStore (initialState) {
+const store = (function configureStore (initialState) {
     return createStoreWithMiddleware(
-        Redux.combineReducers(baseReducers), initialState);
+        combineReducers(baseReducers), initialState);
 })();
 
 store.baseReducers = baseReducers;
 
-module.exports = store;
+export default store;

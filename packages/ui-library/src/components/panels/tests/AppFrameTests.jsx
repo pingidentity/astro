@@ -349,7 +349,7 @@ describe("AppFrame", () => {
         expect(keywordSearch).toBeFalsy();
     });
 
-    it("calls onRootChange, onSectionChange and onItemChange props when search result is clicked for an item", () => {
+    it("calls onRootChange, onSectionChange prop when search result is clicked for an item", () => {
         const wrapper = getWrappedComponent({ searchable: true });
         const {
             refs: {
@@ -371,13 +371,12 @@ describe("AppFrame", () => {
 
         component._onSearchClick(node);
 
-        expect(component.props.onItemChange).lastCalledWith(itemId);
         expect(component.props.onSectionChange).lastCalledWith(sectionId);
         expect(component.props.onRootChange).lastCalledWith(rootId);
         expect(component.state.searchOpen).toEqual(false);
     });
 
-    it("calls onRootChange and onItemChange props when search result is clicked for an item not in a section", () => {
+    it("calls onRootChange prop when search result is clicked for an item not in a section", () => {
         const wrapper = getWrappedComponent({ searchable: true });
         const {
             refs: {
@@ -394,7 +393,6 @@ describe("AppFrame", () => {
 
         component._onSearchClick(node);
 
-        expect(component.props.onItemChange).lastCalledWith(children[2].id);
         expect(component.props.onSectionChange).not.toHaveBeenCalled();
         expect(component.props.onRootChange).lastCalledWith(rootId);
         expect(component.state.searchOpen).toEqual(false);
