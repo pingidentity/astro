@@ -44,6 +44,7 @@ const getJustifyClass = justify => {
 function FlexRow({
     alignment,
     children,
+    "data-id": dataId,
     className,
     inline,
     justify
@@ -59,6 +60,7 @@ function FlexRow({
                     "flex-row--inline": inline
                 }
             )}
+            data-id={dataId}
         >
             {children}
         </div>
@@ -71,6 +73,7 @@ FlexRow.propTypes = {
         alignments.CENTER,
         alignments.TOP
     ]),
+    "data-id": PropTypes.string,
     inline: PropTypes.bool,
     justify: PropTypes.oneOf([
         justifyOptions.CENTER,
@@ -82,6 +85,7 @@ FlexRow.propTypes = {
 
 FlexRow.defaultProps = {
     alignment: alignments.BOTTOM,
+    "data-id": "flex-row",
     inline: false,
     justify: justifyOptions.START
 };

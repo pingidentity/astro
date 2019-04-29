@@ -37,7 +37,7 @@ describe("ColumnSelectorRow", () => {
         expect(component.state().open).toEqual(false);
 
         component
-            .find("div[data-id=\"test-row-toggle\"]")
+            .find("div[data-id=\"row-toggle\"]")
             .simulate("click");
 
         expect(component.state().open).toEqual(true);
@@ -54,7 +54,7 @@ describe("ColumnSelectorRow", () => {
         expect(component.state().open).toEqual(false);
 
         component
-            .find("div[data-id=\"test-row-toggle\"]")
+            .find("div[data-id=\"row-toggle\"]")
             .simulate("click");
 
         expect(component.state().open).toEqual(false);

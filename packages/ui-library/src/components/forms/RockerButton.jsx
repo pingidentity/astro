@@ -157,7 +157,7 @@ class RockerButtonStateless extends React.Component {
                 {
                     this.props.labels.map(function (text, index) {
                         const props = {
-                            "data-id": text,
+                            "data-id": "rocker-label",
                             onClick: this._handleClick,
                             key: index,
                             text,

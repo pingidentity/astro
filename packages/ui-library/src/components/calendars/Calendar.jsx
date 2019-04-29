@@ -465,8 +465,8 @@ class BaseCalendar extends React.Component {
             <div
                 className={className}
                 onClick={this.toggleClick}
+                data-id={this.props["data-id"]}
             >
-
                 <FormLabel
                     className={classnames(this.props.labelClassName)}
                     helpClassName={classnames(this.props.helpClassName)}
@@ -476,7 +476,7 @@ class BaseCalendar extends React.Component {
                 />
                 <div className="input-container">
                     <input type="text"
-                        data-id={this.props["data-id"]}
+                        data-id="calendar-input"
                         className="input-calendar-value"
                         name={this.props.name}
                         value={inputValue}

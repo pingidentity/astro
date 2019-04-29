@@ -193,12 +193,13 @@ export default class ColumnSelectorRow extends Component {
                             }
                         )
                     }
+                    data-id="row-toggle"
                     onClick={this._handleToggleOpen}
                 >
                     {expandable &&
                         <Icon
                             className={`${baseClassName}-toggle`}
-                            data-id={`${dataId}-toggle`}
+                            data-id={`${dataId}-toggle-icon`}
                             iconName={this.state.open ? "close-arrow" : "dropdown-arrow"}
                         />
                     }

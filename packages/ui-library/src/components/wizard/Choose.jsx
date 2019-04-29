@@ -175,6 +175,7 @@ class Choose extends React.Component {
                 return (
                     <label className="input-radio stacked" data-id={this.props["data-id"] + i}>
                         <input type="radio"
+                            data-id="radio-option"
                             disabled={e.disabled}
                             key={e.i}
                             name={this.props.name}

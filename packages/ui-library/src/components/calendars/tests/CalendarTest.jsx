@@ -356,7 +356,7 @@ describe("Calendar", function () {
         expect(callback).toBeCalled();
     });
 
-    it("is triggering onValueChange callback on arrow nagivation", function () {
+    it("is triggering onValueChange callback on arrow navigation", function () {
         var globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
 
         var component = getComponent({
@@ -858,7 +858,7 @@ describe("Calendar", function () {
     it("should hide calendar when clicking input text to type date", () => {
         var component = getComponent();
 
-        ReactTestUtils.Simulate.click(TestUtils.findRenderedDOMNodeWithDataId(component, "calendar"));
+        ReactTestUtils.Simulate.click(TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input"));
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "input-calendar-wrapper")).toBeFalsy();
     });
 
@@ -892,7 +892,7 @@ describe("Calendar", function () {
             flags: [ "p-stateful", "use-portal" ],
         });
 
-        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar");
+        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
 
         expect(textInput.value).toBe("03-16-2019");
     });
@@ -923,7 +923,7 @@ describe("Calendar", function () {
     it("puts empty string in input when date is null", function() {
         const component = getComponent({ date: null, flags: [ "p-stateful", "use-portal" ] });
 
-        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar");
+        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
 
         expect(textInput.value).toBe("");
     });

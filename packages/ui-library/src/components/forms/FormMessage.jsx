@@ -29,7 +29,7 @@ const FormMessage = ({
     const typeName = messageTypes[type] || messageTypes.ERROR;
 
     return (
-        <div className="input-message">
+        <div className="input-message" data-id={dataId}>
             <div
                 data-id={`${dataId}-${typeName}-message-icon`}
                 className={`input-message__icon`}
@@ -44,6 +44,7 @@ const FormMessage = ({
 };
 
 FormMessage.defaultProps = {
+    "data-id": "form-message",
     type: messageTypes.ERROR,
 };
 

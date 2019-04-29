@@ -54,6 +54,7 @@ const KeywordSearchView = ({
             <li key={idx}>
                 <Link
                     className={resultClass}
+                    data-id="search-result"
                     focusable
                     key={`Result ${idx}`}
                     title={title}

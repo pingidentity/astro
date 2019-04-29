@@ -15,6 +15,7 @@ const getClassName = (value, placement) => value !== undefined ? `padding-compon
 function Padding({
     children,
     className,
+    "data-id": dataId,
     bottom,
     left,
     right,
@@ -29,6 +30,7 @@ function Padding({
                 getClassName(right, "right"),
                 getClassName(top, "top")
             )}
+            data-id={dataId}
         >
             {children}
         </div>
@@ -42,6 +44,10 @@ Padding.propTypes = {
     left: paddingPropType,
     right: paddingPropType,
     top: paddingPropType
+};
+
+Padding.defaultProps = {
+    "data-id": "padding-component"
 };
 
 export default Padding;
