@@ -201,9 +201,9 @@ const ConfirmDeletePositions = {
  *
  * @param {boolean} [waiting=false]
  *     If true, disables interaction with the row and reduces opacity of the layer.
- * @param {object} [ordering]
+ * @param {ExpandableRow~Ordering} [ordering]
  *     If exists, disables normal interaction with the row and adds ordering controls.
- *     Its properties are position, total, onReorder, and onPositionValueChange.
+ *     Its properties are position, positionValue, total, onReorder, and onPositionValueChange.
  *
  * @example
  *         <h1>My Row Results</h1>
@@ -219,6 +219,29 @@ const ConfirmDeletePositions = {
  *         <ExpandableRow title={titleJsx} subtitle={subtitleJsx}>
  *             {contentChildrenJsx}
  *         </ExpandableRow>
+ */
+
+/**
+ * @typedef {object} ExpandableRow~Ordering
+ * @property {number} position
+ *  The current position of the row
+ * @property {number} total
+ *  Number of items in whole ordered list
+ * @property {ExpandableRow~onReorder} onReorder
+ *  Handler for changing the order
+ * @property {function} onPositionValueChange
+ *  Handler for editing the input field
+ * @property {number} positionValue
+ *  When provided, the value of the input field. When not provided, it's managed in-component
+ */
+
+/**
+ * @typedef {function} ExpandableRow~onReorder
+ * @param {number} from
+ *  The current index of the item to be moved
+ * @param {number} to
+ *  The current index of the item that should be right after the moving item in the new order
+ *  (If item 2 is moved to index 7, it will end up at index 6 because the list shifts after it is removed)
  */
 
 class ExpandableRow extends React.Component {
@@ -320,7 +343,13 @@ class StatefulExpandableRow extends React.Component {
             positionValue: undefined,
         });
         if (this.props.ordering && this.props.ordering.onReorder) {
-            this.props.ordering.onReorder(from, to);
+            // this is janky code to make up for the original
+            // janky code in this stateful component, which will
+            // be removed in v4
+            this.props.ordering.onReorder(
+                from !== to ? from : this.props.ordering.position,
+                to
+            );
         }
     };
 
@@ -333,7 +362,7 @@ class StatefulExpandableRow extends React.Component {
     render() {
         const ordering = this.props.ordering
             ? _.defaults({
-                position: this.state.positionValue !== undefined
+                position: this.state.positionValue !== undefined && this.state.positionValue !== ""
                     ? this.state.positionValue
                     : this.props.ordering.position,
                 onReorder: this._handleReorder,
@@ -352,6 +381,101 @@ class StatefulExpandableRow extends React.Component {
         }, this.props);
 
         return <StatelessExpandableRow {...props} />;
+    }
+}
+
+class OrderingInput extends React.Component {
+    state = {};
+
+    _getValue = () => {
+        if (this.state.value !== undefined) {
+            return this.state.value;
+        }
+        const { positionValue = this.props.position } = this.props;
+        return positionValue;
+    }
+    _getFromPositionForInput = () => (this.state.value !== undefined || this.props.positionValue !== undefined)
+        ? this.props.position
+        : undefined;
+
+    _positionInRange = number => {
+        const { total } = this.props;
+
+        if (number < 0) {
+            return 0;
+        } else if (number > total) {
+            return total;
+        } else {
+            return number;
+        }
+    }
+
+    _inputValueToPosition = value => value === "" ? "" : parseInt(value) - 1;
+
+    _handleChange = e => {
+        const value = this._inputValueToPosition(e.target.value.replace(/[^0-9]/, ""));
+
+        if (this.props.onPositionValueChange) {
+            this.props.onPositionValueChange(value, e);
+        } else {
+            this.setState({ value });
+        }
+    };
+
+    _stopEvent = e => {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    _handleKey = (e) => {
+        const position = this._getValue();
+
+        if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP) {
+            // this is +2 rather than +1 because it's the index we're inserting this record before
+            this._handleReorder(position, this._positionInRange(position + 2));
+        } else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
+            this._handleReorder(position, this._positionInRange(position - 1));
+        } else if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) {
+            this._handleReorder(this._getFromPositionForInput(), this._positionInRange(position));
+        } else {
+            return;
+        }
+        this._stopEvent(e);
+    };
+
+    _handleDrag = this._stopEvent;
+
+    _handleBlur = () => this._handleReorder(
+        this._getFromPositionForInput(),
+        this._positionInRange(this._getValue())
+    );
+
+    _handleClick = e => e.target.select();
+
+    _handleReorder = (from, to) => {
+        if (to !== "") {
+            this.props.onReorder(from, to);
+        }
+        this.setState({ value: undefined });
+    }
+
+    render() {
+        const value = this._getValue();
+
+        return (
+            <input
+                className="ordering-controls__input"
+                data-id={this.props["data-id"]}
+                draggable={true} // has to be draggable to override dragging
+                onBlur={this._handleBlur}
+                onChange={this._handleChange}
+                onClick={this._handleClick}
+                onDragStart={this._handleDrag}
+                onKeyDown={this._handleKey}
+                type="text"
+                value={value === "" ? value : value + 1}
+            />
+        );
     }
 }
 
@@ -403,6 +527,7 @@ class StatelessExpandableRow extends React.Component {
             total: PropTypes.number,
             onReorder: PropTypes.func,
             onPositionValueChange: PropTypes.func,
+            positionValue: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([""])]),
         }),
         flags: flagsPropType,
     };
@@ -448,56 +573,6 @@ class StatelessExpandableRow extends React.Component {
         if (this.props.onToggle) {
             this.props.onToggle(this.props.expanded);
         }
-    };
-
-    _handlePositionChange = (e) => {
-        let position = parseInt(e.target.value.replace(/[^0-9]/, "")) || 0;
-        position -= 1;
-
-        if (this.props.ordering && this.props.ordering.onPositionValueChange) {
-            this.props.ordering.onPositionValueChange(position);
-        }
-    };
-
-    _positionInRange = number => {
-        if (number < 0) {
-            return 0;
-        } else if (number > this.props.ordering.total) {
-            return this.props.ordering.total;
-        } else {
-            return number;
-        }
-    }
-
-    _handlePositionKey = (e) => {
-        if (this.props.ordering && this.props.ordering.onReorder) {
-            const position = this.props.ordering.position;
-
-            if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP) {
-                // this is +2 rather than +1 because it's the index we're inserting this record before
-                this.props.ordering.onReorder(undefined, this._positionInRange(position + 2));
-            } else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
-                this.props.ordering.onReorder(undefined, this._positionInRange(position - 1));
-            } else if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) {
-                this.props.ordering.onReorder(undefined, this._positionInRange(position));
-            } else {
-                return;
-            }
-            e.preventDefault();
-            e.stopPropagation();
-        }
-    };
-
-    _handlePositionBlur = () => this.props.ordering.onReorder(
-        undefined,
-        this._positionInRange(this.props.ordering.position)
-    );
-
-    _handlePositionClick = e => e.target.select();
-
-    _handlePositionDrag = e => {
-        e.preventDefault();
-        e.stopPropagation();
     };
 
     _handleDrop = (targetId, beingDraggedId) => {
@@ -615,17 +690,9 @@ class StatelessExpandableRow extends React.Component {
                 { (this.props.ordering) && (
                     <div data-id="ordering-controls" className="ordering-controls">
                         <span className="icon-grip ordering-controls__grip"/>
-                        <input
-                            className="ordering-controls__input"
+                        <OrderingInput
                             data-id="ordering-input"
-                            draggable={true} // has to be draggable to override dragging
-                            onBlur={this._handlePositionBlur}
-                            onChange={this._handlePositionChange}
-                            onClick={this._handlePositionClick}
-                            onDragStart={this._handlePositionDrag}
-                            onKeyDown={this._handlePositionKey}
-                            type="text"
-                            value={this.props.ordering.position + 1}
+                            {...this.props.ordering}
                         />
                         / {this.props.ordering.total}
                     </div>

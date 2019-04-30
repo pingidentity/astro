@@ -945,4 +945,85 @@ describe("ExpandableRow", function() {
         expect(console.warn).toBeCalled();
     });
 
+    // make sure this is in V4 tests
+    it("should show positionValue in ordering field", function() {
+        const callback = jest.fn();
+        const component = getComponent({
+            ordering: {
+                position: 3,
+                positionValue: 7,
+                total: 10,
+                onReorder: callback,
+            },
+            flags: ["p-stateful"]
+        });
+        const orderingInput = getOrderingInput(component);
+
+        expect(orderingInput.value).toBe("8");
+    });
+
+    it("should fire positionOnValueChange", function () {
+        const callback = jest.fn();
+        const component = getComponent({
+            ordering: {
+                position: 3,
+                total: 10,
+                onPositionValueChange: value => callback(value),
+            },
+            flags: ["p-stateful"]
+        });
+        const orderingInput = getOrderingInput(component);
+        ReactTestUtils.Simulate.change(orderingInput, { target: { value: "8" } });
+        expect(callback).lastCalledWith(7);
+    });
+
+    it("stateful: should fire onReorder with 3, 3", function () {
+        const component = getComponent({
+            stateless: false,
+            ordering: {
+                position: 3,
+                total: 10,
+                onPositionValueChange: jest.fn(),
+                onReorder: jest.fn(),
+            },
+        });
+        const orderingInput = getOrderingInput(component);
+        ReactTestUtils.Simulate.blur(orderingInput);
+        expect(component.props.ordering.onReorder).lastCalledWith(3, 3);
+    });
+
+    it("should reorder after changing input value without onPositionValueChange callback", function () {
+        const callback = jest.fn();
+        const component = getComponent({
+            ordering: {
+                position: 3,
+                total: 10,
+                onReorder: callback,
+            },
+            flags: ["p-stateful"]
+        });
+        const orderingInput = getOrderingInput(component);
+        ReactTestUtils.Simulate.change(orderingInput, { target: { value: "8" } });
+        ReactTestUtils.Simulate.blur(orderingInput);
+
+        expect(callback).lastCalledWith(3, 7);
+    });
+
+    it("should not reorder if the input field is set to ''", function() {
+        const callback = jest.fn();
+        const component = getComponent({
+            ordering: {
+                position: 3,
+                total: 10,
+                onReorder: callback,
+            },
+            flags: ["p-stateful"]
+        });
+        const orderingInput = getOrderingInput(component);
+        ReactTestUtils.Simulate.change(orderingInput, { target: { value: "" } });
+        ReactTestUtils.Simulate.blur(orderingInput);
+
+        expect(callback).not.toBeCalled();
+    });
+
 });

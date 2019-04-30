@@ -17,7 +17,8 @@ import ButtonGroup from "../../../components/layout/ButtonGroup";
 class ExpandableRowDemo extends React.Component {
     state = {
         expanded: false,
-        rowDeleted: false
+        rowDeleted: false,
+        order1: 40,
     };
 
     static flags = ["use-portal", "expandable-row-class", "p-stateful"];
@@ -30,6 +31,10 @@ class ExpandableRowDemo extends React.Component {
 
         this.setState(newState);
     };
+
+    _handleValueChange = index => value => this.setState({ [`value${index}`]: value });
+
+    _handleReorder = index => (from, to) => this.setState({ [`order${index}`]: (to >= from) ? to - 1 : to });
 
     _handleDelete = () => {
         this.setState({
@@ -244,7 +249,7 @@ class ExpandableRowDemo extends React.Component {
                     ordering={{
                         position: 40,
                         total: 50,
-                        onReorder: index => console.log("New position:", index)
+                        onReorder: (from, to) => console.log("New position:", to)
                     }}
                     rowAccessories={(
                         <span className="row-accessories-content">
@@ -258,6 +263,19 @@ class ExpandableRowDemo extends React.Component {
                             <span className="count">2</span>
                         </span>
                     )}
+                />
+                <ExpandableRow
+                    flags={flags}
+                    stateless={false}
+                    title="Row in Ordering Mode"
+                    subtitle="Using positionValue"
+                    ordering={{
+                        position: this.state.order1,
+                        total: 50,
+                        onReorder: this._handleReorder(1),
+                        positionValue: this.state.value1,
+                        onPositionValueChange: this._handleValueChange(1),
+                    }}
                 />
                 <ExpandableRow
                     flags={flags}
