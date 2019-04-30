@@ -10,7 +10,56 @@ import DragDrop from "../../rows/DragDrop";
 const baseClassName = "column-selector";
 
 /**
- * @class Column Selector
+* @callback ColumnSelector~onAdd
+*     Callback for when the Add button is clicked for an option.
+* @param {Object} payload
+*     An object that holds all of the callback information for onAdd.
+* @param {string} payload.id
+*     ID of the object being added.
+* @param {Object[]} payload.options
+*     The options with the added option removed.
+* @param {Object[]} payload.selectedOptions
+*     The selectedOptions with the added option added.
+* @param {Object[]} payload.event
+*     The JS even that triggered the add.
+*/
+
+/**
+* @callback ColumnSelector~onRemove
+*     Callback for when the Remove button is clicked for a selected option.
+* @param {Object} payload
+*     An object that holds all of the callback information for onRemove.
+* @param {string} payload.id
+*     ID of the option being removed.
+* @param {Object[]} payload.options
+*     The options with the remove option added.
+* @param {Object[]} payload.selectedOptions
+*     The selectedOptions with the removed option removed.
+* @param {Object[]} payload.event
+*     The JS even that triggered the add.
+*/
+
+/**
+* @callback ColumnSelector~onSearch
+*     Callback for when an expandable option is opened or closed.
+* @param {string} query
+*     The search query currently entered in the search box.
+*
+* @callback onToggleOption
+*     Callback for when an expandable option is opened or closed.
+* @param {Object} payload
+*     An object that holds all of the callback information for onRemove.
+* @param {string} payload.id
+*     ID of the option being toggled.
+* @param {Object[]} payload.event
+*     The JS even that triggered the add.
+* @param {boolean} openParentOnMove=true
+*     If true, open rows in options or selectedOptions with the same ID will
+*     cause the option with the same ID in the other section to also be open.
+*/
+
+/**
+ * @class ColumnSelector
  * @desc A component that displays two columns; options can be moved between them.
  *
  * @param {string} [data-id="column-selector"]
@@ -20,54 +69,9 @@ const baseClassName = "column-selector";
  * @param {function} [customSort]
  *     A custom sort function that the column selector will run to sort columns.
  *     The function will be passed to an Array.sort function.
- *
  * @param {boolean} [draggable=false]
  *     Determines whether rows can be dragged to add and rearrange. Not fully
  *     implemented.
- *
- * @callback onAdd
- *     Callback for when the Add button is clicked for an option.
- * @param {Object} payload
- *     An object that holds all of the callback information for onAdd.
- * @param {string} payload.id
- *     ID of the object being added.
- * @param {Object[]} payload.options
- *     The options with the added option removed.
- * @param {Object[]} payload.selectedOptions
- *     The selectedOptions with the added option added.
- * @param {Object[]} payload.event
- *     The JS even that triggered the add.
- *
- * @callback onRemove
- *     Callback for when the Remove button is clicked for a selected option.
- * @param {Object} payload
- *     An object that holds all of the callback information for onRemove.
- * @param {string} payload.id
- *     ID of the option being removed.
- * @param {Object[]} payload.options
- *     The options with the remove option added.
- * @param {Object[]} payload.selectedOptions
- *     The selectedOptions with the removed option removed.
- * @param {Object[]} payload.event
- *     The JS even that triggered the add.
- *
- * @callback onSearch
- *     Callback for when an expandable option is opened or closed.
- * @param {string} query
- *     The search query currently entered in the search box.
- *
- * @callback onToggleOption
- *     Callback for when an expandable option is opened or closed.
- * @param {Object} payload
- *     An object that holds all of the callback information for onRemove.
- * @param {string} payload.id
- *     ID of the option being toggled.
- * @param {Object[]} payload.event
- *     The JS even that triggered the add.
- * @param {boolean} openParentOnMove=true
- *     If true, open rows in options or selectedOptions with the same ID will
- *     cause the option with the same ID in the other section to also be open.
- *
  * @param {Object[]} options
  *     The options shown on the left-hand side of the component; can be added.
  * @param {string} options[].id
@@ -86,7 +90,6 @@ const baseClassName = "column-selector";
  *     Title for the option. Accepts JSX or a string.
  * @param {string} titleIcon
  *     Icon to be displayed next to the title. Does not render for expandable options.
- *
  * @param {Object} optionsTitle
  *     What is displayed above options. Takes JSX or a string.
  * @param {string} searchPlaceholder
@@ -96,7 +99,6 @@ const baseClassName = "column-selector";
  *     options prop, listed above.
  * @param {Object} selectedTitle
  *     What is displayed above selected options. Takes JSX or a string.
- *
  * @param {Search~onResultClick}
  *     Callback to be triggered when a result is clicked; passes back result properties from possibleResults
  *

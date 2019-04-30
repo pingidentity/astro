@@ -4,7 +4,7 @@ import CondensedTable from "../../../components/tables/CondensedTable";
 import InputRow from "../../../components/layout/InputRow";
 
 /**
-* @name CondensedTable Demo
+* @name CondensedTableDemo
 * @memberof CondensedTable
 * @desc A demo for CondensedTable
 */

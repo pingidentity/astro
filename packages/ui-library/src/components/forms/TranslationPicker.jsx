@@ -4,6 +4,14 @@ import List from "./LinkDropDownList";
 import { deprecatedPropValues } from "../../util/DeprecationUtils";
 
 
+/**
+* @class TranslationPicker
+* @desc A component for displaying a Translation Picker.
+*
+* @param {string} [data-id="translation-picker"]
+*     Defines the "data-id" for top-level HTML container.
+*/
+
 const TranslationIcon = (props) => {
     return (
         <div data-id={props["data-id"] + "-icon"} className="translation-picker__label">{props.label}</div>

@@ -6,7 +6,7 @@ var React = require("react"),
 
 import Icon from "../general/Icon";
 /**
- * @class Page Header
+ * @class PageHeader
  * @desc A component for displaying a header.
  *
  * @param {string} [data-id="header"]

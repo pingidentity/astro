@@ -4,8 +4,36 @@ import MultiseriesChart, { chartTypes, propTypes as chartPropTypes } from "./Mul
 import { DashboardCard } from "./Cards";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 
+
 /**
-* @class Multiseries Chart Card
+*@callback MultiseriesChartCard~onDeselectOption
+*     Callback for when an option is deselected.
+* @param {string} [id]
+*     The id of the deselected object
+* @param {Object} [event]
+*     The JS event fired by the deselect.
+*/
+
+/**
+* @callback MultiseriesChartCard~onSelectOption
+*     Callback for when an option is selected.
+* @param {string} [id]
+*     The id of the selected object
+* @param {Object} [event]
+*     The JS event fired by the deselect.
+*/
+
+/**
+* @callback MultiseriesChartCard~onMenuToggle
+*     Callback for option dropdown is toggled open or closed.
+* @param {string} [id]
+*     The id of the selected object
+* @param {Object} [event]
+*     The JS event fired by the deselect.
+*/
+
+/**
+* @class MultiseriesChartCard
 * @desc A card with a line/area chart.
 *
 * @param {string} [data-id="multiseries-chart"]
@@ -24,27 +52,6 @@ import DashboardCardTitle from "./Cards/DashboardCardTitle";
 *     The height of the chart in pixels.
 * @param {boolean} [loading]
 *     The loading state of the card. If set to true, chart will not display; a loading spinner will display instead.
-*
-* @callback onDeselectOption
-*     Callback for when an option is deselected.
-* @param {string} [id]
-*     The id of the deselected object
-* @param {Object} [event]
-*     The JS event fired by the deselect.
-*
-* @callback onSelectOption
-*     Callback for when an option is selected.
-* @param {string} [id]
-*     The id of the selected object
-* @param {Object} [event]
-*     The JS event fired by the deselect.
-*
-* @callback onMenuToggle
-*     Callback for option dropdown is toggled open or closed.
-* @param {string} [id]
-*     The id of the selected object
-* @param {Object} [event]
-*     The JS event fired by the deselect.
 *
 * @param {string[]} [selectedDataSets]
 *     An array of ids that decides which dataset to display. If not passed in, the component
@@ -66,6 +73,19 @@ import DashboardCardTitle from "./Cards/DashboardCardTitle";
 *     of dropdown options.
 * @param {string} [yAxisLabel]
 *     The label for the y-axis.
+* @example
+*  <MultiseriesChartCard
+*    data={formattedData}
+*    menuNote={<p>Limit of 3 applications.</p>}
+*    menuRequiredText={renderRequiredText}
+*    onDeselectOption={this._handleDeselectOption}
+*    onMenuToggle={this._handleToggle}
+*    onSelectOption={this._handleSelectOption}
+*    options={options}
+*    type={this.state.typeIndex === 0 ? chartTypes.LINE : chartTypes.AREA}
+*    title="Application Traffic"
+*    xAxisKey="time"
+*    yAxisLabel="# of Requests" />
 */
 
 const MultiseriesChartCard = ({

@@ -4,9 +4,9 @@ import Checkbox from "../../../../components/forms/FormCheckbox";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 /**
-* @name Heat
-* @memberof HeatMap
-* @desc A demo for HeatMap
+* @name HeatMapCardDemo
+* @memberof HeatMapCard
+* @desc A demo for HeatMapCard
 */
 class HeatMapCardDemo extends React.Component {
 

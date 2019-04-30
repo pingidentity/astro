@@ -4,6 +4,12 @@ import FormTextField from "../../../components/forms/form-text-field";
 import InputWidths from "../../../components/forms/InputWidths";
 
 
+/**
+* @name InputRowDemo
+* @memberof InputRow
+* @desc A demo for InputRow component
+ */
+
 const InputRowDemo = () => {
     return (
         <div>

@@ -13,7 +13,7 @@ import _ from "underscore";
 
 
 /**
- * @class StatCard
+ * @class StatAreaCard
  * @desc A card that displays a single statistic, but can be flipped to reveal others as well.
  *
  * @param {number|string} [accent]

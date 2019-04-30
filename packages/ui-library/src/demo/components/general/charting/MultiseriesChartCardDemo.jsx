@@ -4,6 +4,12 @@ import MultiseriesChartCard, { chartTypes } from "../../../../components/general
 import RockerButton from "../../../../components/forms/RockerButton";
 import { toRechartsDataFormat } from "../../../../util/ChartingUtils";
 
+
+/**
+* @name MultiseriesChartCardDemo
+* @memberof MultiseriesChartCard
+* @desc A demo for MultiSeriesChartCard
+*/
 export default class MultiseriesChartCardDemo extends Component {
     initialOptions = [
         {

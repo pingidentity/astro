@@ -6,6 +6,12 @@ import RowBuilder from "../../../components/rows/RowBuilder";
 import { omit } from "underscore";
 import InputRow from "../../../components/layout/InputRow";
 
+/**
+* @name RowBuilderDemo
+* @memberof RowBuilder
+* @desc A demo for RowBuilder component
+*/
+
 export default class RowBuilderDemo extends Component {
     state = {
         firstRowIds: [uuidV4(), uuidV4()],

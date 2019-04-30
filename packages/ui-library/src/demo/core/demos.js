@@ -192,13 +192,7 @@ module.exports = [
                         label: "File Upload",
                         demo: require("../components/forms/FileUploadDemo"),
                         pathToDoc: "components/forms/FileUpload.jsx",
-                        // FileUpload v2 is split into separate source files, so pass all as array.
-                        // First item in array will be displayed in full source iframe, rest will be linked to above the iframe.
-                        pathToSource: [
-                            "components_forms_file-upload_v2.jsx.html",
-                            "components_forms_file-upload_v2-stateless.jsx.html",
-                            "components_forms_file-upload_v2-stateful.jsx.html"
-                        ],
+                        pathToSource: "components_forms_file-upload_v2.jsx.html",
                         pathToDemoSource: "demo_components_forms_FileUploadDemo.jsx.html"
                     },
                     {
@@ -360,13 +354,7 @@ module.exports = [
                         label: "Selection List",
                         demo: require("../components/forms/SelectionListDemo"),
                         pathToDoc: "components/forms/SelectionList.jsx",
-                        // SelectionList v2 is split into separate source files, so pass all as array.
-                        // First item in array will be displayed in full source iframe, rest will be linked to above the iframe.
-                        pathToSource: [
-                            "components_forms_selection-list_v2.jsx.html",
-                            "components_forms_selection-list_v2-stateless.jsx.html",
-                            "components_forms_selection-list_v2-stateful.jsx.html"
-                        ],
+                        pathToSource: "components_forms_selection-list_v2.jsx.html",
                         pathToDemoSource: "demo_components_forms_SelectionListDemo.jsx.html"
                     },
                     {
@@ -714,8 +702,8 @@ module.exports = [
                         label: "Condensed Table",
                         demo: require("../components/tables/CondensedTableDemo"),
                         pathToDoc: "components/tables/CondensedTable.jsx",
-                        pathToSource: "components_table_CondensedTable.jsx.html",
-                        pathToDemoSource: "demo_components_table_CondensedTable.jsx.html"
+                        pathToSource: "components_tables_CondensedTable.jsx.html",
+                        pathToDemoSource: "demo_components_tables_CondensedTableDemo.jsx.html"
                     },
                     {
                         label: "Drag-N-Drop Table",
@@ -868,7 +856,7 @@ module.exports = [
                         label: "Password Strength Meter",
                         demo: require("../components/general/PasswordStrengthMeterDemo"),
                         pathToDoc: "components/general/PasswordStrengthMeter.jsx",
-                        pathToSource: "PasswordStrengthMeter.jsx.html",
+                        pathToSource: "components_general_PasswordStrengthMeter.jsx.html",
                         pathToDemoSource: "demo_components_general_PasswordStrengthMeterDemo.jsx.html"
                     },
                 ]
@@ -1008,7 +996,7 @@ module.exports = [
                         label: "Drag-N-Drop Row",
                         demo: require("../components/rows/DragDropRowDemo"),
                         pathToDoc: "components/rows/DragDrop.jsx",
-                        pathToSource: "components_rows_DragDropRow.jsx.html",
+                        pathToSource: "components_rows_DragDrop.jsx.html",
                         pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html",
                         keywords: ["DragDropRow", "rows"]
                     },

@@ -4,6 +4,12 @@ import ValidationMessages from "./../../../components/forms/ValidationMessages";
 import InputWidths from "../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
 
+/**
+* @name ValidationMessagesDemo
+* @memberof ValidationMessages
+* @desc A demo for ValidationMessages
+*/
+
 const _testLength = (value) => {
     return value && value.length > 5 ? ValidationMessages.Status.PASS : ValidationMessages.Status.FAIL;
 };

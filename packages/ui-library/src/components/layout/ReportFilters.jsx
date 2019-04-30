@@ -4,8 +4,8 @@ import Button from "../../components/buttons/Button";
 
 
 /**
- * @class Reporting Filters
- * @desc A component for the reporting filter.
+ * @class ReportFilters
+ * @desc A component for the report filtes.
  *
  * @param {string} [data-id="reporting-filter"]
  *     Defines the "data-id" for top-level HTML container.
@@ -22,8 +22,7 @@ import Button from "../../components/buttons/Button";
  *               <FormDropDownList
  *                   label="Report Type"
  *                   selectedOption={reportType[0]}
- *                   options={reportType}
- *               />
+ *                   options={reportType} />
  *           ],
  *           [
  *               <FormDropDownList
@@ -44,14 +43,12 @@ import Button from "../../components/buttons/Button";
  *                       selectedOption: mockTime[3],
  *                       width: InputWidths.XS,
  *                       name: "dropdown"
- *                   }}
- *               />
+ *                   }} />
  *           ],
  *           [
  *               <FormTextField label="Filter" width={InputWidths.SM}/>,
  *           ],
- *       ]}
- *   />
+ *       ]} />
  *
  */
 
