@@ -120,6 +120,7 @@ export default class DropDownSelector extends Component {
                     requiredText={this.props.requiredText}
                     selected={this.props.selectedOptionIds}
                     type={ListType.ADD}
+                    flags={["use-portal"]}
                 />
                 <ChipPanel
                     className="dropdown-selector__bottom-panel"

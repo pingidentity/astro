@@ -6,7 +6,7 @@ export const allFlags = [
     "add-button-margin",
     "expandable-row-class",
     "fix-discard-button",
-    "fix-message-constants",
+    "fixed-messages-constants",
     "true-default",
 ];
 

@@ -172,6 +172,7 @@ class FilterSelector extends React.Component {
                         requiredText={requiredText}
                         selectedItemIds={selected}
                         searchBoxProps={{ textFieldProps: { stateless: true } }}
+                        flags={["p-stateful"]}
                     />
                 </Popover>
             </span>

@@ -9,6 +9,7 @@ import InlineMessage from "ui-library/lib/components/general/InlineMessage";
 import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import HR from "ui-library/lib/components/general/HR";
+import { allFlags } from "ui-library/lib/util/FlagUtils";
 
 const flagHelp = (
     `Use the flags prop on your component to specify custom behaviors.
@@ -17,14 +18,7 @@ const flagHelp = (
 
 class DemoItem extends React.Component {
     state = {
-        flags: [
-            "add-button-margin",
-            "expandable-row-class",
-            "fix-discard-button",
-            "fix-message-constants",
-            "p-stateful",
-            "use-portal",
-        ],
+        flags: allFlags,
     };
 
     static propTypes = {

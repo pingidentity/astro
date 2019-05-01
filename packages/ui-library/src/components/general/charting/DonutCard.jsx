@@ -230,6 +230,7 @@ class DonutCard extends Component {
                                 options={this.props.options}
                                 selectedOption={this.props.selectOption}
                                 onValueChange={this.props.onSelect}
+                                flags={["p-stateful", "use-portal"]}
                             />,
                             this._renderBack(this.props.data)
                         ])}

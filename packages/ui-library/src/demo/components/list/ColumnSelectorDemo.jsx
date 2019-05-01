@@ -16,7 +16,8 @@ export default class ColumnSelectorDemo extends Component {
     state = {
         filterOpen: false,
         selectedRowIds: [],
-        tooltipOpen: false
+        tooltipOpen: false,
+        selectedFilter: 0,
     }
 
     _closeTooltip = () => {
@@ -221,6 +222,7 @@ export default class ColumnSelectorDemo extends Component {
                         <div>Test</div>
                         <Icon
                             iconName="earth"
+                            type="inline"
                         />
                     </RowTitle>,
                 children: [
@@ -268,6 +270,7 @@ export default class ColumnSelectorDemo extends Component {
                             open={this.state.tooltipOpen}
                             placement="top left"
                             title="Inherit future populations"
+                            flags={["use-portal", "p-stateful"]}
                         >
                             You have selected an environment, including all
                             populations governed by it.

@@ -136,6 +136,7 @@ function RowBuilder({
                             data-id="row-builder-add"
                             onClick={add}
                             title={addLabel}
+                            type="block"
                         />
                     )
                 }

@@ -100,6 +100,7 @@ class TabSet extends Component {
                 labels={labels}
                 selectedIndex={selectedIndex}
                 onValueChange={onValueChange}
+                flags={["p-stateful"]}
             />
         );
 

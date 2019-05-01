@@ -50,7 +50,9 @@ class ExpandedRow extends React.Component {
                             date={this.state.selectedDate}
                             computableFormat="x"
                             closeOnSelect={true}
-                            onValueChange={this._handleEnrollmentDateChanged} />
+                            onValueChange={this._handleEnrollmentDateChanged}
+                            flags={["use-portal", "p-stateful"]}
+                        />
                     </div>
                 );
         }

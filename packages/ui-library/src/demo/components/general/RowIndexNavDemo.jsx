@@ -2,6 +2,7 @@ import React from "react";
 import ExpandableRow from "../../../components/rows/ExpandableRow";
 import RowIndexNav from "../../../components/general/RowIndexNav";
 import InputRow from "../../../components/layout/InputRow";
+import { allFlags } from "../../../util/FlagUtils";
 
 var createReactClass = require("create-react-class");
 
@@ -56,18 +57,23 @@ var RowIndexNavDemo = createReactClass({
                     />
                     <ExpandableRow
                         title="Expandable Row"
+                        flags={allFlags}
                     />
                     <ExpandableRow
                         title="Expandable Row"
+                        flags={allFlags}
                     />
                     <ExpandableRow
                         title="Expandable Row"
+                        flags={allFlags}
                     />
                     <ExpandableRow
                         title="Expandable Row"
+                        flags={allFlags}
                     />
                     <ExpandableRow
                         title="Expandable Row"
+                        flags={allFlags}
                     />
                 </ExpandableRow.SimpleWrapper>
             </div>

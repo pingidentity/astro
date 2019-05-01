@@ -37,7 +37,7 @@ class LeftNavDemo extends React.Component {
         return (
             <LeftNavBar {...this.state}
                 onItemValueChange={this._handleItemClick}
-                onSectionValueChange={this._handleSectionClick} />);
+                onSectionValueChange={this._handleSectionClick} legacy />);
     }
 }
 

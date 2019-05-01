@@ -50,14 +50,17 @@ class SectionDemo extends React.Component {
                     collapsedText="Test"
                     onToggle={this._toggleFirst}
                     expanded={this.state.firstSectionOpen}
-                    flags={flags}>
+                    flags={flags}
+                >
                     {this._getContent()}
                 </Section>
                 <Section
                     data-id="demo-section-2"
                     stateless={false}
                     title="Stateful section"
-                    titleValue="Optional section value">
+                    titleValue="Optional section value"
+                    flags={flags}
+                >
                     {this._getContent()}
                 </Section>
                 <Section
@@ -66,7 +69,9 @@ class SectionDemo extends React.Component {
                     accessories={[
                         <Button key="1" inline iconName="edit"/>,
                         <Button key="2" inline iconName="delete"/>
-                    ]}>
+                    ]}
+                    flags={flags}
+                >
                     {this._getContent()}
                 </Section>
                 <Section
@@ -75,12 +80,16 @@ class SectionDemo extends React.Component {
                     detailsText={{
                         expanded: "Expanded",
                         collapsed: "Collapsed"
-                    }}>
+                    }}
+                    flags={flags}
+                >
                     {this._getContent()}
                 </Section>
                 <Section
                     title="Disabled section"
-                    disableExpand={true}>
+                    disableExpand={true}
+                    flags={flags}
+                >
                     {this._getContent()}
                 </Section>
 
@@ -92,14 +101,18 @@ class SectionDemo extends React.Component {
                     <Section
                         stateless={false}
                         condensed={true}
-                        title="Section">
+                        title="Section"
+                        flags={flags}
+                    >
                         {this._getContent()}
                     </Section>
                     <Section
                         stateless={false}
                         condensed={true}
                         title="Section"
-                        titleValue="Optional section value">
+                        titleValue="Optional section value"
+                        flags={flags}
+                    >
                         {this._getContent()}
                     </Section>
                     <Section
@@ -109,7 +122,9 @@ class SectionDemo extends React.Component {
                         accessories={[
                             <Button key="1" inline iconName="edit"/>,
                             <Button key="2" inline iconName="delete"/>
-                        ]}>
+                        ]}
+                        flags={flags}
+                    >
                         {this._getContent()}
                     </Section>
                     <Section
@@ -119,14 +134,18 @@ class SectionDemo extends React.Component {
                         detailsText={{
                             expanded: "Expanded",
                             collapsed: "Collapsed"
-                        }}>
+                        }}
+                        flags={flags}
+                    >
                         {this._getContent()}
                     </Section>
                     <Section
                         title="Disabled section"
                         className="extra"
                         condensed={true}
-                        disableExpand={true}>
+                        disableExpand={true}
+                        flags={flags}
+                    >
                         {this._getContent()}
                     </Section>
                 </div>

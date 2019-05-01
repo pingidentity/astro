@@ -1,4 +1,4 @@
-import FormTextField from "../forms/form-text-field";
+import { FormTextFieldStateless } from "../forms/form-text-field";
 import copiesText from "../../util/behaviors/copiesText";
 
 /**
@@ -8,7 +8,7 @@ import copiesText from "../../util/behaviors/copiesText";
  * @extends FormTextField
  * @extends copiesText
  **/
-const CopyField = copiesText(FormTextField, { value: "text" });
+const CopyField = copiesText(FormTextFieldStateless, { value: "text" });
 
 CopyField.defaultProps = {
     ...CopyField.defaultProps,

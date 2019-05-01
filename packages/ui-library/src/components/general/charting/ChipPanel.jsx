@@ -20,7 +20,7 @@ const renderChips = (chips, onClick) => chips.map(({ className = "", color = cha
         }}
     >
         <span>{ name }</span>
-        <Icon className="chip-panel__chip__icon" iconName="clear" />
+        <Icon className="chip-panel__chip__icon" iconName="clear" type="leading" />
     </div>
 ));
 

@@ -78,7 +78,7 @@ export default class RockerButton extends React.Component {
     componentDidMount() {
         if (!this._usePStateful()) {
             cannonballChangeWarning({
-                message: `The 'selectedIndex' prop will no longer serve as an initial state. ` +
+                message: `The 'selectedIndex' prop will no longer serve as an initial state for RockerButton. ` +
                     `If it is present, it will control the current value of the component. ` +
                     `Set the 'p-stateful' flag to switch to this behavior now.`,
             });

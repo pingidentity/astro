@@ -174,7 +174,7 @@ class ExpandableRowDemo extends React.Component {
                     stateless={false}
                     title="Row with Toggle"
                     subtitle="stateful"
-                    rowAccessories={<Toggle stateless={false} />}
+                    rowAccessories={<Toggle stateless={false} flags={["p-stateful"]} />}
                 />
                 <ExpandableRow
                     flags={flags}
@@ -197,7 +197,7 @@ class ExpandableRowDemo extends React.Component {
                             <label className="row-help">PROV</label>
                         </HelpHint>,
                         <button key="button"className="inline">Inline Button</button>,
-                        <Toggle key="toggle" stateless={false} />,
+                        <Toggle key="toggle" stateless={false} flags={["p-stateful"]} />,
                         <span key="count" className="count">2</span>
                     ]}
                 />
@@ -254,7 +254,7 @@ class ExpandableRowDemo extends React.Component {
                                 <label className="row-help">PROV</label>
                             </HelpHint>
                             <button className="inline">Inline Button</button>
-                            <Toggle stateless={false} />
+                            <Toggle stateless={false} flags={["p-stateful"]} />
                             <span className="count">2</span>
                         </span>
                     )}

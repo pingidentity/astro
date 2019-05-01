@@ -237,6 +237,7 @@ class HeaderBarDemo extends React.Component {
 
                     additionalContent="Additional Content"
                     renderProductNav={customRenderProductNav}
+                    legacy
                 />
                 <HR />
                 <p>With the Mode signifier</p>
@@ -259,6 +260,7 @@ class HeaderBarDemo extends React.Component {
 
                     additionalContent="Additional Content"
                     renderProductNav={customRenderProductNav}
+                    legacy
                 />
             </div>
         );

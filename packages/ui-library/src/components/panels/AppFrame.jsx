@@ -278,6 +278,7 @@ class AppFrame extends React.Component {
                     modalTitle="Search"
                     type="dialog"
                     onClose={closeModal}
+                    flags={["use-portal"]}
                 >
                     <KeywordSearch
                         data-id="app-frame-search"

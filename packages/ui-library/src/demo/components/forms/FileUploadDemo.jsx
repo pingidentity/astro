@@ -4,6 +4,7 @@ import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
+import { allFlags } from "../../../util/FlagUtils";
 
 /**
 * @name FileUploadDemo
@@ -162,7 +163,9 @@ export default class FileUploadDemo extends React.Component {
                         title="File Input in a Details Tooltip"
                         open={this.state.tooltipOpen}
                         onToggle={this._toggleTooltip}
-                        label="Toggle Tooltip">
+                        label="Toggle Tooltip"
+                        flags={allFlags}
+                    >
 
                         <InputRow>
                             <FileUpload

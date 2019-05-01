@@ -158,7 +158,7 @@ class HelpHint extends React.Component {
 
     maybeRenderLink() {
         const { link } = this.props;
-        return link && <Link title="More on this topic" url={link} icon="info"/>;
+        return link && <Link title="More on this topic" url={link} icon="info" type="block" />;
     }
 
     maybeRenderExtraContainer = children => (

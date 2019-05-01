@@ -635,10 +635,22 @@ class FormTextField extends React.Component {
         stateless: true,
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
+    componentDidMount() {
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+        }
+        if (!this._usePStateful()) {
+            cannonballChangeWarning({
+                message: `The 'reveal' prop will no longer serve as an initial state for FormTextField. ` +
+                `If it is present, it will control the current value of the component. ` +
+                `Set the 'p-stateful' flag to switch to this behavior now.`,
+            });
+
+            cannonballChangeWarning({
+                message: `The 'value' prop will no longer serve as an initial state for FormTextField. ` +
+                `If it is present, it will control the current value of the component. ` +
+                `Set the 'p-stateful' flag to switch to this behavior now.`,
+            });
         }
     }
 
@@ -648,18 +660,6 @@ class FormTextField extends React.Component {
         if (this._usePStateful()) {
             return <PStatefulFormTextField {...this.props} />;
         }
-
-        cannonballChangeWarning({
-            message: `The 'reveal' prop will no longer serve as an initial state for FormTextField. ` +
-            `If it is present, it will control the current value of the component. ` +
-            `Set the 'p-stateful' flag to switch to this behavior now.`,
-        });
-
-        cannonballChangeWarning({
-            message: `The 'value' prop will no longer serve as an initial state for FormTextField. ` +
-            `If it is present, it will control the current value of the component. ` +
-            `Set the 'p-stateful' flag to switch to this behavior now.`,
-        });
 
         return (this.props.stateless
             ? <Stateless ref="stateless" {...this.props} />

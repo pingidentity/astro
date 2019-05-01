@@ -567,6 +567,7 @@ class TimeZoneStateless extends React.Component {
                             onClear={this._clearSearchString}
                             ref="searchString"
                             autoFocus
+                            flags={["p-stateful"]}
                         />
                     </div>
                     {this.props.filterByCountry ? this._renderZones() : this._renderCountries()}

@@ -73,7 +73,7 @@ class LinkDropDownListStateless extends React.Component {
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
-        selectedOption: PropTypes.object,
+        selectedOption: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([-1])]), // -1 means no value has been set
         flags: flagsPropType,
     };
 
@@ -248,7 +248,7 @@ const PStatefulLinkDropDownList = inStateContainer([
     },
     {
         name: "selectedOption",
-        initial: 0,
+        initial: -1,
         setter: "onClick"
     },
 

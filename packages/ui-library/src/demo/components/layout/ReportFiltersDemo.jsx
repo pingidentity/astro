@@ -78,6 +78,7 @@ export default class ReportFiltersDemo extends Component {
                                 onValueChange={this._handleReportChange}
                                 options={reportType}
                                 name="report-type"
+                                flags={["p-stateful", "use-portal"]}
                             />
                         ],
                         [
@@ -88,6 +89,7 @@ export default class ReportFiltersDemo extends Component {
                                 options={mockTimeRange}
                                 width={InputWidths.SM}
                                 name="time-range"
+                                flags={["p-stateful", "use-portal"]}
                             />,
                             <UnitInput
                                 labelText="Unit Input Text"
@@ -103,6 +105,7 @@ export default class ReportFiltersDemo extends Component {
                                     width: InputWidths.XS,
                                     name: "dropdown"
                                 }}
+                                flags={["p-stateful", "use-portal"]}
                             />
                         ],
                         [
@@ -112,6 +115,7 @@ export default class ReportFiltersDemo extends Component {
                                 onValueChange={this._handleFilterChange}
                                 width={InputWidths.SM}
                                 name="filter"
+                                flags={["p-stateful"]}
                             />
                         ],
                     ]}

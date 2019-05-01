@@ -64,4 +64,11 @@ describe("Icon", function () {
         expect(icon.className).toContain("xl");
     });
 
+    it("fires cannonball warning if type isn't set and there are no children", function() {
+        console.warn = jest.fn();
+        expect(console.warn).not.toBeCalled();
+        getComponent();
+        expect(console.warn).toBeCalled();
+    });
+
 });

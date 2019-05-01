@@ -76,7 +76,7 @@ const PageHeader = ({
     };
 
     const renderIcon = () => {
-        return iconName && <Icon className="page-header__icon" iconName={iconName}/>;
+        return iconName && <Icon className="page-header__icon" iconName={iconName} type="leading" />;
     };
 
     return (

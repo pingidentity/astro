@@ -87,7 +87,7 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
  *     Default message timeout in ms. Messages will remove themselves after this time, unless the message specifically
  *     overrides the default timeout itself.
  * @param {array} [flags]
- *     Set the flag for "fix-messages-constants" to use WARNING and INFO correctly
+ *     Set the flag for "fixed-messages-constants" to use WARNING and INFO correctly
  *
  * @example
  * Usage:

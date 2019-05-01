@@ -201,6 +201,7 @@ export default class ColumnSelectorRow extends Component {
                             className={`${baseClassName}-toggle`}
                             data-id={`${dataId}-toggle-icon`}
                             iconName={this.state.open ? "close-arrow" : "dropdown-arrow"}
+                            type="leading"
                         />
                     }
                     {!expandable &&
@@ -208,6 +209,7 @@ export default class ColumnSelectorRow extends Component {
                             {titleIcon &&
                                 <Icon
                                     iconName={titleIcon}
+                                    type="leading"
                                 />
                             }
                         </div>

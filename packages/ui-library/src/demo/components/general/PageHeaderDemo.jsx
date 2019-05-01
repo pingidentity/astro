@@ -34,8 +34,8 @@ const PageHeaderDemo = () => {
             <PageHeader
                 title="A Page Header with accessories"
                 accessories={[
-                    <Link title="Link" key="link" />,
-                    <Icon iconName="cog" key="icon" />,
+                    <Link title="Link" key="link" type="block" />,
+                    <Icon iconName="cog" key="icon" type="leading" />,
                     <HelpHint className="width-auto bottom" hintText="Provisioning" key="hint">
                         <label className="row-help">PROV</label>
                     </HelpHint>,

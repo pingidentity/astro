@@ -96,6 +96,7 @@ module.exports = class extends React.Component {
         onDragEnd: PropTypes.func,
         onAdd: PropTypes.func,
         onRemove: PropTypes.func,
+        showCategoryList: PropTypes.bool,
         flags: flagsPropType,
     };
 
@@ -107,6 +108,7 @@ module.exports = class extends React.Component {
         onDragStart: _.noop,
         onDragEnd: _.noop,
         dragToEdge: false,
+        showCategoryList: false,
         strings: {}
     };
 

@@ -151,6 +151,7 @@ MultiDragRow.defaultProps = {
     renderButton: (props, ButtonComponent) => (
         <ButtonComponent
             {...props}
+            type="standard"
         />
     )
 };

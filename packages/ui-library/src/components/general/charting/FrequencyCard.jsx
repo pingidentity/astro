@@ -429,10 +429,10 @@ export default class FrequencyCard extends Component {
                                 <div className="frequency-card__nav-holder">
                                     <RockerButton
                                         className="rocker-button--chart-rocker"
-                                        stateless={false}
                                         onValueChange={this._handleRockerChange}
                                         labels={barData.map(i => i.id)}
                                         labelHints={barData.map(i => i.helpText)}
+                                        flags={["p-stateful"]}
                                     />
                                 </div>
                             </div>

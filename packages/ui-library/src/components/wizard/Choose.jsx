@@ -3,6 +3,9 @@ var React = require("react"),
     Utils = require("../../util/Utils"),
     Step = require("./Step");
 
+import { cannonballPortalWarning } from "../../util/DeprecationUtils";
+import { hasFlag } from "../../util/FlagUtils";
+
 var INHERIT_PROPS = [
     "onEdit",
     "onValueChange",
@@ -106,15 +109,17 @@ class Choose extends React.Component {
         onValueChange: _.noop
     };
 
-    constructor(props) {
-        super(props);
+    componentDidMount() {
         if (!Utils.isProduction()) {
-            if (props.id) {
+            if (this.props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (props.onChange) {
+            if (this.props.onChange) {
                 throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
+        }
+        if (!hasFlag(this, "use-portal")) {
+            cannonballPortalWarning({ name: "Choose" });
         }
     }
 
@@ -199,6 +204,7 @@ class Choose extends React.Component {
         props.titleSelection = this._getChoiceTitle();
         props.canProceed = this._getChoice() >= 0;
         props.showEdit = true;
+        props.flags = this.props.flags;
 
         return (
             <div data-id={this.props["data-id"]} className={this.props.className}>

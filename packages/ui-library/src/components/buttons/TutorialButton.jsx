@@ -35,6 +35,7 @@ function TutorialButton({
                 <div>
                     <Icon
                         iconName="play"
+                        type="leading"
                     />
                     {label}
                 </div>

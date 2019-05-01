@@ -425,6 +425,7 @@ class MultiDragStateless extends React.Component {
                 showClear={true}
                 autoFocus={this.props.autoFocus}
                 value={column.search}
+                flags={["p-stateful"]}
             />
         );
     };

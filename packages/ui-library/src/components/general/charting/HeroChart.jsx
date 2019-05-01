@@ -217,13 +217,17 @@ export default class HeroChart extends Component {
             xAxisKey,
         } = this.props;
 
+        const labels = ["1D", "1W", "1M", "3M"];
+
         const rockerButtonDefaults = {
             "data-id": `${dataId}-range-selector`,
             className: "rocker-button--chart-rocker hero-chart__rocker",
             stateless: false,
-            labels: ["1D", "1W", "1M", "3M"],
-            selected: selected,
+            labels,
             onValueChange: onValueChange,
+            initialState: {
+                selectedIndex: labels.indexOf(selected),
+            }
         };
 
         const topSeriesMax = this._getSeriesMax(data, topSeriesKey);
@@ -304,7 +308,12 @@ export default class HeroChart extends Component {
                         </BarChart>
                     </div>
                 ]}
-                <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
+                <RockerButton
+                    key="range-selector"
+                    {...rockerButtonDefaults}
+                    {...rockerButtonProps}
+                    flags={["p-stateful"]}
+                />
                 {!errorMessage && loading &&
                     <PageSpinner className="hero-chart__loader" show>{loadingMessage}</PageSpinner>
                 }

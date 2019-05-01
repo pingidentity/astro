@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";

@@ -151,7 +151,11 @@ class StatAreaCard extends React.Component {
                             </ResponsiveContainer>
                         ])}
                         {this.props.rockerButtonProps
-                            ? <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
+                            ? <RockerButton
+                                {...rockerButtonDefaults}
+                                {...this.props.rockerButtonProps}
+                                flags={["p-stateful"]}
+                            />
                             : null}
                     </div>
                 }

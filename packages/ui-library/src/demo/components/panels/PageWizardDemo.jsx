@@ -28,7 +28,7 @@ class PageWizardDemo extends React.Component {
     state = {
         activeStep: 0,
         numSteps: 5,
-        currentApp: {},
+        currentApp: { appName: "", appDesc: "" },
         applications: [],
         headerColumns: null,
         show: null,
@@ -288,6 +288,7 @@ class PageWizardDemo extends React.Component {
                                 labelText="Application Name"
                                 value={this.state.currentApp.appName}
                                 onValueChange={this._onAppNameChange}
+                                flags={["p-stateful"]}
                                 required
                             />
                         </InputRow>
@@ -299,6 +300,7 @@ class PageWizardDemo extends React.Component {
                                 placeholder="Describe you application to your user"
                                 value={this.state.currentApp.appDesc}
                                 onValueChange={this._onAppDescChange}
+                                flags={["p-stateful"]}
                             />
                         </InputRow>
                         <FileUpload

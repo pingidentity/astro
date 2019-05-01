@@ -83,8 +83,7 @@ class Row extends React.Component {
         return (<Button inline iconName="remove"
             data-id="row-button-remove"
             onClick={this._handleRemove}
-            type="button" />
-        );
+        />);
     };
 
     render() {

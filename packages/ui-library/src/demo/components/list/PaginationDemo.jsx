@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Pagination from "../../../components/list/Pagination";
 import ExpandableRow from "../../../components/rows/ExpandableRow";
+import { allFlags } from "../../../util/FlagUtils";
 
 /**
 * @name PaginationDemo
@@ -11,7 +12,14 @@ export default class PaginationDemo extends Component {
     static flags = ["p-stateful"]
 
     items = new Array(100).fill("").map(
-        (str, idx) => <ExpandableRow title = {"Entry " + (idx + 1)} data-id={"expandable-row" + idx} key = {idx}/>
+        (str, idx) => (
+            <ExpandableRow
+                title = {"Entry " + (idx + 1)}
+                data-id={"expandable-row" + idx}
+                key = {idx}
+                flags={allFlags}
+            />
+        )
     )
 
     state = {

@@ -7,6 +7,8 @@ import Anchor from "../general/Anchor";
 import _ from "underscore";
 import { InputWidths } from "../forms/InputWidths";
 import { lightInputs } from "../../util/CSSModifiers";
+import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @class FormSearchBar
@@ -51,6 +53,7 @@ class SearchBar extends React.Component {
         "data-id": PropTypes.string,
         disableFilters: PropTypes.bool,
         rightControl: PropTypes.node,
+        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -70,6 +73,12 @@ class SearchBar extends React.Component {
         };
         this.setState(nextState);
     };
+
+    componentDidMount() {
+        if (!hasFlag(this, "p-stateful")) {
+            cannonballProgressivelyStatefulWarning({ name: "FormSearchBar" });
+        }
+    }
 
     render() {
         const {

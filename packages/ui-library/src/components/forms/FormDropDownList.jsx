@@ -276,7 +276,15 @@ class OptionItem extends React.Component {
 
     _renderContent = () => {
         const content = this.props.iconName
-            ? <div><Icon iconName={this.props.iconName} className="select-option__icon"/>{this.props.content}</div>
+            ? (
+                <div>
+                    <Icon
+                        iconName={this.props.iconName}
+                        className="select-option__icon"
+                        type="leading"
+                    />{this.props.content}
+                </div>
+            )
             : <div>{this.props.content}</div>;
 
         if (this.props.option.helpHintText) {
