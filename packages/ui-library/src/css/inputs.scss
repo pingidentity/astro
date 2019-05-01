@@ -411,11 +411,6 @@ label {
                 bottom: auto;
             }
         }
-        &.align-inputs {
-            .icon {
-                bottom: -8px;
-            }
-        }
     }
 
     &.input-radio {
@@ -2543,6 +2538,10 @@ input[type=file] {
                 bottom: 3px;
             }
         }
+    }
+
+    .input-row--line-height {
+        line-height: $default-input-height;
     }
 }
 

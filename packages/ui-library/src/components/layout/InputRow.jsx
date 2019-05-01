@@ -37,7 +37,10 @@ const InputRow = ({
 }) => {
 
     return (
-        <div data-id={dataId} className={classnames("input-row", className, { "input-row--strict": strict })}>
+        <div
+            data-id={dataId}
+            className={classnames("input-row input-row--line-height", className, { "input-row--strict": strict })}
+        >
             {children}
         </div>
     );

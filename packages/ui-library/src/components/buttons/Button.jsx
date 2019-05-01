@@ -12,8 +12,6 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *
  * @param {("primary" | "secondary" | "standard" | "success" | "cancel" | "danger")} [type]
  *      CSS class applied to html.
- * @param {string} [alignInputs]
- *     When true, aligns a  button with text fields in the same row
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {string} [data-id="button"]
@@ -60,7 +58,6 @@ const dontFocus = event => event.preventDefault();
 
 function Button ({
     active,
-    alignInputs,
     children,
     className,
     "data-id": dataId,
@@ -95,7 +92,6 @@ function Button ({
         className,
         iconName,
         {
-            "align-inputs": alignInputs,
             "button--add-margin-fix": iconName === "add" && fixAddMargin,
             "button--no-spacing": noSpacing,
             inline,
@@ -141,7 +137,6 @@ function Button ({
 
 Button.propTypes = {
     active: PropTypes.bool,
-    alignInputs: PropTypes.bool,
     className: PropTypes.string,
     "data-id": PropTypes.string,
     disabled: PropTypes.bool,
@@ -161,7 +156,6 @@ Button.propTypes = {
 
 Button.defaultProps = {
     active: false,
-    alignInputs: false,
     "data-id": "button",
     disabled: false,
     loading: false,

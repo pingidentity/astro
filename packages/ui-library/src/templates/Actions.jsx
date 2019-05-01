@@ -94,7 +94,6 @@ class Actions extends React.Component {
                 flags={["use-portal"]}
                 label={(
                     <Button
-                        alignInputs
                         iconName="delete"
                         inline
                         onClick={this._toggleConfirm(id)}

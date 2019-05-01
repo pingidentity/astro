@@ -26,7 +26,8 @@ const ActionsDemoPage = Object.create(HomePage, {
     */
     getListItems: {
         value: function (index) {
-            const xpath = `//*[@data-id="input-list-${index}"]//*[@class="input-row row-builder__row"]`;
+            const xpath =
+                `//*[@data-id="input-list-${index}"]//*[@class="input-row input-row--line-height row-builder__row"]`;
             return this.isExisting(xpath) ? this.getElements(xpath) : false;
         }
     },
