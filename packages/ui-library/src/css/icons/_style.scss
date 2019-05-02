@@ -3,10 +3,10 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?rdo3d') format('woff2'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?rdo3d') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?rdo3d') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?rdo3d##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?b7hu6b') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?b7hu6b') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?b7hu6b') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?b7hu6b##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -39,6 +39,11 @@
 .icon-alert {
   &:before {
     content: $icon-alert;
+  }
+}
+.icon-alert-solid {
+  &:before {
+    content: $icon-alert-solid;
   }
 }
 .icon-approve {
@@ -638,6 +643,11 @@
     content: $icon-success;
   }
 }
+.icon-success-round {
+  &:before {
+    content: $icon-success-round;
+  }
+}
 .icon-support {
   &:before {
     content: $icon-support;
@@ -713,4 +723,3 @@
     content: $icon-worker-app;
   }
 }
-

@@ -171,13 +171,15 @@
 
 
 .icon-ellipsis {
-    $color: rgba($color-walrus, 0.6);
-    $size: 7px;
-    $spacing: 7px;
+    $color: $color-accent-neutral-10;
+    $size: 8px;
+    $spacing: 6px;
     $timing: 1s ease-out infinite;
 
     position: relative;
     display: inline-block;
+    width: 3 * $size + 2 * $spacing;
+    height: $size;
 
     > span,
     &:before,
@@ -213,26 +215,26 @@
         0% {
             opacity: 0;
         }
-        50% {
-            opacity: 0.6;
+        40% {
+            opacity: 1;
         }
     }
 
     @include keyframes(pulse-2) {
-        25% {
+        20% {
             opacity: 0;
         }
-        75% {
-            opacity: 0.6;
+        60% {
+            opacity: 1;
         }
     }
 
     @include keyframes(pulse-3) {
-        50% {
+        40% {
             opacity: 0;
         }
-        100% {
-            opacity: 0.6;
+        80% {
+            opacity: 1;
         }
     }
     &.ie9 {
@@ -243,25 +245,6 @@
         background-repeat: no-repeat;
         background-position: 50%;
         background-size: 36px 7px;
-    }
-}
-
-.ellipsis-loader-button {
-    &.primary,
-    &.success,
-    &.cancel {
-        .icon-ellipsis {
-            $color: $color-white;
-            > span,
-            &:before,
-            &:after {
-                background-color: $color;
-            }
-            &.ie9 {
-                background-image: url('#{$img-path}ellipsis.gif');
-                opacity: 0.6;
-            }
-        }
     }
 }
 

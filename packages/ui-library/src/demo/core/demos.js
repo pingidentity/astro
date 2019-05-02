@@ -1044,6 +1044,24 @@ module.exports = [
                     },
                 ]
             },
+            {
+                label: "Co-Development",
+                icon: "worker-app",
+                children: [
+                    {
+                        label: "Message Button",
+                        demo: require("../components/buttons/MessageButtonDemo"),
+                        pathToDoc: "components/buttons/MessageButton.jsx",
+                        pathToSource: "components_buttons_MessageButton.jsx.html",
+                        pathToDemoSource: "demo_components_buttons_MessageButtonDemo.jsx.html",
+                        status: {
+                            message: "Co-development: This component is production ready, but the API may change to" +
+                                " reflect requirements.",
+                            type: "version"
+                        }
+                    },
+                ]
+            }
         ]
     },
     {

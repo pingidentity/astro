@@ -1,0 +1,53 @@
+
+button.message-button {
+    @include flexbox;
+    align-items: center;
+    line-height: 1em;
+    transition: all 0.1s ease-out;
+
+    // !important used to override disabled button styling
+
+    &--loading,
+    &--success,
+    &--error {
+        padding-left: $spacing-md;
+        padding-right: $spacing-md;
+        opacity: 1 !important;
+    }
+
+    &--loading {
+        background: $color-accent-neutral-10;
+        border-color: $color-accent-neutral-10 !important;
+        color: $color-white;
+
+        .icon-ellipsis {
+            margin-left: $spacing-md;
+
+            &:before,
+            &:after,
+            span {
+                background-color: $color-white;
+            }
+        }
+        &:hover {
+            color: $color-white !important;
+        }
+    }
+    &--success,
+    &--success:hover {
+        border-color: $color-success-green !important;
+        color: $color-success-green !important;
+    }
+    &--error,
+    &--error:hover {
+        border-color: $color-critical-red !important;
+        color: $color-critical-red !important;
+    }
+    .icon {
+        font-size: 16px !important;
+
+        .icon__content {
+            line-height: 1em;
+        }
+    }
+}

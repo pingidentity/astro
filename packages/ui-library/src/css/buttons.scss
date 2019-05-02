@@ -1,3 +1,5 @@
+@import 'message-button';
+@import 'ellipsis-loader-button';
 
 @mixin base-button-styles {
     @include text-style($color-slate, $font-size-primary);
@@ -373,35 +375,6 @@ button,
         text-transform: uppercase;
 
         border-radius: 3px;
-    }
-}
-
-button.ellipsis-loader-button {
-    .icon-ellipsis {
-        position: absolute;
-        top: 15px;
-        left: 50%;
-        margin: 0 0 0 -18px;
-        display: none;
-    }
-    &.loading {
-        color: transparent;
-        cursor: default;
-
-        .icon-ellipsis {
-            display: block;
-        }
-        &.primary {
-            &:hover {
-                background-color: $color-active-blue;
-                color: $color-active-blue;
-            }
-        }
-        &.inline {
-            .icon-ellipsis {
-                top: 9px;
-            }
-        }
     }
 }
 
