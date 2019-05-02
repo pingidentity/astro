@@ -124,7 +124,7 @@ class FormIntegerFieldDemo extends React.Component {
                 <InputRow>
                     <FormIntegerField
                         showUndo = {true}
-                        labelText={"With default value and undo - Value : " + this.state.integerField2}
+                        labelText={"With default value & undo - Value : " + this.state.integerField2}
                         initialValue = {8800}
                         onValueChange = {this._handleValueChange(2)}
                         width={InputWidths.MD}
@@ -224,6 +224,27 @@ class FormIntegerFieldDemo extends React.Component {
                         initialValue = {40}
                         width={InputWidths.MD}
                         stateless={false}
+                        flags={this.props.flags}
+                    />
+                </InputRow>
+
+                <InputRow>
+                    <FormIntegerField
+                        labelText={"Don't Enforce Range"}
+                        min={50}
+                        max={100}
+                        outOfRangeErrorMessage="It's got to be between 50 and 100"
+                        flags={this.props.flags}
+                        enforceRange={false}
+                    />
+                </InputRow>
+
+                <InputRow>
+                    <FormIntegerField
+                        labelText={"Enforce Range"}
+                        min={50}
+                        max={100}
+                        outOfRangeErrorMessage="It's got to be between 50 and 100"
                         flags={this.props.flags}
                     />
                 </InputRow>

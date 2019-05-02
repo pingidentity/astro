@@ -2,11 +2,11 @@
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { FormTextFieldStateless } from "../form-text-field/index";
+import { FormTextFieldStateless, messageTypes } from "../form-text-field/index";
 import classnames from "classnames";
 import Utils from "../../../util/Utils.js";
 import _ from "underscore";
-import validator from "validator";
+import { isInt } from "validator";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
@@ -19,9 +19,9 @@ const isValid = (value, enforceRange, min, max) => {
     const options = { allow_leading_zeroes: false }; //eslint-disable-line camelcase
 
     if (enforceRange) {
-        return validator.isInt(value.toString(), { ...options, min: min, max: max });
+        return isInt(value.toString(), { ...options, min: min, max: max });
     } else {
-        return validator.isInt(value.toString(), options);
+        return isInt(value.toString(), options);
     }
 };
 
@@ -64,7 +64,7 @@ const isValid = (value, enforceRange, min, max) => {
  * @param {string|number} [value=""]
  *     Current text field value used when stateless=true.
  * @param {string|number} [initialValue=""]
- *     Initial value (also to be used in conjuction with the undo button) when stateless=false.
+ *     Initial value (also to be used in conjuction with the undo button).
  *
  * @param {FormIntegerField~onValueChange} [onValueChange]
  *     Callback to be triggered when the field value changes. It will receive the component's value.
@@ -103,8 +103,7 @@ const isValid = (value, enforceRange, min, max) => {
  * @param {string} [errorMessage]
  *     The message to display if defined when external validation failed.
  * @param {string} [outOfRangeErrorMessage]
- *     The message displayed when the value is out of range of the min/max.
- *     Oly applied for stateful component (when stateless = false).
+ *     When present, the message that displays when the value is out of range of the min/max.
  * @param {string} [errorClassName]
  *     CSS classes to set on the FormTextFieldError component.
  *
@@ -183,6 +182,7 @@ class Stateless extends Component {
 
         errorMessage: PropTypes.string,
         errorClassName: PropTypes.string,
+        outOfRangeErrorMessage: PropTypes.string,
 
         autoFocus: PropTypes.bool,
         autoComplete: PropTypes.bool,
@@ -191,6 +191,7 @@ class Stateless extends Component {
         max: PropTypes.number,
         min: PropTypes.number,
         enforceRange: PropTypes.bool,
+        initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
         tabIndex: PropTypes.number,
     };
@@ -201,12 +202,11 @@ class Stateless extends Component {
         disabled: false,
         readOnly: false,
         hideControls: false,
+        initialValue: "",
 
         value: "",
 
         onValueChange: _.noop,
-        onBlur: _.noop,
-        onFocus: _.noop,
 
         maxLength: 16,
 
@@ -217,7 +217,6 @@ class Stateless extends Component {
         showSave: false,
         onSave: _.noop,
         showUndo: false,
-        onUndo: _.noop,
 
         autoComplete: false,
         autoFocus: false,
@@ -229,6 +228,8 @@ class Stateless extends Component {
 
         tabIndex: -1
     };
+
+    state = { showRangeError: false, showRangeWarning: false };
 
     /**
      * @desc Handles down press of the spinner arrows.
@@ -286,15 +287,9 @@ class Stateless extends Component {
         const value = this.props.value;
         let newValue = isNaN(parseInt(value)) ? this.props.min : parseInt(value) + inc;
 
-        // Always enforce range for spinner buttons and up and down keys
-        if (newValue < this.props.min) {
-            newValue = this.props.min;
+        if (this._checkForMin(newValue)) { // when changing with spinner, always enforce min
+            this._handleValueChange(newValue);
         }
-        else if (newValue > this.props.max) {
-            newValue = this.props.max;
-        }
-
-        this.props.onValueChange(newValue);
     };
 
     /**
@@ -306,8 +301,9 @@ class Stateless extends Component {
      */
     _handleKeyDown = (e) => {
         const key = e.keyCode;
+        const { readOnly, value, min, increment } = this.props;
 
-        if (this.props.readOnly) {
+        if (readOnly) {
             return;
         }
 
@@ -319,48 +315,156 @@ class Stateless extends Component {
         e.stopPropagation();
 
         // Increment/decrement the existing value and send out a notification
-        const intValue = parseInt(this.props.value) || this.props.min;
-        const newValue = intValue + (key === 38 ? 1 : -1) * this.props.increment;
+        const intValue = parseInt(value) || min;
+        const newValue = intValue + (key === 38 ? 1 : -1) * increment;
 
-        this.props.onValueChange(newValue);
+        if (this._checkForMin(newValue, e)) { // when changing with keys, we always enforce the min limit
+            this._handleValueChange(newValue, e);
+        }
     };
+
+    // our behavior for enforcing the minimum has to be complex
+    // because you might be typing '1' to get to '14'
+    _checkForMin = (value, e) => {
+        if (value === "") {
+            return true;
+        }
+        const { min, enforceRange, outOfRangeErrorMessage } = this.props;
+
+        // if a range error message is provided, check to see if we should show it
+        // and whether it should be a warning (we've kept it valid) or an error (it's invalid)
+        if ((value < min) && outOfRangeErrorMessage) {
+            this.setState({
+                [enforceRange ? "showRangeWarning" : "showRangeError"]: true,
+            });
+        }
+        if (enforceRange) {
+            if (this.props.value < min) {
+                this._handleValueChange(min, e);
+            }
+            // these are making sure we handle two cases
+            // if this function is being called for a change that already happened
+            // we need the above code
+            // if it's for a pending change, we need what's below
+            if (value < min) {
+                if (this.props.value > min) {
+                    this._handleValueChange(min, e);
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
+    _handleFocus = () => {
+        if (this.props.enforceRange) {
+            this.setState({ showRangeWarning: false });
+        }
+    }
+
+    _handleBlur = e => {
+        if (this._checkForMin(this.props.value, e) && this.state.showRangeWarning) {
+            this.setState({ showRangeWarning: false });
+        }
+    }
+
+    _rangeErrorShowing = () => {
+        const { value, max } = this.props;
+        const { showRangeError } = this.state;
+
+        if (showRangeError) {
+            return true;
+        }
+
+        if (value === "") {
+            return false;
+        }
+
+        if (value > max) {
+            return true;
+        }
+
+        return false;
+    }
+
+    _handleValueChange = (value, e) => {
+        const { min, max, enforceRange } = this.props;
+
+        if (enforceRange) {
+            if (value > max) {
+                this.props.onValueChange(max, e);
+                this.setState({ showRangeWarning: true });
+                return;
+            }
+        }
+        this.props.onValueChange(value, e);
+        if (this.state.showRangeError && value >= min && value <= max) {
+            this.setState({ showRangeError: false });
+        }
+        if (this.state.showRangeWarning) {
+            this.setState({ showRangeWarning: false });
+        }
+    }
+
+    _handleUndo = e => {
+        this._handleValueChange(this.props.initialValue, e);
+    }
 
     render() {
         let integerControls;
+        const {
+            "data-id": dataId,
+            outOfRangeErrorMessage,
+            errorMessage,
+            messageType,
+            ...props
+        } = this.props;
 
-        if (!this.props.disabled && !this.props.readOnly && !this.props.hideControls) {
+        if (!props.disabled && !props.readOnly && !props.hideControls) {
             integerControls = (
                 <span className="integer-controls" onMouseOut={this._handleSpinnerRelease}>
-                    <button data-id={this.props["data-id"] + "-up-btn"}
+                    <button data-id={dataId + "-up-btn"}
                         data-direction="up"
                         className="integer-up"
                         onMouseDown={this._handleSpinnerPress}
                         onMouseUp={this._handleSpinnerRelease}
-                        tabIndex={this.props.tabIndex}
+                        tabIndex={props.tabIndex}
                         type="button"
                     />
-                    <button data-id={this.props["data-id"] + "-down-btn"}
+                    <button data-id={dataId + "-down-btn"}
                         data-direction="down"
                         className="integer-down"
                         onMouseDown={this._handleSpinnerPress}
                         onMouseUp={this._handleSpinnerRelease}
-                        tabIndex={this.props.tabIndex}
+                        tabIndex={props.tabIndex}
                         type="button"
                     />
                 </span>
             );
         }
+
+        const showRangeMessage = !errorMessage && (this._rangeErrorShowing() || this.state.showRangeWarning);
+
         return (
             <div onKeyDown={this._handleKeyDown} className="form-integer-container input-integer">
-                <FormTextFieldStateless {...this.props}
+                <FormTextFieldStateless
+                    onFocus={this._handleFocus}
+                    onBlur={this._handleBlur}
+                    onUndo={this._handleUndo}
+                    {...props}
                     ref="formTextField"
-                    data-id={this.props["data-id"] + "-text-field"}
-                    name={this.props.name}
-                    stateless={true}
-                    className={this.props.className}
-                    labelClassName={classnames(this.props.labelClassName)}
-                    onValueChange={this.props.onValueChange}
+                    data-id={dataId + "-text-field"}
+                    name={props.name}
+                    className={props.className}
+                    labelClassName={classnames(props.labelClassName)}
+                    onValueChange={this._handleValueChange}
                     controls={integerControls}
+                    errorMessage={showRangeMessage ? outOfRangeErrorMessage : errorMessage}
+                    messageType={
+                        (showRangeMessage && this.props.enforceRange)
+                            ? messageTypes.WARNING
+                            : messageType
+                    }
                 />
             </div>
         );
@@ -501,8 +605,11 @@ export default class FormIntegerFieldV2 extends Component {
 
     render() {
         if (this._usePStateful()) {
+            const initialState = (this.props.initialValue !== undefined)
+                ? { ...this.props.initialState, value: this.props.initialValue }
+                : this.props.initialState;
             return (
-                <PStatefulFormIntegerField {...this.props} />
+                <PStatefulFormIntegerField {...this.props} initialState={initialState} />
             );
         }
 
@@ -529,8 +636,6 @@ export default class FormIntegerFieldV2 extends Component {
  */
 FormIntegerFieldV2.isValid = isValid;
 
-FormIntegerFieldV2.resetToOriginal = (value, current, { originalValue }) => originalValue;
-
 FormIntegerFieldV2.validateInt = (value, current, { enforceRange, max }) => {
     if (!isValid(value, enforceRange, null, max)) {
         return value.substring(0, value.length - 1);
@@ -548,10 +653,6 @@ const PStatefulFormIntegerField = inStateContainer([
             {
                 name: "onValueChange",
                 transform: FormIntegerFieldV2.validateInt
-            },
-            {
-                name: "onUndo",
-                transform: FormIntegerFieldV2.resetToOriginal
             },
         ],
     }, {

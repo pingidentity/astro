@@ -20,6 +20,18 @@ describe("FormIntegerField", function () {
         return ReactTestUtils.renderIntoDocument(<FormIntegerField {...opts} />);
     }
 
+    const getInput = component => (
+        TestUtils.findRenderedDOMNodeWithDataId(component,"form-integer-field-text-field-input")
+    );
+
+    const getDownSpinner = component => (
+        TestUtils.findRenderedDOMNodeWithDataId(component, "form-integer-field-down-btn")
+    );
+
+    const getMessage = component => TestUtils.findRenderedDOMNodeWithDataId(
+        component, "form-integer-field-text-field-error-message"
+    );
+
     beforeEach(function () {
         callback = jest.fn();
     });
@@ -203,16 +215,6 @@ describe("FormIntegerField", function () {
 
         // Value was reverted back to empty string instead of being 0 b/c 0 is invalid in the range
         expect(component.refs.formIntegerFieldStateful.state.value).toEqual("");
-    });
-
-    it("is not triggering onChange callback when max limit exceeded", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField onValueChange={callback} max={5} stateless={false} />
-        );
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        ReactTestUtils.Simulate.change(input, { target: { value: "6" } } );
-
-        expect(callback).not.toBeCalled();
     });
 
     it("is triggering onChange callback when max limit exceeded and range is not enforced", function () {
@@ -504,14 +506,155 @@ describe("FormIntegerField", function () {
         expect(console.warn).not.toBeCalled();
     });
 
-    it("undos in p-stateful component", function () {
-        const val = FormIntegerField.resetToOriginal(4, 3, { originalValue: 4 });
-
-        expect(val).toEqual(4);
-    });
-
     it("validates a value in p-stateful component", function () {
         expect(FormIntegerField.validateInt("1234", 0, {})).toEqual(1234);
         expect(FormIntegerField.validateInt("1234a", 0, {})).toEqual("1234");
     });
+
+    // make sure these make it into the v4 tests
+    it("should not fire onValueChange when enforcing range and keying down below min", function() {
+        const component = getComponent({ min: 10, max: 50, value: 10, flags: ["p-stateful"] });
+        const input = getInput(component);
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: 40 });
+
+        expect(component.props.onValueChange).not.toBeCalled();
+    });
+
+    it("should not fire onValueChange when enforcing range and spinning down below min", function() {
+        const component = getComponent({ min: 10, value: 10, flags: ["p-stateful"] });
+        const down = getDownSpinner(component);
+        ReactTestUtils.Simulate.mouseDown(down);
+
+        expect(component.props.onValueChange).not.toBeCalled();
+    });
+
+    it("shows warning and updates value to min when too low on min", function() {
+        const component = getComponent({
+            min: 10,
+            max: 50,
+            initialState: { value: 10 },
+            outOfRangeErrorMessage: "Oops",
+            flags: ["p-stateful"]
+        });
+        const input = getInput(component);
+
+        // no warning yet
+        ReactTestUtils.Simulate.change(input, { target: { value: 5 } });
+        let message = getMessage(component);
+        expect(message).toBeFalsy();
+
+        // warning now
+        ReactTestUtils.Simulate.blur(input);
+        message = getMessage(component);
+        expect(message).toBeTruthy();
+        expect(input.value).toBe("10");
+    });
+
+    it("doesn't show error until blurring when too low and not enforcing", function() {
+        const component = getComponent({
+            min: 10,
+            max: 50,
+            initialState: { value: 10 },
+            outOfRangeErrorMessage: "Oops",
+            enforceRange: false,
+            flags: ["p-stateful"]
+        });
+        const input = getInput(component);
+
+        // no error yet
+        ReactTestUtils.Simulate.change(input, { target: { value: 5 } });
+        expect(getMessage(component)).toBeFalsy();
+
+        // error now
+        ReactTestUtils.Simulate.blur(input);
+        expect(getMessage(component)).toBeTruthy();
+        expect(input.value).toBe("5");
+    });
+
+    it("clears warning on focus and blur", function() {
+        const component = getComponent({
+            min: 10,
+            max: 50,
+            initialState: { value: 10 },
+            outOfRangeErrorMessage: "Oops",
+            flags: ["p-stateful"]
+        });
+        const input = getInput(component);
+
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: 40 });
+        expect(getMessage(component)).toBeTruthy();
+
+        ReactTestUtils.Simulate.blur(input);
+        expect(getMessage(component)).toBeFalsy();
+
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: 40 });
+        expect(getMessage(component)).toBeTruthy();
+
+        ReactTestUtils.Simulate.focus(input);
+        expect(getMessage(component)).toBeFalsy();
+    });
+
+    it("clears error when value is fixed", function() {
+        const component = getComponent({
+            min: 10,
+            max: 50,
+            initialState: { value: 10 },
+            outOfRangeErrorMessage: "Oops",
+            enforceRange: false,
+            flags: ["p-stateful"]
+        });
+        const input = getInput(component);
+
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: 40 });
+        expect(getMessage(component)).toBeTruthy();
+
+        ReactTestUtils.Simulate.change(input, { target: { value: 20 } });
+        expect(getMessage(component)).toBeFalsy();
+    });
+
+    it("doesn't clear error on focus", function() {
+        const component = getComponent({
+            min: 10,
+            max: 50,
+            initialState: { value: 10 },
+            outOfRangeErrorMessage: "Oops",
+            enforceRange: false,
+            flags: ["p-stateful"]
+        });
+        const input = getInput(component);
+
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: 40 });
+        expect(getMessage(component)).toBeTruthy();
+
+        ReactTestUtils.Simulate.focus(input);
+        expect(getMessage(component)).toBeTruthy();
+    });
+
+    it("lets you clear out the field even while enforcing", function() {
+        const component = getComponent({
+            min: 10,
+            max: 50,
+            initialState: { value: 10 },
+            flags: ["p-stateful"]
+        });
+        const input = getInput(component);
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "" } });
+        ReactTestUtils.Simulate.blur(input);
+        expect(input.value).toBe("");
+    });
+
+    it("undoes with p-stateful", function() {
+        const component = getComponent({
+            initialValue: 20,
+            initialState: { value: 10 },
+            showUndo: true,
+            flags: ["p-stateful"]
+        });
+        const undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
+        ReactTestUtils.Simulate.click(undo);
+
+        expect(getInput(component).value).toBe("20");
+    });
+
 });
