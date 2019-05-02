@@ -1071,6 +1071,13 @@ module.exports = [
                 icon: "circle-o",
             },
             {
+                label: "List Template - Ordering",
+                demo: require("../components/templates/ListViewOrderingDemo"),
+                pathToSource: "templates_paginated-list_PaginatedList.jsx.html",
+                fullscreen: true,
+                icon: "circle-o",
+            },
+            {
                 label: "Property Specific",
                 icon: "globe",
                 children: [

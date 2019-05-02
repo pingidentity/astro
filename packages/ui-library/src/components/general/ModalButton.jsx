@@ -377,6 +377,8 @@ export default class ModalButton extends React.Component {
         onClose: () => {}
     }
 
+    static _statelessComponent = ModalButtonStateless;
+
     componentDidMount() {
         if (!this._usePStateful()) {
             cannonballChangeWarning({

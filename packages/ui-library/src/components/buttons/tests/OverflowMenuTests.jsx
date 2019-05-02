@@ -5,6 +5,7 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import OverflowMenu from "../OverflowMenu";
+import { allFlags } from "../../../util/FlagUtils";
 
 describe("OverflowMenuTests", function () {
     const buttons = [
@@ -26,8 +27,17 @@ describe("OverflowMenuTests", function () {
         }
     ];
 
-    it("rendered component with data-id=overflow-menu", function () {
+    it("v3: rendered component with data-id=overflow-menu", function () {
         const component = ReactTestUtils.renderIntoDocument(<div><OverflowMenu buttons={buttons} /></div>);
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "overflow-menu");
+
+        expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
+    });
+
+    it("v4: rendered component with data-id=overflow-menu", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><OverflowMenu buttons={buttons} flags={allFlags} /></div>
+        );
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, "overflow-menu");
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();

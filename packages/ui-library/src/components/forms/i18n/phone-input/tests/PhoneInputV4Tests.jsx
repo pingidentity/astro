@@ -54,57 +54,57 @@ describe("I18nPhoneInput", function () {
     }
 
     it("renders the component", function () {
-        var component = getComponent();
+        const component = getComponent();
 
-        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-phone-input");
+        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-phone-input");
 
         expect(input).toBeTruthy();
     });
 
     it("stateless: renders the component", function () {
-        var component = getComponent({
+        const component = getComponent({
             stateless: true
         });
 
-        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-phone-input");
+        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-phone-input");
 
         expect(input).toBeTruthy();
     });
 
     it("shows error message", function () {
-        var dataId = "phoneInput",
+        const dataId = "phoneInput",
             component = getComponent({
                 "data-id": "phoneInput",
                 dialCode: "1",
                 phoneNumber: "asdf"
             });
 
-        var error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
+        const error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
         expect(error.textContent).toEqual("Please enter a valid phone number.");
     });
 
     it("prepopulates phone number", function () {
-        var phoneNumber = "123 456 7890";
-        var inputId = "phoneInput";
+        const phoneNumber = "123 456 7890";
+        const inputId = "phoneInput";
 
-        var component = getComponent({
+        const component = getComponent({
             "data-id": inputId,
             phoneNumber: phoneNumber
         });
 
-        var phoneInput = TestUtils.findRenderedDOMNodeWithDataId(component, inputId + "-phoneNumber" + "-input");
+        const phoneInput = TestUtils.findRenderedDOMNodeWithDataId(component, inputId + "-phoneNumber" + "-input");
 
         expect(phoneInput.value).toEqual(phoneNumber);
     });
 
     it("updates callback on country select", function () {
-        var component = getComponent({
+        const component = getComponent({
             open: true
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
-        var afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
+        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        const canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
+        const afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
 
         ReactTestUtils.Simulate.click(flag);
 
@@ -138,22 +138,22 @@ describe("I18nPhoneInput", function () {
     });
 
     it("handles clearing selected country", function () {
-        var phoneNumber = "123 456 7890";
+        const phoneNumber = "123 456 7890";
 
-        var component = getComponent({
+        const component = getComponent({
             countryCode: "us",
             phoneNumber: phoneNumber,
             open: true
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
+        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        const flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain("us");
 
         ReactTestUtils.Simulate.click(flag);
 
-        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "none-option");
+        const noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "none-option");
 
         ReactTestUtils.Simulate.click(noCountry);
         expect(component.props.onValueChange).toBeCalledWith(
@@ -161,12 +161,12 @@ describe("I18nPhoneInput", function () {
     });
 
     it("triggers callback on phone number change", function () {
-        var component = getComponent({
+        const component = getComponent({
             "data-id": "phoneInput",
             dialCode: "1"
         });
 
-        var phoneInput = TestUtils.findRenderedDOMNodeWithDataId(component, "phoneInput" + "-phoneNumber" + "-input");
+        const phoneInput = TestUtils.findRenderedDOMNodeWithDataId(component, "phoneInput" + "-phoneNumber" + "-input");
 
         ReactTestUtils.Simulate.change(phoneInput, {
             target: {
@@ -242,20 +242,20 @@ describe("I18nPhoneInput", function () {
     });
 
     it("stateless: triggers onSearch callback when typing and search string provided", function () {
-        var component = getComponent({
+        const component = getComponent({
             stateless: true,
             open: true,
             searchString: "",
             searchTime: 0
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         expect(component.props.onSearch).toBeCalled();
     });
 
     it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
+        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
         expect(function () {
             getComponent({ controlled: true });
@@ -263,7 +263,7 @@ describe("I18nPhoneInput", function () {
     });
 
     it("throws error when deprecated prop 'onCountrySearch' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
+        const expectedError = new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
 
         expect(function () {
             getComponent({ onCountrySearch: jest.fn() });

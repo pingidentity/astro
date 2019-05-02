@@ -831,7 +831,6 @@ const PStatefulExpandableRow = inStateContainer([
         callbacks: [
             {
                 name: "onToggle",
-                passTransformedValue: true,
                 transform: toggleTransform
             }
         ]

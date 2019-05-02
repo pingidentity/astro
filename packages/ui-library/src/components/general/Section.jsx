@@ -256,7 +256,6 @@ const PStatefulSection = inStateContainer([
         initial: false,
         callbacks: [{
             name: "onToggle",
-            passTransformedValue: true,
             transform: toggleTransform,
         }],
     },

@@ -588,6 +588,8 @@ export default class FormIntegerFieldV2 extends Component {
         stateless: true,
     };
 
+    static _statelessComponent = Stateless;
+
     _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {

@@ -1009,6 +1009,7 @@ export default class FormDropDownList extends React.Component {
     static SearchTypes = SearchTypes;
     static searchTypes = SearchTypes; // we agreed on a new naming standard, but I'm also preserving bw compat
     static filterOptions = filterOptions;
+    static _statelessComponent = FormDropDownListStateless;
 
     _usePStateful = () => hasFlag(this, "p-stateful");
 

@@ -80,8 +80,6 @@
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with row.
 * **Recommendation:** Set the "use-portal" flag.
-* **V4 Behavior:** Each ExpandableRow will use a standalone CSS class to style them even out of context.
-* **V3 Behavior:** ExpandableRows get their styling from a surrounding element.
 
 * **V4 Behavior:** Each ExpandableRow will use a standalone CSS class to style them even out of context.
 * **V3 Behavior:** ExpandableRows get their styling from a surrounding element.
@@ -90,6 +88,10 @@
 * **V4 Behavior:** When provided, the `expanded` prop will control whether the component is open. Otherwise, the component will handle open and closing internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the open state will be controlled by the component.
 * **Recommendation:** Set the "p-stateful" flag.
+
+* **V4 Behavior:** The `onToggle` callback behaves consistently and returns the "before" state.
+* **V3 Behavior:** The stateful version calls `onToggle` with the new state of `expanded` while the stateless version calls it with the old state.
+* **Recommendation:** Set the "p-stateful" flag for consistent behavior.
 
 * **V4 Behavior:** When provided, the `showDeleteConfirm` prop will control whether the confirm delete tooltip is shown. Otherwise, the component will the tooltip.
 * **V3 Behavior:** The `stateless` prop decides whether or not the confirm delete tooltip state will be controlled by the component.
@@ -209,6 +211,9 @@
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the index state will be controlled by the component.
 * **Recommendation:** Set the "p-stateful" flag.
+* **V4 Behavior:** The `selected` prop is ignored.
+* **V3 Behavior:** The stateful version accepts `selected` to set the initial selected state.
+* **Recommendation:** Set the `p-stateful` flag and set the initial `selectedIndex` in `initialState`.
 
 ### SelectionList
 * **V4 Behavior:** The component controls `queryString`, `showOnlySelected`, and `selectedItemIds` if they aren't defined as props. The initial values can be set with `initialState`.

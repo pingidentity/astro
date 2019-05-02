@@ -48,6 +48,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 * @param {string} [selected]
 *     The text value of the item to select initially. Used only when stateless=false.
 *     stateless components must use 'selectedIndex'. Is mutually exclusive with "selectedIndex".
+*     Will be removed in v4.
 * @param {number} [selectedIndex=0]
 *     The index of the selected label. Is mutually exclusive with "selected".
 *
@@ -81,6 +82,13 @@ export default class RockerButton extends React.Component {
                 message: `The 'selectedIndex' prop will no longer serve as an initial state for RockerButton. ` +
                     `If it is present, it will control the current value of the component. ` +
                     `Set the 'p-stateful' flag to switch to this behavior now.`,
+            });
+        }
+
+        if (this.props.selected) {
+            cannonballChangeWarning({
+                message: `The 'selected' prop will be ignored. ` +
+                `Use the 'p-stateful' flag and the 'initialState.seletedIndex' prop`,
             });
         }
 
