@@ -1,0 +1,56 @@
+.input-file {
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1em;
+    @include font-pn-regular;
+    @include break-word;
+
+    &.input-file--selected {
+        background-color: $color-white;
+    }
+
+    &__selected-title {
+        position: absolute;
+        top: -6px;
+        left: 20px;
+        text-transform: uppercase;
+        padding: 0 10px;
+        background: $color-white;
+        color: $color-strong-neutral-50;
+    }
+    &__selected-content {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid $color-strong-neutral-70;
+        border-radius: 3px;
+        padding: $spacing-lg+5 $spacing-lg $spacing-lg $spacing-lg+5;
+    }
+    &__info {
+        display: flex;
+    }
+    &__remove-btn {
+        margin: 0 0 0 $spacing-xl;
+    }
+    &__file {
+        display: flex;
+        flex-direction: column;
+    }
+    &__file-icon {
+        margin-top: -4px;
+        color: $color-strong-neutral-10;
+    }
+    &__file-name {
+        padding: 0 $spacing-xs 0 0;
+        @include text-value;
+    }
+    &__file-data {
+        margin: 7px 0 0;
+        padding: 7px $spacing-xs 0 0;
+        border-top: 1px solid $color-strong-neutral-70;
+        color: $color-strong-neutral-50;
+    }
+}

@@ -87,8 +87,8 @@ describe("FileDrop", function () {
         const fileName = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-file-name`);
         expect(fileName.textContent).toBe(customFileName);
 
-        const label = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-label`);
-        expect(label.textContent).toContain(defaultStrings.change);
+        const changeLink = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-change-link`);
+        expect(changeLink.textContent).toContain(defaultStrings.change);
 
         const removeLink = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-remove-link`);
         expect(removeLink.textContent).toBe(defaultStrings.remove);
@@ -104,8 +104,8 @@ describe("FileDrop", function () {
         const fileName = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-file-name`);
         expect(fileName.textContent).toBe(customFileName);
 
-        const label = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-label`);
-        expect(label.textContent).toContain(customStrings.change);
+        const changeLink = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-change-link`);
+        expect(changeLink.textContent).toContain(customStrings.change);
 
         const removeLink = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-remove-link`);
         expect(removeLink.textContent).toBe(customStrings.remove);
@@ -135,6 +135,17 @@ describe("FileDrop", function () {
         expect(onValueChange).toHaveBeenCalledWith(evtObj.target.files[0], evtObj);
 
     });
+
+    it("triggers the input click when _clickInput method is triggered", function () {
+        const onValueChange = jest.fn();
+        const component = getComponent();
+        component.fileInput.click = onValueChange;
+
+        expect(onValueChange).not.toHaveBeenCalled();
+        component._clickInput();
+        expect(onValueChange).toHaveBeenCalled();
+    });
+
 
     it("Triggers onValueChange on drop", function () {
         const onValueChange = jest.fn();

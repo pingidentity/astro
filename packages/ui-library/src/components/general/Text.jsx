@@ -28,16 +28,19 @@ const textTypes = {
 *     Class name(s) to add to the top-level container/div
 * @param {string} [type]
 *     Style of text
+* @param {string} [inline=false]
+*     Displays inline when true
 */
 
 const Text = ({
     children,
     className,
     "data-id": dataId,
+    inline,
     type,
 }) => (
     <div
-        className={classnames("text-component", className, `text-${type}`)}
+        className={classnames("text-component", className, `text-${type}`, inline ? "text-component--inline" : null)}
         data-id={dataId}
     >
         {children}

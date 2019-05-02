@@ -6,6 +6,30 @@ import _ from "underscore";
 
 
 /**
+* @callback FileDrop~onRemove
+*/
+
+/**
+* @callback FileDrop~onValueChange
+*
+* @param {Object} file
+*     The file object
+* @param {Object} e
+*     The even object provided with the onChange event
+*/
+
+/**
+* @callback FileDrop~onValidateFile
+*
+* @param {boolean} isValidFile
+*     A boolean indicating whether the file type is one the accepted file types.
+* @param {Object} file
+*     The file object
+* @param {Object} e
+*     The even object provided with the onChange event
+*/
+
+/**
  * @class FileDrop
  * @desc A single-selection component with big icons and titles.
  *
@@ -13,12 +37,16 @@ import _ from "underscore";
  *     Defines the "data-id" for top-level HTML container.
  * @param {string[]} [accept]
  *     An optional array of the the allowed file mime types or file extensions.
+ * @param {string} [className]
+ *     Optional CSS classname(s) applied to top-level container.
  * @param {string} [fileName]
  *     The name of the currently selected file.
- * @param {function} [onRemove]
+ * @param {FileDrop~onRemove} [onRemove]
  *     The callback triggered when the remove file link is clicked.
- * @param {function} [onValueChange]
- *     The callback triggered when a file is dropped or selected.
+ * @param {FileDrop~onValueChange} [onValueChange]
+ *     A callback triggered when a file is dropped or selected.
+ * @param {FileDrop~onValidateFile} [onValidateFile]
+ *     The callback triggered when when a file is selected that idicates if the selected file type matches those allowed by the "accept" prop.
  * @param {Object} [strings]
  *     An object containing the various blurbs of text rendered in the component.
  *
@@ -36,8 +64,10 @@ export default class FileDrop extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         accept: PropTypes.array,
+        className: PropTypes.string,
         fileName: PropTypes.string,
         onRemove: PropTypes.func,
+        onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
         strings: PropTypes.objectOf(PropTypes.string),
     };
@@ -45,6 +75,7 @@ export default class FileDrop extends Component {
     static defaultProps = {
         "data-id": "input-filedrop",
         accept: [],
+        fileInput: false,
         onValidateFile: _.noop,
         onValueChange: _.noop,
         strings: {},
@@ -96,6 +127,12 @@ export default class FileDrop extends Component {
     }
 
     _handleFileChange = (file, e) => {
+
+        // needed for when canceling out of the file dialog
+        if (!file) {
+            return;
+        }
+
         const isValidFile = this._validateFile(file);
 
         this.props.onValidateFile(isValidFile, file, e);
@@ -107,10 +144,9 @@ export default class FileDrop extends Component {
         this.props.onValueChange(file, e);
     }
 
-    _renderInput = (labelContent) => {
+    _renderInput = () => {
         return (
             <label key="label" data-id={`${this.props["data-id"]}-label`}>
-                {labelContent}
                 <input
                     data-id={`${this.props["data-id"]}-input`}
                     type="file"
@@ -121,8 +157,11 @@ export default class FileDrop extends Component {
         );
     }
 
-    _renderString = (key) => {
-        return this.props.strings[key] || this.defaultStrings[key];
+    _clickInput = () => {
+
+        console.log(">>> _clickInput");
+        console.log("this.fileInput: ", this.fileInput);
+        this.fileInput.click();
     }
 
     componentDidMount () {
@@ -162,63 +201,80 @@ export default class FileDrop extends Component {
     }
 
     render () {
-        const fileSelected = !!this.props.fileName;
+        const {
+            renderContent,
+            className,
+            "data-id": dataId,
+            fileName,
+            hovered,
+            onRemove,
+        } = this.props;
+
+        const fileSelected = !!fileName;
         const classNames = {
-            "input-filedrop--hover": this.state.hovered,
+            "input-filedrop--hover": hovered,
             "input-filedrop--selected": fileSelected,
         };
+        const text = { ...this.defaultStrings, ...this.props.strings };
+        const customContent = typeof renderContent === "function";
 
         return (
             <div
-                data-id={this.props["data-id"]}
+                data-id={dataId}
                 ref={ (df) => this.dropFile = df }
-                className={classnames("input-filedrop", classNames)}>
+                className={classnames("input-filedrop", className, classNames)}>
 
-                {!fileSelected && ([
-                    <div className="input-filedrop__upload-text" key="input-filedrop__upload-text">
-                        <div data-id={`${this.props["data-id"]}-drop-text`}>
-                            {this._renderString("drop")}
-                        </div>
-                        <div data-id={`${this.props["data-id"]}-separator-text`}>
-                            {this._renderString("separator")}
-                        </div>
+                {customContent && renderContent({ inputRef: this.fileInput })}
+                {!customContent && (
+                    fileSelected ? (
                         <div
-                            data-id={`${this.props["data-id"]}-select-link`}
-                            className="input-filedrop__link">
-                            {this._renderString("select")}
-                        </div>
-                    </div>,
-                    this._renderInput()
-                ])}
-                {fileSelected && (
-                    <div
-                        className="input-filedrop__selected-content"
-                        title={this.props.fileName}>
+                            className="input-filedrop__selected-content"
+                            title={fileName}>
 
-                        <span
-                            data-id={`${this.props["data-id"]}-icon`}
-                            className="icon-check icon__rounded input-filedrop__icon"
-                        />
-                        <span
-                            data-id={`${this.props["data-id"]}-file-name`}
-                            className="input-filedrop__selected-text" >
-                            {this.props.fileName}
-                        </span>
-                        {this._renderInput(
-                            <span className="input-filedrop__link input-filedrop__divider">
-                                {this._renderString("change")}
-                            </span>
-                        )}
-                        {this.props.onRemove && (
                             <span
-                                data-id={`${this.props["data-id"]}-remove-link`}
-                                className="input-filedrop__link input-filedrop__divider"
-                                onClick={this.props.onRemove}>
-                                {this._renderString("remove")}
+                                data-id={`${dataId}-icon`}
+                                className="icon-check icon__rounded input-filedrop__icon"
+                            />
+                            <span
+                                data-id={`${dataId}-file-name`}
+                                className="input-filedrop__selected-text"
+                            >
+                                {fileName}
                             </span>
-                        )}
-                    </div>
+                            <span
+                                data-id={`${dataId}-change-link`}
+                                onClick={this._clickInput}
+                                className="input-filedrop__link input-filedrop__divider"
+                            >
+                                {text.change}
+                            </span>
+                            {onRemove && (
+                                <span
+                                    data-id={`${dataId}-remove-link`}
+                                    className="input-filedrop__link input-filedrop__divider"
+                                    onClick={onRemove}
+                                >
+                                    {text.remove}
+                                </span>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="input-filedrop__upload-text" key="input-filedrop__upload-text">
+                            <div data-id={`${dataId}-drop-text`}>
+                                {text.drop}
+                            </div>
+                            <div data-id={`${dataId}-separator-text`}>
+                                {text.separator}
+                            </div>
+                            <div
+                                data-id={`${dataId}-select-link`}
+                                className="input-filedrop__link">
+                                {text.select}
+                            </div>
+                        </div>
+                    )
                 )}
+                {this._renderInput()}
             </div>
         );
     }

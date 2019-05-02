@@ -32,4 +32,12 @@ describe("Text", function () {
 
         expect(element).toBeTruthy();
     });
+
+    it("renders as inline", function () {
+        const component = getComponent({ inline: true });
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "text-component--inline");
+
+        expect(element).toBeTruthy();
+    });
 });

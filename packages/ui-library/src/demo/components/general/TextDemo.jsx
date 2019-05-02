@@ -13,8 +13,8 @@ const TextDemo = () => {
                 If these lines aren't straight, your water's going to run
                 right out of your painting and get your floor wet.
                 You can't have light without dark. You can't know happiness unless you've known sorrow.
-                It's a super day, so why not make a beautiful sky? I think there's an
-                artist hidden in the bottom of every single one of us. It is a lot of fun.
+                It's a super day, so why not make a beautiful sky? <Text inline type="success">I think there's an
+                artist hidden in the bottom of every single one of us.</Text> It is a lot of fun.
             </Text>
             <Text type="primary">
                 There are no limits in this world. Tree trunks grow however makes them happy.
