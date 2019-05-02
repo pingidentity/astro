@@ -17,7 +17,6 @@
     .recharts-tooltip-wrapper {
         border-radius: 5px !important;
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
-
     }
 
     &__greeting {
@@ -27,9 +26,15 @@
         left: 25px;
         text-transform: uppercase;
         font-size: 18px;
+        &--hidden {
+            visibility: hidden;
+        }
     }
 
     &__center-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         color: $color-white;
         @include font-pn-light;
         margin: 0 0 15px;
@@ -118,12 +123,7 @@
     font-size: 14px;
     text-transform: uppercase;
     color: $color-accent-neutral-10;
+    &__bottom-value {
+        color: $color-charting-orange;
+    }
 }
-
-
-
-.hero-tooltip__bottom-value {
-    color: #ffa500;
-}
-
-

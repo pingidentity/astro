@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
+import classnames from "classnames";
+import _ from "underscore";
+import { BarChart, XAxis, Tooltip, Bar, Cell } from "recharts";
 import RockerButton from "../../forms/RockerButton";
 import PageSpinner from "../../general/PageSpinner";
-import { BarChart, XAxis, Tooltip, Bar, Cell } from "recharts";
-import _ from "underscore";
-
 
 /**
 * @class HeroChart
@@ -96,9 +97,30 @@ const CustomTooltip = (props) => {
 };
 
 export default class HeroChart extends Component {
+
     state = {
         barSelected: null,
+        isGreetingHidden: false
     };
+
+    componentDidMount() {
+        this._handleResize();
+        window.addEventListener("resize", this._handleResize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this._handleResize);
+    }
+
+    _handleResize = _.debounce(() => {
+        const greetingElement = ReactDOM.findDOMNode(this._greeting);
+        const titleElement = ReactDOM.findDOMNode(this._title);
+        // +60px to width described in the requirements
+        const greetingWidth = greetingElement.clientWidth + greetingElement.offsetLeft + 60;
+        const titleOffsetLeft = titleElement.offsetLeft;
+
+        this.setState({ isGreetingHidden: greetingWidth >= titleOffsetLeft });
+    }, 100);
 
     _handleBarMouseOver = (key, index) => () => {
         this.setState({ barSelected: `${key}-${index}` });
@@ -238,13 +260,21 @@ export default class HeroChart extends Component {
         };
 
         const heroStyles = { backgroundImage: bgImage ? `url("${bgImage}")` : null };
+        const greetingClassNames = classnames(
+            "hero-chart__greeting",
+            { "hero-chart__greeting--hidden": this.state.isGreetingHidden }
+        );
 
         return (
             <div data-id={dataId} className="hero-chart" style={heroStyles}>
-                {(greeting || greetingText) && <div className="hero-chart__greeting">{greeting || greetingText}</div>}
+                {(greeting || greetingText) &&
+                    <div className={greetingClassNames} ref={node => this._greeting = node}>
+                        {greeting || greetingText}
+                    </div>
+                }
                 {!errorMessage &&
                     <div key="center-text" className="hero-chart__center-text">
-                        <div className="hero-chart__title">{title || titleText}</div>
+                        <div className="hero-chart__title" ref={node => this._title = node}>{title || titleText}</div>
                         <div className="hero-chart__value">{value || totalValue}</div>
                         <div className="hero-chart__subtitle">{subtitle || subtitleText}</div>
                     </div>

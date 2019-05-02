@@ -3,6 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../HeroChart");
 jest.dontMock("../BarChart");
 jest.dontMock("../../../forms/RockerButton");
+jest.useFakeTimers();
 
 describe("HeroChart", function () {
     const React = require("react");
@@ -50,6 +51,23 @@ describe("HeroChart", function () {
         const container = TestUtils.findRenderedDOMNodeWithDataId(component, defaultProps["data-id"]);
 
         expect(container).toBeTruthy();
+    });
+
+    it("should call _handleResize after mounting", () => {
+        const component = getComponent();
+
+        component.setState = jest.fn();
+        jest.runAllTimers();
+        expect(component.setState).toHaveBeenCalled();
+    });
+
+    it("should unsubscribe all handlers after unmounting", () => {
+        const component = getComponent();
+
+        spyOn(window, "removeEventListener");
+        component.componentWillUnmount();
+
+        expect(window.removeEventListener).toHaveBeenCalled();
     });
 
     it("renders the strings", function () {
