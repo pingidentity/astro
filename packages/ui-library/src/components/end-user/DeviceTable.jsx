@@ -7,7 +7,14 @@ import DeviceIcon from "./DeviceIcon";
 
 const formatBodyData = (devices, onDelete) => {
     return devices.map(({ name, type }) => {
-        const nameNode = <div><DeviceIcon icon={type.toLowerCase()} /> {name} </div>;
+        const nameNode = (
+            <React.Fragment>
+                <DeviceIcon icon={type.toLowerCase()} />
+                <div className="device-name">
+                    {name}
+                    <span className="device-name__type">{type}</span>
+                </div>
+            </React.Fragment>);
         return [nameNode, type, <Button iconName="delete" onClick={onDelete(name)} inline/>];
     });
 };
