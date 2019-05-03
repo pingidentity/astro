@@ -58,7 +58,8 @@ describe("Reports Template Integration", function () {
 
         ReportsTemplatePage.clickUnitText();
 
-        ReportsTemplatePage.blurElement();
+        //ReportsTemplatePage.blurElement();
+        // maybe this line makes it flakey?
 
         // Wait for animations to complete
 

@@ -34,7 +34,14 @@ class ExpandableRowDemo extends React.Component {
 
     _handleValueChange = index => value => this.setState({ [`value${index}`]: value });
 
-    _handleReorder = index => (from, to) => this.setState({ [`order${index}`]: (to >= from) ? to - 1 : to });
+    _handleReorder = index => (from, to) => {
+        const destination = (to > from) ? to - 1 : to;
+
+        this.setState({
+            [`order${index}`]: destination,
+            [`value${index}`]: destination,
+        });
+    }
 
     _handleDelete = () => {
         this.setState({

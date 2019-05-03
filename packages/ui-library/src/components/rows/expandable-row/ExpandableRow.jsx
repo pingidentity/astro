@@ -362,7 +362,7 @@ class StatefulExpandableRow extends React.Component {
     render() {
         const ordering = this.props.ordering
             ? _.defaults({
-                position: this.state.positionValue !== undefined && this.state.positionValue !== ""
+                position: this.state.positionValue !== undefined
                     ? this.state.positionValue
                     : this.props.ordering.position,
                 onReorder: this._handleReorder,
@@ -394,10 +394,6 @@ class OrderingInput extends React.Component {
         const { positionValue = this.props.position } = this.props;
         return positionValue;
     }
-    _getFromPositionForInput = () => (this.state.value !== undefined || this.props.positionValue !== undefined)
-        ? this.props.position
-        : undefined;
-
     _positionInRange = number => {
         const { total } = this.props;
 
@@ -428,15 +424,18 @@ class OrderingInput extends React.Component {
     }
 
     _handleKey = (e) => {
-        const position = this._getValue();
+        // sometimes position is not the actual position but something to show in the field,
+        // so it still makes sense to check the range
+        const position = this._positionInRange(this.props.position);
+        const positionValue = this._getValue();
 
         if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP) {
             // this is +2 rather than +1 because it's the index we're inserting this record before
-            this._handleReorder(position, this._positionInRange(position + 2));
+            this._handleReorder(position, this._positionInRange(positionValue + 2));
         } else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
-            this._handleReorder(position, this._positionInRange(position - 1));
+            this._handleReorder(position, this._positionInRange(positionValue - 1));
         } else if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) {
-            this._handleReorder(this._getFromPositionForInput(), this._positionInRange(position));
+            this._handleReorder(position, this._positionInRange(positionValue));
         } else {
             return;
         }
@@ -446,7 +445,7 @@ class OrderingInput extends React.Component {
     _handleDrag = this._stopEvent;
 
     _handleBlur = () => this._handleReorder(
-        this._getFromPositionForInput(),
+        this._positionInRange(this.props.position), // just making sure it's in range in case we're not being passed the actual position
         this._positionInRange(this._getValue())
     );
 
@@ -454,7 +453,7 @@ class OrderingInput extends React.Component {
 
     _handleReorder = (from, to) => {
         if (to !== "") {
-            this.props.onReorder(from, to);
+            this.props.onReorder(from !== "" ? from : undefined, to);
         }
         this.setState({ value: undefined });
     }
@@ -523,7 +522,7 @@ class StatelessExpandableRow extends React.Component {
         rowMessage: PropTypes.object,
         waiting: PropTypes.bool,
         ordering: PropTypes.shape({
-            position: PropTypes.number,
+            position: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([""])]),
             total: PropTypes.number,
             onReorder: PropTypes.func,
             onPositionValueChange: PropTypes.func,
