@@ -204,29 +204,27 @@ describe("StatAreaCard", () => {
         expect(myFunction).toBeCalledTimes(2);
     });
 
-    it("calls onMouseOut", function () {
+    it("_onMouseOut should call onMouseOut handler only once", function () {
         const myFunction = jest.fn();
-
-        const testData = {
-            id: "my-id",
-            value: "my-value",
-        };
-
-        ReactTestUtils.renderIntoDocument(
-            <div>
-                <StatAreaCard.CustomTooltip
-                    onMouseOut={myFunction}
-                    yAxisKey={"value"}
-                    xAxisKey={"id"}
-                    payload={[
-                        {
-                            payload: testData
-                        }
-                    ]}
-                />
-            </div>
+        const component = ReactTestUtils.renderIntoDocument(
+            <StatAreaCard {...defaultProps} onMouseOut={myFunction} />
         );
 
-        expect(myFunction).toBeCalled();
+        component._onMouseOut();
+        component._onMouseOut();
+        component._onMouseOut();
+        jest.runAllTimers();
+        expect(myFunction).toBeCalledTimes(1);
+    });
+
+    it("_onMouseOut should reset \"lastHover\" value", function () {
+        const myFunction = jest.fn();
+        const component = ReactTestUtils.renderIntoDocument(
+            <StatAreaCard {...defaultProps} onMouseOut={myFunction} />
+        );
+
+        component._onMouseOut();
+        jest.runAllTimers();
+        expect(component.lastHover).toBe(null);
     });
 });

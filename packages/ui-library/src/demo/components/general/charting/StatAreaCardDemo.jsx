@@ -16,8 +16,8 @@ class StatAreaCardDemo extends React.Component {
     state = {
         data: demoChartData.days,
         loading: false,
-        subtitle: "AS OF TODAY",
-        yvalue: 72,
+        subtitle: _.last(demoChartData.days).id,
+        yvalue: _.last(demoChartData.days).value,
     };
 
     _toggleLoading = () => {
@@ -52,16 +52,15 @@ class StatAreaCardDemo extends React.Component {
         });
     };
 
-    _handleOnMouseOver = (yvalue, xvalue) => {
-        console.log(`onMouseOver called with: ${yvalue}, ${xvalue}`);
-
-        this.setState(
-            () => ({ yvalue })
-        );
+    _handleOnMouseOver = (yvalue, subtitle) => {
+        this.setState({ yvalue, subtitle });
     };
 
     _handleOnMouseOut = () => {
-        console.log("onMouseOut called");
+        this.setState({
+            subtitle: _.last(this.state.data).id,
+            yvalue: _.last(this.state.data).value
+        });
     };
 
     _handleMakeDefault = () => {

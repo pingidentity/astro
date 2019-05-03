@@ -11,7 +11,6 @@ import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import classnames from "classnames";
 import _ from "underscore";
 
-
 /**
  * @class StatAreaCard
  * @desc A card that displays a single statistic, but can be flipped to reveal others as well.
@@ -67,7 +66,10 @@ class StatAreaCard extends React.Component {
         }
     }, 10);
 
-    _onMouseOut = () => _.debounce(this.props.onMouseOut(), 10);
+    _onMouseOut = _.debounce(() => {
+        this.props.onMouseOut();
+        this.lastHover = null;
+    }, 10);
 
     render() {
         const dataId = this.props["data-id"];
@@ -119,7 +121,7 @@ class StatAreaCard extends React.Component {
                             <div key="subtitle" className="dashboard-card__subtitle">
                                 {this.props.subtitle}
                             </div>,
-                            <ResponsiveContainer width="100%" height={80}>
+                            <ResponsiveContainer key="area-chart-container" width="100%" height={80}>
                                 <AreaChart
                                     key="chart"
                                     className="stat-area-card__chart"
