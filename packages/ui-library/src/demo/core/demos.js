@@ -189,13 +189,6 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_FileDropDemo.jsx.html"
                     },
                     {
-                        label: "File Input",
-                        demo: require("../components/forms/FileInputDemo"),
-                        pathToDoc: "components/forms/FileInput.jsx",
-                        pathToSource: "components_forms_FileInput.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FileInputDemo.jsx.html"
-                    },
-                    {
                         label: "File Upload",
                         demo: require("../components/forms/FileUploadDemo"),
                         pathToDoc: "components/forms/FileUpload.jsx",
@@ -1046,8 +1039,15 @@ module.exports = [
             },
             {
                 label: "Co-Development",
-                icon: "worker-app",
+                icon: "robot",
                 children: [
+                    {
+                        label: "File Input",
+                        demo: require("../components/forms/FileInputDemo"),
+                        pathToDoc: "components/forms/FileInput.jsx",
+                        pathToSource: "components_forms_FileInput.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FileInputDemo.jsx.html"
+                    },
                     {
                         label: "Message Button",
                         demo: require("../components/buttons/MessageButtonDemo"),
