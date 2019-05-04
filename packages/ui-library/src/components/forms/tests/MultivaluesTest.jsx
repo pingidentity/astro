@@ -235,12 +235,6 @@ describe("Multivalues", function () {
 
     });
 
-    it("adjusts input width on input change", function () {
-        ReactTestUtils.Simulate.change(input, { target: { value: "" } });
-
-        expect(input.style.width).toBe("20px");
-    });
-
     it("throws error when deprecated prop 'id' is passed in", function () {
         var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
@@ -520,6 +514,27 @@ describe("Multivalues", function () {
 
         dropdownInput.simulate("keydown", { keyCode: KeyCodes.ARROW_DOWN });
         expect(wrapper.state().listOpen).toBeTruthy();
+    });
+
+    it("calls onValueChange when editing the draft if the includeDraftInEntries prop is set", function() {
+        const valueChangeCallback = jest.fn();
+        const wrapper = getWrapper({ options, onValueChange: valueChangeCallback, includeDraftInEntries: true });
+
+        expect(valueChangeCallback).not.toHaveBeenCalled();
+        const dropdownInput = wrapper.find("[data-id='value-entry']");
+        dropdownInput.simulate("change", { target: { value: "genn" } });
+        expect(valueChangeCallback).toHaveBeenCalled();
+    });
+
+    it("does not call onValueChange when committing the draft if the includeDraftInEntries prop is set", function() {
+        const valueChangeCallback = jest.fn();
+        const wrapper = getWrapper({ options, onValueChange: valueChangeCallback, includeDraftInEntries: true });
+
+        const dropdownInput = wrapper.find("[data-id='value-entry']");
+        dropdownInput.simulate("change", { target: { value: "genn" } });
+        expect(valueChangeCallback.mock.calls.length).toBe(1);
+        dropdownInput.simulate("blur");
+        expect(valueChangeCallback.mock.calls.length).toBe(1);
     });
 
 });

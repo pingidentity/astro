@@ -131,6 +131,9 @@ class MultivaluesOption extends Component {
  *     - The component will display the corresponding labels
  *     - Only valid options can be added as entries
  *     - An auto-complete list will appear while focused
+ * @param {boolean} [includeDraftInEntries=false]
+ *     When set to true, the draft that is currently being edited is treated
+ *     as the last entry in the list of entries.
  *
  *
  * @example
@@ -180,6 +183,7 @@ class Multivalues extends Component {
         required: PropTypes.bool,
         stacked: PropTypes.bool,
         autoHeight: PropTypes.bool,
+        includeDraftInEntries: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -194,6 +198,7 @@ class Multivalues extends Component {
             value !== "" && (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode) || isSpace(keyCode))
         ),
         onValueChange: _.noop,
+        includeDraftInEntries: false,
     };
 
     constructor(props) {
@@ -211,10 +216,7 @@ class Multivalues extends Component {
         }
     }
 
-    hiddenDiv = null;
-
     state = {
-        inputWidth: "20px",
         validValue: true,
         listOpen: false,
         draft: "",
@@ -223,21 +225,28 @@ class Multivalues extends Component {
         activeEntry: -1,
     };
 
+    _getCommittedEntries = () => (this.props.includeDraftInEntries && this.state.draft)
+        ? this.props.entries.slice(0, -1)
+        : this.props.entries;
+
+    _getDraft = () => (this.props.includeDraftInEntries && this.state.draft)
+        ? this.props.entries[this.props.entries.length - 1]
+        : this.state.draft;
+
     /**
     * Dynamically expand the input as the user types
     * @param {object} e - the event
     * @private
     */
-    _handleChange = ({ target: { value } }) => {
-        //Sets the html of a hidden div to calculate exact pixel width of the input string
-        this.hiddenDiv.innerHTML = value;
-        //add 20 pixels so input has room for next character
+    _handleChange = (e, value = e.target.value) => {
+        const { options, onValueChange } = this.props;
 
-        const { options } = this.props;
+        if (this.props.includeDraftInEntries) {
+            onValueChange([...this._getCommittedEntries(), value]);
+        }
 
         // manage the input element, open the list if applicable, make sure we're highlighting a valid item, unselect entries
         this.setState(({ highlightedOption }) => ({
-            inputWidth: this.hiddenDiv.offsetWidth + 20 + "px",
             draft: value,
             listOpen: options ? true : false,
             highlightedOption: (highlightedOption < 0 && value !== "") ? 0 : highlightedOption,
@@ -253,7 +262,7 @@ class Multivalues extends Component {
     _handleBlur = () => {
         this.setState({ focused: false });
 
-        const { draft } = this.state;
+        const draft = this._getDraft();
 
         if (draft) {
             this._addInputValue(draft);
@@ -276,18 +285,16 @@ class Multivalues extends Component {
      */
     _addInputValue = value => {
         const {
-            onValueChange,
             entries,
+            onValueChange,
+            includeDraftInEntries,
         } = this.props;
 
-        onValueChange([
-            ...entries,
-            value
-        ]);
+        if (!includeDraftInEntries) {
+            onValueChange([...entries, value]);
+        }
 
-        //reset the input width
         this.setState({
-            inputWidth: "20px",
             draft: "",
             highlightedOption: -1,
             listOpen: false,
@@ -316,14 +323,14 @@ class Multivalues extends Component {
     _handleKeyDown = (e) => {
         const { keyCode } = e;
         const {
-            draft,
             activeEntry,
             highlightedOption,
         } = this.state;
         const {
-            entries,
             onNewValue,
         } = this.props;
+        const entries = this._getCommittedEntries();
+        const draft = this._getDraft();
 
         //When delete key is pressed, delete previous string if nothing is entered
         if (isBackSpace(keyCode) && draft === "") {
@@ -338,7 +345,7 @@ class Multivalues extends Component {
 
         // escape key clears any entered text
         if (isEsc(keyCode)) {
-            this.setState({ draft: "" });
+            this._handleChange(null, "");
         }
 
         const { options } = this.props;
@@ -393,7 +400,7 @@ class Multivalues extends Component {
 
         if (draft === "") {
             // the draft is empty
-            if (isSpace(keyCode)) {
+            if (isSpace(keyCode) || isComma(keyCode)) {
                 // when no text is entered, space should toggle the dropdown
                 e.preventDefault();
                 this._toggleList();
@@ -496,7 +503,6 @@ class Multivalues extends Component {
             autoFocus,
             autoHeight,
             className: classNameProp,
-            entries,
             errorMessage,
             label,
             labelText,
@@ -509,12 +515,13 @@ class Multivalues extends Component {
 
         const {
             activeEntry,
-            draft,
             focused,
             highlightedOption,
-            inputWidth,
             listOpen,
         } = this.state;
+
+        const entries = this._getCommittedEntries();
+        const draft = this._getDraft();
 
         const className = classnames(classNameProp, "input-multivalues", {
             required: required && entries.length === 0,
@@ -530,22 +537,6 @@ class Multivalues extends Component {
                 "entries--auto-height": autoHeight,
             }
         );
-
-        //this style is for the hidden div that allows us to get an accurate
-        //size for our dynamic input
-        const hiddenStyle = {
-            width: "auto",
-            display: "inline-block",
-            visibility: "hidden",
-            position: "absolute",
-            zIndex: "-1",
-            bottom: "0",
-            left: "0"
-        };
-
-        const inputStyle = {
-            width: [inputWidth]
-        };
 
         const entryNodes = _.map(entries, (entryValue, index) => {
             const entry = options
@@ -579,27 +570,27 @@ class Multivalues extends Component {
             >
                 <div className={entryClassNames} data-id="entries" ref={el => this.inputBox = el} onMouseDown={noFocus}>
                     {entryNodes}
-                    <div
-                        className="value-input"
-                    >
-                        <input
-                            data-id="value-entry"
-                            style={inputStyle}
-                            type="text"
-                            tabIndex="0"
-                            name={name}
-                            onBlur={this._handleBlur}
-                            onChange={this._handleChange}
-                            onClick={this._handleClick}
-                            onKeyDown={this._handleKeyDown}
-                            onMouseDown={dontPropagate}
-                            autoFocus={autoFocus}
-                            onFocus={this._handleFocus}
-                            value={draft}
-                            autoComplete="off"
-                        />
+                    <div className="value-input">
+                        <div className="value-input__wrapper">
+                            <input
+                                data-id="value-entry"
+                                className="value-input__input"
+                                type="text"
+                                tabIndex="0"
+                                name={name}
+                                onBlur={this._handleBlur}
+                                onChange={this._handleChange}
+                                onClick={this._handleClick}
+                                onKeyDown={this._handleKeyDown}
+                                onMouseDown={dontPropagate}
+                                autoFocus={autoFocus}
+                                onFocus={this._handleFocus}
+                                value={draft}
+                                autoComplete="off"
+                            />
+                        </div>
+                        <div className="value-input__hidden">{draft}</div>
                     </div>
-                    <div ref={ref => this.hiddenDiv = ref} style={hiddenStyle} />
                 </div>
                 {filteredOptions && (filteredOptions.length > 0) && (listOpen) && (
                     <PopperContainer

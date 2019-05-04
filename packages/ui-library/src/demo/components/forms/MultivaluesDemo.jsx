@@ -132,7 +132,9 @@ class MultivaluesDemo extends React.Component {
                         stacked={true}
                         name="mv-demo"
                         required={true}
+                        includeDraftInEntries
                     />
+                    <p>State: {this.state.urlEntries.join(", ")}</p>
                 </InputRow>
 
                 <InputRow>
