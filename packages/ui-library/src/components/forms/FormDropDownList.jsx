@@ -136,7 +136,8 @@ const SearchTypes = {
 *     Set the flag for "use-portal" to render with popper.js and react-portal
 *
 * @param {array<FormDropDownList~option>} options
-*    Array of options for the dropdown list. Each option should have a label and value.
+*    Array of options for the dropdown list. Each option should have a label and value,
+*    but value is required and label is not. If no label is passed in Value will take the place of label.
 *    Additional properties of the option object will be passed as props to the contentType.
 * @param {FormDropDownList~option} selectedOption
 *    The selected list option.
@@ -242,14 +243,21 @@ const SearchTypes = {
 *
 * @param {string} label
 *    The label to render.
+* @param {string} value
+*    The value to render if label is not provided. This value is required.
 */
 class FormDropDownListDefaultContent extends React.Component {
     static propTypes = {
-        label: PropTypes.string
+        label: PropTypes.string,
+        value: PropTypes.string.isRequired
+    };
+
+    static defaultProps = {
+        value: "",
     };
 
     render() {
-        return <span>{this.props.label}</span>;
+        return <span>{this.props.label ? this.props.label : this.props.value}</span>;
     }
 }
 
@@ -346,7 +354,12 @@ class FormDropDownListStateless extends React.Component {
         noneOptionLabelClassName: PropTypes.string,
         onValueChange: PropTypes.func,
         open: PropTypes.bool,
-        options: PropTypes.arrayOf(PropTypes.object).isRequired,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                label: PropTypes.string,
+                value: PropTypes.string.isRequired
+            })
+        ),
         onSearch: PropTypes.func,
         setSearchIndex: PropTypes.func,
         setSearchString: PropTypes.func,
@@ -427,8 +440,22 @@ class FormDropDownListStateless extends React.Component {
         this.props.setSearchIndex(index);
     };
 
+    _getOptionLabel = ({ label, value }) => {
+        if (label !== null && label !== undefined) {
+            return label;
+        } else {
+            return value;
+        }
+    }
+
     _filteredOptions = () => (this.props.canAdd || this.props.searchType === SearchTypes.BOX)
-        ? filterOptions(this.props.options, this.props.searchString)
+        ? filterOptions(_.map(this.props.options, (option) => {
+            return {
+                ...option,
+                label: this._getOptionLabel(option)
+            };
+        })
+        , this.props.searchString)
         : this.props.options;
 
     // Moving complexity of the stateful version's _handleToggle behavior here
@@ -791,6 +818,12 @@ class FormDropDownListStateless extends React.Component {
         ]
     )
 
+    _getSelectedOptionLabel = () => {
+        if (this.props.showSelectedOptionLabel && this.props.selectedOption) {
+            return this._getOptionLabel(this.props.selectedOption);
+        }
+    }
+
     _getReference = () => this.reference;
 
     _usePortal = () => hasFlag(this, "use-portal");
@@ -829,8 +862,7 @@ class FormDropDownListStateless extends React.Component {
                     this.props.selectedOption.iconName
                 }
             ),
-            selectedOptionLabel = this.props.showSelectedOptionLabel && this.props.selectedOption
-                ? this.props.selectedOption.label : "",
+            selectedOptionLabel = this._getSelectedOptionLabel(),
             inputValue = this._isBoxSearch() &&
                 this.didPressKey && this.props.open ? this.props.searchString : selectedOptionLabel;
 

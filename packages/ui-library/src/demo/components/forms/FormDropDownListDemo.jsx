@@ -7,7 +7,7 @@ import InputRow from "../../../components/layout/InputRow";
 const NUM_DEMOS = 12,
     OPTIONS = [
         { label: "One", value: "1", helpHintText: "Help text may be added to any drop-down option." },
-        { label: "Two", value: "2", group: 4 },
+        { value: "2", group: 4 },
         { label: "Three", value: "3", group: 1 },
         { label: "Four", value: "4", group: 2 },
         { label: "Five", value: "5", group: 3 },
@@ -105,6 +105,23 @@ class FormDropDownListDemo extends React.Component {
                     />
                 </InputRow>
                 <div>Selected value: {this.state.selectedValue1.label}</div>
+                <br/>
+
+                <InputRow>
+                    <FormDropDownList
+                        options={[
+                            { value: "1" },
+                            { value: "2" },
+                            { value: "3" },
+                            { value: "4" }
+                        ]}
+                        autofocus={true}
+                        label="Autofocus with values as the labels"
+                        selectedOption={this.state.selectedValue12}
+                        onValueChange={this._handleValueChange(12)}
+                    />
+                </InputRow>
+                <div>Selected value: {this.state.selectedValue12.value}</div>
                 <br/>
 
                 <InputRow>

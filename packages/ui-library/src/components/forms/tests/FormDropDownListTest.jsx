@@ -26,7 +26,7 @@ describe("FormDropDownList", function () {
         { label: "Two", value: 2, group: 3 },
         { label: "Three", value: 3, group: 2 },
         { label: "Four", value: 4, group: 1 },
-        { label: "Five", value: 5 }
+        { label: "Five", value: 5 },
     ];
 
     var groups = [
@@ -844,6 +844,20 @@ describe("FormDropDownList", function () {
         const secondOption = TestUtils.findRenderedDOMNodeWithDataId(component, "option-1");
 
         expect(selected).toEqual(secondOption);
+    });
+
+    it("shows selected option that only has a value", function () {
+        const valueOption = { value: 6 };
+        const component = getComponent({
+            open: true,
+            selectedOption: valueOption,
+            options: [...options, valueOption],
+        });
+
+        const selected = TestUtils.findRenderedDOMNodeWithClass(component, "selected");
+        const span = TestUtils.findRenderedDOMNodeWithTag( selected, "span");
+
+        expect(span.textContent).toEqual("6");
     });
 
     it("fires Cannonball warning when use-portal isn't set", function() {
