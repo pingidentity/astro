@@ -10,7 +10,7 @@ const IconAnchor = props => <Anchor {...props}><span className="inline-icon icon
  *
  * @extends Anchor
  * @extends copiesText
- **/
+ */
 const CopyIcon = copiesText(IconAnchor);
 
 CopyIcon.defaultProps = {

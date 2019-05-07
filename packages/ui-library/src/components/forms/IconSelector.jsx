@@ -15,7 +15,7 @@ import classnames from "classnames";
  * @param {IconSelector~RadioGroup} labelText
  *     A string for to display a label above the icons.
  * @see FormRadioGroup
-**/
+*/
 
 /**
  * @typedef IconSelector~RadioGroupItem

@@ -38,7 +38,7 @@ import _ from "underscore";
 *         <TabContent label="Label One">One</TabContent>
 *         <TabContent label="Label Two">Two</TabContent>
 *    </TabSet>
-**/
+*/
 
 
 
@@ -137,7 +137,7 @@ class TabSet extends Component {
 * @example
 *   <TabContent label="Label One">One</TabContent>
 *   <TabContent label="Label Two">Two</TabContent>
-**/
+*/
 
 
 class TabContent extends Component {

@@ -61,7 +61,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *          >
  *          {markup}
  *     </ConfirmTooltip>
- **/
+ */
 
 
 class ConfirmTooltipBase extends Component {

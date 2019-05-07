@@ -10,7 +10,7 @@ var _ = require("underscore");
  *
  * @param {number} page
  *     Page number for the link that was clicked.
- **/
+ */
 
 /**
  * @class PageLinks
@@ -26,7 +26,7 @@ var _ = require("underscore");
  *
  *     <PageLinks currentPage = {currentPage} numPages = {numPages} onClick = {this._handlePageChange} />
  *
- **/
+ */
 
 class PageLinks extends React.Component {
     static propTypes = {
@@ -105,7 +105,7 @@ class PageLinks extends React.Component {
  *            perPage={5}
  *            total={this.state.items.length} />
  *
- **/
+ */
 
 module.exports = class extends React.Component {
     static displayName = "ColumnPagination";

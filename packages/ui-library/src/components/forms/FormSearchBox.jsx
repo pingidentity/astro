@@ -87,7 +87,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 *         queryString="keyword to search"
 *         placeholder="Search"
 *         onChange={this._filterOptions} />
-**/
+*/
 
 const searchBoxProgressiveState = createProgressiveState([{
     name: "queryString",

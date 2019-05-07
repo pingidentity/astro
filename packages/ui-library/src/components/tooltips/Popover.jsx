@@ -37,7 +37,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     If using a portal, the callback that's triggered then the PopperContainer is clicked
  * @param {string} [popperClassName]
  *     If using a portal, a className that's added to the PopperContainer
- **/
+ */
 
 class PopoverBase extends React.Component {
     static displayName = "Popover";

@@ -51,7 +51,6 @@
     "validator": "5.2.0"
   },
   "devDependencies": {
-    "@pingux/gulp-export": "^2.2.0",
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.4.0",
     "@babel/plugin-external-helpers": "^7.0.0",
@@ -61,6 +60,7 @@
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@pingux/gulp-export": "^2.2.0",
     "acorn": "^6.0.4",
     "babel-eslint": "10.0.1",
     "babel-jest": "^24.5.0",
@@ -98,8 +98,8 @@
     "isomorphic-fetch": "~2.2.1",
     "jasmine": "2.4.1",
     "jest-cli": "^24.5.0",
-    "jsdoc": "3.5.5",
-    "jsdoc-babel": "~0.3.0",
+    "jsdoc": "3.6.1",
+    "jsdoc-babel": "^0.5.0",
     "jsdoc-jsx": "0.1.0",
     "json-loader": "0.5.4",
     "lcov-parse": "0.0.10",

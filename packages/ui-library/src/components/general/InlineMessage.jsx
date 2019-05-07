@@ -12,7 +12,7 @@ var React = require("react"),
  * @callback InlineMessage~onClick
  * @param {object} e
  *          The ReactJS synthetic event object
- **/
+ */
 
 /**
  * @typedef {Object} InlineMessage~secondaryButtons
@@ -58,7 +58,7 @@ var React = require("react"),
  *         label="Do Something" onClick={doSomething}>
  *         Your message here
  *     </InlineMessage>
- **/
+ */
 class InlineMessage extends React.Component {
 
     static propTypes = {

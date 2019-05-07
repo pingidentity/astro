@@ -22,7 +22,7 @@ var React = require("react"),
  *     <Spinner show={this.state.show} defaultText="Loading...">
  *         {data}
  *     </Spinner>
- **/
+ */
 
 class Spinner extends React.Component {
 

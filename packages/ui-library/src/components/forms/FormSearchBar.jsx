@@ -37,7 +37,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     A content area that appears immediately to the right of the search field
  * @param {variable} [renderDocLink]
  *      When called it renders a documentation link
- **/
+ */
 
 class SearchBar extends React.Component {
 

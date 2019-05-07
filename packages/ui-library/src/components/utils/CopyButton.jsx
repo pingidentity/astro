@@ -7,7 +7,7 @@ import copiesText from "../../util/behaviors/copiesText";
  *
  * @extends Button
  * @extends copiesText
- **/
+ */
 const CopyButton = copiesText(Button);
 
 CopyButton.defaultProps = {

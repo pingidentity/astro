@@ -17,7 +17,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
  * @callback DetailsTooltip~onToggle
- **/
+ */
 
 /**
  * @class DetailsTooltip
@@ -80,7 +80,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *          disabled={false}>
  *           <p>what ever callout content is</p>
  *     </DetailsTooltip>
- **/
+ */
 
 const tooltipPlacements = {
     TOP: "top",
@@ -568,7 +568,7 @@ class DetailsTooltip extends React.Component {
 /**
  * @enum {string}
  * @desc Enum for the different styles for DetailsTooltip position.
- **/
+ */
 DetailsTooltip.positionStyles = {
     /** Add className {DetailsTooltip.positionStyles.LEFT} for positioning the tooltip to the left of the label. */
     LEFT: "left",

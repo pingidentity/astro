@@ -38,7 +38,7 @@ var React = require("react"),
 *         className="custom-css-class"
 *     />
 *
-**/
+*/
 
 class SelectionFilterLabel extends React.Component {
     static propTypes = {

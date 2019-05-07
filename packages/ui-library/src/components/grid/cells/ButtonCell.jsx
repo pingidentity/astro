@@ -23,7 +23,7 @@ var React = require("react"),
  * @example
  *     <ButtonCell value="Submit" onGridCellAction={this._handleCellSubmit} />
  *
- **/
+ */
 
 class ButtonCell extends React.Component {
 

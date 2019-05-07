@@ -14,7 +14,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 /**
  * @enum {string}
  * @alias Modal.Type
- **/
+ */
 var Type = {
     BASIC: "basic",
     DIALOG: "dialog",

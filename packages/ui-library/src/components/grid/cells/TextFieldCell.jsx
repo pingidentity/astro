@@ -24,7 +24,7 @@ var React = require("react"),
  * @example
  *     <TextFieldCell onGridCellAction={this._handleChange} />
  *
- **/
+ */
 
 class TextFieldCell extends React.Component {
 

@@ -7,7 +7,7 @@ import copiesText from "../../util/behaviors/copiesText";
  *
  * @extends FormTextField
  * @extends copiesText
- **/
+ */
 const CopyField = copiesText(FormTextFieldStateless, { value: "text" });
 
 CopyField.defaultProps = {

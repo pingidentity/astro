@@ -346,7 +346,7 @@ ProductNav.defaultProps = {
  *          Function that renders the product nav. Accepts props as the first argument and the default component as the second.
  * @param {string|object} [mode]
  *          Mode of the app "sandbox". Eiher title of the mode or object with title and color.
- **/
+ */
 
 /**
  * @callback HeaderBar~onEnvironmentChange

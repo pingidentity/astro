@@ -186,7 +186,7 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 *         </span>
 *      </ButtonBar>
 *
-**/
+*/
 
 class ButtonBar extends React.Component {
     static propTypes = {

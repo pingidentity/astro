@@ -7,7 +7,7 @@ var React = require("react"),
 
 /**
  * @callback Grid#Column~onSelectAllChange
- **/
+ */
 
 /**
  * @class Grid#Column

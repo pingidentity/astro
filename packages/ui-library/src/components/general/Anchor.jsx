@@ -13,7 +13,7 @@ import KeyboardUtils from "../../util/KeyboardUtils";
  *
  * @param {function} [onClick]
  *     Callback to be triggered when trigger is clicked.
- **/
+ */
 
 class Anchor extends React.Component {
     static propTypes = {

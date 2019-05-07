@@ -13,10 +13,10 @@ import classnames from "classnames";
  *     An array of the password strength labels in order from weakest to the strongest. Each displays according to the
  *     score.
  *
-]* @param {number} [score]
+ * @param {number} [score]
  *     The score is an integer value between 0-4. When zero, all bars are unfilled. Each following integer colors the
  *     corresponding number of bars.
- **/
+ */
 
 const PasswordStrengthMeter = (props) => {
     const {

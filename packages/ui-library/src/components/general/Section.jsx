@@ -17,7 +17,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *
  * @param {boolean} expanded
  *     Current expanded/collapsed state.
- **/
+ */
 
 /**
  * @class Section
@@ -63,7 +63,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *           </div>
  *     </Section>
  *
- **/
+ */
 
 
 export default class Section extends React.Component {

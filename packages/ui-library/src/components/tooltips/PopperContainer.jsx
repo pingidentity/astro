@@ -30,7 +30,7 @@ import classnames from "classnames";
  *     Turns off a popper.js feature that conflicts with rendering helphint inside dropdowns
  * @param {boolean} [positionFixed=false]
  *     Turns on a popper.js feature
- **/
+ */
 
 class PopperContainer extends React.Component {
     static propTypes = {

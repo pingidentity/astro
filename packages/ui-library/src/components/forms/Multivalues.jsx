@@ -34,7 +34,7 @@ const dontPropagate = e => e.stopPropagation();
  * @class MultivaluesOption
  * @private
  * @ignore
- **/
+ */
 class MultivaluesOption extends Component {
     static propTypes = {
         label: PropTypes.string.isRequired,
@@ -145,7 +145,7 @@ class MultivaluesOption extends Component {
  *        onValueChange={this._addEntries}
  *    />
  *
- **/
+ */
 
 
 class Multivalues extends Component {

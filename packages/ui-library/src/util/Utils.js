@@ -7,7 +7,7 @@ var moment = require("moment");
  * @enum {string}
  * @alias module:util/Utils.Browsers
  * @desc An enum of browsers.
- **/
+ */
 var browsers = {
     IE: "ie",
     EDGE: "edge",

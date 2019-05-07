@@ -26,7 +26,7 @@ import Button from "../../buttons/Button";
  *    The name of the row, to be displayed to the right of the other options.
  * @param {preview} [bool]
  *    Whether or not the row is a preview. Preview rows do not render their contents.
- **/
+ */
 
 /**
  * @callback MultiDragRow~onAdd

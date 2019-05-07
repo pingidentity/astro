@@ -53,7 +53,7 @@ import { flagsPropType, getFlags } from "../../util/FlagUtils";
  *          disabled={false}>
  *              <p>what ever callout content is</p>
  *     </CancelTooltip>
- **/
+ */
 
 class CancelTooltip extends React.Component {
     static propTypes = {

@@ -11,7 +11,7 @@ var React = require("react"),
  *
  * @param {number} rowIndex
  *     Current expanded row index
- **/
+ */
 
 /**
  * @typedef Grid#Row~RowData
@@ -44,7 +44,7 @@ var React = require("react"),
  *     Determine if this row has expandable column
  * @param {Grid#Row~onRowExpanded} [onRowExpanded]
  *     Callback to be triggered when a row is expanded
- **/
+ */
 
 class Row extends React.Component {
     static propTypes = {

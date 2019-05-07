@@ -46,7 +46,7 @@ import classnames from "classnames";
 *           </ConfirmToolTip>
 *       }
 *  />
-**/
+*/
 
 export default class ListNav extends Component {
 

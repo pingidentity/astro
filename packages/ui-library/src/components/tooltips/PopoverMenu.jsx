@@ -34,7 +34,7 @@ const PopoverBase = Popover.Base;
  *     If true, tooltip is open or else closed.
  * @param {function} [onToggle]
  *     Callback to be triggered when trigger is clicked.
- **/
+ */
 
 class PopoverMenuBase extends PopoverBase {
 

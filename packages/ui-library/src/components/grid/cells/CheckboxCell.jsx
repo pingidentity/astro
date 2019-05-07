@@ -24,7 +24,7 @@ var React = require("react"),
  * @example
  *     <CheckboxCell onGridCellAction={this._handleLaptopChecked} className="stacked" />
  *
- **/
+ */
 
 class CheckboxCell extends React.Component {
 

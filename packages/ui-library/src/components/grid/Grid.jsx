@@ -18,14 +18,14 @@ var React = require("react"),
  * @param {object} e
  *     The ReactJS synthetic event object.
  *
- **/
+ */
 
 /**
  * @callback Grid~onRowExpanded
  *
  * @param {number} rowIndex
  *     Current expanded row index
- **/
+ */
 
 /**
  * @callback Grid~onPaginationChanged
@@ -36,7 +36,7 @@ var React = require("react"),
  *     Last column index for newly selected page
  * @param {number} page
  *     Newly selected page number
- **/
+ */
 
 /**
  * @class Grid
@@ -88,7 +88,7 @@ var React = require("react"),
  *         </Grid.Column>
  *     </Grid>
  *
- **/
+ */
 
 class GridStateless extends React.Component {
     static displayName = "GridStateless";
@@ -336,7 +336,7 @@ module.exports = Grid;
 /**
  * @enum {string}
  * @desc Enum for the different options for Column size.
- **/
+ */
 Grid.ColumnSizes = {
     /** Set type prop to {ColumnSizes.XS} for a column with XS size. */
     XS: "column-xs",
@@ -353,7 +353,7 @@ Grid.ColumnSizes = {
 /**
  * @enum {string}
  * @desc Enum for the different options for alignments.
- **/
+ */
 Grid.Alignments = {
     /** Set type prop to {Alignments.LEFT} for aligning to the left. Empty is left by default. */
     LEFT: "",

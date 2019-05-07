@@ -12,7 +12,7 @@ import HelpHint from "../../components/tooltips/HelpHint";
  *     The text to be copied.
  * @param {object} strings
  *     Object that lets you override the default message text
- **/
+ */
 
 const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Component {
     static propTypes = {

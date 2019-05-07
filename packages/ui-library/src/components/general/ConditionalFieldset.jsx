@@ -18,7 +18,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 /**
  * @enum {string}
  * @alias ConditionalFieldset.Type
- **/
+ */
 const Types = {
     /** radio group */
     RADIO: "radio",
@@ -193,7 +193,7 @@ class ConditionalFieldsetStateful extends React.Component {
  * @callback ConditionalFieldset~onValueChange
  * @param {number} index
  *     Currently selected option
- **/
+ */
 
 /**
  * @class ConditionalFieldset

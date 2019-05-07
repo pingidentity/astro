@@ -200,7 +200,7 @@ var getZoneNameDisplayValue = function (zoneName) {
 *         countryLabel="Country"
 *     />
 *
-**/
+*/
 
 
 var LABEL_DEFAULTS = {
