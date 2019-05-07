@@ -120,6 +120,14 @@ class FormTextFieldDemo extends React.Component {
                         name="basic-stateless"
                     />
                 </InputRow>
+                <InputRow>
+                    <FormTextField
+                        stateless={false}
+                        labelText="Basic with Subtext"
+                        width={InputWidths.MD}
+                        subText="this is subtext"
+                    />
+                </InputRow>
                 {flags.findIndex(item => item === "p-stateful") >= 0 &&
                     <p>
                         The below won't work in progressively-stateful mode.

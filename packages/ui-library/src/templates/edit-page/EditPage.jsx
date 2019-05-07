@@ -127,7 +127,7 @@ export default class EditPage extends React.Component {
 
                     <PageSection title="Address">
                         <InputRow>
-                            <Layout.Row>
+                            <Layout.Row autoWidth>
                                 <Layout.Column>
                                     <InputRow>
                                         <FormTextField
@@ -181,7 +181,6 @@ export default class EditPage extends React.Component {
                                             options={addressOptions} />
                                     </InputRow>
                                 </Layout.Column>
-                                <Layout.Column />
                             </Layout.Row>
                         </InputRow>
                     </PageSection>

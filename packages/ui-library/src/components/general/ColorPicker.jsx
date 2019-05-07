@@ -56,11 +56,12 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @param {string} [labelText]
- *     A label to render at the top of the color picker
+ *     A label to render at the top of the color picker.
  * @param {string} [label]
  *     Alias for labelText
- * @param {string} [hintText]
- *     If a label is provided, a hint text may also be optionally provided
+ * @param {node} [hintText]
+ *     If a label is provided, a hint text may also be optionally provided.
+ *     This can be a string or a JSX object.
  * @param {string} color
  *     A hexcode of chosen color
  * @param {boolean} [disabled=false]
@@ -106,7 +107,7 @@ class Stateless extends React.Component {
         id: PropTypes.string,
         className: PropTypes.string,
         name: PropTypes.string,
-        hintText: PropTypes.string,
+        hintText: PropTypes.node,
         labelText: PropTypes.string,
         label: PropTypes.string,
         color: PropTypes.string.isRequired,

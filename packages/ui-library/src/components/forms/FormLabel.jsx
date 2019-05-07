@@ -18,8 +18,8 @@ var React = require("react"),
  *     When true, detached styling is applied. For use when label is used when not bundled with an input
  * @param {string} [value]
  *     The label text.  If omitted and if this element has no children, nothing is rendered.
- * @param {string} [hint]
- *     The hint text. If omitted, the help hint is not rendered.
+ * @param {node} [hint]
+ *     The hint text either a string or a JSX object. If omitted, the help hint is not rendered.
  * @param {string} [lockText]
  *     The lock text. If omitted, the lock hint is not rendered.
  * @param {string} [helpClassName]
@@ -36,7 +36,7 @@ class FormLabel extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         value: PropTypes.node,
-        hint: PropTypes.string,
+        hint: PropTypes.node,
         lockText: PropTypes.string,
         helpClassName: PropTypes.string,
         helpTarget: PropTypes.object,

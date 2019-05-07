@@ -26,8 +26,8 @@ import { defaultRender } from "../../util/PropUtils";
  *     Disables the input.
  * @property {boolean} hidden
  *     Hides the input.
- * @property {string} labelText
- *     Text to display the label for the radio button.
+ * @property {node} labelText
+ *     String or JSX element to display the label for the radio button.
  * @property {string} label
  *     Text to display the label for the radio button.
  */
@@ -115,8 +115,8 @@ class FormRadioGroup extends React.Component {
         disabled: PropTypes.bool,
         stacked: PropTypes.bool,
         label: PropTypes.string,
-        labelText: PropTypes.string,
-        labelHelpText: PropTypes.string,
+        labelText: PropTypes.node,
+        labelHelpText: PropTypes.node,
         renderRadio: PropTypes.func,
     };
 

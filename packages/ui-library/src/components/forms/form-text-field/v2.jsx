@@ -85,6 +85,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
+* @param {node} [subText]
+*     A node that will add text or a component below the textbox.
 * @param {string} [data-id="form-text-field"]
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [errorClassName]
@@ -95,8 +97,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     CSS classes to apply to the label help hint (bottom, left, etc)
 * @param {string} [inputClassName]
 *     CSS classes to set on the input element.
-* @param {string} [labelHelpText]
-*     The text to display for the help tooltip.
+* @param {node} [labelHelpText]
+*     A string or JSX object to display for the help tooltip.
 * @param {string} [labelLockText]
 *     The text to display for the lock help tooltip.
 * @param {string} [labelText]
@@ -194,6 +196,7 @@ class Stateless extends React.Component {
         children: PropTypes.node,
         className: PropTypes.string,
         controls: PropTypes.object,
+        subText: PropTypes.node,
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
         errorMessage: PropTypes.string,
@@ -210,7 +213,7 @@ class Stateless extends React.Component {
             PropTypes.string
         ]),
         labelClassName: PropTypes.string,
-        labelHelpText: PropTypes.string,
+        labelHelpText: PropTypes.node,
         labelLockText: PropTypes.string,
         labelText: PropTypes.node,
         maskValue: PropTypes.bool,
@@ -450,8 +453,8 @@ class Stateless extends React.Component {
                 "value-entered": this.props.value || this.props.value !== "",
                 "input-text--right-icon": this.props.iconRight,
                 "input-text--left-icon": this.props.iconLeft,
-                "input-text--right-arrow": this.props.withArrow
-            }
+                "input-text--right-arrow": this.props.withArrow,
+            },
         );
 
         return (
@@ -470,7 +473,8 @@ class Stateless extends React.Component {
                         classnames(
                             "input-container",
                             {
-                                "input-text__container--right-arrow": this.props.withArrow
+                                "input-text__container--right-arrow": this.props.withArrow,
+
                             }
                         )
                     }
@@ -563,6 +567,8 @@ class Stateless extends React.Component {
                             type={this.props.messageType}
                         />
                     )}
+                    {this.props.subText ? <span className="sub-text">{this.props.subText}</span>
+                        : null}
                 </span>
             </FormLabel>
         );

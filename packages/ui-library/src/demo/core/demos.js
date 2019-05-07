@@ -1264,6 +1264,13 @@ module.exports = [
                         pathToSource: "templates_PasswordPolicy.jsx.html",
                         fullscreen: true,
                         icon: "details"
+                    },
+                    {
+                        label: "Custom Branding",
+                        demo: require("../../templates/custom-branding/CustomBranding"),
+                        pathToSource: "templates_custom-branding/CustomBranding.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
                     }
                 ]
             }

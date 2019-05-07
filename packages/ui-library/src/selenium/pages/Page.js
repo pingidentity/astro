@@ -260,6 +260,15 @@ Page.prototype.outHover = function () {
     browser.moveToObject("body", 0, 0);
 };
 
+
+/**
+ * @desc move mouse to the object to hover over
+ * @param {string} elementPath the xPath
+ */
+Page.prototype.hover = function (elementPath) {
+    browser.moveToObject(elementPath);
+};
+
 /**
  * @desc Execute the provided callback repeateadly until it returns true.
  *     If the callback still returns false after "timeout" millis, throw exception.
