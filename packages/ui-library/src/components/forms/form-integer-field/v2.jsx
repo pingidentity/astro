@@ -248,7 +248,7 @@ class Stateless extends Component {
         this._counter(inc);
 
         // Set timeout for rapid addition or subtraction when held
-        this.timeout = setTimeout(this._interval.bind(this, inc), 700);
+        this.timeout = global.setTimeout(this._interval.bind(this, inc), 700);
     };
 
     /**
@@ -259,8 +259,8 @@ class Stateless extends Component {
      * @ignore
      */
     _handleSpinnerRelease = () => {
-        clearTimeout(this.timeout);
-        clearInterval(this.interval);
+        global.clearTimeout(this.timeout);
+        global.clearInterval(this.interval);
     };
 
     /**
@@ -272,7 +272,7 @@ class Stateless extends Component {
      */
     _interval = (inc) => {
         clearInterval(this.interval);
-        this.interval = setInterval(this._counter.bind(this, inc), 50);
+        this.interval = global.setInterval(this._counter.bind(this, inc), 50);
     };
 
     /**

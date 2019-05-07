@@ -98,4 +98,20 @@ describe("HorizontalBarCard", function () {
         expect(element).toBeDefined();
     });
 
+
+    it("populates the state on mouseover", function () {
+        const component = getComponent({
+            onMouseOver: jest.fn()
+        });
+
+        const e = {
+            preveventDefault: () => { }
+        };
+
+        component._mouseOver({
+            id: "test"
+        }, 0, e);
+
+        expect(component.state.hoveredSection).toEqual("test");
+    });
 });

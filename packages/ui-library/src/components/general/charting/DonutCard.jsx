@@ -53,9 +53,6 @@ import Colors from "../charting/Cards/dashboardColors";
  *     state of the checkbox set to false. If set to true will render with onMakeDefault already checked.
  * */
 
-
-
-
 class DonutCard extends Component {
     _getColors = (a) => {
         let colors = [];
@@ -67,6 +64,7 @@ class DonutCard extends Component {
             } else {
                 colors.push(Object.values(Colors.COLORS)[defaultIndex]);
 
+                /* istanbul ignore next */
                 if (defaultIndex === Object.values(Colors.COLORS).length - 1) {
                     defaultIndex = 0;
                 } else {
@@ -85,8 +83,7 @@ class DonutCard extends Component {
         hoveredSection: null,
     }
 
-
-    _mouseOver = /* istanbul ignore next  */ (value, index, e) => {
+    _mouseOver = (value, index, e) => {
 
         if (this.props.onMouseOver) {
             this.props.onMouseOver(e, value);
@@ -102,7 +99,10 @@ class DonutCard extends Component {
         });
     };
 
-    _mouseOut = /* istanbul ignore next  */ (value, index, e) => {
+    /*
+    istanbul ignore next
+    */
+    _mouseOut = (value, index, e) => {
         if (this.props.onMouseOut) {
             this.props.onMouseOut(e, value);
         }

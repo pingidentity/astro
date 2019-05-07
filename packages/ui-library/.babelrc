@@ -1,12 +1,32 @@
 {
-	"presets": [
-        "env",
-        "react"
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": "commonjs"
+            },
+        ],
+        "@babel/preset-react"
     ],
     "plugins": [
-        "transform-runtime",
-        "transform-class-properties",
-        "transform-object-rest-spread",
-		"add-module-exports"
-    ]
+        "@babel/plugin-proposal-class-properties",
+        [
+            "transform-es2015-spread",
+            {
+                "loose": true
+            }
+        ],
+        [
+            "add-module-exports",
+            {
+                "addDefaultProperty": true
+            }
+        ],
+        [
+            "@babel/plugin-transform-runtime",
+            {
+                "corejs": 3
+            }
+        ]
+    ],
 }

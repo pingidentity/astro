@@ -92,7 +92,7 @@ describe("Messages v4", function () {
         var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
 
         expect(messages.length).toEqual(1);
-        expect(setInterval.mock.calls[0][1]).toBe(3000);
+        expect(global.setInterval).toHaveBeenLastCalledWith(expect.any(Function), 3000);
     });
 
     it("Test unmount clears timers", function () {

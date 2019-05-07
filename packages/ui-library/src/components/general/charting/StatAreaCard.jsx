@@ -184,6 +184,7 @@ const CustomTooltip = ({
     }
 
     if (!active && onMouseOut) {
+        /* istanbul ignore next */
         onMouseOut();
     }
     return true;

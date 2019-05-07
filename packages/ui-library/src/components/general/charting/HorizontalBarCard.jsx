@@ -65,7 +65,7 @@ export default class HorizontalBarCard extends Component {
         strokeWidth: null,
     }
 
-    _mouseOver = /* istanbul ignore next  */ (value, index, e) => {
+    _mouseOver = (value, index, e) => {
 
         if (this.props.onMouseOver) {
             this.props.onMouseOver(e, value);
@@ -80,7 +80,10 @@ export default class HorizontalBarCard extends Component {
         });
     };
 
-    _mouseOut = /* istanbul ignore next  */ (value, index, e) => {
+    /*
+    istanbul ignore next
+    */
+    _mouseOut = (value, index, e) => {
         if (this.props.onMouseOut) {
             this.props.onMouseOut(e, value);
         }

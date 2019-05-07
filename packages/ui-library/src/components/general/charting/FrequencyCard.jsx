@@ -168,10 +168,10 @@ export default class FrequencyCard extends Component {
         this._itemClearSelection();
     };
 
-    /**
-     * Handle click events
-     */
-    _handleDonutChartClick = /* istanbul ignore next  */ (d, e) => {
+    /*
+    istanbul ignore next
+    */
+    _handleDonutChartClick = (d, e) => {
         const data = {
             index: this.props.donutData.map(x => x.id).indexOf(d.name),
             label: d.name
@@ -180,13 +180,22 @@ export default class FrequencyCard extends Component {
         this.props.onDonutChartClick(data, e);
     }
 
-    _handleFrontLegendClick = /* istanbul ignore next  */ ({ index, label }, e) =>
+    /*
+    istanbul ignore next
+    */
+    _handleFrontLegendClick = ({ index, label }, e) =>
         this.props.onFrontLegendClick({ index, label }, e);
 
-    _handleBarChartClick = /* istanbul ignore next  */ ({ x, y }, e) =>
+    /*
+    istanbul ignore next
+    */
+    _handleBarChartClick = ({ x, y }, e) =>
         this.props.onBarChartClick({ x, y }, e);
 
-    _handleBackLegendClick = /* istanbul ignore next  */ ({ index, label }, e) =>
+    /*
+    istanbul ignore next
+    */
+    _handleBackLegendClick = ({ index, label }, e) =>
         this.props.onBackLegendClick({ index, label }, e);
 
     // Renders donut pieces
