@@ -250,18 +250,14 @@ Page.prototype.scrollToElement = function (tagName, dataId) {
  * @returns {object} browser waitUntil object
  */
 Page.prototype.blurElement = function () {
-
-    return browser.call(function() {
-        return browser.execute("return document.activeElement.blur();");
-    });
-
+    browser.execute("document.activeElement.blur();");
 };
 
 /**
  * @desc move mouse to root of page to remove hover
  */
 Page.prototype.outHover = function () {
-    browser.moveToObject("/*", 0, 0);
+    browser.moveToObject("body", 0, 0);
 };
 
 /**

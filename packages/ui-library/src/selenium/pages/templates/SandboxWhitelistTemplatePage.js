@@ -34,6 +34,7 @@ const SandboxWhitelistDemoPage = Object.create(HomePage, {
     setSearchBoxValue: {
         value: function (inputValue) {
             this.getSearchBoxValue.setValue(inputValue);
+            this.blurElement();
         }
     },
 

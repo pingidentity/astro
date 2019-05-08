@@ -135,8 +135,8 @@ var HomePage = Object.create(Page, {
      */
     takeScreenshotAndCompare: {
         value: function(filename, tolerance) {
-            this.blurElement();
-            this.outHover();
+            //this.blurElement();
+            //this.outHover();
             ScreenshotUtils.takeScreenShotAndCompareWithBaseline(
                 filename,
                 tolerance
@@ -154,8 +154,8 @@ var HomePage = Object.create(Page, {
      */
     takeElementScreenshotAndCompare: {
         value: function(filename, elementSelector, tolerance) {
-            this.blurElement();
-            this.outHover();
+            //this.blurElement();
+            //this.outHover();
             ScreenshotUtils.takeElementScreenShotAndCompareWithBaseline(
                 filename,
                 elementSelector,
@@ -169,8 +169,8 @@ var HomePage = Object.create(Page, {
      */
     focusOutCurrentElement: {
         value: function() {
-            this.blurElement();
-            this.outHover();
+            //this.blurElement();
+            //this.outHover();
         }
     },
 

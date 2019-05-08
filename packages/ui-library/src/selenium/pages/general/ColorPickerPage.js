@@ -55,6 +55,7 @@ var ColorPickerDemoPage = Object.create(HomePage, {
     clickColorPicker: {
         value: function (index) {
             this.click(this.xpathColorPicker(index));
+            this.blurElement();
         }
     },
 

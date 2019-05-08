@@ -188,7 +188,7 @@ install-node-npm:
 
 clean-mvn:
 	rm -f $(MVN_FILENAME)
-	rm -rf mvn
+	rm -rf mvn 
 
 install-mvn: clean-mvn
 	wget http://archive.apache.org/dist/maven/maven-3/3.2.2/binaries/$(MVN_FILENAME)

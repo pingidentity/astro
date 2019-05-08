@@ -18,6 +18,7 @@ var NotificationsDemoPage = Object.create(HomePage, {
     setFromAddressValue: {
         value: function (inputValue) {
             this.getFromAddress.setValue(inputValue);
+            this.blurElement();
         }
     },
 
@@ -38,6 +39,7 @@ var NotificationsDemoPage = Object.create(HomePage, {
     setFromNameValue: {
         value: function (inputValue) {
             this.getFromName.setValue(inputValue);
+            this.blurElement();
         }
     },
 
@@ -95,6 +97,7 @@ var NotificationsDemoPage = Object.create(HomePage, {
     setSubjectValue: {
         value: function (inputValue) {
             this.getSubject.setValue(inputValue);
+            this.blurElement();
         }
     },
 
@@ -114,6 +117,7 @@ var NotificationsDemoPage = Object.create(HomePage, {
     setEmailBodyValue: {
         value: function (inputValue) {
             this.getEmailBody.setValue(inputValue);
+            this.blurElement();
         }
     },
 
@@ -133,6 +137,7 @@ var NotificationsDemoPage = Object.create(HomePage, {
     setSenderIDValue: {
         value: function (inputValue) {
             this.getSenderID.setValue(inputValue);
+            this.blurElement();
         }
     },
 
@@ -152,6 +157,7 @@ var NotificationsDemoPage = Object.create(HomePage, {
     setMessageValue: {
         value: function (inputValue) {
             this.getSenderID.setValue(inputValue);
+            this.blurElement();
         }
     },
 
