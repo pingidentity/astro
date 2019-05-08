@@ -1,8 +1,7 @@
-"use strict";
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    Utils = require("../../util/Utils.js");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import Utils from "../../util/Utils.js";
 
 /**
  * @class ColumnLayout
@@ -112,7 +111,21 @@ class Column extends React.Component {
 
     render() {
         return (
-            <div data-id={this.props["data-id"]} className={classnames("content-column", this.props.className)}>
+            <div
+                data-id={this.props["data-id"]}
+                className={
+                    classnames(
+                        "content-column",
+                        this.props.className,
+                        {
+                            // Mocking the userAgent in Jest is involved and has an effect
+                            // on all subsequent tests, so skipping in coverage.
+                            /* istanbul ignore next  */
+                            "content-column--ie11": Utils.isIE11()
+                        }
+                    )
+                }
+            >
                 {this.props.children}
             </div>
         );

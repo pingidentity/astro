@@ -319,6 +319,16 @@ var Utils = {
     },
 
     /**
+     * @alias module:util/Utils.isIE
+     * @desc A function to detect IE browsers
+     * @return {boolean}
+     *    True if IE.
+     */
+    isIE11: function () {
+        return this.browserType() === browsers.IE;
+    },
+
+    /**
      * @alias module:util/Utils.isFirefox
      * @desc A function to detect Firefox browsers
      * @return {boolean}

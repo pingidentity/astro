@@ -159,5 +159,4 @@ describe("Row", function () {
             );
         }).toThrow(expectedError);
     });
-
 });

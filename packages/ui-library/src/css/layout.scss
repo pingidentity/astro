@@ -977,6 +977,10 @@ $color-grey-minor-1: $color-neutral-30;
         &:last-of-type {
             margin: 0;
         }
+
+        &--ie11 {
+            flex: 1 1 auto;
+        }
     }
     &.columns-margin-none,
     &.columns-nopad {  // nopad DEPRECATED
