@@ -82,6 +82,9 @@ module.exports = merge(common, {
         filename: "[name].js" // Template based on keys in entry above
     },
     devtool: "source-map",
+    devServer: {
+        disableHostCheck: true
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/demo/index.ejs", // Load a custom template
