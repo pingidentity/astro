@@ -273,7 +273,7 @@ export function cannonballChangeWarning({
         console.warn(
             `WARNING potential 4.0.0 breaking change: ` +
             message +
-            ` For more information: https://uilibrary.ping-eng.com/3.40.0-SNAPSHOT/index.html#/?selectedSection=V4BreakingChanges&selectedNode=V4BreakingChanges&root=Documentation`
+            ` For more information: https://uilibrary.ping-eng.com/3.42.0-SNAPSHOT/index.html#/?selectedSection=V4BreakingChanges&selectedNode=V4BreakingChanges&root=Documentation`
         );
     }
 }
