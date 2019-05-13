@@ -39,7 +39,4 @@ module.exports = [
 
     // Eric: this just started to fail the coverage report.. Why now?
     "/src/util/format.js",
-
-    //Tyler: started failing after two lines added. will add next sprint
-    "/src/components/general/charting/StatAreaCard.jsx"
 ];
