@@ -66,7 +66,7 @@ describe("ColumnSelectorRow", () => {
             titleIcon: "cog"
         });
 
-        const icon = component.find("div.icon");
+        const icon = component.find("[data-id=\"icon\"]");
 
         expect(icon.exists()).toEqual(true);
     });
@@ -119,10 +119,10 @@ describe("ColumnSelectorRow", () => {
 
     it("renders custom button", () => {
         const component = getComponent({
-            customButton: <div className="unrepentantly-fake-button" />
+            customButton: <div className="profoundly-fake-button" />
         });
         const oldButton = component.find("button.column-selector__row-button");
-        const custom = component.find("div.unrepentantly-fake-button");
+        const custom = component.find("div.profoundly-fake-button");
 
         expect(oldButton.exists()).toEqual(false);
         expect(custom.exists()).toEqual(true);

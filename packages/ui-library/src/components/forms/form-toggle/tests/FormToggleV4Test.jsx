@@ -93,6 +93,15 @@ describe("Toggle v4", function () {
         expect(component.props.onToggle).toBeCalled();
     });
 
+    it("does not error with default onToggle function", function () {
+        const component = ReactTestUtils.renderIntoDocument(<Toggle />);
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
+
+        ReactTestUtils.Simulate.click(toggle);
+
+        expect(component).toBeTruthy();
+    });
+
     it("stateful: _handleToggle callback changes toggled state when clicked", function () {
         const component = getComponent({ stateless: false });
         const componentRef = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);

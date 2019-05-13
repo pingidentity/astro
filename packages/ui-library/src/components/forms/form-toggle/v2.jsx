@@ -64,6 +64,7 @@ class Stateless extends Component {
         "data-id": "toggle",
         className: "",
         disabled: false,
+        onToggle: () => {}
     };
 
     componentDidMount() {

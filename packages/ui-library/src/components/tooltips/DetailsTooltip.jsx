@@ -199,16 +199,16 @@ class DetailsTooltipStateless extends React.Component {
 
         // can have multiple secondary buttons
         if (this.props.secondaryLabels) {
-            secondaryButtons = this.props.secondaryLabels.map(function (secondaryLabel, i) {
+            secondaryButtons = this.props.secondaryLabels.map((secondaryLabel, i) => {
                 return this._getSecondaryButtonHtml(secondaryLabel.label, secondaryLabel.value, i);
-            }.bind(this));
+            });
         }
 
         // can have multiple primary buttons
         if (this.props.primaryLabels) {
-            primaryButtons = this.props.primaryLabels.map(function (primaryLabel, i) {
+            primaryButtons = this.props.primaryLabels.map((primaryLabel, i) => {
                 return this._getPrimaryButtonHtml(primaryLabel.label, primaryLabel.value, i);
-            }.bind(this));
+            });
         }
 
         // only display if buttons present
@@ -561,10 +561,8 @@ class DetailsTooltip extends React.Component {
 
         return (
             this.props.stateless
-                ? React.createElement(DetailsTooltipStateless, //eslint-disable-line
-                    _.defaults({ ref: "tooltip" }, this.props), this.props.children)
-                : React.createElement(DetailsTooltipStateful, //eslint-disable-line
-                    _.defaults({ ref: "manager" }, this.props), this.props.children)
+                ? <DetailsTooltipStateless ref="tooltip" {...this.props} />
+                : <DetailsTooltipStateful ref="manager" {...this.props} />
         );
     }
 }

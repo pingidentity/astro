@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import _ from "underscore";
+import Button from "../../../components/buttons/Button";
+import ButtonGroup from "../../../components/layout/ButtonGroup";
 import ColumnSelector, { buttonTypes, ColumnTitle, RowButton, RowTitle } from "../../../components/list/ColumnSelector";
 import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
+import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
+import FlexRow, { alignments, justifyOptions } from "../../../components/layout/FlexRow";
+import FormToggle from "../../../components/forms/form-toggle";
+import HelpHint from "../../../components/tooltips/HelpHint";
 import Icon from "../../../components/general/Icon";
+import InputRow from "../../../components/layout/InputRow";
 import LinkDropDownList from "../../../components/forms/LinkDropDownList";
+import Padding, { sizes as paddingSizes } from "../../../components/layout/Padding";
+import { allFlags } from "../../../util/FlagUtils";
 
 /**
  * @class Column Selector Demo
@@ -15,13 +24,15 @@ export default class ColumnSelectorDemo extends Component {
 
     state = {
         filterOpen: false,
+        inheritPopulations: false,
         selectedRowIds: [],
-        tooltipOpen: false,
-        selectedFilter: 0,
+        rowTooltipOpen: false,
+        buttonTooltipOpen: false,
+        selectedFilter: undefined,
     }
 
-    _closeTooltip = () => {
-        this.setState({ tooltipOpen: false });
+    _closeButtonTooltip = () => {
+        this.setState({ rowTooltipOpen: false });
     }
 
     _filterOptions = options => options.reduce((unselected, opt) => {
@@ -155,11 +166,23 @@ export default class ColumnSelectorDemo extends Component {
         console.log("onToggleOption called with: ", payload);
     }
 
-    _toggleTooltip = (e) => {
+    _setInheritPopulations = value => () => this.setState({
+        inheritPopulations: value,
+        rowTooltipOpen: false
+    })
+
+    _toggleButtonTooltip = (e) => {
         if (e) {
             e.stopPropagation();
         }
-        this.setState(({ tooltipOpen }) => ({ tooltipOpen: !tooltipOpen }));
+        this.setState(({ buttonTooltipOpen }) => ({ buttonTooltipOpen: !buttonTooltipOpen }));
+    }
+
+    _toggleRowTooltip = (e) => {
+        if (e) {
+            e.stopPropagation();
+        }
+        this.setState(({ rowTooltipOpen }) => ({ rowTooltipOpen: !rowTooltipOpen }));
     }
 
     _toggleFilter = () => this.setState(({ filterOpen }) => ({ filterOpen: !filterOpen }))
@@ -212,7 +235,45 @@ export default class ColumnSelectorDemo extends Component {
                         title: "Israel Employees",
                         titleIcon: "users"
                     },
-                ]
+                ],
+                bottomPanel: (
+                    <FlexRow
+                        alignment={alignments.CENTER}
+                    >
+                        <ConfirmTooltip
+                            label={
+                                <FormToggle
+                                    flags={allFlags}
+                                    toggled={this.state.inheritPopulations}
+                                />
+                            }
+                            onCancel={this._setInheritPopulations(false)}
+                            onConfirm={this._setInheritPopulations(true)}
+                            onToggle={this._toggleRowTooltip}
+                            open={this.state.rowTooltipOpen}
+                            placement="top left"
+                            title="Inherit future populations"
+                            flags={allFlags}
+                        >
+                            There are populations within this environment that haven’t
+                            been added to memberships. Turning this feature on will
+                            add all current and future populations within this
+                            environment to memberships.
+                        </ConfirmTooltip>
+                        <ColumnTitle
+                            subtitle="Allow automatic memberships"
+                        />
+                        <HelpHint
+                            flags={allFlags}
+                            hintText="When this feature is on, any future
+                                populations added to this environment will
+                                automatically be added to the memberships
+                                column. If turned off, new populations will
+                                need to be added manually."
+                            position="top"
+                        />
+                    </FlexRow>
+                )
             },
             {
                 id: "test",
@@ -252,29 +313,51 @@ export default class ColumnSelectorDemo extends Component {
                 customButton: ({ handleOnButtonClick }) => {
                     const clickAndCloseTooltip = e => {
                         handleOnButtonClick(e);
-                        this._closeTooltip();
+                        this._closeButtonTooltip();
                     };
 
                     return (
-                        <ConfirmTooltip
+                        <DetailsTooltip
+                            flags={["use-portal"]}
                             label={
                                 <RowButton
                                     buttonType={buttonTypes.ADD}
                                     expandable
-                                    onClick={this._toggleTooltip}
                                 />
                             }
-                            onCancel={this._toggleTooltip}
-                            onConfirm={clickAndCloseTooltip}
-                            onToggle={this._toggleTooltip}
-                            open={this.state.tooltipOpen}
-                            placement="top left"
-                            title="Inherit future populations"
-                            flags={["use-portal", "p-stateful"]}
+                            title="Tooltip Title"
+                            onToggle={this._toggleButtonTooltip}
+                            open={this.state.buttonTooltipOpen}
+                            stateless={false}
                         >
-                            You have selected an environment, including all
-                            populations governed by it.
-                        </ConfirmTooltip>
+                            <InputRow>
+                            If you add populations to this environment, they’ll be
+                            automatically added to memberships as well. You can
+                            disable this feature if you prefer to manually add new
+                            populations to memberships.
+                            </InputRow>
+                            <InputRow>
+                                <FlexRow
+                                    justify={justifyOptions.CENTER}
+                                >
+                                    <Padding right={paddingSizes.SM}>
+                                        <FormToggle
+                                            flags={["p-stateful"]}
+                                        />
+                                    </Padding>
+                            Allow automatic memberships
+                                </FlexRow>
+                            </InputRow>
+                            <ButtonGroup
+                                data-id="delete-confirmation"
+                            >
+                                <Button
+                                    onClick={clickAndCloseTooltip}
+                                >
+                                    Save
+                                </Button>
+                            </ButtonGroup>
+                        </DetailsTooltip>
                     );
                 }
             }

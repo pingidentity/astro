@@ -116,6 +116,7 @@ export default class ColumnSelector extends Component {
         openParentOnMove: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.string.isRequired,
+            bottomPanel: PropTypes.node,
             children: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.string.isRequired,
@@ -137,6 +138,7 @@ export default class ColumnSelector extends Component {
         selectedOptions: PropTypes.arrayOf(PropTypes.shape({
             all: PropTypes.bool,
             id: PropTypes.string.isRequired,
+            bottomPanel: PropTypes.node,
             label: PropTypes.node,
             children: PropTypes.arrayOf(
                 PropTypes.shape({
@@ -254,6 +256,7 @@ export default class ColumnSelector extends Component {
             });
         }
     }
+
     handleRemove = ({ id, ...payload }) => {
         const [removed, selected] = partition(this.props.selectedOptions, (({ id: optId }) => id === optId));
         if (this.props.openParentOnMove) {
@@ -274,6 +277,7 @@ export default class ColumnSelector extends Component {
             });
         }
     }
+
     handleToggleOption = (id, open) => this.props.onToggleOption({ id, open });
 
     // Curried so that it can be given an arbitrary button type

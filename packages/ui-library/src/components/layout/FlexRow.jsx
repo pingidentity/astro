@@ -4,9 +4,9 @@ import classnames from "classnames";
 
 export const alignments = {
     BOTTOM: "bottom",
-    TOP: "top",
-    CENTER: "center",
-    STRETCH: "stretch"
+    TOP: "TOP",
+    CENTER: "CENTER",
+    STRETCH: "STRETCH"
 };
 
 export const justifyOptions = {
@@ -71,10 +71,14 @@ function FlexRow({
 }
 
 FlexRow.propTypes = {
-    alignment: PropTypes.oneOf(Object.values(alignments)),
+    alignment: PropTypes.oneOf(
+        Object.values(alignments)
+    ),
     "data-id": PropTypes.string,
     inline: PropTypes.bool,
-    justify: PropTypes.oneOf(Object.values(justifyOptions))
+    justify: PropTypes.oneOf(
+        Object.values(justifyOptions)
+    )
 };
 
 FlexRow.defaultProps = {

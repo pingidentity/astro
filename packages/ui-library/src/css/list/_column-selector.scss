@@ -29,6 +29,10 @@
         border-top: 1px solid $color-neutral-80;
         margin-top: $spacing-sm;
         padding-top: $spacing-md;
+
+        & > :not(:last-of-type) {
+            margin-bottom: $spacing-md;
+        }
     }
 
     &__column-subtitle {
@@ -56,56 +60,20 @@
 
     &__row {
         background-color: $color-white;
-        border: 1px solid $color-neutral-80;
-        cursor: pointer;
-        margin-bottom: $spacing-md;
-        padding: $spacing-sm;
+        flex-grow: 1;
 
         &--open,
         &--closed {
             position: relative;
-
-            &:last-child {
-                border: 1px solid $color-neutral-80;
-            }
 
             &:hover {
                 border-color: $color-neutral-50;
             }
         }
 
-        &--open {
-            padding-bottom: $spacing-xs;
-
-            &:after {
-                background-image: linear-gradient(to bottom, $color-neutral-80, $color-white);
-                border-top: 1px solid $color-neutral-90;
-                content: '';
-                height: 5px;
-                margin-left: -$spacing-sm;
-                position: absolute;
-                top: 58px;
-                width: 100%;
-            }
-        }
-
         &--disabled {
             background-color: transparent;
             cursor: default;
-        }
-
-        & .column-selector {
-            &__row {
-                border: none;
-                border-top: 1px solid $color-neutral-80;
-                margin: 0 0 0 $spacing-lg;
-                padding: $spacing-md 0 $spacing-sm 0;
-
-                & .column-selector__row-title {
-                    font-weight: unset;
-                    text-transform: unset;
-                }
-            }
         }
     }
 
@@ -124,19 +92,60 @@
         }
     }
 
+    &__row-container {
+        border: 1px solid $color-neutral-80;
+
+        &:hover {
+            border-color: $color-strong-neutral-40;
+        }
+    }
+
     &__row-content {
         align-items: center;
         display: inline-flex;
         justify-content: flex-start;
+        padding: $spacing-sm $spacing-sm $spacing-sm 0;
         width: 100%;
 
         // This makes sure that custom buttons are aligned correctly.
         & > *:last-child {
             margin-left: auto;
         }
+    }
 
-        &--open {
-            padding-bottom: $spacing-md;
+    &__row-options {
+        position: relative;
+
+        &:after {
+            background-image: linear-gradient(to bottom, $color-neutral-80, $color-white);
+            border-top: 1px solid $color-neutral-90;
+            content: '';
+            height: 5px;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+
+        & .column-selector {
+            &__row-container {
+                border: none;
+                border-bottom: 1px solid $color-neutral-80;
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+            }
+
+            &__row {
+                & .column-selector__row-title {
+                    font-weight: unset;
+                    text-transform: unset;
+                }
+            }
+
+            &__row-title-icon {
+                margin-left: $spacing-xl;
+            }
         }
     }
 
@@ -158,12 +167,28 @@
     }
 
     &__row-title-icon {
-        display: inline-block;
+        align-items: center;
+        display: flex;
+        margin-left: $spacing-xs;
         width: 25px;
-        vertical-align: middle;
+    }
+
+    &__row-titles-panel {
+        border-top: solid $color-neutral-80 0.5px;
+        margin-top: $spacing-xs;
+        padding: $spacing-xs $spacing-md 0 0;
     }
 
     &__row-toggle {
         font-size: 10px;
+    }
+
+    &__row-toggle-container {
+        align-items: center;
+        background-color: $color-accent-neutral-80;
+        cursor: pointer;
+        display: flex;
+        margin-right: $spacing-md;
+        padding: 0 $spacing-xs;
     }
 }

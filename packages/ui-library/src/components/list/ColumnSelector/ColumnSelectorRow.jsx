@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { isFunction, isString, noop } from "underscore";
 import Button from "../../buttons/Button";
+import FlexRow, { alignments } from "../../layout/FlexRow";
 import Icon from "../../general/Icon";
 
 export const buttonTypes = {
@@ -54,6 +55,7 @@ RowButton.defaultProps = {
 
 export default class ColumnSelectorRow extends Component {
     static propTypes = {
+        bottomPanel: PropTypes.node,
         buttonType: PropTypes.oneOf([
             buttonTypes.ADD,
             buttonTypes.REMOVE
@@ -157,6 +159,7 @@ export default class ColumnSelectorRow extends Component {
 
     render() {
         const {
+            bottomPanel,
             children,
             className,
             "data-id": dataId,
@@ -171,64 +174,72 @@ export default class ColumnSelectorRow extends Component {
         const expandableOpen = expandable && this.state.open;
 
         return (
-            <div
-                className={
-                    classnames(
-                        baseClassName,
-                        className,
-                        {
-                            [`${baseClassName}--open`]: expandableOpen,
-                            [`${baseClassName}--closed`]: expandable && !this.state.open,
-                            [`${baseClassName}--disabled`]: this.props.disabled
-                        }
-                    )}
-                data-id={dataId}
-            >
-                <div
+            <div className={`${baseClassName}-container`} data-id={dataId}>
+                <FlexRow
                     className={
                         classnames(
-                            `${baseClassName}-content`,
+                            baseClassName,
+                            className,
                             {
-                                [`${baseClassName}-content--open`]: expandableOpen
+                                [`${baseClassName}--open`]: expandableOpen,
+                                [`${baseClassName}--closed`]: expandable && !this.state.open,
+                                [`${baseClassName}--disabled`]: this.props.disabled
                             }
-                        )
-                    }
-                    data-id="row-toggle"
-                    onClick={this._handleToggleOpen}
+                        )}
+                    inline
+                    alignment={alignments.STRETCH}
                 >
-                    {expandable &&
-                        <Icon
-                            className={`${baseClassName}-toggle`}
-                            data-id={`${dataId}-toggle-icon`}
-                            iconName={this.state.open ? "close-arrow" : "dropdown-arrow"}
-                            type="leading"
-                        />
-                    }
-                    {!expandable &&
-                        <div className={`${baseClassName}-title-icon`}>
+                    {expandable
+                        ? <div
+                            className={`${baseClassName}-toggle-container`}
+                            data-id="row-toggle"
+                            onClick={this._handleToggleOpen}
+                        >
+                            <Icon
+                                className={`${baseClassName}-toggle`}
+                                data-id={`${dataId}-toggle-icon`}
+                                iconName={this.state.open ? "close-arrow" : "dropdown-arrow"}
+                                type="inline"
+                            />
+                        </div>
+                        : <div className={`${baseClassName}-title-icon`}>
                             {titleIcon &&
                                 <Icon
                                     iconName={titleIcon}
-                                    type="leading"
+                                    type="inline"
                                 />
                             }
                         </div>
                     }
-                    <div className={`${baseClassName}-titles`}>
-                        {isString(title) ? <RowTitle>{title}</RowTitle> : title}
-                        {subtitle &&
+                    <div
+                        className={
+                            classnames(
+                                `${baseClassName}-content`,
+                                {
+                                    [`${baseClassName}-content--open`]: expandableOpen
+                                }
+                            )
+                        }
+                    >
+                        <div className={`${baseClassName}-titles`}>
+                            {isString(title) ? <RowTitle>{title}</RowTitle> : title}
+                            {subtitle &&
                             <div className={`${baseClassName}-subtitle`}>
                                 {subtitle}
                             </div>
-                        }
+                            }
+                            {bottomPanel &&
+                            <div className={`${baseClassName}-titles-panel`}>
+                                {bottomPanel}
+                            </div>
+                            }
+                        </div>
+                        {this._renderButton(this.props)}
                     </div>
-                    {this._renderButton(this.props)}
-                </div>
-                {renderedChildren &&
-                    <div className={`${baseClassName}-options`}>
-                        {renderedChildren}
-                    </div>
-                }
+                </FlexRow>
+                {renderedChildren && <div className={`${baseClassName}-options`}>
+                    {renderedChildren}
+                </div>}
             </div>
         );
     }
