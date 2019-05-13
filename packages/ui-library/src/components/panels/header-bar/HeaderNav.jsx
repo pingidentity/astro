@@ -12,21 +12,17 @@ const HeaderNav = props => (
             const handleClick = () =>
                 props.onNavChange(option.id || option.label);
 
-            return (
-                <Anchor
-                    className={classnames("header-nav__item", {
-                        "header-nav__item--selected":
-                            option.id === props.currentNav || option.label === props.currentNav
-                    })}
-                    data-id={option.label.replace(/\W/g, "") + "-label"}
-                    key={option.label + "-" + i}
-                    onClick={handleClick}
-                >
-                    <span className="header-nav__item-label">
-                        {option.label}
-                    </span>
-                </Anchor>
-            );
+            return props.renderNavItem({
+                "data-id": option.label.replace(/\W/g, "") + "-label",
+                className: classnames("header-nav__item", {
+                    "header-nav__item--selected":
+                        option.id === props.currentNav || option.label === props.currentNav
+                }),
+                onClick: handleClick,
+                option,
+                key: option.label + "-" + i,
+                children: <span className="header-nav__item-label">{option.label}</span>
+            }, Anchor);
         })}
     </div>
 );
@@ -41,7 +37,7 @@ HeaderNav.propTypes = {
 HeaderNav.defaultProps = {
     currentNav: "",
     "data-id": "header-nav",
-    onNavChange: _.noop
+    onNavChange: _.noop,
 };
 
 export default HeaderNav;

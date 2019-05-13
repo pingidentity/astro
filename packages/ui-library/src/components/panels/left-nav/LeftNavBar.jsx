@@ -1,14 +1,15 @@
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    classnames = require("classnames"),
-    Copyright = require("./Copyright"),
-    Utils = require("../../../util/Utils"),
-    Anchor = require("../../general/Anchor"),
-    _ = require("underscore"),
-    getIconClassName = require("../../../util/PropUtils").getIconClassName;
+import PropTypes from "prop-types";
+import { defaultRender } from "../../../util/PropUtils";
+import React from "react";
+import ReactDOM from "react-dom";
+import classnames from "classnames";
+import Copyright from "./Copyright";
+import Utils from "../../../util/Utils";
+import Anchor from "../../general/Anchor";
+import _ from "underscore";
+import { getIconClassName } from "../../../util/PropUtils";
 
 /**
  * @typedef {object} LeftNavBar#Node
@@ -405,7 +406,12 @@ class LeftNavSection extends React.Component {
         "data-id": PropTypes.string,
         selectedNode: PropTypes.string,
         children: PropTypes.array,
-        icon: PropTypes.string
+        icon: PropTypes.string,
+        renderNavItem: PropTypes.func,
+    };
+
+    static defaultProps = {
+        renderNavItem: defaultRender,
     };
 
     constructor(props) {
@@ -464,13 +470,18 @@ class LeftNavSection extends React.Component {
 
             items.push(
                 <li key={i} className={classnames(itemClassName)}>
-                    <Anchor
-                        data-id={item.id + "-label"}
-                        onClick={this._handleItemClicks[i]}
-                        tabIndex={tabIndex}
-                    >
-                        {iconClassName ? (<span className={iconClassName}></span>) : null}{item.label}
-                    </Anchor>
+                    {
+                        this.props.renderNavItem({
+                            "data-id": item.id + "-label",
+                            onClick: this._handleItemClicks[i],
+                            onMouseDown: this.preventDefault,
+                            item,
+                            tabIndex,
+                            children: <span>
+                                {iconClassName?(<span className = { iconClassName } ></span>) : null}{item.label}
+                            </span>
+                        }, Anchor)
+                    }
                 </li>
             );
         }
@@ -652,3 +663,6 @@ class LeftNavContextSelector extends React.Component {
 }
 
 module.exports = LeftNavBar;
+
+
+module.exports.defaultRender = defaultRender;

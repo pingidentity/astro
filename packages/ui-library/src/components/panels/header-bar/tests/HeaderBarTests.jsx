@@ -72,6 +72,33 @@ describe("HeaderBar", function() {
         );
     });
 
+    it("renders the default component properly", function () {
+        const defaultProps = {
+            className: "test"
+        };
+
+        const elem = HeaderBar.defaultRender(defaultProps, <div />);
+
+        expect(elem.props).toEqual(defaultProps);
+    });
+
+    it("renders the tree structure with a custom render prop", function () {
+        var wrapper = getWrappedComponent({
+            renderNavItem: (props) => <div {...props} />,
+            navOptions: [{ label: "Thing", id: "thing" }]
+        });
+        var component = wrapper.refs.target;
+
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "header-nav"
+        );
+        expect(selector).toBeTruthy();
+
+        expect(selector.children[0].getAttribute("data-id")).toEqual("Thing-label");
+    });
+
+
     it("uses preloaded logo", function() {
         var wrapper = getWrappedComponent({
             siteLogo: "pingone",

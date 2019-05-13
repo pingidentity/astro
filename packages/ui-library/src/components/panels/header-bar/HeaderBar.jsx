@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { defaultRender } from "../../../util/PropUtils";
 import classnames from "classnames";
 import _ from "underscore";
 import PopoverNavMenu from "../../tooltips/PopoverNavMenu";
@@ -10,8 +11,6 @@ import Logo from "./logos/Logo";
 import { getIconClassName } from "../../../util/PropUtils";
 import { cannonballChangeWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
 import { flagsPropType, getFlags, hasFlag } from "../../../util/FlagUtils";
-
-const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
 
 /**
  *  @typedef {function} HeaderBar~MenuRenderer
@@ -431,6 +430,7 @@ class HeaderBar extends React.Component {
         userName: PropTypes.string,
         flags: flagsPropType,
         renderProductNav: PropTypes.func,
+        renderNavItem: PropTypes.func,
         legacy: PropTypes.bool,
         updated: PropTypes.bool
     };
@@ -444,6 +444,7 @@ class HeaderBar extends React.Component {
         onMarketChange: _.noop,
         "data-id": "header",
         renderProductNav: defaultRender,
+        renderNavItem: defaultRender,
         legacy: false,
         updated: false
     };
@@ -593,6 +594,7 @@ class HeaderBar extends React.Component {
                             options={this.props.navOptions}
                             currentNav={this.props.navSelected}
                             onNavChange={this.props.onNavChange}
+                            renderNavItem={this.props.renderNavItem}
                         />
                     )}
                 </div>
@@ -627,3 +629,5 @@ class HeaderBar extends React.Component {
 
 
 module.exports = HeaderBar;
+
+module.exports.defaultRender = defaultRender;

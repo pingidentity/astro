@@ -72,6 +72,28 @@ describe("LeftNavBar", function () {
         expect(children[0].textContent).toEqual("Item 1");
     });
 
+    it("renders the tree structure with a custom render prop", function () {
+        var wrapper = getWrappedComponent({
+            renderNavItem: (props) => <div {...props} />
+        });
+        var component = wrapper.refs.target;
+        var section1 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-menu");
+        var children = section1.getElementsByTagName("li");
+
+        expect(children.length).toEqual(1);
+        expect(children[0].textContent).toEqual("Item 1");
+    });
+
+    it("renders the default component properly", function () {
+        const defaultProps = {
+            className: "test"
+        };
+
+        const elem = LeftNavBar.defaultRender(defaultProps, <div/>);
+
+        expect(elem.props).toEqual(defaultProps);
+    });
+
     it("detaches animation listener after re-render", function () {
         var wrapper = getWrappedComponent();
         var component = wrapper.refs.target;
