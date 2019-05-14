@@ -24,7 +24,8 @@ const PageSection = ({
     "data-id": dataId,
     description,
     title,
-    titleAccessories
+    titleAccessories,
+    underlined,
 }) => {
     const props = {
         className:
@@ -34,9 +35,14 @@ const PageSection = ({
             ),
         "data-id": dataId };
 
+    const titleClassName = classnames(
+        "page-section-title",
+        underlined ? null : "page-section-title-nounderline",
+    );
+
     return title || titleAccessories
         ? <div {...props}>
-            <div className="page-section-title">{title}
+            <div className={titleClassName}>{title}
                 {
                     titleAccessories && <div className="page-section__title-accessories">{titleAccessories}</div>
                 }
@@ -59,10 +65,12 @@ PageSection.propTypes = {
     description: PropTypes.node,
     title: PropTypes.node,
     titleAccessories: PropTypes.node,
+    underlined: PropTypes.bool,
 };
 
 PageSection.defaultProps = {
     "data-id": "page-section",
+    underlined: true,
 };
 
 export default PageSection;

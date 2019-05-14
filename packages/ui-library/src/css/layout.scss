@@ -813,6 +813,10 @@ $color-grey-minor-1: $color-neutral-30;
     text-transform: uppercase;
     display: flex;
     justify-content: space-between;
+
+    &.page-section-title-nounderline {
+        border-bottom: 0;
+    }
 }
 
 .page-section__title-accessories {

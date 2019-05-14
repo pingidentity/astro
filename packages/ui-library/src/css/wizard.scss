@@ -174,11 +174,20 @@ $wizard-close-button-color: $color-strong-neutral-40;
     }
 
     &-step {
-        &__title {
-            font-size: $wizard-title-font-size;
-            @include font-pn-light;
-            line-height: 1em;
-            margin-bottom: $wizard-text-spacing;
+        &-top {
+            display: flex;
+            align-items: center;
+            &__title {
+                font-size: $wizard-title-font-size;
+                @include font-pn-light;
+                line-height: 1em;
+                margin-bottom: $wizard-text-spacing;
+                flex: 3;
+            }
+            &__info {
+                flex: 1;
+                text-align: right;
+            }
         }
         &__description {
             margin-bottom: $wizard-v-spacing;

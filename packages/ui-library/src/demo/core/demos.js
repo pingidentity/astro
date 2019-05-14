@@ -1219,6 +1219,13 @@ module.exports = [
                         pathToSource: "templates_SocialLogin.jsx.html",
                         fullscreen: true,
                         icon: "details"
+                    },
+                    {
+                        label: "Metadata Import",
+                        demo: require("../../templates/MetadataImport"),
+                        pathToSource: "templates_MetadataImport.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
                     }
                 ]
             }

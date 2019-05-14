@@ -8,9 +8,19 @@ const Step = ({
     menuDescription,
     menuTitle,
     title,
+    infoItem
 }) => (
     <div data-id={stepDataId}>
-        <div className="wizard2-step__title" data-id={`${stepDataId}-title`}>{title || menuTitle}</div>
+        <div className="wizard2-step-top">
+            <div className="wizard2-step-top__title" data-id={`${stepDataId}-title`}>{title || menuTitle}</div>
+            { infoItem ? (
+                <div className="wizard2-step-top__info">
+                    { infoItem }
+                </div>
+            ) : (
+                null
+            )}
+        </div>
         <div className="wizard2-step__description" data-id={`${stepDataId}-description`}>
             {description || menuDescription}
         </div>
@@ -30,6 +40,7 @@ Step.propTypes = {
     onSave: PropTypes.func,
     required: PropTypes.bool,
     title: PropTypes.node,
+    infoItem: PropTypes.node,
     menuTitle: PropTypes.string,
 };
 

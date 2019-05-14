@@ -6,11 +6,12 @@
     text-align: left;
     font-size: 14px;
     line-height: 1em;
+    background-color: transparent;
     @include font-pn-regular;
     @include break-word;
 
     &.input-file--selected {
-        background-color: $color-white;
+        background-color: transparent;
     }
 
     &__selected-title {
