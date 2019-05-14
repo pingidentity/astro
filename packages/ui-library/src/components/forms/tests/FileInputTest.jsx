@@ -50,4 +50,15 @@ describe("FileInput", function () {
         expect(data.textContent).toContain(fileData);
         expect(removeBtn.textContent).toContain(customStrings.remove);
     });
+
+    it("Renders the component with loading state", function () {
+        const component = getComponent({
+            loading: true
+        });
+
+        const loadingBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "ellipsis-loader");
+
+        expect(loadingBtn).toBeDefined();
+
+    });
 });

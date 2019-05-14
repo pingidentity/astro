@@ -21,7 +21,7 @@ button.message-button {
         color: $color-white;
 
         .icon-ellipsis {
-            margin-left: $spacing-md;
+            margin: 0 $spacing-md;
 
             &:before,
             &:after,

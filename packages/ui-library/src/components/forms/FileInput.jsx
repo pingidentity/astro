@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Button from "../buttons/Button";
 import FileDrop from "./FileDrop";
+import MessageButton from "../buttons/MessageButton";
 import Icon from "../general/Icon";
 import classnames from "classnames";
 
@@ -37,7 +38,9 @@ import classnames from "classnames";
  * @param {string} [data-id="file-drop"]
  *     Defines the "data-id" for top-level HTML container.
  * @param {string[]} [accept]
- *     An optional array of the the allowed file mime types or file extensions.
+ *     An optional array of the the allowed file mime types or file extensions.]
+ * @param {boolean} [loading]
+ *     If the component should show a loading state for uploading files
  * @param {string} [className]
  *     Optional CSS classname(s) applied to top-level container.
  * @param {string} [fileName]
@@ -73,6 +76,10 @@ export default class FileInput extends Component {
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
         strings: PropTypes.objectOf(PropTypes.string),
+        status: PropTypes.shape({
+            label: PropTypes.string,
+            type: PropTypes.string,
+        }),
     };
 
     static defaultProps = {
@@ -96,11 +103,12 @@ export default class FileInput extends Component {
             onRemove,
             selectedTitle,
             strings,
+            status,
         } = this.props;
         const text = { ...this.defaultStrings, ...strings };
 
         return (
-            fileName ? (
+            fileName && !status ? (
                 <div className="input-file__selected-content">
                     <div className="input-file__selected-title">{selectedTitle}</div>
                     <div className="input-file__info">
@@ -131,13 +139,13 @@ export default class FileInput extends Component {
                 </div>
             ) : (
                 <div className="input-file__select-btn">
-                    <Button
+                    <MessageButton
+                        status={status ? status.type : "default" }
                         data-id="select-button"
                         onClick={this._clickButton(inputRef)}
+                        label={status ? status.label : text.select}
                         inline
-                    >
-                        {text.select}
-                    </Button>
+                    />
                 </div>
             )
 
@@ -146,7 +154,7 @@ export default class FileInput extends Component {
 
     render () {
         const {
-            fileName,
+            fileName
         } = this.props;
 
         const classNames = classnames(this.props.className, "input-file", {

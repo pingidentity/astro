@@ -2,6 +2,8 @@
 import React from "react";
 import FileInput from "../../../components/forms/FileInput";
 import Text from "../../../components/general/Text";
+import FormCheckbox from "../../../components/forms/FormCheckbox";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name FileInputDemo
@@ -11,6 +13,7 @@ import Text from "../../../components/general/Text";
 class FileInputDemo extends React.Component {
     state = {
         fileStatus: "no file selected yet",
+        loading: false,
     }
 
     _handleChange = (file) => {
@@ -35,25 +38,40 @@ class FileInputDemo extends React.Component {
         }
     }
 
+    _toggleLoading = () => {
+        this.setState({ loading: !this.state.loading });
+    }
+
     render() {
         return (
             <div>
                 <p>
                     status: {this.state.fileStatus}
                 </p>
-                <FileInput
-                    accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
-                    fileName={this.state.selectedFile}
-                    fileData={(
-                        <span>
-                            Valid <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
-                        </span>
-                    )}
-                    onValidateFile={this._handleFileValidation}
-                    onValueChange={this._handleChange}
-                    onRemove={this._handleRemove}
-                    selectedTitle="Certificate"
-                />
+                <InputRow>
+                    <FileInput
+                        accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
+                        fileName={this.state.selectedFile}
+                        fileData={(
+                            <span>
+                                Valid <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
+                            </span>
+                        )}
+                        onValidateFile={this._handleFileValidation}
+                        onValueChange={this._handleChange}
+                        onRemove={this._handleRemove}
+                        status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
+                        selectedTitle="Certificate"
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormCheckbox
+                        label="Loading state"
+                        onChange={this._toggleLoading}
+                        flags={["p-stateful"]}
+                        checked={this.state.loading}
+                    />
+                </InputRow>
             </div>
         );
     }

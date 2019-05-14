@@ -149,6 +149,7 @@ export default class FileDrop extends Component {
             <label key="label" data-id={`${this.props["data-id"]}-label`}>
                 <input
                     data-id={`${this.props["data-id"]}-input`}
+                    accept={this.props.accept}
                     type="file"
                     onChange={this._onInputChange}
                     ref={ (fi) => this.fileInput = fi }
