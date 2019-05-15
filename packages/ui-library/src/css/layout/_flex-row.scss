@@ -1,5 +1,9 @@
 .flex-row {
-    display: flex;
+    @include flexbox;
+
+    &--inline {
+        display: inline-flex;
+    }
 
     &--justify-center {
         justify-content: center;
@@ -24,6 +28,11 @@
     &--align-center {
         align-content: center;
         align-items: center;
+    }
+
+    &--align-stretch {
+        align-content: stretch;
+        align-items: stretch;
     }
 
     &--align-top {

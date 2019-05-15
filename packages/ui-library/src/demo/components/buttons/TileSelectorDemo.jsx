@@ -1,6 +1,11 @@
 import React from "react";
 import HR from "../../../components/general/HR";
-import TileSelector, { TileButton, tileButtonTypes } from "../../../components/buttons/TileSelector";
+import TileSelector, {
+    TileButton,
+    tileButtonTypes,
+    TileGroup,
+    selectorTypes
+} from "../../../components/buttons/TileSelector";
 import LibraryLogo from "../../core/LibraryLogo";
 
 /**
@@ -11,15 +16,15 @@ import LibraryLogo from "../../core/LibraryLogo";
 class TileSelectorDemo extends React.Component {
     state = { selected: "webapp" };
 
-    logArguments = (buttonId, panelId, e) => {
+    _logArguments = (buttonId, panelId, e) => {
         console.log("Button id: ", buttonId);
         console.log("Panel id: ", panelId);
         console.log("Event: ", e);
     }
 
-    render() {
-        const onValueChange = value => this.setState({ selected: value });
+    _handleValueChange = value => this.setState({ selected: value });
 
+    render() {
         return (
             <div>
                 <TileSelector>
@@ -47,9 +52,42 @@ class TileSelectorDemo extends React.Component {
                     </TileButton>
                 </TileSelector>
                 <HR />
+                <TileSelector>
+                    <TileGroup
+                        title="With groups"
+                    >
+                        <TileButton
+                            details={[
+                                "Cloud-based",
+                                "Easily accessible"
+                            ]}
+                            iconName="network"
+                            title="Web App"
+                        >
+                        Cloud-based apps that are accessed within a browser.
+                        </TileButton>
+                        <TileButton title="Native App" iconName="device" selected >
+                        Applications that are stored and run from a device or desktop.
+                        </TileButton>
+                    </TileGroup>
+                    <TileGroup
+                        title="Another group"
+                    >
+                        <TileButton title="Single Page App" iconName="apps" details={[
+                            "Cloud-based",
+                            "Easily accessible"
+                        ]}>
+                        Just a bit of text.
+                        </TileButton>
+                        <TileButton title="Non-Interactive" icon={<LibraryLogo variant="dark" />}>
+                        Cloud-based apps that are accessed within a browser.
+                        </TileButton>
+                    </TileGroup>
+                </TileSelector>
+                <HR />
                 <TileSelector
                     data-id="second-one"
-                    onValueChange={onValueChange}
+                    onValueChange={this._handleValueChange}
                     selected={this.state.selected}
                     options={[
                         {
@@ -65,14 +103,14 @@ class TileSelectorDemo extends React.Component {
                                         content: "Apps that utilize whatever",
                                         id: "SAML",
                                         label: "SAML",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
                                         id: "OIDC",
                                         label: "OIDC",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     }
                                 ]
                             }
@@ -94,14 +132,14 @@ class TileSelectorDemo extends React.Component {
                                         content: "Apps that utilize whatever",
                                         id: "SAML",
                                         label: "SAML",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
                                         id: "OIDC",
                                         label: "OIDC",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     }
                                 ]
                             }
@@ -119,14 +157,14 @@ class TileSelectorDemo extends React.Component {
                                         content: "Apps that utilize whatever",
                                         id: "SAML",
                                         label: "SAML",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
                                         id: "OIDC",
                                         label: "OIDC",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     }
                                 ]
                             }
@@ -144,14 +182,14 @@ class TileSelectorDemo extends React.Component {
                                         content: "Apps that utilize whatever",
                                         id: "SAML",
                                         label: "SAML",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
                                         id: "OIDC",
                                         label: "OIDC",
-                                        onButtonClick: this.logArguments
+                                        onButtonClick: this._logArguments
                                     }
                                 ]
                             }
@@ -198,6 +236,59 @@ class TileSelectorDemo extends React.Component {
                     ]}
                 />
                 <HR />
+                <TileSelector
+                    type="stacked"
+                    groups={[
+                        {
+                            id: "first",
+                            title: "Stacked group"
+                        },
+                        {
+                            id: "second",
+                            title: "Another stacked group"
+                        }
+                    ]}
+                    options={[
+                        {
+                            id: "webapp",
+                            title: "Web App",
+                            iconName: "network",
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            link: { text: "Read More" },
+                            note: "A Good Tile",
+                            group: "first"
+                        },
+                        {
+                            id: "native",
+                            title: "Native App",
+                            iconName: "device",
+                            description: "Applications that are stored and run from a device or desktop.",
+                            details: [
+                                "Cloud-based",
+                                "Easily accessible"
+                            ],
+                            note: "A Good Tile",
+                            group: "second"
+                        },
+                        {
+                            id: "spa",
+                            title: "Single Page App",
+                            iconName: "apps",
+                            description: "Just a bit of text.",
+                            note: "A Bad Tile",
+                            group: "second"
+                        },
+                        {
+                            id: "noninteractive",
+                            title: "Non-Interactive",
+                            icon: <img src="./images/src/images/logo-pingidentity.png" />,
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            note: "A Good Tile",
+                            group: "first"
+                        }
+                    ]}
+                />
+                <HR />
                 <TileSelector>
                     <TileButton
                         title="Facebook"
@@ -214,6 +305,34 @@ class TileSelectorDemo extends React.Component {
                         iconName="linkedin"
                         type={tileButtonTypes.SQUARE}
                     />
+                </TileSelector>
+                <HR />
+                <TileSelector>
+                    <TileGroup
+                        title="Square group"
+                        type={selectorTypes.SQUARE}
+                    >
+                        <TileButton
+                            title="Facebook"
+                            iconName="facebook"
+                            type={tileButtonTypes.SQUARE}
+                        />
+                        <TileButton
+                            title="Twitter"
+                            iconName="twitter"
+                            type={tileButtonTypes.SQUARE}
+                        />
+                    </TileGroup>
+                    <TileGroup
+                        title="Second group"
+                        type={selectorTypes.SQUARE}
+                    >
+                        <TileButton
+                            title="LinkedIn"
+                            iconName="linkedin"
+                            type={tileButtonTypes.SQUARE}
+                        />
+                    </TileGroup>
                 </TileSelector>
             </div>
         );

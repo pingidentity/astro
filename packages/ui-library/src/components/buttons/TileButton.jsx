@@ -9,7 +9,10 @@ const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when cli
 export const types = {
     SIDEICON: "side-icon",
     SQUARE: "square",
-    TOPICON: "top-icon"
+    TOPICON: "top-icon",
+    // Types below are here to match the TileSelector and TileGroup types to avoid confusion
+    STACKED: "side-icon",
+    ROW: "top-icon"
 };
 
 /**

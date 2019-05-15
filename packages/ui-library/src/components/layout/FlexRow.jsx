@@ -4,8 +4,9 @@ import classnames from "classnames";
 
 export const alignments = {
     BOTTOM: "bottom",
-    TOP: "TOP",
-    CENTER: "CENTER"
+    TOP: "top",
+    CENTER: "center",
+    STRETCH: "stretch"
 };
 
 export const justifyOptions = {
@@ -17,6 +18,8 @@ export const justifyOptions = {
 
 const getAlignmentClass = alignment => {
     switch (alignment) {
+        case alignments.STRETCH:
+            return "flex-row--align-stretch";
         case alignments.CENTER:
             return "flex-row--align-center";
         case alignments.TOP:
@@ -47,7 +50,7 @@ function FlexRow({
     "data-id": dataId,
     className,
     inline,
-    justify
+    justify,
 }) {
     return (
         <div
@@ -68,19 +71,10 @@ function FlexRow({
 }
 
 FlexRow.propTypes = {
-    alignment: PropTypes.oneOf([
-        alignments.BOTTOM,
-        alignments.CENTER,
-        alignments.TOP
-    ]),
+    alignment: PropTypes.oneOf(Object.values(alignments)),
     "data-id": PropTypes.string,
     inline: PropTypes.bool,
-    justify: PropTypes.oneOf([
-        justifyOptions.CENTER,
-        justifyOptions.START,
-        justifyOptions.SPACEBETWEEN,
-        justifyOptions.END,
-    ])
+    justify: PropTypes.oneOf(Object.values(justifyOptions))
 };
 
 FlexRow.defaultProps = {

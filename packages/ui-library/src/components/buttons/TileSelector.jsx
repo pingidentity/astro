@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import _ from "underscore";
 import TileButton, { types as buttonTypes } from "./TileButton";
+import TileGroup from "./TileGroup";
 import TilePanel from "./TilePanel";
 
 const getPanelPosition = (options, selected) => {
@@ -9,6 +11,12 @@ const getPanelPosition = (options, selected) => {
     return (selectedPosition + 1) <= Math.ceil(options.length / 2)
         ? "left"
         : "right";
+};
+
+const selectorTypes = {
+    ROW: "row",
+    SQUARE: "square",
+    STACKED: "stacked",
 };
 
 /**
@@ -66,69 +74,119 @@ const getPanelPosition = (options, selected) => {
  *
  */
 
-const TileSelector = ({
+const renderOptions = ({
     "data-id": dataId,
-    className,
-    children,
     onValueChange,
-    options,
+    options: propsOptions,
     selected,
-    type,
-}) => {
-    const stacked = type === "stacked";
-    const [buttons, panel] = options.reduce((
-        [buttonsAcc, activePanel],
-        {
-            description,
-            icon,
-            iconName,
-            id,
-            note,
-            title,
-            link,
-            panel: optionPanel,
-            details,
-        }
-    ) => {
-        const handleChange = e => onValueChange(id, e);
-        const isSelected = selected === id;
+    type
+}) => options => options.reduce((
+    [buttonsAcc, activePanel],
+    {
+        description,
+        icon,
+        iconName,
+        id,
+        note,
+        title,
+        link,
+        panel: optionPanel,
+        details,
+    }
+) => {
+    const handleChange = e => onValueChange(id, e);
+    const isSelected = selected === id;
 
+    return [
+        [
+            ...buttonsAcc,
+            (
+                <TileButton
+                    key={id}
+                    data-id={`${dataId}-button-${id}`}
+                    title={title}
+                    icon={icon}
+                    iconName={iconName}
+                    selected={isSelected}
+                    onClick={handleChange}
+                    panel={optionPanel ? true : false}
+                    details={details}
+                    type={type === "stacked" ? "side-icon" : "top-icon"}
+                    link={link}
+                    note={note}
+                >
+                    {description}
+                </TileButton>
+            )
+        ],
+        (optionPanel && isSelected)
+            ? <TilePanel
+                {...optionPanel}
+                tileId={id}
+                // Pass in options from props here because, when grouped,
+                // the panel needs to calculate its position based the the total
+                // number of options
+                position={getPanelPosition(propsOptions, selected)}
+            />
+            : activePanel
+    ];
+}, [[], undefined]);
+
+const renderGroupedOptions = props => {
+    const {
+        groups,
+        options,
+        type
+    } = props;
+    // Group options by their group id
+    const grouped = _.groupBy(options, "group");
+    const render = renderOptions(props);
+
+    return Object.entries(grouped).reduce((
+        [groupsAcc, activePanel],
+        [id, fromGroup]
+    ) => {
+        // Render all options from group
+        // Active panel maintains the same value once it's defined
+        const [
+            childOpts,
+            panel = activePanel,
+        ] = render(fromGroup);
+
+        const { title } = groups.find(group => group.id === id) || {};
+
+        // Return active panel and add new group list of other groups
         return [
             [
-                ...buttonsAcc,
-                (
-                    <TileButton
-                        key={id}
-                        data-id={`${dataId}-button-${id}`}
-                        title={title}
-                        icon={icon}
-                        iconName={iconName}
-                        selected={isSelected}
-                        onClick={handleChange}
-                        panel={optionPanel ? true : false}
-                        details={details}
-                        type={stacked ? "side-icon" : "top-icon"}
-                        link={link}
-                        note={note}
-                    >
-                        {description}
-                    </TileButton>
-                )
+                ...groupsAcc,
+                <TileGroup
+                    key={id}
+                    title={title}
+                    type={type}
+                >
+                    {childOpts}
+                </TileGroup>
             ],
-            (optionPanel && isSelected)
-                ? <TilePanel
-                    {...optionPanel}
-                    tileId={id}
-                    position={getPanelPosition(options, selected)}
-                />
-                : activePanel
+            panel
         ];
-    }, [[], null]);
+    }, [[], undefined]);
+};
+
+const TileSelector = props => {
+    const {
+        "data-id": dataId,
+        className,
+        children,
+        groups,
+        options,
+        type
+    } = props;
+    const [buttons, panel] = groups ? renderGroupedOptions(props) : renderOptions(props)(options);
 
     return (
         <div data-id={dataId}>
             <div className={classnames("tile-selector", className, {
-                "tile-selector--stacked": stacked,
+                "tile-selector--stacked": type === "stacked",
             })}>
                 {children}
                 {buttons}
@@ -141,11 +199,18 @@ const TileSelector = ({
 TileSelector.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
+    groups: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired
+        })
+    ),
     onValueChange: PropTypes.func,
     options: PropTypes.arrayOf(
         PropTypes.shape({
             description: PropTypes.string,
             details: PropTypes.arrayOf(PropTypes.string),
+            group: PropTypes.string,
             icon: PropTypes.node,
             iconName: PropTypes.string,
             panel: PropTypes.shape({
@@ -185,11 +250,14 @@ TileSelector.propTypes = {
 
 TileSelector.defaultProps = {
     "data-id": "tile-selector",
+    onValueChange: () => {},
     options: [],
     type: "row",
 };
 
 TileSelector.TileButton = TileButton;
 TileSelector.tileButtonTypes = buttonTypes;
+TileSelector.TileGroup = TileGroup;
+TileSelector.selectorTypes = selectorTypes;
 
 export default TileSelector;

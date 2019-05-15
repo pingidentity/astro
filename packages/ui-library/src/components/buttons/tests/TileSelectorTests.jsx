@@ -62,6 +62,18 @@ describe("TileSelector", function() {
         expect(callback).lastCalledWith("spa");
     });
 
+    it("does not error with default callback", function() {
+        const component = getComponent();
+
+        var newOption = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "tile-selector-button-spa"
+        );
+
+        ReactTestUtils.Simulate.click(newOption);
+        expect(component).toBeTruthy();
+    });
+
     it("renders panel with left position correctly", () => {
         const component = getComponent({
             options: [
@@ -162,5 +174,140 @@ describe("TileSelector", function() {
         const note = TestUtils.findRenderedDOMNodeWithDataId(component, "tile-selector-button-webapp-link");
 
         expect(note).toBeTruthy();
+    });
+
+    it("renders correct number of groups and groups options correctly", () => {
+        const component = getComponent({
+            groups: [
+                {
+                    id: "one",
+                    title: "One"
+                },
+                {
+                    id: "two",
+                    title: "Two"
+                }
+            ],
+            options: [
+                {
+                    id: "webapp",
+                    title: "Web App",
+                    iconName: "network",
+                    description: "Cloud-based apps that are accessed within a browser.",
+                    group: "one"
+                },
+                {
+                    id: "native",
+                    title: "Native App",
+                    iconName: "device",
+                    description: "Applications that are stored and run from a device or desktop.",
+                    group: "two"
+                },
+                {
+                    id: "noninteractive",
+                    title: "Non-Interactive",
+                    iconName: "server",
+                    description: "Cloud-based apps that are accessed within a browser.",
+                    panel: {
+                        label: "CHOOSE CONNECTION TYPE",
+                        options: [
+                            {
+                                buttonLabel: "Configure",
+                                content: "Apps that utilize whatever",
+                                label: "SAML"
+                            },
+                            {
+                                buttonLabel: "Configure",
+                                content: "Employs Universal Login and whatnot",
+                                label: "OIDC",
+                            }
+                        ]
+                    },
+                    group: "two"
+                },
+            ],
+        });
+
+        const groups = TestUtils.scryRenderedDOMNodesWithDataId(component, "tile-group");
+
+        expect(groups.length).toEqual(2);
+
+        const webapp = TestUtils.findRenderedDOMNodeWithDataId(groups[0], "tile-selector-button-webapp");
+
+        expect(webapp).toBeTruthy();
+
+        const noninteractive = TestUtils.findRenderedDOMNodeWithDataId(
+            groups[1],
+            "tile-selector-button-noninteractive"
+        );
+
+        expect(noninteractive).toBeTruthy();
+    });
+
+    it("renders non-grouped options in a group container when overall component has groups", () => {
+        const component = getComponent({
+            groups: [
+                {
+                    id: "one",
+                    title: "One"
+                },
+                {
+                    id: "two",
+                    title: "Two"
+                }
+            ],
+            options: [
+                {
+                    id: "webapp",
+                    title: "Web App",
+                    iconName: "network",
+                    description: "Cloud-based apps that are accessed within a browser.",
+                    group: "one"
+                },
+                {
+                    id: "native",
+                    title: "Native App",
+                    iconName: "device",
+                    description: "Applications that are stored and run from a device or desktop.",
+                    group: "two"
+                },
+                {
+                    id: "noninteractive",
+                    title: "Non-Interactive",
+                    iconName: "server",
+                    description: "Cloud-based apps that are accessed within a browser.",
+                    panel: {
+                        label: "CHOOSE CONNECTION TYPE",
+                        options: [
+                            {
+                                buttonLabel: "Configure",
+                                content: "Apps that utilize whatever",
+                                label: "SAML"
+                            },
+                            {
+                                buttonLabel: "Configure",
+                                content: "Employs Universal Login and whatnot",
+                                label: "OIDC",
+                            }
+                        ]
+                    },
+                },
+            ],
+        });
+
+        const groups = TestUtils.scryRenderedDOMNodesWithDataId(component, "tile-group");
+
+        expect(groups.length).toEqual(3);
+
+        const webapp = TestUtils.findRenderedDOMNodeWithDataId(groups[0], "tile-selector-button-webapp");
+
+        expect(webapp).toBeTruthy();
+
+        const noninteractive = TestUtils.findRenderedDOMNodeWithDataId(
+            groups[2],
+            "tile-selector-button-noninteractive"
+        );
+
+        expect(noninteractive).toBeTruthy();
     });
 });

@@ -611,7 +611,7 @@ button.tile-button {
         @include arrow(20px);
 
         &:after {
-            top: 90%;
+            bottom: -2%;
             transform: rotate(180deg);
             transform-origin: 25%;
         }
@@ -651,6 +651,78 @@ button.tile-button {
                 margin-bottom: 0;
             }
         }
+    }
+
+    &__group {
+        flex-flow: column wrap;
+        height: auto;
+
+        &:not(:last-of-type) {
+            margin-right: $spacing-xl;
+        }
+
+        &--grow-1 {
+            @include flexbox-grow(1);
+        }
+
+        &--grow-2 {
+            @include flexbox-grow(2);
+        }
+
+        &--grow-3 {
+            @include flexbox-grow(3);
+        }
+
+        &--grow-4 {
+            @include flexbox-grow(4);
+        }
+
+        &--square {
+            @include flexbox-grow(0);
+            flex-basis: auto;
+        }
+
+        &--stacked {
+            margin-right: 0;
+        }
+
+    }
+
+    &__group-tiles {
+        flex: 1;
+        margin-top: $spacing-sm;
+        width: 100%;
+
+        > * {
+            @include flexbox-grow(1);
+            @include flexbox-shrink(1);
+
+            margin-right: $spacing-md;
+            flex-basis: 0%;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &--stacked {
+            flex-flow: column nowrap;
+
+            > * {
+                margin-bottom: $spacing-md;
+                margin-right: 0;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    &__group-title {
+        color: $color-accent-neutral-40;
+        font-size: $font-size-reduced;
+        text-transform: uppercase;
+        width: 100%;
     }
 }
 
