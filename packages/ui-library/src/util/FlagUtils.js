@@ -8,10 +8,14 @@ export const allFlags = [
     "fix-discard-button",
     "fixed-messages-constants",
     "true-default",
+    "v4",
 ];
 
 export const flagsPropType = PropTypes.arrayOf(PropTypes.oneOf(allFlags));
 
 export const getFlags = ({ props, context }) => props.flags || (context && context.flags) || [];
 
-export const hasFlag = (component, flag) => getFlags(component).includes(flag);
+export const hasFlag = (component, flag) => {
+    const flags = getFlags(component);
+    return flags.includes(flag) || flags.includes("v4");
+};

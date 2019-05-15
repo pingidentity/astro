@@ -19,7 +19,7 @@ const flagHelp = (
 
 class DemoItem extends React.Component {
     state = {
-        flags: allFlags,
+        flags: allFlags.filter(flag => flag !== "v4"),
     };
 
     static propTypes = {
@@ -86,8 +86,8 @@ class DemoItem extends React.Component {
             jsdocUrl,
             type,
             status,
-            flags,
         } = this.props;
+        const flags = this.props.flags ? [...this.props.flags, "v4"] : null;
 
         // This is very important because Redux updates are not instant.  When replacing the demoItemReducer,
         // The new state will take some type to propagate.  We dont want to try and render without an initial

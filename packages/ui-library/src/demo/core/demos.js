@@ -12,6 +12,7 @@ import StandardProps from "../components/docs/contributing/StandardProps.mdx";
 import ClassNames from "../components/docs/contributing/ClassNames.mdx";
 import DataIDs from "../components/docs/contributing/DataIDs.mdx";
 import Changes from "../components/docs/cannonball/Changes.mdx";
+import GettingReady from "../components/docs/cannonball/GettingReadyV4.mdx";
 
 const contentPage = WrappedComponent => (props) => (
     <PageSection>
@@ -44,6 +45,12 @@ module.exports = [
                 demo: require("../components/docs/cannonball/Cannonball"),
                 fullscreen: true,
                 icon: "circle"
+            },
+            {
+                label: "Getting Ready for V4",
+                demo: contentPage(GettingReady),
+                fullscreen: true,
+                icon: "check"
             },
             {
                 label: "V4 Breaking Changes",
