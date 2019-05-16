@@ -50,13 +50,6 @@ describe("Sandbox White list", function () {
         SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_AddButton");
     }));
 
-    it("clicks the searchbox", SandboxWhitelistPage.retriable(function () {
-
-        SandboxWhitelistPage.clickSearchBox();
-
-        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_SearchBox");
-    }));
-
     it("enters a name in the searchbox", SandboxWhitelistPage.retriable(function () {
 
         SandboxWhitelistPage.setSearchBoxValue("Sophia");

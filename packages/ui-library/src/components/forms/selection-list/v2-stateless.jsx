@@ -63,6 +63,7 @@ export default class SelectionListStateless extends React.Component {
         "no-border": PropTypes.bool,
         bottomPanel: PropTypes.node,
         multiAddButtonLabel: PropTypes.string,
+        multiAddButtonDisabledHint: PropTypes.string,
         onMultiAdd: PropTypes.func,
         autoSelectAll: PropTypes.bool,
         autoFilter: PropTypes.bool,
@@ -161,6 +162,8 @@ export default class SelectionListStateless extends React.Component {
                 <Button
                     data-id="add-button"
                     label={this.props.multiAddButtonLabel}
+                    disabledText={this.props.multiAddButtonDisabledHint}
+                    disabled={!!this.props.multiAddButtonDisabledHint}
                     onClick={onClick}
                     type="primary"
                 />

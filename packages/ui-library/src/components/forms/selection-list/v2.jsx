@@ -68,6 +68,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
  *     Callback to be triggered when the add button is clicked
  * @param {string} [multiAddButtonLabel="Add"]
  *     Label for the multi-add button
+ * @param {string} [multiAddButtonDisabledHint]
+ *     When provided, this text appears as a help-hint on the add button and the add button is disabled.
  * @param {boolean} [autoSelectAll=false]
  *     When true, selecting all will trigger onValueChange with all the items
  * @param {boolean} [autoFilter=false]

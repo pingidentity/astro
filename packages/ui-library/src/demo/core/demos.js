@@ -1188,7 +1188,7 @@ module.exports = [
                     {
                         label: "Sandbox Whitelist",
                         demo: require("../../templates/SandboxWhitelist"),
-                        pathToSource: "templates_oasis_ApplicationWizard.jsx.html",
+                        pathToSource: "templates_SandboxWhitelist.jsx.html",
                         fullscreen: true,
                         icon: "details"
                     },
