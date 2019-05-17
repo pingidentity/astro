@@ -1056,11 +1056,35 @@ module.exports = [
                 icon: "robot",
                 children: [
                     {
+                        label: "Chip",
+                        demo: require("../components/layout/ChipDemo"),
+                        pathToDoc: "components/layout/Chip.jsx",
+                        pathToSource: "components_layout_Chip.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ChipDemo.jsx.html",
+                        status: {
+                            message: "Co-development: This component is production ready, but the API may change to" +
+                                " reflect requirements.",
+                            type: "version"
+                        }
+                    },
+                    {
                         label: "File Input",
                         demo: require("../components/forms/FileInputDemo"),
                         pathToDoc: "components/forms/FileInput.jsx",
                         pathToSource: "components_forms_FileInput.jsx.html",
                         pathToDemoSource: "demo_components_forms_FileInputDemo.jsx.html"
+                    },
+                    {
+                        label: "Mapped Attributes",
+                        demo: require("../components/layout/MappedAttributesDemo"),
+                        pathToDoc: "components/layout/MappedAttributes.jsx",
+                        pathToSource: "components_layout_MappedAttributes.jsx.html",
+                        pathToDemoSource: "demo_components_layout_MappedAttributesDemo.jsx.html",
+                        status: {
+                            message: "Co-development: This component is production ready, but the API may change to" +
+                                " reflect requirements.",
+                            type: "version"
+                        }
                     },
                     {
                         label: "Message Button",

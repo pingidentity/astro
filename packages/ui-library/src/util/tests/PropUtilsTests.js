@@ -1,5 +1,6 @@
 import React from "react";
-import { getIconClassName } from "../PropUtils";
+import { checkPropTypes } from "prop-types";
+import { constantPropType, getIconClassName } from "../PropUtils";
 
 
 describe("PropUtils", function () {
@@ -29,5 +30,37 @@ describe("PropUtils", function () {
         it("returns null non string", function () {
             expect(getIconClassName({ icon: <div></div> })).toBe(null);
         });
+    });
+
+    describe("constantPropType throws error when given invalid oneOf value", () => {
+        console.error = jest.fn();
+        const propType = constantPropType({
+            "ROCKO": "rocko",
+            "HEFFER": "heffer",
+            "FILBERT": "filbert"
+        });
+
+        checkPropTypes(
+            { modernLife: propType },
+            { modernLife: "Snarf" }
+        );
+
+        expect(console.error).toHaveBeenCalled();
+    });
+
+    describe("constantPropType does not throw error with valid oneOf value", () => {
+        console.error = jest.fn();
+        const propType = constantPropType({
+            "ROCKO": "rocko",
+            "HEFFER": "heffer",
+            "FILBERT": "filbert"
+        });
+
+        checkPropTypes(
+            { modernLife: propType },
+            { modernLife: "rocko" }
+        );
+
+        expect(console.error).not.toHaveBeenCalled();
     });
 });

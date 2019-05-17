@@ -1,0 +1,22 @@
+.mapped-attributes {
+    &__from {
+        background-color: #fcdcb4;
+        border-radius: 3px;
+        padding: 4px;
+    }
+
+    &__to {
+        background-color: $color-neutral-90;
+        border-radius: 3px;
+        padding: 4px;
+    }
+
+    &__required {
+        background-color: $color-accent-neutral-10;
+        border-radius: 3px;
+        color: $color-accent-neutral-90;
+        font-size: $font-size-reduced;
+        padding: 2px 5px;
+        text-transform: uppercase;
+    }
+}

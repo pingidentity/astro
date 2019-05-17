@@ -1,0 +1,21 @@
+.chip-component {
+    border-radius: 3px;
+    display: inline-block;
+    padding: $spacing-xs $spacing-sm;
+
+    &--color-cyan {
+        background-color: $color-charting-cyan;
+    }
+
+    &--color-light-grey {
+        background-color: $color-neutral-90;
+    }
+
+    &--color-white {
+        background-color: $color-white;
+    }
+
+    &--full-width {
+        display: block;
+    }
+}

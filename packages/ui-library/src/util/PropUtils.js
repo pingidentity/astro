@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 /**
  * @module util/PropUtils
@@ -50,6 +51,26 @@ export const getIconClassName = (props, options = {}) => {
  *
  */
 export const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
+
+/**
+ * @alias module:util/PropUtils.defaultRender
+ *
+ * @desc Takes a constant object and sets up a oneOf propType for it.
+ *
+ * @param {object} constant
+ *    A constant object, like:
+ *      const Sizes = {
+ *          SM: "sm",
+ *          MD: "md",
+ *          LG: "lg"
+ *      }
+ */
+export const constantPropType = constant => PropTypes.oneOf(Object.values(constant));
+
+export const standardPropTypes = {
+    className: PropTypes.string,
+    "data-id": PropTypes.string,
+};
 
 export default {
     getIconClassName,

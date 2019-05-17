@@ -100,7 +100,7 @@ Table.propTypes = {
     data: PropTypes.array,
     "data-id": PropTypes.string,
     headData: PropTypes.array,
-    line: PropTypes.bool,
+    lines: PropTypes.bool,
     rowLabels: PropTypes.bool,
     verticalAlignment: PropTypes.oneOf([ "AUTO", "TOP", "MIDDLE", "BOTTOM" ])
 };
