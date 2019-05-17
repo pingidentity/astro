@@ -11,7 +11,7 @@ import ButtonGroup from "../../../components/layout/ButtonGroup";
 * @desc A demo for Modal
 */
 class ModalDemo extends React.Component {
-    static flags = [ "use-portal" ];
+    static flags = ["use-portal"];
 
     state = {};
 
@@ -106,8 +106,8 @@ class ModalDemo extends React.Component {
                         onOpen={this._makeToggle(7)}>
                         <InputRow>
                             This modal has no onClose prop, so it is up to the developer to
-                             provide the closing behavior as with the buttons below. <br/>
-                             This also removes the close button at the top of the modal, and centers the header.
+                             provide the closing behavior as with the buttons below. <br />
+                            This also removes the close button at the top of the modal, and centers the header.
                         </InputRow>
                         <ButtonGroup onCancel={this._makeToggle(7)}>
                             <Button type="primary" onClick={this._makeToggle(7)}>Save</Button>
@@ -122,7 +122,8 @@ class ModalDemo extends React.Component {
                         type="dialog"
                         ref="dialogModal"
                         expanded={this.state.expanded4}
-                        onOpen={this._makeToggle(4)}>
+                        onOpen={this._makeToggle(4)}
+                        onClose={this._makeToggle(4)}>
 
                         <div>
                             <div className="modal-title">
@@ -146,9 +147,10 @@ class ModalDemo extends React.Component {
                         type="alert"
                         ref="alertModal"
                         expanded={this.state.expanded5}
+                        showCloseBttn={true}
                         onOpen={this._makeToggle(5)}>
 
-                        <div className = "title">
+                        <div className="title">
                             Alert Modal
                         </div>
                         <div>

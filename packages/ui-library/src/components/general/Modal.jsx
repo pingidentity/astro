@@ -258,14 +258,14 @@ class Modal extends React.Component {
                     data-id="modal-content"
                     onClick={this._handleBgClick}>
                     <span data-id="modal-inner-content">
-                        <If test={this.props.showHeader}>
+                        <If test={this.props.showHeader && this.props.type !== "dialog"}>
                             <div className="modal-header" data-id="modal-header">
                                 {this.props.modalTitle}
                                 {this.props.onClose && this._getCloseButton()}
                             </div>
                         </If>
                         <div className="modal-body" data-id="modal-body" style={this._toggleIeScrollHack()}>
-                            <If test={!this.props.showHeader}>
+                            <If test={(!this.props.showHeader || this.props.type === "dialog") && this.props.onClose}>
                                 {this._getCloseButton()}
                             </If>
                             {this.props.children}
