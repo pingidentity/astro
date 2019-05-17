@@ -43,6 +43,7 @@ $fullwidthBreakpoint: 950px;
     @include flexbox;
 
     position: relative;
+    max-width: 100%;
 
     > * {
         @include flexbox-grow(1);
