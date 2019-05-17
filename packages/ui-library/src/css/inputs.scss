@@ -2416,6 +2416,14 @@ input[type=file] {
         @include flexbox-direction(row);
         align-items: flex-end;
     }
+    &__accessories {
+        display: inline-block;
+        line-height: $default-input-height;
+
+        & > * {
+            vertical-align: middle;
+        }
+    }
 
     position: relative;
     margin: 0 0 25px;

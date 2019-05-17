@@ -46,6 +46,31 @@ const InputRow = ({
     );
 };
 
+
+/**
+ * @class InputRow.InputRowAccessories
+ * @desc A wrapper for text, buttons, etc to ensure it vertically aligns with the input portion of a FormTextField
+ *
+ * @param {string} [data-id="input-row"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @example
+<InputRow>
+    <FormTextField
+        labelText="First Name"
+        width={InputWidths.SM}
+        data-id="firstName"
+        required={true}
+    />
+    <RowAccessories>
+        <Button inline>This will be vertically aligned</Button>
+    </RowAccessories>
+</InputRow>
+ */
+InputRow.InputRowAccessories = ({
+    children,
+    "data-id": dataId,
+}) => <div className="input-row__accessories" data-id={dataId}>{children}</div>;
+
 InputRow.propTypes = {
     "data-id": PropTypes.string,
     children: PropTypes.node,

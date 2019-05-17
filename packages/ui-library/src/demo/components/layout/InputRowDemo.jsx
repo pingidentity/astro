@@ -1,5 +1,6 @@
 import React from "react";
-import InputRow from "../../../components/layout/InputRow";
+import Button from "../../../components/buttons/Button";
+import InputRow, { InputRowAccessories } from "../../../components/layout/InputRow";
 import FormTextField from "../../../components/forms/form-text-field";
 import InputWidths from "../../../components/forms/InputWidths";
 
@@ -28,6 +29,11 @@ const InputRowDemo = () => {
                     flags={["p-stateful"]}
                     required={true}
                 />
+
+                <InputRowAccessories data-id="input-row-accessories">
+                    <Button className="inline">Buttons</Button> and text can be aligned with text inputs using the
+                    InputRow Accessories.
+                </InputRowAccessories>
             </InputRow>
             <InputRow>
                 <FormTextField
