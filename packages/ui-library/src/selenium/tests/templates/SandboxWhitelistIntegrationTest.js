@@ -34,13 +34,9 @@ describe("Sandbox White list", function () {
 
         SandboxWhitelistPage.clickAddUser();
 
-        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_AddUser");
-    }));
-
-    it("click on a user from the list", SandboxWhitelistPage.retriable(function () {
         SandboxWhitelistPage.clickUser();
 
-        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_User");
+        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_AddUser");
     }));
 
     it("clicks on the add button from the list", SandboxWhitelistPage.retriable(function () {
