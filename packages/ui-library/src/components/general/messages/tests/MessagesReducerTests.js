@@ -106,6 +106,7 @@ describe("Messages", function () {
         ]);
     });
 
+
     it("adds message with comp id", function () {
         var store = getStore();
         store.dispatch(Actions.addMessage("mycontainer", "hello world"));
@@ -118,6 +119,13 @@ describe("Messages", function () {
             index: 1,
             timer: 5000
         }]);
+    });
+
+    it("adds a center message with earth icon", function () {
+        var store = getStore();
+        store.dispatch(Actions.addCenterMessage("mycontainer", "hello world", "test"));
+
+        expect(store.getState().mycontainer[0].iconName).toEqual("earth");
     });
 
     it("adds message with status", function () {

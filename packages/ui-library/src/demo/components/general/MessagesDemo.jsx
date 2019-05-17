@@ -26,6 +26,14 @@ class MessagesDemo extends React.Component {
         });
     };
 
+    _addCenterMessage = () => {
+        this.actions.addCenterMessage(
+            "messages-i18n",
+            "Changing to Environment",
+            "TLV-Automation"
+        );
+    };
+
     _addI18nInfoMessage = () => {
         this.actions.addMessage({
             containerId: "messages-i18n",
@@ -246,6 +254,10 @@ class MessagesDemo extends React.Component {
                 <Button onClick={this._addHtmlMessage}>Add HTML message</Button>
                 <Button onClick={this._addProgressMessage}>Add progress message</Button>
                 <Button onClick={this._addMinimizedProgressMessage}>Add minimized message</Button>
+
+                <HR />
+
+                <Button onClick={this._addCenterMessage}>Add env message</Button>
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import { MessageTypes, MessageTypeValues } from "./MessagesConstants";
+import React from "react";
 
 var keyMirror = require("fbjs/lib/keyMirror");
 
@@ -142,6 +143,45 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
             layout,
             hideClose,
             key,
+        });
+    };
+};
+
+/**
+ * @alias Actions.addCenterMessage
+ * @memberof Messages
+ */
+exports.addCenterMessage = function (containerId, messageTitle, messageDescription) {
+    let messageId;
+
+    const removeAfterMs = 2000;
+
+    return function (dispatch) {
+        var timer = removeAfterMs;
+        if (messageId === undefined) {
+            messageId = exports.lastId += 1;
+        }
+
+        timer = window.setTimeout(function (cid, mid) {
+            dispatch(exports.removeMessage(cid, mid));
+        }.bind(null, containerId, messageId), removeAfterMs);
+
+        const message = (
+            <div>
+                <div className="message__title">{messageTitle}</div>
+                <div className="message__description">{messageDescription}</div>
+            </div>
+        );
+
+        dispatch({
+            containerId,
+            type: exports.Types.ADD_MESSAGE,
+            text: message,
+            timer,
+            index: messageId,
+            iconName: "earth",
+            layout: "center",
+            hideClose: true
         });
     };
 };

@@ -23,6 +23,7 @@ exports.MessageTypes = {
 exports.Layouts = {
     BANNER: "banner",
     CORNER: "corner",
+    CENTER: "center",
 };
 
 /*

@@ -282,6 +282,7 @@ class Message extends React.Component {
         const classes = classnames("message show", this._transformType(type), {
             "message--minimized": minimized,
             "message--corner": layout === Layouts.CORNER,
+            "message--center": layout === Layouts.CENTER,
         });
 
         return (
