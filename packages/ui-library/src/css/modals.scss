@@ -94,6 +94,11 @@
             right: 15px;
             line-height: 1em;
             color: transparent;
+
+            .close-modal {
+                top: 0;
+                right: 0;
+            }
         }
         .details-tooltip,
         .details-target {
