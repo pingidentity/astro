@@ -186,7 +186,6 @@ export default class ColumnSelectorRow extends Component {
                                 [`${baseClassName}--disabled`]: this.props.disabled
                             }
                         )}
-                    inline
                     alignment={alignments.STRETCH}
                 >
                     {expandable
