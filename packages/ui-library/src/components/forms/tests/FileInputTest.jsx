@@ -76,5 +76,14 @@ describe("FileInput", function () {
         expect(myOnRemove).not.toHaveBeenCalled();
         removeBtn.simulate("click");
         expect(myOnRemove).toHaveBeenCalled();
+
+    });
+
+    it("Renders the the fieldset without a border", () => {
+        const component = mount(
+            <FileInput fileName="hello" noBorder/>
+        );
+        const element = component.find(".input-file__field-set.unfocused");
+        expect(element.exists()).toEqual(true);
     });
 });

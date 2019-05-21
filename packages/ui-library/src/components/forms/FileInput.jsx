@@ -41,6 +41,8 @@ import classnames from "classnames";
  *     An optional array of the the allowed file mime types or file extensions.]
  * @param {boolean} [loading]
  *     If the component should show a loading state for uploading files
+ * @param {boolean} [noBorder]
+ *     If the component shows a line around the upload this will remove it.
  * @param {string} [className]
  *     Optional CSS classname(s) applied to top-level container.
  * @param {string} [fileName]
@@ -73,6 +75,7 @@ export default class FileInput extends Component {
         fileName: PropTypes.string,
         fileData: PropTypes.node,
         onRemove: PropTypes.func,
+        noBorder: PropTypes.bool,
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
         strings: PropTypes.objectOf(PropTypes.string),
@@ -84,6 +87,7 @@ export default class FileInput extends Component {
 
     static defaultProps = {
         strings: {},
+        noBorder: false,
     }
 
     defaultStrings = {
@@ -105,42 +109,51 @@ export default class FileInput extends Component {
         const {
             fileName,
             fileData,
+            noBorder,
             selectedTitle,
             strings,
             status,
         } = this.props;
         const text = { ...this.defaultStrings, ...strings };
 
+        const classNames = classnames(this.props.className, "input-file__field-set", {
+            "unfocused": noBorder,
+            "focused": !noBorder,
+            "input-file__field-set--focused": !noBorder,
+        });
+
         return (
             fileName && !status ? (
-                <div className="input-file__selected-content">
-                    <div className="input-file__selected-title">{selectedTitle}</div>
-                    <div className="input-file__info">
-                        <Icon
-                            data-id="file-icon"
-                            className="input-file__file-icon"
-                            iconName="docs"
-                            iconSize={Icon.iconSizes.MD}
-                            type="leading"
-                        />
-                        <div className="input-file__file">
-                            <div data-id="file-name" className="input-file__file-name">
-                                {fileName}
+                <fieldset className={classNames}>
+                    <legend>{selectedTitle}</legend>
+                    <div className="input-file__selected-content">
+                        <div className="input-file__info">
+                            <Icon
+                                data-id="file-icon"
+                                className="input-file__file-icon"
+                                iconName="docs"
+                                iconSize={Icon.iconSizes.MD}
+                                type="leading"
+                            />
+                            <div className="input-file__file">
+                                <div data-id="file-name" className="input-file__file-name">
+                                    {fileName}
+                                </div>
+                                {fileData && (
+                                    <div data-id="file-data" className="input-file__file-data">{fileData}</div>
+                                )}
                             </div>
-                            {fileData && (
-                                <div data-id="file-data" className="input-file__file-data">{fileData}</div>
-                            )}
                         </div>
+                        <Button
+                            data-id="remove-button"
+                            className="input-file__remove-btn"
+                            onClick={this._handleRemove(inputRef)}
+                            inline
+                        >
+                            {text.remove}
+                        </Button>
                     </div>
-                    <Button
-                        data-id="remove-button"
-                        className="input-file__remove-btn"
-                        onClick={this._handleRemove(inputRef)}
-                        inline
-                    >
-                        {text.remove}
-                    </Button>
-                </div>
+                </fieldset>
             ) : (
                 <div className="input-file__select-btn">
                     <MessageButton
@@ -158,11 +171,11 @@ export default class FileInput extends Component {
 
     render () {
         const {
-            fileName
+            fileName,
         } = this.props;
 
         const classNames = classnames(this.props.className, "input-file", {
-            "input-file--selected": fileName
+            "input-file--selected": fileName,
         });
 
         return (

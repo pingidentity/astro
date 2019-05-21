@@ -14,27 +14,24 @@
         background-color: transparent;
     }
 
-    &__selected-title {
-        position: absolute;
-        top: -6px;
-        left: 20px;
-        text-transform: uppercase;
-        padding: 0 10px;
-        background: $color-white;
-        color: $color-strong-neutral-50;
+    &__field-set {
+        display: inline-flex;
+        &--focused {
+            padding: $spacing-lg;
+            border-radius: 3px;
+            margin: 0;
+        }
     }
+
     &__selected-content {
         display: inline-flex;
         align-items: center;
-        border: 1px solid $color-strong-neutral-70;
-        border-radius: 3px;
-        padding: $spacing-lg+5 $spacing-lg $spacing-lg $spacing-lg+5;
     }
     &__info {
         display: flex;
     }
     &__remove-btn {
-        margin: 0 0 0 $spacing-xl;
+        margin: 0 0 0 $spacing-lg;
     }
     &__file {
         display: flex;
