@@ -56,13 +56,11 @@ GIT_VERSION_PATCH=$(word 3,$(subst ., ,$(GIT_VERSION_FINAL)))
 # increment the last non-zero component of the version number
 # (fucking hell, this took me ages to figure out)
 # I am using this solution http://stackoverflow.com/a/1926105
-ifeq ($(GIT_VERSION_PATCH),0)
-	GIT_VERSION_MINOR_NEXT := $(shell echo $$(($(GIT_VERSION_MINOR)+1)))
-	GIT_VERSION_PATCH_NEXT := $(GIT_VERSION_PATCH)
-else
-	GIT_VERSION_MINOR_NEXT := $(GIT_VERSION_MINOR)
-	GIT_VERSION_PATCH_NEXT := $(shell echo $$(($(GIT_VERSION_PATCH)+1)))
-endif
+
+GIT_VERSION_MINOR_NEXT := $(shell echo $$(($(GIT_VERSION_MINOR)+1)))
+GIT_VERSION_PATCH_NEXT := 0
+
+
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
 
@@ -81,8 +79,10 @@ endif
 # get the latest for the current branch;
 # if not available, get the latest from master (with no suffix);
 # if no coverage is found, fail the build
-COVERAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
-COVERAGE_STATUS_CODE=$(shell curl -s -I $(COVERAGE_ADDRESS)/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+TEMP_COVERAGE=https://art01.corp.pingidentity.com/artifactory/inhouse/com/pingone/ui-library/ui-library-coverage/3.44.0-SNAPSHOT/ui-library-coverage-3.44.0-20190523.230654-2.tar.gz
+COVERAGE_VERSION=$(GIT_VERSION)
+# COVERAGE_STATUS_CODE=$(shell curl -s -I $(COVERAGE_ADDRESS)/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+COVERAGE_STATUS_CODE=$(shell curl -s -I $(TEMP_COVERAGE) | grep "HTTP/1.1" | awk {'print $$2'})
 ifneq ($(COVERAGE_STATUS_CODE),200)
 	COVERAGE_VERSION=$(GIT_VERSION)
 	COVERAGE_STATUS_CODE=$(shell curl -s -I $(COVERAGE_ADDRESS)/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
@@ -165,9 +165,10 @@ endef
 define install_reference_coverage_report
 	rm -f ui-library-coverage-*.tar.gz
 	rm -rf coverage-reference
-	wget $(COVERAGE_ADDRESS)/$(1)/ui-library-coverage-$(1).tar.gz
+	#wget $(COVERAGE_ADDRESS)/$(1)/ui-library-coverage-$(1).tar.gz
+	wget $(TEMP_COVERAGE)
 	mkdir coverage-reference
-	tar -xzf ui-library-coverage-$(1).tar.gz --strip 1 -C coverage-reference
+	tar -xzf ui-library-coverage-3.44.0-20190523.230654-2.tar.gz --strip 1 -C coverage-reference
 endef
 
 
@@ -188,7 +189,7 @@ install-node-npm:
 
 clean-mvn:
 	rm -f $(MVN_FILENAME)
-	rm -rf mvn 
+	rm -rf mvn
 
 install-mvn: clean-mvn
 	wget http://archive.apache.org/dist/maven/maven-3/3.2.2/binaries/$(MVN_FILENAME)
