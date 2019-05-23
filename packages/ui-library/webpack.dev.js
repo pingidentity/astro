@@ -74,6 +74,10 @@ module.exports = merge(common, {
                 // test: /\.(ttf|eot|otf|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 test: /\.(ttf|eot|otf|woff2?)(\?.*)?$/,
                 use: "file-loader?name=fonts/[path][name].[ext]"
+            },
+            {
+                test: /\.html$/,
+                use: "file-loader?name=emails/[path][name].[ext]"
             }
         ]
     },

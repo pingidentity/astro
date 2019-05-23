@@ -63,3 +63,14 @@ hr {
     border-width: 1px 0 0;
     border-color: $color-timberwolf;
 }
+
+.email-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+
+    &__iframe {
+        height: 100%;
+    }
+}

@@ -1141,6 +1141,13 @@ module.exports = [
                 icon: "circle-o",
             },
             {
+                label: "Basic Email Template",
+                demo: require("../components/email/EmailBasicDemo"),
+                pathToSource: "templates_email_EmailBasic.jsx.html",
+                fullscreen: true,
+                icon: "code",
+            },
+            {
                 label: "Property Specific",
                 icon: "globe",
                 children: [
