@@ -89,7 +89,7 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 #nav {
-    z-index: $zindex__nav--primary;
+    z-index: $zindex__nav--primary - 1; // we want it just under the header bar
     position: absolute;
     top: $layout-header-height;
     bottom: 0;
@@ -127,7 +127,7 @@ $color-grey-minor-1: $color-neutral-30;
             padding-bottom: 25px;
 
             .menu {
-                max-height: 2000px;
+                max-height: 20000px;
             }
         }
     }

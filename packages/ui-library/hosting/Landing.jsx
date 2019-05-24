@@ -51,12 +51,14 @@ class LandingPage extends React.Component {
                             {
                                 label: "Versions",
                                 id: "versions",
-                                children: versions.slice().reverse().map(function (version, index) {
-                                    return {
-                                        label: index > 0 ? version.replace("-SNAPSHOT", "") : version,
-                                        id: version
-                                    };
-                                })
+                                children: this._filterVersions(this._sortVersions(versions)).map(
+                                    function (version, index) {
+                                        return {
+                                            label: index > 0 ? version.replace("-SNAPSHOT", "") : version,
+                                            id: version
+                                        };
+                                    }
+                                )
                             }
                         ]
                     });
@@ -117,6 +119,19 @@ class LandingPage extends React.Component {
         this.setState({ leftNavOpenSections: nextState });
     };
 
+    _versionToNumber = version => {
+        const numbers = version.replace("-SNAPSHOT", "").split(".").map(string => string * 1); // parseInt didn't work
+        return (numbers[0] * 1000 * 1000) + (numbers[1] * 1000) + numbers[0];
+    }
+
+    _sortVersions = versions => versions.slice().sort(
+        (first, second) => ((this._versionToNumber(first) < this._versionToNumber(second)) ? 1 : -1)
+    );
+
+    _filterVersions = versions => versions.filter((version, index, list) => (
+        (index <= 0) || (list[index - 1].match(/^[^\.]*\.[^\.]*/)[0] !== version.match(/^[^\.]*\.[^\.]*/)[0])
+    ));
+
     render() {
         return (
             <div>
@@ -170,7 +185,10 @@ class LandingPage extends React.Component {
                                             <div className="description">
                                             Access the current version: <a id="currentVersionLink"
                                                     href={this.state.version + "/index.html"}>
-                                                    {this.state.version ? this.state.version : "In development"}
+                                                    {this.state.version
+                                                        ? this.state.version.replace("-SNAPSHOT", "")
+                                                        : "In development"
+                                                    }
                                                 </a>
                                             </div>
                                         </div>
