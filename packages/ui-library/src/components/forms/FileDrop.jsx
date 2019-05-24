@@ -159,9 +159,6 @@ export default class FileDrop extends Component {
     }
 
     _clickInput = () => {
-
-        console.log(">>> _clickInput");
-        console.log("this.fileInput: ", this.fileInput);
         this.fileInput.click();
     }
 

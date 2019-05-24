@@ -93,6 +93,11 @@ export default class FileInput extends Component {
 
     _clickButton = (inputRef) => /* istanbul ignore next  */ () => inputRef.click();
 
+    _handleRemove = (inputRef) => () => {
+        inputRef.value = null;
+        this.props.onRemove();
+    }
+
     _renderContent = (props) => {
         const {
             inputRef
@@ -100,7 +105,6 @@ export default class FileInput extends Component {
         const {
             fileName,
             fileData,
-            onRemove,
             selectedTitle,
             strings,
             status,
@@ -131,7 +135,7 @@ export default class FileInput extends Component {
                     <Button
                         data-id="remove-button"
                         className="input-file__remove-btn"
-                        onClick={onRemove}
+                        onClick={this._handleRemove(inputRef)}
                         inline
                     >
                         {text.remove}

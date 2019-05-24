@@ -3,10 +3,11 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import FileInput from "../FileInput";
-import _ from "underscore";
+import { mount } from "enzyme";
 
 
 describe("FileInput", function () {
+    // const FileInput = require("../FileInput");
 
     const testDataId = "myinput";
 
@@ -15,16 +16,17 @@ describe("FileInput", function () {
         remove: "Remove it",
     };
 
+    const defaultProps = {
+        "data-id": testDataId,
+        onRemove: jest.fn(),
+        strings: customStrings,
+    };
+
     function getComponent(opts) {
-        opts = _.defaults(opts || {}, {
-            "data-id": testDataId,
-            onRemove: jest.fn(),
-            strings: customStrings,
-        });
-        return ReactTestUtils.renderIntoDocument(<FileInput {...opts} />);
+        return ReactTestUtils.renderIntoDocument(<FileInput {...defaultProps} {...opts} />);
     }
 
-    it("Renders the component in initial state", function () {
+    it("renders the component in initial state", function () {
         const component = getComponent();
         const componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, testDataId);
         const selectBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "select-button");
@@ -35,7 +37,7 @@ describe("FileInput", function () {
 
     });
 
-    it("Renders custom in selected state", function () {
+    it("renders custom in selected state", function () {
         const fileName = "test.jpg";
         const fileData = "some data";
         const component = getComponent({
@@ -51,14 +53,28 @@ describe("FileInput", function () {
         expect(removeBtn.textContent).toContain(customStrings.remove);
     });
 
-    it("Renders the component with loading state", function () {
+    it("renders the component with loading state", function () {
         const component = getComponent({
             loading: true
         });
-
         const loadingBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "ellipsis-loader");
 
         expect(loadingBtn).toBeDefined();
 
+    });
+
+    it("calls the onRemove callback", function () {
+        const myOnRemove = jest.fn();
+        const wrapper = mount(
+            <FileInput onRemove={myOnRemove} />
+        );
+
+        wrapper.setProps({ fileName: "foobar.png" });
+
+        const removeBtn = wrapper.find(`button[data-id="remove-button"]`);
+
+        expect(myOnRemove).not.toHaveBeenCalled();
+        removeBtn.simulate("click");
+        expect(myOnRemove).toHaveBeenCalled();
     });
 });
