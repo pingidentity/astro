@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Padding, { sizes as paddingSizes } from "../layout/Padding";
 import classnames from "classnames";
 
 export const alignments = {
@@ -15,6 +16,8 @@ export const justifyOptions = {
     SPACEBETWEEN: "spacebetween",
     START: "start"
 };
+
+export const spacingOptions = paddingSizes;
 
 const getAlignmentClass = alignment => {
     switch (alignment) {
@@ -44,6 +47,18 @@ const getJustifyClass = justify => {
     }
 };
 
+const getSpacedChildren = (children, spacing) => React.Children.map(children, (child, idx) =>
+    idx === children.length - 1
+        ? child
+        : (
+            <Padding
+                right={spacing}
+            >
+                {child}
+            </Padding>
+        )
+);
+
 function FlexRow({
     alignment,
     children,
@@ -51,6 +66,7 @@ function FlexRow({
     className,
     inline,
     justify,
+    spacing
 }) {
     return (
         <div
@@ -65,7 +81,10 @@ function FlexRow({
             )}
             data-id={dataId}
         >
-            {children}
+            {spacing
+                ? getSpacedChildren(children, spacing)
+                : children
+            }
         </div>
     );
 }
@@ -78,6 +97,9 @@ FlexRow.propTypes = {
     inline: PropTypes.bool,
     justify: PropTypes.oneOf(
         Object.values(justifyOptions)
+    ),
+    spacing: PropTypes.oneOf(
+        Object.values(spacingOptions)
     )
 };
 

@@ -1,4 +1,5 @@
-import FlexRow, { justifyOptions, alignments } from "../FlexRow";
+import FlexRow, { justifyOptions, alignments, spacingOptions } from "../FlexRow";
+import Padding from "../Padding";
 import React from "react";
 import { shallow } from "enzyme";
 
@@ -49,5 +50,21 @@ describe("Flex Row", () => {
         const component = shallow(<FlexRow justify={justifyOptions.START} />);
 
         expect(component.find(".flex-row--justify-start").exists()).toBeTruthy();
+    });
+
+    it("adds padding components between children with correct spacing", () => {
+        const component = shallow(
+            <FlexRow
+                spacing={spacingOptions.XL}
+            >
+                <div />
+                <div />
+                <div />
+            </FlexRow>
+        );
+
+        const spacing = component.find(Padding);
+
+        expect(spacing.length).toEqual(2);
     });
 });

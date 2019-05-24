@@ -5,6 +5,7 @@ import { constantPropType, standardPropTypes } from "../../util/PropUtils";
 
 export const chipColors = {
     CYAN: "cyan",
+    FAINTGREY: "faint-grey",
     LIGHTGREY: "light-grey",
     TRANSPARENT: "transparent",
     WHITE: "white"

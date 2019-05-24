@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { allFlags } from "../util/FlagUtils";
 import Button from "../components/buttons/Button";
+import Chip, { chipColors } from "../components/layout/Chip";
 import ColumnSelector, {
     ColumnTitle,
 } from "../components/list/ColumnSelector";
 import ExpandableRow from "../components/rows/ExpandableRow";
 import FileUpload from "../components/forms/FileUpload";
-import FlexRow, { alignments } from "../components/layout/FlexRow";
+import FlexRow, { alignments, spacingOptions } from "../components/layout/FlexRow";
 import FormDropDownList from "../components/forms/FormDropDownList";
 import FormTextArea from "../components/forms/FormTextArea";
 import FormTextField from "../components/forms/FormTextField";
@@ -18,11 +20,14 @@ import InputRow from "../components/layout/InputRow";
 import { InputWidths } from "../components/forms/InputWidths";
 import LabelValuePairs from "../components/layout/LabelValuePairs";
 import LinkDropDownList from "../components/forms/LinkDropDownList";
+import MappedAttributes from "../components/layout/MappedAttributes";
 import Padding, { sizes as paddingSizes } from "../components/layout/Padding";
 import PageHeader from "../components/general/PageHeader";
 import PageSection from "../components/layout/PageSection";
 import RowBuilder, { Row as RowBuilderRow, Separator } from "../components/rows/RowBuilder";
+import Table from "../components/tables/Table";
 import { TabSet, TabContent } from "../components/layout/TabSet";
+import Text, { textTypes } from "../components/general/Text";
 import TileSelector, { TileButton, tileButtonTypes } from "../components/buttons/TileSelector";
 import TutorialButton from "../components/buttons/TutorialButton";
 import PageWizard, { Step } from "../components/panels/PageWizard/";
@@ -63,8 +68,8 @@ export default class SocialLogin extends Component {
     state = {
         activeProvider: null,
         providers: [{
-            description: "Supervillain",
             id: uuidV4(),
+            description: "Supervillain",
             logo: "src/demo/images/logo-facebook.png",
             name: "Facebook",
             type: "facebook"
@@ -79,7 +84,14 @@ export default class SocialLogin extends Component {
                 ...attributes,
                 {
                     id: uuidV4(),
-                    providerAttr: "",
+                    to: {
+                        label: "attributeExample",
+                        value: "attributeExample"
+                    },
+                    type: {
+                        label: "None",
+                        value: "none"
+                    }
                 }
             ]
         }
@@ -101,6 +113,17 @@ export default class SocialLogin extends Component {
         providers: providers.filter(prov => prov.id !== id)
     }))
 
+    getMappedAttributes = attributes =>
+        attributes.map(({
+            from,
+            to: { value: to },
+            type: { value: type }
+        }) => ({
+            from: from,
+            to: to,
+            type: type
+        }));
+
     goToLastStep = () => this.setState(({ activeProvider, wizardStep }) => ({
         activeProvider: wizardStep === 0 ? null : activeProvider,
         wizardStep: wizardStep === 0 ? 0 : wizardStep - 1
@@ -114,6 +137,7 @@ export default class SocialLogin extends Component {
         activeProvider: {
             id,
             attributes: [],
+            expanded: true,
             ...provider
         },
         wizardStep: 0
@@ -128,14 +152,14 @@ export default class SocialLogin extends Component {
         wizardStep: 0
     }))
 
-    setAttrValue = id => value => this.setState(({ activeProvider: { attributes, ...provider } }) => ({
+    setAttrValue = id => property => value => this.setState(({ activeProvider: { attributes, ...provider } }) => ({
         activeProvider: {
             ...provider,
             attributes: attributes.map(attr =>
                 attr.id === id
                     ? {
                         ...attr,
-                        providerAttr: value
+                        [property]: value
                     }
                     : attr
             )
@@ -157,11 +181,28 @@ export default class SocialLogin extends Component {
         reader.readAsDataURL(file);
     };
 
+    setRowIndex = providerId => ({ index }) => this.setState(({ providers }) => ({
+        // Iterate through providers, find the one being updated and update its
+        // rowIndex
+        providers: providers.map(({ rowIndex, ...provider }) => ({
+            rowIndex: provider.id === providerId ? index : rowIndex,
+            ...provider
+        }))
+    }));
+
     setStepState = stateName => val => this.setState(({ activeProvider }) => ({
         activeProvider: {
             ...activeProvider,
             [stateName]: val
         }
+    }))
+
+    toggleProviderExpanded = providerId => () => this.setState(({ providers }) => ({
+        providers: providers.map(({ expanded, rowIndex = 0, ...provider }) => ({
+            expanded: provider.id === providerId ? !expanded : rowIndex,
+            rowIndex,
+            ...provider
+        }))
     }))
 
     render() {
@@ -170,20 +211,27 @@ export default class SocialLogin extends Component {
         // being recreated on each render. Shown here for clarity.
         const providers = this.state.providers.map(provider => {
             const {
+                appId,
+                attributes = [],
                 description,
+                expanded = false,
                 id,
                 logo,
                 name,
+                rowIndex = 0,
+                secret,
                 type, // Facebook, LinkedIn or Twitter
             } = provider;
 
             return (
                 <ExpandableRow
-                    flags={["expandable-row-class"]}
+                    expanded={expanded}
+                    flags={allFlags}
                     icon={<Image source={logo} type={imageTypes.SQUARE} size={imageSizes.AUTO} />}
                     key={id}
                     onDelete={this.deleteProvider(id)}
                     onEditButtonClick={this.openProviderWizard(provider)}
+                    onToggle={this.toggleProviderExpanded(id)}
                     rowAccessories={
                         <FormToggle
                             flags={["p-stateful"]}
@@ -196,7 +244,8 @@ export default class SocialLogin extends Component {
                     title={name}
                 >
                     <TabSet
-                        selectedIndex={0}
+                        selectedIndex={rowIndex}
+                        onValueChange={this.setRowIndex(id)}
                     >
                         <TabContent label="Profile">
                             <LabelValuePairs
@@ -217,13 +266,67 @@ export default class SocialLogin extends Component {
                             />
                         </TabContent>
                         <TabContent label="Connection">
-                            Connections
+                            <PageSection
+                                title="Connection details"
+                            >
+                                <LabelValuePairs
+                                    dataPairs={[
+                                        {
+                                            label: "App ID",
+                                            value: appId
+                                        },
+                                        {
+                                            label: "App Secret",
+                                            value: secret
+                                        }
+                                    ]}
+                                />
+                            </PageSection>
                         </TabContent>
                         <TabContent label="Access">
-                            Access
+                            <Table
+                                bodyData={[
+                                    [
+                                        name,
+                                        <Chip
+                                            color={chipColors.FAINTGREY}
+                                        >
+                                            <FlexRow
+                                                spacing={spacingOptions.XS}
+                                            >
+                                                Default:
+                                                <Text
+                                                    type={textTypes.NOTE}
+                                                >
+                                                id, first_name, last_name
+                                                </Text>
+                                            </FlexRow>
+                                        </Chip>
+                                    ],
+                                    [
+                                        name,
+                                        <Chip
+                                            color={chipColors.FAINTGREY}
+                                        >
+                                            Age Range
+                                        </Chip>
+                                    ]
+                                ]}
+                            />
                         </TabContent>
                         <TabContent label="Attributes">
-                            Attributes
+                            <PageSection
+                                title="Mapped Attributes"
+                            >
+                                <MappedAttributes
+                                    attributes={this.getMappedAttributes(attributes)}
+                                    labels={{
+                                        from: `${type} Attribute`,
+                                        to: "PingOne User Attribute",
+                                        type: "Sync Frequency"
+                                    }}
+                                />
+                            </PageSection>
                         </TabContent>
                     </TabSet>
                 </ExpandableRow>
@@ -393,7 +496,7 @@ export default class SocialLogin extends Component {
                                         flags={["p-stateful"]}
                                         labelText="App ID"
                                         onValueChange={this.setStepState("appId")}
-                                        value={activeProvider.appId}
+                                        value={activeProvider.appId || ""}
                                     />
                                 </InputRow>
                                 <InputRow>
@@ -403,7 +506,7 @@ export default class SocialLogin extends Component {
                                         maskValue
                                         onValueChange={this.setStepState("secret")}
                                         showReveal
-                                        value={activeProvider.secret}
+                                        value={activeProvider.secret || ""}
                                     />
                                 </InputRow>
                             </Step>,
@@ -467,10 +570,15 @@ export default class SocialLogin extends Component {
                                             title: `${activeProvider.name}`,
                                             customButton: () => (
                                                 <HelpHint
+                                                    flags={allFlags}
                                                     hintText="Scope cannot be removed"
                                                     placement={HelpHintPlacements.TOP}
                                                 >
-                                                    <Icon iconName="lock" />
+                                                    <Icon
+                                                        flags={allFlags}
+                                                        iconName="lock"
+                                                        type="leading"
+                                                    />
                                                 </HelpHint>
                                             )
                                         },
@@ -556,12 +664,15 @@ export default class SocialLogin extends Component {
                                                             labelText={
                                                                 <div>
                                                                     {`${activeProvider.name} Attribute`}
-                                                                    <HelpHint hintText="Hint" />
+                                                                    <HelpHint
+                                                                        flags={allFlags}
+                                                                        hintText="Hint"
+                                                                    />
                                                                 </div>
                                                             }
                                                             stateless={false}
                                                             width={InputWidths.MD}
-                                                            value="Customer Name"
+                                                            value="Example attribute"
                                                         />
                                                         <Separator>=</Separator>
                                                         <FormDropDownList
@@ -586,7 +697,10 @@ export default class SocialLogin extends Component {
                                                             label={
                                                                 <div>
                                                                 Sync Frequency
-                                                                    <HelpHint hintText="Hint" />
+                                                                    <HelpHint
+                                                                        flags={allFlags}
+                                                                        hintText="Hint"
+                                                                    />
                                                                 </div>
                                                             }
                                                             onValueChange={this.firstDropDownChange}
@@ -598,9 +712,10 @@ export default class SocialLogin extends Component {
                                                         />
                                                         <Padding right={paddingSizes.MD} />
                                                     </RowBuilderRow>
-                                                )
+                                                ),
+                                                removable: false
                                             },
-                                            ...activeProvider.attributes.map(({ id, providerAttr }) => ({
+                                            ...activeProvider.attributes.map(({ id, from, to, type }) => ({
                                                 id,
                                                 content: (
                                                     <RowBuilderRow key="first" showRemoveLabel>
@@ -608,28 +723,27 @@ export default class SocialLogin extends Component {
                                                             labelText={
                                                                 <div>
                                                                     {`${activeProvider.name} Attribute`}
-                                                                    <HelpHint hintText="Hint" />
+                                                                    <HelpHint
+                                                                        flags={allFlags}
+                                                                        hintText="Hint" />
                                                                 </div>
                                                             }
-                                                            onValueChange={this.setAttrValue(id)}
+                                                            onValueChange={this.setAttrValue(id)("from")}
                                                             stateless={false}
                                                             width={InputWidths.MD}
-                                                            value={providerAttr}
+                                                            value={from}
                                                         />
                                                         <Separator>=</Separator>
                                                         <FormDropDownList
                                                             label="PingOne User Attribute"
-                                                            onValueChange={this.firstDropDownChange}
+                                                            onValueChange={this.setAttrValue(id)("to")}
                                                             options={[
                                                                 {
                                                                     label: "attributeExample",
                                                                     value: "attributeExample"
                                                                 },
                                                             ]}
-                                                            selectedOption={{
-                                                                label: "attributeExample",
-                                                                value: "attributeExample"
-                                                            }}
+                                                            selectedOption={to}
                                                             width={InputWidths.MD}
                                                         />
                                                         <Padding right={paddingSizes.SM} />
@@ -637,14 +751,17 @@ export default class SocialLogin extends Component {
                                                             label={
                                                                 <div>
                                                                 Sync Frequency
-                                                                    <HelpHint hintText="Hint" />
+                                                                    <HelpHint
+                                                                        flags={allFlags}
+                                                                        hintText="Hint"
+                                                                    />
                                                                 </div>
                                                             }
-                                                            onValueChange={this.firstDropDownChange}
+                                                            onValueChange={this.setAttrValue(id)("type")}
                                                             options={[
                                                                 { label: "None", value: "none" },
                                                             ]}
-                                                            selectedOption={{ label: "None", value: "none" }}
+                                                            selectedOption={type}
                                                             width={InputWidths.SM}
                                                         />
                                                         <Padding right={paddingSizes.MD} />
