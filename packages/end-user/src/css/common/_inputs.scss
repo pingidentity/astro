@@ -69,7 +69,7 @@ $input-placeholder-color: $color-neutral-30;
     @mixin inputwidth($factor) {
         $perc: round(100% * $factor/$divisions);
 
-        display: inline-block;
+        display: inline-flex;
         width: $perc;
         &.input--margin {
             width: calc(#{$perc} - #{$margin});

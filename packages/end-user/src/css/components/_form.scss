@@ -1,8 +1,13 @@
 .form {
     @include stack($spacing-md);
     @include stacked-item($spacing-xl);
+
+    &__row {
+        display: flex;
+    }
+
     &--margin-small {
-       @include stack(5px);
+        @include stack(5px);
     }
 
     &--spacing-lg > * {
