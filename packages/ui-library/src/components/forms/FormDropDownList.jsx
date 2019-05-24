@@ -419,8 +419,29 @@ class FormDropDownListStateless extends React.Component {
         }
     }
 
+    _getOptionLabel = ({ label, value }) => {
+        if (label !== null && label !== undefined) {
+            return label;
+        } else {
+            return value;
+        }
+    }
+
+    _getLabelOptions = (options) => {
+        return _.map(options, (option) => {
+            return {
+                ...option,
+                label: this._getOptionLabel(option),
+            };
+        });
+    }
+
+    labeledOptions = this._getLabelOptions(this.props.options)
+
+
     componentDidUpdate() {
         this._setSearchListPosition(this.props.options);
+        this.labeledOptions = this._getLabelOptions(this.props.options);
     }
 
     componentDidMount() {
@@ -440,24 +461,9 @@ class FormDropDownListStateless extends React.Component {
         this.props.setSearchIndex(index);
     };
 
-    _getOptionLabel = ({ label, value }) => {
-        if (label !== null && label !== undefined) {
-            return label;
-        } else {
-            return value;
-        }
-    }
-
     _filteredOptions = () => (this.props.canAdd || this.props.searchType === SearchTypes.BOX)
-        ? filterOptions(_.map(this.props.options, (option) => {
-            return {
-                ...option,
-                label: this._getOptionLabel(option)
-            };
-        })
-        , this.props.searchString)
-        : this.props.options;
-
+        ? filterOptions(this.labeledOptions, this.props.searchString)
+        : this.labeledOptions;
     // Moving complexity of the stateful version's _handleToggle behavior here
     _onToggleProxy = () => {
         this.props.onToggle();
@@ -543,7 +549,9 @@ class FormDropDownListStateless extends React.Component {
             } else if (this.props.canAdd) {
                 const cleanSearch = this.props.searchString.toLowerCase().trim();
                 // Cannot add if duplicate
-                return this.props.options.some(({ label }) => label.toLowerCase().trim() === cleanSearch)
+                return this.labeledOptions.some(({
+                    label
+                }) => label.toLowerCase().trim() === cleanSearch)
                     ? undefined
                     : (
                         <li data-id="add-prompt" className={addClassName} onClick={this._handleAdd}>
@@ -651,10 +659,10 @@ class FormDropDownListStateless extends React.Component {
                     : char;
 
                 const option =
-                    options.find(o => o[searchField].toLowerCase().indexOf(search) === 0);
+                    this.labeledOptions.find(o => o[searchField].toLowerCase().indexOf(search) === 0);
                 const index = groups
                     ? this._getOrderedOptionsIndex(option)
-                    : options.indexOf(option);
+                    : this.labeledOptions.indexOf(option);
                     // again, not i18n friendly
                 this._onSearchProxy(option ? search : "", Date.now(), index);
             } else if (searchString) { // invalid character entered
@@ -834,7 +842,6 @@ class FormDropDownListStateless extends React.Component {
         if (this.didPressKey && !this.props.open) {
             this.didPressKey = false;
         }
-
         const hasIcon = this.props.options.some((option) => option.iconName);
         const containerClassName = classnames(
                 "input-custom-select",
