@@ -64,6 +64,7 @@ class FormRadioInputDemo extends React.Component {
                                         value={VALUES.one}
                                         checked={this.state[ROWS.one] === VALUES.one}
                                         onValueChange={this._handleRow1}
+                                        autoFocus
                                     />
                                 </td>
                                 <td style={ style }>

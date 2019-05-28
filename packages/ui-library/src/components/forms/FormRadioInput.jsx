@@ -55,6 +55,27 @@ var React = require("react"),
  */
 
 class FormRadioInput extends React.Component {
+
+    radioInput = null;
+
+    setRadioReference = element => {
+        this.radioInput = element;
+    };
+
+    focusRadioInput = () => {
+        if (this.props.autoFocus) {
+            if (this.radioInput) {
+                this.radioInput.focus();
+            } else {
+                return false;
+            }
+        }
+    };
+
+    componentDidMount() {
+        this.focusRadioInput();
+    }
+
     static propTypes = {
         "data-id": PropTypes.string,
         checked: PropTypes.bool,
@@ -100,9 +121,9 @@ class FormRadioInput extends React.Component {
                     name={this.props.name}
                     value={this.props.value}
                     checked={this.props.checked}
-                    autoFocus={this.props.autoFocus}
                     onChange={this._handleValueChange}
-                    disabled={this.props.disabled} />
+                    disabled={this.props.disabled}
+                    ref={this.setRadioReference}/>
                 <div className="circle"></div>
             </FormLabel>
         );

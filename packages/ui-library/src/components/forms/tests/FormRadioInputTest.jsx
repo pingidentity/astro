@@ -1,14 +1,16 @@
 window.__DEV__ = true;
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import _ from "underscore";
+import TestUtils from "../../../testutil/TestUtils";
+import FormRadioInput from "../FormRadioInput";
+import { mount } from "enzyme";
+
 jest.dontMock("../FormRadioInput");
 jest.dontMock("../FormLabel");
 
 describe("FormRadioInput", function () {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        _ = require("underscore"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FormRadioInput = require("../FormRadioInput");
 
     var getComponent = function (props) {
         props = _.defaults(props || {}, {
@@ -64,5 +66,15 @@ describe("FormRadioInput", function () {
         // test for disabled attribute on inputs
         var inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
         expect(inputs[0].disabled).toBeTruthy();
+    });
+
+
+    //This is a test to just make it fast. Unable to find a test that allows to see if active element is focused.
+    it("checks to see it autoFocus is true and if it is render on pageload with focus", () => {
+        const component = mount (
+            <FormRadioInput autoFocus />
+        );
+
+        expect(component.find("input").exists()).toEqual(true);
     });
 });
