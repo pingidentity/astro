@@ -1,6 +1,11 @@
 import React from "react";
 import MappedAttributes from "../../../components/layout/MappedAttributes";
 
+/**
+* @name MappedAttributesDemo
+* @desc A demo for MappedAttributes
+*/
+
 export default function MappedAttributesDemo() {
     return (
         <MappedAttributes
