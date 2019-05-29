@@ -1,13 +1,14 @@
-var React = require("react");
-var Indent = require("./../../../components/general/Indent");
-var Link = require("./../../../components/general/Link");
+import React from "react";
+import Indent from "./../../../components/general/Indent";
+import Link from "./../../../components/general/Link";
+import Text from "../../../components/general/Text";
 
 /**
 * @name IndentDemo
 * @memberof Indent
 * @desc A demo for Indent
 */
-class IndentDemo extends React.Component {
+export default class IndentDemo extends React.Component {
     state = {
         selectedLabel: "No link clicked"
     };
@@ -146,9 +147,38 @@ class IndentDemo extends React.Component {
                     <Link icon="cog" title="Basic Content Rewrite" url="#" type="block" />
                 </Indent>
                 <br />
+
+                <strong>
+                    With colors
+                </strong>
+                <br />
+                <Indent border title="all" colors>
+                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                    </Text>
+                    <Indent border={true} title="any" colors>
+                        <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                        </Text>
+                        <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                        </Text>
+                        <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                        </Text>
+                        <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                        </Text>
+                        <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                        </Text>
+                        <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                        </Text>
+                    </Indent>
+                </Indent>
+                <br />
             </div>
         );
     }
 }
-
-module.exports = IndentDemo;

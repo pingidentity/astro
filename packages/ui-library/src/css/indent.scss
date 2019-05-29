@@ -71,6 +71,15 @@
             bottom: 0;
             border-left: 1px solid $color-neutral-80;
         }
+
+        // Although most of the rules for this are below, declaring this rule here due to specificity.
+        // Would have to use !important on everything otherwise.
+        .indent--with-colors__title {
+            &:before,
+            &:after {
+                border-color: $color-charting-grape;
+            }
+        }
     }
     .indent-content {
         margin-left: 5px;
@@ -104,4 +113,48 @@
             }
         }
     }
+
+    &--with-colors {
+        &__title {
+            // Necessary for very small indents; will not be centered otherwise.
+            justify-content: center;
+        }
+
+        &__title-content {
+            align-self: center;
+            background-color: $color-charting-grape;
+            border-radius: 2px;
+            color: $color-white;
+            padding: $spacing-md $spacing-xs;
+        }
+
+        // Change the indent colors for each level of nesting
+        & .indent--with-colors {
+            & .indent--with-colors__title {
+                &:before,
+                &:after {
+                    border-color: $color-charting-orange;
+                }
+            }
+
+            & .indent--with-colors__title-content {
+                background-color: $color-charting-orange;
+            }
+
+            & .indent--with-colors {
+                & .indent--with-colors__title {
+                    &:before,
+                    &:after {
+                        border-color: $color-charting-blue;
+                    }
+                }
+
+                & .indent--with-colors__title-content {
+                    background-color: $color-charting-blue;
+                }
+            }
+        }
+    }
+
+    // Nested color styling
 }
