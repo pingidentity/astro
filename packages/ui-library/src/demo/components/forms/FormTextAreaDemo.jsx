@@ -142,6 +142,14 @@ class FormTextAreaDemo extends React.Component {
                         width={InputWidths.MD}
                     />
                 </InputRow>
+                <InputRow>
+                    <FormTextArea
+                        labelText="With a monospaced font"
+                        monospaced
+                        stateless={false}
+                        width={InputWidths.MD}
+                    />
+                </InputRow>
             </div>
         );
     }

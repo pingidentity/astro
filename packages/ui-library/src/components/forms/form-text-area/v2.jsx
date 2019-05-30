@@ -61,6 +61,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     The text to show as the field's label.
 * @param {number} [maxLength]
 *     Max length supported by the field.
+* @param {boolean} [monospaced=false]
+*     If set to true, will use a monospaced font.
 * @param {string} [name]
 *     The name attribute for the input.
 * @param {string} [originalValue]
@@ -145,8 +147,9 @@ class FormTextAreaStateless extends React.Component {
             PropTypes.object,
             PropTypes.string
         ]),
-        mode: PropTypes.string,
         maxLength: PropTypes.number,
+        mode: PropTypes.string,
+        monospaced: PropTypes.bool,
         name: PropTypes.string,
         onBlur: PropTypes.func,
         onChange: PropTypes.func,
@@ -168,6 +171,7 @@ class FormTextAreaStateless extends React.Component {
         disabled: false,
         edited: false,
         mode: FormFieldConstants.FormFieldMode.EDIT,
+        monospaced: false,
         onBlur: _.noop,
         onChange: _.noop,
         onUndo: _.noop,
@@ -216,7 +220,12 @@ class FormTextAreaStateless extends React.Component {
                         data-id={this.props["data-id"] + "-textarea"}
                         ref={this.props["data-id"] + "-textarea"}
                         name={this.props.name || (this.props["data-id"] + "-textarea")}
-                        className={this.props.inputClassName}
+                        className={classnames(
+                            this.props.inputClassName,
+                            {
+                                "input-textarea__input--monospaced": this.props.monospaced
+                            }
+                        )}
                         disabled={this.props.disabled}
                         placeholder={this.props.placeholder}
                         required={this.props.required}

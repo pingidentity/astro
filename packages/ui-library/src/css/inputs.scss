@@ -241,6 +241,14 @@ label {
             line-height: 1.2em;
             height: auto;
             width: 100%;
+
+            &.input-textarea {
+                &__input {
+                    &--monospaced {
+                        font-family: 'Consolas', 'Monaco', 'Andale Mono', monospace;
+                    }
+                }
+            }
         }
         &.extended {
             textarea {

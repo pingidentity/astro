@@ -6,7 +6,7 @@ import HelpHint from "../../../tooltips/HelpHint";
 import Utils from "../../../../util/Utils";
 import _ from "underscore";
 import StateContainer from "../../../utils/StateContainer";
-
+import { mount } from "enzyme";
 
 describe("FormTextArea v4", function () {
 
@@ -302,5 +302,29 @@ describe("FormTextArea v4", function () {
         console.warn = jest.fn();
         getComponent({ flags: ["p-stateful"] });
         expect(console.warn).not.toBeCalled();
+    });
+
+    it("renders with no monospaced class when monospaced is false", () => {
+        const component = mount(
+            <FormTextArea
+                monospaced={false}
+            />
+        );
+
+        const spacing = component.find(".input-textarea__input--monospaced");
+
+        expect(spacing.exists()).toEqual(false);
+    });
+
+    it("renders with single spacing class when spacing property is set to single", () => {
+        const component = mount(
+            <FormTextArea
+                monospaced
+            />
+        );
+
+        const spacing = component.find(".input-textarea__input--monospaced");
+
+        expect(spacing.exists()).toEqual(true);
     });
 });
