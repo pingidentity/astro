@@ -728,6 +728,14 @@ module.exports = [
                         keywords: ["DragDropTable"]
                     },
                     {
+                        label: "Report Table",
+                        demo: require("../components/tables/ReportTableDemo"),
+                        pathToDoc: "components/tables/ReportTable.jsx",
+                        pathToSource: "components_tables_ReportTable.jsx.html",
+                        pathToDemoSource: "demo_components_tables_ReportTableDemo.jsx.html",
+                        keywords: ["ReportTable"]
+                    },
+                    {
                         label: "Grid",
                         demo: require("../components/grid/GridDemo"),
                         pathToDoc: "components/grid/Grid.jsx",
