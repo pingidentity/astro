@@ -441,6 +441,16 @@ describe("FormTextField v4", function () {
         expect(input.getAttribute("type")).toEqual("text");
     });
 
+    it("renders the size attr", function () {
+        const component = getComponent({
+            size: 5
+        });
+
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("size")).toEqual("5");
+    });
+
     it("it applies the input type when specified", function () {
         const type = "email",
             component = getComponent({

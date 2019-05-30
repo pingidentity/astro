@@ -240,6 +240,7 @@ class Stateless extends React.Component {
         showReveal: PropTypes.bool,
         showSave: PropTypes.bool,
         showUndo: PropTypes.bool,
+        size: PropTypes.number,
         width: PropTypes.oneOf(InputWidthProptypes),
         withArrow: PropTypes.bool
     };
@@ -431,7 +432,7 @@ class Stateless extends React.Component {
 
         const className = classnames(
             this.props.className,
-            getInputWidthClass({
+            this.props.size ? null : getInputWidthClass({
                 className: this.props.className,
                 width: this.props.width,
             }),
@@ -462,7 +463,7 @@ class Stateless extends React.Component {
                 hint={this.props.labelHelpText}
                 lockText={this.props.labelLockText}
                 helpClassName={this.props.helpClassName}
-                style={this.state.labelWidth ? { width: this.state.labelWidth } : null}>
+                style={this.state.labelWidth ?{ width: this.state.labelWidth } : null}>
 
                 <span
                     className={
@@ -490,12 +491,18 @@ class Stateless extends React.Component {
                         readOnly={this.props.readOnly}
                         data-id={dataId + "-input"}
                         type={inputType}
-                        maxLength={this.props.maxLength}
+                        maxLength={this.props.maxLength || this.props.size}
                         name={this.props.name}
                         value={this.props.value || ""}
                         autoComplete={this._getAutoComplete()}
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}
+                        size={this.props.size}
+                        style={{
+                            width: this.props.size ? "auto" : null,
+                            padding: this.props.inline ? "5px" : null,
+                            height: this.props.inline ? "32px" : null
+                        }}
                     />
                     {this.props.flexWidth && (
                         <div

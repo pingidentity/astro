@@ -308,6 +308,13 @@ class FormTextFieldDemo extends React.Component {
                         width={InputWidths.MD}
                     />
                 </InputRow>
+                <InputRow>
+                    <FormTextField
+                        stateless={false}
+                        labelText="Fixed width of 5 characters"
+                        size={5}
+                    />
+                </InputRow>
             </div>
         );
     }
