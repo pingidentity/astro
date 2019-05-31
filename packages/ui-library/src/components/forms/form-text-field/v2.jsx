@@ -500,8 +500,11 @@ class Stateless extends React.Component {
                         size={this.props.size}
                         style={{
                             width: this.props.size ? "auto" : null,
-                            padding: this.props.inline ? "5px" : null,
-                            height: this.props.inline ? "32px" : null
+                            padding: this.props.inline ? "2px" : null,
+                            height: this.props.inline ? "25px" : null,
+                            fontSize: this.props.inline ? "13px" : null,
+                            verticalAlign: this.props.inline ? "top" : null,
+                            marginTop: this.props.inline ? "-5px" : null
                         }}
                     />
                     {this.props.flexWidth && (

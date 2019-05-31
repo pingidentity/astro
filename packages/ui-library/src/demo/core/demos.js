@@ -1257,6 +1257,13 @@ module.exports = [
                         pathToSource: "templates_MetadataImport.jsx.html",
                         fullscreen: true,
                         icon: "details"
+                    },
+                    {
+                        label: "Password Policy",
+                        demo: require("../../templates/PasswordPolicy"),
+                        pathToSource: "templates_PasswordPolicy.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
                     }
                 ]
             }
