@@ -268,4 +268,29 @@ describe("Section v4", function () {
         expect(console.warn).not.toBeCalled();
     });
 
+    it("renders with no-margin class if contentMargin is false", () => {
+        const component = getComponent({
+            contentMargin: false
+        });
+
+        const noMargin = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "collapsible-section-content--no-margin"
+        );
+
+        expect(noMargin).toBeTruthy();
+    });
+
+    it("does not render with no-margin class if contentMargin is true", () => {
+        const component = getComponent({
+            contentMargin: true
+        });
+
+        const noMargin = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "collapsible-section-content--no-margin"
+        );
+
+        expect(noMargin).not.toBeTruthy();
+    });
 });

@@ -50,6 +50,12 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     Text to be displayed in the center of the component; switches between collapsed and expanded versions.
  * @param {boolean} [expanded=false]
  *     Whether or not section is expanded and showing body content.
+ * @param {boolean} [contentMargin=true]
+ *     Controls whether the section's content has a left margin.
+ * @param {boolean} [underlined=true]
+ *     Controls whether the section has an underline.
+ * @param {boolean} [arrowCircle=false]
+ *     If true, draws a circle around the arrow that collapses and expands the link.
  *
  * @param {Section~onToggle} [onToggle]
  *     Callback to be triggered when visibility is toggled.
@@ -95,6 +101,15 @@ export default class Section extends React.Component {
         if (!this._usePStateful()) {
             cannonballProgressivelyStatefulWarning({ name: "Section" });
         }
+
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
+            }
+        }
     }
 
     _usePStateful = () => hasFlag(this, "p-stateful");
@@ -139,6 +154,7 @@ class SectionStateless extends React.Component {
             PropTypes.string,
             PropTypes.object
         ]),
+        underlined: PropTypes.bool,
         detailsText: PropTypes.shape({
             collapsed: PropTypes.oneOfType([ PropTypes.node, PropTypes.string ]),
             expanded: PropTypes.oneOfType([ PropTypes.node, PropTypes.string ])
@@ -147,10 +163,12 @@ class SectionStateless extends React.Component {
 
     static defaultProps = {
         condensed: false,
+        contentMargin: true,
         "data-id": "section",
         disableExpand: false,
         expanded: false,
-        onToggle: _.noop
+        onToggle: _.noop,
+        underlined: true,
     };
 
     _handleToggle = () => {
@@ -197,7 +215,8 @@ class SectionStateless extends React.Component {
             condensed: this.props.condensed,
             open: this.props.expanded,
             "disable-expand": this.props.disableExpand,
-            "has-title-value": this.props.titleValue
+            "has-title-value": this.props.titleValue,
+            "collapsible-section--no-underline": !this.props.underlined
         };
 
         return (
@@ -206,7 +225,13 @@ class SectionStateless extends React.Component {
                 data-id={this.props["data-id"]}>
                 <CollapsibleLink
                     data-id={this.props["data-id"] + "-title"}
-                    className="collapsible-section-title"
+                    className={
+                        classnames(
+                            "collapsible-section-title",
+                            {
+                                "collapsible-section-title--circled": this.props.arrowCircle
+                            }
+                        )}
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}
                     title={this.props.title}
                     expanded={this.props.expanded}
@@ -218,7 +243,17 @@ class SectionStateless extends React.Component {
                         {this.props.titleValue}
                     </span>
                 )}
-                <div className="collapsible-section-content" data-id={this.props["data-id"] + "-content"}>
+                <div
+                    className={
+                        classnames(
+                            "collapsible-section-content",
+                            {
+                                "collapsible-section-content--no-margin": !this.props.contentMargin
+                            }
+                        )
+                    }
+                    data-id={this.props["data-id"] + "-content"}
+                >
                     {this.props.children}
                 </div>
             </div>

@@ -1,6 +1,8 @@
 import React from "react";
-import Section from "../../../components/general/Section";
 import Button from "../../../components/buttons/Button";
+import Indent from "../../../components/general/Indent";
+import Section from "../../../components/general/Section";
+import Text from "../../../components/general/Text";
 
 /**
 * @name SectionDemo
@@ -134,8 +136,64 @@ class SectionDemo extends React.Component {
                     >
                         {this._getContent()}
                     </Section>
+                    <Section
+                        arrowCircle
+                        condensed
+                        contentMargin={false}
+                        flags={["p-stateful"]}
+                        title="With no left margin on content"
+                        underlined={false}
+                    >
+                        <Indent border title="all" colors>
+                            <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                            </Text>
+                            <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                            </Text>
+                            <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                            </Text>
+                            <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                            </Text>
+                            <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                            </Text>
+                            <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                            </Text>
+                            <Section
+                                condensed
+                                contentMargin={false}
+                                flags={["p-stateful"]}
+                                title="No margin"
+                                underlined={false}
+                            >
+                                <Indent border={true} title="any" colors>
+                                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                                    </Text>
+                                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                                    </Text>
+                                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                                    </Text>
+                                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                                    </Text>
+                                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                                    </Text>
+                                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque dignissim maximus.
+                                    </Text>
+                                </Indent>
+                            </Section>
+                        </Indent>
+                    </Section>
                 </div>
-
                 <br/>
             </div>
         );

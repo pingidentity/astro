@@ -1,9 +1,6 @@
-"use strict";
-
-var PropTypes = require("prop-types");
-
-var React = require("react"),
-    classnames = require("classnames");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
 
 /**
  * @callback CollapsibleLink~onToggle
@@ -79,15 +76,18 @@ class CollapsibleLink extends React.Component {
     };
 
     render() {
-        var className= classnames("collapsible-link", this.props.className, {
-            open: this.props.expanded,
-            "collapsible-link--disabled": this.props.disabled,
-        });
-        className = classnames(className, this.props.arrowPosition);
-        var title = this.props.title;
-        if (this.props.toggledTitle) {
-            var title = this.props.expanded ? this.props.toggledTitle : this.props.title;
-        }
+        const className = classnames(
+            "collapsible-link",
+            this.props.className,
+            this.props.arrowPosition,
+            {
+                open: this.props.expanded,
+                "collapsible-link--disabled": this.props.disabled
+            }
+        );
+        const title = this.props.toggledTitle && this.props.expanded
+            ? this.props.toggledTitle
+            : this.props.title;
         return (
             <div data-id={this.props["data-id"]} className={className}
                 onClick={this._handleToggle} >
