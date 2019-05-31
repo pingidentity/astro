@@ -1,5 +1,6 @@
 import React from "react";
 import RowAccessories from "../../../components/rows/expandable-row/Accessories";
+import RowAccessoriesLineChart from "../../../components/rows/expandable-row/AccessoriesLineChart";
 import HelpHint from "../../../components/tooltips/HelpHint";
 import ExpandableRow from "../../../components/rows/ExpandableRow";
 import Toggle from "../../../components/forms/form-toggle";
@@ -190,6 +191,7 @@ class ExpandableRowDemo extends React.Component {
                         onToggle={this._onToggle(1)}
                         rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
                     />
+
                     <ExpandableRow
                         stateless={false}
                         title="Row With a Variety of Right Content"
@@ -320,6 +322,105 @@ class ExpandableRowDemo extends React.Component {
                             deleteButton={customDeleteButton}
                         />
                     )}
+                    <ExpandableRow
+                        title="Expanded Row with Line Chart"
+                        subtitle="Full Data"
+                        stateless={false}
+                        expanded={this.state.expanded1}
+                        onToggle={this._onToggle(1)}
+                        rowAccessories={[
+                            <RowAccessoriesLineChart
+                                key="row-accessories-line-chart"
+                                title="Avg daily sign-ons:"
+                                count="1,234,234"
+                                countLabel="Past 7 days"
+                                chartLabel="12 wk trend"
+                                hint="See Contributing Data"
+                                trend="+ 8.6%"
+                                isTrendPositive={true}
+                                data={[
+                                    { id: 1, value: 1 },
+                                    { id: 2, value: 5 },
+                                    { id: 3, value: 3 },
+                                    { id: 4, value: 2 },
+                                    { id: 5, value: 5 },
+                                    { id: 6, value: 1 },
+                                    { id: 7, value: 5 },
+                                    { id: 8, value: 5 },
+                                    { id: 9, value: 1 },
+                                    { id: 10, value: 2 },
+                                    { id: 11, value: 4 },
+                                    { id: 12, value: 11 },
+                                ]}
+
+                            />,
+                            <Toggle key="toggle" stateless={false} />
+                        ]}
+                    />
+                    <ExpandableRow
+                        title="Expanded Row with Line Chart"
+                        subtitle="Partial Data"
+                        stateless={false}
+                        expanded={this.state.expanded1}
+                        onToggle={this._onToggle(1)}
+                        rowAccessories={[
+                            <RowAccessoriesLineChart
+                                key="row-accessories-line-chart"
+                                title="Avg daily sign-ons:"
+                                count="234,234"
+                                countLabel="Past 7 days"
+                                chartLabel="12 wk trend"
+                                hint="See Contributing Data"
+                                trend="- 8.6%"
+                                isTrendPositive={false}
+                                data={[
+                                    { id: 1 },
+                                    { id: 2 },
+                                    { id: 3 },
+                                    { id: 4 },
+                                    { id: 5 },
+                                    { id: 6 },
+                                    { id: 7, value: 6 },
+                                    { id: 8, value: 5 },
+                                    { id: 9, value: 4 },
+                                    { id: 10, value: 3 },
+                                    { id: 11, value: 2 },
+                                    { id: 12, value: 1 },
+                                ]}
+                            />,
+                            <Toggle key="toggle" stateless={false} />
+                        ]}
+                    />
+                    <ExpandableRow
+                        title="Expanded Row with Line Chart"
+                        subtitle="Empty Data"
+                        stateless={false}
+                        expanded={this.state.expanded1}
+                        onToggle={this._onToggle(1)}
+                        rowAccessories={[
+                            <RowAccessoriesLineChart
+                                key="row-accessories-line-chart"
+                                title="Avg daily sign-ons:"
+                                count="0"
+                                countLabel="Past 7 days"
+                                chartLabel="12 wk trend"
+                                hint="See Contributing Data"
+                                hintProps={{ type: HelpHint.Types.LIGHT }}
+                                trend="+ 0%"
+                                isTrendPositive={true}
+                                data={[
+                                    { id: 1 },
+                                    { id: 2 },
+                                    { id: 3 },
+                                    { id: 4 },
+                                    { id: 5 },
+                                    { id: 6 }
+                                ]}
+
+                            />,
+                            <Toggle key="toggle" stateless={false} />
+                        ]}
+                    />
                 </ExpandableRow.SimpleWrapper>
             </div>
         );

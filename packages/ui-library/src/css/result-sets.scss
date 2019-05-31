@@ -1221,3 +1221,65 @@ input.ordering-controls__input {
         margin: 0;
     }
 }
+
+
+.accessories-line-chart__title,
+.accessories-line-chart__trend {
+    font-size: 11px;
+}
+
+.accessories-line-chart__count-wrapper {
+    @include flexbox;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.accessories-line-chart__count {
+    @include font-pn-semibold;
+    font-size: 16px;
+    color: $color-accent-neutral-10;
+}
+
+.accessories-line-chart__count-label,
+.accessories-line-chart__chart-label {
+    font-size: 10px;
+    color: $color-accent-neutral-30;
+}
+
+.accessories-line-chart__hint-wrapper,
+.accessories-line-chart__chart-wrapper {
+    @include flexbox;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accessories-line-chart__chart-wrapper {
+    width: 120px;
+    height: 60px;
+    padding-right: 20px;
+    .accessories-line-chart__chart {
+        width: 50px;
+        height: 18px;
+    }
+    &:hover {
+        cursor: pointer;
+        background-color: $color-accent-neutral-70;
+        .accessories-line-chart__chart {
+            width: 55px;
+            height: 20px;
+        }
+        .accessories-line-chart__chart-label {
+            font-size: 11px;
+        }
+        .accessories-line-chart__trend {
+            font-size: 12px;
+        }
+    }
+    &:before {
+        content: '';
+        display: block;
+        height: 35px;
+        width: 1px;
+        background-color: $color-accent-neutral-70;
+    }
+}
