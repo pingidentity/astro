@@ -18,7 +18,7 @@ const UserInfo = ({
                 />)
                 : <span className="user-info__icon" />
         }
-        { user.name }
+        <span className="truncate">{ user.name }</span>
     </div>
 );
 
