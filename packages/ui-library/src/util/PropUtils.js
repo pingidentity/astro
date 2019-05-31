@@ -65,7 +65,6 @@ export const defaultRender = (props, DefaultComponent) => <DefaultComponent {...
  *          LG: "lg"
  *      }
  */
-export const constantPropType = constant => PropTypes.oneOf(Object.values(constant));
 
 export const standardPropTypes = {
     className: PropTypes.string,
