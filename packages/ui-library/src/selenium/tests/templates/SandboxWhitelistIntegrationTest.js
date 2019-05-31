@@ -30,35 +30,35 @@ describe("Sandbox White list", function () {
 
     }));
 
-    it("it clicks on the add user button", SandboxWhitelistPage.retriable(function () {
+    // it("it clicks on the add user button", SandboxWhitelistPage.retriable(function () {
 
-        SandboxWhitelistPage.clickAddUser();
+    //     SandboxWhitelistPage.clickAddUser();
 
-        SandboxWhitelistPage.clickUser();
+    //     SandboxWhitelistPage.clickUser();
 
-        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_AddUser");
-    }));
+    //     SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_AddUser");
+    // }));
 
-    it("clicks on the add button from the list", SandboxWhitelistPage.retriable(function () {
+    // it("clicks on the add button from the list", SandboxWhitelistPage.retriable(function () {
 
-        SandboxWhitelistPage.clickAddButton();
+    //     SandboxWhitelistPage.clickAddButton();
 
-        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_AddButton");
-    }));
+    //     SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_AddButton");
+    // }));
 
-    it("enters a name in the searchbox", SandboxWhitelistPage.retriable(function () {
+    // it("enters a name in the searchbox", SandboxWhitelistPage.retriable(function () {
 
-        SandboxWhitelistPage.setSearchBoxValue("Sophia");
+    //     SandboxWhitelistPage.setSearchBoxValue("Sophia");
 
-        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_SearchBoxValue");
-    }));
+    //     SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_SearchBoxValue");
+    // }));
 
-    it("removes a name from the list", SandboxWhitelistPage.retriable(function () {
+    // it("removes a name from the list", SandboxWhitelistPage.retriable(function () {
 
-        SandboxWhitelistPage.clickRemoveButton();
+    //     SandboxWhitelistPage.clickRemoveButton();
 
-        SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_RemoveButton");
-    }));
+    //     SandboxWhitelistPage.takeScreenshotAndCompare("SandboxWhiteList_RemoveButton");
+    // }));
 
 
 });
