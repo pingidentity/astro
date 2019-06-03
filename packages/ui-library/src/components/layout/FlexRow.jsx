@@ -3,6 +3,35 @@ import PropTypes from "prop-types";
 import Padding, { sizes as paddingSizes } from "../layout/Padding";
 import classnames from "classnames";
 
+/**
+ * @class FlexRow
+ * @desc A row for wrapping components in a flexbox container
+ *
+ * @param {string} [data-id="flex-row"]
+ *      To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [className]
+ *      A class name to be applied to the row.
+ * @param {("bottom" | "top" | "center" | "stretch" )} [alignment="bottom"]
+ *      The vertical alignment of the items.
+ * @param {boolean} [inline=false]
+ *      If true, makes the FlexRow inline.
+ * @param {("center" | "end" | "spacebetween" | "start" )} [justify="start"]
+ *      The horizontal justification of the items.
+ * @param {("xs" | "sm" | "md" | "lg" | "xl" )} [spacing]
+ *      If supplied, with add spacing in between items.
+ * @example
+<FlexRow>
+    <Button label="Button" noSpacing />
+    <Button label="Another button" noSpacing />
+    <Button
+        inline
+        label="Inline button"
+        noSpacing
+        type="primary"
+    />
+</FlexRow>
+ */
+
 export const alignments = {
     BOTTOM: "bottom",
     TOP: "TOP",
