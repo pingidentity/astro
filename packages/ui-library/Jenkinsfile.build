@@ -26,13 +26,17 @@ pipeline {
   post {
     success {
       container('node-builder') {
-        withAWS(region: 'us-east-2', role: 'k8s-cdn-deployer', roleAccount: '208980577242') {
+        withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
             s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
           }
+        }
+        withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
             s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
           }
+        }
+        withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
             s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
           }
