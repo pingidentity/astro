@@ -6,7 +6,7 @@ pipeline {
     stage('npm-publish') {
       steps {
         container('node-builder') {
-          configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+          withCredentials([sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'keyfile')]) {
             sh "make GIT_BRANCH=${params.BUILD_BRANCH} deploy package-and-upload-for-hosting"
           }
           echo 'Publishing ui-library'
