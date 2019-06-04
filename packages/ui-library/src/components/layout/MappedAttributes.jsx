@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import {
-    standardPropTypes,
-} from "../../util/PropUtils";
 import Chip, { chipColors } from "./Chip";
 import Icon from "../general/Icon";
 import Table from "../tables/Table";
@@ -119,6 +116,8 @@ function MappedAttributes({
 }
 
 MappedAttributes.propTypes = {
+    className: PropTypes.string,
+    "data-id": PropTypes.string,
     attributes: PropTypes.arrayOf(
         PropTypes.shape({
             from: PropTypes.string,
@@ -133,7 +132,6 @@ MappedAttributes.propTypes = {
         type: PropTypes.string,
         required: PropTypes.bool
     }),
-    ...standardPropTypes,
 };
 
 MappedAttributes.defaultProps = {

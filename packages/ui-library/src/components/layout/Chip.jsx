@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { standardPropTypes } from "../../util/PropUtils";
 
 export const chipColors = {
     CYAN: "cyan",
@@ -54,8 +53,9 @@ function Chip({
 }
 
 Chip.propTypes = {
+    className: PropTypes.string,
+    "data-id": PropTypes.string,
     fullWidth: PropTypes.bool,
-    ...standardPropTypes
 };
 
 Chip.defaultProps = {

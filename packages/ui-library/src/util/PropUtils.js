@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 /**
  * @module util/PropUtils
@@ -65,11 +64,6 @@ export const defaultRender = (props, DefaultComponent) => <DefaultComponent {...
  *          LG: "lg"
  *      }
  */
-
-export const standardPropTypes = {
-    className: PropTypes.string,
-    "data-id": PropTypes.string,
-};
 
 export default {
     getIconClassName,
