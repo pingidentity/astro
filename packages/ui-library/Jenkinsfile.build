@@ -6,7 +6,7 @@ pipeline {
     stage('npm-publish') {
       steps {
         container('node-builder') {
-          configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: "${env.JENKINS_HOME}/.m2/settings.xml")]) {
+          configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
             sh "make GIT_BRANCH=${params.BUILD_BRANCH} deploy package-and-upload-for-hosting"
           }
           echo 'Publishing ui-library'
