@@ -36,7 +36,7 @@ import I18nPhoneInput, { I18nPhoneInputStateless } from "../v2";
 import { mount } from "enzyme";
 import { allFlags } from "../../../../../util/FlagUtils";
 
-describe("I18nPhoneInput", function () {
+describe.skip("I18nPhoneInput", function () {
     const defaults = {
         onSearch: jest.fn(),
         onToggle: jest.fn(),
