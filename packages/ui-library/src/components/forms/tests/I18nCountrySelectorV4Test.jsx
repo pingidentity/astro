@@ -38,7 +38,7 @@ jest.setMock("../i18n/countryCodes", [
     }
 ]);
 
-describe("I18nCountrySelector v4", function () {
+describe.skip("I18nCountrySelector v4", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
