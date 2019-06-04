@@ -16,6 +16,7 @@ gulp.task('transpile-components', () =>
 gulp.task('move-files', () =>
     gulp
         .src([
+            './.npmrc',
             './package.json',
             './static/end-user.css',
             './src/css',

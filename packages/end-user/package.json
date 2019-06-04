@@ -1,9 +1,9 @@
 {
   "name": "@pingux/end-user",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
-  "author": "jfal@pingidentity.com",
+  "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
   "publishConfig": {
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
@@ -126,7 +126,7 @@
     "server": "webpack-dev-server --config webpack.config.server.js",
     "lint": "eslint src/** && stylelint src/**/*.scss",
     "host": "npm run static && chmod 600 ./hosting/FARM-33-341f336d.us-west-2.pem && scp -i ./hosting/FARM-33-341f336d.us-west-2.pem static/* ubuntu@uilibrary.ping-eng.com:/var/www/html/end-user",
-    "build-dist": "rm -rf ./dist && mkdir dist && cp ./static/end-user.css ./dist && cp ./static/*.otf ./dist && cp ./static/*.svg ./dist && cp ./package.json ./dist && cp -R ./src/css ./dist",
+    "build-dist": "gulp build-dist",
     "build": "npm run static && npm run build-dist",
     "prepublishOnly": "[[ \"$PWD\" =~ ./dist ]]",
     "jest": "jest",
