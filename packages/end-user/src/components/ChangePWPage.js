@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Branding from './Branding';
-import Button from './Button';
+import Button, { ButtonTypes } from './Button';
 import Card from './Card';
 import Feedback from './Feedback';
 import FloatLabelPasswordInput from './FloatLabelPasswordInput';
@@ -47,7 +47,7 @@ const ChangePWPage = ({ branding }) => (
                     </Tooltip>
                 </FloatLabelPasswordInput>
                 <FloatLabelPasswordInput label="Verify New Password" id="verify" />
-                <Button label="Save" primary disabled />
+                <Button label="Save" type={ButtonTypes.PRIMARY} disabled />
             </Form>
         </Card>
     </Page>

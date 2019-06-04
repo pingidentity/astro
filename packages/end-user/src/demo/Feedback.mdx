@@ -1,4 +1,4 @@
-import Button from '../components/Button';
+import Button, { ButtonTypes } from '../components/Button';
 import ButtonSet from '../components/ButtonSet';
 import Card from '../components/Card';
 import Checkbox from '../components/Checkbox';
@@ -19,7 +19,6 @@ import Spinner from '../components/Spinner';
 import Stack from '../components/Stack';
 import StepLink from '../components/StepLink';
 import TextBlock from '../components/TextBlock';
-import TextInput from '../components/TextInput';
 import TextStyle from '../components/TextStyle';
 import Tooltip from '../components/Tooltip';
 import TwoSidedDemo from '../components/stateful/TwoSidedDemo';
@@ -56,7 +55,7 @@ import ComponentDemo from './components/ComponentDemo';
         <TextBlock>Now that you've registered, you can either continue on or edit your profile.</TextBlock>
         <ButtonSet>
             <Button label="Edit Profile"/>
-            <Button label="Continue" primary/>
+            <Button label="Continue" type={ButtonTypes.PRIMARY}/>
         </ButtonSet>
     </Card>
 </ComponentDemo>
@@ -134,7 +133,7 @@ to the `.two-sided` div.
         <Form margin="small">
             <FloatLabelTextInput label="Username" id="username10"/>
             <TextBlock size="small-right"><a href="#">Have a reset code?</a></TextBlock>
-            <Button label="Reset" primary disabled/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -151,7 +150,7 @@ to the `.two-sided` div.
         <Form margin="small">
             <FloatLabelTextInput label="Username" id="username11" defaultValue="IronMan@gmail.com"/>
             <TextBlock size="small-right"><a href="#">Have a reset code?</a></TextBlock>
-            <Button label="Reset" primary/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -168,7 +167,7 @@ to the `.two-sided` div.
         </TextBlock>
         <Form>
             <FloatLabelTextInput label="Reset Code"/>
-            <Button label="Reset" primary disabled/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -182,7 +181,7 @@ to the `.two-sided` div.
         </Heading>
         <Form>
             <FloatLabelTextInput label="Reset Code"/>
-            <Button label="Reset" primary disabled/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -201,7 +200,7 @@ to the `.two-sided` div.
         </Feedback>
         <Form>
             <FloatLabelTextInput label="Username" id="username12" defaultValue="IronMan@gmail.com"/>
-            <Button label="Send New Code" primary/>
+            <Button label="Send New Code" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -217,7 +216,7 @@ to the `.two-sided` div.
             <FloatLabelPasswordInput label="New Password" id="newPwD5" defaultValue="eightPassword">
             </FloatLabelPasswordInput>
             <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd5" defaultValue="eightPassword"/>
-            <Button label="Save" primary disabled />
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled />
         </Form>
     </Card>
 </ComponentDemo>
@@ -226,7 +225,7 @@ to the `.two-sided` div.
     <Card>
         <Logo src="ping-logo.svg"/>
         <IconFeedback type="success" medium>Password Changed</IconFeedback>
-        <Button label="Continue" secondary/>
+        <Button label="Continue" type={ButtonTypes.SECONDARY}/>
     </Card>
 </ComponentDemo>
 
@@ -247,7 +246,7 @@ to the `.two-sided` div.
         <Logo src="ping-logo.svg"/>
         <IconFeedback type="success" small>You're Registered</IconFeedback>
         <TextBlock spacing="xxlarge">Your account is setup and ready to go.</TextBlock>
-        <Button label="Sign On" primary/>
+        <Button label="Sign On" type={ButtonTypes.PRIMARY}/>
     </Card>
 </ComponentDemo>
 

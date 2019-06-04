@@ -7,7 +7,7 @@ const routes = require('./src/demo/routes.js');
 
 const entries = {};
 for (let i = 0; i < routes.length; i += 1) {
-    entries[routes[i].id] = ['babel-polyfill', `./src/demo/entries/${routes[i].script}`];
+    entries[routes[i].id] = ['@babel/polyfill', `./src/demo/entries/${routes[i].script}`];
 }
 // babel-polyfill is necessary to work on IE10
 
@@ -17,7 +17,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
             },
@@ -77,6 +77,6 @@ module.exports = {
         extractEndUserCSS,
     ],
     resolve: {
-        extensions: ['.js', '.md', '.mdx'],
+        extensions: ['.js', '.jsx', '.md', '.mdx'],
     },
 };

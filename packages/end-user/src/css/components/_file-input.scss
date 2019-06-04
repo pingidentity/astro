@@ -1,0 +1,169 @@
+$image-input-size: 100px;
+
+
+.file-input {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    input[type=file] {
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+    }
+
+    &__remove-link {
+        display: inline-block;
+    }
+
+    &--no-click {
+        pointer-events: none;
+    }
+
+    &__value-text {
+        margin: 0 $spacing-sm 0 0;
+    }
+}
+
+.image-input {
+    height: $image-input-size;
+    width: $image-input-size;
+    color: $color-neutral-100;
+    cursor: pointer;
+
+    &__text {
+        text-align: center;
+        font-size: $font-size-sm;
+        line-height: 1em;
+        margin: $spacing-base 0 0;
+    }
+}
+
+.image-input__container {
+    position: relative;
+}
+
+.image-input__selector,
+.image-input__selected {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: $image-input-size;
+    width: $image-input-size;
+    border-radius: ceil($image-input-size/2);
+    background-color: $color-active-blue;
+}
+
+.image-input__selector {
+    &:hover {
+        $color-start: darken($color-active-blue, 10);
+        $color-end: lighten($color-active-blue, 15);
+        background: -moz-linear-gradient(-45deg,  $color-start 0%, $color-end 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg,  $color-start 0%,$color-end 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg,  $color-start 0%,$color-end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    }
+}
+
+.image-input__selected {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    border: 1px solid $color-neutral-80;
+    border-radius: ceil($image-input-size/2);
+
+    .image-input__text {
+        display: none;
+    }
+
+    &:hover {
+        .image-input__selected-thumbnail {
+            opacity: 0.3;
+        }
+        .image-input__text {
+            display: block;
+        }
+        .image-input__edit-btn {
+            // opacity: 0;
+        }
+    }
+}
+
+.image-input__camera-icon {
+    height: 30px;
+    width: 40px;
+}
+
+.image-input__selected-thumbnail {
+    position: absolute;
+    top: $spacing-xs;
+    bottom: $spacing-xs;
+    left: $spacing-xs;
+    right: $spacing-xs;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+    box-shadow: 0px 0px 0px $spacing-xs $color-neutral-100;
+    border-radius: ceil($image-input-size/2);
+}
+
+.image-input__edit-btn {
+    $size: 28px;
+
+    position: absolute;
+    bottom: 7px;
+    right: 0;
+
+    height: $size;
+    width: $size;
+    background-color: $color-neutral-100;
+    border-radius: ceil($size/2);
+
+    background-image: url(../icons/pencil.svg);
+    background-position: center;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    box-shadow: $shadow-overlay;
+}
+
+.image-input__edit-menu {
+    $arrow-height: 5px;
+
+    position: absolute;
+    top: 100%;
+    left: calc(100% - 13px);
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: $color-neutral-100;
+    background: $color-active-blue;
+    border-radius: 3px;
+
+    &-item {
+        padding: $spacing-xs $spacing-sm;
+        border-bottom: 1px solid rgba($color-neutral-100, 0.3);
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+        &:hover {
+            background-color: rgba(#000, 0.2);
+        }
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        top: -(2*$arrow-height);
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: $arrow-height;
+        border-style: solid;
+        border-color: transparent transparent $color-active-blue;
+    }
+}

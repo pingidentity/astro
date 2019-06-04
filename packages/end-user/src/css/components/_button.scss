@@ -37,4 +37,9 @@
             background: $button-primary-bg-color;
         }
     }
+
+    &--inline {
+        width: auto;
+        display: inline-block;
+    }
 }

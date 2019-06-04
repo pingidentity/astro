@@ -1,4 +1,4 @@
-import Button from '../components/Button';
+import Button, { ButtonTypes } from '../components/Button';
 import ButtonSet from '../components/ButtonSet';
 import Card from '../components/Card';
 import Checkbox from '../components/Checkbox';
@@ -37,7 +37,7 @@ import ComponentDemo from './components/ComponentDemo';
             <FloatLabelTextInput label="Username" id="username6"/>
             <FloatLabelPasswordInput label="Password" id="password2"/>
             <div><Checkbox label="Remember me"/></div>
-            <Button label="Sign On" primary/>
+            <Button label="Sign On" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -51,7 +51,7 @@ import ComponentDemo from './components/ComponentDemo';
             <FloatLabelTextInput label="Username" id="username7"/>
             <FloatLabelPasswordInput label="Password" id="password3"/>
             <div><Checkbox label="Remember me"/></div>
-            <Button label="Sign On" primary/>
+            <Button label="Sign On" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -64,7 +64,7 @@ import ComponentDemo from './components/ComponentDemo';
             <FloatLabelTextInput label="Username" id="username8"/>
             <FloatLabelPasswordInput label="Password" id="password4"/>
             <div><Checkbox label="Remember me"/></div>
-            <Button label="Sign On" primary/>
+            <Button label="Sign On" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -77,7 +77,7 @@ import ComponentDemo from './components/ComponentDemo';
         <TextBlock>Please enter your password below:</TextBlock>
         <Form>
             <FloatLabelPasswordInput label="Password" id="password5"/>
-            <Button label="Sign On" primary disabled/>
+            <Button label="Sign On" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
         <TextBlock size="small">Not Cindy Lou? <a href="#">Switch Accounts</a></TextBlock>
     </Card>
@@ -89,7 +89,7 @@ import ComponentDemo from './components/ComponentDemo';
         <Logo src="ping-logo.svg"/>
         <Feedback type="error">Too many unsuccessful sign-on attempts. Please reset your password.</Feedback>
         <Form>
-            <Button label="Reset Password" primary/>
+            <Button label="Reset Password" type={ButtonTypes.PRIMARY}/>
         </Form>
         <TextBlock size="small">No account? <a href="#">Register Now</a></TextBlock>
     </Card>
@@ -155,7 +155,7 @@ import ComponentDemo from './components/ComponentDemo';
                 </Tooltip>
             </FloatLabelPasswordInput>
             <FloatLabelPasswordInput label="Verify New Password" id="verify" />
-            <Button label="Save" primary disabled />
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled />
         </Form>
     </Card>
 </ComponentDemo>
@@ -167,7 +167,7 @@ import ComponentDemo from './components/ComponentDemo';
         <TextBlock>Now that you've registered, you can either continue on or edit your profile.</TextBlock>
         <ButtonSet>
             <Button label="Edit Profile"/>
-            <Button label="Continue" primary/>
+            <Button label="Continue" type={ButtonTypes.PRIMARY}/>
         </ButtonSet>
     </Card>
 </ComponentDemo>
@@ -240,7 +240,7 @@ to the `.two-sided` div.
         <Form>
             <FloatLabelTextInput label="Username" id="username9"/>
             <FloatLabelPasswordInput label="Password" id="password6"/>
-            <Button label="Sign On" primary disabled/>
+            <Button label="Sign On" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
         <TextBlock size="small">Trouble signing on? <a href="#">Reset password</a></TextBlock>
     </Card>
@@ -259,7 +259,7 @@ to the `.two-sided` div.
         <Form margin="small">
             <FloatLabelTextInput label="Username" id="username10"/>
             <TextBlock size="small-right"><a href="#">Have a reset code?</a></TextBlock>
-            <Button label="Reset" primary disabled/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -276,7 +276,7 @@ to the `.two-sided` div.
         <Form margin="small">
             <FloatLabelTextInput label="Username" id="username11" defaultValue="IronMan@gmail.com"/>
             <TextBlock size="small-right"><a href="#">Have a reset code?</a></TextBlock>
-            <Button label="Reset" primary/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -293,7 +293,7 @@ to the `.two-sided` div.
         </TextBlock>
         <Form>
             <FloatLabelTextInput label="Reset Code"/>
-            <Button label="Reset" primary disabled/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -307,7 +307,7 @@ to the `.two-sided` div.
         </Heading>
         <Form>
             <FloatLabelTextInput label="Reset Code"/>
-            <Button label="Reset" primary disabled/>
+            <Button label="Reset" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -326,7 +326,7 @@ to the `.two-sided` div.
         </Feedback>
         <Form>
             <FloatLabelTextInput label="Username" id="username12" defaultValue="IronMan@gmail.com"/>
-            <Button label="Send New Code" primary/>
+            <Button label="Send New Code" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -341,7 +341,7 @@ to the `.two-sided` div.
         <Form>
             <FloatLabelPasswordInput label="New Password" id="newPwd1" />
             <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd1" />
-            <Button label="Save" primary disabled />
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled />
         </Form>
     </Card>
 </ComponentDemo>
@@ -377,7 +377,7 @@ to the `.two-sided` div.
                 </Tooltip>
             </FloatLabelPasswordInput>
             <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd2" />
-            <Button label="Save" primary disabled />
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled />
         </Form>
     </Card>
 </ComponentDemo>
@@ -413,7 +413,7 @@ to the `.two-sided` div.
                 </Tooltip>
             </FloatLabelPasswordInput>
             <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd3" defaultValue="eightPa"/>
-            <Button label="Save" primary disabled />
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled />
         </Form>
     </Card>
 </ComponentDemo>
@@ -449,7 +449,7 @@ to the `.two-sided` div.
                 </Tooltip>
             </FloatLabelPasswordInput>
             <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd4" defaultValue="eightPassword" success/>
-            <Button label="Save" primary/>
+            <Button label="Save" type={ButtonTypes.PRIMARY}/>
         </Form>
     </Card>
 </ComponentDemo>
@@ -465,7 +465,7 @@ to the `.two-sided` div.
             <FloatLabelPasswordInput label="New Password" id="newPwD5" defaultValue="eightPassword">
             </FloatLabelPasswordInput>
             <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd5" defaultValue="eightPassword"/>
-            <Button label="Save" primary disabled />
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled />
         </Form>
     </Card>
 </ComponentDemo>
@@ -474,7 +474,7 @@ to the `.two-sided` div.
     <Card>
         <Logo src="ping-logo.svg"/>
         <IconFeedback type="success" medium>Password Changed</IconFeedback>
-        <Button label="Continue" secondary/>
+        <Button label="Continue" type={ButtonTypes.SECONDARY}/>
     </Card>
 </ComponentDemo>
 
@@ -499,7 +499,7 @@ to the `.two-sided` div.
                 <FloatLabelPasswordInput label="Password" id="newPwd6"/>
                 <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd6"/>
             </Stack>
-            <Button label="Save" primary disabled/>
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
         <TextBlock size="small">Already have an account? <a href="#">Sign in</a></TextBlock>
     </Card>
@@ -547,7 +547,7 @@ to the `.two-sided` div.
                 </FloatLabelPasswordInput>
                 <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd7"/>
             </Stack>
-            <Button label="Save" primary disabled/>
+            <Button label="Save" type={ButtonTypes.PRIMARY} disabled/>
         </Form>
         <TextBlock size="small">Already have an account? <a href="#">Sign in</a></TextBlock>
     </Card>
@@ -570,7 +570,7 @@ to the `.two-sided` div.
         <Logo src="ping-logo.svg"/>
         <IconFeedback type="success" small>You're Registered</IconFeedback>
         <TextBlock spacing="xxlarge">Your account is setup and ready to go.</TextBlock>
-        <Button label="Sign On" primary/>
+        <Button label="Sign On" type={ButtonTypes.PRIMARY}/>
     </Card>
 </ComponentDemo>
 

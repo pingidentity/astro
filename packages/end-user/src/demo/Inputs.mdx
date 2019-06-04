@@ -3,6 +3,7 @@ import Dropdown from '../components/Dropdown';
 import DropdownCustom from '../components/DropdownCustom';
 import DropdownCustomSearchable from '../components/DropdownCustomSearchable';
 import Feedback from '../components/Feedback';
+import FileInput from '../components/FileInput';
 import FloatLabelDropdown from '../components/FloatLabelDropdown';
 import FloatLabelDropdownCustom from '../components/FloatLabelDropdownCustom';
 import FloatLabelDropdownDemo from '../components/stateful/FloatLabelDropdownDemo';
@@ -12,13 +13,14 @@ import Form from '../components/Form';
 import FormAside from '../components/FormAside';
 import Heading from '../components/Heading';
 import IconFeedback from '../components/IconFeedback';
+import ImageInput from '../components/ImageInput'
 import Logo from '../components/Logo';
 import ModalMenu from '../components/ModalMenu';
 import Requirements from '../components/Requirements';
 import Spinner from '../components/Spinner';
 import Stack from '../components/Stack';
 import TextBlock from '../components/TextBlock';
-import TextInput from '../components/TextInput';
+import TextInput, { textInputTypes } from '../components/TextInput';
 import TextStyle from '../components/TextStyle';
 import Tooltip from '../components/Tooltip';
 import ComponentDemo from './components/ComponentDemo';
@@ -34,19 +36,19 @@ import ComponentDemo from './components/ComponentDemo';
 ### Error state
 
 <ComponentDemo>
-    <TextInput id="username2" error/>
+    <TextInput id="username2" type={textInputTypes.ERROR}/>
 </ComponentDemo>
 
 ### Success state
 
 <ComponentDemo>
-    <TextInput id="username3" success/>
+    <TextInput id="username3" type={textInputTypes.SUCCESS}/>
 </ComponentDemo>
 
 ### Primary input
 
 <ComponentDemo>
-    <TextInput id="primary" defaultValue="495837" primary/>
+    <TextInput id="primary" defaultValue="495837" type={textInputTypes.PRIMARY}/>
 </ComponentDemo>
 
 ### Float Label Inputs
@@ -196,3 +198,20 @@ With searchable options:
     <Checkbox id="checkbox1" label="Label"/>
 </ComponentDemo>
 
+## Image Input
+
+<ComponentDemo>
+    <ImageInput
+        value="https://images-na.ssl-images-amazon.com/images/I/61qxTCzXx0L._SX425_.jpg"
+    />
+</ComponentDemo>
+
+## File Input
+
+<ComponentDemo>
+    <FileInput />
+</ComponentDemo>
+
+<ComponentDemo>
+    <FileInput value="example.pdf" />
+</ComponentDemo>

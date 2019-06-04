@@ -1,6 +1,8 @@
 {
     "env": {
-        "browser": true
+        "browser": true,
+        "jest": true,
+        "jasmine": true
     },
     "parser": "babel-eslint",
     "extends": "airbnb",

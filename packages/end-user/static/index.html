@@ -67,7 +67,8 @@
         </h3>
         <div class="component-demo">
             <div class="component-demo__preview"><button
-                    class="button">Do something
+                    class="button file-input--button"
+                    data-id="button">Do something
                     normal</button></div>
             <div class="component-demo__markup">
                 <div class="component-demo__code"><span
@@ -76,7 +77,8 @@
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Do something normal<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button"</span>
+    <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Do something normal<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
                 </div>
             </div>
         </div>
@@ -87,20 +89,21 @@
             page.</h3>
         <div class="component-demo">
             <div class="component-demo__preview"><button
-                    class="button button--primary brand-primary-bg">push
-                    it</button></div>
+                    class="button file-input--button button--primary brand-primary-bg"
+                    data-id="button">push it</button></div>
             <div class="component-demo__markup">
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">React</span>
                     <pre><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"push it"</span>
-  <span class="hljs-attr">primary</span>
+  <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
  /&gt;</span></pre>
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>push
-    it<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+    <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--primary brand-primary-bg"</span>
+    <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>push it<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
                 </div>
             </div>
         </div>
@@ -108,22 +111,23 @@
             button</h3>
         <div class="component-demo">
             <div class="component-demo__preview"><button
-                    class="button button--primary button--disabled brand-primary-bg"
-                    disabled="">push it</button></div>
+                    class="button file-input--button button--disabled button--primary brand-primary-bg"
+                    data-id="button" disabled="">push
+                    it</button></div>
             <div class="component-demo__markup">
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">React</span>
                     <pre><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
   <span class="hljs-attr">disabled</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"push it"</span>
-  <span class="hljs-attr">primary</span>
+  <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
  /&gt;</span></pre>
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
                     <pre><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-    <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
-    <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>push it<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
+    <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--disabled button--primary brand-primary-bg"</span>
+    <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>push it<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
                 </div>
             </div>
         </div>
@@ -131,19 +135,20 @@
         </h3>
         <div class="component-demo">
             <div class="component-demo__preview"><button
-                    class="button button--tertiary">Change</button>
-            </div>
+                    class="button file-input--button button--tertiary"
+                    data-id="button">Change</button></div>
             <div class="component-demo__markup">
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">React</span>
                     <pre><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"Change"</span>
-  <span class="hljs-attr">tertiary</span>
+  <span class="hljs-attr">type</span>=<span class="hljs-string">"tertiary"</span>
  /&gt;</span></pre>
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--tertiary"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--tertiary"</span>
+    <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></pre>
                 </div>
             </div>
         </div>

@@ -32,6 +32,7 @@
                     </div>
                     <form class="form"><input type="text"
                             class="text-input text-input--primary"
+                            data-id="text-input"
                             value="012345" />
                         <div class="form-aside">
                             <div class="text-block">
@@ -45,11 +46,14 @@
                                     class="text-block__text">
                                     +1 415-xxx-xx35</div>
                             </div><button
-                                class="button button--tertiary">Change</button>
+                                class="button file-input--button button--tertiary"
+                                data-id="button">Change</button>
                         </div><button
-                            class="button button--primary brand-primary-bg">Sign
+                            class="button file-input--button button--primary brand-primary-bg"
+                            data-id="button">Sign
                             On</button><button
-                            class="button">Resend</button>
+                            class="button file-input--button"
+                            data-id="button">Resend</button>
                     </form>
                 </div>
             </div>
@@ -64,7 +68,7 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
       <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"012345"</span>
-      <span class="hljs-attr">primary</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
      /&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">FormAside</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
@@ -75,12 +79,12 @@
       <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
         <span class="hljs-attr">label</span>=<span class="hljs-string">"Change"</span>
-        <span class="hljs-attr">tertiary</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">"tertiary"</span>
        /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">FormAside</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
       <span class="hljs-attr">label</span>=<span class="hljs-string">"Sign On"</span>
-      <span class="hljs-attr">primary</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
      /&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Resend"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
@@ -97,7 +101,7 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
             <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--primary"</span>
-            <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"text-input"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-aside"</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>SMS sent to:
@@ -107,11 +111,13 @@
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>+1
                     415-xxx-xx35<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-                <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--tertiary"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--tertiary"</span>
+                <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-            <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Sign
-            On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-            <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--primary brand-primary-bg"</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Sign On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button"</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
                 </div>
@@ -136,7 +142,8 @@
                             complete authentication.</div>
                     </div>
                     <form class="form"><input type="text"
-                            class="text-input text-input--error text-input--primary"
+                            class="text-input text-input--primary"
+                            data-id="text-input"
                             value="012345" />
                         <div class="form-aside">
                             <div class="text-block">
@@ -150,11 +157,14 @@
                                     class="text-block__text">
                                     +1 415-xxx-xx35</div>
                             </div><button
-                                class="button button--tertiary">Change</button>
+                                class="button file-input--button button--tertiary"
+                                data-id="button">Change</button>
                         </div><button
-                            class="button button--primary brand-primary-bg">Sign
+                            class="button file-input--button button--primary brand-primary-bg"
+                            data-id="button">Sign
                             On</button><button
-                            class="button">Resend</button>
+                            class="button file-input--button"
+                            data-id="button">Resend</button>
                     </form>
                 </div>
             </div>
@@ -173,7 +183,7 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
       <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"012345"</span>
       <span class="hljs-attr">error</span>
-      <span class="hljs-attr">primary</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
      /&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">FormAside</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
@@ -184,12 +194,12 @@
       <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
         <span class="hljs-attr">label</span>=<span class="hljs-string">"Change"</span>
-        <span class="hljs-attr">tertiary</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">"tertiary"</span>
        /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">FormAside</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
       <span class="hljs-attr">label</span>=<span class="hljs-string">"Sign On"</span>
-      <span class="hljs-attr">primary</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
      /&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Resend"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
@@ -211,8 +221,8 @@
             received to complete authentication.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
-            <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--error text-input--primary"</span>
-            <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--primary"</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"text-input"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-aside"</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>SMS sent to:
@@ -222,11 +232,13 @@
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>+1
                     415-xxx-xx35<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-                <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--tertiary"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--tertiary"</span>
+                <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-            <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Sign
-            On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-            <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--primary brand-primary-bg"</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Sign On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button"</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
                 </div>
@@ -288,7 +300,8 @@
                         <p class="icon-feedback__label">
                             Timed Out</p>
                     </div><button
-                        class="button">Back</button>
+                        class="button file-input--button"
+                        data-id="button">Back</button>
                 </div>
             </div>
             <div class="component-demo__markup">
@@ -311,7 +324,8 @@
             <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-timed-out.svg"</span>
             <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span> /&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Timed Out<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button"</span>
+        <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
                 </div>
             </div>
@@ -340,7 +354,8 @@
                             be done to resolve it, if there
                             is a solution.</div>
                     </div><button
-                        class="button">Back</button>
+                        class="button file-input--button"
+                        data-id="button">Back</button>
                 </div>
             </div>
             <div class="component-demo__markup">
@@ -372,7 +387,8 @@
             will appear here when required to further
             explain the type of error and what can be done
             to resolve it, if there is a solution.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button"</span>
+        <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
                 </div>
             </div>
@@ -453,7 +469,8 @@
                         <p class="icon-feedback__label">
                             Canceled</p>
                     </div><button
-                        class="button">Back</button>
+                        class="button file-input--button"
+                        data-id="button">Back</button>
                 </div>
             </div>
             <div class="component-demo__markup">
@@ -476,7 +493,8 @@
             <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-stopped.svg"</span>
             <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span> /&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Canceled<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button"</span>
+        <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
                 </div>
             </div>
@@ -536,6 +554,7 @@
                     </div>
                     <form class="form"><input type="text"
                             class="text-input text-input--primary"
+                            data-id="text-input"
                             value="012345" />
                         <div class="form-aside">
                             <div class="text-block">
@@ -549,11 +568,14 @@
                                     class="text-block__text">
                                     +1 415-xxx-xx35</div>
                             </div><button
-                                class="button button--tertiary">Change</button>
+                                class="button file-input--button button--tertiary"
+                                data-id="button">Change</button>
                         </div><button
-                            class="button button--primary brand-primary-bg">Sign
+                            class="button file-input--button button--primary brand-primary-bg"
+                            data-id="button">Sign
                             On</button><button
-                            class="button">Resend</button>
+                            class="button file-input--button"
+                            data-id="button">Resend</button>
                     </form>
                     <div class="modal-overlay">
                         <div class="modal-overlay__content">
@@ -588,7 +610,7 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
       <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"012345"</span>
-      <span class="hljs-attr">primary</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
      /&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">FormAside</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
@@ -599,12 +621,12 @@
       <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
         <span class="hljs-attr">label</span>=<span class="hljs-string">"Change"</span>
-        <span class="hljs-attr">tertiary</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">"tertiary"</span>
        /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">FormAside</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
       <span class="hljs-attr">label</span>=<span class="hljs-string">"Sign On"</span>
-      <span class="hljs-attr">primary</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>
      /&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Resend"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
@@ -622,7 +644,7 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
             <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--primary"</span>
-            <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"text-input"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-aside"</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>SMS sent to:
@@ -632,11 +654,13 @@
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>+1
                     415-xxx-xx35<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-                <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--tertiary"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--tertiary"</span>
+                <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-            <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Sign
-            On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-            <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button button--primary brand-primary-bg"</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Sign On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button file-input--button"</span>
+            <span class="hljs-attr">data-id</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-overlay"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-overlay__content"</span>&gt;</span>

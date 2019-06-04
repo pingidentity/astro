@@ -8,7 +8,7 @@ import Logo from './Logo';
 import FloatLabelTextInput from './FloatLabelTextInput';
 import FloatLabelPasswordInput from './FloatLabelPasswordInput';
 import Checkbox from './Checkbox';
-import Button from './Button';
+import Button, {ButtonTypes} from './Button';
 
 const SignOnPage = ({ branding }) => (
     <Page footer="© Copyright 2017 Ping Identity. All rights reserved.">
@@ -21,7 +21,7 @@ const SignOnPage = ({ branding }) => (
                 <div>
                     <Checkbox label="Remember me" />
                 </div>
-                <Button label="Sign On" primary />
+                <Button label="Sign On" type={ButtonTypes.PRIMARY} />
             </Form>
         </Card>
     </Page>

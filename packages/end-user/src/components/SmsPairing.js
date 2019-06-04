@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../components/Button';
+import Button, { ButtonTypes } from '../components/Button';
 import ButtonSet from '../components/ButtonSet';
 import Card from '../components/Card';
 import DropdownCustomSearchable from '../components/DropdownCustomSearchable';
@@ -29,7 +29,7 @@ const SmsPairing = ({ onToggle, open }) => (
                 />
             </FormRow>
             <ButtonSet>
-                <Button label="Next" primary />
+                <Button label="Next" type={ButtonTypes.PRIMARY} />
                 <Button label="Cancel" />
             </ButtonSet>
         </Form>

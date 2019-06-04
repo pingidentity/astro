@@ -1,4 +1,4 @@
-import Button from '../components/Button';
+import Button, { ButtonTypes } from '../components/Button';
 import Card from '../components/Card';
 import Checkbox from '../components/Checkbox';
 import Dropdown from '../components/Dropdown';
@@ -50,17 +50,17 @@ The logo that sits atop the form.
 
 ### The submit button for the form. There should only be one of these blue primary buttons per page.
 <ComponentDemo>
-    <Button label="push it" primary/>
+    <Button label="push it" type={ButtonTypes.PRIMARY} />
 </ComponentDemo>
 
 ### Disabled primary button
 <ComponentDemo>
-    <Button label="push it" primary disabled/>
+    <Button label="push it" type={ButtonTypes.PRIMARY} disabled/>
 </ComponentDemo>
 
 ### Third-level button.
 <ComponentDemo>
-    <Button label="Change" tertiary/>
+    <Button label="Change" type={ButtonTypes.TERTIARY} />
 </ComponentDemo>
 
 ## Card
