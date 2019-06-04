@@ -8,7 +8,8 @@ import classnames from "classnames";
 import Translator from "../../../util/i18n/Translator.js";
 import FormDropDownList from "../FormDropDownList";
 import { flagsPropType, getFlags } from "../../../util/FlagUtils";
-let countryCodes = require("./countryCodes.js");
+import countryCodes from "./countryCodes.js";
+
 
 /**
 * @enum {string}
@@ -131,19 +132,14 @@ class CountryFlagList extends React.Component {
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    constructor(props) {
-        super(props);
-        countryCodes = this._translateCountryNames(countryCodes);
-    }
-
     /**
     * Returns a country's data by code
     * @param {string} code - the country's iso2 or isoNum code
     * @return {Object} - the country data
     * @ignore
     */
-    _findByCountryCode = (code) => {
-        return countryCodes.filter(function (country) {
+    _findByCountryCode = (code, countryCodesWithValues) => {
+        return countryCodesWithValues.filter(function (country) {
             return country.iso2 === code || country.isoNum === code;
         })[0];
     };
@@ -159,6 +155,7 @@ class CountryFlagList extends React.Component {
         return listCountry;
     };
 
+
     render() {
         const {
             countryCodeDisplayType,
@@ -170,8 +167,18 @@ class CountryFlagList extends React.Component {
             selectedCountryCode === "" ? "flag-container--none-selected" : "",
             this.props.className
         );
+
+        const countryCodesWithValues = this._translateCountryNames(countryCodes).map(item => {
+            return _.defaults({
+                "data-id": "country-" + item.iso2,
+                code: item[countryCodeDisplayType],
+                value: item[countryCodeDisplayType],
+                label: item.name
+            }, item);
+        });
+
         var selectedCountry = selectedCountryCode
-            ? this._findByCountryCode(selectedCountryCode)
+            ? this._findByCountryCode(selectedCountryCode, countryCodesWithValues)
             : {};
         var selectorFlagClassName = !_.isEmpty(selectedCountry)
             ? classnames("iti-flag", selectedCountry.iso2)
@@ -183,22 +190,13 @@ class CountryFlagList extends React.Component {
         var type = <Flag countryCodeClassName={this.props.countryCodeClassName} />;
 
         // Set up item props to pass to the contentType
-        countryCodes = countryCodes.map(item => {
-            return _.defaults({
-                "data-id": "country-" + item.iso2,
-                code: item[countryCodeDisplayType],
-                value: item[countryCodeDisplayType],
-                label: item.name
-            }, item);
-        });
-
         return (
             <FormDropDownList
                 flags={getFlags(this)}
                 stateless={true}
                 data-id={this.props["data-id"]}
                 className={containerClassName}
-                options={open ? countryCodes : [selectedCountry]}
+                options={open ? countryCodesWithValues : [selectedCountry]}
                 contentType={type}
                 onValueChange={this.props.onValueChange}
                 open={open}
@@ -218,7 +216,7 @@ class CountryFlagList extends React.Component {
                 selectedOptionLabelClassName={selectorFlagClassName}
                 showSelectedOptionLabel={false}
                 name={this.props.name}
-                noneOption={{ label: this.props.labelNoCountry }}
+                noneOption={{ label: this.props.labelNoCountry, value: this.props.labelNoCountry }}
                 noneOptionLabelClassName="country-name" />
         );
     }

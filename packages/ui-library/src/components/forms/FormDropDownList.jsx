@@ -249,7 +249,10 @@ const SearchTypes = {
 class FormDropDownListDefaultContent extends React.Component {
     static propTypes = {
         label: PropTypes.string,
-        value: PropTypes.string.isRequired
+        value: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]).isRequired
     };
 
     static defaultProps = {
@@ -357,7 +360,10 @@ class FormDropDownListStateless extends React.Component {
         options: PropTypes.arrayOf(
             PropTypes.shape({
                 label: PropTypes.string,
-                value: PropTypes.string.isRequired
+                value: PropTypes.oneOfType([
+                    PropTypes.string,
+                    PropTypes.number
+                ]).isRequired
             })
         ),
         onSearch: PropTypes.func,
@@ -436,12 +442,8 @@ class FormDropDownListStateless extends React.Component {
         });
     }
 
-    labeledOptions = this._getLabelOptions(this.props.options)
-
-
     componentDidUpdate() {
         this._setSearchListPosition(this.props.options);
-        this.labeledOptions = this._getLabelOptions(this.props.options);
     }
 
     componentDidMount() {
@@ -461,9 +463,10 @@ class FormDropDownListStateless extends React.Component {
         this.props.setSearchIndex(index);
     };
 
-    _filteredOptions = () => (this.props.canAdd || this.props.searchType === SearchTypes.BOX)
-        ? filterOptions(this.labeledOptions, this.props.searchString)
-        : this.labeledOptions;
+    _filteredOptions = () => {
+        return (this.props.canAdd || this.props.searchType === SearchTypes.BOX)
+            ? filterOptions(this._getLabelOptions(this.props.options), this.props.searchString)
+            : this._getLabelOptions(this.props.options);}
     // Moving complexity of the stateful version's _handleToggle behavior here
     _onToggleProxy = () => {
         this.props.onToggle();
@@ -549,7 +552,7 @@ class FormDropDownListStateless extends React.Component {
             } else if (this.props.canAdd) {
                 const cleanSearch = this.props.searchString.toLowerCase().trim();
                 // Cannot add if duplicate
-                return this.labeledOptions.some(({
+                return this._getLabelOptions(this.props.options).some(({
                     label
                 }) => label.toLowerCase().trim() === cleanSearch)
                     ? undefined
@@ -658,12 +661,14 @@ class FormDropDownListStateless extends React.Component {
                     ? searchString + char
                     : char;
 
+                const labeledOptions = this._getLabelOptions(this.props.options);
                 const option =
-                    this.labeledOptions.find(o => o[searchField].toLowerCase().indexOf(search) === 0);
+                    labeledOptions.find(o =>
+                        o[searchField].toLowerCase().indexOf(search) === 0);
                 const index = groups
                     ? this._getOrderedOptionsIndex(option)
-                    : this.labeledOptions.indexOf(option);
-                    // again, not i18n friendly
+                    : labeledOptions.indexOf(option);
+                // again, not i18n friendly
                 this._onSearchProxy(option ? search : "", Date.now(), index);
             } else if (searchString) { // invalid character entered
                 this._onSearchProxy("", Date.now(), noneOption ? -1 : 0);
