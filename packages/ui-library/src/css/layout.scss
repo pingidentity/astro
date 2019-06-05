@@ -1005,7 +1005,7 @@ $color-grey-minor-1: $color-neutral-30;
     }
     &.columns-width-auto {
         .content-column {
-            flex: none;
+            flex: auto;
 
             @include flexbox-grow(0);
         }
