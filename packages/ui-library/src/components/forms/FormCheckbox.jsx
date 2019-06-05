@@ -108,6 +108,7 @@ class FormCheckbox extends React.Component {
         }
     };
 
+
     render() {
         const labelClassName = classnames(
             "input-checkbox",
@@ -125,7 +126,7 @@ class FormCheckbox extends React.Component {
             }
         );
 
-        return (
+        const checkBox = (
             <FormLabel data-id={this.props["data-id"] + "-container"}
                 className={labelClassName}
                 helpClassName={this.props.helpClassName}
@@ -152,6 +153,13 @@ class FormCheckbox extends React.Component {
                     />
                 )}
             </FormLabel>
+        );
+
+        return (
+            !this.props.stacked ? checkBox
+                : <div className="input-checkbox__container--stacked">
+                    {checkBox}
+                </div>
         );
     }
 }

@@ -415,7 +415,6 @@ label {
             }
         }
         &.stacked {
-            display: block;
             margin-bottom: 10px;
 
             .icon {
@@ -1665,6 +1664,8 @@ input[type=file] {
         }
     }
     .input-selection-list-items {
+        display: flex;
+        flex-direction: column;
         max-height: 228px;
         margin: 0;
         overflow-x: hidden;
@@ -2443,6 +2444,7 @@ input[type=file] {
     .input-integer,
     .input-radio,
     .input-checkbox,
+    .input-checkbox__container--stacked:last-of-type .input-checkbox,
     .input-color-picker,
     .input-calendar {
         margin-bottom: 0;
