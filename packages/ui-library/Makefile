@@ -147,8 +147,7 @@ define deploy
 		-DuniqueVersion=false \
 		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
-		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse \
-		-s settings.xml
+		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse
 endef
 
 define deploy_coverage
@@ -160,8 +159,7 @@ define deploy_coverage
 		-DuniqueVersion=false \
 		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
-		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse \
-		-s settings.xml
+		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse
 endef
 
 define install_reference_coverage_report
