@@ -252,7 +252,10 @@ class AppFrame extends React.Component {
                     onSectionChange(key);
                 }
             });
-            onSectionChange(sec);
+            const { [sec]: isOpen } = openSections;
+            if (!isOpen) {
+                onSectionChange(sec);
+            }
         };
 
         onRootChange(root || id);
