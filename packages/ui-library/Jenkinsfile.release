@@ -7,7 +7,9 @@ pipeline {
       steps {
         container('node-builder') {
           echo 'Building & publishing ui-library'
-          sh "make GIT_BRANCH=${params.RELEASE_BRANCH} dist package-and-upload-for-hosting"
+          withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+            sh "make GIT_BRANCH=${params.RELEASE_BRANCH} dist package-and-upload-for-hosting PRIVATE_SSH_KEY_PATH=${keyfile}"
+          }
           sh 'source ./version'
           sh "npm version ${env.UI_LIBRARY_FINAL_VERSION} --no-git-tag-version"
           configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
