@@ -22,18 +22,20 @@ class ReleaseNotes extends React.Component {
         innerRef.scrollIntoView({ behavior: "smooth" });
     }
 
-    _getPreppedData = notes.map(({ title }, index) => {
+    _getPreppedData = notes.map(({ title, date }, index) => {
         return {
             label: title,
+            releaseDate: date,
             id: index,
         };
     });
 
     _getNotes = (id) => {
-        const { file, title } = notes[id];
+        const { file, title, date } = notes[id];
+        const dateMarkUp = date ? ` - ${date}` : "";
         const markdown = marked(file);
         return (
-            <PageSection key="key" title={title} >
+            <PageSection key="key" title={`${title}${dateMarkUp}`}>
                 <div dangerouslySetInnerHTML={{ __html: markdown }} />
             </PageSection>
         );
