@@ -1,108 +1,101 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        .body { background-color:#263746; width:100% !important; min-width:100%; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0; }
-        .content { background-color:#263746; width:100%; font-family:Helvetica,Arial,sans-serif; font-weight:normal; }
-        .content-centered { text-align:center; }
-        .content-container { overflow:hidden; width:650px; }
-        .email-header { text-align: left; border:0; width:100%; border-collapse:collapse; }
-        .ping-logo { width:70px; height:70px; border:none; outline:none; }
-        .email-body { background-color:#ffffff; padding:25px 30px 30px 30px; color:#263746; font-size:14px; line-height:18px; word-break:break-word; mso-line-height-rule:exactly; }
-        .email-title { color:#b8232f; word-break:normal; font-weight:bold; font-size:28px; line-height:28px; }
-        .email-button--primary { display:inline-block; border:0px; }
-        .email-button__content--primary { border-radius:3px; border:0px; background-color:#263746; }
-        .email-button__link--primary { font-weight:bold; color:#ffffff; font-size:14px; padding:10px 26px; }
-        .email-text { font-weight:100; line-height:28px; }
-        .email-link { color:#4B8BB5; text-decoration:none; }
+        @media (max-width: 600px) {
+            .email-body { padding-left: 15px !important; padding-right: 15px !important; }
+        }
     </style>
 </head>
-<body bgcolor="#263746" class="body">
-    <br>
-    <table bgcolor="#263746" width="100%" class="content">
+<body data-id="body" bgcolor="#ffffff" style="background-color:#ffffff; width:100% !important; min-width:100%; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;">
+    <table data-id="content" width="100%" style="width:100%; font-family:Helvetica,Arial,sans-serif; font-weight:normal;">
         <tr>
-            <td align="center" valign="top" class="content-centered">
+            <td data-id="content-centered" align="center" valign="top" style="text-align:center;">
                 <center>
-                    <table width="650" border="0" cellspacing="0" cellpadding="0" class="content-container">
+                    <table data-id="content-container" width="640" border="0" cellspacing="0" cellpadding="0" style="overflow:hidden; width:640px;">
                         <tr>
-                            <td>
-                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-header">
+                            <td data-id="email-donotreply" align="center" style="text-align:center; color:#999999; font-size:13px; font-weight:bold; font-weight:500; border-bottom:2px solid #f2f2f2; padding:50px 0 15px 0;">
+                                Please DO NOT REPLY to this email. It was sent automatically from an unattended mailbox.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-id="email-logo-container" align="center" style="text-align:center; padding:65px 0 65px 0;">
+                                <img data-id="email-logo" src="https://assets.pingone.com/ux/ui-library/3.44.0/images/logo-pingidentity.png" width="100" height="100" border="0" style="width:100px; height:100px; border:none; outline:none;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-id="email-title" style="color:#2e4355; word-break:normal; font-family:'Gotham',Helvetica,Arial,sans-serif; font-weight:bold; font-weight:500; font-size:30px; line-height:30px; text-align:center; letter-spacing:2px; border-bottom:2px solid #f2f2f2; padding:0 0 30px 0;">
+                                Reset your PingOne® Password
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-id="email-body" class="email-body" align="left" bgcolor="#ffffff" style="background-color:#ffffff; padding:45px 35px 65px 35px; color:#263746; font-size:14px; line-height:18px; word-break:break-word; mso-line-height-rule:exactly;">
+
+                                <div data-id="email-text" style="padding-bottom:35px; color:#2e4355; font-size:15px; line-height:26px; font-weight:500;">
+                                    We received a request to change your PingOne password. If you'd like to continue, click the link below or copy it into a web browser.
+                                    If you don't need to change your password or you didn't make this request, please ignore this message.
+                                </div>
+
+                                <table data-id="center-content" border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-bottom:35px; width:100%;">
                                     <tr>
-                                        <td>
-                                            <img src="https://assets.pingone.com/ux/ui-library/3.33.0/images/logo-pingidentity.png" width="70" height="70" border="0" class="ping-logo">
+                                        <td align="center" style="text-align:center;">
+
+                                            <a href="LINK-HERE" data-id="email-button--primary" border="0" style="display:inline-block; border:0px; text-decoration:none;">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="border-radius:3px; border:0px; background-color:#263746; border-radius:3px; font-weight:bold; color:#ffffff; font-size:16px; padding:15px 20px 15px 20px; font-family:'Gotham',Helvetica,Arial,sans-serif;">
+                                                    <tr>
+                                                        <td bgcolor="263746" align="center" valign="middle" border="0" style="text-align:center;">
+                                                            <span style="color:#ffffff;">RESET PASSWORD</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
                                         </td>
                                     </tr>
-                                    <tr><td colspan="2"><img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="15" style="height:15px;" /></td></tr>
                                 </table>
+
+                                <div data-id="email-text" style="padding-bottom:35px; color:#2e4355; font-size:15px; line-height:26px; font-weight:500;">
+                                    Password reset link:
+                                    <br/><a data-id="email-link" href="LINK-HERE" style="color:#0082c9;">http://www.linkgoeshere.com</a>
+                                </div>
+
+                                <div data-id="email-text" style="padding-bottom:45px; color:#2e4355; font-size:15px; line-height:26px; font-weight:500;">
+                                    Best Regards,
+                                    <br>The PingOne Team
+                                </div>
+
+                                <div data-id="email-text" style="color:#2e4355; font-size:15px; line-height:26px; font-weight:500;">
+                                    Questions? Contact <a data-id="email-link" href="mailto:support@pingidentity.com" style="color:#0082c9;">support@pingidentity.com</a>.
+                                </div>
+
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" bgcolor="#ffffff" class="email-body">
-                                <!-- *** *** *** EMAIL CONTENT START *** *** *** -->
-
-
-                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="40" style="display:block; height:40px;" />
-
-                                <div class="email-title">
-                                    Thanks for Choosing PingOne
-                                </div>
-
-                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="15" style="display:block; height:15px;" />
-
-                                <div class="email-text">
-                                    To activate your PingOne for Enterprise trial account, click the button below or copy the activation link into a web
-                                    browser. Once you’ve activated your account, you can create your password to get started.
-                                </div>
-
-                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="30" style="display:block; height:30px;" />
-
-                                <a border="0" href="#" class="email-button--primary">
-                                    <table border="0" cellpadding="10" cellspacing="0" class="email-button__content--primary">
-                                        <tr>
-                                            <td bgcolor="263746" align="center" valign="middle" border="0" style="text-align:center;" class="email-button__link--primary">
-                                                <span style="color:#ffffff;">ACTIVATE NOW</span>
-                                            </td>
-                                                                                                                                                                                                                                                                                                                                </tr>
-                                    </table>
-                                </a>
-
-                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="30" style="display:block; height:30px;" />
-
-                                <div style="font-weight:bold;">Activation Link:</div>
-
-                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="5" style="display:block; height:5px;" />
-
-                                <a href="#" class="email-link">${activationUrl}</a>
-
-                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="30" style="display:block; height:30px;" />
-
-
-                                <!-- *** *** *** EMAIL CONTENT END *** *** *** -->
-                                <div>
-                                    <span style="font-weight:bold;">Questions?</span> <a style="color:#263746; text-decoration:none;" href="">Visit the PingOne and PingID support communities</a>.
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img style="display:block;" src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="15" style="height:15px;" />
-                                <table align="left" width="100%" height="70" border="0" cellpadding="0" cellspacing="0" style="background-color:#263746; border:0; border-collapse:collapse;">
+                            <td data-id="email-footer" style="padding:50px 0 0 0; border-top:2px solid #f2f2f2;">
+                                <table align="left" width="100%" height="70" border="0" cellpadding="0" cellspacing="0" style="border:0; border-collapse:collapse;">
                                     <tr>
-                                        <td style="color:#e7eff1; font-size:10px; line-height:18px;">
-                                            Ping Identity, 1001 17th Street, Suite 100
-                                            <br />Denver, CO 80202 | <a href="" style="color:#e7eff1; text-decoration:none; cursor:default;">1.877.898.2905</a>
-                                            <br />${currentYear} Ping Identity Corporation | <a href="https://www.pingidentity.com/content/pic/en/privacy.html" style="color:#e7eff1; text-decoration:none;">Privacy</a>
+                                        <td align="center" valign="top" style="text-align:center;">
+                                            <a style="display:inline-block; text-decoration:none;" href="https://www.facebook.com/pingidentitypage" target="_blank">
+                                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-facebook-2x.png" height="18" style="border:none;" />
+                                            </a>
+                                            <a style="display:inline-block; text-decoration:none; padding-left:20px;" href="https://twitter.com/pingidentity" target="_blank">
+                                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-twitter-2x.png" height="18" style="border:none;" />
+                                            </a>
+                                            <a style="display:inline-block; text-decoration:none; padding-left:20px;" href="https://www.linkedin.com/company/ping-identity/" target="_blank">
+                                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-linkedin-2x.png" height="18" style="border:none;" />
+                                            </a>
+                                            <a style="display:inline-block; text-decoration:none; padding-left:20px;" href="https://www.youtube.com/user/pingidentitytv" target="_blank">
+                                                <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-youtube-2x.png" height="18" style="border:none;" />
+                                            </a>
                                         </td>
-                                        <td align="right" valign="top" style="text-align:right;">
-                                            <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" height="5" style="display:block; height:5px;" />
-                                            <a style="text-decoration:none;" href="https://www.facebook.com/pingidentitypage" target="_blank"><img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-facebook-2x.png" height="18" style="border:none;" /></a>
-                                            <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" width="5" />
-                                            <a style="text-decoration:none;" href="https://twitter.com/pingidentity" target="_blank"><img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-twitter-2x.png" height="18" style="border:none;" /></a>
-                                            <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" width="5" />
-                                            <a style="text-decoration:none;" href="https://www.linkedin.com/company/ping-identity/" target="_blank"><img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-linkedin-2x.png" height="18" style="border:none;" /></a>
-                                            <img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-pxl-spacer.gif" width="5" />
-                                            <a style="text-decoration:none;" href="https://www.youtube.com/user/pingidentitytv" target="_blank"><img src="http://s3.amazonaws.com/ping-uxui/public/email/images/30dtrial/email-socbtn-youtube-2x.png" height="18" style="border:none;" /></a>
+                                    </tr>
+                                    <tr>
+                                        <td data-id="email-footer__contact-info" align="center" style="color:#999999; font-size:13px; line-height:24px; text-align:center; padding:35px 0 0 0;">
+                                            © Ping Identity. All Rights Reserved.
+                                            <br />1001 17th Street, Suite 100 &nbsp; | &nbsp; Denver, CO 80202 &nbsp; | &nbsp; <a href="#" data-id="email-footer__link" style="cursor:default; color:#999999; text-decoration:none;">+1 303-468-2900</a>
+                                            <br /><a href="#" data-id="email-footer__link" style="text-decoration:underline; color:#999999;">Update preferences or unsubscribe »</a>
                                         </td>
                                     </tr>
                                 </table>
