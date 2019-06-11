@@ -86,4 +86,20 @@ describe("FileInput", function () {
         const element = component.find(".input-file__field-set.unfocused");
         expect(element.exists()).toEqual(true);
     });
+
+    it("Renders the fieldset with the title always shown", () => {
+        const component = mount(
+            <FileInput alwaysShowTitle />
+        );
+        const element = component.find(".input-file__always-title-container");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("Renders the fieldset with the same title as the selected title", () => {
+        const component = mount(
+            <FileInput alwaysShowTitle selectedTitle="hello"/>
+        );
+        const element = component.find(".input-file__always-title");
+        expect(element.exists()).toEqual(true);
+    });
 });

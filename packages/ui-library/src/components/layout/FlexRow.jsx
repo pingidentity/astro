@@ -46,6 +46,14 @@ export const justifyOptions = {
     START: "start"
 };
 
+export const flexDirectionOptions = {
+    ROW: "row",
+    ROWREVERSE: "row-reverse",
+    COLUMN: "column",
+    COLUMNREVERSE: "column-reverse"
+};
+
+
 export const spacingOptions = paddingSizes;
 
 const getAlignmentClass = alignment => {
@@ -88,6 +96,19 @@ const getSpacedChildren = (children, spacing) => React.Children.map(children, (c
         )
 );
 
+const getFlexDirection = flexDirection => {
+    switch (flexDirection) {
+        case flexDirectionOptions.ROW:
+            return "flex-row--flex-direction-row";
+        case flexDirectionOptions.ROWREVERSE:
+            return "flex-row--flex-direction-row-reverse";
+        case flexDirectionOptions.COLUMN:
+            return "flex-row--flex-direction-column";
+        case flexDirectionOptions.COLUMNREVERSE:
+            return "flex-row--flex-direction-column-reverse";
+    }
+};
+
 function FlexRow({
     alignment,
     children,
@@ -95,6 +116,7 @@ function FlexRow({
     className,
     inline,
     justify,
+    flexDirection,
     spacing
 }) {
     return (
@@ -104,6 +126,7 @@ function FlexRow({
                 className,
                 getAlignmentClass(alignment),
                 getJustifyClass(justify),
+                getFlexDirection(flexDirection),
                 {
                     "flex-row--inline": inline
                 }
@@ -127,9 +150,12 @@ FlexRow.propTypes = {
     justify: PropTypes.oneOf(
         Object.values(justifyOptions)
     ),
+    flexDirection: PropTypes.oneOf(
+        Object.values(flexDirectionOptions)
+    ),
     spacing: PropTypes.oneOf(
         Object.values(spacingOptions)
-    )
+    ),
 };
 
 FlexRow.defaultProps = {

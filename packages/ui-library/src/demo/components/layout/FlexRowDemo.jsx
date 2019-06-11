@@ -3,7 +3,8 @@ import Button from "../../../components/buttons/Button";
 import FlexRow, {
     alignments,
     justifyOptions,
-    spacingOptions
+    spacingOptions,
+    flexDirectionOptions
 } from "../../../components/layout/FlexRow";
 import InputRow from "../../../components/layout/InputRow";
 
@@ -122,6 +123,74 @@ export default function FlexRowDemo() {
             <InputRow>
                 <FlexRow
                     spacing={spacingOptions.SM}
+                >
+                    <Button label="Button" noSpacing />
+                    <Button label="Another button" noSpacing />
+                    <Button
+                        inline
+                        label="Inline button"
+                        noSpacing
+                        type="primary"
+                    />
+                </FlexRow>
+            </InputRow>
+            <InputRow>
+                Flex Direction Column
+            </InputRow>
+            <InputRow>
+                <FlexRow
+                    flexDirection={flexDirectionOptions.COLUMN}
+                >
+                    <Button label="Button" noSpacing />
+                    <Button label="Another button" noSpacing />
+                    <Button
+                        inline
+                        label="Inline button"
+                        noSpacing
+                        type="primary"
+                    />
+                </FlexRow>
+            </InputRow>
+            <InputRow>
+                Flex Direction Column Reverse
+            </InputRow>
+            <InputRow>
+                <FlexRow
+                    flexDirection={flexDirectionOptions.COLUMNREVERSE}
+                >
+                    <Button label="Button" noSpacing />
+                    <Button label="Another button" noSpacing />
+                    <Button
+                        inline
+                        label="Inline button"
+                        noSpacing
+                        type="primary"
+                    />
+                </FlexRow>
+            </InputRow>
+            <InputRow>
+                Flex Direction Row
+            </InputRow>
+            <InputRow>
+                <FlexRow
+                    flexDirection={flexDirectionOptions.ROW}
+                >
+                    <Button label="Button" noSpacing />
+                    <Button label="Another button" noSpacing />
+                    <Button
+                        inline
+                        label="Inline button"
+                        noSpacing
+                        type="primary"
+                    />
+                </FlexRow>
+            </InputRow>
+            <InputRow>
+                Flex Direction Row Reverse
+            </InputRow>
+            <InputRow>
+                <FlexRow
+                    flexDirection={flexDirectionOptions.ROWREVERSE}
                 >
                     <Button label="Button" noSpacing />
                     <Button label="Another button" noSpacing />

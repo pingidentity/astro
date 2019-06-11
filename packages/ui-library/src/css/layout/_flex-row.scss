@@ -39,4 +39,20 @@
         align-content: flex-start;
         align-items: flex-start;
     }
+
+    &--flex-direction-row {
+        flex-direction: row;
+    }
+
+    &--flex-direction-row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    &--flex-direction-column {
+        flex-direction: column;
+    }
+
+    &--flex-direction-column-reverse {
+        flex-direction: column-reverse;
+    }
 }

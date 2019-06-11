@@ -51,4 +51,14 @@
         border-top: 1px solid $color-strong-neutral-70;
         color: $color-strong-neutral-50;
     }
+
+    &__always-title {
+        padding-bottom: $spacing-md;
+        color: $color-elephant;
+        text-transform: uppercase;
+    }
+
+    &__always-title-container {
+        margin-left: $spacing-sm;
+    }
 }

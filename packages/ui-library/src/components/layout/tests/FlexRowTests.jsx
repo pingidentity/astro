@@ -1,4 +1,4 @@
-import FlexRow, { justifyOptions, alignments, spacingOptions } from "../FlexRow";
+import FlexRow, { justifyOptions, alignments, spacingOptions, flexDirectionOptions } from "../FlexRow";
 import Padding from "../Padding";
 import React from "react";
 import { shallow } from "enzyme";
@@ -66,5 +66,29 @@ describe("Flex Row", () => {
         const spacing = component.find(Padding);
 
         expect(spacing.length).toEqual(2);
+    });
+
+    it("renders with correct column flex direction class", () => {
+        const component = shallow(<FlexRow flexDirection={flexDirectionOptions.COLUMN} />);
+
+        expect(component.find(".flex-row--flex-direction-column").exists()).toBeTruthy();
+    });
+
+    it("renders with correct column reverse flex direction class", () => {
+        const component = shallow(<FlexRow flexDirection={flexDirectionOptions.COLUMNREVERSE} />);
+
+        expect(component.find(".flex-row--flex-direction-column-reverse").exists()).toBeTruthy();
+    });
+
+    it("renders with correct row flex direction class", () => {
+        const component = shallow(<FlexRow flexDirection={flexDirectionOptions.ROW} />);
+
+        expect(component.find(".flex-row--flex-direction-row").exists()).toBeTruthy();
+    });
+
+    it("renders with correct row reverse flex direction class", () => {
+        const component = shallow(<FlexRow flexDirection={flexDirectionOptions.ROWREVERSE} />);
+
+        expect(component.find(".flex-row--flex-direction-row-reverse").exists()).toBeTruthy();
     });
 });

@@ -1286,6 +1286,13 @@ module.exports = [
                         pathToSource: "templates_custom-branding/CustomBranding.jsx.html",
                         fullscreen: true,
                         icon: "details"
+                    },
+                    {
+                        label: "Custom Domain Name",
+                        demo: require("../../templates/CustomDomainName"),
+                        pathToSource: "templates_CustomDomainName.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
                     }
                 ]
             }

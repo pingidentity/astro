@@ -39,6 +39,8 @@ import classnames from "classnames";
  *     Defines the "data-id" for top-level HTML container.
  * @param {string[]} [accept]
  *     An optional array of the the allowed file mime types or file extensions.]
+  * @param {boolean} [alwaysShowTitle]
+ *     If true the button will have a title above it.
  * @param {boolean} [loading]
  *     If the component should show a loading state for uploading files
  * @param {boolean} [noBorder]
@@ -71,6 +73,7 @@ export default class FileInput extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         accept: PropTypes.array,
+        alwaysShowTitle: PropTypes.bool,
         className: PropTypes.string,
         fileName: PropTypes.string,
         fileData: PropTypes.node,
@@ -111,6 +114,7 @@ export default class FileInput extends Component {
             fileData,
             noBorder,
             selectedTitle,
+            alwaysShowTitle,
             strings,
             status,
         } = this.props;
@@ -155,14 +159,19 @@ export default class FileInput extends Component {
                     </div>
                 </fieldset>
             ) : (
-                <div className="input-file__select-btn">
-                    <MessageButton
-                        status={status ? status.type : "default" }
-                        data-id="select-button"
-                        onClick={this._clickButton(inputRef)}
-                        label={status ? status.label : text.select}
-                        inline
-                    />
+                <div className="input-file__always-title-container">
+                    {alwaysShowTitle && selectedTitle &&
+                    <div className="input-file__always-title">{selectedTitle}</div>
+                    }
+                    <div className="input-file__select-btn">
+                        <MessageButton
+                            status={status ? status.type : "default" }
+                            data-id="select-button"
+                            onClick={this._clickButton(inputRef)}
+                            label={status ? status.label : text.select}
+                            inline
+                        />
+                    </div>
                 </div>
             )
 

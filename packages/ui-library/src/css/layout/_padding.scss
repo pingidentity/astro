@@ -19,6 +19,10 @@
         &-xl {
             padding-bottom: $spacing-xl;
         }
+
+        &-form-label {
+            padding-bottom: ($spacing-lg - 5);
+        }
     }
 
     &--left {
@@ -40,6 +44,10 @@
 
         &-xl {
             padding-left: $spacing-xl;
+        }
+
+        &-form-label {
+            padding-left: ($spacing-lg - 5);
         }
     }
 
@@ -63,6 +71,11 @@
         &-xl {
             padding-right: $spacing-xl;
         }
+
+        &-form-label {
+            padding-right: ($spacing-lg - 5);
+        }
+
     }
 
     &--top {
@@ -85,10 +98,19 @@
         &-xl {
             padding-top: $spacing-xl;
         }
+
+        &-form-label {
+            padding-top: ($spacing-lg - 5);
+        }
+
+        &-inline-button-with-input {
+            padding-top: ($spacing-lg + 3);
+        }
     }
 
     &--inline {
         display: inline-block;
         vertical-align: middle;
     }
+
 }
