@@ -97,7 +97,7 @@ export default class FileInput extends Component {
 
     _clickButton = (inputRef) => /* istanbul ignore next  */ () => inputRef.click();
 
-    _handleRemove = (inputRef) => () => {
+    _handleRemove = (inputRef = {}) => () => {
         inputRef.value = null;
         this.props.onRemove();
     }

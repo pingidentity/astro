@@ -75,7 +75,6 @@ export default class FileDrop extends Component {
     static defaultProps = {
         "data-id": "input-filedrop",
         accept: [],
-        fileInput: false,
         onValidateFile: _.noop,
         onValueChange: _.noop,
         strings: {},
@@ -144,20 +143,6 @@ export default class FileDrop extends Component {
         this.props.onValueChange(file, e);
     }
 
-    _renderInput = () => {
-        return (
-            <label key="label" data-id={`${this.props["data-id"]}-label`}>
-                <input
-                    data-id={`${this.props["data-id"]}-input`}
-                    accept={this.props.accept}
-                    type="file"
-                    onChange={this._onInputChange}
-                    ref={ (fi) => this.fileInput = fi }
-                />
-            </label>
-        );
-    }
-
     _clickInput = () => {
         this.fileInput.click();
     }
@@ -200,6 +185,7 @@ export default class FileDrop extends Component {
 
     render () {
         const {
+            accept,
             renderContent,
             className,
             "data-id": dataId,
@@ -272,7 +258,15 @@ export default class FileDrop extends Component {
                         </div>
                     )
                 )}
-                {this._renderInput()}
+                <label key="label" data-id={`${dataId}-label`}>
+                    <input
+                        data-id={`${dataId}-input`}
+                        accept={accept}
+                        type="file"
+                        onChange={this._onInputChange}
+                        ref={ (fi) => this.fileInput = fi }
+                    />
+                </label>
             </div>
         );
     }
