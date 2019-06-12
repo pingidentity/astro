@@ -5,7 +5,7 @@ describe("Table", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Table = require("../Table");
-    
+
     const headData = [
         "name",
         "age",
@@ -114,5 +114,26 @@ describe("Table", function () {
         expect(ages.length).toBe(3);
     });
 
+    it("renders with solid lines class if no header data", () => {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><Table bodyData={bodyData} cellRenderers={[
+                null, value => <div data-id="age">{value}</div>
+            ]} /></div>);
+
+        const solidLines = TestUtils.findRenderedDOMNodeWithClass(component, "grid--solid-lines");
+
+        expect(solidLines).toBeTruthy();
+    });
+
+    it("does not render with solid lines class if there is header data", () => {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><Table headData={headData} bodyData={bodyData} cellRenderers={[
+                null, value => <div data-id="age">{value}</div>
+            ]} /></div>);
+
+        const solidLines = TestUtils.findRenderedDOMNodeWithClass(component, "grid--solid-lines");
+
+        expect(solidLines).toBeFalsy();
+    });
 });
 

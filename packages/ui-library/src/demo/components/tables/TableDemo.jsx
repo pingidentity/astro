@@ -81,6 +81,12 @@ const TableDemo = () => {
                 <Table
                     data={dataObjects} rowLabels={true} className="grid--no-lines"/>
             </InputRow>
+            <InputRow>
+                <FormLabel className="detached" value="<Table> with no header." />
+                <Table
+                    bodyData={mockData.body}
+                />
+            </InputRow>
         </div>
     );
 };

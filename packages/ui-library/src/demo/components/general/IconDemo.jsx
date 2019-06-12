@@ -39,7 +39,7 @@ const IconDemo = () => {
             <HR />
             <InputRow>
                 We can also render simple icons:
-                <Icon iconName="user-directory" type="inline" />
+                <Icon iconName="user_directory" type="inline" />
                 <Icon iconName="chat" type="inline" />
                 <Icon iconName="code" type="inline" />
                 <Icon iconName="puzzle" type="inline" />

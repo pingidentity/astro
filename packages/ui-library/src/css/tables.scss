@@ -191,6 +191,11 @@ table {
                 }
             }
         }
+        &--solid-lines {
+            td {
+                border-bottom: 1px solid $color-rabbit-fur;
+            }
+        }
         tr {
             &.expanded {
                 td,

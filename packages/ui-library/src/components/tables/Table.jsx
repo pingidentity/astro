@@ -35,21 +35,23 @@ const cellClasses = {
     "AUTO": "",
 };
 
-const Table = ({
-    cellRenderers,
-    className,
-    data = [],
-    "data-id": dataId,
-    fullWidth,
-    lines,
-    rowLabels,
-    headData = getHeadData(data),
-    bodyData = getBodyData(data, headData),
-    verticalAlignment,
-}) => {
+const Table = props => {
+    const {
+        cellRenderers,
+        className,
+        data = [],
+        "data-id": dataId,
+        fullWidth,
+        lines,
+        rowLabels,
+        headData = getHeadData(data),
+        bodyData = getBodyData(data, headData),
+        verticalAlignment,
+    } = props;
     const classes = classnames("grid", className, {
         "grid--no-lines": !lines,
-        "width-full": fullWidth
+        "width-full": fullWidth,
+        "grid--solid-lines": props.headData === undefined && props.bodyData
     });
 
     // if we're showing labels along the left side of the table, make sure the first column heading is empty
@@ -65,7 +67,8 @@ const Table = ({
         <table className={classes} data-id={dataId}>
             {headData &&
                 <thead>
-                    <tr>{_.map(headData, heading => <th key={heading}>{heading}</th>)}</tr>
+                    {/* Have to have fallback for heading as a key, since header cells might be empty */}
+                    <tr>{_.map(headData, (heading, idx) => <th key={heading || idx}>{heading}</th>)}</tr>
                 </thead>
             }
             <tbody>
@@ -79,7 +82,7 @@ const Table = ({
                                 : entry;
 
                             return (
-                                <Cell key={index+"-"+entryIndex} className={cellClasses[verticalAlignment]}>
+                                <Cell key={`${index}-${entryIndex}`} className={cellClasses[verticalAlignment]}>
                                     {cellValue}{isLabel && ":"}
                                 </Cell>
                             );

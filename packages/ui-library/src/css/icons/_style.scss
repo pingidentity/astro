@@ -683,6 +683,11 @@
     content: $icon-undo;
   }
 }
+.icon-unlink {
+  &:before {
+    content: $icon-unlink;
+  }
+}
 .icon-user {
   &:before {
     content: $icon-user;
