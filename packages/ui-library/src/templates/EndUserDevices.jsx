@@ -63,6 +63,11 @@ class PairingModalContainer extends React.Component {
                             icon: <DeviceIcon icon="email" title="email"/>,
                             description: "Receive an email with your security code.",
                         },
+                        {
+                            id: "mobile",
+                            icon: <DeviceIcon icon="mobile" title="mobile"/>,
+                            description: "Authenticate using your mobile device.",
+                        },
                     ]}
                 />
             </div>
