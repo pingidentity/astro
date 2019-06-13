@@ -8,7 +8,7 @@ gulp.task('delete-dist', () => del(['dist']));
 
 gulp.task('transpile-components', () =>
     gulp
-        .src(['./src/**/*.jsx'])
+        .src(['./src/**/(*.jsx|*.js)'])
         .pipe(babel())
         .pipe(debug({ title: 'transpiling:' }))
         .pipe(gulp.dest('dist')));

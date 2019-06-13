@@ -55,6 +55,7 @@
     "html-webpack-plugin": "^2.30.1",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^24.8.0",
+    "jest-transform-stub": "^2.0.0",
     "js-beautify": "^1.7.5",
     "lodash": "^4.17.5",
     "mdx-loader": "^1.0.0-beta.3",
@@ -119,7 +120,10 @@
     "setupFiles": [
       "<rootDir>/src/util/polyfills.js",
       "<rootDir>/src/devUtil/enzymeSetup.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      ".+\\.(svg)$": "jest-transform-stub"
+    }
   },
   "scripts": {
     "static": "rm -rf ./static && webpack --config webpack.config.static.js",
