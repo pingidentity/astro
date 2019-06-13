@@ -2,63 +2,32 @@ import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import "../util/polyfills.js";
 
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import thunk from "redux-thunk";
-import { bindActionCreators, applyMiddleware, createStore } from "redux";
-import { Provider, connect } from "react-redux";
-import { HashRouter as Router, Route, withRouter, Switch } from "react-router-dom";
+const React = require("react"),
+    thunk = require("redux-thunk"),
+    Redux = require("redux"),
+    ReactDOM = require("react-dom"),
+    ReactRedux = require("react-redux"),
+    ReactRouter = require("react-router"),
+    ReactRouterRedux = require("react-router-redux"),
+    Actions = require("./core/Actions.js"),
+    DemoItem = require("./core/DemoItem"),
+    AppFrame = require("../components/panels/AppFrame"),
+    LeftNavBar = require("../components/panels/left-nav"),
+    PropsToUrlWatcher = require("../components/offscreen/PropsToUrlWatcher"),
+    HeaderBar = require("../components/panels/header-bar"),
+    store = require("./core/store.js"),
+    history = ReactRouterRedux.syncHistoryWithStore(ReactRouter.hashHistory, store),
+    packageJson = require("../../package.json"),
+    EventUtils = require("../util/EventUtils.js"),
+    format = require("../util/format.js"),
+    _ = require("underscore");
 
-// import DemoItem from "./core/DemoItem";
-import AppFrame from "../components/panels/AppFrame";
-import LeftNavBar from "../components/panels/left-nav";
-import HeaderBar from "../components/panels/header-bar";
-import store from "./core/store";
-
-import DemoItemsList from "./core/demos.js";
-
-import packageJson from "../../package.json";
-import format from "../util/format.js";
-import _ from "underscore";
-
-import DemoItem from "./core/DemoItem";
-
-/**
- * The SCSS files will be compiled by a webpack plugin
- * and injected into the head section of the HTML page by another plugin
- */
+// the SCSS files will be compiled by a webpack plugin
+// and injected into the head section of the HTML page by another plugin
 require("../css/ui-library.scss");
 require("./css/ui-library-demo.scss");
 
-class DemoWrapper extends Component {
-    parseDemoFile = (ptd) => {
-        var path = ptd.replace(/(\.jsx|\.js|\/v2.jsx)/, "Demo.jsx").split("/");
-        return path
-            .map(function (dir, i) {
-                // preps example 3 (v2 file in sub directory with dashes)
-                if ((dir.indexOf("-") > -1) && (i === path.length - 1)) {
-                    return dir.split("-").map(function (dirPart) {
-                        return dirPart.charAt(0).toUpperCase() + dirPart.slice(1);
-                    }).join("");
-
-                    // preps example 2 (v2 file in sub directory without dashes)
-                } else if (path.length - 1 === i) {
-                    return dir.charAt(0).toUpperCase() + dir.slice(1);
-
-                    // example 1 (all others)
-                } else {
-                    return dir;
-                }
-            })
-            .join("/");
-    }
-
-    _demoStore = {};
-
-    state = {
-        demoCode: ""
-    }
-
+class DemoApp extends React.Component {
     /**
      * @method
      * @name DemoApp#_getDocumentationUrl
@@ -117,12 +86,14 @@ class DemoWrapper extends Component {
     * @desc Compute the name of the demo item's jsdoc
     * @returns {string} = the jsdoc name
     */
-    _getDocumentationName = (demoItem) => {
+    _getDocumentationName = () => {
         const {
-            module,
-            pathToDoc,
-            docName,
-        } = demoItem;
+            _demoItem: {
+                module,
+                pathToDoc,
+                docName,
+            }
+        } = this;
 
         if (docName) {
             return docName;
@@ -154,93 +125,13 @@ class DemoWrapper extends Component {
         return null;
     }
 
-    constructor(props) {
-        super(props);
-
-        if (this.props.demoItem.hasOwnProperty("demo")) {
-            if (props.demoItem.demo.Reducer) {
-                this._demoStore = applyMiddleware(thunk)(createStore)(props.demoItem.demo.Reducer);
-            }
-
-            if (props.demoItem.pathToDoc) {
-                fetch("src/demo/" + this.parseDemoFile(props.demoItem.pathToDoc))
-                    .then((resp) => {
-                        resp.text().then((text) => {
-                            this.setState({
-                                demoCode: text
-                            });
-                        });
-                    });
-            }
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.demoItem === this.props.demoItem) {
-            return;
-        }
-
-        if (nextProps.demoItem.hasOwnProperty("demo")) {
-            if (nextProps.demoItem.demo.Reducer) {
-                this._demoStore = applyMiddleware(thunk)(createStore)(nextProps.demoItem.demo.Reducer);
-            }
-
-            if (nextProps.demoItem.pathToDoc) {
-                fetch("src/demo/" + this.parseDemoFile(nextProps.demoItem.pathToDoc))
-                    .then((resp) => {
-                        resp.text().then((text) => {
-                            this.setState({
-                                demoCode: text
-                            });
-                        });
-                    });
-            }
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                {typeof this.props.demoItem.demo !== "undefined" ? (
-                    <DemoItem
-                        label={this.props.demoItem.label}
-                        store={this._demoStore}
-                        type={this.props.demoItem.demo}
-                        jsdocUrl={this._getDocumentationUrl(this._getDocumentationName(this.props.demoItem))}
-                        codePathUrl={this._getSourceUrl(this.props.demoItem.pathToSource)}
-                        demoCodePathUrl={this._getSourceUrl(this.props.demoItem.pathToDemoSource)}
-                        importPath={this._getImportPath(this.props.demoItem.pathToSource)}
-                        code={this.state.demoCode}
-                        status={this.props.demoItem.status}
-                        fullscreen={this.props.demoItem.fullscreen}
-                        contentPage={this.props.demoItem.contentPage}
-                        flags={this.props.demoItem.demo && this.props.demoItem.demo.flags}
-                    />
-                ) : null }
-            </div>
-        );
-    }
-
-    static defaultProps = {
-        demoItem: {}
-    }
-}
-
-class DemoApp extends Component {
-
-    // Init state
-    state = {
-        selectedRoot: "Documentation",
-        demoItem: {}
-    }
-
     /**
-     * @method
-     * @name DemoApp#_sortChildren
-     * @private
-     * @desc Sort the child items of a demo item unless an order is specified by parent
-     * @returns {array} = sorted array of demo item children
-     */
+    * @method
+    * @name DemoApp#_sortChildren
+    * @private
+    * @desc Sort the child items of a demo item unless an order is specified by parent
+    * @returns {array} = sorted array of demo item children
+    */
     _sortChildren = ({ listOrder, ...props }, children = []) => {
         return children.length > 0
             ? {
@@ -270,213 +161,113 @@ class DemoApp extends Component {
             ...props
         }, modifiedChildren);
 
+        this._demoIndexById = {
+            [id]: item,
+            ...this._demoIndexById
+        };
+
         return item;
     };
 
-
-    // Process demos.js
-    DemoItems = DemoItemsList.map(this._processItems);
-
     /**
-    * @method
-    * @name DemoApp#_findRoot
-    * @private
-    * @desc Find a root object based on the root's label
-    * @returns {object} = root object
-    */
-    _findRoot = (label) => {
-        return this.DemoItems.find(obj => obj.label === label);
-    }
-
-    /**
-    * @method
-    * @name DemoApp#_selectRoot
-    * @private
-    * @desc Select a new node when the root is modified
-    */
-    _selectRoot = (newRoot) => {
-        this.setState({
-            selectedRoot: newRoot
-        });
-
-        this.navActions.setRoot(newRoot);
-
-        // Get the root object
-        const selectRoot = this._findRoot(newRoot);
-
-        // Select first root child (section or node)
-        let demoItem = selectRoot.children[0];
-
-        this.navActions.toggleSection(this.props.match.params.selectedNode);
-
-        // Check if has sections
-        if (demoItem.hasOwnProperty("children")) {
-
-            // Select first node of section
-            this.navActions.selectItem(
-                demoItem.children[0].id,
-                demoItem.id);
-
-            this._selectItem(demoItem.children[0].id, demoItem.id, newRoot);
-
-            demoItem = demoItem.children[0];
-        } else {
-
-            // Select top-level node
-            this.navActions.selectItem(
-                demoItem.id,
-                demoItem.id);
-
-            this._selectItem(demoItem.id, demoItem.id, newRoot);
-        }
-
-        // Update demo in the state
-        this.setState({
-            demoItem
-        });
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-        // If new page
-        if (nextProps.location !== this.props.location || !this.state.demoItem) {
-
-            /**
-            * Don't execute if called in conjuction with a onRootUpdate to prevent excessive renders
-            */
-            if (this.props.nav.root !== nextProps.nav.root &&
-                this.props.nav.selectedNode === nextProps.nav.selectedNode) {
-                return;
-            }
-
-            // Get the root object
-            let selectedRoot = this.DemoItems.find(obj => obj.label === nextProps.match.params.selectedRoot);
-
-            if (!selectedRoot) {
-                return this._defaultPage();
-            }
-
-            if (nextProps.match.params.selectedSection !== nextProps.nav.selectedSection) {
-                this.navActions.toggleSection(nextProps.match.params.selectedNode);
-            }
-
-            // Select node specified in URL
-            this.navActions.selectItem(
-                nextProps.match.params.selectedNode,
-                nextProps.match.params.selectedSection);
-
-            this.navActions.setRoot(nextProps.match.params.selectedRoot);
-
-            // Update demo in the state
-            let demoItem = selectedRoot.children
-                .find(o => o.id === nextProps.match.params.selectedSection);
-
-            // Section not found -- redirect to home page
-            if (typeof demoItem === "undefined") {
-                return this._defaultPage();
-            }
-
-            if (typeof demoItem.children !== "undefined") {
-                demoItem = demoItem.children
-                    .find(o => o.id === nextProps.match.params.selectedNode);
-
-                // Node not found -- redirect to home page
-                if (typeof demoItem === "undefined") {
-                    return this._defaultPage();
-                }
-            }
-
-            this.setState({
-                demoItem
-            });
-        }
-    }
-
-    _selectItem = (selectedNode, selectedSection, root = this.props.nav.root) => {
-
-        // Setting the URL will trigger the selection fxn to run
-        this.props.history.push(`/${root}/${selectedSection}/${selectedNode}`);
-    }
-
-    _defaultPage = () => {
-        this.props.history.replace(
-            `/${this.DemoItems[0].label}/${this.DemoItems[0].children[0].id}/${this.DemoItems[0].children[0].id}`
-        );
-    }
-
-    _getDocumentationUrl = (name) => {
-        if (!name) {
-            return null;
-        }
-
-        return format("build-doc/{packageName}/{packageVersion}/{name}.html", {
-            packageName: packageJson.name,
-            packageVersion: packageJson.version,
-            name: name
-        });
-    };
-
+     * @method
+     * @name DemoApp#constructor
+     * @desc Initialize and rendering the app
+     */
     constructor(props) {
-
-        // Init Redux actions
         super(props);
+        // bind action creators
+        this.appActions = Redux.bindActionCreators(Actions, props.dispatch);
+        this.routerActions = Redux.bindActionCreators(ReactRouterRedux.routerActions, props.dispatch);
+        this.navActions = Redux.bindActionCreators(LeftNavBar.Actions, props.dispatch);
+        this.headerActions = Redux.bindActionCreators(HeaderBar.Actions, props.dispatch);
+        this._demoItem = {};
 
-        this.navActions = bindActionCreators(LeftNavBar.Actions, props.dispatch);
-        this.headerActions = bindActionCreators(HeaderBar.Actions, props.dispatch);
+        // set up member variables
+        this._demoIndexById = {};
+        this._handleKeydown = EventUtils.handleKeydowns({
+            38: this.navActions.selectPrevItem,
+            40: this.navActions.selectNextItem
+        }, true);
 
         // Enable collapsible, updated for LeftNav
         this.navActions.setCollapsible(true);
         this.navActions.setUpdated(true);
+
         this.navActions.init(require("./core/demos.js").map(this._processItems));
+        this.navActions.setRoot("Documentation");
+    }
 
-        let selectedRoot = this.DemoItems.find(obj => obj.label === this.props.match.params.selectedRoot);
-
-        if (!selectedRoot) {
-            return this._defaultPage();
+    /**
+     * @method
+     * @name DemoApp#componentDidMount
+     * @desc Some initialization cannot take place until the app has mounted and rendered.  That code will be
+     * put here.  For instance, loading the query string.
+     */
+    componentDidMount() {
+        const {
+            query: {
+                root,
+                selectedNode,
+                selectedSection
+            }
+        } = this.props.location;
+        // load the arguments from the query string
+        if (selectedNode) {
+            if (selectedSection) {
+                this.navActions.toggleSection(selectedSection);
+            }
+            if (root) {
+                this.navActions.setRoot(root);
+            }
+            this.navActions.selectItem(
+                selectedNode,
+                selectedSection);
+        } else {
+            // set initial page to docs if none selected
+            this.navActions.toggleSection("Docs");
+            this.navActions.selectItem("ReleaseNotes", "Docs");
         }
+    }
 
-        this.navActions.setRoot(selectedRoot.label);
-        this.navActions.toggleSection(this.props.match.params.selectedSection);
-        this.navActions.selectItem(
-            this.props.match.params.selectedNode,
-            this.props.match.params.selectedSection
-        );
+    /**
+     * @method
+     * @name DemoApp#componentWillReceiveProps
+     * @param {object} newProps - Next props
+     * @desc If the app receives a new selectedNode then fetch the markup for the displayed demo
+     */
+    componentWillReceiveProps({ nav: { selectedNode: id } }) {
+        const { [id]: demoItem } = this._demoIndexById;
+        // Make sure the demo item exists since an invalid component id could be set in the URL when the demoApp loads
+        if (id !== this.props.nav.selectedNode && demoItem) {
+            this._demoStore = null;
+            this._demoItem = demoItem;
+            this._demo = this._demoItem.demo;
 
-        if (!this.props.match.params.selectedRoot ||
-            !this.props.match.params.selectedSection ||
-            !this.props.match.params.selectedNode) {
-            return this._defaultPage();
-        }
+            // Some demo items may have no pathToDoc (e.g. tutorial items)
+            if (this._demoItem.pathToDoc) {
+                this.appActions.fetchCode(id, this._demoItem.pathToDoc);
+            }
 
-        let demoItem = selectedRoot.children
-            .find(o => o.id === this.props.match.params.selectedSection);
-
-        // Section not found -- redirect to home page
-        if (typeof demoItem === "undefined") {
-            return this._defaultPage();
-        }
-
-        if (typeof demoItem.children !== "undefined") {
-            demoItem = demoItem.children
-                .find(o => o.id === this.props.match.params.selectedNode);
-
-            // Node not found -- redirect to home page
-            if (typeof demoItem === "undefined") {
-                return this._defaultPage();
+            // If the demo exposes a Reducer, create an isolated store for the demo to use.  This way the demo
+            // can act like a standalone application.
+            if (this._demo.Reducer) {
+                this._demoStore = Redux.applyMiddleware(thunk)(Redux.createStore)(this._demo.Reducer);
             }
         }
-
-        this.state = {
-            demoItem: demoItem ? demoItem : {},
-            selectedRoot: this.props.nav.root.label
-        };
     }
 
     render() {
+        const id = this.props.nav.selectedNode,
+            name = this._getDocumentationName(),
+            path = this._demoItem.pathToSource,
+            demoPath = this._demoItem.pathToDemoSource,
+            watch = _.pick(this.props.nav, "selectedSection", "selectedNode", "root");
+
         return (
             <AppFrame
-                autoSelectItemFromRoot={false}
-                autoSelectSectionFromItem={true}
+                autoSelectItemFromRoot={true}
+                autoSelectSectionFromItem={false}
                 autoSelectItemFromSection={true}
                 className="components-container"
                 oneSectionOnly={true}
@@ -499,54 +290,62 @@ class DemoApp extends Component {
                     ]
                 })}
                 leftNavBarProps={this.props.nav}
-                root={this.props.nav.root}
                 searchable={true}
                 navTree={this.props.nav.tree}
-                onRootChange={this._selectRoot}
-                onItemChange={this._selectItem}
+                root={this.props.nav.root}
+                onRootChange={this.navActions.setRoot}
+                onItemChange={this.navActions.selectItem}
                 onSectionChange={this.navActions.toggleSection}
-                flags={["use-portal"]}
+                flags={[ "use-portal" ]}
             >
                 <div id="content" data-id="components">
-                    <DemoWrapper
-                        demoItem={this.state.demoItem}
+                    <DemoItem label={this._demoItem.label}
+                        watch={watch}
+                        replace={this.routerActions.replace}
+                        location={this.props.location}
+                        store={this._demoStore}
+                        type={this._demo}
+                        jsdocUrl={this._getDocumentationUrl(name)}
+                        codePathUrl={this._getSourceUrl(path)}
+                        demoCodePathUrl={this._getSourceUrl(demoPath)}
+                        importPath={this._getImportPath(this._demoItem.pathToSource)}
+                        code={this.props.code[id]}
+                        status={this._demoItem.status}
+                        fullscreen={this._demoItem.fullscreen}
+                        contentPage={this._demoItem.contentPage}
+                        flags={this._demo && this._demo.flags}
                     />
                 </div>
-            </AppFrame>
-        );
+
+                {
+                    /*
+                   * This component will watch the provided properties and update the url hash when they change
+                   */
+                }
+                <PropsToUrlWatcher ignoreFalse={true}
+                    location={this.props.location}
+                    onReplaceUrl={this.routerActions.replace}
+                    watch={watch} />
+            </AppFrame>);
     }
 }
 
-const ConnectedDemoApp = withRouter(connect((state) => {
+/** Connect the app to the redux store */
+DemoApp = ReactRedux.connect((state) => {
     return {
+        code: state.app.code,
         nav: state.nav,
         header: state.header,
         all: state
     };
-})(DragDropContext(HTML5Backend)(DemoApp)));
+})(DragDropContext(HTML5Backend)(DemoApp));
 
+/** Setup the router with a single route */
 ReactDOM.render(
-    <Router>
-        <Provider store={store}>
-            <Switch>
-                <Route
-                    exact
-                    path="/"
-                    component={ConnectedDemoApp} />
-                <Route
-                    exact
-                    path="/:selectedRoot"
-                    component={ConnectedDemoApp} />
-                <Route
-                    exact
-                    path="/:selectedRoot/:selectedSection"
-                    component={ConnectedDemoApp} />
-                <Route
-                    exact
-                    path="/:selectedRoot/:selectedSection/:selectedNode"
-                    component={ConnectedDemoApp} />
-            </Switch>
-        </Provider>
-    </Router>,
-    document.getElementById("demo")
-);
+    <ReactRedux.Provider store={store}>
+        <ReactRouter.Router history={history}>
+            <ReactRouter.Route path="/" component={DemoApp} />
+        </ReactRouter.Router>
+    </ReactRedux.Provider>,
+
+    document.getElementById("demo"));

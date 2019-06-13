@@ -62,17 +62,19 @@ class DemoItem extends React.Component {
      * instead we just subscribe directly to the store and use the updates to re-render
      */
     componentWillReceiveProps({ type, store }) {
-        if (type.Reducer) {
+        if (this.props.type !== type) {
             if (this.unsubscribe) {
                 this.unsubscribe();
                 this.unsubscribe = null;
             }
 
-            this.unsubscribe = store.subscribe(this._handleChange);
-            this.setState({ store: store.getState() });
-        }
+            if (type.Reducer) {
+                this.unsubscribe = store.subscribe(this._handleChange);
+                this.setState({ store: store.getState() });
+            }
 
-        this.setState({ selectedSource: 0 }); // Reset default source to demo for each new demo change
+            this.setState({ selectedSource: 0 }); // Reset default source to demo for each new demo change
+        }
     }
 
     render() {

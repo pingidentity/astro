@@ -1,6 +1,8 @@
-import keyMirror from "fbjs/lib/keyMirror";
-import fetch from "isomorphic-fetch";
-import { Promise } from "es6-promise"; // eslint-disable-line
+var keyMirror = require("fbjs/lib/keyMirror"),
+    fetch = require("isomorphic-fetch"),
+    // isomorphic-fetch need a Promise polyfill for older browsers.
+    // Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
+    Promise = require("es6-promise").Promise; // eslint-disable-line
 
 exports.Types = keyMirror({
     SET: null
