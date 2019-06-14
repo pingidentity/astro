@@ -5,7 +5,9 @@ import DeviceTable from "ui-library/lib/components/end-user/DeviceTable";
 import CardModal from "ui-library/lib/components/end-user/CardModal";
 import DeviceIcon from "ui-library/lib/components/end-user/DeviceIcon";
 
+import Image, { imageSizes, imageTypes } from "ui-library/lib/components/general/Image";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
+import Padding, { sizes as paddingSizes } from "ui-library/lib/components/layout/Padding";
 import TileSelector from "ui-library/lib/components/buttons/TileSelector";
 
 
@@ -113,11 +115,23 @@ class AuthPage extends React.Component {
                         [
                             {
                                 name: "CMaxwell@pingidentity.com",
-                                type: "Email",
+                                type: "email",
                             },
                             {
                                 name: "951345279578",
-                                type: "SMS",
+                                type: "sms",
+                                details:
+                                    <div>
+                                        <Padding inline right={paddingSizes.SM}>
+                                            <Image
+                                                inline
+                                                size={imageSizes.SM}
+                                                source="src/demo/images/favicon.png"
+                                                type={imageTypes.SQUARE}
+                                            />
+                                        </Padding>
+                                        Ping Identity
+                                    </div>
                             },
                         ]
                     }

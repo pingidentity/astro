@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 import Table from "../tables/Table";
 import Button from "../buttons/Button";
-import DeviceIcon from "./DeviceIcon";
+import DeviceIcon, { deviceTypes } from "./DeviceIcon";
 
-const formatBodyData = (devices, onDelete) => {
-    return devices.map(({ name, type }) => {
+const formatBodyData = (devices, onDelete, hasDetails) => {
+    return devices.map(({ details = "", name, type }) => {
         const nameNode = (
             <React.Fragment>
                 <DeviceIcon icon={type.toLowerCase()} />
@@ -15,15 +15,21 @@ const formatBodyData = (devices, onDelete) => {
                     <span className="device-name__type">{type}</span>
                 </div>
             </React.Fragment>);
-        return [nameNode, type, <Button iconName="delete" onClick={onDelete(name)} inline/>];
+        return [
+            nameNode,
+            type,
+            ...hasDetails ? [details] : [],
+            <Button iconName="delete" onClick={onDelete(name)} inline/>
+        ];
     });
 };
 
 const DeviceTable = ({ devices, onDelete }) => {
+    const hasDetails = devices.some(({ details }) => details !== undefined);
     return (
         <Table
-            headData={["name","type", " "]}
-            bodyData={formatBodyData(devices, onDelete)}
+            headData={["name","type", ...hasDetails ? [""] : [], " "]}
+            bodyData={formatBodyData(devices, onDelete, hasDetails)}
             className="width-full device-table"
         />
     );
@@ -32,13 +38,13 @@ const DeviceTable = ({ devices, onDelete }) => {
 DeviceTable.propTypes = {
     devices: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
-        type: PropTypes.oneOf(["Email", "SMS"]),
+        type: PropTypes.oneOf(Object.values(deviceTypes)),
     })),
     onDelete: PropTypes.func,
 };
 
 DeviceTable.defaultProps = {
-    devices: {},
+    devices: [],
     onDelete: () => {},
 };
 

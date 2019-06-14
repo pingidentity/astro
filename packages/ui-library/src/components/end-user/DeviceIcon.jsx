@@ -1,6 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+export const deviceTypes = {
+    SMS: "sms",
+    EMAIL: "email",
+    MOBILE: "mobile"
+};
+
 const getIcon = (icon) => {
     switch (icon) {
         case "sms":
@@ -28,7 +34,7 @@ const getIcon = (icon) => {
                 <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <title>mobile</title>
                     <desc>Created with Sketch.</desc>
-                    <g id="mobile" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
+                    <g id="mobile" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                         <g id="Group" transform="translate(4.000000, 0.000000)">
                             <rect
                                 id="Rectangle"
@@ -45,13 +51,13 @@ const getIcon = (icon) => {
                             C7.64084012,20.35 7.35,20.6410231 7.35,21 Z"
                             id="Stroke-200"
                             fill="#6B6B6B"
-                            fill-rule="nonzero" />
+                            fillRule="nonzero" />
                             <path d="M6,3.85 L10,3.85 C10.1932997,3.85 10.35,3.69329966 10.35,3.5
                             C10.35,3.30670034 10.1932997,3.15 10,3.15 L6,3.15 C5.80670034,3.15 5.65,3.30670034
                             5.65,3.5 C5.65,3.69329966 5.80670034,3.85 6,3.85 Z"
                             id="Stroke-202"
                             fill="#6B6B6B"
-                            fill-rule="nonzero"
+                            fillRule="nonzero"
                             />
                         </g>
                     </g>
@@ -72,7 +78,7 @@ const DeviceIcon = ({ icon, title }) => {
 };
 
 DeviceIcon.propTypes = {
-    icon: PropTypes.oneOf(["sms", "email"]),
+    icon: PropTypes.oneOf(Object.values(deviceTypes)),
     title: PropTypes.string,
 };
 

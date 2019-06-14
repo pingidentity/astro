@@ -16,6 +16,7 @@ function Padding({
     children,
     className,
     "data-id": dataId,
+    inline,
     bottom,
     left,
     right,
@@ -28,7 +29,10 @@ function Padding({
                 getClassName(bottom, "bottom"),
                 getClassName(left, "left"),
                 getClassName(right, "right"),
-                getClassName(top, "top")
+                getClassName(top, "top"),
+                {
+                    "padding-component--inline": inline
+                }
             )}
             data-id={dataId}
         >
