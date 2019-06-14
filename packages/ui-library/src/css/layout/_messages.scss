@@ -5,9 +5,9 @@
     left: $layout-nav-width;
     right: 0;
     color: $color-white;
-    align-items: flex-start;
     @include flexbox-direction(column);
     @include flexbox();
+    align-items: flex-start;
     padding: 0;
     height: 100%; // to keep the larger container from ever blocking clicks
     pointer-events: none;
@@ -230,10 +230,13 @@
         }
 
         &--minimized {
-            float: right;
+            width: auto;
+            right: 0;
             min-width: 0;
             transition: min-width 0.2s;
             justify-content: flex-end;
+            margin-left: auto;
+            margin-right: 0;
         }
     }
     .show {
