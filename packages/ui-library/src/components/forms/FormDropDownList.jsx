@@ -419,10 +419,6 @@ class FormDropDownListStateless extends React.Component {
     constructor(props) {
         super(props);
         this._setupGroups(props);
-
-        if (!this._usePortal()) {
-            cannonballPortalWarning({ name: "FormDropDownList" });
-        }
     }
 
     _getOptionLabel = ({ label, value }) => {
@@ -447,6 +443,10 @@ class FormDropDownListStateless extends React.Component {
     }
 
     componentDidMount() {
+        if (!this._usePortal()) {
+            cannonballPortalWarning({ name: "FormDropDownList" });
+        }
+
         window.addEventListener("click", this._handleGlobalClick);
     }
 
@@ -545,7 +545,11 @@ class FormDropDownListStateless extends React.Component {
         if (this._isBoxSearch()) {
             const className = "select-prompt",
                 searchClassName = classnames(className, "select-search-prompt"),
-                addClassName = classnames(className, "select-add", { highlighted: this.props.options.length === 0 });
+                addClassName = classnames(
+                    className,
+                    "select-add",
+                    { highlighted: this._filteredOptions().length === 0 },
+                );
 
             if (this.props.searchString === "") {
                 return <li data-id="search-prompt" className={searchClassName}>{this.props.labelPrompt}</li>;
@@ -557,7 +561,7 @@ class FormDropDownListStateless extends React.Component {
                 }) => label.toLowerCase().trim() === cleanSearch)
                     ? undefined
                     : (
-                        <li data-id="add-prompt" className={addClassName} onClick={this._handleAdd}>
+                        <li data-id="add-prompt" className={addClassName} onClick={this._handleAddClick}>
                             <span className="label">{this.props.labelAdd}</span>
                             <span>{this.props.searchString}</span>
                         </li>
@@ -575,9 +579,13 @@ class FormDropDownListStateless extends React.Component {
 
     _handleAdd = () => {
         this.props.onAdd(this.props.searchString);
-        this._onSearchProxy("",0,this.props.noneOption ? -1 : 0);
-        this._onToggleProxy();
     };
+
+    _handleAddClick = () => {
+        this._handleAdd();
+        this._onSearchProxy("", 0, this.props.noneOption ? -1 : 0);
+        this._onToggleProxy();
+    }
 
     /**
      * On key press open/close list or try and auto find the option that matches the characters typed on a starts with.
@@ -604,7 +612,6 @@ class FormDropDownListStateless extends React.Component {
             noneOption,
             onValueChange,
             open,
-            options,
             searchField,
             searchIndex,
             searchString,
@@ -626,7 +633,7 @@ class FormDropDownListStateless extends React.Component {
         }
 
         if (isEnter(keyCode)) { //enter, so pull previously entered search string
-            if (canAdd && options.length === 0) {
+            if (canAdd && this._filteredOptions().length === 0) {
                 if (searchString !== "" || noneOption) {
                     this._handleAdd();
                 }
@@ -638,7 +645,7 @@ class FormDropDownListStateless extends React.Component {
                         onValueChange(option);
                     }
                 } else {
-                    onValueChange(options[searchIndex]);
+                    onValueChange(this._filteredOptions()[searchIndex]);
                 }
             } else if (searchIndex === -1 && noneOption) {
                 onValueChange(noneOption);

@@ -45,6 +45,8 @@ describe("FormDropDownList v4", function () {
     window.addEventListener = jest.fn();
     window.removeEventListener = jest.fn();
 
+    const getTextInput = component => TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
     beforeEach(function () {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
@@ -489,13 +491,15 @@ describe("FormDropDownList v4", function () {
                         onValueChange={jest.fn()}
                         open={true}
                         groups={groups}
+                        flags={allFlags}
                     />
                 )}
             </TestUtils.StateWrapper>
         );
 
-        const component = ReactTestUtils.findRenderedComponentWithType(wrapper, FormDropDownList);
-        const componentRef = component.refs.FormDropDownListStateless;
+        const componentRef = ReactTestUtils.findRenderedComponentWithType(
+            wrapper, FormDropDownList._statelessComponent
+        );
 
         componentRef._setupGroups = jest.fn();
         wrapper.setState({ options: [] });
@@ -517,13 +521,15 @@ describe("FormDropDownList v4", function () {
                         onValueChange={jest.fn()}
                         open={true}
                         groups={passGroups}
+                        flags={allFlags}
                     />
                 )}
             </TestUtils.StateWrapper>
         );
 
-        const component = ReactTestUtils.findRenderedComponentWithType(wrapper, FormDropDownList);
-        const componentRef = component.refs.FormDropDownListStateless;
+        const componentRef = ReactTestUtils.findRenderedComponentWithType(
+            wrapper, FormDropDownList._statelessComponent
+        );
 
         componentRef._setupGroups = jest.fn();
         wrapper.setState({ groups: [] });
@@ -828,5 +834,20 @@ describe("FormDropDownList v4", function () {
 
         expect(selected).toEqual(secondOption);
 
+    });
+
+    it("should select option by searching and pressing enter", function() {
+        const component = getComponent({
+            open: true,
+            options,
+            searchType: FormDropDownList.SearchTypes.BOX,
+            searchString: "Four",
+            searchIndex: 0,
+        });
+
+        const input = getTextInput(component);
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.onValueChange.mock.calls[0][0]).toEqual({ label: "Four", value: 4, group: 1 });
     });
 });
