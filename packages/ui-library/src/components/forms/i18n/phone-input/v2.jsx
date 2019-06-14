@@ -347,11 +347,12 @@ class I18nPhoneInput extends Component {
     };
 
     static defaultProps = {
-        flags: [],
         stateless: false
     };
 
-    _usePStateful = () => this.props.flags.includes("p-stateful");
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {
