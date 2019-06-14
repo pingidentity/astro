@@ -171,26 +171,9 @@ class BaseCalendar extends React.Component {
 
         moment.locale(Translator.currentLanguage);
 
-        /* istanbul ignore next  */
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-            if (this.props.isRequired !== undefined) {
-                throw new Error(Utils.deprecatePropError("isRequired", "required"));
-            }
-        }
-
         if (!this.props.statelessDate) {
             // doing this just to keep from defining the deprecated hook unless we need it
             this.componentWillReceiveProps = this._maybeComponentWillReceiveProps;
-        }
-
-        if (!this._usePortal()) {
-            cannonballPortalWarning({ name: "Calendar" });
         }
 
         this.state = {
@@ -217,6 +200,23 @@ class BaseCalendar extends React.Component {
     };
 
     componentDidMount() {
+        /* istanbul ignore next  */
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (this.props.onChange) {
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+            if (this.props.isRequired !== undefined) {
+                throw new Error(Utils.deprecatePropError("isRequired", "required"));
+            }
+        }
+
+        if (!this._usePortal()) {
+            cannonballPortalWarning({ name: "Calendar" });
+        }
+
         document.addEventListener("click", this.documentClick);
     }
 
@@ -503,8 +503,8 @@ const PStatefulCalendar = inStateContainer([
     },
 ])(BaseCalendar);
 
-const Calendar = props => {
-    if (hasFlag({ props }, "p-stateful")) {
+const Calendar = (props, context) => {
+    if (hasFlag({ props, context }, "p-stateful")) {
         return <PStatefulCalendar {...props} statelessDate />;
     }
     cannonballChangeWarning({
@@ -516,5 +516,7 @@ const Calendar = props => {
 };
 
 Calendar.Views = Views;
+
+Calendar.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 module.exports = Calendar;
