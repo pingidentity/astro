@@ -278,6 +278,8 @@ export default class ConditionalFieldset extends React.Component {
 
     static Types = Types;
 
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
     _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount () {
