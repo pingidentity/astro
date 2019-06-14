@@ -125,7 +125,6 @@ class InlineMessage extends React.Component {
                 {
                     this._showAction() &&
                         [{
-                            type: this.props.type,
                             label: this.props.label,
                             onClick: this.props.onClick,
                             className: "primary"
