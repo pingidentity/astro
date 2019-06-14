@@ -7,6 +7,10 @@ import _ from "underscore";
 import uuid from "uuid";
 import { defaultRender } from "../../util/PropUtils";
 
+/**
+* @name ReportTable
+*/
+
 const Head = ({
     columnOrder,
     "data-id": dataId,

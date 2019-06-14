@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import ReportTable from "./ReportTable";
 import DragDrop from "../rows/DragDrop";
 
+/**
+* @name DragDropTable
+*/
+
 const renderDragDropCell = props => <DragDrop {...props} />;
 const DragDropTable = props => <ReportTable renderHeaderCell={renderDragDropCell} {...props} />;
 
