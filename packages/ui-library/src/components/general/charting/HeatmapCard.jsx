@@ -12,7 +12,7 @@ import Utils from "../../../util/Utils";
 import _ from "underscore";
 
 /**
-* @typedef HeatMap~DataItem
+* @typedef Heatmap~DataItem
 * @desc An object describing a data item in the data list.
 *
 * @property {object|string} label
@@ -23,7 +23,7 @@ import _ from "underscore";
 */
 
 /**
- * @typedef HeatMapCard~tooltipRenderer
+ * @typedef HeatmapCard~tooltipRenderer
  * @desc An object describing the start and end dates (inclusive) of a selectable date range.
  *
  * @param {object} cellData
@@ -33,7 +33,7 @@ import _ from "underscore";
  */
 
 /**
-* @class HeatMapCard
+* @class HeatmapCard
 * @desc A charting component that renders data as a series of sectors in a pie with optional cuztomizable legend and tooltips.
 *
 * @param {string} [className]
