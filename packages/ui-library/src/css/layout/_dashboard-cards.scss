@@ -370,8 +370,26 @@ $fullwidthBreakpoint: 950px;
     text-align: center;
 
     &__chart {
-        display: inline-block;
-        margin: $spacing-md 0 0;
+        position: absolute;
+        left: 0;
+        bottom: 60px;
+    }
+    &__no-data-subtitle {
+        color: $color-neutral-10;
+        text-align: center;
+        font-size: 22px;
+        @include font-pn-semibold;
+        margin: $spacing-md 0 $spacing-md 0;
+    }
+    &__no-data-message {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        height: 36px;
+        font-size: 12px;
+        & > * {
+            margin-right: 5px;
+        }
     }
     &__range-selector {
         position: absolute;
@@ -822,4 +840,3 @@ $fullwidthBreakpoint: 950px;
     }
 
 }
-

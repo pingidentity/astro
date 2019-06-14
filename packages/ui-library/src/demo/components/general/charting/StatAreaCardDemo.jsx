@@ -1,6 +1,7 @@
 import React from "react";
 import { StatAreaCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
 import Checkbox from "../../../../components/forms/FormCheckbox";
+import Link from "../../../../components/general/Link";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 import demoChartData from "./demoChartData";
@@ -16,6 +17,7 @@ class StatAreaCardDemo extends React.Component {
     state = {
         data: demoChartData.days,
         loading: false,
+        isNoData: false,
         subtitle: _.last(demoChartData.days).id,
         yvalue: _.last(demoChartData.days).value,
     };
@@ -32,6 +34,12 @@ class StatAreaCardDemo extends React.Component {
         });
     };
 
+    _toggleIsNoData = () => {
+        this.setState({
+            isNoData: !this.state.isNoData
+        });
+    }
+
     _handleRangeChange = range => {
         let rangeData;
         let subtitle;
@@ -39,7 +47,7 @@ class StatAreaCardDemo extends React.Component {
         if (range.label === "60D") {
             rangeData = demoChartData.days;
             subtitle = "AS OF TODAY";
-        } else if (range.label === "3M") {
+        } else if (range.label === "12W") {
             rangeData = demoChartData.weeks.slice(0, 12);
             subtitle = "AS OF THIS WEEK";
         } else {
@@ -70,7 +78,7 @@ class StatAreaCardDemo extends React.Component {
     render () {
         const max = _.max(this.state.data, item => item.value).value;
         const percent = parseInt(parseInt(this.state.yvalue) * 100/ max);
-        const rangeLabels = ["60D", "3M", "1YR"];
+        const rangeLabels = ["60D", "12W", "1Y"];
 
         return (
             <div>
@@ -89,27 +97,40 @@ class StatAreaCardDemo extends React.Component {
                             onChange={this._toggleLoading}
                         />
                     </Layout.Column>
+                    <Layout.Column>
+                        <Checkbox
+                            label="Show no data placeholder"
+                            checked={this.state.isNoData}
+                            onChange={this._toggleIsNoData}
+                        />
+                    </Layout.Column>
                 </Layout.Row>
                 <CardRow>
                     <StatAreaCard
-                        data={this.state.data}
-                        errorMessage={this.state.errorMessage}
-                        listData={demoChartData.listData}
+                        size={2}
                         loading={this.state.loading}
+                        errorMessage={this.state.errorMessage}
+                        subtitle={this.state.subtitle}
+                        title="MFA Users"
+                        value={`${percent}%`}
+                        terminateLabel="NO DATA YET"
+                        data={this.state.data}
                         onMouseOver={this._handleOnMouseOver}
                         onMouseOut={this._handleOnMouseOut}
                         onMakeDefault={this._handleMakeDefault}
                         onValueChange={this._handleRangeChange}
                         rockerButtonProps={{ labels: rangeLabels }}
                         selected={rangeLabels[0]}
-                        subtitle={this.state.subtitle}
-                        title="MFA Users"
-                        value={`${percent}%`}
-                        xAxisKey="id"
-                        yAxisKey="value"
                         defaultChecked={false}
+                        isNoData={this.state.isNoData}
+                        noDataSubtitle={"NOT DATA AVAIBLE"}
+                        noDataMessage={[
+                            <div key="no-data-message">MFA Adoption data will display once you add users.</div>,
+                            <Link key="no-data-link" title="Add/Import Users" url="#" />
+                        ]}
+                        listData={demoChartData.listData}
                     />
-                    <DashboardCard size={2} />
+                    <DashboardCard size={1} />
                 </CardRow>
             </div>
         );

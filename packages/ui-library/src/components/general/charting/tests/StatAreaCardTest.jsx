@@ -1,18 +1,13 @@
-window.__DEV__ = true;
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../../testutil/TestUtils";
+import _ from "underscore";
 
-jest.dontMock("../StatAreaCard");
-jest.dontMock("../Cards/DashboardCard");
-jest.dontMock("../../../forms/RockerButton");
-jest.dontMock("../../../forms/FormCheckbox");
+import StatAreaCard from "../StatAreaCard";
+
 jest.useFakeTimers();
 
 describe("StatAreaCard", () => {
-    const React = require("react");
-    const ReactTestUtils = require("react-dom/test-utils");
-    const TestUtils = require("../../../../testutil/TestUtils");
-    const StatAreaCard = require("../StatAreaCard");
-    const _ = require("underscore");
-
     const chartData = [
         { id: "Mon", value: 111 },
         { id: "Tue", value: 222 },
@@ -24,20 +19,23 @@ describe("StatAreaCard", () => {
         { id: "Sun", value: 0 },
     ];
 
+    const partialChartData = [
+        { id: "Mon" },
+        { id: "Tue", value: 222 },
+    ];
+
     const rockerButtonProps = {
         labels: ["A", "B", "C"]
     };
 
     const defaultProps = {
         "data-id": "my-card",
-        yAxisKey: "value",
         data: chartData,
         title: "Hi",
         onValueChange: jest.fn(),
         rockerButtonProps: rockerButtonProps,
         subtitle: "so far",
-        value: "1,000",
-        xAxisKey: "xaxis",
+        value: "1,000"
     };
 
     function getComponent(props) {
@@ -45,6 +43,7 @@ describe("StatAreaCard", () => {
             <div><StatAreaCard {...defaultProps} {...props} /></div>
         );
     }
+
     it("renders with the default data-id", () => {
         const component = getComponent();
         const container = TestUtils.findRenderedDOMNodeWithDataId(component, defaultProps["data-id"]);
@@ -63,6 +62,41 @@ describe("StatAreaCard", () => {
 
         const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__subtitle");
         expect(subtitle.textContent).toBe(defaultProps.subtitle);
+    });
+
+    it("renders chart if part of data is missing", () => {
+        const component = getComponent({ data: partialChartData });
+
+        const chart = TestUtils.scryRenderedDOMNodesWithClass(component, "recharts-responsive-container");
+        expect(chart).toBeTruthy();
+    });
+
+
+    it("renders \"No Data\" chart when no data", function () {
+        const component = getComponent({
+            isNoData: true,
+            noDataSubtitle: "No Data",
+            noDataMessage: "No Data Message",
+        });
+
+        const noDataSubtitle = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-subtitle");
+        expect(noDataSubtitle).toBeTruthy();
+
+        const noDataMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-message");
+        expect(noDataMessage).toBeTruthy();
+
+        const chart = TestUtils.findRenderedDOMNodeWithClass(component, "recharts-responsive-container");
+        expect(chart).toBeTruthy();
+    });
+
+    it("renders \"No Data\" subtitle and messages properly", function () {
+        const component = getComponent({ isNoData: true });
+
+        const noDataSubtitle = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-subtitle");
+        expect(noDataSubtitle).toBeTruthy();
+
+        const noDataMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-message");
+        expect(noDataMessage).toBeFalsy();
     });
 
     it("renders the back-side title", () => {
@@ -87,6 +121,17 @@ describe("StatAreaCard", () => {
         _.each(rockerButton.children, (item, index) => {
             expect(item.textContent).toBe(rockerButtonProps.labels[index]);
         });
+    });
+
+    it("does not render RockerButton if props are absent", () => {
+        const component = getComponent({ rockerButtonProps: null });
+
+        const rockerButton = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            `${defaultProps["data-id"]}-range-selector`
+        );
+
+        expect(rockerButton).toBeFalsy();
     });
 
     it("does not render the error or spinner by default", function () {
@@ -149,9 +194,8 @@ describe("StatAreaCard", () => {
         expect(rockerButton).toBeFalsy();
     });
 
-    it("calls onMouseOver", function () {
-        const myFunction = jest.fn();
-
+    it("CustomTooltip calls onMouseOver", function () {
+        const onMouseOver = jest.fn();
         const testData = {
             id: "my-id",
             value: "my-value",
@@ -160,7 +204,7 @@ describe("StatAreaCard", () => {
         ReactTestUtils.renderIntoDocument(
             <div>
                 <StatAreaCard.CustomTooltip
-                    onMouseOver={myFunction}
+                    onMouseOver={onMouseOver}
                     yAxisKey={"value"}
                     xAxisKey={"id"}
                     payload={[
@@ -172,7 +216,33 @@ describe("StatAreaCard", () => {
             </div>
         );
 
-        expect(myFunction).toBeCalledWith({ value: testData.value, id: testData.id });
+        expect(onMouseOver).toBeCalledWith({ value: testData.value, id: testData.id });
+    });
+
+    it("CustomTooltip calls onMouseOut", function () {
+        const onMouseOut = jest.fn();
+        const testData = {
+            id: "my-id",
+            value: "my-value",
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <div>
+                <StatAreaCard.CustomTooltip
+                    onMouseOut={onMouseOut}
+                    active={false}
+                    yAxisKey={"value"}
+                    xAxisKey={"id"}
+                    payload={[
+                        {
+                            payload: testData
+                        }
+                    ]}
+                />
+            </div>
+        );
+
+        expect(onMouseOut).toBeCalled();
     });
 
     it("calls onMouseOver only if data has changed", function () {
@@ -210,6 +280,7 @@ describe("StatAreaCard", () => {
             <StatAreaCard {...defaultProps} onMouseOut={myFunction} />
         );
 
+        component.lastHover = "Today";
         component._onMouseOut();
         component._onMouseOut();
         component._onMouseOut();
