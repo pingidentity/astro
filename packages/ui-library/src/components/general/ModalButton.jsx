@@ -5,8 +5,7 @@ import _ from "underscore";
 import Utils from "../../util/Utils";
 import Button from "../buttons/Button";
 import Modal from "./Modal";
-import { deprecatedPropValues } from "../../util/DeprecationUtils";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
 import { flagsPropType, getFlags, hasFlag } from "../../util/FlagUtils";
 
@@ -140,14 +139,7 @@ class ModalButtonStateless extends React.Component {
         activatorButtonLabel: PropTypes.string,
         value: PropTypes.string,
         activatorButtonClassName: PropTypes.string,
-        flags: deprecatedPropValues({
-            customMessage: "Usage of the ModalButton without the use-portal flag has been deprecated." +
-            " When using this component, pass in flags=[\"use-portal\"] as a prop.",
-            propType: PropTypes.arrayOf(PropTypes.string),
-            values: [{
-                value: []
-            }]
-        }),
+        flags: flagsPropType,
 
         // Modal/ModalButton props (passed through to modal component)
         modalClassName: PropTypes.string,
@@ -167,6 +159,8 @@ class ModalButtonStateless extends React.Component {
         maximize: false,
         type: Modal.Type.BASIC,
     };
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     constructor(props) {
         super(props);
@@ -387,6 +381,9 @@ export default class ModalButton extends React.Component {
                 `If it is present, it will control the current value of the component. ` +
                 `Set the 'p-stateful' flag to switch to this behavior now.`,
             });
+        }
+        if (!hasFlag(this, "use-portal")) {
+            cannonballPortalWarning({ name: "ModalButton" });
         }
     }
 
