@@ -1,5 +1,10 @@
 const nodes = [
     {
+        title: "v3.45.0",
+        date: "6/14/19",
+        file: require("./release-notes/v3-45-0.md")
+    },
+    {
         title: "v3.44.0",
         date: "5/31/19",
         file: require("./release-notes/v3-44-0.md")
