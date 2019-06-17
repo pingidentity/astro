@@ -32,6 +32,8 @@ import { lightInputs } from "../../../../util/CSSModifiers";
  *     double will occupy 2/3 of the width of the parent.
  * @param {function} [onMakeDefault]
  *     if provided it will add a checkbox to the back of the card to make that the default view.
+ * @param {string} [maxWidth]
+ *     Percentage or pixel width passed to style attribute. Overridden with 100 at full width card breakpoint.
  * @param {function} [ makeDefaultLabel]
  *     if provided it will add a label to the check box.
  *  @param {bool} [defaultChecked]
@@ -66,8 +68,8 @@ class DashboardCard extends React.Component {
         back: PropTypes.node,
         size: PropTypes.number,
         onMakeDefault: PropTypes.func,
-        makeDefaultLabel: PropTypes.string
-
+        makeDefaultLabel: PropTypes.string,
+        maxWidth: PropTypes.string,
     }
 
     static defaultProps = {
@@ -111,8 +113,12 @@ class DashboardCard extends React.Component {
             }
         );
 
+        const style = {
+            maxWidth: this.props.maxWidth,
+        };
+
         return (
-            <div className={classes} data-id={this.props["data-id"]}>
+            <div className={classes} style={style} data-id={this.props["data-id"]}>
                 {!this.props.errorMessage && [
                     <div key="back" className={classnames("dashboard-card__back", lightInputs)}>
                         {this.props.back}

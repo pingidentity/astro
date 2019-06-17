@@ -302,11 +302,28 @@ $fullwidthBreakpoint: 950px;
 .dashboard-card-row {
     margin-bottom: $spacing-md;
 
+    &--content-right {
+        justify-content: right;
+    }
+    &--content-left {
+        justify-content: left;
+    }
+    &--content-center {
+        justify-content: center;
+    }
+
     > * {
         margin-bottom: $spacing-md;
 
         &:last-child {
             margin-bottom: 0;
+        }
+    }
+
+    @media (max-width: $fullwidthBreakpoint) {
+        > .dashboard-card {
+            //using important to override user defined maxwidth because cards should always be 100% at this point
+            max-width: 100% !important;
         }
     }
 
@@ -332,6 +349,7 @@ $fullwidthBreakpoint: 950px;
                 margin-right: 0;
             }
         }
+
     }
 }
 

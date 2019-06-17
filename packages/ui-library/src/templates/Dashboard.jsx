@@ -676,7 +676,7 @@ class Dashboard extends React.Component {
                         message="We're building more data widgets. Check back soon!"
                     />
                 </CardRow>
-                <CardRow>
+                <CardRow alignCards="center">
                     <FrequencyCard
                         errorMessage={this.state.errorMessage}
 
@@ -695,12 +695,9 @@ class Dashboard extends React.Component {
                         onMakeDefault={this.frequencyHandleMakeDefault}
                         makeDefaultLabel="Make Default View"
                         defaultChecked={false}
+                        maxWidth="66%"
+                    />
 
-                        size={2}
-                    />
-                    <PlaceHolderCard
-                        message="We're building more data widgets. Check back soon!"
-                    />
                 </CardRow>
                 <CardRow>
                     <MultiseriesChartCard
