@@ -15,7 +15,7 @@ pipeline {
               sh "make GIT_BRANCH=${params.RELEASE_BRANCH} dist package-and-upload-for-hosting PRIVATE_SSH_KEY_PATH=${uiLibraryKeyPath} GERRIT_SSH_KEY_PATH=${gerritKeyPath}"
             }
           }
-          sh 'source ./version'
+          sh "source ${env.WORKSPACE}/version
           sh "npm version ${env.UI_LIBRARY_FINAL_VERSION} --no-git-tag-version"
           configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
             sh 'npm publish'
