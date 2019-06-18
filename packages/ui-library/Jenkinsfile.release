@@ -16,8 +16,10 @@ pipeline {
             }
           }
           configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+            script {
+              env.UI_LIBRARY_FINAL_VERSION = sh(returnStdout: true, script: "grep 'UI_LIBRARY_FINAL_VERSION' version |cut -d'=' -f2 | tr -d '[:space:]'")
+            }
             sh """
-              . ${env.WORKSPACE}/version;
               npm version ${env.UI_LIBRARY_FINAL_VERSION} --no-git-tag-version;
               npm publish;
             """
