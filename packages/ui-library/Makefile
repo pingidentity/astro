@@ -92,7 +92,7 @@ endif
 define version_and_tag
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(1)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
-	export GIT_SSH_COMMAND="ssh -i ${GERRIT_SSH_KEY_PATH}"
+	export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}"
 	git commit -a -m $(2)
 	if [[ "$(1)" = "$(GIT_VERSION_FINAL)" ]]; then \
 		git tag $(GIT_VERSION_FINAL); \
