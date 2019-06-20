@@ -37,7 +37,7 @@ describe("Messages", function () {
             type: "success",
             text: "hello world",
             index: 1,
-            timer: 5000
+            timer: 2500
         }]);
     });
 
@@ -75,14 +75,14 @@ describe("Messages", function () {
             "messages",
             "hello world",
             "success",
-            5000,
+            2500,
             0
         ));
         store.dispatch(Actions.pushMessage(
             "messages",
             "hello world",
             undefined,
-            5000,
+            2500,
             1
         ));
 
@@ -93,7 +93,7 @@ describe("Messages", function () {
                 type: "success",
                 text: "hello world",
                 index: 0,
-                timer: 5000
+                timer: 2500
             },
             {
                 containerId: "messages",
@@ -101,7 +101,7 @@ describe("Messages", function () {
                 type: "success",
                 text: "hello world",
                 index: 1,
-                timer: 5000
+                timer: 2500
             }
         ]);
     });
@@ -117,7 +117,7 @@ describe("Messages", function () {
             type: "success",
             text: "hello world",
             index: 1,
-            timer: 5000
+            timer: 2500
         }]);
     });
 
@@ -179,7 +179,7 @@ describe("Messages", function () {
 
         store.dispatch(Actions.addMessage("message"));
 
-        expect(window.setTimeout.mock.calls[0][1]).toBe(5000);
+        expect(window.setTimeout.mock.calls[0][1]).toBe(2500);
 
         //trigger the cleanup function
         window.setTimeout.mock.calls[0][0]();

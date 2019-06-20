@@ -117,7 +117,7 @@ describe("Messages", function () {
 
     it("Test unmount clears timers", function () {
         var component = getComponent({
-            messages: [{ key: "Test message text", duration: 5000 }]
+            messages: [{ key: "Test message text", duration: 2500 }]
         });
 
         expect(clearInterval.mock.calls.length).toBe(0);

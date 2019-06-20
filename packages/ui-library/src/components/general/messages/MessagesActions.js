@@ -108,7 +108,7 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         //OUR NAMES ARE REALLY TERRIBLE SO WE HAVE TO DO THIS
         const isError = status === MessageTypes.NOTICE ||
             status === MessageTypes.WARNING || status === MessageTypes.ERROR;
-        removeAfterMs = isError ? 0 : 5000;
+        removeAfterMs = isError ? 0 : 2500;
     }
 
     return function (dispatch) {
