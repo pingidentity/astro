@@ -551,7 +551,7 @@ class HeaderBar extends React.Component {
                     )}
 
                     {this.props.siteLogo &&
-                        (_.contains(["pingone", "uilib", "pingaccess"], this.props.siteLogo) ? (
+                        (_.contains(["pingone", "uilib", "pingaccess", "pingfed"], this.props.siteLogo) ? (
                             <Logo
                                 className="header-bar__site-logo"
                                 data-id={this.props["data-id"] + "-site-logo"}

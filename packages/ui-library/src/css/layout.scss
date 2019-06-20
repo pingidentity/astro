@@ -45,6 +45,14 @@ $layout-nav-width-offset: 15px;
     width: 95px;
 }
 
+.logo-pingfed {
+    background-image: url('#{$img-path}logo-pingfed.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 21px;
+    width: 95px;
+}
+
 .logo-uilib {
     background-image: url('#{$img-path}logo-uilibrary.svg');
     background-repeat: no-repeat;
