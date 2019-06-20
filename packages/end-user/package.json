@@ -1,6 +1,6 @@
 {
   "name": "@pingux/end-user",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "uxdev@pingidentity.com",
@@ -12,6 +12,7 @@
     "@babel/polyfill": "^7.4.0",
     "@babel/runtime": "^7.4.2",
     "@babel/runtime-corejs3": "^7.4.2",
+    "classnames": "^2.2.5",
     "core-js": "^3.0.1",
     "raf": "^3.4.1",
     "underscore": "^1.9.1"
@@ -35,7 +36,6 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-es2015-spread": "^6.22.0",
     "chroma-js": "^1.3.6",
-    "classnames": "^2.2.5",
     "css-loader": "^0.28.9",
     "cssnano": "^4.1.7",
     "del": "^4.1.1",

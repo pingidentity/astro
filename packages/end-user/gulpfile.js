@@ -18,7 +18,7 @@ gulp.task('transpile-utils', () =>
         .src(['./src/util/*'])
         .pipe(babel())
         .pipe(debug({ title: 'transpiling utils:' }))
-        .pipe(gulp.dest('dist/components/util')));
+        .pipe(gulp.dest('dist/util')));
 
 gulp.task('move-files', () =>
     gulp
