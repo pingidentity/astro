@@ -95099,15 +95099,32 @@ _Object$defineProperty(exports, "__esModule", {
 
 exports.default = void 0;
 
+var _propTypes = _interopRequireDefault(__webpack_require__(3));
+
 var _react = _interopRequireDefault(__webpack_require__(2));
 
+/**
+ * @class FormRow
+ * @desc Display mutiple buttons
+ *
+ * @param {node} [children]
+ *      Buttons to display in the set
+ * @param {string} [data-id]
+ *      To define the base "data-id" value for the FormRow
+ *
+ */
 var FormRow = function FormRow(_ref) {
-  var children = _ref.children;
+  var children = _ref.children,
+      dataId = _ref['data-id'];
   return _react.default.createElement("div", {
-    className: "form__row"
+    className: "form__row",
+    "data-id": dataId
   }, children);
 };
 
+FormRow.propTypes = {
+  'data-id': _propTypes.default.string
+};
 var _default = FormRow;
 exports.default = _default;
 module.exports = exports.default;
