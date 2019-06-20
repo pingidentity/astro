@@ -695,21 +695,38 @@ var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
 var _classnames = _interopRequireDefault(__webpack_require__(5));
 
+/**
+ * @class Card
+ * @desc Contains UI elements
+ *
+ * @param {string} [className]
+ *      Classname to apply to the card
+ * @param {string} [width]
+ *      Width of the card element
+ * @param {node} [children]
+ *      Width of the card element
+ * @param {string} [data-id]
+ *      To define the base "data-id" value for the card
+ *
+ */
 var Card = function Card(_ref) {
   var children = _ref.children,
       width = _ref.width,
-      className = _ref.className;
+      className = _ref.className,
+      dataId = _ref['data-id'];
   var classNames = (0, _classnames.default)('card', className, {
     'card--wide': width === 'large'
   });
   return _react.default.createElement("div", {
-    className: classNames
+    className: classNames,
+    "data-id": dataId
   }, children);
 };
 
 Card.propTypes = {
   className: _propTypes.default.string,
-  width: _propTypes.default.oneOf(['large'])
+  width: _propTypes.default.oneOf(['large']),
+  'data-id': _propTypes.default.string
 };
 var _default = Card;
 exports.default = _default;
