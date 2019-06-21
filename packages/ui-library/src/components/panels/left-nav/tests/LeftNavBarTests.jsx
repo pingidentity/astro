@@ -285,6 +285,17 @@ describe("LeftNavBar", function () {
         expect(logo.getAttribute("src")).toBe(logoSrc);
     });
 
+    it("renders custom copyright year", function() {
+        const wrapper = getWrappedComponent({
+            copyrightYear: "2016",
+            updated: true,
+        });
+
+        const copyright = TestUtils.findRenderedDOMNodeWithDataId(wrapper, "copyright");
+        const message = copyright.childNodes[1].textContent;
+        expect(message).toMatch(/^Copyright © 2016\-/);
+    });
+
     it("renders a topContent when specified", function () {
         var text = "Something";
         var content = <span>{text}</span>;

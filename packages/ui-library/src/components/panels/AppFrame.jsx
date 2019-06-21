@@ -28,6 +28,8 @@ import _ from "underscore";
  *     Props that are passed on to the HeaderBar component. See HeaderBar documentation.
  * @param {object} leftNavBarProps
  *     Props that are passed on to the LeftNavBar component
+ * @property {string} [copyrightYear="2003"]
+ *     First year of the copyright message. (The second year is always the current year.)
  * @param {LeftNavBar#Section[]} navTree
  *          A prop which describes the structure of the nav tree.  This will be an array of
  *          Section objects, each of which may have an array of Node objects as its children.
@@ -84,6 +86,7 @@ class AppFrame extends React.Component {
         navTree: PropTypes.array.isRequired,
         root: PropTypes.string,
         searchable: PropTypes.bool,
+        copyrightYear: PropTypes.string,
         flags: flagsPropType,
     };
 
@@ -323,6 +326,7 @@ class AppFrame extends React.Component {
 
     render() {
         const {
+            copyrightYear,
             leftNavBarProps,
             navTree,
             root
@@ -361,6 +365,7 @@ class AppFrame extends React.Component {
                 />
                 <LeftNav
                     topContent={rootBranch.label}
+                    copyrightYear={copyrightYear}
                     {...leftNavBarProps}
                     onSectionValueChange={this._handleSectionChange}
                     onItemValueChange={this._handleItemChange}

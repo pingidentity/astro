@@ -21,11 +21,13 @@ class Copyright extends React.Component {
     static propTypes = {
         pingoneLogo: PropTypes.bool,
         logoSrc: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+        copyrightYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         updated: PropTypes.bool
     };
 
     static defaultProps = {
         pingoneLogo: false,
+        copyrightYear: "2003",
         updated: false
     };
 
@@ -92,7 +94,7 @@ class Copyright extends React.Component {
     _year = new Date().getFullYear();
     _defaultChildren = [
         this._getLogo(),
-        `Copyright © 2003-${this._year}`,
+        `Copyright © ${this.props.copyrightYear}-${this._year}`,
         <br key="br1" />,
         "Ping Identity Corporation",
         <br key="br2" />,

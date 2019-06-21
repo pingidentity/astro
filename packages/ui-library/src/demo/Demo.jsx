@@ -290,6 +290,7 @@ class DemoApp extends React.Component {
                     ]
                 })}
                 leftNavBarProps={this.props.nav}
+                copyrightYear="2015"
                 searchable={true}
                 navTree={this.props.nav.tree}
                 root={this.props.nav.root}

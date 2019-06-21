@@ -37,6 +37,8 @@ import { getIconClassName } from "../../../util/PropUtils";
  *     The text to display in the addLink.
  * @property {func} addLink.callback
  *     The callback to trigger when the addLink is clicked.
+ * @property {string} [copyrightYear="2003"]
+ *     First year of the copyright message. (The second year is always the current year.)
  * @property {LeftNavBar#Node[]} [children]
  *     An optional array of children under this section.
  */
@@ -127,7 +129,8 @@ class LeftNavBar extends React.Component {
         onItemValueChange: PropTypes.func,
         pingoneLogo: PropTypes.bool,
         logoSrc: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-        topContent: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+        topContent: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+        copyrightYear: PropTypes.string,
     };
 
     static defaultProps = {
@@ -370,6 +373,7 @@ class LeftNavBar extends React.Component {
                     logoSrc={this.props.logoSrc}
                     updated={this.props.updated}
                     renderFooterContent={this.props.renderFooterContent}
+                    copyrightYear={this.props.copyrightYear}
                 />
             </div>
         );
