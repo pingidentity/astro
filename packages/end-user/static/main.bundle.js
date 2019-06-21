@@ -2799,19 +2799,34 @@ var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
 var _classnames = _interopRequireDefault(__webpack_require__(5));
 
+/**
+ * @class TextStyle
+ * @desc Apply custom effects and styling to text
+ *
+ * @param {node} [children]
+ *      Buttons to display in the set
+ * @param {string} [data-id]
+ *      To define the base "data-id" value for the card
+ * @param {boolean} [muted=false]
+ *     Mute the text's color
+ *
+ */
 var TextStyle = function TextStyle(_ref) {
   var muted = _ref.muted,
-      children = _ref.children;
+      children = _ref.children,
+      dataId = _ref['data-id'];
   var classes = (0, _classnames.default)({
     'muted-text': muted
   });
   return _react.default.createElement("span", {
-    className: classes
+    className: classes,
+    "data-id": dataId
   }, children);
 };
 
 TextStyle.propTypes = {
-  muted: _propTypes.default.bool
+  muted: _propTypes.default.bool,
+  'data-id': _propTypes.default.string
 };
 var _default = TextStyle;
 exports.default = _default;
