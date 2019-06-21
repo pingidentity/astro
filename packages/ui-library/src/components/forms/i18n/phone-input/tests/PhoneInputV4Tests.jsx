@@ -71,12 +71,36 @@ describe.skip("I18nPhoneInput", function () {
         expect(input).toBeTruthy();
     });
 
+    it("doesn't show error message", function () {
+        const dataId = "phoneInput",
+            component = getComponent({
+                "data-id": "phoneInput",
+                dialCode: "1",
+                phoneNumber: "303 555 5555"
+            });
+
+        const error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
+        expect(error).toBeFalsy();
+    });
+
     it("shows error message", function () {
         const dataId = "phoneInput",
             component = getComponent({
                 "data-id": "phoneInput",
                 dialCode: "1",
                 phoneNumber: "asdf"
+            });
+
+        const error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
+        expect(error.textContent).toEqual("Please enter a valid phone number.");
+    });
+
+    it("shows error message when forced", function () {
+        const dataId = "phoneInput",
+            component = getComponent({
+                "data-id": "phoneInput",
+                dialCode: "1",
+                phoneNumber: "303 555 5555"
             });
 
         const error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");

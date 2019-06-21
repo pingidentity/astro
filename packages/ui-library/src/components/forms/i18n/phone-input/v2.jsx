@@ -81,6 +81,8 @@ import { flagsPropType, hasFlag, getFlags } from "../../../../util/FlagUtils";
 *
 * @param {string} [errorMessage="Please enter a valid phone number."]
 *     The message to display if an invalid phone number is entered.
+* @param {boolean} [showError=false]
+*     When true, the error message will show regardless of validation.
 * @param {string} [placeholder]
 *     The phone number input placeholder text.
 *
@@ -121,6 +123,7 @@ class I18nPhoneInputStateless extends Component {
         setSearchTime: PropTypes.func,
         onSearch: PropTypes.func,
         errorMessage: PropTypes.string,
+        showError: PropTypes.bool,
         placeholder: PropTypes.string,
         autoFocus: PropTypes.bool,
         useAutoComplete: PropTypes.bool,
@@ -142,6 +145,7 @@ class I18nPhoneInputStateless extends Component {
         searchTime: 0,
         onSearch: _.noop,
         errorMessage: "Please enter a valid phone number.",
+        showError: false,
         placeholder: "",
         autoFocus: false,
         useAutoComplete: false,
@@ -246,7 +250,7 @@ class I18nPhoneInputStateless extends Component {
                     name={this.props.name}
                     onChange={this._handlePhoneNumberChange}
                     errorMessage={
-                        Validators.isValidPhoneNumber(this.props.phoneNumber)
+                        (!this.props.showError && Validators.isValidPhoneNumber(this.props.phoneNumber))
                             ? null
                             : this.props.errorMessage
                     }

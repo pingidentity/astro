@@ -132,6 +132,22 @@ class I18nPhoneInputDemo extends React.Component {
                     &nbsp;{this.state.phoneNumberStateless}
                 </div>
                 <br/>
+
+                <label className="detached">Force Error to Show</label>
+                <I18nPhoneInput
+                    stateless={true}
+                    countryCode="dj"
+                    dialCode="253"
+                    phoneNumber="123 456 7890"
+                    showError
+                    errorMessage="This error wouldn't normally show because the phone number is valid."
+                />
+                <br/>
+                <div>
+                    {this.state.dialCodeStateless ? "+" + this.state.dialCodeStateless : ""}
+                    &nbsp;{this.state.phoneNumberStateless}
+                </div>
+                <br/>
             </div>
         );
     }
