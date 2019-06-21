@@ -6,10 +6,12 @@ import { inStateContainer } from '../util/StateContainer';
 
 import smsIcon from '../icons/sms.svg';
 import emailIcon from '../icons/email.svg';
+import mobileIcon from '../icons/mobile.svg';
 
 const icons = {
     sms: smsIcon,
     email: emailIcon,
+    mobile: mobileIcon,
 };
 
 const StatelessModalMenu = ({
@@ -96,7 +98,7 @@ const PStatefulModalMenu = inStateContainer([
  *      Called after a selection is made in the menu
  *
  */
-const ModalMenu = (props) => <PStatefulModalMenu {...props} initialState={{}} />;
+const ModalMenu = props => <PStatefulModalMenu {...props} initialState={{}} />;
 
 ModalMenu.propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({

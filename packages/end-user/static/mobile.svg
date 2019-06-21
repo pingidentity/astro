@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>mobile</title>
+    <desc>Created with Sketch.</desc>
+    <g id="mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(4.000000, 0.000000)">
+            <rect id="Rectangle" stroke="#6B6B6B" x="0.5" y="0.5" width="15" height="23" rx="1.6"></rect>
+            <path d="M6.65,21 C6.65,20.2545224 7.25414218,19.65 8,19.65 C8.74521255,19.65 9.35,20.2547876 9.35,21 C9.35,21.7452127 8.74521266,22.35 8,22.35 C7.25414206,22.35 6.65,21.7454779 6.65,21 Z M7.35,21 C7.35,21.3589771 7.64083996,21.65 8,21.65 C8.35861334,21.65 8.65,21.3586133 8.65,21 C8.65,20.6413869 8.35861318,20.35 8,20.35 C7.64084012,20.35 7.35,20.6410231 7.35,21 Z" id="Stroke-200" fill="#6B6B6B" fill-rule="nonzero"></path>
+            <path d="M6,3.85 L10,3.85 C10.1932997,3.85 10.35,3.69329966 10.35,3.5 C10.35,3.30670034 10.1932997,3.15 10,3.15 L6,3.15 C5.80670034,3.15 5.65,3.30670034 5.65,3.5 C5.65,3.69329966 5.80670034,3.85 6,3.85 Z" id="Stroke-202" fill="#6B6B6B" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>
