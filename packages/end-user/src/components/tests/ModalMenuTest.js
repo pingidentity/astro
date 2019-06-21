@@ -22,7 +22,7 @@ const defaultProps = {
 
 const getComponent = props => mount(<ModalMenu {...defaultProps} {...props} />);
 
-describe('TextInput', () => {
+describe('ModalMenu', () => {
     it('renders the ModalMenu in the default state', () => {
         const wrapper = getComponent();
         const modal = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);

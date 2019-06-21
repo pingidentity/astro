@@ -88,8 +88,7 @@ const PStatefulModalMenu = inStateContainer([
     },
 ])(StatelessModalMenu);
 
-/**
- * @class ModalMenu
+/**denu
  * @desc Display a menu with a list of selections
  *
  * @param {string} [options]
