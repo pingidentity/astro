@@ -1,7 +1,6 @@
 import React from "react";
 import { StatAreaCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
 import Checkbox from "../../../../components/forms/FormCheckbox";
-import Link from "../../../../components/general/Link";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 import demoChartData from "./demoChartData";
@@ -107,30 +106,24 @@ class StatAreaCardDemo extends React.Component {
                 </Layout.Row>
                 <CardRow>
                     <StatAreaCard
-                        size={2}
+                        size={1}
                         loading={this.state.loading}
                         errorMessage={this.state.errorMessage}
                         subtitle={this.state.subtitle}
-                        title="MFA Users"
+                        title="MFA Adoption"
                         value={`${percent}%`}
                         terminateLabel="NO DATA YET"
                         data={this.state.data}
                         onMouseOver={this._handleOnMouseOver}
                         onMouseOut={this._handleOnMouseOut}
-                        onMakeDefault={this._handleMakeDefault}
-                        onValueChange={this._handleRangeChange}
+                        onRangeChange={this._handleRangeChange}
                         rockerButtonProps={{ labels: rangeLabels }}
                         selected={rangeLabels[0]}
-                        defaultChecked={false}
                         isNoData={this.state.isNoData}
-                        noDataSubtitle={"NOT DATA AVAIBLE"}
-                        noDataMessage={[
-                            <div key="no-data-message">MFA Adoption data will display once you add users.</div>,
-                            <Link key="no-data-link" title="Add/Import Users" url="#" />
-                        ]}
+                        noDataMessage="You need MFA-enabled users to see this chart."
                         listData={demoChartData.listData}
                     />
-                    <DashboardCard size={1} />
+                    <DashboardCard size={2} />
                 </CardRow>
             </div>
         );

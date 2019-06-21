@@ -57,7 +57,7 @@ describe("StatAreaCard", () => {
         const greeting = TestUtils.scryRenderedDOMNodesWithClass(component, "dashboard-card__title");
         expect(greeting[0].textContent).toBe(defaultProps.title);
 
-        const value = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__value");
+        const value = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__value");
         expect(value.textContent).toBe(defaultProps.value);
 
         const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__subtitle");
@@ -72,14 +72,15 @@ describe("StatAreaCard", () => {
     });
 
 
-    it("renders \"No Data\" chart when no data", function () {
+    it("renders \"No Data\" chart when noDataData provided", function () {
         const component = getComponent({
             isNoData: true,
+            noDataData: [{ id: 1, value: 2 }],
             noDataSubtitle: "No Data",
             noDataMessage: "No Data Message",
         });
 
-        const noDataSubtitle = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-subtitle");
+        const noDataSubtitle = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__subtitle");
         expect(noDataSubtitle).toBeTruthy();
 
         const noDataMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-message");
@@ -89,14 +90,17 @@ describe("StatAreaCard", () => {
         expect(chart).toBeTruthy();
     });
 
-    it("renders \"No Data\" subtitle and messages properly", function () {
+    it("renders \"No Data\" properly when props don't provied", function () {
         const component = getComponent({ isNoData: true });
 
         const noDataSubtitle = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-subtitle");
-        expect(noDataSubtitle).toBeTruthy();
+        expect(noDataSubtitle).toBeFalsy();
 
         const noDataMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__no-data-message");
         expect(noDataMessage).toBeFalsy();
+
+        const chart = TestUtils.findRenderedDOMNodeWithClass(component, "recharts-responsive-container");
+        expect(chart).toBeTruthy();
     });
 
     it("renders the back-side title", () => {
@@ -162,12 +166,6 @@ describe("StatAreaCard", () => {
 
         const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__subtitle");
         expect(subtitle).toBeFalsy();
-
-        const rockerButton = TestUtils.findRenderedDOMNodeWithDataId(
-            component,
-            `${defaultProps["data-id"]}-range-selector`
-        );
-        expect(rockerButton).toBeTruthy();
     });
 
     it("renders the error when provided", function () {

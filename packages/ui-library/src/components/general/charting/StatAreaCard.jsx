@@ -53,17 +53,19 @@ import _ from "underscore";
  *    Callback triggered when a chart data-point is hovered over
  * @param {function} [onMouseOver]
  *    Callback triggered when a chart data-point is hovered out
- * @param {boolean} [isNoData]
+ * @param {boolean} [isNoData=false]
  *    If true card displays placeholder chart
  * @param {array} [noDataData]
  *    If true card displays placeholder chart
- * @param {string} [noDataSubtitle]
+ * @param {string|element|array} [noDataSubtitle]
  *    Subtitle for No Data chart
  * @param {string|element|array} [noDataMessage]
- *    Message for No Data chart
+ *    Message under No Data chart
  * @param {object} [rockerButtonProps]
  *     An optional object containing the props passed to the range-selector RockerButton component. This may be used
  *     to have greater control over the chart range selector.
+ * @param {function} [onRangeChange]
+ *    Callback triggered for new range click.
  */
 
 const NO_DATA_DATA =[
@@ -73,9 +75,9 @@ const NO_DATA_DATA =[
     { id: 4, value: 3 },
     { id: 5, value: 5 },
     { id: 6, value: 8 },
-    { id: 7, value: 13 },
-    { id: 8, value: 12 },
-    { id: 9, value: 12 },
+    { id: 7, value: 12 },
+    { id: 8, value: 13 },
+    { id: 9, value: 13 },
     { id: 10, value: 14 },
     { id: 11, value: 18 },
     { id: 12, value: 20 },
@@ -138,14 +140,11 @@ class StatAreaCard extends React.Component {
         onMouseOut: PropTypes.func,
         onMakeDefault: PropTypes.func,
         rockerButtonProps: PropTypes.object,
+        onRangeChange: PropTypes.func,
         isNoData: PropTypes.bool,
         noDataData: PropTypes.array,
         noDataSubtitle: PropTypes.string,
-        noDataMessage: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.element,
-            PropTypes.array,
-        ]),
+        noDataMessage: PropTypes.string,
         xAxisKey: PropTypes.string,
         yAxisKey: PropTypes.string,
     };
@@ -156,15 +155,12 @@ class StatAreaCard extends React.Component {
         data: [],
         xAxisKey: "id",
         yAxisKey: "value",
-        terminateLabel: "NO DATA YET",
         listData: [],
         onFlip: _.noop,
         onMouseOver: _.noop,
         onMouseOut: _.noop,
-        onValueChange: _.noop,
+        onRangeChange: _.noop,
         isNoData: false,
-        noDataData: NO_DATA_DATA,
-        noDataSubtitle: "NOT DATA AVAIBLE",
         rockerButtonProps: {},
     };
 
@@ -184,110 +180,12 @@ class StatAreaCard extends React.Component {
         }
     }, 10);
 
-    _getChart = () => {
+    _getFrontTitle = () => {
+        return <DashboardCardTitle className="dashboard-card__title--stat-area" title={this.props.title} />;
+    }
+
+    _getChartWithData = () => {
         const hexColor = DashboardColors.COLORS[DashboardColors.getKey(this.props.accent)];
-        const referenceLineIndex = !this.props.data[0][this.props.yAxisKey]
-            ? _.findIndex(this.props.data, point => (point[this.props.yAxisKey]))
-            : null;
-
-        return [
-            <div key="value" className="dashboard-card__value stat-area-card__value">
-                {this.props.value}
-            </div>,
-            <div key="subtitle" className="dashboard-card__subtitle">
-                {this.props.subtitle}
-            </div>,
-            <ResponsiveContainer
-                key="area-chart-container"
-                className="stat-area-card__chart"
-                width="100%"
-                height={80}
-            >
-                <AreaChart
-                    data={this.props.data}
-                    margin={{ right: 15, left: 15 }}
-                >
-                    <Area
-                        connectNulls={false}
-                        dataKey={this.props.yAxisKey}
-                        fill={hexColor}
-                        stroke={hexColor}
-                        fillOpacity={1}
-                        legendType="none"
-                        isAnimationActive={false}
-                    />
-                    {
-                        _.isNumber(referenceLineIndex) &&
-                        <ReferenceLine
-                            x={referenceLineIndex}
-                            style={{ transform: "translateX(-10px)" }}
-                            stroke="#686f77"
-                            strokeDasharray="3 3"
-                            label={{
-                                value: this.props.terminateLabel,
-                                fontSize: "10px",
-                                angle: -90,
-                                dx: -20
-                            }}
-                        />
-                    }
-                    <Tooltip
-                        content={<CustomTooltip />}
-                        cursor={false}
-                        onMouseOver={this._onMouseOver}
-                        onMouseOut={this._onMouseOut}
-                        xAxisKey={this.props.xAxisKey}
-                        yAxisKey={this.props.yAxisKey}
-                    />
-                </AreaChart>
-            </ResponsiveContainer>
-        ];
-    }
-    _getNoData = () => {
-        const noDataMessage = this.props.noDataMessage
-            ? (
-                <div key="message" className="stat-area-card__no-data-message">
-                    {this.props.noDataMessage}
-                </div>
-            )
-            : null;
-
-        return [
-            <div key="subtitle" className="stat-area-card__no-data-subtitle">
-                {this.props.noDataSubtitle}
-            </div>,
-            noDataMessage,
-            <ResponsiveContainer
-                key="area-chart-container"
-                className="stat-area-card__chart"
-                width="100%"
-                height={80}
-            >
-                <AreaChart
-                    data={this.props.noDataData}
-                    margin={{ right: 15, left: 15 }}
-                >
-                    <defs>
-                        <linearGradient id="no-data-gradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#83C1E7" />
-                            <stop offset="100%" stopColor="#4C8DCA" />
-                        </linearGradient>
-                    </defs>
-                    <Area
-                        connectNulls={false}
-                        dataKey={this.props.yAxisKey}
-                        fill="url(#no-data-gradient)"
-                        fillOpacity={0.8}
-                        stroke="none"
-                        legendType="none"
-                        isAnimationActive={false}
-                    />
-                </AreaChart>
-            </ResponsiveContainer>
-        ];
-    }
-
-    _getFront = () => {
         const rockerButtonDefaults = {
             "data-id": `${this.props["data-id"]}-range-selector`,
             className: classnames(
@@ -299,40 +197,137 @@ class StatAreaCard extends React.Component {
             stateless: false,
             labels: [],
             selected: this.props.selected,
-            onValueChange: this.props.onValueChange,
+            onValueChange: this.props.onRangeChange,
+            disabled: this.props.isNoData
         };
+        const rockerButton = this.props.rockerButtonProps
+            ? (
+                <RockerButton
+                    {...rockerButtonDefaults}
+                    {...this.props.rockerButtonProps}
+                />
+            )
+            : null;
+        const referenceLineIndex = !_.isNumber(this.props.data[0][this.props.yAxisKey])
+            ? _.findIndex(this.props.data, point => _.isNumber(point[this.props.yAxisKey]))
+            : null;
 
         return (
             <div>
-                <DashboardCardTitle
-                    className="dashboard-card__title--stat-area"
-                    title={this.props.title}
-                />
-                {!this.props.loading && this.props.isNoData && this._getNoData()}
-                {!this.props.loading && !this.props.isNoData && this._getChart()}
-                {
-                    this.props.rockerButtonProps
-                        ? <RockerButton
-                            {...rockerButtonDefaults}
-                            {...this.props.rockerButtonProps}
-                            flags={["p-stateful"]}
+                {this._getFrontTitle()}
+                <div className="stat-area-card__value">{this.props.value}</div>
+                <div className="dashboard-card__subtitle">{this.props.subtitle}</div>
+                <ResponsiveContainer
+                    className="stat-area-card__chart"
+                    width="100%"
+                    height={80}
+                >
+                    <AreaChart
+                        data={this.props.data}
+                        margin={{ top: 3, right: 15, left: 15 }}
+                    >
+                        <Area
+                            connectNulls={false}
+                            dataKey={this.props.yAxisKey}
+                            fill={hexColor}
+                            stroke={hexColor}
+                            fillOpacity={1}
+                            legendType="none"
+                            isAnimationActive={false}
                         />
-                        : null
-                }
+                        {
+                            _.isNumber(referenceLineIndex) &&
+                            <ReferenceLine
+                                x={referenceLineIndex}
+                                style={{ transform: "translateX(-10px)" }}
+                                stroke="#686f77"
+                                strokeDasharray="3 3"
+                                label={{
+                                    value: this.props.terminateLabel,
+                                    fontSize: "10px",
+                                    angle: -90,
+                                    dx: -20
+                                }}
+                            />
+                        }
+                        <Tooltip
+                            content={<CustomTooltip />}
+                            cursor={false}
+                            onMouseOver={this._onMouseOver}
+                            onMouseOut={this._onMouseOut}
+                            xAxisKey={this.props.xAxisKey}
+                            yAxisKey={this.props.yAxisKey}
+                        />
+                    </AreaChart>
+                </ResponsiveContainer>
+                {rockerButton}
             </div>
         );
+    }
+    _getChartWithoutData = () => {
+        const noDataData = _.isEmpty(this.props.noDataData)
+            ? _.map(NO_DATA_DATA, point => ({
+                [this.props.xAxisKey]: point.id,
+                [this.props.yAxisKey]: point.value,
+            }))
+            : this.props.noDataData;
+
+        return (
+            <div>
+                {this._getFrontTitle()}
+                {
+                    this.props.noDataSubtitle &&
+                    <div className="dashboard-card__subtitle">
+                        {this.props.noDataSubtitle}
+                    </div>
+                }
+                {
+                    this.props.noDataMessage &&
+                    <div className="stat-area-card__no-data-message">
+                        {this.props.noDataMessage}
+                    </div>
+                }
+                <ResponsiveContainer
+                    className="stat-area-card__chart"
+                    width="100%"
+                    height={100}
+                >
+                    <AreaChart
+                        data={noDataData}
+                        margin={{ right: 15, left: 15 }}
+                    >
+                        <Area
+                            connectNulls={false}
+                            dataKey={this.props.yAxisKey}
+                            fill="#e8ebed"
+                            fillOpacity={0.8}
+                            stroke="none"
+                            legendType="none"
+                            isAnimationActive={false}
+                        />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
+        );
+    }
+
+    _getChart = () => {
+        return this.props.isNoData
+            ? this._getChartWithoutData()
+            : this._getChartWithData();
+    }
+
+    _getFront = () => {
+        return this.props.loading
+            ? this._getFrontTitle()
+            : this._getChart();
     }
 
     _getBack = () => {
         return (
             <div>
-                <DashboardCardTitle
-                    title={this.props.title}
-                    backTitle
-                />
-                {!this.props.loading && (
-                    <DashboardCardList data={this.props.listData} />
-                )}
+                <DashboardCardTitle backTitle title={this.props.title} />
+                {!this.props.loading && <DashboardCardList data={this.props.listData} />}
             </div>
         );
     }

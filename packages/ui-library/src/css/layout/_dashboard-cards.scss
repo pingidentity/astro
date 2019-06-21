@@ -133,8 +133,7 @@ $fullwidthBreakpoint: 950px;
         }
 
         &--stat-area {
-            margin-top: -24px;
-            margin-bottom: 40px;
+            margin-bottom: $spacing-sm;
         }
 
     }
@@ -158,16 +157,6 @@ $fullwidthBreakpoint: 950px;
         @media (max-width: $condensedBreakpoint) and (min-width: $fullwidthBreakpoint) {
             display: none;
         }
-    }
-
-    &__value {
-        color: $color-neutral-10;
-        text-align: center;
-        font-size: 55px;
-        line-height: 1em;
-        min-height: 1em;
-        @include font-pn-semibold;
-        margin: $spacing-md 0 0;
     }
 
     &__description,
@@ -384,31 +373,32 @@ $fullwidthBreakpoint: 950px;
 }
 
 .stat-area-card {
-    min-height: 307px;
+    min-height: 280px;
     text-align: center;
+
+    &__value {
+        color: $color-neutral-10;
+        text-align: center;
+        font-size: 50px;
+        line-height: 1em;
+        min-height: 1em;
+        @include font-pn-semibold;
+    }
+
+    &__no-data-message {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        width: 100%;
+        transform: translateX(-50%);
+    }
 
     &__chart {
         position: absolute;
         left: 0;
-        bottom: 60px;
+        bottom: 55px;
     }
-    &__no-data-subtitle {
-        color: $color-neutral-10;
-        text-align: center;
-        font-size: 22px;
-        @include font-pn-semibold;
-        margin: $spacing-md 0 $spacing-md 0;
-    }
-    &__no-data-message {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        height: 36px;
-        font-size: 12px;
-        & > * {
-            margin-right: 5px;
-        }
-    }
+
     &__range-selector {
         position: absolute;
         left: 50%;
