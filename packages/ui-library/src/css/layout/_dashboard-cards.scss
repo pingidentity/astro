@@ -131,11 +131,6 @@ $fullwidthBreakpoint: 950px;
         &--heatmap {
             margin-bottom: 10px;
         }
-
-        &--stat-area {
-            margin-bottom: $spacing-sm;
-        }
-
     }
 
     &__title-accessories {
@@ -374,7 +369,18 @@ $fullwidthBreakpoint: 950px;
 
 .stat-area-card {
     min-height: 280px;
-    text-align: center;
+
+    &__front-title {
+        min-width: 200px;
+        margin-bottom: 10px;
+        white-space: nowrap;
+        @media (min-width: $condensedBreakpoint), (max-width: $fullwidthBreakpoint) {
+            display: flex;
+            align-items: center;
+            height: 31px;
+            margin-bottom: 0;
+        }
+    }
 
     &__value {
         color: $color-neutral-10;
@@ -402,7 +408,7 @@ $fullwidthBreakpoint: 950px;
     &__range-selector {
         position: absolute;
         left: 50%;
-        bottom: $spacing-lg;
+        bottom: $spacing-md;
         transform: translateX(-50%);
         margin: 0;
     }

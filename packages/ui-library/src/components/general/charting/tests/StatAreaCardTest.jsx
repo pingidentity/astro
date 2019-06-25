@@ -103,6 +103,18 @@ describe("StatAreaCard", () => {
         expect(chart).toBeTruthy();
     });
 
+    it("renders the front-side title when data exists", () => {
+        const component = getComponent();
+        const title = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__front-title");
+        expect(title.textContent).toBe(defaultProps.title);
+    });
+
+    it("renders the front-side title when data doesn't exist", () => {
+        const component = getComponent({ isNoData: true });
+        const title = TestUtils.findRenderedDOMNodeWithClass(component, "stat-area-card__front-title");
+        expect(title.textContent).toBe(defaultProps.title);
+    });
+
     it("renders the back-side title", () => {
         const component = getComponent({
             flipped: true

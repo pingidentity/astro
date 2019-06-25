@@ -181,7 +181,7 @@ class StatAreaCard extends React.Component {
     }, 10);
 
     _getFrontTitle = () => {
-        return <DashboardCardTitle className="dashboard-card__title--stat-area" title={this.props.title} />;
+        return <DashboardCardTitle className="stat-area-card__front-title" title={this.props.title} />;
     }
 
     _getChartWithData = () => {
@@ -208,7 +208,7 @@ class StatAreaCard extends React.Component {
                 />
             )
             : null;
-        const referenceLineIndex = !_.isNumber(this.props.data[0][this.props.yAxisKey])
+        const referenceLineIndex = this.props.data[0] && !_.isNumber(this.props.data[0][this.props.yAxisKey])
             ? _.findIndex(this.props.data, point => _.isNumber(point[this.props.yAxisKey]))
             : null;
 
@@ -224,7 +224,11 @@ class StatAreaCard extends React.Component {
                 >
                     <AreaChart
                         data={this.props.data}
-                        margin={{ top: 3, right: 15, left: 15 }}
+                        margin={{
+                            top: 3,
+                            right: 15,
+                            left: referenceLineIndex ? 25 : 15
+                        }}
                     >
                         <Area
                             connectNulls={false}
