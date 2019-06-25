@@ -15,7 +15,7 @@ describe("FormRadioGroup", function () {
     const callback = jest.fn(),
         items = [
             { id: "1", name: "name 1" },
-            { id: "2", name: "name 2" }
+            { id: "2", name: "name 2" },
         ];
 
     it("tests onValueChanged", function () {

@@ -24,8 +24,13 @@ $default-input-border-radius: 2px;
   but it will still show up on keyboard focus.
 */
 .js-focus-visible :focus:not(.focus-visible) {
-    outline: none;
+    outline-width: 0;
 }
+
+.js-focus-visible [class$='--autofocus']:focus:not(.focus-visible) {
+    outline-width: 5px;
+}
+
 
 
 // CORE INPUT STYLES ---------------------------------------------------------------------------------------------------

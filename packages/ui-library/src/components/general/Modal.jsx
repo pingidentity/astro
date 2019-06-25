@@ -256,7 +256,8 @@ class Modal extends React.Component {
                     className="modal-content"
                     tabIndex="-1"
                     data-id="modal-content"
-                    onClick={this._handleBgClick}>
+                    onClick={this._handleBgClick}
+                >
                     <span data-id="modal-inner-content">
                         <If test={this.props.showHeader && this.props.type !== "dialog"}>
                             <div className="modal-header" data-id="modal-header">

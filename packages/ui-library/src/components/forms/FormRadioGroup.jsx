@@ -41,6 +41,8 @@ import { defaultRender } from "../../util/PropUtils";
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
+ * @param {boolean} [autoFocus=false]
+ *     Whether or not to auto-focus the element.
  * @param {string} groupName
  *     Name of the radio group.
  * @param {FormRadioGroup~RadioGroupItem[]} items
@@ -118,6 +120,7 @@ class FormRadioGroup extends React.Component {
         labelText: PropTypes.node,
         labelHelpText: PropTypes.node,
         renderRadio: PropTypes.func,
+        autoFocus: PropTypes.bool
     };
 
     static defaultProps = {
@@ -125,6 +128,7 @@ class FormRadioGroup extends React.Component {
         stacked: true,
         disabled: false,
         renderRadio: defaultRender,
+        autoFocus: false,
     };
 
     constructor(props) {
@@ -153,6 +157,7 @@ class FormRadioGroup extends React.Component {
             renderRadio,
             selected,
             stacked,
+            autoFocus
         } = this.props;
 
         return items.map((item) => {
@@ -161,7 +166,7 @@ class FormRadioGroup extends React.Component {
             const radioClassName = classnames("input-radio", "group", className, {
                 stacked: stacked,
                 disabled: radioDisabled,
-                hidden: item.hidden
+                hidden: item.hidden,
             });
 
             return renderRadio({
@@ -176,6 +181,7 @@ class FormRadioGroup extends React.Component {
                 onValueChange: this._handleChange,
                 disabled: radioDisabled,
                 helpTarget: item.helpTarget,
+                autoFocus: autoFocus && String(item.id) === String(selected)
             }, FormRadioInput);
         });
     };
