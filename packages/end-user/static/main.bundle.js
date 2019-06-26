@@ -1529,15 +1529,35 @@ _Object$defineProperty(exports, "__esModule", {
 
 exports.default = void 0;
 
+var _propTypes = _interopRequireDefault(__webpack_require__(3));
+
 var _react = _interopRequireDefault(__webpack_require__(2));
 
+/**
+ * @class Tooltip
+ * @desc Show additional information regarding a topic
+ *
+ * @param {node} [children]
+ *      Buttons to display in the set
+ * @param {string} [data-id]
+ *      Sets a data-id property on the tooltip element to be used as a test hook
+ *
+ */
 var Tooltip = function Tooltip(_ref) {
-  var children = _ref.children;
+  var children = _ref.children,
+      dataId = _ref['data-id'];
   return _react.default.createElement("div", {
-    className: "tooltip"
+    className: "tooltip",
+    "data-id": dataId
   }, children);
 };
 
+Tooltip.propTypes = {
+  'data-id': _propTypes.default.string
+};
+Tooltip.defaultProps = {
+  'data-id': 'tooltip'
+};
 var _default = Tooltip;
 exports.default = _default;
 module.exports = exports.default;
