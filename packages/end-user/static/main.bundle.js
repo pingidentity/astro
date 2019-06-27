@@ -38163,12 +38163,19 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
         printer.add_raw_token(raw_token);
         return;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
       }
 
       pre = indentation + matched[1] + '\n';
       text = matched[4];
       if (matched[5]) {
         post = indentation + matched[5];
+<<<<<<< HEAD
+      }
+
+=======
       }
 
 =======
@@ -38184,6 +38191,7 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
         post = indentation + matched[5];
       }
 
+>>>>>>> master
 >>>>>>> master
       // if there is at least one empty line at the end of this text, strip it
       // we'll be adding one back after the text but before the containing tag.
@@ -38197,6 +38205,9 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
           raw_token.whitespace_before = matched[0];
         }
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
       }
     }
 
@@ -38229,6 +38240,8 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
       }
     }
 
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
       }
@@ -38344,6 +38357,7 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
       }
     }
 
+>>>>>>> master
 >>>>>>> master
 >>>>>>> master
 >>>>>>> master
@@ -66859,6 +66873,11 @@ var toIObject = __webpack_require__(48);
 var toPrimitive = __webpack_require__(115);
 var createDesc = __webpack_require__(85);
 <<<<<<< HEAD
+var _create = __webpack_require__(122);
+var gOPNExt = __webpack_require__(575);
+var $GOPD = __webpack_require__(182);
+=======
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 var _create = __webpack_require__(123);
@@ -66870,6 +66889,7 @@ var $GOPS = __webpack_require__(121);
 var _create = __webpack_require__(122);
 var gOPNExt = __webpack_require__(575);
 var $GOPD = __webpack_require__(182);
+>>>>>>> master
 var $GOPS = __webpack_require__(120);
 >>>>>>> master
 var $DP = __webpack_require__(45);
@@ -91942,16 +91962,30 @@ var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
 var _classnames = _interopRequireDefault(__webpack_require__(5));
 
+/**
+ * @class TwoSided
+ * @desc Card with front and back
+ *
+ * @param {bool} [flipped]
+ *      Sets if the back of the card is showing
+ * @param {array} [childen]
+ *      Front and back elements of the card [front, back]
+ * @param {string} [data-id]
+ *      Sets a data-id property on the tooltip element to be used as a test hook
+ *
+ */
 var TwoSided = function TwoSided(_ref) {
   var _ref$children = (0, _slicedToArray2.default)(_ref.children, 2),
       front = _ref$children[0],
       back = _ref$children[1],
-      flipped = _ref.flipped;
+      flipped = _ref.flipped,
+      dataId = _ref['data-id'];
 
   return _react.default.createElement("div", {
     className: (0, _classnames.default)('two-sided', {
       'two-sided--flipped': flipped
-    })
+    }),
+    "data-id": dataId
   }, _react.default.createElement("div", {
     className: "two-sided__front"
   }, front), _react.default.createElement("div", {
@@ -91960,10 +91994,12 @@ var TwoSided = function TwoSided(_ref) {
 };
 
 TwoSided.propTypes = {
-  flipped: _propTypes.default.bool
+  flipped: _propTypes.default.bool,
+  'data-id': _propTypes.default.string
 };
 TwoSided.defaultProps = {
-  flipped: false
+  flipped: false,
+  'data-id': 'two-sided'
 };
 var _default = TwoSided;
 exports.default = _default;
