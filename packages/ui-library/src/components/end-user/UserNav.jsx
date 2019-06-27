@@ -5,6 +5,7 @@ import { Tabs } from "../general/TabbedSections";
 import PopOverNavMenu from "../tooltips/PopoverNavMenu";
 import Link from "../general/Link";
 
+const MENU_OPEN_CLASSNAME = "menu-open";
 
 const UserInfo = ({
     user
@@ -23,12 +24,17 @@ const UserInfo = ({
 );
 
 class UserNav extends React.Component {
+    bodyNode = document.body;
     state = { menuOpen: false };
 
-
+    initialBodyClassNames = `${this.bodyNode.className}`;
 
     _toggleCollapsibleMenu = () => {
-        this.setState(({ menuOpen }) => ({ menuOpen: !menuOpen }));
+        this.setState(({ menuOpen }) => ({ menuOpen: !menuOpen }), () => {
+            this.bodyNode.className = classnames(this.initialBodyClassNames, {
+                [MENU_OPEN_CLASSNAME]: this.state.menuOpen
+            });
+        });
     }
 
     _handleSignOut = () => {
@@ -41,6 +47,10 @@ class UserNav extends React.Component {
         const { onTabChange } = this.props;
         this.setState({ menuOpen: false });
         onTabChange(tab, e);
+    }
+
+    componentWillUnmount() {
+        this.bodyNode.className = this.initialBodyClassNames;
     }
 
     render() {
