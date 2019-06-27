@@ -196,6 +196,13 @@ table {
                 border-bottom: 1px solid $color-rabbit-fur;
             }
         }
+        &--fixed {
+            table-layout: fixed;
+        }
+        &--full-width {
+            display: table;
+            width: 100%;
+        }
         tr {
             &.expanded {
                 td,
@@ -215,6 +222,30 @@ table {
             th {
                 border-bottom: 1px solid $color-rabbit-fur;
                 padding: 0 20px $spacing-xs 0;
+
+                &.grid {
+                    &__column {
+                        &--alignment {
+                            &-center {
+                                text-align: center;
+                            }
+
+                            &-left {
+                                text-align: left;
+                            }
+
+                            &-right {
+                                text-align: right;
+                            }
+                        }
+
+                        &--overflow {
+                            &-ellipsis {
+                                text-overflow: ellipsis;
+                            }
+                        }
+                    }
+                }
             }
         }
         tbody:first-child tr:first-child { // if there's no heading row, remove top padding from top row
@@ -242,6 +273,28 @@ table.grid td.grid__cell {
     }
     &--bottom {
         vertical-align: bottom;
+    }
+
+    &--alignment {
+        &-center {
+            text-align: center;
+        }
+
+        &-left {
+            text-align: left;
+        }
+
+        &-right {
+            text-align: right;
+        }
+    }
+
+    &--overflow {
+        &-ellipsis {
+            overflow-y: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 }
 

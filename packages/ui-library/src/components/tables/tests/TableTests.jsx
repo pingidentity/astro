@@ -1,11 +1,16 @@
 jest.dontMock("../Table");
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import { shallow } from "enzyme";
+import Table, {
+    columnAlignments,
+    overflowOptions,
+    tableLayouts,
+    tableWidths
+} from "../Table";
 
 describe("Table", function () {
-    const React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        Table = require("../Table");
-
     const headData = [
         "name",
         "age",
@@ -134,6 +139,158 @@ describe("Table", function () {
         const solidLines = TestUtils.findRenderedDOMNodeWithClass(component, "grid--solid-lines");
 
         expect(solidLines).toBeFalsy();
+    });
+
+    it("renders with full width class if width is full", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                width={tableWidths.FULL}
+            />
+        );
+
+        expect(component.find(".grid--full-width").exists()).toBeTruthy();
+    });
+
+    it("does not render with full width class if width is not full", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+            />
+        );
+
+        expect(component.find(".grid--full-width").exists()).toBeFalsy();
+    });
+
+    it("renders with fixed class if layout is fixed", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                layout={tableLayouts.FIXED}
+            />
+        );
+
+        expect(component.find(".grid--fixed").exists()).toBeTruthy();
+    });
+
+    it("does not render with fixed class if layout is not fixed", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+            />
+        );
+
+        expect(component.find(".grid--fixed").exists()).toBeFalsy();
+    });
+
+    it("renders correct column with center alignment class", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                columnStyling={[
+                    {
+                        alignment: columnAlignments.CENTER
+                    }
+                ]}
+            />
+        );
+
+        const [firstHeader, secondHeader] = component.find("th");
+
+        expect(firstHeader.props.className).toContain("grid__column--alignment-center");
+        expect(secondHeader.props.className).not.toContain("grid__column--alignment-center");
+    });
+
+    it("renders correct column with ellipsis overflow class", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                columnStyling={[
+                    {
+                        contentOverflow: overflowOptions.ELLIPSIS
+                    }
+                ]}
+            />
+        );
+
+        const [firstHeader, secondHeader] = component.find("th");
+
+        expect(firstHeader.props.className).toContain("grid__column--overflow-ellipsis");
+        expect(secondHeader.props.className).not.toContain("grid__column--overflow-ellipsis");
+    });
+
+    it("renders with column width if width is passed in", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                columnStyling={[
+                    {
+                        width: "50px"
+                    }
+                ]}
+            />
+        );
+
+        const [firstHeader, secondHeader] = component.find("th");
+
+        expect(firstHeader.props.style.width).toEqual("50px");
+        expect(secondHeader.props.style.width).not.toEqual("50px");
+
+        const [firstCell, secondCell] = component.find("td");
+
+        expect(firstCell.props.style.width).toEqual("50px");
+        expect(secondCell.props.style.width).not.toEqual("50px");
+    });
+
+    it("renders with column max width if width is passed in", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                columnStyling={[
+                    {
+                        maxWidth: "50px"
+                    }
+                ]}
+            />
+        );
+
+        const [firstHeader, secondHeader] = component.find("th");
+
+        expect(firstHeader.props.style.maxWidth).toEqual("50px");
+        expect(secondHeader.props.style.maxWidth).not.toEqual("50px");
+
+        const [firstCell, secondCell] = component.find("td");
+
+        expect(firstCell.props.style.maxWidth).toEqual("50px");
+        expect(secondCell.props.style.maxWidth).not.toEqual("50px");
+    });
+
+    it("renders with column max width if width is passed in", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                columnStyling={[
+                    {
+                        minWidth: "50px"
+                    }
+                ]}
+            />
+        );
+
+        const [firstHeader, secondHeader] = component.find("th");
+
+        expect(firstHeader.props.style.minWidth).toEqual("50px");
+        expect(secondHeader.props.style.minWidth).not.toEqual("50px");
+
+        const [firstCell, secondCell] = component.find("td");
+
+        expect(firstCell.props.style.minWidth).toEqual("50px");
+        expect(secondCell.props.style.minWidth).not.toEqual("50px");
     });
 });
 

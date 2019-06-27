@@ -1,6 +1,9 @@
 import React from "react";
 import FormLabel from "../../../components/forms/FormLabel";
-import Table from "../../../components/tables/Table";
+import Table, {
+    columnAlignments,
+    overflowOptions,
+} from "../../../components/tables/Table";
 import InputRow from "../../../components/layout/InputRow";
 
 import HR from "ui-library/lib/components/general/HR";
@@ -59,7 +62,8 @@ const TableDemo = () => {
                 <FormLabel className="detached" value="<Table> with headData and bodyData arrays." />
                 <Table
                     headData={mockData.head}
-                    bodyData={mockData.body} />
+                    bodyData={mockData.body}
+                />
             </InputRow>
             <InputRow>
                 <FormLabel className="detached" value="<Table> with data array of objects and vertical align middle." />
@@ -84,6 +88,24 @@ const TableDemo = () => {
             <InputRow>
                 <FormLabel className="detached" value="<Table> with no header." />
                 <Table
+                    bodyData={mockData.body}
+                />
+            </InputRow>
+            <InputRow>
+                <FormLabel className="detached" value="<Table> with column styling and a full width." />
+                <Table
+                    columnStyling={[
+                        {},
+                        {
+                            alignment: columnAlignments.CENTER,
+                            width: "400px"
+                        },
+                        {
+                            contentOverflow: overflowOptions.ELLIPSIS,
+                            width: "40px"
+                        }
+                    ]}
+                    headData={mockData.head}
                     bodyData={mockData.body}
                 />
             </InputRow>
