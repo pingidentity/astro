@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  *      Logo image src
  *
  */
-const Logo = ({ src, 'data-id': dataId, }) => (
+const Logo = ({ src, 'data-id': dataId }) => (
     <div className="org-logo" data-id={dataId}>
         <img className="org-logo__image" src={src} alt="Company Logo" />
     </div>
