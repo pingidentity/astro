@@ -38163,6 +38163,16 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
         printer.add_raw_token(raw_token);
         return;
 <<<<<<< HEAD
+      }
+
+      pre = indentation + matched[1] + '\n';
+      text = matched[4];
+      if (matched[5]) {
+        post = indentation + matched[5];
+      }
+
+=======
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> master
@@ -38174,6 +38184,7 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
         post = indentation + matched[5];
       }
 
+>>>>>>> master
       // if there is at least one empty line at the end of this text, strip it
       // we'll be adding one back after the text but before the containing tag.
       text = text.replace(/\n[ \t]*$/, '');
@@ -38185,6 +38196,40 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
         if (matched) {
           raw_token.whitespace_before = matched[0];
         }
+<<<<<<< HEAD
+      }
+    }
+
+    if (text) {
+      if (_beautifier) {
+
+        // call the Beautifier if avaliable
+        var Child_options = function() {
+          this.eol = '\n';
+        };
+        Child_options.prototype = this._options.raw_options;
+        var child_options = new Child_options();
+        text = _beautifier(indentation + text, child_options);
+      } else {
+        // simply indent the string otherwise
+        var white = raw_token.whitespace_before;
+        if (white) {
+          text = text.replace(new RegExp('\n(' + white + ')?', 'g'), '\n');
+        }
+
+        text = indentation + text.replace(/\n/g, '\n' + indentation);
+      }
+    }
+
+    if (pre) {
+      if (!text) {
+        text = pre + post;
+      } else {
+        text = pre + text + '\n' + post;
+      }
+    }
+
+=======
 <<<<<<< HEAD
       }
     }
@@ -38299,6 +38344,7 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
       }
     }
 
+>>>>>>> master
 >>>>>>> master
 >>>>>>> master
     printer.print_newline(false);
@@ -41972,13 +42018,32 @@ var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
 var _classnames = _interopRequireDefault(__webpack_require__(5));
 
+/**
+ * @class PasswordInput
+ * @desc Hidden input field
+ *
+ * @param {string} [classname]
+ *      Sets the Input class
+ * @param {string} [id]
+ *      Sets the id prop of the Input
+ * @param {string} [data-id]
+ *      To define the base "data-id" value for the input
+ * @param {string} [placeholder]
+ *      Sets the Input placeholder
+ * @param {bool} [error]
+ *      Added error style to the input
+ * @param {bool} [success]
+ *      Added success style to the input
+ *
+ */
 var PasswordInput = function PasswordInput(_ref) {
   var placeholder = _ref.placeholder,
       id = _ref.id,
       className = _ref.className,
       error = _ref.error,
       success = _ref.success,
-      defaultValue = _ref.defaultValue;
+      defaultValue = _ref.defaultValue,
+      dataId = _ref['data-id'];
   var classNames = (0, _classnames.default)('text-input', className, {
     'text-input--error': error,
     'text-input--success': success
@@ -41989,7 +42054,8 @@ var PasswordInput = function PasswordInput(_ref) {
     name: id,
     placeholder: placeholder,
     type: "password",
-    defaultValue: defaultValue
+    defaultValue: defaultValue,
+    "data-id": dataId
   });
 };
 
@@ -41998,7 +42064,11 @@ PasswordInput.propTypes = {
   id: _propTypes.default.string,
   error: _propTypes.default.bool,
   success: _propTypes.default.bool,
-  defaultValue: _propTypes.default.string
+  defaultValue: _propTypes.default.string,
+  'data-id': _propTypes.default.string
+};
+PasswordInput.defaultProps = {
+  'data-id': 'password-input'
 };
 var _default = PasswordInput;
 exports.default = _default;
@@ -66789,11 +66859,14 @@ var toIObject = __webpack_require__(48);
 var toPrimitive = __webpack_require__(115);
 var createDesc = __webpack_require__(85);
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 var _create = __webpack_require__(123);
 var gOPNExt = __webpack_require__(575);
 var $GOPD = __webpack_require__(182);
 var $GOPS = __webpack_require__(121);
 =======
+>>>>>>> master
 var _create = __webpack_require__(122);
 var gOPNExt = __webpack_require__(575);
 var $GOPD = __webpack_require__(182);
