@@ -2430,6 +2430,7 @@ input[type=file] {
         @include flexbox-direction(row);
         align-items: flex-end;
     }
+
     &__accessories {
         display: inline-block;
         line-height: $default-input-height;
@@ -2439,8 +2440,17 @@ input[type=file] {
         }
     }
 
+    &--top > *,
+    &--top > label {
+        vertical-align: top;
+    }
+
+    &--top &__accessories {
+        margin-top: 22px;
+    }
+
     position: relative;
-    margin: 0 0 25px;
+    margin: 0 0 $spacing-lg;
 
     .input-text,
     .input-textarea,

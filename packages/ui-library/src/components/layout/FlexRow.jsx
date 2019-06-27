@@ -85,7 +85,7 @@ const getJustifyClass = justify => {
 };
 
 const getSpacedChildren = (children, spacing) => React.Children.map(children, (child, idx) =>
-    idx === children.length - 1
+    idx === React.Children.count(children) - 1
         ? child
         : (
             <Padding

@@ -12,6 +12,8 @@ import classnames from "classnames";
  *      css parameter
  * @param {boolean} [strict]
  *      adds flexbox styling to row
+ * @param {string} [align=rowAlignments.BOTTOM]
+ *      whether to align elements to the top or the bottom
  * @example
 <InputRow>
     <FormTextField
@@ -29,17 +31,31 @@ import classnames from "classnames";
 </InputRow>
  */
 
+const rowAlignments = {
+    TOP: "top",
+    BOTTOM: "bottom",
+};
+
 const InputRow = ({
+    alignment,
     children,
     className,
     "data-id": dataId,
     strict
 }) => {
+    const classNames = classnames(
+        "input-row input-row--line-height",
+        className,
+        {
+            "input-row--strict": strict,
+            "input-row--top": alignment === rowAlignments.TOP,
+        }
+    );
 
     return (
         <div
             data-id={dataId}
-            className={classnames("input-row input-row--line-height", className, { "input-row--strict": strict })}
+            className={classNames}
         >
             {children}
         </div>
@@ -72,6 +88,7 @@ InputRow.InputRowAccessories = ({
 }) => <div className="input-row__accessories" data-id={dataId}>{children}</div>;
 
 InputRow.propTypes = {
+    alignment: PropTypes.oneOf(Object.values(rowAlignments)),
     "data-id": PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
@@ -79,7 +96,10 @@ InputRow.propTypes = {
 };
 
 InputRow.defaultProps = {
+    alignment: rowAlignments.BOTTOM,
     "data-id": "input-row"
 };
+
+InputRow.rowAlignments = rowAlignments;
 
 export default InputRow;

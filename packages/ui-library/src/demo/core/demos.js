@@ -1113,6 +1113,18 @@ module.exports = [
                             type: "version"
                         }
                     },
+                    {
+                        label: "Dynamic Filter",
+                        demo: require("../components/filters/DynamicFilterDemo"),
+                        pathToDoc: "components/filters/DynamicFilter.jsx",
+                        pathToSource: "components_filters_DynamicFilter.jsx.html",
+                        pathToDemoSource: "demo_components_filters_DynamicFilterDemo.jsx.html",
+                        status: {
+                            message: "Co-development: This component is production ready, but the API may change to" +
+                                " reflect requirements.",
+                            type: "version"
+                        }
+                    },
                 ]
             }
         ]
