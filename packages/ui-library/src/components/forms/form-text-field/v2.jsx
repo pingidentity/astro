@@ -233,10 +233,7 @@ class Stateless extends React.Component {
         onToggleReveal: PropTypes.func,
         onUndo: PropTypes.func,
         placeholder: PropTypes.string,
-        type: PropTypes.string, value: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
-        ]),
+        type: PropTypes.string,
         readOnly: PropTypes.bool,
         required: PropTypes.bool,
         reveal: PropTypes.bool,
@@ -244,6 +241,7 @@ class Stateless extends React.Component {
         showSave: PropTypes.bool,
         showUndo: PropTypes.bool,
         size: PropTypes.number,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOf(InputWidthProptypes),
         withArrow: PropTypes.bool
     };
@@ -497,7 +495,7 @@ class Stateless extends React.Component {
                         type={inputType}
                         maxLength={this.props.maxLength || this.props.size}
                         name={this.props.name}
-                        value={this.props.value || ""}
+                        value={this.props.value}
                         autoComplete={this._getAutoComplete()}
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}

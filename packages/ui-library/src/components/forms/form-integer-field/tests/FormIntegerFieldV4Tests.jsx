@@ -363,7 +363,6 @@ describe("FormIntegerField v4", function () {
 
     it("validation returns false for none number", function () {
         expect(FormIntegerField.isValid("r")).toBe(false);
-        expect(FormIntegerField.isValid("-")).toBe(false);
     });
 
     it("validation returns false for non-integer number", function () {

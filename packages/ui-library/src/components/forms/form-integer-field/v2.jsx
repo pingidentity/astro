@@ -12,11 +12,15 @@ import { cannonballProgressivelyStatefulWarning } from "../../../util/Deprecatio
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 const isValid = (value, enforceRange, min, max) => {
+    const options = { allow_leading_zeroes: false }; //eslint-disable-line camelcase
+
     if (value === "") {
         return true;
     }
 
-    const options = { allow_leading_zeroes: false }; //eslint-disable-line camelcase
+    if (value.toString().split("")[0] === "-" && value.toString().length === 1) {
+        return true;
+    }
 
     if (enforceRange) {
         return isInt(value.toString(), { ...options, min: min, max: max });
@@ -417,6 +421,7 @@ class Stateless extends Component {
             outOfRangeErrorMessage,
             errorMessage,
             messageType,
+            value,
             ...props
         } = this.props;
 
@@ -445,6 +450,8 @@ class Stateless extends Component {
 
         const showRangeMessage = !errorMessage && (this._rangeErrorShowing() || this.state.showRangeWarning);
 
+        const stringifiedVal = value.toString();
+
         return (
             <div onKeyDown={this._handleKeyDown} className="form-integer-container input-integer">
                 <FormTextFieldStateless
@@ -452,6 +459,7 @@ class Stateless extends Component {
                     onBlur={this._handleBlur}
                     onUndo={this._handleUndo}
                     {...props}
+                    value={stringifiedVal}
                     ref="formTextField"
                     data-id={dataId + "-text-field"}
                     name={props.name}
@@ -517,6 +525,7 @@ class Stateful extends Component {
             return;
         } else {
             let intValue = value === "" ? value : parseInt(value);
+
 
             this.setState({
                 value: intValue,
@@ -643,6 +652,16 @@ FormIntegerFieldV2.validateInt = (value, current, { enforceRange, max }) => {
     if (!isValid(value, enforceRange, null, max)) {
         return value.substring(0, value.length - 1);
     } else {
+        if (value.toString().split("")[0] === "-") {
+            if (value.toString().length > 1) {
+                if (isInt(value.toString().split("").shift())) {
+
+                    return value;
+                }
+            } else {
+                return value;
+            }
+        }
         const intValue = value === "" ? value : parseInt(value);
         return intValue;
     }
