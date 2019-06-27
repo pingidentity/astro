@@ -10502,11 +10502,25 @@ var _react = _interopRequireDefault(__webpack_require__(2));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
+/**
+ * @class Page
+ * @desc Page container
+ *
+ * @param {node} [children]
+ *      Buttons to display in the set
+ * @param {node} [footer]
+ *      Footer content
+ * @param {string} [data-id]
+ *      Sets a data-id property on the tooltip element to be used as a test hook
+ *
+ */
 var Page = function Page(_ref) {
   var children = _ref.children,
-      footer = _ref.footer;
+      footer = _ref.footer,
+      dataId = _ref['data-id'];
   return _react.default.createElement("div", {
-    className: "page brand-background"
+    className: "page brand-background",
+    "data-id": dataId
   }, _react.default.createElement("div", {
     className: "page__content"
   }, children), footer && _react.default.createElement("div", {
@@ -10515,7 +10529,11 @@ var Page = function Page(_ref) {
 };
 
 Page.propTypes = {
-  footer: _propTypes.default.node
+  footer: _propTypes.default.node,
+  'data-id': _propTypes.default.string
+};
+Page.defaultProps = {
+  'data-id': 'page'
 };
 var _default = Page;
 exports.default = _default;
@@ -11836,7 +11854,6 @@ module.exports = __webpack_require__.p + "success.svg";
 /* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 "use strict";
 
 
@@ -11890,15 +11907,12 @@ var _default = FloatLabel;
 exports.default = _default;
 module.exports = exports.default;
 module.exports.default = exports.default;
-=======
-module.exports = __webpack_require__(333);
->>>>>>> master
 
 /***/ }),
 /* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(332);
+module.exports = __webpack_require__(333);
 
 /***/ }),
 /* 167 */
@@ -38103,8 +38117,62 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
       if (!matched) {
         printer.add_raw_token(raw_token);
         return;
+<<<<<<< HEAD
       }
 
+      pre = indentation + matched[1] + '\n';
+      text = matched[4];
+      if (matched[5]) {
+        post = indentation + matched[5];
+      }
+
+      // if there is at least one empty line at the end of this text, strip it
+      // we'll be adding one back after the text but before the containing tag.
+      text = text.replace(/\n[ \t]*$/, '');
+
+      if (matched[2] || matched[3].indexOf('\n') !== -1) {
+        // if the first line of the non-comment text has spaces
+        // use that as the basis for indenting in null case.
+        matched = matched[3].match(/[ \t]+$/);
+        if (matched) {
+          raw_token.whitespace_before = matched[0];
+        }
+=======
+>>>>>>> master
+      }
+    }
+
+    if (text) {
+      if (_beautifier) {
+
+        // call the Beautifier if avaliable
+        var Child_options = function() {
+          this.eol = '\n';
+        };
+        Child_options.prototype = this._options.raw_options;
+        var child_options = new Child_options();
+        text = _beautifier(indentation + text, child_options);
+      } else {
+        // simply indent the string otherwise
+        var white = raw_token.whitespace_before;
+        if (white) {
+          text = text.replace(new RegExp('\n(' + white + ')?', 'g'), '\n');
+        }
+
+<<<<<<< HEAD
+        text = indentation + text.replace(/\n/g, '\n' + indentation);
+      }
+    }
+
+    if (pre) {
+      if (!text) {
+        text = pre + post;
+      } else {
+        text = pre + text + '\n' + post;
+      }
+    }
+
+=======
       pre = indentation + matched[1] + '\n';
       text = matched[4];
       if (matched[5]) {
@@ -38154,6 +38222,7 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
       }
     }
 
+>>>>>>> master
     printer.print_newline(false);
     if (text) {
       raw_token.text = text;
@@ -41910,35 +41979,26 @@ module.exports = __webpack_require__.p + "mobile.svg";
 /* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(149);
-
-=======
 module.exports = __webpack_require__.p + "incomplete.svg";
->>>>>>> master
 
 /***/ }),
 /* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(151);
+module.exports = __webpack_require__(149);
 
 
 /***/ }),
 /* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(150);
-=======
 module.exports = __webpack_require__(335);
 
 /***/ }),
 /* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(153);
->>>>>>> master
+module.exports = __webpack_require__(150);
 
 
 /***/ }),
@@ -66633,13 +66693,8 @@ var global = __webpack_require__(26);
 var has = __webpack_require__(33);
 var DESCRIPTORS = __webpack_require__(32);
 var $export = __webpack_require__(43);
-<<<<<<< HEAD
 var redefine = __webpack_require__(180);
-var META = __webpack_require__(571).KEY;
-=======
-var redefine = __webpack_require__(179);
 var META = __webpack_require__(572).KEY;
->>>>>>> master
 var $fails = __webpack_require__(47);
 var shared = __webpack_require__(118);
 var setToStringTag = __webpack_require__(123);
@@ -66656,13 +66711,8 @@ var toIObject = __webpack_require__(48);
 var toPrimitive = __webpack_require__(114);
 var createDesc = __webpack_require__(85);
 var _create = __webpack_require__(122);
-<<<<<<< HEAD
-var gOPNExt = __webpack_require__(574);
-var $GOPD = __webpack_require__(182);
-=======
 var gOPNExt = __webpack_require__(575);
-var $GOPD = __webpack_require__(181);
->>>>>>> master
+var $GOPD = __webpack_require__(182);
 var $GOPS = __webpack_require__(120);
 var $DP = __webpack_require__(45);
 var $keys = __webpack_require__(66);
@@ -68934,13 +68984,8 @@ if (process.env.NODE_ENV !== "production") {
 var React = __webpack_require__(2);
 var _assign = __webpack_require__(28);
 var checkPropTypes = __webpack_require__(71);
-<<<<<<< HEAD
 var scheduler = __webpack_require__(183);
-var tracing = __webpack_require__(603);
-=======
-var scheduler = __webpack_require__(182);
 var tracing = __webpack_require__(604);
->>>>>>> master
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -90916,13 +90961,8 @@ $({ global: true, forced: parseInt != parseIntImplementation }, {
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(9);
-<<<<<<< HEAD
-var internalStringTrim = __webpack_require__(613);
-var whitespaces = __webpack_require__(184);
-=======
 var internalStringTrim = __webpack_require__(614);
-var whitespaces = __webpack_require__(183);
->>>>>>> master
+var whitespaces = __webpack_require__(184);
 
 var nativeParseInt = global.parseInt;
 var hex = /^[+-]?0[Xx]/;
