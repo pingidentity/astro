@@ -208,10 +208,10 @@
         <h2 id="Dropdown">Dropdown</h2>
         <div class="component-demo">
             <div class="component-demo__preview">
-                <div class="dropdown"><select
-                        class="dropdown__select">
-                        <option disabled="" value="">Select
-                            one</option>
+                <div class="dropdown" data-id="dropdown">
+                    <select class="dropdown__select">
+                        <option selected="" disabled=""
+                            value="">Select one</option>
                         <option value="First Value">First
                             Value</option>
                         <option value="Second Value">Second
@@ -225,15 +225,17 @@
             <div class="component-demo__markup">
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">React</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">Dropdown</span>
+                    <pre><span class="hljs-tag">&lt;
   <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
   <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
  /&gt;</span></pre>
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">data-id</span>=<span class="hljs-string">"dropdown"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span>
+        <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">selected</span>=<span class="hljs-string">""</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one
+        <span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
@@ -246,12 +248,13 @@
         <p>When something is selected:</p>
         <div class="component-demo">
             <div class="component-demo__preview">
-                <div class="dropdown float-label"><select
+                <div class="dropdown float-label"
+                    data-id="dropdown"><select
                         id="float-label-dropdown"
                         name="float-label-dropdown"
                         class="dropdown__select float-label__input">
-                        <option disabled="" value="">Select
-                            one</option>
+                        <option selected="" disabled=""
+                            value="">Select one</option>
                         <option value="First Value">First
                             Value</option>
                         <option value="Second Value">Second
@@ -276,11 +279,12 @@
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span> <span class="hljs-attr">data-id</span>=<span class="hljs-string">"dropdown"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span>
         <span class="hljs-attr">id</span>=<span class="hljs-string">"float-label-dropdown"</span>
         <span class="hljs-attr">name</span>=<span class="hljs-string">"float-label-dropdown"</span>
         <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">selected</span>=<span class="hljs-string">""</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one
+        <span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
@@ -293,11 +297,12 @@
         <p>When nothing is selected:</p>
         <div class="component-demo">
             <div class="component-demo__preview">
-                <div class="dropdown float-label"><select
-                        id="dropdown" name="dropdown"
+                <div class="dropdown float-label"
+                    data-id="dropdown"><select id="dropdown"
+                        name="dropdown"
                         class="dropdown__select float-label__input placeholder-shown">
-                        <option disabled="" value="">Select
-                            one</option>
+                        <option selected="" disabled=""
+                            value="">Select one</option>
                         <option value="First Value">First
                             Value</option>
                         <option value="Second Value">Second
@@ -322,10 +327,11 @@
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span>
-        <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span> <span class="hljs-attr">data-id</span>=<span class="hljs-string">"dropdown"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span>
         <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input placeholder-shown"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">selected</span>=<span class="hljs-string">""</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one
+        <span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
@@ -340,8 +346,9 @@
             class depending on whether there’s a value.</p>
         <div class="component-demo">
             <div class="component-demo__preview">
-                <div class="dropdown float-label"><select
-                        id="dropdown" name="dropdown"
+                <div class="dropdown float-label"
+                    data-id="dropdown"><select id="dropdown"
+                        name="dropdown"
                         class="dropdown__select float-label__input placeholder-shown">
                         <option selected="" disabled=""
                             value="">Select one</option>
@@ -368,8 +375,8 @@
                 </div>
                 <div class="component-demo__code"><span
                         class="component-demo__preview-label">HTML</span>
-                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span>
-        <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span>
+                    <pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span> <span class="hljs-attr">data-id</span>=<span class="hljs-string">"dropdown"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span>
         <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input placeholder-shown"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">selected</span>=<span class="hljs-string">""</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one
         <span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
