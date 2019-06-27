@@ -832,7 +832,7 @@ button.tile-button--side-icon {
             color: $color-active-blue;
 
             &:hover {
-                font-weight: 800;
+                text-shadow: 0 0 0.5px $color-active-blue;
                 border-color: $color-white;
                 box-shadow: 0 0 3px #0e4054;
             }
