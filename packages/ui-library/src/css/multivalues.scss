@@ -1,11 +1,16 @@
 .input-multivalues {
+    @include text-value;
     position: relative;
     display: inline-block;
-    width: 350px;
-    font-size: 16px;
+    width: 390px;
     text-transform: none;
     cursor: text;
-    margin: 0;
+    vertical-align: bottom;
+
+    &--auto-width {
+        width: auto;
+        max-width: 390px;
+    }
 
     .clear {
         font-family: $icon-font;
@@ -23,7 +28,7 @@
         outline: none;
         overflow-y: auto;
         background-color: $color-input-fill;
-        padding: 12px;
+        padding: $spacing-xs + 1px $spacing-sm 1px $spacing-sm;
         width: 100%;
         height: 200px;
         border: 1px solid $color-input-fill;
@@ -34,6 +39,7 @@
 
         &--auto-height {
             height: auto;
+            min-height: 40px;
         }
 
         &:hover {
@@ -48,13 +54,13 @@
             color: $color-midnight;
             max-width: 100%;
             display: inline-block;
-            font-size: 0.9em;
-            margin: 0 5px 5px 0;
+            margin: 0 $spacing-xs $spacing-xs 0;
             vertical-align: top;
-            padding: 10px 30px 10px 10px;
+            padding: $spacing-xs 30px $spacing-xs $spacing-sm;
             text-transform: none;
             overflow: hidden;
             text-overflow: ellipsis;
+            @include text-value;
 
             @include box-sizing(border-box);
             @include border-radius(2px);
@@ -62,7 +68,7 @@
             .delete {
                 font-size: 11px;
                 position: absolute;
-                top: 11px;
+                top: 5px;
                 right: 11px;
 
                 &:before {
@@ -73,6 +79,7 @@
                 }
                 &:hover {
                     text-decoration: none;
+                    color: $color-active-blue;
                 }
             }
             span {
@@ -141,7 +148,7 @@
                 display: inline-block;
                 font-family: inherit;
                 font-size: inherit;
-                height: 34px;
+                height: 26px;
                 margin: 0;
                 outline: none;
                 padding: 0;
@@ -175,4 +182,9 @@
     &--focused .entries:hover {
         border-color: $color-active-blue;
     }
+}
+
+.modifier_light-inputs .input-multivalues .entries .entry {
+    border-color: $color-neutral-95;
+    background-color: $color-neutral-95;
 }

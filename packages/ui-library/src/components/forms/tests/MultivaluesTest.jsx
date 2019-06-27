@@ -516,6 +516,43 @@ describe("Multivalues", function () {
         expect(wrapper.state().listOpen).toBeTruthy();
     });
 
+    it("supports a list of options without labels", function() {
+        const wrapper = getWrapper({
+            options: [
+                { value: "uno" },
+                { value: "two" },
+            ]
+        });
+
+        wrapper.setState({ listOpen: true });
+
+        expect(wrapper.find("li[data-id='option-item']").children().length).toBe(2);
+    });
+
+    it("doesn't show selected entries as options", function() {
+        const wrapper = getWrapper({
+            options: [
+                {
+                    value: "first",
+                    label: "First",
+                },
+                {
+                    value: "second",
+                    label: "Second",
+                },
+                {
+                    value: "third",
+                    label: "Third",
+                },
+            ],
+            entries: ["second"],
+        });
+
+        wrapper.setState({ listOpen: true });
+
+        expect(wrapper.find("li[data-id='option-item']").children().length).toBe(2);
+    });
+
     it("calls onValueChange when editing the draft if the includeDraftInEntries prop is set", function() {
         const valueChangeCallback = jest.fn();
         const wrapper = getWrapper({ options, onValueChange: valueChangeCallback, includeDraftInEntries: true });

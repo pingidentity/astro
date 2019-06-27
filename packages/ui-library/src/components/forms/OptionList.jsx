@@ -117,7 +117,8 @@ class OptionItem extends React.Component {
         const {
             "data-id": dataId,
             heading,
-            label,
+            value,
+            label = value,
             helpHintText,
             iconName,
             selected,

@@ -115,6 +115,8 @@ class MultivaluesOption extends Component {
  * @param {Multivalues~onNewValue} [onNewValue]
  *     Callback triggered and return a boolean when a new value is completed typing.
  *     Default keyCode to detect completed typing are 13, 188, 9 and 32
+ * @param {function} [onBlur]
+ *     Blur callback
  * @param {boolean} [stacked=false]
  *     If true, each value occupies it's own line.
  * @param {boolean} [required=false]
@@ -125,6 +127,8 @@ class MultivaluesOption extends Component {
  *     An error message to be displayed below the component body.
  * @param {boolean} [autoHeight=false]
  *     Is only as high as its entries
+ * @param {boolean} [autoWidth=false]
+ *     Is only as wide as it needs to be
  * @param {array.OptionList~Option} [options]
  *     An array of value-label pairs. When supplied, the behavior changes a bit.
  *     - The entries prop will be a list of values
@@ -171,6 +175,7 @@ class Multivalues extends Component {
         name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
+        onBlur: PropTypes.func,
         options: PropTypes.arrayOf(
             PropTypes.shape({
                 heading: PropTypes.bool,
@@ -194,10 +199,12 @@ class Multivalues extends Component {
         required: false,
         autoFocus: false,
         autoHeight: false,
+        autoWidth: false,
         onNewValue: (keyCode, value) => (
             value !== "" && (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode) || isSpace(keyCode))
         ),
         onValueChange: _.noop,
+        onBlur: _.noop,
         includeDraftInEntries: false,
     };
 
@@ -218,7 +225,7 @@ class Multivalues extends Component {
 
     state = {
         validValue: true,
-        listOpen: false,
+        listOpen: this.props.autoFocus,
         draft: "",
         highlightedOption: -1,
         focused: false,
@@ -259,7 +266,7 @@ class Multivalues extends Component {
      * Manage focused state
      * @private
      */
-    _handleBlur = () => {
+    _handleBlur = (e) => {
         this.setState({ focused: false });
 
         const draft = this._getDraft();
@@ -268,6 +275,7 @@ class Multivalues extends Component {
             this._addInputValue(draft);
         }
         this._hideList();
+        this.props.onBlur(e);
     };
 
     /**
@@ -488,12 +496,12 @@ class Multivalues extends Component {
     * @private
     */
     _getFilteredOptions = () => {
-        const { options } = this.props;
+        const { options, entries } = this.props;
         const { draft } = this.state;
 
         return options
             ? options.filter(
-                ({ label }) => containsString(label, draft)
+                ({ value, label = value }) => (containsString(label, draft) && !entries.includes(value))
             )
             : [];
     };
@@ -502,6 +510,7 @@ class Multivalues extends Component {
         const {
             autoFocus,
             autoHeight,
+            autoWidth,
             className: classNameProp,
             errorMessage,
             label,
@@ -528,6 +537,7 @@ class Multivalues extends Component {
             "value-entered": (entries.length !== 0),
             stacked: stacked,
             "input-multivalues--focused": focused,
+            "input-multivalues--auto-width": autoWidth,
         });
 
         const entryClassNames = classnames(
@@ -550,7 +560,7 @@ class Multivalues extends Component {
             return (
                 <MultivaluesOption
                     id={index}
-                    label={entry.label || entry}
+                    label={entry.label || entry.value || entry}
                     onChange={onValueChange}
                     onDelete = {this._handleDelete}
                     key={index}
@@ -599,6 +609,7 @@ class Multivalues extends Component {
                         getReference={this._getTrigger}
                         matchWidth
                         noGPUAcceleration
+                        placement="bottom-start"
                     >
                         <OptionList
                             data-id="multivalue-options"

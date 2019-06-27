@@ -156,6 +156,7 @@ class MultivaluesDemo extends React.Component {
                         onValueChange={this._onOptionsChange}
                         options={userOptions}
                         autoHeight
+                        autoWidth
                     />
                 </InputRow>
 
