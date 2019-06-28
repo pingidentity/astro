@@ -14,6 +14,11 @@ import PageSection from "../components/layout/PageSection";
 import FileInput from "../components/forms/FileInput";
 import Text from "../components/general/Text";
 
+/**
+* @name MetadataImport
+* @desc A metadata import demo
+*/
+
 export default class MetadataImport extends Component {
     state = {
         activeStep: 0,
