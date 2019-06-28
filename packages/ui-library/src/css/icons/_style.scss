@@ -583,6 +583,11 @@
     content: $icon-robot;
   }
 }
+.icon-saml {
+  &:before {
+    content: $icon-saml;
+  }
+}
 .icon-search {
   &:before {
     content: $icon-search;
