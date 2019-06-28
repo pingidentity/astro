@@ -1295,7 +1295,7 @@ module.exports = [
                     {
                         label: "Custom Branding",
                         demo: require("../../templates/custom-branding/CustomBranding"),
-                        pathToSource: "templates_custom-branding/CustomBranding.jsx.html",
+                        pathToSource: "templates_custom-branding_CustomBranding.jsx.html",
                         fullscreen: true,
                         icon: "details"
                     },
