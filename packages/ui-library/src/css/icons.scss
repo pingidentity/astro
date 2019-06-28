@@ -65,19 +65,19 @@ a.icon-clear {
     &__graphic {
         padding: 0 $spacing-sm 0 0;
         &--size-sm {
-            font-size: 100%;
+            font-size: 14px;
         }
         &--size-md {
-            font-size: 150%;
+            font-size: 21px;
         }
         &--size-lg {
-            font-size: 200%;
+            font-size: 28px;
         }
         &--size-xl {
-            font-size: 250%;
+            font-size: 35px;
         }
         &--size-xxl {
-            font-size: 300%;
+            font-size: 42px;
         }
     }
 }
