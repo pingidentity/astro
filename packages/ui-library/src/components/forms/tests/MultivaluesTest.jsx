@@ -574,4 +574,31 @@ describe("Multivalues", function () {
         expect(valueChangeCallback.mock.calls.length).toBe(1);
     });
 
+    it("doesn't add a blank entry when pressing escape with includeDraftInEntries", function() {
+        const valueChangeCallback = jest.fn();
+        const wrapper = getWrapper({
+            entries: ["one", "two", ""],
+            onValueChange: valueChangeCallback,
+            includeDraftInEntries: true
+        });
+        const textInput = wrapper.find("[data-id='value-entry']");
+        textInput.simulate("keyDown", { keyCode: KeyCodes.ESC });
+
+        expect(valueChangeCallback.mock.calls[0][0].length).toBe(3);
+    });
+
+    it("doesn't add a blank entry when clearing draft with includeDraftInEntries", function() {
+        const valueChangeCallback = jest.fn();
+        const wrapper = getWrapper({
+            entries: ["one", "two", ""],
+            onValueChange: valueChangeCallback,
+            includeDraftInEntries: true
+        });
+        wrapper.setState({ draft: "" });
+        const textInput = wrapper.find("[data-id='value-entry']");
+        textInput.simulate("change", { target: { value: "three" } });
+
+        expect(valueChangeCallback.mock.calls[0][0].length).toBe(3);
+    });
+
 });

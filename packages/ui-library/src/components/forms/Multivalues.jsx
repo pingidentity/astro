@@ -232,9 +232,13 @@ class Multivalues extends Component {
         activeEntry: -1,
     };
 
-    _getCommittedEntries = () => (this.props.includeDraftInEntries && this.state.draft)
-        ? this.props.entries.slice(0, -1)
-        : this.props.entries;
+    _getCommittedEntries = () => {
+        const { includeDraftInEntries, entries } = this.props;
+
+        return (includeDraftInEntries && (this.state.draft === entries[entries.length - 1]))
+            ? entries.slice(0, -1)
+            : entries;
+    }
 
     _getDraft = () => (this.props.includeDraftInEntries && this.state.draft)
         ? this.props.entries[this.props.entries.length - 1]
