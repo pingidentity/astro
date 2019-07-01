@@ -1502,10 +1502,25 @@ var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
 var _classnames = _interopRequireDefault(__webpack_require__(5));
 
+/**
+ * @class TextBlock
+ * @desc Display a block of text
+ *
+ * @param {node} [children]
+ *      Buttons to display in the set
+ * @param {string} [data-id]
+ *      Sets a data-id property on the TextBlock element to be used as a test hook
+ * @param {string} [size]
+ *      Set the size of the TextBlock (small|small-right|large)
+ * @param {string} [spacing]
+ *      Set the spacing of the TextBlock (xxlarge)
+ *
+ */
 var TextBlock = function TextBlock(_ref) {
   var children = _ref.children,
       size = _ref.size,
-      spacing = _ref.spacing;
+      spacing = _ref.spacing,
+      dataId = _ref['data-id'];
   var classNames = (0, _classnames.default)('text-block', {
     'text-block--small': size === 'small',
     'text-block--large': size === 'large',
@@ -1515,7 +1530,8 @@ var TextBlock = function TextBlock(_ref) {
   var Outer = typeof Children === 'string' ? 'p' : 'div';
   var Inner = typeof Children === 'string' ? 'span' : 'div';
   return _react.default.createElement(Outer, {
-    className: classNames
+    className: classNames,
+    "data-id": dataId
   }, _react.default.createElement(Inner, {
     className: "text-block__text"
   }, children));
@@ -1523,7 +1539,11 @@ var TextBlock = function TextBlock(_ref) {
 
 TextBlock.propTypes = {
   size: _propTypes.default.oneOf(['small', 'large', 'small-right']),
-  spacing: _propTypes.default.oneOf(['xxlarge'])
+  spacing: _propTypes.default.oneOf(['xxlarge']),
+  'data-id': _propTypes.default.string
+};
+TextBlock.defaultProps = {
+  'data-id': 'textblock'
 };
 var _default = TextBlock;
 exports.default = _default;
@@ -2056,6 +2076,7 @@ module.exports.default = exports.default;
 
 /***/ }),
 /* 59 */
+<<<<<<< HEAD
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2156,6 +2177,8 @@ module.exports.default = exports.default;
 
 /***/ }),
 /* 61 */
+=======
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
