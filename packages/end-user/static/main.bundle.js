@@ -2136,6 +2136,9 @@ module.exports.default = exports.default;
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2236,6 +2239,8 @@ module.exports.default = exports.default;
 
 /***/ }),
 /* 61 */
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2685,6 +2690,7 @@ module.exports.default = exports.default;
 /* 61 */
 =======
 >>>>>>> master
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2797,7 +2803,8 @@ var PStatefulModalMenu = (0, _StateContainer.inStateContainer)([{
     }
   }]
 }])(StatelessModalMenu);
-/**denu
+/**
+ * @class ModalMenu
  * @desc Display a menu with a list of selections
  *
  * @param {string} [options]
