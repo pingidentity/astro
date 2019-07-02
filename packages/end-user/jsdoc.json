@@ -1,0 +1,32 @@
+{
+    "source": {
+        "include": [
+            "./src"
+        ],
+        "includePattern": ".+\\.(js|jsx)$",
+        "exclude": [
+            "./src/stateful/**"
+        ],
+        "excludePattern": ".+/tests/.+$"
+    },
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "opts": {
+        "destination": "./build-doc",
+        "readme": "./README.md",
+        "package": "./package.json",
+        "recurse": true
+    },
+    "plugins": [
+        "node_modules/jsdoc-babel",
+        "./node_modules/jsdoc-jsx"
+    ],
+    "babel": {
+        "extensions": [
+            "js",
+            "es6",
+            "jsx"
+        ]
+    }
+}

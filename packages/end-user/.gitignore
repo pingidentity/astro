@@ -13,3 +13,6 @@ dist/
 # Mac
 .DS_Store
 **/.DS_Store
+
+# JSDoc
+build-doc/
