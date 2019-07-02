@@ -1460,12 +1460,26 @@ Requirement.propTypes = {
   status: _propTypes.default.string,
   name: _propTypes.default.string
 };
+/**
+ * @class Requirements
+ * @desc Display a list of requirements
+ *
+ * @param {node} [children]
+ *      Elements to appear after the requirements
+ * @param {string} [data-id]
+ *      Sets a data-id property on the Requirements element to be used as a test hook
+ * @param {array} [requirements]
+ *      List of requirements [{status, name}]
+ *
+ */
 
 var Requirements = function Requirements(_ref2) {
   var requirements = _ref2.requirements,
-      children = _ref2.children;
+      children = _ref2.children,
+      dataId = _ref2['data-id'];
   return _react.default.createElement("div", {
-    className: "requirements"
+    className: "requirements",
+    "data-id": dataId
   }, (0, _map.default)(requirements).call(requirements, function (requirement) {
     return _react.default.createElement(Requirement, (0, _extends2.default)({
       key: requirement.name
@@ -1477,7 +1491,12 @@ Requirements.propTypes = {
   requirements: _propTypes.default.arrayOf(_propTypes.default.shape({
     name: _propTypes.default.string,
     status: _propTypes.default.string
-  }))
+  })),
+  'data-id': _propTypes.default.string
+};
+Requirements.defaultProps = {
+  'data-id': 'requirements',
+  requirements: []
 };
 var _default = Requirements;
 exports.default = _default;
@@ -2138,6 +2157,9 @@ module.exports.default = exports.default;
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2239,6 +2261,8 @@ module.exports.default = exports.default;
 
 /***/ }),
 /* 61 */
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 =======
@@ -2466,6 +2490,7 @@ module.exports.default = exports.default;
 /* 61 */
 =======
 =======
+>>>>>>> master
 >>>>>>> master
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {

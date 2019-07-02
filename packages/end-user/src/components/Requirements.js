@@ -18,8 +18,20 @@ Requirement.propTypes = {
     name: PropTypes.string,
 };
 
-const Requirements = ({ requirements, children }) => (
-    <div className="requirements">
+/**
+ * @class Requirements
+ * @desc Display a list of requirements
+ *
+ * @param {node} [children]
+ *      Elements to appear after the requirements
+ * @param {string} [data-id]
+ *      Sets a data-id property on the Requirements element to be used as a test hook
+ * @param {array} [requirements]
+ *      List of requirements [{status, name}]
+ *
+ */
+const Requirements = ({ requirements, children, 'data-id': dataId }) => (
+    <div className="requirements" data-id={dataId}>
         {requirements.map(requirement => <Requirement key={requirement.name} {...requirement} />)}
         {children}
     </div>
@@ -30,6 +42,12 @@ Requirements.propTypes = {
         name: PropTypes.string,
         status: PropTypes.string,
     })),
+    'data-id': PropTypes.string,
+};
+
+Requirements.defaultProps = {
+    'data-id': 'requirements',
+    requirements: [],
 };
 
 export default Requirements;
