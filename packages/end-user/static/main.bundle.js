@@ -773,23 +773,42 @@ var _react = _interopRequireDefault(__webpack_require__(2));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
+/**
+ * @class Heading
+ * @desc Heading text
+ *
+ * @param {node} [children]
+ *      Buttons to display in the set
+ * @param {string} [data-id]
+ *      Sets a data-id property on the Heading element to be used as a test hook
+ * @param {number} [level]
+ *      Size of the Heading text
+ *
+ */
 var Heading = function Heading(_ref) {
   var children = _ref.children,
-      level = _ref.level;
+      level = _ref.level,
+      dataId = _ref['data-id'];
 
   if (level === 4) {
     return _react.default.createElement("h4", {
-      className: "heading heading--4"
+      className: "heading heading--4",
+      "data-id": dataId
     }, children);
   }
 
   return _react.default.createElement("h1", {
-    className: "heading"
+    className: "heading",
+    "data-id": dataId
   }, children);
 };
 
 Heading.propTypes = {
-  level: _propTypes.default.number
+  level: _propTypes.default.number,
+  'data-id': _propTypes.default.string
+};
+Heading.defaultProps = {
+  'data-id': 'heading'
 };
 var _default = Heading;
 exports.default = _default;
@@ -2115,6 +2134,8 @@ module.exports.default = exports.default;
 /***/ }),
 /* 59 */
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2218,6 +2239,7 @@ module.exports.default = exports.default;
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+>>>>>>> master
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38712,6 +38734,7 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
         printer.add_raw_token(raw_token);
         return;
       }
+<<<<<<< HEAD
 
       pre = indentation + matched[1] + '\n';
       text = matched[4];
@@ -38736,6 +38759,32 @@ Beautifier.prototype._print_custom_beatifier_text = function(printer, raw_token,
     if (text) {
       if (_beautifier) {
 
+=======
+
+      pre = indentation + matched[1] + '\n';
+      text = matched[4];
+      if (matched[5]) {
+        post = indentation + matched[5];
+      }
+
+      // if there is at least one empty line at the end of this text, strip it
+      // we'll be adding one back after the text but before the containing tag.
+      text = text.replace(/\n[ \t]*$/, '');
+
+      if (matched[2] || matched[3].indexOf('\n') !== -1) {
+        // if the first line of the non-comment text has spaces
+        // use that as the basis for indenting in null case.
+        matched = matched[3].match(/[ \t]+$/);
+        if (matched) {
+          raw_token.whitespace_before = matched[0];
+        }
+      }
+    }
+
+    if (text) {
+      if (_beautifier) {
+
+>>>>>>> master
         // call the Beautifier if avaliable
         var Child_options = function() {
           this.eol = '\n';
