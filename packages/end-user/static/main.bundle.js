@@ -710,22 +710,42 @@ var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
 var _classnames = _interopRequireDefault(__webpack_require__(5));
 
+/**
+ * @class Form
+ * @desc Form component to hold inputs
+ *
+ * @param {node} [children]
+ *      Form elements
+ * @param {string} [data-id]
+ *      Sets a data-id property on the Form element to be used as a test hook
+ * @param {string} [margin]
+ *      Define margins for the Form (small)
+ * @param {string} [spacing]
+ *      Define spacing for the Form (large)
+ *
+ */
 var Form = function Form(_ref) {
   var children = _ref.children,
       margin = _ref.margin,
-      spacing = _ref.spacing;
+      spacing = _ref.spacing,
+      dataId = _ref['data-id'];
   var classNames = (0, _classnames.default)('form', {
     'form--margin-small': margin === 'small',
     'form--spacing-lg': spacing === 'large'
   });
   return _react.default.createElement("form", {
-    className: classNames
+    className: classNames,
+    "data-id": dataId
   }, children);
 };
 
 Form.propTypes = {
   margin: _propTypes.default.oneOf(['small']),
-  spacing: _propTypes.default.oneOf(['large'])
+  spacing: _propTypes.default.oneOf(['large']),
+  'data-id': _propTypes.default.string
+};
+Form.defaultProps = {
+  'data-id': 'form'
 };
 var _default = Form;
 exports.default = _default;
@@ -2197,6 +2217,7 @@ module.exports.default = exports.default;
 /* 61 */
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2417,6 +2438,8 @@ module.exports.default = exports.default;
 /***/ }),
 /* 61 */
 =======
+=======
+>>>>>>> master
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2564,6 +2587,229 @@ module.exports = exports.default;
 module.exports.default = exports.default;
 
 /***/ }),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _Object$defineProperty = __webpack_require__(1);
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(2));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(3));
+
+var _classnames = _interopRequireDefault(__webpack_require__(5));
+
+var _ghostSuccess = _interopRequireDefault(__webpack_require__(324));
+
+var _ghostError = _interopRequireDefault(__webpack_require__(325));
+
+var _ghostTimedOut = _interopRequireDefault(__webpack_require__(326));
+
+var _ghostStopped = _interopRequireDefault(__webpack_require__(327));
+
+var _ghostDisabled = _interopRequireDefault(__webpack_require__(328));
+
+var typeIcons = {
+  success: _ghostSuccess.default,
+  error: _ghostError.default,
+  timeout: _ghostTimedOut.default,
+  stopped: _ghostStopped.default,
+  disabled: _ghostDisabled.default
+};
+
+var IconFeedback = function IconFeedback(_ref) {
+  var type = _ref.type,
+      _ref$small = _ref.small,
+      small = _ref$small === void 0 ? false : _ref$small,
+      children = _ref.children;
+  var classNames = (0, _classnames.default)('icon-feedback', "icon-feedback--".concat(type), {
+    'icon-feedback--small': small
+  });
+  return _react.default.createElement("div", {
+    className: classNames
+  }, _react.default.createElement("img", {
+    src: typeIcons[type],
+    className: "icon-feedback__icon",
+    alt: ""
+  }), _react.default.createElement("p", {
+    className: "icon-feedback__label"
+  }, children));
+};
+
+IconFeedback.propTypes = {
+  type: _propTypes.default.string,
+  small: _propTypes.default.bool
+};
+var _default = IconFeedback;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;
+
+/***/ }),
+/* 61 */
+=======
+>>>>>>> master
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _Object$defineProperty = __webpack_require__(1);
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(17));
+
+var _map = _interopRequireDefault(__webpack_require__(29));
+
+var _react = _interopRequireDefault(__webpack_require__(2));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(3));
+
+var _classnames = _interopRequireDefault(__webpack_require__(5));
+
+var _StateContainer = __webpack_require__(98);
+
+var _sms = _interopRequireDefault(__webpack_require__(329));
+
+var _email = _interopRequireDefault(__webpack_require__(330));
+
+var _mobile = _interopRequireDefault(__webpack_require__(331));
+
+var icons = {
+  sms: _sms.default,
+  email: _email.default,
+  mobile: _mobile.default
+};
+
+var StatelessModalMenu = function StatelessModalMenu(_ref) {
+  var options = _ref.options,
+      onChange = _ref.onChange,
+      onClose = _ref.onClose,
+      expanded = _ref.expanded,
+      dataId = _ref['data-id'];
+
+  var closeDialog = function closeDialog() {
+    onClose();
+  };
+
+  var itemClicked = function itemClicked(option) {
+    onChange(option);
+    closeDialog();
+  };
+
+  if (!expanded) {
+    return null;
+  }
+
+  return _react.default.createElement("div", {
+    className: "modal-overlay",
+    "data-id": dataId
+  }, _react.default.createElement("div", {
+    className: "modal-overlay__content"
+  }, _react.default.createElement("div", {
+    className: "modal-menu"
+  }, (0, _map.default)(options).call(options, function (option) {
+    return _react.default.createElement("button", {
+      key: option.label,
+      className: (0, _classnames.default)('modal-menu__button', {
+        'modal-menu__button--selected': option.selected
+      }),
+      onClick: function onClick() {
+        return itemClicked(option);
+      }
+    }, _react.default.createElement("img", {
+      className: "modal-menu__icon",
+      src: icons[option.icon],
+      alt: ""
+    }), _react.default.createElement("span", null, _react.default.createElement("span", {
+      className: "modal-menu__label"
+    }, option.label), _react.default.createElement("span", {
+      className: "modal-menu__sublabel"
+    }, option.sublabel)));
+  }), _react.default.createElement("button", {
+    className: "modal-menu__button modal-menu__button--cancel",
+    onClick: closeDialog
+  }, "Cancel"))));
+};
+
+StatelessModalMenu.propTypes = {
+  options: _propTypes.default.arrayOf(_propTypes.default.shape({
+    label: _propTypes.default.string,
+    sublabel: _propTypes.default.string,
+    icon: _propTypes.default.string,
+    selected: _propTypes.default.bool
+  })),
+  onChange: _propTypes.default.func,
+  onClose: _propTypes.default.func,
+  expanded: _propTypes.default.bool,
+  'data-id': _propTypes.default.string
+};
+var PStatefulModalMenu = (0, _StateContainer.inStateContainer)([{
+  name: 'expanded',
+  initial: true,
+  callbacks: [{
+    name: 'onClose',
+    transform: function transform() {
+      return false;
+    }
+  }]
+}])(StatelessModalMenu);
+/**denu
+ * @desc Display a menu with a list of selections
+ *
+ * @param {string} [options]
+ *      A list of the objects to display
+ * @param {ModalMenu~onChange} [onChange]
+ *      Called after a selection is made in the menu
+ *
+ */
+
+var ModalMenu = function ModalMenu(props) {
+  return _react.default.createElement(PStatefulModalMenu, (0, _extends2.default)({}, props, {
+    initialState: {}
+  }));
+};
+
+ModalMenu.propTypes = {
+  options: _propTypes.default.arrayOf(_propTypes.default.shape({
+    label: _propTypes.default.string,
+    sublabel: _propTypes.default.string,
+    icon: _propTypes.default.string,
+    selected: _propTypes.default.bool
+  })),
+  onChange: _propTypes.default.func
+};
+ModalMenu.defaultProps = {
+  onChange: function onChange() {}
+};
+var _default = ModalMenu;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;
+
+/***/ }),
+>>>>>>> master
 >>>>>>> master
 /* 62 */
 /***/ (function(module, exports, __webpack_require__) {
