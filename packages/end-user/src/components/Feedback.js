@@ -5,7 +5,17 @@ import errorIcon from '../icons/error.svg';
 import alertIcon from '../icons/alert.svg';
 import successIcon from '../icons/success.svg';
 
-const Message = ({ children, type }) => {
+/**
+ * @class Feedback
+ * @desc Display text and an icon to a user
+ *
+ * @param {string} [type]
+ *      Sets the feedback's type (error|alert|success)
+ * @param {string} [data-id]
+ *      Sets a data-id property on the feedback element to be used as a test hook
+ *
+ */
+const Message = ({ children, type, 'data-id': dataId }) => {
     const classNames = classnames('feedback', {
         'feedback--error': type === 'error',
         'feedback--alert': type === 'alert',
@@ -13,7 +23,7 @@ const Message = ({ children, type }) => {
     });
 
     return (
-        <div className={classNames}>
+        <div className={classNames} data-id={dataId}>
             {type === 'error' && <img className="feedback__icon" src={errorIcon} alt="Error" />}
             {type === 'alert' && <img className="feedback__icon" src={alertIcon} alt="Alert" />}
             {type === 'success' && <img className="feedback__icon" src={successIcon} alt="Success" />}
@@ -24,6 +34,11 @@ const Message = ({ children, type }) => {
 
 Message.propTypes = {
     type: PropTypes.string,
+    'data-id': PropTypes.string,
+};
+
+Message.defaultProps = {
+    'data-id': 'feedback',
 };
 
 export default Message;

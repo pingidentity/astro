@@ -11,6 +11,8 @@ import { inStateContainer, toggleTransform  } from '../util/StateContainer';
  *      Fired when the value of the checkbox changes
  * @param {bool} [checked]
  *      Sets the checkbox's state
+ * @param {string} [data-id]
+ *      Sets a data-id property on the checkbox element to be used as a test hook
  *
  */
 const StatelessCheckbox = ({

@@ -26,7 +26,7 @@ const getLabel = option => (option.label ? option.label : option);
  * @param {string} [value]
  *      Sets the currently selected dropdown option
  * @param {string} [data-id]
- *      Sets a data-id property on the tooltip element to be used as a test hook
+ *      Sets a data-id property on the dropdown element to be used as a test hook
  *
  */
 const StatelessDropdown = ({

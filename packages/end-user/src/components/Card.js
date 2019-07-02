@@ -13,7 +13,7 @@ import classnames from 'classnames';
  * @param {node} [children]
  *      Width of the card element
  * @param {string} [data-id]
- *      To define the base "data-id" value for the card
+ *      Sets a data-id property on the card element to be used as a test hook
  *
  */
 const Card = ({ children, width, className, 'data-id': dataId }) => {
