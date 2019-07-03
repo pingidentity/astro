@@ -288,12 +288,54 @@ table.grid td.grid__cell {
             text-align: right;
         }
     }
+}
 
-    &--overflow {
-        &-ellipsis {
-            overflow-y: hidden;
+.grid {
+    &__cell {
+        &--alignment {
+            &-center {
+                text-align: center;
+            }
+
+            &-left {
+                text-align: left;
+            }
+
+            &-right {
+                text-align: right;
+            }
+        }
+    }
+
+    &__cell-content {
+        display: inline-block;
+    }
+
+    &__cell-content-wrapper {
+        &--overflow-ellipsis {
+            overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            width: 100%;
+        }
+    }
+
+    &__cell-hint {
+        color: $color-accent-neutral-10;
+        width: 100%;
+    }
+
+    &__cell-icon {
+        display: inline-block;
+    }
+
+    &__column-content {
+        &--overflow {
+            &-ellipsis {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
         }
     }
 }

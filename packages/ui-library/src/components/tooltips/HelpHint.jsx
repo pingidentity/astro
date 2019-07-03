@@ -71,6 +71,7 @@ class HelpHint extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        containerClassName: PropTypes.string,
         delayHide: PropTypes.number,
         delayShow: PropTypes.number,
         iconName: PropTypes.string,
@@ -177,6 +178,7 @@ class HelpHint extends React.Component {
         const {
             "data-id": dataId,
             children,
+            containerClassName,
             leftMargin,
             unstyleTrigger,
         } = this.props;
@@ -191,7 +193,8 @@ class HelpHint extends React.Component {
             this._getTypeClass(),
             {
                 "help-tooltip": !unstyleTrigger,
-                "help-tooltip--left-margin": leftMargin
+                "help-tooltip--left-margin": leftMargin,
+                [containerClassName]: containerClassName !== undefined
             }
         );
 
@@ -205,7 +208,7 @@ class HelpHint extends React.Component {
                     onClick={this._handleClick}
                     data-tip={true}
                     data-for={uid}
-                    ref={((target) => { this.target = target; }).bind(this)}>
+                    ref={(target) => { this.target = target; }}>
                     {display}
                 </div>
                 {this.maybeRenderExtraContainer(

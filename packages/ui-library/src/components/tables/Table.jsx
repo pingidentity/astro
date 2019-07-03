@@ -1,20 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
+
+import HelpHint from "../tooltips/HelpHint";
 
 /**
  * @class Table
  *
  * @desc A stateless component for displaying tabular data
  *
- * @param {array} [data-id]
+ * @param {string} [data-id]
  *      Data-id for the component.
  * @param {array} [data]
  *      An array of objects with data in key value pairs.
  * @param {array} [headData]
  *      An array of values for the table head.
- * @param {array} [bodyData]
+ * @param {[]|Object[]} [bodyData]
  *      An array of arrays for the body that are ordered in the same was as the headData.
  * @param {string} [verticalAlignment]
  *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
@@ -92,23 +94,136 @@ const renderColumnHeadings = (columnStyling = [], headData) => _.map(headData, (
         maxWidth,
         width,
     } = columnStyling[idx] || {};
+    const useEllipsis = contentOverflow === overflowOptions.ELLIPSIS;
     return (
         <th
             className={classnames(
-                `grid__column--alignment-${alignment}`,
-                `grid__column--overflow-${contentOverflow}`
+                `grid__column--alignment-${alignment}`
             )}
             key={heading || idx}
-            style={{
-                ...maxWidth !== undefined ? { maxWidth } : {},
-                ...minWidth !== undefined ? { minWidth } : {},
-                ...width !== undefined ? { width } : {},
-            }}
+            style={
+                useEllipsis
+                    ? {}
+                    : {
+                        ...maxWidth !== undefined ? { maxWidth } : {},
+                        ...minWidth !== undefined ? { minWidth } : {},
+                        ...width !== undefined ? { width } : {},
+                    }
+            }
         >
-            {heading}
+            {useEllipsis ? <div
+                className="grid__column-content--overflow-ellipsis"
+                style={{
+                    ...maxWidth !== undefined ? { maxWidth } : {},
+                    ...minWidth !== undefined ? { minWidth } : {},
+                    ...width !== undefined ? { width } : {},
+                }}
+                title={heading}
+            >{heading}</div>
+                : heading}
         </th>
     );
 });
+
+class TableCell extends Component {
+    static propTypes = {
+        alignment: PropTypes.oneOf(Object.values(columnAlignments)),
+        ellipsis: PropTypes.bool,
+        isLabel: PropTypes.bool,
+        maxWidth: PropTypes.string,
+        minWidth: PropTypes.string,
+        overflow: PropTypes.oneOf(Object.values(overflowOptions)),
+        width: PropTypes.string,
+        verticalAlignment: PropTypes.oneOf(Object.values(verticalAlignments))
+    }
+
+    static defaultProps = {
+        ellipsis: false,
+        isLabel: false
+    }
+
+    cellContent = {};
+
+    hasEllipsis = false;
+
+    _checkForEllipsis = ({
+        offsetWidth = 0,
+        scrollWidth = 0,
+    }) => { this.hasEllipsis = (this.hasEllipsis || offsetWidth < scrollWidth); }
+
+    render() {
+        const {
+            alignment = columnAlignments.LEFT,
+            children,
+            contentOverflow = overflowOptions.WRAP,
+            width: colWidth,
+            isLabel,
+            minWidth,
+            maxWidth = colWidth,
+            verticalAlignment
+        } = this.props;
+
+        const {
+            icon,
+            content = children
+        } = children;
+
+        const Cell = isLabel ? "th" : "td";
+
+        this._checkForEllipsis(this.cellContent);
+
+        const useEllipsis = contentOverflow === overflowOptions.ELLIPSIS;
+
+        const ContentWrapper = useEllipsis && this.hasEllipsis ? HelpHint : "div";
+
+        const cellContents = (
+            <ContentWrapper
+                className={classnames(
+                    "grid__cell-content-wrapper",
+                    {
+                        "grid__cell-content-wrapper--overflow-ellipsis": useEllipsis
+                    }
+                )}
+                ref={ref => this.cellContent = ref}
+                {...this.hasEllipsis ? { containerClassName: "grid__cell-hint", hintText: content } : {}}
+            >
+                {[
+                    ...icon !== undefined
+                        ? [
+                            <div className="grid__cell-icon" key="icon">
+                                {icon}
+                            </div>
+                        ]
+                        : [],
+                    icon && content ? <div
+                        className="grid__cell-content"
+                        key="content"
+                    >
+                        {content}
+                    </div> : content,
+                    ...isLabel ? [":"] : []
+                ]}
+            </ContentWrapper>
+        );
+
+        return (
+            <Cell
+                className={classnames(
+                    cellClasses[verticalAlignment],
+                    "grid__cell",
+                    `grid__cell--alignment-${alignment}`,
+                )}
+                style={{
+                    ...maxWidth !== undefined ? { maxWidth } : {},
+                    ...minWidth !== undefined ? { minWidth } : {},
+                    ...colWidth !== undefined ? { width: colWidth } : {},
+                }}
+            >
+                {cellContents}
+            </Cell>
+        );
+    }
+}
 
 const Table = props => {
     const {
@@ -126,6 +241,7 @@ const Table = props => {
         verticalAlignment,
         width
     } = props;
+
     const classes = classnames("grid", className, {
         "grid--no-lines": !lines,
         "width-full": fullWidth || width === tableWidths.FULL_FIXED,
@@ -155,36 +271,19 @@ const Table = props => {
                 {_.map(bodyData, (item, index) => (
                     <tr key={index}>
                         {_.map(item, (entry, entryIndex) => {
-                            const isLabel = rowLabels && entryIndex === 0;
-                            const Cell = isLabel ? "th" : "td";
                             const cellValue = cellRenderers[entryIndex]
                                 ? cellRenderers[entryIndex](entry, item)
                                 : entry;
 
-                            const {
-                                alignment = columnAlignments.LEFT,
-                                contentOverflow = overflowOptions.WRAP,
-                                width: colWidth,
-                                minWidth,
-                                maxWidth = colWidth,
-                            } = columnStyling[entryIndex] || {};
-
                             return (
-                                <Cell
+                                <TableCell
+                                    isLabel={rowLabels && entryIndex === 0}
                                     key={`${index}-${entryIndex}`}
-                                    className={classnames(
-                                        cellClasses[verticalAlignment],
-                                        `grid__cell--alignment-${alignment}`,
-                                        `grid__cell--overflow-${contentOverflow}`
-                                    )}
-                                    style={{
-                                        ...maxWidth !== undefined ? { maxWidth } : {},
-                                        ...minWidth !== undefined ? { minWidth } : {},
-                                        ...colWidth !== undefined ? { width: colWidth } : {},
-                                    }}
+                                    verticalAlignment={verticalAlignment}
+                                    {...columnStyling[entryIndex] || {}}
                                 >
-                                    {cellValue}{isLabel && ":"}
-                                </Cell>
+                                    {cellValue}
+                                </TableCell>
                             );
                         })}
                     </tr>
@@ -196,7 +295,15 @@ const Table = props => {
 
 Table.propTypes = {
     bodyData: PropTypes.arrayOf(
-        PropTypes.array,
+        PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.node,
+                PropTypes.shape({
+                    icon: PropTypes.node,
+                    content: PropTypes.node
+                })
+            ])
+        ),
     ),
     cellRenderers: PropTypes.arrayOf(PropTypes.func),
     className: PropTypes.string,

@@ -2,7 +2,7 @@ jest.dontMock("../Table");
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import Table, {
     columnAlignments,
     overflowOptions,
@@ -202,8 +202,8 @@ describe("Table", function () {
         expect(secondHeader.props.className).not.toContain("grid__column--alignment-center");
     });
 
-    it("renders correct column with ellipsis overflow class", () => {
-        const component = shallow(
+    it("renders correct column and cell with ellipsis overflow class", () => {
+        const component = mount(
             <Table
                 bodyData={bodyData}
                 headData={headData}
@@ -217,12 +217,19 @@ describe("Table", function () {
 
         const [firstHeader, secondHeader] = component.find("th");
 
-        expect(firstHeader.props.className).toContain("grid__column--overflow-ellipsis");
-        expect(secondHeader.props.className).not.toContain("grid__column--overflow-ellipsis");
+        expect(firstHeader.props.children.props.className).toContain("grid__column-content--overflow-ellipsis");
+        expect(secondHeader.props.children.props).toBeUndefined();
+
+        const [firstCell, secondCell] = component.find("td");
+
+        expect(firstCell.props.children.props.className).toContain("grid__cell-content-wrapper--overflow-ellipsis");
+        expect(secondCell.props.children.props.className)
+            .not
+            .toContain("grid__cell-content-wrapper--overflow-ellipsis");
     });
 
     it("renders with column width if width is passed in", () => {
-        const component = shallow(
+        const component = mount(
             <Table
                 bodyData={bodyData}
                 headData={headData}
@@ -246,7 +253,7 @@ describe("Table", function () {
     });
 
     it("renders with column max width if width is passed in", () => {
-        const component = shallow(
+        const component = mount(
             <Table
                 bodyData={bodyData}
                 headData={headData}
@@ -270,7 +277,31 @@ describe("Table", function () {
     });
 
     it("renders with column max width if width is passed in", () => {
-        const component = shallow(
+        const component = mount(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                columnStyling={[
+                    {
+                        minWidth: "50px"
+                    }
+                ]}
+            />
+        );
+
+        const [firstHeader, secondHeader] = component.find("th");
+
+        expect(firstHeader.props.style.minWidth).toEqual("50px");
+        expect(secondHeader.props.style.minWidth).not.toEqual("50px");
+
+        const [firstCell, secondCell] = component.find("td");
+
+        expect(firstCell.props.style.minWidth).toEqual("50px");
+        expect(secondCell.props.style.minWidth).not.toEqual("50px");
+    });
+
+    it("renders with overflow ellipsis class if overflow value is ellipsis", () => {
+        const component = mount(
             <Table
                 bodyData={bodyData}
                 headData={headData}
