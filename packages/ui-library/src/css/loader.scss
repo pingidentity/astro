@@ -215,26 +215,41 @@
         0% {
             opacity: 0;
         }
-        40% {
+        30% {
             opacity: 1;
+        }
+        60% {
+            opacity: 0;
         }
     }
 
     @include keyframes(pulse-2) {
+        0% {
+            opacity: 0;
+        }
         20% {
             opacity: 0;
         }
-        60% {
+        50% {
             opacity: 1;
+        }
+        80% {
+            opacity: 0;
         }
     }
 
     @include keyframes(pulse-3) {
+        0% {
+            opacity: 0;
+        }
         40% {
             opacity: 0;
         }
-        80% {
+        70% {
             opacity: 1;
+        }
+        100% {
+            opacity: 0;
         }
     }
     &.ie9 {

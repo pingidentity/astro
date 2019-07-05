@@ -39,7 +39,7 @@ class EllipsisLoaderDemo extends React.Component {
         return (
             <div>
                 <Button onClick={this._load} >Load</Button>
-                <EllipsisLoader data-id="demo-ellipsis-loader" loading={this.state.loading} />
+                <EllipsisLoader data-id="demo-ellipsis-loader" loading={true} />
             </div>
         );
     }
