@@ -53,7 +53,7 @@ class UnitInputDemo extends React.Component {
                             onValueChange: this._handleTextValueChange,
                             value: this.state.a,
                             width: InputWidths.XS,
-                            name: "text-field"
+                            name: "text-field",
                         }}
                         dropDownListProps={{
                             options: OPTIONS,
