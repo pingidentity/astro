@@ -236,7 +236,7 @@ class HeaderBarDemo extends React.Component {
                 <HeaderBar
                     mode="Sandbox"
                     inline={true}
-                    siteLogo="pingone"
+                    siteLogo="pingfed"
 
                     tree={[{
                         id: "account",
