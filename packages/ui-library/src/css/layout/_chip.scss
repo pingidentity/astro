@@ -4,6 +4,19 @@
     display: inline-block;
     padding: $spacing-xs $spacing-sm;
 
+    &--condensed {
+        display: inline-block;
+        margin: 0;
+        padding: 4px 5px 1px;
+        font-size: 13px;
+        line-height: 1em;
+        text-transform: uppercase;
+        color: $color-white;
+        background-color: $color-elephant;
+
+        @include border-radius(3px);
+    }
+
     &--color-cyan {
         background-color: $color-charting-cyan;
     }
@@ -14,6 +27,11 @@
 
     &--color-light-grey {
         background-color: $color-neutral-90;
+    }
+
+    &--color-dark-grey {
+        color: $color-white;
+        background-color: $color-elephant;
     }
 
     &--color-white {

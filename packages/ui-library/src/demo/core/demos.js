@@ -1272,6 +1272,13 @@ module.exports = [
                         icon: "details"
                     },
                     {
+                        label: "Certificate Management",
+                        demo: require("../../templates/CertificateManagement"),
+                        pathToSource: "templates_CertificateManagement.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
                         label: "Social Login",
                         demo: require("../../templates/SocialLogin"),
                         pathToSource: "templates_SocialLogin.jsx.html",

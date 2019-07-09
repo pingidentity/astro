@@ -116,7 +116,7 @@ Icon.propTypes = {
     iconName: PropTypes.string,
     textType: PropTypes.string,
     title: PropTypes.string,
-    type: PropTypes.oneOf([ "leading", "inline" ]),
+    type: PropTypes.oneOf(["leading", "inline"]),
 
     iconSize: PropTypes.oneOf([
         iconSizes.SM,
@@ -132,4 +132,4 @@ Icon.defaultProps = {
 };
 
 Icon.iconSizes = iconSizes;
-export default Icon ;
+export default Icon;

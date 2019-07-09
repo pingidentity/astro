@@ -2,7 +2,7 @@
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import FileInput from "../FileInput";
+import FileInput, { errorTypes } from "../FileInput";
 import { mount } from "enzyme";
 
 
@@ -100,6 +100,22 @@ describe("FileInput", function () {
             <FileInput alwaysShowTitle selectedTitle="hello"/>
         );
         const element = component.find(".input-file__always-title");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("Renders the the fileinput with an error", () => {
+        const component = mount(
+            <FileInput fileName="hello" error={errorTypes.ERROR} />
+        );
+        const element = component.find(`div[data-id="error-icon"]`);
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("Renders the the fileinput with an warning", () => {
+        const component = mount(
+            <FileInput fileName="hello" error={errorTypes.WARNING} />
+        );
+        const element = component.find(`div[data-id="error-icon"]`);
         expect(element.exists()).toEqual(true);
     });
 });

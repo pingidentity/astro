@@ -6,8 +6,13 @@ export const chipColors = {
     CYAN: "cyan",
     FAINTGREY: "faint-grey",
     LIGHTGREY: "light-grey",
+    DARKGREY: "dark-grey",
     TRANSPARENT: "transparent",
     WHITE: "white"
+};
+
+export const chipTypes = {
+    CONDENSED: "condensed"
 };
 
 /**
@@ -30,7 +35,7 @@ function Chip({
     className,
     "data-id": dataId,
     fullWidth,
-    spacing
+    type,
 }) {
     return (
         <div
@@ -38,7 +43,9 @@ function Chip({
                 classnames(
                     "chip-component",
                     className,
-                    `chip-component--spacing-${spacing}`,
+                    {
+                        "chip-component--condensed": type === chipTypes.CONDENSED
+                    },
                     `chip-component--color-${color}`,
                     {
                         "chip-component--full-width": fullWidth

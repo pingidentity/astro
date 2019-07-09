@@ -1,6 +1,6 @@
 
 import React from "react";
-import FileInput from "../../../components/forms/FileInput";
+import FileInput, { errorTypes } from "../../../components/forms/FileInput";
 import Text from "../../../components/general/Text";
 import FormCheckbox from "../../../components/forms/FormCheckbox";
 import InputRow from "../../../components/layout/InputRow";
@@ -62,6 +62,7 @@ class FileInputDemo extends React.Component {
                         onRemove={this._handleRemove}
                         status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
                         selectedTitle="Certificate"
+                        error={errorTypes.WARNING}
                     />
                 </InputRow>
                 <InputRow>

@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import Button from "../buttons/Button";
 import FileDrop from "./FileDrop";
 import MessageButton from "../buttons/MessageButton";
-import Icon from "../general/Icon";
+import Icon, { iconSizes } from "../general/Icon";
 import classnames from "classnames";
+import FlexRow from "../layout/FlexRow";
 
 /**
 * @callback FileInput~onRemove
@@ -57,6 +58,8 @@ import classnames from "classnames";
  *     The callback triggered when when a file is selected that idicates if the selected file type matches those allowed by the "accept" prop.
  * @param {Object} [strings]
  *     An object containing the various blurbs of text rendered in the component.
+ * @param {string} [error=error]
+ *    The type of error to display on the input (error = red, warning = yellow)
  *
  * @example
  *     <FileInput
@@ -68,7 +71,12 @@ import classnames from "classnames";
  *     />
  */
 
-export default class FileInput extends Component {
+const errorTypes = {
+    ERROR: "error",
+    WARNING: "warning",
+};
+
+class FileInput extends Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
@@ -86,6 +94,10 @@ export default class FileInput extends Component {
             label: PropTypes.string,
             type: PropTypes.string,
         }),
+        error: PropTypes.oneOf([
+            errorTypes.ERROR,
+            errorTypes.WARNING,
+        ])
     };
 
     static defaultProps = {
@@ -117,6 +129,7 @@ export default class FileInput extends Component {
             alwaysShowTitle,
             strings,
             status,
+            error,
         } = this.props;
         const text = { ...this.defaultStrings, ...strings };
 
@@ -126,38 +139,61 @@ export default class FileInput extends Component {
             "input-file__field-set--focused": !noBorder,
         });
 
+        let errorColor;
+
+        switch (error) {
+            case "error":
+                // $color-critical-red
+                errorColor = "#a31300";
+                break;
+            case "warning":
+                // $color-warning-yellow
+                errorColor = "#eeb91c";
+                break;
+            default:
+                errorColor = undefined;
+        }
+
         return (
             fileName && !status ? (
-                <fieldset className={classNames}>
-                    <legend>{selectedTitle}</legend>
-                    <div className="input-file__selected-content">
-                        <div className="input-file__info">
-                            <Icon
-                                data-id="file-icon"
-                                className="input-file__file-icon"
-                                iconName="docs"
-                                iconSize={Icon.iconSizes.MD}
-                                type="leading"
-                            />
-                            <div className="input-file__file">
-                                <div data-id="file-name" className="input-file__file-name">
-                                    {fileName}
+                <FlexRow>
+                    { errorColor ? <span style={{ color: errorColor }}>
+                        <Icon iconName="alert" data-id="error-icon" iconSize={iconSizes.MD} />
+                    </span>
+                        : null }
+                    <fieldset className={classNames} style={{
+                        borderColor: errorColor
+                    }}>
+                        {selectedTitle ? <legend>{selectedTitle}</legend> : null }
+                        <div className="input-file__selected-content">
+                            <div className="input-file__info">
+                                <Icon
+                                    data-id="file-icon"
+                                    className="input-file__file-icon"
+                                    iconName="docs"
+                                    iconSize={Icon.iconSizes.MD}
+                                    type="leading"
+                                />
+                                <div className="input-file__file">
+                                    <div data-id="file-name" className="input-file__file-name">
+                                        {fileName}
+                                    </div>
+                                    {fileData && (
+                                        <div data-id="file-data" className="input-file__file-data">{fileData}</div>
+                                    )}
                                 </div>
-                                {fileData && (
-                                    <div data-id="file-data" className="input-file__file-data">{fileData}</div>
-                                )}
                             </div>
+                            <Button
+                                data-id="remove-button"
+                                className="input-file__remove-btn"
+                                onClick={this._handleRemove(inputRef)}
+                                inline
+                            >
+                                {text.remove}
+                            </Button>
                         </div>
-                        <Button
-                            data-id="remove-button"
-                            className="input-file__remove-btn"
-                            onClick={this._handleRemove(inputRef)}
-                            inline
-                        >
-                            {text.remove}
-                        </Button>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </FlexRow>
             ) : (
                 <div className="input-file__always-title-container">
                     {alwaysShowTitle && selectedTitle &&
@@ -196,3 +232,7 @@ export default class FileInput extends Component {
         );
     }
 }
+
+FileInput.errorTypes = errorTypes;
+
+export default FileInput;
