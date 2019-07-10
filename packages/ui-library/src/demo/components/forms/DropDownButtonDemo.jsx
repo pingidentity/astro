@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DropDownButton from "../../../components/forms/DropDownButton";
+import Icon from "../../../components/general/Icon";
 
 /**
 * @name DropDownButtonDemo
@@ -21,7 +22,8 @@ export default class DropDownButtonDemo extends Component {
         optionFour: "Option Four",
         optionFive: "Option Five",
         optionSix: "Option Six",
-        optionSeven: "Option Seven"
+        optionSeven: "Option Seven",
+        optionEight: <span>Can do icons too <Icon iconName="globe" type="inline" /></span>
     };
 
     _onToggle = () => {
