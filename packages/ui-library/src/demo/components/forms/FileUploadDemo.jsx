@@ -2,6 +2,7 @@ import React from "react";
 import { v2 as FileUpload } from "../../../components/forms/file-upload";
 import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
 import Button from "../../../components/buttons/Button";
+import Image, { imageSizes } from "../../../components/general/Image";
 import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
 import { allFlags } from "../../../util/FlagUtils";
@@ -149,6 +150,21 @@ export default class FileUploadDemo extends React.Component {
                     />
                     <br /><br />
                     Selected file = {this.state.file2}
+                </InputRow>
+
+                <InputRow>
+                    <FileUpload
+                        labelText="File Input with component as default image"
+                        accept="image/png"
+                        validator={this._fileValidator}
+                        showThumbnail={true}
+                        onChange={this._onChange2}
+                        onRemove={this._onRemove2}
+                        onError={this._onError}
+                        defaultImage={<Image source="src/demo/images/favicon.png" size={imageSizes.FULL} />}
+                        labelSelect="Choose a File"
+                        labelRemove="Remove"
+                    />
                 </InputRow>
 
                 <InputRow>

@@ -33,7 +33,8 @@ import classnames from "classnames";
 
 export const imageSizes = {
     AUTO: "auto",
-    SM: "sm"
+    SM: "sm",
+    FULL: "full"
 };
 
 export const imageTypes = {
@@ -59,7 +60,9 @@ function Image({
                 "image-component",
                 className,
                 `image-component--${size}`,
-                `image-component--${size}${isSquare ? "-square" : ""}`,
+                {
+                    [`image-component--${size}-square`]: isSquare,
+                },
             )}
             data-id={dataId}
             onClick={onClick}

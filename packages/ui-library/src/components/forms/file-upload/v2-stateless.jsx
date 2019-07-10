@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
+import { isString } from "underscore";
 import FormLabel from "../FormLabel";
 import FormError from "../FormError";
 import Button from "../../buttons/Button";
@@ -33,14 +34,20 @@ export default class extends Component {
         showThumbnail: PropTypes.bool,
         showRemoveButton: PropTypes.bool,
         //properties
-        defaultImage: PropTypes.string,
+        defaultImage: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.string,
+        ]),
         errorMessage: PropTypes.string,
         filesAcceptedMessage: PropTypes.string,
         fileName: PropTypes.string,
         name: PropTypes.string,
         accept: PropTypes.string,
         "data-id": PropTypes.string,
-        thumbnailSrc: PropTypes.string,
+        thumbnailSrc: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.string,
+        ]),
 
         flags: flagsPropType
     };
@@ -69,18 +76,18 @@ export default class extends Component {
     };
 
     render() {
-        const fileSelected = !!(this.props.thumbnailSrc || this.props.fileName);
+        const {
+            defaultImage,
+            thumbnailSrc
+        } = this.props;
+
+        const fileSelected = !!(thumbnailSrc || this.props.fileName);
         const containerClass = classnames(this.props.className, "input-file-upload", {
             "image-upload": this.props.showThumbnail,
             "file-selected": fileSelected,
             disabled: this.props.disabled,
             "form-error": !!this.props.errorMessage
         });
-
-        const {
-            defaultImage,
-            thumbnailSrc
-        } = this.props;
 
         const useDefault = this._useTrueDefault() && defaultImage && !thumbnailSrc;
 
@@ -150,15 +157,31 @@ function ImagePreview({
     src,
     show,
 }) {
+    const isNode = !isString(src);
     return show ? (
         <div>
-            {!isDefault && <span className="image-icon"></span>}
+            {!isDefault && <span className="image-icon" />}
             <span
                 className={classnames(
                     "input-image-thumb",
                     isDefault ? "input-image-thumb--default" : ""
                 )}>
-                <img src={src} data-id="imageThumb" alt="Thumbnail" />
+                {isNode
+                    ? src
+                    : <img
+                        className={
+                            classnames(
+                                "input-image-thumb__img",
+                                {
+                                    "input-image-thumb__img--default": isDefault
+                                }
+                            )
+                        }
+                        src={src}
+                        data-id="imageThumb"
+                        alt="Thumbnail"
+                    />
+                }
             </span>
         </div>
     ) : null;
@@ -200,7 +223,7 @@ function Filename({
 }) {
     return show ? (
         <span className="file-name" data-id={dataId}>
-            <span className="icon-file"></span>
+            <span className="icon-file" />
             {value}
         </span>
     ) : null;

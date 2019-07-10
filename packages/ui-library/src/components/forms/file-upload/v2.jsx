@@ -89,13 +89,14 @@ import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
  *    The current/default value or name of the file upload input.
  * @param {string} [name]
  *    If provided, this will be the name attribute for the input.
- * @param {string} accept
- *    Comma-separated string of MIME types that are fed to the 'accept' attribute of the &lt;input&gt;
+ * @param {string} [accept]
+ *    Comma-separated string of MIME types and/or file extensions that are fed to the 'accept' attribute of the &lt;input&gt;
  *    element and used in the file type validation. Pass an empty string to the property to disable validation.
+ *    Further information can be found here: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers.
  * @param {string} [filesAcceptedMessage]
  *    Text describing the accepted file types.
- * @param {string} [defaultImage]
- *    The url for the default image to use.
+ * @param {string|ReactElement} [defaultImage]
+ *    The url for the default image to use. Can also be a React element, specifically an image or an icon.
  * @param {string} [labelText]
  *     The text to show as the input's label.
  * @param {string} [label]

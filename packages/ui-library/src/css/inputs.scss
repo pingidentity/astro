@@ -1201,18 +1201,24 @@ input[type=file] {
         }
         .input-image-thumb {
             display: none;
+            // Width is repeated here and for img tag in case a user passes
+            // in a React element for the thumbnail.
+            width: $img-width;
 
             @include border-radius(4px);
 
-            img {
+            &__img {
                 display: block;
                 width: $img-width;
                 border: 1px solid $color-timberwolf;
+
+                &--default {
+                    opacity: 0.5;
+                }
             }
 
             &--default {
                 display: block;
-                opacity: 0.5;
             }
         }
         button.inline.choose {

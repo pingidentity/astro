@@ -17,6 +17,7 @@ describe("FileUpload", function () {
     const React = require("react");
     const ReactDOM = require("react-dom");
     const ReactTestUtils = require("react-dom/test-utils");
+    const { mount } = require("enzyme");
     const TestUtils = require("../../../../testutil/TestUtils");
     const FileUpload = require("../index.js");
     const CommonTests = require("./commonTests");
@@ -236,5 +237,16 @@ describe("FileUpload", function () {
         console.warn = jest.fn();
         getComponent({ stateless: false });
         expect(console.warn).not.toBeCalled();
+    });
+
+    it("renders node if given node as default image", () => {
+        const component = mount(
+            <FileUpload
+                flags={["true-default"]}
+                defaultImage={<div data-id="default-test" />}
+            />
+        );
+
+        expect(component.find("[data-id=\"default-test\"]"));
     });
 });
