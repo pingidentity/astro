@@ -113,18 +113,6 @@ export default class FileDrop extends Component {
         this._handleFileChange(file, e);
     }
 
-    _validateFile = ({ name = "", type }) => {
-        const {
-            accept
-        } = this.props;
-        if (accept.length > 0) {
-            const extension = name.substring(name.lastIndexOf(".") + 1, name.length);
-            return accept.some(acc => acc === type || acc === extension);
-        } else {
-            return true;
-        }
-    }
-
     _handleFileChange = (file, e) => {
 
         // needed for when canceling out of the file dialog
@@ -132,13 +120,9 @@ export default class FileDrop extends Component {
             return;
         }
 
-        const isValidFile = this._validateFile(file);
-
-        this.props.onValidateFile(isValidFile, file, e);
-
-        if (!isValidFile) {
-            return false;
-        }
+        // Only keeping this in here for backwards compatibility. Existing file validation in this
+        // component duplicated the functionality of <input> accept and did it very badly.
+        this.props.onValidateFile(true, file, e);
 
         this.props.onValueChange(file, e);
     }

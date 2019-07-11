@@ -202,60 +202,6 @@ describe("FileDrop", function () {
         expect(onValueChange).toHaveBeenCalledWith(fileObj, evtObj);
     });
 
-    it("Does NOT trigger onValueChange on drop with wrong mimetype", function () {
-        const onValueChange = jest.fn();
-        const preventDefault = jest.fn();
-        const stopPropagation = jest.fn();
-        const fileObj = {
-            name: "myfile.jpg",
-            type: "image/jpg"
-        };
-        const evtObj = {
-            target: {
-                files: [fileObj],
-            },
-            dataTransfer: {
-                files: [fileObj],
-            },
-            preventDefault: preventDefault,
-            stopPropagation: stopPropagation
-        };
-        const component = getComponent({
-            onValueChange: onValueChange,
-            accept: ["text/csv"]
-        });
-
-        component._onDrop(evtObj);
-        expect(onValueChange).not.toHaveBeenCalledWith(fileObj, evtObj);
-    });
-
-    it("Does NOT trigger onValueChange on drop with wrong file extension", function () {
-        const onValueChange = jest.fn();
-        const preventDefault = jest.fn();
-        const stopPropagation = jest.fn();
-        const fileObj = {
-            name: "myfile.jpg",
-            type: "image/jpg"
-        };
-        const evtObj = {
-            target: {
-                files: [fileObj],
-            },
-            dataTransfer: {
-                files: [fileObj],
-            },
-            preventDefault: preventDefault,
-            stopPropagation: stopPropagation
-        };
-        const component = getComponent({
-            onValueChange: onValueChange,
-            accept: ["csv"]
-        });
-
-        component._onDrop(evtObj);
-        expect(onValueChange).not.toHaveBeenCalledWith(fileObj, evtObj);
-    });
-
     it("Hightlights the drop area on hover", function () {
         const component = getComponent();
 
