@@ -898,6 +898,15 @@ describe("ExpandableRow", function() {
         expect(element).not.toBeNull();
     });
 
+    it("renders expandable row section with data-id", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><ExpandableRow.RowSection>nothing</ExpandableRow.RowSection></div>
+        );
+
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "row-section");
+        expect(element).not.toBeNull();
+    });
+
     it("renders with new class when flags are set", function() {
         const component = getComponent({ flags: [ "expandable-row-class", "usePortal" ] });
 

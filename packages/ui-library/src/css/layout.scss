@@ -827,6 +827,7 @@ $color-grey-minor-1: $color-neutral-30;
 
     &.page-section-title-nounderline {
         border-bottom: 0;
+        padding: 0;
     }
 }
 
@@ -974,9 +975,6 @@ $color-grey-minor-1: $color-neutral-30;
     }
 }
 
-.tab-set-children {
-    padding-left: $spacing-lg;
-}
 
 .content-columns {
     @include flexbox;

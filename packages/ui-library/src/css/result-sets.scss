@@ -1283,3 +1283,10 @@ input.ordering-controls__input {
         background-color: $color-accent-neutral-70;
     }
 }
+
+.expandable-row-section {
+    &__title {
+        @include text-section-title;
+        margin-bottom: $spacing-md;
+    }
+}

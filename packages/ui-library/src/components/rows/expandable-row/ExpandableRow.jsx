@@ -924,9 +924,46 @@ SimpleWrapper.defaultProps = {
     "data-id": "simple-wrapper",
 };
 
+
+/**
+* @class RowSection
+* @memberof ExpandableRow
+* @desc Creates a section of expandable rows
+*
+* @param {string} [data-id="scrolling-wrapper"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*     CSS classes to set on the top-level HTML container.
+*/
+
+const RowSection = ({ "data-id": dataId, className, children, title, ...props }) => (
+    <div
+        data-id={dataId}
+        className={classnames("expandable-row-section", className)}
+        {...props}
+    >
+        <div className="expandable-row-section__title">{title}</div>
+        {children}
+    </div>
+);
+
+RowSection.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.node,
+    title: PropTypes.node
+};
+
+RowSection.defaultProps = {
+    "data-id": "row-section",
+    title: "",
+};
+
+
 ExpandableRow.Statuses = Statuses;
 ExpandableRow.RowMessageTypes = RowMessageTypes;
 ExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
 ExpandableRow.ScrollingWrapper = ScrollingWrapper;
 ExpandableRow.SimpleWrapper = SimpleWrapper;
+ExpandableRow.RowSection = RowSection;
 module.exports = ExpandableRow;

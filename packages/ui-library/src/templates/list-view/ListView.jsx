@@ -31,6 +31,7 @@ import { formatDateTime } from "ui-library/lib/util/DateUtils";
 import { populations, statuses, pwStatuses, customFilters, operators, userList } from "./data";
 import InputWidths from "../../components/forms/InputWidths";
 import { stripInputMargins } from "../../util/CSSModifiers";
+import PageSection from "ui-library/lib/components/layout/PageSection";
 
 // the collapsible "ADVANCED" section in the filters panel
 const AdvancedContainerView = ({ children, open, onToggle }) => (
@@ -459,31 +460,33 @@ const UserRow = user => (
     >
         <TabSet selectedIndex={0} labels={[ "Profile", "Groups" ]}>
             <TabContent label="Profile">
-                <ColumnLayout.Row>
-                    <ColumnLayout.Column>
-                        <PageGroup title="Basic">
-                            <LabelValuePairs
-                                dataPairs={[
-                                    { label: "Population", value: user.population },
-                                    { label: "Department", value: user.department },
-                                    { label: "Country Code", value: user.countryCode },
-                                ]}
-                            />
-                        </PageGroup>
-                    </ColumnLayout.Column>
-                    <ColumnLayout.Column>
-                        <PageGroup title="Status">
-                            <LabelValuePairs
-                                dataPairs={[
-                                    { label: "Status", value: user.status },
-                                    { label: "Password", value: user.pwStatus },
-                                    { label: "Last Login", value: formatDateTime(user.recentLogin) },
-                                    { label: "Failed Logins", value: user.failedLogins.toString() },
-                                ]}
-                            />
-                        </PageGroup>
-                    </ColumnLayout.Column>
-                </ColumnLayout.Row>
+                <PageSection>
+                    <ColumnLayout.Row>
+                        <ColumnLayout.Column>
+                            <PageGroup title="Basic">
+                                <LabelValuePairs
+                                    dataPairs={[
+                                        { label: "Population", value: user.population },
+                                        { label: "Department", value: user.department },
+                                        { label: "Country Code", value: user.countryCode },
+                                    ]}
+                                />
+                            </PageGroup>
+                        </ColumnLayout.Column>
+                        <ColumnLayout.Column>
+                            <PageGroup title="Status">
+                                <LabelValuePairs
+                                    dataPairs={[
+                                        { label: "Status", value: user.status },
+                                        { label: "Password", value: user.pwStatus },
+                                        { label: "Last Login", value: formatDateTime(user.recentLogin) },
+                                        { label: "Failed Logins", value: user.failedLogins.toString() },
+                                    ]}
+                                />
+                            </PageGroup>
+                        </ColumnLayout.Column>
+                    </ColumnLayout.Row>
+                </PageSection>
             </TabContent>
             <TabContent label="Groups">hello</TabContent>
         </TabSet>

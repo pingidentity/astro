@@ -1312,7 +1312,14 @@ module.exports = [
                         pathToSource: "templates_CustomDomainName.jsx.html",
                         fullscreen: true,
                         icon: "details"
-                    }
+                    },
+                    {
+                        label: "OIDC",
+                        demo: require("../../templates/OIDC"),
+                        pathToSource: "templates_OIDC.jsx.html",
+                        fullscreen: true,
+                        icon: "details",
+                    },
                 ]
             }
         ]
