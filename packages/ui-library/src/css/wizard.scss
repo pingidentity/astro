@@ -245,7 +245,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
                 position: absolute;
                 height: $wizard-progress-icon-size;
                 width: $wizard-progress-icon-size;
-                line-height: $wizard-progress-icon-size;
+                line-height: #{$wizard-progress-icon-size - 1};
                 border-radius: 50%;
                 border: $wizard-progress-icon-border-size solid $color-white;
                 color: $color-white;
