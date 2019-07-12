@@ -42,16 +42,25 @@ const possibleProviders = {
     FACEBOOK: {
         token: "facebook",
         label: "Facebook",
+        logo: "src/images/social/FacebookLogo.png",
         ...initialState
     },
     LINKEDIN: {
         token: "linkedin",
         label: "LinkedIn",
+        logo: "src/images/social/LinkedInLogo.png",
         ...initialState
     },
     TWITTER: {
         token: "twitter",
         label: "Twitter",
+        logo: "src/images/social/TwitterLogo.png",
+        ...initialState
+    },
+    GOOGLE: {
+        token: "google",
+        label: "Google",
+        logo: "src/images/social/GoogleLogo.png",
         ...initialState
     },
     INITIAL: {
@@ -380,20 +389,34 @@ export default class SocialLogin extends Component {
                                 <TileSelector>
                                     <TileButton
                                         title={possibleProviders.FACEBOOK.label}
-                                        iconName={possibleProviders.FACEBOOK.token}
+                                        icon={
+                                            <Image source={possibleProviders.FACEBOOK.logo} size={imageSizes.FULL} />
+                                        }
                                         onClick={this.openProviderWizard(possibleProviders.FACEBOOK)}
                                         type={tileButtonTypes.SQUARE}
                                     />
                                     <TileButton
                                         title={possibleProviders.TWITTER.label}
-                                        iconName={possibleProviders.TWITTER.token}
+                                        icon={
+                                            <Image source={possibleProviders.TWITTER.logo} size={imageSizes.FULL} />
+                                        }
                                         onClick={this.openProviderWizard(possibleProviders.TWITTER)}
                                         type={tileButtonTypes.SQUARE}
                                     />
                                     <TileButton
                                         title={possibleProviders.LINKEDIN.label}
-                                        iconName={possibleProviders.LINKEDIN.token}
+                                        icon={
+                                            <Image source={possibleProviders.LINKEDIN.logo} size={imageSizes.FULL} />
+                                        }
                                         onClick={this.openProviderWizard(possibleProviders.LINKEDIN)}
+                                        type={tileButtonTypes.SQUARE}
+                                    />
+                                    <TileButton
+                                        title={possibleProviders.GOOGLE.label}
+                                        icon={
+                                            <Image source={possibleProviders.GOOGLE.logo} size={imageSizes.FULL} />
+                                        }
+                                        onClick={this.openProviderWizard(possibleProviders.GOOGLE)}
                                         type={tileButtonTypes.SQUARE}
                                     />
                                 </TileSelector>
