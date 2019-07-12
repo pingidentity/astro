@@ -252,6 +252,9 @@ label {
                     &--monospaced {
                         font-family: 'Consolas', 'Monaco', 'Andale Mono', monospace;
                     }
+                    &--no-resize {
+                        resize: none;
+                    }
                 }
             }
         }

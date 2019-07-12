@@ -327,4 +327,23 @@ describe("FormTextArea v4", function () {
 
         expect(spacing.exists()).toEqual(true);
     });
+
+    it("does not block resizing when noResize is false", () => {
+        const component = mount(
+            <FormTextArea
+                noResize={false}
+            />
+        );
+        const textarea = component.find(".input-textarea__input--no-resize");
+        expect(textarea.exists()).toBeFalsy();
+    });
+    it("blocks resizing when noResize is true", () => {
+        const component = mount(
+            <FormTextArea
+                noResize={true}
+            />
+        );
+        const textarea = component.find("textarea.input-textarea__input--no-resize");
+        expect(textarea.exists()).toBeTruthy();
+    });
 });

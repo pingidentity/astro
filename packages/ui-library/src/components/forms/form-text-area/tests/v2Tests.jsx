@@ -317,4 +317,10 @@ describe("FormTextArea", function () {
         expect(console.warn).not.toBeCalled();
     });
 
+    it("does not block resizing by default", function() {
+        var component = getComponent({});
+        var field = TestUtils.findRenderedDOMNodeWithClass(component, "input-textarea__input--no-resize");
+        expect(ReactTestUtils.isDOMComponent(field)).toBeFalsy();
+    });
+
 });

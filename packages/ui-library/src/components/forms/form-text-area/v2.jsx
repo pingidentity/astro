@@ -89,6 +89,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     If true, the text area will be disabled.
 * @param {boolean} [edited=false]
 *     Whether or not the field has been edited.
+* @param {boolean} [noResize=false]
+*     If we disallow end user to be able resizing textarea in browsers that support this
 * @param {boolean} [required=false]
 *     If true, the user must select a value for this field.
 * @param {boolean} [showUndo=false]
@@ -99,7 +101,6 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     False or not specified will cause the component to manage state internally.
 * @param {boolean} [useAutocomplete=false]
 *     Whether or not the field will support autocomplete.
-*
 * @param {FormTextArea~onBlur} [onBlur]
 *     Callback to be triggered when the field loses focus (is blurred).
 * @param {FormTextArea~onChange} [onChange]
@@ -151,6 +152,7 @@ class FormTextAreaStateless extends React.Component {
         mode: PropTypes.string,
         monospaced: PropTypes.bool,
         name: PropTypes.string,
+        noResize: PropTypes.bool,
         onBlur: PropTypes.func,
         onChange: PropTypes.func,
         onUndo: PropTypes.func,
@@ -172,6 +174,7 @@ class FormTextAreaStateless extends React.Component {
         edited: false,
         mode: FormFieldConstants.FormFieldMode.EDIT,
         monospaced: false,
+        noResize: false,
         onBlur: _.noop,
         onChange: _.noop,
         onUndo: _.noop,
@@ -223,7 +226,8 @@ class FormTextAreaStateless extends React.Component {
                         className={classnames(
                             this.props.inputClassName,
                             {
-                                "input-textarea__input--monospaced": this.props.monospaced
+                                "input-textarea__input--monospaced": this.props.monospaced,
+                                "input-textarea__input--no-resize": this.props.noResize,
                             }
                         )}
                         disabled={this.props.disabled}
