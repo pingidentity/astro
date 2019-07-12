@@ -16,7 +16,7 @@ import HelpHint from "../tooltips/HelpHint";
  *      An array of objects with data in key value pairs.
  * @param {array} [headData]
  *      An array of values for the table head.
- * @param {[]|Object[]} [bodyData]
+ * @param {Object[]} [bodyData]
  *      An array of arrays for the body that are ordered in the same was as the headData.
  * @param {string} [verticalAlignment]
  *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
