@@ -628,6 +628,18 @@ label {
     }
 }
 
+.input-checkbox {
+    &__conditional-content {
+        margin-top: $spacing-xs;
+        padding-left: 36px;
+
+        &--stacked {
+            margin-top: 0;
+            margin-bottom: $spacing-sm;
+        }
+    }
+}
+
 .content-measurer {
     position: absolute;
     display: inline-block;

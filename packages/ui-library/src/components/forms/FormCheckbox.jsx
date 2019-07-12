@@ -75,6 +75,7 @@ class FormCheckbox extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         checked: PropTypes.bool,
+        conditionalContent: PropTypes.node,
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
         errorMessage: PropTypes.string,
@@ -155,11 +156,27 @@ class FormCheckbox extends React.Component {
             </FormLabel>
         );
 
-        return (
-            !this.props.stacked ? checkBox
-                : <div className="input-checkbox__container--stacked">
-                    {checkBox}
+        const conditionalContent = this.props.conditionalContent && this.props.checked
+            ?(
+                <div
+                    className={classnames(
+                        "input-checkbox__conditional-content",
+                        {
+                            "input-checkbox__conditional-content--stacked": this.props.stacked
+                        }
+                    )}>
+                    {this.props.conditionalContent}
                 </div>
+            )
+            : null;
+
+        return (
+            this.props.stacked || conditionalContent
+                ? <div className={classnames({ "input-checkbox__container--stacked": this.props.stacked })}>
+                    {checkBox}
+                    {conditionalContent}
+                </div>
+                : checkBox
         );
     }
 }

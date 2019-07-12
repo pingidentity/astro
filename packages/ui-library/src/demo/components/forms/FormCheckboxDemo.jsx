@@ -71,6 +71,7 @@ class FormCheckboxDemo extends React.Component {
                         Example of Stacked Options
                     </label>
                     <FormCheckbox
+                        conditionalContent="Some conditional content"
                         label="Stacked Checkbox"
                         onChange={this._onChange(5)}
                         checked={this.state.checkboxChecked5}

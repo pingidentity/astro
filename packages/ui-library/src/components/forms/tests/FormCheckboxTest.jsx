@@ -5,6 +5,8 @@ jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../FormLabel");
 jest.dontMock("../FormError");
 
+import { shallow } from "enzyme";
+
 describe("FormCheckbox", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -166,6 +168,32 @@ describe("FormCheckbox", function () {
         //make sure className is on the container
         expect(container).toEqual(inline[0]);
         expect(container).toEqual(stacked[0]);
+    });
+
+    it("renders conditional content when conditionalContent prop is passed in and checked is true", () => {
+        const component = shallow(
+            <FormCheckbox
+                checked
+                conditionalContent={<div id="SNAAAAAARF" />}
+            />
+        );
+
+        const conditional = component.find("#SNAAAAAARF");
+
+        expect(conditional.exists()).toEqual(true);
+    });
+
+    it("does not render conditional content when conditionalContent prop is passed in and checked is false", () => {
+        const component = shallow(
+            <FormCheckbox
+                checked={false}
+                conditionalContent={<div id="SNAAAAAARF" />}
+            />
+        );
+
+        const conditional = component.find("#SNAAAAAARF");
+
+        expect(conditional.exists()).toEqual(false);
     });
 
 });

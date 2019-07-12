@@ -359,12 +359,13 @@ class ListOptions extends React.Component {
                     data-id={"selectionList-Checkbox-" + index}
                     key={item.id + "-" + index}
                     label={item.name}
-                    className="stacked"
                     checked={checked}
+                    conditionalContent={item.conditionalContent}
                     onValueChange={onValueChangeFunc}
                     labelHelpText={item.helpHintText}
                     helpTarget={item.helpTarget}
                     name={this.props.name}
+                    stacked
                 />
             );
         });

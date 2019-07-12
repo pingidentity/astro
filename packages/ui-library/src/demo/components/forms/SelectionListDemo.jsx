@@ -39,7 +39,7 @@ var SINGLE_SELECT_ITEMS = [
             helpHintText: "Help Hint with custom image",
             helpTarget: testImage } ,
         { name: "Grape Fruit", id: 5 },
-        { name: "Peach", id: 6 },
+        { name: "Peach", id: 6, conditionalContent: "Some content" },
         { name: "Plum", id: 7,
             helpHintText: "Selection List items may have Help Hints" },
         { name: "Strawberry", id: 8 },
