@@ -228,6 +228,7 @@ class ExpandableRowDemo extends React.Component {
                                     placement="top"
                                     hintText="Platform Provided"
                                     iconName="tag"
+                                    leftMargin
                                 />
                             </div>
                         }
