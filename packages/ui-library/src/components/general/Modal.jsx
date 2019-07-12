@@ -40,7 +40,7 @@ var Type = {
  *     Whether the modal is expanded or not.
  * @param {boolean} [maximize=false]
  *     When true, modal content will always occupy the maximum modal dimensions.
- * @param {string} [modalTitle]
+ * @param {node} [modalTitle]
  *     Title of the modal.
  * @param {boolean} [showHeader=true]
  *     Controls modal header rendering; if set to false,
@@ -74,7 +74,7 @@ class Modal extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         expanded: PropTypes.bool,
-        modalTitle: PropTypes.string,
+        modalTitle: PropTypes.node,
         showHeader: PropTypes.bool,
         onClose: PropTypes.func,
         closeOnBgClick: PropTypes.bool,
