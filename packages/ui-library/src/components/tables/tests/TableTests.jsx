@@ -323,5 +323,19 @@ describe("Table", function () {
         expect(firstCell.props.style.minWidth).toEqual("50px");
         expect(secondCell.props.style.minWidth).not.toEqual("50px");
     });
+
+    it("renders an empty table cell without errors", () => {
+        const component= mount(
+            <Table
+                headData={headData}
+                bodyData={[[
+                    undefined,
+                    undefined
+                ]]}
+            />
+        );
+
+        expect(component.exists()).toEqual(true);
+    });
 });
 

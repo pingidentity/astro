@@ -166,7 +166,7 @@ class TableCell extends Component {
         const {
             icon,
             content = children
-        } = children;
+        } = children || {};
 
         const Cell = isLabel ? "th" : "td";
 
