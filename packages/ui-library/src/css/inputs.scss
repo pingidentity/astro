@@ -2743,7 +2743,7 @@ a {
     vertical-align: bottom;
 
     .label-text {
-        word-break: normal;
+        @include break-word;
     }
     &.input-text,
     &.input-textselect,
