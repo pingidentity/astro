@@ -1,4 +1,5 @@
 import Button, { ButtonTypes } from '../components/Button';
+import SocialButton, { BrandTypes } from '../components/SocialButton';
 import ButtonSet from '../components/ButtonSet';
 import Card from '../components/Card';
 import Checkbox from '../components/Checkbox';
@@ -38,6 +39,15 @@ import ComponentDemo from './components/ComponentDemo';
             <FloatLabelPasswordInput label="Password" id="password2"/>
             <div><Checkbox label="Remember me"/></div>
             <Button label="Sign On" type={ButtonTypes.PRIMARY}/>
+                <SocialButton label="Login with Facebook" branding={BrandTypes.FACEBOOK} />
+                <SocialButton label="Login with Apple" branding={BrandTypes.APPLE} />
+                <SocialButton label="Login with Google" branding={BrandTypes.GOOGLE} />
+                <SocialButton label="Login with Amazon" branding={BrandTypes.AMAZON} />
+                <SocialButton label="Login with Instagram" branding={BrandTypes.INSTAGRAM} />
+                <SocialButton label="Login with LinkedIn" branding={BrandTypes.LINKEDIN} />
+                <SocialButton label="Login with Microsoft" branding={BrandTypes.MICROSOFT} />
+                <SocialButton label="Login with Twitter" branding={BrandTypes.TWITTER} />
+                <SocialButton image="./demo/assets/login-demo.png" />
         </Form>
     </Card>
 </ComponentDemo>

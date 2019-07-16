@@ -22,6 +22,15 @@ describe('Button', () => {
         expect(button.hasClass('button--primary')).toEqual(false);
         expect(button.hasClass('button--tertiary')).toEqual(false);
     });
+    it('renders the button with a render prop', () => {
+        const wrapper = getComponent({
+            render: () => (<h1>TEST</h1>),
+        });
+        const button = wrapper.find('h1');
+
+        expect(button.exists()).toEqual(true);
+        expect(button.text()).toBe('TEST');
+    });
     it('assigns a default onClick', () => {
         const wrapper = getComponent();
         const button = wrapper.find(`button[data-id="${defaultProps['data-id']}"]`);

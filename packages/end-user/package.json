@@ -1,6 +1,6 @@
 {
   "name": "@pingux/end-user",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "uxdev@pingidentity.com",
@@ -15,6 +15,7 @@
     "classnames": "^2.2.5",
     "core-js": "^3.0.1",
     "raf": "^3.4.1",
+    "styled-components": "^4.3.2",
     "underscore": "^1.9.1"
   },
   "devDependencies": {

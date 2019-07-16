@@ -1,6 +1,6 @@
 // BUTTONS
 $button-font-size: $font-size-md;
-$button-padding: $spacing-sm;
+$button-padding: 9px;
 $button-radius: 2px;
 $button-text-color: $color-neutral-20;
 $button-bg-color: $color-neutral-100;
@@ -30,8 +30,10 @@ $button-disabled-opacity: 0.2;
     background: $button-bg-color;
     border: $button-border-style;
     display: block;
-    padding: $button-padding - 1px;
+    padding: $button-padding;
     box-shadow: none;
+    min-height: 40px;
+    text-overflow: ellipsis;
     cursor: pointer;
     width: 100%;
 
