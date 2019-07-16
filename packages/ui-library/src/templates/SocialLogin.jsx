@@ -15,7 +15,6 @@ import FormTextField from "../components/forms/FormTextField";
 import FormToggle from "../components/forms/form-toggle";
 import HelpHint, { Placements as HelpHintPlacements } from "../components/tooltips/HelpHint";
 import Icon, { iconSizes } from "../components/general/Icon";
-import Image, { imageSizes, imageTypes } from "../components/general/Image";
 import InputRow from "../components/layout/InputRow";
 import { InputWidths } from "../components/forms/InputWidths";
 import LabelValuePairs from "../components/layout/LabelValuePairs";
@@ -31,6 +30,10 @@ import Text, { textTypes } from "../components/general/Text";
 import TileSelector, { TileButton, tileButtonTypes } from "../components/buttons/TileSelector";
 import TutorialButton from "../components/buttons/TutorialButton";
 import PageWizard, { Step } from "../components/panels/PageWizard/";
+import SocialIcon from "@pingux/end-user/components/SocialIcon";
+import SocialButton, { BrandTypes } from "@pingux/end-user/components/SocialButton";
+import Link from "../components/general/Link";
+import Image, { imageSizes } from "../components/general/Image";
 
 const initialState = {
     attributes: [],
@@ -42,25 +45,33 @@ const possibleProviders = {
     FACEBOOK: {
         token: "facebook",
         label: "Facebook",
-        logo: "src/images/social/FacebookLogo.png",
+        logo: <SocialIcon.FACEBOOK width="50px" height="50px" />,
+        branding: BrandTypes.FACEBOOK,
+        brandingLabel: "Login with Facebook",
         ...initialState
     },
     LINKEDIN: {
         token: "linkedin",
         label: "LinkedIn",
-        logo: "src/images/social/LinkedInLogo.png",
+        logo: <SocialIcon.LINKEDIN width="50px" height="50px" />,
+        branding: BrandTypes.LINKEDIN,
+        brandingLabel: "Login with LinkedIn",
         ...initialState
     },
     TWITTER: {
         token: "twitter",
         label: "Twitter",
-        logo: "src/images/social/TwitterLogo.png",
+        logo: <SocialIcon.TWITTER width="50px" height="50px" />,
+        branding: BrandTypes.TWITTER,
+        brandingLabel: "Login with Twitter",
         ...initialState
     },
     GOOGLE: {
         token: "google",
         label: "Google",
-        logo: "src/images/social/GoogleLogo.png",
+        logo: <SocialIcon.GOOGLE width="50px" height="50px" />,
+        branding: BrandTypes.GOOGLE,
+        brandingLabel: "Login with Google",
         ...initialState
     },
     INITIAL: {
@@ -79,11 +90,12 @@ export default class SocialLogin extends Component {
         providers: [{
             id: uuidV4(),
             description: "Supervillain",
-            logo: "src/demo/images/logo-facebook.png",
+            logo: <SocialIcon.FACEBOOK width="50px" height="50px" />,
             name: "Facebook",
             type: "facebook"
         }],
-        wizardStep: 0
+        wizardStep: 0,
+        displayCustomSocialButton: false,
     }
 
     addAttribute = () => this.setState(({ activeProvider: { attributes, ...activeProvider } }) => ({
@@ -184,11 +196,44 @@ export default class SocialLogin extends Component {
         reader.onloadend = ({ target: { result } }) => this.setState(({ activeProvider }) => ({
             activeProvider: {
                 ...activeProvider,
-                logo: result
+                customLogo: result
             }
         }));
         reader.readAsDataURL(file);
     };
+
+    removeProviderImage = () => {
+        this.setState(({ activeProvider }) => ({
+            activeProvider: {
+                ...activeProvider,
+                customLogo: null
+            }
+        }));
+    }
+
+    setSocialButtonImage = ({
+        target: {
+            files: [file] = []
+        } = {}
+    }) => {
+        const reader = new FileReader();
+        reader.onloadend = ({ target: { result } }) => this.setState(({ activeProvider }) => ({
+            activeProvider: {
+                ...activeProvider,
+                socialButtonImage: result
+            }
+        }));
+        reader.readAsDataURL(file);
+    };
+
+    removeSocialButtonImage = () => {
+        this.setState(({ activeProvider }) => ({
+            activeProvider: {
+                ...activeProvider,
+                socialButtonImage: null
+            }
+        }));
+    }
 
     setRowIndex = providerId => ({ index }) => this.setState(({ providers }) => ({
         // Iterate through providers, find the one being updated and update its
@@ -225,10 +270,14 @@ export default class SocialLogin extends Component {
                 description,
                 expanded = false,
                 id,
-                logo,
                 name,
                 rowIndex = 0,
                 secret,
+                customLogo = null,
+                logo,
+                socialButtonImage = null,
+                branding,
+                brandingLabel,
                 type, // Facebook, LinkedIn or Twitter
             } = provider;
 
@@ -236,7 +285,8 @@ export default class SocialLogin extends Component {
                 <ExpandableRow
                     expanded={expanded}
                     flags={allFlags}
-                    icon={<Image source={logo} type={imageTypes.SQUARE} size={imageSizes.AUTO} />}
+                    icon={customLogo ? undefined : logo}
+                    image={customLogo}
                     key={id}
                     onDelete={this.deleteProvider(id)}
                     onEditButtonClick={this.openProviderWizard(provider)}
@@ -269,8 +319,20 @@ export default class SocialLogin extends Component {
                                     },
                                     {
                                         label: "Logo",
-                                        value: <Image size={imageSizes.SM} source={logo} />
+                                        value: customLogo ? (<Image source={customLogo} size={imageSizes.SM} />) : logo
                                     },
+                                    {
+                                        label: "Button",
+                                        value: (
+                                            <div style={{ width: "340px" }}>
+                                                <SocialButton
+                                                    branding={branding}
+                                                    label={brandingLabel}
+                                                    image={socialButtonImage}
+                                                />
+                                            </div>
+                                        )
+                                    }
                                 ]}
                             />
                         </TabContent>
@@ -390,7 +452,7 @@ export default class SocialLogin extends Component {
                                     <TileButton
                                         title={possibleProviders.FACEBOOK.label}
                                         icon={
-                                            <Image source={possibleProviders.FACEBOOK.logo} size={imageSizes.FULL} />
+                                            <SocialIcon.FACEBOOK />
                                         }
                                         onClick={this.openProviderWizard(possibleProviders.FACEBOOK)}
                                         type={tileButtonTypes.SQUARE}
@@ -398,7 +460,7 @@ export default class SocialLogin extends Component {
                                     <TileButton
                                         title={possibleProviders.TWITTER.label}
                                         icon={
-                                            <Image source={possibleProviders.TWITTER.logo} size={imageSizes.FULL} />
+                                            <SocialIcon.TWITTER />
                                         }
                                         onClick={this.openProviderWizard(possibleProviders.TWITTER)}
                                         type={tileButtonTypes.SQUARE}
@@ -406,7 +468,7 @@ export default class SocialLogin extends Component {
                                     <TileButton
                                         title={possibleProviders.LINKEDIN.label}
                                         icon={
-                                            <Image source={possibleProviders.LINKEDIN.logo} size={imageSizes.FULL} />
+                                            <SocialIcon.LINKEDIN />
                                         }
                                         onClick={this.openProviderWizard(possibleProviders.LINKEDIN)}
                                         type={tileButtonTypes.SQUARE}
@@ -414,7 +476,7 @@ export default class SocialLogin extends Component {
                                     <TileButton
                                         title={possibleProviders.GOOGLE.label}
                                         icon={
-                                            <Image source={possibleProviders.GOOGLE.logo} size={imageSizes.FULL} />
+                                            <SocialIcon.GOOGLE />
                                         }
                                         onClick={this.openProviderWizard(possibleProviders.GOOGLE)}
                                         type={tileButtonTypes.SQUARE}
@@ -433,11 +495,7 @@ export default class SocialLogin extends Component {
                                         <Padding
                                             right={paddingSizes.MD}
                                         >
-                                            <Icon
-                                                iconName={activeProvider.token}
-                                                iconSize={iconSizes.LG}
-                                                inline
-                                            />
+                                            {activeProvider.logo}
                                         </Padding>
                                         Create Profile
                                     </FlexRow>
@@ -472,16 +530,61 @@ export default class SocialLogin extends Component {
                                 <InputRow>
                                     <FileUpload
                                         accepts={[".jpg"]}
-                                        defaultImage="src/demo/images/logo-facebook.png"
                                         flags={["true-default"]}
-                                        label="Logo"
-                                        labelRemove="Remove"
-                                        labelSelect="Choose a File"
-                                        onChange={this.setProviderImage}
+                                        labelRemove={activeProvider.customLogo && "Remove"}
                                         showThumbnail
-                                        stateless={false}
-                                        thumbnailSrc={activeProvider.logo || ""}
+                                        label="Logo"
+                                        onChange={this.setProviderImage}
+                                        onRemove={this.removeProviderImage}
+                                        thumbnailSrc={
+                                            activeProvider.customLogo ? activeProvider.customLogo : (<div>
+                                                <div style={{
+                                                    marginBottom: "8px",
+                                                    opacity: !activeProvider.customLogo ? .5 : 1
+                                                }}>
+                                                    {activeProvider.logo}
+                                                </div>
+                                                <div style={{ textTransform: "none", fontSize: "14px" }}>
+                                                    {!activeProvider.customLogo && (
+                                                        <Link>Change</Link>
+                                                    )}
+                                                </div>
+                                            </div>)
+                                        }
                                     />
+                                </InputRow>
+                                <InputRow>
+                                    <InputRow>
+                                        <FileUpload
+                                            accepts={[".jpg", ".jpeg", ".png"]}
+                                            flags={["true-default"]}
+                                            labelRemove={activeProvider.socialButtonImage && "Remove"}
+                                            showThumbnail
+                                            label="Social Button (80PX x 680PX, .JPG/.PNG)"
+                                            onChange={this.setSocialButtonImage}
+                                            onRemove={this.removeSocialButtonImage}
+                                            thumbnailSrc={
+                                                <div>
+                                                    <div style={{
+                                                        width: "340px",
+                                                        marginBottom: "8px",
+                                                        opacity: !activeProvider.socialButtonImage ? .5 : 1
+                                                    }}>
+                                                        <SocialButton
+                                                            branding={activeProvider.branding}
+                                                            label={activeProvider.label}
+                                                            image={activeProvider.socialButtonImage}
+                                                        />
+                                                    </div>
+                                                    <div style={{ textTransform: "none", fontSize: "14px" }}>
+                                                        { !activeProvider.socialButtonImage && (
+                                                            <Link>Change</Link>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            }
+                                        />
+                                    </InputRow>
                                 </InputRow>
                             </Step>,
                             <Step

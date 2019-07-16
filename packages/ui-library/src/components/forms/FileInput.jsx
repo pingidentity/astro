@@ -6,7 +6,7 @@ import FileDrop from "./FileDrop";
 import MessageButton from "../buttons/MessageButton";
 import Icon, { iconSizes } from "../general/Icon";
 import classnames from "classnames";
-import FlexRow from "../layout/FlexRow";
+import FlexRow, { alignments } from "../layout/FlexRow";
 
 /**
 * @callback FileInput~onRemove
@@ -156,7 +156,7 @@ class FileInput extends Component {
 
         return (
             fileName && !status ? (
-                <FlexRow>
+                <FlexRow alignment={alignments.CENTER}>
                     { errorColor ? <span style={{ color: errorColor }}>
                         <Icon iconName="alert" data-id="error-icon" iconSize={iconSizes.MD} />
                     </span>
