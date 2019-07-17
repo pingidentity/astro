@@ -1,5 +1,4 @@
 import FlexRow, { justifyOptions, alignments, spacingOptions, flexDirectionOptions } from "../FlexRow";
-import Padding from "../Padding";
 import React from "react";
 import { shallow } from "enzyme";
 
@@ -52,20 +51,25 @@ describe("Flex Row", () => {
         expect(component.find(".flex-row--justify-start").exists()).toBeTruthy();
     });
 
-    it("adds padding components between children with correct spacing", () => {
+    it("adds correct spacing class for row", () => {
         const component = shallow(
             <FlexRow
                 spacing={spacingOptions.XL}
-            >
-                <div />
-                <div />
-                <div />
-            </FlexRow>
+            />
         );
 
-        const spacing = component.find(Padding);
+        expect(component.hasClass("flex-row--row-spacing-xl")).toEqual(true);
+    });
 
-        expect(spacing.length).toEqual(2);
+    it("adds correct spacing class for column", () => {
+        const component = shallow(
+            <FlexRow
+                flexDirection={flexDirectionOptions.COLUMN}
+                spacing={spacingOptions.XL}
+            />
+        );
+
+        expect(component.hasClass("flex-row--column-spacing-xl")).toEqual(true);
     });
 
     it("renders with correct column flex direction class", () => {

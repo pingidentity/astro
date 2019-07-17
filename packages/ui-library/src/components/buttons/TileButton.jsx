@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { getIconClassName } from "../../util/PropUtils";
 import classnames from "classnames";
+import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from "../layout/FlexRow";
 import Link from "../general/Link";
 
 
@@ -106,7 +107,7 @@ const TileButton = ({
             </div>
     );
 
-    const renderedContent = (
+    const renderedContent = children && (
         <div key="content" className="tile-button__content">
             {children}
         </div>
@@ -133,9 +134,15 @@ const TileButton = ({
             {isSideIcon
                 ? (
                     <div className="tile-button__content-container">
-                        {renderedTitle}
-                        {renderedContent}
-                        {renderLink}
+                        <FlexRow
+                            alignment={alignments.STRETCH}
+                            flexDirection={flexDirectionOptions.COLUMN}
+                            spacing={spacingOptions.SM}
+                        >
+                            {renderedTitle}
+                            {renderedContent}
+                            {renderLink}
+                        </FlexRow>
                         {renderedDetails}
                     </div>
                 ) : (

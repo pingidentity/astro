@@ -753,10 +753,6 @@ button.tile-button--side-icon {
             margin: 0 $spacing-lg 0 0;
         }
 
-        &__content {
-            margin-bottom: $spacing-sm;
-        }
-
         &__content-container {
             @include flexbox-grow(1);
 
@@ -766,7 +762,6 @@ button.tile-button--side-icon {
         &__title {
             @include flexbox();
 
-            margin-bottom: $spacing-sm;
             margin-top: 0;
             text-align: left;
         }

@@ -55,4 +55,64 @@
     &--flex-direction-column-reverse {
         flex-direction: column-reverse;
     }
+
+    &--row-spacing-xs {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-xs;
+        }
+    }
+
+    &--row-spacing-sm {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-sm;
+        }
+    }
+
+    &--row-spacing-md {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-md;
+        }
+    }
+
+    &--row-spacing-lg {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-lg;
+        }
+    }
+
+    &--row-spacing-xl {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-xl;
+        }
+    }
+
+    &--column-spacing-xs {
+        & > *:not(:last-child) {
+            margin-right: $spacing-xs;
+        }
+    }
+
+    &--column-spacing-sm {
+        & > *:not(:last-child) {
+            margin-right: $spacing-sm;
+        }
+    }
+
+    &--column-spacing-md {
+        & > *:not(:last-child) {
+            margin-right: $spacing-md;
+        }
+    }
+
+    &--column-spacing-lg {
+        & > *:not(:last-child) {
+            margin-right: $spacing-lg;
+        }
+    }
+
+    &--column-spacing-xl {
+        & > *:not(:last-child) {
+            margin-right: $spacing-xl;
+        }
+    }
 }

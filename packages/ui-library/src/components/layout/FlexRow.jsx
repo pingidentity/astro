@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Padding, { sizes as paddingSizes } from "../layout/Padding";
+import { sizes as paddingSizes } from "../layout/Padding";
 import classnames from "classnames";
 
 /**
@@ -84,18 +84,6 @@ const getJustifyClass = justify => {
     }
 };
 
-const getSpacedChildren = (children, spacing) => React.Children.map(children, (child, idx) =>
-    idx === React.Children.count(children) - 1
-        ? child
-        : (
-            <Padding
-                right={spacing}
-            >
-                {child}
-            </Padding>
-        )
-);
-
 const getFlexDirection = flexDirection => {
     switch (flexDirection) {
         case flexDirectionOptions.ROW:
@@ -112,13 +100,15 @@ const getFlexDirection = flexDirection => {
 function FlexRow({
     alignment,
     children,
-    "data-id": dataId,
     className,
+    "data-id": dataId,
+    flexDirection,
     inline,
     justify,
-    flexDirection,
     spacing
 }) {
+    const isColumn =
+        flexDirection === flexDirectionOptions.COLUMN || flexDirection === flexDirectionOptions.COLUMNREVERSE;
     return (
         <div
             className={classnames(
@@ -128,15 +118,13 @@ function FlexRow({
                 getJustifyClass(justify),
                 getFlexDirection(flexDirection),
                 {
+                    [`flex-row--${isColumn ? "column" : "row" }-spacing-${spacing}`]: spacing !== undefined,
                     "flex-row--inline": inline
                 }
             )}
             data-id={dataId}
         >
-            {spacing
-                ? getSpacedChildren(children, spacing)
-                : children
-            }
+            {children}
         </div>
     );
 }
@@ -146,12 +134,12 @@ FlexRow.propTypes = {
         Object.values(alignments)
     ),
     "data-id": PropTypes.string,
+    flexDirection: PropTypes.oneOf(
+        Object.values(flexDirectionOptions)
+    ),
     inline: PropTypes.bool,
     justify: PropTypes.oneOf(
         Object.values(justifyOptions)
-    ),
-    flexDirection: PropTypes.oneOf(
-        Object.values(flexDirectionOptions)
     ),
     spacing: PropTypes.oneOf(
         Object.values(spacingOptions)
@@ -162,7 +150,7 @@ FlexRow.defaultProps = {
     alignment: alignments.BOTTOM,
     "data-id": "flex-row",
     inline: false,
-    justify: justifyOptions.START
+    justify: justifyOptions.START,
 };
 
 export default FlexRow;
