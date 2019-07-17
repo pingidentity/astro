@@ -1,0 +1,87 @@
+Render props are a pattern that allows for rendering one component in place of another while receiving props and other information from a parent component.
+
+## What is a render prop?
+
+A render prop is a function passed to a component as a prop that renders JSX within that component.
+
+As an example, the following component uses a render prop to provide toggle functionality to a child component passed in through the renderContent prop.
+
+```
+class ToggleComponent extends React.Component {
+    state = {
+        toggled: false
+    }
+
+    render() {
+        return this.props.renderContent({
+            changeToggleState: () => this.setState(state => {
+                return {
+                    toggled: !state.toggled
+                }
+            })
+            toggled: this.state.toggled
+        })
+    }
+}
+```
+
+##
+
+In the UI Library, we typically use render props in cases like the following:
+
+```
+class ComponentWithRenderProp extends React.Component {
+    handleClick = () => //do something specific based on the props of the component
+
+    render() {
+        return (
+            <div className="some-class">
+                {renderButton({ onClick: this.props.handleClick, ...otherPropsOfTheButton }, Button)}
+            </div>
+        )
+    }
+}
+```
+
+##
+
+Your renderButton function might look like:
+
+```
+function renderLinkInstead({ onClick }) {
+    return (
+        <Link
+            onClick={onClick}
+        >
+            Let's replace the button with a link
+        </Link>
+    )
+}
+```
+
+##
+
+And your implementation might look like:
+
+```
+function SomeComponent() {
+    return (
+        <ComponentWithRenderProp
+            renderButton={renderLinkInstead}
+        />
+    )
+}
+```
+##
+
+## Why use render props?
+In the 'renderButton' example above, we're able to use the component's internal onClick functionality without having to understand any of its implementation details or rewriting any code. This gives a user flexibility to render numerous different components, from a `<Link />` to a `<DetailsTooltip />` to even another `<Button />`.
+This means that the API's of our components can accommodate many different use cases from the start without having to add props like 'useLink', 'useTooltip', 'tooltipClass', and 'onTooltipClick'. In the long run, this means that component API's stay relatively simple. In the short run, it means that users of our components don't have to wait for the UI Library team to add new props in order to get functionality they want.
+
+## How render props are used in the UI Library
+Like with the example above, we typically use render props to allow users of our components to have flexibility with how different parts of a component get rendered.
+Generally, the first parameter of a render prop function is the props that we'd be passing to the default component and the second parameter is the default component itself.
+
+## Naming conventions
+
+Generally, our render props are all named something like `renderComponent`. So, if you see a prop named `renderButton`, you know that's one of our render props.

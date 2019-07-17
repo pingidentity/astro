@@ -13,6 +13,7 @@ import ClassNames from "../components/docs/contributing/ClassNames.mdx";
 import DataIDs from "../components/docs/contributing/DataIDs.mdx";
 import Changes from "../components/docs/cannonball/Changes.mdx";
 import GettingReady from "../components/docs/cannonball/GettingReadyV4.mdx";
+import RenderProps from "../components/docs/RenderProps.mdx";
 
 const contentPage = WrappedComponent => (props) => (
     <PageSection>
@@ -81,6 +82,12 @@ module.exports = [
                 demo: contentPage(UsingTemplates),
                 contentPage: true,
                 icon: "apps"
+            },
+            {
+                label: "Render Props",
+                demo: contentPage(RenderProps),
+                contentPage: true,
+                icon: "code"
             },
             {
                 label: "Content",
