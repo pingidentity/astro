@@ -1226,14 +1226,11 @@ input[type=file] {
                 display: block;
                 width: $img-width;
                 border: 1px solid $color-timberwolf;
-
-                &--default {
-                    opacity: 0.5;
-                }
             }
 
             &--default {
                 display: block;
+                opacity: 0.5;
             }
         }
         button.inline.choose {

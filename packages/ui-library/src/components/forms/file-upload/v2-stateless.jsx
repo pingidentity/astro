@@ -169,14 +169,7 @@ function ImagePreview({
                 {isNode
                     ? src
                     : <img
-                        className={
-                            classnames(
-                                "input-image-thumb__img",
-                                {
-                                    "input-image-thumb__img--default": isDefault
-                                }
-                            )
-                        }
+                        className="input-image-thumb__img"
                         src={src}
                         data-id="imageThumb"
                         alt="Thumbnail"

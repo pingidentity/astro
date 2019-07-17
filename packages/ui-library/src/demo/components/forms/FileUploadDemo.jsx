@@ -154,7 +154,7 @@ export default class FileUploadDemo extends React.Component {
 
                 <InputRow>
                     <FileUpload
-                        labelText="File Input with component as default image"
+                        labelText="File Input with component as default image and file extensions in accept prop"
                         accept="image/png"
                         validator={this._fileValidator}
                         showThumbnail={true}
