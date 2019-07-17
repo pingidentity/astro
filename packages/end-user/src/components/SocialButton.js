@@ -143,6 +143,7 @@ export default styled(SocialButton)`
         align-items: center;
         overflow: auto;
         position: relative;
+        line-height: 0;
     }
 
     .social-button__button {
@@ -154,14 +155,14 @@ export default styled(SocialButton)`
         margin-left: auto;
         margin-right: auto;
         font-family: "proxima-nova", sans-serif;
-        min-height: 40px;
+        height: 40px;
         position: relative;
         text-overflow: ellipsis;
         cursor: pointer;
 
         &::after {
             content: "";
-            background-color: ${({branding = {}}) => branding.lightBg ? '#000' : '#FFF'};
+            background-color: ${({branding = {}}) => branding.lightBg ? '#CCC' : '#FFF'};
             position: absolute;
             top: 0;
             left: 0;
@@ -196,5 +197,8 @@ export default styled(SocialButton)`
         padding: 0;
         margin: 0;
         border: 0;
+        overflow: hidden;
+        height: 40px;
+        cursor: pointer;
     }
 `;

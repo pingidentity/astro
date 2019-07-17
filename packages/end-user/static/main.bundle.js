@@ -91834,7 +91834,7 @@ var _SocialLogo = _interopRequireDefault(__webpack_require__(639));
 var _styledComponents = _interopRequireDefault(__webpack_require__(640));
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n    .social-button__container {\n        width: 100%;\n        display: flex;\n        align-items: center;\n        overflow: auto;\n        position: relative;\n    }\n\n    .social-button__button {\n        border-radius: 2px;\n        border-style: solid;\n        font-size: 15px;\n        padding: 9px;\n        width: 100%;\n        margin-left: auto;\n        margin-right: auto;\n        font-family: \"proxima-nova\", sans-serif;\n        min-height: 40px;\n        position: relative;\n        text-overflow: ellipsis;\n        cursor: pointer;\n\n        &::after {\n            content: \"\";\n            background-color: ", ";\n            position: absolute;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            opacity: 0;\n            pointer-events: none;\n        }\n\n        &:hover {\n            &::after {\n                opacity: 0.1;\n            }\n        }\n    }\n\n    .social-button__logo {\n        flex: 1;\n        text-align: left;\n    }\n\n    .social-button__label {\n        flex: 2;\n        text-align: center;\n    }\n\n    .social-button__spacer {\n        flex: 1;\n    }\n\n    .social-button__image-button {\n        padding: 0;\n        margin: 0;\n        border: 0;\n    }\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n    .social-button__container {\n        width: 100%;\n        display: flex;\n        align-items: center;\n        overflow: auto;\n        position: relative;\n        line-height: 0;\n    }\n\n    .social-button__button {\n        border-radius: 2px;\n        border-style: solid;\n        font-size: 15px;\n        padding: 9px;\n        width: 100%;\n        margin-left: auto;\n        margin-right: auto;\n        font-family: \"proxima-nova\", sans-serif;\n        height: 40px;\n        position: relative;\n        text-overflow: ellipsis;\n        cursor: pointer;\n\n        &::after {\n            content: \"\";\n            background-color: ", ";\n            position: absolute;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            opacity: 0;\n            pointer-events: none;\n        }\n\n        &:hover {\n            &::after {\n                opacity: 0.1;\n            }\n        }\n    }\n\n    .social-button__logo {\n        flex: 1;\n        text-align: left;\n    }\n\n    .social-button__label {\n        flex: 2;\n        text-align: center;\n    }\n\n    .social-button__spacer {\n        flex: 1;\n    }\n\n    .social-button__image-button {\n        padding: 0;\n        margin: 0;\n        border: 0;\n        overflow: hidden;\n        height: 40px;\n        cursor: pointer;\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -91999,7 +91999,7 @@ SocialButton.BrandTypes = brandTypes;
 var _default = (0, _styledComponents.default)(SocialButton)(_templateObject(), function (_ref3) {
   var _ref3$branding = _ref3.branding,
       branding = _ref3$branding === void 0 ? {} : _ref3$branding;
-  return branding.lightBg ? '#000' : '#FFF';
+  return branding.lightBg ? '#CCC' : '#FFF';
 });
 
 exports.default = _default;
