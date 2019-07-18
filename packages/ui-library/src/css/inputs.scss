@@ -23,15 +23,16 @@ $default-input-border-radius: 2px;
   This will hide the focus indicator if the element receives focus via the mouse,
   but it will still show up on keyboard focus.
 */
-.js-focus-visible :focus:not(.focus-visible) {
-    outline-width: 0;
+
+.js-focus-visible {
+    .input-radio > input:focus:not(.focus-visible) {
+        outline-width: 0;
+    }
+
+    [class$='--autofocus']:focus:not(.focus-visible) {
+        outline-width: 5px;
+    }
 }
-
-.js-focus-visible [class$='--autofocus']:focus:not(.focus-visible) {
-    outline-width: 5px;
-}
-
-
 
 // CORE INPUT STYLES ---------------------------------------------------------------------------------------------------
 
@@ -432,6 +433,7 @@ label {
     }
 
     &.input-radio {
+
         $radio-height: 24px;
         $border-width: 3px;
 
