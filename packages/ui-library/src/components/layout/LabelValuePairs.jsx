@@ -63,8 +63,8 @@ const LabelValuePairs = ({
             );
         } else {
             return [
-                <div key={label} className="label-value-pairs__label">{label}</div>,
-                <div key={value} className="label-value-pairs__value">
+                <div key={`${label}-${value}-${dividerIndex}`} className="label-value-pairs__label">{label}</div>,
+                <div key={`${value}-${label}-${dividerIndex}`}className="label-value-pairs__value">
                     {value}
                     {renderHint()}
                 </div>

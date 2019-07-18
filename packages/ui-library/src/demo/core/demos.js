@@ -1341,6 +1341,13 @@ module.exports = [
                         fullscreen: true,
                         icon: "details",
                     },
+                    {
+                        label: "Outbound Provisioning",
+                        demo: require("../../templates/OutboundProvisioningTemplate"),
+                        pathToSource: "templates_OutboundProvisioningTemplate.jsx.html",
+                        fullscreen: true,
+                        icon: "details",
+                    },
                 ]
             }
         ]

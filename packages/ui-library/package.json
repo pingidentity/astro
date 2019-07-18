@@ -60,7 +60,7 @@
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@pingux/end-user": "^0.6.2",
+    "@pingux/end-user": "^0.7.1",
     "@pingux/gulp-export": "^2.2.0",
     "acorn": "^6.0.4",
     "babel-eslint": "10.0.1",
