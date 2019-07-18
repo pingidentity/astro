@@ -91827,14 +91827,14 @@ var _react = _interopRequireDefault(__webpack_require__(2));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(3));
 
+var _styledComponents = _interopRequireDefault(__webpack_require__(639));
+
 var _Button = _interopRequireDefault(__webpack_require__(19));
 
-var _SocialLogo = _interopRequireDefault(__webpack_require__(639));
-
-var _styledComponents = _interopRequireDefault(__webpack_require__(640));
+var _SocialLogo = _interopRequireDefault(__webpack_require__(648));
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n    .social-button__container {\n        width: 100%;\n        display: flex;\n        align-items: center;\n        overflow: auto;\n        position: relative;\n        line-height: 0;\n    }\n\n    .social-button__button {\n        border-radius: 2px;\n        border-style: solid;\n        font-size: 15px;\n        padding: 9px;\n        width: 100%;\n        margin-left: auto;\n        margin-right: auto;\n        font-family: \"proxima-nova\", sans-serif;\n        height: 40px;\n        position: relative;\n        text-overflow: ellipsis;\n        cursor: pointer;\n\n        &::after {\n            content: \"\";\n            background-color: ", ";\n            position: absolute;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            opacity: 0;\n            pointer-events: none;\n        }\n\n        &:hover {\n            &::after {\n                opacity: 0.1;\n            }\n        }\n    }\n\n    .social-button__logo {\n        flex: 1;\n        text-align: left;\n    }\n\n    .social-button__label {\n        flex: 2;\n        text-align: center;\n    }\n\n    .social-button__spacer {\n        flex: 1;\n    }\n\n    .social-button__image-button {\n        padding: 0;\n        margin: 0;\n        border: 0;\n        overflow: hidden;\n        height: 40px;\n        cursor: pointer;\n    }\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n    .social-button__container {\n        width: 100%;\n        display: flex;\n        align-items: center;\n        overflow: auto;\n        position: relative;\n        box-sizing: border-box;\n    }\n\n    .social-button__button {\n        border-radius: 2px;\n        border-style: solid;\n        font-size: 15px;\n        width: 100%;\n        margin-left: auto;\n        margin-right: auto;\n        font-family: \"proxima-nova\", sans-serif;\n        height: 40px;\n        line-height: unset;\n        position: relative;\n        text-overflow: ellipsis;\n        cursor: pointer;\n\n        &::after {\n            content: \"\";\n            background-color: ", ";\n            position: absolute;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            opacity: 0;\n            pointer-events: none;\n        }\n\n        &:hover {\n            &::after {\n                opacity: 0.1;\n            }\n        }\n    }\n\n    .social-button__logo {\n        flex: 1;\n        text-align: left;\n        display: flex;\n        align-items: center;\n    }\n\n    .social-button__label {\n        flex: 2;\n        text-align: center;\n    }\n\n    .social-button__spacer {\n        flex: 1;\n    }\n\n    .social-button__image-button {\n        padding: 0;\n        margin: 0;\n        border: 0;\n        overflow: hidden;\n        height: 40px;\n        cursor: pointer;\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -91991,7 +91991,13 @@ SocialButton.propTypes = {
   'data-id': _propTypes.default.string,
   onClick: _propTypes.default.func,
   label: _propTypes.default.node,
-  branding: _propTypes.default.oneOf((0, _values.default)(brandTypes)),
+  branding: _propTypes.default.oneOfType([_propTypes.default.oneOf((0, _values.default)(brandTypes)), _propTypes.default.shape({
+    fill: _propTypes.default.string,
+    color: _propTypes.default.string,
+    border: _propTypes.default.string,
+    lightBg: _propTypes.default.bool,
+    logo: _propTypes.default.node
+  })]),
   image: _propTypes.default.string
 };
 SocialButton.BrandTypes = brandTypes;
@@ -92356,280 +92362,6 @@ module.exports = function fill(value /* , start = 0, end = @length */) {
 
 /***/ }),
 /* 639 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(0);
-
-var _Object$defineProperty = __webpack_require__(1);
-
-_Object$defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = void 0;
-
-var _concat = _interopRequireDefault(__webpack_require__(44));
-
-var _react = _interopRequireDefault(__webpack_require__(2));
-
-var SocialLogos = {
-  MICROSOFT: function MICROSOFT(_ref) {
-    var _context;
-
-    var _ref$width = _ref.width,
-        width = _ref$width === void 0 ? 180 : _ref$width,
-        _ref$height = _ref.height,
-        height = _ref$height === void 0 ? 180 : _ref$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context = "new 0 0 ".concat(width, " ")).call(_context, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("rect", {
-      style: {
-        fill: '#F25022'
-      },
-      width: "47.37",
-      height: "47.37"
-    }), _react.default.createElement("rect", {
-      y: "52.63",
-      style: {
-        fill: '#00A4EF'
-      },
-      width: "47.37",
-      height: "47.37"
-    }), _react.default.createElement("rect", {
-      x: "52.63",
-      style: {
-        fill: '#7FBA00'
-      },
-      width: "47.37",
-      height: "47.37"
-    }), _react.default.createElement("rect", {
-      x: "52.63",
-      y: "52.63",
-      style: {
-        fill: '#FFB900'
-      },
-      width: "47.37",
-      height: "47.37"
-    }));
-  },
-  GOOGLE: function GOOGLE(_ref2) {
-    var _context2;
-
-    var _ref2$width = _ref2.width,
-        width = _ref2$width === void 0 ? 180 : _ref2$width,
-        _ref2$height = _ref2.height,
-        height = _ref2$height === void 0 ? 180 : _ref2$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context2 = "new 0 0 ".concat(width, " ")).call(_context2, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("path", {
-      style: {
-        fill: '#4285F4'
-      },
-      d: "M99,51.11C99,47,98.67,44,97.94,40.89H51v18.56h27.56C78,64.06,75,71,68.33,75.67l-0.09,0.62l14.84,11.5 l1.03,0.1C93.56,79.17,99,66.33,99,51.11"
-    }), _react.default.createElement("path", {
-      style: {
-        fill: '#34A853'
-      },
-      d: "M51,100c13.5,0,24.83-4.44,33.11-12.11L68.33,75.67c-4.22,2.94-9.89,5-17.33,5c-13.22,0-24.44-8.72-28.44-20.78 l-0.59,0.05L6.54,71.88l-0.2,0.56C14.56,88.78,31.44,100,51,100"
-    }), _react.default.createElement("path", {
-      style: {
-        fill: '#FBBC05'
-      },
-      d: "M22.56,59.89c-1.06-3.11-1.67-6.44-1.67-9.89c0-3.44,0.61-6.78,1.61-9.89l-0.03-0.66L6.84,27.31l-0.51,0.24 C2.94,34.33,1,41.94,1,50s1.94,15.67,5.33,22.44L22.56,59.89"
-    }), _react.default.createElement("path", {
-      style: {
-        fill: '#EB4335'
-      },
-      d: "M51,19.33c9.39,0,15.72,4.06,19.33,7.44L84.44,13C75.78,4.94,64.5,0,51,0C31.44,0,14.56,11.22,6.33,27.56 L22.5,40.11C26.56,28.06,37.78,19.33,51,19.33"
-    }));
-  },
-  LINKEDIN: function LINKEDIN(_ref3) {
-    var _context3;
-
-    var _ref3$width = _ref3.width,
-        width = _ref3$width === void 0 ? 180 : _ref3$width,
-        _ref3$height = _ref3.height,
-        height = _ref3$height === void 0 ? 180 : _ref3$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context3 = "new 0 0 ".concat(width, " ")).call(_context3, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M85.2,85.2H70.4V62c0-5.5-0.1-12.7-7.7-12.7c-7.7,0-8.9,6-8.9,12.3v23.6H39V37.5h14.2V44h0.2 c2.9-5,8.3-7.9,14-7.7c15,0,17.8,9.9,17.8,22.7L85.2,85.2z M22.2,31c-4.7,0-8.6-3.8-8.6-8.6s3.8-8.6,8.6-8.6c4.7,0,8.6,3.8,8.6,8.6 C30.8,27.1,27,31,22.2,31L22.2,31 M29.7,85.2H14.8V37.5h14.8V85.2z M92.6,0H7.4C3.4,0,0,3.2,0,7.2v85.6c0,4,3.3,7.3,7.4,7.2h85.2 c4,0.1,7.4-3.2,7.4-7.2V7.2C99.9,3.2,96.6-0.1,92.6,0"
-    }));
-  },
-  TWITTER: function TWITTER(_ref4) {
-    var _context4;
-
-    var _ref4$width = _ref4.width,
-        width = _ref4$width === void 0 ? 180 : _ref4$width,
-        _ref4$height = _ref4.height,
-        height = _ref4$height === void 0 ? 180 : _ref4$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context4 = "new 0 0 ".concat(width, " ")).call(_context4, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M31.41,90.66c37.74,0,58.38-31.29,58.38-58.38c0-0.88,0-1.76-0.04-2.64c4-2.88,7.48-6.52,10.24-10.64 c-3.68,1.64-7.64,2.72-11.8,3.24c4.24-2.52,7.48-6.56,9.04-11.36c-3.96,2.36-8.36,4.04-13.05,4.96c-3.76-4-9.08-6.48-14.97-6.48 c-11.32,0-20.53,9.2-20.53,20.53c0,1.6,0.2,3.16,0.52,4.68c-17.05-0.84-32.17-9.04-42.3-21.45c-1.76,3.04-2.76,6.56-2.76,10.32 c0,7.12,3.64,13.41,9.12,17.09C9.92,40.4,6.76,39.48,4,37.96c0,0.08,0,0.16,0,0.28c0,9.92,7.08,18.25,16.45,20.13 c-1.72,0.48-3.52,0.72-5.4,0.72c-1.32,0-2.6-0.12-3.84-0.36c2.6,8.16,10.2,14.09,19.17,14.25c-7.04,5.52-15.89,8.8-25.49,8.8 c-1.64,0-3.28-0.08-4.88-0.28C9.04,87.25,19.85,90.66,31.41,90.66"
-    }));
-  },
-  INSTAGRAM: function INSTAGRAM(_ref5) {
-    var _context5;
-
-    var _ref5$width = _ref5.width,
-        width = _ref5$width === void 0 ? 180 : _ref5$width,
-        _ref5$height = _ref5.height,
-        height = _ref5$height === void 0 ? 180 : _ref5$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context5 = "new 0 0 ".concat(width, " ")).call(_context5, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("g", null, _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M50,9.01c13.35,0,14.93,0.05,20.2,0.29c4.87,0.22,7.52,1.04,9.28,1.72c2.33,0.91,4,1.99,5.75,3.74 c1.75,1.75,2.83,3.42,3.74,5.75c0.68,1.76,1.5,4.41,1.72,9.28c0.24,5.27,0.29,6.85,0.29,20.2s-0.05,14.93-0.29,20.2 c-0.22,4.87-1.04,7.52-1.72,9.28c-0.91,2.33-1.99,4-3.74,5.75c-1.75,1.75-3.42,2.83-5.75,3.74c-1.76,0.68-4.41,1.5-9.28,1.72 c-5.27,0.24-6.85,0.29-20.2,0.29s-14.93-0.05-20.2-0.29c-4.87-0.22-7.52-1.04-9.28-1.72c-2.33-0.91-4-1.99-5.75-3.74 c-1.75-1.75-2.83-3.42-3.74-5.75c-0.68-1.76-1.5-4.41-1.72-9.28C9.06,64.93,9.01,63.35,9.01,50S9.06,35.07,9.3,29.8 c0.22-4.87,1.04-7.52,1.72-9.28c0.91-2.33,1.99-4,3.74-5.75c1.75-1.75,3.42-2.83,5.75-3.74c1.76-0.68,4.41-1.5,9.28-1.72 C35.07,9.06,36.65,9.01,50,9.01 M50,0C36.42,0,34.72,0.06,29.39,0.3c-5.32,0.24-8.96,1.09-12.14,2.32 c-3.29,1.28-6.08,2.99-8.86,5.77c-2.78,2.78-4.49,5.57-5.77,8.86c-1.24,3.18-2.08,6.82-2.32,12.14C0.06,34.72,0,36.42,0,50 c0,13.58,0.06,15.28,0.3,20.61c0.24,5.32,1.09,8.96,2.32,12.14c1.28,3.29,2.99,6.08,5.77,8.86c2.78,2.78,5.57,4.49,8.86,5.77 c3.18,1.24,6.82,2.08,12.14,2.32c5.33,0.24,7.04,0.3,20.61,0.3s15.28-0.06,20.61-0.3c5.32-0.24,8.96-1.09,12.14-2.32 c3.29-1.28,6.08-2.99,8.86-5.77c2.78-2.78,4.49-5.57,5.77-8.86c1.24-3.18,2.08-6.82,2.32-12.14c0.24-5.33,0.3-7.04,0.3-20.61 s-0.06-15.28-0.3-20.61c-0.24-5.32-1.09-8.96-2.32-12.14c-1.28-3.29-2.99-6.08-5.77-8.86c-2.78-2.78-5.57-4.49-8.86-5.77 c-3.18-1.24-6.82-2.08-12.14-2.32C65.28,0.06,63.58,0,50,0L50,0z"
-    }), _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M50,24.32c-14.18,0-25.68,11.5-25.68,25.68S35.82,75.68,50,75.68S75.68,64.18,75.68,50S64.18,24.32,50,24.32z M50,66.67 c-9.2,0-16.67-7.46-16.67-16.67c0-9.2,7.46-16.67,16.67-16.67c9.2,0,16.67,7.46,16.67,16.67C66.67,59.2,59.2,66.67,50,66.67z"
-    }), _react.default.createElement("circle", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      cx: "76.69",
-      cy: "23.31",
-      r: "6"
-    })));
-  },
-  APPLE: function APPLE(_ref6) {
-    var _context6;
-
-    var _ref6$width = _ref6.width,
-        width = _ref6$width === void 0 ? 180 : _ref6$width,
-        _ref6$height = _ref6.height,
-        height = _ref6$height === void 0 ? 180 : _ref6$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context6 = "new 0 0 ".concat(width, " ")).call(_context6, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("g", {
-      transform: "matrix(54.85,0,0,-54.85,-2485.383,4815.859)"
-    }, _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M46.72,86.83c0,0.23,0.19,0.34,0.2,0.35c-0.11,0.16-0.27,0.18-0.33,0.18 c-0.14,0.01-0.28-0.08-0.35-0.08c-0.07,0-0.18,0.08-0.3,0.08c-0.15,0-0.3-0.09-0.38-0.23c-0.16-0.28-0.04-0.69,0.12-0.92 c0.08-0.11,0.17-0.24,0.29-0.23c0.12,0,0.16,0.07,0.3,0.07c0.14,0,0.18-0.07,0.3-0.07c0.12,0,0.2,0.11,0.28,0.22 c0.09,0.13,0.12,0.25,0.13,0.26C46.96,86.46,46.72,86.56,46.72,86.83"
-    })), _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M64.68,15.98c3.49-4.23,5.85-10.11,5.2-15.97c-5.03,0.2-11.12,3.35-14.73,7.58 c-3.23,3.74-6.07,9.72-5.3,15.47C55.46,23.49,61.19,20.2,64.68,15.98"
-    }));
-  },
-  AMAZON: function AMAZON(_ref7) {
-    var _context7;
-
-    var _ref7$width = _ref7.width,
-        width = _ref7$width === void 0 ? 180 : _ref7$width,
-        _ref7$height = _ref7.height,
-        height = _ref7$height === void 0 ? 180 : _ref7$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context7 = "new 0 0 ".concat(width, " ")).call(_context7, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M0.2,75.1C0.5,74.6,1,74.6,1.6,75c15.2,8.8,31.6,13.2,49.5,13.2c11.9,0,23.6-2.2,35.2-6.6c0.3-0.1,0.7-0.3,1.3-0.5 c0.6-0.2,1-0.4,1.2-0.5c0.9-0.4,1.6-0.2,2.1,0.5c0.5,0.7,0.3,1.4-0.5,2c-1.1,0.8-2.5,1.7-4.2,2.7c-5.2,3.1-11,5.5-17.5,7.2 c-6.4,1.7-12.7,2.5-18.8,2.5c-9.5,0-18.4-1.7-26.8-5c-8.4-3.3-16-8-22.6-14C0.2,76.2,0,75.9,0,75.6C0,75.5,0.1,75.3,0.2,75.1z M27.5,49.2c0-4.2,1-7.8,3.1-10.7c2.1-3,4.9-5.2,8.5-6.7c3.3-1.4,7.3-2.4,12.1-3c1.6-0.2,4.3-0.4,8-0.7v-1.5c0-3.9-0.4-6.5-1.3-7.8 c-1.3-1.8-3.3-2.7-6-2.7h-0.7c-2,0.2-3.7,0.8-5.2,1.9c-1.5,1.1-2.4,2.6-2.8,4.5c-0.2,1.2-0.8,1.9-1.8,2.1l-10.5-1.3 c-1-0.2-1.5-0.8-1.5-1.6c0-0.2,0-0.4,0.1-0.6c1-5.4,3.6-9.4,7.6-12c4-2.6,8.7-4.1,14.1-4.4h2.3c6.9,0,12.3,1.8,16.2,5.4 c0.6,0.6,1.2,1.3,1.7,2c0.5,0.7,0.9,1.3,1.2,1.9c0.3,0.5,0.6,1.3,0.8,2.4c0.2,1,0.4,1.7,0.5,2.1c0.1,0.4,0.2,1.2,0.3,2.5 c0.1,1.3,0.1,2.1,0.1,2.3v22c0,1.6,0.2,3,0.7,4.3c0.5,1.3,0.9,2.2,1.3,2.8c0.4,0.6,1.1,1.5,2.1,2.8c0.4,0.5,0.5,1,0.5,1.5 c0,0.5-0.2,0.9-0.7,1.3c-5,4.4-7.8,6.7-8.2,7.1c-0.7,0.5-1.6,0.6-2.6,0.2c-0.8-0.7-1.6-1.4-2.2-2.1c-0.6-0.7-1.1-1.2-1.4-1.5 c-0.3-0.3-0.7-0.9-1.3-1.8c-0.6-0.9-1-1.5-1.3-1.8c-3.4,3.7-6.7,6-10,6.9c-2.1,0.6-4.6,0.9-7.6,0.9c-4.7,0-8.5-1.4-11.5-4.3 S27.5,54.5,27.5,49.2z M43.2,47.4c0,2.4,0.6,4.3,1.8,5.7c1.2,1.4,2.8,2.1,4.8,2.1c0.2,0,0.4,0,0.8-0.1c0.3-0.1,0.6-0.1,0.7-0.1 c2.5-0.7,4.5-2.3,5.9-4.9c0.7-1.2,1.2-2.4,1.5-3.8c0.3-1.4,0.5-2.5,0.5-3.3c0-0.8,0-2.2,0-4.2v-2.3c-3.5,0-6.2,0.2-8,0.7 C45.8,38.8,43.2,42.2,43.2,47.4z M81.4,76.6c0.1-0.2,0.3-0.5,0.5-0.7c1.5-1,3-1.7,4.4-2.1c2.3-0.6,4.5-0.9,6.7-1 c0.6-0.1,1.2,0,1.7,0.1c2.7,0.2,4.4,0.7,4.9,1.4c0.2,0.4,0.4,0.9,0.4,1.6v0.6c0,2.1-0.6,4.6-1.7,7.5c-1.2,2.9-2.8,5.2-4.8,7 c-0.3,0.2-0.6,0.4-0.8,0.4c-0.1,0-0.2,0-0.4-0.1c-0.4-0.2-0.5-0.5-0.3-1c2.2-5.3,3.4-8.9,3.4-11c0-0.7-0.1-1.2-0.4-1.5 c-0.6-0.7-2.3-1.1-5.1-1.1c-1,0-2.2,0.1-3.6,0.2c-1.5,0.2-2.9,0.4-4.2,0.5c-0.4,0-0.6-0.1-0.7-0.2c-0.1-0.1-0.2-0.2-0.1-0.4 C81.3,76.8,81.3,76.8,81.4,76.6z"
-    }));
-  },
-  FACEBOOK: function FACEBOOK(_ref8) {
-    var _context8;
-
-    var _ref8$width = _ref8.width,
-        width = _ref8$width === void 0 ? 180 : _ref8$width,
-        _ref8$height = _ref8.height,
-        height = _ref8$height === void 0 ? 180 : _ref8$height;
-    return _react.default.createElement("svg", {
-      x: "0px",
-      y: "0px",
-      viewBox: "0 0 100 100",
-      style: {
-        enableBackground: (0, _concat.default)(_context8 = "new 0 0 ".concat(width, " ")).call(_context8, height),
-        width: width,
-        height: height
-      }
-    }, _react.default.createElement("path", {
-      style: {
-        fill: '#FFFFFF'
-      },
-      d: "M94.5,0h-89C2.5,0,0,2.5,0,5.5v89c0,3,2.5,5.5,5.5,5.5h47.9V61.3h-13V46.2h13V35.1c0-12.9,7.9-19.9,19.4-19.9 c5.5,0,10.3,0.4,11.6,0.6v13.5l-8,0c-6.3,0-7.5,3-7.5,7.3v9.6h14.9L82,61.3H69V100h25.5c3,0,5.5-2.5,5.5-5.5v-89 C100,2.5,97.5,0,94.5,0z"
-    }), _react.default.createElement("path", {
-      style: {
-        fill: '#3C5A99'
-      },
-      d: "M82,61.3l1.9-15.1H69v-9.6c0-4.4,1.2-7.3,7.5-7.3l8,0V15.7c-1.4-0.2-6.1-0.6-11.6-0.6c-11.5,0-19.4,7-19.4,19.9 v11.1h-13v15.1h13V100H69V61.3H82z"
-    }));
-  }
-};
-var _default = SocialLogos;
-exports.default = _default;
-module.exports = exports.default;
-module.exports.default = exports.default;
-
-/***/ }),
-/* 640 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92647,22 +92379,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThemeProvider", function() { return ThemeProvider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withTheme", function() { return withTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS", function() { return __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_stylis_stylis_min__ = __webpack_require__(641);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_stylis_stylis_min__ = __webpack_require__(640);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_stylis_stylis_min___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_stylis_stylis_min__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis_rule_sheet__ = __webpack_require__(642);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis_rule_sheet__ = __webpack_require__(641);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis_rule_sheet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_stylis_rule_sheet__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__emotion_unitless__ = __webpack_require__(643);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__emotion_unitless__ = __webpack_require__(642);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_is__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_is__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_memoize_one__ = __webpack_require__(644);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_memoize_one__ = __webpack_require__(643);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_stream__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_stream___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_stream__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__emotion_is_prop_valid__ = __webpack_require__(645);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_merge_anything__ = __webpack_require__(647);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__emotion_is_prop_valid__ = __webpack_require__(644);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_merge_anything__ = __webpack_require__(646);
 
 
 
@@ -95150,14 +94882,14 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test' && 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(187)(module)))
 
 /***/ }),
-/* 641 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e){ true?module.exports=e(null):"function"==typeof define&&define.amd?define(e(null)):window.stylis=e(null)}(function e(a){"use strict";var r=/^\0+/g,c=/[\0\r\f]/g,s=/: */g,t=/zoo|gra/,i=/([,: ])(transform)/g,f=/,+\s*(?![^(]*[)])/g,n=/ +\s*(?![^(]*[)])/g,l=/ *[\0] */g,o=/,\r+?/g,h=/([\t\r\n ])*\f?&/g,u=/:global\(((?:[^\(\)\[\]]*|\[.*\]|\([^\(\)]*\))*)\)/g,d=/\W+/g,b=/@(k\w+)\s*(\S*)\s*/,p=/::(place)/g,k=/:(read-only)/g,g=/\s+(?=[{\];=:>])/g,A=/([[}=:>])\s+/g,C=/(\{[^{]+?);(?=\})/g,w=/\s{2,}/g,v=/([^\(])(:+) */g,m=/[svh]\w+-[tblr]{2}/,x=/\(\s*(.*)\s*\)/g,$=/([\s\S]*?);/g,y=/-self|flex-/g,O=/[^]*?(:[rp][el]a[\w-]+)[^]*/,j=/stretch|:\s*\w+\-(?:conte|avail)/,z=/([^-])(image-set\()/,N="-webkit-",S="-moz-",F="-ms-",W=59,q=125,B=123,D=40,E=41,G=91,H=93,I=10,J=13,K=9,L=64,M=32,P=38,Q=45,R=95,T=42,U=44,V=58,X=39,Y=34,Z=47,_=62,ee=43,ae=126,re=0,ce=12,se=11,te=107,ie=109,fe=115,ne=112,le=111,oe=105,he=99,ue=100,de=112,be=1,pe=1,ke=0,ge=1,Ae=1,Ce=1,we=0,ve=0,me=0,xe=[],$e=[],ye=0,Oe=null,je=-2,ze=-1,Ne=0,Se=1,Fe=2,We=3,qe=0,Be=1,De="",Ee="",Ge="";function He(e,a,s,t,i){for(var f,n,o=0,h=0,u=0,d=0,g=0,A=0,C=0,w=0,m=0,$=0,y=0,O=0,j=0,z=0,R=0,we=0,$e=0,Oe=0,je=0,ze=s.length,Je=ze-1,Re="",Te="",Ue="",Ve="",Xe="",Ye="";R<ze;){if(C=s.charCodeAt(R),R===Je)if(h+d+u+o!==0){if(0!==h)C=h===Z?I:Z;d=u=o=0,ze++,Je++}if(h+d+u+o===0){if(R===Je){if(we>0)Te=Te.replace(c,"");if(Te.trim().length>0){switch(C){case M:case K:case W:case J:case I:break;default:Te+=s.charAt(R)}C=W}}if(1===$e)switch(C){case B:case q:case W:case Y:case X:case D:case E:case U:$e=0;case K:case J:case I:case M:break;default:for($e=0,je=R,g=C,R--,C=W;je<ze;)switch(s.charCodeAt(je++)){case I:case J:case W:++R,C=g,je=ze;break;case V:if(we>0)++R,C=g;case B:je=ze}}switch(C){case B:for(g=(Te=Te.trim()).charCodeAt(0),y=1,je=++R;R<ze;){switch(C=s.charCodeAt(R)){case B:y++;break;case q:y--;break;case Z:switch(A=s.charCodeAt(R+1)){case T:case Z:R=Qe(A,R,Je,s)}break;case G:C++;case D:C++;case Y:case X:for(;R++<Je&&s.charCodeAt(R)!==C;);}if(0===y)break;R++}if(Ue=s.substring(je,R),g===re)g=(Te=Te.replace(r,"").trim()).charCodeAt(0);switch(g){case L:if(we>0)Te=Te.replace(c,"");switch(A=Te.charCodeAt(1)){case ue:case ie:case fe:case Q:f=a;break;default:f=xe}if(je=(Ue=He(a,f,Ue,A,i+1)).length,me>0&&0===je)je=Te.length;if(ye>0)if(f=Ie(xe,Te,Oe),n=Pe(We,Ue,f,a,pe,be,je,A,i,t),Te=f.join(""),void 0!==n)if(0===(je=(Ue=n.trim()).length))A=0,Ue="";if(je>0)switch(A){case fe:Te=Te.replace(x,Me);case ue:case ie:case Q:Ue=Te+"{"+Ue+"}";break;case te:if(Ue=(Te=Te.replace(b,"$1 $2"+(Be>0?De:"")))+"{"+Ue+"}",1===Ae||2===Ae&&Le("@"+Ue,3))Ue="@"+N+Ue+"@"+Ue;else Ue="@"+Ue;break;default:if(Ue=Te+Ue,t===de)Ve+=Ue,Ue=""}else Ue="";break;default:Ue=He(a,Ie(a,Te,Oe),Ue,t,i+1)}Xe+=Ue,O=0,$e=0,z=0,we=0,Oe=0,j=0,Te="",Ue="",C=s.charCodeAt(++R);break;case q:case W:if((je=(Te=(we>0?Te.replace(c,""):Te).trim()).length)>1){if(0===z)if((g=Te.charCodeAt(0))===Q||g>96&&g<123)je=(Te=Te.replace(" ",":")).length;if(ye>0)if(void 0!==(n=Pe(Se,Te,a,e,pe,be,Ve.length,t,i,t)))if(0===(je=(Te=n.trim()).length))Te="\0\0";switch(g=Te.charCodeAt(0),A=Te.charCodeAt(1),g){case re:break;case L:if(A===oe||A===he){Ye+=Te+s.charAt(R);break}default:if(Te.charCodeAt(je-1)===V)break;Ve+=Ke(Te,g,A,Te.charCodeAt(2))}}O=0,$e=0,z=0,we=0,Oe=0,Te="",C=s.charCodeAt(++R)}}switch(C){case J:case I:if(h+d+u+o+ve===0)switch($){case E:case X:case Y:case L:case ae:case _:case T:case ee:case Z:case Q:case V:case U:case W:case B:case q:break;default:if(z>0)$e=1}if(h===Z)h=0;else if(ge+O===0&&t!==te&&Te.length>0)we=1,Te+="\0";if(ye*qe>0)Pe(Ne,Te,a,e,pe,be,Ve.length,t,i,t);be=1,pe++;break;case W:case q:if(h+d+u+o===0){be++;break}default:switch(be++,Re=s.charAt(R),C){case K:case M:if(d+o+h===0)switch(w){case U:case V:case K:case M:Re="";break;default:if(C!==M)Re=" "}break;case re:Re="\\0";break;case ce:Re="\\f";break;case se:Re="\\v";break;case P:if(d+h+o===0&&ge>0)Oe=1,we=1,Re="\f"+Re;break;case 108:if(d+h+o+ke===0&&z>0)switch(R-z){case 2:if(w===ne&&s.charCodeAt(R-3)===V)ke=w;case 8:if(m===le)ke=m}break;case V:if(d+h+o===0)z=R;break;case U:if(h+u+d+o===0)we=1,Re+="\r";break;case Y:case X:if(0===h)d=d===C?0:0===d?C:d;break;case G:if(d+h+u===0)o++;break;case H:if(d+h+u===0)o--;break;case E:if(d+h+o===0)u--;break;case D:if(d+h+o===0){if(0===O)switch(2*w+3*m){case 533:break;default:y=0,O=1}u++}break;case L:if(h+u+d+o+z+j===0)j=1;break;case T:case Z:if(d+o+u>0)break;switch(h){case 0:switch(2*C+3*s.charCodeAt(R+1)){case 235:h=Z;break;case 220:je=R,h=T}break;case T:if(C===Z&&w===T&&je+2!==R){if(33===s.charCodeAt(je+2))Ve+=s.substring(je,R+1);Re="",h=0}}}if(0===h){if(ge+d+o+j===0&&t!==te&&C!==W)switch(C){case U:case ae:case _:case ee:case E:case D:if(0===O){switch(w){case K:case M:case I:case J:Re+="\0";break;default:Re="\0"+Re+(C===U?"":"\0")}we=1}else switch(C){case D:if(z+7===R&&108===w)z=0;O=++y;break;case E:if(0==(O=--y))we=1,Re+="\0"}break;case K:case M:switch(w){case re:case B:case q:case W:case U:case ce:case K:case M:case I:case J:break;default:if(0===O)we=1,Re+="\0"}}if(Te+=Re,C!==M&&C!==K)$=C}}m=w,w=C,R++}if(je=Ve.length,me>0)if(0===je&&0===Xe.length&&0===a[0].length==false)if(t!==ie||1===a.length&&(ge>0?Ee:Ge)===a[0])je=a.join(",").length+2;if(je>0){if(f=0===ge&&t!==te?function(e){for(var a,r,s=0,t=e.length,i=Array(t);s<t;++s){for(var f=e[s].split(l),n="",o=0,h=0,u=0,d=0,b=f.length;o<b;++o){if(0===(h=(r=f[o]).length)&&b>1)continue;if(u=n.charCodeAt(n.length-1),d=r.charCodeAt(0),a="",0!==o)switch(u){case T:case ae:case _:case ee:case M:case D:break;default:a=" "}switch(d){case P:r=a+Ee;case ae:case _:case ee:case M:case E:case D:break;case G:r=a+r+Ee;break;case V:switch(2*r.charCodeAt(1)+3*r.charCodeAt(2)){case 530:if(Ce>0){r=a+r.substring(8,h-1);break}default:if(o<1||f[o-1].length<1)r=a+Ee+r}break;case U:a="";default:if(h>1&&r.indexOf(":")>0)r=a+r.replace(v,"$1"+Ee+"$2");else r=a+r+Ee}n+=r}i[s]=n.replace(c,"").trim()}return i}(a):a,ye>0)if(void 0!==(n=Pe(Fe,Ve,f,e,pe,be,je,t,i,t))&&0===(Ve=n).length)return Ye+Ve+Xe;if(Ve=f.join(",")+"{"+Ve+"}",Ae*ke!=0){if(2===Ae&&!Le(Ve,2))ke=0;switch(ke){case le:Ve=Ve.replace(k,":"+S+"$1")+Ve;break;case ne:Ve=Ve.replace(p,"::"+N+"input-$1")+Ve.replace(p,"::"+S+"$1")+Ve.replace(p,":"+F+"input-$1")+Ve}ke=0}}return Ye+Ve+Xe}function Ie(e,a,r){var c=a.trim().split(o),s=c,t=c.length,i=e.length;switch(i){case 0:case 1:for(var f=0,n=0===i?"":e[0]+" ";f<t;++f)s[f]=Je(n,s[f],r,i).trim();break;default:f=0;var l=0;for(s=[];f<t;++f)for(var h=0;h<i;++h)s[l++]=Je(e[h]+" ",c[f],r,i).trim()}return s}function Je(e,a,r,c){var s=a,t=s.charCodeAt(0);if(t<33)t=(s=s.trim()).charCodeAt(0);switch(t){case P:switch(ge+c){case 0:case 1:if(0===e.trim().length)break;default:return s.replace(h,"$1"+e.trim())}break;case V:switch(s.charCodeAt(1)){case 103:if(Ce>0&&ge>0)return s.replace(u,"$1").replace(h,"$1"+Ge);break;default:return e.trim()+s.replace(h,"$1"+e.trim())}default:if(r*ge>0&&s.indexOf("\f")>0)return s.replace(h,(e.charCodeAt(0)===V?"":"$1")+e.trim())}return e+s}function Ke(e,a,r,c){var l,o=0,h=e+";",u=2*a+3*r+4*c;if(944===u)return function(e){var a=e.length,r=e.indexOf(":",9)+1,c=e.substring(0,r).trim(),s=e.substring(r,a-1).trim();switch(e.charCodeAt(9)*Be){case 0:break;case Q:if(110!==e.charCodeAt(10))break;default:for(var t=s.split((s="",f)),i=0,r=0,a=t.length;i<a;r=0,++i){for(var l=t[i],o=l.split(n);l=o[r];){var h=l.charCodeAt(0);if(1===Be&&(h>L&&h<90||h>96&&h<123||h===R||h===Q&&l.charCodeAt(1)!==Q))switch(isNaN(parseFloat(l))+(-1!==l.indexOf("("))){case 1:switch(l){case"infinite":case"alternate":case"backwards":case"running":case"normal":case"forwards":case"both":case"none":case"linear":case"ease":case"ease-in":case"ease-out":case"ease-in-out":case"paused":case"reverse":case"alternate-reverse":case"inherit":case"initial":case"unset":case"step-start":case"step-end":break;default:l+=De}}o[r++]=l}s+=(0===i?"":",")+o.join(" ")}}if(s=c+s+";",1===Ae||2===Ae&&Le(s,1))return N+s+s;return s}(h);else if(0===Ae||2===Ae&&!Le(h,1))return h;switch(u){case 1015:return 97===h.charCodeAt(10)?N+h+h:h;case 951:return 116===h.charCodeAt(3)?N+h+h:h;case 963:return 110===h.charCodeAt(5)?N+h+h:h;case 1009:if(100!==h.charCodeAt(4))break;case 969:case 942:return N+h+h;case 978:return N+h+S+h+h;case 1019:case 983:return N+h+S+h+F+h+h;case 883:if(h.charCodeAt(8)===Q)return N+h+h;if(h.indexOf("image-set(",11)>0)return h.replace(z,"$1"+N+"$2")+h;return h;case 932:if(h.charCodeAt(4)===Q)switch(h.charCodeAt(5)){case 103:return N+"box-"+h.replace("-grow","")+N+h+F+h.replace("grow","positive")+h;case 115:return N+h+F+h.replace("shrink","negative")+h;case 98:return N+h+F+h.replace("basis","preferred-size")+h}return N+h+F+h+h;case 964:return N+h+F+"flex-"+h+h;case 1023:if(99!==h.charCodeAt(8))break;return l=h.substring(h.indexOf(":",15)).replace("flex-","").replace("space-between","justify"),N+"box-pack"+l+N+h+F+"flex-pack"+l+h;case 1005:return t.test(h)?h.replace(s,":"+N)+h.replace(s,":"+S)+h:h;case 1e3:switch(o=(l=h.substring(13).trim()).indexOf("-")+1,l.charCodeAt(0)+l.charCodeAt(o)){case 226:l=h.replace(m,"tb");break;case 232:l=h.replace(m,"tb-rl");break;case 220:l=h.replace(m,"lr");break;default:return h}return N+h+F+l+h;case 1017:if(-1===h.indexOf("sticky",9))return h;case 975:switch(o=(h=e).length-10,u=(l=(33===h.charCodeAt(o)?h.substring(0,o):h).substring(e.indexOf(":",7)+1).trim()).charCodeAt(0)+(0|l.charCodeAt(7))){case 203:if(l.charCodeAt(8)<111)break;case 115:h=h.replace(l,N+l)+";"+h;break;case 207:case 102:h=h.replace(l,N+(u>102?"inline-":"")+"box")+";"+h.replace(l,N+l)+";"+h.replace(l,F+l+"box")+";"+h}return h+";";case 938:if(h.charCodeAt(5)===Q)switch(h.charCodeAt(6)){case 105:return l=h.replace("-items",""),N+h+N+"box-"+l+F+"flex-"+l+h;case 115:return N+h+F+"flex-item-"+h.replace(y,"")+h;default:return N+h+F+"flex-line-pack"+h.replace("align-content","").replace(y,"")+h}break;case 973:case 989:if(h.charCodeAt(3)!==Q||122===h.charCodeAt(4))break;case 931:case 953:if(true===j.test(e))if(115===(l=e.substring(e.indexOf(":")+1)).charCodeAt(0))return Ke(e.replace("stretch","fill-available"),a,r,c).replace(":fill-available",":stretch");else return h.replace(l,N+l)+h.replace(l,S+l.replace("fill-",""))+h;break;case 962:if(h=N+h+(102===h.charCodeAt(5)?F+h:"")+h,r+c===211&&105===h.charCodeAt(13)&&h.indexOf("transform",10)>0)return h.substring(0,h.indexOf(";",27)+1).replace(i,"$1"+N+"$2")+h}return h}function Le(e,a){var r=e.indexOf(1===a?":":"{"),c=e.substring(0,3!==a?r:10),s=e.substring(r+1,e.length-1);return Oe(2!==a?c:c.replace(O,"$1"),s,a)}function Me(e,a){var r=Ke(a,a.charCodeAt(0),a.charCodeAt(1),a.charCodeAt(2));return r!==a+";"?r.replace($," or ($1)").substring(4):"("+a+")"}function Pe(e,a,r,c,s,t,i,f,n,l){for(var o,h=0,u=a;h<ye;++h)switch(o=$e[h].call(Te,e,u,r,c,s,t,i,f,n,l)){case void 0:case false:case true:case null:break;default:u=o}if(u!==a)return u}function Qe(e,a,r,c){for(var s=a+1;s<r;++s)switch(c.charCodeAt(s)){case Z:if(e===T)if(c.charCodeAt(s-1)===T&&a+2!==s)return s+1;break;case I:if(e===Z)return s+1}return s}function Re(e){for(var a in e){var r=e[a];switch(a){case"keyframe":Be=0|r;break;case"global":Ce=0|r;break;case"cascade":ge=0|r;break;case"compress":we=0|r;break;case"semicolon":ve=0|r;break;case"preserve":me=0|r;break;case"prefix":if(Oe=null,!r)Ae=0;else if("function"!=typeof r)Ae=1;else Ae=2,Oe=r}}return Re}function Te(a,r){if(void 0!==this&&this.constructor===Te)return e(a);var s=a,t=s.charCodeAt(0);if(t<33)t=(s=s.trim()).charCodeAt(0);if(Be>0)De=s.replace(d,t===G?"":"-");if(t=1,1===ge)Ge=s;else Ee=s;var i,f=[Ge];if(ye>0)if(void 0!==(i=Pe(ze,r,f,f,pe,be,0,0,0,0))&&"string"==typeof i)r=i;var n=He(xe,f,r,0,0);if(ye>0)if(void 0!==(i=Pe(je,n,f,f,pe,be,n.length,0,0,0))&&"string"!=typeof(n=i))t=0;return De="",Ge="",Ee="",ke=0,pe=1,be=1,we*t==0?n:n.replace(c,"").replace(g,"").replace(A,"$1").replace(C,"$1").replace(w," ")}if(Te.use=function e(a){switch(a){case void 0:case null:ye=$e.length=0;break;default:if("function"==typeof a)$e[ye++]=a;else if("object"==typeof a)for(var r=0,c=a.length;r<c;++r)e(a[r]);else qe=0|!!a}return e},Te.set=Re,void 0!==a)Re(a);return Te});
 //# sourceMappingURL=stylis.min.js.map
 
 /***/ }),
-/* 642 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (factory) {
@@ -95211,7 +94943,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test' && 
 
 
 /***/ }),
-/* 643 */
+/* 642 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95268,7 +95000,7 @@ var unitlessKeys = {
 
 
 /***/ }),
-/* 644 */
+/* 643 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95319,11 +95051,11 @@ function memoizeOne(resultFn, isEqual) {
 
 
 /***/ }),
-/* 645 */
+/* 644 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__emotion_memoize__ = __webpack_require__(646);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__emotion_memoize__ = __webpack_require__(645);
 
 
 var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
@@ -95342,7 +95074,7 @@ var index = Object(__WEBPACK_IMPORTED_MODULE_0__emotion_memoize__["a" /* default
 
 
 /***/ }),
-/* 646 */
+/* 645 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95358,13 +95090,13 @@ function memoize(fn) {
 
 
 /***/ }),
-/* 647 */
+/* 646 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export merge */
 /* unused harmony export concatArrays */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_what__ = __webpack_require__(648);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_what__ = __webpack_require__(647);
 
 
 function assignProp(carry, key, newVal, originalObject) {
@@ -95470,7 +95202,7 @@ function concatArrays(originVal, newVal) {
 
 
 /***/ }),
-/* 648 */
+/* 647 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95692,6 +95424,280 @@ function isType(payload, type) {
 
 
 
+
+/***/ }),
+/* 648 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+var _Object$defineProperty = __webpack_require__(1);
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = void 0;
+
+var _concat = _interopRequireDefault(__webpack_require__(44));
+
+var _react = _interopRequireDefault(__webpack_require__(2));
+
+var SocialLogos = {
+  MICROSOFT: function MICROSOFT(_ref) {
+    var _context;
+
+    var _ref$width = _ref.width,
+        width = _ref$width === void 0 ? 180 : _ref$width,
+        _ref$height = _ref.height,
+        height = _ref$height === void 0 ? 180 : _ref$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context = "new 0 0 ".concat(width, " ")).call(_context, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("rect", {
+      style: {
+        fill: '#F25022'
+      },
+      width: "47.37",
+      height: "47.37"
+    }), _react.default.createElement("rect", {
+      y: "52.63",
+      style: {
+        fill: '#00A4EF'
+      },
+      width: "47.37",
+      height: "47.37"
+    }), _react.default.createElement("rect", {
+      x: "52.63",
+      style: {
+        fill: '#7FBA00'
+      },
+      width: "47.37",
+      height: "47.37"
+    }), _react.default.createElement("rect", {
+      x: "52.63",
+      y: "52.63",
+      style: {
+        fill: '#FFB900'
+      },
+      width: "47.37",
+      height: "47.37"
+    }));
+  },
+  GOOGLE: function GOOGLE(_ref2) {
+    var _context2;
+
+    var _ref2$width = _ref2.width,
+        width = _ref2$width === void 0 ? 180 : _ref2$width,
+        _ref2$height = _ref2.height,
+        height = _ref2$height === void 0 ? 180 : _ref2$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context2 = "new 0 0 ".concat(width, " ")).call(_context2, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("path", {
+      style: {
+        fill: '#4285F4'
+      },
+      d: "M99,51.11C99,47,98.67,44,97.94,40.89H51v18.56h27.56C78,64.06,75,71,68.33,75.67l-0.09,0.62l14.84,11.5 l1.03,0.1C93.56,79.17,99,66.33,99,51.11"
+    }), _react.default.createElement("path", {
+      style: {
+        fill: '#34A853'
+      },
+      d: "M51,100c13.5,0,24.83-4.44,33.11-12.11L68.33,75.67c-4.22,2.94-9.89,5-17.33,5c-13.22,0-24.44-8.72-28.44-20.78 l-0.59,0.05L6.54,71.88l-0.2,0.56C14.56,88.78,31.44,100,51,100"
+    }), _react.default.createElement("path", {
+      style: {
+        fill: '#FBBC05'
+      },
+      d: "M22.56,59.89c-1.06-3.11-1.67-6.44-1.67-9.89c0-3.44,0.61-6.78,1.61-9.89l-0.03-0.66L6.84,27.31l-0.51,0.24 C2.94,34.33,1,41.94,1,50s1.94,15.67,5.33,22.44L22.56,59.89"
+    }), _react.default.createElement("path", {
+      style: {
+        fill: '#EB4335'
+      },
+      d: "M51,19.33c9.39,0,15.72,4.06,19.33,7.44L84.44,13C75.78,4.94,64.5,0,51,0C31.44,0,14.56,11.22,6.33,27.56 L22.5,40.11C26.56,28.06,37.78,19.33,51,19.33"
+    }));
+  },
+  LINKEDIN: function LINKEDIN(_ref3) {
+    var _context3;
+
+    var _ref3$width = _ref3.width,
+        width = _ref3$width === void 0 ? 180 : _ref3$width,
+        _ref3$height = _ref3.height,
+        height = _ref3$height === void 0 ? 180 : _ref3$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context3 = "new 0 0 ".concat(width, " ")).call(_context3, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M85.2,85.2H70.4V62c0-5.5-0.1-12.7-7.7-12.7c-7.7,0-8.9,6-8.9,12.3v23.6H39V37.5h14.2V44h0.2 c2.9-5,8.3-7.9,14-7.7c15,0,17.8,9.9,17.8,22.7L85.2,85.2z M22.2,31c-4.7,0-8.6-3.8-8.6-8.6s3.8-8.6,8.6-8.6c4.7,0,8.6,3.8,8.6,8.6 C30.8,27.1,27,31,22.2,31L22.2,31 M29.7,85.2H14.8V37.5h14.8V85.2z M92.6,0H7.4C3.4,0,0,3.2,0,7.2v85.6c0,4,3.3,7.3,7.4,7.2h85.2 c4,0.1,7.4-3.2,7.4-7.2V7.2C99.9,3.2,96.6-0.1,92.6,0"
+    }));
+  },
+  TWITTER: function TWITTER(_ref4) {
+    var _context4;
+
+    var _ref4$width = _ref4.width,
+        width = _ref4$width === void 0 ? 180 : _ref4$width,
+        _ref4$height = _ref4.height,
+        height = _ref4$height === void 0 ? 180 : _ref4$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context4 = "new 0 0 ".concat(width, " ")).call(_context4, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M31.41,90.66c37.74,0,58.38-31.29,58.38-58.38c0-0.88,0-1.76-0.04-2.64c4-2.88,7.48-6.52,10.24-10.64 c-3.68,1.64-7.64,2.72-11.8,3.24c4.24-2.52,7.48-6.56,9.04-11.36c-3.96,2.36-8.36,4.04-13.05,4.96c-3.76-4-9.08-6.48-14.97-6.48 c-11.32,0-20.53,9.2-20.53,20.53c0,1.6,0.2,3.16,0.52,4.68c-17.05-0.84-32.17-9.04-42.3-21.45c-1.76,3.04-2.76,6.56-2.76,10.32 c0,7.12,3.64,13.41,9.12,17.09C9.92,40.4,6.76,39.48,4,37.96c0,0.08,0,0.16,0,0.28c0,9.92,7.08,18.25,16.45,20.13 c-1.72,0.48-3.52,0.72-5.4,0.72c-1.32,0-2.6-0.12-3.84-0.36c2.6,8.16,10.2,14.09,19.17,14.25c-7.04,5.52-15.89,8.8-25.49,8.8 c-1.64,0-3.28-0.08-4.88-0.28C9.04,87.25,19.85,90.66,31.41,90.66"
+    }));
+  },
+  INSTAGRAM: function INSTAGRAM(_ref5) {
+    var _context5;
+
+    var _ref5$width = _ref5.width,
+        width = _ref5$width === void 0 ? 180 : _ref5$width,
+        _ref5$height = _ref5.height,
+        height = _ref5$height === void 0 ? 180 : _ref5$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context5 = "new 0 0 ".concat(width, " ")).call(_context5, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("g", null, _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M50,9.01c13.35,0,14.93,0.05,20.2,0.29c4.87,0.22,7.52,1.04,9.28,1.72c2.33,0.91,4,1.99,5.75,3.74 c1.75,1.75,2.83,3.42,3.74,5.75c0.68,1.76,1.5,4.41,1.72,9.28c0.24,5.27,0.29,6.85,0.29,20.2s-0.05,14.93-0.29,20.2 c-0.22,4.87-1.04,7.52-1.72,9.28c-0.91,2.33-1.99,4-3.74,5.75c-1.75,1.75-3.42,2.83-5.75,3.74c-1.76,0.68-4.41,1.5-9.28,1.72 c-5.27,0.24-6.85,0.29-20.2,0.29s-14.93-0.05-20.2-0.29c-4.87-0.22-7.52-1.04-9.28-1.72c-2.33-0.91-4-1.99-5.75-3.74 c-1.75-1.75-2.83-3.42-3.74-5.75c-0.68-1.76-1.5-4.41-1.72-9.28C9.06,64.93,9.01,63.35,9.01,50S9.06,35.07,9.3,29.8 c0.22-4.87,1.04-7.52,1.72-9.28c0.91-2.33,1.99-4,3.74-5.75c1.75-1.75,3.42-2.83,5.75-3.74c1.76-0.68,4.41-1.5,9.28-1.72 C35.07,9.06,36.65,9.01,50,9.01 M50,0C36.42,0,34.72,0.06,29.39,0.3c-5.32,0.24-8.96,1.09-12.14,2.32 c-3.29,1.28-6.08,2.99-8.86,5.77c-2.78,2.78-4.49,5.57-5.77,8.86c-1.24,3.18-2.08,6.82-2.32,12.14C0.06,34.72,0,36.42,0,50 c0,13.58,0.06,15.28,0.3,20.61c0.24,5.32,1.09,8.96,2.32,12.14c1.28,3.29,2.99,6.08,5.77,8.86c2.78,2.78,5.57,4.49,8.86,5.77 c3.18,1.24,6.82,2.08,12.14,2.32c5.33,0.24,7.04,0.3,20.61,0.3s15.28-0.06,20.61-0.3c5.32-0.24,8.96-1.09,12.14-2.32 c3.29-1.28,6.08-2.99,8.86-5.77c2.78-2.78,4.49-5.57,5.77-8.86c1.24-3.18,2.08-6.82,2.32-12.14c0.24-5.33,0.3-7.04,0.3-20.61 s-0.06-15.28-0.3-20.61c-0.24-5.32-1.09-8.96-2.32-12.14c-1.28-3.29-2.99-6.08-5.77-8.86c-2.78-2.78-5.57-4.49-8.86-5.77 c-3.18-1.24-6.82-2.08-12.14-2.32C65.28,0.06,63.58,0,50,0L50,0z"
+    }), _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M50,24.32c-14.18,0-25.68,11.5-25.68,25.68S35.82,75.68,50,75.68S75.68,64.18,75.68,50S64.18,24.32,50,24.32z M50,66.67 c-9.2,0-16.67-7.46-16.67-16.67c0-9.2,7.46-16.67,16.67-16.67c9.2,0,16.67,7.46,16.67,16.67C66.67,59.2,59.2,66.67,50,66.67z"
+    }), _react.default.createElement("circle", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      cx: "76.69",
+      cy: "23.31",
+      r: "6"
+    })));
+  },
+  APPLE: function APPLE(_ref6) {
+    var _context6;
+
+    var _ref6$width = _ref6.width,
+        width = _ref6$width === void 0 ? 180 : _ref6$width,
+        _ref6$height = _ref6.height,
+        height = _ref6$height === void 0 ? 180 : _ref6$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context6 = "new 0 0 ".concat(width, " ")).call(_context6, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("g", {
+      transform: "matrix(54.85,0,0,-54.85,-2485.383,4815.859)"
+    }, _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M46.72,86.83c0,0.23,0.19,0.34,0.2,0.35c-0.11,0.16-0.27,0.18-0.33,0.18 c-0.14,0.01-0.28-0.08-0.35-0.08c-0.07,0-0.18,0.08-0.3,0.08c-0.15,0-0.3-0.09-0.38-0.23c-0.16-0.28-0.04-0.69,0.12-0.92 c0.08-0.11,0.17-0.24,0.29-0.23c0.12,0,0.16,0.07,0.3,0.07c0.14,0,0.18-0.07,0.3-0.07c0.12,0,0.2,0.11,0.28,0.22 c0.09,0.13,0.12,0.25,0.13,0.26C46.96,86.46,46.72,86.56,46.72,86.83"
+    })), _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M64.68,15.98c3.49-4.23,5.85-10.11,5.2-15.97c-5.03,0.2-11.12,3.35-14.73,7.58 c-3.23,3.74-6.07,9.72-5.3,15.47C55.46,23.49,61.19,20.2,64.68,15.98"
+    }));
+  },
+  AMAZON: function AMAZON(_ref7) {
+    var _context7;
+
+    var _ref7$width = _ref7.width,
+        width = _ref7$width === void 0 ? 180 : _ref7$width,
+        _ref7$height = _ref7.height,
+        height = _ref7$height === void 0 ? 180 : _ref7$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context7 = "new 0 0 ".concat(width, " ")).call(_context7, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M0.2,75.1C0.5,74.6,1,74.6,1.6,75c15.2,8.8,31.6,13.2,49.5,13.2c11.9,0,23.6-2.2,35.2-6.6c0.3-0.1,0.7-0.3,1.3-0.5 c0.6-0.2,1-0.4,1.2-0.5c0.9-0.4,1.6-0.2,2.1,0.5c0.5,0.7,0.3,1.4-0.5,2c-1.1,0.8-2.5,1.7-4.2,2.7c-5.2,3.1-11,5.5-17.5,7.2 c-6.4,1.7-12.7,2.5-18.8,2.5c-9.5,0-18.4-1.7-26.8-5c-8.4-3.3-16-8-22.6-14C0.2,76.2,0,75.9,0,75.6C0,75.5,0.1,75.3,0.2,75.1z M27.5,49.2c0-4.2,1-7.8,3.1-10.7c2.1-3,4.9-5.2,8.5-6.7c3.3-1.4,7.3-2.4,12.1-3c1.6-0.2,4.3-0.4,8-0.7v-1.5c0-3.9-0.4-6.5-1.3-7.8 c-1.3-1.8-3.3-2.7-6-2.7h-0.7c-2,0.2-3.7,0.8-5.2,1.9c-1.5,1.1-2.4,2.6-2.8,4.5c-0.2,1.2-0.8,1.9-1.8,2.1l-10.5-1.3 c-1-0.2-1.5-0.8-1.5-1.6c0-0.2,0-0.4,0.1-0.6c1-5.4,3.6-9.4,7.6-12c4-2.6,8.7-4.1,14.1-4.4h2.3c6.9,0,12.3,1.8,16.2,5.4 c0.6,0.6,1.2,1.3,1.7,2c0.5,0.7,0.9,1.3,1.2,1.9c0.3,0.5,0.6,1.3,0.8,2.4c0.2,1,0.4,1.7,0.5,2.1c0.1,0.4,0.2,1.2,0.3,2.5 c0.1,1.3,0.1,2.1,0.1,2.3v22c0,1.6,0.2,3,0.7,4.3c0.5,1.3,0.9,2.2,1.3,2.8c0.4,0.6,1.1,1.5,2.1,2.8c0.4,0.5,0.5,1,0.5,1.5 c0,0.5-0.2,0.9-0.7,1.3c-5,4.4-7.8,6.7-8.2,7.1c-0.7,0.5-1.6,0.6-2.6,0.2c-0.8-0.7-1.6-1.4-2.2-2.1c-0.6-0.7-1.1-1.2-1.4-1.5 c-0.3-0.3-0.7-0.9-1.3-1.8c-0.6-0.9-1-1.5-1.3-1.8c-3.4,3.7-6.7,6-10,6.9c-2.1,0.6-4.6,0.9-7.6,0.9c-4.7,0-8.5-1.4-11.5-4.3 S27.5,54.5,27.5,49.2z M43.2,47.4c0,2.4,0.6,4.3,1.8,5.7c1.2,1.4,2.8,2.1,4.8,2.1c0.2,0,0.4,0,0.8-0.1c0.3-0.1,0.6-0.1,0.7-0.1 c2.5-0.7,4.5-2.3,5.9-4.9c0.7-1.2,1.2-2.4,1.5-3.8c0.3-1.4,0.5-2.5,0.5-3.3c0-0.8,0-2.2,0-4.2v-2.3c-3.5,0-6.2,0.2-8,0.7 C45.8,38.8,43.2,42.2,43.2,47.4z M81.4,76.6c0.1-0.2,0.3-0.5,0.5-0.7c1.5-1,3-1.7,4.4-2.1c2.3-0.6,4.5-0.9,6.7-1 c0.6-0.1,1.2,0,1.7,0.1c2.7,0.2,4.4,0.7,4.9,1.4c0.2,0.4,0.4,0.9,0.4,1.6v0.6c0,2.1-0.6,4.6-1.7,7.5c-1.2,2.9-2.8,5.2-4.8,7 c-0.3,0.2-0.6,0.4-0.8,0.4c-0.1,0-0.2,0-0.4-0.1c-0.4-0.2-0.5-0.5-0.3-1c2.2-5.3,3.4-8.9,3.4-11c0-0.7-0.1-1.2-0.4-1.5 c-0.6-0.7-2.3-1.1-5.1-1.1c-1,0-2.2,0.1-3.6,0.2c-1.5,0.2-2.9,0.4-4.2,0.5c-0.4,0-0.6-0.1-0.7-0.2c-0.1-0.1-0.2-0.2-0.1-0.4 C81.3,76.8,81.3,76.8,81.4,76.6z"
+    }));
+  },
+  FACEBOOK: function FACEBOOK(_ref8) {
+    var _context8;
+
+    var _ref8$width = _ref8.width,
+        width = _ref8$width === void 0 ? 180 : _ref8$width,
+        _ref8$height = _ref8.height,
+        height = _ref8$height === void 0 ? 180 : _ref8$height;
+    return _react.default.createElement("svg", {
+      x: "0px",
+      y: "0px",
+      viewBox: "0 0 100 100",
+      style: {
+        enableBackground: (0, _concat.default)(_context8 = "new 0 0 ".concat(width, " ")).call(_context8, height),
+        width: width,
+        height: height
+      }
+    }, _react.default.createElement("path", {
+      style: {
+        fill: '#FFFFFF'
+      },
+      d: "M94.5,0h-89C2.5,0,0,2.5,0,5.5v89c0,3,2.5,5.5,5.5,5.5h47.9V61.3h-13V46.2h13V35.1c0-12.9,7.9-19.9,19.4-19.9 c5.5,0,10.3,0.4,11.6,0.6v13.5l-8,0c-6.3,0-7.5,3-7.5,7.3v9.6h14.9L82,61.3H69V100h25.5c3,0,5.5-2.5,5.5-5.5v-89 C100,2.5,97.5,0,94.5,0z"
+    }), _react.default.createElement("path", {
+      style: {
+        fill: '#3C5A99'
+      },
+      d: "M82,61.3l1.9-15.1H69v-9.6c0-4.4,1.2-7.3,7.5-7.3l8,0V15.7c-1.4-0.2-6.1-0.6-11.6-0.6c-11.5,0-19.4,7-19.4,19.9 v11.1h-13v15.1h13V100H69V61.3H82z"
+    }));
+  }
+};
+var _default = SocialLogos;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;
 
 /***/ }),
 /* 649 */

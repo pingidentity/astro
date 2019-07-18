@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Button from './Button';
 import SocialLogos from '../util/SocialLogo';
-import styled from 'styled-components';
 
 const brandTypes = {
     LINKEDIN: {
@@ -122,7 +122,7 @@ const SocialButton = ({
 SocialButton.defaultProps = {
     'data-id': 'social-button',
     disabled: false,
-    onClick: () => { },
+    onClick: () => {},
 };
 
 SocialButton.propTypes = {
@@ -130,7 +130,16 @@ SocialButton.propTypes = {
     'data-id': PropTypes.string,
     onClick: PropTypes.func,
     label: PropTypes.node,
-    branding: PropTypes.oneOf(Object.values(brandTypes)),
+    branding: PropTypes.oneOfType([
+        PropTypes.oneOf(Object.values(brandTypes)),
+        PropTypes.shape({
+            fill: PropTypes.string,
+            color: PropTypes.string,
+            border: PropTypes.string,
+            lightBg: PropTypes.bool,
+            logo: PropTypes.node,
+        }),
+    ]),
     image: PropTypes.string,
 };
 
@@ -143,19 +152,19 @@ export default styled(SocialButton)`
         align-items: center;
         overflow: auto;
         position: relative;
-        line-height: 0;
+        box-sizing: border-box;
     }
 
     .social-button__button {
         border-radius: 2px;
         border-style: solid;
         font-size: 15px;
-        padding: 9px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
         font-family: "proxima-nova", sans-serif;
         height: 40px;
+        line-height: unset;
         position: relative;
         text-overflow: ellipsis;
         cursor: pointer;
@@ -182,6 +191,8 @@ export default styled(SocialButton)`
     .social-button__logo {
         flex: 1;
         text-align: left;
+        display: flex;
+        align-items: center;
     }
 
     .social-button__label {
