@@ -77,7 +77,8 @@ class ConditionalFieldsetStateless extends React.Component {
             const options = _.map(this.props.children, (child, i) => {
                 return ({
                     value: i + indexOffset,
-                    label: child.props.title
+                    label: child.props.title,
+                    iconName: child.props.icon ? child.props.icon : null,
                 });
             });
             const noneData = {

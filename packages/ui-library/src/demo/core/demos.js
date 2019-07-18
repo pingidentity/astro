@@ -1293,6 +1293,13 @@ module.exports = [
                         icon: "details"
                     },
                     {
+                        label: "SAML Signing Settings",
+                        demo: require("../../templates/SAMLSigningSettings"),
+                        pathToSource: "templates_SAMLSigningSettings.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
                         label: "Social Login",
                         demo: require("../../templates/SocialLogin"),
                         pathToSource: "templates_SocialLogin.jsx.html",
