@@ -183,6 +183,11 @@
     content: $icon-collapse;
   }
 }
+.icon-connection-status {
+  &:before {
+    content: $icon-connection-status; 
+  }
+}
 .icon-curly-braces {
   &:before {
     content: $icon-curly-braces;
@@ -733,3 +738,5 @@
     content: $icon-welcome;
   }
 }
+
+
