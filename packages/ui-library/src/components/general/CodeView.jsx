@@ -2,8 +2,31 @@
 import React, { Component } from "react";
 import SelectText from "./SelectText";
 import PropTypes from "prop-types";
-import hljs from "highlight.js";
+import hljs from "highlight.js/lib/highlight";
+import bash from "highlight.js/lib/languages/bash";
+import http from "highlight.js/lib/languages/http";
+import java from "highlight.js/lib/languages/java";
+import javascript from "highlight.js/lib/languages/javascript";
+import json from "highlight.js/lib/languages/json";
+import markdown from "highlight.js/lib/languages/markdown";
+import python from "highlight.js/lib/languages/python";
+import xml from "highlight.js/lib/languages/xml";
 import Utils from "../../util/Utils";
+
+// Only importing a subset of languages because hljs is gigantic
+// otherwise.
+[
+    ["bash", bash],
+    ["http", http],
+    ["java", java],
+    ["javascript", javascript],
+    ["json", json],
+    ["markdown", markdown],
+    ["python", python],
+    ["xml", xml]
+].forEach(([name, lang]) =>
+    hljs.registerLanguage(name, lang)
+);
 
 /**
  * @class CodeView
