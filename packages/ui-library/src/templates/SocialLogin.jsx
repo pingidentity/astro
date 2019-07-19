@@ -253,7 +253,7 @@ export default class SocialLogin extends Component {
 
     toggleProviderExpanded = providerId => () => this.setState(({ providers }) => ({
         providers: providers.map(({ expanded, rowIndex = 0, ...provider }) => ({
-            expanded: provider.id === providerId ? !expanded : rowIndex,
+            expanded: provider.id === providerId ? !expanded : expanded,
             rowIndex,
             ...provider
         }))
