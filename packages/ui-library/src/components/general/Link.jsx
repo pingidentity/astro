@@ -3,7 +3,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Icon from "./Icon";
-import Anchor from "./Anchor";
+import Anchor, { linkTypes } from "./Anchor";
 import classnames from "classnames";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
@@ -122,11 +122,7 @@ Link.propTypes = {
         PropTypes.string,
         PropTypes.element
     ]),
-    type: PropTypes.oneOf([
-        "add",
-        "remove",
-        "block",
-    ]),
+    type: PropTypes.oneOf(Object.values(linkTypes)),
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     className: PropTypes.string
@@ -137,6 +133,9 @@ Link.defaultProps = {
     disabled: false,
     className: "",
     target: "_self"
+
 };
+
+Link.linkTypes = linkTypes;
 
 module.exports = Link;

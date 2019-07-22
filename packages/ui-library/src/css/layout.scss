@@ -750,6 +750,25 @@ $color-grey-minor-1: $color-neutral-30;
     }
 }
 
+.content-link__return {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 0% 13px 13px;
+    white-space: nowrap;
+
+    &:before {
+        content: 'Y';
+        position: absolute;
+        top: -1px;
+        left: -14px;
+        font-size: 6px;
+        font-family: $icon-font;
+
+        @include rotate(90deg);
+    }
+}
+
 .forward-link {
     position: relative;
     display: inline-block;

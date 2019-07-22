@@ -1,6 +1,7 @@
 var React = require("react");
 var Link = require("./../../../components/general/Link");
 import HR from "ui-library/lib/components/general/HR";
+import { linkTypes } from "ui-library/lib/components/general/Anchor";
 
 /**
 * @name LinkDemo
@@ -26,10 +27,15 @@ const LinkDemo = () => {
                 a block of text using the href prop.
             </p>
             <p>
-                <Link type="add">Add link</Link> and a <Link type="remove">Remove link</Link>
+                <Link type={linkTypes.ADD}>Add link</Link> and a <Link type={linkTypes.REMOVE}>Remove link</Link> and
+            </p>
+            <p>
+                <Link type={linkTypes.PAGE_RETURN}>Return to Page</Link>
             </p>
         </div>
+
     );
 };
 
+Link.linkTypes = linkTypes;
 module.exports = LinkDemo;
