@@ -4,9 +4,9 @@ import Inputs from './Inputs';
 import Layouts from './Layouts';
 import Feedback from './Feedback';
 import MFA from './MFA';
-import SignOnPage from '../components/SignOnPage';
-import ChangePWPage from '../components/ChangePWPage';
-import SigningYouOnPage from '../components/SigningYouOnPage';
+import SignOnPage from './pages/SignOnPage';
+import ChangePWPage from './pages/ChangePWPage';
+import SigningYouOnPage from './pages/SigningYouOnPage';
 import completeBranding from '../util/completeBranding';
 
 import '../css/styles.scss';

@@ -106,7 +106,7 @@
       "<rootDir>/src/testutil"
     ],
     "testMatch": [
-      "**/tests/**/*.js?(x)"
+      "**/**/*.test.js?(x)"
     ],
     "testPathIgnorePatterns": [
       "/node/",
