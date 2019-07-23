@@ -1,5 +1,6 @@
 import React from "react";
 import { isEnter, isSpace } from "./KeyboardUtils";
+import Icon from "../components/general/Icon";
 
 /**
  * @module util/PropUtils
@@ -34,6 +35,18 @@ export const getIconClassName = (props, options = {}) => {
         return icon;
     }
     return `icon-${icon}`;
+};
+
+export const getIcon = (icon, props) => {
+    if (typeof icon === "string") {
+        return (
+            <Icon iconName={icon} {...props}/>
+        );
+    } else {
+        return icon;
+    }
+
+
 };
 
 /**

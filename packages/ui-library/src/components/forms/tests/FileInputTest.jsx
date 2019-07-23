@@ -87,22 +87,6 @@ describe("FileInput", function () {
         expect(element.exists()).toEqual(true);
     });
 
-    it("Renders the fieldset with the title always shown", () => {
-        const component = mount(
-            <FileInput alwaysShowTitle />
-        );
-        const element = component.find(".input-file__always-title-container");
-        expect(element.exists()).toEqual(true);
-    });
-
-    it("Renders the fieldset with the same title as the selected title", () => {
-        const component = mount(
-            <FileInput alwaysShowTitle selectedTitle="hello"/>
-        );
-        const element = component.find(".input-file__always-title");
-        expect(element.exists()).toEqual(true);
-    });
-
     it("Renders the the fileinput with an error", () => {
         const component = mount(
             <FileInput fileName="hello" error={errorTypes.ERROR} />

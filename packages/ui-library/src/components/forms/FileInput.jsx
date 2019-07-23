@@ -40,15 +40,13 @@ import FlexRow, { alignments } from "../layout/FlexRow";
  *     Defines the "data-id" for top-level HTML container.
  * @param {string[]} [accept]
  *     An optional array of the the allowed file mime types or file extensions.]
-  * @param {boolean} [alwaysShowTitle]
- *     If true the button will have a title above it.
  * @param {boolean} [loading]
  *     If the component should show a loading state for uploading files
  * @param {boolean} [noBorder]
  *     If the component shows a line around the upload this will remove it.
  * @param {string} [className]
  *     Optional CSS classname(s) applied to top-level container.
- * @param {string} [fileName]
+ * @param {node} [fileName]
  *     The name of the currently selected file.
  * @param {FileInput~onRemove} [onRemove]
  *     The callback triggered when the remove file link is clicked.
@@ -60,7 +58,6 @@ import FlexRow, { alignments } from "../layout/FlexRow";
  *     An object containing the various blurbs of text rendered in the component.
  * @param {string} [error=error]
  *    The type of error to display on the input (error = red, warning = yellow)
- *
  * @example
  *     <FileInput
  *         onValidate={this._handleValidate}
@@ -81,9 +78,8 @@ class FileInput extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         accept: PropTypes.array,
-        alwaysShowTitle: PropTypes.bool,
         className: PropTypes.string,
-        fileName: PropTypes.string,
+        fileName: PropTypes.node,
         fileData: PropTypes.node,
         onRemove: PropTypes.func,
         noBorder: PropTypes.bool,
@@ -126,7 +122,6 @@ class FileInput extends Component {
             fileData,
             noBorder,
             selectedTitle,
-            alwaysShowTitle,
             strings,
             status,
             error,
@@ -195,19 +190,14 @@ class FileInput extends Component {
                     </fieldset>
                 </FlexRow>
             ) : (
-                <div className="input-file__always-title-container">
-                    {alwaysShowTitle && selectedTitle &&
-                    <div className="input-file__always-title">{selectedTitle}</div>
-                    }
-                    <div className="input-file__select-btn">
-                        <MessageButton
-                            status={status ? status.type : "default" }
-                            data-id="select-button"
-                            onClick={this._clickButton(inputRef)}
-                            label={status ? status.label : text.select}
-                            inline
-                        />
-                    </div>
+                <div className="input-file__select-btn">
+                    <MessageButton
+                        status={status ? status.type : "default" }
+                        data-id="select-button"
+                        onClick={this._clickButton(inputRef)}
+                        label={status ? status.label : text.select}
+                        inline
+                    />
                 </div>
             )
 

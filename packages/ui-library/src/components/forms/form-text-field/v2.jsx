@@ -1,5 +1,3 @@
-"use strict";
-
 import React from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
@@ -16,6 +14,7 @@ import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { getIcon } from "../../../util/PropUtils";
 
 /**
 /**
@@ -95,6 +94,12 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
 *     CSS classes to apply to the label help hint (bottom, left, etc)
+* @param {string|element} [iconRight]
+*     Icon to be rendered on the right side. If it is a string it will be passed to an Icon compononet
+*     as the iconName. If the element is passed it will render the element.
+* @param {string|element} [iconLeft]
+*     Icon to be rendered on the left side. If it is a string it will be passed to an Icon compononet
+*     as the iconName. If the element is passed it will render the element.
 * @param {string} [inputClassName]
 *     CSS classes to set on the input element.
 * @param {node} [labelHelpText]
@@ -203,9 +208,14 @@ class Stateless extends React.Component {
         errorClassName: PropTypes.string,
         flexWidth: PropTypes.bool,
         helpClassName: PropTypes.string,
-        iconRight: PropTypes.string,
-        iconLeft: PropTypes.string,
-
+        iconRight: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.string
+        ]),
+        iconLeft: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.string
+        ]),
         inputClassName: PropTypes.string,
         label: PropTypes.oneOfType([
             PropTypes.array,
@@ -465,14 +475,12 @@ class Stateless extends React.Component {
                 lockText={this.props.labelLockText}
                 helpClassName={this.props.helpClassName}
                 style={this.state.labelWidth ?{ width: this.state.labelWidth } : null}>
-
                 <span
                     className={
                         classnames(
                             "input-container",
                             {
                                 "input-text__container--right-arrow": this.props.withArrow,
-
                             }
                         )
                     }
@@ -553,10 +561,14 @@ class Stateless extends React.Component {
                     )}
                     {this.props.controls}
                     {this.props.iconRight &&
-                        <span className={`input-icon input-icon--right icon-${this.props.iconRight}`}/>
+                    <span className="input-icon input-icon--right">
+                        {getIcon(this.props.iconRight )}
+                    </span>
                     }
                     {this.props.iconLeft &&
-                        <span className={`input-icon input-icon--left icon-${this.props.iconLeft}`}/>
+                     <span className="input-icon input-icon--left">
+                         {getIcon(this.props.iconLeft )}
+                     </span>
                     }
                     {message && (
                         <FormMessage
@@ -572,7 +584,6 @@ class Stateless extends React.Component {
         );
     }
 }
-
 class Stateful extends React.Component {
     static displayName = "FormTextFieldStateful";
 

@@ -39,7 +39,7 @@ import _ from "underscore";
  *     An optional array of the the allowed file mime types or file extensions.
  * @param {string} [className]
  *     Optional CSS classname(s) applied to top-level container.
- * @param {string} [fileName]
+ * @param {node} [fileName]
  *     The name of the currently selected file.
  * @param {FileDrop~onRemove} [onRemove]
  *     The callback triggered when the remove file link is clicked.
@@ -65,7 +65,7 @@ export default class FileDrop extends Component {
         "data-id": PropTypes.string,
         accept: PropTypes.array,
         className: PropTypes.string,
-        fileName: PropTypes.string,
+        fileName: PropTypes.node,
         onRemove: PropTypes.func,
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,

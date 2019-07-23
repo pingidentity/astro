@@ -1,6 +1,9 @@
 import React from "react";
-import { getClickableA11yProps, getIconClassName } from "../PropUtils";
 import { KeyCodes } from "../KeyboardUtils";
+import { getClickableA11yProps, getIconClassName, getIcon } from "../PropUtils";
+import { shallow } from "enzyme";
+import Icon from "../../components/general/Icon";
+
 
 describe("PropUtils", function () {
     describe("getIconClassName", function () {
@@ -70,5 +73,21 @@ describe("PropUtils", function () {
 
             expect(onClick).toHaveBeenCalledWith(argument);
         });
+    });
+
+    describe("getIcon", function () {
+        it("returns icon if string passed in", function () {
+            const component = shallow (
+                getIcon("globe")
+            );
+            expect(component.find(".icon-globe").exists()).toEqual(true);
+        });
+        it("returns icon if icon is passed in", function () {
+            const icon = <Icon iconName="globe"/>;
+            const component = getIcon(icon);
+
+            expect(component).toBe(icon);
+        });
+
     });
 });

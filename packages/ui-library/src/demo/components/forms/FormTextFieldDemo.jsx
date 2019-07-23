@@ -2,6 +2,8 @@ import React from "react";
 import FormTextField from "../../../components/forms/form-text-field";
 import InputWidths from "../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
+import Icon from "../../../components/general/Icon";
+import Text from "../../../components/general/Text";
 
 /**
 * @name FormTextFieldDemo
@@ -321,6 +323,15 @@ class FormTextFieldDemo extends React.Component {
                         stateless={false}
                         labelText="Fixed width of 5 characters"
                         size={5}
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextField
+                        stateless={false}
+                        labelText="text field with Icon"
+                        width={InputWidths.MD}
+                        readOnly
+                        iconRight={<Text type="success"><Icon iconName="success-round" type="inline"/></Text>}
                     />
                 </InputRow>
             </div>
