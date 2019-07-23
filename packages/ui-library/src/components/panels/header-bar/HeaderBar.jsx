@@ -6,6 +6,7 @@ import _ from "underscore";
 import PopoverNavMenu from "../../tooltips/PopoverNavMenu";
 import HeaderNav from "./HeaderNav";
 import EnvironmentSelector from "./EnvironmentSelector";
+import FlexRow, { alignments, spacingOptions } from "../../layout/FlexRow";
 import MarketSelector from "./MarketSelector";
 import Logo from "./logos/Logo";
 import { getIconClassName } from "../../../util/PropUtils";
@@ -550,7 +551,11 @@ class HeaderBar extends React.Component {
                         />
                     )}
 
-                    {this.props.siteLogo &&
+                    <FlexRow
+                        alignment={alignments.BOTTOM}
+                        spacing={spacingOptions.SM}
+                    >
+                        {this.props.siteLogo &&
                         (_.contains(["pingone", "uilib", "pingaccess", "pingfed"], this.props.siteLogo) ? (
                             <Logo
                                 className="header-bar__site-logo"
@@ -565,24 +570,26 @@ class HeaderBar extends React.Component {
                                 src={this.props.siteLogo}
                             />
                         ))}
-                    {this.props.siteTitle && (
-                        <span
-                            className="header-bar__site-title"
-                            data-id={this.props["data-id"] + "-site-title"}
-                        >
-                            {this.props.siteTitle}
-                        </span>
-                    )}
-                    {this.props.additionalContent && (
-                        <span
-                            className="header-bar__additional-content"
-                            data-id={
-                                this.props["data-id"] + "-additional-content"
-                            }
-                        >
-                            {this.props.additionalContent}
-                        </span>
-                    )}
+
+                        {this.props.siteTitle && (
+                            <span
+                                className="header-bar__site-title"
+                                data-id={this.props["data-id"] + "-site-title"}
+                            >
+                                {this.props.siteTitle}
+                            </span>
+                        )}
+                        {this.props.additionalContent && (
+                            <span
+                                className="header-bar__additional-content"
+                                data-id={
+                                    this.props["data-id"] + "-additional-content"
+                                }
+                            >
+                                {this.props.additionalContent}
+                            </span>
+                        )}
+                    </FlexRow>
                     {this.props.marketOptions && (
                         <MarketSelector
                             options={this.props.marketOptions}

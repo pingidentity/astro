@@ -56,61 +56,61 @@
         flex-direction: column-reverse;
     }
 
-    &--row-spacing-xs {
+    &--column-spacing-xs {
         & > *:not(:last-child) {
             margin-bottom: $spacing-xs;
         }
     }
 
-    &--row-spacing-sm {
+    &--column-spacing-sm {
         & > *:not(:last-child) {
             margin-bottom: $spacing-sm;
         }
     }
 
-    &--row-spacing-md {
+    &--column-spacing-md {
         & > *:not(:last-child) {
             margin-bottom: $spacing-md;
         }
     }
 
-    &--row-spacing-lg {
+    &--column-spacing-lg {
         & > *:not(:last-child) {
             margin-bottom: $spacing-lg;
         }
     }
 
-    &--row-spacing-xl {
+    &--column-spacing-xl {
         & > *:not(:last-child) {
             margin-bottom: $spacing-xl;
         }
     }
 
-    &--column-spacing-xs {
+    &--row-spacing-xs {
         & > *:not(:last-child) {
             margin-right: $spacing-xs;
         }
     }
 
-    &--column-spacing-sm {
+    &--row-spacing-sm {
         & > *:not(:last-child) {
             margin-right: $spacing-sm;
         }
     }
 
-    &--column-spacing-md {
+    &--row-spacing-md {
         & > *:not(:last-child) {
             margin-right: $spacing-md;
         }
     }
 
-    &--column-spacing-lg {
+    &--row-spacing-lg {
         & > *:not(:last-child) {
             margin-right: $spacing-lg;
         }
     }
 
-    &--column-spacing-xl {
+    &--row-spacing-xl {
         & > *:not(:last-child) {
             margin-right: $spacing-xl;
         }

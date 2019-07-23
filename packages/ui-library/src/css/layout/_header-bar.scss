@@ -68,9 +68,6 @@ $topnav-bg: $color-neutral-10;
 
 .header-bar__site-logo,
 .header-bar__pingone-logo {
-    display: inline-block;
-    height: 22px;
-    vertical-align: middle;
     max-width: 150px;
 }
 
@@ -80,20 +77,18 @@ $topnav-bg: $color-neutral-10;
 
 .header-bar__site-title,
 .header-bar__additional-content {
-    display: inline-block;
-    height: $topnav-height;
-    line-height: $topnav-height + 3;
     color: $color-white;
-    vertical-align: top;
 }
 
 .header-bar__site-title {
     @include font-pn-regular;
     font-size: 20px;
+    height: 20px;
 }
 
 .header-bar__additional-content {
     @include font-pn-light;
+    margin-bottom: 1px;
 }
 
 .header-bar__mode {
