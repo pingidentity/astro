@@ -1,0 +1,148 @@
+label {
+    .input-toggle {
+        display: block;
+    }
+
+    a {
+        &.input-toggle {
+            display: block;
+        }
+    }
+}
+
+.input-toggle {
+    $toggle-height: 24px;
+    $toggle-width: 40px;
+    $toggle-time: 0.1s;
+
+    $toggle-diameter: $toggle-height - 2;
+    $toggle-border-radius: ceil($toggle-height / 2) + 1;
+
+    display: inline-block;
+
+    .toggle {
+        position: relative;
+        height: $toggle-height - 2;
+        width: $toggle-width - 2;
+        background-color: $color-stratus;
+        display: inline-block;
+        vertical-align: middle;
+        box-sizing: border-box;
+        border: 1px solid $color-stratus;
+        cursor: pointer;
+
+        @include border-radius($toggle-border-radius);
+        @include transition(all $toggle-time);
+
+        &:after {
+            content: '';
+            background-color: $color-white;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: $toggle-diameter - 2;
+            width: $toggle-diameter - 2;
+            box-sizing: border-box;
+
+            @include border-radius($toggle-border-radius);
+            @include transition(all $toggle-time);
+            @include box-shadow((1px 1px 3px 0 rgba(0, 0, 0, 0.3)));
+        }
+    }
+    &.selected {
+        .toggle {
+            background-color: $color-success;
+            border-color: $color-success;
+
+            &:after {
+                left: $toggle-width - $toggle-diameter - 1;
+            }
+        }
+    }
+    &.locked:not(.selected) {
+        .toggle {
+            background-color: $color-warning-icon-yellow;
+            border-color: $color-warning-icon-yellow;
+        }
+    }
+    &.small {
+        .toggle {
+            $toggle-height: 18px;
+            $toggle-width: 30px;
+            $toggle-diameter: $toggle-height - 2;
+
+            height: $toggle-height;
+            width: $toggle-width;
+
+            &:after {
+                height: $toggle-diameter;
+                width: $toggle-diameter;
+            }
+        }
+        &.selected {
+            .toggle {
+                &:after {
+                    left: $toggle-width - $toggle-diameter - 1; //13px
+                }
+            }
+        }
+    }
+}
+
+.required {
+    &.input-toggle {
+        margin: 0 0 0 15px;
+
+        &:before {
+            top: 0;
+            bottom: 0;
+            left: -14px;
+        }
+    }
+}
+
+.form-error,
+.input-message {
+    &.input-toggle {
+        .toggle {
+            border-color: $color-input-error;
+
+            &:after {
+                border-color: $color-input-error;
+            }
+        }
+    }
+}
+
+.disabled {
+    $disabled-opacity: 0.4;
+    $normal-opacity: 1;
+
+    &.input-toggle {
+        @include opacity($disabled-opacity);
+    }
+}
+
+.readonly {
+    &.required {
+        &.input-toggle {
+            &:before {
+                content: none;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.checkbox-list {
+    .actions {
+        .toggle-container {
+            display: inline-block;
+            margin: 0 0 0 20px;
+
+            .input-toggle {
+                margin: 0 0 0 10px;
+            }
+        }
+    }
+}

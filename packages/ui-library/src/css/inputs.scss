@@ -2,14 +2,15 @@
 
 @import 'code-view';
 @import 'forms/dropdown-button';
+@import 'icons/_variables';
 @import 'forms/_keyword-search';
 @import 'forms/_translation-picker';
 @import 'forms/_translation-picker';
 @import 'list/column-selector.scss';
 @import 'forms/_file-drop';
 @import 'forms/_file-input';
+@import 'forms/_toggle';
 @import 'rows/_row-builder';
-@import 'icons/_variables';
 
 // INPUT GLOBAL VARS ---------------------------------------------------------------------------------------------------
 
@@ -577,10 +578,6 @@ label {
         }
     }
 
-    .input-toggle {
-        display: block;
-    }
-
     a {
         &.password-show-button {
             position: absolute;
@@ -597,9 +594,6 @@ label {
                 top: 9px;
                 font-size: 20px;
             }
-        }
-        &.input-toggle {
-            display: block;
         }
         &.undo {
             position: absolute;
@@ -1273,85 +1267,6 @@ input[type=file] {
     }
 }
 
-.input-toggle {
-    $toggle-height: 24px;
-    $toggle-width: 40px;
-    $toggle-time: 0.1s;
-
-    $toggle-diameter: $toggle-height - 2;
-    $toggle-border-radius: ceil($toggle-height / 2) + 1;
-
-    display: inline-block;
-
-    .toggle {
-        position: relative;
-        height: $toggle-height - 2;
-        width: $toggle-width - 2;
-        background-color: $color-stratus;
-        display: inline-block;
-        vertical-align: middle;
-        box-sizing: border-box;
-        border: 1px solid $color-stratus;
-        cursor: pointer;
-
-        @include border-radius($toggle-border-radius);
-        @include transition(all $toggle-time);
-
-        &:after {
-            content: '';
-            background-color: $color-white;
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: $toggle-diameter - 2;
-            width: $toggle-diameter - 2;
-            box-sizing: border-box;
-
-            @include border-radius($toggle-border-radius);
-            @include transition(all $toggle-time);
-            @include box-shadow((1px 1px 3px 0 rgba(0, 0, 0, 0.3)));
-        }
-    }
-    &.selected {
-        .toggle {
-            background-color: $color-success;
-            border-color: $color-success;
-
-            &:after {
-                left: $toggle-width - $toggle-diameter - 1;
-            }
-        }
-    }
-    &.locked:not(.selected) {
-        .toggle {
-            background-color: $color-warning-icon-yellow;
-            border-color: $color-warning-icon-yellow;
-        }
-    }
-    &.small {
-        .toggle {
-            $toggle-height: 18px;
-            $toggle-width: 30px;
-            $toggle-diameter: $toggle-height - 2;
-
-            height: $toggle-height;
-            width: $toggle-width;
-
-            &:after {
-                height: $toggle-diameter;
-                width: $toggle-diameter;
-            }
-        }
-        &.selected {
-            .toggle {
-                &:after {
-                    left: $toggle-width - $toggle-diameter - 1; //13px
-                }
-            }
-        }
-    }
-}
-
 @mixin calendar-wrapper {
     @include font-pn-regular;
 
@@ -1900,15 +1815,6 @@ input[type=file] {
             }
         }
     }
-    &.input-toggle {
-        margin: 0 0 0 15px;
-
-        &:before {
-            top: 0;
-            bottom: 0;
-            left: -14px;
-        }
-    }
     &.legend {
         float: right;
         margin: 0 0 0 15px;
@@ -2056,15 +1962,6 @@ input[type=file] {
         }
         .input-container {
             width: calc(100% - #{$message-input-offset});
-        }
-    }
-    &.input-toggle {
-        .toggle {
-            border-color: $color-input-error;
-
-            &:after {
-                border-color: $color-input-error;
-            }
         }
     }
     &.input-checkbox {
@@ -2367,10 +2264,6 @@ input[type=file] {
             }
         }
     }
-
-    &.input-toggle {
-        @include opacity($disabled-opacity);
-    }
 }
 
 .readonly {
@@ -2406,7 +2299,6 @@ input[type=file] {
         }
         &.input-text,
         &.input-textarea,
-        &.input-toggle,
         &.input-select > div,
         &.legend {
             &:before {
@@ -2417,9 +2309,6 @@ input[type=file] {
             select {
                 padding: 0 30px 0 10px;
             }
-        }
-        &.input-toggle {
-            margin: 0;
         }
     }
 }
@@ -2544,15 +2433,6 @@ input[type=file] {
         display: inline-block;
         margin: 12px 0 0;
         font-size: 14px;
-
-        .toggle-container {
-            display: inline-block;
-            margin: 0 0 0 20px;
-
-            .input-toggle {
-                margin: 0 0 0 10px;
-            }
-        }
     }
 }
 
