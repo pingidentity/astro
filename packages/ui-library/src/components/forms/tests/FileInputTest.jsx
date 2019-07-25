@@ -92,6 +92,22 @@ describe("FileInput", function () {
         expect(element.exists()).toEqual(true);
     });
 
+    it("Renders the a remove button when buttonLabel is provided", () => {
+        const component = mount(
+            <FileInput fileName="hello" buttonLabel="remove" />
+        );
+        const element = component.find(".input-file__remove-btn");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("Renders the the fieldset with a nodeButton", () => {
+        const component = mount(
+            <FileInput fileName="hello" buttonNode={<div />} />
+        );
+        const element = component.find(".input-file__node-btn");
+        expect(element.exists()).toEqual(true);
+    });
+
     it("Renders the the fileinput with an error", () => {
         const component = mount(
             <FileInput fileName="hello" error={errorTypes.ERROR} />

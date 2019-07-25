@@ -56,6 +56,10 @@ import FlexRow, { alignments } from "../layout/FlexRow";
  *     The callback triggered when when a file is selected that idicates if the selected file type matches those allowed by the "accept" prop.
  * @param {Object} [strings]
  *     An object containing the various blurbs of text rendered in the component.
+ * @param {string} [buttonLabel]
+ *     Adds a custom button label if this prop is provided. If not it will default to "remove".
+  * @param {node} [buttonNode]
+ *     Adds a custom component/element/string instead of the standard remove pill button.
  * @param {string} [error=error]
  *    The type of error to display on the input (error = red, warning = yellow)
  * @param {boolean} [required=false]
@@ -80,6 +84,8 @@ class FileInput extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         accept: PropTypes.array,
+        buttonLabel: PropTypes.string,
+        buttonNode: PropTypes.node,
         className: PropTypes.string,
         fileName: PropTypes.node,
         fileData: PropTypes.node,
@@ -126,6 +132,8 @@ class FileInput extends Component {
             fileData,
             noBorder,
             selectedTitle,
+            buttonLabel,
+            buttonNode,
             strings,
             status,
             error,
@@ -182,14 +190,15 @@ class FileInput extends Component {
                                     )}
                                 </div>
                             </div>
-                            <Button
-                                data-id="remove-button"
-                                className="input-file__remove-btn"
-                                onClick={this._handleRemove(inputRef)}
-                                inline
-                            >
-                                {text.remove}
-                            </Button>
+                            {buttonNode ? <div className="input-file__node-btn">{buttonNode}</div>
+                                : <Button
+                                    data-id="remove-button"
+                                    className="input-file__remove-btn"
+                                    onClick={this._handleRemove(inputRef)}
+                                    inline
+                                >
+                                    {buttonLabel ? buttonLabel : text.remove}
+                                </Button>}
                         </div>
                     </fieldset>
                 </FlexRow>

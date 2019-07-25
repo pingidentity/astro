@@ -7,9 +7,7 @@ export const sizes = {
     SM: "sm",
     MD: "md",
     LG: "lg",
-    XL: "xl",
-    FORMLABEL: "form-label",
-    INLINE_BUTTON_WITH_INPUT: "inline-button-with-input"
+    XL: "xl"
 };
 
 const getClassName = (value, placement) => value !== undefined ? `padding-component--${placement}-${value}` : "";

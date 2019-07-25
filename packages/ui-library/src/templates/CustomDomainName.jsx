@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import Button, { buttonTypes } from "../components/buttons/Button";
 import ButtonBar from "../components/forms/ButtonBar";
@@ -7,19 +8,22 @@ import ColorPicker from "../components/general/ColorPicker";
 import FileInput from "../components/forms/FileInput";
 import FileUpload from "../components/forms/file-upload";
 import FormTextField from "../components/forms/FormTextField";
+import FormLabel from "../components/forms/FormLabel";
+import FormTextArea from "../components/forms/FormTextArea";
 import FlexRow,
-{ alignments, justifyOptions, spacingOptions } from "../components/layout/FlexRow";
+{ justifyOptions, spacingOptions, alignments, flexDirectionOptions } from "../components/layout/FlexRow";
 import InputRow from "../components/layout/InputRow";
 import { InputWidths } from "../components/forms/InputWidths";
+import InlineMessage from "../components/general/InlineMessage";
 import Layout from "../components/general/ColumnLayout";
+import Link, { linkTypes } from "../components/general/Link";
 import Modal from "../components/general/Modal";
+import ModalButton from "../components/general/ModalButton";
 import MessageButton, { statuses } from "../components/buttons/MessageButton";
 import PageHeader from "../components/general/PageHeader";
 import PageSection from "../components/layout/PageSection";
-import Padding, { sizes } from "../components/layout/Padding";
 import Stack from "../components/layout/Stack";
 import Text from "../components/general/Text";
-
 
 
 
@@ -28,30 +32,38 @@ import Text from "../components/general/Text";
  * @desc This is a template for Custom Domain Name.
  */
 
+const domainStates = {
+    complete: "complete",
+    enterDomain: "enterDomain",
+    needsVerification: "needsVerification",
+    needsSsl: "needsSsl",
+    noDomain: "noDomain",
+};
 
 export default class CustomDomainName extends Component {
 
     initState = {
+        domainState: domainStates.noDomain,
+        modalButtonExpanded: false,
         expanded: false,
         requiredValue: "",
-        saving: false,
-        saveDisabled: false,
+        saveDisabled: true,
         selectedStatus: statuses.DEFAULT,
         statusText: "Save",
         showBar: true,
-        loading: false,
-        saveLater: false,
-        finishVerification: false,
-        save: false,
-        backgroundColor: "#fff",
-        onChangeValidationErrorMessage: "",
     };
 
-    state = this.initState;
+    state = this.initState
 
     _toggleClick = () => {
         this.setState({
-            save: true
+            domainState: domainStates.enterDomain,
+        });
+    }
+
+    _toggleOpen = () => {
+        this.setState({
+            modalButtonExpanded: true
         });
     }
 
@@ -61,35 +73,39 @@ export default class CustomDomainName extends Component {
         });
     }
 
-    _toggleLoadingButton = () => {
+    _toggleModalClosed = () => {
         this.setState({
-            loading: true
+            modalButtonExpanded: false
         });
     }
 
-    _handleValueChange = dataId => value => {
+    _handleValueChange = (value) => {
         this.setState({
-            [dataId]: value
-        });
-    }
-
-    _handleSubmit = (event) => {
-        this.setState({
-            requiredValue: event.target.value,
+            saveDisabled: (!value || value.length <= 0),
+            requiredValue: value
         });
     }
 
     _handleMessageClick = () => {
+
         this.setState({
-            selectedStatus: statuses.SUCCESS,
-            statusText: "Saved",
+            selectedStatus: statuses.LOADING,
+            statusText: null
         });
+
+
+        setTimeout(() => {
+            this.setState({
+                selectedStatus: statuses.SUCCESS,
+                statusText: "Saved"
+            });
+        }, 1000);
 
         setTimeout(() => {
             this.setState({
                 expanded: true
             });
-        }, 1000);
+        }, 3000);
 
     }
 
@@ -99,54 +115,26 @@ export default class CustomDomainName extends Component {
         );
     };
 
-    _handleSaveLater = () => {
+    _handleNeedsVerification = () => {
         this.setState({
             expanded: false,
-            saveLater: true,
+            domainState: domainStates.needsVerification,
         });
     }
 
     _handleSave = () => {
         this.setState({
             expanded: false,
-            finishVerification: true
+            modalButtonExpanded: false,
+            domainState: domainStates.needsSsl
         });
     };
 
-
-    _handleDisabled = () => {
-        this.setState({
-            saveDisabled: true
-        });
-    };
-
-
-    _handleClickFinishVerification = () => {
+    _handleVerify = () => {
         this.setState({
             expanded: true,
+            domainState: domainStates.enterDomain
         });
-    }
-
-    _handleChange = (file) => {
-        this.setState({
-            selectedFile: file.name,
-            fileStatus: "file selected"
-        });
-    }
-
-    _handleRemove = () => {
-        this.setState({
-            selectedFile: null,
-            fileStatus: "file removed",
-        });
-    }
-
-    _handleFileValidation = (valid) => {
-        if (!valid) {
-            this.setState({
-                fileStatus: "invalid file type selected"
-            });
-        }
     }
 
     _fileValidator = (file) => {
@@ -167,18 +155,20 @@ export default class CustomDomainName extends Component {
         });
     };
 
-    _handleChangeErrorValidation = (e) => {
-        this.setState({
-            onChangeValidationErrorMessage: this._validateInput(e.target.value)
+
+    _handleSslSave = () => {
+        this.setState ({
+            expanded: false,
+            domainState: domainStates.complete
         });
-    };
+    }
 
-    _validateInput = (value) => {
-
-        return value.length === 0 || value.length <= 5
-            ? "This URL is already in use in another environment and can't be used again." : "";
-    };
-
+    _handleEdit = () => {
+        this.setState ({
+            modalButtonExpanded: true,
+            domainState: domainStates.needsSsl
+        });
+    }
 
     renderCopy() {
         if (this.state.selectedStatus === statuses.SUCCESS) {
@@ -186,12 +176,10 @@ export default class CustomDomainName extends Component {
                 <FlexRow justify={justifyOptions.CENTER} spacing={spacingOptions.SM}>
                     <CalloutBox>
                         <InputRow>
-                            <FlexRow justify={justifyOptions.CENTER}>
+                            <FlexRow alignment={alignments.CENTER} flexDirection={flexDirectionOptions.COLUMN}>
                                 <Text type="primary">
                             Add this to your DNS configuration:
                                 </Text>
-                            </FlexRow>
-                            <FlexRow justify={justifyOptions.CENTER}>
                                 <CopyField
                                     width={InputWidths.LG}
                                     text="<unique identifier for domain+environment pair goes here>"
@@ -209,11 +197,10 @@ export default class CustomDomainName extends Component {
         if (this.state.selectedStatus === statuses.SUCCESS) {
             return (<ButtonBar
                 flags={this.props.flags}
-                onCancel={this._handleSaveLater}
+                onCancel={this._handleNeedsVerification}
                 onSave={this._handleSave}
                 cancelText="Close"
                 saveText="Verify"
-                enableSavingAnimation={this.state.saving}
                 visible={this.state.showBar}
                 unfixed
             />);
@@ -223,7 +210,7 @@ export default class CustomDomainName extends Component {
     }
 
     renderModals () {
-        if (this.state.save ) {
+        if (this.state.domainState === domainStates.enterDomain ) {
             return (
                 <div>
                     <InputRow>
@@ -241,7 +228,7 @@ export default class CustomDomainName extends Component {
                             <FlexRow justify={justifyOptions.CENTER}>
                                 <Text>
                                     Please note: it may take up to 24 hours for changes to your
-                                    domain configuration to propogate through the internet.
+                                    domain configuration to propagate through the internet.
                                 </Text>
                             </FlexRow>
                         </InputRow>
@@ -253,98 +240,212 @@ export default class CustomDomainName extends Component {
         }
     }
 
-    renderSSL () {
-        if (this.state.finishVerification) {
+    renderModalButton () {
+        if (this.state.domainState === domainStates.needsSsl) {
             return (
-                <Padding
-                    left={this.state.selectedFile ? undefined : sizes.MD}
-                    top={this.state.selectedFile ? undefined : sizes.LG}
-                >
-                    <FileInput
-                        accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
-                        fileName={this.state.selectedFile}
-                        strings={{ select: "Upload SSL Certificate" }}
-                        fileData={(
-                            <span>
-                                Valid <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
-                            </span>
-                        )}
-                        onValidateFile={this._handleFileValidation}
-                        onValueChange={this._handleChange}
-                        selectedTitle="SSL Certificate"
-                        onRemove={this._handleRemove}
-                        noBorder
-                        alwaysShowTitle
-                    />
-                </Padding>);
+                <FlexRow spacing={spacingOptions.SM}>
+                    <ModalButton
+                        data-id="domain-modal-ssl"
+                        modalTitle="Add SSL Certificate"
+                        activatorContent={
+                            <Button label="Add SSL Certificate" type={buttonTypes.PRIMARY}/>
+                        }
+                        flags={["p-stateful", "use-portal"]}
+                        initialState={{
+                            expanded: false,
+                        }}
+                        onOpen={this._toggleOpen}
+                        onClose={this._toggleModalClosed}
+                    >
+                        <InputRow>
+                            <Text>
+                        Add the SSL Certificate for your domain.
+                            </Text>
+                        </InputRow>
+                        <Stack gap="LG">
+                            <FormTextArea
+                                flags={this.props.flags}
+                                labelText="Certificate"
+                                description="Description of what the certificate is and so on"
+                                required
+                                noResize
+                                width={InputWidths.LG}
+                                placeholder=
+                                    " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
+                            />
+                            <FormTextArea
+                                flags={this.props.flags}
+                                labelText="Private Key"
+                                description="Description of what the private key is and so on"
+                                required
+                                noResize
+                                width={InputWidths.LG}
+                                placeholder=
+                                    " - - - BEGIN PRIVATE KEY - - - Private Key Code - - - END PRIVATE KEY - - -"
+                            />
+                            <FormTextArea
+                                flags={this.props.flags}
+                                labelText="Intermediate Certificate (optional)"
+                                description="Description of what the intermediate certificate is and so on"
+                                noResize
+                                width={InputWidths.LG}
+                                placeholder=
+                                    " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
+                            />
+                            <ButtonBar
+                                flags={this.props.flags}
+                                onCancel={this._handleDiscard}
+                                onSave={this._handleSslSave}
+                                cancelText="Cancel"
+                                saveText="Save"
+                                visible={this.state.showBar}
+                                saveDisabled={this.state.saveDisabled}
+                                unfixed
+                            />
+                        </Stack>
+                    </ModalButton>
+                </FlexRow>
+            );
         }
     }
 
-    renderButtons () {
-        if (this.state.saveLater) {
-            return (
-                <Padding left={sizes.MD} top={sizes.FORMLABEL}>
-                    <Button
-                        label="Verify Domain"
-                        type={buttonTypes.PRIMARY}
-                        loading={this.state.loading}
-                        onClick={this._handleClickFinishVerification}
-                    />
-                </Padding>
+    renderInlineMessage () {
+        return (
+            <InlineMessage type={InlineMessage.MessageTypes.WARNING }>
+                        Your domain is not active until you add the SSL Certificate
+            </InlineMessage>
+        );
+    }
+
+    renderSSL () {
+        if (this.state.domainState === domainStates.complete) {
+            return ( <FileInput
+                fileName={this.state.requiredValue &&
+                        <FlexRow spacing={spacingOptions.SM}>
+                            <span>{this.state.requiredValue}</span>
+                        </FlexRow>}
+                selectedTitle="Domain Name"
+                fileData={(
+                    <FlexRow spacing={spacingOptions.SM}>
+                        <span>
+                            SSL Certificate Valid &nbsp;
+                            <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
+                        </span>
+                        <Link onClick={this._handleEdit}>Edit</Link>
+                    </FlexRow>
+                )}
+                onRemove={this._handleDiscard}
+                buttonLabel="Remove Domain"
+            />
             );
-        } else if (this.state.save) {
+        } else if (this.state.domainState === domainStates.needsSsl) {
             return (
-                <Padding top={sizes.INLINE_BUTTON_WITH_INPUT} left={sizes.MD}>
-                    <MessageButton
-                        label={this.state.statusText}
-                        status={this.state.selectedStatus}
-                        onClick={this._handleMessageClick}
-                        inline
+                <div>
+                    {this.renderInlineMessage()}
+                    <FileInput
+                        fileName={this.state.requiredValue &&
+                    <FlexRow spacing={spacingOptions.SM}>
+                        <span>{this.state.requiredValue}</span>
+                    </FlexRow>}
+                        selectedTitle="Domain Name"
+                        fileData={(
+                            <FlexRow spacing={spacingOptions.SM}>
+                                <Link onClick={this._handleDiscard}>Remove</Link>
+                            </FlexRow>
+                        )}
+                        onRemove={this._handleDiscard}
+                        buttonNode={this.renderModalButton()}
                     />
-                </Padding>
+                </div>
+            );
+        }
+    }
+
+
+    renderButtons () {
+        if (this.state.domainState === domainStates.needsVerification) {
+            return (
+                <Button
+                    label="Verify Domain"
+                    type={buttonTypes.PRIMARY}
+                    onClick={this._handleVerify}
+                    disabled={this.state.saveDisabled}
+                />
+            );
+        } else if (this.state.domainState === domainStates.enterDomain) {
+            return (
+                <MessageButton
+                    label={this.state.statusText}
+                    status={this.state.selectedStatus}
+                    onClick={this._handleMessageClick}
+                    type={(this.state.selectedStatus === statuses.DEFAULT) ||
+                            (this.state.selectedStatus === statuses.LOADING)
+                        ? "primary" : undefined}
+                    disabled={this.state.saveDisabled}
+                />
             );
         }
     }
 
 
     renderFormTextField () {
-        if (this.state.save) {
+        const formText = (
+            <FormTextField
+                dataId="requiredTextField"
+                flags={this.props.flags}
+                required={true}
+                onValueChange={this._handleValueChange}
+                value={this.state.requiredValue}
+                width={InputWidths.MD}
+            />
+        );
+
+        if (this.state.domainState === domainStates.needsVerification) {
             return (
-                <Stack gap="XS">
-                    <FormTextField
-                        labelText="Domain Name"
-                        dataId="requiredTextField"
-                        flags={this.props.flags}
-                        required={true}
-                        onValueChange={this._handleValueChange("requiredValue")}
-                        onChange={this._handleSubmit}
-                        value={this.state.requiredValue}
-                        width={InputWidths.MD}
-                        readOnly={this.state.finishVerification}
-                        errorMessage={this.state.onChangeValidationErrorMessage}
-                        onChange={this._handleChangeErrorValidation}
-                    />
-                    <a onClick={this._handleDiscard}>Remove</a>
-                </Stack>);
-        } else {
-            return null;
+                <div>
+                    {this.renderInlineMessage()}
+                    <span>
+                        {formText}
+                        {this.renderButtons()}
+                        <InputRow>
+                            <Link onClick={this._handleDiscard}>Remove</Link>
+                        </InputRow>
+                    </span>
+                </div>
+            );
+        }
+
+        if (this.state.domainState === domainStates.enterDomain) {
+            return (
+                formText
+            );
         }
     }
 
 
-
     renderFields() {
-        if (this.state.save) {
+        if (this.state.domainState === domainStates.needsVerification ||
+            this.state.domainState === domainStates.needsSsl ||
+            this.state.domainState === domainStates.complete) {
+            return (
+                <Stack gap="MD">
+                    <InputRow>
+                        {this.state.domainState === domainStates.complete ? null : this.renderFormTextField() }
+                    </InputRow>
+                    <InputRow>
+                        {this.renderSSL()}
+                    </InputRow>
+                </Stack>
+            );
+        } else if (this.state.domainState === domainStates.enterDomain) {
             return (
                 <InputRow>
-                    <FlexRow alignment={alignments.TOP}>
-                        {this.renderFormTextField()}
-                        {!this.state.finishVerification && this.renderButtons()}
-                        {this.renderSSL()}
-                    </FlexRow>
+                    {this.renderFormTextField()}
+                    {this.renderButtons()}
+                    {this.renderSSL()}
                 </InputRow>);
         } else {
-            return <a onClick={this._toggleClick}>+ Add Custom Domain</a>;
+            return <Link type={linkTypes.ADD} onClick={this._toggleClick}>Add Custom Domain</Link>;
         }
     }
 
@@ -358,56 +459,63 @@ export default class CustomDomainName extends Component {
                 />
                 <PageSection
                     title="Brand & Appearance"
-                >
-                    <Layout.Row autoWidth>
-                        <Layout.Column>
-                            <FileUpload
-                                accept="image/jpeg, image/jpg, image/png"
-                                data-id="file-upload"
-                                validator={this._fileValidator}
-                                showThumbnail={true}
-                                labelText="Organization logo"
-                                labelSelect="Choose a File"
-                                labelRemove="Remove Image"
-                                labelMaxFileSize="Max Size 4MB"
-                                thumbnailSrc="src/demo/images/favicon.png"
-                            />
-                        </Layout.Column>
-                        <Layout.Column>
-                            <ColorPicker
-                                data-id="color-picker-bg"
-                                color={this.state.backgroundColor}
-                                onValueChange={this._handleColorChange("backgroundColor")}
-                                labelText="Background Color"
-                                flags={this.props.flags}
-                            />
-                        </Layout.Column>
-                    </Layout.Row>
-                </PageSection>
+                    description={
+                        <Layout.Row autoWidth>
+                            <Layout.Column>
+                                <FileUpload
+                                    accept="image/jpeg, image/jpg, image/png"
+                                    data-id="file-upload"
+                                    validator={this._fileValidator}
+                                    showThumbnail={true}
+                                    labelText="Organization logo"
+                                    labelSelect="Choose a File"
+                                    labelRemove="Remove Image"
+                                    labelMaxFileSize="Max Size 4MB"
+                                    thumbnailSrc="src/demo/images/favicon.png"
+                                />
+                            </Layout.Column>
+                            <Layout.Column>
+                                <ColorPicker
+                                    data-id="color-picker-bg"
+                                    initialState={{
+                                        color: "#fff",
+                                    }}
+                                    onValueChange={this._handleColorChange("backgroundColor")}
+                                    labelText="Background Color"
+                                    flags={this.props.flags}
+                                />
+                            </Layout.Column>
+                        </Layout.Row>
+                    }
+                />
                 <PageSection
                     title="Custom Domain"
-                >
-                    <Text>
-                        Customize your environment by setting up a custom domain name.
-                        Users will see your customized domain name in place of the standard (auth.pingone.com).
-                    </Text>
-                    <InputRow>
-                        {this.renderFields()}
-                        <Modal
-                            flags={this.props.flags}
-                            data-id="domain-modal"
-                            modalTitle="Verify Custom Domain"
-                            expanded={this.state.expanded}
-                            onOpen={this._toggleModalOpen}
-                            onClose={this._toggleClose}
-                        >
-                            {this.renderModals()}
-                        </Modal>
-                    </InputRow>
-                </PageSection>
+                    description={
+                        <div>
+                            <Text>
+                            Customize your environment by setting up a custom domain name.
+                            Users will see your customized domain name in place of the standard (auth.pingone.com).
+                            </Text>
+                            {this.state.domainState === domainStates.needsSsl ||
+                            this.state.domainState === domainStates.complete
+                                ? null :<FormLabel value="Domain Name" detached/>}
+                            <InputRow>
+                                {this.renderFields()}
+                                <Modal
+                                    flags={this.props.flags}
+                                    data-id="domain-modal"
+                                    modalTitle="Verify Custom Domain"
+                                    expanded={this.state.expanded}
+                                    onOpen={this._toggleModalOpen}
+                                    onClose={this._toggleClose}
+                                >
+                                    {this.renderModals()}
+                                </Modal>
+                            </InputRow>
+                        </div>
+                    }
+                />
             </div>
         );
     }
-
 }
-

@@ -15,7 +15,7 @@ import classnames from "classnames";
  *      The vertical alignment of the items.
  * @param {boolean} [inline=false]
  *      If true, makes the FlexRow inline.
- * @param {("center" | "end" | "spacebetween" | "start" )} [justify="start"]
+ * @param {("center" | "end" | "spacebetween" | "spaceevenly" | "start" )} [justify="start"]
  *      The horizontal justification of the items.
  * @param {("xs" | "sm" | "md" | "lg" | "xl" )} [spacing]
  *      If supplied, with add spacing in between items.
@@ -43,6 +43,7 @@ export const justifyOptions = {
     CENTER: "center",
     END: "end",
     SPACEBETWEEN: "spacebetween",
+    SPACEEVENLY: "spaceevenly",
     START: "start"
 };
 
@@ -78,6 +79,8 @@ const getJustifyClass = justify => {
             return "flex-row--justify-end";
         case justifyOptions.SPACEBETWEEN:
             return "flex-row--justify-between";
+        case justifyOptions.SPACEEVENLY:
+            return "flex-row--justify-evenly";
         case justifyOptions.START:
         default:
             return "flex-row--justify-start";

@@ -67,6 +67,23 @@ export default function FlexRowDemo() {
                 </FlexRow>
             </InputRow>
             <InputRow>
+                Using a justify value of space-evenly
+            </InputRow>
+            <InputRow>
+                <FlexRow
+                    justify={justifyOptions.SPACEEVENLY}
+                >
+                    <Button label="Button" noSpacing />
+                    <Button label="Another button" noSpacing />
+                    <Button
+                        inline
+                        label="Inline button"
+                        noSpacing
+                        type="primary"
+                    />
+                </FlexRow>
+            </InputRow>
+            <InputRow>
                 Using a justify value of end
             </InputRow>
             <InputRow>

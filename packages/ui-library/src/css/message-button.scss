@@ -29,6 +29,16 @@ button.message-button {
                 background-color: $color-accent-neutral-10;
             }
         }
+
+        &.primary {
+            .icon-ellipsis {
+                &:before,
+                &:after,
+                span {
+                    background-color: $color-white;
+                }
+            }
+        }
     }
     &--success,
     &--success:hover {

@@ -133,7 +133,6 @@ class FileInputDemo extends React.Component {
                             <span>{this.state.selectedFile2}</span>
                             <StatusIndicator type={Types.SUCCESS} />
                         </FlexRow>}
-                        iconRight="success-round"
                         fileData={(
                             <span>
                                 Valid <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>

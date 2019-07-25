@@ -56,6 +56,7 @@ function MessageButton (props) {
             [`message-button--${status}`]: status,
         }
     );
+
     const disabled = status !== statuses.DEFAULT || props.disabled;
 
     return (
@@ -100,9 +101,9 @@ MessageButton.propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
     status: PropTypes.oneOf(statusTypes),
-    disabled: PropTypes.bool,
     inline: PropTypes.bool,
     onClick: PropTypes.func,
+    disabled: PropTypes.bool
 };
 
 MessageButton.statuses = statuses;
