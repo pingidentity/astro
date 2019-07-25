@@ -8,15 +8,14 @@ import Layout from "../../../components/general/ColumnLayout";
 import MultiDrag, { MultiDragRow } from "../../../components/panels/multi-drag";
 import Messages from "../../../components/general/messages/";
 import Toggle from "../../../components/forms/form-toggle";
-import classnames from "classnames";
 import update from "re-mutable";
 import keyMirror from "fbjs/lib/keyMirror";
 import data from "./MultiDragData.js";
 import dragScroll from "../../../util/dragScroll";
 import _ from "underscore";
 
-import Button from "../../../components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
+import Image, { imageSizes } from "ui-library/lib/components/general/Image";
 
 /**
 * @name MultiDragDemo
@@ -28,6 +27,15 @@ const CUSTOMSORTVALS = {
     SORTED: "sorted",
     UNSORTED: "unsorted"
 };
+
+const STYLE_OPTIONS = [
+    { id: "none", name: "none" },
+    { id: "iconSrc", name: "with image" },
+    { id: "icon", name: "with icon" },
+    { id: "count", name: "with random count" },
+    { id: "tooltip", name: "with delete tooltip" }
+];
+
 
 var Types = keyMirror({
     GRID_DEMO_SET: null,
@@ -78,42 +86,42 @@ class Row extends React.Component {
 
     _getButton = () => {
         if (this.props.column === 0) {
-            return <Button inline iconName="plus" data-id="row-button-add" onClick={this._handleAdd} />;
+            return (
+                <div style={{ cursor: "pointer" }}>
+                    <Image
+                        source="https://emoji.slack-edge.com/T02JF3TTN/yeezyhappy/9623ea440069c563.png"
+                        data-id="row-button-add"
+                        onClick={this._handleAdd}
+                        size={imageSizes.SM}
+                    />
+                </div>
+            );
         }
 
-        return (<Button inline iconName="remove"
-            data-id="row-button-remove"
-            onClick={this._handleRemove}
-        />);
+        return (
+            <div style={{ cursor: "pointer" }}>
+                <Image
+                    source="https://emoji.slack-edge.com/T02JF3TTN/yeezy/ac143e6d84e689f4.png"
+                    size={imageSizes.SM}
+                    data-id="row-button-remove"
+                    onClick={this._handleRemove}
+                />
+            </div>
+        );
     };
 
     render() {
-        var hasImage = this.props.style === "iconSrc";
-        var hasIcon = this.props.style === "icon";
-        var hasCount = this.props.style === "count";
+
 
         return (
-            <div className={classnames(
-                "item",
-                { preview: this.props.preview,
-                    "item-decoration": hasImage || hasIcon || hasCount
-                })} data-id={this.props["data-id"]}>
-                <span className="icon-grip"></span>
-                { hasImage &&
-                    <div className="item-image" data-id="row-image"
-                        style={{ backgroundImage: "url(" + this.props.iconSrc + ")" }} />
-                }
-                { hasIcon &&
-                    <span className="item-icon icon-cog" data-id="row-icon" />
-                }
-                { hasCount &&
-                    <span className="item-count count" data-id="row-count">
-                        {Math.round(Math.random() * 10)}
-                    </span>
-                }
-                <span className="name" data-id="row-name">{this.props.name}</span>
-                {this._getButton()}
-            </div>);
+            <MultiDragRow
+                { ...this.props }
+                count={this.props.column === 1 ? this.props.index + 1 : undefined} //show an order based count
+                icon={undefined} //unset icon from data
+                iconSrc={undefined} //unset image from data
+                renderButton= {this._getButton}
+            />
+        );
     }
 }
 
@@ -416,13 +424,7 @@ class MultiDragDemo extends React.Component {
                                 selected={this.props.demo.style}
                                 groupName="row-opts"
                                 stacked={false}
-                                items={[
-                                    { id: "none", name: "none" },
-                                    { id: "iconSrc", name: "with image" },
-                                    { id: "icon", name: "with icon" },
-                                    { id: "count", name: "with count" },
-                                    { id: "tooltip", name: "with delete tooltip" }
-                                ]}
+                                items={STYLE_OPTIONS}
                             />
                         </Layout.Column>
                     </Layout.Row>
@@ -510,7 +512,7 @@ class MultiDragDemo extends React.Component {
                     }
                     <HR />
                     <div>
-                        <h2>Classic Style</h2>
+                        <h2>Custom Row with custom button and custom ordered count</h2>
                         <MultiDrag
                             ref="multi-drag-demo-classic"
                             showSearchOnAllColumns={false}
