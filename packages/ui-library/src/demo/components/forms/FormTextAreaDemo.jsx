@@ -52,6 +52,14 @@ class FormTextAreaDemo extends React.Component {
                 <InputRow>
                     <FormTextArea
                         stateless={false}
+                        labelText="basic with descriptive text"
+                        width={InputWidths.MD}
+                        description="this is descriptive text"
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextArea
+                        stateless={false}
                         labelText="Required with placeholder and change callback"
                         onValueChange={this._handleValueChange}
                         placeholder="placeholder"

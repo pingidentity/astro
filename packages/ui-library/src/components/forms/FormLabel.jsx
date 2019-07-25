@@ -28,6 +28,8 @@ var React = require("react"),
  *     An optional icon or image to replace standard help hint icon
  * @param {object} [style]
  *     For passing through direct style attribute from parent
+ * @param {node} [description]
+ *     The text to display below the title. Can be a string or a node.
  */
 
 class FormLabel extends React.Component {
@@ -42,6 +44,7 @@ class FormLabel extends React.Component {
         helpTarget: PropTypes.object,
         style: PropTypes.object,
         detached: PropTypes.bool,
+        description: PropTypes.node
     };
 
     static defaultProps = {
@@ -90,6 +93,16 @@ class FormLabel extends React.Component {
         );
     };
 
+    _renderDescriptionText = () => {
+        if (this.props.description) {
+            return (
+                <div className="label-text__description">
+                    {this.props.description}
+                </div>
+            );
+        }
+    }
+
     render() {
         var noLabel = typeof(this.props.value) === "undefined" || this.props.value === null;
 
@@ -108,6 +121,7 @@ class FormLabel extends React.Component {
                         { this.props.value }
                         { this._renderHint() }
                         { this._renderLockHint() }
+                        { this._renderDescriptionText()}
                     </span>
                 )}
                 {this.props.children}

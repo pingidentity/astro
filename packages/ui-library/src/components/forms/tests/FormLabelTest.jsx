@@ -1,5 +1,7 @@
 window.__DEV__ = true;
 
+import { shallow } from "enzyme";
+
 jest.dontMock("../FormLabel");
 jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../general/If");
@@ -91,6 +93,13 @@ describe("FormLabel", function () {
                 <FormLabel id="foo" />
             );
         }).toThrow(expectedError);
+    });
+
+    it("Renders the formlabel with a description", () => {
+        const component = shallow(
+            <FormLabel value="hello" description="bar"/>
+        );
+        expect(component.find(".label-text__description").exists()).toBeTruthy();
     });
 
 });

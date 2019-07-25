@@ -47,6 +47,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     Columns value for sizing, default is taken from CSS styles.
 * @param {string} [data-id="form-text-area"]
 *     To define the base "data-id" value for the top-level HTML container.
+* @param {node} [description]
+*     The text to display below the title. Can be a node or a string
 * @param {string} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
@@ -132,6 +134,7 @@ class FormTextAreaStateless extends React.Component {
         className: PropTypes.string,
         cols: PropTypes.number,
         "data-id": PropTypes.string,
+        description: PropTypes.node,
         disabled: PropTypes.bool,
         edited: PropTypes.bool,
         errorMessage: PropTypes.string,
@@ -217,7 +220,8 @@ class FormTextAreaStateless extends React.Component {
                 className={className}
                 value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
-                helpClassName={this.props.helpClassName}>
+                helpClassName={this.props.helpClassName}
+                description={this.props.description}>
                 <span className="input-container">
                     <textarea
                         data-id={this.props["data-id"] + "-textarea"}

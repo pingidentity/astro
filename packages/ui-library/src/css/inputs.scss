@@ -152,6 +152,10 @@ label {
             margin-left: 5px;
             margin-top: 0;
         }
+        &__description {
+            text-transform: none;
+            padding-top: $spacing-xs;
+        }
     }
 
     &.input-text {
