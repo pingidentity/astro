@@ -1,4 +1,5 @@
 import React from "react";
+import { isEnter, isSpace } from "./KeyboardUtils";
 
 /**
  * @module util/PropUtils
@@ -64,6 +65,29 @@ export const defaultRender = (props, DefaultComponent) => <DefaultComponent {...
  *          LG: "lg"
  *      }
  */
+
+/**
+ * @alias module:util/PropUtils.defaultRender
+ *
+ * @desc Gets an object of props that make an element that's not normally clickable
+ *       act like an HTML <button />.
+ *
+ * @param {function} onClick
+ *    The onClick function that gets called when the component is clicked; call on enter and on space.
+ * @returns {object}
+ *    Returns a spreadable props object with an onKeyDown function, an aria role and a tabIndex.
+ *
+ */
+export const getClickableA11yProps = (onClick = () => {}) => ({
+    onKeyDown: e => {
+        if (isEnter(e.keyCode) || isSpace(e.keyCode)) {
+            e.preventDefault();
+            onClick(e);
+        }
+    },
+    role: "button",
+    tabIndex: 0
+});
 
 export default {
     getIconClassName,

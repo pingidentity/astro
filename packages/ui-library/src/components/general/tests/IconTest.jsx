@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-
+import { shallow } from "enzyme";
 import { iconSizes } from "../Icon";
 
 describe("Icon", function () {
@@ -71,4 +71,23 @@ describe("Icon", function () {
         expect(console.warn).toBeCalled();
     });
 
+    it("renders title if that prop is passed in", () => {
+        const component = shallow(
+            <Icon iconName="globe" title="Test" />
+        );
+
+        const label = component.find("label");
+
+        expect(label.exists()).toEqual(true);
+        expect(label.text()).toEqual("Test");
+    });
+
+    it("renders with a tabIndex of 0 if onClick is passed in", () => {
+        const click = () => console.log("QUACK QUACK QUACK");
+        const component = shallow(
+            <Icon iconName="globe" onClick={click} />
+        );
+
+        expect(component.props().tabIndex).toEqual(0);
+    });
 });

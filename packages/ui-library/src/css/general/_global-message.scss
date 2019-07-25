@@ -1,0 +1,41 @@
+.global-message {
+    color: $color-slate;
+    padding: $spacing-xs;
+    position: relative;
+
+    &--error {
+        background-color: #eddad9;
+        color: $color-critical-red;
+    }
+
+    &--info {
+        background-color: #e1eef5;
+    }
+
+    &--warning {
+        background-color: #faedbd;
+    }
+
+    &__button {
+        margin-left: $spacing-md;
+
+        &--info {
+            background-color: #e1eef5;
+        }
+
+        &--warning {
+            background-color: #faedbd;
+        }
+    }
+
+    &__clear {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        height: 100%;
+    }
+
+    &__content {
+        margin: 0 $spacing-md; // Using this specific width to avoid collision with the clear icon
+    }
+}

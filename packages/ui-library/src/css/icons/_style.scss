@@ -183,7 +183,7 @@
 }
 .icon-connection-status {
   &:before {
-    content: $icon-connection-status; 
+    content: $icon-connection-status;
   }
 }
 .icon-curly-braces {
@@ -674,6 +674,11 @@
 .icon-terminal {
   &:before {
     content: $icon-terminal;
+  }
+}
+.icon-timer {
+  &:before {
+    content: $icon-timer;
   }
 }
 .icon-thumb {

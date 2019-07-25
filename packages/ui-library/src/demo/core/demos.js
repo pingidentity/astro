@@ -1078,6 +1078,13 @@ module.exports = [
                 icon: "robot",
                 children: [
                     {
+                        label: "Global Message",
+                        demo: require("../components/general/GlobalMessageDemo"),
+                        pathToDoc: "components/general/GlobalMessage.jsx",
+                        pathToSource: "components_general_GlobalMessage.jsx.html",
+                        pathToDemoSource: "demo_components_general_GlobalMessageDemo.jsx.html"
+                    },
+                    {
                         label: "Chip",
                         demo: require("../components/layout/ChipDemo"),
                         pathToDoc: "components/layout/Chip.jsx",

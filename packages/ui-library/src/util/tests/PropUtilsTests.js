@@ -1,6 +1,6 @@
 import React from "react";
-import { getIconClassName } from "../PropUtils";
-
+import { getClickableA11yProps, getIconClassName } from "../PropUtils";
+import { KeyCodes } from "../KeyboardUtils";
 
 describe("PropUtils", function () {
     describe("getIconClassName", function () {
@@ -28,6 +28,47 @@ describe("PropUtils", function () {
         });
         it("returns null non string", function () {
             expect(getIconClassName({ icon: <div></div> })).toBe(null);
+        });
+    });
+
+    describe("getClickableA11yProps", () => {
+        it("returns the expected role, tabIndex and an onKeyDown function", () => {
+            const {
+                onKeyDown,
+                role,
+                tabIndex
+            } = getClickableA11yProps();
+
+            onKeyDown({ keyCode: KeyCodes.SPACE, preventDefault: () => {} }); // Just calling this so that the default function is covered.
+            expect(onKeyDown).toBeTruthy();
+            expect(role).toEqual("button");
+            expect(tabIndex).toEqual(0);
+        });
+
+        it("onKeyDown calls onClick if enter is pressed", () => {
+            const onClick = jest.fn();
+            const argument = { keyCode: KeyCodes.ENTER, preventDefault: () => {} };
+
+            const {
+                onKeyDown
+            } = getClickableA11yProps(onClick);
+
+            onKeyDown(argument);
+
+            expect(onClick).toHaveBeenCalledWith(argument);
+        });
+
+        it("onKeyDown calls onClick if space is pressed", () => {
+            const onClick = jest.fn();
+            const argument = { keyCode: KeyCodes.SPACE, preventDefault: () => {} };
+
+            const {
+                onKeyDown
+            } = getClickableA11yProps(onClick);
+
+            onKeyDown(argument);
+
+            expect(onClick).toHaveBeenCalledWith(argument);
         });
     });
 });

@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { getIconClassName } from "../../util/PropUtils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
+import { noFocus } from "../../util/EventUtils";
+import { getClickableA11yProps } from "../../util/PropUtils";
 
 
 /**
@@ -51,15 +53,16 @@ const iconSizes = {
 
 const Icon = ({
     className,
+    containerClassName,
     children,
     "data-id": dataId,
-    type,
     iconSize,
+    onClick,
     title,
+    type,
     ...props
 }) => {
-
-    const iconClassName = classnames(
+    const graphicClassName = classnames(
         "icon__graphic",
         getIconClassName(props),
         className, {
@@ -70,8 +73,27 @@ const Icon = ({
             "icon__graphic--size-xxl": iconSize === iconSizes.XXL,
         });
 
+    const onClickProps = onClick ? {
+        onClick,
+        // Prevent focus on click
+        onMouseDown: noFocus,
+        ...getClickableA11yProps(onClick)
+    } : {};
+
     if (type === "inline") {
-        return <span data-id={dataId} className={getIconClassName(props)} />;
+        return (
+            <span
+                data-id={dataId}
+                className={classnames(
+                    containerClassName,
+                    getIconClassName(props),
+                    {
+                        "icon--clickable": onClick
+                    }
+                )}
+                {...onClickProps}
+            />
+        );
     } else if (type !== "leading" && !children) {
         cannonballChangeWarning({
             message: (
@@ -83,30 +105,28 @@ const Icon = ({
     }
 
     return (
-        iconSize
-            ? <div className="icon icon__container" data-id={dataId}>
-                <div
-                    className={iconClassName}
-                    data-id={`${dataId}-graphic`}
-                />
-                {children && (
-                    <div className="icon__content" data-id={`${dataId}-content`}>
-                        <label>{title}</label>
-                        {children}
-                    </div>
-                )}
-            </div>
-            : <div className="icon" data-id={dataId}>
-                <div
-                    className={iconClassName}
-                    data-id={`${dataId}-graphic`}
-                />
-                {children && (
-                    <div className="icon__content" data-id={`${dataId}-content`}>
-                        {children}
-                    </div>
-                )}
-            </div>
+        <div
+            className={classnames(
+                containerClassName,
+                "icon",
+                {
+                    "icon--clickable": onClick
+                }
+            )}
+            data-id={dataId}
+            {...onClickProps}
+        >
+            <div
+                className={graphicClassName}
+                data-id={`${dataId}-graphic`}
+            />
+            {(children || title) && (
+                <div className="icon__content" data-id={`${dataId}-content`}>
+                    {title && <label>{title}</label>}
+                    {children}
+                </div>
+            )}
+        </div>
     );
 };
 
@@ -117,7 +137,6 @@ Icon.propTypes = {
     textType: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.oneOf(["leading", "inline"]),
-
     iconSize: PropTypes.oneOf([
         iconSizes.SM,
         iconSizes.MD,

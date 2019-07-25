@@ -80,13 +80,9 @@ a.icon-clear {
             font-size: 42px;
         }
     }
-}
 
-.icon__container {
-    @include inline-flex;
-    align-items: flex-start;
-    .icon__content {
-        padding-left: $spacing-xs;
+    &--clickable {
+        cursor: pointer;
     }
 }
 
