@@ -1,6 +1,6 @@
 
 button.message-button {
-    @include flexbox;
+    @include inline-flex;
     align-items: center;
     line-height: 1em;
     transition: all 0.1s ease-out;

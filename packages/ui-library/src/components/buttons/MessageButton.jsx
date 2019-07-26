@@ -16,6 +16,8 @@ import _ from "underscore";
  *     The text displayed in the button
  * @param {boolean} [inline=false]
  *     When true, the button displays as an inline button
+ * @param {boolean} [disabled=false]
+ *     When true, the button is disabled
  * @param {MessageButton.statuses} [status=MessageButton.statuses.DEFAULT]
  *     Determines the styling of the message button.
  *
@@ -55,7 +57,7 @@ function MessageButton (props) {
             [`message-button--${status}`]: status,
         }
     );
-    const disabled = status !== statuses.DEFAULT;
+    const disabled = status !== statuses.DEFAULT || props.disabled;
 
     return (
         <Button
@@ -89,6 +91,7 @@ MessageButton.displayName="MessageButton";
 MessageButton.defaultProps = {
     "data-id": "message-button",
     inline: false,
+    disabled: false,
     loading: false,
     onClick: _.noop,
     status: statuses.DEFAULT,
@@ -98,6 +101,9 @@ MessageButton.propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
     status: PropTypes.oneOf(statusTypes),
+    disabled: PropTypes.bool,
+    inline: PropTypes.bool,
+    onClick: PropTypes.func,
 };
 
 MessageButton.statuses = statuses;
