@@ -124,7 +124,7 @@ class DynamicFilter extends React.Component {
                 <InputRowAccessories>
                     {links.length > 0 &&
                         <FlexRow spacing={spacingOptions.SM}>
-                            <Text type="label">{addFilterLabel}:</Text>
+                            <Text inline type="label">{addFilterLabel}:</Text>
                             {links}
                         </FlexRow>
                     }
