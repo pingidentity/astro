@@ -1,7 +1,7 @@
 import Button, { ButtonTypes } from '../components/Button';
 import SocialButton, { BrandTypes } from '../components/SocialButton';
 import ButtonSet from '../components/ButtonSet';
-import Card from '../components/Card';
+import Card, { CardMessage, messageTypes } from '../components/Card';
 import Checkbox from '../components/Checkbox';
 import Dropdown from '../components/Dropdown';
 import Feedback from '../components/Feedback';
@@ -32,7 +32,13 @@ import ComponentDemo from './components/ComponentDemo';
 ## The Sign-On Form
 
 <ComponentDemo>
-    <Card>
+    <Card
+        header={(
+            <CardMessage type={messageTypes.critical}>
+                Your trial has expired. Please contact sales to purchase a license.
+            </CardMessage>
+        )}
+    >
         <Logo src="ping-logo.svg"/>
         <Form>
             <FloatLabelTextInput label="Username" id="username6"/>

@@ -13,7 +13,6 @@ $card-mobile-padding: $spacing-xx;
     margin: 0 auto;
     max-width: $card-width;
     min-height: 440px;
-    padding: $card-padding-top $card-padding-horizontal $card-padding-bottom $card-padding-horizontal;
     position: relative;
     width: 100%;
 
@@ -22,6 +21,32 @@ $card-mobile-padding: $spacing-xx;
     }
     &--auto-height {
         min-height: auto;
+    }
+
+    &__content {
+        padding: $card-padding-top $card-padding-horizontal $card-padding-bottom $card-padding-horizontal;
+    }
+
+    &__message {
+        padding: $spacing-sm;
+        display: flex;
+        align-items: center;
+
+        &--icon {
+            flex: 1;
+            flex-grow: 0;
+            margin-right: $spacing-xs;
+
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        &--content {
+            flex: 1;
+            font-size: $font-size-sm;
+        }
     }
 
 }
