@@ -196,7 +196,7 @@ export default styled(SocialButton)`
     }
 
     .social-button__label {
-        flex: 2;
+        flex: 4;
         text-align: center;
     }
 
@@ -209,7 +209,6 @@ export default styled(SocialButton)`
         margin: 0;
         border: 0;
         overflow: hidden;
-        height: 40px;
         cursor: pointer;
     }
 `;

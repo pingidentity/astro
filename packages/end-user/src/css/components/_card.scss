@@ -4,7 +4,6 @@ $card-width: 400px;
 $card-padding-bottom: $spacing-xx;
 $card-padding-top: $spacing-xl;
 $card-padding-horizontal: $spacing-xl;
-$card-mobile-padding: $spacing-xx;
 
 .card {
     background: $card-bg;
@@ -54,10 +53,4 @@ $card-mobile-padding: $spacing-xx;
         }
     }
 
-}
-
-@media (max-width: $breakpoint-mobile) {
-    .card {
-        padding: $card-mobile-padding;
-    }
 }
