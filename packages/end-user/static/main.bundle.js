@@ -39161,7 +39161,7 @@ var Card = function Card(_ref) {
       className = _ref.className,
       header = _ref.header,
       dataId = _ref['data-id'];
-  var classNames = (0, _classnames.default)('card', className, {
+  var classNames = (0, _classnames.default)('card', 'card--no-padding', className, {
     'card--wide': width === 'large'
   });
   return _react.default.createElement("div", {
@@ -39218,7 +39218,7 @@ var messageTypes = {
     // $color-critical-red-light
     color: '#A31200',
     // $color-critical-red-dark
-    icon: '../../icons/alert.svg'
+    icon: '../../icons/error.svg'
   }
 };
 /**

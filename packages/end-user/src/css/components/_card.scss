@@ -15,6 +15,11 @@ $card-mobile-padding: $spacing-xx;
     min-height: 440px;
     position: relative;
     width: 100%;
+    padding: $card-padding-top $card-padding-horizontal $card-padding-bottom $card-padding-horizontal;
+
+    &--no-padding {
+        padding: 0;
+    }
 
     &--wide {
         max-width: 550px;

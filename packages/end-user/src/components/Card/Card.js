@@ -23,7 +23,7 @@ const Card = ({
     header,
     'data-id': dataId,
 }) => {
-    const classNames = classnames('card', className, {
+    const classNames = classnames('card', 'card--no-padding', className, {
         'card--wide': width === 'large',
     });
 
