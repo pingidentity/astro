@@ -484,6 +484,7 @@ class Stateless extends React.Component {
                             }
                         )
                     }
+                    data-id="text-field_container"
                     ref="input-container"
                     onClick={this.props.onClick}
                 >

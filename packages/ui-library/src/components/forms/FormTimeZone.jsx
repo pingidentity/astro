@@ -376,6 +376,7 @@ class TimeZoneStateless extends React.Component {
                     const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
                     return (
                         <button
+                            data-id={`country-option_${country.abbr}`}
                             data-value={country.abbr}
                             onClick={this._onCountryChange}
                             ref={"country-option-" + i}
@@ -421,6 +422,7 @@ class TimeZoneStateless extends React.Component {
                         const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
                         return (
                             <button
+                                data-id={`country-code_time-zone_${tz.abbr}`}
                                 data-index={i}
                                 onClick={this._onZoneChange}
                                 ref={"zone-option-" + i}
@@ -559,7 +561,7 @@ class TimeZoneStateless extends React.Component {
                     popperClassName={classnames("input-timezone", classNames)}
                     onPopperClick={this._focusSearch}
                 >
-                    <div className="popover-search" onClick={this._killEvent}>
+                    <div className="popover-search" onClick={this._killEvent} data-id="popover-search">
                         <FormSearchBox
                             className="input-timezone__search"
                             data-id={`${this.props["data-id"]}-search-input`}
@@ -575,7 +577,7 @@ class TimeZoneStateless extends React.Component {
                     {this.props.filterByCountry ? this._renderZones() : this._renderCountries()}
                     {(this.props.onClear || this.props.showClear) && this.props.value && (
                         <div className="button-menu__options">
-                            <a className="button-menu__option-link" onClick={this._handleClear}>
+                            <a className="button-menu__option-link" data-id="option-link" onClick={this._handleClear}>
                                 {this.props.clearLabel}
                             </a>
                         </div>

@@ -290,7 +290,7 @@ class Message extends React.Component {
                 {iconName && <div className={classnames("message__icon", `icon-${iconName}`)} />}
                 {!minimized && text && (<span className="message__text">{text}</span>)}
                 {progress && this._renderProgress()}
-                {!hideClose && <a className="close" onClick={this._handleRemove}></a>}
+                {!hideClose && <a className="close" onClick={this._handleRemove} data-id="message-close"></a>}
             </div>
         );
     }

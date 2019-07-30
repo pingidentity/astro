@@ -63,17 +63,23 @@ class UserNav extends React.Component {
                         className="user-nav__logo user-nav__logo--ping"
                     />
                 }
-                <div className={classnames(
-                    "user-nav__collapsible-trigger",
-                    { "user-nav__collapsible-trigger--open": menuOpen }
-                )} onClick={this._toggleCollapsibleMenu}>
+                <div
+                    className={classnames(
+                        "user-nav__collapsible-trigger",
+                        { "user-nav__collapsible-trigger--open": menuOpen }
+                    )}
+                    data-id="collapsible-trigger"
+                    onClick={this._toggleCollapsibleMenu}
+                >
                     <span />
                 </div>
                 {
                     menuOpen &&
                     <div
                         className="modal show user-nav__modal-bg"
-                        onClick={this._toggleCollapsibleMenu}>
+                        data-id="show-modal"
+                        onClick={this._toggleCollapsibleMenu}
+                    >
                         <div className="modal-bg" />
                     </div>
                 }

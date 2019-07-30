@@ -227,9 +227,15 @@ class Step extends React.Component {
 
     _getEditLink = () => {
         if (!this.props.active && this.props.showEdit) {
-            return (<a ref="editButton" className="task-edit-link edit edit-directory" onClick={this._edit}>
-                {this.props.labelEdit || Translator.translate("edit")}
-            </a>);
+            return (
+                <a
+                    ref="editButton"
+                    className="task-edit-link edit edit-directory"
+                    data-id="edit-button"
+                    onClick={this._edit}
+                >
+                    {this.props.labelEdit || Translator.translate("edit")}
+                </a>);
         }
     };
 

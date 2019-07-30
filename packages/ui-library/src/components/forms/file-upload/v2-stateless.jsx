@@ -137,7 +137,12 @@ export default class extends Component {
                             data-id={this.props["data-id"] + "-fileName"}
                             value={this.props.fileName}
                         />
-                        <a className="file-remove" ref="remove" onClick={this.props.onRemove}>
+                        <a
+                            className="file-remove"
+                            data-id="file-remove"
+                            ref="remove"
+                            onClick={this.props.onRemove}
+                        >
                             {this.props.labelRemove}
                         </a>
                     </div>

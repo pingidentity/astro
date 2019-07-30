@@ -16,7 +16,7 @@ const OverflowMenu = (props) => {
         <PopoverMenu
             {...props}
             placement="bottom left"
-            label={<button className="button button--overflow" />}
+            label={<button className="button button--overflow" data-id="overflow-menu_button" />}
         />
     );
 };

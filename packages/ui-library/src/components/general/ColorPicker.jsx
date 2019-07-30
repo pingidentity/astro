@@ -292,7 +292,9 @@ class Stateless extends React.Component {
             <div data-id={this.props["data-id"]} className={css(containerCss)}>
                 <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText}/>
                 <div className="color-picker" ref="swatch">
-                    <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
+                    <span
+                        className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
+                        data-id="inner-swatch"
                         ref="innerSwatch"
                         onClick={this._handleClick}>
                         <FormTextField

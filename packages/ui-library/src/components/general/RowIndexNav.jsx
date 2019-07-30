@@ -61,8 +61,11 @@ class RowIndexNavItem extends React.Component {
             disabled: !this.props.active
         });
         return (
-            <li className={classNames}
-                onClick={this._handleOnClick}>
+            <li
+                className={classNames}
+                data-id={`nav-item_${this.props.index}`}
+                onClick={this._handleOnClick}
+            >
                 {this.props.index}
             </li>
         );

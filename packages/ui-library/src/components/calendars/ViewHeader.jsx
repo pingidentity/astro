@@ -24,11 +24,23 @@ module.exports = class extends React.Component {
 
         return (
             <div data-id={this.props["data-id"]} className="navigation-wrapper">
-                <span onClick={this.props.prevDisabled ? null : prop.onPrev} className={prevClassName} >
+                <span
+                    onClick={this.props.prevDisabled ? null : prop.onPrev}
+                    className={prevClassName}
+                    data-id="view-header_previous"
+                >
                     <i className="fa fa-angle-left icon-left" data-id="calendar-nav-icon-left"></i>
                 </span>
-                <span onClick={prop.onClick} className="navigation-title" >{prop.data}</span>
-                <span onClick={this.props.nextDisabled ? null : prop.onNext} className={nextClassName} >
+                <span
+                    onClick={prop.onClick}
+                    className="navigation-title"
+                    data-id="view-header_title"
+                >{prop.data}</span>
+                <span
+                    onClick={this.props.nextDisabled ? null : prop.onNext}
+                    className={nextClassName}
+                    data-id="view-header_next"
+                >
                     <i className="fa fa-angle-right icon-right" data-id="calendar-nav-icon-right"></i>
                 </span>
             </div>

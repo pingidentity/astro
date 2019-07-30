@@ -107,7 +107,12 @@ module.exports = class extends React.Component {
                     prevDisabled={start && (parseInt(years[0].label) - 1) < start.year()}
                     nextDisabled={end && (parseInt(years[years.length - 1].label) + 1) > end.year()}
                     data={currentDate} />
-                <div className="years" onClick={this.cellClick}>{yearsCells}</div>
+                <div
+                    className="years"
+                    onClick={this.cellClick}
+                    data-id="years-view_cell"
+                >{yearsCells}
+                </div>
             </div>
         );
     }

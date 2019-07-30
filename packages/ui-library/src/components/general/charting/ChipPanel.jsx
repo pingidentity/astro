@@ -13,6 +13,7 @@ const click = onClick => id => e => {
 const renderChips = (chips, onClick) => chips.map(({ className = "", color = chartingColors[0], id, name }, idx) => (
     <div
         className={classnames(className, "chip-panel__chip")}
+        data-id={`chip_${id}`}
         key={`${name}-${idx}`}
         onClick={onClick(id)}
         style={{
