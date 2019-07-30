@@ -93,6 +93,7 @@ const CustomFilterControl = ({
                 placeholder="Select One"
                 onValueChange={onTypeChange}
                 selectedOption={selectedType}
+                flags={["p-stateful", "use-portal"]}
             />
             {mode === "comparison" && [
                 <FormDropDownList
@@ -101,6 +102,7 @@ const CustomFilterControl = ({
                     placeholder="Select One"
                     onValueChange={onOperatorChange}
                     selectedOption={selectedOperator}
+                    flags={["p-stateful", "use-portal"]}
                 />,
                 <FormTextField
                     key="value"
@@ -108,6 +110,7 @@ const CustomFilterControl = ({
                     placeholder="Enter Value"
                     value={value}
                     onValueChange={onValueChange}
+                    flags={["p-stateful"]}
                 />
             ]}
             {mode === "date" && [
@@ -119,6 +122,7 @@ const CustomFilterControl = ({
                     onValueChange={_.noop}
                     selectedOption={timeRangeOptions[0]}
                     width={InputWidths.SM}
+                    flags={["p-stateful", "use-portal"]}
                 />,
                 <Calendar
                     key="start"
@@ -232,11 +236,12 @@ const FilterControls = ({
             }}
             showFilters={showFilters}
             onToggle={onToggleFilters}
-            rightControl={<Button label="Add User" iconName="add" />}
+            rightControl={<Button label="Add User" iconName="add" flags={["add-button-margin"]}/>}
             disableFilters={isSCIM}
             strings={{
                 linkText: showFilters ? "Filters on" : "Filters"
             }}
+            flags={["p-stateful"]}
         >
             <Aside
                 position="top-right"
@@ -253,6 +258,7 @@ const FilterControls = ({
                             }))}
                             selected={populationOptions}
                             onValueChange={onPopulationsChange}
+                            flags={["p-stateful", "use-portal"]}
                         />
                     </ColumnLayout.Column>
                     <ColumnLayout.Column>
@@ -265,6 +271,7 @@ const FilterControls = ({
                             }))}
                             selected={statusOptions}
                             onValueChange={onStatusesChange}
+                            flags={["p-stateful", "use-portal"]}
                         />
                     </ColumnLayout.Column>
                     <ColumnLayout.Column>
@@ -277,6 +284,7 @@ const FilterControls = ({
                             }))}
                             selected={pwStatusOptions}
                             onValueChange={onPWStatusesChange}
+                            flags={["p-stateful", "use-portal"]}
                         />
                     </ColumnLayout.Column>
                 </ColumnLayout.Row>
@@ -335,6 +343,7 @@ const FilterControls = ({
                                             options={customFilterOptions}
                                             placeholder="Select One"
                                             onValueChange={handleTypeChange}
+                                            flags={["p-stateful", "use-portal"]}
                                         />
                                         {customFilterList.length > 1 &&
                                             <Link
@@ -359,7 +368,12 @@ const FilterControls = ({
                         }
                     </div>
                 </Aside>
-                <ButtonBar saveText="Search" onSave={onApplyFilters} saveDisabled={!advancedModified} unfixed />
+                <ButtonBar
+                    saveText="Search"
+                    onSave={onApplyFilters}
+                    saveDisabled={!advancedModified}
+                    unfixed
+                    flags={["use-portal"]}/>
             </AdvancedContainer>
         </FormSearchBar>
     );
@@ -456,7 +470,7 @@ const UserRow = user => (
         confirmDeleteTitle="Delete User"
         labelDeleteConfirm="Are you sure you want to delete this user?"
         onDelete={user.onDelete}
-        flags={[ "use-portal" ]}
+        flags={["p-stateful", "use-portal", "expandable-row-class"]}
     >
         <TabSet selectedIndex={0} labels={[ "Profile", "Groups" ]}>
             <TabContent label="Profile">

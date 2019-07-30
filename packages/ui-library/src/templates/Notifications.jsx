@@ -193,7 +193,7 @@ export default class Notifications extends Component {
                         <FormLabel value="Default Language" />
                         <Layout.Row>
                             <LinkDropDownList
-                                stateless={false}
+                                flags={["p-stateful", "use-portal"]}
                                 options={mockLabel}
                                 label={this.state.defaultLanguage.label}
                                 selectedOption={this.state.defaultLanguage}
@@ -239,6 +239,7 @@ export default class Notifications extends Component {
                                 options={OPTIONS}
                                 selectedOption={this.state.selectedValue}
                                 onValueChange={this._handleValueChange}
+                                flags={["p-stateful", "use-portal"]}
                             />
                             <br/>
                             <FormDropDownList
@@ -246,6 +247,7 @@ export default class Notifications extends Component {
                                 options={LOCALE}
                                 selectedOption={this.state.selectedLocale}
                                 onValueChange={this._handleLocaleChange}
+                                flags={["p-stateful", "use-portal"]}
                             />
                         </ConfirmToolTip>
                     }
@@ -258,6 +260,7 @@ export default class Notifications extends Component {
                                 name="fromAddress"
                                 value={this.state.fromAddress}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                             <FormTextField
                                 labelText="from name"
@@ -265,6 +268,7 @@ export default class Notifications extends Component {
                                 name="fromName"
                                 value={this.state.fromName}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                         </InputRow>
                         <InputRow>
@@ -274,6 +278,7 @@ export default class Notifications extends Component {
                                 name="replyAddress"
                                 value={this.state.replyAddress}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                             <FormTextField
                                 labelText="Reply To Name"
@@ -281,6 +286,7 @@ export default class Notifications extends Component {
                                 name="replyToName"
                                 value={this.state.replyToName}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                         </InputRow>
                         <InputRow>
@@ -290,6 +296,7 @@ export default class Notifications extends Component {
                                 name="subject"
                                 value={this.state.subject}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                         </InputRow>
                         <InputRow>
@@ -300,6 +307,7 @@ export default class Notifications extends Component {
                                 value={this.state.emailBody}
                                 rows={6}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                         </InputRow>
                         <InputRow>
@@ -315,6 +323,7 @@ export default class Notifications extends Component {
                                 name="senderID"
                                 value={this.state.senderID}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                         </InputRow>
                         <InputRow>
@@ -324,6 +333,7 @@ export default class Notifications extends Component {
                                 name="message"
                                 value={this.state.message}
                                 onChange={this._handleInputChange}
+                                flags={["p-stateful"]}
                             />
                         </InputRow>
                         <InputRow>
@@ -345,6 +355,7 @@ export default class Notifications extends Component {
                     saveText="Save"
                     enableSavingAnimation={this.state.saving}
                     visible={this._showButtonBar(this.state)}
+                    flags={["use-portal"]}
                 />
 
             </div>

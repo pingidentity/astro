@@ -331,7 +331,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="text field with Icon"
                         width={InputWidths.MD}
                         readOnly
-                        iconRight={<Text type="success"><Icon iconName="success-round" type="inline"/></Text>}
+                        iconRight={<Text type="success"><Icon iconName="success-round"/></Text>}
                     />
                 </InputRow>
             </div>

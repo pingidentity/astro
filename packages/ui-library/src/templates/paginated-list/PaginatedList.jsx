@@ -63,6 +63,7 @@ export default class PaginatedList extends React.Component {
             return (<ExpandableRow {...obj}
                 showEdit={true}
                 rowAccessories={<RowAccessories.Status status={status} />}
+                flags={["p-stateful", "expandable-row-class", "use-portal"]}
             />);
         });
 
@@ -78,14 +79,17 @@ export default class PaginatedList extends React.Component {
                     formSearchBoxProps={{
                         onValueChange: this._handleFilter,
                     }}
-                    rightControl={<Button label="Add Application" iconName="add"/>}
+                    rightControl={<Button label="Add Application" iconName="add" flags={["add-button-margin"]}/>}
+                    flags={["p-stateful"]}
                 />
                 {filteredPages.length && (
                     <Pagination stateless={true}
                         className = "result-set"
                         page = {this.state.page}
                         total = {filteredPages.length}
-                        onValueChange = {this._handlePageChange}>
+                        onValueChange = {this._handlePageChange}
+                        flags={["p-stateful"]}
+                    >
 
                         {this._rowSlice(filteredPages)}
                     </Pagination>

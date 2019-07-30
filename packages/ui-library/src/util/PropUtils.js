@@ -45,8 +45,6 @@ export const getIcon = (icon, props) => {
     } else {
         return icon;
     }
-
-
 };
 
 /**

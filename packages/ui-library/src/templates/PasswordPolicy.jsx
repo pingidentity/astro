@@ -91,7 +91,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password cannot have more than
-                        <FormTextField inline={true} size={5} stateless={false} />&nbsp;
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]} />&nbsp;
                         repeated characters
                     </span>
                 )
@@ -100,15 +100,15 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password must have a minimum of&nbsp;
-                        <FormTextField inline={true} size={5} stateless={false} /> unique characters
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]}/> unique characters
                     </span>
                 )
             }, {
                 value: "6",
                 label: (
                     <span>
-                        The password must be between <FormTextField inline={true} size={5} stateless={false} />
-                        and <FormTextField inline={true} size={5} stateless={false} /> characters
+                        The password must be between <FormTextField inline={true} size={5} flags={["p-stateful"]}/>
+                        and <FormTextField inline={true} size={5} flags={["p-stateful"]} /> characters
                     </span>
                 )
             }, {
@@ -116,14 +116,15 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password must have at least&nbsp;
-                        <FormTextField inline={true} size={5} stateless={false} /> number(s)
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]} /> number(s)
                     </span>
                 )
             }, {
                 value: "8",
                 label: (
                     <span>
-                        The password must have at least <FormTextField inline={true} size={5} stateless={false} />&nbsp;
+                        The password must have at least <FormTextField inline={true} size={5} flags={["p-stateful"]} />
+                        &nbsp;
                         lower case letter(s): abcdefghijklmnopqrstuvwxyz
                     </span>
                 )
@@ -131,7 +132,8 @@ export default class PasswordPolicy extends Component {
                 value: "10",
                 label: (
                     <span>
-                        The password must have at least <FormTextField inline={true} size={5} stateless={false} />&nbsp;
+                        The password must have at least <FormTextField inline={true} size={5} flags={["p-stateful"]} />
+                        &nbsp;
                         upper case letter(s): ABCDEFGHIJKLMNOPQRSTUVWXYZ
                     </span>
                 )
@@ -140,7 +142,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password must have at least&nbsp;
-                        <FormTextField inline={true} size={5} stateless={false} />
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]} />
                         special characters: {`~!@#$%^&*()-_=+[]{}|;:,.<>/?`}
                     </span>
                 )
@@ -153,7 +155,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         Limit password change frequency. Passwords can be changed every&nbsp;
-                        <FormTextField inline={true} size={5} stateless={false} /> hours.
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]} /> hours.
                     </span>
                 )
             }, {
@@ -161,7 +163,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         Require password expiration. Password expires every&nbsp;
-                        <FormTextField inline={true} size={5} stateless={false} /> days.
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]} /> days.
                     </span>
                 )
             },
@@ -169,9 +171,9 @@ export default class PasswordPolicy extends Component {
                 value: "14",
                 label: (
                     <span>
-                        Restrict password reuse. <FormTextField inline={true} size={5} stateless={false} />
+                        Restrict password reuse. <FormTextField inline={true} size={5} flags={["p-stateful"]}/>
                         prior passwords will be maintained in the password history vault for a maximum of&nbsp;
-                        <FormTextField inline={true} size={5} stateless={false} /> days.
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]}/> days.
                     </span>
                 )
             },
@@ -181,8 +183,8 @@ export default class PasswordPolicy extends Component {
                     <span>
                         Lockout users after repeated failed login attempts.
                         The user's account will lockout after&nbsp;
-                        <FormTextField inline={true} size={5} stateless={false} />&nbsp;
-                        failed attempts for <FormTextField inline={true} size={5} stateless={false} /> minutes.
+                        <FormTextField inline={true} size={5} flags={["p-stateful"]} />&nbsp;
+                        failed attempts for <FormTextField inline={true} size={5} flags={["p-stateful"]} /> minutes.
                         Repeated attempts of the same password will not be counted as failed attempts.
                     </span>
                 )

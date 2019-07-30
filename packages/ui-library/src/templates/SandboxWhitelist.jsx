@@ -153,6 +153,7 @@ export default class SandboxWhitelist extends Component {
                     >
                         <SearchBox
                             onValueChange={this._setSearchTerm}
+                            flags={["p-stateful"]}
                         />
                         <Popover
                             flags={["use-portal"]}
@@ -160,6 +161,7 @@ export default class SandboxWhitelist extends Component {
                                 <Button
                                     iconName="add"
                                     label="Add User"
+                                    flags={["add-button-margin"]}
                                 />
                             }
                             onToggle={this._toggleList}

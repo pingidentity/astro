@@ -650,8 +650,7 @@ class Dashboard extends React.Component {
                         onMouseOver={this._areaHandleOnMouseOver}
                         onMakeDefault={this._handleMakeDefault}
                         onValueChange={this._areaHandleRangeChange}
-                        rockerButtonProps={{ labels: this.areaRangeLabels }}
-                        selected={this.areaRangeLabels[0]}
+                        rockerButtonProps={{ labels: this.areaRangeLabels, flags: ["p-stateful"] }}
                         subtitle={this.state.areaSubtitle}
                         title="MFA Users"
                         value={`${areaPercent}%`}
@@ -706,8 +705,7 @@ class Dashboard extends React.Component {
                                 className={`rocker-button--chart-rocker`}
                                 labels={["3M", "6M", "1Y"]}
                                 onValueChange={this._setTimeSpan}
-                                stateless
-                                selectedIndex={this.state.multiseriesTimeSpanIndex}
+                                flags={["p-stateful"]}
                             />
                         }
                         data={multiseriesFormattedData}

@@ -1,3 +1,4 @@
+
 import { FormTextFieldStateless } from "../forms/form-text-field";
 import copiesText from "../../util/behaviors/copiesText";
 
@@ -14,7 +15,7 @@ CopyField.defaultProps = {
     ...CopyField.defaultProps,
     "data-id": "copy-field",
     readOnly: true,
-    iconRight: "clipboard",
+    iconRight: "clipboard"
 };
 
 export default CopyField;

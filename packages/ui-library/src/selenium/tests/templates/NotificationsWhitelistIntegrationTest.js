@@ -46,6 +46,7 @@ describe("Notifications White list", function () {
 
     }));
 
+
     it("clicks Toggle the toggle to change the state" ,NotificationsWhitelistPage.retriable(function () {
 
         //take screenshot and compare

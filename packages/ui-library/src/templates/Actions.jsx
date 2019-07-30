@@ -66,6 +66,7 @@ class Actions extends React.Component {
                         readOnly
                         value={templateUUIDs[index % templateUUIDs.length]}
                         width={InputWidths.MD}
+                        flags={["p-stateful"]}
                     />
                 )]
             });
@@ -262,6 +263,7 @@ class Actions extends React.Component {
                         modalTitle="Its a Popover"
                         onClose={this._togglePopover}
                         onOpen={this._togglePopover}
+                        flags={["use-portal"]}
                     >
                         Hi, this is a popup with a simple action.
 

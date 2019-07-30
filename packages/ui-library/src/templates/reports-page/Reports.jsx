@@ -228,6 +228,7 @@ export default class Reports extends React.Component {
                                 onValueChange={this._handleReportChange}
                                 options={reportType}
                                 name="report-type"
+                                flags={["p-stateful", "use-portal"]}
                             />
                         ],
                         [
@@ -238,20 +239,22 @@ export default class Reports extends React.Component {
                                 options={mockTimeRange}
                                 width={InputWidths.SM}
                                 name="time-range"
+                                flags={["p-stateful", "use-portal"]}
                             />,
                             <UnitInput
                                 labelText="Unit Input Text"
+                                flags={["p-stateful", "use-portal"]}
                                 textFieldProps={{
                                     value: 1,
                                     width: InputWidths.XS,
-                                    name: "time-field"
+                                    name: "time-field",
                                 }}
                                 dropDownListProps={{
                                     options: mockUnit,
                                     selectedOption: this.state.selectedUnit || mockUnit[3],
                                     onValueChange: this._handleUnitChange,
                                     width: InputWidths.XS,
-                                    name: "unit-time"
+                                    name: "unit-time",
                                 }}
                             />
                         ],
@@ -262,6 +265,7 @@ export default class Reports extends React.Component {
                                 onValueChange={this._handleFilterChange}
                                 width={InputWidths.SM}
                                 name="filter"
+                                flags={["p-stateful"]}
                             />
                         ],
                     ]}

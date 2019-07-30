@@ -46,9 +46,9 @@ export default class AttributeMappings extends Component {
             [<Row key="first">
                 <FormTextField
                     labelText={<div>Application Attribute<HelpHint hintText="Hint" /></div>}
-                    stateless={false}
                     width={InputWidths.MD}
                     value="Customer Name"
+                    flags={["p-stateful"]}
                 />
                 <Separator>=</Separator>
                 <FormDropDownList
@@ -61,6 +61,7 @@ export default class AttributeMappings extends Component {
                     ]}
                     selectedOption={this.state.firstDropDownOption}
                     width={InputWidths.MD}
+                    flags={["p-stateful", "use-portal"]}
                 />
                 <FormCheckbox
                     checked={this.state.firstChecked}
@@ -78,6 +79,7 @@ export default class AttributeMappings extends Component {
                     placeholder="Enter mapped attribute"
                     stateless={false}
                     width={InputWidths.MD}
+                    flags={["p-stateful"]}
                 />
                 <Separator>=</Separator>
                 <FormDropDownList
@@ -90,6 +92,7 @@ export default class AttributeMappings extends Component {
                     placeholder="Select a PingOne attribute"
                     selectedOption={this.state.secondDropDownOption}
                     width={InputWidths.MD}
+                    flags={["p-stateful", "use-portal"]}
                 />
                 <FormCheckbox
                     checked={this.state.secondChecked}

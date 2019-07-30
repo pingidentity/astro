@@ -18,10 +18,11 @@ import ValueItem from "../components/layout/ValueItem";
 export default function NotificationsWhitelistUser() {
     return (
         <ExpandableRow
-            expanded
+            initialState={{ expanded: true }}
             flags={[
                 "expandable-row-class",
-                "use-portal"
+                "use-portal",
+                "p-stateful"
             ]}
             rowAccessories={[
                 <Button
@@ -31,7 +32,7 @@ export default function NotificationsWhitelistUser() {
                 />,
                 <Toggle
                     key="toggle"
-                    stateless={false}
+                    flags={["p-stateful"]}
                 />
             ]}
             subtitle="dtaylor@company.com"
@@ -44,7 +45,7 @@ export default function NotificationsWhitelistUser() {
                     "MFA",
                     "API",
                 ]}
-                stateless={false}
+                flags={["p-stateful"]}
             />
             <InlineMessage
                 fullwidth
@@ -62,7 +63,7 @@ export default function NotificationsWhitelistUser() {
                         [
                             "MFA",
                             <ValueItem
-                                icon={<Toggle stateless={false} toggled />}
+                                icon={<Toggle flags={["p-stateful"]} initialState={{ toggled: true }}/>}
                             >
                             Enabled
                             </ValueItem>
@@ -81,6 +82,7 @@ export default function NotificationsWhitelistUser() {
                             "dtaylor@company.com",
                             <Link
                                 title="Details"
+                                type="block"
                             />,
                             <Button
                                 inline
@@ -92,6 +94,7 @@ export default function NotificationsWhitelistUser() {
                             "+720-888-8787",
                             <Link
                                 title="Details"
+                                type="block"
                             />,
                             <Button
                                 inline

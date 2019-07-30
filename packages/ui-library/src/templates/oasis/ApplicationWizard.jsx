@@ -157,11 +157,12 @@ const ChooseTemplate = ({
             closeOnBgClick
             modalTitle="Template Configuration"
             maximize
+            flags={["use-portal"]}
         >
             <h3 className="text-section-title">Public Application</h3>
-            <Section title="Client" stateless={false}><CodeView value={code} /></Section>
-            <Section title="OIDC Policy" stateless={false}><CodeView value={code} /></Section>
-            <Section title="Access Token Manager" stateless={false}><CodeView value={code} /></Section>
+            <Section title="Client" flags={["p-stateful"]}><CodeView value={code} /></Section>
+            <Section title="OIDC Policy" flags={["p-stateful"]}><CodeView value={code} /></Section>
+            <Section title="Access Token Manager" flags={["p-stateful"]}><CodeView value={code} /></Section>
         </Modal>
     </Step>
 );
@@ -175,15 +176,15 @@ const RedirectURIs = (props) => (
                 bodyData={[
                     [
                         "Production",
-                        <FormTextArea />
+                        <FormTextArea flags={["p-stateful"]}/>
                     ],
                     [
                         "Staging",
-                        <FormTextArea />
+                        <FormTextArea flags={["p-stateful"]}/>
                     ],
                     [
                         "Development",
-                        <FormTextArea />
+                        <FormTextArea flags={["p-stateful"]}/>
                     ]
                 ]}
             />
@@ -198,10 +199,10 @@ const RedirectURIs = (props) => (
 const ApplicationProperties = ({ owners, onOwnersChange, ...props }) => (
     <Step {...props} >
         <InputRow>
-            <FormTextField labelText="Name" required />
+            <FormTextField labelText="Name" required flags={["p-stateful"]}/>
         </InputRow>
         <InputRow>
-            <FormTextArea labelText="Description" />
+            <FormTextArea labelText="Description" flags={["p-stateful"]}/>
         </InputRow>
         <InputRow>
             <Multivalues
