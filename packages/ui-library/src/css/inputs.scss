@@ -1916,6 +1916,7 @@ input[type=file] {
         }
         .input-container {
             padding-right: $icon-spacing;
+            border-color: $color-input-error;
         }
         .integer-controls {
             right: 33px;
@@ -1969,6 +1970,11 @@ input[type=file] {
         .input-container {
             width: calc(100% - #{$message-input-offset});
         }
+    }
+    &.input-custom-select
+    &.input-text
+    input[type=text] {
+        border-color: $color-input-error;
     }
     &.input-checkbox {
         .icon {
