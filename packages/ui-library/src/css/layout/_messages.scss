@@ -415,6 +415,10 @@
             }
         }
     }
+
+    &--nomargin {
+        margin: 0;
+    }
 }
 
 .inline-message-text--full-width {

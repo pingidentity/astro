@@ -135,6 +135,16 @@ describe("InlineMessage", function () {
         expect(component).toBeTruthy();
     });
 
+    it("displays with no margins", function () {
+        const text = "Message text";
+        const view = getComponent({ "data-id": "message-nomargin", noMargin: true }, text);
+
+        const component = TestUtils.findRenderedDOMNodeWithClass(view, "inline-message--nomargin");
+
+        expect(component).toBeTruthy();
+    });
+
+
     it("throws error when deprecated prop 'callback' is passed in", function () {
         var expectedError = new Error(Utils.deprecatePropError("callback", "onClick"));
 

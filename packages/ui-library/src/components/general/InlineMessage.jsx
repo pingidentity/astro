@@ -42,6 +42,8 @@ var React = require("react"),
  *     Warning message with full background color and no icon.
  * @param {boolean} [fullwidth]
  *     when true creates a full page width inline message.
+ * @param {boolean} [noMargin]
+ *     When true it will remove the margin around the inline message.
  * @param {InlineMessage~onClick} [onClick]
  *     Callback to be triggered when the button is clicked.
  * @param {Array.InlineMessage~secondaryButtons} [secondaryButtons]
@@ -67,6 +69,7 @@ class InlineMessage extends React.Component {
         bordered: PropTypes.bool,
         className: PropTypes.string,
         "data-id": PropTypes.string,
+        noMargin: PropTypes.bool,
         onClick: PropTypes.func,
         label: PropTypes.string,
         type: PropTypes.oneOf([
@@ -82,6 +85,7 @@ class InlineMessage extends React.Component {
     static defaultProps = {
         "data-id": "inline-message",
         fullWidth: false,
+        noMargin: false,
         bordered: true,
         type: MessageTypes.NOTICE,
         secondaryButtons: []
@@ -107,7 +111,8 @@ class InlineMessage extends React.Component {
         const className = classnames("inline-message", this.props.type, {
             "inline-message--borderless": !this.props.bordered,
             "inline-message--alternate": this.props.alternate,
-            "inline-message--fullwidth": this.props.fullwidth
+            "inline-message--fullwidth": this.props.fullwidth,
+            "inline-message--nomargin": this.props.noMargin
         });
 
         const messageClassName = classnames(
