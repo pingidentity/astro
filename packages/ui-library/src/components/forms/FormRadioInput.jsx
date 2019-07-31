@@ -29,13 +29,13 @@ var React = require("react"),
  *    Whether or not the radio input is selected.
  * @param {FormRadioInput~onValueChange} [onValueChange]
  *    Callback to be triggered when the radio input is toggled.
- *
  * @param {string} [label]
  *    Label text to be displayed.
+ * @param {node} [description]
+ *    Description to display below the label.
  * @param {string} [helpHintText]
  *    When set, a help icon appears to the right of the label.  This value defines the text to display when the user
  *    hovers over the help icon.
- *
  * @param {string} [name]
  *    The name value for the input.
  * @param {string} [value]
@@ -61,12 +61,14 @@ class FormRadioInput extends React.Component {
         checked: PropTypes.bool,
         autoFocus: PropTypes.bool,
         className: PropTypes.string,
+        description: PropTypes.node,
         disabled: PropTypes.bool,
         label: PropTypes.oneOfType([
             PropTypes.array,
             PropTypes.object,
             PropTypes.string
         ]),
+        labelNode: PropTypes.node,
         onValueChange: PropTypes.func,
         name: PropTypes.string,
         value: PropTypes.oneOfType([
@@ -99,7 +101,8 @@ class FormRadioInput extends React.Component {
                 key={this.props.value}
                 data-id={this.props["data-id"] + "_label_" + this.props.value}
                 value={this.props.label}
-                hint={this.props.helpHintText}>
+                hint={this.props.helpHintText}
+                description={this.props.description}>
                 <input
                     data-id={this.props["data-id"] + "_" + this.props.value}
                     type="radio"
@@ -116,6 +119,4 @@ class FormRadioInput extends React.Component {
         );
     }
 }
-
-
 module.exports = FormRadioInput;

@@ -111,7 +111,6 @@
 		"react/react-in-jsx-scope": [2],
 		"react/self-closing-comp": [1],
 		"react/wrap-multilines": [2],
-		"react/jsx-no-bind": [2, { "ignoreRefs": true }],
 		"import/no-extraneous-dependencies": [
 			2,
 			{

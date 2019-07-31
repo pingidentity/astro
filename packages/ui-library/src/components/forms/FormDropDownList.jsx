@@ -127,6 +127,8 @@ const SearchTypes = {
 *     adds an icon to the option
 * @param {string} [label]
 *     The text to display as the field's label.
+* @param {node} [description]
+*     Description to display below the label.
 * @param {string} [name]
 *     The name attribute for the input.
 * @param {boolean} [stateless=false]
@@ -349,6 +351,7 @@ class FormDropDownListStateless extends React.Component {
         ),
         helpClassName: PropTypes.string,
         label: PropTypes.node,
+        description: PropTypes.node,
         labelAdd: PropTypes.string,
         labelHelpText: PropTypes.string,
         labelPrompt: PropTypes.string,
@@ -896,9 +899,11 @@ class FormDropDownListStateless extends React.Component {
             </ul>
         );
 
+
         return (
             <FormLabel
                 value={this.props.label}
+                description={this.props.description}
                 data-id={this.props["data-id"]}
                 ref="form-drop-down-list"
                 className={containerClassName}

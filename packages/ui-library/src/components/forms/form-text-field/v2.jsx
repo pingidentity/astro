@@ -88,6 +88,8 @@ import { getIcon } from "../../../util/PropUtils";
 *     A node that will add text or a component below the textbox.
 * @param {string} [data-id="form-text-field"]
 *     To define the base "data-id" value for the top-level HTML container.
+* @param {node} [description]
+*     Description to display below the label.
 * @param {string} [errorClassName]
 *     CSS classes to set on the FormTextFieldError component.
 * @param {string} [errorMessage]
@@ -201,6 +203,7 @@ class Stateless extends React.Component {
         children: PropTypes.node,
         className: PropTypes.string,
         controls: PropTypes.object,
+        description: PropTypes.node,
         subText: PropTypes.node,
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
@@ -470,6 +473,7 @@ class Stateless extends React.Component {
                 className={className}
                 ref="container"
                 data-id={dataId}
+                description={this.props.description}
                 value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
                 lockText={this.props.labelLockText}

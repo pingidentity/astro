@@ -72,6 +72,8 @@ var Views = {
  *    String value of the date format you want to display (e.g. "YYYY-MM-DD").
  * @param {string} [computableFormat="MM-DD-YYYY"]
  *    If unsure, leave as "x". Refer to moment#formatTokenFunctions for more info.
+ * @param {node} [labelNode]
+ *     A FormLabel component that replaces the default label of the calendar.
  * @param {string} [labelHelpText]
  *     The text to display for the help tooltip.
  * @param {string} [labelText]
@@ -139,6 +141,7 @@ class BaseCalendar extends React.Component {
         helpClassName: PropTypes.string,
         labelClassName: PropTypes.string,
         label: PropTypes.string,
+        labelNode: PropTypes.node,
         labelText: PropTypes.string,
         labelHelpText: PropTypes.string,
         minView: PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]),
@@ -462,20 +465,22 @@ class BaseCalendar extends React.Component {
             "value-entered": !!inputValue,
             "input-calendar--width-tight": this.props.tight,
         });
-
+        
         return (
             <div
                 className={className}
                 onClick={this.toggleClick}
                 data-id={this.props["data-id"]}
             >
-                <FormLabel
-                    className={classnames(this.props.labelClassName)}
-                    helpClassName={classnames(this.props.helpClassName)}
-                    data-id={this.props["data-id"] + "-label"}
-                    value={this.props.labelText || this.props.label}
-                    hint={this.props.labelHelpText}
-                />
+                {this.props.labelNode ||
+                    <FormLabel
+                        className={classnames(this.props.labelClassName)}
+                        helpClassName={classnames(this.props.helpClassName)}
+                        data-id={this.props["data-id"] + "-label"}
+                        value={this.props.labelText || this.props.label}
+                        hint={this.props.labelHelpText}
+                    />
+                }
                 <div className="input-container">
                     <input type="text"
                         data-id="calendar-input"
@@ -516,7 +521,9 @@ const Calendar = (props, context) => {
 };
 
 Calendar.Views = Views;
+Calendar.FormLabel = FormLabel;
 
 Calendar.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-module.exports = Calendar;
+export default Calendar;
+

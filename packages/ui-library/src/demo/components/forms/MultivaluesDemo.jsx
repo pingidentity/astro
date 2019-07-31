@@ -106,6 +106,7 @@ class MultivaluesDemo extends React.Component {
                 <InputRow>
                     <Multivalues
                         labelText="Default multi-values input"
+                        description="Sample Description"
                         stateless={false}
                         entries={this.state.entries}
                         onValueChange={this._handleValueChange}

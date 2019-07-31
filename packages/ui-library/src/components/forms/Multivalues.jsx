@@ -110,6 +110,8 @@ class MultivaluesOption extends Component {
  *     Array of strings used to display initial entry boxes.
  * @param {string} [name]
  *     Name attribute for the input.
+ * @param {node} [description]
+ *     Description to display below the label.
  * @param {Multivalues~onValueChange} [onValueChange]
  *     Callback triggered when a new entry is added or removed.
  * @param {Multivalues~onNewValue} [onNewValue]
@@ -163,6 +165,7 @@ class Multivalues extends Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         autoFocus: PropTypes.bool,
+        description: PropTypes.node,
         entries: PropTypes.arrayOf(PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.number,
@@ -581,6 +584,7 @@ class Multivalues extends Component {
                 value={labelText || label}
                 className={className}
                 data-id={this.props["data-id"]}
+                description={this.props.description}
             >
                 <div className={entryClassNames} data-id="entries" ref={el => this.inputBox = el} onMouseDown={noFocus}>
                     {entryNodes}

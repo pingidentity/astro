@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment-range";
-import Calendar from "../../../components/calendars/Calendar";
+import Calendar, { FormLabel } from "../../../components/calendars/Calendar";
 
 /**
 * @name CalendarDemo
@@ -54,21 +54,27 @@ class CalendarDemo extends React.Component {
                 <br /><br />
 
                 <Calendar data-id="calendar-2"
-                    closeOnSelect={true}
+                    closeOnSelect
                     computableFormat="x"
                     dateRange={this.state.dateRange}
                     date={this.state.selectedDate2}
                     format="YYYY-MM-DD"
                     helpClassName="right"
-                    required={true}
-                    labelText="Date with date range"
-                    labelHelpText="Selection outside of date range is not permitted"
+                    required
+                    labelNode={
+                        <FormLabel
+                            data-id="Example ID"
+                            value="Date with date range"
+                            hint="Selection outside of date range is not permitted"
+                            description="Sample Description"
+                        />
+                    }
                     onValueChange={this._onEnrollmentDateChanged(2)}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
 
                 <br /><br />
-
+                
                 <Calendar data-id="calendar-3"
                     closeOnSelect={true}
                     computableFormat="x"

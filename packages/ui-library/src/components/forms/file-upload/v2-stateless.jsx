@@ -25,6 +25,7 @@ export default class extends Component {
         labelSelectOther: PropTypes.string,
         labelRemove: PropTypes.string.isRequired,
         labelMaxFileSize: PropTypes.string,
+        description: PropTypes.node,
         //callbacks
         onRemove: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
@@ -95,7 +96,8 @@ export default class extends Component {
             <div className={containerClass} data-id={this.props["data-id"]}>
                 <FormLabel
                     className={classnames({ "form-error": this.props.errorMessage }) }
-                    value={this.props.labelText || this.props.label}>
+                    value={this.props.labelText || this.props.label}
+                    description={this.props.description}>
                     <ImagePreview
                         isDefault={useDefault}
                         show={this.props.showThumbnail}

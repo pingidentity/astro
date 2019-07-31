@@ -100,6 +100,7 @@ class FormDropDownListDemo extends React.Component {
                         ]}
                         autofocus={true}
                         label="Autofocus with auto-width"
+                        description="Sample Description"
                         selectedOption={this.state.selectedValue1}
                         onValueChange={this._handleValueChange(1)}
                     />

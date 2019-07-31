@@ -31,6 +31,7 @@ class ConditionalFieldsetStateless extends React.Component {
         children: PropTypes.node,
         className: PropTypes.string,
         "data-id": PropTypes.string,
+        description: PropTypes.node,
         disabled: PropTypes.bool,
         emptyMessage: PropTypes.string,
         name: PropTypes.string,
@@ -155,7 +156,7 @@ class ConditionalFieldsetStateless extends React.Component {
 
         return (
             <div>
-                <FormLabel data-id={`${dataId}-label`} className="detached">
+                <FormLabel data-id={`${dataId}-label`} className="detached" description={this.props.description}>
                     {label}
                 </FormLabel>
                 <fieldset data-id={dataId} className={className}>

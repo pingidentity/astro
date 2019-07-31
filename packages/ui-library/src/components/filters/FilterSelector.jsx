@@ -30,6 +30,8 @@ const optionsSelector = createSelector(
 *     Class name(s) to add to the top-level container/div
 * @param {node} [bottomPanel]
 *     Content to be shown after the list of options.
+* @param {node} [description]
+*     Description to display below the label.
 * @param {string} [labelText]
 *     Label of the field
 * @param {string} [label]
@@ -60,6 +62,7 @@ class FilterSelector extends React.Component {
         "data-id": PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         bottomPanel: PropTypes.node,
         className: PropTypes.string,
+        description: PropTypes.node,
         labelText: PropTypes.string,
         label: PropTypes.string,
         onValueChange: PropTypes.func,
@@ -129,6 +132,7 @@ class FilterSelector extends React.Component {
             "data-id": dataId,
             bottomPanel,
             className,
+            description,
             labelText,
             label,
             selected,
@@ -148,6 +152,7 @@ class FilterSelector extends React.Component {
                             open={open}
                             filterLabel={this._getFilterLabel() || ""}
                             labelText={labelText}
+                            description={description}
                             label={label}
                             placeholder="Select One"
                             count={selected.length > 0 ? selected.length : -1}

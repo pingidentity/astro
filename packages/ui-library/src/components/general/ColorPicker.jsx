@@ -59,6 +59,8 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     A label to render at the top of the color picker.
  * @param {string} [label]
  *     Alias for labelText
+ * @param {node} [description]
+ *     Description to display below the label.
  * @param {node} [hintText]
  *     If a label is provided, a hint text may also be optionally provided.
  *     This can be a string or a JSX object.
@@ -107,6 +109,7 @@ class Stateless extends React.Component {
         id: PropTypes.string,
         className: PropTypes.string,
         name: PropTypes.string,
+        description: PropTypes.node,
         hintText: PropTypes.node,
         labelText: PropTypes.string,
         label: PropTypes.string,
@@ -290,7 +293,7 @@ class Stateless extends React.Component {
         return (
             /* eslint-disable max-len */
             <div data-id={this.props["data-id"]} className={css(containerCss)}>
-                <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText}/>
+                <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText} description={this.props.description}/>
                 <div className="color-picker" ref="swatch">
                     <span
                         className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"

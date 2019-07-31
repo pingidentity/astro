@@ -145,6 +145,8 @@ var getZoneNameDisplayValue = function (zoneName) {
 *     Set the flag for "use-portal" to render with popper.js and react-portal
 * @param {string} [countryLabel="Country"]
 *     The text to display over the selected country
+* @param {node} [description]
+*     Description to display below the label.
 * @param {string} [displayValue] Value to be displayed other than the unique string value. For example the abbreviation
 *     could be displayed instead.
 * @param {string} [errorMessage]
@@ -215,6 +217,7 @@ class TimeZoneStateless extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         countryLabel: PropTypes.string,
+        description: PropTypes.node,
         displayValue: PropTypes.string,
         errorMessage: PropTypes.string,
         filterByCountry: PropTypes.string,
@@ -549,8 +552,9 @@ class TimeZoneStateless extends React.Component {
                 hint={this.props.labelHelpText}
                 helpClassName={this.props.helpClassName}
                 ref="input-timezone"
+                description={this.props.description}
             >
-
+            
                 <PopoverBase
                     data-id="tooltip-menu"
                     label={this._renderLabel()}

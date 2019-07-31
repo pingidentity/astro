@@ -47,6 +47,7 @@ class ColorPickerDemo extends React.Component {
                         labelText="Background color"
                         name="stateful-demo"
                         hintText="Pick a color or type in the hex code"
+                        description="Sample Description"
                     />
                 </InputRow>
                 <InputRow>

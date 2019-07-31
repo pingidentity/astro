@@ -96,6 +96,7 @@ class FormTimeZoneDemo extends React.Component {
                         value={this.state.value0.name}
                         displayValue={this.state.displayValue0}
                         ref="tzStateless"
+                        description="Sample Description"
                     />
                 </InputRow>
                 <InputRow>

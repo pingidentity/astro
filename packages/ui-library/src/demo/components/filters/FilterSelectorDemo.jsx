@@ -22,6 +22,7 @@ class FilterSelectorDemo extends React.Component {
             <div>
                 <FilterSelector
                     labelText="A Filter"
+                    description="Sample Description"
                     options={[
                         {
                             id: "43434",

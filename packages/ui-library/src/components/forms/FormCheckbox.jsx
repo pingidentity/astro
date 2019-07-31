@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import FormError from "./FormError";
 import FormLabel from "./FormLabel";
+import { defaultRender } from "../../util/PropUtils";
 import { InputWidthProptypes, getInputWidthClass } from "./InputWidths";
 
 import classnames from "classnames";
@@ -42,6 +43,8 @@ import classnames from "classnames";
  *    CSS classes to set on the HelpHint component.
  * @param {string} [name]
  *    The name value for the input.
+ * @param {function} [renderLabel]
+ *    Render prop to display FormLabel
  * @param {string} [value]
  *    The value for the input.
 * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
@@ -88,6 +91,7 @@ class FormCheckbox extends React.Component {
         onChange: PropTypes.func,
         onValueChange: PropTypes.func,
         stacked: PropTypes.bool,
+        renderLabel: PropTypes.func,
         value: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
     };
@@ -98,6 +102,7 @@ class FormCheckbox extends React.Component {
         disabled: false,
         inline: false,
         stacked: false,
+        renderLabel: defaultRender,
     };
 
     _handleChange = (e) => {
@@ -127,34 +132,41 @@ class FormCheckbox extends React.Component {
             }
         );
 
-        const checkBox = (
-            <FormLabel data-id={this.props["data-id"] + "-container"}
-                className={labelClassName}
-                helpClassName={this.props.helpClassName}
-                helpTarget={this.props.helpTarget}
-                disabled={this.props.disabled}
-                value={this.props.label}
-                hint={this.props.labelHelpText}>
-                <input data-id={this.props["data-id"]}
-                    type="checkbox"
-                    name={this.props.name ? this.props.name : this.props["data-id"]}
-                    value={this.props.value ? this.props.value: this.props["data-id"]}
-                    onChange={this._handleChange}
-                    checked={this.props.checked}
-                    disabled={this.props.disabled}
-                />
-                <div className="icon"/>
-                {this.props.errorMessage && (
-                    <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} />
-                )}
-                {this.props.errorMessage && (
-                    <FormError.Message
-                        value={this.props.errorMessage}
-                        data-id={this.props["data-id"] + "-error-message"}
-                    />
-                )}
-            </FormLabel>
+        const checkBox = this.props.renderLabel(
+            {
+                "data-id": `${this.props["data-id"]}-container`,
+                className: labelClassName,
+                helpClassName: this.props.helpClassName,
+                helpTarget: this.props.helpTarget,
+                disabled: this.props.disabled,
+                value: this.props.label,
+                hint: this.props.labelHelpText,
+                children: [
+                    <input data-id={this.props["data-id"]}
+                        type="checkbox"
+                        name={this.props.name ? this.props.name : this.props["data-id"]}
+                        value={this.props.value ? this.props.value: this.props["data-id"]}
+                        onChange={this._handleChange}
+                        checked={this.props.checked}
+                        disabled={this.props.disabled}
+                        key="input"
+                    />,
+                    <div className="icon" key="icon"/>,
+                    this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} key="errorIcon" />
+                    ),
+                    this.props.errorMessage && (
+                        <FormError.Message
+                            value={this.props.errorMessage}
+                            data-id={this.props["data-id"] + "-error-message"}
+                            key="errorMessage"
+                        />
+                    ),
+                ]
+            },
+            FormLabel
         );
+
 
         const conditionalContent = this.props.conditionalContent && this.props.checked
             ?(

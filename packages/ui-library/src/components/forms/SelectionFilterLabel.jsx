@@ -13,15 +13,19 @@ var React = require("react"),
 *     Additional CSS classes that are added to the top-level HTML container
 * @param {number} [count]
 *     The number that is displayed to the right of the filterLabel
-* @param {string} filterLabel
+* @param {node} [description]
+*     Description to display below the label.
+* @param {string} [filterLabel]
 *     The text to display inside of the SelectionFilterLabel
-* @param {string} labelText
+* @param {string} [filterLabel]
+*     The text to display inside of the SelectionFilterLabel
+* @param {string} [labelText]
 *     The text to display as an input label above the SelectionFilterLabel
 * @param {string} [label]
 *     Alias for labelText
-* @param {boolean} open
+* @param {boolean} [open]
 *     Is this view opened?
-* @param {string} placeholder
+* @param {string} [placeholder]
 *     Text that displays as a placeholder if filterLabel is empty
 * @param {bool} [required=false]
 *     When true the required styling is applied to the component
@@ -45,6 +49,7 @@ class SelectionFilterLabel extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         count: PropTypes.number,
+        description: PropTypes.node,
         filterLabel: PropTypes.string.isRequired,
         labelText: PropTypes.string,
         label: PropTypes.string,
@@ -84,7 +89,11 @@ class SelectionFilterLabel extends React.Component {
     render() {
         const labelText = this.props.labelText || this.props.label;
         return labelText ? (
-            <FormLabel data-id={this.props["data-id"] + "-label"} value={labelText}>
+            <FormLabel
+                data-id={this.props["data-id"] + "-label"}
+                value={labelText}
+                description={this.props.description}
+            >
                 {this._renderSelectionFilter()}
             </FormLabel>
         ) : this._renderSelectionFilter();

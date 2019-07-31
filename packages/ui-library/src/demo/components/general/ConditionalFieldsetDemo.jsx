@@ -60,6 +60,7 @@ class ConditionalFieldsetDemo extends React.Component {
                             data-id="demo-1"
                             emptyMessage={"Do nothing"}
                             label="Stateless version"
+                            description="Sample Description"
                             onValueChange={this._onValueChange}
                             selectedIndex={this._usePstateful() ? undefined : this.state.selectedIndex}
                             stateless

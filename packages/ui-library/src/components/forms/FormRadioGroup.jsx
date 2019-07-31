@@ -14,21 +14,23 @@ import { defaultRender } from "../../util/PropUtils";
 
 /**
  * @typedef FormRadioGroup~RadioGroupItem
- * @property {string} id
+ * @property {string} [id]
  *     The item's identifier.
- * @property {string} name
+ * @property {string} [name]
  *     The item's display text.
- * @property {string} helpHintText
+ * @property {string} [helpHintText]
  *     Text to display in help hint next to the item's name.
  * @param {object} [helpTarget]
  *     An optional icon or image to replace standard help hint icon.
- * @property {boolean} disabled
+ * @property {node} [description]
+ *     Description to display below the label.
+ * @property {boolean} [disabled]
  *     Disables the input.
- * @property {boolean} hidden
+ * @property {boolean} [hidden]
  *     Hides the input.
- * @property {node} labelText
+ * @property {node} [labelText]
  *     String or JSX element to display the label for the radio button.
- * @property {string} label
+ * @property {string} [label]
  *     Text to display the label for the radio button.
  */
 
@@ -43,7 +45,7 @@ import { defaultRender } from "../../util/PropUtils";
  *
  * @param {boolean} [autoFocus=false]
  *     Whether or not to auto-focus the element.
- * @param {string} groupName
+ * @param {string} [groupName]
  *     Name of the radio group.
  * @param {FormRadioGroup~RadioGroupItem[]} items
  *     Array of RadioGroupItem objects to render.
@@ -114,6 +116,7 @@ class FormRadioGroup extends React.Component {
         items: PropTypes.array.isRequired,
         selected: PropTypes.any,
         onValueChange: PropTypes.func,
+        description: PropTypes.node,
         disabled: PropTypes.bool,
         stacked: PropTypes.bool,
         label: PropTypes.string,
@@ -190,6 +193,7 @@ class FormRadioGroup extends React.Component {
         return (
             this.props.label || this.props.labelText ? (
                 <FormLabel data-id={this.props["data-id"]}
+                    description={this.props.description}
                     disabled={this.props.disabled}
                     value={this.props.label || this.props.labelText}
                     hint={this.props.labelHelpText}
