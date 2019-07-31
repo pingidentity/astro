@@ -567,12 +567,12 @@ class Stateless extends React.Component {
                     {this.props.controls}
                     {this.props.iconRight &&
                     <span className="input-icon input-icon--right">
-                        {getIcon(this.props.iconRight )}
+                        {getIcon(this.props.iconRight, { type: "inline" })}
                     </span>
                     }
                     {this.props.iconLeft &&
                      <span className="input-icon input-icon--left">
-                         {getIcon(this.props.iconLeft )}
+                         {getIcon(this.props.iconLeft, { type: "leading" })}
                      </span>
                     }
                     {message && (

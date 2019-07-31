@@ -921,7 +921,6 @@ class FormDropDownListStateless extends React.Component {
                                 <span className="wrapper__spacer">{inputValue}</span>
                                 // for auto-sized dropdowns, it pushes out the width of the input
                             }
-
                             <FormTextFieldStateless
                                 data-id="selected-input"
                                 disabled={this.props.disabled}

@@ -129,7 +129,7 @@ class FormDropDownListDemo extends React.Component {
                     <FormDropDownList
                         options={[
                             { iconName: "globe", label: "One", value: "1" },
-                            { iconName: "cog", label: "Option two", value: "2" },
+                            { iconName: "cog", label: "Option two with a very, very long label", value: "2" },
                             { label: "with no icon", value: "3" },
                         ]}
                         autofocus={true}

@@ -80,6 +80,7 @@ class ConditionalFieldsetStateless extends React.Component {
                     value: i + indexOffset,
                     label: child.props.title,
                     iconName: child.props.icon ? child.props.icon : null,
+                    type: "inline",
                 });
             });
             const noneData = {
