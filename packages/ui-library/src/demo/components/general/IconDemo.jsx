@@ -54,6 +54,35 @@ const IconDemo = () => {
                     <Text type="error">Number of failed attempts 1/000</Text>
                 </Icon>
             </InputRow>
+            <HR />
+            <InputRow>
+                <Text type="value">Icon Sizes:</Text>
+            </InputRow>
+            <InputRow>
+                <Icon iconName="cogs" iconSize={iconSizes.SM}>
+                    <div className="textblock textblock--primary">Small</div>
+                </Icon>
+            </InputRow>
+            <InputRow>
+                <Icon iconName="cogs" iconSize={iconSizes.MD}>
+                    <div className="textblock textblock--primary">Medium</div>
+                </Icon>
+            </InputRow>
+            <InputRow>
+                <Icon iconName="cogs" iconSize={iconSizes.LG}>
+                    <div className="textblock textblock--primary">Large</div>
+                </Icon>
+            </InputRow>
+            <InputRow>
+                <Icon iconName="cogs" iconSize={iconSizes.XL}>
+                    <div className="textblock textblock--primary">X-Large</div>
+                </Icon>
+            </InputRow>
+            <InputRow>
+                <Icon iconName="cogs" iconSize={iconSizes.XXL}>
+                    <div className="textblock textblock--primary">XX-Large</div>
+                </Icon>
+            </InputRow>
         </div>
     );
 };

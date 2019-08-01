@@ -44,7 +44,7 @@ exports.config = {
 
     dockerLogs: "./logs",
     dockerOptions: {
-        image: "selenium/standalone-firefox",
+        image: "selenium/standalone-firefox:3.141.59-selenium",
         healthCheck: "http://localhost:4444",
         options: {
             p: ["4444:4444"],
