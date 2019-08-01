@@ -83,7 +83,7 @@ describe("List View Infinite Scroll Integration", function () {
         // verify advanced section
         expect(ListViewInfiniteScrollPage.verifyAdvancedIsShowing()).toBeTruthy();
         // choose a custom filter type
-        ListViewInfiniteScrollPage.chooseNewFilterType(1);
+        ListViewInfiniteScrollPage.chooseNewFilterType("recentLogin");
         // add a filter
         ListViewInfiniteScrollPage.clickAddCustomFilter();
         // verify any/all is showing

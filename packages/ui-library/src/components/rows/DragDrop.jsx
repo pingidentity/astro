@@ -163,6 +163,7 @@ class DragDropBase extends React.Component {
         isDragging: PropTypes.bool.isRequired,
         dropTarget: PropTypes.bool.isRequired,
 
+        "data-id": PropTypes.string,
         id: PropTypes.any.isRequired,
         index: PropTypes.oneOfType([
             PropTypes.number,
@@ -185,6 +186,7 @@ class DragDropBase extends React.Component {
     };
 
     static defaultProps = {
+        "data-id": "drag-drop-item",
         disabled: false,
         tagName: "div",
         onDragStart: _.noop,
@@ -201,6 +203,7 @@ class DragDropBase extends React.Component {
             className,
             connectDragSource,
             connectDropTarget,
+            "data-id": dataId,
             dropTarget,
             isDragging
         } = this.props;
@@ -217,7 +220,7 @@ class DragDropBase extends React.Component {
                 [dropTargetClass]: dropTarget && !isDragging,
                 [dropTargetAfterClass]: dropTarget && !isDragging && this.props.dropAfter,
             }),
-            "data-id": "drag-drop-item",
+            "data-id": dataId,
             style: {
                 ...this.props.style,
                 opacity

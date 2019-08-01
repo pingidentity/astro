@@ -53,7 +53,7 @@ describe("CheckboxGroup", function () {
             onValueChange: value => callback(value),
             onAdd: addCallback
         });
-        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "checkbox-group-2");
+        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "checkbox-group-three");
 
         expect(callback).not.toBeCalled();
         expect(addCallback).not.toBeCalled();
@@ -69,7 +69,7 @@ describe("CheckboxGroup", function () {
             onValueChange: value => callback(value),
             onRemove: removeCallback
         });
-        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "checkbox-group-0");
+        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "checkbox-group-one");
 
         expect(callback).not.toBeCalled();
         expect(removeCallback).not.toBeCalled();

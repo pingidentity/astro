@@ -152,13 +152,13 @@ module.exports = class extends React.Component {
                         // It was a mistake to include this props object; only including for backward compatibility
                         ...props,
                         column: propsIndex,
-                        "data-id": row.id,
+                        "data-id": `row_${row.id}`,
                         index,
                         ...row
                     })
                     : React.cloneElement(contentType, {
                         column: propsIndex,
-                        "data-id": row.id,
+                        "data-id": `row_${row.id}`,
                         index,
                         onAdd: this.props.onAdd,
                         onRemove: this.props.onRemove,
@@ -167,7 +167,11 @@ module.exports = class extends React.Component {
         }
 
         return (
-            <DragDropRow id={row.id} key={row.id} index={index}
+            <DragDropRow
+                data-id={`drag-drop-row_${row.id}`}
+                id={row.id}
+                key={row.id}
+                index={index}
                 className={row.preview ? "selector-row--drop-preview" : ""}
                 disabled={opts && opts.disabled}
                 column={propsIndex}

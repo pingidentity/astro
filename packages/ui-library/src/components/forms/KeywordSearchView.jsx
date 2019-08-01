@@ -50,11 +50,13 @@ const KeywordSearchView = ({
             </div>
         );
 
+        const sanitizedLabel = label.toLowerCase().replace(/[^0-9a-z]/gi, "");
+
         return (
-            <li key={idx}>
+            <li key={`${root}-${section}-${sanitizedLabel}`}>
                 <Link
                     className={resultClass}
-                    data-id="search-result"
+                    data-id={`search-result_${root}-${section}-${sanitizedLabel}`}
                     focusable
                     key={`Result ${idx}`}
                     title={title}

@@ -785,7 +785,7 @@ class FormDropDownListStateless extends React.Component {
             <OptionItem
                 key={`option-${option.label}-${option.value}`} // add prop allows re-ordering, so must have unique key
                 ref={"option-" + index}
-                data-id={"option-" + index}
+                data-id={"option_" + option.value}
                 className={className}
                 onClick={!disabled ? this._handleOptionClick : _.noop}
                 option={option}

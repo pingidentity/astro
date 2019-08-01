@@ -114,7 +114,7 @@ class LinkDropDownListStateless extends React.Component {
         return this.props.options.map(function (option, i) {
             return (
                 <LinkDropDownListOption
-                    data-id="list-option"
+                    data-id={`list-option-${option.value}`}
                     key={i}
                     onClick={this._handleClick}
                     option={option}

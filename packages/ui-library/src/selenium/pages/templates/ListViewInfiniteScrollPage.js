@@ -140,12 +140,12 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
     },
 
     /**
-     * @desc this function is to choost a custom filter type
+     * @desc this function is to choose a custom filter type
      */
     chooseNewFilterType: {
-        value: function (index) {
+        value: function (id) {
             this.click("//label[@data-id='new-filter-type']");
-            this.click(`//li[@data-id='option-${index}']`);
+            this.click(`//li[@data-id='option_${id}']`);
         }
     },
 
@@ -164,7 +164,7 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
     clickEnabledStatus: {
         value: function () {
             this.click("//span[@data-id='status-selector']//label[@data-id='selection-filter-label']");
-            this.click("//label[@data-id='selectionList-Checkbox-0-container']");
+            this.click("//label[@data-id='selectionList-Checkbox-Enabled-container']");
         }
     },
 
@@ -174,7 +174,7 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
     clickGoodPasswordStatus: {
         value: function () {
             this.click("//span[@data-id='pw-status-selector']//label[@data-id='selection-filter-label']");
-            this.click("//label[@data-id='selectionList-Checkbox-0-container']");
+            this.click("//label[@data-id='selectionList-Checkbox-Good-container']");
         }
     },
 

@@ -248,7 +248,7 @@ describe("ConditionalFieldset", function () {
         expect(console.warn).not.toBeCalled();
     });
 
-    it("sets the selectedIndex automatically when p-statful flag is set", function () {
+    it("sets the selectedIndex automatically when p-stateful flag is set", function () {
         const cb = jest.fn();
         const wrapper = getEnzymeWrapper({
             flags: ["p-stateful"],

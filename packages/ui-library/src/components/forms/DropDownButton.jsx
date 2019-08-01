@@ -160,9 +160,9 @@ class Stateless extends Component {
         }
     };
 
-    _renderOptionNodes = () => _.map(this.props.options, (value, key) => (
+    _renderOptionNodes = () => _.map(this.props.options, (value = "", key) => (
         <a
-            data-id={key}
+            data-id={`option-${_.isString(value) ? value.toLowerCase().replace(/[^0-9a-z]/gi, "") : key}`}
             onClick={_.partial(this._onValueChanged, key)}
             key={key}
             className="dropdown-button__option">

@@ -31,7 +31,7 @@ describe("Wizard Integration", function () {
         //check use Pulsing checkbox
         WizardPage.clickPulsingCheckbox();
         //Select wizard 1
-        WizardPage.selectWizardCheckbox(0);
+        WizardPage.selectWizardCheckbox("Wizard 1");
         //take screenshot and compare
         WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step1");
         //click button next
@@ -101,7 +101,7 @@ describe("Wizard Integration", function () {
 
             expect(WizardPage.verifyPulsingCheckboxExisting()).toBeTruthy();
             //Select wizard 2
-            WizardPage.selectWizardCheckbox(2);
+            WizardPage.selectWizardCheckbox("Wizard 2");
             //take screenshot and compare
             WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step1");
             //click button next

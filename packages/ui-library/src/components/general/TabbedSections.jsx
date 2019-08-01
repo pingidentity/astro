@@ -147,7 +147,7 @@ const Tabs = ({
                     tabs.map((tab, index) => (
                         <TabbedSectionChild
                             className={activeTab === index ? "active" : ""}
-                            data-id={dataId + "-" + index}
+                            data-id={dataId + "_" + tab}
                             onClick={onChange}
                             key={tab}
                             index={index}

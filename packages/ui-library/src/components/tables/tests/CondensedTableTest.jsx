@@ -52,12 +52,11 @@ describe("CondensedTable", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <div><CondensedTable headData={mockData.head} bodyData={mockData.body} /></div>);
 
-        var sections = TestUtils.scryRenderedDOMNodesWithDataId(component, "section");
-        var items = TestUtils.scryRenderedDOMNodesWithDataId(sections[0], "item");
+        var section = TestUtils.findRenderedDOMNodeWithDataId(component, "section_0");
+        var items = TestUtils.scryRenderedDOMNodesWithClass(section, "data-item");
         var label = TestUtils.findRenderedDOMNodeWithTag(items[0], "label");
         var description = TestUtils.findRenderedDOMNodeWithTag(items[0], "span");
 
-        expect(sections.length).toBe(3);
         expect(items.length).toBe(3);
         expect(label.textContent).toBe("name");
         expect(description.textContent).toBe("tom");
@@ -66,12 +65,11 @@ describe("CondensedTable", function () {
 
     it("renders table with data objects", function () {
         var component = ReactTestUtils.renderIntoDocument(<div><CondensedTable data={dataObjects} /></div>);
-        var sections = TestUtils.scryRenderedDOMNodesWithDataId(component, "section");
-        var items = TestUtils.scryRenderedDOMNodesWithDataId(sections[1], "item");
+        var section = TestUtils.findRenderedDOMNodeWithDataId(component, "section_1");
+        var items = TestUtils.scryRenderedDOMNodesWithClass(section, "data-item");
         var label = TestUtils.findRenderedDOMNodeWithTag(items[1], "label");
         var description = TestUtils.findRenderedDOMNodeWithTag(items[1], "span");
 
-        expect(sections.length).toBe(3);
         expect(items.length).toBe(3);
         expect(label.textContent).toBe("age");
         expect(description.textContent).toBe("36");

@@ -40,17 +40,25 @@ class PopoverNavMenuBase extends PopoverMenuBase {
     }
 
     renderItem = (item, handleClick, index) => {
+        const {
+            url,
+            href = url,
+            label,
+            target,
+            "data-id": dataId = `${this.props["data-id"]}-link-${label ? label.toString() : index}`
+        } = item;
+
         return (
             <Anchor
-                data-id={item["data-id"] || `${this.props["data-id"]}-link-${index}`}
-                href={item.href || item.url}
-                key={item.label}
+                data-id={dataId}
+                href={href}
+                key={label}
                 className={classnames("nav-menu__link", { "nav-menu__link--w-icon": this._anyIcons() })}
                 onClick={handleClick}
-                target={item.target}
+                target={target}
             >
                 {this._getIcon(item)}
-                {item.label}
+                {label}
             </Anchor>
         );
     };

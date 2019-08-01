@@ -303,7 +303,7 @@ class ListOptions extends React.Component {
                 <Button
                     inline
                     iconName="plus"
-                    data-id="row-button-add"
+                    data-id={`row-button-add_${item.id}`}
                     onClick={valueChange(item)}
                 />
                 {item.name}
@@ -356,7 +356,7 @@ class ListOptions extends React.Component {
 
             return (
                 <FormCheckbox
-                    data-id={"selectionList-Checkbox-" + index}
+                    data-id={"selectionList-Checkbox-" + item.id}
                     key={item.id + "-" + index}
                     label={item.name}
                     checked={checked}

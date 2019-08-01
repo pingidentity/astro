@@ -218,7 +218,7 @@ class Wizard extends React.Component {
         var steps = this._filter(this.props.children),
             props = _.pick(this.props, INHERIT_PROPS);
 
-        var stepNodes = React.Children.map(steps, function (step, i) {
+        var stepNodes = React.Children.map(steps, (step, i) => {
             var idx = this.props.number + i;
 
             return React.cloneElement(step, _.defaults({
@@ -233,7 +233,7 @@ class Wizard extends React.Component {
                 onNext: step.props.onNext,
                 saveTooltip: step.props.saveTooltip,
             }, props));
-        }.bind(this));
+        });
 
         return (
             <div data-id={this.props["data-id"]} className={this.props.className}>

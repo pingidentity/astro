@@ -53,7 +53,7 @@ class Menu extends React.Component {
             return (
                 <Item
                     key={index}
-                    data-id={`${this.props["data-id"]}-menu-item-${type}-${index}`}
+                    data-id={`${this.props["data-id"]}-menu-item-${type}_${step.title || step.menuTitle}`}
                     index={step.index}
                     clickDisabled={clickDisabled}
                     completed={step.completed}

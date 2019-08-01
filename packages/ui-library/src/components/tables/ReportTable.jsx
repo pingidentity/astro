@@ -33,6 +33,7 @@ const Head = ({
 
                     return renderHeaderCell({
                         key: index,
+                        "data-id": `header_${content}`,
                         id: index,
                         index: index,
                         onDrag: onDrag,

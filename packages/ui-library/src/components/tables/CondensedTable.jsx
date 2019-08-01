@@ -27,12 +27,16 @@ var React = require("react"),
 var ObjectTable = function (props) {
     return (
         <div>
-            {props.data.map(function (item) {
+            {props.data.map(function (item, rowIndex) {
                 return (
-                    <div key={uuid.v1()} className="data-group data-section" data-id="section">
+                    <div
+                        key={uuid.v1()}
+                        className="data-group data-section"
+                        data-id={`section_${rowIndex}`} // Wanted to use something data-specific, but there's not a good way without serializing the whole item
+                    >
                         {Object.keys(item).map(function (key) {
                             return (
-                                <div className="data-item" key={key} data-id="item">
+                                <div className="data-item" key={key} data-id={`item_${item[key]}`}>
                                     <label>{key}</label>
                                     <span>{item[key]}</span>
                                 </div>
@@ -48,12 +52,16 @@ var ObjectTable = function (props) {
 var ArrayTable = function (props) {
     return (
         <div>
-            {props.bodyData.map(function (item) {
+            {props.bodyData.map(function (item, rowIndex) {
                 return (
-                    <div key={uuid.v1()} className="data-group data-section" data-id="section">
+                    <div
+                        key={uuid.v1()}
+                        className="data-group data-section"
+                        data-id={`section_${rowIndex}`} // Wanted to use something data-specific, but there's not a good way without serializing the whole item
+                    >
                         {item.map(function (entry, entryIndex) {
                             return (
-                                <div className="data-item" key={entry.toString()} data-id="item">
+                                <div className="data-item" key={entry.toString()} data-id={`item_${entry.toString()}`}>
                                     <label>{props.headData[entryIndex]}</label>
                                     <span>{entry}</span>
                                 </div>

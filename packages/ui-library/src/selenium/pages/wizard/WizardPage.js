@@ -30,7 +30,7 @@ var WizardDemoPage = Object.create(HomePage, {
 
     xpathWizardCheckbox: {
         get: function () {
-            return "//label[@data-id='choose{index}']";
+            return "//label[@data-id='choose{id}']";
         }
     },
 
@@ -90,8 +90,8 @@ var WizardDemoPage = Object.create(HomePage, {
      * @param {number} index - the order of Wizard
      */
     selectWizardCheckbox: {
-        value: function (index) {
-            this.click(this.formatXpath(this.xpathWizardCheckbox, { index: index }));
+        value: function (id) {
+            this.click(this.formatXpath(this.xpathWizardCheckbox, { id }));
         }
     },
 

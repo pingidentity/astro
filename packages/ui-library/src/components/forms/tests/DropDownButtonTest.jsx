@@ -453,7 +453,7 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.Simulate.click(button);
 
-        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "one");
+        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "option-one");
         expect(option).toBeTruthy();
     });
 

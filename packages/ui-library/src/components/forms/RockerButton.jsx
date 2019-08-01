@@ -167,9 +167,8 @@ class RockerButtonStateless extends React.Component {
         return (
             <div ref="container" data-id={this.props["data-id"]} className={className}>
                 {
-                    this.props.labels.map(function (text, index) {
+                    this.props.labels.map((text, index) => {
                         const props = {
-                            "data-id": "rocker-label",
                             onClick: this._handleClick,
                             key: index,
                             text,
@@ -180,7 +179,7 @@ class RockerButtonStateless extends React.Component {
                         };
                         return (
                             <RockerButtonLabel {...props} />);
-                    }.bind(this))
+                    })
                 }
             </div>
         );
@@ -194,14 +193,18 @@ var RockerButtonLabel = function (props) {
         props.onClick(props.text, props.index, event);
     };
 
+    const { label = "" } = props;
+
+    const sanitizedLabel = label.toLowerCase().replace(/[^0-9a-z]/gi, "");
+
     return props.helpText
         ? <HelpHint
-            data-id="helphint-button"
+            data-id={`helphint-button_${sanitizedLabel}`}
             placement="top"
             delayShow={500}
             hintText={props.helpText} >
             <button
-                data-id={props["data-id"]}
+                data-id={`rocker-label_${sanitizedLabel}`}
                 onMouseDown={dontFocus}
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
@@ -210,7 +213,7 @@ var RockerButtonLabel = function (props) {
             </button>
         </HelpHint>
         : <button
-            data-id={props["data-id"]}
+            data-id={`rocker-label_${sanitizedLabel}`}
             onMouseDown={dontFocus}
             onClick={_handleClick}
             autoFocus={props.autoFocus}

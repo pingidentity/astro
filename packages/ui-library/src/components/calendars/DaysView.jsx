@@ -99,7 +99,7 @@ module.exports = class extends React.Component {
 
     render() {
         var titles = this.getDaysTitles().map(function (item, i) {
-            return <Cell data-id={"titles-cell-" + i} value={item.label} className="day title" key={i} />;
+            return <Cell data-id={"titles-cell-" + item.val} value={item.label} className="day title" key={i} />;
         });
 
         var days = this.getDays().map(function (item, i) {
@@ -111,7 +111,7 @@ module.exports = class extends React.Component {
                 today: item.today,
                 disabled: item.outOfRange
             });
-            return <Cell data-id={"days-cell-" + i} value={item.label} className={className} key={i} />;
+            return <Cell data-id={"days-cell-" + item.label} value={item.label} className={className} key={i} />;
         });
 
         /* istanbul ignore next  */

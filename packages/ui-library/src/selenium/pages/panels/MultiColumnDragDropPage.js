@@ -190,9 +190,9 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     verifyAddedItemToRightColumnExisting: {
         value: function (itemNumber) {
-            var prefixXpath = "//div[@data-id='DragDropColumn-1']//div[@data-id='drag-drop-item']";
-            var xPath = prefixXpath + "//div[contains(@data-id,'{itemNumber}')]";
-            return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
+            return this.isExisting(
+                `//div[@data-id='DragDropColumn-1']//div[@data-id='drag-drop-row_${itemNumber}']`
+            );
         }
     },
 
@@ -202,9 +202,9 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     verifyRemovedItemToLeftColumnExisting: {
         value: function (itemNumber) {
-            var prefixXpath = "//div[@data-id='DragDropColumn-0']//div[@data-id='drag-drop-item']";
-            var xPath = prefixXpath + "//div[contains(@data-id, '{itemNumber}')]";
-            return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
+            return this.isExisting(
+                `//div[@data-id='DragDropColumn-0']//div[@data-id='drag-drop-row_${itemNumber}']`
+            );
         }
     },
 

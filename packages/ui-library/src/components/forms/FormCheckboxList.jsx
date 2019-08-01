@@ -22,7 +22,7 @@ var _includesIgnoreCase = function (propName, substr) {
 * @property {string} name
 *    The name for this checkbox item.
 * @property {string} group
-*    The group that this checkbox item blongs to.
+*    The group that this checkbox item belongs to.
 *
 * @example
 *    `{"id": 1, "name": "Salesforce", "group": "Sales and Marketing"}`
@@ -323,7 +323,7 @@ class Stateless extends React.Component {
                                 </div>
                             </If>
                             <FormLabel className="input-checkbox" inline value={item.name}>
-                                <input data-id="checkbox" type="checkbox" name={groupName}
+                                <input data-id={`checkbox_${item.id}`} type="checkbox" name={groupName}
                                     value={item.id} onChange={onChange} checked={checked}/>
                                 <div className="icon"></div>
                             </FormLabel>

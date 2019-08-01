@@ -92,7 +92,7 @@ module.exports = class extends React.Component {
                 current: parseInt(item.label) === currYear,
                 disabled: item.outOfRange
             });
-            return <Cell data-id={"years-cell-" + i} value={item.label} className={className} key={i} />;
+            return <Cell data-id={"years-cell-" + item.label} value={item.label} className={className} key={i} />;
         });
 
         var currentDate = [years[0].label, years[years.length - 1].label].join("-");

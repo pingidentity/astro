@@ -82,6 +82,7 @@ function RowBuilder({
 
     const renderRow = ({ id, content, removable = true }, idx) => {
         const hasRemoveLabel = showRemoveLabel && idx === 0;
+        const rowId = `${dataId}-${id}-delete`;
 
         return (
             <InputRow
@@ -95,7 +96,7 @@ function RowBuilder({
                     }
                     {renderRemoveButton
                         ? isFunction(renderRemoveButton)
-                            ? renderRemoveButton({ id, onRemove, removable })
+                            ? renderRemoveButton({ "data-id": rowId, id, onRemove, removable })
                             : renderRemoveButton
                         : (<Button
                             className={classnames(
@@ -104,7 +105,7 @@ function RowBuilder({
                                     "row-builder__remove__button--hidden": !removable
                                 }
                             )}
-                            data-id={`${dataId}-${id}-delete`}
+                            data-id={rowId}
                             iconName="minus"
                             inline
                             onClick={remove(id)}

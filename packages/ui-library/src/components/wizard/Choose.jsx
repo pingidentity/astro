@@ -175,25 +175,25 @@ class Choose extends React.Component {
     _generateRadioOptions = () => {
         var choice = this._getChoice();
 
-        return React.Children.map(this.props.children, function (e, i) {
+        return React.Children.map(this.props.children, (e, i) => {
             if (e.type.displayName === "Wizard" || e.type.displayName === "Choose") {
                 return (
-                    <label className="input-radio stacked" data-id={this.props["data-id"] + i}>
+                    <label className="input-radio stacked" data-id={this.props["data-id"] + (e.props.title || i)}>
                         <input type="radio"
-                            data-id="radio-option"
+                            data-id={`radio-option_${e.props.title || i}`}
                             disabled={e.disabled}
                             key={e.i}
                             name={this.props.name}
                             checked={i === choice}
                             onChange={this._getChangeHandler(i, this.props.number + this._getSubChildCount(i))}
                         />
-                        <div className="circle"></div>
+                        <div className="circle" />
                         {e.props.title}
                     </label>);
             } else {
                 return e;
             }
-        }.bind(this));
+        });
     };
 
     render() {

@@ -66,7 +66,7 @@ const CheckboxGroup = ({
 
     return (
         <div className="stack-sm" data-id={dataId}>
-            {_.map(options, (option, index) => {
+            {_.map(options, (option) => {
                 if (typeof option !== "object") {
                     option = {
                         value: option,
@@ -91,7 +91,7 @@ const CheckboxGroup = ({
                     <InputRow className={className} key={option.value}>
                         <FormCheckbox
                             stacked
-                            data-id={dataId + "-" + index}
+                            data-id={dataId + "-" + option.value}
                             label={option.label}
                             value={option.value}
                             checked={checked}

@@ -414,7 +414,7 @@ describe("FormDropDownList", function () {
 
     it("list option triggers onValueChange callback on item click", function () {
         var component = getComponent({ open: true });
-        var option1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option-1");
+        var option1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option_1");
 
         ReactTestUtils.Simulate.click(option1);
 
@@ -841,7 +841,7 @@ describe("FormDropDownList", function () {
         });
 
         const selected = TestUtils.findRenderedDOMNodeWithClass(component, "selected");
-        const secondOption = TestUtils.findRenderedDOMNodeWithDataId(component, "option-1");
+        const secondOption = TestUtils.findRenderedDOMNodeWithDataId(component, "option_2");
 
         expect(selected).toEqual(secondOption);
     });

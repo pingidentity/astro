@@ -204,7 +204,7 @@ export default class FrequencyCard extends Component {
             this.state.hoveredItem.id === id ? (
                 <Cell
                     className="frequency-card__hovered"
-                    data-id="donut-pie-cell"
+                    data-id={`donut-pie-cell_${id}`}
                     key={id}
                     fill={colors[key]}
                     style={{
@@ -212,7 +212,7 @@ export default class FrequencyCard extends Component {
                         stroke: this.state.hoveredItem ? colors[key] : null,
                     }}/>
             ) : (
-                <Cell data-id="donut-pie-cell" key={id} fill={colors[key]}/>
+                <Cell data-id={`donut-pie-cell_${id}`} key={id} fill={colors[key]}/>
             )
         );
 

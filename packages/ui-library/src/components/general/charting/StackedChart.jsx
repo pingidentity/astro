@@ -148,7 +148,7 @@ class StackedChart extends Component {
                             legend.map(({ id }, key) => (
                                 <Bar
                                     key={key}
-                                    data-id="stacked-chart-bar"
+                                    data-id={`stacked-chart-bar_${id}`}
                                     dataKey={key}
                                     stackId="a"
                                     onMouseOver={this._handleMouseOver(id)}
