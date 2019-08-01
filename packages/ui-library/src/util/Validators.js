@@ -104,7 +104,7 @@ module.exports = {
      *     Returns true if only empty, numbers, parens, dashes & whitespace present
      */
     isValidPhoneNumber: function (str) {
-        return /^$|^[\d\-\(\)\s\.]+$/g.test(str);
+        return /^$|^[\d\-\(\)\s\.]+$|^\+/g.test(str);
     },
 
     /**

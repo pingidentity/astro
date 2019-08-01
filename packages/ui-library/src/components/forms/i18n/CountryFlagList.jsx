@@ -196,7 +196,7 @@ class CountryFlagList extends React.Component {
                 stateless={true}
                 data-id={this.props["data-id"]}
                 className={containerClassName}
-                options={open ? countryCodesWithValues : [selectedCountry]}
+                options={countryCodesWithValues}
                 contentType={type}
                 onValueChange={this.props.onValueChange}
                 open={open}

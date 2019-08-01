@@ -172,17 +172,16 @@ class I18nPhoneInputStateless extends Component {
     _getCountryCode() {
         const {
             countryCode,
-            dialCode,
+            dialCode = "",
             phoneNumber
         } = this.props;
         if (countryCode !== "") {
             return countryCode;
-        } else if (dialCode !== "" && phoneNumber !== "") {
-            const parsedDialCode = dialCode.startsWith("+")
-                ? dialCode
-                : `+${dialCode}`;
-
-            const { country = "" } = parsePhoneNumberFromString(`${parsedDialCode}${phoneNumber}`) || {};
+        } else if (phoneNumber !== "") {
+            const numberWithCode = `${dialCode}${phoneNumber}`;
+            const { country = "" } = parsePhoneNumberFromString(
+                `${numberWithCode.startsWith("+") ? "" : "+"}${numberWithCode}`
+            ) || {};
             return country.toLowerCase();
         } else {
             return "";
@@ -210,9 +209,16 @@ class I18nPhoneInputStateless extends Component {
         }
     };
 
-    _handlePhoneNumberChange = (e) => {
-        var val = e.target.value;
-        this.props.onValueChange({ dialCode: this.props.dialCode, phoneNumber: val });
+    _handlePhoneNumberChange = ({ target: { value } }) => {
+        const {
+            country = "",
+            countryCallingCode
+        } = parsePhoneNumberFromString(value) || {};
+        this.props.onValueChange({
+            countryCode: this.props.countryCode || country.toLowerCase(),
+            dialCode: this.props.dialCode || countryCallingCode,
+            phoneNumber: value
+        });
     };
 
     render() {

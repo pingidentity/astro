@@ -25,7 +25,11 @@ class I18nPhoneInputDemo extends React.Component {
 
         countryCodeStateless2: "dz",
         dialCodeStateless2: "abc",
-        phoneNumberStateless2: "efg hji klm"
+        phoneNumberStateless2: "efg hji klm",
+
+        countryCodeStateless3: "can",
+        dialCodeStateless3: "1",
+        phoneNumberStateless3: "+1 613 555 0188"
     };
 
     _handleValueChangeStateful = (phoneInputValues) => {
@@ -53,6 +57,12 @@ class I18nPhoneInputDemo extends React.Component {
             });
         }
     };
+
+    _handleAutoDetectUpdate = ({ countryCode, dialCode, phoneNumber }) => this.setState({
+        countryCodeStateless3: countryCode,
+        dialCodeStateless3: dialCode,
+        phoneNumberStateless3: phoneNumber
+    })
 
     _handleDemoToggle = () => {
         this.setState({
@@ -148,6 +158,17 @@ class I18nPhoneInputDemo extends React.Component {
                     &nbsp;{this.state.phoneNumberStateless}
                 </div>
                 <br/>
+                <label className="detached">Country code auto-detected based on phone number</label>
+                <I18nPhoneInput
+                    //stateless
+                    phoneNumber={this.state.phoneNumberStateless3}
+                    onValueChange={this._handleAutoDetectUpdate}
+                />
+                <div>
+                    Country code - {this.state.countryCodeStateless3}
+                    <br />
+                    Dial code - +{this.state.dialCodeStateless3}
+                </div>
             </div>
         );
     }

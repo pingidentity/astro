@@ -181,7 +181,9 @@ describe("I18nPhoneInput", function () {
             }
         });
 
-        expect(component.props.onValueChange).toBeCalledWith({ dialCode: "1", phoneNumber: "111-222" });
+        expect(component.props.onValueChange).toBeCalledWith(
+            { countryCode: "", dialCode: "1", phoneNumber: "111-222" }
+        );
     });
 
     it("stateful: onToggle callback changes open/close state", function () {
