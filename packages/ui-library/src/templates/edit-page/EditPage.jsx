@@ -5,6 +5,7 @@ import FormDropDownList from "../../components/forms/FormDropDownList";
 import InputWidths from "../../components/forms/InputWidths";
 import PageHeader from "../../components/general/PageHeader";
 import Layout from "../../components/general/ColumnLayout";
+import { linkTypes } from "../../components/general/Anchor";
 import Toggle from "../../components/forms/form-toggle";
 import ButtonBar from "../../components/forms/ButtonBar";
 import Button from "../../components/buttons/Button";
@@ -82,7 +83,7 @@ export default class EditPage extends React.Component {
 
         return (
             <div>
-                <Link className="page-return-link" title="To record list"/>
+                <Link type={linkTypes.PAGE_RETURN}>To record list</Link>
                 <PageHeader title="Denver Broncos"
                     underlined={true}
                     accessories={[

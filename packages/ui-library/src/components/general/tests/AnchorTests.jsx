@@ -43,7 +43,7 @@ describe("Anchor", function() {
 
     it("renders an add link", function() {
         var component = ReactTestUtils.renderIntoDocument(
-            <Anchor type="add">Hello</Anchor>
+            <Anchor type={Anchor.linkTypes.ADD}>Hello</Anchor>
         );
 
         var element = TestUtils.findRenderedDOMNodeWithClass(component, "icon-plus");
@@ -53,11 +53,22 @@ describe("Anchor", function() {
 
     it("renders a remove link", function() {
         var component = ReactTestUtils.renderIntoDocument(
-            <Anchor type="remove">Hello</Anchor>
+            <Anchor type={Anchor.linkTypes.REMOVE}>Hello</Anchor>
         );
 
         var element = TestUtils.findRenderedDOMNodeWithClass(component, "icon-clear");
 
         expect(element).toBeTruthy();
     });
+
+    it("renders page return link", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Anchor type={Anchor.linkTypes.PAGE_RETURN}> Hello</Anchor>
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "page-return-link");
+
+        expect(element).toBeTruthy();
+    });
 });
+

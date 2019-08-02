@@ -9,6 +9,7 @@ import ExpandableRow from "../components/rows/ExpandableRow";
 import { TabSet, TabContent } from "../components/layout/TabSet";
 import { allFlags } from "../util/FlagUtils";
 import Link from "../components/general/Link";
+import { linkTypes } from "../components/general/Anchor";
 import RowBuilder, { Separator } from "../components/rows/RowBuilder";
 import FormDropDownList from "../components/forms/FormDropDownList";
 import FormTextField from "../components/forms/form-text-field";
@@ -174,10 +175,7 @@ export default class OicoAccessToken extends Component {
         {
             return (
                 <div>
-                    <Link title="To Resource List"
-                        className="page-return-link"
-                        onClick = {this.toggleAddResource}
-                    />
+                    <Link type={linkTypes.PAGE_RETURN} onClick = {this.toggleAddResource}>To Resource List</Link>
                     <PageHeader
                         title="Custom Access Token"
                         subtitle="Content about what this is. Lorem ipsum dolor sit amet."

@@ -2,6 +2,7 @@ import React from "react";
 import DragDropTable from "../../components/tables/DragDropTable";
 import mockData from "../reports-page/mockData";
 import Link from "../../components/general/Link";
+import { linkTypes } from "../../components/general/Anchor";
 import _ from "underscore";
 import ReportFilters from "../../components/layout/ReportFilters";
 import { InputWidths } from "../../components/forms/InputWidths";
@@ -215,7 +216,7 @@ export default class Reports extends React.Component {
         ];
         return (
             <div>
-                <Link className="page-return-link" title="To record list"/>
+                <Link type={linkTypes.PAGE_RETURN}>To record list</Link>
                 <PageHeader title="Report Paramaters" bottomMarginSize={bottomMargin.XS} />
                 <ReportFilters
                     buttonLabel="Run"

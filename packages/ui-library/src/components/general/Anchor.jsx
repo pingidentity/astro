@@ -50,9 +50,9 @@ class Anchor extends React.Component {
         switch (type) {
             case linkTypes.ADD: return <span className="icon-plus anchor__icon" />;
             case linkTypes.REMOVE: return <span className="icon-clear anchor__icon" />;
-            case linkTypes.PAGE_RETURN: return <span className="content-link__return"/>;
+            case linkTypes.PAGE_RETURN:
             case linkTypes.BLOCK:
-            default : return null;
+            default: return null;
         }
     }
 
@@ -63,7 +63,8 @@ class Anchor extends React.Component {
             <a
                 tabIndex="0"
                 {...props}
-                className={classnames("anchor", className, { disabled })}
+                className={classnames("anchor", className,
+                    { disabled, "page-return-link": type === linkTypes.PAGE_RETURN })}
                 onMouseDown={this._dontFocus}
                 onKeyPress={this._handleKeyPress}
             >
