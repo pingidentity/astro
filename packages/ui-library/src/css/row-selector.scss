@@ -66,10 +66,9 @@
     }
     &__available,
     &__added {
-        @include flexbox-grow(1);
         box-sizing: border-box;
-        flex-basis: 50%;
-        margin: 0 $spacing-lg 0 0;
+        width: 50%;
+        padding: 0 $spacing-lg 0 0;
         .items {
             border-top: 1px solid $color-rabbit-fur;
             border-bottom: 1px solid $color-rabbit-fur;
@@ -254,6 +253,7 @@
     padding: $spacing-sm;
     background-color: $color-white;
     border: 1px solid $color-strong-neutral-70;
+    overflow: hidden;
 
     :first-child > & {
         margin-top: -1px;
@@ -295,16 +295,24 @@
 
     &__labels {
         @include flexbox-grow(1);
+        overflow: hidden;
+        margin: 0 35px 0 0;
     }
 
     &__name {
         color: $color-midnight;
         font-size: 15px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     &__category {
         color: $color-elephant;
         font-size: 14px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
