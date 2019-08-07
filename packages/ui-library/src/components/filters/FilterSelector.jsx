@@ -147,6 +147,7 @@ class FilterSelector extends React.Component {
         return (
             <span data-id={dataId} className={className}>
                 <Popover
+                    data-id="filter-selector-container"
                     label={
                         <SelectionFilterLabel
                             open={open}

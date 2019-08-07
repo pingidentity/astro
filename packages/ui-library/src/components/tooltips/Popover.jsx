@@ -44,6 +44,7 @@ class PopoverBase extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
+        "data-parent": PropTypes.string,
         children: PropTypes.node,
         className: PropTypes.string,
         flags: flagsPropType,
@@ -139,6 +140,8 @@ class PopoverBase extends React.Component {
         return this._usePortal() ? (
             <PopperContainer
                 className={classnames("popover-display", this.props.popperClassName)}
+                data-id="popup-frame"
+                data-parent={this.props["data-id"]}
                 getReference={this._getReference}
                 pointerClassName="popup-frame__pointer"
                 placement={getPlacement()}
@@ -165,7 +168,7 @@ class PopoverBase extends React.Component {
         );
 
         return (
-            <div className={containerClassName} data-id={this.props["data-id"]} ref="content">
+            <div className={containerClassName} data-id={this.props["data-id"]}>
                 <a
                     className={classnames(
                         "popover__trigger",

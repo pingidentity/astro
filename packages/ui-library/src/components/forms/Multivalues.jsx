@@ -612,6 +612,8 @@ class Multivalues extends Component {
                 </div>
                 {filteredOptions && (filteredOptions.length > 0) && (listOpen) && (
                     <PopperContainer
+                        data-id="multivalue-options-container"
+                        data-parent={this.props["data-id"]}
                         key={`popper-${entries.length}-${draft}`}
                         className="input-multivalues__popper"
                         getReference={this._getTrigger}

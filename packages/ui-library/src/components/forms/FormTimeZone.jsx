@@ -554,7 +554,6 @@ class TimeZoneStateless extends React.Component {
                 ref="input-timezone"
                 description={this.props.description}
             >
-            
                 <PopoverBase
                     data-id="tooltip-menu"
                     label={this._renderLabel()}

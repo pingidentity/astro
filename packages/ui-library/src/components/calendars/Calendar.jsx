@@ -445,6 +445,7 @@ class BaseCalendar extends React.Component {
             ? (
                 <PopperContainer
                     className="calendar-popup"
+                    data-parent={this.props["data-id"]}
                     getReference={this._getReference}
                     placement="bottom-start"
                     ref={el => this.popperContainer = el}

@@ -948,6 +948,7 @@ class FormDropDownListStateless extends React.Component {
                             ? (this.props.open &&
                                 <PopperContainer
                                     data-id={this.props["data-id"]+"-dropdown"}
+                                    data-parent={this.props["data-id"]}
                                     getReference={this._getReference}
                                     className={containerClassName}
                                     placement="bottom-start"
