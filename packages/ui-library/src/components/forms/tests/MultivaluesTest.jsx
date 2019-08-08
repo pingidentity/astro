@@ -10,7 +10,7 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import Utils from "../../../util/Utils";
 import TestUtils from "../../../testutil/TestUtils";
-import Multivalues from "../Multivalues";
+import { MultivaluesBase as Multivalues } from "../Multivalues";
 import { KeyCodes } from "../../../util/KeyboardUtils";
 import options from "../../../demo/components/forms/data/userOptions";
 import { mount } from "enzyme";

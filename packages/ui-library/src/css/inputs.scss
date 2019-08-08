@@ -25,13 +25,33 @@ $default-input-border-radius: 2px;
   but it will still show up on keyboard focus.
 */
 
-.js-focus-visible {
-    .input-radio > input:focus:not(.focus-visible) {
+.button,
+.input-radio > input,
+.input-radio--autofocus,
+.anchor,
+.rocker-button__button,
+.value-input__input,
+.option-list,
+.icon,
+.icon--clickable {
+    &:focus {
         outline-width: 0;
     }
+}
 
-    [class$='--autofocus']:focus:not(.focus-visible) {
-        outline-width: 5px;
+.ui-library-focus-visible {
+    .button,
+    .input-radio > input,
+    .input-radio--autofocus,
+    .anchor,
+    .rocker-button__button,
+    .value-input__input,
+    .option-list,
+    .icon,
+    .icon--clickable {
+        &:focus {
+            outline-width: 5px;
+        }
     }
 }
 

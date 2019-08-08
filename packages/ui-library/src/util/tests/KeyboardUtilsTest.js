@@ -2,6 +2,9 @@ window.__DEV__ = true;
 
 jest.dontMock("../KeyboardUtils.js");
 
+import React from "react";
+import { mount } from "enzyme";
+
 describe("KeyboardUtils", function () {
     var KeyboardUtils = require("../KeyboardUtils.js");
 
@@ -38,7 +41,7 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.ModifierCodes.indexOf(27) === -1).toBe(true); //ESC
             expect(KeyboardUtils.ModifierCodes.indexOf(37) === -1).toBe(true); //ARROW_LEFT
             expect(KeyboardUtils.ModifierCodes.indexOf(38) === -1).toBe(true); //ARROW_UP
-            expect(KeyboardUtils.ModifierCodes.indexOf(39) === -1).toBe(true); //ARRORW_RIGHT
+            expect(KeyboardUtils.ModifierCodes.indexOf(39) === -1).toBe(true); //ARROW_RIGHT
             expect(KeyboardUtils.ModifierCodes.indexOf(40) === -1).toBe(true); //ARROW_DOWN
         });
     });
@@ -354,6 +357,47 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+        });
+    });
+
+    describe("withFocusOutline", () => {
+        it("sets uiLibComponentCount on mount and adds event listener if count is not set", () => {
+            document.addEventListener = jest.fn();
+            const Test = KeyboardUtils.withFocusOutline(() => <div />);
+            mount(<Test />);
+
+            expect(document.body.dataset.uiLibComponentCount).toEqual("1");
+            expect(document.addEventListener).toHaveBeenCalled();
+        });
+
+        it("increments uiLibComponentCount on mount but does not add event listener if count is > 0", () => {
+            document.addEventListener = jest.fn();
+            document.body.dataset.uiLibComponentCount = "1";
+            const Test = KeyboardUtils.withFocusOutline(() => <div />);
+            mount(<Test />);
+
+            expect(document.body.dataset.uiLibComponentCount).toEqual("2");
+            expect(document.addEventListener).not.toHaveBeenCalled();
+        });
+
+        it("sets uiLibComponentCount to 0 and removes event listener on unmount of count is 1", () => {
+            document.removeEventListener = jest.fn();
+            document.body.dataset.uiLibComponentCount = "0";
+            const Test = KeyboardUtils.withFocusOutline(() => <div />);
+            mount(<Test />).unmount();
+
+            expect(document.body.dataset.uiLibComponentCount).toEqual("0");
+            expect(document.removeEventListener).toHaveBeenCalled();
+        });
+
+        it("decrements uiLibComponentCount on unmount but does not remove event listener if count is < 1", () => {
+            document.removeEventListener = jest.fn();
+            document.body.dataset.uiLibComponentCount = "1";
+            const Test = KeyboardUtils.withFocusOutline(() => <div />);
+            mount(<Test />).unmount();
+
+            expect(document.body.dataset.uiLibComponentCount).toEqual("1");
+            expect(document.removeEventListener).not.toHaveBeenCalled();
         });
     });
 });

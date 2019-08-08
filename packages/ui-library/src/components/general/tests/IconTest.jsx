@@ -74,7 +74,7 @@ describe("Icon", function () {
     it("renders title if that prop is passed in", () => {
         const component = shallow(
             <Icon iconName="globe" title="Test" />
-        );
+        ).dive();
 
         const label = component.find("label");
 
@@ -86,7 +86,7 @@ describe("Icon", function () {
         const click = () => console.log("QUACK QUACK QUACK");
         const component = shallow(
             <Icon iconName="globe" onClick={click} />
-        );
+        ).dive();
 
         expect(component.props().tabIndex).toEqual(0);
     });

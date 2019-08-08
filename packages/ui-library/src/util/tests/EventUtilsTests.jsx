@@ -61,14 +61,6 @@ describe("ReduxUtils", function () {
         callback.mockClear();
     });
 
-    it("prevents default behavior with noFocus", function() {
-        const e = { preventDefault: jest.fn() };
-
-        expect(e.preventDefault).not.toBeCalled();
-        Utils.noFocus(e);
-        expect(e.preventDefault).toBeCalled();
-    });
-
     it("prevents default on specified keys and not on others", function() {
         const map = { 13: () => true };
 

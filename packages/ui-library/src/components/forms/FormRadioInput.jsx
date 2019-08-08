@@ -1,9 +1,9 @@
-import "focus-visible";
-
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    FormLabel = require("./FormLabel");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import FormLabel from "./FormLabel";
+// Would have just destructured out withFocusOutline, but this causes issues in the FormRadioGroup for some reason
+import KeyboardUtils from "../../util/KeyboardUtils";
 
 /**
  * @callback FormRadioInput~onValueChange
@@ -42,7 +42,7 @@ var React = require("react"),
  *    The value for the input.
  *
  * @param {boolean} [disabled]
- *    If true, disables current radio input in both functionaly and style.
+ *    If true, disables current radio input in both functionality and style.
  *
  * @example
  *
@@ -54,7 +54,7 @@ var React = require("react"),
  *
  */
 
-class FormRadioInput extends React.Component {
+class FormRadioInputBase extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
@@ -119,4 +119,7 @@ class FormRadioInput extends React.Component {
         );
     }
 }
-module.exports = FormRadioInput;
+
+const FormRadioInput = KeyboardUtils.withFocusOutline(FormRadioInputBase);
+
+export default FormRadioInput;

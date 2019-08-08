@@ -114,12 +114,3 @@ exports.handleKeydowns = function (map, killEvent) {
         }
     };
 };
-
-/**
- * @alias module:util/EventUtils.noFocus
- * @desc Give this to mouseDown to prevent focusing with the mouse.
- *       Usually used for items that should be focused by tabbing.
- */
-exports.noFocus = function (e) {
-    e.preventDefault();
-};

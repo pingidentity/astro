@@ -1,3 +1,5 @@
+import React, { Component } from "react";
+
 /*eslint-disable valid-jsdoc*/
 
 /**
@@ -228,3 +230,54 @@ exports.isArrowKey = function (code) {
 * @return {boolean}
 *    Whether or not the code is a keyboard right alt key code.
 */
+
+// Trying to get global event listeners to actually fire in Jest is really, really complicated.
+/* istanbul ignore next  */
+const addFocusClass = ({ keyCode }) => {
+    if (keyCode === 9) {
+        document.body.classList.add("ui-library-focus-visible");
+    }
+};
+
+/* istanbul ignore next  */
+const removeFocusClass = () => document.body.classList.remove("ui-library-focus-visible");
+
+/**
+* @function module:util/KeyboardUtils.withFocusOutline
+* @desc
+*    A higher order component that sets up a component to show focus outlines when tab
+*       is pressed and removes them when the mouse is used.
+*
+* @return {function}
+*    The component, but now with lifecycle methods to add global listeners for adding and
+*    removing focus class.
+*/
+exports.withFocusOutline = WrappedComponent => class extends Component {
+    componentDidMount() {
+        const componentCount = parseInt(document.body.dataset.uiLibComponentCount || 0, 10);
+        if (componentCount > 0) {
+            document.body.dataset.uiLibComponentCount = componentCount + 1;
+        } else {
+            document.body.dataset.uiLibComponentCount = 1;
+            document.addEventListener("keydown", addFocusClass);
+            document.addEventListener("mousedown", removeFocusClass);
+        }
+    }
+
+    componentWillUnmount() {
+        const componentCount = parseInt(document.body.dataset.uiLibComponentCount || 0, 10);
+
+        if (componentCount === 1) {
+            document.body.dataset.uiLibComponentCount = 0;
+            document.removeEventListener("keydown", addFocusClass);
+            document.removeEventListener("mousedown", removeFocusClass);
+            removeFocusClass();
+        } else {
+            document.body.dataset.uiLibComponentCount = componentCount - 1;
+        }
+    }
+
+    render() {
+        return <WrappedComponent {...this.props} />;
+    }
+};

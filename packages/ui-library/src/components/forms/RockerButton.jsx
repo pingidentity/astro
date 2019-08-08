@@ -5,8 +5,9 @@ import HelpHint from "../tooltips/HelpHint";
 import _ from "underscore";
 import Utils from "../../util/Utils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
-import { inStateContainer } from "../utils/StateContainer";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { withFocusOutline } from "../../util/KeyboardUtils";
+import { inStateContainer } from "../utils/StateContainer";
 
 /**
 * @typedef RockerButton~labelValues
@@ -186,8 +187,6 @@ class RockerButtonStateless extends React.Component {
     }
 }
 
-const dontFocus = event => event.preventDefault();
-
 var RockerButtonLabel = function (props) {
     var _handleClick = function (event) {
         props.onClick(props.text, props.index, event);
@@ -205,7 +204,7 @@ var RockerButtonLabel = function (props) {
             hintText={props.helpText} >
             <button
                 data-id={`rocker-label_${sanitizedLabel}`}
-                onMouseDown={dontFocus}
+                className="rocker-button__button"
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
             >
@@ -214,7 +213,7 @@ var RockerButtonLabel = function (props) {
         </HelpHint>
         : <button
             data-id={`rocker-label_${sanitizedLabel}`}
-            onMouseDown={dontFocus}
+            className="rocker-button__button"
             onClick={_handleClick}
             autoFocus={props.autoFocus}
         >
@@ -261,17 +260,19 @@ class RockerButtonStateful extends React.Component {
     }
 }
 
-const PStatefulRockerButton = inStateContainer([
-    {
-        name: "selectedIndex",
-        initial: 0,
-        callbacks: [
-            {
-                name: "onValueChange",
-                transform: ({ index }) => index
-            }
-        ],
-    }
-])(RockerButtonStateless);
+const PStatefulRockerButton = withFocusOutline(
+    inStateContainer([
+        {
+            name: "selectedIndex",
+            initial: 0,
+            callbacks: [
+                {
+                    name: "onValueChange",
+                    transform: ({ index }) => index
+                }
+            ],
+        }
+    ])(RockerButtonStateless)
+);
 
 PStatefulRockerButton.displayName = "PStatefulRockerButton";

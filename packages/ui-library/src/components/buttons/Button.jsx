@@ -5,6 +5,7 @@ import HelpHint from "../tooltips/HelpHint";
 import EllipsisLoader from "../general/EllipsisLoader";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { withFocusOutline } from "../../util/KeyboardUtils";
 
 /**
  * @class Button
@@ -54,9 +55,7 @@ const buttonTypes = {
 
 const buttonTypeList = Object.values(buttonTypes);
 
-const dontFocus = event => event.preventDefault();
-
-function Button ({
+function BaseButton ({
     active,
     children,
     className,
@@ -109,7 +108,6 @@ function Button ({
         <TagName
             className = {classes}
             data-id={dataId}
-            onMouseDown={dontFocus}
             onClick={onClick}
             disabled={disabled}
             type={submit ? "submit" : "button"}
@@ -134,6 +132,8 @@ function Button ({
             : Tags
     );
 }
+
+const Button = withFocusOutline(BaseButton);
 
 Button.propTypes = {
     active: PropTypes.bool,

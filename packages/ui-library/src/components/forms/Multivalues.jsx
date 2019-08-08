@@ -21,8 +21,8 @@ import {
     isArrowDown,
     isArrowLeft,
     isArrowRight,
+    withFocusOutline
 } from "../../util/KeyboardUtils.js";
-import { noFocus } from "../../util/EventUtils";
 import Icon from "../general/Icon";
 
 const placeholder = document.createElement("span");
@@ -157,7 +157,7 @@ class MultivaluesOption extends Component {
  */
 
 
-class Multivalues extends Component {
+export class MultivaluesBase extends Component {
 
     static displayName = "Multivalues";
 
@@ -586,7 +586,7 @@ class Multivalues extends Component {
                 data-id={this.props["data-id"]}
                 description={this.props.description}
             >
-                <div className={entryClassNames} data-id="entries" ref={el => this.inputBox = el} onMouseDown={noFocus}>
+                <div className={entryClassNames} data-id="entries" ref={el => this.inputBox = el}>
                     {entryNodes}
                     <div className="value-input">
                         <div className="value-input__wrapper">
@@ -643,4 +643,6 @@ class Multivalues extends Component {
     }
 }
 
-module.exports = Multivalues;
+const Multivalues = withFocusOutline(MultivaluesBase);
+
+export default Multivalues;

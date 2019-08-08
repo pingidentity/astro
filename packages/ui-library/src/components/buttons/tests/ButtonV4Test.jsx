@@ -76,18 +76,6 @@ describe("Button", function () {
         expect(button).toBeTruthy();
     });
 
-    it("prevents default for a mouse down event", function() {
-        const callback = jest.fn();
-        const component = getComponent();
-        const button = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
-
-        const event = { preventDefault: callback };
-
-        expect(callback).not.toBeCalled();
-        ReactTestUtils.Simulate.mouseDown(button, event);
-        expect(callback).toBeCalled();
-    });
-
     it("should not show the Cannonball warning if 'noSpacing' is true", function() {
         console.warn = jest.fn();
 

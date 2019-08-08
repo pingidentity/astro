@@ -77,9 +77,9 @@ describe("PropUtils", function () {
 
     describe("getIcon", function () {
         it("returns icon if string passed in", function () {
-            const component = shallow (
+            const component = shallow(
                 getIcon("globe")
-            );
+            ).dive();
             expect(component.find(".icon-globe").exists()).toEqual(true);
         });
         it("returns icon if icon is passed in", function () {

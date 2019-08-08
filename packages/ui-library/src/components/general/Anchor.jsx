@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
-import KeyboardUtils from "../../util/KeyboardUtils";
+import KeyboardUtils, { withFocusOutline } from "../../util/KeyboardUtils";
 
 const linkTypes = {
     ADD: "add",
@@ -22,7 +22,7 @@ const linkTypes = {
  *     Callback to be triggered when trigger is clicked.
  */
 
-class Anchor extends React.Component {
+class AnchorBase extends React.Component {
     static propTypes = {
         children: PropTypes.node,
         "data-id": PropTypes.string,
@@ -35,10 +35,6 @@ class Anchor extends React.Component {
         onClick: _.noop,
         type: "block"
     };
-
-    static linkTypes = linkTypes;
-
-    _dontFocus = e => e.preventDefault();
 
     _handleKeyPress = e => {
         if (e.charCode === KeyboardUtils.KeyCodes.ENTER || e.charCode === KeyboardUtils.KeyCodes.SPACE) {
@@ -65,7 +61,6 @@ class Anchor extends React.Component {
                 {...props}
                 className={classnames("anchor", className,
                     { disabled, "page-return-link": type === linkTypes.PAGE_RETURN })}
-                onMouseDown={this._dontFocus}
                 onKeyPress={this._handleKeyPress}
             >
                 {this._typeIcon(type)}
@@ -75,4 +70,8 @@ class Anchor extends React.Component {
     };
 }
 
-module.exports = Anchor;
+const Anchor = withFocusOutline(AnchorBase);
+
+Anchor.linkTypes = linkTypes;
+
+export default Anchor;

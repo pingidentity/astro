@@ -1,12 +1,9 @@
-"use strict";
-
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { getIconClassName } from "../../util/PropUtils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
-import { noFocus } from "../../util/EventUtils";
-import { getClickableA11yProps } from "../../util/PropUtils";
+import { withFocusOutline } from "../../util/KeyboardUtils";
+import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
 
 
 /**
@@ -51,7 +48,7 @@ const iconSizes = {
 };
 
 
-const Icon = ({
+const Icon = withFocusOutline(({
     className,
     containerClassName,
     children,
@@ -76,7 +73,6 @@ const Icon = ({
     const onClickProps = onClick ? {
         onClick,
         // Prevent focus on click
-        onMouseDown: noFocus,
         ...getClickableA11yProps(onClick)
     } : {};
 
@@ -128,7 +124,7 @@ const Icon = ({
             )}
         </div>
     );
-};
+});
 
 Icon.propTypes = {
     "data-id": PropTypes.string,

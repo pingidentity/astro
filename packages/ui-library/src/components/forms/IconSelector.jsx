@@ -1,7 +1,6 @@
 import React from "react";
 import FormRadioGroup from "./FormRadioGroup";
 import Icon from "../general/Icon";
-import { noFocus } from "../../util/EventUtils";
 import classnames from "classnames";
 
 /**
@@ -34,7 +33,7 @@ const IconItem = ({ label, onValueChange, value, checked }) => {
     });
 
     return (
-        <button onClick={onClick} onMouseDown={noFocus} className={className} data-id="icon-selector-button">
+        <button onClick={onClick} className={className} data-id="icon-selector-button">
             {<Icon iconName={label} type="inline" />}
         </button>
     );
