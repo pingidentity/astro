@@ -258,6 +258,7 @@ export default class CustomDomainName extends Component {
             return (
                 <Padding
                     left={this.state.selectedFile ? undefined : sizes.MD}
+                    top={this.state.selectedFile ? undefined : sizes.LG}
                 >
                     <FileInput
                         accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
