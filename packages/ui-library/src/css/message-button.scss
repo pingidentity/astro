@@ -16,9 +16,9 @@ button.message-button {
     }
 
     &--loading {
-        background: $color-accent-neutral-10;
-        border-color: $color-accent-neutral-10 !important;
-        color: $color-white;
+        background: transparent;
+        border-color: $color-neutral-50 !important;
+        color: $color-accent-neutral-10;
 
         .icon-ellipsis {
             margin: 0 $spacing-md;
@@ -26,11 +26,8 @@ button.message-button {
             &:before,
             &:after,
             span {
-                background-color: $color-white;
+                background-color: $color-accent-neutral-10;
             }
-        }
-        &:hover {
-            color: $color-white !important;
         }
     }
     &--success,
