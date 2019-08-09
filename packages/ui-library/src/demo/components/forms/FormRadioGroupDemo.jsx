@@ -1,5 +1,5 @@
 import React from "react";
-import FormRadioGroup, { FormLabel } from "../../../components/forms/FormRadioGroup";
+import FormRadioGroup from "../../../components/forms/FormRadioGroup";
 import InputRow from "../../../components/layout/InputRow";
 
 /**
@@ -85,27 +85,9 @@ class FormRadioGroupDemo extends React.Component {
                     />
                 </InputRow>
 
-                <InputRow>
-                    <FormRadioGroup
-                        groupName="hidden-stacked-group"
-                        selected={this.state.selectedId4}
-                        onValueChange={this._handleChange(4)}
-                        items={radioItemsWithHidden}
-                        labelNode={
-                            <FormLabel
-                                data-id="Example ID"
-                                value="Date with date range"
-                                hint="Selection outside of date range is not permitted"
-                                description="Sample Description"
-                            />
-                        }
-                    />
-                </InputRow>
-
             </div>
         );
     }
 }
-
 
 module.exports = FormRadioGroupDemo;
