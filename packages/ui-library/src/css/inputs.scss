@@ -81,6 +81,7 @@ select {
     }
 }
 
+
 // Tag styling
 input[type=text],
 input[type=password],
@@ -689,6 +690,7 @@ label {
 fieldset {
     margin: 0 0 25px;
     clear: both;
+    min-width: 0;
 
     .input-select {
         margin-right: 0;
