@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormDropDownList v4 data id's don't change 1`] = `"form-drop-down-list"`;
+
+exports[`FormDropDownList v4 data id's don't change 2`] = `"form-drop-down-list"`;
+
+exports[`FormDropDownList v4 data id's don't change 3`] = `"form-drop-down-list"`;
+
+exports[`FormDropDownList v4 data id's don't change 4`] = `"selected-option"`;
+
+exports[`FormDropDownList v4 data id's don't change 5`] = `"selected-input"`;
+
+exports[`FormDropDownList v4 data id's don't change 6`] = `"selected-input"`;
+
+exports[`FormDropDownList v4 data id's don't change 7`] = `"selected-input"`;
+
+exports[`FormDropDownList v4 data id's don't change 8`] = `"text-field_container"`;
+
+exports[`FormDropDownList v4 data id's don't change 9`] = `"selected-input-input"`;

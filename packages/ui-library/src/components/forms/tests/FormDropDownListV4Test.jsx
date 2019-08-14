@@ -52,6 +52,19 @@ describe("FormDropDownList v4", function () {
         window.removeEventListener.mockClear();
     });
 
+    it("data id's don't change", () => {
+        const props = {
+            stateless: true,
+            options: options,
+            selectedOption: options[0],
+            onToggle: jest.fn(),
+            onSearch: jest.fn(),
+            onValueChange: jest.fn(),
+            flags: allFlags,
+        };
+        TestUtils.mountSnapshotDataIds(<FormDropDownList {...props} />);
+    });
+
     it("renders the component with default data-id", function () {
         const component = getComponent();
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "form-drop-down-list")).toBeTruthy();

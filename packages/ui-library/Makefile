@@ -101,7 +101,7 @@ define version_and_tag
 endef
 
 define run_coverage
-	npm run coverage
+	npm run coverage-ci
 	rm -rf $$TMPDIR/jest_preprocess_cache
 endef
 

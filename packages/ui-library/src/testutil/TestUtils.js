@@ -1,6 +1,6 @@
 /*eslint-disable valid-jsdoc*/
-
-"use strict";
+// Don't fire warning that these are in devDependencies
+/*eslint-disable import/no-extraneous-dependencies  */
 
 /**
  * @module util/TestUtils
@@ -10,10 +10,11 @@
  *     and not in the library.
  */
 
-var ReactDOM = require("react-dom");
-var React = require("react");
-var ReactTestUtils = require("react-dom/test-utils");
-var _ = require("underscore");
+import ReactDOM from "react-dom";
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import _ from "underscore";
+import { mount, shallow } from "enzyme";
 
 var TestUtils = {
 
@@ -472,6 +473,14 @@ TestUtils.checkForDataIds = function (component, ids) {
     }, true);
 };
 
+TestUtils.snapshotDataIds = node => {
+    const dataIds = node.find("[data-id]");
+    dataIds.forEach(element => {
+        expect(element.prop("data-id")).toMatchSnapshot();
+    });
+};
 
+TestUtils.shallowSnapshotDataIds = component => TestUtils.snapshotDataIds(shallow(component));
+TestUtils.mountSnapshotDataIds = component => TestUtils.snapshotDataIds(mount(component));
 
 module.exports = TestUtils;

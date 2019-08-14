@@ -196,6 +196,7 @@
     "stylelint": "stylelint \"src/css/**/*.scss\" --config ./.stylelintrc --syntax scss",
     "jest": "jest && node ./clean-after.js",
     "coverage": "jest --coverage && node ./clean-after.js",
+    "coverage-ci": "jest --coverage --ci && node ./clean-after.js",
     "test": "jest",
     "verify": "npm run jslint && npm run stylelint && npm run test",
     "integration": "wdio wdio.conf.js",
