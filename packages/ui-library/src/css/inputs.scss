@@ -854,6 +854,8 @@ input[type=file] {
             }
         }
     }
+
+
     select {
         appearance: none;
         border: 0;
@@ -2106,17 +2108,47 @@ input[type=file] {
             top: calc(100% - 20px);
 
             @include border-radius($default-input-border-radius);
+
+        }
+    }
+    &.unit-input {
+        margin: 0 12px 0 0 !important;
+
+        .input-message__icon {
+            top: round(($default-input-height) - 6);
+            right: -12px;
+        }
+        .input-message__text {
+            box-sizing: border-box;
+            min-width: calc(100% - 10px);
+        }
+
+        .unit-input__drop-down-list--error {
+            border-left-width: 0;
+            margin-left: -1px;
+        }
+
+        .unit-input__text-field--error input[type=text],
+        .unit-input__drop-down-list--error input[type=text],
+        .unit-input__drop-down-list--error .readonly input[type=text] {
+            border: 1px solid $color-critical-red;
+
+            &:hover {
+                border: 1px solid $color-critical-red;
+                margin-bottom: 0 !important;
+            }
         }
     }
     &.input-textselect {
+
         > .input-text {
-            .input-message__icon,
-            .form-error-icon {
-                right: -($message-input-offset)x;
-            }
-            .input-message__text,
-            .form-error-message {
-                right: 1px;
+            padding-right: $icon-spacing;
+            margin-right: -$icon-spacing !important;
+        }
+        &:hover,
+        &:focus {
+            .input-message .input-message__text {
+                display: block;
             }
         }
     }
@@ -2494,6 +2526,7 @@ input[type=file] {
     // UnitInput Component
     &.unit-input {
         white-space: nowrap;
+        margin: 0;
         .input-custom-select {
             padding-top: 0;
             padding-bottom: 0;
@@ -2756,6 +2789,10 @@ $input-width-settings-map-select: input-width-map(
 );
 
 label {
+    &.unit-input__text-field--error,
+    .unit-input__drop-down-list--error {
+        margin-bottom: 0 !important;
+    }
     &.input-width-xsmall,
     &.input-width-small,
     &.input-width-medium,
@@ -3144,4 +3181,3 @@ label.input-text--right-icon {
     font-size: 10px;
     text-transform: lowercase;
 }
-

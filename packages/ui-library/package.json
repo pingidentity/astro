@@ -205,7 +205,8 @@
     "compile-sass": "node ./compile-sass.js",
     "generate-release-notes": "node ./generateReleaseNotes.js",
     "generate-template-dictionary": "node ./generate-template-dictionary",
-    "check-licenses": "license-checker --production --excludePackages '@pingone/net@0.1.3' --onlyAllow 'MIT;BSD-3-Clause;Apache-2.0;BSD-2-Clause;ISC;Public Domain'"
+    "check-licenses": "license-checker --production --excludePackages '@pingone/net@0.1.3' --onlyAllow 'MIT;BSD-3-Clause;Apache-2.0;BSD-2-Clause;ISC;Public Domain'",
+    "lint": "npm run jslint && npm run stylelint"
   },
   "csrfDataSourceApiConfig": {}
 }

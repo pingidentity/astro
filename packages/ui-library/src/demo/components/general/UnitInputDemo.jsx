@@ -21,26 +21,36 @@ const OPTIONS = [
 class UnitInputDemo extends React.Component {
     static flags = [ "use-portal" ];
 
-    constructor(props) {
-        super(props);
-        var initialState = {
-            a: "1",
-            b: "2",
-            selectedValue: { label: "Day(s)", value: "Day(s)" }
-        };
-        this.state = initialState;
-    }
 
-    _handleTextValueChange = (e) => {
+    state = {
+        unitInputExample1: "1",
+        unitInputExample2: "1",
+        selectedValue1: { label: "Day(s)", value: "Day(s)" },
+        selectedValue2: { label: "Day(s)", value: "Day(s)" }
+    };
+
+    _handleTextValueChange1 = (input) => {
         this.setState({
-            a: e
+            unitInputExample1: input
         });
     };
 
-    _handleDropdownValueChange = (value) => {
-        var newState = {};
-        newState["selectedValue"] = value;
-        this.setState(newState);
+    _handleDropdownValueChange1 = (value) => {
+        this.setState({
+            selectedValue1: value
+        });
+    };
+
+    _handleTextValueChange2 = (input) => {
+        this.setState({
+            unitInputExample2: input
+        });
+    };
+
+    _handleDropdownValueChange2 = (value) => {
+        this.setState({
+            selectedValue2: value
+        });
     };
 
     render() {
@@ -50,21 +60,43 @@ class UnitInputDemo extends React.Component {
                     <UnitInput
                         labelText="Unit Input Text"
                         textFieldProps={{
-                            onValueChange: this._handleTextValueChange,
-                            value: this.state.a,
+                            onValueChange: this._handleTextValueChange1,
+                            value: this.state.unitInputExample1,
                             width: InputWidths.XS,
                             name: "text-field",
                         }}
                         dropDownListProps={{
                             options: OPTIONS,
-                            onValueChange: this._handleDropdownValueChange,
-                            selectedOption: this.state.selectedValue,
-                            width: InputWidths.XS,
+                            onValueChange: this._handleDropdownValueChange1,
+                            selectedOption: this.state.selectedValue1,
+                            width: InputWidths.SM,
                             name: "dropdown"
                         }}
                     />
                     <br /><br />
-                    Selected Value: <strong>{this.state.a} {this.state.selectedValue.value}</strong>
+                    Selected Value: <strong>{this.state.unitInputExample1} {this.state.selectedValue1.value}</strong>
+                </InputRow>
+
+                <InputRow>
+                    <UnitInput
+                        labelText="Unit Input Text With Error"
+                        errorMessage ="Unit Input Error Message."
+                        textFieldProps={{
+                            onValueChange: this._handleTextValueChange2,
+                            value: this.state.unitInputExample2,
+                            width: InputWidths.XS,
+                            name: "text-field",
+                        }}
+                        dropDownListProps={{
+                            options: OPTIONS,
+                            onValueChange: this._handleDropdownValueChange2,
+                            selectedOption: this.state.selectedValue2,
+                            width: InputWidths.SM,
+                            name: "dropdown"
+                        }}
+                    />
+                    <br /><br />
+                    Selected Value: <strong>{this.state.unitInputExample2} {this.state.selectedValue2.value}</strong>
                 </InputRow>
             </div>
         );

@@ -1,3 +1,5 @@
+import { shallow } from "enzyme";
+import FormMessage from "../../forms/FormMessage";
 window.__DEV__ = true;
 
 jest.dontMock("moment");
@@ -145,7 +147,7 @@ describe("UnitInput", function () {
     });
 
     it("renders label as well as labelText", function() {
-        component = ReactTestUtils.renderIntoDocument(
+        const input = shallow(
             <UnitInput
                 label="Unit Input Text"
                 dropDownListProps={{
@@ -154,8 +156,61 @@ describe("UnitInput", function () {
             />
         );
 
-        const label = TestUtils.findRenderedDOMNodeWithDataId(component, "unit-input-label");
-        expect(label.textContent).toEqual("Unit Input Text");
+        const label = input.find({ "data-id": "unit-input" });
+        expect(label.prop("value")).toEqual("Unit Input Text");
     });
+
+
+    it("renders errorMessage if props exists", () => {
+        const input = shallow (
+            <UnitInput
+                errorMessage = "test"
+            />
+        );
+        expect(input.find(FormMessage).exists()).toEqual(true);
+    });
+
+    it("does not render errorMessage if prop does not exist", () => {
+        const input = shallow (
+            <UnitInput
+            />
+        );
+        expect(input.find(FormMessage).exists()).toEqual(false);
+    });
+
+    it("applies classname unit-input__text-field--error when errorMessage prop exists", function () {
+        const input = shallow (
+            <UnitInput
+                errorMessage = "test"
+            />
+        );
+        expect(input.find(".unit-input__text-field--error").exists()).toEqual(true);
+    });
+
+    it("does not apply classname unit-input__text-field--error when errorMessage prop does not exists", function () {
+        const input = shallow (
+            <UnitInput
+            />
+        );
+        expect(input.find(".unit-input__text-field--error").exists()).toEqual(false);
+    });
+
+    it("applies classname unit-input__drop-down-list--error when errorMessage prop exists", function () {
+        const input = shallow (
+            <UnitInput
+                errorMessage = "test"
+            />
+        );
+        expect(input.find(".unit-input__drop-down-list--error").exists()).toEqual(true);
+    });
+
+    it("does not apply classname unit-input__drop-down-list--error when errorMessage prop does not exists",
+        function () {
+            const input = shallow (
+                <UnitInput
+                />
+            );
+            expect(input.find(".unit-input__drop-down-list--error").exists()).toEqual(false);
+        });
 
 });
