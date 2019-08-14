@@ -254,7 +254,7 @@ class SectionStateless extends React.Component {
                     }
                     data-id={this.props["data-id"] + "-content"}
                 >
-                    {this.props.children}
+                    { this.props.expanded ? this.props.children : null }
                 </div>
             </div>
         );

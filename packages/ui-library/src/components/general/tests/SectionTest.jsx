@@ -40,7 +40,7 @@ describe("Section", function () {
         expect(container.className).not.toContain("open");
         expect(title.textContent).toEqual("My Section");
         expect(body.length).toEqual(1);
-        expect(content.length).toEqual(1);
+        expect(content.length).toEqual(0);
     });
 
     it("Stateful: renders collapsed state", function () {
@@ -56,7 +56,7 @@ describe("Section", function () {
         expect(container.className).not.toContain("open");
         expect(title.textContent).toEqual("My Section");
         expect(body.length).toEqual(1);
-        expect(content.length).toEqual(1);
+        expect(content.length).toEqual(0);
     });
 
     it("Stateless: renders expanded state", function () {
