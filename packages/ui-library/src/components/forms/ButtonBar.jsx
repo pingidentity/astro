@@ -110,6 +110,9 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 *     display.
 * @param {ButtonBar~onSave} onSave
 *     Callback that will be triggered when the "save" button is clicked
+* @param {ButtonBar~onSave} onSaveMouseDown
+*     Callback that will be triggered when the "save" button gets a mousedown event.
+*     Because mousedown fires blur events, it's sometimes possible for the save to get a mousedown event but never get the click.
 *
 * @example
 *     <ButtonBar
@@ -210,6 +213,7 @@ class ButtonBar extends React.Component {
         onCancel: PropTypes.func,
         onDiscard: PropTypes.func,
         onSave: PropTypes.func,
+        onSaveMouseDown: PropTypes.func,
         saveClassName: PropTypes.string,
         saveDisabled: PropTypes.bool,
         saveText: PropTypes.string.isRequired,
@@ -234,10 +238,12 @@ class ButtonBar extends React.Component {
         "data-id": "button-bar",
         saveDisabled: false,
         saveText: "Save",
+        discardText: "Discard Changes",
         enableSavingAnimation: false,
         unfixed: false,
         visible: true,
         onSave: _.noop,
+        onSaveMouseDown: _.noop,
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
@@ -278,6 +284,7 @@ class ButtonBar extends React.Component {
             disabledText={this.props.saveDisabledText}
             loading={this.props.enableSavingAnimation}
             onClick={this._handleSave}
+            onMouseDown={this.props.onSaveMouseDown}
             text={this.props.saveText || Translator.translate("save")}
         />
     );

@@ -6,6 +6,7 @@ import EllipsisLoader from "../general/EllipsisLoader";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
+import _ from "underscore";
 
 /**
  * @class Button
@@ -21,6 +22,8 @@ import { withFocusOutline } from "../../util/KeyboardUtils";
  *     The name and CSS of the icon.
  * @param {function} [onClick]
  *     Click handler.
+ * @param {function} [onMouseDown]
+ *     Mousedown handler.
  * @param {string} [label]
  *     Html name of the button.
 * @param {string} text
@@ -72,6 +75,7 @@ function BaseButton ({
     loading,
     noSpacing,
     onClick,
+    onMouseDown,
     submit,
     target,
     type,
@@ -112,6 +116,7 @@ function BaseButton ({
             className = {classes}
             data-id={dataId}
             onClick={onClick}
+            onMouseDown={onMouseDown}
             disabled={disabled}
             type={submit ? "submit" : "button"}
             href={href}
@@ -157,6 +162,7 @@ Button.propTypes = {
     loading: PropTypes.bool,
     noSpacing: PropTypes.bool,
     onClick: PropTypes.func,
+    onMouseDown: PropTypes.func,
     submit: PropTypes.bool,
     target: PropTypes.string,
     type: PropTypes.oneOf(buttonTypeList),
@@ -168,7 +174,8 @@ Button.defaultProps = {
     disabled: false,
     loading: false,
     noSpacing: false,
-    onClick: () => {},
+    onClick: _.noop,
+    onMouseDown: _.noop,
     submit: false,
 };
 

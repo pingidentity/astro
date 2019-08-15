@@ -14,6 +14,7 @@ import DataIDs from "../components/docs/contributing/DataIDs.mdx";
 import Changes from "../components/docs/cannonball/Changes.mdx";
 import GettingReady from "../components/docs/cannonball/GettingReadyV4.mdx";
 import RenderProps from "../components/docs/RenderProps.mdx";
+import Validation from "../components/docs/standards/Validation.mdx";
 
 const contentPage = WrappedComponent => (props) => (
     <PageSection>
@@ -94,6 +95,12 @@ module.exports = [
                 demo: require("../components/docs/Content"),
                 contentPage: true,
                 icon: "notepad"
+            },
+            {
+                label: "Form Validation",
+                demo: contentPage(Validation),
+                contentPage: true,
+                icon: "check"
             },
             {
                 label: "Reference",
@@ -1022,6 +1029,23 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_charting_MultiseriesChartCardDemo.jsx.html"
                     },
                 ]
+            },
+            {
+                label: "Behaviors",
+                icon: "cogs",
+                children: [
+                    {
+                        label: "Form Validator",
+                        demo: require("../components/forms/FormValidatorDemo").default,
+                        pathToDoc: "components/forms/FormValidator.jsx",
+                        pathToSource: "components_forms_FormValidator.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FormValidatorDemo.jsx.html",
+                        status: {
+                            type: "dependencies",
+                            dependencies: ["context"],
+                        },
+                    }
+                ],
             },
             {
                 label: "Utils",

@@ -2226,6 +2226,7 @@ input[type=file] {
         }
         .input-message__text {
             background-color: $color;
+            text-shadow: 0 0 3px rgba($color-black, 0.6);
         }
         &.input-text {
             input[type=text],

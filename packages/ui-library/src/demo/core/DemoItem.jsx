@@ -35,9 +35,18 @@ class DemoItem extends React.Component {
 
     _handleUpdateFlags = flags => this.setState({ flags });
 
-    _renderMessage= ({ message, type, use } = {}) => {
+    _renderMessage= ({ message, type, use, dependencies } = {}) => {
         if (!type) {
             return null;
+        } else if (type === "dependencies") {
+            return (
+                <InlineMessage type={InlineMessage.MessageTypes.NOTICE}>
+                    {
+                        dependencies.includes("context") &&
+                        <div>This component uses the latest context API and requires <strong>React 16.3</strong>.</div>
+                    }
+                </InlineMessage>
+            );
         } else if (message || type !== "design-deprecated") {
             return (
                 <InlineMessage type={type === "version" ? InlineMessage.MessageTypes.WARNING : type }>

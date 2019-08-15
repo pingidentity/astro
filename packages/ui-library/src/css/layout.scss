@@ -964,6 +964,10 @@ $color-grey-minor-1: $color-neutral-30;
         bottom: auto;
         margin-top: $spacing-md;
         z-index: $zindex__base;
+
+        &.hidden {
+            display: none;
+        }
     }
 }
 

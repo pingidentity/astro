@@ -1,0 +1,62 @@
+import { ShowSaveBar, RequiredFields, DisableSave, InvalidCharacters, AutoFormat, Reformat, InvalidFormats, UniqueValue } from "./ValidationExamples";
+
+## Dynamic Save Bar
+When editing existing records, we don’t show the save bar right away. It should only appear when a change has been made to the page, and it should disappear as soon as any changes have been saved or discarded.
+
+<ShowSaveBar />
+
+---
+
+## Required Fields
+Empty required fields are marked with a yellow indicator. This indicator disappears as soon as any value has been entered into the field.
+
+<RequiredFields />
+
+---
+
+## Disabled Save Button
+The save button should be disabled when there is a visible problem with the form: if there are any unfilled required fields or if there are any fields showing an error.
+
+It is possible that a field won’t be valid but won’t yet be showing an error. In this case, the save button will still be enabled, but saving will fail.
+
+<DisableSave />
+
+---
+
+## Invalid Characters
+When fields only accept certain characters, we prefer to prevent those characters from being entered over showing an error when they are entered. However, this restriction must be accompanied by some kind of text or other indication of what characters are valid. Either the field itself should have a distinct appearance that indicates its data type or we should show some static text that explains the field’s requirements.
+
+<InvalidCharacters />
+
+---
+
+## Auto-formatting
+In some cases, we can change the character they are entering for another. For instance, if a field only accepts lowercase letters, we can change any uppercase letters to lowercase. Sometimes it might make sense to turn spaces into underscores. It’s still preferable, though not necessary, to show some messaging about this.
+
+<AutoFormat />
+
+For fields with formatting that can be derived from the entered data when it’s not formatted correctly -- like phone numbers, dates, and times -- we can update the format on blur.
+
+<Reformat />
+
+---
+
+## Invalid Formats
+When we can validate the format of a piece of data -- like a valid email, URL, or phone number -- we should do that validation on blur. This means the user might be able to click the save button while invalid data is entered. Clicking the button will trigger validation. Any field-level error should be cleared as soon as the value has been modified.
+
+<InvalidFormats />
+
+---
+
+## Unique Values
+Sometimes we need to ensure an entered value is unique. Ideally, this would follow the same pattern as invalid formats. Leaving a field that is not unique will trigger a field-level error that will clear as soon as any change is made to the field.
+
+<UniqueValue />
+
+---
+
+## Server-side Validation
+When possible, we like to validate data before the user tries to save. When validation requires information from the server, we would ideally make that validation request on blur.
+
+## Failed Save
+When validation errors occur on save, we show field-level errors and a red feedback banner that says “Save Failed. There are validation errors.”. This banner can disappear after 5 seconds. The field-level errors will persist until addressed.
