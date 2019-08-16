@@ -11,6 +11,7 @@ import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import HR from "ui-library/lib/components/general/HR";
 import { allFlags } from "ui-library/lib/util/FlagUtils";
 import FlagsProvider from "ui-library/lib/components/utils/FlagsProvider";
+import FormattedContent from "ui-library/lib/components/general/FormattedContent";
 
 const flagHelp = (
     `Use the flags prop on your component to specify custom behaviors.
@@ -36,9 +37,9 @@ class DemoItem extends React.Component {
     _renderMessage= ({ message, type, use } = {}) => {
         if (!type) {
             return null;
-        } else if (message) {
+        } else if (message || type !== "design-deprecated") {
             return (
-                <InlineMessage type={InlineMessage.MessageTypes.WARNING}>
+                <InlineMessage type={type === "version" ? InlineMessage.MessageTypes.WARNING : type }>
                     {message}
                 </InlineMessage>
             );
@@ -134,6 +135,18 @@ class DemoItem extends React.Component {
                 </div>
                 <StretchContent className="section-content">
                     {this._renderMessage(status)}
+                    {flags ? this._renderMessage(
+                        {
+                            message: (
+                                <FormattedContent>
+                                    This component has alternate behaviors that can be triggered
+                                    with the flags prop or with the FlagsProvider component.
+                                    Example: <code>flags=&#123;["new-behavior", "something-else"]&#125;</code>
+                                </FormattedContent>
+                            ),
+                            type: InlineMessage.MessageTypes.NOTICE
+                        }
+                    ) : null}
                     <div className="demo-description"
                         dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
@@ -141,21 +154,20 @@ class DemoItem extends React.Component {
                         className="output"
                         key={this.state.flags ? this.state.flags.join("_") : "demo"}
                     >
-                        <FlagsProvider flags={_.intersection(this.state.flags, flags)}>
-                            {React.createElement(type, props)}
-                        </FlagsProvider>
-
                         {flags &&
                             <div>
-                                <HR />
                                 <FormLabel value="Flags" hint={flagHelp} />
                                 <CheckboxGroup
                                     options={flags.map(flag => ({ value: flag, label: flag }))}
                                     values={this.state.flags}
                                     onValueChange={this._handleUpdateFlags}
                                 />
+                                <HR />
                             </div>
                         }
+                        <FlagsProvider flags={_.intersection(this.state.flags, flags)}>
+                            {React.createElement(type, props)}
+                        </FlagsProvider>
                     </OutputComponent>
 
                     {!(fullscreen || contentPage) && <Markup content={this.props.code} />}
