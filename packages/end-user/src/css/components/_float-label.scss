@@ -33,10 +33,6 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
     cursor: text;
 }
 
-.float-label__active {
-    color:red;
-}
-
 .float-label__input, .float-label .float-label__input {
     padding-top: $float-label-input-padding-top;
     padding-bottom: $float-label-input-padding-bottom;
