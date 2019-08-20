@@ -1579,7 +1579,7 @@ input[type=file] {
             &.integer-up {
                 margin: 0 0 3px;
 
-                @include rotate(180deg);
+                @include flipV;
             }
         }
 
