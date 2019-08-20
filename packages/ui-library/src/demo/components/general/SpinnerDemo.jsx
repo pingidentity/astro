@@ -20,15 +20,14 @@ class SpinnerDemo extends React.Component {
     render() {
         return (
             <div>
-                <p>
-                    <Spinner
-                        show={this.state.showSpinner}
-                        defaultText="Loading...">
-                        <div className="spinner-content">
+                <Spinner
+                    show={this.state.showSpinner}
+                    defaultText="Loading...">
+                    <div className="spinner-content">
                             Content shown after spinner/loading is complete goes here.
-                        </div>
-                    </Spinner>
-                </p>
+                    </div>
+                </Spinner>
+                <br /><br />
                 <a onClick={this._toggleSpinner}>
                     Toggle Spinner
                 </a>
