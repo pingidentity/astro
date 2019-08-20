@@ -201,6 +201,7 @@ install-mvn: clean-mvn
 verify: install-node-npm
 	npm run jslint
 	npm run stylelint
+	npm run check-licenses
 	$(call run_coverage)
 
 	# convert the lcov report to cobertura format to be published by Jenkins
