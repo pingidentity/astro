@@ -112,6 +112,10 @@ class OptionItem extends React.Component {
     componentDidUpdate = () => this._makeVisible();
     componentDidMount = () => this._makeVisible();
 
+    _dontFocus = e => {
+        e.preventDefault();
+    }
+
     render () {
         const {
             "data-id": dataId,
@@ -129,6 +133,7 @@ class OptionItem extends React.Component {
             ? <li
                 data-id={dataId}
                 className="option-list__heading"
+                onMouseDown={this._dontFocus}
             >{label}</li>
             : <li
                 data-id={dataId}
@@ -137,6 +142,7 @@ class OptionItem extends React.Component {
                     "option-list__item--selected": selected,
                     "option-list__item--active": active,
                 })}
+                onMouseDown={this._dontFocus}
             >
                 {maybeHelpHintWrapper(helpHintText,
                     <div>

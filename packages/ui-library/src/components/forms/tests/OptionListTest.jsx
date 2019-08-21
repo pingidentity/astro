@@ -37,12 +37,26 @@ describe("OptionList", function () {
         expect(wrapper.find(".option-list__icon")).toBeTruthy();
     });
 
-    it("fires a the onValueChange callback", function() {
+    it("fires the onValueChange callback", function() {
         const callback = jest.fn();
         const wrapper = getWrapper({ onValueChange: callback });
 
         expect(callback).not.toHaveBeenCalled();
         wrapper.find("[data-id='option-item']").first().simulate("click");
+        expect(callback).toHaveBeenCalled();
+    });
+
+    it("mousedown prevents default", function() {
+        const callback = jest.fn();
+        const wrapper = getWrapper();
+
+        expect(callback).not.toHaveBeenCalled();
+
+        const event = {
+            preventDefault: callback,
+        };
+        wrapper.find("li[data-id='option-item']").first().props().onMouseDown(event);
+
         expect(callback).toHaveBeenCalled();
     });
 });
