@@ -33,7 +33,9 @@ $default-input-border-radius: 2px;
 .value-input__input,
 .option-list,
 .icon,
-.icon--clickable {
+.icon--clickable,
+.integer-down,
+.integer-up {
     &:focus {
         outline-width: 0;
     }
@@ -48,7 +50,9 @@ $default-input-border-radius: 2px;
     .value-input__input,
     .option-list,
     .icon,
-    .icon--clickable {
+    .icon--clickable,
+    .integer-down,
+    .integer-up {
         &:focus {
             outline-width: 5px;
         }
