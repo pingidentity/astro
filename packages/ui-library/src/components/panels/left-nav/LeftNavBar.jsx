@@ -131,6 +131,8 @@ class LeftNavBar extends React.Component {
         logoSrc: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         topContent: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         copyrightYear: PropTypes.string,
+        renderTopNavItem: PropTypes.func,
+        renderNavItem: PropTypes.func,
     };
 
     static defaultProps = {
@@ -190,6 +192,8 @@ class LeftNavBar extends React.Component {
                 onItemValueChange={this._handleItemClick}
                 onSectionValueChange={this._handleSectionClick}
                 open={this.props.openSections[section.id]}
+                renderTopNavItem={this.props.renderTopNavItem}
+                renderNavItem={this.props.renderNavItem}
             />
         );
     };
@@ -411,11 +415,13 @@ class LeftNavSection extends React.Component {
         selectedNode: PropTypes.string,
         children: PropTypes.array,
         icon: PropTypes.string,
+        renderTopNavItem: PropTypes.func,
         renderNavItem: PropTypes.func,
     };
 
     static defaultProps = {
-        renderNavItem: defaultRender,
+        renderTopNavItem: (props, Elem) => { const { item, ...defaults } = props; return <Elem {...defaults} />; },
+        renderNavItem: (props, Elem) => { const { item, ...defaults } = props; return <Elem {...defaults} />; },
     };
 
     constructor(props) {
@@ -514,13 +520,16 @@ class LeftNavSection extends React.Component {
         return (
             <div className={className} data-id={this.props["data-id"]}>
                 {this.props.label && (
-                    <Anchor
-                        className={titleClassName}
-                        data-id={this.props["data-id"] + "-label"}
-                        onClick={this._handleSectionClick}>
-                        {iconClassName ? (
-                            <span className={iconClassName}></span>) : null}{this.props.label}
-                    </Anchor>
+                    this.props.renderTopNavItem({
+                        className: titleClassName,
+                        "data-id": this.props["data-id"] + "-label",
+                        onClick: this._handleSectionClick,
+                        item: this.props,
+                        children: [
+                            (iconClassName?(<span className = {iconClassName} key="icon"></span>) : null),
+                            (this.props.label)
+                        ],
+                    }, Anchor)
                 )}
                 {this.props.children &&
                     <ul className="menu" data-id={this.props["data-id"] + "-menu"}>

@@ -19,6 +19,7 @@ const HeaderNav = props => (
                         option.id === props.currentNav || option.label === props.currentNav
                 }),
                 onClick: handleClick,
+                item: option,
                 option,
                 key: option.label + "-" + i,
                 children: <span className="header-nav__item-label">{option.label}</span>
