@@ -58,6 +58,8 @@ import FlexRow, { alignments } from "../layout/FlexRow";
  *     An object containing the various blurbs of text rendered in the component.
  * @param {string} [error=error]
  *    The type of error to display on the input (error = red, warning = yellow)
+ * @param {boolean} [required=false]
+ *    If true, user is required to upload a file
  * @example
  *     <FileInput
  *         onValidate={this._handleValidate}
@@ -85,6 +87,7 @@ class FileInput extends Component {
         noBorder: PropTypes.bool,
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
+        required: PropTypes.bool,
         strings: PropTypes.objectOf(PropTypes.string),
         status: PropTypes.shape({
             label: PropTypes.string,
@@ -99,6 +102,7 @@ class FileInput extends Component {
     static defaultProps = {
         strings: {},
         noBorder: false,
+        required: false,
     }
 
     defaultStrings = {
@@ -197,10 +201,12 @@ class FileInput extends Component {
                         onClick={this._clickButton(inputRef)}
                         label={status ? status.label : text.select}
                         inline
+                        className= {classnames (
+                            { "input-file__select-btn--required": this.props.required }
+                        )}
                     />
                 </div>
             )
-
         );
     }
 

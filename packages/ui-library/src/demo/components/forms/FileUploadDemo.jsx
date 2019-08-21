@@ -112,6 +112,18 @@ export default class FileUploadDemo extends React.Component {
 
                 <InputRow>
                     <FileUpload
+                        labelText="Required File Input"
+                        onError={this._onError}
+                        accept=""
+                        labelSelect="Choose a File"
+                        labelRemove="Remove"
+                        fileName="first-one"
+                        required
+                    />
+                </InputRow>
+
+                <InputRow>
+                    <FileUpload
                         labelText="Image File Input with a Max Size"
                         data-id="fileUpload"
                         maxFileSizeKb={4096}

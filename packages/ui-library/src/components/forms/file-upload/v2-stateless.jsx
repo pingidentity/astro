@@ -50,7 +50,8 @@ export default class extends Component {
             PropTypes.string,
         ]),
 
-        flags: flagsPropType
+        flags: flagsPropType,
+        required: PropTypes.bool,
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
@@ -118,7 +119,13 @@ export default class extends Component {
                         labelMaxFileSize={this.props.labelMaxFileSize}
                         labelAcceptedFileTypes={this.props.labelAcceptedFileTypes}
                     />
-                    <Button inline className="choose">
+                    <Button
+                        inline
+                        className= {classnames (
+                            "choose",
+                            { "input-file-upload__select-btn--required": this.props.required }
+                        )}
+                    >
                         {(fileSelected && this.props.labelSelectOther) || this.props.labelSelect}
                     </Button>
                     {this.props.errorMessage && (

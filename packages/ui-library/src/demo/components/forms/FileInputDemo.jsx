@@ -31,6 +31,26 @@ class FileInputDemo extends React.Component {
         });
     }
 
+    _handleChange1 = (file) => {
+        this.setState({
+            selectedFile1: file.name,
+        });
+    }
+
+    _handleRemove1 = () => {
+        this.setState({
+            selectedFile1: null,
+        });
+    }
+
+    _handleFileValidation1 = (valid) => {
+        if (!valid) {
+            this.setState({
+                fileStatus: "invalid file type selected"
+            });
+        }
+    }
+
     _handleChange2 = (file) => {
         this.setState({
             selectedFile2: file.name,
@@ -78,6 +98,29 @@ class FileInputDemo extends React.Component {
                         error={errorTypes.WARNING}
                     />
                 </InputRow>
+
+                <p>
+                    required state button
+                </p>
+                <InputRow>
+                    <FileInput
+                        accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
+                        fileName={this.state.selectedFile1}
+                        fileData={(
+                            <span>
+                                Valid <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
+                            </span>
+                        )}
+                        onValidateFile={this._handleFileValidation1}
+                        onValueChange={this._handleChange1}
+                        onRemove={this._handleRemove1}
+                        status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
+                        selectedTitle="Certificate"
+                        error={errorTypes.WARNING}
+                        required
+                    />
+                </InputRow>
+
 
                 <p>
                     file input with icon added to file

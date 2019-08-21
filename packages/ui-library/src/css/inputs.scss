@@ -1170,6 +1170,11 @@ input[type=file] {
             display: none;
         }
     }
+    &__select-btn--required {
+        -webkit-box-shadow: 0 0 0 3px rgba(242, 187, 26, 1);
+        -moz-box-shadow: 0 0 0 3px rgba(242, 187, 26, 1);
+        box-shadow: 0 0 0 3px rgba(242, 187, 26, 1);
+    }
     &.image-upload {
         $img-width: 90px;
 

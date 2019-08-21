@@ -20,7 +20,6 @@ import _ from "underscore";
  *     When true, the button is disabled
  * @param {MessageButton.statuses} [status=MessageButton.statuses.DEFAULT]
  *     Determines the styling of the message button.
- *
  * @example
  *  <MessageButton
  *      label="Button"

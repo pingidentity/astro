@@ -102,4 +102,20 @@ describe("FileInput", function () {
         const element = component.find(`div[data-id="error-icon"]`);
         expect(element.exists()).toEqual(true);
     });
+
+    it("Renders the file input button with a yellow border when required prop exists", () => {
+        const component = mount(
+            <FileInput required/>
+        );
+        const element = component.find(".input-file__select-btn--required");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("Renders the file input button without yellow border when required prop does not exist", () => {
+        const component = mount(
+            <FileInput />
+        );
+        const element = component.find(".input-file__select-btn--required");
+        expect(element.exists()).toEqual(false);
+    });
 });

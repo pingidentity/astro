@@ -249,4 +249,20 @@ describe("FileUpload", function () {
 
         expect(component.find("[data-id=\"default-test\"]"));
     });
+
+    it("Renders the file input button with a yellow border when required prop exists", () => {
+        const component = mount(
+            <FileUpload required/>
+        );
+        const element = component.find(".input-file-upload__select-btn--required");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("Renders the file input button without yellow border when required prop does not exist", () => {
+        const component = mount(
+            <FileUpload />
+        );
+        const element = component.find(".input-file-upload__select-btn--required");
+        expect(element.exists()).toEqual(false);
+    });
 });

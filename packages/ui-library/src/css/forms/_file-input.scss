@@ -58,4 +58,10 @@
         border-top: 1px solid $color-strong-neutral-70;
         color: $color-strong-neutral-50;
     }
+    &__select-btn--required {
+        -webkit-box-shadow: 0 0 0 3px rgba(242, 187, 26, 1);
+        -moz-box-shadow: 0 0 0 3px rgba(242, 187, 26, 1);
+        box-shadow: 0 0 0 3px rgba(242, 187, 26, 1);
+    }
+
 }
