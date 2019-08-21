@@ -446,6 +446,7 @@ label {
             text-transform: none;
 
             .label-text {
+                @include break-word;
                 display: inline-block;
                 text-transform: none;
                 font-size: 14px;
@@ -2430,7 +2431,8 @@ input[type=file] {
             vertical-align: bottom;
             line-height: 27px;
             .icon {
-                bottom: 3px;
+                top: 0;
+                bottom: unset;
             }
         }
     }
