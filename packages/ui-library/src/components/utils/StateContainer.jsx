@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Utils from "../../util/Utils";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 const mapNothing = () => ({});
 
@@ -130,6 +131,37 @@ class StateContainer extends React.Component {
 
         this.state = state;
         this.callbacks = callbacks;
+    }
+
+    componentDidMount() {
+        const {
+            stateDefs,
+            passedProps: {
+                stateless,
+                ...passedProps
+            }
+        } = this.props;
+
+        if (stateless === false) {
+            const definedProps = stateDefs.filter(({ name }) => passedProps[name] !== undefined);
+
+            if (definedProps.length === 0) {
+                return;
+            }
+
+            cannonballChangeWarning({
+                message: `The stateless prop has been deprecated. Previously, setting the stateless
+                prop to 'true' and defining a prop would effectively make that prop behave as initial state,
+                with the component managing that piece of state internally. However, using the 'p-stateful'
+                flag, defining a prop means that the component expects that prop to be managed externally.
+
+                To use internally managed state with an initial value, leave that prop undefined and instead
+                pass in the 'initialState' prop as an object with properties for each of the values you'd like to set.
+
+                The following props will need to be changed: ${definedProps.map(({ name }) => name).join(", ")}.
+
+                ` });
+        }
     }
 
     render() {

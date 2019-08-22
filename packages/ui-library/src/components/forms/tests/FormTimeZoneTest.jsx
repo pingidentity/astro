@@ -426,7 +426,7 @@ describe("FormTimeZone", function () {
     it("doesn't fire cannonball warning when p-stateful and use-portal flag are set", function() {
         console.warn = jest.fn();
 
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
+        getComponent({ flags: [ "use-portal", "p-stateful" ], stateless: true });
         expect(console.warn).not.toBeCalled();
     });
 

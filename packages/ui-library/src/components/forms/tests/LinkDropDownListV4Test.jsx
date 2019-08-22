@@ -132,7 +132,6 @@ describe("LinkDropDownList v4", function () {
     it("Renders the stateful component", function () {
         var clickIndex = 1,
             component = getComponent({
-                stateless: false,
                 closeOnSelection: true
             }),
             label = getLabel(component),
@@ -166,7 +165,6 @@ describe("LinkDropDownList v4", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <LinkDropDownList
                 data-id={componentId}
-                stateless={false}
                 closeOnSelection={false}
                 label={labelText}
                 onClick={jest.fn()}
@@ -181,7 +179,6 @@ describe("LinkDropDownList v4", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <LinkDropDownList
                 data-id={componentId}
-                stateless={false}
                 closeOnSelection={false}
                 label={labelText}
                 onClick={jest.fn()}
@@ -222,7 +219,7 @@ describe("LinkDropDownList v4", function () {
     it("fires no cannonball warning when the p-stateful flag is set", function() {
         console.warn = jest.fn();
         getComponent({ flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
+        expect(console.warn).toHaveBeenCalledTimes(1);
     });
 
     it("P-stateful renders the component in open state", function () {

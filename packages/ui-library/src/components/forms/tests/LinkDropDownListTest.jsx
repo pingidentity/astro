@@ -215,12 +215,6 @@ describe("LinkDropDownList", function () {
         expect(console.warn).toBeCalled();
     });
 
-    it("fires no cannonball warning when the p-stateful flag is set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
-    });
-
     it("P-stateful renders the component in open state", function () {
         var component = getComponent({ open: true, flags: [ "p-stateful" ] }),
             label = getLabel(component),
@@ -253,7 +247,7 @@ describe("LinkDropDownList", function () {
 
     it("doesn't fire Cannonball warning when use-portal and p-stateful is set", function() {
         console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
+        getComponent({ flags: [ "use-portal", "p-stateful" ], stateless: true });
         expect(console.warn).not.toBeCalled();
     });
 });

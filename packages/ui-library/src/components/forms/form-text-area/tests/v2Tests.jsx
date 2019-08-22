@@ -314,7 +314,7 @@ describe("FormTextArea", function () {
         expect(console.warn).not.toBeCalled();
         getComponent({ stateless: true, flags: [ "p-stateful" ] });
         getComponent({ stateless: false, value: "something", flags: [ "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
+        expect(console.warn).toHaveBeenCalledTimes(1);
     });
 
     it("does not block resizing by default", function() {
