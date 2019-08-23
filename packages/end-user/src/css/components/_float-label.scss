@@ -68,3 +68,10 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 .float-label__input.placeholder-shown {
     @include placeholderShown;
 }
+
+input:-webkit-autofill ~ .float-label__label,
+input:-webkit-autofill:hover ~ .float-label__label,
+input:-webkit-autofill:focus ~ .float-label__label,
+input:-webkit-autofill:active ~ .float-label__label {
+    color: $input-focus-border-color;
+}
