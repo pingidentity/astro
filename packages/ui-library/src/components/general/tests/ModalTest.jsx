@@ -11,7 +11,9 @@ describe("ModalTest", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Modal = require("../Modal"),
+        BodyTitle = require("../Modal").BodyTitle,
         Wrapper = TestUtils.UpdatePropsWrapper,
+        shallow = require("enzyme").shallow,
         _ = require("underscore");
 
     window.addEventListener = jest.fn();
@@ -253,6 +255,20 @@ describe("ModalTest", function () {
         expect(tooltipDenyBtn.textContent).toBe(modalParams.cancelTooltip.cancelButtonText);
         expect(tooltipTitle.textContent).toBe(modalParams.cancelTooltip.title);
         expect(tooltipText.textContent).toBe(modalParams.cancelTooltip.messageText);
+    });
+
+    it("BodyTitle test", function () {
+        const titleText = "This is my title";
+        const component =
+            shallow(
+                <BodyTitle>
+                    {titleText}
+                </BodyTitle>
+            );
+
+        const TitleNode = component.find(".body-title");
+
+        expect(TitleNode.text()).toEqual(titleText);
     });
 
     it("fires cannonball warning if use-portal isn't set", function() {

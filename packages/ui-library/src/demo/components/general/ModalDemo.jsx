@@ -1,9 +1,11 @@
 import React from "react";
-import Modal from "./../../../components/general/Modal";
+import Modal, { BodyTitle } from "./../../../components/general/Modal";
 
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
+
+import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
 
 /**
 * @name ModalDemo
@@ -125,19 +127,22 @@ class ModalDemo extends React.Component {
                         onOpen={this._makeToggle(4)}
                         onClose={this._makeToggle(4)}>
 
-                        <div>
-                            <div className="modal-title">
+                        <FlexRow
+                            flexDirection={flexDirectionOptions.COLUMN}
+                            alignment={alignments.CENTER}
+                        >
+                            <BodyTitle>
                                 Dialog modal content here!
-                            </div>
+                            </BodyTitle>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis eu eros id
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
-                            <div className="buttons">
+                            <ButtonGroup>
                                 <Button onClick={this._makeToggle(4)}>Nope</Button>
                                 <Button type="primary" onClick={this._makeToggle(4)}>Yup</Button>
-                            </div>
-                        </div>
+                            </ButtonGroup>
+                        </FlexRow>
                     </Modal>
                 </InputRow>
                 <InputRow>
@@ -150,9 +155,9 @@ class ModalDemo extends React.Component {
                         showCloseBttn={true}
                         onOpen={this._makeToggle(5)}>
 
-                        <div className="title">
+                        <BodyTitle>
                             Alert Modal
-                        </div>
+                        </BodyTitle>
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>

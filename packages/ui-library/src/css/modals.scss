@@ -169,7 +169,8 @@
         .modal-content {
             width: $modal-width;
         }
-        .modal-title {
+        .modal-title,
+        .body-title {
             font-size: 20px;
             margin: 0 0 15px;
         }
@@ -228,7 +229,8 @@
 
             @include border-radius(0 0 $modal-radius $modal-radius);
 
-            .title {
+            .title,
+            .body-title {
                 color: $color-warning-text;
                 text-align: center;
                 font-weight: 400;

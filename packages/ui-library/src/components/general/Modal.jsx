@@ -280,6 +280,19 @@ class Modal extends React.Component {
     }
 }
 
+const BodyTitle = ({
+    children,
+}) => (
+    <div className="body-title">
+        { children }
+    </div>
+);
+BodyTitle.propTypes = {
+    children: PropTypes.node,
+};
+
+
 Modal.Type = Type;
+Modal.BodyTitle = BodyTitle;
 
 module.exports = Modal;
