@@ -1119,6 +1119,10 @@ input[type=file] {
     display: inline-block;
     width: 100%;
 
+    &__image-container {
+        position: relative;
+    }
+
     &.no-label {
         margin-top: 0;
     }

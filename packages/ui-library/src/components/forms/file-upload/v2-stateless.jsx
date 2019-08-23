@@ -99,20 +99,22 @@ export default class extends Component {
                     className={classnames({ "form-error": this.props.errorMessage }) }
                     value={this.props.labelText || this.props.label}
                     description={this.props.description}>
-                    <ImagePreview
-                        isDefault={useDefault}
-                        show={this.props.showThumbnail}
-                        src={useDefault ? defaultImage : thumbnailSrc}
-                    />
-                    <input
-                        disabled={this.props.disabled}
-                        type="file"
-                        ref="fileInput"
-                        name={this.props.name || this.props.fileName}
-                        accept={this.props.accept}
-                        onChange={this.props.onChange}
-                        data-id={this.props["data-id"] + "-input"}
-                    />
+                    <div className="input-file-upload__image-container">
+                        <ImagePreview
+                            isDefault={useDefault}
+                            show={this.props.showThumbnail}
+                            src={useDefault ? defaultImage : thumbnailSrc}
+                        />
+                        <input
+                            disabled={this.props.disabled}
+                            type="file"
+                            ref="fileInput"
+                            name={this.props.name || this.props.fileName}
+                            accept={this.props.accept}
+                            onChange={this.props.onChange}
+                            data-id={this.props["data-id"] + "-input"}
+                        />
+                    </div>
                     <FileRestrictions
                         show={this.props.showThumbnail}
                         data-id={this.props["data-id"] + "-restrictions"}
@@ -173,13 +175,15 @@ function ImagePreview({
 }) {
     const isNode = !isString(src);
     return show ? (
-        <div>
-            {!isDefault && <span className="image-icon" />}
+        [
+            !isDefault && <span className="image-icon" key="icon" />,
             <span
                 className={classnames(
                     "input-image-thumb",
                     isDefault ? "input-image-thumb--default" : ""
-                )}>
+                )}
+                key="image"
+            >
                 {isNode
                     ? src
                     : <img
@@ -190,7 +194,7 @@ function ImagePreview({
                     />
                 }
             </span>
-        </div>
+        ]
     ) : null;
 }
 
