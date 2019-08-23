@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HorizontalBarCard data-id's don't change 1`] = `
+Array [
+  "horizontalBar-card",
+  "horizontalBar-card-number",
+  "horizontalBar-card-label",
+  "horizontalBar-card-drop-down",
+  "selected-option",
+  "selected-input",
+  "text-field_container",
+  "selected-input-input",
+]
+`;

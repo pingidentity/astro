@@ -46,6 +46,18 @@ describe("ColorPicker v4", function () {
         window.removeEventListener.mockClear();
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ColorPicker
+                onToggle={jest.fn()}
+                onValueChange={jest.fn()}
+                onError={jest.fn()}
+                color={"#fff"}
+                flags={[ "use-portal", "p-stateful" ]}
+            />
+        );
+    });
+
     it("stateless: renders label, hint and color", function () {
         var component = getComponent({
             color: "#ff00ff",

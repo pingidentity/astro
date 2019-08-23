@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiDragRow data-id's don't change 1`] = `
+Array [
+  "multi-drag-row",
+  "row-image",
+  "row-count",
+  "row-name",
+  "row-category",
+  "row-button-remove",
+]
+`;

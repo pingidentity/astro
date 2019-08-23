@@ -27,6 +27,19 @@ describe("Section v4", function () {
         return ReactTestUtils.renderIntoDocument(<Section {...opts} />);
     };
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Section
+                expanded
+                detailsText="Quite detailed, really"
+                titleValue="BORK BORK BORK"
+                flags={allFlags}
+            >
+                Some very important stuff
+            </Section>
+        );
+    });
+
     it("Stateless: renders collapsed state", function () {
         const view = getComponent({
                 children: <div data-id="iShouldBeHidden">My Content</div>

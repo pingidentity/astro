@@ -37,6 +37,16 @@ describe("PopoverMenu", function() {
         window.removeEventListener.mockClear();
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <PopoverMenu
+                buttons={buttonData}
+                label="hello"
+                open
+            />
+        );
+    });
+
     it("renders open state", function() {
         var component = ReactTestUtils.renderIntoDocument(
             <div>

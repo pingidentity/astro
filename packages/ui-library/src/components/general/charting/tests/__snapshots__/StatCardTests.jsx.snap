@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatCard data-id's don't change 1`] = `
+Array [
+  "stat-card",
+  "stat-card-list",
+  "stat-card-view-toggle",
+]
+`;

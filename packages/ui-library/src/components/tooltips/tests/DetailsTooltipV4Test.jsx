@@ -40,6 +40,24 @@ describe("DetailsTooltip", function () {
         delete process.env.NODE_ENV;
     });
 
+    it("data-id's don't change", () => {
+        const labels = [
+            { value: jest.fn(), label: "Save" },
+            { value: jest.fn(), label: "Save More" },
+        ];
+        TestUtils.mountSnapshotDataIds(
+            <DetailsTooltip
+                cancelLabel="UH OH"
+                flags={allFlags}
+                label="OH JEEZ"
+                primaryLabels={labels}
+                secondaryLabels={labels}
+                showClose
+                title="OH BISCUITS"
+            />
+        );
+    });
+
     it("managed component that starts open", function () {
         const component = getComponent({ initialState: { open: true } }, false);
         expect(ReactTestUtils.findRenderedComponentWithType(component, StateContainer).state.open).toBe(true);

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RockerButton v4 data-id's don't change 1`] = `
+Array [
+  "rocker-button",
+  "rocker-label_a",
+  "rocker-label_b",
+  "rocker-label_c",
+]
+`;
+
+exports[`RockerButton v4 data-id's don't change with helpText 1`] = `
+Array [
+  "rocker-button",
+  "rocker-label_a",
+  "rocker-label_b",
+  "rocker-label_c",
+]
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReportTable data-id's don't change 1`] = `
+Array [
+  "report-table",
+  "report-table-container",
+  "report-table-table",
+  "report-table-fixedHead",
+  "header_name",
+  "header_age",
+  "header_city",
+  "report-table-body",
+]
+`;

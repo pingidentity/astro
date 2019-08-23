@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderBar v4 data-id's don't change 1`] = `
+Array [
+  "header",
+  "header-logo",
+  "flex-row",
+  "header-site-logo",
+  "header-site-title",
+  "header-additional-content",
+  "header-product-nav",
+  "help",
+  "cog",
+  "cog-trigger",
+  "account",
+  "account-trigger",
+]
+`;

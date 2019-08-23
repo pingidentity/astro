@@ -305,8 +305,8 @@ class ReportTable extends React.Component {
 
         const tableHead = <Head {...props} />;
         const tableBody = this.props.infiniteScroll && this.state.columnWidths
-            ? <ISBody {...props} />
-            : <Body {...props} />;
+            ? <ISBody {...props} data-id={`${props["data-id"]}-body`} />
+            : <Body {...props} data-id={`${props["data-id"]}-body`} />;
 
         const className = classnames(
             this.props.className,

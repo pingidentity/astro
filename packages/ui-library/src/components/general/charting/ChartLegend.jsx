@@ -34,7 +34,7 @@ const ChartLegend = (
         const classes = classnames("legend__aside-key", {
             "legend__aside-key-selected": selectedId === id
         });
-        
+
         return (
             <div
                 data-id="chart-legend-key"
@@ -66,7 +66,7 @@ const ChartLegend = (
                     legend.map(({ id }, key) =>
                         helpLabel ? (
                             <HelpHint
-                                data-id="helphint-topplacement"
+                                data-id={`helphint-topplacement_${id}`}
                                 placement="right"
                                 delayShow={500}
                                 hintText={helpLabel}

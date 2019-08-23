@@ -31,6 +31,14 @@ describe("RowBuilder", () => {
         );
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <RowBuilder
+                rows={defaultRows}
+            />
+        );
+    });
+
     it("renders all rows passed in", () => {
         const component = getComponent();
         const rows = TestUtils.scryRenderedDOMNodesWithClass(component, "row-builder__row");

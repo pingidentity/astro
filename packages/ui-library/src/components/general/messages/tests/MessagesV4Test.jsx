@@ -39,6 +39,16 @@ describe("Messages v4", function () {
         return ReactTestUtils.renderIntoDocument(<Messages {...props} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Messages
+                messages={
+                    [{ text: "Test message text", progress: { text: "uploading" } }]
+                }
+            />
+        );
+    });
+
     it("Render empty messages", function () {
         var component = getComponent({ messages: null });
         var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");

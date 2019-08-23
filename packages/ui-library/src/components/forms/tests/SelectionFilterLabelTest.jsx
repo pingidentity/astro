@@ -23,6 +23,15 @@ describe("SelectionFilterLabel", function () {
         return ReactTestUtils.renderIntoDocument(<SelectionFilterLabel {...opts} />);
     }
 
+    it("data-id's don't change with single list type", () => {
+        TestUtils.mountSnapshotDataIds(
+            <SelectionFilterLabel
+                count={200}
+                labelText="HI THERE"
+            />
+        );
+    });
+
     it("Renders the component without count", function () {
         var component = getComponent(),
             componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, componentId),

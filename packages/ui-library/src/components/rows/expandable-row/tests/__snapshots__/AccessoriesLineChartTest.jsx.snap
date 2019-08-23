@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccessoriesLineChartTest data-id's don't change 1`] = `
+Array [
+  "accessories-line-chart-helphint",
+  "accessories-line-chart-helphint-target",
+  "accessories-line-chart-chart-wrapper",
+  "tooltip",
+]
+`;

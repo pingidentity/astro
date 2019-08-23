@@ -48,6 +48,23 @@ describe("CondensedTable", function () {
         }
     ];
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <CondensedTable
+                headData={mockData.head}
+                bodyData={mockData.body}
+            />
+        );
+    });
+
+    it("data-id's don't change with data object", () => {
+        TestUtils.mountSnapshotDataIds(
+            <CondensedTable
+                data={dataObjects}
+            />
+        );
+    });
+
     it("renders table with head and body", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <div><CondensedTable headData={mockData.head} bodyData={mockData.body} /></div>);

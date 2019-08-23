@@ -29,6 +29,25 @@ describe("ChartLegend", function () {
         return ReactTestUtils.renderIntoDocument(<div><ChartLegend {...withDefaults} /></div>);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ChartLegend
+                helpLabel="PLEASE HELP"
+                legend={[
+                    {
+                        id: "Red",
+                        color: "#FF0000"
+                    },
+                    {
+                        id: "Blue",
+                        color: "#FF0000"
+                    }
+                ]}
+                colors={Object.values(Colors.COLORS)}
+            />
+        );
+    });
+
     it("rendered component with data-id=chart-legend", function () {
         const component = getComponent();
 

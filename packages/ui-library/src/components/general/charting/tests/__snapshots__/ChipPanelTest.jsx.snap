@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChipPanel data-id's don't change 1`] = `
+Array [
+  "chip-panel",
+  "chip_1",
+  "icon",
+  "icon-graphic",
+  "chip_2",
+  "icon",
+  "icon-graphic",
+]
+`;

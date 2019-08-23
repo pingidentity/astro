@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormTimeZone v4 data-id's don't change 1`] = `
+Array [
+  "formLabel",
+  "tooltip-menu",
+  "tooltip-menu-trigger",
+  "undefined-collapsible-link",
+]
+`;

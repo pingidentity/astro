@@ -1,6 +1,7 @@
 import React from "react";
 import OptionList from "../OptionList";
 import { mount } from "enzyme";
+import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
 
 const options = [
     {
@@ -31,6 +32,14 @@ describe("OptionList", function () {
         );
     }
 
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <OptionList
+                options={options}
+            />
+        );
+    });
+
     it("renders an icon", function () {
         const wrapper = getWrapper();
 
@@ -42,7 +51,7 @@ describe("OptionList", function () {
         const wrapper = getWrapper({ onValueChange: callback });
 
         expect(callback).not.toHaveBeenCalled();
-        wrapper.find("[data-id='option-item']").first().simulate("click");
+        wrapper.find("[data-id='option-item_1']").hostNodes().simulate("click");
         expect(callback).toHaveBeenCalled();
     });
 
@@ -55,7 +64,7 @@ describe("OptionList", function () {
         const event = {
             preventDefault: callback,
         };
-        wrapper.find("li[data-id='option-item']").first().props().onMouseDown(event);
+        wrapper.find("li[data-id='option-item_1']").props().onMouseDown(event);
 
         expect(callback).toHaveBeenCalled();
     });

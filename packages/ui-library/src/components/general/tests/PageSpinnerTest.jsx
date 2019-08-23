@@ -26,6 +26,13 @@ describe("PageSpinner", function () {
         );
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <PageSpinner
+                modal
+            />
+        );
+    });
 
     it("render component as normal-sized by default", function () {
         const component = getComponent(

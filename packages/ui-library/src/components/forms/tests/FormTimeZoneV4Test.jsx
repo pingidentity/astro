@@ -94,6 +94,16 @@ describe("FormTimeZone v4", function () {
         window.removeEventListener.mockClear();
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FormTimeZone
+                flags={[ "use-portal", "p-stateful" ]}
+                showClear
+                value="25102019"
+            />
+        );
+    });
+
     it("renders the value link", function () {
         const component = getComponent();
         const valueLink = getValueLink(component);

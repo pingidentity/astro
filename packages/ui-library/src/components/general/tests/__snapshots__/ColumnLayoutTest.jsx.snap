@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Row data-id's don't change 1`] = `
+Array [
+  "row",
+  "column-layout",
+  "column-layout",
+]
+`;

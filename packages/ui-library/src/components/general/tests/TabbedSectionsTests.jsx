@@ -25,6 +25,20 @@ describe("If component", function () {
             </TabbedSections>);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <TabbedSections
+                expanded
+                detailsText="Quite detailed, really"
+                titleValue="BORK BORK BORK"
+                onValueChange={jest.fn()}
+            >
+                <div>Some very important stuff</div>
+                <div>Extraneous nonsense</div>
+            </TabbedSections>
+        );
+    });
+
     it("Renders one child", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <TabbedSections selectedIndex={0} onValueChange={_.noop}>

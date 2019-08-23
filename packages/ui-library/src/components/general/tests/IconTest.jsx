@@ -17,6 +17,15 @@ describe("Icon", function () {
         return ReactTestUtils.renderIntoDocument(<div><Icon {...props} /></div>);
     };
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Icon
+                iconName="globe"
+                title="I AM A VERY COMPELLING TITLE"
+            />
+        );
+    });
+
     it("renders the component", function () {
         var dataId = "myicon",
             childContent = "Some child content",

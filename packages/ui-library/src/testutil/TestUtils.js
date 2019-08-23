@@ -14,7 +14,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import _ from "underscore";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 
 var TestUtils = {
 
@@ -474,13 +474,12 @@ TestUtils.checkForDataIds = function (component, ids) {
 };
 
 TestUtils.snapshotDataIds = node => {
-    const dataIds = node.find("[data-id]");
-    dataIds.forEach(element => {
-        expect(element.prop("data-id")).toMatchSnapshot();
-    });
+    const elements = node.find("[data-id]").hostNodes(); // Find only actual HTML elements
+
+    const ids = elements.map(element => element.prop("data-id"));
+    expect(ids).toMatchSnapshot();
 };
 
-TestUtils.shallowSnapshotDataIds = component => TestUtils.snapshotDataIds(shallow(component));
-TestUtils.mountSnapshotDataIds = component => TestUtils.snapshotDataIds(mount(component));
+TestUtils.mountSnapshotDataIds = node => TestUtils.snapshotDataIds(mount(node));
 
 module.exports = TestUtils;

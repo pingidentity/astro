@@ -33,8 +33,8 @@ const IconItem = ({ label, onValueChange, value, checked }) => {
     });
 
     return (
-        <button onClick={onClick} className={className} data-id="icon-selector-button">
-            {<Icon iconName={label} type="inline" />}
+        <button onClick={onClick} className={className} data-id={`icon-selector-button_${value}`}>
+            {<Icon data-id={`icon-selector-icon_${value}`} iconName={label} type="inline" />}
         </button>
     );
 };

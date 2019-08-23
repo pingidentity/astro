@@ -11,6 +11,14 @@ describe("ButtonGroup", function () {
         return ReactTestUtils.renderIntoDocument(<div><ButtonGroup {...props} /></div>);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ButtonGroup
+                onCancel={jest.fn()}
+            />
+        );
+    });
+
     it("renders component with default data-id", function () {
         const component = getComponent();
 

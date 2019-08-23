@@ -22,6 +22,13 @@ describe("BackgroundLoader", function () {
         loadContentFunc = jest.fn();
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <BackgroundLoader loaded>
+                <div data-id="loaded-content">content loaded</div>
+            </BackgroundLoader>
+        );
+    });
 
     it("render loading state", function () {
         loaded = false;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageButton data-id's do not change 1`] = `
+Array [
+  "message-button",
+  "icon",
+  "icon-graphic",
+]
+`;

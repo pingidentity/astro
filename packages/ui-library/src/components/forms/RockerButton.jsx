@@ -192,18 +192,18 @@ var RockerButtonLabel = function (props) {
         props.onClick(props.text, props.index, event);
     };
 
-    const { label = "" } = props;
+    const { text = "" } = props;
 
-    const sanitizedLabel = label.toLowerCase().replace(/[^0-9a-z]/gi, "");
+    const sanitizedText = text.toLowerCase().replace(/[^0-9a-z]/gi, "");
 
     return props.helpText
         ? <HelpHint
-            data-id={`helphint-button_${sanitizedLabel}`}
+            data-id={`helphint-button_${sanitizedText}`}
             placement="top"
             delayShow={500}
             hintText={props.helpText} >
             <button
-                data-id={`rocker-label_${sanitizedLabel}`}
+                data-id={`rocker-label_${sanitizedText}`}
                 className="rocker-button__button"
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
@@ -212,7 +212,7 @@ var RockerButtonLabel = function (props) {
             </button>
         </HelpHint>
         : <button
-            data-id={`rocker-label_${sanitizedLabel}`}
+            data-id={`rocker-label_${sanitizedText}`}
             className="rocker-button__button"
             onClick={_handleClick}
             autoFocus={props.autoFocus}

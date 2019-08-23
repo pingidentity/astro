@@ -26,6 +26,27 @@ describe("RockerButton v4", function () {
         return ReactTestUtils.renderIntoDocument(<RockerButton {...opts} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <RockerButton
+                flags={allFlags}
+                onValueChange={jest.fn()}
+                labels={labelsArray}
+            />
+        );
+    });
+
+    it("data-id's don't change with helpText", () => {
+        TestUtils.mountSnapshotDataIds(
+            <RockerButton
+                flags={allFlags}
+                onValueChange={jest.fn()}
+                labels={labelsArray}
+                helpText="PLEASE HELP"
+            />
+        );
+    });
+
     it("stateless: will render component with data-id", function () {
         const component = getComponent({
             "data-id": "myRockerButton"

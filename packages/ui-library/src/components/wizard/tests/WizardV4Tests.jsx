@@ -65,6 +65,23 @@ describe("Wizard v4", function () {
         return TestUtils.findRenderedDOMNodeWithDataId(component, "button-bar-save");
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Wizard
+                title={defaultText.title}
+                onNext={jest.fn()}
+                onEdit={jest.fn()}
+                onValueChange={jest.fn()}
+                onCancel={jest.fn()}
+                onDone={jest.fn()}
+                labelNext={defaultText.labelNext}
+                labelCancel={defaultText.labelCancel}
+                labelEdit={defaultText.labelEdit}
+                labelDone={defaultText.labelDone}
+            />
+        );
+    });
+
     it("Is the root wizard", function () {
         var component = getRenderedComponent();
         var args = component.props.onValueChange.mock.calls[0];

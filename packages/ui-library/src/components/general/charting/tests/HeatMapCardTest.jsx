@@ -70,6 +70,14 @@ describe("HeatmapCard", function () {
         );
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <HeatmapCard
+                data={chartData}
+            />
+        );
+    });
+
     it("renders with the default data-id", function () {
         const component = getComponent();
         const container = TestUtils.findRenderedDOMNodeWithDataId(component, dataId);

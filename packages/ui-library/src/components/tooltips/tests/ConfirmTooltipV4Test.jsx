@@ -27,6 +27,14 @@ describe("ConfirmTooltip", function () {
         return ReactTestUtils.renderIntoDocument(<ConfirmTooltip {...opts} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ConfirmTooltip
+                flags={allFlags}
+            />
+        );
+    });
+
     it("rendered component with data-id=-confirm-tooltip", function () {
         let component = getComponent({});
 

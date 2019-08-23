@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FrequencyCard data-id's don't change 1`] = `
+Array [
+  "frequency-card",
+  "helphint-bottomplacement",
+  "helphint-bottomplacement-target",
+  "helphint-bottomplacement-icon",
+  "tooltip",
+  "stacked-chart-legend",
+  "chart-legend-key",
+  "chart-legend-key",
+  "chart-legend-key",
+  "chart-legend-key",
+  "chart-legend-key",
+  "rocker-button",
+  "rocker-label_first",
+  "rocker-label_second",
+  "helphint-bottomplacement",
+  "helphint-bottomplacement-target",
+  "helphint-bottomplacement-icon",
+  "tooltip",
+  "donut-chart-legend",
+  "helphint-topplacement_Enabled Users",
+  "helphint-topplacement_Enabled Users-target",
+  "chart-legend-key",
+  "tooltip",
+  "helphint-topplacement_Inactive Users",
+  "helphint-topplacement_Inactive Users-target",
+  "chart-legend-key",
+  "tooltip",
+  "helphint-topplacement_Disabled Users",
+  "helphint-topplacement_Disabled Users-target",
+  "chart-legend-key",
+  "tooltip",
+  "frequency-card-view-toggle",
+]
+`;

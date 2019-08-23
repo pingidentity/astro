@@ -69,6 +69,55 @@ describe("FrequencyCard", function () {
         return ReactTestUtils.renderIntoDocument(<FrequencyCard {...withDefaults} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FrequencyCard
+                donutData={donutData}
+                barData={[
+                    {
+                        id: "First",
+                        legend: legend,
+                        data: [
+                            {
+                                id: "Feb 2018",
+                                data: [ 60, 20, 10, 5, 5 ]
+                            },
+                            {
+                                id: "March 2018",
+                                data: [60, 20, 10, 5, 5]
+                            },
+                            {
+                                id: "April 2018",
+                                data: [60, 20, 10, 5, 5]
+                            }
+                        ]
+                    },
+                    {
+                        id: "Second",
+                        legend: legend,
+                        data: [
+                            {
+                                id: "May 2018",
+                                data: [60, 20, 10, 5, 5]
+                            },
+                            {
+                                id: "June 2018",
+                                data: [60, 20, 10, 5, 5]
+                            },
+                            {
+                                id: "July 2018",
+                                data: [60, 20, 10, 5, 5]
+                            }
+                        ]
+                    }
+                ]}
+                backTitleHelpHint="PLZ HALP"
+                frontTitleHelpHint="NOTHING WILL HELP HERE"
+                loading={false}
+            />
+        );
+    });
+
     it("rendered component with data-id=frequency-card", function () {
         const component = getComponent({
         });

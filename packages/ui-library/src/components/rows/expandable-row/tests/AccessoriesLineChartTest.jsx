@@ -4,6 +4,7 @@ import React from "react";
 import { Line, ReferenceLine } from "recharts";
 import { shallow } from "enzyme";
 import _ from "underscore";
+import { mountSnapshotDataIds } from "../../../../testutil/TestUtils";
 
 import AccessoriesLineChart from "../AccessoriesLineChart";
 
@@ -52,6 +53,15 @@ describe("AccessoriesLineChartTest", function () {
 
         return shallow(<AccessoriesLineChart {...props} />);
     }
+
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <AccessoriesLineChart
+                hint="It's a secret"
+                {...defaultProps}
+            />
+        );
+    });
 
     it("should render with default data-id", function() {
         const component = getComponent();

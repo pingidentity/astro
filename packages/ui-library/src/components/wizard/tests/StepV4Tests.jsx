@@ -71,6 +71,24 @@ describe("Step", function () {
         );
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Step
+                active={true}
+                number={1}
+                total={2}
+                onNext={jest.fn()}
+                onEdit={jest.fn()}
+                onDone={jest.fn()}
+                labelDone="done"
+                titleSelection="title selection"
+                hintText="hint"
+                flags={allFlags}
+                showEdit
+            />
+        );
+    });
+
     it("Specifies button labels", function () {
         var component = getRenderedComponent({ isModal: false });
 

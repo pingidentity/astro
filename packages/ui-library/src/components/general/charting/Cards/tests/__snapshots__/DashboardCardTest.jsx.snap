@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DashboardCard data-id's don't change with single list type 1`] = `
+Array [
+  "dashboard-card",
+  "dashboard-card-error-message",
+]
+`;

@@ -64,6 +64,25 @@ describe("MultiDrag v4", function () {
         };
     }
 
+    it("data-id's don't change", () => {
+        const WithContext = DragDropContext(TestBackend)(() => (
+            <MultiDrag
+                onSearch={jest.fn()}
+                onDrag={jest.fn()}
+                onDrop={jest.fn()}
+                onCancel={jest.fn()}
+                categoryList={["One", "Two"]}
+                columns={[
+                    { name: "Available Rows", id: 1, rows: availableRows, filteredRows: availableRows,
+                        showCategoryList: true },
+                    { name: "Added Rows", id: 2, rows: addedRows, filteredRows: addedRows }
+                ]}
+                flags={allFlags}
+            />
+        ));
+        TestUtils.mountSnapshotDataIds(<WithContext />);
+    });
+
     it("renders with default data-id", function () {
         getWrappedComponent();
         var component = thisComponent;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConditionalFieldset data-id's don't change 1`] = `
+Array [
+  "conditional-fieldset",
+  "conditional-fieldset-options",
+  "conditional-fieldset-options_label_0",
+  "label",
+  "conditional-fieldset-options_0",
+  "conditional-fieldset-options_label_1",
+  "label",
+  "conditional-fieldset-options_1",
+  "option1",
+]
+`;

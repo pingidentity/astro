@@ -46,6 +46,15 @@ describe("HeroChart", function () {
             <HeroChart {...componentProps} />
         );
     }
+
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <HeroChart
+                {...defaultProps}
+            />
+        );
+    });
+
     it("renders with the default data-id", function () {
         const component = getComponent();
         const container = TestUtils.findRenderedDOMNodeWithDataId(component, defaultProps["data-id"]);

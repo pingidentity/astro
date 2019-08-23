@@ -89,6 +89,33 @@ describe("ExpandableRow v4", function() {
         return TestUtils.findRenderedDOMNodeWithDataId(component, "ordering-input");
     }
 
+    it("data-id's don't change", () => {
+        const Wrapped = DragDropContext(TestBackend)(() => (
+            <ExpandableRow
+                title={<div>Test Title</div>}
+                subtitle={<div>Test Subtitle</div>}
+                content={<div data-id="content">Test Content</div>}
+                onToggle={jest.fn()}
+                flags={allFlags}
+                ordering={{
+                    position: 3,
+                    total: 10,
+                    onReorder: jest.fn()
+                }}
+                rowAccessories="BORK BORK"
+                showEdit
+                showDelete
+                status={ExpandableRow.Statuses.GOOD}
+                expanded
+                rowMessage={{
+                    type: ExpandableRow.RowMessageTypes.ERROR,
+                    text: "OH NO OOPS"
+                }}
+            />
+        ));
+        TestUtils.mountSnapshotDataIds(<Wrapped />);
+    });
+
     it("renders with default data-id", function() {
         const component = getComponent();
 
@@ -740,7 +767,7 @@ describe("ExpandableRow v4", function() {
     it("fires no events from other keys when in ordering mode", function() {
         const callback = jest.fn();
         const component = getComponent({
-            
+
             ordering: {
                 position: 3,
                 total: 10,

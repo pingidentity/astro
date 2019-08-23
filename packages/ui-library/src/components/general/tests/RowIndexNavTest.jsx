@@ -36,6 +36,17 @@ describe("Indent", function () {
         navItems = TestUtils.scryRenderedDOMNodesWithTag(component, "li");
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <RowIndexNav
+                indexes={indexes}
+                onClick={onClickFunction}
+                activeIndexes={activeIndexes}
+                selectedIndex={activeIndexes[selectedIndex]}
+            />
+        );
+    });
+
     it("renders the component", function () {
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "row-index-nav");
 

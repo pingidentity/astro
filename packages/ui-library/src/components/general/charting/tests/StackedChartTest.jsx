@@ -8,17 +8,18 @@ import Colors from "../Cards/dashboardColors";
 describe("StackedChart", function () {
     const componentId = "stacked-chart";
 
-    function getComponent(opts) {
-        const exampleData = [10, 20, 30, 40];
-        const legend = [
-            { id: "At least daily" },
-            { id: "At least weekly" },
-            { id: "At least monthly" },
-            { id: "At least quarterly" },
-            { id: "Less than quarterly" },
-        ];
+    const exampleData = [10, 20, 30, 40];
+    const legend = [
+        { id: "At least daily" },
+        { id: "At least weekly" },
+        { id: "At least monthly" },
+        { id: "At least quarterly" },
+        { id: "Less than quarterly" },
+    ];
 
-        const colors = Object.values(Colors.COLORS);
+    const colors = Object.values(Colors.COLORS);
+
+    function getComponent(opts) {
 
         const withDefaults = _.defaults(opts || {}, {
             "data-id": componentId,
@@ -40,6 +41,28 @@ describe("StackedChart", function () {
 
         return ReactTestUtils.renderIntoDocument(<StackedChart {...withDefaults} />);
     }
+
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <StackedChart
+                data-id={componentId}
+                id={"Test Chart"}
+                legend={legend}
+                colors={colors}
+                selectedId={"Col 2"}
+                data={[
+                    {
+                        id: "Col 1",
+                        data: exampleData
+                    },
+                    {
+                        id: "Col 2",
+                        data: exampleData
+                    }
+                ]}
+            />
+        );
+    });
 
     it("rendered component with data-id=stacked-chart", function () {
         const component = getComponent();
@@ -63,8 +86,6 @@ describe("StackedChart", function () {
     });
 
     it("properly digests API-style data into Rechart data", function () {
-        const exampleData = [10, 20, 30, 40];
-
         const data = [
             {
                 id: "Jan 2018",

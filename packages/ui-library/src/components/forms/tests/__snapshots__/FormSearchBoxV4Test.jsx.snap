@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormSearchBox v4 data-id's don't change 1`] = `
+Array [
+  "FormSearchBox",
+  "searchBox",
+  "text-field_container",
+  "searchBox-input",
+  "clear",
+]
+`;

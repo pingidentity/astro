@@ -180,6 +180,7 @@ class HeatMapCard extends React.Component {
                     return ([
                         rowLabel,
                         <HelpHint
+                            data-id={`heatmap-hint_${cellValue}_${rowIndex}`}
                             delayHide={0}
                             hintText={cellContent}
                             key={`cell-${rowIndex}-${cellIndex}`}

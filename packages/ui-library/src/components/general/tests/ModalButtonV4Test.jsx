@@ -41,6 +41,17 @@ describe("ModalButtonTest v4", function () {
         return getComponentWithoutDefaults(opts);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ModalButton
+                activatorButtonLabel={"My Button"}
+                activatorButtonClassName={"buttonClass"}
+                onOpen={jest.fn()}
+                onClose={jest.fn().mockReturnValue(true)}
+            />
+        );
+    });
+
     it("Doesn't render body until expanded", function () {
         const component = getComponent({ modalBody: jest.fn() });
 

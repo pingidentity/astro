@@ -94,6 +94,17 @@ describe("Page Wizard", function () {
         return TestUtils.findRenderedDOMNodeWithDataId(container, `${wizardDefaultProps["data-id"]}${didExtension}`);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <PageWizard
+                {...wizardDefaultProps}
+            >
+                {defaultStepData.map((step) => {
+                    return <Step {...step} />;
+                })}
+            </PageWizard>
+        );
+    });
 
     it("renders the wizard title, description, and content for each step", function () {
         defaultStepData.map(function (dataItem, index) {

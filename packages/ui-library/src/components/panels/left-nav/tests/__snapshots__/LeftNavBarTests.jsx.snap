@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeftNavBar data-id's don't change 1`] = `
+Array [
+  "nav-top-content",
+  "a thing",
+  "a thing-label",
+  "a thing-menu",
+  "a thing-option-context-item-1",
+  "a thing-option-context-item-2",
+  "a thing-option-context-item-3",
+  "a thing-option-add",
+  "section-1",
+  "section-1-label",
+  "section-1-menu",
+  "item-1-label",
+  "section-2",
+  "section-2-label",
+  "section-2-menu",
+  "item-2-label",
+  "section-3",
+  "section-3-label",
+  "copyright",
+]
+`;

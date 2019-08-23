@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page Wizard data-id's don't change 1`] = `
+Array [
+  "mrwizard",
+  "mrwizard-headeritems",
+  "mrwizard-headeritem-0",
+  "mrwizard-headeritem-title-0",
+  "mrwizard-headeritem-1",
+  "mrwizard-headeritem-title-1",
+  "mrwizard-headeritem-2",
+  "mrwizard-headeritem-title-2",
+  "mrwizard-close-button",
+  "mrwizard-step",
+  "mrwizard-step-title",
+  "mrwizard-step-description",
+  "mrwizard-step-content",
+  "mrwizard-buttonbar",
+  "mrwizard-buttonbar-save",
+  "mrwizard-buttonbar-cancel",
+  "mrwizard-menu",
+  "mrwizard-menu-title",
+  "mrwizard-menu-item-required_step 1 title",
+  "mrwizard-menu-item-required_step 2 title",
+  "mrwizard-menu-divider-title",
+  "mrwizard-menu-item-optional_step 3 title",
+  "mrwizard-menu-item-optional_step 4 title",
+]
+`;

@@ -30,4 +30,25 @@ describe("TranslationPickerTests", function () {
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <TranslationPicker
+                options={[
+                    { label: "en", value: "en" },
+                    { label: "fr", value: "fr" },
+                    { label: "fr-ca", value: "fr" },
+                    { label: "es", value: "es" },
+                    { label: "ch", value: "ch" },
+                    { label: "zn", value: "zn" },
+                    { label: "en", value: "en" },
+                    { label: "fr", value: "fr" },
+                    { label: "fr-ca", value: "fr-ca" },
+                    { label: "es", value: "es" },
+                    { label: "ch", value: "ch" },
+                    { label: "zn", value: "zn" },
+                ]}
+            />
+        );
+    });
+
 });

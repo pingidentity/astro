@@ -28,6 +28,16 @@ describe("StatCard", function () {
         return ReactTestUtils.renderIntoDocument(<StatCard {...props} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <StatCard
+                data={listData}
+                title="QUACK QUACK"
+                value="0"
+            />
+        );
+    });
+
     it("renders with default data-id", function () {
         const component = getComponent();
         const chart = TestUtils.findRenderedDOMNodeWithDataId(component, "stat-card");

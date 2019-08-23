@@ -58,23 +58,22 @@ describe("Grid", function () {
         }
     ];
 
-    beforeEach(function () {
-    });
+    const defaultProps = {
+        rows: rows,
+        "data-id": "grid-test",
+        columnsPerPage: 5,
+        firstColumn: 0,
+        lastColumn: 5,
+        currentPage: 1,
+        onPaginationChanged: jest.fn(),
+        stateless: true
+    };
 
     /*
      * Gets a simple component (no complex feature)
      */
     function getComponent (opts) {
-        opts = _.defaults(opts || {}, {
-            rows: rows,
-            "data-id": "grid-test",
-            columnsPerPage: 5,
-            firstColumn: 0,
-            lastColumn: 5,
-            currentPage: 1,
-            onPaginationChanged: jest.fn(),
-            stateless: true
-        });
+        opts = _.defaults(opts || {}, defaultProps);
 
         return ReactTestUtils.renderIntoDocument(
             <Grid {...opts} >
@@ -90,6 +89,24 @@ describe("Grid", function () {
             </Grid>
         );
     }
+
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Grid
+                {...defaultProps}
+            >
+                <Grid.Column isLeftHeader={true} field="rowheader" />
+                <Grid.Column headerText="Firstname" fixed={true} field="firstname" />
+                <Grid.Column headerText="Lastname" field="lastname" />
+                <Grid.Column headerText="Midname" field="midname"
+                    width={Grid.ColumnSizes.XS}
+                    data-id="grid-column-3"
+                    align={Grid.Alignments.RIGHT} />
+                <Grid.Column headerText="Email" field="email" />
+                <Grid.Column headerText="Gender" field="gender" />
+            </Grid>
+        );
+    });
 
     it("should render component correctly", function () {
         var component = getComponent();

@@ -1,6 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { omit } from "underscore";
+import { mountSnapshotDataIds } from "../../../../testutil/TestUtils";
 import ColumnSelector from "../ColumnSelector";
 import ColumnSelectorFrame from "../ColumnSelectorFrame";
 import ColumnSelectorRow, { RowButton } from "../ColumnSelectorRow";
@@ -102,6 +103,15 @@ describe("ColumnSelector", () => {
             />
         );
     }
+
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <ColumnSelector
+                options={baseOptions}
+                selectedOptions={baseOptions}
+            />
+        );
+    });
 
     it("renders the first column", () => {
         const component = getComponent();

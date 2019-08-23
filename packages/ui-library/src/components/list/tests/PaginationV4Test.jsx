@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 import { mount } from "enzyme";
+import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
 import StateContainer from "../../utils/StateContainer";
 import { allFlags } from "../../../util/FlagUtils";
 
@@ -42,6 +43,25 @@ describe("Pagination", function () {
         top = pageLinks[0];
         topLinks = top.childNodes;
 
+    });
+
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <Pagination
+                data-id="test-pagination"
+                page={2}
+                perPage = {5}
+                total = {100}
+                onValueChange={callback}>
+                <ExpandableRow className="row" key={1} />
+                <ExpandableRow className="row" key={2} />
+                <ExpandableRow className="row" key={3} />
+                <ExpandableRow className="row" key={4} />
+                <ExpandableRow className="row" key={5} />
+                <ExpandableRow className="row" key={6} />
+                <ExpandableRow className="row" key={7} />
+            </Pagination>
+        );
     });
 
     it ("renders short pages navigation", function () {

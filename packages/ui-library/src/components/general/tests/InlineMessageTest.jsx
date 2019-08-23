@@ -18,6 +18,15 @@ describe("InlineMessage", function () {
         return ReactTestUtils.renderIntoDocument(<InlineMessage { ...props }>{ message }</InlineMessage>);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <InlineMessage
+                label="A very, very important message"
+                onClick={jest.fn()}
+            />
+        );
+    });
+
     it("display simple inline message with no button", function () {
         var text = "Your message here";
         var view = getComponent({ "data-id": "notice-message-no-button",

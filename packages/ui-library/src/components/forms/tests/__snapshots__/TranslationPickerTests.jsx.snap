@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslationPickerTests data-id's don't change 1`] = `
+Array [
+  "translation-picker",
+  "action-btn",
+  "translation-picker-label",
+  "translation-picker-icon",
+]
+`;

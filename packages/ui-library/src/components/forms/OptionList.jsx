@@ -178,6 +178,7 @@ const OptionList = ({
             {options.map((option, index) => (
                 <OptionItem
                     {...option}
+                    data-id={`option-item_${option.value}`}
                     key={option.value || option.heading}
                     active={highlightedIndex === index}
                     selected={value === option.value}

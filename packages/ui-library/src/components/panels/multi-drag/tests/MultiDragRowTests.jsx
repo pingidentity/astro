@@ -3,6 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../MultiDragRow");
 jest.dontMock("../../../buttons/Button.jsx");
 import { mount } from "enzyme";
+import { mountSnapshotDataIds } from "../../../../testutil/TestUtils";
 
 describe("MultiDragRow", function() {
     var React = require("react"),
@@ -15,6 +16,16 @@ describe("MultiDragRow", function() {
 
         return ReactTestUtils.renderIntoDocument(<MultiDragRow {...props} />);
     }
+
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <MultiDragRow
+                count="4"
+                iconSrc="path"
+                iconClass="icon-globe"
+            />
+        );
+    });
 
     it("triggers add event", function() {
         const callback = jest.fn();

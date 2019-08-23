@@ -163,7 +163,7 @@ class RowIndexNav extends React.Component {
                 ref={function (nav) { self.nav = nav; }}
                 className={classnames("row-index-nav", this.props.className)}
                 data-id={this.props["data-id"]}>
-                <ul data-id={this.props["data-id"]}
+                <ul data-id="row-index-nav-items"
                     className="row-index-nav-items"
                     ref={function (scroller) { self.scroller = scroller; }}
                     style={style}>

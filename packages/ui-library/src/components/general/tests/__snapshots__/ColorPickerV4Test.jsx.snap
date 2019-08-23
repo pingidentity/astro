@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorPicker v4 data-id's don't change 1`] = `
+Array [
+  "color-picker",
+  "inner-swatch",
+  "colorInput",
+  "text-field_container",
+  "colorInput-input",
+  "color-picker-colors-swatch",
+]
+`;

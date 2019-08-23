@@ -18,26 +18,30 @@ describe("HeaderBar v4", function() {
 
     var dataId = "test-header";
 
+    const getDefaults = () => ({
+        onItemValueChange: jest.fn(),
+        onMenuValueChange: jest.fn(),
+        tree: [
+            { id: "help", url: "http://www.yahoo.com" },
+            {
+                id: "cog",
+                children: [
+                    { id: "cog-menu-item", label: "Cog Menu Item" }
+                ]
+            },
+            {
+                id: "account",
+                children: [{ id: "globe", label: "Globe" }]
+            }
+        ],
+        flags: allFlags,
+    });
+
     function getWrappedComponent(opts, omit = {}) {
         opts = _.omit(
             _.defaults(opts || {}, {
                 "data-id": dataId,
-                onItemValueChange: jest.fn(),
-                onMenuValueChange: jest.fn(),
-                tree: [
-                    { id: "help", url: "http://www.yahoo.com" },
-                    {
-                        id: "cog",
-                        children: [
-                            { id: "cog-menu-item", label: "Cog Menu Item" }
-                        ]
-                    },
-                    {
-                        id: "account",
-                        children: [{ id: "globe", label: "Globe" }]
-                    }
-                ],
-                flags: allFlags,
+                ...getDefaults()
             }),
             omit
         );
@@ -49,6 +53,20 @@ describe("HeaderBar v4", function() {
     beforeEach(function() {
         window.addEventListener = jest.fn();
         window.removeEventListener = jest.fn();
+    });
+
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <HeaderBar
+                {...getDefaults()}
+                additionalContent="some stuff that is clearly very important"
+                legacy
+                onNewEnvironment={jest.fn()}
+                searchable
+                siteLogo="pingfed"
+                siteTitle="title"
+            />
+        );
     });
 
     it("clicks trigger correct callback", function() {

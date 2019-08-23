@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grid data-id's don't change 1`] = `
+Array [
+  "grid-test",
+  "grid-row-header",
+  "grid-column-header",
+  "grid-column-header",
+  "grid-column-header",
+  "grid-column-3",
+  "grid-column-header",
+  "grid-column-header",
+  "paginationColumn",
+  "grid-row-0",
+  "grid-row-0-cell-0",
+  "grid-row-0-cell-1",
+  "grid-row-0-cell-2",
+  "grid-row-0-cell-3",
+  "grid-row-0-cell-4",
+  "grid-row-0-cell-5",
+  "paginationCell",
+  "grid-row-1",
+  "grid-row-1-cell-0",
+  "grid-row-1-cell-1",
+  "grid-row-1-cell-2",
+  "grid-row-1-cell-3",
+  "grid-row-1-cell-4",
+  "grid-row-1-cell-5",
+  "paginationCell",
+]
+`;

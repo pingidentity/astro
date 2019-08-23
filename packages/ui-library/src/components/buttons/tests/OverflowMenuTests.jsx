@@ -27,6 +27,14 @@ describe("OverflowMenuTests", function () {
         }
     ];
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <OverflowMenu
+                buttons={buttons}
+            />
+        );
+    });
+
     it("v3: rendered component with data-id=overflow-menu", function () {
         const component = ReactTestUtils.renderIntoDocument(<div><OverflowMenu buttons={buttons} /></div>);
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, "overflow-menu");

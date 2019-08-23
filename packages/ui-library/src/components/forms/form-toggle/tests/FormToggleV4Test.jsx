@@ -21,6 +21,10 @@ describe("Toggle v4", function () {
         return ReactTestUtils.renderIntoDocument(<Toggle {...props} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(<Toggle flags={allFlags} />);
+    });
+
     it("stateless: renders the component with default data-id", function () {
         const component = getComponent();
 

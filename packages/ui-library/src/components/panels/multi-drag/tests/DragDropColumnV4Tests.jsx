@@ -67,6 +67,30 @@ describe("DragDropColumn v4", function () {
         thisComponent = null;
     });
 
+    it("data-id's don't change", () => {
+        const WithContext = DragDropContext(TestBackend)(() => (
+            <DragDropColumn
+                onDrag={jest.fn()}
+                onDrop={jest.fn()}
+                onCancel={jest.fn()}
+                onSearch={jest.fn()}
+                onScrolledToTop={jest.fn()}
+                onScrolledToBottom={jest.fn()}
+
+                contentType={<div />}
+                helpText="PLEASE HELP I AM LOST"
+                name={"Available Rows"}
+                index={0}
+                rows={[{ id: 1, n: 1 }, { id: 2, n: 2 }]}
+
+                flags={allFlags}
+            />
+        ));
+        TestUtils.mountSnapshotDataIds(
+            <WithContext />
+        );
+    });
+
     it("renders with default data-id", function () {
         getWrappedComponent();
         const component = thisComponent;

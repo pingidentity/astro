@@ -34,6 +34,28 @@ describe("HorizontalBarCard", function () {
         return ReactTestUtils.renderIntoDocument(<HorizontalBarCard {...withOptions} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <HorizontalBarCard
+                value={2000}
+                data={[
+                    { id: "Error 401", label: "401 Unauthorized", value: 2600 },
+                    { id: "Error 402", label: "402 Payment Required", value: 1890 },
+                    { id: "Error 403", label: "403 Forbidden", value: 3000 },
+                    { id: "Error 404", label: "404 Not Found", value: 2000 },
+                    { id: "Error 408", label: "405 Request Timeout", value: 3500 },
+                ]}
+
+                options={[
+                    { label: "This Month", value: "1" },
+                    { label: "This Hour", value: "2" },
+                    { label: "Today", value: "3" },
+                    { label: "This Week", value: "4" },
+                ]}
+            />
+        );
+    });
+
     it("rendered component with data-id=horizontalBar-card", function () {
         const component = getComponent({
         });

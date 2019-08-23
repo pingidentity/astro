@@ -69,6 +69,25 @@ describe("Multivalues", function () {
         expect(elements.length).toBe(0);
     });
 
+    it("data-id's don't change", () => {
+        const multival = mount(
+            <Multivalues
+                entries={[
+                    "Entry 1",
+                    "Entry 2",
+                    "Entry 3",
+                    "Entry 4"
+                ]}
+                options={options}
+            />
+        );
+
+        const dropdownInput = multival.find("[data-id='value-entry']");
+        dropdownInput.simulate("click");
+
+        TestUtils.snapshotDataIds(multival);
+    });
+
     it("renders with default data-id", function () {
         component = ReactTestUtils.renderIntoDocument(<Multivalues entries={["one", "two"]} />);
 
@@ -526,7 +545,8 @@ describe("Multivalues", function () {
 
         wrapper.setState({ listOpen: true });
 
-        expect(wrapper.find("li[data-id='option-item']").children().length).toBe(2);
+        expect(wrapper.find("li[data-id='option-item_uno']").exists()).toEqual(true);
+        expect(wrapper.find("li[data-id='option-item_two']").exists()).toEqual(true);
     });
 
     it("doesn't show selected entries as options", function() {
@@ -550,7 +570,8 @@ describe("Multivalues", function () {
 
         wrapper.setState({ listOpen: true });
 
-        expect(wrapper.find("li[data-id='option-item']").children().length).toBe(2);
+        expect(wrapper.find("li[data-id='option-item_first']").exists()).toEqual(true);
+        expect(wrapper.find("li[data-id='option-item_third']").exists()).toEqual(true);
     });
 
     it("calls onValueChange when editing the draft if the includeDraftInEntries prop is set", function() {

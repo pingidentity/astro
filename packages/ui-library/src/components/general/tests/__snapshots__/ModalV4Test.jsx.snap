@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalTest v4 data-id's don't change 1`] = `
+Array [
+  "modal-button",
+  "modal-bg",
+  "modal-content",
+  "modal-inner-content",
+  "modal-header",
+  "modal-body",
+]
+`;

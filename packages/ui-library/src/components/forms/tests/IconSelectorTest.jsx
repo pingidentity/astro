@@ -1,6 +1,7 @@
 import React from "react";
 import IconSelector from "../IconSelector";
 import { mount } from "enzyme";
+import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
 
 const radioItems = [
     { id: "cog", iconName: "cog" },
@@ -25,6 +26,15 @@ describe("IconSelector", function () {
         );
     }
 
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <IconSelector
+                items={radioItems}
+                labelText="hello"
+            />
+        );
+    });
+
     it("renders width default data-id", function () {
         const wrapper = getWrapper();
 
@@ -35,7 +45,7 @@ describe("IconSelector", function () {
         const callback = jest.fn();
         const wrapper = getWrapper({ onValueChange: value => callback(value) });
 
-        const button = wrapper.find("[data-id='icon-selector-button']").at(1);
+        const button = wrapper.find("[data-id='icon-selector-button_puzzle']");
 
         expect(callback).not.toHaveBeenCalled();
         button.simulate("click");

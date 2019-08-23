@@ -21,6 +21,17 @@ describe("DashboardCard", function () {
         return ReactTestUtils.renderIntoDocument(<DashboardCard {...opts} />);
     }
 
+    it("data-id's don't change with single list type", () => {
+        TestUtils.mountSnapshotDataIds(
+            <DashboardCard
+                back="SNAAAAARF"
+                errorMessage="OH GOD IM SO SORRY"
+                loading={false}
+                onMakeDefault={jest.fn()}
+            />
+        );
+    });
+
     it("responds to flip", function () {
         const callback = jest.fn();
         const component = getComponent({

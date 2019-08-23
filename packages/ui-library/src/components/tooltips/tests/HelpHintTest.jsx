@@ -24,6 +24,14 @@ describe("HelpHint", function () {
         // tooltipDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text-content");
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <HelpHint
+                hintText="top secret"
+            />
+        );
+    });
+
     it("renders the component", function () {
         expect(ReactTestUtils.isDOMComponent(div)).toBeTruthy();
     });

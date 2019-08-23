@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpandableRow v4 data-id's don't change 1`] = `
+Array [
+  "drag-drop-item",
+  "expandable-row",
+  "row-accessories",
+  "status",
+  "ordering-controls",
+  "ordering-input",
+  "expanded-row",
+  "item-message",
+  "inline-message-text",
+  "content",
+  "expand-btn",
+  "edit-btn",
+  "delete-btn",
+]
+`;

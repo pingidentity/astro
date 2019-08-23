@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OptionList data-id's don't change 1`] = `
+Array [
+  "option-list",
+  "option-item_1",
+  "icon",
+  "icon-graphic",
+  "option-item_undefined",
+  "option-item_2",
+  "helpHint",
+  "helpHint-target",
+  "icon",
+  "icon-graphic",
+  "tooltip",
+]
+`;

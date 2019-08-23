@@ -48,6 +48,71 @@ describe("SelectionList v4", function () {
         return ReactTestUtils.renderIntoDocument(<SelectionList {...opts} />);
     }
 
+    it("data-id's don't change with single list type", () => {
+        TestUtils.mountSnapshotDataIds(
+            <SelectionList
+                flags={allFlags}
+                items={[
+                    { name: "Long Tran", id: 1 },
+                    { name: "Nam Tu", id: 2 },
+                    { name: "Viem Ong", id: 3 },
+                    { name: "Chien Cao", id: 4 },
+                    { name: "Thuy Vu", id: 5 },
+                    { name: "Quy Bui", id: 6 },
+                    { name: "Nam Duong", id: 7 },
+                    { name: "Thai Tran", id: 8 },
+                    { name: "Phu Le", id: 9 }
+                ]}
+                onValueChange={jest.fn()}
+                requiredText="YOU NEED ME"
+                showSearchBox
+                type={SelectionList.ListType.SINGLE}
+            />
+        );
+    });
+
+    it("data-id's don't change with add list type", () => {
+        TestUtils.mountSnapshotDataIds(
+            <SelectionList
+                flags={allFlags}
+                items={[
+                    { name: "Long Tran", id: 1 },
+                    { name: "Nam Tu", id: 2 },
+                    { name: "Viem Ong", id: 3 },
+                    { name: "Chien Cao", id: 4 },
+                    { name: "Thuy Vu", id: 5 },
+                    { name: "Quy Bui", id: 6 },
+                    { name: "Nam Duong", id: 7 },
+                    { name: "Thai Tran", id: 8 },
+                    { name: "Phu Le", id: 9 }
+                ]}
+                onValueChange={jest.fn()}
+                type={SelectionList.ListType.ADD}
+            />
+        );
+    });
+
+    it("data-id's don't change with multi-add list type", () => {
+        TestUtils.mountSnapshotDataIds(
+            <SelectionList
+                flags={allFlags}
+                items={[
+                    { name: "Long Tran", id: 1 },
+                    { name: "Nam Tu", id: 2 },
+                    { name: "Viem Ong", id: 3 },
+                    { name: "Chien Cao", id: 4 },
+                    { name: "Thuy Vu", id: 5 },
+                    { name: "Quy Bui", id: 6 },
+                    { name: "Nam Duong", id: 7 },
+                    { name: "Thai Tran", id: 8 },
+                    { name: "Phu Le", id: 9 }
+                ]}
+                onValueChange={jest.fn()}
+                type={SelectionList.ListType.MULTIADD}
+            />
+        );
+    });
+
     it("should render the component as single selection list by default", function () {
         const component = getComponent();
 

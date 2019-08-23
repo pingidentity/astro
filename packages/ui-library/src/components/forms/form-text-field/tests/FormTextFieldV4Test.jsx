@@ -44,6 +44,12 @@ describe("FormTextField v4", function () {
         return ReactTestUtils.renderIntoDocument(<FormTextField {...opts} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FormTextField
+                flags={allFlags}
+            />);
+    });
 
     it("renders the component", function () {
         const component = getComponent();

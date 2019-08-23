@@ -26,6 +26,10 @@ describe("FileInput", function () {
         return ReactTestUtils.renderIntoDocument(<FileInput {...defaultProps} {...opts} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(<FileInput />);
+    });
+
     it("renders the component in initial state", function () {
         const component = getComponent();
         const componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, testDataId);

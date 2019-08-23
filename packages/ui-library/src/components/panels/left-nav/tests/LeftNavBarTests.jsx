@@ -41,6 +41,41 @@ describe("LeftNavBar", function () {
         return ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <LeftNavBar
+                copyrightYear="1985"
+                onItemValueChange={jest.fn()}
+                onSectionValueChange={jest.fn()}
+                topContent="Right up top"
+                tree={[{
+                    id: "a thing",
+                    type: "context",
+                    label: "Environement",
+                    icon: "globe",
+                    addLink: {
+                        text: "Environment",
+                        callback: jest.fn()
+                    },
+                    children: [
+                        {
+                            label: "Item 1",
+                            id: "context-item-1"
+                        },
+                        {
+                            label: "Item 2",
+                            id: "context-item-2"
+                        },
+                        {
+                            label: "Item 22",
+                            id: "context-item-3"
+                        }
+                    ]
+                }, ...navData]}
+            />
+        );
+    });
+
     it("clicks trigger correct callback", function () {
         var wrapper = getWrappedComponent();
         var component = wrapper.refs.target;

@@ -6,6 +6,12 @@ describe("Masked Value", function() {
         TestUtils = require("../../../testutil/TestUtils"),
         MaskedValue = require("../MaskedValue");
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <MaskedValue />
+        );
+    });
+
     it("renders with a string and toggles", function() {
         var component = ReactTestUtils.renderIntoDocument(<MaskedValue>A value</MaskedValue>);
 

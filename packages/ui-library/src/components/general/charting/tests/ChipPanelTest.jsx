@@ -35,6 +35,14 @@ describe("ChipPanel", () => {
         );
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ChipPanel
+                chips={defaultChips}
+            />
+        );
+    });
+
     it("renders succesfully", () => {
         const component = getComponent();
         const container = TestUtils.findRenderedDOMNodeWithDataId(component, "test-panel");

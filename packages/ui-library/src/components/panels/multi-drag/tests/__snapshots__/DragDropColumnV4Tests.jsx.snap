@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DragDropColumn v4 data-id's don't change 1`] = `
+Array [
+  "drag-drop-column",
+  "drag-drop-column-helphint",
+  "drag-drop-column-helphint-target",
+  "drag-drop-column-helphint-icon",
+  "tooltip",
+  "drag-drop-row_1",
+  "row_1",
+  "drag-drop-row_2",
+  "row_2",
+]
+`;

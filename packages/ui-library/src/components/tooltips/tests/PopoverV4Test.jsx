@@ -27,6 +27,18 @@ describe("Popover", function() {
         window.removeEventListener.mockClear();
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Popover
+                flags={allFlags}
+                label="BORK"
+                open
+            >
+                Just some stuff
+            </Popover>
+        );
+    });
+
     it("renders open state", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>

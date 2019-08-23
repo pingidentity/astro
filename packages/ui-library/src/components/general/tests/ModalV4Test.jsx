@@ -36,6 +36,15 @@ describe("ModalTest v4", function () {
         return ReactTestUtils.renderIntoDocument(<Modal {...modalDefaults} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Modal
+                expanded
+                flags={allFlags}
+            />
+        );
+    });
+
     it("detaches event listeners and calls close event on unmount", function () {
         const component = getComponent({ expanded: true });
         const handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];

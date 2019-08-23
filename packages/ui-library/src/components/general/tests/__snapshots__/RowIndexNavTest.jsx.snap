@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Indent data-id's don't change 1`] = `
+Array [
+  "row-index-nav",
+  "row-index-nav-items",
+  "nav-item_A",
+  "nav-item_B",
+  "nav-item_C",
+  "nav-item_D",
+  "nav-item_E",
+  "nav-item_F",
+  "nav-item_G",
+  "nav-item_H",
+  "nav-item_I",
+  "nav-item_J",
+  "nav-item_K",
+  "nav-item_L",
+  "nav-item_M",
+  "nav-item_N",
+  "nav-item_O",
+  "nav-item_P",
+  "nav-item_Q",
+  "nav-item_R",
+  "nav-item_S",
+  "nav-item_T",
+  "nav-item_U",
+  "nav-item_V",
+  "nav-item_W",
+  "nav-item_X",
+  "nav-item_Y",
+  "nav-item_Z",
+]
+`;

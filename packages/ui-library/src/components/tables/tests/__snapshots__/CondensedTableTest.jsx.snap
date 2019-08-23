@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CondensedTable data-id's don't change 1`] = `
+Array [
+  "condensedTable",
+  "section_0",
+  "item_tom",
+  "item_25",
+  "item_denver",
+  "section_1",
+  "item_jane",
+  "item_36",
+  "item_breckenridge",
+  "section_2",
+  "item_roy",
+  "item_19",
+  "item_arvada",
+]
+`;
+
+exports[`CondensedTable data-id's don't change with data object 1`] = `
+Array [
+  "condensedTable",
+  "section_0",
+  "item_tom",
+  "item_25",
+  "item_denver",
+  "section_1",
+  "item_jane",
+  "item_36",
+  "item_breckenridge",
+  "section_2",
+  "item_roy",
+  "item_19",
+  "item_arvada",
+]
+`;

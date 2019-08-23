@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconSelector data-id's don't change 1`] = `
+Array [
+  "icon-selector",
+  "label",
+  "icon-selector-button_cog",
+  "icon-selector-icon_cog",
+  "icon-selector-button_puzzle",
+  "icon-selector-icon_puzzle",
+  "icon-selector-button_badge",
+  "icon-selector-icon_badge",
+  "icon-selector-button_key",
+  "icon-selector-icon_key",
+  "icon-selector-button_globe",
+  "icon-selector-icon_globe",
+  "icon-selector-button_apps",
+  "icon-selector-icon_apps",
+  "icon-selector-button_beaker",
+  "icon-selector-icon_beaker",
+  "icon-selector-button_device",
+  "icon-selector-icon_device",
+]
+`;

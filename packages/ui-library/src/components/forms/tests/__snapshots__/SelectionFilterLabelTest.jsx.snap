@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectionFilterLabel data-id's don't change with single list type 1`] = `
+Array [
+  "selection-filter-label",
+  "label",
+  "selection-filter",
+  "selection-filter-count",
+]
+`;

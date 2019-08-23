@@ -57,6 +57,15 @@ describe("ConditionalFieldset", function () {
         ReactTestUtils.Simulate.click(clickDropdown); // open the dropdown
     };
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ConditionalFieldset flags={allFlags}>
+                <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
+                <div data-id="option2" title="Option 2">Option 2</div>
+            </ConditionalFieldset>
+        );
+    });
+
     it("renders default configuration with select", function () {
         const component = getComponent({ "data-id": dataId, type: ConditionalFieldset.Types.SELECT });
 

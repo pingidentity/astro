@@ -14,6 +14,15 @@ describe("FormLabel", function () {
         FormLabel = require("../FormLabel"),
         Utils = require("../../../util/Utils");
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FormLabel
+                hint="hint"
+                lockText="LOCKED THE HECK UP"
+            />
+        );
+    });
+
     it("renders if it has children", function () {
         var label = ReactTestUtils.renderIntoDocument(
             <FormLabel><div>some text</div></FormLabel>);

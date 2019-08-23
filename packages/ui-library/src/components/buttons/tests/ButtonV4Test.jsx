@@ -10,10 +10,7 @@ import Button from "../Button";
 import { allFlags } from "../../../util/FlagUtils";
 
 describe("Button", function () {
-
     const componentId = "button";
-
-
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
@@ -32,6 +29,15 @@ describe("Button", function () {
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
+    });
+
+    it("data-id's do not change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Button
+                disabled
+                disabledText="test"
+            />
+        );
     });
 
     it("renders href tag with 'a' ", function () {

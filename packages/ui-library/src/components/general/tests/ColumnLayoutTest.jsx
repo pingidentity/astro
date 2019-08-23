@@ -39,6 +39,15 @@ describe("Row", function () {
         );
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Layout.Row>
+                <Layout.Column>{colContent[0]}</Layout.Column>
+                <Layout.Column>{colContent[1]}</Layout.Column>
+            </Layout.Row>
+        );
+    });
+
     it("row renders with default data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(<Layout.Row />);
 

@@ -1,10 +1,19 @@
 import React from "react";
 import { shallow } from "enzyme";
+import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
 import GlobalMessage, { messageTypes } from "../GlobalMessage";
 import Button, { buttonTypes } from "../../buttons/Button";
 import Icon from "../Icon";
 
 describe("Global Message", () => {
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <GlobalMessage
+                type={messageTypes.WARNING}
+            />
+        );
+    });
+
     it("renders the component", () => {
         const component = shallow(
             <GlobalMessage />

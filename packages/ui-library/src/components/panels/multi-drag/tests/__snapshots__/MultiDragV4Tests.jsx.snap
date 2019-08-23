@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiDrag v4 data-id's don't change 1`] = `
+Array [
+  "multi-drag",
+  "DragDropColumn-0",
+  "link-dropdown-list",
+  "action-btn",
+  "link-dropdown-list-label",
+  "details-content",
+  "details-body",
+  "link-dropdown-list-menu",
+  "drag-drop-row_1",
+  "row_1",
+  "row-name",
+  "row-category",
+  "row-button-add",
+  "drag-drop-row_2",
+  "row_2",
+  "row-name",
+  "row-category",
+  "row-button-add",
+  "DragDropColumn-1",
+  "drag-drop-row_3",
+  "row_3",
+  "row-name",
+  "row-category",
+  "row-button-remove",
+  "drag-drop-row_4",
+  "row_4",
+  "row-name",
+  "row-category",
+  "row-button-remove",
+]
+`;

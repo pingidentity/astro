@@ -12,6 +12,13 @@ import { mount } from "enzyme";
 import { allFlags } from "../../../util/FlagUtils";
 
 describe("DropDownButton", function () {
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <DropDownButton
+                title="title"
+            />
+        );
+    });
 
     it("renders closed in stateless mode", function () {
         const callback = jest.fn();

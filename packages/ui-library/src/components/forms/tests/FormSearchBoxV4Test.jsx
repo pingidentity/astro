@@ -24,6 +24,15 @@ describe("FormSearchBox v4", function () {
         return ReactTestUtils.renderIntoDocument(<FormSearchBox {...opts} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FormSearchBox
+                flags={allFlags}
+                queryString="WHO AM I WHY AM I HERE"
+            />
+        );
+    });
+
     it("should render the component", function () {
         var component = getComponent({
             "data-id": "mySearchBox"

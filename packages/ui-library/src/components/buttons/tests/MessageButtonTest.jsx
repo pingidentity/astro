@@ -116,4 +116,12 @@ describe("MessageButton", function () {
         ReactTestUtils.Simulate.click(button);
         expect(onClick).not.toHaveBeenCalled();
     });
+
+    it("data-id's do not change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <MessageButton
+                status={statuses.ERROR}
+            />
+        );
+    });
 });

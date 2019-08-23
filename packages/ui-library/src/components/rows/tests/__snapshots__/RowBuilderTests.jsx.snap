@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RowBuilder data-id's don't change 1`] = `
+Array [
+  "row-builder",
+  "input-row",
+  "row-builder-first-delete",
+  "input-row",
+  "row-builder-second-delete",
+  "row-builder-add",
+  "link-anchor",
+]
+`;

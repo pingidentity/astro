@@ -40,6 +40,24 @@ describe("FormCheckboxList", function () {
         return ReactTestUtils.renderIntoDocument(<FormCheckboxList {...props} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FormCheckboxList
+                labelHideUnselected={"Hide Unselected"}
+                labelSearchPlaceholder={"Search"}
+                onGetSelectAllLabel={jest.fn()}
+                onGetDeselectAllLabel={jest.fn()}
+                onValueChange={jest.fn()}
+                onQueryChange={jest.fn()}
+                onVisibilityChange={jest.fn()}
+                items={[{ id: 1, name: "Salesforce" },
+                    { id: 2, name: "Google Mail" }
+                ]}
+                selected={[2]}
+            />
+        );
+    });
+
     it("renders with default data-id", function () {
         var component = getComponent(),
             checkboxList = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox-list");

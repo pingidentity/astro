@@ -28,6 +28,24 @@ describe("DonutCard", function () {
         return ReactTestUtils.renderIntoDocument(<DonutCard {...withDefaults} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <DonutCard
+                data={[
+                    { id: "Enabled Users", value: 120543 , color: "#E12F51" },
+                    { id: "Inactive Users", value: 51233 },
+                    { id: "Disabled Users", value: 3000 },
+                ]}
+                options={[
+                    { label: "Current", value: "1" },
+                    { label: "30 DAYS", value: "2" },
+                    { label: "60 DAYS", value: "3" },
+                    { label: "90 DAYS", value: "4" },
+                ]}
+            />
+        );
+    });
+
     it("rendered component with data-id=donut-card", function () {
         const component = getComponent({
         });

@@ -37,6 +37,12 @@ describe("Calendar v4", function () {
         callback.mockClear();
     });
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <Calendar />
+        );
+    });
+
     it("renders with default data-id", function () {
         const component = getComponent({ date: selectedDate });
 

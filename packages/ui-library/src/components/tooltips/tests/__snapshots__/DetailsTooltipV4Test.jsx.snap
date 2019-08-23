@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailsTooltip data-id's don't change 1`] = `
+Array [
+  "details-tooltip",
+  "action-btn",
+]
+`;

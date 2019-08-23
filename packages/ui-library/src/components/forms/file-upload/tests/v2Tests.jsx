@@ -89,6 +89,12 @@ describe("FileUpload", function () {
     //bind the change simulator
     var simulateChange = CommonTests.simulateChange.bind(null, get);
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FileUpload />
+        );
+    });
+
     it("onchange callback", function () {
         var component = getComponent({ onChange: jest.fn() });
 

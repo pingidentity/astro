@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormCheckboxList data-id's don't change 1`] = `
+Array [
+  "form-checkbox-list",
+  "dataobject-search",
+  "searchBox",
+  "text-field_container",
+  "searchBox-input",
+  "check-all",
+  "hide-unchecked",
+  "dataobjects",
+  "checkbox-label_1",
+  "label",
+  "checkbox_1",
+  "checkbox-label_2",
+  "label",
+  "checkbox_2",
+]
+`;

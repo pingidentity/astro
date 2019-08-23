@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Masked Value data-id's don't change 1`] = `
+Array [
+  "masked-value",
+  "reveal",
+]
+`;

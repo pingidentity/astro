@@ -55,6 +55,16 @@ describe("ReportTable", function () {
         return ReactTestUtils.renderIntoDocument(<ReportTable {...props} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <ReportTable
+                headData={mockData.cols}
+                bodyData={mockData.data}
+                fixedHead
+            />
+        );
+    });
+
     it("Correctly renders number of th and content", function () {
         const component = getComponent();
         var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");

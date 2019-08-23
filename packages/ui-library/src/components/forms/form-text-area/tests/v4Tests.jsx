@@ -22,6 +22,18 @@ describe("FormTextArea v4", function () {
         return ReactTestUtils.renderIntoDocument(<FormTextArea {...props} />);
     }
 
+    it("data-id's don't change", () => {
+        TestUtils.mountSnapshotDataIds(
+            <FormTextArea
+                stateless={true}
+                onChange={jest.fn()}
+                onValueChange={jest.fn()}
+                onBlur={jest.fn()}
+                flags={[ "p-stateful" ]}
+            />
+        );
+    });
+
     it("renders the component", function () {
         var component = getComponent();
 
