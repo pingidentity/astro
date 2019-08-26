@@ -259,7 +259,7 @@ clean-css:
 
 # package the module and name the file to include the current version
 package: install-mvn install-node-npm clean-css
-	# $(call run_coverage)
+	$(call run_coverage)
 
 	$(call package,$(PACKAGE_VERSION))
 	$(call package_coverage,$(PACKAGE_VERSION))
