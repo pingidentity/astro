@@ -1,0 +1,90 @@
+@import '../../../src/css/colors.scss';
+@import '../../../src/css/spacing.scss';
+
+body {
+    background: $color-neutral-95;
+}
+
+.main {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100%;
+    min-width: 100%;
+    background: linear-gradient(54deg, rgba(228,228,228,1) 0%, rgba(235,235,235,1) 25%, rgba(242,242,242,1) 100%);
+}
+
+.content {
+    margin: $spacing-md 0 $spacing-md 10%;
+    max-width: 550px;
+}
+
+.splash {
+    min-height: 100%;
+    flex-grow: 1;
+    background: url('../images/escher-style.png');
+    background-repeat: no-repeat;
+    align-self: stretch;
+    margin-left: -80px;
+}
+
+.ping-logo {
+    position: absolute;
+    right: $spacing-lg;
+    top: $spacing-lg;
+    width: 80px;
+    height: 80px;
+}
+
+.card {
+    background: $color-white;
+    padding: $spacing-md;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    font-size: 15px;
+
+    &__icon {
+        margin-right: $spacing-md;
+        width: 80px;
+        height: 80px
+    }
+
+    &__link {
+        font-weight: bold;
+
+        &:after {
+            content: '\00BB';
+            margin-left: $spacing-xs;
+        }
+    }
+}
+
+.landing-button {
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 18px;
+    text-transform: uppercase;
+    padding: $spacing-sm $spacing-lg;
+    height: auto;
+
+    &--ghost {
+        border-color: $color-active-blue;
+        color: $color-active-blue;
+        background: transparent;
+
+        &:hover {
+            border-color: $color-active-blue-highlighted;
+            color: $color-active-blue-highlighted;
+            background: $color-white;
+        }
+    }
+}
+
+.version-dropdown {
+    text-transform: uppercase;
+    font-weight: bold;
+}

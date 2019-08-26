@@ -1,18 +1,26 @@
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    fetch = require("isomorphic-fetch"),
-    // isomorphic-fetch need a Promise polyfill for older browsers.
-    // Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
-    Promise = require("es6-promise").Promise, // eslint-disable-line
-    HeaderBar = require("../src/components/panels/header-bar/HeaderBar"),
-    LeftNavBar = require("../src/components/panels/left-nav/LeftNavBar"),
-    _ = require("underscore");
+import React from "react";
+import ReactDOM from "react-dom";
+import fetch from "isomorphic-fetch";
+// isomorphic-fetch need a Promise polyfill for older browsers.
+// Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
+import "es6-promise"; // eslint-disable-lint;
+
 
 // the CSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
-require("../src/css/ui-library.scss"); // UI Library styles
-require("../src/demo/css/ui-library-demo.scss"); // UI Library demo styles
-require("./assets/css/landing.css"); // Override undesired styles from ui-library.scss and ui-library-demo.scss
+import "../src/css/ui-library.scss"; // UI Library styles
+import "../src/demo/css/ui-library-demo.scss"; // UI Library demo styles
+import "./assets/css/landing.scss";
+
+import LinkDropDownList from "../src/components/forms/LinkDropDownList";
+import Button from "../src/components/buttons/Button";
+import Stack from "../src/components/layout/Stack";
+import Link from "../src/components/general/Link";
+import libLogo from "./assets/images/logo-uilibrary.svg";
+import pingLogo from "./assets/images/ping-logo.svg";
+import documentationIcon from "./assets/images/documentation-icon.svg";
+import componentsIcon from "./assets/images/components-icon.svg";
+import templatesIcon from "./assets/images/templates-icon.svg";
 
 class LandingPage extends React.Component {
 
@@ -27,97 +35,51 @@ class LandingPage extends React.Component {
                 return resp.json();
             })
             .then(function (versions) {
-                var GETTING_STARTED_NODE = {
-                    label: "QuickStart",
-                    id: "quickStart",
-                    children: [{ label: "Getting Started", id: "getting-started" }]
-                };
-
                 if (versions && versions.length > 0) {
-                    var latestVersion = versions[versions.length - 1];
+                    const versionList = this._filterVersions(this._sortVersions(versions));
 
                     this.setState({
-                        version: latestVersion,
-                        headerBarTree: [
-                            {
-                                id: "help",
-                                iconClassName: "icon-help",
-                                title: "Documentation",
-                                url: latestVersion + "/build-doc/ui-library/" + latestVersion + "/index.html"
+                        stableVersion: versionList[1].replace("-SNAPSHOT", ""),
+                        versionOptions: versionList.map(
+                            function (version, index) {
+                                return {
+                                    label: index > 0 ? version.replace("-SNAPSHOT", "") : version,
+                                    value: version
+                                };
                             }
-                        ],
-                        leftNavBarTree: [
-                            GETTING_STARTED_NODE,
-                            {
-                                label: "Versions",
-                                id: "versions",
-                                children: this._filterVersions(this._sortVersions(versions)).map(
-                                    function (version, index) {
-                                        return {
-                                            label: index > 0 ? version.replace("-SNAPSHOT", "") : version,
-                                            id: version
-                                        };
-                                    }
-                                )
-                            }
-                        ]
+                        )
                     });
                 } else {
                     // probably local
                     this.setState({
-                        version: "",
-                        headerBarTree: [
-                            {
-                                id: "help",
-                                iconClassName: "icon-help",
-                                title: "Documentation"
-                            }
-                        ],
-                        leftNavBarTree: [
-                            GETTING_STARTED_NODE,
-                            {
-                                label: "Versions",
-                                id: "versions",
-                                children: [{ label: "Not found or in development", id: "" }]
-                            }
-                        ]
+                        stableVersion: "",
                     });
                 }
             }.bind(this));
     }
 
     state = {
-        version: "",
-        headerBarTree: [],
-        leftNavBarTree: [],
-        leftNavOpenSections: { versions: true }
-    };
-
-    _gotoTutorials = () => {
-        window.location.href = this.state.version + "/index.html#/?openNode=Tutorials";
-    };
-
-    _gotoQuickstartPage = () => {
-        window.location.href = this.state.version + "/index.html#/?openNode=Tutorials&selectedNode=UILibrary101";
+        versionOptions: [],
+        stableVersion: "",
     };
 
     _gotoDemoVersion = (version) => {
-        window.location.href = version + "/index.html";
+        window.location.href = `${version}/index.html`;
     };
 
-    _handleLeftNavBarItemValueChange = (itemId) => {
-        if (itemId === "getting-started") {
-            this._gotoQuickstartPage();
-        } else {
-            this._gotoDemoVersion(itemId);
-        }
-    };
+    _getStableVersionLink = () => `${this.state.stableVersion}-SNAPSHOT/index.html`;
 
-    _handleLeftNavBarSectionValueChange = (sectionId) => {
-        var nextState = _.clone(this.state.leftNavOpenSections);
-        nextState[sectionId] = !nextState[sectionId];
-        this.setState({ leftNavOpenSections: nextState });
-    };
+    _getDocumentationLink = () => `${this.state.stableVersion}-SNAPSHOT/index.html#/?root=Documentation`;
+    _getComponentsLink = () => (
+        `${this.state.stableVersion}-SNAPSHOT/index.html#/` +
+        `?selectedSection=BasicInputs&selectedNode=Checkbox&root=Components`
+    );
+    _getTemplatesLink = () => (
+        `${this.state.stableVersion}-SNAPSHOT/index.html#/` +
+        `?selectedSection=Actionstemplate&selectedNode=Actionstemplate&root=Templates`
+    );
+
+    _handleVersionSelect = ({ value }) => this._gotoDemoVersion(value);
 
     _versionToNumber = version => {
         const numbers = version.replace("-SNAPSHOT", "").split(".").map(string => string * 1); // parseInt didn't work
@@ -134,136 +96,64 @@ class LandingPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="components-container">
-                    <HeaderBar tree={this.state.headerBarTree}
-                        label="UI Library" />
-
-                    <LeftNavBar tree={this.state.leftNavBarTree}
-                        openSections={this.state.leftNavOpenSections}
-                        onItemValueChange={this._handleLeftNavBarItemValueChange}
-                        onSectionValueChange={this._handleLeftNavBarSectionValueChange}
-                        collapsible={true}/>
-
-
-                    <div id="library-content" className="contrast">
-                        <div>
-                            <div className="section">
-                                <div className="documentation">
-                                    <div className="doc">
-                                        <div className="clearfix">
-                                            <h1>
-                                            Welcome to the UI Library
-                                            </h1>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="section-content">
-                                    <div className="clearfix">
-                                        <div className="about-section">
-                                            <div className="description">
-                                            The UI library is intended to solve a number of challenges for
-                                            Ping's product development teams:
-                                                <ol>
-                                                    <li><strong>Components:</strong> Ensure that all base-level,
-                                                    reusable pieces of UI code developed at Ping can be leveraged
-                                                    by all teams.
-                                                    </li>
-                                                    <li><strong>Templates:</strong> Create the most standard layouts
-                                                    based on the design standards document produced by UX,
-                                                    to provide common markup and styling layouts for teams to use to
-                                                    quickly produce pixel-perfect pages.
-                                                    </li>
-                                                    <li><strong>Tutorials:</strong> Educate and enable developers
-                                                    to use the library components and templates to quickly create
-                                                    new applications and features.</li>
-                                                </ol>
-                                            </div>
-
-                                            <br/><br/>
-                                            <div className="description">
-                                            Access the current version: <a id="currentVersionLink"
-                                                    href={this.state.version + "/index.html"}>
-                                                    {this.state.version
-                                                        ? this.state.version.replace("-SNAPSHOT", "")
-                                                        : "In development"
-                                                    }
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div className="page-section-data-divider"></div>
-
-                                        <div className="content-section">
-                                            <div className="content-columns columns-3" data-id="columns-3">
-                                                <div className="content-column">
-                                                    <h2>
-                                                        <span data-id="quickstart" className="icon-thumb"></span>
-                                                    QuickStart
-                                                    </h2>
-
-                                                    <div className="description">
-                                                    Getting up and running with the UI Library is a quick and easy.
-                                                    Just follow our 101 quickstart guide and you'll know exactly
-                                                    what to do.
-                                                    </div>
-
-                                                    <div className="button-container">
-                                                        <button type="button" className="success"
-                                                            onClick={this._gotoQuickstartPage}>
-                                                        Get Started
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div className="content-column">
-                                                    <h2>
-                                                        <span data-id="tutorials" className="icon-wand"></span>
-                                                    Tutorials
-                                                    </h2>
-
-                                                    <div className="description">
-                                                    This <a href="#" onClick={this._gotoTutorials}>tutorial</a> will
-                                                    guide you through how to integrate the UI Library project into your
-                                                    own project and start using it to create a new application using
-                                                    its components and templates. There are a series of tutorials that
-                                                    you can refer to with best practices, coding examples, and details
-                                                    on how to successfully use the library to increase your team's
-                                                    velocity.
-                                                    </div>
-                                                </div>
-
-                                                <div className="content-column">
-                                                    <h2>
-                                                        <span data-id="downloads" className="icon-download"></span>
-                                                    Downloads
-                                                    </h2>
-                                                    {
-                                                    /* eslint-disable max-len */
-                                                        <div className="description">
-                                                        To download the latest UI Library or a specific version of the
-                                                        library you can either download it from artifactory,
-                                                        where each version is uploaded with the
-                                                        release, or check out the code from Gerrit <a
-                                                                href="https://hg-od01.corp.pingidentity.com/r/#/admin/projects/ui-library"
-                                                                target="_blanke">
-                                                            here
-                                                            </a>.
-                                                        If you choose to download the source from Gerrit,
-                                                        you can access a specific release by branching from a tag.
-                                                        </div>
-                                                    /* eslint-enable max-len */
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            <div className="main">
+                <Stack gap="LG" className="content">
+                    <img src={libLogo} width="490px" height="141px" />
+                    <div>
+                        <Button
+                            className="landing-button"
+                            label={`${this.state.stableVersion} Release`}
+                            type="primary"
+                            href={this._getStableVersionLink()}
+                        />
+                        <Button
+                            className="landing-button landing-button--ghost"
+                            label="End-User"
+                            href="end-user/"
+                        />
+                        {false && // removing this until the beta demo site is in place
+                            <Button
+                                className="landing-button landing-button--ghost"
+                                label="4.0.0 Beta"
+                                href="beta/index.html"
+                            />
+                        }
+                    </div>
+                    <LinkDropDownList
+                        label="All Versions"
+                        className="version-dropdown"
+                        options={this.state.versionOptions}
+                        onClick={this._handleVersionSelect}
+                    />
+                    <Stack gap="MD">
+                        <div className="card">
+                            <img className="card__icon" src={documentationIcon} />
+                            <div className="card__description">
+                                <p>
+                                    Get up to speed on basic usage of the library
+                                    and read release notes for the different versions.
+                                </p>
+                                <Link className="card__link" href={this._getDocumentationLink()}>Documentation</Link>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div className="card">
+                            <img className="card__icon" src={componentsIcon} />
+                            <div className="card__description">
+                                <p>Play with demos of the components, view code samples, and get API documentation.</p>
+                                <Link className="card__link" href={this._getComponentsLink()}>Components</Link>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <img className="card__icon" src={templatesIcon} />
+                            <div className="card__description">
+                                <p>View real examples of page layouts based on designs for product features.</p>
+                                <Link className="card__link" href={this._getTemplatesLink()}>Templates</Link>
+                            </div>
+                        </div>
+                    </Stack>
+                </Stack>
+                <div className="splash" />
+                <img className="ping-logo" src={pingLogo} />
             </div>);
     }
 }
