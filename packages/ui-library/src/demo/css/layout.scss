@@ -85,6 +85,7 @@ $sidenav-lineheight: 22px;
     }
     .markup-wrapper {
         overflow: hidden;
+        padding-top: $spacing-lg;
     }
     .inner-markup-wrapper {
         overflow-x: auto;
