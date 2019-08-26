@@ -35,7 +35,10 @@ $default-input-border-radius: 2px;
 .icon,
 .icon--clickable,
 .integer-down,
-.integer-up {
+.integer-up,
+.view-toggle,
+.delete-btn,
+.button-menu__button, {
     &:focus {
         outline-width: 0;
     }
@@ -52,7 +55,10 @@ $default-input-border-radius: 2px;
     .icon,
     .icon--clickable,
     .integer-down,
-    .integer-up {
+    .integer-up,
+    .view-toggle,
+    .delete-btn,
+    .button-menu__button, {
         &:focus {
             outline-width: 5px;
         }
