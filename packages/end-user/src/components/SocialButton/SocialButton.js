@@ -186,6 +186,13 @@ export default styled(SocialButton)`
                 opacity: 0.1;
             }
         }
+
+        &:disabled {
+            cursor: unset;
+            &::after {
+                opacity: 0.2;
+            }
+        }
     }
 
     .social-button__logo {
@@ -210,5 +217,12 @@ export default styled(SocialButton)`
         border: 0;
         overflow: hidden;
         cursor: pointer;
+
+        &:disabled {
+             cursor: unset;
+            &::after {
+                opacity: 0.2;
+            }
+        }
     }
 `;
