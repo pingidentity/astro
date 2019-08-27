@@ -27,6 +27,7 @@ gulp.task('move-files', () =>
             './package.json',
             './static/end-user.css',
             './src/css**/**/*',
+            './src/components**/**/*(*.jsx|*.js)',
             './static/*.otf',
             './static/*.svg',
         ])
