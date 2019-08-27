@@ -207,6 +207,7 @@ var RockerButtonLabel = function (props) {
                 className="rocker-button__button"
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
+                type="button"
             >
                 {props.text}
             </button>
@@ -216,6 +217,7 @@ var RockerButtonLabel = function (props) {
             className="rocker-button__button"
             onClick={_handleClick}
             autoFocus={props.autoFocus}
+            type="button"
         >
             {props.text}
         </button>;

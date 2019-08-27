@@ -315,7 +315,7 @@ class ButtonBar extends React.Component {
                 {...props}
             >
                 {messageText}
-            </ ConfirmTooltip >)
+            </ConfirmTooltip>)
             : this._getSaveButtonMarkup();
     }
 
@@ -361,6 +361,7 @@ class ButtonBar extends React.Component {
                             className={discardClassName}
                             onClick={this.props.onDiscard}
                             disabled={this.props.enableSavingAnimation}
+                            type="button"
                         >
                             {discardText}
                         </Button>

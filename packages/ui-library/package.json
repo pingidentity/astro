@@ -86,7 +86,6 @@
     "gulp": "~3.9.1",
     "gulp-babel": "~8.0.0",
     "gulp-debug": "~3.1.0",
-    "gulp-export": "^2.2.0",
     "gulp-flatten": "~0.3.1",
     "gulp-rename": "^1.4.0",
     "gulp-revert-path": "~1.2.1",
