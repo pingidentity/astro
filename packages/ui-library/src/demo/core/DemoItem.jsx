@@ -12,6 +12,7 @@ import HR from "ui-library/lib/components/general/HR";
 import { allFlags } from "ui-library/lib/util/FlagUtils";
 import FlagsProvider from "ui-library/lib/components/utils/FlagsProvider";
 import FormattedContent from "ui-library/lib/components/general/FormattedContent";
+import Stack from "ui-library/lib/components/layout/Stack";
 
 const flagHelp = (
     `Use the flags prop on your component to specify custom behaviors.
@@ -119,6 +120,7 @@ class DemoItem extends React.Component {
         const OutputComponent = (fullscreen || contentPage) ? StretchContent : "div";
 
         return (
+
             <StretchContent className={containerClassName}>
                 <div className="documentation">
 
@@ -138,11 +140,25 @@ class DemoItem extends React.Component {
                     {flags ? this._renderMessage(
                         {
                             message: (
+                                /* eslint-disable max-len */
                                 <FormattedContent>
-                                    This component has alternate behaviors that can be triggered
-                                    with the flags prop or with the FlagsProvider component.
-                                    Example: <code>flags=&#123;["new-behavior", "something-else"]&#125;</code>
+                                    <Stack gap={"XS"}>
+                                        <h3>This component has new behaviors that will become
+                                             standard in a future release.
+                                        </h3>
+                                        <p>Opt-in now by using the "flags" prop or the&nbsp;
+                                            <a href="/index.html#/?selectedSection=undefined&selectedNode=FlagsProvider&root=Components">
+                                            FlagsProvider
+                                            </a> component.
+                                        </p>
+                                        <p>V4: New apps and pages should be wrapped in&nbsp;
+                                            <code>
+                                                {`<FlagsProvider flags={["v4"]}></FlagsProvider>`}
+                                            </code> to future-proof your code.
+                                        </p>
+                                    </Stack>
                                 </FormattedContent>
+                                /* eslint-enable max-len */
                             ),
                             type: InlineMessage.MessageTypes.NOTICE
                         }
@@ -158,6 +174,7 @@ class DemoItem extends React.Component {
                             <div>
                                 <FormLabel value="Flags" hint={flagHelp} />
                                 <CheckboxGroup
+                                    inline
                                     options={flags.map(flag => ({ value: flag, label: flag }))}
                                     values={this.state.flags}
                                     onValueChange={this._handleUpdateFlags}
