@@ -8,6 +8,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { allFlags } from "../../../../util/FlagUtils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("MultiDrag v4", function () {
     var React = require("react"),
@@ -80,7 +81,7 @@ describe("MultiDrag v4", function () {
                 flags={allFlags}
             />
         ));
-        TestUtils.mountSnapshotDataIds(<WithContext />);
+        mountSnapshotDataIds(<WithContext />);
     });
 
     it("renders with default data-id", function () {

@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 import React from "react";
+import { mountSnapshotDataIds } from "../../../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../../testutil/TestUtils";
 import _ from "underscore";
@@ -22,7 +23,7 @@ describe("DashboardCard", function () {
     }
 
     it("data-id's don't change with single list type", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <DashboardCard
                 back="SNAAAAARF"
                 errorMessage="OH GOD IM SO SORRY"

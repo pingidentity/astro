@@ -1,4 +1,5 @@
 import React from "react";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import _ from "underscore";
@@ -35,7 +36,7 @@ describe("HorizontalBarCard", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <HorizontalBarCard
                 value={2000}
                 data={[

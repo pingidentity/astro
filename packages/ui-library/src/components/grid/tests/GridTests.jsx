@@ -18,6 +18,8 @@ jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../forms/form-text-field/index.js");
 jest.dontMock("../../forms/form-text-field");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("Grid", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
@@ -91,7 +93,7 @@ describe("Grid", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Grid
                 {...defaultProps}
             >

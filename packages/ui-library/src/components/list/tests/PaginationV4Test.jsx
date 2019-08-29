@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 import { mount } from "enzyme";
-import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import StateContainer from "../../utils/StateContainer";
 import { allFlags } from "../../../util/FlagUtils";
 

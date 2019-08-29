@@ -12,6 +12,8 @@ jest.dontMock("../form-toggle/v2");
 jest.dontMock("../../general/If");
 jest.dontMock("../../../testutil/TestUtils");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("FormCheckboxList", function () {
     var _ = require("underscore");
     var React = require("react");
@@ -41,7 +43,7 @@ describe("FormCheckboxList", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <FormCheckboxList
                 labelHideUnselected={"Hide Unselected"}
                 labelSearchPlaceholder={"Search"}

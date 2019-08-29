@@ -13,6 +13,8 @@ jest.dontMock("../../FormLabel");
 jest.setMock("exif-js", { getData: jest.fn() });
 jest.setMock("fix-orientation", jest.fn() );
 
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
+
 describe("FileUpload", function () {
     const React = require("react");
     const ReactDOM = require("react-dom");
@@ -90,7 +92,7 @@ describe("FileUpload", function () {
     var simulateChange = CommonTests.simulateChange.bind(null, get);
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <FileUpload />
         );
     });

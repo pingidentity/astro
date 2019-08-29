@@ -4,7 +4,7 @@ import React from "react";
 import { Line, ReferenceLine } from "recharts";
 import { shallow } from "enzyme";
 import _ from "underscore";
-import { mountSnapshotDataIds } from "../../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 import AccessoriesLineChart from "../AccessoriesLineChart";
 

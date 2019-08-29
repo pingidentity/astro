@@ -4,6 +4,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { shallow } from "enzyme";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import { allFlags } from "../../../util/FlagUtils";
 import StateContainer from "../../utils/StateContainer";
 
@@ -45,7 +46,7 @@ describe("DetailsTooltip", function () {
             { value: jest.fn(), label: "Save" },
             { value: jest.fn(), label: "Save More" },
         ];
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <DetailsTooltip
                 cancelLabel="UH OH"
                 flags={allFlags}

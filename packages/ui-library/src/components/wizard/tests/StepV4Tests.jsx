@@ -13,6 +13,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { allFlags } from "../../../util/FlagUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("Step", function () {
     var React = require("react"),
@@ -72,7 +73,7 @@ describe("Step", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Step
                 active={true}
                 number={1}

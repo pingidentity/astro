@@ -2,6 +2,8 @@ window.__DEV__ = true;
 
 jest.dontMock("../RowIndexNav");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("Indent", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -37,7 +39,7 @@ describe("Indent", function () {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <RowIndexNav
                 indexes={indexes}
                 onClick={onClickFunction}

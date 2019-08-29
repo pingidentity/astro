@@ -4,6 +4,8 @@ jest.dontMock("../PopoverMenu");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Utils.js");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("PopoverMenu", function() {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -38,7 +40,7 @@ describe("PopoverMenu", function() {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <PopoverMenu
                 buttons={buttonData}
                 label="hello"

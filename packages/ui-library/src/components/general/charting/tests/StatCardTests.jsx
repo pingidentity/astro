@@ -1,5 +1,7 @@
 window.__DEV__ = true;
 
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
+
 describe("StatCard", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -29,7 +31,7 @@ describe("StatCard", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <StatCard
                 data={listData}
                 title="QUACK QUACK"

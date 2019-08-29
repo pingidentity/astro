@@ -8,6 +8,7 @@ jest.dontMock("../../../tooltips/HelpHint");
 
 import StateContainer from "../../../utils/StateContainer";
 import { allFlags } from "../../../../util/FlagUtils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("FormTextField v4", function () {
     const React = require("react"),
@@ -45,7 +46,7 @@ describe("FormTextField v4", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <FormTextField
                 flags={allFlags}
             />);

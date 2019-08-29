@@ -3,7 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../MultiDragRow");
 jest.dontMock("../../../buttons/Button.jsx");
 import { mount } from "enzyme";
-import { mountSnapshotDataIds } from "../../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("MultiDragRow", function() {
     var React = require("react"),

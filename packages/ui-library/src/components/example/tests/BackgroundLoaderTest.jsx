@@ -2,6 +2,8 @@ window.__DEV__ = true;
 
 jest.dontMock("../BackgroundLoader");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("BackgroundLoader", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
@@ -23,7 +25,7 @@ describe("BackgroundLoader", function () {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <BackgroundLoader loaded>
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>

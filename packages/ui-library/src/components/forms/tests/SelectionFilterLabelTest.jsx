@@ -2,6 +2,7 @@
 jest.dontMock("../SelectionFilterLabel");
 jest.dontMock("../FormLabel");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("SelectionFilterLabel", function () {
 
@@ -24,7 +25,7 @@ describe("SelectionFilterLabel", function () {
     }
 
     it("data-id's don't change with single list type", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <SelectionFilterLabel
                 count={200}
                 labelText="HI THERE"

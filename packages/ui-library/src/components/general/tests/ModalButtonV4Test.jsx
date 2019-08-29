@@ -1,6 +1,7 @@
 "use strict";
 
 import { mount } from "enzyme";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import StateContainer from "../../utils/StateContainer";
 import { allFlags } from "../../../util/FlagUtils";
 
@@ -42,7 +43,7 @@ describe("ModalButtonTest v4", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <ModalButton
                 activatorButtonLabel={"My Button"}
                 activatorButtonClassName={"buttonClass"}

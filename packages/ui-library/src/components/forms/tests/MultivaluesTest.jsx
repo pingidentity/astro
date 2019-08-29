@@ -7,6 +7,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import React from "react";
+import { snapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import Utils from "../../../util/Utils";
 import TestUtils from "../../../testutil/TestUtils";
@@ -85,7 +86,7 @@ describe("Multivalues", function () {
         const dropdownInput = multival.find("[data-id='value-entry']");
         dropdownInput.simulate("click");
 
-        TestUtils.snapshotDataIds(multival);
+        snapshotDataIds(multival);
     });
 
     it("renders with default data-id", function () {

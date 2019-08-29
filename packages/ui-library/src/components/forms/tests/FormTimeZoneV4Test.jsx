@@ -1,4 +1,5 @@
 import React from "react";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import ReactDOM from "react-dom";
 import TestUtils from "../../../testutil/TestUtils";
@@ -95,7 +96,7 @@ describe("FormTimeZone v4", function () {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <FormTimeZone
                 flags={[ "use-portal", "p-stateful" ]}
                 showClear

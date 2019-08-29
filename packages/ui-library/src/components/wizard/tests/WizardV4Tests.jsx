@@ -8,6 +8,7 @@ jest.dontMock("../../../util/format.js");
 jest.dontMock("../../tooltips/CancelTooltip");
 jest.dontMock("../../tooltips/DetailsTooltip");
 import { allFlags } from "../../../util/FlagUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("Wizard v4", function () {
     var React = require("react"),
@@ -66,7 +67,7 @@ describe("Wizard v4", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Wizard
                 title={defaultText.title}
                 onNext={jest.fn()}

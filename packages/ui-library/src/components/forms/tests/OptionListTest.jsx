@@ -1,7 +1,7 @@
 import React from "react";
 import OptionList from "../OptionList";
 import { mount } from "enzyme";
-import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 const options = [
     {

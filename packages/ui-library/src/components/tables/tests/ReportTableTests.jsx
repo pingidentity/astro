@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import TestUtils from "../../../testutil/TestUtils";
 import _ from "underscore";
 import ReportTable from "../ReportTable";
@@ -56,7 +57,7 @@ describe("ReportTable", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <ReportTable
                 headData={mockData.cols}
                 bodyData={mockData.data}

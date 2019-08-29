@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import TestUtils from "../../../testutil/TestUtils";
 import ButtonGroup from "../ButtonGroup";
 
@@ -12,7 +13,7 @@ describe("ButtonGroup", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <ButtonGroup
                 onCancel={jest.fn()}
             />

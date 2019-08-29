@@ -3,6 +3,8 @@ window.__DEV__ = true;
 jest.dontMock("../PageSpinner");
 jest.dontMock("../Spinner");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("PageSpinner", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -27,7 +29,7 @@ describe("PageSpinner", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <PageSpinner
                 modal
             />

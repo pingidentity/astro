@@ -2,6 +2,7 @@ import { mount } from "enzyme";
 import StateContainer from "../../utils/StateContainer";
 
 import { allFlags } from "../../../util/FlagUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("RockerButton v4", function () {
 
@@ -27,7 +28,7 @@ describe("RockerButton v4", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <RockerButton
                 flags={allFlags}
                 onValueChange={jest.fn()}
@@ -37,7 +38,7 @@ describe("RockerButton v4", function () {
     });
 
     it("data-id's don't change with helpText", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <RockerButton
                 flags={allFlags}
                 onValueChange={jest.fn()}

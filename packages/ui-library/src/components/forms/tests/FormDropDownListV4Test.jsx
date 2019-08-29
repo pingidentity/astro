@@ -3,6 +3,7 @@ window.__DEV__ = true;
 import React from "react";
 import ReactDOM from "react-dom";
 import _ from "underscore";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import KeyBoardUtils from "../../../util/KeyboardUtils.js";
@@ -62,7 +63,7 @@ describe("FormDropDownList v4", function () {
             onValueChange: jest.fn(),
             flags: allFlags,
         };
-        TestUtils.mountSnapshotDataIds(<FormDropDownList {...props} />);
+        mountSnapshotDataIds(<FormDropDownList {...props} />);
     });
 
     it("renders the component with default data-id", function () {

@@ -3,6 +3,8 @@ window.__DEV__ = true;
 jest.dontMock("../HeatmapCard");
 jest.dontMock("../../../forms/RockerButton");
 
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
+
 describe("HeatmapCard", function () {
     const React = require("react");
     const ReactTestUtils = require("react-dom/test-utils");
@@ -71,7 +73,7 @@ describe("HeatmapCard", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <HeatmapCard
                 data={chartData}
             />

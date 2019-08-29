@@ -1,5 +1,7 @@
 jest.dontMock("../Link");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("Masked Value", function() {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -7,7 +9,7 @@ describe("Masked Value", function() {
         MaskedValue = require("../MaskedValue");
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <MaskedValue />
         );
     });

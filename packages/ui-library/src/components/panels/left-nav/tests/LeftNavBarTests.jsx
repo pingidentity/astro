@@ -4,6 +4,8 @@ jest.dontMock("../LeftNavBar");
 jest.dontMock("../Copyright");
 jest.dontMock("../../../../util/Utils");
 
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
+
 describe("LeftNavBar", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -42,7 +44,7 @@ describe("LeftNavBar", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <LeftNavBar
                 copyrightYear="1985"
                 onItemValueChange={jest.fn()}

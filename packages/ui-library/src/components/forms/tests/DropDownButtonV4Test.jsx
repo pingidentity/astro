@@ -5,6 +5,7 @@ jest.dontMock("../../../util/EventUtils.js");
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import DropDownButton from "../DropDownButton";
@@ -13,7 +14,7 @@ import { allFlags } from "../../../util/FlagUtils";
 
 describe("DropDownButton", function () {
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <DropDownButton
                 title="title"
             />

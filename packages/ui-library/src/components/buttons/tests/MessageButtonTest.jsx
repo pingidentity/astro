@@ -3,6 +3,7 @@ window.__DEV__ = true;
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import MessageButton, { statuses } from "../MessageButton";
 
 describe("MessageButton", function () {
@@ -118,7 +119,7 @@ describe("MessageButton", function () {
     });
 
     it("data-id's do not change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <MessageButton
                 status={statuses.ERROR}
             />

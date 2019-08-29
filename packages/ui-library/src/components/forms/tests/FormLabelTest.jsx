@@ -6,6 +6,8 @@ jest.dontMock("../FormLabel");
 jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../general/If");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("FormLabel", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -15,7 +17,7 @@ describe("FormLabel", function () {
         Utils = require("../../../util/Utils");
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <FormLabel
                 hint="hint"
                 lockText="LOCKED THE HECK UP"

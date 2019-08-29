@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 import React from "react";
 import { renderIntoDocument, Simulate } from "react-dom/test-utils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 import TestUtils from "../../../../testutil/TestUtils";
 import ChipPanel from "../ChipPanel";
 
@@ -36,7 +37,7 @@ describe("ChipPanel", () => {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <ChipPanel
                 chips={defaultChips}
             />

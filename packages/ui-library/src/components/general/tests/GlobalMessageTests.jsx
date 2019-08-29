@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import GlobalMessage, { messageTypes } from "../GlobalMessage";
 import Button, { buttonTypes } from "../../buttons/Button";
 import Icon from "../Icon";

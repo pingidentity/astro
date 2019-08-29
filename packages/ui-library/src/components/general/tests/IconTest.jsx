@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 import { shallow } from "enzyme";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import { iconSizes } from "../Icon";
 
 describe("Icon", function () {
@@ -18,7 +19,7 @@ describe("Icon", function () {
     };
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Icon
                 iconName="globe"
                 title="I AM A VERY COMPELLING TITLE"

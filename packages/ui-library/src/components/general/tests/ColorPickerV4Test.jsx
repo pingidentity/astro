@@ -10,6 +10,8 @@ jest.dontMock("react-color");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("ColorPicker v4", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -47,7 +49,7 @@ describe("ColorPicker v4", function () {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <ColorPicker
                 onToggle={jest.fn()}
                 onValueChange={jest.fn()}

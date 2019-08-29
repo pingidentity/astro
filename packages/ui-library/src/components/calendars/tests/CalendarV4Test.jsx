@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import Calendar from "../Calendar";
 import moment from "moment-range";
 import _ from "underscore";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import Utils from "../../../util/Utils";
@@ -38,7 +39,7 @@ describe("Calendar v4", function () {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Calendar />
         );
     });

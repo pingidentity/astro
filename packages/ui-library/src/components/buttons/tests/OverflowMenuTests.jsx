@@ -4,6 +4,7 @@ window.__DEV__ = true;
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import OverflowMenu from "../OverflowMenu";
 import { allFlags } from "../../../util/FlagUtils";
 
@@ -28,7 +29,7 @@ describe("OverflowMenuTests", function () {
     ];
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <OverflowMenu
                 buttons={buttons}
             />

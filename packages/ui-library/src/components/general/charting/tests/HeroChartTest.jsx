@@ -5,6 +5,8 @@ jest.dontMock("../BarChart");
 jest.dontMock("../../../forms/RockerButton");
 jest.useFakeTimers();
 
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
+
 describe("HeroChart", function () {
     const React = require("react");
     const ReactTestUtils = require("react-dom/test-utils");
@@ -48,7 +50,7 @@ describe("HeroChart", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <HeroChart
                 {...defaultProps}
             />

@@ -2,6 +2,8 @@ window.__DEV__ = true;
 
 jest.dontMock("../TabbedSections");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("If component", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -26,7 +28,7 @@ describe("If component", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <TabbedSections
                 expanded
                 detailsText="Quite detailed, really"

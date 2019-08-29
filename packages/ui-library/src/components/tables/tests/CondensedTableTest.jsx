@@ -1,5 +1,7 @@
 jest.dontMock("../CondensedTable");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("CondensedTable", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -49,7 +51,7 @@ describe("CondensedTable", function () {
     ];
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <CondensedTable
                 headData={mockData.head}
                 bodyData={mockData.body}
@@ -58,7 +60,7 @@ describe("CondensedTable", function () {
     });
 
     it("data-id's don't change with data object", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <CondensedTable
                 data={dataObjects}
             />

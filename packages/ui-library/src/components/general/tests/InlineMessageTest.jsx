@@ -4,6 +4,8 @@ jest.dontMock("../InlineMessage");
 jest.dontMock("../If");
 jest.dontMock("../ColorPicker");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("InlineMessage", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -19,7 +21,7 @@ describe("InlineMessage", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <InlineMessage
                 label="A very, very important message"
                 onClick={jest.fn()}

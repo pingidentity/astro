@@ -2,6 +2,8 @@ window.__DEV__ = true;
 
 jest.dontMock("../RowBuilder.jsx");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("RowBuilder", () => {
     const React = require("react");
     const { isDOMComponent, renderIntoDocument, Simulate } = require("react-dom/test-utils");
@@ -32,7 +34,7 @@ describe("RowBuilder", () => {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <RowBuilder
                 rows={defaultRows}
             />

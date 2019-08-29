@@ -1,7 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { omit } from "underscore";
-import { mountSnapshotDataIds } from "../../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 import ColumnSelector from "../ColumnSelector";
 import ColumnSelectorFrame from "../ColumnSelectorFrame";
 import ColumnSelectorRow, { RowButton } from "../ColumnSelectorRow";

@@ -2,6 +2,7 @@ jest.dontMock("../v2");
 
 import { allFlags } from "../../../../util/FlagUtils";
 import StateContainer from "../../../utils/StateContainer";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("Toggle v4", function () {
     const React = require("react");
@@ -22,7 +23,7 @@ describe("Toggle v4", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(<Toggle flags={allFlags} />);
+        mountSnapshotDataIds(<Toggle flags={allFlags} />);
     });
 
     it("stateless: renders the component with default data-id", function () {

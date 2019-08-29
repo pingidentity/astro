@@ -1,6 +1,7 @@
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import _ from "underscore";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 import Utils from "../../../../util/Utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import SelectionList from "../v2";
@@ -49,7 +50,7 @@ describe("SelectionList v4", function () {
     }
 
     it("data-id's don't change with single list type", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <SelectionList
                 flags={allFlags}
                 items={[
@@ -72,7 +73,7 @@ describe("SelectionList v4", function () {
     });
 
     it("data-id's don't change with add list type", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <SelectionList
                 flags={allFlags}
                 items={[
@@ -93,7 +94,7 @@ describe("SelectionList v4", function () {
     });
 
     it("data-id's don't change with multi-add list type", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <SelectionList
                 flags={allFlags}
                 items={[

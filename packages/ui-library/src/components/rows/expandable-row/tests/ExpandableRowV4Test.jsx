@@ -8,6 +8,7 @@ jest.mock("react-portal");
 
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 import TestUtils from "../../../../testutil/TestUtils";
 import KeyboardUtils from "../../../../util/KeyboardUtils";
 import Utils from "../../../../util/Utils";
@@ -113,7 +114,7 @@ describe("ExpandableRow v4", function() {
                 }}
             />
         ));
-        TestUtils.mountSnapshotDataIds(<Wrapped />);
+        mountSnapshotDataIds(<Wrapped />);
     });
 
     it("renders with default data-id", function() {

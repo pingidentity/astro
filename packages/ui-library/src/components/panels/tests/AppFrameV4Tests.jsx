@@ -7,6 +7,7 @@ jest.dontMock("../../forms/KeywordSearch.jsx");
 
 import { mount } from "enzyme";
 import { allFlags } from "../../../util/FlagUtils";
+import { snapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("AppFrame", () => {
     const React = require("react"),
@@ -110,7 +111,7 @@ describe("AppFrame", () => {
         );
 
         component.find("a[data-id=\"search\"]").simulate("click");
-        TestUtils.snapshotDataIds(component);
+        snapshotDataIds(component);
     });
 
     it("clicks trigger correct callback for items", function() {

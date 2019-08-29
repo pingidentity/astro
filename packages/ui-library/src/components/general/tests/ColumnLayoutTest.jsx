@@ -2,6 +2,8 @@ window.__DEV__ = true;
 
 jest.dontMock("../ColumnLayout");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("Row", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -40,7 +42,7 @@ describe("Row", function () {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Layout.Row>
                 <Layout.Column>{colContent[0]}</Layout.Column>
                 <Layout.Column>{colContent[1]}</Layout.Column>

@@ -5,6 +5,7 @@ jest.dontMock("../CollapsibleLink");
 jest.dontMock("../If");
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import Section from "../Section";
 import Utils from "../../../util/Utils";
 import TestUtils from "../../../testutil/TestUtils";
@@ -28,7 +29,7 @@ describe("Section v4", function () {
     };
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Section
                 expanded
                 detailsText="Quite detailed, really"

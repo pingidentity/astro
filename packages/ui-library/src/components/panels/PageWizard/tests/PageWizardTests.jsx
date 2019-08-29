@@ -8,6 +8,7 @@ jest.dontMock("../../../forms/ButtonBar");
 jest.dontMock("../../../general/EllipsisLoaderButton");
 jest.dontMock("../../../general/PageSpinner");
 
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("Page Wizard", function () {
 
@@ -95,7 +96,7 @@ describe("Page Wizard", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <PageWizard
                 {...wizardDefaultProps}
             >

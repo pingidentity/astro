@@ -8,6 +8,7 @@ jest.mock("react-portal");
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 import TestUtils from "../../../../testutil/TestUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import ReduxTestUtils from "../../../../util/ReduxTestUtils";
@@ -86,7 +87,7 @@ describe("DragDropColumn v4", function () {
                 flags={allFlags}
             />
         ));
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <WithContext />
         );
     });

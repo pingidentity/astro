@@ -11,6 +11,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import React from "react";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import Utils from "../../../util/Utils";
@@ -58,7 +59,7 @@ describe("ConditionalFieldset", function () {
     };
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <ConditionalFieldset flags={allFlags}>
                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                 <div data-id="option2" title="Option 2">Option 2</div>

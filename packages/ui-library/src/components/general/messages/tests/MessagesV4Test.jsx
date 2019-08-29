@@ -6,6 +6,7 @@ jest.dontMock("../MessagesConstants.js");
 
 import { MessageTypes } from "../MessagesConstants";
 import { allFlags } from "../../../../util/FlagUtils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("Messages v4", function () {
     var React = require("react"),
@@ -40,7 +41,7 @@ describe("Messages v4", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Messages
                 messages={
                     [{ text: "Test message text", progress: { text: "uploading" } }]

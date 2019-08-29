@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import { allFlags } from "../../../util/FlagUtils";
 import CancelTooltip from "../CancelTooltip";
 

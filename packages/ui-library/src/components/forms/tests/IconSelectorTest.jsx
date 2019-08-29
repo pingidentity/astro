@@ -1,7 +1,7 @@
 import React from "react";
 import IconSelector from "../IconSelector";
 import { mount } from "enzyme";
-import { mountSnapshotDataIds } from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 const radioItems = [
     { id: "cog", iconName: "cog" },

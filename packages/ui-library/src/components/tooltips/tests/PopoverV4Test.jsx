@@ -3,6 +3,7 @@ import { handleOpen } from "../../../util/behaviors/popsOver.js";
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactTestUtils from "react-dom/test-utils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import TestUtils from "../../../testutil/TestUtils";
 import KeyboardUtils from "../../../util/KeyboardUtils";
 import Popover from "../Popover";
@@ -28,7 +29,7 @@ describe("Popover", function() {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Popover
                 flags={allFlags}
                 label="BORK"

@@ -6,6 +6,7 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import _ from "underscore";
 import TestUtils from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import Button from "../Button";
 import { allFlags } from "../../../util/FlagUtils";
 
@@ -32,7 +33,7 @@ describe("Button", function () {
     });
 
     it("data-id's do not change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <Button
                 disabled
                 disabledText="test"

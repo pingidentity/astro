@@ -7,6 +7,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { allFlags } from "../../../../util/FlagUtils";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("HeaderBar v4", function() {
     var React = require("react"),
@@ -56,7 +57,7 @@ describe("HeaderBar v4", function() {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <HeaderBar
                 {...getDefaults()}
                 additionalContent="some stuff that is clearly very important"

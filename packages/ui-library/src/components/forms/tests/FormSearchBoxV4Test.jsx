@@ -1,4 +1,5 @@
 import React from "react";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import _ from "underscore";
 import TestUtils from "../../../testutil/TestUtils";
@@ -25,7 +26,7 @@ describe("FormSearchBox v4", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <FormSearchBox
                 flags={allFlags}
                 queryString="WHO AM I WHY AM I HERE"

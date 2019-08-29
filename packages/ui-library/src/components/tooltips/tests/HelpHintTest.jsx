@@ -2,6 +2,8 @@ window.__DEV__ = true;
 
 jest.dontMock("../HelpHint");
 
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("HelpHint", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
@@ -25,7 +27,7 @@ describe("HelpHint", function () {
     });
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <HelpHint
                 hintText="top secret"
             />
