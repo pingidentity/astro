@@ -7,8 +7,6 @@ import popsOver from "../../util/behaviors/popsOver";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { hasFlag } from "../../util/FlagUtils";
 
-import { uid } from "react-uid";
-
 const PopoverBase = Popover.Base;
 
 /**
@@ -62,7 +60,7 @@ class PopoverMenuBase extends PopoverBase {
     renderItem = (item, handleClick, index) => (
         <button
             data-id={`${this.props["data-id"]}-button-${index}`}
-            key={uid(item.label)}
+            key={item.label}
             className="button-menu__button"
             onClick={handleClick}
         >
