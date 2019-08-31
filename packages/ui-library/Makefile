@@ -329,3 +329,12 @@ package-and-upload-for-hosting: install-node-npm
 		rm -f ./versions.json;\
 		rm -f $${LIB_VERSION}.tar.gz;\
 	fi
+
+
+# update the landing page
+package-and-upload-landing: install-node-npm
+	set -eo;\
+	if [ "$(GIT_BRANCH)" == "master" ]; then\
+		npm run pack-landing;\
+		scp -r -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} build-landing/* $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
+	fi
