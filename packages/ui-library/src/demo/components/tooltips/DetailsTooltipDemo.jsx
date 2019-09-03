@@ -4,6 +4,8 @@ import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+import Anchor from "ui-library/lib/components/general/Anchor";
+
 
 /**
 * @name DetailsTooltipDemo
@@ -104,7 +106,7 @@ class DetailsTooltipDemo extends React.Component {
                 <div>{this.state.status1}</div>
 
                 <br/>
-                <a onClick={this._handleToggle(2)}>Without label (label is outside component)</a>
+                <Anchor onClick={this._handleToggle(2)}>Without label (label is outside component)</Anchor>
                 <DetailsTooltip
                     stateless={true}
                     placement="bottom right"
@@ -134,7 +136,7 @@ class DetailsTooltipDemo extends React.Component {
                 <br/>
                 <DetailsTooltip
                     stateless={true}
-                    label={(<button type="button" className="delete-btn">Label as button</button>)}
+                    label={(<Button noSpacing className="delete-btn">Label as button</Button>)}
                     placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open3}
@@ -349,3 +351,4 @@ class DetailsTooltipDemo extends React.Component {
 }
 
 module.exports = DetailsTooltipDemo;
+

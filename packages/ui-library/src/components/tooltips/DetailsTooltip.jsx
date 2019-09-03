@@ -8,7 +8,7 @@ import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import Utils from "../../util/Utils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
-
+import Anchor from "../general/Anchor";
 import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
 import ButtonGroup from "../layout/ButtonGroup";
@@ -408,14 +408,14 @@ class DetailsTooltipStateless extends React.Component {
                 ref="container"
             >
                 {this.props.label
-                    ? <a
+                    ? <Anchor
                         data-id="action-btn"
                         className={classnames("details-target", targetCss, this.props.labelClassName)}
                         onClick={!this.props.disabled ? this._handleToggle : null}
                         ref={el => this.trigger = el}
                     >
                         {this.props.label}
-                    </a>
+                    </Anchor>
                     : <span ref={el => this.trigger = el} />
                 }
                 {this._content()}
