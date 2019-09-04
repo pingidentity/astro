@@ -133,6 +133,8 @@ function BaseButton ({
     );
 }
 
+BaseButton.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
 const Button = withFocusOutline(BaseButton);
 
 Button.propTypes = {
@@ -165,7 +167,5 @@ Button.defaultProps = {
 };
 
 Button.buttonTypes = buttonTypes;
-
-Button.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default Button;
