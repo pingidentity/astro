@@ -7,12 +7,14 @@ import classnames from "classnames";
 * @class ScrollBox
 * @desc ScrollBox adds a shadow to the top or bottom of the container when there's content to scroll to that way.
 *
-* @param {string} [data-id="tab-set"]
+* @param {string} [data-id="scroll-box"]
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
-* @param {number} maxHeight
+* @param {number} [height]
 *     Sets the maximum height for the container.
+* @param {boolean} [fixHeight=false]
+*     When true, the height prop will set the height rather than just the maximum height.
 * @example
 *
 *   <ScrollBox>
@@ -23,7 +25,7 @@ import classnames from "classnames";
 *       ribeye prosciutto chicken turducken.
 *       Pork loin shoulder salami frankfurter chicken.
 *   </ScrollBox>
-**/
+*/
 
 class ScrollBoxShadow extends React.PureComponent {
     state = {
