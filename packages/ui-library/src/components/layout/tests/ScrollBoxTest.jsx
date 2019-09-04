@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import ScrollBox from "../ScrollBox";
-import TestUtils from "../../../testutil/TestUtils";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("ScrollBox", function () {
 
@@ -14,7 +14,7 @@ describe("ScrollBox", function () {
     }
 
     it("data-id's don't change", () => {
-        TestUtils.mountSnapshotDataIds(
+        mountSnapshotDataIds(
             <ScrollBox />
         );
     });
