@@ -6,6 +6,7 @@ import Image, { imageSizes } from "../../../components/general/Image";
 import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
 import { allFlags } from "../../../util/FlagUtils";
+import HelpHint from "../../../components/tooltips/HelpHint";
 
 /**
 * @name FileUploadDemo
@@ -124,7 +125,7 @@ export default class FileUploadDemo extends React.Component {
 
                 <InputRow>
                     <FileUpload
-                        labelText="Image File Input with a Max Size"
+                        label={<div>Image File Input with a Max Size<HelpHint hintText="Help Hint" /></div>}
                         data-id="fileUpload"
                         maxFileSizeKb={4096}
                         showThumbnail={true}

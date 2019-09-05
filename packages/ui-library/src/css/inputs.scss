@@ -38,7 +38,8 @@ $default-input-border-radius: 2px;
 .integer-up,
 .view-toggle,
 .delete-btn,
-.button-menu__button, {
+.button-menu__button,
+.input-image-thumb {
     &:focus {
         outline-width: 0;
     }
@@ -58,7 +59,8 @@ $default-input-border-radius: 2px;
     .integer-up,
     .view-toggle,
     .delete-btn,
-    .button-menu__button, {
+    .button-menu__button,
+    .input-image-thumb {
         &:focus {
             outline-width: 5px;
         }
@@ -1129,18 +1131,7 @@ input[type=file] {
         margin-top: 0;
     }
     input[type=file] {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        font-size: 1px;
-        z-index: $zindex__elevated;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-
-        @include opacity(0);
+        display: none;
     }
     button.inline.choose {
         display: block;
@@ -1265,6 +1256,7 @@ input[type=file] {
             @include border-radius(4px);
 
             &__img {
+                cursor: pointer;
                 display: block;
                 width: $img-width;
                 border: 1px solid $color-timberwolf;

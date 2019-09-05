@@ -8,6 +8,8 @@ import FormError from "../FormError";
 import Button from "../../buttons/Button";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { withFocusOutline } from "../../../util/KeyboardUtils";
+import { getClickableA11yProps } from "../../../util/PropUtils";
 
 /**
  * @name FileUploadStateless
@@ -20,7 +22,7 @@ export default class extends Component {
     static propTypes = {
         //labels
         labelText: PropTypes.string,
-        label: PropTypes.string,
+        label: PropTypes.node,
         labelSelect: PropTypes.string.isRequired,
         labelSelectOther: PropTypes.string,
         labelRemove: PropTypes.string.isRequired,
@@ -55,6 +57,16 @@ export default class extends Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
+    // Testing this would require testing that the file input was clicked,
+    // which Jest doesn't have a good way of doing. We can't really test an
+    // actual file input change, either, because Jest isn't creating a real
+    // file upload screen.
+    /* istanbul ignore next*/
+    _clickFileInput = e => {
+        e.stopPropagation();
+        this.refs.fileInput.click();
+    }
 
     _useTrueDefault = () => hasFlag(this, "true-default");
 
@@ -95,23 +107,24 @@ export default class extends Component {
 
         return (
             <div className={containerClass} data-id={this.props["data-id"]}>
+                <input
+                    disabled={this.props.disabled}
+                    type="file"
+                    ref="fileInput"
+                    name={this.props.name || this.props.fileName}
+                    accept={this.props.accept}
+                    onChange={this.props.onChange}
+                    data-id={this.props["data-id"] + "-input"}
+                />
                 <FormLabel
                     className={classnames({ "form-error": this.props.errorMessage }) }
                     value={this.props.labelText || this.props.label}
                     description={this.props.description}>
                     <ImagePreview
                         isDefault={useDefault}
+                        onClick={this._clickFileInput}
                         show={this.props.showThumbnail}
                         src={useDefault ? defaultImage : thumbnailSrc}
-                    />
-                    <input
-                        disabled={this.props.disabled}
-                        type="file"
-                        ref="fileInput"
-                        name={this.props.name || this.props.fileName}
-                        accept={this.props.accept}
-                        onChange={this.props.onChange}
-                        data-id={this.props["data-id"] + "-input"}
                     />
                     <FileRestrictions
                         show={this.props.showThumbnail}
@@ -119,15 +132,19 @@ export default class extends Component {
                         labelMaxFileSize={this.props.labelMaxFileSize}
                         labelAcceptedFileTypes={this.props.labelAcceptedFileTypes}
                     />
+                    {!this.props.showThumbnail &&
                     <Button
+                        data-id="upload-button"
                         inline
                         className= {classnames (
                             "choose",
                             { "input-file-upload__select-btn--required": this.props.required }
                         )}
+                        onClick={this._clickFileInput}
                     >
                         {(fileSelected && this.props.labelSelectOther) || this.props.labelSelect}
                     </Button>
+                    }
                     {this.props.errorMessage && (
                         <FormError.Icon data-id={this.props["data-id"] + "-errormessage-icon"} />
                     )}
@@ -166,11 +183,12 @@ export default class extends Component {
     }
 }
 
-function ImagePreview({
+const ImagePreview = withFocusOutline(({
     isDefault,
+    onClick,
     src,
     show,
-}) {
+}) => {
     const isNode = !isString(src);
     return show ? (
         <div>
@@ -179,7 +197,11 @@ function ImagePreview({
                 className={classnames(
                     "input-image-thumb",
                     isDefault ? "input-image-thumb--default" : ""
-                )}>
+                )}
+                data-id="image-preview"
+                onClick={onClick}
+                {...getClickableA11yProps(onClick)}
+            >
                 {isNode
                     ? src
                     : <img
@@ -192,7 +214,7 @@ function ImagePreview({
             </span>
         </div>
     ) : null;
-}
+});
 
 function FileRestrictions({
     "data-id": dataId,

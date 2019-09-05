@@ -3,8 +3,8 @@
 exports[`FileUpload data-id's don't change 1`] = `
 Array [
   "file-upload",
-  "formLabel",
   "file-upload-input",
-  "button",
+  "formLabel",
+  "upload-button",
 ]
 `;
