@@ -137,6 +137,8 @@ BaseButton.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 const Button = withFocusOutline(BaseButton);
 
+Button.displayName = "Button";
+
 Button.propTypes = {
     active: PropTypes.bool,
     className: PropTypes.string,
