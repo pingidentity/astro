@@ -81,6 +81,22 @@ a .icon-clear {
         }
     }
 
+    &--size-sm {
+        font-size: 14px;
+    }
+    &--size-md {
+        font-size: 21px;
+    }
+    &--size-lg {
+        font-size: 28px;
+    }
+    &--size-xl {
+        font-size: 35px;
+    }
+    &--size-xxl {
+        font-size: 42px;
+    }
+
     &--clickable {
         cursor: pointer;
     }

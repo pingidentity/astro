@@ -2,7 +2,7 @@ window.__DEV__ = true;
 
 import { shallow } from "enzyme";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
-import { iconSizes } from "../Icon";
+import { iconSizes, iconTypes } from "../Icon";
 
 describe("Icon", function () {
     var React = require("react"),
@@ -50,7 +50,7 @@ describe("Icon", function () {
 
     it("renders the inline version of the component", function () {
         const dataId = "myicon";
-        const component = getComponent({ "data-id": dataId, iconName: "cog", type: "inline" });
+        const component = getComponent({ "data-id": dataId, iconName: "cog", type: iconTypes.INLINE });
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, dataId);
         const noElement = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-graphic");
 
@@ -72,6 +72,18 @@ describe("Icon", function () {
 
         expect(element).toBeTruthy();
         expect(icon.className).toContain("xl");
+    });
+
+    it("renders inline icon with correct size", () => {
+        const component = shallow(
+            <Icon
+                iconName="globe"
+                iconSize={iconSizes.SM}
+                type={iconTypes.INLINE}
+            />
+        ).dive();
+
+        expect(component.find(".icon--size-sm").exists()).toEqual(true);
     });
 
     it("fires cannonball warning if type isn't set and there are no children", function() {

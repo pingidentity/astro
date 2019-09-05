@@ -1,5 +1,5 @@
 import React from "react";
-import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
+import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Text from "ui-library/lib/components/general/Text";
 import HR from "ui-library/lib/components/general/HR";
@@ -14,7 +14,7 @@ const IconDemo = () => {
     return (
         <div>
             <InputRow>
-                <Icon iconName="globe" data-id="myicon" type="leading" /> A simple icon next to text
+                <Icon iconName="globe" data-id="myicon" type={iconTypes.LEADING} /> A simple icon next to text
             </InputRow>
             <InputRow>
                 <Icon iconName="cog">
@@ -39,10 +39,10 @@ const IconDemo = () => {
             <HR />
             <InputRow>
                 We can also render simple icons:
-                <Icon iconName="user_directory" type="inline" />
-                <Icon iconName="chat" type="inline" />
-                <Icon iconName="code" type="inline" />
-                <Icon iconName="puzzle" type="inline" />
+                <Icon iconName="user_directory" type={iconTypes.INLINE} />
+                <Icon iconName="chat" type={iconTypes.INLINE} />
+                <Icon iconName="code" type={iconTypes.INLINE} />
+                <Icon iconName="puzzle" type={iconTypes.INLINE} />
             </InputRow>
             <InputRow>
                 <Icon iconName="facebook" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">

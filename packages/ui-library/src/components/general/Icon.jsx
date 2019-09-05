@@ -47,6 +47,10 @@ const iconSizes = {
     XXL: "xxl"
 };
 
+const iconTypes = {
+    INLINE: "inline",
+    LEADING: "leading"
+};
 
 const Icon = withFocusOutline(({
     className,
@@ -76,7 +80,7 @@ const Icon = withFocusOutline(({
         ...getClickableA11yProps(onClick)
     } : {};
 
-    if (type === "inline") {
+    if (type === iconTypes.INLINE) {
         return (
             <span
                 data-id={dataId}
@@ -84,13 +88,18 @@ const Icon = withFocusOutline(({
                     containerClassName,
                     getIconClassName(props),
                     {
-                        "icon--clickable": onClick
+                        "icon--clickable": onClick,
+                        "icon--size-sm": iconSize === iconSizes.SM,
+                        "icon--size-md": iconSize === iconSizes.MD,
+                        "icon--size-lg": iconSize === iconSizes.LG,
+                        "icon--size-xl": iconSize === iconSizes.XL,
+                        "icon--size-xxl": iconSize === iconSizes.XXL,
                     }
                 )}
                 {...onClickProps}
             />
         );
-    } else if (type !== "leading" && !children) {
+    } else if (type !== iconTypes.LEADING && !children) {
         cannonballChangeWarning({
             message: (
                 `By default, Icon will display a simple icon when no children are provided. ` +
@@ -126,13 +135,15 @@ const Icon = withFocusOutline(({
     );
 });
 
+Icon.displayName = "Icon";
+
 Icon.propTypes = {
     "data-id": PropTypes.string,
     className: PropTypes.string,
     iconName: PropTypes.string,
     textType: PropTypes.string,
     title: PropTypes.string,
-    type: PropTypes.oneOf(["leading", "inline"]),
+    type: PropTypes.oneOf(Object.values(iconTypes)),
     iconSize: PropTypes.oneOf([
         iconSizes.SM,
         iconSizes.MD,
@@ -147,4 +158,5 @@ Icon.defaultProps = {
 };
 
 Icon.iconSizes = iconSizes;
+Icon.iconTypes = iconTypes;
 export default Icon;
