@@ -262,9 +262,14 @@ PStatefulLinkDropDownList.displayName = "PStatefulLinkDropDownList";
 
 class LinkDropDownListOption extends React.Component {
     static propTypes = {
+        "data-id": PropTypes.string,
         option: PropTypes.object,
         selected: PropTypes.bool
     };
+
+    static defaultProps = {
+        "data-id": "link-dropdown-option"
+    }
 
     _handleClick = () => {
         this.props.onClick(this.props.option);
@@ -277,7 +282,9 @@ class LinkDropDownListOption extends React.Component {
         };
 
         return (
-            <li data-value={this.props.option.value}
+            <li
+                data-id={this.props["data-id"]}
+                data-value={this.props.option.value}
                 className={classnames(classNames)}
                 onClick={this._handleClick}>
                 {this.props.option.label}
