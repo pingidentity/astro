@@ -72,11 +72,11 @@ let componentIndex = 0;
 gulp.task("transpile-lib", () =>
     gulp.src([
         "./src/**/*.js?(x)",
-        "!./src/**/*Test?(s).js?(x)", //exlude tests
-        "!./src/demo/**", //exlude demos
-        "!./src/selenium/**", //exlude selenium
-        "!./src/templates/**", //exlude templates
-        "!./src/tutorials/**", //exlude tutorials
+        "!./src/**/tests/**", //exclude tests
+        "!./src/demo/**", //exclude demos
+        "!./src/selenium/**", //exclude selenium
+        "!./src/templates/**", //exclude templates
+        "!./src/tutorials/**", //exclude tutorials
     ])
         .pipe(babel())
         .pipe(debug({ title: "transpiling:" }))
@@ -128,16 +128,17 @@ gulp.task("move-files", () =>
     gulp.src([
         "./src/**/*",
         "!./src/**/*.js?(x)",
-        "!./src/**/*Test?(s).js?(x)", //exlude tests
-        "!./src/core", //exlude demo folder
-        "!./src/demo", //exlude demo folder
-        "!./src/demo/**", //exlude demos
-        "!./src/selenium", //exlude selenium folder
-        "!./src/selenium/**", //exlude selenium
-        "!./src/templates", //exlude templates folder
-        "!./src/templates/**", //exlude templates
-        "!./src/tutorials", //exlude tutorials folder
-        "!./src/tutorials/**", //exlude tutorials
+        "!./src/**/tests",
+        "!./src/**/tests/**",
+        "!./src/core", //exclude demo folder
+        "!./src/demo", //exclude demo folder
+        "!./src/demo/**", //exclude demos
+        "!./src/selenium", //exclude selenium folder
+        "!./src/selenium/**", //exclude selenium
+        "!./src/templates", //exclude templates folder
+        "!./src/templates/**", //exclude templates
+        "!./src/tutorials", //exclude tutorials folder
+        "!./src/tutorials/**", //exclude tutorials
     ])
         .pipe(debug({ title: "moving:" }))
         .pipe(gulp.dest("lib"))
