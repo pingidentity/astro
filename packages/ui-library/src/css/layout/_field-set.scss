@@ -1,0 +1,17 @@
+.field-set-component {
+    border: 1px solid $color-dolphin;
+    border-radius: 5px;
+    margin: 0;
+    height: auto;
+    line-height: 1em;
+    background-color: transparent;
+    display: inline-flex;
+    padding: $spacing-md;
+    @include font-pn-regular;
+    @include break-word;
+
+    legend {
+        padding: 0 $spacing-sm;
+        @include text-parent-label;
+    }
+}
