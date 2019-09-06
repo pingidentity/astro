@@ -18,6 +18,7 @@ body {
 }
 
 .content {
+    position: relative;
     margin: $spacing-md 0 $spacing-md 10%;
     max-width: 550px;
 }
