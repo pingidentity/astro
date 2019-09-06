@@ -83,7 +83,7 @@ class LandingPage extends React.Component {
 
     _versionToNumber = version => {
         const numbers = version.replace("-SNAPSHOT", "").split(".").map(string => string * 1); // parseInt didn't work
-        return (numbers[0] * 1000 * 1000) + (numbers[1] * 1000) + numbers[0];
+        return (numbers[0] * 1000 * 1000) + (numbers[1] * 1000) + numbers[2];
     }
 
     _sortVersions = versions => versions.slice().sort(
