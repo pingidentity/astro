@@ -119,12 +119,15 @@ class LandingPage extends React.Component {
                             />
                         }
                     </div>
-                    <LinkDropDownList
-                        label="All Versions"
-                        className="version-dropdown"
-                        options={this.state.versionOptions}
-                        onClick={this._handleVersionSelect}
-                    />
+                    <div>
+                        <LinkDropDownList
+                            flags={["v4"]}
+                            label="All Versions"
+                            className="version-dropdown"
+                            options={this.state.versionOptions}
+                            onClick={this._handleVersionSelect}
+                        />
+                    </div>
                     <Stack gap="MD">
                         <div className="card">
                             <img className="card__icon" src={documentationIcon} />
