@@ -252,7 +252,93 @@ describe("Multivalues", function () {
         expect(close.length).toBe(4);
         ReactTestUtils.Simulate.click(close[1]);
         expect(callback.mock.calls.length).toBe(2);
+    });
 
+    describe("edit mode", function () {
+        const editButtonClassName = "input-multivalues--edit-action";
+        function getEntries(parent) {
+            return TestUtils.scryRenderedDOMNodesWithClass(parent, "entry");
+        }
+
+        function initEdit(parent, index) {
+            const entry = getEntries(parent)[index];
+            ReactTestUtils.Simulate.mouseEnter(entry);
+            const editButton = TestUtils.findRenderedDOMNodeWithClass(entry, editButtonClassName);
+            if (editButton) {
+                ReactTestUtils.Simulate.click(editButton);
+            }
+        }
+
+        it("displays edit button for entry on mouse enter", () => {
+            expect(TestUtils.findRenderedDOMNodeWithClass(component, editButtonClassName)).toBeFalsy();
+            const secondEntry = getEntries(component)[1];
+            ReactTestUtils.Simulate.mouseEnter(secondEntry);
+            expect(TestUtils.scryRenderedDOMNodesWithClass(component, editButtonClassName)).toHaveLength(1);
+            expect(TestUtils.scryRenderedDOMNodesWithClass(secondEntry, editButtonClassName)).toHaveLength(1);
+        });
+
+        it("hides edit button for entry on mouse leave", () => {
+            const secondEntry = getEntries(component)[1];
+            ReactTestUtils.Simulate.mouseEnter(secondEntry);
+            ReactTestUtils.Simulate.mouseLeave(secondEntry);
+            expect(TestUtils.scryRenderedDOMNodesWithClass(component, editButtonClassName)).toHaveLength(0);
+        });
+
+        it("excludes entry under edit if includeDraftInEntries is false", () => {
+            initEdit(component, 1);
+            expect(callback).toHaveBeenCalledWith(["Entry 1", "Entry 3", "Entry 4"]);
+        });
+
+        it("commits current draft prior editing entry", () => {
+            ReactTestUtils.Simulate.change(input, { target: { value: "draft" } });
+            initEdit(component, 1);
+            expect(callback).toHaveBeenCalledWith(["Entry 1", "Entry 3", "Entry 4", "draft"]);
+        });
+
+        it("allows edit entries provided as objects", () => {
+            component = getComponent({
+                onValueChange: callback,
+                entries: [
+                    { value: "1", label: "A", icon: "A" },
+                    { value: "2", label: "B", icon: "B" },
+                    { value: "3", label: "C", icon: "C" }
+                ]
+            });
+            /*
+             this test fails on re-rendering if includeDraftInEntries is truthy;
+             Root cause is `props.entries` are not updated(so it's still array with 3 objects)
+             but `state.draft` is not empty(set to string value);
+             on re-render `_getDraft()` takes last `entries`'s member instead of `state.draft`;
+             so React render fails with message "object {label, value} is not valid React children"
+             it works fine in real app(since parent component provides up-to-date `props.entries`)
+             */
+            initEdit(component, 1);
+            expect(callback).toHaveBeenCalledWith([
+                { value: "1", label: "A", icon: "A" },
+                { value: "3", label: "C", icon: "C" }
+            ]);
+        });
+
+        it("provides entry under editing if includeDraftInEntries", () => {
+            component = getComponent({ includeDraftInEntries: true, onValueChange: callback });
+            initEdit(component, 1);
+            expect(callback).toHaveBeenCalledWith(["Entry 1", "Entry 3", "Entry 4", "Entry 2"]);
+        });
+
+        it("does not allow editing entries if options provided", () => {
+            component = getComponent({
+                entries: ["A","B"],
+                options: [
+                    { label: "A", value: "A" },
+                    { label: "B", value: "B" },
+                    { label: "C", value: "C" }
+                ],
+                includeDraftInEntries: true,
+                onValueChange: callback
+            });
+            initEdit(component, 1);
+            expect(callback).not.toHaveBeenCalledWith();
+        });
     });
 
     it("throws error when deprecated prop 'id' is passed in", function () {

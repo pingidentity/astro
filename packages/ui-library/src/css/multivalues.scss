@@ -28,7 +28,7 @@
         outline: none;
         overflow-y: auto;
         background-color: $color-input-fill;
-        padding: $spacing-xs + 1px $spacing-sm 1px $spacing-sm;
+        padding: $spacing-xs + 5px $spacing-sm 1px $spacing-sm;
         width: 100%;
         height: 200px;
         border: 1px solid $color-input-fill;
@@ -49,21 +49,26 @@
         @include box-sizing(border-box);
 
         .entry {
+            position: relative;
             border: 1px solid $color-input-border;
             background: $color-white;
-            color: $color-midnight;
             max-width: 100%;
             display: inline-block;
             margin: 0 $spacing-xs $spacing-xs 0;
             vertical-align: top;
             padding: $spacing-xs 30px $spacing-xs $spacing-sm;
-            text-transform: none;
             overflow: hidden;
             text-overflow: ellipsis;
-            @include text-value;
-
             @include box-sizing(border-box);
             @include border-radius(2px);
+
+            label {
+                text-transform: none;
+                color: $color-midnight;
+                @include text-value;
+                margin: 0;
+            }
+
 
             .delete {
                 font-size: 11px;
@@ -182,6 +187,13 @@
     &--focused .entries,
     &--focused .entries:hover {
         border-color: $color-active-blue;
+    }
+
+    &--edit-action {
+        background-color: $color-active-blue;
+        padding: 3px;
+        border-radius: 2em;
+        color: $color-white;
     }
 }
 

@@ -38,7 +38,28 @@ const dontPropagate = e => e.stopPropagation();
 class MultivaluesOption extends Component {
     static propTypes = {
         label: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         onChange: PropTypes.func.isRequired,
+        onEdit: PropTypes.func,
+        canEdit: PropTypes.bool,
+        onDelete: PropTypes.func,
+        iconName: PropTypes.string,
+        active: PropTypes.bool
+    };
+
+    static defaultProps = {
+        onEdit: _.noop,
+        onDelete: _.noop,
+        canEdit: true,
+        iconName: "",
+        active: false,
+    };
+
+    entryRef = null;
+    timeout = null;
+
+    state = {
+        hover: false
     };
 
     /**
@@ -49,9 +70,33 @@ class MultivaluesOption extends Component {
     * @private
     * @ignore
     */
-    _delete = () => {
+    _delete = (e) => {
+        e.stopPropagation();
         const { onDelete, id } = this.props;
         onDelete(id);
+    };
+
+    _onEdit = () => {
+        const {
+            id,
+            onEdit,
+            canEdit
+        } = this.props;
+        if (canEdit) {
+            onEdit(id);
+        }
+    };
+
+    _showEditControl = () => {
+        this.setState({
+            hover: true
+        });
+    };
+
+    _hideEditControl = () => {
+        this.setState({
+            hover: false
+        });
     };
 
     render() {
@@ -60,22 +105,55 @@ class MultivaluesOption extends Component {
             iconName,
             id,
             label,
+            canEdit
         } = this.props;
+        const {
+            hover
+        } = this.state;
+        const showEditControls = canEdit && hover;
 
         return (
-            <label
-                data-id={id}
-                className={classnames("entry", { "entry--active": active })}
-                title={label}
+            <div
+                className={classnames("entry", { "entry--active": active, "entry--editable": canEdit, hover })}
+                onMouseEnter={this._showEditControl}
+                onMouseLeave={this._hideEditControl}
             >
-                {label}
-                {iconName && <Icon iconName={iconName} type="leading" />}
+                <label
+                    data-id={id}
+                    title={label}
+                    ref={(entryRef) => this.entryRef = entryRef}
+                >
+                    {label}
+                    {iconName && <Icon iconName={iconName} type="leading" />}
+                </label>
                 <a className="delete"
                     data-id="delete"
                     id={id}
                     onClick={this._delete}
                 />
-            </label>
+                {showEditControls &&
+                <PopperContainer
+                    getReference={() => this.entryRef}
+                    config={{
+                        placement: "top-start",
+                        modifiers: {
+                            offset: { offset: "-100%p, -60%p" },
+                            flip: {
+                                enabled: false
+                            }
+                        }
+                    }}
+                >
+                    <span style={{ fontSize: "11px" }}>
+                        <Icon
+                            iconName="edit"
+                            type="inline"
+                            containerClassName="input-multivalues--edit-action"
+                            onClick={this._onEdit}
+                        />
+                    </span>
+                </PopperContainer>}
+            </div>
         );
     }
 }
@@ -83,7 +161,7 @@ class MultivaluesOption extends Component {
 /**
 * @callback Multivalues~onValueChange
 *
-* @param {arrray<string>} newValues
+* @param {array<string>} newValues
 *     Array of strings, contains new list of entries.
 */
 
@@ -235,13 +313,15 @@ export class MultivaluesBase extends Component {
         activeEntry: -1,
     };
 
+    _draftInputRef = null;
+
     _getCommittedEntries = () => {
         const { includeDraftInEntries, entries } = this.props;
 
         return (includeDraftInEntries && (this.state.draft === entries[entries.length - 1]))
             ? entries.slice(0, -1)
             : entries;
-    }
+    };
 
     _getDraft = () => (this.props.includeDraftInEntries && this.state.draft)
         ? this.props.entries[this.props.entries.length - 1]
@@ -291,7 +371,7 @@ export class MultivaluesBase extends Component {
      */
     _handleFocus = () => {
         this.setState({ focused: true });
-    }
+    };
 
     /**
      * fire the onValueChange event with the new entry added to the existing list
@@ -314,7 +394,7 @@ export class MultivaluesBase extends Component {
             highlightedOption: -1,
             listOpen: false,
         });
-    }
+    };
 
     /**
     * Move the highlighted index
@@ -459,6 +539,38 @@ export class MultivaluesBase extends Component {
         this.setState(({ activeEntry }) => activeEntry >= entries.length - 1 ? { activeEntry: -1 } : {});
     };
 
+    _focusDraftField = () => {
+        if (this._draftInputRef) {
+            this._draftInputRef.focus();
+        }
+    };
+
+    /**
+     * Make item as a draft to allow user editing it
+     * @param {number} index - index of item to be edited
+     * @private
+     */
+    _onEntryEditStarted = (index) => {
+        const { entries, onValueChange, includeDraftInEntries } = this.props;
+        const [[entryToEdit], entriesToSend] = _.partition(entries, (entry, i) => index === i);
+        const draft = this._getDraft();
+        if (draft && !includeDraftInEntries) {
+            entriesToSend.push(draft);
+        }
+        let newDraft;
+        if (_.isObject(entryToEdit)) {
+            newDraft = entryToEdit.value || entryToEdit.label;
+        } else {
+            newDraft = entryToEdit;
+        }
+        this.setState({ draft: newDraft }, this._focusDraftField);
+
+        if (includeDraftInEntries) {
+            entriesToSend.push(newDraft);
+        }
+        onValueChange(entriesToSend);
+    };
+
     /**
     * Toggle the open state of the dropdown list
     * @private
@@ -484,7 +596,7 @@ export class MultivaluesBase extends Component {
     _handleClick = e => {
         this._toggleList();
         e.stopPropagation();
-    }
+    };
 
     /**
     * Return the input box element so the popper can attach to it
@@ -569,10 +681,12 @@ export class MultivaluesBase extends Component {
                     id={index}
                     label={entry.label || entry.value || entry}
                     onChange={onValueChange}
+                    onEdit={this._onEntryEditStarted}
                     onDelete = {this._handleDelete}
                     key={index}
                     iconName={entry.icon}
                     active={index === activeEntry}
+                    canEdit={_.isEmpty(options)}
                 />
             );
         });
@@ -593,6 +707,7 @@ export class MultivaluesBase extends Component {
                             <input
                                 data-id="value-entry"
                                 className="value-input__input"
+                                ref={(ref) => this._draftInputRef = ref}
                                 type="text"
                                 tabIndex="0"
                                 name={name}
