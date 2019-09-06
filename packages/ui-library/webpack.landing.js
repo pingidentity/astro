@@ -15,7 +15,7 @@ module.exports = merge(common, {
     },
     output: {
         path: `${__dirname}/${buildDir}`,
-        filename: "[name].js" // Template based on keys in entry above
+        filename: "[name].[hash].js" // Template based on keys in entry above
     },
     devtool: "source-map",
     module: {
