@@ -24,6 +24,7 @@ import PageHeader from "../components/general/PageHeader";
 import PageSection from "../components/layout/PageSection";
 import Stack from "../components/layout/Stack";
 import Text from "../components/general/Text";
+import ButtonGroup from "../components/layout/ButtonGroup";
 
 
 
@@ -45,6 +46,8 @@ export default class CustomDomainName extends Component {
     initState = {
         domainState: domainStates.noDomain,
         modalButtonExpanded: false,
+        modalConfirm: false,
+        editModal: false,
         expanded: false,
         requiredValue: "",
         saveDisabled: true,
@@ -63,19 +66,34 @@ export default class CustomDomainName extends Component {
 
     _toggleOpen = () => {
         this.setState({
-            modalButtonExpanded: true
+            modalButtonExpanded: true,
+        });
+    }
+
+    _toggleEditModal = () => {
+        this.setState({
+            editModal: true,
+        });
+    }
+
+    _toggleModalConfirm = () => {
+        this.setState({
+            modalConfirm: true,
         });
     }
 
     _toggleClose = () => {
         this.setState({
             expanded: false,
+            modalConfirm: false,
+            editModal: false,
         });
     }
 
     _toggleModalClosed = () => {
         this.setState({
-            modalButtonExpanded: false
+            modalButtonExpanded: false,
+            editModal: false
         });
     }
 
@@ -133,7 +151,7 @@ export default class CustomDomainName extends Component {
     _handleVerify = () => {
         this.setState({
             expanded: true,
-            domainState: domainStates.enterDomain
+            domainState: domainStates.needsVerification
         });
     }
 
@@ -159,14 +177,15 @@ export default class CustomDomainName extends Component {
     _handleSslSave = () => {
         this.setState ({
             expanded: false,
+            editModal: false,
             domainState: domainStates.complete
         });
     }
 
     _handleEdit = () => {
         this.setState ({
-            modalButtonExpanded: true,
-            domainState: domainStates.needsSsl
+            editModal: true,
+            domainState: domainStates.complete
         });
     }
 
@@ -210,7 +229,8 @@ export default class CustomDomainName extends Component {
     }
 
     renderModals () {
-        if (this.state.domainState === domainStates.enterDomain ) {
+        if (this.state.domainState === domainStates.enterDomain ||
+            this.state.domainState === domainStates.needsVerification) {
             return (
                 <div>
                     <InputRow>
@@ -240,6 +260,52 @@ export default class CustomDomainName extends Component {
         }
     }
 
+    renderTextAreas () {
+        return (
+            <Stack gap="LG">
+                <FormTextArea
+                    flags={this.props.flags}
+                    labelText="Certificate"
+                    description="Description of what the certificate is and so on"
+                    required
+                    noResize
+                    width={InputWidths.LG}
+                    placeholder=
+                        " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
+                />
+                <FormTextArea
+                    flags={this.props.flags}
+                    labelText="Private Key"
+                    description="Description of what the private key is and so on"
+                    required
+                    noResize
+                    width={InputWidths.LG}
+                    placeholder=
+                        " - - - BEGIN PRIVATE KEY - - - Private Key Code - - - END PRIVATE KEY - - -"
+                />
+                <FormTextArea
+                    flags={this.props.flags}
+                    labelText="Intermediate Certificate (optional)"
+                    description="Description of what the intermediate certificate is and so on"
+                    noResize
+                    width={InputWidths.LG}
+                    placeholder=
+                        " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
+                />
+                <ButtonBar
+                    flags={this.props.flags}
+                    onCancel={this._toggleModalClosed}
+                    onSave={this._handleSslSave}
+                    cancelText="Cancel"
+                    saveText="Save"
+                    visible={this.state.showBar}
+                    saveDisabled={this.state.saveDisabled}
+                    unfixed
+                />
+            </Stack>
+        );
+    }
+
     renderModalButton () {
         if (this.state.domainState === domainStates.needsSsl) {
             return (
@@ -251,9 +317,7 @@ export default class CustomDomainName extends Component {
                             <Button label="Add SSL Certificate" type={buttonTypes.PRIMARY}/>
                         }
                         flags={["p-stateful", "use-portal"]}
-                        initialState={{
-                            expanded: false,
-                        }}
+                        expanded={this.state.modalButtonExpanded}
                         onOpen={this._toggleOpen}
                         onClose={this._toggleModalClosed}
                     >
@@ -262,59 +326,71 @@ export default class CustomDomainName extends Component {
                         Add the SSL Certificate for your domain.
                             </Text>
                         </InputRow>
-                        <Stack gap="LG">
-                            <FormTextArea
-                                flags={this.props.flags}
-                                labelText="Certificate"
-                                description="Description of what the certificate is and so on"
-                                required
-                                noResize
-                                width={InputWidths.LG}
-                                placeholder=
-                                    " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
-                            />
-                            <FormTextArea
-                                flags={this.props.flags}
-                                labelText="Private Key"
-                                description="Description of what the private key is and so on"
-                                required
-                                noResize
-                                width={InputWidths.LG}
-                                placeholder=
-                                    " - - - BEGIN PRIVATE KEY - - - Private Key Code - - - END PRIVATE KEY - - -"
-                            />
-                            <FormTextArea
-                                flags={this.props.flags}
-                                labelText="Intermediate Certificate (optional)"
-                                description="Description of what the intermediate certificate is and so on"
-                                noResize
-                                width={InputWidths.LG}
-                                placeholder=
-                                    " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
-                            />
-                            <ButtonBar
-                                flags={this.props.flags}
-                                onCancel={this._handleDiscard}
-                                onSave={this._handleSslSave}
-                                cancelText="Cancel"
-                                saveText="Save"
-                                visible={this.state.showBar}
-                                saveDisabled={this.state.saveDisabled}
-                                unfixed
-                            />
-                        </Stack>
+                        {this.renderTextAreas()}
                     </ModalButton>
                 </FlexRow>
+            );
+        } else if (this.state.domainState === domainStates.complete) {
+            return (
+                <Modal
+                    flags={this.props.flags}
+                    data-id="ssl-modal"
+                    modalTitle="Edit SSL Certificate"
+                    expanded={this.state.editModal}
+                    onOpen={this._toggleEditModal}
+                    onClose={this._toggleClose}
+                >
+                    <InputRow>
+                        <Text>
+                        Edit the SSL Certificate for your domain.
+                        </Text>
+                    </InputRow>
+                    {this.renderTextAreas()}
+                </Modal>
             );
         }
     }
 
-    renderInlineMessage () {
-        return (
-            <InlineMessage type={InlineMessage.MessageTypes.WARNING }>
-                        Your domain is not active until you add the SSL Certificate
-            </InlineMessage>
-        );
+    renderConfirmModal () {
+        if (this.state.domainState === domainStates.complete) {
+            return (
+                <ModalButton
+                    activatorContent={
+                        <Button label="Remove Domain" inline/>
+                    }
+                    flags={["p-stateful", "use-portal"]}
+                    expanded={this.state.modalConfirm}
+                    onOpen={this._toggleModalConfirm}
+                >
+                    <Text>
+                        Are you sure you want to remove the custom domain for your environment?
+                        Users will see auth.pingone.com instead of your custom domain.
+                    </Text>
+                    <ButtonGroup>
+                        <Button onClick={this._toggleClose}>No</Button>
+                        <Button onClick={this._handleDiscard} type="primary">Yes</Button>
+                    </ButtonGroup>
+                </ModalButton>
+            );
+        } else if (this.state.domainState === domainStates.needsVerification ||
+            this.state.domainState === domainStates.needsSsl) {
+            return (
+                <Modal
+                    flags={["p-stateful", "use-portal"]}
+                    expanded={this.state.modalConfirm}
+                    onOpen={this._toggleModalConfirm}
+                >
+                    <Text>
+                Are you sure you want to remove the custom domain for your environment?
+                Users will see auth.pingone.com instead of your custom domain.
+                    </Text>
+                    <ButtonGroup>
+                        <Button onClick={this._toggleClose}>No</Button>
+                        <Button onClick={this._handleDiscard} type="primary">Yes</Button>
+                    </ButtonGroup>
+                </Modal>
+            );
+        }
     }
 
     renderSSL () {
@@ -332,16 +408,19 @@ export default class CustomDomainName extends Component {
                             <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
                         </span>
                         <Link onClick={this._handleEdit}>Edit</Link>
+                        {this.renderModalButton()}
                     </FlexRow>
                 )}
                 onRemove={this._handleDiscard}
-                buttonLabel="Remove Domain"
+                buttonNode={this.renderConfirmModal()}
             />
             );
         } else if (this.state.domainState === domainStates.needsSsl) {
             return (
                 <div>
-                    {this.renderInlineMessage()}
+                    <InlineMessage type={InlineMessage.MessageTypes.WARNING }>
+                        Your domain is not active until you add the SSL Certificate
+                    </InlineMessage>
                     <FileInput
                         fileName={this.state.requiredValue &&
                     <FlexRow spacing={spacingOptions.SM}>
@@ -350,7 +429,8 @@ export default class CustomDomainName extends Component {
                         selectedTitle="Domain Name"
                         fileData={(
                             <FlexRow spacing={spacingOptions.SM}>
-                                <Link onClick={this._handleDiscard}>Remove</Link>
+                                <Link onClick={this._toggleModalConfirm}>Remove</Link>
+                                {this.renderConfirmModal()}
                             </FlexRow>
                         )}
                         onRemove={this._handleDiscard}
@@ -403,12 +483,15 @@ export default class CustomDomainName extends Component {
         if (this.state.domainState === domainStates.needsVerification) {
             return (
                 <div>
-                    {this.renderInlineMessage()}
+                    <InlineMessage type={InlineMessage.MessageTypes.WARNING }>
+                        Your domain is not active until you verify the domain.
+                    </InlineMessage>
                     <span>
                         {formText}
                         {this.renderButtons()}
                         <InputRow>
-                            <Link onClick={this._handleDiscard}>Remove</Link>
+                            <Link onClick={this._toggleModalConfirm}>Remove</Link>
+                            {this.renderConfirmModal()}
                         </InputRow>
                     </span>
                 </div>
@@ -507,7 +590,7 @@ export default class CustomDomainName extends Component {
                                     modalTitle="Verify Custom Domain"
                                     expanded={this.state.expanded}
                                     onOpen={this._toggleModalOpen}
-                                    onClose={this._toggleClose}
+                                    onClose={this._handleDiscard}
                                 >
                                     {this.renderModals()}
                                 </Modal>
