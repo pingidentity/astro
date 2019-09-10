@@ -111,13 +111,11 @@ class LandingPage extends React.Component {
                             label="End-User"
                             href="end-user/"
                         />
-                        {false && // removing this until the beta demo site is in place
-                            <Button
-                                className="landing-button landing-button--ghost"
-                                label="4.0.0 Beta"
-                                href="beta/index.html"
-                            />
-                        }
+                        <Button
+                            className="landing-button landing-button--ghost"
+                            label="4.0.0 Beta"
+                            href="beta/index.html"
+                        />
                     </div>
                     <div>
                         <LinkDropDownList
