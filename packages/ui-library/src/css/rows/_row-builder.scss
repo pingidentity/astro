@@ -44,6 +44,18 @@
         }
     }
 
+    &__remove-icon {
+        color: $color-accent-neutral-30;
+    }
+    &__row:hover &__remove-icon,
+    &__row:focus-within &__remove-icon {
+        color: $color-strong-neutral-10;
+
+        &:hover {
+            color: $color-active-blue;
+        }
+    }
+
     &--form {
         &__row {
             align-items: flex-end;

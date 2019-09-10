@@ -85,6 +85,7 @@ const Icon = withFocusOutline(({
             <span
                 data-id={dataId}
                 className={classnames(
+                    className,
                     containerClassName,
                     getIconClassName(props),
                     {
@@ -159,4 +160,7 @@ Icon.defaultProps = {
 
 Icon.iconSizes = iconSizes;
 Icon.iconTypes = iconTypes;
+
+Icon.displayName = "Icon";
+
 export default Icon;

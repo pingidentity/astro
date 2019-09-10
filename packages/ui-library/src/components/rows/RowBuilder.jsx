@@ -5,6 +5,24 @@ import { isFunction } from "underscore";
 import Button from "../buttons/Button";
 import InputRow from "../layout/InputRow";
 import Link from "../general/Link";
+import Icon from "../general/Icon";
+
+export const renderRemoveIcon = ({
+    "data-id": dataId,
+    onRemove,
+    removable,
+    id,
+}) => (
+    removable ? (
+        <Icon
+            className="row-builder__remove-icon"
+            data-id={dataId}
+            type="inline"
+            onClick={e => onRemove(e, id)}
+            iconName="delete"
+        />
+    ) : null
+);
 
 function Row({
     children
@@ -106,7 +124,7 @@ function RowBuilder({
                                 }
                             )}
                             data-id={rowId}
-                            iconName="minus"
+                            iconName="delete"
                             inline
                             onClick={remove(id)}
                         />)

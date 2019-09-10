@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { v4 as uuidV4 } from "uuid";
 import FormDropDownList from "../../../components/forms/FormDropDownList";
 import FormTextField from "../../../components/forms/form-text-field";
-import RowBuilder from "../../../components/rows/RowBuilder";
+import RowBuilder, { renderRemoveIcon } from "../../../components/rows/RowBuilder";
 import { omit } from "underscore";
 import InputRow from "../../../components/layout/InputRow";
+import HR from "../../../components/general/HR";
+import FormattedContent from "../../../components/general/FormattedContent";
 
 /**
 * @name RowBuilderDemo
@@ -15,18 +17,17 @@ import InputRow from "../../../components/layout/InputRow";
 export default class RowBuilderDemo extends Component {
     state = {
         firstRowIds: [uuidV4(), uuidV4()],
-        secondRowIds: [uuidV4(), uuidV4()]
+        secondRowIds: [uuidV4(), uuidV4()],
+        thirdRowIds: [uuidV4()],
     }
 
-    addRow = (isFirstRow) => {
-        this.setState(({ firstRowIds, secondRowIds }) => ({
-            firstRowIds: isFirstRow ? [...firstRowIds, uuidV4()] : firstRowIds,
-            secondRowIds: isFirstRow ? secondRowIds : [...secondRowIds, uuidV4()]
+    addRow = key => () => {
+        const stateKey = `${key}RowIds`;
+        this.setState(state => ({
+            ...state,
+            [stateKey]: [...state[stateKey], uuidV4()],
         }));
     }
-
-    addFirst = () => this.addRow(true)
-    addSecond = () => this.addRow(false)
 
     createRows = (content, ids) => {
         const noLabels = content.map(({ props, ...template }) => ({
@@ -41,10 +42,11 @@ export default class RowBuilderDemo extends Component {
         );
     }
 
-    removeRow = (isFirstRow) => (e, id) => {
-        this.setState(({ firstRowIds, secondRowIds }) => ({
-            firstRowIds: isFirstRow ? firstRowIds.filter(rowId => rowId !== id) : firstRowIds,
-            secondRowIds: isFirstRow ? secondRowIds : secondRowIds.filter(rowId => rowId !== id)
+    removeRow =key => (e, id) => {
+        const stateKey = `${key}RowIds`;
+        this.setState(state => ({
+            ...state,
+            [stateKey]: state[stateKey].filter(rowId => rowId !== id),
         }));
     }
 
@@ -59,8 +61,8 @@ export default class RowBuilderDemo extends Component {
             <div>
                 <InputRow>
                     <RowBuilder
-                        onAdd={this.addFirst}
-                        onRemove={this.removeRow(true)}
+                        onAdd={this.addRow("first")}
+                        onRemove={this.removeRow("first")}
                         rows={this.createRows(
                             [
                                 (
@@ -85,11 +87,12 @@ export default class RowBuilderDemo extends Component {
                         showRemoveLabel={true}
                     />
                 </InputRow>
+                <HR />
                 <InputRow>
                     <RowBuilder
                         hasLineBetween={false}
-                        onAdd={this.addSecond}
-                        onRemove={this.removeRow(false)}
+                        onAdd={this.addRow("second")}
+                        onRemove={this.removeRow("second")}
                         rows={[
                             ...this.createRows(
                                 [<FormTextField
@@ -101,6 +104,39 @@ export default class RowBuilderDemo extends Component {
                                 this.state.secondRowIds
                             ),
                             nonRemovable
+                        ]}
+                    />
+                </InputRow>
+                <HR />
+                <FormattedContent>
+                    <p>
+                        RowBuilder accepts a prop that overrides how the remove button is rendered.
+                        <code>renderRemoveButton</code> accepts a function that returns the rendered button.
+                        The function accepts an object with the data for the row.
+                        (Try logging out the properties you get to help design a render function.)
+                    </p>
+                    <p>
+                        We provide one alternate function that renders a trash icon as the button.
+                        <code>import {`{ renderRemoveIcon }`} from "ui-library/lib/components/rows/RowBuilder"</code>
+                        and pass it to <code>renderRemoveButton</code> to use this appearance.
+                    </p>
+                </FormattedContent>
+                <InputRow>
+                    <RowBuilder
+                        hasLineBetween={false}
+                        onAdd={this.addRow("third")}
+                        onRemove={this.removeRow("third")}
+                        renderRemoveButton={renderRemoveIcon}
+                        rows={[
+                            ...this.createRows(
+                                [<FormTextField
+                                    key="textfield"
+                                    placeholder="Rows without dividing lines"
+                                    stateless={false}
+                                    flags={["p-stateful"]}
+                                />],
+                                this.state.thirdRowIds
+                            )
                         ]}
                     />
                 </InputRow>

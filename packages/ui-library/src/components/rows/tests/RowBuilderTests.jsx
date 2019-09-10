@@ -3,12 +3,12 @@ window.__DEV__ = true;
 jest.dontMock("../RowBuilder.jsx");
 
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
+import React from "react";
+import { isDOMComponent, renderIntoDocument, Simulate } from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import RowBuilder, { renderRemoveIcon } from "../RowBuilder";
 
 describe("RowBuilder", () => {
-    const React = require("react");
-    const { isDOMComponent, renderIntoDocument, Simulate } = require("react-dom/test-utils");
-    const TestUtils = require("../../../testutil/TestUtils");
-    const RowBuilder = require("../RowBuilder");
 
     const defaultRows = [
         {
@@ -159,6 +159,37 @@ describe("RowBuilder", () => {
         const customRemoveButtons = TestUtils.scryRenderedDOMNodesWithClass(component, customClass);
 
         expect(customRemoveButtons.length).toBe(defaultRows.length);
+    });
+
+    it("renders custom remove icon and fires callback", () => {
+        const callback = jest.fn();
+
+        const component = getComponent({
+            renderRemoveButton: renderRemoveIcon,
+            onRemove: callback,
+        });
+
+        const icons = TestUtils.scryRenderedDOMNodesWithClass(component, "icon--clickable");
+        expect(icons.length).toBeTruthy();
+
+        expect(callback).not.toBeCalled();
+        Simulate.click(icons[0]);
+        expect(callback).toBeCalled();
+    });
+
+    it("doesn't render custom remove icon when row is not removeable", () => {
+        const component = getComponent({
+            renderRemoveButton: renderRemoveIcon,
+            rows: [
+                {
+                    id: "one",
+                    content: <div />,
+                    removable: false,
+                }
+            ]
+        });
+
+        expect(TestUtils.findRenderedDOMNodeWithClass(component, "icon--clickable")).toBeFalsy();
     });
 
     it("renders custom remove button when given function", () => {
