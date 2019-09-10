@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 import { mount } from "enzyme";
 import StateContainer from "../../utils/StateContainer";
+import Pagination from "../Pagination";
 
 jest.dontMock("../Pagination");
 jest.dontMock("../../rows/expandable-row/ExpandableRow");
@@ -12,7 +13,6 @@ describe("Pagination", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Utils = require("../../../util/Utils"),
-        Pagination = require("../Pagination"),
         ExpandableRow = require("../../rows/expandable-row/ExpandableRow"),
         callback,
         component,
@@ -147,6 +147,35 @@ describe("Pagination", function () {
         expect(topLinks[3].textContent).toBe("3");
 
         // expect the last child to be ">>"
+        expect(topLinks[4].childNodes[0].className).toBe("icon-next");
+    });
+
+    it ("renders navigation using using renderProps(renderPageLinks)", function () {
+
+        component = ReactTestUtils.renderIntoDocument(
+            <Pagination
+                totalPages={3}
+                perPage={3}
+                onValueChange={callback}>
+                renderPageLinks={(props, PageLinks)=> (
+                    <div>
+                        <PageLinks
+                            currentPage={props.currentPage}
+                            numPages={props.numPages}
+                            onValueChange={props.onValueChange}
+                            data-id="topPageLinks"
+                        />
+                        <ExpandableRow className="row" key={1} />
+                        <ExpandableRow className="row" key={2} />
+                        <ExpandableRow className="row" key={3} />
+                    </div>
+                )}
+            </Pagination>
+        );
+
+        pageLinks = TestUtils.scryRenderedDOMNodesWithClass(component, "page-links");
+        topLinks = pageLinks[0].childNodes;
+
         expect(topLinks[4].childNodes[0].className).toBe("icon-next");
     });
 

@@ -157,7 +157,8 @@ class PaginationStateless extends Component {
         onValueChange: PropTypes.func.isRequired,
         page: PropTypes.number,
         perPage: PropTypes.number,
-        total: PropTypes.number
+        total: PropTypes.number,
+        renderPageLinks: PropTypes.func,
     };
 
     static defaultProps = {
@@ -197,19 +198,31 @@ class PaginationStateless extends Component {
             <div
                 className={this.props.className}
                 data-id={this.props["data-id"]}>
-                <PageLinks
-                    currentPage={currentPage}
-                    numPages={numPages}
-                    onValueChange={this._handlePageChange}
-                    key="topPageLinks"
-                    data-id="topPageLinks" />
-                {this.props.children}
-                <PageLinks
-                    currentPage={currentPage}
-                    numPages={numPages}
-                    onValueChange={this._handlePageChange}
-                    key="bottomPageLinks"
-                    data-id="bottomPageLinks" />
+                {
+                    this.props.renderPageLinks ? this.props.renderPageLinks({
+                        currentPage,
+                        numPages,
+                        onValueChange: this._handlePageChange,
+                        children: this.props.children
+                    }, PageLinks) : (
+                        <div>
+                            <PageLinks
+                                currentPage={currentPage}
+                                numPages={numPages}
+                                onValueChange={this._handlePageChange}
+                                key="topPageLinks"
+                                data-id="topPageLinks" />
+                            {this.props.children}
+                            <PageLinks
+                                currentPage={currentPage}
+                                numPages={numPages}
+                                onValueChange={this._handlePageChange}
+                                key="bottomPageLinks"
+                                data-id="bottomPageLinks" />
+                        </div>
+                    )
+
+                }
             </div>
         );
     }
@@ -287,6 +300,9 @@ const PStatefulPagination = inStateContainer([
  *          Currently selected page number. Respected only with externally managed variant.
  * @param {Pagination~onValueChange} onValueChange
  *          Callback to be triggered when a new page selected.
+ *  * @param {function} [renderPagelinks]
+ *     Function that gets passed the PageLinks function for the pagination;
+ *     Used to render as many page links as you want.
  *
  * @example
  *
