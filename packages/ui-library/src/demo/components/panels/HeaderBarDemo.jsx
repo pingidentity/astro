@@ -1,5 +1,12 @@
 import React from "react";
 import HeaderBar from "../../../components/panels/header-bar";
+import NavFrame, {
+    NavSearch,
+    NavLink,
+    NavMenu,
+    EnvironmentSelector,
+    MarketSelector
+} from "../../../components/panels/NavFrame";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 import HR from "ui-library/lib/components/general/HR";
 
@@ -132,9 +139,111 @@ class HeaderBarDemo extends React.Component {
         this.setState({ newEnvironment: true });
     }
 
+    _tempNavTree = [
+        {
+            id: "SNAAAARF",
+            label: "Header 1",
+            children: [
+                {
+                    id: "evenworse",
+                    icon: "globe",
+                    label: "Section without children"
+                }
+            ]
+        },
+        {
+            id: "1",
+            label: "Header 2",
+            children: [
+                {
+                    icon: "globe",
+                    id: 2,
+                    label: "Section",
+                    children: [
+                        {
+                            id: 4,
+                            label: "Group",
+                            children: [
+                                {
+                                    id: 5,
+                                    label: "End node"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    label: "SPLEHRT"
+                }
+            ]
+        }
+    ]
+
     render() {
         return (
             <div>
+                <HR />
+                <NavFrame
+                    copyrightYear="1982"
+                    headerLeft={
+                        <MarketSelector
+                            onMarketChange={() => console.log("NEW MARKET :D")}
+                            market="1"
+                            options={[
+                                {
+                                    id: "1",
+                                    label: "MORKET"
+                                }
+                            ]}
+                        />
+                    }
+                    headerRight={[
+                        <EnvironmentSelector
+                            onEnvironmentChange={() => console.log("BORK")}
+                            onNewEnvironment={() => console.log("NEU")}
+                            options={[
+                                {
+                                    id: 1,
+                                    label: "Raddest env",
+                                    value: "RAD"
+                                },
+                                {
+                                    id: 2,
+                                    label: "Freaking DEFECTIVE",
+                                    value: "NAH"
+                                }
+                            ]}
+                            environment="RAD"
+                            flags={["use-portal"]}
+                        />,
+                        <NavSearch
+                            navTree={this._tempNavTree}
+                        />,
+                        <NavLink
+                            iconName="globe"
+                            href="stuff"
+                        />,
+                        <NavMenu
+                            iconName="globe"
+                            items={[
+                                {
+                                    icon: "globe",
+                                    id: "id",
+                                    label: "STEELY DAN RULES"
+                                }
+                            ]}
+                            onClose={() => console.log("AH BISCUITS")}
+                            onOpen={() => console.log("HI PLEASE LOVE ME")}
+                            onItemClick={() => console.log("ok RUDE")}
+                        />
+                    ]}
+                    navTree={this._tempNavTree}
+                    onItemSelect={id => console.log("<(~_~)>", id)}
+                    selectedNode={5}
+                >
+                    HI THERE
+                </NavFrame>
                 <p>Using the provided reducer:</p>
                 <HeaderBar {...this.state}
                     onItemValueChange={this._handleItemClick}
