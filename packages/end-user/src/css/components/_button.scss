@@ -1,6 +1,8 @@
 .button {
     @include button;
 
+    position: relative;
+
     border-radius: $button-radius;
 
     &--primary {
@@ -41,5 +43,132 @@
     &--inline {
         width: auto;
         display: inline-block;
+    }
+
+    &--inline-alt {
+        background-color: $color-active-blue;
+        color: #fff;
+        border-radius: 30px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 0;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    &--inline {
+        &.edit,
+        &.plus,
+        &.delete,
+        &.remove,
+        &.minus,
+        &.prev,
+        &.clear,
+        &.next {
+            $size: 29px;
+
+            padding: 0;
+            height: $size;
+            width: $size;
+            min-height: unset;
+            text-align: center;
+            line-height: $size;
+
+            border-radius: 50%;
+
+            &:before {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                font-family: $icon-font;
+                text-transform: none;
+            }
+
+            // if the icon button has text then adjust the spacing accordingly
+            &:not(:empty) {
+                width: auto;
+                padding: 0 25px 0 43px;
+
+                &:before {
+                    width: auto;
+                    left: 18px;
+                }
+            }
+        }
+
+        &.plus {
+            &:before {
+                content: '*';
+                font-size: 12px;
+            }
+        }
+        &.remove,
+        &.minus {
+            &:before {
+                content: '-';
+                font-size: 9px;
+            }
+        }
+        &.delete {
+            &:before {
+                content: 'd';
+                font-size: 15px;
+            }
+        }
+        &.edit {
+            &:before {
+                content: 'e';
+                font-size: 15px;
+            }
+        }
+        &.prev {
+            &:before {
+                content: '<';
+                font-size: 11px;
+            }
+        }
+        &.next {
+            &:before {
+                content: '>';
+                font-size: 11px;
+            }
+        }
+
+        &.small {
+            $size: 21px;
+            height: $size;
+            width: $size;
+            font-size: 13px;
+            margin: 0;
+            vertical-align: text-bottom;
+
+            &.edit {
+                &:before {
+                    top: 5px;
+                    font-size: 10px;
+                }
+            }
+            &.plus {
+                &:before {
+                    top: 7px;
+                    font-size: 10px;
+                }
+            }
+            &.remove,
+            &.minus {
+                &:before {
+                    top: 10px;
+                    left: 1px;
+                    right: 0;
+                    font-size: 9px;
+                    width: auto;
+                    height: 2px;
+                    line-height: 2px;
+                }
+            }
+        }
     }
 }

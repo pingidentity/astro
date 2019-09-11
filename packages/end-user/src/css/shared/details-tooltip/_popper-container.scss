@@ -1,0 +1,55 @@
+.popper-container {
+    box-sizing: content-box;
+    z-index: $zindex__popover;
+
+    &[x-placement^='bottom'] {
+        margin-top: 10px + $spacing-xs;
+    }
+
+    &[x-placement^='top'] {
+        margin-bottom: 10px + $spacing-xs;
+    }
+
+    &[x-placement^='right'] {
+        margin-left: 10px + $spacing-xs;
+    }
+
+    &[x-placement^='left'] {
+        margin-right: 10px + $spacing-xs;
+    }
+
+    &__pointer {
+        position: absolute;
+
+        *[x-placement^='top'] & {
+            bottom: 0;
+            transform: translateY(100%);
+        }
+
+        *[x-placement^='bottom'] & {
+            top: 0;
+            transform: translateY(-100%);
+        }
+
+        *[x-placement^='left'] & {
+            right: 0;
+            transform: translateX(100%);
+        }
+
+        *[x-placement^='right'] & {
+            left: 0;
+            transform: translateX(-100%);
+        }
+    }
+
+    &.input-select {
+        margin: 0;
+        padding: 0;
+
+        display: none;
+
+        &.open {
+            display: block;
+        }
+    }
+}

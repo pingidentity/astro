@@ -1,0 +1,148 @@
+$font-size-primary: 15px;
+$font-size-normal: 14px;
+$font-size-reduced: 13px;
+
+$body-text-color: $color-neutral-20;
+
+@mixin text-style(
+    $color: $color-slate,
+    $size: $font-size-normal
+) {
+    color: $color;
+    font-size: $size;
+    // @include font-pn-regular;
+}
+
+// PAGE TITLE
+@mixin text-page-title {
+    @include text-style($color-slate, 24px);
+}
+
+.text-page-title {
+    @include text-page-title;
+}
+
+// PAGE SUBTITLE
+@mixin text-page-subtitle {
+    @include text-style($color-elephant);
+}
+
+.text-page-subtitle {
+    @include text-page-subtitle;
+}
+
+// LABEL
+@mixin text-label {
+    @include text-style($color-elephant, $font-size-reduced);
+
+    text-transform: uppercase;
+}
+
+.text-label {
+    @include text-label;
+}
+
+// PARENT LABEL
+@mixin parent-label {
+    @include text-style($color-elephant, $font-size-primary);
+    @include font-pn-semibold;
+
+    text-transform: uppercase;
+}
+
+// VALUE
+@mixin text-value {
+    @include text-style($color-midnight);
+}
+
+.text-value {
+    @include text-value;
+}
+
+@mixin text-no-value {
+    @include text-style($color-accent-neutral-30);
+
+    font-style: italic;
+}
+
+.text-no-value {
+    @include text-no-value;
+}
+
+@mixin text-placeholder {
+    @include text-value;
+
+    opacity: 0.4;
+    font-style: italic;
+}
+
+.text-placeholder {
+    @include text-placeholder;
+}
+
+// BODY
+@mixin text-body {
+    @include text-style($body-text-color);
+
+    em {
+        font-style: italic;
+    }
+}
+
+.text-body {
+    @include text-body;
+}
+
+@mixin text-note {
+    @include text-style($body-text-color);
+    font-style: italic;
+}
+
+.text-note {
+    @include text-note;
+}
+
+// PRIMARY
+@mixin text-primary {
+    @include text-style($color-slate, $font-size-primary);
+}
+
+.text-primary {
+    @include text-primary;
+}
+
+// SECTION TITLE
+@mixin text-section-title {
+    @include text-style($color-slate, $font-size-primary);
+
+    text-transform: uppercase;
+}
+
+.text-section-title {
+    @include text-section-title;
+}
+
+// COLOR VARIANTS
+@mixin text-error {
+    color: $color-critical-red;
+}
+
+.text-error {
+    @include text-error;
+}
+
+@mixin text-warning {
+    color: $color-warning-icon-yellow;
+}
+
+.text-warning {
+    @include text-warning;
+}
+
+@mixin text-success {
+    color: $color-success;
+}
+
+.text-success {
+    @include text-success;
+}

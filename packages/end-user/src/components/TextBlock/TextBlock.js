@@ -12,6 +12,8 @@ import classnames from 'classnames';
  *      Sets a data-id property on the TextBlock element to be used as a test hook
  * @param {string} [size]
  *      Set the size of the TextBlock (small|small-right|large)
+ * @param {string} [className]
+ *      Classname to apply to the TextBlock
  * @param {string} [spacing]
  *      Set the spacing of the TextBlock (xxlarge)
  *
@@ -20,9 +22,10 @@ const TextBlock = ({
     children,
     size,
     spacing,
+    className,
     'data-id': dataId,
 }) => {
-    const classNames = classnames('text-block', {
+    const classNames = classnames('text-block', className, {
         'text-block--small': size === 'small',
         'text-block--large': size === 'large',
         'text-block--small-right': size === 'small-right',
@@ -42,6 +45,7 @@ const TextBlock = ({
 TextBlock.propTypes = {
     size: PropTypes.oneOf(['small', 'large', 'small-right']),
     spacing: PropTypes.oneOf(['xxlarge']),
+    className: PropTypes.string,
     'data-id': PropTypes.string,
 };
 

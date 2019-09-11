@@ -18,6 +18,7 @@
 @import './fonts';
 @import './text';
 @import './spacing';
+@import './mixins';
 
 @import './common/buttons';
 @import './common/inputs';
@@ -27,6 +28,7 @@
 @import './components/button-set';
 @import './components/card';
 @import './components/checkbox';
+@import './components/container';
 @import './components/dropdown';
 @import './components/feedback';
 @import './components/file-input';
@@ -44,8 +46,27 @@
 @import './components/text-input';
 @import './components/tooltip';
 @import './components/two-sided';
+@import './components/profile-image';
 
-// spacing components are after so they take precedence
+@import './shared/text-styles';
+@import './shared/modal';
+@import './shared/tabs';
+@import './shared/details-tooltip';
+@import './shared/flex-row';
+@import './shared/user-nav';
+@import './shared/layout';
+@import './shared/help';
+@import './shared/inputs';
+@import './shared/collapsible-section';
+@import './shared/padding';
+@import './shared/toggle';
+@import './shared/forms/translation-picker';
+@import './shared/messages';
+@import './shared/tables';
+@import './shared/device-table';
+@import './shared/device-icon';
+
+// spacing components are after so they take precedence\
 
 @import './components/form-aside';
 @import './components/stack';

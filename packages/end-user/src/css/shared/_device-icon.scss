@@ -1,0 +1,41 @@
+.device-icon {
+    display: inline-block;
+    vertical-align: middle;
+    svg {
+        max-width: 30px;
+        max-height: 30px;
+        width: auto;
+        height: auto;
+
+    }
+    &__title {
+        text-transform: uppercase;
+        color: $color-active-blue;
+    }
+
+    &__icon {
+        &--mobile {
+            rect {
+                stroke: $color-strong-neutral-10;
+            }
+            path {
+                fill: $color-strong-neutral-10;
+            }
+        }
+    }
+}
+
+.tile-button {
+    &:hover {
+        .device-icon__icon {
+            &--mobile {
+                rect {
+                    stroke: $color-active-blue;
+                }
+                path {
+                    fill: $color-active-blue;
+                }
+            }
+        }
+    }
+}

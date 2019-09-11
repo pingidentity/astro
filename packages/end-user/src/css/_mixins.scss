@@ -1,0 +1,551 @@
+
+// CROSS-BROWSER COMPATIBILITY --------------------------------------------------------------------
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin box-shadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+@mixin gradient-vertical($color-top, $color-bot, $top-percent:0%, $bot-percent:100%) {
+    /* stylelint-disable */
+    background: $color-top; // Old browsers
+    background: -moz-linear-gradient(top, $color-top $top-percent, $color-bot $bot-percent); // FF3.6+
+    background: -webkit-gradient(linear, left top, left bottom, color-stop($bot-percent,$color-top), color-stop($bot-percent,$color-bot)); // Chrome,Safari4+
+    background: -webkit-linear-gradient(top, $color-top $top-percent,$color-bot $bot-percent); // Chrome10+,Safari5.1+
+    background: -o-linear-gradient(top, $color-top $top-percent,$color-bot $bot-percent); // Opera 11.10+
+    background: -ms-linear-gradient(top, $color-top $top-percent,$color-bot $bot-percent); // IE10+
+    background: linear-gradient(to bottom, $color-top $top-percent,$color-bot $bot-percent); // W3C
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$color-top}', endColorstr='#{$color-bot}',GradientType=0 ); // IE6-9
+    /* stylelint-enable */
+}
+
+@mixin opacity($opacity) {
+    $msopac: $opacity * 100;
+    filter: alpha(opacity=$msopac);
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$msopac})';
+    opacity: $opacity;
+}
+
+@mixin blur($blur) {
+    -webkit-filter: blur($blur);
+    -moz-filter: blur($blur);
+    -o-filter: blur($blur);
+    -ms-filter: blur($blur);
+    filter: blur($blur);
+}
+
+@mixin flexbox {
+	/* stylelint-disable */
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+	/* stylelint-enable */
+}
+
+@mixin flexbox-grow($value) {
+    -webkit-box-flex: $value;
+    -webkit-flex-grow: $value;
+    -moz-flex-grow: $value;
+    -ms-flex-positive: $value;
+    flex-grow: $value;
+}
+
+// STYLING ----------------------------------------------------------------------------------------
+
+@mixin inactive-link-styles {
+    @include transition(transform 0.2s ease-out);
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $color-active;
+    transform: scaleX(0);
+    visibility: hidden;
+}
+
+@mixin active-link-styles {
+    @include transition(transform 0.1s ease-out);
+    transform: scaleX(1);
+    visibility: visible;
+}
+
+@mixin input-style-light {
+    background-color: $color-white;
+    border: 1px solid $color-strong-neutral-70;
+}
+
+@mixin input-background-light {
+    background-color: $color-white;
+}
+
+@mixin input-background-dark {
+    background-color: $color-input-fill;
+}
+
+@mixin input-style-base {
+    @include input-background-dark;
+
+    color: $color-input-text;
+    border: 1px solid $color-input-fill;
+    font-size: 14px;
+
+    &::placeholder {
+        font-style: italic;
+        opacity: 0.4;
+    }
+}
+
+@mixin input-style {
+    @include input-style-base;
+
+    .modifier_light-inputs & {
+        @include input-style-light;
+    }
+
+    .modifier_light-inputs .modifier_dark-inputs & {
+        @include input-style-base;
+    }
+}
+
+@mixin input-background {
+    background-color: $color-input-fill;
+
+    .modifier_light-inputs & {
+        @include input-background-light;
+    }
+
+    .modifier_light-inputs .modifier_dark-inputs & {
+        @include input-background-dark;
+    }
+}
+
+@mixin style-inputs-light {
+    .input-textfield input,
+    .input-textarea textarea,
+    .input-multivalues .entries {
+        @include input-background-light;
+        @include input-style-light;
+    }
+}
+
+
+// TEXT -------------------------------------------------------------------------------------------
+
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin text-size-adjust($tsa) {
+    -moz-text-size-adjust: $tsa;
+    -webkit-text-size-adjust: $tsa;
+    -ms-text-size-adjust: $tsa;
+}
+
+@mixin placeholder-css(
+    $color,
+    $font-weight,
+    $padding-top,
+    $font-style: italic
+) {
+    ::-webkit-input-placeholder {
+        color: $color;
+        font-weight: $font-weight;
+        padding: $padding-top 3px 0 0;
+        font-style: $font-style;
+    }
+    :-moz-placeholder { // Firefox 18-
+        color: $color;
+        font-weight: $font-weight;
+        padding: $padding-top 3px 0 0;
+        font-style: $font-style;
+    }
+    ::-moz-placeholder {  // Firefox 19+
+        color: $color;
+        font-weight: $font-weight;
+        padding: $padding-top 3px 0 0;
+        font-style: $font-style;
+    }
+    :-ms-input-placeholder {
+        color: $color;
+        font-weight: $font-weight;
+        padding: $padding-top 3px 0 0;
+        font-style: $font-style;
+    }
+}
+
+@mixin break-word {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+
+// ANIMATION --------------------------------------------------------------------------------------
+
+@mixin transition($transition) {
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -ms-transition: $transition;
+    -o-transition: $transition;
+    transition: $transition;
+}
+
+@mixin transition-delay($transition-delay) {
+    -webkit-transition-delay: $transition-delay;
+    -moz-transition-delay: $transition-delay;
+    -ms-transition: $transition-delay;
+    -o-transition: $transition-delay;
+    transition-delay: $transition-delay;
+}
+
+@mixin transition-duration($transition-duration) {
+    -webkit-transition-duration: $transition-duration;
+    -moz-transition-duration: $transition-duration;
+    transition-duration: $transition-duration;
+}
+
+@mixin transform($transform) {
+    -ms-transform: $transform;
+    -webkit-transform: $transform;
+    transform: $transform;
+}
+
+@mixin animation ($animation) {
+    -webkit-animation: $animation;
+    -moz-animation: $animation;
+    -o-animation: $animation;
+    animation: $animation;
+}
+
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    -o-transform: rotate($degrees);
+    transform: rotate($degrees);
+}
+
+@mixin flipV {
+    -webkit-transform: scaleY(-1);
+    -moz-transform: scaleY(-1);
+    -ms-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin fadein-keyframes {
+    @include keyframes('fade-in') {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+@include fadein-keyframes; // animation keyframes only need to be declared once and then can be used globally
+
+@mixin slidedown-keyframes {
+    @include keyframes('slide-down') {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            opacity: translateY(-100%);
+        }
+    }
+}
+
+@include slidedown-keyframes;
+
+
+// NUMERIC -----------------------------------------------------------------------------------------
+
+// Power function : @param {Number} $x, @param {Number} $n, @return {Number}
+@function pow($x, $n) {
+    /* stylelint-disable */
+    $ret: 1;
+    @if $n >= 0 {
+        @for $i from 1 through $n {
+            $ret: $ret * $x;
+        }
+    } @else {
+        @for $i from $n to 0 {
+            $ret: $ret / $x;
+        }
+    }
+    @return $ret;
+    /* stylelint-enable */
+}
+
+@function to-fixed($float, $digits: 2) {
+    $sass-precision: 5;
+
+    @if $digits > $sass-precision {
+        @warn 'Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now.'
+            + 'The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`.'
+            + 'See https://github.com/sass/sass/issues/1122 for further informations.';
+    }
+
+    $pow: pow(10, $digits);
+
+    @return round($float * $pow) / $pow;
+}
+
+
+// FLEXBOX ----------------------------------------------------------------------------------------
+
+@mixin flexbox {
+    /* stylelint-disable declaration-block-no-duplicate-properties */
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    /* stylelint-enable declaration-block-no-duplicate-properties */
+}
+
+@mixin flexbox-grow($value) {
+    -webkit-box-flex: $value;
+    -webkit-flex-grow: $value;
+    -moz-flex-grow: $value;
+    -ms-flex-positive: $value;
+    flex-grow: $value;
+}
+
+@mixin flexbox-shrink($value) {
+    -webkit-flex-shrink: $value;
+    -moz-flex-shrink: $value;
+    -ms-flex-shrink: $value;
+    flex-shrink: $value;
+}
+
+@mixin inline-flex {
+    /* stylelint-disable declaration-block-no-duplicate-properties */
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    /* stylelint-enable declaration-block-no-duplicate-properties */
+}
+
+@mixin flexbox-direction($value) {
+    flex-direction: $value;
+    -ms-flex-direction: $value;
+}
+
+
+// COLOR ------------------------------------------------------------------------------------------
+
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+
+// MISC --------------------------------------------------------------------------------------------
+
+@mixin vertical-align {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+@mixin box-sizing($box-sizing) {
+    -webkit-box-sizing: $box-sizing;
+    -moz-box-sizing: $box-sizing;
+    box-sizing: $box-sizing;
+}
+
+@mixin background-clip($background-clip) {
+    -webkit-background-clip: $background-clip;
+    -moz-background-clip: $background-clip;
+    background-clip: $background-clip;
+}
+
+@mixin background-size($bgsize) {
+    -webkit-background-size: $bgsize;
+    -moz-background-size: $bgsize;
+    -o-background-size: $bgsize;
+    background-size: $bgsize;
+}
+
+@mixin grab-cursor {
+	/* stylelint-disable */
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    &:active {
+        cursor: grabbing;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+    }
+	/* stylelint-enable */
+}
+
+@mixin appearance($appearance) {
+    appearance: $appearance;
+    -moz-appearance: $appearance;
+    -webkit-appearance: $appearance;
+    -o-appearance: $appearance;
+}
+
+@mixin clip($clip-property) {
+    -moz-background-clip: $clip-property;
+    -webkit-background-clip: $clip-property;
+    background-clip: $clip-property;
+}
+
+@mixin button-spacing($spacing: 10px) {
+    > .details-tooltip .details-target button {
+        margin: 0;
+    }
+
+    > input[type=button],
+    > button,
+    > .button,
+    > .details-tooltip {
+        margin: 0;
+
+        & ~ input[type=button],
+        & ~ button,
+        & ~ .button,
+        & ~ .details-tooltip {
+            margin-left: $spacing;
+        }
+    }
+}
+
+@mixin backface-visibility {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+@mixin arrow($arrow-size) {
+    &:after {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: $arrow-size;
+        border-style: solid;
+        border-color: inherit;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        content: '';
+    }
+}
+
+// POPOVER/TOOLTIP/HELPHINT POINTERS
+@mixin makePointer($height, $fill, $direction: down) {
+    width: $height * 2;
+    height: $height * 2;
+    box-sizing: border-box;
+    border: $height solid transparent;
+    position: absolute;
+
+    @if $direction == down {
+        border-top-color: $fill;
+    }
+    @else if $direction == right {
+        border-left-color: $fill;
+    }
+    @else if $direction == left {
+        border-right-color: $fill;
+    }
+    @else {
+        border-bottom-color: $fill;
+    }
+}
+
+@mixin makeBorderedPointer($height, $fill, $border, $direction: down) {
+    @include makePointer($height, $border, $direction);
+
+    &:after {
+        content: '';
+
+        @include makePointer($height, $fill, $direction);
+
+        @if $direction == down {
+            left: -$height;
+            bottom: 1px - $height;
+        }
+        @else if $direction == right {
+            bottom: -$height;
+            right: 1px - $height;
+        }
+        @else if $direction == left {
+            bottom: -$height;
+            left: 1px - $height;
+        }
+        @else {
+            left: -$height;
+            top: 1px - $height;
+        }
+    }
+}
+
+// DEPRECATED OR SITE-SPECIFIC --------------------------------------------------------------------
+
+@mixin chrome-fixed-positioning-bug-hack {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+}
+
+@mixin transition-3($opacity, $visibility, $transform) {
+    -webkit-transition: $opacity, $visibility, $transform;
+    -moz-transition: $opacity, $visibility, $transform;
+    -ms-transition: $opacity, $visibility, $transform;
+    -o-transition: $opacity, $visibility, $transform;
+    transition: $opacity, $visibility, $transform;
+}
+
+@mixin user-select($select) {
+    -o-user-select: $select;
+    -moz-user-select: $select;
+    -webkit-user-select: $select;
+    -ms-user-select: $select;
+    user-select: $select;
+}
+
+@mixin keyframe ($animation-name) {
+    @include keyframes($animation-name) {
+        @content;
+    }
+}

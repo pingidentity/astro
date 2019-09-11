@@ -99,3 +99,10 @@
     font-family: 'proxima-nova-black';
     src: url('./fonts/proxima-nova/ProximaNova-Black.otf');
 }
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('./fonts/icons/iconfont.ttf');
+}
+
+$icon-font: 'iconfont';

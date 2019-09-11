@@ -66,6 +66,10 @@ module.exports = {
                     name: '[name].[ext]',
                 },
             },
+            {
+                test: /\.(woff|woff2|eot|ttf)$/,
+                loader: 'url-loader?limit=100000',
+            },
         ],
     },
     output: {

@@ -7,6 +7,10 @@ $spacing-lg: $spacing-base * 2.5;
 $spacing-xl: $spacing-base * 4;
 $spacing-xx: $spacing-base * 6.5;
 
+$layout-header-height: 64px;    // used in miltiple includes
+$layout-nav-width: 190px;       // used in miltiple include
+$line-height-default: 1.3em;
+
 // COLOR TOKENS
 $color-active-blue: #277ba5;
 $color-active-blue-highlighted: #3d88ae;
@@ -14,15 +18,101 @@ $color-critical-red: #de3602;
 $color-warning-yellow: #eeb91c;
 $color-success-green: #21934c;
 
-$color-neutral-10: #4d4d4d;
-$color-neutral-20: #595959;
-$color-neutral-30: #666;
-$color-neutral-40: #737373;
-$color-neutral-50: #808080;
-$color-neutral-60: #9a9a9a;
-$color-neutral-70: #b4b4b4;
-$color-neutral-80: #D6D6D6;
-$color-neutral-90: #f8f8f8;
+// NEUTRAL COLORS
+$color-black: #000;
+$color-white: #fff;
+
+$color-neutral-10: #575f67;
+$color-neutral-20: #686f77;
+$color-neutral-30: #798087;
+$color-neutral-40: #8b9197;
+$color-neutral-50: #9da2a8;
+$color-neutral-60: #afb4b8;
+$color-neutral-70: #c2c6ca;
+$color-neutral-80: #d5d8db;
+$color-neutral-90: #e8ebed;
+$color-neutral-95: #f8f8f8;
+
+$color-strong-neutral-10: #3d454d;
+$color-strong-neutral-20: #515960;
+$color-strong-neutral-30: #676e75;
+$color-strong-neutral-40: #7d8389;
+$color-strong-neutral-50: #93999f;
+$color-strong-neutral-60: #abb0b4;
+$color-strong-neutral-70: #c3c7cb;
+$color-strong-neutral-80: #dbdfe2;
+$color-strong-neutral-90: #f4f7f9;
+
+$color-accent-neutral-10: #4b637c;
+$color-accent-neutral-20: #5f748b;
+$color-accent-neutral-30: #738599;
+$color-accent-neutral-40: #8797a8;
+$color-accent-neutral-50: #9ba9b8;
+$color-accent-neutral-60: #b0bcc7;
+$color-accent-neutral-70: #c5cfd7;
+$color-accent-neutral-80: #dae2e7;
+$color-accent-neutral-90: #f0f6f7;
+
+// SEMANTIC COLORS
+$color-active-blue: #2996cc;
+$color-active-blue-highlighted: tint($color-active-blue, 10%);
+$color-critical-red: #a31300;
+$color-critical-red-highlighted: tint($color-critical-red, 10%);
+$color-success-green: #4aba78;
+$color-success-green-highlighted: tint($color-success-green, 10%);
+$color-warning-yellow: #eeb91c;
+
+// CHARTING COLORS
+$color-charting-indigo: #193967;
+$color-charting-blue: #4c8dca;
+$color-charting-magenta: #e12f51;
+$color-charting-orange: #ffa500;
+$color-charting-green: #447100;
+$color-charting-cyan: #77e6eb;
+$color-charting-grape: #6a3f89;
+
+// LEGACY COLOR NAMES
+$color-active: $color-active-blue;
+$color-blue-grey: $color-accent-neutral-50;
+$color-chilly: $color-accent-neutral-80;
+$color-elephant: $color-strong-neutral-50;
+$color-elderly: $color-strong-neutral-90;
+$color-midnight: $color-accent-neutral-10;
+$color-rabbit-fur: $color-neutral-70;
+$color-required-yellow: $color-warning-yellow;
+$color-rhino: $color-neutral-50;
+$color-slate: $color-strong-neutral-10;
+$color-sonic: $color-accent-neutral-90;
+$color-stratus: $color-neutral-60;
+$color-timberwolf: $color-neutral-90;
+$color-walrus: $color-neutral-10;
+$color-warning-icon-yellow: $color-warning-yellow;
+
+// REUSABLE SEMANTIC COLOR VARS (use color vars for all other colors or when semantic meaning does not apply)
+$color-text: $color-elephant;
+$color-value-text: $color-midnight;
+$color-active: $color-active-blue;
+$color-input-fill: $color-sonic;
+$color-input-border: $color-rabbit-fur;
+$color-input-text: $color-midnight;
+$color-input-placeholder: $color-rabbit-fur;
+$color-input-required: $color-required-yellow;
+$color-input-error: $color-critical-red;
+$color-link-text: $color-active-blue;
+
+$color-active-blue-option: #0069d9;
+$color-active-blue-inactive: #a9d5eb;
+$color-cinder-block: #e4e5e5;
+$color-dolphin: #d8dbdc;
+$color-grass: #3cb66e;
+$color-manatee: #b1b5b8;
+$color-oitnb: #f89201;
+$color-stone: #c2c3c4;
+$color-success-green-inactive: #b1e2c5;
+$color-verde: #76cc99;
+$color-warning-text: #96702c;
+$color-success: $color-success-green;
+$color-success-highlighted: $color-success-green-highlighted;
 
 $color-critical-red-light: #EDDAD9;
 $color-critical-red-dark: #A31200;
@@ -45,3 +135,37 @@ $font-size-xx: 36px;
 
 // SHADOW
 $shadow-overlay: 0 1px 4px 1px rgba($color-neutral-30, 0.35);
+
+// Z-INDEXES
+$zindex__modal:          80;
+$zindex__nav--primary:   70;
+$zindex__page-overlay:   60;
+$zindex__message:        50;
+$zindex__popover:        40;
+$zindex__menu:           30;
+$zindex__fixed-controls: 20;
+$zindex__elevated:       10;
+$zindex__base:            0;
+$zindex__hidden:        -10;
+
+$img-path: '../images/';
+
+@mixin message-button-css {
+    button,
+    .button {
+        background-color: transparent;
+        color: $color-white;
+        border-color: $color-white;
+        vertical-align: baseline;
+    }
+}
+@mixin message-primary-button-css ($color) {
+    .button,
+    button {
+        &.inline.primary {
+            border: 1px solid $color-white;
+            background-color: $color-white;
+            color: $color;
+        }
+    }
+}

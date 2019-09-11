@@ -1,0 +1,141 @@
+.flex-row {
+    @include flexbox;
+
+    &--inline {
+        display: inline-flex;
+    }
+
+    &--justify-center {
+        justify-content: center;
+    }
+    &--justify-end {
+        justify-content: flex-end;
+    }
+
+    &--justify-start {
+        justify-content: flex-start;
+    }
+
+    &--justify-between {
+        justify-content: space-between;
+    }
+
+    &--align-bottom {
+        align-content: flex-end;
+        align-items: flex-end;
+    }
+
+    &--align-center {
+        align-content: center;
+        align-items: center;
+    }
+
+    &--align-stretch {
+        align-content: stretch;
+        align-items: stretch;
+    }
+
+    &--align-top {
+        align-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &--flex-direction-row {
+        flex-direction: row;
+    }
+
+    &--flex-direction-row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    &--flex-direction-column {
+        flex-direction: column;
+
+        & > * {
+            width: 100%;
+        }
+    }
+
+    &--flex-direction-column-reverse {
+        flex-direction: column-reverse;
+    }
+
+    &--column-spacing-xs {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-xs;
+        }
+    }
+
+    &--column-spacing-sm {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-sm;
+        }
+    }
+
+    &--column-spacing-md {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-md;
+        }
+    }
+
+    &--column-spacing-lg {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-lg;
+        }
+    }
+
+    &--column-spacing-xl {
+        & > *:not(:last-child) {
+            margin-bottom: $spacing-xl;
+        }
+    }
+
+    &--row-spacing-xs {
+        & > *:not(:last-child) {
+            margin-right: $spacing-xs;
+        }
+    }
+
+    &--row-spacing-sm {
+        & > *:not(:last-child) {
+            margin-right: $spacing-sm;
+        }
+    }
+
+    &--row-spacing-md {
+        & > *:not(:last-child) {
+            margin-right: $spacing-md;
+        }
+    }
+
+    &--row-spacing-lg {
+        & > *:not(:last-child) {
+            margin-right: $spacing-lg;
+        }
+    }
+
+    &--row-spacing-xl {
+        & > *:not(:last-child) {
+            margin-right: $spacing-xl;
+        }
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+        flex-direction: column;
+
+        *:not(:last-child) {
+            width: 100%;
+            margin-bottom: 20px;
+            margin-right: 0;
+        }
+    }
+}
+
+.mobileCenter {
+    @media (max-width: $breakpoint-mobile) {
+        text-align: center !important;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+}

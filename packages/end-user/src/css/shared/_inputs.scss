@@ -1,0 +1,846 @@
+$default-input-transition: all 0.3s;
+$default-input-height: 40px;
+$default-input-font-size: 14px;
+$borderSize: 1px !default;
+$default-input-border-radius: 2px;
+
+label {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0 20px 0 0;
+    text-transform: uppercase;
+    vertical-align: top;
+    line-height: 1em;
+    cursor: default;
+
+    @include text-label;
+
+    .modifier_strip-input-margins & {
+        // this is for layouts that don't play well with the built-in margins inputs have
+        // for instance, when an input goes in a column, which has its own padding and margin
+        margin-right: 0;
+    }
+
+    .label-text,
+    .input-container {
+        display: block;
+        position: relative;
+
+        @include transition($default-input-transition);
+
+        &:before {
+            @include transition($default-input-transition);
+        }
+    }
+
+
+
+    .label-text {
+        margin: 0 0 8px;
+        text-align: left;
+
+        .help-tooltip {
+            margin-left: 10px;
+            height: 12px;
+            vertical-align: baseline;
+        }
+        .help-tooltip.inline {
+            margin-left: 5px;
+            margin-top: 0;
+        }
+        &__description {
+            text-transform: none;
+            padding-top: $spacing-xs;
+        }
+    }
+
+    &.input-text {
+        input {
+            width: 100%;
+            padding: 4px 15px 3px;
+        }
+        &.search {
+            .input-container {
+                input {
+                    padding-left: 35px;
+                    padding-right: 30px;
+                }
+            }
+            a.clear-search {
+                position: absolute;
+                font-family: $icon-font;
+                text-transform: none;
+                font-size: 11px;
+                color: inherit;
+                top: 14px;
+                right: 10px;
+
+                &:before {
+                    content: 'X';
+                }
+
+                &:hover {
+                    text-decoration: none;
+                    color: $color-active-blue;
+                }
+            }
+            a.undo {
+                top: 15px;
+                line-height: 1em;
+
+                @include transition($default-input-transition);
+
+                &:before {
+                    content: 'X';
+                    font-size: 13px;
+                    line-height: 1em;
+                }
+            }
+            &--query .input-container:before {
+                content: 'd';
+            }
+        }
+        &.no-label {
+            input {
+                margin-top: 0;
+            }
+        }
+        &.extended {
+            input {
+                width: 350px;
+            }
+        }
+        &.masking-controls {
+            input[type=text],
+            input[type=password] {
+                padding-right: 40px;
+            }
+        }
+
+        // temporary sizing classes
+        &.input-width-1 {
+            input {
+                width: 70px;
+            }
+        }
+        &.input-width-2 {
+            input {
+                width: 210px;
+            }
+        }
+        &.input-width-3 {
+            input {
+                width: 492px;
+            }
+        }
+        &--mono input {
+            font-family: 'Consolas', 'Monaco', 'Andale Mono', monospace;
+        }
+
+        .password-meter {
+            margin: 6px 0 0;
+        }
+    }
+
+    &.input-textarea {
+        textarea {
+            padding: 12px 15px;
+            line-height: 1.2em;
+            height: auto;
+            width: 100%;
+
+            &.input-textarea {
+                &__input {
+                    &--monospaced {
+                        font-family: 'Consolas', 'Monaco', 'Andale Mono', monospace;
+                    }
+                    &--no-resize {
+                        resize: none;
+                    }
+                }
+            }
+        }
+        &.extended {
+            textarea {
+                width: 350px;
+            }
+        }
+        &.no-label {
+            textarea {
+                margin-top: 0;
+            }
+        }
+        &.textarea-height--short {
+            textarea {
+                height: 100px;
+            }
+        }
+
+        &.textarea-height--medium {
+            textarea {
+                height: 250px;
+            }
+        }
+
+        &.textarea-height--large {
+            textarea {
+                height: 400px;
+            }
+        }
+
+        &.readonly {
+            &.textarea-height--short,
+            &.textarea-height--medium,
+            &.textarea-height--large {
+                textarea[readonly],
+                textarea {
+                    resize: both !important;
+                }
+            }
+        }
+    }
+
+    &.input-text,
+    &.input-textarea,
+    &.input-multivalues {
+        &.short {
+            input[type=text],
+            input[type=password] {
+                width: 75px;
+            }
+        }
+        &.actions {
+            input[type=text],
+            input[type=password],
+            textarea {
+                padding-right: 40px;
+            }
+        }
+    }
+
+    &.input-checkbox {
+        $checkbox-size: 24px;
+        $border-width: 3px;
+
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        min-width: $checkbox-size;
+        min-height: $checkbox-size;
+        padding: 0 0 22px;
+        cursor: pointer;
+
+        .label-text {
+            display: block;
+            text-transform: uppercase;
+        }
+        input[type=checkbox] {
+            position: absolute;
+            visibility: hidden;
+            margin: 0;
+            top: 0;
+            left: 0;
+            width: $checkbox-size;
+            height: $checkbox-size;
+
+            &:checked + .icon:after {
+                color: $color-input-text;
+            }
+        }
+        .icon {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            display: inline-block;
+
+            &:before {
+                @include input-background;
+
+                content: '';
+                display: block;
+                box-sizing: border-box;
+                border: 3px solid $color-timberwolf;
+                height: $checkbox-size;
+                width: $checkbox-size;
+                line-height: $checkbox-size;
+
+                @include border-radius($default-input-border-radius);
+            }
+            &:after {
+                content: '\79';
+                position: absolute;
+                text-transform: none;
+                color: transparent;
+                font-family: $icon-font;
+                font-size: 10px;
+                left: 0;
+                bottom: 0;
+                height: $checkbox-size;
+                width: $checkbox-size;
+                line-height: $checkbox-size;
+                text-align: center;
+
+                @include transition($default-input-transition);
+            }
+        }
+        &.top-label {
+            padding: 0;
+            height: 47px;
+
+            .icon {
+                top: 23px;
+            }
+        }
+        &.no-label {
+            margin-right: 0;
+        }
+        &.side-label {
+            .icon {
+                position: relative;
+                top: auto;
+                left: auto;
+                vertical-align: middle;
+                margin: 0 5px 0 0;
+            }
+            .label-text {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+        &.stacked,
+        &.inline {
+            margin-bottom: 5px;
+            margin-right: 20px;
+            padding: 0 0 0 36px;
+            text-transform: none;
+
+            .label-text {
+                @include break-word;
+                display: inline-block;
+                text-transform: none;
+                font-size: 14px;
+                color: $color-midnight;
+                padding: 6px 0 0;
+                margin: 0;
+                line-height: 1em;
+            }
+        }
+        &.stacked {
+            margin-bottom: 10px;
+
+            .icon {
+                bottom: auto;
+            }
+        }
+    }
+
+    &.input-radio {
+
+        $radio-height: 24px;
+        $border-width: 3px;
+
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        line-height: $radio-height;
+        min-height: $radio-height;
+        min-width: $radio-height;
+        font-size: 14px;
+        text-transform: none;
+        color: $color-midnight;
+        padding: 0 0 0 35px;
+        margin-right: 20px;
+        cursor: pointer;
+
+        .circle {
+            @include input-background;
+
+            position: absolute;
+            left: 0;
+            top: -1px;
+            box-sizing: border-box;
+            width: $radio-height;
+            height: $radio-height;
+            cursor: pointer;
+            border: $border-width solid $color-timberwolf;
+
+            @include border-radius(ceil($radio-height/2) + $border-width);
+
+            &:after {
+                content: '';
+                position: absolute;
+                left: 4px;
+                top: 4px;
+                width: 10px;
+                height: 10px;
+                background-color: transparent;
+
+                @include border-radius(ceil($radio-height/2) + 1);
+                @include transition($default-input-transition);
+            }
+        }
+        &.no-label {
+            margin-right: 0;
+            padding-left: 0;
+        }
+        &.stacked {
+            display: block;
+            margin-bottom: 13px;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+        .label-text {
+            text-transform: none;
+
+            @include text-value;
+        }
+        input[type=radio] {
+            position: absolute;
+            margin: 0;
+            top: -1px;
+            left: 0;
+            height: 24px;
+            width: 24px;
+
+            &:checked + .circle:after {
+                background-color: $color-midnight;
+            }
+
+            :focus {
+                outline-width: 1px;
+            }
+        }
+        &.input-text {
+            .circle {
+                bottom: 9px;
+            }
+            input[type=text] {
+                display: inline-block;
+                margin: 0;
+            }
+        }
+        &.hidden {
+            display: none;
+        }
+        .help-tooltip {
+            height: 19px;
+            vertical-align: bottom;
+            margin: 0 0 0 7px;
+        }
+    }
+
+    &.input-group {
+        font-size: 14px;
+        color: $color-elephant;
+        text-transform: uppercase;
+        margin: 0 0 20px;
+    }
+
+    &.detached {
+        margin-right: 0;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    &.parent {
+        color: $color-elephant;
+        // @include font-pn-semibold;
+        display: block;
+        font-size: 15px;
+        margin: 0 0 $spacing-sm;
+    }
+
+    &.inline-save {
+        .input-container {
+            padding-right: 50px;
+        }
+        .undo {
+            right: 61px;
+        }
+        .save {
+            position: absolute;
+            top: 15px;
+            right: 0;
+        }
+    }
+
+    &.radio-group {
+        display: block;
+        margin: 0 0 10px;
+
+        .help-tooltip {
+            line-height: 1em;
+            height: 18px;
+            width: 18px;
+            vertical-align: middle;
+            margin: 0 0 0 10px;
+        }
+    }
+
+    a {
+        &.password-show-button {
+            position: absolute;
+            right: 14px;
+
+            &:hover {
+                text-decoration: none;
+            }
+            &.icon-view {
+                top: 14px;
+                font-size: 11px;
+            }
+            &.icon-view-hidden {
+                top: 9px;
+                font-size: 20px;
+            }
+        }
+        &.undo {
+            position: absolute;
+            top: 13px;
+            right: 11px;
+            font-size: 0;
+            color: transparent;
+            width: 14px;
+
+            &:before {
+                content: '\6e';
+                font-family: $icon-font;
+                font-size: 16px;
+                color: $color-active;
+                text-transform: none;
+
+                @include transition($default-input-transition);
+            }
+        }
+    }
+
+    .value-container {
+        display: block;
+        margin: 6px 0 0;
+        color: $color-midnight;
+        text-transform: none;
+        font-size: 16px;
+    }
+}
+
+.input-selection-list {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid $color-timberwolf;
+    width: 200px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    @include border-radius(3px);
+
+    &--no-border {
+        border: none;
+    }
+
+    &__multi-add-panel {
+        margin-top: $spacing-sm;
+    }
+
+    &__note {
+        color: $color-strong-neutral-50;
+        font-size: $font-size-reduced;
+        font-style: italic;
+
+        &--error {
+            color: $color-critical-red;
+        }
+    }
+
+    .selection-list-search {
+        position: relative;
+
+        .input-text {
+            display: block;
+            margin: 0 0 10px;
+        }
+        .input-container {
+            input[type=text] {
+                height: 36px;
+                width: 100%;
+                padding-left: 35px;
+                padding-right: 25px;
+            }
+            &:before {
+                font-size: 16px;
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    }
+    .input-selection-list-items {
+        display: flex;
+        flex-direction: column;
+        max-height: 228px;
+        margin: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .input-radio {
+            margin: 0 15px 10px 0;
+        }
+        .input-checkbox {
+            margin: 0 15px 10px 0;
+
+            .label-text {
+                text-transform: none;
+                word-break: break-word;
+                word-wrap: break-word;
+            }
+        }
+    }
+    .required-message {
+        background-color: $color-warning-icon-yellow;
+        color: $color-white;
+        margin: -10px -10px 10px;
+        padding: 7px 10px;
+        font-size: 15px;
+        line-height: 1em;
+        text-align: center;
+
+        @include animation(fade-in 0.5s);
+
+        > span {
+            display: inline-block;
+            text-align: left;
+        }
+    }
+    .view-item {
+        color: $color-midnight;
+        font-size: 14px;
+        margin: 0 0 10px 1px;
+    }
+    .help-tooltip {
+        margin: 0 0 0 7px;
+    }
+
+    &.searchable {
+        .input-selection-list-items {
+            max-height: 228px - 46px;
+            margin-top: 1px;
+        }
+        a.clear-search {
+            position: absolute;
+            font-family: $icon-font;
+            text-decoration: none;
+            font-size: 12px;
+            bottom: 18px;
+            right: 10px;
+
+            &:before {
+                content: 'X';
+            }
+        }
+    }
+    &.show-selection-options {
+        width: 220px;
+        padding-bottom: 5px;
+    }
+    &.fluid-width {
+        max-width: 400px;
+        width: auto;
+    }
+
+    &__add-option {
+        align-items: center;
+        color: $color-accent-neutral-10;
+        display: inline-flex;
+        line-height: 1em;
+        margin: 0 $spacing-md $spacing-sm 0;
+        text-transform: none;
+    }
+}
+
+
+.input-custom-select {
+    padding: $borderSize;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    width: auto;           // set to auto, allow different input widths to be set
+
+    &.open {
+        .select-list {
+            visibility: visible;
+            z-index: $zindex__menu;
+            top: -1px;
+
+            @include animation(fade-in 0.2s);
+
+        }
+        .input-container {
+            &:last-of-type {
+                .wrapper {
+                    &:after {
+                        @include rotate(-180deg);
+                    }
+                }
+            }
+        }
+        .selected-option {
+            .arrow {
+                @include rotate(-180deg);
+            }
+        }
+    }
+    &.disabled {
+        .input-text {
+            .input-container {
+                @include opacity(1);
+                input {
+                    cursor: default !important;
+                }
+            }
+        }
+    }
+    // override the input-select behavior
+    .input-container {
+        height: auto;
+
+        @include transition(none);
+        &:before,
+        &:focus {
+            @include transition(none);
+        }
+        &:last-of-type {
+            .wrapper {
+                overflow: visible;
+                border: none;
+            }
+        }
+    }
+
+    // override default input readonly styles
+    .input-text {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 0;
+
+        input[type=text] {
+            width: 100%;
+        }
+    }
+    .readonly {
+        &.input-text {
+            input[type=text] {
+                @include input-style;
+                cursor: pointer;
+
+                &:focus {
+                    border-color: $color-active-blue;
+                }
+            }
+        }
+    }
+    .selected-option {
+        @include transition(none);
+        &:hover {
+            @include transition(none);
+        }
+    }
+    input[type=text] {
+        @include transition(none);
+        &.selected-option-label {
+            border-radius: $default-input-border-radius $default-input-border-radius 0 0;
+            &:hover,
+            &:focus {
+                cursor: pointer;
+                border-color: $color-input-fill;
+            }
+            &--icon-padding {
+                padding-left: 30px;
+            }
+        }
+    }
+
+    @include placeholder-css($color-midnight, normal, 0, normal); // override placeholder styles on selected option preview
+
+    .select-list {
+        $option-padding: 7px 40px 7px 15px;
+
+        visibility: hidden;
+        top: -100000px;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid $color-rabbit-fur;
+        list-style: none;
+        position: relative;
+        background: $color-white;
+        padding: 8px 0;
+        white-space: nowrap;
+
+        @include box-shadow(0 3px 4px rgba($color-black, 0.1));
+
+        // place menu above the input element
+        &.dropup {
+            bottom: 100%;
+            margin-bottom: (-$borderSize);
+        }
+
+        @media (max-width: 500px) { // except on small screens, where we force the dropdown width to match the input
+            white-space: normal;
+        }
+
+        // horizontal rule separator between groups
+        .group-separator {
+            border-top: 1px dotted $color-rabbit-fur;
+            margin: 5px 10px;
+
+            &:first-child {
+                border: none;
+            }
+        }
+        .select-prompt {
+            padding: $option-padding;
+            font-size: 14px;
+        }
+        .select-search-prompt {
+            font-style: italic;
+            color: $color-stratus;
+        }
+        .select-add {
+            .label {
+                color: $color-elephant;
+                font-size: 13px;
+                margin-right: 4px;
+
+                &:after {
+                    content: ':';
+                }
+            }
+            &.highlighted {
+                background-color: $color-active-blue;
+                color: $color-white;
+
+                .label {
+                    color: $color-white;
+                }
+            }
+        }
+
+        // each group header in dropdown
+        .select-group {
+            padding: 7px 40px 7px 10px;
+            color: $color-elephant;
+            text-transform: uppercase;
+            font-size: 13px;
+
+            &.disabled {
+                color: $color-rabbit-fur;
+            }
+        }
+    }
+    .selected-option,
+    .select-option,
+    .none-option {
+        text-transform: none;
+    }
+}

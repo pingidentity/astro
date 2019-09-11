@@ -35,6 +35,13 @@ module.exports = [
         demoCSS: true,
     },
     {
+        id: 'selfservice',
+        script: 'selfservice.js',
+        title: 'Ping End User - Self Service Page',
+        filename: 'selfservice.html',
+        demoCSS: true,
+    },
+    {
         id: 'signon',
         script: 'signon.js',
         title: 'Sign On',

@@ -7,6 +7,7 @@ import MFA from './MFA';
 import SignOnPage from './pages/SignOnPage';
 import ChangePWPage from './pages/ChangePWPage';
 import SigningYouOnPage from './pages/SigningYouOnPage';
+import SelfService from './pages/SelfService';
 import completeBranding from '../util/completeBranding';
 
 import '../css/styles.scss';
@@ -35,6 +36,7 @@ const App = PageComponent => (
             <li><a href="layouts.html">Layouts</a></li>
             <li><a href="feedback.html">Feedback</a></li>
             <li><a href="mfa.html">MFA</a></li>
+            <li><a href="selfservice.html">Self Service</a></li>
         </ul>
         <PageComponent />
     </div>
@@ -46,8 +48,10 @@ export default {
     layouts: App(Layouts),
     feedback: App(Feedback),
     mfa: App(MFA),
+    selfservice: App(SelfService),
     signon: <SignOnPage branding={pingBranding} />,
     branded: <SignOnPage branding={jjBranding} />,
     changepw: <ChangePWPage branding={pingBranding} />,
     signingon: <SigningYouOnPage branding={pingBranding} />,
+    selfservice: <SelfService />,
 };

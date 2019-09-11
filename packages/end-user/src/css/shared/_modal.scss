@@ -1,0 +1,286 @@
+.modal {
+    $modal-radius: 4px;
+    $default-top: 57px;
+    $min-bottom: 40px;
+    $header-height: 46px;
+    $max-modal-width: 960px;
+
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    top: $default-top;
+    bottom: 0;
+    z-index: $zindex__modal;
+
+    &.show {
+        .modal-content {
+            display: inline-block;
+        }
+        .modal-bg {
+            background: $color-black;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            @include opacity(0.4);
+        }
+    }
+    &.modal-width-small {
+        .modal-content {
+            width: 390px;
+        }
+    }
+    &.modal-width-full,
+    &.full-width {
+        .modal-content {
+            width: 100%;
+        }
+    }
+
+    .modal-content {
+        display: none;
+        position: relative;
+        outline: none; //prevent outline when focused
+        top: 0;
+        left: 50%;
+        height: 100%;
+        max-width: $max-modal-width;
+        min-width: 360px;
+        // @include font-pn-regular;
+
+        @include transform(translateX(-50%));
+    }
+    .close-modal {
+        display: block;
+        position: absolute;
+        top: 13px;
+        right: 15px;
+        line-height: 1em;
+        color: transparent;
+        cursor: pointer;
+
+        &:after {
+            color: $color-rhino;
+            font-size: 18px;
+            content: '\78';
+            font-family: 'iconfont';
+        }
+    }
+    .modal-header {
+        position: relative;
+        padding: 0 25px;
+        box-sizing: border-box;
+        background-color: $color-walrus;
+        color: $color-white;
+        font-size: 21px;
+        line-height: $header-height;
+        min-height: $header-height;
+        font-weight: 300;
+
+        @include border-radius($modal-radius $modal-radius 0 0);
+
+        h2 {
+            vertical-align: middle;
+            margin: 0 auto;
+            color: $color-white;
+            padding: 18px 0 0 18px;
+        }
+        > .details-tooltip {
+            display: block;
+            position: absolute;
+            top: 13px;
+            right: 15px;
+            line-height: 1em;
+            color: transparent;
+
+            .close-modal {
+                top: 0;
+                right: 0;
+            }
+        }
+        .details-tooltip,
+        .details-target {
+            height: 18px;
+            width: 18px;
+        }
+        .details-content {
+            top: 29px;
+        }
+    }
+    &.no-close {
+        .modal-header {
+            text-align: center;
+        }
+    }
+    .modal-body {
+        position: relative;
+        padding: 25px;
+        font-weight: normal;
+        box-sizing: border-box;
+        background-color: $color-white;
+        overflow-x: visible;
+        overflow-y: auto;
+        max-height: calc(100% - #{2 * $min-bottom});
+        margin: 0 30px;
+
+        @include border-radius(0 0 $modal-radius $modal-radius);
+
+        h2 {
+            color: $color-midnight;
+            padding: 20px 0 5px 48px;
+            margin-bottom: 0;
+        }
+        p {
+            margin-bottom: 1em;
+            color: $color-elephant;
+            font-size: 14px;
+
+            a {
+                display: inline-block;
+                margin: 0 5px;
+            }
+        }
+        .page-controls-primary {
+            position: relative;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            background: transparent;
+            padding: 0;
+            border: none;
+        }
+    }
+    &.wizard-modal {
+        .modal-body {
+            background-color: $color-elderly;
+        }
+    }
+    &.maximize {
+        &.show {
+            .modal-body {
+                width: $max-modal-width;
+            }
+        }
+    }
+    &.dialog {
+        $modal-width: 350px;
+
+        .modal-content {
+            width: $modal-width;
+        }
+        .modal-title,
+        .body-title {
+            font-size: 20px;
+            margin: 0 0 15px;
+        }
+        .modal-body {
+            border-width: 0 1px 1px;
+            text-align: left;
+            font-size: 18px;
+            max-height: calc(100% - #{$min-bottom});
+
+            @include border-radius($modal-radius);
+        }
+    }
+    &.alert {
+        .modal-header,
+        .modal-body {
+            border-width: 1px 1px 0;
+            border-style: solid;
+            border-color: $color-warning-icon-yellow;
+            width: 360px;
+        }
+        .modal-header {
+            background: $color-warning-icon-yellow;
+            color: rgba($color-black, 0.5);
+            font-size: 17px;
+            text-align: center;
+            line-height: 1.2em;
+            padding: 20px;
+            text-transform: none;
+
+            &:after {
+                content: none;
+            }
+            &:before {
+                font-family: $icon-font;
+                content: '\21';
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 22px;
+                line-height: 1;
+                z-index: $zindex__elevated;
+                color: $color-warning-text;
+            }
+            .close-modal {
+                display: none;
+            }
+        }
+        .modal-body {
+            border: none;
+            text-align: left;
+            background-color: $color-white;
+            position: relative;
+            top: 0;
+
+            @include border-radius(0 0 $modal-radius $modal-radius);
+
+            .title,
+            .body-title {
+                color: $color-warning-text;
+                text-align: center;
+                font-weight: 400;
+                font-size: 24px;
+                margin: 0;
+                padding-bottom: 20px;
+            }
+
+            .buttons {
+                margin: 25px 0 0;
+                text-align: center;
+
+                a.cancel {
+                    display: inline-block;
+                    margin: 15px 0 0;
+                }
+            }
+        }
+    }
+    .page-messages {
+        left: 0;
+        right: 0;
+
+        .close {
+            right: 15px;
+
+            &:after {
+                font-size: 18px;
+
+            }
+        }
+        .message {
+            padding-left: 30px;
+        }
+    }
+    .page-controls-primary {
+        @include transition(all 0.1s);
+
+        &.hidden {
+            @include transform(translateY(0));
+            @include opacity(0);
+        }
+    }
+}
+
+.edit-form {
+    .modal {
+        .modal-body {
+            background: $color-white;
+        }
+    }
+}

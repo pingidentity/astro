@@ -1,0 +1,68 @@
+table.device-table {
+    td {
+        padding-top: $spacing-lg;
+        padding-bottom: $spacing-lg;
+    }
+
+    th,
+    td {
+        border-bottom-style: solid;
+        &:first-child {
+            padding-left: $spacing-md;
+            width: 42%;
+        }
+        button.inline.delete {
+            margin: 0;
+        }
+    }
+
+    .device {
+        &-icon {
+            margin-right: $spacing-sm;
+        }
+        &-name {
+            display: inline-block;
+            vertical-align: middle;
+            &__type {
+                display: none;
+                color: $color-neutral-30;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+//based on Dock menu breakpoints
+@media (max-width: 600px) {
+    table.device-table {
+        th {
+            font-size: 0; //hide fields but not the line below
+            flex: 1;
+            border-bottom: 1px solid $color-rabbit-fur;
+        }
+        tr {
+            display: flex;
+            align-items: stretch;
+            border-bottom: 1px solid $color-rabbit-fur;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        td {
+            border-bottom: none;
+            &:last-child {
+                margin-left: auto;
+                padding-right: 25px;
+            }
+        }
+        th,
+        td {
+            &:nth-child(2) { //selector for type column
+                display: none;
+            }
+        }
+        .device-type {
+            display: block;
+        }
+    }
+}
+

@@ -1,0 +1,273 @@
+// Popup and popover frame
+$popup-border-color: $color-timberwolf;
+$popup-border: 1px solid $popup-border-color;
+
+$popup-border-radius: 4px;
+$popup-box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
+
+$popup-width: 360px;
+$popup-title-height: 50px;
+
+$arrow-offset: 15px;
+$arrow-height: 10px;
+
+$popup-min-width: 2 * $arrow-offset + 2 * $arrow-height + 65px;
+
+.popup-frame {
+    @include box-shadow($popup-box-shadow);
+
+    display: inline-block;
+    position: relative;
+    border: 1px solid $popup-border-color;
+    border-radius: $popup-border-radius;
+    background: $color-white;
+
+    &__pointer {
+        margin: 0 $spacing-xs;
+
+        *[x-placement^='top'] & {
+            @include makeBorderedPointer($arrow-height, $color-white, $popup-border-color, down);
+        }
+
+        *[x-placement^='bottom'] & {
+            @include makeBorderedPointer($arrow-height, $color-white, $popup-border-color, up);
+        }
+    }
+
+    &--padded {
+        padding: $spacing-md;
+    }
+}
+
+@mixin popover-pointer($top, $color) {
+    content: '';
+    position: absolute;
+    top: $top;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-$arrow-height);
+
+    border-style: solid;
+    border-width: $arrow-height;
+    border-color: transparent transparent $color;
+}
+
+.popup-frame--pointer {
+    @extend .popup-frame;
+
+    margin-top: $arrow-height + 5px;
+    min-width: $popup-min-width;
+
+    &:before {
+        @include popover-pointer(-($arrow-height * 2) - 1px, $popup-border-color);
+    }
+
+    &:after {
+        @include popover-pointer(-($arrow-height * 2), $color-white);
+    }
+
+}
+
+.popup-frame--top {
+    margin-top: 0;
+    margin-bottom: $arrow-height + 5px;
+
+    &:before {
+        top: auto;
+        bottom: -($arrow-height * 2) - 1px;
+        border-color: $popup-border-color transparent transparent transparent;
+    }
+
+    &:after {
+        top: auto;
+        bottom: -($arrow-height * 2);
+        border-color: $color-white transparent transparent transparent;
+    }
+}
+
+.popup-frame--left {
+    &:before {
+        right: $arrow-offset;
+        left: auto;
+        transform: none;
+    }
+
+    &:after {
+        right: $arrow-offset;
+        left: auto;
+        transform: none;
+    }
+}
+
+.popup-frame--right {
+    &:before {
+        left: $arrow-offset;
+        right: auto;
+        transform: none;
+    }
+
+    &:after {
+        left: $arrow-offset;
+        right: auto;
+        transform: none;
+    }
+}
+
+.popup-frame--padded {
+    padding: $spacing-md;
+}
+
+
+// Popover Component
+$max-popover-width: 360px;
+
+.popover {
+    position: relative;
+    display: inline-block;
+
+    &__trigger {
+        display: inline-block;
+    }
+}
+
+.popover__container {
+    margin-right: -$max-popover-width;
+    max-width: $max-popover-width;
+    z-index: $zindex__popover;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.popover--top .popover__container {
+    bottom: 100%;
+}
+
+.popover--right .popover__container {
+    transform: translateX(-$arrow-offset - $arrow-height);
+}
+
+.popover--left .popover__container {
+    right: 50%;
+    left: auto;
+    margin-right: 0;
+    margin-left: -$max-popover-width;
+    transform: translateX($arrow-offset + $arrow-height);
+}
+
+// Styles for Popover Menu
+.button-menu__button {
+    color: $color-slate;
+    font-size: 15px;
+    display: block;
+    box-sizing: border-box;
+    padding: 10px 25px;
+    text-align: left;
+    border: none;
+    height: auto;
+    line-height: 1em;
+    margin: 0;
+    border-radius: 0;
+    white-space: normal;
+    width: 100%;
+
+    &:hover {
+        color: $color-active-blue;
+        text-decoration: none;
+    }
+
+    &:active {
+        border: none;
+    }
+
+    &--nopad {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+.button-menu__button + .button-menu__button {
+    border-top: 1px solid $color-neutral-80;
+}
+
+.button-menu__button--selected {
+    color: $color-active-blue;
+}
+
+.button-menu__scroller {
+    border-top: 1px solid $color-neutral-80;
+    position: relative;
+    max-height: 305px;
+    overflow: auto;
+}
+
+.button-menu__options {
+    text-transform: none;
+    text-align: center;
+    padding: 15px 0 0;
+    border-top: 1px solid $color-neutral-95;
+    font-size: 14px;
+}
+
+// Styles for Popover Nav Menu
+.nav-menu__link {
+    color: $color-slate;
+    font-size: 14px;
+    display: block;
+    min-width: $popup-min-width;
+    padding: $spacing-md $spacing-lg;
+    position: relative;
+    text-align: left;
+
+    &:hover {
+        background: $color-strong-neutral-90;
+    }
+    &:hover,
+    &:active {
+        color: $color-slate;
+        text-decoration: none;
+    }
+}
+
+.nav-menu__link--w-icon {
+    padding-left: $spacing-xl;
+    line-height: 30px;
+}
+
+.nav-menu__link + .nav-menu__link {
+    border-top: 1px solid $color-neutral-95;
+}
+
+.nav-menu__icon {
+    font-size: 16px;
+    position: absolute;
+    top: $spacing-md + 6px;
+    left: $spacing-md;
+}
+
+
+
+.popover-search {
+    position: relative;
+    margin: 0 0 15px;
+
+    label {
+        width: 100%;
+    }
+    input {
+        padding-left: 35px;
+    }
+}
+
+.popover-search-clear {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 12px;
+
+    &:before {
+        content: 'X';
+        font-family: $icon-font;
+    }
+}

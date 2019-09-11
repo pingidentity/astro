@@ -1,0 +1,180 @@
+
+.collapsible-section {
+    $line-indent: 17px;
+
+    position: relative;
+    border-top: 1px dotted $color-rabbit-fur;
+    border-bottom: 1px dotted $color-rabbit-fur;
+    margin: 0 0 -1px $line-indent;
+
+    &--no-underline {
+        border: none;
+    }
+
+    > .collapsible-section-title {
+        position: relative;
+        display: inline-block;
+        padding: 25px 0 22px;
+        font-size: 15px;
+        text-transform: uppercase;
+        color: $color-slate;
+        line-height: 1em;
+        cursor: pointer;
+        // @include font-pn-regular;
+
+        &--circled {
+            &.collapsible-link {
+                margin-left: 28px;
+            }
+
+            &:before {
+                left: -23px !important;
+            }
+
+            &:after {
+                position: absolute;
+                top: 11px;
+                content: '';
+                border: 1px solid $color-accent-neutral-50;
+                height: 20px;
+                width: 20px;
+                left: -30px;
+                border-radius: 50%;
+            }
+        }
+
+    }
+    > .collapsible-section-title-value {
+        font-size: 14px;
+        text-transform: none;
+        margin: 0 0 0 5px;
+        color: $color-midnight;
+    }
+    > .collapsible-section-content {
+        display: none;
+        visibility: hidden;
+        position: relative;
+        margin: 0 0 25px 25px;
+
+        @include transition(all 0.3s);
+
+        &--no-margin {
+            margin-left: 0;
+        }
+    }
+    .row-accessories {
+        float: unset;
+
+        > * {
+            margin-left: 10px;
+        }
+    }
+    &.disable-expand {
+        .left:before,
+        .right:after {
+            content: '';
+        }
+        .collapsible-section-title {
+            pointer-events: none;
+            cursor: default;
+        }
+    }
+    &.open {
+        > .collapsible-section-content {
+            display: block;
+            visibility: visible;
+
+            @include animation(fade-in 0.2s);
+        }
+    }
+    &.has-title-value {
+        > .collapsible-section-title {
+            &:after {
+                content: ':';
+            }
+        }
+    }
+
+    &.draggable {
+        &:before {
+            content: 'G';
+            font-family: $icon-font;
+            position: absolute;
+            left: 5px;
+            top: 33px;
+            margin-top: -9px;
+            color: $color-stone;
+        }
+        .collapsible-section-title {
+            padding-left: 21px;
+        }
+    }
+
+    &.condensed {
+        border-bottom: none;
+
+        &:first-child {
+            border-top: none;
+            margin-top: -15px;
+        }
+        .collapsible-section-title {
+            padding: 15px 0 13px;
+        }
+
+        .collapsible-section__right-content {
+            height: 43px;
+        }
+    }
+
+    // Override for default collapsible-link styles
+    .collapsible-link {
+        margin: 0 0 0 24px;
+
+        &:hover {
+            color: $color-slate;
+            text-decoration: none;
+
+            &.left:before {
+                color: $color-slate;
+            }
+        }
+        &.left:before {
+            top: auto;
+            left: -19px;
+            color: $color-midnight;
+        }
+    }
+}
+
+// when present in a title, not stand alone
+.collapsible-link {
+    &.inline {
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+}
+
+.collapsible-form {
+    .collapsible-section {
+        .collapsible-section-title {
+            color: $color-elephant;
+            font-size: 13px;
+        }
+    }
+}
+
+.collapsible-section__right-content {
+    float: right;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    width: 50%;
+}
+
+.collapsible-section__details-text {
+    padding-left: 12px;
+    color: $color-strong-neutral-50;
+
+    @include transition(all 0.3s);
+}

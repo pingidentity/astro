@@ -14,19 +14,20 @@ import classnames from 'classnames';
  *      Size of the stack container (xsmall|small|large)
  *
  */
-const Stack = ({ children, size, 'data-id': dataId }) => {
+const Stack = ({ children, size, 'data-id': dataId, centered }) => {
     const classNames = classnames('stack', {
         'stack--small': size === 'small',
         'stack--xsmall': size === 'xsmall',
         'stack--large': size === 'large',
     });
 
-    return <div className={classNames} data-id={dataId}>{children}</div>;
+    return <div className={classNames} data-id={dataId} style={{ textAlign: centered ? 'center' : null }}>{children}</div>;
 };
 
 Stack.propTypes = {
     size: PropTypes.string,
     'data-id': PropTypes.string,
+    centered: PropTypes.bool,
 };
 
 Stack.defaultProps = {

@@ -1,0 +1,152 @@
+
+.help-tooltip {
+    $help-icon-size: 18px;
+    $inline-icon-height: 12px;
+
+    @mixin bg-styles($bg-color) {
+        background-color: $bg-color;
+
+        &.place-right:after {
+            border-right-color: $bg-color;
+        }
+        &.place-left:after {
+            border-left-color: $bg-color;
+        }
+        &.place-top:after {
+            border-top-color: $bg-color;
+        }
+        &.place-bottom:after {
+            border-bottom-color: $bg-color;
+        }
+    }
+
+    @mixin default-icon-styles {
+        height: $inline-icon-height;
+        font-size: $inline-icon-height;
+        line-height: $inline-icon-height;
+        color: $color-blue-grey;
+        display: inline-block;
+    }
+
+    color: $color-blue-grey;
+
+    display: inline-block;
+    background: transparent;
+    line-height: 14px;
+
+    // overrides for the default react-tooltip styling
+    .tooltip-text {
+        color: $color-white;
+        // @include font-pn-regular;
+        font-size: 14px;
+        text-transform: none;
+        white-space: normal;
+        font-weight: normal;
+        padding: 8px 10px;
+        max-width: 400px;
+        pointer-events: auto !important;
+
+        @include bg-styles($color-midnight);
+
+        &.show {
+            @include opacity(1);
+        }
+        &.tooltip-text-link {
+            &:hover {
+                visibility: visible;
+
+                @include opacity(1);
+            }
+            a {
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+        .content-link {
+            font-weight: bold;
+            &:before {
+                content: '';
+                height: 1px;
+                background-color: $color-white;
+                display: inline-block;
+                margin: 10px 0 8px;
+                position: relative;
+                width: 100%;
+            }
+            .icon-info {
+                color: $color-white;
+            }
+        }
+        a {
+            color: $color-white;
+            text-decoration: underline;
+        }
+    }
+
+    .inline {
+        &:hover {
+            .icon-help {
+                color: $color-midnight;
+            }
+        }
+        [class^='icon'] {
+            @include default-icon-styles;
+        }
+        .icon-help {
+            width: $inline-icon-height - 1px;
+
+            &:before {
+                content: '\48'; //change to icon-help-rounded
+            }
+        }
+        .icon-lock {
+            padding-left: 2px;
+        }
+        img {
+            display: inline-block;
+            height: 14px;
+            width: auto;
+            max-width: 20px;
+            vertical-align: text-bottom;
+        }
+    }
+    .icon-help {
+        text-transform: none;
+        width: $help-icon-size;
+        font-size: $help-icon-size;
+        line-height: $help-icon-size;
+        color: $color-midnight;
+        display: inline-block;
+        vertical-align: baseline;
+        cursor: pointer;
+    }
+    &:hover [class^='icon-'] {
+        color: $color-accent-neutral-10;
+    }
+
+    &--warning {
+        .tooltip-text {
+            @include bg-styles($color-critical-red);
+        }
+    }
+
+    &--light {
+        .tooltip-text {
+            color: $color-accent-neutral-10;
+
+            @include bg-styles($color-white);
+            @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
+        }
+    }
+
+    // Class to add same left margin that tooltips have when inside of inputs.
+    &--left-margin {
+        margin-left: 10px;
+    }
+
+    &--extra {
+        display: block;
+    }
+}

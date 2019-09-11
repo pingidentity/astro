@@ -50,6 +50,7 @@ const TextInput = ({
     placeholder,
     type,
     value,
+    width,
 }) => {
     const classNames = classnames('text-input', className, {
         'text-input--error': type === textInputTypes.ERROR,
@@ -68,6 +69,7 @@ const TextInput = ({
             placeholder={placeholder}
             type="text"
             value={value}
+            style={{ width }}
         />
     );
 };

@@ -1,4 +1,4 @@
-import Card from './Card';
+import Card, { CardTypes } from './Card';
 import CardMessage, { messageTypes } from './CardMessage';
 
-export { Card as default, CardMessage, messageTypes };
+export { Card as default, CardTypes, CardMessage, messageTypes };

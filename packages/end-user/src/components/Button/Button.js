@@ -48,11 +48,12 @@ const Button = ({
     label,
     onClick,
     children,
+    iconName,
     type,
     style,
     render,
 }) => {
-    const classNames = classnames('button file-input--button', className, {
+    const classNames = classnames('button file-input--button', className, iconName, {
         'button--disabled': disabled,
         'button--inline': inline,
         'button--primary': type === ButtonTypes.PRIMARY,

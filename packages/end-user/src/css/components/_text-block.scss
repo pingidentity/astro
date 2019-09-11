@@ -8,6 +8,14 @@
         text-align: left;
     }
 
+    &--full-width {
+        width: 100%;
+
+        .text-block__text {
+            width: 100%;
+        }
+    }
+
     &--small {
         font-size: $font-size-sm;
     }
