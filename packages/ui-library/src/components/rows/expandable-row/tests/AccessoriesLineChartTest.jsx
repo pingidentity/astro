@@ -36,6 +36,16 @@ describe("AccessoriesLineChartTest", function () {
         { id: 6 },
     ];
 
+    const zeroData = [
+        { id: 1, value: "0" },
+        { id: 2, value: "0" },
+        { id: 3, value: "0" },
+        { id: 4, value: "0" },
+        { id: 5, value: "0" },
+        { id: 6, value: "0" },
+    ];
+
+
     const defaultProps = {
         key: "accessories-line-chart",
         title: "Avg daily sign-ons:",
@@ -100,6 +110,13 @@ describe("AccessoriesLineChartTest", function () {
 
     it("should render without ReferenceLine if all data exist", function() {
         const component = getComponent();
+        const isLineEmpty = component.find(ReferenceLine).isEmpty();
+
+        expect(isLineEmpty).toBeTruthy();
+    });
+
+    it("should render without ReferenceLine if all point have 0 values", function() {
+        const component = getComponent({ data: zeroData });
         const isLineEmpty = component.find(ReferenceLine).isEmpty();
 
         expect(isLineEmpty).toBeTruthy();

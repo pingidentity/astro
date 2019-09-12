@@ -113,8 +113,8 @@ export default class AccessoriesLineChart extends React.Component {
         const trendColor = this.props.isTrendPositive ? "#193967" : "#000";
         let referenceLinePoint;
 
-        if (this.props.data[0] && !this.props.data[0][this.props.yAxisKey]) {
-            referenceLinePoint = _.find(this.props.data.slice(1), point => (point[this.props.yAxisKey])) ||
+        if (this.props.data[0] && !_.has(this.props.data[0], this.props.yAxisKey)) {
+            referenceLinePoint = _.find(this.props.data.slice(1), point => _.has(point, this.props.yAxisKey)) ||
             _.last(this.props.data);
         }
 
