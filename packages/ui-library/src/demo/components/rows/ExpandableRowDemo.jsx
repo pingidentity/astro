@@ -2,6 +2,7 @@ import React from "react";
 import RowAccessories from "../../../components/rows/expandable-row/Accessories";
 import RowAccessoriesLineChart from "../../../components/rows/expandable-row/AccessoriesLineChart";
 import HelpHint from "../../../components/tooltips/HelpHint";
+import Link from "../../../components/general/Link";
 import ExpandableRow from "../../../components/rows/ExpandableRow";
 import Toggle from "../../../components/forms/form-toggle";
 import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
@@ -371,7 +372,7 @@ class ExpandableRowDemo extends React.Component {
                                 count="234,234"
                                 countLabel="Past 7 days"
                                 chartLabel="12 wk trend"
-                                hint="See Contributing Data"
+                                hint={<Link>See Contributing Data</Link>}
                                 trend="- 8.6%"
                                 isTrendPositive={false}
                                 data={[
@@ -405,7 +406,7 @@ class ExpandableRowDemo extends React.Component {
                                 count="0"
                                 countLabel="Past 7 days"
                                 chartLabel="12 wk trend"
-                                hint="See Contributing Data"
+                                hint={<Link>See Contributing Data</Link>}
                                 hintProps={{ type: HelpHint.Types.LIGHT }}
                                 trend="+ 0%"
                                 isTrendPositive={true}

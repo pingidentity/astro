@@ -1251,6 +1251,14 @@ input.ordering-controls__input {
     @include flexbox;
     align-items: center;
     justify-content: space-between;
+
+    .help-tooltip .tooltip-text a {
+        text-decoration: none;
+    }
+
+    .help-tooltip--light .tooltip-text a {
+        color: $color-active-blue;
+    }
 }
 
 .accessories-line-chart__chart-wrapper {
