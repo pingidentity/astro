@@ -1,0 +1,32 @@
+.file-details {
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1em;
+    background-color: transparent;
+    @include font-pn-regular;
+    @include break-word;
+
+    &.input-file--selected {
+        background-color: transparent;
+    }
+    &__file {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__file-name {
+        padding: 0 $spacing-xs 0 0;
+        @include text-value;
+    }
+
+    &__file-data {
+        margin: 7px 0 0;
+        padding: 7px $spacing-xs 0 0;
+        border-top: 1px solid $color-strong-neutral-70;
+        color: $color-strong-neutral-50;
+    }
+}

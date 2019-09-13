@@ -504,6 +504,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_FieldSetDemo.jsx.html"
                     },
                     {
+                        label: "File Details",
+                        demo: require("../components/layout/FileDetailsDemo"),
+                        pathToDoc: "components/layout/FileDetails.jsx",
+                        pathToSource: "components_layout_FileDetails.jsx.html",
+                        pathToDemoSource: "demo_components_layout_FileDetailsDemo.jsx.html"
+                    },
+                    {
                         label: "Flex Row",
                         demo: require("../components/layout/FlexRowDemo"),
                         pathToDoc: "components/layout/FlexRow.jsx",
@@ -1366,6 +1373,13 @@ module.exports = [
                         label: "Outbound Provisioning",
                         demo: require("../../templates/OutboundProvisioningTemplate"),
                         pathToSource: "templates_OutboundProvisioningTemplate.jsx.html",
+                        fullscreen: true,
+                        icon: "details",
+                    },
+                    {
+                        label: "Multiple Certificates",
+                        demo: require("../../templates/MultipleCertificates"),
+                        pathToSource: "templates_MultipleCertificatesTemplate.jsx.html",
                         fullscreen: true,
                         icon: "details",
                     },
