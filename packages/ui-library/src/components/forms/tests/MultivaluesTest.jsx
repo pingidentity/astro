@@ -255,7 +255,7 @@ describe("Multivalues", function () {
     });
 
     describe("edit mode", function () {
-        const editButtonClassName = "input-multivalues--edit-action";
+        const editButtonClassName = "entry__edit-icon";
         function getEntries(parent) {
             return TestUtils.scryRenderedDOMNodesWithClass(parent, "entry");
         }

@@ -132,27 +132,15 @@ class MultivaluesOption extends Component {
                     onClick={this._delete}
                 />
                 {showEditControls &&
-                <PopperContainer
-                    getReference={() => this.entryRef}
-                    config={{
-                        placement: "top-start",
-                        modifiers: {
-                            offset: { offset: "-100%p, -60%p" },
-                            flip: {
-                                enabled: false
-                            }
-                        }
-                    }}
-                >
-                    <span style={{ fontSize: "11px" }}>
+                    <span className="entry__edit">
                         <Icon
                             iconName="edit"
                             type="inline"
-                            containerClassName="input-multivalues--edit-action"
+                            containerClassName="entry__edit-icon"
                             onClick={this._onEdit}
                         />
                     </span>
-                </PopperContainer>}
+                }
             </div>
         );
     }

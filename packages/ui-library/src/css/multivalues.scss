@@ -57,18 +57,38 @@
             margin: 0 $spacing-xs $spacing-xs 0;
             vertical-align: top;
             padding: $spacing-xs 30px $spacing-xs $spacing-sm;
-            overflow: hidden;
             text-overflow: ellipsis;
             @include box-sizing(border-box);
             @include border-radius(2px);
 
             label {
+                max-width: 100%;
+                overflow: hidden;
                 text-transform: none;
                 color: $color-midnight;
                 @include text-value;
                 margin: 0;
             }
 
+            &__edit {
+                font-size: 11px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                @include transform(translate(-45%, -55%));
+
+                &-icon {
+                    border: 1px solid $color-neutral-80;
+                    background-color: $color-white;
+                    padding: 3px;
+                    border-radius: 2em;
+                    color: $color-midnight;
+
+                    &:hover {
+                        color: $color-active-blue;
+                    }
+                }
+            }
 
             .delete {
                 font-size: 11px;
@@ -84,7 +104,9 @@
                 }
                 &:hover {
                     text-decoration: none;
-                    color: $color-active-blue;
+                    &:before {
+                        color: $color-active-blue;
+                    }
                 }
             }
             span {
@@ -189,12 +211,6 @@
         border-color: $color-active-blue;
     }
 
-    &--edit-action {
-        background-color: $color-active-blue;
-        padding: 3px;
-        border-radius: 2em;
-        color: $color-white;
-    }
 }
 
 .modifier_light-inputs .input-multivalues .entries .entry {
