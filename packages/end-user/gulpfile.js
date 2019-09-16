@@ -8,10 +8,10 @@ gulp.task('delete-dist', () => del(['dist']));
 
 gulp.task('transpile-components', () =>
     gulp
-        .src(['./src/**/components**/*(*.jsx|*.js)'])
+        .src(['./src/components**/**/*(*.jsx|*.js)', '!./src/components**/**/*(*.test.jsx|*.test.js)'])
         .pipe(babel())
         .pipe(debug({ title: 'transpiling:' }))
-        .pipe(gulp.dest('dist')));
+        .pipe(gulp.dest('dist/components')));
 
 gulp.task('transpile-utils', () =>
     gulp
@@ -27,7 +27,6 @@ gulp.task('move-files', () =>
             './package.json',
             './static/end-user.css',
             './src/css**/**/*',
-            './src/components**/**/*(*.jsx|*.js)',
             './static/*.otf',
             './static/*.svg',
         ])
