@@ -23,6 +23,8 @@ import { withFocusOutline } from "../../util/KeyboardUtils";
  *     Click handler.
  * @param {string} [label]
  *     Html name of the button.
+* @param {string} text
+ *     Text to display in the button when not loading.
  * @param {boolean} [disabled=false]
  *     Button will not function when true.
  * @param {string} [disabledText]
@@ -31,7 +33,7 @@ import { withFocusOutline } from "../../util/KeyboardUtils";
  * @param {boolean} loading
  *     While true, loading animation will be shown.
  *  @param {boolean} [noSpacing]
- *     Don't include the right margin
+ *     Don't include the right margin.
  * @param {boolean} active
  *     Active style of the button for when it's being used as a toggle.
  * @param {array} [flags]
@@ -66,6 +68,7 @@ function BaseButton ({
     iconName,
     inline,
     label,
+    text,
     loading,
     noSpacing,
     onClick,
@@ -115,6 +118,7 @@ function BaseButton ({
             target={target}
         >
             {label}
+            {text}
             {children}
             <EllipsisLoader loading={loading}/>
         </TagName>

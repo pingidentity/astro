@@ -629,13 +629,6 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_DropDownButtonDemo.jsx.html"
                     },
                     {
-                        label: "Ellipsis Loader Button",
-                        demo: require("../components/general/EllipsisLoaderButtonDemo"),
-                        pathToDoc: "components/general/EllipsisLoaderButton.jsx",
-                        pathToSource: "components_general_EllipsisLoaderButton.jsx.html",
-                        pathToDemoSource: "demo_components_general_EllipsisLoaderButtonDemo.jsx.html"
-                    },
-                    {
                         label: "Link",
                         demo: require("../components/general/LinkDemo"),
                         pathToDoc: "components/general/Link.jsx",
