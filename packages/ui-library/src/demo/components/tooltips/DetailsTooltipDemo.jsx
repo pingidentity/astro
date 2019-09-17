@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "underscore";
-import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+import DetailsTooltip, { detailsWidth } from "ui-library/lib/components/tooltips/DetailsTooltip";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
@@ -85,7 +85,8 @@ class DetailsTooltipDemo extends React.Component {
                     label="With a label (label is passed into component)"
                     title="Tooltip Title"
                     open={this.state.open1}
-                    onToggle={this._handleToggle(1)}>
+                    onToggle={this._handleToggle(1)}
+                >
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -303,6 +304,35 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                 </DetailsTooltip>
                 <div>{this.state.status8}</div>
+
+                <br />
+                <DetailsTooltip
+                    flags={["p-stateful", "use-portal"]}
+                    placement="bottom right"
+                    label="Large details tool tip"
+                    title="Tooltip Title"
+                    open={this.state.open9}
+                    onToggle={this._handleToggle(9)}
+                    width={detailsWidth.LG}
+                >
+
+                    <p>
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                    </p>
+                    <ButtonGroup
+                        data-id="delete-confirmation"
+                        onCancel={this._handleCancel(9)}
+                    >
+                        <Button
+                            data-id="confirm-action"
+                            type="primary"
+                            onClick={this._handleConfirm(9)} >
+                            Confirm
+                        </Button>
+                    </ButtonGroup>
+                </DetailsTooltip>
+                <div>{this.state.status9}</div>
 
                 <br/>
                 <DetailsTooltip
