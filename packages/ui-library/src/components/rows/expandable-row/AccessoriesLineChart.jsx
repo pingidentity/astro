@@ -33,6 +33,8 @@ import _ from "underscore";
  *    The object property that contains the x-axis data in the "data" prop
  * @param {string} [yAxisKey="value"]
  *    The object property that contains the y-axis data in the "data" prop
+*  @param {function} [onLineChartClick]
+ *     Click handler.
  *
  * @example
  *     <ExpandableRow.SimpleWrapper>
@@ -83,6 +85,7 @@ export default class AccessoriesLineChart extends React.Component {
         data: PropTypes.array.isRequired,
         xAxisKey: PropTypes.string,
         yAxisKey: PropTypes.string,
+        onLineChartClick: PropTypes.func
     };
 
     static defaultProps = {
@@ -120,6 +123,7 @@ export default class AccessoriesLineChart extends React.Component {
                 key="chart-wrapper"
                 data-id={`${this.props["data-id"]}-chart-wrapper`}
                 className="accessories-line-chart__chart-wrapper"
+                onClick={this.props.onLineChartClick}
             >
                 <div>
                     <div className="accessories-line-chart__chart">
