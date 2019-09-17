@@ -96,7 +96,6 @@ gulp.task("build-index", () =>
             relativeNames: false,
             exportModules: false
         }))
-        .pipe(babel())
         .pipe(gulp.dest("./"))
 );
 
