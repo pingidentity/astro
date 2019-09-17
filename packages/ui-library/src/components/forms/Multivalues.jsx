@@ -197,6 +197,8 @@ class MultivaluesOption extends Component {
  *     Default keyCode to detect completed typing are 13, 188, 9 and 32
  * @param {function} [onBlur]
  *     Blur callback
+ * @param {function} [onFocus]
+ *     Focus callback
  * @param {boolean} [stacked=false]
  *     If true, each value occupies it's own line.
  * @param {boolean} [required=false]
@@ -257,6 +259,7 @@ export class MultivaluesBase extends Component {
         onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
         onBlur: PropTypes.func,
+        onFocus: PropTypes.func,
         options: PropTypes.arrayOf(
             PropTypes.shape({
                 heading: PropTypes.bool,
@@ -286,6 +289,7 @@ export class MultivaluesBase extends Component {
         ),
         onValueChange: _.noop,
         onBlur: _.noop,
+        onFocus: _.noop,
         includeDraftInEntries: false,
     };
 
@@ -369,8 +373,10 @@ export class MultivaluesBase extends Component {
      * Manage focused state
      * @private
      */
-    _handleFocus = () => {
+    _handleFocus = (e) => {
         this.setState({ focused: true });
+
+        this.props.onFocus(e);
     };
 
     /**

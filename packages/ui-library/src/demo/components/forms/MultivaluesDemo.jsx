@@ -111,6 +111,7 @@ class MultivaluesDemo extends React.Component {
                         entries={this.state.entries}
                         onValueChange={this._handleValueChange}
                         autoFocus={true}
+                        onFocus={()=>console.log("MultiValues focused!")}
                     />
                 </InputRow>
 

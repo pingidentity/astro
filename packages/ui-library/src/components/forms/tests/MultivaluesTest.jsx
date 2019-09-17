@@ -466,6 +466,16 @@ describe("Multivalues", function () {
         expect(callback.mock.calls.length).toBe(0);
     });
 
+    it("calls the onFocus callback", function () {
+        const onFocusCallback = jest.fn();
+        const wrapper = getWrapper({ onFocus: onFocusCallback });
+        const wrapperInput = wrapper.find("[data-id='value-entry']");
+
+        wrapperInput.simulate("focus");
+
+        expect(onFocusCallback).toHaveBeenCalled();
+    });
+
     it("adds and removes a focus class", function() {
         ReactTestUtils.Simulate.focus(input);
 
