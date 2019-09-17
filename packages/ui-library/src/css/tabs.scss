@@ -9,7 +9,7 @@
         margin-bottom: 28px;
 
         li {
-            display: inline;
+            display: inline-block;
             margin-right: 46px;
             padding-bottom: 8px;
             position: relative;
@@ -17,6 +17,7 @@
             color: $color-rhino;
             cursor: pointer;
             font-size: 13px;
+            margin-bottom: 6px;
 
             a {
                 color: $color-rhino;
