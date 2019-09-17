@@ -11,7 +11,7 @@ gulp.task('transpile-components', () =>
         .src(['./src/components**/**/*(*.jsx|*.js)', '!./src/components**/**/*(*.test.jsx|*.test.js)'])
         .pipe(babel())
         .pipe(debug({ title: 'transpiling:' }))
-        .pipe(gulp.dest('dist/components')));
+        .pipe(gulp.dest('dist')));
 
 gulp.task('transpile-utils', () =>
     gulp
