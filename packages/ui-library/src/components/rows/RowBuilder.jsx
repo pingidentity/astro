@@ -7,7 +7,7 @@ import InputRow from "../layout/InputRow";
 import Link from "../general/Link";
 import Icon from "../general/Icon";
 
-export const renderRemoveIcon = ({
+const renderRemoveIcon = ({
     "data-id": dataId,
     onRemove,
     removable,
@@ -198,5 +198,6 @@ RowBuilder.propTypes = {
 
 RowBuilder.Row = Row;
 RowBuilder.Separator = Separator;
+RowBuilder.renderRemoveIcon = renderRemoveIcon;
 
 export default RowBuilder;
