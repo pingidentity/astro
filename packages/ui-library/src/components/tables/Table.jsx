@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
-
 import HelpHint from "../tooltips/HelpHint";
 
 /**
@@ -26,8 +25,6 @@ import HelpHint from "../tooltips/HelpHint";
  *          Whether or not the table is full-width.
  * @param {'auto'|'full'|'full-fixed'} [width]
  *      The width of the table.
- * @param {bool} [fixed]
- *      If true, gives the table table-layout fixed.
  */
 
 /**
@@ -37,17 +34,17 @@ import HelpHint from "../tooltips/HelpHint";
  * @param {'center'|'left'|'right'} [columnStyling.alignment]
  *      The horizontal alignment of the column.
  * @param {string} [columnStyling.minWidth]
- *      The minimum width of the column. Must be a string including a unit, ie 90px.PropTypes
+ *      The minimum width of the column. Must be a string including a unit, ie 90px.
  * @param {string} [columnStyling.maxWidth]
  *      The maximum width of the column. Must be a string including a unit. Due to
- *      limitations of the HTML <table/> spec, this will not work on a full width table.PropTypes
+ *      limitations of the HTML <table/> spec, this will not work on a full width table.
  * @param {string} [columnStyling.width]
  *      The width of the column. Must be a string with a unit.
  *
  */
 
 
-const getHeadData = data => _.reduce(data, (headings, item) => _.union(headings, _.keys(item)), []);
+const getHeadData = data => _.reduce(data, (headings, item) => _.union(headings, _.keys(item)), null);
 const getBodyData = (data, headData) => _.map(data, item => _.map(headData, heading => item[heading]));
 
 const cellClasses = {
@@ -62,6 +59,7 @@ const columnAlignments = {
     LEFT: "left",
     RIGHT: "right"
 };
+
 
 const overflowOptions = {
     ELLIPSIS: "ellipsis",
@@ -245,9 +243,9 @@ const Table = props => {
     const classes = classnames("grid", className, {
         "grid--no-lines": !lines,
         "width-full": fullWidth || width === tableWidths.FULL_FIXED,
-        "grid--solid-lines": props.headData === undefined && props.bodyData,
         "grid--full-width": width === tableWidths.FULL,
-        "grid--fixed": layout === tableLayouts.FIXED
+        "grid--fixed": layout === tableLayouts.FIXED,
+        
     });
 
     // if we're showing labels along the left side of the table, make sure the first column heading is empty
@@ -336,10 +334,43 @@ Table.defaultProps = {
     verticalAlignment: "AUTO",
 };
 
+/**
+ * @class Divider
+ * @desc Vertical line
+ *
+ * @param {string} [data-id]
+ *     Defines the "data-id" for top-level HTML container.
+ * @param {string} [className]
+ *     Extra CSS class(s) applied to the top-level HTML container.
+ * @example
+ * <Divider/>
+ *
+ */
+
+const Divider= ({
+    ["data-id"]: dataId,
+    className,
+}) => (
+    <div
+        data-id={dataId}
+        className={classnames("table-divider", className,)}
+    />
+);
+
+Divider.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+};
+
+Divider.defaultProps = {
+    "data-id": "divider",
+};
+
 Table.columnAlignments = columnAlignments;
 Table.overflowOptions = overflowOptions;
 Table.tableLayouts = tableLayouts;
 Table.tableWidths = tableWidths;
 Table.verticalAlignments = verticalAlignments;
+Table.Divider = Divider;
 
 export default Table;

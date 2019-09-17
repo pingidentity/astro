@@ -7,7 +7,7 @@ export const sizes = {
     SM: "sm",
     MD: "md",
     LG: "lg",
-    XL: "xl"
+    XL: "xl",
 };
 
 const getClassName = (value, placement) => value !== undefined ? `padding-component--${placement}-${value}` : "";

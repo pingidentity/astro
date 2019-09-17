@@ -138,17 +138,15 @@ table {
         }
         th,
         td {
-            padding: 9px 20px 8px 0;
+            padding: 9px 20px 9px 0;
             border-bottom: 1px dotted $color-rabbit-fur;
             text-align: left;
             box-sizing: border-box;
             @include font-pn-regular;
             line-height: 1.1em;
             vertical-align: baseline;
+            height: inherit;
 
-            &:last-child {
-                padding-right: 0;
-            }
             &.center {
                 text-align: center;
             }
@@ -191,11 +189,7 @@ table {
                 }
             }
         }
-        &--solid-lines {
-            td {
-                border-bottom: 1px solid $color-rabbit-fur;
-            }
-        }
+
         &--fixed {
             table-layout: fixed;
         }
@@ -252,10 +246,18 @@ table {
             td,
             th {
                 padding-top: 0;
+
+            }
+            .table-divider {
+                top: 0;
             }
         }
         tbody tr:last-child {
-            td,
+            td {
+                padding-bottom: 9px;
+                border-bottom: none;
+            }
+
             th {
                 padding-bottom: 0;
                 border-bottom: none;
@@ -265,6 +267,8 @@ table {
 }
 
 table.grid td.grid__cell {
+    position: relative;
+
     &--top {
         vertical-align: top;
     }
@@ -500,4 +504,12 @@ table.grid--small-padding td {
     &.grid {
         display: table;
     }
+}
+
+.table-divider {
+    top: 10px;
+    bottom: 10px;
+    position: absolute;
+    border-left: solid 1px $color-rhino;
+    right: 50%;
 }

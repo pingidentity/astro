@@ -3,6 +3,7 @@ import FormLabel from "../../../components/forms/FormLabel";
 import Table, {
     columnAlignments,
     overflowOptions,
+    Divider,
 } from "../../../components/tables/Table";
 import InputRow from "../../../components/layout/InputRow";
 
@@ -15,7 +16,7 @@ import HR from "ui-library/lib/components/general/HR";
 */
 
 const TableDemo = () => {
-    var mockData = {
+    const mockData = {
         head: [
             "name",
             "age",
@@ -39,7 +40,7 @@ const TableDemo = () => {
             ]
         ]
     };
-    var dataObjects = [
+    const dataObjects = [
         {
             name: "tom",
             age: 25,
@@ -56,6 +57,35 @@ const TableDemo = () => {
             city: "arvada"
         }
     ];
+
+    const mockData2 = {
+        head: [
+            "name",
+            "age",
+            "",
+            "city"
+        ],
+        body: [
+            [
+                "tom",
+                "25",
+                <Divider/>,
+                "denver"
+            ],
+            [
+                "jane",
+                "36",
+                <Divider/>,
+                <span>breckenridge<br />montrose</span>
+            ],
+            [
+                "roy",
+                "19",
+                <Divider/>,
+                "arvada"
+            ]
+        ]
+    };
     return (
         <div>
             <InputRow>
@@ -107,6 +137,24 @@ const TableDemo = () => {
                     ]}
                     headData={mockData.head}
                     bodyData={mockData.body}
+                />
+            </InputRow>
+            <InputRow>
+                <FormLabel className="detached" value="<Table> with column styling and divider." />
+                <Table
+                    columnStyling={[
+                        {},
+                        {
+                            alignment: columnAlignments.CENTER,
+                            width: "400px"
+                        },
+                        {
+                            contentOverflow: overflowOptions.ELLIPSIS,
+                            width: "40px"
+                        }
+                    ]}
+                    headData={mockData2.head}
+                    bodyData={mockData2.body}
                 />
             </InputRow>
         </div>

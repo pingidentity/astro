@@ -531,6 +531,7 @@ module.exports = [
                         pathToSource: "components_layout_LabelValuePairs.jsx.html",
                         pathToDemoSource: "demo_components_layout_LabelValuePairsDemo.jsx.html"
                     },
+
                     {
                         label: "List Nav",
                         demo: require("../components/layout/ListNavDemo"),
@@ -1373,6 +1374,13 @@ module.exports = [
                         label: "Multiple Certificates",
                         demo: require("../../templates/MultipleCertificates"),
                         pathToSource: "templates_MultipleCertificatesTemplate.jsx.html",
+                        fullscreen: true,
+                        icon: "details",
+                    },
+                    {
+                        label: "Gateways",
+                        demo: require("../../templates/Gateways"),
+                        pathToSource: "templates_Gateways.jsx.html",
                         fullscreen: true,
                         icon: "details",
                     },

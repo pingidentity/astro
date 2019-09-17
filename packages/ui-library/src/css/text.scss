@@ -75,6 +75,13 @@
         display: inline-block;
         margin: 0;
     }
+
+    &--overflow-ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
 }
 
 .textblock {

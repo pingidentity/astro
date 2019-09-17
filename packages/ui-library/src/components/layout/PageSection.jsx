@@ -10,12 +10,14 @@ import classnames from "classnames";
 *     The data-id of the component.
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div.
-* @param {string} description
+* @param {string} [description]
 *     Intro paragraph to the section.
-* @param {string|node} title
+* @param {string|node} [title]
 *     Title of section.
-* @param {string|node} titleAccessories
+* @param {string|node} [titleAccessories]
 *     Label that sits on the right side of the page.
+* @param {boolean} [underlined=true]
+*     Creates underline under section title
 */
 
 const PageSection = ({

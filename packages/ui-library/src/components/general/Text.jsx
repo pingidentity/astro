@@ -18,6 +18,11 @@ const textTypes = {
     WARNING: "warning",
 };
 
+const overflowTypes = {
+    WRAP: "wrap",
+    ELLIPSIS: "ellipsis"
+};
+
 /**
 * @class Text
 * @desc A block of text
@@ -38,9 +43,11 @@ const Text = ({
     "data-id": dataId,
     inline,
     type,
+    overflow,
 }) => (
     <div
-        className={classnames("text-component", className, `text-${type}`, inline ? "text-component--inline" : null)}
+        className={classnames("text-component", className, `text-${type}`,
+            `text-component--overflow-${overflow}`, inline ? "text-component--inline" : null)}
         data-id={dataId}
     >
         {children}
@@ -65,13 +72,16 @@ Text.propTypes = {
         textTypes.VALUE,
         textTypes.WARNING
     ]),
+    overflow: PropTypes.oneOf(Object.values(overflowTypes))
 };
 
 Text.defaultProps = {
     "data-id": "styled-text",
     type: textTypes.BODY,
+    overflow: overflowTypes.WRAP,
 };
 
 Text.textTypes = textTypes;
+Text.overflowTypes = overflowTypes;
 
 export default Text;

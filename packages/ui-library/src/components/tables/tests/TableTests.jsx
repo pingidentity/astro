@@ -7,7 +7,8 @@ import Table, {
     columnAlignments,
     overflowOptions,
     tableLayouts,
-    tableWidths
+    tableWidths,
+    Divider
 } from "../Table";
 
 describe("Table", function () {
@@ -117,17 +118,6 @@ describe("Table", function () {
         const ages = TestUtils.scryRenderedDOMNodesWithDataId(component, "age");
 
         expect(ages.length).toBe(3);
-    });
-
-    it("renders with solid lines class if no header data", () => {
-        const component = ReactTestUtils.renderIntoDocument(
-            <div><Table bodyData={bodyData} cellRenderers={[
-                null, value => <div data-id="age">{value}</div>
-            ]} /></div>);
-
-        const solidLines = TestUtils.findRenderedDOMNodeWithClass(component, "grid--solid-lines");
-
-        expect(solidLines).toBeTruthy();
     });
 
     it("does not render with solid lines class if there is header data", () => {
@@ -337,5 +327,11 @@ describe("Table", function () {
 
         expect(component.exists()).toEqual(true);
     });
-});
 
+    it("renders a divider when the divder component is called", () => {
+        const component = shallow (
+            <Divider />
+        );
+        expect(component.exists()).toEqual(true);
+    });
+});
