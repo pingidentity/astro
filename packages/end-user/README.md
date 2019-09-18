@@ -49,3 +49,7 @@ localhost:4040/signingon.html
 6. `npm publish`
 
 One way to confirm your release was good is to look at the archive that is generated. You can do that by using `npm show @pingux/end-user dist.tarball` and then downloading from the URL that command shows you.
+
+### Test
+
+Test
