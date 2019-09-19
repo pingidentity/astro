@@ -212,12 +212,14 @@ class I18nPhoneInputStateless extends Component {
     _handlePhoneNumberChange = ({ target: { value } }) => {
         const {
             country = "",
-            countryCallingCode
+            countryCallingCode,
+            nationalNumber
         } = parsePhoneNumberFromString(value) || {};
         this.props.onValueChange({
             countryCode: this.props.countryCode || country.toLowerCase(),
             dialCode: this.props.dialCode || countryCallingCode,
-            phoneNumber: value
+            phoneNumber: value,
+            nationalNumber: nationalNumber
         });
     };
 

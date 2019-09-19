@@ -29,7 +29,8 @@ class I18nPhoneInputDemo extends React.Component {
 
         countryCodeStateless3: "can",
         dialCodeStateless3: "1",
-        phoneNumberStateless3: "+1 613 555 0188"
+        phoneNumberStateless3: "+1 613 555 0188",
+        nationalNumberStateless: "613 555 0188"
     };
 
     _handleValueChangeStateful = (phoneInputValues) => {
@@ -58,10 +59,11 @@ class I18nPhoneInputDemo extends React.Component {
         }
     };
 
-    _handleAutoDetectUpdate = ({ countryCode, dialCode, phoneNumber }) => this.setState({
+    _handleAutoDetectUpdate = ({ countryCode, dialCode, phoneNumber, nationalNumber }) => this.setState({
         countryCodeStateless3: countryCode,
         dialCodeStateless3: dialCode,
-        phoneNumberStateless3: phoneNumber
+        phoneNumberStateless3: phoneNumber,
+        nationalNumberStateless: nationalNumber
     })
 
     _handleDemoToggle = () => {
@@ -168,6 +170,10 @@ class I18nPhoneInputDemo extends React.Component {
                     Country code - {this.state.countryCodeStateless3}
                     <br />
                     Dial code - +{this.state.dialCodeStateless3}
+                    <br />
+                    National number - {this.state.nationalNumberStateless}
+                    <br />
+                    Phone number - {this.state.phoneNumberStateless3}
                 </div>
             </div>
         );
