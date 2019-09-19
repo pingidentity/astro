@@ -172,7 +172,7 @@ class CountryFlagList extends React.Component {
             return _.defaults({
                 "data-id": "country-" + item.iso2,
                 code: item[countryCodeDisplayType],
-                value: item[countryCodeDisplayType],
+                value: item.iso2,
                 label: item.name
             }, item);
         });
