@@ -39,7 +39,8 @@ $default-input-border-radius: 2px;
 .view-toggle,
 .delete-btn,
 .button-menu__button,
-.input-image-thumb {
+.input-image-thumb,
+.image-icon {
     &:focus {
         outline-width: 0;
     }
@@ -60,7 +61,8 @@ $default-input-border-radius: 2px;
     .view-toggle,
     .delete-btn,
     .button-menu__button,
-    .input-image-thumb {
+    .input-image-thumb,
+    .image-icon {
         &:focus {
             outline-width: 5px;
         }
@@ -1201,6 +1203,7 @@ input[type=file] {
             padding: 0;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
 
             @include border-radius(2px);
 
@@ -1252,11 +1255,11 @@ input[type=file] {
             // Width is repeated here and for img tag in case a user passes
             // in a React element for the thumbnail.
             width: $img-width;
+            cursor: pointer;
 
             @include border-radius(4px);
 
             &__img {
-                cursor: pointer;
                 display: block;
                 width: $img-width;
                 border: 1px solid $color-timberwolf;

@@ -192,7 +192,12 @@ const ImagePreview = withFocusOutline(({
     const isNode = !isString(src);
     return show ? (
         <div>
-            {!isDefault && <span className="image-icon" />}
+            {!isDefault &&
+            <span
+                onClick={onClick}
+                {...getClickableA11yProps(onClick)}
+                className="image-icon"
+            />}
             <span
                 className={classnames(
                     "input-image-thumb",
