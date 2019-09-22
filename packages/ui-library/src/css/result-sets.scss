@@ -1272,15 +1272,11 @@ input.ordering-controls__input {
     &:hover {
         cursor: pointer;
         background-color: $color-accent-neutral-70;
-        .accessories-line-chart__chart {
-            width: 55px;
-            height: 20px;
-        }
-        .accessories-line-chart__chart-label {
-            font-size: 11px;
-        }
+        .accessories-line-chart__chart,
+        .accessories-line-chart__chart-label,
         .accessories-line-chart__trend {
-            font-size: 12px;
+            transform: scale(1.1);
+            transition: transform 0.2s;
         }
     }
     &:before {
