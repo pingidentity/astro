@@ -9,6 +9,8 @@ cache:
     - node_modules/
 
 install_dependencies:
+  tags:
+  - shared
   stage: build
   script:
     - npm install
@@ -17,5 +19,7 @@ install_dependencies:
       - node_modules/
 
 testing_testing:
+  tags:
+  - shared
   stage: test
   script: npm run build
