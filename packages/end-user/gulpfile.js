@@ -15,10 +15,10 @@ gulp.task('transpile-components', () =>
 
 gulp.task('transpile-utils', () =>
     gulp
-        .src(['./src/util/*'])
+        .src(['./src/util**/**/*(*.jsx|*.js)'])
         .pipe(babel())
         .pipe(debug({ title: 'transpiling utils:' }))
-        .pipe(gulp.dest('dist/util')));
+        .pipe(gulp.dest('dist')));
 
 gulp.task('move-files', () =>
     gulp
