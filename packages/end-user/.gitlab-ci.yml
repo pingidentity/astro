@@ -10,6 +10,10 @@ cache:
 
 install_dependencies:
   stage: build
+  tags:
+    - platform-publish-node-fragment
+    - platform-build-node-ui-page
+    - platform-build-node-fragment
   script:
     - npm install
   artifacts:
@@ -18,4 +22,8 @@ install_dependencies:
 
 testing_testing:
   stage: test
+  tags:
+    - platform-publish-node-fragment
+    - platform-build-node-ui-page
+    - platform-build-node-fragment
   script: npm run build
