@@ -1,0 +1,22 @@
+image: node:8
+
+stages:
+  - build
+  - test
+
+install_dependencies:
+  stage: build
+  tags:
+    - platform-publish-node-fragment
+    - platform-build-node-ui-page
+    - platform-build-node-fragment
+  script:
+    - lerna bootstrap
+
+testing_testing:
+  stage: test
+  tags:
+    - platform-publish-node-fragment
+    - platform-build-node-ui-page
+    - platform-build-node-fragment
+  script: lerna run test
