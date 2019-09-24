@@ -11,6 +11,7 @@ install_dependencies:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
+    - npm i lerna -g
     - lerna bootstrap
 
 testing_testing:
