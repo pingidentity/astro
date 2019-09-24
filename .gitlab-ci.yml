@@ -11,8 +11,11 @@ install_dependencies:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
+    - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+    - nvm install 8.12.0
+    - nvm alias default 8.12.0
     - npm i lerna -g
-    - lerna bootstrap --hoist
+    - lerna bootstrap --hoist --no-ci
 
 testing_testing:
   stage: test
