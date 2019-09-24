@@ -12,7 +12,7 @@ install_dependencies:
     - platform-build-node-fragment
   script:
     - npm i lerna -g
-    - lerna bootstrap
+    - lerna bootstrap --hoist
 
 testing_testing:
   stage: test
