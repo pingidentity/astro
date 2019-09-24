@@ -1,5 +1,10 @@
 image: node:8
 
+cache:
+  paths:
+    - node_modules/
+    - packages/*/node_modules/
+
 stages:
   - build
   - test
@@ -20,4 +25,6 @@ testing_testing:
     - platform-publish-node-fragment
     - platform-build-node-ui-page
     - platform-build-node-fragment
-  script: lerna run test
+  script:
+  - npm i lerna -g
+  - lerna run test
