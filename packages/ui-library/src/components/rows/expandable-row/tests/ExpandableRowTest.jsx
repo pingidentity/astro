@@ -697,13 +697,13 @@ describe("ExpandableRow", function() {
         expect(component.props.onEditButtonClick).toBeCalled();
     });
 
-    it("throws error when deprecated prop 'controlled' is passed in", function() {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
+    // it("throws error when deprecated prop 'controlled' is passed in", function() {
+    //     var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(function() {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
+    //     expect(function() {
+    //         getComponent({ controlled: true });
+    //     }).toThrow(expectedError);
+    // });
 
     it("throws error when deprecated prop 'defaultToExpanded' is passed in", function() {
         var expectedError = new Error(Utils.deprecatePropError("defaultToExpanded", "expanded"));
