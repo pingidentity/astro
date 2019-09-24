@@ -3,7 +3,7 @@ image: node:8
 cache:
   paths:
     - node_modules/
-    - "packages/*/node_modules/"
+    - "packages/*/node_modules"
 
 stages:
   - build
