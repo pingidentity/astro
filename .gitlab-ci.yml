@@ -26,5 +26,4 @@ testing_testing:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
-  - npm i lerna -g
   - lerna run test
