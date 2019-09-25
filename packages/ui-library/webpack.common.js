@@ -7,10 +7,10 @@ module.exports = {
         // We can require the components in the demos the same way devs require
         // components, but without actually using a node module
         alias: {
-            "ui-library/lib": path.resolve(__dirname, "src/")
+            "ui-library/lib": path.resolve(__dirname, "packages/ui-library/src/")
         }
     },
-    plugins: [
+    plugins: [,
         new MiniCssExtractPlugin({ filename: "[name].css" })
     ]
 };
