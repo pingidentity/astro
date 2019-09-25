@@ -146,6 +146,7 @@
     "build": "npm run static && npm run build-dist",
     "prepublishOnly": "[[ \"$PWD\" =~ ./dist ]]",
     "jest": "jest",
+    "test": "jest",
     "coverage": "jest --coverage"
   }
 }

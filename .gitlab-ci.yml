@@ -3,7 +3,6 @@ image: node:8
 cache:
   paths:
     - node_modules/
-    - "packages/*/node_modules/"
 
 stages:
   - test
@@ -17,5 +16,4 @@ testing_testing:
   script:
   - npm i lerna -g
   - lerna bootstrap --hoist --no-ci
-  - cd packages/ui-library
-  - npm run test
+  - lerna run test
