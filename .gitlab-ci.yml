@@ -17,4 +17,5 @@ testing_testing:
   script:
   - npm i lerna -g
   - lerna bootstrap --hoist --no-ci
-  - lerna run test
+  - cd packages/ui-library
+  - npm run test
