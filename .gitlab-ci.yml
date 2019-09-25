@@ -6,18 +6,7 @@ cache:
     - "packages/*/node_modules/"
 
 stages:
-  - build
   - test
-
-install_dependencies:
-  stage: build
-  tags:
-    - platform-publish-node-fragment
-    - platform-build-node-ui-page
-    - platform-build-node-fragment
-  script:
-    - npm i lerna -g
-    - lerna bootstrap --hoist --no-ci
 
 testing_testing:
   stage: test
@@ -26,4 +15,6 @@ testing_testing:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
+  - npm i lerna -g
+  - lerna bootstrap --hoist --no-ci
   - lerna run test
