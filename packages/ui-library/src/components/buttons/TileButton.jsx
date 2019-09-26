@@ -130,7 +130,13 @@ const TileButton = ({
 
 
     return (
-        <TagName className={classNames} data-id={dataId} onClick={scrollAndClick} onMouseDown={handleMouseDown} role="button">
+        <TagName
+            className={classNames}
+            data-id={dataId}
+            onClick={scrollAndClick}
+            onMouseDown={handleMouseDown}
+            role="button"
+        >
             {renderedIcon &&
                 <div
                     className={classnames(
