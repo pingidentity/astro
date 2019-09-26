@@ -119,6 +119,16 @@ const TileButton = ({
 
     const TagName = link ? "div" : "button";
 
+    const scrollAndClick = (data, onClickCallback) => {
+        const topRef = document.getElementsByClassName("tile-panel")[0];
+        // onClickCallback(data);
+        if ( topRef === undefined ) {
+            return onClickCallback;
+        } else {
+            return topRef.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <TagName className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown} role="button">
             {renderedIcon &&
