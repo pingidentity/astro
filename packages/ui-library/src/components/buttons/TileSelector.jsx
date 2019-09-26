@@ -132,6 +132,7 @@ const renderOptions = ({
     ];
 }, [[], undefined]);
 
+
 const renderGroupedOptions = props => {
     const {
         groups,

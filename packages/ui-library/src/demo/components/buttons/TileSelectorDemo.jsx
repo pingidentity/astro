@@ -22,11 +22,7 @@ class TileSelectorDemo extends React.Component {
         console.log("Event: ", e);
     }
 
-    _handleValueChange = value => {
-        const topRef = document.getElementsByClassName("tile-panel")[0];
-        topRef.scrollIntoView({ behavior: "smooth" });
-        this.setState({ selected: value });
-    }
+    _handleValueChange = value => this.setState({ selected: value });
 
     render() {
         return (
