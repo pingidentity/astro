@@ -119,17 +119,20 @@ const TileButton = ({
 
     const TagName = link ? "div" : "button";
 
-    const scrollAndClick = () => {
-        const topRef = document.getElementsByClassName("tile-panel")[0];
-        if ( panel === true ) {
-            return topRef.scrollIntoView({ behavior: "smooth" });
+    const scrollAndClick = (data) => {
+        if ( panel ) {
+            const topRef = document.getElementsByClassName("tile-panel")[0];
+            topRef.scrollIntoView({ behavior: "smooth" });
+            onClick(data);
         } else {
             return false;
         }
     };
 
+    const click = panel ? scrollAndClick : onClick;
+
     return (
-        <TagName className={classNames} data-id={dataId} onClick={scrollAndClick} onMouseDown={handleMouseDown} role="button">
+        <TagName className={classNames} data-id={dataId} onClick={click} onMouseDown={handleMouseDown} role="button">
             {renderedIcon &&
                 <div
                     className={classnames(
