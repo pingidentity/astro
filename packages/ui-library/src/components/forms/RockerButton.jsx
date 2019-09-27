@@ -215,7 +215,7 @@ var RockerButtonLabel = function (props) {
             delayShow={500}
             hintText={props.helpText} >
             <button
-                data-id={props["data-id"] || `helphint-button_${sanitizedText}`}
+                data-id={props["data-id"] || `rocker-label_${sanitizedText}`}
                 className="rocker-button__button"
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
@@ -225,7 +225,7 @@ var RockerButtonLabel = function (props) {
             </button>
         </HelpHint>
         : <button
-            data-id={props["data-id"] || `helphint-button_${sanitizedText}`}
+            data-id={props["data-id"] || `rocker-label_${sanitizedText}`}
             className="rocker-button__button"
             onClick={_handleClick}
             autoFocus={props.autoFocus}
