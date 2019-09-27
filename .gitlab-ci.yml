@@ -15,5 +15,9 @@ testing_testing:
     - platform-build-node-fragment
   script:
   - npm i lerna -g
-  - lerna bootstrap --hoist --no-ci
+  - cd packages/ui-library
+  - npm install
+  - cd ../end-user
+  - npm install
+  - cd ../../
   - lerna run test
