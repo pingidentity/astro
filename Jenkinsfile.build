@@ -24,7 +24,7 @@ pipeline {
       }
       post {
         always {
-          archiveArtifacts artifacts: "build-css/**", fingerprint: true
+          archiveArtifacts artifacts: "${env.WORKSPACE}/packages/ui-library/build-css/**", fingerprint: true
         }
       }
     }
