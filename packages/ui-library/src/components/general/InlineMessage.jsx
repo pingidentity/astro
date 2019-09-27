@@ -157,6 +157,7 @@ class InlineMessage extends React.Component {
                                 >
                                     <Button
                                         {...this.props}
+                                        data-id={"button"}
                                         key="main" inline type={type} label={label}
                                         onClick={this._onClick(onClick)} className={buttonClass}
 
