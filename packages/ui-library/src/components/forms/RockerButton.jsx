@@ -132,7 +132,14 @@ class RockerButtonStateless extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        labels: PropTypes.array.isRequired,
+        labels: PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.shape({
+                    label: PropTypes.string.isRequired,
+                    id: PropTypes.string
+                }),
+            ])),
         labelHints: PropTypes.arrayOf(PropTypes.string),
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
@@ -168,16 +175,21 @@ class RockerButtonStateless extends React.Component {
         return (
             <div ref="container" data-id={this.props["data-id"]} className={className}>
                 {
-                    this.props.labels.map((text, index) => {
-                        const props = {
+                    this.props.labels.map((data, index) => {
+                        let props = {
                             onClick: this._handleClick,
                             key: index,
-                            text,
                             index,
                             autoFocus: index === this.props.selectedIndex &&
-                                this.props.autoFocus === true,
+                                  this.props.autoFocus === true,
                             helpText: this.props.labelHints ? this.props.labelHints[index] : undefined,
                         };
+                        if (data && data.id) {
+                            props.text = data.label;
+                            props["data-id"] = data.id;
+                        } else {
+                            props.text = data;
+                        }
                         return (
                             <RockerButtonLabel {...props} />);
                     })
@@ -198,12 +210,12 @@ var RockerButtonLabel = function (props) {
 
     return props.helpText
         ? <HelpHint
-            data-id={`helphint-button_${sanitizedText}`}
+            data-id={props["data-id"] || `helphint-button_${sanitizedText}`}
             placement="top"
             delayShow={500}
             hintText={props.helpText} >
             <button
-                data-id={`rocker-label_${sanitizedText}`}
+                data-id={props["data-id"] || `helphint-button_${sanitizedText}`}
                 className="rocker-button__button"
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
@@ -213,7 +225,7 @@ var RockerButtonLabel = function (props) {
             </button>
         </HelpHint>
         : <button
-            data-id={`rocker-label_${sanitizedText}`}
+            data-id={props["data-id"] || `helphint-button_${sanitizedText}`}
             className="rocker-button__button"
             onClick={_handleClick}
             autoFocus={props.autoFocus}

@@ -1,4 +1,5 @@
 import React from "react";
+import FormLabel from "../../../components/forms/FormLabel";
 import RockerButton from "../../../components/forms/RockerButton";
 
 /**
@@ -8,22 +9,41 @@ import RockerButton from "../../../components/forms/RockerButton";
 */
 
 const labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
+
 const years = ["3M", "6M", "1Y"];
 const days = ["1D", "1W", "1M"];
+
+const labelsWithId = [
+    { label: "Label One", id: "rocker" },
+    { label: "Label 2", id: "rocker1" },
+    { label: "Label Three", id: "rocker2" },
+    { label: "Longer Label Four", id: "rocker3" }
+];
 class RockerButtonDemo extends React.Component {
     static flags = ["p-stateful"]
 
     state = {
         selectedLabel: "Label One",
-        selectedIndex: 0
+        selectedIndex: 0,
+        selectedId: "1",
+        selectedLabel2: "Label One",
+        selectedIndex2: 0,
+        selectedId2: 1
     };
 
     _handleValueChange = (labelValues) => {
         this.setState({
             selectedLabel: labelValues.label,
-            selectedIndex: labelValues.index
+            selectedIndex: labelValues.index,
         });
     };
+
+    _handleChangeWithId = (labelValues) => {
+        this.setState({
+            selectedLabel2: labelValues.label,
+            selectedIndex2: labelValues.index,
+        });
+    }
 
     render() {
         return (
@@ -34,6 +54,20 @@ class RockerButtonDemo extends React.Component {
                     labels={labels}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
+
+                <br /><br />
+
+
+                <FormLabel>Rocker that takes label and id object and changes the Id to the new DataID</FormLabel>
+                <RockerButton
+                    stateless={false}
+                    onValueChange={this._handleChangeWithId}
+                    labels={labelsWithId}
+                />
+                <div>Selected rocker label = {this.state.selectedLabel2},
+                index = {this.state.selectedIndex2},
+                id = {this.state.selectedId2}
+                </div>
 
                 <br /><br />
 
