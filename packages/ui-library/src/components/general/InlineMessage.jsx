@@ -107,6 +107,15 @@ class InlineMessage extends React.Component {
         onClick(e);
     };
 
+    // _label = () => {
+    //     console.log(this.props.label);
+    //     if (this.props.label) {
+    //         return this.props.label;
+    //     } else {
+    //         return null;
+    //     }
+    // }
+
     render() {
         const className = classnames("inline-message", this.props.type, {
             "inline-message--borderless": !this.props.bordered,
@@ -121,6 +130,8 @@ class InlineMessage extends React.Component {
                 "inline-message-text--full-width": this.props.fullwidth
             }
         );
+
+
 
         return (
             <div data-id={this.props["data-id"]} className={classnames(className, this.props.className)}>
@@ -144,8 +155,11 @@ class InlineMessage extends React.Component {
                                     data-id="inline-message-btn"
                                     className="inline-message-btn"
                                 >
-                                    <Button key="main" inline type={type} label={label}
+                                    <Button
+                                        {...this.props}
+                                        key="main" inline type={type} label={label}
                                         onClick={this._onClick(onClick)} className={buttonClass}
+
                                     />
                                 </div>
                             );

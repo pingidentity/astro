@@ -1,6 +1,7 @@
 var React = require("react"),
     InlineMessage = require("../../../components/general/InlineMessage");
 import HR from "ui-library/lib/components/general/HR";
+import Button, { buttonTypes } from "../../../components/buttons/Button";
 
 /**
 * @name InlineMessageDemo
@@ -81,6 +82,15 @@ class InlineMessageDemo extends React.Component {
 
                 <InlineMessage
                     type={ InlineMessage.MessageTypes.WARNING }
+                    label="message with href and target"
+                    onClick={doSomething}
+                    href="#"
+                    target="#">
+                Message with Href
+                </InlineMessage>
+
+                <InlineMessage
+                    type={ InlineMessage.MessageTypes.WARNING }
                     label="Do Something"
                     onClick={doSomething}
                     secondaryButtons={[
@@ -142,6 +152,8 @@ class InlineMessageDemo extends React.Component {
                 <InlineMessage noMargin>
                     Message with no margins.
                 </InlineMessage>
+
+
             </div>
         );
     }
