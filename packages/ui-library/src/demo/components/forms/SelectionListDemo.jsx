@@ -28,6 +28,25 @@ var SINGLE_SELECT_ITEMS = [
         { name: "Boxing", id: 9 },
         { name: "Cross-country Mountain Biking", id: 10 }
     ],
+    
+    SINGLE_SELECT_ITEMS2 = [
+        { name: "Hockey", id: 1 },
+        { name: "Soccer", id: 2,
+            helpHintText: "Selection List items may have Help Hints",
+            disabled: true },
+        { name: "Basketball", id: 3,
+            helpHintText: "Help Hint with dynamic icon",
+            helpTarget: testIcon },
+        { name: "Swimming", id: 4 },
+        { name: "Chess", id: 5,
+            helpHintText: "Help Hint with custom image",
+            helpTarget: testImage },
+        { name: "Cross Country Skiing", id: 6 },
+        { name: "Wrestling", id: 7 },
+        { name: "Diving", id: 8 },
+        { name: "Boxing", id: 9 },
+        { name: "Cross-country Mountain Biking", id: 10 }
+    ],
 
     MULTI_SELECT_ITEMS = [
         { name: "Apple", id: 1 },
@@ -118,7 +137,7 @@ class SelectionListDemo extends React.Component {
                 <hr />
 
                 <h3>
-                    Single-Selection Inline
+                    Single-Selection Inline with Disabled Item
                 </h3>
                 <p>
                     Selected Radio ID = {this.state.singleSelectId2}
@@ -132,7 +151,7 @@ class SelectionListDemo extends React.Component {
                     data-id="radio-demo-1"
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
-                    items={SINGLE_SELECT_ITEMS}
+                    items={SINGLE_SELECT_ITEMS2}
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
@@ -141,6 +160,7 @@ class SelectionListDemo extends React.Component {
                 />
 
                 <hr />
+
 
                 <h3>
                     Single-Selection Inline Without Search

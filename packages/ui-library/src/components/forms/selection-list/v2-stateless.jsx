@@ -366,6 +366,7 @@ class ListOptions extends React.Component {
                     helpTarget={item.helpTarget}
                     name={this.props.name}
                     stacked
+                    disabled = {item.disabled}
                 />
             );
         });
@@ -400,7 +401,8 @@ class ListOptions extends React.Component {
     _genViewonlyOptions = () => {
         return this.props.items.map((item, i) => {
             return (
-                <div className="view-item" key={i}>
+                <div className="view-item"
+                    key={i}>
                     {item.name}{this._genTooltip(item)}
                 </div>
             );
