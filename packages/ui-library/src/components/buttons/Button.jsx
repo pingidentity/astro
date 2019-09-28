@@ -94,15 +94,6 @@ function BaseButton ({
             ),
         });
     }
-    // const _label = () => {
-    //     if (label === children) {
-    //         return label;
-    //     } else if (label) {
-    //         return label;
-    //     } else if (children) {
-    //         return children;
-    //     }
-    // };
 
     const classes = classnames(
         "button",
