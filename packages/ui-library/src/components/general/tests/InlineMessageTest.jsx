@@ -47,8 +47,9 @@ describe("InlineMessage", function () {
         var label = "Do Something";
         var onClick = jest.fn();
         var view = getComponent({ "data-id": "notice-message-button",
+            primaryButton: { label: label },
             type: InlineMessage.MessageTypes.NOTICE,
-            label: label, onClick: onClick }, text);
+            label: text, onClick: onClick });
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-button");
         var actionContainer = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-btn");
         var buttonElement = TestUtils.findRenderedDOMNodeWithTag(actionContainer, "button");

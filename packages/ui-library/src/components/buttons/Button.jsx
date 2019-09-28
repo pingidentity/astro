@@ -94,15 +94,15 @@ function BaseButton ({
             ),
         });
     }
-    const _label = () => {
-        if (label === children) {
-            return label;
-        } else if (label) {
-            return label;
-        } else if (children) {
-            return children;
-        }
-    };
+    // const _label = () => {
+    //     if (label === children) {
+    //         return label;
+    //     } else if (label) {
+    //         return label;
+    //     } else if (children) {
+    //         return children;
+    //     }
+    // };
 
     const classes = classnames(
         "button",
@@ -133,8 +133,9 @@ function BaseButton ({
             href={href}
             target={target}
         >
+            {label}
             {text}
-            {_label()}
+            {children}
             <EllipsisLoader loading={loading}/>
         </TagName>
     );

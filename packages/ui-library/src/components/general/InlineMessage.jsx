@@ -75,6 +75,12 @@ class InlineMessage extends React.Component {
         type: PropTypes.oneOf([
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
+        primaryButton: PropTypes.shape({
+            className: PropTypes.string,
+            label: PropTypes.string,
+            href: PropTypes.string,
+            target: PropTypes.string
+        }),
         secondaryButtons: PropTypes.arrayOf(PropTypes.shape({
             className: PropTypes.string,
             onClick: PropTypes.func.isRequired,
@@ -88,6 +94,7 @@ class InlineMessage extends React.Component {
         noMargin: false,
         bordered: true,
         type: MessageTypes.NOTICE,
+        primaryButton: {},
         secondaryButtons: []
     };
 
@@ -106,15 +113,6 @@ class InlineMessage extends React.Component {
     _onClick = onClick => (e) => {
         onClick(e);
     };
-
-    // _label = () => {
-    //     console.log(this.props.label);
-    //     if (this.props.label) {
-    //         return this.props.label;
-    //     } else {
-    //         return null;
-    //     }
-    // }
 
     render() {
         const className = classnames("inline-message", this.props.type, {
@@ -140,11 +138,13 @@ class InlineMessage extends React.Component {
                 </div>
                 {
                     this._showAction() &&
-                        [{
-                            label: this.props.label,
-                            onClick: this.props.onClick,
-                            className: "primary"
-                        }, ...this.props.secondaryButtons].map(({
+                        [
+                            {
+                                label: this.props.primaryButton.label,
+                                onClick: this.props.onClick,
+                                className: "primary",
+                            },
+                            ...this.props.secondaryButtons].map(({
                             onClick,
                             label,
                             type,
@@ -156,11 +156,14 @@ class InlineMessage extends React.Component {
                                     className="inline-message-btn"
                                 >
                                     <Button
-                                        {...this.props}
-                                        data-id={"button"}
-                                        key="main" inline type={type} label={label}
-                                        onClick={this._onClick(onClick)} className={buttonClass}
-
+                                        key="main"
+                                        inline
+                                        type={type}
+                                        label={label}
+                                        onClick={this._onClick(onClick)}
+                                        className={buttonClass}
+                                        href={this.props.primaryButton.href}
+                                        target={this.props.primaryButton.target}
                                     />
                                 </div>
                             );
