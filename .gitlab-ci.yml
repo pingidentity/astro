@@ -3,12 +3,15 @@ image: node:8
 cache:
   paths:
     - node_modules/
+    - packages/ui-library/node_modules/
+    - packages/end-user/node_modules/
 
 stages:
+  - build
   - test
 
-testing_testing:
-  stage: test
+build_packages:
+  stage: build
   tags:
     - platform-publish-node-fragment
     - platform-build-node-ui-page
@@ -20,4 +23,13 @@ testing_testing:
   - cd ../end-user
   - npm install
   - cd ../../
+
+
+test_packages:
+  stage: test
+  tags:
+    - platform-publish-node-fragment
+    - platform-build-node-ui-page
+    - platform-build-node-fragment
+  script:
   - lerna run test
