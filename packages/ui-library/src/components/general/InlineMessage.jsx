@@ -1,3 +1,5 @@
+import { thisExpression } from "@babel/types";
+
 "use strict";
 
 var PropTypes = require("prop-types");
@@ -76,8 +78,6 @@ class InlineMessage extends React.Component {
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
         primaryButton: PropTypes.shape({
-            className: PropTypes.string,
-            label: PropTypes.string,
             href: PropTypes.string,
             target: PropTypes.string
         }),
@@ -140,13 +140,17 @@ class InlineMessage extends React.Component {
                     this._showAction() &&
                         [
                             {
-                                label: this.props.primaryButton.label,
+                                label: this.props.label,
                                 onClick: this.props.onClick,
                                 className: "primary",
+                                href: this.props.primaryButton.href,
+                                target: this.props.primaryButton.target
                             },
                             ...this.props.secondaryButtons].map(({
                             onClick,
                             label,
+                            href,
+                            target,
                             type,
                             className: buttonClass,
                         }, index) => {
@@ -162,8 +166,8 @@ class InlineMessage extends React.Component {
                                         label={label}
                                         onClick={this._onClick(onClick)}
                                         className={buttonClass}
-                                        href={this.props.primaryButton.href}
-                                        target={this.props.primaryButton.target}
+                                        href={href}
+                                        target={target}
                                     />
                                 </div>
                             );

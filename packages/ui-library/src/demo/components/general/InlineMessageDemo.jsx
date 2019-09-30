@@ -76,9 +76,7 @@ class InlineMessageDemo extends React.Component {
                     type={ InlineMessage.MessageTypes.WARNING }
                     label="Do Something"
                     onClick={doSomething}
-                    primaryButton={{
-                        label: "click",
-                    }}>
+                >
                     Message with action.
                 </InlineMessage>
 
@@ -87,8 +85,8 @@ class InlineMessageDemo extends React.Component {
                     label="message with href and target"
                     onClick={doSomething}
                     primaryButton={{
-                        label: "with href",
-                        href: "#"
+                        href: "#",
+                        target: "#"
                     }}
                 >
                 Message with Href
@@ -98,14 +96,11 @@ class InlineMessageDemo extends React.Component {
                     type={ InlineMessage.MessageTypes.WARNING }
                     label="Do Something"
                     onClick={doSomething}
-                    primaryButton={{
-                        label: "click",
-                    }}
                     secondaryButtons={[
                         {
                             onClick: doSomething,
                             label: "Do Something",
-                            className: "secondary"
+                            className: "secondary",
 
                         },
                     ]}
@@ -117,9 +112,6 @@ class InlineMessageDemo extends React.Component {
                     type={ InlineMessage.MessageTypes.WARNING }
                     label="Do Something"
                     onClick={doSomething}
-                    primaryButton={{
-                        label: "click",
-                    }}
                     alternate>
                     Alternate Message with action.
                 </InlineMessage>
@@ -128,9 +120,6 @@ class InlineMessageDemo extends React.Component {
                     type={ InlineMessage.MessageTypes.ERROR }
                     label="Do Something"
                     onClick={doSomething}
-                    primaryButton={{
-                        label: "click",
-                    }}
                     secondaryButtons={[
                         {
                             onClick: doSomething,
