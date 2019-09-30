@@ -1,10 +1,11 @@
 image: node:8
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - node_modules/
-    - packages/ui-library/node_modules/
-    - packages/end-user/node_modules/
+  - node_modules/
+  - packages/ui-library/node_modules/
+  - packages/end-user/node_modules/
 
 stages:
   - build
