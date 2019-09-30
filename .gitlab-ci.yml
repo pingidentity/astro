@@ -17,7 +17,7 @@ build_packages:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
-  - npm i lerna -g
+  - npm i lerna
   - cd packages/ui-library
   - npm install
   - cd ../end-user
