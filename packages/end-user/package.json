@@ -1,7 +1,7 @@
 {
   "name": "@pingux/end-user",
   "version": "0.9.2",
-  "description": "Style framework for end-user pages",
+  "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
