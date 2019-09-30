@@ -117,10 +117,11 @@ class MultivaluesDemo extends React.Component {
 
                 <InputRow>
                     <Multivalues
-                        labelText="Default multi-values input with icons"
+                        labelText="Default multi-values input with icons (XL)"
                         stateless={false}
                         entries={this.state.iconEntries}
                         onValueChange={this._handleIconChange}
+                        width={Multivalues.inputWidths.XL}
                     />
                 </InputRow>
 
@@ -141,12 +142,13 @@ class MultivaluesDemo extends React.Component {
 
                 <InputRow>
                     <Multivalues
-                        labelText="With error message"
+                        labelText="With error message (MD)"
                         stateless={false}
                         entries={this.state.errorEntries}
                         onNewValue={this._onNewErrorEntry}
                         onValueChange={this._handleErrorEntryChange}
                         errorMessage={this.state.error}
+                        width={Multivalues.inputWidths.MD}
                     />
                 </InputRow>
 

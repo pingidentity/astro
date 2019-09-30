@@ -2,15 +2,9 @@
     @include text-value;
     position: relative;
     display: inline-block;
-    width: 390px;
     text-transform: none;
     cursor: text;
     vertical-align: bottom;
-
-    &--auto-width {
-        width: auto;
-        max-width: 390px;
-    }
 
     .clear {
         font-family: $icon-font;
