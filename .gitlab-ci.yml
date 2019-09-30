@@ -32,4 +32,4 @@ test_packages:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
-  - lerna run test
+  - node_modules/.bin/lerna run test
