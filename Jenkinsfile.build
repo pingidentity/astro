@@ -24,7 +24,7 @@ pipeline {
       }
       post {
         always {
-          archiveArtifacts artifacts: "${env.WORKSPACE}/packages/ui-library/build-css/**", fingerprint: true
+          archiveArtifacts artifacts: "packages/ui-library/build-css", fingerprint: true
         }
       }
     }
@@ -34,17 +34,17 @@ pipeline {
       container('node-builder') {
         withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
+            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "packages/ui-library/build-css/")
           }
         }
         withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
+            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "packages/ui-library/build-css/")
           }
         }
         withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "packages/ui-library/build-css/")
           }
         }
       }
