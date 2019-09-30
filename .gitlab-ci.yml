@@ -17,7 +17,6 @@ build_packages:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
-  - npm i lerna
   - cd packages/ui-library
   - npm install
   - cd ../end-user
@@ -32,4 +31,5 @@ test_packages:
     - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
-  - node_modules/.bin/lerna run test
+  - npm i lerna -g
+  - lerna run test
