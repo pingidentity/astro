@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ResponsiveContainer, LineChart, XAxis, Line, ReferenceLine } from "recharts";
+import { ResponsiveContainer, LineChart, XAxis, YAxis, Line, ReferenceLine } from "recharts";
 import HelpHint from "../../tooltips/HelpHint";
 
 import _ from "underscore";
@@ -98,7 +98,7 @@ export default class AccessoriesLineChart extends React.Component {
 
     _getTitle = () => {
         return this.props.title && <div key="title" className="accessories-line-chart__title">{this.props.title}</div>;
-    }
+    };
 
     _getCount = () => {
         return this.props.count && (
@@ -107,11 +107,15 @@ export default class AccessoriesLineChart extends React.Component {
                 <div className="accessories-line-chart__count-label">{this.props.countLabel}</div>
             </div>
         );
-    }
+    };
 
     _getLineChart = () => {
-        const trendColor = this.props.isTrendPositive ? "#193967" : "#000";
+        const trendColor = this.props.isTrendPositive ? "#2A60B1" : "#000";
         let referenceLinePoint;
+        const isZeroTrend = _.chain(this.props.data)
+            .filter(point => _.has(point, this.props.yAxisKey))
+            .every(point => point[this.props.yAxisKey] === 0)
+            .value();
 
         if (this.props.data[0] && !_.has(this.props.data[0], this.props.yAxisKey)) {
             referenceLinePoint = _.find(this.props.data.slice(1), point => _.has(point, this.props.yAxisKey)) ||
@@ -127,39 +131,49 @@ export default class AccessoriesLineChart extends React.Component {
             >
                 <div>
                     <div className="accessories-line-chart__chart">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <LineChart
-                                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-                                cursor="pointer"
-                                data={this.props.data}
-                            >
-                                <XAxis dataKey={this.props.xAxisKey} hide={true} />
-                                <Line
-                                    type="monotone"
-                                    dot={false}
-                                    isAnimationActive={false}
-                                    dataKey={this.props.yAxisKey}
-                                    stroke={trendColor}
-                                    strokeWidth={1}
-                                />
-                                {
-                                    referenceLinePoint && referenceLinePoint[this.props.xAxisKey] &&
-                                    <ReferenceLine
-                                        data-id="reference-line"
-                                        x={referenceLinePoint[this.props.xAxisKey]}
-                                        stroke="#686f77"
-                                        strokeDasharray="2 2"
-                                    />
-                                }
-                            </LineChart>
-                        </ResponsiveContainer>
+                        {
+                            _.isEmpty(this.props.data)
+                                ? <div className="accessories-line-chart__no-data-chart" />
+                                : <ResponsiveContainer width="100%" height="100%">
+                                    <LineChart
+                                        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                                        cursor="pointer"
+                                        data={this.props.data}
+                                    >
+                                        <XAxis dataKey={this.props.xAxisKey} hide={true} />
+                                        {
+                                            isZeroTrend &&
+                                           <YAxis domain={[-1, 1]} hide={true} />
+                                        }
+                                        <Line
+                                            type="monotone"
+                                            dot={false}
+                                            isAnimationActive={false}
+                                            dataKey={this.props.yAxisKey}
+                                            stroke={trendColor}
+                                            strokeWidth={1}
+                                        />
+                                        {
+                                            referenceLinePoint && referenceLinePoint[this.props.xAxisKey] &&
+                                            <ReferenceLine
+                                                data-id="reference-line"
+                                                x={referenceLinePoint[this.props.xAxisKey]}
+                                                stroke="#686f77"
+                                                strokeDasharray="2 2"
+                                            />
+                                        }
+                                    </LineChart>
+                                </ResponsiveContainer>
+
+                        }
+
                     </div>
                     <div className="accessories-line-chart__chart-label">{this.props.chartLabel}</div>
                 </div>
                 <span className="accessories-line-chart__trend" style={{ color: trendColor }}>{this.props.trend}</span>
             </div>
         );
-    }
+    };
 
     _getLineChartWithHint = () => {
         return (
@@ -174,7 +188,7 @@ export default class AccessoriesLineChart extends React.Component {
                 </HelpHint>
             </div>
         );
-    }
+    };
 
     render() {
         return [
