@@ -35,9 +35,11 @@ const Card = ({
 
     return (
         <div className={classNames} data-id={dataId}>
-            <div className="card__header">
-                {header}
-            </div>
+            { header ? (
+                <div className="card__header">
+                    {header}
+                </div>
+            ) : null }
             <div className="card__content">
                 {children}
             </div>

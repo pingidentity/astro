@@ -1,68 +1,51 @@
-table.device-table {
-    td {
-        padding-top: $spacing-lg;
-        padding-bottom: $spacing-lg;
+.device-table {
+    @media (max-width: 480px) {
+        flex-direction: column;
     }
 
-    th,
-    td {
-        border-bottom-style: solid;
-        &:first-child {
-            padding-left: $spacing-md;
-            width: 42%;
-        }
-        button.inline.delete {
-            margin: 0;
+    &__icon {
+        flex: 1;
+        flex-grow: 0;
+        fill: $color-neutral-20;
+
+        @media (max-width: $breakpoint-mobile) {
+            display: none;
         }
     }
 
-    .device {
-        &-icon {
-            margin-right: $spacing-sm;
-        }
-        &-name {
-            display: inline-block;
-            vertical-align: middle;
-            &__type {
-                display: none;
-                color: $color-neutral-30;
-                text-transform: uppercase;
+    &__row {
+        border-bottom: 1px dashed $color-neutral-20;
+
+        @media (max-width: $breakpoint-mobile) {
+            flex-direction: row;
+
+            *:not(:last-child) {
+                width: unset;
+                margin-bottom: unset;
+                margin-right: unset;
             }
         }
+    }
+
+    &__row:last-child {
+        border-bottom: 0;
+    }
+
+    &__row > div {
+        padding: 20px 10px;
+    }
+
+    &__row-details {
+        text-align: left;
+    }
+
+    &__type {
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    &__name {
+        color: $color-charting-indigo;
     }
 }
-//based on Dock menu breakpoints
-@media (max-width: 600px) {
-    table.device-table {
-        th {
-            font-size: 0; //hide fields but not the line below
-            flex: 1;
-            border-bottom: 1px solid $color-rabbit-fur;
-        }
-        tr {
-            display: flex;
-            align-items: stretch;
-            border-bottom: 1px solid $color-rabbit-fur;
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-        td {
-            border-bottom: none;
-            &:last-child {
-                margin-left: auto;
-                padding-right: 25px;
-            }
-        }
-        th,
-        td {
-            &:nth-child(2) { //selector for type column
-                display: none;
-            }
-        }
-        .device-type {
-            display: block;
-        }
-    }
-}
-
