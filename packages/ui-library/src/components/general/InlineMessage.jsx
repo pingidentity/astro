@@ -1,4 +1,3 @@
-import { thisExpression } from "@babel/types";
 
 "use strict";
 
@@ -77,7 +76,7 @@ class InlineMessage extends React.Component {
         type: PropTypes.oneOf([
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
-        primaryButton: PropTypes.shape({
+        primaryButtonProps: PropTypes.shape({
             href: PropTypes.string,
             target: PropTypes.string
         }),
@@ -142,9 +141,8 @@ class InlineMessage extends React.Component {
                             {
                                 label: this.props.label,
                                 onClick: this.props.onClick,
+                                ...this.props.primaryButtonProps,
                                 className: "primary",
-                                href: this.props.primaryButton.href,
-                                target: this.props.primaryButton.target
                             },
                             ...this.props.secondaryButtons].map(({
                             onClick,

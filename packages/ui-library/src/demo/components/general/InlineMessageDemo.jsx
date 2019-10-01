@@ -84,7 +84,7 @@ class InlineMessageDemo extends React.Component {
                     type={ InlineMessage.MessageTypes.WARNING }
                     label="message with href and target"
                     onClick={doSomething}
-                    primaryButton={{
+                    primaryButtonProps={{
                         href: "#",
                         target: "#"
                     }}
