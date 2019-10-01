@@ -1,18 +1,19 @@
 image: node:8
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
   paths:
   - node_modules/
   - packages/ui-library/node_modules/
   - packages/end-user/node_modules/
 
 stages:
-  - build
+  - setup
   - test
 
-build_packages:
-  stage: build
+setup:
+  stage: setup
   tags:
     - platform-publish-node-fragment
     - platform-build-node-ui-page
@@ -25,7 +26,7 @@ build_packages:
   - cd ../../
 
 
-test_packages:
+test:
   stage: test
   tags:
     - platform-publish-node-fragment
