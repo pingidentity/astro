@@ -11,7 +11,6 @@ jest.dontMock("../../forms/FormDropDownList");
 describe("TimePicker", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         TimePicker = require("../TimePicker"),
         moment = require("moment"),
@@ -118,39 +117,6 @@ describe("TimePicker", function () {
         ]);
     });
 
-    it("properly populates the FormDropDown's options", function () {
-        component = render({
-            increments: 60,
-            format: "24"
-        });
-
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
-
-        expect(select.children.length).toEqual(25);
-        expect(select.children[0].textContent).toEqual("--");
-        expect(select.children[1].textContent).toEqual("0:00");
-        expect(select.children[13].textContent).toEqual("12:00");
-        expect(select.children[24].textContent).toEqual("23:00");
-    });
-
-    it("updates the value on change", function () {
-        component = render({
-            increments: 60,
-            format: "24"
-        });
-
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
-
-        ReactTestUtils.Simulate.click(select.children[0]);
-        expect(onValueChange).toBeCalledWith("");
-
-        ReactTestUtils.Simulate.click(select.children[14]);
-        expect(onValueChange).toBeCalledWith("13:00");
-
-        ReactTestUtils.Simulate.click(select.children[24]);
-        expect(onValueChange).toBeCalledWith("23:00");
-    });
-
     it("takes a `moment` object as a value", function () {
         component = render({
             increments: 60,
@@ -179,26 +145,6 @@ describe("TimePicker", function () {
     it("verify default data-id", function () {
         component = render({ increments: 60, format: "24" });
         expect(component.props["data-id"]).toBe("time-picker");
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            render({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        render();
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-        render({ flags: [ "use-portal" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

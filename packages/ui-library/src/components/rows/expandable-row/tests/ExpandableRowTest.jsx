@@ -1,15 +1,16 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../ExpandableRow");
 jest.dontMock("../../../tooltips/DetailsTooltip");
 jest.dontMock("../../../tooltips/HelpHint");
 
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
-import { shallow } from "enzyme";
 import TestUtils from "../../../../testutil/TestUtils";
 import KeyboardUtils from "../../../../util/KeyboardUtils";
-import Utils from "../../../../util/Utils";
 import ExpandableRow from "../ExpandableRow";
 import DragDrop from "../../DragDrop";
 import HelpHint from "../../../tooltips/HelpHint";
@@ -40,7 +41,7 @@ describe("ExpandableRow", function() {
 
         const WrappedComponent = opts.ordering ? wrapInTestContext(ExpandableRow) : ExpandableRow;
 
-        return ReactTestUtils.renderIntoDocument(<WrappedComponent {...opts} />);
+        return TestUtils.renderInWrapper(<WrappedComponent {...opts} />);
     }
 
     function getTwoComponents(opts, opts2) {
@@ -249,15 +250,7 @@ describe("ExpandableRow", function() {
         var expandButton = getExpandButton(component);
 
         ReactTestUtils.Simulate.click(expandButton);
-        expect(component.props.onToggle).lastCalledWith(true);
-    });
-
-    it("stateless: calls onToggle when collapsed", function() {
-        var component = getComponent();
-        var expandButton = getExpandButton(component);
-
-        ReactTestUtils.Simulate.click(expandButton);
-        expect(component.props.onToggle).lastCalledWith(false);
+        expect(component.props.children.props.onToggle).lastCalledWith(true);
     });
 
     it("stateless: no exception is thrown when onToggle is null", function() {
@@ -267,30 +260,8 @@ describe("ExpandableRow", function() {
         ReactTestUtils.Simulate.click(expandButton);
     });
 
-    it("stateful: expands when clicking on the expand icon and collapses when clicked on again", function() {
-        var component = getComponent({ stateless: false });
-        var expandButton = getExpandButton(component);
-
-        // expand
-        ReactTestUtils.Simulate.click(expandButton);
-
-        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
-        var content = TestUtils.findRenderedDOMNodeWithDataId(component, "content");
-
-        expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
-        expect(ReactTestUtils.isDOMComponent(content)).toBeTruthy();
-        expect(content.textContent).toEqual("Test Content");
-        expect(component.props.onToggle).lastCalledWith(true);
-
-        // collapse
-        ReactTestUtils.Simulate.click(expandButton);
-        expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
-        expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeFalsy();
-        expect(component.props.onToggle).lastCalledWith(false);
-    });
-
-    it("p-stateful: expands when clicking on the expand icon and collapses when clicked on again", function() {
-        const component = getComponent({ flags: ["p-stateful"] });
+    it("expands when clicking on the expand icon and collapses when clicked on again", function() {
+        const component = getComponent();
         const expandButton = getExpandButton(component);
 
         // expand
@@ -302,17 +273,17 @@ describe("ExpandableRow", function() {
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
         expect(ReactTestUtils.isDOMComponent(content)).toBeTruthy();
         expect(content.textContent).toEqual("Test Content");
-        expect(component.props.onToggle.mock.calls[0][0]).toEqual(false);
+        expect(component.props.children.props.onToggle.mock.calls[0][0]).toEqual(false);
 
         // collapse
         ReactTestUtils.Simulate.click(expandButton);
         const expanded = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         expect(ReactTestUtils.isDOMComponent(expanded)).toBeFalsy();
-        expect(component.props.onToggle.mock.calls[1][0]).toEqual(true);
+        expect(component.props.children.props.onToggle.mock.calls[1][0]).toEqual(true);
     });
 
-    it("p-stateful: does not expand if expanded prop is set to false", () => {
-        const component = getComponent({ flags: ["p-stateful"], expanded: false });
+    it("does not expand if expanded prop is set to false", () => {
+        const component = getComponent({ expanded: false });
         const expandButton = getExpandButton(component);
 
         // expand
@@ -320,7 +291,7 @@ describe("ExpandableRow", function() {
 
         const expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         expect(expandedRow).toEqual(null);
-        expect(component.props.onToggle).lastCalledWith(false);
+        expect(component.props.children.props.onToggle).lastCalledWith(false);
     });
 
 
@@ -518,30 +489,11 @@ describe("ExpandableRow", function() {
         expect(deleteConfirmDialog).toBeTruthy();
     });
 
-    it("stateful: should hide delete confirm dialog", function() {
-        const component = getComponent({
-            stateless: false,
-            expanded: true,
-            showDelete: true,
-            confirmDelete: true,
-            showDeleteConfirm: true
-        });
-
-        const deleteConfirmDialog = TestUtils.findRenderedDOMNodeWithDataId(component, "details-content");
-        expect(deleteConfirmDialog).toBeTruthy();
-        const cancelButton = TestUtils.findRenderedDOMNodeWithDataId(deleteConfirmDialog, "button-group-cancel");
-        ReactTestUtils.Simulate.click(cancelButton);
-
-        const dialog = TestUtils.findRenderedDOMNodeWithDataId(component, "details-content");
-        expect(dialog).toBeFalsy();
-    });
-
-    it("p-stateful: should show and hide delete confirm dialog if confirmDelete is true", () => {
+    it("should show and hide delete confirm dialog if confirmDelete is true", () => {
         const component = getComponent({
             expanded: true,
             showDelete: true,
             confirmDelete: true,
-            flags: ["p-stateful"]
         });
 
         expect(
@@ -559,12 +511,11 @@ describe("ExpandableRow", function() {
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "details-content")).toBeFalsy();
     });
 
-    it("p-stateful: should close confirm dialog when cancel is clicked", () => {
+    it("should close confirm dialog when cancel is clicked", () => {
         const component = getComponent({
             expanded: true,
             showDelete: true,
             confirmDelete: true,
-            flags: ["p-stateful"]
         });
 
         expect(
@@ -582,12 +533,11 @@ describe("ExpandableRow", function() {
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "details-content")).toBeFalsy();
     });
 
-    it("p-stateful: should not show confirm dialog if confirmDelete is false", () => {
+    it("should not show confirm dialog if confirmDelete is false", () => {
         const component = getComponent({
             expanded: true,
             showDelete: true,
             confirmDelete: false,
-            flags: ["p-stateful"]
         });
 
         expect(
@@ -601,13 +551,12 @@ describe("ExpandableRow", function() {
         expect(deleteConfirmDialog).toEqual(null);
     });
 
-    it("p-stateful: should not show confirm dialog if showDeleteConfirm is passed as false", () => {
+    it("should not show confirm dialog if showDeleteConfirm is passed as false", () => {
         const component = getComponent({
             expanded: true,
             showDelete: true,
             confirmDelete: true,
             showDeleteConfirm: false,
-            flags: ["p-stateful"]
         });
 
         expect(
@@ -619,26 +568,6 @@ describe("ExpandableRow", function() {
 
         const deleteConfirmDialog = TestUtils.findRenderedDOMNodeWithDataId(component, "details-content");
         expect(deleteConfirmDialog).toEqual(null);
-    });
-
-    it("stateful: should trigger onDelete callback on click confirm-delete", function() {
-        let onDelete = jest.fn();
-
-        var component = getComponent({
-            stateless: false,
-            expanded: true,
-            showDelete: true,
-            confirmDelete: true,
-            showDeleteConfirm: true,
-            onDelete: onDelete
-        });
-
-        var deleteConfirmDialog = TestUtils.findRenderedDOMNodeWithDataId(component, "details-content");
-        var deleteConfirmBtn = TestUtils.findRenderedDOMNodeWithDataId(deleteConfirmDialog, "confirm-delete");
-
-        ReactTestUtils.Simulate.click(deleteConfirmBtn);
-
-        expect(component.props.onDelete).toBeCalled();
     });
 
     it("stateful: should trigger onDelete callback when confirmDelete is false", function() {
@@ -655,7 +584,7 @@ describe("ExpandableRow", function() {
 
         ReactTestUtils.Simulate.click(deleteBtn);
 
-        expect(component.props.onDelete).toBeCalled();
+        expect(component.props.children.props.onDelete).toBeCalled();
     });
 
     it("stateless: renders the status as good", function() {
@@ -679,7 +608,7 @@ describe("ExpandableRow", function() {
 
         ReactTestUtils.Simulate.click(editButton);
 
-        expect(component.props.onEditButtonClick).toBeCalled();
+        expect(component.props.children.props.onEditButtonClick).toBeCalled();
     });
 
     it("stateful: should trigger onEditButtonClick callback on edit-btn click", function() {
@@ -694,23 +623,7 @@ describe("ExpandableRow", function() {
 
         ReactTestUtils.Simulate.click(editButton);
 
-        expect(component.props.onEditButtonClick).toBeCalled();
-    });
-
-    // it("throws error when deprecated prop 'controlled' is passed in", function() {
-    //     var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-    //     expect(function() {
-    //         getComponent({ controlled: true });
-    //     }).toThrow(expectedError);
-    // });
-
-    it("throws error when deprecated prop 'defaultToExpanded' is passed in", function() {
-        var expectedError = new Error(Utils.deprecatePropError("defaultToExpanded", "expanded"));
-
-        expect(function() {
-            getComponent({ defaultToExpanded: true });
-        }).toThrow(expectedError);
+        expect(component.props.children.props.onEditButtonClick).toBeCalled();
     });
 
     it("fires reorder event from input when in ordering mode", function() {
@@ -907,53 +820,6 @@ describe("ExpandableRow", function() {
         expect(element).not.toBeNull();
     });
 
-    it("renders with new class when flags are set", function() {
-        const component = getComponent({ flags: [ "expandable-row-class", "usePortal" ] });
-
-        const row = TestUtils.findRenderedDOMNodeWithClass(component, "expandable-row");
-
-        expect(row).toBeTruthy();
-    });
-
-    it("does not render with new class when flag is not set", function() {
-        const component = getComponent();
-
-        const row = TestUtils.findRenderedDOMNodeWithClass(component, "expandable-row");
-
-        expect(row).toBeFalsy();
-    });
-
-    it("fires Cannonball warning when new class flag is not set", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toHaveBeenCalled();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).toHaveBeenCalled();
-    });
-
-    it("fires Cannonball warning when p-stateful flag is not set", () => {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toHaveBeenCalled();
-        // Shallow mount to avoid triggering other warnings.
-        shallow(<ExpandableRow />);
-        expect(console.warn).toHaveBeenCalled();
-    });
-
-    it("does not fire Cannonball warning when p-stateful and use-portal flags are set", () => {
-        console.warn = jest.fn();
-
-        // Shallow mount to avoid triggering other warnings.
-        shallow(<ExpandableRow flags={["p-stateful"]} />);
-        expect(console.warn).not.toHaveBeenCalled();
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "expandable-row-class", "p-stateful" ] });
-        expect(console.warn).toBeCalled();
-    });
-
     it("should show positionValue in ordering field", function() {
         const callback = jest.fn();
         const component = getComponent({
@@ -963,7 +829,6 @@ describe("ExpandableRow", function() {
                 total: 10,
                 onReorder: callback,
             },
-            flags: ["p-stateful"]
         });
         const orderingInput = getOrderingInput(component);
 
@@ -978,7 +843,6 @@ describe("ExpandableRow", function() {
                 total: 10,
                 onPositionValueChange: value => callback(value),
             },
-            flags: ["p-stateful"]
         });
         const orderingInput = getOrderingInput(component);
         ReactTestUtils.Simulate.change(orderingInput, { target: { value: "8" } });
@@ -997,7 +861,7 @@ describe("ExpandableRow", function() {
         });
         const orderingInput = getOrderingInput(component);
         ReactTestUtils.Simulate.blur(orderingInput);
-        expect(component.props.ordering.onReorder).lastCalledWith(3, 3);
+        expect(component.props.children.props.ordering.onReorder).lastCalledWith(3, 3);
     });
 
     it("should reorder after changing input value without onPositionValueChange callback", function () {
@@ -1008,7 +872,6 @@ describe("ExpandableRow", function() {
                 total: 10,
                 onReorder: callback,
             },
-            flags: ["p-stateful"]
         });
         const orderingInput = getOrderingInput(component);
         ReactTestUtils.Simulate.change(orderingInput, { target: { value: "8" } });
@@ -1025,7 +888,6 @@ describe("ExpandableRow", function() {
                 total: 10,
                 onReorder: callback,
             },
-            flags: ["p-stateful"]
         });
         const orderingInput = getOrderingInput(component);
         ReactTestUtils.Simulate.change(orderingInput, { target: { value: "" } });

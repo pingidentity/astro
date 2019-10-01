@@ -2,11 +2,10 @@
     box-sizing: border-box;
     position: relative;
 
-    border: 1px dashed $color-strong-neutral-30;
+    border: 1px dashed $color-rabbit-fur;
     padding: $spacing-lg;
     background-color: $color-white;
-    color: $color-strong-neutral-20;
-    @include font-pn-light;
+    @include text-body;
     height: 95px;
     text-align: center;
     border-radius: 2px;
@@ -22,9 +21,7 @@
         right: 0;
         margin: 0;
         text-transform: none;
-        font-size: 15px;
         cursor: pointer;
-        @include font-pn-light;
     }
     input[type=file] {
         opacity: 0;
@@ -58,12 +55,11 @@
 }
 
 .input-filedrop__upload-text {
-    font-size: 14px;
     line-height: 1.3em;
 }
 
 .input-filedrop__selected-content {
-    font-size: 15px;
+    @include text-primary;
     line-height: 15px;
 }
 
@@ -77,9 +73,12 @@
 }
 
 .input-filedrop__link {
-    color: $color-active-blue;
+    @include text-link;
     vertical-align: middle;
-    cursor: pointer;
+
+    .input-filedrop:hover .input-filedrop__upload-text & {
+        text-decoration: underline;
+    }
 }
 
 .input-filedrop__divider {

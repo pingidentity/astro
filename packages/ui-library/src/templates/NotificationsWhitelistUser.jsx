@@ -19,11 +19,6 @@ export default function NotificationsWhitelistUser() {
     return (
         <ExpandableRow
             initialState={{ expanded: true }}
-            flags={[
-                "expandable-row-class",
-                "use-portal",
-                "p-stateful"
-            ]}
             rowAccessories={[
                 <Button
                     inline
@@ -32,7 +27,6 @@ export default function NotificationsWhitelistUser() {
                 />,
                 <Toggle
                     key="toggle"
-                    flags={["p-stateful"]}
                 />
             ]}
             subtitle="dtaylor@company.com"
@@ -45,7 +39,6 @@ export default function NotificationsWhitelistUser() {
                     "MFA",
                     "API",
                 ]}
-                flags={["p-stateful"]}
             />
             <InlineMessage
                 fullwidth
@@ -63,7 +56,7 @@ export default function NotificationsWhitelistUser() {
                         [
                             "MFA",
                             <ValueItem
-                                icon={<Toggle flags={["p-stateful"]} initialState={{ toggled: true }}/>}
+                                icon={<Toggle initialState={{ toggled: true }}/>}
                             >
                             Enabled
                             </ValueItem>

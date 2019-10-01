@@ -93,6 +93,21 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
     },
 
     /**
+     *
+     * @desc this function is to check if row is open
+     * @param {string} item - the number of item
+     */
+    verifyRowIsOpen: {
+        value: function (index) {
+            const xPath = (
+                `//div[contains(@class, 'expandable-row')][${index}]` +
+                    `//*[@data-id='expanded-row']`
+            );
+            return this.isExisting(xPath);
+        }
+    },
+
+    /**
      * @desc this function is to check if advanced section is showing
      */
     verifyAdvancedIsShowing: {
@@ -191,7 +206,7 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
 
     verifySuccessStatuses: {
         value: function () {
-            var rows = this.getElements("//div[contains(@class, 'result-set')]//div[contains(@class, 'item')]");
+            var rows = this.getElements("//div[contains(@class, 'expandable-row')]");
             for (var i = 0; i < rows.length; i += 1) {
                 const xPath = (
                     "//div[@data-id='user-{index}']//span[contains(@class, 'status-indicator--icon__success')]"

@@ -24,7 +24,6 @@ describe("Grid", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
-    var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var ShallowRenderer = require("react-test-renderer/shallow");
     var Grid = require("../Grid");
@@ -335,14 +334,6 @@ describe("Grid", function () {
         var output = shallowRenderer.getRenderOutput();
 
         expect(output).toBeNull();
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
     });
 
 });

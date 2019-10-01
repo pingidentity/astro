@@ -8,11 +8,9 @@ import MonthsView from "./MonthsView";
 import YearsView from "./YearsView";
 import CalendarUtils from "./Utils";
 import Translator from "../../util/i18n/Translator.js";
-import Utils from "../../util/Utils.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
-import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -64,6 +62,7 @@ var Views = {
  *
  * @param {*} [date]
  *    Numeric value for the selected date. If not provided, will use the today's date.
+ *    When not provided, the component will manage this value.
  * @param {Calendar~dateRange} [dateRange]
  *    A date range to restrict the selectable dates in the calendar.
  *    If provided, will restrict calendar date selection so it can't be less and/or can't be greater than the date range.
@@ -94,9 +93,6 @@ var Views = {
  *    Whether or not the calendar should close once a date is selected.
  * @param {boolean} [required=false]
  *    If true, the user must select a date for the calendar.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal.
- *     Set the flag for "p-stateful" to use this component in a progressively stateful mode.
  *
  * @example
  *
@@ -152,8 +148,6 @@ class BaseCalendar extends React.Component {
 
         onValueChange: PropTypes.func,
         flags: flagsPropType,
-
-        statelessDate: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -164,7 +158,6 @@ class BaseCalendar extends React.Component {
         required: false,
         format: Translator.translate("dateformat"),
         tight: false,
-        statelessDate: false,
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
@@ -174,11 +167,6 @@ class BaseCalendar extends React.Component {
 
         moment.locale(Translator.currentLanguage);
 
-        if (!this.props.statelessDate) {
-            // doing this just to keep from defining the deprecated hook unless we need it
-            this.componentWillReceiveProps = this._maybeComponentWillReceiveProps;
-        }
-
         this.state = {
             date: props.date || moment(),
             currentView: props.minView,
@@ -186,10 +174,8 @@ class BaseCalendar extends React.Component {
         };
     }
 
-    _getDateValue = () => this.props.statelessDate ? this.props.date : this.state.date;
-
     // runs the date through moment
-    _getDate = (date = this._getDateValue()) => {
+    _getDate = (date = this.props.date) => {
         // we have a habit of passing back stringified time numbers
         if (date && date.match && date.match(/^\-?[0-9]+$/)) {
             return moment(parseInt(date));
@@ -203,23 +189,6 @@ class BaseCalendar extends React.Component {
     };
 
     componentDidMount() {
-        /* istanbul ignore next  */
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-            if (this.props.isRequired !== undefined) {
-                throw new Error(Utils.deprecatePropError("isRequired", "required"));
-            }
-        }
-
-        if (!this._usePortal()) {
-            cannonballPortalWarning({ name: "Calendar" });
-        }
-
         document.addEventListener("click", this.documentClick);
     }
 
@@ -311,16 +280,6 @@ class BaseCalendar extends React.Component {
         }
     }
 
-    // keeping the code for this deprecated hook here
-    // the constructor will decide if it needs it
-    _maybeComponentWillReceiveProps = (nextProps) => {
-        const { date } = nextProps;
-
-        if (date) {
-            this.setState({ date });
-        }
-    }
-
     // formats the date according to the provided computable format
     _getComputableDate = (date) => date.format(this.props.computableFormat);
 
@@ -408,8 +367,6 @@ class BaseCalendar extends React.Component {
         e.stopPropagation();
     };
 
-    _usePortal = () => hasFlag(this, "use-portal");
-
     _getReference = () => this.reference;
 
     render() {
@@ -441,19 +398,17 @@ class BaseCalendar extends React.Component {
             </div>
         );
 
-        const popup = (this._usePortal()
-            ? (
-                <PopperContainer
-                    className="calendar-popup"
-                    data-parent={this.props["data-id"]}
-                    getReference={this._getReference}
-                    placement="bottom-start"
-                    ref={el => this.popperContainer = el}
-                >
-                    {calendar}
-                </PopperContainer>
-            )
-            : calendar
+        const popup = (
+            <PopperContainer
+                data-parent={this.props["data-id"]}
+                className="calendar-popup"
+                data-parent={this.props["data-id"]}
+                getReference={this._getReference}
+                placement="bottom-start"
+                ref={el => this.popperContainer = el}
+            >
+                {calendar}
+            </PopperContainer>
         );
 
         const inputValue = this.state.inputValue === undefined
@@ -466,7 +421,7 @@ class BaseCalendar extends React.Component {
             "value-entered": !!inputValue,
             "input-calendar--width-tight": this.props.tight,
         });
-        
+
         return (
             <div
                 className={className}
@@ -501,25 +456,13 @@ class BaseCalendar extends React.Component {
     }
 }
 
-const PStatefulCalendar = inStateContainer([
+const Calendar = inStateContainer([
     {
         name: "date",
         initial: moment(),
         setter: "onValueChange",
     },
 ])(BaseCalendar);
-
-const Calendar = (props, context) => {
-    if (hasFlag({ props, context }, "p-stateful")) {
-        return <PStatefulCalendar {...props} statelessDate />;
-    }
-    cannonballChangeWarning({
-        message: `The 'date' prop will no longer serve as an initial state. ` +
-        `If it is present, it will control the current value of the component. ` +
-        `Set the 'p-stateful' flag to switch to this behavior now.`,
-    });
-    return <BaseCalendar {...props} />;
-};
 
 Calendar.Views = Views;
 Calendar.FormLabel = FormLabel;

@@ -101,7 +101,6 @@ class UserNav extends React.Component {
                         onClick={this._handleSignOut}
                     />
                     <PopOverNavMenu
-                        flags={["use-portal"]}
                         className="user-nav__dropdown-menu"
                         label={<UserInfo user={user}/> }
                         items={[

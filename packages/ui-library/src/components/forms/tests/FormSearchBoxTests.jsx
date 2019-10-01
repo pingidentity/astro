@@ -79,7 +79,7 @@ describe("FormSearchBox", function () {
     it("v4: should fire onChange when field changes", function () {
         var handleOnChange = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
-            <FormSearchBox onValueChange={handleOnChange} flags={["p-stateful"]} />
+            <FormSearchBox onValueChange={handleOnChange} />
         );
 
         var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component, "FormSearchBox");
@@ -263,7 +263,7 @@ describe("FormSearchBox", function () {
 
     it("v4: searchBoxFocus should focus search input field", function () {
         document.activeElement.blur();
-        var component = getComponent({ queryString: "test", flags: [ "p-stateful" ] }),
+        var component = getComponent({ queryString: "test", }),
             searchInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         expect(document.activeElement).toBe(document.body);
@@ -283,17 +283,5 @@ describe("FormSearchBox", function () {
         component.searchBoxFocus();
         expect(document.activeElement).toBe(searchInput);
         expect(component.isFocused()).toBe(true);
-    });
-
-    it("fires cannonball warning when the p-stateful flag is not set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire cannonball warning when the p-stateful flag is set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
     });
 });

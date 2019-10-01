@@ -34,7 +34,7 @@ describe("Icon", function () {
             component = getComponent({
                 "data-id": dataId,
                 iconName: iconName,
-                children: childContent
+                children: childContent,
             }),
             iconContainer = TestUtils.findRenderedDOMNodeWithDataId(component, dataId),
             iconGraphic = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-graphic"),
@@ -86,16 +86,9 @@ describe("Icon", function () {
         expect(component.find(".icon--size-sm").exists()).toEqual(true);
     });
 
-    it("fires cannonball warning if type isn't set and there are no children", function() {
-        console.warn = jest.fn();
-        expect(console.warn).not.toBeCalled();
-        getComponent();
-        expect(console.warn).toBeCalled();
-    });
-
     it("renders title if that prop is passed in", () => {
         const component = shallow(
-            <Icon iconName="globe" title="Test" />
+            <Icon iconName="globe" title="Test" type="leading" />
         ).dive();
 
         const label = component.find("label");

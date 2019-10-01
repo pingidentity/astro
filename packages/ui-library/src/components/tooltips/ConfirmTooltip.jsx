@@ -5,8 +5,7 @@ import DetailsTooltip, { DetailsTooltipStateless } from "../tooltips/DetailsTool
 
 import popsOver from "../../util/behaviors/popsOver";
 import ButtonGroup from "../layout/ButtonGroup";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class ConfirmTooltip
@@ -16,8 +15,6 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     The data-id of the component.
  * @param {node} label
  *     The text of the link.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning.
  *      When using multiple positions like "top left" or "bottom right" do not use dashes as it will not work.
@@ -88,12 +85,6 @@ class ConfirmTooltipBase extends Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "ConfirmTooltip" });
-        }
-    }
 
     _handleConfirm = e => {
         if (this.props.onConfirm) {

@@ -10,11 +10,9 @@ import EllipsisLoaderButton from "../general/EllipsisLoaderButton";
 import HelpHint from "../tooltips/HelpHint";
 import Progress from "./Progress";
 import classnames from "classnames";
-import Utils from "../../util/Utils";
 import Translator from "../../util/i18n/Translator.js";
 import _ from "underscore";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
  * @callback Wizard#Step~onNext
@@ -38,8 +36,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
  *
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render the tooltip with popper.js and react-portal
  * @param {string} [hintText]
  *     String tooltip help text
  * @param {string} labelEdit
@@ -139,25 +135,6 @@ class Step extends React.Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.doneButtonStyle) {
-                throw new Error(Utils.deprecatePropError("doneButtonStyle", "doneButtonClassName"));
-            }
-            if (this.props.nextButtonStyle) {
-                throw new Error(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
-            }
-        }
-
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "Step" });
-        }
-    }
 
     _edit = () => {
         if (this.props.onEdit && !this.props.showPulsing) {

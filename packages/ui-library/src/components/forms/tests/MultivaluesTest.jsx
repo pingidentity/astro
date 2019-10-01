@@ -9,7 +9,6 @@ jest.mock("react-portal");
 import React from "react";
 import { snapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
-import Utils from "../../../util/Utils";
 import TestUtils from "../../../testutil/TestUtils";
 import { MultivaluesBase as Multivalues } from "../Multivalues";
 import { KeyCodes } from "../../../util/KeyboardUtils";
@@ -339,45 +338,6 @@ describe("Multivalues", function () {
             initEdit(component, 1);
             expect(callback).not.toHaveBeenCalledWith();
         });
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <Multivalues
-                    id="foo"
-                    title="bar" entries={[ ]} onValueChange={jest.fn()} onNewValue={jest.fn()}
-                />
-            );
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onChange' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <Multivalues
-                    onChange={jest.fn()}
-                    title="bar" entries={[ ]} onNewValue={jest.fn()}
-                />
-            );
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'isRequired' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("isRequired", "required"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <Multivalues
-                    isRequired={true}
-                    title="bar" entries={[ ]} onValueChange={jest.fn()} onNewValue={jest.fn()}
-                />
-            );
-        }).toThrow(expectedError);
     });
 
     it("renders with autofocus true", function () {

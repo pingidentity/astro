@@ -26,36 +26,10 @@ describe("Popover", function() {
         window.removeEventListener.mockClear();
     });
 
-    it("renders open state", function() {
-        var component = ReactTestUtils.renderIntoDocument(
-            <div>
-                <Popover label="hello" open={true}>
-                    <div className="content">Popover</div>
-                </Popover>
-            </div>
-        );
-        var popoverContainer = TestUtils.scryRenderedDOMNodesWithClass(
-            component,
-            "popover__container"
-        );
-        var popupFrame = TestUtils.scryRenderedDOMNodesWithClass(
-            component,
-            "popup-frame"
-        );
-        var content = TestUtils.scryRenderedDOMNodesWithClass(
-            component,
-            "content"
-        );
-
-        expect(popoverContainer.length).toBe(1);
-        expect(popupFrame.length).toBe(1);
-        expect(content.length).toBe(1);
-    });
-
     it("renders open state using portal", function() {
         var component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} flags={[ "use-portal" ]}>
+                <Popover label="hello" open={true}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -146,7 +120,7 @@ describe("Popover", function() {
     it("renders with top and left placement using a portal", function() {
         var component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="top left" flags={[ "use-portal" ]}>
+                <Popover label="hello" open={true} placement="top left">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -167,7 +141,7 @@ describe("Popover", function() {
     it("renders with right placement using a portal", function() {
         var component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="right" flags={[ "use-portal" ]}>
+                <Popover label="hello" open={true} placement="right">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -183,7 +157,7 @@ describe("Popover", function() {
     it("renders with center placement using a portal", function() {
         var component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="center" flags={[ "use-portal" ]}>
+                <Popover label="hello" open={true} placement="center">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -356,6 +330,11 @@ describe("Popover", function() {
 
     it("triggers callback when clicked outside", function() {
         var callback = jest.fn();
+
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
 
         ReactTestUtils.renderIntoDocument(
             <div>

@@ -8,8 +8,6 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for Toggle
 */
 class ToggleDemo extends React.Component {
-    static flags = ["p-stateful"];
-
     state = {
         toggled1: false,
         toggled2: false,

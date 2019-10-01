@@ -16,7 +16,6 @@ jest.dontMock("../SelectText");
 describe("SelectText", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
-    var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var SelectText = require("../SelectText");
     var Wrapper = TestUtils.UpdatePropsWrapper;
@@ -266,16 +265,6 @@ describe("SelectText", function () {
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "select-text");
 
         expect(element).toBeDefined();
-    });
-
-    it("throws error when deprecated prop 'dataId' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("dataId", "data-id"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <SelectText dataId="foo">bar</SelectText>
-            );
-        }).toThrow(expectedError);
     });
 
 });

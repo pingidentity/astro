@@ -4,7 +4,6 @@ var React = require("react"),
     Toggle = require("./form-toggle"),
     If = require("../general/If"),
     _ = require("underscore"),
-    Utils = require("../../util/Utils.js"),
     FormLabel = require("./FormLabel"),
     FormSearchBox = require("./FormSearchBox");
 
@@ -204,27 +203,6 @@ class Stateless extends React.Component {
         queryString: "",
         hideUnchecked: false
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-            }
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.onSelectionChange) {
-                throw new Error(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
-            }
-            if (props.labelSelectAll) {
-                throw new Error(Utils.deprecatePropError("labelSelectAll", "onGetSelectAllLabel"));
-            }
-            if (props.labelDeselectAll) {
-                throw new Error(Utils.deprecatePropError("labelDeselectAll", "onGetDeselectAllLabel"));
-            }
-        }
-    }
 
     _isAllSelected = (visibleItems, isSelected) => {
         return _.every(visibleItems, isSelected);

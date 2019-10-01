@@ -190,7 +190,6 @@ class WizardDemoDragScreen extends React.Component {
                         onRemove={this._handleRemoveStateless}
                         labelEmpty="No Items Available"
                         disabled={this.state.disabled}
-                        flags={["use-portal", "p-stateful"]}
                     />
                 </div>
             </div>

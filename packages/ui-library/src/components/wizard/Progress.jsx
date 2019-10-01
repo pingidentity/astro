@@ -31,13 +31,6 @@ class Progress extends React.Component {
         "data-id": "progress"
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
-
     _style = () => {
         return format("progress step{step} of{of}", this.props) +
             (this.props.done ? " done" : "") +

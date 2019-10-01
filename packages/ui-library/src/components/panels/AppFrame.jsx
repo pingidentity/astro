@@ -5,8 +5,7 @@ import LeftNav from "./left-nav";
 import KeywordSearch from "../forms/KeywordSearch";
 import Modal from "../general/Modal";
 import { deprecatedProp } from "../../util/DeprecationUtils";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 import _ from "underscore";
 
@@ -43,8 +42,6 @@ import _ from "underscore";
  *          Handler for when a section is toggled. Accepts the id of the section.
  * @param {bool} [searchable]
  *          This is an experimental prop that is not ready for production.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  */
 
 /**
@@ -107,12 +104,6 @@ class AppFrame extends React.Component {
 
     state = {
         searchOpen: false
-    }
-
-    componentDidMount() {
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "AppFrame" });
-        }
     }
 
     /**
@@ -283,7 +274,6 @@ class AppFrame extends React.Component {
                     modalTitle="Search"
                     type="dialog"
                     onClose={closeModal}
-                    flags={["use-portal"]}
                 >
                     <KeywordSearch
                         data-id="app-frame-search"
@@ -370,7 +360,6 @@ class AppFrame extends React.Component {
                     onSectionValueChange={this._handleSectionChange}
                     onItemValueChange={this._handleItemChange}
                     tree={tree}
-                    updated={true}
                 />
                 {this.props.children}
                 {this._renderSearchModal()}

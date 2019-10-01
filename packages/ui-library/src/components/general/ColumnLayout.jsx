@@ -52,13 +52,6 @@ class Row extends React.Component {
         "data-id": "row"
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
-
     render() {
         var className = classnames(
             "content-columns", this.props.className,
@@ -101,13 +94,6 @@ class Column extends React.Component {
     static defaultProps = {
         "data-id": "column-layout"
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
 
     render() {
         return (

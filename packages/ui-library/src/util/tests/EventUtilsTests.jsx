@@ -8,6 +8,13 @@ describe("ReduxUtils", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../EventUtils");
 
+    beforeEach(function() {
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+    });
+
     it("Forwards checked attribute", function () {
         var callback = jest.fn();
         var wrapper = Utils.forwardTargetChecked(callback);
@@ -61,7 +68,40 @@ describe("ReduxUtils", function () {
         callback.mockClear();
     });
 
+    it("does not call call back when text selected", function () {
+
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "text",
+        });
+        class MockComp extends React.Component {
+            _handleClick = (e) => {
+                Utils.callIfOutsideOfContainer(
+                    ReactDOM.findDOMNode(this.refs.inner),
+                    this.props.onClick, e);
+            };
+
+            render() {
+                return (
+                    <div ref="outer" onClick={this._handleClick}>
+                        <div ref="inner" onClick={this._handleClick}>
+                            <div ref="innerMost" onClick={this._handleClick}>
+                            </div>
+                        </div>
+                    </div>);
+            }
+        }
+
+        var callback = jest.fn();
+        var component = ReactTestUtils.renderIntoDocument(<MockComp onClick={callback} />);
+
+        ReactTestUtils.Simulate.click(component.refs.outer);
+        expect(callback).not.toBeCalled();
+        callback.mockClear();
+    });
+
     it("prevents default on specified keys and not on others", function() {
+
         const map = { 13: () => true };
 
         const event = {

@@ -9,8 +9,6 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for FormTimeZone
 */
 class FormTimeZoneDemo extends React.Component {
-    static flags = [ "use-portal", "p-stateful" ];
-
     constructor(props) {
         super(props);
         let state = {};
@@ -76,7 +74,6 @@ class FormTimeZoneDemo extends React.Component {
     }
 
     render() {
-        const { flags } = this.props;
 
         return (
             <div>
@@ -123,7 +120,7 @@ class FormTimeZoneDemo extends React.Component {
                         labelText="Stateful Version"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"
-                        {...flags.includes("p-stateful") ? { initialState: { open: true } } : { open: true }}
+                        initialState={{ open: true }}
                         filterByCountry="US"
                     />
                 </InputRow>

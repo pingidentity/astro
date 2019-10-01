@@ -1,3 +1,6 @@
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../Modal");
 jest.dontMock("../If");
 jest.dontMock("../../../util/EventUtils.js");
@@ -24,7 +27,6 @@ describe("ModalTest v4", function () {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
         window.setTimeout.mockClear();
-
     });
 
     function getComponent (opts) {
@@ -94,6 +96,11 @@ describe("ModalTest v4", function () {
             stopPropagation: jest.fn(),
             preventDefault: jest.fn()
         };
+
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
 
         //expect that the collapsed modal does not process keypress events
         handler(e);
@@ -266,18 +273,6 @@ describe("ModalTest v4", function () {
         expect(tooltipDenyBtn.textContent).toBe(modalParams.cancelTooltip.cancelButtonText);
         expect(tooltipTitle.textContent).toBe(modalParams.cancelTooltip.title);
         expect(tooltipText.textContent).toBe(modalParams.cancelTooltip.messageText);
-    });
-
-    it("fires cannonball warning if use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire cannonball warning if use-portal is set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal" ], expanded: true });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

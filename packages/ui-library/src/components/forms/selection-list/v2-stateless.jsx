@@ -208,7 +208,6 @@ export default class SelectionListStateless extends React.Component {
                             placeholder={this.props.searchPlaceholder}
                             onValueChange={this.props.onSearch}
                             width="MAX"
-                            flags={[ "p-stateful" ]}
                             {...this.props.searchBoxProps} // band-aid fix to allow overriding the stateful text field
                         />
                     </div>

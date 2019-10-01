@@ -88,7 +88,6 @@ export default class SAMLSigningSettings extends Component {
                         </TabContent>
                         <TabContent label="Configuration">
                             <Section
-                                flags={["p-stateful"]}
                                 title="Connection Settings"
                                 onToggle={this._toggleFirst}
                                 expanded={this.state.firstSectionOpen}
@@ -128,7 +127,6 @@ export default class SAMLSigningSettings extends Component {
                             </Section>
 
                             <Section
-                                flags={["p-stateful"]}
                                 title="SAML Settings"
                                 onToggle={this._toggleSecond}
                                 expanded={this.state.secondSectionOpen}
@@ -137,7 +135,6 @@ export default class SAMLSigningSettings extends Component {
                                     <FormTextArea
                                         labelText="ACS URLs (Assertion Consumer Service)"
                                         width={InputWidths.MD}
-                                        flags={["p-stateful", "use-portal"]}
                                     />
                                 </InputRow>
                                 <InputRow>
@@ -145,7 +142,6 @@ export default class SAMLSigningSettings extends Component {
                                         data-id="demo-1"
                                         emptyMessage={"Do nothing"}
                                         label="Signing Certificate"
-                                        flags={["p-stateful", "use-portal"]}
                                         type={ConditionalFieldsetTypes.SELECT}
                                     >
                                         <div title="(Default) P1 Universal Signing Cert 2018" icon="certificate">
@@ -164,7 +160,6 @@ export default class SAMLSigningSettings extends Component {
                                                         { id: "2", name: "Response" },
                                                         { id: "3", name: "Assertion & Response" },
                                                     ]}
-                                                    flags={["p-stateful"]}
                                                     stacked={false}
                                                 />
                                             </FlexRow>
@@ -186,7 +181,6 @@ export default class SAMLSigningSettings extends Component {
                                                         { id: "2", name: "Response" },
                                                         { id: "3", name: "Assertion & Response" },
                                                     ]}
-                                                    flags={["p-stateful"]}
                                                     stacked={false}
                                                 />
                                             </FlexRow>
@@ -196,7 +190,6 @@ export default class SAMLSigningSettings extends Component {
                                 <InputRow>
                                     <FormTextField
                                         label="Service Provider (SP) Entity ID" placeholder="https://"
-                                        flags={["p-stateful"]}
                                     />
                                 </InputRow>
                                 <InputRow>
@@ -204,12 +197,10 @@ export default class SAMLSigningSettings extends Component {
                                         <FormTextField
                                             label="Single Logout (SLO) Response Endpoint"
                                             placeholder="https://"
-                                            flags={["p-stateful"]}
                                         />
                                         <FormTextField
                                             label="Single Logout (SLO) Endpoint"
                                             placeholder="https://"
-                                            flags={["p-stateful"]}
                                         />
                                     </InputRow>
                                 </InputRow>
@@ -224,7 +215,6 @@ export default class SAMLSigningSettings extends Component {
                                                 { id: "2", name: "Http Redirect" },
                                             ]}
                                             stacked={false}
-                                            flags={["p-stateful"]}
                                             labelText="Single Logout (SLO) Binding"
                                         />
                                     </InputRow>
@@ -233,7 +223,6 @@ export default class SAMLSigningSettings extends Component {
                                     <FormTextField
                                         labelText="Assertation Validity Duration (In Seconds)"
                                         width={InputWidths.SM}
-                                        flags={["p-stateful"]}
                                     />
                                 </InputRow>
                                 <InputRow>
@@ -261,7 +250,6 @@ export default class SAMLSigningSettings extends Component {
                                         selectedOption={this.state.selectedValue1}
                                         onValueChange={this._handleAlgoChange}
                                         width={InputWidths.LG}
-                                        flags={["p-stateful", "use-portal"]}
                                     />
                                 </InputRow>
                             </Section>

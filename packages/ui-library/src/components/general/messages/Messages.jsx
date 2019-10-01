@@ -4,12 +4,10 @@ import PropTypes from "prop-types";
 
 import React from "react";
 import classnames from "classnames";
-import Utils from "../../../util/Utils";
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import _ from "underscore";
 
-import { MessageTypes, Layouts } from "./MessagesConstants";
-import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
+import { Layouts } from "./MessagesConstants";
+import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -86,8 +84,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
  * @param {number} [defaultMessageTimeout]
  *     Default message timeout in ms. Messages will remove themselves after this time, unless the message specifically
  *     overrides the default timeout itself.
- * @param {array} [flags]
- *     Set the flag for "fixed-messages-constants" to use WARNING and INFO correctly
  *
  * @example
  * Usage:
@@ -118,21 +114,6 @@ module.exports = class extends React.Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.removeMessage) {
-                throw new Error(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
-            }
-            if (props.i18n) {
-                throw new Error(Utils.deprecatePropError("i18n", "onI18n"));
-            }
-        }
-    }
 
     render() {
         const {
@@ -202,15 +183,6 @@ class Message extends React.Component {
         if (interval) {
             this.interval = global.setInterval(this._handleRemove, interval);
         }
-
-        if (this.props.message.type === MessageTypes.WARNING && !this._fixedConstants()) {
-            cannonballChangeWarning({
-                message: (
-                    `The WARNING message type will use the yellow style instead of the red. ` +
-                    `Add the 'fixed-messages-constants' flag to Messages or use the ERROR or NOTICE constant.`
-                ),
-            });
-        }
     }
 
     componentWillUnmount() {
@@ -246,23 +218,6 @@ class Message extends React.Component {
         );
     }
 
-    _translatedConstants = {
-        [MessageTypes.SUCCESS]: MessageTypes.SUCCESS,
-        [MessageTypes.ERROR]: MessageTypes.ERROR,
-        [MessageTypes.WARNING]: MessageTypes.NOTICE,
-        [MessageTypes.NOTICE]: MessageTypes.NOTICE,
-        [MessageTypes.FEATURE]: MessageTypes.FEATURE,
-        [MessageTypes.INFO]: MessageTypes.FEATURE,
-    };
-
-    _fixedConstants = () => hasFlag(this, "fixed-messages-constants");
-
-    _transformType = type => (
-        this._fixedConstants()
-            ? this._translatedConstants[type]
-            : type
-    );
-
     render() {
         const {
             message: {
@@ -279,7 +234,7 @@ class Message extends React.Component {
         } = this.props;
 
         const text = message.text || this.props.onI18n(key, params);
-        const classes = classnames("message show", this._transformType(type), {
+        const classes = classnames("message show", type, {
             "message--minimized": minimized,
             "message--corner": layout === Layouts.CORNER,
             "message--center": layout === Layouts.CENTER,

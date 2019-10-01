@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../PopoverMenu");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Utils.js");

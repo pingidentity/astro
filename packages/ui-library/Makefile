@@ -1,4 +1,3 @@
-COVERAGE_ADDRESS=https://art01.corp.pingidentity.com/artifactory/inhouse/com/pingone/ui-library/ui-library-coverage
 HOSTING_SERVER_ADDRESS=uilibrary.ping-eng.com
 HOSTING_SERVER_USERNAME=ubuntu
 
@@ -44,7 +43,9 @@ GIT_VERSION := $(shell sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*
 
 # check that version number ends with -SNAPSHOT, error out if it doesn't
 ifeq (,$(findstring -SNAPSHOT,$(GIT_VERSION)))
+ifeq (,$(findstring -BETA,$(GIT_VERSION)))
 $(error The version number does not contain -SNAPSHOT; cannot continue)
+endif
 endif
 
 # get the final version by removing the -SNAPSHOT part from the version number
@@ -74,18 +75,6 @@ else
 	PACKAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
 	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)-$(GIT_BRANCH)
 	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)-$(GIT_BRANCH)
-endif
-
-
-# find the name of the reference coverage to download, by sending HEAD requests for various coverage packages:
-# get the latest for the current branch;
-# if not available, get the latest from master (with no suffix);
-# if no coverage is found, fail the build
-COVERAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
-COVERAGE_STATUS_CODE=$(shell curl -s -I $(COVERAGE_ADDRESS)/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
-ifneq ($(COVERAGE_STATUS_CODE),200)
-	COVERAGE_VERSION=$(GIT_VERSION)
-	COVERAGE_STATUS_CODE=$(shell curl -s -I $(COVERAGE_ADDRESS)/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
 endif
 
 # GERRIT_SSH_KEY_PATH variable will be passed in from the command line, see Jenkinsfile.release for example
@@ -164,15 +153,6 @@ define deploy_coverage
 		-s settings.xml
 endef
 
-define install_reference_coverage_report
-	rm -f ui-library-coverage-*.tar.gz
-	rm -rf coverage-reference
-	wget $(COVERAGE_ADDRESS)/$(1)/ui-library-coverage-$(1).tar.gz
-	mkdir coverage-reference
-	tar -xzf ui-library-coverage-$(1).tar.gz --strip 1 -C coverage-reference
-endef
-
-
 log-config:
 	@echo "Current branch: $(GIT_BRANCH)"
 	@echo "Current version: $(GIT_VERSION)"
@@ -206,16 +186,6 @@ verify: install-node-npm
 
 	# convert the lcov report to cobertura format to be published by Jenkins
 	python tools/lcov_cobertura.py coverage/lcov.info --base-dir . --output coverage/cobertura.xml
-
-	if [ "$(COVERAGE_STATUS_CODE)" -lt "200" ] || [ "$(COVERAGE_STATUS_CODE)" -ge "400" ]; then\
-		echo "Cannot find the coverage report to download";\
-		exit 1;\
-	fi
-
-	# download the coverage report from art01 for the current version
-	# verify the current coverage against the reference;
-	$(call install_reference_coverage_report,$(COVERAGE_VERSION))
-	node tools/verify_coverage.js
 
 integration: install-node-npm
 	rm -rf reports
@@ -338,3 +308,16 @@ package-and-upload-landing: install-node-npm
 		npm run pack-landing;\
 		scp -r -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} build-landing/* $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
 	fi
+
+# update the beta demo site
+package-and-upload-beta: install-node-npm
+	set -eo;\
+	rm -rf build;\
+	rm -rf build-doc;\
+	npm run doc;\
+	npm run pack;\
+	cp -rf build-doc build;\
+	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/beta;\
+	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/beta;\
+	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) chmod 755 /var/www/html/beta;\
+	scp -r -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} build/* $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/beta;

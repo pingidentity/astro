@@ -8,7 +8,6 @@ describe("Row", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         Layout = require("../ColumnLayout"),
-        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils");
 
     var colContent, customRowCss, customColCss, columns2, columns3, columns4, testNodeParent, testNodeChildren, i;
@@ -159,15 +158,4 @@ describe("Row", function () {
 
     });
 
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <Layout.Row id="foo">
-                    <Layout.Column>something</Layout.Column>
-                </Layout.Row>
-            );
-        }).toThrow(expectedError);
-    });
 });

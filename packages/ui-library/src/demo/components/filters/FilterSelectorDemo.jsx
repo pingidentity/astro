@@ -7,7 +7,6 @@ import FilterSelector from "ui-library/lib/components/filters/FilterSelector";
 * @desc A demo for FilterSelector
 */
 class FilterSelectorDemo extends React.Component {
-    static flags = [ "use-portal" ];
 
     state = {
         values1: [

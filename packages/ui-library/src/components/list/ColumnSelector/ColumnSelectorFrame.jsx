@@ -50,7 +50,6 @@ export default class ColumnSelector extends Component {
                     onValueChange={this._handleSearch}
                     placeholder={searchPlaceHolder}
                     queryString={query}
-                    flags={["p-stateful"]}
                 />
                 <div className={`${baseClassName}__columns`}>
                     {isFunction(children) ? children(this.state) : children}

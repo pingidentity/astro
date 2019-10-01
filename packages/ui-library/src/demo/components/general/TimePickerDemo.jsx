@@ -9,7 +9,6 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for TimePicker
 */
 class TimePickerDemo extends React.Component {
-    static flags = [ "use-portal" ];
 
     state = {
         a: "--",

@@ -4,7 +4,6 @@ var PropTypes = require("prop-types");
 
 var React = require("react"),
     classnames = require("classnames"),
-    Utils = require("../../util/Utils"),
     Button = require("../buttons/Button"),
     MessageTypes = require("../general/messages/MessagesConstants").MessageTypes;
 
@@ -90,13 +89,6 @@ class InlineMessage extends React.Component {
         type: MessageTypes.NOTICE,
         secondaryButtons: []
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.callback) {
-            throw new Error(Utils.deprecatePropError("callback", "onClick"));
-        }
-    }
 
     _showAction = () => {
         return (this.props.label !== undefined && this.props.onClick !== undefined);

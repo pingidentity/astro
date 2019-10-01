@@ -70,7 +70,6 @@ export default class RowBuilderDemo extends Component {
                                         key="dropdown"
                                         options={[{ label: "Name", value: "" } ]}
                                         label="Row with inputs"
-                                        flags={["p-stateful", "use-portal"]}
                                     />
                                 ),
                                 (
@@ -78,7 +77,6 @@ export default class RowBuilderDemo extends Component {
                                         key="textfield"
                                         labelText="Text field"
                                         stateless={false}
-                                        flags={["p-stateful"]}
                                     />
                                 )
                             ],
@@ -99,7 +97,6 @@ export default class RowBuilderDemo extends Component {
                                     key="textfield"
                                     placeholder="Rows without dividing lines"
                                     stateless={false}
-                                    flags={["p-stateful"]}
                                 />],
                                 this.state.secondRowIds
                             ),

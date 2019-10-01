@@ -10,7 +10,6 @@ import moment from "moment-range";
 import _ from "underscore";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import Utils from "../../../util/Utils";
 import { mount } from "enzyme";
 
 describe("Calendar", function () {
@@ -45,34 +44,14 @@ describe("Calendar", function () {
     });
 
     it("renders open state in portal", function () {
-        const wrapper = mountComponent({ date: selectedDate, flags: [ "use-portal" ] });
-        const component = wrapper.childAt(0);
+        const wrapper = mountComponent({ date: selectedDate });
+        const component = wrapper.childAt(0).childAt(0);
 
         component.instance().setState({ isVisible: true });
         wrapper.update();
 
         const calendar = wrapper.find("[data-id='input-calendar-wrapper']");
         expect(calendar.length).toBe(1);
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-
-        ReactTestUtils.renderIntoDocument(
-            <Calendar date={selectedDate} flags={[ "p-stateful" ]} />
-        );
-
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-
-        ReactTestUtils.renderIntoDocument(
-            <Calendar date={selectedDate} flags={[ "use-portal", "p-stateful" ]} />
-        );
-
-        expect(console.warn).not.toBeCalled();
     });
 
     it("renders with given data-id", function () {
@@ -147,119 +126,6 @@ describe("Calendar", function () {
 
         //make sure no calendar cells rendered (e.g. closed)
         expect(cells.length).toEqual(0);
-    });
-
-    it("is rendering days view", function () {
-        var component = getComponent({
-            format: "YYYY-MM-DD",
-            date: selectedDate,
-            computableFormat: "x",
-            closeOnSelect: true,
-            onValueChange: callback,
-        });
-
-        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
-
-        // open calendar
-        ReactTestUtils.Simulate.click(container, {});
-
-        var cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
-
-        // make sure calendar cells rendered: 35 days + 7 headers (MON-SUN)
-        expect(cells.length).toEqual(42);
-
-        // Navigate to September (previous month)
-        var prev = TestUtils.findRenderedDOMNodeWithClass(component, "icon-left");
-        ReactTestUtils.Simulate.click(prev, {});
-        var month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(month.textContent).toBe("September");
-
-        // Navigate back to October (next month)
-        var next = TestUtils.findRenderedDOMNodeWithClass(component, "icon-right");
-        ReactTestUtils.Simulate.click(next, {});
-        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(month.textContent).toBe("October");
-    });
-
-    it("is rendering months view", function () {
-        var component = getComponent({
-            format: "YYYY-MM-DD",
-            date: selectedDate,
-            computableFormat: "x",
-            closeOnSelect: true,
-            onValueChange: callback,
-        });
-
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
-
-        // open calendar
-        ReactTestUtils.Simulate.click(container, {});
-
-        // switch to months view
-        var navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        ReactTestUtils.Simulate.click(navigation, {});
-
-        var cells = TestUtils.scryRenderedDOMNodesWithClass(component, "month");
-
-        expect(cells.length).toEqual(12);
-
-        // Navigate to previous year
-        var prev = TestUtils.findRenderedDOMNodeWithClass(component, "icon-left");
-        ReactTestUtils.Simulate.click(prev, {});
-        var year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(parseInt(year.textContent)).toBe(moment(selectedDate).subtract(1, "years").year());
-
-        // Navigate back to selectedDate year
-        var next = TestUtils.findRenderedDOMNodeWithClass(component, "icon-right");
-        ReactTestUtils.Simulate.click(next, {});
-        year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(parseInt(year.textContent)).toBe(moment(selectedDate).year());
-
-        // let's select month and make sure we go back to days view
-        ReactTestUtils.Simulate.click(cells[0]);
-        cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
-        expect(cells.length).toEqual(42);
-
-    });
-
-    it("is rendering years view", function () {
-        var component = getComponent({
-            format: "YYYY-MM-DD",
-            date: selectedDate,
-            computableFormat: "x",
-            closeOnSelect: true,
-            onValueChange: callback,
-        });
-
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
-
-        //open calendar
-        ReactTestUtils.Simulate.click(container, {});
-
-        //Switch to months view
-        var navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        ReactTestUtils.Simulate.click(navigation, {});
-
-        //Switch to years view
-        navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        ReactTestUtils.Simulate.click(navigation, {});
-
-        // Navigate to previous year range
-        var prev = TestUtils.findRenderedDOMNodeWithClass(component, "icon-left");
-        ReactTestUtils.Simulate.click(prev, {});
-        var yearRange = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(yearRange.textContent).toBe("2000-2011");
-
-        // Navigate back to current year range
-        var next = TestUtils.findRenderedDOMNodeWithClass(component, "icon-right");
-        ReactTestUtils.Simulate.click(next, {});
-        yearRange = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(yearRange.textContent).toBe("2010-2021");
-
-        var cells = TestUtils.scryRenderedDOMNodesWithClass(component, "year");
-
-        //make sure calendar cells rendered: 12 years
-        expect(cells.length).toEqual(12);
     });
 
     it("renders as required when required set", function () {
@@ -498,39 +364,6 @@ describe("Calendar", function () {
         expect(cells.length).toEqual(0);
     });
 
-    it("renders with dates outside range disabled", function () {
-        var component = getComponent({
-            date: selectedDate,
-            dateRange: dateRange,
-        });
-
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
-
-        //open calendar
-        ReactTestUtils.Simulate.click(container, {});
-
-        //In October
-        var cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "day"));
-        cells = cells.filter(function (cell) {
-            return cell.classList.contains("disabled") && !cell.classList.contains("prev");
-        });
-
-        expect(cells.length).toBe(9); // dates 1 to 9 out of range
-
-        //Navigate to November
-        var next = TestUtils.scryRenderedDOMNodesWithClass(component, "icon")[1];
-        ReactTestUtils.Simulate.click(next, {});
-        var month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(month.textContent).toBe("November");
-
-        cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "day"));
-        cells = cells.filter(function (cell) {
-            return cell.classList.contains("disabled") && !cell.classList.contains("next");
-        });
-
-        expect(cells.length).toBe(10); // dates 21 - 30 out of range
-    });
-
     it("renders with months outside range disabled", function () {
         var component = getComponent({
             date: new Date(2015, 9, 15),
@@ -605,48 +438,6 @@ describe("Calendar", function () {
 
         //input was not updated
         expect(input.value).not.toBe("2080-12-04");
-    });
-
-    it("disables header arrow navigation if date out of range", function () {
-        var component = getComponent({
-            date: selectedDate,
-            dateRange: dateRange,
-        });
-
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
-
-        //open calendar
-        ReactTestUtils.Simulate.click(container, {});
-
-        //In October
-        var month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(month.textContent).toBe("October");
-
-        var arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
-        expect(arrows.length).toBe(2); // prev & next
-
-        //Nothing happens clicking disabled prev
-        var prev = arrows[0];
-        expect(prev.classList.contains("disabled")).toBe(true);
-        ReactTestUtils.Simulate.click(prev, {});
-        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(month.textContent).toBe("October");
-
-        //Navigate to with enabled next
-        var next = arrows[1];
-        ReactTestUtils.Simulate.click(next, {});
-        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(month.textContent).toBe("November");
-
-        arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
-        expect(arrows.length).toBe(2); // prev & next
-
-        //Nothing happens clicking disabled next
-        next = arrows[1];
-        expect(next.classList.contains("disabled")).toBe(true);
-        ReactTestUtils.Simulate.click(next, {});
-        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
-        expect(month.textContent).toBe("November");
     });
 
     it("disables header arrow navigation if month out of range", function () {
@@ -802,59 +593,6 @@ describe("Calendar", function () {
         expect(callback).not.toBeCalled();
     });
 
-
-    it("prevView navigation does not trigger onValueChange callback when date out of range", function () {
-        const wrapper = mountComponent({
-            date: selectedDate, dateRange: dateRange, onValueChange: callback,
-        });
-        const component = wrapper.childAt(0);
-
-        component.instance().prevView(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
-        expect(callback).not.toBeCalled();
-    });
-
-    it("prevView navigation does trigger onValueChange callback when there's no", function () {
-        const wrapper = mountComponent({
-            date: selectedDate, onValueChange: callback,
-        });
-        const component = wrapper.childAt(0);
-
-        component.instance().prevView(moment(new Date(2015, 9, 1)));
-        expect(callback).toBeCalled();
-    });
-
-    it("setDate does not trigger onValueChange callback when date out of range", function () {
-        const wrapper = mountComponent({
-            date: selectedDate, dateRange: dateRange, onValueChange: callback,
-        });
-        const component = wrapper.childAt(0);
-
-        component.instance().setDate(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
-        expect(callback).not.toBeCalled();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onChange' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-
-        expect(() => getComponent({ onChange: jest.fn() })).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'isRequired' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("isRequired", "required"));
-
-        expect(function () {
-            getComponent({ isRequired: true });
-        }).toThrow(expectedError);
-    });
-
     it("should hide calendar when clicking input text to type date", () => {
         var component = getComponent();
 
@@ -868,7 +606,6 @@ describe("Calendar", function () {
                 date: selectedDate,
             },
             closeOnSelect: false,
-            flags: [ "p-stateful" ],
         });
 
         const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
@@ -889,7 +626,6 @@ describe("Calendar", function () {
         const component = getComponent({
             computableFormat: "x",
             date: "1552766657444",
-            flags: [ "p-stateful", "use-portal" ],
         });
 
         const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
@@ -897,47 +633,12 @@ describe("Calendar", function () {
         expect(textInput.value).toBe("03-16-2019");
     });
 
-    it("changes the internal state when a new prop date is received", function() {
-        const wrapper = mount(
-            <TestUtils.StateWrapper initialState={{ date: selectedDate }}>
-                {state => <Calendar {...state} />}
-            </TestUtils.StateWrapper>
-        );
-        const component = wrapper.childAt(0).childAt(0);
-        expect(component.instance().state.date).toBe(selectedDate);
-
-        const badDate = moment("11-08-2016");
-
-        component.instance().setState({ date: badDate });
-        expect(component.instance().state.date).toBe(badDate);
-
-        const newDate = moment("03-16-2019");
-
-        wrapper.instance().setState({ date: undefined });
-        expect(component.instance().state.date).toBe(badDate);
-
-        wrapper.instance().setState({ date: newDate });
-        expect(component.instance().state.date).toBe(newDate);
-    });
-
     it("puts empty string in input when date is null", function() {
-        const component = getComponent({ date: null, flags: [ "p-stateful", "use-portal" ] });
+        const component = getComponent({ date: null });
 
         const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
 
         expect(textInput.value).toBe("");
-    });
-
-    it("fires Cannonball warning for p-stateful", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warnings if required flags are provided", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "p-stateful", "use-portal" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

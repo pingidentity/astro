@@ -1,7 +1,6 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
-    Utils = require("../../../util/Utils.js"),
     StatelessFileUpload = require("./v2-stateless"),
     StatefulFileUpload = require("./v2-stateful"),
     Constants = require("./v2-constants.js");
@@ -140,15 +139,6 @@ class FileUpload extends React.Component {
     };
 
     componentDidMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (this.props.title) {
-                throw new Error(Utils.deprecatePropError("title", "labelText"));
-            }
-        }
-
         if (this.props.stateless) {
             cannonballChangeWarning({
                 message: "The stateless version of FileUpload is deprecated.",

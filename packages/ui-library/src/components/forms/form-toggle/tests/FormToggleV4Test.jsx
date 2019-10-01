@@ -9,7 +9,6 @@ describe("Toggle v4", function () {
     const ReactTestUtils = require("react-dom/test-utils");
     const _ = require("underscore");
     const TestUtils = require("../../../../testutil/TestUtils");
-    const Utils = require("../../../../util/Utils");
     const Toggle = require("../v2");
 
     function getComponent (p) {
@@ -19,29 +18,15 @@ describe("Toggle v4", function () {
             flags: allFlags,
         });
 
-        return ReactTestUtils.renderIntoDocument(<Toggle {...props} />);
+        return TestUtils.renderInWrapper(<Toggle {...props} />);
     }
 
     it("data-id's don't change", () => {
         mountSnapshotDataIds(<Toggle flags={allFlags} />);
     });
 
-    it("stateless: renders the component with default data-id", function () {
+    it("renders the component with default data-id", function () {
         const component = getComponent();
-
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
-    });
-
-    it("progressively stateless: renders the component with default data-id", function () {
-        const component = getComponent({
-            flags: ["p-stateful"]
-        });
-
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
-    });
-
-    it("stateful: renders the component with default data-id", function () {
-        const component = getComponent({ stateless: false });
 
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
     });
@@ -95,11 +80,11 @@ describe("Toggle v4", function () {
 
         ReactTestUtils.Simulate.click(toggle);
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("does not error with default onToggle function", function () {
-        const component = ReactTestUtils.renderIntoDocument(<Toggle />);
+        const component = TestUtils.renderInWrapper(<Toggle />);
         const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
 
         ReactTestUtils.Simulate.click(toggle);
@@ -125,22 +110,14 @@ describe("Toggle v4", function () {
 
         ReactTestUtils.Simulate.click(toggle);
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
+    it("renders locked toggle", function() {
+        const component = getComponent({ status: Toggle.Status.LOCKED });
 
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
+        const locked = TestUtils.findRenderedDOMNodeWithClass(component, "locked");
+        expect(locked).toBeTruthy();
     });
 
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
 });

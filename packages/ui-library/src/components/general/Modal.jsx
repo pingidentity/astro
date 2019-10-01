@@ -8,8 +8,7 @@ import CancelTooltip from "./../tooltips/CancelTooltip";
 import If from "./If";
 import classnames from "classnames";
 import { Portal } from "react-portal";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @enum {string}
@@ -58,8 +57,6 @@ var Type = {
  * @param {Modal.Type} [type=Modal.Type.BASIC]
  *     Basic modal when not specified; a DIALOG modal has the "dialog" CSS class on it,
  *     same goes for the ALERT dialog.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with react-portal.
  *
  * @example
  *      <a onClick={this._toggleModal}>Open the Modal</a>
@@ -195,17 +192,6 @@ class Modal extends React.Component {
         if (this.props.expanded) {
             this._triggerEvent(true);
         }
-
-        if (!this._usePortal()) {
-            cannonballPortalWarning({ name: "Modal" });
-        }
-
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.id) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
     }
 
     componentDidUpdate(prevProps) {
@@ -224,8 +210,6 @@ class Modal extends React.Component {
             this._triggerEvent(false);
         }
     }
-
-    _usePortal = () => hasFlag(this, "use-portal");
 
     render() {
         if (!this.props.expanded) {
@@ -276,7 +260,7 @@ class Modal extends React.Component {
             </div>
         );
 
-        return this._usePortal() ? <Portal>{renderedModal}</Portal> : renderedModal;
+        return <Portal>{renderedModal}</Portal>;
     }
 }
 

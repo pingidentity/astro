@@ -19,8 +19,6 @@ const ITEMS = [
 * @desc A demo for FormSearchBox
 */
 class FormSearchBoxDemo extends React.Component {
-    static flags = [ "p-stateful" ];
-
     state = {
         items: ITEMS,
         queryString: "",

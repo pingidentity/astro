@@ -10,8 +10,6 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for Pagination
 */
 export default class PaginationDemo extends Component {
-    static flags = ["p-stateful"]
-
     items = new Array(100).fill("").map(
         (str, idx) => (
             <ExpandableRow

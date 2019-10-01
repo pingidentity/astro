@@ -11,7 +11,6 @@ describe("FormTextArea", function () {
         TestUtils = require("../../../../testutil/TestUtils"),
         FormTextArea = require("../v2"),
         HelpHint = require("../../../tooltips/HelpHint"),
-        Utils = require("../../../../util/Utils"),
         _ = require("underscore");
 
     function getComponent (props) {
@@ -22,7 +21,7 @@ describe("FormTextArea", function () {
             onBlur: jest.fn()
         });
 
-        return ReactTestUtils.renderIntoDocument(<FormTextArea {...props} />);
+        return TestUtils.renderInWrapper(<FormTextArea {...props} />);
     }
 
     it("renders the component", function () {
@@ -107,8 +106,8 @@ describe("FormTextArea", function () {
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        expect(component.props.onChange).toBeCalled();
-        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onChange).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
     });
 
     it("triggers the onBlur callback on field blur", function () {
@@ -118,7 +117,7 @@ describe("FormTextArea", function () {
 
         ReactTestUtils.Simulate.blur(field);
 
-        expect(component.props.onBlur).toBeCalled();
+        expect(component.props.children.props.onBlur).toBeCalled();
     });
 
     it("does not show the undo button if showUndo is not set to true", function () {
@@ -190,13 +189,6 @@ describe("FormTextArea", function () {
         expect(field).toBeDefined();
     });
 
-    it("stateful: assigns empty string to value state when no value or defaultValue given", function () {
-        var component = getComponent({ stateless: false }),
-            componentRef = component.refs.FormTextAreaStateful;
-
-        expect(componentRef.state.value).toBe("");
-    });
-
     it("stateful: does not show the undo button if the originalValue param is not passed in", function () {
         var originalValue = "my original value";
         var component = getComponent({
@@ -208,61 +200,6 @@ describe("FormTextArea", function () {
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
-    });
-
-    it("stateful: shows the undo icon when text changes", function () {
-        var originalValue = "my original value";
-        var component = getComponent({
-            stateless: false,
-            defaultValue: originalValue,
-            originalValue: originalValue
-        });
-
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
-        expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
-    });
-
-    it("stateful: reverts the input text to its original value if the undo icon is clicked", function () {
-        var originalValue = "my original value";
-        var component = getComponent({
-            stateless: false,
-            defaultValue: originalValue,
-            originalValue: originalValue
-        });
-
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        // check that the undo icon gets displayed
-        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
-        expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
-        // click on the undo icon and verify that the field gets reverted to the original value
-        ReactTestUtils.Simulate.click(undo);
-        expect(field.value).toEqual(originalValue);
-        // now check that the undo icon dissapeared
-        undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
-        expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
-    });
-
-    it("stateful: fires the onValueChange callback when clicking on the undo icon", function () {
-        var originalValue = "my original value";
-        var component = getComponent({
-            stateless: false,
-            defaultValue: originalValue,
-            originalValue: originalValue
-        });
-
-        // make the undo icon appear by changing the field
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        // check that the icon is actually there
-        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
-        expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
-        // click on the undo icon
-        ReactTestUtils.Simulate.click(undo);
-        // now we can verify that the callback gets triggered
-        expect(component.props.onValueChange).toBeCalled();
     });
 
     /*
@@ -282,39 +219,6 @@ describe("FormTextArea", function () {
 
         expect(help).toBeTruthy();
         // expect(help.getAttribute("class")).toContain("bottom right");
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it ("throws the Cannonball warning when value is provided to a stateful text area", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: false, value: "something" });
-        expect(console.warn).toBeCalled();
-    });
-
-    it ("throws the Cannonball warning when value is not provided to a stateless text area", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: true });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("does not throw Cannonball warnings when the 'p-stateful' flag is set", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: true, flags: [ "p-stateful" ] });
-        getComponent({ stateless: false, value: "something", flags: [ "p-stateful" ] });
-        expect(console.warn).toHaveBeenCalledTimes(1);
     });
 
     it("does not block resizing by default", function() {

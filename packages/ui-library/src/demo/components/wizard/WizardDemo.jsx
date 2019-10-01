@@ -29,7 +29,6 @@ class WizardDemo extends React.Component {
         this._handlePick = this.actions.pick.bind(null, null);
     }
 
-    static flags = [ "use-portal" ];
 
     state = {
         isLoading: false,
@@ -129,7 +128,6 @@ class WizardDemo extends React.Component {
                     onDone={this._openSaveTooltip}
                     onCancel={this._openCancelTooltip}
                     showPulsing={this.state.isLoading}
-                    flags={["use-portal"]}
                     {...this.props}
                     {...BUTTON_LABELS}>
 

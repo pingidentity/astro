@@ -8,7 +8,6 @@ import PopoverMenu from "../../../components/tooltips/PopoverMenu";
  */
 
 class PopoverMenuDemo extends React.Component {
-    static flags = ["use-portal"];
 
     state = {
         open1: false,

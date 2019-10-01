@@ -5,7 +5,6 @@ import Utils from "../../../util/Utils";
 import fixOrientation from "fix-orientation";
 import readExif from "exif-js";
 import _ from "underscore";
-import { hasFlag } from "../../../util/FlagUtils";
 
 /**
  * @name FileUploadStateful
@@ -20,13 +19,9 @@ export default class FileUpload extends Component {
         onPreviewReady: _.noop
     };
 
-    _useTrueDefault = () => hasFlag(this, "true-default");
-
     state = {
         errorMessage: "",
-        thumbnailSrc: this._useTrueDefault()
-            ? this.props.thumbnailSrc
-            : this.props.defaultImage || this.props.thumbnailSrc,
+        thumbnailSrc: this.props.thumbnailSrc,
         labelAcceptedFileTypes: this.props.labelAcceptedFileTypes || this.props.accept.split("image/").join("")
     };
 

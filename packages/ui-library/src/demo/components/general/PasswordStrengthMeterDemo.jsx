@@ -37,7 +37,6 @@ class PasswordStrengthMeterDemo extends React.Component {
         return (
             <div>
                 <FormTextField
-                    flags={["p-stateful"]}
                     onValueChange={this._handleChange}
                     placeholder="Enter a password"
                     value={password}

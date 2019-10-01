@@ -9,8 +9,6 @@ import HR from "ui-library/lib/components/general/HR";
  */
 
 class ButtonsDemo extends Component {
-    static flags = [ "add-button-margin" ];
-
     state = {
         loading1: false,
         loading2: false

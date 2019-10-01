@@ -30,9 +30,8 @@ describe("ColorPicker v4", function () {
             onValueChange: jest.fn(),
             onError: jest.fn(),
             color: "#fff",
-            flags: [ "use-portal", "p-stateful" ],
         });
-        return ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
+        return TestUtils.renderInWrapper(<ColorPicker {...opts} />);
     }
 
     function getParts (component) {
@@ -98,20 +97,24 @@ describe("ColorPicker v4", function () {
 
         ReactTestUtils.Simulate.focus(input, { nativeEvent: { relatedTarget: {} } });
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: closes on a global click", function () {
         var component = getComponent({ stateless: true, open: true });
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = { target: document.body };
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
 
         //click outside
         handler(e);
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("stateless: skips the global click handler if not open and click outside of picker", function () {
@@ -119,12 +122,12 @@ describe("ColorPicker v4", function () {
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = { target: document.body };
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
 
         //click outside
         handler(e);
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: skips the global click handler if not open and click inside picker", function () {
@@ -135,7 +138,7 @@ describe("ColorPicker v4", function () {
 
         //click on the inner swatch
         handler({ target: innerSwatch });
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: skips global click handler if the click is inside the component", function () {
@@ -145,7 +148,7 @@ describe("ColorPicker v4", function () {
 
 
         handler({ target: pickerNode });
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: renders as closed and enabled if open and disabled props are not provided", function () {
@@ -230,7 +233,7 @@ describe("ColorPicker v4", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#ff00aa" } });
-        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
+        expect(component.props.children.props.onValueChange).lastCalledWith("#ff00aa");
     });
 
     it("stateful: accepts valid user typed color", function () {
@@ -239,7 +242,7 @@ describe("ColorPicker v4", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#ff00aa" } });
-        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
+        expect(component.props.children.props.onValueChange).lastCalledWith("#ff00aa");
     });
 
     it("stateless: does not accept invalid user typed color", function () {
@@ -250,7 +253,7 @@ describe("ColorPicker v4", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#xxi" } });
-        expect(component.props.onValueChange).not.toBeCalled();
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
     });
 
     it("stateful: does not accept invalid user typed color", function () {
@@ -259,7 +262,7 @@ describe("ColorPicker v4", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#xxi" } });
-        expect(component.props.onValueChange).not.toBeCalled();
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
     });
 
     it("stateless: triggers error for invalid user typed color on blur", function () {
@@ -269,7 +272,7 @@ describe("ColorPicker v4", function () {
         var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         ReactTestUtils.Simulate.blur(input, { target: { value: "#ff" } });
-        expect(component.props.onError).toBeCalled();
+        expect(component.props.children.props.onError).toBeCalled();
     });
 
     it("stateless: does not triggers error for valid user typed color on blur", function () {
@@ -279,7 +282,7 @@ describe("ColorPicker v4", function () {
         var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         ReactTestUtils.Simulate.blur(input, { target: { value: "#000" } });
-        expect(component.props.onError).not.toBeCalled();
+        expect(component.props.children.props.onError).not.toBeCalled();
     });
 
     it("stateless: prepends '#' to user typed color if it does not start with '#'", function () {
@@ -290,10 +293,10 @@ describe("ColorPicker v4", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "ff00aa" } });
-        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
+        expect(component.props.children.props.onValueChange).lastCalledWith("#ff00aa");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "#aabbcc" } });
-        expect(component.props.onValueChange).lastCalledWith("#aabbcc");
+        expect(component.props.children.props.onValueChange).lastCalledWith("#aabbcc");
     });
 
     it("stateful: prepends '#' to user typed color if it does not start with '#'", function () {
@@ -302,10 +305,10 @@ describe("ColorPicker v4", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "ff00aa" } });
-        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
+        expect(component.props.children.props.onValueChange).lastCalledWith("#ff00aa");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "#aabbcc" } });
-        expect(component.props.onValueChange).lastCalledWith("#aabbcc");
+        expect(component.props.children.props.onValueChange).lastCalledWith("#aabbcc");
     });
 
     it("stateless: detaches on unmount", function () {
@@ -331,7 +334,7 @@ describe("ColorPicker v4", function () {
         var e = { keyCode: 27 };
         stateless._handleGlobalKeyDown(e);
 
-        expect(component.props.onToggle.mock.calls.length).toBe(0);
+        expect(component.props.children.props.onToggle.mock.calls.length).toBe(0);
     });
 
     it("stateless: handle global key down when open", function () {
@@ -344,12 +347,12 @@ describe("ColorPicker v4", function () {
         // nothing happens when pressing any key other than ESC
         var e = { keyCode: 13 };
         stateless._handleGlobalKeyDown(e);
-        expect(component.props.onToggle.mock.calls.length).toBe(0);
+        expect(component.props.children.props.onToggle.mock.calls.length).toBe(0);
 
         // should call the onToggle callback on ESC key press
         e = { keyCode: 27 };
         stateless._handleGlobalKeyDown(e);
-        expect(component.props.onToggle.mock.calls.length).toBe(1);
+        expect(component.props.children.props.onToggle.mock.calls.length).toBe(1);
     });
 
     it("stateful: handle global key down", function () {
@@ -486,7 +489,7 @@ describe("ColorPicker v4", function () {
 
         ReactTestUtils.Simulate.focus(stateless.refs.innerSwatch, { nativeEvent: { relatedTarget: {} } });
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: open when the inner swatch is focused on", function () {
@@ -495,7 +498,7 @@ describe("ColorPicker v4", function () {
 
         ReactTestUtils.Simulate.focus(stateless.refs.innerSwatch, { nativeEvent: { relatedTarget: false } });
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("stateful: open when the inner swatch is clicked", function () {
@@ -518,9 +521,9 @@ describe("ColorPicker v4", function () {
         // simulate a call back from the react color picker component
         stateless._handleValueChange({ hex: "#aaa" });
 
-        expect(component.props.onValueChange.mock.calls.length).toBe(1);
-        expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
-        expect(component.props.onValueChange.mock.calls[0][1]).toBeUndefined();
+        expect(component.props.children.props.onValueChange.mock.calls.length).toBe(1);
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
+        expect(component.props.children.props.onValueChange.mock.calls[0][1]).toBeUndefined();
     });
 
     it("stateful: trigger onValueChange when color is picked", function () {
@@ -532,7 +535,7 @@ describe("ColorPicker v4", function () {
 
         // simulate a call back from the react color picker component
         stateless._handleValueChange("#aaa");
-        expect(component.props.onValueChange.mock.calls.length).toBe(1);
+        expect(component.props.children.props.onValueChange.mock.calls.length).toBe(1);
     });
 
     it("stateless: trigger onValueChange when mouse is dragged on the color picker", function () {
@@ -545,8 +548,8 @@ describe("ColorPicker v4", function () {
         // simulate a call back from the react color picker component
         stateless._handleDrag({ hex: "#aaa" });
 
-        expect(component.props.onValueChange.mock.calls.length).toBe(1);
-        expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
+        expect(component.props.children.props.onValueChange.mock.calls.length).toBe(1);
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
     });
 
     it("stateful: trigger onValueChange when mouse is dragged on the color picker", function () {
@@ -559,7 +562,7 @@ describe("ColorPicker v4", function () {
         // simulate a call back from the react color picker component
         stateless._handleDrag("#aaa");
 
-        expect(component.props.onValueChange.mock.calls.length).toBe(1);
+        expect(component.props.children.props.onValueChange.mock.calls.length).toBe(1);
         // and the color picker should not close
         expect(stateless.props.open).toBe(true);
     });
@@ -616,7 +619,6 @@ describe("ColorPicker v4", function () {
         var component = getComponent({
             stateless: true,
             open: true,
-            flags: [ "use-portal" ],
         });
 
         var element = TestUtils.findRenderedDOMNodeWithClass(component, "popover-display");

@@ -3,7 +3,6 @@
 var PropTypes = require("prop-types");
 
 var React = require("react"),
-    Utils = require("../../../util/Utils"),
     FormTextField = require("../../forms/form-text-field");
 
 /**
@@ -38,16 +37,6 @@ class TextFieldCell extends React.Component {
     static defaultProps = {
         "data-id": "grid-textfield-cell"
     };
-
-    constructor(props) {
-        super(props);
-        // TODO: figure out how to test separage throws in Jest and implement
-        /* istanbul ignore if  */
-        if (!Utils.isProduction() && props.onCallBack) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
-        }
-    }
 
     render() {
         return (

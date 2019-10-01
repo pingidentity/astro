@@ -5,15 +5,14 @@ import ReactDOM from "react-dom";
 import classnames from "classnames";
 import _ from "underscore";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
-import { inStateContainer, toggleTransform } from "../utils/StateContainer";
+import StateContainer, { toggleTransform } from "../utils/StateContainer";
 import Utils from "../../util/Utils";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import Anchor from "../general/Anchor";
 import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
 import ButtonGroup from "../layout/ButtonGroup";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
+import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
  * @callback DetailsTooltip~onToggle
@@ -27,8 +26,6 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {boolean} [stateless]
  *     WARNING. Default value for "stateless" will be set to false from next version.
  *     To enable the component to be externally managed.
@@ -40,9 +37,6 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     CSS classes to apply to title container.
  * @param {string} [labelClassName]
  *     CSS classes to set on the trigger label.
- * @param {DetailsTooltip.positionStyles|string} [positionClassName]
- *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
- *     DetailsTooltip.positionStyles enum and/or any extra css styling if needed.
  * @param {("top" | "bottom" | "top left" | "top right" | "bottom left" | "bottom right")} [placement]
  *     How the tooltip is placed off of its trigger.
  * @param {node} [label]
@@ -63,6 +57,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     Whether to close tooltip on content area click.
  * @param {boolean} [open=false]
  *     If true, tooltip is open or else closed.
+ *     When not provided, the component will manage this value.
  * @param {DetailsTooltip~onToggle} [onToggle]
  *     Callback to be triggered when label is clicked.
  * @param {DetailsTooltip~onKeyDown} [onKeyDown]
@@ -71,6 +66,8 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     Show close control.
  * @param {("basic" | "alert")} [type="basic"]
  *     Determines basic appearance
+* @param {("MD, LG")} [width]
+ *      If supplied, with add different width sizes for the tooltip.
  *
  * @example
  *     <DetailsTooltip position={DetailsTooltip.tooltipPositions.BOTTOM_LEFT} labelClassName="resend-btn"
@@ -97,6 +94,21 @@ const popupTypes = {
     ALERT: "alert"
 };
 
+const detailsWidth = {
+    MD: "medium",
+    LG: "large"
+};
+
+const getDetailsWidth = width => {
+    switch (width) {
+        case detailsWidth.LG:
+            return "details-tooltip-display--large";
+        case detailsWidth.MD:
+        default:
+            return "details-tooltip-display";
+    }
+};
+
 class DetailsTooltipStateless extends React.Component {
     static displayName = "DetailsTooltipStateless";
 
@@ -106,7 +118,8 @@ class DetailsTooltipStateless extends React.Component {
         contentClassName: PropTypes.string,
         titleClassName: PropTypes.string,
         labelClassname: PropTypes.string,
-        positionClassName: PropTypes.string,
+        positionClassName: deprecatedProp({ message: "Use the 'placement' prop to place the DetailsTooltip " +
+            "and set 'type' to alert for that special styling." }),
         placement: PropTypes.oneOf(Object.values(tooltipPlacements)),
         label: PropTypes.node,
         title: PropTypes.string,
@@ -121,12 +134,12 @@ class DetailsTooltipStateless extends React.Component {
         secondaryLabels: PropTypes.array,
         primaryLabels: PropTypes.array,
         cancelLabel: PropTypes.string,
-        flags: flagsPropType
+        flags: flagsPropType,
+        width: PropTypes.oneOf(Object.values(detailsWidth)),
     };
 
     static defaultProps = {
         "data-id": "details-tooltip",
-        positionClassName: "top", // revisit this after v4
         titleClassName: "details-title",
         onToggle: _.noop,
         open: false,
@@ -134,6 +147,8 @@ class DetailsTooltipStateless extends React.Component {
         showClose: true,
         hideOnClick: false,
         type: popupTypes.BASIC,
+        placement: tooltipPlacements.BOTTOM,
+        width: detailsWidth.MD
     };
 
     static popupTypes = popupTypes;
@@ -232,8 +247,6 @@ class DetailsTooltipStateless extends React.Component {
         return buttons;
     };
 
-    _usePortal = () => hasFlag(this, "use-portal");
-
     /*
      * Return of content based on props.open.
      *
@@ -249,33 +262,13 @@ class DetailsTooltipStateless extends React.Component {
         const contentClassName = classnames(
             "details-content",
             this.props.contentClassName,
-            this._getPositionClassName(),
             {
                 alert: this.props.type === popupTypes.ALERT,
             },
         );
 
-        const positionList = (this._getPositionClassName() + " " + this.props.className).split(" ");
-
-        const getHorizontalPlacement = vertical => {
-            if (_.find(positionList, v => v === "left")) {
-                return vertical + "-end";
-            } else if (_.find(positionList, v => v === "center")) {
-                return vertical;
-            } else {
-                return vertical + "-start";
-            }
-        };
-
         const getPlacement = () => {
-            if (this.props.placement) {
-                return this.props.placement.replace(/left/, "end").replace(/right/, "start").replace(/\s/, "-");
-            }
-            if (_.find(positionList, v => v === "top")) {
-                return getHorizontalPlacement("top");
-            } else {
-                return getHorizontalPlacement("bottom");
-            }
+            return this.props.placement.replace(/left/, "end").replace(/right/, "start").replace(/\s/, "-");
         };
 
         const contents = (
@@ -297,11 +290,12 @@ class DetailsTooltipStateless extends React.Component {
             </div>
         );
 
-        return this._usePortal() ? (
-            // implement use-portal flag
+        return (
             <PopperContainer
                 getReference={this._getTrigger}
-                className={classnames("details-tooltip-display", contentClassName, this.props.className)}
+                className={classnames("details-tooltip-display", contentClassName, this.props.className,
+                    getDetailsWidth(this.props.width)
+                )}
                 pointerClassName="details-tooltip-display__pointer"
                 data-id="details-content"
                 data-parent={this.props["data-id"]}
@@ -309,13 +303,6 @@ class DetailsTooltipStateless extends React.Component {
                 onClick={hide}
                 ref={el => this.popperContainer = el}
             >{contents}</PopperContainer>
-        ) : (
-            <div
-                className={contentClassName}
-                data-id="details-content"
-                data-parent={this.props["data-id"]}
-                onClick={hide}
-            >{contents}</div>
         );
     };
 
@@ -369,20 +356,6 @@ class DetailsTooltipStateless extends React.Component {
 
     _getTrigger = () => this.trigger;
 
-    _getPositionClassName = () => {
-        // this is sort of the reverse of getPlacement, and should be eliminated in v4
-        if (this.props.placement) {
-            const wordList = this.props.placement.split(/\s/);
-            if (wordList.length === 1) {
-                return `${wordList[0]} center`;
-            } if (wordList[1] === "right") {
-                return wordList[0];
-            }
-            return this.props.placement;
-        }
-        return this.props.positionClassName || "top";
-    }
-
     render() {
         var containerCss = {
                 show: this.props.open
@@ -395,7 +368,6 @@ class DetailsTooltipStateless extends React.Component {
             "details-tooltip",
             containerCss,
             this.props.className,
-            this._getPositionClassName(),
             {
                 alert: this.props.type === popupTypes.ALERT,
             },
@@ -424,33 +396,7 @@ class DetailsTooltipStateless extends React.Component {
     }
 }
 
-class DetailsTooltipStateful extends React.Component {
-    static displayName = "DetailsTooltipStateful";
-
-    state = {
-        open: this.props.open
-    };
-
-    _handleToggle = () => {
-        this.setState({
-            open: !this.state.open
-        });
-    };
-
-    close = () => {
-        this.setState({
-            open: false
-        });
-    };
-
-    render() {
-        var props = _.defaults(
-            { ref: "tooltip", open: this.state.open, onToggle: this._handleToggle }, this.props);
-        return React.createElement(DetailsTooltipStateless, props, this.props.children);
-    }
-}
-
-const PStatefulDetailsTooltip = inStateContainer([
+const stateDefs = [
     {
         name: "open",
         initial: false,
@@ -459,18 +405,14 @@ const PStatefulDetailsTooltip = inStateContainer([
             transform: toggleTransform,
         }],
     }
-])(DetailsTooltipStateless);
+];
 
 class DetailsTooltip extends React.Component {
     static displayName = "DetailsTooltip";
 
     static propTypes = {
-        stateless: PropTypes.bool,
+        stateless: deprecatedStatelessProp,
         flags: flagsPropType,
-    };
-
-    static defaultProps = {
-        stateless: true,
     };
 
     static tooltipPlacements = tooltipPlacements;
@@ -479,64 +421,9 @@ class DetailsTooltip extends React.Component {
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     componentDidMount() {
-        if (!hasFlag(this, "p-stateful")) {
-            cannonballChangeWarning({
-                message: `The 'open' prop will no longer serve as an initial state for DetailsTooltip. ` +
-                `If it is present, it will control the current value of the component. ` +
-                `Set the 'p-stateful' flag to switch to this behavior now.`,
-            });
-        }
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "DetailsTooltip" });
-        }
-
-        if (this.props.positionClassName) {
-            cannonballChangeWarning({
-                message: `DetailsTooltip will not be positioned using classNames. ` +
-                `Instead, the 'placement' prop will accept "top", "bottom", top left", ` +
-                `"top right", "bottom left", and "bottom right".`
-            });
-        }
-        if (this.props.positionClassName && this.props.positionClassName.split(/\s/).includes("alert")) {
-            cannonballChangeWarning({
-                message: `The alert style of DetailsTooltip will not be activated by ` +
-                `setting 'type' to 'alert', not with 'positionClassName'.`
-            });
-        }
-
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
         /* istanbul ignore if  */
         if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (this.props.id) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.controlled !== undefined) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.contentClassNames) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("contentClassNames", "contentClassName"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.titleClassNames) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("titleClassNames", "titleClassName"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.labelStyle) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("labelStyle", "labelClassName"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.positionStyle) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("positionStyle", "positionClassName"));
-            }
             if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
                 console.warn(
                     "DetailsTooltip expecting two or less secondary button labels.",
@@ -546,23 +433,22 @@ class DetailsTooltip extends React.Component {
         }
     }
 
-    // Remove this once V4 is released. Calling component methods is a bad look.
-    // Only here for backward compatibility.
     close = () => {
-        if (!this.props.stateless) {
-            this.refs.manager.close();
-        }
+        this.stateContainer.setState(state => (state.open ? { open: false } : {}));
     };
 
     render() {
-        if (hasFlag(this, "p-stateful")) {
-            return <PStatefulDetailsTooltip {...this.props} />;
-        }
+        const { initialState, ...props } = this.props;
 
         return (
-            this.props.stateless
-                ? <DetailsTooltipStateless ref="tooltip" {...this.props} />
-                : <DetailsTooltipStateful ref="manager" {...this.props} />
+            <StateContainer
+                stateDefs={stateDefs}
+                initialState={initialState}
+                passedProps={props}
+                ref={el => this.stateContainer = el}
+            >
+                {containerProps => <DetailsTooltipStateless {...containerProps} />}
+            </StateContainer>
         );
     }
 }
@@ -581,5 +467,7 @@ DetailsTooltip.positionStyles = {
     /** Add className {DetailsTooltip.positionStyles.BOTTOM} for positioning the tooltip to the bottom of the label. */
     BOTTOM: "bottom"
 };
+
+DetailsTooltip.detailsWidth = detailsWidth;
 
 export default DetailsTooltip;

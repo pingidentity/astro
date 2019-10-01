@@ -11,8 +11,6 @@ class CalendarDemo extends React.Component {
 
     numDemos = 3;
 
-    static flags = [ "use-portal", "p-stateful" ];
-
     state = {
         selectedDate1: moment(new Date()), //current date
         selectedDate2: moment("2015-10-15"), //Feb 20 2017

@@ -3,7 +3,6 @@ window.__DEV__ = true;
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import Utils from "../../../util/Utils";
 import FormRadioGroup from "../FormRadioGroup";
 
 jest.dontMock("../FormRadioGroup");
@@ -211,26 +210,6 @@ describe("FormRadioGroup", function () {
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "radio-btn");
 
         expect(element).toBeDefined();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <FormRadioGroup id="foo" items={items} />
-            );
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onChange' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <FormRadioGroup onChange={jest.fn()} items={items} />
-            );
-        }).toThrow(expectedError);
     });
 
     it("renders a label", function () {

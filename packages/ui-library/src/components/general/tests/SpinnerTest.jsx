@@ -5,7 +5,6 @@ jest.dontMock("../Spinner");
 describe("Spinner", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Spinner = require("../Spinner"),
         _ = require("underscore"),
@@ -62,14 +61,6 @@ describe("Spinner", function () {
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
 
         expect(element).toBeDefined();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
     });
 
 });

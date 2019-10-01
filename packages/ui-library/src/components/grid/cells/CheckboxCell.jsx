@@ -3,7 +3,6 @@
 var PropTypes = require("prop-types");
 
 var React = require("react"),
-    Utils = require("../../../util/Utils"),
     FormCheckbox = require("../../forms/FormCheckbox");
 
 /**
@@ -39,16 +38,6 @@ class CheckboxCell extends React.Component {
         "data-id": "grid-checkbox-cell",
         value: false
     };
-
-    constructor(props) {
-        super(props);
-        // TODO: figure out how to test separage throws in Jest and implement
-        /* istanbul ignore if  */
-        if (!Utils.isProduction() && props.onCallBack) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
-        }
-    }
 
     render() {
         return (

@@ -14,8 +14,6 @@ import React from "react";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import Utils from "../../../util/Utils";
-import FormDropDownList from "../../forms/FormDropDownList";
 import FormRadioGroup from "../../forms/FormRadioGroup";
 import ConditionalFieldset from "../ConditionalFieldset";
 import StateContainer from "../../utils/StateContainer";
@@ -36,7 +34,7 @@ describe("ConditionalFieldset", function () {
     });
 
     function getComponent (props) {
-        return ReactTestUtils.renderIntoDocument(
+        return TestUtils.renderInWrapper(
             <ConditionalFieldset {...defaultProps} {...props} flags={allFlags}>
                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                 <div data-id="option2" title="Option 2">Option 2</div>
@@ -78,7 +76,7 @@ describe("ConditionalFieldset", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
         expect(select).toBeTruthy();
-        const dropDownList = TestUtils.findRenderedComponentWithType(component, FormDropDownList);
+        const dropDownList = TestUtils.findRenderedDOMNodeWithDataId(component, dataId);
         expect(dropDownList).toBeTruthy();
 
         const clickDropdown = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
@@ -166,7 +164,7 @@ describe("ConditionalFieldset", function () {
     });
 
     it("verify defaults change to select when 3 or more options", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper(
             <ConditionalFieldset data-id={dataId} >
                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                 <div data-id="option2" title="Option 2">Option 2</div>
@@ -175,10 +173,8 @@ describe("ConditionalFieldset", function () {
         );
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
         expect(select).toBeTruthy();
-        const dropDownList = TestUtils.findRenderedComponentWithType(component, FormDropDownList);
+        const dropDownList = TestUtils.findRenderedDOMNodeWithDataId(component, dataId);
         expect(dropDownList).toBeTruthy();
-        const options = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
-        expect(options.length).toBe(3);
     });
 
     it("stateless change option", function () {
@@ -230,14 +226,6 @@ describe("ConditionalFieldset", function () {
         expect(form2).toBeFalsy();
     });
 
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
     it("creates a conditional fieldset dropdown with specified width and classname", function () {
         const testClass = "test-class";
         const component = getComponent({
@@ -267,7 +255,6 @@ describe("ConditionalFieldset", function () {
     it("sets the selectedIndex automatically when p-statful flag is set", function () {
         const cb = jest.fn();
         const wrapper = getEnzymeWrapper({
-            flags: ["p-stateful"],
             onValueChange: cb,
         });
 

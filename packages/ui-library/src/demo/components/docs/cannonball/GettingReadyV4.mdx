@@ -1,17 +1,18 @@
-# Getting Ready for Cannonball: the UI Library Version 4.0.0
-
-We are currently planning to release version 4.0.0 in October 2019. while we will continue to support v3 of the Library, all further component development will be done in v4.
-
-You can try out a beta version of v4 in your projects with this command: `npm install ui-library@beta`
-
-Our goal is to make the upgrade close to painless. To that end, we developed the new v4 behaviors in v3 and put them behind feature flags. This allows you to try out v4 right away and make any changes you need to make over the next few months. If you are already using the latest version of the library, you should be seeing several console warnings calling out components you should address. These fall into a few main categories.
+# Upgrading the UI Library from 3.x to 4.0.0
+If you have a project that currently uses a 3.x version of the UI Library, try these steps to upgrade to v4:
+1. Upgrade to the latest 3.x version. While v4 is still in beta, you can do this by running `npm install ui-library@latest`
+2. Run your project with the console open. You will probably see a lot of "Cannonball" warnings about potential behavior changes. These changes are summarized below.
+3. Either address the warnings one-by-one or, if you don't think the changes will have a big impact, move on to testing out v4.
+4. You can test the v4 behaviors by wrapping your whole application in `<FlagsProvider flags={["v4"]}></FlagsProvider>`.
+5. Review your application for broken behaviors.
+6. Install v4. While it is still in beta, run `npm install ui-library@beta`.
 
 ## Progressive Statefulness
-In v4, we are doing away with the `stateless` prop and the hard distinction between stateful and stateless versions of our components. Our new model allows you to choose which props you’d like to control and which you’d like the component to control. These components will take control of any potentially stateful props on mount if no value is provided.
+In v4, we did away with the `stateless` prop and the hard distinction between stateful and stateless versions of our components. Our new model allows you to choose which props you’d like to control and which you’d like the component to control. These components take control of any potentially stateful props on mount if no value is provided.
 
-Since you are currently either controlling all the props or none, not much should break. Some of our components let you use the prop in the stateful version as the initial value for that state. The new components will not behave that way. You’ll need to put initial values as keys inside the `initialState` prop.
+Since you are currently either controlling all the props or none, not much should break. Some of our components let you use the prop in the stateful version as the initial value for that state. The new components do not behave that way. You need to put initial values as keys inside the `initialState` prop.
 
-Here are all the components that will be progressively stateful in v4, along with the props that can be controlled. Use this behavior by passing the “p-stateful” flag.
+Here are all the components that are progressively stateful in v4, along with the props that can be controlled.
 
 * Calendar
     * date
@@ -62,9 +63,9 @@ Here are all the components that will be progressively stateful in v4, along wit
     * selectedItemIds
 
 ## Portals and Popper.js
-A portal is a React feature that lets a component render content in another part of the DOM. Popper.js is a library that positions an element in relation to some other element. For v4, we’re using these two features to make our dropdowns and other popout content work better. For the most part, this change should work automatically and make your existing components behave in a new and better way. Because using portals change the DOM structure, there could be problems with any custom CSS targeting these components. Tests relying on the DOM might also break.
+A portal is a React feature that lets a component render content in another part of the DOM. Popper.js is a library that positions an element in relation to some other element. For v4, we’re using these two features to make our dropdowns and other popout content work better. For the most part, this change should work automatically and make your existing components behave in a new and better way. Because using portals changes the DOM structure, there could be problems with any custom CSS targeting these components. Tests relying on the DOM might also break.
 
-Here are all the components that will use portals, poppers, or both. Use this behavior by applying the “use-portal” flag.
+Here are all the components that use portals, poppers, or both.
 
 * AppFrame
 * ButtonBar
@@ -91,22 +92,19 @@ Here are all the components that will use portals, poppers, or both. Use this be
 
 ## Single-Component Changes
 ### Button
-The v3 button removes the right margin from buttons with the “add” icon. In v4, that margin is removed by setting the `noSpacing` prop rather than targeting an icon. Set that prop to avoid any layout changes.
+The v3 button removes the right margin from buttons with the “add” icon. In v4, that margin is removed by setting the `noSpacing` prop rather than targeting an icon.
 
 ### ButtonBar
-In mockups, the “Discard Changes” button is the dark gray cancel button style while the v3 version of the button bar displays it in the outlined white standard button style. This style will change in v4. You can adopt this style change by setting the `fix-discard-button` flag, or you can simply use the cancel button instead. “Discard Changes” always stands in for “Cancel”.
+In mockups, the “Discard Changes” button is the dark gray cancel button style while the v3 version of the button bar displays it in the outlined white standard button style. This style has changed in v4.
 
 ### ExpandableRow
-To display a correctly-styled expandable row in v3, the component must be wrapped in an element with the `result-set` class. In v4, the component will have its own class. This shouldn’t create problems unless there’s a conflict with custom CSS.
+To display a correctly-styled expandable row in v3, the component must be wrapped in an element with the `result-set` class. In v4, the component has its own class. This shouldn’t create problems unless there’s a conflict with custom CSS.
 
 ### FileUpload
-In v4, we’re improving the handling of default image. In particular, the default will no longer take precedence when `thumbnailSrc` is provided. If you’re using the `defaultImage` prop, also set the `true-default` flag to get this new behavior.
-
-## FlagsProvider
-We have created a new component to help you opt into the v4 behaviors across many components at once. If you want to make all the components on a page progressively stateful, wrap them in `<FlagsProvider flags={[“p-stateful”]}></FlagsProvider>`. Even better, if you want to make your whole app use v4 behaviors, put `<FlagsProvider flags={[“v4”]}></FlagsProvider>` at the root level.
+In v4, we improved the handling of default image. In particular, the default will no longer take precedence when `thumbnailSrc` is provided.
 
 ## CSS Classes, Markup, and Data IDs
-In addition to the code changes we’ve made for v4, we are also changing our approach to refactoring components. In v3, we tried to preserve markup and class names so that we wouldn’t break custom CSS or tests. For v4, we are expressly not guaranteeing our class names and markup will remain consistent.
+In addition to the code changes we made for v4, we are also changing our approach to refactoring components. In v3, we tried to preserve markup and class names so that we wouldn’t break custom CSS or tests. For v4, we are expressly not guaranteeing our class names and markup will remain consistent.
 
 To make sure your application doesn’t break, please remove any styles that target library-generated classes or that rely on a component having a certain DOM structure. We will still support the `className` prop for our components, so you might consider changing your custom styles to use your own custom class name.
 

@@ -273,7 +273,7 @@ class DemoApp extends React.Component {
                 oneSectionOnly={true}
                 headerBarProps={_.extend(this.props.header, {
                     siteLogo: "uilib",
-                    updated: true,
+                    additionalContent: "v4 beta",
                     tree: [
                         {
                             id: "help",
@@ -297,7 +297,6 @@ class DemoApp extends React.Component {
                 onRootChange={this.navActions.setRoot}
                 onItemChange={this.navActions.selectItem}
                 onSectionChange={this.navActions.toggleSection}
-                flags={[ "use-portal" ]}
             >
                 <div id="content" data-id="components">
                     <DemoItem label={this._demoItem.label}

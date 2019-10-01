@@ -8,7 +8,6 @@ describe("Section", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         Section = require("../Section"),
-        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 
@@ -25,7 +24,7 @@ describe("Section", function () {
             title: defaults.title
         });
 
-        return ReactTestUtils.renderIntoDocument(<Section {...opts} />);
+        return TestUtils.renderInWrapper(<Section {...opts} />);
     };
 
     it("Stateless: renders collapsed state", function () {
@@ -133,31 +132,6 @@ describe("Section", function () {
         expect(root.className).toContain("extra");
     });
 
-    it("Stateless: triggers callback on click", function () {
-        const callback = jest.fn(),
-            view = getComponent({
-                onToggle: callback
-            }),
-            title = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"] + "-title");
-
-        ReactTestUtils.Simulate.click(title);
-
-        expect(callback).toBeCalledWith(false);
-    });
-
-    it("Stateful: callback toggles expanded", function () {
-        const view = getComponent({
-                stateless: false
-            }),
-            stateful = view.refs.SectionStateful;
-
-        expect(stateful.state.expanded).toBeFalsy();
-
-        stateful._handleToggle();
-
-        expect(stateful.state.expanded).toBeTruthy();
-    });
-
     it("Stateful: renders the right-side/row-accessories text content", function () {
         const accessoriesContent = "Some text",
             view = getComponent({
@@ -209,26 +183,6 @@ describe("Section", function () {
         expect(root.className).toContain("condensed");
     });
 
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(
-            function () {
-                getComponent({ id: "foo" });
-            }
-        ).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
-
-        expect(
-            function () {
-                getComponent({ controlled: true });
-            }
-        ).toThrow(expectedError);
-    });
-
     it("renders collapsed detail text when collapsed and detailsText is passed in", () => {
         const component = getComponent({
                 detailsText: {
@@ -261,31 +215,6 @@ describe("Section", function () {
             detailsText = TestUtils.findRenderedDOMNodeWithClass(component, "collapsible-section__details-text");
 
         expect(detailsText.textContent).toEqual("Expanded");
-    });
-
-    it("does not throw Cannonball warnings when the 'p-stateful' flag is set", function () {
-        console.warn = jest.fn();
-
-        getComponent({ stateless: true, flags: ["p-stateful"] });
-        expect(console.warn).not.toBeCalled();
-    });
-
-    it("Cannonball warning is thrown when component is statefull but the 'p-stateful' flag is not set", function () {
-        console.warn = jest.fn();
-
-        getComponent({ stateless: true });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("does not throw Cannonball warnings when the 'p-stateful' flag is set", function () {
-        const component = getComponent({ flags: ["p-stateful"] });
-        const title = TestUtils.findRenderedDOMNodeWithDataId(component, "my-section-title");
-
-        expect(title.className).not.toContain("open");
-
-        ReactTestUtils.Simulate.click(title);
-
-        expect(title.className).toContain("open");
     });
 
 });

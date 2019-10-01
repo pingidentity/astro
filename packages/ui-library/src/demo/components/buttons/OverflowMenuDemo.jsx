@@ -9,7 +9,6 @@ import Button from "../../../components/buttons/Button";
  */
 
 class OverflowMenuDemo extends React.Component {
-    static flags = [ "use-portal" ];
 
     state = {
         message: ""

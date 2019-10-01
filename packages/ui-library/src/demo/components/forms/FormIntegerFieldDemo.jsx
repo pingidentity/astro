@@ -9,8 +9,6 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for FormIntegerField
 */
 class FormIntegerFieldDemo extends React.Component {
-    static flags = ["p-stateful"];
-
     state = {
         integerField1: undefined,
         integerField4Error: "",

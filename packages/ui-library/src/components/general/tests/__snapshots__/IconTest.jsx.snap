@@ -3,7 +3,5 @@
 exports[`Icon data-id's don't change 1`] = `
 Array [
   "icon",
-  "icon-graphic",
-  "icon-content",
 ]
 `;

@@ -60,8 +60,6 @@ var SINGLE_SELECT_ITEMS = [
 */
 class SelectionListDemo extends React.Component {
 
-    static flags = [ "use-portal", "p-stateful" ];
-
     state = {
         singleSelectId1: 1,
         singleSelectId2: 3,

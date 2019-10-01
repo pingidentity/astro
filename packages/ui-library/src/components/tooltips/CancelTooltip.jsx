@@ -25,8 +25,6 @@ import { flagsPropType, getFlags } from "../../util/FlagUtils";
  *     The text of the cancel link.
  * @param {string} confirmButtonText
  *     The text of the confirm button.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} messageText
  *     The text to display in the body of the tooltip.
  * @param {string} [positionClassName]

@@ -7,8 +7,6 @@ import I18nPhoneInput from "../../../../components/forms/i18n/phone-input";
 * @desc A demo for I18nPhoneInput
 */
 class I18nPhoneInputDemo extends React.Component {
-    static flags = [ "p-stateful", "use-portal" ];
-
     state = {
         countryCodeStateful: "dj",
         dialCodeStateful: "253",

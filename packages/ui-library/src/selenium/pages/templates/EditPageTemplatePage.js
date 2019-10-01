@@ -115,7 +115,7 @@ var EditPageDemoPage = Object.create(HomePage, {
         value: function (valueOption) { //eslint-disable-line no-unused-vars
             this.waitForExist("//label[@data-id='addressType']");
             this.click("//label[@data-id='addressType']");
-            this.click("//li//div[contains(string(), valueOption)]");
+            this.click("//div[@data-id='addressType-dropdown']//li//div[contains(string(), valueOption)]");
         }
     },
 
@@ -127,7 +127,7 @@ var EditPageDemoPage = Object.create(HomePage, {
         value: function (valueOption) { //eslint-disable-line no-unused-vars
             this.waitForExist("//label[@data-id='alternateAddressType']");
             this.click("//label[@data-id='alternateAddressType']");
-            this.click("//li//div[contains(string(), valueOption)]");
+            this.click("//div[@data-id='alternateAddressType-dropdown']//li//div[contains(string(), valueOption)]");
         }
     },
 

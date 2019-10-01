@@ -23,7 +23,6 @@ class SelectTextDemo extends React.Component {
                         <FormTextField
                             mode={FormFieldConstants.FormFieldMode.READ_ONLY}
                             value="The text in this input will be selected when clicked"
-                            flags={["p-stateful"]}
                         />
                     </SelectText>
                 </InputRow>

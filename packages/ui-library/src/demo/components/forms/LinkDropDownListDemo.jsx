@@ -24,8 +24,6 @@ var _options = [
 ];
 
 class LinkDropDownListDemo extends React.Component {
-    static flags = [ "use-portal", "p-stateful" ];
-
     state = {
         open: false,
         selectedOption: _options[0]

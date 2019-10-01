@@ -99,7 +99,6 @@ const KeywordSearchView = ({
                 onKeyDown={onKeyDown}
                 onValueChange={onValueChange}
                 ref={search => search && search.searchBoxFocus()}
-                flags={["p-stateful"]}
             />
             <ul className="keyword-search__results" ref={ref => _container = ref }>
                 {results.map(_renderSearchResult)}

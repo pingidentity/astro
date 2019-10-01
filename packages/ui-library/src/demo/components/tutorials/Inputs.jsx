@@ -52,7 +52,7 @@ class Inputs extends Component {
                         </legend>
 
                         {this.state.showFieldset && (
-                            <FormTextField labelText="Toggled Text Input" flags={["p-stateful"]} />
+                            <FormTextField labelText="Toggled Text Input" />
                         )}
 
                     </fieldset>
@@ -84,8 +84,7 @@ class Inputs extends Component {
                 </p>
 
                 <div>
-                    <FormTextField labelText="Normal Text Input" value="Content of normal input"
-                        flags={["p-stateful"]} />
+                    <FormTextField labelText="Normal Text Input" value="Content of normal input" />
                     <div>
                         <FormLabel>Normal Radio Button and Checkbox</FormLabel><br />
                         <FormRadioInput name="nothing" value="nothing" checked={true} />
@@ -94,8 +93,7 @@ class Inputs extends Component {
                 </div>
                 <HR />
                 <div className="modifier_light-inputs" style={{ background: "#f8f8f8", padding: 15 }}>
-                    <FormTextField labelText="White BG Text Input" value="Content of white input"
-                        flags={["p-stateful"]} />
+                    <FormTextField labelText="White BG Text Input" value="Content of white input" />
                     <div>
                         <FormLabel>White BG Radio Button and Checkbox</FormLabel><br />
                         <FormRadioInput name="nothing" value="nothing" checked={true} />

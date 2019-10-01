@@ -133,7 +133,6 @@ export default class MetadataImport extends Component {
                             <FormTextField
                                 labelText="Import URL"
                                 width={InputWidths.LG}
-                                flags={["p-stateful"]}
                             />
                             <Button
                                 iconName="icon-clear"
@@ -237,7 +236,6 @@ export default class MetadataImport extends Component {
                                     labelText="ACS URLs (Customer Service)"
                                     rows={5}
                                     width={InputWidths.LG}
-                                    flags={["p-stateful"]}
                                 />
                             </InputRow>
 
@@ -245,7 +243,6 @@ export default class MetadataImport extends Component {
                                 <FormTextField
                                     labelText="Service Provider (SP) Entity ID"
                                     width={InputWidths.LG}
-                                    flags={["p-stateful"]}
                                 />
                             </InputRow>
 
@@ -253,7 +250,6 @@ export default class MetadataImport extends Component {
                                 <FormTextField
                                     labelText="Single Logout (SLO) Response Endpoint"
                                     width={InputWidths.LG}
-                                    flags={["p-stateful"]}
                                 />
                             </InputRow>
 
@@ -272,7 +268,6 @@ export default class MetadataImport extends Component {
                                 <FormTextField
                                     labelText="Assertation Validity Duration (In Seconds)"
                                     width={InputWidths.SM}
-                                    flags={["p-stateful"]}
                                 />
                             </InputRow>
 

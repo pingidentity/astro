@@ -66,7 +66,6 @@ class Actions extends React.Component {
                         readOnly
                         value={templateUUIDs[index % templateUUIDs.length]}
                         width={InputWidths.MD}
-                        flags={["p-stateful"]}
                     />
                 )]
             });
@@ -92,7 +91,6 @@ class Actions extends React.Component {
             <ConfirmTooltip
                 buttonLabel="Delete"
                 cancelText="Cancel"
-                flags={["use-portal"]}
                 label={(
                     <Button
                         iconName="delete"
@@ -244,7 +242,6 @@ class Actions extends React.Component {
                     </FormLabel>
                     <ConfirmTooltip
                         data-id="popup-tooltip"
-                        flags={["use-portal"]}
                         label={<Button data-id="popup-button" inline>Popup</Button>}
                         onConfirm={this._popupConfirm}
                         open={this.state.popupOpen}
@@ -263,7 +260,6 @@ class Actions extends React.Component {
                         modalTitle="Its a Popover"
                         onClose={this._togglePopover}
                         onOpen={this._togglePopover}
-                        flags={["use-portal"]}
                     >
                         Hi, this is a popup with a simple action.
 

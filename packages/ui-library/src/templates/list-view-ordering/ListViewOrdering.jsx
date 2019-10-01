@@ -104,13 +104,12 @@ module.exports = class extends React.Component {
                     key={`${obj.title}`}
                     {...obj}
                     showEdit={true}
-                    rowAccessories={ <Toggle flags={["p-stateful"]} /> }
+                    rowAccessories={ <Toggle /> }
                     ordering={{
                         position,
                         total: this.props.rows.all.length,
                         onReorder: this._handleReorder
                     }}
-                    flags={["p-stateful", "expandable-row-class", "use-portal"]}
                 />
             );
         }.bind(this));
@@ -125,7 +124,6 @@ module.exports = class extends React.Component {
                         onValueChange: this._handleTextChange,
                         queryString: this.props.filters.text
                     }}
-                    flags={["p-stateful"]}
                 >
                     <FormCheckbox label="filter odd rows"
                         onValueChange={this._handleOddFilterToggle}
@@ -143,7 +141,6 @@ module.exports = class extends React.Component {
                         page = {this.props.page}
                         total = {this.props.rows.filtered.length}
                         onValueChange = {this._handlePageChange}
-                        flags={["p-stateful"]}
                     >
                         {this._generatePageRows()}
                     </Pagination>

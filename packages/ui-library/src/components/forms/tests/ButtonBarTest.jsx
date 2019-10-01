@@ -1,10 +1,11 @@
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../ButtonBar");
 jest.dontMock("../../general/EllipsisLoaderButton");
 jest.dontMock("../../tooltips/CancelTooltip");
 jest.dontMock("../../tooltips/DetailsTooltip");
-
-import { shallow } from "enzyme";
 
 describe("ButtonBar", function () {
 
@@ -303,71 +304,5 @@ describe("ButtonBar", function () {
         expect(tooltipDenyBtn.textContent).toBe(buttonBarParams.saveTooltip.cancelButtonText);
         expect(tooltipTitle.textContent).toBe(buttonBarParams.saveTooltip.title);
         expect(tooltipText.textContent).toContain(buttonBarParams.saveTooltip.messageText);
-    });
-
-    it("renders a cancel button in place of a discard button when the flag is set", function() {
-        const component = getComponent({ onDiscard: jest.fn(), flags: [ "fix-discard-button" ] });
-
-        const cancelBtn = TestUtils.findRenderedDOMNodeWithClass(component, "cancel");
-        const discardBtn = getDiscardButton(component);
-
-        expect(cancelBtn).toBeTruthy();
-        expect(discardBtn).toBeTruthy();
-    });
-
-    it("fires the Cannonball warning when the discard props" +
-        "are used but no fix-discard-button flag is set", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ onDiscard: jest.fn(), flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire the warning when either the fix-discard-button" +
-        "flag is set or discard props aren't set", function() {
-        console.warn = jest.fn();
-
-        shallow(
-            <ButtonBar
-                data-id={componentId}
-                cancelText={cancelText}
-                discardTex={discardText}
-                onSave={jest.fn()}
-                saveText={saveText}
-                flags={["use-portal"]}
-            />
-        );
-
-        expect(console.warn).not.toBeCalled();
-
-        shallow(
-            <ButtonBar
-                data-id={componentId}
-                cancelText={cancelText}
-                discardTex={discardText}
-                onSave={jest.fn()}
-                saveText={saveText}
-                onDiscard={jest.fn()}
-                flags={["fix-discard-button","use-portal"]}
-            />
-        );
-        expect(console.warn).not.toBeCalled();
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-
-        getComponent({ flags: [ "fix-discard-button" ] });
-
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-
-        getComponent({ flags: [ "use-portal", "fix-discard-button" ] });
-
-        expect(console.warn).not.toBeCalled();
     });
 });

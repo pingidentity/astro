@@ -441,7 +441,6 @@ export default class FrequencyCard extends Component {
                                         onValueChange={this._handleRockerChange}
                                         labels={barData.map(i => i.id)}
                                         labelHints={barData.map(i => i.helpText)}
-                                        flags={["p-stateful"]}
                                     />
                                 </div>
                             </div>

@@ -25,7 +25,6 @@ const OPTIONS = [
 ];
 
 class TranslationPickerDemo extends React.Component {
-    static flags = [ "use-portal" ];
 
     state = {
         open: false,

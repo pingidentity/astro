@@ -1,6 +1,5 @@
 var PropTypes = require("prop-types");
 var React = require("react");
-var Utils = require("../../util/Utils");
 var Link = require("../general/Link");
 var ReactTooltip = require("react-tooltip");
 var classnames = require("classnames");
@@ -97,13 +96,6 @@ class HelpHint extends React.Component {
         unstyleTrigger: false,
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
-
     _handleClick = (e) => {
         // kill click event to prevent event from triggering label from checking a checkbox/radio
         e.preventDefault();
@@ -123,10 +115,6 @@ class HelpHint extends React.Component {
             placement = classNames.indexOf("left") > -1 ? "left" : placement;
             placement = classNames.indexOf("top") > -1 ? "top" : placement;
             placement = classNames.indexOf("bottom") > -1 ? "bottom" : placement;
-
-            if (!Utils.isProduction() && placement !== "right") {
-                console.warn(Utils.deprecatePropError("className css positioning", "position"));
-            }
         }
 
         return placement;

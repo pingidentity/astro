@@ -114,19 +114,6 @@ describe("UnitInput", function () {
         expect(_.contains(dropDownClasses, "disabled")).toEqual(true);
     });
 
-    it("renders list of options", function () {
-        component = render({ labelText: "Unit Input Text" });
-
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
-
-        expect(select.children.length).toEqual(5);
-        expect(select.children[0].textContent).toEqual("Minute(s)");
-        expect(select.children[1].textContent).toEqual("Hour(s)");
-        expect(select.children[2].textContent).toEqual("Day(s)");
-        expect(select.children[3].textContent).toEqual("Week(s)");
-        expect(select.children[4].textContent).toEqual("Year(s)");
-    });
-
     it("renders value in form text field", function () {
         component = render({ labelText: "Unit Input Text" });
         var input = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-input");
@@ -146,18 +133,6 @@ describe("UnitInput", function () {
 
         const label = input.find({ "data-id": "unit-input" });
         expect(label.prop("value")).toEqual("Unit Input Text");
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        render({ textFieldProps: {}, dropDownListProps: { options }, flags: ["p-stateful"] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
-        console.warn = jest.fn();
-        render({ textFieldProps: {}, dropDownListProps: { options }, flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
     it("renders errorMessage if props exists", () => {

@@ -64,9 +64,6 @@ var Types = {
 *    CSS classes to set on the top-level HTML container.
 * @param {string} [name]
 *    Name attribute for the input.
-* @param {array} [flags]
-*     Set the flag for "use-portal" to render with popper.js and react-portal
-*
 * @param {string|number} [selectedCountryCode]
 *    The selected country's iso2 or isoNum code.
 * @param {CountryFlagList.CountryCodeTypes} [countryCodeDisplayType=CountryFlagList.CountryCodeTypes.ISO_2]

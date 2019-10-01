@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import classnames from "classnames";
-import Utils from "../../util/Utils";
 import FormRadioInput from "./FormRadioInput";
 import FormLabel from "./FormLabel";
 import { defaultRender } from "../../util/PropUtils";
@@ -133,18 +132,6 @@ class FormRadioGroup extends React.Component {
         renderRadio: defaultRender,
         autoFocus: false,
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-    }
 
     _handleChange = (value) => {
         this.props.onValueChange(value);

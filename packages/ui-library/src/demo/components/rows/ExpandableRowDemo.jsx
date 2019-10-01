@@ -23,8 +23,6 @@ class ExpandableRowDemo extends React.Component {
         order1: 40,
     };
 
-    static flags = ["use-portal", "expandable-row-class", "p-stateful"];
-
     _onToggle = (index) => () => {
         var newState = {},
             key = "expanded" + index;
@@ -157,20 +155,9 @@ class ExpandableRowDemo extends React.Component {
                             ]),
                             type: ExpandableRow.RowMessageTypes.WARNING
                         }}
-                        // When using the p-stateful flag, you can define an initial state for your component;
-                        // it will still control the prop internally, but will initialize with the value you
-                        // selected.
-                        {
-                        ...this.props.flags.includes("p-stateful")
-                            ? {
-                                initialState: {
-                                    expanded: true
-                                }
-                            }
-                            : {
-                                expanded: true
-                            }
-                        }
+                        initialState={{
+                            expanded: true
+                        }}
                     />
                     <ExpandableRow
                         stateless={false}

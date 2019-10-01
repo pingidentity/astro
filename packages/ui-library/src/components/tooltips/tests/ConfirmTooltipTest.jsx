@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../ConfirmTooltip");
 jest.dontMock("../DetailsTooltip");
 jest.dontMock("../../buttons/Button");
@@ -75,18 +78,6 @@ describe("ConfirmTooltip", function () {
         ReactTestUtils.Simulate.click(button);
         expect(confirmCallback).toBeCalled();
         expect(toggleCallback).toBeCalled();
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent();
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

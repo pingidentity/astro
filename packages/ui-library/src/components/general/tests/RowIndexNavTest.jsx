@@ -83,4 +83,12 @@ describe("Indent", function () {
         ReactTestUtils.Simulate.click(navItems[testIndexActive]);
         expect(component.props.onClick).toBeCalled();
     });
+
+    it("renders the nav items with the height style", function () {
+        const nav = getComponent({ height: 200 });
+        const list = TestUtils.findRenderedDOMNodeWithTag(nav, "ul");
+
+        expect(list.getAttribute("style")).toContain("height: 200px");
+    });
+
 });

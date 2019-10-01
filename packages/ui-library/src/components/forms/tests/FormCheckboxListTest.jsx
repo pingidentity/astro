@@ -19,9 +19,7 @@ describe("FormCheckboxList", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
-    var Utils = require("../../../util/Utils");
     var FormCheckboxList = require("../FormCheckboxList");
-    var Toggle = require("../form-toggle/v2");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
@@ -81,13 +79,13 @@ describe("FormCheckboxList", function () {
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
         var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobject-search");
         var checkAllToggle = TestUtils.findRenderedDOMNodeWithDataId(component, "check-all");
-        var hideUncheckedToggle = ReactTestUtils.scryRenderedComponentsWithType(component, Toggle);
+        var hideUncheckedToggle = TestUtils.findRenderedDOMNodeWithDataId(component, "hide-unchecked");
 
         // Check for rendered elements
         expect(checkboxes.length).toBe(2);
         expect(searchInput).toBeDefined();
         expect(checkAllToggle).toBeDefined();
-        expect(hideUncheckedToggle.length).toBe(1);
+        expect(hideUncheckedToggle).toBeTruthy();
 
         // validate rendered dataobject checkbox values
         expect(checkboxes[0].value).toBe("1");
@@ -379,46 +377,6 @@ describe("FormCheckboxList", function () {
         expect(component.refs.FormCheckboxListStateful.state.queryString).toBe("");
         component.refs.FormCheckboxListStateful._handleQueryChange(queryString);
         expect(component.refs.FormCheckboxListStateful.state.queryString).toBe(queryString);
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onSelectionChange' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
-
-        expect(function () {
-            getComponent({ onSelectionChange: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'labelSelectAll' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("labelSelectAll", "onGetSelectAllLabel"));
-
-        expect(function () {
-            getComponent({ labelSelectAll: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'labelDeselectAll' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("labelDeselectAll", "onGetDeselectAllLabel"));
-
-        expect(function () {
-            getComponent({ labelDeselectAll: "foo" });
-        }).toThrow(expectedError);
     });
 
 });

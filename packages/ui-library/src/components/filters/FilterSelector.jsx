@@ -8,8 +8,7 @@ import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
 import { darkInputs } from "../../util/CSSModifiers";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 const optionsSelector = createSelector(
     state => state.search,
@@ -50,8 +49,6 @@ const optionsSelector = createSelector(
 *     Filters the list. If not provided, search is stored in state
 * @param {array} [selected]
 *     All the selected ids
-* @param {array} [flags]
-*     Set the flag for "use-portal" to render with popper.js and react-portal
 */
 class FilterSelector extends React.Component {
     state = {
@@ -92,14 +89,6 @@ class FilterSelector extends React.Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    _usePortal = () => hasFlag(this, "use-portal");
-
-    componentDidMount() {
-        if (!this._usePortal()) {
-            cannonballPortalWarning({ name: "FilterSelector" });
-        }
-    }
 
     _handleSearch = value => {
         this.setState({ search: value });
@@ -179,7 +168,6 @@ class FilterSelector extends React.Component {
                         requiredText={requiredText}
                         selectedItemIds={selected}
                         searchBoxProps={{ textFieldProps: { stateless: true } }}
-                        flags={["p-stateful"]}
                     />
                 </Popover>
             </span>

@@ -42,7 +42,6 @@ const HomeApp = () => {
         <div>
             <PageHeader title="Home App" />
             <RockerButton
-                flags={["p-stateful"]}
                 labels={[
                     "Profile",
                     "Configuration",
@@ -54,7 +53,6 @@ const HomeApp = () => {
             <Section
                 data-id="demo-section-1"
                 title="App Settings"
-                flags={["p-stateful"]}
             >
                 <Table
                     headData={attributeMappings.head}
@@ -65,7 +63,6 @@ const HomeApp = () => {
             <Section
                 data-id="demo-section-2"
                 title="SAML Settings"
-                flags={["p-stateful"]}
             >
                 <Table
                     headData={attributeMappings.head}
@@ -77,7 +74,6 @@ const HomeApp = () => {
                 data-id="demo-section-3"
                 expanded
                 title="Attribute Mappings"
-                flags={["p-stateful"]}
             >
                 <Table
                     headData={attributeMappings.head}

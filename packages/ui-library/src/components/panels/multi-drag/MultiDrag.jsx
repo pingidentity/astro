@@ -5,7 +5,6 @@ import DragDropColumn from "./DragDropColumn";
 import MultiDragRow from "./MultiDragRow";
 import { move, reapplyFilters, search } from "./MultiDragReducer.js";
 import update from "re-mutable";
-import Utils from "../../../util/Utils.js";
 import FormSearchBox from "../../forms/FormSearchBox";
 import InputRow from "../../layout/InputRow";
 import _ from "underscore";
@@ -202,8 +201,6 @@ function convertFilteredIndexes (columns, desc) {
  *    Callback to be triggered when a drag even ends.
  * @param {MultiDrag~customSort} [customSort]
  *    Callback to sort rows according to custom criteria. Expects to receive rows as a return value.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @example
  *    <MultiDrag
@@ -427,7 +424,6 @@ class MultiDragStateless extends React.Component {
                 showClear={true}
                 autoFocus={this.props.autoFocus}
                 value={column.search}
-                flags={["p-stateful"]}
             />
         );
     };
@@ -610,6 +606,7 @@ class MultiDragStateful extends React.Component {
         }
     }
 
+    /* istanbul ignore next */
     componentWillReceiveProps({ columns: nextCols, customSort }) {
         if (!_.isEqual(nextCols, this.props.columns) || !_.isEqual(customSort, this.props.customSort)) {
             this.setState((prevState) => reapplyFilters(prevState, customSort || this.props.customSort));
@@ -645,13 +642,6 @@ class MultiDrag extends React.Component {
     static defaultProps = {
         stateless: false
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-        }
-    }
 
     render() {
         return this.props.stateless

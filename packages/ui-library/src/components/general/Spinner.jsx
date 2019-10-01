@@ -1,7 +1,6 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
-    classnames = require("classnames"),
-    Utils = require("../../util/Utils");
+    classnames = require("classnames");
 
 /**
  * @class Spinner
@@ -37,13 +36,6 @@ class Spinner extends React.Component {
         "data-id": "spinner",
         defaultText: ""
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
 
     render() {
         if (this.props.show) {

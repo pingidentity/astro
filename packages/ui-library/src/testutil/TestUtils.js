@@ -472,4 +472,10 @@ TestUtils.checkForDataIds = function (component, ids) {
     }, true);
 };
 
+class SimpleWrapper extends React.Component {
+    render = () => this.props.children;
+}
+
+TestUtils.renderInWrapper = element => ReactTestUtils.renderIntoDocument(<SimpleWrapper>{element}</SimpleWrapper>);
+
 module.exports = TestUtils;

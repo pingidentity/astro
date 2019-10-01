@@ -157,7 +157,6 @@ export default class MultiseriesChartCardDemo extends Component {
                     labels={["Line", "Area"]}
                     onValueChange={this._setChartType}
                     selectedIndex={this.state.typeIndex}
-                    flags={["p-stateful"]}
                 />
                 <MultiseriesChartCard
                     bottomPanel={
@@ -165,7 +164,6 @@ export default class MultiseriesChartCardDemo extends Component {
                             className={`rocker-button--chart-rocker`}
                             labels={["3M", "6M", "1Y"]}
                             onValueChange={this._setTimeSpan}
-                            flags={["p-stateful"]}
                             selectedIndex={this.state.timeSpanIndex}
                         />
                     }

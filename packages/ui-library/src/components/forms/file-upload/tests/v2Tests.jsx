@@ -23,7 +23,6 @@ describe("FileUpload", function () {
     const TestUtils = require("../../../../testutil/TestUtils");
     const FileUpload = require("../index.js");
     const CommonTests = require("./commonTests");
-    const Utils = require("../../../../util/Utils");
     const _ = require("underscore");
 
     //require these files so that jest will count them in coverage
@@ -187,52 +186,14 @@ describe("FileUpload", function () {
         }
     });
 
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'title' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("title", "labelText"));
-
-        expect(function () {
-            getComponent({ title: "something" });
-        }).toThrow(expectedError);
-    });
-
-    it("true default: renders default image if no thumbnail is passed in", () => {
+    it("renders default image if no thumbnail is passed in", () => {
         const component = getComponent({
             defaultImage: "pictureofanuglydog.png",
-            flags: ["true-default"]
         });
 
         const defaultImage = TestUtils.findRenderedDOMNodeWithClass(component, "input-image-thumb--default");
 
         expect(defaultImage).toBeTruthy();
-    });
-
-    it("true default: throws a warning when defaultImage is passed in without flag enabled", () => {
-        console.warn = jest.fn();
-
-        getComponent({
-            defaultImage: "stuff.png"
-        });
-
-        expect(console.warn).toHaveBeenCalled();
-    });
-
-    it("true default: does not throw a warning when defaultImage is passed in with flag enabled", () => {
-        console.warn = jest.fn();
-
-        getComponent({
-            defaultImage: "stuff.png",
-            flags: ["true-default"]
-        });
-
-        expect(console.warn).not.toHaveBeenCalled();
     });
 
     it("fires cannonball warning for the stateless veraion", function() {

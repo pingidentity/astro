@@ -5,7 +5,7 @@ import _ from "underscore";
 import PopperContainer from "./PopperContainer";
 
 import popsOver from "../../util/behaviors/popsOver";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class Popover
@@ -15,8 +15,6 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} [triggerClassName]
  *     CSS classes to set on the link that triggers the popover.
  *
@@ -73,8 +71,6 @@ class PopoverBase extends React.Component {
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    _usePortal = () => hasFlag(this, "use-portal");
-
     /*
      * Check if placement contains a word (like top, right, or left)
      */
@@ -110,8 +106,6 @@ class PopoverBase extends React.Component {
             this.props.className,
             this._getModifiers("popup-frame"), {
                 "popup-frame--padded": this.props.padded,
-            }, {
-                "popup-frame--pointer": !this._usePortal(),
             }
         );
 
@@ -137,8 +131,9 @@ class PopoverBase extends React.Component {
             }
         };
 
-        return this._usePortal() ? (
+        return (
             <PopperContainer
+                data-parent={this.props["data-id"]}
                 className={classnames("popover-display", this.props.popperClassName)}
                 data-id="popup-frame"
                 data-parent={this.props["data-id"]}
@@ -150,8 +145,6 @@ class PopoverBase extends React.Component {
             >
                 {contents}
             </PopperContainer>
-        ) : (
-            <div className="popover__container">{contents}</div>
         );
     };
 
@@ -162,9 +155,7 @@ class PopoverBase extends React.Component {
             "popover",
             this.props.className,
             this._getModifiers("popover"),
-            {
-                "popover--use-portal": this._usePortal(),
-            }
+            "popover--use-portal",
         );
 
         return (

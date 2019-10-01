@@ -184,7 +184,7 @@ var NotificationsDemoPage = Object.create(HomePage, {
      */
     clickLanguageButton: {
         value: function () {
-            this.click("//span[@class='details-tooltip bottom center']");
+            this.click("//span[@data-id='confirm-tooltip']");
         }
     },
 

@@ -17,8 +17,6 @@ const typeOptions = [
  * @desc A demo for ConditionalFieldset
  */
 class ConditionalFieldsetDemo extends React.Component {
-    static flags = [ "use-portal", "p-stateful" ];
-
     state= {
         selectedIndex: 0,
         type: ConditionalFieldset.Types.SELECT,
@@ -38,8 +36,6 @@ class ConditionalFieldsetDemo extends React.Component {
             typeId: id,
         });
     }
-
-    _usePstateful = () => this.props.flags.includes("p-stateful");
 
     render() {
         return (
@@ -62,7 +58,6 @@ class ConditionalFieldsetDemo extends React.Component {
                             label="Stateless version"
                             description="Sample Description"
                             onValueChange={this._onValueChange}
-                            selectedIndex={this._usePstateful() ? undefined : this.state.selectedIndex}
                             stateless
                             type={this.state.type}>
                             <div title="Option 1">Option 1 content</div>

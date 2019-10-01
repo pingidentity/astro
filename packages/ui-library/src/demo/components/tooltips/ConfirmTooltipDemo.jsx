@@ -9,7 +9,6 @@ import HR from "ui-library/lib/components/general/HR";
 */
 
 class ConfirmTooltipDemo extends Component {
-    static flags = ["use-portal"];
 
     state = {
         open: this.props.open

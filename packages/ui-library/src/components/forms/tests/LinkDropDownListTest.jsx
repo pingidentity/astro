@@ -1,4 +1,7 @@
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../LinkDropDownList");
 jest.dontMock("../../general/CollapsibleLink");
 jest.dontMock("../../tooltips/DetailsTooltip");
@@ -33,7 +36,7 @@ describe("LinkDropDownList", function () {
             options: options,
             selectedOption: options[selectedIndex]
         });
-        return ReactTestUtils.renderIntoDocument(<LinkDropDownList {...opts} />);
+        return TestUtils.renderInWrapper(<LinkDropDownList {...opts} />);
     }
 
     function getLabel (component) {
@@ -87,7 +90,7 @@ describe("LinkDropDownList", function () {
         var component = getComponent();
 
         ReactTestUtils.Simulate.click(getLabel(component));
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("Triggers onClick callback when menu item is clicked", function () {
@@ -96,8 +99,8 @@ describe("LinkDropDownList", function () {
             menuItems = getMenu(component).children;
 
         ReactTestUtils.Simulate.click(menuItems[clickIndex]);
-        expect(component.props.onClick).toBeCalledWith(options[clickIndex]);
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onClick).toBeCalledWith(options[clickIndex]);
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("Does not trigger onClick callback if not passed in - stateful", function () {
@@ -119,7 +122,7 @@ describe("LinkDropDownList", function () {
             menuItems = getMenu(component).children;
 
         ReactTestUtils.Simulate.click(menuItems[clickIndex]);
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
 
@@ -151,15 +154,15 @@ describe("LinkDropDownList", function () {
         menuItems = getMenu(component).children;
         ReactTestUtils.Simulate.click(menuItems[clickIndex]);
 
-        expect(component.props.onToggle).toBeCalled();
-        expect(component.props.onClick).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onClick).toBeCalled();
 
         menu = getMenu(component);
         expect(menu).toBeFalsy();
     });
 
     it("No onToggle callback exists when onToggle not provided", function () {
-        var component = ReactTestUtils.renderIntoDocument(
+        var component = TestUtils.renderInWrapper(
             <LinkDropDownList
                 data-id={componentId}
                 stateless={false}
@@ -170,11 +173,11 @@ describe("LinkDropDownList", function () {
                 selectedOption={options[selectedIndex]}
             />);
 
-        expect(component.props.onToggle).toBeFalsy();
+        expect(component.props.children.props.onToggle).toBeFalsy();
     });
 
     it("Triggers onToggle callback when label clicked and onToggle provided", function () {
-        var component = ReactTestUtils.renderIntoDocument(
+        var component = TestUtils.renderInWrapper(
             <LinkDropDownList
                 data-id={componentId}
                 stateless={false}
@@ -186,16 +189,16 @@ describe("LinkDropDownList", function () {
                 selectedOption={options[selectedIndex]}
             />);
 
-        expect(component.props.onToggle).toBeTruthy();
+        expect(component.props.children.props.onToggle).toBeTruthy();
 
         var label = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-label");
 
         ReactTestUtils.Simulate.click(label);
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("renders bottom links", () => {
-        var component = ReactTestUtils.renderIntoDocument(
+        var component = TestUtils.renderInWrapper(
             <LinkDropDownList
                 data-id={componentId}
                 stateless
@@ -209,14 +212,8 @@ describe("LinkDropDownList", function () {
     });
 
 
-    it("fires a cannonball warning when the p-stateful flag is not set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("P-stateful renders the component in open state", function () {
-        var component = getComponent({ open: true, flags: [ "p-stateful" ] }),
+    it("renders the component in open state", function () {
+        var component = getComponent({ open: true }),
             label = getLabel(component),
             menu = getMenu(component);
 
@@ -229,25 +226,13 @@ describe("LinkDropDownList", function () {
         expect(menu.getAttribute("class")).toContain("select-list");
     });
 
-    it("P-statful triggers onClick callback when menu item is clicked ", function () {
+    it("triggers onClick callback when menu item is clicked ", function () {
         var clickIndex = 1,
-            component = getComponent({ open: true, flags: [ "p-stateful" ] }),
+            component = getComponent({ open: true }),
             menuItems = getMenu(component).children;
 
         ReactTestUtils.Simulate.click(menuItems[clickIndex]);
-        expect(component.props.onClick).toBeCalledWith(options[clickIndex]);
-        expect(component.props.onToggle).not.toBeCalled();
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent();
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal and p-stateful is set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal", "p-stateful" ], stateless: true });
-        expect(console.warn).not.toBeCalled();
+        expect(component.props.children.props.onClick).toBeCalledWith(options[clickIndex]);
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 });

@@ -86,7 +86,6 @@ const customRenderProductNav = (props, DefaultNav) => (
 * @desc A demo for HeaderBar
 */
 class HeaderBarDemo extends React.Component {
-    static flags = [ "use-portal" ];
 
     constructor(props) {
         super(props);

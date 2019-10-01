@@ -1,7 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import Messages from "./../../../components/general/messages/";
-import InlineMessage from "../../../components/general/InlineMessage";
 import uuid from "uuid";
 
 import Button from "../../../components/buttons/Button";
@@ -14,8 +13,6 @@ import HR from "ui-library/lib/components/general/HR";
  * @desc A demo for Messages
  */
 class MessagesDemo extends React.Component {
-    static flags = [ "fixed-messages-constants" ];
-
     actions = bindActionCreators(Messages.Actions, this.props.store.dispatch);
 
     _addSuccessMessage = () => {
@@ -37,7 +34,7 @@ class MessagesDemo extends React.Component {
     _addI18nInfoMessage = () => {
         this.actions.addMessage({
             containerId: "messages-i18n",
-            status: Messages.MessageTypes.FEATURE,
+            status: Messages.MessageTypes.INFO,
             iconName: "globe",
             key: "my.i18n.key",
         });
@@ -52,18 +49,10 @@ class MessagesDemo extends React.Component {
     };
 
     _addWarningMessage = () => {
-        this.actions.addMessage(`New Warning Message Added at ${new Date().toString()}`, Messages.MessageTypes.NOTICE);
+        this.actions.addMessage(`New Warning Message Added at ${new Date().toString()}`, Messages.MessageTypes.WARNING);
     };
 
     _addInfoMessage = () => {
-        this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.FEATURE);
-    };
-
-    _addWarningConstantMessage = () => {
-        this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.WARNING);
-    };
-
-    _addInfoConstantMessage = () => {
         this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.INFO);
     };
 
@@ -81,7 +70,7 @@ class MessagesDemo extends React.Component {
     _addCornerWarningMessage = () => {
         this.actions.addMessage({
             message: `New Warning Message Added at ${new Date().toString()}`,
-            status: Messages.MessageTypes.NOTICE,
+            status: Messages.MessageTypes.WARNING,
             layout: Messages.Layouts.CORNER,
             iconName: "error-triangle",
             removeAfterMs: 0,
@@ -91,7 +80,7 @@ class MessagesDemo extends React.Component {
     _addCornerDeletedMessage = () => {
         this.actions.addMessage({
             message: "You've successfully removed (email address) from your authentication methods.",
-            status: Messages.MessageTypes.FEATURE,
+            status: Messages.MessageTypes.INFO,
             layout: Messages.Layouts.CORNER,
             iconName: "delete",
             hideClose: true,
@@ -183,8 +172,6 @@ class MessagesDemo extends React.Component {
     }
 
     render() {
-        const fixedConstants = this.props.flags.includes("fixed-messages-constants");
-
         return (
             <div>
                 <Messages
@@ -202,17 +189,6 @@ class MessagesDemo extends React.Component {
                     onI18n={this._onI18n}
                 />
 
-                {!fixedConstants &&
-                    <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
-                        There is a discrepency between the message types and the constant name.
-                        Please use the following for the status. <br />
-                        Success = MessageTypes.SUCCESS <br />
-                        Error = MessageTypes.WARNING || MessageTypes.ERROR <br />
-                        Warning = MessageTypes.NOTICE <br />
-                        Info = MessageTypes.FEATURE <br />
-                    </InlineMessage>
-                }
-
                 <InputRow>
                     For messages that will appear in full width pages like Login or Change Password pages, add
                     'containerType=&#123;Messages.ContainerTypes.FULL&#125;'. For messages that will appear in Modals or
@@ -228,26 +204,16 @@ class MessagesDemo extends React.Component {
                     <Button onClick={this._addErrorMessage}>Add error message - MessageTypes.ERROR</Button>
                 </InputRow>
                 <InputRow>
-                    <Button onClick={this._addWarningMessage}>Add warning message - MessageTypes.NOTICE</Button>
+                    <Button onClick={this._addWarningMessage}>Add warning message - MessageTypes.WARNING</Button>
                     <Button onClick={this._addCornerWarningMessage}>Add corner warning message</Button>
                 </InputRow>
                 <InputRow>
-                    <Button onClick={this._addInfoMessage}>Add info message - MessageTypes.FEATURE</Button>
+                    <Button onClick={this._addInfoMessage}>Add info message - MessageTypes.INFO</Button>
                     <Button onClick={this._addCornerDeletedMessage}>Add corner deleted message</Button>
                 </InputRow>
                 <InputRow>
-                    <Button onClick={this._addWarningConstantMessage}>
-                        Add warning message - MessageTypes.WARNING
-                    </Button>
+                    <Button onClick={this._addI18nInfoMessage}>Add an i18n message - MessageTypes.INFO</Button>
                 </InputRow>
-                <InputRow>
-                    <Button onClick={this._addI18nInfoMessage}>Add an i18n message - MessageTypes.NOTICE</Button>
-                </InputRow>
-                {fixedConstants &&
-                    <InputRow>
-                        <Button onClick={this._addInfoConstantMessage}>Add info message - MessageTypes.INFO</Button>
-                    </InputRow>
-                }
 
                 <HR />
 

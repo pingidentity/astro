@@ -10,7 +10,7 @@ import Toggle from "ui-library/lib/components/forms/form-toggle";
 class ValueItemDemo extends React.Component {
     render() {
         return (
-            <ValueItem icon={<Toggle flags={["p-stateful"]} />}>
+            <ValueItem icon={<Toggle />}>
                 Disabled
             </ValueItem>
         );

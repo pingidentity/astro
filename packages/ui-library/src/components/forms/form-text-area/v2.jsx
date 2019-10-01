@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
 
 import FormFieldConstants from "../../../constants/FormFieldConstants";
 import FormLabel from "../FormLabel";
@@ -8,12 +7,11 @@ import FormError from "../FormError";
 import { InputWidthProptypes, getInputWidthClass } from "../InputWidths";
 
 import classnames from "classnames";
-import Utils from "../../../util/Utils.js";
 import _ from "underscore";
 
 import { inStateContainer } from "../../utils/StateContainer";
-import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { flagsPropType, } from "../../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
 * @callback FormTextArea~onChange
@@ -75,12 +73,10 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 * @param {number} [rows]
 *     Rows value for sizing, default is taken from CSS styles.
 * @param {string} [value=""]
-*     The current text field value, used when state is managed outside of component.
+*     The current text field value.
 *     Must be used with onValueChange handle to get updates.
-* @param {array} [flags=[]]
-*     Use progressively stateful behavior by providing the 'p-stateful' flag.
+ *    When not provided, the component will manage this value.
 * @param {object} [initialState]
-*     When the 'p-stateful' flag is set and 'value' is not being set as a prop,
 *     initialState.value determines the initial state of 'value'.
 * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
 *    Specifies the width of the input.
@@ -266,54 +262,6 @@ class FormTextAreaStateless extends React.Component {
     }
 }
 
-class FormTextAreaStateful extends React.Component {
-    static defaultProps = {
-        "data-id": "form-text-area",
-        onChange: _.noop,
-        onValueChange: _.noop
-    };
-
-    state = {
-        value: this.props.value || ""
-    };
-
-    _handleUndo = (e) => {
-        // update the event with the reverted data and send back to the parent
-        // otherwise the parent won't be aware of the reverted field even though the browser displays the original value
-        e.target = ReactDOM.findDOMNode(this.refs.FormTextAreaStateless.refs[this.props["data-id"] + "-textarea"]);
-        e.target.value = this.props.originalValue;
-        this.props.onChange(e);
-        this.props.onValueChange(e.target.value);
-
-        this.setState({
-            value: this.props.originalValue
-        });
-    };
-
-    _handleValueChange = (value) => {
-        this.setState({
-            value: value
-        }, function () {
-            if (this.props.onValueChange) {
-                this.props.onValueChange(value);
-            }
-        });
-    };
-
-    render() {
-        const props = _.defaults({
-            ref: "FormTextAreaStateless",
-            value: this.state.value,
-            onValueChange: this._handleValueChange,
-            edited: this.props.originalValue && this.state.value !== this.props.originalValue,
-            showUndo: this.props.originalValue && this.state.value !== this.props.originalValue,
-            onUndo: this._handleUndo
-        }, this.props);
-
-        return React.createElement(FormTextAreaStateless, props, this.props.children);
-    }
-}
-
 const resetToOriginal = (value, current, { originalValue }) => originalValue;
 
 const isEdited = ({ value }, { originalValue }) => {
@@ -323,7 +271,7 @@ const isEdited = ({ value }, { originalValue }) => {
     return {};
 };
 
-const PStatefulFormTextArea = inStateContainer([
+const FormTextArea = inStateContainer([
     {
         name: "value",
         initial: "",
@@ -335,46 +283,13 @@ const PStatefulFormTextArea = inStateContainer([
     },
 ], isEdited)(FormTextAreaStateless);
 
-export default class FormTextArea extends React.Component {
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
+FormTextArea.displayName = "FormTextArea";
 
-    static defaultProps = {
-        stateless: true,
-    };
+FormTextArea.propTypes = {
+    stateless: deprecatedStatelessProp,
+    flags: flagsPropType,
+};
 
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+FormTextArea.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            cannonballProgressivelyStatefulWarning({ name: "FormTextArea" });
-        }
-
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-        }
-    }
-
-    render() {
-        if (this._usePStateful()) {
-            return (
-                <PStatefulFormTextArea
-                    {...this.props}
-                />);
-        }
-
-        const { stateless, children } = this.props;
-
-        return (
-            stateless
-                ? React.createElement(FormTextAreaStateless,
-                    _.defaults({ ref: "FormTextAreaStateless" }, this.props), children)
-                : React.createElement(FormTextAreaStateful,
-                    _.defaults({ ref: "FormTextAreaStateful" }, this.props), children)
-        );
-    }
-}
+export default FormTextArea;

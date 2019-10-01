@@ -8,7 +8,6 @@ import { MessageTypes } from "../MessagesConstants";
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactTestUtils from "react-dom/test-utils";
-import Utils from "../../../../util/Utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import Messages from "../index.js";
 const setTimeout = window.setTimeout;
@@ -233,71 +232,6 @@ describe("Messages", function () {
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "messages");
 
         expect(element).toBeDefined();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'removeMessage' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
-
-        expect(function () {
-            getComponent({ removeMessage: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'i18n' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("i18n", "onI18n"));
-
-        expect(function () {
-            getComponent({ i18n: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    const warningMessage = [
-        {
-            message: "Warrrrrning",
-            type: MessageTypes.WARNING,
-        }
-    ];
-
-    it("shows Cannonball warning when using WARNING type without the flag", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toHaveBeenCalled();
-        getComponent({ messages: warningMessage });
-        expect(console.warn).toHaveBeenCalled();
-    });
-
-    it("doesn't show Cannonball warning if you use the flag", function() {
-        console.warn = jest.fn();
-
-        getComponent({ messages: warningMessage, flags: [ "fixed-messages-constants" ] });
-        expect(console.warn).not.toHaveBeenCalled();
-    });
-
-    it("doesn't show Cannonball warning normally", function() {
-        console.warn = jest.fn();
-
-        getComponent();
-        expect(console.warn).not.toHaveBeenCalled();
-    });
-
-    it("changes the warning class if the flag is set", function() {
-        const component = getComponent({ messages: warningMessage, flags: [ "fixed-messages-constants" ] });
-        const message = TestUtils.findRenderedDOMNodeWithClass(component, "notice");
-        expect(message).toBeTruthy();
-    });
-
-    it("doesn't change the warning class if the flag is not set", function() {
-        const component = getComponent({ messages: warningMessage });
-        const message = TestUtils.findRenderedDOMNodeWithClass(component, "warning");
-        expect(message).toBeTruthy();
     });
 
 });

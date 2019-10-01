@@ -12,7 +12,6 @@ describe("LeftNavBar", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
-        Utils = require("../../../../util/Utils"),
         LeftNavBar = require("../LeftNavBar"),
         _ = require("underscore");
 
@@ -286,8 +285,8 @@ describe("LeftNavBar", function () {
         expect(logo).toBeTruthy();
     });
 
-    it("renders no logo when logoSrc is not provided and pingoneLogo is not declared ", function () {
-        var wrapper = getWrappedComponent({ });
+    it("renders no logo when logoSrc is not provided and pingoneLogo is not declared in legacy mode", function () {
+        var wrapper = getWrappedComponent({ legacy: true });
         var component = wrapper.refs.target;
 
         var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
@@ -450,29 +449,6 @@ describe("LeftNavBar", function () {
                 "my-context-selector": "context-item-4"
             }
         });
-    });
-
-    it("throws error when deprecated prop 'onItemClick' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
-
-        expect(function () {
-            getWrappedComponent({ onItemClick: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onSectionClick' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
-
-        expect(function () {
-            getWrappedComponent({ onSectionClick: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    it ("throws the Cannonball warning when either legacy or updated is not provided", function() {
-        console.warn = jest.fn();
-
-        getWrappedComponent();
-        expect(console.warn).toBeCalled();
     });
 
 });

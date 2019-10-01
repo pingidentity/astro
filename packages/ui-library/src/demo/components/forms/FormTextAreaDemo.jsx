@@ -9,8 +9,6 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for FormTextArea
 */
 class FormTextAreaDemo extends React.Component {
-    static flags = [ "p-stateful" ];
-
     state = {
         onValueChangeFieldValue: "",
         onUndoValue: "Lorem ipsum dolor sit amet",
@@ -38,7 +36,6 @@ class FormTextAreaDemo extends React.Component {
         var options = { 1: "one", 2: "two", 3: "three" },
             heightOptions = "With a default height of 'medium'. Options" +
                             " are 'short', 'medium', and 'large'.";
-        const { flags } = this.props;
 
         return (
             <div>
@@ -85,7 +82,6 @@ class FormTextAreaDemo extends React.Component {
                     <FormTextArea
                         stateless={false}
                         labelText="With defaultValue and undo (stateful)"
-                        value={flags.includes("p-stateful") ? undefined : "Lorem ipsum dolor sit amet"}
                         initialState={{
                             value: "Lorem ipsum dolor sit amet",
                         }}

@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 import EllipsisLoader from "../general/EllipsisLoader";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import _ from "underscore";
 
@@ -39,8 +38,6 @@ import _ from "underscore";
  *     Don't include the right margin.
  * @param {boolean} active
  *     Active style of the button for when it's being used as a toggle.
- * @param {array} [flags]
- *     Set the flag for "add-button-margin" to override the special add button margin styling.
  * @example
  *  <Button
  *      label="Button"
@@ -79,26 +76,12 @@ function BaseButton ({
     submit,
     target,
     type,
-    ...props
-}, context) {
-    const fixAddMargin = hasFlag({ props, context }, "add-button-margin");
-
-    if (iconName === "add" && !fixAddMargin && !noSpacing) {
-        cannonballChangeWarning({
-            message: (
-                `Add buttons will no longer automatically have their right margin stripped. ` +
-                    `Instead, the 'noSpacing' prop will manually do it. ` +
-                    `Switch over by adding the 'add-button-margin' flag to Add buttons.`
-            ),
-        });
-    }
-
+}) {
     const classes = classnames(
         "button",
         className,
         iconName,
         {
-            "button--add-margin-fix": iconName === "add" && fixAddMargin,
             "button--no-spacing": noSpacing,
             inline,
             loading: loading,

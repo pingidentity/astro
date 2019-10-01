@@ -22,6 +22,7 @@ describe("DetailsTooltipPage Integration", function () {
     it("should have the details tooltip when clicking on each link", DetailsTooltipPage.retriable(function () {
         DetailsTooltipPage.openDetailsTooltipDemoPage();
         DetailsTooltipPage.scrollElementToTop("//div[@id='content']", 300);
+        DetailsTooltipPage.clickOutside();
 
         //click on the link "With a label (label is passed into component)"
         DetailsTooltipPage.clickWithALabelLink();

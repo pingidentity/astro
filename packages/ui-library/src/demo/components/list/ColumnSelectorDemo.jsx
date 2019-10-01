@@ -20,7 +20,6 @@ import { allFlags } from "../../../util/FlagUtils";
  */
 
 export default class ColumnSelectorDemo extends Component {
-    static flags = [ "use-portal" ];
 
     state = {
         filterOpen: false,
@@ -318,7 +317,6 @@ export default class ColumnSelectorDemo extends Component {
 
                     return (
                         <DetailsTooltip
-                            flags={["use-portal"]}
                             label={
                                 <RowButton
                                     buttonType={buttonTypes.ADD}
@@ -341,9 +339,7 @@ export default class ColumnSelectorDemo extends Component {
                                     justify={justifyOptions.CENTER}
                                 >
                                     <Padding right={paddingSizes.SM}>
-                                        <FormToggle
-                                            flags={["p-stateful"]}
-                                        />
+                                        <FormToggle />
                                     </Padding>
                             Allow automatic memberships
                                 </FlexRow>

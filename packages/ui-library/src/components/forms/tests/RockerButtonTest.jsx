@@ -7,13 +7,10 @@ describe("RockerButton", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Utils = require("../../../util/Utils.js"),
         RockerButton = require("../RockerButton"),
         _ = require("underscore");
 
     const labelsArray = ["A", "B", "C"];
-
-    const flags = ["p-stateful"];
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
@@ -44,38 +41,6 @@ describe("RockerButton", function () {
         expect(rocker).toBeDefined();
     });
 
-    it("stateful: onValueChange callback is not called when selection does not change", function () {
-        const callback = jest.fn();
-        const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} selectedIndex={0} labels={labelsArray} onValueChange={callback} />
-        );
-        const buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
-
-        ReactTestUtils.Simulate.click(buttons[0], {});
-        expect(component.props.onValueChange).not.toBeCalled();
-    });
-
-    it("stateless: will trigger onValueChange callback when selection changes", function () {
-        const component = getComponent();
-        const buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
-        const testIndex = 2;
-
-        ReactTestUtils.Simulate.click(buttons[2], {});
-        expect(component.props.onValueChange).toBeCalledWith({ label: labelsArray[testIndex], index: testIndex });
-    });
-
-    it("stateful: will trigger onValueChange callback when selection changes", function () {
-        const callback = jest.fn();
-        const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} labels={labelsArray} onValueChange={callback} />
-        );
-        const buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
-        const testIndex = 2;
-
-        ReactTestUtils.Simulate.click(buttons[testIndex], {});
-        expect(component.props.onValueChange).toBeCalledWith({ label: labelsArray[testIndex], index: testIndex });
-    });
-
     it("stateless: will not trigger callbacks if not given", function () {
         const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
@@ -94,35 +59,6 @@ describe("RockerButton", function () {
 
         ReactTestUtils.Simulate.click(buttons[2], {});
         expect(callback).not.toBeCalled();
-    });
-
-    it("stateless: will accept index of selected item", function () {
-        const component = getComponent({ selectedIndex: 1 });
-        const rocker = component.refs.RockerButtonStateless;
-        const container = rocker.refs.container;
-        const node = ReactDOM.findDOMNode(container);
-
-        expect(node.getAttribute("class").match("sel-1")).toBeTruthy();
-    });
-
-    it("stateless: will select initial index", function () {
-        const component = getComponent({ stateless: false, selectedIndex: 2 });
-        const manager = component.refs.RockerButtonStateful;
-        const rocker = manager.refs.RockerButtonStateless;
-        const container = rocker.refs.container;
-        const node = ReactDOM.findDOMNode(container);
-
-        expect(node.getAttribute("class").match("sel-2")).toBeTruthy();
-    });
-
-    it("stateless: will select initial item", function () {
-        const component = getComponent({ stateless: false, selected: "C" });
-        const manager = component.refs.RockerButtonStateful;
-        const rocker = manager.refs.RockerButtonStateless;
-        const container = rocker.refs.container;
-        const node = ReactDOM.findDOMNode(container);
-
-        expect(node.getAttribute("class").match("sel-2")).toBeTruthy();
     });
 
     it("stateless: will render buttons rocker button list", function () {
@@ -152,80 +88,26 @@ describe("RockerButton", function () {
         expect(callback).not.toBeCalled();
     });
 
-    it("is logging warning if more than 5 labels given", function () {
-
-        console.warn = jest.fn();
-        const callback = jest.fn();
-
-        ReactTestUtils.renderIntoDocument(
-            <RockerButton labels={["Profile", "Groups", "Services", "Users", "Security", "Attributes"]}
-                onValueChange={callback} />
-        );
-
-        expect(console.warn).toBeCalledWith("RockerButton expecting two to five labels, but was given ", 6);
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onChange' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-
-        expect(function () {
-            getComponent({ onChange: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    it ("throws the Cannonball warning when value is provided to a stateful rocker button", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: false, value: "something" });
-        expect(console.warn).toBeCalled();
-    });
-
-    it ("throws the Cannonball warning when value is not provided to a stateless rocker button", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ stateless: true });
-        expect(console.warn).toBeCalled();
-    });
-
     it("doesn't fire Cannonball warnings if required flags are provided", function() {
         console.warn = jest.fn();
-        getComponent({ flags: [ "p-stateful" ] });
+        getComponent();
         expect(console.warn).not.toBeCalled();
     });
 
-    it(" renders p-stateful version of component", () => {
+    it("renders component", () => {
         const modal = mount(
             <RockerButton
                 labels={labelsArray}
-                flags={flags}
             />
         );
         expect(modal.find(StateContainer).exists()).toBeTruthy();
 
     });
 
-    it("p-stateful will trigger onValueChange callback when selection changes", function () {
+    it(" will trigger onValueChange callback when selection changes", function () {
         const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton labels={labelsArray} onValueChange={callback} flags={flags} />
+            <RockerButton labels={labelsArray} onValueChange={callback} />
         );
         const buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
         const testIndex = 2;
@@ -234,12 +116,6 @@ describe("RockerButton", function () {
         expect(component.props.onValueChange).toBeCalledWith(
             { label: labelsArray[testIndex], index: testIndex },
             undefined);
-    });
-
-    it("fires warning if they use the selected prop", function () {
-        console.warn = jest.fn();
-        getComponent({ selected: "C", flags: [ "p-stateful" ] });
-        expect(console.warn).toBeCalled();
     });
 
 });

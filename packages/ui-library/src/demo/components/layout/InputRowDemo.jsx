@@ -19,14 +19,12 @@ const InputRowDemo = () => {
                     labelText="First Name"
                     width={InputWidths.SM}
                     data-id="firstName"
-                    flags={["p-stateful"]}
                     required={true}
                 />
                 <FormTextField
                     labelText="Last Name"
                     width={InputWidths.SM}
                     data-id="firstName"
-                    flags={["p-stateful"]}
                     required={true}
                 />
 
@@ -40,7 +38,6 @@ const InputRowDemo = () => {
                     labelText="Misc"
                     width={InputWidths.SM}
                     data-id="firstName"
-                    flags={["p-stateful"]}
                     required={true}
                 />
             </InputRow>

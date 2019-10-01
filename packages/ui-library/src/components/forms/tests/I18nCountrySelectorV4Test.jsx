@@ -2,7 +2,6 @@ window.__DEV__ = true;
 
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
-import Utils from "../../../util/Utils";
 import TestUtils from "../../../testutil/TestUtils";
 import I18nCountrySelector from "../i18n/I18nCountrySelector";
 import StateContainer from "../../utils/StateContainer";
@@ -45,7 +44,6 @@ describe.skip("I18nCountrySelector v4", function () {
             onValueChange: jest.fn(),
             onToggle: jest.fn(),
             onSearch: jest.fn(),
-            flags: [ "use-portal", "p-stateful" ],
         });
         return ReactTestUtils.renderIntoDocument(<I18nCountrySelector {...props} />);
     }
@@ -205,35 +203,6 @@ describe.skip("I18nCountrySelector v4", function () {
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         expect(component.props.onSearch).toBeCalled();
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onCountrySearch' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
-
-        expect(function () {
-            getComponent({ onCountrySearch: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    it("fires cannonball warning when p-stateful flag isn't set", function() {
-        console.warn = jest.fn();
-        expect(console.warn).not.toBeCalled();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire cannonball warning when p-stateful and use-portal flags are set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

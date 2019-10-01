@@ -8,8 +8,7 @@ import FormTextField from "../forms/form-text-field";
 import FormMessage from "../forms/FormMessage";
 import FormLabel from "../forms/FormLabel";
 import classnames from "classnames";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
  * @class UnitInput
@@ -19,10 +18,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  *     The data-id assigned to the top-level of the component
  * @param {string}   [className]
  *     CSS class names to assign to the top-level of the component
- * @param {string} [errorMessage]
- *     The message to display if defined when external validation failed.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render the dropdown with popper.js and react-portal
  * @param {string}   [labelText]
  *     The label text for the compound input
  * @param {string} [label]
@@ -53,12 +48,6 @@ module.exports = class extends React.Component {
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    componentDidMount() {
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "UnitInput" });
-        }
-    }
-
     render() {
         const containerClassName = classnames(
             "input-textselect",
@@ -78,14 +67,13 @@ module.exports = class extends React.Component {
             className: dropDownClassName = "",
             ...dropDownProps
         } = this.props.dropDownListProps;
-        
+
         return (
             <FormLabel value=
                 {this.props.labelText || this.props.label}
             className={containerClassName}
             data-id={this.props["data-id"]}>
                 <FormTextField
-                    flags={[ "p-stateful" ]}
                     {...textFieldProps}
                     className={ classnames(
                         textFieldClassName,

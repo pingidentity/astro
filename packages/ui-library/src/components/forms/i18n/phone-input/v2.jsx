@@ -6,10 +6,9 @@ import { parsePhoneNumberFromString } from "libphonenumber-js";
 import CountryFlagList from "../CountryFlagList";
 import { v2 as FormTextField } from "../../form-text-field";
 import Validators from "../../../../util/Validators";
-import Utils from "../../../../util/Utils.js";
-import { cannonballPortalWarning, cannonballProgressivelyStatefulWarning } from "../../../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../../../utils/StateContainer";
-import { flagsPropType, hasFlag, getFlags } from "../../../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../../../util/DeprecationUtils";
 
 /**
  * @typedef I18nPhoneInput~PhoneInputValues
@@ -67,15 +66,19 @@ import { flagsPropType, hasFlag, getFlags } from "../../../../util/FlagUtils";
 *
 * @param {boolean} [open=false]
 *     State of the open/closed dropdown menu.
+*     When not provided, the component will manage this value.
 * @param {I18nPhoneInput~onToggle} [onToggle]
 *     Callback to be triggered when open/close state changes. Used only when stateless=true.
 *
 * @param {number} [searchIndex]
 *     The index of the country that was just searched to enable highlighing.
+*     When not provided, the component will manage this value.
 * @param {string} [searchString]
 *     Value to help with finding an element on keydown.
+*     When not provided, the component will manage this value.
 * @param {number} [searchTime]
 *     Time to help clear the search when the user delays their search.
+*     When not provided, the component will manage this value.
 * @param {I18nPhoneInput~onSearch} [onSearch]
 *     Callback to be triggered when the state of the search of a country when the flag dropdown is expanded changes.
 *
@@ -90,8 +93,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../../../util/FlagUtils";
 *     Passes to and auto focuses the FormTextField input.
 * @param {boolean} [useAutoComplete="false"]
 *     Whether or not the field will support autocomplete.
-* @param {array} [flags]
-*     Set the flag for "use-portal" to render with popper.js and react-portal
 *
 * @example
 *       <I18nPhoneInput
@@ -153,21 +154,6 @@ class I18nPhoneInputStateless extends Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (this.props.onCountrySearch) {
-                throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
-            }
-        }
-
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "Phone" });
-        }
-    }
 
     _getCountryCode() {
         const {
@@ -264,69 +250,13 @@ class I18nPhoneInputStateless extends Component {
                     }
                     autoFocus={this.props.autoFocus}
                     useAutocomplete={this.props.useAutocomplete}
-                    flags={[ "p-stateful" ]}
                 />
             </div>
         );
     }
 }
 
-class I18nPhoneInputStateful extends Component {
-    state = {
-        open: this.props.open || false,
-        searchIndex: -1,
-        searchString: "",
-        searchTime: 0
-    };
-
-    _handleToggle = () => {
-        this.setState({
-            open: !this.state.open,
-            searchIndex: -1,
-            searchString: "",
-            searchTime: 0
-        });
-    };
-
-    /**
-    * @method _handleSearch
-    * @memberof I18nPhoneInputStateful
-    * @private
-    * @ignore
-    *
-    * @desc Handles search of country in list.
-    *
-    * @param {string} search
-    *     Search string for country.
-    * @param {number} time
-    *     Search time for country.
-    * @param {Number} index
-    *     The index of country searched
-    */
-    _handleSearch = (search, time, index) => {
-        this.setState({
-            searchString: search,
-            searchTime: time,
-            searchIndex: index
-        });
-    };
-
-    render() {
-        var props = _.defaults({
-            ref: "I18nPhoneInputStateless",
-            open: this.state.open,
-            onToggle: this._handleToggle,
-            searchIndex: this.state.searchIndex,
-            searchString: this.state.searchString,
-            searchTime: this.state.searchTime,
-            onSearch: this._handleSearch
-        }, this.props);
-
-        return <I18nPhoneInputStateless {...props} />;
-    }
-}
-
-const PStatefulPhoneInput = inStateContainer([
+const I18nPhoneInput = inStateContainer([
     {
         name: "open",
         initial: false,
@@ -351,39 +281,13 @@ const PStatefulPhoneInput = inStateContainer([
         setter: "setSearchTime",
     },
 ])(I18nPhoneInputStateless);
-PStatefulPhoneInput.displayName = "PStatefulPhoneInput";
+I18nPhoneInput.displayName = "PhoneInput";
 
-class I18nPhoneInput extends Component {
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
+I18nPhoneInput.propTypes = {
+    stateless: deprecatedStatelessProp
+};
 
-    static defaultProps = {
-        stateless: false
-    };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            cannonballProgressivelyStatefulWarning({
-                name: "I18nPhoneInput"
-            });
-        }
-    }
-
-    render() {
-        if (this._usePStateful()) {
-            return <PStatefulPhoneInput {...this.props} />;
-        }
-
-        return this.props.stateless
-            ? <I18nPhoneInputStateless ref="I18nPhoneInputStateless" {...this.props} />
-            : <I18nPhoneInputStateful ref="I18nPhoneInputStateful" {...this.props} />;
-    }
-}
+I18nPhoneInput.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 I18nPhoneInput.I18nPhoneInputStateless = I18nPhoneInputStateless;
 

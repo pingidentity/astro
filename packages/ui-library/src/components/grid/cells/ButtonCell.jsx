@@ -2,8 +2,7 @@
 
 var PropTypes = require("prop-types");
 
-var React = require("react"),
-    Utils = require("../../../util/Utils");
+var React = require("react");
 
 /**
  * @class ButtonCell
@@ -37,16 +36,6 @@ class ButtonCell extends React.Component {
     static defaultProps = {
         "data-id": "grid-button-cell"
     };
-
-    constructor(props) {
-        super(props);
-        // TODO: figure out how to test separage throws in Jest and implement
-        /* istanbul ignore if  */
-        if (!Utils.isProduction() && props.onCallBack) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
-        }
-    }
 
     render() {
         return (

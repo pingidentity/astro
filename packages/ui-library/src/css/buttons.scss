@@ -163,11 +163,6 @@ button,
     }
     &.add {
         padding-left: 36px;
-        margin: 0;
-
-        &.button--add-margin-fix { // just to fix the margin change - remove in V4
-            margin-right: $spacing-sm;
-        }
 
         &:before,
         &:after {
@@ -396,7 +391,7 @@ button,
     button,
     .help-tooltip > .helphint-button-target > button {
         @include text-style();
-        padding: 0 30px;
+        padding: 0 $spacing-lg;
 
         width: auto;
         line-height: $height - 2px;

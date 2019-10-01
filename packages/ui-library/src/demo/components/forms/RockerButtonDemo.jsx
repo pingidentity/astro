@@ -11,8 +11,6 @@ const labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
 const years = ["3M", "6M", "1Y"];
 const days = ["1D", "1W", "1M"];
 class RockerButtonDemo extends React.Component {
-    static flags = ["p-stateful"]
-
     state = {
         selectedLabel: "Label One",
         selectedIndex: 0

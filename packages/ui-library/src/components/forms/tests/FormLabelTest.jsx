@@ -13,8 +13,7 @@ describe("FormLabel", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        FormLabel = require("../FormLabel"),
-        Utils = require("../../../util/Utils");
+        FormLabel = require("../FormLabel");
 
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
@@ -94,16 +93,6 @@ describe("FormLabel", function () {
 
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "formLabel");
         expect(element).toBeDefined();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <FormLabel id="foo" />
-            );
-        }).toThrow(expectedError);
     });
 
     it("Renders the formlabel with a description", () => {

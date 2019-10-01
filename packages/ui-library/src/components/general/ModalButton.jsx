@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 
 import React from "react";
-import _ from "underscore";
 import Utils from "../../util/Utils";
 import Button from "../buttons/Button";
 import Modal from "./Modal";
-import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType, getFlags, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
  * @callback ModalButton~contentCallback
@@ -32,17 +31,10 @@ import { flagsPropType, getFlags, hasFlag } from "../../util/FlagUtils";
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
  *
- * @param {boolean} [initiallyExpanded=false]
- *     Initial modal expanded state. Used only when stateless=false.
- *     if the expanded property is provided, it overrides the initiallyExpanded.
  * @param {boolean} [expanded=false]
- *     Modal expanded state.  If set on a stateless modal,
- *     then the modal will not keep its own expanded state,
- *     and closing the modal must be managed externally.
+ *     Modal expanded state.
+ *     When not provided, the component will manage this value.
  *
- *  @param {array} [flags]
- *     Set the flag for "use-portal" to render with react-portal and/or
- *     set "p-stateful" to render the component progressively stateful.
  * @param {function} [onOpen]
  *     Callback to be triggered when the activator is clicked and the modal is about to open.
  *     If this function returns false, the opening will be prevented.
@@ -162,36 +154,6 @@ class ModalButtonStateless extends React.Component {
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.containerStyle) {
-                throw new Error(Utils.deprecatePropError("containerStyle", "className"));
-            }
-            if (props.activatorContainerStyle) {
-                throw new Error(Utils.deprecatePropError("activatorContainerStyle", "activatorContainerClassName"));
-            }
-            if (props.linkContent) {
-                throw new Error(Utils.deprecatePropError("linkContent", "activatorContent"));
-            }
-            if (props.linkStyle) {
-                throw new Error(Utils.deprecatePropError("linkStyle", "activatorContentClassName"));
-            }
-            if (props.value) {
-                throw new Error(Utils.deprecatePropError("value", "activatorButtonLabel"));
-            }
-            if (props.buttonStyle) {
-                throw new Error(Utils.deprecatePropError("buttonStyle", "activatorButtonClassName"));
-            }
-        }
-    }
-
     close = () => {
         this.props.onClose();
     };
@@ -259,157 +221,7 @@ class ModalButtonStateless extends React.Component {
     }
 }
 
-class ModalButtonStateful extends React.Component {
-    static displayName = "ModalButtonStateful";
-
-    static propTypes = {
-        initiallyExpanded: PropTypes.bool,
-        expanded: PropTypes.bool,
-        onOpen: PropTypes.func,
-        onClose: PropTypes.func
-    };
-
-    static defaultProps = {
-        initiallyExpanded: false
-    };
-
-    constructor(props) {
-        super(props);
-        // TODO - in a future version, the initiallyExpanded prop should be removed
-        // and the expanded prop (used with a stateless modal) should mean the initial expanded state;
-        // in that case, replace the code below with just:
-        // return { expanded: this.props.expanded };
-
-        var expanded = props.initiallyExpanded;
-
-        // this code should not be here, but I am keeping it for backwards compatibility
-        if (typeof(props.expanded) !== "undefined" && props.expanded !== null) {
-            expanded = !!props.expanded;
-        }
-
-        this.state = {
-            expanded: expanded
-        };
-    }
-
-    /*
-     * Expand the modal if it is not already expanded,
-     * triggered by clicking on the modal button.
-     */
-    _handleOpen = () => {
-        if (!this.props.disabled && !this._isExpanded()) {
-            this.props.onOpen();
-
-            this.setState({
-                expanded: true
-            });
-        }
-    };
-
-    /*
-     * Close the modal if it is expanded,
-     * triggered by clicking the close modal button.
-     */
-    _handleClose = () => {
-        if (!this.props.disabled && this._isExpanded()) {
-            const doClose = this.props.onClose() !== false;
-
-            // Prevent closing if close callback returned false
-            if (doClose) {
-                this.setState({
-                    expanded: false
-                });
-            }
-        }
-    };
-
-    /*
-     * Since the expanded flag can be provided through props
-     * (as on override of the local state attribute), check both.
-     */
-    _isExpanded = () => {
-        // TODO - in a future version, where the expanded property on the stateful modal button
-        // means the initial expanded state, replace the code below with just:
-        // return this.state.expanded;
-
-        if (typeof(this.props.expanded) !== "undefined") {
-            return !!this.props.expanded;
-        } else {
-            return this.state.expanded;
-        }
-    };
-
-    render() {
-        var expanded = this._isExpanded();
-
-        var props = _.defaults(
-            {
-                ref: "ModalButtonStateless",
-                expanded: expanded,
-                onOpen: this._handleOpen,
-                onClose: this._handleClose
-
-            },
-            this.props
-        );
-
-        return <ModalButtonStateless {...props} />;
-    }
-}
-
-export default class ModalButton extends React.Component {
-    static displayName = "ModalButton";
-
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
-
-    static defaultProps = {
-        stateless: false,
-        onOpen: () => {},
-        onClose: () => {}
-    }
-
-    static _statelessComponent = ModalButtonStateless;
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            cannonballChangeWarning({
-                message: `The 'onOpen' prop will no longer serve as an initial state. ` +
-                `If it is present, it will control the current value of the component. ` +
-                `Set the 'p-stateful' flag to switch to this behavior now.`,
-            });
-        }
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "ModalButton" });
-        }
-    }
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    render() {
-
-        if (this._usePStateful()) {
-            return <PStatefulModalButton {...this.props} />;
-        }
-
-        return (
-            this.props.stateless
-                ? React.createElement(
-                    ModalButtonStateless,
-                    _.defaults({ ref: "ModalButtonStateless" }, this.props)
-                )
-                : React.createElement(
-                    ModalButtonStateful,
-                    _.defaults({ ref: "ModalButtonStateful" }, this.props)
-                )
-        );
-    }
-}
-
-const PStatefulModalButton = inStateContainer([
+const ModalButton = inStateContainer([
     {
         name: "expanded",
         initial: false,
@@ -426,6 +238,18 @@ const PStatefulModalButton = inStateContainer([
     },
 
 ])(ModalButtonStateless);
+
+ModalButton.propTypes = {
+    stateless: deprecatedStatelessProp,
+    flags: flagsPropType,
+};
+
+ModalButton.defaultProps = {
+    onOpen: () => {},
+    onClose: () => {}
+};
+
+ModalButton._statelessComponent = ModalButtonStateless;
 
 /**
 * @callback ModalButton#ModalActivator~onOpen
@@ -542,3 +366,5 @@ class ModalActivator extends React.Component {
 }
 
 ModalButton.Modal = Modal;
+
+export default ModalButton;

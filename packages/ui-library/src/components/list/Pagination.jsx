@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
-import Utils from "../../util/Utils";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
  * @callback PageLinks~onValueChange
@@ -228,27 +227,7 @@ class PaginationStateless extends Component {
     }
 }
 
-class PaginationStateful extends Component {
-    static displayName = "PaginationStateful";
-
-    state = {
-        page: 0
-    };
-
-    _onPageChange = ({ first, last, page }) => this.setState({
-        page
-    }, () => this.props.onValueChange(
-        { first, last, page }
-    ));
-
-    render() {
-        return (
-            <PaginationStateless {...this.props} page={this.state.page} onValueChange={this._onPageChange}/>
-        );
-    }
-}
-
-const PStatefulPagination = inStateContainer([
+const Pagination = inStateContainer([
     {
         name: "page",
         initial: 1,
@@ -297,7 +276,8 @@ const PStatefulPagination = inStateContainer([
  * @param {number} totalPages
  *          Total number of pages (alternate to passing total records)
  * @param {number} [page]
- *          Currently selected page number. Respected only with externally managed variant.
+ *          Currently selected page number.
+ *          When not provided, the component will manage this value.
  * @param {Pagination~onValueChange} onValueChange
  *          Callback to be triggered when a new page selected.
  *  * @param {function} [renderPagelinks]
@@ -327,49 +307,13 @@ const PStatefulPagination = inStateContainer([
  *
  */
 
-export default class Pagination extends Component {
+Pagination.displayName = "Pagination";
 
-    static displayName = "Pagination";
+Pagination.propTypes = {
+    flags: flagsPropType,
+    stateless: deprecatedStatelessProp
+};
 
-    static propTypes = {
-        flags: flagsPropType,
-        stateless: PropTypes.bool
-    };
+Pagination.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    static defaultProps = {
-        stateless: false
-    };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-    }
-
-    render() {
-        if (hasFlag(this, "p-stateful")) {
-            return <PStatefulPagination {...this.props} />;
-        }
-
-        cannonballChangeWarning({
-            message: `The 'page' prop will no longer serve as an initial state. ` +
-            `If it is present, it will control the current value of the component. ` +
-            `Set the 'p-stateful' flag to switch to this behavior now.`,
-        });
-
-        return (
-            this.props.stateless
-                ? <PaginationStateless ref="PaginationStateless" {...this.props} />
-                : <PaginationStateful ref="PaginationStateful" {...this.props} />);
-    }
-}
+export default Pagination;

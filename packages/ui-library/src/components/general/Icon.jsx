@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
 
@@ -17,7 +16,7 @@ import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {string} [type]
- *     Set to "leading" or "inline" to either provide extra spacing or not.
+ *     Set to Icon.iconTypes.LEADING or Icon.iconTypes.INLINE to either provide extra spacing or not.
  * @param {string} [title]
  *     Title for the label within a stack gap.
  * @param {string} [iconSize]
@@ -49,8 +48,9 @@ const iconSizes = {
 
 const iconTypes = {
     INLINE: "inline",
-    LEADING: "leading"
+    LEADING: "leading",
 };
+
 
 const Icon = withFocusOutline(({
     className,
@@ -80,7 +80,7 @@ const Icon = withFocusOutline(({
         ...getClickableA11yProps(onClick)
     } : {};
 
-    if (type === iconTypes.INLINE) {
+    if ((type !== iconTypes.LEADING && !children) || (type === iconTypes.INLINE)) {
         return (
             <span
                 data-id={dataId}
@@ -100,14 +100,6 @@ const Icon = withFocusOutline(({
                 {...onClickProps}
             />
         );
-    } else if (type !== iconTypes.LEADING && !children) {
-        cannonballChangeWarning({
-            message: (
-                `By default, Icon will display a simple icon when no children are provided. ` +
-                `You can use this rendering behavior now by setting the 'type' prop to 'inline'. ` +
-                `To display a leading icon that includes the right margin, set 'type' to 'leading'.`
-            ),
-        });
     }
 
     return (
@@ -145,13 +137,7 @@ Icon.propTypes = {
     textType: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.oneOf(Object.values(iconTypes)),
-    iconSize: PropTypes.oneOf([
-        iconSizes.SM,
-        iconSizes.MD,
-        iconSizes.LG,
-        iconSizes.XL,
-        iconSizes.XXL
-    ]),
+    iconSize: PropTypes.oneOf(Object.values(iconSizes)),
 };
 
 Icon.defaultProps = {
@@ -161,6 +147,4 @@ Icon.defaultProps = {
 Icon.iconSizes = iconSizes;
 Icon.iconTypes = iconTypes;
 
-Icon.displayName = "Icon";
-
-export default Icon;
+export default Icon ;

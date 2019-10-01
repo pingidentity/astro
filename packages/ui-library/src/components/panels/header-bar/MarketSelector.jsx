@@ -50,7 +50,6 @@ class MarketSelector extends React.Component {
             selectedOption={this._getSelectedOption()}
             onValueChange={this._handleMarketChange}
             options={this._getOptions()}
-            flags={["use-portal", "p-stateful"]}
         />
     );
 }

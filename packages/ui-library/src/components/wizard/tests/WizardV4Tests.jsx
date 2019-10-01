@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../Step");
 jest.dontMock("../Wizard");
 jest.dontMock("../../general/EllipsisLoaderButton");
@@ -14,7 +17,6 @@ describe("Wizard v4", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Utils = require("../../../util/Utils"),
         ReactTestUtils = require("react-dom/test-utils"),
         Wizard = require("../Wizard"),
         Step = Wizard.Step,
@@ -243,23 +245,6 @@ describe("Wizard v4", function () {
         expect(tooltipTitle.textContent).toBe(cancelTooltipParams.title);
         expect(tooltipText.textContent).toBe(cancelTooltipParams.messageText);
     });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getRenderedComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onChange' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-
-        expect(function () {
-            getRenderedComponent({ onChange: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
 
     it("for a single step wizard,the progress bar is not rendered and the css classnames are altered", function () {
         var component = getRenderedComponent({}, (<Step title="step 1">Step 1</Step>)),

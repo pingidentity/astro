@@ -4,7 +4,6 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import FormTextArea from "../v2";
 import HelpHint from "../../../tooltips/HelpHint";
-import Utils from "../../../../util/Utils";
 import _ from "underscore";
 import StateContainer from "../../../utils/StateContainer";
 import { mount } from "enzyme";
@@ -17,10 +16,9 @@ describe("FormTextArea v4", function () {
             onChange: jest.fn(),
             onValueChange: jest.fn(),
             onBlur: jest.fn(),
-            flags: [ "p-stateful" ],
         });
 
-        return ReactTestUtils.renderIntoDocument(<FormTextArea {...props} />);
+        return TestUtils.renderInWrapper(<FormTextArea {...props} />);
     }
 
     it("data-id's don't change", () => {
@@ -117,8 +115,8 @@ describe("FormTextArea v4", function () {
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        expect(component.props.onChange).toBeCalled();
-        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onChange).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
     });
 
     it("triggers the onBlur callback on field blur", function () {
@@ -128,7 +126,7 @@ describe("FormTextArea v4", function () {
 
         ReactTestUtils.Simulate.blur(field);
 
-        expect(component.props.onBlur).toBeCalled();
+        expect(component.props.children.props.onBlur).toBeCalled();
     });
 
     it("does not show the undo button if showUndo is not set to true", function () {
@@ -274,7 +272,7 @@ describe("FormTextArea v4", function () {
         // click on the undo icon
         ReactTestUtils.Simulate.click(undo);
         // now we can verify that the callback gets triggered
-        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
     });
 
     /*
@@ -295,26 +293,6 @@ describe("FormTextArea v4", function () {
 
         expect(help).toBeTruthy();
         // expect(help.getAttribute("class")).toContain("bottom right");
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it("fires cannonball warning when p-stateful flag isn't set", function () {
-        console.warn = jest.fn();
-        getComponent({ flags: [] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire cannonball warning when p-stateful flag is set", function () {
-        console.warn = jest.fn();
-        getComponent({ flags: ["p-stateful"] });
-        expect(console.warn).not.toBeCalled();
     });
 
     it("renders with no monospaced class when monospaced is false", () => {

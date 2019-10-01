@@ -29,13 +29,6 @@ class EllipsisLoader extends React.Component {
         "data-id": "ellipsis-loader"
     };
 
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
-
     render() {
         if (this.props.loading) {
             var id = this.props.id || this.props["data-id"];

@@ -75,17 +75,14 @@ const ProfileEdit = ({
         <PageSection>
             <InputRow>
                 <FormTextField
-                    flags={["p-stateful"]}
                     labelText="Name"
                     onValueChange={setStepState("name")}
                     value={activeProvider.name}
                     required={true}
-                    flags={["p-stateful"]}
                 />
             </InputRow>
             <InputRow>
                 <FormTextArea
-                    flags={["p-stateful"]}
                     labelText="Description"
                     onValueChange={setStepState("description")}
                     value={activeProvider.description}
@@ -113,7 +110,6 @@ const IDPEdit = (props) => {
         <PageSection>
             <InputRow>
                 <FormTextField
-                    flags={["p-stateful"]}
                     labelText="Subdomain"
                     onValueChange={props.setStepState("appId")}
                     value={props.activeProvider.appId || ""}
@@ -152,7 +148,6 @@ const AuthorizationEdit = (props) => {
             <InputRow>
                 <FormTextField
                     required
-                    flags={["p-stateful"]}
                     labelText="OAUTH CLIENT ID"
                     onValueChange={props.setStepState("appId")}
                     value={props.activeProvider.appId || ""}
@@ -161,7 +156,6 @@ const AuthorizationEdit = (props) => {
             <InputRow>
                 <FormTextField
                     required
-                    flags={["p-stateful"]}
                     labelText="OAUTH CLIENT SECRET"
                     maskValue
                     onValueChange={props.setStepState("secret")}
@@ -190,13 +184,11 @@ const AttributesEdit = (props) => {
             >
                 <InputRow>
                     <FormTextField
-                        flags={["p-stateful"]}
                         width={InputWidths.SM}
                         placeholder="Username"
                         withArrow
                     />
                     <FormDropDownList
-                        flags={["p-stateful", "use-portal"]}
                         width={InputWidths.MD}
                         required
                         label="PingOne User Attribute"
@@ -221,13 +213,11 @@ const AttributesEdit = (props) => {
                     <Row key="first">
                         <FormTextField
                             width={InputWidths.SM}
-                            flags={["p-stateful"]}
                             labelText=""
                             value="FirstName"
                         />
                         <Separator>=</Separator>
                         <FormDropDownList
-                            flags={["p-stateful", "use-portal"]}
                             width={InputWidths.MD}
                             label="PingOne User Attribute"
                             placeholder="Select an attribute to link"
@@ -245,13 +235,11 @@ const AttributesEdit = (props) => {
                     <Row key="second">
                         <FormTextField
                             width={InputWidths.SM}
-                            flags={["p-stateful"]}
                             labelText=""
                             value="LastName"
                         />
                         <Separator>=</Separator>
                         <FormDropDownList
-                            flags={["p-stateful", "use-portal"]}
                             width={InputWidths.MD}
                             placeholder="Select an attribute to link"
                             selectedOption={{ label: "Attribute", value: "Attribute" }}
@@ -268,13 +256,11 @@ const AttributesEdit = (props) => {
                     <Row key="third">
                         <FormTextField
                             width={InputWidths.SM}
-                            flags={["p-stateful"]}
                             labelText=""
                             value="Title"
                         />
                         <Separator>=</Separator>
                         <FormDropDownList
-                            flags={["p-stateful", "use-portal"]}
                             width={InputWidths.MD}
                             placeholder="Select an attribute to link"
                             selectedOption={{ label: "Attribute", value: "Attribute" }}
@@ -291,13 +277,11 @@ const AttributesEdit = (props) => {
                     <Row key="fourth">
                         <FormTextField
                             width={InputWidths.SM}
-                            flags={["p-stateful"]}
                             labelText=""
                             value="Phone"
                         />
                         <Separator>=</Separator>
                         <FormDropDownList
-                            flags={["p-stateful", "use-portal"]}
                             width={InputWidths.MD}
                             placeholder="Select an attribute to link"
                             selectedOption={{ label: "Attribute", value: "Attribute" }}
@@ -799,7 +783,7 @@ export default class OutboundProvisioning extends Component {
                                 Error: OAuth Client ID
                                 </Text>,
                                 <StatusIndicator type={StatusIndicator.Types.ERROR} key="status"/>,
-                                <Toggle flags={["p-stateful"]} key="toggle"/>
+                                <Toggle key="toggle"/>
                             ]
                             : <StatusIndicator type={StatusIndicator.Types.SUCCESS}/>}
                     subtitle={possibleProviders[type]}
@@ -929,7 +913,6 @@ export default class OutboundProvisioning extends Component {
                     />
                     <InputRow>
                         <SearchBar
-                            flags={["p-stateful"]}
                             onValueChange={this._setSearchTerm}
                             placeholder="Search something"
                             showClear={true}

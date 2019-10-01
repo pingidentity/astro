@@ -4,10 +4,9 @@ import PropTypes from "prop-types";
 import CollapsibleLink from "../general/CollapsibleLink";
 import DetailsTooltip from "../tooltips/DetailsTooltip";
 import classnames from "classnames";
-import _ from "underscore";
-import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 
 /**
@@ -30,8 +29,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  *     A string or JSX object that serves as the trigger label.
 * @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @param {object} [bottomPanel]
  *     Link actions for the bottom of the list
@@ -41,10 +38,12 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  *     component's parent component. False or not specified will cause the component to manage state internally.
  * @param {boolean} [open=false]
  *     Determines whether the LinkDropDownList is visible. True = visible, False = hidden.
+ *     When not provided, the component will manage this value.
  * @param {object} [initialState]
- *     When the 'p-stateful' flag is set 'selectedOption' needs to be passed into the initialState prop.
  *     selectedOption determines the initial state of 'selectedOption'.
- *
+ * @param {FormDropDownList~option} selectedOption
+ *     The selected list option.
+ *     When not provided, the component will manage this value.
  * @param {LinkDropDownList~onClick} [onClick]
  *     Callback triggered when a menu item is selected
  * @param {LinkDropDownList~onToggle} [onToggle]
@@ -83,12 +82,6 @@ class LinkDropDownListStateless extends React.Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "LinkDropDownList" });
-        }
-    }
 
     _handleClick = (selectedOption) => {
         if (this.props.closeOnSelection) {
@@ -135,7 +128,7 @@ class LinkDropDownListStateless extends React.Component {
                 showClose={false}
                 open={this.props.open}
                 onToggle={this.props.onToggle}
-                flags={[...getFlags(this), "p-stateful"]}
+                flags={getFlags(this)}
             >
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}
@@ -150,96 +143,7 @@ class LinkDropDownListStateless extends React.Component {
     }
 }
 
-class LinkDropDownListStateful extends React.Component {
-    static propTypes = {
-        bottomPanel: PropTypes.object,
-        className: PropTypes.string,
-        "data-id": PropTypes.string,
-        label: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.object]),
-        onClick: PropTypes.func,
-        onToggle: PropTypes.func,
-        open: PropTypes.bool,
-        options: PropTypes.arrayOf(PropTypes.object).isRequired,
-        selectedOption: PropTypes.object,
-    };
-
-    static defaultProps = {
-        onToggle: _.noop
-    };
-
-    state = {
-        open: this.props.open || false,
-        selectedOption: this.props.selectedOption
-    };
-
-    _handleClick = (selectedOption) => {
-        this.setState({
-            selectedOption: selectedOption
-        });
-        if (this.props.onClick) {
-            this.props.onClick(selectedOption);
-        }
-    };
-
-    _handleToggle = () => {
-        this.setState({
-            open: !this.state.open
-        });
-        this.props.onToggle();
-    };
-
-    render() {
-        var props = _.defaults({
-            onClick: this._handleClick,
-            onToggle: this._handleToggle,
-            open: this.state.open,
-            selectedOption: this.state.selectedOption,
-            ref: "LinkDropDownListStateful"
-        }, this.props);
-
-        return React.createElement(LinkDropDownListStateless, props);
-    }
-}
-
-export default class LinkDropDownList extends React.Component {
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
-
-    static defaultProps = {
-        stateless: false,
-    };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            cannonballProgressivelyStatefulWarning({
-                name: "LinkDropDownList"
-            });
-        }
-    }
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    render() {
-
-        if (this._usePStateful()) {
-            return <PStatefulLinkDropDownList {...this.props} />;
-        }
-
-        return this.props.stateless
-            ? React.createElement(LinkDropDownListStateless, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "LinkDropDownListStateless" }, this.props))
-            : React.createElement(LinkDropDownListStateful, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "LinkDropDownListStateful" }, this.props));
-    }
-}
-
-const PStatefulLinkDropDownList = inStateContainer([
+const LinkDropDownList = inStateContainer([
     {
         name: "open",
         initial: false,
@@ -257,8 +161,14 @@ const PStatefulLinkDropDownList = inStateContainer([
     },
 
 ])(LinkDropDownListStateless);
-PStatefulLinkDropDownList.displayName = "PStatefulLinkDropDownList";
+LinkDropDownList.displayName = "LinkDropDownList";
 
+LinkDropDownList.propTypes = {
+    stateless: deprecatedStatelessProp,
+    flags: flagsPropType,
+};
+
+LinkDropDownList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 class LinkDropDownListOption extends React.Component {
     static propTypes = {
@@ -293,3 +203,4 @@ class LinkDropDownListOption extends React.Component {
     }
 }
 
+export default LinkDropDownList;

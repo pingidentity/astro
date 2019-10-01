@@ -11,7 +11,6 @@ import _ from "underscore";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import Utils from "../../../util/Utils";
 import { mount } from "enzyme";
 import { allFlags } from "../../../util/FlagUtils";
 
@@ -54,33 +53,13 @@ describe("Calendar v4", function () {
 
     it("renders open state in portal", function () {
         const wrapper = mountComponent({ date: selectedDate });
-        const component = wrapper.childAt(0).childAt(0).childAt(0);
+        const component = wrapper.childAt(0).childAt(0);
 
         component.instance().setState({ isVisible: true });
         wrapper.update();
 
         const calendar = wrapper.find("[data-id='input-calendar-wrapper']");
         expect(calendar.length).toBe(1);
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-
-        ReactTestUtils.renderIntoDocument(
-            <Calendar date={selectedDate} flags={[ "p-stateful" ]} />
-        );
-
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-
-        ReactTestUtils.renderIntoDocument(
-            <Calendar date={selectedDate} flags={[ "use-portal", "p-stateful" ]} />
-        );
-
-        expect(console.warn).not.toBeCalled();
     });
 
     it("renders with given data-id", function () {
@@ -825,7 +804,7 @@ describe("Calendar v4", function () {
         const wrapper = mountComponent({
             date: selectedDate, dateRange: dateRange, onValueChange: callback,
         });
-        const component = wrapper.childAt(0).childAt(0).childAt(0);
+        const component = wrapper.childAt(0).childAt(0);
 
         component.instance().prevView(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
         expect(callback).not.toBeCalled();
@@ -835,7 +814,7 @@ describe("Calendar v4", function () {
         const wrapper = mountComponent({
             date: selectedDate, onValueChange: callback,
         });
-        const component = wrapper.childAt(0).childAt(0).childAt(0);
+        const component = wrapper.childAt(0).childAt(0);
 
         component.instance().prevView(moment(new Date(2015, 9, 1)));
         expect(callback).toBeCalled();
@@ -845,32 +824,10 @@ describe("Calendar v4", function () {
         const wrapper = mountComponent({
             date: selectedDate, dateRange: dateRange, onValueChange: callback,
         });
-        const component = wrapper.childAt(0).childAt(0).childAt(0);
+        const component = wrapper.childAt(0).childAt(0);
 
         component.instance().setDate(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
         expect(callback).not.toBeCalled();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onChange' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-
-        expect(() => getComponent({ onChange: jest.fn() })).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'isRequired' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("isRequired", "required"));
-
-        expect(function () {
-            getComponent({ isRequired: true });
-        }).toThrow(expectedError);
     });
 
     it("should hide calendar when clicking input text to type date", () => {
@@ -886,7 +843,6 @@ describe("Calendar v4", function () {
                 date: selectedDate,
             },
             closeOnSelect: false,
-            flags: [ "p-stateful" ],
         });
 
         const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
@@ -907,7 +863,6 @@ describe("Calendar v4", function () {
         const component = getComponent({
             computableFormat: "x",
             date: "1552766657444",
-            flags: [ "p-stateful", "use-portal" ],
         });
 
         const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
@@ -915,31 +870,8 @@ describe("Calendar v4", function () {
         expect(textInput.value).toBe("03-16-2019");
     });
 
-    it("changes the internal state when a new prop date is received", function() {
-        const wrapper = mount(
-            <TestUtils.StateWrapper initialState={{ date: selectedDate }}>
-                {state => <Calendar {...state} />}
-            </TestUtils.StateWrapper>
-        );
-        const component = wrapper.childAt(0).childAt(0);
-        expect(component.instance().state.date).toBe(selectedDate);
-
-        const badDate = moment("11-08-2016");
-
-        component.instance().setState({ date: badDate });
-        expect(component.instance().state.date).toBe(badDate);
-
-        const newDate = moment("03-16-2019");
-
-        wrapper.instance().setState({ date: undefined });
-        expect(component.instance().state.date).toBe(badDate);
-
-        wrapper.instance().setState({ date: newDate });
-        expect(component.instance().state.date).toBe(newDate);
-    });
-
     it("puts empty string in input when date is null", function() {
-        const component = getComponent({ date: null, flags: [ "p-stateful", "use-portal" ] });
+        const component = getComponent({ date: null });
 
         const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
 

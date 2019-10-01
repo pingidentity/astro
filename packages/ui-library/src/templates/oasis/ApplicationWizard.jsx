@@ -157,12 +157,11 @@ const ChooseTemplate = ({
             closeOnBgClick
             modalTitle="Template Configuration"
             maximize
-            flags={["use-portal"]}
         >
             <h3 className="text-section-title">Public Application</h3>
-            <Section title="Client" flags={["p-stateful"]}><CodeView value={code} /></Section>
-            <Section title="OIDC Policy" flags={["p-stateful"]}><CodeView value={code} /></Section>
-            <Section title="Access Token Manager" flags={["p-stateful"]}><CodeView value={code} /></Section>
+            <Section title="Client"><CodeView value={code} /></Section>
+            <Section title="OIDC Policy"><CodeView value={code} /></Section>
+            <Section title="Access Token Manager"><CodeView value={code} /></Section>
         </Modal>
     </Step>
 );
@@ -176,15 +175,15 @@ const RedirectURIs = (props) => (
                 bodyData={[
                     [
                         "Production",
-                        <FormTextArea flags={["p-stateful"]}/>
+                        <FormTextArea />
                     ],
                     [
                         "Staging",
-                        <FormTextArea flags={["p-stateful"]}/>
+                        <FormTextArea />
                     ],
                     [
                         "Development",
-                        <FormTextArea flags={["p-stateful"]}/>
+                        <FormTextArea />
                     ]
                 ]}
             />
@@ -199,10 +198,10 @@ const RedirectURIs = (props) => (
 const ApplicationProperties = ({ owners, onOwnersChange, ...props }) => (
     <Step {...props} >
         <InputRow>
-            <FormTextField labelText="Name" required flags={["p-stateful"]}/>
+            <FormTextField labelText="Name" required />
         </InputRow>
         <InputRow>
-            <FormTextArea labelText="Description" flags={["p-stateful"]}/>
+            <FormTextArea labelText="Description" />
         </InputRow>
         <InputRow>
             <Multivalues
@@ -335,7 +334,6 @@ class AddApplication extends React.Component {
                         label="Add Application"
                         iconName="add"
                         onClick={this._showWizard}
-                        flags={[ "add-button-margin" ]}
                     />
                 </PageSection>
                 {showingWizard &&

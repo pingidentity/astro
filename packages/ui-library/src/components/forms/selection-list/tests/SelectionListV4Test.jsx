@@ -2,7 +2,6 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import _ from "underscore";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
-import Utils from "../../../../util/Utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import SelectionList from "../v2";
 import FormCheckbox from "../../FormCheckbox";
@@ -19,7 +18,6 @@ const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString
 describe("SelectionList v4", function () {
 
     // just so that they are included in the coverage report
-    require("../v2-stateful");
     require("../v2-stateless");
 
     let listItems;
@@ -46,7 +44,7 @@ describe("SelectionList v4", function () {
             flags: allFlags,
         });
 
-        return ReactTestUtils.renderIntoDocument(<SelectionList {...opts} />);
+        return TestUtils.renderInWrapper(<SelectionList {...opts} />);
     }
 
     it("data-id's don't change with single list type", () => {
@@ -198,7 +196,7 @@ describe("SelectionList v4", function () {
         const radios = TestUtils.scryRenderedDOMNodesWithTag(formRadioGroup, "input");
 
         ReactTestUtils.Simulate.change(radios[0]);
-        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
     });
 
     it("should check one radio", function () {
@@ -211,8 +209,8 @@ describe("SelectionList v4", function () {
         const radios = TestUtils.scryRenderedDOMNodesWithTag(formRadioGroup, "input");
 
         ReactTestUtils.Simulate.change(radios[0]);
-        expect(component.props.onValueChange).toBeCalled();
-        expect(component.props.onValueChange.mock.calls[0][0]).toBe(1);
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toBe(1);
     });
 
     it("should render with few checked checkboxes and uncheck all when selected", function () {
@@ -296,7 +294,6 @@ describe("SelectionList v4", function () {
             onValueChange: jest.fn(),
             onSelectAll: callback,
             onSearch: jest.fn(),
-            flags: [ "p-stateful" ],
             autoSelectAll: true,
         };
         const component = getComponent(props);
@@ -345,7 +342,7 @@ describe("SelectionList v4", function () {
 
         ReactTestUtils.Simulate.change(checkboxes[0]);
 
-        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
     });
 
     it("should check one checkbox", function () {
@@ -359,7 +356,7 @@ describe("SelectionList v4", function () {
 
         ReactTestUtils.Simulate.change(checkboxes[3]);
 
-        expect(component.props.onValueChange).toBeCalledWith([4]);
+        expect(component.props.children.props.onValueChange).toBeCalledWith([4]);
     });
 
     it("should check few checkboxes", function () {
@@ -373,7 +370,7 @@ describe("SelectionList v4", function () {
 
         ReactTestUtils.Simulate.change(checkboxes[4]);
 
-        expect(component.props.onValueChange).toBeCalledWith([1, 2, 5]);
+        expect(component.props.children.props.onValueChange).toBeCalledWith([1, 2, 5]);
     });
 
     it("should check all checkboxes", function () {
@@ -387,7 +384,7 @@ describe("SelectionList v4", function () {
 
         ReactTestUtils.Simulate.change(checkboxes[8]);
 
-        expect(component.props.onValueChange).toBeCalledWith([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        expect(component.props.children.props.onValueChange).toBeCalledWith([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
     it("should uncheck one checkbox", function () {
@@ -400,7 +397,7 @@ describe("SelectionList v4", function () {
         const checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         ReactTestUtils.Simulate.change(checkboxes[2]);
-        expect(component.props.onValueChange).toBeCalledWith([1]);
+        expect(component.props.children.props.onValueChange).toBeCalledWith([1]);
     });
 
     it("should do a start search with 2 chars keyword", function () {
@@ -491,8 +488,8 @@ describe("SelectionList v4", function () {
         const searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "foo" } });
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("foo");
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("foo");
     });
 
     it("stateless: triggers onSearch callback when search input changes", function () {
@@ -501,8 +498,8 @@ describe("SelectionList v4", function () {
         const searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "foo" } });
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("foo");
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("foo");
     });
 
     it("should trim space before performing a start search", function () {
@@ -523,7 +520,6 @@ describe("SelectionList v4", function () {
     it("v4: clears search on ESC", function () {
         const component = getComponent({
             showSearchBox: true,
-            flags: [ "p-stateful" ],
         });
         const stateful = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
 
@@ -546,7 +542,6 @@ describe("SelectionList v4", function () {
     it("v4: does not clear search when not ESC", function () {
         const component = getComponent({
             showSearchBox: true,
-            flags: [ "p-stateful" ],
         });
         const stateful = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
 
@@ -569,7 +564,6 @@ describe("SelectionList v4", function () {
     it("v4: clears search on (X) button click", function () {
         const component = getComponent({
             showSearchBox: true,
-            flags: [ "p-stateful" ],
         });
         const stateful = ReactTestUtils.scryRenderedComponentsWithType(component, StateContainer)[0];
 
@@ -618,14 +612,6 @@ describe("SelectionList v4", function () {
         listItems.map(function (listItem, index) {
             expect(viewItems[index].textContent).toEqual(listItem.name);
         });
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
     });
 
     it("renders note when optionsNote prop is passed in", () => {

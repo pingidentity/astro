@@ -6,8 +6,7 @@ import HelpHint from "../../tooltips/HelpHint";
 import LinkDropDownList from "../../forms/LinkDropDownList";
 import classnames from "classnames";
 import _ from "underscore";
-import { cannonballPortalWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @class MultiDrag#DragDropColumn
@@ -41,8 +40,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
  *    of being incremented after the halfway mark which is the default behavior.
  * @param {number} [helpText]
  *    When provided, this text appears withing a helphint next to the column title/name
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @param {MultiDrag~onAdd} [onAdd]
  *    Callback to be passed to contentType (as onAdd).
@@ -113,12 +110,6 @@ module.exports = class extends React.Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "MultiDrag" });
-        }
-    }
 
     /*
      * Handler for scrolls.  This is useful for implementing lazy loading of rows

@@ -5,7 +5,6 @@ jest.dontMock("../EllipsisLoader");
 describe("Ellipsis loader", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
-    var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var EllipsisLoader = require("../EllipsisLoader");
 
@@ -34,16 +33,6 @@ describe("Ellipsis loader", function () {
         );
         var test = TestUtils.scryRenderedDOMNodesWithDataId(component, "ellipsis-loader");
         expect(test.length).toBe(0);
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <EllipsisLoader id="foo" />
-            );
-        }).toThrow(expectedError);
     });
 
 });

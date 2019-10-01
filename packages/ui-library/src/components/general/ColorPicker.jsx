@@ -12,15 +12,13 @@ import _ from "underscore";
 import FormLabel from "../forms/FormLabel";
 import FormTextField from "../forms/form-text-field";
 import Validators from "../../util/Validators";
-import Utils from "../../util/Utils";
 import Validator from "validator";
 import If from "./If";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import PopperContainer from "../tooltips/PopperContainer";
-import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import StateContainer, { toggleTransform } from "../utils/StateContainer";
+import { flagsPropType } from "../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
  * @callback ColorPicker~onValueChange
@@ -52,9 +50,6 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     False or not specified will cause the component to manage state internally.
  * @param {string} [name]
  *    Name attribute for the input.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
- *
  * @param {string} [labelText]
  *     A label to render at the top of the color picker.
  * @param {string} [label]
@@ -66,10 +61,11 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     This can be a string or a JSX object.
  * @param {string} color
  *     A hexcode of chosen color
+ *     When not provided, the component will manage this value.
  * @param {boolean} [disabled=false]
  *     A property to disable the component
  * @param {boolean} [useInternalError=true]
- *     When using the p-stateful version, turn on or off the internal hex format error
+ *     Turn on or off the internal hex format error
  * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX")} [width]
 *      Specifies the width of the input.
  * @param {ColorPicker~onValueChange} onValueChange
@@ -77,6 +73,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *
  * @param {boolean} [open=false]
  *     Boolean state of open/closed menu. Used only in stateless mode.
+ *     When not provided, the component will manage this value.
  * @param {ColorPicker~onToggle} [onToggle]
  *     Callback to be triggered when open/closed state changed. Used only with stateless mode. Will receive current
  *     open status value.
@@ -265,8 +262,6 @@ class Stateless extends React.Component {
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
     }
 
-    _usePortal = () => hasFlag(this, "use-portal");
-
     _getReference = () => this.refs.swatch;
 
     _errorMessage = () => this.props.errorMessage || this.props.internalError;
@@ -313,35 +308,23 @@ class Stateless extends React.Component {
                             onKeyDown={this._handleColorInputKeyDown}
                             onBlur={this._handleColorInputBlur}
                             width={this.props.width}
-                            flags={[ "p-stateful" ]}
                         />
                         <span className="colors-swatch" data-id={this.props["data-id"] + "-colors-swatch"} >
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
                         </span>
                     </span>
                     <If test={this.props.open && !this.props.disabled}>
-                        {this._usePortal()
-                            ? (
-                                <PopperContainer
-                                    data-id="colorpicker-container"
-                                    data-parent={this.props["data-id"]}
-                                    className="popover-display"
-                                    getReference={this._getReference}
-                                    pointerClassName="popup-frame__pointer"
-                                    ref={el => this.popperContainer = el}
-                                    positionFixed
-                                >
-                                    <div className="popup-frame popup-frame--padded">{picker}</div>
-                                </PopperContainer>
-                            )
-                            : (
-                                <span
-                                    className="colorpicker-container"
-                                    data-id="colorpicker-container"
-                                    data-parent={this.props["data-id"]}
-                                >{picker}</span>
-                            )
-                        }
+                        <PopperContainer
+                            data-id="colorpicker-container"
+                            data-parent={this.props["data-id"]}
+                            className="popover-display"
+                            getReference={this._getReference}
+                            pointerClassName="popup-frame__pointer"
+                            ref={el => this.popperContainer = el}
+                            positionFixed
+                        >
+                            <div className="popup-frame popup-frame--padded">{picker}</div>
+                        </PopperContainer>
                     </If>
                 </div>
             </div>
@@ -350,37 +333,7 @@ class Stateless extends React.Component {
     }
 }
 
-class Stateful extends React.Component {
-    static displayName = "ColorPickerStateful";
-
-    state = {
-        open: false,
-        errorMessage: ""
-    };
-
-    _handleToggle = () => {
-        this.setState({
-            open: !this.state.open
-        });
-    };
-
-    _handleError = (message) => {
-        this.setState({ errorMessage: message });
-    };
-
-    render() {
-        return (
-            <Stateless ref="stateless" {...this.props}
-                errorMessage={this.state.errorMessage}
-                onError={this._handleError}
-                onToggle={this._handleToggle}
-                onValueChange={this.props.onValueChange}
-                open={this.state.open}/>
-        );
-    }
-}
-
-const PStatefulColorPicker = inStateContainer([
+const stateDefs = [
     {
         name: "color",
         initial: "",
@@ -399,73 +352,32 @@ const PStatefulColorPicker = inStateContainer([
         initial: "",
         setter: "onError",
     },
-])(Stateless);
-PStatefulColorPicker.displayName = "PStatefulColorPicker";
+];
 
-export default class ColorPicker extends React.Component {
+const ColorPicker = ({ initialState, useInternalError, ...props }) => (
+    <StateContainer
+        stateDefs={stateDefs}
+        initialState={initialState}
+        passedProps={{ ...props, internalError: useInternalError ? undefined : "" }}
+    >
+        {containerProps => <Stateless {...containerProps} />}
+    </StateContainer>
+);
 
-    static displayName = "ColorPicker";
+ColorPicker.displayName = "ColorPicker";
 
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-        useInternalError: PropTypes.bool, // this appears in the JSDocs for the main component
-    };
+ColorPicker.propTypes = {
+    stateless: deprecatedStatelessProp,
+    flags: flagsPropType,
+    useInternalError: PropTypes.bool, // this appears in the JSDocs for the main component
+};
 
-    static defaultProps = {
-        stateless: false,
-        useInternalError: true,
-    };
+ColorPicker.defaultProps = {
+    useInternalError: true,
+};
 
-    static _statelessComponent = Stateless; // this is to enable testing
+ColorPicker._statelessComponent = Stateless; // this is to enable testing
 
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+ColorPicker.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            if (!this.props.stateless && (this.props.open !== undefined && this.props.errorMessage !== undefined)) {
-                cannonballProgressivelyStatefulWarning({ name: "ColorPicker" });
-            } else if (this.props.stateless) {
-                cannonballProgressivelyStatefulWarning({ name: "ColorPicker" });
-            }
-        }
-
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "ColorPicker" });
-        }
-
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (this.props.controlled !== undefined) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.id) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.onChange) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-    }
-
-    render() {
-        if (this._usePStateful()) {
-            const { useInternalError, ...props } = this.props;
-            return <PStatefulColorPicker {...props} internalError={useInternalError ? undefined : ""}/>;
-        }
-
-        return (
-            this.props.stateless
-                ? <Stateless ref="stateless" {...this.props} />
-                : <Stateful ref="stateful" {...this.props} />);
-    }
-}
+export default ColorPicker;

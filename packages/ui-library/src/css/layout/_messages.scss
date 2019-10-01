@@ -142,7 +142,6 @@
             margin: 0 0 0 17px;
             border: none;
         }
-        &.warning,
         &.error {
             background-color: $color-critical-red;
             @include message-primary-button-css ($color-critical-red);
@@ -159,6 +158,7 @@
                 color: $color-success;
             }
         }
+        &.warning,
         &.notice {
             background-color: $color-warning-yellow;
             @include message-primary-button-css ($color-warning-yellow);
@@ -167,7 +167,8 @@
                 color: $color-warning-yellow;
             }
         }
-        &.feature {
+        &.feature,
+        &.info {
             background-color: $color-active-blue;
             @include message-primary-button-css ($color-active-blue);
 

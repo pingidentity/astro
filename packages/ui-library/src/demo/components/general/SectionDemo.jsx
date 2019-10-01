@@ -10,8 +10,6 @@ import Text from "../../../components/general/Text";
 * @desc A demo for Section
 */
 class SectionDemo extends React.Component {
-    static flags = ["p-stateful"];
-
     state = {
         firstSectionOpen: false
     };
@@ -140,7 +138,6 @@ class SectionDemo extends React.Component {
                         arrowCircle
                         condensed
                         contentMargin={false}
-                        flags={["p-stateful"]}
                         title="With no left margin on content"
                         underlined={false}
                     >
@@ -166,7 +163,6 @@ class SectionDemo extends React.Component {
                             <Section
                                 condensed
                                 contentMargin={false}
-                                flags={["p-stateful"]}
                                 title="No margin"
                                 underlined={false}
                             >

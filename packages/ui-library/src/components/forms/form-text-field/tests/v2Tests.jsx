@@ -14,7 +14,6 @@ describe("FormTextField", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         FormTextField = require("../v2"),
-        Utils = require("../../../../util/Utils"),
         _ = require("underscore");
 
 
@@ -39,24 +38,12 @@ describe("FormTextField", function () {
             required: legacyProp(opts, "required", "isRequired", false),
         });
 
-        return ReactTestUtils.renderIntoDocument(<FormTextField {...opts} />);
+        return TestUtils.renderInWrapper(<FormTextField {...opts} />);
     }
 
 
-    it("v3: renders the component", function () {
+    it("renders the component", function () {
         var component = getComponent();
-
-        // verify that the component is rendered
-        var input = ReactDOM.findDOMNode(component);
-        expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
-
-        // make sure that the input is not required by default
-        var elements = TestUtils.scryRenderedDOMNodesWithClass(component, "required");
-        expect(elements.length).toBe(0);
-    });
-
-    it("v4: renders the component", function () {
-        var component = getComponent({ flags: ["p-stateful" ] });
 
         // verify that the component is rendered
         var input = ReactDOM.findDOMNode(component);
@@ -239,19 +226,8 @@ describe("FormTextField", function () {
         expect(handleReveal).toBeCalled();
     });
 
-    it("v3 stateful: toggles reveal state", function () {
-        var component = getComponent(),
-            componentRef = component.refs.stateful;
-
-        expect(componentRef.state.reveal).toBe(false);
-
-        componentRef._handleToggleReveal();
-
-        expect(componentRef.state.reveal).toBe(true);
-    });
-
     it("v4 stateful: toggles reveal state", function () {
-        const component = getComponent({ flags: [ "p-stateful" ] });
+        const component = getComponent();
         const container = ReactTestUtils.findRenderedComponentWithType(component, StateContainer);
         const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
 
@@ -360,10 +336,8 @@ describe("FormTextField", function () {
         });
 
         var parent = ReactTestUtils.renderIntoDocument(TestParent());
-        var component = TestUtils.findRenderedComponentWithType(parent, FormTextField);
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        var input = TestUtils.findRenderedDOMNodeWithTag(parent, "input");
 
-        expect(component.props.value).toBe(initialValue);
         expect(input.value).toBe(initialValue);
 
         var newValue = "changed";
@@ -371,7 +345,6 @@ describe("FormTextField", function () {
             value: newValue
         });
 
-        expect(component.props.value).toBe(newValue);
         expect(input.value).toBe(newValue);
     });
 
@@ -473,35 +446,6 @@ describe("FormTextField", function () {
         expect(input.getAttribute("type")).toEqual(type);
     });
 
-    it("v3: shows content measuring DOM when flexWidth is true", function () {
-        const initialValue = "initial input text";
-        const newValue = "something really long entered into the text input for testing purposes";
-        const component = getComponent({
-            "data-id": "ftf",
-            stateless: false,
-            flexWidth: true,
-            required: false,
-            label: "test",
-            value: initialValue
-        });
-        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-        const contentMeasurer = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-content-measurer");
-
-        jest.runAllTimers();
-
-        expect(input.value).toEqual(initialValue);
-        expect(contentMeasurer).toBeTruthy();
-        expect(stateless.pwChar).toEqual("•");
-
-        ReactTestUtils.Simulate.change(input, { target: { value: newValue } });
-        expect(input.value).toEqual(newValue);
-
-        // Im not able get any information from the content-measurer and it seems that the style attribute of the
-        // input is not updating in the test even though it does so in a browser
-        // TODO: figure out a way to test this functionality
-    });
-
     it("v4: shows content measuring DOM when flexWidth is true", function () {
         const initialValue = "initial input text";
         const newValue = "something really long entered into the text input for testing purposes";
@@ -514,7 +458,6 @@ describe("FormTextField", function () {
             initialState: {
                 value: initialValue
             },
-            flags: [ "p-stateful" ],
         });
         const input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
         const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
@@ -574,14 +517,6 @@ describe("FormTextField", function () {
 
         expect(console.warn).not.toBeCalled();
         delete process.env.NODE_ENV;
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
     });
 
     it("renders right and left icons", function() {

@@ -6,7 +6,7 @@ import TestUtils from "../../../testutil/TestUtils";
 import FormTimeZone from "../FormTimeZone";
 import KeyboardUtils from "../../../util/KeyboardUtils.js";
 import moment from "moment-timezone";
-import momentMetadata from "moment-timezone/data/meta/latest.json";
+import momentMetadata from "../../../../node_modules/moment-timezone/data/meta/latest.json";
 import _ from "underscore";
 
 jest.mock("popper.js");
@@ -17,6 +17,7 @@ describe("FormTimeZone v4", function () {
     const componentId = "timezone";
     const initialValue = "America/Denver";
     const countryLabel="select a Country";
+
 
     function prepCountryMetaData () {
         var countryMetadata = [];
@@ -52,7 +53,6 @@ describe("FormTimeZone v4", function () {
             initialState: {
                 value: initialValue,
             },
-            flags: [ "use-portal", "p-stateful" ],
         });
         return ReactTestUtils.renderIntoDocument(<FormTimeZone {...options} />);
     }
@@ -85,6 +85,10 @@ describe("FormTimeZone v4", function () {
         });
 
         return countryZones;
+    }
+
+    function getPopper (component) {
+        return TestUtils.findRenderedDOMNodeWithDataId(component, "popup-frame");
     }
 
     window.addEventListener = jest.fn();
@@ -314,6 +318,10 @@ describe("FormTimeZone v4", function () {
             onToggle: jest.fn(),
             onValueChange: jest.fn()
         });
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
         const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTimeZone._statelessComponent);
         const handler = stateless._onGlobalClick;
 
@@ -424,20 +432,19 @@ describe("FormTimeZone v4", function () {
         expect(renderedLabelText).toBeFalsy();
     });
 
-    it("fires cannonball warning when p-stateful flag is not set", function() {
-        console.warn = jest.fn();
+    it("closes the list", function() {
+        const component = getComponent({
+            initialState: {
+                open: true,
+            }
+        });
 
-        expect(console.warn).not.toBeCalled();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
+        expect(getPopper(component)).toBeTruthy();
 
-    it("doesn't fire cannonball warning when p-stateful flag is set", function() {
-        console.warn = jest.fn();
+        const valueLink = getValueLink(component);
+        ReactTestUtils.Simulate.click(valueLink);
 
-        expect(console.warn).not.toBeCalled();
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
+        expect(getPopper(component)).toBeFalsy();
     });
 
     /*

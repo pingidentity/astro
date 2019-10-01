@@ -8,8 +8,6 @@ import InputRow from "../../../components/layout/InputRow";
 * @desc A demo for ColorPicker
 */
 class ColorPickerDemo extends React.Component {
-    static flags = [ "use-portal", "p-stateful" ];
-
     state = {
         picker1color: "#fff",
         picker2color: "#000",

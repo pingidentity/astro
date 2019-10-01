@@ -3,7 +3,6 @@ window.__DEV__ = true;
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { shallow } from "enzyme";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import { allFlags } from "../../../util/FlagUtils";
 import StateContainer from "../../utils/StateContainer";
@@ -36,6 +35,12 @@ describe("DetailsTooltip", function () {
     beforeEach(function () {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
+        beforeEach(function() {
+            global.getSelection = jest.fn();
+            global.getSelection.mockReturnValue({
+                toString: () => "",
+            });
+        });
     });
     afterEach(function () {
         delete process.env.NODE_ENV;
@@ -244,23 +249,6 @@ describe("DetailsTooltip", function () {
         expect(callback).not.toBeCalled(); //make sure callback was not triggered
     });
 
-    // Remove this once V4 is released. Calling component methods is a bad look.
-    it("is closing stateful component programatically", function () {
-        const component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" stateless={false} open={true}>
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        component.close();
-
-        const details = TestUtils.findRenderedComponentWithType(component, DetailsTooltip);
-        const content = TestUtils.scryRenderedDOMNodesWithDataId(details, "details-content");
-
-        //no DOM content
-        expect(content.length).toBe(0);
-    });
-
     it("registers global listener on mount if component is open", function () {
         //let's override defer or execute func immediately for tests
         _.defer = function (func) {
@@ -367,7 +355,10 @@ describe("DetailsTooltip", function () {
             </DetailsTooltip>
         );
 
-        component.refs.tooltip._handleGlobalClick();
+        ReactTestUtils.findRenderedComponentWithType(
+            component,
+            DetailsTooltip.DetailsTooltipStateless
+        )._handleGlobalClick();
     });
 
     it("doesn't error when handling escape click but not open", function () {
@@ -377,7 +368,10 @@ describe("DetailsTooltip", function () {
             </DetailsTooltip>
         );
 
-        component.refs.tooltip._handleGlobalKeyDown({ keyCode: 27 });
+        ReactTestUtils.findRenderedComponentWithType(
+            component,
+            DetailsTooltip.DetailsTooltipStateless
+        )._handleGlobalKeyDown({ keyCode: 27 });
     });
 
     it("unregister listener when transitioning from open to closed", function () {
@@ -415,19 +409,6 @@ describe("DetailsTooltip", function () {
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, "details-tooltip");
 
         expect(element).toBeDefined();
-    });
-
-
-    it("is rendering position styling with positionClassName", function () {
-
-        const component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} positionClassName="position">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        //make sure root div got position CSS classes
-        expect(ReactDOM.findDOMNode(component).getAttribute("class")).toContain("position");
     });
 
     it("is rendering label styling with labelClassName", function () {
@@ -516,30 +497,6 @@ describe("DetailsTooltip", function () {
         expect(secondaryBtns[3].textContent).toBe("Save More");
     });
 
-    it("is rendering with the right x-placement attribute based on the positionClass", function() {
-        const positionedComponent = position => ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip
-                stateless={true}
-                title="Title"
-                label="Action"
-                open={true}
-                positionClassName={position}
-                flags={[ "use-portal" ]}
-            >
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        const positioningProp = position => positionedComponent(position).refs.tooltip.popperContainer.props.placement;
-
-        expect(positioningProp("top")).toBe("top-start");
-        expect(positioningProp("bottom")).toBe("bottom-start");
-        expect(positioningProp("top left")).toBe("top-end");
-        expect(positioningProp("bottom left")).toBe("bottom-end");
-        expect(positioningProp("top center")).toBe("top");
-        expect(positioningProp("bottom center")).toBe("bottom");
-    });
-
     it("is rendering with the right x-placement attribute based on the placement prop", function() {
         const positionedComponent = placement => ReactTestUtils.renderIntoDocument(
             <DetailsTooltip
@@ -548,13 +505,15 @@ describe("DetailsTooltip", function () {
                 label="Action"
                 open={true}
                 placement={placement}
-                flags={[ "use-portal" ]}
             >
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
 
-        const positioningProp = position => positionedComponent(position).refs.tooltip.popperContainer.props.placement;
+        const positioningProp = position => ReactTestUtils.findRenderedComponentWithType(
+            positionedComponent(position),
+            DetailsTooltip.DetailsTooltipStateless
+        ).popperContainer.props.placement;
 
         expect(positioningProp("top right")).toBe("top-start");
         expect(positioningProp("bottom right")).toBe("bottom-start");
@@ -562,56 +521,6 @@ describe("DetailsTooltip", function () {
         expect(positioningProp("bottom left")).toBe("bottom-end");
         expect(positioningProp("top")).toBe("top");
         expect(positioningProp("bottom")).toBe("bottom");
-    });
-
-    it("fires progressively stateful warning when p-stateful flag is not passed in", () => {
-        console.warn = jest.fn();
-        shallow(
-            <DetailsTooltip flags={["use-portal"]} />
-        );
-
-        expect(console.warn).toHaveBeenCalledTimes(1);
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: ["p-stateful"] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
-    });
-
-    it("fires cannonball warning when using positionClassName prop", function() {
-        console.warn = jest.fn();
-        shallow(
-            <DetailsTooltip positionClassName="anything" />
-        );
-
-        expect(console.warn).toHaveBeenCalled();
-    });
-
-    it("shows alert style when type is 'alert'", function() {
-        const component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} type="alert">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        //make sure root div got position CSS classes
-        expect(TestUtils.findRenderedDOMNodeWithClass(component, "alert")).toBeTruthy();
-    });
-
-    it("fires cannonball warning when positionClassName is set to alert", () => {
-        console.warn = jest.fn();
-        shallow(
-            <DetailsTooltip positionClassName="alert" />
-        );
-
-        expect(console.warn).toHaveBeenCalled();
     });
 
 });

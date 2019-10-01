@@ -24,8 +24,6 @@ export default class FileUploadDemo extends React.Component {
         tooltipConfirmed: ""
     };
 
-    static flags = ["true-default"]
-
     _getFile = (e) => {
         return e && e.target && e.target.files && e.target.files[0];
     };

@@ -8,7 +8,6 @@ describe("If component", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         TabbedSections = require("../TabbedSections"),
@@ -105,22 +104,6 @@ describe("If component", function () {
         ReactTestUtils.Simulate.click(tabs.childNodes[1]);
 
         expect(onValueChange).toBeCalled();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onSectionChange' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onSectionChange", "onValueChange"));
-
-        expect(function () {
-            getComponent({ onSectionChange: jest.fn() });
-        }).toThrow(expectedError);
     });
 
 });

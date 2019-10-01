@@ -2,8 +2,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
     Spinner = require("../general/Spinner"),
-    _ = require("underscore"),
-    Utils = require("../../util/Utils.js");
+    _ = require("underscore");
 
 /**
  * @callback Batch~onGenerateHeading
@@ -235,21 +234,6 @@ class InfiniteScroll extends React.Component {
 
         if (props.attachToWindow) {
             window.addEventListener("scroll", this._handleScroll);
-        }
-
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (props.loadPrev) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("loadPrev", "onLoadPrev"));
-            }
-            /* istanbul ignore if  */
-            if (props.loadNext) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("loadNext", "onLoadNext"));
-            }
         }
     }
 

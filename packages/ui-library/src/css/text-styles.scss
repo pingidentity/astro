@@ -122,6 +122,18 @@ $body-text-color: $color-neutral-20;
     @include text-section-title;
 }
 
+// LINK
+@mixin text-link {
+    color: $color-active-blue;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 // COLOR VARIANTS
 @mixin text-error {
     color: $color-critical-red;

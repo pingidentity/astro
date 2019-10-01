@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../DragDropColumn");
 jest.dontMock("../../../../util/EventUtils");
 jest.dontMock("../../../../util/Utils");
@@ -240,17 +243,5 @@ describe("DragDropColumn", function () {
         jest.restoreAllMocks();
     });
     // *** Make sure the above test is always last because of the mock findDOMNode ***
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getWrappedComponent();
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-        getWrappedComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).not.toBeCalled();
-    });
 
 });

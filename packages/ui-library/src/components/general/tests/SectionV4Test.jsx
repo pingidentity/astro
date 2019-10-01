@@ -7,7 +7,6 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import Section from "../Section";
-import Utils from "../../../util/Utils";
 import TestUtils from "../../../testutil/TestUtils";
 import _ from "underscore";
 import { allFlags } from "../../../util/FlagUtils";
@@ -25,7 +24,7 @@ describe("Section v4", function () {
     const getComponent = (opts) => {
         opts = _.defaults(opts || {}, defaults);
 
-        return ReactTestUtils.renderIntoDocument(<Section {...opts} />);
+        return TestUtils.renderInWrapper(<Section {...opts} />);
     };
 
     it("data-id's don't change", () => {
@@ -221,26 +220,6 @@ describe("Section v4", function () {
         expect(root.className).toContain("condensed");
     });
 
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(
-            function () {
-                getComponent({ id: "foo" });
-            }
-        ).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
-
-        expect(
-            function () {
-                getComponent({ controlled: true });
-            }
-        ).toThrow(expectedError);
-    });
-
     it("renders collapsed detail text when collapsed and detailsText is passed in", () => {
         const component = getComponent({
                 detailsText: {
@@ -273,13 +252,6 @@ describe("Section v4", function () {
             detailsText = TestUtils.findRenderedDOMNodeWithClass(component, "collapsible-section__details-text");
 
         expect(detailsText.textContent).toEqual("Expanded");
-    });
-
-    it("does not throw Cannonball warnings when the 'p-stateful' flag is set", function () {
-        console.warn = jest.fn();
-
-        getComponent({ stateless: true, flags: ["p-stateful"] });
-        expect(console.warn).not.toBeCalled();
     });
 
     it("renders with no-margin class if contentMargin is false", () => {

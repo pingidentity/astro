@@ -4,7 +4,6 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import FormIntegerField from "../v2";
 import TestUtils from "../../../../testutil/TestUtils";
-import Utils from "../../../../util/Utils";
 import { allFlags } from "../../../../util/FlagUtils";
 import StateContainer from "../../../utils/StateContainer";
 
@@ -19,7 +18,7 @@ describe("FormIntegerField v4", function () {
 
     function getComponent (opts={}) {
         opts.onValueChange = jest.fn();
-        return ReactTestUtils.renderIntoDocument(<FormIntegerField {...opts} flags={allFlags} />);
+        return TestUtils.renderInWrapper(<FormIntegerField {...opts} flags={allFlags} />);
     }
 
     const getInput = component => (
@@ -40,7 +39,7 @@ describe("FormIntegerField v4", function () {
 
 
     it("test default render with simple label", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper(
             <FormIntegerField labelText = "Default Integer Box" onValueChange = {callback} flags={allFlags} />
         );
 
@@ -58,7 +57,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("test up/down key press and up/down spinner press", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper(
             <FormIntegerField data-id="int" onValueChange = {callback} value = {40} flags={allFlags} />
         );
 
@@ -108,7 +107,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("disables up/down keys when in read only mode", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField data-id="int" readOnly={true} onValueChange={callback} value={40} flags={allFlags} />
         );
         const input = TestUtils.findRenderedDOMNodeWithDataId(component,"int-text-field-input");
@@ -117,7 +116,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("shows field as required", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField onChange={callback} required={true} flags={allFlags} />
         );
 
@@ -126,7 +125,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("shows placeholder", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField onChange={callback} placeholder="Enter a number" flags={allFlags} />
         );
         // verify that the component is rendered
@@ -135,7 +134,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("fires the onValueChange callback when field changes", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField onValueChange={callback} flags={allFlags} />
         );
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -147,7 +146,7 @@ describe("FormIntegerField v4", function () {
     it("shows the error message when it is specified", function () {
         const errorMessage = "help!";
 
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField errorMessage={errorMessage} onValueChange={callback} flags={allFlags} />
         );
 
@@ -158,7 +157,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("triggers onBlur event", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField onBlur={callback} flags={allFlags} />
         );
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -168,7 +167,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("is limiting up/down arrows within min-max interval", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField data-id="int"
                 onValueChange={callback}
                 max={5}
@@ -199,7 +198,7 @@ describe("FormIntegerField v4", function () {
     it("is releasing timer tasks on mouse up", function () {
         jest.useFakeTimers();
 
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} flags={allFlags} />
         );
 
@@ -214,7 +213,7 @@ describe("FormIntegerField v4", function () {
 
     it("is autoincrementing field while spinner is pressed", function () {
 
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField data-id="int" onValueChange={callback} value={1} flags={allFlags} />
         );
 
@@ -232,10 +231,10 @@ describe("FormIntegerField v4", function () {
 
     it("it assigns tabIndex when specified", function () {
 
-        const noTabIndex = ReactTestUtils.renderIntoDocument(
+        const noTabIndex = TestUtils.renderInWrapper (
             <FormIntegerField onChange={callback} value={1} flags={allFlags} />
         );
-        const withTabIndex = ReactTestUtils.renderIntoDocument(
+        const withTabIndex = TestUtils.renderInWrapper (
             <FormIntegerField onChange={callback} value={1} tabIndex={10} flags={allFlags} />
         );
 
@@ -251,7 +250,7 @@ describe("FormIntegerField v4", function () {
     it("is disabled when it is specified", function () {
         const onChange = function () {};
         const helpText = "Disabled with help text";
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField onChange={onChange} value={1} labelHelpText={helpText} disabled={true} flags={allFlags} />
         );
 
@@ -261,7 +260,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("the min value is used as default on spinner mouse down if provided value is NaN", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField data-id="int" onValueChange={callback} flags={allFlags} />
         );
 
@@ -275,7 +274,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("the min value is used as default on field key down if provided value is NaN", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField data-id="int" onValueChange={callback} flags={allFlags} />
         );
 
@@ -287,7 +286,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("show initial value if provided to stateful component", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField initialValue="123" onValueChange={callback} flags={allFlags} />
         );
 
@@ -301,7 +300,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("does trigger onValueChange for empty value in stateful component", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField onValueChange={callback} flags={allFlags} />
         );
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -312,7 +311,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("toggle reveal in stateful component", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField value={3}
                 onValueChange={callback}
                 showReveal={true}
@@ -331,7 +330,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("will add css class to container", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField
                 className="added"
                 flags={allFlags}
@@ -341,7 +340,7 @@ describe("FormIntegerField v4", function () {
     });
 
     it("hides controls", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper (
             <FormIntegerField hideControls={true} flags={allFlags} />);
 
         const spinnerUp = TestUtils.findRenderedDOMNodeWithDataId(component, "int-up-btn");
@@ -377,15 +376,7 @@ describe("FormIntegerField v4", function () {
         expect(FormIntegerField.isValid(5, true, 10, 20)).toBe(false);
     });
 
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it("validates a value in p-stateful component", function () {
+    it("validates a value", function () {
         expect(FormIntegerField.validateInt("1234", 0, {})).toEqual(1234);
         expect(FormIntegerField.validateInt("1234a", 0, {})).toEqual("1234");
     });
@@ -395,7 +386,7 @@ describe("FormIntegerField v4", function () {
         const input = getInput(component);
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 40 });
 
-        expect(component.props.onValueChange).not.toBeCalled();
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
     });
 
     it("should not fire onValueChange when enforcing range and spinning down below min", function() {
@@ -403,7 +394,7 @@ describe("FormIntegerField v4", function () {
         const down = getDownSpinner(component);
         ReactTestUtils.Simulate.mouseDown(down);
 
-        expect(component.props.onValueChange).not.toBeCalled();
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
     });
 
     it("shows warning and updates value to min when too low on min", function() {
@@ -516,7 +507,7 @@ describe("FormIntegerField v4", function () {
         expect(input.value).toBe("");
     });
 
-    it("undoes with p-stateful", function() {
+    it("undoes", function() {
         const component = getComponent({
             initialValue: 20,
             initialState: { value: 10 },

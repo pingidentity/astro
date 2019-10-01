@@ -52,16 +52,4 @@ describe("OverflowMenuTests", function () {
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        ReactTestUtils.renderIntoDocument(<div><OverflowMenu buttons={buttons} /></div>);
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-        ReactTestUtils.renderIntoDocument(<div><OverflowMenu buttons={buttons} flags={[ "use-portal" ]} /></div>);
-        expect(console.warn).not.toBeCalled();
-    });
-
 });

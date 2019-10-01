@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../DropDownButton");
 jest.dontMock("../../../util/EventUtils.js");
 
@@ -21,6 +24,7 @@ describe("DropDownButton", function () {
         );
     });
 
+
     it("renders closed in stateless mode", function () {
         const callback = jest.fn();
 
@@ -29,7 +33,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton title="Test Drop Down"
                 stateless={true}
                 onValueChange={callback}
@@ -57,7 +61,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={true}
@@ -84,7 +88,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 className="extra"
                 stateless={true}
@@ -108,7 +112,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={false}
@@ -138,7 +142,7 @@ describe("DropDownButton", function () {
             optionFive: "Option Five"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Add" title="Test Drop Down"
                 onValueChange={callback}
                 options={menu} />
@@ -166,7 +170,7 @@ describe("DropDownButton", function () {
             optionFive: "Option Five"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 onValueChange={callback}
                 options={menu} />
@@ -211,7 +215,7 @@ describe("DropDownButton", function () {
             optionFive: "Option Five"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 onValueChange={callback}
                 options={menu} />
@@ -253,7 +257,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        ReactTestUtils.renderIntoDocument(
+        TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={true}
@@ -274,7 +278,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        const dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+        const dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={true}
@@ -291,6 +295,10 @@ describe("DropDownButton", function () {
 
     it("triggers callback when clicked outside", function () {
         window.addEventListener = jest.fn();
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
         const callback = jest.fn();
 
         const menu = {
@@ -298,7 +306,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        ReactTestUtils.renderIntoDocument(
+        TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={true}
@@ -321,6 +329,38 @@ describe("DropDownButton", function () {
         expect(callback).toHaveBeenCalled();
     });
 
+    it("doesn't trigger callback when clicked outside if not open", function () {
+        window.addEventListener = jest.fn();
+        const callback = jest.fn();
+
+        const menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        TestUtils.renderInWrapper(
+            <DropDownButton label="Test Drop Down"
+                stateless={true}
+                open={false}
+                onValueChange={jest.fn()}
+                options={menu}
+                onToggle={callback} />
+        );
+
+        const handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
+
+
+        const e = {
+            target: { parentNode: document.body },
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn()
+        };
+
+        //click outside
+        handler(e);
+        expect(callback).not.toHaveBeenCalled();
+    });
+
     it("doesn't trigger callback when clicked outside and drop down is not open", function () {
         const callback = jest.fn();
 
@@ -329,7 +369,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        ReactTestUtils.renderIntoDocument(
+        TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={false}
@@ -362,7 +402,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        ReactTestUtils.renderIntoDocument(
+        TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={true}
@@ -390,7 +430,7 @@ describe("DropDownButton", function () {
             optionTwo: "Option Two"
         };
 
-        ReactTestUtils.renderIntoDocument(
+        TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 stateless={true}
                 open={false}
@@ -408,7 +448,7 @@ describe("DropDownButton", function () {
     });
 
     it("renders title if provided", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper(
             <DropDownButton title="Test Drop Down" options={{}} label="Add" />
         );
 
@@ -425,7 +465,7 @@ describe("DropDownButton", function () {
     });
 
     it("renders classname and data-id", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper(
             <DropDownButton options={{}} label="Add" data-id="my-id" className="my-class" />
         );
 
@@ -436,7 +476,7 @@ describe("DropDownButton", function () {
     });
 
     it("render component with default data-id", function () {
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper(
             <DropDownButton options={{}} label="Add" />
         );
 
@@ -449,7 +489,7 @@ describe("DropDownButton", function () {
             onClick
         }) => <button data-id="render-button" onClick={onClick} />;
 
-        const component = ReactTestUtils.renderIntoDocument(
+        const component = TestUtils.renderInWrapper(
             <DropDownButton
                 label="Add"
                 options={{
@@ -468,10 +508,9 @@ describe("DropDownButton", function () {
         expect(option).toBeTruthy();
     });
 
-    it("p-stateful version of component correctly opens and closes", () => {
+    it("correctly opens and closes", () => {
         const component = mount(
             <DropDownButton
-                flags={["p-stateful"]}
                 label="Label"
                 options={{
                     one: "one"

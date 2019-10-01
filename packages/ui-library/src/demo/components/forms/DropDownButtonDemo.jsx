@@ -8,8 +8,6 @@ import Icon from "../../../components/general/Icon";
 * @desc A demo for DropDownButton
 */
 export default class DropDownButtonDemo extends Component {
-    static flags = ["p-stateful"]
-
     state = {
         selectedLabel: "None.",
         open: false

@@ -6,8 +6,7 @@ import { isString } from "underscore";
 import FormLabel from "../FormLabel";
 import FormError from "../FormError";
 import Button from "../../buttons/Button";
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 import { withFocusOutline } from "../../../util/KeyboardUtils";
 import { getClickableA11yProps } from "../../../util/PropUtils";
 
@@ -68,20 +67,6 @@ export default class extends Component {
         this.refs.fileInput.click();
     }
 
-    _useTrueDefault = () => hasFlag(this, "true-default");
-
-    componentDidMount() {
-        if (!this._useTrueDefault() && this.props.defaultImage) {
-            cannonballChangeWarning({
-                message: "The \"defaultImage\" parameter will no longer " +
-                    "be the same as passing in thumbnailSrc. Instead, " +
-                    "defaultImage will show an image when there is no " +
-                    "current thumbnail, either due to not passing the prop " +
-                    "or due to removing the image in the stateful version."
-            });
-        }
-    }
-
     /*
      * Reset the input to the original state
      */
@@ -103,7 +88,7 @@ export default class extends Component {
             "form-error": !!this.props.errorMessage
         });
 
-        const useDefault = this._useTrueDefault() && defaultImage && !thumbnailSrc;
+        const useDefault = defaultImage && !thumbnailSrc;
 
         return (
             <div className={containerClass} data-id={this.props["data-id"]}>

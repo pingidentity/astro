@@ -19,7 +19,6 @@ const OPTIONS = [
 * @desc A demo for UnitInput
 */
 class UnitInputDemo extends React.Component {
-    static flags = [ "use-portal" ];
 
 
     state = {

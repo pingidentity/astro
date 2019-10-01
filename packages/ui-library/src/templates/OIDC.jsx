@@ -101,13 +101,10 @@ export default class OicoAccessToken extends Component {
                             selectedOption={row.input1}
                             width={InputWidths.MD}
                             key="PingOneDropdown"
-                            flags={["p-stateful"]}
-        
                         />
                         : <FormTextField
                             label={labelField1}
                             key="StaticTextfield"
-                            flags={["p-stateful"]}
                             value={row.input1}
                             onValueChange={this._handleInputChange("input1", row.id)}
                             placeholder="Attribute"
@@ -118,7 +115,6 @@ export default class OicoAccessToken extends Component {
                         <FormTextField
                             key="Textfield"
                             label={labelField2}
-                            flags={["p-stateful"]}
                             value={row.input2}
                             onValueChange={this._handleInputChange("input2", row.id)}
                             placeholder="Attribute"
@@ -236,7 +232,6 @@ export default class OicoAccessToken extends Component {
                     <SearchBox
                         width={InputWidths.XL}
                         onValueChange={this._setSearchTerm}
-                        flags={["p-stateful"]}
                     />
 
                     <Button
@@ -261,14 +256,14 @@ export default class OicoAccessToken extends Component {
                                 </div>}
                             flags={allFlags}
                             onEditButtonClick={this.toggleAddResource}
-                            rowAccessories={<Toggle stateless={false} flags={["p-stateful"]}/>}
+                            rowAccessories={<Toggle />}
                         >
 
                             <FlexRow
                                 alignment={alignments.TOP}
                                 justify={justifyOptions.SPACEBETWEEN}
                             >
-                                
+
                                 <TabSet
                                     onValueChange={this._handleValueChangeExpandableRow}
                                     selectedIndex={this.state.selectedIndexExpandableRow}

@@ -312,7 +312,6 @@ export default class HeroChart extends Component {
                     key="range-selector"
                     {...rockerButtonDefaults}
                     {...rockerButtonProps}
-                    flags={["p-stateful"]}
                 />
                 {!errorMessage && loading &&
                     <PageSpinner className="hero-chart__loader" show>{loadingMessage}</PageSpinner>

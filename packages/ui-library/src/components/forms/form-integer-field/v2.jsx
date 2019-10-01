@@ -4,12 +4,11 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { FormTextFieldStateless, messageTypes } from "../form-text-field/index";
 import classnames from "classnames";
-import Utils from "../../../util/Utils.js";
 import _ from "underscore";
 import { isInt } from "validator";
-import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import StateContainer, { toggleTransform } from "../../utils/StateContainer";
+import { flagsPropType } from "../../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 const isValid = (value, enforceRange, min, max) => {
     const options = { allow_leading_zeroes: false }; //eslint-disable-line camelcase
@@ -43,10 +42,6 @@ const isValid = (value, enforceRange, min, max) => {
  *     To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [stateless]
- *     To enable the component to be externally managed. True will relinquish control to the component's owner.
- *     False or not specified will cause the component to manage state internally.
- *
  * @param {boolean} [required=false]
  *     Whether the field is required or not.
  * @param {boolean} [disabled=false]
@@ -67,6 +62,7 @@ const isValid = (value, enforceRange, min, max) => {
  *
  * @param {string|number} [value=""]
  *     Current text field value used when stateless=true.
+ *     When not provided, the component will manage this value.
  * @param {string|number} [initialValue=""]
  *     Initial value (also to be used in conjuction with the undo button).
  *
@@ -88,6 +84,7 @@ const isValid = (value, enforceRange, min, max) => {
  *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
  * @param {boolean} [reveal=false]
  *     If true, will remove value masking. Use only when stateless=true.
+ *     When not provided, the component will manage this value.
  * @param {boolean} [showReveal=false]
  *    Whether or not to display a reveal option to remove value masking.
  *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
@@ -479,176 +476,7 @@ class Stateless extends Component {
     }
 }
 
-class Stateful extends Component {
-    static displayName = "FormIntegerFieldStateful";
-
-    static propTypes = {
-        initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        max: PropTypes.number,
-        min: PropTypes.number,
-        enforceRange: PropTypes.bool,
-        outOfRangeErrorMessage: PropTypes.string,
-        onBlur: PropTypes.func,
-    };
-
-    static defaultProps = {
-        initialValue: "",
-        max: 999999999999999,
-        min: 0,
-        enforceRange: true,
-        onBlur: _.noop,
-    };
-
-    state = {
-        reveal: false,
-        value: this.props.initialValue
-    };
-
-    /**
-     * @desc Verify the new value and call the onValueChange callback
-     * only if the value is valid.
-     * @param {string} value
-     *     The new value
-     * @private
-     * @ignore
-     */
-    _handleValueChange = (value) => {
-
-        // Don't restrict "min" when checking typing so that numbers outside range can be inputed
-        // e.g. If range is restricted to 3 - 30, we want users to be able to input 2 and 1 for 21
-        if (!isValid(value, this.props.enforceRange, null, this.props.max)) {
-
-            // Reset the field to the previous valid value
-            this.setState({
-                value: this.state.value
-            });
-            return;
-        } else {
-            let intValue = value === "" ? value : parseInt(value);
-
-
-            this.setState({
-                value: intValue,
-                lastValue: this.state.value,
-                errorMessage: this.props.errorMessage || ""
-            }, function () {
-                this.props.onValueChange(intValue);
-            });
-        }
-    };
-
-    _handleBlur = () => {
-
-        // Check validity of value onBlur to enforce min restriction that's not checked onValueChange above
-        if (!isValid(this.state.value, this.props.enforceRange, this.props.min, this.props.max)) {
-
-            // Reset the field to the previous valid value
-            // Set error message
-            this.setState({
-                value: this.state.lastValue,
-                errorMessage: this.props.outOfRangeErrorMessage
-            });
-        }
-
-        this.props.onBlur();
-    };
-
-    _toggleReveal = () => {
-        this.setState({
-            reveal: !this.state.reveal
-        });
-    };
-
-    _handleUndo = () => {
-        if (this.props.initialValue) {
-            const value = this.props.initialValue;
-            this.setState({
-                value: value
-            }, function () {
-                this.props.onValueChange(value);
-            });
-        }
-    };
-
-    render() {
-        const defaultProps = {
-            ref: "stateless",
-            reveal: this.state.reveal,
-            onToggleReveal: this._toggleReveal,
-            onValueChange: this._handleValueChange,
-            onUndo: this._handleUndo,
-            value: this.state.value,
-            onBlur: this._handleBlur,
-            errorMessage: this.state.errorMessage
-        };
-        const props = _.defaults(defaultProps, this.props);
-
-        return <Stateless {...props} />;
-    }
-}
-
-export default class FormIntegerFieldV2 extends Component {
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
-
-    static defaultProps = {
-        stateless: true,
-    };
-
-    static _statelessComponent = Stateless;
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            cannonballProgressivelyStatefulWarning({ name: "FormIntegerField" });
-        }
-    }
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-        }
-    }
-
-    render() {
-        if (this._usePStateful()) {
-            const initialState = (this.props.initialValue !== undefined)
-                ? { ...this.props.initialState, value: this.props.initialValue }
-                : this.props.initialState;
-            return (
-                <PStatefulFormIntegerField {...this.props} initialState={initialState} />
-            );
-        }
-
-        return this.props.stateless
-            ? <Stateless { ...{ ref: "formIntegerFieldStateless", ...this.props }} />
-            : <Stateful {...{ ref: "formIntegerFieldStateful", ...this.props }} />;
-    }
-}
-
-/**
- * @alias FormIntegerField.isValid
- * @desc Verifies if the provided value is an integer and that it falls in acceptable range
- * (only if the enforceRange argument is true).
- *
- * @param {string} value the value to be evaluated
- * @param {boolean} [enforceRange=false]
- *     Whether or not enforce max value limit.
- * @param {number} [min]
- *     The minimum number allowed in field. Required if enforceRange is true.
- * @param {number} [max]
- *     The maximum number allowed in field. Required if enforceRange is true.
- *
- * @returns {boolean} returns true if integer false if not
- */
-FormIntegerFieldV2.isValid = isValid;
-
-FormIntegerFieldV2.validateInt = (value, current, { enforceRange, max }) => {
+const validateInt = (value, current, { enforceRange, max }) => {
     if (!isValid(value, enforceRange, null, max)) {
         return value.substring(0, value.length - 1);
     } else {
@@ -667,14 +495,14 @@ FormIntegerFieldV2.validateInt = (value, current, { enforceRange, max }) => {
     }
 };
 
-const PStatefulFormIntegerField = inStateContainer([
+const stateDefs = [
     {
         name: "value",
         initial: "",
         callbacks: [
             {
                 name: "onValueChange",
-                transform: FormIntegerFieldV2.validateInt
+                transform: validateInt
             },
         ],
     }, {
@@ -687,4 +515,45 @@ const PStatefulFormIntegerField = inStateContainer([
             }
         ],
     }
-])(Stateless);
+];
+
+const FormIntegerField = ({ initialState = {}, initialValue, ...props }) => (
+    <StateContainer
+        stateDefs={stateDefs}
+        initialState={initialValue !== undefined ? { ...initialState, value: initialValue } : initialState}
+        passedProps={props}
+    >
+        {containerProps => <Stateless {...containerProps} initialValue={initialValue} />}
+    </StateContainer>
+);
+
+FormIntegerField.displayName = "FormIntegerField";
+
+FormIntegerField.propTypes = {
+    stateless: deprecatedStatelessProp,
+    flags: flagsPropType,
+};
+
+FormIntegerField._statelessComponent = Stateless;
+FormIntegerField.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
+/**
+ * @alias FormIntegerField.isValid
+ * @desc Verifies if the provided value is an integer and that it falls in acceptable range
+ * (only if the enforceRange argument is true).
+ *
+ * @param {string} value the value to be evaluated
+ * @param {boolean} [enforceRange=false]
+ *     Whether or not enforce max value limit.
+ * @param {number} [min]
+ *     The minimum number allowed in field. Required if enforceRange is true.
+ * @param {number} [max]
+ *     The maximum number allowed in field. Required if enforceRange is true.
+ *
+ * @returns {boolean} returns true if integer false if not
+ */
+FormIntegerField.isValid = isValid;
+
+FormIntegerField.validateInt = validateInt;
+
+export default FormIntegerField;

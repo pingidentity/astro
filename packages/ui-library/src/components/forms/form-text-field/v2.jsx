@@ -10,11 +10,11 @@ import Translator from "../../../util/i18n/Translator.js";
 
 import _ from "underscore";
 import Utils from "../../../util/Utils.js";
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
 import { getIcon } from "../../../util/PropUtils";
+import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
 /**
@@ -127,6 +127,7 @@ import { getIcon } from "../../../util/PropUtils";
 *     controls that often makes it easier to enter the field data.
 * @param {string|number} [value=""]
 *     Current text field value.
+*     When not provided, the component will manage this value.
 * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
 *    Specifies the width of the input.
 *
@@ -146,6 +147,7 @@ import { getIcon } from "../../../util/PropUtils";
 *     If true, the user must select a value for this field.
 * @param {boolean} [reveal=false]
 *     If true, will remove value masking.
+*     When not provided, the component will manage this value.
 * @param {boolean} [showReveal=false]
 *    Whether or not to display a reveal option to remove value masking.
 * @param {boolean} [showSave=false]
@@ -589,53 +591,8 @@ class Stateless extends React.Component {
         );
     }
 }
-class Stateful extends React.Component {
-    static displayName = "FormTextFieldStateful";
 
-    state = {
-        reveal: false,
-        value: this.props.value || ""
-    };
-
-    _handleToggleReveal = () => {
-        // prevents focus on characters in input field
-        this.setState({
-            reveal: !this.state.reveal
-        });
-    };
-
-    _handleValueChange = (value) => {
-        this.setState({
-            value: value
-        }, function () {
-            if (this.props.onValueChange) {
-                this.props.onValueChange(value);
-            }
-        });
-    };
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.value !== this.props.value) {
-            this.setState({
-                value: newProps.value
-            });
-        }
-    }
-
-    render() {
-        const props = _.defaults({
-            ref: "stateless",
-            reveal: this.state.reveal,
-            onToggleReveal: this._handleToggleReveal,
-            value: this.state.value,
-            onValueChange: this._handleValueChange
-        }, this.props);
-
-        return <Stateless {...props} />;
-    }
-}
-
-const PStatefulFormTextField = inStateContainer([
+const FormTextField = inStateContainer([
     {
         name: "reveal",
         initial: false,
@@ -651,53 +608,17 @@ const PStatefulFormTextField = inStateContainer([
     },
 ])(Stateless);
 
-class FormTextField extends React.Component {
+FormTextField.displayName = "FormTextField";
 
-    static messageTypes = FormMessage.messageTypes;
-    static FormTextFieldStateless = Stateless; // we'd rather this were a named export, but the index.js/v2.jsx scheme prevents that
+FormTextField.messageTypes = FormMessage.messageTypes;
 
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
+FormTextField.FormTextFieldStateless = Stateless; // we'd rather this were a named export, but the index.js/v2.jsx scheme prevents that
 
-    static defaultProps = {
-        stateless: true,
-    };
+FormTextField.propTypes = {
+    stateless: deprecatedStatelessProp,
+    flags: flagsPropType,
+};
 
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-        }
-        if (!this._usePStateful()) {
-            cannonballChangeWarning({
-                message: `The 'reveal' prop will no longer serve as an initial state for FormTextField. ` +
-                `If it is present, it will control the current value of the component. ` +
-                `Set the 'p-stateful' flag to switch to this behavior now.`,
-            });
-
-            cannonballChangeWarning({
-                message: `The 'value' prop will no longer serve as an initial state for FormTextField. ` +
-                `If it is present, it will control the current value of the component. ` +
-                `Set the 'p-stateful' flag to switch to this behavior now.`,
-            });
-        }
-    }
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    render() {
-        if (this._usePStateful()) {
-            return <PStatefulFormTextField {...this.props} />;
-        }
-
-        return (this.props.stateless
-            ? <Stateless ref="stateless" {...this.props} />
-            : <Stateful ref="stateful" {...this.props} />
-        );
-    }
-}
+FormTextField.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default FormTextField;

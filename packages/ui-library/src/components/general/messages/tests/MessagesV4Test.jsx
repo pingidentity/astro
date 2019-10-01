@@ -12,7 +12,6 @@ describe("Messages v4", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Utils = require("../../../../util/Utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Messages = require("../index.js"),
         setTimeout = window.setTimeout,
@@ -224,30 +223,6 @@ describe("Messages v4", function () {
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "messages");
 
         expect(element).toBeDefined();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'removeMessage' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
-
-        expect(function () {
-            getComponent({ removeMessage: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'i18n' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("i18n", "onI18n"));
-
-        expect(function () {
-            getComponent({ i18n: jest.fn() });
-        }).toThrow(expectedError);
     });
 
 });

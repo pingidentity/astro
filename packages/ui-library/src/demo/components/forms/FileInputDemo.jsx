@@ -149,7 +149,6 @@ class FileInputDemo extends React.Component {
                     <FormCheckbox
                         label="Loading state"
                         onChange={this._toggleLoading}
-                        flags={["p-stateful"]}
                         checked={this.state.loading}
                     />
                 </InputRow>

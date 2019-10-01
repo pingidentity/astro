@@ -30,7 +30,6 @@ jest.mock("popper.js");
 
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
-import Utils from "../../../../../util/Utils";
 import TestUtils from "../../../../../testutil/TestUtils";
 import I18nPhoneInput, { I18nPhoneInputStateless } from "../v2";
 import { mount } from "enzyme";
@@ -201,7 +200,7 @@ describe.skip("I18nPhoneInput", function () {
         expect(component.props.onValueChange).toBeCalledWith({ dialCode: "1", phoneNumber: "111-222" });
     });
 
-    it("p-stateful: onToggle callback opens and closes component when open is not supplied", function () {
+    it("onToggle callback opens and closes component when open is not supplied", function () {
         const onToggle = jest.fn();
         const component = mount(<I18nPhoneInput {...defaults} onToggle={onToggle} />);
 
@@ -212,7 +211,7 @@ describe.skip("I18nPhoneInput", function () {
         expect(component.find(I18nPhoneInputStateless).props().open).toEqual(true);
     });
 
-    it("p-stateful: onToggle callback does not open or close component when open prop is supplied", function () {
+    it("onToggle callback does not open or close component when open prop is supplied", function () {
         const onToggle = jest.fn();
         const component = mount(<I18nPhoneInput {...defaults} onToggle={onToggle} open />);
 
@@ -278,22 +277,6 @@ describe.skip("I18nPhoneInput", function () {
         expect(component.props.onSearch).toBeCalled();
     });
 
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onCountrySearch' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
-
-        expect(function () {
-            getComponent({ onCountrySearch: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
     it("gets correct country code if given dial code and phone number for a specific country", () => {
         const component = getComponent({
             dialCode: "+1",
@@ -304,18 +287,6 @@ describe.skip("I18nPhoneInput", function () {
         const usFlag = TestUtils.findRenderedDOMNodeWithClass(component, "selected-option-label us");
 
         expect(usFlag).toBeTruthy();
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: ["p-stateful"] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal and p-stateful are set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal", "p-stateful" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

@@ -3,75 +3,54 @@
 ### AppFrame
 * **V4 Behavior:** Renders dropdowns in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdowns in DOM with header bar.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### Button
 * **V4 Behavior:** All buttons, including those with the 'add' icon, will have margin on their right side unless other styles from, for instance, a container remove it.
 * **V3 Behavior:** Buttons with the icon "add" have their margin removed.
-* **Recommendation:** Set the 'add-button-margin' flag to keep the margin or set the `noSpacing` prop to true on a button to keep it removed.
+* **Recommendation:** Set the `noSpacing` prop to true on a button to keep the margin removed.
 
 ### ButtonBar
 * **V4 Behavior:** The discard button will be styled the same as a cancel button.
 * **V3 Behavior:** The discard button is styled like a standard button.
-* **Recommendation:** Set the 'fix-discard-button' flag for ButtonBar or use the props for a cancel button instead.
 * **V4 Behavior:** Renders button tooltips in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders button tooltips in DOM with button bar.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### Calendar
 * **V4 Behavior:** Renders calendar in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders calendar in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** When provided, the `date` prop will control the value of the component.
 * **V3 Behavior:** The `date` prop only updates the component when it changes.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### ColorPicker
 * **V4 Behavior:** Renders color picker in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders color picker in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** The component controls the state of `color` and `open` if they're not defined as props. The initial values can be set with `initialState.value`. Also, an internal error message is managed for invalid hex values.
 * **V3 Behavior:** The `stateless` prop determines whether `open` and `errorMessage` are controlled by the component or not.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### ConditionalFieldset
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the index state will be controlled by the component.
-* **Recommendation:** Set the "p-stateful" flag.
 
 ### ConfirmTooltip
 * **V4 Behavior:** Renders in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders in DOM with trigger.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### Country Selector
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** The component controls the state of `open`, `searchIndex`, `searchString`, and `searchTime` if they're not defined as props. The initial values can be set with `initialState`.
 * **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### DetailsTooltip
 * **V4 Behavior:** Renders in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders in DOM with trigger.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** When provided, the `open` prop will control whether the component is open. Otherwise, the component will handle open and closing internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the open state will be controlled by the component.
-* **Recommendation:** Set the "p-stateful" flag.
-
 * **V4 Behavior:** `placement` prop accepts "top", "bottom", "top left", "top right", "bottom left", and "bottom right" to position.
 * **V3 Behavior:** `positionClassName` is added to classes of component. CSS does the positioning.
 * **Recommendation:** Use `placement` instead of `positionClassName`.
-
 * **V4 Behavior:** The alert style of the DetailsTooltip will be triggered only by setting `type` to "alert".
 * **V3 Behavior:** Adding "alert" to `positionClassName` triggers alert styling.
 * **Recommendation:** Use `type` = "alert" instead of `positionClassName`.
@@ -79,88 +58,61 @@
 ### ExpandableRow
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with row.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** Each ExpandableRow will use a standalone CSS class to style them even out of context.
 * **V3 Behavior:** ExpandableRows get their styling from a surrounding element.
-* **Recommendation:** Add the flag 'expandable-row-class' to each ExpandableRow.
-
 * **V4 Behavior:** When provided, the `expanded` prop will control whether the component is open. Otherwise, the component will handle open and closing internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the open state will be controlled by the component.
-* **Recommendation:** Set the "p-stateful" flag.
-
 * **V4 Behavior:** The `onToggle` callback behaves consistently and returns the "before" state.
 * **V3 Behavior:** The stateful version calls `onToggle` with the new state of `expanded` while the stateless version calls it with the old state.
-* **Recommendation:** Set the "p-stateful" flag for consistent behavior.
-
 * **V4 Behavior:** When provided, the `showDeleteConfirm` prop will control whether the confirm delete tooltip is shown. Otherwise, the component will the tooltip.
 * **V3 Behavior:** The `stateless` prop decides whether or not the confirm delete tooltip state will be controlled by the component.
-* **Recommendation:** Set the "p-stateful" flag.
 
 ### FileUpload
 * **V4 Behavior:** When provided, the `defaultImage` prop will show an image with opacity when no `thumbnailSrc` prop is provided.
 * **V3 Behavior:** The `defaultImage` prop worked roughly the same as `thumbnailSrc` and took precedence over it, but only in the stateful version of the component. There was no additional styling.
-* **Recommendation:** Set the "true-default" flag.
 
 ### FilterSelector
 * **V4 Behavior:** Renders selector in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders selector in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### FormDropDownList
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** The component controls the state of `open`, `searchIndex`, `searchString`, and `searchTime` if they're not defined as props. The initial values can be set with `initialState`.
 * **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### FormTextArea
 * **V4 Behavior:** The component controls the state of `value` if it's not defined as a prop. The initial value can be set with `initialState.value`.
 * **V3 Behavior:** The `stateless` prop determines whether `value` is controlled by the component or not.
-* **Recommendation:** Make sure `value` is only set when the component is stateless. If you want the component to be stateful and also want to set an initial value, use the `initialState` prop. (Or set a flag for "p-stateful".)
-
 * **V4 Behavior:** The component controls the state of `value` if it's not defined as a prop. The initial value can be set with `initialState.value`.
 * **V3 Behavior:** The `stateless` prop determines whether `value` is controlled by the component or not.
-* **Recommendation:** Make sure `value` is only set when the component is stateless. If you want the component to be stateful and also want to set an initial value, use the `initialState` prop. (Or set a flag for "p-stateful".)
 
 ### FormTimeZone
 * **V4 Behavior:** The component controls the state of `filterByCountry`, `open`, `searchString`, `selectedIndex`, and `value` if they're not defined as props. The initial values can be set with `initialState`.
 * **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
-* **Recommendation:** Set the 'p-stateful' flag.
-
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### HeaderBar
 * **V4 Behavior:** Renders dropdowns in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdowns in DOM with header bar.
-* **Recommendation:** Set the "use-portal" flag.
-
-* **V4 Behavior:** Will default to updated style unless prop "legacy" is set to true.
-* **V3 Behavior:** Defaults to legacy style unless prop "updated" is set to true.
-* **Recommendation:** Set either updated or legacy to true.
+* **V4 Behavior:** Will default to updated style unless prop `legacy` is set to true.
+* **V3 Behavior:** Defaults to legacy style unless prop `updated` is set to true.
+* **Recommendation:** Set `legacy` to true for legacy styling.
 
 ### I18nPhoneInput
 * **V4 Behavior:** The component controls the state of `open`, `searchIndex`, `searchString`, and `searchTime` if they're not defined as props. The initial values can be set with `initialState`.
 * **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### Icon
 * **V4 Behavior:** Displays an icon with only a SPAN tag unless it contains `children` or `type` is set to "leading".
 * **V3 Behavior:** Displays a block element with an icon that has right margin unless `type` is set to "inline".
-* **Recommendation:** Set `type` to either "leading" or "inline".
-
-* **V4 Behavior:** Displays an icon with only a SPAN tag unless it contains `children` or `type` is set to "leading".
-* **V3 Behavior:** Displays a block element with an icon that has right margin unless `type` is set to "inline".
-* **Recommendation:** Set `type` to either "leading" or "inline".
+* **Recommendation:** Set `type` to "leading" for block element icons.
 
 ### LeftNavBar
-* **V4 Behavior:** Will default to updated style unless prop "legacy" is set to true.
-* **V3 Behavior:** Defaults to legacy style unless prop "updated" is set to true.
-* **Recommendation:** Set either updated or legacy to true.
+* **V4 Behavior:** Will default to updated style unless prop `legacy` is set to true.
+* **V3 Behavior:** Defaults to legacy style unless prop `updated` is set to true.
+* **Recommendation:** Set `legacy` to true for legacy styling.
 
 ### Link
 * **V4 Behavior:** Displays a link with only an A tag unless `type` is set to "block".
@@ -171,80 +123,55 @@
 ### LinkDropDownList
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
-
 * **V4 Behavior:** The component controls the state of `open` and `selectedOption` if they're not defined as props. The initial values can be set with `initialState`.
 * **V3 Behavior:** The `stateless` prop determines whether these props are controlled by the component or not.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### Messages
 * **V4 Behavior:** The WARNING message type will show a yellow banner.
 * **V3 Behavior:** The WARNING message type shows a red error banner.
-* **Recommendation:** Use NOTICE instead of WARNING. (Or set a flag for 'fixed-messages-constants'.)
 
 ### ModalButton
 * **V4 Behavior:** Renders modal in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders modal in DOM with trigger.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### MultiDrag
 * **V4 Behavior:** Renders dropdowns in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdowns in DOM with main input.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### OverflowMenu
 * **V4 Behavior:** Renders in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders in DOM with trigger.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### Pagination
 * **V4 Behavior:** When provided, the `page` prop will control the current page of the component. Otherwise, the component will handle paging internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not paging will be controlled by the component.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### PopoverMenu
 * **V4 Behavior:** Renders in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders in DOM with trigger.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### RockerButton
 * **V4 Behavior:** When provided, the `selectedIndex` prop will control which index is selected. Otherwise, the component will handle which index is selected internally.
 * **V3 Behavior:** The `stateless` prop decides whether or not the index state will be controlled by the component.
-* **Recommendation:** Set the "p-stateful" flag.
 * **V4 Behavior:** The `selected` prop is ignored.
 * **V3 Behavior:** The stateful version accepts `selected` to set the initial selected state.
-* **Recommendation:** Set the `p-stateful` flag and set the initial `selectedIndex` in `initialState`.
 
 ### SelectionList
 * **V4 Behavior:** The component controls `queryString`, `showOnlySelected`, and `selectedItemIds` if they aren't defined as props. The initial values can be set with `initialState`.
 * **V3 Behavior:** The `stateless` prop determines whether they are controlled by the component or not.
-* **Recommendation:** Set the 'p-stateful' flag.
 
 ### TimePicker
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### TranslationPicker
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### UnitInput
 * **V4 Behavior:** Renders dropdown in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdown in DOM with input.
-* **Recommendation:** Set the "use-portal" flag.
 
 ### Wizard & Step
 * **V4 Behavior:** Renders dropdowns in a portal, outside of the main DOM tree.
 * **V3 Behavior:** Renders dropdowns in DOM with wizard.
-* **Recommendation:** Set the "use-portal" flag.
-
-## Flags
-* **add-button-margin**
-* **expandable-row-class**
-* **fix-discard-button**
-* **fixed-messages-constants**
-* **p-stateful**
-* **use-portal**
-* **true-default**

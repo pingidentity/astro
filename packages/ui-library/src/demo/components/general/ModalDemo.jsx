@@ -13,7 +13,6 @@ import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/compon
 * @desc A demo for Modal
 */
 class ModalDemo extends React.Component {
-    static flags = ["use-portal"];
 
     state = {};
 

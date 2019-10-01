@@ -10,8 +10,7 @@ import FlexRow, { alignments, spacingOptions } from "../../layout/FlexRow";
 import MarketSelector from "./MarketSelector";
 import Logo from "./logos/Logo";
 import { getIconClassName } from "../../../util/PropUtils";
-import { cannonballChangeWarning, cannonballPortalWarning } from "../../../util/DeprecationUtils";
-import { flagsPropType, getFlags, hasFlag } from "../../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  *  @typedef {function} HeaderBar~MenuRenderer
@@ -45,8 +44,6 @@ import { flagsPropType, getFlags, hasFlag } from "../../../util/FlagUtils";
  *          require the developer to do anything when they use the headerbar.
  * @param {HeaderBar~MenuRenderer} renderMenu
  *          Renders the popup menu
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  */
 class NavItem extends React.Component {
     static propTypes = {
@@ -201,8 +198,6 @@ class NavItem extends React.Component {
  *          of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
  * @param {string} openNode
  *          Id of the open node
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {HeaderBar~navigationLink[]} tree
  *          The data structure of the menus of the headerbar
  *
@@ -338,12 +333,8 @@ ProductNav.defaultProps = {
  *          Alternative to the tree prop. If you just want a single user menu, provide the options here
  * @param {string} [userName]
  *          Used as the label for the user menu
-  * @param {boolean} [updated=false]
- *          Flag to explicitly indicate you're using the new style of the header bar.
  * @param {boolean} [legacy]
  *          Flag to explicitly indicate you're using the old style of the header bar.
- * @param {array} [flags]
- *          Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {HeaderBar~ProductNavRenderer} renderProductNav
  *          Function that renders the product nav. Accepts props as the first argument and the default component as the second.
  * @param {string|object} [mode]
@@ -435,7 +426,6 @@ class HeaderBar extends React.Component {
         renderProductNav: PropTypes.func,
         renderNavItem: PropTypes.func,
         legacy: PropTypes.bool,
-        updated: PropTypes.bool
     };
 
     static defaultProps = {
@@ -449,16 +439,9 @@ class HeaderBar extends React.Component {
         renderProductNav: defaultRender,
         renderNavItem: defaultRender,
         legacy: false,
-        updated: false
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "HeaderBar" });
-        }
-    }
 
     /**
      * @method
@@ -481,16 +464,7 @@ class HeaderBar extends React.Component {
         this.props.environmentOptions ||
         this.props.navOptions ||
         this.props.marketOptions ||
-        this.props.updated
-
-    componentDidMount() {
-        if (!this.props.legacy && !this._isUpdated() ) {
-            cannonballChangeWarning({
-                message: `The Header Bar and Left Nav will default to the update style ` +
-                `unless the prop "legacy" is set to true.`,
-            });
-        }
-    }
+        !this.props.legacy
 
     _getModeNodes() {
         const { mode } = this.props;
@@ -544,7 +518,7 @@ class HeaderBar extends React.Component {
             >
                 {modeNodes.bar}
                 <div className="header-bar__left">
-                    {(!this._isUpdated() || this.props.legacy) && (
+                    {(!this._isUpdated()) && (
                         <div
                             className="header-bar__ping-logo"
                             data-id="header-logo"

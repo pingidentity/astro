@@ -4,12 +4,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FormDropDownList from "../forms/FormDropDownList";
-import Utils from "../../util/Utils";
 import moment from "moment-range";
 import Translator from "../../util/i18n/Translator.js";
 import classnames from "classnames";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 
 /**
@@ -40,8 +38,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  *              The value to be set, eg: "3:00pm" or a `moment` object
  * @param {TimePicker~onValueChange} onValueChange
  *              Callback to be triggered when the select element value changes
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  */
 module.exports = class extends React.Component {
 
@@ -73,16 +69,6 @@ module.exports = class extends React.Component {
     constructor(props) {
         super(props);
         moment.locale(Translator.currentLanguage);
-    }
-
-    componentDidMount() {
-        if (!Utils.isProduction() && this.props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "TimePicker" });
-        }
     }
 
     /**
@@ -243,7 +229,7 @@ module.exports = class extends React.Component {
                 validSearchCharsRegex="/[^\d:\s]+/"
                 title={value}
                 noneOption={noTime}
-                flags={[...getFlags(this), "p-stateful"]}
+                flags={getFlags(this)}
             />
         );
     }

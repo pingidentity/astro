@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "underscore";
-import Utils from "../../util/Utils.js";
 import FormLabel from "./FormLabel";
 import FormError from "./FormError";
 import OptionList from "./OptionList";
@@ -280,21 +279,6 @@ export class MultivaluesBase extends Component {
         onFocus: _.noop,
         includeDraftInEntries: false,
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-            if (props.isRequired !== undefined) {
-                throw new Error(Utils.deprecatePropError("isRequired", "required"));
-            }
-        }
-    }
 
     state = {
         validValue: true,

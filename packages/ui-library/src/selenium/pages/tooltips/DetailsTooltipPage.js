@@ -11,6 +11,15 @@ var DetailsTooltipDemoPage = Object.create(HomePage, {
     },
 
     /**
+     * @desc click outside details tooltips to make sure they're closed
+     */
+    clickOutside: {
+        value: function() {
+            this.click(".output");
+        }
+    },
+
+    /**
      * @desc this function is to click the link "With a label (label is passed into component)"
      */
     clickWithALabelLink: {

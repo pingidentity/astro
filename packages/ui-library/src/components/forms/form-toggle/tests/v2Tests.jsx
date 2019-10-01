@@ -5,7 +5,6 @@ describe("Toggle", function () {
     const ReactTestUtils = require("react-dom/test-utils");
     const _ = require("underscore");
     const TestUtils = require("../../../../testutil/TestUtils");
-    const Utils = require("../../../../util/Utils");
     const Toggle = require("../v2");
 
     function getComponent (p) {
@@ -14,25 +13,11 @@ describe("Toggle", function () {
             onToggle: jest.fn()
         });
 
-        return ReactTestUtils.renderIntoDocument(<Toggle {...props} />);
+        return TestUtils.renderInWrapper(<Toggle {...props} />);
     }
 
-    it("stateless: renders the component with default data-id", function () {
+    it("renders the component with default data-id", function () {
         const component = getComponent();
-
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
-    });
-
-    it("progressively stateless: renders the component with default data-id", function () {
-        const component = getComponent({
-            flags: ["p-stateful"]
-        });
-
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
-    });
-
-    it("stateful: renders the component with default data-id", function () {
-        const component = getComponent({ stateless: false });
 
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "toggle")).toBeTruthy();
     });
@@ -86,19 +71,7 @@ describe("Toggle", function () {
 
         ReactTestUtils.Simulate.click(toggle);
 
-        expect(component.props.onToggle).toBeCalled();
-    });
-
-    it("stateful: _handleToggle callback changes toggled state when clicked", function () {
-        const component = getComponent({ stateless: false });
-        const componentRef = component.refs.ToggleStateful;
-        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "toggle");
-
-        expect(componentRef.state.toggled).toBe(false);
-
-        ReactTestUtils.Simulate.click(toggle);
-
-        expect(componentRef.state.toggled).toBe(true);
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("stateless: does not trigger onToggle callback when disabled", function () {
@@ -107,22 +80,7 @@ describe("Toggle", function () {
 
         ReactTestUtils.Simulate.click(toggle);
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-
-        expect(function () {
-            getComponent({ controlled: true });
-        }).toThrow(expectedError);
-    });
 });

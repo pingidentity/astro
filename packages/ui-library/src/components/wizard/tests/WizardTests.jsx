@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.dontMock("../Step");
 jest.dontMock("../Wizard");
 jest.dontMock("../../general/EllipsisLoaderButton");
@@ -12,7 +15,6 @@ describe("Wizard", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Utils = require("../../../util/Utils"),
         ReactTestUtils = require("react-dom/test-utils"),
         Wizard = require("../Wizard"),
         Step = Wizard.Step,
@@ -225,23 +227,6 @@ describe("Wizard", function () {
         expect(tooltipText.textContent).toBe(cancelTooltipParams.messageText);
     });
 
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getRenderedComponent({ id: "foo" });
-        }).toThrow(expectedError);
-    });
-
-    it("throws error when deprecated prop 'onChange' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-
-        expect(function () {
-            getRenderedComponent({ onChange: jest.fn() });
-        }).toThrow(expectedError);
-    });
-
-
     it("for a single step wizard,the progress bar is not rendered and the css classnames are altered", function () {
         var component = getRenderedComponent({}, (<Step title="step 1">Step 1</Step>)),
             progress = TestUtils.findRenderedDOMNodeWithDataId(component, "progress"),
@@ -250,20 +235,6 @@ describe("Wizard", function () {
         expect(component).toBeTruthy();
         expect(progress).toBeFalsy();
         expect(content).toBeFalsy(); // testing that the task-content class is not added
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getRenderedComponent({}, [<Step title="step 1" flags={[ "use-portal" ]}>Step 1</Step>]);
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-        getRenderedComponent(
-            { flags: [ "use-portal" ] }, [<Step title="step 1" flags={[ "use-portal" ]}>Step 1</Step>]
-        );
-        expect(console.warn).not.toBeCalled();
     });
 
 });

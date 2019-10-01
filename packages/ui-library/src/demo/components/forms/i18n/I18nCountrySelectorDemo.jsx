@@ -7,8 +7,6 @@ import I18nCountrySelector from "../../../../components/forms/i18n/I18nCountrySe
 * @desc A demo for I18nCountrySelector
 */
 export default class I18nCountrySelectorDemo extends React.Component {
-    static flags = [ "use-portal", "p-stateful" ];
-
     state = {
         countryCode: "840"
     };

@@ -44,21 +44,27 @@ module.exports = [
             },
             {
                 label: "UI Library 4.0.0",
-                demo: require("../components/docs/cannonball/Cannonball"),
-                fullscreen: true,
-                icon: "circle"
-            },
-            {
-                label: "Getting Ready for V4",
-                demo: contentPage(GettingReady),
-                fullscreen: true,
-                icon: "check"
-            },
-            {
-                label: "V4 Breaking Changes",
-                demo: contentPage(Changes),
-                contentPage: true,
-                icon: "walkthrough",
+                icon: "circle",
+                children: [
+                    {
+                        label: "Announcement",
+                        demo: require("../components/docs/cannonball/Cannonball"),
+                        fullscreen: true,
+                        icon: "circle"
+                    },
+                    {
+                        label: "Upgrading to V4",
+                        demo: contentPage(GettingReady),
+                        fullscreen: true,
+                        icon: "check"
+                    },
+                    {
+                        label: "V4 Breaking Changes",
+                        demo: contentPage(Changes),
+                        contentPage: true,
+                        icon: "walkthrough",
+                    },
+                ]
             },
             {
                 label: "UI Library 101",
@@ -711,11 +717,6 @@ module.exports = [
                         pathToDoc: "components/general/ModalButton.jsx",
                         pathToSource: "components_general_ModalButton.jsx.html",
                         pathToDemoSource: "demo_components_general_ModalButtonDemo.jsx.html",
-                        status: {
-                            message: "Usage of the ModalButton without the use-portal flag has been deprecated." +
-                                " When using this component, pass in flags=[\"use-portal\"] as a prop.",
-                            type: "version"
-                        }
                     },
                     {
                         label: "Popover Menu",
@@ -1051,15 +1052,6 @@ module.exports = [
                 label: "Utils",
                 icon: "wand",
                 children: [
-                    {
-                        label: "Cache",
-                        demo: require("../net/CacheDemo"),
-                        pathToDoc: "net/Cache.js",
-                        pathToSource: "net_Cache.js.html",
-                        pathToDemoSource: "demo_net_CacheDemo.jsx.html",
-                        // Indicate that the jsdoc is a module and not a class to generate the correct name for the jsdoc url
-                        module: true
-                    },
                     {
                         label: "Context Close Button",
                         demo: require("../components/general/ContextCloseButtonDemo"),

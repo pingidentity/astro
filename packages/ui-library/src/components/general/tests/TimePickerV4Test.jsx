@@ -15,7 +15,6 @@ import { allFlags } from "../../../util/FlagUtils";
 describe("TimePicker", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         TimePicker = require("../TimePicker"),
         moment = require("moment"),
@@ -190,14 +189,6 @@ describe("TimePicker", function () {
     it("verify default data-id", function () {
         const component = render({ increments: 60, format: "24" });
         expect(component.props["data-id"]).toBe("time-picker");
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            render({ id: "foo" });
-        }).toThrow(expectedError);
     });
 
 });

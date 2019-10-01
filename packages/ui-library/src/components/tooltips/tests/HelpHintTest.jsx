@@ -8,7 +8,6 @@ describe("HelpHint", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
-    var Utils = require("../../../util/Utils");
     var HelpHint = require("../HelpHint");
     var text = "test help text!";
     var classValue = "short-tooltip";
@@ -128,16 +127,6 @@ describe("HelpHint", function () {
         ReactTestUtils.Simulate.click(container, event);
 
         // expect(event.preventDefault.mock.calls.length).toEqual(1);
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            ReactTestUtils.renderIntoDocument(
-                <HelpHint id="foo" hintText="bar" />
-            );
-        }).toThrow(expectedError);
     });
 
     it("renders a link when prop 'link' is pass in", function () {

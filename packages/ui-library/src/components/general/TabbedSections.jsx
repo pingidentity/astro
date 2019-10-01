@@ -2,8 +2,7 @@
 
 var PropTypes = require("prop-types");
 
-var React = require("react"),
-    Utils = require("../../util/Utils");
+var React = require("react");
 
 /**
  * @callback TabbedSections~onValueChange
@@ -55,19 +54,6 @@ class TabbedSections extends React.Component {
         "data-id": "tabbed-sections",
         renderHidden: false
     };
-
-    constructor(props) {
-        super(props);
-
-        if (!Utils.isProduction()) {
-            if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (props.onSectionChange) {
-                throw new Error(Utils.deprecatePropError("onSectionChange", "onValueChange"));
-            }
-        }
-    }
 
     /**
      * Returns all children

@@ -11,8 +11,6 @@ import HR from "ui-library/lib/components/general/HR";
 */
 
 class SearchBarDemo extends React.Component {
-    static flags = ["p-stateful"];
-
     state = {
         value: "",
         lastEvent: "",

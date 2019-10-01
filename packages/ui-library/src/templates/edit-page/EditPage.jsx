@@ -88,14 +88,13 @@ export default class EditPage extends React.Component {
                     underlined={true}
                     accessories={[
                         <Button label="Reset Password" inline key="button" />,
-                        <Toggle key="toggle" flags={["p-stateful"]}/>
+                        <Toggle key="toggle" />
                     ]}
                 />
 
                 <PageSection>
                     <RockerButton
                         labels={labels}
-                        flags={["p-stateful"]}
                     />
                     <PageSection title="Identity">
                         <InputRow>
@@ -106,7 +105,7 @@ export default class EditPage extends React.Component {
                                 required={true}
                                 value={this.state.firstName || ""}
                                 onChange={this._handleInputChange}
-                                flags={["p-stateful"]}/>
+                            />
                             <FormTextField
                                 labelText="Last Name"
                                 width={InputWidths.MD}
@@ -114,7 +113,7 @@ export default class EditPage extends React.Component {
                                 required={true}
                                 value={this.state.lastName || ""}
                                 onChange={this._handleInputChange}
-                                flags={["p-stateful"]}/>
+                            />
                         </InputRow>
                         <InputRow>
                             <FormTextField
@@ -124,7 +123,7 @@ export default class EditPage extends React.Component {
                                 required={true}
                                 value={this.state.username || ""}
                                 onChange={this._handleInputChange}
-                                flags={["p-stateful"]}/>
+                            />
                         </InputRow>
                     </PageSection>
 
@@ -139,7 +138,7 @@ export default class EditPage extends React.Component {
                                             data-id="address1"
                                             value={this.state.address1 || ""}
                                             onChange={this._handleInputChange}
-                                            flags={["p-stateful"]}/>
+                                        />
                                     </InputRow>
                                     <InputRow>
                                         <FormTextField
@@ -147,7 +146,7 @@ export default class EditPage extends React.Component {
                                             data-id="address2"
                                             value={this.state.address2 || ""}
                                             onChange={this._handleInputChange}
-                                            flags={["p-stateful"]}/>
+                                        />
                                     </InputRow>
                                     <InputRow>
                                         <FormDropDownList
@@ -158,7 +157,7 @@ export default class EditPage extends React.Component {
                                             selectedOption={this.state.addressType || addressOptions[0]}
                                             onValueChange={this._handleSelectChange("addressType")}
                                             options={addressOptions}
-                                            flags={["p-stateful", "use-portal"]}/>
+                                        />
                                     </InputRow>
                                 </Layout.Column>
                                 <Layout.Column>
@@ -169,7 +168,7 @@ export default class EditPage extends React.Component {
                                             data-id="alternateAddress1"
                                             value={this.state.alternateAddress1 || ""}
                                             onChange={this._handleInputChange}
-                                            flags={["p-stateful"]}/>
+                                        />
                                     </InputRow>
                                     <InputRow>
                                         <FormTextField
@@ -177,7 +176,7 @@ export default class EditPage extends React.Component {
                                             data-id="alternateAddress2"
                                             value={this.state.alternateAddress2 || ""}
                                             onChange={this._handleInputChange}
-                                            flags={["p-stateful"]}/>
+                                        />
                                     </InputRow>
                                     <InputRow>
                                         <FormDropDownList
@@ -187,7 +186,7 @@ export default class EditPage extends React.Component {
                                             selectedOption={this.state.alternateAddressType || addressOptions[1]}
                                             onValueChange={this._handleSelectChange("alternateAddressType")}
                                             options={addressOptions}
-                                            flags={["p-stateful", "use-portal"]}/>
+                                        />
                                     </InputRow>
                                 </Layout.Column>
                             </Layout.Row>
@@ -216,7 +215,7 @@ export default class EditPage extends React.Component {
                     saveText="Save"
                     enableSavingAnimation={this.state.saving}
                     visible={this._showButtonBar(this.state)}
-                    flags={["p-stateful", "use-portal"]}/>
+                />
             </div>
         );
     }

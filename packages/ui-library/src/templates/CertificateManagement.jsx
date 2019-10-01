@@ -34,7 +34,7 @@ export default class CertificateManagement extends Component {
                         alignment={alignments.TOP}
                         justify={justifyOptions.SPACEBETWEEN}
                     >
-                        <SearchBar onValueChange={this._onSearchType} flags={["p-stateful"]}>
+                        <SearchBar onValueChange={this._onSearchType}>
                             <FormCheckbox label="Filter 1" className="inline" key="uno" />
                             <FormCheckbox label="Filter 2" className="inline" key="dos" />
                             <FormCheckbox label="Filter 3" className="inline" key="tres" />
@@ -46,7 +46,6 @@ export default class CertificateManagement extends Component {
 
                     <ExpandableRow.SimpleWrapper data-id="idp-row">
                         <ExpandableRow
-                            flags={["p-stateful", "expandable-row-class", "use-portal"]}
                             title="Dan's Cert Which Will Expire"
                             subtitle="Default for None"
                             icon="icon-info"
@@ -96,7 +95,6 @@ export default class CertificateManagement extends Component {
                         </ExpandableRow>
 
                         <ExpandableRow
-                            flags={["p-stateful", "expandable-row-class", "use-portal"]}
                             title="dk-litterbox"
                             subtitle="Encryption"
                             icon="icon-cert-connection"
@@ -116,7 +114,6 @@ export default class CertificateManagement extends Component {
                         />
 
                         <ExpandableRow
-                            flags={["p-stateful", "expandable-row-class", "use-portal"]}
                             title="dk-litterbox"
                             subtitle="Signing"
                             icon="icon-cert-connection"
@@ -133,7 +130,6 @@ export default class CertificateManagement extends Component {
                         />
 
                         <ExpandableRow
-                            flags={["p-stateful", "expandable-row-class", "use-portal"]}
                             title="test"
                             subtitle="Verification"
                             icon="icon-cert-connection"

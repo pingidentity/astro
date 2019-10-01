@@ -1,7 +1,6 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
-    ReactDOM = require("react-dom"),
-    Utils = require("../../util/Utils");
+    ReactDOM = require("react-dom");
 
 /**
  * @callback SelectText~onClick
@@ -87,13 +86,6 @@ class SelectText extends React.Component {
     static defaultProps = {
         "data-id": "select-text"
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.dataId) {
-            throw new Error(Utils.deprecatePropError("dataId", "data-id"));
-        }
-    }
 
     /*
      * Select the text of the clicked element using

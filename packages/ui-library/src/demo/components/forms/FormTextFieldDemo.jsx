@@ -11,8 +11,6 @@ import Text from "../../../components/general/Text";
 * @desc A demo for FormTextField
 */
 class FormTextFieldDemo extends React.Component {
-    static flags = [ "p-stateful" ];
-
     state = {
         onValueChangeFieldValue: "",
         onBlurFieldValue: "",
@@ -101,7 +99,6 @@ class FormTextFieldDemo extends React.Component {
     };
 
     render() {
-        const { flags } = this.props;
 
         return (
             <div>
@@ -128,21 +125,6 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Basic with Subtext"
                         width={InputWidths.MD}
                         subText="this is subtext"
-                    />
-                </InputRow>
-                {flags.findIndex(item => item === "p-stateful") >= 0 &&
-                    <p>
-                        The below won't work in progressively-stateful mode.
-                        Providing the value makes it stateless.
-                        Use the "initialState" prop.
-                    </p>
-                }
-                <InputRow>
-                    <FormTextField
-                        stateless={false}
-                        labelText="Default value"
-                        value="default"
-                        width={InputWidths.MD}
                     />
                 </InputRow>
                 <InputRow>

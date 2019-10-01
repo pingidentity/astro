@@ -5,7 +5,6 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
-    Utils = require("../../util/Utils.js"),
     Row = require("./Row"),
     ColumnPagination = require("./ColumnPagination"),
     FormCheckbox = require("../forms/FormCheckbox");
@@ -312,13 +311,6 @@ class Grid extends React.Component {
     static defaultProps = {
         stateless: false
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-        }
-    }
 
     render() {
         return (

@@ -4,10 +4,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ButtonBar from "../forms/ButtonBar";
-import Utils from "../../util/Utils";
 import _ from "underscore";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 var INHERIT_PROPS = [
     "activeStep",
@@ -69,8 +67,6 @@ var INHERIT_PROPS = [
  * @param {string} [className]
  *      CSS classes to set on the top-level HTML container
  *
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render the tooltip with popper.js and react-portal
  * @param {string} [labelEdit]
  *      If provided, will be injected its children's props
  * @param {string} [labelNext]
@@ -195,19 +191,6 @@ class Wizard extends React.Component {
     };
 
     componentDidMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "Wizard" });
-        }
-
         //if this is the root wizard, report the number of steps up to the reducer
         if (this.props.number === 1) {
             this.props.onValueChange({ choice: 0, numSteps: this._filter(this.props.children).length });

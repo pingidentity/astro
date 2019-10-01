@@ -1,12 +1,9 @@
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
-
 import PropTypes from "prop-types";
 import { defaultRender } from "../../../util/PropUtils";
 import React from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
 import Copyright from "./Copyright";
-import Utils from "../../../util/Utils";
 import Anchor from "../../general/Anchor";
 import _ from "underscore";
 import { getIconClassName } from "../../../util/PropUtils";
@@ -83,8 +80,6 @@ import { getIconClassName } from "../../../util/PropUtils";
  *     The id of the selected section.
  * @param {object} [openSections={}]
  *     A hash map of ids and their open state. This is used internally by the Reducer to maintain expand/collapse state.
- * @param {boolean} [updated=false]
- *      *     Flag to explicitly indicate you're using the old style of the left nav bar.
  *  @param {boolean} [legacy=false]
  *     Flag to explicitly indicate you're using the old style of the left nav bar.
  * @param {boolean} [collapsible=false]
@@ -122,7 +117,6 @@ class LeftNavBar extends React.Component {
         selectedSection: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         openSections: PropTypes.object,
         collapsible: PropTypes.bool,
-        updated: PropTypes.bool,
         legacy: PropTypes.bool,
         autocollapse: PropTypes.bool,
         onSectionValueChange: PropTypes.func,
@@ -142,21 +136,8 @@ class LeftNavBar extends React.Component {
         collapsible: false,
         autocollapse: false,
         pingoneLogo: false,
-        updated: false,
         legacy: false
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction()) {
-            if (props.onItemClick) {
-                throw new Error(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
-            }
-            if (props.onSectionClick) {
-                throw new Error(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
-            }
-        }
-    }
 
     state = {
         selectorStyle: { top: 0, height: 0 },
@@ -341,20 +322,11 @@ class LeftNavBar extends React.Component {
         }
     }
 
-    componentDidMount() {
-        if (!this.props.legacy && !this.props.updated ) {
-            cannonballChangeWarning({
-                message: `The Header Bar and Left Nav will default to the update style ` +
-                `unless the prop "legacy" is set to true.`,
-            });
-        }
-    }
-
     render() {
         var className = classnames({
             scrollable: this.state.scrollable,
             collapsible: this.props.collapsible,
-            updated: this.props.updated,
+            updated: !this.props.legacy,
         });
 
         return (
@@ -375,7 +347,7 @@ class LeftNavBar extends React.Component {
                     ref="copyright"
                     pingoneLogo={this.props.pingoneLogo}
                     logoSrc={this.props.logoSrc}
-                    updated={this.props.updated}
+                    updated={!this.props.legacy}
                     renderFooterContent={this.props.renderFooterContent}
                     copyrightYear={this.props.copyrightYear}
                 />

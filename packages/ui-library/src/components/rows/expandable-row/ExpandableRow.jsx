@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "underscore";
 import DetailsTooltip from "../../tooltips/DetailsTooltip";
-import Utils from "../../../util/Utils";
 import Translator from "../../../util/i18n/Translator";
 import KeyboardUtils from "../../../util/KeyboardUtils";
 import DragDrop from "../DragDropRow";
@@ -15,13 +14,9 @@ import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
 import ButtonGroup from "../../layout/ButtonGroup";
-import {
-    cannonballChangeWarning,
-    cannonballProgressivelyStatefulWarning,
-    cannonballPortalWarning
-} from "../../../util/DeprecationUtils";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
 * @enum {string}
@@ -104,9 +99,6 @@ const ConfirmDeletePositions = {
  *     Row id, which may be used as a numeric counter rather. Can compliment data-id.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render tooltips with popper.js and react-portal
- *     Set the flag for "expandable-row-class" to use the updated CSS className
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
@@ -114,6 +106,7 @@ const ConfirmDeletePositions = {
  *
  * @param {boolean} [expanded=false]
  *     Whether the row is expanded or collapsed.
+ *     When not provided, the component will manage this value.
  * @param {ExpandableRow~onToggle} [onToggle]
  *     Callback to be triggered when the expand/collapse button is clicked.
  *
@@ -185,6 +178,7 @@ const ConfirmDeletePositions = {
  *     Optional custom content to replace the default delete confirmation tooltip content
  * @param {boolean} [showDeleteConfirm=false]
  *     Whether or not the confirm delete dialog is visible.
+ *     When not provided, the component will manage this value.
  * @param {ExpandableRow~onDeleteCancelClick} [onDeleteCancelClick]
  *     Callback to be triggered when the 'cancel' button in a delete confirm dialog is clicked.
  * @param {ExpandableRow~onDeleteConfirmClick} [onDeleteConfirmClick]
@@ -243,146 +237,6 @@ const ConfirmDeletePositions = {
  *  The current index of the item that should be right after the moving item in the new order
  *  (If item 2 is moved to index 7, it will end up at index 6 because the list shifts after it is removed)
  */
-
-class ExpandableRow extends React.Component {
-
-    static displayName = "ExpandableRow";
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: false
-    };
-
-    _usePStateful = () => hasFlag(this, "p-stateful")
-
-    componentDidMount() {
-        if (!Utils.isProduction()) {
-            if (!this._usePStateful()) {
-                cannonballProgressivelyStatefulWarning({
-                    name: "ExpandableRow"
-                });
-            }
-            if (this.props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (this.props.defaultToExpanded !== undefined) {
-                throw new Error(Utils.deprecatePropError("defaultToExpanded", "expanded"));
-            }
-        }
-    }
-
-    render() {
-        if (this._usePStateful()) {
-            return <PStatefulExpandableRow {...this.props} />;
-        }
-
-        return this.props.stateless
-            ? React.createElement(StatelessExpandableRow, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "StatelessExpandableRow" }, this.props), this.props.children)
-            : React.createElement(StatefulExpandableRow, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "StatefulExpandableRow" }, this.props), this.props.children);
-    }
-}
-
-class StatefulExpandableRow extends React.Component {
-    static displayName = "StatefulExpandableRow";
-
-    static propTypes = {
-        showDeleteConfirm: PropTypes.bool
-    };
-
-    static defaultProps = {
-        showDeleteConfirm: false,
-        expanded: false
-    };
-
-    state = {
-        expanded: this.props.expanded,
-        showDeleteConfirm: this.props.showDeleteConfirm
-    };
-
-    _handleToggle = () => {
-        if (typeof(this.props.onToggle) === "function") {
-            this.props.onToggle(!this.state.expanded);
-        }
-
-        this.setState({
-            expanded: !this.state.expanded
-        });
-    };
-
-    _hideDeleteConfirm = () => {
-        this.setState({
-            showDeleteConfirm: false
-        });
-    };
-
-    _handleDeleteConfirm = (e) => {
-        this._hideDeleteConfirm();
-        if (this.props.onDelete) {
-            this.props.onDelete(e);
-        }
-    };
-
-    _handleDelete = (e) => {
-        e.preventDefault();
-        if (!this.props.confirmDelete && this.props.onDelete) {
-            this.props.onDelete(e);
-        } else {
-            this.setState({
-                showDeleteConfirm: true
-            });
-        }
-    };
-
-    _handleReorder = (from = this.props.ordering.position, to) => {
-        this.setState({
-            positionValue: undefined,
-        });
-        if (this.props.ordering && this.props.ordering.onReorder) {
-            // this is janky code to make up for the original
-            // janky code in this stateful component, which will
-            // be removed in v4
-            this.props.ordering.onReorder(
-                from !== to ? from : this.props.ordering.position,
-                to
-            );
-        }
-    };
-
-    _handlePositionValueChange = (value) => {
-        this.setState({
-            positionValue: value
-        });
-    };
-
-    render() {
-        const ordering = this.props.ordering
-            ? _.defaults({
-                position: this.state.positionValue !== undefined
-                    ? this.state.positionValue
-                    : this.props.ordering.position,
-                onReorder: this._handleReorder,
-                onPositionValueChange: this._handlePositionValueChange,
-            }, this.props.ordering)
-            : undefined;
-        const props = _.defaults({
-            ref: "StatelessExpandableRow",
-            expanded: this.state.expanded,
-            onToggle: this._handleToggle,
-            showDeleteConfirm: this.state.showDeleteConfirm,
-            onDelete: this._handleDelete,
-            onDeleteCancelClick: this._hideDeleteConfirm,
-            onDeleteConfirmClick: this._handleDeleteConfirm,
-            ordering
-        }, this.props);
-
-        return <StatelessExpandableRow {...props} />;
-    }
-}
 
 class OrderingInput extends React.Component {
     state = {};
@@ -550,21 +404,6 @@ class StatelessExpandableRow extends React.Component {
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    componentDidMount() {
-        if (!this._useNewClassName()) {
-            cannonballChangeWarning({
-                message: (
-                    `ExpandableRow will use a new className in v4. To use that className now, ` +
-                    `add the flag 'expandable-row-class' to ExpandableRow.`
-                ),
-            });
-        }
-
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "ExpandableRow" });
-        }
-    }
-
     /**
      * Propagate expanded/collapse toggle event to owner.
      *
@@ -609,11 +448,9 @@ class StatelessExpandableRow extends React.Component {
         }
     }
 
-    _useNewClassName = () => hasFlag(this, "expandable-row-class");
-
     render() {
         const { icon } = this.props;
-        const baseClassName = this._useNewClassName() ? "expandable-row" : "item";
+        const baseClassName = "expandable-row";
         var showEditIcon = this.props.showEdit && this.props.isEditEnabled,
             showViewIcon = this.props.showEdit && !this.props.isEditEnabled,
             containerClassname = classnames(baseClassName, this.props.className, {
@@ -827,7 +664,7 @@ class ConfirmDeleteDialog extends React.Component {
     }
 }
 
-const PStatefulExpandableRow = inStateContainer([
+const ExpandableRow = inStateContainer([
     {
         name: "expanded",
         initial: false,
@@ -857,6 +694,12 @@ const PStatefulExpandableRow = inStateContainer([
         ]
     }
 ])(StatelessExpandableRow);
+
+ExpandableRow.displayName = "ExpandableRow";
+
+ExpandableRow.propTypes = {
+    stateless: deprecatedStatelessProp
+};
 
 /**
 * @class ScrollingWrapper

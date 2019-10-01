@@ -165,7 +165,7 @@ class FileInput extends Component {
             fileName && !status ? (
                 <FlexRow alignment={alignments.CENTER}>
                     { errorColor ? <span style={{ color: errorColor }}>
-                        <Icon iconName="alert" data-id="error-icon" iconSize={iconSizes.MD} />
+                        <Icon iconName="alert" data-id="error-icon" iconSize={iconSizes.MD} type="leading" />
                     </span>
                         : null }
                     <fieldset className={classNames} style={{

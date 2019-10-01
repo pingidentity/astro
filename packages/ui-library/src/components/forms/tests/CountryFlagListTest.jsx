@@ -1,5 +1,8 @@
 window.__DEV__ = true;
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 jest.setMock("../i18n/countryCodes", [
     {
         name: "Afghanistan (‫افغانستان‬‎)",
@@ -93,17 +96,6 @@ describe("CountryFlagList", function () {
     it("displays long em dash in the preview when no selectedCountryCode is provided", function () {
         var component = getComponent();
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "no-selection")).toBeTruthy();
-    });
-
-    it("defaults to iso2 countryCodeDisplayType", function () {
-        var component = getComponent({
-            selectedCountryCode: "af"
-        });
-
-        var countryListItem = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
-        var countryCode = TestUtils.findRenderedDOMNodeWithClass(countryListItem, "country-code");
-
-        expect(countryCode.innerHTML).toBe("af");
     });
 
     it("displays correct country code in list for iso2 countryCodeDisplayType", function () {
@@ -217,6 +209,10 @@ describe("CountryFlagList", function () {
     it("global click handler closes open list when click outside of component", function () {
         var component = getComponent({ open: true });
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
 
         expect(component.props.onToggle).not.toBeCalled();
 

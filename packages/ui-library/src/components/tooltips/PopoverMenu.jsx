@@ -4,8 +4,6 @@ import Popover from "./Popover";
 import _ from "underscore";
 
 import popsOver from "../../util/behaviors/popsOver";
-import { cannonballPortalWarning } from "../../util/DeprecationUtils";
-import { hasFlag } from "../../util/FlagUtils";
 
 const PopoverBase = Popover.Base;
 
@@ -19,8 +17,6 @@ const PopoverBase = Popover.Base;
  *     CSS classes to set on the top-level HTML container.
  * @param {array} [buttons]
  *     Objects that define the buttons. Accepts "label" and "onClick"
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} [triggerClassName]
  *     CSS classes to set on the link that triggers the popover.
  *
@@ -50,12 +46,6 @@ class PopoverMenuBase extends PopoverBase {
             items: [],
             buttons: []
         });
-
-    componentDidMount() {
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "PopoverMenu" });
-        }
-    }
 
     renderItem = (item, handleClick, index) => (
         <button

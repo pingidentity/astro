@@ -64,6 +64,25 @@ describe("Utils", function () {
         });
     });
 
+    describe("deprecatePropError", function () {
+        it("uses deprecatePropError", function () {
+            var warning = Utils.deprecatePropError("id", "data-id");
+
+            expect(warning).toBe(
+                "Deprecated Prop: use data-id instead of id. Support for id has been removed."
+            );
+        });
+
+        it("includes optional default value change warning", function () {
+            var warning = Utils.deprecatePropError("id", "data-id", "old", "new");
+
+            expect(warning).toBe(
+                "Deprecated Prop: use data-id instead of id. " +
+                "The default for data-id will be new instead of old. " +
+                "Support for id has been removed.");
+        });
+    });
+
     describe("isProduction", function () {
         afterEach(function () {
             delete process.env.NODE_ENV;

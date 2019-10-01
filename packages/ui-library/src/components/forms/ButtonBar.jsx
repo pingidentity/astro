@@ -7,9 +7,8 @@ import CancelTooltip from "./../tooltips/CancelTooltip";
 import ConfirmTooltip from "../tooltips/ConfirmTooltip";
 import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
 import Translator from "../../util/i18n/Translator.js";
-import { cannonballChangeWarning, cannonballPortalWarning } from "../../util/DeprecationUtils";
 import _ from "underscore";
-import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
+import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
 * @callback ButtonBar~onCancel
@@ -32,8 +31,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 *
-* @param {array} [flags]
-*     Set the flag for "use-portal" to render the confirmation tooltips with popper.js and react-portal
 * @param {string} [cancelClassName]
 *     Class name(s) to add to the "cancel" button
 * @param {string} [cancelText]
@@ -326,22 +323,6 @@ class ButtonBar extends React.Component {
             : this._getSaveButtonMarkup();
     }
 
-    _fixedProps = () => hasFlag(this, "fix-discard-button");
-
-    componentDidMount() {
-        if (this.props.discardText && this.props.onDiscard && !this._fixedProps()) {
-            cannonballChangeWarning({
-                message: (
-                    `The discard button will be styled like a cancel button. ` +
-                    `To use this style now, add the 'fix-discard-button' flag.`
-                ),
-            });
-        }
-        if (!hasFlag(this, "use-portal")) {
-            cannonballPortalWarning({ name: "ButtonBar" });
-        }
-    }
-
     render() {
         const discardText = this.props.discardText || Translator.translate("discard"),
             containerClassName = {
@@ -349,7 +330,7 @@ class ButtonBar extends React.Component {
                 hidden: !this.props.visible
             },
             discardClassName = classnames(
-                this.props.discardClassName || (this._fixedProps() && "cancel") || null,
+                this.props.discardClassName ||"cancel",
                 { disabled: this.props.enableSavingAnimation }
             ),
             unfixedClassName = { "page-controls-primary--unfixed": this.props.unfixed };

@@ -1,5 +1,8 @@
 jest.dontMock("../FilterSelector");
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 describe("FilterSelector", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -66,18 +69,6 @@ describe("FilterSelector", function () {
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, "filter-selector");
         expect(element).toBeTruthy();
         expect(element.textContent).toEqual(labelText);
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent();
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire Cannonball warning when use-portal is set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).not.toBeCalled();
     });
 
 });

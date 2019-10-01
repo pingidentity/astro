@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
 import _ from "underscore";
-import FormTextField, { messageTypes, FormTextFieldStateless } from "./form-text-field/index";
+import { messageTypes, FormTextFieldStateless } from "./form-text-field/index";
 import KeyboardUtils from "../../util/KeyboardUtils.js";
 import classnames from "classnames";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 import { createProgressiveState } from "../utils/StateContainer";
-import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -142,21 +141,17 @@ class FormSearchBox extends React.Component {
         super(props);
         const { queryString, value, onValueChange } = props;
 
-        if (this._usePStateful({ props })) {
-            const passedProps = {
-                queryString: queryString !== undefined ? queryString : value,
-                onValueChange,
-            };
+        const passedProps = {
+            queryString: queryString !== undefined ? queryString : value,
+            onValueChange,
+        };
 
-            const [ state, callbacks ] = searchBoxProgressiveState({
-                initialState: props.initialState, passedProps, boundSetState: this.setState.bind(this),
-            });
+        const [ state, callbacks ] = searchBoxProgressiveState({
+            initialState: props.initialState, passedProps, boundSetState: this.setState.bind(this),
+        });
 
-            this.state = state;
-            this.callbacks = { onValueChange, ...callbacks };
-        } else {
-            this.callbacks = { onValueChange };
-        }
+        this.state = state;
+        this.callbacks = { onValueChange, ...callbacks };
     }
 
     /**
@@ -183,10 +178,7 @@ class FormSearchBox extends React.Component {
     };
 
     _getSearchInputRef = () => {
-        if (this._usePStateful()) {
-            return this.refs.searchBox.refs["searchBox-input"];
-        }
-        return this.refs.searchBox.refs.stateful.refs.stateless.refs["searchBox-input"];
+        return this.refs.searchBox.refs["searchBox-input"];
     };
 
     /**
@@ -206,14 +198,6 @@ class FormSearchBox extends React.Component {
         return document.activeElement === this._getSearchInputRef();
     };
 
-    _usePStateful = (component = this) => hasFlag(component, "p-stateful");
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            cannonballProgressivelyStatefulWarning({ name: "FormSearchBox" });
-        }
-    }
-
     render() {
         const value = (this.state && this.state.queryString) || this.props.queryString || this.props.value || "";
         const showClear = value !== "";
@@ -223,11 +207,9 @@ class FormSearchBox extends React.Component {
         });
         const { autoFocus } = this.props;
 
-        const TextFieldComponent = this._usePStateful() ? FormTextFieldStateless : FormTextField;
-
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
-                <TextFieldComponent
+                <FormTextFieldStateless
                     data-id="searchBox"
                     stateless={false}
                     ref="searchBox"
@@ -248,7 +230,7 @@ class FormSearchBox extends React.Component {
                         : null
                     }
                     width={this.props.width}
-                ><span className={iconClasses}/></TextFieldComponent>
+                ><span className={iconClasses}/></FormTextFieldStateless>
             </div>
         );
     }

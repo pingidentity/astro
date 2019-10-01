@@ -1,5 +1,3 @@
-/* istanbul ignore next */
-
 "use strict";
 
 var PropTypes = require("prop-types");
@@ -110,6 +108,7 @@ class RowIndexNav extends React.Component {
         }.bind(this));
     };
 
+    /* istanbul ignore next */
     _itemInView = (parent, child) => {
         var parentHeight = parent.getBoundingClientRect().height,
             parentScrollTop = parent.scrollTop,
@@ -123,6 +122,7 @@ class RowIndexNav extends React.Component {
         }
     };
 
+    /* istanbul ignore next */
     _scrollIntoView = (parent, child, iteration) => {
         var parentScrollTop = parent.scrollTop,
             maxScroll = parent.scrollHeight - parent.getBoundingClientRect().height,
@@ -144,6 +144,7 @@ class RowIndexNav extends React.Component {
         }
     };
 
+    /* istanbul ignore next */
     componentDidUpdate(prevProps) {
         var scroller = ReactDOM.findDOMNode(this.scroller),
             selected = document.getElementsByClassName("selected")[0];

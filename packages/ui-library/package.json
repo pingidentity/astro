@@ -1,6 +1,6 @@
 {
   "name": "ui-library",
-  "version": "3.54.0-SNAPSHOT",
+  "version": "4.0.0-BETA.3",
   "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons).",
   "author": "UX Front-End Development Team",
   "license": "ISC",
@@ -20,7 +20,6 @@
     "@babel/polyfill": "^7.4.0",
     "@babel/runtime": "^7.4.2",
     "@babel/runtime-corejs3": "^7.4.2",
-    "@pingone/net": "0.1.3",
     "classnames": "1.2.1",
     "clipboard-polyfill": "2.4.7",
     "clone": "1.0.2",
@@ -149,37 +148,6 @@
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
-  },
-  "jest": {
-    "rootDir": "./",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules",
-      "<rootDir>/src/util/Utils.js",
-      "<rootDir>/src/testutil/TestUtils.js",
-      "<rootDir>/src/util/ReduxTestUtils.js",
-      "<rootDir>/src/util/ReactWithDefaultMethods.js"
-    ],
-    "testMatch": [
-      "**/tests/**/*.js?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node/",
-      "/node_modules/",
-      "/tests/coverage/",
-      "/build/",
-      "/dist/",
-      "/src/selenium/tests",
-      "commonTests.js?(x)"
-    ],
-    "modulePathIgnorePatterns": [
-      "/node/",
-      "/build/",
-      "/dist/"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/util/polyfills.js",
-      "<rootDir>/src/devUtil/enzymeSetup.js"
-    ]
   },
   "scripts": {
     "pack": "webpack --progress --colors --config webpack.prod.js",

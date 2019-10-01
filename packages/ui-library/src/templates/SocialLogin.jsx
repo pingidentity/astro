@@ -293,7 +293,6 @@ export default class SocialLogin extends Component {
                     onToggle={this.toggleProviderExpanded(id)}
                     rowAccessories={
                         <FormToggle
-                            flags={["p-stateful"]}
                             initialState={{
                                 toggled: true
                             }}
@@ -513,7 +512,6 @@ export default class SocialLogin extends Component {
                             >
                                 <InputRow>
                                     <FormTextField
-                                        flags={["p-stateful"]}
                                         labelText="Name"
                                         onValueChange={this.setStepState("name")}
                                         value={activeProvider.name}
@@ -521,7 +519,6 @@ export default class SocialLogin extends Component {
                                 </InputRow>
                                 <InputRow>
                                     <FormTextArea
-                                        flags={["p-stateful"]}
                                         labelText="Description"
                                         onValueChange={this.setStepState("description")}
                                         value={activeProvider.description}
@@ -530,7 +527,7 @@ export default class SocialLogin extends Component {
                                 <InputRow>
                                     <FileUpload
                                         accepts={[".jpg"]}
-                                        flags={["true-default"]}
+                                        defaultImage="src/demo/images/logo-facebook.png"
                                         labelRemove={activeProvider.customLogo && "Remove"}
                                         showThumbnail
                                         label="Logo"
@@ -619,7 +616,6 @@ export default class SocialLogin extends Component {
                             >
                                 <InputRow>
                                     <FormTextField
-                                        flags={["p-stateful"]}
                                         labelText="App ID"
                                         onValueChange={this.setStepState("appId")}
                                         value={activeProvider.appId || ""}
@@ -627,7 +623,6 @@ export default class SocialLogin extends Component {
                                 </InputRow>
                                 <InputRow>
                                     <FormTextField
-                                        flags={["p-stateful"]}
                                         labelText="App secret"
                                         maskValue
                                         onValueChange={this.setStepState("secret")}
@@ -753,7 +748,6 @@ export default class SocialLogin extends Component {
                                 >
                                     <InputRow>
                                         <FormTextField
-                                            flags={["p-stateful"]}
                                             labelText="Facebook ID Attribute"
                                             readOnly
                                             placeholder="email"

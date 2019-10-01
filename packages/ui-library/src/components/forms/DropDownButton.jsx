@@ -3,12 +3,11 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import _ from "underscore";
-import Utils from "../../util/Utils.js";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import Popover from "../tooltips/Popover";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { flagsPropType, hasFlag } from "../../util/FlagUtils";
+import { flagsPropType } from "../../util/FlagUtils";
 import { FlagsProvider } from "../utils/FlagsProvider";
+import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
  * @callback DropDownButton~onValueChange
@@ -41,7 +40,8 @@ import { FlagsProvider } from "../utils/FlagsProvider";
  * @param {DropDownButton~onToggle} [onToggle]
  *     Callback to be triggered when open/closed state changed. Used only when stateless=true.
  * @param {boolean} [open=false]
- *     Boolean state of open/closed menu. Used only when stateless=true.
+ *     Boolean state of open/closed menu.
+ *     When not provided, the component will manage this value.
  * @param {function} [renderButton]
  *     Function that gets passed the onClick function for the drop down button;
  *     used to render something other than the default button.
@@ -95,29 +95,6 @@ class Stateless extends Component {
         options: {},
         open: false
     };
-
-    constructor(props) {
-        super(props);
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (props.id) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            /* istanbul ignore if  */
-            if (props.controlled !== undefined) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            /* istanbul ignore if  */
-            if (props.onSelect) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("onSelect", "onValueChange"));
-            }
-        }
-    }
 
     /**
      * Triggered
@@ -214,41 +191,7 @@ class Stateless extends Component {
     }
 }
 
-class Stateful extends Component {
-    static displayName = "DropDownButtonStateful";
-
-    static defaultProps = {
-        onValueChange: _.noop
-    };
-
-    state = {
-        open: false
-    };
-
-    _toggle = () =>
-        this.setState(({ open }) => ({
-            open: !open
-        }));
-
-    _select = (value) => {
-        this.setState({
-            open: false
-        }, function () {
-            this.props.onValueChange(value);
-        });
-    };
-
-    render() {
-        const props = _.defaults({
-            onToggle: this._toggle,
-            onValueChange: this._select,
-            open: this.state.open
-        }, this.props);
-        return <Stateless {...props} />;
-    }
-}
-
-const PStatefulDropDownButton = inStateContainer([
+const DropDownButton = inStateContainer([
     {
         name: "open",
         initial: false,
@@ -261,43 +204,27 @@ const PStatefulDropDownButton = inStateContainer([
     }
 ])(Stateless);
 
-export default class DropDownButton extends Component {
-    static displayName = "DropDownButton";
+DropDownButton.displayName = "DropDownButton";
 
-    static propTypes = {
-        "data-id": PropTypes.string,
-        className: PropTypes.string,
-        stateless: PropTypes.bool,
-        options: PropTypes.object,
-        onValueChange: PropTypes.func,
-        onToggle: PropTypes.func,
-        open: PropTypes.bool,
-        renderButton: PropTypes.func,
-        label: PropTypes.string,
-        title: PropTypes.string,
-        flags: flagsPropType
-    };
+DropDownButton.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    stateless: deprecatedStatelessProp,
+    options: PropTypes.object,
+    onValueChange: PropTypes.func,
+    onToggle: PropTypes.func,
+    open: PropTypes.bool,
+    renderButton: PropTypes.func,
+    label: PropTypes.string,
+    title: PropTypes.string,
+    flags: flagsPropType
+};
 
-    static defaultProps = {
-        "data-id": "drop-down-button",
-        stateless: false,
-    };
+DropDownButton.defaultProps = {
+    "data-id": "drop-down-button",
+    stateless: false,
+};
 
-    static contextType = FlagsProvider;
+DropDownButton.contextType = FlagsProvider;
 
-    render() {
-        if (hasFlag(this, "p-stateful")) {
-            return <PStatefulDropDownButton {...this.props} />;
-        }
-
-        cannonballChangeWarning({
-            message: `The 'open' prop will no longer serve as an initial state. ` +
-            `If it is present, it will control the current value of the component. ` +
-            `Set the 'p-stateful' flag to switch to this behavior now.`,
-        });
-
-        return this.props.stateless
-            ? <Stateless {..._.defaults({ ref: "Stateless" }, this.props)} />
-            : <Stateful {..._.defaults({ ref: "Stateful" }, this.props)} />;
-    }
-}
+export default DropDownButton;

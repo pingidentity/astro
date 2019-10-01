@@ -14,7 +14,6 @@ describe("MultiDrag v4", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
-        Utils = require("../../../../util/Utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         MultiDrag = require("../MultiDrag"),
         _ = require("underscore"),
@@ -363,14 +362,6 @@ describe("MultiDrag v4", function () {
             });
             expect(convertedIndexes).toEqual({ from: 1, to: 2 });
         });
-    });
-
-    it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
-
-        expect(function () {
-            getWrappedComponent({ controlled: true });
-        }).toThrow(expectedError);
     });
 
     it("doesn't trigger category toggle event for stateful component", function () {

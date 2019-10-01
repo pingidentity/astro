@@ -1,14 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
-import _ from "underscore";
-import Utils from "../../../util/Utils.js";
 import Constants from "./v2-constants";
-import Stateless from "./v2-stateless";
-import Stateful from "./v2-stateful";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
 import SelectionListStateless from "./v2-stateless";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { flagsPropType } from "../../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
  * @typedef SelectionList~SelectionListItem
@@ -58,6 +53,7 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
  *     Actual data to display in the component
  * @param {array|string|number} [selectedItemIds]
  *     IDs of the list items which are selected
+ *     When not provided, the component will manage this value.
  * @param {SelectionList~onValueChange} onValueChange
  *     Callback to be triggered when the item selection changes
  * @param {SelectionList~onVisibilityChange} onVisibilityChange
@@ -74,9 +70,12 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
  *     When true, selecting all will trigger onValueChange with all the items
  * @param {boolean} [autoFilter=false]
  *     When true, the items will be filtered by the queryString.
- *     This is set to true when in p-stateful mode if the queryString is being controlled by the component.
+ *     This is set to true if the queryString is being controlled by the component.
  * @param {boolean} [showSearchBox=true]
  *     Flag to determine the visibility of the search box
+ * @param {boolean} [showOnlySelected=false]
+ *     When true, only selected items will be shown in the list.
+ *     When not provided, the component will manage this value.
  * @param {string} [searchPlaceholder]
  *     Hint text inside the searchBox
  * @param {SelectionList~onSearch} [onSearch]
@@ -84,77 +83,54 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
  *     if not provided, the default search function will be used
  * @param {string} [queryString]
  *     The value of the search field
+ *     When not provided, the component will manage this value.
  */
 
-const PStatefulSelectionList = inStateContainer([
-    {
-        name: "queryString",
-        initial: "",
-        setter: "onSearch",
-    },
-    {
-        name: "showOnlySelected",
-        initial: false,
-        callbacks: [
-            {
-                name: "onVisibilityChange",
-                transform: toggleTransform,
-            },
-        ]
-    },
-    {
-        name: "selectedItemIds",
-        initial: [],
-        setter: "onValueChange",
-    },
-])(SelectionListStateless);
-PStatefulSelectionList.displayName = "PStatefulSelectionList";
+const SelectionList = inStateContainer(
+    [
+        {
+            name: "queryString",
+            initial: "",
+            setter: "onSearch",
+        },
+        {
+            name: "showOnlySelected",
+            initial: false,
+            callbacks: [
+                {
+                    name: "onVisibilityChange",
+                    transform: toggleTransform,
+                },
+            ]
+        },
+        {
+            name: "selectedItemIds",
+            initial: [],
+            setter: "onValueChange",
+        },
+    ], ({ queryString }) => ({ autoFilter: queryString === undefined ? false : true })
+)(SelectionListStateless);
 
-export default class SelectionList extends React.Component {
+SelectionList.displayName = "SelectionList";
 
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
+SelectionList.propTypes = {
+    stateless: deprecatedStatelessProp,
+    flags: flagsPropType,
+};
 
-    static defaultProps = {
-        stateless: false,
-    };
+SelectionList.defaultProps = {
+    stateless: false,
+};
 
-    static Actions = require("./v2-actions");
-    static actions = require("./v2-actions"); // according to our new standard
+SelectionList.Actions = require("./v2-actions");
+SelectionList.actions = require("./v2-actions"); // according to our new standard
 
-    static Reducer = require("./v2-reducer");
-    static reducer = require("./v2-reducer"); // according to our new standard
+SelectionList.Reducer = require("./v2-reducer");
+SelectionList.reducer = require("./v2-reducer"); // according to our new standard
 
-    static ListType = Constants.ListType;
-    static listType = Constants.ListType; // according to our new standard
+SelectionList.ListType = Constants.ListType;
+SelectionList.listType = Constants.ListType; // according to our new standard
 
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+SelectionList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    componentDidMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-        }
-        if (!this._usePStateful()) {
-            cannonballProgressivelyStatefulWarning({ name: "SelectionList" });
-        }
-    }
-
-    render() {
-        if (this._usePStateful()) {
-            return (
-                <PStatefulSelectionList
-                    autoFilter={this.props.queryString === undefined ? true : false}
-                    {...this.props}
-                />
-            );
-        }
-
-        return this.props.stateless
-            ? <Stateless {..._.defaults({ ref: "SelectionListStateless" }, this.props)} />
-            : <Stateful {..._.defaults({ ref: "SelectionListStateful" }, this.props)} />;
-    }
-}
+export default SelectionList;

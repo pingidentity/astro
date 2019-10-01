@@ -1,3 +1,5 @@
+jest.mock("popper.js");
+jest.mock("react-portal");
 
 jest.dontMock("../FormTimeZone");
 jest.dontMock("../FormError");
@@ -14,12 +16,11 @@ describe("FormTimeZone", function () {
 
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),
         FormTimeZone = require("../FormTimeZone"),
         KeyboardUtils = require("../../../util/KeyboardUtils.js"),
         moment = require("moment-timezone"),
-        momentMetadata = require("moment-timezone/data/meta/latest.json"),
+        momentMetadata = require("../../../../node_modules/moment-timezone/data/meta/latest.json"),
         _ = require("underscore");
 
     var componentId = "timezone",
@@ -168,7 +169,9 @@ describe("FormTimeZone", function () {
         const searchString = "United";
         const component = getComponent({
             open: true,
-            searchString: searchString
+            initialState: {
+                searchString: searchString
+            }
         });
         const searchInput = getSearchInput(component);
         const clearSearch = TestUtils.findRenderedDOMNodeWithClass(component, "clear-search");
@@ -246,80 +249,6 @@ describe("FormTimeZone", function () {
         expect(zoneRows.length).toEqual(0);
     });
 
-    it("selects the zone when the zone is clicked", function () {
-        const countryAbbr = "US";
-        const component = getComponent({
-            open: true,
-            filterByCountry: countryAbbr
-        });
-        const testIndex = 4;
-        const zoneRows = getRows(component);
-        const zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[testIndex], "timezone-name").textContent;
-        let valueLink;
-
-        ReactTestUtils.Simulate.click(zoneRows[testIndex]);
-        valueLink = getValueLink(component);
-        expect(valueLink.textContent).toEqual(zoneRowName);
-    });
-
-    it("selects the top zone when the ENTER key is pressed while searching", function () {
-        const countryAbbr = "US";
-        const component = getComponent({
-            open: true,
-            filterByCountry: countryAbbr
-        });
-        const searchInput = getSearchInput(component);
-        const testIndex = 0;
-        const zoneRows = getRows(component);
-        const zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[testIndex], "timezone-name").textContent;
-        let valueLink;
-
-        ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
-        valueLink = getValueLink(component);
-        expect(valueLink.textContent).toEqual(zoneRowName);
-        expect(zoneRows[testIndex].className).toContain("selected");
-    });
-
-    it("selects the second zone when the DOWN-ARROW key is pressed then ENTER key is pressed", function () {
-        const countryAbbr = "US";
-        const component = getComponent({
-            open: true,
-            filterByCountry: countryAbbr
-        });
-        const searchInput = getSearchInput(component);
-        const zoneRows = getRows(component);
-        const zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[1], "timezone-name").textContent;
-        let valueLink;
-
-        ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_DOWN });
-        ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
-        valueLink = getValueLink(component);
-        expect(valueLink.textContent).toEqual(zoneRowName);
-        expect(zoneRows[1].className).toContain("selected");
-    });
-
-    it("calls global click handler when a click occurs outside of component", function () {
-        const component = getComponent({
-            stateless: true,
-            open: true,
-            onSearch: jest.fn(),
-            onToggle: jest.fn(),
-            onValueChange: jest.fn()
-        });
-        const handler = component.refs.TimeZoneStateless._onGlobalClick;
-
-        expect(component.props.onToggle).not.toBeCalled();
-
-        // click outside
-        handler({ target: document.body });
-
-        // hack, for now, to get this test to work
-        // @TODO : remove the following line
-        ReactTestUtils.Simulate.click(getValueLink(component));
-
-        expect(component.props.onToggle).toBeCalled();
-    });
-
     it("skips the global click handler if not open and click on component", function () {
         const component = getComponent({
             stateless: true,
@@ -333,33 +262,6 @@ describe("FormTimeZone", function () {
         handler({ target: { dataset: component } });
 
         expect(component.props.onToggle).not.toBeCalled();
-    });
-
-    it("detaches global listeners on unmount", function () {
-        const component = getComponent({
-            stateless: true,
-            onToggle: jest.fn(),
-            onSearch: jest.fn(),
-            onValueChange: jest.fn()
-        });
-        const componentRef = component.refs.TimeZoneStateless;
-
-        expect(window.addEventListener).toBeCalledWith("click", componentRef._onGlobalClick);
-
-        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
-        expect(window.removeEventListener).toBeCalledWith("click", componentRef._onGlobalClick);
-    });
-
-    it("calls function for list placement on componentDidUpdate", function () {
-        const component = getComponent({
-            open: true,
-            stateless: true
-        });
-        const componentRef = component.refs.TimeZoneStateless;
-
-        componentRef._setListPosition = jest.fn();
-        componentRef.componentDidUpdate();
-        expect(componentRef._setListPosition).toBeCalled();
     });
 
     it("does not render the error when not provided", function () {
@@ -387,11 +289,11 @@ describe("FormTimeZone", function () {
     it("public function isValidTimeZone works properly", function () {
         const component = getComponent();
         const realZoneName = zoneMetadata[10].name;
-        let checkZone = component.refs.TimeZoneStateful.isValidTimeZone("badZoneName");
+        let checkZone = component.isValidTimeZone("badZoneName");
 
         expect(checkZone).toEqual(false);
 
-        checkZone = component.refs.TimeZoneStateful.isValidTimeZone(realZoneName);
+        checkZone = component.isValidTimeZone(realZoneName);
         expect(checkZone).toBeTruthy();
         expect(checkZone.name).toEqual(realZoneName);
     });
@@ -415,21 +317,6 @@ describe("FormTimeZone", function () {
         expect(renderedLabelText).toBeFalsy();
     });
 
-    it("fires cannonball warning when p-stateful flag is not set", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        getComponent({ flags: [ "use-portal" ] });
-        expect(console.warn).toBeCalled();
-    });
-
-    it("doesn't fire cannonball warning when p-stateful and use-portal flag are set", function() {
-        console.warn = jest.fn();
-
-        getComponent({ flags: [ "use-portal", "p-stateful" ], stateless: true });
-        expect(console.warn).not.toBeCalled();
-    });
-
     /*
     TODO: fix this test
     NOTE: Currently we've not been able to test the react-tooltip helpHint in it's shown state. Since the React Tooltip
@@ -449,12 +336,6 @@ describe("FormTimeZone", function () {
         expect(renderedLabelText.textContent).toContain(labelText);
         expect(renderedHelpIcon).toBeTruthy();
         // expect(renderedHelpText.textContent).toEqual(labelHelpText);
-    });
-
-    it("fires Cannonball warning when use-portal isn't set", function() {
-        console.warn = jest.fn();
-        getComponent({ flags: [ "p-stateful" ] });
-        expect(console.warn).toBeCalled();
     });
 
 });

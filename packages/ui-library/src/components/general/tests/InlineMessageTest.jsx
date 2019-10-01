@@ -10,7 +10,6 @@ describe("InlineMessage", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         InlineMessage = require("../InlineMessage"),
-        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 
@@ -155,12 +154,4 @@ describe("InlineMessage", function () {
         expect(component).toBeTruthy();
     });
 
-
-    it("throws error when deprecated prop 'callback' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("callback", "onClick"));
-
-        expect(function () {
-            getComponent({ callback: jest.fn() });
-        }).toThrow(expectedError);
-    });
 });

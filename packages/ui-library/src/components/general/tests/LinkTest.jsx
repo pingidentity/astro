@@ -113,14 +113,4 @@ describe("Link", function () {
         expect(element).toBeTruthy();
     });
 
-    it("throws warning when no type is set but it's also not obvious that it's a simple link", function() {
-        console.warn = jest.fn();
-
-        expect(console.warn).not.toBeCalled();
-        ReactTestUtils.renderIntoDocument(
-            <div><Link title="What Kind?" /></div>
-        );
-        expect(console.warn).toBeCalled();
-    });
-
 });

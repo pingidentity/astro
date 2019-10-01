@@ -300,19 +300,9 @@ export function cannonballProgressivelyStatefulWarning({
 }
 
 /**
- * @desc Function specifically for the v4 Cannonball release. Shows a warning about portal behavior
- * @param {string} name - The name of the component
- *
- * @returns {} No return value.
- *
- * @example: cannonballPortalWarning({
- *      name: "Calendar",
- *  })
+ * @desc Prop type for deprecating the stateless prop
  */
-export function cannonballPortalWarning({
-    name
-}) {
-    cannonballChangeWarning({
-        message: `${name} will render using a portal and auto-positioning.`
-    });
-}
+export const deprecatedStatelessProp = deprecatedProp({
+    message: "Since v4.0.0, components no longer have stateful and stateless versions, " +
+        "so this prop no longer has any effect."
+});

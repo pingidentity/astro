@@ -40,7 +40,7 @@ describe("FormDropDownList v4", function () {
             onValueChange: jest.fn(),
             flags: allFlags,
         });
-        return ReactTestUtils.renderIntoDocument(<FormDropDownList {...props} />);
+        return TestUtils.renderInWrapper(<FormDropDownList {...props} />);
     }
 
     window.addEventListener = jest.fn();
@@ -134,7 +134,7 @@ describe("FormDropDownList v4", function () {
 
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_UP });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("opens list on arrow down when focused", function () {
@@ -145,7 +145,7 @@ describe("FormDropDownList v4", function () {
 
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("opens list on space when focused", () => {
@@ -156,7 +156,7 @@ describe("FormDropDownList v4", function () {
 
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.SPACE });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("opens list on enter when focused", () => {
@@ -167,7 +167,7 @@ describe("FormDropDownList v4", function () {
 
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("closes open list on tab when focused", function () {
@@ -178,7 +178,7 @@ describe("FormDropDownList v4", function () {
 
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.TAB });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("renders with option list closed by default", function () {
@@ -204,22 +204,22 @@ describe("FormDropDownList v4", function () {
         const component = getComponent();
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
 
-        expect(component.props.onToggle.mock.calls.length).toBe(0);
+        expect(component.props.children.props.onToggle.mock.calls.length).toBe(0);
 
         ReactTestUtils.Simulate.click(select);
 
-        expect(component.props.onToggle.mock.calls.length).toBe(1);
+        expect(component.props.children.props.onToggle.mock.calls.length).toBe(1);
     });
 
     it("does not open list on list button click when disabled", function () {
         const component = getComponent({ disabled: true });
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
 
         ReactTestUtils.Simulate.click(select);
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("stateful: onToggle callback updates open state", function () {
@@ -281,7 +281,7 @@ describe("FormDropDownList v4", function () {
     });
 
     it("renders list of options using portal", function () {
-        const component = getComponent({ open: true, flags: [ "use-portal" ] });
+        const component = getComponent({ open: true });
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
 
         expect(select.children.length).toEqual(5);
@@ -382,9 +382,9 @@ describe("FormDropDownList v4", function () {
         const prompt = TestUtils.findRenderedDOMNodeWithDataId(select, "add-prompt");
 
         ReactTestUtils.Simulate.click(prompt);
-        expect(component.props.onAdd).toBeCalledWith(searchString);
-        expect(component.props.onSearch).toBeCalledWith("", 0 ,0);
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onAdd).toBeCalledWith(searchString);
+        expect(component.props.children.props.onSearch).toBeCalledWith("", 0 ,0);
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("triggers onToggle for closed list when typing into input of BOX search", function () {
@@ -392,7 +392,7 @@ describe("FormDropDownList v4", function () {
         const input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "foo" } });
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("triggers onSearch callback when input into BOX search", function () {
@@ -400,7 +400,7 @@ describe("FormDropDownList v4", function () {
         const input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "foo" } });
-        expect(component.props.onSearch).toBeCalledWith("foo", 0, 0);
+        expect(component.props.children.props.onSearch).toBeCalledWith("foo", 0, 0);
     });
 
     it("list option triggers onValueChange callback on item click", function () {
@@ -409,7 +409,7 @@ describe("FormDropDownList v4", function () {
 
         ReactTestUtils.Simulate.click(option1);
 
-        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
     });
 
     it("global click handler closes open list when click outside of component", function () {
@@ -418,12 +418,17 @@ describe("FormDropDownList v4", function () {
             component, FormDropDownList._statelessComponent
         )._handleGlobalClick;
 
-        expect(component.props.onToggle).not.toBeCalled();
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+
+        expect(component.props.children.props.onToggle).not.toBeCalled();
 
         // click outside
         handler({ target: document.body });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("skips the global click handler if not open and click on component", function () {
@@ -433,7 +438,7 @@ describe("FormDropDownList v4", function () {
         // click on component
         handler({ target: { dataset: component } });
 
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("detaches global listeners on unmount", function () {
@@ -561,7 +566,7 @@ describe("FormDropDownList v4", function () {
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
 
         ReactTestUtils.Simulate.keyDown(select, { keyCode: 70 }); // f
-        expect(component.props.onSearch).not.toBeCalled();
+        expect(component.props.children.props.onSearch).not.toBeCalled();
     });
 
     it("find by typing", function () {
@@ -569,18 +574,18 @@ describe("FormDropDownList v4", function () {
 
         let select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: 70 }); // f
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("f");
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("f");
 
         component = getComponent({ // simulate the change since mock onSearch wouldn't have changed stuff
             open: true,
-            searchString: component.props.onSearch.mock.calls[0][0],
-            searchTime: component.props.onSearch.mock.calls[0][1]
+            searchString: component.props.children.props.onSearch.mock.calls[0][0],
+            searchTime: component.props.children.props.onSearch.mock.calls[0][1]
         });
 
         select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: 79 }); // o
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("fo");
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("fo");
     });
 
     it("find by typing with grouped options", function () {
@@ -588,18 +593,18 @@ describe("FormDropDownList v4", function () {
 
         let select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: 70 }); // f
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("f");
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("f");
 
         component = getComponent({ // simulate the change since mock onSearch wouldn't have changed stuff
             open: true,
-            searchString: component.props.onSearch.mock.calls[0][0],
-            searchTime: component.props.onSearch.mock.calls[0][1]
+            searchString: component.props.children.props.onSearch.mock.calls[0][0],
+            searchTime: component.props.children.props.onSearch.mock.calls[0][1]
         });
 
         select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: 79 }); // o
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("fo");
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("fo");
     });
 
     it("resets search when no option found", function () {
@@ -607,8 +612,8 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: "&amp;" });
-        expect(component.props.onSearch.mock.calls[0][0]).toBe(""); // search = ""
-        expect(component.props.onSearch.mock.calls[0][2]).toBe(-1); // searchIndex = -1
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe(""); // search = ""
+        expect(component.props.children.props.onSearch.mock.calls[0][2]).toBe(-1); // searchIndex = -1
     });
 
     it("find and select option by hitting enter then close list", function () {
@@ -621,9 +626,9 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
-        expect(component.props.onValueChange).toBeCalled();
-        expect(component.props.onValueChange.mock.calls[0][0].label).toBe("Two");
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0].label).toBe("Two");
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("calls onValueChange with none option props when enter is pressed and none option is selected", () => {
@@ -638,7 +643,7 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
-        expect(component.props.onValueChange).toBeCalledWith(noneOption);
+        expect(component.props.children.props.onValueChange).toBeCalledWith(noneOption);
     });
 
     it("find and select with enter on grouped options", function () {
@@ -652,9 +657,9 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
-        expect(component.props.onValueChange).toBeCalled();
-        expect(component.props.onValueChange.mock.calls[0][0].label).toBe("Two");
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0].label).toBe("Two");
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("find does not select with enter on grouped options when option in disabled group", function () {
@@ -672,8 +677,8 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
-        expect(component.props.onValueChange).not.toBeCalled();
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("triggers onAdd callback to add new option on enter when no options match filter searchString", function () {
@@ -685,7 +690,7 @@ describe("FormDropDownList v4", function () {
         });
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
-        expect(component.props.onAdd).toBeCalledWith("foo");
+        expect(component.props.children.props.onAdd).toBeCalledWith("foo");
     });
 
     it("enter closes list", function () {
@@ -695,7 +700,7 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
     });
 
     it("find by typing - KEYBOARD seach clear with esc", function () {
@@ -707,9 +712,9 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ESC });
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("");
-        expect(component.props.onToggle).toHaveBeenCalled();
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("");
+        expect(component.props.children.props.onToggle).toHaveBeenCalled();
     });
 
     it("find by typing - BOX search clear with esc", function () {
@@ -722,9 +727,9 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ESC });
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("");
-        expect(component.props.onToggle).toHaveBeenCalled();
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("");
+        expect(component.props.children.props.onToggle).toHaveBeenCalled();
     });
 
     it("find by typing - clear with delay", function () {
@@ -736,8 +741,8 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: 79 }); // o
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("o");
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("o");
     });
 
     it("cycle though options with up/down arrows", function () {
@@ -750,12 +755,12 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("f"); // up/down should not clear searchString
-        expect(component.props.onSearch.mock.calls[0][2]).toBe(2); //added 1 to searchIndex
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[0][0]).toBe("f"); // up/down should not clear searchString
+        expect(component.props.children.props.onSearch.mock.calls[0][2]).toBe(2); //added 1 to searchIndex
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_UP });
-        expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
+        expect(component.props.children.props.onSearch).toBeCalled();
+        expect(component.props.children.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
     });
 
     it("up/down arrows do not call onToggle when list is disabled", function () {
@@ -769,8 +774,8 @@ describe("FormDropDownList v4", function () {
 
         const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
-        expect(component.props.onSearch).not.toBeCalled();
-        expect(component.props.onToggle).not.toBeCalled();
+        expect(component.props.children.props.onSearch).not.toBeCalled();
+        expect(component.props.children.props.onToggle).not.toBeCalled();
     });
 
     it("shows none option as selected when selected", function () {
@@ -861,7 +866,8 @@ describe("FormDropDownList v4", function () {
 
         const input = getTextInput(component);
         ReactTestUtils.Simulate.keyDown(input, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
-        expect(component.props.onValueChange).toBeCalled();
-        expect(component.props.onValueChange.mock.calls[0][0]).toEqual({ label: "Four", value: 4, group: 1 });
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toEqual(
+            { label: "Four", value: 4, group: 1 });
     });
 });

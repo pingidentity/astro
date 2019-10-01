@@ -1,8 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
-    HelpHint = require("../tooltips/HelpHint"),
-    Utils = require("../../util/Utils");
+    HelpHint = require("../tooltips/HelpHint");
 
 /** @class FormLabel
  * @desc Most form fields implement the same logic to display an optional label, with optional hint.
@@ -52,14 +51,6 @@ class FormLabel extends React.Component {
         detached: false,
         style: {},
     };
-
-    constructor(props) {
-        super(props);
-        if (!Utils.isProduction() && props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
-
 
     _renderHint = () => {
         if (!this.props.hint) {
