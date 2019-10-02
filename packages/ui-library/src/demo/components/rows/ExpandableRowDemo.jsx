@@ -326,6 +326,28 @@ class ExpandableRowDemo extends React.Component {
                     )}
                     <ExpandableRow
                         title="Expanded Row with Line Chart"
+                        subtitle="Empty Data"
+                        stateless={false}
+                        expanded={this.state.expanded1}
+                        onToggle={this._onToggle(1)}
+                        rowAccessories={[
+                            <RowAccessoriesLineChart
+                                key="row-accessories-line-chart"
+                                title="Avg daily sign-ons:"
+                                count="0"
+                                countLabel="Past 7 days"
+                                isTrendPositive={true}
+                                data={[]}
+                                chartLabel="No data yet"
+                                hintProps={{ type: HelpHint.Types.LIGHT }}
+                                trend="+ 0%"
+
+                            />,
+                            <Toggle key="toggle" stateless={false} />
+                        ]}
+                    />
+                    <ExpandableRow
+                        title="Expanded Row with Line Chart"
                         subtitle="Full Data"
                         stateless={false}
                         expanded={this.state.expanded1}
@@ -336,9 +358,6 @@ class ExpandableRowDemo extends React.Component {
                                 title="Avg daily sign-ons:"
                                 count="1,234,234"
                                 countLabel="Past 7 days"
-                                chartLabel="12 wk trend"
-                                hint="See Contributing Data"
-                                trend="+ 8.6%"
                                 isTrendPositive={true}
                                 data={[
                                     { id: 1, value: 1 },
@@ -354,7 +373,9 @@ class ExpandableRowDemo extends React.Component {
                                     { id: 11, value: 4 },
                                     { id: 12, value: 11 },
                                 ]}
-
+                                chartLabel="12 wk trend"
+                                hint="See Contributing Data"
+                                trend="+ 8.6%"
                             />,
                             <Toggle key="toggle" stateless={false} />
                         ]}
@@ -371,9 +392,6 @@ class ExpandableRowDemo extends React.Component {
                                 title="Avg daily sign-ons:"
                                 count="234,234"
                                 countLabel="Past 7 days"
-                                chartLabel="12 wk trend"
-                                hint={<Link>See Contributing Data</Link>}
-                                trend="- 8.6%"
                                 isTrendPositive={false}
                                 data={[
                                     { id: 1 },
@@ -389,13 +407,16 @@ class ExpandableRowDemo extends React.Component {
                                     { id: 11, value: 2 },
                                     { id: 12, value: 1 },
                                 ]}
+                                chartLabel="12 wk trend"
+                                hint={<Link>See Contributing Data</Link>}
+                                trend="- 8.6%"
                             />,
                             <Toggle key="toggle" stateless={false} />
                         ]}
                     />
                     <ExpandableRow
                         title="Expanded Row with Line Chart"
-                        subtitle="Empty Data"
+                        subtitle="Zero Data"
                         stateless={false}
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
@@ -405,20 +426,53 @@ class ExpandableRowDemo extends React.Component {
                                 title="Avg daily sign-ons:"
                                 count="0"
                                 countLabel="Past 7 days"
-                                chartLabel="12 wk trend"
-                                hint={<Link>See Contributing Data</Link>}
-                                hintProps={{ type: HelpHint.Types.LIGHT }}
-                                trend="+ 0%"
-                                isTrendPositive={true}
+                                isTrendPositive={false}
                                 data={[
                                     { id: 1 },
                                     { id: 2 },
                                     { id: 3 },
                                     { id: 4 },
                                     { id: 5 },
-                                    { id: 6 }
+                                    { id: 6 },
+                                    { id: 7 },
+                                    { id: 8, value: 0 },
+                                    { id: 9, value: 0 },
+                                    { id: 10, value: 0 },
+                                    { id: 11, value: 0 },
+                                    { id: 12, value: 0 },
                                 ]}
+                                chartLabel="12 wk trend"
+                                hint={<Link>See Contributing Data</Link>}
+                                hintProps={{ type: HelpHint.Types.LIGHT }}
+                                trend="+ 0%"
 
+                            />,
+                            <Toggle key="toggle" stateless={false} />
+                        ]}
+                    />
+                    <ExpandableRow
+                        title="Expanded Row with Line Chart"
+                        subtitle="Zero values"
+                        stateless={false}
+                        expanded={this.state.expanded1}
+                        onToggle={this._onToggle(1)}
+                        rowAccessories={[
+                            <RowAccessoriesLineChart
+                                key="row-accessories-line-chart"
+                                title="Avg daily sign-ons:"
+                                count="0"
+                                countLabel="Past 7 days"
+                                isTrendPositive={false}
+                                data={[
+                                    { id: 1, value: 0 },
+                                    { id: 2, value: 0 },
+                                    { id: 3, value: 0 },
+                                    { id: 4, value: 0 },
+                                ]}
+                                chartLabel="12 wk trend"
+                                hint={<Link>See Contributing Data</Link>}
+                                hintProps={{ type: HelpHint.Types.LIGHT }}
+                                trend="+ 0%"
                             />,
                             <Toggle key="toggle" stateless={false} />
                         ]}
