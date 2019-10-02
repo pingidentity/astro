@@ -53,6 +53,7 @@ class FormRadioGroupDemo extends React.Component {
                         labelText="Horizonal Alignment"
                         stacked={false}
                         description="Sample Description"
+                        labelHelpText="This is an example help hint."
                     />
                 </InputRow>
 
