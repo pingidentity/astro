@@ -456,6 +456,10 @@ label {
             padding: 0 0 0 36px;
             text-transform: none;
 
+            &.disabled {
+                @include opacity(0.4);
+            }
+
             .label-text {
                 @include break-word;
                 display: inline-block;
