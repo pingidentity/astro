@@ -47,6 +47,8 @@ var React = require("react"),
  *     When true it will remove the margin around the inline message.
  * @param {InlineMessage~onClick} [onClick]
  *     Callback to be triggered when the button is clicked.
+ * @param {InlineMessage~primaryButton} [primaryButton]
+ *     an object for the primary button
  * @param {Array.InlineMessage~secondaryButtons} [secondaryButtons]
  *     List of secondary buttons
  *
