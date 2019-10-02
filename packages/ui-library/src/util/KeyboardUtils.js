@@ -29,6 +29,7 @@ exports.KeyCodes = {
     RIGHT_ALT: 93,
     SPACE: 32,
     BACK_SPACE: 8,
+    DELETE: 46,
     COMMA: 188,
 };
 
@@ -253,7 +254,7 @@ const removeFocusClass = () => document.body.classList.remove("ui-library-focus-
 *    removing focus class.
 */
 exports.withFocusOutline = WrappedComponent => class extends Component {
-    static displayName = WrappedComponent.displayName || WrappedComponent.name
+    static displayName = WrappedComponent.displayName || WrappedComponent.name;
     componentDidMount() {
         const componentCount = parseInt(document.body.dataset.uiLibComponentCount || 0, 10);
         if (componentCount > 0) {
