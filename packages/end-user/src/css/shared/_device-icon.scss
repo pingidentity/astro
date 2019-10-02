@@ -26,6 +26,10 @@
 }
 
 .tile-button {
+    &__content {
+        @include break-word;
+    }
+
     &:hover {
         .device-icon__icon {
             &--mobile {
