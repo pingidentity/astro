@@ -2,6 +2,7 @@ import React from "react";
 import Multivalues from "../../../components/forms/Multivalues";
 import InputRow from "../../../components/layout/InputRow";
 import userOptions from "./data/userOptions";
+import FormCheckbox from '../../../components/forms/FormCheckbox';
 
 /**
 * @name MultivaluesDemo
@@ -102,11 +103,24 @@ class MultivaluesDemo extends React.Component {
                     Type ahead. Press "return" or "," or "tab" or "space" to add an item, or delete an item by
                     clicking "x".
                 </p>
-
+                <FormCheckbox
+                    label={"With Error Message; checked: "}
+                    renderLabel={
+                        (props, FormLabel) => (
+                            <FormLabel
+                                {...props}
+                                description="Sample Description"
+                            />
+                        )
+                    }
+                    value=""
+                    onChange={()=>{}}
+                    checked={true}
+                    errorMessage="asdfasdfasdfasdf\nasdfasfasfasdf\nasdfasfasdf\n"
+                />
                 <InputRow>
                     <Multivalues
-                        labelText="Default multi-values input"
-                        description="Sample Description"
+   
                         stateless={false}
                         entries={this.state.entries}
                         onValueChange={this._handleValueChange}

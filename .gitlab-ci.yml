@@ -1,23 +1,32 @@
 image: node:8
 
 cache:
+  key: "$CI_COMMIT_REF_SLUG"
   paths:
-    - node_modules/
+  - node_modules/
+  - packages/ui-library/node_modules/
+  - packages/end-user/node_modules/
 
 stages:
+  - setup
   - test
 
-testing_testing:
-  stage: test
+setup:
+  stage: setup
   tags:
-    - platform-publish-node-fragment
-    - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
-  - npm i lerna -g
   - cd packages/ui-library
   - npm install
   - cd ../end-user
   - npm install
   - cd ../../
+
+
+test:
+  stage: test
+  tags:
+    - platform-build-node-fragment
+  script:
+  - npm i lerna -g
   - lerna run test

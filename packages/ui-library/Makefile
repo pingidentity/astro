@@ -220,7 +220,7 @@ verify: install-node-npm
 integration: install-node-npm
 	rm -rf reports
 	npm run pack
-	node_modules/.bin/wdio wdio.conf.js --spec DetailsTooltip
+	node_modules/.bin/wdio wdio.conf.js
 
 # $(SAUCELABS_BROWSER) is parameter from Jenkins variable SAUCELABS_BROWSER
 integration-saucelabs: install-node-npm
