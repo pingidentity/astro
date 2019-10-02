@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 import CollapsibleLink from "../general/CollapsibleLink";
@@ -26,7 +25,7 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  *
  * @param {string} [data-id=toggle]
  *     The "data-id" value for top-level HTML container.
- * @param {object|string} [label]
+ * @param {node} [label]
  *     A string or JSX object that serves as the trigger label.
 * @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
@@ -44,12 +43,13 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  * @param {object} [initialState]
  *     When the 'p-stateful' flag is set 'selectedOption' needs to be passed into the initialState prop.
  *     selectedOption determines the initial state of 'selectedOption'.
+ * @param {boolean} [noCaret]
+ *     Determines whether the caret is displayed.
  *
  * @param {LinkDropDownList~onClick} [onClick]
  *     Callback triggered when a menu item is selected
  * @param {LinkDropDownList~onToggle} [onToggle]
  *     Callback triggered when the menu visibility is changed
- *
  *
  * @example
  *     <LinkDropDownList
@@ -66,20 +66,20 @@ class LinkDropDownListStateless extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         "data-id": PropTypes.string,
-        label: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.object]),
+        label: PropTypes.node,
         onClick: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([-1])]), // -1 means no value has been set
         flags: flagsPropType,
+        noCaret: PropTypes.bool,
     };
 
     static defaultProps = {
         closeOnSelection: true,
         "data-id": "link-dropdown-list",
+        noCaret: false
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
@@ -101,13 +101,24 @@ class LinkDropDownListStateless extends React.Component {
     };
 
     _renderLabel = () => {
-        return (
-            <CollapsibleLink
-                data-id={this.props["data-id"] + "-label"}
-                expanded={this.props.open}
-                title={this.props.label}
-            />
-        );
+        if (!this.props.noCaret) {
+            return (
+                <CollapsibleLink
+                    data-id={this.props["data-id"] + "-label"}
+                    expanded={this.props.open}
+                    title={this.props.label}
+                />
+            );
+        } else {
+            return (
+                <CollapsibleLink
+                    data-id={this.props["data-id"] + "-label"}
+                    expanded={this.props.open}
+                    title={this.props.label}
+                    arrowPosition={CollapsibleLink.arrowPositions.NOCARET}
+                />
+            );
+        }
     };
 
     _renderOptions = () => {
@@ -264,7 +275,7 @@ class LinkDropDownListOption extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         option: PropTypes.object,
-        selected: PropTypes.bool
+        selected: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -278,7 +289,7 @@ class LinkDropDownListOption extends React.Component {
     render() {
         var classNames = {
             "select-option": true,
-            selected: this.props.selected
+            selected: this.props.selected,
         };
 
         return (

@@ -44,6 +44,8 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     A right-aligned container where buttons and toggles may be passed in to render on the right side of the section
  * @param {string|object} [title]
  *     The text to display in the the collapsed view and along the top in the expanded view (adjacent to the arrow)
+ * @param {string|object} [titleSection]
+ *     Displays multiple elements in the section
  * @param {string|object} [titleValue]
  *     The text to display just to the right of the title (separated by a colon)
  * @param {object} [detailsText]
@@ -150,7 +152,15 @@ class SectionStateless extends React.Component {
             PropTypes.string,
             PropTypes.object
         ]),
+        titleSection: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
+        ]),
         titleValue: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
+        ]),
+        sectionAccessories: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object
         ]),
@@ -229,7 +239,9 @@ class SectionStateless extends React.Component {
                         classnames(
                             "collapsible-section-title",
                             {
-                                "collapsible-section-title--circled": this.props.arrowCircle
+                                "collapsible-section-title--circled": this.props.arrowCircle,
+                                "collapsible-section-title--accessories": this.props.sectionAccessories,
+                                "collapsible-section-title--section": this.props.titleSection
                             }
                         )}
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}
@@ -241,6 +253,14 @@ class SectionStateless extends React.Component {
                 {this.props.titleValue && (
                     <span className="collapsible-section-title-value" data-id={this.props["data-id"] + "-title-value"}>
                         {this.props.titleValue}
+                    </span>
+                )}
+                {this.props.titleSection && (
+                    <span
+                        className="collapsible-section-title-section"
+                        data-id={this.props["data-id"] + "-title-section"}
+                    >
+                        {this.props.titleSection}
                     </span>
                 )}
                 <div

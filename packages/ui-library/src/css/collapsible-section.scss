@@ -42,6 +42,9 @@
                 border-radius: 50%;
             }
         }
+        &--accessories {
+            text-transform: none;
+        }
 
     }
     > .collapsible-section-title-value {
@@ -50,7 +53,23 @@
         margin: 0 0 0 5px;
         color: $color-midnight;
     }
+    > .collapsible-section-title-section {
+        font-size: 14px;
+        text-transform: none;
+        margin: 0 0 0 5px;
+        color: $color-midnight;
+        .content-columns {
+            margin-left: 25px;
+            margin-top: -20px;
+            margin-bottom: 10px;
+        }
+        label{
+            text-transform: none;
+        }
+
+    }
     > .collapsible-section-content {
+        text-transform: none;
         display: none;
         visibility: hidden;
         position: relative;
@@ -142,6 +161,16 @@
             top: auto;
             left: -19px;
             color: $color-midnight;
+        }
+        &.collapsible-section-title--section {
+            &.left:before {
+                top: 55px;
+            }
+        }
+        &.noCaret{
+            &:after {
+                content: none;
+            }
         }
     }
 }
