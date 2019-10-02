@@ -43,6 +43,7 @@ $default-input-border-radius: 2px;
 .image-icon {
     &:focus {
         outline-width: 0;
+        outline-style: solid;
     }
 }
 
