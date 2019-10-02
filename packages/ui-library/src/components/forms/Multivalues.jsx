@@ -12,6 +12,7 @@ import PopperContainer from "../tooltips/PopperContainer";
 import { containsString } from "../../util/SearchUtils";
 import {
     isBackSpace,
+    isDelete,
     isComma,
     isEnter,
     isEsc,
@@ -420,13 +421,13 @@ export class MultivaluesBase extends Component {
         } = this.props;
         const entries = this._getCommittedEntries();
         const draft = this._getDraft();
+        const isDeleteAction = isBackSpace(keyCode) || isDelete(keyCode);
 
-        //When delete key is pressed, delete previous string if nothing is entered
-        if (isBackSpace(keyCode) && draft === "") {
+        if (isDeleteAction && draft === "") {
             e.preventDefault(); //keeps the browser from going back after last item is deleted
-            if (activeEntry < 0) {
+            if (isBackSpace(keyCode) && activeEntry < 0) {
                 this._handleDelete(entries.length - 1);
-            } else {
+            } else if (activeEntry > -1) {
                 this._handleDelete(activeEntry);
             }
             return;
