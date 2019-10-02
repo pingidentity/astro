@@ -1929,6 +1929,7 @@ input[type=file] {
     @mixin inputMessageDisplay {
         ~ .input-message .input-message__text,
         ~ .form-error-message {
+            @include break-word;
             display: block;
         }
     }
