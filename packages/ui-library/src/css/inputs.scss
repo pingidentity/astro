@@ -43,6 +43,7 @@ $default-input-border-radius: 2px;
 .image-icon {
     &:focus {
         outline-width: 0;
+        outline-style: solid;
     }
 }
 
@@ -454,6 +455,10 @@ label {
             margin-right: 20px;
             padding: 0 0 0 36px;
             text-transform: none;
+
+            &.disabled {
+                @include opacity(0.4);
+            }
 
             .label-text {
                 @include break-word;

@@ -36,7 +36,8 @@ export default class SelectionListStateless extends React.Component {
                     PropTypes.number,
                     PropTypes.string
                 ]).isRequired,
-                name: PropTypes.string.isRequired
+                name: PropTypes.string.isRequired,
+                disabled: PropTypes.bool,
             })
         ),
         selectedItemIds: PropTypes.oneOfType([
@@ -248,8 +249,15 @@ export default class SelectionListStateless extends React.Component {
  *         SINGLE for radio inputs next to each list item
  *         MULTI for checkbox inputs next to each list item
  *         VIEWONLY for text only list items
- * @param {SelectionListItem[]} items
+ * @param {object[]} items
  *     Actual data to display in the component
+ * @param {string} items.id
+ *     The id of item in items array
+ * @param {string} items.name
+ *     The name of item in items array
+ * @param {bool} items.disabled
+ *     When true item in array is disabled
+ *     Disabled does not work with a ViewOnly list
  * @param {array|string|number} [selectedItemIds]
  *     IDs of which list items are selected
  * @param {function} onValueChange
@@ -272,7 +280,8 @@ class ListOptions extends React.Component {
                     PropTypes.number,
                     PropTypes.string
                 ]).isRequired,
-                name: PropTypes.string.isRequired
+                name: PropTypes.string.isRequired,
+                disabled: PropTypes.disabled
             })
         ),
         selectedItemIds: PropTypes.oneOfType([
@@ -305,6 +314,7 @@ class ListOptions extends React.Component {
                     iconName="plus"
                     data-id={`row-button-add_${item.id}`}
                     onClick={valueChange(item)}
+                    disabled = {item.disabled}
                 />
                 {item.name}
             </div>
@@ -327,6 +337,7 @@ class ListOptions extends React.Component {
                 stacked={true}
                 selected={this.props.selectedItemIds}
                 onValueChange={this.props.onValueChange}
+                disabled={this.props.disabled}
             />
         );
     };
@@ -366,6 +377,7 @@ class ListOptions extends React.Component {
                     helpTarget={item.helpTarget}
                     name={this.props.name}
                     stacked
+                    disabled = {item.disabled}
                 />
             );
         });
@@ -400,7 +412,8 @@ class ListOptions extends React.Component {
     _genViewonlyOptions = () => {
         return this.props.items.map((item, i) => {
             return (
-                <div className="view-item" key={i}>
+                <div className="view-item"
+                    key={i}>
                     {item.name}{this._genTooltip(item)}
                 </div>
             );
