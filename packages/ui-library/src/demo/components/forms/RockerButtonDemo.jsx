@@ -40,6 +40,7 @@ class RockerButtonDemo extends React.Component {
         this.setState({
             selectedLabel2: labelValues.label,
             selectedIndex2: labelValues.index,
+
         });
     }
 
@@ -64,7 +65,7 @@ class RockerButtonDemo extends React.Component {
                     labels={labelsWithId}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel2},
-                id = {this.state.selectedIndex2}
+                id = {this.state.selectedIndex2},
                 </div>
 
                 <br /><br />

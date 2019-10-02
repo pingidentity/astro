@@ -8,7 +8,7 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import { inStateContainer } from "../utils/StateContainer";
-import { tsThisType } from "@babel/types";
+
 
 /**
 * @typedef RockerButton~labelValues
@@ -175,11 +175,9 @@ class RockerButtonStateless extends React.Component {
     };
 
     myArray = () => {
-        if (this.props.selectedIndex) {
-            return this.props.labels.findIndex( ({ id }) => {
-                return id === this.props.selectedIndex;
-            });
-        }
+        return this.props.labels.findIndex( ({ id }) => {
+            return id === this.props.selectedIndex;
+        });
     };
 
     render() {
