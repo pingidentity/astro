@@ -96,6 +96,13 @@ const renderOptions = ({
 ) => {
     const handleChange = e => onValueChange(id, e);
     const isSelected = selected === id;
+    const scrollAndClick = (data) => {
+        if ( optionPanel ) {
+            const topRef = document.getElementsByClassName("tile-panel")[0];
+            topRef.scrollIntoView({ behavior: "smooth" });
+        }
+        handleChange(data);
+    };
 
     return [
         [
@@ -108,7 +115,7 @@ const renderOptions = ({
                     icon={icon}
                     iconName={iconName}
                     selected={isSelected}
-                    onClick={handleChange}
+                    onClick={scrollAndClick}
                     panel={optionPanel ? true : false}
                     details={details}
                     type={type === "stacked" ? "side-icon" : "top-icon"}

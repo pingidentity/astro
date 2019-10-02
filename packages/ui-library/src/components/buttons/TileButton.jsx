@@ -120,20 +120,12 @@ const TileButton = ({
 
     const TagName = link ? "div" : "button";
 
-    const scrollAndClick = (data) => {
-        if ( panel ) {
-            const topRef = document.getElementsByClassName("tile-panel")[0];
-            topRef.scrollIntoView({ behavior: "smooth" });
-        }
-        onClick(data);
-    };
-
 
     return (
         <TagName
             className={classNames}
             data-id={dataId}
-            onClick={scrollAndClick}
+            onClick={onClick}
             onMouseDown={handleMouseDown}
             role="button"
         >
