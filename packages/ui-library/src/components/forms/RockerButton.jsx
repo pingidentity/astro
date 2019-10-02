@@ -8,6 +8,7 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import { inStateContainer } from "../utils/StateContainer";
+import { tsThisType } from "@babel/types";
 
 /**
 * @typedef RockerButton~labelValues
@@ -143,7 +144,14 @@ class RockerButtonStateless extends React.Component {
         labelHints: PropTypes.arrayOf(PropTypes.string),
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
-        selectedIndex: PropTypes.number,
+        selectedId: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+        ]),
+        selectedIndex: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+        ]),
         autoFocus: PropTypes.bool,
         disabled: PropTypes.bool,
     };
@@ -162,15 +170,23 @@ class RockerButtonStateless extends React.Component {
         if (this.props.disabled) {
             return;
         }
-
         this.props.onValueChange({ label: label, index: index });
 
     };
 
+    myArray = () => {
+        if (this.props.selectedIndex) {
+            return this.props.labels.findIndex( ({ id }) => {
+                return id === this.props.selectedIndex;
+            });
+        }
+    };
+
     render() {
-        var className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className, {
+        var className = classnames("rocker-button sel-" + this.myArray(), this.props.className, {
             disabled: this.props.disabled
         });
+
 
         return (
             <div ref="container" data-id={this.props["data-id"]} className={className}>
@@ -201,7 +217,11 @@ class RockerButtonStateless extends React.Component {
 
 var RockerButtonLabel = function (props) {
     var _handleClick = function (event) {
-        props.onClick(props.text, props.index, event);
+        if (props["data-id"]) {
+            props.onClick(props.text, props["data-id"], event);
+        } else {
+            props.onClick(props.text, props.index, event);
+        }
     };
 
     const { text = "" } = props;
@@ -210,7 +230,7 @@ var RockerButtonLabel = function (props) {
 
     return props.helpText
         ? <HelpHint
-            data-id={props["data-id"] || `helphint-button_${sanitizedText}`}
+            data-id={`helphint-button_${sanitizedText}`}
             placement="top"
             delayShow={500}
             hintText={props.helpText} >
@@ -244,8 +264,10 @@ RockerButtonLabel.propTypes = {
 };
 
 class RockerButtonStateful extends React.Component {
+
+
     state = {
-        selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected))
+        selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected)),
     };
 
     _handleOnValueChange = (selectedButton) => {

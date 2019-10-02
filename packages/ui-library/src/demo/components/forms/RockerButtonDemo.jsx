@@ -14,10 +14,10 @@ const years = ["3M", "6M", "1Y"];
 const days = ["1D", "1W", "1M"];
 
 const labelsWithId = [
-    { label: "Label One", id: "rocker" },
-    { label: "Label 2", id: "rocker1" },
-    { label: "Label Three", id: "rocker2" },
-    { label: "Longer Label Four", id: "rocker3" }
+    { label: "Label One", id: "rocker1" },
+    { label: "Label 2", id: "rocker2" },
+    { label: "Label Three", id: "rocker3" },
+    { label: "Longer Label Four", id: "rocker4" }
 ];
 class RockerButtonDemo extends React.Component {
     static flags = ["p-stateful"]
@@ -25,10 +25,8 @@ class RockerButtonDemo extends React.Component {
     state = {
         selectedLabel: "Label One",
         selectedIndex: 0,
-        selectedId: "1",
         selectedLabel2: "Label One",
         selectedIndex2: 0,
-        selectedId2: 1
     };
 
     _handleValueChange = (labelValues) => {
@@ -59,14 +57,14 @@ class RockerButtonDemo extends React.Component {
 
 
                 <FormLabel>Rocker that takes label and id object and changes the Id to the new DataID</FormLabel>
+                <br />
                 <RockerButton
                     stateless={false}
                     onValueChange={this._handleChangeWithId}
                     labels={labelsWithId}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel2},
-                index = {this.state.selectedIndex2},
-                id = {this.state.selectedId2}
+                id = {this.state.selectedIndex2}
                 </div>
 
                 <br /><br />
