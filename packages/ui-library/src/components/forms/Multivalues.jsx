@@ -654,9 +654,7 @@ export class MultivaluesBase extends Component {
         const className = classnames(
             classNameProp,
             "input-multivalues",
-            width !== undefined ? getInputWidthClass({
-                width,
-            }) : "",
+            getInputWidthClass({ width }),
             {
                 required: required && entries.length === 0,
                 "value-entered": (entries.length !== 0),
