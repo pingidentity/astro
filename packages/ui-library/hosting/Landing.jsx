@@ -21,6 +21,8 @@ import pingLogo from "./assets/images/ping-logo.svg";
 import documentationIcon from "./assets/images/documentation-icon.svg";
 import componentsIcon from "./assets/images/components-icon.svg";
 import templatesIcon from "./assets/images/templates-icon.svg";
+import Text from "../src/components/general/Text";
+import Icon from "../src/components/general/Icon";
 
 class LandingPage extends React.Component {
 
@@ -53,6 +55,7 @@ class LandingPage extends React.Component {
                     // probably local
                     this.setState({
                         stableVersion: "",
+                        error: true,
                     });
                 }
             }.bind(this));
@@ -94,18 +97,23 @@ class LandingPage extends React.Component {
         (index <= 0) || (list[index - 1].match(/^[^\.]*\.[^\.]*/)[0] !== version.match(/^[^\.]*\.[^\.]*/)[0])
     ));
 
+    _hasVersions = () => this.state.versionOptions.length > 0;
+
     render() {
         return (
             <div className="main">
                 <Stack gap="LG" className="content">
                     <img src={libLogo} width="490px" height="141px" />
                     <div>
-                        <Button
-                            className="landing-button"
-                            label={`${this.state.stableVersion} Release`}
-                            type="primary"
-                            href={this._getStableVersionLink()}
-                        />
+                        {!this.state.error &&
+                            <Button
+                                className="landing-button"
+                                label={`${this.state.stableVersion} Release`}
+                                type="primary"
+                                href={this._getStableVersionLink()}
+                                loading={!this._hasVersions()}
+                            />
+                        }
                         <Button
                             className="landing-button landing-button--ghost"
                             label="End-User"
@@ -118,13 +126,18 @@ class LandingPage extends React.Component {
                         />
                     </div>
                     <div>
-                        <LinkDropDownList
-                            flags={["v4"]}
-                            label="All Versions"
-                            className="version-dropdown"
-                            options={this.state.versionOptions}
-                            onClick={this._handleVersionSelect}
-                        />
+                        {this._hasVersions() &&
+                            <LinkDropDownList
+                                flags={["v4"]}
+                                label="All Versions"
+                                className="version-dropdown"
+                                options={this.state.versionOptions}
+                                onClick={this._handleVersionSelect}
+                            />
+                        }
+                        {this.state.error &&
+                            <Text type="error"><Icon iconName="alert" type="inline" /> Can't Load Versions</Text>
+                        }
                     </div>
                     <Stack gap="MD">
                         <div className="card">
@@ -134,21 +147,33 @@ class LandingPage extends React.Component {
                                     Get up to speed on basic usage of the library
                                     and read release notes for the different versions.
                                 </p>
-                                <Link className="card__link" href={this._getDocumentationLink()}>Documentation</Link>
+                                <Link
+                                    className="card__link"
+                                    href={this._hasVersions() ? this._getDocumentationLink() : null}
+                                    disabled={!this._hasVersions()}
+                                >Documentation</Link>
                             </div>
                         </div>
                         <div className="card">
                             <img className="card__icon" src={componentsIcon} />
                             <div className="card__description">
                                 <p>Play with demos of the components, view code samples, and get API documentation.</p>
-                                <Link className="card__link" href={this._getComponentsLink()}>Components</Link>
+                                <Link
+                                    className="card__link"
+                                    href={this._hasVersions() ? this._getComponentsLink() : null}
+                                    disabled={!this._hasVersions()}
+                                >Components</Link>
                             </div>
                         </div>
                         <div className="card">
                             <img className="card__icon" src={templatesIcon} />
                             <div className="card__description">
                                 <p>View real examples of page layouts based on designs for product features.</p>
-                                <Link className="card__link" href={this._getTemplatesLink()}>Templates</Link>
+                                <Link
+                                    className="card__link"
+                                    href={this._hasVersions() ? this._getTemplatesLink() : null}
+                                    disabled={!this._hasVersions()}
+                                >Templates</Link>
                             </div>
                         </div>
                     </Stack>
