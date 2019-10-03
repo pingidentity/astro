@@ -506,7 +506,7 @@ describe("Multivalues", function () {
         expect(wrapper.state().highlightedOption).toBe(0);
     });
 
-    it("activates previous entries and deletes the first one", function() {
+    it("deletes current active entry(with both Delete and Backspace keys)", function() {
         const changeCallback = jest.fn();
         const wrapper = getWrapper({ onValueChange: changeCallback });
         const dropdownInput = wrapper.find("[data-id='value-entry']");
@@ -528,8 +528,23 @@ describe("Multivalues", function () {
         expect(wrapper.state().activeEntry).toBe(0);
 
         dropdownInput.simulate("keydown", { keyCode: KeyCodes.BACK_SPACE });
-        expect(changeCallback).toHaveBeenCalledWith([
+        expect(changeCallback).toHaveBeenLastCalledWith([
             "Entry 2",
+            "Entry 3",
+            "Entry 4"
+        ]);
+
+        dropdownInput.simulate("keydown", { keyCode: KeyCodes.DELETE });
+        expect(changeCallback).toHaveBeenLastCalledWith([
+            "Entry 2",
+            "Entry 3",
+            "Entry 4"
+        ]);
+
+        dropdownInput.simulate("keydown", { keyCode: KeyCodes.ARROW_RIGHT });
+        dropdownInput.simulate("keydown", { keyCode: KeyCodes.DELETE });
+        expect(changeCallback).toHaveBeenLastCalledWith([
+            "Entry 1",
             "Entry 3",
             "Entry 4"
         ]);
@@ -556,6 +571,9 @@ describe("Multivalues", function () {
         dropdownInput.simulate("keydown", { keyCode: KeyCodes.ARROW_LEFT });
         expect(wrapper.state().activeEntry).toBe(3);
         dropdownInput.simulate("keydown", { keyCode: KeyCodes.BACK_SPACE });
+        expect(wrapper.state().activeEntry).toBe(-1);
+        dropdownInput.simulate("keydown", { keyCode: KeyCodes.ARROW_LEFT });
+        dropdownInput.simulate("keydown", { keyCode: KeyCodes.DELETE });
         expect(wrapper.state().activeEntry).toBe(-1);
     });
 
