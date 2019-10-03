@@ -25,6 +25,7 @@ import {
     withFocusOutline
 } from "../../util/KeyboardUtils.js";
 import Icon from "../general/Icon";
+import { InputWidths, InputWidthProptypes, getInputWidthClass } from "./InputWidths";
 
 const placeholder = document.createElement("span");
 placeholder.className = "placeholder";
@@ -209,6 +210,8 @@ class MultivaluesOption extends Component {
  * @param {boolean} [includeDraftInEntries=false]
  *     When set to true, the draft that is currently being edited is treated
  *     as the last entry in the list of entries.
+ * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width=LG]
+ *    Specifies the width of the input.
  *
  *
  * @example
@@ -262,6 +265,7 @@ export class MultivaluesBase extends Component {
         stacked: PropTypes.bool,
         autoHeight: PropTypes.bool,
         includeDraftInEntries: PropTypes.bool,
+        width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
@@ -280,6 +284,7 @@ export class MultivaluesBase extends Component {
         onBlur: _.noop,
         onFocus: _.noop,
         includeDraftInEntries: false,
+        width: InputWidths.LG,
     };
 
     constructor(props) {
@@ -634,6 +639,7 @@ export class MultivaluesBase extends Component {
             onValueChange,
             required,
             stacked,
+            width,
         } = this.props;
 
         const {
@@ -646,13 +652,18 @@ export class MultivaluesBase extends Component {
         const entries = this._getCommittedEntries();
         const draft = this._getDraft();
 
-        const className = classnames(classNameProp, "input-multivalues", {
-            required: required && entries.length === 0,
-            "value-entered": (entries.length !== 0),
-            stacked: stacked,
-            "input-multivalues--focused": focused,
-            "input-multivalues--auto-width": autoWidth,
-        });
+        const className = classnames(
+            classNameProp,
+            "input-multivalues",
+            getInputWidthClass({ width }),
+            {
+                required: required && entries.length === 0,
+                "value-entered": (entries.length !== 0),
+                stacked: stacked,
+                "input-multivalues--focused": focused,
+                "input-multivalues--auto-width": autoWidth,
+            }
+        );
 
         const entryClassNames = classnames(
             "entries",
@@ -754,5 +765,7 @@ export class MultivaluesBase extends Component {
 }
 
 const Multivalues = withFocusOutline(MultivaluesBase);
+
+Multivalues.inputWidths = InputWidths;
 
 export default Multivalues;

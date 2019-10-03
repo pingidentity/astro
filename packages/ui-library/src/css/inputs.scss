@@ -2716,6 +2716,14 @@ a {
     &.input-textselect .input-text.input-message {
         width: map-get($input-width-settings-map-text, $size);
     }
+    &.input-multivalues {
+        max-width: map-get($input-width-settings-map-text, $size);
+        width: map-get($input-width-settings-map-text, $size);
+
+        &.input-multivalues--auto-width {
+            width: auto;
+        }
+    }
     &.input-textarea {
         width: map-get($input-width-settings-map-textarea, $size);
     }
