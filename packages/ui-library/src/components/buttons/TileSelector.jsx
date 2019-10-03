@@ -74,6 +74,13 @@ const selectorTypes = {
  *
  */
 
+const getTilePanel = () => {
+    const tileSelector = document.querySelector(".tile-button--selected");
+    if (tileSelector) {
+        return document.querySelector(".tile-panel").scrollIntoView({ behavior: "smooth" });
+    }
+};
+
 const renderOptions = ({
     "data-id": dataId,
     onValueChange,
@@ -98,8 +105,7 @@ const renderOptions = ({
     const isSelected = selected === id;
     const scrollAndClick = (data) => {
         if ( optionPanel ) {
-            const topRef = document.getElementsByClassName("tile-panel")[0];
-            topRef.scrollIntoView({ behavior: "smooth" });
+            getTilePanel();
         }
         handleChange(data);
     };
