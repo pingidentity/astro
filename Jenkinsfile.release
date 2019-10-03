@@ -5,8 +5,8 @@ pipeline {
   }
   stages {
     stage('npm-publish') {
-      dir("${env.WORKSPACE}/packages/ui-library") {
-        steps {
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo 'Building & publishing ui-library'
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
