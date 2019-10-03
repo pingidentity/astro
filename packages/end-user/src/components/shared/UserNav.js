@@ -30,11 +30,13 @@ class UserNav extends React.Component {
     initialBodyClassNames = `${this.bodyNode.className}`;
 
     _setMenuOpen = (menuOpen) => {
-        this.setState({ menuOpen }, () => {
-            this.bodyNode.className = classnames(this.initialBodyClassNames, {
-                [MENU_OPEN_CLASSNAME]: this.state.menuOpen
+        if (menuOpen !== this.state.menuOpen) {
+            this.setState({ menuOpen }, () => {
+                this.bodyNode.className = classnames(this.initialBodyClassNames, {
+                    [MENU_OPEN_CLASSNAME]: menuOpen
+                });
             });
-        });
+        }
     };
 
     _toggleCollapsibleMenu = () => {
