@@ -36,7 +36,7 @@ const COLORS = [
     },
     {
         name: "critical-red",
-        value: "#ed3a03",
+        value: "#a31300",
     },
     {
         name: "dolphin",
