@@ -144,10 +144,6 @@ class RockerButtonStateless extends React.Component {
         labelHints: PropTypes.arrayOf(PropTypes.string),
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
-        selectedId: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string
-        ]),
         selectedIndex: PropTypes.oneOfType([
             PropTypes.number,
             PropTypes.string
@@ -174,14 +170,19 @@ class RockerButtonStateless extends React.Component {
 
     };
 
-    myArray = () => {
-        return this.props.labels.findIndex( ({ id }) => {
-            return id === this.props.selectedIndex;
-        });
+    buttonPos = () => {
+        if (typeof this.props.labels[0] === "object") {
+            if (this.props.selectedIndex) {
+                return this.props.labels.findIndex(({ id }) => id === this.props.selectedIndex);
+            }
+            return 0;
+        } else {
+            return this.props.selectedIndex;
+        }
     };
 
     render() {
-        var className = classnames("rocker-button sel-" + this.myArray(), this.props.className, {
+        var className = classnames("rocker-button sel-" + this.buttonPos(), this.props.className, {
             disabled: this.props.disabled
         });
 

@@ -26,7 +26,7 @@ class RockerButtonDemo extends React.Component {
         selectedLabel: "Label One",
         selectedIndex: 0,
         selectedLabel2: "Label One",
-        selectedIndex2: 0,
+        selectedIndex2: "rocker1",
     };
 
     _handleValueChange = (labelValues) => {
