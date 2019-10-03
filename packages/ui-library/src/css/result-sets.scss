@@ -1232,6 +1232,7 @@ input.ordering-controls__input {
     @include flexbox;
     flex-direction: column;
     align-items: flex-end;
+    width: 70px;
 }
 
 .accessories-line-chart__count {
@@ -1250,7 +1251,7 @@ input.ordering-controls__input {
 .accessories-line-chart__chart-wrapper {
     @include flexbox;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     .help-tooltip .tooltip-text a {
         text-decoration: none;
@@ -1262,9 +1263,9 @@ input.ordering-controls__input {
 }
 
 .accessories-line-chart__chart-wrapper {
-    width: 120px;
+    width: 130px;
     height: 60px;
-    padding-right: 20px;
+    padding-right: $spacing-md;
     .accessories-line-chart__chart {
         width: 50px;
         height: 18px;
@@ -1289,7 +1290,13 @@ input.ordering-controls__input {
         display: block;
         height: 35px;
         width: 1px;
+        margin-right: $spacing-md;
         background-color: $color-accent-neutral-70;
+    }
+    .accessories-line-chart__trend {
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 1;
     }
 }
 
