@@ -124,9 +124,7 @@ export default class License extends Component {
                 closeOnClick={true}
                 label={<Icon inline iconName="edit"/>}
                 options={nodeOptions}
-                initialState={{
-                    selectedOption: nodeOptions[0]
-                }}
+                flags={["use-portal"]}
                 noCaret
             >
                 {this.renderModal()}
