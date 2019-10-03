@@ -47,6 +47,11 @@ pipeline {
             s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "packages/ui-library/build-css/")
           }
         }
+        withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+          withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/end-user/', file: "${env.WORKSPACE}/packages/end-user/static/end-user.css")
+          }
+        }
       }
     }
   }
