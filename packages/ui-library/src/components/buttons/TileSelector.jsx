@@ -107,7 +107,7 @@ const renderOptions = ({
         if ( optionPanel ) {
             getTilePanel();
         }
-        handleChange(data);
+        handleChange(data.target);
     };
 
     return [
