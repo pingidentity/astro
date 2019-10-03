@@ -19,13 +19,16 @@ else ifeq ($(filter %86,$(UNAME_P)),)
 	ARCH_NAME=x32
 endif
 
+MVN_FILENAME=apache-maven-3.2.2-bin.tar.gz
 SC_FILENAME=sc-4.4.1-linux.tar.gz
 CREATING_TUNNEL_TIMEOUT=60
 CREATING_TUNNEL_ATTEMPT=0
 
 CURRENT_DIR := $(shell pwd)
 
+M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
+PATH := $(PATH):$(M2_HOME)/bin
 
 # The Git branch is to be passed as argument on the command line
 # (eg. make GIT_BRANCH=master verify)
@@ -93,13 +96,26 @@ endef
 
 define package
 	npm run package-library
+	rm -rf dist
+	mkdir -p dist/ui-library
+	mkdir -p dist/ui-library/examples
+	cp -rf lib dist/ui-library
+	cp -f package.json dist/ui-library
+	cp -f index.js dist/ui-library
+	tar -czf dist/ui-library-$(1).tar.gz --directory=dist ui-library
+endef
+
+define package_coverage
+	rm -rf dist/ui-library-coverage-$(1).tar.gz
+	tar -czf dist/ui-library-coverage-$(1).tar.gz coverage
 endef
 
 define package_css
 	rm -rf build-css/css
 	rm -rf build-css/$(1)
 
-	npm run build-css
+	mkdir -p build-css/css
+	npm run compile-sass
 
 	mkdir build-css/$(1)
 	mv build-css/css build-css/$(1)
@@ -111,6 +127,32 @@ define package_css
 	rm -f build-css/$(1)/fonts/README
 endef
 
+define deploy
+	mvn deploy:deploy-file \
+		-DgroupId=com.pingone.ui-library \
+		-DartifactId=ui-library \
+		-Dversion=$(1) \
+		-Dfile=dist/ui-library-$(1).tar.gz \
+		-DuniqueVersion=false \
+		-Dpackaging=tar.gz \
+		-DrepositoryId=art01 \
+		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse \
+		-s settings.xml
+endef
+
+define deploy_coverage
+	mvn deploy:deploy-file \
+		-DgroupId=com.pingone.ui-library \
+		-DartifactId=ui-library-coverage \
+		-Dversion=$(1) \
+		-Dfile=dist/ui-library-coverage-$(1).tar.gz \
+		-DuniqueVersion=false \
+		-Dpackaging=tar.gz \
+		-DrepositoryId=art01 \
+		-Durl=https://art01.corp.pingidentity.com/artifactory/inhouse \
+		-s settings.xml
+endef
+
 log-config:
 	@echo "Current branch: $(GIT_BRANCH)"
 	@echo "Current version: $(GIT_VERSION)"
@@ -118,17 +160,32 @@ log-config:
 	@echo "Package version: $(PACKAGE_VERSION)"
 	@echo "Package version final: $(PACKAGE_VERSION_FINAL)"
 	@echo "Package version next: $(PACKAGE_VERSION_NEXT)"
+	@echo "Coverage version: $(COVERAGE_VERSION)"
+	@echo "Coverage status code: $(COVERAGE_STATUS_CODE)"
 
 install-node-npm:
 	npm cache clean --force
 	npm install
 	npm rebuild node-sass
 
+clean-mvn:
+	rm -f $(MVN_FILENAME)
+	rm -rf mvn
+
+install-mvn: clean-mvn
+	wget http://archive.apache.org/dist/maven/maven-3/3.2.2/binaries/$(MVN_FILENAME)
+	mkdir -p mvn
+	tar -xzf apache-maven-3.2.2-bin.tar.gz --strip=1 -C mvn
+	rm -f $(MVN_FILENAME)
+
 verify: install-node-npm
 	npm run jslint
 	npm run stylelint
 	npm run check-licenses
 	$(call run_coverage)
+
+	# convert the lcov report to cobertura format to be published by Jenkins
+	python tools/lcov_cobertura.py coverage/lcov.info --base-dir . --output coverage/cobertura.xml
 
 integration: install-node-npm
 	rm -rf reports
@@ -171,18 +228,30 @@ clean-css:
 	rm -rf build-css
 
 # package the module and name the file to include the current version
-package: install-node-npm clean-css
+package: install-mvn install-node-npm clean-css
+	$(call run_coverage)
+
 	$(call package,$(PACKAGE_VERSION))
+	$(call package_coverage,$(PACKAGE_VERSION))
 	$(call package_css,$(PACKAGE_VERSION))
+
+# package the module and name the file to include the current version
+# deploy the package as a maven artifact
+deploy: package
+	$(call deploy,$(PACKAGE_VERSION))
+	$(call deploy_coverage,$(PACKAGE_VERSION))
 
 # set the version number to FINAL, commit and push the change
 # package the module and name the file to include the FINAL version
+# and deploy the package as a maven artifact
 # set the version number to the next SNAPSHOT and commit
 # package the module and name the file to include the current version
+# deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
-dist: install-node-npm clean-css
+dist: install-mvn install-node-npm clean-css
 	$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project")
 	$(call package,$(PACKAGE_VERSION_FINAL))
+	$(call deploy,$(PACKAGE_VERSION_FINAL))
 	$(call package_css,$(PACKAGE_VERSION_FINAL))
 
 	@echo "UI_LIBRARY_FINAL_VERSION=$(PACKAGE_VERSION_FINAL)" > version
@@ -190,7 +259,13 @@ dist: install-node-npm clean-css
 
 	$(call version_and_tag,$(PACKAGE_VERSION_NEXT),"Prepare for the next release cycle")
 	$(call package,$(PACKAGE_VERSION_NEXT))
+	$(call deploy,$(PACKAGE_VERSION_NEXT))
 	$(call package_css,$(PACKAGE_VERSION_NEXT))
+
+	# generate the coverage, package and deploy it
+	$(call run_coverage)
+	$(call package_coverage,$(PACKAGE_VERSION_NEXT))
+	$(call deploy_coverage,$(PACKAGE_VERSION_NEXT))
 
 # compile/transpile the files, so that they can be packed and distributed as a collection of static assets
 package-and-upload-for-hosting: install-node-npm
