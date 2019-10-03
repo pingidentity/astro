@@ -1,3 +1,4 @@
+// This file has been modified for releasing a beta version. Some steps have been removed that will need to go back in when v4 is out of beta.
 pipeline {
   agent {
     label 'ui-library-cdn-deploy'
@@ -8,21 +9,10 @@ pipeline {
         steps {
           container('node-builder') {
             echo 'Building & publishing ui-library'
-            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
-              withCredentials([
-                sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'uiLibraryKeyPath'),
-                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
-              ]){
-                sh "make GIT_BRANCH=${params.RELEASE_BRANCH} dist package-and-upload-for-hosting PRIVATE_SSH_KEY_PATH=${uiLibraryKeyPath} GERRIT_SSH_KEY_PATH=${gerritKeyPath}"
-              }
-            }
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
-              script {
-                env.UI_LIBRARY_FINAL_VERSION = sh(returnStdout: true, script: "grep 'UI_LIBRARY_FINAL_VERSION' version |cut -d'=' -f2 | tr -d '[:space:]'")
-              }
               sh """
-                npm version ${env.UI_LIBRARY_FINAL_VERSION} --no-git-tag-version;
-                npm publish;
+                make package
+                npm publish --tag beta;
               """
             }
           }
@@ -40,28 +30,19 @@ pipeline {
       container('node-builder') {
         withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
           }
         }
         withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
           }
         }
         withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/build-css/")
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
           }
         }
-        mail(subject: "UI-library ${env.UI_LIBRARY_FINAL_VERSION} released",
-             body: """The UI-library ${env.UI_LIBRARY_FINAL_VERSION} has been released.
-The new development version is ${env.UI_LIBRARY_SNAPSHOT_VERSION}.
-
-
---------
-
-The UI-library team""",
-             to: 'interface-development@pingidentity.com,ui-library-release@pingidentity.com,pingaccessdev@pingidentity.com')
       }
     }
   }
