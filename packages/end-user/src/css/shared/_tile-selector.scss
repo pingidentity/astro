@@ -188,7 +188,6 @@ button.tile-button--side-icon {
         }
 
         &__label {
-            @include font-pn-semibold;
             font-size: 17px;
             margin-bottom: $spacing-xs;
         }
