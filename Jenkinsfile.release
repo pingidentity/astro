@@ -17,10 +17,10 @@ pipeline {
             }
           }
         }
-        post {
-          always {
-            archiveArtifacts artifacts: "packages/ui-library/build-css/**", fingerprint: true
-          }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "packages/ui-library/build-css/**", fingerprint: true
         }
       }
     }
