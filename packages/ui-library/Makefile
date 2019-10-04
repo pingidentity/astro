@@ -64,15 +64,16 @@ endif
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
 
-ifeq ($(GIT_BRANCH),master)
+# Disabling this for releasing the beta, and I'm not sure we need 
+# ifeq ($(GIT_BRANCH),master)
 	PACKAGE_VERSION=$(GIT_VERSION)
 	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)
 	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)
-else
-	PACKAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
-	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)-$(GIT_BRANCH)
-	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)-$(GIT_BRANCH)
-endif
+# else
+# 	PACKAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
+# 	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)-$(GIT_BRANCH)
+# 	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)-$(GIT_BRANCH)
+# endif
 
 # GERRIT_SSH_KEY_PATH variable will be passed in from the command line, see Jenkinsfile.release for example
 define version_and_tag
