@@ -65,7 +65,12 @@ $wizard-close-button-color: $color-strong-neutral-40;
         }
         .wizard2__content {
             top: $wizard-header-height;
+
+            >.page-messages {
+                top:$wizard-header-height + $topnav-height;
+            }
         }
+        
     }
     &--menu-hidden {
         .wizard2__content {
@@ -155,10 +160,9 @@ $wizard-close-button-color: $color-strong-neutral-40;
         overflow-y: auto;
 
         .page-messages {
-            position: relative;
-            top: -$wizard-v-spacing;
-            left: -$wizard-h-spacing;
-            width: calc(100% + (#{$wizard-h-spacing} * 2));
+            position: fixed;
+            left: 0;
+            width:calc(100% - #{$wizard-progress-menu-width});
             height: auto;
         }
 

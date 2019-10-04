@@ -1,23 +1,17 @@
 image: node:8
 
-cache:
-  paths:
-    - node_modules/
-
 stages:
   - test
 
-testing_testing:
+test:
   stage: test
   tags:
-    - platform-publish-node-fragment
-    - platform-build-node-ui-page
     - platform-build-node-fragment
   script:
-  - npm i lerna -g
-  - cd packages/ui-library
-  - npm install
-  - cd ../end-user
-  - npm install
-  - cd ../../
-  - lerna run test
+    - cd packages/ui-library
+    - npm install
+    - cd ../end-user
+    - npm install
+    - cd ../../
+    - npm i lerna -g
+    - lerna run test

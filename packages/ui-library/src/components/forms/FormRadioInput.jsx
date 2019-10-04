@@ -86,10 +86,6 @@ class FormRadioInputBase extends React.Component {
         this.props.onValueChange(this.props.value, e);
     };
 
-    inputClassNames = classnames({
-        "input-radio--autofocus": this.props.autoFocus,
-    });
-
     render() {
 
         return (
@@ -112,7 +108,6 @@ class FormRadioInputBase extends React.Component {
                     onChange={this._handleValueChange}
                     disabled={this.props.disabled}
                     autoFocus={this.props.autoFocus}
-                    className={this.inputClassNames}
                 />
                 <div className="circle"></div>
             </FormLabel>
