@@ -7,6 +7,8 @@ import uuid from "uuid";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
 import HR from "ui-library/lib/components/general/HR";
+import Toggle from "../../../components/forms/form-toggle";
+import ValueItem from "../../../components/layout/ValueItem";
 
 /**
  * @name MessagesDemo
@@ -15,6 +17,10 @@ import HR from "ui-library/lib/components/general/HR";
  */
 class MessagesDemo extends React.Component {
     static flags = [ "fixed-messages-constants" ];
+
+    state = {
+        cornerDefault: false,
+    }
 
     actions = bindActionCreators(Messages.Actions, this.props.store.dispatch);
 
@@ -182,6 +188,8 @@ class MessagesDemo extends React.Component {
         return mssgs[key] || "i18n key key not found";
     }
 
+    _toggleCornerDefault = () => this.setState(({ cornerDefault }) => ({ cornerDefault: !cornerDefault }));
+
     render() {
         const fixedConstants = this.props.flags.includes("fixed-messages-constants");
 
@@ -192,6 +200,7 @@ class MessagesDemo extends React.Component {
                     messages={this.props.messages}
                     onRemoveMessage={this.actions.removeAt}
                     flags={this.props.flags}
+                    defaultMessageLayout={this.state.cornerDefault ? Messages.Layouts.CORNER : undefined}
                 />
                 <Messages
                     data-id="messages-i18n"
@@ -200,6 +209,7 @@ class MessagesDemo extends React.Component {
                     onRemoveMessage={this.actions.removeAt}
                     flags={this.props.flags}
                     onI18n={this._onI18n}
+                    defaultMessageLayout={this.state.cornerDefault ? Messages.Layouts.CORNER : undefined}
                 />
 
                 {!fixedConstants &&
@@ -258,6 +268,17 @@ class MessagesDemo extends React.Component {
                 <HR />
 
                 <Button onClick={this._addCenterMessage}>Add env message</Button>
+
+                <HR />
+
+                <ValueItem
+                    icon={
+                        <Toggle
+                            onToggle={this._toggleCornerDefault}
+                            toggled={this.state.cornerDefault}
+                        />
+                    }
+                >Default to corner layout</ValueItem>
             </div>
         );
     }
