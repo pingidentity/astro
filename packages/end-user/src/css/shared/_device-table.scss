@@ -32,20 +32,32 @@
     }
 
     &__row > div {
-        padding: 20px 10px;
+        padding: $spacing-md $spacing-sm;
+    }
+
+    &__row-info {
+        flex: 1;
+        flex-grow: 1;
+        text-align: left;
     }
 
     &__row-details {
         text-align: left;
     }
 
-    &__type {
+    &__row-type {
         text-transform: uppercase;
         font-weight: 500;
         font-size: 13px;
     }
 
-    &__name {
+    &__row-name {
         color: $color-charting-indigo;
+    }
+
+    &__row-sdelete {
+        text-align: right;
+        flex: 1;
+        flex-grow: 0;
     }
 }

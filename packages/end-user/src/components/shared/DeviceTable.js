@@ -14,15 +14,17 @@ const getDevices = (devices, onDelete, hasDetails) => {
                 <div className="device-table__icon">
                     <DeviceIcon icon={type.toLowerCase()} />
                 </div>
-                <div style={{ flex: 1, flexGrow: 1, textAlign: 'left' }}>
+                <div className="device-table__row-info">
                     <TextBlock className="device-table__row-details">
                         <span>
-                            <div className="device-table__type">{type}</div>
-                            <div className="device-table__name">{name}</div>
+                            <div className="device-table__row-type">{type}</div>
+                            <div className="device-table__row-name">{name}</div>
                         </span>
                     </TextBlock>
                 </div>
-                <div style={{ textAlign: 'right', flex: 1, flexGrow: 0 }}><Button iconName="delete" onClick={onDelete(name)} inline /></div>
+                <div className="device-table__row-delete">
+                    <Button iconName="delete" onClick={onDelete(name)} inline />
+                </div>
             </FlexRow>
         );
     });
