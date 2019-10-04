@@ -218,8 +218,8 @@
                         color: default;
                         font-family: $icon-font;
                         content: '\47';
-                        margin-left: -15px;
-                        margin-right: 15px;
+                        margin-left: -15px - 4px;
+                        margin-right: 15px - 4px;
                     }
                 }
                 a {

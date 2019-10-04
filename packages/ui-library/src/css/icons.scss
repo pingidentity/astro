@@ -19,11 +19,6 @@ a .icon-plus {
     font-weight: bold;
 }
 
-a .icon-plus,
-a .icon-clear {
-    font-size: 11px;
-}
-
 .icon-check {
     @extend .icon-success;
 }
@@ -32,32 +27,6 @@ a .icon-clear {
     display: inline-block;
     vertical-align: text-bottom;
     margin: 0 5px 0 0;
-
-    &.icon-approve {
-        font-size: 90%;
-        line-height: 1.2em;
-    }
-    &.icon-expand-arrow {
-        font-size: 60%;
-        line-height: 1.55em;
-    }
-    &.icon-left,
-    &.icon-right {
-        font-size: 70%;
-        line-height: 1.4em;
-    }
-    &.icon-menu {
-        font-size: 65%;
-        line-height: 1.55em;
-    }
-    &.icon-next {
-        font-size: 90%;
-        line-height: 1.2em;
-    }
-    &.icon-view {
-        font-size: 70%;
-        line-height: 1.4em;
-    }
 }
 
 .icon {
@@ -137,7 +106,7 @@ a .icon-clear {
         border-radius: ceil($size);
 
         font-family: '#{$icomoon-font-family}' !important;
-        font-size: 6px;
+        font-size: 8px;
         line-height: $size;
         text-align: center;
         vertical-align: top;
@@ -166,6 +135,7 @@ a .icon-clear {
             @extend .icon-clear;
             background-color: $color-critical-red;
             font-weight: bold;
+            font-size: 8px;
         }
     }
 }

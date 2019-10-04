@@ -13,15 +13,17 @@
         display: inline-block;
 
         &:after {
-            content: '\59';
-            font-family: $icon-font;
-            font-size: 7px;
             position: absolute;
-            top: 11px;
-            right: 10px;
-            color: $color-midnight;
-            pointer-events: none;
+            content: 'v';
+            font-family: $icon-font;
+            font-size: 9px;
             text-transform: none;
+            right: $spacing-sm - 1px;
+            top: 11px;
+            line-height: 1em;
+            color: $color-midnight;
+            padding: 5px;
+            pointer-events: none;
 
             @include transition(all 0.3s);
         }

@@ -20,6 +20,16 @@ $default-input-font-size: 14px;
 $borderSize: 1px !default;
 $default-input-border-radius: 2px;
 
+@mixin input-icon {
+    font-family: $icon-font;
+    color: $color-accent-neutral-10;
+    font-size: 16px;
+    position: absolute;
+    left: $spacing-sm;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 /*
   This will hide the focus indicator if the element receives focus via the mouse,
   but it will still show up on keyboard focus.
@@ -208,13 +218,10 @@ label {
                 }
             }
             a.clear-search {
-                position: absolute;
-                font-family: $icon-font;
-                text-transform: none;
-                font-size: 11px;
-                color: inherit;
-                top: 14px;
-                right: 10px;
+                @include input-icon();
+
+                right: $spacing-sm;
+                left: auto;
 
                 &:before {
                     content: 'X';
@@ -413,7 +420,7 @@ label {
                 text-transform: none;
                 color: transparent;
                 font-family: $icon-font;
-                font-size: 10px;
+                font-size: 13px;
                 left: 0;
                 bottom: 0;
                 height: $checkbox-size;
@@ -769,6 +776,19 @@ input[type=file] {
 
 @include placeholder-css($color-input-placeholder, normal, 0);
 
+@mixin dropdown-caret {
+    position: absolute;
+    content: 'v';
+    font-family: $icon-font;
+    font-size: 9px;
+    text-transform: none;
+    right: $spacing-sm - 1px;
+    top: 11px;
+    line-height: 1em;
+    color: $color-midnight;
+    padding: 5px;
+}
+
 // Input types
 .input-text,
 .input-textarea,
@@ -825,16 +845,7 @@ input[type=file] {
             @include border-radius($default-input-border-radius);
 
             &:after {
-                position: absolute;
-                content: 'v';
-                font-family: $icon-font;
-                font-size: 10px;
-                text-transform: none;
-                right: 10px;
-                top: 16px;
-                line-height: 1em;
-                color: $color-midnight;
-                pointer-events: none;
+                @include dropdown-caret();
             }
 
             &__spacer {
@@ -1479,10 +1490,9 @@ input[type=file] {
 
         @include transition($default-input-transition);
     }
-    &:after {
-        content: 'v';
-        right: 9px;
-        bottom: 12px;
+    .input-container:after {
+        @include dropdown-caret();
+        cursor: pointer;
 
         @include transition($default-input-transition);
     }
@@ -1549,11 +1559,12 @@ input[type=file] {
     .integer-controls {
         position: absolute;
         right: 13px;
-        bottom: 8px;
         font-family: $icon-font;
         cursor: pointer;
         max-width: 35px;
         display: inline-block;
+        bottom: 50%;
+        @include transform(translateY(50%));
 
         button {
             $height: 10px;
@@ -1573,12 +1584,12 @@ input[type=file] {
             &:before {
                 content: 'Y';
                 font-family: $icon-font;
-                font-size: 6px;
+                font-size: 10px;
                 line-height: $height;
                 height: $height;
             }
             &.integer-up {
-                margin: 0 0 3px;
+                margin-bottom: $spacing-xs;
 
                 @include flipV;
             }
@@ -3084,7 +3095,7 @@ label {
         right: 15px;
         content: '\59';
         font-family: $icon-font;
-        font-size: 5px;
+        font-size: 9px;
         color: $color-midnight;
 
         @include transition(($default-input-transition));
@@ -3119,12 +3130,7 @@ label {
 }
 
 .input-icon {
-    color: $color-midnight;
-    font-size: 16px;
-    position: absolute;
-    left: $spacing-sm;
-    top: 50%;
-    transform: translateY(-50%);
+    @include input-icon();
 
     &.icon-search {
         font-weight: bold;
@@ -3139,7 +3145,7 @@ label {
 
 label.input-text--right-icon {
     input {
-        padding-right: $spacing-xl;
+        padding-right: 35px;
     }
 }
 

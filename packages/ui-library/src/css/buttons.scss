@@ -25,6 +25,26 @@
     }
 }
 
+@mixin button-with-icon {
+    padding-left: $spacing-md + $spacing-sm + $spacing-sm;
+
+    &:before,
+    &:after {
+        font-family: $icon-font;
+    }
+    &:before {
+        content: '\2b';
+        position: absolute;
+        left: $spacing-md;
+        width: $spacing-md;
+        top: 50%;
+        text-align: center;
+        @include transform(translateY(-50%));
+        font-size: 12px;
+        line-height: 1em;
+    }
+}
+
 input[type=button],
 input[type=submit],
 button,
@@ -162,62 +182,13 @@ button,
         }
     }
     &.add {
-        padding-left: 36px;
-
-        &:before,
-        &:after {
-            font-family: $icon-font;
-        }
-        &:before {
-            content: '\2b';
-            position: absolute;
-            left: 20px;
-            top: 13px;
-            font-size: 10px;
-            line-height: 1em;
-        }
-        &.user {
-            padding-right: 15px;
-            font-size: 0;
-
-            &:after {
-                font-size: 19px;
-                content: '\55';
-            }
-        }
-        &.no-label {
-            width: 25px;
-            padding: 0;
-
-            &:before {
-                left: 8px;
-            }
-        }
-
-        &.inline {
-            &:before {
-                top: 8px;
-            }
-        }
+        @include button-with-icon();
     }
     &.download {
-        padding-left: 40px;
+        @include button-with-icon();
 
         &:before {
-            font-family: $icon-font;
             content: '\44';
-            position: absolute;
-            left: 15px;
-            top: 0;
-            font-size: 15px;
-        }
-
-        &.inline {
-            padding-left: 35px;
-
-            &:before {
-                font-size: 12px;
-            }
         }
     }
     &.inline {
@@ -264,38 +235,32 @@ button,
         &.plus {
             &:before {
                 content: '*';
-                font-size: 12px;
             }
         }
         &.remove,
         &.minus {
             &:before {
                 content: '-';
-                font-size: 9px;
             }
         }
         &.delete {
             &:before {
                 content: 'd';
-                font-size: 15px;
             }
         }
         &.edit {
             &:before {
                 content: 'e';
-                font-size: 15px;
             }
         }
         &.prev {
             &:before {
                 content: '<';
-                font-size: 11px;
             }
         }
         &.next {
             &:before {
                 content: '>';
-                font-size: 11px;
             }
         }
 
