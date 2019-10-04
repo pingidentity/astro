@@ -12,6 +12,7 @@ pipeline {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               sh """
                 make package
+                npm publish --tag beta;
               """
             }
           }
