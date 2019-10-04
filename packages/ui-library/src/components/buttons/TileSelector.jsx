@@ -77,7 +77,7 @@ const selectorTypes = {
 const getTilePanel = () => {
     const tileSelector = document.querySelector(".tile-button--selected");
     if (tileSelector) {
-        return document.querySelector(".tile-panel").scrollIntoView({ behavior: "smooth" });
+        return document.querySelector(".tile-panel").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     }
 };
 
