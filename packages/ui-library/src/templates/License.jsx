@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PageSection from "../components/layout/PageSection";
 import Button from "../components/buttons/Button";
+import ButtonGroup from "../components/layout/ButtonGroup";
 import Layout from "../components/general/ColumnLayout";
 import PageHeader from "../components/general/PageHeader";
 import FormLabel from "../components/forms/FormLabel";
@@ -12,7 +13,6 @@ import Link from "../components/general/Link";
 import LinkDropDownList from "../components/forms/LinkDropDownList";
 import Modal from "../components/general/Modal";
 import FormattedContent from "../components/general/FormattedContent";
-import HR from "../components/general/HR";
 import Section from "../components/general/Section";
 import InputRow from "../components/layout/InputRow";
 import Table, {
@@ -66,21 +66,18 @@ const nodeOptions = [
 ];
 
 
-const mockData = {
-};
-
 const licenseStates = {
-    landing: "landing",
-    modal: "modal"
+    LANDING: "landing",
+    MODALREASSIGN: "modalreassign",
+    MODALDOWNGRADE: "modaldowngrade",
+    FEATURE: "feature"
 };
 
 
 export default class License extends Component {
 
     initState = {
-        licenseState: licenseStates.landing,
-        modalClick: false,
-        modalConfirm: false,
+        licenseState: licenseStates.LANDING,
         expanded: false,
     }
 
@@ -89,30 +86,139 @@ export default class License extends Component {
     _toggleOpen = () => {
         this.setState({
             expanded: true,
+            licenseState: licenseStates.MODALREASSIGN
         });
     }
 
+    _toggleOpen2 = () => {
+        this.setState({
+            expanded: true,
+            licenseState: licenseStates.MODALDOWNGRADE
+        });
+    }
+
+    _toggleFeatureClick = () => {
+        this.setState({
+            expanded: true,
+            licenseState: licenseStates.FEATURE
+        });
+    }
+
+    // _toggleModals = () => {
+    //     if (this.state.licenseState === licenseStates.MODALREASSIGN) {
+    //         return this._toggleOpen;
+    //     } else if (this.state.licenseState === licenseStates.MODALDOWNGRADE) {
+    //         return this._toggleOpen2;
+    //     }
+    // }
+
+    handleClick = () => {
+        this.setState({
+            expanded: false,
+            licenseState: licenseStates.LANDING,
+        });
+    }
+
+    modalContent() {
+        if (this.state.licenseState === licenseStates.MODALREASSIGN) {
+            return (
+                <div>
+                    <InputRow>
+                    Are you sure you want to re-assign the environment <br/>
+                    EU Contractors to a Global license?
+                    </InputRow>
+                    <ButtonGroup onCancel={this.handleClick}>
+                        <Button type="primary" onClick={this.handleClick}>Re-assign</Button>
+                    </ButtonGroup>
+                </div>
+            );
+        } else if (this.state.licenseState === licenseStates.MODALDOWNGRADE) {
+            return (
+                <div>
+                    <InputRow>
+                    Some Features in this environment current license <br/>
+                    are not available in the new license. These features <br/>
+                    will still function, but not additive changes can be <br/>
+                    made to them.
+                    </InputRow>
+                    <InputRow>
+                        <li>MFA will not be available for new users</li>
+                        <li>
+                                    Current custom schemas will not allow further <br />
+                                    customization
+                        </li>
+                    </InputRow>
+                    <InputRow>
+                    Are you sure you want to re-assign the environment <br/>
+                    EU Contractors to a Global license?
+                    </InputRow>
+                    <ButtonGroup onCancel={this.handleClick}>
+                        <Button type="primary" onClick={this.handleClick}>Re-assign</Button>
+                    </ButtonGroup>
+                </div>
+            );
+        } else if (this.state.licenseState === licenseStates.FEATURE) {
+            return (
+                <div>
+                    <li>Password Authn w/ credential store & basic profile</li>
+                    <li>Social Login & Account Linking</li>
+                    <li>Registration</li>
+                    <li>Account Recovery</li>
+                    <li>Profile Mgmt</li>
+                    <li>MFA OTP - Email & SMS</li>
+                    <li>OIDC / Oauth2</li>
+                    <li>Polices: Time and IP</li>
+                    <li>Admin User Mgmt App</li>
+                    <li>Admin Auditing</li>
+                    <li>Service Usage Reporting</li>
+                    <li>Custom Schema</li>
+                    <li>SAML Support (Inbound and Outbound)</li>
+                    <li>Expanded Polices Support (Authn, Reg, Recover)</li>
+                    <li>Consent Service</li>
+                    <li>Delegated User Administration</li>
+                    <li>OutBound Provisioning</li>
+                    <ButtonGroup>
+                        <Button onClick={this.handleClick}>Cancel</Button>
+                    </ButtonGroup>
+                </div>
+            );
+        }
+    }
+
     renderModal() {
-        if (this.state.licenseState === licenseStates.Modal) {
+        if (this.state.licenseState === licenseStates.MODALREASSIGN) {
             return (
                 <Modal
                     data-id="default-example"
-                    modalTitle="Default Modal"
-                    expanded={this._toggleOpen}
-                    onOpen={this._toggleOpen}
+                    modalTitle="Re-assign Environment"
+                    maximize={false}
+                    expanded={this.state.expanded}
+                    flags={["p-stateful", "use-portal"]}
                 >
-                    <div>
-                        <p>
-                        Default modals size both vertically and horizontally with the content.
-                        </p>
-                        <p>
-                        The modal has a maximum width of 960px.
-                        </p>
-                        <p>
-                        The height will grow until it is 40px from the bottom of the users screen.
-                        </p>
-                    </div>
+                    {this.modalContent()}
                 </Modal>
+            );
+        } else if (this.state.licenseState === licenseStates.MODALDOWNGRADE) {
+            return ( <Modal
+                data-id="default-example"
+                modalTitle="License Downgrade"
+                maximize={false}
+                expanded={this.state.expanded}
+                flags={["p-stateful", "use-portal"]}
+            >
+                {this.modalContent()}
+            </Modal>
+            );
+        } else if (this.state.licenseState === licenseStates.FEATURE) {
+            return ( <Modal
+                data-id="default-example"
+                modalTitle="Features: Premier License"
+                maximize={false}
+                expanded={this.state.expanded}
+                flags={["p-stateful", "use-portal"]}
+            >
+                {this.modalContent()}
+            </Modal>
             );
         }
     }
@@ -121,14 +227,12 @@ export default class License extends Component {
         return (
             <LinkDropDownList
                 stateless={false}
-                closeOnClick={true}
-                label={<Icon inline iconName="edit"/>}
+                label={<Icon type="inline" iconName="edit"/>}
                 options={nodeOptions}
-                flags={["use-portal"]}
+                flags={["p-stateful", "use-portal"]}
+                onClick={this._toggleOpen}
                 noCaret
-            >
-                {this.renderModal()}
-            </LinkDropDownList>
+            />
         );
 
     }
@@ -203,6 +307,46 @@ export default class License extends Component {
         );
     }
 
+    renderTable2 () {
+        return ( <Table
+            columnStyling={[
+                {
+                    width: "15em"
+                },
+                {
+                    width: "10em",
+                },
+                {},
+                {
+                    width: "10em",
+                    alignment: columnAlignments.RIGHT
+                }
+            ]}
+            headData={[
+                "Environment",
+                "identities",
+                "region",
+                "re-assign"
+            ]}
+            bodyData={[
+                [
+                    "EU Contractors",
+                    "201",
+                    "Europe-DE",
+                    this.renderLinkDropDown()
+                ],
+                [
+                    "IT Admins",
+                    "23",
+                    "North America",
+                    this.renderLinkDropDown()
+                ],
+            ]
+            }
+        />
+        );
+    }
+
     render () {
         return (
             <div>
@@ -224,12 +368,11 @@ export default class License extends Component {
                             titleSection={
                                 <Layout.Row className="columns-width-auto">
                                     <Layout.Column>
-                                        <FormLabel value="Premier">
-                                            <Stack gap="XS">
-                                                <Text type="value">Renewed 2019-06-13</Text>
-                                                <Text type="value">Expires 2022-12-13</Text>
-                                            </Stack>
-                                        </FormLabel>
+                                        <FormLabel value="Premier"/>
+                                        <Stack gap="XS">
+                                            <Text type="value">Renewed 2019-06-13</Text>
+                                            <Text type="value">Expires 2022-12-13</Text>
+                                        </Stack>
                                     </Layout.Column>
                                     <Layout.Column>
                                         <Icon iconName="earth" iconSize="xl" title="environments">
@@ -251,9 +394,12 @@ export default class License extends Component {
                                 </Layout.Row>}
                         >
                             <Stack gap="MD">
-                                <Link title="View Feature List" url="#" type="block" />
+                                <Link title="View Feature List" onClick={this._toggleFeatureClick} type="block">
+
+                                </Link>
                                 <CalloutBox>
                                     {this.renderTable()}
+                                    {this.renderModal()}
                                 </CalloutBox>
                             </Stack>
                         </Section>
@@ -287,7 +433,12 @@ export default class License extends Component {
                                         </Icon>
                                     </Layout.Column>
                                 </Layout.Row>}
-                        />
+                        >
+                            <CalloutBox>
+                                {this.renderTable2()}
+                                {this.renderModal()}
+                            </CalloutBox>
+                        </Section>
                     </InputRow>
                     <Stack gap="SM">
                         <Link title="Compare plans" url="#" type="block"/>
