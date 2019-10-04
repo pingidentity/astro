@@ -16,41 +16,52 @@ var React = require("react"),
  */
 
 /**
+ * @typedef {Object} InlineMessage~primaryButton
+ * @property {string} [href]
+ *     Pass in a string to give the button an href.
+ * @property {string} [target]
+ *     Pass a string to give the button a target.
+ */
+
+/**
  * @typedef {Object} InlineMessage~secondaryButtons
- * @param {string} label
+ * @property {string} [className]
+ *     CSS classes to add on the top-level HTML container.
+ * @property {string} [label]
  *     Pass in a string label for the button label if you want an action option. If you pass this you must
  *     also pass the callback function.
- * @param {InlineMessage~onClick} onClick
+ * @property {InlineMessage~onClick} [onClick]
  *     Callback to be triggered when the button is clicked.
- * @param {string} [className]
- *     CSS classes to add on the top-level HTML container.
- *
+ */
+
+/**
  * @class InlineMessage
  * @desc Sometimes we need a message block to show embedded in a form or somewhere on a page.
  *
- * @param {string} [data-id="inline-message"]
- *     To define the base "data-id" value for the top-level HTML container.
+ * @param {boolean} [alternate]
+ *     Warning message with full background color and no icon.
+ * @param {boolean} [bordered=true]
+ *     Whether or not to surround the inline message with a border.
  * @param {string} [className]
  *     CSS classes to add on the top-level HTML container.
- * @param {InlineMessage.MessageTypes} [type=MessageTypes.NOTICE]
- *     Type of icon to display (MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING)
+ * @param {string} [data-id="inline-message"]
+ *     To define the base "data-id" value for the top-level HTML container.
+ * @param {boolean} [fullwidth]
+ *     when true creates a full page width inline message.
  * @param {string} [label]
  *     Pass in a string label for the button label if you want an action option. If you pass this you must
  *     also pass the callback function.
- * @param {boolean} [bordered=true]
- *     Whether or not to surround the inline message with a border.
- * @param {boolean} [alternate]
- *     Warning message with full background color and no icon.
- * @param {boolean} [fullwidth]
- *     when true creates a full page width inline message.
  * @param {boolean} [noMargin]
  *     When true it will remove the margin around the inline message.
  * @param {InlineMessage~onClick} [onClick]
  *     Callback to be triggered when the button is clicked.
  * @param {InlineMessage~primaryButton} [primaryButton]
- *     an object for the primary button
- * @param {Array.InlineMessage~secondaryButtons} [secondaryButtons]
+ *      Primary button containing href and target.
+ * @param {Array.<InlineMessage~secondaryButtons>} [secondaryButtons]
  *     List of secondary buttons
+ * @param {InlineMessage.MessageTypes} [type=MessageTypes.NOTICE]
+ *     Type of icon to display (MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING)
+ *     an object for the primary button
  *
  *
  * @example

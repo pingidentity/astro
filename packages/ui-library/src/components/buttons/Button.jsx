@@ -14,33 +14,38 @@ import _ from "underscore";
  *
  * @param {("primary" | "secondary" | "standard" | "success" | "cancel" | "danger")} [type]
  *      CSS class applied to html.
+ * @param {boolean} active
+ *     Active style of the button for when it's being used as a toggle.
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {string} [data-id="button"]
  *     Defines the "data-id" for top-level HTML container.
- * @param {string} [iconName]
- *     The name and CSS of the icon.
- * @param {function} [onClick]
- *     Click handler.
- * @param {function} [onMouseDown]
- *     Mousedown handler.
- * @param {string} [label]
- *     Html name of the button.
-* @param {string} text
- *     Text to display in the button when not loading.
  * @param {boolean} [disabled=false]
  *     Button will not function when true.
  * @param {string} [disabledText]
  *     Text for the help hint will be rendered when the same button has a the prop disabled set to true.
- * @param {boolean} [inline]
- * @param {boolean} loading
- *     While true, loading animation will be shown.
- *  @param {boolean} [noSpacing]
- *     Don't include the right margin.
- * @param {boolean} active
- *     Active style of the button for when it's being used as a toggle.
  * @param {array} [flags]
  *     Set the flag for "add-button-margin" to override the special add button margin styling.
+ * @param {string} [href]
+ *     Pass in a string to give the button an href.
+ * @param {string} [iconName]
+ *     The name and CSS of the icon.
+ * @param {boolean} [inline]
+ *      When true, turns button into inline pill button.
+ * @param {string} [label]
+ *     Html name of the button
+ * @param {boolean} loading
+ *     While true, loading animation will be shown.
+ * @param {function} [onClick]
+ *     Click handler.
+ *  @param {boolean} [noSpacing]
+ *     Don't include the right margin.
+ * @param {function} [onMouseDown]
+ *     Mousedown handler..
+ * @param {string} [target]
+ *     Pass a string to give the button a target.
+ * @param {string} text
+ *     Text to display in the button when not loading.
  * @example
  *  <Button
  *      label="Button"
