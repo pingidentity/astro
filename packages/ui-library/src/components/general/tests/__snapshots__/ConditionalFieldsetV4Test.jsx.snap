@@ -4,12 +4,12 @@ exports[`ConditionalFieldset data-id's don't change 1`] = `
 Array [
   "conditional-fieldset",
   "conditional-fieldset-options",
-  "conditional-fieldset-options_label_0",
+  "conditional-fieldset-options_label_Option 1",
   "label",
-  "conditional-fieldset-options_0",
-  "conditional-fieldset-options_label_1",
+  "conditional-fieldset-options_Option 1",
+  "conditional-fieldset-options_label_Option 2",
   "label",
-  "conditional-fieldset-options_1",
+  "conditional-fieldset-options_Option 2",
   "option1",
 ]
 `;

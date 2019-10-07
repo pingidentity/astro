@@ -4,9 +4,9 @@ exports[`PopoverMenu data-id's don't change 1`] = `
 Array [
   "popover-menu",
   "popover-menu-trigger",
-  "popover-menu-button-0",
-  "popover-menu-button-1",
-  "popover-menu-button-2",
-  "popover-menu-button-3",
+  "popover-menu-button-first",
+  "popover-menu-button-second",
+  "popover-menu-button-third",
+  "popover-menu-button-fourth",
 ]
 `;
