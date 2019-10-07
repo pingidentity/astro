@@ -2,19 +2,39 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
+/**
+ * @enum {string}
+ * @alias Text.textTypes
+ * @desc Enum for the different types of Messages
+ */
 const textTypes = {
+    /** body */
     BODY: "body",
+    /** error */
     ERROR: "error",
+    /** label */
     LABEL: "label",
+    /** normal-case-label */
+    NORMALCASELABEL: "normal-case-label",
+    /** note */
     NOTE: "note",
+    /** no-value */
     NOVALUE: "no-value",
+    /** page-subtitle */
     PAGESUBTITLE: "page-subtitle",
+    /** page-title */
     PAGETITLE: "page-title",
+    /** placeholder */
     PLACEHOLDER: "placeholder",
+    /** primary */
     PRIMARY: "primary",
+    /** section-title */
     SECTIONTITLE: "section-title",
+    /** success */
     SUCCESS: "success",
+    /** value */
     VALUE: "value",
+    /** warning */
     WARNING: "warning",
 };
 
@@ -31,7 +51,7 @@ const overflowTypes = {
 *     The data-id of the component
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
-* @param {string} [type]
+* @param {Text.textTypes} [type]
 *     Style of text
 * @param {string} [inline=false]
 *     Displays inline when true

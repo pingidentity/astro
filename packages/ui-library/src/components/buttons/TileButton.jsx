@@ -4,6 +4,7 @@ import { getIconClassName } from "../../util/PropUtils";
 import classnames from "classnames";
 import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from "../layout/FlexRow";
 import Link from "../general/Link";
+import _ from "underscore";
 
 
 const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking
@@ -119,8 +120,15 @@ const TileButton = ({
 
     const TagName = link ? "div" : "button";
 
+
     return (
-        <TagName className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown} role="button">
+        <TagName
+            className={classNames}
+            data-id={dataId}
+            onClick={onClick}
+            onMouseDown={handleMouseDown}
+            role="button"
+        >
             {renderedIcon &&
                 <div
                     className={classnames(
@@ -174,6 +182,7 @@ TileButton.propTypes = {
 TileButton.defaultProps = {
     "data-id": "tile-button",
     type: types.TOPICON,
+    onClick: _.noop,
 };
 
 export default TileButton;

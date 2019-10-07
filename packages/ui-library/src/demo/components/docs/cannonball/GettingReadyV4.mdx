@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Upgrading the UI Library from 3.x to 4.0.0
 If you have a project that currently uses a 3.x version of the UI Library, try these steps to upgrade to v4:
 1. Upgrade to the latest 3.x version. While v4 is still in beta, you can do this by running `npm install ui-library@latest`
@@ -6,6 +7,16 @@ If you have a project that currently uses a 3.x version of the UI Library, try t
 4. You can test the v4 behaviors by wrapping your whole application in `<FlagsProvider flags={["v4"]}></FlagsProvider>`.
 5. Review your application for broken behaviors.
 6. Install v4. While it is still in beta, run `npm install ui-library@beta`.
+=======
+# Getting Ready for Cannonball: the UI Library Version 4.0.0
+
+We are currently planning to release version 4.0.0 in October 2019, followed by a short period of joint v3 and v4 development.
+While we will continue to support v3 of the Library, beginning in 2020, all further component development will be done in v4.
+
+You can try out a beta version of v4 in your projects with this command: `npm install ui-library@beta`
+
+Our goal is to make the upgrade close to painless. To that end, we developed the new v4 behaviors in v3 and put them behind feature flags. This allows you to try out v4 right away and make any changes you need to make over the next few months. If you are already using the latest version of the library, you should be seeing several console warnings calling out components you should address. These fall into a few main categories.
+>>>>>>> origin/master
 
 ## Progressive Statefulness
 In v4, we did away with the `stateless` prop and the hard distinction between stateful and stateless versions of our components. Our new model allows you to choose which props you’d like to control and which you’d like the component to control. These components take control of any potentially stateful props on mount if no value is provided.
