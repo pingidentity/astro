@@ -90,8 +90,9 @@
     "stylelint-selector-bem-pattern": "^2.0.0",
     "url-loader": "^2.1.0",
     "uuid": "^3.3.2",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
   },
   "peerDependencies": {
     "react": "^16.0.0",
