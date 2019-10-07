@@ -95,7 +95,28 @@ class FileInputDemo extends React.Component {
                         onRemove={this._handleRemove}
                         status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
                         selectedTitle="Certificate"
-                        error={errorTypes.WARNING}
+                    />
+                </InputRow>
+
+
+                <p>
+                    With error state
+                </p>
+                <InputRow>
+                    <FileInput
+                        accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
+                        fileName={this.state.selectedFile1}
+                        fileData={(
+                            <span>
+                                Valid <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
+                            </span>
+                        )}
+                        onValidateFile={this._handleFileValidation1}
+                        onValueChange={this._handleChange1}
+                        onRemove={this._handleRemove1}
+                        status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
+                        selectedTitle="Certificate"
+                        error={errorTypes.ERROR}
                     />
                 </InputRow>
 
@@ -123,7 +144,7 @@ class FileInputDemo extends React.Component {
 
 
                 <p>
-                    file input with icon added to file
+                    file input with icon added to file and no border
                 </p>
                 <InputRow>
                     <FileInput
@@ -138,6 +159,7 @@ class FileInputDemo extends React.Component {
                                 Valid <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
                             </span>
                         )}
+                        noBorder
                         onValidateFile={this._handleFileValidation}
                         onValueChange={this._handleChange2}
                         onRemove={this._handleRemove2}
