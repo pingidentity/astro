@@ -110,14 +110,6 @@ export default class License extends Component {
         });
     }
 
-    // _toggleModals = () => {
-    //     if (this.state.licenseState === licenseStates.MODALREASSIGN) {
-    //         return this._toggleOpen;
-    //     } else if (this.state.licenseState === licenseStates.MODALDOWNGRADE) {
-    //         return this._toggleOpen2;
-    //     }
-    // }
-
     handleClick = () => {
         this.setState({
             expanded: false,
