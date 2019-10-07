@@ -87,14 +87,16 @@ export default class License extends Component {
     initState = {
         licenseState: licenseStates.LANDING,
         expanded: false,
+        selectedOption: nodeOptions[0]
     }
 
     state = this.initState
 
-    _toggleOpen = () => {
+    _toggleOpen = (selectedOption) => {
         this.setState({
             expanded: true,
-            licenseState: licenseStates.MODALREASSIGN
+            licenseState: licenseStates.MODALREASSIGN,
+            selectedOption: selectedOption
         });
     }
 
@@ -239,6 +241,7 @@ export default class License extends Component {
                 label={<Icon type="inline" iconName="edit"/>}
                 options={nodeOptions}
                 flags={["p-stateful", "use-portal"]}
+                selectedOption={this.state.selectedOption}
                 onClick={this._toggleOpen}
                 noCaret
             />
@@ -356,6 +359,76 @@ export default class License extends Component {
         );
     }
 
+    renderTable3 () {
+        return ( <Table
+            columnStyling={[
+                {
+                    width: "15em"
+                },
+                {
+                    width: "10em",
+                },
+                {},
+                {
+                    width: "10em",
+                    alignment: columnAlignments.RIGHT
+                }
+            ]}
+            headData={[
+                "Environment",
+                "identities",
+                "region",
+                "re-assign"
+            ]}
+            bodyData={[
+                [
+                    "EU Contractors",
+                    "201",
+                    "Europe-DE",
+                    this.renderLinkDropDown()
+                ],
+                [
+                    "IT Admins",
+                    "23",
+                    "North America",
+                    this.renderLinkDropDown()
+                ],
+                [
+                    "Production",
+                    "1400",
+                    "North America",
+                    this.renderLinkDropDown()
+                ],
+                [
+                    "Stacy's Prod-like Sandbox",
+                    "56",
+                    "North America",
+                    this.renderLinkDropDown()
+                ],
+                [
+                    "Staging",
+                    "1001",
+                    "North America",
+                    this.renderLinkDropDown()
+                ],
+                [
+                    "UK Employees",
+                    "854",
+                    "Europe - UK",
+                    this.renderLinkDropDown()
+                ],
+                [
+                    "Vendors from Acme",
+                    "33",
+                    "North America",
+                    this.renderLinkDropDown()
+                ]
+            ]
+            }
+        />
+        );
+    }
+
 
 
     render () {
@@ -445,6 +518,41 @@ export default class License extends Component {
                         >
                             <CalloutBox>
                                 {this.renderTable2()}
+                                {this.renderModal()}
+                            </CalloutBox>
+                        </Section>
+                        <Section
+                            flags={["p-stateful"]}
+                            titleSection={
+                                <Layout.Row className="columns-width-auto">
+                                    <Layout.Column>
+                                        <FormLabel value="Global"/>
+                                        <Stack gap="XS">
+                                            <Text type="value">Renewed 2019-06-13</Text>
+                                            <Text type="value">Expires 2022-12-13</Text>
+                                        </Stack>
+                                    </Layout.Column>
+                                    <Layout.Column>
+                                        <Icon iconName="earth" iconSize="xl" title="environments">
+                                            <Stack gap="XS">
+                                                <Text type="value">11/15 maximum</Text>
+                                                <Text type="value">All regions</Text>
+                                            </Stack>
+                                        </Icon>
+                                    </Layout.Column>
+                                    <Layout.Column>
+                                        <Icon iconName="users" iconSize="xl" title="identites">
+                                            <FormattedContent>
+                                                <Stack gap="XS">
+                                                    <Text type="value">10 million / environment</Text>
+                                                </Stack>
+                                            </FormattedContent>
+                                        </Icon>
+                                    </Layout.Column>
+                                </Layout.Row>}
+                        >
+                            <CalloutBox>
+                                {this.renderTable3()}
                                 {this.renderModal()}
                             </CalloutBox>
                         </Section>

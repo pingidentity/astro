@@ -63,6 +63,11 @@
             margin-top: -20px;
             margin-bottom: 10px;
         }
+        [data-id="formLabel"] {
+            .label-text{
+            font-weight: bold;
+            }
+        }
     }
     > .collapsible-section-content {
         text-transform: none;

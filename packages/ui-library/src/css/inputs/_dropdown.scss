@@ -125,6 +125,12 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
         }
         .selected {
             @include option-list__item--selected;
+            [data-id="formLabel"] {
+                .label-text{
+                font-weight: bold;
+                color: $color-black;
+                }
+            }
         }
         .none-option {
             //@include text-no-value;
