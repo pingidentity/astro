@@ -271,8 +271,8 @@ describe("ConditionalFieldset", function () {
             onValueChange: cb,
         });
 
-        const r1 = { "data-id": "fieldset-options_0" };
-        const r2 = { "data-id": "fieldset-options_1" };
+        const r1 = { "data-id": "fieldset-options_Option 1" };
+        const r2 = { "data-id": "fieldset-options_Option 2" };
 
         expect(cb).not.toBeCalled();
         expect(wrapper.find(r1).prop("checked")).toEqual(true);
