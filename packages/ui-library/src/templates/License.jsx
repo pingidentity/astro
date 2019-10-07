@@ -77,7 +77,8 @@ const licenseStates = {
     LANDING: "landing",
     MODALREASSIGN: "modalreassign",
     MODALDOWNGRADE: "modaldowngrade",
-    FEATURE: "feature"
+    FEATURE: "feature",
+    REASSIGNCHECKED: "reassignchecked"
 };
 
 
@@ -126,11 +127,6 @@ export default class License extends Component {
         });
     }
 
-    _onChange = i => event => {
-        var newState = {};
-        newState["checkboxChecked" + i] = event.target.checked;
-        this.setState(newState);
-    };
 
     modalContent() {
         if (this.state.licenseState === licenseStates.MODALREASSIGN) {
@@ -250,15 +246,6 @@ export default class License extends Component {
 
     }
 
-    renderCheckbox() {
-        return (
-            <Checkbox
-                onChange = {this._onChange(1)}
-                checked = {this.state.checkboxChecked1}
-            />
-        );
-    }
-
     renderTable () {
         return ( <Table
             columnStyling={[
@@ -333,9 +320,6 @@ export default class License extends Component {
         return ( <Table
             columnStyling={[
                 {
-                    width: "0"
-                },
-                {
                     width: "15em"
                 },
                 {
@@ -348,7 +332,6 @@ export default class License extends Component {
                 }
             ]}
             headData={[
-                this.renderCheckbox(),
                 "Environment",
                 "identities",
                 "region",
@@ -356,14 +339,12 @@ export default class License extends Component {
             ]}
             bodyData={[
                 [
-                    this.renderCheckbox(),
                     "EU Contractors",
                     "201",
                     "Europe-DE",
                     this.renderLinkDropDown()
                 ],
                 [
-                    this.renderCheckbox(),
                     "IT Admins",
                     "23",
                     "North America",
@@ -374,6 +355,8 @@ export default class License extends Component {
         />
         );
     }
+
+
 
     render () {
         return (
