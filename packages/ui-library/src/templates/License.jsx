@@ -19,7 +19,6 @@ import Table, {
     columnAlignments,
 } from "../components/tables/Table";
 import CalloutBox from "../components/layout/CalloutBox";
-import Checkbox from "../components/forms/FormCheckbox";
 
 
 /**
@@ -37,7 +36,7 @@ const nodeOptions = [
                     <Text type="value">Expires 2022-12-13</Text>
                 </Stack>
                 <Stack gap="XS">
-                    <Icon iconName="globe" iconSize={iconSizes.LG}/>
+                    <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
                     <Text>&nbsp;7/10</Text>
                 </Stack>
             </FlexRow>
@@ -51,7 +50,7 @@ const nodeOptions = [
                     <Text type="value">Expires 2022-12-13</Text>
                 </Stack>
                 <Stack gap="XS">
-                    <Icon iconName="globe" iconSize={iconSizes.LG}/>
+                    <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
                     <Text>&nbsp;4/5</Text>
                 </Stack>
             </FlexRow>
@@ -65,7 +64,7 @@ const nodeOptions = [
                     <Text type="value">Expires 2022-12-13</Text>
                 </Stack>
                 <Stack gap="XS">
-                    <Icon iconName="globe" iconSize={iconSizes.LG}/>
+                    <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
                     <Text>&nbsp;11/15</Text>
                 </Stack>
             </FlexRow>
@@ -78,7 +77,6 @@ const licenseStates = {
     MODALREASSIGN: "modalreassign",
     MODALDOWNGRADE: "modaldowngrade",
     FEATURE: "feature",
-    REASSIGNCHECKED: "reassignchecked"
 };
 
 
@@ -87,16 +85,14 @@ export default class License extends Component {
     initState = {
         licenseState: licenseStates.LANDING,
         expanded: false,
-        selectedOption: nodeOptions[0]
     }
 
     state = this.initState
 
-    _toggleOpen = (selectedOption) => {
+    _toggleOpen = () => {
         this.setState({
             expanded: true,
             licenseState: licenseStates.MODALREASSIGN,
-            selectedOption: selectedOption
         });
     }
 
@@ -237,16 +233,31 @@ export default class License extends Component {
     renderLinkDropDown () {
         return (
             <LinkDropDownList
-                stateless={false}
                 label={<Icon type="inline" iconName="edit"/>}
                 options={nodeOptions}
                 flags={["p-stateful", "use-portal"]}
-                selectedOption={this.state.selectedOption}
                 onClick={this._toggleOpen}
+                initialState={{
+                    selectedOption: nodeOptions[0]
+                }}
                 noCaret
             />
         );
+    }
 
+    renderLinkDropDown2 () {
+        return (
+            <LinkDropDownList
+                label={<Icon type="inline" iconName="edit"/>}
+                options={nodeOptions}
+                flags={["p-stateful", "use-portal"]}
+                onClick={this._toggleOpen2}
+                initialState={{
+                    selectedOption: nodeOptions[0]
+                }}
+                noCaret
+            />
+        );
     }
 
     renderTable () {
@@ -345,13 +356,13 @@ export default class License extends Component {
                     "EU Contractors",
                     "201",
                     "Europe-DE",
-                    this.renderLinkDropDown()
+                    this.renderLinkDropDown2()
                 ],
                 [
                     "IT Admins",
                     "23",
                     "North America",
-                    this.renderLinkDropDown()
+                    this.renderLinkDropDown2()
                 ],
             ]
             }
