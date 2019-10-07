@@ -585,6 +585,7 @@ button.tile-button {
 
     &__content {
         @include flexbox-grow(1);
+        @include break-word;
 
         line-height: 1.3em;
         text-align: left;
