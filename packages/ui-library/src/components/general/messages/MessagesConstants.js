@@ -20,9 +20,17 @@ exports.MessageTypes = {
     FEATURE: "feature",
 };
 
+/**
+ * @enum {string}
+ * @alias Messages.Layouts
+ * @desc Enum for the different layouts of Messages
+ */
 exports.Layouts = {
+    /** banner */
     BANNER: "banner",
+    /** corner */
     CORNER: "corner",
+    /** center */
     CENTER: "center",
 };
 

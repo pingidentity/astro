@@ -75,8 +75,21 @@ class InlineMessageDemo extends React.Component {
                 <InlineMessage
                     type={ InlineMessage.MessageTypes.WARNING }
                     label="Do Something"
-                    onClick={doSomething}>
+                    onClick={doSomething}
+                >
                     Message with action.
+                </InlineMessage>
+
+                <InlineMessage
+                    type={ InlineMessage.MessageTypes.WARNING }
+                    label="message with href and target"
+                    onClick={doSomething}
+                    primaryButtonProps={{
+                        href: "#",
+                        target: "#"
+                    }}
+                >
+                Message with Href
                 </InlineMessage>
 
                 <InlineMessage
@@ -87,7 +100,7 @@ class InlineMessageDemo extends React.Component {
                         {
                             onClick: doSomething,
                             label: "Do Something",
-                            className: "secondary"
+                            className: "secondary",
 
                         },
                     ]}
@@ -142,6 +155,8 @@ class InlineMessageDemo extends React.Component {
                 <InlineMessage noMargin>
                     Message with no margins.
                 </InlineMessage>
+
+
             </div>
         );
     }
