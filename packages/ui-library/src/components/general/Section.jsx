@@ -154,7 +154,8 @@ class SectionStateless extends React.Component {
         ]),
         titleSection: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.object
+            PropTypes.object,
+            PropTypes.node,
         ]),
         titleValue: PropTypes.oneOfType([
             PropTypes.string,
@@ -259,6 +260,7 @@ class SectionStateless extends React.Component {
                     <span
                         className="collapsible-section-title-section"
                         data-id={this.props["data-id"] + "-title-section"}
+                        onClick={this._handleToggle}
                     >
                         {this.props.titleSection}
                     </span>

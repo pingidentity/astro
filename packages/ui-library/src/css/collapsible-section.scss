@@ -5,7 +5,7 @@
     position: relative;
     border-top: 1px dotted $color-rabbit-fur;
     border-bottom: 1px dotted $color-rabbit-fur;
-    margin: 0 0 -1px $line-indent;
+    margin: 0 0 -1px 0;
 
     &--no-underline {
         border: none;
@@ -58,6 +58,7 @@
         text-transform: none;
         margin: 0 0 0 5px;
         color: $color-midnight;
+        cursor: pointer;
         .content-columns {
             margin-left: 25px;
             margin-top: -20px;
