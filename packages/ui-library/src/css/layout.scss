@@ -82,7 +82,7 @@ $color-grey-main-2: $color-strong-neutral-30;
 $color-grey-minor-1: $color-neutral-30;
 
 @mixin inactive-link-styles {
-    @include transition(transform 0.2s ease-out);
+    transition: transform 0.2s ease-out;
     content: '';
     position: absolute;
     bottom: 0;
@@ -95,7 +95,7 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 @mixin active-link-styles {
-    @include transition(transform 0.1s ease-out);
+    transition: transform 0.1s ease-out;
     transform: scaleX(1);
     visibility: visible;
 }
@@ -166,7 +166,7 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .selected-item {
-        @include transition(all 0.3s);
+        transition: all 0.3s;
         position: absolute;
         left: 0;
         top: -1px;
@@ -192,7 +192,7 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .selected-item-arrow {
-        @include transition(all 0.3s);
+        transition: all 0.3s;
         position: absolute;
         left: $layout-nav-width;
         z-index: $zindex__hidden;
@@ -219,7 +219,7 @@ $color-grey-minor-1: $color-neutral-30;
         overflow: hidden;
 
         > li {
-            @include transition(all 0.3s);
+            transition: all 0.3s;
             position: relative;
 
             a {
@@ -335,7 +335,7 @@ $color-grey-minor-1: $color-neutral-30;
             background-color: rgba($color-black, 0.05);
             z-index: $zindex__menu;
 
-            @include animation(fade-in 0.3s);
+            animation: fade-in 0.3s;
 
             a {
                 padding: 10px 10px 10px 25px;
@@ -380,7 +380,7 @@ $color-grey-minor-1: $color-neutral-30;
                 margin: -1px 0 0 0;
                 left: 15px;
 
-                @include rotate(90deg);
+                transform: rotate( 90deg);
             }
         }
     }
@@ -432,7 +432,7 @@ $color-grey-minor-1: $color-neutral-30;
             }
             &.selected {
                 .title {
-                    @include transition(background-color 0.2s);
+                    transition: background-color 0.2s;
                     @include font-pn-semibold;
                     background-color: $color-grey-main-2;
                     &:before {
@@ -444,8 +444,8 @@ $color-grey-minor-1: $color-neutral-30;
                 }
             }
             &.highlighted .title {
-                @include transition(padding 0);
-                @include transition(background-color 0.2s);
+                transition: padding 0;
+                transition: background-color 0.2s;
                 @include font-pn-semibold;
                 padding-right: 15px;
                 background-color: $color-grey-main;
@@ -457,7 +457,7 @@ $color-grey-minor-1: $color-neutral-30;
                 background-color: $color-grey-minor-1;
                 &.selected {
                     .title {
-                        @include transition(background-color 0.2s);
+                        transition: background-color 0.2s;
                         @include font-pn-light;
                         background-color: $color-grey-main-2;
                         &:before {
@@ -465,7 +465,7 @@ $color-grey-minor-1: $color-neutral-30;
                             background-color: $color-grey-main-2;
                         }
                         &:hover {
-                            @include transition(background-color 0.2s);
+                            transition: background-color 0.2s;
                             background: $color-grey-main;
                         }
                     }
@@ -501,7 +501,7 @@ $color-grey-minor-1: $color-neutral-30;
                 display: block; // restore icons for section titles in new nav
             }
             &.open {
-                @include transition(background-color 0.2s);
+                transition: background-color 0.2s;
                 background-color: $color-grey-main-2;
             }
             &.collapsible-link {
@@ -512,7 +512,7 @@ $color-grey-minor-1: $color-neutral-30;
                 }
             }
             &:hover {
-                @include transition(background-color 0.2s);
+                transition: background-color 0.2s;
                 text-decoration: none;
                 background-color: $color-grey-main;
             }
@@ -536,7 +536,7 @@ $color-grey-minor-1: $color-neutral-30;
                     padding: 13px 20px 13px 45px;
                     color: $color-white;
                     &:hover {
-                        @include transition(background-color 0.2s);
+                        transition: background-color 0.2s;
                         background-color: $color-grey-main;
                     }
                     &:after {
@@ -544,7 +544,7 @@ $color-grey-minor-1: $color-neutral-30;
                     }
                 }
                 &.highlighted {
-                    @include transition(background-color 0.2s);
+                    transition: background-color 0.2s;
                     width: $layout-nav-width;
                     box-sizing: border-box;
                     background-color: $color-grey-main;
@@ -631,7 +631,7 @@ $color-grey-minor-1: $color-neutral-30;
 
     // workaround for bottom padding - bottom padding is ignored in scrolling elements in FF and IE
     &:after {
-        @include flexbox-shrink(0);
+        flex-shrink: 0;
 
         content: '';
         display: block;
@@ -672,8 +672,8 @@ $color-grey-minor-1: $color-neutral-30;
     line-height: 19px;
     text-align: center;
 
-    @include box-sizing(border-box);
-    @include border-radius(7px);
+    box-sizing: border-box;
+    border-radius: 7px;
 }
 
 .collapsible-link {
@@ -704,7 +704,7 @@ $color-grey-minor-1: $color-neutral-30;
         color: $color-active-blue;
         text-decoration: underline; // necessary to remove underline in IE -jfal
 
-        @include transition((all 0.2s linear));
+        transition: (all 0.2s linear);
     }
     &.left:before,
     &.left:hover:before,
@@ -723,13 +723,13 @@ $color-grey-minor-1: $color-neutral-30;
     &.open {
         &.left:before,
         &.right:after {
-            @include rotate(-180deg);
-            @include transition((all 0.2s linear));
+            transform: rotate( -180deg);
+            transition: (all 0.2s linear);
         }
     }
 
     &--disabled {
-        opacity: 0.4;
+        opacity: $inactive-opacity;
         pointer-events: none;
     }
 }
@@ -749,7 +749,7 @@ $color-grey-minor-1: $color-neutral-30;
         font-size: 6px;
         font-family: $icon-font;
 
-        @include rotate(90deg);
+        transform: rotate( 90deg);
     }
 }
 
@@ -766,7 +766,7 @@ $color-grey-minor-1: $color-neutral-30;
         font-size: 6px;
         font-family: $icon-font;
 
-        @include rotate(-90deg);
+        transform: rotate( -90deg);
     }
 }
 
@@ -948,10 +948,10 @@ $color-grey-minor-1: $color-neutral-30;
     background: rgba($color-white, 0.9);
     border-top: 1px solid $color-rabbit-fur;
 
-    @include transition(translate 0.2s);
+    transition: translate 0.2s;
 
     &.hidden {
-        @include transform(translateY(100%));
+        transform: translateY(100%);
     }
 
     @include button-spacing();
@@ -984,7 +984,7 @@ $color-grey-minor-1: $color-neutral-30;
 
 
 .content-columns {
-    @include flexbox;
+    display: flex;
 
     .content-column {
         flex: 1;
@@ -992,7 +992,7 @@ $color-grey-minor-1: $color-neutral-30;
         margin: 0 40px 0 0;
         max-width: 100%;
 
-        @include flexbox-grow(1);
+        flex-grow: 1;
 
         &:last-of-type {
             margin: 0;
@@ -1021,7 +1021,7 @@ $color-grey-minor-1: $color-neutral-30;
         .content-column {
             flex: auto;
 
-            @include flexbox-grow(0);
+            flex-grow: 0;
         }
     }
     &--divided {
@@ -1233,8 +1233,8 @@ a {
 }
 
 .value-item {
-    @include flexbox;
-    @include flexbox-direction(row);
+    display: flex;
+    flex-direction: row;
     align-items: center;
 
     font-size: 14px;
@@ -1278,7 +1278,7 @@ a {
         padding-top: 20px;
         max-height: 0;
 
-        @include transition(max-height $animation-timing);
+        transition: max-height $animation-timing;
     }
     .add-modal {
         display: inline;
@@ -1288,14 +1288,14 @@ a {
     &.expanded {
         .filter-by {
             &:before {
-                @include rotate(-180deg);
+                transform: rotate( -180deg);
             }
         }
         .filters {
             display: block;
             max-height: 133px;
 
-            @include animation(fade-in $animation-timing);
+            animation: fade-in $animation-timing;
         }
     }
 }

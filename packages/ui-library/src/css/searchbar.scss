@@ -8,14 +8,14 @@ $searchbar-input-height: 38px;
 
 .searchbar {
     &__bar {
-        @include flexbox();
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
 
         max-width: $searchbar-width;
     }
 
     &__input {
-        @include flexbox-grow(1);
+        flex-grow: 1;
 
         position: relative;
         display: inline-block;
@@ -28,13 +28,13 @@ $searchbar-input-height: 38px;
     }
 
     &__top-line {
-        @include flexbox();
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
         justify-content: space-between;
     }
 
     &__left-control {
-        @include flexbox-grow(1);
+        flex-grow: 1;
 
         max-width: $searchbar-width;
     }
@@ -55,7 +55,7 @@ $searchbar-input-height: 38px;
     }
 
     &--open &__input {
-        @include box-shadow(0 2px 3px rgba(0,0,0,0.1));
+        box-shadow: 0 2px 3px rgba(0,0,0,0.1);
     }
 
     &__filter-link {
@@ -101,7 +101,7 @@ $searchbar-input-height: 38px;
     }
 
     &__filter-actions {
-        @include flexbox-grow(1);
+        flex-grow: 1;
 
         text-align: right;
     }
