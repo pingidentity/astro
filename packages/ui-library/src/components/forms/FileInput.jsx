@@ -7,6 +7,7 @@ import MessageButton from "../buttons/MessageButton";
 import Icon, { iconSizes } from "../general/Icon";
 import classnames from "classnames";
 import FlexRow, { alignments } from "../layout/FlexRow";
+import Text from "../general/Text";
 
 /**
 * @callback FileInput~onRemove
@@ -15,55 +16,55 @@ import FlexRow, { alignments } from "../layout/FlexRow";
 /**
 * @callback FileDrop~onValueChange
 *
-* @param {Object} file
-*     The file object
 * @param {Object} e
 *     The even object provided with the onChange event
+* @param {Object} file
+*     The file object
 */
 
 /**
 * @callback FileInput~onValidateFile
 *
-* @param {boolean} isValidFile
-*     A boolean indicating whether the file type is one the accepted file types.
-* @param {Object} file
-*     The file object
 * @param {Object} e
 *     The even object provided with the onChange event
+* @param {Object} file
+*     The file object
+* @param {boolean} isValidFile
+*     A boolean indicating whether the file type is one the accepted file types.
 */
 
 /**
  * @class FileInput
  * @desc A single-selection component with big icons and titles.
  *
+ * @param {string[]} [accept]
+ *     An optional array of the the allowed file mime types or file extensions.
+ * @param {string} [buttonLabel]
+ *     Adds a custom button label if this prop is provided. If not it will default to "remove".
+ * @param {node} [buttonNode]
+ *     Adds a custom component/element/string instead of the standard remove pill button.
+ * @param {string} [className]
+ *     Optional CSS classname(s) applied to top-level container.
  * @param {string} [data-id="file-drop"]
  *     Defines the "data-id" for top-level HTML container.
- * @param {string[]} [accept]
- *     An optional array of the the allowed file mime types or file extensions.]
+ * @param {string} [error=error]
+ *    The type of error to display on the input (error = red, warning = yellow)
+ * @param {node} [fileName]
+ *     The name of the currently selected file.
  * @param {boolean} [loading]
  *     If the component should show a loading state for uploading files
  * @param {boolean} [noBorder]
  *     If the component shows a line around the upload this will remove it.
- * @param {string} [className]
- *     Optional CSS classname(s) applied to top-level container.
- * @param {node} [fileName]
- *     The name of the currently selected file.
  * @param {FileInput~onRemove} [onRemove]
  *     The callback triggered when the remove file link is clicked.
  * @param {FileInput~onValueChange} [onValueChange]
  *     A callback triggered when a file is dropped or selected.
  * @param {FileInput~onValidateFile} [onValidateFile]
  *     The callback triggered when when a file is selected that idicates if the selected file type matches those allowed by the "accept" prop.
- * @param {Object} [strings]
- *     An object containing the various blurbs of text rendered in the component.
- * @param {string} [buttonLabel]
- *     Adds a custom button label if this prop is provided. If not it will default to "remove".
-  * @param {node} [buttonNode]
- *     Adds a custom component/element/string instead of the standard remove pill button.
- * @param {string} [error=error]
- *    The type of error to display on the input (error = red, warning = yellow)
  * @param {boolean} [required=false]
  *    If true, user is required to upload a file
+ * @param {Object} [strings]
+ *     An object containing the various blurbs of text rendered in the component.
  * @example
  *     <FileInput
  *         onValidate={this._handleValidate}
