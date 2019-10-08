@@ -7,7 +7,6 @@ import MessageButton from "../buttons/MessageButton";
 import Icon, { iconSizes } from "../general/Icon";
 import classnames from "classnames";
 import FlexRow, { alignments } from "../layout/FlexRow";
-import Text from "../general/Text";
 
 /**
 * @callback FileInput~onRemove
