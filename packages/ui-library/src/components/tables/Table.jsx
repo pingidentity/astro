@@ -9,20 +9,22 @@ import HelpHint from "../tooltips/HelpHint";
  *
  * @desc A stateless component for displaying tabular data
  *
+ * @param {Object[]} [bodyData]
+ *      An array of arrays for the body that are ordered in the same was as the headData.
+ * @param {function} [cellRenderers]
+ *      An array of functions to be applied to a specific table cell
+ * @param {string} [className]
+ *      CSS class name for Table.
  * @param {string} [data-id]
  *      Data-id for the component.
  * @param {array} [data]
  *      An array of objects with data in key value pairs.
  * @param {array} [headData]
  *      An array of values for the table head.
- * @param {Object[]} [bodyData]
- *      An array of arrays for the body that are ordered in the same was as the headData.
- * @param {string} [verticalAlignment]
- *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
- * @param {string} [className]
- *      CSS class name for Table.
  * @param {bool} [fullWidth]
  *          Whether or not the table is full-width.
+ * @param {string} [verticalAlignment]
+ *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
  * @param {'auto'|'full'|'full-fixed'} [width]
  *      The width of the table.
  */
