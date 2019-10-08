@@ -4,8 +4,8 @@ pipeline {
   }
   stages {
     stage('npm-publish') {
-      dir("${env.WORKSPACE}/packages/ui-library") {
-        steps {
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo 'Building & publishing ui-library'
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
