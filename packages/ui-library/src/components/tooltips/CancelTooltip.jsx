@@ -5,7 +5,6 @@ import DetailsTooltip from "./DetailsTooltip";
 
 import Button from "../buttons/Button";
 import ButtonGroup from "../layout/ButtonGroup";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
 * @callback CancelTooltip~onCancel
@@ -66,17 +65,13 @@ class CancelTooltip extends React.Component {
         onCancel: PropTypes.func.isRequired,
         positionClassName: PropTypes.string,
         placement: PropTypes.oneOf(Object.values(DetailsTooltip.tooltipPlacements)),
-        flags: flagsPropType,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     render() {
         return (
             <DetailsTooltip
                 data-id={this.props["data-id"] + "-cancel-tooltip"}
                 className="cancel-tooltip"
-                flags={getFlags(this)}
                 label={this.props.label}
                 open={this.props.open}
                 positionClassName={this.props.positionClassName}

@@ -4,7 +4,6 @@ import FlexRow, { alignments, justifyOptions, spacingOptions } from "../componen
 import PageHeader from "../components/general/PageHeader";
 import PageSection from "../components/layout/PageSection";
 import ExpandableRow from "../components/rows/ExpandableRow";
-import { allFlags } from "../util/FlagUtils";
 import Link from "../components/general/Link";
 import { v4 as uuidV4 } from "uuid";
 import Toggle from "../components/forms/form-toggle";
@@ -23,9 +22,9 @@ import InputRow from "../components/layout/InputRow";
  * @desc Gateway Template
  */
 
- 
+
 export default class GatewayTemplate extends Component {
-   
+
     state = {
         showingAddResource: false,
         selectedIndex: 2,
@@ -37,7 +36,7 @@ export default class GatewayTemplate extends Component {
             id: uuidV4(),
         }],
     }
-    
+
     toggleAddResource = () => this.setState((prevState) => ({ showingAddResource: !prevState.showingAddResource }));
 
     render() {
@@ -52,7 +51,7 @@ export default class GatewayTemplate extends Component {
                         title="Gateways"
                         iconName="resource"
                     />
-                
+
                     <Button
                         iconName="add"
                         label="Gateway"
@@ -64,9 +63,8 @@ export default class GatewayTemplate extends Component {
                         <ExpandableRow
                             title="North American Users"
                             subtitle="LDAP/PROXY Gateway"
-                            flags={allFlags}
                             onEditButtonClick={this.toggleAddResource}
-                            rowAccessories={<Toggle flags={["p-stateful"]}/>}
+                            rowAccessories={<Toggle />}
                         >
                             <InputRow>
                                 <PageSection title="Instances" underlined= {false}>

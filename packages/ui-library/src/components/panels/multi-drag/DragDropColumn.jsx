@@ -6,7 +6,6 @@ import HelpHint from "../../tooltips/HelpHint";
 import LinkDropDownList from "../../forms/LinkDropDownList";
 import classnames from "classnames";
 import _ from "underscore";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @class MultiDrag#DragDropColumn
@@ -94,7 +93,6 @@ module.exports = class extends React.Component {
         onAdd: PropTypes.func,
         onRemove: PropTypes.func,
         showCategoryList: PropTypes.bool,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -108,8 +106,6 @@ module.exports = class extends React.Component {
         showCategoryList: false,
         strings: {}
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * Handler for scrolls.  This is useful for implementing lazy loading of rows
@@ -288,7 +284,6 @@ module.exports = class extends React.Component {
                             onClick={this._handleCategoryClick}
                             onToggle={this._handleCategoryToggle}
                             options={categoryOptions}
-                            flags={getFlags(this)}
                         />
                         }
                     </span>

@@ -1,5 +1,4 @@
 jest.dontMock("../FilterSelector");
-import { allFlags } from "../../../util/FlagUtils";
 
 jest.mock("popper.js");
 jest.mock("react-portal");
@@ -26,7 +25,7 @@ describe("FilterSelector", function () {
     ];
 
     function getComponent (props) {
-        return ReactTestUtils.renderIntoDocument(<div><FilterSelector {...props} flags={allFlags}/></div>);
+        return ReactTestUtils.renderIntoDocument(<div><FilterSelector {...props} /></div>);
     }
 
     it("renders with default data-id", function () {

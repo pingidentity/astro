@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 import EllipsisLoader from "../general/EllipsisLoader";
-import { flagsPropType } from "../../util/FlagUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import _ from "underscore";
 
@@ -23,8 +22,6 @@ import _ from "underscore";
  *     Button will not function when true.
  * @param {string} [disabledText]
  *     Text for the help hint will be rendered when the same button has a the prop disabled set to true.
- * @param {array} [flags]
- *     Set the flag for "add-button-margin" to override the special add button margin styling.
  * @param {string} [href]
  *     Pass in a string to give the button an href.
  * @param {string} [iconName]
@@ -134,8 +131,6 @@ function BaseButton ({
     );
 }
 
-BaseButton.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
 const Button = withFocusOutline(BaseButton);
 
 Button.displayName = "Button";
@@ -146,7 +141,6 @@ Button.propTypes = {
     "data-id": PropTypes.string,
     disabled: PropTypes.bool,
     disabledText: PropTypes.string,
-    flags: flagsPropType,
     href: PropTypes.string,
     iconName: PropTypes.string,
     inline: PropTypes.bool,

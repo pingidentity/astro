@@ -6,7 +6,6 @@ jest.dontMock("../left-nav/LeftNavBar");
 jest.dontMock("../../forms/KeywordSearch.jsx");
 
 import { mount } from "enzyme";
-import { allFlags } from "../../../util/FlagUtils";
 import { snapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("AppFrame", () => {
@@ -82,7 +81,6 @@ describe("AppFrame", () => {
         leftNavBarProps: {
             openSections: { "section-3": true }
         },
-        flags: allFlags,
     });
 
     function getWrappedComponent(opts) {

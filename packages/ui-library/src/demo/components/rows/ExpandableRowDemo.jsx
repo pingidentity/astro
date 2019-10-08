@@ -276,7 +276,6 @@ class ExpandableRowDemo extends React.Component {
                     <ExpandableRow
                         editButton={
                             <ConfirmTooltip
-                                flags={this.props.flags}
                                 label=" "
                                 className="edit-btn left"
                             >Confirm?</ConfirmTooltip>

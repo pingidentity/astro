@@ -17,7 +17,6 @@ import If from "./If";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import StateContainer, { toggleTransform } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
@@ -119,7 +118,6 @@ class Stateless extends React.Component {
         internalError: PropTypes.string, // internal use only, leaving out of JSDocs on purpose
         onError: PropTypes.func,
         width: PropTypes.oneOf(InputWidthProptypes),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -133,8 +131,6 @@ class Stateless extends React.Component {
         internalError: "",
         width: InputWidths.SM,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * Toggle the color picker. If a mouse click happens outside the color picker area and if the color picker is open.
@@ -368,7 +364,6 @@ ColorPicker.displayName = "ColorPicker";
 
 ColorPicker.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
     useInternalError: PropTypes.bool, // this appears in the JSDocs for the main component
 };
 
@@ -377,7 +372,5 @@ ColorPicker.defaultProps = {
 };
 
 ColorPicker._statelessComponent = Stateless; // this is to enable testing
-
-ColorPicker.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default ColorPicker;

@@ -4,7 +4,6 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import FormIntegerField from "../v2";
 import TestUtils from "../../../../testutil/TestUtils";
-import { allFlags } from "../../../../util/FlagUtils";
 import StateContainer from "../../../utils/StateContainer";
 
 jest.dontMock("../v2");
@@ -18,7 +17,7 @@ describe("FormIntegerField v4", function () {
 
     function getComponent (opts={}) {
         opts.onValueChange = jest.fn();
-        return TestUtils.renderInWrapper(<FormIntegerField {...opts} flags={allFlags} />);
+        return TestUtils.renderInWrapper(<FormIntegerField {...opts} />);
     }
 
     const getInput = component => (
@@ -40,7 +39,7 @@ describe("FormIntegerField v4", function () {
 
     it("test default render with simple label", function () {
         const component = TestUtils.renderInWrapper(
-            <FormIntegerField labelText = "Default Integer Box" onValueChange = {callback} flags={allFlags} />
+            <FormIntegerField labelText = "Default Integer Box" onValueChange = {callback} />
         );
 
         //Expect a single integer field to be rendered with default data-id.
@@ -58,7 +57,7 @@ describe("FormIntegerField v4", function () {
 
     it("test up/down key press and up/down spinner press", function () {
         const component = TestUtils.renderInWrapper(
-            <FormIntegerField data-id="int" onValueChange = {callback} value = {40} flags={allFlags} />
+            <FormIntegerField data-id="int" onValueChange = {callback} value = {40} />
         );
 
         //Expect a single input to be renderd with initial value of 40
@@ -108,7 +107,7 @@ describe("FormIntegerField v4", function () {
 
     it("disables up/down keys when in read only mode", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField data-id="int" readOnly={true} onValueChange={callback} value={40} flags={allFlags} />
+            <FormIntegerField data-id="int" readOnly={true} onValueChange={callback} value={40} />
         );
         const input = TestUtils.findRenderedDOMNodeWithDataId(component,"int-text-field-input");
         ReactTestUtils.Simulate.keyDown(input, { key: "up arrow", keyCode: 38, which: 38 } );
@@ -117,7 +116,7 @@ describe("FormIntegerField v4", function () {
 
     it("shows field as required", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField onChange={callback} required={true} flags={allFlags} />
+            <FormIntegerField onChange={callback} required={true} />
         );
 
         const isRequired = TestUtils.findRenderedDOMNodeWithClass(component, "required");
@@ -126,7 +125,7 @@ describe("FormIntegerField v4", function () {
 
     it("shows placeholder", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField onChange={callback} placeholder="Enter a number" flags={allFlags} />
+            <FormIntegerField onChange={callback} placeholder="Enter a number" />
         );
         // verify that the component is rendered
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -135,7 +134,7 @@ describe("FormIntegerField v4", function () {
 
     it("fires the onValueChange callback when field changes", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField onValueChange={callback} flags={allFlags} />
+            <FormIntegerField onValueChange={callback} />
         );
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "3" } } );
@@ -147,7 +146,7 @@ describe("FormIntegerField v4", function () {
         const errorMessage = "help!";
 
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField errorMessage={errorMessage} onValueChange={callback} flags={allFlags} />
+            <FormIntegerField errorMessage={errorMessage} onValueChange={callback} />
         );
 
         const errorMessageEl = TestUtils.findRenderedDOMNodeWithDataId(
@@ -158,7 +157,7 @@ describe("FormIntegerField v4", function () {
 
     it("triggers onBlur event", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField onBlur={callback} flags={allFlags} />
+            <FormIntegerField onBlur={callback} />
         );
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.blur(input);
@@ -174,7 +173,6 @@ describe("FormIntegerField v4", function () {
                 min={3}
                 value={4}
                 increment={3}
-                flags={allFlags}
             />
         );
 
@@ -199,7 +197,7 @@ describe("FormIntegerField v4", function () {
         jest.useFakeTimers();
 
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} flags={allFlags} />
+            <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} />
         );
 
         const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "integer-controls");
@@ -214,7 +212,7 @@ describe("FormIntegerField v4", function () {
     it("is autoincrementing field while spinner is pressed", function () {
 
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField data-id="int" onValueChange={callback} value={1} flags={allFlags} />
+            <FormIntegerField data-id="int" onValueChange={callback} value={1} />
         );
 
         const spinnerUp = TestUtils.findRenderedDOMNodeWithDataId(component, "int-up-btn");
@@ -232,10 +230,10 @@ describe("FormIntegerField v4", function () {
     it("it assigns tabIndex when specified", function () {
 
         const noTabIndex = TestUtils.renderInWrapper (
-            <FormIntegerField onChange={callback} value={1} flags={allFlags} />
+            <FormIntegerField onChange={callback} value={1} />
         );
         const withTabIndex = TestUtils.renderInWrapper (
-            <FormIntegerField onChange={callback} value={1} tabIndex={10} flags={allFlags} />
+            <FormIntegerField onChange={callback} value={1} tabIndex={10} />
         );
 
         // check default tabIndex
@@ -251,7 +249,7 @@ describe("FormIntegerField v4", function () {
         const onChange = function () {};
         const helpText = "Disabled with help text";
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField onChange={onChange} value={1} labelHelpText={helpText} disabled={true} flags={allFlags} />
+            <FormIntegerField onChange={onChange} value={1} labelHelpText={helpText} disabled={true} />
         );
 
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -261,7 +259,7 @@ describe("FormIntegerField v4", function () {
 
     it("the min value is used as default on spinner mouse down if provided value is NaN", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField data-id="int" onValueChange={callback} flags={allFlags} />
+            <FormIntegerField data-id="int" onValueChange={callback} />
         );
 
         const spinnerUp = TestUtils.findRenderedDOMNodeWithDataId(component, "int-up-btn");
@@ -275,7 +273,7 @@ describe("FormIntegerField v4", function () {
 
     it("the min value is used as default on field key down if provided value is NaN", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField data-id="int" onValueChange={callback} flags={allFlags} />
+            <FormIntegerField data-id="int" onValueChange={callback} />
         );
 
         const input = TestUtils.findRenderedDOMNodeWithDataId(component,"int-text-field-input");
@@ -287,7 +285,7 @@ describe("FormIntegerField v4", function () {
 
     it("show initial value if provided to stateful component", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField initialValue="123" onValueChange={callback} flags={allFlags} />
+            <FormIntegerField initialValue="123" onValueChange={callback} />
         );
 
         //Expect a single checkbox to be rendered with default data-id.
@@ -301,7 +299,7 @@ describe("FormIntegerField v4", function () {
 
     it("does trigger onValueChange for empty value in stateful component", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField onValueChange={callback} flags={allFlags} />
+            <FormIntegerField onValueChange={callback} />
         );
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "" } } );
@@ -316,7 +314,6 @@ describe("FormIntegerField v4", function () {
                 onValueChange={callback}
                 showReveal={true}
                 maskValue={true}
-                flags={allFlags}
             />
         );
 
@@ -333,7 +330,6 @@ describe("FormIntegerField v4", function () {
         const component = TestUtils.renderInWrapper (
             <FormIntegerField
                 className="added"
-                flags={allFlags}
             />
         );
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "added")).not.toBeNull();
@@ -341,7 +337,7 @@ describe("FormIntegerField v4", function () {
 
     it("hides controls", function () {
         const component = TestUtils.renderInWrapper (
-            <FormIntegerField hideControls={true} flags={allFlags} />);
+            <FormIntegerField hideControls={true} />);
 
         const spinnerUp = TestUtils.findRenderedDOMNodeWithDataId(component, "int-up-btn");
         const spinnerDown = TestUtils.findRenderedDOMNodeWithDataId(component, "int-down-btn");

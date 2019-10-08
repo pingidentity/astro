@@ -5,7 +5,6 @@ import Anchor from "../../general/Anchor";
 
 import _ from "underscore";
 import { getIconClassName } from "../../../util/PropUtils";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 class EnvironmentSelector extends React.Component {
     state = { open: false };
@@ -17,7 +16,6 @@ class EnvironmentSelector extends React.Component {
         options: PropTypes.array,
         environment: PropTypes.string,
         newEnvironmentLabel: PropTypes.string,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -27,8 +25,6 @@ class EnvironmentSelector extends React.Component {
         environment: "",
         newEnvironmentLabel: "+ New environment",
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _handleToggle = () => this.setState({ open: !this.state.open });
 
@@ -95,7 +91,6 @@ class EnvironmentSelector extends React.Component {
                 selectedOption={selectedOption}
                 className="environment-selector left"
                 bottomPanel={bottomPanel}
-                flags={getFlags(this)}
             />
         );
     };

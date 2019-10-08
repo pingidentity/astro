@@ -10,7 +10,6 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { InputWidthClasses } from "../../forms/InputWidths";
-import { allFlags } from "../../../util/FlagUtils";
 
 describe("UnitInput", function () {
     var React = require("react"),
@@ -48,7 +47,6 @@ describe("UnitInput", function () {
                     className: InputWidthClasses.SM,
                     ...dropDownListProps
                 }}
-                flags={allFlags}
                 {...props}
             />
         );

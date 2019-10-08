@@ -12,7 +12,6 @@ import Icon from "../../../components/general/Icon";
 import InputRow from "../../../components/layout/InputRow";
 import LinkDropDownList from "../../../components/forms/LinkDropDownList";
 import Padding, { sizes as paddingSizes } from "../../../components/layout/Padding";
-import { allFlags } from "../../../util/FlagUtils";
 
 /**
  * @class Column Selector Demo
@@ -242,7 +241,6 @@ export default class ColumnSelectorDemo extends Component {
                         <ConfirmTooltip
                             label={
                                 <FormToggle
-                                    flags={allFlags}
                                     toggled={this.state.inheritPopulations}
                                 />
                             }
@@ -252,7 +250,6 @@ export default class ColumnSelectorDemo extends Component {
                             open={this.state.rowTooltipOpen}
                             placement="top left"
                             title="Inherit future populations"
-                            flags={allFlags}
                         >
                             There are populations within this environment that haven’t
                             been added to memberships. Turning this feature on will
@@ -263,7 +260,6 @@ export default class ColumnSelectorDemo extends Component {
                             subtitle="Allow automatic memberships"
                         />
                         <HelpHint
-                            flags={allFlags}
                             hintText="When this feature is on, any future
                                 populations added to this environment will
                                 automatically be added to the memberships

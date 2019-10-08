@@ -215,7 +215,6 @@ export default class CustomDomainName extends Component {
     renderButtonBar () {
         if (this.state.selectedStatus === statuses.SUCCESS) {
             return (<ButtonBar
-                flags={this.props.flags}
                 onCancel={this._handleNeedsVerification}
                 onSave={this._handleSave}
                 cancelText="Close"
@@ -264,7 +263,6 @@ export default class CustomDomainName extends Component {
         return (
             <Stack gap="LG">
                 <FormTextArea
-                    flags={this.props.flags}
                     labelText="Certificate"
                     description="Description of what the certificate is and so on"
                     required
@@ -274,7 +272,6 @@ export default class CustomDomainName extends Component {
                         " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
                 />
                 <FormTextArea
-                    flags={this.props.flags}
                     labelText="Private Key"
                     description="Description of what the private key is and so on"
                     required
@@ -284,7 +281,6 @@ export default class CustomDomainName extends Component {
                         " - - - BEGIN PRIVATE KEY - - - Private Key Code - - - END PRIVATE KEY - - -"
                 />
                 <FormTextArea
-                    flags={this.props.flags}
                     labelText="Intermediate Certificate (optional)"
                     description="Description of what the intermediate certificate is and so on"
                     noResize
@@ -293,7 +289,6 @@ export default class CustomDomainName extends Component {
                         " - - - BEGIN CERTIFICATE - - - Certificate Code - - - END CERTIFICATE - - -"
                 />
                 <ButtonBar
-                    flags={this.props.flags}
                     onCancel={this._toggleModalClosed}
                     onSave={this._handleSslSave}
                     cancelText="Cancel"
@@ -316,7 +311,6 @@ export default class CustomDomainName extends Component {
                         activatorContent={
                             <Button label="Add SSL Certificate" type={buttonTypes.PRIMARY}/>
                         }
-                        flags={["p-stateful", "use-portal"]}
                         expanded={this.state.modalButtonExpanded}
                         onOpen={this._toggleOpen}
                         onClose={this._toggleModalClosed}
@@ -333,7 +327,6 @@ export default class CustomDomainName extends Component {
         } else if (this.state.domainState === domainStates.complete) {
             return (
                 <Modal
-                    flags={this.props.flags}
                     data-id="ssl-modal"
                     modalTitle="Edit SSL Certificate"
                     expanded={this.state.editModal}
@@ -358,7 +351,6 @@ export default class CustomDomainName extends Component {
                     activatorContent={
                         <Button label="Remove Domain" inline/>
                     }
-                    flags={["p-stateful", "use-portal"]}
                     expanded={this.state.modalConfirm}
                     onOpen={this._toggleModalConfirm}
                 >
@@ -376,7 +368,6 @@ export default class CustomDomainName extends Component {
             this.state.domainState === domainStates.needsSsl) {
             return (
                 <Modal
-                    flags={["p-stateful", "use-portal"]}
                     expanded={this.state.modalConfirm}
                     onOpen={this._toggleModalConfirm}
                 >
@@ -472,7 +463,6 @@ export default class CustomDomainName extends Component {
         const formText = (
             <FormTextField
                 dataId="requiredTextField"
-                flags={this.props.flags}
                 required={true}
                 onValueChange={this._handleValueChange}
                 value={this.state.requiredValue}
@@ -565,7 +555,6 @@ export default class CustomDomainName extends Component {
                                     }}
                                     onValueChange={this._handleColorChange("backgroundColor")}
                                     labelText="Background Color"
-                                    flags={this.props.flags}
                                 />
                             </Layout.Column>
                         </Layout.Row>
@@ -585,7 +574,6 @@ export default class CustomDomainName extends Component {
                             <InputRow>
                                 {this.renderFields()}
                                 <Modal
-                                    flags={this.props.flags}
                                     data-id="domain-modal"
                                     modalTitle="Verify Custom Domain"
                                     expanded={this.state.expanded}

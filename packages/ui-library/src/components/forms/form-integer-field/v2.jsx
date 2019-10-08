@@ -7,7 +7,6 @@ import classnames from "classnames";
 import _ from "underscore";
 import { isInt } from "validator";
 import StateContainer, { toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType } from "../../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 const isValid = (value, enforceRange, min, max) => {
@@ -531,11 +530,9 @@ FormIntegerField.displayName = "FormIntegerField";
 
 FormIntegerField.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
 
 FormIntegerField._statelessComponent = Stateless;
-FormIntegerField.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 /**
  * @alias FormIntegerField.isValid

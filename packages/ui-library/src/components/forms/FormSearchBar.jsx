@@ -7,7 +7,6 @@ import Anchor from "../general/Anchor";
 import _ from "underscore";
 import { InputWidths } from "../forms/InputWidths";
 import { lightInputs } from "../../util/CSSModifiers";
-import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class FormSearchBar
@@ -52,7 +51,6 @@ class SearchBar extends React.Component {
         "data-id": PropTypes.string,
         disableFilters: PropTypes.bool,
         rightControl: PropTypes.node,
-        flags: flagsPropType,
     };
 
     static defaultProps = {

@@ -8,7 +8,6 @@ import update from "re-mutable";
 import FormSearchBox from "../../forms/FormSearchBox";
 import InputRow from "../../layout/InputRow";
 import _ from "underscore";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @typedef {object} MultiDrag~IndexesDescriptor
@@ -262,7 +261,6 @@ class MultiDragStateless extends React.Component {
         onDragStart: PropTypes.func,
         onDragEnd: PropTypes.func,
         strings: PropTypes.objectOf(PropTypes.string),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -276,8 +274,6 @@ class MultiDragStateless extends React.Component {
         showCategoryFilterOnAllColumns: false,
         strings: {}
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * This function will compare the current move to the last reported drag and if there is no change
@@ -406,7 +402,6 @@ class MultiDragStateless extends React.Component {
                 data-id={"DragDropColumn-" + index}
                 showCount={index > 0}
                 strings={this.props.strings}
-                flags={getFlags(this)}
             />
         );
     }

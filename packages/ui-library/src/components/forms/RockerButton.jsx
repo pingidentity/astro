@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 import _ from "underscore";
-import { flagsPropType } from "../../util/FlagUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import { inStateContainer } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
@@ -209,9 +208,6 @@ RockerButton.displayName = "RockerButton";
 
 RockerButton.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
-
-RockerButton.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default RockerButton;

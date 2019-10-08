@@ -9,7 +9,6 @@ import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import Section from "../Section";
 import TestUtils from "../../../testutil/TestUtils";
 import _ from "underscore";
-import { allFlags } from "../../../util/FlagUtils";
 import StateContainer from "../../utils/StateContainer";
 
 describe("Section v4", function () {
@@ -18,7 +17,6 @@ describe("Section v4", function () {
         children: "content",
         "data-id": "my-section",
         title: "My Section",
-        flags: allFlags,
     };
 
     const getComponent = (opts) => {
@@ -33,7 +31,6 @@ describe("Section v4", function () {
                 expanded
                 detailsText="Quite detailed, really"
                 titleValue="BORK BORK BORK"
-                flags={allFlags}
             >
                 Some very important stuff
             </Section>

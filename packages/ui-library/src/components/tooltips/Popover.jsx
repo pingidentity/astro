@@ -5,7 +5,6 @@ import _ from "underscore";
 import PopperContainer from "./PopperContainer";
 
 import popsOver from "../../util/behaviors/popsOver";
-import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class Popover
@@ -45,7 +44,6 @@ class PopoverBase extends React.Component {
         "data-parent": PropTypes.string,
         children: PropTypes.node,
         className: PropTypes.string,
-        flags: flagsPropType,
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         onPopperClick: PropTypes.func,
         onKeyDown: PropTypes.func,
@@ -68,8 +66,6 @@ class PopoverBase extends React.Component {
         popperClassName: "",
         padded: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * Check if placement contains a word (like top, right, or left)

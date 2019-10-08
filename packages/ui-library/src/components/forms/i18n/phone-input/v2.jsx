@@ -7,7 +7,6 @@ import CountryFlagList from "../CountryFlagList";
 import { v2 as FormTextField } from "../../form-text-field";
 import Validators from "../../../../util/Validators";
 import { inStateContainer, toggleTransform } from "../../../utils/StateContainer";
-import { flagsPropType, getFlags } from "../../../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../../../util/DeprecationUtils";
 
 /**
@@ -129,7 +128,6 @@ class I18nPhoneInputStateless extends Component {
         autoFocus: PropTypes.bool,
         useAutoComplete: PropTypes.bool,
         disabled: PropTypes.bool,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -152,8 +150,6 @@ class I18nPhoneInputStateless extends Component {
         useAutoComplete: false,
         disabled: false
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _getCountryCode() {
         const {
@@ -234,7 +230,6 @@ class I18nPhoneInputStateless extends Component {
                     setSearchTime={this.props.setSearchTime}
                     name={this.props.name ? this.props.name+"-country" : null}
                     onSearch={this.props.onSearch}
-                    flags={getFlags(this)}
                 />
                 <FormTextField
                     data-id={this.props["data-id"] + "-phoneNumber"}
@@ -286,8 +281,6 @@ I18nPhoneInput.displayName = "PhoneInput";
 I18nPhoneInput.propTypes = {
     stateless: deprecatedStatelessProp
 };
-
-I18nPhoneInput.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 I18nPhoneInput.I18nPhoneInputStateless = I18nPhoneInputStateless;
 

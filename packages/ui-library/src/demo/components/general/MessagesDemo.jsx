@@ -186,7 +186,6 @@ class MessagesDemo extends React.Component {
                     data-id="messages"
                     messages={this.props.messages}
                     onRemoveMessage={this.actions.removeAt}
-                    flags={this.props.flags}
                     defaultMessageLayout={this.state.cornerDefault ? Messages.Layouts.CORNER : undefined}
                 />
                 <Messages
@@ -194,7 +193,6 @@ class MessagesDemo extends React.Component {
                     containerId="messages-i18n"
                     messages={this.props["messages-i18n"]}
                     onRemoveMessage={this.actions.removeAt}
-                    flags={this.props.flags}
                     onI18n={this._onI18n}
                     defaultMessageLayout={this.state.cornerDefault ? Messages.Layouts.CORNER : undefined}
                 />

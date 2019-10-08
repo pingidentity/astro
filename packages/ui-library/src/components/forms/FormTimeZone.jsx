@@ -14,7 +14,6 @@ import _ from "underscore";
 import StateContainer, { toggleTransform } from "../utils/StateContainer";
 
 import Popover from "../tooltips/Popover";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 const PopoverBase = Popover.Base;
@@ -239,7 +238,6 @@ class TimeZoneStateless extends React.Component {
         selectLabel: PropTypes.string,
         selectedIndex: PropTypes.number,
         value: PropTypes.string,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -261,8 +259,6 @@ class TimeZoneStateless extends React.Component {
         selectedIndex: 0,
         value: moment.tz.guess(),
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     constructor(props) {
         super(props);
@@ -559,7 +555,6 @@ class TimeZoneStateless extends React.Component {
                     open={this.props.open}
                     placement="right"
                     padded
-                    flags={getFlags(this)}
                     popperClassName={classnames("input-timezone", classNames)}
                     onPopperClick={this._focusSearch}
                 >
@@ -634,14 +629,11 @@ export default class FormTimeZone extends React.Component {
 
     static propTypes = {
         stateless: deprecatedStatelessProp,
-        flags: flagsPropType,
     };
 
     static _statelessComponent = TimeZoneStateless; // this is to enable testing
 
     static getZoneNameDisplayValue = getZoneNameDisplayValue;
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     isValidTimeZone = isValidTimeZone;
 

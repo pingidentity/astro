@@ -7,7 +7,6 @@ import FormDropDownList from "../forms/FormDropDownList";
 import moment from "moment-range";
 import Translator from "../../util/i18n/Translator.js";
 import classnames from "classnames";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 
 /**
@@ -54,7 +53,6 @@ module.exports = class extends React.Component {
             PropTypes.object
         ]),
         onValueChange: PropTypes.func.isRequired,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -63,8 +61,6 @@ module.exports = class extends React.Component {
         value: "12:00pm",
         "data-id": "time-picker",
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     constructor(props) {
         super(props);
@@ -229,7 +225,6 @@ module.exports = class extends React.Component {
                 validSearchCharsRegex="/[^\d:\s]+/"
                 title={value}
                 noneOption={noTime}
-                flags={getFlags(this)}
             />
         );
     }

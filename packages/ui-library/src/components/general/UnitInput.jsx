@@ -8,7 +8,6 @@ import FormTextField from "../forms/form-text-field";
 import FormMessage from "../forms/FormMessage";
 import FormLabel from "../forms/FormLabel";
 import classnames from "classnames";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
  * @class UnitInput
@@ -37,7 +36,6 @@ module.exports = class extends React.Component {
         labelHelpText: PropTypes.string,
         textFieldProps: PropTypes.object,
         dropDownListProps: PropTypes.object,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -45,8 +43,6 @@ module.exports = class extends React.Component {
         textFieldProps: {},
         dropDownListProps: {},
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     render() {
         const containerClassName = classnames(
@@ -57,7 +53,7 @@ module.exports = class extends React.Component {
                 "form-error": this.props.errorMessage,
             }
         );
-        
+
         const {
             className: textFieldClassName = "",
             ...textFieldProps
@@ -84,7 +80,6 @@ module.exports = class extends React.Component {
                 />
                 <FormDropDownList
                     {...dropDownProps}
-                    flags={getFlags(this)}
                     className={ classnames(
                         dropDownClassName,
                         {

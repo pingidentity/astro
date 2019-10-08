@@ -88,12 +88,6 @@ describe("RockerButton", function () {
         expect(callback).not.toBeCalled();
     });
 
-    it("doesn't fire Cannonball warnings if required flags are provided", function() {
-        console.warn = jest.fn();
-        getComponent();
-        expect(console.warn).not.toBeCalled();
-    });
-
     it("renders component", () => {
         const modal = mount(
             <RockerButton

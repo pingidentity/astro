@@ -211,7 +211,6 @@ describe("FileUpload", function () {
     it("renders node if given node as default image", () => {
         const component = mount(
             <FileUpload
-                flags={["true-default"]}
                 defaultImage={<div data-id="default-test" />}
             />
         );

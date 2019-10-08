@@ -7,7 +7,6 @@ jest.dontMock("../../../../util/Utils");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { allFlags } from "../../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("MultiDrag v4", function () {
@@ -46,7 +45,6 @@ describe("MultiDrag v4", function () {
                     showCategoryList: true },
                 { name: "Added Rows", id: 2, rows: addedRows, filteredRows: addedRows }
             ],
-            flags: allFlags,
         });
 
         var WrappedComponent = wrapInTestContext(MultiDrag);
@@ -77,7 +75,6 @@ describe("MultiDrag v4", function () {
                         showCategoryList: true },
                     { name: "Added Rows", id: 2, rows: addedRows, filteredRows: addedRows }
                 ]}
-                flags={allFlags}
             />
         ));
         mountSnapshotDataIds(<WithContext />);

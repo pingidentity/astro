@@ -12,7 +12,6 @@ jest.dontMock("../../buttons/Button.jsx");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { allFlags } from "../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("Step", function () {
@@ -41,7 +40,6 @@ describe("Step", function () {
             title: "Test Step",
             titleSelection: "title selection",
             hintText: "hint",
-            flags: allFlags,
         };
 
         return ReactTestUtils.renderIntoDocument(
@@ -62,7 +60,6 @@ describe("Step", function () {
             labelDone: "xxxdone",
             titleSelection: "title selection",
             hintText: "hint",
-            flags: allFlags,
         };
 
         return ReactTestUtils.renderIntoDocument(
@@ -84,7 +81,6 @@ describe("Step", function () {
                 labelDone="done"
                 titleSelection="title selection"
                 hintText="hint"
-                flags={allFlags}
                 showEdit
             />
         );

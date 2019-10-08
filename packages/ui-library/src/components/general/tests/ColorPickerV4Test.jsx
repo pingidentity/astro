@@ -54,7 +54,6 @@ describe("ColorPicker v4", function () {
                 onValueChange={jest.fn()}
                 onError={jest.fn()}
                 color={"#fff"}
-                flags={[ "use-portal", "p-stateful" ]}
             />
         );
     });

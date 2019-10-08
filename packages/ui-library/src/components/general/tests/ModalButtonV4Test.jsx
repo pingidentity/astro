@@ -3,7 +3,6 @@
 import { mount } from "enzyme";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import StateContainer from "../../utils/StateContainer";
-import { allFlags } from "../../../util/FlagUtils";
 
 jest.mock("react-portal");
 
@@ -32,7 +31,7 @@ describe("ModalButtonTest v4", function () {
     const getCloseLink = component => component.find("span.close-modal");
 
     function getComponentWithoutDefaults (opts) {
-        return mount(<ModalButton {...opts} flags={allFlags} />);
+        return mount(<ModalButton {...opts} />);
     }
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {

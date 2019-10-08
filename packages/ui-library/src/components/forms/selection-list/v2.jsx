@@ -1,8 +1,6 @@
-import PropTypes from "prop-types";
 import Constants from "./v2-constants";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import SelectionListStateless from "./v2-stateless";
-import { flagsPropType } from "../../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
@@ -115,7 +113,6 @@ SelectionList.displayName = "SelectionList";
 
 SelectionList.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
 
 SelectionList.defaultProps = {
@@ -130,7 +127,5 @@ SelectionList.reducer = require("./v2-reducer"); // according to our new standar
 
 SelectionList.ListType = Constants.ListType;
 SelectionList.listType = Constants.ListType; // according to our new standard
-
-SelectionList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default SelectionList;

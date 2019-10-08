@@ -3,7 +3,6 @@ import PropTypes from "prop-types" ;
 import classnames from "classnames";
 import _ from "underscore";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType } from "../../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
@@ -109,10 +108,7 @@ Toggle.displayName = "Toggle";
 
 Toggle.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
-
-Toggle.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 Toggle.Status = Status;
 

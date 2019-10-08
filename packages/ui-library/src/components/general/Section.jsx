@@ -8,7 +8,6 @@ import CollapsibleLink from "./CollapsibleLink";
 import classnames from "classnames";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import _ from "underscore";
-import { flagsPropType } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
@@ -213,10 +212,7 @@ const Section = inStateContainer([
 Section.displayName = "Section";
 
 Section.propTypes = {
-    flags: flagsPropType,
     stateless: deprecatedStatelessProp,
 };
-
-Section.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default Section;

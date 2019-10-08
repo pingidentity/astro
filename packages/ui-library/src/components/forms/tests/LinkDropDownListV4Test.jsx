@@ -5,8 +5,6 @@ jest.dontMock("../../tooltips/DetailsTooltip");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { allFlags } from "../../../util/FlagUtils";
-
 describe("LinkDropDownList v4", function () {
 
     var React = require("react"),
@@ -35,7 +33,6 @@ describe("LinkDropDownList v4", function () {
             onToggle: jest.fn(),
             options: options,
             selectedOption: options[selectedIndex],
-            flags: allFlags,
         });
         return TestUtils.renderInWrapper(<LinkDropDownList {...opts} />);
     }

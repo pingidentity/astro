@@ -15,7 +15,6 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import Modal from "../Modal";
 import _ from "underscore";
-import { allFlags } from "../../../util/FlagUtils";
 const Wrapper = TestUtils.UpdatePropsWrapper;
 
 describe("ModalTest v4", function () {
@@ -33,7 +32,6 @@ describe("ModalTest v4", function () {
         const modalDefaults = _.defaults(opts || {}, {
             onOpen: jest.fn(),
             onClose: jest.fn().mockReturnValue(true),
-            flags: allFlags,
         });
 
         return ReactTestUtils.renderIntoDocument(<Modal {...modalDefaults} />);
@@ -43,7 +41,6 @@ describe("ModalTest v4", function () {
         mountSnapshotDataIds(
             <Modal
                 expanded
-                flags={allFlags}
             />
         );
     });

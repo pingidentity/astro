@@ -2,7 +2,7 @@ import React from "react";
 import Multivalues from "../../../components/forms/Multivalues";
 import InputRow from "../../../components/layout/InputRow";
 import userOptions from "./data/userOptions";
-import FormCheckbox from '../../../components/forms/FormCheckbox';
+import FormCheckbox from "../../../components/forms/FormCheckbox";
 
 /**
 * @name MultivaluesDemo

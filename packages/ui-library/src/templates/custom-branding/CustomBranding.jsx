@@ -124,7 +124,6 @@ export default class CustomBranding extends Component {
                 <Stack gap="XL">
                     <DetailsTooltip
                         data-id="details-tooltip"
-                        flags={this.props.flags}
                         label={(
                             <Button type="button" className="delete-btn" inline type="secondary">
                             Restore Defaults
@@ -242,7 +241,6 @@ export default class CustomBranding extends Component {
                                     </div>
                                 </div>
                             }
-                            flags={this.props.flags}
                         />
                     </PageSection>
                     <PageSection
@@ -268,7 +266,6 @@ export default class CustomBranding extends Component {
                                             </div>
                                         </div>
                                     }
-                                    flags={this.props.flags}
                                 />
                                 <ColorPicker
                                     data-id="color-picker-button-font"
@@ -287,7 +284,6 @@ export default class CustomBranding extends Component {
                                             </div>
                                         </div>
                                     }
-                                    flags={this.props.flags}
                                 />
                             </Layout.Column>
                         </Layout.Row>
@@ -315,7 +311,6 @@ export default class CustomBranding extends Component {
                                             </div>
                                         </div>
                                     }
-                                    flags={this.props.flags}
                                 />
                                 <ColorPicker
                                     data-id="color-picker-text-font"
@@ -332,7 +327,6 @@ export default class CustomBranding extends Component {
                                             </div>
                                         </div>
                                     }
-                                    flags={this.props.flags}
                                 />
                                 <ColorPicker
                                     data-id="color-picker-text-link"
@@ -351,7 +345,6 @@ export default class CustomBranding extends Component {
                                             </div>
                                         </div>
                                     }
-                                    flags={this.props.flags}
                                 />
                                 <ColorPicker
                                     data-id="color-picker-text-header"
@@ -370,7 +363,6 @@ export default class CustomBranding extends Component {
                                             </div>
                                         </div>
                                     }
-                                    flags={this.props.flags}
                                 />
                             </Layout.Column>
                         </Layout.Row>
@@ -387,7 +379,6 @@ export default class CustomBranding extends Component {
                                         width={InputWidths.SM}
                                         value={this.state.registrationPageHeader}
                                         data-id="registration-page-header"
-                                        flags={this.props.flags}
                                         labelHelpText={
                                             <div data-id="helphint-registration-page-header">
                                                 <Image
@@ -409,7 +400,6 @@ export default class CustomBranding extends Component {
                                         width={InputWidths.XL}
                                         value={this.state.registrationPageText}
                                         data-id="registration-page-text"
-                                        flags={this.props.flags}
                                         labelHelpText={
                                             <div data-id="helphint-registration-page-text">
                                                 <Image
@@ -433,7 +423,6 @@ export default class CustomBranding extends Component {
                                         width={InputWidths.SM}
                                         value={this.state.loginPageHeader}
                                         data-id="login-page-header"
-                                        flags={this.props.flags}
                                         labelHelpText={
                                             <div data-id="helphint-login-page-header">
                                                 <Image
@@ -455,7 +444,6 @@ export default class CustomBranding extends Component {
                                         width={InputWidths.XL}
                                         value={this.state.loginPageText}
                                         data-id="login-page-text"
-                                        flags={this.props.flags}
                                         labelHelpText={
                                             <div data-id="helphint-login-page-text">
                                                 <Image
@@ -479,7 +467,6 @@ export default class CustomBranding extends Component {
                                         width={InputWidths.SM}
                                         value={this.state.resetPasswordHeader}
                                         data-id="reset-password-header"
-                                        flags={this.props.flags}
                                         labelHelpText={
                                             <div data-id="helphint-reset-password-header">
                                                 <Image
@@ -501,7 +488,6 @@ export default class CustomBranding extends Component {
                                         width={InputWidths.XL}
                                         value={this.state.resetPasswordText}
                                         data-id="reset-password-text"
-                                        flags={this.props.flags}
                                         labelHelpText={
                                             <div data-id="helphint-reset-password-text">
                                                 <Image
@@ -523,7 +509,6 @@ export default class CustomBranding extends Component {
                         </Layout.Row>
                     </PageSection>
                     <ButtonBar
-                        flags={this.props.flags}
                         onCancel={this._handleDiscard}
                         onSave={this._handleSave}
                         cancelText="Discard Changes"

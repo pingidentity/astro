@@ -10,7 +10,6 @@ jest.dontMock("../../forms/ButtonBar");
 jest.dontMock("../../../util/format.js");
 jest.dontMock("../../tooltips/CancelTooltip");
 jest.dontMock("../../tooltips/DetailsTooltip");
-import { allFlags } from "../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("Wizard v4", function () {
@@ -32,7 +31,7 @@ describe("Wizard v4", function () {
 
     function getRenderedComponentWithProps (props, steps) {
         return ReactTestUtils.renderIntoDocument(
-            <Wizard {...props} flags={allFlags}>
+            <Wizard {...props}>
                 {steps ? steps : ([
                     <Step title="step 1">Step 1</Step>,
                     <Step title="step 2">Step 2</Step>,

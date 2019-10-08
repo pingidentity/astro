@@ -7,7 +7,6 @@ import SearchBox from "../components/forms/FormSearchBox";
 import PageSection from "../components/layout/PageSection";
 import ExpandableRow from "../components/rows/ExpandableRow";
 import { TabSet, TabContent } from "../components/layout/TabSet";
-import { allFlags } from "../util/FlagUtils";
 import Link from "../components/general/Link";
 import { linkTypes } from "../components/general/Anchor";
 import RowBuilder, { Separator } from "../components/rows/RowBuilder";
@@ -254,7 +253,6 @@ export default class OicoAccessToken extends Component {
                                         leftMargin
                                     />
                                 </div>}
-                            flags={allFlags}
                             onEditButtonClick={this.toggleAddResource}
                             rowAccessories={<Toggle />}
                         >
@@ -320,7 +318,6 @@ export default class OicoAccessToken extends Component {
                 <ExpandableRow.SimpleWrapper data-id="idp-row">
                     <ExpandableRow.RowSection title="Resources">
                         <ExpandableRow
-                            flags={allFlags}
                             title={
                                 <div>
                                     openid
@@ -332,9 +329,7 @@ export default class OicoAccessToken extends Component {
                                     />
                                 </div>}
                         />
-                        <ExpandableRow
-                            title="test"
-                            flags={allFlags}/>
+                        <ExpandableRow title="test" />
                     </ExpandableRow.RowSection>
                 </ExpandableRow.SimpleWrapper>
             </div>

@@ -7,7 +7,6 @@ import _ from "underscore";
 import classnames from "classnames";
 import Translator from "../../../util/i18n/Translator.js";
 import FormDropDownList from "../FormDropDownList";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 import countryCodes from "./countryCodes.js";
 
 
@@ -112,7 +111,6 @@ class CountryFlagList extends React.Component {
         setSearchString: PropTypes.func,
         setSearchTime: PropTypes.func,
         onSearch: PropTypes.func,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -126,8 +124,6 @@ class CountryFlagList extends React.Component {
         onValueChange: _.noop,
         onToggle: _.noop
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /**
     * Returns a country's data by code
@@ -189,8 +185,6 @@ class CountryFlagList extends React.Component {
         // Set up item props to pass to the contentType
         return (
             <FormDropDownList
-                flags={getFlags(this)}
-                stateless={true}
                 data-id={this.props["data-id"]}
                 className={containerClassName}
                 options={countryCodesWithValues}

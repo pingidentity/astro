@@ -1,7 +1,6 @@
 import { mount } from "enzyme";
 import StateContainer from "../../utils/StateContainer";
 
-import { allFlags } from "../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("RockerButton v4", function () {
@@ -20,7 +19,6 @@ describe("RockerButton v4", function () {
             onValueChange: jest.fn(),
             labels: labelsArray,
             className: "myRocker",
-            flags: allFlags,
         });
 
         return ReactTestUtils.renderIntoDocument(<RockerButton {...opts} />);
@@ -29,7 +27,6 @@ describe("RockerButton v4", function () {
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
             <RockerButton
-                flags={allFlags}
                 onValueChange={jest.fn()}
                 labels={labelsArray}
             />
@@ -39,7 +36,6 @@ describe("RockerButton v4", function () {
     it("data-id's don't change with helpText", () => {
         mountSnapshotDataIds(
             <RockerButton
-                flags={allFlags}
                 onValueChange={jest.fn()}
                 labels={labelsArray}
                 helpText="PLEASE HELP"

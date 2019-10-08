@@ -8,7 +8,6 @@ import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
 import { darkInputs } from "../../util/CSSModifiers";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 const optionsSelector = createSelector(
     state => state.search,
@@ -76,7 +75,6 @@ class FilterSelector extends React.Component {
             SelectionList.ListType.ADD,
             SelectionList.ListType.MULTI
         ]),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -87,8 +85,6 @@ class FilterSelector extends React.Component {
         selected: [],
         type: SelectionList.ListType.MULTI
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _handleSearch = value => {
         this.setState({ search: value });
@@ -150,7 +146,6 @@ class FilterSelector extends React.Component {
                     }
                     open={open}
                     onToggle={onToggle}
-                    flags={getFlags(this)}
                 >
                     <SelectionList
                         className={darkInputs}

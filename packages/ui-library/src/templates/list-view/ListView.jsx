@@ -232,7 +232,7 @@ const FilterControls = ({
             }}
             showFilters={showFilters}
             onToggle={onToggleFilters}
-            rightControl={<Button label="Add User" iconName="add" flags={["add-button-margin"]}/>}
+            rightControl={<Button label="Add User" iconName="add" />}
             disableFilters={isSCIM}
             strings={{
                 linkText: showFilters ? "Filters on" : "Filters"

@@ -5,7 +5,6 @@ jest.dontMock("../Messages");
 jest.dontMock("../MessagesConstants.js");
 
 import { MessageTypes } from "../MessagesConstants";
-import { allFlags } from "../../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("Messages v4", function () {
@@ -33,7 +32,6 @@ describe("Messages v4", function () {
                 type: MessageTypes.SUCCESS,
             }],
             onRemoveMessage: jest.fn(),
-            flags: allFlags,
         });
 
         return ReactTestUtils.renderIntoDocument(<Messages {...props} />);

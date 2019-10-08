@@ -9,7 +9,6 @@ import InlineMessage from "ui-library/lib/components/general/InlineMessage";
 import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import HR from "ui-library/lib/components/general/HR";
-import { allFlags } from "ui-library/lib/util/FlagUtils";
 import FlagsProvider from "ui-library/lib/components/utils/FlagsProvider";
 import FormattedContent from "ui-library/lib/components/general/FormattedContent";
 import Stack from "ui-library/lib/components/layout/Stack";
@@ -20,10 +19,6 @@ const flagHelp = (
 );
 
 class DemoItem extends React.Component {
-    state = {
-        flags: allFlags.filter(flag => flag !== "v4"),
-    };
-
     static propTypes = {
     };
 

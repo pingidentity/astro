@@ -24,7 +24,6 @@ import _ from "underscore";
 
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
@@ -387,7 +386,6 @@ class FormDropDownListStateless extends React.Component {
         title: PropTypes.string,
         validSearchCharsRegex: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -413,8 +411,6 @@ class FormDropDownListStateless extends React.Component {
         disabled: false,
         autofocus: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     didPressKey = false;
     inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
@@ -988,14 +984,11 @@ DropDownList.displayName = "FormDropDownList";
 
 DropDownList.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
 
 DropDownList.SearchTypes = SearchTypes;
 DropDownList.searchTypes = SearchTypes; // we agreed on a new naming standard, but I'm also preserving bw compat
 DropDownList.filterOptions = filterOptions;
 DropDownList._statelessComponent = FormDropDownListStateless;
-
-DropDownList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default DropDownList;

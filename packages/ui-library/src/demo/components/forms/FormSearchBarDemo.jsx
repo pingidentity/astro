@@ -47,7 +47,6 @@ class SearchBarDemo extends React.Component {
             value: this.state.value,
             name: "demo-search"
         };
-        const { flags } = this.props;
 
         return (
             <div>
@@ -55,7 +54,6 @@ class SearchBarDemo extends React.Component {
                 <SearchBar
                     formSearchBoxProps={formSearchBoxProps}
                     key="props"
-                    flags={flags}
                 >
                     <FormCheckbox label="Filter 1" className="inline" key="uno" />
                     <FormCheckbox label="Filter 2" className="inline" key="dos" />
@@ -70,7 +68,6 @@ class SearchBarDemo extends React.Component {
                     value={this.state.value}
                     name="demo-search"
                     key="direct"
-                    flags={flags}
                 >
                     <FormCheckbox label="Filter 1" className="inline" key="uno" />
                     <FormCheckbox label="Filter 2" className="inline" key="dos" />
@@ -84,7 +81,6 @@ class SearchBarDemo extends React.Component {
                     showClear={true}
                     value={this.state.value}
                     name="demo-search"
-                    flags={flags}
                 />
                 <HR />
                 <p>With a button on the right</p>
@@ -96,7 +92,6 @@ class SearchBarDemo extends React.Component {
                     name="demo-search"
                     centerControl={<FormCheckbox className="inline" label="Hide disabled"/>}
                     rightControl={<Button label="Add" iconName="add" noSpacing />}
-                    flags={flags}
                 />
                 <HR />
                 <p>With documentation link</p>
@@ -112,7 +107,6 @@ class SearchBarDemo extends React.Component {
                         href: "http://uilibrary.ping-eng.com/3.8.0-SNAPSHOT/build-doc/ui-library/3.8.0-SNAPSHOT/index.html",
                         showWithFilters: false,
                     }}
-                    flags={flags}
                 >
                     <FormCheckbox label="Filter 1" className="inline" key="uno" />
                     <FormCheckbox label="Filter 2" className="inline" key="dos" />
@@ -132,7 +126,6 @@ class SearchBarDemo extends React.Component {
                         href: "http://uilibrary.ping-eng.com/3.8.0-SNAPSHOT/build-doc/ui-library/3.8.0-SNAPSHOT/index.html",
                         showWithFilters: true,
                     }}
-                    flags={flags}
                 >
                     <FormCheckbox label="Filter 1" className="inline" key="uno" />
                     <FormCheckbox label="Filter 2" className="inline" key="dos" />

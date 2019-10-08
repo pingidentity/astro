@@ -28,13 +28,11 @@ export class ShowSaveBar extends React.Component {
     render = () => (
         <div>
             <FormTextField
-                flags={["v4"]}
                 value={this.state.value}
                 onValueChange={this._handleChange}
                 labelText="A Field"
             />
             <ButtonBar
-                flags={["v4"]}
                 unfixed
                 visible={this._isChanged()}
                 onSave={this._handleSave}
@@ -50,19 +48,16 @@ export class RequiredFields extends React.Component {
             <FormTextField
                 labelText="A Required Field"
                 required
-                flags={["v4"]}
                 placeholder="Enter Something"
             />
             <FormTextField
                 required
-                flags={["v4"]}
                 labelText="A Second Field"
                 placeholder="Enter Something"
             />
             <FormTextField
                 labelText="A Third Field"
                 required
-                flags={["v4"]}
                 placeholder="Enter Something"
             />
         </div>
@@ -97,10 +92,9 @@ export class DisableSave extends FormDemo {
             requiredValues={[this.state.name]}
             onInvalidSave={this._saveError}
         >
-            <Messages messages={this._getMessages()} flags={["v4"]} />
+            <Messages messages={this._getMessages()} />
             <InputRow>
                 <FormTextField
-                    flags={["v4"]}
                     value={this.state.name}
                     onValueChange={this._handleChange("name")}
                     labelText="A Required Field"
@@ -110,14 +104,12 @@ export class DisableSave extends FormDemo {
             <InputRow>
                 <FormTextFieldValidated
                     formKey="eight"
-                    flags={["v4"]}
                     value={this.state.eight}
                     onValueChange={this._handleChange("eight")}
                     labelText="A Field That Must Be 8 Characters Long"
                 />
             </InputRow>
             <ButtonBarValidated
-                flags={["v4"]}
                 unfixed
                 visible={this._isChanged()}
                 onSave={this._handleSave}
@@ -142,7 +134,6 @@ export class InvalidCharacters extends React.Component {
         return (
             <div>
                 <FormTextField
-                    flags={["v4"]}
                     value={this.state.value}
                     onValueChange={this._handleChange}
                     labelText="No Spaces Please"
@@ -184,7 +175,6 @@ export class AutoFormat extends React.Component {
             <div>
                 <InputRow>
                     <FormTextField
-                        flags={["v4"]}
                         value={this.state.cardValue}
                         onValueChange={this._handleChangeCard}
                         labelText="Credit Card"
@@ -193,7 +183,6 @@ export class AutoFormat extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        flags={["v4"]}
                         value={this.state.filenameValue}
                         onValueChange={this._handleChangeFilename}
                         labelText="Filename"
@@ -235,7 +224,6 @@ export class Reformat extends React.Component {
         return (
             <div>
                 <FormTextField
-                    flags={["v4"]}
                     value={this.state.date}
                     onValueChange={this._handleDateChange}
                     onBlur={this._formatDate}
@@ -285,11 +273,10 @@ export class InvalidFormats extends FormDemo {
             }}
             onInvalidSave={this._saveError}
         >
-            <Messages messages={this._getMessages()} flags={["v4"]} />
+            <Messages messages={this._getMessages()} />
             <InputRow>
                 <FormTextFieldValidated
                     formKey="email"
-                    flags={["v4"]}
                     value={this.state.email}
                     onValueChange={this._handleChange("email")}
                     labelText="Email"
@@ -299,7 +286,6 @@ export class InvalidFormats extends FormDemo {
             <InputRow>
                 <FormTextFieldValidated
                     formKey="url"
-                    flags={["v4"]}
                     value={this.state.url}
                     onValueChange={this._handleChange("url")}
                     labelText="URL"
@@ -309,7 +295,6 @@ export class InvalidFormats extends FormDemo {
             <InputRow>
                 <FormTextFieldValidated
                     formKey="phone"
-                    flags={["v4"]}
                     value={this.state.phone}
                     onValueChange={this._handleChange("phone")}
                     labelText="Phone"
@@ -317,7 +302,6 @@ export class InvalidFormats extends FormDemo {
                 />
             </InputRow>
             <ButtonBarValidated
-                flags={["v4"]}
                 unfixed
                 visible={this._isChanged()}
                 onSave={this._handleSave}
@@ -343,16 +327,14 @@ export class UniqueValue extends FormDemo {
                 errorMessage: this._isNotUnique(this.state.name) ? "" : "You can't be Joe or Denise.",
             }
         }} onInvalidSave={this._saveError} >
-            <Messages messages={this._getMessages()} flags={["v4"]} />
+            <Messages messages={this._getMessages()} />
             <FormTextFieldValidated
-                flags={["v4"]}
                 formKey="name"
                 value={this.state.name}
                 onValueChange={this._handleChange("name")}
                 labelText="Name (Not Joe or Denise)"
             />
             <ButtonBarValidated
-                flags={["v4"]}
                 unfixed
                 visible={this._isChanged()}
                 onSave={this._handleSave}

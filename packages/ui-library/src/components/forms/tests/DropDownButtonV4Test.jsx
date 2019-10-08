@@ -13,7 +13,6 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import DropDownButton from "../DropDownButton";
 import { mount } from "enzyme";
-import { allFlags } from "../../../util/FlagUtils";
 
 describe("DropDownButton", function () {
     it("data-id's don't change", () => {
@@ -40,7 +39,6 @@ describe("DropDownButton", function () {
                 options={menu}
                 onToggle={jest.fn()}
                 label="Add"
-                flags={allFlags}
             />
         );
 

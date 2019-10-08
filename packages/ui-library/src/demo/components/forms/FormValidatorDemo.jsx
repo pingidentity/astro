@@ -105,7 +105,7 @@ class FormValidatorDemo extends FormDemo {
                 }}
                 onInvalidSave={this._saveError}
             >
-                <Messages messages={this._getMessages()} flags={["v4"]} />
+                <Messages messages={this._getMessages()} />
                 <FormattedContent>
                     <p>
                         <code>FormValidator</code> is wrapped around your form components and your button bar.
@@ -119,7 +119,6 @@ class FormValidatorDemo extends FormDemo {
                     <FormTextFieldValidated
                         required
                         formKey="name"
-                        flags={["v4"]}
                         value={this.state.name}
                         onValueChange={this._handleChange("name")}
                         labelText="name"
@@ -129,7 +128,6 @@ class FormValidatorDemo extends FormDemo {
                     <FormTextFieldValidated
                         required
                         formKey="email"
-                        flags={["v4"]}
                         value={this.state.email}
                         onValueChange={this._handleChange("email")}
                         labelText="Email"
@@ -139,7 +137,6 @@ class FormValidatorDemo extends FormDemo {
                 <InputRow>
                     <FormTextFieldValidated
                         formKey="url"
-                        flags={["v4"]}
                         value={this.state.url}
                         onValueChange={this._handleChange("url")}
                         labelText="URL"
@@ -149,7 +146,6 @@ class FormValidatorDemo extends FormDemo {
                 <InputRow>
                     <FormTextFieldValidated
                         formKey="phone"
-                        flags={["v4"]}
                         value={this.state.phone}
                         onValueChange={this._handleChange("phone")}
                         labelText="Phone"
@@ -157,7 +153,6 @@ class FormValidatorDemo extends FormDemo {
                     />
                 </InputRow>
                 <ButtonBarValidated
-                    flags={["v4"]}
                     unfixed
                     visible={this._isChanged()}
                     onSave={this._handleSave}
