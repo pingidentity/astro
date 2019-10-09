@@ -176,11 +176,12 @@ export default class License extends Component {
                     made to them.
                     </InputRow>
                     <InputRow>
-                        <li>MFA will not be available for new users</li>
-                        <li>
-                                    Current custom schemas will not allow further <br />
-                                    customization
-                        </li>
+                        <FormattedContent>
+                            <ul>
+                                <li>MFA will not be available for new users</li>
+                                <li>Current custom schemas will not allow further customization</li>
+                            </ul>
+                        </FormattedContent>
                     </InputRow>
                     <InputRow>
                     Are you sure you want to re-assign the environment <br/>
@@ -194,25 +195,27 @@ export default class License extends Component {
         } else if (this.state.licenseState === licenseStates.FEATURE) {
             return (
                 <Stack spacing="LG">
-                    <ul>
-                        <li>Password Authn w/ credential store & basic profile</li>
-                        <li>Social Login & Account Linking</li>
-                        <li>Registration</li>
-                        <li>Account Recovery</li>
-                        <li>Profile Mgmt</li>
-                        <li>MFA OTP - Email & SMS</li>
-                        <li>OIDC / Oauth2</li>
-                        <li>Polices: Time and IP</li>
-                        <li>Admin User Mgmt App</li>
-                        <li>Admin Auditing</li>
-                        <li>Service Usage Reporting</li>
-                        <li>Custom Schema</li>
-                        <li>SAML Support (Inbound and Outbound)</li>
-                        <li>Expanded Polices Support (Authn, Reg, Recover)</li>
-                        <li>Consent Service</li>
-                        <li>Delegated User Administration</li>
-                        <li>OutBound Provisioning</li>
-                    </ul>
+                    <FormattedContent>
+                        <ul>
+                            <li>Password Authn w/ credential store & basic profile</li>
+                            <li>Social Login & Account Linking</li>
+                            <li>Registration</li>
+                            <li>Account Recovery</li>
+                            <li>Profile Mgmt</li>
+                            <li>MFA OTP - Email & SMS</li>
+                            <li>OIDC / Oauth2</li>
+                            <li>Polices: Time and IP</li>
+                            <li>Admin User Mgmt App</li>
+                            <li>Admin Auditing</li>
+                            <li>Service Usage Reporting</li>
+                            <li>Custom Schema</li>
+                            <li>SAML Support (Inbound and Outbound)</li>
+                            <li>Expanded Polices Support (Authn, Reg, Recover)</li>
+                            <li>Consent Service</li>
+                            <li>Delegated User Administration</li>
+                            <li>OutBound Provisioning</li>
+                        </ul>
+                    </FormattedContent>
                     <div>
                         <Link>Compare License Types <Icon iconName="new-window" flags={["v4"]} /></Link>
                     </div>
