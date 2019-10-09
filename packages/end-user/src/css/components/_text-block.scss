@@ -6,6 +6,21 @@
     &__text {
         display: inline-block;
         text-align: left;
+        &-center {
+            text-align: center;
+        }
+    }
+
+    // &__text-center {
+    //     display: inline-block;
+    //     text-align: center;
+    // }
+
+    &__text-right {
+        text-align: right;
+    }
+    &__text-center {
+        text-align: center;
     }
 
     &--full-width {
