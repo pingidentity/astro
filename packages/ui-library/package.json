@@ -187,7 +187,7 @@
     "pack-landing": "webpack --progress --colors --config webpack.landing.js",
     "webpack-start-landing": "webpack-dev-server --content-base hosting/ -d --hot --port 8082 --host 0.0.0.0 --inline --progress --colors --config webpack.landing.js",
     "webpack-start": "webpack-dev-server -d --hot --host 0.0.0.0 --port 8080 --inline --progress --colors --config webpack.dev.js",
-    "start": "npm run doc && npm run webpack-start",
+    "start": "npm run webpack-start & npm run doc",
     "start-w-doc": "npm run doc && npm run webpack-start",
     "doc": "jsdoc -c ./jsdoc.json",
     "test-w-docker": "./node_modules/.bin/wdio wdio.dev.conf.js",
