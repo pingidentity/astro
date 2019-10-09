@@ -42,10 +42,10 @@
                 border-radius: 50%;
             }
         }
+
         &--accessories {
             text-transform: none;
         }
-
     }
     > .collapsible-section-title-value {
         font-size: 14px;
@@ -60,14 +60,11 @@
         color: $color-midnight;
         cursor: pointer;
         .content-columns {
-            margin-left: 25px;
-            margin-top: -20px;
-            margin-bottom: 10px;
+            margin-left: $spacing-lg;
+            margin-bottom: $spacing-lg;
         }
-        [data-id="formLabel"] {
-            .label-text{
-            font-weight: bold;
-            }
+        label {
+            cursor: pointer;
         }
     }
     > .collapsible-section-content {
@@ -75,7 +72,7 @@
         display: none;
         visibility: hidden;
         position: relative;
-        margin: 0 0 25px 25px;
+        margin: 0 0 $spacing-lg $spacing-lg;
 
         @include transition(all 0.3s);
 
@@ -165,8 +162,10 @@
             color: $color-midnight;
         }
         &.collapsible-section-title--section {
+            padding-top: 0;
+
             &.left:before {
-                top: 55px;
+                top: 50px;
             }
         }
         &.noCaret{

@@ -4,7 +4,6 @@ import Button from "../components/buttons/Button";
 import ButtonGroup from "../components/layout/ButtonGroup";
 import Layout from "../components/general/ColumnLayout";
 import PageHeader from "../components/general/PageHeader";
-import FormLabel from "../components/forms/FormLabel";
 import FlexRow, { spacingOptions, alignments, justifyOptions } from "../components/layout/FlexRow";
 import Text from "../components/general/Text";
 import Stack from "../components/layout/Stack";
@@ -19,6 +18,7 @@ import Table, {
     columnAlignments,
 } from "../components/tables/Table";
 import CalloutBox from "../components/layout/CalloutBox";
+import Padding from "../components/layout/Padding";
 
 
 /**
@@ -26,49 +26,84 @@ import CalloutBox from "../components/layout/CalloutBox";
 * @desc This is a template to demonstrate how to build a License Template.
 */
 
+const LicenseOption = ({
+    created,
+    envCount,
+    expires,
+    renewed,
+    type,
+}) => (
+    <Padding vertical={Padding.sizes.SM}>
+        <FlexRow spacing={spacingOptions.LG} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
+            <Stack gap="XS">
+                <Text type="parent-label">{type}</Text>
+                {renewed && <Text type="value">Renewed {renewed}</Text>}
+                {created && <Text type="value">Created {created}</Text>}
+                <Text type="value">Expires {expires}</Text>
+            </Stack>
+            <Stack gap="XS">
+                <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
+                <Text align={Text.alignments.CENTER} type="value">{envCount}</Text>
+            </Stack>
+        </FlexRow>
+    </Padding>
+);
+
+const LicenseRow = ({
+    created,
+    envLines = [],
+    expires,
+    identityLines = [],
+    onFeatureClick,
+    renderTable,
+    renderModal,
+    renewed,
+    type,
+}) => (
+    <Section
+        flags={["p-stateful"]}
+        titleSection={
+            <Layout.Row className="columns-width-auto">
+                <Layout.Column>
+                    <Stack gap="ZERO">
+                        <Text type="parent-label">{type}</Text>
+                        {renewed && <Text type="value">Renewed {renewed}</Text>}
+                        {created && <Text type="value">Created {created}</Text>}
+                        <Text type="value">Expires {expires}</Text>
+                    </Stack>
+                </Layout.Column>
+                <Layout.Column>
+                    <Icon iconName="earth" iconSize="xl" title="environments">
+                        <Stack gap="ZERO">
+                            {envLines.map(line => <Text type="value" key={line}>{line}</Text>)}
+                        </Stack>
+                    </Icon>
+                </Layout.Column>
+                <Layout.Column>
+                    <Icon iconName="users" iconSize="xl" title="identites">
+                        <FormattedContent>
+                            <Stack gap="ZERO">
+                                {identityLines.map(line => <Text type="value" key={line}>{line}</Text>)}
+                            </Stack>
+                        </FormattedContent>
+                    </Icon>
+                </Layout.Column>
+            </Layout.Row>}
+    >
+        <Stack gap="MD">
+            <Link title="View Feature List" onClick={onFeatureClick} type="block"/>
+            <CalloutBox>
+                {renderTable()}
+                {renderModal()}
+            </CalloutBox>
+        </Stack>
+    </Section>
+);
+
 const nodeOptions = [
-    { label:
-        <div>
-            <FormLabel value="Premier" />
-            <FlexRow spacing={spacingOptions.MD} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
-                <Stack gap="XS">
-                    <Text type="value">Renewed 2019-06-13</Text>
-                    <Text type="value">Expires 2022-12-13</Text>
-                </Stack>
-                <Stack gap="XS">
-                    <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
-                    <Text>&nbsp;7/10</Text>
-                </Stack>
-            </FlexRow>
-        </div>, value: "1" },
-    { label:
-        <div>
-            <FormLabel value="Trial" />
-            <FlexRow spacing={spacingOptions.MD} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
-                <Stack gap="XS">
-                    <Text type="value">Created 2019-06-13</Text>
-                    <Text type="value">Expires 2022-12-13</Text>
-                </Stack>
-                <Stack gap="XS">
-                    <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
-                    <Text>&nbsp;4/5</Text>
-                </Stack>
-            </FlexRow>
-        </div>, value: "2" },
-    { label:
-        <div>
-            <FormLabel value="Global" />
-            <FlexRow spacing={spacingOptions.MD} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
-                <Stack gap="XS">
-                    <Text type="value">Renewed 2019-06-13</Text>
-                    <Text type="value">Expires 2022-12-13</Text>
-                </Stack>
-                <Stack gap="XS">
-                    <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
-                    <Text>&nbsp;11/15</Text>
-                </Stack>
-            </FlexRow>
-        </div>, value: "2" }
+    { label: <LicenseOption type="Premier" renewed="2019-06-13" expires="2022-12-13" envCount="7/10" />, value: "1" },
+    { label: <LicenseOption type="Trial" created="2019-06-13" expires="2022-12-13" envCount="4/5" />, value: "2" },
+    { label: <LicenseOption type="Global" renewed="2019-06-13" expires="2022-12-13" envCount="11/15" />, value: "3" },
 ];
 
 
@@ -118,7 +153,7 @@ export default class License extends Component {
     }
 
 
-    modalContent() {
+    modalContent = () => {
         if (this.state.licenseState === licenseStates.MODALREASSIGN) {
             return (
                 <div>
@@ -158,33 +193,38 @@ export default class License extends Component {
             );
         } else if (this.state.licenseState === licenseStates.FEATURE) {
             return (
-                <div>
-                    <li>Password Authn w/ credential store & basic profile</li>
-                    <li>Social Login & Account Linking</li>
-                    <li>Registration</li>
-                    <li>Account Recovery</li>
-                    <li>Profile Mgmt</li>
-                    <li>MFA OTP - Email & SMS</li>
-                    <li>OIDC / Oauth2</li>
-                    <li>Polices: Time and IP</li>
-                    <li>Admin User Mgmt App</li>
-                    <li>Admin Auditing</li>
-                    <li>Service Usage Reporting</li>
-                    <li>Custom Schema</li>
-                    <li>SAML Support (Inbound and Outbound)</li>
-                    <li>Expanded Polices Support (Authn, Reg, Recover)</li>
-                    <li>Consent Service</li>
-                    <li>Delegated User Administration</li>
-                    <li>OutBound Provisioning</li>
+                <Stack spacing="LG">
+                    <ul>
+                        <li>Password Authn w/ credential store & basic profile</li>
+                        <li>Social Login & Account Linking</li>
+                        <li>Registration</li>
+                        <li>Account Recovery</li>
+                        <li>Profile Mgmt</li>
+                        <li>MFA OTP - Email & SMS</li>
+                        <li>OIDC / Oauth2</li>
+                        <li>Polices: Time and IP</li>
+                        <li>Admin User Mgmt App</li>
+                        <li>Admin Auditing</li>
+                        <li>Service Usage Reporting</li>
+                        <li>Custom Schema</li>
+                        <li>SAML Support (Inbound and Outbound)</li>
+                        <li>Expanded Polices Support (Authn, Reg, Recover)</li>
+                        <li>Consent Service</li>
+                        <li>Delegated User Administration</li>
+                        <li>OutBound Provisioning</li>
+                    </ul>
+                    <div>
+                        <Link>Compare License Types <Icon iconName="new-window" flags={["v4"]} /></Link>
+                    </div>
                     <ButtonGroup>
-                        <Button onClick={this.handleClick}>Cancel</Button>
+                        <Button onClick={this.handleClick}>Close</Button>
                     </ButtonGroup>
-                </div>
+                </Stack>
             );
         }
     }
 
-    renderModal() {
+    renderModal = () => {
         if (this.state.licenseState === licenseStates.MODALREASSIGN) {
             return (
                 <Modal
@@ -222,7 +262,7 @@ export default class License extends Component {
         }
     }
 
-    renderLinkDropDown () {
+    renderLinkDropDown = () => {
         return (
             <LinkDropDownList
                 label={<Icon type="inline" iconName="edit"/>}
@@ -237,7 +277,7 @@ export default class License extends Component {
         );
     }
 
-    renderLinkDropDown2 () {
+    renderLinkDropDown2 = () => {
         return (
             <LinkDropDownList
                 label={<Icon type="inline" iconName="edit"/>}
@@ -252,7 +292,7 @@ export default class License extends Component {
         );
     }
 
-    renderTable () {
+    renderTable = () => {
         return ( <Table
             columnStyling={[
                 {
@@ -322,7 +362,7 @@ export default class License extends Component {
         );
     }
 
-    renderTable2 () {
+    renderTable2 = () => {
         return ( <Table
             columnStyling={[
                 {
@@ -362,7 +402,7 @@ export default class License extends Component {
         );
     }
 
-    renderTable3 () {
+    renderTable3 = () => {
         return ( <Table
             columnStyling={[
                 {
@@ -440,125 +480,58 @@ export default class License extends Component {
                 <PageHeader title="License" />
                 <PageSection>
                     <InputRow>
-                        <Stack gap="LG">
-                            <Layout.Column>
-                                <FormLabel value="Organization" />
-                                <Text type="value">
-                                PingOne Demo
-                                </Text>
-                            </Layout.Column>
+                        <Stack gap="XS">
+                            <Text type="parent-label">Organization</Text>
+                            <Text type="value">PingOne Demo</Text>
                         </Stack>
                     </InputRow>
                     <InputRow>
-                        <Section
-                            flags={["p-stateful"]}
-                            titleSection={
-                                <Layout.Row className="columns-width-auto">
-                                    <Layout.Column>
-                                        <FormLabel value="Premier"/>
-                                        <Stack gap="XS">
-                                            <Text type="value">Renewed 2019-06-13</Text>
-                                            <Text type="value">Expires 2022-12-13</Text>
-                                        </Stack>
-                                    </Layout.Column>
-                                    <Layout.Column>
-                                        <Icon iconName="earth" iconSize="xl" title="environments">
-                                            <Stack gap="XS">
-                                                <Text type="value">7/10 maximum</Text>
-                                                <Text type="value">2 regions</Text>
-                                            </Stack>
-                                        </Icon>
-                                    </Layout.Column>
-                                    <Layout.Column>
-                                        <Icon iconName="users" iconSize="xl" title="identites">
-                                            <FormattedContent>
-                                                <Stack gap="XS">
-                                                    <Text type="value">10 million / environment</Text>
-                                                </Stack>
-                                            </FormattedContent>
-                                        </Icon>
-                                    </Layout.Column>
-                                </Layout.Row>}
-                        >
-                            <Stack gap="MD">
-                                <Link title="View Feature List" onClick={this._toggleFeatureClick} type="block"/>
-                                <CalloutBox>
-                                    {this.renderTable()}
-                                    {this.renderModal()}
-                                </CalloutBox>
-                            </Stack>
-                        </Section>
-                        <Section
-                            flags={["p-stateful"]}
-                            titleSection={
-                                <Layout.Row className="columns-width-auto">
-                                    <Layout.Column>
-                                        <FormLabel value="Trial"/>
-                                        <Stack gap="XS">
-                                            <Text type="value">Renewed 2019-06-13</Text>
-                                            <Text type="value">Expires 2022-12-13</Text>
-                                        </Stack>
-                                    </Layout.Column>
-                                    <Layout.Column>
-                                        <Icon iconName="earth" iconSize="xl" title="environments">
-                                            <Stack gap="XS">
-                                                <Text type="value">4/5 maximum</Text>
-                                                <Text type="value">Sandbox only</Text>
-                                                <Text type="value">1 regions</Text>
-                                            </Stack>
-                                        </Icon>
-                                    </Layout.Column>
-                                    <Layout.Column>
-                                        <Icon iconName="users" iconSize="xl" title="identites">
-                                            <FormattedContent>
-                                                <Stack gap="XS">
-                                                    <Text type="value">1 million / environment</Text>
-                                                </Stack>
-                                            </FormattedContent>
-                                        </Icon>
-                                    </Layout.Column>
-                                </Layout.Row>}
-                        >
-                            <CalloutBox>
-                                {this.renderTable2()}
-                                {this.renderModal()}
-                            </CalloutBox>
-                        </Section>
-                        <Section
-                            flags={["p-stateful"]}
-                            titleSection={
-                                <Layout.Row className="columns-width-auto">
-                                    <Layout.Column>
-                                        <FormLabel value="Global"/>
-                                        <Stack gap="XS">
-                                            <Text type="value">Renewed 2019-06-13</Text>
-                                            <Text type="value">Expires 2022-12-13</Text>
-                                        </Stack>
-                                    </Layout.Column>
-                                    <Layout.Column>
-                                        <Icon iconName="earth" iconSize="xl" title="environments">
-                                            <Stack gap="XS">
-                                                <Text type="value">11/15 maximum</Text>
-                                                <Text type="value">All regions</Text>
-                                            </Stack>
-                                        </Icon>
-                                    </Layout.Column>
-                                    <Layout.Column>
-                                        <Icon iconName="users" iconSize="xl" title="identites">
-                                            <FormattedContent>
-                                                <Stack gap="XS">
-                                                    <Text type="value">10 million / environment</Text>
-                                                </Stack>
-                                            </FormattedContent>
-                                        </Icon>
-                                    </Layout.Column>
-                                </Layout.Row>}
-                        >
-                            <CalloutBox>
-                                {this.renderTable3()}
-                                {this.renderModal()}
-                            </CalloutBox>
-                        </Section>
+                        <LicenseRow
+                            type="Premier"
+                            renewed="2019-06-13"
+                            expires="2022-12-13"
+                            envLines={[
+                                "7 (10 maximum)",
+                                "2 regions"
+                            ]}
+                            identityLines={[
+                                "10 million / environment"
+                            ]}
+                            onFeatureClick={this._toggleFeatureClick}
+                            renderModal={this.renderModal}
+                            renderTable={this.renderTable}
+                        />
+                        <LicenseRow
+                            type="Trial"
+                            renewed="2019-06-13"
+                            expires="2022-12-13"
+                            envLines={[
+                                "4 (5 maximum)",
+                                "Sandbox only",
+                                "1 region",
+                            ]}
+                            identityLines={[
+                                "1 million / environment"
+                            ]}
+                            onFeatureClick={this._toggleFeatureClick}
+                            renderModal={this.renderModal}
+                            renderTable={this.renderTable2}
+                        />
+                        <LicenseRow
+                            type="Global"
+                            renewed="2019-06-13"
+                            expires="2022-12-13"
+                            envLines={[
+                                "11 (15 maximum)",
+                                "All regions",
+                            ]}
+                            identityLines={[
+                                "10 million / environment"
+                            ]}
+                            onFeatureClick={this._toggleFeatureClick}
+                            renderModal={this.renderModal}
+                            renderTable={this.renderTable3}
+                        />
                     </InputRow>
                     <Stack gap="SM">
                         <Link title="Compare plans" url="#" type="block"/>
