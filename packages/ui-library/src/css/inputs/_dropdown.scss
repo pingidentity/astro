@@ -70,10 +70,6 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
         @include option-list;
         display: inline-block;
 
-        // div {
-        //     display: inline-block;
-        // }
-
         // each item in dropdown
         .select-option,
         .none-option {
