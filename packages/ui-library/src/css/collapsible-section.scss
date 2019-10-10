@@ -42,6 +42,16 @@
                 border-radius: 50%;
             }
         }
+        &--section {
+            font-size: 14px;
+            text-transform: none;
+            margin: 0 0 0 5px;
+            color: $color-midnight;
+            cursor: pointer;
+            label {
+                cursor: pointer;
+            }
+        }
 
         &--accessories {
             text-transform: none;
@@ -53,20 +63,7 @@
         margin: 0 0 0 5px;
         color: $color-midnight;
     }
-    > .collapsible-section-title-section {
-        font-size: 14px;
-        text-transform: none;
-        margin: 0 0 0 5px;
-        color: $color-midnight;
-        cursor: pointer;
-        .content-columns {
-            margin-left: $spacing-lg;
-            margin-bottom: $spacing-lg;
-        }
-        label {
-            cursor: pointer;
-        }
-    }
+    > .collapsible-section-title
     > .collapsible-section-content {
         text-transform: none;
         display: none;
@@ -162,13 +159,14 @@
             color: $color-midnight;
         }
         &.collapsible-section-title--section {
-            padding-top: 0;
+            padding: $spacing-md 0 $spacing-md 0;
 
             &.left:before {
-                top: 50px;
+                top: 25px;
             }
         }
-        &.noCaret{
+        &.noCaret
+        &.link-dropdown-list--no-caret{
             &:after {
                 content: none;
             }

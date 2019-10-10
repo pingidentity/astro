@@ -242,7 +242,8 @@ class SectionStateless extends React.Component {
                             {
                                 "collapsible-section-title--circled": this.props.arrowCircle,
                                 "collapsible-section-title--accessories": this.props.sectionAccessories,
-                                "collapsible-section-title--section": this.props.titleSection
+                                "collapsible-section-title--section": this.props.title
+                                    ? typeof this.props.title !== "string" : this.props.title
                             }
                         )}
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}
@@ -254,15 +255,6 @@ class SectionStateless extends React.Component {
                 {this.props.titleValue && (
                     <span className="collapsible-section-title-value" data-id={this.props["data-id"] + "-title-value"}>
                         {this.props.titleValue}
-                    </span>
-                )}
-                {this.props.titleSection && (
-                    <span
-                        className="collapsible-section-title-section"
-                        data-id={this.props["data-id"] + "-title-section"}
-                        onClick={this._handleToggle}
-                    >
-                        {this.props.titleSection}
                     </span>
                 )}
                 <div

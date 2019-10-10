@@ -73,7 +73,10 @@ class LinkDropDownListStateless extends React.Component {
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([-1])]), // -1 means no value has been set
         flags: flagsPropType,
-        noCaret: PropTypes.bool,
+        noCaret: PropTypes.oneOfType([
+            PropTypes.bool,
+            PropTypes.string
+        ]),
     };
 
     static defaultProps = {
@@ -141,7 +144,12 @@ class LinkDropDownListStateless extends React.Component {
                 data-id={this.props["data-id"]}
                 placement={DetailsTooltip.tooltipPlacements.BOTTOM_RIGHT}
                 contentClassName="link-dropdown-list"
-                className={classnames(this.props.className, "link-dropdown-list")}
+                className={classnames(this.props.className, "link-dropdown-list",
+                    {
+                        "link-drop-down-list--no-caret": this.props.noCaret
+                            ? typeof this.props.noCaret !== "boolean" : this.props.noCaret
+                    }
+                )}
                 label={this._renderLabel()}
                 showClose={false}
                 open={this.props.open}

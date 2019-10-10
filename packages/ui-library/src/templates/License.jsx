@@ -62,7 +62,7 @@ const LicenseRow = ({
 }) => (
     <Section
         flags={["p-stateful"]}
-        titleSection={
+        title={
             <Layout.Row className="columns-width-auto">
                 <Layout.Column>
                     <Stack gap="ZERO">
