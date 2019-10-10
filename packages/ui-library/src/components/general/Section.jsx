@@ -150,12 +150,8 @@ class SectionStateless extends React.Component {
         onToggle: PropTypes.func,
         title: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.object
-        ]),
-        titleSection: PropTypes.oneOfType([
-            PropTypes.string,
             PropTypes.object,
-            PropTypes.node,
+            PropTypes.node
         ]),
         titleValue: PropTypes.oneOfType([
             PropTypes.string,

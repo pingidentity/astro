@@ -48,6 +48,10 @@
             margin: 0 0 0 5px;
             color: $color-midnight;
             cursor: pointer;
+            .content-columns {
+                margin-top: $spacing-md;
+                margin-bottom: $spacing-lg;
+            }
             label {
                 cursor: pointer;
             }
@@ -100,6 +104,9 @@
             visibility: visible;
 
             @include animation(fade-in 0.2s);
+            .stack > *:last-child  {
+                margin-bottom: $spacing-md;
+            }
         }
     }
     &.has-title-value {
@@ -159,14 +166,13 @@
             color: $color-midnight;
         }
         &.collapsible-section-title--section {
-            padding: $spacing-md 0 $spacing-md 0;
+            padding: 0;
 
             &.left:before {
-                top: 25px;
+                top: 30px;
             }
         }
-        &.noCaret
-        &.link-dropdown-list--no-caret{
+        &.noCaret {
             &:after {
                 content: none;
             }
