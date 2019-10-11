@@ -25,7 +25,7 @@
     }
 }
 
-@mixin button-with-icon {
+@mixin button-with-icon($content: '\2b') {
     padding-left: $spacing-md + $spacing-sm + $spacing-sm;
 
     &:before,
@@ -33,7 +33,7 @@
         font-family: $icon-font;
     }
     &:before {
-        content: '\2b';
+        content: $content;
         position: absolute;
         left: $spacing-md;
         width: $spacing-md;
@@ -185,11 +185,7 @@ button,
         @include button-with-icon();
     }
     &.download {
-        @include button-with-icon();
-
-        &:before {
-            content: '\44';
-        }
+        @include button-with-icon('\44');
     }
     &.inline {
         &.edit,
