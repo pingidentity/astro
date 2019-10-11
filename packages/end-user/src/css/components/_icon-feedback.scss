@@ -34,4 +34,8 @@
         font-size: $font-size-lg;
         padding-right: $spacing-md;
     }
+
+    &--bold &__label {
+        font-weight: bold;
+    }
 }
