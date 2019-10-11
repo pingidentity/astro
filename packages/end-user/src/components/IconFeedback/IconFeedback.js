@@ -20,7 +20,7 @@ const typeIcons = {
     safe: safeIcon,
 };
 
-const IconFeedback = ({ type, small = false, children, bold = false }) => {
+const IconFeedback = ({ type, children, small, bold }) => {
     const classNames = classnames('icon-feedback', `icon-feedback--${type}`, {
         'icon-feedback--small': small,
         'icon-feedback--bold': bold,
@@ -38,5 +38,10 @@ IconFeedback.propTypes = {
     small: PropTypes.bool,
     bold: PropTypes.bool
 };
+
+IconFeedback.defaultProps = {
+    small: false,
+    bold: false,
+}
 
 export default IconFeedback;
