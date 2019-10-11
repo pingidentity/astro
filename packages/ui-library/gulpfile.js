@@ -146,7 +146,7 @@ gulp.task("move-files", () =>
 
 gulp.task("build-css", () =>
     gulp.src(["./src/css/ui-library.scss", "./src/css/end-user.scss"])
-        .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+        .pipe(sass().on("error", sass.logError))
         .pipe(postcss())
         .pipe(gulp.dest("lib/css"))
 );
