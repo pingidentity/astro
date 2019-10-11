@@ -10,10 +10,9 @@ pipeline {
             echo 'Building & publishing end-user'
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               withCredentials([
-                sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'uiLibraryKeyPath'),
                 sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
               ]){
-                sh "make GIT_BRANCH=${params.RELEASE_BRANCH} package_and_tag PRIVATE_SSH_KEY_PATH=${uiLibraryKeyPath} GERRIT_SSH_KEY_PATH=${gerritKeyPath}"
+                sh "make GIT_BRANCH=${params.RELEASE_BRANCH} package_and_tag GERRIT_SSH_KEY_PATH=${gerritKeyPath}"
               }
             }
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
@@ -21,7 +20,7 @@ pipeline {
                 cd dist;
                 npm publish;
                 cd ..;
-                make GIT_BRANCH=${params.RELEASE_BRANCH} version PRIVATE_SSH_KEY_PATH=${uiLibraryKeyPath} GERRIT_SSH_KEY_PATH=${gerritKeyPath};
+                make GIT_BRANCH=${params.RELEASE_BRANCH} version GERRIT_SSH_KEY_PATH=${gerritKeyPath};
               """
             }
           }
