@@ -65,7 +65,7 @@ const LicenseRow = ({
         title={
             <Layout.Row className="columns-width-auto">
                 <Layout.Column>
-                    <Stack gap="ZERO">
+                    <Stack gap="XS">
                         <Text type="parent-label">{type}</Text>
                         {renewed && <Text type="value">Renewed {renewed}</Text>}
                         {created && <Text type="value">Created {created}</Text>}
@@ -74,7 +74,7 @@ const LicenseRow = ({
                 </Layout.Column>
                 <Layout.Column>
                     <Icon iconName="earth" iconSize="xl" title="environments">
-                        <Stack gap="ZERO">
+                        <Stack gap="XS">
                             {envLines.map(line => <Text type="value" key={line}>{line}</Text>)}
                         </Stack>
                     </Icon>
@@ -82,7 +82,7 @@ const LicenseRow = ({
                 <Layout.Column>
                     <Icon iconName="users" iconSize="xl" title="identites">
                         <FormattedContent>
-                            <Stack gap="ZERO">
+                            <Stack gap="XS">
                                 {identityLines.map(line => <Text type="value" key={line}>{line}</Text>)}
                             </Stack>
                         </FormattedContent>
