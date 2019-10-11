@@ -42,6 +42,7 @@ pipeline {
             s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/end-user/', file: "${env.WORKSPACE}/packages/end-user/build-css/")
           }
         }
+      }
     }
   }
 }
