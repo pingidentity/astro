@@ -1,6 +1,6 @@
 import Button, { ButtonTypes } from '../components/Button';
 import ButtonSet from '../components/ButtonSet';
-import Card from '../components/Card';
+import Card, { CardTypes } from '../components/Card';
 import Checkbox from '../components/Checkbox';
 import Dropdown from '../components/Dropdown';
 import Feedback from '../components/Feedback';
@@ -268,7 +268,7 @@ to the `.two-sided` div.
 ### Error Screen
 
 <ComponentDemo>
-    <Card type="error">
+    <Card type={CardTypes.ERROR}>
         <Logo src="ping-logo.svg"/>
         <IconFeedback type="hourGlass" bold>Trial Expired</IconFeedback>
         <TextBlock size="large" alignment="center">To extend your trial, please contact us.</TextBlock>
@@ -279,11 +279,11 @@ to the `.two-sided` div.
 ### Account Inactive Screen
 
 <ComponentDemo>
-    <Card type="error">
+    <Card type={CardTypes.ERROR}>
         <Logo src="jj-logo.png"/>
         <Padding top={sizes.LG}>
             <IconFeedback type="safe" bold>Account Inactive</IconFeedback>
         </Padding>
         <TextBlock size="large">This service is no longer active.</TextBlock>
-        </Card>
+    </Card>
 </ComponentDemo>

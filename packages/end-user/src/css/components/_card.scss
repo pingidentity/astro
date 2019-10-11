@@ -1,7 +1,7 @@
 // CARDS
 $card-bg: white;
 $card-width: 400px;
-$card-padding-bottom: $spacing-xx;
+$card-padding-bottom: $spacing-xl;
 $card-padding-top: $spacing-xl;
 $card-padding-horizontal: $spacing-xl;
 
@@ -43,6 +43,14 @@ $card-padding-horizontal: $spacing-xl;
         position: absolute;
         width: 250%;
         margin-left: -300px;
+    }
+
+    &--slim {
+        min-height: unset;
+    }
+
+    &--slim > &__content{
+        padding: 20px;
     }
 
     &__content {

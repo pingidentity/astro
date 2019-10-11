@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+const CardTypes = {
+    SLIM: 'slim',
+    ERROR: 'error'
+};
+
+
 /**
  * @class Card
  * @desc Contains UI elements
@@ -23,20 +29,35 @@ const Card = ({
     width,
     className,
     header,
+    error,
     type,
     'data-id': dataId,
 }) => {
     const classNames = classnames('card', 'card--no-padding', className, {
         'card--wide': width === 'large',
-        'card--error': type === 'error',
+        'card--slim': type === CardTypes.SLIM,
+        'card--error': type === CardTypes.ERROR,
     });
+
+    const headerType = () => {
+        if (type === CardTypes.ERROR) {
+            return (
+            <div className="card__error" />
+            )
+        } else if (header) {
+            return (
+            <div className="card__header">
+                    {header}
+                </div>
+            )
+        } else {
+            return null
+        }
+    }
 
     return (
         <div className={classNames} data-id={dataId}>
-            {type ? <div className="card__error" /> : null }
-            <div className="card__header">
-                {header}
-            </div>
+            {headerType()}
             <div className="card__content">
                 {children}
             </div>
@@ -44,10 +65,12 @@ const Card = ({
     );
 };
 
+Card.CardTypes = CardTypes;
+
 Card.propTypes = {
     className: PropTypes.string,
     width: PropTypes.oneOf(['large']),
-    type: PropTypes.oneOf(['error']),
+    type: PropTypes.oneOf(Object.values(CardTypes)),
     header: PropTypes.node,
     'data-id': PropTypes.string,
 };
