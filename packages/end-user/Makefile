@@ -75,5 +75,4 @@ package_and_tag: install-node-npm clean-css
 	mv dist/end-user.css build-css/$(GIT_VERSION)
 
 	git tag end-user-$(GIT_VERSION)
-	git commit -a -m "Release end-user"
 	GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin $(GIT_BRANCH)
