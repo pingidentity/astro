@@ -29,7 +29,6 @@ const Card = ({
     width,
     className,
     header,
-    error,
     type,
     'data-id': dataId,
 }) => {
