@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <g id="Group" stroke="#FD2A00" stroke-width="1.5">
+                <rect id="Rectangle" fill="#FFFFFF" x="0.75" y="16.75" width="3.5" height="9.5" rx="1"></rect>
+                <rect id="Rectangle" fill="#FFFFFF" x="0.75" y="43.75" width="3.5" height="9.5" rx="1"></rect>
+                <rect id="Rectangle" fill="#FFFFFF" x="4.75" y="0.75" width="67.5" height="67.5" rx="4"></rect>
+                <circle id="Oval" fill="#FFFFFF" cx="38.5" cy="34.5" r="18.5"></circle>
+                <path d="M38.5,19.5 L38.5,49.5" id="Line-2" stroke-linecap="round"></path>
+                <path d="M38.5,19.5 L38.5,49.5" id="Line-2" stroke-linecap="round" transform="translate(38.500000, 34.500000) rotate(90.000000) translate(-38.500000, -34.500000) "></path>
+                <path d="M38.5,19.5 L38.5,49.5" id="Line-2" stroke-linecap="round" transform="translate(38.500000, 34.500000) rotate(135.000000) translate(-38.500000, -34.500000) "></path>
+                <path d="M38.5,19.5 L38.5,49.5" id="Line-2" stroke-linecap="round" transform="translate(38.500000, 34.500000) scale(-1, 1) rotate(135.000000) translate(-38.500000, -34.500000) "></path>
+            </g>
+            <polyline id="Path-7" stroke="#FD2A00" stroke-width="1.5" stroke-linejoin="round" points="15.0543208 68 18.1121126 71.6587266 23.26719 71.6587266 25.7941081 68"></polyline>
+            <polyline id="Path-7" stroke="#FD2A00" stroke-width="1.5" stroke-linejoin="round" points="51.0543208 68 54.1121126 71.6587266 59.26719 71.6587266 61.7941081 68"></polyline>
+            <circle id="Oval" stroke="#FFFFFF" fill="#FFFFFF" cx="38.5" cy="34.5" r="9.5"></circle>
+            <circle id="Oval" stroke="#FD2A00" stroke-width="1.5" fill="#FFFFFF" cx="38.5" cy="34.5" r="7.5"></circle>
+            <path d="M38.5,29.5 L38.5,39.5" id="Line" stroke="#FD2A00" stroke-linecap="round"></path>
+            <path d="M38.5,29.5 L38.5,39.5" id="Line" stroke="#FD2A00" stroke-linecap="round" transform="translate(38.500000, 34.500000) rotate(90.000000) translate(-38.500000, -34.500000) "></path>
+            <path d="M38.5680009,29.5245758 L38.5680009,39.5245758" id="Line" stroke="#FD2A00" stroke-linecap="round" transform="translate(38.568001, 34.524576) rotate(135.000000) translate(-38.568001, -34.524576) "></path>
+            <path d="M38.5680009,29.5245758 L38.5680009,39.5245758" id="Line" stroke="#FD2A00" stroke-linecap="round" transform="translate(38.568001, 34.524576) scale(-1, 1) rotate(135.000000) translate(-38.568001, -34.524576) "></path>
+            <circle id="Oval" stroke="#FFFFFF" fill="#FFFFFF" cx="38.5" cy="34.5" r="2.5"></circle>
+        </g>
+    </g>
+</svg>

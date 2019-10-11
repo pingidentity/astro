@@ -22,22 +22,28 @@ const TextBlock = ({
     children,
     size,
     spacing,
+    alignment,
     className,
     'data-id': dataId,
 }) => {
-    const classNames = classnames('text-block', className, {
+    const classNamesOuter = classnames('text-block', className, {
         'text-block--small': size === 'small',
         'text-block--large': size === 'large',
         'text-block--small-right': size === 'small-right',
         'text-block--margin-xx': spacing === 'xxlarge',
     });
 
+    const classNamesInner = classnames('text-block__text', className, {
+        'text-block__text-center': alignment === 'center',
+        'text-block__text-right': alignment === 'right'
+    })
+
     const Outer = typeof Children === 'string' ? 'p' : 'div';
     const Inner = typeof Children === 'string' ? 'span' : 'div';
 
     return (
-        <Outer className={classNames} data-id={dataId}>
-            <Inner className="text-block__text">{children}</Inner>
+        <Outer className={classNamesOuter} data-id={dataId}>
+            <Inner className={classNamesInner}>{children}</Inner>
         </Outer>
     );
 };
@@ -45,6 +51,7 @@ const TextBlock = ({
 TextBlock.propTypes = {
     size: PropTypes.oneOf(['small', 'large', 'small-right']),
     spacing: PropTypes.oneOf(['xxlarge']),
+    alignment: PropTypes.oneOf(['right', 'center' ]),
     className: PropTypes.string,
     'data-id': PropTypes.string,
 };

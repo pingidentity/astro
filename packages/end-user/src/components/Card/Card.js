@@ -6,6 +6,7 @@ const CardTypes = {
     SLIM: 'slim'
 };
 
+
 /**
  * @class Card
  * @desc Contains UI elements
@@ -14,6 +15,8 @@ const CardTypes = {
  *      Classname to apply to the card
  * @param {string} [width]
  *      Width of the card element
+ * @param {string} [type]
+ *      Type of card that is to be used.
  * @param {node} [children]
  *      Children of the card component
  * @param {string} [data-id]
@@ -24,6 +27,7 @@ const Card = ({
     children,
     width,
     className,
+    error,
     header,
     type,
     'data-id': dataId,
@@ -31,15 +35,14 @@ const Card = ({
     const classNames = classnames('card', 'card--no-padding', className, {
         'card--wide': width === 'large',
         'card--slim': type === CardTypes.SLIM,
+        'card--error': error === true,
     });
 
     return (
         <div className={classNames} data-id={dataId}>
-            { header ? (
-                <div className="card__header">
+              { header ? <div className="card__header">
                     {header}
-                </div>
-            ) : null }
+                </div> : null}
             <div className="card__content">
                 {children}
             </div>
@@ -47,14 +50,15 @@ const Card = ({
     );
 };
 
+Card.CardTypes = CardTypes;
+
 Card.propTypes = {
     className: PropTypes.string,
     width: PropTypes.oneOf(['large']),
-    header: PropTypes.node,
+    error: PropTypes.bool,
     type: PropTypes.oneOf(Object.values(CardTypes)),
+    header: PropTypes.node,
     'data-id': PropTypes.string,
 };
-
-Card.CardTypes = CardTypes;
 
 export default Card;
