@@ -28,6 +28,7 @@ const Card = ({
     children,
     width,
     className,
+    error,
     header,
     type,
     'data-id': dataId,
@@ -35,28 +36,14 @@ const Card = ({
     const classNames = classnames('card', 'card--no-padding', className, {
         'card--wide': width === 'large',
         'card--slim': type === CardTypes.SLIM,
-        'card--error': type === CardTypes.ERROR,
+        'card--error': error === true,
     });
-
-    const headerType = () => {
-        if (type === CardTypes.ERROR) {
-            return (
-            <div className="card__error" />
-            )
-        } else if (header) {
-            return (
-            <div className="card__header">
-                    {header}
-                </div>
-            )
-        } else {
-            return null
-        }
-    }
 
     return (
         <div className={classNames} data-id={dataId}>
-            {headerType()}
+              { header ?<div className="card__header">
+                    {header}
+                </div> : null}
             <div className="card__content">
                 {children}
             </div>
@@ -69,6 +56,7 @@ Card.CardTypes = CardTypes;
 Card.propTypes = {
     className: PropTypes.string,
     width: PropTypes.oneOf(['large']),
+    error: PropTypes.bool,
     type: PropTypes.oneOf(Object.values(CardTypes)),
     header: PropTypes.node,
     'data-id': PropTypes.string,

@@ -22,9 +22,6 @@ $card-padding-horizontal: $spacing-xl;
 
     &--wide {
         max-width: 550px;
-        .card__error {
-            width: 210%;
-        }
     }
     &--auto-height {
         min-height: auto;
@@ -33,17 +30,21 @@ $card-padding-horizontal: $spacing-xl;
     &--error {
         background: $color-light-red;
         overflow: hidden;
+        z-index: 1;
+        &:after {
+                content: '';
+                height: 200%;
+                border-radius: 100% 100% 0 0;
+                background-color: white;
+                top: 200px;
+                position: absolute;
+                width: 250%;
+                transform: translateX(-50%);
+                left: 50%;
+                z-index: -1;
+        }
     }
 
-    &__error {
-        height: 200%;
-        border-radius: 100% 100% 0 0;
-        background-color: white;
-        top: 217px;
-        position: absolute;
-        width: 250%;
-        margin-left: -300px;
-    }
 
     &--slim {
         min-height: unset;

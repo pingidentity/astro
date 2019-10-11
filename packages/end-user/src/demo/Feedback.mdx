@@ -268,7 +268,7 @@ to the `.two-sided` div.
 ### Error Screen
 
 <ComponentDemo>
-    <Card type={CardTypes.ERROR}>
+    <Card error>
         <Logo src="ping-logo.svg"/>
         <IconFeedback type="hourGlass" bold>Trial Expired</IconFeedback>
         <TextBlock size="large" alignment="center">To extend your trial, please contact us.</TextBlock>
@@ -279,11 +279,11 @@ to the `.two-sided` div.
 ### Account Inactive Screen
 
 <ComponentDemo>
-    <Card type={CardTypes.ERROR}>
+    <Card error>
         <Logo src="jj-logo.png"/>
-        <Padding top={sizes.LG}>
+        {/* <Padding top={sizes.LG}> */}
             <IconFeedback type="safe" bold>Account Inactive</IconFeedback>
-        </Padding>
+        {/* </Padding> */}
         <TextBlock size="large">This service is no longer active.</TextBlock>
     </Card>
 </ComponentDemo>
