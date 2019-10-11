@@ -1,5 +1,7 @@
 # PingUX
 
+[![pipeline status](https://gitlab.corp.pingidentity.com/ux/pingux/badges/master/pipeline.svg)](https://gitlab.corp.pingidentity.com/ux/pingux/commits/master)
+
 This is the PingUX monorepo. 📦
 
 Currently, it's used to manage both the `ui-library` (`admin`) and the `end-user` library.

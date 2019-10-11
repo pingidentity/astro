@@ -5,10 +5,12 @@ pipeline {
   stages {
     stage('npm-publish') {
       steps {
-        container('node-builder') {
-          configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
-            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
-              sh "make GIT_BRANCH=${params.BUILD_BRANCH} package-and-upload-landing PRIVATE_SSH_KEY_PATH=${keyfile}"
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder') {
+            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+              withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+                sh "make GIT_BRANCH=${params.BUILD_BRANCH} package-and-upload-landing PRIVATE_SSH_KEY_PATH=${keyfile}"
+              }
             }
           }
         }

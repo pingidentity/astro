@@ -37,7 +37,6 @@ $default-input-border-radius: 2px;
 
 .button,
 .input-radio > input,
-.input-radio--autofocus,
 .anchor,
 .rocker-button__button,
 .value-input__input,
@@ -53,13 +52,13 @@ $default-input-border-radius: 2px;
 .image-icon {
     &:focus {
         outline-width: 0;
+        outline-style: solid;
     }
 }
 
 .ui-library-focus-visible {
     .button,
     .input-radio > input,
-    .input-radio--autofocus,
     .anchor,
     .rocker-button__button,
     .value-input__input,
@@ -461,6 +460,10 @@ label {
             margin-right: 20px;
             padding: 0 0 0 36px;
             text-transform: none;
+
+            &.disabled {
+                @include opacity(0.4);
+            }
 
             .label-text {
                 @include break-word;
@@ -1935,6 +1938,7 @@ input[type=file] {
     @mixin inputMessageDisplay {
         ~ .input-message .input-message__text,
         ~ .form-error-message {
+            @include break-word;
             display: block;
         }
     }
@@ -2720,6 +2724,14 @@ a {
     &.input-textselect .input-text.form-error,
     &.input-textselect .input-text.input-message {
         width: map-get($input-width-settings-map-text, $size);
+    }
+    &.input-multivalues {
+        max-width: map-get($input-width-settings-map-text, $size);
+        width: map-get($input-width-settings-map-text, $size);
+
+        &.input-multivalues--auto-width {
+            width: auto;
+        }
     }
     &.input-textarea {
         width: map-get($input-width-settings-map-textarea, $size);

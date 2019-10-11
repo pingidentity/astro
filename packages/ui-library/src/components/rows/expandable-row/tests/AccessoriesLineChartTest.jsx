@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 import React from "react";
-import { Line, ReferenceLine } from "recharts";
+import { Line, LineChart, YAxis, ReferenceLine } from "recharts";
 import { shallow } from "enzyme";
 import _ from "underscore";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
@@ -37,12 +37,12 @@ describe("AccessoriesLineChartTest", function () {
     ];
 
     const zeroData = [
-        { id: 1, value: "0" },
-        { id: 2, value: "0" },
-        { id: 3, value: "0" },
-        { id: 4, value: "0" },
-        { id: 5, value: "0" },
-        { id: 6, value: "0" },
+        { id: 1, value: 0 },
+        { id: 2, value: 0 },
+        { id: 3, value: 0 },
+        { id: 4, value: 0 },
+        { id: 5, value: 0 },
+        { id: 6, value: 0 },
     ];
 
 
@@ -134,5 +134,18 @@ describe("AccessoriesLineChartTest", function () {
         const line = component.find(ReferenceLine).getElement();
 
         expect(line).toBeDefined();
+    });
+
+    it("should render without LineChart chart has no data", function() {
+        const component = getComponent({ data: [] });
+        const line = component.find(LineChart).isEmpty();
+
+        expect(line).toBeDefined();
+    });
+
+    it("should render YAxis when points have only 0 values", function() {
+        const component = getComponent({ data: zeroData });
+
+        expect(component.find(YAxis).exists()).toBeTruthy();
     });
 });

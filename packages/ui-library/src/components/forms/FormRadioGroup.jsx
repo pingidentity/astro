@@ -13,51 +13,51 @@ import { defaultRender } from "../../util/PropUtils";
 
 /**
  * @typedef FormRadioGroup~RadioGroupItem
- * @property {string} [id]
- *     The item's identifier.
- * @property {string} [name]
- *     The item's display text.
- * @property {string} [helpHintText]
- *     Text to display in help hint next to the item's name.
- * @param {object} [helpTarget]
- *     An optional icon or image to replace standard help hint icon.
  * @property {node} [description]
  *     Description to display below the label.
  * @property {boolean} [disabled]
  *     Disables the input.
+ * @property {string} [helpHintText]
+ *     Text to display in help hint next to the item's name.
+ * @param {object} [helpTarget]
+ *     An optional icon or image to replace standard help hint icon.
  * @property {boolean} [hidden]
  *     Hides the input.
- * @property {node} [labelText]
- *     String or JSX element to display the label for the radio button.
+ * @property {string} [id]
+ *     The item's identifier.
  * @property {string} [label]
  *     Text to display the label for the radio button.
+ * @property {node} [labelHelpText]
+ *     Help hint text to display alongside label.
+ * @property {node} [labelText]
+ *     String or JSX element to display the label for the radio button.
+ * @property {string} [name]
+ *     The item's display text.
  */
 
 /**
  * @class FormRadioGroup
  * @desc FormRadioGroup renders the any object (key/display) into a group of radio buttons
  *
- * @param {string} [data-id="radio-btn"]
- *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [className]
- *     CSS classes to set on the top-level HTML container.
- *
  * @param {boolean} [autoFocus=false]
  *     Whether or not to auto-focus the element.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ * @param {string} [data-id="radio-btn"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {boolean} [disabled=false]
+ *     If radio buttons are disabled.
  * @param {string} [groupName]
  *     Name of the radio group.
  * @param {FormRadioGroup~RadioGroupItem[]} items
  *     Array of RadioGroupItem objects to render.
- * @param {*} [selected]
- *     The selected "id" from the items object above. If none is passed-in, all radio buttons are left unchecked
  * @param {FormRadioGroup~onValueChange} [onValueChange]
  *     Callback to be triggered when the selection is changed.
- *
+ * @param {*} [selected]
+ *     The selected "id" from the items object above. If none is passed-in, all radio buttons are left unchecked
  * @param {boolean} [stacked=true]
  *     When true, radios inputs are stacked vertically. When false radio inputs appear on same line
  *     and wrap when out of space.
- * @param {boolean} [disabled=false]
- *     If radio buttons are disabled.
  * @param {FormRadioGroup~radioRenderer} renderRadio
  *     Renders a single radio button.
  *

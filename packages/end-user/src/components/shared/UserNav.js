@@ -29,23 +29,29 @@ class UserNav extends React.Component {
 
     initialBodyClassNames = `${this.bodyNode.className}`;
 
-    _toggleCollapsibleMenu = () => {
-        this.setState(({ menuOpen }) => ({ menuOpen: !menuOpen }), () => {
-            this.bodyNode.className = classnames(this.initialBodyClassNames, {
-                [MENU_OPEN_CLASSNAME]: this.state.menuOpen
+    _setMenuOpen = (menuOpen) => {
+        if (menuOpen !== this.state.menuOpen) {
+            this.setState({ menuOpen }, () => {
+                this.bodyNode.className = classnames(this.initialBodyClassNames, {
+                    [MENU_OPEN_CLASSNAME]: menuOpen
+                });
             });
-        });
+        }
+    };
+
+    _toggleCollapsibleMenu = () => {
+        this._setMenuOpen(!this.state.menuOpen);
     }
 
     _handleSignOut = () => {
         const { onSignOut } = this.props;
-        this.setState({ menuOpen: false });
+        this._setMenuOpen(false);
         onSignOut();
     }
 
     _handleTabChange = (tab, e) => {
         const { onTabChange } = this.props;
-        this.setState({ menuOpen: false });
+        this._setMenuOpen(false);
         onTabChange(tab, e);
     }
 
