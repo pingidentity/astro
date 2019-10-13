@@ -1,3 +1,12 @@
+@mixin no-circle-icon {
+    background: none;
+
+    &:before {
+        font-size: 150%;
+        color: $color-white;
+    }
+}
+
 .page-messages {
     position: fixed;
     z-index: $zindex__message;
@@ -80,11 +89,11 @@
 
             .message__icon {
                 display: inline-block;
-                width: 33px;
-                height: 33px;
+                width: 32px;
+                height: 32px;
                 border-radius: 17px;
-                line-height: 35px;
-                font-size: 16px;
+                line-height: 32px;
+                font-size: 20px;
                 margin-right: $spacing-md;
 
                 &.icon-error-triangle {
@@ -190,9 +199,15 @@
             height: 19px;
             border-radius: 10px;
             text-align: center;
-            line-height: 20px;
+            line-height: 19px;
 
-            font-size: 10px;
+            font-size: 13px;
+
+            &.icon-alert,
+            &.icon-info,
+            &.icon-error-triangle {
+                @include no-circle-icon;
+            }
         }
 
         &__progress {

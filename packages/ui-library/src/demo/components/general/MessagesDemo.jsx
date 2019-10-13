@@ -16,7 +16,7 @@ import ValueItem from "../../../components/layout/ValueItem";
  */
 class MessagesDemo extends React.Component {
     state = {
-        cornerDefault: false,
+        bannerDefault: false,
     }
 
     actions = bindActionCreators(Messages.Actions, this.props.store.dispatch);
@@ -25,7 +25,6 @@ class MessagesDemo extends React.Component {
         this.actions.addMessage({
             message: `New Error Message Added at ${new Date().toString()}`,
             status: Messages.MessageTypes.SUCCESS,
-            iconName: "success",
         });
     };
 
@@ -50,7 +49,6 @@ class MessagesDemo extends React.Component {
         this.actions.addMessage({
             message: `New Error Message Added at ${new Date().toString()}`,
             status: Messages.MessageTypes.ERROR,
-            iconName: "clear",
         });
     };
 
@@ -62,33 +60,30 @@ class MessagesDemo extends React.Component {
         this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.INFO);
     };
 
-    _addCornerSuccessMessage = () => {
+    _addBannerSuccessMessage = () => {
         this.actions.addMessage({
             message: `New Success Message Added at ${new Date().toString()}`,
             status: Messages.MessageTypes.SUCCESS,
-            layout: Messages.Layouts.CORNER,
-            iconName: "success",
+            layout: Messages.Layouts.BANNER,
             hideClose: true,
             removeAfterMs: 10000,
         });
     }
 
-    _addCornerWarningMessage = () => {
+    _addBannerWarningMessage = () => {
         this.actions.addMessage({
             message: `New Warning Message Added at ${new Date().toString()}`,
             status: Messages.MessageTypes.WARNING,
-            layout: Messages.Layouts.CORNER,
-            iconName: "error-triangle",
+            layout: Messages.Layouts.BANNER,
             removeAfterMs: 0,
         });
     }
 
-    _addCornerDeletedMessage = () => {
+    _addBannerDeletedMessage = () => {
         this.actions.addMessage({
             message: "You've successfully removed (email address) from your authentication methods.",
             status: Messages.MessageTypes.INFO,
-            layout: Messages.Layouts.CORNER,
-            iconName: "delete",
+            layout: Messages.Layouts.BANNER,
             hideClose: true,
             removeAfterMs: 10000,
         });
@@ -177,7 +172,7 @@ class MessagesDemo extends React.Component {
         return mssgs[key] || "i18n key key not found";
     }
 
-    _toggleCornerDefault = () => this.setState(({ cornerDefault }) => ({ cornerDefault: !cornerDefault }));
+    _toggleBannerDefault = () => this.setState(({ bannerDefault }) => ({ bannerDefault: !bannerDefault }));
 
     render() {
         return (
@@ -187,7 +182,7 @@ class MessagesDemo extends React.Component {
                     messages={this.props.messages}
                     onRemoveMessage={this.actions.removeAt}
                     flags={this.props.flags}
-                    defaultMessageLayout={this.state.cornerDefault ? Messages.Layouts.CORNER : undefined}
+                    defaultMessageLayout={this.state.bannerDefault ? Messages.Layouts.BANNER : undefined}
                 />
                 <Messages
                     data-id="messages-i18n"
@@ -196,7 +191,7 @@ class MessagesDemo extends React.Component {
                     onRemoveMessage={this.actions.removeAt}
                     flags={this.props.flags}
                     onI18n={this._onI18n}
-                    defaultMessageLayout={this.state.cornerDefault ? Messages.Layouts.CORNER : undefined}
+                    defaultMessageLayout={this.state.bannerDefault ? Messages.Layouts.BANNER : undefined}
                 />
 
                 <InputRow>
@@ -208,18 +203,18 @@ class MessagesDemo extends React.Component {
 
                 <InputRow>
                     <Button onClick={this._addSuccessMessage}>Add success message - MessageTypes.SUCCESS</Button>
-                    <Button onClick={this._addCornerSuccessMessage}>Add corner success message</Button>
+                    <Button onClick={this._addBannerSuccessMessage}>Add banner success message</Button>
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addErrorMessage}>Add error message - MessageTypes.ERROR</Button>
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addWarningMessage}>Add warning message - MessageTypes.WARNING</Button>
-                    <Button onClick={this._addCornerWarningMessage}>Add corner warning message</Button>
+                    <Button onClick={this._addBannerWarningMessage}>Add banner warning message</Button>
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addInfoMessage}>Add info message - MessageTypes.INFO</Button>
-                    <Button onClick={this._addCornerDeletedMessage}>Add corner deleted message</Button>
+                    <Button onClick={this._addBannerDeletedMessage}>Add banner deleted message</Button>
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addI18nInfoMessage}>Add an i18n message - MessageTypes.INFO</Button>
@@ -240,11 +235,11 @@ class MessagesDemo extends React.Component {
                 <ValueItem
                     icon={
                         <Toggle
-                            onToggle={this._toggleCornerDefault}
-                            toggled={this.state.cornerDefault}
+                            onToggle={this._toggleBannerDefault}
+                            toggled={this.state.bannerDefault}
                         />
                     }
-                >Default to corner layout</ValueItem>
+                >Default to banner layout</ValueItem>
             </div>
         );
     }
