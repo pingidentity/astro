@@ -193,6 +193,7 @@ class DemoApp extends React.Component {
         // Enable collapsible, updated for LeftNav
         this.navActions.setCollapsible(true);
         this.navActions.setUpdated(true);
+        this.navActions.setAutocollapse(true);
 
         this.navActions.init(require("./core/demos.js").map(this._processItems));
         this.navActions.setRoot("Documentation");
@@ -298,7 +299,7 @@ class DemoApp extends React.Component {
         return (
             <AppFrame
                 autoSelectItemFromRoot={true}
-                autoSelectSectionFromItem={false}
+                autoSelectSectionFromItem={true}
                 autoSelectItemFromSection={true}
                 className="components-container"
                 oneSectionOnly={true}
