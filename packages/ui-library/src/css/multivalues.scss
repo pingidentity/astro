@@ -61,6 +61,7 @@
                 color: $color-midnight;
                 @include text-value;
                 margin: 0;
+                @include break-word;
             }
 
             &__edit {
