@@ -322,7 +322,7 @@ table.grid td.grid__cell {
             white-space: nowrap;
             width: 100%;
         }
-        [data-id="icon"] {
+        .icon-edit {
             padding-right: 25px;
             color: $color-accent-neutral-10;
             &:hover {
