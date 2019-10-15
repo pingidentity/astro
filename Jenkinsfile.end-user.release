@@ -16,7 +16,6 @@ pipeline {
                 sh "cd dist"
                 sh "npm publish"
                 sh "cd .."
-                sh "make GIT_BRANCH=${params.RELEASE_BRANCH} version GERRIT_SSH_KEY_PATH=${gerritKeyPath}"
               }
             }
           }
