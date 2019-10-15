@@ -51,7 +51,7 @@ define package_css
 endef
 
 version:
-	npm version --no-git-tag-version
+	npm version minor --no-git-tag-version
 	git commit -a -m "Prepare for the next end-user release cycle"
 	GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin $(GIT_BRANCH)
 
@@ -75,4 +75,4 @@ package_and_tag: install-node-npm clean-css
 	mv dist/end-user.css build-css/$(GIT_VERSION)
 
 	git tag end-user-$(GIT_VERSION)
-	GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin $(GIT_BRANCH)
+	GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin end-user-$(GIT_VERSION)

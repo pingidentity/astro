@@ -40,9 +40,7 @@ pipeline {
       }
     }
     cleanup {
-        dir("${env.WORKSPACE}/packages/end-user") {
-            sh "rm -rf ./static"
-        }
+        cleanWs()
     }
   }
 }
