@@ -41,12 +41,7 @@ pipeline {
     }
     cleanup {
         dir("${env.WORKSPACE}/packages/end-user") {
-            script {
-                image.inside('-u root') {
-                    sh 'find . -user root -name \'*\' | xargs chmod ugo+rw'
-                }
-            }
-            deleteDir()
+            sh "rm -rf ./static"
         }
     }
   }
