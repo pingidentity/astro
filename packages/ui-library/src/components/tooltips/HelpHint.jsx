@@ -9,12 +9,16 @@ var _ = require("underscore");
 
 /**
  * @enum {string}
- * @alias HelpHint.Positions
+ * @alias HelpHint.Placements
  */
 const Placements = {
+    /** top */
     TOP: "top",
+    /** bottom */
     BOTTOM: "bottom",
+    /** left */
     LEFT: "left",
+    /** right */
     RIGHT: "right"
 };
 
@@ -24,9 +28,13 @@ const Placements = {
  */
 const Types = {
     DEFAULT: "",
+    /** error */
     ERROR: "error",
+    /** light */
     LIGHT: "light",
+    /** success */
     SUCCESS: "success",
+    /** warning */
     WARNING: "warning",
 };
 
@@ -45,10 +53,10 @@ const Types = {
  *     Multiple rows of text are supported.
  *     HTML is supported.
  *
- * @param {string} [data-id="helpHint"]
- *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {string} [data-id="helpHint"]
+ *     To define the base "data-id" value for top-level HTML container.
  * @param {number} [delayHide=400]
  *     Sets the number of milliseconds to wait before hiding the tooltip.
  * @param {number} [delayShow=0]
@@ -59,6 +67,8 @@ const Types = {
  *
  * @param {string} link
  *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
+ * @param {HelpHint.Placements} [placement]
+ *     How to place the help hint.
  * @param {bool} [unstyleTrigger=false]
  *     When set, don't apply any styling to the helphint trigger.
  *
@@ -232,3 +242,5 @@ class HelpHint extends React.Component {
 module.exports = HelpHint;
 module.exports.Placements = Placements;
 module.exports.Types = Types;
+module.exports.placements = Placements;
+module.exports.types = Types;
