@@ -5,6 +5,14 @@ import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 
 /**
+ * @callback Table~cellRenderer
+ * @param {string|number} cell
+ *     Data for the cell
+ * @param {array} row
+ *     All the data for the row
+ *
+ *
+/**
  * @class Table
  *
  * @desc A stateless component for displaying tabular data
@@ -12,7 +20,8 @@ import HelpHint from "../tooltips/HelpHint";
  * @param {Object[]} [bodyData]
  *      An array of arrays for the body that are ordered in the same was as the headData.
  * @param {function} [cellRenderers]
- *      An array of functions to be applied to a specific table cell
+ *      An array of functions that transform the data for each column in the table.
+ *      You can target a specific column like this: [null, null, function, null]
  * @param {string} [className]
  *      CSS class name for Table.
  * @param {string} [data-id]
