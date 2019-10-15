@@ -17,7 +17,7 @@ class HelpHintDemo extends React.Component {
     render() {
         return (
             <div>
-                <FormLabel value="Help Hints On Various Elements" className="detached" />
+                <FormLabel value="Help Hints On Various Elements" detached />
                 <HelpHint
                     data-id="helphint-regular"
                     ref="testTip"
@@ -44,7 +44,7 @@ class HelpHintDemo extends React.Component {
 
                 <br /><br /><br />
 
-                <FormLabel value="Help Hint Placement" className="detached" />
+                <FormLabel value="Help Hint Placement" detached />
                 <HelpHint
                     data-id="helphint-topplacement"
                     placement="top"
@@ -70,7 +70,7 @@ class HelpHintDemo extends React.Component {
                 />
 
                 <br /><br /><br />
-                <FormLabel value="Help Hint with Link" className="detached" />
+                <FormLabel value="Help Hint with Link" detached />
                 <HelpHint
                     data-id="helphint-more"
                     hintText="Help hint text"

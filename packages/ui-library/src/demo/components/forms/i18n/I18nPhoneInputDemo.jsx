@@ -1,5 +1,6 @@
 import React from "react";
 import I18nPhoneInput from "../../../../components/forms/i18n/phone-input";
+import FormLabel from "../../../../components/forms/FormLabel"
 
 /**
 * @name I18nPhoneInputDemo
@@ -83,7 +84,7 @@ class I18nPhoneInputDemo extends React.Component {
     render() {
         return (
             <div>
-                <label className="detached">Stateful Phone Input</label>
+                <FormLabel detached>Stateful Phone Input</FormLabel>
                 <I18nPhoneInput
                     onValueChange={this._handleValueChangeStateful}
                     countryCode={this.state.countryCodeStateful}
@@ -97,7 +98,7 @@ class I18nPhoneInputDemo extends React.Component {
                 </div>
                 <br />
 
-                <label className="detached">Stateless Phone Input</label>
+                <FormLabel detached>Stateless Phone Input</FormLabel>
                 <I18nPhoneInput
                     stateless={true}
                     name="second-item"
@@ -119,7 +120,7 @@ class I18nPhoneInputDemo extends React.Component {
                 </div>
                 <br/>
 
-                <label className="detached">Stateless Phone Input with Error</label>
+                <FormLabel detached>Stateless Phone Input with Error</FormLabel>
                 <I18nPhoneInput
                     stateless={true}
                     open={false}
@@ -129,7 +130,7 @@ class I18nPhoneInputDemo extends React.Component {
                 />
                 <br/>
 
-                <label className="detached">Stateless, Disabled Phone Input</label>
+                <FormLabel detached>Stateless, Disabled Phone Input</FormLabel>
                 <I18nPhoneInput
                     stateless={true}
                     open={false}
@@ -145,7 +146,7 @@ class I18nPhoneInputDemo extends React.Component {
                 </div>
                 <br/>
 
-                <label className="detached">Force Error to Show</label>
+                <FormLabel detached>Force Error to Show</FormLabel>
                 <I18nPhoneInput
                     stateless={true}
                     countryCode="dj"
@@ -160,7 +161,7 @@ class I18nPhoneInputDemo extends React.Component {
                     &nbsp;{this.state.phoneNumberStateless}
                 </div>
                 <br/>
-                <label className="detached">Country code auto-detected based on phone number</label>
+                <FormLabel detached>Country code auto-detected based on phone number</FormLabel>
                 <I18nPhoneInput
                     //stateless
                     phoneNumber={this.state.phoneNumberStateless3}
