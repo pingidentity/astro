@@ -13,15 +13,11 @@ pipeline {
                 sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
               ]){
                 sh "make GIT_BRANCH=${params.RELEASE_BRANCH} package_and_tag GERRIT_SSH_KEY_PATH=${gerritKeyPath}"
+                sh "cd dist"
+                sh "npm publish"
+                sh "cd .."
+                sh "make GIT_BRANCH=${params.RELEASE_BRANCH} version GERRIT_SSH_KEY_PATH=${gerritKeyPath}"
               }
-            }
-            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
-              sh """
-                cd dist;
-                npm publish;
-                cd ..;
-                make GIT_BRANCH=${params.RELEASE_BRANCH} version GERRIT_SSH_KEY_PATH=${gerritKeyPath};
-              """
             }
           }
         }
@@ -43,8 +39,13 @@ pipeline {
         }
       }
     }
-    always {
+    cleanup {
         dir("${env.WORKSPACE}/packages/end-user") {
+            script {
+                image.inside('-u root') {
+                    sh 'find . -user root -name \'*\' | xargs chmod ugo+rw'
+                }
+            }
             deleteDir()
         }
     }
