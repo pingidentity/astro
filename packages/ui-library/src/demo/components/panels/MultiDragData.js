@@ -102,6 +102,7 @@ exports.columns = [
         name: "Added Rows",
         id: 2,
         disableSort: false,
+        helpText: "A helphint can be added to the column titles A helphint can be added to the column titles A helphint can be added to the column titles A helphint can be added to the column titles A helphint can be added to the column titles ",
         rows: [
             {
                 id: 11,
