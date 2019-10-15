@@ -43,5 +43,10 @@ pipeline {
         }
       }
     }
+    always {
+        dir("${env.WORKSPACE}/packages/end-user") {
+            deleteDir()
+        }
+    }
   }
 }
