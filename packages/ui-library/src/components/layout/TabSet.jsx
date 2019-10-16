@@ -85,7 +85,7 @@ class TabSet extends Component {
 
     render () {
         const {
-            children = [],
+            children,
             onValueChange,
             renderLabels,
             selectedIndex,

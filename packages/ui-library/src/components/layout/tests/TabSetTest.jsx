@@ -30,58 +30,42 @@ describe("TabSet", function () {
 
     it("getLabels correctly gets labels and active tab content", function () {
         const component = getTabSet({
-            selectedIndex: 0
+            selectedIndex: 0,
+            children: [
+                <TabContent label="label one">
+                    whatever
+                </TabContent>,
+                <TabContent label="label two">
+                        hello world
+                </TabContent>
+            ]
         });
 
-        const mock = [
-            {
-                props: {
-                    label: "label one",
-                    children: ["whatever"]
-                }
-            },
-            {
-                props: {
-                    label: "label two",
-                    children: ["hello world"]
-                }
-            }
-        ];
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+        const firstButton = TestUtils.scryRenderedDOMNodesWithClass(element, "rocker-button__button")[0];
+        const activeTab = TestUtils.findRenderedDOMNodeWithClass(element, "tab-set-children");
 
-        const {
-            activeTabContent,
-            labels
-        } = component._getLabels(mock);
-
-        expect(labels).toEqual(["label one", "label two"]);
-        expect(activeTabContent).toEqual(["whatever"]);
+        expect(firstButton.textContent).toEqual("label one");
+        expect(activeTab.textContent).toEqual("whatever");
     });
 
     it("getLabels correctly gets active tab content for non-default tab", function () {
         const component = getTabSet({
-            selectedIndex: 1
+            selectedIndex: 1,
+            children: [
+                <TabContent label="label one">
+                    whatever
+                </TabContent>,
+                <TabContent label="label two">
+                    hello world
+                </TabContent>
+            ]
         });
 
-        const mock = [
-            {
-                props: {
-                    label: "label one",
-                    children: ["whatever"]
-                }
-            },
-            {
-                props: {
-                    label: "label two",
-                    children: ["hello world"]
-                }
-            }
-        ];
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+        const activeTab = TestUtils.findRenderedDOMNodeWithClass(element, "tab-set-children");
 
-        const {
-            activeTabContent,
-        } = component._getLabels(mock);
-
-        expect(activeTabContent).toEqual(["hello world"]);
+        expect(activeTab.textContent).toEqual("hello world");
     });
 
     it("renders the custom labels correctly", () => {
