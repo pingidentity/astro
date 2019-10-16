@@ -16,6 +16,20 @@ import { cannonballProgressivelyStatefulWarning } from "../../../util/Deprecatio
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
+ * @enum {string}
+ * @alias TextArea.inputHeights
+ * @desc Heights for TextArea component.
+ */
+const inputHeights = {
+    /** short */
+    SM: "short",
+    /** medium */
+    MD: "medium",
+    /** large */
+    LG: "large"
+};
+
+/**
 * @callback FormTextArea~onChange
 * @param {object} e
 *     The ReactJS synthetic event object.
@@ -53,6 +67,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
 *     CSS classes to set on the HelpHint component.
+* @param {TextArea.inputHeights} [height]
+*     Hard-coded heights for text areas.
 * @param {string} [inputClassName]
 *     CSS classes to set on the input element.
 * @param {string} [label]
@@ -97,10 +113,6 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 *     If true, the user must select a value for this field.
 * @param {boolean} [showUndo=false]
 *     Whether or not to display an undo option when field is edited. Only used when stateless=true.
-* @param {boolean} [stateless]
-*     WARNING. Default value for "stateless" will be set to true from next version.
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
 * @param {boolean} [useAutocomplete=false]
 *     Whether or not the field will support autocomplete.
 * @param {FormTextArea~onBlur} [onBlur]
@@ -138,6 +150,7 @@ class FormTextAreaStateless extends React.Component {
         disabled: PropTypes.bool,
         edited: PropTypes.bool,
         errorMessage: PropTypes.string,
+        height: PropTypes.oneOf(Object.values(inputHeights)),
         helpClassName: PropTypes.string,
         inputClassName: PropTypes.string,
         label: PropTypes.oneOfType([
@@ -210,7 +223,8 @@ class FormTextAreaStateless extends React.Component {
                     edited: this.props.edited,
                     "value-entered": !!this.props.value,
                     readonly: readonly,
-                    actions: this.props.showUndo
+                    actions: this.props.showUndo,
+                    [`textarea-height--${this.props.height}`]: this.props.height,
                 }
             );
 
@@ -377,3 +391,6 @@ export default class FormTextArea extends React.Component {
         );
     }
 }
+FormTextArea.inputHeights = inputHeights;
+
+export default FormTextArea;
