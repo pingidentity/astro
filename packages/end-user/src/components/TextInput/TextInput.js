@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { noop } from 'underscore';
 
 /**
  * @enum {string}
@@ -19,6 +20,42 @@ export const textInputTypes = {
  * @param {object} e
  *    The ReactJS synthetic event object.
  */
+
+/**
+* @callback TextInput~onBlur
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback TextInput~onFocus
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback TextInput~onKeyDown
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback TextInput~onKeyPress
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback TextInput~onMouseDown
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
 
 /**
  * @class TextInput
@@ -46,6 +83,11 @@ const TextInput = ({
     'data-id': dataId,
     defaultValue,
     onChange,
+    onFocus,
+    onBlur,
+    onKeyPress,
+    onKeyDown,
+    onMouseDown,
     id,
     placeholder,
     type,
@@ -66,6 +108,11 @@ const TextInput = ({
             id={id}
             name={id}
             onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onKeyPress={onKeyPress}
+            onKeyDown={onKeyDown}
+            onMouseDown={onMouseDown}
             placeholder={placeholder}
             type="text"
             value={value}
@@ -76,6 +123,12 @@ const TextInput = ({
 
 TextInput.defaultProps = {
     'data-id': 'text-input',
+    onChange: noop,
+    onFocus: noop,
+    onBlur: noop,
+    onKeyPress: noop,
+    onKeyDown: noop,
+    onMouseDown: noop,
 };
 
 TextInput.propTypes = {
@@ -86,9 +139,18 @@ TextInput.propTypes = {
     ]),
     id: PropTypes.string,
     onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    onMouseDown: PropTypes.func,
     placeholder: PropTypes.string,
     type: PropTypes.oneOf(Object.values(textInputTypes)),
     value: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+    ]),
+    width: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string,
     ]),

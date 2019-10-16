@@ -9,6 +9,7 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import { inStateContainer } from "../utils/StateContainer";
 
+
 /**
 * @typedef RockerButton~labelValues
 * @property {string} label
@@ -132,11 +133,21 @@ class RockerButtonStateless extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        labels: PropTypes.array.isRequired,
+        labels: PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.shape({
+                    label: PropTypes.string.isRequired,
+                    id: PropTypes.string
+                }),
+            ])),
         labelHints: PropTypes.arrayOf(PropTypes.string),
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
-        selectedIndex: PropTypes.number,
+        selectedIndex: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+        ]),
         autoFocus: PropTypes.bool,
         disabled: PropTypes.bool,
     };
@@ -155,29 +166,45 @@ class RockerButtonStateless extends React.Component {
         if (this.props.disabled) {
             return;
         }
-
         this.props.onValueChange({ label: label, index: index });
 
     };
 
+    buttonPos = () => {
+        if (typeof this.props.labels[0] === "object") {
+            if (this.props.selectedIndex) {
+                return this.props.labels.findIndex(({ id }) => id === this.props.selectedIndex);
+            }
+            return 0;
+        } else {
+            return this.props.selectedIndex;
+        }
+    };
+
     render() {
-        var className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className, {
+        var className = classnames("rocker-button sel-" + this.buttonPos(), this.props.className, {
             disabled: this.props.disabled
         });
+
 
         return (
             <div ref="container" data-id={this.props["data-id"]} className={className}>
                 {
-                    this.props.labels.map((text, index) => {
-                        const props = {
+                    this.props.labels.map((data, index) => {
+                        let props = {
                             onClick: this._handleClick,
                             key: index,
-                            text,
                             index,
                             autoFocus: index === this.props.selectedIndex &&
-                                this.props.autoFocus === true,
+                                  this.props.autoFocus === true,
                             helpText: this.props.labelHints ? this.props.labelHints[index] : undefined,
                         };
+                        if (data && data.id) {
+                            props.text = data.label;
+                            props["data-id"] = data.id;
+                        } else {
+                            props.text = data;
+                        }
                         return (
                             <RockerButtonLabel {...props} />);
                     })
@@ -189,7 +216,11 @@ class RockerButtonStateless extends React.Component {
 
 var RockerButtonLabel = function (props) {
     var _handleClick = function (event) {
-        props.onClick(props.text, props.index, event);
+        if (props["data-id"]) {
+            props.onClick(props.text, props["data-id"], event);
+        } else {
+            props.onClick(props.text, props.index, event);
+        }
     };
 
     const { text = "" } = props;
@@ -203,7 +234,7 @@ var RockerButtonLabel = function (props) {
             delayShow={500}
             hintText={props.helpText} >
             <button
-                data-id={`rocker-label_${sanitizedText}`}
+                data-id={props["data-id"] || `rocker-label_${sanitizedText}`}
                 className="rocker-button__button"
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
@@ -213,7 +244,7 @@ var RockerButtonLabel = function (props) {
             </button>
         </HelpHint>
         : <button
-            data-id={`rocker-label_${sanitizedText}`}
+            data-id={props["data-id"] || `rocker-label_${sanitizedText}`}
             className="rocker-button__button"
             onClick={_handleClick}
             autoFocus={props.autoFocus}
@@ -232,8 +263,10 @@ RockerButtonLabel.propTypes = {
 };
 
 class RockerButtonStateful extends React.Component {
+
+
     state = {
-        selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected))
+        selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected)),
     };
 
     _handleOnValueChange = (selectedButton) => {

@@ -7,6 +7,7 @@
     font-size: 14px;
     line-height: 1em;
     background-color: transparent;
+    display: inline-block;
     @include font-pn-regular;
     @include break-word;
 
@@ -26,6 +27,9 @@
             padding: $spacing-lg;
             border-radius: 3px;
             margin: 0;
+        }
+        &.unfocused {
+            padding: 0;
         }
     }
 

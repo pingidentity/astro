@@ -66,15 +66,9 @@ endif
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
 
-ifeq ($(GIT_BRANCH),master)
-	PACKAGE_VERSION=$(GIT_VERSION)
-	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)
-	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)
-else
-	PACKAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
-	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)-$(GIT_BRANCH)
-	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)-$(GIT_BRANCH)
-endif
+PACKAGE_VERSION=$(GIT_VERSION)
+PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)
+PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)
 
 
 # find the name of the reference coverage to download, by sending HEAD requests for various coverage packages:
@@ -220,7 +214,7 @@ verify: install-node-npm
 integration: install-node-npm
 	rm -rf reports
 	npm run pack
-	node_modules/.bin/wdio wdio.conf.js --spec DetailsTooltip
+	node_modules/.bin/wdio wdio.conf.js
 
 # $(SAUCELABS_BROWSER) is parameter from Jenkins variable SAUCELABS_BROWSER
 integration-saucelabs: install-node-npm
