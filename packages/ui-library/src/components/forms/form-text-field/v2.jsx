@@ -432,6 +432,8 @@ class Stateless extends React.Component {
             return this.props.autoComplete;
         } else if (this.props.autoComplete) {
             return "on";
+        } else {
+            return "new-password";
         }
     }
 
