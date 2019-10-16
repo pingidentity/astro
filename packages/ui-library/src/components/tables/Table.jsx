@@ -7,9 +7,9 @@ import HelpHint from "../tooltips/HelpHint";
 /**
  * @callback Table~cellRenderer
  * @param {string|number} cell
- *     Data for the cell
+ *     Data for the cell.
  * @param {array} row
- *     All the data for the row
+ *     All the data for the row.
  *
  *
 /**
@@ -18,7 +18,7 @@ import HelpHint from "../tooltips/HelpHint";
  * @desc A stateless component for displaying tabular data
  *
  * @param {Object[]} [bodyData]
- *      An array of arrays for the body that are ordered in the same was as the headData.
+ *      An array of arrays for the body that are ordered in the same way as the headData.
  * @param {function} [cellRenderers]
  *      An array of functions that transform the data for each column in the table.
  *      You can target a specific column like this: [null, null, function, null]
