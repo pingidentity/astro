@@ -18,7 +18,7 @@ import Table, {
     columnAlignments,
 } from "../components/tables/Table";
 import CalloutBox from "../components/layout/CalloutBox";
-import Padding from "../components/layout/Padding";
+import Padding, { sizes } from "../components/layout/Padding";
 
 
 /**
@@ -33,7 +33,7 @@ const LicenseOption = ({
     renewed,
     type,
 }) => (
-    <Padding vertical={Padding.sizes.SM}>
+    <Padding vertical={sizes.SM}>
         <FlexRow spacing={spacingOptions.LG} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
             <Stack gap="XS">
                 <Text type="parent-label">{type}</Text>

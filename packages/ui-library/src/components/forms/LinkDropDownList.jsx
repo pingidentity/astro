@@ -101,24 +101,14 @@ class LinkDropDownListStateless extends React.Component {
     };
 
     _renderLabel = () => {
-        if (!this.props.noCaret) {
-            return (
-                <CollapsibleLink
-                    data-id={this.props["data-id"] + "-label"}
-                    expanded={this.props.open}
-                    title={this.props.label}
-                />
-            );
-        } else {
-            return (
-                <CollapsibleLink
-                    data-id={this.props["data-id"] + "-label"}
-                    expanded={this.props.open}
-                    title={this.props.label}
-                    arrowPosition={CollapsibleLink.arrowPositions.NOCARET}
-                />
-            );
-        }
+        return (
+            <CollapsibleLink
+                data-id={this.props["data-id"] + "-label"}
+                expanded={this.props.open}
+                title={this.props.label}
+                arrowPosition={this.props.noCaret ? CollapsibleLink.arrowPositions.NOCARET : this.props.arrowPosition }
+            />
+        );
     };
 
     _renderOptions = () => {

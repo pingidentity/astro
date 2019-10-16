@@ -60,6 +60,4 @@ Padding.defaultProps = {
     "data-id": "padding-component"
 };
 
-Padding.sizes = sizes;
-
 export default Padding;
