@@ -171,7 +171,7 @@ class FileInput extends Component {
                     <fieldset className={classNames} style={{
                         borderColor: errorColor
                     }}>
-                        {selectedTitle ? <legend>{selectedTitle}</legend> : null }
+                        {selectedTitle && !noBorder ? <legend>{selectedTitle}</legend> : null }
                         <div className="input-file__selected-content">
                             <div className="input-file__info">
                                 <Icon

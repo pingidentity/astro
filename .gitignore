@@ -1,3 +1,6 @@
 node_modules
 
 .DS_Store
+
+packages/end-user/build-css
+packages/end-user/static

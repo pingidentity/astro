@@ -2,6 +2,11 @@
     text-align: center;
     margin: 0 auto $spacing-lg auto;
     max-width: 250px;
+    box-sizing: border-box;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .org-logo__image {
