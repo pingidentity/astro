@@ -1713,7 +1713,7 @@ input[type=file] {
     }
     &.show-selection-options {
         width: 220px;
-        padding-bottom: 5px;
+        padding-bottom: 30px;
     }
     &.fluid-width {
         max-width: 400px;
@@ -1734,6 +1734,13 @@ input[type=file] {
 .list-input__bottom-links {
     border-top: 1px solid $color-input-fill;
     padding: 5px 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    background: $color-white;
+    padding: $spacing-xs 0;
+    text-align: center;
 
     .option,
     a {
