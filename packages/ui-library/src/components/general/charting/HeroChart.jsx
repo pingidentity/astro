@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "underscore";
-import { BarChart, XAxis, Tooltip, Bar, Cell } from "recharts";
+import { ResponsiveContainer, BarChart, XAxis, Tooltip, Bar, Cell } from "recharts";
 import RockerButton from "../../forms/RockerButton";
 import PageSpinner from "../../general/PageSpinner";
 
@@ -284,7 +284,12 @@ export default class HeroChart extends Component {
                     </div>
                 }
                 {!errorMessage && !loading && [
-                    <div key="top-chart" className="hero-chart__top-chart">
+                    <ResponsiveContainer
+                        key="top-chart"
+                        className="hero-chart__top-chart"
+                        height={topChartHeight}
+                        width="100%"
+                    >
                         <BarChart
                             {...chartProps}
                             data-id={`${dataId}-top-chart`}
@@ -293,8 +298,14 @@ export default class HeroChart extends Component {
                             <Tooltip {...tooltipProps} position={{ y: -25 }} selected={this.state.barSelected} />
                             {this._renderBars(data, topSeriesKey, "#fff")}
                         </BarChart>
-                    </div>,
-                    <div key="bottom-chart" className="hero-chart__bottom-chart">
+                    </ResponsiveContainer>
+                    ,
+                    <ResponsiveContainer
+                        key="bottom-chart"
+                        className="hero-chart__bottom-chart"
+                        height={botChartHeight}
+                        width="100%"
+                    >
                         <BarChart
                             {...chartProps}
                             data-id={`${dataId}-bottom-chart`}
@@ -306,7 +317,7 @@ export default class HeroChart extends Component {
                             />
                             {this._renderBars(data, bottomSeriesKey, "#ffa500")}
                         </BarChart>
-                    </div>
+                    </ResponsiveContainer>
                 ]}
                 <RockerButton
                     key="range-selector"

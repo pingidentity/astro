@@ -44,6 +44,7 @@ $fullwidthBreakpoint: 950px;
 
     position: relative;
     max-width: 100%;
+    min-width: 220px;
 
     > * {
         @include flexbox-grow(1);
@@ -66,6 +67,7 @@ $fullwidthBreakpoint: 950px;
         box-sizing: border-box;
         padding: $spacing-xl $spacing-lg;
         min-height: 227px;
+        overflow-x: auto;
 
         @media (max-width: $condensedBreakpoint) {
             padding: $spacing-xl $spacing-md;
@@ -129,6 +131,7 @@ $fullwidthBreakpoint: 950px;
         }
 
         &--heatmap {
+            max-width: 570px;
             margin-bottom: 10px;
         }
     }
@@ -371,20 +374,20 @@ $fullwidthBreakpoint: 950px;
     min-height: 280px;
 
     &__front-title {
-        min-width: 200px;
+        display: flex;
+        align-items: center;
         margin-bottom: 10px;
         white-space: nowrap;
         @media (min-width: $condensedBreakpoint), (max-width: $fullwidthBreakpoint) {
-            display: flex;
-            align-items: center;
             height: 31px;
             margin-bottom: 0;
         }
     }
 
     &__value {
+        display: flex;
+        justify-content: center;
         color: $color-neutral-10;
-        text-align: center;
         font-size: 50px;
         line-height: 1em;
         min-height: 1em;
@@ -393,10 +396,13 @@ $fullwidthBreakpoint: 950px;
 
     &__no-data-message {
         position: absolute;
-        bottom: 20px;
-        left: 50%;
-        width: 100%;
-        transform: translateX(-50%);
+        bottom: 0;
+        left: 15px;
+        height: 55px;
+        right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &__chart {
@@ -725,19 +731,31 @@ $fullwidthBreakpoint: 950px;
     text-align: center;
     white-space: nowrap;
 
+    &__content {
+        max-width: 800px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+    }
+
     &__chart,
-    &__data {
-        display: inline-block;
-        vertical-align: middle;
+    &__data,
+    &__footer {
+        max-width: 570px;
+    }
+
+    &__chart {
+        overflow-x: auto;
     }
 
     &__data {
-        margin: 0 0 15px $spacing-xl;
+        flex-grow: 1;
         color: $color-neutral-10;
         white-space: initial;
     }
 
-    &__chart-title {
+    &__chart-title, {
         margin: 0 0 $spacing-sm;
         color: $color-neutral-10;
         font-size: 18px;
@@ -768,9 +786,9 @@ $fullwidthBreakpoint: 950px;
     }
 
     .dashboard-card__front {
+        overflow-y: hidden;
         padding-top: 20px;
         padding-bottom: 20px;
-        min-height: 295px;
     }
 }
 

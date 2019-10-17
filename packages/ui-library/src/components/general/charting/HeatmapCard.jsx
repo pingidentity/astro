@@ -180,7 +180,6 @@ class HeatMapCard extends React.Component {
                     return ([
                         rowLabel,
                         <HelpHint
-                            data-id={`heatmap-hint_${cellValue}_${rowIndex}`}
                             delayHide={0}
                             hintText={cellContent}
                             key={`cell-${rowIndex}-${cellIndex}`}
@@ -223,7 +222,7 @@ class HeatMapCard extends React.Component {
         );
     }
 
-    render() {
+    _getFront = () => {
         const dataId = this.props["data-id"];
         const { min, max } = this._getDataMinMax();
         const dataRange = max - min;
@@ -237,35 +236,24 @@ class HeatMapCard extends React.Component {
         };
 
         return (
-            <DashboardCard
-                className={classnames("heatmap-card", this.props.className)}
-                data-id={dataId}
-                errorMessage={this.props.errorMessage}
-                loading={this.props.loading}
-                front={(
+            <div>
+                <DashboardCardTitle className="dashboard-card__title--heatmap" title={this.props.chartTitle} />
+                {!this.props.loading && (
                     <div>
-                        {!this.props.loading && ([
-                            <div className="heatmap-card__chart" key="heatmap-chart">
-                                <DashboardCardTitle
-                                    className="dashboard-card__title--heatmap"
-                                    title={this.props.chartTitle}
-                                />
+                        <div className="heatmap-card__content">
+                            <div className="heatmap-card__chart">
                                 <div
                                     className="heatmap"
                                     data-id={`${dataId}-chart`}
                                     style={{ backgroundColor: Utils.HexToRgba(
                                         this.props.heatColor, 0.1)
-                                    }}>
+                                    }}
+                                >
                                     {this._renderXAxis()}
                                     {this._renderCells(dataRange, min)}
                                 </div>
-                                <div>
-                                    {this.props.rockerButtonProps
-                                        ? <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
-                                        : null}
-                                </div>
-                            </div>,
-                            <div className="heatmap-card__data" key="heatmap-data">
+                            </div>
+                            <div className="heatmap-card__data">
                                 <div className="heatmap-card__title" data-id={`${dataId}-value-title`}>
                                     {this.props.valueTitle}
                                 </div>
@@ -276,9 +264,28 @@ class HeatMapCard extends React.Component {
                                     {this.props.valueSubtitle}
                                 </div>
                             </div>
-                        ])}
+                        </div>
+                        <div className="heatmap-card__footer">
+                            {
+                                this.props.rockerButtonProps
+                                    ? <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
+                                    : null
+                            }
+                        </div>
                     </div>
                 )}
+            </div>
+        );
+    }
+
+    render() {
+        return (
+            <DashboardCard
+                className={classnames("heatmap-card", this.props.className)}
+                data-id={this.props["data-id"]}
+                errorMessage={this.props.errorMessage}
+                loading={this.props.loading}
+                front={this._getFront()}
             />
         );
     }

@@ -90,6 +90,7 @@ class HeatMapCardDemo extends React.Component {
                     valueTitle={this.state.valueTitle}
                     valueSubtitle={<span>Sign-ons<br />per day</span>}
                     tooltipSubtitle="Average sign-ons"
+                    rockerButtonProps={{}}
                 />
             </div>
         );
