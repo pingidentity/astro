@@ -193,7 +193,7 @@ describe("NavSidebar", () => {
                 />
             );
 
-            expect(component.find(".left-nav__group--with-divider").exists()).toEqual(true);
+            expect(component.find(".nav-sidebar__group--with-divider").exists()).toEqual(true);
         });
 
         it("does not render with divider class if hasDivider is false", () => {
@@ -201,7 +201,7 @@ describe("NavSidebar", () => {
                 <SidebarGroup/>
             );
 
-            expect(component.find(".left-nav__group--with-divider").exists()).toEqual(false);
+            expect(component.find(".nav-sidebar__group--with-divider").exists()).toEqual(false);
         });
     });
 
