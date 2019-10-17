@@ -51,10 +51,10 @@ const overflowTypes = {
 *     The data-id of the component
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
-* @param {Text.textTypes} [type]
-*     Style of text
 * @param {string} [inline=false]
 *     Displays inline when true
+* @param {Text.textTypes} [type]
+*     Style of text
 */
 
 const Text = ({

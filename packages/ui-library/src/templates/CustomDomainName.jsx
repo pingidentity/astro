@@ -50,6 +50,7 @@ export default class CustomDomainName extends Component {
         editModal: false,
         expanded: false,
         requiredValue: "",
+        canonical: "611a17db-81cc-45d5-ad2b-6950472e851a.edge1.pingone.com",
         saveDisabled: true,
         selectedStatus: statuses.DEFAULT,
         statusText: "Save",
@@ -398,7 +399,10 @@ export default class CustomDomainName extends Component {
             return ( <FileInput
                 fileName={this.state.requiredValue &&
                         <FlexRow spacing={spacingOptions.SM}>
-                            <span>{this.state.requiredValue}</span>
+                            <Stack gap="XS">
+                                <span>{this.state.requiredValue}</span>
+                                <Text>{this.state.canonical}</Text>
+                            </Stack>
                         </FlexRow>}
                 selectedTitle="Domain Name"
                 fileData={(
@@ -424,7 +428,10 @@ export default class CustomDomainName extends Component {
                     <FileInput
                         fileName={this.state.requiredValue &&
                     <FlexRow spacing={spacingOptions.SM}>
-                        <span>{this.state.requiredValue}</span>
+                        <Stack gap="XS">
+                            <span>{this.state.requiredValue}</span>
+                            <Text>{this.state.canonical}</Text>
+                        </Stack>
                     </FlexRow>}
                         selectedTitle="Domain Name"
                         fileData={(
