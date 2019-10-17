@@ -3,10 +3,10 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?mavcmm') format('woff2'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?mavcmm') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?mavcmm') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?mavcmm##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?ifnuej') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?ifnuej') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?ifnuej') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?ifnuej##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -383,6 +383,11 @@
     content: $icon-minus-rounded; 
   }
 }
+.icon-native-app {
+  &:before {
+    content: $icon-native-app; 
+  }
+}
 .icon-network {
   &:before {
     content: $icon-network; 
@@ -748,5 +753,4 @@
     content: $icon-welcome; 
   }
 }
-
 
