@@ -38,7 +38,7 @@ class ConditionalFieldsetStateless extends React.Component {
         onValueChange: PropTypes.func,
         label: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.object]),
+            PropTypes.node]),
         listClassName: PropTypes.string,
         required: PropTypes.bool,
         selectedIndex: PropTypes.number,
