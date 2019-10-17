@@ -132,9 +132,11 @@ class HeaderBarDemo extends React.Component {
         this.setState({ newEnvironment: true });
     }
 
+
     render() {
         return (
             <div>
+                <HR />
                 <p>Using the provided reducer:</p>
                 <HeaderBar {...this.state}
                     onItemValueChange={this._handleItemClick}
