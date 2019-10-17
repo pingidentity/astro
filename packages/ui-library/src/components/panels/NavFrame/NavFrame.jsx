@@ -48,9 +48,9 @@ export default class NavFrame extends Component {
             ...childIndexes,
             [id]: {
                 group,
-                header,
+                header: header || id,
                 label,
-                section,
+                section: section || id,
             }
         };
     }
@@ -67,7 +67,6 @@ export default class NavFrame extends Component {
             onSelectItem,
             selectedNode = this._firstNode
         } = this.props;
-
         const {
             header: selectedHeader,
             section: selectedSection
@@ -79,7 +78,7 @@ export default class NavFrame extends Component {
         } = navTree.find(({ id }) => id === selectedHeader);
 
         return (
-            <div data-id={dataId}>
+            <div className="nav-frame" data-id={dataId}>
                 <NavHeader
                     left={headerLeft}
                     navTree={navTree}
@@ -87,16 +86,18 @@ export default class NavFrame extends Component {
                     right={headerRight}
                     selectedHeader={selectedHeader}
                 />
-                <NavSidebar
-                    copyrightYear={copyrightYear}
-                    onSelectItem={onSelectItem}
-                    selectedHeaderLabel={selectedHeaderLabel}
-                    selectedNode={selectedNode}
-                    selectedSection={selectedSection}
-                    navTree={sectionNodes}
-                />
-                <div>
-                    {this.props.children}
+                <div className="nav-frame__bottom">
+                    <NavSidebar
+                        copyrightYear={copyrightYear}
+                        onSelectItem={onSelectItem}
+                        selectedHeaderLabel={selectedHeaderLabel}
+                        selectedNode={selectedNode}
+                        selectedSection={selectedSection}
+                        navTree={sectionNodes}
+                    />
+                    <div className="nav-content">
+                        {this.props.children}
+                    </div>
                 </div>
             </div>
         );

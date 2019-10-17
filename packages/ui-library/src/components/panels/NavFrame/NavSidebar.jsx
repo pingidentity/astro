@@ -11,12 +11,12 @@ export const SidebarNode = ({
     onClick,
     selected
 }) => (
-    <div
+    <li
         className={
             classnames(
-                "left-nav__node",
+                "nav-sidebar__node",
                 {
-                    "left-nav__node--selected": selected
+                    "nav-sidebar__node--selected": selected
                 }
             )
         }
@@ -26,9 +26,9 @@ export const SidebarNode = ({
             onClick(id, e);
         }}
     >
-        {label}
+        <div className="nav-sidebar__node-label">{label}</div>
         {selected}
-    </div>
+    </li>
 );
 
 SidebarNode.propTypes = {
@@ -53,14 +53,14 @@ export const SidebarGroup = ({
 }) => (
     <div
         className={classnames(
-            "left-nav__group",
+            "nav-sidebar__group",
             {
                 // Add divider above groups with this modifier
-                "left-nav__group--with-divider": hasDivider
+                "nav-sidebar__group--with-divider": hasDivider
             }
         )}
     >
-        <div>
+        <div className="nav-sidebar__group-title">
             {label}
         </div>
         {children}
@@ -79,29 +79,28 @@ export const SidebarSection = ({
     onClick,
     selected
 }) => (
-    <div
+    <li
         className={classnames(
-            "left-nav__section",
+            "nav-sidebar__section",
             {
-                "left-nav__section--selected": selected
+                "nav-sidebar__section--selected": selected
             }
         )}
+        data-id={`sidebar-section_${id}`}
+        onClick={e => {
+            e.stopPropagation();
+            onClick(id, e);
+        }}
     >
-        <div
-            data-id={`sidebar-section_${id}`}
-            onClick={e => {
-                e.stopPropagation();
-                onClick(id, e);
-            }}
-        >
-            {icon &&
-                <div className="left-nav__section-icon">
-                    {getIcon(icon, { type: "leading" })}
-                </div>
-            }
+        {icon &&
+            <div className="nav-sidebar__section-icon">
+                {getIcon(icon, { type: "inline" })}
+            </div>
+        }
+        <div className="nav-sidebar__section-label">
             {label}
         </div>
-    </div>
+    </li>
 );
 
 SidebarSection.propTypes = {
@@ -213,32 +212,41 @@ export default function NavSidebar(props) {
     }, [[]]);
 
     return (
-        <div data-id={dataId}>
-            <div>
-                {selectedHeaderLabel}
-            </div>
-            <div
-                className="left-nav__sections"
+        <nav data-id={dataId} className="nav-sidebar">
+
+            <ul
+                className={classnames(
+                    "nav-sidebar__sections",
+                    {
+                        // Add divider above groups with this modifier
+                        "nav-sidebar__sections--group-visible": selectedGroup,
+                    }
+                )}
             >
+                <div className="nav-sidebar__section-title">
+                    {selectedHeaderLabel}
+                </div>
                 {renderedSections}
-            </div>
+                <div
+                    classnames="nav-sidebar__copyright"
+                >
+                    {copyrightYear}
+                </div>
+            </ul>
             {
                 selectedGroup &&
-                    <div className="left-nav__group-container">
+                    <ul className="nav-sidebar__group-container">
                         <div
-                            className="left-nav__group-container-title"
+                            className="nav-sidebar__group-container-title"
                         >
+                            {/* <a className="nav-sidebar__group-collapse"> */}
                             {selectedLabel}
                         </div>
                         {selectedGroup.map(renderNode(props))}
-                    </div>
+                    </ul>
             }
-            <div
-                classnames="left-nav__copyright"
-            >
-                {copyrightYear}
-            </div>
-        </div>
+
+        </nav>
     );
 }
 
