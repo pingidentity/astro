@@ -90,6 +90,7 @@ class FileInputDemo extends React.Component {
                         onRemove={this._handleRemove}
                         status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
                         selectedTitle="Certificate"
+                        error={errorTypes.WARNING}
                     />
                 </InputRow>
 
