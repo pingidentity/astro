@@ -106,7 +106,6 @@ define package
 	mkdir -p dist/ui-library/examples
 	cp -rf lib dist/ui-library
 	cp -f package.json dist/ui-library
-	cp -f index.js dist/ui-library
 	tar -czf dist/ui-library-$(1).tar.gz --directory=dist ui-library
 endef
 
