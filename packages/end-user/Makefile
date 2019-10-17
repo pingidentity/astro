@@ -72,11 +72,10 @@ package_and_tag: install-node-npm clean-css
 
 	mkdir build-css
 	mkdir build-css/$(GIT_VERSION)
-	mv dist/end-user.css build-css/$(GIT_VERSION)
-
-	cp -rf src/images build-css/$(GIT_VERSION)
-
-	cp -rf src/icons build-css/$(GIT_VERSION)
+	mv dist/*.svg build-css/$(GIT_VERSION)
+	mv dist/*.map build-css/$(GIT_VERSION)
+	mv dist/*.jpg build-css/$(GIT_VERSION)
+	mv dist/*.otf build-css/$(GIT_VERSION)
 
 	git tag end-user-$(GIT_VERSION)
 	GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin end-user-$(GIT_VERSION)
