@@ -72,6 +72,8 @@ package_and_tag: install-node-npm clean-css
 
 	mkdir build-css
 	mkdir build-css/$(GIT_VERSION)
+
+	mv dist/end-user.css build-css/$(GIT_VERSION)
 	mv dist/*.svg build-css/$(GIT_VERSION)
 	mv dist/*.map build-css/$(GIT_VERSION)
 	mv dist/*.jpg build-css/$(GIT_VERSION)
