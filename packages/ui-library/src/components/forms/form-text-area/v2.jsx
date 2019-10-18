@@ -236,7 +236,6 @@ class FormTextAreaStateless extends React.Component {
                         )}
                         disabled={this.props.disabled}
                         placeholder={this.props.placeholder}
-                        required={this.props.required}
                         readOnly={readonly}
                         maxLength={this.props.maxLength}
                         value={this.props.value}
