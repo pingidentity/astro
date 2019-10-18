@@ -22,9 +22,12 @@ pipeline {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             sh "npm --no-git-tag-version ${params.VERSION_TYPE} version"
 
-            env.PACKAGE_JSON = readJSON file: "./package.json"
-            env.RELEASE_VERSION = "${PACKAGE_JSON}.version"
-            env.GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
+            script {
+              env.PACKAGE_JSON = readJSON file: "./package.json"
+              env.RELEASE_VERSION = "${PACKAGE_JSON}.version"
+              env.GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
+            }
+
 
             sh "git add package.json"
             sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
