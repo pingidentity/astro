@@ -2,20 +2,36 @@ pipeline {
   agent {
     label 'ui-library-cdn-deploy'
   }
-  environment {
-    PACKAGE_JSON = readJSON file: "${env.WORKSPACE}/packages/end-user/package.json"
-    RELEASE_VERSION = "${PACKAGE_JSON}.version"
-    GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
-  }
   stages {
     stage('run-tests') {
       steps {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
-            echo "Running end-user linting and tests on ${RELEASE_VERSION}"
+            echo "Running end-user linting and tests"
             sh "npm install"
             // sh "npm run lint"
             sh "npm run coverage"
+          }
+        }
+      }
+    }
+    stage('increment version') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
+            echo "Incrementing the version: ${params.VERSION_TYPE}"
+            sh "npm --no-git-tag-version ${params.VERSION_TYPE} version"
+
+            env.PACKAGE_JSON = readJSON file: "./package.json"
+            env.RELEASE_VERSION = "${PACKAGE_JSON}.version"
+            env.GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
+
+            sh "git add package.json"
+            sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
+            sh "git push origin ${params.RELEASE_BRANCH}"
+
+            sh "git tag ${GIT_RELEASE_TAG}"
+            sh "git push origin ${GIT_RELEASE_TAG}"
           }
         }
       }
@@ -33,10 +49,6 @@ pipeline {
         }
       }
       post {
-        success {
-          sh "git tag ${GIT_RELEASE_TAG}"
-          sh "git push origin ${GIT_RELEASE_TAG}"
-        }
         always {
           archiveArtifacts artifacts: "packages/end-user/cdn/**", fingerprint: true
         }
