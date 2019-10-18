@@ -358,7 +358,7 @@ class LeftNavBar extends React.Component {
         });
 
         return (
-            <div id="nav" ref="nav" className={className}>
+            <div id="nav" data-id={this.props["data-id"]} ref="nav" className={className} >
                 <div className="nav-menus" ref="container">
                     <div ref="itemSelector" className="selected-item" style={this.state.selectorStyle} />
                     <div ref="itemSelectorArrow" className="selected-item-arrow" style={this.state.selectorStyle}>

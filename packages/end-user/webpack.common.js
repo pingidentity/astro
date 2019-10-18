@@ -1,21 +1,21 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const routes = require('./src/demo/routes.js');
+
 const extractDemoCSS = new ExtractTextPlugin('demo.css');
 const extractEndUserCSS = new ExtractTextPlugin('end-user.css');
 
-const routes = require('./src/demo/routes.js');
-
+// babel-polyfill is necessary to work on IE10
 const entries = {};
 for (let i = 0; i < routes.length; i += 1) {
     entries[routes[i].id] = ['@babel/polyfill', `./src/demo/entries/${routes[i].script}`];
 }
-// babel-polyfill is necessary to work on IE10
 
 module.exports = {
     entry: entries,
     devtool: 'source-map',
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',

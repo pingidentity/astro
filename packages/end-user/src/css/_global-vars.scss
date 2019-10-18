@@ -14,7 +14,7 @@ $line-height-default: 1.3em;
 // COLOR TOKENS
 $color-active-blue: #277ba5;
 $color-active-blue-highlighted: #3d88ae;
-$color-critical-red: #de3602;
+$color-critical-red: #a31300;
 $color-warning-yellow: #eeb91c;
 $color-success-green: #21934c;
 
@@ -58,6 +58,7 @@ $color-active-blue: #2996cc;
 $color-active-blue-highlighted: tint($color-active-blue, 10%);
 $color-critical-red: #a31300;
 $color-critical-red-highlighted: tint($color-critical-red, 10%);
+$color-light-red: #ffe8e8;
 $color-success-green: #4aba78;
 $color-success-green-highlighted: tint($color-success-green, 10%);
 $color-warning-yellow: #eeb91c;

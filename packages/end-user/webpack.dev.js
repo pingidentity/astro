@@ -1,12 +1,11 @@
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const config = require('./webpack.config.common.js');
 const path = require('path');
 
-const plugins = config.plugins;
-
+const common = require('./webpack.common.js');
 const routes = require('./src/demo/routes.js');
 
-module.exports = Object.assign(config, {
+module.exports = merge(common, {
     target: 'web',
     devServer: {
         contentBase: path.join(__dirname, '/src'),
@@ -15,12 +14,12 @@ module.exports = Object.assign(config, {
         disableHostCheck: true,
         host: '0.0.0.0',
     },
-    plugins: plugins.concat(routes.map(route => (
+    plugins: routes.map(route => (
         new HtmlWebpackPlugin({
             title: route.title,
             template: './src/demo/template.html',
             chunks: [route.id],
             filename: route.filename,
         })
-    ))),
+    )),
 });

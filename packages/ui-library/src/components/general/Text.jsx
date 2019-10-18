@@ -5,6 +5,7 @@ import classnames from "classnames";
 /**
  * @enum {string}
  * @alias Text.textTypes
+ * @desc Enum for the different types of Messages
  */
 const textTypes = {
     /** body */
@@ -13,6 +14,8 @@ const textTypes = {
     ERROR: "error",
     /** label */
     LABEL: "label",
+    /** normal-case-label */
+    NORMALCASELABEL: "normal-case-label",
     /** note */
     NOTE: "note",
     /** no-value */

@@ -27,8 +27,7 @@ gulp.task('move-files', () =>
             './package.json',
             './static/end-user.css',
             './src/css**/**/*',
-            './static/*.otf',
-            './static/*.svg',
+            './static/*(*.svg|*.map|*.jpg|*.otf)',
         ])
         .pipe(debug({ title: 'moving:' }))
         .pipe(gulp.dest('dist')));

@@ -31,6 +31,7 @@ import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @typedef Messages~MessageItem
+ * @memberof Messages
  * @property {node} text
  *     Message text
  * @property {Messages.MessageTypes} type
@@ -86,6 +87,8 @@ import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
  * @param {number} [defaultMessageTimeout]
  *     Default message timeout in ms. Messages will remove themselves after this time, unless the message specifically
  *     overrides the default timeout itself.
+ * @param {Messages.Layouts} [defaultMessageLayout=Banner]
+ *     Default message layout for this messages component. Messages that don't set their own layout type will receive this on.
  * @param {array} [flags]
  *     Set the flag for "fixed-messages-constants" to use WARNING and INFO correctly
  *
@@ -98,6 +101,7 @@ import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
  */
 
 module.exports = class extends React.Component {
+    static displayName = "Messages";
 
     static propTypes = {
         "data-id": PropTypes.string,
@@ -108,6 +112,7 @@ module.exports = class extends React.Component {
         onI18n: PropTypes.func,
         i18n: PropTypes.func,
         defaultMessageTimeout: PropTypes.number,
+        defaultMessageLayout: PropTypes.oneOf(Object.values(Layouts)),
         flags: flagsPropType,
     };
 
@@ -115,6 +120,7 @@ module.exports = class extends React.Component {
         "data-id": "messages",
         onRemoveMessage: null,
         onI18n: (key) => key,
+        defaultMessageLayout: Layouts.BANNER,
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
@@ -139,6 +145,7 @@ module.exports = class extends React.Component {
             containerType,
             "data-id": dataId,
             defaultMessageTimeout,
+            defaultMessageLayout,
             key,
             messages,
             onI18n,
@@ -158,6 +165,7 @@ module.exports = class extends React.Component {
                                 onI18n={onI18n}
                                 onRemoveMessage={onRemoveMessage}
                                 defaultTimeout={defaultMessageTimeout}
+                                defaultLayout={defaultMessageLayout}
                                 data-id={`${dataId}-message-${i}`}
                                 flags={getFlags(this)}
                             />
@@ -179,6 +187,7 @@ class Message extends React.Component {
         flags: flagsPropType,
         onRemoveMessage: PropTypes.func,
         iconName: PropTypes.string,
+        defaultMessageLayout: PropTypes.oneOf(Object.values(Layouts)),
     }
 
     static defaultProps = {
@@ -265,11 +274,12 @@ class Message extends React.Component {
 
     render() {
         const {
+            defaultLayout,
             message: {
                 iconName,
                 key,
                 hideClose,
-                layout,
+                layout = defaultLayout,
                 minimized,
                 params,
                 progress,

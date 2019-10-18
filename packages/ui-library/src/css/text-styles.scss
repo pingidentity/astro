@@ -42,6 +42,17 @@ $body-text-color: $color-neutral-20;
     @include text-label;
 }
 
+// NORMAL CASE LABEL
+@mixin text-normal-case-label {
+    @include text-style($color-elephant, $font-size-reduced);
+
+    text-transform: none;
+}
+
+.text-normal-case-label {
+    @include text-normal-case-label;
+}
+
 // PARENT LABEL
 @mixin parent-label {
     @include text-style($color-elephant);

@@ -32,4 +32,15 @@ describe('TextInput', () => {
         input.simulate('change', mockEvent.target.value);
         expect(testCallback).toHaveBeenCalled();
     });
+    it('calls the onBlur', () => {
+        const testCallback = jest.fn();
+        const wrapper = getComponent({ onBlur: testCallback });
+        const input = wrapper.find(`input[data-id="${defaultProps['data-id']}"]`);
+
+        expect(input.exists()).toEqual(true);
+        expect(testCallback).not.toHaveBeenCalled();
+
+        input.simulate('blur');
+        expect(testCallback).toHaveBeenCalled();
+    });
 });

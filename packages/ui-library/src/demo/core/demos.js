@@ -1185,6 +1185,17 @@ module.exports = [
                             type: "version"
                         }
                     },
+                    {
+                        label: "NavFrame",
+                        demo: require("../components/panels/NavFrameDemo"),
+                        pathToDoc: "components/panels/NavFrame.jsx",
+                        pathToSource: "components_panels_NavFrame.jsx.html",
+                        pathToDemoSource: "demo_components_panels_NavFrameDemo.jsx.html",
+                        status: {
+                            message: "THIS COMPONENT IS STILL IN DEVELOPMENT. FOR PINGFEDERATE USE ONLY.",
+                            type: "version"
+                        }
+                    },
                 ]
             }
         ]

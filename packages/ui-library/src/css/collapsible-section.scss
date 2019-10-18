@@ -166,10 +166,10 @@
             padding: 0;
 
             &.left:before {
-                top: 30px;
+                top: 34px;
             }
         }
-        &.noCaret {
+        &.none {
             &:after {
                 content: none;
             }

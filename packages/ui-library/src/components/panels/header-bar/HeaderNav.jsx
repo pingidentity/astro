@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import Anchor from "../../general/Anchor";
 
+import { defaultRender } from "../../../util/PropUtils";
 import classnames from "classnames";
 import _ from "underscore";
 
@@ -29,7 +30,10 @@ const HeaderNav = props => (
 );
 
 HeaderNav.propTypes = {
-    currentNav: PropTypes.string,
+    currentNav: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
     "data-id": PropTypes.string,
     options: PropTypes.array,
     onNavChange: PropTypes.func,
@@ -39,6 +43,7 @@ HeaderNav.defaultProps = {
     currentNav: "",
     "data-id": "header-nav",
     onNavChange: _.noop,
+    renderNavItem: defaultRender
 };
 
 export default HeaderNav;

@@ -66,15 +66,9 @@ endif
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
 
-ifeq ($(GIT_BRANCH),master)
-	PACKAGE_VERSION=$(GIT_VERSION)
-	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)
-	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)
-else
-	PACKAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
-	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)-$(GIT_BRANCH)
-	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)-$(GIT_BRANCH)
-endif
+PACKAGE_VERSION=$(GIT_VERSION)
+PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)
+PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)
 
 
 # find the name of the reference coverage to download, by sending HEAD requests for various coverage packages:
@@ -94,7 +88,7 @@ define version_and_tag
 	mv package.json.tmp package.json
 	git commit -a -m $(2)
 	if [[ "$(1)" = "$(GIT_VERSION_FINAL)" ]]; then \
-		git tag $(GIT_VERSION_FINAL); \
+		git tag ui-library-$(GIT_VERSION_FINAL); \
 		GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin $(GIT_VERSION_FINAL); \
 	fi
 	GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin $(GIT_BRANCH)
@@ -112,7 +106,6 @@ define package
 	mkdir -p dist/ui-library/examples
 	cp -rf lib dist/ui-library
 	cp -f package.json dist/ui-library
-	cp -f index.js dist/ui-library
 	tar -czf dist/ui-library-$(1).tar.gz --directory=dist ui-library
 endef
 

@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { isObject } from "underscore";
 import { isEnter, isSpace } from "./KeyboardUtils";
 import Icon from "../components/general/Icon";
 
@@ -99,6 +101,54 @@ export const getClickableA11yProps = (onClick = () => {}) => ({
     role: "button",
     tabIndex: 0
 });
+
+const navProps = {
+    id: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]).isRequired,
+    label: PropTypes.string,
+};
+
+export const navTreePropType = PropTypes.arrayOf(
+    PropTypes.shape(navProps)
+);
+
+/**
+ * @alias module:util/PropUtils.generateNavTreePropType
+ *
+ * @desc Creates a propType for a navTree with a given number of levels, along with optional extra
+ * props.
+ *
+ * @param {int} levels
+ *    The number of levels that the tree should have.
+ * @param {Object[]}
+ *    An array of extra prop objects added to the level corresponding to their position in array.
+ *    For example, passing [null, { icon: PropTypes.string }] would give the second level of the
+ *    tree an icon prop.
+ * @returns {function}
+ *    Returns a propType that can be used to validate a nav tree.
+ *
+ */
+export const generateNavTreePropType = (levels, extraProps = []) =>
+    new Array(levels)
+        .fill(undefined)
+        // Create each level in reverse order, starting with the lowest level of the tree.
+        .reduce((childPropType, _, idx) =>
+            // Just use the starting accumulator if it's the lowest level of the tree,
+            // since that won't have children.
+            idx === 0
+                ? childPropType
+                : PropTypes.arrayOf(
+                    PropTypes.shape({
+                        ...navProps,
+                        children: childPropType,
+                        // Look for the extra props in non-reverse order.
+                        ...isObject(extraProps[levels - idx - 1]) ? extraProps[levels - idx - 1] : {}
+                    })
+                ),
+        navTreePropType
+        );
 
 export default {
     getIconClassName,

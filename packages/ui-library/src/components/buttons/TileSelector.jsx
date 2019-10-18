@@ -74,6 +74,13 @@ const selectorTypes = {
  *
  */
 
+const getTilePanel = () => {
+    const tileSelector = document.querySelector(".tile-button--selected");
+    if (tileSelector) {
+        return document.querySelector(".tile-panel").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    }
+};
+
 const renderOptions = ({
     "data-id": dataId,
     onValueChange,
@@ -96,6 +103,12 @@ const renderOptions = ({
 ) => {
     const handleChange = e => onValueChange(id, e);
     const isSelected = selected === id;
+    const scrollAndClick = (data) => {
+        if ( optionPanel ) {
+            getTilePanel();
+        }
+        handleChange(data.target);
+    };
 
     return [
         [
@@ -108,7 +121,7 @@ const renderOptions = ({
                     icon={icon}
                     iconName={iconName}
                     selected={isSelected}
-                    onClick={handleChange}
+                    onClick={scrollAndClick}
                     panel={optionPanel ? true : false}
                     details={details}
                     type={type === "stacked" ? "side-icon" : "top-icon"}
@@ -131,6 +144,7 @@ const renderOptions = ({
             : activePanel
     ];
 }, [[], undefined]);
+
 
 const renderGroupedOptions = props => {
     const {

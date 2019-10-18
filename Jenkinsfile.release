@@ -4,8 +4,8 @@ pipeline {
   }
   stages {
     stage('npm-publish') {
-      dir("${env.WORKSPACE}/packages/ui-library") {
-        steps {
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo 'Building & publishing ui-library'
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
@@ -27,10 +27,10 @@ pipeline {
             }
           }
         }
-        post {
-          always {
-            archiveArtifacts artifacts: "packages/ui-library/build-css/**", fingerprint: true
-          }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "packages/ui-library/build-css/**", fingerprint: true
         }
       }
     }
@@ -40,17 +40,17 @@ pipeline {
       container('node-builder') {
         withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "packages/ui-library/build-css/")
+            s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
           }
         }
         withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "packages/ui-library/build-css/")
+            s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
           }
         }
         withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "packages/ui-library/build-css/")
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "${env.WORKSPACE}/packages/ui-library/build-css/")
           }
         }
         mail(subject: "UI-library ${env.UI_LIBRARY_FINAL_VERSION} released",

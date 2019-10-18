@@ -2,15 +2,9 @@
     @include text-value;
     position: relative;
     display: inline-block;
-    width: 390px;
     text-transform: none;
     cursor: text;
     vertical-align: bottom;
-
-    &--auto-width {
-        width: auto;
-        max-width: 390px;
-    }
 
     .clear {
         font-family: $icon-font;
@@ -63,11 +57,11 @@
 
             label {
                 max-width: 100%;
-                overflow: hidden;
                 text-transform: none;
                 color: $color-midnight;
                 @include text-value;
                 margin: 0;
+                @include break-word;
             }
 
             &__edit {
