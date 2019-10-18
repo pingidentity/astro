@@ -162,19 +162,6 @@ describe("RockerButton v4", function () {
         expect(callback).not.toBeCalled();
     });
 
-    it("is logging warning if more than 5 labels given", function () {
-
-        console.warn = jest.fn();
-        const callback = jest.fn();
-
-        ReactTestUtils.renderIntoDocument(
-            <RockerButton labels={["Profile", "Groups", "Services", "Users", "Security", "Attributes"]}
-                onValueChange={callback} />
-        );
-
-        expect(console.warn).toBeCalledWith("RockerButton expecting two to five labels, but was given ", 6);
-    });
-
     it("throws error when deprecated prop 'id' is passed in", function () {
         const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
