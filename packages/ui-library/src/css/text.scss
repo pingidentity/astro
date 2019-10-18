@@ -82,6 +82,14 @@
         white-space: nowrap;
         width: 100%;
     }
+
+    &--center {
+        text-align: center;
+    }
+
+    &--right {
+        text-align: right;
+    }
 }
 
 .textblock {

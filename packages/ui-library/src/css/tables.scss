@@ -322,6 +322,13 @@ table.grid td.grid__cell {
             white-space: nowrap;
             width: 100%;
         }
+        .icon-edit {
+            padding-right: 25px;
+            color: $color-accent-neutral-10;
+            &:hover {
+                color: $color-active-blue;
+            }
+        }
     }
 
     &__cell-hint {

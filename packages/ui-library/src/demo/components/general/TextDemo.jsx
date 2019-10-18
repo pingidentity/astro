@@ -39,6 +39,8 @@ const TextDemo = () => {
                 we need a little path. All you need is a dream in your heart, and an almighty knife.
                 That's the way I look when I get home late; black and blue.
             </Text>
+            <Text align={Text.alignments.CENTER}>Centered</Text>
+            <Text align={Text.alignments.RIGHT}>Right-aligned</Text>
         </div>
     );
 };

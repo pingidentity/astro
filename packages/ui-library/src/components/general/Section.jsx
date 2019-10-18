@@ -148,7 +148,7 @@ class SectionStateless extends React.Component {
         onToggle: PropTypes.func,
         title: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.object
+            PropTypes.node
         ]),
         titleValue: PropTypes.oneOfType([
             PropTypes.string,
@@ -229,7 +229,9 @@ class SectionStateless extends React.Component {
                         classnames(
                             "collapsible-section-title",
                             {
-                                "collapsible-section-title--circled": this.props.arrowCircle
+                                "collapsible-section-title--circled": this.props.arrowCircle,
+                                "collapsible-section-title--node": this.props.title
+                                    ? typeof this.props.title !== "string" : this.props.title
                             }
                         )}
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}
