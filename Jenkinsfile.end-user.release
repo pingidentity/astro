@@ -24,17 +24,21 @@ pipeline {
 
             script {
               env.PACKAGE_JSON = readJSON file: "./package.json"
-              env.RELEASE_VERSION = "${PACKAGE_JSON}.version"
+              env.RELEASE_VERSION = PACKAGE_JSON.version
               env.GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
             }
 
 
             sh "git add package.json"
-            sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
-            sh "git push origin ${params.RELEASE_BRANCH}"
+            withCredentials([
+                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+              ]){
+              sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
+              sh "git push origin ${params.RELEASE_BRANCH}"
 
-            sh "git tag ${GIT_RELEASE_TAG}"
-            sh "git push origin ${GIT_RELEASE_TAG}"
+              sh "git tag ${GIT_RELEASE_TAG}"
+              sh "git push origin ${GIT_RELEASE_TAG}"
+            }
           }
         }
       }
