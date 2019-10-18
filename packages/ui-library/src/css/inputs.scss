@@ -198,6 +198,15 @@ label {
         input {
             width: 100%;
             padding: 4px 15px 3px;
+
+            // Hide autofill button in Safari
+            &::-webkit-contacts-auto-fill-button,
+            &::-webkit-credentials-auto-fill-button {
+            visibility: hidden;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+            }
         }
         &.search {
             .input-container {
