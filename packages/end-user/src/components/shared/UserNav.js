@@ -18,6 +18,7 @@ export const UserInfo = ({
     imageSize,
     imageSrc,
     name,
+    className,
 }) => {
     const size = classnames({
         'user-info__image--small': imageSize === imageSizes.SMALL,
@@ -26,7 +27,7 @@ export const UserInfo = ({
     });
 
     return(
-        <div className="user-info">
+        <div className={classnames("user-info", className)}>
             {
                 imageSrc
                     ? (<div
@@ -126,7 +127,7 @@ class UserNav extends React.Component {
                     <PopOverNavMenu
                         flags={["use-portal"]}
                         className="user-nav__dropdown-menu"
-                        label={<UserInfo {...user} />}
+                        label={<UserInfo className="user-nav__info" {...user} />}
                         items={[
                             {
                                 label: "Sign Out",
@@ -161,6 +162,7 @@ UserInfo.propTypes = {
     imageSrc: PropTypes.string,
     imageSize:PropTypes.oneOf(Object.values(imageSizes)),
     name: PropTypes.string,
+    className: PropTypes.string,
 }
 
 UserInfo.defaultProps = {
@@ -170,3 +172,4 @@ UserInfo.defaultProps = {
 }
 
 export default UserNav;
+

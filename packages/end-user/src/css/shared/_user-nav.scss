@@ -47,10 +47,10 @@
     align-items: flex-end;
     padding: 18px 25px;
 
-    .user-info {
+    &__info {
         margin-right: $spacing-md;
 
-        &__image {
+        .user-info__image {
             margin-right: $spacing-sm;
         }
 
@@ -266,3 +266,4 @@
 body.menu-open {
     overflow-y: hidden;
 }
+
