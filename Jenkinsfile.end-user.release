@@ -14,7 +14,7 @@ pipeline {
           container('node-builder') {
             echo "Running end-user linting and tests on ${RELEASE_VERSION}"
             sh "npm install"
-            sh "npm run lint"
+            // sh "npm run lint"
             sh "npm run coverage"
           }
         }
