@@ -4,7 +4,7 @@ pipeline {
   }
   environment {
     PACKAGE_JSON = readJSON file: "${env.WORKSPACE}/packages/end-user/package.json"
-    RELEASE_VERSION = PACKAGE_JSON.version
+    RELEASE_VERSION = "${PACKAGE_JSON}.version"
     GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
   }
   stages {
