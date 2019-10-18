@@ -43,8 +43,6 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  * @param {object} [initialState]
  *     When the 'p-stateful' flag is set 'selectedOption' needs to be passed into the initialState prop.
  *     selectedOption determines the initial state of 'selectedOption'.
- * @param {boolean} [noCaret]
- *     Determines whether the caret is displayed.
  *
  * @param {LinkDropDownList~onClick} [onClick]
  *     Callback triggered when a menu item is selected
@@ -67,19 +65,18 @@ class LinkDropDownListStateless extends React.Component {
         className: PropTypes.string,
         "data-id": PropTypes.string,
         label: PropTypes.node,
+        labelArrowPosition: PropTypes.oneOf(Object.values(CollapsibleLink.arrowPositions)),
         onClick: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([-1])]), // -1 means no value has been set
         flags: flagsPropType,
-        noCaret: PropTypes.bool
     };
 
     static defaultProps = {
         closeOnSelection: true,
         "data-id": "link-dropdown-list",
-        noCaret: false
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
@@ -106,7 +103,7 @@ class LinkDropDownListStateless extends React.Component {
                 data-id={this.props["data-id"] + "-label"}
                 expanded={this.props.open}
                 title={this.props.label}
-                arrowPosition={this.props.noCaret ? CollapsibleLink.arrowPositions.NOCARET : this.props.arrowPosition }
+                arrowPosition={this.props.labelArrowPosition}
             />
         );
     };
@@ -213,6 +210,9 @@ export default class LinkDropDownList extends React.Component {
     static defaultProps = {
         stateless: false,
     };
+
+    static labelArrowPositions = CollapsibleLink.arrowPositions
+
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 

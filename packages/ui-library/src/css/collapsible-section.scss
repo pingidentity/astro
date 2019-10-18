@@ -42,7 +42,7 @@
                 border-radius: 50%;
             }
         }
-        &--section {
+        &--node {
             font-size: 14px;
             text-transform: none;
             margin: 0 0 0 5px;
@@ -162,7 +162,7 @@
             left: -19px;
             color: $color-midnight;
         }
-        &.collapsible-section-title--section {
+        &.collapsible-section-title--node {
             padding: 0;
 
             &.left:before {

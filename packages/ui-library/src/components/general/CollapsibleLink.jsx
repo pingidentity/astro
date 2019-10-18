@@ -54,7 +54,7 @@ class CollapsibleLink extends React.Component {
             PropTypes.string,
             PropTypes.object]),
         toggledTitle: PropTypes.string,
-        arrowPosition: PropTypes.oneOf(["left", "right", "nocaret"]),
+        arrowPosition: PropTypes.oneOf(["left", "right", "none"]),
         expanded: PropTypes.bool,
         disabled: PropTypes.bool,
         onToggle: PropTypes.func
@@ -102,12 +102,12 @@ class CollapsibleLink extends React.Component {
  * @desc Enum for the different options for CollapsibleLink arrow position.
  * Add className {CollapsibleLink.arrowPositions.LEFT} for positioning the toggle arrow to the left of the title.
  * Add className {CollapsibleLink.arrowPositions.RIGHT} for positioning the toggle arrow to the right of the title.
- * Add className {CollapsibleLink.arrowPositions.NOCARET} to display without an arrow.
+ * Add className {CollapsibleLink.arrowPositions.NONE} to display without an arrow.
  */
 CollapsibleLink.arrowPositions = {
     LEFT: "left",
     RIGHT: "right",
-    NOCARET: "nocaret"
+    NONE: "none"
 };
 
 module.exports = CollapsibleLink;

@@ -124,7 +124,7 @@ class LinkDropDownListDemo extends React.Component {
                     initialState={{
                         selectedOption: nodeOptions[0]
                     }}
-                    noCaret
+                    labelArrowPosition={LinkDropDownList.labelArrowPositions.NONE}
                 />
             </div>
         );

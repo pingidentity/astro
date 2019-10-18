@@ -275,7 +275,7 @@ export default class License extends Component {
                 initialState={{
                     selectedOption: nodeOptions[0]
                 }}
-                noCaret
+                labelArrowPosition={LinkDropDownList.labelArrowPositions.NONE}
             />
         );
     }
@@ -290,7 +290,7 @@ export default class License extends Component {
                 initialState={{
                     selectedOption: nodeOptions[0]
                 }}
-                noCaret
+                labelArrowPosition={LinkDropDownList.labelArrowPositions.NONE}
             />
         );
     }

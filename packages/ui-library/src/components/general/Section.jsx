@@ -231,7 +231,7 @@ class SectionStateless extends React.Component {
                             "collapsible-section-title",
                             {
                                 "collapsible-section-title--circled": this.props.arrowCircle,
-                                "collapsible-section-title--section": this.props.title
+                                "collapsible-section-title--node": this.props.title
                                     ? typeof this.props.title !== "string" : this.props.title
                             }
                         )}
