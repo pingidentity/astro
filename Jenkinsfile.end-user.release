@@ -24,8 +24,9 @@ pipeline {
 
             script {
               env.PACKAGE_JSON = readJSON file: "./package.json"
-              env.RELEASE_VERSION = PACKAGE_JSON.version
-              env.GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
+              env.RELEASE_VERSION = "${env.PACKAGE_JSON.version}"
+              echo "${env.RELEASE_VERSION}"
+              env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
 
             script {
@@ -34,11 +35,11 @@ pipeline {
                 sh 'git config --global user.name "devtools-jenkins"'
 
                 sh "git add package.json"
-                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
+                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'"
                 sh "git push origin ${params.RELEASE_BRANCH}"
 
-                sh "git tag ${GIT_RELEASE_TAG}"
-                sh "git push origin ${GIT_RELEASE_TAG}"
+                sh "git tag ${env.GIT_RELEASE_TAG}"
+                sh "git push origin ${env.GIT_RELEASE_TAG}"
               }
             }
 
@@ -51,7 +52,7 @@ pipeline {
       steps {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
-            echo "Building & publishing end-user ${RELEASE_VERSION}"
+            echo "Building & publishing end-user ${env.RELEASE_VERSION}"
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               sh "npm run dist"
               sh "cd dist && npm publish"
@@ -71,7 +72,7 @@ pipeline {
       container('node-builder') {
         withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${env.RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
           }
         }
       }
