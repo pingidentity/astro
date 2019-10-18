@@ -1,4 +1,4 @@
-def pjson = readJSON file: './package.json'
+def pjson = readJSON file: "${env.WORKSPACE}/packages/end-user/package.json"
 def releaseVersion = pjson.version
 def gitTag = "end-user-${releaseVersion}"
 
