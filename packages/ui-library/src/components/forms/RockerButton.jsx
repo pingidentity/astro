@@ -106,9 +106,6 @@ export default class RockerButton extends React.Component {
             if (this.props.onChange) {
                 throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
-            if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 5)) {
-                console.warn("RockerButton expecting two to five labels, but was given ", this.props.labels.length);
-            }
             if (this.props.stateless === false) {
                 console.warn("Deprecated: the stateful option for this component will be removed in next version");
             }
