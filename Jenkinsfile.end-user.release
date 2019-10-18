@@ -20,7 +20,7 @@ pipeline {
         dir ("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
-            sh "npm --no-git-tag-version ${params.VERSION_TYPE} version"
+            sh "npm version ${params.VERSION_TYPE} --no-git-tag-version"
 
             script {
               env.PACKAGE_JSON = readJSON file: "./package.json"
