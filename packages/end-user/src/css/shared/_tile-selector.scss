@@ -205,3 +205,134 @@ button.tile-button--side-icon {
         }
     }
 }
+
+.tile-button,
+button.tile-button {
+    background: $color-white;
+    border: 1px solid $color-accent-neutral-70;
+    color: $color-slate;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: normal;
+    height: auto;
+    white-space: normal;
+
+    @include flexbox;
+    @include flexbox-direction(column);
+
+    align-items: center;
+    justify-content: space-between;
+    -ms-flex: 1 1 100%;
+
+    $icon-size: 80px;
+
+    &:hover,
+    &:active,
+    &.tile-button--selected {
+        border-color: $color-active-blue;
+
+        .tile-button__icon {
+            color: $color-active-blue;
+        }
+        .tile-button__icon-container {
+            svg {
+                fill: $color-active-blue;
+            }
+        }
+    }
+    &.tile-button--selected {
+        @include box-shadow(0 2px 5px 0 rgba($color-black, 0.2));
+
+        & .tile-button__title {
+            @include font-pn-semibold;
+        }
+    }
+
+    &__details {
+        position: relative;
+        text-align: left;
+        color: $color-neutral-50;
+        list-style: none;
+        margin-top: $spacing-lg;
+        line-height: 1em;
+
+        li {
+            margin-bottom: $spacing-xs;
+
+            &:before {
+                content: '•';
+                position: absolute;
+                left: -10px;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__divider {
+        border-top: 1px solid $color-neutral-50;
+        margin-top: $spacing-lg;
+        width: 100%;
+    }
+
+    &__icon {
+        font-size: $icon-size;
+        color: $color-midnight;
+    }
+    &__icon-container {
+        height: $icon-size;
+        margin-bottom: $spacing-lg;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--square {
+            margin-bottom: $spacing-md;
+        }
+
+        img,
+        svg {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    &__content {
+        @include flexbox-grow(1);
+
+        line-height: 1.3em;
+        text-align: left;
+    }
+
+    &__title {
+        color: $color-active-blue;
+        font-size: 17px;
+        margin-top: $spacing-lg;
+        text-transform: uppercase;
+        word-break: break-word;
+
+        &--square {
+            margin-top: 0;
+        }
+    }
+
+    &--panel {
+        @include arrow(20px);
+
+        &:after {
+            bottom: -2%;
+            transform: rotate(180deg);
+            transform-origin: 25%;
+        }
+    }
+
+    &--square {
+        flex-grow: 0;
+        min-height: 165px;
+        min-width: 165px;
+        padding: 25px;
+    }
+}

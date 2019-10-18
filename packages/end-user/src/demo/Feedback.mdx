@@ -13,13 +13,12 @@ import Heading from '../components/Heading';
 import IconFeedback from '../components/IconFeedback';
 import Logo from '../components/Logo';
 import ModalMenu from '../components/ModalMenu';
-import Padding, { sizes } from '../components/shared/Padding';
 import Requirements from '../components/Requirements';
 import SerializedData from '../components/SerializedData';
 import Spinner from '../components/Spinner';
 import Stack from '../components/Stack';
 import StepLink from '../components/StepLink';
-import TextBlock from '../components/TextBlock';
+import TextBlock, { alignments } from '../components/TextBlock';
 import TextStyle from '../components/TextStyle';
 import Tooltip from '../components/Tooltip';
 import TwoSidedDemo from '../components/stateful/TwoSidedDemo';
@@ -271,7 +270,7 @@ to the `.two-sided` div.
     <Card error>
         <Logo src="ping-logo.svg"/>
         <IconFeedback type="hourGlass" bold>Trial Expired</IconFeedback>
-        <TextBlock size="large" alignment="center">To extend your trial, please contact us.</TextBlock>
+        <TextBlock size="large">To extend your trial, please contact us.</TextBlock>
         <Button label="Contact Us" type={ButtonTypes.PRIMARY}/>
     </Card>
 </ComponentDemo>
@@ -281,9 +280,7 @@ to the `.two-sided` div.
 <ComponentDemo>
     <Card error>
         <Logo src="jj-logo.png"/>
-        {/* <Padding top={sizes.LG}> */}
             <IconFeedback type="safe" bold>Account Inactive</IconFeedback>
-        {/* </Padding> */}
         <TextBlock size="large">This service is no longer active.</TextBlock>
     </Card>
 </ComponentDemo>

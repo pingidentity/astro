@@ -1,7 +1,7 @@
 import Button, { ButtonTypes } from '../components/Button';
 import SocialButton, { BrandTypes } from '../components/SocialButton';
 import ButtonSet from '../components/ButtonSet';
-import Card, { CardMessage, messageTypes } from '../components/Card';
+import Card, { CardMessage, messageTypes, CardTypes } from '../components/Card';
 import Checkbox from '../components/Checkbox';
 import Dropdown from '../components/Dropdown';
 import Feedback from '../components/Feedback';
@@ -20,12 +20,20 @@ import SmsPairingDemo from '../components/stateful/SmsPairingDemo.js'
 import Spinner from '../components/Spinner';
 import Stack from '../components/Stack';
 import StepLink from '../components/StepLink';
-import TextBlock from '../components/TextBlock';
+import TextBlock, { alignments , spacing } from '../components/TextBlock';
 import TextInput from '../components/TextInput';
 import TextStyle from '../components/TextStyle';
 import Tooltip from '../components/Tooltip';
 import TwoSidedDemo from '../components/stateful/TwoSidedDemo';
 import ComponentDemo from './components/ComponentDemo';
+import FlexRow, { spacingOptions, flexDirectionOptions, justifyOptions, alignments as flexRowAlignments } from '../components/shared/FlexRow.js';
+import Padding, { sizes } from '../components/shared/Padding.js';
+import Link from '../components/shared/Link.js';
+import TileSelector, { TileButton, tileButtonTypes, TileGroup, selectorTypes } from '../components/shared/TileSelector.js';
+import { types } from '../components/shared/TileButton.js';
+import Icon from '../components/shared/Icon.js';
+import UserNav, { UserInfo, imageSizes } from '../components/shared/UserNav';
+
 
 # Layouts
 
@@ -595,4 +603,81 @@ to the `.two-sided` div.
     <SmsPairingDemo />
 </ComponentDemo>
 
+
+## User-Selector Table
+<ComponentDemo>
+    <Card> 
+        <Logo src="ping-logo.svg"/>
+        <TextBlock> Please select the account to login with:</TextBlock>
+            <FlexRow spacing={spacingOptions.MD} alignment={flexRowAlignments.CENTER} flexDirection={flexDirectionOptions.COLUMN}>
+                <TileButton type="side-icon">
+                    <FlexRow spacing={spacingOptions.MD} alignment={flexRowAlignments.CENTER}>
+                            <FlexRow justify={justifyOptions.CENTER} alignment={flexRowAlignments.CENTER}>
+                                <UserInfo 
+                                    imageSrc="https://placedog.net/200/200"
+                                    imageSize={imageSizes.MEDIUM}
+                                />
+                            </FlexRow>
+                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{flex: 1}}>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Username:</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Email:</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Last Login:</TextBlock> 
+                            </FlexRow>
+                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{flex: 1}} justify={justifyOptions.SPACEEVENLY}>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">da****</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">da**@gmail.com</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Today, 9:48</TextBlock>
+                            </FlexRow>
+                    </FlexRow>
+                </TileButton>
+                <TileButton type="side-icon">
+                    <FlexRow spacing={spacingOptions.MD} alignment={flexRowAlignments.CENTER}>
+                            <FlexRow justify={justifyOptions.CENTER} alignment={flexRowAlignments.CENTER}>
+                                <UserInfo 
+                                    imageSize={imageSizes.MEDIUM}
+                                />
+                            </FlexRow>
+                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{flex: 1}}>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Username:</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Email:</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Last Login:</TextBlock> 
+                            </FlexRow>
+                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{flex: 1}} justify={justifyOptions.SPACEEVENLY}>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">da****</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">da**@gmail.com</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Today, 9:48</TextBlock>
+                            </FlexRow>
+                    </FlexRow>
+                </TileButton>   <TileButton type="side-icon">
+                    <FlexRow spacing={spacingOptions.MD} alignment={flexRowAlignments.CENTER}>
+                            <FlexRow justify={justifyOptions.CENTER} alignment={flexRowAlignments.CENTER}>
+                                <UserInfo 
+                                    imageSrc="https://placedog.net/200/200"
+                                    imageSize={imageSizes.MEDIUM}
+                                />
+                            </FlexRow>
+                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{flex: 1}}>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Username:</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Email:</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Last Login:</TextBlock> 
+                            </FlexRow>
+                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{flex: 1}} justify={justifyOptions.SPACEEVENLY}>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">da****</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">da**@gmail.com</TextBlock>
+                                <TextBlock inline alignment={alignments.LEFT} spacing="small">Today, 9:48</TextBlock>
+                            </FlexRow>
+                    </FlexRow>
+                </TileButton>
+                <FlexRow justify={justifyOptions.END} >
+                    <Link>See 6 more accounts</Link>
+                </FlexRow>
+                <Padding top={sizes.SM}/>
+                <TextBlock>or</TextBlock>
+                <Button label="Create New Account" type={ButtonTypes.PRIMARY}/>
+                <FlexRow justify={justifyOptions.CENTER} >
+                    <Link>Already have an account? Sign on.</Link>
+                </FlexRow>
+             </FlexRow>
+    </Card>
+</ComponentDemo>
 

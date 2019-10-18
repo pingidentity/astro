@@ -1,3 +1,8 @@
+// PATHS ---------------------------------------------------------------------------------------------------------------
+
+@import url('https://use.typekit.net/nxh5mrb.css');
+
+
 // SPACING SCALE
 $spacing-base: 10px;
 $spacing-xs: $spacing-base * 0.5;
@@ -125,6 +130,27 @@ $breakpoint-mobile: 480px;
 
 // FONTS
 $font-default: 'proxima-nova', sans-serif;
+
+@mixin font-pn-regular {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+@mixin font-pn-light {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+@mixin font-pn-semibold {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+@mixin font-pn-bold {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
 
 // FONT SIZES
 $font-size-xs: 11px;
