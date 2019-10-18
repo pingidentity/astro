@@ -6,15 +6,6 @@
     &__text {
         display: inline-block;
         text-align: left;
-        &-center {
-            text-align: center;
-        }
-    }
-    &__text-right {
-        text-align: right;
-    }
-    &__text-center {
-        text-align: center;
     }
 
     &--full-width {
@@ -39,7 +30,22 @@
         margin-bottom: 15px;
     }
 
-    &--xxlarge {
+    &--margin-sm {
+        margin-bottom: $spacing-xs;
+    }
+
+    &--xxlarge, 
+    &--margin-xx {
         margin-bottom: $spacing-xx;
     }
+
+    &--left {
+        text-align: left;
+    }
+
+    &--right {
+        text-align: right;
+    }
 }
+
+

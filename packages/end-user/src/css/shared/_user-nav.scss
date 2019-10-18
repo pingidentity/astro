@@ -1,8 +1,76 @@
+.user-info {
+    $image-size: 30px;
+    @include flexbox();
+    align-items: center;
+    color: $color-midnight;
+    text-decoration: none;
+
+    &__icon,
+    &__image {
+        font-size: $image-size;
+        display: inline-block;
+        width: $image-size;
+        height: $image-size;
+
+        &--small {
+            width: 30px;
+            height: 30px;
+        }
+
+        &--medium {
+            width: 55px;
+            height: 55px;
+        }
+
+        &--large {
+            width: 75px;
+            height: 75px;
+        }
+    }
+    &__icon {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMjQiIGhlaWdodD0iMTAyNCIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCI+PHRpdGxlPjwvdGl0bGU+PGcgaWQ9Imljb21vb24taWdub3JlIj48L2c+PHBhdGggZD0iTTUxMiAwYy0yODEuMzY5IDAtNTEyIDIzMC42MzEtNTEyIDUxMnMyMzAuNjMxIDUxMiA1MTIgNTEyYzI4MS4zNjkgMCA1MTItMjMwLjYzMSA1MTItNTEycy0yMzAuNjMxLTUxMi01MTItNTEyek04MzkuNDk1IDg0NC4xMDhjLTczLjgwMi03My44MDItMTcwLjY2Ny0xMDYuMDkwLTE4OS4xMTctMTEwLjcwMy01NS4zNTEtNDYuMTI2LTMyLjI4OC05Ni44NjUgOS4yMjUtMTY2LjA1NCA0LjYxMy05LjIyNSAxMy44MzgtMjMuMDYzIDE4LjQ1LTMyLjI4OCAyNy42NzYtNTkuOTY0IDIzLjA2My05Ni44NjUgMTguNDUtMTEwLjcwMyA5LjIyNS00MS41MTQgMjMuMDYzLTE1Ni44MjktMzYuOTAxLTIyMS40MDUtMzYuOTAxLTM2LjkwMS04Ny42NC01MC43MzktMTUyLjIxNi0zMi4yODgtNjkuMTg5IDAtMTE5LjkyOCAyMy4wNjMtMTUyLjIxNiA2NC41NzctNTUuMzUxIDczLjgwMi0yNy42NzYgMTc5Ljg5Mi0xOC40NSAyMDcuNTY4LTEzLjgzOCA1MC43MzkgMTMuODM4IDg3LjY0IDIzLjA2MyA5Ni44NjVzODcuNjQgMTI0LjU0MSAxOC40NSAxOTMuNzNsLTIzLjA2MyA5LjIyNWMtNzguNDE0IDMyLjI4OC0xMjkuMTUzIDU5Ljk2NC0xNzAuNjY3IDk2Ljg2NS04Ny42NC04My4wMjctMTM4LjM3OC0xOTguMzQyLTEzOC4zNzgtMzI3LjQ5NSAwLTI1OC4zMDYgMjA3LjU2OC00NjUuODc0IDQ2NS44NzQtNDY1Ljg3NHM0NjUuODc0IDIwNy41NjggNDY1Ljg3NCA0NjUuODc0YzAgMTI5LjE1My01NS4zNTEgMjQ0LjQ2OC0xMzguMzc4IDMzMi4xMDh6Ij48L3BhdGg+PC9zdmc+');
+
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    &__image {
+        border-radius: 50%;
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+    }
+}
+
 .user-nav {
     // @include font-pn-regular;
     @include flexbox();
     align-items: flex-end;
     padding: 18px 25px;
+
+    .user-info {
+        margin-right: $spacing-md;
+
+        &__image {
+            margin-right: $spacing-sm;
+        }
+
+        &:after {
+            position: absolute;
+            top: auto;
+            right: 0;
+            content: 'Y';
+            font-family: 'iconfont';
+            font-size: 5px;
+            color: $color-midnight;
+            transition: all 0.2s linear;
+        }
+    
+        .truncate {
+            display: inline-block;
+            max-width: 410px;
+            @include text-truncate;
+        }
+    }
 
     &__collapsible-trigger {
         display: none;
@@ -78,53 +146,6 @@
     // And add the tab styling to the full nav
     padding-bottom: $spacing-lg;
     border-bottom: 1px solid $color-rabbit-fur;
-}
-
-.user-info {
-    $image-size: 30px;
-    @include flexbox();
-    align-items: center;
-    color: $color-midnight;
-    text-decoration: none;
-    margin-right: $spacing-md;
-
-    &:after {
-        position: absolute;
-        top: auto;
-        right: 0;
-        content: 'Y';
-        // font-family: 'iconfont';
-        font-size: 5px;
-        color: $color-midnight;
-        transition: all 0.2s linear;
-    }
-
-    .truncate {
-        display: inline-block;
-        max-width: 410px;
-        @include text-truncate;
-    }
-
-    &__icon,
-    &__image {
-        font-size: $image-size;
-        margin-right: $spacing-sm;
-        display: inline-block;
-        width: $image-size;
-        height: $image-size;
-    }
-    &__icon {
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMjQiIGhlaWdodD0iMTAyNCIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCI+PHRpdGxlPjwvdGl0bGU+PGcgaWQ9Imljb21vb24taWdub3JlIj48L2c+PHBhdGggZD0iTTUxMiAwYy0yODEuMzY5IDAtNTEyIDIzMC42MzEtNTEyIDUxMnMyMzAuNjMxIDUxMiA1MTIgNTEyYzI4MS4zNjkgMCA1MTItMjMwLjYzMSA1MTItNTEycy0yMzAuNjMxLTUxMi01MTItNTEyek04MzkuNDk1IDg0NC4xMDhjLTczLjgwMi03My44MDItMTcwLjY2Ny0xMDYuMDkwLTE4OS4xMTctMTEwLjcwMy01NS4zNTEtNDYuMTI2LTMyLjI4OC05Ni44NjUgOS4yMjUtMTY2LjA1NCA0LjYxMy05LjIyNSAxMy44MzgtMjMuMDYzIDE4LjQ1LTMyLjI4OCAyNy42NzYtNTkuOTY0IDIzLjA2My05Ni44NjUgMTguNDUtMTEwLjcwMyA5LjIyNS00MS41MTQgMjMuMDYzLTE1Ni44MjktMzYuOTAxLTIyMS40MDUtMzYuOTAxLTM2LjkwMS04Ny42NC01MC43MzktMTUyLjIxNi0zMi4yODgtNjkuMTg5IDAtMTE5LjkyOCAyMy4wNjMtMTUyLjIxNiA2NC41NzctNTUuMzUxIDczLjgwMi0yNy42NzYgMTc5Ljg5Mi0xOC40NSAyMDcuNTY4LTEzLjgzOCA1MC43MzkgMTMuODM4IDg3LjY0IDIzLjA2MyA5Ni44NjVzODcuNjQgMTI0LjU0MSAxOC40NSAxOTMuNzNsLTIzLjA2MyA5LjIyNWMtNzguNDE0IDMyLjI4OC0xMjkuMTUzIDU5Ljk2NC0xNzAuNjY3IDk2Ljg2NS04Ny42NC04My4wMjctMTM4LjM3OC0xOTguMzQyLTEzOC4zNzgtMzI3LjQ5NSAwLTI1OC4zMDYgMjA3LjU2OC00NjUuODc0IDQ2NS44NzQtNDY1Ljg3NHM0NjUuODc0IDIwNy41NjggNDY1Ljg3NCA0NjUuODc0YzAgMTI5LjE1My01NS4zNTEgMjQ0LjQ2OC0xMzguMzc4IDMzMi4xMDh6Ij48L3BhdGg+PC9zdmc+');
-
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-    &__image {
-        border-radius: 50%;
-        background-size: cover;
-        background-position: 50%;
-        background-repeat: no-repeat;
-    }
 }
 
 //based on PIC tablet menu breakpoints
@@ -232,7 +253,6 @@
         &__icon,
         &__image {
             display: block;
-            margin: 0 auto $spacing-lg;
             width: $image-size;
             height: $image-size;
         }

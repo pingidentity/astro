@@ -5,23 +5,40 @@ import { Tabs } from './TabbedSections';
 import PopOverNavMenu from '../Tooltip/PopoverNavMenu';
 import Link from './Link';
 
+
 const MENU_OPEN_CLASSNAME = 'menu-open';
 
-const UserInfo = ({
-    user
-}) => (
+export const imageSizes = { 
+    SMALL: "small",
+    MEDIUM: "medium",
+    LARGE: "large",
+};
+
+export const UserInfo = ({
+    imageSize,
+    imageSrc,
+    name,
+}) => {
+    const size = classnames({
+        'user-info__image--small': imageSize === imageSizes.SMALL,
+        'user-info__image--medium': imageSize === imageSizes.MEDIUM,
+        'user-info__image--large': imageSize === imageSizes.LARGE,
+    });
+
+    return(
         <div className="user-info">
             {
-                user.imageSrc
+                imageSrc
                     ? (<div
-                        className="user-info__image"
-                        style={{ backgroundImage: `url(${user.imageSrc})` }}
+                        className={classnames("user-info__image", size)}
+                        style={{ backgroundImage: `url(${imageSrc})` }}
                     />)
-                    : <span className="user-info__icon" />
+                    : <span className="user-info__icon" className={classnames("user-info__icon", size)} />  
             }
-            <span className="truncate">{user.name}</span>
+            <span className="truncate">{name}</span>
         </div>
     );
+};
 
 class UserNav extends React.Component {
     bodyNode = typeof document !== "undefined" ? document.body : {};
@@ -109,7 +126,7 @@ class UserNav extends React.Component {
                     <PopOverNavMenu
                         flags={["use-portal"]}
                         className="user-nav__dropdown-menu"
-                        label={<UserInfo user={user} />}
+                        label={<UserInfo {...user} />}
                         items={[
                             {
                                 label: "Sign Out",
@@ -129,10 +146,7 @@ UserNav.propTypes = {
     logo: PropTypes.bool,
     menu: PropTypes.bool,
     tabs: PropTypes.arrayOf(PropTypes.string),
-    user: PropTypes.shape({
-        imageSrc: PropTypes.string,
-        name: PropTypes.name,
-    }),
+    user: PropTypes.shape({}),
 };
 
 UserNav.defaultProps = {
@@ -142,5 +156,17 @@ UserNav.defaultProps = {
     onSignOut: () => { },
     user: {},
 };
+
+UserInfo.propTypes = {
+    imageSrc: PropTypes.string,
+    imageSize:PropTypes.oneOf(Object.values(imageSizes)),
+    name: PropTypes.string,
+}
+
+UserInfo.defaultProps = {
+    imageSize: imageSizes.SMALL,
+    name: "",
+    imageSrc: null,
+}
 
 export default UserNav;
