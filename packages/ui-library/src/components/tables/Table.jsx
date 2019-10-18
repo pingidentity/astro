@@ -5,24 +5,35 @@ import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 
 /**
+ * @callback Table~cellRenderer
+ * @param {string|number} cell
+ *     Data for the cell.
+ * @param {array} row
+ *     All the data for the row.
+ *
+ *
+/**
  * @class Table
  *
  * @desc A stateless component for displaying tabular data
  *
+ * @param {Object[]} [bodyData]
+ *      An array of arrays for the body that are ordered in the same way as the headData.
+ * @param {function} [cellRenderers]
+ *      An array of functions that transform the data for each column in the table.
+ *      You can target a specific column like this: [null, null, function, null]
+ * @param {string} [className]
+ *      CSS class name for Table.
  * @param {string} [data-id]
  *      Data-id for the component.
  * @param {array} [data]
  *      An array of objects with data in key value pairs.
  * @param {array} [headData]
  *      An array of values for the table head.
- * @param {Object[]} [bodyData]
- *      An array of arrays for the body that are ordered in the same was as the headData.
- * @param {string} [verticalAlignment]
- *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
- * @param {string} [className]
- *      CSS class name for Table.
  * @param {bool} [fullWidth]
  *          Whether or not the table is full-width.
+ * @param {string} [verticalAlignment]
+ *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
  * @param {'auto'|'full'|'full-fixed'} [width]
  *      The width of the table.
  */
