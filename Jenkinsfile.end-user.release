@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'pingux-end-user-release-and-cdn-deploy'
+    label 'ui-library-cdn-deploy'
   }
   environment {
     PACKAGE_JSON = readJSON file: "${env.WORKSPACE}/packages/end-user/package.json"
