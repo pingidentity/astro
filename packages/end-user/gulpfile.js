@@ -34,10 +34,9 @@ gulp.task('move-files', () =>
         .src([
             './.npmrc',
             './package.json',
-            './static/end-user.css',
+            './static/end-user*(.css|.map)',
             './src/css**/**/*',
-            './static/*',
-            '!./static/*.html'
+            './static/*(*.svg|*.jpg|*.otf)'
         ])
         .pipe(debug({ title: 'moving:' }))
         .pipe(gulp.dest(paths.dist))
@@ -46,8 +45,8 @@ gulp.task('move-files', () =>
 gulp.task('build-cdn', () =>
     gulp
         .src([
-            './static/*',
-            '!./static/*.html'
+            './static/end-user*(.css|.map)',
+            './static/*(*.svg|*.jpg|*.otf)', //move top level files to cdn
         ])
         .pipe(debug({ title: 'perparing for cdn:' }))
         .pipe(gulp.dest(paths.cdn))
