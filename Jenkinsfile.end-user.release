@@ -28,17 +28,21 @@ pipeline {
               env.GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
             }
 
+            script {
+              sshagent(['jenkins-build-user']) {
+                sh 'git config --global user.email "devtools+jenkins@pingidentity.com"'
+                sh 'git config --global user.name "devtools-jenkins"'
 
-            sh "git add package.json"
-            withCredentials([
-                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
-              ]){
-              sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
-              sh "git push origin ${params.RELEASE_BRANCH}"
+                sh "git add package.json"
+                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
+                sh "git push origin ${params.RELEASE_BRANCH}"
 
-              sh "git tag ${GIT_RELEASE_TAG}"
-              sh "git push origin ${GIT_RELEASE_TAG}"
+                sh "git tag ${GIT_RELEASE_TAG}"
+                sh "git push origin ${GIT_RELEASE_TAG}"
+              }
             }
+
+
           }
         }
       }
