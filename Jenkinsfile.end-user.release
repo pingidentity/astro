@@ -1,6 +1,6 @@
-def pjson = readJSON file: "${env.WORKSPACE}/packages/end-user/package.json"
-def releaseVersion = pjson.version
-def gitTag = "end-user-${releaseVersion}"
+def pjson
+def releaseVersion
+def gitTag
 
 pipeline {
   agent {
@@ -22,6 +22,8 @@ pipeline {
       steps {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
+            pjson = readJSON file: "./package.json"
+            releaseVersion = pjson.version
             echo "Building & publishing end-user ${releaseVersion}"
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               sh "npm run dist"
@@ -32,6 +34,7 @@ pipeline {
       }
       post {
         success {
+          gitTag = "end-user-${releaseVersion}"
           sh "git tag ${gitTag}"
           sh "git push origin ${gitTag}"
         }
