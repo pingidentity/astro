@@ -1,10 +1,11 @@
-def pjson
-def releaseVersion
-def gitTag
-
 pipeline {
   agent {
     label 'pingux-end-user-release-and-cdn-deploy'
+  }
+  environment {
+    PACKAGE_JSON = readJSON file: "${env.WORKSPACE}/packages/end-user/package.json"
+    RELEASE_VERSION = PACKAGE_JSON.version
+    GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
   }
   stages {
     stage('run-tests') {
@@ -22,9 +23,7 @@ pipeline {
       steps {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
-            pjson = readJSON file: "./package.json"
-            releaseVersion = pjson.version
-            echo "Building & publishing end-user ${releaseVersion}"
+            echo "Building & publishing end-user ${RELEASE_VERSION}"
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               sh "npm run dist"
               sh "cd dist && npm publish"
@@ -34,9 +33,8 @@ pipeline {
       }
       post {
         success {
-          gitTag = "end-user-${releaseVersion}"
-          sh "git tag ${gitTag}"
-          sh "git push origin ${gitTag}"
+          sh "git tag ${GIT_RELEASE_TAG}"
+          sh "git push origin ${GIT_RELEASE_TAG}"
         }
         always {
           archiveArtifacts artifacts: "packages/end-user/cdn/**", fingerprint: true
@@ -49,7 +47,7 @@ pipeline {
       container('node-builder') {
         withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${releaseVersion}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
           }
         }
       }
