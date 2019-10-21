@@ -26,26 +26,29 @@ pipeline {
       }
     }
     stage('git commit and tag') {
-      environment {
-        PACKAGE_JSON = readJSON file: "./package.json"
-        RELEASE_VERSION = "${env.PACKAGE_JSON["version"]}"
-        GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
-      }
       steps {
         dir ("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
-            echo "Package: ${env.PACKAGE_JSON} Release: ${env.RELEASE_VERSION} tag: ${GIT_RELEASE_TAG} "
             script {
-              sshagent(['jenkins-build-user']) {
-                sh 'git config --global user.email "devtools+jenkins@pingidentity.com"'
-                sh 'git config --global user.name "devtools-jenkins"'
+                env.PACKAGE_JSON = readJSON file: "./package.json"
+                env.RELEASE_VERSION = env.PACKAGE_JSON["version"]
+                env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
+            }
 
-                sh "git add package.json"
-                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'"
-                sh "git push origin ${params.RELEASE_BRANCH}"
+            echo env.PACKAGE_JSON
+            echo env.RELEASE_VERSION
+            echo env.GIT_RELEASE_TAG
 
-                sh "git tag ${env.GIT_RELEASE_TAG}"
-                sh "git push origin ${env.GIT_RELEASE_TAG}"
+            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+              withCredentials([
+                sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'uiLibraryKeyPath'),
+                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+              ]){
+                sh  """
+                  git add package.json
+                  git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH} --dry-run
+                """
               }
             }
           }
@@ -59,7 +62,7 @@ pipeline {
             echo "Building & publishing"
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               sh "npm run dist"
-              sh "cd dist && npm publish"
+              sh "cd dist && npm publish --dry-run"
             }
           }
         }
@@ -76,7 +79,8 @@ pipeline {
       container('node-builder') {
         withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${env.RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
+            // s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${env.RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
+            echo "ux/end-user/${env.RELEASE_VERSION}"
           }
         }
       }
