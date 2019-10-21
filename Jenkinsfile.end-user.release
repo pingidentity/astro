@@ -9,8 +9,8 @@ pipeline {
           container('node-builder') {
             echo "Running end-user linting and tests"
             sh "npm install"
-            // sh "npm run lint"
-            //sh "npm run coverage"
+            //sh "npm run lint"
+            sh "npm run coverage"
           }
         }
       }
@@ -30,13 +30,12 @@ pipeline {
             """
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               withCredentials([
-                sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'uiLibraryKeyPath'),
                 sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
               ]){
                 sh  """
                   git add package.json
                   git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH} --dry-run
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
                 """
               }
             }
@@ -51,7 +50,7 @@ pipeline {
             echo "Building & publishing"
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               sh "npm run dist"
-              sh "cd dist && npm publish --dry-run"
+              sh "cd dist && npm publish"
             }
           }
         }
@@ -68,8 +67,7 @@ pipeline {
       container('node-builder') {
         withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            // s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${env.RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
-            echo "ux/end-user/${env.RELEASE_VERSION}"
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${env.RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
           }
         }
       }
