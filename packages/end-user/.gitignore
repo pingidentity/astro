@@ -4,9 +4,9 @@ npm-debug.log
 package-lock.json
 yarn.lock
 yarn-error.log
-dist/
-cdn/
-
+dist
+cdn
+static
 # Istanbul
 **/coverage
 **/coverage-reference
