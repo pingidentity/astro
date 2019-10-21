@@ -2,16 +2,13 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const del = require('del');
 const debug = require('gulp-debug');
-const log = require('fancy-log');
 
 const paths = {
     dist: 'dist',
-    cdn: 'cdn',
 }
 
 gulp.task('delete-dist', () => del([paths.dist]));
 
-gulp.task('delete-cdn', () => del([paths.cdn]));
 
 gulp.task('transpile-components', () =>
     gulp
@@ -34,23 +31,11 @@ gulp.task('move-files', () =>
         .src([
             './.npmrc',
             './package.json',
-            './static/end-user*(.css|.map)',
             './src/css**/**/*',
-            './static/*(*.svg|*.jpg|*.otf)'
+            './src/icons**/**/*',
         ])
         .pipe(debug({ title: 'moving:' }))
         .pipe(gulp.dest(paths.dist))
-);
-
-gulp.task('build-cdn', () =>
-    gulp
-        .src([
-            './static/end-user*(.css|.map)',
-            './static/*(*.svg|*.jpg|*.otf)', //move top level files to cdn
-        ])
-        .pipe(debug({ title: 'perparing for cdn:' }))
-        .pipe(gulp.dest(paths.cdn))
-        .on('end', () => { log(`cdn built`);} )
 );
 
 gulp.task('build-dist', gulp.series(
@@ -61,9 +46,4 @@ gulp.task('build-dist', gulp.series(
     done => done(),
 ));
 
-gulp.task(paths.dist, gulp.series(
-    'build-dist',
-    'delete-cdn',
-    'build-cdn',
-    done => done(),
-));
+

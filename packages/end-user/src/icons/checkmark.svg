@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>checkmark</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="checkmark">
+            <g>
+                <rect id="Rectangle-4" x="0" y="0" width="16" height="16"></rect>
+                <path d="M12.0038598,5.01004173 C12.3292874,4.71119612 12.8353608,4.73274505 13.1342064,5.05817262 C13.433052,5.38360019 13.4115031,5.8896736 13.0860755,6.18851921 L7.27053927,11.529024 C6.95486151,11.8189163 6.46680534,11.8085301 6.16374599,11.5054707 L3.43431458,8.77603932 C3.12189514,8.46361988 3.12189514,7.9570879 3.43431458,7.64466847 C3.74673401,7.33224903 4.25326599,7.33224903 4.56568542,7.64466847 L6.75300608,9.83198912 L12.0038598,5.01004173 Z" id="Page-1" fill="#4D4D4D" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

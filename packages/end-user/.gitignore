@@ -1,12 +1,12 @@
 # npm / yarn
-node_modules/
+node_modules
 npm-debug.log
 package-lock.json
 yarn.lock
 yarn-error.log
-dist/
-cdn/
-
+dist
+cdn
+static
 # Istanbul
 **/coverage
 **/coverage-reference
@@ -16,4 +16,4 @@ cdn/
 **/.DS_Store
 
 # JSDoc
-build-doc/
+build-doc
