@@ -46,7 +46,7 @@ pipeline {
                 sh "git push origin ${params.RELEASE_BRANCH}"
 
                 sh "git tag ${GIT_RELEASE_TAG}"
-                sh "git push origin ${.GIT_RELEASE_TAG}"
+                sh "git push origin ${GIT_RELEASE_TAG}"
               }
             }
           }
@@ -74,10 +74,14 @@ pipeline {
   }
   post {
     success {
-      container('node-builder') {
-        withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
-          withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${env.RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
+      dir ("${env.WORKSPACE}/packages/end-user") {
+        container('node-builder') {
+          def PACKAGE_JSON = readJSON file: "./package.json"
+          def RELEASE_VERSION = PACKAGE_JSON.version
+          withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+            withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+              s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${RELEASE_VERSION}", file: "./cdn/")
+            }
           }
         }
       }
