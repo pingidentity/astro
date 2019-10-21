@@ -280,10 +280,6 @@ describe("DropDownButton", function () {
 
     it("triggers callback when clicked outside", function () {
         window.addEventListener = jest.fn();
-        global.getSelection = jest.fn();
-        global.getSelection.mockReturnValue({
-            toString: () => "",
-        });
 
         var callback = jest.fn();
 

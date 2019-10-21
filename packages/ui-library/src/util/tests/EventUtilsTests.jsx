@@ -8,13 +8,6 @@ describe("ReduxUtils", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../EventUtils");
 
-    beforeEach(function() {
-        global.getSelection = jest.fn();
-        global.getSelection.mockReturnValue({
-            toString: () => "",
-        });
-    });
-
     it("Forwards checked attribute", function () {
         var callback = jest.fn();
         var wrapper = Utils.forwardTargetChecked(callback);

@@ -350,12 +350,6 @@ describe("Popover", function() {
     it("triggers callback when clicked outside", function() {
         const callback = jest.fn();
 
-        global.getSelection = jest.fn();
-        global.getSelection.mockReturnValue({
-            toString: () => "",
-        });
-
-
         ReactTestUtils.renderIntoDocument(
             <div>
                 <Popover onToggle={callback} label="hello" open={true} flags={allFlags}>
