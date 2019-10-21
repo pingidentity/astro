@@ -21,29 +21,32 @@ pipeline {
           container('node-builder') {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             sh "npm version ${params.VERSION_TYPE} --no-git-tag-version"
-
-            script {
-              env.PACKAGE_JSON = readJSON file: "./package.json"
-              env.RELEASE_VERSION = "${env.PACKAGE_JSON.version}"
-              echo "${env.RELEASE_VERSION}"
-              env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
-            }
-
+          }
+        }
+      }
+    }
+    stage('git commit and tag') {
+      environment {
+        PACKAGE_JSON = readJSON file: "./package.json"
+        RELEASE_VERSION = "${PACKAGE_JSON.version}"
+        GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
+      }
+      steps {
+        dir ("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
             script {
               sshagent(['jenkins-build-user']) {
                 sh 'git config --global user.email "devtools+jenkins@pingidentity.com"'
                 sh 'git config --global user.name "devtools-jenkins"'
 
                 sh "git add package.json"
-                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'"
+                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
                 sh "git push origin ${params.RELEASE_BRANCH}"
 
-                sh "git tag ${env.GIT_RELEASE_TAG}"
-                sh "git push origin ${env.GIT_RELEASE_TAG}"
+                sh "git tag ${GIT_RELEASE_TAG}"
+                sh "git push origin ${GIT_RELEASE_TAG}"
               }
             }
-
-
           }
         }
       }
@@ -52,7 +55,7 @@ pipeline {
       steps {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
-            echo "Building & publishing end-user ${env.RELEASE_VERSION}"
+            echo "Building & publishing"
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               sh "npm run dist"
               sh "cd dist && npm publish"
