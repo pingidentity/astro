@@ -22,7 +22,7 @@ pipeline {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             script {
               env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
-              env.RELEASE_VERSION = RELEASE_VERSION_V,replaceAll("v","")
+              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","")
               env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
             echo """
