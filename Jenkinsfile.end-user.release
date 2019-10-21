@@ -8,37 +8,26 @@ pipeline {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Running end-user linting and tests"
-            sh "npm install"
+            //sh "npm install"
             // sh "npm run lint"
-            sh "npm run coverage"
+            //sh "npm run coverage"
           }
         }
       }
     }
-    stage('increment version') {
+    stage('version, tag and commit') {
       steps {
         dir ("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
-            sh "npm version ${params.VERSION_TYPE} --no-git-tag-version"
-          }
-        }
-      }
-    }
-    stage('git commit and tag') {
-      steps {
-        dir ("${env.WORKSPACE}/packages/end-user") {
-          container('node-builder') {
             script {
-                env.PACKAGE_JSON = readJSON file: "./package.json"
-                env.RELEASE_VERSION = env.PACKAGE_JSON["version"]
-                env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
+              env.RELEASE_VERSION = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
+              env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
-
-            echo env.PACKAGE_JSON
-            echo env.RELEASE_VERSION
-            echo env.GIT_RELEASE_TAG
-
+            echo """
+              release version: ${env.RELEASE_VERSION}
+              git tag: ${env.GIT_RELEASE_TAG}
+            """
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               withCredentials([
                 sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'uiLibraryKeyPath'),
