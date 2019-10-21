@@ -27,26 +27,25 @@ pipeline {
     }
     stage('git commit and tag') {
       environment {
-
+        PACKAGE_JSON = readJSON file: "./package.json"
+        RELEASE_VERSION = "${env.PACKAGE_JSON["version"]}"
+        GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
       }
       steps {
         dir ("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
-            def PACKAGE_JSON = readJSON file: "./package.json"
-            def RELEASE_VERSION = PACKAGE_JSON.version
-            def GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
-            echo "Package: ${PACKAGE_JSON} Release: ${RELEASE_VERSION} tag: ${GIT_RELEASE_TAG} "
+            echo "Package: ${env.PACKAGE_JSON} Release: ${env.RELEASE_VERSION} tag: ${GIT_RELEASE_TAG} "
             script {
               sshagent(['jenkins-build-user']) {
                 sh 'git config --global user.email "devtools+jenkins@pingidentity.com"'
                 sh 'git config --global user.name "devtools-jenkins"'
 
                 sh "git add package.json"
-                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
+                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'"
                 sh "git push origin ${params.RELEASE_BRANCH}"
 
-                sh "git tag ${GIT_RELEASE_TAG}"
-                sh "git push origin ${GIT_RELEASE_TAG}"
+                sh "git tag ${env.GIT_RELEASE_TAG}"
+                sh "git push origin ${env.GIT_RELEASE_TAG}"
               }
             }
           }
@@ -74,14 +73,10 @@ pipeline {
   }
   post {
     success {
-      dir ("${env.WORKSPACE}/packages/end-user") {
-        container('node-builder') {
-          def PACKAGE_JSON = readJSON file: "./package.json"
-          def RELEASE_VERSION = PACKAGE_JSON.version
-          withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
-            withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-              s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${RELEASE_VERSION}", file: "./cdn/")
-            }
+      container('node-builder') {
+        withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+          withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+            s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/${env.RELEASE_VERSION}", file: "${env.WORKSPACE}/packages/end-user/cdn/")
           }
         }
       }
