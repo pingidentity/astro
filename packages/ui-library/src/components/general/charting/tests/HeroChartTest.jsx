@@ -3,8 +3,8 @@ import ReactTestUtils from "react-dom/test-utils";
 import { mount } from "enzyme";
 import TestUtils from "../../../../testutil/TestUtils";
 import HeroChart from "../HeroChart";
-import { BarChart } from "recharts";
 import _ from "underscore";
+import { BarChart } from "recharts";import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 jest.dontMock("recharts");
 jest.dontMock("../HeroChart");
@@ -52,6 +52,14 @@ describe("HeroChart", function () {
         const componentProps = _.defaults(props || {}, defaultProps);
         return mount(<HeroChart {...componentProps} />);
     };
+
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <HeroChart
+                {...defaultProps}
+            />
+        );
+    });
 
     it("renders with the default data-id", function () {
         const component = getComponent();

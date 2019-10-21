@@ -180,6 +180,7 @@ class HeatMapCard extends React.Component {
                     return ([
                         rowLabel,
                         <HelpHint
+                            data-id={`heatmap-hint_${cellValue}_${rowIndex}`}
                             delayHide={0}
                             hintText={cellContent}
                             key={`cell-${rowIndex}-${cellIndex}`}
@@ -239,38 +240,39 @@ class HeatMapCard extends React.Component {
             <div>
                 <DashboardCardTitle className="dashboard-card__title--heatmap" title={this.props.chartTitle} />
                 {!this.props.loading && (
-                    <div>
-                        <div className="heatmap-card__content">
-                            <div className="heatmap-card__chart">
-                                <div
-                                    className="heatmap"
-                                    data-id={`${dataId}-chart`}
-                                    style={{ backgroundColor: Utils.HexToRgba(
-                                        this.props.heatColor, 0.1)
-                                    }}
-                                >
-                                    {this._renderXAxis()}
-                                    {this._renderCells(dataRange, min)}
-                                </div>
+                    <div className="heatmap-card__content">
+                        <div className="heatmap-card__chart-container">
+                            <div
+                                className="heatmap"
+                                data-id={`${dataId}-chart`}
+                                style={{ backgroundColor: Utils.HexToRgba(
+                                    this.props.heatColor, 0.1)
+                                }}
+                            >
+                                {this._renderXAxis()}
+                                {this._renderCells(dataRange, min)}
                             </div>
-                            <div className="heatmap-card__data">
-                                <div className="heatmap-card__title" data-id={`${dataId}-value-title`}>
-                                    {this.props.valueTitle}
-                                </div>
-                                <div className="heatmap-card__value" data-id={`${dataId}-value`}>
-                                    {this.props.value}
-                                </div>
-                                <div className="heatmap-card__subtitle" data-id={`${dataId}-value-subtitle`}>
-                                    {this.props.valueSubtitle}
-                                </div>
+                            <div className="heatmap-card__range-selecotr">
+                                {
+                                    this.props.rockerButtonProps
+                                        ? <RockerButton
+                                            {...rockerButtonDefaults}
+                                            {...this.props.rockerButtonProps}
+                                        />
+                                        : null
+                                }
                             </div>
                         </div>
-                        <div className="heatmap-card__footer">
-                            {
-                                this.props.rockerButtonProps
-                                    ? <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
-                                    : null
-                            }
+                        <div className="heatmap-card__data">
+                            <div className="heatmap-card__title" data-id={`${dataId}-value-title`}>
+                                {this.props.valueTitle}
+                            </div>
+                            <div className="heatmap-card__value" data-id={`${dataId}-value`}>
+                                {this.props.value}
+                            </div>
+                            <div className="heatmap-card__subtitle" data-id={`${dataId}-value-subtitle`}>
+                                {this.props.valueSubtitle}
+                            </div>
                         </div>
                     </div>
                 )}

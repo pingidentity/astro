@@ -131,7 +131,6 @@ $fullwidthBreakpoint: 950px;
         }
 
         &--heatmap {
-            max-width: 570px;
             margin-bottom: 10px;
         }
     }
@@ -732,17 +731,21 @@ $fullwidthBreakpoint: 950px;
     white-space: nowrap;
 
     &__content {
-        max-width: 800px;
         display: flex;
-        justify-content: left;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap-reverse;
+        @media (max-width: $fullwidthBreakpoint) {
+            justify-content: left;
+        }
     }
 
-    &__chart,
-    &__data,
-    &__footer {
+    &__chart-container {
         max-width: 570px;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__chart {
@@ -750,16 +753,12 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__data {
-        flex-grow: 1;
         color: $color-neutral-10;
         white-space: initial;
-    }
-
-    &__chart-title, {
-        margin: 0 0 $spacing-sm;
-        color: $color-neutral-10;
-        font-size: 18px;
-        text-transform: uppercase;
+        margin: 0 0 $spacing-lg $spacing-lg;
+        @media (max-width: $fullwidthBreakpoint) {
+            flex-grow: 1;
+        }
     }
 
     &__value,
