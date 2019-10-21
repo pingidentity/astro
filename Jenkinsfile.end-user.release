@@ -8,7 +8,7 @@ pipeline {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Running end-user linting and tests"
-            //sh "npm install"
+            sh "npm install"
             // sh "npm run lint"
             //sh "npm run coverage"
           }
