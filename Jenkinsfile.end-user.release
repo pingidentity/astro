@@ -28,23 +28,24 @@ pipeline {
     stage('git commit and tag') {
       environment {
         PACKAGE_JSON = readJSON file: "./package.json"
-        RELEASE_VERSION = "${PACKAGE_JSON.version}"
-        GIT_RELEASE_TAG = "end-user-${RELEASE_VERSION}"
+        RELEASE_VERSION = "${env.PACKAGE_JSON.version}"
+        GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
       }
       steps {
         dir ("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
+            echo "Package: ${env.PACKAGE_JSON} Release: ${env.RELEASE_VERSION} tag: ${GIT_RELEASE_TAG} "
             script {
               sshagent(['jenkins-build-user']) {
                 sh 'git config --global user.email "devtools+jenkins@pingidentity.com"'
                 sh 'git config --global user.name "devtools-jenkins"'
 
                 sh "git add package.json"
-                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${RELEASE_VERSION}'"
+                sh "git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'"
                 sh "git push origin ${params.RELEASE_BRANCH}"
 
-                sh "git tag ${GIT_RELEASE_TAG}"
-                sh "git push origin ${GIT_RELEASE_TAG}"
+                sh "git tag ${env.GIT_RELEASE_TAG}"
+                sh "git push origin ${env.GIT_RELEASE_TAG}"
               }
             }
           }
