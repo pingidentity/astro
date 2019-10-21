@@ -276,6 +276,11 @@ describe("DetailsTooltip", function () {
     //TODO no idea why this isn't working. can console log the full stack, it just isn't being called
     it("triggers callback when clicked outside", function () {
         var callback = jest.fn();
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+
 
         ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>

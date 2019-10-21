@@ -218,6 +218,11 @@ describe("CountryFlagList", function () {
         var component = getComponent({ open: true });
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+
         expect(component.props.onToggle).not.toBeCalled();
 
         // click outside

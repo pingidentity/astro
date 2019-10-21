@@ -95,6 +95,12 @@ describe("ModalTest v4", function () {
             preventDefault: jest.fn()
         };
 
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+
+
         //expect that the collapsed modal does not process keypress events
         handler(e);
         expect(e.stopPropagation).toBeCalled();

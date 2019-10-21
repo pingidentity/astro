@@ -106,6 +106,12 @@ describe("ColorPicker v4", function () {
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = { target: document.body };
 
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+
+
         expect(component.props.onToggle).not.toBeCalled();
 
         //click outside

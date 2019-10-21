@@ -306,6 +306,12 @@ describe("FormTimeZone", function () {
             onToggle: jest.fn(),
             onValueChange: jest.fn()
         });
+
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+
         const handler = component.refs.TimeZoneStateless._onGlobalClick;
 
         expect(component.props.onToggle).not.toBeCalled();

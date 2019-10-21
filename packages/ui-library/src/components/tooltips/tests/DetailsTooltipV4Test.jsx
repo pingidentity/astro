@@ -36,6 +36,11 @@ describe("DetailsTooltip", function () {
     beforeEach(function () {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
+        global.getSelection = jest.fn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
+
     });
     afterEach(function () {
         delete process.env.NODE_ENV;
