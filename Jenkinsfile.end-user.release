@@ -21,7 +21,8 @@ pipeline {
           container('node-builder') {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             script {
-              env.RELEASE_VERSION = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
+              env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
+              env.RELEASE_VERSION = RELEASE_VERSION_V,replaceAll("v","")
               env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
             echo """
@@ -34,6 +35,8 @@ pipeline {
               ]){
                 sh  """
                   git add package.json
+                  git config --global user.email 'devtools+jenkins@pingidentity.com'
+                  git config --global user.name 'devtools-jenkins'
                   git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
                   GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
                 """
