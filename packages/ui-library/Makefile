@@ -89,7 +89,7 @@ define version_and_tag
 	git commit -a -m $(2)
 	if [[ "$(1)" = "$(GIT_VERSION_FINAL)" ]]; then \
 		git tag ui-library-$(GIT_VERSION_FINAL); \
-		GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin $(GIT_VERSION_FINAL); \
+		GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin ui-library-$(GIT_VERSION_FINAL); \
 	fi
 	GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin $(GIT_BRANCH)
 endef
