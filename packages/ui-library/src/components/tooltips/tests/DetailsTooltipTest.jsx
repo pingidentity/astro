@@ -4,7 +4,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { shallow } from "enzyme";
-import DetailsTooltip, { detailsWidth } from "../DetailsTooltip";
+import DetailsTooltip, { detailsWidths } from "../DetailsTooltip";
 import PopperContainer from "../PopperContainer";
 
 describe("DetailsTooltip", function () {
@@ -598,7 +598,7 @@ describe("DetailsTooltip", function () {
     });
 
     it("renders with width LG", () => {
-        const component = shallow(<DetailsTooltip width={detailsWidth.LG} open={true} flags={["use-portal"]}/>).dive();
+        const component = shallow(<DetailsTooltip width={detailsWidths.LG} open={true} flags={["use-portal"]}/>).dive();
 
         expect(component.find(PopperContainer).hasClass("details-tooltip-display--large")).toEqual(true);
     });
