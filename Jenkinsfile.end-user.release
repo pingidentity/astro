@@ -69,7 +69,10 @@ pipeline {
     success {
       dir("${env.WORKSPACE}/packages/end-user") {
         container('node-builder') {
-          sh "mkdir -p ./cdn2/${env.RELEASE_VERSION} && cp -R ./cdn/. ./cdn2/${env.RELEASE_VERSION}/"
+          sh"""
+            mkdir -m 777 -p ./cdn2/${env.RELEASE_VERSION}
+            cp -R ./cdn/. ./cdn2/${env.RELEASE_VERSION}/
+          """
 
           // withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
           //   withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
