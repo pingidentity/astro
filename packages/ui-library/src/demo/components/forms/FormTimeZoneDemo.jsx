@@ -137,6 +137,15 @@ class FormTimeZoneDemo extends React.Component {
                         showClear={true}
                     />
                 </InputRow>
+                <InputRow>
+                    <FormTimeZone
+                        data-id="timezone-stateful2"
+                        stateless={false}
+                        labelText="Stateful Version with Error Message"
+                        helpClassName="bottom right"
+                        errorMessage="Example error message"
+                    />
+                </InputRow>
                 <p>
                     * Note that the browser's timezone is guessed if the passed value is undefined.
                 </p>
