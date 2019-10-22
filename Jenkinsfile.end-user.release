@@ -80,10 +80,12 @@ pipeline {
   }
   post {
     success {
-       slackSend channel: '#front_end_dev', message: "${BUILD_URL} great Success!", color: "green"
+       slackSend channel: '#ux-deployments', message: ":verynice: Great Success! End-User ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
+       slackSend channel: '#ui-announcements', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+       slackSend channel: '#ui-coalition', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
     }
     unsuccessful {
-       slackSend channel: '#front_end_dev', message: "${BUILD_URL} failed!", color: "#B22222"
+       slackSend channel: '#ux-deployments', message: "@here ${BUILD_URL} failed!", color: "#a31300"
     }
 
     cleanup {
