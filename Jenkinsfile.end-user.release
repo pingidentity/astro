@@ -38,7 +38,7 @@ pipeline {
                   git config --global user.email 'devtools+jenkins@pingidentity.com'
                   git config --global user.name 'devtools-jenkins'
                   git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH} --dry-run
                 """
               }
             }
@@ -53,7 +53,7 @@ pipeline {
             echo "Building & publishing"
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               sh "npm run dist"
-              sh "cd dist && npm publish"
+              sh "cd dist && npm publish --dry-run"
             }
           }
         }
@@ -71,13 +71,13 @@ pipeline {
         container('node-builder') {
           sh """
             mkdir -p ./cdn2/${env.RELEASE_VERSION}
-            cp -R ./cdn/. ./cdn2/${env.RELEASE_VERSION}/
+
           """
-          withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
-            withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-              s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/", file: "./cdn2/")
-            }
-          }
+          // withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+          //   withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+          //     s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/", file: "./cdn2/")
+          //   }
+          // }
         }
       }
     }
