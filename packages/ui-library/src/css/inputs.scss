@@ -2221,7 +2221,7 @@ input[type=file] {
         left: 0;
         right: $message-input-offset;
         display: none;
-        z-index: $zindex__elevated;
+        z-index: $zindex__popover;
         padding: 15px;
         box-sizing: border-box;
         min-width: 169px;
