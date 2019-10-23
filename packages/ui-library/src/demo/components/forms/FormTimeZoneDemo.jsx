@@ -139,7 +139,6 @@ class FormTimeZoneDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTimeZone
-                        data-id="timezone-stateful2"
                         stateless={false}
                         labelText="Stateful Version with Error Message"
                         helpClassName="bottom right"
