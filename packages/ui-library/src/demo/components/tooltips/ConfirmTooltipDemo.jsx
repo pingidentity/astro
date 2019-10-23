@@ -28,8 +28,8 @@ class ConfirmTooltipDemo extends Component {
         });
 
         setTimeout(() => {
-            this.setState({
-                open: !this.state.open
+            this.setState((state) => {
+                return { open: !state.open };
             });
         }, 1000);
     }
