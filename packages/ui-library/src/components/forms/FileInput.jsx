@@ -52,6 +52,8 @@ import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
  *     The name of the currently selected file.
  * @param {boolean} [loading]
  *     If the component should show a loading state for uploading files
+ * @param {boolean} [multipleFiles]
+ *     If there are multiple files in the same container being uploaded then pass this prop to make sure everything is lined up.
  * @param {boolean} [noBorder]
  *     If the component shows a line around the upload this will remove it.
  * @param {FileInput~onRemove} [onRemove]
