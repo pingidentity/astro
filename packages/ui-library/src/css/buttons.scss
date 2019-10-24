@@ -854,8 +854,8 @@ button.tile-button--side-icon {
 }
 
 .tab-set-children {
-    padding-left: $spacing-lg;
+    margin-left: $spacing-lg;
     > .page-section {
-        margin: 0;
+        margin-left: 0;
     }
 }
