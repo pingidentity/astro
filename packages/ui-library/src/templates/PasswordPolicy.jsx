@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import InputRow from "../components/layout/InputRow";
 import FormRadioGroup from "../components/forms/FormRadioGroup";
 import FormTextField from "../components/forms/FormTextField";
+import FlexRow, { justifyOptions } from "../components/layout/FlexRow";
 import Button, { buttonTypes } from "../components/buttons/Button";
 import HR from "../components/general/HR";
 import PageSection from "../components/layout/PageSection";
@@ -252,7 +253,7 @@ export default class PasswordPolicy extends Component {
 
                 <PageSection>
                     <HR solid />
-                    <div style={{ textAlign: "right" }}>
+                    <FlexRow justify={justifyOptions.END}>
                         <Button
                             label="Discard Changes"
                             type={buttonTypes.CANCEL}
@@ -261,7 +262,7 @@ export default class PasswordPolicy extends Component {
                             label="Save"
                             type={buttonTypes.PRIMARY}
                         />
-                    </div>
+                    </FlexRow>
                 </PageSection>
             </div>
         );
