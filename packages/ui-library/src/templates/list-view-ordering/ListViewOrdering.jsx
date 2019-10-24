@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import ExpandableRow from "../../components/rows/ExpandableRow";
+import ExpandableRow, { SimpleWrapper } from "../../components/rows/ExpandableRow";
 import FormCheckbox from "../../components/forms/FormCheckbox";
 import FormSearchBar from "../../components/forms/FormSearchBar";
 import Pagination from "../../components/list/Pagination";
@@ -130,15 +130,14 @@ module.exports = class extends React.Component {
                     <FormCheckbox label="filter odd rows"
                         onValueChange={this._handleOddFilterToggle}
                         checked={this.props.filters.odd}
-                        className="inline" />
+                        inline />
                     <FormCheckbox label="filter even rows"
                         onValueChange={this._handleEvenFilterToggle}
                         checked={this.props.filters.even}
-                        className="inline" />
+                        inline />
                 </FormSearchBar>
                 {this.props.rows.filtered.length && (
                     <Pagination
-                        className = "result-set"
                         perPage = {this.props.perPage}
                         page = {this.props.page}
                         total = {this.props.rows.filtered.length}
