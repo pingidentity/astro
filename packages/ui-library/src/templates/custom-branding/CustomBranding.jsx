@@ -126,7 +126,7 @@ export default class CustomBranding extends Component {
                         data-id="details-tooltip"
                         flags={this.props.flags}
                         label={(
-                            <Button type="button" className="delete-btn" inline type="secondary">
+                            <Button type="button" inline type="secondary">
                             Restore Defaults
                             </Button>
                         )}
