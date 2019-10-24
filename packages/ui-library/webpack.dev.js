@@ -87,7 +87,8 @@ module.exports = merge(common, {
     },
     devtool: "source-map",
     devServer: {
-        disableHostCheck: true
+        disableHostCheck: true,
+        after: () => console.log("backstop ready")
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -95,5 +96,10 @@ module.exports = merge(common, {
             inject: "body", // Inject all scripts into the body
             favicon: "./src/demo/images/favicon.png"
         }),
+        {
+            apply: compiler => {
+                compiler.hooks.done.tap("I DONE MADE A THING", () => console.log("backstop ready"));
+            }
+        }
     ]
 });

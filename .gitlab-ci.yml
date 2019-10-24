@@ -10,6 +10,7 @@ test:
   script:
     - cd packages/ui-library
     - npm install
+    - npm run backstop-with-server
     - cd ../end-user
     - npm install
     - cd ../../

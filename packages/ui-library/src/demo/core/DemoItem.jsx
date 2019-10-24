@@ -88,6 +88,11 @@ class DemoItem extends React.Component {
         }
     }
 
+    componentDidMount() {
+        // Backstop needs an event to let it know when to take screenshots
+        console.log("backstop ready");
+    }
+
     render() {
         const {
             contentPage,
