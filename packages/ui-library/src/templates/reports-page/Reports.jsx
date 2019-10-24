@@ -118,9 +118,9 @@ export default class Reports extends React.Component {
             };
 
             return (
-                <a onClick={_handleOnClick} className={linkClass}>
+                <Link onClick={_handleOnClick} className={linkClass}>
                     {props.data}
-                </a>
+                </Link>
             );
         };
         return (<HeaderCell />);
@@ -217,7 +217,7 @@ export default class Reports extends React.Component {
         return (
             <div>
                 <Link type={linkTypes.PAGE_RETURN}>To record list</Link>
-                <PageHeader title="Report Paramaters" bottomMarginSize={bottomMargin.XS} />
+                <PageHeader title="Report Parameters" bottomMarginSize={bottomMargin.XS} />
                 <ReportFilters
                     buttonLabel="Run"
                     filters={[
