@@ -3,7 +3,6 @@ import ButtonGroup from "../components/layout/ButtonGroup";
 import CopyField from "../components/utils/CopyField";
 import FileInput from "../components/forms/FileInput";
 import FieldSet from "../components/layout/FieldSet";
-import FileDetails from "../components/layout/FileDetails";
 import FlexRow, { justifyOptions, alignments } from "../components/layout/FlexRow";
 import FormLabel from "../components/forms/FormLabel";
 import FormRadioGroup from "../components/forms/FormRadioGroup";
@@ -12,7 +11,6 @@ import FormDropDownList from "../components/forms/FormDropDownList";
 import HR from "../components/general/HR";
 import InputWidths from "../components/forms/InputWidths";
 import InputRow from "../components/layout/InputRow";
-import Icon from "../components/general/Icon";
 import InlineMessage from "../components/general/InlineMessage";
 import PageHeader from "../components/general/PageHeader";
 import PageSection from "../components/layout/PageSection";
@@ -154,25 +152,17 @@ export default class MultipleCertsTemplate extends Component {
                     return (
                         <div key={id}>
                             {this._fileDetailsHRVisibility(index)}
-                            <FlexRow justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
-                                <FlexRow justify={justifyOptions.START} alignment={alignments.TOP}>
-                                    <Icon
-                                        data-id="file-icon"
-                                        className="input-file__file-icon"
-                                        iconName="docs"
-                                        iconSize={Icon.iconSizes.MD}
-                                        type="leading"
-                                    />
-                                    <FileDetails fileName={fileName} validTo="9/9/2020" validFrom="1/1/2019"/>
-                                </FlexRow>
-                                <Button
-                                    data-id="remove-button"
-                                    className="input-file__remove-btn"
-                                    onClick={ () => this._handleCertRemove(id)}
-                                    inline
-                                    label="Remove"
-                                />
-                            </FlexRow>
+                            <FileInput
+                                noBorder
+                                multipleFiles
+                                fileName={fileName}
+                                onRemove={ () => this._handleCertRemove(id)}
+                                fileData={(
+                                    <span>
+                                        Valid &nbsp;
+                                        <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
+                                    </span>
+                                )}/>
                         </div>
                     );
                 })}

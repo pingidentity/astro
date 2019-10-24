@@ -13,6 +13,12 @@
 
     &.input-file--selected {
         background-color: transparent;
+        &-multiple {
+            width: 100%;
+            .input-file__field-set.unfocused {
+                margin-bottom: 0;
+            }
+        }
     }
 
     &__container {
@@ -30,6 +36,7 @@
         }
         &.unfocused {
             padding: 0;
+            width: 100%;
         }
     }
 
@@ -42,11 +49,12 @@
     }
     &__remove-btn,
     &__node-btn {
-        margin: 0 0 0 $spacing-lg;
+        margin-left: auto;
     }
     &__file {
         display: flex;
         flex-direction: column;
+        margin: 0 $spacing-lg 0 0;
     }
     &__file-icon {
         margin-top: -4px;

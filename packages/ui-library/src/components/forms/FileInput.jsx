@@ -6,7 +6,7 @@ import FileDrop from "./FileDrop";
 import MessageButton from "../buttons/MessageButton";
 import Icon, { iconSizes } from "../general/Icon";
 import classnames from "classnames";
-import FlexRow, { alignments } from "../layout/FlexRow";
+import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
 
 /**
 * @callback FileInput~onRemove
@@ -91,6 +91,7 @@ class FileInput extends Component {
         fileData: PropTypes.node,
         onRemove: PropTypes.func,
         noBorder: PropTypes.bool,
+        multipleFiles: PropTypes.bool,
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
         required: PropTypes.bool,
@@ -163,7 +164,7 @@ class FileInput extends Component {
 
         return (
             fileName && !status ? (
-                <FlexRow alignment={alignments.CENTER}>
+                <FlexRow alignment={alignments.CENTER} justify={justifyOptions.START}>
                     { errorColor ? <span style={{ color: errorColor }}>
                         <Icon iconName="alert" data-id="error-icon" iconSize={iconSizes.MD} />
                     </span>
@@ -222,10 +223,12 @@ class FileInput extends Component {
     render () {
         const {
             fileName,
+            multipleFiles
         } = this.props;
 
         const classNames = classnames(this.props.className, "input-file", {
             "input-file--selected": fileName,
+            "input-file--selected-multiple": multipleFiles
         });
 
         return (
@@ -234,6 +237,7 @@ class FileInput extends Component {
                 renderContent={this._renderContent}
                 className={classNames}
             />
+
         );
     }
 }
