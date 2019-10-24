@@ -12,6 +12,10 @@
     bottom: 0;
     z-index: $zindex__modal;
 
+    @media only screen and (max-width: 767px) {
+        top: 18px; // Padding in header
+    }
+
     &.show {
         .modal-content {
             display: inline-block;
