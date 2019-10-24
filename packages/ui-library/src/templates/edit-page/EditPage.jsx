@@ -40,7 +40,9 @@ export default class EditPage extends React.Component {
     state = this.initState
 
     _handleCancel = () => {
-        // do something on cancel
+        this.setState(
+            this.initState
+        );
     };
 
     _handleSave = () => {
@@ -154,7 +156,7 @@ export default class EditPage extends React.Component {
                                             label="Address Location"
                                             width={InputWidths.MD}
                                             data-id="addressType"
-                                            searchType="box"
+                                            searchType={FormDropDownList.SearchTypes.BOX}
                                             selectedOption={this.state.addressType || addressOptions[0]}
                                             onValueChange={this._handleSelectChange("addressType")}
                                             options={addressOptions}
