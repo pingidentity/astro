@@ -95,11 +95,6 @@ module.exports = merge(common, {
             template: "./src/demo/index.ejs", // Load a custom template
             inject: "body", // Inject all scripts into the body
             favicon: "./src/demo/images/favicon.png"
-        }),
-        {
-            apply: compiler => {
-                compiler.hooks.done.tap("I DONE MADE A THING", () => console.log("backstop ready"));
-            }
-        }
+        })
     ]
 });

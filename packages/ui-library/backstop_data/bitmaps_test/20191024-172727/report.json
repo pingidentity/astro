@@ -1,4 +1,4 @@
-report({
+{
   "testSuite": "BackstopJS",
   "tests": [
     {
@@ -554,4 +554,4 @@ report({
     }
   ],
   "id": "ui_lib"
-});
+}
