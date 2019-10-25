@@ -2,10 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const alignments = { 
-    LEFT: "left",
-    RIGHT: "right",
-}
+export const overflowTypes = {
+    WRAP: 'wrap',
+    ELLIPSIS: 'ellipsis',
+};
+
+export const alignments = {
+    LEFT: 'left',
+    RIGHT: 'right',
+};
 
 /**
  * @class TextBlock
@@ -32,24 +37,29 @@ const TextBlock = ({
     spacing,
     alignment,
     className,
+    overflow,
     'data-id': dataId,
 }) => {
-    const classNamesOuter = classnames('text-block', className, {
-        'text-block--small': size === 'small',
-        'text-block--large': size === 'large',
-        'text-block--small-right': size === 'small-right',
-        'text-block--margin-sm': spacing === 'small',
-        'text-block--margin-xx': spacing === 'xxlarge',
-        'text-block--right': alignment === alignments.RIGHT,
-        'text-block--left': alignment === alignments.LEFT,
-    });
+    const classNamesOuter = classnames(
+        'text-block',
+        className,
+        {
+            'text-block--small': size === 'small',
+            'text-block--large': size === 'large',
+            'text-block--small-right': size === 'small-right',
+            'text-block--margin-sm': spacing === 'small',
+            'text-block--margin-xx': spacing === 'xxlarge',
+            'text-block--right': alignment === alignments.RIGHT,
+            'text-block--left': alignment === alignments.LEFT,
+        }
+    );
 
     const Outer = typeof Children === 'string' ? 'p' : 'div';
     const Inner = typeof Children === 'string' ? 'span' : 'div';
 
     return (
         <Outer className={classNamesOuter} data-id={dataId}>
-            <Inner>{children}</Inner>
+            <Inner className={`text-block--overflow-${overflow}`}>{children}</Inner>
         </Outer>
     );
 };
@@ -59,12 +69,14 @@ TextBlock.propTypes = {
     spacing: PropTypes.oneOf(['small', 'xxlarge']),
     className: PropTypes.string,
     'data-id': PropTypes.string,
-    alignment: PropTypes.oneOf(Object.values(alignments))
+    alignment: PropTypes.oneOf(Object.values(alignments)),
+    overflow: PropTypes.oneOf(Object.values(overflowTypes)),
 };
 
 TextBlock.defaultProps = {
     'data-id': 'textblock',
+    overflow: overflowTypes.WRAP,
 };
-TextBlock.alignments = alignments;
+
 export default TextBlock;
 

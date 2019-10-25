@@ -39,6 +39,7 @@
         flex: 1;
         flex-grow: 1;
         text-align: left;
+        min-width: 0;
     }
 
     &__row-details {
@@ -55,7 +56,7 @@
         color: $color-charting-indigo;
     }
 
-    &__row-sdelete {
+    &__row-delete {
         text-align: right;
         flex: 1;
         flex-grow: 0;
