@@ -10,9 +10,9 @@ import PageSection from "ui-library/lib/components/layout/PageSection";
 import PolicyNode from "ui-library/lib/components/layout/PolicyNode";
 import EditablePolicyNode from "ui-library/lib/components/layout/EditablePolicyNode";
 import PolicySettingsList from "ui-library/lib/components/layout/PolicySettingsList";
-import PageHeader from "../../components/general/PageHeader";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
 import _ from "underscore";
-import Actions from "./Actions";
+import Actions from "ui-library/src/templates/authn-policy/Actions";
 
 const conditionTypes = {
     "last-sign-on": {
