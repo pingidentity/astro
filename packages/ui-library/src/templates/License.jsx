@@ -1,25 +1,25 @@
 import React, { Component } from "react";
-import PageSection from "../components/layout/PageSection";
-import Button from "../components/buttons/Button";
-import ButtonGroup from "../components/layout/ButtonGroup";
-import Layout from "../components/general/ColumnLayout";
-import PageHeader from "../components/general/PageHeader";
-import FlexRow, { spacingOptions, alignments, justifyOptions } from "../components/layout/FlexRow";
-import Text from "../components/general/Text";
-import Stack from "../components/layout/Stack";
-import Icon, { iconSizes } from "../components/general/Icon";
-import Link from "../components/general/Link";
-import LinkDropDownList from "../components/forms/LinkDropDownList";
-import Modal from "../components/general/Modal";
-import FormattedContent from "../components/general/FormattedContent";
-import Section from "../components/general/Section";
-import InputRow from "../components/layout/InputRow";
+
+import Button from "ui-library/lib/components/buttons/Button";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
+import FlexRow, { spacingOptions, alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+import FormattedContent from "ui-library/lib/components/general/FormattedContent";
+import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import Link from "ui-library/lib/components/general/Link";
+import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+import Modal from "ui-library/lib/components/general/Modal";
+import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import Stack from "ui-library/lib/components/layout/Stack";
+import Section from "ui-library/lib/components/general/Section";
 import Table, {
     columnAlignments,
-} from "../components/tables/Table";
-import CalloutBox from "../components/layout/CalloutBox";
-import Padding, { sizes } from "../components/layout/Padding";
-
+} from "ui-library/lib/components/tables/Table";
+import Text from "ui-library/lib/components/general/Text";
 
 /**
 * @name License
@@ -63,7 +63,7 @@ const LicenseRow = ({
     <Section
         flags={["p-stateful"]}
         title={
-            <Layout.Row className="columns-width-auto">
+            <Layout.Row autoWidth>
                 <Layout.Column>
                     <Stack gap="XS">
                         <Text type="parent-label">{type}</Text>

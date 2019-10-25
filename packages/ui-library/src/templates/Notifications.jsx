@@ -1,20 +1,21 @@
 import React, { Component } from "react";
-import ListNav from "../components/layout/ListNav";
-import ConfirmToolTip from "../components/tooltips/ConfirmTooltip";
-import FormDropDownList from "../components/forms/FormDropDownList";
-import InputRow from "../components/layout/InputRow";
-import FormTextField from "../components/forms/form-text-field";
-import FormTextArea from "../components/forms/form-text-area";
-import InputWidths from "../components/forms/InputWidths";
-import PageSection from "../components/layout/PageSection";
-import FormLabel from "../components/forms/FormLabel";
-import StatusIndicator from "../components/general/StatusIndicator";
+
 import Button from "../components/buttons/Button";
 import ButtonBar from "../components/forms/ButtonBar";
+import ConfirmToolTip from "../components/tooltips/ConfirmTooltip";
+import FormTextField from "../components/forms/form-text-field";
+import FormTextArea from "../components/forms/form-text-area";
+import FormLabel from "../components/forms/FormLabel";
+import FormDropDownList from "../components/forms/FormDropDownList";
+import InputRow from "../components/layout/InputRow";
+import InputWidths from "../components/forms/InputWidths";
 import LinkDropDownList from "../components/forms/LinkDropDownList";
 import Layout from "../components/general/ColumnLayout";
-import PopOverMenu from "../components/tooltips/PopoverMenu";
+import ListNav from "../components/layout/ListNav";
+import PageSection from "../components/layout/PageSection";
 import PageHeader from "../components/general/PageHeader";
+import PopOverMenu from "../components/tooltips/PopoverMenu";
+import StatusIndicator from "../components/general/StatusIndicator";
 
 /**
 * @name Notifications
@@ -188,7 +189,7 @@ export default class Notifications extends Component {
         return (
             <div>
                 <PageHeader title="Notifications" />
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <FormLabel value="Default Language" />
                         <Layout.Row>
