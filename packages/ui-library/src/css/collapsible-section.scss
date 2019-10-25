@@ -56,7 +56,7 @@
         position: relative;
         margin: 0 0 25px 25px;
 
-        @include transition(all 0.3s);
+        transition: all 0.3s;
 
         &--no-margin {
             margin-left: 0;
@@ -84,7 +84,7 @@
             display: block;
             visibility: visible;
 
-            @include animation(fade-in 0.2s);
+            animation: fade-in 0.2s;
         }
     }
     &.has-title-value {
@@ -176,5 +176,5 @@
     padding-left: 12px;
     color: $color-strong-neutral-50;
 
-    @include transition(all 0.3s);
+    transition: all 0.3s;
 }

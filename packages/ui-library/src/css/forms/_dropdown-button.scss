@@ -29,7 +29,7 @@
             left: 7px;
             top: 8px;
             color: $color-white;
-            @include transition(all 0.3s);
+            transition: all 0.3s;
         }
         &:hover {
             background: $color-elderly;
@@ -44,6 +44,6 @@
             background-color: $color-elderly;
         }
 
-        @include transition(all 0.1s);
+        transition: all 0.1s;
     }
 }

@@ -1,7 +1,7 @@
 // INDENT
 .indent {
-    @include flexbox();
-    @include flexbox-direction(row);
+    display: flex;
+    flex-direction: row;
     justify-content: left;
 
     position: relative;
@@ -21,14 +21,14 @@
         padding: 0 3px;
     }
     .indent-title-container {
-        @include flexbox-shrink(0);
+        flex-shrink: 0;
 
         position: relative;
         width: 20px;
 
         .title {
-            @include flexbox;
-            @include transform(rotate(180deg));
+            display: flex;
+            transform: rotate(180deg);
 
             -ms-flex-direction: column;
 
@@ -53,7 +53,7 @@
                 display: inline-block; // for IE10
                 height: 5000px;
 
-                @include transform(translateX(10px));
+                transform: translateX(10px);
             }
 
             &:before {

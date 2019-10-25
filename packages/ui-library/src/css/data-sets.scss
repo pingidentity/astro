@@ -4,7 +4,7 @@
         display: inline-block;
         border: 1px solid $color-rabbit-fur;
 
-        @include border-radius(4px);
+        border-radius: 4p;
 
         .data-group {
             padding: 20px 0 10px;
@@ -73,7 +73,7 @@
                     &.child {
                         border: 1px solid $color-rabbit-fur;
 
-                        @include border-radius(4px);
+                        border-radius: 4px;
 
                         .data-group {
 

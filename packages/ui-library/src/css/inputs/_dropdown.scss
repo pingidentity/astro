@@ -12,7 +12,7 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
 }
 
 @mixin option-popover {
-    @include box-shadow(0 3px 4px rgba($color-black, 0.1));
+    box-shadow: 0 3px 4px rgba($color-black, 0.1);
 
     border: 1px solid $color-rabbit-fur;
 }
@@ -54,7 +54,7 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
         top: 12px;
         left: 7px;
 
-        @include border-radius(1.5px);
+        border-radius: 1.5px;
     }
 }
 

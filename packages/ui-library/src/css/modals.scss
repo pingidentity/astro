@@ -24,7 +24,7 @@
             left: 0;
             right: 0;
 
-            @include opacity(0.4);
+            opacity: $inactive-opacity;
         }
     }
     &.modal-width-small {
@@ -50,7 +50,7 @@
         min-width: 360px;
         @include font-pn-regular;
 
-        @include transform(translateX(-50%));
+        transform: translateX(-50%);
     }
     .close-modal {
         display: block;
@@ -79,7 +79,7 @@
         min-height: $header-height;
         font-weight: 300;
 
-        @include border-radius($modal-radius $modal-radius 0 0);
+        border-radius: $modal-radius $modal-radius 0 0;
 
         h2 {
             vertical-align: middle;
@@ -124,7 +124,7 @@
         overflow-y: auto;
         max-height: calc(100% - #{2 * $min-bottom});
 
-        @include border-radius(0 0 $modal-radius $modal-radius);
+        border-radius: 0 0 $modal-radius $modal-radius;
 
         h2 {
             color: $color-midnight;
@@ -180,7 +180,7 @@
             font-size: 18px;
             max-height: calc(100% - #{$min-bottom});
 
-            @include border-radius($modal-radius);
+            border-radius: $modal-radius;
         }
     }
     &.alert {
@@ -227,7 +227,7 @@
             position: relative;
             top: 0;
 
-            @include border-radius(0 0 $modal-radius $modal-radius);
+            border-radius: 0 0 $modal-radius $modal-radius;
 
             .title,
             .body-title {
@@ -267,11 +267,11 @@
         }
     }
     .page-controls-primary {
-        @include transition(all 0.1s);
+        transition: all 0.1s;
 
         &.hidden {
-            @include transform(translateY(0));
-            @include opacity(0);
+            transform: translateY(0);
+            opacity: 0;
         }
     }
 }

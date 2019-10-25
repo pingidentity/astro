@@ -93,7 +93,7 @@
 
     &__bottom-chart {
         .recharts-surface {
-            @include transform(scaleY(-1));
+            transform: scaleY(-1);
         }
     }
 

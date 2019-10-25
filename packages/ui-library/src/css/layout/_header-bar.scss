@@ -126,7 +126,7 @@ $topnav-bg: $color-neutral-10;
             @include font-pn-regular;
             font-size: $font-size-normal - 1px;
 
-            @include border-radius(2px);
+            border-radius: 2px;
 
             background: $color-strong-neutral-10;
             border: 0;
@@ -159,7 +159,7 @@ $topnav-bg: $color-neutral-10;
 }
 
 .header-nav {
-    @include flexbox;
+    display: flex;
     flex-direction: row;
     -ms-flex-direction: row;
     justify-content: center;
