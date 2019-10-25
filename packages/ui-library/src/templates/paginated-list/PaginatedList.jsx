@@ -84,7 +84,6 @@ export default class PaginatedList extends React.Component {
                 />
                 {filteredPages.length && (
                     <Pagination stateless={true}
-                        className = "result-set"
                         page = {this.state.page}
                         total = {filteredPages.length}
                         onValueChange = {this._handlePageChange}
