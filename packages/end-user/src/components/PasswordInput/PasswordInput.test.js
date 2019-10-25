@@ -16,4 +16,16 @@ describe('PasswordInput', () => {
 
         expect(passwordinput.exists()).toEqual(true);
     });
+    it('calls the onChange', () => {
+        const testCallback = jest.fn();
+        const wrapper = getComponent({ onChange: testCallback });
+        const mockEvent = { target: { value: 'password' } };
+        const input = wrapper.find(`input[data-id="${defaultProps['data-id']}"]`);
+
+        expect(input.exists()).toEqual(true);
+        expect(testCallback).not.toHaveBeenCalled();
+
+        input.simulate('change', mockEvent.target.value);
+        expect(testCallback).toHaveBeenCalled();
+    });
 });
