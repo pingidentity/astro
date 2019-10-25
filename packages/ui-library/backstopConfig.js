@@ -50,9 +50,9 @@ module.exports = {
     },
     "report": ["browser"],
     "engine": "puppeteer",
-    // "engineOptions": {
-    //     "args": ["--no-sandbox"]
-    // },
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
     "asyncCaptureLimit": 5,
     "asyncCompareLimit": 50,
     "debug": false,
