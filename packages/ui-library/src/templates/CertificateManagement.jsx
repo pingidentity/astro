@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import FormCheckbox from "../components/forms/FormCheckbox";
+import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import FlexRow, { alignments, justifyOptions } from "../components/layout/FlexRow";
-import InputRow from "../components/layout/InputRow";
-import PageHeader from "../components/general/PageHeader";
-import SearchBar from "../components/forms/FormSearchBar";
-import PageSection from "../components/layout/PageSection";
-import Text from "../components/general/Text";
-import InlineMessage from "../components/general/InlineMessage";
-import ExpandableRow from "../components/rows/ExpandableRow";
-import Icon, { iconSizes } from "../components/general/Icon";
-import LabelValuePairs from "../components/layout/LabelValuePairs";
-import Padding, { sizes } from "../components/layout/Padding";
-import Chip, { chipTypes, chipColors } from "../components/layout/Chip";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import SearchBar from "ui-library/lib/components/forms/FormSearchBar";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import Text from "ui-library/lib/components/general/Text";
+import InlineMessage from "ui-library/lib/components/general/InlineMessage";
+import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
+import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
+import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
+import Chip, { chipTypes, chipColors } from "ui-library/lib/components/layout/Chip";
 
 /**
 * @name Certificate Management
@@ -35,9 +35,9 @@ export default class CertificateManagement extends Component {
                         justify={justifyOptions.SPACEBETWEEN}
                     >
                         <SearchBar onValueChange={this._onSearchType} flags={["p-stateful"]}>
-                            <FormCheckbox label="Filter 1" className="inline" key="uno" />
-                            <FormCheckbox label="Filter 2" className="inline" key="dos" />
-                            <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                            <FormCheckbox label="Filter 1" inline key="uno" />
+                            <FormCheckbox label="Filter 2" inline key="dos" />
+                            <FormCheckbox label="Filter 3" inline key="tres" />
                         </SearchBar>
                     </FlexRow>
                     <InlineMessage type={InlineMessage.MessageTypes.ERROR}>
