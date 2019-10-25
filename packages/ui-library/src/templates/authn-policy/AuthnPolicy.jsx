@@ -12,7 +12,7 @@ import EditablePolicyNode from "ui-library/lib/components/layout/EditablePolicyN
 import PolicySettingsList from "ui-library/lib/components/layout/PolicySettingsList";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import _ from "underscore";
-import Actions from "ui-library/src/templates/authn-policy/Actions";
+import Actions from "ui-library/lib/templates/authn-policy/Actions";
 
 const conditionTypes = {
     "last-sign-on": {
