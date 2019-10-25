@@ -77,7 +77,17 @@ const DeviceIcon = ({ icon, title }) => {
 };
 
 DeviceIcon.propTypes = {
-    icon: PropTypes.oneOf(Object.values(deviceTypes)),
+    icon: (props, propName, componentName) => {
+        const deviceToUpper = props[propName].toUpperCase();
+
+        if (!Object.values(deviceTypes).map(device => device.toUpperCase()).includes(deviceToUpper)) {
+            return new Error(
+                "Invalid prop `" + propName + "` supplied to" +
+                " `" + componentName + "`. Validation failed."
+            );
+        }
+        return null;
+    },
     title: PropTypes.string,
 };
 

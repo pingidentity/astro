@@ -38,7 +38,17 @@ const DeviceTable = ({ devices, onDelete }) => {
 DeviceTable.propTypes = {
     devices: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
-        type: PropTypes.oneOf(Object.values(deviceTypes)),
+        type: (props, propName, componentName) => {
+            const deviceToUpper = props[propName].toUpperCase();
+
+            if (!Object.values(deviceTypes).map(device => device.toUpperCase()).includes(deviceToUpper)) {
+                return new Error(
+                    "Invalid prop `" + propName + "` supplied to" +
+                    " `" + componentName + "`. Validation failed."
+                );
+            }
+            return null;
+        },
     })),
     onDelete: PropTypes.func,
 };
