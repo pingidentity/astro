@@ -1,6 +1,6 @@
 .aside-container {
-    @include flexbox();
-    @include flexbox-direction(row);
+    display: flex;
+    flex-direction: row;
 
     &--full-height {
         > :last-child {
@@ -9,36 +9,36 @@
     }
 
     > :last-child {
-        @include flexbox-grow(1);
+        flex-grow: 1;
 
         margin-left: $spacing-lg;
         box-sizing: border-box;
     }
 
     &--sm > :last-child {
-        @include flexbox-shrink(0);
+        flex-shrink: 0;
         width: 250px;
     }
 
     &--md > :last-child {
-        @include flexbox-shrink(0);
+        flex-shrink: 0;
         width: 400px;
     }
 
     &--lg > :last-child {
-        @include flexbox-shrink(0);
+        flex-shrink: 0;
         width: 600px;
     }
 
     &__aside {
         &--top-right {
-            @include flexbox-grow(1);
+            flex-grow: 1;
 
             text-align: right;
         }
 
         &--right {
-            @include flexbox-grow(0);
+            flex-grow: 0;
 
             margin-left: auto;
         }

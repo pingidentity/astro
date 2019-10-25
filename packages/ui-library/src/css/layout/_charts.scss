@@ -42,7 +42,7 @@
     &.sel-1 > button:nth-of-type(2),
     &.sel-2 > button:nth-of-type(3),
     &.sel-3 > button:nth-of-type(4) {
-        @include transition($transition-timing color ease-out);
+        transition: $transition-timing color ease-out;
 
         background-color: transparent;
         color: $color-white;
@@ -54,7 +54,7 @@
     &.sel-3 > .help-tooltip:nth-of-type(4) {
         .help-tooltip-target {
             button {
-                @include transition($transition-timing color ease-out);
+                transition: $transition-timing color ease-out;
 
                 background-color: transparent;
                 color: $color-white;
@@ -67,7 +67,7 @@
     &.sel-2,
     &.sel-3 {
         &:after {
-            @include transition($transition-timing left ease-out);
+            transition: $transition-timing left ease-out;
 
             content: '';
             //z-index: $zindex__elevated;

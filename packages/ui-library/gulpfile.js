@@ -11,6 +11,7 @@ const runSequence = require("run-sequence");
 const sass = require("gulp-sass");
 const tap = require("gulp-tap");
 const _ = require("underscore");
+const postcss = require("gulp-postcss");
 
 // Flat file generation data & vars
 const demoComponentSrcPaths = fs.readFileSync("./src/demo/core/demos.js")
@@ -145,7 +146,8 @@ gulp.task("move-files", () =>
 
 gulp.task("build-css", () =>
     gulp.src(["./src/css/ui-library.scss", "./src/css/end-user.scss"])
-        .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+        .pipe(sass().on("error", sass.logError))
+        .pipe(postcss())
         .pipe(gulp.dest("lib/css"))
 );
 

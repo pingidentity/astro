@@ -37,6 +37,6 @@
             padding-top: $spacing-sm;
         }
 
-        @include border-radius(3px);
+        border-radius: 3px;
     }
 }

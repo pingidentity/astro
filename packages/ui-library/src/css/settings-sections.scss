@@ -27,7 +27,7 @@
         border-bottom: 1px solid $color-cinder-block;
         overflow: visible;
 
-        @include transition(max-height ease-out 0.6s);
+        transition: max-height ease-out 0.6s;
 
         &:last-of-type {
             border-bottom: none;
@@ -35,13 +35,13 @@
         &.active {
             .input-integer {
                 .icon-dropdown-arrow {
-                    @include transition(none);
-                    @include transform(none);
+                    transition: none;
+                    transform: none;
                 }
             }
             .icon-dropdown-arrow {
-                @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-                @include transform(rotate(180deg));
+                transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
+                transform: rotate(180deg);
             }
         }
     }
@@ -118,8 +118,8 @@
             color: $color-elephant;
             display: inline-block;
 
-            @include transition(top ease-out 0.4s);
-            @include transform(rotate(180deg));
+            transition: top ease-out 0.4s;
+            transform: rotate(180deg);
         }
     }
     &.device-settings {
@@ -197,7 +197,7 @@
         margin: 20px 0 20px 15px;
         padding: 0 15px;
 
-        @include transition(all ease-out 0.5s);
+        transition: all ease-out 0.5s;
 
         .settings-attribute-title {
             margin: 0 0 20px;
@@ -221,7 +221,7 @@
                 display: none;
             }
             .close-link {
-                @include opacity(1);
+                opacity: 1;
             }
         }
         &:last-of-type {
@@ -247,8 +247,8 @@
             right: 15px;
             bottom: 25px;
 
-            @include opacity(0);
-            @include transition(all ease-out 0.5s);
+            opacity: 0;
+            transition: all ease-out 0.5s;
         }
     }
 }
@@ -277,8 +277,8 @@
                 background-image: none;
                 padding-right: 10px;
 
-                @include transition(none);
-                @include transform(none);
+                transition: none;
+                transform: none;
             }
         }
         &.active {
@@ -289,8 +289,8 @@
                 &:before {
                     display: inline-block;
 
-                    @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-                    @include transform(rotate(180deg));
+                    transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
+                    transform: rotate(180deg);
                 }
             }
         }
@@ -328,7 +328,7 @@
                 margin: 5px 0 10px;
             }
             .inactive {
-                @include opacity(0.6);
+                opacity: 0.6;
             }
         }
     }

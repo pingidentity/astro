@@ -1,6 +1,4 @@
 .task {
-    $inactive-opacity: 0.5;
-
     padding: 12px;
     border: 1px solid transparentize($color-timberwolf, $inactive-opacity);
     background-color: transparentize($color-white, $inactive-opacity);
@@ -14,14 +12,14 @@
         .task-title {
             .progress,
             .task-title-text {
-                @include opacity(1);
+                opacity: 1;
             }
         }
         .task-content {
             max-height: 12000px;
         }
         .task-title-selection {
-            @include opacity(1);
+            opacity: 1;
         }
     }
     &.item {
@@ -39,7 +37,7 @@
         margin: 15px 8px 0 68px;
         padding: 0;
 
-        @include transition(all 0.5s);
+        transition: all 0.5s;
 
         &.content-only {
             margin: 45px;
@@ -63,7 +61,7 @@
 
         .progress,
         .task-title-text {
-            @include opacity($inactive-opacity);
+            opacity: $inactive-opacity;
         }
         .progress {
             text-transform: none;
@@ -86,7 +84,7 @@
         @include font-pn-regular;
         text-transform: initial;
 
-        @include opacity($inactive-opacity);
+        opacity: $inactive-opacity;
     }
     .task-edit-link {
         margin: 0 0 0 20px;
@@ -204,7 +202,7 @@
                 margin: 0 0 0 #{-$indent};
                 font-weight: 100;
 
-                @include border-radius(#{ceil($size/2)});
+                border-radius: #{ceil($size/2)};
             }
         }
         &.divided {

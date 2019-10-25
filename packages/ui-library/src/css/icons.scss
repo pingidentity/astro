@@ -61,7 +61,7 @@ a .icon-clear {
 }
 
 .icon {
-    @include inline-flex;
+    display: inline-flex;
     &__graphic {
         padding: 0 $spacing-sm 0 0;
         &--size-sm {

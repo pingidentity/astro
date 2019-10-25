@@ -8,7 +8,7 @@
     margin-left: 10px;
     box-sizing: border-box;
 
-    @include border-radius(ceil($size/2));
+    border-radius: ceil($size/2);
 
     &.good {
         background-color: $color-success;
@@ -23,6 +23,6 @@
         height: $size;
         width: $size;
 
-        @include border-radius(ceil(($size + $border)/2));
+        border-radius: ceil(($size + $border)/2);
     }
 }
