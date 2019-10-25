@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 
-import Button from "../components/buttons/Button";
-import ButtonBar from "../components/forms/ButtonBar";
-import ConfirmToolTip from "../components/tooltips/ConfirmTooltip";
-import FormTextField from "../components/forms/form-text-field";
-import FormTextArea from "../components/forms/form-text-area";
-import FormLabel from "../components/forms/FormLabel";
-import FormDropDownList from "../components/forms/FormDropDownList";
-import InputRow from "../components/layout/InputRow";
-import InputWidths from "../components/forms/InputWidths";
-import LinkDropDownList from "../components/forms/LinkDropDownList";
-import Layout from "../components/general/ColumnLayout";
-import ListNav from "../components/layout/ListNav";
-import PageSection from "../components/layout/PageSection";
-import PageHeader from "../components/general/PageHeader";
-import PopOverMenu from "../components/tooltips/PopoverMenu";
-import StatusIndicator from "../components/general/StatusIndicator";
+import Button from "ui-library/lib/components/buttons/Button";
+import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
+import ConfirmToolTip from "ui-library/lib/components/tooltips/ConfirmTooltip";
+import FormTextField from "ui-library/lib/components/forms/form-text-field";
+import FormTextArea from "ui-library/lib/components/forms/form-text-area";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import ListNav from "ui-library/lib/components/layout/ListNav";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PopOverMenu from "ui-library/lib/components/tooltips/PopoverMenu";
+import StatusIndicator from "ui-library/lib/components/general/StatusIndicator";
 
 /**
 * @name Notifications
