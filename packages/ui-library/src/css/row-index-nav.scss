@@ -44,7 +44,7 @@
         margin: 0 0 10px;
         cursor: pointer;
 
-        @include transition(all 0.2s);
+        transition: all 0.2s;
 
         &:last-of-type {
             margin-bottom: 0;

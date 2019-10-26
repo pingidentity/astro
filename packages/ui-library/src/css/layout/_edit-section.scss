@@ -1,5 +1,5 @@
 .edit-section {
-    @include border-radius(3px);
+    border-radius: 3px;
 
     border: 1px solid $color-rabbit-fur;
     margin: 0 (-1 * $spacing-md);

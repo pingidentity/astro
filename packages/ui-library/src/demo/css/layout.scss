@@ -16,7 +16,7 @@ $sidenav-lineheight: 22px;
     position: relative;
     z-index: $zindex__elevated;
 
-    @include transition(all 0.3s);
+    transition: all 0.3s;
 
     h2 {
         float: left;
@@ -99,7 +99,7 @@ $sidenav-lineheight: 22px;
         margin-bottom: 0;
         padding: 0;
 
-        @include border-radius(3px);
+        border-radius: 3px;
 
         &:before {
             position: absolute;

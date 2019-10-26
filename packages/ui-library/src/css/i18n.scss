@@ -96,7 +96,7 @@ $flagsImageExtension: 'png' !default;
     margin: 0 20px 20px 0;
 
     &.disabled {
-        @include opacity(0.4);
+        opacity: $inactive-opacity;
         pointer-events: none;
         cursor: default;
     }
@@ -245,7 +245,7 @@ $flagsImageExtension: 'png' !default;
             border-right: $triangleBorder solid transparent;
             border-top: $arrowHeight solid $arrowColor;
 
-            @include transition(0.2s);
+            transition: 0.2s;
 
             &.up {
                 border-top: none;

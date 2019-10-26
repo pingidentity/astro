@@ -27,7 +27,7 @@
             padding: 0 4px;
             vertical-align: text-top;
 
-            @include border-radius(5px);
+            border-radius: 5px;
             &:hover {
                 text-decoration: none;
             }
@@ -55,7 +55,7 @@
 
         &.disabled {
             pointer-events: none;
-            opacity: 0.4;
+            opacity: $inactive-opacity;
         }
     }
 }

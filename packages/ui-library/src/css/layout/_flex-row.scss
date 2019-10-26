@@ -1,5 +1,5 @@
 .flex-row {
-    @include flexbox;
+    display: flex;
 
     &--inline {
         display: inline-flex;
