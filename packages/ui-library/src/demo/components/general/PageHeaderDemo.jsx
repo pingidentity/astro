@@ -37,7 +37,7 @@ const PageHeaderDemo = () => {
                 accessories={[
                     <Link title="Link" key="link" type="block" />,
                     <Icon iconName="cog" key="icon" type="leading" />,
-                    <HelpHint className="width-auto bottom" hintText="Provisioning" key="hint">
+                    <HelpHint placement="bottom" hintText="Provisioning" key="hint">
                         <Chip type={chipTypes.CONDENSED}>PROV</Chip>
                     </HelpHint>,
                     <Button inline key="button" label="inline" />,
