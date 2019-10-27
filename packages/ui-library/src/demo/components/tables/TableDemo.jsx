@@ -113,7 +113,7 @@ const TableDemo = () => {
             <InputRow>
                 <FormLabel detached value="<Table> row labels." />
                 <Table
-                    data={dataObjects} rowLabels={true} className="grid--no-lines"/>
+                    data={dataObjects} rowLabels={true} lines={false} />
             </InputRow>
             <InputRow>
                 <FormLabel detached value="<Table> with no header." />
