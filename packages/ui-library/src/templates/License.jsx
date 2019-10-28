@@ -36,7 +36,7 @@ const LicenseOption = ({
     <Padding vertical={sizes.SM}>
         <FlexRow spacing={spacingOptions.LG} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
             <Stack gap="XS">
-                <Text type={textTypes.PARENT}>{type}</Text>
+                <Text type={textTypes.PARENTLABEL}>{type}</Text>
                 {renewed && <Text type={textTypes.VALUE}>Renewed {renewed}</Text>}
                 {created && <Text type={textTypes.VALUE}>Created {created}</Text>}
                 <Text type={textTypes.VALUE}>Expires {expires}</Text>
@@ -63,10 +63,10 @@ const LicenseRow = ({
     <Section
         flags={["p-stateful"]}
         title={
-            <Layout.Row className="columns-width-auto">
+            <Layout.Row autoWidth>
                 <Layout.Column>
                     <Stack gap="XS">
-                        <Text type={textTypes.PARENT}>{type}</Text>
+                        <Text type={textTypes.PARENTLABEL}>{type}</Text>
                         {renewed && <Text type={textTypes.VALUE}>Renewed {renewed}</Text>}
                         {created && <Text type={textTypes.VALUE}>Created {created}</Text>}
                         <Text type={textTypes.VALUE}>Expires {expires}</Text>
