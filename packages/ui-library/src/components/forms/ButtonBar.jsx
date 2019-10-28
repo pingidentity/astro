@@ -27,39 +27,18 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 * @class ButtonBar
 * @desc Displays a set of button controls, most often "Save" and "Cancel", and sometimes "Discard"
 *
-* @param {string} [data-id=button-bar]
-*     The data-id of the component
+* @param {ButtonBar.alignments} [alignment=right]
+*     Which side of the bar the buttons go.
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
+* @param {string} [data-id=button-bar]
+*     The data-id of the component
 *
-* @param {array} [flags]
-*     Set the flag for "use-portal" to render the confirmation tooltips with popper.js and react-portal
 * @param {string} [cancelClassName]
 *     Class name(s) to add to the "cancel" button
 * @param {string} [cancelText]
 *     Text to display on the "cancel" button. Note that the onCancel callback and cancelText props are required to
 *     display the cancel button. If either is not provided, the button will not display.
-* @param {string} [discardClassName]
-*     Class name(s) to add to the "discard" button
-* @param {string} discardText
-*     Text to display on the "discard" button. Note that the onDiscard callback and discardText props are required to
-*     display the discard button. If either is not provided, the button will not display.
-* @param {string} [saveDisabledText]
-*      Text for the help hint will be rendered when the same button has a the prop disabled set to true.
-* @param {string} [saveClassName]
-*     Class name(s) to add to the "save" button
-* @param {string} saveText
-*     Text to display on the "save" button
-*
-* @param {boolean} [saveDisabled=false]
-*     Disabled the save button when true
-* @param {boolean} [enableSavingAnimation=false]
-*     Enables the ellipsis loading animation on the save button. This also disables the "discard" and "cancel" buttons.
-* @param {boolean} [unfixed=false]
-*     When set, the bar appears within the flow of the page content rather than fixed to the bottom of the window.
-* @param {boolean} [visible=true]
-*     Shows/hides the button bar. This is often set to true when a form data is "dirty"/has been edited
-*
 * @param {Object} cancelTooltip
 *     An object of the props required to generate a details tooltip that to confirm the closing of a modal.
 * @param {string} cancelTooltip.confirmButtonText
@@ -80,6 +59,39 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 * @param {string} cancelTooltip.title
 *     Text for the title of the modal.
 *
+* @param {string} [discardClassName]
+*     Class name(s) to add to the "discard" button
+* @param {string} discardText
+*     Text to display on the "discard" button. Note that the onDiscard callback and discardText props are required to
+*     display the discard button. If either is not provided, the button will not display.
+* @param {boolean} [enableSavingAnimation=false]
+*     Enables the ellipsis loading animation on the save button. This also disables the "discard" and "cancel" buttons.
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render the confirmation tooltips with popper.js and react-portal
+*
+* @param {ButtonBar~onCancel} [onCancel]
+*     Callback that will be triggered when the "cancel" button is clicked. Note that the onCancel callback and
+*     cancelText props are required to display the cancel button. If either is not provided, the button will not
+*     display.
+* @param {ButtonBar~onDiscard} [onDiscard]
+*     Callback that will be triggered when the "discard" button is clicked. Note that the onDiscard callback and
+*     discardText props are required to display the discard button. If either is not provided, the button will not
+*     display.
+* @param {ButtonBar~onSave} onSave
+*     Callback that will be triggered when the "save" button is clicked
+* @param {ButtonBar~onSave} onSaveMouseDown
+*     Callback that will be triggered when the "save" button gets a mousedown event.
+*     Because mousedown fires blur events, it's sometimes possible for the save to get a mousedown event but never get the click.
+*
+* @param {string} [saveDisabledText]
+*      Text for the help hint will be rendered when the same button has a the prop disabled set to true.
+* @param {string} [saveClassName]
+*     Class name(s) to add to the "save" button
+* @param {string} saveText
+*     Text to display on the "save" button
+*
+* @param {boolean} [saveDisabled=false]
+*     Disabled the save button when true
 * @param {Object} saveTooltip
 *     An object of the props required to generate a details tooltip to confirm saving.
 * @param {string} saveTooltip.confirmButtonText
@@ -100,19 +112,10 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 * @param {string} saveTooltip.title
 *     Text for the title of the modal.
 *
-* @param {ButtonBar~onCancel} [onCancel]
-*     Callback that will be triggered when the "cancel" button is clicked. Note that the onCancel callback and
-*     cancelText props are required to display the cancel button. If either is not provided, the button will not
-*     display.
-* @param {ButtonBar~onDiscard} [onDiscard]
-*     Callback that will be triggered when the "discard" button is clicked. Note that the onDiscard callback and
-*     discardText props are required to display the discard button. If either is not provided, the button will not
-*     display.
-* @param {ButtonBar~onSave} onSave
-*     Callback that will be triggered when the "save" button is clicked
-* @param {ButtonBar~onSave} onSaveMouseDown
-*     Callback that will be triggered when the "save" button gets a mousedown event.
-*     Because mousedown fires blur events, it's sometimes possible for the save to get a mousedown event but never get the click.
+* @param {boolean} [unfixed=false]
+*     When set, the bar appears within the flow of the page content rather than fixed to the bottom of the window.
+* @param {boolean} [visible=true]
+*     Shows/hides the button bar. This is often set to true when a form data is "dirty"/has been edited
 *
 * @example
 *     <ButtonBar
@@ -191,8 +194,20 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 *
 */
 
+/**
+ * @enum {string}
+ * @alias ButtonBar.alignments
+ */
+const alignments = {
+    /** left */
+    LEFT: "left",
+    RIGHT: "right",
+};
+
+
 class ButtonBar extends React.Component {
     static propTypes = {
+        alignment: PropTypes.oneOf(Object.values(alignments)),
         cancelClassName: PropTypes.string,
         cancelText: PropTypes.string,
         cancelTooltip: PropTypes.shape({
@@ -234,6 +249,7 @@ class ButtonBar extends React.Component {
     };
 
     static defaultProps = {
+        alignment: "right",
         cancelText: "Cancel",
         "data-id": "button-bar",
         saveDisabled: false,
@@ -247,6 +263,8 @@ class ButtonBar extends React.Component {
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+
+    static buttonAlignments = alignments;
 
     _handleSave = (e) => {
         if (!this.props.enableSavingAnimation) {
@@ -286,6 +304,7 @@ class ButtonBar extends React.Component {
             onClick={this._handleSave}
             onMouseDown={this.props.onSaveMouseDown}
             text={this.props.saveText || Translator.translate("save")}
+            noSpacing={this.props.alignment === "right"}
         />
     );
 
@@ -343,10 +362,12 @@ class ButtonBar extends React.Component {
     }
 
     render() {
+        const { alignment, children } = this.props;
         const discardText = this.props.discardText || Translator.translate("discard"),
             containerClassName = {
                 "page-controls-primary": true,
-                hidden: !this.props.visible
+                hidden: !this.props.visible,
+                "button-bar--left-align": this.props.alignment === "left",
             },
             discardClassName = classnames(
                 this.props.discardClassName || (this._fixedProps() && "cancel") || null,
@@ -357,8 +378,9 @@ class ButtonBar extends React.Component {
         return (
             <div
                 data-id={this.props["data-id"]}
-                className={classnames(this.props.className, containerClassName, unfixedClassName)}>
-                {this.props.children}
+                className={classnames(this.props.className, containerClassName, unfixedClassName)}
+            >
+                {alignment === "right" && children}
                 <div className="button-bar__buttons">
                     {this._renderSaveButton()}
                     {this.props.cancelText && this.props.onCancel && this._renderCancelButton()}
@@ -374,9 +396,10 @@ class ButtonBar extends React.Component {
                         </Button>
                     )}
                 </div>
+                {alignment === "left" && children}
             </div>
         );
     }
 }
 
-module.exports = ButtonBar;
+export default ButtonBar;
