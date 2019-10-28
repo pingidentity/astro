@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
+import { HorizontalBarCard, CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
-import Checkbox from "../../../../components/forms/FormCheckbox";
-import { HorizontalBarCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
+
+
 
 /**
 * @name HorizontalBarCardDemo
@@ -81,7 +83,7 @@ export default class HorizontalBarCardDemo extends Component {
     render () {
         return (
             <div>
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <Checkbox
                             label="Show error message"

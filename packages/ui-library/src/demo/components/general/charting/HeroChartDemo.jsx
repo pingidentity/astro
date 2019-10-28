@@ -1,6 +1,6 @@
 import React from "react";
-import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
 import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
+import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 
@@ -48,7 +48,7 @@ class HeroChartDemo extends React.Component {
 
         return (
             <div>
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <Checkbox
                             label="Show error message"
