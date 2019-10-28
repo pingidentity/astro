@@ -102,7 +102,7 @@ export default class MultipleCertsTemplate extends Component {
     _renderCertRadioChoices = () => {
         return (
             <div>
-                <Padding top={sizes.MD}>
+                <Padding top={sizes.SM}>
                     <FormRadioGroup
                         groupName="verification-certificate"
                         selected={this.state.certType}
@@ -257,12 +257,12 @@ export default class MultipleCertsTemplate extends Component {
                                     <Button
                                         label="Cancel"
                                         type={buttonTypes.CANCEL}
-                                        disabled={true}
+                                        disabled
                                     />
                                     <Button
                                         type={Button.buttonTypes.PRIMARY}
                                         label="Save"
-                                        disabled={true}
+                                        disabled
                                     />
                                 </ButtonGroup>
                             </FlexRow>
