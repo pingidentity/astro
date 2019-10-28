@@ -11,11 +11,9 @@ import Text from "../../../components/general/Text";
 
 export default class FieldSetDemo extends Component {
 
-    initState = {
+    state = {
         radioSelected: null,
     }
-
-    state = this.initState;
 
     _handleSelectChange = dataId => value => {
         this.setState({
