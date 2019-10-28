@@ -547,6 +547,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_ListNavDemo.jsx.html"
                     },
                     {
+                        label: "Padding",
+                        demo: require("../components/layout/PaddingDemo"),
+                        pathToDoc: "components/layout/Padding.jsx",
+                        pathToSource: "components_layout_Padding.jsx.html",
+                        pathToDemoSource: "demo_components_layout_PaddingDemo.jsx.html"
+                    },
+                    {
                         label: "Page Group",
                         demo: require("../components/layout/PageGroupDemo"),
                         pathToDoc: "components/layout/PageGroup.jsx",
@@ -566,6 +573,13 @@ module.exports = [
                         pathToDoc: "components/layout/PageSection.jsx",
                         pathToSource: "components_layout_PageSection.jsx.html",
                         pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
+                    },
+                    {
+                        label: "Spacing",
+                        demo: require("../components/layout/SpacingDemo"),
+                        pathToDoc: "components/layout/Spacing.jsx",
+                        pathToSource: "components_layout_Spacing.jsx.html",
+                        pathToDemoSource: "demo_components_layout_SpacingDemo.jsx.html"
                     },
                     {
                         label: "Tab Set",
