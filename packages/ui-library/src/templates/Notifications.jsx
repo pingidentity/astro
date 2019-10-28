@@ -190,7 +190,7 @@ export default class Notifications extends Component {
         return (
             <div>
                 <PageHeader title="Notifications" />
-                <Layout.Row autowidth>
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <FormLabel value="Default Language" />
                         <Layout.Row>
