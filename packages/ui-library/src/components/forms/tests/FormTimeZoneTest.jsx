@@ -306,6 +306,7 @@ describe("FormTimeZone", function () {
             onToggle: jest.fn(),
             onValueChange: jest.fn()
         });
+
         const handler = component.refs.TimeZoneStateless._onGlobalClick;
 
         expect(component.props.onToggle).not.toBeCalled();

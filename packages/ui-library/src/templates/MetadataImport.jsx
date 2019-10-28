@@ -116,7 +116,7 @@ export default class MetadataImport extends Component {
 
         const helpHint = (<span>
             Import Metadata from URL&nbsp;
-            <HelpHint hintText="This is some help text..." className="inline" />
+            <HelpHint hintText="This is some help text..." />
         </span>);
 
         const _renderMetadataSource = () => {

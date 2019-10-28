@@ -1,31 +1,31 @@
 import React, { Component } from "react";
-import Button from "../components/buttons/Button";
-import FlexRow, { alignments, justifyOptions, spacingOptions } from "../components/layout/FlexRow";
-import PageHeader from "../components/general/PageHeader";
-import PageSection from "../components/layout/PageSection";
-import ExpandableRow from "../components/rows/ExpandableRow";
-import { allFlags } from "../util/FlagUtils";
-import Link from "../components/general/Link";
+import Button from "ui-library/lib/components/buttons/Button";
+import FlexRow, { alignments, justifyOptions, spacingOptions } from "ui-library/lib/components/layout/FlexRow";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+import { allFlags } from "ui-library/lib/util/FlagUtils";
+import Link from "ui-library/lib/components/general/Link";
 import { v4 as uuidV4 } from "uuid";
-import Toggle from "../components/forms/form-toggle";
+import Toggle from "ui-library/lib/components/forms/form-toggle";
 import Table, {
     columnAlignments,
     Divider,
     tableWidths,
     verticalAlignments
-} from "../components/tables/Table";
-import Text, { textTypes } from "../components/general/Text";
-import Icon, { iconSizes } from "../components/general/Icon";
-import InputRow from "../components/layout/InputRow";
+} from "ui-library/lib/components/tables/Table";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 
 /**
  * @class Gateway Template
  * @desc Gateway Template
  */
 
- 
+
 export default class GatewayTemplate extends Component {
-   
+
     state = {
         showingAddResource: false,
         selectedIndex: 2,
@@ -37,7 +37,7 @@ export default class GatewayTemplate extends Component {
             id: uuidV4(),
         }],
     }
-    
+
     toggleAddResource = () => this.setState((prevState) => ({ showingAddResource: !prevState.showingAddResource }));
 
     render() {
@@ -52,7 +52,7 @@ export default class GatewayTemplate extends Component {
                         title="Gateways"
                         iconName="resource"
                     />
-                
+
                     <Button
                         iconName="add"
                         label="Gateway"

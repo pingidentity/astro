@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import Button from "ui-library/lib/components/buttons/Button";
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
 import FlexRow, { spacingOptions, alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
 import FormattedContent from "ui-library/lib/components/general/FormattedContent";
-import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
+import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 import Link from "ui-library/lib/components/general/Link";
@@ -19,7 +19,7 @@ import Section from "ui-library/lib/components/general/Section";
 import Table, {
     columnAlignments,
 } from "ui-library/lib/components/tables/Table";
-import Text from "ui-library/lib/components/general/Text";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**
 * @name License
@@ -36,14 +36,14 @@ const LicenseOption = ({
     <Padding vertical={sizes.SM}>
         <FlexRow spacing={spacingOptions.LG} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
             <Stack gap="XS">
-                <Text type="parent-label">{type}</Text>
-                {renewed && <Text type="value">Renewed {renewed}</Text>}
-                {created && <Text type="value">Created {created}</Text>}
-                <Text type="value">Expires {expires}</Text>
+                <Text type={textTypes.PARENTLABEL}>{type}</Text>
+                {renewed && <Text type={textTypes.VALUE}>Renewed {renewed}</Text>}
+                {created && <Text type={textTypes.VALUE}>Created {created}</Text>}
+                <Text type={textTypes.VALUE}>Expires {expires}</Text>
             </Stack>
             <Stack gap="XS">
-                <Icon iconName="earth" iconSize={iconSizes.LG} type="inline"/>
-                <Text align={Text.alignments.CENTER} type="value">{envCount}</Text>
+                <Icon iconName="earth" iconSize={iconSizes.LG} type={iconTypes.INLINE}/>
+                <Text align={Text.alignments.CENTER} type={textTypes.VALUE}>{envCount}</Text>
             </Stack>
         </FlexRow>
     </Padding>
@@ -66,24 +66,24 @@ const LicenseRow = ({
             <Layout.Row autoWidth>
                 <Layout.Column>
                     <Stack gap="XS">
-                        <Text type="parent-label">{type}</Text>
-                        {renewed && <Text type="value">Renewed {renewed}</Text>}
-                        {created && <Text type="value">Created {created}</Text>}
-                        <Text type="value">Expires {expires}</Text>
+                        <Text type={textTypes.PARENTLABEL}>{type}</Text>
+                        {renewed && <Text type={textTypes.VALUE}>Renewed {renewed}</Text>}
+                        {created && <Text type={textTypes.VALUE}>Created {created}</Text>}
+                        <Text type={textTypes.VALUE}>Expires {expires}</Text>
                     </Stack>
                 </Layout.Column>
                 <Layout.Column>
-                    <Icon iconName="earth" iconSize="xl" title="environments">
+                    <Icon iconName="earth" iconSize={iconSizes.XL} title="environments">
                         <Stack gap="XS">
-                            {envLines.map(line => <Text type="value" key={line}>{line}</Text>)}
+                            {envLines.map(line => <Text type={textTypes.VALUE} key={line}>{line}</Text>)}
                         </Stack>
                     </Icon>
                 </Layout.Column>
                 <Layout.Column>
-                    <Icon iconName="users" iconSize="xl" title="identites">
+                    <Icon iconName="users" iconSize={iconSizes.XL} title="identites">
                         <FormattedContent>
                             <Stack gap="XS">
-                                {identityLines.map(line => <Text type="value" key={line}>{line}</Text>)}
+                                {identityLines.map(line => <Text type={textTypes.VALUE} key={line}>{line}</Text>)}
                             </Stack>
                         </FormattedContent>
                     </Icon>
@@ -162,7 +162,7 @@ export default class License extends Component {
                     EU Contractors to a Global license?
                     </InputRow>
                     <ButtonGroup onCancel={this.handleClick}>
-                        <Button type="primary" onClick={this.handleClick}>Re-assign</Button>
+                        <Button type={buttonTypes.PRIMARY} onClick={this.handleClick}>Re-assign</Button>
                     </ButtonGroup>
                 </div>
             );
@@ -188,7 +188,7 @@ export default class License extends Component {
                     EU Contractors to a Global license?
                     </InputRow>
                     <ButtonGroup onCancel={this.handleClick}>
-                        <Button type="primary" onClick={this.handleClick}>Re-assign</Button>
+                        <Button type={buttonTypes.PRIMARY} onClick={this.handleClick}>Re-assign</Button>
                     </ButtonGroup>
                 </div>
             );
@@ -268,7 +268,7 @@ export default class License extends Component {
     renderLinkDropDown = () => {
         return (
             <LinkDropDownList
-                label={<Icon type="inline" iconName="edit"/>}
+                label={<Icon type={iconTypes.INLINE} iconName="edit"/>}
                 options={nodeOptions}
                 flags={["p-stateful", "use-portal"]}
                 onClick={this._toggleOpen}
@@ -283,7 +283,7 @@ export default class License extends Component {
     renderLinkDropDown2 = () => {
         return (
             <LinkDropDownList
-                label={<Icon type="inline" iconName="edit"/>}
+                label={<Icon type={iconTypes.INLINE} iconName="edit"/>}
                 options={nodeOptions}
                 flags={["p-stateful", "use-portal"]}
                 onClick={this._toggleOpen2}
@@ -484,8 +484,8 @@ export default class License extends Component {
                 <PageSection>
                     <InputRow>
                         <Stack gap="XS">
-                            <Text type="parent-label">Organization</Text>
-                            <Text type="value">PingOne Demo</Text>
+                            <Text type={textTypes.PARENT}>Organization</Text>
+                            <Text type={textTypes.VALUE}>PingOne Demo</Text>
                         </Stack>
                     </InputRow>
                     <InputRow>
@@ -539,7 +539,7 @@ export default class License extends Component {
                     <Stack gap="SM">
                         <Link title="Compare plans" url="#" type="block"/>
                         <Link title="Terms of service" url="#" type="block"/>
-                        <Button type="primary" label="Contact Us" />
+                        <Button type={buttonTypes.PRIMARY} label="Contact Us" />
                     </Stack>
                 </PageSection>
             </div>

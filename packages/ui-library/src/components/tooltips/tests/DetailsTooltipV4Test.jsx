@@ -36,6 +36,7 @@ describe("DetailsTooltip", function () {
     beforeEach(function () {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
+
     });
     afterEach(function () {
         delete process.env.NODE_ENV;
