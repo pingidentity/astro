@@ -1,7 +1,7 @@
 
 import React from "react";
-import ButtonBar, { buttonAlignments } from "../../../components/forms/ButtonBar";
-import Button from "../../../components/buttons/Button";
+import ButtonBar, { buttonAlignments } from "ui-library/lib/components/forms/ButtonBar";
+import Button from "ui-library/lib/components/buttons/Button";
 
 /**
 * @name ButtonBarDemo
