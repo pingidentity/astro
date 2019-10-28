@@ -141,7 +141,7 @@ $topnav-bg: $color-neutral-10;
                 color: $color-white;
                 font-size: 10px;
                 right: $spacing-sm;
-                top: 8px;
+                top: 3px;
             }
 
             &:hover {
@@ -149,11 +149,15 @@ $topnav-bg: $color-neutral-10;
             }
         }
 
-        .wrapper:after {
-            color: $color-white;
-            font-size: 10px;
-            right: $spacing-sm;
-            top: 8px;
+        .wrapper {
+            height: $market-selector-height;
+
+            &:after {
+                color: $color-white;
+                font-size: 10px;
+                right: $spacing-sm;
+                top: 3px;
+            }
         }
     }
 }
