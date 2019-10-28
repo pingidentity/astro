@@ -1,10 +1,10 @@
 import React from "react";
-import ExpandableRow from "../../components/rows/ExpandableRow";
-import FormSearchBar from "../../components/forms/FormSearchBar";
-import Pagination from "../../components/list/Pagination";
-import Button from "../../components/buttons/Button";
-import RowAccessories from "../../components/rows/expandable-row/Accessories";
-import PageHeader from "../../components/general/PageHeader";
+import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+import FormSearchBar from "ui-library/lib/components/forms/FormSearchBar";
+import Pagination from "ui-library/lib/components/list/Pagination";
+import Button from "ui-library/lib/components/buttons/Button";
+import RowAccessories from "ui-library/lib/components/rows/expandable-row/Accessories";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
 
 
 /**
