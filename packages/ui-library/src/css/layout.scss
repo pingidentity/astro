@@ -981,6 +981,11 @@ $color-grey-minor-1: $color-neutral-30;
     &__save {
         margin-right: 0;
     }
+
+    &__cancel-link {
+        line-height: 36px;
+        margin-right: $spacing-sm;
+    }
 }
 
 
