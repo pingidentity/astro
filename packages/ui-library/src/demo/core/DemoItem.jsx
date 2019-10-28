@@ -128,13 +128,12 @@ class DemoItem extends React.Component {
 
         const markdown = description && marked(description),
             props = _.extend({}, this.props, this.state.store, { flags: this.state.flags }),
-            containerClassName = classnames({ "fullscreen": (fullscreen || contentPage) }),
+            containerClassName = classnames("demo-item", { "fullscreen": (fullscreen || contentPage) }),
             headerClassName = "doc";
 
         const OutputComponent = (fullscreen || contentPage) ? StretchContent : "div";
 
         return (
-
             <StretchContent className={containerClassName}>
                 <div className="documentation">
 

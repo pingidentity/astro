@@ -11,4 +11,3 @@ fetch("http://localhost:8085/")
                 .then(() => console.log("Backstop tests passed!"));
         }
     });
-//.catch((err) => throw new Error("Could not get response from server at localhost:8082; error ", err));

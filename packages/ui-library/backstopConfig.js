@@ -78,9 +78,9 @@ const generateBaseDemoTests = ({
     return children === undefined
         ? [{
             label,
-            url: `http://localhost:8082/#/?selectedSection=${section || id}&selectedNode=${id}&root=${root}`,
+            url: `http://localhost:8085/#/?selectedSection=${section || id}&selectedNode=${id}&root=${root}`,
             selectors: [
-                root === "Templates" ? "#content" : ".output"
+                root === "Templates" ? ".demo-item" : ".output"
             ],
             delay: section === "Dashboard" ? 1500 : 0
         }]
@@ -99,9 +99,9 @@ module.exports = {
     "id": "ui_lib",
     "viewports": [
         {
-            label: "MacBook Pro",
+            label: "Large height, standard width",
             width: 1440,
-            height: 900
+            height: 3000
         }
     ],
     "scenarios": [...baseTests, ...templateTests, ...componentTests],
@@ -121,5 +121,6 @@ module.exports = {
     "asyncCompareLimit": 50,
     "debug": false,
     "debugWindow": false,
-    "misMatchThreshold": 0.01
+    "misMatchThreshold": 0.01,
+    "docker": true
 };
