@@ -1,5 +1,5 @@
-$icomoon-font-family: "iconfont" !default;
-$icomoon-font-path: "fonts" !default;
+$icomoon-font-path: "../fonts/icons"; // KEEP - designates relative path to icons file where this is imported
+$icomoon-font-family: "iconfont"; // KEEP - designates name of font
 
 $icon-account: "\61";
 $icon-admin-account: "\74";

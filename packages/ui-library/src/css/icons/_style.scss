@@ -2,9 +2,7 @@
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?p6zuti');
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?p6zuti#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?p6zuti') format('woff2'),
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?p6zuti') format('woff2'),
     url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?p6zuti') format('truetype'),
     url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?p6zuti') format('woff'),
     url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?p6zuti##{$icomoon-font-family}') format('svg');
