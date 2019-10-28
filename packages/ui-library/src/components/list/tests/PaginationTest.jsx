@@ -22,6 +22,7 @@ describe("Pagination", function () {
 
     beforeEach(function () {
         callback = jest.fn();
+
         component = ReactTestUtils.renderIntoDocument(
             <Pagination
                 data-id="test-pagination"

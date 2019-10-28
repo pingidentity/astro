@@ -418,6 +418,7 @@ describe("FormDropDownList v4", function () {
             component, FormDropDownList._statelessComponent
         )._handleGlobalClick;
 
+
         expect(component.props.onToggle).not.toBeCalled();
 
         // click outside

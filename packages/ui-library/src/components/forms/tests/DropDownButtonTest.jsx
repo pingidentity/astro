@@ -280,6 +280,7 @@ describe("DropDownButton", function () {
 
     it("triggers callback when clicked outside", function () {
         window.addEventListener = jest.fn();
+
         var callback = jest.fn();
 
         var menu = {
