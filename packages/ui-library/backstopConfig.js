@@ -18,7 +18,7 @@ const transformTestProps = ({
     section = label,
 }) => ({
     ...scenarioDefaults,
-    url: `http://localhost:8085/#/?selectedSection=${sanitizeLabel(section)}&selectedNode=${sanitizeLabel(label)}&root=${sanitizeLabel(root)}`,
+    url: `http://host.docker.internal:8085/#/?selectedSection=${sanitizeLabel(section)}&selectedNode=${sanitizeLabel(label)}&root=${sanitizeLabel(root)}`,
 });
 
 // Walk through directories, finding all of the backstop test files
@@ -42,6 +42,7 @@ const skippedDemos = [
     "Checkbox",
     "Documentation",
     "DashboardLayout",
+    "DonutCard",
     "EllipsisLoader",
     "HeatmapCard",
     "PageSpinner",
@@ -78,11 +79,11 @@ const generateBaseDemoTests = ({
     return children === undefined
         ? [{
             label,
-            url: `http://localhost:8085/#/?selectedSection=${section || id}&selectedNode=${id}&root=${root}`,
+            url: `http://host.docker.internal:8085/#/?selectedSection=${section || id}&selectedNode=${id}&root=${root}`,
             selectors: [
                 root === "Templates" ? ".demo-item" : ".output"
             ],
-            delay: section === "Dashboard" ? 1500 : 0
+            delay: section === "Dashboard" ? 2500 : 0
         }]
         : generateBaseDemoTests({
             root: root || id,
