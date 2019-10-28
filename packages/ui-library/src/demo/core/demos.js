@@ -511,13 +511,6 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_FieldSetDemo.jsx.html"
                     },
                     {
-                        label: "File Details",
-                        demo: require("../components/layout/FileDetailsDemo"),
-                        pathToDoc: "components/layout/FileDetails.jsx",
-                        pathToSource: "components_layout_FileDetails.jsx.html",
-                        pathToDemoSource: "demo_components_layout_FileDetailsDemo.jsx.html"
-                    },
-                    {
                         label: "Flex Row",
                         demo: require("../components/layout/FlexRowDemo"),
                         pathToDoc: "components/layout/FlexRow.jsx",

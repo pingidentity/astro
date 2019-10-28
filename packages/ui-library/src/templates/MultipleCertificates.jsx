@@ -3,7 +3,7 @@ import ButtonGroup from "../components/layout/ButtonGroup";
 import CopyField from "../components/utils/CopyField";
 import FileInput from "../components/forms/FileInput";
 import FieldSet from "../components/layout/FieldSet";
-import FlexRow, { justifyOptions, alignments } from "../components/layout/FlexRow";
+import FlexRow, { justifyOptions } from "../components/layout/FlexRow";
 import FormLabel from "../components/forms/FormLabel";
 import FormRadioGroup from "../components/forms/FormRadioGroup";
 import FormTextField from "../components/forms/FormTextField";
@@ -12,6 +12,7 @@ import HR from "../components/general/HR";
 import InputWidths from "../components/forms/InputWidths";
 import InputRow from "../components/layout/InputRow";
 import InlineMessage from "../components/general/InlineMessage";
+import Link from "ui-library/lib/components/general/Link";
 import PageHeader from "../components/general/PageHeader";
 import PageSection from "../components/layout/PageSection";
 import React, { Component } from "react";
@@ -85,7 +86,7 @@ export default class MultipleCertsTemplate extends Component {
 
     _noRequiredCert = () => {
         return this.state.addedFiles.length > 0
-            ? (<InputRow><a onClick={this._handleAdditionalCert}>+ Add Additional Certificate</a></InputRow>)
+            ? (<InputRow><Link onClick={this._handleAdditionalCert}>+ Add Additional Certificate</Link></InputRow>)
             : (<div>
                 <InlineMessage type={ InlineMessage.MessageTypes.ERROR }>
                 Your file “mycertificate.pdf” failed to upload because of
