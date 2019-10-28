@@ -1,18 +1,18 @@
 import React from "react";
-import FormTextField from "../../components/forms//form-text-field";
-import FormRadioGroup from "../../components/forms/FormRadioGroup";
-import FormDropDownList from "../../components/forms/FormDropDownList";
-import InputWidths from "../../components/forms/InputWidths";
-import PageHeader from "../../components/general/PageHeader";
-import Layout from "../../components/general/ColumnLayout";
-import { linkTypes } from "../../components/general/Anchor";
-import Toggle from "../../components/forms/form-toggle";
-import ButtonBar from "../../components/forms/ButtonBar";
-import Button from "../../components/buttons/Button";
-import RockerButton from "../../components/forms/RockerButton";
-import PageSection from "../../components/layout/PageSection";
-import InputRow from "../../components/layout/InputRow";
-import Link from "../../components/general/Link";
+import FormTextField from "ui-library/lib/components/forms//form-text-field";
+import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import { linkTypes } from "ui-library/lib/components/general/Anchor";
+import Toggle from "ui-library/lib/components/forms/form-toggle";
+import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
+import Button from "ui-library/lib/components/buttons/Button";
+import RockerButton from "ui-library/lib/components/forms/RockerButton";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import Link from "ui-library/lib/components/general/Link";
 
 /**
  * @class EditPage
