@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 
-import InputRow from "../components/layout/InputRow";
-import FormRadioGroup from "../components/forms/FormRadioGroup";
-import FormTextField from "../components/forms/FormTextField";
-import Button, { buttonTypes } from "../components/buttons/Button";
-import HR from "../components/general/HR";
-import PageSection from "../components/layout/PageSection";
-import Text from "../components/general/Text";
-import PageHeader from "../components/general/PageHeader";
-import FormCheckbox from "../components/forms/FormCheckbox";
-import PasswordStrengthMeter from "../components/general/PasswordStrengthMeter";
-import Layout from "../components/general/ColumnLayout";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
+import FormTextField from "ui-library/lib/components/forms/FormTextField";
+import FlexRow, { justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import Text from "ui-library/lib/components/general/Text";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
+import PasswordStrengthMeter from "ui-library/lib/components/general/PasswordStrengthMeter";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 class PasswordStrength extends Component {
     render() {
@@ -91,7 +92,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password cannot have more than
-                        <FormTextField inline={true} size={5} flags={["p-stateful"]} />&nbsp;
+                        <FormTextField inline size={5} flags={["p-stateful"]} />&nbsp;
                         repeated characters
                     </span>
                 )
@@ -100,15 +101,15 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password must have a minimum of&nbsp;
-                        <FormTextField inline={true} size={5} flags={["p-stateful"]}/> unique characters
+                        <FormTextField inline size={5} flags={["p-stateful"]}/> unique characters
                     </span>
                 )
             }, {
                 value: "6",
                 label: (
                     <span>
-                        The password must be between <FormTextField inline={true} size={5} flags={["p-stateful"]}/>
-                        and <FormTextField inline={true} size={5} flags={["p-stateful"]} /> characters
+                        The password must be between <FormTextField inline size={5} flags={["p-stateful"]}/>
+                        and <FormTextField inline size={5} flags={["p-stateful"]} /> characters
                     </span>
                 )
             }, {
@@ -252,7 +253,7 @@ export default class PasswordPolicy extends Component {
 
                 <PageSection>
                     <HR solid />
-                    <div style={{ textAlign: "right" }}>
+                    <FlexRow justify={justifyOptions.END}>
                         <Button
                             label="Discard Changes"
                             type={buttonTypes.CANCEL}
@@ -261,7 +262,7 @@ export default class PasswordPolicy extends Component {
                             label="Save"
                             type={buttonTypes.PRIMARY}
                         />
-                    </div>
+                    </FlexRow>
                 </PageSection>
             </div>
         );
