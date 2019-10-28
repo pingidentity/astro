@@ -366,7 +366,7 @@ module.exports = [
                     {
                         label: "Multi Column Drag Drop",
                         demo: require("../components/panels/MultiDragDemo"),
-                        pathToDoc: "components/panels/multi-drag/MultiDrag.jsx",
+                        pathToDoc: "components/panels/MultiDrag.jsx",
                         pathToSource: "components_panels_multi-drag_MultiDrag.jsx.html",
                         pathToDemoSource: "demo_components_panels_MultiDragDemo.jsx.html",
                         keywords: ["MultiDrag"]

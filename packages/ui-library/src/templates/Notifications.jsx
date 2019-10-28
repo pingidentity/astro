@@ -3,19 +3,20 @@ import React, { Component } from "react";
 import Button from "ui-library/lib/components/buttons/Button";
 import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
 import ConfirmToolTip from "ui-library/lib/components/tooltips/ConfirmTooltip";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import FormTextField from "ui-library/lib/components/forms/form-text-field";
 import FormTextArea from "ui-library/lib/components/forms/form-text-area";
-import FormLabel from "ui-library/lib/components/forms/FormLabel";
-import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
-import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
+import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
 import ListNav from "ui-library/lib/components/layout/ListNav";
-import PageSection from "ui-library/lib/components/layout/PageSection";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PageSection from "ui-library/lib/components/layout/PageSection";
 import PopOverMenu from "ui-library/lib/components/tooltips/PopoverMenu";
 import StatusIndicator from "ui-library/lib/components/general/StatusIndicator";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**
 * @name Notifications
@@ -212,8 +213,10 @@ export default class Notifications extends Component {
                     </Layout.Column>
                     <Layout.Column>
                         <FormLabel value="Optional variables" />
-                        <Layout.Row className="text-value">
-                            {"${user.username}"} {"${supportEmail}"}
+                        <Layout.Row>
+                            <Text type={textTypes.VALUE}>
+                                {"${user.username}"} {"${supportEmail}"}
+                            </Text>
                         </Layout.Row>
                     </Layout.Column>
                 </Layout.Row>
