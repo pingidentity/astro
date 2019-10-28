@@ -9,6 +9,7 @@ const fs = require("fs");
 const path = require("path");
 const runSequence = require("run-sequence");
 const sass = require("gulp-sass");
+const sourcemaps = require("gulp-sourcemaps");
 const tap = require("gulp-tap");
 const _ = require("underscore");
 const postcss = require("gulp-postcss");
@@ -144,11 +145,18 @@ gulp.task("move-files", () =>
         .pipe(gulp.dest("lib"))
 );
 
+const cssFolder = () => {
+    const index = process.argv.indexOf("--destination");
+    return index >= 0 ? process.argv[index + 1] : "lib/css";
+};
+
 gulp.task("build-css", () =>
     gulp.src(["./src/css/ui-library.scss", "./src/css/end-user.scss"])
+        .pipe(sourcemaps.init())
         .pipe(sass().on("error", sass.logError))
         .pipe(postcss())
-        .pipe(gulp.dest("lib/css"))
+        .pipe(sourcemaps.write("./"))
+        .pipe(gulp.dest(cssFolder()))
 );
 
 gulp.task("package-lib", () => {
