@@ -1,11 +1,11 @@
 import React from "react";
-import PageWizard, { Step } from "../../../components/panels/PageWizard";
-import TileSelector from "../../../components/buttons/TileSelector";
-import FormTextField from "../../../components/forms/form-text-field";
-import FormTextArea from "../../../components/forms/form-text-area";
-import FileUpload from "../../../components/forms/file-upload";
-import Multivalues from "../../../components/forms/Multivalues";
-import Button from "../../../components/buttons/Button";
+import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard";
+import TileSelector from "ui-library/lib/components/buttons/TileSelector";
+import FormTextField from "ui-library/lib/components/forms/form-text-field";
+import FormTextArea from "ui-library/lib/components/forms/form-text-area";
+import FileUpload from "ui-library/lib/components/forms/file-upload";
+import Multivalues from "ui-library/lib/components/forms/Multivalues";
+import Button from "ui-library/lib/components/buttons/Button";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import _ from "underscore";
 
@@ -15,7 +15,9 @@ import DragScreen from "./page-wizard-screens/DragScreen";
 import Utils from "ui-library/lib//util/Utils";
 import fixOrientation from "fix-orientation";
 import readExif from "exif-js";
-import InputWidths from "../../../components/forms/InputWidths";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import Spacing from "ui-library/lib/components/layout/Spacing";
+import Text from "ui-library/lib/components/general/Text";
 
 /**
 * @name PageWizard Demo
@@ -264,7 +266,9 @@ class PageWizardDemo extends React.Component {
                         required>
 
 
-                        <div className="text-section-title space-bottom-md">Select an application type</div>
+                        <Spacing bottom="md">
+                            <Text inline type="section-title">Select an application type</Text>
+                        </Spacing>
                         <TileSelector
                             onValueChange={this._onTileSelect}
                             selected={this.state.currentApp.selectedTile}
