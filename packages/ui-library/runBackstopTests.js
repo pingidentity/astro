@@ -2,11 +2,13 @@ const backstop = require("backstopjs");
 const backstopConfig = require("./backstopConfig");
 const fetch = require("node-fetch");
 
-fetch("http://localhost:8080/")
+const isApprovalRun = process.argv.includes("--approve");
+
+fetch("http://localhost:8085/")
     .then(response => {
         if (response.ok) {
-            backstop("test", { config: backstopConfig })
+            backstop(isApprovalRun ? "approve" : "test", { config: backstopConfig })
                 .then(() => console.log("Backstop tests passed!"));
         }
-    })
-    .catch((err) => throw new Error("Could not get response from server at localhost:8080; error ", err));
+    });
+//.catch((err) => throw new Error("Could not get response from server at localhost:8082; error ", err));

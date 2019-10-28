@@ -11,13 +11,23 @@ const scenarioDefaults = {
     readyEvent: "backstop ready"
 };
 
+const sanitizeLabel = label => label.replace(/\W/g, "");
+const transformTestProps = ({
+    root,
+    label,
+    section = label,
+}) => ({
+    ...scenarioDefaults,
+    url: `http://localhost:8085/#/?selectedSection=${sanitizeLabel(section)}&selectedNode=${sanitizeLabel(label)}&root=${sanitizeLabel(root)}`,
+});
+
 // Walk through directories, finding all of the backstop test files
 function getTests(path = "", tests = []) {
     if (isBackstopTest(path)) {
         const componentTests = require(path);
         return [
             // Add defaults into each test
-            ...tests.map(test => ({ ...scenarioDefaults, ...test })),
+            ...tests.map(transformTestProps),
             ...componentTests
         ];
     } else if (isDirectory(path)) {
@@ -27,6 +37,60 @@ function getTests(path = "", tests = []) {
         return tests;
     }
 }
+
+const skippedDemos = [
+    "Checkbox",
+    "Documentation",
+    "DashboardLayout",
+    "EllipsisLoader",
+    "HeatmapCard",
+    "PageSpinner",
+    "Spinner",
+    "TimeZone"
+];
+
+// Remove require statements to avoid parsing and resolving them
+const demosWithoutRequires = fs.readFileSync("./src/demo/core/demos.js")
+    .toString()
+    .replace(/(?<=demo: ).*?(?=,)/g, "\"\"");
+// Parse out just module.exports, then use eval to convert that string into
+// an object. I would use JSON.parse, but demos.js includes trailing commas
+// and property names that aren't in quotes.
+const demos = eval(`(
+    ${demosWithoutRequires.substring(
+        demosWithoutRequires.lastIndexOf("module.exports = ") + 10,
+        demosWithoutRequires.lastIndexOf(";")
+    )}
+)`);
+
+
+const generateBaseDemoTests = ({
+    root,
+    section
+}) => nodes => nodes.flatMap(({
+    children,
+    label
+}) => {
+    const id = sanitizeLabel(label);
+    if (skippedDemos.includes(id)) {
+        return [];
+    }
+    return children === undefined
+        ? [{
+            label,
+            url: `http://localhost:8082/#/?selectedSection=${section || id}&selectedNode=${id}&root=${root}`,
+            selectors: [
+                root === "Templates" ? "#content" : ".output"
+            ],
+            delay: section === "Dashboard" ? 1500 : 0
+        }]
+        : generateBaseDemoTests({
+            root: root || id,
+            section: root && !section ? id : section
+        })(children);
+});
+
+const baseTests = generateBaseDemoTests({})(demos);
 
 const componentTests = getTests("./src/components");
 const templateTests = getTests("./src/templates");
@@ -40,7 +104,7 @@ module.exports = {
             height: 900
         }
     ],
-    "scenarios": [...templateTests, ...componentTests],
+    "scenarios": [...baseTests, ...templateTests, ...componentTests],
     "paths": {
         "bitmaps_reference": "backstop_data/bitmaps_reference",
         "bitmaps_test": "backstop_data/bitmaps_test",
