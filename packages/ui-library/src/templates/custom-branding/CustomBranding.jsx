@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import ColorPicker from "../../components/general/ColorPicker";
-import Button from "../../components/buttons/Button";
-import ButtonBar from "../../components/forms/ButtonBar";
-import FormRadioGroup from "../../components/forms/FormRadioGroup";
-import FormTextField from "../../components/forms/form-text-field";
-import FileUpload from "../../components/forms/FileUpload";
-import HelpHint from "../../components/tooltips/HelpHint";
-import InputWidths from "../../components/forms/InputWidths";
-import Layout from "../../components/general/ColumnLayout";
-import PageSection from "../../components/layout/PageSection";
-import Stack from "../../components/layout/Stack";
-import InputRow from "../../components/layout/InputRow";
-import DetailsTooltip from "../../components/tooltips/DetailsTooltip";
-import ButtonGroup from "../../components/layout/ButtonGroup";
-import Image from "../../components/general/Image";
+import ColorPicker from "ui-library/lib/components/general/ColorPicker";
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
+import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
+import FormTextField from "ui-library/lib/components/forms/form-text-field";
+import FileUpload from "ui-library/lib/components/forms/FileUpload";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import Stack from "ui-library/lib/components/layout/Stack";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+import Image from "ui-library/lib/components/general/Image";
 
 
 /**
@@ -126,7 +126,7 @@ export default class CustomBranding extends Component {
                         data-id="details-tooltip"
                         flags={this.props.flags}
                         label={(
-                            <Button type="button" inline type="secondary">
+                            <Button inline type={buttonTypes.SECONDARY}>
                             Restore Defaults
                             </Button>
                         )}
@@ -145,7 +145,7 @@ export default class CustomBranding extends Component {
                         >
                             <Button
                                 data-id="confirm-action"
-                                type="secondary"
+                                type={buttonTypes.SECONDARY}
                                 onClick={this._handleConfirm} >
                             Confirm
                             </Button>
