@@ -50,7 +50,6 @@ function Spacing({
     children,
     className,
     "data-id": dataId,
-    inline,
     spacing,
     vertical = spacing,
     horizontal = spacing,
@@ -67,9 +66,6 @@ function Spacing({
                 getClassName(left, "left"),
                 getClassName(right, "right"),
                 getClassName(top, "top"),
-                {
-                    "Spacing-component--inline": inline
-                }
             )}
             data-id={dataId}
         >

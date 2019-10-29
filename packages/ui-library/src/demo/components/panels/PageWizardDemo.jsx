@@ -16,8 +16,8 @@ import Utils from "ui-library/lib//util/Utils";
 import fixOrientation from "fix-orientation";
 import readExif from "exif-js";
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
-import Spacing from "ui-library/lib/components/layout/Spacing";
-import Text from "ui-library/lib/components/general/Text";
+import Spacing, { sizes } from "ui-library/lib/components/layout/Spacing";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**
 * @name PageWizard Demo
@@ -266,8 +266,8 @@ class PageWizardDemo extends React.Component {
                         required>
 
 
-                        <Spacing bottom="md">
-                            <Text inline type="section-title">Select an application type</Text>
+                        <Spacing bottom={sizes.MD}>
+                            <Text inline type={textTypes.SECTIONTITLE}>Select an application type</Text>
                         </Spacing>
                         <TileSelector
                             onValueChange={this._onTileSelect}
