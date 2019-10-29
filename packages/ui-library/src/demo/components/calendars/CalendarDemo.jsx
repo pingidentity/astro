@@ -12,9 +12,9 @@ class CalendarDemo extends React.Component {
     numDemos = 3;
 
     state = {
-        selectedDate1: moment(new Date()), //current date
+        selectedDate1: moment(new Date(2021, 1, 20)), //last day!
         selectedDate2: moment("2015-10-15"), //Feb 20 2017
-        selectedDate3: moment(new Date()),
+        selectedDate3: moment(new Date(2016, 2, 7)), //Broncos won Superbowl 50!
         dateRange: {
             startDate: new Date(2015, 9, 10), //Oct 10 2015
             endDate: new Date(2015, 10, 20) //Nov 20 2015
@@ -72,7 +72,7 @@ class CalendarDemo extends React.Component {
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
 
                 <br /><br />
-                
+
                 <Calendar data-id="calendar-3"
                     closeOnSelect={true}
                     computableFormat="x"

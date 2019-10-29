@@ -93,13 +93,14 @@ module.exports = merge(common, {
     },
     devtool: "source-map",
     devServer: {
-        disableHostCheck: true
+        disableHostCheck: true,
+        after: () => console.log("backstop ready")
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/demo/index.ejs", // Load a custom template
             inject: "body", // Inject all scripts into the body
             favicon: "./src/demo/images/favicon.png"
-        }),
+        })
     ]
 });

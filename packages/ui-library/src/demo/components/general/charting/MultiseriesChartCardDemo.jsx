@@ -161,7 +161,7 @@ export default class MultiseriesChartCardDemo extends Component {
                 <MultiseriesChartCard
                     bottomPanel={
                         <RockerButton
-                            className={`rocker-button--chart-rocker`}
+                            type={RockerButton.rockerTypes.CHART}
                             labels={["3M", "6M", "1Y"]}
                             onValueChange={this._setTimeSpan}
                             selectedIndex={this.state.timeSpanIndex}
