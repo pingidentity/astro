@@ -395,7 +395,6 @@ class MultiDragDemo extends React.Component {
                             <br/>
                             <Toggle
                                 data-id="disable-toggle"
-                                className="row-status-toggle"
                                 stateless={true}
                                 toggled={this.state.disabled}
                                 onToggle={this._handleDisabledToggle}
