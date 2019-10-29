@@ -11,7 +11,7 @@ import RockerButton from "../../../components/forms/RockerButton";
 const labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
 
 const years = ["3M", "6M", "1Y"];
-const days = ["1D", "1W", "1M", "1D", "1W", "1M", "1D", "1W", "1M", "1D", "1W", "1M", "1D", "1W", "1M", "1D", "1W", "1M", "1D", "1W", "1M"];
+const days = ["1D", "1W", "1M"];
 
 const labelsWithId = [
     { label: "Label One", id: "rocker1" },
