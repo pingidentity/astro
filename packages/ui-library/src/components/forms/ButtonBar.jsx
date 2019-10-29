@@ -115,7 +115,7 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 *     Callback that will be triggered when the "save" button gets a mousedown event.
 *     Because mousedown fires blur events, it's sometimes possible for the save to get a mousedown event but never get the click.
 * @param {boolean} [useButtonForCancel=true]
-*     If you want to render the Cancel and Discard Changes link buttons as regular buttons, set this to true.
+*     If you want to render the Cancel and Discard Changes buttons as links, set this to false.
 *
 * @example
 *     <ButtonBar
