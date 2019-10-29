@@ -211,7 +211,7 @@
     "lint": "npm run jslint && npm run stylelint",
     "backstop": "backstop test --config ./backstopConfig.js",
     "backstop-approve": "npm run pack && (http-server ./build --p 8085 & SERVER_ID=$! && node ./runBackstopTests.js --approve && kill -9 $SERVER_ID)",
-    "backstop-test": "npm run pack && (http-server ./build --p 8085 & SERVER_ID=$! && node ./runBackstopTests.js && kill -9 $SERVER_ID)"
+    "backstop-test": "rm -rf ./backstop.json && npm run pack && (http-server ./build --p 8085 & SERVER_ID=$! && node ./runBackstopTests.js && kill -9 $SERVER_ID)"
   },
   "csrfDataSourceApiConfig": {}
 }
