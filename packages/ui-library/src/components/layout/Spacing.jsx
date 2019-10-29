@@ -21,7 +21,9 @@ export const sizes = {
     XX: "xx",
 };
 
-const getClassName = (value, placement) => value !== undefined ? `space-${placement}-${value}` : "";
+const noCustomClasses = () => ({});
+
+const spacingGetClassName = (value, placement) => value !== undefined ? `space-${placement}-${value}` : "";
 
 /**
  * @class Spacing
@@ -46,33 +48,36 @@ const getClassName = (value, placement) => value !== undefined ? `space-${placem
  *      Spacing on all sides
  */
 
-function Spacing({
+export const makeSpacing = ({ getClassName, makeCustomClasses = noCustomClasses }) => ({
     children,
     className,
     "data-id": dataId,
-    spacing,
+    padding,
+    spacing = padding,
     vertical = spacing,
     horizontal = spacing,
     bottom = vertical,
     left = horizontal,
     right = horizontal,
     top = vertical,
-}) {
-    return (
-        <div
-            className={classnames(
-                className,
-                getClassName(bottom, "bottom"),
-                getClassName(left, "left"),
-                getClassName(right, "right"),
-                getClassName(top, "top"),
-            )}
-            data-id={dataId}
-        >
-            {children}
-        </div>
-    );
-}
+    ...props
+}) => (
+    <div
+        className={classnames(
+            className,
+            getClassName(bottom, "bottom"),
+            getClassName(left, "left"),
+            getClassName(right, "right"),
+            getClassName(top, "top"),
+            makeCustomClasses(props),
+        )}
+        data-id={dataId}
+    >
+        {children}
+    </div>
+);
+
+const Spacing = makeSpacing({ getClassName: spacingGetClassName });
 
 const SpacingPropType = PropTypes.oneOf(Object.values(sizes));
 
@@ -83,7 +88,7 @@ Spacing.propTypes = {
     top: SpacingPropType,
     vertical: SpacingPropType,
     horizontal: SpacingPropType,
-    Spacing: SpacingPropType,
+    spacing: SpacingPropType,
 };
 
 Spacing.defaultProps = {
