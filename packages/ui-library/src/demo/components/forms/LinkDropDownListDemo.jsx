@@ -1,13 +1,13 @@
 
 import React from "react";
-import LinkDropDownList from "../../../components/forms/LinkDropDownList";
-import InputRow from "../../../components/layout/InputRow";
+import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 import HR from "ui-library/lib/components/general/HR";
-import Icon, { iconSizes } from "../../../components/general/Icon";
-import FlexRow, { spacingOptions, alignments } from "../../../components/layout/FlexRow";
-import FormLabel from "../../../components/forms/FormLabel";
-import Stack from "../../../components/layout/Stack";
-import Text from "../../../components/general/Text";
+import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
+import FlexRow, { spacingOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import Stack from "ui-library/lib/components/layout/Stack";
+import Text from "ui-library/lib/components/general/Text";
 /**
 * @name LinkDropDownListDemo
 * @memberof LinkDropDownList
