@@ -1,10 +1,10 @@
-var React = require("react"),
-    _ = require("underscore"),
-    SelectionList = require("../../../components/forms/selection-list/index"),
-    SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel"),
-    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
+import React from "react";
+import _ from "underscore";
+import SelectionList from "ui-library/lib/components/forms/selection-list/index";
+import SelectionFilterLabel from "ui-library/lib/components/forms/SelectionFilterLabel";
+import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 
-import Button from "../../../components/buttons/Button";
+import Button from "ui-library/lib/components/buttons/Button";
 
 const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString.length) === littleString);
 
