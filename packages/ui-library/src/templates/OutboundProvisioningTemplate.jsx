@@ -195,7 +195,7 @@ const AttributesEdit = (props) => {
                         withArrow
                     />
                     <FormDropDownList
-                        flags={["p-stateful"]}
+                        flags={["p-stateful", "use-portal"]}
                         width={InputWidths.MD}
                         required
                         label="PingOne User Attribute"
@@ -226,7 +226,7 @@ const AttributesEdit = (props) => {
                         />
                         <Separator>=</Separator>
                         <FormDropDownList
-                            flags={["p-stateful"]}
+                            flags={["p-stateful", "use-portal"]}
                             width={InputWidths.MD}
                             label="PingOne User Attribute"
                             placeholder="Select an attribute to link"
