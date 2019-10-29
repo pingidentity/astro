@@ -985,6 +985,11 @@ $color-grey-minor-1: $color-neutral-30;
     &--left-align {
         text-align: left;
     }
+
+    &__cancel-link {
+        line-height: 36px;
+        margin-right: $spacing-sm;
+    }
 }
 
 
