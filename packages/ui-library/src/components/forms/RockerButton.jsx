@@ -29,20 +29,16 @@ import { inStateContainer } from "../utils/StateContainer";
 * @class RockerButton
 * @desc Rocker buttons implementation, supports 2 to 4 buttons (current CSS restriction).
 *
-* @param {string} [data-id="rocker-button"]
-*     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
-* @param {boolean} [stateless]
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
+* @param {string} [data-id="rocker-button"]
+*     To define the base "data-id" value for the top-level HTML container.
 * @param {boolean} [disabled=false]
 *     Indicates whether component is disabled.
-*
-* @param {array} labels
-*     Array of label strings to use as button titles.
 * @param {array} [flags]
 *     Set the flag to use Pstateful
+* @param {array} labels
+*     Array of label strings to use as button titles.
 *
 * @param {RockerButton~onValueChange} [onValueChange]
 *     Callback to be triggered when selection changes.
@@ -54,6 +50,12 @@ import { inStateContainer } from "../utils/StateContainer";
 * @param {number} [selectedIndex=0]
 *     The index of the selected label. Is mutually exclusive with "selected".
 *
+* @param {boolean} [stateless]
+*     To enable the component to be externally managed. True will relinquish control to the component's owner.
+*     False or not specified will cause the component to manage state internally.
+* @param {RockerButton.rockerTypes} [type]
+*     Set to CHART for special style.
+*
 * @example
 *      <RockerButton onValueChange={this._changeSubview}
 *                    labels={["Profile", "Groups", "Services"]} />
@@ -64,6 +66,20 @@ import { inStateContainer } from "../utils/StateContainer";
 *          console.log("++ _changeSubview: ",selectedView);
 *      }
 */
+
+/**
+ * @enum {string}
+ * @alias RockerButton.rockerTypes
+ */
+const rockerTypes = {
+    /** default */
+    DEFAULT: "default",
+    /** chart */
+    CHART: "chart",
+    /** chart-small */
+    CHART_SMALL: "chart-small",
+};
+
 
 export default class RockerButton extends React.Component {
 
@@ -125,11 +141,16 @@ export default class RockerButton extends React.Component {
     }
 }
 
+RockerButton.rockerTypes = rockerTypes;
+
 
 class RockerButtonStateless extends React.Component {
     static propTypes = {
-        "data-id": PropTypes.string,
+        autoFocus: PropTypes.bool,
         className: PropTypes.string,
+        "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
+        labelHints: PropTypes.arrayOf(PropTypes.string),
         labels: PropTypes.arrayOf(
             PropTypes.oneOfType([
                 PropTypes.string,
@@ -138,25 +159,23 @@ class RockerButtonStateless extends React.Component {
                     id: PropTypes.string
                 }),
             ])),
-        labelHints: PropTypes.arrayOf(PropTypes.string),
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
         selectedIndex: PropTypes.oneOfType([
             PropTypes.number,
             PropTypes.string
         ]),
-        autoFocus: PropTypes.bool,
-        disabled: PropTypes.bool,
+        type: PropTypes.oneOf(Object.values(rockerTypes)),
     };
 
     static defaultProps = {
-        "data-id": "rocker-button",
+        autoFocus: false,
         className: "",
+        "data-id": "rocker-button",
+        disabled: false,
         onValueChange: _.noop,
         selected: "",
         selectedIndex: 0,
-        autoFocus: false,
-        disabled: false
     };
 
     _handleClick = (label, index) => {
@@ -179,8 +198,12 @@ class RockerButtonStateless extends React.Component {
     };
 
     render() {
-        var className = classnames("rocker-button sel-" + this.buttonPos(), this.props.className, {
-            disabled: this.props.disabled
+        const { type } = this.props;
+
+        const className = classnames("rocker-button sel-" + this.buttonPos(), this.props.className, {
+            disabled: this.props.disabled,
+            "rocker-button--chart-rocker": type === rockerTypes.CHART || type === rockerTypes.CHART_SMALL,
+            "rocker-button--chart-rocker-small": type === rockerTypes.CHART_SMALL,
         });
 
 
