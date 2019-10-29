@@ -1,5 +1,5 @@
 import React from "react";
-import Chip, { chipColors } from "../../../components/layout/Chip";
+import Chip, { chipColors, chipTypes } from "../../../components/layout/Chip";
 import Icon from "../../../components/general/Icon";
 import InputRow from "../../../components/layout/InputRow";
 
@@ -34,6 +34,13 @@ export default function ChipDemo() {
                     >
                         A chip with an icon
                     </Icon>
+                </Chip>
+            </InputRow>
+            <InputRow>
+                <Chip
+                    type={chipTypes.CONDENSED}
+                >
+                    Condensed
                 </Chip>
             </InputRow>
         </div>
