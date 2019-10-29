@@ -1,7 +1,7 @@
-var React = require("react"),
-    _ = require("underscore"),
-    Stateless = require("./v2-stateless"),
-    filterItemsFunction = require("./v2-reducer").filterItemsFunction;
+import React from "react";
+import _ from "underscore";
+import Stateless from "./v2-stateless";
+import { filterItemsFunction } from "./v2-reducer";
 
 /**
  * @name SelectionListStateful
