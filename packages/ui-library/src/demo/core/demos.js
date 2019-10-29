@@ -1234,7 +1234,7 @@ module.exports = [
             {
                 label: "List Template - Ordering",
                 demo: require("../components/templates/ListViewOrderingDemo"),
-                pathToSource: "templates_paginated-list_PaginatedList.jsx.html",
+                pathToSource: "templates_list-view-ordering_ListViewOrdering.jsx.html",
                 fullscreen: true,
                 icon: "circle-o",
             },
