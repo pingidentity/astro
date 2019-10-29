@@ -348,7 +348,7 @@ const PStatefulFormTextArea = inStateContainer([
     },
 ], isEdited)(FormTextAreaStateless);
 
-export default class FormTextArea extends React.Component {
+class FormTextArea extends React.Component {
     static propTypes = {
         stateless: PropTypes.bool,
         flags: flagsPropType,
