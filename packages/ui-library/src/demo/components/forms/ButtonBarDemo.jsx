@@ -1,7 +1,7 @@
 
 import React from "react";
-import ButtonBar from "../../../components/forms/ButtonBar";
-import Button from "../../../components/buttons/Button";
+import ButtonBar, { buttonAlignments } from "ui-library/lib/components/forms/ButtonBar";
+import Button from "ui-library/lib/components/buttons/Button";
 
 /**
 * @name ButtonBarDemo
@@ -12,6 +12,7 @@ class ButtonBarDemo extends React.Component {
     static flags = [ "use-portal", "fix-discard-button" ];
 
     state = {
+        leftAlign: false,
         saving: false,
         showBar: true,
         statusText: "-",
@@ -77,6 +78,12 @@ class ButtonBarDemo extends React.Component {
         }));
     };
 
+    _toggleAlignment = () => this.setState(
+        ({ leftAlign }) => ({
+            leftAlign: !leftAlign
+        })
+    );
+
     _openCancelTooltip = () => {
         this.setState({ showCancelTooltip: true });
     };
@@ -117,6 +124,10 @@ class ButtonBarDemo extends React.Component {
                 <br /><br />
                 <button onClick={this._toggleUnfix}>Unfix button bar</button>
                 <br /><br />
+                <Button onClick={this._toggleAlignment}>
+                    Change button alignment
+                </Button>
+                <br /><br />
                 Demo status: &nbsp; <i>{this.state.statusText}</i>
 
                 <ButtonBar
@@ -136,6 +147,8 @@ class ButtonBarDemo extends React.Component {
                     saveDisabled={this.state.saveDisabled}
                     unfixed={this.state.unfixed}
                     saveDisabledText={this.state.saveDisabledText}
+
+                    alignment={this.state.leftAlign ? buttonAlignments.LEFT : buttonAlignments.RIGHT}
 
                     cancelTooltip={{
                         title: "Cancel Confirmation",
