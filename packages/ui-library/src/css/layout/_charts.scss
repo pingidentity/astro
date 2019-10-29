@@ -41,7 +41,23 @@
     &.sel-0 > button:nth-of-type(1),
     &.sel-1 > button:nth-of-type(2),
     &.sel-2 > button:nth-of-type(3),
-    &.sel-3 > button:nth-of-type(4) {
+    &.sel-3 > button:nth-of-type(4),
+    &.sel-4 > button:nth-of-type(5),
+    &.sel-5 > button:nth-of-type(6),
+    &.sel-6 > button:nth-of-type(7),
+    &.sel-7 > button:nth-of-type(8),
+    &.sel-8 > button:nth-of-type(9),
+    &.sel-9 > button:nth-of-type(10),
+    &.sel-10 > button:nth-of-type(11),
+    &.sel-11 > button:nth-of-type(12),
+    &.sel-12 > button:nth-of-type(13),
+    &.sel-13 > button:nth-of-type(14),
+    &.sel-14 > button:nth-of-type(15),
+    &.sel-15 > button:nth-of-type(16),
+    &.sel-16 > button:nth-of-type(17),
+    &.sel-17 > button:nth-of-type(18),
+    &.sel-18 > button:nth-of-type(19),
+    &.sel-19 > button:nth-of-type(20) {
         transition: $transition-timing color ease-out;
 
         background-color: transparent;
@@ -51,7 +67,23 @@
     &.sel-0 > .help-tooltip:nth-of-type(1),
     &.sel-1 > .help-tooltip:nth-of-type(2),
     &.sel-2 > .help-tooltip:nth-of-type(3),
-    &.sel-3 > .help-tooltip:nth-of-type(4) {
+    &.sel-3 > .help-tooltip:nth-of-type(4),
+    &.sel-4 > .help-tooltip:nth-of-type(5),
+    &.sel-5 > .help-tooltip:nth-of-type(6),
+    &.sel-6 > .help-tooltip:nth-of-type(7),
+    &.sel-7 > .help-tooltip:nth-of-type(8),
+    &.sel-8 > .help-tooltip:nth-of-type(9),
+    &.sel-9 > .help-tooltip:nth-of-type(10),
+    &.sel-10 > .help-tooltip:nth-of-type(11),
+    &.sel-11 > .help-tooltip:nth-of-type(12),
+    &.sel-12 > .help-tooltip:nth-of-type(13),
+    &.sel-13 > .help-tooltip:nth-of-type(14),
+    &.sel-14 > .help-tooltip:nth-of-type(15),
+    &.sel-15 > .help-tooltip:nth-of-type(16),
+    &.sel-16 > .help-tooltip:nth-of-type(17),
+    &.sel-17 > .help-tooltip:nth-of-type(18),
+    &.sel-18 > .help-tooltip:nth-of-type(19),
+    &.sel-19 > .help-tooltip:nth-of-type(20) {
         .help-tooltip-target {
             button {
                 transition: $transition-timing color ease-out;
@@ -65,12 +97,27 @@
     &.sel-0,
     &.sel-1,
     &.sel-2,
-    &.sel-3 {
+    &.sel-3,
+    &.sel-4,
+    &.sel-5,
+    &.sel-6,
+    &.sel-7,
+    &.sel-8,
+    &.sel-9,
+    &.sel-10,
+    &.sel-11,
+    &.sel-12,
+    &.sel-13,
+    &.sel-14,
+    &.sel-15,
+    &.sel-16,
+    &.sel-17,
+    &.sel-18,
+    &.sel-19 {
         &:after {
             transition: $transition-timing left ease-out;
 
             content: '';
-            //z-index: $zindex__elevated;
             position: absolute;
             height: $button-height;
             width: $button-width;
@@ -83,11 +130,26 @@
     &.sel-1 button:nth-of-type(2),
     &.sel-2 button:nth-of-type(3),
     &.sel-3 button:nth-of-type(4),
-    &.sel-4 button:nth-of-type(5) {
+    &.sel-4 button:nth-of-type(5),
+    &.sel-5 button:nth-of-type(6),
+    &.sel-6 button:nth-of-type(7),
+    &.sel-7 button:nth-of-type(8),
+    &.sel-8 button:nth-of-type(9),
+    &.sel-9 button:nth-of-type(10),
+    &.sel-10 button:nth-of-type(11),
+    &.sel-11 button:nth-of-type(12),
+    &.sel-12 button:nth-of-type(13),
+    &.sel-13 button:nth-of-type(14),
+    &.sel-14 button:nth-of-type(15),
+    &.sel-15 button:nth-of-type(16),
+    &.sel-16 button:nth-of-type(17),
+    &.sel-17 button:nth-of-type(18),
+    &.sel-18 button:nth-of-type(19),
+    &.sel-19 button:nth-of-type(20) {
         background: transparent;
     }
 
-    @for $i from 0 through 3 {
+    @for $i from 0 through 20 {
         &.sel-#{$i} {
             &:after {
                 left: 1px + $i*$button-width;
@@ -115,7 +177,25 @@
     &.sel-0,
     &.sel-1,
     &.sel-2,
-    &.sel-3 {
+    &.sel-3,
+    &.sel-4,
+    &.sel-5,
+    &.sel-6,
+    &.sel-7,
+    &.sel-8,
+    &.sel-9,
+    &.sel-10,
+    &.sel-11,
+    &.sel-12,
+    &.sel-13,
+    &.sel-14,
+    &.sel-15,
+    &.sel-16,
+    &.sel-17,
+    &.sel-18,
+    &.sel-19,
+    &.sel-20
+     {
         &:after {
 
             content: '';
@@ -125,7 +205,7 @@
         }
     }
 
-    @for $i from 0 through 3 {
+    @for $i from 0 through 20 {
         &.sel-#{$i} {
             &:after {
                 left: 1px + $i*$button-width;

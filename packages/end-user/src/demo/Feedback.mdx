@@ -1,6 +1,6 @@
 import Button, { ButtonTypes } from '../components/Button';
 import ButtonSet from '../components/ButtonSet';
-import Card from '../components/Card';
+import Card, { CardTypes } from '../components/Card';
 import Checkbox from '../components/Checkbox';
 import Dropdown from '../components/Dropdown';
 import Feedback from '../components/Feedback';
@@ -18,7 +18,7 @@ import SerializedData from '../components/SerializedData';
 import Spinner from '../components/Spinner';
 import Stack from '../components/Stack';
 import StepLink from '../components/StepLink';
-import TextBlock from '../components/TextBlock';
+import TextBlock, { alignments } from '../components/TextBlock';
 import TextStyle from '../components/TextStyle';
 import Tooltip from '../components/Tooltip';
 import TwoSidedDemo from '../components/stateful/TwoSidedDemo';
@@ -261,5 +261,26 @@ to the `.two-sided` div.
                 Authentication flow does not exist: 48f041b4-9fb0-4532-bae6-3bf0241419de
             </TextStyle>
         </TextBlock>
+    </Card>
+</ComponentDemo>
+
+### Error Screen
+
+<ComponentDemo>
+    <Card error>
+        <Logo src="ping-logo.svg"/>
+        <IconFeedback type="hourGlass" bold>Trial Expired</IconFeedback>
+        <TextBlock size="large">To extend your trial, please contact us.</TextBlock>
+        <Button label="Contact Us" type={ButtonTypes.PRIMARY}/>
+    </Card>
+</ComponentDemo>
+
+### Account Inactive Screen
+
+<ComponentDemo>
+    <Card error>
+        <Logo src="jj-logo.png"/>
+            <IconFeedback type="safe" bold>Account Inactive</IconFeedback>
+        <TextBlock size="large">This service is no longer active.</TextBlock>
     </Card>
 </ComponentDemo>

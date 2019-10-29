@@ -49,7 +49,7 @@ class PopoverMenuBase extends PopoverBase {
 
     renderItem = (item, handleClick, index) => (
         <button
-            data-id={`${this.props["data-id"]}-button-${index}`}
+            data-id={`${this.props["data-id"]}-button-${_.isString(item.label) ? item.label.toLowerCase().replace(/[^0-9a-z]/gi, "") : index}`}
             key={item.label}
             className="button-menu__button"
             onClick={handleClick}

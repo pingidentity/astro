@@ -94,16 +94,16 @@ const popupTypes = {
     ALERT: "alert"
 };
 
-const detailsWidth = {
+const detailsWidths = {
     MD: "medium",
     LG: "large"
 };
 
 const getDetailsWidth = width => {
     switch (width) {
-        case detailsWidth.LG:
+        case detailsWidths.LG:
             return "details-tooltip-display--large";
-        case detailsWidth.MD:
+        case detailsWidths.MD:
         default:
             return "details-tooltip-display";
     }
@@ -135,7 +135,7 @@ class DetailsTooltipStateless extends React.Component {
         primaryLabels: PropTypes.array,
         cancelLabel: PropTypes.string,
         flags: flagsPropType,
-        width: PropTypes.oneOf(Object.values(detailsWidth)),
+        width: PropTypes.oneOf(Object.values(detailsWidths)),
     };
 
     static defaultProps = {
@@ -148,7 +148,7 @@ class DetailsTooltipStateless extends React.Component {
         hideOnClick: false,
         type: popupTypes.BASIC,
         placement: tooltipPlacements.BOTTOM,
-        width: detailsWidth.MD
+        width: detailsWidths.MD
     };
 
     static popupTypes = popupTypes;
@@ -468,6 +468,6 @@ DetailsTooltip.positionStyles = {
     BOTTOM: "bottom"
 };
 
-DetailsTooltip.detailsWidth = detailsWidth;
+DetailsTooltip.detailsWidths = detailsWidths;
 
 export default DetailsTooltip;

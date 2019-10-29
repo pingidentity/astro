@@ -7,7 +7,7 @@ import TileSelector from "ui-library/lib/components/buttons/TileSelector";
 import Aside from "ui-library/lib/components/layout/Aside";
 import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
 import Stack from "ui-library/lib/components/layout/Stack";
-import Text from "ui-library/lib/components/general/Text";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 import Modal from "ui-library/lib/components/general/Modal";
 import Section from "ui-library/lib/components/general/Section";
 import CodeView from "ui-library/lib/components/general/CodeView";
@@ -158,10 +158,10 @@ const ChooseTemplate = ({
             modalTitle="Template Configuration"
             maximize
         >
-            <h3 className="text-section-title">Public Application</h3>
-            <Section title="Client"><CodeView value={code} /></Section>
-            <Section title="OIDC Policy"><CodeView value={code} /></Section>
-            <Section title="Access Token Manager"><CodeView value={code} /></Section>
+            <Text type={textTypes.SECTIONTITLE}>Public Application</Text>
+            <Section title="Client" flags={["p-stateful"]}><CodeView value={code} /></Section>
+            <Section title="OIDC Policy" flags={["p-stateful"]}><CodeView value={code} /></Section>
+            <Section title="Access Token Manager" flags={["p-stateful"]}><CodeView value={code} /></Section>
         </Modal>
     </Step>
 );

@@ -51,9 +51,10 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
         background-color: $color-midnight;
         display: inline-block;
         position: absolute;
-        top: 12px;
+        top: 50%;
         left: 7px;
 
+        transform: translateY(-50%);
         border-radius: 1.5px;
     }
 }
@@ -68,10 +69,6 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
     .select-list {
         @include option-list;
 
-        div {
-            display: inline-block;
-        }
-
         // each item in dropdown
         .select-option,
         .none-option {
@@ -84,6 +81,11 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
             &:hover,
             &.highlighted {
                 @include option-list__item--active;
+                .text-parent-label,
+                .text-value {
+                    cursor: pointer;
+                    color: $color-white;
+                }
             }
             &.disabled {
                 @include option-list__item--disabled;
@@ -124,9 +126,15 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
         }
         .selected {
             @include option-list__item--selected;
+            .text-parent-label {
+                color: $color-strong-neutral-10;
+            }
         }
         .none-option {
             //@include text-no-value;
+        }
+        label {
+            text-transform: none;
         }
     }
 }

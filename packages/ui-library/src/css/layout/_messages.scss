@@ -305,6 +305,10 @@
         }
     }
 
+    .inline-message-text {
+        @include break-word;
+    }
+
     &.warning,
     &.success,
     &.notice,

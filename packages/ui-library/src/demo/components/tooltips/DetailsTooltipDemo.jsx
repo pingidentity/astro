@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "underscore";
-import DetailsTooltip, { detailsWidth } from "ui-library/lib/components/tooltips/DetailsTooltip";
+import DetailsTooltip, { detailsWidths } from "ui-library/lib/components/tooltips/DetailsTooltip";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
@@ -309,7 +309,7 @@ class DetailsTooltipDemo extends React.Component {
                     title="Tooltip Title"
                     open={this.state.open9}
                     onToggle={this._handleToggle(9)}
-                    width={detailsWidth.LG}
+                    width={detailsWidths.LG}
                 >
 
                     <p>

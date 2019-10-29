@@ -2,6 +2,7 @@
 
 exports[`LeftNavBar data-id's don't change 1`] = `
 Array [
+  "left-nav-bar",
   "nav-top-content",
   "a thing",
   "a thing-label",

@@ -14,7 +14,16 @@ class EnvironmentSelector extends React.Component {
         "data-id": PropTypes.string,
         onEnvironmentChange: PropTypes.func,
         onNewEnvironment: PropTypes.func,
-        options: PropTypes.array,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.oneOfType([
+                    PropTypes.number,
+                    PropTypes.string
+                ]),
+                label: PropTypes.string,
+                value: PropTypes.string
+            })
+        ),
         environment: PropTypes.string,
         newEnvironmentLabel: PropTypes.string,
         flags: flagsPropType,

@@ -9,7 +9,12 @@ class MarketSelector extends React.Component {
         "data-id": PropTypes.string,
         onMarketChange: PropTypes.func,
         market: PropTypes.string,
-        options: PropTypes.arrayOf(PropTypes.object),
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string,
+                label: PropTypes.string,
+            })
+        ),
         flags: flagsPropType,
     };
 

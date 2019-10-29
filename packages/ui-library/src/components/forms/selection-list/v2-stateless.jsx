@@ -20,6 +20,11 @@ import { filterItemsFunction } from "./v2-reducer";
 export default class SelectionListStateless extends React.Component {
     static displayName = "SelectionListStateless";
 
+    state = {
+        contentHeight: null,
+        contentWidth: null,
+    }
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -177,6 +182,15 @@ export default class SelectionListStateless extends React.Component {
         ? filterItemsFunction(this.props.items, this.props.queryString)
         : this.props.items;
 
+    componentDidMount() {
+        const height = this.selectionElement.clientHeight;
+        const width = this.selectionElement.clientWidth;
+        this.setState({
+            contentHeight: height,
+            contentWidth: width,
+        });
+    }
+
     render() {
         const {
             "data-id": dataId,
@@ -196,7 +210,15 @@ export default class SelectionListStateless extends React.Component {
         const visibleItems = this.props.showOnlySelected ? this._filterVisible() : this._getItems();
 
         return (
-            <div data-id={dataId} className={className}>
+            <div
+                data-id={dataId}
+                className={className}
+                ref={(selectionElement) => this.selectionElement = selectionElement}
+                style={{
+                    width: this.state.contentWidth,
+                    height: this.state.contentHeight,
+                }}
+            >
                 {requiredText && (
                     <div data-id={dataId + "-required-message"} className="required-message">
                         <span>{requiredText}</span>

@@ -1,5 +1,6 @@
 import React from "react";
 
+import Button from "ui-library/lib/components/buttons/Button";
 import UserNav from "ui-library/lib/components/end-user/UserNav";
 import DeviceTable from "ui-library/lib/components/end-user/DeviceTable";
 import CardModal from "ui-library/lib/components/end-user/CardModal";
@@ -109,7 +110,7 @@ class AuthPage extends React.Component {
         return (
             <div>
                 <PageHeader title="Methods" />
-                <button className="add" onClick={this._toggleModal}>Add Method</button>
+                <Button iconName="add" onClick={this._toggleModal} label="Add Method"/>
                 <DeviceTable
                     devices={
                         [

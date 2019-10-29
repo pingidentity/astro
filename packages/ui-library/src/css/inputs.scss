@@ -208,6 +208,15 @@ label {
         input {
             width: 100%;
             padding: 4px 15px 3px;
+
+            // Hide autofill button in Safari
+            &::-webkit-contacts-auto-fill-button,
+            &::-webkit-credentials-auto-fill-button {
+            visibility: hidden;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+            }
         }
         &.search {
             .input-container {
@@ -1724,7 +1733,7 @@ input[type=file] {
     }
     &.show-selection-options {
         width: 220px;
-        padding-bottom: 5px;
+        padding-bottom: 30px;
     }
     &.fluid-width {
         max-width: 400px;
@@ -1745,6 +1754,13 @@ input[type=file] {
 .list-input__bottom-links {
     border-top: 1px solid $color-input-fill;
     padding: 5px 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    background: $color-white;
+    padding: $spacing-xs 0;
+    text-align: center;
 
     .option,
     a {
@@ -2216,7 +2232,7 @@ input[type=file] {
         left: 0;
         right: $message-input-offset;
         display: none;
-        z-index: $zindex__elevated;
+        z-index: $zindex__popover;
         padding: 15px;
         box-sizing: border-box;
         min-width: 169px;

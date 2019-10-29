@@ -74,6 +74,10 @@
     max-width: $popup-width;
     word-break: break-word;
 
+    &--large {
+        max-width: 70%;
+    }
+
     .loader {
         position: relative;
         display: inline-block;

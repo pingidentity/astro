@@ -183,7 +183,7 @@ describe("FormTextField v4", function () {
         });
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
-        expect(input.getAttribute("autoComplete")).toBe("nope");
+        expect(input.getAttribute("autoComplete")).toBe("new-password");
     });
 
     it("accepts arbitary string for autocomplete", function () {

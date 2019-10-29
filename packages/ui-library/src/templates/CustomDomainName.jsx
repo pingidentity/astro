@@ -1,30 +1,30 @@
 
 import React, { Component } from "react";
-import Button, { buttonTypes } from "../components/buttons/Button";
-import ButtonBar from "../components/forms/ButtonBar";
-import CalloutBox from "../components/layout/CalloutBox";
-import CopyField from "../components/utils/CopyField";
-import ColorPicker from "../components/general/ColorPicker";
-import FileInput from "../components/forms/FileInput";
-import FileUpload from "../components/forms/file-upload";
-import FormTextField from "../components/forms/FormTextField";
-import FormLabel from "../components/forms/FormLabel";
-import FormTextArea from "../components/forms/FormTextArea";
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
+import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
+import CopyField from "ui-library/lib/components/utils/CopyField";
+import ColorPicker from "ui-library/lib/components/general/ColorPicker";
+import FileInput from "ui-library/lib/components/forms/FileInput";
+import FileUpload from "ui-library/lib/components/forms/file-upload";
+import FormTextField from "ui-library/lib/components/forms/FormTextField";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import FormTextArea from "ui-library/lib/components/forms/FormTextArea";
 import FlexRow,
-{ justifyOptions, spacingOptions, alignments, flexDirectionOptions } from "../components/layout/FlexRow";
-import InputRow from "../components/layout/InputRow";
-import { InputWidths } from "../components/forms/InputWidths";
-import InlineMessage from "../components/general/InlineMessage";
-import Layout from "../components/general/ColumnLayout";
-import Link, { linkTypes } from "../components/general/Link";
-import Modal from "../components/general/Modal";
-import ModalButton from "../components/general/ModalButton";
-import MessageButton, { statuses } from "../components/buttons/MessageButton";
-import PageHeader from "../components/general/PageHeader";
-import PageSection from "../components/layout/PageSection";
-import Stack from "../components/layout/Stack";
-import Text from "../components/general/Text";
-import ButtonGroup from "../components/layout/ButtonGroup";
+{ justifyOptions, spacingOptions, alignments, flexDirectionOptions } from "ui-library/lib/components/layout/FlexRow";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import { InputWidths } from "ui-library/lib/components/forms/InputWidths";
+import InlineMessage from "ui-library/lib/components/general/InlineMessage";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import Link, { linkTypes } from "ui-library/lib/components/general/Link";
+import Modal from "ui-library/lib/components/general/Modal";
+import ModalButton from "ui-library/lib/components/general/ModalButton";
+import MessageButton, { statuses } from "ui-library/lib/components/buttons/MessageButton";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import Stack from "ui-library/lib/components/layout/Stack";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 
 
 
@@ -50,6 +50,7 @@ export default class CustomDomainName extends Component {
         editModal: false,
         expanded: false,
         requiredValue: "",
+        canonical: "611a17db-81cc-45d5-ad2b-6950472e851a.edge1.pingone.com",
         saveDisabled: true,
         selectedStatus: statuses.DEFAULT,
         statusText: "Save",
@@ -196,7 +197,7 @@ export default class CustomDomainName extends Component {
                     <CalloutBox>
                         <InputRow>
                             <FlexRow alignment={alignments.CENTER} flexDirection={flexDirectionOptions.COLUMN}>
-                                <Text type="primary">
+                                <Text type={textTypes.PRIMARY}>
                             Add this to your DNS configuration:
                                 </Text>
                                 <CopyField
@@ -368,7 +369,7 @@ export default class CustomDomainName extends Component {
                     </Text>
                     <ButtonGroup>
                         <Button onClick={this._toggleClose}>No</Button>
-                        <Button onClick={this._handleDiscard} type="primary">Yes</Button>
+                        <Button onClick={this._handleDiscard} type={buttonTypes.PRIMARY}>Yes</Button>
                     </ButtonGroup>
                 </ModalButton>
             );
@@ -386,7 +387,7 @@ export default class CustomDomainName extends Component {
                     </Text>
                     <ButtonGroup>
                         <Button onClick={this._toggleClose}>No</Button>
-                        <Button onClick={this._handleDiscard} type="primary">Yes</Button>
+                        <Button onClick={this._handleDiscard} type={buttonTypes.PRIMARY}>Yes</Button>
                     </ButtonGroup>
                 </Modal>
             );
@@ -398,14 +399,26 @@ export default class CustomDomainName extends Component {
             return ( <FileInput
                 fileName={this.state.requiredValue &&
                         <FlexRow spacing={spacingOptions.SM}>
-                            <span>{this.state.requiredValue}</span>
+                            <Stack gap="XS">
+                                <span>{this.state.requiredValue}</span>
+                                <Text>{this.state.canonical}</Text>
+                            </Stack>
                         </FlexRow>}
                 selectedTitle="Domain Name"
                 fileData={(
                     <FlexRow spacing={spacingOptions.SM}>
                         <span>
                             SSL Certificate Valid &nbsp;
-                            <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
+                            <Text
+                                inline type={textTypes.VALUE}
+                            >
+                            04-15
+                            </Text> to
+                            <Text
+                                inline type={textTypes.VALUE}
+                            >
+                                09-17
+                            </Text>
                         </span>
                         <Link onClick={this._handleEdit}>Edit</Link>
                         {this.renderModalButton()}
@@ -424,7 +437,10 @@ export default class CustomDomainName extends Component {
                     <FileInput
                         fileName={this.state.requiredValue &&
                     <FlexRow spacing={spacingOptions.SM}>
-                        <span>{this.state.requiredValue}</span>
+                        <Stack gap="XS">
+                            <span>{this.state.requiredValue}</span>
+                            <Text>{this.state.canonical}</Text>
+                        </Stack>
                     </FlexRow>}
                         selectedTitle="Domain Name"
                         fileData={(

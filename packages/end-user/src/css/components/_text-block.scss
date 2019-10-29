@@ -30,7 +30,22 @@
         margin-bottom: 15px;
     }
 
-    &--xxlarge {
+    &--margin-sm {
+        margin-bottom: $spacing-xs;
+    }
+
+    &--xxlarge, 
+    &--margin-xx {
         margin-bottom: $spacing-xx;
     }
+
+    &--left {
+        text-align: left;
+    }
+
+    &--right {
+        text-align: right;
+    }
 }
+
+

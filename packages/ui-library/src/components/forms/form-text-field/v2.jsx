@@ -131,7 +131,7 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
 *    Specifies the width of the input.
 *
-* @param {boolean|string} [autoComplete="nope"]
+* @param {boolean|string} [autoComplete="new-password"]
 *     Whether or not the field will support autocomplete.
 * @param {boolean} [autoFocus=false]
 *     Whether or not to auto-focus the element.
@@ -262,7 +262,7 @@ class Stateless extends React.Component {
     };
 
     static defaultProps = {
-        autoComplete: "nope",
+        autoComplete: "new-password",
         autoFocus: false,
         "data-id": "form-text-field",
         disabled: false,
@@ -435,7 +435,7 @@ class Stateless extends React.Component {
         } else if (this.props.autoComplete) {
             return "on";
         } else {
-            return "nope";
+            return "new-password";
         }
     }
 

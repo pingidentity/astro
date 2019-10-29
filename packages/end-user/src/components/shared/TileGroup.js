@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import FlexRow, { alignments } from "../layout/FlexRow";
+import FlexRow, { alignments } from '../../components/shared/FlexRow';
 
 const selectorTypes = {
     ROW: "row",

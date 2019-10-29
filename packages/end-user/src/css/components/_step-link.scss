@@ -9,7 +9,7 @@
 
         &:after {
             content: '';
-            background: url('images/caret-blue.svg') center no-repeat;
+            background: url('../icons/caret-blue.svg') center no-repeat;
             padding: $spacing-xs 0;
             position: absolute;
             height: $caret-height;

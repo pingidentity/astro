@@ -1,0 +1,95 @@
+pipeline {
+  agent {
+    label 'ui-library-cdn-deploy'
+  }
+  stages {
+    stage('run-tests') {
+      steps {
+        dir("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
+            echo "Running end-user linting and tests"
+            sh "npm install"
+            //sh "npm run lint"
+            //sh "npm run coverage"
+          }
+        }
+      }
+    }
+    stage('version, tag and commit') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
+            echo "Incrementing the version: ${params.VERSION_TYPE}"
+            script {
+              env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
+              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","")
+              env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
+            }
+            echo """
+              release version: ${env.RELEASE_VERSION}
+              git tag: ${env.GIT_RELEASE_TAG}
+            """
+            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+              withCredentials([
+                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+              ]){
+                sh  """
+                  git add package.json
+                  git config --global user.email 'devtools+jenkins@pingidentity.com'
+                  git config --global user.name 'devtools-jenkins'
+                  git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+                """
+              }
+            }
+          }
+        }
+      }
+    }
+    stage('npm-publish') {
+      steps {
+        dir("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
+            echo "Building & publishing"
+            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+              sh "npm run dist"
+              sh "cd dist && npm publish"
+            }
+          }
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "packages/end-user/cdn/**", fingerprint: true
+        }
+      }
+    }
+    stage('cdn deploy') {
+      steps {
+        dir("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
+            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/", file: "cdn/")
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  post {
+    success {
+       slackSend channel: '#ux-deployments', message: ":verynice: Great Success! End-User ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
+       slackSend channel: '#ui-announcements', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+       slackSend channel: '#ui-coalition', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+    }
+    unsuccessful {
+       slackSend channel: '#ux-deployments', message: "@here ${BUILD_URL} failed!", color: "#a31300"
+    }
+
+    cleanup {
+        cleanWs()
+    }
+  }
+}

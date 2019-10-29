@@ -3,13 +3,16 @@ import React from "react";
 import LinkDropDownList from "../../../components/forms/LinkDropDownList";
 import InputRow from "../../../components/layout/InputRow";
 import HR from "ui-library/lib/components/general/HR";
-
+import Icon, { iconSizes } from "../../../components/general/Icon";
+import FlexRow, { spacingOptions, alignments } from "../../../components/layout/FlexRow";
+import FormLabel from "../../../components/forms/FormLabel";
+import Stack from "../../../components/layout/Stack";
+import Text from "../../../components/general/Text";
 /**
 * @name LinkDropDownListDemo
 * @memberof LinkDropDownList
 * @desc A demo for LinkDropDownList
 */
-
 var _options = [
     { label: "One is the loneliest number", value: "1" },
     { label: "Two", value: "2" },
@@ -22,25 +25,59 @@ var _options = [
     { label: "Nine", value: "9" },
     { label: "Ten", value: "10" }
 ];
-
+const nodeOptions = [
+    { label:
+        <FormLabel value="Premier">
+            <FlexRow spacing={spacingOptions.MD} alignment={alignments.CENTER}>
+                <Stack gap="XS">
+                    <Text type="value">Renewed 2019-06-13</Text>
+                    <Text type="value">Expires 2022-12-13</Text>
+                </Stack>
+                <Stack gap="XS">
+                    <Icon iconName="globe" iconSize={iconSizes.LG}>7/10</Icon>
+                </Stack>
+            </FlexRow>
+        </FormLabel>, value: "1" },
+    { label:
+            <FormLabel value="Trial">
+                <FlexRow spacing={spacingOptions.MD} alignment={alignments.CENTER}>
+                    <Stack gap="XS">
+                        <Text type="value">Created 2019-06-13</Text>
+                        <Text type="value">Expires 2022-12-13</Text>
+                    </Stack>
+                    <Stack gap="XS">
+                        <Icon iconName="globe" iconSize={iconSizes.LG}>4/5</Icon>
+                    </Stack>
+                </FlexRow>
+            </FormLabel>, value: "2" },
+    { label:
+                <FormLabel value="Global">
+                    <FlexRow spacing={spacingOptions.MD} alignment={alignments.CENTER}>
+                        <Stack gap="XS">
+                            <Text type="value">Renewed 2019-06-13</Text>
+                            <Text type="value">Expires 2022-12-13</Text>
+                        </Stack>
+                        <Stack gap="XS">
+                            <Icon iconName="globe" iconSize={iconSizes.LG}>11/15</Icon>
+                        </Stack>
+                    </FlexRow>
+                </FormLabel>, value: "2" }
+];
 class LinkDropDownListDemo extends React.Component {
     state = {
         open: false,
         selectedOption: _options[0]
     };
-
     _handleToggle = () => {
         this.setState({
             open: !this.state.open
         });
     };
-
     _handleClick = (selectedOption) => {
         this.setState({
             selectedOption: selectedOption
         });
     };
-
     render() {
         return (
             <div>
@@ -77,9 +114,19 @@ class LinkDropDownListDemo extends React.Component {
                     }}
                     className="left"
                 />
+                <HR />
+                <LinkDropDownList
+                    stateless={false}
+                    closeOnClick={true}
+                    label={<Icon inline iconName="edit"/>}
+                    options={nodeOptions}
+                    initialState={{
+                        selectedOption: nodeOptions[0]
+                    }}
+                    labelArrowPosition={LinkDropDownList.labelArrowPositions.NONE}
+                />
             </div>
         );
     }
 }
-
 module.exports = LinkDropDownListDemo;

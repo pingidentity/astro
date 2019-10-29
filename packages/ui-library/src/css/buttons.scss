@@ -401,7 +401,21 @@ button,
     &.sel-2 button:nth-of-type(3),
     &.sel-3 button:nth-of-type(4),
     &.sel-4 button:nth-of-type(5),
-    &.sel-4 button:nth-of-type(6) {
+    &.sel-5 button:nth-of-type(6),
+    &.sel-6 button:nth-of-type(7),
+    &.sel-7 button:nth-of-type(8),
+    &.sel-8 button:nth-of-type(9),
+    &.sel-9 button:nth-of-type(10),
+    &.sel-10 button:nth-of-type(11),
+    &.sel-11 button:nth-of-type(12),
+    &.sel-12 button:nth-of-type(13),
+    &.sel-13 button:nth-of-type(14),
+    &.sel-14 button:nth-of-type(15),
+    &.sel-15 button:nth-of-type(16),
+    &.sel-16 button:nth-of-type(17),
+    &.sel-17 button:nth-of-type(18),
+    &.sel-18 button:nth-of-type(19),
+    &.sel-19 button:nth-of-type(20) {
         transition: $transition;
         background: $color-timberwolf;
     }

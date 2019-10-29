@@ -26,7 +26,8 @@ module.exports = {
     ],
     "setupFiles": [
         "<rootDir>/src/util/polyfills.js",
-        "<rootDir>/src/devUtil/enzymeSetup.js"
+        "<rootDir>/src/devUtil/enzymeSetup.js",
+        "<rootDir>/src/devUtil/jestSetup.js"
     ],
     "coverageThreshold": {
         "global": {

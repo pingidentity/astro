@@ -318,10 +318,6 @@ describe("FormTimeZone v4", function () {
             onToggle: jest.fn(),
             onValueChange: jest.fn()
         });
-        global.getSelection = jest.fn();
-        global.getSelection.mockReturnValue({
-            toString: () => "",
-        });
         const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTimeZone._statelessComponent);
         const handler = stateless._onGlobalClick;
 

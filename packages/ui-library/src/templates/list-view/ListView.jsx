@@ -21,6 +21,7 @@ import InfiniteScroll from "ui-library/lib/components/list/InfiniteScroll";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
 import Link from "ui-library/lib/components/general/Link";
+import { linkTypes } from "ui-library/lib/components/general/Anchor";
 import PageGroup from "ui-library/lib/components/layout/PageGroup";
 import StretchContent from "ui-library/lib/components/layout/StretchContent";
 import togglesOpen from "ui-library/lib/util/behaviors/togglesOpen";
@@ -141,7 +142,7 @@ const CustomFilterControl = ({
                     stateless={false}
                 />
             ]}
-            <Link type="remove" onClick={onRemove} />
+            <Link type={linkTypes.REMOVE} onClick={onRemove} />
         </InputRow>
     );
 };
@@ -338,7 +339,7 @@ const FilterControls = ({
                                         />
                                         {customFilterList.length > 1 &&
                                             <Link
-                                                type="remove"
+                                                type={linkTypes.REMOVE}
                                                 onClick={handleRemoveFilter}
                                             />
                                         }
@@ -349,12 +350,12 @@ const FilterControls = ({
                         {
                             customFilterList.length < 1 || customFilterList[customFilterList.length - 1].type
                                 ? <div>
-                                    <Link data-id="add-filter-link" onClick={addCustomFilter} type="add">
+                                    <Link data-id="add-filter-link" onClick={addCustomFilter} type={linkTypes.ADD}>
                                         Add Filter
                                     </Link>
                                 </div>
                                 : <div>
-                                    <Link disabled={true} type="add">Add Filter</Link>
+                                    <Link disabled={true} type={linkTypes.ADD}>Add Filter</Link>
                                 </div>
                         }
                     </div>

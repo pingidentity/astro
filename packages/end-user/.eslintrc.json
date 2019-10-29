@@ -24,7 +24,7 @@
         "react/jsx-indent-props": ["error", 4, { "SwitchCase": 1 }],
         "react/prop-types": ["error", { "ignore": ["children", "className"]}],
         "react/require-default-props": 0,
-        "react/no-multi-comp": 0,
+        "react/no-multi-comp": 0
     },
     "settings": {
         "import/resolver": {
