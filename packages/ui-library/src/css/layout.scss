@@ -381,7 +381,7 @@ $color-grey-minor-1: $color-neutral-30;
                 margin: -1px 0 0 0;
                 left: 15px;
 
-                transform: rotate( 90deg);
+                transform: rotate(90deg);
             }
         }
     }
@@ -445,8 +445,7 @@ $color-grey-minor-1: $color-neutral-30;
                 }
             }
             &.highlighted .title {
-                transition: padding 0;
-                transition: background-color 0.2s;
+                transition: padding 0, background-color 0.2s;
                 @include font-pn-semibold;
                 padding-right: 15px;
                 background-color: $color-grey-main;
@@ -724,7 +723,7 @@ $color-grey-minor-1: $color-neutral-30;
     &.open {
         &.left:before,
         &.right:after {
-            transform: rotate( -180deg);
+            transform: rotate(-180deg);
             transition: (all 0.2s linear);
         }
     }
@@ -751,7 +750,7 @@ $color-grey-minor-1: $color-neutral-30;
         font-size: 10px;
         font-family: $icon-font;
 
-        transform: rotate( 90deg);
+        transform: rotate(90deg);
     }
 }
 
@@ -768,7 +767,7 @@ $color-grey-minor-1: $color-neutral-30;
         font-size: 6px;
         font-family: $icon-font;
 
-        transform: rotate( -90deg);
+        transform: rotate(-90deg);
     }
 }
 
@@ -1290,7 +1289,7 @@ a {
     &.expanded {
         .filter-by {
             &:before {
-                transform: rotate( -180deg);
+                transform: rotate(-180deg);
             }
         }
         .filters {

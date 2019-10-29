@@ -12,6 +12,7 @@
         flex-grow: 1;
     }
 }
+
 .nav-sidebar {
     $nav-frame-width: 200px;
     $nav-item-padding: $spacing-md;
@@ -30,8 +31,8 @@
                 white-space: nowrap;
             }
             .nav-sidebar__section-label {
-               display: none;
-               position: absolute;
+                display: none;
+                position: absolute;
             }
             .nav-sidebar__section:hover {
                 .nav-sidebar__section-label {
@@ -42,7 +43,7 @@
                     white-space: nowrap;
                     padding: $nav-item-padding $nav-item-padding $nav-item-padding ($nav-item-padding * 2 + $left-gap + 5);
                     left: $left-gap;
-                    border: 1px solid lightgray;
+                    border: 1px solid #d3d3d3;
                     border-radius: 2px;
                     top: 50%;
                     transform: translateY(-50%);

@@ -114,4 +114,18 @@ describe("PopoverMenu", function() {
 
         expect(callback).toBeCalled(); //make sure callback was triggered
     });
+
+    it("renders a numerical data-id", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div>
+                <PopoverMenu
+                    label="hello"
+                    open={true}
+                    buttons={[{ label: 8 }]}
+                />
+            </div>
+        );
+
+        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "popover-menu-button-0")).toBeTruthy();
+    })
 });

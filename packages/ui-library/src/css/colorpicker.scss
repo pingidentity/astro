@@ -34,7 +34,7 @@
                 display: block;
             }
             &:after {
-                transform: rotate( 180deg);
+                transform: rotate(180deg);
             }
         }
     }
@@ -123,7 +123,7 @@
             line-height: 1em;
             color: $color-white;
 
-            transform: scale(1.9,1);
+            transform: scale(1.9, 1);
         }
     }
 }

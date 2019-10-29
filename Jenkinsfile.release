@@ -10,6 +10,9 @@ pipeline {
           container('node-builder') {
             echo 'Building & publishing ui-library'
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              script {
+                env.UI_LIBRARY_FINAL_VERSION = sh(returnStdout: true, script: "grep 'UI_LIBRARY_FINAL_VERSION' version |cut -d'=' -f2 | tr -d '[:space:]'")
+              }
               sh """
                 make package
                 npm publish --tag beta;

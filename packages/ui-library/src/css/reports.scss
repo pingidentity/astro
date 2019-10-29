@@ -227,7 +227,7 @@
                     &.ascending,
                     &.descending {
                         &:after {
-                            animation: all 0.2s;
+                            transition: all 0.2s;
                             font-size: 11px;
                             font-family: $icon-font;
                             content: '\31';
@@ -237,7 +237,7 @@
                     }
                     &.descending {
                         &:after {
-                            transform: rotate( -180deg);
+                            transform: rotate(-180deg);
                         }
                     }
 

@@ -195,22 +195,6 @@
         border-radius: ceil($size/2);
     }
 
-    span {
-        left: 0;
-
-        animation: pulse-1 $timing;
-    }
-    &:before {
-        left: $size + $spacing;
-
-        animation: pulse-2 $timing;
-    }
-    &:after {
-        left: 2*($size + $spacing);
-
-        animation: pulse-3 $timing;
-    }
-
     @include keyframes(pulse-1) {
         0% {
             opacity: 0;
@@ -252,6 +236,23 @@
             opacity: 0;
         }
     }
+
+    span {
+        left: 0;
+
+        animation: pulse-1 $timing;
+    }
+    &:before {
+        left: $size + $spacing;
+
+        animation: pulse-2 $timing;
+    }
+    &:after {
+        left: 2*($size + $spacing);
+
+        animation: pulse-3 $timing;
+    }
+
     &.ie9 {
         height: 7px;
         width: 36px;

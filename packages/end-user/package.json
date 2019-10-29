@@ -148,6 +148,7 @@
     "prepublishOnly": "[[ \"$PWD\" =~ ./dist ]]",
     "jest": "jest",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "coverage-ci": "jest --coverage --ci"
   }
 }

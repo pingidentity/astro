@@ -5,6 +5,7 @@
         "stylelint-selector-bem-pattern"
     ],
     "extends": ["stylelint-config-recommended", "stylelint-config-sass-guidelines"],
+    "ignoreFiles": ["src/css/_mixins.scss", "src/css/_global-vars.scss"],
     "rules": {
 
         "indentation": 4,
@@ -23,7 +24,7 @@
         "at-rule-semicolon-newline-after": "always",
         "at-rule-no-vendor-prefix": null,
         "at-rule-no-unknown": [true, {
-            "ignoreAtRules": ["extend", "mixin", "function", "return", "include", "content"]
+            "ignoreAtRules": [ "for", "each", "if", "else", "include", "extend", "mixin", "warn", "function", "return", "content" ]
         }],
 
         "block-closing-brace-newline-before": "always",

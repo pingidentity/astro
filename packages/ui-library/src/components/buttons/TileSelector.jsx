@@ -74,6 +74,7 @@ const selectorTypes = {
  *
  */
 
+/* istanbul ignore next  */
 const getTilePanel = () => {
     const tileSelector = document.querySelector(".tile-button--selected");
     if (tileSelector) {
@@ -105,6 +106,7 @@ const renderOptions = ({
 ) => {
     const handleChange = e => onValueChange(id, e);
     const isSelected = selected === id;
+    /* istanbul ignore next  */
     const scrollAndClick = (data) => {
         if ( optionPanel ) {
             getTilePanel();

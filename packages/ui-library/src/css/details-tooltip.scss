@@ -224,7 +224,7 @@
         }
         .selection-filter-label {
             &:after {
-                transform: rotate( -180deg);
+                transform: rotate(-180deg);
                 transition: (all 0.2s linear);
             }
         }
@@ -325,7 +325,7 @@
                 line-height: 1em;
                 color: $color-walrus;
 
-                transform: scale(1.9,1);
+                transform: scale(1.9, 1);
             }
             > .details-title {
                 min-height: $title-height;
