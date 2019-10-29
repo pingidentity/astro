@@ -45,8 +45,8 @@ class ConfirmTooltipDemo extends Component {
             <div>
                 <ConfirmTooltip
                     placement="bottom right"
-                    label="Confirm Cancel"
-                    title="Confirm Cancel"
+                    label="Confirm Cancel With Loading State"
+                    title="Confirm Cancel With Loading State"
                     onToggle={this._handleToggle}
                     open={this.state.open}
                     onConfirm={this._handleConfirm}
