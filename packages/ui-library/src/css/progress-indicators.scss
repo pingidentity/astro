@@ -1,32 +1,74 @@
+@function circular-progress($maxPercent, $percent, $color-bar, $color-back) {
+    $increment: 360 / $maxPercent;
+    $half: round($maxPercent / 2);
+    $background-image: '';
+
+    @if $percent < $half {
+      $nextdeg: 90deg +  ($increment * $percent);
+
+      $background-image: 'linear-gradient(90deg, #{$color-back} 50%, transparent 50%, transparent),
+      linear-gradient(#{$nextdeg}, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+
+    } @else {
+        $nextdeg: -90deg + ($increment * ($percent - $half));
+
+        $background-image: 'linear-gradient(#{$nextdeg}, #{$color-bar} 50%, transparent 50%, transparent),
+        linear-gradient(270deg, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+      }
+    @return unquote($background-image);
+  }
+
+  @mixin progress-icon ($total) {
+    $increment: 100 / $total;
+    &.of#{$total} {
+        @for $i from 1 through $total {
+            &.step#{$i}:before {
+                    background: circular-progress(100, $increment * $i , $color-midnight, #ccc);
+                }
+              }
+    }
+}
+
+
 .progress {
     $progress-size: 36px;
+    $border-size: 10px;
 
     position: relative;
     display: inline-block;
+    text-align: center;
     height: $progress-size;
     width: $progress-size;
     padding-top: 2px;
     line-height: 2.43em;
-    text-align: center;
     font-size: 14px;
     font-weight: 500;
     color: $color-midnight;
+    border-radius: 50%;
+    z-index: 1;
+
 
     &:before,
     &:after {
-        font-family: $icon-font;
-        font-size: $progress-size;
-        line-height: $progress-size;
         position: absolute;
         top: 0;
         left: 0;
+        border-radius: 50%;
+        content: '' !important;
+        z-index: -1;
     }
     &:before {
-        color: rgba($color-midnight, 0.2);
-        content: 'O';
+        width: $progress-size;
+        height: $progress-size;
+        display: block;
+
     }
     &:after {
-        color: $color-midnight;
+        width: $progress-size - $border-size;
+        height: $progress-size - $border-size;
+        top: $border-size / 2;
+        left: $border-size / 2;
+        background: white;
     }
 
     &.done {
@@ -39,9 +81,6 @@
             font-style: normal;
 
             &:after {
-                position: absolute;
-                top: 2px;
-                left: -1px;
                 font-family: $icon-font;
                 content: '\79';
                 height: $progress-size;
@@ -51,136 +90,15 @@
             }
         }
     }
-    &.of1 {
-        &.step1 {
-            &:after {
-                content: '\e4';
-            }
-        }
-    }
-    &.of2 {
-        &:before {
-            content: '\d1';
-        }
-        &.step1 {
-            &:after {
-                content: '\d0';
-            }
-        }
-        &.step2 {
-            &:after {
-                content: '\d1';
-            }
-        }
-    }
-    &.of3 {
-        &:before {
-            content: '\d4';
-        }
-        &.step1 {
-            &:after {
-                content: '\d2';
-            }
-        }
-        &.step2 {
-            &:after {
-                content: '\d3';
-            }
-        }
-        &.step3 {
-            &:after {
-                content: '\d4';
-            }
-        }
-    }
-    &.of4 {
-        &:before {
-            content: '\d8';
-        }
-        &.step1 {
-            &:after {
-                content: '\d5';
-            }
-        }
-        &.step2 {
-            &:after {
-                content: '\d6';
-            }
-        }
-        &.step3 {
-            &:after {
-                content: '\d7';
-            }
-        }
-        &.step4 {
-            &:after {
-                content: '\d8';
-            }
-        }
-    }
-    &.of5 {
-        &:before {
-            content: '\dd';
-        }
-        &.step1 {
-            &:after {
-                content: '\d9';
-            }
-        }
-        &.step2 {
-            &:after {
-                content: '\da';
-            }
-        }
-        &.step3 {
-            &:after {
-                content: '\db';
-            }
-        }
-        &.step4 {
-            &:after {
-                content: '\dc';
-            }
-        }
-        &.step5 {
-            &:after {
-                content: '\dd';
-            }
-        }
-    }
-    &.of6 {
-        &:before {
-            content: '\e3';
-        }
-        &.step1 {
-            &:after {
-                content: '\de';
-            }
-        }
-        &.step2 {
-            &:after {
-                content: '\df';
-            }
-        }
-        &.step3 {
-            &:after {
-                content: '\e0';
-            }
-        }
-        &.step4 {
-            &:after {
-                content: '\e1';
-            }
-        }
-        &.step5 {
-            &:after {
-                content: '\e2';
-            }
-        }
-        &.step6 {
-            &:after {
-                content: '\e3';
-            }
-        }
-    }
+    @include progress-icon(1);
+    @include progress-icon(2);
+    @include progress-icon(3);
+    @include progress-icon(4);
+    @include progress-icon(5);
+    @include progress-icon(6);
+    @include progress-icon(7);
+    @include progress-icon(8);
+    @include progress-icon(9);
+    @include progress-icon(10);
+
 }
