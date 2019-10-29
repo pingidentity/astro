@@ -12,30 +12,30 @@ const SpacingDemo = () => {
     return (
         <div>
             <Spacing left={Spacing.sizes.LG}>
-                <div style={{ background: "red" }}>
+                <div style={{ background: "lightgrey" }}>
                     Spacing on the left
                 </div>
             </Spacing>
             <HR />
             <Spacing vertical={Spacing.sizes.XL}>
-                <div style={{ background: "red" }}>
+                <div style={{ background: "lightgrey" }}>
                     Vertical spacing
                 </div>
             </Spacing>
             <HR />
             <Spacing spacing={Spacing.sizes.MD}>
-                <div style={{ background: "red" }}>
+                <div style={{ background: "lightgrey" }}>
                     Spacing all around
                 </div>
             </Spacing>
             <HR />
             <Spacing bottom={Spacing.sizes.XS}>
-                <div style={{ background: "red" }}>
+                <div style={{ background: "lightgrey" }}>
                     Collapsed
                 </div>
             </Spacing>
             <Spacing top={Spacing.sizes.XS}>
-                <div style={{ background: "red" }}>
+                <div style={{ background: "lightgrey" }}>
                     Margins
                 </div>
             </Spacing>

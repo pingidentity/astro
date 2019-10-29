@@ -11,19 +11,19 @@ import HR from "ui-library/lib/components/general/HR";
 const PaddingDemo = () => {
     return (
         <div>
-            <div style={{ background: "red" }}>
+            <div style={{ background: "lightgrey" }}>
                 <Padding left={Padding.sizes.LG}>
                     Padding on the left
                 </Padding>
             </div>
             <HR />
-            <div style={{ background: "red" }}>
+            <div style={{ background: "lightgrey" }}>
                 <Padding vertical={Padding.sizes.XL}>
                     Vertical padding
                 </Padding>
             </div>
             <HR />
-            <div style={{ background: "red" }}>
+            <div style={{ background: "lightgrey" }}>
                 <Padding padding={Padding.sizes.MD}>
                     Padding all around
                 </Padding>
