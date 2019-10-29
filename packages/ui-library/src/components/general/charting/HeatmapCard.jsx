@@ -229,7 +229,8 @@ class HeatMapCard extends React.Component {
         const dataRange = max - min;
         const rockerButtonDefaults = {
             "data-id": `${dataId}-range-selector`,
-            className: "rocker-button--chart-rocker heatmap-card__range-selector",
+            className: "heatmap-card__range-selector",
+            type: RockerButton.rockerTypes.CHART,
             stateless: false,
             labels: ["1W", "1M", "3M", "6M"],
             selected: null,

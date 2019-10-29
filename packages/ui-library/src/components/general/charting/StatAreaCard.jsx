@@ -189,12 +189,11 @@ class StatAreaCard extends React.Component {
         const rockerButtonDefaults = {
             "data-id": `${this.props["data-id"]}-range-selector`,
             className: classnames(
-                "rocker-button--chart-rocker",
-                "rocker-button--chart-rocker-small",
                 "dashboard-card__range-selector",
                 "stat-area-card__range-selector"
             ),
             stateless: false,
+            type: RockerButton.rockerTypes.CHART_SMALL,
             labels: [],
             selected: this.props.selected,
             onValueChange: this.props.onRangeChange,

@@ -80,7 +80,7 @@ class RockerButtonDemo extends React.Component {
                 <br /><br />
 
                 <RockerButton
-                    className="rocker-button--chart-rocker"
+                    type={RockerButton.rockerTypes.CHART}
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={years}
@@ -90,7 +90,7 @@ class RockerButtonDemo extends React.Component {
                 <br /><br />
 
                 <RockerButton
-                    className="rocker-button--chart-rocker rocker-button--chart-rocker-small"
+                    type={RockerButton.rockerTypes.CHART_SMALL}
                     stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={days}
