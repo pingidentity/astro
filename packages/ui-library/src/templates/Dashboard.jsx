@@ -1,14 +1,19 @@
 import React from "react";
-import HeroChart from "../components/general/charting/HeroChart";
-import { CardRow, DonutCard, PlaceHolderCard, StatCard, StatAreaCard } from "../components/general/charting/Cards";
-import { HorizontalBarCard } from "../components/general/charting/Cards";
-import demoChartData from "../demo/components/general/charting/demoChartData";
+import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
+import {
+    CardRow,
+    DonutCard,
+    PlaceHolderCard,
+    StatCard,
+    StatAreaCard } from "ui-library/lib/components/general/charting/Cards";
+import { HorizontalBarCard } from "ui-library/lib/components/general/charting/Cards";
+import demoChartData from "ui-library/lib/demo/components/general/charting/demoChartData";
 import _ from "underscore";
-import MultiseriesChartCard, { chartTypes } from "../components/general/charting/MultiseriesChartCard";
-import HeatmapCard from "../components/general/charting/HeatmapCard";
-import FrequencyCard from "../components/general/charting/FrequencyCard";
-import RockerButton from "../components/forms/RockerButton";
-import { toRechartsDataFormat } from "../util/ChartingUtils";
+import MultiseriesChartCard, { chartTypes } from "ui-library/lib/components/general/charting/MultiseriesChartCard";
+import HeatmapCard from "ui-library/lib/components/general/charting/HeatmapCard";
+import FrequencyCard from "ui-library/lib/components/general/charting/FrequencyCard";
+import RockerButton from "ui-library/lib/components/forms/RockerButton";
+import { toRechartsDataFormat } from "ui-library/lib/util/ChartingUtils";
 
 Math.seed = 123;
 Math.seededRandom = function(max, min) {
