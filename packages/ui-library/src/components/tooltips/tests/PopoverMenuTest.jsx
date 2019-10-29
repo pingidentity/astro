@@ -127,5 +127,5 @@ describe("PopoverMenu", function() {
         );
 
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "popover-menu-button-0")).toBeTruthy();
-    })
+    });
 });
