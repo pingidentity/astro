@@ -39,7 +39,7 @@
         width: $spacing-md;
         top: 50%;
         text-align: center;
-        @include transform(translateY(-50%));
+        transform: translateY(-50%);
         font-size: 12px;
         line-height: 1em;
     }

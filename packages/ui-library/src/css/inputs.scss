@@ -1576,7 +1576,7 @@ input[type=file] {
         max-width: 35px;
         display: inline-block;
         bottom: 50%;
-        @include transform(translateY(50%));
+        transform: translateY(50%);
 
         button {
             $height: 10px;
