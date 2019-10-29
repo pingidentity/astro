@@ -28,7 +28,7 @@ var SINGLE_SELECT_ITEMS = [
         { name: "Boxing", id: 9 },
         { name: "Cross-country Mountain Biking", id: 10 }
     ],
-    
+
     SINGLE_SELECT_ITEMS2 = [
         { name: "Hockey", id: 1 },
         { name: "Soccer", id: 2,
@@ -345,7 +345,7 @@ class SelectionListDemo extends React.Component {
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange(2)}
                     requiredText={this.state.required ? "Select at least one" : ""}
-                    className="fluid-width"
+                    width={SelectionList.listWidths.FLUID}
                 />
 
                 <hr />

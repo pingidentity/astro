@@ -7,7 +7,7 @@ import Stateless from "./v2-stateless";
 import Stateful from "./v2-stateful";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { cannonballProgressivelyStatefulWarning } from "../../../util/DeprecationUtils";
-import SelectionListStateless from "./v2-stateless";
+import SelectionListStateless, { listWidths } from "./v2-stateless";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
@@ -84,6 +84,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
  *     if not provided, the default search function will be used
  * @param {string} [queryString]
  *     The value of the search field
+ * @param {SelectionList.ListWidths} [width]
+ *     Use FLUID to adjust the width to the content (up to 400px)
  */
 
 const PStatefulSelectionList = inStateContainer([
@@ -129,6 +131,8 @@ export default class SelectionList extends React.Component {
 
     static ListType = Constants.ListType;
     static listType = Constants.ListType; // according to our new standard
+
+    static listWidths = listWidths;
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
