@@ -139,7 +139,6 @@ const CustomFilterControl = ({
                 />,
                 <FormTimeZone
                     key="time-zone"
-                    stateless={false}
                 />
             ]}
             <Link type={linkTypes.REMOVE} onClick={onRemove} />
@@ -219,9 +218,6 @@ const FilterControls = ({
             formSearchBoxProps={{
                 onValueChange: onSearchChange,
                 placeholder: showFilters ? "Search" : "Search or SCIM Query",
-                textFieldProps: {
-                    stateless: true,
-                },
                 queryString: search,
                 iconName: isSCIM ? "code" : "search",
                 monospaced: isSCIM,

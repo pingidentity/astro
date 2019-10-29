@@ -94,7 +94,6 @@ class LinkDropDownListDemo extends React.Component {
                     />
                 </InputRow>
                 <LinkDropDownList
-                    stateless={false}
                     closeOnClick={true}
                     label="Stateful Version"
                     onClick={this._handleClick}
@@ -105,7 +104,6 @@ class LinkDropDownListDemo extends React.Component {
                 />
                 <HR />
                 <LinkDropDownList
-                    stateless={false}
                     closeOnClick={true}
                     label="Right-aligned"
                     options={_options}
@@ -116,7 +114,6 @@ class LinkDropDownListDemo extends React.Component {
                 />
                 <HR />
                 <LinkDropDownList
-                    stateless={false}
                     closeOnClick={true}
                     label={<Icon inline iconName="edit"/>}
                     options={nodeOptions}

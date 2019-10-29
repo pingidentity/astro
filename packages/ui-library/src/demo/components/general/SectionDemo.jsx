@@ -41,7 +41,6 @@ class SectionDemo extends React.Component {
 
                 <Section
                     data-id="demo-section-1"
-                    stateless={true}
                     title="Stateless section"
                     collapsedText="Test"
                     onToggle={this._toggleFirst}
@@ -51,7 +50,6 @@ class SectionDemo extends React.Component {
                 </Section>
                 <Section
                     data-id="demo-section-2"
-                    stateless={false}
                     title="Stateful section"
                     titleValue="Optional section value"
                 >
@@ -59,7 +57,6 @@ class SectionDemo extends React.Component {
                 </Section>
                 <Section
                     title="Section with accessories"
-                    stateless={false}
                     accessories={[
                         <Button key="1" inline iconName="edit"/>,
                         <Button key="2" inline iconName="delete"/>
@@ -69,7 +66,6 @@ class SectionDemo extends React.Component {
                 </Section>
                 <Section
                     title="Section with details text"
-                    stateless={false}
                     detailsText={{
                         expanded: "Expanded",
                         collapsed: "Collapsed"
@@ -90,14 +86,12 @@ class SectionDemo extends React.Component {
 
                 <div>
                     <Section
-                        stateless={false}
                         condensed={true}
                         title="Section"
                     >
                         {this._getContent()}
                     </Section>
                     <Section
-                        stateless={false}
                         condensed={true}
                         title="Section"
                         titleValue="Optional section value"
@@ -105,7 +99,6 @@ class SectionDemo extends React.Component {
                         {this._getContent()}
                     </Section>
                     <Section
-                        stateless={false}
                         condensed={true}
                         title="Section with accessories"
                         accessories={[
@@ -116,7 +109,6 @@ class SectionDemo extends React.Component {
                         {this._getContent()}
                     </Section>
                     <Section
-                        stateless={false}
                         condensed={true}
                         title="Section with details text"
                         detailsText={{

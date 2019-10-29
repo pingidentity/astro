@@ -133,7 +133,6 @@ class GridDemo extends React.Component {
                 <h2>Grid example 1 (Expandable row, Components inside a cell, Stateless)</h2>
                 <br /><br />
                 <Grid {...this.props[this.id]}
-                    stateless={true}
                     columnsPerPage={2}
                     onPaginationChanged={this._handlePaginationChange}
                     rowExpandable={true}

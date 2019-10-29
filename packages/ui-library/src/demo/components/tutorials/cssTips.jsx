@@ -418,7 +418,7 @@ class cssTips extends React.Component {
                 <div className="output">
                     <fieldset className={classnames(fieldsetCss)}>
                         <legend>
-                            <Toggle stateless={true} onToggle={this._toggleFieldset} toggled={this.state.showFieldset}
+                            <Toggle onToggle={this._toggleFieldset} toggled={this.state.showFieldset}
                                 value={this.state.showFieldset} />
                             &nbsp; Click here to toggle fieldset content
                         </legend>

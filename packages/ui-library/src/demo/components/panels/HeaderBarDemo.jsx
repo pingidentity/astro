@@ -64,7 +64,6 @@ const customMenuPopup = ({ triggerClassName, ...props }) => (
     <DetailsTooltip
         {...props}
         title="Custom Popover"
-        stateless={false}
         placement="bottom left"
         labelClassName={triggerClassName}
     >

@@ -134,7 +134,6 @@ const CustomFilterControl = ({
                 />,
                 <FormTimeZone
                     key="time-zone"
-                    stateless={false}
                 />
             ]}
             <Link type="remove" onClick={onRemove} />

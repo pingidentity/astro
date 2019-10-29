@@ -42,7 +42,7 @@ class WizardDemoDragScreen extends React.Component {
     rowsAvailableStateful = true;
 
     state = {
-        columns: data.columns, // used for stateful (stateless=false) demo
+        columns: data.columns,
         disabled: false,
         drag: MultiDrag.Reducer(MultiDrag.Reducer(null, "init"), MultiDrag.Actions.init(data.columns)),
         //messages: Messages.Reducer,
@@ -170,7 +170,6 @@ class WizardDemoDragScreen extends React.Component {
             <div className="multidrag-demo" data-id="multidragDemoDiv">
                 <div>
                     <MultiDrag
-                        stateless={true}
                         showSearchOnAllColumns={this.state.demo.search === "all"}
                         showSearch={true}
                         onSearch={this._handleSearchStateless}

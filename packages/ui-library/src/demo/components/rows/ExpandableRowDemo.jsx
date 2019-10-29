@@ -109,7 +109,6 @@ class ExpandableRowDemo extends React.Component {
 
         var customDeleteButton = (
             <DetailsTooltip
-                stateless={false}
                 label={(<button type="button" className="delete-btn" onClick={this._toggleCustomDelete}/>)}
                 placement="top left"
                 title="Tooltip Title"
@@ -136,13 +135,11 @@ class ExpandableRowDemo extends React.Component {
             <div>
                 <ExpandableRow.SimpleWrapper data-id="idp-row">
                     <ExpandableRow
-                        stateless={false}
                         title="Basic Row"
                         subtitle="Row Subtitle">
                         <LabelValuePairs dataPairs={mockData} />
                     </ExpandableRow>
                     <ExpandableRow
-                        stateless={false}
                         title="Expanded Row with Row Message"
                         rowMessage={{
                             text: ([
@@ -160,28 +157,24 @@ class ExpandableRowDemo extends React.Component {
                         }}
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row with Status Indicator"
                         subtitle="Row Subtitle"
                         status={ExpandableRow.Statuses.ERROR}
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row with Toggle"
                         subtitle="stateful"
-                        rowAccessories={<Toggle stateless={false} />}
+                        rowAccessories={<Toggle />}
                     />
                     <ExpandableRow
                         title="Row with Pill Button"
                         subtitle="stateless"
-                        stateless={false}
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
                         rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
                     />
 
                     <ExpandableRow
-                        stateless={false}
                         title="Row With a Variety of Right Content"
                         subtitle="Row Subtitle"
                         rowAccessories={[
@@ -191,24 +184,21 @@ class ExpandableRowDemo extends React.Component {
                                 <label className="row-help">PROV</label>
                             </HelpHint>,
                             <button key="button"className="inline">Inline Button</button>,
-                            <Toggle key="toggle" stateless={false} />,
+                            <Toggle key="toggle" />,
                             <span key="count" className="count">2</span>
                         ]}
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row With Image"
                         subtitle="Row Subtitle"
                         image="src/demo/images/example-expandable-row-image.png"
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row With Icon"
                         subtitle="Row Subtitle"
                         icon="icon-cog"
                     />
                     <ExpandableRow
-                        stateless={false}
                         title={
                             <div className="hover-tooltip">
                                 Row With Tab
@@ -222,13 +212,11 @@ class ExpandableRowDemo extends React.Component {
                         }
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row in Waiting Mode"
                         subtitle="stateful"
                         waiting={true}
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row in Ordering Mode"
                         subtitle="stateful"
                         ordering={{
@@ -244,13 +232,12 @@ class ExpandableRowDemo extends React.Component {
                                     <label className="row-help">PROV</label>
                                 </HelpHint>
                                 <button className="inline">Inline Button</button>
-                                <Toggle stateless={false} />
+                                <Toggle/>
                                 <span className="count">2</span>
                             </span>
                         )}
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row in Ordering Mode"
                         subtitle="Using positionValue"
                         ordering={{
@@ -262,7 +249,6 @@ class ExpandableRowDemo extends React.Component {
                         }}
                     />
                     <ExpandableRow
-                        stateless={false}
                         title="Row With Invited Styling"
                         className="invited"
                         rowAccessories={[
@@ -281,14 +267,12 @@ class ExpandableRowDemo extends React.Component {
                                 className="edit-btn left"
                             >Confirm?</ConfirmTooltip>
                         }
-                        stateless={false}
                         title="Row With Custom Edit Button"
                     />
                     {!this.state.rowDeleted && (
                         <ExpandableRow
                             title="Row with Delete Confirmation with Custom delete title"
                             subtitle="stateless"
-                            stateless={false}
                             expanded={this.state.expanded3}
                             onToggle={this._onToggle(3)}
                             onDeleteCancelClick={this._handleDeleteCancel}
@@ -305,7 +289,6 @@ class ExpandableRowDemo extends React.Component {
                         <ExpandableRow
                             title="Row with Custom Delete Tooltip Button"
                             subtitle="stateless"
-                            stateless={false}
                             expanded={this.state.expanded4}
                             onToggle={this._onToggle(4)}
                             deleteButton={customDeleteButton}
@@ -314,7 +297,6 @@ class ExpandableRowDemo extends React.Component {
                     <ExpandableRow
                         title="Expanded Row with Line Chart"
                         subtitle="Empty Data"
-                        stateless={false}
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
                         rowAccessories={[
@@ -330,13 +312,12 @@ class ExpandableRowDemo extends React.Component {
                                 trend="+ 0%"
 
                             />,
-                            <Toggle key="toggle" stateless={false} />
+                            <Toggle key="toggle" />
                         ]}
                     />
                     <ExpandableRow
                         title="Expanded Row with Line Chart"
                         subtitle="Full Data"
-                        stateless={false}
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
                         rowAccessories={[
@@ -364,13 +345,12 @@ class ExpandableRowDemo extends React.Component {
                                 hint="See Contributing Data"
                                 trend="+ 8.6%"
                             />,
-                            <Toggle key="toggle" stateless={false} />
+                            <Toggle key="toggle"/>
                         ]}
                     />
                     <ExpandableRow
                         title="Expanded Row with Line Chart"
                         subtitle="Partial Data"
-                        stateless={false}
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
                         rowAccessories={[
@@ -398,13 +378,12 @@ class ExpandableRowDemo extends React.Component {
                                 hint={<Link>See Contributing Data</Link>}
                                 trend="- 8.6%"
                             />,
-                            <Toggle key="toggle" stateless={false} />
+                            <Toggle key="toggle"/>
                         ]}
                     />
                     <ExpandableRow
                         title="Expanded Row with Line Chart"
                         subtitle="Zero Data"
-                        stateless={false}
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
                         rowAccessories={[
@@ -434,13 +413,12 @@ class ExpandableRowDemo extends React.Component {
                                 trend="+ 0%"
 
                             />,
-                            <Toggle key="toggle" stateless={false} />
+                            <Toggle key="toggle" />
                         ]}
                     />
                     <ExpandableRow
                         title="Expanded Row with Line Chart"
                         subtitle="Zero values"
-                        stateless={false}
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
                         rowAccessories={[
@@ -461,7 +439,7 @@ class ExpandableRowDemo extends React.Component {
                                 hintProps={{ type: HelpHint.Types.LIGHT }}
                                 trend="+ 0%"
                             />,
-                            <Toggle key="toggle" stateless={false} />
+                            <Toggle key="toggle"/>
                         ]}
                     />
                 </ExpandableRow.SimpleWrapper>

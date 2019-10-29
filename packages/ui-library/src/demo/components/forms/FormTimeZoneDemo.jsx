@@ -80,7 +80,6 @@ class FormTimeZoneDemo extends React.Component {
                 <InputRow>
                     <FormTimeZone
                         data-id="timezone-stateless"
-                        stateless={true}
                         filterByCountry={this.state.filterByCountry0}
                         labelText="Stateless Version with clear"
                         onValueChange={this._handleChange(0)}
@@ -99,7 +98,6 @@ class FormTimeZoneDemo extends React.Component {
                 <InputRow>
                     <FormTimeZone
                         data-id="timezone-stateless"
-                        stateless={true}
                         filterByCountry={this.state.filterByCountry1}
                         labelText="Stateless Version (where abbreviation is displayed instead)"
                         onValueChange={this._handleChange(1)}
@@ -116,7 +114,6 @@ class FormTimeZoneDemo extends React.Component {
                 <InputRow>
                     <FormTimeZone
                         data-id="timezone-stateful"
-                        stateless={false}
                         labelText="Stateful Version"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"
@@ -127,7 +124,6 @@ class FormTimeZoneDemo extends React.Component {
                 <InputRow>
                     <FormTimeZone
                         data-id="timezone-stateful2"
-                        stateless={false}
                         labelText="Stateful Version with clear"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"
@@ -136,7 +132,6 @@ class FormTimeZoneDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTimeZone
-                        stateless={false}
                         labelText="Stateful Version with Error Message"
                         helpClassName="bottom right"
                         errorMessage="Example error message"
