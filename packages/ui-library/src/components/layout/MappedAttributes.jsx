@@ -37,7 +37,8 @@ import Table from "../tables/Table";
 *     Label for the type of attribute.
 * @param {boolean} [labels.required]
 *     Label for whether or not the attribute is required.
-*
+* @param {boolean} [lines=true]
+*     Show/hide lines inbetween rows
 */
 
 // Always have five labels so that label line extends for the correct length
@@ -58,7 +59,8 @@ function MappedAttributes({
     attributes,
     className,
     "data-id": dataId,
-    labels
+    labels,
+    lines,
 }) {
     return (
         <Table
@@ -68,6 +70,7 @@ function MappedAttributes({
                     className
                 )
             }
+            lines={lines}
             data-id={dataId}
             bodyData={
                 attributes.map(({
@@ -132,12 +135,14 @@ MappedAttributes.propTypes = {
         type: PropTypes.string,
         required: PropTypes.bool
     }),
+    lines: PropTypes.bool,
 };
 
 MappedAttributes.defaultProps = {
     attributes: [],
     "data-id": "mapped-attributes",
-    labels: {}
+    labels: {},
+    lines: true,
 };
 
 export default MappedAttributes;

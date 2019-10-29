@@ -278,6 +278,7 @@ describe("DetailsTooltip", function () {
     it("triggers callback when clicked outside", function () {
         var callback = jest.fn();
 
+
         ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>

@@ -12,12 +12,32 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  * @class ConfirmTooltip
  * @desc ConfirmTooltip implements tooltip used to confirm or deny the canceling of an action.
  *
+ * @param {string} buttonLabel
+ *      text for the button label
+ * @param {string} buttonType
+ *      css class to set the type of button(primary, secondary, danger)
+ * @param {string} cancelText
+ *      text of the cancel A tag
+ * @param {bool} [closeOnConfirm=false]
+ *      when true, triggers onToggle when onConfirm is triggered.
  * @param {string} [data-id]
  *     The data-id of the component.
- * @param {node} label
- *     The text of the link.
+ * @param {bool} disableSave
+ *      boolean to turn enable or disable the button.
  * @param {array} [flags]
  *     Set the flag for "use-portal" to render with popper.js and react-portal
+ * @param {node} label
+ *     The text of the link.
+ * @param {boolean} loading
+ *     While true, loading animation will be shown.
+ * @param {boolean} open
+ *     The prop that controls whether the tooltip is visible or not
+ * @param {ConfirmTooltip~onCancel} onCancel
+ *     The callback triggered when the cancel button is pressed.
+ * @param {ConfirmTooltip~onConfirm} onDelete
+ *     The callback triggered when the delete button is pressed.
+ * @param {ConfirmTooltip~onToggle}
+ *      the callback to open and close the modal.
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning.
  *      When using multiple positions like "top left" or "bottom right" do not use dashes as it will not work.
@@ -27,24 +47,6 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     The title of the ConfirmTooltip tooltip.
  * @param {string} type
  *     The Style/type of button
- * @param {boolean} open
- *     The prop that controls whether the tooltip is visible or not
- * @param {string} cancelText
- *      text of the cancel A tag
- * @param {string} buttonLabel
- *      text for the button label
- * @param {string} buttonType
- *      css class to set the type of button(primary, secondary, danger)
- * @param {bool} disableSave
- *      boolean to turn enable or disable the button.
- * @param {bool} [closeOnConfirm=false]
- *      when true, triggers onToggle when onConfirm is triggered.
- * @param {ConfirmTooltip~onCancel} onCancel
- *     The callback triggered when the cancel button is pressed.
- * @param {ConfirmTooltip~onConfirm} onDelete
- *     The callback triggered when the delete button is pressed.
- * @param {ConfirmTooltip~onToggle}
- *      the callback to open and close the modal.
  *
  * @example
  *     <ConfirmTooltip
@@ -66,20 +68,21 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 class ConfirmTooltipBase extends Component {
     static propTypes = {
-        "data-id": PropTypes.string,
-        onConfirm: PropTypes.func,
-        onCancel: PropTypes.func,
-        className: PropTypes.string,
-        open: PropTypes.bool,
-        onToggle: PropTypes.func,
-        label: PropTypes.node,
-        cancelText: PropTypes.string,
         buttonLabel: PropTypes.string,
         buttonType: PropTypes.string,
-        disableSave: PropTypes.bool,
+        className: PropTypes.string,
+        cancelText: PropTypes.string,
         closeOnConfirm: PropTypes.bool,
-        placement: PropTypes.oneOf(Object.values(DetailsTooltip.tooltipPlacements)),
+        "data-id": PropTypes.string,
+        disableSave: PropTypes.bool,
         flags: flagsPropType,
+        label: PropTypes.node,
+        loading: PropTypes.bool,
+        onCancel: PropTypes.func,
+        onConfirm: PropTypes.func,
+        open: PropTypes.bool,
+        onToggle: PropTypes.func,
+        placement: PropTypes.oneOf(Object.values(DetailsTooltip.tooltipPlacements)),
     }
 
     static defaultProps = {
@@ -119,6 +122,7 @@ class ConfirmTooltipBase extends Component {
                         type={this.props.buttonType}
                         onClick={this._handleConfirm}
                         disabled={this.props.disableSave}
+                        loading={this.props.loading}
                     />
                     <br />
                     <a

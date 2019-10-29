@@ -72,6 +72,11 @@ exports.forwardTargetValueAsInt = function (callback) {
  *     Whether or not the event was outside of the container.  True means the event was outside
  */
 exports.callIfOutsideOfContainer = function (container, callback, e) {
+
+    if (global.getSelection().toString()) {
+        return false;
+    }
+
     var node = e.target;
 
     while (node.parentNode) {

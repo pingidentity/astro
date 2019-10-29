@@ -852,3 +852,10 @@ button.tile-button--side-icon {
 .button-add-modal {
     float: right;
 }
+
+.tab-set-children {
+    margin-left: $spacing-lg;
+    > .page-section {
+        margin-left: 0;
+    }
+}

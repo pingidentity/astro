@@ -12,7 +12,8 @@ class ConfirmTooltipDemo extends Component {
     static flags = ["use-portal"];
 
     state = {
-        open: this.props.open
+        open: this.props.open,
+        loading: false,
     };
 
     _handleToggle = () => {
@@ -22,7 +23,15 @@ class ConfirmTooltipDemo extends Component {
     };
 
     _handleConfirm = () => {
-        this._handleToggle();
+        this.setState({
+            loading: true
+        });
+
+        setTimeout(() => {
+            this.setState((state) => {
+                return { open: !state.open };
+            });
+        }, 1000);
     }
 
     _handleCancel = () => {
@@ -36,8 +45,8 @@ class ConfirmTooltipDemo extends Component {
             <div>
                 <ConfirmTooltip
                     placement="bottom right"
-                    label="Confirm Cancel"
-                    title="Confirm Cancel"
+                    label="Confirm Cancel With Loading State"
+                    title="Confirm Cancel With Loading State"
                     onToggle={this._handleToggle}
                     open={this.state.open}
                     onConfirm={this._handleConfirm}
@@ -45,6 +54,7 @@ class ConfirmTooltipDemo extends Component {
                     buttonLabel="Confirm"
                     cancelText="Cancel"
                     disableSave={false}
+                    loading={this.state.loading}
                 >
                     {markup}
                 </ConfirmTooltip>

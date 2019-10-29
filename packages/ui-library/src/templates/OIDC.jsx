@@ -1,25 +1,23 @@
 import React, { Component } from "react";
-
-import Button from "../components/buttons/Button";
-import FlexRow, { alignments, justifyOptions } from "../components/layout/FlexRow";
-import PageHeader from "../components/general/PageHeader";
-import SearchBox from "../components/forms/FormSearchBox";
-import PageSection from "../components/layout/PageSection";
-import ExpandableRow from "../components/rows/ExpandableRow";
-import { TabSet, TabContent } from "../components/layout/TabSet";
-import { allFlags } from "../util/FlagUtils";
-import Link from "../components/general/Link";
-import { linkTypes } from "../components/general/Anchor";
-import RowBuilder, { Separator } from "../components/rows/RowBuilder";
-import FormDropDownList from "../components/forms/FormDropDownList";
-import FormTextField from "../components/forms/form-text-field";
-import InputWidths from "../components/forms/InputWidths";
-import PopoverMenu from "../components/tooltips/PopoverNavMenu";
-import HelpHint from "../components/tooltips/HelpHint";
-import MappedAttributes from "../components/layout/MappedAttributes";
+import { allFlags } from "ui-library/lib/util/FlagUtils";
+import Button from "ui-library/lib/components/buttons/Button";
+import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+import FlexRow, { alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import FormTextField from "ui-library/lib/components/forms/form-text-field";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import Link from "ui-library/lib/components/general/Link";
+import { linkTypes } from "ui-library/lib/components/general/Anchor";
+import MappedAttributes from "ui-library/lib/components/layout/MappedAttributes";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import PopoverMenu from "ui-library/lib/components/tooltips/PopoverNavMenu";
+import RowBuilder, { Separator } from "ui-library/lib/components/rows/RowBuilder";
+import SearchBox from "ui-library/lib/components/forms/FormSearchBox";
+import { TabSet, TabContent } from "ui-library/lib/components/layout/TabSet";
+import Toggle from "ui-library/lib/components/forms/form-toggle";
 import { v4 as uuidV4 } from "uuid";
-import Toggle from "../components/forms/form-toggle";
-
 
 /**
  * @class OicoAccessToken
@@ -285,7 +283,7 @@ export default class OicoAccessToken extends Component {
                                             underlined={false}
                                         >
                                             <MappedAttributes
-                                                className="grid--no-lines"
+                                                lines={false}
                                                 attributes={[
                                                     {
                                                         from: "Name",

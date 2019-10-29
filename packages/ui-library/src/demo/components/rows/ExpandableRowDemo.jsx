@@ -1,15 +1,16 @@
 import React from "react";
-import RowAccessories from "../../../components/rows/expandable-row/Accessories";
-import RowAccessoriesLineChart from "../../../components/rows/expandable-row/AccessoriesLineChart";
-import HelpHint from "../../../components/tooltips/HelpHint";
-import Link from "../../../components/general/Link";
-import ExpandableRow from "../../../components/rows/ExpandableRow";
-import Toggle from "../../../components/forms/form-toggle";
-import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
-import Button from "../../../components/buttons/Button";
-import LabelValuePairs from "../../../components/layout/LabelValuePairs";
-import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
-import ButtonGroup from "../../../components/layout/ButtonGroup";
+import RowAccessories from "ui-library/lib/components/rows/expandable-row/Accessories";
+import RowAccessoriesLineChart from "ui-library/lib/components/rows/expandable-row/AccessoriesLineChart";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import Link from "ui-library/lib/components/general/Link";
+import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+import Toggle from "ui-library/lib/components/forms/form-toggle";
+import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+import Button from "ui-library/lib/components/buttons/Button";
+import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
+import ConfirmTooltip from "ui-library/lib/components/tooltips/ConfirmTooltip";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+import Chip, { chipTypes } from "ui-library/lib/components/layout/Chip";
 
 /**
 * @name ExpandableRowDemo
@@ -201,7 +202,7 @@ class ExpandableRowDemo extends React.Component {
                             <a key="link">Link</a>,
                             <span key="icon" className="icon-cog" />,
                             <HelpHint key="help" className="width-auto bottom" hintText="Provisioning">
-                                <label className="row-help">PROV</label>
+                                <Chip type={chipTypes.CONDENSED}>Prov</Chip>
                             </HelpHint>,
                             <button key="button"className="inline">Inline Button</button>,
                             <Toggle key="toggle" stateless={false} />,
@@ -254,7 +255,7 @@ class ExpandableRowDemo extends React.Component {
                                 <a>Link</a>
                                 <span className="icon-cog" />
                                 <HelpHint className="width-auto bottom" hintText="Provisioning">
-                                    <label className="row-help">PROV</label>
+                                    <Chip type={chipTypes.CONDENSED}>Prov</Chip>
                                 </HelpHint>
                                 <button className="inline">Inline Button</button>
                                 <Toggle stateless={false} />
