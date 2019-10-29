@@ -1,12 +1,13 @@
-const React = require("react");
-import Padding, { sizes as paddingSizes } from "../../../components/layout/Padding";
-import Button from "../../../components/buttons/Button";
-import TutorialButton from "../../../components/buttons/TutorialButton";
-import Icon from "../../../components/general/Icon";
-import FlexRow from "../../../components/layout/FlexRow";
-const PageHeader = require("./../../../components/general/PageHeader");
-const HelpHint = require("./../../../components/tooltips/HelpHint");
-const Link = require("./../../../components/general/Link");
+import React from "react";
+import Padding, { sizes as paddingSizes } from "ui-library/lib/components/layout/Padding";
+import Button from "ui-library/lib/components/buttons/Button";
+import TutorialButton from "ui-library/lib/components/buttons/TutorialButton";
+import Icon from "ui-library/lib/components/general/Icon";
+import FlexRow from "ui-library/lib/components/layout/FlexRow";
+import Chip, { chipTypes } from "ui-library/lib/components/layout/Chip";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import Link from "ui-library/lib/components/general/Link";
 
 /**
 * @name PageHeaderDemo
@@ -37,7 +38,7 @@ const PageHeaderDemo = () => {
                     <Link title="Link" key="link" type="block" />,
                     <Icon iconName="cog" key="icon" type="leading" />,
                     <HelpHint className="width-auto bottom" hintText="Provisioning" key="hint">
-                        <label className="row-help">PROV</label>
+                        <Chip type={chipTypes.CONDENSED}>PROV</Chip>
                     </HelpHint>,
                     <Button inline key="button" label="inline" />,
                     <span className="count" key="count">2</span>
