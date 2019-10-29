@@ -5,7 +5,6 @@ import Utils from "../../util/Utils";
 import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import { inStateContainer } from "../utils/StateContainer";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
-import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 import { SimpleWrapper } from "../../components/rows/ExpandableRow";
 
 /**
