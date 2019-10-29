@@ -41,7 +41,7 @@ const PageHeaderDemo = () => {
                         <Chip type={chipTypes.CONDENSED}>PROV</Chip>
                     </HelpHint>,
                     <Button inline key="button" label="inline" />,
-                    <span className="count" key="count">2</span>
+                    <Chip type={chipTypes.COUNT} key="count">2</Chip>
                 ]}
             />
             <PageHeader

@@ -2,17 +2,34 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
+/**
+ * @enum {string}
+ * @alias Chip.chipColors
+ */
 export const chipColors = {
+    /** cyan */
     CYAN: "cyan",
+    /** faint-grey */
     FAINTGREY: "faint-grey",
+    /** light-grey */
     LIGHTGREY: "light-grey",
+    /** dark-grey */
     DARKGREY: "dark-grey",
+    /** transparent */
     TRANSPARENT: "transparent",
+    /** white */
     WHITE: "white"
 };
 
+/**
+ * @enum {string}
+ * @alias Chip.chipTypes
+ */
 export const chipTypes = {
-    CONDENSED: "condensed"
+    /** condensed */
+    CONDENSED: "condensed",
+    /** count */
+    COUNT: "count"
 };
 
 /**
@@ -23,8 +40,10 @@ export const chipTypes = {
 *     The data-id of the component.
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div.
-* @param {string} [color]
+* @param {Chip.chipColors} [color]
 *     The background color of the component.
+* @param {Chip.chipTypes} [type]
+*     The type of the chip.
 * @param {boolean} [fullWidth=false]
 *     Whether the component takes up the full width of the container.
 */
@@ -41,15 +60,15 @@ function Chip({
         <div
             className={
                 classnames(
-                    "chip-component",
                     className,
                     {
-                        "chip-component--condensed": type === chipTypes.CONDENSED
-                    },
-                    `chip-component--color-${color}`,
-                    {
-                        "chip-component--full-width": fullWidth
+                        "chip-component": type !== chipTypes.COUNT,
+                        "chip-component--condensed": type === chipTypes.CONDENSED,
+                        [`chip-component--color-${color}`]: type !== chipTypes.COUNT,
+                        "chip-component--full-width": fullWidth,
+                        "count": type === chipTypes.COUNT,
                     }
+
                 )
             }
             data-id={dataId}
