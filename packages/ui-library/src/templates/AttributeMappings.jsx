@@ -75,7 +75,6 @@ export default class AttributeMappings extends Component {
                 <FormTextField
                     labelText="Application Attribute"
                     placeholder="Enter mapped attribute"
-                    stateless={false}
                     width={InputWidths.MD}
                 />
                 <Separator>=</Separator>

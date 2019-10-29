@@ -97,7 +97,6 @@ class I18nPhoneInputDemo extends React.Component {
 
                 <label className="detached">Stateless Phone Input</label>
                 <I18nPhoneInput
-                    stateless={true}
                     name="second-item"
                     onSearch={this._handleSearch}
                     searchIndex={this.state.searchIndex}
@@ -119,7 +118,6 @@ class I18nPhoneInputDemo extends React.Component {
 
                 <label className="detached">Stateless Phone Input with Error</label>
                 <I18nPhoneInput
-                    stateless={true}
                     open={false}
                     countryCode={this.state.countryCodeStateless2}
                     dialCode={this.state.dialCodeStateless1}
@@ -129,7 +127,6 @@ class I18nPhoneInputDemo extends React.Component {
 
                 <label className="detached">Stateless, Disabled Phone Input</label>
                 <I18nPhoneInput
-                    stateless={true}
                     open={false}
                     countryCode={this.state.countryCodeStateless1}
                     dialCode={this.state.dialCodeStateless1}
@@ -145,7 +142,6 @@ class I18nPhoneInputDemo extends React.Component {
 
                 <label className="detached">Force Error to Show</label>
                 <I18nPhoneInput
-                    stateless={true}
                     countryCode="dj"
                     dialCode="253"
                     phoneNumber="123 456 7890"

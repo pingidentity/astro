@@ -66,7 +66,6 @@ export default class PaginationDemo extends Component {
                     Current Page: {this.state.currentPage},
                     </div>
                     <Pagination
-                        stateless={true}
                         perPage={this.state.perPage}
                         page={this.state.currentPage}
                         total={this.items.length}
@@ -79,7 +78,6 @@ export default class PaginationDemo extends Component {
                 <InputRow>
                     <label>Pagination with Render prop to display one or more page links</label>
                     <Pagination
-                        stateless={true}
                         perPage={this.state.perPage2}
                         page={this.state.currentPage2}
                         total={this.items.length}

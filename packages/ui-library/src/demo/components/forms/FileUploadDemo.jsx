@@ -235,7 +235,6 @@ export default class FileUploadDemo extends React.Component {
                                 this.fileUploadStateless = component.refs.FileUploadStateless;
                             }
                         }}
-                        stateless={true}
                         fileName={this.state.file3}
                         onChange={this._onChange3}
                         onRemove={this._onRemove3}

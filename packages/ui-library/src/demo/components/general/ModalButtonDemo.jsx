@@ -46,7 +46,6 @@ class ModalButtonDemo extends React.Component {
                     <ModalButton data-id="default-example"
                         activatorButtonLabel="Open Default Modal"
                         modalTitle="Default Modal"
-                        stateless={false}
                     >
                         <div>
                             <p>
@@ -65,7 +64,6 @@ class ModalButtonDemo extends React.Component {
                     <ModalButton data-id="stateless-example"
                         activatorButtonLabel="Open Stateless Modal"
                         modalTitle="Stateless Modal"
-                        stateless={true}
                         onOpen={this._handleOpen(1)}
                         onClose={this._handleClose(1)}
                         initiallyExpanded={false}
@@ -109,7 +107,6 @@ class ModalButtonDemo extends React.Component {
                         modalTitle="Dialog Modal"
                         type={ModalButton.Modal.Type.DIALOG}
                         ref="dialogModal"
-                        stateless={true}
                         onOpen={this._handleOpen(2)}
                         onClose={this._handleClose(2)}
                         expanded={this.state.modalExpanded2}
@@ -138,7 +135,6 @@ class ModalButtonDemo extends React.Component {
                         modalTitle=""
                         type={ModalButton.Modal.Type.ALERT}
                         ref="alertModal"
-                        stateless={true}
                         onOpen={this._handleOpen(3)}
                         onClose={this._handleClose(3)}
                         expanded={this.state.modalExpanded3}

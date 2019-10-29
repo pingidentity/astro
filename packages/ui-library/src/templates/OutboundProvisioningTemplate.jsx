@@ -97,7 +97,6 @@ const ProfileEdit = ({
                     labelRemove="Remove"
                     labelSelect="Choose a File"
                     showThumbnail
-                    stateless={false}
                     thumbnailSrc={activeProvider.logo || ""}
                 />
             </InputRow>

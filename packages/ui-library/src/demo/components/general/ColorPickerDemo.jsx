@@ -59,7 +59,6 @@ class ColorPickerDemo extends React.Component {
                         onError={this._handleError}
                         errorMessage={this.state.errorMessage}
                         open={this.state.picker2open}
-                        stateless={true}
                     />
                 </InputRow>
             </div>);

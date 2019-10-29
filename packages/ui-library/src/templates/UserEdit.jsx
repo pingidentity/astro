@@ -17,7 +17,7 @@ import InputRow from "ui-library/lib/components/layout/InputRow";
 const UserEdit = () => {
     const rowAccessories = [
         <Button key="button" label="Button" inline />,
-        <Toggle key="label" stateless={false} toggled />
+        <Toggle key="label" toggled />
     ];
 
     const rockerLabels = [
@@ -32,10 +32,9 @@ const UserEdit = () => {
             <ExpandableRow
                 title="Addleman, Katie"
                 subtitle="kaddleman"
-                stateless={false}
                 rowAccessories={rowAccessories}
             >
-                <RockerButton stateless={false} labels={rockerLabels} />
+                <RockerButton labels={rockerLabels} />
                 <Row className="columns-margin-none section-columns__columns">
                     <Column className="textblock textblock--primary">
                         Role
@@ -51,7 +50,6 @@ const UserEdit = () => {
                         collapsed: "Collapsed test",
                         expanded: "Expanded test"
                     }}
-                    stateless={false}
                 >
                     <Row className="columns-margin-none">
                         <Column>
@@ -85,11 +83,10 @@ const UserEdit = () => {
             <ExpandableRow
                 title="Lewis, Francisco"
                 subtitle="flewis"
-                stateless={false}
                 rowAccessories={rowAccessories}
                 expanded
             >
-                <RockerButton stateless={false} labels={rockerLabels} />
+                <RockerButton labels={rockerLabels} />
                 <Row className="columns-margin-none section-columns__columns textblock--primary">
                     <Column>
                         Role
@@ -109,7 +106,6 @@ const UserEdit = () => {
                         <Button inline iconName="edit"/>,
                         <Button inline iconName="delete"/>
                     ]}
-                    stateless={false}
                 >
                     <Row className="columns-margin-none">
                         <Column>
@@ -143,10 +139,9 @@ const UserEdit = () => {
             <ExpandableRow
                 title="Schneider, Maria"
                 subtitle="mschneider"
-                stateless={false}
                 rowAccessories={rowAccessories}
             >
-                <RockerButton stateless={false} labels={rockerLabels} />
+                <RockerButton labels={rockerLabels} />
                 <Row className="columns-margin-none section-columns__columns textblock--primary">
                     <Column>
                         Role
@@ -162,7 +157,6 @@ const UserEdit = () => {
                         collapsed: "Who doesn't love breakdancing?",
                         expanded: "Nobody, that's who"
                     }}
-                    stateless={false}
                 >
                     <Row className="columns-margin-none">
                         <Column>

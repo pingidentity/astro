@@ -25,12 +25,12 @@ class ScrollBoxDemo extends React.Component {
                 <FlexRow spacing="md">
                     <ValueItem
                         icon={
-                            <Toggle stateless={true} toggled={this.state.short} onToggle={this._handleToggle} />
+                            <Toggle toggled={this.state.short} onToggle={this._handleToggle} />
                         }
                     >Short content</ValueItem>
                     <ValueItem
                         icon={
-                            <Toggle stateless={true} toggled={this.state.fixHeight} onToggle={this._handleFixToggle} />
+                            <Toggle toggled={this.state.fixHeight} onToggle={this._handleFixToggle} />
                         }
                     >Fix height</ValueItem>
                 </FlexRow>

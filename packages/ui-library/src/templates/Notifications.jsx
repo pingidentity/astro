@@ -233,7 +233,6 @@ export default class Notifications extends Component {
                             title="Add Language"
                             buttonLabel="Add"
                             cancelText="Cancel"
-                            stateless={false}
                             buttonType="primary"
                         >
                             <FormDropDownList

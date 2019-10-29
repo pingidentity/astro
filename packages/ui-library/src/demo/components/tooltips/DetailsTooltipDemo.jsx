@@ -77,7 +77,6 @@ class DetailsTooltipDemo extends React.Component {
         return (
             <div className="controls">
                 <DetailsTooltip
-                    stateless={true}
                     placement="bottom right"
                     label="With a label (label is passed into component)"
                     title="Tooltip Title"
@@ -106,7 +105,6 @@ class DetailsTooltipDemo extends React.Component {
                 <br/>
                 <Anchor onClick={this._handleToggle(2)}>Without label (label is outside component)</Anchor>
                 <DetailsTooltip
-                    stateless={true}
                     placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open2}
@@ -133,7 +131,6 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
-                    stateless={true}
                     label={(<Button noSpacing className="delete-btn">Label as button</Button>)}
                     placement="bottom right"
                     title="Tooltip Title"
@@ -160,7 +157,6 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
-                    stateless={true}
                     placement="bottom right"
                     label="Open by default"
                     title="Tooltip Title"
@@ -186,7 +182,6 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
-                    stateless={true}
                     label="With alert styling"
                     type="alert"
                     positionClassName="" // this is to override the default positionClassName
@@ -217,7 +212,6 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
-                    stateless={true}
                     placement="bottom right"
                     label="Three Buttons"
                     title="Three Buttons"
@@ -250,7 +244,6 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
-                    stateless={true}
                     label="Alert styling with three buttons"
                     type="alert"
                     title="Tooltip Title"
@@ -283,7 +276,6 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
-                    stateless={true}
                     label="Test passing buttons"
                     placement="bottom right"
                     title="Tooltip Title"
@@ -336,7 +328,6 @@ class DetailsTooltipDemo extends React.Component {
                     labelClassName="my-css-class"
                     label="Stateful tooltip"
                     title="Tooltip Title"
-                    stateless={false}
                     onToggle={_.noop}>
 
                     <p>
@@ -350,8 +341,7 @@ class DetailsTooltipDemo extends React.Component {
                     placement="bottom left"
                     labelClassName="my-css-class"
                     label="Hang on the left"
-                    title="Tooltip Title"
-                    stateless={false}>
+                    title="Tooltip Title">
 
                     <p>
                         Nothing fancy here.
@@ -364,8 +354,7 @@ class DetailsTooltipDemo extends React.Component {
                     placement="bottom"
                     labelClassName="my-css-class"
                     label="Hang center"
-                    title="Tooltip Title"
-                    stateless={false}>
+                    title="Tooltip Title">
 
                     <p>
                         Nothing fancy here.

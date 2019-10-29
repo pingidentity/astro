@@ -81,7 +81,7 @@ export default class PaginatedList extends React.Component {
                     rightControl={<Button label="Add Application" iconName="add" flags={["add-button-margin"]}/>}
                 />
                 {filteredPages.length && (
-                    <Pagination stateless={true}
+                    <Pagination
                         page = {this.state.page}
                         total = {filteredPages.length}
                         onValueChange = {this._handlePageChange}

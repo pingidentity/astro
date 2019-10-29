@@ -60,7 +60,6 @@ class ValidationMessagesDemo extends React.Component {
                         onValueChange={this._handleValueChange1}
                         maskValue={true}
                         showReveal={true}
-                        stateless={false}
                     />
                     <ValidationMessages
                         className="show"
@@ -74,7 +73,6 @@ class ValidationMessagesDemo extends React.Component {
                         maskValue={true}
                         onValueChange={this._handleValueChange2}
                         showReveal={true}
-                        stateless={false}
                     />
                     <ValidationMessages
                         className={this.state.showValidateMessages}
