@@ -206,7 +206,7 @@ class ExpandableRowDemo extends React.Component {
                             </HelpHint>,
                             <button key="button"className="inline">Inline Button</button>,
                             <Toggle key="toggle" stateless={false} />,
-                            <span key="count" className="count">2</span>
+                            <Chip type={chipTypes.COUNT} key="count">2</Chip>
                         ]}
                     />
                     <ExpandableRow
@@ -259,7 +259,7 @@ class ExpandableRowDemo extends React.Component {
                                 </HelpHint>
                                 <button className="inline">Inline Button</button>
                                 <Toggle stateless={false} />
-                                <span className="count">2</span>
+                                <Chip type={chipTypes.COUNT} key="count">2</Chip>
                             </span>
                         )}
                     />

@@ -43,6 +43,14 @@ export default function ChipDemo() {
                     Condensed
                 </Chip>
             </InputRow>
+            <InputRow>
+                Count:
+                <Chip
+                    type={chipTypes.COUNT}
+                >
+                    18
+                </Chip>
+            </InputRow>
         </div>
     );
 }
