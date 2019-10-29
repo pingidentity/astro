@@ -1,7 +1,7 @@
 import React from "react";
-import Chip, { chipColors, chipTypes } from "../../../components/layout/Chip";
-import Icon from "../../../components/general/Icon";
-import InputRow from "../../../components/layout/InputRow";
+import Chip, { chipColors, chipTypes } from "ui-library/lib/components/layout/Chip";
+import Icon from "ui-library/lib/components/general/Icon";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 
 /**
 * @class ChipDemo
