@@ -1,6 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { noop } from 'underscore';
+
+/**
+ * @callback PasswordInput~onChange
+ *
+ * @param {object} e
+ *    The ReactJS synthetic event object.
+ */
+
+/**
+* @callback PasswordInput~onBlur
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback PasswordInput~onFocus
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback PasswordInput~onKeyDown
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback PasswordInput~onKeyPress
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback PasswordInput~onMouseDown
+*
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
 
 /**
  * @class PasswordInput
@@ -21,7 +64,19 @@ import classnames from 'classnames';
  *
  */
 const PasswordInput = ({
-    placeholder, id, className, error, success, defaultValue, 'data-id': dataId,
+    placeholder,
+    id,
+    className,
+    error,
+    success,
+    defaultValue,
+    'data-id': dataId,
+    onChange,
+    onFocus,
+    onBlur,
+    onKeyPress,
+    onKeyDown,
+    onMouseDown,
 }) => {
     const classNames = classnames('text-input', className, {
         'text-input--error': error,
@@ -33,6 +88,12 @@ const PasswordInput = ({
             className={classNames}
             id={id}
             name={id}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onKeyPress={onKeyPress}
+            onKeyDown={onKeyDown}
+            onMouseDown={onMouseDown}
             placeholder={placeholder}
             type="password"
             defaultValue={defaultValue}
@@ -44,6 +105,12 @@ const PasswordInput = ({
 PasswordInput.propTypes = {
     placeholder: PropTypes.string,
     id: PropTypes.string,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    onMouseDown: PropTypes.func,
     error: PropTypes.bool,
     success: PropTypes.bool,
     defaultValue: PropTypes.string,
@@ -52,6 +119,12 @@ PasswordInput.propTypes = {
 
 PasswordInput.defaultProps = {
     'data-id': 'password-input',
+    onChange: noop,
+    onFocus: noop,
+    onBlur: noop,
+    onKeyPress: noop,
+    onKeyDown: noop,
+    onMouseDown: noop,
 };
 
 export default PasswordInput;
