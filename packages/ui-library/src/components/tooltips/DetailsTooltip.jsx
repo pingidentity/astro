@@ -84,6 +84,10 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     </DetailsTooltip>
  */
 
+const DetailsTitle = ({ children }) => (
+    <div class="title">{children}</div>
+);
+
 const tooltipPlacements = {
     TOP: "top",
     BOTTOM: "bottom",
@@ -604,5 +608,6 @@ DetailsTooltip.positionStyles = {
 };
 
 DetailsTooltip.detailsWidths = detailsWidths;
+DetailsTooltip.DetailsTitle = DetailsTitle;
 
 export default DetailsTooltip;
