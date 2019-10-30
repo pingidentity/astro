@@ -10,7 +10,7 @@ import HR from "ui-library/lib/components/general/HR";
 */
 class PageSectionDemo extends React.Component {
     render() {
-        const helpHint = <span>Would you like <HelpHint hintText="Some help?" className="inline" /></span>;
+        const helpHint = <span>Would you like <HelpHint hintText="Some help?" /></span>;
 
         return (
             <div>

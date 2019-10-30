@@ -131,6 +131,7 @@ class FormRadioGroup extends React.Component {
         disabled: false,
         renderRadio: defaultRender,
         autoFocus: false,
+        onValueChange: () => {},
     };
 
     _handleChange = (value) => {

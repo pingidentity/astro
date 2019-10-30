@@ -41,7 +41,7 @@ class CalendarDemo extends React.Component {
                     computableFormat="x"
                     date={this.state.selectedDate1}
                     format="YYYY-MM-DD"
-                    helpClassName="right"
+                    helpPlacement="right"
                     labelText="Date"
                     labelHelpText="Help text can go here"
                     name="calendar-demo"
@@ -57,7 +57,7 @@ class CalendarDemo extends React.Component {
                     dateRange={this.state.dateRange}
                     date={this.state.selectedDate2}
                     format="YYYY-MM-DD"
-                    helpClassName="right"
+                    helpPlacement="right"
                     required
                     labelNode={
                         <FormLabel

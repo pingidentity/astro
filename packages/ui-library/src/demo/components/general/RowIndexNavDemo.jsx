@@ -38,11 +38,12 @@ var RowIndexNavDemo = createReactClass({
         return (
             <div>
                 <InputRow>
-                    <button
+                    <Button
                         onClick={this._selectNewIndex}
-                        className="inline">
+                        inline
+                    >
                         Randomly Select New Index
-                    </button> - illustrates autoscroll when selection is out of view.
+                    </Button> - illustrates autoscroll when selection is out of view.
                 </InputRow>
                 <div className="instructions">
                     Note that the rows below are not tied in anyway to the Index Nav on the right. The are present

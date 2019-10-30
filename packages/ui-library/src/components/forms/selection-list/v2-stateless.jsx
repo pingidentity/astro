@@ -13,6 +13,18 @@ import { ListType } from "./v2-constants";
 import { filterItemsFunction } from "./v2-reducer";
 
 /**
+ * @enum {string}
+ * @alias SelectionList.ListWidths
+ */
+export const listWidths = {
+    /** fixed */
+    FIXED: "fixed",
+    /** fluid */
+    FLUID: "fluid",
+};
+
+
+/**
  * @name SelectionListStateless
  * @memberof SelectionList
  * @desc This is a wrapper around the stateful (stateless=true) SelectionList.
@@ -73,6 +85,7 @@ export default class SelectionListStateless extends React.Component {
         onMultiAdd: PropTypes.func,
         autoSelectAll: PropTypes.bool,
         autoFilter: PropTypes.bool,
+        width: PropTypes.oneOf(Object.values(listWidths))
     };
 
     static defaultProps = {
@@ -205,7 +218,8 @@ export default class SelectionListStateless extends React.Component {
             {
                 searchable: this.props.showSearchBox,
                 "show-selection-options": showSelectionOptions,
-                "input-selection-list--no-border": this.props["no-border"]
+                "input-selection-list--no-border": this.props["no-border"],
+                "fluid-width": this.props.width === listWidths.FLUID,
             });
         const visibleItems = this.props.showOnlySelected ? this._filterVisible() : this._getItems();
 

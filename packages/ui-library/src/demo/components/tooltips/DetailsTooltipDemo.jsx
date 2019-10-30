@@ -1,10 +1,11 @@
 import React from "react";
 import _ from "underscore";
-import DetailsTooltip, { detailsWidths } from "ui-library/lib/components/tooltips/DetailsTooltip";
+import DetailsTooltip, { detailsWidths, DetailsTitle } from "ui-library/lib/components/tooltips/DetailsTooltip";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import Anchor from "ui-library/lib/components/general/Anchor";
+import Padding from "ui-library/lib/components/layout/Padding";
 
 /**
 * @name DetailsTooltipDemo
@@ -131,7 +132,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
-                    label={(<Button noSpacing className="delete-btn">Label as button</Button>)}
+                    label={(<Button noSpacing>Label as button</Button>)}
                     placement="bottom right"
                     title="Tooltip Title"
                     open={this.state.open3}
@@ -189,9 +190,9 @@ class DetailsTooltipDemo extends React.Component {
                     open={this.state.open5}
                     onToggle={this._handleToggle(5)}
                 >
-                    <div className="title">
+                    <DetailsTitle>
                         Alert Title
-                    </div>
+                    </DetailsTitle>
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
@@ -249,7 +250,7 @@ class DetailsTooltipDemo extends React.Component {
                     title="Tooltip Title"
                     open={this.state.open7}
                     onToggle={this._handleToggle(7)}>
-                    <div className="title">Save Changes</div>
+                    <DetailsTitle>Save Changes</DetailsTitle>
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
@@ -285,7 +286,7 @@ class DetailsTooltipDemo extends React.Component {
                     primaryLabels={primaryArr}
                     cancelLabel="Cancel"
                 >
-                    <div className="title">Pass buttons</div>
+                    <DetailsTitle>Pass buttons</DetailsTitle>
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
@@ -336,16 +337,18 @@ class DetailsTooltipDemo extends React.Component {
 
                 <HR />
 
-                <DetailsTooltip
-                    placement="bottom left"
-                    labelClassName="my-css-class"
-                    label="Hang on the left"
-                    title="Tooltip Title">
+                <Padding left="xl">
+                    <DetailsTooltip
+                        placement="bottom left"
+                        labelClassName="my-css-class"
+                        label="Hang on the left"
+                        title="Tooltip Title">
 
-                    <p>
-                        Nothing fancy here.
-                    </p>
-                </DetailsTooltip>
+                        <p>
+                            Nothing fancy here.
+                        </p>
+                    </DetailsTooltip>
+                </Padding>
 
                 <br />
 

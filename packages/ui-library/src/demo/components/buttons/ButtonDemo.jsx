@@ -56,6 +56,11 @@ class ButtonsDemo extends Component {
                     inline>
                     <span className="badge">4</span>
                 </Button>
+                <Button
+                    label="Here's a Link Button"
+                    inline
+                    type={buttonTypes.LINK}
+                />
                 <br /><br />
                 <Button
                     label="Add"

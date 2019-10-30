@@ -7,7 +7,7 @@ import _ from "underscore";
 import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
-import { darkInputs } from "../../util/CSSModifiers";
+import InputModifier, { inputColors } from "../general/InputModifier";
 
 const optionsSelector = createSelector(
     state => state.search,
@@ -147,23 +147,22 @@ class FilterSelector extends React.Component {
                     open={open}
                     onToggle={onToggle}
                 >
-                    <SelectionList
-                        className={darkInputs}
-                        stateless={true}
-                        type={type}
-                        bottomPanel={bottomPanel}
-                        items={this._getOptions()}
-                        optionsNote={optionsNote}
-                        showSearchBox={true}
-                        searchPlaceholder="Search..."
-                        onSearch={this._handleSearch}
-                        onValueChange={onValueChange}
-                        no-border
-                        queryString={this._getSearch()}
-                        requiredText={requiredText}
-                        selectedItemIds={selected}
-                        searchBoxProps={{ textFieldProps: { stateless: true } }}
-                    />
+                    <InputModifier inputColor={inputColors.DARK}>
+                        <SelectionList
+                            type={type}
+                            bottomPanel={bottomPanel}
+                            items={this._getOptions()}
+                            optionsNote={optionsNote}
+                            showSearchBox={true}
+                            searchPlaceholder="Search..."
+                            onSearch={this._handleSearch}
+                            onValueChange={onValueChange}
+                            no-border
+                            queryString={this._getSearch()}
+                            requiredText={requiredText}
+                            selectedItemIds={selected}
+                        />
+                    </InputModifier>
                 </Popover>
             </span>
         );

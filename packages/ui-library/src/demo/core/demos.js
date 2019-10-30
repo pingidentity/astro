@@ -517,13 +517,6 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_FieldSetDemo.jsx.html"
                     },
                     {
-                        label: "File Details",
-                        demo: require("../components/layout/FileDetailsDemo"),
-                        pathToDoc: "components/layout/FileDetails.jsx",
-                        pathToSource: "components_layout_FileDetails.jsx.html",
-                        pathToDemoSource: "demo_components_layout_FileDetailsDemo.jsx.html"
-                    },
-                    {
                         label: "Flex Row",
                         demo: require("../components/layout/FlexRowDemo"),
                         pathToDoc: "components/layout/FlexRow.jsx",
@@ -544,13 +537,26 @@ module.exports = [
                         pathToSource: "components_layout_LabelValuePairs.jsx.html",
                         pathToDemoSource: "demo_components_layout_LabelValuePairsDemo.jsx.html"
                     },
-
+                    {
+                        label: "Linking Arrow",
+                        demo: require("../components/layout/LinkingArrowDemo"),
+                        pathToDoc: "components/layout/LinkingArrow.jsx",
+                        pathToSource: "components_layout_LinkingArrow.jsx.html",
+                        pathToDemoSource: "demo_components_layout_LinkingArrowDemo.jsx.html"
+                    },
                     {
                         label: "List Nav",
                         demo: require("../components/layout/ListNavDemo"),
                         pathToDoc: "components/layout/ListNav.jsx",
                         pathToSource: "components_layout_ListNav.jsx.html",
                         pathToDemoSource: "demo_components_layout_ListNavDemo.jsx.html"
+                    },
+                    {
+                        label: "Padding",
+                        demo: require("../components/layout/PaddingDemo"),
+                        pathToDoc: "components/layout/Padding.jsx",
+                        pathToSource: "components_layout_Padding.jsx.html",
+                        pathToDemoSource: "demo_components_layout_PaddingDemo.jsx.html"
                     },
                     {
                         label: "Page Group",
@@ -572,6 +578,13 @@ module.exports = [
                         pathToDoc: "components/layout/PageSection.jsx",
                         pathToSource: "components_layout_PageSection.jsx.html",
                         pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
+                    },
+                    {
+                        label: "Spacing",
+                        demo: require("../components/layout/SpacingDemo"),
+                        pathToDoc: "components/layout/Spacing.jsx",
+                        pathToSource: "components_layout_Spacing.jsx.html",
+                        pathToDemoSource: "demo_components_layout_SpacingDemo.jsx.html"
                     },
                     {
                         label: "Tab Set",

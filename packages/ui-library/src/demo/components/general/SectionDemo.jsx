@@ -120,7 +120,6 @@ class SectionDemo extends React.Component {
                     </Section>
                     <Section
                         title="Disabled section"
-                        className="extra"
                         condensed={true}
                         disableExpand={true}
                     >

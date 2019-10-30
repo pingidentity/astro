@@ -34,7 +34,7 @@ class FormTextAreaDemo extends React.Component {
 
     render() {
         var options = { 1: "one", 2: "two", 3: "three" },
-            heightOptions = "With a default height of 'medium'. Options" +
+            heightOptions = "With a height of 'medium'. Options" +
                             " are 'short', 'medium', and 'large'.";
 
         return (
@@ -131,8 +131,8 @@ class FormTextAreaDemo extends React.Component {
                 <InputRow>
                     <FormTextArea
                         labelText={heightOptions}
-                        labelHelpText="This is the default medium height."
-                        className="textarea-height--medium"
+                        labelHelpText="This is the default short height."
+                        height={FormTextArea.inputHeights.MD}
                         width={InputWidths.MD}
                     />
                 </InputRow>

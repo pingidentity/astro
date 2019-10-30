@@ -7,7 +7,7 @@ import classnames from "classnames";
  * @alias Text.textTypes
  * @desc Enum for the different types of Messages
  */
-const textTypes = {
+export const textTypes = {
     /** body */
     BODY: "body",
     /** error */

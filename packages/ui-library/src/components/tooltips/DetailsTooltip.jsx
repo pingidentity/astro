@@ -63,7 +63,7 @@ import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationU
  *     Callback to be triggered when escape key is clicked. Closes DetailsTooltip.
  * @param {boolean} [showClose=true]
  *     Show close control.
- * @param {("basic" | "alert")} [type="basic"]
+ * @param {("basic" | "alert" | "selection-list")} [type="basic"]
  *     Determines basic appearance
 * @param {("MD, LG")} [width]
  *      If supplied, with add different width sizes for the tooltip.
@@ -78,6 +78,10 @@ import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationU
  *     </DetailsTooltip>
  */
 
+const DetailsTitle = ({ children }) => (
+    <div class="title">{children}</div>
+);
+
 const tooltipPlacements = {
     TOP: "top",
     BOTTOM: "bottom",
@@ -90,7 +94,8 @@ const tooltipPlacements = {
 const popupTypes = {
     BASIC: "basic",
     DIALOG: "dialog",
-    ALERT: "alert"
+    ALERT: "alert",
+    SELECTION_LIST: "selection-list",
 };
 
 const detailsWidths = {
@@ -289,8 +294,14 @@ class DetailsTooltipStateless extends React.Component {
         return (
             <PopperContainer
                 getReference={this._getTrigger}
-                className={classnames("details-tooltip-display", contentClassName, this.props.className,
-                    getDetailsWidth(this.props.width)
+                className={classnames(
+                    "details-tooltip-display",
+                    contentClassName,
+                    this.props.className,
+                    getDetailsWidth(this.props.width),
+                    {
+                        "input-selection-list-tooltip": this.props.type === popupTypes.SELECTION_LIST
+                    }
                 )}
                 pointerClassName="details-tooltip-display__pointer"
                 data-id="details-content"
@@ -462,5 +473,6 @@ DetailsTooltip.positionStyles = {
 };
 
 DetailsTooltip.detailsWidths = detailsWidths;
+DetailsTooltip.DetailsTitle = DetailsTitle;
 
 export default DetailsTooltip;

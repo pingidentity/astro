@@ -56,8 +56,8 @@ var Views = {
  *    CSS classes to apply to the top-level HTML container.
  * @param {string} [labelClassName]
  *    CSS classes to apply to the label container.
- * @param {string} [helpClassName]
- *    CSS classes to apply to the label help container.
+ * @param {HelpHint.Placements} [helpPlacement]
+ *     How to place the help hint.
  *
  * @param {*} [date]
  *    Numeric value for the selected date. If not provided, will use the today's date.
@@ -134,6 +134,7 @@ class BaseCalendar extends React.Component {
         }),
         format: PropTypes.string,
         helpClassName: PropTypes.string,
+        helpPlacement: PropTypes.string,
         labelClassName: PropTypes.string,
         label: PropTypes.string,
         labelNode: PropTypes.node,
@@ -428,6 +429,7 @@ class BaseCalendar extends React.Component {
                     <FormLabel
                         className={classnames(this.props.labelClassName)}
                         helpClassName={classnames(this.props.helpClassName)}
+                        helpPlacement={this.props.helpPlacement}
                         data-id={this.props["data-id"] + "-label"}
                         value={this.props.labelText || this.props.label}
                         hint={this.props.labelHelpText}

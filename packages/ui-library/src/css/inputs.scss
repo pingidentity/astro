@@ -2432,6 +2432,11 @@ input[type=file] {
             margin-left: 5px;
         }
     }
+
+    &--show {
+        display: block;
+    }
+
     .message {
         padding: 3px 0;
     }

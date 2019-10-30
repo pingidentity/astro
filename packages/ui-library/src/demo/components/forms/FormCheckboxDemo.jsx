@@ -1,6 +1,7 @@
 import React from "react";
 import FormCheckbox from "./../../../components/forms/FormCheckbox";
 import InputRow from "../../../components/layout/InputRow";
+import FormLabel from "../../../components/forms/FormLabel";
 
 /**
 * @name FormCheckboxDemo
@@ -67,9 +68,9 @@ class FormCheckboxDemo extends React.Component {
                     />
                 </InputRow>
                 <InputRow>
-                    <label className="detached">
+                    <FormLabel detached>
                         Example of Stacked Options
-                    </label>
+                    </FormLabel>
                     <FormCheckbox
                         conditionalContent="Some conditional content"
                         label="Stacked Checkbox"
@@ -91,9 +92,9 @@ class FormCheckboxDemo extends React.Component {
                     />
                 </InputRow>
                 <InputRow>
-                    <label className="detached">
+                    <FormLabel detached>
                         Example of Inline Options together and alone
-                    </label>
+                    </FormLabel>
                     <FormCheckbox
                         label="Inline Checkbox"
                         onChange={this._onChange(8)}
