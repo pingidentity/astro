@@ -1,15 +1,27 @@
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export const overflowTypes = {
+const overflowTypes = {
     WRAP: 'wrap',
     ELLIPSIS: 'ellipsis',
 };
 
-export const alignments = {
+const alignments = {
     LEFT: 'left',
     RIGHT: 'right',
+};
+
+const sizes = {
+    SM: 'small',
+    LG: 'large',
+    SMALLRIGHT: 'small-right',
+};
+
+const margins = {
+    SM: 'small',
+    XXL: 'xxlarge',
 };
 
 /**
@@ -17,7 +29,7 @@ export const alignments = {
  * @desc Display a block of text
  *
 * @param {string} [alignments]
- *      Aligns the textblock contents (left | right )
+ *      Aligns the textblock contents (left|right)
  * @param {node} [children]
  *      Buttons to display in the set
  * @param {string} [className]
@@ -27,7 +39,7 @@ export const alignments = {
  * @param {string} [size]
  *      Set the size of the TextBlock (small|small-right|large)
  * @param {string} [spacing]
- *      Set the spacing of the TextBlock (small| xxlarge)
+ *      Set the spacing of the TextBlock (small|xxlarge)
  *
  */
 
@@ -40,19 +52,15 @@ const TextBlock = ({
     overflow,
     'data-id': dataId,
 }) => {
-    const classNamesOuter = classnames(
-        'text-block',
-        className,
-        {
-            'text-block--small': size === 'small',
-            'text-block--large': size === 'large',
-            'text-block--small-right': size === 'small-right',
-            'text-block--margin-sm': spacing === 'small',
-            'text-block--margin-xx': spacing === 'xxlarge',
-            'text-block--right': alignment === alignments.RIGHT,
-            'text-block--left': alignment === alignments.LEFT,
-        }
-    );
+    const classNamesOuter = classnames('text-block', className, {
+        'text-block--small': size === sizes.SM,
+        'text-block--large': size === sizes.SM,
+        'text-block--small-right': size === sizes.SMALLRIGHT,
+        'text-block--margin-sm': spacing === margins.SM,
+        'text-block--margin-xx': spacing === margins.XXL,
+        'text-block--right': alignment === alignments.RIGHT,
+        'text-block--left': alignment === alignments.LEFT,
+    });
 
     const Outer = typeof Children === 'string' ? 'p' : 'div';
     const Inner = typeof Children === 'string' ? 'span' : 'div';
@@ -65,8 +73,8 @@ const TextBlock = ({
 };
 
 TextBlock.propTypes = {
-    size: PropTypes.oneOf(['small', 'large', 'small-right']),
-    spacing: PropTypes.oneOf(['small', 'xxlarge']),
+    size: PropTypes.oneOf(['small', 'large', 'small-right', ...Object.values(sizes)]),
+    spacing: PropTypes.oneOf(['small', 'xxlarge', ...Object.values(margins)]),
     className: PropTypes.string,
     'data-id': PropTypes.string,
     alignment: PropTypes.oneOf(Object.values(alignments)),
@@ -78,5 +86,9 @@ TextBlock.defaultProps = {
     overflow: overflowTypes.WRAP,
 };
 
+TextBlock.overflowTypes = overflowTypes;
+TextBlock.alignments = alignments;
+TextBlock.sizes = sizes;
+TextBlock.margins = margins;
 export default TextBlock;
 
