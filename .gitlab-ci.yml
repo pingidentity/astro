@@ -8,11 +8,9 @@ test:
   tags:
     - platform-build-node-fragment
   script:
-    - cd packages/ui-library
-    - npm install
-    - cd ../end-user
-    - npm install
-    - cd ../../
     - npm i lerna -g
+    - lerna bootstrap
     - lerna run lint
     - lerna run coverage-ci
+    - lerna run static
+    - lerna run pack
