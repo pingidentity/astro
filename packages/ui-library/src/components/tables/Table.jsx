@@ -193,7 +193,10 @@ class TableCell extends Component {
                     }
                 )}
                 ref={ref => this.cellContent = ref}
-                {...this.hasEllipsis ? { containerClassName: "grid__cell-hint", hintText: content } : {}}
+                {...(useEllipsis && this.hasEllipsis)
+                    ? { containerClassName: "grid__cell-hint", hintText: content }
+                    : {}
+                }
             >
                 {[
                     ...icon !== undefined
