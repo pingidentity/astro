@@ -230,7 +230,7 @@ class FileInput extends Component {
 
         const classNames = classnames(this.props.className, "input-file", {
             "input-file--selected": fileName,
-            "input-file--selected-fullWidth": fullWidth
+            "input-file--selected-full-width": fullWidth
         });
 
         return (
