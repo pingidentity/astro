@@ -1,6 +1,8 @@
 import React from "react";
 import DragDropTable from "ui-library/lib/components/tables/DragDropTable";
 import mockData from "ui-library/lib/templates/reports-page/mockData";
+import FlexRow, { alignments, spacingOptions } from "ui-library/lib/components/layout/FlexRow";
+import Icon from "ui-library/lib/components/general/Icon";
 import Link from "ui-library/lib/components/general/Link";
 import { linkTypes } from "ui-library/lib/components/general/Anchor";
 import _ from "underscore";
@@ -109,17 +111,28 @@ export default class Reports extends React.Component {
 
     _getHeadContentType = (sortFunction) => {
         const HeaderCell = (props) => {
-            const linkClass = (this.state.sort.column === props.index)
-                ? (this.state.sort.ascending ? "ascending" : "descending")
-                : null;
 
             const _handleOnClick = function (event) {
                 sortFunction(props.index, event);
             };
 
             return (
-                <Link onClick={_handleOnClick} className={linkClass}>
-                    {props.data}
+                <Link onClick={_handleOnClick}>
+                    <FlexRow
+                        alignment={alignments.STRETCH}
+                        inline
+                        spacing={spacingOptions.XS}
+                    >
+                        <span>{props.data}</span>
+                        <Icon
+                            inline
+                            iconName={
+                                this.state.sort.column === props.index
+                                    ? `sort-${this.state.sort.ascending ? "asc" : "desc"}`
+                                    : undefined
+                            }
+                        />
+                    </FlexRow>
                 </Link>
             );
         };
