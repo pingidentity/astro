@@ -348,7 +348,7 @@ const PStatefulFormTextArea = inStateContainer([
     },
 ], isEdited)(FormTextAreaStateless);
 
-class FormTextArea extends React.Component {
+export default class FormTextArea extends React.Component {
     static propTypes = {
         stateless: PropTypes.bool,
         flags: flagsPropType,
@@ -392,5 +392,3 @@ class FormTextArea extends React.Component {
     }
 }
 FormTextArea.inputHeights = inputHeights;
-
-export default FormTextArea;
