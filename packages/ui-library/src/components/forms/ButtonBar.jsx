@@ -26,7 +26,7 @@ import { flagsPropType, getFlags } from "../../util/FlagUtils";
 * @class ButtonBar
 * @desc Displays a set of button controls, most often "Save" and "Cancel", and sometimes "Discard"
 *
-* @param {ButtonBar.alignments} [alignment=right]
+* @param {ButtonBar.alignments} [alignment=left]
 *     Which side of the bar the buttons go.
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
@@ -124,8 +124,8 @@ import { flagsPropType, getFlags } from "../../util/FlagUtils";
 * @param {ButtonBar~onSave} onSaveMouseDown
 *     Callback that will be triggered when the "save" button gets a mousedown event.
 *     Because mousedown fires blur events, it's sometimes possible for the save to get a mousedown event but never get the click.
-* @param {boolean} [useButtonForCancel=true]
-*     If you want to render the Cancel and Discard Changes buttons as links, set this to false.
+* @param {boolean} [useButtonForCancel=false]
+*     If you want to render the Cancel and Discard Changes links as buttons, set this to true.
 * @param {boolean} [unfixed=false]
 *     When set, the bar appears within the flow of the page content rather than fixed to the bottom of the window.
 * @param {boolean} [visible=true]
@@ -264,7 +264,7 @@ class ButtonBar extends React.Component {
     };
 
     static defaultProps = {
-        alignment: "right",
+        alignment: "left",
         cancelText: "Cancel",
         "data-id": "button-bar",
         saveDisabled: false,
@@ -275,7 +275,7 @@ class ButtonBar extends React.Component {
         visible: true,
         onSave: _.noop,
         onSaveMouseDown: _.noop,
-        useButtonForCancel: true,
+        useButtonForCancel: false,
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };

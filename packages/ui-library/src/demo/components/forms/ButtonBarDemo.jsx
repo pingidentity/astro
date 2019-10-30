@@ -11,14 +11,14 @@ import Button from "ui-library/lib/components/buttons/Button";
 class ButtonBarDemo extends React.Component {
 
     state = {
-        leftAlign: false,
+        leftAlign: true,
         saving: false,
         showBar: true,
         statusText: "-",
         showCancelTooltip: false,
         showSaveTooltip: false,
         saveDisabledText: null,
-        cancelButtons: true,
+        cancelButtons: false,
     };
 
     _handleCancel = () => {
