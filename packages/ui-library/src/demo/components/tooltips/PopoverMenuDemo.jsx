@@ -1,5 +1,6 @@
 import React from "react";
 import PopoverMenu from "../../../components/tooltips/PopoverMenu";
+import Button from "ui-library/lib/components/buttons/Button";
 
 /**
  * @name PopoverMenuDemo
@@ -39,7 +40,7 @@ class PopoverMenuDemo extends React.Component {
             <div>
                 <p>Last clicked: {this.state.message}</p>
                 <PopoverMenu
-                    label={<span className="button inline edit" />}
+                    label={<Button inline iconName="edit" />}
                     buttons={this._buttons}
                     open={this.state.open1}
                     onToggle={this._toggle1}

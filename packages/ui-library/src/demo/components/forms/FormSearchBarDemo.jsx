@@ -59,9 +59,9 @@ class SearchBarDemo extends React.Component {
                     key="props"
                     flags={flags}
                 >
-                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
-                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
-                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                    <FormCheckbox label="Filter 1" inline key="uno" />
+                    <FormCheckbox label="Filter 2" inline key="dos" />
+                    <FormCheckbox label="Filter 3" inline key="tres" />
                 </SearchBar>
                 <HR />
                 <p>Passing the search box props directly:</p>
@@ -74,9 +74,9 @@ class SearchBarDemo extends React.Component {
                     key="direct"
                     flags={flags}
                 >
-                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
-                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
-                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                    <FormCheckbox label="Filter 1" inline key="uno" />
+                    <FormCheckbox label="Filter 2" inline key="dos" />
+                    <FormCheckbox label="Filter 3" inline key="tres" />
                 </SearchBar>
                 <HR />
                 <p>No filters</p>
@@ -96,7 +96,7 @@ class SearchBarDemo extends React.Component {
                     showClear={true}
                     value={this.state.value}
                     name="demo-search"
-                    centerControl={<FormCheckbox className="inline" label="Hide disabled"/>}
+                    centerControl={<FormCheckbox inline label="Hide disabled"/>}
                     rightControl={<Button label="Add" iconName="add" noSpacing />}
                     flags={flags}
                 />
@@ -116,9 +116,9 @@ class SearchBarDemo extends React.Component {
                     }}
                     flags={flags}
                 >
-                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
-                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
-                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                    <FormCheckbox label="Filter 1" inline key="uno" />
+                    <FormCheckbox label="Filter 2" inline key="dos" />
+                    <FormCheckbox label="Filter 3" inline key="tres" />
                 </SearchBar>
                 <HR />
                 <p>With documentation link and showwithFilters is True</p>
@@ -136,9 +136,9 @@ class SearchBarDemo extends React.Component {
                     }}
                     flags={flags}
                 >
-                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
-                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
-                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                    <FormCheckbox label="Filter 1" inline key="uno" />
+                    <FormCheckbox label="Filter 2" inline key="dos" />
+                    <FormCheckbox label="Filter 3" inline key="tres" />
                 </SearchBar>
             </div>
         );

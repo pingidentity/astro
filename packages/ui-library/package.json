@@ -172,7 +172,7 @@
       "/dist/",
       "/src/selenium/tests",
       "commonTests.js?(x)"
-  ],
+    ],
     "modulePathIgnorePatterns": [
       "/node/",
       "/build/",

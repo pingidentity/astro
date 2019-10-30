@@ -11,6 +11,7 @@ import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
 import ConfirmTooltip from "ui-library/lib/components/tooltips/ConfirmTooltip";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import Chip, { chipTypes } from "ui-library/lib/components/layout/Chip";
+import Icon from "ui-library/lib/components/general/Icon";
 
 /**
 * @name ExpandableRowDemo
@@ -200,11 +201,11 @@ class ExpandableRowDemo extends React.Component {
                         subtitle="Row Subtitle"
                         rowAccessories={[
                             <a key="link">Link</a>,
-                            <span key="icon" className="icon-cog" />,
+                            <Icon iconName="cog" key="icon" />,
                             <HelpHint key="help" className="width-auto bottom" hintText="Provisioning">
                                 <Chip type={chipTypes.CONDENSED}>Prov</Chip>
                             </HelpHint>,
-                            <button key="button"className="inline">Inline Button</button>,
+                            <Button key="button" inline>Inline Button</Button>,
                             <Toggle key="toggle" stateless={false} />,
                             <Chip type={chipTypes.COUNT} key="count">2</Chip>
                         ]}
@@ -253,11 +254,11 @@ class ExpandableRowDemo extends React.Component {
                         rowAccessories={(
                             <span className="row-accessories-content">
                                 <a>Link</a>
-                                <span className="icon-cog" />
+                                <Icon iconName="cog" key="icon" />,
                                 <HelpHint className="width-auto bottom" hintText="Provisioning">
                                     <Chip type={chipTypes.CONDENSED}>Prov</Chip>
                                 </HelpHint>
-                                <button className="inline">Inline Button</button>
+                                <Button inline>Inline Button</Button>
                                 <Toggle stateless={false} />
                                 <Chip type={chipTypes.COUNT} key="count">2</Chip>
                             </span>
@@ -284,7 +285,7 @@ class ExpandableRowDemo extends React.Component {
                                 <div className="invite-status">Invited (Open)</div>
                                 <div className="invite-date">2017-4-10 4:35pm</div>
                             </div>,
-                            <button key="button" className="inline">Resend Invitation</button>
+                            <Button key="button" inline>Resend Invitation</Button>
                         ]}
                     />
                     <ExpandableRow

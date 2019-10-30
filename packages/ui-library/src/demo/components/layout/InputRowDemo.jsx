@@ -31,7 +31,7 @@ const InputRowDemo = () => {
                 />
 
                 <InputRowAccessories data-id="input-row-accessories">
-                    <Button className="inline">Buttons</Button> and text can be aligned with text inputs using the
+                    <Button inline>Buttons</Button> and text can be aligned with text inputs using the
                     InputRow Accessories.
                 </InputRowAccessories>
             </InputRow>
