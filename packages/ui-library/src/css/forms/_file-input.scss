@@ -13,6 +13,12 @@
 
     &.input-file--selected {
         background-color: transparent;
+        &-full-width {
+            width: 100%;
+            .input-file__field-set.unfocused {
+                margin-bottom: 0;
+            }
+        }
     }
 
     &__container {
@@ -23,6 +29,7 @@
 
     &__field-set {
         display: inline-flex;
+        width: 100%;
         &--focused {
             padding: $spacing-lg;
             border-radius: 3px;
@@ -36,17 +43,19 @@
     &__selected-content {
         display: inline-flex;
         align-items: center;
+        width: 100%;
     }
     &__info {
         display: flex;
     }
     &__remove-btn,
     &__node-btn {
-        margin: 0 0 0 $spacing-lg;
+        margin-left: auto;
     }
     &__file {
         display: flex;
         flex-direction: column;
+        margin: 0 $spacing-lg 0 0;
     }
     &__file-icon {
         margin-top: -4px;

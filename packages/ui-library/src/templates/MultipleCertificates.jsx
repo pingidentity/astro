@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
@@ -5,8 +6,8 @@ import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import CopyField from "ui-library/lib/components/utils/CopyField";
 import FileInput from "ui-library/lib/components/forms/FileInput";
 import FieldSet from "ui-library/lib/components/layout/FieldSet";
-import FileDetails from "ui-library/lib/components/layout/FileDetails";
-import FlexRow, { justifyOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
+import Link from "ui-library/lib/components/general/Link";
+import FlexRow, { justifyOptions } from "ui-library/lib/components/layout/FlexRow";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
 import FormTextField from "ui-library/lib/components/forms/FormTextField";
@@ -14,7 +15,6 @@ import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
 import HR from "ui-library/lib/components/general/HR";
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
 import InputRow from "ui-library/lib/components/layout/InputRow";
-import Icon from "ui-library/lib/components/general/Icon";
 import InlineMessage from "ui-library/lib/components/general/InlineMessage";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import PageSection from "ui-library/lib/components/layout/PageSection";
@@ -89,7 +89,7 @@ export default class MultipleCertsTemplate extends Component {
 
     _noRequiredCert = () => {
         return this.state.addedFiles.length > 0
-            ? (<InputRow><a onClick={this._handleAdditionalCert}>+ Add Additional Certificate</a></InputRow>)
+            ? (<InputRow><Link onClick={this._handleAdditionalCert}>+ Add Additional Certificate</Link></InputRow>)
             : (<div>
                 <InlineMessage type={ InlineMessage.MessageTypes.ERROR }>
                 Your file “mycertificate.pdf” failed to upload because of
@@ -158,25 +158,17 @@ export default class MultipleCertsTemplate extends Component {
                     return (
                         <div key={id}>
                             {this._fileDetailsHRVisibility(index)}
-                            <FlexRow justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
-                                <FlexRow justify={justifyOptions.START} alignment={alignments.TOP}>
-                                    <Icon
-                                        data-id="file-icon"
-                                        className="input-file__file-icon"
-                                        iconName="docs"
-                                        iconSize={Icon.iconSizes.MD}
-                                        type="leading"
-                                    />
-                                    <FileDetails fileName={fileName} validTo="9/9/2020" validFrom="1/1/2019"/>
-                                </FlexRow>
-                                <Button
-                                    data-id="remove-button"
-                                    className="input-file__remove-btn"
-                                    onClick={ () => this._handleCertRemove(id)}
-                                    inline
-                                    label="Remove"
-                                />
-                            </FlexRow>
+                            <FileInput
+                                noBorder
+                                fullWidth
+                                fileName={fileName}
+                                onRemove={ () => this._handleCertRemove(id)}
+                                fileData={(
+                                    <span>
+                                        Valid &nbsp;
+                                        <Text inline type="value">04-15</Text> to <Text inline type="value">09-17</Text>
+                                    </span>
+                                )}/>
                         </div>
                     );
                 })}
