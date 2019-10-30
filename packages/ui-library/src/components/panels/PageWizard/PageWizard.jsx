@@ -366,6 +366,7 @@ function ActiveStep(props) {
                 key="button-bar"
                 data-id={`${props["data-id"]}-buttonbar`}
                 className="wizard2__button-bar"
+                alignment="right"
                 {...buttonBarProps}
             />
         </div>
