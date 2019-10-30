@@ -8,6 +8,7 @@ import FlexRow, { spacingOptions, alignments } from "ui-library/lib/components/l
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import Stack from "ui-library/lib/components/layout/Stack";
 import Text from "ui-library/lib/components/general/Text";
+import Padding from "ui-library/lib/components/layout/Padding";
 /**
 * @name LinkDropDownListDemo
 * @memberof LinkDropDownList
@@ -105,15 +106,18 @@ class LinkDropDownListDemo extends React.Component {
                     }}
                 />
                 <HR />
-                <LinkDropDownList
-                    stateless={false}
-                    closeOnClick={true}
-                    label="Right-aligned"
-                    options={_options}
-                    initialState={{
-                        selectedOption: _options[0]
-                    }}
-                />
+                <Padding left="xl"><Padding left="xl">
+                    <LinkDropDownList
+                        stateless={false}
+                        closeOnClick={true}
+                        label="Right-aligned"
+                        options={_options}
+                        initialState={{
+                            selectedOption: _options[0]
+                        }}
+                        alignment={LinkDropDownList.alignments.RIGHT}
+                    />
+                </Padding></Padding>
                 <HR />
                 <LinkDropDownList
                     stateless={false}
