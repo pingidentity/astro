@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Constants from "./v2-constants";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import SelectionListStateless, { listWidths } from "./v2-stateless";
-import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
  * @typedef SelectionList~SelectionListItem
@@ -115,11 +115,6 @@ SelectionList.displayName = "SelectionList";
 
 SelectionList.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
-};
-
-SelectionList.defaultProps = {
-    stateless: false,
 };
 
 SelectionList.Actions = require("./v2-actions");
