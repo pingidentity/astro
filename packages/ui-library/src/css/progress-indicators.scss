@@ -4,28 +4,27 @@
     $background-image: '';
 
     @if $percent < $half {
-      $nextdeg: 90deg +  ($increment * $percent);
+        $nextdeg: 90deg +  ($increment * $percent);
 
-      $background-image: 'linear-gradient(90deg, #{$color-back} 50%, transparent 50%, transparent),
-      linear-gradient(#{$nextdeg}, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+        $background-image: 'linear-gradient(90deg, #{$color-back} 50%, transparent 50%, transparent), linear-gradient(#{$nextdeg}, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
 
-    } @else {
+    }
+    @else {
         $nextdeg: -90deg + ($increment * ($percent - $half));
 
-        $background-image: 'linear-gradient(#{$nextdeg}, #{$color-bar} 50%, transparent 50%, transparent),
-        linear-gradient(270deg, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
-      }
+        $background-image: 'linear-gradient(#{$nextdeg}, #{$color-bar} 50%, transparent 50%, transparent), linear-gradient(270deg, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+    }
     @return unquote($background-image);
-  }
+}
 
-  @mixin progress-icon ($total) {
+@mixin progress-icon ($total) {
     $increment: 100 / $total;
     &.of#{$total} {
         @for $i from 1 through $total {
             &.step#{$i}:before {
-                    background: circular-progress(100, $increment * $i , $color-midnight, #ccc);
-                }
-              }
+                background: circular-progress(100, $increment * $i, $color-midnight, #ccc);
+            }
+        }
     }
 }
 
@@ -68,7 +67,7 @@
         height: $progress-size - $border-size;
         top: $border-size / 2;
         left: $border-size / 2;
-        background: white;
+        background: #fff;
     }
 
     &.done {
