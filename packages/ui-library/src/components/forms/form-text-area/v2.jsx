@@ -21,6 +21,8 @@ import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
  * @desc Heights for TextArea component.
  */
 const inputHeights = {
+    /** auto */
+    AUTO: "auto",
     /** short */
     SM: "short",
     /** medium */
@@ -188,6 +190,7 @@ class FormTextAreaStateless extends React.Component {
         "data-id": "form-text-area",
         disabled: false,
         edited: false,
+        height: inputHeights.AUTO,
         mode: FormFieldConstants.FormFieldMode.EDIT,
         monospaced: false,
         noResize: false,
@@ -224,7 +227,7 @@ class FormTextAreaStateless extends React.Component {
                     "value-entered": !!this.props.value,
                     readonly: readonly,
                     actions: this.props.showUndo,
-                    [`textarea-height--${this.props.height}`]: this.props.height,
+                    [`textarea-height--${this.props.height}`]: this.props.height !== inputHeights.AUTO,
                 }
             );
 
