@@ -1,6 +1,6 @@
 import React from "react";
 import I18nPhoneInput from "../../../../components/forms/i18n/phone-input";
-import FormLabel from "../../../../components/forms/FormLabel"
+import FormLabel from "../../../../components/forms/FormLabel";
 
 /**
 * @name I18nPhoneInputDemo

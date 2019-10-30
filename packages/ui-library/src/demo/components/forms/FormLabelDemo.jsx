@@ -16,7 +16,9 @@ const FormLabelDemo = () => (
             <FormLabel>Hello, here's a bare label</FormLabel>
         </InputRow>
         <InputRow>
-            <FormLabel value="I have help" hint="Use the hint prop for this text" helpPlacement="bottom">Okay?</FormLabel>
+            <FormLabel value="I have help" hint="Use the hint prop for this text" helpPlacement="bottom">
+                Okay?
+            </FormLabel>
         </InputRow>
         <InputRow>
             <FormLabel value="I contain a button">

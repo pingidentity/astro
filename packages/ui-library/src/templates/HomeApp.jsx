@@ -4,7 +4,7 @@ import LinkingArrow from "ui-library/lib/components/layout/LinkingArrow";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import RockerButton from "ui-library/lib/components/forms/RockerButton";
 import Section from "ui-library/lib/components/general/Section";
-import Table, { tableWidths } from "ui-library/lib/components/tables/Table";
+import Table from "ui-library/lib/components/tables/Table";
 
 /**
  * @class Home App
