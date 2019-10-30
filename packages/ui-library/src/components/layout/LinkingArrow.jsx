@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import FlexRow from "./FlexRow";
+import FlexRow, { alignments } from "./FlexRow";
 import Icon from "../general/Icon";
 
 /**
@@ -24,6 +24,7 @@ export default function LinkingArrow({
 }) {
     return (
         <FlexRow
+            alignment={alignments.STRETCH}
             className={classnames("linking-arrow", className)}
             data-id={dataId}
         >

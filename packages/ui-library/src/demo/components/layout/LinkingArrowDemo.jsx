@@ -1,4 +1,5 @@
 import React from "react";
+import { Row, Column } from "ui-library/lib/components/general/ColumnLayout";
 import LinkingArrow from "ui-library/lib/components/layout/LinkingArrow";
 
 /**
@@ -9,6 +10,10 @@ import LinkingArrow from "ui-library/lib/components/layout/LinkingArrow";
 
 export default function LinkingArrowDemo() {
     return (
-        <LinkingArrow title="A linking arrow" />
+        <Row autoWidth>
+            <Column>
+                <LinkingArrow title="A linking arrow" />
+            </Column>
+        </Row>
     );
 }
