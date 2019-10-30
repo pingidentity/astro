@@ -13,7 +13,7 @@
 
     &.input-file--selected {
         background-color: transparent;
-        &-multiple {
+        &-fullWidth {
             width: 100%;
             .input-file__field-set.unfocused {
                 margin-bottom: 0;
@@ -29,6 +29,7 @@
 
     &__field-set {
         display: inline-flex;
+        width: 100%;
         &--focused {
             padding: $spacing-lg;
             border-radius: 3px;
@@ -36,7 +37,6 @@
         }
         &.unfocused {
             padding: 0;
-            width: 100%;
         }
     }
 

@@ -52,7 +52,7 @@ import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
  *     The name of the currently selected file.
  * @param {boolean} [loading]
  *     If the component should show a loading state for uploading files
- * @param {boolean} [multipleFiles]
+ * @param {boolean} [fullWidth]
  *     If there are multiple files in the same container being uploaded then pass this prop to make sure everything is lined up.
  * @param {boolean} [noBorder]
  *     If the component shows a line around the upload this will remove it.
@@ -93,7 +93,7 @@ class FileInput extends Component {
         fileData: PropTypes.node,
         onRemove: PropTypes.func,
         noBorder: PropTypes.bool,
-        multipleFiles: PropTypes.bool,
+        fullWidth: PropTypes.bool,
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
         required: PropTypes.bool,
@@ -166,7 +166,7 @@ class FileInput extends Component {
 
         return (
             fileName && !status ? (
-                <FlexRow alignment={alignments.CENTER} justify={justifyOptions.START}>
+                <FlexRow alignment={alignments.CENTER}>
                     { errorColor ? <span style={{ color: errorColor }}>
                         <Icon iconName="alert" data-id="error-icon" iconSize={iconSizes.MD} />
                     </span>
@@ -225,12 +225,12 @@ class FileInput extends Component {
     render () {
         const {
             fileName,
-            multipleFiles
+            fullWidth
         } = this.props;
 
         const classNames = classnames(this.props.className, "input-file", {
             "input-file--selected": fileName,
-            "input-file--selected-multiple": multipleFiles
+            "input-file--selected-fullWidth": fullWidth
         });
 
         return (

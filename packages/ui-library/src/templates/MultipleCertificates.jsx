@@ -155,7 +155,7 @@ export default class MultipleCertsTemplate extends Component {
                             {this._fileDetailsHRVisibility(index)}
                             <FileInput
                                 noBorder
-                                multipleFiles
+                                fullWidth
                                 fileName={fileName}
                                 onRemove={ () => this._handleCertRemove(id)}
                                 fileData={(
