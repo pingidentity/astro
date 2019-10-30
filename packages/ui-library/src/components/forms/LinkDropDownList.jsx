@@ -8,16 +8,6 @@ import { cannonballProgressivelyStatefulWarning, cannonballPortalWarning } from 
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
-/**
- * @enum {string}
- * @alias LinkDropDownList.alignments
- */
-export const alignments = {
-    /** left */
-    LEFT: "left",
-    /** right */
-    RIGHT: "right",
-};
 
 /**
  * @callback LinkDropDownList~onClick
@@ -33,8 +23,6 @@ export const alignments = {
  * @class LinkDropDownList
  * @desc Toggles between two states on click. Is either "off" or "on".
  *
- * @param {LinkDropDownList.alignments} [alignment=left]
- *     Right or left alignment of the dropdown.
  * @param {string} [data-id=toggle]
  *     The "data-id" value for top-level HTML container.
  * @param {node} [label]
@@ -74,7 +62,6 @@ export const alignments = {
 
 class LinkDropDownListStateless extends React.Component {
     static propTypes = {
-        alignment: PropTypes.oneOf(Object.values(alignments)),
         className: PropTypes.string,
         "data-id": PropTypes.string,
         label: PropTypes.node,
@@ -139,11 +126,7 @@ class LinkDropDownListStateless extends React.Component {
         return (
             <DetailsTooltip
                 data-id={this.props["data-id"]}
-                placement={
-                    this.props.alignment === alignments.RIGHT
-                        ? DetailsTooltip.tooltipPlacements.BOTTOM_LEFT
-                        : DetailsTooltip.tooltipPlacements.BOTTOM_RIGHT
-                }
+                placement={DetailsTooltip.tooltipPlacements.BOTTOM_RIGHT}
                 contentClassName="link-dropdown-list"
                 className={classnames(this.props.className, "link-dropdown-list")}
                 label={this._renderLabel()}
@@ -228,9 +211,8 @@ export default class LinkDropDownList extends React.Component {
         stateless: false,
     };
 
-    static labelArrowPositions = CollapsibleLink.arrowPositions;
+    static labelArrowPositions = CollapsibleLink.arrowPositions
 
-    static alignments = alignments;
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
