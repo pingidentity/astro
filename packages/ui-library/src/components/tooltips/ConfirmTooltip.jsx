@@ -71,7 +71,6 @@ class ConfirmTooltipBase extends Component {
         closeOnConfirm: PropTypes.bool,
         "data-id": PropTypes.string,
         disableSave: PropTypes.bool,
-        flags: flagsPropType,
         label: PropTypes.node,
         loading: PropTypes.bool,
         onCancel: PropTypes.func,
