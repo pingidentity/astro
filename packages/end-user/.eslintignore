@@ -1,0 +1,7 @@
+# We're ignoring everything right now PLEASE FIX ME
+src/*
+src/components/shared/*
+src/util/*
+src/testutil/*
+src/devUtil/*
+src/demo/*

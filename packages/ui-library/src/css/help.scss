@@ -45,9 +45,9 @@
         padding: 8px 10px;
         max-width: 400px;
         pointer-events: auto !important;
-        -webkit-box-shadow: 4px 4px 9px -8px rgba(0,0,0,0.64);
-        -moz-box-shadow: 4px 4px 9px -8px rgba(0,0,0,0.64);
-        box-shadow: 4px 4px 9px -8px rgba(0,0,0,0.64);
+        -webkit-box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
+        -moz-box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
+        box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
 
         @include bg-styles($color-midnight);
 

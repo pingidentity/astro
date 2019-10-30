@@ -168,7 +168,7 @@ LinkDropDownList.propTypes = {
 
 LinkDropDownList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-LinkDropDownList.labelArrowPositions = CollapsibleLink.arrowPositions
+LinkDropDownList.labelArrowPositions = CollapsibleLink.arrowPositions;
 
 class LinkDropDownListOption extends React.Component {
     static propTypes = {

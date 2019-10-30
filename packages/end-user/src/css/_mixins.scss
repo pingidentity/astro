@@ -18,20 +18,20 @@
     /* stylelint-disable */
     background: $color-top; // Old browsers
     background: -moz-linear-gradient(top, $color-top $top-percent, $color-bot $bot-percent); // FF3.6+
-    background: -webkit-gradient(linear, left top, left bottom, color-stop($bot-percent,$color-top), color-stop($bot-percent,$color-bot)); // Chrome,Safari4+
-    background: -webkit-linear-gradient(top, $color-top $top-percent,$color-bot $bot-percent); // Chrome10+,Safari5.1+
-    background: -o-linear-gradient(top, $color-top $top-percent,$color-bot $bot-percent); // Opera 11.10+
-    background: -ms-linear-gradient(top, $color-top $top-percent,$color-bot $bot-percent); // IE10+
-    background: linear-gradient(to bottom, $color-top $top-percent,$color-bot $bot-percent); // W3C
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$color-top}', endColorstr='#{$color-bot}',GradientType=0 ); // IE6-9
+    background: -webkit-gradient(linear, left top, left bottom, color-stop($bot-percent, $color-top), color-stop($bot-percent, $color-bot)); // Chrome,Safari4+
+    background: -webkit-linear-gradient(top, $color-top $top-percent, $color-bot $bot-percent); // Chrome10+,Safari5.1+
+    background: -o-linear-gradient(top, $color-top $top-percent, $color-bot $bot-percent); // Opera 11.10+
+    background: -ms-linear-gradient(top, $color-top $top-percent, $color-bot $bot-percent); // IE10+
+    background: linear-gradient(to bottom, $color-top $top-percent, $color-bot $bot-percent); // W3C
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$color-top}', endColorstr='#{$color-bot}', GradientType=0); // IE6-9
     /* stylelint-enable */
 }
 
 @mixin opacity($opacity) {
     $msopac: $opacity * 100;
-    filter: alpha(opacity=$msopac);
-    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$msopac})';
     opacity: $opacity;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$msopac})';
+    filter: alpha(opacity=$msopac);
 }
 
 @mixin blur($blur) {
@@ -43,13 +43,13 @@
 }
 
 @mixin flexbox {
-	/* stylelint-disable */
+    /* stylelint-disable */
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flexbox;
     display: flex;
-	/* stylelint-enable */
+    /* stylelint-enable */
 }
 
 @mixin flexbox-grow($value) {
@@ -64,26 +64,26 @@
 
 @mixin inactive-link-styles {
     @include transition(transform 0.2s ease-out);
-    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
+    visibility: hidden;
     width: 100%;
     height: 2px;
     background-color: $color-active;
+    content: '';
     transform: scaleX(0);
-    visibility: hidden;
 }
 
 @mixin active-link-styles {
     @include transition(transform 0.1s ease-out);
-    transform: scaleX(1);
     visibility: visible;
+    transform: scaleX(1);
 }
 
 @mixin input-style-light {
-    background-color: $color-white;
     border: 1px solid $color-strong-neutral-70;
+    background-color: $color-white;
 }
 
 @mixin input-background-light {
@@ -96,9 +96,9 @@
 
 @mixin input-style-base {
     @include input-background-dark;
+    border: 1px solid $color-input-fill;
 
     color: $color-input-text;
-    border: 1px solid $color-input-fill;
     font-size: 14px;
 
     &::placeholder {
@@ -145,9 +145,9 @@
 
 @mixin text-truncate {
     overflow: hidden;
-    text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
@@ -164,27 +164,30 @@
     $font-style: italic
 ) {
     ::-webkit-input-placeholder {
+        padding: $padding-top 3px 0 0;
         color: $color;
         font-weight: $font-weight;
-        padding: $padding-top 3px 0 0;
         font-style: $font-style;
     }
+
     :-moz-placeholder { // Firefox 18-
+        padding: $padding-top 3px 0 0;
         color: $color;
         font-weight: $font-weight;
-        padding: $padding-top 3px 0 0;
         font-style: $font-style;
     }
+
     ::-moz-placeholder {  // Firefox 19+
+        padding: $padding-top 3px 0 0;
         color: $color;
         font-weight: $font-weight;
-        padding: $padding-top 3px 0 0;
         font-style: $font-style;
     }
+
     :-ms-input-placeholder {
+        padding: $padding-top 3px 0 0;
         color: $color;
         font-weight: $font-weight;
-        padding: $padding-top 3px 0 0;
         font-style: $font-style;
     }
 }
@@ -207,10 +210,10 @@
 }
 
 @mixin transition-delay($transition-delay) {
-    -webkit-transition-delay: $transition-delay;
-    -moz-transition-delay: $transition-delay;
     -ms-transition: $transition-delay;
     -o-transition: $transition-delay;
+    -webkit-transition-delay: $transition-delay;
+    -moz-transition-delay: $transition-delay;
     transition-delay: $transition-delay;
 }
 
@@ -268,6 +271,7 @@
         0% {
             opacity: 0;
         }
+
         100% {
             opacity: 1;
         }
@@ -281,6 +285,7 @@
         0% {
             transform: translateY(-100%);
         }
+
         100% {
             opacity: translateY(-100%);
         }
@@ -293,18 +298,23 @@
 // NUMERIC -----------------------------------------------------------------------------------------
 
 // Power function : @param {Number} $x, @param {Number} $n, @return {Number}
+
 @function pow($x, $n) {
     /* stylelint-disable */
     $ret: 1;
+
     @if $n >= 0 {
         @for $i from 1 through $n {
             $ret: $ret * $x;
         }
-    } @else {
+    }
+
+ @else {
         @for $i from $n to 0 {
             $ret: $ret / $x;
         }
     }
+
     @return $ret;
     /* stylelint-enable */
 }
@@ -312,13 +322,13 @@
 @function to-fixed($float, $digits: 2) {
     $sass-precision: 5;
 
+    $pow: pow(10, $digits);
+
     @if $digits > $sass-precision {
         @warn 'Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now.'
             + 'The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`.'
             + 'See https://github.com/sass/sass/issues/1122 for further informations.';
     }
-
-    $pow: pow(10, $digits);
 
     @return round($float * $pow) / $pow;
 }
@@ -360,8 +370,8 @@
 }
 
 @mixin flexbox-direction($value) {
-    flex-direction: $value;
     -ms-flex-direction: $value;
+    flex-direction: $value;
 }
 
 
@@ -406,24 +416,25 @@
 }
 
 @mixin grab-cursor {
-	/* stylelint-disable */
+    /* stylelint-disable */
     cursor: move; /* fallback if grab cursor is unsupported */
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
+
     &:active {
         cursor: grabbing;
         cursor: -moz-grabbing;
         cursor: -webkit-grabbing;
     }
-	/* stylelint-enable */
+    /* stylelint-enable */
 }
 
 @mixin appearance($appearance) {
-    appearance: $appearance;
     -moz-appearance: $appearance;
     -webkit-appearance: $appearance;
     -o-appearance: $appearance;
+    appearance: $appearance;
 }
 
 @mixin clip($clip-property) {
@@ -453,15 +464,14 @@
 }
 
 @mixin backface-visibility {
-    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 @mixin arrow($arrow-size) {
     &:after {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
         border-width: $arrow-size;
         border-style: solid;
         border-color: inherit;
@@ -469,26 +479,31 @@
         border-bottom-color: transparent;
         border-left-color: transparent;
         content: '';
+        transform: translateX(-50%);
     }
 }
 
 // POPOVER/TOOLTIP/HELPHINT POINTERS
+
 @mixin makePointer($height, $fill, $direction: down) {
+    position: absolute;
+    box-sizing: border-box;
     width: $height * 2;
     height: $height * 2;
-    box-sizing: border-box;
     border: $height solid transparent;
-    position: absolute;
 
     @if $direction == down {
         border-top-color: $fill;
     }
+
     @else if $direction == right {
         border-left-color: $fill;
     }
+
     @else if $direction == left {
         border-right-color: $fill;
     }
+
     @else {
         border-bottom-color: $fill;
     }
@@ -498,25 +513,28 @@
     @include makePointer($height, $border, $direction);
 
     &:after {
-        content: '';
 
         @include makePointer($height, $fill, $direction);
+        content: '';
 
         @if $direction == down {
-            left: -$height;
             bottom: 1px - $height;
+            left: -$height;
         }
+
         @else if $direction == right {
-            bottom: -$height;
             right: 1px - $height;
+            bottom: -$height;
         }
+
         @else if $direction == left {
             bottom: -$height;
             left: 1px - $height;
         }
+
         @else {
-            left: -$height;
             top: 1px - $height;
+            left: -$height;
         }
     }
 }

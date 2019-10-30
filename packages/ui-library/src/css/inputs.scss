@@ -212,10 +212,10 @@ label {
             // Hide autofill button in Safari
             &::-webkit-contacts-auto-fill-button,
             &::-webkit-credentials-auto-fill-button {
-            visibility: hidden;
-            pointer-events: none;
-            position: absolute;
-            right: 0;
+                visibility: hidden;
+                pointer-events: none;
+                position: absolute;
+                right: 0;
             }
         }
         &.search {
@@ -980,14 +980,14 @@ input[type=file] {
             &:last-of-type {
                 .wrapper {
                     &:after {
-                        transform: rotate( -180deg);
+                        transform: rotate(-180deg);
                     }
                 }
             }
         }
         .selected-option {
             .arrow {
-                transform: rotate( -180deg);
+                transform: rotate(-180deg);
             }
         }
     }
@@ -1753,13 +1753,12 @@ input[type=file] {
 //pulled this out of the above and made it more generic for multiple list components to use
 .list-input__bottom-links {
     border-top: 1px solid $color-input-fill;
-    padding: 5px 0 0;
+    padding: $spacing-xs 0;
     position: absolute;
     bottom: 0;
     left: 10px;
     right: 10px;
     background: $color-white;
-    padding: $spacing-xs 0;
     text-align: center;
 
     .option,
@@ -3138,7 +3137,7 @@ label {
     }
 
     &--open:after {
-        transform: rotate( -180deg);
+        transform: rotate(-180deg);
         transition: (all 0.2s linear);
     }
 }

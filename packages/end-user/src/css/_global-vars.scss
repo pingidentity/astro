@@ -120,8 +120,8 @@ $color-warning-text: #96702c;
 $color-success: $color-success-green;
 $color-success-highlighted: $color-success-green-highlighted;
 
-$color-critical-red-light: #EDDAD9;
-$color-critical-red-dark: #A31200;
+$color-critical-red-light: #eddad9;
+$color-critical-red-dark: #a31200;
 
 $color-neutral-100: #fff;
 
@@ -132,24 +132,27 @@ $breakpoint-mobile: 480px;
 $font-default: 'proxima-nova', sans-serif;
 
 @mixin font-pn-regular {
-    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
     font-weight: 400;
     font-style: normal;
-}
-@mixin font-pn-light {
     font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+}
+
+@mixin font-pn-light {
     font-weight: 300;
     font-style: normal;
-}
-@mixin font-pn-semibold {
     font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+}
+
+@mixin font-pn-semibold {
     font-weight: 600;
     font-style: normal;
-}
-@mixin font-pn-bold {
     font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+}
+
+@mixin font-pn-bold {
     font-weight: 700;
     font-style: normal;
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
 }
 
 // FONT SIZES
@@ -180,12 +183,13 @@ $img-path: '../../icons/';
 @mixin message-button-css {
     button,
     .button {
+        border-color: $color-white;
         background-color: transparent;
         color: $color-white;
-        border-color: $color-white;
         vertical-align: baseline;
     }
 }
+
 @mixin message-primary-button-css ($color) {
     .button,
     button {
