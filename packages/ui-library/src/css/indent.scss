@@ -101,6 +101,16 @@
             }
         }
     }
+
+    &--detached {
+        min-height: 0;
+        margin: $spacing-sm 0;
+
+        .indent-content {
+            margin-left: 1px;
+        }
+    }
+
     // nested
     .indent {
         padding: 3px 0 0;
