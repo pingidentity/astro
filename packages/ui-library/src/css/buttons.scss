@@ -303,6 +303,12 @@ button,
                 font-size: 11px;
             }
         }
+        &.clear {
+            &:before {
+                content: 'X';
+                font-size: 12px;
+            }
+        }
 
         &.small {
             $size: 21px;

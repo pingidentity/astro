@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 
-import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard";
-import InputRow from "ui-library/lib/components/layout/InputRow";
+import Button from "ui-library/lib/components/buttons/Button";
+import FileInput from "ui-library/lib/components/forms/FileInput";
+import FlexRow, { alignments } from "ui-library/lib/components/layout/FlexRow";
 import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
 import FormTextField from "ui-library/lib/components/forms/FormTextField";
 import FormTextArea from "ui-library/lib/components/forms/FormTextArea";
-import InputWidths from "ui-library/lib/components/forms/InputWidths";
-import Icon from "ui-library/lib/components/general/Icon";
-import Button from "ui-library/lib/components/buttons/Button";
-import HR from "ui-library/lib/components/general/HR";
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import HR from "ui-library/lib/components/general/HR";
+import Icon from "ui-library/lib/components/general/Icon";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
 import PageSection from "ui-library/lib/components/layout/PageSection";
-import FileInput from "ui-library/lib/components/forms/FileInput";
+import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard";
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**
@@ -129,18 +130,17 @@ export default class MetadataImport extends Component {
                     )}
 
                     {this.state.selectedMetadataSource === "2" ? (
-                        <InputRow>
+                        <FlexRow alignment={alignments.CENTER}>
                             <FormTextField
                                 labelText="Import URL"
                                 width={InputWidths.LG}
                                 flags={["p-stateful"]}
                             />
                             <Button
-                                iconName="icon-clear"
-                                className="clear"
+                                iconName="clear"
                                 inline
                             />
-                        </InputRow>
+                        </FlexRow>
                     ) : (
                         null
                     )}
