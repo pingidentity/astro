@@ -114,10 +114,10 @@ export default class IndentDemo extends React.Component {
                 <Indent border={false}>
                     <div>This content area can contain any data.</div>
                     <FormattedContent>
-                    <ul>
-                        <li>Test Item One</li>
-                        <li>Test Item Two</li>
-                    </ul>
+                        <ul>
+                            <li>Test Item One</li>
+                            <li>Test Item Two</li>
+                        </ul>
                     </FormattedContent>
                 </Indent>
                 <br />

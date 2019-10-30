@@ -126,8 +126,8 @@ class FormCheckboxDemo extends React.Component {
                     <FormCheckbox
                         label={"With Error Message; checked: " + this.state.checkboxChecked12}
                         renderLabel= {
-                            (props, FormLabel) => (
-                                <FormLabel
+                            (props, FormLabelComponent) => (
+                                <FormLabelComponent
                                     {...props}
                                     description="Sample Description"
                                 />

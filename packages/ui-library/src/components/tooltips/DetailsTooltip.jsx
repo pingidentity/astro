@@ -79,7 +79,7 @@ import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationU
  */
 
 const DetailsTitle = ({ children }) => (
-    <div class="title">{children}</div>
+    <div className="title">{children}</div>
 );
 
 const tooltipPlacements = {

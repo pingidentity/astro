@@ -1,6 +1,4 @@
-import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import { makeSpacing, sizes } from "./Spacing";
 
 const getClassName = (value, placement) => value !== undefined ? `padding-component--${placement}-${value}` : "";
