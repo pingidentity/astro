@@ -16,7 +16,7 @@ const CardModal = ({
 
 CardModal.propTypes = {
     ...Modal.propTypes,
-    title: PropTypes.string,
+    title: PropTypes.node,
 };
 
 CardModal.defaultProps = {
