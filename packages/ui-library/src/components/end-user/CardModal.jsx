@@ -6,7 +6,7 @@ import Modal from "ui-library/lib/components/general/Modal";
 const CardModal = ({
     children,
     title,
-    ...props,
+    ...props
 }) => (
     <Modal { ...props } type="dialog" >
         <div className="modal-title">{title}</div>

@@ -67,7 +67,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
             top: $wizard-header-height;
 
             > .page-messages {
-                top: $wizard-header-height + $topnav - height;
+                top: $wizard-header-height + $topnav-height;
             }
         }
 
