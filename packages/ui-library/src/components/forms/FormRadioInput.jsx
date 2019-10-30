@@ -80,6 +80,7 @@ class FormRadioInputBase extends React.Component {
     static defaultProps = {
         "data-id": "FormRadioInput",
         autoFocus: false,
+        onValueChange: () => {},
     };
 
     _handleValueChange = (e) => {

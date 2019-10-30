@@ -44,7 +44,6 @@ class ToggleDemo extends React.Component {
                 <InputRow>
                     <Toggle
                         data-id="user-toggle1"
-                        className="row-status-toggle"
                         toggled={this.state.toggled1}
                         onToggle={this._handleToggle1}
                         name="the-toggle"
@@ -56,7 +55,6 @@ class ToggleDemo extends React.Component {
                     <p>Optional locked styling:</p>
                     <Toggle
                         data-id="user-toggle2"
-                        className="row-status-toggle"
                         status={Toggle.Status.LOCKED}
                         toggled={this.state.toggled2}
                         onToggle={this._handleToggle2}
@@ -68,7 +66,6 @@ class ToggleDemo extends React.Component {
                     <p>Stateless toggle with onToggle callback:</p>
                     <Toggle
                         data-id="user-toggle3"
-                        className="row-status-toggle"
                         onToggle={this._handleToggle3}
                         toggled={this.state.toggled3}
                     />

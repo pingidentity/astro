@@ -9,7 +9,7 @@ import Step from "./Step";
 import _ from "underscore";
 import classnames from "classnames";
 import Utils from "../../../util/Utils";
-import { lightInputs } from "../../../util/CSSModifiers";
+import InputModifier, { inputColors } from "../../general/InputModifier";
 
 
 /**
@@ -269,25 +269,27 @@ class PageWizard extends React.Component {
                     onClick={onClose || onCancel}
                     data-id={`${dataId}-close-button`}
                 />
-                <div className={classnames("wizard2__content", lightInputs)}>
-                    {messageProps && <Messages {...messageProps} />}
-                    <ActiveStep
-                        data-id={dataId}
-                        step={activeStep}
-                        stepTotal={requiredSteps.length + optionalSteps.length}
-                        stepIndex={activeStep.props.required
-                            ? _.findIndex(requiredSteps, activeStep.props)
-                            : _.findIndex(optionalSteps, activeStep.props) + requiredSteps.length
-                        }
-                        hasOptional={optionalSteps.length > 0}
-                        hideButtonBar={activeStep.props.hideButtonBar}
-                        buttonBarProps={buttonBarProps}
-                        loading={loading}
-                        onCancel={onCancel}
-                        onNext={onNext}
-                        onSave={onSave}
-                    />
-                </div>
+                <InputModifier inputColor={inputColors.LIGHT}>
+                    <div className="wizard2__content">
+                        {messageProps && <Messages {...messageProps} />}
+                        <ActiveStep
+                            data-id={dataId}
+                            step={activeStep}
+                            stepTotal={requiredSteps.length + optionalSteps.length}
+                            stepIndex={activeStep.props.required
+                                ? _.findIndex(requiredSteps, activeStep.props)
+                                : _.findIndex(optionalSteps, activeStep.props) + requiredSteps.length
+                            }
+                            hasOptional={optionalSteps.length > 0}
+                            hideButtonBar={activeStep.props.hideButtonBar}
+                            buttonBarProps={buttonBarProps}
+                            loading={loading}
+                            onCancel={onCancel}
+                            onNext={onNext}
+                            onSave={onSave}
+                        />
+                    </div>
+                </InputModifier>
                 {!activeStep.props.hideMenu && (
                     <Menu
                         optionalSteps={optionalSteps}

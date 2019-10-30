@@ -55,13 +55,13 @@ class CondensedTableDemo extends React.Component {
         return (
             <div>
                 <InputRow>
-                    <FormLabel className="detached" value="<CondensedTable> with headData and bodyData arrays." />
+                    <FormLabel detached value="<CondensedTable> with headData and bodyData arrays." />
                     <CondensedTable
                         headData={mockData.head}
                         bodyData={mockData.body} />
                 </InputRow>
                 <InputRow>
-                    <FormLabel className="detached" value="<CondensedTable> with data array of objects." />
+                    <FormLabel detached value="<CondensedTable> with data array of objects." />
                     <CondensedTable
                         data={dataObjects} />
                 </InputRow>

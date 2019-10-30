@@ -1,5 +1,6 @@
 import React from "react";
 import ModalButton from "./../../../components/general/ModalButton";
+import { BodyTitle } from "./../../../components/general/Modal";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
@@ -112,9 +113,9 @@ class ModalButtonDemo extends React.Component {
                         expanded={this.state.modalExpanded2}
                     >
                         <div>
-                            <div className="modal-title">
+                            <BodyTitle>
                                 Dialog modal content here!
-                            </div>
+                            </BodyTitle>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis eu eros id
                                 euismod. Etiam molestie quis nunc eu ultrices.
@@ -139,13 +140,13 @@ class ModalButtonDemo extends React.Component {
                         onClose={this._handleClose(3)}
                         expanded={this.state.modalExpanded3}
                     >
-                        <div className = "title">
+                        <BodyTitle>
                             Alert Modal
-                        </div>
+                        </BodyTitle>
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>
-                        <ButtonGroup>
+                        <ButtonGroup onCancel={this._handleClose(3)}>
                             <Button type="cancel"
                                 onClick={this._handleClose(3)} data-id="discardChangesButton" >
                                 Discard Changes
@@ -154,8 +155,6 @@ class ModalButtonDemo extends React.Component {
                                 onClick={this._handleClose(3)} data-id="saveButton">
                                 Save
                             </Button>
-                            <br />
-                            <a className="cancel" data-id="cancelLink" onClick={this._handleClose(3)}>Cancel</a>
                         </ButtonGroup>
                     </ModalButton>
                 </InputRow>

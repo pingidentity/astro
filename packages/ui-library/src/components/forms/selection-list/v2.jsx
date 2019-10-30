@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import Constants from "./v2-constants";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import SelectionListStateless from "./v2-stateless";
-import { flagsPropType } from "../../../util/FlagUtils";
-import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
+import SelectionListStateless, { listWidths } from "./v2-stateless";
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 
 /**
  * @typedef SelectionList~SelectionListItem
@@ -83,7 +82,8 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
  *     if not provided, the default search function will be used
  * @param {string} [queryString]
  *     The value of the search field
- *     When not provided, the component will manage this value.
+ * @param {SelectionList.ListWidths} [width]
+ *     Use FLUID to adjust the width to the content (up to 400px)
  */
 
 const SelectionList = inStateContainer(
@@ -130,6 +130,8 @@ SelectionList.reducer = require("./v2-reducer"); // according to our new standar
 
 SelectionList.ListType = Constants.ListType;
 SelectionList.listType = Constants.ListType; // according to our new standard
+
+SelectionList.listWidths = listWidths;
 
 SelectionList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 

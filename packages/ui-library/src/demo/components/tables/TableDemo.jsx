@@ -89,14 +89,14 @@ const TableDemo = () => {
     return (
         <div>
             <InputRow>
-                <FormLabel className="detached" value="<Table> with headData and bodyData arrays." />
+                <FormLabel detached value="<Table> with headData and bodyData arrays." />
                 <Table
                     headData={mockData.head}
                     bodyData={mockData.body}
                 />
             </InputRow>
             <InputRow>
-                <FormLabel className="detached" value="<Table> with data array of objects and vertical align middle." />
+                <FormLabel detached value="<Table> with data array of objects and vertical align middle." />
                 <Table
                     data={dataObjects}
                     verticalAlignment="MIDDLE"
@@ -104,25 +104,25 @@ const TableDemo = () => {
             </InputRow>
             <HR />
             <InputRow>
-                <FormLabel className="detached" value="<Table> with row labels." />
+                <FormLabel detached value="<Table> with row labels." />
                 <Table
                     headData={mockData.head}
                     bodyData={mockData.body}
                     rowLabels={true} />
             </InputRow>
             <InputRow>
-                <FormLabel className="detached" value="<Table> row labels." />
+                <FormLabel detached value="<Table> row labels." />
                 <Table
-                    data={dataObjects} rowLabels={true} className="grid--no-lines"/>
+                    data={dataObjects} rowLabels={true} lines={false} />
             </InputRow>
             <InputRow>
-                <FormLabel className="detached" value="<Table> with no header." />
+                <FormLabel detached value="<Table> with no header." />
                 <Table
                     bodyData={mockData.body}
                 />
             </InputRow>
             <InputRow>
-                <FormLabel className="detached" value="<Table> with column styling and a full width." />
+                <FormLabel detached value="<Table> with column styling and a full width." />
                 <Table
                     columnStyling={[
                         {},
@@ -140,7 +140,7 @@ const TableDemo = () => {
                 />
             </InputRow>
             <InputRow>
-                <FormLabel className="detached" value="<Table> with column styling and divider." />
+                <FormLabel detached value="<Table> with column styling and divider." />
                 <Table
                     columnStyling={[
                         {},

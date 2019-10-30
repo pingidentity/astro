@@ -21,8 +21,8 @@ var React = require("react"),
  *     The hint text either a string or a JSX object. If omitted, the help hint is not rendered.
  * @param {string} [lockText]
  *     The lock text. If omitted, the lock hint is not rendered.
- * @param {string} [helpClassName]
- *     CSS classes to set on the help hint.
+ * @param {HelpHint.Placements} [helpPlacement]
+ *     How to place the help hint.
  * @param {object} [helpTarget]
  *     An optional icon or image to replace standard help hint icon
  * @param {object} [style]
@@ -40,6 +40,7 @@ class FormLabel extends React.Component {
         hint: PropTypes.node,
         lockText: PropTypes.string,
         helpClassName: PropTypes.string,
+        helpPlacement: PropTypes.oneOf(Object.values(HelpHint.placements)),
         helpTarget: PropTypes.object,
         style: PropTypes.object,
         detached: PropTypes.bool,
@@ -62,6 +63,7 @@ class FormLabel extends React.Component {
                 ref="hint"
                 data-id="help-tooltip"
                 className={classnames("inline", this.props.helpClassName)}
+                placement={this.props.helpPlacement}
                 hintText={this.props.hint}>
                 {this.props.helpTarget}
             </HelpHint>
@@ -79,6 +81,7 @@ class FormLabel extends React.Component {
                 data-id="lock-tooltip"
                 className={classnames("inline", this.props.helpClassName)}
                 hintText={this.props.lockText}
+                placement={this.props.helpPlacement}
                 lock={true}
             />
         );

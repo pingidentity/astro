@@ -7,6 +7,7 @@ import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
 import { allFlags } from "../../../util/FlagUtils";
 import HelpHint from "../../../components/tooltips/HelpHint";
+import FormLabel from "../../../components/forms/FormLabel";
 
 /**
 * @name FileUploadDemo
@@ -179,9 +180,9 @@ export default class FileUploadDemo extends React.Component {
                 </InputRow>
 
                 <InputRow>
-                    <label className="detached">
+                    <FormLabel detached>
                         File Input in a Tooltip
-                    </label>
+                    </FormLabel>
                     <DetailsTooltip
                         placement={DetailsTooltip.tooltipPlacements.TOP_RIGHT}
                         title="File Input in a Details Tooltip"
@@ -218,9 +219,9 @@ export default class FileUploadDemo extends React.Component {
                 </InputRow>
 
                 <InputRow>
-                    <label className="detached">
+                    <FormLabel detached>
                         Stateless File Input
-                    </label>
+                    </FormLabel>
                     <div className="attention">
                         Note that it is recommended that the stateful version of this component be used since
                         it performs all of the file parsing involved when handling files in javascript. For that reason,

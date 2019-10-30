@@ -1,7 +1,6 @@
-"use strict";
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
 
 import StatusIndicator from "../general/StatusIndicator";
 
@@ -19,6 +18,8 @@ import StatusIndicator from "../general/StatusIndicator";
 *
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
+* @param {boolean} [show]
+*     If true, shows the messages.
 *
 * @example
 *     <ValidationMessages
@@ -43,26 +44,32 @@ const StatusTypes = {
     [Status.FAIL]: StatusIndicator.Types.ERROR,
 };
 
-var ValidationMessages = function (props) {
-
-    var _getMessages = function () {
-        return props.messages.map(function (item, i) {
-            return (
-                <StatusIndicator
-                    className="message"
-                    key={i}
-                    type={StatusTypes[item.status]}>
-                    {item.text}
-                </StatusIndicator>
-            );
-        }.bind(this));
-    };
-
-    var className = classnames("validation-messages", props.className);
-
+const ValidationMessages = function ({
+    className,
+    "data-id": dataId,
+    messages,
+    show
+}) {
     return (
-        <div data-id={props["data-id"]} className={className}>
-            {_getMessages()}
+        <div
+            data-id={dataId}
+            className={classnames(
+                "validation-messages",
+                className,
+                {
+                    "validation-messages--show": show
+                }
+            )}>
+            {messages.map(({ status, text }, i) => {
+                return (
+                    <StatusIndicator
+                        className="message"
+                        key={`${status}-${text}-${i}`}
+                        type={StatusTypes[status]}>
+                        {text}
+                    </StatusIndicator>
+                );
+            })}
         </div>
     );
 };
@@ -70,13 +77,15 @@ var ValidationMessages = function (props) {
 ValidationMessages.propTypes = {
     "data-id": PropTypes.string,
     messages: PropTypes.array.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    show: PropTypes.bool
 };
 
 ValidationMessages.defaultProps = {
-    "data-id": "validation"
+    "data-id": "validation",
+    show: false
 };
 
 ValidationMessages.Status = Status;
 
-module.exports = ValidationMessages;
+export default ValidationMessages;

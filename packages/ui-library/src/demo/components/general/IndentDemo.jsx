@@ -1,7 +1,8 @@
 import React from "react";
-import Indent from "./../../../components/general/Indent";
-import Link from "./../../../components/general/Link";
-import Text from "../../../components/general/Text";
+import Indent from "ui-library/lib/components/general/Indent";
+import Link from "ui-library/lib/components/general/Link";
+import Text from "ui-library/lib/components/general/Text";
+import FormattedContent from "ui-library/lib/components/general/FormattedContent";
 
 /**
 * @name IndentDemo
@@ -26,7 +27,7 @@ export default class IndentDemo extends React.Component {
                     Basic Indent Component
                 </strong>
                 <br />
-                <Indent title="all" className="primary">
+                <Indent title="all">
 
                     <Link icon="cabinet" title="HR Apps Base Policy" url="#" type="block" />
                     <Indent title="any">
@@ -112,10 +113,12 @@ export default class IndentDemo extends React.Component {
                 <br />
                 <Indent border={false}>
                     <div>This content area can contain any data.</div>
-                    <ul className="ul">
+                    <FormattedContent>
+                    <ul>
                         <li>Test Item One</li>
                         <li>Test Item Two</li>
                     </ul>
+                    </FormattedContent>
                 </Indent>
                 <br />
 
@@ -125,9 +128,11 @@ export default class IndentDemo extends React.Component {
                 <br />
                 <Indent border={true} title="all">
                     <Link icon="cabinet" title="Advanced Content Rewrite" url="#" type="block" />
-                    <Link icon="cog" className="text-first" title="Basic Content Rewrite" url="#" type="block" />
+                    <Link icon="cog" iconAfter title="Basic Content Rewrite" url="#" type="block" />
                 </Indent>
-                <Link icon="cabinet" title="Advanced Content Rewrite" url="#" className="detached" type="block" />
+                <Indent detached>
+                    <Link icon="cabinet" title="Advanced Content Rewrite" url="#" type="block" />
+                </Indent>
                 <Indent border={true} title="any">
                     <Link icon="cabinet" title="Advanced Content Rewrite" url="#" type="block" />
                     <Link icon="cog" title="Basic Content Rewrite" url="#" type="block" />
@@ -138,7 +143,7 @@ export default class IndentDemo extends React.Component {
                     Two Grouped Indents
                 </strong>
                 <br />
-                <Indent border={true} title="all" className="grouped">
+                <Indent border={true} title="all" grouped>
                     <Link icon="cabinet" title="Advanced Content Rewrite" url="#" type="block" />
                     <Link icon="cog" title="Basic Content Rewrite" url="#" type="block" />
                 </Indent>

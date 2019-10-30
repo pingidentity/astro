@@ -71,7 +71,6 @@ const columnAlignments = {
     RIGHT: "right"
 };
 
-
 const overflowOptions = {
     ELLIPSIS: "ellipsis",
     WRAP: "wrap"
@@ -194,7 +193,10 @@ class TableCell extends Component {
                     }
                 )}
                 ref={ref => this.cellContent = ref}
-                {...this.hasEllipsis ? { containerClassName: "grid__cell-hint", hintText: content } : {}}
+                {...(useEllipsis && this.hasEllipsis)
+                    ? { containerClassName: "grid__cell-hint", hintText: content }
+                    : {}
+                }
             >
                 {[
                     ...icon !== undefined
@@ -256,7 +258,7 @@ const Table = props => {
         "width-full": fullWidth || width === tableWidths.FULL_FIXED,
         "grid--full-width": width === tableWidths.FULL,
         "grid--fixed": layout === tableLayouts.FIXED,
-        
+
     });
 
     // if we're showing labels along the left side of the table, make sure the first column heading is empty

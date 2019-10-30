@@ -1,18 +1,17 @@
-window.__DEV__ = true;
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import { mount } from "enzyme";
+import TestUtils from "../../../../testutil/TestUtils";
+import HeroChart from "../HeroChart";
+import _ from "underscore";
+import { BarChart } from "recharts";import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
+jest.dontMock("recharts");
 jest.dontMock("../HeroChart");
-jest.dontMock("../BarChart");
 jest.dontMock("../../../forms/RockerButton");
 jest.useFakeTimers();
 
-import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
-
 describe("HeroChart", function () {
-    const React = require("react");
-    const ReactTestUtils = require("react-dom/test-utils");
-    const TestUtils = require("../../../../testutil/TestUtils");
-    const HeroChart = require("../HeroChart");
-    const _ = require("underscore");
     const Wrapper = TestUtils.UpdatePropsWrapper;
 
     const chartData = [
@@ -42,12 +41,17 @@ describe("HeroChart", function () {
         xAxisKey: "xaxis",
     };
 
-    function getComponent(props) {
+    const getComponent = props => {
         const componentProps = _.defaults(props || {}, defaultProps);
         return ReactTestUtils.renderIntoDocument(
             <HeroChart {...componentProps} />
         );
-    }
+    };
+
+    const getMountedComponent = props => {
+        const componentProps = _.defaults(props || {}, defaultProps);
+        return mount(<HeroChart {...componentProps} />);
+    };
 
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
@@ -130,30 +134,23 @@ describe("HeroChart", function () {
     });
 
     it("renders the bars", function () {
-        const component = getComponent();
+        const wrapper = getMountedComponent();
 
-        const topChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__top-chart");
-        const topBarContainer = TestUtils.findRenderedDOMNodeWithClass(topChart, "recharts-bar-rectangles");
-        expect(topBarContainer.children.length).toBe(chartData.length);
+        const topChart = wrapper.find(BarChart).at(0).instance();
+        expect(topChart.props["data-id"]).toBe("mr-chart-top-chart");
+        expect(topChart.props.data.length).toBe(chartData.length);
 
-        const botChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__bottom-chart");
-        const botBarContainer = TestUtils.findRenderedDOMNodeWithClass(botChart, "recharts-bar-rectangles");
-        expect(botBarContainer.children.length).toBe(chartData.length);
+        const bottomChart = wrapper.find(BarChart).at(1).instance();
+        expect(bottomChart.props["data-id"]).toBe("mr-chart-bottom-chart");
+        expect(bottomChart.props.data.length).toBe(chartData.length);
     });
 
     it("renders the x-axis", function () {
-        const component = getComponent();
+        const wrapper = getMountedComponent();
+        const topChart = wrapper.find(BarChart).get(0);
+        const xAxis = topChart.props.children[0];
 
-        // x-axis labels/ticks are part of top chart
-        const topChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__top-chart");
-        const axisContainer = TestUtils.findRenderedDOMNodeWithClass(topChart, "recharts-cartesian-axis-ticks");
-
-        expect(axisContainer.children.length).toBe(chartData.length);
-
-        _.each(axisContainer.children, (item, index) => {
-            const textContainer = TestUtils.findRenderedDOMNodeWithTag(item, "tspan");
-            expect(textContainer.textContent).toBe(chartData[index][defaultProps.xAxisKey]);
-        });
+        expect(xAxis.props.dataKey).toBe("xaxis");
     });
 
     it("does not render the error or spinner by default", function () {
@@ -230,11 +227,11 @@ describe("HeroChart", function () {
 
     it("renders the x-axis in the various font sizes", function () {
         const fontSizeData = [
-            { size: "15", threshold: 1 },
-            { size: "14", threshold: 19 },
-            { size: "13", threshold: 22 },
-            { size: "12", threshold: 24 },
-            { size: "11", threshold: 26 },
+            { size: 15, threshold: 1 },
+            { size: 14, threshold: 19 },
+            { size: 13, threshold: 22 },
+            { size: 12, threshold: 24 },
+            { size: 11, threshold: 26 },
         ];
 
         fontSizeData.forEach((item) => {
@@ -244,11 +241,10 @@ describe("HeroChart", function () {
                 customChartData.push({ xaxis: i, yups: 1, nopes: 1 });
             }
 
-            const component = getComponent({ data: customChartData });
-            const xAxisTick = TestUtils.findRenderedDOMNodeWithClass(component, "recharts-cartesian-axis-ticks")
-                .childNodes[0];
-            const textTag = TestUtils.findRenderedDOMNodeWithTag(xAxisTick, "text");
-            expect(textTag.getAttribute("font-size")).toEqual(item.size);
+            const wrapper = getMountedComponent({ data: customChartData });
+            const topChart = wrapper.find(BarChart).get(0);
+            const xAxis = topChart.props.children[0];
+            expect(xAxis.props.tick.fontSize).toEqual(item.size);
         });
     });
 

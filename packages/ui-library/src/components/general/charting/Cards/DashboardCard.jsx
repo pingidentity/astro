@@ -5,8 +5,7 @@ import PageSpinner from "../../../general/PageSpinner";
 import ViewToggle from "../ViewToggle";
 import classnames from "classnames";
 import Checkbox from "../../../forms/FormCheckbox";
-import { lightInputs } from "../../../../util/CSSModifiers";
-
+import InputModifier, { inputColors } from "../../../general/InputModifier";
 
 /**
  * @class DashboardCard
@@ -120,21 +119,25 @@ class DashboardCard extends React.Component {
         return (
             <div className={classes} style={style} data-id={this.props["data-id"]}>
                 {!this.props.errorMessage && [
-                    <div key="back" className={classnames("dashboard-card__back", lightInputs)}>
-                        {this.props.back}
-                        {this.props.onMakeDefault &&
-                            <Checkbox
-                                data-id={`${this.props["data-id"]}-make-default`}
-                                className="dashboard-card__make-default stacked"
-                                label={this.props.makeDefaultLabel}
-                                onValueChange={this._handleChecked}
-                                checked={this.state.defaultChecked}
-                            />
-                        }
-                    </div>,
-                    <div key="front" className={classnames("dashboard-card__front", lightInputs)}>
-                        {this.props.front}
-                    </div>,
+                    <InputModifier inputColor={inputColors.LIGHT}>
+                        <div key="back" className="dashboard-card__back">
+                            {this.props.back}
+                            {this.props.onMakeDefault &&
+                                <Checkbox
+                                    data-id={`${this.props["data-id"]}-make-default`}
+                                    className="dashboard-card__make-default stacked"
+                                    label={this.props.makeDefaultLabel}
+                                    onValueChange={this._handleChecked}
+                                    checked={this.state.defaultChecked}
+                                />
+                            }
+                        </div>
+                    </InputModifier>,
+                    <InputModifier inputColor={inputColors.LIGHT} key="front">
+                        <div className="dashboard-card__front">
+                            {this.props.front}
+                        </div>
+                    </InputModifier>,
                     <div key="control" className="dashboard-card__control">
                         {!this.props.loading && this.props.back &&
                             <ViewToggle

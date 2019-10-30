@@ -52,6 +52,8 @@ import FlexRow, { alignments } from "../layout/FlexRow";
  *     The name of the currently selected file.
  * @param {boolean} [loading]
  *     If the component should show a loading state for uploading files
+ * @param {boolean} [fullWidth]
+ *     If there are multiple files in the same container being uploaded then pass this prop to make sure everything is lined up.
  * @param {boolean} [noBorder]
  *     If the component shows a line around the upload this will remove it.
  * @param {FileInput~onRemove} [onRemove]
@@ -91,6 +93,7 @@ class FileInput extends Component {
         fileData: PropTypes.node,
         onRemove: PropTypes.func,
         noBorder: PropTypes.bool,
+        fullWidth: PropTypes.bool,
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
         required: PropTypes.bool,
@@ -222,10 +225,12 @@ class FileInput extends Component {
     render () {
         const {
             fileName,
+            fullWidth
         } = this.props;
 
         const classNames = classnames(this.props.className, "input-file", {
             "input-file--selected": fileName,
+            "input-file--selected-full-width": fullWidth
         });
 
         return (
@@ -234,6 +239,7 @@ class FileInput extends Component {
                 renderContent={this._renderContent}
                 className={classNames}
             />
+
         );
     }
 }

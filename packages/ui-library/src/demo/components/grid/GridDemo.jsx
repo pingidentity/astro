@@ -155,7 +155,7 @@ class GridDemo extends React.Component {
                         selectAllValue={this.props[this.id].hasLaptopForAll}
                         onSelectAllChange={this._handleSelectAllHasLaptop}
                         width={Grid.ColumnSizes.M}>
-                        <CheckboxCell onGridCellAction={this._handleLaptopChecked} className="stacked" />
+                        <CheckboxCell onGridCellAction={this._handleLaptopChecked} stacked />
                     </Grid.Column>
                 </Grid>
 

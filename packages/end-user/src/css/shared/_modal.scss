@@ -12,6 +12,10 @@
     bottom: 0;
     z-index: $zindex__modal;
 
+    @media only screen and (max-width: 767px) {
+        top: 18px; // Padding in header
+    }
+
     &.show {
         .modal-content {
             display: inline-block;
@@ -48,7 +52,6 @@
         height: 100%;
         max-width: $max-modal-width;
         min-width: 360px;
-        // @include font-pn-regular;
 
         @include transform(translateX(-50%));
     }
@@ -123,7 +126,6 @@
         overflow-x: visible;
         overflow-y: auto;
         max-height: calc(100% - #{2 * $min-bottom});
-        margin: 0 30px;
 
         @include border-radius(0 0 $modal-radius $modal-radius);
 
