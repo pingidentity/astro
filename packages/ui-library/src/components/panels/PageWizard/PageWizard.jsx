@@ -9,7 +9,7 @@ import Step from "./Step";
 import _ from "underscore";
 import classnames from "classnames";
 import Utils from "../../../util/Utils";
-import InputModifier, { InputColors } from "../../general/InputModifier";
+import InputModifier, { inputColors } from "../../general/InputModifier";
 
 
 /**
@@ -269,7 +269,7 @@ class PageWizard extends React.Component {
                     onClick={onClose || onCancel}
                     data-id={`${dataId}-close-button`}
                 />
-                <InputModifier inputColor={InputColors.LIGHT}>
+                <InputModifier inputColor={inputColors.LIGHT}>
                     <div className="wizard2__content">
                         {messageProps && <Messages {...messageProps} />}
                         <ActiveStep

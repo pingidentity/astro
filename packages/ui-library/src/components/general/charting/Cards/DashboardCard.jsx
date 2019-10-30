@@ -5,7 +5,7 @@ import PageSpinner from "../../../general/PageSpinner";
 import ViewToggle from "../ViewToggle";
 import classnames from "classnames";
 import Checkbox from "../../../forms/FormCheckbox";
-import InputModifier, { InputColors } from "../../../general/InputModifier";
+import InputModifier, { inputColors } from "../../../general/InputModifier";
 
 /**
  * @class DashboardCard
@@ -119,7 +119,7 @@ class DashboardCard extends React.Component {
         return (
             <div className={classes} style={style} data-id={this.props["data-id"]}>
                 {!this.props.errorMessage && [
-                    <InputModifier inputColor={InputColors.LIGHT}>
+                    <InputModifier inputColor={inputColors.LIGHT}>
                         <div key="back" className="dashboard-card__back">
                             {this.props.back}
                             {this.props.onMakeDefault &&
@@ -133,8 +133,8 @@ class DashboardCard extends React.Component {
                             }
                         </div>
                     </InputModifier>,
-                    <InputModifier inputColor={InputColors.LIGHT}>
-                        <div key="front" className="dashboard-card__front">
+                    <InputModifier inputColor={inputColors.LIGHT} key="front">
+                        <div className="dashboard-card__front">
                             {this.props.front}
                         </div>
                     </InputModifier>,

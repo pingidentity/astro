@@ -31,7 +31,7 @@ import { formatDateTime } from "ui-library/lib/util/DateUtils";
 
 import { populations, statuses, pwStatuses, customFilters, operators, userList } from "./data";
 import InputWidths from "../../components/forms/InputWidths";
-import InputModifier, { InputMargins } from "ui-library/lib/components/general/InputModifier";
+import InputModifier, { inputMargins } from "ui-library/lib/components/general/InputModifier";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 
 // the collapsible "ADVANCED" section in the filters panel
@@ -248,7 +248,7 @@ const FilterControls = ({
                 position="top-right"
                 aside={<Link onClick={onClearFilters}>Clear</Link>}
             >
-                <InputModifier inputMargin={InputMargins.STRIP}>
+                <InputModifier inputMargin={inputMargins.STRIP}>
                     <ColumnLayout.Row divided>
                         <ColumnLayout.Column>
                             <FilterSelector

@@ -2,42 +2,42 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-const InputColors = {
+export const inputColors = {
     LIGHT: "light",
-    DARK: "DARK",
+    DARK: "dark",
 };
 
-const InputMargins = {
+export const inputMargins = {
     STRIP: "strip",
 };
 
-class InputModifier extends Component {
-    render() {
-        const {
-            inputColor,
-            inputMargin,
-            children,
-        } = this.props;
+export default function InputModifier({
+    inputColor,
+    inputMargin,
+    children,
+}) {
+    const {
 
-        const classNames = classnames({
-            "modifier_light-inputs": inputColor === InputColors.LIGHT,
-            "modifier_dark-inputs": inputColor === InputColors.DARK,
-            "modifier_strip-input-margins": inputMargin === InputMargins.STRIP,
-        });
+    } = this.props;
 
-        return (
-            <div className={classNames}>
-                {children}
-            </div>
-        )
-    }
+    const classNames = classnames({
+        "modifier_light-inputs": inputColor === inputColors.LIGHT,
+        "modifier_dark-inputs": inputColor === inputColors.DARK,
+        "modifier_strip-input-margins": inputMargin === inputMargins.STRIP,
+    });
+
+    return (
+        <div className={classNames}>
+            {children}
+        </div>
+    );
 }
 
 InputModifier.propTypes = {
-    inputColor: PropTypes.oneOf(Object.values(InputColors)),
-    inputMargin: PropTypes.oneOf(Object.values(InputMargins)),
+    inputColor: PropTypes.oneOf(Object.values(inputColors)),
+    inputMargin: PropTypes.oneOf(Object.values(inputMargins)),
 };
 
-InputModifier.InputColors = InputColors;
-InputModifier.InputMargins = InputMargins;
-export default InputModifier;
+InputModifier.propTypes = {
+    inputColor: inputColors.LIGHT,
+};

@@ -7,7 +7,7 @@ import _ from "underscore";
 import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
-import InputModifier, { InputColors } from "../general/InputModifier";
+import InputModifier, { inputColors } from "../general/InputModifier";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
@@ -163,7 +163,7 @@ class FilterSelector extends React.Component {
                     onToggle={onToggle}
                     flags={getFlags(this)}
                 >
-                    <InputModifier inputColor={InputColors.DARK}>
+                    <InputModifier inputColor={inputColors.DARK}>
                         <SelectionList
                             stateless={true}
                             type={type}
