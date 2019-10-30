@@ -24,6 +24,8 @@ import { cannonballChangeWarning } from "../../util/DeprecationUtils";
  *          Specify what this link is being used for.
  * @param {string} [icon]
  *          Icon name for Link
+ * @param {boolean} [iconAfter=false]
+ *          When true, places icon after text.
  * @param {string} [count]
  *          Count for Link
  * @param {boolean} [disabled=false]
@@ -72,6 +74,7 @@ const Link = (props) => {
     const {
         disabled,
         icon,
+        iconAfter,
         onClick,
     } = props;
 
@@ -82,7 +85,8 @@ const Link = (props) => {
     };
 
     const linkCss = classnames(className, {
-        disabled
+        disabled,
+        "text-first": iconAfter,
     });
 
     const _renderTitle = () => {
@@ -116,6 +120,7 @@ const Link = (props) => {
 Link.propTypes = {
     "data-id": PropTypes.string,
     icon: PropTypes.string,
+    iconAfter: PropTypes.bool,
     count: PropTypes.string,
     url: PropTypes.string,
     target: PropTypes.string,
@@ -133,8 +138,8 @@ Link.defaultProps = {
     "data-id": "content-link",
     disabled: false,
     className: "",
-    target: "_self"
-
+    target: "_self",
+    iconAfter: false,
 };
 
 Link.linkTypes = linkTypes;
