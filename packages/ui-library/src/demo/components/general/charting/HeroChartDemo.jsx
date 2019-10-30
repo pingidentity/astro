@@ -3,6 +3,46 @@ import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
 import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
+const labels = ["24H", "7D"];
+
+const data = {
+    "24H": [
+        { id: "12a", successes: 1200, failures: 200 },
+        { id: "1a", successes: 100, failures: 200 },
+        { id: "2a", successes: 200, failures: 200 },
+        { id: "3a", successes: 300, failures: 200 },
+        { id: "4a", successes: 400, failures: 200 },
+        { id: "5a", successes: 500, failures: 200 },
+        { id: "6a", successes: 600, failures: 200 },
+        { id: "7a", successes: 700, failures: 500 },
+        { id: "8a", successes: 800, failures: 200 },
+        { id: "9a", successes: 900, failures: 900 },
+        { id: "10a", successes: 1000, failures: 200 },
+        { id: "11a", successes: 1100, failures: 1200 },
+        { id: "12p", successes: 200, failures: 200 },
+        { id: "1p", successes: 200, failures: 200 },
+        { id: "2p", successes: 200, failures: 200 },
+        { id: "3p", successes: 200, failures: 200 },
+        { id: "4p", successes: 200, failures: 200 },
+        { id: "5p", successes: 200, failures: 200 },
+        { id: "6p", successes: 200, failures: 200 },
+        { id: "7p", successes: 200, failures: 200 },
+        { id: "8p", successes: 200, failures: 200 },
+        { id: "9p", successes: 200, failures: 200 },
+        { id: "10p", successes: 200, failures: 200 },
+        { id: "11p", successes: 200, failures: 200 }
+
+    ],
+    "7D": [
+        { id: "Sat 12/8", successes: 4000, failures: 200 },
+        { id: "Sun 12/9", successes: 3000, failures: 198 },
+        { id: "Mon 12/10", successes: 0, failures: 0 },
+        { id: "Tue 12/11", successes: 3908, failures: 200 },
+        { id: "Wed 12/12", successes: 4800, failures: 281 },
+        { id: "Thu 12/13", successes: 3908, failures: 200 },
+        { id: "Fri 12/14", successes: 4800, failures: 281 },
+    ]
+};
 
 /**
 * @name HeroChartDemo
@@ -12,6 +52,7 @@ import Layout from "ui-library/lib/components/general/ColumnLayout";
 class HeroChartDemo extends React.Component {
 
     state = {
+        range: "7D",
         errormessage: null,
         loading: false,
         totalValue: "24,458",
@@ -35,16 +76,15 @@ class HeroChartDemo extends React.Component {
         });
     }
 
+    _getData = () => {
+        return data[this.state.range];
+    }
+
+    _onRangeChange = range => {
+        this.setState({ range: range.label });
+    }
+
     render () {
-        const data = [
-            { id: "Sat 12/8", successes: 4000, failures: 200 },
-            { id: "Sun 12/9", successes: 3000, failures: 198 },
-            { id: "Mon 12/10", successes: 0, failures: 0 },
-            { id: "Tue 12/11", successes: 3908, failures: 200 },
-            { id: "Wed 12/12", successes: 4800, failures: 281 },
-            { id: "Thu 12/13", successes: 3908, failures: 200 },
-            { id: "Fri 12/14", successes: 4800, failures: 281 },
-        ];
 
         return (
             <div>
@@ -70,7 +110,7 @@ class HeroChartDemo extends React.Component {
                     errorMessage={this.state.errorMessage}
 
                     bgImage={"src/images/herochart-bg1.png"}
-                    data={data}
+                    data={this._getData()}
                     onValueChange={this._handleRangeChange}
                     selected="1W"
 
@@ -84,6 +124,10 @@ class HeroChartDemo extends React.Component {
                     tooltipTopLabel="Logins"
                     tooltipBottomLabel="Failures"
                     value={this.state.totalValue}
+                    rockerButtonProps={{
+                        labels,
+                        onValueChange: this._onRangeChange
+                    }}
                 />
             </div>
         );
