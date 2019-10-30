@@ -1,10 +1,10 @@
-var React = require("react"),
-    _ = require("underscore"),
-    SelectionList = require("../../../components/forms/selection-list/index"),
-    SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel"),
-    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
+import React from "react";
+import _ from "underscore";
+import SelectionList from "ui-library/lib/components/forms/selection-list/index";
+import SelectionFilterLabel from "ui-library/lib/components/forms/SelectionFilterLabel";
+import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 
-import Button from "../../../components/buttons/Button";
+import Button from "ui-library/lib/components/buttons/Button";
 
 const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString.length) === littleString);
 
@@ -28,7 +28,7 @@ var SINGLE_SELECT_ITEMS = [
         { name: "Boxing", id: 9 },
         { name: "Cross-country Mountain Biking", id: 10 }
     ],
-    
+
     SINGLE_SELECT_ITEMS2 = [
         { name: "Hockey", id: 1 },
         { name: "Soccer", id: 2,
@@ -345,7 +345,7 @@ class SelectionListDemo extends React.Component {
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange(2)}
                     requiredText={this.state.required ? "Select at least one" : ""}
-                    className="fluid-width"
+                    width={SelectionList.listWidths.FLUID}
                 />
 
                 <hr />
