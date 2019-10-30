@@ -31,7 +31,7 @@ import { formatDateTime } from "ui-library/lib/util/DateUtils";
 
 import { populations, statuses, pwStatuses, customFilters, operators, userList } from "./data";
 import InputWidths from "../../components/forms/InputWidths";
-import { stripInputMargins } from "../../util/CSSModifiers";
+import InputModifier, { inputMargins } from "ui-library/lib/components/general/InputModifier";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 
 // the collapsible "ADVANCED" section in the filters panel
@@ -248,47 +248,49 @@ const FilterControls = ({
                 position="top-right"
                 aside={<Link onClick={onClearFilters}>Clear</Link>}
             >
-                <ColumnLayout.Row divided className={stripInputMargins}>
-                    <ColumnLayout.Column>
-                        <FilterSelector
-                            data-id="population-selector"
-                            labelText="Population"
-                            options={_.map(populations, filter => ({
-                                id: filter,
-                                name: filter
-                            }))}
-                            selected={populationOptions}
-                            onValueChange={onPopulationsChange}
-                            flags={["p-stateful", "use-portal"]}
-                        />
-                    </ColumnLayout.Column>
-                    <ColumnLayout.Column>
-                        <FilterSelector
-                            data-id="status-selector"
-                            labelText="Status"
-                            options={_.map(statuses, filter => ({
-                                id: filter,
-                                name: filter
-                            }))}
-                            selected={statusOptions}
-                            onValueChange={onStatusesChange}
-                            flags={["p-stateful", "use-portal"]}
-                        />
-                    </ColumnLayout.Column>
-                    <ColumnLayout.Column>
-                        <FilterSelector
-                            data-id="pw-status-selector"
-                            labelText="Password Status"
-                            options={_.map(pwStatuses, filter => ({
-                                id: filter,
-                                name: filter
-                            }))}
-                            selected={pwStatusOptions}
-                            onValueChange={onPWStatusesChange}
-                            flags={["p-stateful", "use-portal"]}
-                        />
-                    </ColumnLayout.Column>
-                </ColumnLayout.Row>
+                <InputModifier inputMargin={inputMargins.STRIP}>
+                    <ColumnLayout.Row divided>
+                        <ColumnLayout.Column>
+                            <FilterSelector
+                                data-id="population-selector"
+                                labelText="Population"
+                                options={_.map(populations, filter => ({
+                                    id: filter,
+                                    name: filter
+                                }))}
+                                selected={populationOptions}
+                                onValueChange={onPopulationsChange}
+                                flags={["p-stateful", "use-portal"]}
+                            />
+                        </ColumnLayout.Column>
+                        <ColumnLayout.Column>
+                            <FilterSelector
+                                data-id="status-selector"
+                                labelText="Status"
+                                options={_.map(statuses, filter => ({
+                                    id: filter,
+                                    name: filter
+                                }))}
+                                selected={statusOptions}
+                                onValueChange={onStatusesChange}
+                                flags={["p-stateful", "use-portal"]}
+                            />
+                        </ColumnLayout.Column>
+                        <ColumnLayout.Column>
+                            <FilterSelector
+                                data-id="pw-status-selector"
+                                labelText="Password Status"
+                                options={_.map(pwStatuses, filter => ({
+                                    id: filter,
+                                    name: filter
+                                }))}
+                                selected={pwStatusOptions}
+                                onValueChange={onPWStatusesChange}
+                                flags={["p-stateful", "use-portal"]}
+                            />
+                        </ColumnLayout.Column>
+                    </ColumnLayout.Row>
+                </InputModifier>
             </Aside>
             <AdvancedContainer>
                 <Aside

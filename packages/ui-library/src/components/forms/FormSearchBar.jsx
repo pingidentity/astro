@@ -6,7 +6,7 @@ import CollapsibleLink from "../general/CollapsibleLink";
 import Anchor from "../general/Anchor";
 import _ from "underscore";
 import { InputWidths } from "../forms/InputWidths";
-import { lightInputs } from "../../util/CSSModifiers";
+import InputModifier, { inputColors } from "../general/InputModifier";
 import { cannonballProgressivelyStatefulWarning } from "../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
@@ -141,13 +141,14 @@ class SearchBar extends React.Component {
                 </div>
                 {filtersOpen &&
                     <div data-id={`${dataId}-filters-container`}>
-                        <div
-                            data-id={`${dataId}-filters`}
-                            className={classnames("searchbar__filters", lightInputs)}
-                            key="searchbar-filters"
-                        >
-                            {children}
-                        </div>
+                        <InputModifier inputColor={inputColors.LIGHT} key="searchbar-filters">
+                            <div
+                                data-id={`${dataId}-filters`}
+                                className="searchbar__filters"
+                            >
+                                {children}
+                            </div>
+                        </InputModifier>
                         {filtersOpen && documentationLink && documentationLink.showWithFilters && renderDocLink}
                     </div>
                 }

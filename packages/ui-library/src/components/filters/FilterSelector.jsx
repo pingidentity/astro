@@ -7,7 +7,7 @@ import _ from "underscore";
 import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
-import { darkInputs } from "../../util/CSSModifiers";
+import InputModifier, { inputColors } from "../general/InputModifier";
 import { cannonballPortalWarning } from "../../util/DeprecationUtils";
 import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
 
@@ -163,24 +163,25 @@ class FilterSelector extends React.Component {
                     onToggle={onToggle}
                     flags={getFlags(this)}
                 >
-                    <SelectionList
-                        className={darkInputs}
-                        stateless={true}
-                        type={type}
-                        bottomPanel={bottomPanel}
-                        items={this._getOptions()}
-                        optionsNote={optionsNote}
-                        showSearchBox={true}
-                        searchPlaceholder="Search..."
-                        onSearch={this._handleSearch}
-                        onValueChange={onValueChange}
-                        no-border
-                        queryString={this._getSearch()}
-                        requiredText={requiredText}
-                        selectedItemIds={selected}
-                        searchBoxProps={{ textFieldProps: { stateless: true } }}
-                        flags={["p-stateful"]}
-                    />
+                    <InputModifier inputColor={inputColors.DARK}>
+                        <SelectionList
+                            stateless={true}
+                            type={type}
+                            bottomPanel={bottomPanel}
+                            items={this._getOptions()}
+                            optionsNote={optionsNote}
+                            showSearchBox={true}
+                            searchPlaceholder="Search..."
+                            onSearch={this._handleSearch}
+                            onValueChange={onValueChange}
+                            no-border
+                            queryString={this._getSearch()}
+                            requiredText={requiredText}
+                            selectedItemIds={selected}
+                            searchBoxProps={{ textFieldProps: { stateless: true } }}
+                            flags={["p-stateful"]}
+                        />
+                    </InputModifier>
                 </Popover>
             </span>
         );
