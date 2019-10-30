@@ -358,6 +358,19 @@ button,
             margin: 0 0 6px;
         }
     }
+    &.link {
+        background: transparent;
+        border: none;
+        color: $color-active-blue;
+        height: auto;
+        line-height: inherit;
+        padding: 0;
+
+        &:hover {
+            color: $color-active-blue-highlighted;
+            text-decoration: underline;
+        }
+    }
 }
 
 .button {

@@ -29,12 +29,6 @@ class ButtonBarDemo extends React.Component {
         this._closeCancelTooltip();
     };
 
-    _handleDiscard = () => {
-        this.setState({
-            statusText: "Discard button pressed"
-        });
-    };
-
     _handleSave = () => {
         this.setState(({ showSaveTooltip }) => ({
             statusText: "Save button pressed",
@@ -141,11 +135,9 @@ class ButtonBarDemo extends React.Component {
                     data-id="buttonbar"
 
                     cancelText="Cancel"
-                    discardText="Discard"
                     saveText="Save"
 
                     onCancel={this._openCancelTooltip}
-                    onDiscard={this._handleDiscard}
                     onSave={this._openSaveTooltip}
 
 
