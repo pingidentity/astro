@@ -55,10 +55,14 @@ $body-text-color: $color-neutral-20;
 
 // PARENT LABEL
 @mixin parent-label {
-    @include text-style($color-elephant, $font-size-primary);
+    @include text-style($color-elephant);
     @include font-pn-semibold;
 
     text-transform: uppercase;
+}
+
+.text-parent-label {
+    @include parent-label;
 }
 
 // VALUE
@@ -83,7 +87,7 @@ $body-text-color: $color-neutral-20;
 @mixin text-placeholder {
     @include text-value;
 
-    opacity: 0.4;
+    opacity: $inactive-opacity;
     font-style: italic;
 }
 

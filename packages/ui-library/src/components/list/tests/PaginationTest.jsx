@@ -21,10 +21,7 @@ describe("Pagination", function () {
 
     beforeEach(function () {
         callback = jest.fn();
-        global.getSelection = jest.fn();
-        global.getSelection.mockReturnValue({
-            toString: () => "",
-        });
+
         component = TestUtils.renderInWrapper(
             <Pagination
                 data-id="test-pagination"

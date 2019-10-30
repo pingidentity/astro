@@ -60,30 +60,32 @@ class TabSet extends Component {
     }
 
     _getLabels = children => (
-        children.reduce(({
-            activeTabContent,
-            labels,
-        },
-        {
-            props: {
-                children: grandChildren,
-                label,
-            }
-        },idx) => {
-            return {
-                activeTabContent: idx === this.props.selectedIndex ? grandChildren : activeTabContent,
-                labels: [...labels, label]
-            };
-        },
-        {
-            activeTabContent: {},
-            labels: []
-        })
+        React.Children.toArray(children)
+            .filter(({ props }) => props !== undefined)
+            .reduce(({
+                activeTabContent,
+                labels,
+            },
+            {
+                props: {
+                    children: grandChildren,
+                    label,
+                }
+            },idx) => {
+                return {
+                    activeTabContent: idx === this.props.selectedIndex ? grandChildren : activeTabContent,
+                    labels: [...labels, label]
+                };
+            },
+            {
+                activeTabContent: {},
+                labels: []
+            })
     )
 
     render () {
         const {
-            children = [],
+            children,
             onValueChange,
             renderLabels,
             selectedIndex,

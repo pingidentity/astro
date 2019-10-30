@@ -1,6 +1,6 @@
 .chip-panel {
     &__chip {
-        @include border-radius(2px);
+        border-radius: 2px;
 
         align-items: center;
         color: $color-white;

@@ -1,7 +1,7 @@
 
 .help-tooltip {
     $help-icon-size: 18px;
-    $inline-icon-height: 12px;
+    $inline-icon-height: 13px;
 
     @mixin bg-styles($bg-color) {
         background-color: $bg-color;
@@ -45,17 +45,20 @@
         padding: 8px 10px;
         max-width: 400px;
         pointer-events: auto !important;
+        -webkit-box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
+        -moz-box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
+        box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
 
         @include bg-styles($color-midnight);
 
         &.show {
-            @include opacity(1);
+            opacity: 1;
         }
         &.tooltip-text-link {
             &:hover {
                 visibility: visible;
 
-                @include opacity(1);
+                opacity: 1;
             }
             a {
                 text-decoration: none;
@@ -137,7 +140,7 @@
             color: $color-accent-neutral-10;
 
             @include bg-styles($color-white);
-            @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
+            box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
         }
     }
 

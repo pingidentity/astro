@@ -2,7 +2,6 @@ import React from "react";
 import Multivalues from "../../../components/forms/Multivalues";
 import InputRow from "../../../components/layout/InputRow";
 import userOptions from "./data/userOptions";
-import FormCheckbox from "../../../components/forms/FormCheckbox";
 
 /**
 * @name MultivaluesDemo
@@ -103,25 +102,8 @@ class MultivaluesDemo extends React.Component {
                     Type ahead. Press "return" or "," or "tab" or "space" to add an item, or delete an item by
                     clicking "x".
                 </p>
-                <FormCheckbox
-                    label={"With Error Message; checked: "}
-                    renderLabel={
-                        (props, FormLabel) => (
-                            <FormLabel
-                                {...props}
-                                description="Sample Description"
-                            />
-                        )
-                    }
-                    value=""
-                    onChange={()=>{}}
-                    checked={true}
-                    errorMessage="asdfasdfasdfasdf\nasdfasfasfasdf\nasdfasfasdf\n"
-                />
                 <InputRow>
                     <Multivalues
-   
-                        stateless={false}
                         entries={this.state.entries}
                         onValueChange={this._handleValueChange}
                         autoFocus={true}
@@ -132,7 +114,6 @@ class MultivaluesDemo extends React.Component {
                 <InputRow>
                     <Multivalues
                         labelText="Default multi-values input with icons (XL)"
-                        stateless={false}
                         entries={this.state.iconEntries}
                         onValueChange={this._handleIconChange}
                         width={Multivalues.inputWidths.XL}
@@ -142,7 +123,6 @@ class MultivaluesDemo extends React.Component {
                 <InputRow>
                     <Multivalues
                         labelText="Alternate stacked formatting"
-                        stateless={false}
                         entries={this.state.urlEntries}
                         onNewValue={this._onNewValue}
                         onValueChange={this._handleUrlChange}
@@ -156,8 +136,7 @@ class MultivaluesDemo extends React.Component {
 
                 <InputRow>
                     <Multivalues
-                        labelText="With error message (MD)"
-                        stateless={false}
+                        labelText="With error message (MD) -- Error will show when entry is repeated"
                         entries={this.state.errorEntries}
                         onNewValue={this._onNewErrorEntry}
                         onValueChange={this._handleErrorEntryChange}
@@ -169,7 +148,6 @@ class MultivaluesDemo extends React.Component {
                 <InputRow>
                     <Multivalues
                         labelText="With list of options"
-                        stateless={false}
                         entries={this.state.optionsEntries}
                         onValueChange={this._onOptionsChange}
                         options={userOptions}

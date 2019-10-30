@@ -126,7 +126,7 @@ $topnav-bg: $color-neutral-10;
             @include font-pn-regular;
             font-size: $font-size-normal - 1px;
 
-            @include border-radius(2px);
+            border-radius: 2px;
 
             background: $color-strong-neutral-10;
             border: 0;
@@ -141,7 +141,7 @@ $topnav-bg: $color-neutral-10;
                 color: $color-white;
                 font-size: 10px;
                 right: $spacing-sm;
-                top: 8px;
+                top: 3px;
             }
 
             &:hover {
@@ -149,17 +149,21 @@ $topnav-bg: $color-neutral-10;
             }
         }
 
-        .wrapper:after {
-            color: $color-white;
-            font-size: 10px;
-            right: $spacing-sm;
-            top: 8px;
+        .wrapper {
+            height: $market-selector-height;
+
+            &:after {
+                color: $color-white;
+                font-size: 10px;
+                right: $spacing-sm;
+                top: 3px;
+            }
         }
     }
 }
 
 .header-nav {
-    @include flexbox;
+    display: flex;
     flex-direction: row;
     -ms-flex-direction: row;
     justify-content: center;

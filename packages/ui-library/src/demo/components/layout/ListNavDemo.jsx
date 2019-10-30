@@ -91,7 +91,6 @@ export default class ListNavDemo extends Component {
                         title="Add Language"
                         buttonLabel="Add"
                         cancelText="Cancel"
-                        stateless={false}
                         buttonType="primary"
                     >
                         <FormDropDownList

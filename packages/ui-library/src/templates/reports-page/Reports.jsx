@@ -1,15 +1,15 @@
 import React from "react";
-import DragDropTable from "../../components/tables/DragDropTable";
-import mockData from "../reports-page/mockData";
-import Link from "../../components/general/Link";
-import { linkTypes } from "../../components/general/Anchor";
+import DragDropTable from "ui-library/lib/components/tables/DragDropTable";
+import mockData from "ui-library/lib/templates/reports-page/mockData";
+import Link from "ui-library/lib/components/general/Link";
+import { linkTypes } from "ui-library/lib/components/general/Anchor";
 import _ from "underscore";
-import ReportFilters from "../../components/layout/ReportFilters";
-import { InputWidths } from "../../components/forms/InputWidths";
-import FormDropDownList from "../../components/forms/FormDropDownList";
-import UnitInput from "../../components/general/UnitInput";
-import FormTextField from "../../components/forms/form-text-field";
-import PageHeader, { bottomMargin } from "../../components/general/PageHeader";
+import ReportFilters from "ui-library/lib/components/layout/ReportFilters";
+import { InputWidths } from "ui-library/lib/components/forms/InputWidths";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import UnitInput from "ui-library/lib/components/general/UnitInput";
+import FormTextField from "ui-library/lib/components/forms/form-text-field";
+import PageHeader, { bottomMargin } from "ui-library/lib/components/general/PageHeader";
 
 const mockUnit = [
     { label: "--", value: "" },
@@ -118,9 +118,9 @@ export default class Reports extends React.Component {
             };
 
             return (
-                <a onClick={_handleOnClick} className={linkClass}>
+                <Link onClick={_handleOnClick} className={linkClass}>
                     {props.data}
-                </a>
+                </Link>
             );
         };
         return (<HeaderCell />);
@@ -217,7 +217,7 @@ export default class Reports extends React.Component {
         return (
             <div>
                 <Link type={linkTypes.PAGE_RETURN}>To record list</Link>
-                <PageHeader title="Report Paramaters" bottomMarginSize={bottomMargin.XS} />
+                <PageHeader title="Report Parameters" bottomMarginSize={bottomMargin.XS} />
                 <ReportFilters
                     buttonLabel="Run"
                     filters={[

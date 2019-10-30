@@ -45,7 +45,6 @@ class ToggleDemo extends React.Component {
                     <Toggle
                         data-id="user-toggle1"
                         className="row-status-toggle"
-                        stateless={true}
                         toggled={this.state.toggled1}
                         onToggle={this._handleToggle1}
                         name="the-toggle"
@@ -58,7 +57,6 @@ class ToggleDemo extends React.Component {
                     <Toggle
                         data-id="user-toggle2"
                         className="row-status-toggle"
-                        stateless={true}
                         status={Toggle.Status.LOCKED}
                         toggled={this.state.toggled2}
                         onToggle={this._handleToggle2}
@@ -71,7 +69,6 @@ class ToggleDemo extends React.Component {
                     <Toggle
                         data-id="user-toggle3"
                         className="row-status-toggle"
-                        stateless={true}
                         onToggle={this._handleToggle3}
                         toggled={this.state.toggled3}
                     />

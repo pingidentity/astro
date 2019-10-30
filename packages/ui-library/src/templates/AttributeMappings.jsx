@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import FormCheckbox from "../components/forms/FormCheckbox";
-import FormDropDownList from "../components/forms/FormDropDownList";
-import FormTextField from "../components/forms/form-text-field";
-import HelpHint from "../components/tooltips/HelpHint";
-import Indent from "../components/general/Indent";
-import Link from "../components/general/Link";
-import PageHeader from "../components/general/PageHeader";
-import DropDownButton from "../components/forms/DropDownButton";
-import RowBuilder, { Row, Separator } from "../components/rows/RowBuilder";
-import InputWidths from "../components/forms/InputWidths";
+import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
+import FormDropDownList from "ui-library/lib//components/forms/FormDropDownList";
+import FormTextField from "ui-library/lib//components/forms/form-text-field";
+import HelpHint from "ui-library/lib//components/tooltips/HelpHint";
+import Indent from "ui-library/lib//components/general/Indent";
+import Link from "ui-library/lib//components/general/Link";
+import PageHeader from "ui-library/lib//components/general/PageHeader";
+import DropDownButton from "ui-library/lib//components/forms/DropDownButton";
+import RowBuilder, { Row, Separator } from "ui-library/lib//components/rows/RowBuilder";
+import InputWidths from "ui-library/lib//components/forms/InputWidths";
 
 /**
  * @class Attribute Mappings
@@ -63,7 +63,7 @@ export default class AttributeMappings extends Component {
                 />
                 <FormCheckbox
                     checked={this.state.firstChecked}
-                    className="inline"
+                    inline
                     label="Required"
                     onValueChange={this.firstCheckChange}
                 />
@@ -75,7 +75,6 @@ export default class AttributeMappings extends Component {
                 <FormTextField
                     labelText="Application Attribute"
                     placeholder="Enter mapped attribute"
-                    stateless={false}
                     width={InputWidths.MD}
                 />
                 <Separator>=</Separator>
@@ -92,7 +91,7 @@ export default class AttributeMappings extends Component {
                 />
                 <FormCheckbox
                     checked={this.state.secondChecked}
-                    className="inline"
+                    inline
                     label="Required"
                     onValueChange={this.secondCheckChange}
                 />

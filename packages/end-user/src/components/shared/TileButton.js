@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from './FlexRow';
-import Link from '../general/Link';
+import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from '../../components/shared/FlexRow';
+import Link from '../../components/shared/Link';
 
 
 const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking

@@ -319,7 +319,7 @@ function ActiveStep(props) {
         } else {
             buttonBarDefaults.saveText = DEFAULT_TEXT.SAVE_AND_CONTINUE;
         }
-        buttonBarDefaults.saveClassName = "success";
+        buttonBarDefaults.saveClassName = "primary";
 
     } else if (props.step.props.dirty || stepSaveCallback || props.step.props.required) {
         buttonBarDefaults.saveText = DEFAULT_TEXT.NEXT;

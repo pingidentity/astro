@@ -18,7 +18,6 @@ export default () => (
     <div>
         <PageHeader title="User MFA" />
         <RockerButton
-            stateless={true}
             labels={[
                 "Profile",
                 "Roles",

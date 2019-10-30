@@ -19,6 +19,7 @@
 @import './text';
 @import './spacing';
 @import './mixins';
+@import './shared/text-styles';
 
 @import './common/buttons';
 @import './common/inputs';
@@ -48,7 +49,6 @@
 @import './components/two-sided';
 @import './components/profile-image';
 
-@import './shared/text-styles';
 @import './shared/modal';
 @import './shared/tabs';
 @import './shared/details-tooltip';

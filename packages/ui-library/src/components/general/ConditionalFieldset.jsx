@@ -33,7 +33,9 @@ class ConditionalFieldsetStateless extends React.Component {
         emptyMessage: PropTypes.string,
         name: PropTypes.string,
         onValueChange: PropTypes.func,
-        label: PropTypes.string,
+        label: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.node]),
         listClassName: PropTypes.string,
         required: PropTypes.bool,
         selectedIndex: PropTypes.number,
@@ -55,7 +57,9 @@ class ConditionalFieldsetStateless extends React.Component {
     };
 
     _handleRadioValueChange = (value) => {
-        this.props.onValueChange(Number(value));
+        //This is to preserve backward compatibility. This component expects the index to be returned. We want to set value different from index.
+        const index = React.Children.toArray(this.props.children).findIndex(( { props } ) => props.title === value);
+        this.props.onValueChange(Number(index));
     };
 
     _getOptions = type => {
@@ -95,9 +99,9 @@ class ConditionalFieldsetStateless extends React.Component {
                 />
             );
         } else {
-            const options = _.map(this.props.children, (child, i) => {
+            const options = _.map(this.props.children, (child) => {
                 return ({
-                    id: i,
+                    id: child.props.title,
                     name: child.props.title
                 });
             });
@@ -109,7 +113,7 @@ class ConditionalFieldsetStateless extends React.Component {
                     disabled={this.props.disabled}
                     groupName={this.props.name || this.props["data-id"]+"-radio-group"}
                     stacked={false}
-                    selected={this.props.selectedIndex}
+                    selected={options[this.props.selectedIndex].id}
                     onValueChange={this._handleRadioValueChange}
                     items={options}
                 />

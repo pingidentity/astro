@@ -675,7 +675,6 @@ export default class SocialLogin extends Component {
                                                 key="filter"
                                                 label="All"
                                                 options={[]}
-                                                stateless
                                             />
                                         </div>
                                     }
@@ -784,7 +783,6 @@ export default class SocialLogin extends Component {
                                                                     />
                                                                 </div>
                                                             }
-                                                            stateless={false}
                                                             width={InputWidths.MD}
                                                             value="Example attribute"
                                                         />
@@ -841,7 +839,6 @@ export default class SocialLogin extends Component {
                                                                 </div>
                                                             }
                                                             onValueChange={this.setAttrValue(id)("from")}
-                                                            stateless={false}
                                                             width={InputWidths.MD}
                                                             value={from}
                                                         />

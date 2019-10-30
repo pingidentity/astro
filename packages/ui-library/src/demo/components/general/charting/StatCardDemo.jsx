@@ -1,8 +1,9 @@
 import React from "react";
-import { StatCard, CardRow } from "../../../../components/general/charting/Cards";
-import Checkbox from "../../../../components/forms/FormCheckbox";
-import Layout from "ui-library/lib/components/general/ColumnLayout";
+import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
 import demoChartData from "./demoChartData";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import { StatCard, CardRow } from "ui-library/lib/components/general/charting/Cards";
+
 
 /**
 * @name StatCardemo
@@ -30,7 +31,7 @@ class StatCardDemo extends React.Component {
     render () {
         return (
             <div>
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <Checkbox
                             label="Show error message"

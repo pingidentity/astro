@@ -1,37 +1,37 @@
 
 @-webkit-keyframes spinner-rotation {
     0% {
-        @include transform(rotate(0deg));
+        transform: rotate(0deg);
     }
     100% {
-        @include transform(rotate(360deg));
+        transform: rotate(360deg);
     }
 }
 
 @-moz-keyframes spinner-rotation {
     0% {
-        @include transform(rotate(0deg));
+        transform: rotate(0deg);
     }
     100% {
-        @include transform(rotate(360deg));
+        transform: rotate(360deg);
     }
 }
 
 @-o-keyframes spinner-rotation {
     0% {
-        @include transform(rotate(0deg));
+        transform: rotate(0deg);
     }
     100% {
-        @include transform(rotate(360deg));
+        transform: rotate(360deg);
     }
 }
 
 @keyframes spinner-rotation {
     0% {
-        @include transform(rotate(0deg));
+        transform: rotate(0deg);
     }
     100% {
-        @include transform(rotate(360deg));
+        transform: rotate(360deg);
     }
 }
 
@@ -84,7 +84,7 @@
         box-sizing: border-box;
         border-style: solid;
 
-        @include animation (spinner-rotation 0.8s infinite linear);
+        animation: spinner-rotation 0.8s infinite linear;
         @include spinnerRotatorSize($size, $border-width, $color);
     }
 
@@ -192,23 +192,7 @@
         background-color: $color;
         opacity: 0;
 
-        @include border-radius(ceil($size/2));
-    }
-
-    span {
-        left: 0;
-
-        @include animation(pulse-1 $timing);
-    }
-    &:before {
-        left: $size + $spacing;
-
-        @include animation(pulse-2 $timing);
-    }
-    &:after {
-        left: 2*($size + $spacing);
-
-        @include animation(pulse-3 $timing);
+        border-radius: ceil($size/2);
     }
 
     @include keyframes(pulse-1) {
@@ -252,6 +236,23 @@
             opacity: 0;
         }
     }
+
+    span {
+        left: 0;
+
+        animation: pulse-1 $timing;
+    }
+    &:before {
+        left: $size + $spacing;
+
+        animation: pulse-2 $timing;
+    }
+    &:after {
+        left: 2*($size + $spacing);
+
+        animation: pulse-3 $timing;
+    }
+
     &.ie9 {
         height: 7px;
         width: 36px;
@@ -282,7 +283,7 @@
     font-size: 1px;
     vertical-align: bottom;
 
-    @include animation (spinner-rotation 0.8s infinite linear);
+    animation: spinner-rotation 0.8s infinite linear;
 
     &.large {
         $size: 40px;

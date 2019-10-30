@@ -46,7 +46,6 @@ class RockerButtonDemo extends React.Component {
         return (
             <div>
                 <RockerButton
-                    stateless={false}
                     onValueChange={this._handleValueChange}
                     labels={labels}
                 />
@@ -58,7 +57,6 @@ class RockerButtonDemo extends React.Component {
                 <FormLabel>Rocker that takes label and id object and changes the Id to the new DataID</FormLabel>
                 <br />
                 <RockerButton
-                    stateless={false}
                     onValueChange={this._handleChangeWithId}
                     labels={labelsWithId}
                 />
@@ -69,7 +67,6 @@ class RockerButtonDemo extends React.Component {
                 <br /><br />
 
                 <RockerButton
-                    stateless={false}
                     disabled={true}
                     labels={labels}
                 />
@@ -78,8 +75,7 @@ class RockerButtonDemo extends React.Component {
                 <br /><br />
 
                 <RockerButton
-                    className="rocker-button--chart-rocker"
-                    stateless={false}
+                    type={RockerButton.rockerTypes.CHART}
                     onValueChange={this._handleValueChange}
                     labels={years}
                 />
@@ -88,8 +84,7 @@ class RockerButtonDemo extends React.Component {
                 <br /><br />
 
                 <RockerButton
-                    className="rocker-button--chart-rocker rocker-button--chart-rocker-small"
-                    stateless={false}
+                    type={RockerButton.rockerTypes.CHART_SMALL}
                     onValueChange={this._handleValueChange}
                     labels={days}
                 />

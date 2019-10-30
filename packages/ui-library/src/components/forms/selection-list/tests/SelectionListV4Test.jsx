@@ -208,6 +208,24 @@ describe("SelectionList v4", function () {
         expect(component.props.children.props.onValueChange.mock.calls[0][0]).toBe(1);
     });
 
+    it("maintains height and width after filtering", function () {
+        const component = getComponent({
+            stateless: true,
+            type: SelectionList.ListType.SINGLE
+        });
+
+        const selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list");
+        const originalHeight = selectionList.style.height;
+        const originalWidth = selectionList.style.width;
+
+        const searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
+        const searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: "Na" } });
+
+        expect(selectionList.style.height).toEqual(originalHeight);
+        expect(selectionList.style.width).toEqual(originalWidth);
+    });
+
     it("should render with few checked checkboxes and uncheck all when selected", function () {
         const callback = jest.fn();
         const props = {

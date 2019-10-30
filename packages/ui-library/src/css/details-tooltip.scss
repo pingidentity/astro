@@ -32,7 +32,7 @@
             &:after {
                 content: '\21';
                 position: absolute;
-                top: 15px;
+                top: $spacing-md;
                 left: 0;
                 right: 0;
                 font-family: $icon-font;
@@ -74,6 +74,10 @@
     max-width: $popup-width;
     word-break: break-word;
 
+    &--large {
+        max-width: 70%;
+    }
+
     .loader {
         position: relative;
         display: inline-block;
@@ -91,9 +95,9 @@
         background-color: $color-white;
         font-size: 14px;
 
-        @include box-shadow($popup-box-shadow);
-        @include border-radius($popup-border-radius);
-        @include transition(0.3s ease);
+        box-shadow: $popup-box-shadow;
+        border-radius: $popup-border-radius;
+        transition: 0.3s ease;
 
     }
 
@@ -110,7 +114,7 @@
         letter-spacing: 0;
         text-transform: none;
 
-        @include border-radius($popup-border-radius $popup-border-radius 0 0);
+        border-radius: $popup-border-radius $popup-border-radius 0 0;
 
         a {
             font-size: 16px;
@@ -161,8 +165,8 @@
 
     .details-close {
         position: absolute;
-        top: 18px;
-        right: 15px;
+        top: $spacing-md;
+        right: $spacing-md;
         color: transparent;
         z-index: 2;
         line-height: 1em;
@@ -220,8 +224,8 @@
         }
         .selection-filter-label {
             &:after {
-                @include rotate(-180deg);
-                @include transition((all 0.2s linear));
+                transform: rotate(-180deg);
+                transition: (all 0.2s linear);
             }
         }
     }
@@ -245,7 +249,7 @@
                 .details-body {
                     border-top: $title-height solid $color-warning-icon-yellow;
 
-                    @include border-radius($border-radius);
+                    border-radius: $border-radius;
                 }
             }
             .details-close,
@@ -304,9 +308,9 @@
             font-size: 14px;
             margin: $arrow-height 0 0 (-$arrow-offset - $arrow-width-offset);
 
-            @include box-shadow($box-shadow);
-            @include border-radius($border-radius);
-            @include transition(0.3s ease);
+            box-shadow: $box-shadow;
+            border-radius: $border-radius;
+            transition: 0.3s ease;
 
             &:before {
                 content: '▲';
@@ -321,7 +325,7 @@
                 line-height: 1em;
                 color: $color-walrus;
 
-                @include transform(scale(1.9,1));
+                transform: scale(1.9, 1);
             }
             > .details-title {
                 min-height: $title-height;
@@ -338,7 +342,7 @@
                 letter-spacing: 0;
                 text-transform: none;
 
-                @include border-radius($border-radius $border-radius 0 0);
+                border-radius: $border-radius $border-radius 0 0;
 
                 a {
                     font-size: 16px;

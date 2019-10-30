@@ -372,7 +372,7 @@ module.exports = [
                     {
                         label: "Multi Column Drag Drop",
                         demo: require("../components/panels/MultiDragDemo"),
-                        pathToDoc: "components/panels/multi-drag/MultiDrag.jsx",
+                        pathToDoc: "components/panels/MultiDrag.jsx",
                         pathToSource: "components_panels_multi-drag_MultiDrag.jsx.html",
                         pathToDemoSource: "demo_components_panels_MultiDragDemo.jsx.html",
                         keywords: ["MultiDrag"]
@@ -1177,6 +1177,17 @@ module.exports = [
                             type: "version"
                         }
                     },
+                    {
+                        label: "NavFrame",
+                        demo: require("../components/panels/NavFrameDemo"),
+                        pathToDoc: "components/panels/NavFrame.jsx",
+                        pathToSource: "components_panels_NavFrame.jsx.html",
+                        pathToDemoSource: "demo_components_panels_NavFrameDemo.jsx.html",
+                        status: {
+                            message: "THIS COMPONENT IS STILL IN DEVELOPMENT. FOR PINGFEDERATE USE ONLY.",
+                            type: "version"
+                        }
+                    },
                 ]
             }
         ]
@@ -1215,7 +1226,7 @@ module.exports = [
             {
                 label: "List Template - Ordering",
                 demo: require("../components/templates/ListViewOrderingDemo"),
-                pathToSource: "templates_paginated-list_PaginatedList.jsx.html",
+                pathToSource: "templates_list-view-ordering_ListViewOrdering.jsx.html",
                 fullscreen: true,
                 icon: "circle-o",
             },

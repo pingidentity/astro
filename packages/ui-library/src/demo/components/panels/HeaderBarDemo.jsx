@@ -64,7 +64,6 @@ const customMenuPopup = ({ triggerClassName, ...props }) => (
     <DetailsTooltip
         {...props}
         title="Custom Popover"
-        stateless={false}
         placement="bottom left"
         labelClassName={triggerClassName}
     >
@@ -131,9 +130,11 @@ class HeaderBarDemo extends React.Component {
         this.setState({ newEnvironment: true });
     }
 
+
     render() {
         return (
             <div>
+                <HR />
                 <p>Using the provided reducer:</p>
                 <HeaderBar {...this.state}
                     onItemValueChange={this._handleItemClick}

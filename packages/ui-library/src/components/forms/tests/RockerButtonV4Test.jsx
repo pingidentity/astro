@@ -173,4 +173,34 @@ describe("RockerButton v4", function () {
             undefined);
     });
 
+    it("renders the selected class when the label is an object", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <RockerButton labels={[
+                {
+                    id: 7
+                },
+                {
+                    id: 8
+                }
+            ]} selectedIndex={7} />
+        );
+
+        expect(TestUtils.findRenderedDOMNodeWithClass(component, "sel-0"));
+    });
+
+    it("renders the selected class when the label is an object and nothing selected", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <RockerButton labels={[
+                {
+                    id: 7
+                },
+                {
+                    id: 8
+                }
+            ]} />
+        );
+
+        expect(TestUtils.findRenderedDOMNodeWithClass(component, "sel-0"));
+    });
+
 });

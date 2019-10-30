@@ -43,7 +43,7 @@ $checkbox-border-color: $color-neutral-40;
 
     &:after {
         content: '';
-        background: url('images/checkmark.svg') center no-repeat;
+        background: url('../icons/checkmark.svg') center no-repeat;
         position: absolute;
         top: 0;
         right: 0;

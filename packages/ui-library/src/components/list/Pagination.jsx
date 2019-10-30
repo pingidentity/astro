@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import _ from "underscore";
 import { inStateContainer } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
+import { SimpleWrapper } from "../../components/rows/ExpandableRow";
 
 /**
  * @callback PageLinks~onValueChange
@@ -193,7 +194,7 @@ class PaginationStateless extends Component {
         //make sure current page isn't greater than number of pages
         var currentPage = parseInt(this.props.page) > numPages ? numPages : parseInt(this.props.page);
         return (
-            <div
+            <SimpleWrapper
                 className={this.props.className}
                 data-id={this.props["data-id"]}>
                 {
@@ -221,7 +222,7 @@ class PaginationStateless extends Component {
                     )
 
                 }
-            </div>
+            </SimpleWrapper>
         );
     }
 }

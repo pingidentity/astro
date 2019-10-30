@@ -2,11 +2,11 @@
 
     &__columns,
     &__search-row {
-        @include flexbox;
+        display: flex;
     }
 
     &__search {
-        @include flexbox-grow(1);
+        flex-grow: 1;
         margin-bottom: $spacing-lg;
         flex-basis: 50%;
         margin-right: $spacing-lg;
@@ -17,13 +17,13 @@
     }
 
     &--disabled {
-        @include opacity(0.4);
+        opacity: $inactive-opacity;
 
         .row-selector__available,
         .row-selector__added {
             pointer-events: none;
 
-            @include user-select(none);
+            user-select: none;
         }
     }
 
@@ -52,7 +52,7 @@
             background: $color-white;
             z-index: $zindex__base - 1;
 
-            @include border-radius(7px);
+            border-radius: 7px;
         }
     }
 
@@ -140,7 +140,7 @@
         background-color: $color-white;
         min-height: 50px;
 
-        @include box-sizing(border-box);
+        box-sizing: border-box;
 
         &.preview {
             border: 1px dotted $color-active-blue;
@@ -157,9 +157,9 @@
         margin: 0;
         padding: 15px 5px;
 
-        @include box-sizing(border-box);
+        box-sizing: border-box;
         @include grab-cursor;
-        @include border-radius(2px);
+        border-radius: 2px;
 
         .icon-grip {
             display: inline-block;
@@ -188,7 +188,7 @@
             width: 32px;
             height: 32px;
 
-            @include background-size(cover);
+            background-size: cover;
         }
         .item-icon {
             left: 30px;
@@ -208,7 +208,7 @@
             text-overflow: ellipsis;
             width: calc(100% - 65px);
 
-            @include transition(all 0.3s);
+            transition: all 0.3s;
         }
         a.button {
             position: absolute;
@@ -246,8 +246,8 @@
 }
 
 .selector-row {
-    @include flexbox;
-    @include border-radius(2px);
+    display: flex;
+    border-radius: 2px;
     @include grab-cursor;
     align-items: center;
     padding: $spacing-sm;
@@ -284,7 +284,7 @@
     }
 
     &__count {
-        @include border-radius(12px);
+        border-radius: 12px;
         color: $color-midnight;
         border: 1px solid $color-midnight;
         min-width: 23px;
@@ -294,7 +294,7 @@
     }
 
     &__labels {
-        @include flexbox-grow(1);
+        flex-grow: 1;
         overflow: hidden;
         margin: 0 35px 0 0;
     }

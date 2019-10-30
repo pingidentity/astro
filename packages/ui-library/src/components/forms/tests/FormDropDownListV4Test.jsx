@@ -415,10 +415,6 @@ describe("FormDropDownList v4", function () {
             component, FormDropDownList._statelessComponent
         )._handleGlobalClick;
 
-        global.getSelection = jest.fn();
-        global.getSelection.mockReturnValue({
-            toString: () => "",
-        });
 
         expect(component.props.children.props.onToggle).not.toBeCalled();
 

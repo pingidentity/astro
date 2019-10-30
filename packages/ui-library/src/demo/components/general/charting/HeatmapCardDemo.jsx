@@ -1,6 +1,6 @@
 import React from "react";
-import HeatmapCard from "../../../../components/general/charting/HeatmapCard";
-import Checkbox from "../../../../components/forms/FormCheckbox";
+import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
+import HeatmapCard from "ui-library/lib/components/general/charting/HeatmapCard";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 /**
@@ -60,7 +60,7 @@ class HeatMapCardDemo extends React.Component {
     render() {
         return (
             <div>
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <Checkbox
                             label="Show error message"

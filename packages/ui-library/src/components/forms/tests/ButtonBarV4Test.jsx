@@ -315,4 +315,12 @@ describe("ButtonBar", function () {
         expect(discardBtn).toBeTruthy();
     });
 
+    it("renders cancel and discard as links when the prop is set", function() {
+        const component = getComponent({ onDiscard: jest.fn(), onCancel: jest.fn(), useButtonForCancel: false });
+
+        const links = TestUtils.scryRenderedDOMNodesWithClass(component, "button-bar__cancel-link");
+
+        expect(links.length).toBe(2);
+    });
+
 });

@@ -41,14 +41,12 @@ class FormTextAreaDemo extends React.Component {
             <div>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="Basic"
                         width={InputWidths.MD}
                     />
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="basic with descriptive text"
                         width={InputWidths.MD}
                         description="this is descriptive text"
@@ -56,7 +54,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="Required with placeholder and change callback"
                         onValueChange={this._handleValueChange}
                         placeholder="placeholder"
@@ -69,7 +66,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="With maxLength and defined size"
                         options={options}
                         cols={10}
@@ -80,7 +76,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="With defaultValue and undo (stateful)"
                         initialState={{
                             value: "Lorem ipsum dolor sit amet",
@@ -92,7 +87,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={true}
                         labelText="With defaultValue and undo (stateless)"
                         value={this.state.onUndoValue}
                         onValueChange={this._handleUndoValueChange}
@@ -112,7 +106,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="With error message"
                         errorMessage="The error message appears when hovering over the error icon or when focus is
                             placed on the textarea."
@@ -122,7 +115,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="With help tooltip"
                         labelHelpText="This is my help text."
                         width={InputWidths.MD}
@@ -130,7 +122,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText="Disabled With help tooltip"
                         labelHelpText="This is my help text."
                         disabled={true}
@@ -139,7 +130,6 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
-                        stateless={false}
                         labelText={heightOptions}
                         labelHelpText="This is the default medium height."
                         className="textarea-height--medium"
@@ -150,7 +140,6 @@ class FormTextAreaDemo extends React.Component {
                     <FormTextArea
                         labelText="With a monospaced font"
                         monospaced
-                        stateless={false}
                         width={InputWidths.MD}
                     />
                 </InputRow>

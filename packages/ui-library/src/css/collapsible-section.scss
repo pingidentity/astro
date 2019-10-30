@@ -5,7 +5,7 @@
     position: relative;
     border-top: 1px dotted $color-rabbit-fur;
     border-bottom: 1px dotted $color-rabbit-fur;
-    margin: 0 0 -1px $line-indent;
+    margin: 0 0 -1px 0;
 
     &--no-underline {
         border: none;
@@ -42,7 +42,24 @@
                 border-radius: 50%;
             }
         }
+        &--node {
+            font-size: 14px;
+            text-transform: none;
+            margin: 0 0 0 5px;
+            color: $color-midnight;
+            cursor: pointer;
+            .content-columns {
+                margin-top: $spacing-md;
+                margin-bottom: $spacing-lg;
+            }
+            label {
+                cursor: pointer;
+            }
+        }
 
+        &--accessories {
+            text-transform: none;
+        }
     }
     > .collapsible-section-title-value {
         font-size: 14px;
@@ -50,13 +67,15 @@
         margin: 0 0 0 5px;
         color: $color-midnight;
     }
+
     > .collapsible-section-content {
+        text-transform: none;
         display: none;
         visibility: hidden;
         position: relative;
-        margin: 0 0 25px 25px;
+        margin: 0 0 $spacing-lg $spacing-lg;
 
-        @include transition(all 0.3s);
+        transition: all 0.3s;
 
         &--no-margin {
             margin-left: 0;
@@ -84,7 +103,7 @@
             display: block;
             visibility: visible;
 
-            @include animation(fade-in 0.2s);
+            animation: 0.2s fade-in;
         }
     }
     &.has-title-value {
@@ -143,6 +162,18 @@
             left: -19px;
             color: $color-midnight;
         }
+        &.collapsible-section-title--node {
+            padding: 0;
+
+            &.left:before {
+                top: 34px;
+            }
+        }
+        &.none {
+            &:after {
+                content: none;
+            }
+        }
     }
 }
 
@@ -176,5 +207,5 @@
     padding-left: 12px;
     color: $color-strong-neutral-50;
 
-    @include transition(all 0.3s);
+    transition: all 0.3s;
 }

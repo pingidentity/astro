@@ -1,7 +1,7 @@
 
 import React from "react";
-import ButtonBar from "../../../components/forms/ButtonBar";
-import Button from "../../../components/buttons/Button";
+import ButtonBar, { buttonAlignments } from "ui-library/lib/components/forms/ButtonBar";
+import Button from "ui-library/lib/components/buttons/Button";
 
 /**
 * @name ButtonBarDemo
@@ -11,12 +11,14 @@ import Button from "../../../components/buttons/Button";
 class ButtonBarDemo extends React.Component {
 
     state = {
+        leftAlign: false,
         saving: false,
         showBar: true,
         statusText: "-",
         showCancelTooltip: false,
         showSaveTooltip: false,
         saveDisabledText: null,
+        cancelButtons: true,
     };
 
     _handleCancel = () => {
@@ -76,6 +78,12 @@ class ButtonBarDemo extends React.Component {
         }));
     };
 
+    _toggleAlignment = () => this.setState(
+        ({ leftAlign }) => ({
+            leftAlign: !leftAlign
+        })
+    );
+
     _openCancelTooltip = () => {
         this.setState({ showCancelTooltip: true });
     };
@@ -96,6 +104,8 @@ class ButtonBarDemo extends React.Component {
         this.setState({ unfixed: !this.state.unfixed });
     }
 
+    _toggleCancelButtons = () => this.setState(({ cancelButtons }) => ({ cancelButtons: !cancelButtons }));
+
     render() {
         var toggleButtonText = this.state.showBar ? "FALSE" : "TRUE",
             saveButtonSaving = this.state.saving ? "FALSE" : "TRUE",
@@ -114,7 +124,15 @@ class ButtonBarDemo extends React.Component {
                     Set "saveDisabled with helphint" prop to {saveButtonHelpHint}
                 </Button>
                 <br /><br />
+                <Button onClick={this._toggleCancelButtons}>
+                    Use cancel buttons or links
+                </Button>
+                <br /><br />
                 <button onClick={this._toggleUnfix}>Unfix button bar</button>
+                <br /><br />
+                <Button onClick={this._toggleAlignment}>
+                    Change button alignment
+                </Button>
                 <br /><br />
                 Demo status: &nbsp; <i>{this.state.statusText}</i>
 
@@ -135,6 +153,9 @@ class ButtonBarDemo extends React.Component {
                     saveDisabled={this.state.saveDisabled}
                     unfixed={this.state.unfixed}
                     saveDisabledText={this.state.saveDisabledText}
+
+                    useButtonForCancel={this.state.cancelButtons}
+                    alignment={this.state.leftAlign ? buttonAlignments.LEFT : buttonAlignments.RIGHT}
 
                     cancelTooltip={{
                         title: "Cancel Confirmation",

@@ -35,8 +35,8 @@ $expandable-row-gap: 12px;
     margin: 0 0 $expandable-row-gap;
     max-height: $expandable-row-height;
 
-    @include border-radius(2px);
-    @include transition(all 0.1s);
+    border-radius: 2px;
+    transition: all 0.1s;
 
     .collapsed-content {
         position: relative;
@@ -150,11 +150,11 @@ $expandable-row-gap: 12px;
             font-family: $icon-font;
             color: $color-walrus;
 
-            @include transform(translateX(-50%) translateY(-50%));
+            transform: translateX(-50%) translateY(-50%);
         }
         &:hover {
             &:after {
-                @include opacity(0.65);
+                opacity: 0.65;
                 text-decoration: none;
             }
         }
@@ -207,7 +207,7 @@ $expandable-row-gap: 12px;
         max-height: 4000px;
         border: 1px solid $color-rabbit-fur;
 
-        //@include transition(max-height 1s);
+        //transition: max-height 1s);
 
         .expand-btn {
             position: relative;
@@ -249,7 +249,7 @@ $expandable-row-gap: 12px;
                 content: '';
             }
             &:hover {
-                @include opacity(1);
+                opacity: 1;
             }
         }
     }
@@ -285,7 +285,7 @@ $expandable-row-gap: 12px;
             right: 0;
             background-color: $color-white;
 
-            @include opacity(0.6);
+            opacity: 0.6;
         }
     }
     &.draggable {
@@ -374,7 +374,7 @@ $expandable-row-gap: 12px;
 
         .row-accessories,
         .row-btns {
-            opacity: 0.4;
+            opacity: $inactive-opacity;
             pointer-events: none;
         }
 
@@ -454,7 +454,7 @@ $expandable-row-gap: 12px;
     color: $color-white;
     background-color: $color-elephant;
 
-    @include border-radius(3px);
+    border-radius: 3px;
 }
 
 .draggable-item--drop-target {
@@ -500,7 +500,7 @@ $expandable-row-gap: 12px;
         right: 0;
         background-color: $color-white;
 
-        @include opacity(0.6);
+        opacity: 0.6;
     }
 }
 
@@ -561,7 +561,7 @@ input.ordering-controls__input {
         .loader-container {
             bottom: 30px;
 
-            @include opacity(1);
+            opacity: 1;
         }
     }
     .item {
@@ -623,7 +623,7 @@ input.ordering-controls__input {
                 .icon-view {
                     top: 0;
                     &.hide {
-                        @include opacity(0.25);
+                        opacity: 0.25;
                     }
                     &.disabled {
                         cursor: not-allowed;
@@ -664,7 +664,7 @@ input.ordering-controls__input {
             .item-sub-title,
             .grip,
             .action-status {
-                @include opacity(0.5);
+                opacity: 0.5;
             }
             .item-title,
             .item-sub-title,
@@ -676,7 +676,7 @@ input.ordering-controls__input {
             &.hide {
                 display: block;
 
-                @include opacity(0.25);
+                opacity: 0.25;
             }
             &.disabled {
                 cursor: not-allowed;
@@ -774,7 +774,7 @@ input.ordering-controls__input {
                 padding-top: 47px;
 
                 &:hover {
-                    @include opacity(0.7);
+                    opacity: 0.7;
                 }
             }
             .reject-btn {
@@ -807,7 +807,7 @@ input.ordering-controls__input {
                 top: 18px;
                 display: none;
 
-                @include transition(all 0.2s);
+                transition: all 0.2s;
             }
             .input-toggle {
                 position: absolute;
@@ -874,7 +874,7 @@ input.ordering-controls__input {
         &.active {
             display: inline-block;
 
-            @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+            transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
         }
         .set {
             width: 100%;
@@ -920,8 +920,8 @@ input.ordering-controls__input {
             border-bottom: none;
         }
         .show-set {
-            @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-            @include transform(rotate(180deg));
+            transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
+            transform: rotate(180deg);
         }
     }
 }
@@ -934,8 +934,8 @@ input.ordering-controls__input {
     left: -4px;
     top: 4px;
     &.expanded {
-        @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-        @include transform(rotate(180deg));
+        transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
+        transform: rotate(180deg);
     }
     .data-col-of-4 {
         max-width: 25%;
@@ -952,7 +952,7 @@ input.ordering-controls__input {
 
     &.active {
         .show-condition {
-            @include rotate(-180deg);
+            transform: rotate(-180deg);
         }
     }
 }
@@ -1001,13 +1001,13 @@ input.ordering-controls__input {
         }
         &.active {
             .show-condition {
-                @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-                @include transform(rotate(180deg));
+                transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
+                transform: rotate(180deg);
             }
             .condition {
                 display: block;
 
-                @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+                transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
             }
         }
     }
@@ -1026,7 +1026,7 @@ input.ordering-controls__input {
         &.active {
             display: block;
 
-            @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+            transition: (top ease-out 0.4s, opacity ease-out 0.1s 0.3s);
         }
         &.alone {
             border-bottom: none;
@@ -1049,7 +1049,7 @@ input.ordering-controls__input {
                     width: 180px;
                     padding-left: 30px;
 
-                    @include border-radius(3px);
+                    border-radius: 3px;
                 }
                 .input-row {
                     margin: 0 0 10px;
@@ -1168,11 +1168,11 @@ input.ordering-controls__input {
             position: absolute;
             font-size: 12px;
 
-            @include transition(all 0.3s);
+            transition: all 0.3s;
         }
         &.show {
             &:after {
-                @include transform(rotate(180deg));
+                transform: rotate(180deg);
             }
         }
     }
@@ -1182,15 +1182,15 @@ input.ordering-controls__input {
         height: 0;
         overflow: hidden;
 
-        @include opacity(0);
-        @include transition(all 0.3s);
+        opacity: 0;
+        transition: all 0.3s;
 
         &.show {
             padding-top: 30px;
             padding-bottom: 10px;
             height: 24px;
 
-            @include opacity(1);
+            opacity: 1;
         }
         .input-checkbox {
             padding-bottom: 0;
@@ -1229,7 +1229,7 @@ input.ordering-controls__input {
 }
 
 .accessories-line-chart__count-wrapper {
-    @include flexbox;
+    display: flex;
     flex-direction: column;
     align-items: flex-end;
     width: 70px;
@@ -1249,7 +1249,7 @@ input.ordering-controls__input {
 
 .accessories-line-chart__hint-wrapper,
 .accessories-line-chart__chart-wrapper {
-    @include flexbox;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
 

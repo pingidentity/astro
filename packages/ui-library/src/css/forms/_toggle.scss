@@ -31,8 +31,8 @@ label {
         border: 1px solid $color-stratus;
         cursor: pointer;
 
-        @include border-radius($toggle-border-radius);
-        @include transition(all $toggle-time);
+        border-radius: $toggle-border-radius;
+        transition: all $toggle-time;
 
         &:after {
             content: '';
@@ -44,9 +44,9 @@ label {
             width: $toggle-diameter - 2;
             box-sizing: border-box;
 
-            @include border-radius($toggle-border-radius);
-            @include transition(all $toggle-time);
-            @include box-shadow((1px 1px 3px 0 rgba(0, 0, 0, 0.3)));
+            border-radius: $toggle-border-radius;
+            transition: all $toggle-time;
+            box-shadow: (1px 1px 3px 0 rgba(0, 0, 0, 0.3));
         }
     }
     &.selected {
@@ -115,11 +115,11 @@ label {
 }
 
 .disabled {
-    $disabled-opacity: 0.4;
+    $disabled-opacity: $inactive-opacity;
     $normal-opacity: 1;
 
     &.input-toggle {
-        @include opacity($disabled-opacity);
+        opacity: $disabled-opacity;
     }
 }
 

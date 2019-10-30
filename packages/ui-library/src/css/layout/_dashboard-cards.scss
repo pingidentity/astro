@@ -19,34 +19,34 @@ $fullwidthBreakpoint: 950px;
 }
 
 @mixin flippedTo {
-    @include transform(rotateY(0deg));
+    transform: rotateY(0deg);
 }
 
 @mixin flippedAway {
-    @include transform(rotateY(180deg));
+    transform: rotateY(180deg);
 }
 
 @mixin flipper {
-    @include transition(all 0.2s ease-in-out);
-    @include backface-visibility();
+    transition: all 0.2s ease-in-out;
+    backface-visibility: hidden;
 }
 
 @mixin cardFrame {
-    @include border-radius(2px);
-    @include box-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
     background: $color-white;
     border: 1px solid $color-neutral-70;
 }
 
 .dashboard-card {
-    @include flexbox;
+    display: flex;
 
     position: relative;
     max-width: 100%;
 
     > * {
-        @include flexbox-grow(1);
+        flex-grow: 1;
         max-width: 100%;
     }
 
@@ -60,8 +60,8 @@ $fullwidthBreakpoint: 950px;
         @include cardFrame;
         @include flipper;
         @include flippedTo;
-        @include flexbox;
-        @include flexbox-direction(column);
+        display: flex;
+        flex-direction: column;
 
         box-sizing: border-box;
         padding: $spacing-xl $spacing-lg;
@@ -181,11 +181,11 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__stat-row {
-        @include flexbox();
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
 
         > * {
-            @include flexbox-grow(1);
+            flex-grow: 1;
         }
     }
 
@@ -248,7 +248,7 @@ $fullwidthBreakpoint: 950px;
     &--magenta {
         .dashboard-card__title-icon,
         .dashboard-card__stat-row-number,
-        .stat-area-card__value, {
+        .stat-area-card__value {
             color: $color-charting-magenta;
         }
         .dashboard-card--back-title,
@@ -312,16 +312,16 @@ $fullwidthBreakpoint: 950px;
     }
 
     @media (min-width: $fullwidthBreakpoint) {
-        @include flexbox;
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
 
         align-items: stretch;
 
         > * {
-            @include flexbox-grow(1);
+            flex-grow: 1;
 
             &.dashboard-card--double {
-                @include flexbox-grow(2);
+                flex-grow: 2;
                 flex-basis: 1em;
             }
 
@@ -340,8 +340,8 @@ $fullwidthBreakpoint: 950px;
 .stat-card {
 
     &__front-title {
-        @include flexbox;
-        @include flexbox-grow(1);
+        display: flex;
+        flex-grow: 1;
 
         align-items: center;
         justify-content: center;
@@ -480,13 +480,13 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__back-info {
-        @include flexbox;
+        display: flex;
         justify-content: space-between;
         height: 30px;
     }
 
     &__drop-down {
-        @include flexbox;
+        display: flex;
         justify-content: center;
         padding-left: 10px;
         bottom: 21px;
@@ -551,8 +551,8 @@ $fullwidthBreakpoint: 950px;
 
 
     &__holder {
-        @include flexbox;
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
         align-items: center;
         margin-top: 25px;
         justify-content: center;
@@ -560,8 +560,8 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__nav-holder {
-        @include flexbox;
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
     }
@@ -569,7 +569,7 @@ $fullwidthBreakpoint: 950px;
     &__wrapper {
         display: inline-block;
         position: relative;
-        @include flexbox-grow(1);
+        flex-grow: 1;
     }
 
     &__center-info {
@@ -601,13 +601,13 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__back-info {
-        @include flexbox;
+        display: flex;
         justify-content: space-between;
         height: 30px;
     }
 
     &__drop-down {
-        @include flexbox;
+        display: flex;
         justify-content: center;
         padding-left: 10px;
         bottom: 21px;
@@ -677,19 +677,19 @@ $fullwidthBreakpoint: 950px;
 
     &__aside-keys {
         position: relative;
-        @include flexbox;
-        @include flexbox-direction(column);
+        display: flex;
+        flex-direction: column;
     }
 
     &__aside-keys-revese {
-        @include flexbox-direction(column-reverse);
+        flex-direction: column-reverse;
     }
 
     &__aside-key {
         padding: 5px 0;
         cursor: pointer;
-        @include flexbox;
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
         align-content: center;
     }
 

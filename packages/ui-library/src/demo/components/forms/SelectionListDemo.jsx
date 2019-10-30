@@ -146,7 +146,6 @@ class SelectionListDemo extends React.Component {
                 </p>
                 <SelectionList
                     data-id="radio-demo-1"
-                    stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS2}
                     selectedItemIds={this.state.singleSelectId2}
@@ -167,7 +166,6 @@ class SelectionListDemo extends React.Component {
                 </p>
                 <SelectionList
                     data-id="radio-demo-2"
-                    stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId3}
@@ -190,12 +188,10 @@ class SelectionListDemo extends React.Component {
                     className="input-selection-list-tooltip"
                     label="Single Selection List"
                     showClose={false}
-                    stateless={false}
                     onToggle={function () {}}>
 
                     <SelectionList
                         data-id="radio-demo-3"
-                        stateless={false}
                         type={SelectionList.ListType.SINGLE}
                         items={SINGLE_SELECT_ITEMS}
                         selectedItemIds={this.state.singleSelectId1}
@@ -220,7 +216,6 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.multiSelectIds3.join()}
                 </div>
                 <SelectionList
-                    stateless={false}
                     type={SelectionList.ListType.MULTI}
                     items={MULTI_SELECT_ITEMS}
                     selectedItemIds={this.state.multiSelectIds3}
@@ -262,11 +257,9 @@ class SelectionListDemo extends React.Component {
                     className="input-selection-list-tooltip filter"
                     label="Multi Selection List"
                     showClose={false}
-                    stateless={false}
                     onToggle={function () {}}>
 
                     <SelectionList
-                        stateless={false}
                         type={SelectionList.ListType.MULTI}
                         items={MULTI_SELECT_ITEMS}
                         selectedItemIds={this.state.multiSelectIds1}
@@ -295,11 +288,9 @@ class SelectionListDemo extends React.Component {
                             count={this.state.multiSelectIds4.length} />
                     )}
                     showClose={false}
-                    stateless={false}
                     onToggle={function () {}}>
 
                     <SelectionList
-                        stateless={false}
                         type={SelectionList.ListType.MULTI}
                         items={MULTI_SELECT_ITEMS}
                         selectedItemIds={this.state.multiSelectIds4}
@@ -320,7 +311,6 @@ class SelectionListDemo extends React.Component {
                 </h3>
                 <SelectionList
                     name="view-only"
-                    stateless={false}
                     type={SelectionList.ListType.VIEWONLY}
                     items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId1}
@@ -335,7 +325,6 @@ class SelectionListDemo extends React.Component {
                 </h3>
                 <SelectionList
                     name="fluid-width"
-                    stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId2}
@@ -353,7 +342,6 @@ class SelectionListDemo extends React.Component {
                 </h3>
                 <SelectionList
                     name="fully-stateful"
-                    stateless={false}
                     type={SelectionList.ListType.MULTIADD}
                     items={SINGLE_SELECT_ITEMS}
                     showSearchBox={true}

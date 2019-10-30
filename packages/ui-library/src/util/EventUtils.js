@@ -73,7 +73,6 @@ exports.forwardTargetValueAsInt = function (callback) {
  */
 exports.callIfOutsideOfContainer = function (container, callback, e) {
 
-
     if (global.getSelection().toString()) {
         return false;
     }

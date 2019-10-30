@@ -45,7 +45,6 @@ export default class DropDownButtonDemo extends Component {
                     onValueChange={this._onValueChange}
                     onToggle={this._onToggle}
                     open={this.state.open}
-                    stateless={true}
                     options={this._dropDownOptions}
                 />
                 <br/><br/>

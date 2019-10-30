@@ -17,10 +17,13 @@ function Padding({
     className,
     "data-id": dataId,
     inline,
-    bottom,
-    left,
-    right,
-    top
+    padding,
+    vertical = padding,
+    horizontal = padding,
+    bottom = vertical,
+    left = horizontal,
+    right = horizontal,
+    top = vertical,
 }) {
     return (
         <div
@@ -47,7 +50,10 @@ Padding.propTypes = {
     bottom: paddingPropType,
     left: paddingPropType,
     right: paddingPropType,
-    top: paddingPropType
+    top: paddingPropType,
+    vertical: paddingPropType,
+    horizontal: paddingPropType,
+    padding: paddingPropType,
 };
 
 Padding.defaultProps = {

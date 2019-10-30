@@ -178,7 +178,7 @@ describe("Page Wizard", function () {
         const secondaryButton = getElementByDid(component, "-buttonbar-cancel");
 
         expect(primaryButton.textContent).toBe("Save and Continue");
-        expect(primaryButton.className).toContain("success");
+        expect(primaryButton.className).toContain("primary");
         ReactTestUtils.Simulate.click(primaryButton);
         expect(component.props.children[0].props.onSave).toBeCalled();
 
@@ -208,7 +208,7 @@ describe("Page Wizard", function () {
         const secondaryButton = getElementByDid(component, "-buttonbar-cancel");
 
         expect(primaryButton.textContent).toBe("Save and Close");
-        expect(primaryButton.className).toContain("success");
+        expect(primaryButton.className).toContain("primary");
         ReactTestUtils.Simulate.click(primaryButton);
         expect(component.props.children[finalStepIndex].props.onSave).toBeCalled();
 

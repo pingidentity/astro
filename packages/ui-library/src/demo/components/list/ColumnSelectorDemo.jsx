@@ -322,7 +322,6 @@ export default class ColumnSelectorDemo extends Component {
                             title="Tooltip Title"
                             onToggle={this._toggleButtonTooltip}
                             open={this.state.buttonTooltipOpen}
-                            stateless={false}
                         >
                             <InputRow>
                             If you add populations to this environment, they’ll be

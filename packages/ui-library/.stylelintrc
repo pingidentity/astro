@@ -9,7 +9,7 @@
         "no-eol-whitespace": true,
         "no-extra-semicolons": true,
         "no-invalid-double-slash-comments": true,
-        "no-unknown-animations": true,
+        "no-unknown-animations": null,
 
         "at-rule-empty-line-before": null,
         "at-rule-name-case": "lower",

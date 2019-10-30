@@ -1,3 +1,8 @@
+// PATHS ---------------------------------------------------------------------------------------------------------------
+
+@import url('https://use.typekit.net/nxh5mrb.css');
+
+
 // SPACING SCALE
 $spacing-base: 10px;
 $spacing-xs: $spacing-base * 0.5;
@@ -14,7 +19,7 @@ $line-height-default: 1.3em;
 // COLOR TOKENS
 $color-active-blue: #277ba5;
 $color-active-blue-highlighted: #3d88ae;
-$color-critical-red: #de3602;
+$color-critical-red: #a31300;
 $color-warning-yellow: #eeb91c;
 $color-success-green: #21934c;
 
@@ -58,6 +63,7 @@ $color-active-blue: #2996cc;
 $color-active-blue-highlighted: tint($color-active-blue, 10%);
 $color-critical-red: #a31300;
 $color-critical-red-highlighted: tint($color-critical-red, 10%);
+$color-light-red: #ffe8e8;
 $color-success-green: #4aba78;
 $color-success-green-highlighted: tint($color-success-green, 10%);
 $color-warning-yellow: #eeb91c;
@@ -114,8 +120,8 @@ $color-warning-text: #96702c;
 $color-success: $color-success-green;
 $color-success-highlighted: $color-success-green-highlighted;
 
-$color-critical-red-light: #EDDAD9;
-$color-critical-red-dark: #A31200;
+$color-critical-red-light: #eddad9;
+$color-critical-red-dark: #a31200;
 
 $color-neutral-100: #fff;
 
@@ -124,6 +130,30 @@ $breakpoint-mobile: 480px;
 
 // FONTS
 $font-default: 'proxima-nova', sans-serif;
+
+@mixin font-pn-regular {
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+}
+
+@mixin font-pn-light {
+    font-weight: 300;
+    font-style: normal;
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+}
+
+@mixin font-pn-semibold {
+    font-weight: 600;
+    font-style: normal;
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+}
+
+@mixin font-pn-bold {
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+}
 
 // FONT SIZES
 $font-size-xs: 11px;
@@ -148,17 +178,18 @@ $zindex__elevated:       10;
 $zindex__base:            0;
 $zindex__hidden:        -10;
 
-$img-path: '../images/';
+$img-path: '../../icons/';
 
 @mixin message-button-css {
     button,
     .button {
+        border-color: $color-white;
         background-color: transparent;
         color: $color-white;
-        border-color: $color-white;
         vertical-align: baseline;
     }
 }
+
 @mixin message-primary-button-css ($color) {
     .button,
     button {

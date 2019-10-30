@@ -1,6 +1,6 @@
 import React from "react";
-import { FrequencyCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
-import Checkbox from "../../../../components/forms/FormCheckbox";
+import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
+import { FrequencyCard, CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 /**
@@ -255,7 +255,7 @@ export default class FrequencyCardDemo extends React.Component {
 
         return (
             <div>
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <Checkbox
                             label="Show error message"

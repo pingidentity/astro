@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 import CollapsibleLink from "../general/CollapsibleLink";
@@ -24,7 +23,7 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  *
  * @param {string} [data-id=toggle]
  *     The "data-id" value for top-level HTML container.
- * @param {object|string} [label]
+ * @param {node} [label]
  *     A string or JSX object that serves as the trigger label.
 * @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
@@ -48,7 +47,6 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  * @param {LinkDropDownList~onToggle} [onToggle]
  *     Callback triggered when the menu visibility is changed
  *
- *
  * @example
  *     <LinkDropDownList
  *         options={data.options}
@@ -64,9 +62,8 @@ class LinkDropDownListStateless extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         "data-id": PropTypes.string,
-        label: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.object]),
+        label: PropTypes.node,
+        labelArrowPosition: PropTypes.oneOf(Object.values(CollapsibleLink.arrowPositions)),
         onClick: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
@@ -95,6 +92,7 @@ class LinkDropDownListStateless extends React.Component {
                 data-id={this.props["data-id"] + "-label"}
                 expanded={this.props.open}
                 title={this.props.label}
+                arrowPosition={this.props.labelArrowPosition}
             />
         );
     };
@@ -162,11 +160,13 @@ LinkDropDownList.propTypes = {
     stateless: deprecatedStatelessProp,
 };
 
+LinkDropDownList.labelArrowPositions = CollapsibleLink.arrowPositions;
+
 class LinkDropDownListOption extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         option: PropTypes.object,
-        selected: PropTypes.bool
+        selected: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -180,7 +180,7 @@ class LinkDropDownListOption extends React.Component {
     render() {
         var classNames = {
             "select-option": true,
-            selected: this.props.selected
+            selected: this.props.selected,
         };
 
         return (

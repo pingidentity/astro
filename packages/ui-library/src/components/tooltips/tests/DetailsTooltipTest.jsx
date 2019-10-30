@@ -4,7 +4,7 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { shallow } from "enzyme";
-import DetailsTooltip, { detailsWidth } from "../DetailsTooltip";
+import DetailsTooltip, { detailsWidths } from "../DetailsTooltip";
 import PopperContainer from "../PopperContainer";
 
 describe("DetailsTooltip", function () {
@@ -247,6 +247,7 @@ describe("DetailsTooltip", function () {
             toString: () => "",
         });
 
+
         ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
@@ -448,7 +449,7 @@ describe("DetailsTooltip", function () {
     });
 
     it("renders with width LG", () => {
-        const component = shallow(<DetailsTooltip.DetailsTooltipStateless width={detailsWidth.LG} open={true}/>);
+        const component = shallow(<DetailsTooltip.DetailsTooltipStateless width={detailsWidths.LG} open={true}/>);
 
         expect(component.find(PopperContainer).hasClass("details-tooltip-display--large")).toEqual(true);
     });

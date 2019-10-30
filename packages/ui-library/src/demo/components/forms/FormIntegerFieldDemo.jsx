@@ -101,7 +101,6 @@ class FormIntegerFieldDemo extends React.Component {
                         labelText={"Basic - Value : " + this.state.integerField0}
                         onValueChange = {this._handleValueChange(0)}
                         initialValue = ""
-                        stateless={false}
                         width={InputWidths.MD}
                         name="demo"
                     />
@@ -113,7 +112,6 @@ class FormIntegerFieldDemo extends React.Component {
                         onValueChange = {this._changeCallback}
                         value={this.state.integerField1}
                         width={InputWidths.MD}
-                        stateless={true}
                         hideControls={true}
                     />
                 </InputRow>
@@ -124,7 +122,6 @@ class FormIntegerFieldDemo extends React.Component {
                         initialValue = {8800}
                         onValueChange = {this._handleValueChange(2)}
                         width={InputWidths.MD}
-                        stateless={false}
                     />
                 </InputRow>
                 <InputRow>
@@ -136,7 +133,6 @@ class FormIntegerFieldDemo extends React.Component {
                         required = {true}
                         placeholder = "This field is required"
                         width={InputWidths.MD}
-                        stateless={false}
                     />
                 </InputRow>
                 <InputRow>
@@ -152,7 +148,6 @@ class FormIntegerFieldDemo extends React.Component {
                         labelHelpText = "Prop enforceRange is true by default. This doesn't allow keyboard input\
                                 above the maximum range."
                         width={InputWidths.MD}
-                        stateless={false}
                     />
                 </InputRow>
                 <InputRow>
@@ -173,7 +168,6 @@ class FormIntegerFieldDemo extends React.Component {
                                 " of out of range numbers"
                         }
                         width={InputWidths.MD}
-                        stateless={false}
                     />
                 </InputRow>
                 <InputRow>
@@ -187,7 +181,6 @@ class FormIntegerFieldDemo extends React.Component {
                         min = {50}
                         max = {300}
                         width={InputWidths.MD}
-                        stateless={false}
                     />
                 </InputRow>
 
@@ -200,7 +193,6 @@ class FormIntegerFieldDemo extends React.Component {
                         onValueChange = {this._changeCallback}
                         initialValue = {30}
                         width={InputWidths.MD}
-                        stateless={false}
                     />
                 </InputRow>
 
@@ -213,7 +205,6 @@ class FormIntegerFieldDemo extends React.Component {
                         labelHelpText = "Disabled with help text"
                         initialValue = {40}
                         width={InputWidths.MD}
-                        stateless={false}
                     />
                 </InputRow>
 

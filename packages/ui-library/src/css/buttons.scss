@@ -25,6 +25,26 @@
     }
 }
 
+@mixin button-with-icon($content: '\2b') {
+    padding-left: $spacing-md + $spacing-sm + $spacing-sm;
+
+    &:before,
+    &:after {
+        font-family: $icon-font;
+    }
+    &:before {
+        content: $content;
+        position: absolute;
+        left: $spacing-md;
+        width: $spacing-md;
+        top: 50%;
+        text-align: center;
+        transform: translateY(-50%);
+        font-size: 12px;
+        line-height: 1em;
+    }
+}
+
 input[type=button],
 input[type=submit],
 button,
@@ -38,7 +58,7 @@ button,
     border: 1px solid $color-rhino;
     box-sizing: border-box;
 
-    @include border-radius(2px);
+    border-radius: 2px;
     @include base-button-styles;
     @include default-button-styles;
 
@@ -115,7 +135,7 @@ button,
         line-height: $height;
         font-size: $font-size-normal;
 
-        @include border-radius(ceil($height/2));
+        border-radius: ceil($height/2);
 
         .badge {
             color: inherit;
@@ -129,14 +149,14 @@ button,
             line-height: 19px;
             text-align: center;
 
-            @include border-radius(10px);
+            border-radius: 10px;
         }
     }
     &.disabled,
     &[disabled] {
         cursor: default;
 
-        @include opacity(0.4);
+        opacity: $inactive-opacity;
 
         &:hover {
             color: $color-slate;
@@ -162,63 +182,10 @@ button,
         }
     }
     &.add {
-        padding-left: 36px;
-
-        &:before,
-        &:after {
-            font-family: $icon-font;
-        }
-        &:before {
-            content: '\2b';
-            position: absolute;
-            left: 20px;
-            top: 13px;
-            font-size: 10px;
-            line-height: 1em;
-        }
-        &.user {
-            padding-right: 15px;
-            font-size: 0;
-
-            &:after {
-                font-size: 19px;
-                content: '\55';
-            }
-        }
-        &.no-label {
-            width: 25px;
-            padding: 0;
-
-            &:before {
-                left: 8px;
-            }
-        }
-
-        &.inline {
-            &:before {
-                top: 8px;
-            }
-        }
+        @include button-with-icon();
     }
     &.download {
-        padding-left: 40px;
-
-        &:before {
-            font-family: $icon-font;
-            content: '\44';
-            position: absolute;
-            left: 15px;
-            top: 0;
-            font-size: 15px;
-        }
-
-        &.inline {
-            padding-left: 35px;
-
-            &:before {
-                font-size: 12px;
-            }
-        }
+        @include button-with-icon('\44');
     }
     &.inline {
         &.edit,
@@ -238,7 +205,7 @@ button,
             text-align: center;
             line-height: $size;
 
-            @include border-radius(ceil($size/2));
+            border-radius: ceil($size/2);
 
             &:before {
                 position: absolute;
@@ -264,38 +231,32 @@ button,
         &.plus {
             &:before {
                 content: '*';
-                font-size: 12px;
             }
         }
         &.remove,
         &.minus {
             &:before {
                 content: '-';
-                font-size: 9px;
             }
         }
         &.delete {
             &:before {
                 content: 'd';
-                font-size: 15px;
             }
         }
         &.edit {
             &:before {
                 content: 'e';
-                font-size: 15px;
             }
         }
         &.prev {
             &:before {
                 content: '<';
-                font-size: 11px;
             }
         }
         &.next {
             &:before {
                 content: '>';
-                font-size: 11px;
             }
         }
 
@@ -377,7 +338,7 @@ button,
     $height: 35px;
     $transition: left 0.4s ease-out;
 
-    @include flexbox;
+    display: flex;
     align-content: center;
     justify-content: center;
 
@@ -385,7 +346,7 @@ button,
     line-height: 10px;
     margin-bottom: $spacing-lg;
 
-    @include border-radius(3px);
+    border-radius: 3px;
     @include base-button-styles;
 
     button,
@@ -409,27 +370,27 @@ button,
 
     button {
         &:first-of-type {
-            @include border-radius(3px 0 0 3px);
+            border-radius: 3px 0 0 3px;
         }
         &:last-of-type {
-            @include border-radius(0 3px 3px 0);
+            border-radius: 0 3px 3px 0;
             border-width: 1px;
         }
     }
 
     .help-tooltip > .helphint-button-target > button {
         &:first-of-type {
-            @include border-radius(3px 0 0 3px);
+            border-radius: 3px 0 0 3px;
         }
 
         &:last-of-type {
-            @include border-radius(0 3px 3px 0);
+            border-radius: 0 3px 3px 0;
             border-width: 1px;
         }
     }
 
     &.disabled {
-        @include opacity(0.4);
+        opacity: $inactive-opacity;
         cursor: default;
         button {
             pointer-events: none;
@@ -440,8 +401,22 @@ button,
     &.sel-2 button:nth-of-type(3),
     &.sel-3 button:nth-of-type(4),
     &.sel-4 button:nth-of-type(5),
-    &.sel-4 button:nth-of-type(6) {
-        @include transition($transition);
+    &.sel-5 button:nth-of-type(6),
+    &.sel-6 button:nth-of-type(7),
+    &.sel-7 button:nth-of-type(8),
+    &.sel-8 button:nth-of-type(9),
+    &.sel-9 button:nth-of-type(10),
+    &.sel-10 button:nth-of-type(11),
+    &.sel-11 button:nth-of-type(12),
+    &.sel-12 button:nth-of-type(13),
+    &.sel-13 button:nth-of-type(14),
+    &.sel-14 button:nth-of-type(15),
+    &.sel-15 button:nth-of-type(16),
+    &.sel-16 button:nth-of-type(17),
+    &.sel-17 button:nth-of-type(18),
+    &.sel-18 button:nth-of-type(19),
+    &.sel-19 button:nth-of-type(20) {
+        transition: $transition;
         background: $color-timberwolf;
     }
 }
@@ -500,8 +475,8 @@ button.tile-button {
     height: auto;
     white-space: normal;
 
-    @include flexbox;
-    @include flexbox-direction(column);
+    display: flex;
+    flex-direction: column;
 
     align-items: center;
     justify-content: space-between;
@@ -524,7 +499,7 @@ button.tile-button {
         }
     }
     &.tile-button--selected {
-        @include box-shadow(0 2px 5px 0 rgba($color-black, 0.2));
+        box-shadow: 0 2px 5px 0 rgba($color-black, 0.2);
 
         & .tile-button__title {
             @include font-pn-semibold;
@@ -584,7 +559,7 @@ button.tile-button {
     }
 
     &__content {
-        @include flexbox-grow(1);
+        flex-grow: 1;
         @include break-word;
 
         line-height: 1.3em;
@@ -622,11 +597,11 @@ button.tile-button {
 }
 
 .tile-selector {
-    @include flexbox;
+    display: flex;
 
     > * {
-        @include flexbox-grow(1);
-        @include flexbox-shrink(1);
+        flex-grow: 1;
+        flex-shrink: 1;
         margin-right: $spacing-md;
         flex-basis: 0;
 
@@ -658,23 +633,23 @@ button.tile-button {
         }
 
         &--grow-1 {
-            @include flexbox-grow(1);
+            flex-grow: 1;
         }
 
         &--grow-2 {
-            @include flexbox-grow(2);
+            flex-grow: 2;
         }
 
         &--grow-3 {
-            @include flexbox-grow(3);
+            flex-grow: 3;
         }
 
         &--grow-4 {
-            @include flexbox-grow(4);
+            flex-grow: 4;
         }
 
         &--square {
-            @include flexbox-grow(0);
+            flex-grow: 0;
             flex-basis: auto;
         }
 
@@ -690,8 +665,8 @@ button.tile-button {
         width: 100%;
 
         > * {
-            @include flexbox-grow(1);
-            @include flexbox-shrink(1);
+            flex-grow: 1;
+            flex-shrink: 1;
 
             margin-right: $spacing-md;
             flex-basis: 0%;
@@ -724,7 +699,7 @@ button.tile-button {
 
 .tile-button--side-icon,
 button.tile-button--side-icon {
-    @include flexbox-direction(row);
+    flex-direction: row;
 
     box-sizing: border-box;
 
@@ -749,13 +724,13 @@ button.tile-button--side-icon {
         }
 
         &__content-container {
-            @include flexbox-grow(1);
+            flex-grow: 1;
 
             text-align: left;
         }
 
         &__title {
-            @include flexbox();
+            display: flex;
 
             margin-top: 0;
             text-align: left;
@@ -764,8 +739,8 @@ button.tile-button--side-icon {
         &__note {
             @include text-body;
 
-            @include flexbox-grow(1);
-            @include flexbox-shrink(0);
+            flex-grow: 1;
+            flex-shrink: 0;
 
             text-transform: none;
             text-align: right;
@@ -779,7 +754,7 @@ button.tile-button--side-icon {
 }
 
 .tile-panel {
-    @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
+    box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
 
     background-color: $color-active-blue;
     box-sizing: border-box;
@@ -832,4 +807,11 @@ button.tile-button--side-icon {
 
 .button-add-modal {
     float: right;
+}
+
+.tab-set-children {
+    margin-left: $spacing-lg;
+    > .page-section {
+        margin-left: 0;
+    }
 }

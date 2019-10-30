@@ -27,7 +27,7 @@
             padding: 0 4px;
             vertical-align: text-top;
 
-            @include border-radius(5px);
+            border-radius: 5px;
             &:hover {
                 text-decoration: none;
             }
@@ -55,7 +55,7 @@
 
         &.disabled {
             pointer-events: none;
-            opacity: 0.4;
+            opacity: $inactive-opacity;
         }
     }
 }
@@ -81,6 +81,14 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         width: 100%;
+    }
+
+    &--center {
+        text-align: center;
+    }
+
+    &--right {
+        text-align: right;
     }
 }
 
@@ -144,7 +152,7 @@
 
     &__icon {
         color: $color-midnight;
-        font-size: 11px;
+        font-size: 20px;
         margin-left: $spacing-sm;
         vertical-align: middle;
         line-height: 11px;
@@ -152,10 +160,6 @@
         &:hover {
             text-decoration: none;
         }
-    }
-
-    &--masked &__icon {
-        font-size: 20px;
     }
 }
 

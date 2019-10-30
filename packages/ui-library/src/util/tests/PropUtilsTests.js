@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes, { checkPropTypes } from "prop-types";
 import { KeyCodes } from "../KeyboardUtils";
-import { getClickableA11yProps, getIconClassName, getIcon } from "../PropUtils";
+import { generateNavTreePropType, getClickableA11yProps, getIconClassName, getIcon } from "../PropUtils";
 import { shallow } from "enzyme";
 import Icon from "../../components/general/Icon";
 
@@ -89,5 +90,100 @@ describe("PropUtils", function () {
             expect(component).toBe(icon);
         });
 
+    });
+
+    describe("generateNavTreePropType", () => {
+        it("throws error for tree with invalid prop on one of its levels", () => {
+            console.error = jest.fn();
+            const tree = [
+                {
+                    id: <div>I AM INCORRECT AND SORRY FOR WHAT I AM</div>,
+                    label: "Header 1",
+                    children: [
+                        {
+                            id: "evenworse",
+                            icon: "globe",
+                            label: "Section without children"
+                        }
+                    ]
+                },
+                {
+                    id: "1",
+                    label: "Header 2",
+                    children: [
+                        {
+                            icon: "globe",
+                            id: 2,
+                            label: "Section",
+                            children: [
+                                {
+                                    id: 4,
+                                    label: "Group",
+                                    children: [
+                                        {
+                                            id: 5,
+                                            label: "End node"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 3,
+                            label: "SPLEHRT"
+                        }
+                    ]
+                }
+            ];
+
+            const propType = generateNavTreePropType(4);
+
+            checkPropTypes({ tree: propType }, { tree });
+
+            expect(console.error).toHaveBeenCalledTimes(1);
+        });
+
+        it("throws error for custom propType on correct level", () => {
+            console.error = jest.fn();
+            const tree = [
+                {
+                    justTheWorstProp: 21212121,
+                    id: "1",
+                    label: "Header 2",
+                    children: [
+                        {
+                            justTheWorstProp: 21212121,
+                            icon: "globe",
+                            id: 2,
+                            label: "Section",
+                            children: [
+                                {
+                                    justTheWorstProp: 21212121,
+                                    id: 4,
+                                    label: "Group",
+                                    children: [
+                                        {
+                                            justTheWorstProp: 21212121,
+                                            id: 5,
+                                            label: "End node"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 3,
+                            label: "SPLEHRT"
+                        }
+                    ]
+                }
+            ];
+
+            const propType = generateNavTreePropType(4, [null, { justTheWorstProp: PropTypes.string }]);
+
+            checkPropTypes({ tree: propType }, { tree });
+
+            expect(console.error).toHaveBeenCalledTimes(1);
+        });
     });
 });

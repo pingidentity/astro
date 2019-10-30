@@ -1,6 +1,6 @@
 import React from "react";
-import { DonutCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
-import Checkbox from "../../../../components/forms/FormCheckbox";
+import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
+import { DonutCard, CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 /**
@@ -80,7 +80,7 @@ class DonutCardDemo extends React.Component {
 
         return (
             <div>
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <Checkbox
                             label="Show error message"

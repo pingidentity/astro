@@ -193,6 +193,7 @@ class DemoApp extends React.Component {
         // Enable collapsible, updated for LeftNav
         this.navActions.setCollapsible(true);
         this.navActions.setUpdated(true);
+        this.navActions.setAutocollapse(true);
 
         this.navActions.init(require("./core/demos.js").map(this._processItems));
         this.navActions.setRoot("Documentation");
@@ -205,28 +206,19 @@ class DemoApp extends React.Component {
      * put here.  For instance, loading the query string.
      */
     componentDidMount() {
-        const {
-            query: {
-                root,
-                selectedNode,
-                selectedSection
-            }
-        } = this.props.location;
-        // load the arguments from the query string
-        if (selectedNode) {
-            if (selectedSection) {
-                this.navActions.toggleSection(selectedSection);
-            }
-            if (root) {
-                this.navActions.setRoot(root);
-            }
-            this.navActions.selectItem(
-                selectedNode,
-                selectedSection);
-        } else {
-            // set initial page to docs if none selected
-            this.navActions.toggleSection("Docs");
-            this.navActions.selectItem("ReleaseNotes", "Docs");
+        this.setSelectedItemFromLocation();
+    }
+
+    /**
+     * @method
+     * @name DemoApp#componentDidUpdate
+     * @desc Update the component if url changes
+     */
+    componentDidUpdate({ location: prevLocation }) {
+        const { location } = this.props;
+
+        if (location !== prevLocation) {
+            this.setSelectedItemFromLocation();
         }
     }
 
@@ -256,6 +248,46 @@ class DemoApp extends React.Component {
             }
         }
     }
+    /**
+     * @method
+     * @name DemoApp#setSelectedItemFromLocation
+     * @desc Sets selected option from the location to load component based on url
+     */
+
+    setSelectedItemFromLocation = () => {
+        // load the arguments from the query string
+        const {
+            query: {
+                root,
+                selectedNode,
+                selectedSection
+            }
+        } = this.props.location;
+
+        const { nav } = this.props;
+
+        //don't set from location if everything is the same
+        if (nav.root === root && nav.selectedNode === selectedNode && nav.selectedSection === selectedSection) {
+            return;
+        }
+
+        if (selectedNode) {
+            // if it isn't opened then open it!
+            if (!nav.openSections[selectedSection]) {
+                this.navActions.toggleSection(selectedSection);
+            }
+            if (root) {
+                this.navActions.setRoot(root);
+            }
+            this.navActions.selectItem(
+                selectedNode,
+                selectedSection);
+        } else {
+            // set initial page to docs if none selected
+            this.navActions.toggleSection("Docs");
+            this.navActions.selectItem("ReleaseNotes", "Docs");
+        }
+    }
 
     render() {
         const id = this.props.nav.selectedNode,
@@ -267,7 +299,7 @@ class DemoApp extends React.Component {
         return (
             <AppFrame
                 autoSelectItemFromRoot={true}
-                autoSelectSectionFromItem={false}
+                autoSelectSectionFromItem={true}
                 autoSelectItemFromSection={true}
                 className="components-container"
                 oneSectionOnly={true}
@@ -300,8 +332,6 @@ class DemoApp extends React.Component {
             >
                 <div id="content" data-id="components">
                     <DemoItem label={this._demoItem.label}
-                        watch={watch}
-                        replace={this.routerActions.replace}
                         location={this.props.location}
                         store={this._demoStore}
                         type={this._demo}
@@ -324,7 +354,7 @@ class DemoApp extends React.Component {
                 }
                 <PropsToUrlWatcher ignoreFalse={true}
                     location={this.props.location}
-                    onReplaceUrl={this.routerActions.replace}
+                    onReplaceUrl={this.routerActions.push}
                     watch={watch} />
             </AppFrame>);
     }

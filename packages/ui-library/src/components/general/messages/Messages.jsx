@@ -84,7 +84,7 @@ import { Layouts } from "./MessagesConstants";
  * @param {number} [defaultMessageTimeout]
  *     Default message timeout in ms. Messages will remove themselves after this time, unless the message specifically
  *     overrides the default timeout itself.
- * @param {Messages.Layouts} [defaultMessageLayout=Banner]
+ * @param {Messages.Layouts} [defaultMessageLayout=CORNER]
  *     Default message layout for this messages component. Messages that don't set their own layout type will receive this on.
  *
  * @example
@@ -114,7 +114,7 @@ module.exports = class extends React.Component {
         "data-id": "messages",
         onRemoveMessage: null,
         onI18n: (key) => key,
-        defaultMessageLayout: Layouts.BANNER,
+        defaultMessageLayout: Layouts.CORNER,
     };
 
     render() {
@@ -219,18 +219,25 @@ class Message extends React.Component {
         );
     }
 
+    _iconName = {
+        "success": "check",
+        "warning": "error-triangle",
+        "error": "alert",
+        "info": "info",
+    };
+
     render() {
         const {
             defaultLayout,
             message: {
-                iconName,
+                type,
+                iconName = this._iconName[type],
                 key,
                 hideClose,
                 layout = defaultLayout,
                 minimized,
                 params,
                 progress,
-                type,
                 ...message
             }
         } = this.props;

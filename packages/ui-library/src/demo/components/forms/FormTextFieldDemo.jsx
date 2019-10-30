@@ -104,14 +104,12 @@ class FormTextFieldDemo extends React.Component {
             <div>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Basic (stateful)"
                         width={InputWidths.MD}
                     />
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={true}
                         labelText="Basic (stateless)"
                         value={this.state.statelessValue}
                         onValueChange={this._handleStatelessValueChange}
@@ -121,7 +119,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Basic with Subtext"
                         width={InputWidths.MD}
                         subText="this is subtext"
@@ -161,7 +158,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Reveal"
                         maskValue={true}
                         showReveal={true}
@@ -178,7 +174,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="onChange callback"
                         onValueChange={this._handleValueChange}
                         width={InputWidths.MD}
@@ -187,7 +182,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="MaxLength (10 chars)"
                         maxLength={10}
                         width={InputWidths.MD}
@@ -195,7 +189,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Placeholder text"
                         placeholder="placeholder text"
                         width={InputWidths.MD}
@@ -203,7 +196,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="onBlur callback"
                         onBlur={this._handleBlur}
                         width={InputWidths.MD}
@@ -228,13 +220,11 @@ class FormTextFieldDemo extends React.Component {
                     />
                     <FormTextField
                         labelText="Other text"
-                        stateless={false}
                         width={InputWidths.MD}
                     />
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Error message"
                         errorMessage="The error message appears when hovering over the input/icon or when focus is
                             placed on the input."
@@ -243,7 +233,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Help tooltip"
                         labelHelpText="This is my help text."
                         width={InputWidths.MD}
@@ -251,7 +240,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Help and lock tooltips"
                         labelHelpText="This is my help text."
                         labelLockText="This is the reason the field is locked."
@@ -261,7 +249,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Validate onChange"
                         labelHelpText="Valid when 5 or more characters present"
                         errorMessage={this.state.onChangeValidationErrorMessage}
@@ -272,7 +259,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Validate onBlur"
                         labelHelpText="Valid when 5 or more characters present"
                         errorMessage={this.state.onBlurValidationErrorMessage}
@@ -282,7 +268,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Flex Width Input"
                         labelHelpText="A flex-width input grows with the content once it gets wider than the intial
                             width"
@@ -293,7 +278,6 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Info message variant"
                         message="Info formatted messages are now supported within this component"
                         messageType={FormTextField.messageTypes.INFO}
@@ -302,14 +286,12 @@ class FormTextFieldDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="Fixed width of 5 characters"
                         size={5}
                     />
                 </InputRow>
                 <InputRow>
                     <FormTextField
-                        stateless={false}
                         labelText="text field with Icon"
                         width={InputWidths.MD}
                         readOnly

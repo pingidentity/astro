@@ -1,20 +1,22 @@
 import React, { Component } from "react";
-import ListNav from "../components/layout/ListNav";
-import ConfirmToolTip from "../components/tooltips/ConfirmTooltip";
-import FormDropDownList from "../components/forms/FormDropDownList";
-import InputRow from "../components/layout/InputRow";
-import FormTextField from "../components/forms/form-text-field";
-import FormTextArea from "../components/forms/form-text-area";
-import InputWidths from "../components/forms/InputWidths";
-import PageSection from "../components/layout/PageSection";
-import FormLabel from "../components/forms/FormLabel";
-import StatusIndicator from "../components/general/StatusIndicator";
-import Button from "../components/buttons/Button";
-import ButtonBar from "../components/forms/ButtonBar";
-import LinkDropDownList from "../components/forms/LinkDropDownList";
-import Layout from "../components/general/ColumnLayout";
-import PopOverMenu from "../components/tooltips/PopoverMenu";
-import PageHeader from "../components/general/PageHeader";
+
+import Button from "ui-library/lib/components/buttons/Button";
+import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
+import ConfirmToolTip from "ui-library/lib/components/tooltips/ConfirmTooltip";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import FormTextField from "ui-library/lib/components/forms/form-text-field";
+import FormTextArea from "ui-library/lib/components/forms/form-text-area";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+import ListNav from "ui-library/lib/components/layout/ListNav";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import PopOverMenu from "ui-library/lib/components/tooltips/PopoverMenu";
+import StatusIndicator from "ui-library/lib/components/general/StatusIndicator";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**
 * @name Notifications
@@ -188,7 +190,7 @@ export default class Notifications extends Component {
         return (
             <div>
                 <PageHeader title="Notifications" />
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <FormLabel value="Default Language" />
                         <Layout.Row>
@@ -210,8 +212,10 @@ export default class Notifications extends Component {
                     </Layout.Column>
                     <Layout.Column>
                         <FormLabel value="Optional variables" />
-                        <Layout.Row className="text-value">
-                            {"${user.username}"} {"${supportEmail}"}
+                        <Layout.Row>
+                            <Text type={textTypes.VALUE}>
+                                {"${user.username}"} {"${supportEmail}"}
+                            </Text>
                         </Layout.Row>
                     </Layout.Column>
                 </Layout.Row>
@@ -229,7 +233,6 @@ export default class Notifications extends Component {
                             title="Add Language"
                             buttonLabel="Add"
                             cancelText="Cancel"
-                            stateless={false}
                             buttonType="primary"
                         >
                             <FormDropDownList

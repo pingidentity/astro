@@ -1,3 +1,12 @@
+@mixin no-circle-icon {
+    background: none;
+
+    &:before {
+        font-size: 150%;
+        color: $color-white;
+    }
+}
+
 .page-messages {
     position: fixed;
     z-index: $zindex__message;
@@ -5,8 +14,8 @@
     left: $layout-nav-width;
     right: 0;
     color: $color-white;
-    @include flexbox-direction(column);
-    @include flexbox();
+    flex-direction: column;
+    display: flex;
     align-items: flex-start;
     padding: 0;
     height: 100%; // to keep the larger container from ever blocking clicks
@@ -50,7 +59,7 @@
         }
     }
     .message {
-        @include flexbox();
+        display: flex;
         pointer-events: auto;
         align-items: center;
         clear: both;
@@ -64,7 +73,7 @@
         width: 100%;
         box-sizing: border-box;
 
-        @include animation(fade-in 0.7s);
+        animation: fade-in 0.7s;
 
         &--corner {
             max-width: 400px;
@@ -80,11 +89,11 @@
 
             .message__icon {
                 display: inline-block;
-                width: 33px;
-                height: 33px;
+                width: 32px;
+                height: 32px;
                 border-radius: 17px;
-                line-height: 35px;
-                font-size: 16px;
+                line-height: 32px;
+                font-size: 20px;
                 margin-right: $spacing-md;
 
                 &.icon-error-triangle {
@@ -100,7 +109,7 @@
             margin: auto;
             padding: $spacing-lg;
             background: $color-accent-neutral-10;
-            @include border-radius(4px);
+            border-radius: 4px;
             display: flex;
             flex-direction: column;
             transform: translate(-$layout-nav-width/2, -$layout-header-height);
@@ -178,11 +187,11 @@
         }
 
         &__text {
-            @include flexbox-grow(1);
+            flex-grow: 1;
         }
 
         &__icon {
-            @include flexbox-shrink(0);
+            flex-shrink: 0;
 
             margin-right: $spacing-sm;
             background: $color-white;
@@ -190,14 +199,20 @@
             height: 19px;
             border-radius: 10px;
             text-align: center;
-            line-height: 20px;
+            line-height: 19px;
 
-            font-size: 10px;
+            font-size: 13px;
+
+            &.icon-alert,
+            &.icon-info,
+            &.icon-error-triangle {
+                @include no-circle-icon;
+            }
         }
 
         &__progress {
-            @include flexbox();
-            @include flexbox-direction(row);
+            display: flex;
+            flex-direction: row;
 
             align-items: center;
 
@@ -215,7 +230,7 @@
             }
 
             &-border {
-                @include border-radius(2px);
+                border-radius: 2px;
 
                 border: 1px solid $color-white;
                 height: 19px;
@@ -249,7 +264,7 @@
             margin-top: 0;
             border-bottom: 1px solid rgba($color-black, 0.1);
 
-            @include transition(margin-top 0.1s);
+            transition: margin-top 0.1s;
         }
     }
 
@@ -271,7 +286,7 @@
     margin: 15px 0 30px;
     border: 1px solid $color-rabbit-fur;
 
-    @include border-radius(3px);
+    border-radius: 3px;
 
     // TODO: determine primary button styling in non-alternate inline message
     button,
@@ -303,6 +318,10 @@
             display: block;
             margin: 0 auto 0 15px;
         }
+    }
+
+    .inline-message-text {
+        @include break-word;
     }
 
     &.warning,

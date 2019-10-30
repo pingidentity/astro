@@ -7,12 +7,14 @@ import Button from "../../components/buttons/Button";
  * @class ReportFilters
  * @desc A component for the report filtes.
  *
- * @param {string} [data-id="reporting-filter"]
- *     Defines the "data-id" for top-level HTML container.
  * @param {string} [buttonLabel]
  *    Html name of the button.
+ * @param {string} [data-id="reporting-filter"]
+ *     Defines the "data-id" for top-level HTML container.
  * @param {array} [filters]
  *    An array that lets you pass in multiple jsx elements.
+* @param {function} [onClick]
+ *     Click handler.
  *
  * @example
  * <ReportFilters
@@ -76,15 +78,21 @@ const _renderInputs = (data) => {
 
 
 const ReportFilters = ({
+    buttonLabel,
     "data-id": dataId,
     filters,
-    buttonLabel
+    onClick
 }) => {
     return (
         <div data-id={dataId} className="reporting-filters">
             <div className="reporting-filters__container modifier_light-inputs">
                 {_renderInputs(filters)}
-                <Button className="reporting-filters--button-margin" label={buttonLabel} type="primary"/>
+                <Button
+                    className="reporting-filters--button-margin"
+                    label={buttonLabel}
+                    type="primary"
+                    onClick={onClick}
+                />
             </div>
         </div>
     );
@@ -92,13 +100,14 @@ const ReportFilters = ({
 
 
 ReportFilters.propTypes = {
-    dataId: PropTypes.string,
     buttonLabel: PropTypes.string,
+    dataId: PropTypes.string,
     filters: PropTypes.arrayOf(
         PropTypes.arrayOf(
             PropTypes.node
         )
-    )
+    ),
+    onClick: PropTypes.func
 };
 
 ReportFilters.defaultProps = {
@@ -107,4 +116,5 @@ ReportFilters.defaultProps = {
 };
 
 module.exports = ReportFilters;
+
 

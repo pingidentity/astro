@@ -1,8 +1,8 @@
 import React from "react";
+import HR from "ui-library/lib/components/general/HR";
 import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
 import InputRow from "ui-library/lib/components/layout/InputRow";
-import Text from "ui-library/lib/components/general/Text";
-import HR from "ui-library/lib/components/general/HR";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 
 /**
@@ -24,16 +24,16 @@ const IconDemo = () => {
             </InputRow>
             <InputRow>
                 <Icon iconName="earth">
-                    <div className="textblock textblock--primary">Special Icon Styling</div>
-                    <div className="textblock">
+                    <Text type={textTypes.PRIMARY}>Special Icon Styling</Text>
+                    <Text>
                         Special icon title and description styling exists for targeted use.
-                    </div>
+                    </Text>
                 </Icon>
             </InputRow>
             <InputRow>
                 <Icon iconName="globe" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">
-                    <Text type="value">Icon with multiple lines and title</Text>
-                    <Text type="error">Number of failed attempts 1/000</Text>
+                    <Text type={textTypes.VALUE}>Icon with multiple lines and title</Text>
+                    <Text type={textTypes.ERROR}>Number of failed attempts 1/000</Text>
                 </Icon>
             </InputRow>
             <HR />
@@ -46,41 +46,41 @@ const IconDemo = () => {
             </InputRow>
             <InputRow>
                 <Icon iconName="facebook" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">
-                    <Text type="value">Icon with multiple lines and title</Text>
-                    <Text type="error">Number of failed attempts 1/000</Text>
+                    <Text type={textTypes.VALUE}>Icon with multiple lines and title</Text>
+                    <Text type={textTypes.ERROR}>Number of failed attempts 1/000</Text>
                 </Icon>
                 <Icon iconName="twitter" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">
-                    <Text type="value">Icon with multiple lines and title</Text>
-                    <Text type="error">Number of failed attempts 1/000</Text>
+                    <Text type={textTypes.VALUE}>Icon with multiple lines and title</Text>
+                    <Text type={textTypes.ERROR}>Number of failed attempts 1/000</Text>
                 </Icon>
             </InputRow>
             <HR />
             <InputRow>
-                <Text type="value">Icon Sizes:</Text>
+                <Text type={textTypes.VALUE}>Icon Sizes:</Text>
             </InputRow>
             <InputRow>
                 <Icon iconName="cogs" iconSize={iconSizes.SM}>
-                    <div className="textblock textblock--primary">Small</div>
+                    <Text type={textTypes.PRIMARY}>Small</Text>
                 </Icon>
             </InputRow>
             <InputRow>
                 <Icon iconName="cogs" iconSize={iconSizes.MD}>
-                    <div className="textblock textblock--primary">Medium</div>
+                    <Text type={textTypes.PRIMARY}>Medium</Text>
                 </Icon>
             </InputRow>
             <InputRow>
                 <Icon iconName="cogs" iconSize={iconSizes.LG}>
-                    <div className="textblock textblock--primary">Large</div>
+                    <Text type={textTypes.PRIMARY}>Large</Text>
                 </Icon>
             </InputRow>
             <InputRow>
                 <Icon iconName="cogs" iconSize={iconSizes.XL}>
-                    <div className="textblock textblock--primary">X-Large</div>
+                    <Text type={textTypes.PRIMARY}>X-Large</Text>
                 </Icon>
             </InputRow>
             <InputRow>
                 <Icon iconName="cogs" iconSize={iconSizes.XXL}>
-                    <div className="textblock textblock--primary">XX-Large</div>
+                    <Text type={textTypes.PRIMARY}>XX-Large</Text>
                 </Icon>
             </InputRow>
         </div>

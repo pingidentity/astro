@@ -20,6 +20,16 @@ $default-input-font-size: 14px;
 $borderSize: 1px !default;
 $default-input-border-radius: 2px;
 
+@mixin input-icon {
+    font-family: $icon-font;
+    color: $color-accent-neutral-10;
+    font-size: 16px;
+    position: absolute;
+    left: $spacing-sm;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 /*
   This will hide the focus indicator if the element receives focus via the mouse,
   but it will still show up on keyboard focus.
@@ -116,8 +126,8 @@ textarea {
     outline-width: 0;
     @include font-pn-regular;
 
-    @include border-radius($default-input-border-radius);
-    @include transition(border-color 0.3s);
+    border-radius: $default-input-border-radius;
+    transition: border-color 0.3s;
 
     &:visited {
         border: 1px solid $color-input-fill;
@@ -166,10 +176,10 @@ label {
         display: block;
         position: relative;
 
-        @include transition($default-input-transition);
+        transition: $default-input-transition;
 
         &:before {
-            @include transition($default-input-transition);
+            transition: $default-input-transition;
         }
     }
 
@@ -198,6 +208,15 @@ label {
         input {
             width: 100%;
             padding: 4px 15px 3px;
+
+            // Hide autofill button in Safari
+            &::-webkit-contacts-auto-fill-button,
+            &::-webkit-credentials-auto-fill-button {
+                visibility: hidden;
+                pointer-events: none;
+                position: absolute;
+                right: 0;
+            }
         }
         &.search {
             .input-container {
@@ -207,13 +226,10 @@ label {
                 }
             }
             a.clear-search {
-                position: absolute;
-                font-family: $icon-font;
-                text-transform: none;
-                font-size: 11px;
-                color: inherit;
-                top: 14px;
-                right: 10px;
+                @include input-icon();
+
+                right: $spacing-sm;
+                left: auto;
 
                 &:before {
                     content: 'X';
@@ -228,7 +244,7 @@ label {
                 top: 15px;
                 line-height: 1em;
 
-                @include transition($default-input-transition);
+                transition: $default-input-transition;
 
                 &:before {
                     content: 'X';
@@ -404,7 +420,7 @@ label {
                 width: $checkbox-size;
                 line-height: $checkbox-size;
 
-                @include border-radius($default-input-border-radius);
+                border-radius: $default-input-border-radius;
             }
             &:after {
                 content: '\79';
@@ -412,7 +428,7 @@ label {
                 text-transform: none;
                 color: transparent;
                 font-family: $icon-font;
-                font-size: 10px;
+                font-size: 13px;
                 left: 0;
                 bottom: 0;
                 height: $checkbox-size;
@@ -420,7 +436,7 @@ label {
                 line-height: $checkbox-size;
                 text-align: center;
 
-                @include transition($default-input-transition);
+                transition: $default-input-transition;
             }
         }
         &.top-label {
@@ -455,7 +471,7 @@ label {
             text-transform: none;
 
             &.disabled {
-                @include opacity(0.4);
+                opacity: $inactive-opacity;
             }
 
             .label-text {
@@ -508,7 +524,7 @@ label {
             cursor: pointer;
             border: $border-width solid $color-timberwolf;
 
-            @include border-radius(ceil($radio-height/2) + $border-width);
+            border-radius: ceil($radio-height/2) + $border-width;
 
             &:after {
                 content: '';
@@ -519,8 +535,8 @@ label {
                 height: 10px;
                 background-color: transparent;
 
-                @include border-radius(ceil($radio-height/2) + 1);
-                @include transition($default-input-transition);
+                border-radius: ceil($radio-height/2) + 1;
+                transition: $default-input-transition;
             }
         }
         &.no-label {
@@ -655,7 +671,7 @@ label {
                 color: $color-active;
                 text-transform: none;
 
-                @include transition($default-input-transition);
+                transition: $default-input-transition;
             }
         }
     }
@@ -696,7 +712,7 @@ label {
         input[type=password] {
             max-width: 100%;
 
-            @include transition((width 0s));
+            transition: (width 0s);
         }
     }
 }
@@ -745,7 +761,7 @@ fieldset {
         border: 1px solid $color-dolphin;
         padding: 20px;
 
-        @include border-radius(5px);
+        border-radius: 5px;
 
         &.narrow {
             width: 500px;
@@ -771,6 +787,19 @@ input[type=file] {
 }
 
 @include placeholder-css($color-input-placeholder, normal, 0);
+
+@mixin dropdown-caret {
+    position: absolute;
+    content: 'v';
+    font-family: $icon-font;
+    font-size: 9px;
+    text-transform: none;
+    right: $spacing-sm - 1px;
+    top: 11px;
+    line-height: 1em;
+    color: $color-midnight;
+    padding: 5px;
+}
 
 // Input types
 .input-text,
@@ -825,19 +854,10 @@ input[type=file] {
             border: 1px solid $color-input-fill;
             box-sizing: border-box;
 
-            @include border-radius($default-input-border-radius);
+            border-radius: $default-input-border-radius;
 
             &:after {
-                position: absolute;
-                content: 'v';
-                font-family: $icon-font;
-                font-size: 10px;
-                text-transform: none;
-                right: 10px;
-                top: 16px;
-                line-height: 1em;
-                color: $color-midnight;
-                pointer-events: none;
+                @include dropdown-caret();
             }
 
             &__spacer {
@@ -885,7 +905,7 @@ input[type=file] {
         @include font-pn-regular;
         text-transform: none;
 
-        @include transition($default-input-transition);
+        transition: $default-input-transition;
 
         // IE FIXES
         option {
@@ -953,28 +973,28 @@ input[type=file] {
             z-index: $zindex__menu;
             top: -1px;
 
-            @include animation(fade-in 0.2s);
+            animation: fade-in 0.2s;
 
         }
         .input-container {
             &:last-of-type {
                 .wrapper {
                     &:after {
-                        @include rotate(-180deg);
+                        transform: rotate(-180deg);
                     }
                 }
             }
         }
         .selected-option {
             .arrow {
-                @include rotate(-180deg);
+                transform: rotate(-180deg);
             }
         }
     }
     &.disabled {
         .input-text {
             .input-container {
-                @include opacity(1);
+                opacity: 1;
                 input {
                     cursor: default !important;
                 }
@@ -985,10 +1005,10 @@ input[type=file] {
     .input-container {
         height: auto;
 
-        @include transition(none);
+        transition: none;
         &:before,
         &:focus {
-            @include transition(none);
+            transition: none;
         }
         &:last-of-type {
             .wrapper {
@@ -1021,13 +1041,13 @@ input[type=file] {
         }
     }
     .selected-option {
-        @include transition(none);
+        transition: none;
         &:hover {
-            @include transition(none);
+            transition: none;
         }
     }
     input[type=text] {
-        @include transition(none);
+        transition: none;
         &.selected-option-label {
             border-radius: $default-input-border-radius $default-input-border-radius 0 0;
             &:hover,
@@ -1058,7 +1078,7 @@ input[type=file] {
         padding: 8px 0;
         white-space: nowrap;
 
-        @include box-shadow(0 3px 4px rgba($color-black, 0.1));
+        box-shadow: 0 3px 4px rgba($color-black, 0.1);
 
         // place menu above the input element
         &.dropup {
@@ -1208,7 +1228,7 @@ input[type=file] {
             overflow: hidden;
             cursor: pointer;
 
-            @include border-radius(2px);
+            border-radius: 2px;
 
             // This should probably be refactored to not rely on absolute positioning,
             // but leaving it in place because of impending redesign.
@@ -1239,7 +1259,7 @@ input[type=file] {
                 background-color: $color-white;
                 border: 1px solid $color-rhino;
 
-                @include border-radius(18px);
+                border-radius: 18px;
             }
             &.no-logo {
                 display: inline-block;
@@ -1260,7 +1280,7 @@ input[type=file] {
             width: $img-width;
             cursor: pointer;
 
-            @include border-radius(4px);
+            border-radius: 4px;
 
             &__img {
                 display: block;
@@ -1320,8 +1340,8 @@ input[type=file] {
     width: 200px;
     text-align: center;
 
-    @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
-    @include user-select(none);
+    border-radius: 0 0 $default-input-border-radius $default-input-border-radius;
+    user-select: none;
 
     .today-btn {
         display: none;
@@ -1357,7 +1377,7 @@ input[type=file] {
                 }
                 &.disabled {
                     .fa {
-                        @include opacity(0.4);
+                        opacity: $inactive-opacity;
                     }
                 }
             }
@@ -1401,8 +1421,8 @@ input[type=file] {
             color: $color-input-text;
             &.prev,
             &.next {
-                @include opacity(0.4);
-                @include transition(opacity 0.5s ease);
+                opacity: $inactive-opacity;
+                transition: opacity 0.5s ease;
                 visibility: hidden;
             }
         }
@@ -1414,16 +1434,16 @@ input[type=file] {
             -webkit-touch-callout: none;
             font-size: 13px;
 
-            @include user-select(none);
-            @include transition($default-input-transition);
+            user-select: none;
+            transition: $default-input-transition;
 
             &.hover {
                 color: $color-input-text;
             }
             &.current,
             &:hover {
-                @include opacity(0.8);
-                @include border-radius(3px);
+                opacity: 0.8;
+                border-radius: 3px;
             }
             &.current {
                 color: $color-white;
@@ -1434,12 +1454,12 @@ input[type=file] {
             }
             &.title {
                 &:hover {
-                    @include opacity(1);
+                    opacity: 1;
                     background: transparent;
                 }
             }
             &.disabled {
-                @include opacity(0.4);
+                opacity: $inactive-opacity;
             }
         }
     }
@@ -1480,21 +1500,20 @@ input[type=file] {
         bottom: 14px;
         z-index: $zindex__elevated;
 
-        @include transition($default-input-transition);
+        transition: $default-input-transition;
     }
-    &:after {
-        content: 'v';
-        right: 9px;
-        bottom: 12px;
+    .input-container:after {
+        @include dropdown-caret();
+        cursor: pointer;
 
-        @include transition($default-input-transition);
+        transition: $default-input-transition;
     }
     &.active {
         input[type=text] {
             border: 1px solid $color-stone;
         }
         &:after {
-            @include transform(rotate(180deg));
+            transform: rotate(180deg);
         }
     }
     input[type=text].input-calendar-value {
@@ -1552,11 +1571,12 @@ input[type=file] {
     .integer-controls {
         position: absolute;
         right: 13px;
-        bottom: 8px;
         font-family: $icon-font;
         cursor: pointer;
         max-width: 35px;
         display: inline-block;
+        bottom: 50%;
+        transform: translateY(50%);
 
         button {
             $height: 10px;
@@ -1576,18 +1596,18 @@ input[type=file] {
             &:before {
                 content: 'Y';
                 font-family: $icon-font;
-                font-size: 6px;
+                font-size: 10px;
                 line-height: $height;
                 height: $height;
             }
             &.integer-up {
-                margin: 0 0 3px;
+                margin-bottom: $spacing-xs;
 
-                @include flipV;
+                transform: scaleY(-1);
             }
         }
 
-        @include transition($default-input-transition);
+        transition: $default-input-transition;
     }
     [disabled],
     [readonly] {
@@ -1606,7 +1626,7 @@ input[type=file] {
     box-sizing: border-box;
     overflow: hidden;
 
-    @include border-radius(3px);
+    border-radius: 3px;
 
     &--no-border {
         border: none;
@@ -1677,7 +1697,7 @@ input[type=file] {
         line-height: 1em;
         text-align: center;
 
-        @include animation(fade-in 0.5s);
+        animation: fade-in 0.5s;
 
         > span {
             display: inline-block;
@@ -1713,7 +1733,7 @@ input[type=file] {
     }
     &.show-selection-options {
         width: 220px;
-        padding-bottom: 5px;
+        padding-bottom: 30px;
     }
     &.fluid-width {
         max-width: 400px;
@@ -1733,7 +1753,13 @@ input[type=file] {
 //pulled this out of the above and made it more generic for multiple list components to use
 .list-input__bottom-links {
     border-top: 1px solid $color-input-fill;
-    padding: 5px 0 0;
+    padding: $spacing-xs 0;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    background: $color-white;
+    text-align: center;
 
     .option,
     a {
@@ -1786,8 +1812,8 @@ input[type=file] {
         width: 5px;
         z-index: $zindex__elevated;
 
-        @include border-radius(1px);
-        @include transition($default-input-transition);
+        border-radius: 1px;
+        transition: $default-input-transition;
     }
 
     @mixin requiredPadding {
@@ -1965,7 +1991,7 @@ input[type=file] {
         }
         &.search {
             a.clear-search {
-                @include transition($default-input-transition);
+                transition: $default-input-transition;
                 right: 32px;
             }
         }
@@ -2068,7 +2094,7 @@ input[type=file] {
         .form-error-message {
             top: calc(100% + 5px);
 
-            @include border-radius($default-input-border-radius);
+            border-radius: $default-input-border-radius;
         }
 
         &.image-upload {
@@ -2080,7 +2106,7 @@ input[type=file] {
             .form-error-message {
                 top: 100%;
 
-                @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
+                border-radius: 0 0 $default-input-border-radius $default-input-border-radius;
             }
         }
         input {
@@ -2112,7 +2138,7 @@ input[type=file] {
         .form-error-message {
             top: calc(100% - 20px);
 
-            @include border-radius($default-input-border-radius);
+            border-radius: $default-input-border-radius;
 
         }
     }
@@ -2205,15 +2231,15 @@ input[type=file] {
         left: 0;
         right: $message-input-offset;
         display: none;
-        z-index: $zindex__elevated;
+        z-index: $zindex__popover;
         padding: 15px;
         box-sizing: border-box;
         min-width: 169px;
         text-transform: none;
         -webkit-backface-visibility: hidden; // keeps animation from flickering in Chrome
 
-        @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
-        @include animation(fade-down-in 0.2s);
+        border-radius: 0 0 $default-input-border-radius $default-input-border-radius;
+        animation: fade-down-in 0.2s;
 
         &--error {
             background-color: $color-critical-red;
@@ -2260,7 +2286,7 @@ input[type=file] {
 }
 
 .disabled {
-    $disabled-opacity: 0.4;
+    $disabled-opacity: $inactive-opacity;
     $normal-opacity: 1;
 
     font-style: normal;
@@ -2275,14 +2301,14 @@ input[type=file] {
     &.input-multivalues,
     &.input-select {
         .input-container {
-            @include opacity($disabled-opacity);
+            opacity: $disabled-opacity;
         }
         .label-text {
             span {
-                @include opacity($disabled-opacity);
+                opacity: $disabled-opacity;
                 &.icon-help,
                 &.icon-lock {
-                    @include opacity($normal-opacity);
+                    opacity: $normal-opacity;
                 }
             }
         }
@@ -2294,14 +2320,14 @@ input[type=file] {
 
     &.input-checkbox {
         .icon {
-            @include opacity($disabled-opacity);
+            opacity: $disabled-opacity;
         }
         .label-text {
             span {
-                @include opacity($disabled-opacity);
+                opacity: $disabled-opacity;
                 &.icon-help,
                 &.icon-lock {
-                    @include opacity($normal-opacity);
+                    opacity: $normal-opacity;
                 }
             }
         }
@@ -2313,7 +2339,7 @@ input[type=file] {
         }
     }
     &.input-radio {
-        @include opacity($disabled-opacity);
+        opacity: $disabled-opacity;
 
         input[type=radio] + .circle {
             cursor: default;
@@ -2328,7 +2354,7 @@ input[type=file] {
                 border: 1px solid $color-input-fill;
             }
 
-            @include opacity(1);
+            opacity: 1;
         }
         .input-container {
             &:before {
@@ -2417,8 +2443,8 @@ input[type=file] {
 .input-row {
 
     &--strict {
-        @include flexbox();
-        @include flexbox-direction(row);
+        display: flex;
+        flex-direction: row;
         align-items: flex-end;
     }
 
@@ -2579,7 +2605,7 @@ input[type=file] {
         display: inline-block;
 
         .wrapper {
-            @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
+            border-radius: 0 $default-input-border-radius $default-input-border-radius 0;
         }
     }
 
@@ -2589,7 +2615,7 @@ input[type=file] {
 
         .input-text {
             input[type=text] {
-                @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
+                border-radius: 0 $default-input-border-radius $default-input-border-radius 0;
                 width: 100%;
                 text-align: left;
             }
@@ -2604,12 +2630,12 @@ input[type=file] {
             vertical-align: middle;
             display: inline-block;
 
-            @include border-radius($default-input-border-radius 0 0 $default-input-border-radius);
+            border-radius: $default-input-border-radius 0 0 $default-input-border-radius;
         }
 
         &.form-error {
             input[type=text] {
-                @include border-radius($default-input-border-radius 0 0 $default-input-border-radius);
+                border-radius: $default-input-border-radius 0 0 $default-input-border-radius;
             }
             .input-container {
                 padding-right: 0;
@@ -2876,7 +2902,7 @@ label {
     &--selected,
     &--selected:hover,
     &:active {
-        @include border-radius(2px);
+        border-radius: 2px;
 
         background: $color-white;
         border-color: $color-active-blue;
@@ -2991,7 +3017,7 @@ label {
             text-align: center;
             display: inline-block;
 
-            @include border-radius(10px);
+            border-radius: 10px;
         }
     }
 }
@@ -3021,7 +3047,7 @@ label {
                 color: $color-white;
                 padding: 15px;
 
-                @include border-radius(0 0 4px 4px);
+                border-radius: 0 0 4px 4px;
             }
         }
     }
@@ -3087,8 +3113,8 @@ label {
     white-space: nowrap;
     color: $color-midnight;
 
-    @include border-radius($default-input-border-radius);
-    @include box-sizing(border-box);
+    border-radius: $default-input-border-radius;
+    box-sizing: border-box;
 
     &:after {
         position: absolute;
@@ -3096,28 +3122,28 @@ label {
         right: 15px;
         content: '\59';
         font-family: $icon-font;
-        font-size: 5px;
+        font-size: 9px;
         color: $color-midnight;
 
-        @include transition(($default-input-transition));
+        transition: ($default-input-transition);
     }
     .count {
         margin-left: 5px;
     }
 
     &__placeholder {
-        opacity: 0.4;
+        opacity: $inactive-opacity;
         font-style: italic;
     }
 
     &--open:after {
-        @include rotate(-180deg);
-        @include transition((all 0.2s linear));
+        transform: rotate(-180deg);
+        transition: (all 0.2s linear);
     }
 }
 
 .input-message-inline {
-    @include border-radius(2px);
+    border-radius: 2px;
     display: inline-block;
     color: $color-white;
     font-size: 15px;
@@ -3131,12 +3157,7 @@ label {
 }
 
 .input-icon {
-    color: $color-midnight;
-    font-size: 16px;
-    position: absolute;
-    left: $spacing-sm;
-    top: 50%;
-    transform: translateY(-50%);
+    @include input-icon();
 
     &.icon-search {
         font-weight: bold;
@@ -3151,7 +3172,7 @@ label {
 
 label.input-text--right-icon {
     input {
-        padding-right: $spacing-xl;
+        padding-right: 35px;
     }
 }
 
@@ -3165,7 +3186,7 @@ label.input-text--right-icon {
             //margin-right: $spacing-xl;
             width: 100%;
             &:after {
-                @include transform(rotate(-135deg));
+                transform: rotate(-135deg);
                 content: '';
                 border: solid $color-neutral-70;
                 border-width: 0 0 1px 1px;

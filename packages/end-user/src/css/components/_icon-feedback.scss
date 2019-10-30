@@ -15,6 +15,7 @@
 
     &__label {
         margin: 0;
+        font-family: "proxima-nova", sans-serif;
     }
 
     &--small {
@@ -33,5 +34,9 @@
     &--small &__label {
         font-size: $font-size-lg;
         padding-right: $spacing-md;
+    }
+
+    &--bold &__label {
+        font-weight: bold;
     }
 }

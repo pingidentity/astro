@@ -13,17 +13,19 @@
         display: inline-block;
 
         &:after {
-            content: '\59';
-            font-family: $icon-font;
-            font-size: 7px;
             position: absolute;
-            top: 11px;
-            right: 10px;
-            color: $color-midnight;
-            pointer-events: none;
+            content: 'v';
+            font-family: $icon-font;
+            font-size: 9px;
             text-transform: none;
+            right: $spacing-sm - 1px;
+            top: 11px;
+            line-height: 1em;
+            color: $color-midnight;
+            padding: 5px;
+            pointer-events: none;
 
-            @include transition(all 0.3s);
+            transition: all 0.3s;
         }
     }
     &.open {
@@ -32,7 +34,7 @@
                 display: block;
             }
             &:after {
-                @include rotate(180deg);
+                transform: rotate(180deg);
             }
         }
     }
@@ -64,7 +66,7 @@
             right: 0;
             overflow: hidden;
 
-            @include border-radius(3px);
+            border-radius: 3px;
 
             &:before {
                 content: '';
@@ -76,8 +78,8 @@
                 box-sizing: border-box;
                 border: 1px solid rgba($color-black, 0.1);
 
-                @include background-clip(content-box);
-                @include border-radius(3px);
+                background-clip: content-box;
+                border-radius: 3px;
             }
         }
     }
@@ -103,9 +105,9 @@
 
 
 
-        @include box-shadow($box-shadow);
-        @include border-radius($border-radius);
-        @include transition(0.3s ease);
+        box-shadow: $box-shadow;
+        border-radius: $border-radius;
+        transition: 0.3s ease;
 
         &:before {
             content: '▲';
@@ -121,11 +123,11 @@
             line-height: 1em;
             color: $color-white;
 
-            @include transform(scale(1.9,1));
+            transform: scale(1.9, 1);
         }
     }
 }
 
 .chrome-picker {
-    @include box-shadow(none !important);
+    box-shadow: none !important;
 }

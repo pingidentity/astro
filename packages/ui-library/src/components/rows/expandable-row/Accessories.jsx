@@ -1,9 +1,10 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    _ = require("underscore"),
-    HelpHint = require("../../tooltips/HelpHint"),
-    Statuses = require("./ExpandableRow").Statuses;
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import _ from "underscore";
+import HelpHint from "../../tooltips/HelpHint";
+import { Statuses } from "./ExpandableRow";
+import Chip, { chipTypes } from "../../layout/Chip";
 
 
 /**
@@ -117,7 +118,7 @@ exports.HelpLabel = class extends React.Component {
             <HelpHint
                 className={this.props.className}
                 hintText={this.props.hintText}>
-                <label className="row-help">{this.props.label}</label>
+                <Chip type={chipTypes.CONDENSED}>{this.props.label}</Chip>
             </HelpHint>
         );
     }
