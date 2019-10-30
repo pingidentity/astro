@@ -16,10 +16,6 @@ export default function InputModifier({
     inputMargin,
     children,
 }) {
-    const {
-
-    } = this.props;
-
     const classNames = classnames({
         "modifier_light-inputs": inputColor === inputColors.LIGHT,
         "modifier_dark-inputs": inputColor === inputColors.DARK,
