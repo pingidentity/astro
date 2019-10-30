@@ -353,11 +353,12 @@ button,
         }
     }
     &.link {
+        background: transparent;
+        border: none;
+        color: $color-active-blue;
         height: auto;
         line-height: inherit;
         padding: 0;
-        color: $color-active-blue;
-        border: none;
 
         &:hover {
             color: $color-active-blue-highlighted;
