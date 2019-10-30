@@ -531,7 +531,13 @@ module.exports = [
                         pathToSource: "components_layout_LabelValuePairs.jsx.html",
                         pathToDemoSource: "demo_components_layout_LabelValuePairsDemo.jsx.html"
                     },
-
+                    {
+                        label: "Linking Arrow",
+                        demo: require("../components/layout/LinkingArrowDemo"),
+                        pathToDoc: "components/layout/LinkingArrow.jsx",
+                        pathToSource: "components_layout_LinkingArrow.jsx.html",
+                        pathToDemoSource: "demo_components_layout_LinkingArrowDemo.jsx.html"
+                    },
                     {
                         label: "List Nav",
                         demo: require("../components/layout/ListNavDemo"),
