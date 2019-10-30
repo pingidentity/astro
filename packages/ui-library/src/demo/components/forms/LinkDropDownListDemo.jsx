@@ -113,7 +113,6 @@ class LinkDropDownListDemo extends React.Component {
                     initialState={{
                         selectedOption: _options[0]
                     }}
-                    className="left"
                 />
                 <HR />
                 <LinkDropDownList
