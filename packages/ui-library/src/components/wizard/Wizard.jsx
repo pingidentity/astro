@@ -230,7 +230,6 @@ class Wizard extends React.Component {
                         saveDisabled={this.props.saveDisabled}
                         saveText={this.props.labelDone}
                         enableSavingAnimation={this.props.showPulsing}
-                        saveClassName="success"
                         cancelTooltip={this.props.cancelTooltip}
                         saveTooltip={this.props.saveTooltip}
                         flags={getFlags(this)}
