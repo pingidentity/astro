@@ -1,8 +1,8 @@
 import React from "react";
-import FormTextField from "../../../components/forms/form-text-field";
-import ValidationMessages from "./../../../components/forms/ValidationMessages";
-import InputWidths from "../../../components/forms/InputWidths";
-import InputRow from "../../../components/layout/InputRow";
+import FormTextField from "ui-library/lib/components/forms/form-text-field";
+import ValidationMessages from "ui-library/lib/components/forms/ValidationMessages";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 
 /**
 * @name ValidationMessagesDemo
@@ -34,7 +34,7 @@ class ValidationMessagesDemo extends React.Component {
     state = {
         messages1: _getMessages(),
         messages2: [],
-        showValidateMessages: "",
+        showValidateMessages: false,
     };
 
     _handleValueChange1 = (value) => {
@@ -46,7 +46,7 @@ class ValidationMessagesDemo extends React.Component {
     _handleValueChange2 = (value) => {
         this.setState({
             messages2: _getMessages(value),
-            showValidateMessages: "show"
+            showValidateMessages: true
         });
     };
 
@@ -62,8 +62,8 @@ class ValidationMessagesDemo extends React.Component {
                         showReveal={true}
                     />
                     <ValidationMessages
-                        className="show"
                         messages={this.state.messages1}
+                        show
                     />
                 </InputRow>
                 <InputRow>
@@ -75,8 +75,8 @@ class ValidationMessagesDemo extends React.Component {
                         showReveal={true}
                     />
                     <ValidationMessages
-                        className={this.state.showValidateMessages}
                         messages={this.state.messages2}
+                        show={this.state.showValidateMessages}
                     />
                 </InputRow>
             </div>

@@ -1,109 +1,111 @@
 import React from "react";
 import PageSection from "ui-library/lib/components/layout/PageSection";
+import HR from "ui-library/lib/components/general/HR";
 import Markup from "../../core/Markup";
+import Text from "ui-library/lib/components/general/Text";
 
 const TextStyles = () => (
     <div>
         <PageSection title="Headings">
-            <div className="text-page-title">Page Title</div>
+            <Text type="page-title">Page Title</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-page-title">Page Title</div>`
+                    `<Text type="page-title">Page Title</Text>`
                 }
             />
-            <hr className="hr"/>
-            <div className="text-page-subtitle">Page Subtitle</div>
+            <HR />
+            <Text type="page-subtitle">Page Subtitle</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-page-subtitle">Page Subtitle</div>`
+                    `<Text type="page-subtitle">Page Subtitle</Text>`
                 }
             />
-            <hr className="hr"/>
-            <div className="text-section-title">Section Title</div>
+            <HR />
+            <Text type="section-title">Section Title</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-section-title">Section Title</div>`
+                    `<Text type="section-title">Section Title</Text>`
                 }
             />
         </PageSection>
         <PageSection title="Body Text">
-            <div className="text-body">This is some body text. You can <em>italicized words in it</em>.</div>
+            <Text type="body">This is some body text. You can <em>italicized words in it</em>.</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-body">This is some body text. You can <em>italicized words in it</em>.</div>`
+                    `<Text type="body">This is some body text. You can <em>italicized words in it</em>.</Text>`
                 }
             />
-            <hr className="hr"/>
-            <div className="text-primary">This is some primary text.</div>
+            <HR />
+            <Text type="primary">This is some primary text.</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-primary">This is some primary text.</div>`
+                    `<Text type="primary">This is some primary text.</Text>`
                 }
             />
-            <hr className="hr"/>
-            <div className="text-note">This is a note.</div>
+            <HR />
+            <Text type="note">This is a note.</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-note">This is a note.</div>`
+                    `<Text type="note">This is a note.</Text>`
                 }
             />
         </PageSection>
         <PageSection title="Labels & Values">
-            <div className="text-label">Label</div>
+            <Text type="label">Label</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-label">Label</div>`
+                    `<Text type="label">Label</div>`
                 }
             />
-            <hr className="hr"/>
-            <div className="text-value">Value</div>
+            <HR />
+            <Text type="value">Value</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-value">Value</div>`
+                    `<Text type="value">Value</Text>`
                 }
             />
         </PageSection>
         <PageSection title="Color Variants">
-            <div className="text-value text-error">Error text</div>
+            <Text type="value text-error">Error text</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-value text-error">Error text</div>`
+                    `<Text type="value text-error">Error text</Text>`
                 }
             />
-            <hr className="hr" />
-            <div className="text-value text-warning">Warning text</div>
+            <HR />
+            <Text type="value text-warning">Warning text</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-value text-warning">Warning text</div>`
+                    `<Text type="value text-warning">Warning text</Text>`
                 }
             />
-            <hr className="hr" />
-            <div className="text-value text-success">Success text</div>
+            <HR />
+            <Text type="value text-success">Success text</Text>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-value text-success">Success text</div>`
+                    `<Text type="value text-success">Success text</Text>`
                 }
             />
         </PageSection>

@@ -2,8 +2,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import classnames from "classnames";
-import Link from "../general/Link";
-import Button from "../buttons/Button";
+import Button, { buttonTypes } from "../buttons/Button";
 import CancelTooltip from "./../tooltips/CancelTooltip";
 import ConfirmTooltip from "../tooltips/ConfirmTooltip";
 import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
@@ -291,24 +290,24 @@ class ButtonBar extends React.Component {
 
     _getCancelButtonMarkup = () => {
         var cancelClassName = classnames(
-            this.props.cancelClassName || "cancel",
+            this.props.cancelClassName,
             {
+                "cancel": this.props.useButtonForCancel && !this.props.cancelClassName,
                 disabled: this.props.enableSavingAnimation,
                 "button-bar__cancel-link": !this.props.useButtonForCancel,
             }
         );
 
-        const Component = this.props.useButtonForCancel ? Button : Link;
-
         return (
-            <Component
+            <Button
                 data-id={this.props["data-id"] + "-cancel"}
                 className={cancelClassName}
                 onClick={this.props.onCancel}
                 disabled={this.props.enableSavingAnimation}
+                type={this.props.useButtonForCancel ? buttonTypes.CANCEL : buttonTypes.LINK}
             >
                 {this.props.cancelText || Translator.translate("cancel")}
-            </Component>
+            </Button>
         );
     };
 
@@ -384,8 +383,6 @@ class ButtonBar extends React.Component {
             ),
             unfixedClassName = { "page-controls-primary--unfixed": this.props.unfixed };
 
-        const DiscardComponent = this.props.useButtonForCancel ? Button : Link;
-
         return (
             <div
                 data-id={this.props["data-id"]}
@@ -396,14 +393,15 @@ class ButtonBar extends React.Component {
                     {this._renderSaveButton()}
                     {this.props.cancelText && this.props.onCancel && this._renderCancelButton()}
                     {this.props.discardText && this.props.onDiscard && (
-                        <DiscardComponent
+                        <Button
                             data-id={this.props["data-id"] + "-discard"}
                             className={discardClassName}
                             onClick={this.props.onDiscard}
                             disabled={this.props.enableSavingAnimation}
+                            type={this.useButtonForCancel ? buttonTypes.CANCEL : buttonTypes.LINK}
                         >
                             {discardText}
-                        </DiscardComponent>
+                        </Button>
                     )}
                 </div>
                 {alignment === "left" && children}

@@ -536,13 +536,12 @@ input.ordering-controls__input {
     &--stretched &__scroller {
         > * {
             padding-right: $content-padding;
-            padding-bottom: $content-padding;
         }
 
         margin-right: -$content-padding; // page offset to make scrollbar go all the way to right
         margin-bottom: -2 * $spacing-xl; // page offset to make it look like it is on the bottom
 
-        overflow: auto visible;
+        overflow: scroll visible;
     }
 }
 

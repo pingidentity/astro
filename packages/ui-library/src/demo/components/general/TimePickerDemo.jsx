@@ -2,6 +2,7 @@ import React from "react";
 import TimePicker from "./../../../components/general/TimePicker";
 import Calendar from "./../../../components/calendars/Calendar";
 import InputRow from "../../../components/layout/InputRow";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
 
 /**
 * @name TimePickerDemo
@@ -55,10 +56,10 @@ class TimePickerDemo extends React.Component {
                     24hr: <strong>{this.state.b}</strong>
                 </InputRow>
 
-                <label className="stand-alone">
+                <FormLabel detached>
                     Date/Time Picker Combo
-                </label>
-                <div className="input-datetime">
+                </FormLabel>
+                <div>
                     <Calendar
                         format="YYYY-MM-DD"
                         computableFormat="x"

@@ -23,7 +23,7 @@ class SpinnerDemo extends React.Component {
                 <Spinner
                     show={this.state.showSpinner}
                     defaultText="Loading...">
-                    <div className="spinner-content">
+                    <div>
                             Content shown after spinner/loading is complete goes here.
                     </div>
                 </Spinner>

@@ -7,6 +7,16 @@ import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { flagsPropType, getFlags } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
+/**
+ * @enum {string}
+ * @alias LinkDropDownList.alignments
+ */
+const alignments = {
+    /** left */
+    LEFT: "left",
+    /** right */
+    RIGHT: "right",
+};
 
 /**
  * @callback LinkDropDownList~onClick
@@ -22,6 +32,8 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  * @class LinkDropDownList
  * @desc Toggles between two states on click. Is either "off" or "on".
  *
+ * @param {LinkDropDownList.alignments} [alignment=left]
+ *     Right or left alignment of the dropdown.
  * @param {string} [data-id=toggle]
  *     The "data-id" value for top-level HTML container.
  * @param {node} [label]
@@ -61,6 +73,7 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 class LinkDropDownListStateless extends React.Component {
     static propTypes = {
+        alignment: PropTypes.oneOf(Object.values(alignments)),
         className: PropTypes.string,
         "data-id": PropTypes.string,
         label: PropTypes.node,
@@ -119,7 +132,11 @@ class LinkDropDownListStateless extends React.Component {
         return (
             <DetailsTooltip
                 data-id={this.props["data-id"]}
-                placement={DetailsTooltip.tooltipPlacements.BOTTOM_RIGHT}
+                placement={
+                    this.props.alignment === alignments.RIGHT
+                        ? DetailsTooltip.tooltipPlacements.BOTTOM_LEFT
+                        : DetailsTooltip.tooltipPlacements.BOTTOM_RIGHT
+                }
                 contentClassName="link-dropdown-list"
                 className={classnames(this.props.className, "link-dropdown-list")}
                 label={this._renderLabel()}
@@ -169,6 +186,9 @@ LinkDropDownList.propTypes = {
 LinkDropDownList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 LinkDropDownList.labelArrowPositions = CollapsibleLink.arrowPositions;
+
+LinkDropDownList.alignments = alignments;
+
 
 class LinkDropDownListOption extends React.Component {
     static propTypes = {

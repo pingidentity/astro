@@ -116,7 +116,7 @@ class WizardDemo extends React.Component {
                         label="Demonstrate saving animation"
                         onChange={this.toggleUsePulsing}
                         checked={this.state.usePulsing}
-                        className="stacked"
+                        stacked
                     />
                 </InputRow>
 

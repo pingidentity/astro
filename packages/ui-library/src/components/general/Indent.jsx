@@ -17,6 +17,11 @@ import classnames from "classnames";
  * @param {boolean} [colors=false]
  *     If true, the indent border will have a set color. Nesting
  *     indents results in different colors.
+ * @param {boolean} [detached=false]
+ *     Used to display a standalone item with no indentation
+ *     but with correct spacing.
+ * @param {boolean} [grouped=false]
+ *     Set to true for spacing between groups
  *
  * @example
  * <Indent title="all">
@@ -35,6 +40,8 @@ function Indent ({
     className,
     colors,
     "data-id": dataId,
+    detached,
+    grouped,
     title
 }) {
     const contentClass = classnames(
@@ -50,35 +57,39 @@ function Indent ({
                     "indent",
                     className,
                     {
-                        "indent--with-colors": colors
+                        "indent--with-colors": colors,
+                        "indent--detached": detached,
+                        grouped,
                     }
                 )}
             data-id={dataId}
         >
-            <div className="indent-title-container">
-                {border && (
-                    title
-                        ? <div
-                            className={classnames(
-                                "title",
-                                {
-                                    "indent--with-colors__title": colors
-                                }
-                            )}
-                            data-id="title"
-                        >
-                            <span className={classnames(
-                                "indent__title-content",
-                                {
-                                    "indent--with-colors__title-content": colors
-                                }
-                            )}>
-                                {title}
-                            </span>
-                        </div>
-                        : <div className="border" data-id="border"/>
-                )}
-            </div>
+            {!detached &&
+                <div className="indent-title-container">
+                    {border && (
+                        title
+                            ? <div
+                                className={classnames(
+                                    "title",
+                                    {
+                                        "indent--with-colors__title": colors
+                                    }
+                                )}
+                                data-id="title"
+                            >
+                                <span className={classnames(
+                                    "indent__title-content",
+                                    {
+                                        "indent--with-colors__title-content": colors
+                                    }
+                                )}>
+                                    {title}
+                                </span>
+                            </div>
+                            : <div className="border" data-id="border"/>
+                    )}
+                </div>
+            }
             <div className={contentClass}>
                 {children}
             </div>
@@ -87,17 +98,21 @@ function Indent ({
 }
 
 Indent.propTypes = {
-    "data-id": PropTypes.string,
-    className: PropTypes.string,
     border: PropTypes.bool,
+    className: PropTypes.string,
     colors: PropTypes.bool,
+    "data-id": PropTypes.string,
+    detached: PropTypes.bool,
+    grouped: PropTypes.bool,
     title: PropTypes.string,
 };
 
 Indent.defaultProps = {
-    "data-id": "indent",
     border: true,
     colors: false,
+    "data-id": "indent",
+    detached: false,
+    grouped: false,
 };
 
 module.exports = Indent;

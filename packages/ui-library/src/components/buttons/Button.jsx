@@ -11,7 +11,7 @@ import _ from "underscore";
  * @class Button
  * @desc button component
  *
- * @param {("primary" | "secondary" | "standard" | "success" | "cancel" | "danger")} [type]
+ * @param {("primary" | "secondary" | "standard" | "success" | "cancel" | "danger" | "link")} [type]
  *      CSS class applied to html.
  * @param {boolean} active
  *     Active style of the button for when it's being used as a toggle.
@@ -59,7 +59,8 @@ const buttonTypes = {
     STANDARD: "standard",
     SUCCESS: "success",
     CANCEL: "cancel",
-    DANGER: "danger"
+    DANGER: "danger",
+    LINK: "link",
 };
 
 const buttonTypeList = Object.values(buttonTypes);

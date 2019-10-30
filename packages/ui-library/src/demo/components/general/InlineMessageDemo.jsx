@@ -100,8 +100,6 @@ class InlineMessageDemo extends React.Component {
                         {
                             onClick: doSomething,
                             label: "Do Something",
-                            className: "secondary",
-
                         },
                     ]}
                 >
@@ -124,8 +122,6 @@ class InlineMessageDemo extends React.Component {
                         {
                             onClick: doSomething,
                             label: "Do Something",
-                            className: "secondary"
-
                         },
                     ]}
                     alternate>
