@@ -57,7 +57,6 @@ const HomeApp = () => {
                 <Table
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
-                    // className="grid--small-padding"
                     lines={false}
                     width={tableWidths.FULL}
                 />
@@ -71,7 +70,6 @@ const HomeApp = () => {
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
                     lines={false}
-                    // className="grid--small-padding"
                     width={tableWidths.FULL}
                 />
             </Section>
@@ -85,7 +83,6 @@ const HomeApp = () => {
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
                     lines={false}
-                    // className="grid--small-padding"
                     width={tableWidths.FULL}
                 />
             </Section>
