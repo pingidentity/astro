@@ -71,11 +71,6 @@ const columnAlignments = {
     RIGHT: "right"
 };
 
-const columnSpacings = {
-    SM: "sm",
-    MD: "md"
-};
-
 const overflowOptions = {
     ELLIPSIS: "ellipsis",
     WRAP: "wrap"
@@ -320,7 +315,6 @@ Table.propTypes = {
     ),
     cellRenderers: PropTypes.arrayOf(PropTypes.func),
     className: PropTypes.string,
-    columnSpacing: PropTypes.oneOf(Object.values(columnSpacings)),
     columnStyling: PropTypes.arrayOf(
         PropTypes.shape({
             alignment: PropTypes.oneOf(Object.values(columnAlignments)),
