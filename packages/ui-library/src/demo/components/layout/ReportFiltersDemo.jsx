@@ -64,12 +64,17 @@ export default class ReportFiltersDemo extends Component {
         });
     };
 
+    _handleClick = () => {
+        alert("button clicked");
+    }
+
     render() {
         return (
             <div>
                 <PageHeader title="Report Paramaters" bottomMarginSize="xs" />
                 <ReportFilters
                     buttonLabel="Run"
+                    onClick={this._handleClick}
                     filters={[
                         [
                             <FormDropDownList

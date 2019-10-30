@@ -1,34 +1,34 @@
 import { allFlags } from "../util/FlagUtils";
 import Aside from "ui-library/lib/components/layout/Aside";
-import Button from "../components/buttons/Button";import React, { Component } from "react";
-import ColumnSelector, { ColumnTitle } from "../components/list/ColumnSelector/ColumnSelector";
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";import React, { Component } from "react";
+import ColumnSelector, { ColumnTitle } from "ui-library/lib/components/list/ColumnSelector/ColumnSelector";
 import ColumnLayout from "ui-library/lib/components/general/ColumnLayout";
-import ExpandableRow from "../components/rows/ExpandableRow";
-import FormRadioGroup from "../components/forms/FormRadioGroup";
-import FileUpload from "../components/forms/FileUpload";
+import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
+import FileUpload from "ui-library/lib/components/forms/FileUpload";
 import FilterSelector from "ui-library/lib/components/filters/FilterSelector";
-import FlexRow, { alignments, justifyOptions } from "../components/layout/FlexRow";
-import FormDropDownList from "../components/forms/FormDropDownList";
-import FormCheckBox from "../components/forms/FormCheckbox";
-import FormTextArea from "../components/forms/FormTextArea";
-import FormTextField from "../components/forms/FormTextField";
-import InputRow from "../components/layout/InputRow";
-import InputWidths from "../components/forms/InputWidths";
-import LabelValuePairs from "../components/layout/LabelValuePairs";
-import Link from "../components/general/Link";
-import MappedAttributes from "../components/layout/MappedAttributes";
-import MessageButton from "../components/buttons/MessageButton";
-import PageWizard, { Step } from "../components/panels/PageWizard/";
-import Padding, { sizes as paddingSizes } from "../components/layout/Padding";
-import PageHeader from "../components/general/PageHeader";
-import PageSection from "../components/layout/PageSection";
-import SearchBar from "../components/forms/FormSearchBar";
-import StatusIndicator from "../components/general/StatusIndicator";
-import Text from "../components/general/Text";
-import TileSelector, { TileButton, tileButtonTypes } from "../components/buttons/TileSelector";
-import Toggle from "../components/forms/form-toggle";
-import { Row, Separator } from "../components/rows/RowBuilder";
-import { TabSet, TabContent } from "../components/layout/TabSet";
+import FlexRow, { alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import FormCheckBox from "ui-library/lib/components/forms/FormCheckbox";
+import FormTextArea from "ui-library/lib/components/forms/FormTextArea";
+import FormTextField from "ui-library/lib/components/forms/FormTextField";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
+import Link, { linkTypes } from "ui-library/lib/components/general/Link";
+import MappedAttributes from "ui-library/lib/components/layout/MappedAttributes";
+import MessageButton from "ui-library/lib/components/buttons/MessageButton";
+import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard/";
+import Padding, { sizes as paddingSizes } from "ui-library/lib/components/layout/Padding";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import SearchBar from "ui-library/lib/components/forms/FormSearchBar";
+import StatusIndicator from "ui-library/lib/components/general/StatusIndicator";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import TileSelector, { TileButton, tileButtonTypes } from "ui-library/lib/components/buttons/TileSelector";
+import Toggle from "ui-library/lib/components/forms/form-toggle";
+import { Row, Separator } from "ui-library/lib/components/rows/RowBuilder";
+import { TabSet, TabContent } from "ui-library/lib/components/layout/TabSet";
 import { v4 as uuidV4 } from "uuid";
 
 import SocialIcon from "@pingux/end-user/components/SocialIcon/SocialIcon";
@@ -75,7 +75,6 @@ const ProfileEdit = ({
         <PageSection>
             <InputRow>
                 <FormTextField
-                    flags={["p-stateful"]}
                     labelText="Name"
                     onValueChange={setStepState("name")}
                     value={activeProvider.name}
@@ -173,7 +172,7 @@ const AuthorizationEdit = (props) => {
                 <MessageButton
                     data-id="demo-ellipsis-loader-button-primary"
                     label="Authorize Configuration"
-                    className="primary"
+                    type={buttonTypes.PRIMARY}
                 />
             </InputRow>
         </PageSection>
@@ -394,7 +393,7 @@ class EditView extends Component {
 
         return (
             <div>
-                <Link onClick={this.props.onClose} className="page-return-link">Back to Application List</Link>
+                <Link onClick={this.props.onClose} type={linkTypes.PAGE_RETURN}>Back to Application List</Link>
                 <PageHeader
 
                     title={
@@ -863,7 +862,7 @@ export default class OutboundProvisioning extends Component {
                                 title="Mapped Attributes"
                             >
                                 <MappedAttributes
-                                    className="grid--no-lines"
+                                    lines={false}
                                     attributes={[
                                         {
                                             from: "Username",
@@ -983,7 +982,7 @@ export default class OutboundProvisioning extends Component {
                         </SearchBar>
                     </InputRow>
                     <InputRow>
-                        <div className="text-section-title">PROVISIONING IDENTITY STORES</div>
+                        <Text type={textTypes.SECTIONTITLE}>PROVISIONING IDENTITY STORES</Text>
                     </InputRow>
                     {providers}
                     {activeProvider &&

@@ -71,6 +71,8 @@ import { flagsPropType, hasFlag } from "../../util/FlagUtils";
  *     Show close control.
  * @param {("basic" | "alert")} [type="basic"]
  *     Determines basic appearance
+* @param {("MD, LG")} [width]
+ *      If supplied, with add different width sizes for the tooltip.
  *
  * @example
  *     <DetailsTooltip position={DetailsTooltip.tooltipPositions.BOTTOM_LEFT} labelClassName="resend-btn"
@@ -97,6 +99,21 @@ const popupTypes = {
     ALERT: "alert"
 };
 
+const detailsWidths = {
+    MD: "medium",
+    LG: "large"
+};
+
+const getDetailsWidth = width => {
+    switch (width) {
+        case detailsWidths.LG:
+            return "details-tooltip-display--large";
+        case detailsWidths.MD:
+        default:
+            return;
+    }
+};
+
 class DetailsTooltipStateless extends React.Component {
     static displayName = "DetailsTooltipStateless";
 
@@ -121,7 +138,8 @@ class DetailsTooltipStateless extends React.Component {
         secondaryLabels: PropTypes.array,
         primaryLabels: PropTypes.array,
         cancelLabel: PropTypes.string,
-        flags: flagsPropType
+        flags: flagsPropType,
+        width: PropTypes.oneOf(Object.values(detailsWidths)),
     };
 
     static defaultProps = {
@@ -134,6 +152,7 @@ class DetailsTooltipStateless extends React.Component {
         showClose: true,
         hideOnClick: false,
         type: popupTypes.BASIC,
+        width: detailsWidths.MD
     };
 
     static popupTypes = popupTypes;
@@ -301,7 +320,9 @@ class DetailsTooltipStateless extends React.Component {
             // implement use-portal flag
             <PopperContainer
                 getReference={this._getTrigger}
-                className={classnames("details-tooltip-display", contentClassName, this.props.className)}
+                className={classnames("details-tooltip-display", contentClassName, this.props.className,
+                    getDetailsWidth(this.props.width)
+                )}
                 pointerClassName="details-tooltip-display__pointer"
                 data-id="details-content"
                 data-parent={this.props["data-id"]}
@@ -581,5 +602,7 @@ DetailsTooltip.positionStyles = {
     /** Add className {DetailsTooltip.positionStyles.BOTTOM} for positioning the tooltip to the bottom of the label. */
     BOTTOM: "bottom"
 };
+
+DetailsTooltip.detailsWidths = detailsWidths;
 
 export default DetailsTooltip;

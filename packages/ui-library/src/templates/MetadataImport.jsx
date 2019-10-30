@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 
-import PageWizard, { Step } from "../components/panels/PageWizard";
-import InputRow from "../components/layout/InputRow";
-import FormRadioGroup from "../components/forms/FormRadioGroup";
-import FormTextField from "../components/forms/FormTextField";
-import FormTextArea from "../components/forms/FormTextArea";
-import InputWidths from "../components/forms/InputWidths";
-import Icon from "../components/general/Icon";
-import Button from "../components/buttons/Button";
-import HR from "../components/general/HR";
-import HelpHint from "../components/tooltips/HelpHint";
-import PageSection from "../components/layout/PageSection";
-import FileInput from "../components/forms/FileInput";
-import Text from "../components/general/Text";
+import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
+import FormTextField from "ui-library/lib/components/forms/FormTextField";
+import FormTextArea from "ui-library/lib/components/forms/FormTextArea";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import Icon from "ui-library/lib/components/general/Icon";
+import Button from "ui-library/lib/components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import FileInput from "ui-library/lib/components/forms/FileInput";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**
 * @name MetadataImport
@@ -116,7 +116,7 @@ export default class MetadataImport extends Component {
 
         const helpHint = (<span>
             Import Metadata from URL&nbsp;
-            <HelpHint hintText="This is some help text..." className="inline" />
+            <HelpHint hintText="This is some help text..." />
         </span>);
 
         const _renderMetadataSource = () => {
@@ -171,8 +171,8 @@ export default class MetadataImport extends Component {
                                 fileData={(
                                     <span>
                                         Valid&nbsp;
-                                        <Text inline type="value">04-15</Text> to&nbsp;
-                                        <Text inline type="value">09-17</Text>
+                                        <Text inline type={textTypes.VALUE}>04-15</Text> to&nbsp;
+                                        <Text inline type={textTypes.VALUE}>09-17</Text>
                                     </span>
                                 )}
                                 onValidateFile={this._handleFileValidation}

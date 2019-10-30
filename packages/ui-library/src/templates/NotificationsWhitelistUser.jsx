@@ -1,14 +1,15 @@
 import React from "react";
+
+import Button from "ui-library/lib/components/buttons/Button";
+import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+import InlineMessage, { MessageTypes } from "ui-library/lib/components/general/InlineMessage";
+import Link from "ui-library/lib/components/general/Link";
 import { noop } from "underscore";
-import Button from "../components/buttons/Button";
-import ExpandableRow from "../components/rows/ExpandableRow";
-import Toggle from "../components/forms/form-toggle/v2";
-import InlineMessage, { MessageTypes } from "../components/general/InlineMessage";
-import Link from "../components/general/Link";
-import PageSection from "../components/layout/PageSection";
-import RockerButton from "../components/forms/RockerButton";
-import Table from "../components/tables/Table";
-import ValueItem from "../components/layout/ValueItem";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import RockerButton from "ui-library/lib/components/forms/RockerButton";
+import Toggle from "ui-library/lib/components/forms/form-toggle/v2";
+import Table from "ui-library/lib/components/tables/Table";
+import ValueItem from "ui-library/lib/components/layout/ValueItem";
 
 /**
  * @class Notifications Whitelist

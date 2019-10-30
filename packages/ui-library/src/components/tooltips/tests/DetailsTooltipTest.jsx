@@ -4,6 +4,8 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { shallow } from "enzyme";
+import DetailsTooltip, { detailsWidths } from "../DetailsTooltip";
+import PopperContainer from "../PopperContainer";
 
 describe("DetailsTooltip", function () {
 
@@ -11,7 +13,6 @@ describe("DetailsTooltip", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        DetailsTooltip = require("../DetailsTooltip"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 
@@ -276,6 +277,7 @@ describe("DetailsTooltip", function () {
     //TODO no idea why this isn't working. can console log the full stack, it just isn't being called
     it("triggers callback when clicked outside", function () {
         var callback = jest.fn();
+
 
         ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
@@ -594,6 +596,12 @@ describe("DetailsTooltip", function () {
         );
 
         expect(console.warn).toHaveBeenCalled();
+    });
+
+    it("renders with width LG", () => {
+        const component = shallow(<DetailsTooltip width={detailsWidths.LG} open={true} flags={["use-portal"]}/>).dive();
+
+        expect(component.find(PopperContainer).hasClass("details-tooltip-display--large")).toEqual(true);
     });
 
 });

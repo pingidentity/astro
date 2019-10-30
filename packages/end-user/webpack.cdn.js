@@ -1,10 +1,11 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const VERSION = require('./package.json').version;
 
 module.exports = {
     target: 'web',
     entry: './src/css/styles.scss',
     output: {
-        path: `${__dirname}/cdn`,
+        path: `${__dirname}/cdn/${VERSION}`,
         filename: 'end-user.css',
     },
     module: {
@@ -28,6 +29,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new ExtractTextPlugin('end-user.css')
-      ]
+        new ExtractTextPlugin('end-user.css'),
+    ],
 };

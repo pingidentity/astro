@@ -1,9 +1,8 @@
 import React from "react";
-import { StatAreaCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
-import Checkbox from "../../../../components/forms/FormCheckbox";
-import Layout from "ui-library/lib/components/general/ColumnLayout";
-
+import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
 import demoChartData from "./demoChartData";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import { StatAreaCard, CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
 import _ from "underscore";
 
 /**
@@ -81,7 +80,7 @@ class StatAreaCardDemo extends React.Component {
 
         return (
             <div>
-                <Layout.Row className="columns-width-auto">
+                <Layout.Row autoWidth>
                     <Layout.Column>
                         <Checkbox
                             label="Show error message"

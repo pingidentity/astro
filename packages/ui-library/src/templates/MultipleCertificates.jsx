@@ -1,24 +1,27 @@
-import Button, { buttonTypes } from "../components/buttons/Button";
-import ButtonGroup from "../components/layout/ButtonGroup";
-import CopyField from "../components/utils/CopyField";
-import FileInput from "../components/forms/FileInput";
-import FieldSet from "../components/layout/FieldSet";
-import FlexRow, { justifyOptions } from "../components/layout/FlexRow";
-import FormLabel from "../components/forms/FormLabel";
-import FormRadioGroup from "../components/forms/FormRadioGroup";
-import FormTextField from "../components/forms/FormTextField";
-import FormDropDownList from "../components/forms/FormDropDownList";
-import HR from "../components/general/HR";
-import InputWidths from "../components/forms/InputWidths";
-import InputRow from "../components/layout/InputRow";
-import InlineMessage from "../components/general/InlineMessage";
-import Link from "ui-library/lib/components/general/Link";
-import PageHeader from "../components/general/PageHeader";
-import PageSection from "../components/layout/PageSection";
+
 import React, { Component } from "react";
-import Text from "../components/general/Text";
-import { TabContent, TabSet } from "../components/layout/TabSet";
+
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+import CopyField from "ui-library/lib/components/utils/CopyField";
+import FileInput from "ui-library/lib/components/forms/FileInput";
+import FieldSet from "ui-library/lib/components/layout/FieldSet";
+import Link from "ui-library/lib/components/general/Link";
+import FlexRow, { justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
+import FormTextField from "ui-library/lib/components/forms/FormTextField";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import HR from "ui-library/lib/components/general/HR";
+import InputWidths from "ui-library/lib/components/forms/InputWidths";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import InlineMessage from "ui-library/lib/components/general/InlineMessage";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import { TabContent, TabSet } from "ui-library/lib/components/layout/TabSet";
 import uuid from "uuid";
+import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
 
 /**
 * @name Multiple Verification Certificates Template
@@ -99,39 +102,41 @@ export default class MultipleCertsTemplate extends Component {
     _renderCertRadioChoices = () => {
         return (
             <div>
-                <FormRadioGroup
-                    className="space-top-md"
-                    groupName="verification-certificate"
-                    selected={this.state.certType}
-                    onValueChange={this._handleCertType}
-                    items={[
-                        { id: "1", name: "Import" },
-                        { id: "2", name: "Choose from list" },
-                    ]}
-                    stacked={false}
-                    flags={["p-stateful"]}
-                />
+                <Padding top={sizes.SM}>
+                    <FormRadioGroup
+                        groupName="verification-certificate"
+                        selected={this.state.certType}
+                        onValueChange={this._handleCertType}
+                        items={[
+                            { id: "1", name: "Import" },
+                            { id: "2", name: "Choose from list" },
+                        ]}
+                        stacked={false}
+                        flags={["p-stateful"]}
+                    />
+                </Padding>
                 {this._renderCertUploadType()}
             </div>);
     }
 
     _renderCertUploadType = () => {
         return this.state.certType === "1"
-            ? (<FileInput
-                className= "space-top-sm"
-                required = {this.state.addedFiles.length === 0}
-                fileName={this.state.selectedCertFile}
-                onValueChange={this._handleCertFileChange}
-                onRemove={this._handleCertFileRemove}
-                noBorder
-                status={{ label: "Select File" }}
-                fileData={(
-                    <span>
+            ? (<Padding top={sizes.MD}>
+                <FileInput
+                    required = {this.state.addedFiles.length === 0}
+                    fileName={this.state.selectedCertFile}
+                    onValueChange={this._handleCertFileChange}
+                    onRemove={this._handleCertFileRemove}
+                    noBorder
+                    status={{ label: "Select File" }}
+                    fileData={(
+                        <span>
                         Valid&nbsp;
-                        <Text inline type="value">04-15</Text> to&nbsp;
-                        <Text inline type="value">09-17</Text>
-                    </span>
-                )}/>
+                            <Text inline type={textTypes.VALUE}>04-15</Text> to&nbsp;
+                            <Text inline type={textTypes.VALUE}>09-17</Text>
+                        </span>
+                    )}/>
+            </Padding>
             )
             : (<FormDropDownList
                 onValueChange = {this._handleCertFileChange}
@@ -244,12 +249,12 @@ export default class MultipleCertsTemplate extends Component {
                                     <Button
                                         label="Cancel"
                                         type={buttonTypes.CANCEL}
-                                        disabled={true}
+                                        disabled
                                     />
                                     <Button
                                         type={Button.buttonTypes.PRIMARY}
                                         label="Save"
-                                        disabled={true}
+                                        disabled
                                     />
                                 </ButtonGroup>
                             </FlexRow>

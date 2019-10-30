@@ -314,6 +314,7 @@ describe("FormTimeZone v4", function () {
             onToggle: jest.fn(),
             onValueChange: jest.fn()
         });
+
         const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTimeZone._statelessComponent);
         const handler = stateless._onGlobalClick;
 
