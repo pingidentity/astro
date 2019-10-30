@@ -73,8 +73,8 @@ const TextBlock = ({
 };
 
 TextBlock.propTypes = {
-    size: PropTypes.oneOf(['small', 'large', 'small-right', ...Object.values(sizes)]),
-    spacing: PropTypes.oneOf(['small', 'xxlarge', ...Object.values(margins)]),
+    size: PropTypes.oneOf(Object.values(sizes)),
+    spacing: PropTypes.oneOf(Object.values(margins)),
     className: PropTypes.string,
     'data-id': PropTypes.string,
     alignment: PropTypes.oneOf(Object.values(alignments)),
