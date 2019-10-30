@@ -114,7 +114,7 @@ class AuthPage extends React.Component {
                     devices={
                         [
                             {
-                                name: "CMaxwell@pingidentity.cffffffffffffffffffffom",
+                                name: "CMaxwell@pingidentity.com",
                                 type: "email",
                             },
                             {
