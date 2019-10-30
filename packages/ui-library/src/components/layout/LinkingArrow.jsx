@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import FlexRow, { alignments } from "./FlexRow";
-import Icon from "../general/Icon";
+import Icon, { iconTypes } from "../general/Icon";
 
 /**
  * @class Linking Arrow
@@ -34,6 +34,7 @@ export default function LinkingArrow({
             <Icon
                 className="linking-arrow__icon"
                 iconName="link"
+                type={iconTypes.INLINE}
             />
             <div className="linking-arrow__line"/>
         </FlexRow>

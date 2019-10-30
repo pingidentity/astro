@@ -58,7 +58,6 @@ const HomeApp = () => {
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
                     lines={false}
-                    width={tableWidths.FULL}
                 />
             </Section>
             <Section
@@ -70,7 +69,6 @@ const HomeApp = () => {
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
                     lines={false}
-                    width={tableWidths.FULL}
                 />
             </Section>
             <Section
@@ -83,7 +81,6 @@ const HomeApp = () => {
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
                     lines={false}
-                    width={tableWidths.FULL}
                 />
             </Section>
         </div>
