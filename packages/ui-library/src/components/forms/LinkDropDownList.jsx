@@ -12,7 +12,7 @@ import { flagsPropType, hasFlag, getFlags } from "../../util/FlagUtils";
  * @enum {string}
  * @alias LinkDropDownList.alignments
  */
-export const alignments = {
+const alignments = {
     /** left */
     LEFT: "left",
     /** right */
