@@ -5,6 +5,7 @@ import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import Anchor from "ui-library/lib/components/general/Anchor";
+import Padding from "ui-library/lib/components/layout/Padding";
 
 
 /**
@@ -350,17 +351,19 @@ class DetailsTooltipDemo extends React.Component {
 
                 <HR />
 
-                <DetailsTooltip
-                    placement="bottom left"
-                    labelClassName="my-css-class"
-                    label="Hang on the left"
-                    title="Tooltip Title"
-                    stateless={false}>
+                <Padding left="xl">
+                    <DetailsTooltip
+                        placement="bottom left"
+                        labelClassName="my-css-class"
+                        label="Hang on the left"
+                        title="Tooltip Title"
+                        stateless={false}>
 
-                    <p>
-                        Nothing fancy here.
-                    </p>
-                </DetailsTooltip>
+                        <p>
+                            Nothing fancy here.
+                        </p>
+                    </DetailsTooltip>
+                </Padding>
 
                 <br />
 

@@ -1,13 +1,14 @@
 
 import React from "react";
-import LinkDropDownList from "../../../components/forms/LinkDropDownList";
-import InputRow from "../../../components/layout/InputRow";
+import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+import InputRow from "ui-library/lib/components/layout/InputRow";
 import HR from "ui-library/lib/components/general/HR";
-import Icon, { iconSizes } from "../../../components/general/Icon";
-import FlexRow, { spacingOptions, alignments } from "../../../components/layout/FlexRow";
-import FormLabel from "../../../components/forms/FormLabel";
-import Stack from "../../../components/layout/Stack";
-import Text from "../../../components/general/Text";
+import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
+import FlexRow, { spacingOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import Stack from "ui-library/lib/components/layout/Stack";
+import Text from "ui-library/lib/components/general/Text";
+import Padding from "ui-library/lib/components/layout/Padding";
 /**
 * @name LinkDropDownListDemo
 * @memberof LinkDropDownList
@@ -105,15 +106,18 @@ class LinkDropDownListDemo extends React.Component {
                     }}
                 />
                 <HR />
-                <LinkDropDownList
-                    stateless={false}
-                    closeOnClick={true}
-                    label="Right-aligned"
-                    options={_options}
-                    initialState={{
-                        selectedOption: _options[0]
-                    }}
-                />
+                <Padding left="xl"><Padding left="xl">
+                    <LinkDropDownList
+                        stateless={false}
+                        closeOnClick={true}
+                        label="Right-aligned"
+                        options={_options}
+                        initialState={{
+                            selectedOption: _options[0]
+                        }}
+                        alignment={LinkDropDownList.alignments.RIGHT}
+                    />
+                </Padding></Padding>
                 <HR />
                 <LinkDropDownList
                     stateless={false}
