@@ -1,0 +1,43 @@
+.linking-arrow {
+    position: relative;
+
+    &__title {
+        background-color: $color-white;
+        flex-grow: 0;
+        padding-right: $spacing-xs;
+        z-index: $zindex__elevated;
+    }
+
+    &__line {
+        &:before {
+            border: 0.5px solid $color-midnight;
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 7px;
+            width: 100%;
+        }
+    }
+
+
+    &:after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 6px solid $color-midnight;
+        position: absolute;
+        right: -1px;
+        top: 3.5px;
+    }
+
+    &__icon {
+        background: $color-white;
+        padding: 0 $spacing-xs;
+        position: absolute;
+        right: 30%;
+        top: 0;
+        z-index: $zindex__elevated;
+    }
+}

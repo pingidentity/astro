@@ -1,8 +1,10 @@
 import React from "react";
+import Chip, { chipColors, chipTypes } from "ui-library/lib/components/layout/Chip";
+import LinkingArrow from "ui-library/lib/components/layout/LinkingArrow";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
 import RockerButton from "ui-library/lib/components/forms/RockerButton";
 import Section from "ui-library/lib/components/general/Section";
-import Table from "ui-library/lib/components/tables/Table";
-import PageHeader from "ui-library/lib/components/general/PageHeader";
+import Table, { tableWidths } from "ui-library/lib/components/tables/Table";
 
 /**
  * @class Home App
@@ -17,22 +19,18 @@ const HomeApp = () => {
         ],
         body: [
             [
-                <div className="table-row-arrow">
-                    <div className="icon-link"/>
-                    <span>Name</span>
-                    <div className="table-row-arrow__line"/>
-                </div>,
+                <LinkingArrow
+                    title="Name"
+                />,
                 <div>
                     Customer Name
                 </div>,
-                <span className="row-tag">Required</span>
+                <Chip color={chipColors.TRANSPARENT} type={chipTypes.CONDENSED}>Required</Chip>
             ],
             [
-                <div className="table-row-arrow">
-                    <div className="icon-link"/>
-                    <span>Country</span>
-                    <div className="table-row-arrow__line"/>
-                </div>,
+                <LinkingArrow
+                    title="Country"
+                />,
                 <div>Country</div>
             ]
         ]
@@ -59,7 +57,9 @@ const HomeApp = () => {
                 <Table
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
-                    className="grid--no-lines grid--small-padding home-app"
+                    // className="grid--small-padding"
+                    lines={false}
+                    width={tableWidths.FULL}
                 />
             </Section>
             <Section
@@ -70,7 +70,9 @@ const HomeApp = () => {
                 <Table
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
-                    className="grid--no-lines grid--small-padding home-app"
+                    lines={false}
+                    // className="grid--small-padding"
+                    width={tableWidths.FULL}
                 />
             </Section>
             <Section
@@ -82,7 +84,9 @@ const HomeApp = () => {
                 <Table
                     headData={attributeMappings.head}
                     bodyData={attributeMappings.body}
-                    className="grid--no-lines grid--small-padding home-app"
+                    lines={false}
+                    // className="grid--small-padding"
+                    width={tableWidths.FULL}
                 />
             </Section>
         </div>

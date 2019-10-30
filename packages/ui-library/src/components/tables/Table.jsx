@@ -71,6 +71,10 @@ const columnAlignments = {
     RIGHT: "right"
 };
 
+const columnSpacings = {
+    SM: "sm",
+    MD: "md"
+};
 
 const overflowOptions = {
     ELLIPSIS: "ellipsis",
@@ -256,7 +260,7 @@ const Table = props => {
         "width-full": fullWidth || width === tableWidths.FULL_FIXED,
         "grid--full-width": width === tableWidths.FULL,
         "grid--fixed": layout === tableLayouts.FIXED,
-        
+
     });
 
     // if we're showing labels along the left side of the table, make sure the first column heading is empty
@@ -316,6 +320,7 @@ Table.propTypes = {
     ),
     cellRenderers: PropTypes.arrayOf(PropTypes.func),
     className: PropTypes.string,
+    columnSpacing: PropTypes.oneOf(Object.values(columnSpacings)),
     columnStyling: PropTypes.arrayOf(
         PropTypes.shape({
             alignment: PropTypes.oneOf(Object.values(columnAlignments)),
