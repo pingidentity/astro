@@ -376,7 +376,7 @@ class MultiDragDemo extends React.Component {
                 <div className="multidrag-demo" data-id="multidragDemoDiv">
                     <Messages messages={this.props.messages.messages} onRemoveMessage={this.messageActions.removeAt} />
 
-                    <Layout.Row className="columns-nopad">
+                    <Layout.Row noMargin>
                         <Layout.Column>
                             <FormLabel>Select the type of demo</FormLabel>
                             <FormRadioGroup
@@ -395,14 +395,13 @@ class MultiDragDemo extends React.Component {
                             <br/>
                             <Toggle
                                 data-id="disable-toggle"
-                                className="row-status-toggle"
                                 stateless={true}
                                 toggled={this.state.disabled}
                                 onToggle={this._handleDisabledToggle}
                             />
                         </Layout.Column>
                     </Layout.Row>
-                    <Layout.Row className="columns-nopad">
+                    <Layout.Row noMargin>
                         <Layout.Column>
                             <FormLabel value="Search options" />
                             <FormRadioGroup
@@ -428,7 +427,7 @@ class MultiDragDemo extends React.Component {
                             />
                         </Layout.Column>
                     </Layout.Row>
-                    <Layout.Row className="columns-nopad">
+                    <Layout.Row noMargin>
                         <Layout.Column>
                             <FormLabel>Toggle custom sort (stateful only)</FormLabel>
                             <FormRadioGroup
