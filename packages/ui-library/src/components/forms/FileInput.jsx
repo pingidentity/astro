@@ -6,7 +6,7 @@ import FileDrop from "./FileDrop";
 import MessageButton from "../buttons/MessageButton";
 import Icon, { iconSizes } from "../general/Icon";
 import classnames from "classnames";
-import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
+import FlexRow, { alignments } from "../layout/FlexRow";
 
 /**
 * @callback FileInput~onRemove
