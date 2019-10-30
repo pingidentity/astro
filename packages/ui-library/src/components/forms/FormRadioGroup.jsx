@@ -5,7 +5,6 @@ import Utils from "../../util/Utils";
 import FormRadioInput from "./FormRadioInput";
 import FormLabel from "./FormLabel";
 import { defaultRender } from "../../util/PropUtils";
-import _ from "underscore";
 
 /**
  * @callback FormRadioGroup~onValueChange
@@ -133,7 +132,7 @@ class FormRadioGroup extends React.Component {
         disabled: false,
         renderRadio: defaultRender,
         autoFocus: false,
-        onValueChange: _.noop,
+        onValueChange: () => {},
     };
 
     constructor(props) {
