@@ -228,7 +228,7 @@ export default class Notifications extends Component {
                     onSelect={this._onSelect}
                     listButton={
                         <ConfirmToolTip
-                            positionClassName="bottom center"
+                            placement="bottom"
                             label="+ Add Language"
                             title="Add Language"
                             buttonLabel="Add"
