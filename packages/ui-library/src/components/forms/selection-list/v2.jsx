@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Constants from "./v2-constants";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import SelectionListStateless, { listWidths } from "./v2-stateless";
@@ -126,5 +127,7 @@ SelectionList.ListType = Constants.ListType;
 SelectionList.listType = Constants.ListType; // according to our new standard
 
 SelectionList.listWidths = listWidths;
+
+SelectionList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default SelectionList;
