@@ -23,6 +23,7 @@ describe("FormRadioGroup", function () {
                 data-id="test-radio-group"
                 groupName="test_radio_group"
                 onValueChange={callback}
+                autoFocus
                 items={items}/>
         );
         var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
