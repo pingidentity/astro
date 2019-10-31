@@ -53,7 +53,7 @@ class AnchorBase extends React.Component {
     }
 
     render = () => {
-        const { children, className, type, disabled, ...props } = this.props;
+        const { children, className, type, disabled, iconAfter, ...props } = this.props;
 
         return (
             <a
