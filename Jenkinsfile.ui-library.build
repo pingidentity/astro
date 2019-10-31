@@ -26,41 +26,44 @@ pipeline {
     }
 
     stage ('package and upload for hosting') {
-      dir("${env.WORKSPACE}/packages/ui-library") {
-        container('node-builder') {
-          script {
-            env.HOSTING_SERVER_ADDRESS = "uilibrary.ping-eng.com"
-            env.HOSTING_SERVER_USERNAME = "ubuntu"
-          }
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder') {
+            script {
+              env.HOSTING_SERVER_ADDRESS = "uilibrary.ping-eng.com"
+              env.HOSTING_SERVER_USERNAME = "ubuntu"
+            }
 
-           configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
-            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
-              sh """
-                  set -eo
-                  npm run doc
-                  npm run pack
-                  npm run build-css
-                  cp -rf src build
-                  cp -rf build-doc build
-                  rm -rf ${env.SNAPSHOT_VERSION}.tar.gz
-                  tar -czf ${env.SNAPSHOT_VERSION}.tar.gz build
-                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
-                  scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.SNAPSHOT_VERSION}.tar.gz ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/
-                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -rf /var/www/html/${env.SNAPSHOT_VERSION}
-                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mkdir /var/www/html/${env.SNAPSHOT_VERSION}
-                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} tar -xzf /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz --strip 1 -C /var/www/html/${env.SNAPSHOT_VERSION}
-                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
-                  scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions.json ./
-                  node hosting/append_current_version.js;\
-                  scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ./versions.json ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions-${env.SNAPSHOT_VERSION}.json;\
-                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mv /var/www/html/versions-${env.SNAPSHOT_VERSION}.json /var/www/html/versions.json;\
-                  rm -f ./versions.json;\
-                  rm -f ${env.SNAPSHOT_VERSION}.tar.gz;\
-                """
+            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+              withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+                sh """
+                    set -eo
+                    npm run doc
+                    npm run pack
+                    npm run build-css
+                    cp -rf src build
+                    cp -rf build-doc build
+                    rm -rf ${env.SNAPSHOT_VERSION}.tar.gz
+                    tar -czf ${env.SNAPSHOT_VERSION}.tar.gz build
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
+                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.SNAPSHOT_VERSION}.tar.gz ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -rf /var/www/html/${env.SNAPSHOT_VERSION}
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mkdir /var/www/html/${env.SNAPSHOT_VERSION}
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} tar -xzf /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz --strip 1 -C /var/www/html/${env.SNAPSHOT_VERSION}
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
+                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions.json ./
+                    node hosting/append_current_version.js;\
+                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ./versions.json ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions-${env.SNAPSHOT_VERSION}.json;\
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mv /var/www/html/versions-${env.SNAPSHOT_VERSION}.json /var/www/html/versions.json;\
+                    rm -f ./versions.json;\
+                    rm -f ${env.SNAPSHOT_VERSION}.tar.gz;\
+                  """
+              }
             }
           }
         }
       }
+
     }
 
     stage('npm-publish') {
