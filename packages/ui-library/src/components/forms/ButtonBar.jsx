@@ -369,8 +369,9 @@ class ButtonBar extends React.Component {
                 "button-bar--left-align": this.props.alignment === "left",
             },
             discardClassName = classnames(
-                this.props.discardClassName ||"cancel",
+                this.props.discardClassName,
                 {
+                    "cancel": this.props.useButtonForCancel && !this.props.discardClassName,
                     disabled: this.props.enableSavingAnimation,
                     "button-bar__cancel-link": !this.props.useButtonForCancel,
                 }
@@ -392,7 +393,7 @@ class ButtonBar extends React.Component {
                             className={discardClassName}
                             onClick={this.props.onDiscard}
                             disabled={this.props.enableSavingAnimation}
-                            type={this.useButtonForCancel ? buttonTypes.CANCEL : buttonTypes.LINK}
+                            type={this.props.useButtonForCancel ? buttonTypes.CANCEL : buttonTypes.LINK}
                         >
                             {discardText}
                         </Button>

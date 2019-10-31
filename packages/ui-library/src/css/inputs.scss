@@ -1685,6 +1685,10 @@ input[type=file] {
             }
         }
     }
+    .list-input__bottom-links {
+        position: absolute;
+        bottom: 0;
+    }
     .required-message {
         background-color: $color-warning-icon-yellow;
         color: $color-white;
@@ -1751,12 +1755,6 @@ input[type=file] {
 .list-input__bottom-links {
     border-top: 1px solid $color-input-fill;
     padding: $spacing-xs 0;
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    right: 10px;
-    background: $color-white;
-    text-align: center;
 
     .option,
     a {
