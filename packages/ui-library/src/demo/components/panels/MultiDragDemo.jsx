@@ -447,6 +447,7 @@ class MultiDragDemo extends React.Component {
                                 First column has sort within column disabled.
                             </h2>
                             <MultiDrag
+                                stateless
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
                                 showSearch={this.props.demo.search === "first"}
                                 onSearch={this._handleSearchStateless}

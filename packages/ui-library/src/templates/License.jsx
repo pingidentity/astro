@@ -484,7 +484,7 @@ export default class License extends Component {
                 <PageSection>
                     <InputRow>
                         <Stack gap="XS">
-                            <Text type={textTypes.PARENT}>Organization</Text>
+                            <Text type={textTypes.PARENTLABEL}>Organization</Text>
                             <Text type={textTypes.VALUE}>PingOne Demo</Text>
                         </Stack>
                     </InputRow>
