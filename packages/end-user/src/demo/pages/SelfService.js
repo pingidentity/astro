@@ -21,7 +21,7 @@ import DeviceTable from '../../components/shared/DeviceTable';
 class SelfService extends React.Component {
     state = {
         selectedIndex: 0,
-        openModals: [],
+        openModals: []
     };
 
     _handleSectionChange = (index) => {
@@ -31,7 +31,8 @@ class SelfService extends React.Component {
     };
 
     render = () => (
-        <>'           '<UserNav
+        <>
+            <UserNav
                 logo
                 tabs={[
                     'My Profile',
@@ -43,12 +44,16 @@ class SelfService extends React.Component {
                 onTabChange={this._handleSectionChange}
                 user={{
                     name: 'Tyler Grove',
-                    imageSrc: 'https://placedog.net/50/50',
+                    imageSrc: 'https://placedog.net/50/50'
                 }}
-            />'
-           '{ this.state.selectedIndex === 0 ? <MyProfilePage /> : null }'           '{ this.state.selectedIndex === 1 ? <AuthenticationPage /> : null }'           '{ this.state.selectedIndex === 2 ? <ChangePasswordPage /> : null }'       '</>
+            />
+
+            { this.state.selectedIndex === 0 ? <MyProfilePage /> : null }
+            { this.state.selectedIndex === 1 ? <AuthenticationPage /> : null }
+            { this.state.selectedIndex === 2 ? <ChangePasswordPage /> : null }
+        </>
     );
-}
+};
 
 const MyProfilePage = () => (
     <Container>
@@ -96,8 +101,8 @@ const MyProfilePage = () => (
                         <FormLabel>Email</FormLabel>
                         <TextBlock className="text-block--full-width">katie.addleman@compra</TextBlock>
                     </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }} />
-                    <div style={{ flexGrow: 1, flexBasis: 0 }} />
+                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
+                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
                 </FlexRow>
             </FlexRow>
         </PageSection>
@@ -113,11 +118,11 @@ const MyProfilePage = () => (
                     flexDirection={flexDirectionOptions.ROW}
                     justify={justifyOptions.SPACEBETWEEN}
                 >
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}>
+                    <div style={{ flexGrow: 1, flexBasis: 0}}>
                         <FormLabel>Street Address</FormLabel>
                         <TextBlock className="text-block--full-width">1440 S Main Street</TextBlock>
                     </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}>
+                    <div style={{ flexGrow: 1, flexBasis: 0}}>
                         <FormLabel>City</FormLabel>
                         <TextBlock className="text-block--full-width">San Diego</TextBlock>
                     </div>
@@ -125,7 +130,7 @@ const MyProfilePage = () => (
                         <FormLabel>State</FormLabel>
                         <TextBlock className="text-block--full-width">CA</TextBlock>
                     </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }} />
+                    <div style={{ flexGrow: 1, flexBasis: 0}}></div>
                 </FlexRow>
                 <FlexRow
                     spacing={spacingOptions.MD}
@@ -141,8 +146,8 @@ const MyProfilePage = () => (
                         <FormLabel>Country</FormLabel>
                         <TextBlock className="text-block--full-width">United States</TextBlock>
                     </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }} />
-                    <div style={{ flexGrow: 1, flexBasis: 0 }} />
+                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
+                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
                 </FlexRow>
             </FlexRow>
         </PageSection>
@@ -175,16 +180,16 @@ class AuthenticationPage extends React.Component {
         dataIsVisible: false,
     };
 
-    _openModal = modal => () => {
+    _openModal = (modal) => () => {
         this.setState({ [`isExpanded${modal}`]: true });
     }
 
-    _closeModal = modal => () => {
+    _closeModal = (modal) => () => {
         this.setState({ [`isExpanded${modal}`]: false });
     }
 
-    _toggleValue = val => () => {
-        this.setState({ [val]: !this.state[val] });
+    _toggleValue = (val) => () => {
+        this.setState({ [val]: !this.state[val] })
     }
 
     _showData = () => {
@@ -194,9 +199,13 @@ class AuthenticationPage extends React.Component {
     render = () => (
         <Container maxWidth="400px">
             { !this.state.dataIsVisible ? (
-                <>'                   '<h1 className="heading-text centered-text">Authentication Methods</h1>'                   '<p className="normal-text centered-text">
+                <>
+                    <h1 className="heading-text centered-text">Authentication Methods</h1>
+                    <p className="normal-text centered-text">
                         To set up multi-factor authentication, you need to add an authentication method.
-                    </p>'                   '<Button label="Add Method" type={ButtonTypes.PRIMARY} onClick={() => this._openModal(1)()} />'               '</>
+                    </p>
+                    <Button label="Add Method" type={ButtonTypes.PRIMARY} onClick={() => this._openModal(1)()} />
+                </>
             ) : (
                 <FlexRow
                     alignment={alignments.CENTER}
@@ -217,6 +226,7 @@ class AuthenticationPage extends React.Component {
                                 <Toggle
                                     data-id="user-toggle1"
                                     className="row-status-toggle"
+                                    stateless={true}
                                     toggled={this.state.multifactorAuth}
                                     onToggle={() => this._toggleValue('multifactorAuth')()}
                                     name="the-toggle"
@@ -237,12 +247,12 @@ class AuthenticationPage extends React.Component {
                                 devices={
                                     [
                                         {
-                                            name: 'CMaxwell@pingidentity.com',
-                                            type: 'Email',
+                                            name: "CMaxwell@pingidentity.com",
+                                            type: "Email",
                                         },
                                         {
-                                            name: '951345279578',
-                                            type: 'SMS',
+                                            name: "951345279578",
+                                            type: "SMS",
                                         },
                                     ]
                                 }
@@ -272,7 +282,7 @@ class AuthenticationPage extends React.Component {
                         Enter the mobile number you would like to recieve authentication codes with.
                     </p>
                     <TextInput width="100%" />
-                    <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(1)(); this._openModal(2)(); }} />
+                    <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(1)(); this._openModal(2)(); }}/>
                     <TextBlock size="small"><a href="#" onClick={() => this._closeModal(1)()}>Cancel</a></TextBlock>
                 </FlexRow>
             </Modal>
@@ -283,8 +293,7 @@ class AuthenticationPage extends React.Component {
                 type="dialog"
                 expanded={this.state.isExpanded2}
                 onclose={this._openModal(2)}
-                onClose={this._closeModal(2)}
-            >
+                onClose={this._closeModal(2)}>
 
                 <FlexRow
                     alignment={alignments.CENTER}
@@ -297,7 +306,7 @@ class AuthenticationPage extends React.Component {
                     </p>
                     <TextInput width="150px" />
                     <TextBlock size="small"><a href="#">Resend passcode</a></TextBlock>
-                    <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(2)(); this._openModal(3)(); }} />
+                    <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(2)(); this._openModal(3)(); }}/>
                     <TextBlock size="small"><a href="#" onClick={() => this._closeModal(2)()}>Cancel</a></TextBlock>
                 </FlexRow>
             </Modal>
@@ -308,8 +317,7 @@ class AuthenticationPage extends React.Component {
                 type="dialog"
                 expanded={this.state.isExpanded3}
                 onclose={this._openModal(3)}
-                onClose={this._closeModal(3)}
-            >
+                onClose={this._closeModal(3)}>
 
                 <FlexRow
                     alignment={alignments.CENTER}
@@ -321,7 +329,7 @@ class AuthenticationPage extends React.Component {
                         Enter the email address you would like to recieve authentication codes with.
                     </p>
                     <TextInput width="100%" />
-                    <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(3)(); this._openModal(4)(); }} />
+                    <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(3)(); this._openModal(4)(); }}/>
                 </FlexRow>
             </Modal>
 
@@ -344,11 +352,11 @@ class AuthenticationPage extends React.Component {
                     </p>
                     <TextInput width="150px" />
                     <TextBlock size="small"><a href="#">Resend passcode</a></TextBlock>
-                    <Button label="Save" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(4)(); this._showData(); }} />
+                    <Button label="Save" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(4)(); this._showData(); }}/>
                     <TextBlock size="small"><a href="#" onClick={() => this._closeModal(4)()}>Cancel</a></TextBlock>
                 </FlexRow>
             </Modal>
         </Container>
     );
-}
+};
 export default SelfService;
