@@ -4,6 +4,7 @@ reports/
 mvn/
 build*
 dist
+cdn
 lib
 temp
 **/examples/node_modules

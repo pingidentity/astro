@@ -5,8 +5,7 @@
   "author": "UX Front-End Development Team",
   "license": "ISC",
   "files": [
-    "lib",
-    "index.js"
+    "lib"
   ],
   "main": "./index.js",
   "publishConfig": {
@@ -175,7 +174,7 @@
     "postintegration": "npm run clean-processes",
     "clean-screenshots": "node ./clean-screenshot.js",
     "clean-selenium-log": "node ./clean-selenium-log.js",
-    "build-css": "gulp build-css --destination build-css/css",
+    "build-css": "gulp build-css --destination cdn/css",
     "generate-release-notes": "node ./generateReleaseNotes.js",
     "generate-template-dictionary": "node ./generate-template-dictionary",
     "check-licenses": "license-checker --production --excludePackages '@pingone/net@0.1.3' --onlyAllow 'MIT;BSD-3-Clause;Apache-2.0;BSD-2-Clause;ISC;Public Domain'",

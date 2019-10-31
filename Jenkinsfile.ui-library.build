@@ -1,0 +1,113 @@
+pipeline {
+  agent {
+    label 'ui-library-cdn-deploy'
+  }
+  stages {
+    stage('version') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder') {
+            echo "Building SNAPSHOT"
+            script {
+              sh "npm install"
+              env.VERSION_V = sh(returnStdout: true, script: "npm version minor --no-git-tag-version");
+              env.SHAPSHOT_VERSION = env.SHAPSHOT_VERSION_V.replaceAll("v","") + "-SNAPSHOT";
+              sh """
+                sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "${env.SNAPSHOT_VERSION}.${process.env.BUILD_NUMBER}"/' package.json > package.json.tmp
+                mv package.json.tmp package.json
+              """
+            }
+            echo """
+              SNAPSHOT version: ${env.SNAPSHOT_VERSION}
+            """
+          }
+        }
+      }
+    }
+
+    stage ('package and upload for hosting') {
+      dir("${env.WORKSPACE}/packages/ui-library") {
+        container('node-builder') {
+          script {
+            env.HOSTING_SERVER_ADDRESS = "uilibrary.ping-eng.com"
+            env.HOSTING_SERVER_USERNAME = "ubuntu"
+          }
+
+           configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh """
+                  set -eo
+                  npm run doc
+                  npm run pack
+                  npm run build-css
+                  cp -rf src build
+                  cp -rf build-doc build
+                  rm -rf ${env.SNAPSHOT_VERSION}.tar.gz
+                  tar -czf ${env.SNAPSHOT_VERSION}.tar.gz build
+                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
+                  scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.SNAPSHOT_VERSION}.tar.gz ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/
+                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -rf /var/www/html/${env.SNAPSHOT_VERSION}
+                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mkdir /var/www/html/${env.SNAPSHOT_VERSION}
+                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} tar -xzf /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz --strip 1 -C /var/www/html/${env.SNAPSHOT_VERSION}
+                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
+                  scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions.json ./
+                  node hosting/append_current_version.js;\
+                  scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ./versions.json ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions-${env.SNAPSHOT_VERSION}.json;\
+                  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mv /var/www/html/versions-${env.SNAPSHOT_VERSION}.json /var/www/html/versions.json;\
+                  rm -f ./versions.json;\
+                  rm -f ${env.SNAPSHOT_VERSION}.tar.gz;\
+                """
+            }
+          }
+        }
+      }
+    }
+
+    stage('npm-publish') {
+      steps {
+        container('node-builder') {
+          dir("${env.WORKSPACE}/packages/ui-library") {
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              echo "publishing UI Library: ${env.SNAPSHOT_VERSION} "
+              sh 'npm publish --tag snapshot'
+            }
+          }
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
+        }
+      }
+    }
+
+    stage('cdn deploy') {
+      steps {
+        dir("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
+            withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+              }
+            }
+            withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+              }
+            }
+            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  post {
+    unsuccessful {
+       slackSend channel: '#ux-deployments', message: "@here :tears: UI Library build-job:  ${BUILD_URL} failed!", color: "#a31300"
+    }
+  }
+
