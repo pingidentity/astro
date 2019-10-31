@@ -9,8 +9,6 @@ import NavFrame from "../../../components/panels/NavFrame";
 * @desc A demo for HeaderBar
 */
 class HeaderBarDemo extends React.Component {
-    static flags = [ "use-portal" ];
-
     state = {
 
     }
