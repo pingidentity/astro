@@ -1413,7 +1413,7 @@ module.exports = [
                     {
                         label: "Multiple Certificates",
                         demo: require("../../templates/MultipleCertificates"),
-                        pathToSource: "templates_MultipleCertificatesTemplate.jsx.html",
+                        pathToSource: "templates_MultipleCertificates.jsx.html",
                         fullscreen: true,
                         icon: "details",
                     },

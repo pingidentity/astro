@@ -24,7 +24,7 @@ import uuid from "uuid";
 import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
 
 /**
-* @name Multiple Verification Certificates Template
+* @name MultipleCertificates
 * @desc This template demonstrates how to add multiple verification certificates.
 */
 export default class MultipleCertsTemplate extends Component {
