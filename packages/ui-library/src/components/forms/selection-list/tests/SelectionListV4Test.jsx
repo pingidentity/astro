@@ -9,7 +9,6 @@ import FormRadioGroup from "../../FormRadioGroup";
 import FormLabel from "../../FormLabel";
 import KeyboardUtils from "../../../../util/KeyboardUtils.js";
 import StateContainer from "../../../utils/StateContainer";
-import { allFlags } from "../../../../util/FlagUtils";
 
 window.__DEV__ = true;
 
@@ -41,7 +40,6 @@ describe("SelectionList v4", function () {
             items: listItems,
             "data-id": "my-selection-list",
             onValueChange: jest.fn(),
-            flags: allFlags,
         });
 
         return TestUtils.renderInWrapper(<SelectionList {...opts} />);
@@ -50,7 +48,6 @@ describe("SelectionList v4", function () {
     it("data-id's don't change with single list type", () => {
         mountSnapshotDataIds(
             <SelectionList
-                flags={allFlags}
                 items={[
                     { name: "Long Tran", id: 1 },
                     { name: "Nam Tu", id: 2 },
@@ -73,7 +70,6 @@ describe("SelectionList v4", function () {
     it("data-id's don't change with add list type", () => {
         mountSnapshotDataIds(
             <SelectionList
-                flags={allFlags}
                 items={[
                     { name: "Long Tran", id: 1 },
                     { name: "Nam Tu", id: 2 },
@@ -94,7 +90,6 @@ describe("SelectionList v4", function () {
     it("data-id's don't change with multi-add list type", () => {
         mountSnapshotDataIds(
             <SelectionList
-                flags={allFlags}
                 items={[
                     { name: "Long Tran", id: 1 },
                     { name: "Nam Tu", id: 2 },

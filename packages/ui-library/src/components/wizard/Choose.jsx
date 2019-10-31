@@ -186,7 +186,6 @@ class Choose extends React.Component {
         props.titleSelection = this._getChoiceTitle();
         props.canProceed = this._getChoice() >= 0;
         props.showEdit = true;
-        props.flags = this.props.flags;
 
         return (
             <div data-id={this.props["data-id"]} className={this.props.className}>

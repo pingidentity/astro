@@ -6,7 +6,6 @@ jest.dontMock("../../../../util/Utils");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { allFlags } from "../../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("HeaderBar v4", function() {
@@ -35,7 +34,6 @@ describe("HeaderBar v4", function() {
                 children: [{ id: "globe", label: "Globe" }]
             }
         ],
-        flags: allFlags,
     });
 
     function getWrappedComponent(opts, omit = {}) {

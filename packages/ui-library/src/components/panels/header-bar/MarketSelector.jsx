@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import FormDropDownList from "../../forms/FormDropDownList";
-import { flagsPropType } from "../../../util/FlagUtils";
 
 class MarketSelector extends React.Component {
     static propTypes = {
@@ -15,18 +14,14 @@ class MarketSelector extends React.Component {
                 label: PropTypes.string,
             })
         ),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
         "data-id": "market-selector",
         onMarketChange: _.noop,
         market: "",
-        flags: [],
         options: []
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     // The FormDropDownList uses labels & values. We want to use labels & ids
     _getDDLOption = option => ({ label: option.label, value: option.id })

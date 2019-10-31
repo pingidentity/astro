@@ -9,7 +9,6 @@ import FormRadioGroup from "../forms/FormRadioGroup";
 import _ from "underscore";
 
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 
@@ -42,7 +41,6 @@ class ConditionalFieldsetStateless extends React.Component {
         selectedIndex: PropTypes.number,
         supportEmpty: PropTypes.bool,
         type: PropTypes.string,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -53,8 +51,6 @@ class ConditionalFieldsetStateless extends React.Component {
         selectedIndex: 0,
         supportEmpty: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _handleSelectValueChange = (option) => {
         this.props.onValueChange(option.value);
@@ -100,7 +96,6 @@ class ConditionalFieldsetStateless extends React.Component {
                     selectedOption={selectedOption}
                     title={selectedOption.label}
                     width={this.props.inputWidth}
-                    flags={getFlags(this)}
                 />
             );
         } else {
@@ -256,7 +251,5 @@ ConditionalFieldset.propTypes = {
 };
 
 ConditionalFieldset.Types = Types;
-
-ConditionalFieldset.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default ConditionalFieldset;

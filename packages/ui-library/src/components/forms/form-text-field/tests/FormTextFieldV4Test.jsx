@@ -7,7 +7,6 @@ jest.dontMock("../../FormError");
 jest.dontMock("../../../tooltips/HelpHint");
 
 import StateContainer from "../../../utils/StateContainer";
-import { allFlags } from "../../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("FormTextField v4", function () {
@@ -38,7 +37,6 @@ describe("FormTextField v4", function () {
             stateless: false,
             labelText: "",
             required: legacyProp(opts, "required", "isRequired", false),
-            flags: allFlags,
         });
 
         return TestUtils.renderInWrapper(<FormTextField {...opts} />);
@@ -46,9 +44,7 @@ describe("FormTextField v4", function () {
 
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
-            <FormTextField
-                flags={allFlags}
-            />);
+            <FormTextField />);
     });
 
     it("renders the component", function () {

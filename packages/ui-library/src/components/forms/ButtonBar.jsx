@@ -8,7 +8,6 @@ import ConfirmTooltip from "../tooltips/ConfirmTooltip";
 import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
 import Translator from "../../util/i18n/Translator.js";
 import _ from "underscore";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
 * @callback ButtonBar~onCancel
@@ -259,7 +258,6 @@ class ButtonBar extends React.Component {
         enableSavingAnimation: PropTypes.bool,
         unfixed: PropTypes.bool,
         visible: PropTypes.bool,
-        flags: flagsPropType,
         useButtonForCancel: PropTypes.bool,
     };
 
@@ -277,8 +275,6 @@ class ButtonBar extends React.Component {
         onSaveMouseDown: _.noop,
         useButtonForCancel: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     static buttonAlignments = alignments;
 
@@ -335,7 +331,6 @@ class ButtonBar extends React.Component {
                 data-id={this.props["data-id"]}
                 label={this._getCancelButtonMarkup()}
                 placement="top left"
-                flags={getFlags(this)}
                 {...this.props.cancelTooltip}
             />
             : this._getCancelButtonMarkup()
@@ -357,7 +352,6 @@ class ButtonBar extends React.Component {
                 label={this._getSaveButtonMarkup()}
                 onConfirm={this._handleSave}
                 placement="top left"
-                flags={getFlags(this)}
                 showClose={false}
                 {...props}
             >

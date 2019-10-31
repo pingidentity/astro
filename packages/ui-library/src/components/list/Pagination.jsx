@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 import { SimpleWrapper } from "../../components/rows/ExpandableRow";
 
@@ -311,10 +310,7 @@ const Pagination = inStateContainer([
 Pagination.displayName = "Pagination";
 
 Pagination.propTypes = {
-    flags: flagsPropType,
     stateless: deprecatedStatelessProp
 };
-
-Pagination.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default Pagination;

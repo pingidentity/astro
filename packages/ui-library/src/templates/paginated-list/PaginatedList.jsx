@@ -78,7 +78,7 @@ export default class PaginatedList extends React.Component {
                     formSearchBoxProps={{
                         onValueChange: this._handleFilter,
                     }}
-                    rightControl={<Button label="Add Application" iconName="add" flags={["add-button-margin"]}/>}
+                    rightControl={<Button label="Add Application" iconName="add" />}
                 />
                 {filteredPages.length && (
                     <Pagination

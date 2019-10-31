@@ -19,7 +19,6 @@ import ConditionalFieldset from "../ConditionalFieldset";
 import StateContainer from "../../utils/StateContainer";
 import { InputWidths, InputWidthClasses } from "../../forms/InputWidths";
 import { mount } from "enzyme";
-import { allFlags } from "../../../util/FlagUtils";
 
 describe("ConditionalFieldset", function () {
     const dataId = "fieldset";
@@ -35,7 +34,7 @@ describe("ConditionalFieldset", function () {
 
     function getComponent (props) {
         return TestUtils.renderInWrapper(
-            <ConditionalFieldset {...defaultProps} {...props} flags={allFlags}>
+            <ConditionalFieldset {...defaultProps} {...props}>
                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                 <div data-id="option2" title="Option 2">Option 2</div>
             </ConditionalFieldset>
@@ -44,7 +43,7 @@ describe("ConditionalFieldset", function () {
 
     function getEnzymeWrapper (props) {
         return mount(
-            <ConditionalFieldset {...defaultProps} {...props} flags={allFlags}>
+            <ConditionalFieldset {...defaultProps} {...props}>
                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                 <div data-id="option2" title="Option 2">Option 2</div>
             </ConditionalFieldset>
@@ -58,7 +57,7 @@ describe("ConditionalFieldset", function () {
 
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
-            <ConditionalFieldset flags={allFlags}>
+            <ConditionalFieldset>
                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                 <div data-id="option2" title="Option 2">Option 2</div>
             </ConditionalFieldset>

@@ -5,7 +5,6 @@ import Button from "../../../components/buttons/Button";
 import Image, { imageSizes } from "../../../components/general/Image";
 import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
-import { allFlags } from "../../../util/FlagUtils";
 import HelpHint from "../../../components/tooltips/HelpHint";
 import FormLabel from "../../../components/forms/FormLabel";
 
@@ -189,7 +188,6 @@ export default class FileUploadDemo extends React.Component {
                         open={this.state.tooltipOpen}
                         onToggle={this._toggleTooltip}
                         label="Toggle Tooltip"
-                        flags={allFlags}
                     >
 
                         <InputRow>

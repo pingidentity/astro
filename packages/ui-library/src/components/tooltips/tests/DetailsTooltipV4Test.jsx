@@ -4,7 +4,6 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
-import { allFlags } from "../../../util/FlagUtils";
 import StateContainer from "../../utils/StateContainer";
 
 describe("DetailsTooltip", function () {
@@ -26,7 +25,6 @@ describe("DetailsTooltip", function () {
             open: alwaysOpen ? true : undefined,
             onValueChange: jest.fn(),
             onToggle: jest.fn(),
-            flags: allFlags,
         });
 
         return ReactTestUtils.renderIntoDocument(
@@ -48,7 +46,6 @@ describe("DetailsTooltip", function () {
         mountSnapshotDataIds(
             <DetailsTooltip
                 cancelLabel="UH OH"
-                flags={allFlags}
                 label="OH JEEZ"
                 primaryLabels={labels}
                 secondaryLabels={labels}

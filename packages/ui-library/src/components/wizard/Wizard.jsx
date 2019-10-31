@@ -5,7 +5,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import ButtonBar from "../forms/ButtonBar";
 import _ from "underscore";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 var INHERIT_PROPS = [
     "activeStep",
@@ -165,7 +164,6 @@ class Wizard extends React.Component {
         onEdit: PropTypes.func,
         onDone: PropTypes.func,
         children: PropTypes.node,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -175,8 +173,6 @@ class Wizard extends React.Component {
         showPulsing: false,
         onValueChange: _.noop,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _filter = (children) => {
         var result = [];
@@ -232,7 +228,6 @@ class Wizard extends React.Component {
                         enableSavingAnimation={this.props.showPulsing}
                         cancelTooltip={this.props.cancelTooltip}
                         saveTooltip={this.props.saveTooltip}
-                        flags={getFlags(this)}
                     />
                 ) : null}
             </div>

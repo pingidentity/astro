@@ -4,7 +4,6 @@ import CollapsibleLink from "../general/CollapsibleLink";
 import DetailsTooltip from "../tooltips/DetailsTooltip";
 import classnames from "classnames";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
@@ -83,15 +82,12 @@ class LinkDropDownListStateless extends React.Component {
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([-1])]), // -1 means no value has been set
-        flags: flagsPropType,
     };
 
     static defaultProps = {
         closeOnSelection: true,
         "data-id": "link-dropdown-list",
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _handleClick = (selectedOption) => {
         if (this.props.closeOnSelection) {
@@ -143,7 +139,6 @@ class LinkDropDownListStateless extends React.Component {
                 showClose={false}
                 open={this.props.open}
                 onToggle={this.props.onToggle}
-                flags={getFlags(this)}
             >
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}
@@ -180,10 +175,7 @@ LinkDropDownList.displayName = "LinkDropDownList";
 
 LinkDropDownList.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
-
-LinkDropDownList.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 LinkDropDownList.labelArrowPositions = CollapsibleLink.arrowPositions;
 

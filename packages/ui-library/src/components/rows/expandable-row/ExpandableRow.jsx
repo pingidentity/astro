@@ -15,7 +15,6 @@ import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
 import ButtonGroup from "../../layout/ButtonGroup";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
@@ -382,7 +381,6 @@ class StatelessExpandableRow extends React.Component {
             onPositionValueChange: PropTypes.func,
             positionValue: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([""])]),
         }),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -401,8 +399,6 @@ class StatelessExpandableRow extends React.Component {
         onDeleteConfirmClick: _.noop,
         waiting: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /**
      * Propagate expanded/collapse toggle event to owner.
@@ -501,7 +497,6 @@ class StatelessExpandableRow extends React.Component {
                     confirmDeleteTitle={this.props.confirmDeleteTitle}
                     onDeleteConfirm={this.props.onDeleteConfirmClick}
                     confirmDeletePosition={this.props.confirmDeletePosition}
-                    flags={getFlags(this)}
                 >
                     {this.props.confirmDeleteContent}
                 </ConfirmDeleteDialog>);
@@ -613,7 +608,6 @@ class ConfirmDeleteDialog extends React.Component {
         confirmDeleteTitle: PropTypes.string,
         onCancel: PropTypes.func,
         onDeleteConfirm: PropTypes.func,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -622,8 +616,6 @@ class ConfirmDeleteDialog extends React.Component {
         onDeleteConfirm: _.noop,
         confirmDeleteTitle: Translator.translate("confirmdelete")
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _renderTooltipContent = () => {
         if (this.props.children) {
@@ -656,7 +648,6 @@ class ConfirmDeleteDialog extends React.Component {
                 label={this.props.trigger}
                 open={this.props.open}
                 onToggle={this.props.open ? this.props.onCancel : _.noop}
-                flags={getFlags(this)}
             >
                 {this._renderTooltipContent()}
             </DetailsTooltip>

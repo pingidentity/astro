@@ -4,7 +4,6 @@ import FlexRow, { alignments, justifyOptions, spacingOptions } from "ui-library/
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
-import { allFlags } from "ui-library/lib/util/FlagUtils";
 import Link from "ui-library/lib/components/general/Link";
 import { v4 as uuidV4 } from "uuid";
 import Toggle from "ui-library/lib/components/forms/form-toggle";
@@ -64,9 +63,8 @@ export default class GatewayTemplate extends Component {
                         <ExpandableRow
                             title="North American Users"
                             subtitle="LDAP/PROXY Gateway"
-                            flags={allFlags}
                             onEditButtonClick={this.toggleAddResource}
-                            rowAccessories={<Toggle flags={["p-stateful"]}/>}
+                            rowAccessories={<Toggle />}
                         >
                             <InputRow>
                                 <PageSection title="Instances" underlined= {false}>

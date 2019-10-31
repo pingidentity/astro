@@ -12,7 +12,6 @@ import Progress from "./Progress";
 import classnames from "classnames";
 import Translator from "../../util/i18n/Translator.js";
 import _ from "underscore";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 /**
  * @callback Wizard#Step~onNext
@@ -114,7 +113,6 @@ class Step extends React.Component {
         onEdit: PropTypes.func,
         onNext: PropTypes.func,
         children: PropTypes.node,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -133,8 +131,6 @@ class Step extends React.Component {
         nextButtonClassName: "primary next-step",
         doneButtonClassName: "primary final-step"
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _edit = () => {
         if (this.props.onEdit && !this.props.showPulsing) {
@@ -166,7 +162,6 @@ class Step extends React.Component {
                     data-id={this.props["data-id"]}
                     label={this._getCancelButtonMarkup()}
                     positionClassName="top left"
-                    flags={getFlags(this)}
                     {...this.props.cancelTooltip}
                 />
             ) : this._getCancelButtonMarkup();
@@ -193,7 +188,6 @@ class Step extends React.Component {
                 data-id={this.props.saveTooltip["data-id"]}
                 label={this._getNextButtonMarkup()}
                 positionClassName="top left"
-                flags={getFlags(this)}
 
                 {...this.props.saveTooltip}
             >

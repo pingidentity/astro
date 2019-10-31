@@ -5,8 +5,6 @@ import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import _ from "underscore";
 import Popover from "../tooltips/Popover";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
-import { FlagsProvider } from "../utils/FlagsProvider";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
@@ -217,14 +215,11 @@ DropDownButton.propTypes = {
     renderButton: PropTypes.func,
     label: PropTypes.string,
     title: PropTypes.string,
-    flags: flagsPropType
 };
 
 DropDownButton.defaultProps = {
     "data-id": "drop-down-button",
     stateless: false,
 };
-
-DropDownButton.contextType = FlagsProvider;
 
 export default DropDownButton;

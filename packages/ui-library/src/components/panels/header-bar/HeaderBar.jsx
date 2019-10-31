@@ -10,7 +10,6 @@ import FlexRow, { alignments, spacingOptions } from "../../layout/FlexRow";
 import MarketSelector from "./MarketSelector";
 import Logo from "./logos/Logo";
 import { getIconClassName } from "../../../util/PropUtils";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  *  @typedef {function} HeaderBar~MenuRenderer
@@ -61,7 +60,6 @@ class NavItem extends React.Component {
         onMenuToggle: PropTypes.func,
         onMenuValueChange: PropTypes.func,
         renderMenu: PropTypes.func,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -72,8 +70,6 @@ class NavItem extends React.Component {
         onMenuValueChange: _.noop,
         renderMenu: defaultRender,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /**
      * @method
@@ -151,7 +147,6 @@ class NavItem extends React.Component {
                             onOpen: this._handleMenuToggle,
                             onClose: this._handleMenuToggle,
                             triggerClassName: "product-nav__menu-trigger",
-                            flags: getFlags(this),
                         },
                         PopoverNavMenu
                     )
@@ -209,7 +204,6 @@ const ProductNav = ({
     onMenuValueChange,
     openNode,
     renderNavItem,
-    flags,
     tree,
 }) => {
     const getNavItem = item => {
@@ -220,7 +214,6 @@ const ProductNav = ({
                 "data-id": item.id,
                 onMenuToggle,
                 onMenuValueChange,
-                flags,
             },
             item,
         );
@@ -422,7 +415,6 @@ class HeaderBar extends React.Component {
         tree: PropTypes.arrayOf(PropTypes.object),
         userMenu: PropTypes.arrayOf(PropTypes.object),
         userName: PropTypes.string,
-        flags: flagsPropType,
         renderProductNav: PropTypes.func,
         renderNavItem: PropTypes.func,
         legacy: PropTypes.bool,
@@ -440,8 +432,6 @@ class HeaderBar extends React.Component {
         renderNavItem: defaultRender,
         legacy: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /**
      * @method
@@ -506,7 +496,7 @@ class HeaderBar extends React.Component {
             ];
         }
 
-        const { flags, renderProductNav, openNode } = this.props;
+        const { renderProductNav, openNode } = this.props;
 
         const modeNodes = this._getModeNodes();
 
@@ -569,7 +559,6 @@ class HeaderBar extends React.Component {
                             options={this.props.marketOptions}
                             market={this.props.marketSelected}
                             onMarketChange={this.props.onMarketChange}
-                            flags={getFlags(this)}
                         />
                     )}
                 </div>
@@ -592,14 +581,12 @@ class HeaderBar extends React.Component {
                             onEnvironmentChange={this.props.onEnvironmentChange}
                             onNewEnvironment={this.props.onNewEnvironment}
                             newEnvironmentLabel={this.props.newEnvironmentLabel}
-                            flags={getFlags(this)}
                         />
                     )}
 
                     {
                         tree && renderProductNav({
                             "data-id": `${this.props["data-id"]}-product-nav`,
-                            flags,
                             onMenuToggle: this._handleMenuToggle,
                             onMenuValueChange: this.props.onMenuValueChange,
                             openNode,

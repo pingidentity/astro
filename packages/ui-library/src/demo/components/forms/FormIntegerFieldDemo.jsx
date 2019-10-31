@@ -214,7 +214,6 @@ class FormIntegerFieldDemo extends React.Component {
                         min={50}
                         max={100}
                         outOfRangeErrorMessage="It's got to be between 50 and 100"
-                        flags={this.props.flags}
                         enforceRange={false}
                     />
                 </InputRow>
@@ -225,7 +224,6 @@ class FormIntegerFieldDemo extends React.Component {
                         min={50}
                         max={100}
                         outOfRangeErrorMessage="It's got to be between 50 and 100"
-                        flags={this.props.flags}
                     />
                 </InputRow>
             </div>

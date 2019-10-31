@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { allFlags } from "ui-library/lib/util/FlagUtils";
 import Button from "ui-library/lib/components/buttons/Button";
 import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
 import FlexRow, { alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
@@ -252,7 +251,6 @@ export default class OicoAccessToken extends Component {
                                         leftMargin
                                     />
                                 </div>}
-                            flags={allFlags}
                             onEditButtonClick={this.toggleAddResource}
                             rowAccessories={<Toggle />}
                         >
@@ -318,7 +316,6 @@ export default class OicoAccessToken extends Component {
                 <ExpandableRow.SimpleWrapper data-id="idp-row">
                     <ExpandableRow.RowSection title="Resources">
                         <ExpandableRow
-                            flags={allFlags}
                             title={
                                 <div>
                                     openid
@@ -330,9 +327,7 @@ export default class OicoAccessToken extends Component {
                                     />
                                 </div>}
                         />
-                        <ExpandableRow
-                            title="test"
-                            flags={allFlags}/>
+                        <ExpandableRow title="test" />
                     </ExpandableRow.RowSection>
                 </ExpandableRow.SimpleWrapper>
             </div>

@@ -5,7 +5,6 @@ import LeftNav from "./left-nav";
 import KeywordSearch from "../forms/KeywordSearch";
 import Modal from "../general/Modal";
 import { deprecatedProp } from "../../util/DeprecationUtils";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 
 import _ from "underscore";
 
@@ -84,7 +83,6 @@ class AppFrame extends React.Component {
         root: PropTypes.string,
         searchable: PropTypes.bool,
         copyrightYear: PropTypes.string,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -99,8 +97,6 @@ class AppFrame extends React.Component {
         openSections: {},
         searchable: false
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     state = {
         searchOpen: false
@@ -347,7 +343,6 @@ class AppFrame extends React.Component {
                 data-id={this.props["data-id"]}
             >
                 <HeaderBar
-                    flags={getFlags(this)}
                     {...this._buildHeaderProps()}
                     navOptions={navOptions}
                     navSelected={this.props.root}

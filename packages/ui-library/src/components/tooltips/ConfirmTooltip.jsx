@@ -5,7 +5,6 @@ import DetailsTooltip, { DetailsTooltipStateless } from "../tooltips/DetailsTool
 
 import popsOver from "../../util/behaviors/popsOver";
 import ButtonGroup from "../layout/ButtonGroup";
-import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @class ConfirmTooltip
@@ -72,7 +71,6 @@ class ConfirmTooltipBase extends Component {
         closeOnConfirm: PropTypes.bool,
         "data-id": PropTypes.string,
         disableSave: PropTypes.bool,
-        flags: flagsPropType,
         label: PropTypes.node,
         loading: PropTypes.bool,
         onCancel: PropTypes.func,
@@ -86,8 +84,6 @@ class ConfirmTooltipBase extends Component {
         "data-id": "confirm-tooltip",
         closeOnConfirm: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     _handleConfirm = e => {
         if (this.props.onConfirm) {

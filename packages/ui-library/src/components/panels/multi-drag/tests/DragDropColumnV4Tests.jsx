@@ -17,7 +17,6 @@ import DragDrop from "../../../rows/DragDrop";
 import _ from "underscore";
 import TestBackend from "react-dnd-test-backend";
 import { DragDropContext } from "react-dnd";
-import { allFlags } from "../../../../util/FlagUtils";
 
 describe("DragDropColumn v4", function () {
 
@@ -46,7 +45,6 @@ describe("DragDropColumn v4", function () {
             index: 0,
             rows: [{ id: 1, n: 1 }, { id: 2, n: 2 }],
 
-            flags: allFlags,
         });
     }
 
@@ -84,7 +82,6 @@ describe("DragDropColumn v4", function () {
                 index={0}
                 rows={[{ id: 1, n: 1 }, { id: 2, n: 2 }]}
 
-                flags={allFlags}
             />
         ));
         mountSnapshotDataIds(

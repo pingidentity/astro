@@ -12,7 +12,6 @@ import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import { mount } from "enzyme";
-import { allFlags } from "../../../util/FlagUtils";
 
 describe("Calendar v4", function () {
     const callback = jest.fn(),
@@ -25,12 +24,12 @@ describe("Calendar v4", function () {
 
     function getComponent (props) {
         return ReactTestUtils.renderIntoDocument(
-            <div><Calendar {...props} flags={allFlags} /></div>
+            <div><Calendar {...props} /></div>
         );
     }
 
     function mountComponent(props) {
-        return mount(<Calendar {...props} flags={allFlags} />);
+        return mount(<Calendar {...props} />);
     }
 
     beforeEach(function () {

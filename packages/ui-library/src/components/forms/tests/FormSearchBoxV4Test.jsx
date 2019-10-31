@@ -6,7 +6,6 @@ import TestUtils from "../../../testutil/TestUtils";
 import FormSearchBox from "../FormSearchBox";
 import { FormTextFieldStateless } from "../form-text-field/index";
 import KeyboardUtils from "../../../util/KeyboardUtils.js";
-import { allFlags } from "../../../util/FlagUtils";
 
 window.__DEV__ = true;
 
@@ -19,7 +18,6 @@ describe("FormSearchBox v4", function () {
             onFocus: jest.fn(),
             onBlur: jest.fn(),
             onClear: jest.fn(),
-            flags: allFlags,
         });
 
         return ReactTestUtils.renderIntoDocument(<FormSearchBox {...opts} />);
@@ -28,7 +26,6 @@ describe("FormSearchBox v4", function () {
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
             <FormSearchBox
-                flags={allFlags}
                 queryString="WHO AM I WHY AM I HERE"
             />
         );

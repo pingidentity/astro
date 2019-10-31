@@ -10,7 +10,6 @@ import classnames from "classnames";
 import _ from "underscore";
 
 import { inStateContainer } from "../../utils/StateContainer";
-import { flagsPropType, } from "../../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
 /**
@@ -303,10 +302,8 @@ FormTextArea.displayName = "FormTextArea";
 
 FormTextArea.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
 
-FormTextArea.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 FormTextArea.inputHeights = inputHeights;
 
 export default FormTextArea;

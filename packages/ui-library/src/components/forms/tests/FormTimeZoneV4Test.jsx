@@ -12,7 +12,6 @@ import _ from "underscore";
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-// This file is a copy of the standard Time Zone tests with all the v4 flags set by default
 describe("FormTimeZone v4", function () {
     const componentId = "timezone";
     const initialValue = "America/Denver";
@@ -102,7 +101,6 @@ describe("FormTimeZone v4", function () {
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
             <FormTimeZone
-                flags={[ "use-portal", "p-stateful" ]}
                 showClear
                 value="25102019"
             />

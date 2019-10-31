@@ -56,21 +56,11 @@ var RowIndexNavDemo = createReactClass({
                         onClick={this._handleOnClick}
                         selectedIndex={this.state.selectedIndex}
                     />
-                    <ExpandableRow
-                        title="Expandable Row"
-                    />
-                    <ExpandableRow
-                        title="Expandable Row"
-                    />
-                    <ExpandableRow
-                        title="Expandable Row"
-                    />
-                    <ExpandableRow
-                        title="Expandable Row"
-                    />
-                    <ExpandableRow
-                        title="Expandable Row"
-                    />
+                    <ExpandableRow title="Expandable Row" />
+                    <ExpandableRow title="Expandable Row" />
+                    <ExpandableRow title="Expandable Row" />
+                    <ExpandableRow title="Expandable Row" />
+                    <ExpandableRow title="Expandable Row" />
                 </ExpandableRow.SimpleWrapper>
             </div>
         );

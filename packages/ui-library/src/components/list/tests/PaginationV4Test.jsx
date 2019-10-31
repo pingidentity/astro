@@ -2,7 +2,6 @@ window.__DEV__ = true;
 
 import { mount } from "enzyme";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
-import { allFlags } from "../../../util/FlagUtils";
 import Pagination from "../Pagination";
 
 jest.dontMock("../Pagination");
@@ -71,7 +70,6 @@ describe("Pagination", function () {
                 perPage = {5}
                 total = {30}
                 onValueChange={callback}
-                flags={allFlags}
             >
                 <ExpandableRow className="row" key={1} />
                 <ExpandableRow className="row" key={2} />
@@ -121,7 +119,6 @@ describe("Pagination", function () {
                 perPage = {5}
                 total = {4}
                 onValueChange={callback}
-                flags={allFlags}
             >
                 <ExpandableRow className="row" key={1} />
                 <ExpandableRow className="row" key={2} />
@@ -151,7 +148,6 @@ describe("Pagination", function () {
                 totalPages={3}
                 perPage={3}
                 onValueChange={callback}
-                flags={allFlags}
             >
                 <ExpandableRow className="row" key={1} />
                 <ExpandableRow className="row" key={2} />
@@ -228,7 +224,6 @@ describe("Pagination", function () {
                 totalPages={3}
                 perPage={3}
                 onValueChange={callback}
-                flags={allFlags}
             >
                 <ExpandableRow className="row" key={1} />
             </Pagination>
@@ -246,7 +241,6 @@ describe("Pagination", function () {
                 perPage = {5}
                 total = {100}
                 onValueChange={callback}
-                flags={allFlags}
             >
                 <ExpandableRow className="row" key={1} />
                 <ExpandableRow className="row" key={2} />
@@ -272,7 +266,6 @@ describe("Pagination", function () {
                 perPage = {5}
                 total = {1}
                 onValueChange={callback}
-                flags={allFlags}
             >
                 <ExpandableRow className="row" key={1} />
                 <ExpandableRow className="row" key={2} />
@@ -290,7 +283,6 @@ describe("Pagination", function () {
     it("updates page", () => {
         const pagination = mount(
             <Pagination
-                flags={allFlags}
                 totalPages={10}
             />
         );

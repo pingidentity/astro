@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { allFlags } from "../util/FlagUtils";
 import Button from "../components/buttons/Button";
 import Chip, { chipColors } from "../components/layout/Chip";
 import ColumnSelector, {
@@ -284,7 +283,6 @@ export default class SocialLogin extends Component {
             return (
                 <ExpandableRow
                     expanded={expanded}
-                    flags={allFlags}
                     icon={customLogo ? undefined : logo}
                     image={customLogo}
                     key={id}
@@ -554,7 +552,6 @@ export default class SocialLogin extends Component {
                                     <InputRow>
                                         <FileUpload
                                             accepts={[".jpg", ".jpeg", ".png"]}
-                                            flags={["true-default"]}
                                             labelRemove={activeProvider.socialButtonImage && "Remove"}
                                             showThumbnail
                                             label="Social Button (80PX x 680PX, .JPG/.PNG)"
@@ -690,12 +687,10 @@ export default class SocialLogin extends Component {
                                             title: `${activeProvider.name}`,
                                             customButton: () => (
                                                 <HelpHint
-                                                    flags={allFlags}
                                                     hintText="Scope cannot be removed"
                                                     placement={HelpHintPlacements.TOP}
                                                 >
                                                     <Icon
-                                                        flags={allFlags}
                                                         iconName="lock"
                                                         type="leading"
                                                     />
@@ -784,7 +779,6 @@ export default class SocialLogin extends Component {
                                                                 <div>
                                                                     {`${activeProvider.name} Attribute`}
                                                                     <HelpHint
-                                                                        flags={allFlags}
                                                                         hintText="Hint"
                                                                     />
                                                                 </div>
@@ -816,7 +810,6 @@ export default class SocialLogin extends Component {
                                                                 <div>
                                                                 Sync Frequency
                                                                     <HelpHint
-                                                                        flags={allFlags}
                                                                         hintText="Hint"
                                                                     />
                                                                 </div>
@@ -842,7 +835,6 @@ export default class SocialLogin extends Component {
                                                                 <div>
                                                                     {`${activeProvider.name} Attribute`}
                                                                     <HelpHint
-                                                                        flags={allFlags}
                                                                         hintText="Hint" />
                                                                 </div>
                                                             }
@@ -869,7 +861,6 @@ export default class SocialLogin extends Component {
                                                                 <div>
                                                                 Sync Frequency
                                                                     <HelpHint
-                                                                        flags={allFlags}
                                                                         hintText="Hint"
                                                                     />
                                                                 </div>

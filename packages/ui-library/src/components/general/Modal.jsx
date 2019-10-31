@@ -8,7 +8,6 @@ import CancelTooltip from "./../tooltips/CancelTooltip";
 import If from "./If";
 import classnames from "classnames";
 import { Portal } from "react-portal";
-import { flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @enum {string}
@@ -83,7 +82,6 @@ class Modal extends React.Component {
         ]),
         cancelTooltip: PropTypes.object,
         children: PropTypes.node,
-        flags: flagsPropType,
     };
 
     static childContextTypes = {
@@ -97,8 +95,6 @@ class Modal extends React.Component {
         maximize: false,
         type: Type.BASIC,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * Set close method into context to allow children

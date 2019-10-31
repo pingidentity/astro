@@ -8,7 +8,6 @@ import _ from "underscore";
 import TestUtils from "../../../testutil/TestUtils";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import Button from "../Button";
-import { allFlags } from "../../../util/FlagUtils";
 
 describe("Button", function () {
     const componentId = "button";
@@ -16,7 +15,6 @@ describe("Button", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             "data-id": componentId,
-            flags: allFlags,
         });
 
         return ReactTestUtils.renderIntoDocument(<div><Button {...opts} /></div>);
@@ -81,26 +79,5 @@ describe("Button", function () {
 
         ReactTestUtils.Simulate.click(button);
         expect(button).toBeTruthy();
-    });
-
-    it("should not show the Cannonball warning if 'noSpacing' is true", function() {
-        console.warn = jest.fn();
-
-        getComponent({ iconName: "add", noSpacing: true });
-        expect(console.warn).not.toBeCalled();
-    });
-
-    it("should not show the Cannonball warning if not using the add class", function() {
-        console.warn = jest.fn();
-
-        getComponent();
-        expect(console.warn).not.toBeCalled();
-    });
-
-    it("should not show the Cannonball warning if the flag is set", function() {
-        console.warn = jest.fn();
-
-        getComponent({ iconName: "add", flags: [ "add-button-margin" ] });
-        expect(console.warn).not.toBeCalled();
     });
 });

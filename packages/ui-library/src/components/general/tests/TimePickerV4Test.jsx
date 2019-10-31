@@ -10,8 +10,6 @@ jest.dontMock("../../forms/FormDropDownList");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { allFlags } from "../../../util/FlagUtils";
-
 describe("TimePicker", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -22,7 +20,7 @@ describe("TimePicker", function () {
 
     function render (props) {
         return ReactTestUtils.renderIntoDocument(
-            <TimePicker onValueChange={onValueChange} {...props} flags={allFlags} />
+            <TimePicker onValueChange={onValueChange} {...props} />
         );
     }
 

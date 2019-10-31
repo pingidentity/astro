@@ -5,7 +5,6 @@ import Utils from "../../util/Utils";
 import Button from "../buttons/Button";
 import Modal from "./Modal";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType, getFlags } from "../../util/FlagUtils";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
@@ -131,7 +130,6 @@ class ModalButtonStateless extends React.Component {
         activatorButtonLabel: PropTypes.string,
         value: PropTypes.string,
         activatorButtonClassName: PropTypes.string,
-        flags: flagsPropType,
 
         // Modal/ModalButton props (passed through to modal component)
         modalClassName: PropTypes.string,
@@ -151,8 +149,6 @@ class ModalButtonStateless extends React.Component {
         maximize: false,
         type: Modal.Type.BASIC,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     close = () => {
         this.props.onClose();
@@ -203,7 +199,6 @@ class ModalButtonStateless extends React.Component {
                 maximize={this.props.maximize}
                 type={this.props.type}
                 closeOnBgClick={this.props.closeOnBgClick}
-                flags={getFlags(this)}
             >
                 {this.props.children || modalBodyContent}
             </Modal>
@@ -241,7 +236,6 @@ const ModalButton = inStateContainer([
 
 ModalButton.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
 
 ModalButton.defaultProps = {

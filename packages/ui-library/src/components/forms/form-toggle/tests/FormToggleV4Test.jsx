@@ -1,6 +1,5 @@
 jest.dontMock("../v2");
 
-import { allFlags } from "../../../../util/FlagUtils";
 import StateContainer from "../../../utils/StateContainer";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
@@ -15,14 +14,13 @@ describe("Toggle v4", function () {
         const props = _.defaults(p || {}, {
             stateless: true,
             onToggle: jest.fn(),
-            flags: allFlags,
         });
 
         return TestUtils.renderInWrapper(<Toggle {...props} />);
     }
 
     it("data-id's don't change", () => {
-        mountSnapshotDataIds(<Toggle flags={allFlags} />);
+        mountSnapshotDataIds(<Toggle />);
     });
 
     it("renders the component with default data-id", function () {

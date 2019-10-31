@@ -296,7 +296,6 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br />
                 <DetailsTooltip
-                    flags={["p-stateful", "use-portal"]}
                     placement="bottom right"
                     label="Large details tool tip"
                     title="Tooltip Title"

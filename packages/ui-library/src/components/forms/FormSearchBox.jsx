@@ -6,7 +6,6 @@ import KeyboardUtils from "../../util/KeyboardUtils.js";
 import classnames from "classnames";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 import { createProgressiveState } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -118,7 +117,6 @@ class FormSearchBox extends React.Component {
         queryString: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
         autoFocus: PropTypes.bool,
-        flags: flagsPropType,
         initialState: PropTypes.object,
     };
 
@@ -134,8 +132,6 @@ class FormSearchBox extends React.Component {
         autoFocus: false,
         initialState: {},
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     constructor(props) {
         super(props);

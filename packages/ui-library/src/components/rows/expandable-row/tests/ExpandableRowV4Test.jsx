@@ -17,7 +17,6 @@ import HelpHint from "../../../tooltips/HelpHint";
 import { DragDropContext } from "react-dnd";
 import _ from "underscore";
 import TestBackend from "react-dnd-test-backend";
-import { allFlags } from "../../../../util/FlagUtils";
 
 describe("ExpandableRow v4", function() {
 
@@ -38,7 +37,6 @@ describe("ExpandableRow v4", function() {
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
             onToggle: jest.fn(),
-            flags: allFlags,
         });
 
         const WrappedComponent = opts.ordering ? wrapInTestContext(ExpandableRow) : ExpandableRow;
@@ -53,7 +51,6 @@ describe("ExpandableRow v4", function() {
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
             onToggle: jest.fn(),
-            flags: allFlags,
         };
         opts = _.defaults(opts || {}, defaults);
         opts2 = _.defaults(opts2 || {}, defaults);
@@ -96,7 +93,6 @@ describe("ExpandableRow v4", function() {
                 subtitle={<div>Test Subtitle</div>}
                 content={<div data-id="content">Test Content</div>}
                 onToggle={jest.fn()}
-                flags={allFlags}
                 ordering={{
                     position: 3,
                     total: 10,

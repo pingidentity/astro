@@ -6,7 +6,6 @@ jest.dontMock("../../buttons/Button");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { allFlags } from "../../../util/FlagUtils";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("ConfirmTooltip", function () {
@@ -22,7 +21,6 @@ describe("ConfirmTooltip", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             "data-id": componentId,
-            flags: allFlags,
         });
 
         return ReactTestUtils.renderIntoDocument(<ConfirmTooltip {...opts} />);
@@ -30,9 +28,7 @@ describe("ConfirmTooltip", function () {
 
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
-            <ConfirmTooltip
-                flags={allFlags}
-            />
+            <ConfirmTooltip />
         );
     });
 

@@ -7,7 +7,6 @@ import classnames from "classnames";
 import _ from "underscore";
 
 import { Layouts } from "./MessagesConstants";
-import { flagsPropType, getFlags } from "../../../util/FlagUtils";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -109,7 +108,6 @@ module.exports = class extends React.Component {
         i18n: PropTypes.func,
         defaultMessageTimeout: PropTypes.number,
         defaultMessageLayout: PropTypes.oneOf(Object.values(Layouts)),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -118,8 +116,6 @@ module.exports = class extends React.Component {
         onI18n: (key) => key,
         defaultMessageLayout: Layouts.CORNER,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     render() {
         const {
@@ -148,7 +144,6 @@ module.exports = class extends React.Component {
                                 defaultTimeout={defaultMessageTimeout}
                                 defaultLayout={defaultMessageLayout}
                                 data-id={`${dataId}-message-${i}`}
-                                flags={getFlags(this)}
                             />
                         );
                     })
@@ -165,7 +160,6 @@ module.exports = class extends React.Component {
  */
 class Message extends React.Component {
     static propTypes = {
-        flags: flagsPropType,
         onRemoveMessage: PropTypes.func,
         iconName: PropTypes.string,
         defaultMessageLayout: PropTypes.oneOf(Object.values(Layouts)),
@@ -174,8 +168,6 @@ class Message extends React.Component {
     static defaultProps = {
         onRemoveMessage: _.noop,
     }
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * Remove the message by calling the removeMessage callback if it exists.

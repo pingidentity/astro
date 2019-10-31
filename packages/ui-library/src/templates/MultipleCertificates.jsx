@@ -112,7 +112,6 @@ export default class MultipleCertsTemplate extends Component {
                             { id: "2", name: "Choose from list" },
                         ]}
                         stacked={false}
-                        flags={["p-stateful"]}
                     />
                 </Padding>
                 {this._renderCertUploadType()}
@@ -147,7 +146,6 @@ export default class MultipleCertsTemplate extends Component {
                 ]}
                 placeholder="Choose a certificate"
                 width={InputWidths.MD}
-                flags={["p-stateful", "use-portal"]}
             />);
     }
 
@@ -213,14 +211,12 @@ export default class MultipleCertsTemplate extends Component {
                                 <FormTextField
                                     labelText="SSO Endpoint"
                                     width={InputWidths.LG}
-                                    flags={["p-stateful"]}
                                 />
                             </InputRow>
                             <InputRow>
                                 <FormTextField
                                     labelText="IDP Entity ID"
                                     width={InputWidths.LG}
-                                    flags={["p-stateful"]}
                                 />
                             </InputRow>
                             <InputRow>
@@ -233,7 +229,6 @@ export default class MultipleCertsTemplate extends Component {
                                         { id: "2", name: "HTTP Redirect" },
                                     ]}
                                     stacked={false}
-                                    flags={["p-stateful"]}
                                     labelText="SSO Binding"
                                 />
                             </InputRow>

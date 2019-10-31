@@ -1,4 +1,3 @@
-import { allFlags } from "../util/FlagUtils";
 import Aside from "ui-library/lib/components/layout/Aside";
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";import React, { Component } from "react";
 import ColumnSelector, { ColumnTitle } from "ui-library/lib/components/list/ColumnSelector/ColumnSelector";
@@ -92,7 +91,6 @@ const ProfileEdit = ({
             <InputRow>
                 <FileUpload
                     accepts={[".jpg"]}
-                    flags={["true-default"]}
                     label="Logo"
                     labelRemove="Remove"
                     labelSelect="Choose a File"
@@ -771,7 +769,6 @@ export default class OutboundProvisioning extends Component {
                 <ExpandableRow
                     key={id}
                     expanded={expanded}
-                    flags={allFlags}
                     icon={logo}
                     onEditButtonClick={this._handleEdit(provider)}
                     onToggle={this.toggleProviderExpanded(id)}

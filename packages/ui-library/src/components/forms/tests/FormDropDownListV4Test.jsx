@@ -8,7 +8,6 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import KeyBoardUtils from "../../../util/KeyboardUtils.js";
 import FormDropDownList from "../FormDropDownList";
-import { allFlags } from "../../../util/FlagUtils";
 import StateContainer from "../../utils/StateContainer";
 
 jest.mock("popper.js");
@@ -38,7 +37,6 @@ describe("FormDropDownList v4", function () {
             onToggle: jest.fn(),
             onSearch: jest.fn(),
             onValueChange: jest.fn(),
-            flags: allFlags,
         });
         return TestUtils.renderInWrapper(<FormDropDownList {...props} />);
     }
@@ -61,7 +59,6 @@ describe("FormDropDownList v4", function () {
             onToggle: jest.fn(),
             onSearch: jest.fn(),
             onValueChange: jest.fn(),
-            flags: allFlags,
         };
         mountSnapshotDataIds(<FormDropDownList {...props} />);
     });
@@ -506,7 +503,6 @@ describe("FormDropDownList v4", function () {
                         onValueChange={jest.fn()}
                         open={true}
                         groups={groups}
-                        flags={allFlags}
                     />
                 )}
             </TestUtils.StateWrapper>
@@ -536,7 +532,6 @@ describe("FormDropDownList v4", function () {
                         onValueChange={jest.fn()}
                         open={true}
                         groups={passGroups}
-                        flags={allFlags}
                     />
                 )}
             </TestUtils.StateWrapper>

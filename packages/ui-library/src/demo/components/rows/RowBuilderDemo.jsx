@@ -127,7 +127,6 @@ export default class RowBuilderDemo extends Component {
                                 [<FormTextField
                                     key="textfield"
                                     placeholder="Rows without dividing lines"
-                                    flags={["p-stateful"]}
                                 />],
                                 this.state.thirdRowIds
                             )

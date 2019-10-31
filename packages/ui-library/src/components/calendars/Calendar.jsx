@@ -10,7 +10,6 @@ import CalendarUtils from "./Utils";
 import Translator from "../../util/i18n/Translator.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
-import { flagsPropType } from "../../util/FlagUtils";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -148,7 +147,6 @@ class BaseCalendar extends React.Component {
         tight: PropTypes.bool,
 
         onValueChange: PropTypes.func,
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -160,8 +158,6 @@ class BaseCalendar extends React.Component {
         format: Translator.translate("dateformat"),
         tight: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     constructor(props) {
         super(props);
@@ -468,8 +464,6 @@ const Calendar = inStateContainer([
 
 Calendar.Views = Views;
 Calendar.FormLabel = FormLabel;
-
-Calendar.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default Calendar;
 

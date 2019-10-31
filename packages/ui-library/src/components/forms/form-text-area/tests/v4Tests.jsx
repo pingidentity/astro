@@ -28,7 +28,6 @@ describe("FormTextArea v4", function () {
                 onChange={jest.fn()}
                 onValueChange={jest.fn()}
                 onBlur={jest.fn()}
-                flags={[ "p-stateful" ]}
             />
         );
     });

@@ -12,7 +12,6 @@ import _ from "underscore";
 import Utils from "../../../util/Utils.js";
 
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
-import { flagsPropType } from "../../../util/FlagUtils";
 import { getIcon } from "../../../util/PropUtils";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 
@@ -616,9 +615,6 @@ FormTextField.FormTextFieldStateless = Stateless; // we'd rather this were a nam
 
 FormTextField.propTypes = {
     stateless: deprecatedStatelessProp,
-    flags: flagsPropType,
 };
-
-FormTextField.contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
 export default FormTextField;

@@ -8,7 +8,6 @@ import TestUtils from "../../../testutil/TestUtils";
 import KeyboardUtils from "../../../util/KeyboardUtils";
 import Popover from "../Popover";
 import _ from "underscore";
-import { allFlags } from "../../../util/FlagUtils";
 const Wrapper = TestUtils.UpdatePropsWrapper;
 
 window.__DEV__ = true;
@@ -31,7 +30,6 @@ describe("Popover", function() {
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
             <Popover
-                flags={allFlags}
                 label="BORK"
                 open
             >
@@ -43,7 +41,7 @@ describe("Popover", function() {
     it("renders open state", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} flags={allFlags}>
+                <Popover label="hello" open={true}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -69,7 +67,7 @@ describe("Popover", function() {
     it("renders closed state", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={false} flags={allFlags}>
+                <Popover label="hello" open={false}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -102,7 +100,7 @@ describe("Popover", function() {
     it("renders with top and left classes", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="top left" flags={allFlags}>
+                <Popover label="hello" open={true} placement="top left">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -123,7 +121,7 @@ describe("Popover", function() {
     it("renders with right class", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="right" flags={allFlags}>
+                <Popover label="hello" open={true} placement="right">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -139,7 +137,7 @@ describe("Popover", function() {
     it("renders with top and left placement using a portal", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="top left" flags={allFlags}>
+                <Popover label="hello" open={true} placement="top left">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -160,7 +158,7 @@ describe("Popover", function() {
     it("renders with right placement using a portal", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="right" flags={allFlags}>
+                <Popover label="hello" open={true} placement="right">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -176,7 +174,7 @@ describe("Popover", function() {
     it("renders with center placement using a portal", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} placement="center" flags={allFlags}>
+                <Popover label="hello" open={true} placement="center">
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -194,7 +192,7 @@ describe("Popover", function() {
 
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover onToggle={callback} label="hello" open={false} flags={allFlags}>
+                <Popover onToggle={callback} label="hello" open={false}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -220,7 +218,7 @@ describe("Popover", function() {
 
         ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} flags={allFlags}>
+                <Popover label="hello" open={true}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -242,7 +240,7 @@ describe("Popover", function() {
 
         ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={false} flags={allFlags}>
+                <Popover label="hello" open={false}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -259,7 +257,7 @@ describe("Popover", function() {
     it("unregister global listeners on unmount", function() {
         const component = ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover label="hello" open={true} flags={allFlags}>
+                <Popover label="hello" open={true}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -287,7 +285,7 @@ describe("Popover", function() {
 
     it("unregisters listener when transitioning from open to closed", function() {
         const component = ReactTestUtils.renderIntoDocument(
-            <Wrapper type={Popover} label="hello" open={true} flags={allFlags}>
+            <Wrapper type={Popover} label="hello" open={true}>
                 <div className="content">Popover</div>
             </Wrapper>
         );
@@ -304,7 +302,7 @@ describe("Popover", function() {
 
     it("registers listener when transitioning from closed to open", function() {
         const component = ReactTestUtils.renderIntoDocument(
-            <Wrapper type={Popover} label="hello" open={false} flags={allFlags}>
+            <Wrapper type={Popover} label="hello" open={false}>
                 <div className="content">Popover</div>
             </Wrapper>
         );
@@ -321,7 +319,7 @@ describe("Popover", function() {
 
     it("registers and unregisters listener when transitioning -- stateful", function() {
         const component = ReactTestUtils.renderIntoDocument(
-            <Wrapper type={Popover} label="hello" flags={allFlags}>
+            <Wrapper type={Popover} label="hello">
                 <div className="content">Popover</div>
             </Wrapper>
         );
@@ -356,7 +354,7 @@ describe("Popover", function() {
 
         ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover onToggle={callback} label="hello" open={true} flags={allFlags}>
+                <Popover onToggle={callback} label="hello" open={true}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>
@@ -385,7 +383,7 @@ describe("Popover", function() {
 
         ReactTestUtils.renderIntoDocument(
             <div>
-                <Popover onToggle={callback} label="hello" open={true} flags={allFlags}>
+                <Popover onToggle={callback} label="hello" open={true}>
                     <div className="content">Popover</div>
                 </Popover>
             </div>

@@ -11,7 +11,6 @@ import Anchor from "../general/Anchor";
 import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
 import ButtonGroup from "../layout/ButtonGroup";
-import { flagsPropType } from "../../util/FlagUtils";
 import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
@@ -139,7 +138,6 @@ class DetailsTooltipStateless extends React.Component {
         secondaryLabels: PropTypes.array,
         primaryLabels: PropTypes.array,
         cancelLabel: PropTypes.string,
-        flags: flagsPropType,
         width: PropTypes.oneOf(Object.values(detailsWidths)),
     };
 
@@ -421,13 +419,10 @@ class DetailsTooltip extends React.Component {
 
     static propTypes = {
         stateless: deprecatedStatelessProp,
-        flags: flagsPropType,
     };
 
     static tooltipPlacements = tooltipPlacements;
     static DetailsTooltipStateless = DetailsTooltipStateless;
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     componentDidMount() {
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws

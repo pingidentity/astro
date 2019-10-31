@@ -33,14 +33,12 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../../testutil/TestUtils";
 import I18nPhoneInput, { I18nPhoneInputStateless } from "../v2";
 import { mount } from "enzyme";
-import { allFlags } from "../../../../../util/FlagUtils";
 
 describe.skip("I18nPhoneInput", function () {
     const defaults = {
         onSearch: jest.fn(),
         onToggle: jest.fn(),
         onValueChange: jest.fn(),
-        flags: allFlags
     };
 
     function getComponent (props) {

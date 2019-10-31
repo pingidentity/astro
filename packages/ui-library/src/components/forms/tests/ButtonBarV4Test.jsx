@@ -11,7 +11,6 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import ButtonBar from "../ButtonBar";
 import _ from "underscore";
-import { allFlags } from "../../../util/FlagUtils";
 
 describe("ButtonBar", function () {
 
@@ -29,7 +28,7 @@ describe("ButtonBar", function () {
             onSave: jest.fn(),
             saveText: saveText
         });
-        return ReactTestUtils.renderIntoDocument(<ButtonBar {...opts} flags={allFlags} />);
+        return ReactTestUtils.renderIntoDocument(<ButtonBar {...opts} />);
     }
 
     function getSaveButton (component) {
@@ -307,7 +306,7 @@ describe("ButtonBar", function () {
     });
 
     it("renders a cancel button in place of a discard button when the flag is set", function() {
-        const component = getComponent({ onDiscard: jest.fn(), flags: [ "fix-discard-button" ] });
+        const component = getComponent({ onDiscard: jest.fn() });
 
         const cancelBtn = TestUtils.findRenderedDOMNodeWithClass(component, "cancel");
         const discardBtn = getDiscardButton(component);

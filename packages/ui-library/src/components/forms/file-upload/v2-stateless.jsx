@@ -6,7 +6,6 @@ import { isString } from "underscore";
 import FormLabel from "../FormLabel";
 import FormError from "../FormError";
 import Button from "../../buttons/Button";
-import { flagsPropType } from "../../../util/FlagUtils";
 import { withFocusOutline } from "../../../util/KeyboardUtils";
 import { getClickableA11yProps } from "../../../util/PropUtils";
 
@@ -51,11 +50,8 @@ export default class extends Component {
             PropTypes.string,
         ]),
 
-        flags: flagsPropType,
         required: PropTypes.bool,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     // Testing this would require testing that the file input was clicked,
     // which Jest doesn't have a good way of doing. We can't really test an
