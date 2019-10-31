@@ -83,8 +83,7 @@ const inputHeights = {
 * @param {string} [name]
 *     The name attribute for the input.
 * @param {string} [originalValue]
-*     The original value of the field. Also used for handling undo when stateless=false as
-*     the value to set the field to if the undo icon is clicked - if not specified, no undo control will be shown.
+*     The original value of the field.
 * @param {string} [placeholder]
 *     Placeholder text to show as the field's label.
 * @param {number} [rows]
@@ -109,7 +108,7 @@ const inputHeights = {
 * @param {boolean} [required=false]
 *     If true, the user must select a value for this field.
 * @param {boolean} [showUndo=false]
-*     Whether or not to display an undo option when field is edited. Only used when stateless=true.
+*     Whether or not to display an undo option when field is edited.
 * @param {boolean} [useAutocomplete=false]
 *     Whether or not the field will support autocomplete.
 * @param {FormTextArea~onBlur} [onBlur]
@@ -121,7 +120,7 @@ const inputHeights = {
 *     Callback to be triggered when the field changes. It will receive the component's value.
 *     The onChange callback will also be triggered.
 * @param {FormTextArea~onUndo} [onUndo]
-*     Callback to be triggered when the 'undo' icon is clicked. Only used when stateless=true.
+*     Callback to be triggered when the 'undo' icon is clicked.
 *
 * @param {module:constants/FormFieldConstants.FormFieldTypes} [mode=FormFieldTypes.EDIT]
 *     How the field will be shown: FormFieldTypes.EDIT or FormFieldTypes.READ_ONLY.

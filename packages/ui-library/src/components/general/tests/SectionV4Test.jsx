@@ -55,7 +55,6 @@ describe("Section v4", function () {
     it("Stateful: renders collapsed state", function () {
         const view = getComponent({
                 children: <div data-id="iShouldBeHidden">My Content</div>,
-                stateless: false
             }),
             container = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]),
             title = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"] + "-title"),
@@ -88,7 +87,6 @@ describe("Section v4", function () {
         const view = getComponent({
                 children: <div data-id="iShouldBeVisible">My Content</div>,
                 expanded: true,
-                stateless: false,
                 titleValue: "some value"
             }),
             container = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]),
@@ -109,7 +107,6 @@ describe("Section v4", function () {
                 children: <div data-id="iShouldBeVisible">My Content</div>,
                 className: "extra",
                 expanded: true,
-                stateless: false
             }),
             root = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]);
 
@@ -169,7 +166,6 @@ describe("Section v4", function () {
     it("Stateful: renders the right-side/row-accessories text content", function () {
         const accessoriesContent = "Some text",
             view = getComponent({
-                stateless: false,
                 accessories: accessoriesContent
             }),
             accessories = TestUtils.findRenderedDOMNodeWithDataId(
@@ -185,7 +181,6 @@ describe("Section v4", function () {
         const accessoriesText = "Some Content",
             accessoriesContent = (<span>{accessoriesText}</span>),
             view = getComponent({
-                stateless: false,
                 accessories: accessoriesContent
             }),
             accessories = TestUtils.findRenderedDOMNodeWithDataId(
@@ -199,7 +194,6 @@ describe("Section v4", function () {
 
     it("does not render the title colon when the title-value is not defined", function () {
         const view = getComponent({
-                stateless: false
             }),
             title = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"] + "-title"),
             titleValue = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"] + "-title-value");

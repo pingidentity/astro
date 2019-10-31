@@ -22,7 +22,6 @@ const TranslationPicker = (props) => {
         <List
             {...props}
             className="translation-picker"
-            stateless={false}
             label={<TranslationIcon label={props.label} data-id={props["data-id"]}/>}
         />
     );

@@ -76,7 +76,7 @@ describe("RockerButton v4", function () {
     it("stateful: will trigger onValueChange callback when selection changes", function () {
         const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} labels={labelsArray} onValueChange={callback} />
+            <RockerButton labels={labelsArray} onValueChange={callback} />
         );
         const labels = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
         const testIndex = 2;
@@ -91,7 +91,7 @@ describe("RockerButton v4", function () {
     it("steteless: will not trigger callbacks if not given", function () {
         const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={true} labels={labelsArray} />);
+            <RockerButton labels={labelsArray} />);
         const labels = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
 
         ReactTestUtils.Simulate.click(labels[2], {});
@@ -101,7 +101,7 @@ describe("RockerButton v4", function () {
     it("stateful: will not trigger callbacks if not given", function () {
         const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} labels={labelsArray} />);
+            <RockerButton labels={labelsArray} />);
         const labels = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
 
         ReactTestUtils.Simulate.click(labels[2], {});
@@ -138,7 +138,7 @@ describe("RockerButton v4", function () {
     it("disabled will not do anything for button clicks", function () {
         const callback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
-                <RockerButton stateless={false} disabled={true} labels={labelsArray} />),
+                <RockerButton disabled={true} labels={labelsArray} />),
             labels = TestUtils.scryRenderedDOMNodesWithTag(component, "button"),
             container = ReactDOM.findDOMNode(component);
 

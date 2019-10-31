@@ -25,7 +25,6 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton title="Test Drop Down"
-                stateless={true}
                 onValueChange={callback}
                 options={menu}
                 onToggle={jest.fn()}
@@ -51,7 +50,6 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={true}
                 onValueChange={callback}
                 options={menu}
@@ -79,7 +77,6 @@ describe("DropDownButton", function () {
         var dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
                 className="extra"
-                stateless={true}
                 open={true}
                 onValueChange={callback}
                 options={menu}
@@ -103,7 +100,6 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={false}
                 onValueChange={jest.fn()}
                 onToggle={callback}
@@ -248,7 +244,6 @@ describe("DropDownButton", function () {
 
         TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={true}
                 options={menu}
                 onToggle={jest.fn()} />
@@ -269,7 +264,6 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={true}
                 options={menu}
                 onToggle={jest.fn()} />
@@ -293,7 +287,6 @@ describe("DropDownButton", function () {
 
         TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={true}
                 onValueChange={jest.fn()}
                 options={menu}
@@ -324,7 +317,6 @@ describe("DropDownButton", function () {
 
         TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={false}
                 onValueChange={jest.fn()}
                 options={menu}
@@ -357,7 +349,6 @@ describe("DropDownButton", function () {
 
         TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={true}
                 onValueChange={jest.fn()}
                 options={menu}
@@ -385,7 +376,6 @@ describe("DropDownButton", function () {
 
         TestUtils.renderInWrapper(
             <DropDownButton label="Test Drop Down"
-                stateless={true}
                 open={false}
                 onValueChange={jest.fn()}
                 options={menu}

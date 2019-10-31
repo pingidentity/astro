@@ -60,7 +60,7 @@ const isValid = (value, enforceRange, min, max) => {
  *     The name attribute for the input.
  *
  * @param {string|number} [value=""]
- *     Current text field value used when stateless=true.
+ *     Current text field value used.
  *     When not provided, the component will manage this value.
  * @param {string|number} [initialValue=""]
  *     Initial value (also to be used in conjuction with the undo button).
@@ -82,13 +82,13 @@ const isValid = (value, enforceRange, min, max) => {
  * @param {boolean} [maskValue=false]
  *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
  * @param {boolean} [reveal=false]
- *     If true, will remove value masking. Use only when stateless=true.
+ *     If true, will remove value masking.
  *     When not provided, the component will manage this value.
  * @param {boolean} [showReveal=false]
  *    Whether or not to display a reveal option to remove value masking.
  *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
  * @param {FormTextField~onToggleReveal} [onToggleReveal]
- *    Callack to be triggered when the 'reveal' button is clicked. Use only when stateless=true.
+ *    Callack to be triggered when the 'reveal' button is clicked.
  *
  * @param {boolean} [showSave=false]
  *     Whether or not to display a save option.

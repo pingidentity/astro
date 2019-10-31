@@ -222,7 +222,6 @@ class GridStateless extends React.Component {
         allColumnHeaders.push(
             <th className="column-pg" data-id="paginationColumn" key="paginationColumn">
                 <ColumnPagination
-                    stateless={true}
                     perPage = {this.props.columnsPerPage}
                     page = {this.props.currentPage}
                     total = {this._getPageableColumns()}

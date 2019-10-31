@@ -257,7 +257,7 @@ describe("FormIntegerField", function () {
 
     it("does trigger onValueChange for empty value in stateful component", function () {
         var component = TestUtils.renderInWrapper(
-            <FormIntegerField onValueChange={callback} stateless={false} />
+            <FormIntegerField onValueChange={callback} />
         );
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "" } } );
@@ -270,7 +270,6 @@ describe("FormIntegerField", function () {
         var component = TestUtils.renderInWrapper(
             <FormIntegerField
                 className="added"
-                stateless={false}
             />
         );
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "added")).not.toBeNull();

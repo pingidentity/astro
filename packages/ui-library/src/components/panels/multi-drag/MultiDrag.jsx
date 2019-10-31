@@ -139,10 +139,6 @@ function convertFilteredIndexes (columns, desc) {
  *    To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *    CSS classes to set on the top-level HTML container.
- * @param {boolean} [stateless]
- *     To enable the component to be externally managed. True will relinquish control to the component's owner.
- *     False or not specified will cause the component to manage state internally.
- *     stateless=false will handle filtering and moving in addition to executing all callbacks if specified.
  *
  * @param {MultiDrag~ColumnData[]} columns
  *    The data representing the columns in the component.
@@ -163,7 +159,6 @@ function convertFilteredIndexes (columns, desc) {
  * @param {string[]} [filterFieldNames=[]]
  *    An array of field names of the row properties to use in a search where array index corresponds to each column index.
  *    If unset for any column index, search will use all row properties that have a string representation for that column.
- *    Only used when stateless=false.
  *
  * @param {boolean} [autoFocus=false]
  *     Whether or not to auto-focus the element.
@@ -178,17 +173,13 @@ function convertFilteredIndexes (columns, desc) {
  *    function is passed all of the props of the column, including its handlers.
  *
  * @param {MultiDrag~onSearch} onSearch
- *    Callback to be triggered when a column is searched. When stateless=false, will be executed after search has
- *    completed and the component re-renders.
+ *    Callback to be triggered when a column is searched.
  * @param {MultiDrag~onDragDrop} onDrag
- *    Callback to be triggered when a row is dragged. When stateless=false, will be executed after drag has
- *    completed and the component re-renders.
+ *    Callback to be triggered when a row is dragged.
  * @param {MultiDrag~onDragDrop} onDrop
- *    Callback to be triggered when a row id dropped. When stateless=false, will be executed after drop has
- *    completed and the component re-renders.
+ *    Callback to be triggered when a row id dropped.
  * @param {MultiDrag~onCancel} onCancel
- *    Callback to be triggered when a drag event ends. When stateless=false, will be executed after cancel has
- *    completed and the component re-renders.
+ *    Callback to be triggered when a drag event ends.
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToTop]
  *    Callback to be triggered when the list is scrolled to the top. Can be used to fetch more data.
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToBottom]

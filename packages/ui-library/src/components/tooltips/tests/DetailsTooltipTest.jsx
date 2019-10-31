@@ -125,7 +125,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.fn();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true} title="Title" label="Action" open={false} onToggle={callback}>
+            <DetailsTooltip title="Title" label="Action" open={false} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -143,7 +143,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.fn();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true} title="Title" label="Action" open={true}
+            <DetailsTooltip title="Title" label="Action" open={true}
                 onToggle={callback} showClose={false} hideOnClick={true}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
@@ -162,7 +162,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.fn();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
+            <DetailsTooltip title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -179,7 +179,7 @@ describe("DetailsTooltip", function () {
     it("when stateless, close method doesn't fire an error", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true} title="Title" label="Action" open={true}>
+            <DetailsTooltip title="Title" label="Action" open={true}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -191,7 +191,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.fn();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true}
+            <DetailsTooltip
                 title="Title" label="Action" open={false} onToggle={callback} disabled={true}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
@@ -249,7 +249,7 @@ describe("DetailsTooltip", function () {
 
 
         ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
+            <DetailsTooltip title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -271,7 +271,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.fn();
 
         ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
+            <DetailsTooltip title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -294,7 +294,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.fn();
 
         ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
+            <DetailsTooltip title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -316,7 +316,7 @@ describe("DetailsTooltip", function () {
     it("unregister listener when transitioning from open to closed", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Wrapper type={DetailsTooltip}
-                stateless={true} title="Title" label="Action" open={true} onToggle={jest.genMockFn}>
+                title="Title" label="Action" open={true} onToggle={jest.genMockFn}>
                 <p>what ever callout content is</p>
             </Wrapper>);
 

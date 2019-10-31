@@ -15,7 +15,6 @@ describe("RockerButton", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             onValueChange: jest.fn(),
-            stateless: true,
             labels: labelsArray,
             className: "myRocker"
         });
@@ -44,7 +43,7 @@ describe("RockerButton", function () {
     it("stateless: will not trigger callbacks if not given", function () {
         const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={true} labels={labelsArray} />);
+            <RockerButton labels={labelsArray} />);
         const buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
 
         ReactTestUtils.Simulate.click(buttons[2], {});
@@ -54,7 +53,7 @@ describe("RockerButton", function () {
     it("stateful: will not trigger callbacks if not given", function () {
         const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} labels={labelsArray} />);
+            <RockerButton labels={labelsArray} />);
         const buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
 
         ReactTestUtils.Simulate.click(buttons[2], {});
@@ -77,7 +76,7 @@ describe("RockerButton", function () {
     it("disabled will not do anything for button clicks", function () {
         const callback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
-                <RockerButton stateless={false} disabled={true} labels={labelsArray} />),
+                <RockerButton disabled={true} labels={labelsArray} />),
             buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button"),
             container = ReactDOM.findDOMNode(component);
 

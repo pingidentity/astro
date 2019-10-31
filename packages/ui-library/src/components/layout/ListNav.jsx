@@ -32,7 +32,6 @@ import classnames from "classnames";
 *               title="Add Language"
 *               buttonLabel="Add"
 *               cancelText="Cancel"
-*               stateless={false}
 *           >
 *               <FormDropDownList
 *                   label="Language"

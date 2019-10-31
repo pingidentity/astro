@@ -170,21 +170,4 @@ describe("StateContainer", function () {
         instance.find("a").simulate("click");
         expect(onClick).toHaveBeenCalledWith("test val", undefined);
     });
-
-    it("fires a warning when stateless is set to false and a prop is defined", () => {
-        console.warn = jest.fn();
-        const Component = props => <StateContainer
-            stateDefs={[
-                {
-                    name: "aThing",
-                }
-            ]}
-            passedProps={props}
-        >
-            {passed => <TestComponent {...passed} />}
-        </StateContainer>;
-
-        mount(<Component aThing="this thing" stateless={false} />);
-        expect(console.warn).toBeCalled();
-    });
 });

@@ -41,7 +41,6 @@ import _ from "underscore";
  *        <ExpandableRow
  *            title="Expanded Row with Line Chart"
  *            subtitle="Row Subtitle"
- *            stateless={false}
  *            expanded={false}
  *            onToggle={() => {}}
  *            rowAccessories={[
@@ -63,7 +62,7 @@ import _ from "underscore";
  *                        { id: 6, value: 1 },
  *                    ]}
  *                />,
- *                <Toggle key="toggle" stateless={false} />
+ *                <Toggle key="toggle" />
  *            ]}
  *        />
  *     </ExpandableRow.SimpleWrapper>

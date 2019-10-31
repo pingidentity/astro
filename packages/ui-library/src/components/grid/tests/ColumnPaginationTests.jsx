@@ -14,7 +14,7 @@ describe("ColumnPagination", function () {
 
     function render (props) {
         return ReactTestUtils.renderIntoDocument(
-            <ColumnPagination stateless={true} data-id="ColumnPagination" {...props} />
+            <ColumnPagination data-id="ColumnPagination" {...props} />
         );
     }
 

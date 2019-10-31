@@ -127,7 +127,6 @@ class FormTimeField extends React.Component {
             <FormTextField {...this.props}
                 className={this.props.className}
                 type={this.props.type || Types.TIME}
-                stateless={true}
                 maskValue={false}
                 showSave={false}
                 showUndo={false}

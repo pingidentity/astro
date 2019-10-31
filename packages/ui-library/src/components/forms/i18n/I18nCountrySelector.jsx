@@ -52,7 +52,7 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 *     State of the open/closed dropdown menu.
 *     When not provided, the component will manage this value.
 * @param {I18nCountrySelector~onToggle} [onToggle]
-*     Callback to be triggered when open/close state changes. Used only when stateless=true.
+*     Callback to be triggered when open/close state changes.
 * @param {number} [searchIndex]
 *     Index of searched element if found
 *     When not provided, the component will manage this value.

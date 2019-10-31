@@ -94,7 +94,7 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  *       color={this.props.data.enrollmentBgColor}
  *       onToggle={this._onColorPickerToggle}
  *       open={this.state.colorPickerOpen}
- *       stateless={true} />
+ *       />
  */
 
 class Stateless extends React.Component {

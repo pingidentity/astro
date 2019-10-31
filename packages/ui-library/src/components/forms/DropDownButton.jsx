@@ -36,7 +36,7 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  * @param {DropDownButton~onValueChange} [onValueChange]
  *     Callback to be triggered when the selection changed.
  * @param {DropDownButton~onToggle} [onToggle]
- *     Callback to be triggered when open/closed state changed. Used only when stateless=true.
+ *     Callback to be triggered when open/closed state changed.
  * @param {boolean} [open=false]
  *     Boolean state of open/closed menu.
  *     When not provided, the component will manage this value.
@@ -56,7 +56,7 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  *              options={optionsMenu}
  *      />
  *
- *      <DropDownButton stateless={true}
+ *      <DropDownButton
  *          data-id="drop-down-menu"
  *          title="My menu"
  *          onValueChange={this._changeARule}

@@ -24,7 +24,6 @@ describe("FormTextArea v4", function () {
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
             <FormTextArea
-                stateless={true}
                 onChange={jest.fn()}
                 onValueChange={jest.fn()}
                 onBlur={jest.fn()}

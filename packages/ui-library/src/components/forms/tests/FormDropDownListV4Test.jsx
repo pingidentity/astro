@@ -495,7 +495,6 @@ describe("FormDropDownList v4", function () {
             >
                 {({ options: passOptions }) => (
                     <FormDropDownList
-                        stateless={true}
                         options={passOptions}
                         selectedOption={options[0]}
                         onToggle={jest.fn()}
@@ -524,7 +523,6 @@ describe("FormDropDownList v4", function () {
             >
                 {({ groups: passGroups }) => (
                     <FormDropDownList
-                        stateless={true}
                         options={options}
                         selectedOption={options[0]}
                         onToggle={jest.fn()}

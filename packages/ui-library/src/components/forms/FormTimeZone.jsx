@@ -190,7 +190,6 @@ var getZoneNameDisplayValue = function (zoneName) {
 *
 * @example
 *     <FormTimeZone
-*         stateless={true}
 *         open={this.state.open}
 *         searchString={this.state.searchString}
 *         value={this.state.value}

@@ -199,7 +199,6 @@ describe("LinkDropDownList v4", function () {
         var component = TestUtils.renderInWrapper(
             <LinkDropDownList
                 data-id={componentId}
-                stateless
                 open
                 options={options}
                 bottomPanel={<a href="#">Link</a>}
