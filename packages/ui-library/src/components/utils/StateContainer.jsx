@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Utils from "../../util/Utils";
-import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 
 const mapNothing = () => ({});
 
