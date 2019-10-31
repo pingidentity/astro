@@ -647,10 +647,7 @@ label {
             &:hover {
                 text-decoration: none;
             }
-            &.icon-view {
-                top: 14px;
-                font-size: 11px;
-            }
+            &.icon-view,
             &.icon-view-hidden {
                 top: 9px;
                 font-size: 20px;
