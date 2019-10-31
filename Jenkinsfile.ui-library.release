@@ -18,7 +18,7 @@ pipeline {
     }
     stage('version, tag and commit') {
       steps {
-        dir ("${env.WORKSPACE}/packages/end-user") {
+        dir ("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             script {
