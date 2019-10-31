@@ -305,7 +305,6 @@ class DemoApp extends React.Component {
                 oneSectionOnly={true}
                 headerBarProps={_.extend(this.props.header, {
                     siteLogo: "uilib",
-                    additionalContent: "v4 beta",
                     tree: [
                         {
                             id: "help",
