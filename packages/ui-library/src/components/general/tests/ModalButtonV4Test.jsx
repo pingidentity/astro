@@ -332,7 +332,6 @@ describe("ModalButtonTest v4", function () {
             activatorContent: linkCallback,
             onOpen: jest.fn(),
             onClose: jest.fn().mockReturnValue(true),
-            stateless: true,
             expanded: true,
             closeOnBgClick: false
         });
@@ -347,7 +346,6 @@ describe("ModalButtonTest v4", function () {
             activatorContent: linkCallback,
             onOpen: jest.fn(),
             onClose: jest.fn().mockReturnValue(true),
-            stateless: true,
             expanded: true,
             closeOnBgClick: true
         });

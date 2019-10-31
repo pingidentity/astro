@@ -58,7 +58,6 @@ class ConditionalFieldsetDemo extends React.Component {
                             label="Stateless version"
                             description="Sample Description"
                             onValueChange={this._onValueChange}
-                            stateless
                             type={this.state.type}>
                             <div title="Option 1">Option 1 content</div>
                             <div title="Option 2">Option 2 content</div>

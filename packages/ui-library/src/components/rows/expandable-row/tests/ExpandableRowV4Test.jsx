@@ -32,7 +32,6 @@ describe("ExpandableRow v4", function() {
 
     function getComponent(opts) {
         opts = _.defaults(opts || {}, {
-            stateless: true,
             title: <div>Test Title</div>,
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
@@ -46,7 +45,6 @@ describe("ExpandableRow v4", function() {
 
     function getTwoComponents(opts, opts2) {
         const defaults = {
-            stateless: true,
             title: <div>Test Title</div>,
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
@@ -464,7 +462,6 @@ describe("ExpandableRow v4", function() {
             expanded: true,
             showDelete: true,
             confirmDelete: true,
-            stateless: false
         });
 
         const deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");
@@ -487,7 +484,6 @@ describe("ExpandableRow v4", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true,
-            stateless: false
         });
 
         const deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");

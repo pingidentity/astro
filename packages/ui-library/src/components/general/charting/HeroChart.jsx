@@ -222,7 +222,6 @@ export default class HeroChart extends Component {
         const rockerButtonDefaults = {
             "data-id": `${dataId}-range-selector`,
             className: "hero-chart__rocker",
-            stateless: false,
             type: RockerButton.rockerTypes.CHART,
             labels,
             onValueChange: onValueChange,

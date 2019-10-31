@@ -131,7 +131,6 @@ describe("LinkDropDownList", function () {
     it("Renders the stateful component", function () {
         var clickIndex = 1,
             component = getComponent({
-                stateless: false,
                 closeOnSelection: true
             }),
             label = getLabel(component),
@@ -199,7 +198,6 @@ describe("LinkDropDownList", function () {
         var component = TestUtils.renderInWrapper(
             <LinkDropDownList
                 data-id={componentId}
-                stateless
                 open
                 options={options}
                 bottomPanel={<a href="#">Link</a>}

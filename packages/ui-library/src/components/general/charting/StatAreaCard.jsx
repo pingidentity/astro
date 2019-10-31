@@ -192,7 +192,6 @@ class StatAreaCard extends React.Component {
                 "dashboard-card__range-selector",
                 "stat-area-card__range-selector"
             ),
-            stateless: false,
             type: RockerButton.rockerTypes.CHART_SMALL,
             labels: [],
             selected: this.props.selected,

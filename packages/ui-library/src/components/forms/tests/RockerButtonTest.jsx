@@ -15,7 +15,6 @@ describe("RockerButton", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             onValueChange: jest.fn(),
-            stateless: true,
             labels: labelsArray,
             className: "myRocker"
         });

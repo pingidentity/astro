@@ -396,7 +396,6 @@ export default class ColumnSelectorDemo extends Component {
                                 open={this.state.filterOpen}
                                 options={filterOptions}
                                 selectedOption={this.state.selectedFilter}
-                                stateless
                             />
                         </div>
                     }

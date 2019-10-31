@@ -32,7 +32,6 @@ describe("ExpandableRow", function() {
 
     function getComponent(opts) {
         opts = _.defaults(opts || {}, {
-            stateless: true,
             title: <div>Test Title</div>,
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
@@ -46,7 +45,6 @@ describe("ExpandableRow", function() {
 
     function getTwoComponents(opts, opts2) {
         const defaults = {
-            stateless: true,
             title: <div>Test Title</div>,
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
@@ -254,7 +252,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateless: no exception is thrown when onToggle is null", function() {
-        var component = getComponent({ stateless: false, onToggle: null });
+        var component = getComponent({ onToggle: null });
         var expandButton = getExpandButton(component);
 
         ReactTestUtils.Simulate.click(expandButton);
@@ -296,7 +294,7 @@ describe("ExpandableRow", function() {
 
 
     it("stateful: renders the row as expanded if expanded prop is set to true", function() {
-        var component = getComponent({ stateless: false, expanded: true });
+        var component = getComponent({ expanded: true });
         var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         var content = TestUtils.findRenderedDOMNodeWithDataId(component, "content");
 
@@ -439,7 +437,6 @@ describe("ExpandableRow", function() {
             expanded: true,
             showDelete: true,
             confirmDelete: true,
-            stateless: false
         });
 
         var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");
@@ -462,7 +459,6 @@ describe("ExpandableRow", function() {
         var component = getComponent({
             expanded: true,
             showDelete: true,
-            stateless: false
         });
 
         var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");
@@ -471,8 +467,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should show delete confirm dialog", function() {
-        var component = getComponent({
-            stateless: false,
+        var component = getComponent({,
             expanded: true,
             showDelete: true,
             confirmDelete: true
@@ -571,8 +566,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should trigger onDelete callback when confirmDelete is false", function() {
-        var component = getComponent({
-            stateless: false,
+        var component = getComponent({,
             expanded: true,
             showDelete: true,
             confirmDelete: false,
@@ -612,8 +606,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should trigger onEditButtonClick callback on edit-btn click", function() {
-        var component = getComponent({
-            stateless: false,
+        var component = getComponent({,
             expanded: true,
             showEdit: true,
             onEditButtonClick: jest.fn()
@@ -628,8 +621,7 @@ describe("ExpandableRow", function() {
 
     it("fires reorder event from input when in ordering mode", function() {
         const callback = jest.fn();
-        const component = getComponent({
-            stateless: false,
+        const component = getComponent({,
             ordering: {
                 position: 3,
                 total: 10,
@@ -657,8 +649,7 @@ describe("ExpandableRow", function() {
 
     it("fires reorder event from up/down keys when in ordering mode", function() {
         const callback = jest.fn();
-        let component = getComponent({
-            stateless: false,
+        let component = getComponent({,
             ordering: {
                 position: 3,
                 total: 10,
@@ -675,8 +666,7 @@ describe("ExpandableRow", function() {
         expect(callback).lastCalledWith(3, 2);
 
         // lower bound
-        component = getComponent({
-            stateless: false,
+        component = getComponent({,
             ordering: {
                 position: 0,
                 total: 10,
@@ -689,8 +679,7 @@ describe("ExpandableRow", function() {
         expect(callback).lastCalledWith(0, 0);
 
         // upper bound
-        component = getComponent({
-            stateless: false,
+        component = getComponent({,
             ordering: {
                 position: 9,
                 total: 10,
@@ -705,8 +694,7 @@ describe("ExpandableRow", function() {
 
     it("fires no events from other keys when in ordering mode", function() {
         const callback = jest.fn();
-        const component = getComponent({
-            stateless: false,
+        const component = getComponent({,
             ordering: {
                 position: 3,
                 total: 10,
@@ -723,8 +711,7 @@ describe("ExpandableRow", function() {
 
     it("calls drag handler for input when in ordering mode", function() {
         const callback = jest.fn();
-        const component = getComponent({
-            stateless: false,
+        const component = getComponent({,
             ordering: {
                 position: 3,
                 total: 10,
@@ -740,7 +727,7 @@ describe("ExpandableRow", function() {
         const callback = jest.fn();
         const root = getTwoComponents(
             {
-                stateless: false,
+,
                 ordering: {
                     position: 3,
                     total: 10,
@@ -748,7 +735,7 @@ describe("ExpandableRow", function() {
                 }
             },
             {
-                stateless: false,
+,
                 ordering: {
                     position: 6,
                     total: 10,
@@ -850,8 +837,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should fire onReorder with 3, 3", function () {
-        const component = getComponent({
-            stateless: false,
+        const component = getComponent({,
             ordering: {
                 position: 3,
                 total: 10,

@@ -212,9 +212,6 @@ const FilterControls = ({
             formSearchBoxProps={{
                 onValueChange: onSearchChange,
                 placeholder: showFilters ? "Search" : "Search or SCIM Query",
-                textFieldProps: {
-                    stateless: true,
-                },
                 queryString: search,
                 iconName: isSCIM ? "code" : "search",
                 monospaced: isSCIM,

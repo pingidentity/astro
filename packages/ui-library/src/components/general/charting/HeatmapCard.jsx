@@ -231,7 +231,6 @@ class HeatMapCard extends React.Component {
             "data-id": `${dataId}-range-selector`,
             className: "heatmap-card__range-selector",
             type: RockerButton.rockerTypes.CHART,
-            stateless: false,
             labels: ["1W", "1M", "3M", "6M"],
             selected: null,
             onValueChange: this.props.onValueChange,
