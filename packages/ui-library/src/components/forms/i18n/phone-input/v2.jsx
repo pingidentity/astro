@@ -67,7 +67,7 @@ import { deprecatedStatelessProp } from "../../../../util/DeprecationUtils";
 *     State of the open/closed dropdown menu.
 *     When not provided, the component will manage this value.
 * @param {I18nPhoneInput~onToggle} [onToggle]
-*     Callback to be triggered when open/close state changes. Used only when stateless=true.
+*     Callback to be triggered when open/close state changes.
 *
 * @param {number} [searchIndex]
 *     The index of the country that was just searched to enable highlighing.

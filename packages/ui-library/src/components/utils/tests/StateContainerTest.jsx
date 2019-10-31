@@ -184,7 +184,7 @@ describe("StateContainer", function () {
             {passed => <TestComponent {...passed} />}
         </StateContainer>;
 
-        mount(<Component aThing="this thing" stateless={false} />);
+        mount(<Component aThing="this thing" />);
         expect(console.warn).toBeCalled();
     });
 });

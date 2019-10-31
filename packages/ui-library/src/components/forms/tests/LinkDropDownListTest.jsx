@@ -165,7 +165,6 @@ describe("LinkDropDownList", function () {
         var component = TestUtils.renderInWrapper(
             <LinkDropDownList
                 data-id={componentId}
-                stateless={false}
                 closeOnSelection={false}
                 label={labelText}
                 onClick={jest.fn()}
@@ -180,7 +179,6 @@ describe("LinkDropDownList", function () {
         var component = TestUtils.renderInWrapper(
             <LinkDropDownList
                 data-id={componentId}
-                stateless={false}
                 closeOnSelection={false}
                 label={labelText}
                 onClick={jest.fn()}

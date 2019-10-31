@@ -280,7 +280,6 @@ module.exports = class extends React.Component {
                             className="row-selector__category-selector"
                             open={showCategoryList}
                             label={selectedCategory.label}
-                            stateless={true}
                             onClick={this._handleCategoryClick}
                             onToggle={this._handleCategoryToggle}
                             options={categoryOptions}

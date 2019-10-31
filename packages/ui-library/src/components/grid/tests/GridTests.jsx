@@ -263,7 +263,7 @@ describe("Grid", function () {
 
     it("should have TextField in cells", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
+            <Grid rows={rows} >
                 <Grid.Column headerText="Email" field="email" >
                     <TextFieldCell onGridCellAction={jest.fn()} />
                 </Grid.Column>
@@ -282,7 +282,7 @@ describe("Grid", function () {
     it("triggers onGridCellAction on TextField cell change", function () {
         var callback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
+            <Grid rows={rows} >
                 <Grid.Column headerText="Email" field="email" >
                     <TextFieldCell onGridCellAction={callback} />
                 </Grid.Column>
@@ -298,7 +298,7 @@ describe("Grid", function () {
 
     it("should have Button in cells", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
+            <Grid rows={rows} >
                 <Grid.Column headerText="Email" field="email" >
                     <ButtonCell onGridCellAction={jest.fn()} />
                 </Grid.Column>
@@ -317,7 +317,7 @@ describe("Grid", function () {
     it("triggers onGridCellAction on button cell click", function () {
         var callback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
+            <Grid rows={rows} >
                 <Grid.Column headerText="Email" field="email" >
                     <ButtonCell data-id="cellWithonGridCellAction" onGridCellAction={callback} />
                 </Grid.Column>

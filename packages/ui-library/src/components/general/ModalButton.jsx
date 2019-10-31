@@ -37,11 +37,9 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  * @param {function} [onOpen]
  *     Callback to be triggered when the activator is clicked and the modal is about to open.
  *     If this function returns false, the opening will be prevented.
- *     It is required when stateless=true.
  * @param {function} [onClose]
  *     Callback to be triggered when the modal is closing by clicking the close modal link.
  *     If this function returns false then closing will be prevented.
- *     It is required when stateless=true.
  * @param {boolean} [closeOnBgClick]
  *     When true, the onClose callback is triggered when modal bg is clicked. Note that the onClose callback is also
  *     required for the stateless version of this component
@@ -87,16 +85,16 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  *
  * @example
  *     <ModalButton modalTitle="My wonderful modal"
- *             stateless={true} expanded={this.state.expanded}
+ *             expanded={this.state.expanded}
  *             onOpen={this._onOpen} onClose={this._onCloseModal}>
  *         <p>Thank you for opening this modal</p>
  *     </ModalButton>
  * @example
- *     <ModalButton stateless={false} initiallyExpanded={true} expanded={false}>
+ *     <ModalButton initiallyExpanded={true} expanded={false}>
  *         <p>test</p>
  *     </ModalButton>
  * @example
- *     <ModalButton stateless={false} expanded={false}
+ *     <ModalButton expanded={false}
  *             onOpen={this._openModal} onClose={this._closeModal}
  *             type={Modal.Type.DIALOG} >
  *         <p>test</p>

@@ -391,7 +391,6 @@ class Stateless extends React.Component {
                             {this.props.labelHideUnselected}
                             <Toggle data-id="hide-unchecked"
                                 className="small"
-                                stateless={true}
                                 onToggle={this._onHideUncheckedToggle}
                                 toggled={this.props.hideUnchecked}/>
                         </div>

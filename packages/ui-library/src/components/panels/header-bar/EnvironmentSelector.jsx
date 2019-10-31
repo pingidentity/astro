@@ -84,7 +84,6 @@ class EnvironmentSelector extends React.Component {
 
         return (
             <LinkDropDownList
-                stateless={true}
                 closeOnClick={true}
                 data-id={this.props["data-id"]}
                 label={

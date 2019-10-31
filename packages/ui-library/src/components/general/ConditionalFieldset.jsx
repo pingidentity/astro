@@ -191,11 +191,9 @@ class ConditionalFieldsetStateless extends React.Component {
  *     CSS class to set on the FormDropDownList
  * @param {string} [name]
  *    Name attribute for the input.
- * @param {ConditionalFieldset~onValueChange} onValueChange Callback to be triggered when the selection is changed. If
- *     using the stateless=false option this is not required.
+ * @param {ConditionalFieldset~onValueChange} onValueChange Callback to be triggered when the selection is changed.
  * @param {number} selectedIndex
- *     The index of the currently selected option. If using the stateless=false option this is not required.
- *     When not provided, the component will manage this value.
+ *     The index of the currently selected option. When not provided, the component will manage this value.
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally. If True, onValueChange and
@@ -215,7 +213,6 @@ class ConditionalFieldsetStateless extends React.Component {
  *             onValueChange={this._onCondition1ValueChange}
  *             selectedIndex={this.state.selectedCondition1Index}
  *             supportEmpty={true}
- *             stateless={true}
  *             emptyMessage={"Do Nothing"}
  *             type={this.state.selectedTypeName} >
  *             <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>

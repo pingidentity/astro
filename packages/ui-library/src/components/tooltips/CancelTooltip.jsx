@@ -76,7 +76,6 @@ class CancelTooltip extends React.Component {
                 open={this.props.open}
                 positionClassName={this.props.positionClassName}
                 placement={this.props.placement}
-                stateless={true}
                 showClose={false}
                 title={this.props.title}>
                 <p data-id={this.props["data-id"] + "-cancel-tooltip-text"}>

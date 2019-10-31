@@ -213,7 +213,6 @@ describe("Pagination", function () {
     it ("verify large number of pages", function () {
         component = TestUtils.renderInWrapper(
             <Pagination
-                stateless={true}
                 data-id="test-pagination"
                 page={6}
                 perPage = {5}
@@ -237,7 +236,6 @@ describe("Pagination", function () {
     it ("verify no pages", function () {
         component = TestUtils.renderInWrapper(
             <Pagination
-                stateless={true}
                 data-id="test-pagination"
                 page={1}
                 perPage = {5}

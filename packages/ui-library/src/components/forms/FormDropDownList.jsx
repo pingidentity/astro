@@ -129,9 +129,6 @@ const SearchTypes = {
 *     Description to display below the label.
 * @param {string} [name]
 *     The name attribute for the input.
-* @param {boolean} [stateless=false]
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
 * @param {array<FormDropDownList~option>} options
 *    Array of options for the dropdown list. Each option should have a label and value,
 *    but value is required and label is not. If no label is passed in Value will take the place of label.
@@ -210,10 +207,6 @@ const SearchTypes = {
 *     If true, the user must select a value for this field.
 * @param {boolean} [showSelectedOptionLabel=true]
 *    Whether or not to display the label text for the selected option.
-* @param {boolean} [stateless=false]
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
-*
 * @param {FormDropDownList.onAdd} [onAdd]
 *    Callback to be triggered when a new option is to be added to the list.
 * @param {FormDropDownList~onSearch} [onSearch]
@@ -919,7 +912,6 @@ class FormDropDownListStateless extends React.Component {
                                 errorMessage={this.props.errorMessage}
                                 autoFocus={this.props.autofocus}
                                 selectOnFocus={this._isBoxSearch()}
-                                stateless={true}
                                 value={inputValue}
                                 placeholder={this.props.placeholder}
                                 name={this.props.name}

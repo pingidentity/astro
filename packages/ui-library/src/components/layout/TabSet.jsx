@@ -98,7 +98,6 @@ class TabSet extends Component {
 
         const defaultLabels = (
             <RockerButton
-                stateless={true}
                 labels={labels}
                 selectedIndex={selectedIndex}
                 onValueChange={onValueChange}
