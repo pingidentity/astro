@@ -68,7 +68,7 @@ import { flagsPropType, hasFlag, getFlags } from '../../../util/FlagUtils';
 * @param {boolean} [open=false]
 *     State of the open/closed dropdown menu.
 * @param {I18nPhoneInput~onToggle} [onToggle]
-*     Callback to be triggered when open/close state changes.
+*     Callback to be triggered when open/close state changes. Used only when stateless=true.
 *
 * @param {number} [searchIndex]
 *     The index of the country that was just searched to enable highlighing.
@@ -102,12 +102,12 @@ import { flagsPropType, hasFlag, getFlags } from '../../../util/FlagUtils';
 
 class I18nPhoneInputStateless extends Component {
     static propTypes = {
-        'data-id': PropTypes.string,
+        "data-id": PropTypes.string,
         className: PropTypes.string,
         countryCode: PropTypes.string,
         dialCode: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.number,
+            PropTypes.number
         ]),
         phoneNumber: PropTypes.string,
         name: PropTypes.string,
@@ -131,24 +131,24 @@ class I18nPhoneInputStateless extends Component {
     };
 
     static defaultProps = {
-        'data-id': 'i18n-phone-input',
-        className: '',
-        countryCode: '',
-        dialCode: '',
-        phoneNumber: '',
+        "data-id": "i18n-phone-input",
+        className: "",
+        countryCode: "",
+        dialCode: "",
+        phoneNumber: "",
         onValueChange: _.noop,
         open: false,
         onToggle: _.noop,
         searchIndex: -1,
-        searchString: '',
+        searchString: "",
         searchTime: 0,
         onSearch: _.noop,
-        errorMessage: 'Please enter a valid phone number.',
+        errorMessage: "Please enter a valid phone number.",
         showError: false,
-        placeholder: '',
+        placeholder: "",
         autoFocus: false,
         useAutoComplete: false,
-        disabled: false,
+        disabled: false
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
@@ -167,9 +167,9 @@ class I18nPhoneInputStateless extends Component {
                 `${numberWithCode.startsWith("+") ? "" : "+"}${numberWithCode}`
             ) || {};
             return country.toLowerCase();
-        } 
+        } else {
             return "";
-        
+        }
     }
 
     /**
@@ -186,36 +186,36 @@ class I18nPhoneInputStateless extends Component {
     _handleValueChange = (country) => {
         if (!this.props.disabled) {
             this.props.onValueChange({
-                countryCode: country.iso2 || '',
-                dialCode: country.dialCode || '',
-                phoneNumber: this.props.phoneNumber,
+                countryCode: country.iso2 || "",
+                dialCode: country.dialCode || "",
+                phoneNumber: this.props.phoneNumber
             });
         }
     };
 
     _handlePhoneNumberChange = ({ target: { value } }) => {
         const {
-            country = '',
-            countryCallingCode,
+            country = "",
+            countryCallingCode
         } = parsePhoneNumberFromString(value) || {};
         this.props.onValueChange({
             countryCode: this.props.countryCode || country.toLowerCase(),
             dialCode: this.props.dialCode || countryCallingCode,
-            phoneNumber: value,
+            phoneNumber: value
         });
     };
 
     render() {
         const classname = classnames(
-            'intl-tel-input',
+            "intl-tel-input",
             this.props.className,
-            { disabled: this.props.disabled },
+            { disabled: this.props.disabled }
         );
 
         return (
-            <div data-id={this.props['data-id']} className={classname}>
+            <div data-id={this.props["data-id"]} className={classname}>
                 <CountryFlagList
-                    data-id={`${this.props["data-id"]  }-countryFlagList`}
+                    data-id={this.props["data-id"] + "-countryFlagList"}
                     countryCodeClassName="dial-code"
                     className="input-custom-select"
                     countryCodeDisplayType={CountryFlagList.CountryCodeTypes.DIAL_CODE}
@@ -229,12 +229,12 @@ class I18nPhoneInputStateless extends Component {
                     setSearchIndex={this.props.setSearchIndex}
                     setSearchString={this.props.setSearchString}
                     setSearchTime={this.props.setSearchTime}
-                    name={this.props.name ? `${this.props.name  }-country` : null}
+                    name={this.props.name ? this.props.name + "-country" : null}
                     onSearch={this.props.onSearch}
                     flags={getFlags(this)}
                 />
                 <FormTextField
-                    data-id={`${this.props["data-id"]  }-phoneNumber`}
+                    data-id={this.props["data-id"] + "-phoneNumber"}
                     className="form-control"
                     placeholder={this.props.placeholder}
                     value={this.props.phoneNumber}
@@ -247,7 +247,7 @@ class I18nPhoneInputStateless extends Component {
                     }
                     autoFocus={this.props.autoFocus}
                     useAutocomplete={this.props.useAutocomplete}
-                    flags={['p-stateful']}
+                    flags={["p-stateful"]}
                 />
             </div>
         );
@@ -258,16 +258,16 @@ class I18nPhoneInputStateful extends Component {
     state = {
         open: this.props.open || false,
         searchIndex: -1,
-        searchString: '',
-        searchTime: 0,
+        searchString: "",
+        searchTime: 0
     };
 
     _handleToggle = () => {
         this.setState({
             open: !this.state.open,
             searchIndex: -1,
-            searchString: '',
-            searchTime: 0,
+            searchString: "",
+            searchTime: 0
         });
     };
 
@@ -290,19 +290,19 @@ class I18nPhoneInputStateful extends Component {
         this.setState({
             searchString: search,
             searchTime: time,
-            searchIndex: index,
+            searchIndex: index
         });
     };
 
     render() {
-        let props = _.defaults({
-            ref: 'I18nPhoneInputStateless',
+        var props = _.defaults({
+            ref: "I18nPhoneInputStateless",
             open: this.state.open,
             onToggle: this._handleToggle,
             searchIndex: this.state.searchIndex,
             searchString: this.state.searchString,
             searchTime: this.state.searchTime,
-            onSearch: this._handleSearch,
+            onSearch: this._handleSearch
         }, this.props);
 
         return <I18nPhoneInputStateless {...props} />;
@@ -311,48 +311,48 @@ class I18nPhoneInputStateful extends Component {
 
 const PStatefulPhoneInput = inStateContainer([
     {
-        name: 'open',
+        name: "open",
         initial: false,
         callbacks: [{
-            name: 'onToggle',
-            transform: toggleTransform,
-        }],
+            name: "onToggle",
+            transform: toggleTransform
+        }]
     },
     {
-        name: 'searchIndex',
+        name: "searchIndex",
         initial: -1,
-        setter: 'setSearchIndex',
+        setter: "setSearchIndex",
     },
     {
-        name: 'searchString',
-        initial: '',
-        setter: 'setSearchString',
+        name: "searchString",
+        initial: "",
+        setter: "setSearchString",
     },
     {
-        name: 'searchTime',
+        name: "searchTime",
         initial: 0,
-        setter: 'setSearchTime',
+        setter: "setSearchTime",
     },
 ])(I18nPhoneInputStateless);
-PStatefulPhoneInput.displayName = 'PStatefulPhoneInput';
+PStatefulPhoneInput.displayName = "PStatefulPhoneInput";
 
 class I18nPhoneInput extends Component {
     static propTypes = {
-        stateless: PropTypes.bool,
+        stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        stateless: false,
+        stateless: false
     };
 
     static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
-    _usePStateful = () => hasFlag(this, 'p-stateful');
+    _usePStateful = () => hasFlag(this, "p-stateful");
 
     componentDidMount() {
         if (!this._usePStateful()) {
             cannonballProgressivelyStatefulWarning({
-                name: 'I18nPhoneInput',
+                name: "I18nPhoneInput"
             });
         }
     }
