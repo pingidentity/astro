@@ -216,6 +216,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_FileDropDemo.jsx.html"
                     },
                     {
+                        label: "File Input",
+                        demo: require("../components/forms/FileInputDemo"),
+                        pathToDoc: "components/forms/FileInput.jsx",
+                        pathToSource: "components_forms_FileInput.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FileInputDemo.jsx.html"
+                    },
+                    {
                         label: "File Upload",
                         demo: require("../components/forms/FileUploadDemo"),
                         pathToDoc: "components/forms/FileUpload.jsx",
@@ -474,6 +481,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_ButtonGroupDemo.jsx.html"
                     },
                     {
+                        label: "Chip",
+                        demo: require("../components/layout/ChipDemo"),
+                        pathToDoc: "components/layout/Chip.jsx",
+                        pathToSource: "components_layout_Chip.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ChipDemo.jsx.html",
+                    },
+                    {
                         label: "Collapsible Link",
                         demo: require("../components/general/CollapsibleLinkDemo"),
                         pathToDoc: "components/general/CollapsibleLink.jsx",
@@ -550,6 +564,13 @@ module.exports = [
                         pathToDoc: "components/layout/ListNav.jsx",
                         pathToSource: "components_layout_ListNav.jsx.html",
                         pathToDemoSource: "demo_components_layout_ListNavDemo.jsx.html"
+                    },
+                    {
+                        label: "Mapped Attributes",
+                        demo: require("../components/layout/MappedAttributesDemo"),
+                        pathToDoc: "components/layout/MappedAttributes.jsx",
+                        pathToSource: "components_layout_MappedAttributes.jsx.html",
+                        pathToDemoSource: "demo_components_layout_MappedAttributesDemo.jsx.html",
                     },
                     {
                         label: "Padding",
@@ -661,6 +682,13 @@ module.exports = [
                         pathToDoc: "components/general/Link.jsx",
                         pathToSource: "components_general_Link.jsx.html",
                         pathToDemoSource: "demo_components_general_LinkDemo.jsx.html"
+                    },
+                    {
+                        label: "Message Button",
+                        demo: require("../components/buttons/MessageButtonDemo"),
+                        pathToDoc: "components/buttons/MessageButton.jsx",
+                        pathToSource: "components_buttons_MessageButton.jsx.html",
+                        pathToDemoSource: "demo_components_buttons_MessageButtonDemo.jsx.html",
                     },
                     {
                         label: "Overflow Menu",
@@ -847,6 +875,13 @@ module.exports = [
                 icon: "search",
                 children: [
                     {
+                        label: "Dynamic Filter",
+                        demo: require("../components/filters/DynamicFilterDemo"),
+                        pathToDoc: "components/filters/DynamicFilter.jsx",
+                        pathToSource: "components_filters_DynamicFilter.jsx.html",
+                        pathToDemoSource: "demo_components_filters_DynamicFilterDemo.jsx.html",
+                    },
+                    {
                         label: "Search Bar",
                         demo: require("../components/forms/FormSearchBarDemo"),
                         pathToDoc: "components/forms/FormSearchBar.jsx",
@@ -881,6 +916,13 @@ module.exports = [
                         pathToDoc: "components/general/EllipsisLoader.jsx",
                         pathToSource: "components_general_EllipsisLoader.jsx.html",
                         pathToDemoSource: "demo_components_general_EllipsisLoaderDemo.jsx.html"
+                    },
+                    {
+                        label: "Global Message",
+                        demo: require("../components/general/GlobalMessageDemo"),
+                        pathToDoc: "components/general/GlobalMessage.jsx",
+                        pathToSource: "components_general_GlobalMessage.jsx.html",
+                        pathToDemoSource: "demo_components_general_GlobalMessageDemo.jsx.html"
                     },
                     {
                         label: "Inline Message",
@@ -1128,68 +1170,6 @@ module.exports = [
                 label: "Co-Development",
                 icon: "robot",
                 children: [
-                    {
-                        label: "Global Message",
-                        demo: require("../components/general/GlobalMessageDemo"),
-                        pathToDoc: "components/general/GlobalMessage.jsx",
-                        pathToSource: "components_general_GlobalMessage.jsx.html",
-                        pathToDemoSource: "demo_components_general_GlobalMessageDemo.jsx.html"
-                    },
-                    {
-                        label: "Chip",
-                        demo: require("../components/layout/ChipDemo"),
-                        pathToDoc: "components/layout/Chip.jsx",
-                        pathToSource: "components_layout_Chip.jsx.html",
-                        pathToDemoSource: "demo_components_layout_ChipDemo.jsx.html",
-                        status: {
-                            message: "Co-development: This component is production ready, but the API may change to" +
-                                " reflect requirements.",
-                            type: "version"
-                        }
-                    },
-                    {
-                        label: "File Input",
-                        demo: require("../components/forms/FileInputDemo"),
-                        pathToDoc: "components/forms/FileInput.jsx",
-                        pathToSource: "components_forms_FileInput.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FileInputDemo.jsx.html"
-                    },
-                    {
-                        label: "Mapped Attributes",
-                        demo: require("../components/layout/MappedAttributesDemo"),
-                        pathToDoc: "components/layout/MappedAttributes.jsx",
-                        pathToSource: "components_layout_MappedAttributes.jsx.html",
-                        pathToDemoSource: "demo_components_layout_MappedAttributesDemo.jsx.html",
-                        status: {
-                            message: "Co-development: This component is production ready, but the API may change to" +
-                                " reflect requirements.",
-                            type: "version"
-                        }
-                    },
-                    {
-                        label: "Message Button",
-                        demo: require("../components/buttons/MessageButtonDemo"),
-                        pathToDoc: "components/buttons/MessageButton.jsx",
-                        pathToSource: "components_buttons_MessageButton.jsx.html",
-                        pathToDemoSource: "demo_components_buttons_MessageButtonDemo.jsx.html",
-                        status: {
-                            message: "Co-development: This component is production ready, but the API may change to" +
-                                " reflect requirements.",
-                            type: "version"
-                        }
-                    },
-                    {
-                        label: "Dynamic Filter",
-                        demo: require("../components/filters/DynamicFilterDemo"),
-                        pathToDoc: "components/filters/DynamicFilter.jsx",
-                        pathToSource: "components_filters_DynamicFilter.jsx.html",
-                        pathToDemoSource: "demo_components_filters_DynamicFilterDemo.jsx.html",
-                        status: {
-                            message: "Co-development: This component is production ready, but the API may change to" +
-                                " reflect requirements.",
-                            type: "version"
-                        }
-                    },
                     {
                         label: "NavFrame",
                         demo: require("../components/panels/NavFrameDemo"),
