@@ -4,6 +4,7 @@ import classnames from "classnames";
 import FormLabel from "./FormLabel";
 // Would have just destructured out withFocusOutline, but this causes issues in the FormRadioGroup for some reason
 import KeyboardUtils from "../../util/KeyboardUtils";
+import { noop } from "underscore";
 
 /**
  * @callback FormRadioInput~onValueChange
@@ -80,7 +81,7 @@ class FormRadioInputBase extends React.Component {
     static defaultProps = {
         "data-id": "FormRadioInput",
         autoFocus: false,
-        onValueChange: () => {},
+        onValueChange: noop,
     };
 
     _handleValueChange = (e) => {

@@ -116,10 +116,6 @@ SelectionList.propTypes = {
     stateless: deprecatedStatelessProp,
 };
 
-SelectionList.defaultProps = {
-    stateless: false,
-};
-
 SelectionList.Actions = require("./v2-actions");
 SelectionList.actions = require("./v2-actions"); // according to our new standard
 

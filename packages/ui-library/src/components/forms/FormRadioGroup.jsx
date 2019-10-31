@@ -4,6 +4,7 @@ import classnames from "classnames";
 import FormRadioInput from "./FormRadioInput";
 import FormLabel from "./FormLabel";
 import { defaultRender } from "../../util/PropUtils";
+import { noop } from "underscore";
 
 /**
  * @callback FormRadioGroup~onValueChange
@@ -131,7 +132,7 @@ class FormRadioGroup extends React.Component {
         disabled: false,
         renderRadio: defaultRender,
         autoFocus: false,
-        onValueChange: () => {},
+        onValueChange: noop,
     };
 
     _handleChange = (value) => {
