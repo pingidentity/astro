@@ -11,7 +11,7 @@ pipeline {
             script {
               sh "npm install"
               env.VERSION_V = sh(returnStdout: true, script: "npm version minor --no-git-tag-version");
-              env.SHAPSHOT_VERSION = env.VERSION_V.replaceAll("v","");
+              env.SNAPSHOT_VERSION = env.VERSION_V.replaceAll("v","") + "-SNAPSHOT";
               sh """
                 sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "${env.SNAPSHOT_VERSION}.${process.env.BUILD_NUMBER}"/' package.json > package.json.tmp
                 mv package.json.tmp package.json
