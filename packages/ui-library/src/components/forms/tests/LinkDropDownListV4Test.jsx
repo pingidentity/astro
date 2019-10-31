@@ -5,6 +5,9 @@ jest.dontMock("../../tooltips/DetailsTooltip");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
+import { shallow } from "enzyme";
+import DetailsTooltip from "../../tooltips/DetailsTooltip";
+
 describe("LinkDropDownList v4", function () {
 
     var React = require("react"),
@@ -229,5 +232,19 @@ describe("LinkDropDownList v4", function () {
         ReactTestUtils.Simulate.click(menuItems[clickIndex]);
         expect(component.props.children.props.onClick).toBeCalledWith(options[clickIndex]);
         expect(component.props.children.props.onToggle).not.toBeCalled();
+    });
+
+    it("gives tooltip BOTTOM_LEFT alignment if its alignment is RIGHT", () => {
+        const component = shallow(
+            <LinkDropDownList
+                alignment={LinkDropDownList.alignments.RIGHT}
+                label="Link"
+                options={options}
+                selectedOption={[]}
+            />
+        ).dive().dive();
+        const tooltip = component.find(DetailsTooltip);
+
+        expect(tooltip.prop("placement")).toEqual(DetailsTooltip.tooltipPlacements.BOTTOM_LEFT);
     });
 });
