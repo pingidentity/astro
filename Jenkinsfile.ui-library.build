@@ -109,5 +109,8 @@ pipeline {
     unsuccessful {
        slackSend channel: '#ux-deployments', message: "@here :tears: UI Library build-job:  ${BUILD_URL} failed!", color: "#a31300"
     }
+    cleanup {
+        cleanWs()
+    }
   }
 
