@@ -39,7 +39,13 @@ pipeline {
                   git config --global user.email 'devtools+jenkins@pingidentity.com'
                   git config --global user.name 'devtools-jenkins'
                   git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+
                   GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+
+
+                  git tag ${env.GIT_RELEASE_TAG}
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${env.GIT_RELEASE_TAG}
+
                 """
               }
             }
