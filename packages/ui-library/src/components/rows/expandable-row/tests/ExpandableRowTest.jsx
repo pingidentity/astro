@@ -467,7 +467,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should show delete confirm dialog", function() {
-        var component = getComponent({,
+        var component = getComponent({
             expanded: true,
             showDelete: true,
             confirmDelete: true
@@ -566,7 +566,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should trigger onDelete callback when confirmDelete is false", function() {
-        var component = getComponent({,
+        var component = getComponent({
             expanded: true,
             showDelete: true,
             confirmDelete: false,
@@ -606,7 +606,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should trigger onEditButtonClick callback on edit-btn click", function() {
-        var component = getComponent({,
+        var component = getComponent({
             expanded: true,
             showEdit: true,
             onEditButtonClick: jest.fn()
@@ -621,7 +621,7 @@ describe("ExpandableRow", function() {
 
     it("fires reorder event from input when in ordering mode", function() {
         const callback = jest.fn();
-        const component = getComponent({,
+        const component = getComponent({
             ordering: {
                 position: 3,
                 total: 10,
@@ -649,7 +649,7 @@ describe("ExpandableRow", function() {
 
     it("fires reorder event from up/down keys when in ordering mode", function() {
         const callback = jest.fn();
-        let component = getComponent({,
+        let component = getComponent({
             ordering: {
                 position: 3,
                 total: 10,
@@ -666,7 +666,7 @@ describe("ExpandableRow", function() {
         expect(callback).lastCalledWith(3, 2);
 
         // lower bound
-        component = getComponent({,
+        component = getComponent({
             ordering: {
                 position: 0,
                 total: 10,
@@ -679,7 +679,7 @@ describe("ExpandableRow", function() {
         expect(callback).lastCalledWith(0, 0);
 
         // upper bound
-        component = getComponent({,
+        component = getComponent({
             ordering: {
                 position: 9,
                 total: 10,
@@ -694,7 +694,7 @@ describe("ExpandableRow", function() {
 
     it("fires no events from other keys when in ordering mode", function() {
         const callback = jest.fn();
-        const component = getComponent({,
+        const component = getComponent({
             ordering: {
                 position: 3,
                 total: 10,
@@ -711,7 +711,7 @@ describe("ExpandableRow", function() {
 
     it("calls drag handler for input when in ordering mode", function() {
         const callback = jest.fn();
-        const component = getComponent({,
+        const component = getComponent({
             ordering: {
                 position: 3,
                 total: 10,
@@ -727,7 +727,6 @@ describe("ExpandableRow", function() {
         const callback = jest.fn();
         const root = getTwoComponents(
             {
-,
                 ordering: {
                     position: 3,
                     total: 10,
@@ -735,7 +734,6 @@ describe("ExpandableRow", function() {
                 }
             },
             {
-,
                 ordering: {
                     position: 6,
                     total: 10,
@@ -837,7 +835,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should fire onReorder with 3, 3", function () {
-        const component = getComponent({,
+        const component = getComponent({
             ordering: {
                 position: 3,
                 total: 10,

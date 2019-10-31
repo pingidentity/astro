@@ -86,7 +86,7 @@ describe("Section v4", function () {
     it("Stateful: renders expanded state", function () {
         const view = getComponent({
                 children: <div data-id="iShouldBeVisible">My Content</div>,
-                expanded: true,,
+                expanded: true,
                 titleValue: "some value"
             }),
             container = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]),
@@ -165,7 +165,7 @@ describe("Section v4", function () {
 
     it("Stateful: renders the right-side/row-accessories text content", function () {
         const accessoriesContent = "Some text",
-            view = getComponent({,
+            view = getComponent({
                 accessories: accessoriesContent
             }),
             accessories = TestUtils.findRenderedDOMNodeWithDataId(
@@ -180,7 +180,7 @@ describe("Section v4", function () {
     it("Stateful: renders the right-side/row-accessories html content", function () {
         const accessoriesText = "Some Content",
             accessoriesContent = (<span>{accessoriesText}</span>),
-            view = getComponent({,
+            view = getComponent({
                 accessories: accessoriesContent
             }),
             accessories = TestUtils.findRenderedDOMNodeWithDataId(
