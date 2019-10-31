@@ -649,7 +649,7 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_ButtonBarDemo.jsx.html"
                     },
                     {
-                        label: "Drop Down Button (stateless)",
+                        label: "Drop Down Button",
                         demo: require("../components/forms/DropDownButtonDemo"),
                         pathToDoc: "components/forms/DropDownButton.jsx",
                         pathToSource: "components_forms_DropDownButton.jsx.html",
