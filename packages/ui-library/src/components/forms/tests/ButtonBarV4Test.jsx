@@ -306,7 +306,7 @@ describe("ButtonBar", function () {
     });
 
     it("renders a cancel button in place of a discard button when the flag is set", function() {
-        const component = getComponent({ onDiscard: jest.fn() });
+        const component = getComponent({ onDiscard: jest.fn(), useButtonForCancel: true });
 
         const cancelBtn = TestUtils.findRenderedDOMNodeWithClass(component, "cancel");
         const discardBtn = getDiscardButton(component);

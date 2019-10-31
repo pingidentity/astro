@@ -371,7 +371,7 @@ class ButtonBar extends React.Component {
             discardClassName = classnames(
                 this.props.discardClassName,
                 {
-                    "cancel": this.props.useButtonForCancel && this._fixedProps() && !this.props.discardClassName,
+                    "cancel": this.props.useButtonForCancel && !this.props.discardClassName,
                     disabled: this.props.enableSavingAnimation,
                     "button-bar__cancel-link": !this.props.useButtonForCancel,
                 }
