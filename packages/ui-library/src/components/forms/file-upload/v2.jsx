@@ -5,7 +5,7 @@ var React = require("react"),
     StatefulFileUpload = require("./v2-stateful"),
     Constants = require("./v2-constants.js");
 
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
+import { isProduction } from "../../../util/Utils";
 
 /**
  * @callback FileUpload~onValidate
@@ -139,10 +139,8 @@ class FileUpload extends React.Component {
     };
 
     componentDidMount() {
-        if (this.props.stateless) {
-            cannonballChangeWarning({
-                message: "The stateless version of FileUpload is deprecated.",
-            });
+        if (this.props.stateless && !isProduction()) {
+            console.warn("The stateless version of FileUpload is deprecated.");
         }
     }
 

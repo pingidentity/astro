@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { isEqual } from "underscore";
-import { isProduction } from "./Utils";
 
 function getSubstituteMessage(sub) {
     return sub ? ` Use "${sub}" instead.` : "";
@@ -254,49 +253,6 @@ export function deprecationError({
         `The ${type} "${name}" is deprecated and has been removed.${
             getSubstituteMessage(substitute)}${renderMessage(message)}`
     );
-}
-
-/**
- * @desc Function specifically for the v4 Cannonball release. Shows a warning about changing behavior
- * @param {string} message - The message that will appear between the two pieces of boilerplate.
- *
- * @returns {} No return value.
- *
- * @example: cannonballChangeWarning({
- *      message: "This component will act much differently. Add 'much-differently' flag to preview.",
- *  })
- */
-export function cannonballChangeWarning({
-    message
-}) {
-    if (!isProduction()) {
-        console.warn(
-            `WARNING potential 4.0.0 breaking change: ` +
-            message +
-            ` For more information: https://uilibrary.ping-eng.com/3.42.0-SNAPSHOT/index.html#/?selectedSection=V4BreakingChanges&selectedNode=V4BreakingChanges&root=Documentation`
-        );
-    }
-}
-
-/**
- * @desc Function specifically for the v4 Cannonball release. Shows a warning about this specific behavior change
- * @param {string} name - The the name of the component
- *
- * @returns {} No return value.
- *
- * @example: cannonballProgressivelyStatefulWarning({
- *      name: "FormTextArea",
- *  })
- */
-export function cannonballProgressivelyStatefulWarning({
-    name
-}) {
-    cannonballChangeWarning({
-        message: `The stateless prop will be removed from ${name}. ` +
-            `Instead of distinguishing between stateless and stateful versions, ` +
-            `the component will instead control the state of a subset of its props when those ` +
-            `have not been defined.`
-    });
 }
 
 /**
