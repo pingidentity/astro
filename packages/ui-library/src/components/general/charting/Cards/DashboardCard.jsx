@@ -119,8 +119,8 @@ class DashboardCard extends React.Component {
         return (
             <div className={classes} style={style} data-id={this.props["data-id"]}>
                 {!this.props.errorMessage && [
-                    <InputModifier inputColor={inputColors.LIGHT}>
-                        <div key="back" className="dashboard-card__back">
+                    <div key="back" className="dashboard-card__back">
+                        <InputModifier inputColor={inputColors.LIGHT}>
                             {this.props.back}
                             {this.props.onMakeDefault &&
                                 <Checkbox
@@ -131,13 +131,13 @@ class DashboardCard extends React.Component {
                                     checked={this.state.defaultChecked}
                                 />
                             }
-                        </div>
-                    </InputModifier>,
-                    <InputModifier inputColor={inputColors.LIGHT} key="front">
-                        <div className="dashboard-card__front">
+                        </InputModifier>
+                    </div>,
+                    <div className="dashboard-card__front">
+                        <InputModifier inputColor={inputColors.LIGHT} key="front">
                             {this.props.front}
-                        </div>
-                    </InputModifier>,
+                        </InputModifier>
+                    </div>,
                     <div key="control" className="dashboard-card__control">
                         {!this.props.loading && this.props.back &&
                             <ViewToggle
