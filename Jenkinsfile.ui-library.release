@@ -1,0 +1,114 @@
+// This file has been modified for releasing a beta version. Some steps have been removed that will need to go back in when v4 is out of beta.
+pipeline {
+  agent {
+    label 'ui-library-cdn-deploy'
+  }
+  stages {
+     stage('run-tests') {
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder') {
+            echo "Running ui-library linting and tests"
+            sh "npm install"
+            sh "npm run lint"
+            sh "npm run coverage-ci"
+          }
+        }
+      }
+    }
+    stage('version, tag and commit') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder') {
+            echo "Incrementing the version: ${params.VERSION_TYPE}"
+            script {
+              env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
+              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","")
+              env.GIT_RELEASE_TAG = "ui-library-${env.RELEASE_VERSION}"
+            }
+            echo """
+              release version: ${env.RELEASE_VERSION}
+              git tag: ${env.GIT_RELEASE_TAG}
+            """
+            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+              withCredentials([
+                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+              ]){
+                sh  """
+                  git add package.json
+                  git config --global user.email 'devtools+jenkins@pingidentity.com'
+                  git config --global user.name 'devtools-jenkins'
+                  git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+                """
+              }
+            }
+          }
+        }
+      }
+    }
+    stage('npm-publish') {
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder') {
+            echo 'Building & publishing ui-library'
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              sh """
+                npm run package-library
+
+                npm run build-css
+                mkdir cdn/${env.RELEASE_VERSION}
+                mv cdn/css cdn/${env.RELEASE_VERSION}
+
+                cp -rf src/images cdn/${env.RELEASE_VERSION}
+                rm -f cdn/${env.RELEASE_VERSION}/images/README
+
+                cp -rf src/fonts cdn/${env.RELEASE_VERSION}
+                rm -f cdn/${env.RELEASE_VERSION}/fonts/README
+
+                npm publish;
+              """
+            }
+          }
+        }
+      post {
+        always {
+          archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
+        }
+      }
+    }
+  }
+  stage('cdn deploy') {
+    steps {
+      dir("${env.WORKSPACE}/packages/ui-library") {
+        container('node-builder') {
+          withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
+            withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
+              s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+            }
+          }
+          withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
+            withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
+              s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+            }
+          }
+          withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+            withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+              s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+            }
+          }
+        }
+      }
+    }
+  }
+  post {
+    success {
+        slackSend channel: '#ux-deployments', message: ":verynice: Great Success! UI Library ${env.RELEASE_VERSION} has been released. ${BUILD_URL} ", color: "#4aba78"
+        slackSend channel: '#ui-announcements', message: "@here UI-Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+        slackSend channel: '#ui-coalition', message: "@here UI-Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+    }
+    unsuccessful {
+      slackSend channel: '#ux-deployments', message: "@here :tears: UI Library build-job:  ${BUILD_URL} failed! ${env.RELEASE_VERSION} has not been released", color: "#a31300"
+    }
+  }
+}
