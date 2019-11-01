@@ -38,13 +38,6 @@ endif
 # extract the version number from package.json
 GIT_VERSION := $(shell sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json)
 
-# check that version number ends with -SNAPSHOT, error out if it doesn't
-ifeq (,$(findstring -SNAPSHOT,$(GIT_VERSION)))
-ifeq (,$(findstring -BETA,$(GIT_VERSION)))
-$(error The version number does not contain -SNAPSHOT; cannot continue)
-endif
-endif
-
 # get the final version by removing the -SNAPSHOT part from the version number
 GIT_VERSION_FINAL=$(subst -SNAPSHOT,,$(GIT_VERSION))
 # get the major, the minor and the patch parts of the version number
