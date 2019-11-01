@@ -11,8 +11,8 @@ pipeline {
             sh "npm install"
             script {
               env.VERSION_V = sh(returnStdout: true, script: "npm version minor --no-git-tag-version");
-              env.VERSION_UNV = env.VERSION_V.replaceAll("v","").trim();
-              env.SNAPSHOT_VERSION = "${env.VERSION_UNV}-SNAPSHOT"
+              env.VERSION = env.VERSION_V.replaceAll("v","").trim();
+              env.SNAPSHOT_VERSION = "${env.VERSION}-SNAPSHOT"
             }
             echo """
               SNAPSHOT version: ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER}
@@ -51,20 +51,20 @@ pipeline {
 
                     cp -rf src build
                     cp -rf build-doc build
-                    rm -rf ${env.SNAPSHOT_VERSION}.tar.gz
-                    tar -czf ${env.SNAPSHOT_VERSION}.tar.gz build
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
-                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.SNAPSHOT_VERSION}.tar.gz ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -rf /var/www/html/${env.SNAPSHOT_VERSION}
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mkdir /var/www/html/${env.SNAPSHOT_VERSION}
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} tar -xzf /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz --strip 1 -C /var/www/html/${env.SNAPSHOT_VERSION}
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.SNAPSHOT_VERSION}.tar.gz
+                    rm -rf ${env.VERSION}.tar.gz
+                    tar -czf ${env.VERSION}.tar.gz build
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.VERSION}.tar.gz
+                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.VERSION}.tar.gz ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -rf /var/www/html/${env.VERSION}
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mkdir /var/www/html/${env.VERSION}
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} tar -xzf /var/www/html/${env.VERSION}.tar.gz --strip 1 -C /var/www/html/${env.VERSION}
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.VERSION}.tar.gz
                     scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions.json ./
                     node hosting/append_current_version.js;\
-                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ./versions.json ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions-${env.SNAPSHOT_VERSION}.json;\
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mv /var/www/html/versions-${env.SNAPSHOT_VERSION}.json /var/www/html/versions.json;\
+                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ./versions.json ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions-${env.VERSION}.json;\
+                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mv /var/www/html/versions-${env.VERSION}.json /var/www/html/versions.json;\
                     rm -f ./versions.json;\
-                    rm -f ${env.SNAPSHOT_VERSION}.tar.gz;\
+                    rm -f ${env.VERSION}.tar.gz;\
                   """
               }
             }
