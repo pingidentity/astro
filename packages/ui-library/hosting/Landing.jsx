@@ -90,7 +90,7 @@ class LandingPage extends React.Component {
     _handleVersionSelect = ({ value }) => this._gotoDemoVersion(value);
 
     _versionToNumber = version => {
-        const numbers = version.replace("", "").split(".").map(string => string * 1); // parseInt didn't work
+        const numbers = version.replace("-SNAPSHOT", "").split(".").map(string => string * 1); // parseInt didn't work
         return (numbers[0] * 1000 * 1000) + (numbers[1] * 1000) + numbers[2];
     }
 
