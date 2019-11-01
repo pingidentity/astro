@@ -8,15 +8,15 @@ pipeline {
         dir ("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo "Building SNAPSHOT"
+            sh "npm install"
             script {
-              sh "npm install"
               env.VERSION_V = sh(returnStdout: true, script: "npm version minor --no-git-tag-version");
               env.SNAPSHOT_VERSION = env.VERSION_V.replaceAll("v","") + "-SNAPSHOT";
-              sh """
-                sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "${env.SNAPSHOT_VERSION}.${process.env.BUILD_NUMBER}"/' package.json > package.json.tmp
-                mv package.json.tmp package.json
-              """
             }
+            sh """
+              sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "${env.SNAPSHOT_VERSION}.${process.env.BUILD_NUMBER}"/' package.json > package.json.tmp
+              mv package.json.tmp package.json
+            """
             echo """
               SNAPSHOT version: ${env.SNAPSHOT_VERSION}
             """
