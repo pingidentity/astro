@@ -11,15 +11,16 @@ pipeline {
             sh "npm install"
             script {
               env.VERSION_V = sh(returnStdout: true, script: "npm version minor --no-git-tag-version");
-              env.SNAPSHOT_VERSION = env.VERSION_V.replaceAll("v","") + "-SNAPSHOT";
+              env.VERSION_UNV = env.VERSION_V.replaceAll("v","").trim();
+              env.SNAPSHOT_VERSION = "${env.VERSION_UNV}-SNAPSHOT"
             }
-            sh """
-              sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "${env.SNAPSHOT_VERSION}.${process.env.BUILD_NUMBER}"/' package.json > package.json.tmp
-              mv package.json.tmp package.json
-            """
             echo """
-              SNAPSHOT version: ${env.SNAPSHOT_VERSION}
+              SNAPSHOT version: ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER}
             """
+            sh """
+              npm version ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER} --no-git-tag-version
+            """
+
           }
         }
       }
@@ -38,9 +39,20 @@ pipeline {
               withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
                 sh """
                     set -eo
+
+
+
                     npm run doc
                     npm run pack
+
                     npm run build-css
+                    mkdir cdn/${env.SNAPSHOT_VERSION}
+                    mv cdn/css cdn/${env.SNAPSHOT_VERSION}
+
+                    cp -rf src/images cdn/${env.SNAPSHOT_VERSION}
+                    cp -rf src/fonts cdn/${env.SNAPSHOT_VERSION}
+
+
                     cp -rf src build
                     cp -rf build-doc build
                     rm -rf ${env.SNAPSHOT_VERSION}.tar.gz
@@ -68,10 +80,11 @@ pipeline {
 
     stage('npm-publish') {
       steps {
-        container('node-builder') {
           dir("${env.WORKSPACE}/packages/ui-library") {
+           container('node-builder') {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               echo "publishing UI Library: ${env.SNAPSHOT_VERSION} "
+              sh 'npm run package-library'
               sh 'npm publish --tag snapshot'
             }
           }
@@ -86,7 +99,7 @@ pipeline {
 
     stage('cdn deploy') {
       steps {
-        dir("${env.WORKSPACE}/packages/end-user") {
+        dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
               withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
@@ -112,6 +125,7 @@ pipeline {
     unsuccessful {
        slackSend channel: '#ux-deployments', message: "@here :tears: UI Library build-job:  ${BUILD_URL} failed!", color: "#a31300"
     }
+
     cleanup {
         cleanWs()
     }
