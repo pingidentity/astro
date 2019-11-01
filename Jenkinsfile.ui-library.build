@@ -17,10 +17,6 @@ pipeline {
             echo """
               SNAPSHOT version: ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER}
             """
-            sh """
-              npm version ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER} --no-git-tag-version
-            """
-
           }
         }
       }
@@ -84,8 +80,11 @@ pipeline {
            container('node-builder') {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               echo "publishing UI Library: ${env.SNAPSHOT_VERSION} "
-              sh 'npm run package-library'
-              sh 'npm publish --tag snapshot'
+              sh """
+                npm run package-library
+                npm version ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER} --no-git-tag-version
+                npm publish --tag snapshot
+              """
             }
           }
         }
