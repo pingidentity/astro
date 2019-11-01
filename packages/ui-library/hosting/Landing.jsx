@@ -40,12 +40,17 @@ class LandingPage extends React.Component {
                 if (versions && versions.length > 0) {
                     const versionList = this._filterVersions(this._sortVersions(versions));
 
+                    const getVersionLabel = (version, index) => {
+                        const versionNumber = version.replace("-SNAPSHOT", "");
+                        return index > 0 ? versionNumber : `${versionNumber}-SNAPSHOT`;
+                    };
+
                     this.setState({
                         stableVersion: versionList[1].replace("-SNAPSHOT", ""),
                         versionOptions: versionList.map(
                             function (version, index) {
                                 return {
-                                    label: index > 0 ? version.replace("-SNAPSHOT", "") : version,
+                                    label: getVersionLabel(version, index),
                                     value: version
                                 };
                             }
@@ -70,15 +75,15 @@ class LandingPage extends React.Component {
         window.location.href = `${version}/index.html`;
     };
 
-    _getStableVersionLink = () => `${this.state.stableVersion}-SNAPSHOT/index.html`;
+    _getStableVersionLink = () => `${this.state.stableVersion}/index.html`;
 
-    _getDocumentationLink = () => `${this.state.stableVersion}-SNAPSHOT/index.html#/?root=Documentation`;
+    _getDocumentationLink = () => `${this.state.stableVersion}/index.html#/?root=Documentation`;
     _getComponentsLink = () => (
-        `${this.state.stableVersion}-SNAPSHOT/index.html#/` +
+        `${this.state.stableVersion}/index.html#/` +
         `?selectedSection=BasicInputs&selectedNode=Checkbox&root=Components`
     );
     _getTemplatesLink = () => (
-        `${this.state.stableVersion}-SNAPSHOT/index.html#/` +
+        `${this.state.stableVersion}/index.html#/` +
         `?selectedSection=Actionstemplate&selectedNode=Actionstemplate&root=Templates`
     );
 
