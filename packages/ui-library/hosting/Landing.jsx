@@ -43,7 +43,7 @@ class LandingPage extends React.Component {
                     const getVersionLabel = (version, index) => {
                         const versionNumber = version.replace("-SNAPSHOT", "");
                         return index > 0 ? versionNumber : `${versionNumber}-SNAPSHOT`;
-                    }
+                    };
 
                     this.setState({
                         stableVersion: versionList[1].replace("-SNAPSHOT", ""),
