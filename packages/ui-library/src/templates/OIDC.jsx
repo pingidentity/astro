@@ -107,7 +107,7 @@ export default class OicoAccessToken extends Component {
                             placeholder="Attribute"
                         />
                     ),
-                    (<Separator>=</Separator>),
+                    (<Separator key="Separator">=</Separator>),
                     (
                         <FormTextField
                             key="Textfield"
