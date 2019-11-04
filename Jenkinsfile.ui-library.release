@@ -38,12 +38,12 @@ pipeline {
                   git add package.json
                   git config --global user.email 'devtools+jenkins@pingidentity.com'
                   git config --global user.name 'devtools-jenkins'
-                  git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
 
+                  git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
                   GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
-
-
+                  git tag ${env.GIT_RELEASE_TAG}
+                  GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${GERRIT_SSH_KEY_PATH}" git push origin ${env.GIT_RELEASE_TAG}
                 """
               }
             }
@@ -106,7 +106,9 @@ pipeline {
   }
   post {
     success {
-        slackSend channel: '#ux-deployments', message: ":verynice: Great Success! UI Library ${env.RELEASE_VERSION} has been released. ${BUILD_URL} ", color: "#4aba78"
+        slackSend channel: '#ux-deployments', message: "@here :verynice: Great Success! UI Library ${env.RELEASE_VERSION} has been released. ${BUILD_URL} ", color: "#4aba78"
+        slackSend channel: '#ui-coalition', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+        slackSend channel: '#ui-announcements', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
     }
     unsuccessful {
       slackSend channel: '#ux-deployments', message: "@here :tears: UI Library build-job:  ${BUILD_URL} failed! ${env.RELEASE_VERSION} has not been released", color: "#a31300"
