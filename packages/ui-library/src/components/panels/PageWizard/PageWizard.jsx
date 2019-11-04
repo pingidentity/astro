@@ -345,7 +345,6 @@ function ActiveStep(props) {
     // Cancel button styling, text, and callback
     buttonBarDefaults.cancelText = DEFAULT_TEXT.CANCEL;
     buttonBarDefaults.onCancel = props.onCancel;
-    buttonBarDefaults.cancelClassName = "cancel";
 
     const buttonBarProps = _.defaults({}, props.buttonBarProps, buttonBarDefaults);
 
