@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Table from './Table';
-import TextBlock from '../TextBlock';
-import FlexRow, { alignment, flexDirectionOptions } from './FlexRow';
+import TextBlock, { alignments } from '../TextBlock';
+import FlexRow, { alignment, flexDirectionOptions, spacing } from './FlexRow';
 import Button from '../Button';
 import DeviceIcon, { deviceTypes } from './DeviceIcon';
+import { overflowTypes } from '../TextBlock/TextBlock';
 
 const getDevices = (devices, onDelete, hasDetails) => {
     return devices.map(({ details = "", name, type }) => {
@@ -15,12 +16,26 @@ const getDevices = (devices, onDelete, hasDetails) => {
                     <DeviceIcon icon={type.toLowerCase()} />
                 </div>
                 <div className="device-table__row-info">
-                    <TextBlock className="device-table__row-details">
+                    <div className="device-table__row-details">
                         <span>
-                            <div className="device-table__row-type">{type}</div>
-                            <div className="device-table__row-name">{name}</div>
+                            <TextBlock
+                                className="device-table__row-type"
+                                alignment={alignments.LEFT}
+                                overflow={overflowTypes.ELLIPSIS}
+                                spacing="small"
+                            >
+                                {type}
+                            </TextBlock>
+                            <TextBlock
+                                className="device-table__row-name"
+                                alignment={alignments.LEFT}
+                                overflow={overflowTypes.ELLIPSIS}
+                                spacing="small"
+                            >
+                                {name}
+                            </TextBlock>
                         </span>
-                    </TextBlock>
+                    </div>
                 </div>
                 <div className="device-table__row-delete">
                     <Button iconName="delete" onClick={onDelete(name)} inline />
