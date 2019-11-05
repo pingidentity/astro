@@ -64,6 +64,7 @@ const Type = {
  *          <p>Thank you for opening this modal.</p>
  *      </Modal>
  */
+
 class Modal extends React.Component {
 
     static displayName = 'Modal';
@@ -168,6 +169,13 @@ class Modal extends React.Component {
         } else {
             event = new CustomEvent(eventName, { bubbles: true, detail: eventDetail });
         }
+
+        if (open) {
+            document.body.classList.add('modal--open');
+        } else {
+            document.body.classList.remove('modal--open');
+        }
+
         document.body.dispatchEvent(event);
     }
 
