@@ -148,37 +148,83 @@ describe("ExpandableRow v4", function() {
         expect(rowMessage.textContent).toContain(rowMessageObj.text);
     });
 
-    it("renders the custom delete tooltip content when provided", function() {
-        const deleteTtText = "My custom content";
-        const deleteTtClass = "my-delete-tt";
-        const deleteTtContent = <div className={deleteTtClass}>{deleteTtText}</div>;
-        const component = getComponent({
-            confirmDeleteContent: deleteTtContent,
-            expanded: true,
-            showDeleteConfirm: true
-        });
-        const ttContent = TestUtils.findRenderedDOMNodeWithClass(component, deleteTtClass);
-
-        expect(ttContent).toBeDefined();
-        expect(ttContent.textContent).toEqual(deleteTtText);
-    });
-
-    it("renders the custom delete tooltip content with custom title when provided", function() {
-        const deleteTitle = "Custom delete title";
-        const deleteTitleClass = "details-title";
-        const deleteTitleText = "My custom content";
-        const deleteTitleContent = <div>{deleteTitleText}</div>;
-        const component = getComponent({
-            confirmDeleteContent: deleteTitleContent,
-            expanded: true,
-            showDeleteConfirm: true,
-            confirmDeleteTitle: deleteTitle
+    describe("renders custom delete tooltip content with render prop", () => {
+        it("calls confirmDeleteContent with passing-in expected props", () => {
+            const confirmDeleteContentMock = jest.fn();
+            getComponent({
+                confirmDeleteContent: confirmDeleteContentMock,
+                expanded: true,
+                showDeleteConfirm: true,
+            });
+            expect(confirmDeleteContentMock).toBeCalledTimes(1);
+            const argumentKeyNames = Object.keys(confirmDeleteContentMock.mock.calls[0][0]);
+            expect(argumentKeyNames).toContain("onCancel");
+            expect(argumentKeyNames).toContain("onConfirm");
+            expect(argumentKeyNames).toContain("confirmLabel");
+            expect(argumentKeyNames).toContain("cancelLabel");
         });
 
-        const deleteTitleTooltip = ReactTestUtils.findRenderedDOMComponentWithClass(component, deleteTitleClass);
+        it("renders custom content returned from render prop", () => {
+            const deleteTtText = "My custom content";
+            const deleteTtClass = "my-delete-tt";
+            const deleteTtContent = () => (<div className={deleteTtClass}>{deleteTtText}</div>);
+            const component = getComponent({
+                confirmDeleteContent: deleteTtContent,
+                expanded: true,
+                showDeleteConfirm: true,
+            });
+            const ttContent = ReactTestUtils.findRenderedDOMComponentWithClass(component, deleteTtClass);
+            expect(ttContent.textContent).toEqual(deleteTtText);
+        });
 
-        expect(deleteTitleTooltip).toBeDefined();
-        expect(deleteTitleTooltip.textContent).toEqual(deleteTitle);
+        it("renders custom delete title", () => {
+            const deleteTitle = "Custom delete title";
+            const deleteTtContent = () => (<div />);
+            const component = getComponent({
+                confirmDeleteContent: deleteTtContent,
+                expanded: true,
+                showDeleteConfirm: true,
+                confirmDeleteTitle: deleteTitle
+            });
+
+            const deleteTitleTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "details-title");
+            expect(deleteTitleTooltip.textContent).toEqual(deleteTitle);
+        });
+
+        it("renders Confirm button with expected label and onclick handler", () => {
+            const onConfirmDeleteMock = jest.fn();
+            const confirmButtonId = "confirm-custom-button";
+            const deleteTtContent = ({ onConfirm, confirmLabel }) =>
+                (<button key="confirm" data-id={confirmButtonId} onClick={onConfirm}>Yes({confirmLabel})</button>);
+            const component = getComponent({
+                confirmDeleteContent: deleteTtContent,
+                expanded: true,
+                showDeleteConfirm: true,
+                onDeleteConfirmClick: onConfirmDeleteMock,
+            });
+            const confirmButton = TestUtils.findRenderedDOMNodeWithDataId(component, confirmButtonId);
+            expect(confirmButton.textContent).toEqual("Yes(Delete)");
+            expect(onConfirmDeleteMock).not.toBeCalled();
+            ReactTestUtils.Simulate.click(confirmButton);
+            expect(onConfirmDeleteMock).toBeCalled();
+        });
+
+        it("renders Cancel button with expected label and onclick handler", () => {
+            const onCancelMock = jest.fn();
+            const cancelButtonId = "confirm-custom-button";
+            const deleteTtContent = ({ onCancel, cancelLabel }) =>
+                (<button key="cancel" data-id={cancelButtonId} onClick={onCancel}>No({cancelLabel})</button>);
+            const component = getComponent({
+                confirmDeleteContent: deleteTtContent,
+                expanded: true,
+                showDeleteConfirm: true,
+                onDeleteCancelClick: onCancelMock
+            });
+            const cancelButton = TestUtils.findRenderedDOMNodeWithDataId(component, cancelButtonId);
+            expect(cancelButton.textContent).toEqual("No(Cancel)");
+            ReactTestUtils.Simulate.click(cancelButton);
+            expect(onCancelMock).toBeCalled();
+        });
     });
 
     it("stateless: renders component as collapsed (by default)", function() {

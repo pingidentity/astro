@@ -173,8 +173,10 @@ const ConfirmDeletePositions = {
  *     Used to determine whether the confirm delete dialog will appear above or below the delete button.
  * @param {string} [confirmDeleteTitle]
  *     Title to set for Confirm Delete dialog tooltip
- * @param {object} [confirmDeleteContent]
+ * @param {object|function} [confirmDeleteContent]
  *     Optional custom content to replace the default delete confirmation tooltip content
+ *     Can be a function that takes object(with only member so far {onCancel} )
+ *     and returns custom Confirm Delete tooltip's content
  * @param {boolean} [showDeleteConfirm=false]
  *     Whether or not the confirm delete dialog is visible.
  *     When not provided, the component will manage this value.
@@ -246,7 +248,8 @@ class OrderingInput extends React.Component {
         }
         const { positionValue = this.props.position } = this.props;
         return positionValue;
-    }
+    };
+
     _positionInRange = number => {
         const { total } = this.props;
 
@@ -257,7 +260,7 @@ class OrderingInput extends React.Component {
         } else {
             return number;
         }
-    }
+    };
 
     _inputValueToPosition = value => value === "" ? "" : parseInt(value) - 1;
 
@@ -274,7 +277,7 @@ class OrderingInput extends React.Component {
     _stopEvent = e => {
         e.preventDefault();
         e.stopPropagation();
-    }
+    };
 
     _handleKey = (e) => {
         // sometimes position is not the actual position but something to show in the field,
@@ -309,7 +312,7 @@ class OrderingInput extends React.Component {
             this.props.onReorder(from !== "" ? from : undefined, to);
         }
         this.setState({ value: undefined });
-    }
+    };
 
     render() {
         const value = this._getValue();
@@ -366,7 +369,10 @@ class StatelessExpandableRow extends React.Component {
         labelDeleteConfirm: PropTypes.string,
         confirmDelete: PropTypes.bool,
         confirmDeletePosition: PropTypes.string,
-        confirmDeleteContent: PropTypes.object,
+        confirmDeleteContent: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.func
+        ]),
         showDeleteConfirm: PropTypes.bool,
         onDeleteCancelClick: PropTypes.func,
         onDeleteConfirmClick: PropTypes.func,
@@ -608,6 +614,7 @@ class ConfirmDeleteDialog extends React.Component {
         confirmDeleteTitle: PropTypes.string,
         onCancel: PropTypes.func,
         onDeleteConfirm: PropTypes.func,
+        children: PropTypes.oneOfType(PropTypes.node, PropTypes.func)
     };
 
     static defaultProps = {
@@ -618,25 +625,34 @@ class ConfirmDeleteDialog extends React.Component {
     };
 
     _renderTooltipContent = () => {
-        if (this.props.children) {
-            return this.props.children;
-        } else {
+        const cancelLabel = Translator.translate("cancel");
+        const confirmLabel = Translator.translate("delete");
+        if (!this.props.children) {
             return (
                 <div>
                     <p>
                         {this.props.label}
                     </p>
                     <ButtonGroup
-                        cancelLabel={Translator.translate("cancel")}
+                        cancelLabel={cancelLabel}
                         onCancel={this.props.onCancel}
                     >
                         <Button data-id="confirm-delete" onClick={this.props.onDeleteConfirm}>
-                            {Translator.translate("delete")}
+                            {confirmLabel}
                         </Button>
                     </ButtonGroup>
                 </div>
             );
         }
+        if (typeof this.props.children === "function") {
+            return this.props.children({
+                onCancel: this.props.onCancel,
+                onConfirm: this.props.onDeleteConfirm,
+                confirmLabel,
+                cancelLabel
+            });
+        }
+        return this.props.children;
     };
 
     render() {
