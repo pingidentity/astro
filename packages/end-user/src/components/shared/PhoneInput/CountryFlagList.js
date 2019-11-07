@@ -7,7 +7,6 @@ import FormDropDownList from '../FormDropDownList';
 import { flagsPropType, getFlags } from '../../../util/FlagUtils';
 import countryCodes from './countryCodes.js';
 
-
 /**
 * @enum {string}
 * @alisas CountryFlagList.CountryCodeTypes
