@@ -2,33 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import successIcon from '../../icons/ghost-success.svg';
-import errorIcon from '../../icons/ghost-error.svg';
-import timedOutIcon from '../../icons/ghost-timed-out.svg';
-import stoppedIcon from '../../icons/ghost-stopped.svg';
-import disabledIcon from '../../icons/ghost-disabled.svg';
-import hourGlassIcon from '../../icons/hour-glass.svg';
-import safeIcon from '../../icons/safe.svg';
-
 const typeIcons = {
-    success: successIcon,
-    error: errorIcon,
-    timeout: timedOutIcon,
-    stopped: stoppedIcon,
-    disabled: disabledIcon,
-    hourGlass: hourGlassIcon,
-    safe: safeIcon,
+    success: 'icon-ghost-success',
+    error: 'icon-ghost-error',
+    timeout: 'icon-ghost-timed-out',
+    stopped: 'icon-clear',
+    disabled: 'icon-ghost-disabled',
+    hourGlass: 'icon-hour-glass',
+    safe: 'icon-safe',
 };
 
 const IconFeedback = ({ type, children, small, bold }) => {
-    const classNames = classnames('icon-feedback', `icon-feedback--${type}`, {
-        'icon-feedback--small': small,
-        'icon-feedback--bold': bold,
+    const classNames = classnames('iconfeedback', `iconfeedback--${type}`, {
+        'iconfeedback--small': small,
+        'iconfeedback--bold': bold,
     });
+
+    const iconClassNames = classnames('iconfeedback__icon', typeIcons[type], {
+        'iconfeedback--success': type === typeIcons.success,
+        'iconfeedback--error': type === typeIcons.error || type === typeIcons.disabled,
+        'iconfeedback--warning': type === typeIcons.timeout || type === typeIcons.hourGlass || type === typeIcons.safe,
+    });
+
     return (
         <div className={classNames}>
-            <img src={typeIcons[type]} className="icon-feedback__icon" alt="" />
-            <p className="icon-feedback__label">{children}</p>
+            <span className={iconClassNames}></span>
+            <p className="iconfeedback__label">{children}</p>
         </div>
     );
 };

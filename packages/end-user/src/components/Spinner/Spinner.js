@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-
 import React from 'react';
-import spinnerIcon from '../../icons/spinner.svg';
 
 /**
  * @class Spinner
@@ -11,7 +9,11 @@ import spinnerIcon from '../../icons/spinner.svg';
  *      To define the base "data-id" value for the card
  *
  */
-const Spinner = ({ 'data-id': dataId }) => <img className="spinner" src={spinnerIcon} alt="Loading spinner" data-id={dataId} />;
+const Spinner = ({ 'data-id': dataId }) => (
+    <div className="spinner">
+        <div className="spinner__icon" data-id={dataId}></div>
+    </div>
+);
 
 Spinner.propTypes = {
     'data-id': PropTypes.string,

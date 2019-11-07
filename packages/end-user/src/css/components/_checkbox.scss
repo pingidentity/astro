@@ -40,10 +40,19 @@ $checkbox-border-color: $color-neutral-40;
     position: absolute;
     left: 0;
     top: 0;
+    text-transform: none;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
 
     &:after {
-        content: '';
-        background: url('../icons/checkmark.svg') center no-repeat;
+        content: $icon-approve;
+        font-family: $icon-font;
+        font-size: 9px;
+        width: $spacing-lg - 6px;
+        height: $spacing-lg - 6px;
+        line-height: $spacing-lg - 6px;
         position: absolute;
         top: 0;
         right: 0;

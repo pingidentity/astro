@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import errorIcon from '../../icons/error.svg';
-import alertIcon from '../../icons/alert.svg';
-import successIcon from '../../icons/success.svg';
 
 /**
  * @class Feedback
@@ -24,9 +21,9 @@ const Message = ({ children, type, 'data-id': dataId }) => {
 
     return (
         <div className={classNames} data-id={dataId}>
-            {type === 'error' && <img className="feedback__icon" src={errorIcon} alt="Error" />}
-            {type === 'alert' && <img className="feedback__icon" src={alertIcon} alt="Alert" />}
-            {type === 'success' && <img className="feedback__icon" src={successIcon} alt="Success" />}
+            {type === 'error' && <span className="feedback__icon icon-error-triangle"></span>}
+            {type === 'alert' && <span className="feedback__icon icon-alert"></span>}
+            {type === 'success' && <span className="feedback__icon icon-success-round"></span>}
             <div className="feedback__message">{children}</div>
         </div>
     );

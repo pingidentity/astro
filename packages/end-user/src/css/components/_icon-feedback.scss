@@ -1,4 +1,4 @@
-.icon-feedback {
+.iconfeedback {
     color: $color-neutral-20;
     font-size: $font-size-xl;
     font-weight: 200;
@@ -9,12 +9,23 @@
         color: $color-success-green;
     }
 
+    &--error {
+        color: $color-critical-red;
+    }
+
+    &--warning {
+        color: $color-warning-yellow;
+    }
+
     &__icon {
-        margin-bottom: $spacing-md;
+        margin-bottom: $spacing-lg;
+        display: block;
+        font-size: 80px;
     }
 
     &__label {
         margin: 0;
+        color: $color-neutral-20;
         font-family: "proxima-nova", sans-serif;
     }
 
@@ -25,10 +36,9 @@
     }
 
     &--small &__icon {
-        height: 50px;
         margin-bottom: 0;
         margin-right: $spacing-sm;
-        width: 50px;
+        font-size: 30px;
     }
 
     &--small &__label {

@@ -6,6 +6,7 @@
 
 .feedback__icon {
     @extend %icon-pair__icon;
+    margin-right: $spacing-sm;
 }
 
 .feedback__message {

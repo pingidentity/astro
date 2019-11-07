@@ -2,14 +2,16 @@ $caret-height: 16px;
 
 @mixin caret {
     &:after {
-        content: '';
+        font-family: $icon-font;
+        content: $icon-dropdown-arrow;
+        font-size: 13px;
+        line-height: 13px;
         position: absolute;
         right: $spacing-sm;
         top: 50%;
         transform: translateY(-50%);
-        background: url('../icons/caret.svg') center no-repeat;
-        height: 8px;
-        width: 10px;
+        height: 16px;
+        width: 16px;
         pointer-events: none;
     }
 }

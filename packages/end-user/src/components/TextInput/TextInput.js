@@ -100,24 +100,32 @@ const TextInput = ({
         'text-input--primary': type === textInputTypes.PRIMARY,
     });
 
+    const wrapperClassNames = classnames('text-input-wrapper', className, {
+        'text-input-wrapper--error': type === textInputTypes.ERROR,
+        'text-input-wrapper--success': type === textInputTypes.SUCCESS,
+        'text-input-wrapper--primary': type === textInputTypes.PRIMARY,
+    });
+
     return (
-        <input
-            className={classNames}
-            data-id={dataId}
-            defaultValue={defaultValue}
-            id={id}
-            name={id}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onKeyPress={onKeyPress}
-            onKeyDown={onKeyDown}
-            onMouseDown={onMouseDown}
-            placeholder={placeholder}
-            type="text"
-            value={value}
-            style={{ width }}
-        />
+        <span className={wrapperClassNames}>
+            <input
+                className={classNames}
+                data-id={dataId}
+                defaultValue={defaultValue}
+                id={id}
+                name={id}
+                onChange={onChange}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onKeyPress={onKeyPress}
+                onKeyDown={onKeyDown}
+                onMouseDown={onMouseDown}
+                placeholder={placeholder}
+                type="text"
+                value={value}
+                style={{ width }}
+            />
+        </span>
     );
 };
 

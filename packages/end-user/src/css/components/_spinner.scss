@@ -1,9 +1,18 @@
 .spinner {
     animation: spin 1.5s linear infinite;
     display: block;
-    height: 50px;
-    margin: $spacing-xx auto;
-    width: 50px;
+    margin: $spacing-xx 0;
+    text-align: center;
+
+    &__icon {
+        &:after {
+            font-family: $icon-font;
+            content: $icon-spinner;
+            font-size: 50px;
+            color: $color-success;
+            display: inline-block;
+        }
+    }
 }
 
 @keyframes spin {

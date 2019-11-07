@@ -56,15 +56,29 @@ $modal-menu-button-radius: 4px;
         }
 
         &--selected {
-            background-image: url("../icons/success.svg");
-            background-position: right $spacing-sm center;
-            background-repeat: no-repeat;
+            position: relative;
+
+            &:after {
+                font-family: $icon-font;
+                content: $icon-success-round;
+                font-size: 14px;
+                line-height: 14px;
+                color: $color-success;
+                position: absolute;
+                right: $spacing-sm;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 16px;
+                width: 16px;
+            }
         }
     }
 
     &__icon {
         float: left;
         margin-right: $spacing-md;
+        font-size: 25px;
+        color: $color-neutral-20;
     }
 
     &__label, &__sublabel {

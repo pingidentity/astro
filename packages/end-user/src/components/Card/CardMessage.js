@@ -6,7 +6,7 @@ export const messageTypes = {
     critical: {
         fill: '#EDDAD9', // $color-critical-red-light
         color: '#A31200', // $color-critical-red-dark
-        icon: '../../icons/error.svg',
+        icon: 'error-triangle',
     },
 };
 
@@ -33,13 +33,7 @@ const CardMessage = ({
     return (
         <div className={classNames} data-id={dataId} style={{ backgroundColor: type.fill }}>
             <div className="card__message--icon">
-                <img
-                    src={type.icon}
-                    alt="Message icon"
-                    style={{
-                        fill: type.color,
-                    }}
-                />
+                <span className={`icon-${type.icon}`} style={{ color: type.color }}></span>
             </div>
             <div className="card__message--content" style={{ color: type.color }}>
                 {children}

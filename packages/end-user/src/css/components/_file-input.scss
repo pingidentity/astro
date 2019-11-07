@@ -96,8 +96,8 @@ $image-input-size: 100px;
 }
 
 .image-input__camera-icon {
-    height: 30px;
-    width: 40px;
+    font-size: 30px;
+    line-height: 30px;
 }
 
 .image-input__selected-thumbnail {
@@ -126,11 +126,19 @@ $image-input-size: 100px;
     background-color: $color-neutral-100;
     border-radius: ceil($size/2);
 
-    background-image: url(../icons/pencil.svg);
-    background-position: center;
-    background-size: 16px;
-    background-repeat: no-repeat;
     box-shadow: $shadow-overlay;
+    text-transform: none;
+    text-align: center;
+
+    &:after {
+        font-family: $icon-font;
+        content: $icon-edit;
+        font-size: 16px;
+        height: $size;
+        width: $size;
+        line-height: $size;
+        color: $color-active-blue;
+    }
 }
 
 .image-input__edit-menu {

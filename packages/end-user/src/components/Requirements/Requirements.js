@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noIcon from '../../icons/incomplete.svg';
-import yesIcon from '../../icons/success.svg';
-import errorIcon from '../../icons/error.svg';
+import classnames from 'classnames';
 
-const Requirement = ({ status, name }) => (
-    <div className="requirement">
-        {status === 'no' && <img className="requirement__icon" src={noIcon} alt="No" />}
-        {status === 'yes' && <img className="requirement__icon" src={yesIcon} alt="Yes" />}
-        {status === 'error' && <img className="requirement__icon" src={errorIcon} alt="Error" />}
-        <span className="requirement__name">{name}</span>
-    </div>
-);
+const Requirement = ({ status, name }) => {
+    const requirementClassNames = classnames('requirement__icon', {
+        'icon-incomplete': status === 'no',
+        'icon-success-round': status === 'yes',
+        'requirement__icon--success': status === 'yes',
+        'icon-error-triangle': status === 'error',
+        'requirement__icon--error': status === 'error',
+    });
+
+    return (
+        <div className="requirement">
+            <span className={requirementClassNames}></span>
+            <span className="requirement__name">{name}</span>
+        </div>
+    );
+};
 
 Requirement.propTypes = {
     status: PropTypes.string,

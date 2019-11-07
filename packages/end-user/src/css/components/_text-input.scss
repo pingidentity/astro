@@ -14,14 +14,14 @@
         border-color: $color-critical-red;
 
         background: right $spacing-sm center no-repeat url("../icons/error.svg");
-        background-color: white;
+        background-color: $color-white;
 
         padding-right: $spacing-xl;
     }
 
     &--success {
         background: right $spacing-sm center no-repeat url("../icons/success.svg");
-        background-color: white;
+        background-color: $color-white;
 
         padding-right: $spacing-xl;
     }
@@ -41,5 +41,53 @@
     &--dropdown-search {
         border-width: 0 0 1px 0;
         border-color: $color-neutral-70;
+    }
+}
+
+/**
+ * NOTE: For backwards-compatibility we unset bg images in favor
+ * of font icon pseudo elements only if inside a wrapper
+ */
+.text-input-wrapper {
+    position: relative;
+
+    .text-input {
+        display: unset;
+
+        &--error, &--error:focus {
+            background: $color-white;
+        }
+
+        &--success {
+            background: $color-white;
+        }
+    }
+
+    &--error {
+        &::after {
+            content: $icon-error-triangle;
+            font-family: $icon-font;
+            color: $color-critical-red;
+            font-size: 16px;
+            line-height: 16px;
+            text-transform: none;
+            position: absolute;
+            top: calc(50%-8px);
+            right: $spacing-sm;
+        }
+    }
+
+    &--success {
+        &::after {
+            content: $icon-success-round;
+            font-family: $icon-font;
+            color: $color-success;
+            font-size: 16px;
+            line-height: 16px;
+            text-transform: none;
+            position: absolute;
+            top: calc(50%-8px);
+            right: $spacing-sm;
+        }
     }
 }

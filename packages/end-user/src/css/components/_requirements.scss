@@ -11,6 +11,14 @@
     @extend %icon-pair__icon;
     flex-shrink: 0;
     max-height: 14px;
+
+    &--success {
+        color: $color-success;
+    }
+
+    &--error {
+        color: $color-critical-red;
+    }
 }
 
 .requirement__name {
