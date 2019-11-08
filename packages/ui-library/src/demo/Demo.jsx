@@ -330,7 +330,6 @@ class DemoApp extends React.Component {
                 })}
                 leftNavBarProps={{
                     theme: this.props.lightMode ? LeftNavBar.themes.LIGHT : LeftNavBar.themes.DARK,
-                    legacy: true,
                     ...this.props.nav
                 }}
                 copyrightYear="2015"
