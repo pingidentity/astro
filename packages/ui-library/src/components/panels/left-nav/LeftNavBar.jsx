@@ -467,7 +467,10 @@ class LeftNavSection extends React.Component {
                         this.props.legacy && this.props.selectedNode === item.id && [
                             <div ref="itemSelector" className="selected-item" />,
                             <div ref="itemSelectorArrow" className="selected-item-arrow">
-                                <svg version="1.1" width="10px" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <svg
+                                    version="1.1" width="10px" height="100%" viewBox="0 0 100 100"
+                                    preserveAspectRatio="none"
+                                >
                                     <polyline points="0,0 100,50 0,100" className="arrow" />
                                 </svg>
                             </div>
