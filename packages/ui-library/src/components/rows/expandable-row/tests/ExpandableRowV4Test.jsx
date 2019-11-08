@@ -227,14 +227,14 @@ describe("ExpandableRow v4", function() {
         });
     });
 
-    it("stateless: renders component as collapsed (by default)", function() {
+    it("renders component as collapsed (by default)", function() {
         const component = getComponent();
         const expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
 
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeFalsy();
     });
 
-    it("stateless: no toggle callback", function() {
+    it("no toggle callback", function() {
         const component = getComponent({ onToggle: undefined });
         const expandButton = getExpandButton(component);
 
@@ -242,20 +242,20 @@ describe("ExpandableRow v4", function() {
         //as long as no exception is thrown, the test will pass
     });
 
-    it("stateless: renders the expand button", function() {
+    it("renders the expand button", function() {
         const component = getComponent();
         const expandButton = getExpandButton(component);
 
         expect(ReactTestUtils.isDOMComponent(expandButton)).toBeTruthy();
     });
 
-    it("stateless: renders the edit button by default", function() {
+    it("renders the edit button by default", function() {
         const component = getComponent({ expanded: true });
 
         expect(ReactTestUtils.isDOMComponent(getEditButton(component))).toBeTruthy();
     });
 
-    it("stateless: renders custom edit button", function() {
+    it("renders custom edit button", function() {
         const component = getComponent({
             expanded: true,
             editButton: <div data-id="custom-edit-button">Click me</div>
@@ -267,7 +267,7 @@ describe("ExpandableRow v4", function() {
         expect(customButton.textContent).toBe("Click me");
     });
 
-    it("stateless: renders custom className", function() {
+    it("renders custom className", function() {
         const component = getComponent({
             expanded: true,
             className: "extra"
@@ -276,13 +276,13 @@ describe("ExpandableRow v4", function() {
         expect(getContainer(component).getAttribute("class")).toContain("extra");
     });
 
-    it("stateless: renders the delete button by default", function() {
+    it("renders the delete button by default", function() {
         const component = getComponent({ expanded: true });
 
         expect(ReactTestUtils.isDOMComponent(getDeleteButton(component))).toBeTruthy();
     });
 
-    it("stateless: renders row without delete button when showDelete prop is set to false", function() {
+    it("renders row without delete button when showDelete prop is set to false", function() {
         const component = getComponent({ expanded: true, showDelete: false });
 
         // check css on row
@@ -292,7 +292,7 @@ describe("ExpandableRow v4", function() {
         expect(ReactTestUtils.isDOMComponent(getDeleteButton(component))).toBeFalsy();
     });
 
-    it("stateless: passes non-hash path", function() {
+    it("passes non-hash path", function() {
         const component = getComponent({
             expanded: true,
             editViewRoute: "/my/route"
@@ -303,7 +303,7 @@ describe("ExpandableRow v4", function() {
         expect(editButton.getAttribute("href")).toEqual("/my/route");
     });
 
-    it("stateless: renders the specified delete button", function() {
+    it("renders the specified delete button", function() {
         const component = getComponent({
             expanded: true,
             deleteButton: <div data-id="custom-delete-button">Delete Me</div>
@@ -315,7 +315,7 @@ describe("ExpandableRow v4", function() {
         expect(customButton.textContent).toEqual("Delete Me");
     });
 
-    it("stateless: calls onToggle when expanded", function() {
+    it("calls onToggle when expanded", function() {
         const component = getComponent({ expanded: true });
         const expandButton = getExpandButton(component);
 
@@ -323,7 +323,7 @@ describe("ExpandableRow v4", function() {
         expect(component.props.children.props.onToggle).lastCalledWith(true);
     });
 
-    it("stateless: calls onToggle when collapsed", function() {
+    it("calls onToggle when collapsed", function() {
         const component = getComponent();
         const expandButton = getExpandButton(component);
 
@@ -332,7 +332,7 @@ describe("ExpandableRow v4", function() {
         expect(component.props.children.props.onToggle.mock.calls[0][0]).toBe(false);
     });
 
-    it("stateless: no exception is thrown when onToggle is null", function() {
+    it("no exception is thrown when onToggle is null", function() {
         const component = getComponent({ onToggle: null });
         const expandButton = getExpandButton(component);
 
@@ -374,7 +374,7 @@ describe("ExpandableRow v4", function() {
     });
 
 
-    it("stateful: renders the row as expanded if expanded prop is set to true", function() {
+    it("renders the row as expanded if expanded prop is set to true", function() {
         const component = getComponent({ expanded: true });
         const expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         const content = TestUtils.findRenderedDOMNodeWithDataId(component, "content");
@@ -383,21 +383,21 @@ describe("ExpandableRow v4", function() {
         expect(ReactTestUtils.isDOMComponent(content)).toBeTruthy();
     });
 
-    it("stateless: renders the view icon when isEditEnabled prop is set to false", function() {
+    it("renders the view icon when isEditEnabled prop is set to false", function() {
         const component = getComponent({ expanded: true, isEditEnabled: false });
         const viewButton = TestUtils.findRenderedDOMNodeWithDataId(component, "edit-btn");
 
         expect(viewButton.className).toEqual("view-btn");
     });
 
-    it("stateless: renders an empty disabled button when showEdit prop is set to false", function() {
+    it("renders an empty disabled button when showEdit prop is set to false", function() {
         const component = getComponent({ expanded: true, showEdit: false });
         const expandableRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expandable-row");
 
         expect(expandableRow.className).toContain("no-edit");
     });
 
-    it("stateless: renders the content when passed in as a children instead of a prop", function() {
+    it("renders the content when passed in as a children instead of a prop", function() {
         const component = getComponent({
             expanded: true,
             children: <div data-id="content-children">Content</div>
@@ -411,7 +411,7 @@ describe("ExpandableRow v4", function() {
         expect(content.textContent).toEqual("Content");
     });
 
-    it("stateless: renders the right-side/row-accessories content", function() {
+    it("renders the right-side/row-accessories content", function() {
         const linkText = "Control Link",
             rowAccessoriesLink = <a className="control-link">{linkText}</a>;
 
@@ -431,7 +431,7 @@ describe("ExpandableRow v4", function() {
     NOTE: Currently we've not been able to test the react-tooltip helpHint in it's shown state. Since the React Tooltip
     does not populate its content until it is displayed, the content of the tooltip cannot yet be tested.
     */
-    it("stateless: renders the right-side/row-accessories help hint", function() {
+    it("renders the right-side/row-accessories help hint", function() {
         const // helpText = "I need help",
             labelText = "Help, I need somebody",
             rowAccessoriesHelp = (
@@ -459,7 +459,7 @@ describe("ExpandableRow v4", function() {
         expect(rowAccessoriesLabelContent.textContent).toEqual(labelText);
     });
 
-    it("stateless: renders a row image when provided", function() {
+    it("renders a row image when provided", function() {
         const imagePath = "http://p1.com/images/image1.jpg";
 
         // test without image
@@ -474,7 +474,7 @@ describe("ExpandableRow v4", function() {
         expect(imageContent[0].src).toEqual(imagePath);
     });
 
-    it("stateless: renders a row icon when provided", function() {
+    it("renders a row icon when provided", function() {
         const iconType = "icon-cog";
 
         // test without icon
@@ -491,7 +491,7 @@ describe("ExpandableRow v4", function() {
         expect(iconContent.length).toEqual(1);
     });
 
-    it("stateless: should generate delete button with confirmation when confirmDelete provided", function() {
+    it("should generate delete button with confirmation when confirmDelete provided", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true,
@@ -503,7 +503,7 @@ describe("ExpandableRow v4", function() {
         expect(getDeleteButton(component)).toBeNull();
     });
 
-    it("stateful: should generate delete button with confirmation when confirmDelete provided", function() {
+    it("should generate delete button with confirmation when confirmDelete provided", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true,
@@ -515,7 +515,7 @@ describe("ExpandableRow v4", function() {
         expect(getDeleteButton(component)).toBeNull();
     });
 
-    it("stateless: should generate delete button without confirmation when confirmDelete not provided", function() {
+    it("should generate delete button without confirmation when confirmDelete not provided", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true
@@ -526,7 +526,7 @@ describe("ExpandableRow v4", function() {
         expect(getDeleteButton(component)).toBeTruthy();
     });
 
-    it("stateful: should generate delete button without confirmation when confirmDelete not provided", function() {
+    it("should generate delete button without confirmation when confirmDelete not provided", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true,
@@ -537,7 +537,7 @@ describe("ExpandableRow v4", function() {
         expect(getDeleteButton(component)).toBeTruthy();
     });
 
-    it("stateful: should show delete confirm dialog", function() {
+    it("should show delete confirm dialog", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true,
@@ -555,7 +555,7 @@ describe("ExpandableRow v4", function() {
         expect(deleteConfirmDialog).toBeTruthy();
     });
 
-    it("stateful: should hide delete confirm dialog", function() {
+    it("should hide delete confirm dialog", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true,
@@ -655,7 +655,7 @@ describe("ExpandableRow v4", function() {
         expect(deleteConfirmDialog).toEqual(null);
     });
 
-    it("stateful: should trigger onDelete callback when confirmDelete is false", function() {
+    it("should trigger onDelete callback when confirmDelete is false", function() {
         const component = getComponent({
             expanded: true,
             showDelete: true,
@@ -671,31 +671,21 @@ describe("ExpandableRow v4", function() {
         expect(component.props.children.props.onDelete).toBeCalled();
     });
 
-    it("stateless: renders the status as good", function() {
+    it("renders the status as good", function() {
         const component = getComponent({ status: ExpandableRow.Statuses.GOOD });
         const status = TestUtils.findRenderedDOMNodeWithDataId(component, "status");
         const icon = TestUtils.findRenderedDOMNodeWithClass(status, "status-indicator--icon");
         expect(icon.className).toContain("status-indicator--icon__success");
     });
 
-    it("stateless: renders the status as error", function() {
+    it("renders the status as error", function() {
         const component = getComponent({ status: ExpandableRow.Statuses.ERROR });
         const status = TestUtils.findRenderedDOMNodeWithDataId(component, "status");
         const icon = TestUtils.findRenderedDOMNodeWithClass(status, "status-indicator--icon");
         expect(icon.className).toContain("status-indicator--icon__error");
     });
 
-    it("stateless: should trigger onEditButtonClick callback on edit-btn click", function() {
-        const component = getComponent({ expanded: true, showEdit: true, onEditButtonClick: jest.fn() });
-
-        const editButton = getEditButton(component);
-
-        ReactTestUtils.Simulate.click(editButton);
-
-        expect(component.props.children.props.onEditButtonClick).toBeCalled();
-    });
-
-    it("stateful: should trigger onEditButtonClick callback on edit-btn click", function() {
+    it("should trigger onEditButtonClick callback on edit-btn click", function() {
         const component = getComponent({
             expanded: true,
             showEdit: true,
