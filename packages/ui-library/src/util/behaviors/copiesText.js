@@ -29,15 +29,11 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
     };
 
     _copyText = () => {
-        const selection = global.getSelection();
-
-        if (selection.toString() === "") {
-            clipboard.writeText(this.props.text).then(() => {
-                this.setState({ message: 1 });
-            }).catch(() => {
-                this.setState({ message: -1 });
-            });
-        }
+        clipboard.writeText(this.props.text).then(() => {
+            this.setState({ message: 1 });
+        }).catch(() => {
+            this.setState({ message: -1 });
+        });
     };
 
     _hintMessage = () => {
