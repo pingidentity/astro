@@ -43,7 +43,7 @@ class ExpandableRowDemo extends React.Component {
             [`order${index}`]: destination,
             [`value${index}`]: destination,
         });
-    }
+    };
 
     _handleDelete = () => {
         this.setState({
@@ -165,12 +165,10 @@ class ExpandableRowDemo extends React.Component {
                     />
                     <ExpandableRow
                         title="Row with Toggle"
-                        subtitle="stateful"
                         rowAccessories={<Toggle />}
                     />
                     <ExpandableRow
                         title="Row with Pill Button"
-                        subtitle="stateless"
                         expanded={this.state.expanded1}
                         onToggle={this._onToggle(1)}
                         rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
@@ -215,12 +213,10 @@ class ExpandableRowDemo extends React.Component {
                     />
                     <ExpandableRow
                         title="Row in Waiting Mode"
-                        subtitle="stateful"
                         waiting={true}
                     />
                     <ExpandableRow
                         title="Row in Ordering Mode"
-                        subtitle="stateful"
                         ordering={{
                             position: 40,
                             total: 50,
@@ -272,24 +268,22 @@ class ExpandableRowDemo extends React.Component {
                     />
                     {!this.state.rowDeleted && (
                         <ExpandableRow
-                            title="Row with Delete Confirmation with Custom delete title"
-                            subtitle="stateless"
-                            expanded={this.state.expanded3}
+                            title="Row with Delete Confirmation with Custom Confirmation Popup"
                             onToggle={this._onToggle(3)}
-                            onDeleteCancelClick={this._handleDeleteCancel}
-                            onDeleteConfirmClick={this._handleDeleteConfirm}
                             showDelete={true}
                             confirmDelete={true}
                             confirmDeleteTitle="Custom delete title"
-                            showDeleteConfirm={this.state.showDeleteConfirm}
-                            onDelete={this._handleDelete}
+                            onDeleteConfirmClick={this._handleDeleteConfirm}
+                            confirmDeleteContent={({ onCancel, onConfirm, confirmLabel, cancelLabel }) => (<div>
+                                <button key="confirm" onClick={onConfirm}>{confirmLabel}</button>
+                                <button key="cancel" onClick={onCancel}>{cancelLabel}</button>
+                            </div>)}
                             labelDeleteConfirm="Are you sure you want to delete this row?"
                         />
                     )}
                     {!this.state.rowCustomDeleted && (
                         <ExpandableRow
                             title="Row with Custom Delete Tooltip Button"
-                            subtitle="stateless"
                             expanded={this.state.expanded4}
                             onToggle={this._onToggle(4)}
                             deleteButton={customDeleteButton}
