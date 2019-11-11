@@ -8,8 +8,11 @@
         position: relative;
 
         &:after {
-            content: '';
-            background: url('../icons/caret-blue.svg') center no-repeat;
+            font-family: $icon-font;
+            content: $pingicon-dropdown-arrow;
+            font-size: 10px;
+            line-height: 10px;
+            color: $color-active-blue;
             padding: $spacing-xs 0;
             position: absolute;
             height: $caret-height;

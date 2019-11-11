@@ -2,22 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import successIcon from '../../icons/ghost-success.svg';
-import errorIcon from '../../icons/ghost-error.svg';
-import timedOutIcon from '../../icons/ghost-timed-out.svg';
-import stoppedIcon from '../../icons/ghost-stopped.svg';
-import disabledIcon from '../../icons/ghost-disabled.svg';
-import hourGlassIcon from '../../icons/hour-glass.svg';
-import safeIcon from '../../icons/safe.svg';
-
 const typeIcons = {
-    success: successIcon,
-    error: errorIcon,
-    timeout: timedOutIcon,
-    stopped: stoppedIcon,
-    disabled: disabledIcon,
-    hourGlass: hourGlassIcon,
-    safe: safeIcon,
+    success: 'pingicon-ghost-success',
+    error: 'pingicon-ghost-error',
+    timeout: 'pingicon-ghost-timed-out',
+    stopped: 'pingicon-clear',
+    disabled: 'pingicon-ghost-disabled',
+    hourGlass: 'pingicon-hour-glass',
+    safe: 'pingicon-safe',
 };
 
 const IconFeedback = ({ type, children, small, bold }) => {
@@ -25,9 +17,15 @@ const IconFeedback = ({ type, children, small, bold }) => {
         'icon-feedback--small': small,
         'icon-feedback--bold': bold,
     });
+
+    const iconClassNames = classnames('icon-feedback__icon', typeIcons[type], {
+        'icon-feedback--success': type === 'success',
+        'icon-feedback--error': type === 'error' || type === 'disabled' || type === 'timeout' || type === 'stopped' || type === 'hourGlass' || type === 'safe',
+    });
+
     return (
         <div className={classNames}>
-            <img src={typeIcons[type]} className="icon-feedback__icon" alt="" />
+            <span className={iconClassNames}></span>
             <p className="icon-feedback__label">{children}</p>
         </div>
     );
@@ -36,7 +34,7 @@ const IconFeedback = ({ type, children, small, bold }) => {
 IconFeedback.propTypes = {
     type: PropTypes.string,
     small: PropTypes.bool,
-    bold: PropTypes.bool
+    bold: PropTypes.bool,
 };
 
 IconFeedback.defaultProps = {

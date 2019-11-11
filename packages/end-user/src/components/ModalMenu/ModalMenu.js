@@ -4,14 +4,10 @@ import classnames from 'classnames';
 
 import { inStateContainer } from '../../util/StateContainer';
 
-import smsIcon from '../../icons/sms.svg';
-import emailIcon from '../../icons/email.svg';
-import mobileIcon from '../../icons/mobile.svg';
-
 const icons = {
-    sms: smsIcon,
-    email: emailIcon,
-    mobile: mobileIcon,
+    sms: 'pingicon-chat',
+    email: 'pingicon-email',
+    mobile: 'pingicon-mobile',
 };
 
 const StatelessModalMenu = ({
@@ -42,7 +38,7 @@ const StatelessModalMenu = ({
                             })}
                             onClick={() => itemClicked(option)}
                         >
-                            <img className="modal-menu__icon" src={icons[option.icon]} alt="" />
+                            <span className={`modal-menu__icon ${icons[option.icon]}`}></span>
                             <span>
                                 <span className="modal-menu__label">{option.label}</span>
                                 <span className="modal-menu__sublabel">{option.sublabel}</span>

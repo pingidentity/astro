@@ -54,7 +54,7 @@ const TextBlock = ({
 }) => {
     const classNamesOuter = classnames('text-block', className, {
         'text-block--small': size === sizes.SM,
-        'text-block--large': size === sizes.SM,
+        'text-block--large': size === sizes.LG,
         'text-block--small-right': size === sizes.SMALLRIGHT,
         'text-block--margin-sm': spacing === margins.SM,
         'text-block--margin-xx': spacing === margins.XXL,

@@ -137,11 +137,11 @@ class HelpHint extends React.Component {
         } = this.props;
 
         if (iconName) {
-            return `icon-${iconName}`;
+            return `pingicon-${iconName}`;
         } else {
             return lock
-                ? "icon-lock"
-                : "icon-help";
+                ? "pingicon-lock"
+                : "pingicon-help";
         }
     }
 

@@ -239,7 +239,7 @@ class Message extends React.Component {
 
         return (
             <div className="message__progress" data-id={this.props["data-id"]+"-progress"}>
-                {percent >= 100 && <div className="message__progress-icon icon-check" />}
+                {percent >= 100 && <div className="message__progress-icon pingicon-check" />}
                 <div className="message__progress-text" data-id={this.props["data-id"]+"-progress-text"}>{text}</div>
                 {percent < 100 &&
                     <div className="message__progress-border">
@@ -297,7 +297,7 @@ class Message extends React.Component {
 
         return (
             <div className={classes} data-id={this.props["data-id"]}>
-                {iconName && <div className={classnames("message__icon", `icon-${iconName}`)} />}
+                {iconName && <div className={classnames("message__icon", `pingicon-${iconName}`)} />}
                 {!minimized && text && (<span className="message__text">{text}</span>)}
                 {progress && this._renderProgress()}
                 {!hideClose && <a className="close" onClick={this._handleRemove} data-id="message-close"></a>}

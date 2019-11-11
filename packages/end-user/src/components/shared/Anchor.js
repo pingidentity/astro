@@ -44,8 +44,8 @@ class AnchorBase extends React.Component {
 
     _typeIcon = type => {
         switch (type) {
-            case linkTypes.ADD: return <span className="icon-plus anchor__icon" />;
-            case linkTypes.REMOVE: return <span className="icon-clear anchor__icon" />;
+            case linkTypes.ADD: return <span className="pingicon-plus anchor__icon" />;
+            case linkTypes.REMOVE: return <span className="pingicon-clear anchor__icon" />;
             case linkTypes.PAGE_RETURN:
             case linkTypes.BLOCK:
             default: return null;

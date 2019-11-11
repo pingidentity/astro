@@ -9,12 +9,36 @@
         color: $color-success-green;
     }
 
+    &--error {
+        color: $color-critical-red;
+    }
+
+    &--warning {
+        color: $color-warning-yellow;
+    }
+
     &__icon {
-        margin-bottom: $spacing-md;
+        margin-bottom: $spacing-lg;
+        display: block;
+        font-size: 80px;
+
+        /**
+         * Added for BW
+         */
+        font-family: $icon-font;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     &__label {
         margin: 0;
+        color: $color-neutral-20;
         font-family: "proxima-nova", sans-serif;
     }
 
@@ -25,9 +49,13 @@
     }
 
     &--small &__icon {
-        height: 50px;
         margin-bottom: 0;
         margin-right: $spacing-sm;
+        font-size: 30px;
+    }
+
+    &--small img.icon-feedback__icon {
+        height: 50px;
         width: 50px;
     }
 

@@ -36,7 +36,6 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 .float-label__input, .float-label .float-label__input {
     padding-top: $float-label-input-padding-top;
     padding-bottom: $float-label-input-padding-bottom;
-    padding-left: $spacing-sm + $spacing-sm;
 
     &::placeholder {
         color: rgba(255,255,255,0);
