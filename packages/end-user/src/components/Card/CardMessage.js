@@ -33,7 +33,7 @@ const CardMessage = ({
     return (
         <div className={classNames} data-id={dataId} style={{ backgroundColor: type.fill }}>
             <div className="card__message--icon">
-                <span className={`icon-${type.icon}`} style={{ color: type.color }}></span>
+                <span className={`pingicon-${type.icon}`} style={{ color: type.color }}></span>
             </div>
             <div className="card__message--content" style={{ color: type.color }}>
                 {children}

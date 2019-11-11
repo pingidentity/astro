@@ -4,10 +4,10 @@ import classnames from 'classnames';
 
 const Requirement = ({ status, name }) => {
     const requirementClassNames = classnames('requirement__icon', {
-        'icon-incomplete': status === 'no',
-        'icon-success-round': status === 'yes',
+        'pingicon-incomplete': status === 'no',
+        'pingicon-success-round': status === 'yes',
         'requirement__icon--success': status === 'yes',
-        'icon-error-triangle': status === 'error',
+        'pingicon-error-triangle': status === 'error',
         'requirement__icon--error': status === 'error',
     });
 

@@ -5,9 +5,9 @@ import classnames from 'classnames';
 import { inStateContainer } from '../../util/StateContainer';
 
 const icons = {
-    sms: 'icon-chat',
-    email: 'icon-email',
-    mobile: 'icon-mobile',
+    sms: 'pingicon-chat',
+    email: 'pingicon-email',
+    mobile: 'pingicon-mobile',
 };
 
 const StatelessModalMenu = ({

@@ -3,7 +3,7 @@ $caret-height: 16px;
 @mixin caret {
     &:after {
         font-family: $icon-font;
-        content: $icon-dropdown-arrow;
+        content: $pingicon-dropdown-arrow;
         font-size: 13px;
         line-height: 13px;
         position: absolute;

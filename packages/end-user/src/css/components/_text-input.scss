@@ -66,7 +66,7 @@
 
     &--error {
         &::after {
-            content: $icon-error-triangle;
+            content: $pingicon-error-triangle;
             font-family: $icon-font;
             color: $color-critical-red;
             font-size: 16px;
@@ -80,7 +80,7 @@
 
     &--success {
         &::after {
-            content: $icon-success-round;
+            content: $pingicon-success-round;
             font-family: $icon-font;
             color: $color-success;
             font-size: 16px;

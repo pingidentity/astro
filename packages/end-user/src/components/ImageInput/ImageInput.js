@@ -140,7 +140,7 @@ export default class ImageInput extends Component {
 
     _renderContentSelector = () => (
         <div key='image-input__selector' className='image-input__selector'>
-            <span className='icon-camera image-input__camera-icon'></span>
+            <span className='pingicon-camera image-input__camera-icon'></span>
             <div className='image-input__text'>
                 Add Photo
             </div>
@@ -156,7 +156,7 @@ export default class ImageInput extends Component {
                     role='img'
                     style={{ backgroundImage: `url(${this.state.value})` }}
                 />
-                <span className='icon-camera image-input__camera-icon'></span>
+                <span className='pingicon-camera image-input__camera-icon'></span>
                 <div className='image-input__text'>
                     Change
                 </div>

@@ -47,7 +47,7 @@ $checkbox-border-color: $color-neutral-40;
     text-align: center;
 
     &:after {
-        content: $icon-approve;
+        content: $pingicon-approve;
         font-family: $icon-font;
         font-size: 9px;
         width: $spacing-lg - 6px;

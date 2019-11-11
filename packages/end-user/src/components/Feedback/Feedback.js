@@ -21,9 +21,9 @@ const Message = ({ children, type, 'data-id': dataId }) => {
 
     return (
         <div className={classNames} data-id={dataId}>
-            {type === 'error' && <span className="feedback__icon icon-error-triangle"></span>}
-            {type === 'alert' && <span className="feedback__icon icon-alert"></span>}
-            {type === 'success' && <span className="feedback__icon icon-success-round"></span>}
+            {type === 'error' && <span className="feedback__icon pingicon-error-triangle"></span>}
+            {type === 'alert' && <span className="feedback__icon pingicon-alert"></span>}
+            {type === 'success' && <span className="feedback__icon pingicon-success-round"></span>}
             <div className="feedback__message">{children}</div>
         </div>
     );

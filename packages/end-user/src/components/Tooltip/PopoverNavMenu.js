@@ -14,7 +14,7 @@ const getIconClassName = (props, options = {}) => {
     if (props.iconClassName) {
         return icon;
     }
-    return `icon-${icon}`;
+    return `pingicon-${icon}`;
 };
 
 const PopoverMenuBase = PopoverMenu.Base;

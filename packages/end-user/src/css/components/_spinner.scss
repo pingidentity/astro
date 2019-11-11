@@ -16,7 +16,7 @@
     &__icon {
         &:after {
             font-family: $icon-font;
-            content: $icon-spinner;
+            content: $pingicon-spinner;
             font-size: 50px;
             color: $color-success;
             display: inline-block;
