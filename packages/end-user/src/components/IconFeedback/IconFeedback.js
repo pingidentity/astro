@@ -20,8 +20,7 @@ const IconFeedback = ({ type, children, small, bold }) => {
 
     const iconClassNames = classnames('iconfeedback__icon', typeIcons[type], {
         'iconfeedback--success': type === 'success',
-        'iconfeedback--error': type === 'error' || type === 'disabled' || type === 'timeout' || type === 'stopped',
-        'iconfeedback--warning':  type === 'hourGlass' || type === 'safe',
+        'iconfeedback--error': type === 'error' || type === 'disabled' || type === 'timeout' || type === 'stopped' || type === 'hourGlass' || type === 'safe',
     });
 
     return (
