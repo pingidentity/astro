@@ -15,17 +15,13 @@ module.exports = {
                 use: ExtractTextPlugin.extract(['css-loader?sourceMap', 'postcss-loader', 'sass-loader']),
             },
             {
-                test: /\.(png|jpe?g|otf|svg)$/i,
+                test: /\.(png|jpe?g|otf|ttf|woff|woff2|svg)$/i,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]',
                     context: 'src',
                 },
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf)$/,
-                loader: 'url-loader?limit=100000',
-            },
+            }
         ],
     },
     plugins: [

@@ -13,20 +13,20 @@ const typeIcons = {
 };
 
 const IconFeedback = ({ type, children, small, bold }) => {
-    const classNames = classnames('iconfeedback', `iconfeedback--${type}`, {
-        'iconfeedback--small': small,
-        'iconfeedback--bold': bold,
+    const classNames = classnames('icon-feedback', `icon-feedback--${type}`, {
+        'icon-feedback--small': small,
+        'icon-feedback--bold': bold,
     });
 
-    const iconClassNames = classnames('iconfeedback__icon', typeIcons[type], {
-        'iconfeedback--success': type === 'success',
-        'iconfeedback--error': type === 'error' || type === 'disabled' || type === 'timeout' || type === 'stopped' || type === 'hourGlass' || type === 'safe',
+    const iconClassNames = classnames('icon-feedback__icon', typeIcons[type], {
+        'icon-feedback--success': type === 'success',
+        'icon-feedback--error': type === 'error' || type === 'disabled' || type === 'timeout' || type === 'stopped' || type === 'hourGlass' || type === 'safe',
     });
 
     return (
         <div className={classNames}>
             <span className={iconClassNames}></span>
-            <p className="iconfeedback__label">{children}</p>
+            <p className="icon-feedback__label">{children}</p>
         </div>
     );
 };
@@ -34,7 +34,7 @@ const IconFeedback = ({ type, children, small, bold }) => {
 IconFeedback.propTypes = {
     type: PropTypes.string,
     small: PropTypes.bool,
-    bold: PropTypes.bool
+    bold: PropTypes.bool,
 };
 
 IconFeedback.defaultProps = {

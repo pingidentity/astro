@@ -1,4 +1,4 @@
-.iconfeedback {
+.icon-feedback {
     color: $color-neutral-20;
     font-size: $font-size-xl;
     font-weight: 200;
@@ -21,6 +21,19 @@
         margin-bottom: $spacing-lg;
         display: block;
         font-size: 80px;
+
+        /**
+         * Added for BW
+         */
+        font-family: $icon-font;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     &__label {
@@ -39,6 +52,11 @@
         margin-bottom: 0;
         margin-right: $spacing-sm;
         font-size: 30px;
+    }
+
+    &--small img.icon-feedback__icon {
+        height: 50px;
+        width: 50px;
     }
 
     &--small &__label {
