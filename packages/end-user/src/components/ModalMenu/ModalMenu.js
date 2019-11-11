@@ -4,10 +4,6 @@ import classnames from 'classnames';
 
 import { inStateContainer } from '../../util/StateContainer';
 
-import smsIcon from '../../icons/sms.svg';
-import emailIcon from '../../icons/email.svg';
-import mobileIcon from '../../icons/mobile.svg';
-
 const icons = {
     sms: 'icon-chat',
     email: 'icon-email',
