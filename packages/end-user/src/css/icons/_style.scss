@@ -28,36 +28,6 @@ $icon-font: 'iconfont';
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-ghost-error {
-  &:before {
-    content: $icon-ghost-error; 
-  }
-}
-.icon-ghost-success {
-  &:before {
-    content: $icon-ghost-success; 
-  }
-}
-.icon-incomplete {
-  &:before {
-    content: $icon-incomplete; 
-  }
-}
-.icon-mobile {
-  &:before {
-    content: $icon-mobile; 
-  }
-}
-.icon-hour-glass {
-  &:before {
-    content: $icon-hour-glass; 
-  }
-}
-.icon-safe {
-  &:before {
-    content: $icon-safe; 
-  }
-}
 .icon-camera {
   &:before {
     content: $icon-camera; 
@@ -83,34 +53,44 @@ $icon-font: 'iconfont';
     content: $icon-spinner; 
   }
 }
-.icon-download-box {
+.icon-error {
   &:before {
-    content: $icon-download-box; 
+    content: $icon-error; 
   }
 }
-.icon-native-app {
+.icon-hour-glass {
   &:before {
-    content: $icon-native-app; 
+    content: $icon-hour-glass; 
   }
 }
-.icon-signpost {
+.icon-safe {
   &:before {
-    content: $icon-signpost; 
+    content: $icon-safe; 
   }
 }
-.icon-timer {
+.icon-success {
   &:before {
-    content: $icon-timer; 
+    content: $icon-success; 
   }
 }
-.icon-connection-status {
+.icon-ghost-error {
   &:before {
-    content: $icon-connection-status; 
+    content: $icon-ghost-error; 
   }
 }
-.icon-saml {
+.icon-ghost-success {
   &:before {
-    content: $icon-saml; 
+    content: $icon-ghost-success; 
+  }
+}
+.icon-incomplete {
+  &:before {
+    content: $icon-incomplete; 
+  }
+}
+.icon-mobile {
+  &:before {
+    content: $icon-mobile; 
   }
 }
 .icon-account {
@@ -266,6 +246,11 @@ $icon-font: 'iconfont';
 .icon-collapse {
   &:before {
     content: $icon-collapse; 
+  }
+}
+.icon-connection-status {
+  &:before {
+    content: $icon-connection-status; 
   }
 }
 .icon-curly-braces {
@@ -463,6 +448,11 @@ $icon-font: 'iconfont';
     content: $icon-minus-rounded; 
   }
 }
+.icon-native-app {
+  &:before {
+    content: $icon-native-app; 
+  }
+}
 .icon-network {
   &:before {
     content: $icon-network; 
@@ -568,6 +558,11 @@ $icon-font: 'iconfont';
     content: $icon-robot; 
   }
 }
+.icon-saml {
+  &:before {
+    content: $icon-saml; 
+  }
+}
 .icon-search {
   &:before {
     content: $icon-search; 
@@ -586,6 +581,11 @@ $icon-font: 'iconfont';
 .icon-shield {
   &:before {
     content: $icon-shield; 
+  }
+}
+.icon-signpost {
+  &:before {
+    content: $icon-signpost; 
   }
 }
 .icon-slider {
@@ -628,9 +628,9 @@ $icon-font: 'iconfont';
     content: $icon-spinner1; 
   }
 }
-.icon-success {
+.icon-success1 {
   &:before {
-    content: $icon-success; 
+    content: $icon-success1; 
   }
 }
 .icon-success-round {
@@ -656,6 +656,11 @@ $icon-font: 'iconfont';
 .icon-thumb {
   &:before {
     content: $icon-thumb; 
+  }
+}
+.icon-timer {
+  &:before {
+    content: $icon-timer; 
   }
 }
 .icon-twitter {
@@ -713,4 +718,3 @@ $icon-font: 'iconfont';
     content: $icon-welcome; 
   }
 }
-

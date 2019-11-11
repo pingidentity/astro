@@ -19,9 +19,9 @@ const IconFeedback = ({ type, children, small, bold }) => {
     });
 
     const iconClassNames = classnames('iconfeedback__icon', typeIcons[type], {
-        'iconfeedback--success': type === typeIcons.success,
-        'iconfeedback--error': type === typeIcons.error || type === typeIcons.disabled,
-        'iconfeedback--warning': type === typeIcons.timeout || type === typeIcons.hourGlass || type === typeIcons.safe,
+        'iconfeedback--success': type === 'success',
+        'iconfeedback--error': type === 'error' || type === 'disabled' || type === 'timeout' || type === 'stopped',
+        'iconfeedback--warning':  type === 'hourGlass' || type === 'safe',
     });
 
     return (
