@@ -29,18 +29,19 @@ pipeline {
               release version: ${env.RELEASE_VERSION}
               git tag: ${env.GIT_RELEASE_TAG}
             """
-            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
-              withCredentials([
-                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
-              ]){
-                sh  """
-                  git add package.json
-                  git config --global user.email 'devtools+jenkins@pingidentity.com'
-                  git config --global user.name 'devtools-jenkins'
-                  git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
-                """
-              }
+            withCredentials([
+              sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+            ]){
+              sh  """
+                git add package.json
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+                git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+
+                git tag ${env.GIT_RELEASE_TAG}
+                GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+              """
             }
           }
         }
@@ -51,7 +52,7 @@ pipeline {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Building & publishing"
-            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               sh "npm run dist"
               sh "cd dist && npm publish"
             }
