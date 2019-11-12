@@ -719,9 +719,6 @@ fieldset {
     clear: both;
     min-width: 0;
 
-    .input-select {
-        margin-right: 0;
-    }
     legend {
         text-transform: uppercase;
 
@@ -744,7 +741,8 @@ fieldset {
             font-size: 14px;
             color: $color-elephant;
 
-            .input-radio {
+            .input-radio,
+            .input-select {
                 &:last-of-type {
                     margin-right: 0;
                 }
@@ -2141,9 +2139,11 @@ input[type=file] {
         margin: 0 12px 0 0 !important;
 
         .input-message__icon {
-            top: round(($default-input-height) - 6);
+            bottom: 12px;
             right: -12px;
+            top: auto;
         }
+
         .input-message__text {
             box-sizing: border-box;
             min-width: calc(100% - 10px);
