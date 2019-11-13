@@ -133,7 +133,7 @@ class DashboardCard extends React.Component {
                             }
                         </InputModifier>
                     </div>,
-                    <div className="dashboard-card__front">
+                    <div key="front" className="dashboard-card__front">
                         <InputModifier inputColor={inputColors.LIGHT} key="front">
                             {this.props.front}
                         </InputModifier>
