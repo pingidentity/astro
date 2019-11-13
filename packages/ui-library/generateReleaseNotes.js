@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const fs = require("fs");
+const moment = require("moment");
 
 const parseIssue = ({
     key,
@@ -21,9 +22,28 @@ if (user === undefined || pass === undefined) {
     console.log("Please supply a username and password");
 }
 
-const params = `sprint = "UIP-${version}" AND fixversion =  ${version} AND status = Closed `;
+const params = `project = "UIP" AND fixversion =  ${version} AND status = Closed `;
 const requestUri = `https://jira.pingidentity.com/rest/api/2/search?jql=${encodeURIComponent(params)}`;
 
+function addNotesToDoc(v, p) {
+    const notePath = "./src/demo/components/docs/notes.json";
+    const previousNotes = require(`${notePath}`);
+
+    const noteTemplate = {
+        title: `v${v}`,
+        date: moment().format("MM/DD/YY"),
+        file: `./release-notes/${p}`
+    };
+
+    const newNotes = [noteTemplate, ...previousNotes];
+
+
+    fs.writeFile(
+        notePath,
+        JSON.stringify(newNotes, null, 4),
+        err => err ? console.log("Could not write to file: ", err) : console.log(`${notePath} write success`)
+    );
+}
 
 fetch(requestUri, {
     method: "GET",
@@ -46,7 +66,8 @@ fetch(requestUri, {
             .join("\r\n");
 
         const parsedVersion = version.split(".").join("-");
-        const path = `src/demo/components/docs/release-notes/v${parsedVersion}.md`;
+        const fileName = `v${parsedVersion}.md`;
+        const path = `src/demo/components/docs/release-notes/${fileName}`;
 
         if (fs.existsSync(path)) {
             console.log(`File ${path} already exists. Please delete the file before continuing.`);
@@ -56,7 +77,9 @@ fetch(requestUri, {
         fs.writeFile(
             path,
             content,
-            err => console.log("Could not write to file: ", err)
+            err => err ? console.log("Could not write to file: ", err) : console.log(`${path} write success`)
         );
+
+        addNotesToDoc(version, fileName);
     })
     .catch(err => console.log(err));
