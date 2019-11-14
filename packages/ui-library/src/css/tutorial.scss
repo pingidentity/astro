@@ -51,6 +51,12 @@
             border-top: 1px solid $color-neutral-90;
         }
 
+        &--actions {
+            & > * {
+                margin-left: $spacing-sm;
+            }
+        }
+
         &--progress {
             ul.tutorial__modal--steps {
                 padding: 0;
@@ -98,20 +104,20 @@
             }
         }
 
-        // Arrow -- bottom
-        &:before {
-            width: 20px;
-            height: 20px;
-            transform: rotate(45deg);
-            content: " ";
-            display: inline-block;
-            background: $color-white;
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            display: inline-block;
-            box-shadow: $popup-box-shadow;
-            z-index: 90;
+        &--pointer {
+            &:after {
+                content: "";
+                width: 20px;
+                height: 20px;
+                transform: rotate(45deg);
+                display: inline-block;
+                background: $color-white;
+                position: absolute;
+                top: -10px;
+                left: 20px;
+                box-shadow: $popup-box-shadow;
+                z-index: 90;
+            }
         }
     }
 }

@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import Button, { buttonTypes } from "../buttons/Button";
-import FlexRow from "../layout/FlexRow";
+import Link from "../general/Link";
+import FlexRow, {
+    alignments,
+    justifyOptions,
+} from "../layout/FlexRow";
 import Icon, { iconTypes } from "../general/Icon";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
-
-const OFFSET = 25;
 
 export default class Tutorial extends React.Component {
     constructor(props) {
@@ -52,7 +54,7 @@ export default class Tutorial extends React.Component {
             });
 
             progressIndicators.push((
-                <li className={indicatorClassnames}></li>
+                <li className={indicatorClassnames} key={`step-${i}`}></li>
             ));
         }
 
@@ -66,12 +68,20 @@ export default class Tutorial extends React.Component {
     }
 
     _renderPopup = (steps, active) => {
+        const {
+            labelNext,
+            labelPrevious,
+            onNext,
+            onPrevious,
+        } = this.props;
+
         const step = steps[active - 1];
         if (active > 0 && step) {
             return (
                 <PopperContainer
                     getReference={step.target}
-                    placement="bottom"
+                    placement={step.side}
+                    pointerClassName="tutorial__modal--pointer"
                 >
                     <div className="tutorial__modal" ref={this.modal}>
                         <div className="tutorial__modal--close">
@@ -79,13 +89,13 @@ export default class Tutorial extends React.Component {
                         </div>
                         {this._renderStepContent(step)}
                         <div className="tutorial__modal--footer">
-                            <FlexRow>
+                            <FlexRow alignment={alignments.CENTER} justify={justifyOptions.SPACEBETWEEN}>
                                 <div>
                                     {this._renderProgress(active, steps.length)}
                                 </div>
-                                <div>
-                                    <Button onClick={this.props.onPrevious}>Back</Button>
-                                    <Button type={buttonTypes.PRIMARY} onClick={this.props.onNext}>Next</Button>
+                                <div className="tutorial__modal--actions">
+                                    <Link onClick={onPrevious}>{labelPrevious}</Link>
+                                    <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>{labelNext}</Button>
                                 </div>
                             </FlexRow>
                         </div>
@@ -136,4 +146,6 @@ Tutorial.propTypes = {
 Tutorial.defaultProps = {
     visible: true,
     active: 0,
+    labelNext: "Next",
+    labelPrevious: "Back",
 };
