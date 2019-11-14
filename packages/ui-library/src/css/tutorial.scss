@@ -103,16 +103,12 @@
         &--close {
             position: absolute;
             top: $spacing-lg;
-            right: $spacing-md;
+            right: $spacing-lg;
             cursor: pointer;
         }
 
         &--content {
-            padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
-        }
-
-        &--header {
-            margin-bottom: $spacing-md;
+            padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
         }
 
         &--title {
@@ -120,6 +116,19 @@
             font-weight: 700;
             color: $color-neutral-20;
             margin-bottom: $spacing-md;
+            margin-right: 30px;
+        }
+
+        &--header {
+            margin-bottom: $spacing-md;
+
+            // Offset for close button
+            margin-right: 30px;
+
+            // Remove title close button offset if header is present
+            & + .tutorial__modal--title {
+                margin-right: 0;
+            }
         }
 
         &--description {
@@ -130,7 +139,7 @@
 
         &--footer {
             margin-top: $spacing-md;
-            padding: $spacing-md $spacing-md;
+            padding: $spacing-md $spacing-lg;
             border-top: 1px solid $color-neutral-90;
         }
 
@@ -180,7 +189,7 @@
 
                     &--inactive {
                         &:before {
-                            background: $color-neutral-90;
+                            background: $color-neutral-50;
                         }
                     }
                 }

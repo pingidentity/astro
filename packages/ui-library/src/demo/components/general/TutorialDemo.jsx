@@ -1,5 +1,6 @@
 import React from "react";
 import Tutorial from "../../../components/general/Tutorial";
+import Text from "../../../components/general/Text";
 import TutorialButton from "../../../components/buttons/TutorialButton";
 
 export default class TutorialDemo extends React.Component {
@@ -9,27 +10,39 @@ export default class TutorialDemo extends React.Component {
         steps: [
             {
                 title: "This is the First Step",
-                description: "This is some text...",
-                headerContent: (
-                    <span>Some header content...</span>
+                description: (
+                    <Text type="primary">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco.
+                    </Text>
                 ),
-                side: "bottom right",
-                target: () => document.querySelectorAll("[data-id='BasicInputs-label']")[0]
+                side: "bottom",
+                target: () => document.querySelectorAll("[data-id='BasicInputs']")[0]
             },
             {
                 title: "This is the Second Step",
-                description: "This is some text...",
-                headerContent: (
-                    <span>Some header content...</span>
+                description: (
+                    <Text type="primary">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco.
+                    </Text>
                 ),
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='Templates-label']")[0]
             },
             {
                 title: "This is the Third Step",
-                description: "This is some text...",
-                headerContent: (
-                    <span>Some header content...</span>
+                description: (
+                    <Text type="primary">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco.
+                    </Text>
                 ),
                 side: "bottom left",
                 target: () => document.getElementsByClassName("doc-links")[0]
