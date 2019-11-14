@@ -55,9 +55,12 @@
         z-index: 100;
         width: 400px;
         max-width: 500px;
-        position: absolute;
         background: $color-white;
         box-shadow: $popup-box-shadow;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
         &--content {
             padding: $spacing-lg $spacing-md $spacing-md $spacing-md;

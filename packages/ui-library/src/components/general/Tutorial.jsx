@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import { Portal } from "react-portal";
 import Button, { buttonTypes } from "../buttons/Button";
 import Link from "../general/Link";
 import FlexRow, {
@@ -28,26 +29,28 @@ export default class Tutorial extends React.Component {
         } = this.props;
 
         return (
-            <div className="tutorial__welcome">
-                <div className="tutorial__welcome--content">
-                    <div className="tutorial__welcome--title">
-                        {messageWelcomeTitle}
+            <Portal>
+                <div className="tutorial__welcome">
+                    <div className="tutorial__welcome--content">
+                        <div className="tutorial__welcome--title">
+                            {messageWelcomeTitle}
+                        </div>
+                        <div className="tutorial__welcome--description">
+                            {messageWelcomeDescription}
+                        </div>
                     </div>
-                    <div className="tutorial__welcome--description">
-                        {messageWelcomeDescription}
+                    <div className="tutorial__welcome--actions">
+                        <div>
+                            <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
+                                {labelGetStarted}
+                            </Button>
+                        </div>
+                        <div>
+                            <Link onClick={onClose}>{labelDismiss}</Link>
+                        </div>
                     </div>
                 </div>
-                <div className="tutorial__welcome--actions">
-                    <div>
-                        <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
-                            {labelGetStarted}
-                        </Button>
-                    </div>
-                    <div>
-                        <Link onClick={onClose}>{labelDismiss}</Link>
-                    </div>
-                </div>
-            </div>
+            </Portal>
         );
     }
 
