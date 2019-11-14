@@ -4,6 +4,8 @@ var PropTypes = require("prop-types");
 
 var React = require("react");
 
+import Button from "../../buttons/Button";
+
 /**
  * @class ButtonCell
  * @desc ButtonCell displays a button to a cell where users can click it inside a cell.
@@ -12,6 +14,8 @@ var React = require("react");
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {string} [iconName]
+ *     Sets the icon for the button
  *
  * @param {string} [value]
  *     Label to display on the button
@@ -29,6 +33,7 @@ class ButtonCell extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        iconName: PropTypes.string,
         value: PropTypes.string,
         onGridCellAction: PropTypes.func
     };
@@ -39,8 +44,13 @@ class ButtonCell extends React.Component {
 
     render() {
         return (
-            <button data-id={this.props["data-id"]}
-                className={this.props.className} onClick={this.props.onGridCellAction} />
+            <Button
+                data-id={this.props["data-id"]}
+                className={this.props.className}
+                iconName={this.props.iconName}
+                inline
+                onClick={this.props.onGridCellAction}
+            />
         );
     }
 }

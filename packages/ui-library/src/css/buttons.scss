@@ -266,6 +266,25 @@ button,
             }
         }
 
+        &.button--circle {
+            $size: 28px;
+
+            padding: 0;
+            height: $size;
+            width: $size;
+            min-width: $size;
+            text-align: center;
+
+            border-radius: ceil($size/2);
+
+            .button__icon {
+                left: 0;
+                right: 0;
+                text-align: center;
+                width: auto;
+            }
+        }
+
         &.small {
             $size: 21px;
             height: $size;
@@ -330,6 +349,21 @@ button,
 }
 
 .button {
+    &__icon {
+        position: absolute;
+        left: $spacing-md;
+        width: $spacing-md;
+        top: 50%;
+        text-align: center;
+        transform: translateY(-50%);
+        font-size: 13px;
+        line-height: 1em;
+    }
+
+    &--icon {
+        padding-left: $spacing-md + $spacing-sm + $spacing-sm;
+    }
+
     &--active {
         background: $color-midnight;
         border-color: $color-midnight;

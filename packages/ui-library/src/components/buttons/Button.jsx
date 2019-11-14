@@ -62,7 +62,14 @@ const buttonTypes = {
 
 const buttonTypeList = Object.values(buttonTypes);
 
+const iconAliases = {
+    "add": "plus",
+    "remove": "minus",
+    "prev": "left",
+    "next": "right",
+};
 
+const iconAlias = iconName => iconAliases[iconName] || iconName;
 
 function BaseButton ({
     active,
@@ -84,11 +91,13 @@ function BaseButton ({
     target,
     type,
 }) {
+    const hasLabel = label || text || children;
     const classes = classnames(
         "button",
         className,
-        iconName,
         {
+            "button--icon": iconName && hasLabel,
+            "button--circle": iconName && !hasLabel,
             "button--no-spacing": noSpacing,
             inline,
             loading: loading,
@@ -112,6 +121,7 @@ function BaseButton ({
             href={href}
             target={target}
         >
+            {iconName && <span className={`icon-${iconAlias(iconName)} button__icon`} />}
             {label}
             {text}
             {children}
