@@ -102,9 +102,9 @@ describe("ColumnSelectorRow", () => {
             buttonType: buttonTypes.ADD
         });
 
-        const button = component.find("button.column-selector__row-button");
+        const button = component.find("button.column-selector__row-button .icon-plus");
 
-        expect(button.props().className).toContain("plus");
+        expect(button.exists).toBeTruthy();
     });
 
     it("renders a plus button for the ADD button type", () => {
@@ -112,9 +112,9 @@ describe("ColumnSelectorRow", () => {
             buttonType: buttonTypes.REMOVE
         });
 
-        const button = component.find("button.column-selector__row-button");
+        const button = component.find("button.column-selector__row-button .icon-minus");
 
-        expect(button.props().className).toContain("minus");
+        expect(button.exists).toBeTruthy();
     });
 
     it("renders custom button", () => {

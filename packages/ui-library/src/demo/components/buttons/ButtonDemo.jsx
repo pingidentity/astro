@@ -71,6 +71,10 @@ class ButtonsDemo extends Component {
                     iconName="download"
                 />
                 <Button
+                    label="Robot"
+                    iconName="robot"
+                />
+                <Button
                     iconName="edit"
                     inline
                 />
@@ -89,6 +93,15 @@ class ButtonsDemo extends Component {
                 <Button
                     iconName="next"
                     inline
+                />
+                <Button
+                    iconName="clear"
+                    inline
+                />
+                <Button
+                    iconName="cog"
+                    inline
+                    label="Configure"
                 />
                 <HR />
                 <Button
