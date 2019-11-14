@@ -767,6 +767,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_tooltips_PopoverMenuDemo.jsx.html"
                     },
                     {
+                        label: "Tutorial",
+                        demo: require("../components/general/TutorialDemo"),
+                        pathToDoc: "components/general/Tutorial.jsx",
+                        pathToSource: "components_general_Tutorial.jsx.html",
+                        pathToDemoSource: "demo_components_general_TutorialDemo.jsx.html",
+                    },
+                    {
                         label: "Wizard",
                         demo: require("../components/wizard/WizardDemo"),
                         pathToDoc: "components/wizard/Wizard.jsx",

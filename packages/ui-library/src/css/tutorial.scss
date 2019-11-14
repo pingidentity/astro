@@ -1,130 +1,117 @@
-
-//Unsure if the dock is pulling the css file. They have similarities but,
-// best for now to keep the css file.
-.introOverlay {
-    background: rgba($color-black, 0.6);
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    position: absolute;
-    z-index: $zindex__elevated;
-    text-align: center;
-    left: 0;
-    top: 0;
-
-    > svg {
-        width: 100%;
-        height: 100%;
+.tutorial {
+    &__bg {
         position: absolute;
+        top: 0;
         left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
     }
-    div.modal {
-        display: inline-block;
-        padding: 20px 20px 77px;
-        margin-top: -100px;
-        margin-left: -200px;
-        top: 50%;
-        left: 50%;
-        background-color: $color-black;
-        width: 400px;
-        opacity: 1;
-        color: $color-white;
 
-        border-radius: 5px;
+    &__modal {
+        background-color: $color-white;
+        border-radius: 4px;
+        z-index: 100;
+        width: 300px;
+        max-width: 400px;
+        position: absolute;
+        background: $color-white;
+        box-shadow: $popup-box-shadow;
 
-        .title {
-            font-size: 36px;
-            line-height: 1em;
-            margin: 0 0 25px;
-            @include font-pn-regular;
-        }
-        .description {
-            text-align: left;
-            line-height: 1.6em;
-            font-size: 18px;
-            @include font-pn-light;
-        }
-        .page {
-            font-weight: 100;
-            font-size: 20px;
-            padding: 30px 0;
-            color: transparentize($color-white, 0.5);
-        }
-        .controls {
+        &--close {
             position: absolute;
-            bottom: 0;
-            left: 5px;
-            right: 5px;
-            border-top: 1px solid transparentize($color-white, 0.75);
-            padding: 20px 0;
-            text-align: right;
-
+            top: $spacing-lg;
+            right: $spacing-lg;
         }
-        button[type=button] {
-            border: none;
-            font-size: 16px;
-            line-height: 1em;
-            padding: 10px 20px;
-            color: $color-white;
-            background-color: $color-active-blue;
-            font-weight: 100;
 
-            border-radius: 2px;
+        &--content {
+            padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
+        }
 
-            &.prev,
-            &.dismiss {
-                color: $color-active-blue;
-                background-color: transparent;
-                font-weight: 500;
-            }
-            &.dismiss {
-                position: absolute;
-                bottom: 10px;
-                left: 10px;
+        &--header {
+            margin-bottom: $spacing-md;
+        }
+
+        &--title {
+            font-size: 20px;
+            font-weight: 700;
+            color: $color-neutral-20;
+            margin-bottom: $spacing-md;
+        }
+
+        &--description {
+            font-size: 14px;
+            font-weight: 500;
+            color: $color-neutral-10;
+        }
+
+        &--footer {
+            margin-top: $spacing-md;
+            padding: $spacing-md $spacing-lg;
+            border-top: 1px solid $color-neutral-90;
+        }
+
+        &--progress {
+            ul.tutorial__modal--steps {
                 padding: 0;
-            }
-            &[disabled] {
-                &:hover {
-                    color: $color-white;
+                margin: 0;
+                list-style: none;
+
+                li.tutorial__modal--step {
+                    display: inline-block;
+                    margin-right: $spacing-xs;
+                    margin-left: -2px;
+                    border: 1px solid transparent;
+                    padding: 2px;
+
+                    &:before {
+                        content: "";
+                        height: 8px;
+                        width: 8px;
+                        border-radius: 50%;
+                        background: $color-active-blue;
+                        display: block;
+                    }
+
+                    &--complete {
+                        &:before {
+                            background: $color-active-blue;
+                        }
+                    }
+
+                    &--active {
+                        border: 1px solid $color-active-blue;
+                        padding: 2px;
+                        border-radius: 50%;
+
+                        &:before {
+                            background: $color-active-blue;
+                        }
+                    }
+
+                    &--inactive {
+                        &:before {
+                            background: $color-neutral-90;
+                        }
+                    }
                 }
             }
         }
-    }
-    path {
-        stroke: $color-active-blue;
-        fill: none;
 
-        &.line {
-            stroke-width: 2px;
+        // Arrow -- bottom
+        &:before {
+            width: 20px;
+            height: 20px;
+            transform: rotate(45deg);
+            content: " ";
+            display: inline-block;
+            background: $color-white;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            display: inline-block;
+            box-shadow: $popup-box-shadow;
+            z-index: 90;
         }
-        &.marker {
-            stroke-width: 0.04em;
-        }
-    }
-    > .spotlight {
-        background: $color-white;
-        border-radius: 15px;
-        position: absolute;
-        text-align: left;
-        overflow: hidden;
-    }
-}
-
-html body .introOverlay > .spotlight > * {
-    position: relative;
-    left: 0;
-    top: 0;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-
-.icons {
-    .inline-icon {
-        display: inline-block;
-        width: 35px;
-        text-align: center;
-        color: $color-walrus;
     }
 }

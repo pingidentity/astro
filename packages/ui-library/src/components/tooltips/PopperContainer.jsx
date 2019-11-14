@@ -124,13 +124,12 @@ class PopperContainer extends React.Component {
             }
         };
 
-
         if (reference) {
             const popper = new Popper(
                 ReactDOM.findDOMNode(reference),
                 ReactDOM.findDOMNode(this.popper),
                 config
-            );
+            )
 
             window.requestAnimationFrame(popper.update);
         }
