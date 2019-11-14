@@ -57,26 +57,34 @@ pipeline {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               sh """
                 npm run package-library
-
-                npm run build-css
-                mkdir cdn/${env.RELEASE_VERSION}
-                mv cdn/css cdn/${env.RELEASE_VERSION}
-
-                cp -rf src/images cdn/${env.RELEASE_VERSION}
-                cp -rf src/fonts cdn/${env.RELEASE_VERSION}
-
+                make CDN_VERSION=${env.RELEASE_VERSION} build-cdn-assets
                 npm publish;
               """
             }
           }
         }
      }
-    post {
-        always {
-          archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
+      post {
+          always {
+            archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
+          }
         }
+    }
+    stage('update-library-demo') {
+      when {
+        expression { params.BRELEASE_BRANCH != 'master'	}
       }
-  }
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder'){
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.RELEASE_VERSION} package-and-upload-for-hosting"
+            }
+          }
+        }
+
+      }
+    }
     stage('cdn deploy') {
       steps {
         dir("${env.WORKSPACE}/packages/ui-library") {
