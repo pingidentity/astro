@@ -103,7 +103,7 @@
         &--close {
             position: absolute;
             top: $spacing-lg;
-            right: $spacing-lg;
+            right: $spacing-md;
             cursor: pointer;
         }
 
@@ -130,7 +130,7 @@
 
         &--footer {
             margin-top: $spacing-md;
-            padding: $spacing-md $spacing-lg;
+            padding: $spacing-md $spacing-md;
             border-top: 1px solid $color-neutral-90;
         }
 

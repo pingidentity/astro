@@ -74,7 +74,7 @@ export default class Tutorial extends React.Component {
 
     _renderProgress = (activeStep, steps) => {
         const progressIndicators = [];
-
+        
         for (let i = 1; i <= steps; i = i + 1) {
             const indicatorClassnames = classnames("tutorial__modal--step", {
                 "tutorial__modal--step--complete": i < activeStep,
