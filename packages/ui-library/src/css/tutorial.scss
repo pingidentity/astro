@@ -1,11 +1,85 @@
+@import "details-tooltip/popper-container";
+
+.popper-container {
+    z-index: 73;
+
+    &__pointer {
+        z-index: 74px;
+        *[x-placement^='top'] & {
+            @include makePointer(15px, $color-white, down);
+            margin-top: -5px;
+        }
+
+        *[x-placement^='bottom'] & {
+            @include makePointer(15px, $color-white, up);
+            margin-bottom: -5px;
+        }
+
+        *[x-placement^='right'] & {
+            @include makePointer(15px, $color-white, left);
+            margin-right: -5px;
+        }
+
+        *[x-placement^='left'] & {
+            @include makePointer(15px, $color-white, right);
+            margin-left: -5px;
+        }
+    }
+}
+
 .tutorial {
     &__bg {
+        &:before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 72;
+        }
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    &__welcome {
+        background-color: $color-white;
+        border-radius: 4px;
+        z-index: 100;
+        width: 400px;
+        max-width: 500px;
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        background: $color-white;
+        box-shadow: $popup-box-shadow;
+
+        &--content {
+            padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
+        }
+
+        &--title {
+            font-size: 20px;
+            font-weight: 700;
+            color: $color-neutral-20;
+            margin-bottom: $spacing-md;
+        }
+
+        &--description {
+            font-size: 14px;
+            font-weight: 500;
+            color: $color-neutral-10;
+        }
+
+        &--actions {
+            text-align: right;
+            padding: $spacing-md $spacing-md $spacing-lg $spacing-md;
+
+            & > * {
+                margin-left: $spacing-sm;
+            }
+        }
     }
 
     &__modal {
@@ -101,22 +175,6 @@
                         }
                     }
                 }
-            }
-        }
-
-        &--pointer {
-            &:after {
-                content: "";
-                width: 20px;
-                height: 20px;
-                transform: rotate(45deg);
-                display: inline-block;
-                background: $color-white;
-                position: absolute;
-                top: -10px;
-                left: 20px;
-                box-shadow: $popup-box-shadow;
-                z-index: 90;
             }
         }
     }

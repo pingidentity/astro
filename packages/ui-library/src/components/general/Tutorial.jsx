@@ -18,9 +18,29 @@ export default class Tutorial extends React.Component {
     }
 
     _renderWelcome = () => {
+        const {
+            messageWelcomeTitle,
+            messageWelcomeDescription,
+            labelPrevious,
+            labelNext,
+            onPrevious,
+            onNext,
+        } = this.props;
+
         return (
             <div className="tutorial__welcome">
-
+                <div class="tutorial__welcome--content">
+                    <div className="tutorial__welcome--title">
+                        {messageWelcomeTitle}
+                    </div>
+                    <div className="tutorial__welcome--description">
+                        {messageWelcomeDescription}
+                    </div>
+                </div>
+                <div className="tutorial__welcome--actions">
+                    <Link onClick={onPrevious}>{labelPrevious}</Link>
+                    <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>{labelNext}</Button>
+                </div>
             </div>
         );
     }
@@ -74,12 +94,13 @@ export default class Tutorial extends React.Component {
             onNext,
             onPrevious,
         } = this.props;
-
         const step = steps[active - 1];
+
         if (active > 0 && step) {
             return (
                 <PopperContainer
                     getReference={step.target}
+                    key={step.target}
                     placement={step.side}
                     pointerClassName="tutorial__modal--pointer"
                 >
@@ -112,18 +133,21 @@ export default class Tutorial extends React.Component {
             "data-id": dataId,
             active,
             steps,
+            visible,
         } = this.props;
 
         return (
-            <div className="tutorial">
-                <div className="tutorial__bg">
-                    { active === 0 ? (
-                        this._renderWelcome()
-                    ) : (
-                        this._renderPopup(steps, active)
-                    )}
+            visible ? (
+                <div className="tutorial" data-id={dataId}>
+                    <div className="tutorial__bg">
+                        { active === 0 ? (
+                            this._renderWelcome()
+                        ) : (
+                            this._renderPopup(steps, active)
+                        )}
+                    </div>
                 </div>
-            </div>
+            ) : null
         );
     }
 }
@@ -144,7 +168,7 @@ Tutorial.propTypes = {
 };
 
 Tutorial.defaultProps = {
-    visible: true,
+    visible: false,
     active: 0,
     labelNext: "Next",
     labelPrevious: "Back",
