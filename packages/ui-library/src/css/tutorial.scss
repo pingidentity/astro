@@ -1,28 +1,32 @@
 @import "details-tooltip/popper-container";
 
 .popper-container {
-    z-index: 73;
+    z-index: 73 !important;
 
     &__pointer {
         z-index: 74px;
         *[x-placement^='top'] & {
-            @include makePointer(15px, $color-white, down);
+            @include makePointer(13px, $color-white, down);
             margin-top: -5px;
+            margin-left: 5px;
         }
 
         *[x-placement^='bottom'] & {
-            @include makePointer(15px, $color-white, up);
+            @include makePointer(13px, $color-white, up);
             margin-bottom: -5px;
+            margin-left: 5px;
         }
 
         *[x-placement^='right'] & {
-            @include makePointer(15px, $color-white, left);
+            @include makePointer(13px, $color-white, left);
             margin-right: -5px;
+            margin-top: 5px;
         }
 
         *[x-placement^='left'] & {
-            @include makePointer(15px, $color-white, right);
+            @include makePointer(13px, $color-white, right);
             margin-left: -5px;
+            margin-left: 5px;
         }
     }
 }
@@ -73,11 +77,12 @@
         }
 
         &--actions {
-            text-align: right;
+            text-align: center;
             padding: $spacing-md $spacing-md $spacing-lg $spacing-md;
 
             & > * {
                 margin-left: $spacing-sm;
+                margin-top: $spacing-sm;
             }
         }
     }
@@ -90,12 +95,13 @@
         max-width: 400px;
         position: absolute;
         background: $color-white;
-        box-shadow: $popup-box-shadow;
+        // box-shadow: $popup-box-shadow;
 
         &--close {
             position: absolute;
             top: $spacing-lg;
             right: $spacing-lg;
+            cursor: pointer;
         }
 
         &--content {

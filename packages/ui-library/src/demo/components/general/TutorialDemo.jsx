@@ -13,8 +13,8 @@ export default class TutorialDemo extends React.Component {
                 headerContent: (
                     <span>Some header content...</span>
                 ),
-                side: "bottom",
-                target: () => document.getElementById("step__1"),
+                side: "right",
+                target: () => document.querySelectorAll("[data-id='BasicInputs-label']")[0]
             },
             {
                 title: "This is the Second Step",
@@ -22,35 +22,45 @@ export default class TutorialDemo extends React.Component {
                 headerContent: (
                     <span>Some header content...</span>
                 ),
-                side: "right",
-                target: () => document.getElementById("step__2"),
+                side: "bottom",
+                target: () => document.querySelectorAll("[data-id='Templates-label']")[0]
             }
         ],
     };
 
     _onPrevious = () => {
-        this.setState({ active: this.state.active > 0 ? this.state.active - 1 : this.state.active });
+        this.setState({
+            active: this.state.active > 0 ? this.state.active - 1 : this.state.activ
+        });
     }
 
     _onNext = () => {
-        this.setState({ active: this.state.active < this.state.steps.length ? this.state.active + 1 : this.state.active });
+        this.setState({
+            active: this.state.active < this.state.steps.length ? this.state.active + 1 : this.state.active
+        });
+    }
+
+    _onClose = () => {
+        this.setState({
+            visible: false,
+            active: 0,
+        });
     }
 
     _openTutorial = () => {
-        this.setState({ visible: true, active: 1 });
+        this.setState({ visible: true, active: 0 });
     }
 
     render() {
         return (
             <div>
                 <Button onClick={this._openTutorial}>Start Tutorial</Button>
-                <div><span id="step__1">First Element</span></div>
-                <div><span id="step__2">Second Element</span></div>
                 <Tutorial
                     active={this.state.active}
                     visible={this.state.visible}
                     onPrevious={this._onPrevious}
                     onNext={this._onNext}
+                    onClose={this._onClose}
                     messageWelcomeTitle="Welcome to Ping!"
                     messageWelcomeDescription="Here's some description text..."
                     steps={this.state.steps}

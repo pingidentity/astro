@@ -21,15 +21,15 @@ export default class Tutorial extends React.Component {
         const {
             messageWelcomeTitle,
             messageWelcomeDescription,
-            labelPrevious,
-            labelNext,
+            labelGetStarted,
+            labelDismiss,
             onPrevious,
             onNext,
         } = this.props;
 
         return (
             <div className="tutorial__welcome">
-                <div class="tutorial__welcome--content">
+                <div className="tutorial__welcome--content">
                     <div className="tutorial__welcome--title">
                         {messageWelcomeTitle}
                     </div>
@@ -38,8 +38,14 @@ export default class Tutorial extends React.Component {
                     </div>
                 </div>
                 <div className="tutorial__welcome--actions">
-                    <Link onClick={onPrevious}>{labelPrevious}</Link>
-                    <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>{labelNext}</Button>
+                    <div>
+                        <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
+                            {labelGetStarted}
+                        </Button>
+                    </div>
+                    <div>
+                        <Link onClick={onPrevious}>{labelDismiss}</Link>
+                    </div>
                 </div>
             </div>
         );
@@ -93,6 +99,7 @@ export default class Tutorial extends React.Component {
             labelPrevious,
             onNext,
             onPrevious,
+            onClose,
         } = this.props;
         const step = steps[active - 1];
 
@@ -106,7 +113,7 @@ export default class Tutorial extends React.Component {
                 >
                     <div className="tutorial__modal" ref={this.modal}>
                         <div className="tutorial__modal--close">
-                            <Icon iconName="clear" type={iconTypes.INLINE} />
+                            <Icon iconName="clear" type={iconTypes.INLINE} onClick={onClose}/>
                         </div>
                         {this._renderStepContent(step)}
                         <div className="tutorial__modal--footer">
@@ -159,6 +166,7 @@ Tutorial.propTypes = {
     steps: PropTypes.arrayOf(PropTypes.object),
     onNext: PropTypes.func,
     onPrevious: PropTypes.func,
+    onClose: PropTypes.func,
     messageWelcomeTitle: PropTypes.node,
     messageWelcomeDescription: PropTypes.node,
     labelGetStarted: PropTypes.string,
@@ -172,4 +180,6 @@ Tutorial.defaultProps = {
     active: 0,
     labelNext: "Next",
     labelPrevious: "Back",
+    labelGetStarted: "Get Started",
+    labelDismiss: "Dismiss",
 };
