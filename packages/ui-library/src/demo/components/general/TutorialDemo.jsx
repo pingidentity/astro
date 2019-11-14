@@ -35,9 +35,16 @@ export default class TutorialDemo extends React.Component {
     }
 
     _onNext = () => {
-        this.setState({
-            active: this.state.active < this.state.steps.length ? this.state.active + 1 : this.state.active
-        });
+        if (this.state.active === this.state.steps.length) {
+            this.setState({
+                visible: false,
+                active: 0,
+            });
+        } else {
+            this.setState({
+                active: this.state.active + 1
+            });
+        }
     }
 
     _onClose = () => {
