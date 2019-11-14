@@ -5,25 +5,25 @@
 
     &__pointer {
         z-index: 74px;
-        *[x-placement^='top'] & {
+        *[x-placement^="top"] & {
             @include makePointer(13px, $color-white, down);
             margin-top: -5px;
             margin-left: 5px;
         }
 
-        *[x-placement^='bottom'] & {
+        *[x-placement^="bottom"] & {
             @include makePointer(13px, $color-white, up);
             margin-bottom: -5px;
             margin-left: 5px;
         }
 
-        *[x-placement^='right'] & {
+        *[x-placement^="right"] & {
             @include makePointer(13px, $color-white, left);
             margin-right: -5px;
             margin-top: 5px;
         }
 
-        *[x-placement^='left'] & {
+        *[x-placement^="left"] & {
             @include makePointer(13px, $color-white, right);
             margin-left: -5px;
             margin-left: 5px;
@@ -93,7 +93,7 @@
         z-index: 100;
         width: 300px;
         max-width: 400px;
-        position: absolute;
+        position: relative;
         background: $color-white;
         // box-shadow: $popup-box-shadow;
 

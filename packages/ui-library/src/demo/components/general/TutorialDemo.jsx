@@ -1,6 +1,6 @@
 import React from "react";
 import Tutorial from "../../../components/general/Tutorial";
-import Button from "../../../components/buttons/Button";
+import TutorialButton from "../../../components/buttons/TutorialButton";
 
 export default class TutorialDemo extends React.Component {
     state = {
@@ -13,7 +13,7 @@ export default class TutorialDemo extends React.Component {
                 headerContent: (
                     <span>Some header content...</span>
                 ),
-                side: "right",
+                side: "bottom right",
                 target: () => document.querySelectorAll("[data-id='BasicInputs-label']")[0]
             },
             {
@@ -24,6 +24,15 @@ export default class TutorialDemo extends React.Component {
                 ),
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='Templates-label']")[0]
+            },
+            {
+                title: "This is the Third Step",
+                description: "This is some text...",
+                headerContent: (
+                    <span>Some header content...</span>
+                ),
+                side: "bottom left",
+                target: () => document.getElementsByClassName("doc-links")[0]
             }
         ],
     };
@@ -61,7 +70,7 @@ export default class TutorialDemo extends React.Component {
     render() {
         return (
             <div>
-                <Button onClick={this._openTutorial}>Start Tutorial</Button>
+                <TutorialButton onClick={this._openTutorial}/>
                 <Tutorial
                     active={this.state.active}
                     visible={this.state.visible}

@@ -23,7 +23,7 @@ export default class Tutorial extends React.Component {
             messageWelcomeDescription,
             labelGetStarted,
             labelDismiss,
-            onPrevious,
+            onClose,
             onNext,
         } = this.props;
 
@@ -44,7 +44,7 @@ export default class Tutorial extends React.Component {
                         </Button>
                     </div>
                     <div>
-                        <Link onClick={onPrevious}>{labelDismiss}</Link>
+                        <Link onClick={onClose}>{labelDismiss}</Link>
                     </div>
                 </div>
             </div>
