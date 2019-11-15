@@ -130,10 +130,11 @@ class Row extends React.Component {
  * the type for each row.
  */
 class MultiDragDemo extends React.Component {
+    static flags = [ "use-portal" ];
 
     state = {
         demoType: "STATELESS",
-        columns: data.columns, // used for stateful demo
+        columns: data.columns, // used for stateful (stateless=false) demo
         disabled: false,
         sorted: false
     };
@@ -202,7 +203,7 @@ class MultiDragDemo extends React.Component {
     };
 
     /*
-     * When a drop event happens, the MultiDragStateless component simply makes a callback describing
+     * When a drop event happens, the MultiDragStateless (stateless=true) component simply makes a callback describing
      * what happend. It's up to the user to decide what to do with that operation.
      *
      * Where it gets hairy is if a drop is happening to and from a filtered list.
@@ -326,6 +327,7 @@ class MultiDragDemo extends React.Component {
             <ConfirmTooltip
                 buttonLabel="Confirm"
                 cancelText="Cancel"
+                flags={["use-portal"]}
                 label={
                     <RowButton {...props} />
                 }
@@ -443,11 +445,11 @@ class MultiDragDemo extends React.Component {
                     {this.state.demoType === "STATELESS" &&
                         <div>
                             <h2>
-                                Stateless, Empty Label Set.
+                                Stateless (stateless=true), Empty Label Set.
                                 First column has sort within column disabled.
                             </h2>
                             <MultiDrag
-                                stateless
+                                stateless={true}
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
                                 showSearch={this.props.demo.search === "first"}
                                 onSearch={this._handleSearchStateless}
@@ -480,7 +482,7 @@ class MultiDragDemo extends React.Component {
                     }
                     {this.state.demoType === "STATEFUL" &&
                         <div>
-                            <h2>Stateful</h2>
+                            <h2>Stateful (stateless=false)</h2>
                             <MultiDrag
                                 ref="multi-drag-demo-stateful"
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
