@@ -34,7 +34,7 @@ pipeline {
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
                 sh """
-                    make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.version} package-and-upload-for-hosting
+                    make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.VERSION} package-and-upload-for-hosting
                     make CDN_VERSION=${env.SNAPSHOT_VERSION} build-cdn-assets
                   """
               }

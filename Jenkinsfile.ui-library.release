@@ -72,7 +72,7 @@ pipeline {
     }
     stage('update-library-demo') {
       when {
-        expression { params.BRELEASE_BRANCH != 'master'	}
+        expression { params.RELEASE_BRANCH != 'master'	}
       }
       steps {
         dir("${env.WORKSPACE}/packages/ui-library") {

@@ -2,7 +2,7 @@ HOSTING_SERVER_ADDRESS=uilibrary.ping-eng.com
 HOSTING_SERVER_USERNAME=ubuntu
 
 
-package-and-upload-for-hosting: install-node-npm
+package-and-upload-for-hosting:
 	# PRIVATE_SSH_KEY_PATH, LIB_VERSION variables will be passed in from the command line, see Jenkinsfile.ui-library.build for example
 	set -eo;\
 
