@@ -98,6 +98,30 @@ export default class Tutorial extends React.Component {
         );
     }
 
+    componentDidUpdate(prevProps) {
+        const prevSpotlight = document.querySelectorAll("[data-spotlight='true']")[0];
+
+        if (prevSpotlight !== undefined) {
+            prevSpotlight.remove();
+        }
+
+        if (prevProps.active !== this.props.active && this.props.active <= this.props.steps.length && this.props.active !== 0) {
+            const target = this.props.steps[this.props.active - 1].target;
+            if (target() !== undefined) {
+                const clonedNode = target().cloneNode(true);
+                const dims = target().getBoundingClientRect();
+                clonedNode.style.position = "fixed";
+                clonedNode.style.zIndex = "10000";
+                clonedNode.style.boxShadow = "0 1px 1px 70000px rgba(0, 0, 0, 0.3)";
+                clonedNode.style.pointerEvents = "none";
+                clonedNode.style.top = `${dims.top}px`;
+                clonedNode.style.left = `${dims.left}px`;
+                clonedNode.dataset.spotlight="true";
+                target().parentNode.insertBefore(clonedNode, target());
+            }
+        }
+    }
+
     _renderPopup = (steps, active) => {
         const {
             labelNext,
@@ -110,12 +134,13 @@ export default class Tutorial extends React.Component {
         const step = steps[active - 1];
 
         if (active > 0 && step) {
-            return (
+            return [
                 <PopperContainer
                     getReference={step.target}
                     key={step.target}
                     placement={step.side}
                     pointerClassName="tutorial__modal--pointer"
+                    className="tutorial__modal--popper"
                 >
                     <div className="tutorial__modal" ref={this.modal}>
                         <div className="tutorial__modal--close">
@@ -136,12 +161,13 @@ export default class Tutorial extends React.Component {
                             </FlexRow>
                         </div>
                     </div>
-                </PopperContainer>
-            );
+                </PopperContainer>,
+                <Portal>
+                    <div className="tutorial__cloneHolder"></div>
+                </Portal>
+            ];
         }
     }
-
-    _getReference = () => this.props.target;
 
     render() {
         const {
@@ -155,11 +181,13 @@ export default class Tutorial extends React.Component {
             visible ? (
                 <div className="tutorial" data-id={dataId}>
                     <div className="tutorial__bg">
-                        { active === 0 ? (
-                            this._renderWelcome()
-                        ) : (
-                            this._renderPopup(steps, active)
-                        )}
+                        <div className="">
+                            { active === 0 ? (
+                                this._renderWelcome()
+                            ) : (
+                                this._renderPopup(steps, active)
+                            )}
+                        </div>
                     </div>
                 </div>
             ) : null
@@ -175,8 +203,8 @@ Tutorial.propTypes = {
     onNext: PropTypes.func,
     onPrevious: PropTypes.func,
     onClose: PropTypes.func,
-    messageWelcomeTitle: PropTypes.node,
-    messageWelcomeDescription: PropTypes.node,
+    messageWelcomeTitle: PropTypes.node.isRequired,
+    messageWelcomeDescription: PropTypes.node.isRequired,
     labelGetStarted: PropTypes.string,
     labelNext: PropTypes.string,
     labelFinal: PropTypes.string,
@@ -187,8 +215,9 @@ Tutorial.propTypes = {
 Tutorial.defaultProps = {
     visible: false,
     active: 0,
+    steps: [],
     labelNext: "Next",
-    labelFinal: "Close",
+    labelFinal: "Finish",
     labelPrevious: "Back",
     labelGetStarted: "Get Started",
     labelDismiss: "Dismiss",

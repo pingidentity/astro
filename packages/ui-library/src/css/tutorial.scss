@@ -1,8 +1,6 @@
 @import "details-tooltip/popper-container";
 
 .popper-container {
-    z-index: 73 !important;
-
     &__pointer {
         z-index: 74px;
         *[x-placement^="top"] & {
@@ -33,20 +31,14 @@
 
 .tutorial {
     &__bg {
-        &:before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 72;
-        }
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        // Place one level below Popper
+        z-index: 71;
     }
 
     &__welcome {
@@ -71,12 +63,14 @@
             font-weight: 700;
             color: $color-neutral-20;
             margin-bottom: $spacing-md;
+            text-align: center;
         }
 
         &--description {
             font-size: 14px;
             font-weight: 500;
             color: $color-neutral-10;
+            text-align: center;
         }
 
         &--actions {
@@ -98,7 +92,11 @@
         max-width: 400px;
         position: relative;
         background: $color-white;
-        // box-shadow: $popup-box-shadow;
+
+        &--popper {
+            // Move over bg
+            z-index: 72 !important;
+        }
 
         &--close {
             position: absolute;
@@ -189,7 +187,7 @@
 
                     &--inactive {
                         &:before {
-                            background: $color-neutral-50;
+                            background: $color-neutral-40;
                         }
                     }
                 }

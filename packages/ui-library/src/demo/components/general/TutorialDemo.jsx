@@ -44,8 +44,8 @@ export default class TutorialDemo extends React.Component {
                         exercitation ullamco.
                     </Text>
                 ),
-                side: "bottom left",
-                target: () => document.getElementsByClassName("doc-links")[0]
+                side: "bottom",
+                target: () => document.querySelectorAll("[data-id='search']")[0]
             }
         ],
     };
@@ -90,8 +90,8 @@ export default class TutorialDemo extends React.Component {
                     onPrevious={this._onPrevious}
                     onNext={this._onNext}
                     onClose={this._onClose}
-                    messageWelcomeTitle="Welcome to Ping!"
-                    messageWelcomeDescription="Here's some description text..."
+                    messageWelcomeTitle="Welcome to the Dock!"
+                    messageWelcomeDescription="Here's some description text about the tutorial..."
                     steps={this.state.steps}
                 />
             </div>
