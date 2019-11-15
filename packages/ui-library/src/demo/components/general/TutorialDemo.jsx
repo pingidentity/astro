@@ -10,40 +10,19 @@ export default class TutorialDemo extends React.Component {
         steps: [
             {
                 title: "This is the First Step",
-                description: (
-                    <Text type="primary">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco.
-                    </Text>
-                ),
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='BasicInputs']")[0]
             },
             {
                 title: "This is the Second Step",
-                description: (
-                    <Text type="primary">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco.
-                    </Text>
-                ),
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='Templates-label']")[0]
             },
             {
                 title: "This is the Third Step",
-                description: (
-                    <Text type="primary">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco.
-                    </Text>
-                ),
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='search']")[0]
             }
@@ -93,7 +72,6 @@ export default class TutorialDemo extends React.Component {
                     messageWelcomeTitle="Welcome to the Dock!"
                     messageWelcomeDescription="Here's some description text about the tutorial..."
                     steps={this.state.steps}
-                    theme={themes.DARK}
                 />
             </div>
         );

@@ -71,8 +71,9 @@ $tutorial-dark-text-color: $color-white;
         }
 
         &--description {
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 400;
+            font-style: normal;
             color: $color-neutral-10;
             text-align: center;
         }
@@ -175,8 +176,9 @@ $tutorial-dark-text-color: $color-white;
         }
 
         &--description {
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 400;
+            font-style: normal;
             color: $color-neutral-10;
         }
 
