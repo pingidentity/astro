@@ -22,6 +22,7 @@ describe("PopperContainer", function() {
         const newData = component._matchReferenceWidth(data);
 
         expect(newData.styles.minWidth).toEqual(`${width}px`);
+        expect(newData.styles.maxWidth).toEqual(`${width}px`);
     });
 
     it("should insert the z index into a data object", function() {

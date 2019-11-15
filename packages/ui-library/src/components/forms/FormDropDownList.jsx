@@ -426,6 +426,7 @@ class FormDropDownListStateless extends React.Component {
             return {
                 ...option,
                 label: this._getOptionLabel(option),
+
             };
         });
     }
@@ -727,6 +728,7 @@ class FormDropDownListStateless extends React.Component {
             selectListItem = ReactDOM.findDOMNode(this.refs[selectListTarget]);
 
         selectList.scrollTop = selectListItem ? (selectListItem.offsetTop - 50) : 0;
+
     };
 
     _handleToggle = (e) => {
@@ -834,8 +836,17 @@ class FormDropDownListStateless extends React.Component {
 
     _getReference = () => this.reference;
 
+    _getLongestString = () => {
+        const arr = this._getLabelOptions(this.props.options);
+
+        return arr.reduce((longest, option) => {
+            return option.label.length >= longest.length ? option.label : longest;
+        }, "");
+    }
+
     render() {
         this._setupGroups(this.props);
+
 
         if (this.didPressKey && !this.props.open) {
             this.didPressKey = false;
@@ -882,7 +893,6 @@ class FormDropDownListStateless extends React.Component {
             </ul>
         );
 
-
         return (
             <FormLabel
                 value={this.props.label}
@@ -901,7 +911,7 @@ class FormDropDownListStateless extends React.Component {
                             className={selectClassName}
                             title={this.props.title}>
                             {
-                                <span className="wrapper__spacer">{inputValue}</span>
+                                <span className="wrapper__spacer">{this._getLongestString()}</span>
                                 // for auto-sized dropdowns, it pushes out the width of the input
                             }
                             <FormTextFieldStateless
@@ -920,7 +930,7 @@ class FormDropDownListStateless extends React.Component {
                                     ? this.props.selectedOption.iconName
                                     : undefined }
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
-                                width={InputWidths.MAX}
+                                width={InputWidths.MAX }
                                 ref={el => this.reference = el}
                             />
                             {!this.props.disabled && <div className="arrow" /> }
