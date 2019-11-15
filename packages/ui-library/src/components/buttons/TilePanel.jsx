@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import Button from "./Button";
@@ -50,56 +50,79 @@ const renderOptions = (dataId, tileId, options) => options.map(({
  * </TileButton>
  *
  */
-const TilePanel = ({
-    "data-id": dataId,
-    className,
-    label,
-    options,
-    position,
-    tileId
-}) => {
-    return (
-        <div
-            className={classnames("tile-panel", `tile-panel--${position.toLowerCase()}`, className)}
-            data-id={dataId}
-        >
-            {label && <div className="tile-panel__label">{label}</div>}
-            {Array.isArray(options) && options.some(({ content }) => content !== undefined)
-                ? renderOptions(dataId, tileId, options)
-                : options}
-        </div>
-    );
-};
+export default class TilePanel extends Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        label: PropTypes.string,
+        options: PropTypes.oneOfType([
+            PropTypes.arrayOf(
+                PropTypes.shape({
+                    buttonLabel: PropTypes.string.isRequired,
+                    content: PropTypes.node.isRequired,
+                    id: PropTypes.oneOfType([
+                        PropTypes.number,
+                        PropTypes.string,
+                    ]),
+                    label: PropTypes.string.isRequired,
+                    onButtonClick: PropTypes.func
+                })
+            ),
+            PropTypes.node
+        ]),
+        position: PropTypes.oneOf([
+            "left",
+            "right"
+        ]),
+        tileId: PropTypes.string
+    }
 
-TilePanel.propTypes = {
-    "data-id": PropTypes.string,
-    className: PropTypes.string,
-    label: PropTypes.string,
-    options: PropTypes.oneOfType([
-        PropTypes.arrayOf(
-            PropTypes.shape({
-                buttonLabel: PropTypes.string.isRequired,
-                content: PropTypes.node.isRequired,
-                id: PropTypes.oneOfType([
-                    PropTypes.number,
-                    PropTypes.string,
-                ]),
-                label: PropTypes.string.isRequired,
-                onButtonClick: PropTypes.func
-            })
-        ),
-        PropTypes.node
-    ]),
-    position: PropTypes.oneOf([
-        "left",
-        "right"
-    ]),
-    tileId: PropTypes.string
-};
+    static defaultProps = {
+        "data-id": "tile-selector-panel",
+        position: "left"
+    }
 
-TilePanel.defaultProps = {
-    "data-id": "tile-selector-panel",
-    position: "left"
-};
+    panel = null;
 
-export default TilePanel;
+    // Testing refs is the worst
+    /* istanbul ignore next */
+    scrollIntoView = () => {
+        if (this.panel.scrollIntoView) {
+            this.panel.scrollIntoView(
+                { behavior: "smooth", block: "end", inline: "nearest" }
+            );
+        }
+    }
+
+    componentDidMount() {
+        this.scrollIntoView();
+    }
+
+    /* istanbul ignore next */
+    componentDidUpdate() {
+        this.scrollIntoView();
+    }
+
+    render() {
+        const {
+            "data-id": dataId,
+            className,
+            label,
+            options,
+            position,
+            tileId
+        } = this.props;
+        return (
+            <div
+                className={classnames("tile-panel", `tile-panel--${position.toLowerCase()}`, className)}
+                data-id={dataId}
+                ref={ref => { this.panel = ref; }}
+            >
+                {label && <div className="tile-panel__label">{label}</div>}
+                {Array.isArray(options) && options.some(({ content }) => content !== undefined)
+                    ? renderOptions(dataId, tileId, options)
+                    : options}
+            </div>
+        );
+    }
+}
