@@ -1,5 +1,5 @@
 import React from "react";
-import Tutorial from "../../../components/general/Tutorial";
+import Tutorial, { themes } from "../../../components/general/Tutorial";
 import Text from "../../../components/general/Text";
 import TutorialButton from "../../../components/buttons/TutorialButton";
 
@@ -93,6 +93,7 @@ export default class TutorialDemo extends React.Component {
                     messageWelcomeTitle="Welcome to the Dock!"
                     messageWelcomeDescription="Here's some description text about the tutorial..."
                     steps={this.state.steps}
+                    theme={themes.DARK}
                 />
             </div>
         );

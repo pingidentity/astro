@@ -1,8 +1,12 @@
 @import "details-tooltip/popper-container";
 
+$tutorial-dark-bg-color: darken($color-neutral-10, 20%);
+$tutorial-dark-text-color: $color-white;
+
 .popper-container {
     &__pointer {
         z-index: 74px;
+
         *[x-placement^="top"] & {
             @include makePointer(13px, $color-white, down);
             margin-top: -5px;
@@ -42,7 +46,6 @@
     }
 
     &__welcome {
-        background-color: $color-white;
         border-radius: 4px;
         z-index: 100;
         width: 400px;
@@ -74,6 +77,19 @@
             text-align: center;
         }
 
+        &--dark {
+            background: $tutorial-dark-bg-color;
+            box-shadow: 0 1px 1px 70000px rgba(255, 255, 255, 0.3);
+
+            .tutorial__welcome--title {
+                color: $tutorial-dark-text-color;
+            }
+
+            .tutorial__welcome--description {
+                color: $tutorial-dark-text-color;
+            }
+        }
+
         &--actions {
             text-align: center;
             padding: $spacing-md $spacing-md $spacing-lg $spacing-md;
@@ -99,6 +115,12 @@
             z-index: 72 !important;
         }
 
+        &--pointer {
+            &--dark {
+                border-bottom-color: $tutorial-dark-bg-color !important;
+            }
+        }
+
         &--lightbox {
             position: fixed;
             z-index: 70;
@@ -112,6 +134,12 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
+            }
+
+            &--dark {
+                &:before {
+                    box-shadow: 0 1px 1px 70000px rgba(255, 255, 255, 0.3);
+                }
             }
         }
 
@@ -156,6 +184,26 @@
             margin-top: $spacing-md;
             padding: $spacing-md $spacing-lg;
             border-top: 1px solid $color-neutral-90;
+        }
+
+        &--dark {
+            background: $tutorial-dark-bg-color;
+
+            .tutorial__modal--close {
+                color: $tutorial-dark-text-color;
+            }
+
+            .tutorial__modal--title {
+                color: $tutorial-dark-text-color;
+            }
+
+            .tutorial__modal--description {
+                color: $tutorial-dark-text-color;
+            }
+
+            .tutorial__modal--footer {
+                border-top-color: darken($tutorial-dark-bg-color, 20%);
+            }
         }
 
         &--actions {

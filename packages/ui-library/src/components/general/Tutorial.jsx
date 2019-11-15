@@ -11,7 +11,12 @@ import FlexRow, {
 import Icon, { iconTypes } from "../general/Icon";
 import PopperContainer from "../tooltips/PopperContainer";
 
-export default class Tutorial extends React.Component {
+const Themes = {
+    LIGHT: "light",
+    DARK: "dark",
+};
+
+class Tutorial extends React.Component {
     constructor(props) {
         super(props);
         this.modal = React.createRef();
@@ -25,11 +30,16 @@ export default class Tutorial extends React.Component {
             labelDismiss,
             onClose,
             onNext,
+            theme,
         } = this.props;
+
+        const welcomeClassnames = classnames("tutorial__welcome", {
+            "tutorial__welcome--dark": theme === Themes.DARK,
+        });
 
         return (
             <Portal>
-                <div className="tutorial__welcome">
+                <div className={welcomeClassnames}>
                     <div className="tutorial__welcome--content">
                         <div className="tutorial__welcome--title">
                             {messageWelcomeTitle}
@@ -124,6 +134,10 @@ export default class Tutorial extends React.Component {
                 lightbox.style.height = `${dims.height}px`;
                 lightbox.classList.add("tutorial__modal--lightbox");
 
+                if (this.props.theme === Themes.DARK) {
+                    lightbox.classList.add("tutorial__modal--lightbox--dark");
+                }
+
                 // Add clone by existing element to preserve contextual styles
                 document.body.append(lightbox);
             }
@@ -138,8 +152,18 @@ export default class Tutorial extends React.Component {
             onNext,
             onPrevious,
             onClose,
+            theme,
         } = this.props;
+
         const step = steps[active - 1];
+
+        const pointerClassnames = classnames("tutorial__modal--pointer", {
+            "tutorial__modal--pointer--dark": theme === Themes.DARK,
+        });
+
+        const modalClassnames = classnames("tutorial__modal", {
+            "tutorial__modal--dark": theme === Themes.DARK,
+        });
 
         if (active > 0 && step) {
             return (
@@ -147,10 +171,10 @@ export default class Tutorial extends React.Component {
                     getReference={step.target}
                     key={step.target}
                     placement={step.side}
-                    pointerClassName="tutorial__modal--pointer"
+                    pointerClassName={pointerClassnames}
                     className="tutorial__modal--popper"
                 >
-                    <div className="tutorial__modal" ref={this.modal}>
+                    <div className={modalClassnames} ref={this.modal}>
                         <div className="tutorial__modal--close">
                             <Icon iconName="clear" type={iconTypes.INLINE} onClick={onClose}/>
                         </div>
@@ -180,11 +204,16 @@ export default class Tutorial extends React.Component {
             active,
             steps,
             visible,
+            theme,
         } = this.props;
+
+        const tutorialClassnames = classnames("tutorial", {
+            "tutorial--dark": theme === Themes.DARK,
+        });
 
         return (
             visible ? (
-                <div className="tutorial" data-id={dataId}>
+                <div className={tutorialClassnames} data-id={dataId}>
                     <div className="tutorial__bg">
                         <div className="">
                             { active === 0 ? (
@@ -215,6 +244,7 @@ Tutorial.propTypes = {
     labelFinal: PropTypes.string,
     labelPrevious: PropTypes.string,
     labelDismiss: PropTypes.string,
+    theme: PropTypes.oneOf(Object.values(Themes)),
 };
 
 Tutorial.defaultProps = {
@@ -227,3 +257,6 @@ Tutorial.defaultProps = {
     labelGetStarted: "Get Started",
     labelDismiss: "Dismiss",
 };
+
+Tutorial.themes = Themes;
+export default Tutorial;
