@@ -172,10 +172,10 @@
 
                 li.tutorial__modal--step {
                     display: inline-block;
-                    margin-right: $spacing-xs;
+                    margin-right: $spacing-sm;
                     margin-left: -2px;
                     border: 1px solid transparent;
-                    padding: 2px;
+                    padding: 1px;
 
                     &:before {
                         content: "";
