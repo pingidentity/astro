@@ -101,6 +101,7 @@ export default class Tutorial extends React.Component {
     _renderPopup = (steps, active) => {
         const {
             labelNext,
+            labelFinal,
             labelPrevious,
             onNext,
             onPrevious,
@@ -128,7 +129,9 @@ export default class Tutorial extends React.Component {
                                 </div>
                                 <div className="tutorial__modal--actions">
                                     <Link onClick={onPrevious}>{labelPrevious}</Link>
-                                    <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>{labelNext}</Button>
+                                    <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
+                                        { active === steps.length ? labelFinal : labelNext }
+                                    </Button>
                                 </div>
                             </FlexRow>
                         </div>
@@ -176,6 +179,7 @@ Tutorial.propTypes = {
     messageWelcomeDescription: PropTypes.node,
     labelGetStarted: PropTypes.string,
     labelNext: PropTypes.string,
+    labelFinal: PropTypes.string,
     labelPrevious: PropTypes.string,
     labelDismiss: PropTypes.string,
 };
@@ -184,6 +188,7 @@ Tutorial.defaultProps = {
     visible: false,
     active: 0,
     labelNext: "Next",
+    labelFinal: "Close",
     labelPrevious: "Back",
     labelGetStarted: "Get Started",
     labelDismiss: "Dismiss",
