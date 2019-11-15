@@ -103,6 +103,8 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 *     as the iconName. If the element is passed it will render the element.
 * @param {string} [inputClassName]
 *     CSS classes to set on the input element.
+* @param {boolean} [inline]
+*     When true, text field is inline.
 * @param {node} [labelHelpText]
 *     A string or JSX object to display for the help tooltip.
 * @param {string} [labelLockText]
@@ -221,6 +223,7 @@ class Stateless extends React.Component {
             PropTypes.string
         ]),
         inputClassName: PropTypes.string,
+        inline: PropTypes.bool,
         label: PropTypes.oneOfType([
             PropTypes.array,
             PropTypes.object,
@@ -267,6 +270,7 @@ class Stateless extends React.Component {
         disabled: false,
         errorClassName: "",
         flexWidth: false,
+        inline: false,
         maskValue: false,
         onBlur: _.noop,
         onClick: _.noop,
@@ -466,6 +470,7 @@ class Stateless extends React.Component {
                 "input-text--right-icon": this.props.iconRight,
                 "input-text--left-icon": this.props.iconLeft,
                 "input-text--right-arrow": this.props.withArrow,
+
             },
         );
 
@@ -486,6 +491,7 @@ class Stateless extends React.Component {
                             "input-container",
                             {
                                 "input-text__container--right-arrow": this.props.withArrow,
+                                "input-text__container--inline": this.props.inline,
                             }
                         )
                     }
@@ -494,7 +500,13 @@ class Stateless extends React.Component {
                     onClick={this.props.onClick}
                 >
                     <input
-                        className={this.props.inputClassName}
+                        className={
+                            classnames(
+                                this.props.inputClassName,
+                                {
+                                    "input-text--inline": this.props.inline,
+                                })
+                        }
                         onFocus={this._handleFocus}
                         onBlur={this.props.onBlur}
                         onKeyPress={this.props.onKeyPress}
@@ -514,14 +526,7 @@ class Stateless extends React.Component {
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}
                         size={this.props.size}
-                        style={{
-                            width: this.props.size ? "auto" : null,
-                            padding: this.props.inline ? "2px" : null,
-                            height: this.props.inline ? "25px" : null,
-                            fontSize: this.props.inline ? "13px" : null,
-                            verticalAlign: this.props.inline ? "top" : null,
-                            marginTop: this.props.inline ? "-5px" : null
-                        }}
+                        style={{ width: this.props.size ? "auto" : null }}
                     />
                     {this.props.flexWidth && (
                         <div

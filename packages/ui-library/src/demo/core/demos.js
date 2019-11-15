@@ -230,6 +230,14 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_FileUploadDemo.jsx.html"
                     },
                     {
+                        label: "Inline Text Field",
+                        demo: require("../components/forms/InlineTextFieldDemo"),
+                        pathToDoc: "components/forms/InlineTextField.jsx",
+                        pathToSource: "components_forms_InlineTextField.jsx.html",
+                        pathToDemoSource: "demo_components_forms_InlineTextFieldDemo.jsx.html",
+                        keywords: ["InlineTextField"]
+                    },
+                    {
                         label: "Radio Group",
                         demo: require("../components/forms/FormRadioGroupDemo"),
                         pathToDoc: "components/forms/FormRadioGroup.jsx",
