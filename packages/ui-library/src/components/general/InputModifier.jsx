@@ -22,8 +22,6 @@ export default function InputModifier({
         "modifier_strip-input-margins": inputMargin === inputMargins.STRIP,
     });
 
-    console.log(PropTypes.oneOf(Object.values(inputColors)));
-
     return (
         <div className={classNames}>
             {children}
