@@ -46,7 +46,8 @@
             }
         }
 
-        &.more-on-topic {
+        &.more-on-topic,
+        &.content-link--icon-color-active {
             [class^='icon-'],
             [class*=' icon-'] {
                 color: #2996cc;

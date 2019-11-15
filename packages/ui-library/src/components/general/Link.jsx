@@ -6,33 +6,45 @@ import Icon from "./Icon";
 import Anchor, { linkTypes } from "./Anchor";
 import classnames from "classnames";
 
+/**
+ * @enum {string}
+ * @alias Link.iconColors
+ */
+const iconColors = {
+    /** default */
+    DEFAULT: "default",
+    /** active */
+    ACTIVE: "active",
+};
 
 /**
  * @class Link
  * @desc A stateless component for displaying a link
  *
+ * @param {string} [className]
+ *     CSS classes to be set on the inner Link container.
+ * @param {string} [count]
+ *          Count for Link
  * @param {string} [data-id="link"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [title]
- *          title for Link
- * @param {string} [url]
- *          URL for Link
- * @param {string} [target]
- *          Target for Link
- * @param {string} [type]
- *          Specify what this link is being used for.
+ * @param {boolean} [disabled=false]
+ *     Indicates whether component is disabled.
  * @param {string} [icon]
  *          Icon name for Link
  * @param {boolean} [iconAfter=false]
  *          When true, places icon after text.
- * @param {string} [count]
- *          Count for Link
- * @param {boolean} [disabled=false]
- *     Indicates whether component is disabled.
- * @param {string} [className]
- *     CSS classes to be set on the inner Link container.
+ * @param {Link.iconColors} [iconColor]
+ *          Changes the color for the icon.
  * @param {Link~onClick} [onClick]
  *     Callback to be triggered when Link selected.
+ * @param {string} [target]
+ *          Target for Link
+ * @param {string} [title]
+ *          title for Link
+ * @param {string} [type]
+ *          Specify what this link is being used for.
+ * @param {string} [url]
+ *          URL for Link
  *
  * @example
  * <Link
@@ -67,6 +79,7 @@ const Link = (props) => {
     const {
         disabled,
         icon,
+        iconColor,
         iconAfter,
         onClick,
     } = props;
@@ -79,6 +92,7 @@ const Link = (props) => {
 
     const linkCss = classnames(className, {
         disabled,
+        "content-link--icon-color-active": iconColor === iconColors.ACTIVE,
         "text-first": iconAfter,
     });
 
@@ -136,5 +150,6 @@ Link.defaultProps = {
 };
 
 Link.linkTypes = linkTypes;
+Link.iconColors = iconColors;
 
 module.exports = Link;
