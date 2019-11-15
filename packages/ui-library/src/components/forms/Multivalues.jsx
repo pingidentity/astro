@@ -169,16 +169,22 @@ class MultivaluesOption extends Component {
  * @desc Multivalues takes an array of strings and creates "boxed" text entries of each. Free form typing creates
  *     new entries when Enter or Comma is used.
  *
- * @param {string} [data-id="multivalues"]
- *     To define the base "data-id" value for the top-level HTML container.
+ * @param {boolean} [autoFocus=false]
+ *     Whether or not to auto-focus the element.
+ * @param {boolean} [autoHeight=false]
+ *     Is only as high as its entries
+ * @param {boolean} [autoWidth=false]
+ *     Is only as wide as it needs to be
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {string} [data-id="multivalues"]
+ *     To define the base "data-id" value for the top-level HTML container.
+ * @param {node} [description]
+ *     Description to display below the label.
  * @param {array<string|Object>} [entries=[]]
  *     Array of strings used to display initial entry boxes.
  * @param {string} [name]
  *     Name attribute for the input.
- * @param {node} [description]
- *     Description to display below the label.
  * @param {Multivalues~onValueChange} [onValueChange]
  *     Callback triggered when a new entry is added or removed.
  * @param {Multivalues~onNewValue} [onNewValue]
@@ -188,24 +194,20 @@ class MultivaluesOption extends Component {
  *     Blur callback
  * @param {function} [onFocus]
  *     Focus callback
- * @param {boolean} [stacked=false]
- *     If true, each value occupies it's own line.
  * @param {boolean} [required=false]
  *     If true, the user must enter an entry to the field.
- * @param {boolean} [autoFocus=false]
- *     Whether or not to auto-focus the element.
+ * @param {boolean} [stacked=false]
+ *     If true, each value occupies its own line.
  * @param {string} [errorMessage]
  *     An error message to be displayed below the component body.
- * @param {boolean} [autoHeight=false]
- *     Is only as high as its entries
- * @param {boolean} [autoWidth=false]
- *     Is only as wide as it needs to be
  * @param {array.OptionList~Option} [options]
  *     An array of value-label pairs. When supplied, the behavior changes a bit.
  *     - The entries prop will be a list of values
  *     - The component will display the corresponding labels
  *     - Only valid options can be added as entries
  *     - An auto-complete list will appear while focused
+ * @param {boolean} [optionsStrict=true]
+ *     When true, the component will only accept values from the options array.
  * @param {boolean} [includeDraftInEntries=false]
  *     When set to true, the draft that is currently being edited is treated
  *     as the last entry in the list of entries.
@@ -233,9 +235,11 @@ export class MultivaluesBase extends Component {
     static displayName = "Multivalues";
 
     static propTypes = {
-        "data-id": PropTypes.string,
-        className: PropTypes.string,
         autoFocus: PropTypes.bool,
+        autoHeight: PropTypes.bool,
+        autoWidth: PropTypes.bool,
+        className: PropTypes.string,
+        "data-id": PropTypes.string,
         description: PropTypes.node,
         entries: PropTypes.arrayOf(PropTypes.oneOfType([
             PropTypes.string,
@@ -246,11 +250,12 @@ export class MultivaluesBase extends Component {
             })
         ])),
         errorMessage: PropTypes.string,
+        includeDraftInEntries: PropTypes.bool,
         name: PropTypes.string,
-        onValueChange: PropTypes.func.isRequired,
-        onNewValue: PropTypes.func,
         onBlur: PropTypes.func,
         onFocus: PropTypes.func,
+        onNewValue: PropTypes.func,
+        onValueChange: PropTypes.func.isRequired,
         options: PropTypes.arrayOf(
             PropTypes.shape({
                 heading: PropTypes.bool,
@@ -260,29 +265,29 @@ export class MultivaluesBase extends Component {
                 value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
             })
         ),
+        optionsStrict: PropTypes.bool,
         required: PropTypes.bool,
         stacked: PropTypes.bool,
-        autoHeight: PropTypes.bool,
-        includeDraftInEntries: PropTypes.bool,
         width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
-        "data-id": "multivalues",
-        entries: [],
-        name: "value-entry",
-        stacked: false,
-        required: false,
         autoFocus: false,
         autoHeight: false,
         autoWidth: false,
+        "data-id": "multivalues",
+        entries: [],
+        includeDraftInEntries: false,
+        name: "value-entry",
+        onBlur: _.noop,
+        onFocus: _.noop,
         onNewValue: (keyCode, value) => (
             value !== "" && (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode) || isSpace(keyCode))
         ),
         onValueChange: _.noop,
-        onBlur: _.noop,
-        onFocus: _.noop,
-        includeDraftInEntries: false,
+        optionsStrict: true,
+        required: false,
+        stacked: false,
         width: InputWidths.LG,
     };
 
@@ -367,7 +372,15 @@ export class MultivaluesBase extends Component {
             entries,
             onValueChange,
             includeDraftInEntries,
+            options,
+            optionsStrict,
         } = this.props;
+
+        if (options && optionsStrict) {
+            if (!options.find(({ value: optionValue }) => optionValue === value)) {
+                return false;
+            }
+        }
 
         if (!includeDraftInEntries) {
             onValueChange([...entries, value]);
@@ -462,10 +475,13 @@ export class MultivaluesBase extends Component {
                 ? filteredOptions[highlightedOption].value : draft;
 
             // if an item is selected and it's valid, add it
-            if (highlightedOption >= 0 && highlightedOption < filteredOptions.length) {
-                if (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode)) {
+            if (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode)) {
+                if (highlightedOption >= 0 && highlightedOption < filteredOptions.length) {
                     e.preventDefault();
                     this._addInputValue(value);
+                } else if (filteredOptions.length === 0) {
+                    e.preventDefault();
+                    this._addInputValue(draft);
                 }
             }
         } else {
@@ -604,7 +620,7 @@ export class MultivaluesBase extends Component {
 
         return options
             ? options.filter(
-                ({ value, label = value }) => (containsString(label, draft) && !entries.includes(value))
+                ({ value = "", label = value }) => (containsString(label, draft) && !entries.includes(value))
             )
             : [];
     };
@@ -659,7 +675,7 @@ export class MultivaluesBase extends Component {
 
         const entryNodes = _.map(entries, (entryValue, index) => {
             const entry = options
-                ? options.find(option => option.value === entryValue)
+                ? (options.find(option => option.value === entryValue) || entryValue)
                 : entryValue;
 
             if (!entry) {

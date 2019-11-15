@@ -45,6 +45,7 @@ class MultivaluesDemo extends React.Component {
             "repeated"
         ],
         optionsEntries: [],
+        optionsEntries2: [],
         error: null
     };
 
@@ -94,6 +95,7 @@ class MultivaluesDemo extends React.Component {
     }
 
     _onOptionsChange = optionsEntries => this.setState({ optionsEntries });
+    _onOptionsChange2 = optionsEntries2 => this.setState({ optionsEntries2 });
 
     render() {
         return (
@@ -151,6 +153,18 @@ class MultivaluesDemo extends React.Component {
                         entries={this.state.optionsEntries}
                         onValueChange={this._onOptionsChange}
                         options={userOptions}
+                        autoHeight
+                        autoWidth
+                    />
+                </InputRow>
+
+                <InputRow>
+                    <Multivalues
+                        labelText="With list of options (not strict)"
+                        entries={this.state.optionsEntries2}
+                        onValueChange={this._onOptionsChange2}
+                        options={userOptions}
+                        optionsStrict={false}
                         autoHeight
                         autoWidth
                     />
