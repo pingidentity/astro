@@ -5,9 +5,11 @@ stages:
 
 build_ci_image:
   stage: build-ci-image
-  only:
-    changes:
-      - Dockerfile
+  # This was causing issues where some builds would fail to find the proper Docker hash.
+  # It should be added back in at some point.
+  # only:
+  #   changes:
+  #     - Dockerfile
   script:
     - docker build --pull --tag docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0 ./shared/docker
     - docker push docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
