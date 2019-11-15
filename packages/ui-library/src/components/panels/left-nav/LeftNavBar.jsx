@@ -9,6 +9,17 @@ import _ from "underscore";
 import { getIconClassName } from "../../../util/PropUtils";
 
 /**
+ * @enum {string}
+ * @alias LeftNavBar.themes
+ */
+const themes = {
+    /** dark */
+    DARK: "dark",
+    /** light */
+    LIGHT: "light",
+};
+
+/**
  * @typedef {object} LeftNavBar#Node
  * @desc An object describing a leaf in the LeftNav
  * @property {string} label
@@ -38,6 +49,8 @@ import { getIconClassName } from "../../../util/PropUtils";
  *     First year of the copyright message. (The second year is always the current year.)
  * @property {LeftNavBar#Node[]} [children]
  *     An optional array of children under this section.
+ * @property {LeftNavBar.themes} [theme=DARK]
+ *     Change the appearance
  */
 
 /**
@@ -127,6 +140,7 @@ class LeftNavBar extends React.Component {
         copyrightYear: PropTypes.string,
         renderTopNavItem: PropTypes.func,
         renderNavItem: PropTypes.func,
+        theme: PropTypes.oneOf(Object.values(themes)),
     };
 
     static defaultProps = {
@@ -136,21 +150,18 @@ class LeftNavBar extends React.Component {
         collapsible: false,
         autocollapse: false,
         pingoneLogo: false,
-        legacy: false
+        legacy: false,
+        theme: themes.DARK,
     };
 
+    static themes = themes;
+
     state = {
-        selectorStyle: { top: 0, height: 0 },
         scrollable: false
     };
 
     _rerender = () => {
         this.componentDidUpdate();
-        this._getItemSelector().removeEventListener("transitionend", this._rerender);
-    };
-
-    _getItemSelector = () => {
-        return ReactDOM.findDOMNode(this.refs.itemSelector);
     };
 
     _renderItem = (item) => {
@@ -175,6 +186,7 @@ class LeftNavBar extends React.Component {
                 open={this.props.openSections[section.id]}
                 renderTopNavItem={this.props.renderTopNavItem}
                 renderNavItem={this.props.renderNavItem}
+                legacy={this.props.legacy}
             />
         );
     };
@@ -208,17 +220,12 @@ class LeftNavBar extends React.Component {
     };
 
     componentDidMount() {
-        // Occasionally the first calculation of the position of the selector is wrong because there are still
-        // animations happening on the page.  Recalculate after the initialRender
-        this._getItemSelector().addEventListener("transitionend", this._rerender, false);
-
         window.addEventListener("resize", this._handleResize);
 
         this.componentDidUpdate();
     }
 
     componentWillUnmount() {
-        this._getItemSelector().removeEventListener("transitionend", this._rerender);
         window.removeEventListener("resize", this._handleResize);
     }
 
@@ -313,12 +320,6 @@ class LeftNavBar extends React.Component {
 
             // set whether nav is tall enough to scroll (toggles class on nav to trigger shadow on copyright)
             this._handleResize();
-
-            /* eslint-disable react/no-did-update-set-state */
-            if (!_.isEqual(this.state.selectorStyle, style)) {
-                this.setState({ selectorStyle: style });
-            }
-            /* eslint-enable react/no-did-update-set-state */
         }
     }
 
@@ -326,18 +327,14 @@ class LeftNavBar extends React.Component {
         var className = classnames({
             scrollable: this.state.scrollable,
             collapsible: this.props.collapsible,
-            updated: !this.props.legacy,
+            "legacy-left-nav": this.props.legacy,
+            "left-nav": !this.props.legacy,
+            "nav--light": this.props.theme === themes.LIGHT,
         });
 
         return (
             <div id="nav" data-id={this.props["data-id"]} ref="nav" className={className} >
                 <div className="nav-menus" ref="container">
-                    <div ref="itemSelector" className="selected-item" style={this.state.selectorStyle} />
-                    <div ref="itemSelectorArrow" className="selected-item-arrow" style={this.state.selectorStyle}>
-                        <svg version="1.1" width="10px" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <polyline points="0,0 100,50 0,100" className="arrow" />
-                        </svg>
-                    </div>
                     { this.props.topContent && (
                         <div className="top-content" data-id="nav-top-content">{this.props.topContent}</div>
                     ) }
@@ -389,11 +386,13 @@ class LeftNavSection extends React.Component {
         icon: PropTypes.string,
         renderTopNavItem: PropTypes.func,
         renderNavItem: PropTypes.func,
+        legacy: PropTypes.bool,
     };
 
     static defaultProps = {
         renderTopNavItem: (props, Elem) => { const { item, ...defaults } = props; return <Elem {...defaults} />; },
         renderNavItem: (props, Elem) => { const { item, ...defaults } = props; return <Elem {...defaults} />; },
+        legacy: false,
     };
 
     constructor(props) {
@@ -463,6 +462,19 @@ class LeftNavSection extends React.Component {
                                 {iconClassName?(<span className = { iconClassName } ></span>) : null}{item.label}
                             </span>
                         }, Anchor)
+                    }
+                    {
+                        this.props.legacy && this.props.selectedNode === item.id && [
+                            <div ref="itemSelector" className="selected-item" />,
+                            <div ref="itemSelectorArrow" className="selected-item-arrow">
+                                <svg
+                                    version="1.1" width="10px" height="100%" viewBox="0 0 100 100"
+                                    preserveAspectRatio="none"
+                                >
+                                    <polyline points="0,0 100,50 0,100" className="arrow" />
+                                </svg>
+                            </div>
+                        ]
                     }
                 </li>
             );
