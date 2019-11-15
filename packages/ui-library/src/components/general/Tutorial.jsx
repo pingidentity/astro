@@ -10,7 +10,6 @@ import FlexRow, {
 } from "../layout/FlexRow";
 import Icon, { iconTypes } from "../general/Icon";
 import PopperContainer from "../tooltips/PopperContainer";
-import { inStateContainer } from "../utils/StateContainer";
 
 export default class Tutorial extends React.Component {
     constructor(props) {
@@ -63,7 +62,7 @@ export default class Tutorial extends React.Component {
 
         return (
             <div className="tutorial__modal--content">
-                {headerContent ? (
+                { headerContent ? (
                     <div className="tutorial__modal--header">
                         {headerContent}
                     </div>
@@ -99,22 +98,34 @@ export default class Tutorial extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+
+        // Remove existing lightbox if any
         const prevSpotlight = document.getElementsByClassName("tutorial__modal--lightbox")[0];
 
         if (prevSpotlight !== undefined) {
             prevSpotlight.remove();
         }
 
-        if (prevProps.active !== this.props.active && this.props.active <= this.props.steps.length && this.props.active !== 0) {
+        if (prevProps.active !== this.props.active &&
+            this.props.active <= this.props.steps.length &&
+            this.props.active !== 0
+        ) {
+            // Get ref to target element
             const target = this.props.steps[this.props.active - 1].target;
 
             if (target() !== undefined) {
-                const clonedNode = target().cloneNode(true);
+
+                // Create clone of target with custom styles
+                const lightbox = document.createElement("div");
                 const dims = target().getBoundingClientRect();
-                clonedNode.style.top = `${dims.top}px`;
-                clonedNode.style.left = `${dims.left}px`;
-                clonedNode.classList.add("tutorial__modal--lightbox");
-                target().parentNode.insertBefore(clonedNode, target());
+                lightbox.style.top = `${dims.top}px`;
+                lightbox.style.left = `${dims.left}px`;
+                lightbox.style.width = `${dims.width}px`;
+                lightbox.style.height = `${dims.height}px`;
+                lightbox.classList.add("tutorial__modal--lightbox");
+
+                // Add clone by existing element to preserve contextual styles
+                document.body.append(lightbox);
             }
         }
     }
@@ -131,7 +142,7 @@ export default class Tutorial extends React.Component {
         const step = steps[active - 1];
 
         if (active > 0 && step) {
-            return [
+            return (
                 <PopperContainer
                     getReference={step.target}
                     key={step.target}
@@ -158,11 +169,8 @@ export default class Tutorial extends React.Component {
                             </FlexRow>
                         </div>
                     </div>
-                </PopperContainer>,
-                <Portal>
-                    <div className="tutorial__cloneHolder"></div>
-                </Portal>
-            ];
+                </PopperContainer>
+            );
         }
     }
 

@@ -53,6 +53,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        box-shadow: 0 1px 1px 70000px rgba(0, 0, 0, 0.3);
 
         &--content {
             padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
@@ -87,7 +88,7 @@
     &__modal {
         background-color: $color-white;
         border-radius: 4px;
-        z-index: 100;
+        z-index: 71;
         width: 300px;
         max-width: 400px;
         position: relative;
@@ -100,10 +101,10 @@
 
         &--lightbox {
             position: fixed;
-            z-index: 10000;
+            z-index: 70;
             pointer-events: none;
 
-            &:after {
+            &:before {
                 content: "";
                 box-shadow: 0 1px 1px 70000px rgba(0, 0, 0, 0.3);
                 position: absolute;
