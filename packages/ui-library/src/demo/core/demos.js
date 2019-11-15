@@ -525,6 +525,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_CalloutBoxDemo.jsx.html"
                     },
                     {
+                        label: "Disabled",
+                        demo: require("../components/layout/DisabledDemo"),
+                        pathToDoc: "components/layout/Disabled.jsx",
+                        pathToSource: "components_layout_Disabled.jsx.html",
+                        pathToDemoSource: "demo_components_layout_DisabledDemo.jsx.html"
+                    },
+                    {
                         label: "Form Label",
                         demo: require("../components/forms/FormLabelDemo"),
                         pathToDoc: "components/forms/FormLabel.jsx",

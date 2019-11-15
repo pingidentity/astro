@@ -79,11 +79,10 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
                 white-space: nowrap;
             }
 
-            &:hover,
+            &:hover:not(.disabled),
             &.highlighted {
                 @include option-list__item--active;
-                .text-parent-label,
-                .text-value {
+                .text-component {
                     cursor: pointer;
                     color: $color-white;
                 }
@@ -92,11 +91,12 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
                 @include option-list__item--disabled;
             }
 
-
             &__placeholder {
                 padding-left: 37px;
             }
+
         }
+
         .help-hint-option {
             &.select-option {
                 padding: 0;
@@ -189,3 +189,4 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
         @include option-popover;
     }
 }
+

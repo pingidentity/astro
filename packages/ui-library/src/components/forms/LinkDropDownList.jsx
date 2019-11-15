@@ -5,6 +5,7 @@ import DetailsTooltip from "../tooltips/DetailsTooltip";
 import classnames from "classnames";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
+import Disabled from "../layout/Disabled";
 
 /**
  * @enum {string}
@@ -28,6 +29,18 @@ const alignments = {
  */
 
 /**
+ * @class LinkDropDownListOption
+ * @param {string} [data-id=link-dropdown-option]
+ *     The "data-id" value for top-level HTML container.
+ * @param {boolean} [disabled]
+ *     dropdown option will not function when true.
+  * @param {object} option
+ *     Array of group sections for the linkDropDownList.
+ * @param {boolean} selected
+ *    The selected list option.
+ */
+
+/**
  * @class LinkDropDownList
  * @desc Toggles between two states on click. Is either "off" or "on".
  *
@@ -35,9 +48,10 @@ const alignments = {
  *     Right or left alignment of the dropdown.
  * @param {string} [data-id=toggle]
  *     The "data-id" value for top-level HTML container.
+
  * @param {node} [label]
  *     A string or JSX object that serves as the trigger label.
-* @param {string} [className]
+ * @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
  *
  * @param {object} [bottomPanel]
@@ -80,7 +94,16 @@ class LinkDropDownListStateless extends React.Component {
         onClick: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
-        options: PropTypes.arrayOf(PropTypes.object).isRequired,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                label: PropTypes.node,
+                disabled: PropTypes.bool,
+                value: PropTypes.oneOfType([
+                    PropTypes.string,
+                    PropTypes.number
+                ]).isRequired
+            })
+        ),
         selectedOption: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([-1])]), // -1 means no value has been set
     };
 
@@ -119,6 +142,7 @@ class LinkDropDownListStateless extends React.Component {
                     onClick={this._handleClick}
                     option={option}
                     selected={option === this.props.selectedOption}
+                    disabled={option.disabled}
                 />
             );
         }.bind(this));
@@ -185,33 +209,52 @@ LinkDropDownList.alignments = alignments;
 class LinkDropDownListOption extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
         option: PropTypes.object,
         selected: PropTypes.bool,
     };
 
     static defaultProps = {
-        "data-id": "link-dropdown-option"
+        "data-id": "link-dropdown-option",
+        disabled: false
     }
 
     _handleClick = () => {
-        this.props.onClick(this.props.option);
+        if (!this.props.disabled) {
+            return this.props.onClick(this.props.option);
+        }
+    };
+
+    classNames = {
+        "select-option": true,
+        disabled: this.props.disabled,
+        selected: this.props.selected,
     };
 
     render() {
-        var classNames = {
-            "select-option": true,
-            selected: this.props.selected,
-        };
-
-        return (
+        const list = (
             <li
                 data-id={this.props["data-id"]}
                 data-value={this.props.option.value}
-                className={classnames(classNames)}
-                onClick={this._handleClick}>
+                className={classnames(this.classNames)}
+                onClick={this._handleClick}
+            >
                 {this.props.option.label}
             </li>
         );
+
+        /* istanbul ignore if  */
+        if (this.props.disabled) {
+            return (
+                <Disabled>
+                    {list}
+                </Disabled>
+            );
+        } else {
+            return (
+                list
+            );
+        }
     }
 }
 
