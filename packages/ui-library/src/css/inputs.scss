@@ -184,7 +184,6 @@ label {
     }
 
 
-
     .label-text {
         margin: 0 0 8px;
         text-align: left;
@@ -1936,6 +1935,7 @@ input[type=file] {
     }
 }
 
+
 .form-error,
 .input-message {
     $message-icon-size: 16px;
@@ -2076,6 +2076,7 @@ input[type=file] {
             }
         }
     }
+
     &.input-file-upload {
         .input-message__icon,
         .form-error-icon {
@@ -3205,6 +3206,28 @@ label.input-text--right-icon {
                 bottom: 50%;
                 width: $spacing-xl;
                 right: -$spacing-xl;
+            }
+        }
+
+        &--inline {
+            .input-message__icon {
+                top: auto;
+                bottom: 5px;
+            }
+
+            input[type=text],
+            input[type=password],
+            input[type=email],
+            input[type=number],
+            input[type=search],
+            input[type=tel],
+            input[type=url] {
+                width: auto;
+                padding: 2px;
+                height: 25px;
+                font-size: 13px;
+                align-items: top;
+                margin-top: -5px;
             }
         }
     }

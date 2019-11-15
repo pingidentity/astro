@@ -157,6 +157,15 @@ describe("FormTextField", function () {
         expect(ReactDOM.findDOMNode(component).textContent).toBe("some label");
     });
 
+    it("renders inline", function () {
+        var component = getComponent({
+            inline: true,
+        });
+
+        const inlineProp = TestUtils.scryRenderedDOMNodesWithClass(component, "input-text--inline");
+        expect(inlineProp).toBeTruthy();
+    });
+
     it("enables autocomplete", function () {
         var component = getComponent({
             autoComplete: true,
