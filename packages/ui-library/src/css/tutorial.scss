@@ -98,6 +98,22 @@
             z-index: 72 !important;
         }
 
+        &--lightbox {
+            position: fixed;
+            z-index: 10000;
+            pointer-events: none;
+
+            &:after {
+                content: "";
+                box-shadow: 0 1px 1px 70000px rgba(0, 0, 0, 0.3);
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+        }
+
         &--close {
             position: absolute;
             top: $spacing-lg;

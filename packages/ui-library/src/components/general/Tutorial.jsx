@@ -99,7 +99,7 @@ export default class Tutorial extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const prevSpotlight = document.querySelectorAll("[data-spotlight='true']")[0];
+        const prevSpotlight = document.getElementsByClassName("tutorial__modal--lightbox")[0];
 
         if (prevSpotlight !== undefined) {
             prevSpotlight.remove();
@@ -107,16 +107,13 @@ export default class Tutorial extends React.Component {
 
         if (prevProps.active !== this.props.active && this.props.active <= this.props.steps.length && this.props.active !== 0) {
             const target = this.props.steps[this.props.active - 1].target;
+
             if (target() !== undefined) {
                 const clonedNode = target().cloneNode(true);
                 const dims = target().getBoundingClientRect();
-                clonedNode.style.position = "fixed";
-                clonedNode.style.zIndex = "10000";
-                clonedNode.style.boxShadow = "0 1px 1px 70000px rgba(0, 0, 0, 0.3)";
-                clonedNode.style.pointerEvents = "none";
                 clonedNode.style.top = `${dims.top}px`;
                 clonedNode.style.left = `${dims.left}px`;
-                clonedNode.dataset.spotlight="true";
+                clonedNode.classList.add("tutorial__modal--lightbox");
                 target().parentNode.insertBefore(clonedNode, target());
             }
         }
