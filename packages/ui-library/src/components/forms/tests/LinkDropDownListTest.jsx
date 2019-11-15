@@ -231,4 +231,17 @@ describe("LinkDropDownList", function () {
         expect(component.props.children.props.onClick).toBeCalledWith(options[clickIndex]);
         expect(component.props.children.props.onToggle).not.toBeCalled();
     });
+
+    it("supports disabled when set", function () {
+        var component = TestUtils.renderInWrapper(
+            <LinkDropDownList
+                data-id={componentId}
+                open
+                options={[{ label: "Five", value: "5", disabled: true }]}
+            />);
+
+        var disabled = TestUtils.findRenderedDOMNodeWithClass(component, "disabled-wrapper");
+        expect(disabled).toBeTruthy();
+    });
+
 });

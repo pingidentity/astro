@@ -1,0 +1,12 @@
+@mixin disabled-wrapper-css {
+    background: none;
+    pointer-events: none;
+    opacity: $inactive-opacity;
+}
+
+.disabled-wrapper {
+    @include disabled-wrapper-css();
+    .text-component {
+        @include disabled-wrapper-css();
+    }
+}
