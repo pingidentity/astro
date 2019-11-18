@@ -72,19 +72,6 @@ describe("copiesText", function () {
         expect(clipboard.writeText).lastCalledWith("dummy text");
     });
 
-    it("doesn't copy text if something else is selected", function() {
-        global.getSelection.mockReturnValue({
-            toString: () => "selection",
-        });
-
-        let component = getComponent();
-
-        let link = TestUtils.findRenderedDOMNodeWithTag(component, "a");
-
-        ReactTestUtils.Simulate.click(link);
-        expect(clipboard.writeText).not.toHaveBeenCalled();
-    });
-
     it("changes message when succeeding", function() {
         let component = getComponent();
 

@@ -12,12 +12,16 @@ import HR from "ui-library/lib/components/general/HR";
 
 class SearchBarDemo extends React.Component {
     state = {
-        value: "",
+        search1: "",
+        search2: "",
+        search3: "",
+        search4: "",
+        search5: "",
         lastEvent: "",
     };
 
-    _handleValueChange = (inputValue) => {
-        this.setState({ value: inputValue });
+    _handleValueChange = dataId => inputValue => {
+        this.setState({ [dataId]: inputValue });
     };
 
     _handleKeyDown = () => {
@@ -44,7 +48,6 @@ class SearchBarDemo extends React.Component {
             onValueChange: this._handleValueChange,
             placeholder: "Search something",
             showClear: true,
-            value: this.state.value,
             name: "demo-search"
         };
 
@@ -62,10 +65,10 @@ class SearchBarDemo extends React.Component {
                 <HR />
                 <p>Passing the search box props directly:</p>
                 <SearchBar
-                    onValueChange={this._handleValueChange}
+                    onValueChange={this._handleValueChange("search1")}
                     placeholder="Search something"
                     showClear={true}
-                    value={this.state.value}
+                    value={this.state.search1}
                     name="demo-search"
                     key="direct"
                 >
@@ -76,19 +79,19 @@ class SearchBarDemo extends React.Component {
                 <HR />
                 <p>No filters</p>
                 <SearchBar
-                    onValueChange={this._handleValueChange}
+                    onValueChange={this._handleValueChange("search2")}
                     placeholder="Search something"
                     showClear={true}
-                    value={this.state.value}
+                    value={this.state.search2}
                     name="demo-search"
                 />
                 <HR />
                 <p>With a button on the right</p>
                 <SearchBar
-                    onValueChange={this._handleValueChange}
+                    onValueChange={this._handleValueChange("search3")}
                     placeholder="Search something"
                     showClear={true}
-                    value={this.state.value}
+                    value={this.state.search3}
                     name="demo-search"
                     centerControl={<FormCheckbox inline label="Hide disabled"/>}
                     rightControl={<Button label="Add" iconName="add" noSpacing />}
@@ -96,10 +99,10 @@ class SearchBarDemo extends React.Component {
                 <HR />
                 <p>With documentation link</p>
                 <SearchBar
-                    onValueChange={this._handleValueChange}
+                    onValueChange={this._handleValueChange("search4")}
                     placeholder="Search something"
                     showClear={true}
-                    value={this.state.value}
+                    value={this.state.search4}
                     name="demo-search"
                     rightControl={<Button label="Add" iconName="add" noSpacing />}
                     documentationLink={{
@@ -115,10 +118,10 @@ class SearchBarDemo extends React.Component {
                 <HR />
                 <p>With documentation link and showwithFilters is True</p>
                 <SearchBar
-                    onValueChange={this._handleValueChange}
+                    onValueChange={this._handleValueChange("search5")}
                     placeholder="Search something"
                     showClear={true}
-                    value={this.state.value}
+                    value={this.state.search5}
                     name="demo-search"
                     rightControl={<Button label="Add" iconName="add" noSpacing />}
                     documentationLink={{

@@ -1,14 +1,13 @@
 
 import React from "react";
 import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+import FlexRow, { spacingOptions, alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import HR from "ui-library/lib/components/general/HR";
-import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
-import FlexRow, { spacingOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
-import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
 import Stack from "ui-library/lib/components/layout/Stack";
-import Text from "ui-library/lib/components/general/Text";
-import Padding from "ui-library/lib/components/layout/Padding";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
 /**
 * @name LinkDropDownListDemo
 * @memberof LinkDropDownList
@@ -16,7 +15,7 @@ import Padding from "ui-library/lib/components/layout/Padding";
 */
 var _options = [
     { label: "One is the loneliest number", value: "1" },
-    { label: "Two", value: "2" },
+    { label: "Two", value: "2", disabled: true },
     { label: "Three", value: "3" },
     { label: "Four", value: "4" },
     { label: "Five", value: "5" },
@@ -26,43 +25,44 @@ var _options = [
     { label: "Nine", value: "9" },
     { label: "Ten", value: "10" }
 ];
+
+const LicenseOption = ({
+    created,
+    envCount,
+    expires,
+    renewed,
+    type,
+}) => (
+    <Padding vertical={sizes.SM}>
+        <FlexRow spacing={spacingOptions.LG} justify={justifyOptions.SPACEBETWEEN} alignment={alignments.CENTER}>
+            <Stack gap="XS">
+                <Text type={textTypes.PARENTLABEL}>{type}</Text>
+                {renewed && <Text type={textTypes.VALUE}>Renewed {renewed}</Text>}
+                {created && <Text type={textTypes.VALUE}>Created {created}</Text>}
+                <Text type={textTypes.VALUE}>Expires {expires}</Text>
+            </Stack>
+            <Stack gap="XS">
+                <Icon iconName="earth" iconSize={iconSizes.LG} type={iconTypes.INLINE}/>
+                <Text align={Text.alignments.CENTER} type={textTypes.VALUE}>{envCount}</Text>
+            </Stack>
+        </FlexRow>
+    </Padding>
+);
+
 const nodeOptions = [
-    { label:
-        <FormLabel value="Premier">
-            <FlexRow spacing={spacingOptions.MD} alignment={alignments.CENTER}>
-                <Stack gap="XS">
-                    <Text type="value">Renewed 2019-06-13</Text>
-                    <Text type="value">Expires 2022-12-13</Text>
-                </Stack>
-                <Stack gap="XS">
-                    <Icon iconName="globe" iconSize={iconSizes.LG}>7/10</Icon>
-                </Stack>
-            </FlexRow>
-        </FormLabel>, value: "1" },
-    { label:
-            <FormLabel value="Trial">
-                <FlexRow spacing={spacingOptions.MD} alignment={alignments.CENTER}>
-                    <Stack gap="XS">
-                        <Text type="value">Created 2019-06-13</Text>
-                        <Text type="value">Expires 2022-12-13</Text>
-                    </Stack>
-                    <Stack gap="XS">
-                        <Icon iconName="globe" iconSize={iconSizes.LG}>4/5</Icon>
-                    </Stack>
-                </FlexRow>
-            </FormLabel>, value: "2" },
-    { label:
-                <FormLabel value="Global">
-                    <FlexRow spacing={spacingOptions.MD} alignment={alignments.CENTER}>
-                        <Stack gap="XS">
-                            <Text type="value">Renewed 2019-06-13</Text>
-                            <Text type="value">Expires 2022-12-13</Text>
-                        </Stack>
-                        <Stack gap="XS">
-                            <Icon iconName="globe" iconSize={iconSizes.LG}>11/15</Icon>
-                        </Stack>
-                    </FlexRow>
-                </FormLabel>, value: "2" }
+    {
+        label: <LicenseOption type="Premier" renewed="2019-06-13" expires="2022-12-13" envCount="7/10" />,
+        value: "1"
+    },
+    {
+        disabled: true,
+        label: <LicenseOption type="Trial" created="2019-06-13" expires="2022-12-13" envCount="4/5" />,
+        value: "2"
+    },
+    {
+        label: <LicenseOption type="Global" renewed="2019-06-13" expires="2022-12-13" envCount="11/15" />,
+        value: "3"
+    },
 ];
 class LinkDropDownListDemo extends React.Component {
     state = {

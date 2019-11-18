@@ -258,12 +258,22 @@ describe("DragDropColumn v4", function () {
         component.props.onScrolledToTop.mockClear();
 
         //set up the node to look like it's scrolled to the bottom
-        items.scrollTop = 100;
+        // we're overshooting because it seems like in practice, that can happen
+        items.scrollTop = 105;
         items.scrollHeight = 200;
 
         component._handleScroll();
         expect(component.props.onScrolledToTop).not.toBeCalled();
         expect(component.props.onScrolledToBottom).toBeCalled();
+        //clear the mock
+        component.props.onScrolledToBottom.mockClear();
+
+        //set up the node to look like it's scrolling back up
+        items.scrollTop = 100;
+        items.scrollHeight = 200;
+
+        component._handleScroll();
+        expect(component.props.onScrolledToBottom).not.toBeCalled();
 
         jest.restoreAllMocks();
     });

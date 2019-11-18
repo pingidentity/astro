@@ -1,7 +1,6 @@
 var React = require("react");
-var Link = require("./../../../components/general/Link");
 import HR from "ui-library/lib/components/general/HR";
-import { linkTypes } from "ui-library/lib/components/general/Anchor";
+import Link, { linkTypes, iconColors } from "ui-library/lib/components/general/Link";
 
 /**
 * @name LinkDemo
@@ -11,13 +10,19 @@ import { linkTypes } from "ui-library/lib/components/general/Anchor";
 const LinkDemo = () => {
     return (
         <div>
-            <Link title="A link" url="#" type="block"/>
+            <Link title="A link" url="#" type={linkTypes.BLOCK} />
             &nbsp;
-            <Link title="A link with a count" url="#" count="1" type="block" />
+            <Link title="A link with a count" url="#" count="1" type={linkTypes.BLOCK} />
             &nbsp;
-            <Link title="A link with an icon" url="#" icon="cog" type="block" />
+            <Link title="A link with an icon" url="#" icon="cog" type={linkTypes.BLOCK} />
             &nbsp;
-            <Link className="more-on-topic" title="More on this topic" url="#" icon="alert" type="block" />
+            <Link
+                title="More on this topic"
+                url="#"
+                icon="alert"
+                type={linkTypes.BLOCK}
+                iconColor={iconColors.ACTIVE}
+            />
             <HR />
             <p>
                 Here's a <Link url="https:/pingidentity.com" target="_blank">simple link</Link> in a block of text.

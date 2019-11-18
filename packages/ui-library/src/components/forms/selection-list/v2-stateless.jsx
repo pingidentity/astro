@@ -32,11 +32,6 @@ export const listWidths = {
 export default class SelectionListStateless extends React.Component {
     static displayName = "SelectionListStateless";
 
-    state = {
-        contentHeight: null,
-        contentWidth: null,
-    }
-
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -195,15 +190,6 @@ export default class SelectionListStateless extends React.Component {
         ? filterItemsFunction(this.props.items, this.props.queryString)
         : this.props.items;
 
-    componentDidMount() {
-        const height = this.selectionElement.clientHeight;
-        const width = this.selectionElement.clientWidth;
-        this.setState({
-            contentHeight: height,
-            contentWidth: width,
-        });
-    }
-
     render() {
         const {
             "data-id": dataId,
@@ -227,11 +213,6 @@ export default class SelectionListStateless extends React.Component {
             <div
                 data-id={dataId}
                 className={className}
-                ref={(selectionElement) => this.selectionElement = selectionElement}
-                style={{
-                    width: this.state.contentWidth,
-                    height: this.state.contentHeight,
-                }}
             >
                 {requiredText && (
                     <div data-id={dataId + "-required-message"} className="required-message">
@@ -332,6 +313,11 @@ class ListOptions extends React.Component {
         type: ListType.SINGLE,
         onValueChange: _.noop
     };
+
+    state = {
+        contentHeight: null,
+        contentWidth: null,
+    }
 
     /**
     * @desc Generate list options as radio buttons
@@ -476,9 +462,27 @@ class ListOptions extends React.Component {
         }
     };
 
+
+    componentDidMount() {
+        const height = this.selectionElement.clientHeight;
+        const width = this.selectionElement.clientWidth;
+        this.setState({
+            contentHeight: height,
+            contentWidth: width,
+        });
+    }
+
     render() {
         return (
-            <div data-id={this.props["data-id"]} className="input-selection-list-items">
+            <div
+                data-id={this.props["data-id"]}
+                className="input-selection-list-items"
+                ref={(selectionElement) => this.selectionElement = selectionElement}
+                style={{
+                    width: this.state.contentWidth,
+                    height: this.state.contentHeight,
+                }}
+            >
                 {this._genListOptions()}
             </div>
         );

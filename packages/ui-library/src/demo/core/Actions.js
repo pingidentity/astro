@@ -5,7 +5,8 @@ var keyMirror = require("fbjs/lib/keyMirror"),
     Promise = require("es6-promise").Promise; // eslint-disable-line
 
 exports.Types = keyMirror({
-    SET: null
+    SET: null,
+    TOGGLE_LIGHTMODE: null,
 });
 
 exports.set = function (path, value) {
@@ -62,5 +63,9 @@ exports.fetchCode = function (id, pathToDoc) {
             }.bind(this));
     };
 };
+
+exports.toggleLightMode = () => ({
+    type: exports.Types.TOGGLE_LIGHTMODE,
+});
 
 exports.setActiveView = exports.set.bind(null, "activeView");

@@ -444,8 +444,13 @@ class StatelessExpandableRow extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.expanded && !prevProps.expanded) {
-            setTimeout(() => this.expandableRow.scrollIntoView(
-                { behavior: "smooth", block: "nearest" }), 50
+            setTimeout(
+                () => {
+                    if (this.expandableRow) {
+                        this.expandableRow.scrollIntoView(
+                            { behavior: "smooth", block: "nearest" });
+                    }
+                }, 50
             );
         }
     }

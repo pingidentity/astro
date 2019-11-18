@@ -6,7 +6,7 @@ import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
 import Colors from "../charting/Cards/dashboardColors";
-
+import FlexRow, { justifyOptions } from "../../layout/FlexRow";
 /**
  * @typedef {Object} DonutCard~data
  * @param {string} [id]
@@ -148,7 +148,11 @@ class DonutCard extends Component {
 
     _renderBack = (data) => {
         return (
-            <div className="dashboard-card__stat-list" data-id={`${this.props["data-id"]}-list`} key="dashKey">
+            <div
+                className="dashboard-card__stat-list donut-card__scroll"
+                data-id={`${this.props["data-id"]}-list`}
+                key="dashKey"
+            >
                 {data.map(({ id, label, value }, key) => (
                     <div key={id} className="donut-card__back-info">
                         <div className="dashboard-card__stat-row-label">{label || id}</div>
@@ -179,38 +183,42 @@ class DonutCard extends Component {
                             title={this.props.title}
                         />
                         {!this.props.loading && ([
-                            <PieChart
-                                key="chartKey"
-                                height={202}
-                                width={202}
-                                data-id={`${this.props["data-id"]}-chart`}
-                                className="donut-card__donut-chart"
-                            >
-                                <Pie
-                                    innerRadius={60}
-                                    outerRadius={100}
-                                    paddingAngle={1}
-                                    startAngle={90}
-                                    endAngle={450}
-                                    key="pieKey"
-                                    data={this.props.data}
-                                    dataKey="value"
-                                    nameKey="id"
-                                    onMouseOver={this._mouseOver}
-                                    onMouseOut={this._mouseOut}
-                                >
-                                    {this._renderCells(this.props.data, this._getColors(this.props.data))}
-                                </Pie>
-                            </PieChart>,
-                            <div key="centerLabelKey" className="donut-card__center-info">
-                                <div className="donut-card__center-number" style={{ color: this.state.statColor }}>
-                                    {this._renderNumber(this.props.value)}
+                            <FlexRow justify={justifyOptions.CENTER}>
+                                <FlexRow justify={justifyOptions.CENTER} key="inner-flex">
+                                    <PieChart
+                                        key="chartKey"
+                                        height={202}
+                                        width={202}
+                                        data-id={`${this.props["data-id"]}-chart`}
+                                        className="donut-card__donut-chart"
+                                    >
+                                        <Pie
+                                            innerRadius={60}
+                                            outerRadius={100}
+                                            paddingAngle={1}
+                                            startAngle={90}
+                                            endAngle={450}
+                                            key="pieKey"
+                                            data={this.props.data}
+                                            dataKey="value"
+                                            nameKey="id"
+                                            onMouseOver={this._mouseOver}
+                                            onMouseOut={this._mouseOut}
+                                        >
+                                            {this._renderCells(this.props.data, this._getColors(this.props.data))}
+                                        </Pie>
+                                    </PieChart>
+                                </FlexRow>
+                                <div key="centerLabelKey" className="donut-card__center-info">
+                                    <div className="donut-card__center-number" style={{ color: this.state.statColor }}>
+                                        {this._renderNumber(this.props.value)}
+                                    </div>
+                                    <div className="donut-card__front-line" />
+                                    <div className="donut-card__center-label" style={{ color: this.state.statColor }}>
+                                        {this.props.label}
+                                    </div>
                                 </div>
-                                <div className="donut-card__front-line" />
-                                <div className="donut-card__center-label" style={{ color: this.state.statColor }}>
-                                    {this.props.label}
-                                </div>
-                            </div>
+                            </FlexRow>
                         ])}
                     </div>
                 )}

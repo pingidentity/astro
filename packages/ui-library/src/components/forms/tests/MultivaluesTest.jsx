@@ -697,4 +697,36 @@ describe("Multivalues", function () {
         expect(valueChangeCallback.mock.calls[0][0].length).toBe(3);
     });
 
+    it("adds an invalid entry when supplied with options", function() {
+        const valueChangeCallback = jest.fn();
+        const wrapper = getWrapper({
+            entries: ["one", "two", "three"],
+            onValueChange: valueChangeCallback,
+            options,
+            optionsStrict: false,
+        });
+
+        const dropdownInput = wrapper.find("[data-id='value-entry']");
+
+        expect(valueChangeCallback).not.toBeCalled();
+        dropdownInput.simulate("change", { target: { value: "not a valid entry" } });
+        dropdownInput.simulate("keydown", { keyCode: KeyCodes.ENTER });
+        expect(valueChangeCallback).toBeCalled();
+    });
+
+    it("doesn't add an invalid entry in optionsStrict mode", function() {
+        const valueChangeCallback = jest.fn();
+        const wrapper = getWrapper({
+            entries: ["one", "two", "three"],
+            onValueChange: valueChangeCallback,
+            options,
+        });
+
+        const dropdownInput = wrapper.find("[data-id='value-entry']");
+
+        dropdownInput.simulate("change", { target: { value: "not a valid entry" } });
+        dropdownInput.simulate("keydown", { keyCode: KeyCodes.ENTER });
+        expect(valueChangeCallback).not.toBeCalled();
+    });
+
 });

@@ -121,8 +121,8 @@ $fullwidthBreakpoint: 950px;
         &--donut,
         &--multiseries,
         &--horizontal-bar-card {
-            margin-top: -24px;
-            margin-bottom: 6px;
+            margin: -24px 50px 6px;
+            @include break-word;
         }
 
         &--frequency-card {
@@ -200,6 +200,7 @@ $fullwidthBreakpoint: 950px;
         margin-bottom: $spacing-md;
         padding: $spacing-xs $spacing-sm;
         text-transform: uppercase;
+        margin-right: 55px;
     }
 
     &__stat-row-label {
@@ -457,9 +458,8 @@ $fullwidthBreakpoint: 950px;
 
     &__center-info {
         position: absolute;
-        top: 140px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -165%);
         text-align: center;
         color: $color-neutral-10;
         z-index: 10;
@@ -488,6 +488,14 @@ $fullwidthBreakpoint: 950px;
         display: flex;
         justify-content: space-between;
         height: 30px;
+    }
+
+    &__scroll {
+        height: 90px;
+        width: 90%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        display: inline-block;
     }
 
     &__drop-down {

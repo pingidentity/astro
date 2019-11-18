@@ -107,6 +107,8 @@ module.exports = class extends React.Component {
         strings: {}
     };
 
+    _lastScroll = 0;
+
     /*
      * Handler for scrolls.  This is useful for implementing lazy loading of rows
      */
@@ -114,11 +116,15 @@ module.exports = class extends React.Component {
         var container = ReactDOM.findDOMNode(this.refs.items);
         var rect = container.getBoundingClientRect();
 
-        if (container.scrollTop === 0) {
+        if (container.scrollTop === 0 && this._lastScroll >= 0) {
             this.props.onScrolledToTop(this.props.index);
-        } else if (container.scrollTop + rect.height === container.scrollHeight) {
+        } else if (
+            (container.scrollTop + rect.height >= container.scrollHeight) &&
+            (container.scrollTop >= this._lastScroll)
+        ) {
             this.props.onScrolledToBottom(this.props.index);
         }
+        this._lastScroll = container.scrollTop;
     };
 
     /*

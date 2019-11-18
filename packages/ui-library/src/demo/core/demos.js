@@ -230,6 +230,14 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_FileUploadDemo.jsx.html"
                     },
                     {
+                        label: "Inline Text Field",
+                        demo: require("../components/forms/InlineTextFieldDemo"),
+                        pathToDoc: "components/forms/InlineTextField.jsx",
+                        pathToSource: "components_forms_InlineTextField.jsx.html",
+                        pathToDemoSource: "demo_components_forms_InlineTextFieldDemo.jsx.html",
+                        keywords: ["InlineTextField"]
+                    },
+                    {
                         label: "Radio Group",
                         demo: require("../components/forms/FormRadioGroupDemo"),
                         pathToDoc: "components/forms/FormRadioGroup.jsx",
@@ -515,6 +523,13 @@ module.exports = [
                         pathToDoc: "components/layout/CalloutBox.jsx",
                         pathToSource: "components_layout_CalloutBox.jsx.html",
                         pathToDemoSource: "demo_components_layout_CalloutBoxDemo.jsx.html"
+                    },
+                    {
+                        label: "Disabled",
+                        demo: require("../components/layout/DisabledDemo"),
+                        pathToDoc: "components/layout/Disabled.jsx",
+                        pathToSource: "components_layout_Disabled.jsx.html",
+                        pathToDemoSource: "demo_components_layout_DisabledDemo.jsx.html"
                     },
                     {
                         label: "Form Label",

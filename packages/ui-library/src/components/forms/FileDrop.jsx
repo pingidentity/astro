@@ -131,6 +131,11 @@ export default class FileDrop extends Component {
         this.fileInput.click();
     }
 
+    _handleRemove = () => {
+        this.fileInput.value = null;
+        this.props.onRemove();
+    }
+
     componentDidMount () {
         ["dragenter", "dragleave", "dragover", "drop"].forEach(eventName => {
             this.dropFile.addEventListener(eventName, this._preventDefaults, false);
@@ -220,7 +225,7 @@ export default class FileDrop extends Component {
                                 <span
                                     data-id={`${dataId}-remove-link`}
                                     className="input-filedrop__link input-filedrop__divider"
-                                    onClick={onRemove}
+                                    onClick={this._handleRemove}
                                 >
                                     {text.remove}
                                 </span>

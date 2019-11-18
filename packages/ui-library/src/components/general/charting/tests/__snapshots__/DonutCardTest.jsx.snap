@@ -9,6 +9,8 @@ Array [
   "text-field_container",
   "selected-input-input",
   "donut-card-list",
+  "flex-row",
+  "flex-row",
   "donut-card-view-toggle",
 ]
 `;

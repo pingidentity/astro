@@ -316,11 +316,22 @@ class DemoApp extends React.Component {
                         {
                             id: "user",
                             iconClassName: "icon-account",
-                            children: [{ id: "cog", label: "Cog" }]
+                            children: [
+                                { id: "cog", label: "Cog" },
+                                {
+                                    id: "light",
+                                    label: this.props.lightMode ? "Dark Mode" : "Light Mode",
+                                    iconName: "support",
+                                    onClick: this.appActions.toggleLightMode,
+                                }
+                            ]
                         }
                     ]
                 })}
-                leftNavBarProps={this.props.nav}
+                leftNavBarProps={{
+                    theme: this.props.lightMode ? LeftNavBar.themes.LIGHT : LeftNavBar.themes.DARK,
+                    ...this.props.nav
+                }}
                 copyrightYear="2015"
                 searchable={true}
                 navTree={this.props.nav.tree}
@@ -365,6 +376,7 @@ DemoApp = ReactRedux.connect((state) => {
         code: state.app.code,
         nav: state.nav,
         header: state.header,
+        lightMode: state.app.lightMode,
         all: state
     };
 })(DragDropContext(HTML5Backend)(DemoApp));

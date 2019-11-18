@@ -140,6 +140,7 @@
             padding: 0;
             max-width: 100%;
             position: relative;
+            margin-left: 5px;
 
             &__hidden {
                 position: relative;
@@ -174,7 +175,6 @@
                 outline: none;
                 padding: 0;
                 -webkit-appearance: none;
-                margin-left: 5px;
             }
         }
     }

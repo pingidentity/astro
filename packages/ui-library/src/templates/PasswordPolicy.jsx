@@ -91,8 +91,8 @@ export default class PasswordPolicy extends Component {
                 value: "4",
                 label: (
                     <span>
-                        The password cannot have more than
-                        <FormTextField inline size={5} />&nbsp;
+                        The password cannot have more than&nbsp;
+                        <FormTextField inline size={5} errorMessage="Example Error Message"/>&nbsp;
                         repeated characters
                     </span>
                 )

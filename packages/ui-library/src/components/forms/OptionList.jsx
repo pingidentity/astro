@@ -43,7 +43,7 @@ import _ from "underscore";
  * @property {string} label
  *      The text for this option
  * @property {string} value
- *      The value for this option
+ *      Sets the key for the option element
 */
 
 /**
@@ -178,8 +178,8 @@ const OptionList = ({
             {options.map((option, index) => (
                 <OptionItem
                     {...option}
-                    data-id={`option-item_${option.value}`}
-                    key={option.value || option.heading}
+                    data-id={`option-item_${option.value !== undefined ? option.value : option.label}`}
+                    key={`${option.value !== undefined ? option.value : option.label}-${index}`}
                     active={highlightedIndex === index}
                     selected={value === option.value}
                     onSelect={makeHandleValueChange(onValueChange, option.value)}

@@ -130,17 +130,14 @@ class Row extends React.Component {
     };
 
     render() {
-        var cssClassName = classnames({
-            "inline plus": !this.props.rowObject.expanded,
-            "inline minus": this.props.rowObject.expanded
-        });
+        var iconName = this.props.rowObject.expanded ? "minus" : "plus";
 
         var row = [];
         if (this.props.rowExpandable) {
             var key = this.props["data-id"] + "_expandableIconCell";
             row.push(
                 <td onClick={this._handleRowToggle} data-id={key} key={key}>
-                    <ButtonCell className={cssClassName} />
+                    <ButtonCell iconName={iconName} />
                 </td>
             );
         }

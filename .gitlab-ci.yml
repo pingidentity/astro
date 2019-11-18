@@ -1,16 +1,32 @@
-image: node:8
-
 stages:
+  - build-ci-image
   - test
+
+
+build_ci_image:
+  stage: build-ci-image
+  # This was causing issues where some builds would fail to find the proper Docker hash.
+  # It should be added back in at some point.
+  # only:
+  #   changes:
+  #     - Dockerfile
+  script:
+    - docker build --pull --tag docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0 ./shared/docker
+    - docker push docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
+  tags:
+    - platform-publish-docker
 
 test:
   stage: test
+  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
   tags:
-    - platform-build-node-fragment
+    - platform-build-docker
   script:
     - npm i lerna -g
     - lerna bootstrap
     - lerna run lint
     - lerna run coverage-ci
     - lerna run static
-    - lerna run pack
+    - cd packages/ui-library
+    - npm i
+    - npm run backstop-ci

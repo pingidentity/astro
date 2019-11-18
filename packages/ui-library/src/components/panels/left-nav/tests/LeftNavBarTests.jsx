@@ -8,7 +8,6 @@ import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("LeftNavBar", function () {
     var React = require("react"),
-        ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
@@ -128,28 +127,6 @@ describe("LeftNavBar", function () {
         const elem = LeftNavBar.defaultRender(defaultProps, <div/>);
 
         expect(elem.props).toEqual(defaultProps);
-    });
-
-    it("detaches animation listener after re-render", function () {
-        var wrapper = getWrappedComponent();
-        var component = wrapper.refs.target;
-
-        component._getItemSelector().removeEventListener = jest.fn();
-
-        component._rerender();
-
-        expect(component._getItemSelector().removeEventListener).toBeCalled();
-    });
-
-    it("unmounts", function () {
-        var wrapper = getWrappedComponent({ selectedNode: "item-1" });
-        var component = wrapper.refs.target;
-
-        component._getItemSelector().removeEventListener = jest.fn();
-
-        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
-
-        expect(component._getItemSelector()).toBe(null);
     });
 
     /*
