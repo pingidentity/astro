@@ -17,7 +17,8 @@ module.exports = {
         "/build/",
         "/dist/",
         "/src/selenium/tests",
-        "commonTests.js?(x)"
+        "commonTests.js?(x)",
+        "Backstop",
     ],
     "modulePathIgnorePatterns": [
         "/node/",

@@ -12,7 +12,7 @@ const flows = [
         "sublabel": "remove-top-content",
         "clickSelector": "div[data-id='remove-top-content']",
     },
-]
+];
 
 module.exports = flows.map(flow => ({
     ...flow,

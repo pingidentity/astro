@@ -21,7 +21,7 @@ module.exports = function (state, action) {
             nextState = update.set(nextState, ["leftNav", action.path], !nextState.leftNav[action.path]);
             break;
         default:
-        return state || initialState;
+            return state || initialState;
     }
 
     return nextState;
