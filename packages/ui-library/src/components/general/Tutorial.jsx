@@ -54,14 +54,11 @@ const Themes = {
  *     Theme for the Tutorial component.
  * @param {bool} [visible=false]
  *     If the Tutorial is to be displayed or not.
- *
- *  @example
- *     <HelpHint className="short-tooltip right" hintText="My first HelpHint!">SomeTextWithHelp</HelpHint>
  */
 class Tutorial extends React.Component {
     constructor(props) {
         super(props);
-        this.modal = React.createRef();
+        this.modal = this.refs.modal;
     }
 
     _renderWelcome = () => {
