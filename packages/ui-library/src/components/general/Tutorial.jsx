@@ -248,6 +248,7 @@ Tutorial.propTypes = {
 };
 
 Tutorial.defaultProps = {
+    "data-id": "tutorial",
     visible: false,
     active: 0,
     steps: [],
