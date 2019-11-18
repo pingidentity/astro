@@ -3,7 +3,11 @@ var Actions = require("./Actions.js"),
 
 var initialState = {
     code: {},
-    lightMode: false,
+    leftNav: {
+        lightMode: false,
+        legacyNav: false,
+        removeTopContent: false,
+    }
 };
 
 module.exports = function (state, action) {
@@ -13,11 +17,11 @@ module.exports = function (state, action) {
         case Actions.Types.SET:
             nextState = update.set(nextState, action.path, action.value);
             break;
-        case Actions.Types.TOGGLE_LIGHTMODE:
-            nextState = update.set(nextState, "lightMode", !nextState.lightMode);
+        case Actions.Types.TOGGLE_NAVMODE:
+            nextState = update.set(nextState, ["leftNav", action.path], !nextState.leftNav[action.path]);
             break;
         default:
-            return state || initialState;
+        return state || initialState;
     }
 
     return nextState;

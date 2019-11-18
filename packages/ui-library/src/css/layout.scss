@@ -420,10 +420,6 @@ $color-grey-minor-1: $color-neutral-30;
     .nav-section {
         padding: 0;
 
-        &:first-of-type {
-            margin-top: -15px;
-        }
-
         &.selected {
             .title {
                 transition: background-color 0.2s;

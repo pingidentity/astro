@@ -1009,7 +1009,7 @@ module.exports = [
                         pathToDemoSource: "demo_components_panels_HeaderBarDemo.jsx.html"
                     },
                     {
-                        label: "Left Side Nav Bar",
+                        label: "Left Nav Bar",
                         demo: require("../components/panels/LeftNavBarDemo"),
                         pathToDoc: "components/panels/left-nav/LeftNavBar.jsx",
                         pathToSource: "components_panels_left-nav_LeftNavBar.jsx.html",

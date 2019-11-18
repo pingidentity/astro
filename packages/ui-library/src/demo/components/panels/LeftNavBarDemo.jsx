@@ -1,44 +1,48 @@
-var React = require("react");
-var LeftNavBar = require("../../../components/panels/left-nav");
+import React from "react";
+import { connect } from "react-redux";
+import Toggle from "ui-library/lib/components/forms/form-toggle";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import Actions from "../../core/Actions.js";
+
 
 /**
 * @name LeftNavBarDemo
 * @memberof LeftNavBar
 * @desc A demo for LeftNavBar
 */
-class LeftNavDemo extends React.Component {
-    constructor(props) {
-        super(props);
-        var initState = LeftNavBar.Reducer(null, {});
 
-        this.state = LeftNavBar.Reducer(initState, LeftNavBar.Actions.init([
-            {
-                label: "Section 1",
-                id: "section1",
-                children: [ { label: "Item 1", id: "item1" } ]
-            },
-            {
-                label: "Section 2",
-                id: "section2",
-                children: [ { label: "Item 2", id: "item2" } ]
-            }
-        ]));
-    }
+const LeftNavBarDemoStateless = ({
+    lightMode,
+    toggleLightMode,
+    legacyNav,
+    toggleLegacyNav,
+    removeTopContent,
+    toggleRemoveTopContent,
+}) => (
+    <div>
+        <FormLabel value="Light Mode">
+            <Toggle toggled={lightMode} onToggle={toggleLightMode} data-id="light-mode" />
+        </FormLabel>
+        <FormLabel value="Legacy">
+            <Toggle toggled={legacyNav} onToggle={toggleLegacyNav} data-id="legacy" />
+        </FormLabel>
+        <FormLabel value="Remove Top Content">
+            <Toggle toggled={removeTopContent} onToggle={toggleRemoveTopContent} data-id="remove-top-content" />
+        </FormLabel>
+    </div>
+);
 
-    _handleSectionClick = (id) => {
-        this.setState(LeftNavBar.Reducer(this.state, LeftNavBar.Actions.toggleSectionCloseOthers(id)));
-    };
+const LeftNavBarDemo = connect(
+    state => ({
+        lightMode: state.app.leftNav.lightMode,
+        legacyNav: state.app.leftNav.legacyNav,
+        removeTopContent: state.app.leftNav.removeTopContent,
+    }),
+    dispatch => ({
+        toggleLightMode: () => dispatch(Actions.toggleNavMode("lightMode")),
+        toggleLegacyNav: () => dispatch(Actions.toggleNavMode("legacyNav")),
+        toggleRemoveTopContent: () => dispatch(Actions.toggleNavMode("removeTopContent")),
+    })
+)(LeftNavBarDemoStateless);
 
-    _handleItemClick = (id) => {
-        this.setState(LeftNavBar.Reducer(this.state, LeftNavBar.Actions.selectItemUnselectOthers(id)));
-    };
-
-    render() {
-        return (
-            <LeftNavBar {...this.state}
-                onItemValueChange={this._handleItemClick}
-                onSectionValueChange={this._handleSectionClick} legacy />);
-    }
-}
-
-module.exports = LeftNavDemo;
+module.exports = LeftNavBarDemo;
