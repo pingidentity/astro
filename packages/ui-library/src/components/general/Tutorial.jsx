@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { Portal } from "react-portal";
-import Button, { buttonTypes } from "../buttons/Button";
-import Link from "../general/Link";
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import Link from "ui-library/lib/components/general/Link";
 import FlexRow, {
     alignments,
     justifyOptions,
-} from "../layout/FlexRow";
-import Icon, { iconTypes } from "../general/Icon";
-import PopperContainer from "../tooltips/PopperContainer";
+} from "ui-library/lib/components/layout/FlexRow";
+import Icon, { iconTypes } from "ui-library/lib/components/general/Icon";
+import PopperContainer from "ui-library/lib/components/tooltips/PopperContainer";
 
 const Themes = {
     LIGHT: "light",

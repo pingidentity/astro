@@ -2,6 +2,11 @@ import React from "react";
 import Tutorial from "../../../components/general/Tutorial";
 import TutorialButton from "../../../components/buttons/TutorialButton";
 
+/**
+* @name TutorialDemo
+* @memberof Tutorial
+* @desc A demo for Tutorial
+*/
 export default class TutorialDemo extends React.Component {
     state = {
         active: 0,
