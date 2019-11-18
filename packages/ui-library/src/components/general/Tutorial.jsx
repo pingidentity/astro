@@ -16,6 +16,48 @@ const Themes = {
     DARK: "dark",
 };
 
+/**
+ * @class Tutorial
+ * @desc The Tutorial component can help guide a user through a new or complex interface.
+ *
+ * @param {number} [active=0]
+ *     The active step. "0" is the welcome page, "1" is the first step.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ * @param {string} [data-id="tutorial"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [labelDismiss="Dismiss"]
+ *     "Dismiss" button label.
+ * @param {string} [labelFinal="Finish"]
+ *     "Finish" button label.
+ * @param {string} [labelGetStarted="Get Started"]
+ *     "Get Started" button label.
+ * @param {string} [labelNext="Next"]
+ *     "Next" button label.
+ * @param {string} [labelPrevious="Back"]
+ *     "Previous" button label.
+ * @param {string} link
+ *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
+ * @param {string} [messageWelcomeDescription]
+ *     Node that is set as the initial welcome modal description.
+ * @param {string} [messageWelcomeTitle]
+ *     Node that is set as the initial welcome modal title.
+ * @param {function} [onClose]
+ *     onClose cick handler.
+ * @param {function} [onNext]
+ *     onPrevious cick handler.
+ * @param {function} [onPrevious]
+ *     onPrevious cick handler.
+ * @param {array} steps
+ *     An array of step objects that the tutorial will walk through.
+ * @param {Tutiorial.themes} [theme]
+ *     Theme for the Tutorial component.
+ * @param {bool} [visible=false]
+ *     If the Tutorial is to be displayed or not.
+ *
+ *  @example
+ *     <HelpHint className="short-tooltip right" hintText="My first HelpHint!">SomeTextWithHelp</HelpHint>
+ */
 class Tutorial extends React.Component {
     constructor(props) {
         super(props);
@@ -205,9 +247,10 @@ class Tutorial extends React.Component {
             steps,
             visible,
             theme,
+            className,
         } = this.props;
 
-        const tutorialClassnames = classnames("tutorial", {
+        const tutorialClassnames = classnames("tutorial", className, {
             "tutorial--dark": theme === Themes.DARK,
         });
 
@@ -232,6 +275,7 @@ class Tutorial extends React.Component {
 Tutorial.propTypes = {
     "data-id:": PropTypes.string,
     visible: PropTypes.bool,
+    className: PropTypes.string,
     active: PropTypes.number,
     steps: PropTypes.arrayOf(PropTypes.object),
     onNext: PropTypes.func,

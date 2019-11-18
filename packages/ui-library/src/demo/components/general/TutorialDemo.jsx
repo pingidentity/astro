@@ -1,6 +1,5 @@
 import React from "react";
-import Tutorial, { themes } from "../../../components/general/Tutorial";
-import Text from "../../../components/general/Text";
+import Tutorial from "../../../components/general/Tutorial";
 import TutorialButton from "../../../components/buttons/TutorialButton";
 
 export default class TutorialDemo extends React.Component {
@@ -10,19 +9,19 @@ export default class TutorialDemo extends React.Component {
         steps: [
             {
                 title: "This is the First Step",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='BasicInputs']")[0]
             },
             {
                 title: "This is the Second Step",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='Templates-label']")[0]
             },
             {
                 title: "This is the Third Step",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 side: "bottom",
                 target: () => document.querySelectorAll("[data-id='search']")[0]
             }
