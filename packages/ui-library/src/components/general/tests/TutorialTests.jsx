@@ -185,6 +185,22 @@ describe("UnitInput", () => {
         expect(modalDescription.text()).toEqual("Step 1 description...");
     });
 
+    it("populates the active step content after changed", () => {
+        const component = getComponent({
+            visible: true,
+            active: 1,
+        });
+        const tutorialModal = component.find(".tutorial__modal");
+        const modalTitle = tutorialModal.find(".tutorial__modal--title");
+        expect(modalTitle.text()).toEqual("Step 1 Title");
+        const modalDescription = tutorialModal.find(".tutorial__modal--description");
+        expect(modalDescription.text()).toEqual("Step 1 description...");
+
+        component.setProps({ active: 2 });
+        expect(modalTitle.text()).toEqual("Step 2 Title");
+        expect(modalDescription.text()).toEqual("Step 2 description...");
+    });
+
     it("renders headerContent in step if provided", () => {
         const component = getComponent({
             visible: true,

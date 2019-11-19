@@ -151,6 +151,7 @@ class Tutorial extends React.Component {
         // Remove existing lightbox if any
         const prevSpotlight = document.getElementsByClassName("tutorial__modal--lightbox")[0];
 
+        /* istanbul ignore if  */
         if (prevSpotlight !== undefined) {
             prevSpotlight.remove();
         }
@@ -162,6 +163,7 @@ class Tutorial extends React.Component {
             // Get ref to target element
             const target = this.props.steps[this.props.active - 1].target;
 
+            /* istanbul ignore if  */
             if (target() !== undefined) {
 
                 // Create clone of target with custom styles
