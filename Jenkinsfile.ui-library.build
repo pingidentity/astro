@@ -34,37 +34,8 @@ pipeline {
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
                 sh """
-                    set -eo
-
-
-
-                    npm run doc
-                    npm run pack
-
-                    npm run build-css
-                    mkdir cdn/${env.SNAPSHOT_VERSION}
-                    mv cdn/css cdn/${env.SNAPSHOT_VERSION}
-
-                    cp -rf src/images cdn/${env.SNAPSHOT_VERSION}
-                    cp -rf src/fonts cdn/${env.SNAPSHOT_VERSION}
-
-
-                    cp -rf src build
-                    cp -rf build-doc build
-                    rm -rf ${env.VERSION}.tar.gz
-                    tar -czf ${env.VERSION}.tar.gz build
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.VERSION}.tar.gz
-                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.VERSION}.tar.gz ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -rf /var/www/html/${env.VERSION}
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mkdir /var/www/html/${env.VERSION}
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} tar -xzf /var/www/html/${env.VERSION}.tar.gz --strip 1 -C /var/www/html/${env.VERSION}
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} rm -f /var/www/html/${env.VERSION}.tar.gz
-                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions.json ./
-                    node hosting/append_current_version.js;\
-                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ./versions.json ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS}:/var/www/html/versions-${env.VERSION}.json;\
-                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${keyfile} ${env.HOSTING_SERVER_USERNAME}@${env.HOSTING_SERVER_ADDRESS} mv /var/www/html/versions-${env.VERSION}.json /var/www/html/versions.json;\
-                    rm -f ./versions.json;\
-                    rm -f ${env.VERSION}.tar.gz;\
+                    make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.VERSION} package-and-upload-for-hosting
+                    make CDN_VERSION=${env.SNAPSHOT_VERSION} build-cdn-assets
                   """
               }
             }
