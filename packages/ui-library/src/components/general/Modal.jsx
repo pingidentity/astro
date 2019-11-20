@@ -27,6 +27,8 @@ var Type = {
  * @class Modal
  * @desc A generic modal component. Child components of the modal are rendered as the modal content.
  *
+ * @param {node} [bodyTitle]
+ *     Title for inside the modal body.
  * @param {string} [data-id="modal-button"]
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
@@ -67,6 +69,7 @@ class Modal extends React.Component {
 
     static displayName = "Modal";
     static propTypes = {
+        bodyTitle: PropTypes.node,
         "data-id": PropTypes.string,
         className: PropTypes.string,
         expanded: PropTypes.bool,
@@ -249,6 +252,11 @@ class Modal extends React.Component {
                             <If test={(!this.props.showHeader || this.props.type === "dialog") && this.props.onClose}>
                                 {this._getCloseButton()}
                             </If>
+                            {
+                                this.props.bodyTitle
+                                    ? <div className="modal-body__body-title">{this.props.bodyTitle}</div>
+                                    : null
+                            }
                             {this.props.children}
                         </div>
                     </span>

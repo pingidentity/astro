@@ -173,11 +173,13 @@
         .modal-content {
             width: $modal-width;
         }
+
         .modal-title,
         .body-title {
             font-size: 20px;
             margin: 0 0 15px;
         }
+
         .modal-body {
             border-width: 0 1px 1px;
             text-align: left;
@@ -185,6 +187,13 @@
             max-height: calc(100% - #{$min-bottom});
 
             border-radius: $modal-radius;
+
+            &__body-title {
+                font-size: 20px;
+                margin: 0 0 $spacing-md;
+                display: flex;
+                justify-content: center;
+            }
         }
     }
     &.alert {
@@ -233,6 +242,7 @@
 
             border-radius: 0 0 $modal-radius $modal-radius;
 
+            &__body-title,
             .title,
             .body-title {
                 color: $color-warning-text;

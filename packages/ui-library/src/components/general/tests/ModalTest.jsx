@@ -278,4 +278,15 @@ describe("ModalTest", function () {
         expect(TitleNode.text()).toEqual(titleText);
     });
 
+    it("renders a bodyTitle when prop defined", function () {
+        const component =
+            shallow(
+                <Modal bodyTitle="hello" expanded={true} />
+            );
+
+        const bodyTitleNode = component.find(".modal-body__body-title");
+
+        expect(bodyTitleNode.exists()).toEqual(true);
+    });
+
 });
