@@ -129,7 +129,19 @@
 
     &--warning {
         .tooltip-text {
+            @include bg-styles($color-warning-yellow);
+        }
+    }
+
+    &--error {
+        .tooltip-text {
             @include bg-styles($color-critical-red);
+        }
+    }
+
+    &--success {
+        .tooltip-text {
+            @include bg-styles($color-success-green);
         }
     }
 
