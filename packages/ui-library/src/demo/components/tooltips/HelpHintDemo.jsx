@@ -1,8 +1,8 @@
-var React = require("react");
-var HelpHint = require("../../../components/tooltips/HelpHint");
-var FormLabel = require("../../../components/forms/FormLabel");
-
-import Button from "../../../components/buttons/Button";
+import React from "react";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import Button from "ui-library/lib/components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name HelpHintDemo
@@ -77,6 +77,32 @@ class HelpHintDemo extends React.Component {
                     placement="bottom"
                     link="#"
                 />
+
+                <HR />
+                <HelpHint
+                    data-id="helphint-error"
+                    hintText="Error type"
+                    type={HelpHint.types.ERROR}
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    data-id="helphint-light"
+                    hintText="Light type"
+                    type={HelpHint.types.LIGHT}
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    data-id="helphint-success"
+                    hintText="Success type"
+                    type={HelpHint.types.SUCCESS}
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    data-id="helphint-warning"
+                    hintText="Warning type"
+                    type={HelpHint.types.WARNING}
+                />
+
 
             </div>
         );
