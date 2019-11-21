@@ -25,6 +25,28 @@ describe("PopperContainer", function() {
         expect(newData.styles.maxWidth).toEqual(`${width}px`);
     });
 
+    it("gives popper.js the correct width with _matchReferenceMinWidth", function() {
+        const getReference = () => null;
+        const component = ReactTestUtils.renderIntoDocument(
+            <PopperContainer getReference={getReference}>contents</PopperContainer>
+        );
+        const width = 1234;
+
+        const data = {
+            styles: {},
+            offsets: {
+                reference: {
+                    width: width
+                }
+            }
+        };
+
+        const newData = component._matchReferenceMinWidth(data);
+
+        expect(newData.styles.minWidth).toEqual(`${width}px`);
+    });
+
+
     it("should insert the z index into a data object", function() {
         const getReference = () => null;
         const component = ReactTestUtils.renderIntoDocument(
