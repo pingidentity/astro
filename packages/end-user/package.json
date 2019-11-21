@@ -139,7 +139,7 @@
     }
   },
   "scripts": {
-    "static": "rm -rf ./static && webpack --config webpack.static.js",
+    "pack": "rm -rf ./static && webpack --config webpack.static.js",
     "cdn": "rm -rf ./cdn && webpack --config webpack.cdn.js && cp -R ./src/icons/. ./cdn/*/icons",
     "start": "webpack-dev-server --config webpack.dev.js",
     "lint": "eslint src/** && stylelint src/**/*.scss",

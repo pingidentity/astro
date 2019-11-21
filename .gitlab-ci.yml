@@ -26,7 +26,6 @@ test:
     - lerna bootstrap
     - lerna run lint
     - lerna run coverage-ci
-    - lerna run static
-    - cd packages/ui-library
-    - npm i
-    - npm run backstop-ci
+    - lerna run pack
+    - lerna run backstop-ci
+
