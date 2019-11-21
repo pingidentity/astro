@@ -90,6 +90,7 @@ pipeline {
         }
       }
     }
+  }
   post {
     success {
        slackSend channel: '#ux-deployments', message: ":verynice: Great Success! End-User ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
