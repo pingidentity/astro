@@ -5,7 +5,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
     output: {
-        path: `${__dirname}/static`,
+        path: `${__dirname}/build`,
         filename: '[name].bundle.js',
         libraryTarget: 'umd',
     },

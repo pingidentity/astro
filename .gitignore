@@ -8,3 +8,5 @@ packages/end-user/static
 packages/ui-library/backstop_data/html_report/
 packages/ui-library/backstop_data/bitmaps_test/*
 packages/ui-library/backstop.json
+
+build

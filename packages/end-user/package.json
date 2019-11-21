@@ -139,7 +139,7 @@
     }
   },
   "scripts": {
-    "pack": "rm -rf ./static && webpack --config webpack.static.js",
+    "pack": "rm -rf ./build && webpack --config webpack.static.js",
     "cdn": "rm -rf ./cdn && webpack --config webpack.cdn.js && cp -R ./src/icons/. ./cdn/*/icons",
     "start": "webpack-dev-server --config webpack.dev.js",
     "lint": "eslint src/** && stylelint src/**/*.scss",
@@ -149,6 +149,7 @@
     "jest": "jest",
     "test": "jest",
     "coverage": "jest --coverage",
-    "coverage-ci": "jest --coverage --ci"
+    "coverage-ci": "jest --coverage --ci",
+    "append-version": "node ../../append_current_version.js"
   }
 }
