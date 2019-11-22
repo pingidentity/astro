@@ -1,7 +1,7 @@
 import React from "react";
 import ListNav from "../../../components/layout/ListNav";
 import Tutorial from "../tutorials/Tutorial.jsx";
-import notes from "./notes.js";
+import notes from "./notes.json";
 import PageSection from "../../../components/layout/PageSection";
 import marked from "marked";
 
@@ -33,7 +33,7 @@ class ReleaseNotes extends React.Component {
     _getNotes = (id) => {
         const { file, title, date } = notes[id];
         const dateMarkUp = date ? ` - ${date}` : "";
-        const markdown = marked(file);
+        const markdown = marked(require(`${file}`));
         return (
             <PageSection key="key" title={`${title}${dateMarkUp}`}>
                 <div dangerouslySetInnerHTML={{ __html: markdown }} />

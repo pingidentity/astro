@@ -1,7 +1,9 @@
-// This file has been modified for releasing a beta version. Some steps have been removed that will need to go back in when v4 is out of beta.
 pipeline {
   agent {
     label 'ui-library-cdn-deploy'
+  }
+  environment {
+    JIRA_CREDS = credentials('jira-creds')
   }
   stages {
      stage('run-tests') {
@@ -9,7 +11,7 @@ pipeline {
         dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo "Running ui-library linting and tests"
-            sh "npm install"
+            sh "npm ci"
             sh "npm run lint"
             sh "npm run coverage-ci"
           }
@@ -23,19 +25,25 @@ pipeline {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             script {
               env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
-              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","")
+              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","").trim()
               env.GIT_RELEASE_TAG = "ui-library-${env.RELEASE_VERSION}"
             }
             echo """
               release version: ${env.RELEASE_VERSION}
               git tag: ${env.GIT_RELEASE_TAG}
             """
-            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
-              withCredentials([
-                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
-              ]){
-                sh  """
+            withCredentials([
+              sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+            ]){
+              sh  """
+                  npm run generate-release-notes ${env.RELEASE_VERSION} ${env.JIRA_CREDS}
+                  git add *notes.json */release-notes/*.md
+                  git commit -m 'UI Library Release notes ${env.RELEASE_VERSION}'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+
+
                   git add package.json
+                  git add package-lock.json
                   git config --global user.email 'devtools+jenkins@pingidentity.com'
                   git config --global user.name 'devtools-jenkins'
 
@@ -45,7 +53,6 @@ pipeline {
                   git tag ${env.GIT_RELEASE_TAG}
                   GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
                 """
-              }
             }
           }
         }
@@ -78,7 +85,7 @@ pipeline {
           archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
         }
       }
-  }
+    }
     stage('cdn deploy') {
       steps {
         dir("${env.WORKSPACE}/packages/ui-library") {
@@ -102,7 +109,6 @@ pipeline {
         }
       }
     }
-
   }
   post {
     success {
