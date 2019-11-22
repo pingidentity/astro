@@ -3,7 +3,6 @@ HOSTING_SERVER_ADDRESS=uilibrary.ping-eng.com
 HOSTING_SERVER_USERNAME=ubuntu
 #Base for UI LIBRARY
 HOSTING_PROJECT_BASE=/var/www/html/
-PROJECT=ui-library
 
 
 # we don't want "make" to run package-and-upload-for-hosting so I put in a useless default
