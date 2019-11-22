@@ -322,7 +322,9 @@ table.grid td.grid__cell {
             white-space: nowrap;
             width: 100%;
         }
-        .icon-edit {
+        .collapsible-link .icon-edit {
+            // this CSS block is for the licensing template
+            // if you remove it, make sure the edit icons still look good on that template
             padding-right: 25px;
             color: $color-accent-neutral-10;
             &:hover {

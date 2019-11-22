@@ -8,6 +8,7 @@ import Table, {
 import InputRow from "../../../components/layout/InputRow";
 
 import HR from "ui-library/lib/components/general/HR";
+import Button from "ui-library/lib/components/buttons/Button";
 
 /**
 * @name TableDemo
@@ -20,23 +21,27 @@ const TableDemo = () => {
         head: [
             "name",
             "age",
-            "city"
+            "city",
+            ""
         ],
         body: [
             [
                 "tom",
                 "25",
-                "denver"
+                "denver",
+                <Button iconName="edit" inline />
             ],
             [
                 "jane",
                 "36",
-                <span>breckenridge<br />montrose</span>
+                <span>breckenridge<br />montrose</span>,
+                <Button iconName="edit" inline />
             ],
             [
                 "roy",
                 "19",
-                "arvada"
+                "arvada",
+                <Button iconName="edit" inline />
             ]
         ]
     };
