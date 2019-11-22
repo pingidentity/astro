@@ -32,7 +32,7 @@ const getTests = baseUrl => (path = "", tests = []) => {
         const componentTests = require(path);
         return [
             // Add defaults into each test
-            ...tests.map(transformTestProps(baseUrl)),
+            ...tests,
             ...componentTests.map(transformTestProps(baseUrl))
         ];
     } else if (isDirectory(path)) {
