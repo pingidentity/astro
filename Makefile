@@ -6,7 +6,8 @@ HOSTING_PROJECT_BASE=/var/www/html/
 PROJECT=ui-library
 
 
-do-nothing:
+# we don't want "make" to run package-and-upload-for-hosting so I put in a useless default
+default:
 	@echo "Make does nothing"
 
 package-and-upload-for-hosting:
