@@ -472,6 +472,12 @@ button,
         transition: $transition;
         background: $color-timberwolf;
     }
+
+    &__button {
+        &:focus {
+            z-index: 1;
+        }
+    }
 }
 
 button.button--overflow {
