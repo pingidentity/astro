@@ -15,7 +15,7 @@ const brandTypes = {
         logo: <SocialLogos.TWITTER width={20} height={20} />,
     },
     FACEBOOK: {
-        fill: '#4267B6',
+        fill: '#1877f2',
         logo: <SocialLogos.FACEBOOK width={20} height={20} />,
     },
     APPLE: {

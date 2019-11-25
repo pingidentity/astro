@@ -61,7 +61,7 @@ const SocialIcons = {
             <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
                 <rect x="35.5" y="10.3" style={{ fill: '#FFFFFF' }} width="52.8" height="89.7" />
                 <path
-                    style={{ fill: '#3C5A99' }}
+                    style={{ fill: '#1877f2' }}
                     d="M94.5,0h-89C2.5,0,0,2.5,0,5.5v89c0,3,2.5,5.5,5.5,5.5h47.9V61.3h-13V46.2h13V35.1c0-12.9,7.9-19.9,19.4-19.9
                     c5.5,0,10.3,0.4,11.6,0.6v13.5l-8,0c-6.3,0-7.5,3-7.5,7.3v9.6h14.9L82,61.3H69V100h25.5c3,0,5.5-2.5,5.5-5.5v-89
                     C100,2.5,97.5,0,94.5,0z"
