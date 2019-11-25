@@ -47,7 +47,7 @@ $card-padding-horizontal: $spacing-xl;
 
 
     &--slim {
-        min-height: unset;
+        min-height: auto;
     }
 
     &--slim > &__content{

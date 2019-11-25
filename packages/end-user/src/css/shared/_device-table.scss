@@ -4,8 +4,8 @@
     }
 
     &__icon {
-        flex: 1;
         flex-grow: 0;
+        flex-basis: auto;
         fill: $color-neutral-20;
 
         @media (max-width: $breakpoint-mobile) {
@@ -36,8 +36,8 @@
     }
 
     &__row-info {
-        flex: 1;
         flex-grow: 1;
+        flex-basis: auto;
         text-align: left;
         min-width: 0;
     }
@@ -58,7 +58,7 @@
 
     &__row-delete {
         text-align: right;
-        flex: 1;
         flex-grow: 0;
+        flex-basis: auto;
     }
 }
