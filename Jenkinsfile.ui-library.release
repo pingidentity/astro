@@ -47,8 +47,8 @@ pipeline {
                   git config --global user.email 'devtools+jenkins@pingidentity.com'
                   git config --global user.name 'devtools-jenkins'
 
-                git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+                  git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
                   git tag ${env.GIT_RELEASE_TAG}
                   GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
@@ -83,6 +83,16 @@ pipeline {
       when {
         expression { params.RELEASE_BRANCH != 'master'	}
       }
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder'){
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.RELEASE_VERSION} package-and-upload-for-hosting"
+            }
+          }
+        }
+      }
+
     }
     stage('cdn deploy') {
       steps {
