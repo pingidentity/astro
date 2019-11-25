@@ -1,0 +1,166 @@
+.expandable-card {
+    margin-left: -10px;
+    margin-right: -10px;
+
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+
+        & > div {
+            flex-basis: content;
+            margin-right: $spacing-md;
+        }
+    }
+
+    &__title {
+        color: $color-neutral-10;
+        font-size: 18px;
+        margin-bottom: 5px;
+        @include break-word;
+        width: calc(100% - 20px);
+    }
+
+    &__card {
+        padding: $spacing-md;
+        background: $color-neutral-95;
+        border: 1px solid darken($color-neutral-90, 10%);
+        border-radius: 4px;
+        align-self: flex-start;
+        min-height: 100px;
+        margin: 10px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        &--expanded {
+            .expandable-card__info {
+                flex-direction: row;
+
+                .expandable-card__title {
+                    width: unset;
+                }
+            }
+
+            .expandable-card__description {
+                display: none;
+            }
+
+            .expandable-card__text,
+            .expandable-card__chip {
+                height: unset;
+            }
+        }
+    }
+
+    &__subtitle {
+        color: $color-accent-neutral-20;
+        font-size: 14px;
+        @include break-word;
+    }
+
+    &__cardAccessories {
+        position: absolute;
+        top: $spacing-md;
+        right: $spacing-md;
+    }
+
+    &__description {
+        color: $color-neutral-20;
+        font-size: 14px;
+        height: 40px;
+        display: flex;
+        align-items: flex-end;
+        @include break-word;
+    }
+
+    &__chip {
+        height: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__holder {
+        flex: 1;
+        flex-grow: 0;
+        flex-basis: calc(100% / 9);
+        box-sizing: border-box;
+
+        @media only screen and (max-width: 2750px) {
+            flex-basis: calc(100% / 8);
+        }
+
+        @media only screen and (max-width: 2500px) {
+            flex-basis: calc(100% / 7);
+        }
+
+        @media only screen and (max-width: 2250px) {
+            flex-basis: calc(100% / 6);
+        }
+
+        @media only screen and (max-width: 2000px) {
+            flex-basis: calc(100% / 5);
+        }
+
+        @media only screen and (max-width: 1750px) {
+            flex-basis: calc(100% / 4);
+        }
+
+        @media only screen and (max-width: 1500px) {
+            flex-basis: calc(100% / 3);
+        }
+
+        @media only screen and (max-width: 1250px) {
+            flex-basis: calc(100% / 2);
+        }
+
+        @media only screen and (max-width: 1000px) {
+            flex-basis: 100%;
+        }
+
+        &--expanded {
+            flex-basis: 100%;
+        }
+    }
+
+    &__content-holder {
+        position: relative;
+        transition: all 0.2s;
+    }
+
+    &__content {
+        visibility: hidden;
+        overflow: hidden;
+        display: block;
+        padding: 20px 0;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        transition: all 0.2s;
+        max-height: 0;
+
+        &--expanded {
+            visibility: unset;
+            position: relative;
+            width: unset;
+            max-height: 100%;
+            opacity: 1;
+        }
+    }
+
+    &__footer {
+        position: relative;
+    }
+
+    &__expand {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}

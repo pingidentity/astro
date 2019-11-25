@@ -1,28 +1,70 @@
+@mixin chip($color, $bg) {
+    background-color: $bg;
+    border-color: $bg;
+    color: $color;
+}
+
+@mixin chipOutline($color) {
+    border-width: 1px;
+    border-style: solid;
+    background-color: transparent;
+    border-color: $color;
+    color: $color;
+}
+
 .chip-component {
     border-radius: 3px;
     color: $color-neutral-20;
     display: inline-block;
     padding: $spacing-xs $spacing-sm;
+    border-width: 0;
 
     &--color-cyan {
-        background-color: $color-charting-cyan;
+        @include chip($color-neutral-20, $color-charting-cyan);
+
+        &.chip-component--outline {
+            @include chipOutline($color-charting-cyan);
+        }
     }
 
     &--color-faint-grey {
-        background-color: $color-strong-neutral-90;
+        @include chip($color-neutral-20, $color-strong-neutral-90);
+
+        &.chip-component--outline {
+            @include chipOutline($color-strong-neutral-90);
+        }
     }
 
     &--color-light-grey {
-        background-color: $color-neutral-90;
+        @include chip($color-neutral-20, $color-neutral-90);
+
+        &.chip-component--outline {
+            @include chipOutline($color-neutral-90);
+        }
     }
 
     &--color-dark-grey {
-        color: $color-white;
-        background-color: $color-elephant;
+        @include chip($color-white, $color-elephant);
+
+        &.chip-component--outline {
+            @include chipOutline($color-elephant);
+        }
     }
 
     &--color-white {
-        background-color: $color-white;
+        @include chip($color-neutral-20, $color-white);
+
+        &.chip-component--outline {
+            @include chipOutline($color-white);
+        }
+    }
+
+    &--color-red {
+        @include chip($color-white, $color-critical-red);
+
+        &.chip-component--outline {
+            @include chipOutline($color-critical-red);
+        }
     }
 
     &--full-width {

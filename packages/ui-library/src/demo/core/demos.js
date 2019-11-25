@@ -848,6 +848,14 @@ module.exports = [
                         keywords: ["rows"]
                     },
                     {
+                        label: "Expandable Card",
+                        demo: require("../components/rows/ExpandableCardDemo"),
+                        pathToDoc: "components/rows/ExpandableCard.jsx",
+                        pathToSource: "components_rows_ExpandableCard.jsx.html",
+                        pathToDemoSource: "demo_components_rows_ExpandableCardDemo.jsx.html",
+                        keywords: ["rows"]
+                    },
+                    {
                         label: "Infinite Scroller",
                         demo: require("../components/list/InfiniteScrollDemo"),
                         pathToDoc: "components/list/InfiniteScroll.jsx",

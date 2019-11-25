@@ -189,6 +189,8 @@ button,
     }
     &.inline {
         &.edit,
+        &.download-box,
+        &.expand,
         &.plus,
         &.delete,
         &.remove,
@@ -244,9 +246,21 @@ button,
                 content: 'd';
             }
         }
+        &.download-box {
+            &:before {
+                content: '\e935';
+                font-size: 15px;
+            }
+        }
         &.edit {
             &:before {
                 content: 'e';
+            }
+        }
+        &.expand {
+            &:before {
+                content: '\e91f';
+                font-size: 11px;
             }
         }
         &.prev {
