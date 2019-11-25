@@ -1,7 +1,9 @@
-// This file has been modified for releasing a beta version. Some steps have been removed that will need to go back in when v4 is out of beta.
 pipeline {
   agent {
     label 'ui-library-cdn-deploy'
+  }
+  environment {
+    JIRA_CREDS = credentials('jira-creds')
   }
   stages {
      stage('run-tests') {
@@ -9,7 +11,7 @@ pipeline {
         dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo "Running ui-library linting and tests"
-            sh "npm install"
+            sh "npm ci"
             sh "npm run lint"
             sh "npm run coverage-ci"
           }
@@ -34,16 +36,23 @@ pipeline {
               sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
             ]){
               sh  """
-                git add package.json
-                git config --global user.email 'devtools+jenkins@pingidentity.com'
-                git config --global user.name 'devtools-jenkins'
+                  npm run generate-release-notes ${env.RELEASE_VERSION} ${env.JIRA_CREDS}
+                  git add *notes.json */release-notes/*.md
+                  git commit -m 'UI Library Release notes ${env.RELEASE_VERSION}'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
-                git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
-                git tag ${env.GIT_RELEASE_TAG}
-                GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
-              """
+                  git add package.json
+                  git add package-lock.json
+                  git config --global user.email 'devtools+jenkins@pingidentity.com'
+                  git config --global user.name 'devtools-jenkins'
+
+                  git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+
+                  git tag ${env.GIT_RELEASE_TAG}
+                  GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+                """
             }
           }
         }
@@ -82,8 +91,8 @@ pipeline {
             }
           }
         }
-
       }
+
     }
     stage('cdn deploy') {
       steps {
@@ -108,7 +117,6 @@ pipeline {
         }
       }
     }
-
   }
   post {
     success {

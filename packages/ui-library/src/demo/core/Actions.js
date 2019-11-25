@@ -6,7 +6,7 @@ var keyMirror = require("fbjs/lib/keyMirror"),
 
 exports.Types = keyMirror({
     SET: null,
-    TOGGLE_LIGHTMODE: null,
+    TOGGLE_NAVMODE: null,
 });
 
 exports.set = function (path, value) {
@@ -64,8 +64,9 @@ exports.fetchCode = function (id, pathToDoc) {
     };
 };
 
-exports.toggleLightMode = () => ({
-    type: exports.Types.TOGGLE_LIGHTMODE,
+exports.toggleNavMode = path => ({
+    type: exports.Types.TOGGLE_NAVMODE,
+    path,
 });
 
 exports.setActiveView = exports.set.bind(null, "activeView");

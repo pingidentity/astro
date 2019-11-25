@@ -8,7 +8,8 @@ const scenarioDefaults = {
     postInteractionWait: 0,
     misMatchThreshold: 0.1,
     requireSameDimensions: true,
-    readyEvent: "backstop ready"
+    readyEvent: "backstop ready",
+    onReadyScript: "puppet/onReady.js",
 };
 
 const sanitizeLabel = label => label.replace(/\W/g, "");
@@ -16,9 +17,13 @@ const transformTestProps = baseUrl => ({
     root,
     label,
     section = label,
+    sublabel = "",
+    ...properties
 }) => ({
+    label: `${label}${sublabel && "__"}${sublabel}`,
     ...scenarioDefaults,
     url: `http://${baseUrl}:8085/#/?selectedSection=${sanitizeLabel(section)}&selectedNode=${sanitizeLabel(label)}&root=${sanitizeLabel(root)}`,
+    ...properties
 });
 
 // Walk through directories, finding all of the backstop test files
@@ -27,8 +32,8 @@ const getTests = baseUrl => (path = "", tests = []) => {
         const componentTests = require(path);
         return [
             // Add defaults into each test
-            ...tests.map(transformTestProps(baseUrl)),
-            ...componentTests
+            ...tests,
+            ...componentTests.map(transformTestProps(baseUrl))
         ];
     } else if (isDirectory(path)) {
         return fs.readdirSync(path).reduce((testAcc, dirPath) =>

@@ -10,16 +10,15 @@ const parseIssue = ({
 }) => `- [${key} ${summary}](https://jira.pingidentity.com/browse/${key})`;
 
 const version = process.argv[2];
-const user = process.argv[3];
-const pass = process.argv[4];
+const userPass = process.argv[3];
 
 if (version === undefined || version.length < 1) {
     console.log("Please supply a version number");
     return;
 }
 
-if (user === undefined || pass === undefined) {
-    console.log("Please supply a username and password");
+if (userPass === undefined) {
+    console.log("Please supply a username:password");
 }
 
 const params = `project = "UIP" AND fixversion =  ${version} AND status = Closed `;
@@ -48,7 +47,7 @@ function addNotesToDoc(v, p) {
 fetch(requestUri, {
     method: "GET",
     headers: {
-        Authorization: `Basic ${Buffer(user + ":" + pass).toString("base64")}`,
+        Authorization: `Basic ${Buffer(userPass).toString("base64")}`,
         "Content-Type": "application/json"
     }
 })
