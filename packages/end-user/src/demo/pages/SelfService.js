@@ -95,11 +95,11 @@ const MyProfilePage = () => (
                 >
                     <div style={{ flexGrow: 1, flexBasis: 0 }}>
                         <FormLabel>Phone</FormLabel>
-                        <TextBlock className="text-block--full-width">(123) 456-7890</TextBlock>
+                        <TextBlock className="text-block--full-width text-block--left">(123) 456-7890</TextBlock>
                     </div>
                     <div style={{ flexGrow: 1, flexBasis: 0 }}>
                         <FormLabel>Email</FormLabel>
-                        <TextBlock className="text-block--full-width">katie.addleman@compra</TextBlock>
+                        <TextBlock className="text-block--full-width text-block--left">katie.addleman@compra</TextBlock>
                     </div>
                     <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
                     <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
@@ -120,15 +120,15 @@ const MyProfilePage = () => (
                 >
                     <div style={{ flexGrow: 1, flexBasis: 0}}>
                         <FormLabel>Street Address</FormLabel>
-                        <TextBlock className="text-block--full-width">1440 S Main Street</TextBlock>
+                        <TextBlock className="text-block--full-width text-block--left">1440 S Main Street</TextBlock>
                     </div>
                     <div style={{ flexGrow: 1, flexBasis: 0}}>
                         <FormLabel>City</FormLabel>
-                        <TextBlock className="text-block--full-width">San Diego</TextBlock>
+                        <TextBlock className="text-block--full-width text-block--left">San Diego</TextBlock>
                     </div>
                     <div style={{ flexGrow: 1, flexBasis: 0 }}>
                         <FormLabel>State</FormLabel>
-                        <TextBlock className="text-block--full-width">CA</TextBlock>
+                        <TextBlock className="text-block--full-width text-block--left">CA</TextBlock>
                     </div>
                     <div style={{ flexGrow: 1, flexBasis: 0}}></div>
                 </FlexRow>
@@ -140,11 +140,11 @@ const MyProfilePage = () => (
                 >
                     <div style={{ flexGrow: 1, flexBasis: 0 }}>
                         <FormLabel>Zip Code</FormLabel>
-                        <TextBlock className="text-block--full-width">92121</TextBlock>
+                        <TextBlock className="text-block--full-width text-block--left">92121</TextBlock>
                     </div>
                     <div style={{ flexGrow: 1, flexBasis: 0 }}>
                         <FormLabel>Country</FormLabel>
-                        <TextBlock className="text-block--full-width">United States</TextBlock>
+                        <TextBlock className="text-block--full-width text-block--left">United States</TextBlock>
                     </div>
                     <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
                     <div style={{ flexGrow: 1, flexBasis: 0 }}></div>

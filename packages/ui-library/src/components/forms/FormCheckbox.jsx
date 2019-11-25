@@ -35,7 +35,7 @@ import classnames from "classnames";
  *    and the "data-id" string will be set on the checkbox "input" elelment under the top-level HTML container.
  * @param {string} [errorMessage]
  *    The message to display if defined when external validation failed.
- * @param {string} [label]
+ * @param {node} [label]
  *    Label text to be displayed.
  * @param {string} [labelHelpText]
  *    Label help text to be displayed.
@@ -85,7 +85,7 @@ class FormCheckbox extends React.Component {
         helpClassName: PropTypes.string,
         helpTarget: PropTypes.node,
         inline: PropTypes.bool,
-        label: PropTypes.string,
+        label: PropTypes.node,
         labelHelpText: PropTypes.string,
         name: PropTypes.string,
         onChange: PropTypes.func,

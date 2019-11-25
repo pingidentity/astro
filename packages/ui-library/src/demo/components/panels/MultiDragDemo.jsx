@@ -130,8 +130,6 @@ class Row extends React.Component {
  * the type for each row.
  */
 class MultiDragDemo extends React.Component {
-    static flags = [ "use-portal" ];
-
     state = {
         demoType: "STATELESS",
         columns: data.columns, // used for stateful (stateless=false) demo
@@ -327,7 +325,6 @@ class MultiDragDemo extends React.Component {
             <ConfirmTooltip
                 buttonLabel="Confirm"
                 cancelText="Cancel"
-                flags={["use-portal"]}
                 label={
                     <RowButton {...props} />
                 }

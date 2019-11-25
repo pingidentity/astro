@@ -18,7 +18,9 @@ export const chipColors = {
     /** transparent */
     TRANSPARENT: "transparent",
     /** white */
-    WHITE: "white"
+    WHITE: "white",
+    /** red */
+    RED: "red",
 };
 
 /**
@@ -29,7 +31,9 @@ export const chipTypes = {
     /** condensed */
     CONDENSED: "condensed",
     /** count */
-    COUNT: "count"
+    COUNT: "count",
+    /** outline */
+    OUTLINE: "outline"
 };
 
 /**
@@ -64,6 +68,7 @@ function Chip({
                     {
                         "chip-component": type !== chipTypes.COUNT,
                         "chip-component--condensed": type === chipTypes.CONDENSED,
+                        "chip-component--outline": type === chipTypes.OUTLINE,
                         [`chip-component--color-${color}`]: type !== chipTypes.COUNT,
                         "chip-component--full-width": fullWidth,
                         "count": type === chipTypes.COUNT,
