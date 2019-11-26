@@ -1,8 +1,10 @@
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import { TabSet, TabContent } from "../TabSet";
+import RockerButton from "../../forms/RockerButton";
 import TestUtils from "../../../testutil/TestUtils";
 import _ from "underscore";
+import { shallow } from "enzyme";
 
 jest.dontMock("../TabSet");
 jest.dontMock("../../forms/RockerButton.jsx");
@@ -134,5 +136,28 @@ describe("TabSet", function () {
         expect(dom.className).toContain(myCss);
         expect(dom.getAttribute("label")).toContain(myLabel);
         expect(dom.textContent).toContain(myContent);
+    });
+
+    it("renders multiple tabs as a rocker button", () => {
+        const component = shallow(
+            <TabSet>
+                <TabContent label="Just One">Hello</TabContent>
+                <TabContent label="Just Two">Hello again</TabContent>
+            </TabSet>
+        );
+
+        expect(component.find(RockerButton).exists()).toBeTruthy();
+        expect(component.find(".page-section-title").exists()).toBeFalsy();
+    });
+
+    it("renders a single tab as a heading", () => {
+        const component = shallow(
+            <TabSet>
+                <TabContent label="Just One">Hello</TabContent>
+            </TabSet>
+        );
+
+        expect(component.find(RockerButton).exists()).toBeFalsy();
+        expect(component.find(".page-section-title").exists()).toBeTruthy();
     });
 });
