@@ -52,7 +52,7 @@ describe("UnitInput", () => {
 
     it("renders the dark theme on a step", () => {
         const component = getComponent({
-            theme:themes.DARK,
+            theme: themes.DARK,
             visible: true,
             active: 1,
         });
