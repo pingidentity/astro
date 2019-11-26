@@ -141,6 +141,18 @@ export default class TabSetDemo extends Component {
                         Label three content
                     </TabContent>
                 </TabSet>
+
+                <HR />
+                <h3>Only one label</h3>
+                <br />
+
+                <TabSet
+                    selectedIndex={0}
+                >
+                    <TabContent label="Label 1">
+                        Label one content
+                    </TabContent>
+                </TabSet>
             </div>
         );
     }

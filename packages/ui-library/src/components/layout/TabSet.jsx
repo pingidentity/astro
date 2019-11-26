@@ -96,13 +96,15 @@ class TabSet extends Component {
             labels
         } = this._getLabels(children);
 
-        const defaultLabels = (
-            <RockerButton
-                labels={labels}
-                selectedIndex={selectedIndex}
-                onValueChange={onValueChange}
-            />
-        );
+        const defaultLabels = labels.length > 1
+            ? (
+                <RockerButton
+                    labels={labels}
+                    selectedIndex={selectedIndex}
+                    onValueChange={onValueChange}
+                />
+            )
+            : <div className="page-section-title">{labels[0]}</div>;
 
         return (
             <div className="tab-set" data-id={this.props["data-id"]}>
