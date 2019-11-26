@@ -738,7 +738,7 @@ export class MultivaluesBase extends Component {
                         key={`popper-${entries.length}-${draft}`}
                         className="input-multivalues__popper"
                         getReference={this._getTrigger}
-                        matchWidth
+                        matchMinWidth
                         noGPUAcceleration
                         placement="bottom-start"
                     >
@@ -769,3 +769,4 @@ const Multivalues = withFocusOutline(MultivaluesBase);
 Multivalues.inputWidths = InputWidths;
 
 export default Multivalues;
+
