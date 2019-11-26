@@ -23,29 +23,27 @@ pipeline {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             script {
               env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
-              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","")
+              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","").trim()
               env.GIT_RELEASE_TAG = "ui-library-${env.RELEASE_VERSION}"
             }
             echo """
               release version: ${env.RELEASE_VERSION}
               git tag: ${env.GIT_RELEASE_TAG}
             """
-            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
-              withCredentials([
-                sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
-              ]){
-                sh  """
-                  git add package.json
-                  git config --global user.email 'devtools+jenkins@pingidentity.com'
-                  git config --global user.name 'devtools-jenkins'
+            withCredentials([
+              sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+            ]){
+              sh  """
+                git add package.json
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
 
-                  git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+                git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
-                  git tag ${env.GIT_RELEASE_TAG}
-                  GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
-                """
-              }
+                git tag ${env.GIT_RELEASE_TAG}
+                GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+              """
             }
           }
         }
@@ -59,26 +57,34 @@ pipeline {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               sh """
                 npm run package-library
-
-                npm run build-css
-                mkdir cdn/${env.RELEASE_VERSION}
-                mv cdn/css cdn/${env.RELEASE_VERSION}
-
-                cp -rf src/images cdn/${env.RELEASE_VERSION}
-                cp -rf src/fonts cdn/${env.RELEASE_VERSION}
-
+                make CDN_VERSION=${env.RELEASE_VERSION} build-cdn-assets
                 npm publish;
               """
             }
           }
         }
      }
-    post {
-        always {
-          archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
+      post {
+          always {
+            archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
+          }
         }
+    }
+    stage('update-library-demo') {
+      when {
+        expression { params.RELEASE_BRANCH != 'master'	}
       }
-  }
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder'){
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.RELEASE_VERSION} package-and-upload-for-hosting"
+            }
+          }
+        }
+
+      }
+    }
     stage('cdn deploy') {
       steps {
         dir("${env.WORKSPACE}/packages/ui-library") {

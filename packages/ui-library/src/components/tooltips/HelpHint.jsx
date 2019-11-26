@@ -68,6 +68,8 @@ const Types = {
  *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
  * @param {HelpHint.Placements} [placement]
  *     How to place the help hint.
+ * @param {HelpHint.Types} [type]
+ *     Sets special styling for the help hint.
  * @param {bool} [unstyleTrigger=false]
  *     When set, don't apply any styling to the helphint trigger.
  *
@@ -78,21 +80,17 @@ const Types = {
 class HelpHint extends React.Component {
 
     static propTypes = {
-        "data-id": PropTypes.string,
         className: PropTypes.string,
         containerClassName: PropTypes.string,
+        "data-id": PropTypes.string,
         delayHide: PropTypes.number,
         delayShow: PropTypes.number,
+        hintText: PropTypes.any.isRequired,
         iconName: PropTypes.string,
         leftMargin: PropTypes.bool,
-        placement: PropTypes.oneOf([
-            Placements.TOP,
-            Placements.BOTTOM,
-            Placements.LEFT,
-            Placements.RIGHT
-        ]),
-        hintText: PropTypes.any.isRequired,
         link: PropTypes.string,
+        placement: PropTypes.oneOf(Object.values(Placements)),
+        type: PropTypes.oneOf(Object.values(Types)),
         tooltipProps: PropTypes.object,
         unstyleTrigger: PropTypes.bool,
     };
