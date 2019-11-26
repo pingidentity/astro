@@ -9,19 +9,19 @@ import InputRow from "../layout/InputRow";
  * @desc A single-selection component with big icons and titles.
  *
  * @param {string} [className]
- *     Class name(s) to add to the top-level container/div
+ *     Class name(s) to add to the top-level container/div.
  * @param {string} [data-id="checkbox-group"]
  *     Defines the "data-id" for top-level HTML container.
  * @param {array} [values]
- *     List of identifiers for currently-selected options
+ *     List of identifiers for currently-selected options.
  * @param {array<CheckboxGroup~option>} [options]
- *     List of options with value, label, and conditionalContent
+ *     List of options with value, label, disabled and conditionalContent.
  * @param {function} [onValueChange]
- *     When the list of values changes
+ *     When the list of values changes.
  * @param {function} [onAdd]
- *     When you add to the list of values
+ *     When you add to the list of values.
  * @param {function} [onRemove]
- *     When remove from the list of values
+ *     When remove from the list of values.
  * @param {Object} [strings]
  *     An object containing the various blurbs of text rendered in the component.
  *
@@ -92,6 +92,7 @@ const CheckboxGroup = ({
                         <FormCheckbox
                             stacked
                             data-id={dataId + "-" + option.value}
+                            disabled={option.disabled}
                             label={option.label}
                             value={option.value}
                             checked={checked}
@@ -112,6 +113,7 @@ CheckboxGroup.propTypes = {
     values: PropTypes.arrayOf(PropTypes.string),
     options: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.shape({
+            disabled: PropTypes.bool,
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).required,
             label: PropTypes.string,
             labelHelpText: PropTypes.string,
