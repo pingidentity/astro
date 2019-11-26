@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import Tutorial from "../../general/Tutorial";
+import Tutorial, { themes } from "../../general/Tutorial";
 
 const defaultProps = {
     active: 0,
@@ -40,17 +40,9 @@ describe("UnitInput", () => {
         expect(tutorial.exists()).toEqual(true);
     });
 
-    it("renders with custom data-id", () => {
-        const component = getComponent({
-            "data-id": "tutorial-custom"
-        });
-        const tutorial = component.find("[data-id='tutorial-custom']");
-        expect(tutorial.exists()).toEqual(true);
-    });
-
     it("renders the dark theme on welcome modal", () => {
         const component = getComponent({
-            theme: Tutorial.themes.DARK,
+            theme: themes.DARK,
             visible: true,
             active: 0,
         });
@@ -60,7 +52,7 @@ describe("UnitInput", () => {
 
     it("renders the dark theme on a step", () => {
         const component = getComponent({
-            theme: Tutorial.themes.DARK,
+            theme:themes.DARK,
             visible: true,
             active: 1,
         });

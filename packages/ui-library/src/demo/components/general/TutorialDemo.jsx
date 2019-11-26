@@ -34,22 +34,26 @@ export default class TutorialDemo extends React.Component {
     };
 
     _onPrevious = () => {
-        this.setState({
-            active: this.state.active > 0 ? this.state.active - 1 : this.state.activ
+        this.setState((prevState) => {
+            return {
+                active: prevState.active > 0 ? prevState.active - 1 : prevState.active
+            };
         });
     }
 
     _onNext = () => {
-        if (this.state.active === this.state.steps.length) {
-            this.setState({
-                visible: false,
-                active: 0,
-            });
-        } else {
-            this.setState({
-                active: this.state.active + 1
-            });
-        }
+        this.setState((prevState) => {
+            if (prevState.active === prevState.steps.length) {
+                return {
+                    visible: false,
+                    active: 0,
+                };
+            } else {
+                return {
+                    active: prevState.active + 1
+                };
+            }
+        });
     }
 
     _onClose = () => {

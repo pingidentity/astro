@@ -11,7 +11,7 @@ import FlexRow, {
 import Icon, { iconTypes } from "../../components/general/Icon";
 import PopperContainer from "../../components/tooltips/PopperContainer";
 
-const Themes = {
+export const themes = {
     LIGHT: "light",
     DARK: "dark",
 };
@@ -55,11 +55,44 @@ const Themes = {
  * @param {bool} [visible=false]
  *     If the Tutorial is to be displayed or not.
  */
-class Tutorial extends React.Component {
-    constructor(props) {
-        super(props);
-        this.modal = this.refs.modal;
-    }
+export default class Tutorial extends React.Component {
+    modal = this.refs.modal;
+
+    static propTypes = {
+        "data-id:": PropTypes.string,
+        visible: PropTypes.bool,
+        className: PropTypes.string,
+        active: PropTypes.number,
+        steps: PropTypes.arrayOf(PropTypes.shape({
+            title: PropTypes.node,
+            description: PropTypes.node,
+            side: PropTypes.string,
+            target: PropTypes.func,
+        })),
+        onNext: PropTypes.func,
+        onPrevious: PropTypes.func,
+        onClose: PropTypes.func,
+        messageWelcomeTitle: PropTypes.node.isRequired,
+        messageWelcomeDescription: PropTypes.node.isRequired,
+        labelGetStarted: PropTypes.string,
+        labelNext: PropTypes.string,
+        labelFinal: PropTypes.string,
+        labelPrevious: PropTypes.string,
+        labelDismiss: PropTypes.string,
+        theme: PropTypes.oneOf(Object.values(themes)),
+    };
+
+    static defaultProps = {
+        "data-id": "tutorial",
+        visible: false,
+        active: 0,
+        steps: [],
+        labelNext: "Next",
+        labelFinal: "Finish",
+        labelPrevious: "Back",
+        labelGetStarted: "Get Started",
+        labelDismiss: "Dismiss",
+    };
 
     _renderWelcome = () => {
         const {
@@ -73,7 +106,7 @@ class Tutorial extends React.Component {
         } = this.props;
 
         const welcomeClassnames = classnames("tutorial__welcome", {
-            "tutorial__welcome--dark": theme === Themes.DARK,
+            "tutorial__welcome--dark": theme === themes.DARK,
         });
 
         return (
@@ -102,13 +135,7 @@ class Tutorial extends React.Component {
         );
     }
 
-    _renderStepContent = (step) => {
-        const {
-            title,
-            description,
-            headerContent
-        } = step;
-
+    _renderStepContent = ({ title, description, headerContent }) => {
         return (
             <div className="tutorial__modal--content">
                 { headerContent ? (
@@ -175,7 +202,7 @@ class Tutorial extends React.Component {
                 lightbox.style.height = `${dims.height}px`;
                 lightbox.classList.add("tutorial__modal--lightbox");
 
-                if (this.props.theme === Themes.DARK) {
+                if (this.props.theme === themes.DARK) {
                     lightbox.classList.add("tutorial__modal--lightbox--dark");
                 }
 
@@ -199,11 +226,11 @@ class Tutorial extends React.Component {
         const step = steps[active - 1];
 
         const pointerClassnames = classnames("tutorial__modal--pointer", {
-            "tutorial__modal--pointer--dark": theme === Themes.DARK,
+            "tutorial__modal--pointer--dark": theme === themes.DARK,
         });
 
         const modalClassnames = classnames("tutorial__modal", {
-            "tutorial__modal--dark": theme === Themes.DARK,
+            "tutorial__modal--dark": theme === themes.DARK,
         });
 
         if (active > 0 && step) {
@@ -250,7 +277,7 @@ class Tutorial extends React.Component {
         } = this.props;
 
         const tutorialClassnames = classnames("tutorial", className, {
-            "tutorial--dark": theme === Themes.DARK,
+            "tutorial--dark": theme === themes.DARK,
         });
 
         return (
@@ -270,37 +297,3 @@ class Tutorial extends React.Component {
         );
     }
 }
-
-Tutorial.propTypes = {
-    "data-id:": PropTypes.string,
-    visible: PropTypes.bool,
-    className: PropTypes.string,
-    active: PropTypes.number,
-    steps: PropTypes.arrayOf(PropTypes.object),
-    onNext: PropTypes.func,
-    onPrevious: PropTypes.func,
-    onClose: PropTypes.func,
-    messageWelcomeTitle: PropTypes.node.isRequired,
-    messageWelcomeDescription: PropTypes.node.isRequired,
-    labelGetStarted: PropTypes.string,
-    labelNext: PropTypes.string,
-    labelFinal: PropTypes.string,
-    labelPrevious: PropTypes.string,
-    labelDismiss: PropTypes.string,
-    theme: PropTypes.oneOf(Object.values(Themes)),
-};
-
-Tutorial.defaultProps = {
-    "data-id": "tutorial",
-    visible: false,
-    active: 0,
-    steps: [],
-    labelNext: "Next",
-    labelFinal: "Finish",
-    labelPrevious: "Back",
-    labelGetStarted: "Get Started",
-    labelDismiss: "Dismiss",
-};
-
-Tutorial.themes = Themes;
-export default Tutorial;
