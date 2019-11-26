@@ -294,7 +294,7 @@ describe("ModalTest v4", function () {
         expect(bodyTitleNode.exists()).toEqual(true);
     });
 
-    it("renders a bodyTitle when prop defined", function () {
+    it("does not renders a bodyTitle when prop is not defined", function () {
         const component =
             shallow(
                 <Modal expanded={true} />
