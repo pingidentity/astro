@@ -2,6 +2,7 @@ import React from "react";
 import DynamicFilter from "ui-library/lib/components/filters/DynamicFilter";
 import FormSearchBar from "ui-library/lib/components/forms/FormSearchBar";
 import userOptions from "../forms/data/userOptions";
+import { noop } from "underscore";
 
 const CATEGORIES = [
     {
@@ -62,7 +63,7 @@ class DynamicFilterDemo extends React.Component {
                     categories={CATEGORIES}
                     onValueChange={this._handleChange}
                 />
-                <FormSearchBar open>
+                <FormSearchBar open onValueChange={noop}>
                     <DynamicFilter
                         value={this.state.filterValue}
                         categories={CATEGORIES}
