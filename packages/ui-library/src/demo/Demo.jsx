@@ -213,7 +213,7 @@ class DemoApp extends React.Component {
         this.setSelectedItemFromLocation();
 
         //set versions for dropdown
-        fetchVersions(versions => this.setState({ versions }))('../../hosting/')
+        fetchVersions(versions => this.setState({ versions }))("../../hosting/");
     }
 
     /**
@@ -300,11 +300,11 @@ class DemoApp extends React.Component {
         const { pathname, search } = this.props.location;
         return (
             <MarketSelector
-                options={versions.map(({label, value}) => ({label, id: value}))}
+                options={versions.map(({ label, value }) => ({ label, id: value }))}
                 market={pathname.replace("/")}
-                onMarketChange={(value) => {window.location.href = `https://uilibrary.ping-eng.com/${value}/#/${search}`}} //hard coding for local development
+                onMarketChange={(value) => {window.location.href = `https://uilibrary.ping-eng.com/${value}/#/${search}`;}} //hard coding for local development
             />
-        )
+        );
     }
 
 

@@ -1,10 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import fetch from "isomorphic-fetch";
-// isomorphic-fetch need a Promise polyfill for older browsers.
-// Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
-import "es6-promise"; // eslint-disable-lint;
-
 
 // the CSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
@@ -24,7 +19,7 @@ import templatesIcon from "./assets/images/templates-icon.svg";
 import Text from "../src/components/general/Text";
 import Icon from "../src/components/general/Icon";
 
-import { fetchVersions }  from "./fetchVersions";
+import { fetchVersions } from "./fetchVersions";
 
 class LandingPage extends React.Component {
 
@@ -48,7 +43,7 @@ class LandingPage extends React.Component {
                     [product]: {
                         error
                     }
-                })
+                });
             }
         );
 
@@ -57,7 +52,7 @@ class LandingPage extends React.Component {
     }
 
     _getDemoLink = (value) => {
-        return `${value}/`
+        return `${value}/`;
     }
 
     _getVersionLink = (version) => {
@@ -83,7 +78,7 @@ class LandingPage extends React.Component {
         const { uiLibrary, endUser } = this.state;
 
         const libStable = uiLibrary.versions && uiLibrary.versions[1];
-        const libSnapshot =  uiLibrary.versions && uiLibrary.versions[0];
+        const libSnapshot = uiLibrary.versions && uiLibrary.versions[0];
 
         return (
             <div className="main">
@@ -121,19 +116,25 @@ class LandingPage extends React.Component {
 
                         {uiLibrary.versions &&
                             [<span className="space-right-sm">|</span>,
-                            <LinkDropDownList
-                                flags={["v4"]}
-                                label="Older Versions"
-                                className="version-dropdown"
-                                options={uiLibrary.versions.slice(2)}
-                                onClick={this._handleVersionSelect}
-                            />]
+                                <LinkDropDownList
+                                    flags={["v4"]}
+                                    label="Older Versions"
+                                    className="version-dropdown"
+                                    options={uiLibrary.versions.slice(2)}
+                                    onClick={this._handleVersionSelect}
+                                />]
                         }
                         {uiLibrary.error &&
-                            <Text type="error"><Icon iconName="alert" type="inline" /> Can't Load UI Library Versions</Text>
+                            <Text type="error">
+                                <Icon iconName="alert" type="inline" />
+                                Can't Load UI Library Versions
+                            </Text>
                         }
                         {endUser.error &&
-                            <Text type="error"><Icon iconName="alert" type="inline" /> Can't Load End User Versions</Text>
+                            <Text type="error">
+                                <Icon iconName="alert" type="inline" />
+                                Can't Load End User Versions
+                            </Text>
                         }
                     </div>
                     <Stack gap="MD">
