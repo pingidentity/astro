@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button, { buttonTypes } from "../../../components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
-import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import Text from "ui-library/lib/components/general/Text";
 
 /**
  * @name ButtonDemo
