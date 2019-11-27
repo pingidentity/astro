@@ -1,9 +1,9 @@
 .ellipsis-loader-button {
     .icon-ellipsis {
         position: absolute;
-        top: 15px;
+        top: 50%;
         left: 50%;
-        margin: 0 0 0 -18px;
+        transform: translate(-50%, -50%);
         display: none;
     }
     &.loading {
@@ -16,11 +16,6 @@
         &.primary {
             &:hover {
                 background-color: $color-active-blue;
-            }
-        }
-        &.inline {
-            .icon-ellipsis {
-                top: 9px;
             }
         }
         &:hover {
