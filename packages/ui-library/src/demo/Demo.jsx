@@ -1,6 +1,8 @@
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import "../util/polyfills.js";
+import MarketSelector from "../components/panels/header-bar/MarketSelector";
+import { fetchVersions } from "../../hosting/fetchVersions";
 
 const React = require("react"),
     thunk = require("redux-thunk"),
@@ -27,7 +29,9 @@ const React = require("react"),
 require("../css/ui-library.scss");
 require("./css/ui-library-demo.scss");
 
+
 class DemoApp extends React.Component {
+    state = {};
     /**
      * @method
      * @name DemoApp#_getDocumentationUrl
@@ -207,6 +211,9 @@ class DemoApp extends React.Component {
      */
     componentDidMount() {
         this.setSelectedItemFromLocation();
+
+        //set versions for dropdown
+        fetchVersions(versions => this.setState({ versions }))('../../hosting/')
     }
 
     /**
@@ -289,12 +296,25 @@ class DemoApp extends React.Component {
         }
     }
 
+    getVersionSelector = (versions) => {
+        const { pathname, search } = this.props.location;
+        return (
+            <MarketSelector
+                options={versions.map(({label, value}) => ({label, id: value}))}
+                market={pathname.replace("/")}
+                onMarketChange={(value) => {window.location.href = `https://uilibrary.ping-eng.com/${value}/#/${search}`}} //hard coding for local development
+            />
+        )
+    }
+
+
     render() {
         const id = this.props.nav.selectedNode,
             name = this._getDocumentationName(),
             path = this._demoItem.pathToSource,
             demoPath = this._demoItem.pathToDemoSource,
             watch = _.pick(this.props.nav, "selectedSection", "selectedNode", "root");
+
 
         return (
             <AppFrame
@@ -320,7 +340,8 @@ class DemoApp extends React.Component {
                                 { id: "cog", label: "Cog" },
                             ]
                         }
-                    ]
+                    ],
+                    additionalContent: this.state.versions && this.getVersionSelector(this.state.versions)
                 })}
                 leftNavBarProps={{
                     theme: this.props.leftNav.lightMode ? LeftNavBar.themes.LIGHT : LeftNavBar.themes.DARK,
