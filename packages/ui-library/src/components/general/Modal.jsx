@@ -253,9 +253,7 @@ class Modal extends React.Component {
                                 {this._getCloseButton()}
                             </If>
                             {
-                                this.props.bodyTitle
-                                    ? <BodyTitle>{this.props.bodyTitle}</BodyTitle>
-                                    : null
+                                this.props.bodyTitle && <BodyTitle>{this.props.bodyTitle}</BodyTitle>
                             }
                             {this.props.children}
                         </div>
