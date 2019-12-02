@@ -34,7 +34,7 @@ class LandingPage extends React.Component {
                 this.setState({
                     [product]: {
                         versions,
-                        error: !versions
+                        error: !versions || versions.length === 0
                     }
                 });
             },
@@ -126,13 +126,13 @@ class LandingPage extends React.Component {
                         }
                         {uiLibrary.error &&
                             <Text type="error">
-                                <Icon iconName="alert" type="inline" />
+                                <Icon iconName="alert" type="leading" />
                                 Can't Load UI Library Versions
                             </Text>
                         }
                         {endUser.error &&
                             <Text type="error">
-                                <Icon iconName="alert" type="inline" />
+                                <Icon iconName="alert" type="leading" />
                                 Can't Load End User Versions
                             </Text>
                         }
