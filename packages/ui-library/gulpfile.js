@@ -79,6 +79,20 @@ gulp.task("transpile-lib", () =>
         "!./src/templates/**", //exclude templates
         "!./src/tutorials/**", //exclude tutorials
     ])
+        .pipe(tap(function(file) { // add React version warning
+            const parentDirs = file.path
+                .replace(file.cwd, "") // remove absolute path
+                .replace("/src/", "") // remove src
+                .replace(/[^\/]+$/, "") // remove anythin after the last slash
+                .replace(/[^\/]+/g, ".."); // turn all folder names into ..
+            const warningPath = `${parentDirs}util/GlobalScript.js`;
+            if (file.path.search("GlobalScript") < 0) { // let's not import this into itself
+                file.contents = Buffer.concat([
+                    new Buffer(`import "${warningPath}";\n`),
+                    file.contents
+                ]);
+            }
+        }))
         .pipe(babel())
         .pipe(debug({ title: "transpiling:" }))
         .pipe(gulp.dest("lib"))
