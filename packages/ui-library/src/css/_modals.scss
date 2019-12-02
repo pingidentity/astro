@@ -68,7 +68,7 @@
         &:after {
             color: $color-rhino;
             font-size: 18px;
-            content: '\78';
+            content: $icon-close;
             font-family: 'iconfont';
         }
     }
@@ -209,7 +209,7 @@
             }
             &:before {
                 font-family: $icon-font;
-                content: '\21';
+                content: $icon-alert;
                 position: absolute;
                 top: 10px;
                 left: 0;
