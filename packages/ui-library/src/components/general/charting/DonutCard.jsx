@@ -182,9 +182,9 @@ class DonutCard extends Component {
                             className="dashboard-card__title--donut"
                             title={this.props.title}
                         />
-                        {!this.props.loading && ([
+                        {!this.props.loading && (
                             <FlexRow justify={justifyOptions.CENTER}>
-                                <FlexRow justify={justifyOptions.CENTER} key="inner-flex">
+                                <FlexRow justify={justifyOptions.CENTER}>
                                     <PieChart
                                         key="chartKey"
                                         height={202}
@@ -219,7 +219,7 @@ class DonutCard extends Component {
                                     </div>
                                 </div>
                             </FlexRow>
-                        ])}
+                        )}
                     </div>
                 )}
                 back={(
