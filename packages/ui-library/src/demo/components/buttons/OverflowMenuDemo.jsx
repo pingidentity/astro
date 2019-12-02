@@ -16,18 +16,22 @@ class OverflowMenuDemo extends React.Component {
 
     _buttons = [
         {
+            id: 1,
             label: <span>Option</span>,
             onClick: () => this.setState({ message: "Option Clicked" })
         },
         {
+            id: 2,
             label: <span>Option 2</span>,
             onClick: () => this.setState({ message: "Option 2 Clicked" })
         },
         {
+            id: 3,
             label: <span>Option 3</span>,
             onClick: () => this.setState({ message: "Option 3 Clicked" })
         },
         {
+            id: 4,
             label: <span>Option 4</span>,
             onClick: () => this.setState({ message: "Option 4 Clicked" })
         }

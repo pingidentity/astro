@@ -105,6 +105,8 @@ import InputModifier, { inputColors } from "../../general/InputModifier";
   * @desc Displays a single wizard step.
   * @param {string} [data-id="wizard"]
   *     Value of the "data-id" assigned to the top-level HTML container of the step.
+  * @param {boolean} [clickDisabled=false]
+  *     Disables the menu item for this step.
   * @param {boolean} [completed=false]
   *     Determines whether to render the step as completed in the menu.
   * @param {boolean|string} [loading]
