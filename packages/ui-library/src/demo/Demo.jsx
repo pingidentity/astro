@@ -341,7 +341,8 @@ class DemoApp extends React.Component {
                             ]
                         }
                     ],
-                    additionalContent: this.state.versions && this.state.versions > 0 && this.getVersionSelector(this.state.versions)
+                    additionalContent: this.state.versions &&
+                    this.state.versions > 0 && this.getVersionSelector(this.state.versions)
                 })}
                 leftNavBarProps={{
                     theme: this.props.leftNav.lightMode ? LeftNavBar.themes.LIGHT : LeftNavBar.themes.DARK,
