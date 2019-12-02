@@ -1,5 +1,5 @@
 import React from "react";
-import Modal, { BodyTitle } from "./../../../components/general/Modal";
+import Modal from "./../../../components/general/Modal";
 
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
@@ -124,15 +124,13 @@ class ModalDemo extends React.Component {
                         ref="dialogModal"
                         expanded={this.state.expanded4}
                         onOpen={this._makeToggle(4)}
-                        onClose={this._makeToggle(4)}>
+                        onClose={this._makeToggle(4)}
+                        bodyTitle="Dialog modal content here!">
 
                         <FlexRow
                             flexDirection={flexDirectionOptions.COLUMN}
                             alignment={alignments.CENTER}
                         >
-                            <BodyTitle>
-                                Dialog modal content here!
-                            </BodyTitle>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis eu eros id
                                 euismod. Etiam molestie quis nunc eu ultrices.
@@ -152,11 +150,8 @@ class ModalDemo extends React.Component {
                         ref="alertModal"
                         expanded={this.state.expanded5}
                         showCloseBttn={true}
-                        onOpen={this._makeToggle(5)}>
-
-                        <BodyTitle>
-                            Alert Modal
-                        </BodyTitle>
+                        onOpen={this._makeToggle(5)}
+                        bodyTitle="Alert Modal">
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>

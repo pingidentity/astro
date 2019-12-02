@@ -173,11 +173,17 @@
         .modal-content {
             width: $modal-width;
         }
+
         .modal-title,
         .body-title {
             font-size: 20px;
             margin: 0 0 15px;
         }
+
+        .body-title {
+            text-align: center;
+        }
+
         .modal-body {
             border-width: 0 1px 1px;
             text-align: left;
