@@ -114,7 +114,7 @@ class LandingPage extends React.Component {
                             />
                         }
 
-                        {uiLibrary.versions &&
+                        {uiLibrary.versions && uiLibrary.versions.length > 2 &&
                             [<span className="space-right-sm">|</span>,
                                 <LinkDropDownList
                                     flags={["v4"]}
@@ -148,7 +148,7 @@ class LandingPage extends React.Component {
                                 <Link
                                     className="card__link"
                                     href={libStable ? this._getDocumentationLink(libStable) : null}
-                                    disabled={!uiLibrary.versions}
+                                    disabled={!libStable}
                                 >Documentation</Link>
                             </div>
                         </div>
@@ -159,7 +159,7 @@ class LandingPage extends React.Component {
                                 <Link
                                     className="card__link"
                                     href={libStable ? this._getComponentsLink(libStable) : null}
-                                    disabled={!uiLibrary.versions}
+                                    disabled={!libStable}
                                 >Components</Link>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ class LandingPage extends React.Component {
                                 <Link
                                     className="card__link"
                                     href={libStable ? this._getTemplatesLink(libStable) : null}
-                                    disabled={!uiLibrary.versions}
+                                    disabled={!libStable}
                                 >Templates</Link>
                             </div>
                         </div>
