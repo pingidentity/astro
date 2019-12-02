@@ -254,7 +254,7 @@ class Modal extends React.Component {
                             </If>
                             {
                                 this.props.bodyTitle
-                                    ? <div className="modal-body__body-title">{this.props.bodyTitle}</div>
+                                    ? <BodyTitle>{this.props.bodyTitle}</BodyTitle>
                                     : null
                             }
                             {this.props.children}
