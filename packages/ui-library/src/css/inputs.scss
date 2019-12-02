@@ -2139,15 +2139,10 @@ input[type=file] {
     &.unit-input {
         margin: 0 12px 0 0 !important;
 
-        .input-message__icon {
-            bottom: 12px;
-            right: -12px;
-            top: auto;
-        }
-
         .input-message__text {
+            top: 60px;
             box-sizing: border-box;
-            min-width: calc(100% - 10px);
+            min-width: calc(100%);
         }
 
         .unit-input__drop-down-list--error {
@@ -2165,7 +2160,17 @@ input[type=file] {
                 margin-bottom: 0 !important;
             }
         }
+
+        .input-message__icon,
+        .form-error-icon {
+            &:before {
+                left: 22px;
+                position: absolute;
+                bottom: -21px;
+            }
+        }
     }
+
     &.input-textselect {
 
         > .input-text {
