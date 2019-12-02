@@ -380,7 +380,7 @@ $color-grey-minor-1: $color-neutral-30;
             padding-left: 30px;
 
             &:before {
-                content: '\59';
+                content: $icon-expand-arrow;
                 font-family: $icon-font;
                 font-size: 6px;
                 position: absolute;
@@ -854,7 +854,7 @@ $color-grey-minor-1: $color-neutral-30;
     &.right:after {
         position: absolute;
         top: 0;
-        content: '\59';
+        content: $icon-expand-arrow;
         font-family: $icon-font;
         font-size: 8px;
         color: $color-active-blue;

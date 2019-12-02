@@ -30,7 +30,7 @@
     &.alert {
         .details-content-inner {
             &:after {
-                content: '\21';
+                content: $icon-alert;
                 position: absolute;
                 top: $spacing-md;
                 left: 0;
@@ -172,7 +172,7 @@
 
         &:after {
             font-family: 'iconfont';
-            content: '\78';
+            content: $icon-close;
             text-transform: none;
             font-size: 18px;
             color: rgba($color-white, 0.3);
@@ -234,7 +234,7 @@
                     color: $color-warning-icon-yellow;
                 }
                 &:after {
-                    content: '\21';
+                    content: $icon-alert;
                     position: absolute;
                     top: 15px;
                     left: 0;
@@ -390,7 +390,7 @@
 
                 &:after {
                     font-family: 'iconfont';
-                    content: '\78';
+                    content: $icon-close;
                     text-transform: none;
                     font-size: 18px;
                     color: rgba($color-white, 0.3);

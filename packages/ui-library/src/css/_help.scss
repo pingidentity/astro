@@ -99,7 +99,7 @@
             width: $inline-icon-height - 1px;
 
             &:before {
-                content: '\48'; //change to icon-help-rounded
+                content: $icon-help-rounded; //change to icon-help-rounded
             }
         }
         .icon-lock {

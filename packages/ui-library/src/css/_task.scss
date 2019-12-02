@@ -154,7 +154,7 @@
 
         &:before {
             font-family: $icon-font;
-            content: '\79';
+            content: $icon-success;
             text-transform: none;
             font-size: 18px;
             margin: 0 10px 0 0;

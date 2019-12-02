@@ -84,7 +84,7 @@ table {
                     right: -11px;
                     font-family: $icon-font;
                     text-transform: none;
-                    content: '\7c';
+                    content: $icon-sort-none;
                     font-size: 10px;
                     margin: 0 0 0 10px;
 
@@ -93,14 +93,14 @@ table {
                     &:after {
                         top: -4px;
                         font-size: 4px;
-                        content: '\41';
+                        content: $icon-sort-asc;
                     }
                 }
                 &.desc {
                     &:after {
                         top: 1px;
                         font-size: 4px;
-                        content: '\2200';
+                        content: $icon-sort-desc;
                     }
                 }
             }
@@ -439,7 +439,7 @@ a.add-table-row {
     font-size: 14px;
 
     &:before {
-        content: '\2b';
+        content: $icon-plus;
         position: absolute;
         left: 0;
         top: 0;
