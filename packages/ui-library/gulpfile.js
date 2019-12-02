@@ -160,7 +160,7 @@ gulp.task("build-css", () =>
 
 gulp.task("package-lib", gulp.series(
     ["transpile-lib"],
-    ["create-flatfiles"],
+    // ["create-flatfiles"], temporarily removing until this can be fixed
     ["move-files"],
     ["build-css"],
     ["build-index"],
