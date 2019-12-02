@@ -125,7 +125,7 @@ class ButtonsDemo extends Component {
                 />
                 <Button
                     label="Documentation"
-                    href="/build-doc/ui-library/3.5.0-SNAPSHOT/index.html"
+                    href="build-doc/ui-library/4.0.1/index.html"
                     target="_blank"
                 />
                 <HR />

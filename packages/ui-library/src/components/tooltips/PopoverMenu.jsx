@@ -8,6 +8,16 @@ import popsOver from "../../util/behaviors/popsOver";
 const PopoverBase = Popover.Base;
 
 /**
+ * @typedef {object} PopoverMenu.Button
+ * @property {string} key
+ *      When provided, becomes the key for the button element.
+ * @property {node|string} label
+ *      The label of the button
+ * @property {function} onClick
+ *      Click event for the button
+ * */
+
+/**
  * @class PopoverMenu
  * @desc Menu of buttons that appears in a popover.
  *
@@ -15,8 +25,8 @@ const PopoverBase = Popover.Base;
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {array} [buttons]
- *     Objects that define the buttons. Accepts "label" and "onClick"
+ * @param {Array.<PopoverMenu.Button>} [buttons]
+ *     Objects that define the buttons. Accepts "label", "onClick", and "id".
  * @param {string} [triggerClassName]
  *     CSS classes to set on the link that triggers the popover.
  *
@@ -47,16 +57,21 @@ class PopoverMenuBase extends PopoverBase {
             buttons: []
         });
 
+    _getDataId = (id, label, index) => {
+        if (id !== undefined) {
+            return id;
+        }
+        return _.isString(label)
+            ? label.toLowerCase().replace(/[^0-9a-z]/gi, "")
+            : index;
+    }
+
     renderItem = (item, handleClick, index) => (
         <button
             data-id={
-                `${this.props["data-id"]}-button-${
-                    _.isString(item.label)
-                        ? item.label.toLowerCase().replace(/[^0-9a-z]/gi, "")
-                        : index
-                }`
+                `${this.props["data-id"]}-button-${this._getDataId(item.id, item.label, index)}`
             }
-            key={item.label}
+            key={item.id || item.label}
             className="button-menu__button"
             onClick={handleClick}
         >

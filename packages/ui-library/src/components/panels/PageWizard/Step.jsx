@@ -31,6 +31,7 @@ const Step = ({
 );
 
 Step.propTypes = {
+    clickDisabled: PropTypes.bool,
     completed: PropTypes.bool,
     "data-id": PropTypes.string,
     description: PropTypes.string,

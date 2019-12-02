@@ -1012,14 +1012,14 @@ module.exports = [
                     {
                         label: "Header Bar",
                         demo: require("../components/panels/HeaderBarDemo"),
-                        pathToDoc: "components/panels/header-bar/HeaderBar.jsx",
+                        pathToDoc: "components/panels/HeaderBar.jsx",
                         pathToSource: "components_panels_header-bar_HeaderBar.jsx.html",
                         pathToDemoSource: "demo_components_panels_HeaderBarDemo.jsx.html"
                     },
                     {
                         label: "Left Nav Bar",
                         demo: require("../components/panels/LeftNavBarDemo"),
-                        pathToDoc: "components/panels/left-nav/LeftNavBar.jsx",
+                        pathToDoc: "components/panels/LeftNavBar.jsx",
                         pathToSource: "components_panels_left-nav_LeftNavBar.jsx.html",
                         pathToDemoSource: "demo_components_panels_LeftNavBarDemo.jsx.html",
                         keywords: ["LeftNavBar"]
@@ -1139,10 +1139,10 @@ module.exports = [
                     },
                     {
                         label: "Drag-N-Drop Row",
-                        demo: require("../components/rows/DragDropRowDemo"),
+                        demo: require("../components/rows/DragDropDemo"),
                         pathToDoc: "components/rows/DragDrop.jsx",
                         pathToSource: "components_rows_DragDrop.jsx.html",
-                        pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html",
+                        pathToDemoSource: "demo_components_rows_DragDropDemo.jsx.html",
                         keywords: ["DragDropRow", "rows"]
                     },
                     {
