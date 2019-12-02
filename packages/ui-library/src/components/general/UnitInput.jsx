@@ -65,10 +65,16 @@ module.exports = class extends React.Component {
         } = this.props.dropDownListProps;
 
         return (
-            <FormLabel value=
-                {this.props.labelText || this.props.label}
-            className={containerClassName}
-            data-id={this.props["data-id"]}>
+            <div className={containerClassName}>
+                <FormLabel
+                    value= {this.props.labelText || this.props.label}
+                    data-id={this.props["data-id"]} detached>
+                    {this.props.errorMessage && (
+                        <FormMessage
+                            message={this.props.errorMessage}
+                        />
+                    )}
+                </FormLabel>
                 <FormTextField
                     {...textFieldProps}
                     className={ classnames(
@@ -87,12 +93,8 @@ module.exports = class extends React.Component {
                         }
                     )}
                 />
-                {this.props.errorMessage && (
-                    <FormMessage
-                        message={this.props.errorMessage}
-                    />
-                )}
-            </FormLabel>
+            </div>
         );
     }
 };
+
