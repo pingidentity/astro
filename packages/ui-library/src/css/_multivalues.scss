@@ -15,13 +15,14 @@
         color: $color-input-text;
     }
     .entries {
+        @include input-background;
+
         position: relative;
         z-index: $zindex__base;
         display: block;
         min-height: 36px;
         outline: none;
         overflow-y: auto;
-        background-color: $color-input-fill;
         padding: $spacing-xs + 5px $spacing-sm 1px $spacing-sm;
         width: 100%;
         height: 200px;

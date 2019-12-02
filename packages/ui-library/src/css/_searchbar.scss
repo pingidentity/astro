@@ -120,7 +120,8 @@ $searchbar-input-height: 38px;
         text-align: right;
     }
 
-    .input-row a {
+    .input-row .input-timezone a,
+    .input-row > a {
         line-height: 38px;
     }
 
