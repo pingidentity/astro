@@ -2,7 +2,6 @@
 
 @import 'code-view';
 @import 'forms/dropdown-button';
-@import 'icons/_variables';
 @import 'forms/_keyword-search';
 @import 'forms/_translation-picker';
 @import 'forms/_translation-picker';
@@ -422,7 +421,7 @@ label {
                 border-radius: $default-input-border-radius;
             }
             &:after {
-                content: '\79';
+                content: $icon-success;
                 position: absolute;
                 text-transform: none;
                 color: transparent;
@@ -661,7 +660,7 @@ label {
             width: 14px;
 
             &:before {
-                content: '\6e';
+                content: $icon-undo;
                 font-family: $icon-font;
                 font-size: 16px;
                 color: $color-active;
@@ -1233,7 +1232,7 @@ input[type=file] {
                 color: $color-stratus;
                 font-family: $icon-font;
                 text-transform: none;
-                content: '\69';
+                content: $icon-image;
                 font-size: 85px;
                 height: $img-width;
                 line-height: 1.3em;
@@ -1489,7 +1488,7 @@ input[type=file] {
         cursor: pointer;
     }
     &:before {
-        content: '\43';
+        content: $icon-calendar;
         left: 10px;
         bottom: 14px;
         z-index: $zindex__elevated;
@@ -2139,15 +2138,10 @@ input[type=file] {
     &.unit-input {
         margin: 0 12px 0 0 !important;
 
-        .input-message__icon {
-            bottom: 12px;
-            right: -12px;
-            top: auto;
-        }
-
         .input-message__text {
+            top: 60px;
             box-sizing: border-box;
-            min-width: calc(100% - 10px);
+            min-width: calc(100%);
         }
 
         .unit-input__drop-down-list--error {
@@ -2165,7 +2159,17 @@ input[type=file] {
                 margin-bottom: 0 !important;
             }
         }
+
+        .input-message__icon,
+        .form-error-icon {
+            &:before {
+                left: 22px;
+                position: absolute;
+                bottom: -21px;
+            }
+        }
     }
+
     &.input-textselect {
 
         > .input-text {
@@ -3007,7 +3011,7 @@ label {
         width: 164px;
 
         &:before {
-            content: '\00D7';
+            content: '\00D7'; // no icon for this exists in current library
             background: $color-critical-red;
             color: $color-white;
             font-size: 14px;
@@ -3121,7 +3125,7 @@ label {
         position: absolute;
         top: 0;
         right: 15px;
-        content: '\59';
+        content: $icon-expand-arrow;
         font-family: $icon-font;
         font-size: 9px;
         color: $color-midnight;

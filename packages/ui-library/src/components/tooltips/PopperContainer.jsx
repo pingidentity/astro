@@ -26,6 +26,8 @@ import classnames from "classnames";
  *     Where we'll try to put the container. Passed to popper.js
  * @param {boolean} [matchWidth=false]
  *     Should the popper match the width of its reference? (Like a dropdown does)
+  * @param {boolean} [matchMinWidth=false]
+ *     Should the popper match the the min width of the reference.
  * @param {boolean} [noGPUacceleration=false]
  *     Turns off a popper.js feature that conflicts with rendering helphint inside dropdowns
  * @param {boolean} [positionFixed=false]
@@ -42,6 +44,7 @@ class PopperContainer extends React.Component {
         onClick: PropTypes.func,
         placement: PropTypes.string,
         matchWidth: PropTypes.bool,
+        matchMinWidth: PropTypes.bool,
         noGPUAcceleration: PropTypes.bool,
         positionFixed: PropTypes.bool,
     }
@@ -49,6 +52,7 @@ class PopperContainer extends React.Component {
     static defaultProps = {
         "data-id": "popper-container",
         placement: "bottom",
+        matchMinWidth: false,
         matchWidth: false,
         noGPUAcceleration: false,
         positionFixed: false,
@@ -71,6 +75,11 @@ class PopperContainer extends React.Component {
     _matchReferenceWidth = data => {
         data.styles.minWidth = data.offsets.reference.width + "px";
         data.styles.maxWidth = data.offsets.reference.width + "px";
+        return data;
+    }
+
+    _matchReferenceMinWidth = data => {
+        data.styles.minWidth = data.offsets.reference.width + "px";
         return data;
     }
 
@@ -114,6 +123,11 @@ class PopperContainer extends React.Component {
                     enabled: this.props.matchWidth,
                     order: 650,
                     fn: this._matchReferenceWidth,
+                },
+                autoMinWidth: {
+                    enabled: this.props.matchMinWidth,
+                    order: 650,
+                    fn: this._matchReferenceMinWidth
                 },
                 computeStyle: {
                     gpuAcceleration: !this.props.noGPUAcceleration,
@@ -172,3 +186,4 @@ class PopperContainer extends React.Component {
 }
 
 export default PopperContainer;
+

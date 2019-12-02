@@ -1,11 +1,12 @@
 
 // COMMON
 
+
 @import 'reset';
 @import 'mixins';
 @import 'clearfix';
 @import 'globals';
-
+@import 'icons';
 
 // BY FUNCTIONALITY
 
@@ -19,7 +20,6 @@
 @import 'help';
 @import 'html-elements';
 @import 'i18n';
-@import 'icons';
 @import 'indent';
 @import 'inputs';
 @import 'layout';

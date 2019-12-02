@@ -25,7 +25,7 @@
     }
 }
 
-@mixin button-with-icon($content: '\2b') {
+@mixin button-with-icon($content: $icon-plus) {
     padding-left: $spacing-md + $spacing-sm + $spacing-sm;
 
     &:before,
@@ -185,7 +185,7 @@ button,
         @include button-with-icon();
     }
     &.download {
-        @include button-with-icon('\44');
+        @include button-with-icon($icon-download);
     }
     &.inline {
         &.edit,

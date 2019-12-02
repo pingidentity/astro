@@ -168,7 +168,7 @@ $expandable-row-gap: 12px;
         bottom: 0;
 
         &:after {
-            content: '\45';
+            content: $icon-expand;
         }
     }
     .edit-btn,
@@ -179,12 +179,12 @@ $expandable-row-gap: 12px;
     }
     .edit-btn {
         &:after {
-            content: '\65';
+            content: $icon-edit;
         }
     }
     .view-btn {
         &:after {
-            content: '\56';
+            content: $icon-view;
             font-size: 13px;
         }
     }
@@ -199,7 +199,7 @@ $expandable-row-gap: 12px;
         border-radius: 0;
 
         &:after {
-            content: '\64';
+            content: $icon-delete;
         }
     }
     &.expanded {
@@ -218,7 +218,7 @@ $expandable-row-gap: 12px;
 
             &:after {
                 font-family: 'iconfont';
-                content: '\63';
+                content: $icon-collapse;
             }
         }
         .edit-btn,
@@ -304,7 +304,7 @@ $expandable-row-gap: 12px;
             @include grab-cursor;
 
             &:before {
-                content: '\47';
+                content: $icon-grip;
                 text-transform: none;
                 font-size: 18px;
                 font-family: 'iconfont';
@@ -781,7 +781,7 @@ input.ordering-controls__input {
                 background-color: $color-stratus;
 
                 &:after {
-                    content: '\58';
+                    content: $icon-clear;
                 }
             }
             .approve-btn {
@@ -789,7 +789,7 @@ input.ordering-controls__input {
                 background-color: $color-success;
 
                 &:after {
-                    content: '\70';
+                    content: $icon-approve;
                 }
             }
             .resend-btn {
@@ -797,7 +797,7 @@ input.ordering-controls__input {
                 background-color: $color-active;
 
                 &:after {
-                    content: '\72';
+                    content: $icon-resend;
                 }
             }
             .row-button {
@@ -1163,7 +1163,7 @@ input.ordering-controls__input {
 
         &:after {
             font-family: $icon-font;
-            content: '\76';
+            content: $icon-dropdown-arrow;
             position: absolute;
             font-size: 12px;
 

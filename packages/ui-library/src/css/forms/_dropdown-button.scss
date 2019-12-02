@@ -23,7 +23,7 @@
 
         &:before {
             font-family: $icon-font;
-            content: '\2b';
+            content: $icon-plus;
             font-size: 10px;
             position: absolute;
             left: 7px;

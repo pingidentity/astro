@@ -26,11 +26,6 @@ pipeline {
       steps {
         dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
-            script {
-              env.HOSTING_SERVER_ADDRESS = "uilibrary.ping-eng.com"
-              env.HOSTING_SERVER_USERNAME = "ubuntu"
-            }
-
             configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
               withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
                 sh """

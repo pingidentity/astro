@@ -22,7 +22,7 @@ pipeline {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             script {
               env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
-              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","")
+              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","").trim()
               env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
             echo """
@@ -73,6 +73,18 @@ pipeline {
               withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
                 s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/end-user/", file: "cdn/")
               }
+            }
+          }
+        }
+      }
+    }
+
+    stage('update-library-demo') {
+      steps {
+        dir("${env.WORKSPACE}/packages/end-user") {
+          container('node-builder'){
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.RELEASE_VERSION} package-and-upload-end-user"
             }
           }
         }

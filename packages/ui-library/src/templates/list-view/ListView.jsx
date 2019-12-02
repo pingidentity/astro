@@ -33,6 +33,7 @@ import { populations, statuses, pwStatuses, customFilters, operators, userList }
 import InputWidths from "../../components/forms/InputWidths";
 import InputModifier, { inputMargins } from "ui-library/lib/components/general/InputModifier";
 import PageSection from "ui-library/lib/components/layout/PageSection";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
 
 // the collapsible "ADVANCED" section in the filters panel
 const AdvancedContainerView = ({ children, open, onToggle }) => (
@@ -634,6 +635,7 @@ class ListView extends React.Component {
                 }
                 onRemoveMessage={this._clearDeleteMessage}
             />
+            <PageHeader title="List Page" />
             <FilterControls
                 populationOptions={this.state.filters.population}
                 statusOptions={this.state.filters.status}

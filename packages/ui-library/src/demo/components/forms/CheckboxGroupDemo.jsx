@@ -16,6 +16,11 @@ const optionsData = [
         label: "Three",
         labelHelpText: "this is a help text"
     },
+    {
+        value: "four",
+        label: "Four disabled",
+        disabled: true
+    },
 ];
 
 /**

@@ -81,7 +81,7 @@
 
             &:after {
                 font-family: $icon-font;
-                content: '\79';
+                content: $icon-success;
                 height: $progress-size;
                 width: $progress-size;
                 color: $color-midnight;

@@ -24,6 +24,8 @@ const React = require("react"),
     format = require("../util/format.js"),
     _ = require("underscore");
 
+import ContentArea from "ui-library/lib/components/layout/ContentArea";
+
 // the SCSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
 require("../css/ui-library.scss");
@@ -358,7 +360,7 @@ class DemoApp extends React.Component {
                 onItemChange={this.navActions.selectItem}
                 onSectionChange={this.navActions.toggleSection}
             >
-                <div id="content" data-id="components">
+                <ContentArea data-id="components">
                     <DemoItem label={this._demoItem.label}
                         location={this.props.location}
                         store={this._demoStore}
@@ -373,7 +375,7 @@ class DemoApp extends React.Component {
                         contentPage={this._demoItem.contentPage}
                         flags={this._demo && this._demo.flags}
                     />
-                </div>
+                </ContentArea>
 
                 {
                     /*

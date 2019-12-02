@@ -13,7 +13,8 @@ import ReactDOM from "react-dom";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import Modal from "../Modal";
+import Modal, { BodyTitle } from "../Modal";
+import { shallow } from "enzyme";
 import _ from "underscore";
 const Wrapper = TestUtils.UpdatePropsWrapper;
 
@@ -268,4 +269,17 @@ describe("ModalTest v4", function () {
         expect(tooltipText.textContent).toBe(modalParams.cancelTooltip.messageText);
     });
 
+    it("BodyTitle test", function () {
+        const titleText = "This is my title";
+        const component =
+            shallow(
+                <BodyTitle>
+                    {titleText}
+                </BodyTitle>
+            );
+
+        const TitleNode = component.find(".body-title");
+
+        expect(TitleNode.text()).toEqual(titleText);
+    });
 });

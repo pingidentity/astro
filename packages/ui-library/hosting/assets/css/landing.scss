@@ -58,7 +58,7 @@ body {
         font-weight: bold;
 
         &:after {
-            content: '\00BB';
+            content: '\00BB'; // no icon for this exists in current library
             margin-left: $spacing-xs;
         }
     }
