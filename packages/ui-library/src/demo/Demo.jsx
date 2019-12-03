@@ -299,12 +299,11 @@ class DemoApp extends React.Component {
     }
 
     getVersionSelector = (versions) => {
-        const { pathname, search } = this.props.location;
-        console.log(pathname, this.props.location, pathname.replace("/"));
+        const { search } = this.props.location;
         return (
             <MarketSelector
                 options={versions.map(({ label, value }) => ({ label, id: value }))}
-                market={pathname.replace("/")}
+                market={window.location.pathname.replace(/\//g, "")}
                 onMarketChange={(value) => {window.location.href = `https://uilibrary.ping-eng.com/${value}/#/${search}`;}} //hard coding for local development
             />
         );
