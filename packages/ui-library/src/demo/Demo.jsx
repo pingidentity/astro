@@ -215,7 +215,7 @@ class DemoApp extends React.Component {
         this.setSelectedItemFromLocation();
 
         //set versions for dropdown
-        fetchVersions(versions => this.setState({ versions }))("../../hosting/");
+        fetchVersions(versions => this.setState({ versions }))("../");
     }
 
     /**
