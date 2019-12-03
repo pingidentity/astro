@@ -14,7 +14,7 @@ module.exports = merge(common, {
     },
     output: {
         path: path.resolve(__dirname, "build"),
-        filename: "[name].js" // Template based on keys in entry above
+        filename: "[name].[hash].js" // Template based on keys in entry above
     },
     module: {
         rules: [
