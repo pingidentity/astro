@@ -215,7 +215,7 @@ class DemoApp extends React.Component {
         this.setSelectedItemFromLocation();
 
         //set versions for dropdown
-        fetchVersions(versions => this.setState({ versions }))("../");
+        fetchVersions(versions => this.setState({ versions }))("./");
     }
 
     /**
@@ -344,7 +344,7 @@ class DemoApp extends React.Component {
                         }
                     ],
                     additionalContent: this.state.versions &&
-                    this.state.versions > 0 && this.getVersionSelector(this.state.versions)
+                        this.state.versions.length > 0 && this.getVersionSelector(this.state.versions)
                 })}
                 leftNavBarProps={{
                     theme: this.props.leftNav.lightMode ? LeftNavBar.themes.LIGHT : LeftNavBar.themes.DARK,
