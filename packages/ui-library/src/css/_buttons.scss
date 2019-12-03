@@ -354,6 +354,8 @@ button,
         height: auto;
         line-height: inherit;
         padding: 0;
+        font-size: 14px;
+        vertical-align: initial;
 
         &:hover {
             color: $color-active-blue-highlighted;

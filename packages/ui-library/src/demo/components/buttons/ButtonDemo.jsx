@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button, { buttonTypes } from "../../../components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
+import Text from "ui-library/lib/components/general/Text";
 
 /**
  * @name ButtonDemo
@@ -104,28 +105,36 @@ class ButtonsDemo extends Component {
                     label="Configure"
                 />
                 <HR />
+                <Text>Loading States (click to show ellipsis)</Text>
                 <Button
-                    label="Ellipsis Loader Primary Button"
+                    label="Primary"
                     type={buttonTypes.PRIMARY}
                     loading={this.state.loading1}
                     onClick={this._toggleLoadingButton(1)}
                 />
                 <Button
-                    label="Ellipsis Loader Secondary Button"
+                    label="Secondary"
                     type={buttonTypes.SECONDARY}
                     loading={this.state.loading2}
                     onClick={this._toggleLoadingButton(2)}
                 />
                 <Button
-                    label="Inline Ellipsis Button"
+                    label="Inline"
                     type={buttonTypes.SECONDARY}
                     inline
                     loading={this.state.loading3}
                     onClick={this._toggleLoadingButton(3)}
                 />
                 <Button
-                    label="Documentation"
-                    href="build-doc/ui-library/4.0.1/index.html"
+                    label="Link"
+                    type={buttonTypes.LINK}
+                    loading={this.state.loading4}
+                    onClick={this._toggleLoadingButton(4)}
+                />
+                <HR />
+                <Button
+                    label="With Href"
+                    href="https://www.pingidentity.com"
                     target="_blank"
                 />
                 <HR />

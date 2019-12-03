@@ -1,10 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import fetch from "isomorphic-fetch";
-// isomorphic-fetch need a Promise polyfill for older browsers.
-// Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
-import "es6-promise"; // eslint-disable-lint;
-
 
 // the CSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
@@ -24,119 +19,122 @@ import templatesIcon from "./assets/images/templates-icon.svg";
 import Text from "../src/components/general/Text";
 import Icon from "../src/components/general/Icon";
 
+import { fetchVersions } from "./fetchVersions";
+
 class LandingPage extends React.Component {
 
-    constructor(props) {
-        super(props);
-        fetch("versions.json?_=" + new Date().getTime())
-            .then(function (resp) {
-                if (resp.status >= 400) {
-                    throw new Error("Could not get versions from server.");
-                }
-
-                return resp.json();
-            })
-            .then(function (versions) {
-                if (versions && versions.length > 0) {
-                    const versionList = this._filterVersions(this._sortVersions(versions));
-
-                    const getVersionLabel = (version, index) => {
-                        const versionNumber = version.replace("-SNAPSHOT", "");
-                        return index > 0 ? versionNumber : `${versionNumber}-SNAPSHOT`;
-                    };
-
-                    this.setState({
-                        stableVersion: versionList[1].replace("-SNAPSHOT", ""),
-                        versionOptions: versionList.map(
-                            function (version, index) {
-                                return {
-                                    label: getVersionLabel(version, index),
-                                    value: version
-                                };
-                            }
-                        )
-                    });
-                } else {
-                    // probably local
-                    this.setState({
-                        stableVersion: "",
-                        error: true,
-                    });
-                }
-            }.bind(this));
+    state = {
+        endUser: {},
+        uiLibrary: {}
     }
 
-    state = {
-        versionOptions: [],
-        stableVersion: "",
-    };
+    componentDidMount() {
+        const setVersions = product => fetchVersions(
+            versions => {
+                this.setState({
+                    [product]: {
+                        versions,
+                        error: !versions || versions.length === 0
+                    }
+                });
+            },
+            error => {
+                this.setState({
+                    [product]: {
+                        error
+                    }
+                });
+            }
+        );
 
-    _gotoDemoVersion = (version) => {
-        window.location.href = `${version}/index.html`;
-    };
+        setVersions("endUser")("./end-user/");
+        setVersions("uiLibrary")("./");
+    }
 
-    _getStableVersionLink = () => `${this.state.stableVersion}/index.html`;
+    _getDemoLink = (value) => {
+        return `${value}/`;
+    }
 
-    _getDocumentationLink = () => `${this.state.stableVersion}/index.html#/?root=Documentation`;
-    _getComponentsLink = () => (
-        `${this.state.stableVersion}/index.html#/` +
+    _getVersionLink = (version) => {
+        return this._getDemoLink(version.value);
+    }
+
+    _getDocumentationLink = (version) => `${this._getVersionLink(version)}#/?root=Documentation`;
+
+    _getComponentsLink = (version) => (
+        `${this._getVersionLink(version)}#/` +
         `?selectedSection=BasicInputs&selectedNode=Checkbox&root=Components`
     );
-    _getTemplatesLink = () => (
-        `${this.state.stableVersion}/index.html#/` +
+    _getTemplatesLink = (version) => (
+        `${this._getVersionLink(version)}#/` +
         `?selectedSection=Actionstemplate&selectedNode=Actionstemplate&root=Templates`
     );
 
-    _handleVersionSelect = ({ value }) => this._gotoDemoVersion(value);
-
-    _versionToNumber = version => {
-        const numbers = version.replace("-SNAPSHOT", "").split(".").map(string => string * 1); // parseInt didn't work
-        return (numbers[0] * 1000 * 1000) + (numbers[1] * 1000) + numbers[2];
+    _handleVersionSelect = ({ value }) => {
+        window.location.href = this._getDemoLink(value);
     }
 
-    _sortVersions = versions => versions.slice().sort(
-        (first, second) => ((this._versionToNumber(first) < this._versionToNumber(second)) ? 1 : -1)
-    );
-
-    _filterVersions = versions => versions.filter((version, index, list) => (
-        (index <= 0) || (list[index - 1].match(/^[^\.]*\.[^\.]*/)[0] !== version.match(/^[^\.]*\.[^\.]*/)[0])
-    ));
-
-    _hasVersions = () => this.state.versionOptions.length > 0;
-
     render() {
+        const { uiLibrary, endUser } = this.state;
+
+        const libStable = uiLibrary.versions && uiLibrary.versions[1];
+        const libSnapshot = uiLibrary.versions && uiLibrary.versions[0];
+
         return (
             <div className="main">
                 <Stack gap="LG" className="content">
                     <img src={libLogo} width="490px" height="141px" />
                     <div>
-                        {!this.state.error &&
+                        {!uiLibrary.error &&
                             <Button
                                 className="landing-button"
-                                label={`${this.state.stableVersion} Release`}
+                                label={libStable ? `${libStable.label} Release` : `x.x.x Release`}
                                 type="primary"
-                                href={this._getStableVersionLink()}
-                                loading={!this._hasVersions()}
+                                href={libStable && this._getVersionLink(libStable)}
+                                loading={!libStable}
                             />
                         }
-                        <Button
-                            className="landing-button landing-button--ghost"
-                            label="End-User"
-                            href="end-user/"
-                        />
+
+                        {!endUser.error &&
+                            <Button
+                                className="landing-button landing-button--ghost"
+                                label={endUser.versions ? `End User ${endUser.versions[0].label}` : "End User x.x.x"}
+                                href={endUser.versions && `end-user/${endUser.versions[0].value}/`}
+                                loading={!endUser.versions}
+                            />
+                        }
                     </div>
                     <div>
-                        {this._hasVersions() &&
-                            <LinkDropDownList
-                                flags={["v4"]}
-                                label="All Versions"
-                                className="version-dropdown"
-                                options={this.state.versionOptions}
-                                onClick={this._handleVersionSelect}
+                        {!uiLibrary.error &&
+                            <Button
+                                label={libSnapshot ? `${libSnapshot.label} Snapshot` : "x.x.x Snapshot"}
+                                href={uiLibrary.versions && this._getVersionLink(libSnapshot)}
+                                loading={!libSnapshot}
+                                type={"link"}
                             />
                         }
-                        {this.state.error &&
-                            <Text type="error"><Icon iconName="alert" type="inline" /> Can't Load Versions</Text>
+
+                        {uiLibrary.versions && uiLibrary.versions.length > 2 &&
+                            [<span className="space-right-sm">|</span>,
+                                <LinkDropDownList
+                                    flags={["v4"]}
+                                    label="Older Versions"
+                                    className="version-dropdown"
+                                    options={uiLibrary.versions.slice(2)}
+                                    onClick={this._handleVersionSelect}
+                                />]
+                        }
+                        {uiLibrary.error &&
+                            <Text type="error">
+                                <Icon iconName="alert" type="leading" />
+                                Can't Load UI Library Versions
+                            </Text>
+                        }
+                        {endUser.error &&
+                            <Text type="error">
+                                <Icon iconName="alert" type="leading" />
+                                Can't Load End User Versions
+                            </Text>
                         }
                     </div>
                     <Stack gap="MD">
@@ -149,8 +147,8 @@ class LandingPage extends React.Component {
                                 </p>
                                 <Link
                                     className="card__link"
-                                    href={this._hasVersions() ? this._getDocumentationLink() : null}
-                                    disabled={!this._hasVersions()}
+                                    href={libStable ? this._getDocumentationLink(libStable) : null}
+                                    disabled={!libStable}
                                 >Documentation</Link>
                             </div>
                         </div>
@@ -160,8 +158,8 @@ class LandingPage extends React.Component {
                                 <p>Play with demos of the components, view code samples, and get API documentation.</p>
                                 <Link
                                     className="card__link"
-                                    href={this._hasVersions() ? this._getComponentsLink() : null}
-                                    disabled={!this._hasVersions()}
+                                    href={libStable ? this._getComponentsLink(libStable) : null}
+                                    disabled={!libStable}
                                 >Components</Link>
                             </div>
                         </div>
@@ -171,8 +169,8 @@ class LandingPage extends React.Component {
                                 <p>View real examples of page layouts based on designs for product features.</p>
                                 <Link
                                     className="card__link"
-                                    href={this._hasVersions() ? this._getTemplatesLink() : null}
-                                    disabled={!this._hasVersions()}
+                                    href={libStable ? this._getTemplatesLink(libStable) : null}
+                                    disabled={!libStable}
                                 >Templates</Link>
                             </div>
                         </div>
