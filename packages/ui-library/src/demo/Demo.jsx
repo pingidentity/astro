@@ -300,6 +300,7 @@ class DemoApp extends React.Component {
 
     getVersionSelector = (versions) => {
         const { pathname, search } = this.props.location;
+        console.log(pathname, this.props.location, pathname.replace("/"));
         return (
             <MarketSelector
                 options={versions.map(({ label, value }) => ({ label, id: value }))}
