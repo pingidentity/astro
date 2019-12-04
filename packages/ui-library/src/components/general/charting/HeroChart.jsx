@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "underscore";
-import { ResponsiveContainer, BarChart, XAxis, Tooltip, Bar, Cell } from "recharts";
+import { ResponsiveContainer, BarChart, XAxis, Tooltip, Bar, Cell, YAxis } from "recharts";
 import RockerButton from "../../forms/RockerButton";
 import PageSpinner from "../../general/PageSpinner";
 
@@ -65,6 +65,7 @@ import PageSpinner from "../../general/PageSpinner";
 */
 
 const xAxisHeight = 30;
+const botChartOffset = 10;
 
 const CustomTooltip = (props) => {
     /* istanbul ignore next  */
@@ -293,9 +294,14 @@ export default class HeroChart extends Component {
                         <BarChart
                             {...chartProps}
                             data-id={`${dataId}-top-chart`}
-                            height={topChartHeight}>
+                            height={topChartHeight}
+                        >
                             {this._renderXAxis(xAxisKey, data.length)}
-                            <Tooltip {...tooltipProps} position={{ y: -25 }} selected={this.state.barSelected} />
+                            <Tooltip
+                                {...tooltipProps}
+                                position={{ y: -25 }}
+                                selected={this.state.barSelected}
+                            />
                             {this._renderBars(data, topSeriesKey, "#fff")}
                         </BarChart>
                     </ResponsiveContainer>
@@ -303,13 +309,16 @@ export default class HeroChart extends Component {
                     <ResponsiveContainer
                         key="bottom-chart"
                         className="hero-chart__bottom-chart"
-                        height={botChartHeight}
+                        height={botChartHeight + botChartOffset}
                         width="100%"
                     >
                         <BarChart
                             {...chartProps}
                             data-id={`${dataId}-bottom-chart`}
-                            height={botChartHeight}>
+                            height={botChartHeight}
+                            margin={{ bottom: botChartOffset }}
+                        >
+                            <YAxis reversed hide />
                             <Tooltip
                                 {...tooltipProps}
                                 position={{ y: botChartHeight }}
