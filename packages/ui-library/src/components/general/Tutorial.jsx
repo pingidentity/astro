@@ -135,7 +135,7 @@ export default class Tutorial extends React.Component {
 
     _renderStepContent = ({ title, description, headerContent }) => {
         return (
-            <div className="tutorial__modal-content" key={title}>
+            <div className="tutorial__modal-content">
                 { headerContent ? (
                     <div className="tutorial__modal-header">
                         {headerContent}

@@ -67,8 +67,8 @@ describe("UnitInput", () => {
         });
         const welcomeModal = component.find(".tutorial__welcome");
         expect(welcomeModal.exists()).toEqual(true);
-        expect(welcomeModal.find(".tutorial__welcome--title").text()).toEqual("Test Title");
-        expect(welcomeModal.find(".tutorial__welcome--description").text()).toEqual("Test description...");
+        expect(welcomeModal.find(".tutorial__welcome-title").text()).toEqual("Test Title");
+        expect(welcomeModal.find(".tutorial__welcome-description").text()).toEqual("Test description...");
     });
 
     it("renders custom buttons on welcome modal", () => {
@@ -78,7 +78,7 @@ describe("UnitInput", () => {
             labelDismiss: "Test Dismiss",
             labelGetStarted: "Test Get Started",
         });
-        const welcomeModal = component.find(".tutorial__welcome--actions");
+        const welcomeModal = component.find(".tutorial__welcome-actions");
         const nextButton = welcomeModal.find("button");
         expect(nextButton.text()).toEqual("Test Get Started");
         const dismissButton = welcomeModal.find("a");
@@ -92,7 +92,7 @@ describe("UnitInput", () => {
             active: 0,
             onNext,
         });
-        const welcomeModal = component.find(".tutorial__welcome--actions");
+        const welcomeModal = component.find(".tutorial__welcome-actions");
         const nextButton = welcomeModal.find("button");
         nextButton.simulate("click");
         expect(onNext).toHaveBeenCalled();
@@ -105,7 +105,7 @@ describe("UnitInput", () => {
             active: 0,
             onClose
         });
-        const welcomeModal = component.find(".tutorial__welcome--actions");
+        const welcomeModal = component.find(".tutorial__welcome-actions");
         const dismissButton = welcomeModal.find("a");
         dismissButton.simulate("click");
         expect(onClose).toHaveBeenCalled();
@@ -118,7 +118,7 @@ describe("UnitInput", () => {
             labelNext: "Test Next",
             labelPrevious: "Test Back",
         });
-        const tutorialModal = component.find(".tutorial__modal--actions");
+        const tutorialModal = component.find(".tutorial__modal-actions");
         const nextButton = tutorialModal.find("button");
         expect(nextButton.text()).toEqual("Test Next");
         const dismissButton = tutorialModal.find("a");
@@ -132,7 +132,7 @@ describe("UnitInput", () => {
             labelFinal: "Test Final",
             labelPrevious: "Test Back",
         });
-        const tutorialModal = component.find(".tutorial__modal--actions");
+        const tutorialModal = component.find(".tutorial__modal-actions");
         const finalButton = tutorialModal.find("button");
         expect(finalButton.text()).toEqual("Test Final");
         const dismissButton = tutorialModal.find("a");
@@ -146,7 +146,7 @@ describe("UnitInput", () => {
             active: 1,
             onNext
         });
-        const tutorialModal = component.find(".tutorial__modal--actions");
+        const tutorialModal = component.find(".tutorial__modal-actions");
         const nextButton = tutorialModal.find("button");
         nextButton.simulate("click");
         expect(onNext).toHaveBeenCalled();
@@ -159,7 +159,7 @@ describe("UnitInput", () => {
             active: 1,
             onPrevious
         });
-        const tutorialModal = component.find(".tutorial__modal--actions");
+        const tutorialModal = component.find(".tutorial__modal-actions");
         const backButton = tutorialModal.find("a");
         backButton.simulate("click");
         expect(onPrevious).toHaveBeenCalled();
@@ -171,9 +171,9 @@ describe("UnitInput", () => {
             active: 1,
         });
         const tutorialModal = component.find(".tutorial__modal");
-        const modalTitle = tutorialModal.find(".tutorial__modal--title");
+        const modalTitle = tutorialModal.find(".tutorial__modal-title");
         expect(modalTitle.text()).toEqual("Step 1 Title");
-        const modalDescription = tutorialModal.find(".tutorial__modal--description");
+        const modalDescription = tutorialModal.find(".tutorial__modal-description");
         expect(modalDescription.text()).toEqual("Step 1 description...");
     });
 
@@ -183,9 +183,9 @@ describe("UnitInput", () => {
             active: 1,
         });
         const tutorialModal = component.find(".tutorial__modal");
-        const modalTitle = tutorialModal.find(".tutorial__modal--title");
+        const modalTitle = tutorialModal.find(".tutorial__modal-title");
         expect(modalTitle.text()).toEqual("Step 1 Title");
-        const modalDescription = tutorialModal.find(".tutorial__modal--description");
+        const modalDescription = tutorialModal.find(".tutorial__modal-description");
         expect(modalDescription.text()).toEqual("Step 1 description...");
 
         component.setProps({ active: 2 });
@@ -208,7 +208,7 @@ describe("UnitInput", () => {
             ]
         });
         const tutorialModal = component.find(".tutorial__modal");
-        const modalHeader = tutorialModal.find(".tutorial__modal--header");
+        const modalHeader = tutorialModal.find(".tutorial__modal-header");
         expect(modalHeader.text()).toEqual("Test header content...");
     });
 
@@ -217,8 +217,8 @@ describe("UnitInput", () => {
             visible: true,
             active: 2,
         });
-        expect(component.find(".tutorial__modal--step--complete").length).toEqual(1);
-        expect(component.find(".tutorial__modal--step--active").length).toEqual(1);
-        expect(component.find(".tutorial__modal--step--inactive").length).toEqual(1);
+        expect(component.find(".tutorial__modal-step--complete").length).toEqual(1);
+        expect(component.find(".tutorial__modal-step--active").length).toEqual(1);
+        expect(component.find(".tutorial__modal-step--inactive").length).toEqual(1);
     });
 });
