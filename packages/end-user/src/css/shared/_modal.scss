@@ -172,9 +172,9 @@
     }
     &.dialog {
         $modal-width: 350px;
-
         .modal-content {
-            width: $modal-width;
+            width: 100%;
+            max-width: $modal-width;
         }
         .modal-title,
         .body-title {

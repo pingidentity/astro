@@ -11,6 +11,7 @@ const ButtonTypes = {
     PRIMARY: 'primary',
     SECONDARY: 'secondary',
     TERTIARY: 'tertiary',
+    DANGER: 'danger',
 };
 
 /**
@@ -58,6 +59,7 @@ const Button = ({
         'button--inline': inline,
         'button--primary': type === ButtonTypes.PRIMARY,
         'button--tertiary': type === ButtonTypes.TERTIARY,
+        'button--danger': type === ButtonTypes.DANGER,
         'brand-primary-bg': type === ButtonTypes.PRIMARY,
     });
     return (

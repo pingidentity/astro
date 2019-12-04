@@ -27,6 +27,25 @@
 @import './common/inputs';
 @import './common/icon-pairs';
 
+@import './shared/modal';
+@import './shared/tabs';
+@import './shared/details-tooltip';
+@import './shared/flex-row';
+@import './shared/user-nav';
+@import './shared/layout';
+@import './shared/help';
+@import './shared/inputs';
+@import './shared/collapsible-section';
+@import './shared/padding';
+@import './shared/toggle';
+@import './shared/forms/translation-picker';
+@import './shared/messages';
+@import './shared/tables';
+@import './shared/device-table';
+@import './shared/device-icon';
+@import './shared/tile-selector';
+
+@import './components/account-table';
 @import './components/button';
 @import './components/button-set';
 @import './components/card';
@@ -41,6 +60,7 @@
 @import './components/modal-menu';
 @import './components/org-logo';
 @import './components/page';
+@import './components/profile-image';
 @import './components/requirements';
 @import './components/serialized-data';
 @import './components/spinner';
@@ -52,25 +72,6 @@
 @import './components/profile-image';
 @import './components/column';
 @import './components/phone-input';
-
-@import './shared/modal';
-@import './shared/tabs';
-@import './shared/details-tooltip';
-@import './shared/flex-row';
-@import './shared/layout';
-@import './shared/help';
-@import './shared/inputs';
-@import './shared/collapsible-section';
-@import './shared/padding';
-@import './shared/toggle';
-@import './shared/forms/translation-picker';
-@import './shared/messages';
-@import './shared/tables';
-@import './shared/device-table';
-@import './shared/device-icon';
-@import './shared/user-nav';
-@import './shared/tile-selector';
-@import './shared/icons';
 
 // spacing components are after so they take precedence\
 

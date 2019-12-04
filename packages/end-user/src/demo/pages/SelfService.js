@@ -16,6 +16,8 @@ import TextInput from '../../components/TextInput';
 import TextBlock from '../../components/TextBlock';
 import Toggle from '../../components/shared/Toggle';
 import DeviceTable from '../../components/shared/DeviceTable';
+import AccountTable from '../../components/AccountTable';
+import SocialLogos from '../../util/SocialLogo';
 import ImageInput from '../../components/ImageInput';
 import FloatLabelDropdownCustom from '../../components/FloatLabelDropdownCustom';
 import Columns, { Column, alignments as colAlignments, widths as colWidths } from '../../components/Columns';
@@ -53,6 +55,7 @@ class SelfService extends React.Component {
             { this.state.selectedIndex === 0 ? <MyProfilePage /> : null }
             { this.state.selectedIndex === 1 ? <AuthenticationPage /> : null }
             { this.state.selectedIndex === 2 ? <ChangePasswordPage /> : null }
+            { this.state.selectedIndex === 3 ? <LinkedAccountsPage /> : null }
         </>
     );
 };
@@ -478,4 +481,62 @@ class AuthenticationPage extends React.Component {
         </Container>
     );
 };
+
+class LinkedAccountsPage extends React.Component {
+    state = {
+        accounts: [
+            {
+                name: "Google",
+                image: <SocialLogos.GOOGLE width={40} height={40} />,
+            },
+            {
+                name: "Facebook",
+                image: <SocialLogos.FACEBOOK width={40} height={40} />,
+            },
+        ],
+        accountToUnlink: ''
+    }
+    render() {
+        return (
+            <Container maxWidth="400px">
+                <h2 className="heading-text centered-text">Linked Accounts</h2>
+                <p className="normal-text centered-text">
+                    Text explaining that this is. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+                </p>
+                <Card type={CardTypes.SLIM}>
+                    <FlexRow
+                        alignment={alignments.CENTER}
+                        flexDirection={flexDirectionOptions.COLUMN}
+                        spacing={spacingOptions.SM}
+                    >
+                        <AccountTable
+                            onUnlink={(accountName) => {
+                                this.setState((prevState) => prevState.accounts.map((account) => {
+                                        if (account.name === accountName) {
+                                            account.unlinked = true;
+                                        }
+                                        return account;
+                                }));
+                            }}
+                            onRemove={(accountName) => {
+                                this.setState((prevState) => {
+                                    return {
+                                        accounts: prevState.accounts.filter(({ name }) => name !== accountName)
+                                    };
+                                });
+                            }}
+                            onUnlinkClick={(name) => {
+                                this.setState({ accountToUnlink: name });
+                            }}
+                            accounts={this.state.accounts}
+                            unlinkModalMessage={`Are you sure you want to unlink your ${this.state.accountToUnlink} account? Unlinking this account will not allow you to access PingOne with your ${this.state.accountToUnlink} credentials.`}
+                            unlinkModalTitle={`Unlink Linked Account: ${this.state.accountToUnlink}`}
+                        />
+                    </FlexRow>
+                </Card>
+            </Container>
+        );
+    }
+}
+
 export default SelfService;
