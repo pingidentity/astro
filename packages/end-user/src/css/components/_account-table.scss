@@ -1,0 +1,71 @@
+.account-table {
+    @media (max-width: 480px) {
+        flex-direction: column;
+    }
+
+    &__icon {
+        flex: 1;
+        flex-grow: 0;
+        fill: $color-neutral-20;
+
+        @media (max-width: $breakpoint-mobile) {
+            flex-grow: 1;
+        }
+    }
+
+    &__row {
+        border-bottom: 1px dashed $color-neutral-20;
+
+        @media (max-width: $breakpoint-mobile) {
+            flex-direction: row;
+
+            *:not(:last-child) {
+                width: unset;
+                margin-bottom: unset;
+                margin-right: unset;
+            }
+        }
+    }
+
+    &__row:last-child {
+        border-bottom: 0;
+    }
+
+    &__row > div {
+        padding: $spacing-md $spacing-sm;
+    }
+
+    &__row-info {
+        flex: 1;
+        text-align: left;
+        min-width: 0;
+
+        @media (max-width: $breakpoint-mobile) {
+            display: none;
+        }
+    }
+
+    &__row-unlink {
+        flex: 2;
+        text-align: right;
+        min-width: 0;
+
+        @media (max-width: $breakpoint-mobile) {
+            flex: 3;
+        }
+    }
+
+    &__row-details {
+        text-align: left;
+    }
+
+    &__row-type {
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    &__row-name {
+        color: $color-charting-indigo;
+    }
+}

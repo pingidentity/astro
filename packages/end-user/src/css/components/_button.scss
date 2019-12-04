@@ -23,6 +23,17 @@
         }
     }
 
+    &--danger {
+        color: $color-white;
+        background: $color-critical-red;
+        border: $color-critical-red;
+
+        &:hover {
+            color: $color-white;
+            background: darken($color-critical-red, 5%);
+        }
+    }
+
     &--tertiary {
         font-size: $button-tertiary-font-size;
         padding: $spacing-xs $spacing-md;
@@ -34,15 +45,13 @@
     &:disabled, &--disabled {
         opacity: $button-disabled-opacity;
         cursor: default;
-
-        &:hover {
-            background: $button-primary-bg-color;
-        }
     }
 
     &--inline {
         width: auto;
         display: inline-block;
+        border-radius: 30px;
+        padding: 4px $spacing-sm;
     }
 
     &--inline-alt {
