@@ -44,3 +44,10 @@
 .centered-text {
     text-align: center;
 }
+
+hr {
+    margin: 30px;
+    height: 0;
+    border: solid $color-neutral-90;
+    border-width: 1px 0 0;
+}
