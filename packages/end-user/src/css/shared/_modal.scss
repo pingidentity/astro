@@ -130,7 +130,6 @@
         background-color: $color-white;
         overflow-x: visible;
         overflow-y: auto;
-        max-height: calc(100% - #{2 * $min-bottom});
 
         @include border-radius(0 0 $modal-radius $modal-radius);
 
