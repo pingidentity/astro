@@ -14,6 +14,10 @@ label {
     line-height: 1em;
     cursor: default;
 
+    @media (max-width: $breakpoint-mobile) {
+        margin-right: 0;
+    }
+
     @include text-label;
 
     .modifier_strip-input-margins & {

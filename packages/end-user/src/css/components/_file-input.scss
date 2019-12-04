@@ -102,16 +102,15 @@ $image-input-size: 100px;
 
 .image-input__selected-thumbnail {
     position: absolute;
-    top: $spacing-xs;
-    bottom: $spacing-xs;
-    left: $spacing-xs;
-    right: $spacing-xs;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     overflow: hidden;
 
     box-shadow: 0px 0px 0px $spacing-xs $color-neutral-100;
     border-radius: ceil($image-input-size/2);
+    transform: scale(0.88);
 }
 
 .image-input__edit-btn {
@@ -152,6 +151,7 @@ $image-input-size: 100px;
     color: $color-neutral-100;
     background: $color-active-blue;
     border-radius: 3px;
+    z-index: 1;
 
     &-item {
         padding: $spacing-xs $spacing-sm;

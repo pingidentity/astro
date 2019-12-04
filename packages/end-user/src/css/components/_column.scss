@@ -1,0 +1,91 @@
+@mixin col($width) {
+    flex-basis: calc(#{$width} / 12 * 100%);
+    box-sizing: border-box;
+}
+
+.columns {
+    @include flexbox;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    & > *:not(:last-child) {
+        padding-right: $spacing-md;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+        flex-direction: column;
+
+        & > * {
+            width: 100%;
+        }
+
+        *:not(:last-child) {
+            padding-bottom: 10px;
+            padding-right: 0;
+        }
+    }
+}
+
+.column {
+    &__one {
+        @include col(1);
+    }
+
+    &__two {
+        @include col(2);
+    }
+
+    &__three {
+        @include col(3);
+    }
+
+    &__four {
+        @include col(4);
+    }
+
+    &__five {
+        @include col(5);
+    }
+
+    &__six {
+        @include col(6);
+    }
+
+    &__seven {
+        @include col(7);
+    }
+
+    &__eight {
+        @include col(8);
+    }
+
+    &__nine {
+        @include col(9);
+    }
+
+    &__ten {
+        @include col(10);
+    }
+
+    &__eleven {
+        @include col(11);
+    }
+
+    &__twelve  {
+        @include col(12);
+    }
+
+    &--left {
+        text-align: left;
+    }
+
+    &--center {
+        text-align: center;
+    }
+
+    &--right {
+        text-align: right;
+    }
+}
