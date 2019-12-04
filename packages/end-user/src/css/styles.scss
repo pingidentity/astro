@@ -16,8 +16,8 @@
 
 @import './global-vars';
 @import './fonts';
-@import './icons/_variables';
-@import './icons/_style';
+@import './icons/variables';
+@import './icons/style';
 @import './text';
 @import './spacing';
 @import './mixins';
@@ -50,6 +50,7 @@
 @import './components/tooltip';
 @import './components/two-sided';
 @import './components/profile-image';
+@import './components/column';
 @import './components/phone-input';
 
 @import './shared/modal';

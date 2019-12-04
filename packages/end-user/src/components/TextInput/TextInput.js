@@ -95,38 +95,37 @@ const TextInput = ({
     width,
 }) => {
     const classNames = classnames('text-input', className, {
-        'text-input--error': type === textInputTypes.ERROR,
-        'text-input--success': type === textInputTypes.SUCCESS,
+        'text-input--error-icon': type === textInputTypes.ERROR,
+        'text-input--success-icon': type === textInputTypes.SUCCESS,
         'text-input--primary': type === textInputTypes.PRIMARY,
     });
 
-    const wrapperClassNames = classnames('text-input-wrapper', className, {
-        'text-input-wrapper--error': type === textInputTypes.ERROR,
-        'text-input-wrapper--success': type === textInputTypes.SUCCESS,
-        'text-input-wrapper--primary': type === textInputTypes.PRIMARY,
+    const iconClassNames = classnames('text-input__icon', {
+        'text-input__icon--error': type === textInputTypes.ERROR,
+        'text-input__icon--success': type === textInputTypes.SUCCESS,
     });
 
-    return (
-        <span className={wrapperClassNames}>
-            <input
-                className={classNames}
-                data-id={dataId}
-                defaultValue={defaultValue}
-                id={id}
-                name={id}
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onKeyPress={onKeyPress}
-                onKeyDown={onKeyDown}
-                onMouseDown={onMouseDown}
-                placeholder={placeholder}
-                type="text"
-                value={value}
-                style={{ width }}
-            />
-        </span>
-    );
+    return [
+        (type ? <div className={iconClassNames} key="type-icon"></div> : null),
+        <input
+            className={classNames}
+            data-id={dataId}
+            defaultValue={defaultValue}
+            id={id}
+            name={id}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onKeyPress={onKeyPress}
+            onKeyDown={onKeyDown}
+            onMouseDown={onMouseDown}
+            placeholder={placeholder}
+            value={value}
+            style={{width}}
+            type="text"
+            key="textinput"
+        />,
+    ];
 };
 
 TextInput.defaultProps = {
