@@ -139,7 +139,6 @@ class PopperContainer extends React.Component {
             }
         };
 
-
         if (reference) {
             const popper = new Popper(
                 ReactDOM.findDOMNode(reference),
