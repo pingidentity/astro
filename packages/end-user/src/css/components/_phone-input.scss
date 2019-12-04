@@ -1,0 +1,27 @@
+.phone-input {
+    position: relative;
+    height: 48px;
+    width: 100%;
+    max-width: 350px;
+
+    &__code {
+        width: calc(25% - #{$spacing-xs});
+        margin-right: $spacing-xs;
+        transition: all 0.2s;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+
+        &--open {
+            width: 100%;
+        }
+    }
+
+    &__number {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 75%;
+    }
+}
