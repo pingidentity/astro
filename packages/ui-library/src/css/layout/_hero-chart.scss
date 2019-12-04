@@ -82,8 +82,9 @@
     &__top-chart,
     &__bottom-chart {
         max-width: 850px;
-        display: inline-block;
+        margin: 0 auto;
     }
+
     &__top-chart {
         .recharts-tooltip-wrapper {
             margin-top: -5px;
