@@ -1,0 +1,162 @@
+@import './icons/_style'; //icon files from icomoon
+
+a[class^='pingicon-'],
+a[class*=' pingicon-'] {
+    text-decoration: none;
+}
+
+a [class^='pingicon-'],
+a [class*='pingicon-'] {
+    &:before {
+        display: inline-block; // need this to remove underlines
+    }
+}
+
+a.pingicon-clear,
+a .pingicon-clear,
+a.pingicon-plus,
+a .pingicon-plus {
+    font-weight: bold;
+}
+
+.pingicon-check {
+    @extend .pingicon-success;
+}
+
+.inline-icon {
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin: 0 5px 0 0;
+}
+
+.icon {
+    display: inline-flex;
+    &__graphic {
+        padding: 0 $spacing-sm 0 0;
+        &--size-sm {
+            font-size: 14px;
+        }
+        &--size-md {
+            font-size: 21px;
+        }
+        &--size-lg {
+            font-size: 28px;
+        }
+        &--size-xl {
+            font-size: 35px;
+        }
+        &--size-xxl {
+            font-size: 42px;
+        }
+    }
+
+    &--size-sm {
+        font-size: 14px;
+    }
+    &--size-md {
+        font-size: 21px;
+    }
+    &--size-lg {
+        font-size: 28px;
+    }
+    &--size-xl {
+        font-size: 35px;
+    }
+    &--size-xxl {
+        font-size: 42px;
+    }
+
+    &--clickable {
+        cursor: pointer;
+    }
+}
+
+.icon__rounded {
+    $size: 23px;
+
+    display: inline-block;
+    border-radius: ceil($size / 2);
+    background: $color-elephant;
+    color: $color-white;
+    height: $size;
+    width: $size;
+    text-align: center;
+    vertical-align: middle;
+
+    &:before {
+        transform: translateY(-50%);
+        margin-top: 50%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &.pingicon-check {
+        font-size: 10px;
+    }
+}
+
+.status-indicator {
+    $size: 14px;
+
+    &--icon {
+        display: inline-block;
+        box-sizing: border-box;
+        height: $size;
+        width: $size;
+        border-radius: ceil($size);
+
+        font-family: '#{$icomoon-font-family}' !important;
+        font-size: 8px;
+        line-height: $size;
+        text-align: center;
+        vertical-align: top;
+        color: $color-white;
+
+        &__success {
+            @extend .pingicon-success;
+            background-color: $color-success;
+        }
+        &__notice {
+            @extend .pingicon-info;
+            overflow: hidden;
+            border: 1px solid $color-active-blue;
+            font-size: $size;
+            background-color: $color-active-blue;
+
+            &:before {
+                display: block;
+                margin: -1px 0 0 -1px;
+            }
+        }
+        &__warning {
+            border: 3px solid $color-warning-yellow;
+        }
+        &__error {
+            @extend .pingicon-clear;
+            background-color: $color-critical-red;
+            font-weight: bold;
+            font-size: 8px;
+        }
+    }
+}
+
+// Colors for social icons
+
+.pingicon-facebook {
+    &:before {
+        color: #3c5c99; // Facebook blue
+    }
+}
+
+.pingicon-linkedin {
+    &:before {
+        color: #0077b5; // LinkedIn brand blue
+    }
+}
+
+.pingicon-twitter {
+    &:before {
+        color: #1da1f2; // Twitter blue
+        content: $pingicon-twitter;
+    }
+}
