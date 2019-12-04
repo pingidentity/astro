@@ -112,20 +112,18 @@ export default class Tutorial extends React.Component {
         return (
             <Portal>
                 <div className={welcomeClassnames}>
-                    <div className="tutorial__welcome--content">
-                        <div className="tutorial__welcome--title">
+                    <div className="tutorial__welcome-content">
+                        <div className="tutorial__welcome-title">
                             {messageWelcomeTitle}
                         </div>
-                        <div className="tutorial__welcome--description">
+                        <div className="tutorial__welcome-description">
                             {messageWelcomeDescription}
                         </div>
                     </div>
-                    <div className="tutorial__welcome--actions">
-                        <div>
-                            <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
-                                {labelGetStarted}
-                            </Button>
-                        </div>
+                    <div className="tutorial__welcome-actions">
+                        <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
+                            {labelGetStarted}
+                        </Button>
                         <div>
                             <Link onClick={onClose}>{labelDismiss}</Link>
                         </div>
@@ -137,14 +135,14 @@ export default class Tutorial extends React.Component {
 
     _renderStepContent = ({ title, description, headerContent }) => {
         return (
-            <div className="tutorial__modal--content">
+            <div className="tutorial__modal-content" key={title}>
                 { headerContent ? (
-                    <div className="tutorial__modal--header">
+                    <div className="tutorial__modal-header">
                         {headerContent}
                     </div>
                 ) : null }
-                <div key="title" className="tutorial__modal--title">{title}</div>
-                <div key="description" className="tutorial__modal--description">{description}</div>
+                <div className="tutorial__modal-title">{title}</div>
+                <div className="tutorial__modal-description">{description}</div>
             </div>
         );
     }
@@ -153,10 +151,10 @@ export default class Tutorial extends React.Component {
         const progressIndicators = [];
 
         for (let i = 1; i <= steps; i = i + 1) {
-            const indicatorClassnames = classnames("tutorial__modal--step", {
-                "tutorial__modal--step--complete": i < activeStep,
-                "tutorial__modal--step--active": i === activeStep,
-                "tutorial__modal--step--inactive": i > activeStep,
+            const indicatorClassnames = classnames("tutorial__modal-step", {
+                "tutorial__modal-step--complete": i < activeStep,
+                "tutorial__modal-step--active": i === activeStep,
+                "tutorial__modal-step--inactive": i > activeStep,
             });
 
             progressIndicators.push((
@@ -165,8 +163,8 @@ export default class Tutorial extends React.Component {
         }
 
         return (
-            <div className="tutorial__modal--progress">
-                <ul className="tutorial__modal--steps">
+            <div className="tutorial__modal-progress">
+                <ul className="tutorial__modal-steps">
                     {progressIndicators}
                 </ul>
             </div>
@@ -176,7 +174,7 @@ export default class Tutorial extends React.Component {
     componentDidUpdate(prevProps) {
 
         // Remove existing lightbox if any
-        const prevSpotlight = document.getElementsByClassName("tutorial__modal--lightbox")[0];
+        const prevSpotlight = document.getElementsByClassName("tutorial__modal-lightbox")[0];
 
         /* istanbul ignore if  */
         if (prevSpotlight !== undefined) {
@@ -200,10 +198,10 @@ export default class Tutorial extends React.Component {
                 lightbox.style.left = `${dims.left}px`;
                 lightbox.style.width = `${dims.width}px`;
                 lightbox.style.height = `${dims.height}px`;
-                lightbox.classList.add("tutorial__modal--lightbox");
+                lightbox.classList.add("tutorial__modal-lightbox");
 
                 if (this.props.theme === themes.DARK) {
-                    lightbox.classList.add("tutorial__modal--lightbox--dark");
+                    lightbox.classList.add("tutorial__modal-lightbox--dark");
                 }
 
                 // Add clone by existing element to preserve contextual styles
@@ -225,8 +223,8 @@ export default class Tutorial extends React.Component {
 
         const step = steps[active - 1];
 
-        const pointerClassnames = classnames("tutorial__modal--pointer", {
-            "tutorial__modal--pointer--dark": theme === themes.DARK,
+        const pointerClassnames = classnames("tutorial__modal-pointer", {
+            "tutorial__modal-pointer--dark": theme === themes.DARK,
         });
 
         const modalClassnames = classnames("tutorial__modal", {
@@ -240,19 +238,19 @@ export default class Tutorial extends React.Component {
                     key={step.target}
                     placement={step.side}
                     pointerClassName={pointerClassnames}
-                    className="tutorial__modal--popper"
+                    className="tutorial__modal-popper"
                 >
                     <div className={modalClassnames} ref={this.modal}>
-                        <div className="tutorial__modal--close">
+                        <div className="tutorial__modal-close">
                             <Icon iconName="clear" type={iconTypes.INLINE} onClick={onClose}/>
                         </div>
                         {this._renderStepContent(step)}
-                        <div className="tutorial__modal--footer">
+                        <div className="tutorial__modal-footer">
                             <FlexRow alignment={alignments.CENTER} justify={justifyOptions.SPACEBETWEEN}>
                                 <div>
                                     {this._renderProgress(active, steps.length)}
                                 </div>
-                                <div className="tutorial__modal--actions">
+                                <div className="tutorial__modal-actions">
                                     <Link onClick={onPrevious}>{labelPrevious}</Link>
                                     <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
                                         { active === steps.length ? labelFinal : labelNext }
@@ -284,13 +282,11 @@ export default class Tutorial extends React.Component {
             visible ? (
                 <div className={tutorialClassnames} data-id={dataId}>
                     <div className="tutorial__bg">
-                        <div className="">
-                            { active === 0 ? (
-                                this._renderWelcome()
-                            ) : (
-                                this._renderPopup(steps, active)
-                            )}
-                        </div>
+                        {active === 0 ? (
+                            this._renderWelcome()
+                        ) : (
+                            this._renderPopup(steps, active)
+                        )}
                     </div>
                 </div>
             ) : null

@@ -1,7 +1,7 @@
 $tutorial-dark-bg-color: darken($color-neutral-10, 20%);
 $tutorial-dark-text-color: $color-white;
 
-.tutorial__modal--pointer {
+.tutorial__modal-pointer {
     z-index: 74px;
 
     *[x-placement^='top'] & {
@@ -53,11 +53,11 @@ $tutorial-dark-text-color: $color-white;
         transform: translate(-50%, -50%);
         box-shadow: 0 1px 1px 70000px rgba(0, 0, 0, 0.3);
 
-        &--content {
+        &-content {
             padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
         }
 
-        &--title {
+        &-title {
             font-size: 20px;
             font-weight: 700;
             color: $color-neutral-20;
@@ -65,7 +65,7 @@ $tutorial-dark-text-color: $color-white;
             text-align: center;
         }
 
-        &--description {
+        &-description {
             font-size: 15px;
             font-weight: 400;
             font-style: normal;
@@ -77,16 +77,16 @@ $tutorial-dark-text-color: $color-white;
             background: $tutorial-dark-bg-color;
             box-shadow: 0 1px 1px 70000px rgba(255, 255, 255, 0.3);
 
-            .tutorial__welcome--title {
+            .tutorial__welcome-title {
                 color: $tutorial-dark-text-color;
             }
 
-            .tutorial__welcome--description {
+            .tutorial__welcome-description {
                 color: $tutorial-dark-text-color;
             }
         }
 
-        &--actions {
+        &-actions {
             text-align: center;
             padding: $spacing-md $spacing-md $spacing-lg $spacing-md;
 
@@ -105,18 +105,18 @@ $tutorial-dark-text-color: $color-white;
         position: relative;
         background: $color-white;
 
-        &--popper {
+        &-popper {
             // Move over bg
             z-index: 72 !important;
         }
 
-        &--pointer {
+        &-pointer {
             &--dark {
                 border-bottom-color: $tutorial-dark-bg-color !important;
             }
         }
 
-        &--lightbox {
+        &-lightbox {
             position: fixed;
             z-index: 70;
             pointer-events: none;
@@ -138,18 +138,18 @@ $tutorial-dark-text-color: $color-white;
             }
         }
 
-        &--close {
+        &-close {
             position: absolute;
             top: $spacing-lg;
             right: $spacing-lg;
             cursor: pointer;
         }
 
-        &--content {
+        &-content {
             padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
         }
 
-        &--title {
+        &-title {
             font-size: 20px;
             font-weight: 700;
             color: $color-neutral-20;
@@ -157,26 +157,26 @@ $tutorial-dark-text-color: $color-white;
             margin-right: 30px;
         }
 
-        &--header {
+        &-header {
             margin-bottom: $spacing-md;
 
             // Offset for close button
             margin-right: 30px;
 
             // Remove title close button offset if header is present
-            & + .tutorial__modal--title {
+            & + .tutorial__modal-title {
                 margin-right: 0;
             }
         }
 
-        &--description {
+        &-description {
             font-size: 15px;
             font-weight: 400;
             font-style: normal;
             color: $color-neutral-10;
         }
 
-        &--footer {
+        &-footer {
             margin-top: $spacing-md;
             padding: $spacing-md $spacing-lg;
             border-top: 1px solid $color-neutral-90;
@@ -185,36 +185,36 @@ $tutorial-dark-text-color: $color-white;
         &--dark {
             background: $tutorial-dark-bg-color;
 
-            .tutorial__modal--close {
+            .tutorial__modal-close {
                 color: $tutorial-dark-text-color;
             }
 
-            .tutorial__modal--title {
+            .tutorial__modal-title {
                 color: $tutorial-dark-text-color;
             }
 
-            .tutorial__modal--description {
+            .tutorial__modal-description {
                 color: $tutorial-dark-text-color;
             }
 
-            .tutorial__modal--footer {
+            .tutorial__modal-footer {
                 border-top-color: darken($tutorial-dark-bg-color, 20%);
             }
         }
 
-        &--actions {
+        &-actions {
             & > * {
                 margin-left: $spacing-sm;
             }
         }
 
-        &--progress {
-            ul.tutorial__modal--steps {
+        &-progress {
+            ul.tutorial__modal-steps {
                 padding: 0;
                 margin: 0;
                 list-style: none;
 
-                li.tutorial__modal--step {
+                li.tutorial__modal-step {
                     display: inline-block;
                     margin-right: $spacing-sm;
                     margin-left: -2px;
