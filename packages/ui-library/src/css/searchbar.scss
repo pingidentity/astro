@@ -34,9 +34,8 @@ $searchbar-input-height: 38px;
     }
 
     &__left-control {
-        flex-grow: 1;
-
         max-width: $searchbar-width;
+        flex-basis: $searchbar-width;
     }
 
     &__center-control {
@@ -47,6 +46,7 @@ $searchbar-input-height: 38px;
     &__right-control {
         margin-left: $spacing-md;
         text-align: right;
+        flex-grow: 1;
 
         :last-child,
         .button:last-child {
