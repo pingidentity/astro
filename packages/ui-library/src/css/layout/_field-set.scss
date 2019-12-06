@@ -5,8 +5,6 @@
     height: auto;
     line-height: 1em;
     background-color: transparent;
-    display: inline-flex;
-    flex-direction: column;
     padding: $spacing-md;
     @include font-pn-regular;
     @include break-word;

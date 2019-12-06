@@ -1,0 +1,91 @@
+pipeline {
+  agent {
+    label 'ui-library-cdn-deploy'
+  }
+  stages {
+
+    stage('version') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder') {
+            sh "npm install"
+            script {
+              env.VERSION_V = sh(returnStdout: true, script: "npm version minor --no-git-tag-version");
+              env.VERSION = env.VERSION_V.replaceAll("v","").trim();
+              env.FEATURE_NAME = params.UI ?: params.BUILD_BRANCH
+              env.SNAPSHOT_VERSION = "${env.VERSION}-${env.FEATURE_NAME}-BETA"
+            }
+            echo """
+              SNAPSHOT version: ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER}
+            """
+          }
+        }
+      }
+    }
+
+
+    stage('npm-publish') {
+      steps {
+          dir("${env.WORKSPACE}/packages/ui-library") {
+           container('node-builder') {
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              echo "publishing UI Library: ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER} "
+              sh """
+                npm run package-library
+
+                npm run build-css
+                mkdir cdn/${env.SNAPSHOT_VERSION}
+                mv cdn/css cdn/${env.SNAPSHOT_VERSION}
+
+                cp -rf src/images cdn/${env.SNAPSHOT_VERSION}
+                cp -rf src/fonts cdn/${env.SNAPSHOT_VERSION}
+
+                npm version ${env.SNAPSHOT_VERSION}.${env.BUILD_NUMBER} --no-git-tag-version
+                npm publish --tag feature
+              """
+            }
+          }
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "packages/ui-library/cdn/**", fingerprint: true
+        }
+      }
+    }
+
+    stage('cdn deploy') {
+      steps {
+        dir("${env.WORKSPACE}/packages/ui-library") {
+          container('node-builder') {
+            withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+              }
+            }
+            withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+              }
+            }
+            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  post {
+    unsuccessful {
+       slackSend channel: '#ux-deployments', message: "@here :tears: UI Library build-job:  ${BUILD_URL} failed!", color: "#a31300"
+    }
+
+    cleanup {
+        cleanWs()
+    }
+  }
+}
+
