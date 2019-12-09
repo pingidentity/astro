@@ -9,9 +9,9 @@ pipeline {
           container('node-builder') {
             echo "Building SNAPSHOT"
             sh "yarn install --ignore-engines"
+            sh "yarn version --minor --no-git-tag-version"
             script {
-              env.VERSION_V = sh(returnStdout: true, script: "yarn version --minor --no-git-tag-version");
-              env.VERSION = env.VERSION_V.replaceAll("v","").trim();
+              env.VERSION = sh(returnStdout: true, script: "echo $(node -p -e "require('./package.json').version")");
               env.SNAPSHOT_VERSION = "${env.VERSION}-SNAPSHOT"
             }
             echo """
