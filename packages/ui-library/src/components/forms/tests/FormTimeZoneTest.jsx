@@ -20,7 +20,7 @@ describe("FormTimeZone", function () {
         FormTimeZone = require("../FormTimeZone"),
         KeyboardUtils = require("../../../util/KeyboardUtils.js"),
         moment = require("moment-timezone"),
-        momentMetadata = require("../../../../node_modules/moment-timezone/data/meta/latest.json"),
+        momentMetadata = require("moment-timezone/data/meta/latest.json"),
         _ = require("underscore");
 
     var componentId = "timezone",

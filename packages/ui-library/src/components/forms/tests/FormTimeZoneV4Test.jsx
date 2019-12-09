@@ -6,7 +6,7 @@ import TestUtils from "../../../testutil/TestUtils";
 import FormTimeZone from "../FormTimeZone";
 import KeyboardUtils from "../../../util/KeyboardUtils.js";
 import moment from "moment-timezone";
-import momentMetadata from "../../../../node_modules/moment-timezone/data/meta/latest.json";
+import momentMetadata from "moment-timezone/data/meta/latest.json";
 import _ from "underscore";
 
 jest.mock("popper.js");

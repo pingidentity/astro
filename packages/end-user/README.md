@@ -5,7 +5,7 @@ This project provides static HTML and CSS to build end-user pages.
 You can install the module from Ping's Artifactory.
 
 ```
-npm i @pingux/end-user
+yarn add @pingux/end-user
 ```
 
 The module consists of a `package.json` file and `end-user.css` + assets at the root. The source `css` folder is also included.
@@ -43,9 +43,9 @@ localhost:4040/signingon.html
 
 1. `git fetch`, `git checkout master`, and `git pull` to make sure you've got the latest code.
 2. Update the version number in `package.json` (in the root folder)
-3. `npm run build` to produce the distributable code
+3. `yarn run build` to produce the distributable code
 4. `cd dist` (Publishing from the root folder won't work)
-5. `npm login` with your corp credentials
-6. `npm publish`
+5. `yarn login` with your corp credentials
+6. `yarn publish`
 
-One way to confirm your release was good is to look at the archive that is generated. You can do that by using `npm show @pingux/end-user dist.tarball` and then downloading from the URL that command shows you.
+One way to confirm your release was good is to look at the archive that is generated. You can do that by using `yarn info @pingux/end-user dist.tarball` and then downloading from the URL that command shows you.

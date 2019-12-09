@@ -12,7 +12,7 @@ To get rolling with PingUX, first clone down the repository, make sure Lerna is 
 
 ## Developing
 
-Each package's respective npm commands can be run out of their folder under `packages/`. Just cd into the package you want to work with and run the npm commands like normal.
+Each package's respective npm/yarn commands can be run out of their folder under `packages/`. Just cd into the package you want to work with and run the npm/yarn commands like normal.
 
 ## Testing
 
