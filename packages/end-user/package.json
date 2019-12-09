@@ -144,7 +144,7 @@
     "start": "webpack-dev-server --config webpack.dev.js",
     "lint": "eslint src/** && stylelint src/**/*.scss",
     "doc": "jsdoc -c ./jsdoc.json",
-    "dist": "gulp build-dist && npm run cdn && cp -R ./cdn/*/. ./dist/",
+    "dist": "gulp build-dist && yarn run cdn && cp -R ./cdn/*/. ./dist/",
     "prepublishOnly": "[[ \"$PWD\" =~ ./dist ]]",
     "jest": "jest",
     "test": "jest",

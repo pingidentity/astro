@@ -13,8 +13,8 @@ package-and-upload-for-hosting:
 	# PRIVATE_SSH_KEY_PATH, LIB_VERSION variables will be passed in from the command line, see Jenkinsfile.ui-library.build for example
 	set -eo;\
 
-	npm run doc;\
-	npm run pack;\
+	yarn run doc;\
+	yarn run pack;\
 	cp -rf src build;\
 	cp -rf build-doc build;\
 	rm -rf ${LIB_VERSION}.tar.gz;\
@@ -26,7 +26,7 @@ package-and-upload-for-hosting:
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf ${HOSTING_PROJECT_BASE}${LIB_VERSION}.tar.gz --strip 1 -C ${HOSTING_PROJECT_BASE}${LIB_VERSION};\
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f ${HOSTING_PROJECT_BASE}${LIB_VERSION}.tar.gz;\
 	scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE}versions.json ./;\
-	npm run append-version
+	yarn run append-version
 	scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE}versions-$(UUID).json;\
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv ${HOSTING_PROJECT_BASE}versions-$(UUID).json ${HOSTING_PROJECT_BASE}versions.json;\
 	rm -f ./versions.json;\
@@ -36,5 +36,5 @@ package-and-upload-for-hosting:
 package-and-upload-landing:
 	# PRIVATE_SSH_KEY_PATH variable will be passed in from the command line, see Jenkinsfile.ui-library.build for example
 	set -eo;\
-	npm run pack-landing;\
+	yarn run pack-landing;\
 	scp -r -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} build-landing/* $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE};\

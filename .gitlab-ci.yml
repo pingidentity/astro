@@ -22,7 +22,7 @@ test:
   tags:
     - platform-build-docker
   script:
-    - npm i lerna -g
+    - yarn global add lerna
     - lerna bootstrap
     - lerna run lint
     - lerna run coverage-ci

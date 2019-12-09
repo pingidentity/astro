@@ -11,7 +11,7 @@ COPY --from=docker.corp.pingidentity.com:5000/ping-base/oracle-java:8 /opt/java/
 ENV JAVA_HOME /opt/java
 ENV PATH $JAVA_HOME/bin:$PATH
 
-RUN npm config set registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/
+RUN yarn config set registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/
 
 # This is really just ripped from the backstopjs Docker image.
 # Eventually this should be a proper multi-stage build that pulls files
