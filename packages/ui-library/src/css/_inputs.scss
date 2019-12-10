@@ -469,7 +469,12 @@ label {
             text-transform: none;
 
             &.disabled {
-                opacity: $inactive-opacity;
+                .label-text {
+                    color: rgba(75, 99, 124, 0.5);
+                    .help-target {
+                        opacity: 1;
+                    }
+                }
             }
 
             .label-text {
