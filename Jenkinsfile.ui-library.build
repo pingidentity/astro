@@ -11,7 +11,7 @@ pipeline {
             sh "yarn install --ignore-engines"
             sh "yarn version --minor --no-git-tag-version"
             script {
-              env.VERSION = sh(returnStdout: true, script: "echo $(node -p -e \"require('./package.json').version\")");
+              env.VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('./package.json').version")/$).trim();
               env.SNAPSHOT_VERSION = "${env.VERSION}-SNAPSHOT"
             }
             echo """
