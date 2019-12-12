@@ -287,7 +287,9 @@ class OptionItem extends React.Component {
                         iconName={this.props.iconName}
                         className="select-option__icon"
                         type="leading"
-                    />{this.props.content}
+                    >
+                        {this.props.content}
+                    </Icon>
                 </div>
             )
             : <div>{this.props.content}</div>;
