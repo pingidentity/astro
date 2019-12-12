@@ -58,6 +58,8 @@ class PopperContainer extends React.Component {
         positionFixed: false,
     }
 
+    _popperAPI = null;
+
     _getComputedZIndex = node => {
         if (node && window.getComputedStyle) {
             let parentZIndex = "auto";
@@ -140,13 +142,21 @@ class PopperContainer extends React.Component {
         };
 
         if (reference) {
-            const popper = new Popper(
+            this.popperAPI = new Popper(
                 ReactDOM.findDOMNode(reference),
                 ReactDOM.findDOMNode(this.popper),
                 config
             );
 
-            window.requestAnimationFrame(popper.update);
+            window.requestAnimationFrame(this.popperAPI.update);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        // Run this on componentDidUpdate so that popper repositions itself in case new children
+        // have a different height than the last children - https://jira.pingidentity.com/browse/UIP-3005
+        if (this.popperAPI&& this.popperAPI.scheduleUpdate && prevProps.children !== this.props.children) {
+            this.popperAPI.scheduleUpdate();
         }
     }
 
