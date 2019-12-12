@@ -97,12 +97,6 @@
         }
     }
 
-    &__bottom-chart {
-        .recharts-surface {
-            transform: scaleY(-1);
-        }
-    }
-
     &__rocker {
         position: absolute;
         left: 50%;
