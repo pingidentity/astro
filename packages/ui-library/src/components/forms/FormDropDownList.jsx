@@ -551,7 +551,11 @@ class FormDropDownListStateless extends React.Component {
                     ? undefined
                     : (
                         <li data-id="add-prompt" className={addClassName} onClick={this._handleAddClick}>
-                            <span className="label">{this.props.labelAdd}</span>
+                            {
+                                this.props.labelAdd !== undefined ? (
+                                    <span className="label">{this.props.labelAdd}</span>
+                                ) : null
+                            }
                             <span>{this.props.searchString}</span>
                         </li>
                     );

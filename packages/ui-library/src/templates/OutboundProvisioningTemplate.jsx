@@ -11,6 +11,8 @@ import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
 import FormCheckBox from "ui-library/lib/components/forms/FormCheckbox";
 import FormTextArea from "ui-library/lib/components/forms/FormTextArea";
 import FormTextField from "ui-library/lib/components/forms/FormTextField";
+import HelpHint, { Types, showOptions } from "ui-library/lib/components/tooltips/HelpHint";
+import InlineMessage from "ui-library/lib/components/general/InlineMessage";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
 import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
@@ -21,7 +23,10 @@ import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard/";
 import Padding, { sizes as paddingSizes } from "ui-library/lib/components/layout/Padding";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import PageSection from "ui-library/lib/components/layout/PageSection";
+import { omit } from "underscore";
+import RowBuilder from "ui-library/lib/components/rows/RowBuilder";
 import SearchBar from "ui-library/lib/components/forms/FormSearchBar";
+import Spacing from "ui-library/lib/components/layout/Spacing";
 import StatusIndicator from "ui-library/lib/components/general/StatusIndicator";
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 import TileSelector, { TileButton, tileButtonTypes } from "ui-library/lib/components/buttons/TileSelector";
@@ -44,8 +49,16 @@ import SocialIcon from "@pingux/end-user/components/SocialIcon/SocialIcon";
 const initialState = {
     attributes: [],
     description: "",
-    name: ""
+    name: "",
+    dropDownOptions: [
+        { label: "phone number", value: "1" },
+        { label: "email", value: "2" },
+        { label: "username", value: "3" },
+        { label: "given name", value: "4" },
+    ],
+    selectedValue: "",
 };
+
 
 const possibleProviders = {
     MARKETO: {
@@ -66,9 +79,151 @@ const possibleProviders = {
     }
 };
 
+
+const AttributesFirstRow = (
+    [<Row key="first">
+        <FormTextField
+            width={InputWidths.MD}
+            value="Username"
+        />
+        <Separator>=</Separator>
+        <FormTextField
+            width={InputWidths.MD}
+            value="username"
+            required
+        />
+    </Row>]
+);
+
+const AttributesSecondRow = (
+    [<Row key="second">
+        <FormTextField
+            width={InputWidths.MD}
+            value="First Name"
+        />
+        <Separator>=</Separator>
+        <FormTextField
+            width={InputWidths.MD}
+            value="given name"
+            required
+        />
+    </Row>]
+);
+
+const AttributesThirdRow = (
+    [<Row key="third">
+        <FormTextField
+            width={InputWidths.MD}
+            value="Last Name"
+        />
+        <Separator>=</Separator>
+        <FormTextField
+            width={InputWidths.MD}
+            value="family name"
+            required
+        />
+    </Row>]
+);
+
+const AttributesFourthRow = (
+    [<Row key="fourth">
+        <FormTextField
+            width={InputWidths.MD}
+            value="Alias"
+        />
+        <Separator>=</Separator>
+        <FormTextField
+            width={InputWidths.MD}
+            value="username"
+            required
+        />
+    </Row>]
+);
+
+const AttributesFifthRow = (
+    [<Row key="fifth">
+        <FormTextField
+            width={InputWidths.MD}
+            value="Email"
+        />
+        <Separator>=</Separator>
+        <FormTextField
+            width={InputWidths.MD}
+            value="email"
+            required
+        />
+    </Row>]
+);
+
+class AttributesSixthRow extends Component {
+    state = {
+        showHelpHint: true,
+        dropDownSelectedValue: {},
+    };
+
+    showHelpHint = () => this.setState((prevState) => { console.log(prevState);
+        return { showHelpHint: !prevState.showHelpHint }; });
+
+    _handleDropDownAdd = (optionLabel) => {
+        const newOption = { label: optionLabel, value: optionLabel };
+        const newOptions = this.props.dropDownOptions.concat([newOption]);
+
+        this.setState({
+            dropDownOptions: newOptions,
+            dropDownSelectedValue: newOption
+        });
+        console.log(this.props.dropDownOptions);
+    };
+
+    handleDropDownValueChange = selectedOption => {
+        this.setState({
+            dropDownSelectedValue: { selectedOption }
+        });
+    };
+        
+    render () {
+        const { dropDownOptions } = this.props;
+
+        return (
+            [<Row key="sixth">
+                <FormTextField
+                    width={InputWidths.MD}
+                    value="Email Encoding Key"
+                />
+                <Separator>=</Separator>
+                <HelpHint
+                    data-id="helphint-button"
+                    hintText= { <div><Spacing top={Spacing.sizes.XS}/>
+                        <InlineMessage noMargin bordered={false}>
+                        To add a new literal value, add quotation marks around the value (e.g., "phone number")
+                        </InlineMessage>
+                        <Spacing bottom={Spacing.sizes.XS}/></div>}
+                    type={Types.LIGHT}
+                    // showOption={showHelpHint ? showOptions.ONCLICK : null}
+                    //showOption={showOptions.ONCLICK}
+                >
+                    <FormDropDownList
+                        required
+                        options={dropDownOptions}
+                        canAdd={true}
+                        onAdd={this._handleDropDownAdd}
+                        labelPrompt="Type to search or add"
+                        selectedOption={this.state.dropDownSelectedValue.selectedOption}
+                        onValueChange={this.handleDropDownValueChange}
+                        width={InputWidths.MD}
+                        onToggle={this.showHelpHint}
+                    />
+                </HelpHint>
+            </Row>]
+        );
+    }
+}
+
 const ProfileEdit = ({
     setStepState,
-    activeProvider,
+    name,
+    description,
+    logo,
 }) => {
     return (
         <PageSection>
@@ -76,7 +231,7 @@ const ProfileEdit = ({
                 <FormTextField
                     labelText="Name"
                     onValueChange={setStepState("name")}
-                    value={activeProvider.name}
+                    value={name}
                     required={true}
                 />
             </InputRow>
@@ -84,7 +239,7 @@ const ProfileEdit = ({
                 <FormTextArea
                     labelText="Description"
                     onValueChange={setStepState("description")}
-                    value={activeProvider.description}
+                    value={description}
                     width={InputWidths.XX}
                 />
             </InputRow>
@@ -95,7 +250,7 @@ const ProfileEdit = ({
                     labelRemove="Remove"
                     labelSelect="Choose a File"
                     showThumbnail
-                    thumbnailSrc={activeProvider.logo || ""}
+                    thumbnailSrc={logo || ""}
                 />
             </InputRow>
         </PageSection>
@@ -107,21 +262,51 @@ const IDPEdit = (props) => {
         <PageSection>
             <InputRow>
                 <FormTextField
-                    labelText="Subdomain"
-                    onValueChange={props.setStepState("appId")}
-                    value={props.activeProvider.appId || ""}
+                    labelText={`${props.activeProvider.label} Domain`}
+                    placeholder="myCompanyName.my.salesforce.com"
+                    onValueChange={props.setStepState("domain")}
+                    value={props.activeProvider.domain || ""}
                     width={InputWidths.LG}
+                    required
                 />
             </InputRow>
             <InputRow>
-                <FormCheckBox
-                    checked={props.activeProvider.freeze}
-                    inline
-                    label= {"Freeze user accounts on deprovisioning"}
-                    selected = {props.activeProvider.freeze}
-                    onValueChange= {props.setStepState("freeze")}
+                <FormTextField
+                    labelText={"Client ID"}
+                    onValueChange={props.setStepState("clientID")}
+                    value={props.activeProvider.clientID || ""}
+                    width={InputWidths.LG}
+                    required
                 />
             </InputRow>
+            <InputRow>
+                <FormTextField
+                    labelText={"Client Secret"}
+                    onValueChange={props.setStepState("clientSecret")}
+                    value={props.activeProvider.clientSecret || ""}
+                    width={InputWidths.LG}
+                    required
+                />
+            </InputRow>
+            <InputRow>
+                <FormTextField
+                    labelText={"Oauth Access Token"}
+                    onValueChange={props.setStepState("OAT")}
+                    value={props.activeProvider.OAT || ""}
+                    width={InputWidths.LG}
+                    required
+                />
+            </InputRow>
+            <InputRow>
+                <FormTextField
+                    labelText={"Oauth Refresh Token"}
+                    onValueChange={props.setStepState("ORT")}
+                    value={props.activeProvider.ORT || ""}
+                    width={InputWidths.LG}
+                    required
+                />
+            </InputRow>
+            <Button type={buttonTypes.PRIMARY} label="Test Connection"/>
         </PageSection>
     );
 };
@@ -131,40 +316,27 @@ const AuthorizationEdit = (props) => {
     return (
         <PageSection>
             <InputRow>
-                <FormRadioGroup
-                    groupName="privacy-type"
-                    selected={props.activeProvider.privacyType}
-                    onValueChange={props.setStepState("privacyType")}
-                    items={[
-                        { id: "1", name: "Private" },
-                        { id: "2", name: "Public" },
+                <FormDropDownList
+                    label="Deprovisioning Action"
+                    required
+                    options={[
+                        { label: "Disable", value: "Disable" },
+                        { label: "Freeze", value: "Freeze" },
                     ]}
-                    stacked={false}
+                    selectedOption={props.setStepState("deproAction")}
+                    width={InputWidths.MD}
                 />
             </InputRow>
             <InputRow>
-                <FormTextField
+                <FormDropDownList
+                    label="Permission Set Management"
                     required
-                    labelText="OAUTH CLIENT ID"
-                    onValueChange={props.setStepState("appId")}
-                    value={props.activeProvider.appId || ""}
-                />
-            </InputRow>
-            <InputRow>
-                <FormTextField
-                    required
-                    labelText="OAUTH CLIENT SECRET"
-                    maskValue
-                    onValueChange={props.setStepState("secret")}
-                    showReveal
-                    value={props.activeProvider.secret || ""}
-                />
-            </InputRow>
-            <InputRow>
-                <MessageButton
-                    data-id="demo-ellipsis-loader-button-primary"
-                    label="Authorize Configuration"
-                    type={buttonTypes.PRIMARY}
+                    options={[
+                        { label: "Merge with permission sets", value: "Merge with permission sets" },
+                        { label: "Overwrite permission sets", value: "Overwrite permission sets" },
+                    ]}
+                    selectedOption={props.setStepState("permissionMgmt")}
+                    width={InputWidths.MD}
                 />
             </InputRow>
         </PageSection>
@@ -172,124 +344,51 @@ const AuthorizationEdit = (props) => {
 };
 
 const AttributesEdit = (props) => {
+
     return (
         <div>
-            <PageSection
-                title={
-                    `Link ${props.activeProvider.label}'s attributes to your Pingone Identity attributes.`
-                }
-            >
-                <InputRow>
-                    <FormTextField
-                        width={InputWidths.SM}
-                        placeholder="Username"
-                        withArrow
-                    />
-                    <FormDropDownList
-                        width={InputWidths.MD}
-                        required
-                        label="PingOne User Attribute"
-                        placeholder="Select an attribute to link"
-                        selectedOption={{ label: "Attribute", value: "Attribute" }}
-                        options={[
-                            {
-                                label: "Attribute",
-                                value: "Attribute"
-                            }
-                        ]}
-                    />
-                </InputRow>
-            </PageSection>
-            <Padding
-                bottom={paddingSizes.XL}
-            />
             <PageSection
                 title="Optional Attributes"
             >
                 <InputRow>
-                    <Row key="first">
-                        <FormTextField
-                            width={InputWidths.SM}
-                            labelText=""
-                            value="FirstName"
-                        />
-                        <Separator>=</Separator>
-                        <FormDropDownList
-                            width={InputWidths.MD}
-                            label="PingOne User Attribute"
-                            placeholder="Select an attribute to link"
-                            selectedOption={{ label: "Attribute", value: "Attribute" }}
-                            options={[
+                    <InputRow>
+                        <RowBuilder
+                            hasLineBetween={false}
+                            onAdd={props.addRow("first")}
+                            rows={[
                                 {
-                                    label: "Attribute",
-                                    value: "Attribute"
-                                }
+                                    id: "first",
+                                    content: AttributesFirstRow,
+                                    removable: false
+                                },
+                                {
+                                    id: "second",
+                                    content: AttributesSecondRow,
+                                    removable: false
+                                },
+                                {
+                                    id: "third",
+                                    content: AttributesThirdRow,
+                                    removable: false
+                                },
+                                {
+                                    id: "fourth",
+                                    content: AttributesFourthRow,
+                                    removable: false
+                                },
+                                {
+                                    id: "fifth",
+                                    content: AttributesFifthRow,
+                                    removable: false
+                                },
+                                {
+                                    id: "sixth",
+                                    content: <AttributesSixthRow setStepState={props.activeProvider.setStepState} dropDownOptions={props.activeProvider.dropDownOptions} handleDropDownValueChange={props.handleDropDownValueChange} dropDownSelectedValue={props.activeProvider.dropDownSelectedValue} />,
+                                    removable: false
+                                },
                             ]}
                         />
-                    </Row>
-                </InputRow>
-                <InputRow>
-                    <Row key="second">
-                        <FormTextField
-                            width={InputWidths.SM}
-                            labelText=""
-                            value="LastName"
-                        />
-                        <Separator>=</Separator>
-                        <FormDropDownList
-                            width={InputWidths.MD}
-                            placeholder="Select an attribute to link"
-                            selectedOption={{ label: "Attribute", value: "Attribute" }}
-                            options={[
-                                {
-                                    label: "Attribute",
-                                    value: "Attribute"
-                                }
-                            ]}
-                        />
-                    </Row>
-                </InputRow>
-                <InputRow>
-                    <Row key="third">
-                        <FormTextField
-                            width={InputWidths.SM}
-                            labelText=""
-                            value="Title"
-                        />
-                        <Separator>=</Separator>
-                        <FormDropDownList
-                            width={InputWidths.MD}
-                            placeholder="Select an attribute to link"
-                            selectedOption={{ label: "Attribute", value: "Attribute" }}
-                            options={[
-                                {
-                                    label: "Attribute",
-                                    value: "Attribute"
-                                }
-                            ]}
-                        />
-                    </Row>
-                </InputRow>
-                <InputRow>
-                    <Row key="fourth">
-                        <FormTextField
-                            width={InputWidths.SM}
-                            labelText=""
-                            value="Phone"
-                        />
-                        <Separator>=</Separator>
-                        <FormDropDownList
-                            width={InputWidths.MD}
-                            placeholder="Select an attribute to link"
-                            selectedOption={{ label: "Attribute", value: "Attribute" }}
-                            options={[
-                                {
-                                    label: "Attribute",
-                                    value: "Attribute"
-                                }
-                            ]}
-                        />
-                    </Row>
+                    </InputRow>
                 </InputRow>
             </PageSection>
         </div>
@@ -426,7 +525,7 @@ class WizardView extends Component {
     }))
 
     render() {
-        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider } = this.props;
+        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider, addRow, createRows, firstRowIds, handleDropDownValueChange } = this.props;
         const { wizardStep } = this.state;
         return (
             <PageWizard
@@ -534,7 +633,7 @@ class WizardView extends Component {
                                 >
                                     {activeProvider.logo}
                                 </Padding>
-                            Authorization Configuration
+                                Configure Identity Store
                             </FlexRow>
                         }
                         description={
@@ -542,9 +641,10 @@ class WizardView extends Component {
                         }
                         required
                         menuDescription={
-                            `Configure provisioning identity store between ${activeProvider.label} and PingOne.`
+                            `Specify additional configuration options for your 
+                            ${activeProvider.label} Communities identity store`
                         }
-                        menuTitle="Authorization Configuration"
+                        menuTitle="Configure Identity Store"
                         completed={wizardStep > 2}
                         key="request"
                     >
@@ -577,7 +677,7 @@ class WizardView extends Component {
                         completed={wizardStep > 3}
                         key="linking"
                     >
-                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState} />
+                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState} firstRowIds={firstRowIds} addRow={addRow} createRows={createRows} handleDropDownValueChange={handleDropDownValueChange}/>
                     </Step>,
                     <Step
                         title={
@@ -629,6 +729,32 @@ export default class OutboundProvisioning extends Component {
             "population1"
         ],
         privacyType: "1",
+        firstRowIds: [uuidV4(), uuidV4()],
+        secondRowIds: [uuidV4(), uuidV4()],
+        thirdRowIds: [uuidV4()],
+        dropDownSelectedValue: { label: "phone number", value: "1" },
+    }
+
+    
+    addRow = key => () => {
+        const stateKey = `${key}RowIds`;
+        this.setState(state => ({
+            ...state,
+            [stateKey]: [...state[stateKey], uuidV4()],
+        }));
+    }
+
+    createRows = (content, ids) => {
+        const noLabels = content.map(({ props, ...template }) => ({
+            props: omit(props, ["label", "labelText"]),
+            ...template
+        }));
+
+        return ids.map((id, index) =>
+            index === 0
+                ? { id, content }
+                : { id, content: noLabels }
+        );
     }
 
 
@@ -972,9 +1098,14 @@ export default class OutboundProvisioning extends Component {
                         onSave={this.saveActiveProvider}
                         setStepState={this.setStepState}
                         openProviderWizard={this.openProviderWizard}
+                        addRow={this.addRow}
+                        createRows={this.createRows}
+                        firstRowIds={this.state.firstRowIds}
+                        handleDropDownValueChange={this.handleDropDownValueChange}
                     />
                     }
                 </div>
         );
     }
 }
+

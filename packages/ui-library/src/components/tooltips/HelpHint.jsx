@@ -5,6 +5,18 @@ var ReactTooltip = require("react-tooltip");
 var classnames = require("classnames");
 var _ = require("underscore");
 
+/**
+ * @enum {string}
+ * @alias HelpHint.showOptions
+ */
+const showOptions = {
+    /** hover */
+    ONHOVER: "onHover",
+    /** click */
+    ONCLICK: "onClick",
+    /** on load */
+    ONLOAD: "onLoad"
+};
 
 /**
  * @enum {string}
@@ -68,6 +80,11 @@ const Types = {
  *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
  * @param {HelpHint.Placements} [placement]
  *     How to place the help hint.
+ * @param {HelpHint.showOption} [showOption]
+ *     Way in which the help hint appears.
+ *     onLoad - helphint is visible on page load.
+ *     onHover - helphint is visible on hover.
+ *     onClick- helphint is visible when clicked
  * @param {HelpHint.Types} [type]
  *     Sets special styling for the help hint.
  * @param {bool} [unstyleTrigger=false]
@@ -76,6 +93,9 @@ const Types = {
  *  @example
  *     <HelpHint className="short-tooltip right" hintText="My first HelpHint!">SomeTextWithHelp</HelpHint>
  */
+
+
+
 
 class HelpHint extends React.Component {
 
@@ -90,6 +110,7 @@ class HelpHint extends React.Component {
         leftMargin: PropTypes.bool,
         link: PropTypes.string,
         placement: PropTypes.oneOf(Object.values(Placements)),
+        showOption: PropTypes.oneOf(Object.values(showOptions)),
         type: PropTypes.oneOf(Object.values(Types)),
         tooltipProps: PropTypes.object,
         unstyleTrigger: PropTypes.bool,
@@ -102,6 +123,7 @@ class HelpHint extends React.Component {
         className: "",
         leftMargin: false,
         unstyleTrigger: false,
+        showOption: showOptions.ONHOVER,
     };
 
     _handleClick = (e) => {
@@ -128,12 +150,18 @@ class HelpHint extends React.Component {
         return placement;
     };
 
+    _getShowOption = () => {
+        return this.props.showOption === showOptions.ONCLICK ? "click" : null;
+    }
+
+
     _getTypeClass = () => {
         return this.props.type ? `help-tooltip--${this.props.type}` : null;
     }
 
     componentDidMount() {
-        if (this.props.show || this.props.className.indexOf("show") > -1) {
+        if (this.props.show || this.props.showOptions === showOptions.ONLOAD ||
+            this.props.className.indexOf("show") > -1) {
             this.show();
         }
     }
@@ -215,6 +243,8 @@ class HelpHint extends React.Component {
                         effect="solid"
                         delayShow={this.props.delayShow}
                         delayHide={this.props.delayHide}
+                        disable={this.props.show === false}
+                        event={this._getShowOption()}
                         {...this.props.tooltipProps}>
                         {this.props.hintText}
                         {this.maybeRenderLink()}
@@ -226,6 +256,7 @@ class HelpHint extends React.Component {
 }
 
 module.exports = HelpHint;
+module.exports.showOptions = showOptions;
 module.exports.Placements = Placements;
 module.exports.Types = Types;
 module.exports.placements = Placements;
