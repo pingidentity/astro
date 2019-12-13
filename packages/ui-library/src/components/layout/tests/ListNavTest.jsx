@@ -38,7 +38,7 @@ describe("ListNav", function () {
     function getListNav (opts) {
         const defaults = {
             "data-id": componentId,
-            labels: mockData
+            labels: mockData,
         };
 
         return ReactTestUtils.renderIntoDocument(<ListNav {...defaults} {...opts} />);
@@ -56,6 +56,7 @@ describe("ListNav", function () {
         const myLabelText = "hello";
         const ericText = "eric";
         const component = getListNav({
+            listButton: "heyyyy",
             labels: [{ label: myLabelText }, { label: ericText }]
         });
 
@@ -68,19 +69,37 @@ describe("ListNav", function () {
     it("renders a label and id", function () {
         const myLabelText = "hello";
         const myID = "seven";
+        const secondLabel = "hey";
+        const secondId = "second";
+        const component = getListNav({
+            listButton: "heyyyy",
+            labels: [{ label: myLabelText, id: myID }, { label: secondLabel, id: secondId }]
+        });
+
+        const element = TestUtils.scryRenderedDOMNodesWithClass(component, "list-nav-item__link");
+
+        expect(element[0].textContent).toBe(myLabelText, myID);
+        expect(element[1].textContent).toBe(secondLabel, secondId);
+    });
+
+    it("does not render listnav if there is 1 label", function () {
+        const myLabelText = "hello";
+        const myID = "seven";
         const component = getListNav({
             labels: [{ label: myLabelText, id: myID }]
         });
 
         const element = TestUtils.findRenderedDOMNodeWithClass(component, "list-nav-item__link");
 
-        expect(element.textContent).toBe(myLabelText, myID);
+        expect(element).toBe(null);
+
     });
 
     it("calls the onSelect callback", function () {
         const callback = jest.fn();
         const component = getListNav({
-            onSelect: callback
+            onSelect: callback,
+            listButton: "heyyyy"
         });
 
         const tags = TestUtils.scryRenderedDOMNodesWithClass(component, "list-nav-item__link");

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import Utils from "../../util/Utils";
 
 /**
 * @class ListNav
@@ -49,6 +50,14 @@ import classnames from "classnames";
 
 export default class ListNav extends Component {
 
+    componentDidMount() {
+        if (!Utils.isProduction() && !this.props.listButton && this.props.labels.length <= 1) {
+            console.warn(
+                "** This component will not render if only one item is in the array and listButton is not defined."
+            );
+        }
+    }
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -75,33 +84,37 @@ export default class ListNav extends Component {
         "data-id": "list-nav",
     }
 
-    _renderList = (data) => {
-        return data.map(({ label, id }) => {
-            const classes = classnames("list-nav-item",{
-                "list-nav-item--selected": this.props.selectedLabel === id
-            });
-            const handleClick = (e) => {
-                this.props.onSelect(id, label, e);
-            };
+    _getRenderList = (data) => {
+        if (data.length > 1 || this.props.listButton ) {
+            return data.map(({ label, id }) => {
+                const classes = classnames("list-nav-item",{
+                    "list-nav-item--selected": this.props.selectedLabel === id
+                });
+                const handleClick = (e) => {
+                    this.props.onSelect(id, label, e);
+                };
 
-            return (
-                <li className={classes} key={id}>
-                    <a className="list-nav-item__link"
-                        data-id={`${this.props["data-id"]}_nav-link_${id}`}
-                        onClick={handleClick}
-                    >
-                        {label}
-                    </a>
-                </li>
-            );
-        });
+                return (
+                    <li className={classes} key={id}>
+                        <a className="list-nav-item__link"
+                            data-id={`${this.props["data-id"]}_nav-link_${id}`}
+                            onClick={handleClick}
+                        >
+                            {label}
+                        </a>
+                    </li>
+                );
+            });
+        }
     }
+
+    renderedList = this._getRenderList(this.props.labels)
 
     render() {
         return (
             <div data-id={this.props["data-id"]} className={classnames("list-nav", this.props.className)}>
                 <div className="list-nav__nav">
-                    {this._renderList(this.props.labels)}
+                    {this.renderedList}
                     {this.props.listButton}
                 </div>
                 <div className="list-nav__content">

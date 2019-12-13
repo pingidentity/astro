@@ -55,7 +55,7 @@ export default class ListNavDemo extends Component {
     state = {
         selectedLabel: mockLabel[0].id,
         selectedValue: OPTIONS[0],
-        selectedLocale: LOCALE[0]
+        selectedLocale: LOCALE[0],
     }
 
     _onSelect = (id) => {
@@ -92,6 +92,7 @@ export default class ListNavDemo extends Component {
                         buttonLabel="Add"
                         cancelText="Cancel"
                         buttonType="primary"
+                        closeOnConfirm={true}
                     >
                         <FormDropDownList
                             label="Language"
