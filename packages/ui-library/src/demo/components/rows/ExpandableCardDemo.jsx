@@ -24,6 +24,7 @@ export default class ExpandableCardDemo extends Component {
                     )}
                 >
                     <Text>This is content in the ExpandableCard.</Text>
+
                 </ExpandableCard>
                 <ExpandableCard
                     title="Second Expandable Card"

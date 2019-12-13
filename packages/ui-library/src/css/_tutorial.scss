@@ -1,130 +1,258 @@
+$tutorial-dark-bg-color: darken($color-neutral-10, 20%);
+$tutorial-dark-text-color: $color-white;
 
-//Unsure if the dock is pulling the css file. They have similarities but,
-// best for now to keep the css file.
-.introOverlay {
-    background: rgba($color-black, 0.6);
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    position: absolute;
-    z-index: $zindex__elevated;
-    text-align: center;
-    left: 0;
-    top: 0;
+.tutorial__modal-pointer {
+    z-index: 74px;
 
-    > svg {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
+    *[x-placement^='top'] & {
+        @include makePointer(13px, $color-white, down);
+        margin-top: -5px;
+        margin-left: 5px;
     }
-    div.modal {
-        display: inline-block;
-        padding: 20px 20px 77px;
-        margin-top: -100px;
-        margin-left: -200px;
+
+    *[x-placement^='bottom'] & {
+        @include makePointer(13px, $color-white, up);
+        margin-bottom: -5px;
+        margin-left: 5px;
+    }
+
+    *[x-placement^='right'] & {
+        @include makePointer(13px, $color-white, left);
+        margin-right: -5px;
+        margin-top: 5px;
+    }
+
+    *[x-placement^='left'] & {
+        @include makePointer(13px, $color-white, right);
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+}
+
+.tutorial {
+    &__bg {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        // Place one level below Popper
+        z-index: 71;
+    }
+
+    &__welcome {
+        border-radius: 4px;
+        z-index: 100;
+        width: 400px;
+        max-width: 500px;
+        background: $color-white;
+        position: fixed;
         top: 50%;
         left: 50%;
-        background-color: $color-black;
-        width: 400px;
-        opacity: 1;
-        color: $color-white;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 1px 1px 70000px rgba(0, 0, 0, 0.3);
 
-        border-radius: 5px;
+        &-content {
+            padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
+        }
 
-        .title {
-            font-size: 36px;
-            line-height: 1em;
-            margin: 0 0 25px;
-            @include font-pn-regular;
-        }
-        .description {
-            text-align: left;
-            line-height: 1.6em;
-            font-size: 18px;
-            @include font-pn-light;
-        }
-        .page {
-            font-weight: 100;
+        &-title {
             font-size: 20px;
-            padding: 30px 0;
-            color: transparentize($color-white, 0.5);
+            font-weight: 700;
+            color: $color-neutral-20;
+            margin-bottom: $spacing-md;
+            text-align: center;
         }
-        .controls {
-            position: absolute;
-            bottom: 0;
-            left: 5px;
-            right: 5px;
-            border-top: 1px solid transparentize($color-white, 0.75);
-            padding: 20px 0;
-            text-align: right;
 
+        &-description {
+            font-size: 15px;
+            font-weight: 400;
+            font-style: normal;
+            color: $color-neutral-10;
+            text-align: center;
         }
-        button[type=button] {
-            border: none;
-            font-size: 16px;
-            line-height: 1em;
-            padding: 10px 20px;
-            color: $color-white;
-            background-color: $color-active-blue;
-            font-weight: 100;
 
-            border-radius: 2px;
+        &--dark {
+            background: $tutorial-dark-bg-color;
+            box-shadow: 0 1px 1px 70000px rgba(255, 255, 255, 0.3);
 
-            &.prev,
-            &.dismiss {
-                color: $color-active-blue;
-                background-color: transparent;
-                font-weight: 500;
+            .tutorial__welcome-title {
+                color: $tutorial-dark-text-color;
             }
-            &.dismiss {
+
+            .tutorial__welcome-description {
+                color: $tutorial-dark-text-color;
+            }
+        }
+
+        &-actions {
+            text-align: center;
+            padding: $spacing-md $spacing-md $spacing-lg $spacing-md;
+
+            & > * {
+                margin-left: $spacing-sm;
+                margin-top: $spacing-sm;
+            }
+        }
+    }
+
+    &__modal {
+        border-radius: 4px;
+        z-index: 71;
+        width: 300px;
+        max-width: 400px;
+        position: relative;
+        background: $color-white;
+
+        &-popper {
+            // Move over bg
+            z-index: 72 !important;
+        }
+
+        &-pointer {
+            &--dark {
+                border-bottom-color: $tutorial-dark-bg-color !important;
+            }
+        }
+
+        &-lightbox {
+            position: fixed;
+            z-index: 70;
+            pointer-events: none;
+
+            &:before {
+                content: '';
+                box-shadow: 0 1px 1px 70000px rgba(0, 0, 0, 0.3);
                 position: absolute;
-                bottom: 10px;
-                left: 10px;
-                padding: 0;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
             }
-            &[disabled] {
-                &:hover {
-                    color: $color-white;
+
+            &--dark {
+                &:before {
+                    box-shadow: 0 1px 1px 70000px rgba(255, 255, 255, 0.3);
                 }
             }
         }
-    }
-    path {
-        stroke: $color-active-blue;
-        fill: none;
 
-        &.line {
-            stroke-width: 2px;
+        &-close {
+            position: absolute;
+            top: $spacing-lg;
+            right: $spacing-lg;
+            cursor: pointer;
         }
-        &.marker {
-            stroke-width: 0.04em;
+
+        &-content {
+            padding: $spacing-lg $spacing-lg $spacing-md $spacing-lg;
         }
-    }
-    > .spotlight {
-        background: $color-white;
-        border-radius: 15px;
-        position: absolute;
-        text-align: left;
-        overflow: hidden;
-    }
-}
 
-html body .introOverlay > .spotlight > * {
-    position: relative;
-    left: 0;
-    top: 0;
-    margin-bottom: 0;
-    margin-top: 0;
-}
+        &-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: $color-neutral-20;
+            margin-bottom: $spacing-md;
+            margin-right: 30px;
+        }
 
-.icons {
-    .inline-icon {
-        display: inline-block;
-        width: 35px;
-        text-align: center;
-        color: $color-walrus;
+        &-header {
+            margin-bottom: $spacing-md;
+
+            // Offset for close button
+            margin-right: 30px;
+
+            // Remove title close button offset if header is present
+            & + .tutorial__modal-title {
+                margin-right: 0;
+            }
+        }
+
+        &-description {
+            font-size: 15px;
+            font-weight: 400;
+            font-style: normal;
+            color: $color-neutral-10;
+        }
+
+        &-footer {
+            margin-top: $spacing-md;
+            padding: $spacing-md $spacing-lg;
+            border-top: 1px solid $color-neutral-90;
+        }
+
+        &--dark {
+            background: $tutorial-dark-bg-color;
+
+            .tutorial__modal-close {
+                color: $tutorial-dark-text-color;
+            }
+
+            .tutorial__modal-title {
+                color: $tutorial-dark-text-color;
+            }
+
+            .tutorial__modal-description {
+                color: $tutorial-dark-text-color;
+            }
+
+            .tutorial__modal-footer {
+                border-top-color: darken($tutorial-dark-bg-color, 20%);
+            }
+        }
+
+        &-actions {
+            & > * {
+                margin-left: $spacing-sm;
+            }
+        }
+
+        &-progress {
+            ul.tutorial__modal-steps {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+
+                li.tutorial__modal-step {
+                    display: inline-block;
+                    margin-right: $spacing-sm;
+                    margin-left: -2px;
+                    border: 1px solid transparent;
+                    padding: 1px;
+
+                    &:before {
+                        content: '';
+                        height: 8px;
+                        width: 8px;
+                        border-radius: 50%;
+                        background: $color-active-blue;
+                        display: block;
+                    }
+
+                    &--complete {
+                        &:before {
+                            background: $color-active-blue;
+                        }
+                    }
+
+                    &--active {
+                        border: 1px solid $color-active-blue;
+                        padding: 1px;
+                        border-radius: 50%;
+
+                        &:before {
+                            background: $color-active-blue;
+                        }
+                    }
+
+                    &--inactive {
+                        &:before {
+                            background: $color-neutral-40;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

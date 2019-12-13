@@ -142,8 +142,8 @@
         opacity: 0;
         position: absolute;
         width: 100%;
-        transition: all 0.2s;
-        max-height: 0;
+        transition: max-height 0.3s, visiblility 0.2s, opacity 0.2s;
+        max-height: 0%;
 
         &--expanded {
             visibility: unset;

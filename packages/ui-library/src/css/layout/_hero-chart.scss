@@ -82,8 +82,9 @@
     &__top-chart,
     &__bottom-chart {
         max-width: 850px;
-        display: inline-block;
+        margin: 0 auto;
     }
+
     &__top-chart {
         .recharts-tooltip-wrapper {
             margin-top: -5px;
@@ -93,12 +94,6 @@
     &__bottom-chart {
         .recharts-tooltip-wrapper {
             margin-top: 8px;
-        }
-    }
-
-    &__bottom-chart {
-        .recharts-surface {
-            transform: scaleY(-1);
         }
     }
 

@@ -101,6 +101,7 @@ const Text = ({
                 "text-component--inline": inline,
                 "text-component--center": align === alignments.CENTER,
                 "text-component--right": align === alignments.RIGHT,
+                "text-component--overflow-wrap": overflow === overflowTypes.WRAP
             }
         )}
         data-id={dataId}

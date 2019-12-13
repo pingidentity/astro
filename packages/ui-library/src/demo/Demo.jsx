@@ -302,7 +302,13 @@ class DemoApp extends React.Component {
         const { search } = this.props.location;
         return (
             <MarketSelector
-                options={versions.map(({ label, value }) => ({ label, id: value }))}
+                options={versions.map(
+                    ({ label, value }, index) =>
+                        ({
+                            label: index === 0 ? `${label}-SNAPSHOT` : label,
+                            id: value
+                        })
+                )}
                 market={window.location.pathname.replace(/\//g, "")}
                 onMarketChange={(value) => {window.location.href = `https://uilibrary.ping-eng.com/${value}/#/${search}`;}} //hard coding for local development
             />

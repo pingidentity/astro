@@ -8,9 +8,9 @@ pipeline {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Running end-user linting and tests"
-            sh "npm install"
-            //sh "npm run lint"
-            //sh "npm run coverage"
+            sh "yarn install --ignore-engines"
+            //sh "yarn run lint"
+            //sh "yarn run coverage"
           }
         }
       }
@@ -21,7 +21,7 @@ pipeline {
           container('node-builder') {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             script {
-              env.RELEASE_VERSION_V = sh(returnStdout: true, script: "npm version ${params.VERSION_TYPE} --no-git-tag-version");
+              env.RELEASE_VERSION_V = sh(returnStdout: true, script: "yarn version --${params.VERSION_TYPE} --no-git-tag-version");
               env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","").trim()
               env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
@@ -47,14 +47,14 @@ pipeline {
         }
       }
     }
-    stage('npm-publish') {
+    stage('yarn-publish') {
       steps {
         dir("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Building & publishing"
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
-              sh "npm run dist"
-              sh "cd dist && npm publish"
+              sh "yarn run dist"
+              sh "cd dist && yarn publish"
             }
           }
         }

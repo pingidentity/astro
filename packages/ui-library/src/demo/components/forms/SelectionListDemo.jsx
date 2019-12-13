@@ -14,7 +14,7 @@ var testImage = <img src="./favicon.png" />;
 var SINGLE_SELECT_ITEMS = [
         { name: "Hockey", id: 1 },
         { name: "Soccer", id: 2,
-            helpHintText: "Selection List items may have Help Hints" },
+            helpHintText: "Selection List items may have Help Hints", disabled: true },
         { name: "Basketball", id: 3,
             helpHintText: "Help Hint with dynamic icon",
             helpTarget: testIcon },

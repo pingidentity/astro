@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
 const routes = require('./src/demo/routes.js');
 
@@ -35,6 +36,7 @@ module.exports = {
                 include: [
                     `${__dirname}/src/demo/css`,
                     `${__dirname}/node_modules/highlight.js/`,
+                    path.resolve('../../node_modules/highlight.js/'),
                 ],
                 loader: extractDemoCSS.extract(['css-loader', 'postcss-loader', 'sass-loader']),
             },

@@ -16,8 +16,8 @@
 
 @import './global-vars';
 @import './fonts';
-@import './icons/_variables';
-@import './icons/_style';
+@import './icons/variables';
+@import './icons/style';
 @import './text';
 @import './spacing';
 @import './mixins';
@@ -26,30 +26,6 @@
 @import './common/buttons';
 @import './common/inputs';
 @import './common/icon-pairs';
-
-@import './components/button';
-@import './components/button-set';
-@import './components/card';
-@import './components/checkbox';
-@import './components/container';
-@import './components/dropdown';
-@import './components/feedback';
-@import './components/file-input';
-@import './components/float-label';
-@import './components/form';
-@import './components/icon-feedback';
-@import './components/modal-menu';
-@import './components/org-logo';
-@import './components/page';
-@import './components/requirements';
-@import './components/serialized-data';
-@import './components/spinner';
-@import './components/step-link';
-@import './components/text-block';
-@import './components/text-input';
-@import './components/tooltip';
-@import './components/two-sided';
-@import './components/profile-image';
 
 @import './shared/modal';
 @import './shared/tabs';
@@ -68,6 +44,34 @@
 @import './shared/device-table';
 @import './shared/device-icon';
 @import './shared/tile-selector';
+
+@import './components/account-table';
+@import './components/button';
+@import './components/button-set';
+@import './components/card';
+@import './components/checkbox';
+@import './components/container';
+@import './components/dropdown';
+@import './components/feedback';
+@import './components/file-input';
+@import './components/float-label';
+@import './components/form';
+@import './components/icon-feedback';
+@import './components/modal-menu';
+@import './components/org-logo';
+@import './components/page';
+@import './components/profile-image';
+@import './components/requirements';
+@import './components/serialized-data';
+@import './components/spinner';
+@import './components/step-link';
+@import './components/text-block';
+@import './components/text-input';
+@import './components/tooltip';
+@import './components/two-sided';
+@import './components/profile-image';
+@import './components/column';
+@import './components/phone-input';
 
 // spacing components are after so they take precedence\
 

@@ -16,12 +16,16 @@ import TextInput from '../../components/TextInput';
 import TextBlock from '../../components/TextBlock';
 import Toggle from '../../components/shared/Toggle';
 import DeviceTable from '../../components/shared/DeviceTable';
-
+import AccountTable from '../../components/AccountTable';
+import SocialLogos from '../../util/SocialLogo';
+import ImageInput from '../../components/ImageInput';
+import FloatLabelDropdownCustom from '../../components/FloatLabelDropdownCustom';
+import Columns, { Column, alignments as colAlignments, widths as colWidths } from '../../components/Columns';
 
 class SelfService extends React.Component {
     state = {
         selectedIndex: 0,
-        openModals: []
+        openModals: [],
     };
 
     _handleSectionChange = (index) => {
@@ -51,108 +55,226 @@ class SelfService extends React.Component {
             { this.state.selectedIndex === 0 ? <MyProfilePage /> : null }
             { this.state.selectedIndex === 1 ? <AuthenticationPage /> : null }
             { this.state.selectedIndex === 2 ? <ChangePasswordPage /> : null }
+            { this.state.selectedIndex === 3 ? <LinkedAccountsPage /> : null }
         </>
     );
 };
 
-const MyProfilePage = () => (
-    <Container>
-        <Padding bottom={paddingSizes.LG}>
-            <FlexRow
-                flexDirection={flexDirectionOptions.ROW}
-                alignment={alignments.TOP}
-            >
-                <FlexRow
-                    spacing={spacingOptions.LG}
-                    alignment={alignments.CENTER}
-                >
-                    <img
-                        src="https://placedog.net/150/150"
-                        alt="Profile"
-                        className="profile-image"
-                    />
+class MyProfilePage extends React.Component {
+    state = {
+        isEditToggled: false,
+    };
+
+    _toggleEdit = () => {
+        this.setState({ isEditToggled: !this.state.isEditToggled });
+    }
+
+    render() {
+        const {
+            isEditToggled
+        } = this.state;
+
+        return (
+            <Container>
+                {isEditToggled ? (
                     <div>
-                        <FormLabel className="mobileCenter">kaddleman</FormLabel>
-                        <h1 className="heading-text centered-text">Dr. Katherine Anne Addleman</h1>
-                    </div>
-                </FlexRow>
-                <div style={{ textAlign: 'right', flexGrow: 1 }} className="mobileCenter">
-                    <Button inline className="button--inline-alt">Edit Profile</Button>
-                </div>
-            </FlexRow>
-        </Padding>
+                        <PageSection title="Personal Settings">
+                            <FlexRow
+                                spacing={spacingOptions.MD}
+                                flexDirection={flexDirectionOptions.COLUMN}
+                            >
+                                <FlexRow
+                                    spacing={spacingOptions.MD}
+                                    alignment={alignments.CENTER}
+                                    flexDirection={flexDirectionOptions.ROW}
+                                    justify={justifyOptions.SPACEBETWEEN}
+                                >
+                                    <Column width={colWidths.TWO} alignment={colAlignments.CENTER}>
+                                        <ImageInput
+                                            value="https://images-na.ssl-images-amazon.com/images/I/61qxTCzXx0L._SX425_.jpg"
+                                        />
+                                    </Column>
+                                    <Column width={colWidths.FOUR}>
+                                        <FloatLabelTextInput label="First Name"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.TWO}>
+                                        <FloatLabelTextInput label="Middle Name"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.FOUR}>
+                                        <FloatLabelTextInput label="Last Name"></FloatLabelTextInput>
+                                    </Column>
+                                </FlexRow>
+                            </FlexRow>
+                        </PageSection>
 
-        <PageSection title="Contact">
-            <FlexRow
-                spacing={spacingOptions.LG}
-                flexDirection={flexDirectionOptions.COLUMN}
-            >
-                <FlexRow
-                    spacing={spacingOptions.MD}
-                    alignment={alignments.CENTER}
-                    flexDirection={flexDirectionOptions.ROW}
-                    justify={justifyOptions.SPACEBETWEEN}
-                >
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                        <FormLabel>Phone</FormLabel>
-                        <TextBlock className="text-block--full-width text-block--left">(123) 456-7890</TextBlock>
-                    </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                        <FormLabel>Email</FormLabel>
-                        <TextBlock className="text-block--full-width text-block--left">katie.addleman@compra</TextBlock>
-                    </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
-                </FlexRow>
-            </FlexRow>
-        </PageSection>
+                        <PageSection title="Contact">
+                            <FlexRow
+                                spacing={spacingOptions.MD}
+                                flexDirection={flexDirectionOptions.COLUMN}
+                            >
+                                <Columns>
+                                    <Column width={colWidths.FOUR}>
+                                        <FloatLabelTextInput label="Primary Number"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.FOUR}>
+                                        <FloatLabelTextInput label="Mobile Number"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.FOUR}/>
+                                </Columns>
+                                <Columns>
+                                    <Column width={colWidths.FOUR}>
+                                        <FloatLabelTextInput label="Email Address"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.FOUR}/>
+                                    <Column width={colWidths.FOUR}/>
+                                </Columns>
+                            </FlexRow>
+                        </PageSection>
 
-        <PageSection title="Location">
-            <FlexRow
-                spacing={spacingOptions.LG}
-                flexDirection={flexDirectionOptions.COLUMN}
-            >
-                <FlexRow
-                    spacing={spacingOptions.MD}
-                    alignment={alignments.CENTER}
-                    flexDirection={flexDirectionOptions.ROW}
-                    justify={justifyOptions.SPACEBETWEEN}
-                >
-                    <div style={{ flexGrow: 1, flexBasis: 0}}>
-                        <FormLabel>Street Address</FormLabel>
-                        <TextBlock className="text-block--full-width text-block--left">1440 S Main Street</TextBlock>
+                        <PageSection title="Location">
+                            <FlexRow
+                                spacing={spacingOptions.MD}
+                                flexDirection={flexDirectionOptions.COLUMN}
+                            >
+                                <Columns>
+                                    <Column width={colWidths.EIGHT}>
+                                        <FloatLabelTextInput label="Street Address"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.FOUR}>
+                                        <FloatLabelTextInput label="Apt. / Suite"></FloatLabelTextInput>
+                                    </Column>
+                                </Columns>
+                                <Columns>
+                                    <Column width={colWidths.TWO}>
+                                        <FloatLabelDropdownCustom
+                                            id="countryDropdown"
+                                            label="Country"
+                                            options={["Canada", "United States"]}
+                                            value="United States"
+                                        />
+                                    </Column>
+                                    <Column width={colWidths.SIX}>
+                                        <FloatLabelTextInput label="City"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.TWO}>
+                                        <FloatLabelDropdownCustom
+                                            id="stateDropdown"
+                                            label="State"
+                                            options={["NE", "IA"]}
+                                            value="NE"
+                                        />
+                                    </Column>
+                                    <Column width={colWidths.TWO}>
+                                        <FloatLabelTextInput label="Zip Code"></FloatLabelTextInput>
+                                    </Column>
+                                </Columns>
+                            </FlexRow>
+                        </PageSection>
+
+                        <PageSection title="Company">
+                            <FlexRow
+                                spacing={spacingOptions.MD}
+                                flexDirection={flexDirectionOptions.COLUMN}
+                            >
+                                <Columns>
+                                    <Column width={colWidths.EIGHT}>
+                                        <FloatLabelTextInput label="Job Title"></FloatLabelTextInput>
+                                    </Column>
+                                    <Column width={colWidths.FOUR}/>
+                                </Columns>
+                            </FlexRow>
+                        </PageSection>
+
+                        <FlexRow>
+                            <Column width={colWidths.TWELVE} alignment={colAlignments.RIGHT}>
+                                <Button inline className="button--inline-alt" onClick={this._toggleEdit}>View Profile</Button>
+                            </Column>
+                        </FlexRow>
                     </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0}}>
-                        <FormLabel>City</FormLabel>
-                        <TextBlock className="text-block--full-width text-block--left">San Diego</TextBlock>
+                ) : (
+                    <div>
+                        <Padding bottom={paddingSizes.LG}>
+                            <Columns>
+                                <Column width={colWidths.EIGHT}>
+                                    <FlexRow
+                                        spacing={spacingOptions.LG}
+                                        alignment={alignments.CENTER}
+                                    >
+                                        <img
+                                            src="https://placedog.net/150/150"
+                                            alt="Profile"
+                                            className="profile-image"
+                                        />
+                                        <div>
+                                            <FormLabel className="mobileCenter">kaddleman</FormLabel>
+                                            <h1 className="heading-text centered-text">Dr. Katherine Anne Addleman</h1>
+                                        </div>
+                                    </FlexRow>
+                                </Column>
+                                <Column width={colWidths.FOUR} alignment={colAlignments.RIGHT}>
+                                    <Button inline className="button--inline-alt" onClick={this._toggleEdit}>Edit Profile</Button>
+                                </Column>
+                            </Columns>
+                        </Padding>
+
+                        <PageSection title="Contact">
+                            <FlexRow
+                                spacing={spacingOptions.LG}
+                                flexDirection={flexDirectionOptions.COLUMN}
+                            >
+                                <Columns>
+                                    <Column width={colWidths.THREE}>
+                                        <FormLabel>Phone</FormLabel>
+                                        <TextBlock className="text-block--full-width text-block--left">(123) 456-7890</TextBlock>
+                                    </Column>
+                                    <Column width={colWidths.THREE}>
+                                        <FormLabel>Email</FormLabel>
+                                        <TextBlock className="text-block--full-width text-block--left">katie.addleman@compra</TextBlock>
+                                    </Column>
+                                    <Column width={colWidths.SIX}/>
+                                </Columns>
+                            </FlexRow>
+                        </PageSection>
+
+                        <PageSection title="Location">
+                            <FlexRow
+                                spacing={spacingOptions.LG}
+                                flexDirection={flexDirectionOptions.COLUMN}
+                            >
+                                <Columns>
+                                    <Column width={colWidths.THREE}>
+                                        <FormLabel>Street Address</FormLabel>
+                                        <TextBlock className="text-block--full-width text-block--left">1440 S Main Street</TextBlock>
+                                    </Column>
+                                    <Column width={colWidths.THREE}>
+                                        <FormLabel>City</FormLabel>
+                                        <TextBlock className="text-block--full-width text-block--left">San Diego</TextBlock>
+                                    </Column>
+                                    <Column width={colWidths.THREE}>
+                                        <FormLabel>State</FormLabel>
+                                        <TextBlock className="text-block--full-width text-block--left">CA</TextBlock>
+                                    </Column>
+                                    <Column width={colWidths.THREE}/>
+                                </Columns>
+                                <Columns>
+                                    <Column width={colWidths.THREE}>
+                                        <FormLabel>Zip Code</FormLabel>
+                                        <TextBlock className="text-block--full-width text-block--left">92121</TextBlock>
+                                    </Column>
+                                    <Column width={colWidths.THREE}>
+                                        <FormLabel>Country</FormLabel>
+                                        <TextBlock className="text-block--full-width text-block--left">United States</TextBlock>
+                                    </Column>
+                                    <Column width={colWidths.SIX}/>
+                                </Columns>
+                            </FlexRow>
+                        </PageSection>
                     </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                        <FormLabel>State</FormLabel>
-                        <TextBlock className="text-block--full-width text-block--left">CA</TextBlock>
-                    </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0}}></div>
-                </FlexRow>
-                <FlexRow
-                    spacing={spacingOptions.MD}
-                    alignment={alignments.CENTER}
-                    flexDirection={flexDirectionOptions.ROW}
-                    justify={justifyOptions.SPACEBETWEEN}
-                >
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                        <FormLabel>Zip Code</FormLabel>
-                        <TextBlock className="text-block--full-width text-block--left">92121</TextBlock>
-                    </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                        <FormLabel>Country</FormLabel>
-                        <TextBlock className="text-block--full-width text-block--left">United States</TextBlock>
-                    </div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
-                    <div style={{ flexGrow: 1, flexBasis: 0 }}></div>
-                </FlexRow>
-            </FlexRow>
-        </PageSection>
-    </Container>
-);
+                )}
+            </Container>
+        );
+    }
+};
 
 const ChangePasswordPage = () => (
     <Container maxWidth="400px">
@@ -359,4 +481,62 @@ class AuthenticationPage extends React.Component {
         </Container>
     );
 };
+
+class LinkedAccountsPage extends React.Component {
+    state = {
+        accounts: [
+            {
+                name: "Google",
+                image: <SocialLogos.GOOGLE width={40} height={40} />,
+            },
+            {
+                name: "Facebook",
+                image: <SocialLogos.FACEBOOK width={40} height={40} />,
+            },
+        ],
+        accountToUnlink: ''
+    }
+    render() {
+        return (
+            <Container maxWidth="400px">
+                <h2 className="heading-text centered-text">Linked Accounts</h2>
+                <p className="normal-text centered-text">
+                    Text explaining that this is. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+                </p>
+                <Card type={CardTypes.SLIM}>
+                    <FlexRow
+                        alignment={alignments.CENTER}
+                        flexDirection={flexDirectionOptions.COLUMN}
+                        spacing={spacingOptions.SM}
+                    >
+                        <AccountTable
+                            onUnlink={(accountName) => {
+                                this.setState((prevState) => prevState.accounts.map((account) => {
+                                        if (account.name === accountName) {
+                                            account.unlinked = true;
+                                        }
+                                        return account;
+                                }));
+                            }}
+                            onRemove={(accountName) => {
+                                this.setState((prevState) => {
+                                    return {
+                                        accounts: prevState.accounts.filter(({ name }) => name !== accountName)
+                                    };
+                                });
+                            }}
+                            onUnlinkClick={(name) => {
+                                this.setState({ accountToUnlink: name });
+                            }}
+                            accounts={this.state.accounts}
+                            unlinkModalMessage={`Are you sure you want to unlink your ${this.state.accountToUnlink} account? Unlinking this account will not allow you to access PingOne with your ${this.state.accountToUnlink} credentials.`}
+                            unlinkModalTitle={`Unlink Linked Account: ${this.state.accountToUnlink}`}
+                        />
+                    </FlexRow>
+                </Card>
+            </Container>
+        );
+    }
+}
+
 export default SelfService;

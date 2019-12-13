@@ -130,7 +130,6 @@
         background-color: $color-white;
         overflow-x: visible;
         overflow-y: auto;
-        max-height: calc(100% - #{2 * $min-bottom});
 
         @include border-radius(0 0 $modal-radius $modal-radius);
 
@@ -173,9 +172,9 @@
     }
     &.dialog {
         $modal-width: 350px;
-
         .modal-content {
-            width: $modal-width;
+            width: 100%;
+            max-width: $modal-width;
         }
         .modal-title,
         .body-title {

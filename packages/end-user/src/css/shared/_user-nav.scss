@@ -64,7 +64,7 @@
             color: $color-midnight;
             transition: all 0.2s linear;
         }
-    
+
         .truncate {
             display: inline-block;
             max-width: 410px;
@@ -237,28 +237,35 @@
                 }
             }
         }
-    }
-    .user-info {
-        $image-size: 60px;
-        font-size: 20px;
-        display: block;
-        text-align: center;
-        padding-bottom: $spacing-sm;
-        margin-right: 0;
 
-        .truncate {
-            max-width: 210px;
-        }
-
-        &__icon,
-        &__image {
+        &__info {
+            $image-size: 60px;
+            font-size: 20px;
             display: block;
-            width: $image-size;
-            height: $image-size;
-        }
+            text-align: center;
+            padding-bottom: $spacing-sm;
 
-        &:after {
-            display: none;
+            .truncate {
+                max-width: 210px;
+            }
+
+            .user-info {
+                &__icon,
+                &__image {
+                    display: block;
+                    width: $image-size;
+                    height: $image-size;
+                }
+
+                &__image {
+                    margin: 0 auto;
+                    margin-bottom: $spacing-sm;
+                }
+
+                &:after {
+                    display: none;
+                }
+            }
         }
     }
 }
