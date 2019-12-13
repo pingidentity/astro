@@ -530,6 +530,17 @@ $fullwidthBreakpoint: 950px;
     opacity: 0.5;
 }
 
+.column-chart {
+    &__tooltip {
+        border-width: 1px;
+        border-color: $color-neutral-95;
+        padding: $spacing-sm;
+        background: $color-white;
+        border-radius: 3px;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
+    }
+}
+
 .frequency-card {
     overflow: visible;
     display: block;

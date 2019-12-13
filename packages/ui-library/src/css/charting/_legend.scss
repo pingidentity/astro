@@ -1,0 +1,47 @@
+.legend {
+    &__item {
+        display: inline-block;
+        margin-right: $spacing-xl;
+
+        &-info {
+            display: flex;
+            justify-content: center;
+            margin-bottom: $spacing-xs;
+        }
+
+        &-left {
+            text-align: left;
+        }
+
+        &-center {
+            text-align: center;
+        }
+
+        &-right {
+            text-align: right;
+        }
+
+        &-badge {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            border-radius: 3px;
+            margin-right: $spacing-xs;
+        }
+
+        &-label {
+            font-size: 12px;
+            line-height: 12px;
+            color: $color-neutral-10;
+            font-weight: 400;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        &-value {
+            font-size: 22px;
+            color: $color-accent-neutral-10;
+            font-weight: 600;
+        }
+    }
+}
