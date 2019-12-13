@@ -240,15 +240,6 @@ $wizard-close-button-color: $color-strong-neutral-40;
                 @include inactive-link-styles;
             }
 
-            //if active no line
-            // &:before {
-            //     content: "";
-            //     position: absolute;
-            //     top: 0;
-            //     width: 85%;
-            //     border-top: 1px solid $color-rabbit-fur;
-            // }
-
             .wizard-progress-menu__item-description {
                 opacity: 0.8;
             }
