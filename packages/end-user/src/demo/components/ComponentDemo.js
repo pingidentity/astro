@@ -28,6 +28,14 @@ class ComponentDemo extends React.Component {
                         }}
                     />
                 </div>
+                <div className="component-demo__code">
+                    <span className="component-demo__preview-label">HTML</span>
+                    <pre
+                        dangerouslySetInnerHTML={{
+                            __html: this._getSource(),
+                        }}
+                    />
+                </div>
             </div>
         </div>
     );
