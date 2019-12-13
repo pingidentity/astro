@@ -1,5 +1,5 @@
 import React from "react";
-import HelpHint, { showOptions } from "ui-library/lib/components/tooltips/HelpHint";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
@@ -22,7 +22,6 @@ class HelpHintDemo extends React.Component {
                     data-id="helphint-regular"
                     ref="testTip"
                     hintText="Regular help hint with icon"
-                    showOption={showOptions.ONCLICK}
                 />
                 &nbsp; &nbsp;
                 <HelpHint
