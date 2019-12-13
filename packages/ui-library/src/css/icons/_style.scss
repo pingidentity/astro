@@ -491,14 +491,14 @@
     content: $icon-on-off; 
   }
 }
-.icon-org-chart {
-  &:before {
-    content: $icon-org-chart; 
-  }
-}
 .icon-open-lock {
   &:before {
     content: $icon-open-lock; 
+  }
+}
+.icon-org-chart {
+  &:before {
+    content: $icon-org-chart; 
   }
 }
 .icon-overview {
