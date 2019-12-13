@@ -491,6 +491,11 @@
     content: $icon-on-off; 
   }
 }
+.icon-open-lock {
+  &:before {
+    content: $icon-open-lock; 
+  }
+}
 .icon-org-chart {
   &:before {
     content: $icon-org-chart; 
@@ -721,3 +726,4 @@
     content: $icon-welcome; 
   }
 }
+
