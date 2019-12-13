@@ -213,6 +213,13 @@
     }
 }
 
+.line-chart {
+    .recharts-line {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+}
+
 .heatmap {
     $cell-size: 20px;
 
