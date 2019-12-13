@@ -93,7 +93,7 @@ class FormDropDownListDemo extends React.Component {
                     <FormDropDownList
                         options={[
                             { label: "One", value: "1" },
-                            { label: "Option two with a very, very, very, very long label Option two with a very, very, very, very long label Option two with a very, very, very, very long label Option two with a very, very, very, very long label", value: "2" },
+                            { label: "Option two with a very, very, very, very long label", value: "2" },
                             { label: "Three", value: "3" },
                         ]}
                         autofocus={true}
@@ -127,7 +127,7 @@ class FormDropDownListDemo extends React.Component {
                     <FormDropDownList
                         options={[
                             { iconName: "globe", label: "One", value: "1" },
-                            { iconName: "cog", label: "Option two with a very, very long label ", value: "2" },
+                            { iconName: "cog", label: "Option two with a very, very long label", value: "2" },
                             { label: "with no icon", value: "3" },
                         ]}
                         autofocus={true}
@@ -246,7 +246,7 @@ class FormDropDownListDemo extends React.Component {
                         label="With groups & add"
                         canAdd={true}
                         onAdd={this._handleAdd9}
-                        // labelAdd="ADD"
+                        labelAdd="ADD"
                         labelPrompt="Type to search or add"
                         selectedOption={this.state.selectedValue9}
                         onValueChange={this._handleValueChange(9)}
