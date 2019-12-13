@@ -20,6 +20,10 @@
         }
     }
 
+    &>.border {
+        border: 1px solid $color-blue-grey !important;
+    }
+
     @mixin default-icon-styles {
         height: $inline-icon-height;
         font-size: $inline-icon-height;
