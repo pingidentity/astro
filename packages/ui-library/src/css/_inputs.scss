@@ -974,6 +974,15 @@ input[type=file] {
             animation: fade-in 0.2s;
 
         }
+        label:not(.readonly) {
+            .selected-option-label {
+                &:hover,
+                &:focus {
+                    cursor: text;
+                }
+            }
+        }
+
         .input-container {
             &:last-of-type {
                 .wrapper {
@@ -1101,10 +1110,12 @@ input[type=file] {
             padding: $option-padding;
             font-size: 14px;
         }
+
         .select-search-prompt {
             @include font-pn-light;
             font-style: italic;
             color: $color-stratus;
+            cursor: pointer;
         }
         .select-add {
             .label {
