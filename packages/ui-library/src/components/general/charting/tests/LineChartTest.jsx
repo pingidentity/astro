@@ -1,41 +1,56 @@
+import React from "react";
+import _ from "underscore";
+import LineChart from "../LineChart";
+import { mount } from "enzyme";
+
 window.__DEV__ = true;
 
 jest.dontMock("../LineChart");
 
-describe("LineChart", function () {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../../testutil/TestUtils"),
-        _ = require("underscore"),
-        Line = require("recharts").Line,
-        LineChart = require("../LineChart");
+describe("LineChart", () => {
+    const defaultProps = {
+        "data-id": "line-chart",
+        width: 500,
+        height: 150,
+        dataKey: "name",
+        dataValue: "value",
+        data: [
+            { name: "Test 1", value: 4 },
+            { name: "Test 2", value: 7 },
+            { name: "Test 3", value: 2 },
+        ],
+    };
 
-    function getComponent (props) {
-        props = _.defaults(props || {}, {
-            data: [
-                { id: "One", s1: 1, s2: 10 },
-                { id: "Two", s1: 2, s2: 20 }
-            ],
-            series: [{ id: "s1", label: "s1" }, { id: "s2", label: "s2" }]
-        });
-        return ReactTestUtils.renderIntoDocument(<LineChart {...props} />);
-    }
+    const getComponent = props => {
+        const componentProps = _.defaults(props || {}, defaultProps);
+        return mount(<LineChart {...componentProps} />);
+    };
 
     it("renders with default data-id", function () {
-        var component = getComponent();
-        var chart = TestUtils.findRenderedDOMNodeWithDataId(component, "line-chart");
-        expect(chart).toBeTruthy();
+        const component = getComponent();
+        expect(component.find('[data-id="line-chart"]').exists()).toEqual(true);
     });
 
-    it("renders with custom data-id", function () {
-        var component = getComponent({ "data-id": "my-line-chart" });
-        var chart = TestUtils.findRenderedDOMNodeWithDataId(component, "my-line-chart");
-        expect(chart).toBeTruthy();
+    it("renders the highlight", function () {
+        const component = getComponent({
+            showHighlight: true,
+        });
+
+        const linearGradientId = component.find("linearGradient").prop("id");
+
+        expect(component.find(`path[stroke="url(#${linearGradientId})"]`).exists()).toEqual(true);
     });
 
-    it("renders series lines", function () {
-        var component = getComponent();
-        var series = TestUtils.scryRenderedComponentsWithType(component, Line);
-        expect(series.length).toBe(2);
+    it("calls onHoverDataPoint with correct data", () => {
+        const onHoverDataPoint = jest.fn();
+        const component = getComponent({
+            onHoverDataPoint,
+        });
+
+        component.instance()._onHoverDataPoint({
+            activeTooltipIndex: 1,
+        });
+
+        expect(onHoverDataPoint).toHaveBeenCalledWith(1);
     });
 });
