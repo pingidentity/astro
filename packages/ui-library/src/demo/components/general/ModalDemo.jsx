@@ -4,7 +4,6 @@ import Modal from "./../../../components/general/Modal";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
 import ButtonGroup from "../../../components/layout/ButtonGroup";
-import Icon from "../../../components/general/Icon";
 
 import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
 
@@ -147,13 +146,12 @@ class ModalDemo extends React.Component {
                     <a onClick={this._makeToggle(5)}>Open Alert Modal</a>
 
                     <Modal
-                        showHeader={false}
                         type="alert"
                         ref="alertModal"
                         expanded={this.state.expanded5}
                         showCloseBttn={true}
                         onOpen={this._makeToggle(5)}
-                        bodyTitle={<Icon iconName="cog"/>}>
+                        bodyTitle="Alert Modal">
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>
