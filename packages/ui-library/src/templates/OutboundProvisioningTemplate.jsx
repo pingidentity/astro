@@ -49,7 +49,18 @@ const initialState = {
     attributes: [],
     description: "",
     name: "",
+<<<<<<< Updated upstream
     selectedValue: "",
+=======
+    dropDownOptions: [
+        { label: "phone number", value: "1" },
+        { label: "email", value: "2" },
+        { label: "username", value: "3" },
+        { label: "given name", value: "4" },
+    ],
+    selectedValue: "",
+    // dropDownSelectedValue: { label: "phone number", value: "1" },
+>>>>>>> Stashed changes
 };
 
 
@@ -72,6 +83,10 @@ const possibleProviders = {
     }
 };
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 const AttributesFirstRow = (
     [<Row key="first">
         <FormTextField
@@ -82,7 +97,10 @@ const AttributesFirstRow = (
         <FormTextField
             width={InputWidths.MD}
             value="username"
+<<<<<<< Updated upstream
             required
+=======
+>>>>>>> Stashed changes
         />
     </Row>]
 );
@@ -97,7 +115,10 @@ const AttributesSecondRow = (
         <FormTextField
             width={InputWidths.MD}
             value="given name"
+<<<<<<< Updated upstream
             required
+=======
+>>>>>>> Stashed changes
         />
     </Row>]
 );
@@ -112,7 +133,10 @@ const AttributesThirdRow = (
         <FormTextField
             width={InputWidths.MD}
             value="family name"
+<<<<<<< Updated upstream
             required
+=======
+>>>>>>> Stashed changes
         />
     </Row>]
 );
@@ -127,7 +151,10 @@ const AttributesFourthRow = (
         <FormTextField
             width={InputWidths.MD}
             value="username"
+<<<<<<< Updated upstream
             required
+=======
+>>>>>>> Stashed changes
         />
     </Row>]
 );
@@ -142,11 +169,15 @@ const AttributesFifthRow = (
         <FormTextField
             width={InputWidths.MD}
             value="email"
+<<<<<<< Updated upstream
             required
+=======
+>>>>>>> Stashed changes
         />
     </Row>]
 );
 
+<<<<<<< Updated upstream
 class AttributesSixthRow extends Component {
     state = {
         dropDownSelectedValue: {},
@@ -207,12 +238,43 @@ class AttributesSixthRow extends Component {
         );
     }
 }
+=======
+const AttributesSixthRow = ({
+    dropDownOptions,
+    handleDropDownValueChange,
+    dropDownSelectedValue,
+}) => {
+    return (
+        [<Row key="sixth">
+            <FormTextField
+                width={InputWidths.MD}
+                value="Email Encoding Key"
+            />
+            <Separator>=</Separator>
+            <FormDropDownList
+                options={dropDownOptions}
+                canAdd={true}
+                //onAdd={this._handleAdd7}
+                labelAdd="ADD"
+                labelPrompt="Type to search or add"
+                selectedOption={dropDownSelectedValue}
+                onValueChange={handleDropDownValueChange}
+                width={InputWidths.MD}
+            />
+        </Row>]
+    );
+};
+>>>>>>> Stashed changes
 
 const ProfileEdit = ({
     setStepState,
     name,
     description,
+<<<<<<< Updated upstream
     activeProvider,
+=======
+    logo,
+>>>>>>> Stashed changes
 }) => {
     return (
         <PageSection>
@@ -238,6 +300,7 @@ const ProfileEdit = ({
                     label="Logo"
                     labelSelect="Choose a File"
                     showThumbnail
+<<<<<<< Updated upstream
                     labelRemove=""
                     thumbnailSrc={
                         activeProvider.customLogo ? activeProvider.customLogo : (<div>
@@ -254,6 +317,9 @@ const ProfileEdit = ({
                             </div>
                         </div>)
                     }
+=======
+                    thumbnailSrc={logo || ""}
+>>>>>>> Stashed changes
                 />
             </InputRow>
         </PageSection>
@@ -329,6 +395,7 @@ class AuthorizationEdit extends Component {
     deprovisioningDropDownChange = this.setDropDown("deprovisioningDropDownOption")
     permissionDropDownChange = this.setDropDown("permissionDropDownOption")
 
+<<<<<<< Updated upstream
     setChecked = checkedName => () => this.setState(
         ({ [checkedName]: checked }) => ({ [checkedName]: !checked })
     )
@@ -342,6 +409,17 @@ class AuthorizationEdit extends Component {
 
         return (
             <PageSection>
+=======
+const AttributesEdit = (props) => {
+
+    return (
+        <div>
+            <PageSection
+                title={
+                    `Link ${props.activeProvider.label}'s attributes to your Pingone Identity attributes.`
+                }
+            >
+>>>>>>> Stashed changes
                 <InputRow>
                     <FormDropDownList
                         label="Deprovisioning Action"
@@ -387,6 +465,10 @@ const AttributesEdit = (props) => {
                     <InputRow>
                         <RowBuilder
                             hasLineBetween={false}
+<<<<<<< Updated upstream
+=======
+                            onAdd={props.addRow("first")}
+>>>>>>> Stashed changes
                             rows={[
                                 {
                                     id: "first",
@@ -415,7 +497,11 @@ const AttributesEdit = (props) => {
                                 },
                                 {
                                     id: "sixth",
+<<<<<<< Updated upstream
                                     content: <AttributesSixthRow setStepState={props.activeProvider.setStepState} />,
+=======
+                                    content: <AttributesSixthRow setStepState={props.activeProvider.setStepState} dropDownOptions={props.activeProvider.dropDownOptions} handleDropDownValueChange={props.handleDropDownValueChange} dropDownSelectedValue={props.activeProvider.dropDownSelectedValue} />,
+>>>>>>> Stashed changes
                                     removable: false
                                 },
                             ]}
@@ -556,7 +642,7 @@ class WizardView extends Component {
     }))
 
     render() {
-        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider } = this.props;
+        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider, addRow, createRows, firstRowIds, handleDropDownValueChange } = this.props;
         const { wizardStep } = this.state;
         return (
             <PageWizard
@@ -708,7 +794,7 @@ class WizardView extends Component {
                         completed={wizardStep > 3}
                         key="linking"
                     >
-                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState} />
+                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState} firstRowIds={firstRowIds} addRow={addRow} createRows={createRows} handleDropDownValueChange={handleDropDownValueChange}/>
                     </Step>,
                     <Step
                         title={
@@ -760,10 +846,40 @@ export default class OutboundProvisioning extends Component {
             "population1"
         ],
         privacyType: "1",
+<<<<<<< Updated upstream
         dropDownSelectedValue: { label: "phone number", value: "1" },
     }
 
     
+=======
+        firstRowIds: [uuidV4(), uuidV4()],
+        secondRowIds: [uuidV4(), uuidV4()],
+        thirdRowIds: [uuidV4()],
+        dropDownSelectedValue: { label: "phone number", value: "1" },
+    }
+
+    handleDropDownValueChange = selectedOption => {
+        this.setState({
+            dropDownSelectedValue: { selectedOption }
+        });
+        console.log(this.state.dropDownSelectedValue);
+    };
+    
+    
+
+    _handleAdd7 = (optionLabel) => {
+        // Mock new option
+        const newOption = { label: optionLabel, value: optionLabel };
+        const newOptions = this.state.dropDownOptions.concat([newOption]);
+
+        // Update options & select the newly added option
+        this.setState({
+            dropDownOptions: newOptions,
+            selectedValue7: newOption
+        });
+    };
+
+>>>>>>> Stashed changes
     addRow = key => () => {
         const stateKey = `${key}RowIds`;
         this.setState(state => ({
@@ -1126,6 +1242,10 @@ export default class OutboundProvisioning extends Component {
                         onSave={this.saveActiveProvider}
                         setStepState={this.setStepState}
                         openProviderWizard={this.openProviderWizard}
+                        addRow={this.addRow}
+                        createRows={this.createRows}
+                        firstRowIds={this.state.firstRowIds}
+                        handleDropDownValueChange={this.handleDropDownValueChange}
                     />
                     }
                 </div>
