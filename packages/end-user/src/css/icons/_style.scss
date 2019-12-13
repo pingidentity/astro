@@ -29,6 +29,16 @@ $icon-font: 'iconfont';
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pingicon-open-lock {
+  &:before {
+    content: $pingicon-open-lock; 
+  }
+}
+.pingicon-download-box {
+  &:before {
+    content: $pingicon-download-box; 
+  }
+}
 .pingicon-camera {
   &:before {
     content: $pingicon-camera; 
@@ -49,9 +59,9 @@ $icon-font: 'iconfont';
     content: $pingicon-ghost-timed-out; 
   }
 }
-.pingicon-spinner {
+.pingicon-spinner-alt {
   &:before {
-    content: $pingicon-spinner; 
+    content: $pingicon-spinner-alt; 
   }
 }
 .pingicon-error {
@@ -69,9 +79,9 @@ $icon-font: 'iconfont';
     content: $pingicon-safe; 
   }
 }
-.pingicon-success {
+.pingicon-success-alt {
   &:before {
-    content: $pingicon-success; 
+    content: $pingicon-success-alt; 
   }
 }
 .pingicon-ghost-error {
@@ -624,14 +634,14 @@ $icon-font: 'iconfont';
     content: $pingicon-spin-up; 
   }
 }
-.pingicon-spinner1 {
+.pingicon-spinner {
   &:before {
-    content: $pingicon-spinner1; 
+    content: $pingicon-spinner; 
   }
 }
-.pingicon-success1 {
+.pingicon-success {
   &:before {
-    content: $pingicon-success1; 
+    content: $pingicon-success; 
   }
 }
 .pingicon-success-round {

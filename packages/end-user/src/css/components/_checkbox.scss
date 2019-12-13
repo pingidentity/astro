@@ -40,31 +40,27 @@ $checkbox-border-color: $color-neutral-40;
     position: absolute;
     left: 0;
     top: 0;
-    text-transform: none;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
 
     &:after {
-        content: $pingicon-approve;
+        text-transform: none;
         font-family: $icon-font;
-        font-size: 9px;
+        content: $pingicon-success;
         width: $spacing-lg - 6px;
         height: $spacing-lg - 6px;
         line-height: $spacing-lg - 6px;
         position: absolute;
+        text-align: center;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        transition: 0.1s background-size;
-        background-size: 0%;
+        transition: 0.1s font-size;
+        font-size: 0px;
     }
 }
 
 .checkbox__input:checked + .checkbox__standin:after {
-    background-size: 100%;
+    font-size: 14px;
 }
 
 .checkbox__input:focus + .checkbox__standin {
