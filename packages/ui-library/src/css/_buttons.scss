@@ -465,6 +465,15 @@ button,
             pointer-events: none;
         }
     }
+
+    .icon {
+        vertical-align: bottom;
+    }
+
+    .icon__graphic {
+        line-height: unset;
+    }
+
     &.sel-0 button:nth-of-type(1),
     &.sel-1 button:nth-of-type(2),
     &.sel-2 button:nth-of-type(3),
