@@ -2151,12 +2151,13 @@ input[type=file] {
         }
     }
     &.unit-input {
-        margin: 0 12px 0 0 !important;
+        position: relative;
 
         .input-message__text {
-            top: 60px;
+            top: 73px;
             box-sizing: border-box;
-            min-width: calc(100%);
+            position: unset;
+            width: 100%;
         }
 
         .unit-input__drop-down-list--error {
@@ -2175,12 +2176,13 @@ input[type=file] {
             }
         }
 
-        .input-message__icon,
-        .form-error-icon {
-            &:before {
-                left: 22px;
-                position: absolute;
-                bottom: -21px;
+        .input-message {
+            position: relative;
+
+            .input-message__icon,
+            .form-error-icon {
+                right: -20px;
+                top: -28px;
             }
         }
     }
@@ -2577,7 +2579,6 @@ input[type=file] {
 
     // UnitInput Component
     &.unit-input {
-        white-space: nowrap;
         margin: 0;
         .input-custom-select {
             padding-top: 0;
@@ -2614,6 +2615,15 @@ input[type=file] {
 
                 input[type=text] {
                     border-width: 1px 1px 1px 0;
+                }
+            }
+        }
+        .unit-input__input-container {
+            display: inline-block;
+            .input-text {
+                margin-right: 0;
+                &.unit-input__text-field--error {
+                    margin-right: -1px;
                 }
             }
         }
