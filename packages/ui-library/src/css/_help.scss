@@ -151,6 +151,18 @@
 
             @include bg-styles($color-white);
             box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
+            border: 1px solid $color-blue-grey;
+
+            &.place-right:before {
+                @include makePointer(7px, $color-blue-grey, left);
+                left: -14px;
+                top: 49%;
+            }
+
+            &.place-right:after {
+                @include makePointer(5px, white, left);
+                left: -10px;
+            }
         }
     }
 
@@ -161,5 +173,5 @@
 
     &--extra {
         display: block;
-    }
+    } 
 }
