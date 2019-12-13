@@ -193,7 +193,7 @@ class DonutCard extends Component {
                                         className="donut-card__donut-chart"
                                     >
                                         <Pie
-                                            innerRadius={60}
+                                            innerRadius={72}
                                             outerRadius={100}
                                             paddingAngle={1}
                                             startAngle={90}
@@ -210,12 +210,11 @@ class DonutCard extends Component {
                                     </PieChart>
                                 </FlexRow>
                                 <div key="centerLabelKey" className="donut-card__center-info">
-                                    <div className="donut-card__center-number" style={{ color: this.state.statColor }}>
-                                        {this._renderNumber(this.props.value)}
-                                    </div>
-                                    <div className="donut-card__front-line" />
                                     <div className="donut-card__center-label" style={{ color: this.state.statColor }}>
                                         {this.props.label}
+                                    </div>
+                                    <div className="donut-card__center-number" style={{ color: this.state.statColor }}>
+                                        {this._renderNumber(this.props.value)}
                                     </div>
                                 </div>
                             </FlexRow>

@@ -474,14 +474,17 @@ $fullwidthBreakpoint: 950px;
 
     &__center-number {
         position: relative;
-        font-size: 35px;
-        bottom: 10px;
+        font-size: 28px;
+        font-weight: 600;
+        color: $color-accent-neutral-10;
+        top: -15px;
     }
 
     &__center-label {
         position: relative;
-        font-size: 12px;
-        top: 2px;
+        font-size: 13px;
+        bottom: 24px;
+        text-transform: uppercase;
     }
 
     &__back-info {
