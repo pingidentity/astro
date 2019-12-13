@@ -1,6 +1,7 @@
 import React from "react";
 import FormLabel from "../../../components/forms/FormLabel";
 import RockerButton from "../../../components/forms/RockerButton";
+import Icon from "../../../components/general/Icon";
 
 /**
 * @name RockerButtonDemo
@@ -8,13 +9,13 @@ import RockerButton from "../../../components/forms/RockerButton";
 * @desc A demo for RockerButton
 */
 
-const labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
+const labels = ["Label 1", "Label 2", "Label Three", "Longer Label Four"];
 
 const years = ["3M", "6M", "1Y"];
 const days = ["1D", "1W", "1M"];
 
 const labelsWithId = [
-    { label: "Label One", id: "rocker1" },
+    { label: <Icon iconName="globe">Label One</Icon>, id: "rocker1" },
     { label: "Label 2", id: "rocker2" },
     { label: "Label Three", id: "rocker3" },
     { label: "Longer Label Four", id: "rocker4" }

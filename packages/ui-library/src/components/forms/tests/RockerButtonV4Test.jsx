@@ -3,6 +3,9 @@ import StateContainer from "../../utils/StateContainer";
 
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
+import HelpHint from "../../../components/tooltips/HelpHint";
+import Icon from "../../../components/general/Icon";
+
 describe("RockerButton v4", function () {
 
     const React = require("react"),
@@ -13,6 +16,13 @@ describe("RockerButton v4", function () {
         _ = require("underscore");
 
     const labelsArray = ["A", "B", "C"];
+
+    const labelsArray2 = [
+        { label: <Icon iconName="globe">Label One</Icon>, id: "rocker1" },
+        { label: "Label 2", id: "rocker2" },
+        { label: "Label Three", id: "rocker3" },
+        { label: "Longer Label Four", id: "rocker4" }
+    ];
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
@@ -28,7 +38,7 @@ describe("RockerButton v4", function () {
         mountSnapshotDataIds(
             <RockerButton
                 onValueChange={jest.fn()}
-                labels={labelsArray}
+                labels={labelsArray2}
             />
         );
     });
@@ -201,6 +211,25 @@ describe("RockerButton v4", function () {
         );
 
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "sel-0"));
+    });
+
+
+    it("renders a helphint if helpText is supplied", () => {
+        const component = mount(<RockerButton labels={labelsArray} labelHints="hello"/>);
+
+        const helpHint = component.find(HelpHint);
+
+
+        expect(helpHint.exists()).toEqual(true);
+    });
+
+    it("does not renders a helphint if helpText is not supplied", () => {
+        const component = mount(<RockerButton labels={labelsArray} />);
+
+        const helpHint = component.find(HelpHint);
+
+
+        expect(helpHint.exists()).toEqual(false);
     });
 
 });

@@ -8,6 +8,7 @@ import { inStateContainer } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 
+
 /**
 * @typedef RockerButton~labelValues
 * @property {string} label
@@ -81,7 +82,7 @@ class RockerButtonStateless extends React.Component {
             PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.shape({
-                    label: PropTypes.string.isRequired,
+                    label: PropTypes.node.isRequired,
                     id: PropTypes.string
                 }),
             ])),
@@ -169,16 +170,24 @@ var RockerButtonLabel = function (props) {
 
     const { text = "" } = props;
 
-    const sanitizedText = text.toLowerCase().replace(/[^0-9a-z]/gi, "");
+    const sanitizedDataId = (() => {
+        if (typeof text === "string") {
+            return text.toLowerCase().replace(/[^0-9a-z]/gi, "");
+        } else if (props.id) {
+            return props.id;
+        } else {
+            return props.index;
+        }
+    })();
 
     return props.helpText
         ? <HelpHint
-            data-id={`helphint-button_${sanitizedText}`}
+            data-id={`helphint-button_${sanitizedDataId}`}
             placement="top"
             delayShow={500}
             hintText={props.helpText} >
             <button
-                data-id={props["data-id"] || `rocker-label_${sanitizedText}`}
+                data-id={props["data-id"] || `rocker-label_${sanitizedDataId}`}
                 className="rocker-button__button"
                 onClick={_handleClick}
                 autoFocus={props.autoFocus}
@@ -188,7 +197,7 @@ var RockerButtonLabel = function (props) {
             </button>
         </HelpHint>
         : <button
-            data-id={props["data-id"] || `rocker-label_${sanitizedText}`}
+            data-id={props["data-id"] || `rocker-label_${sanitizedDataId}`}
             className="rocker-button__button"
             onClick={_handleClick}
             autoFocus={props.autoFocus}
@@ -202,8 +211,8 @@ RockerButtonLabel.propTypes = {
     "data-id": PropTypes.string,
     onClick: PropTypes.func,
     autoFocus: PropTypes.bool,
-    text: PropTypes.string,
-    index: PropTypes.number
+    text: PropTypes.node,
+    index: PropTypes.number,
 };
 
 const RockerButton = withFocusOutline(
