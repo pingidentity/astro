@@ -3,22 +3,21 @@ import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";i
 import ColumnSelector, { ColumnTitle } from "ui-library/lib/components/list/ColumnSelector/ColumnSelector";
 import ColumnLayout from "ui-library/lib/components/general/ColumnLayout";
 import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
-import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
 import FileUpload from "ui-library/lib/components/forms/FileUpload";
 import FilterSelector from "ui-library/lib/components/filters/FilterSelector";
 import FlexRow, { alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
 import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
-import FormCheckBox from "ui-library/lib/components/forms/FormCheckbox";
+import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import FormTextArea from "ui-library/lib/components/forms/FormTextArea";
 import FormTextField from "ui-library/lib/components/forms/FormTextField";
-import HelpHint, { Types, showOptions } from "ui-library/lib/components/tooltips/HelpHint";
+import HelpHint, { Types } from "ui-library/lib/components/tooltips/HelpHint";
 import InlineMessage from "ui-library/lib/components/general/InlineMessage";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
 import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
 import Link, { linkTypes } from "ui-library/lib/components/general/Link";
 import MappedAttributes from "ui-library/lib/components/layout/MappedAttributes";
-import MessageButton from "ui-library/lib/components/buttons/MessageButton";
+import MessageButton, { statuses } from "ui-library/lib/components/buttons/MessageButton";
 import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard/";
 import Padding, { sizes as paddingSizes } from "ui-library/lib/components/layout/Padding";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
@@ -50,12 +49,6 @@ const initialState = {
     attributes: [],
     description: "",
     name: "",
-    dropDownOptions: [
-        { label: "phone number", value: "1" },
-        { label: "email", value: "2" },
-        { label: "username", value: "3" },
-        { label: "given name", value: "4" },
-    ],
     selectedValue: "",
 };
 
@@ -78,7 +71,6 @@ const possibleProviders = {
         token: "initial"
     }
 };
-
 
 const AttributesFirstRow = (
     [<Row key="first">
@@ -157,22 +149,23 @@ const AttributesFifthRow = (
 
 class AttributesSixthRow extends Component {
     state = {
-        showHelpHint: true,
         dropDownSelectedValue: {},
+        dropDownOptions: [
+            { label: "phone number", value: "1" },
+            { label: "email", value: "2" },
+            { label: "username", value: "3" },
+            { label: "given name", value: "4" },
+        ],
     };
-
-    showHelpHint = () => this.setState((prevState) => { console.log(prevState);
-        return { showHelpHint: !prevState.showHelpHint }; });
 
     _handleDropDownAdd = (optionLabel) => {
         const newOption = { label: optionLabel, value: optionLabel };
-        const newOptions = this.props.dropDownOptions.concat([newOption]);
+        const newOptions = this.state.dropDownOptions.concat([newOption]);
 
         this.setState({
             dropDownOptions: newOptions,
             dropDownSelectedValue: newOption
         });
-        console.log(this.props.dropDownOptions);
     };
 
     handleDropDownValueChange = selectedOption => {
@@ -182,7 +175,6 @@ class AttributesSixthRow extends Component {
     };
         
     render () {
-        const { dropDownOptions } = this.props;
 
         return (
             [<Row key="sixth">
@@ -193,25 +185,22 @@ class AttributesSixthRow extends Component {
                 <Separator>=</Separator>
                 <HelpHint
                     data-id="helphint-button"
-                    hintText= { <div><Spacing top={Spacing.sizes.XS}/>
+                    hintText= {<div><Spacing top={Spacing.sizes.XS}/>
                         <InlineMessage noMargin bordered={false}>
                         To add a new literal value, add quotation marks around the value (e.g., "phone number")
-                        </InlineMessage>
-                        <Spacing bottom={Spacing.sizes.XS}/></div>}
+                        </InlineMessage> <Spacing bottom={Spacing.sizes.XS}/></div>}
                     type={Types.LIGHT}
-                    // showOption={showHelpHint ? showOptions.ONCLICK : null}
-                    //showOption={showOptions.ONCLICK}
+                    delayShow={500}
                 >
                     <FormDropDownList
                         required
-                        options={dropDownOptions}
+                        options={this.state.dropDownOptions}
                         canAdd={true}
                         onAdd={this._handleDropDownAdd}
                         labelPrompt="Type to search or add"
                         selectedOption={this.state.dropDownSelectedValue.selectedOption}
                         onValueChange={this.handleDropDownValueChange}
                         width={InputWidths.MD}
-                        onToggle={this.showHelpHint}
                     />
                 </HelpHint>
             </Row>]
@@ -223,7 +212,7 @@ const ProfileEdit = ({
     setStepState,
     name,
     description,
-    logo,
+    activeProvider,
 }) => {
     return (
         <PageSection>
@@ -247,101 +236,145 @@ const ProfileEdit = ({
                 <FileUpload
                     accepts={[".jpg"]}
                     label="Logo"
-                    labelRemove="Remove"
                     labelSelect="Choose a File"
                     showThumbnail
-                    thumbnailSrc={logo || ""}
+                    labelRemove=""
+                    thumbnailSrc={
+                        activeProvider.customLogo ? activeProvider.customLogo : (<div>
+                            <div style={{
+                                marginBottom: "8px",
+                                opacity: !activeProvider.customLogo ? .5 : 1
+                            }}>
+                                {activeProvider.logo}
+                            </div>
+                            <div style={{ textTransform: "none", fontSize: "14px" }}>
+                                {!activeProvider.customLogo && (
+                                    <Link>Change</Link>
+                                )}
+                            </div>
+                        </div>)
+                    }
                 />
             </InputRow>
         </PageSection>
     );
 };
 
-const IDPEdit = (props) => {
-    return (
-        <PageSection>
-            <InputRow>
-                <FormTextField
-                    labelText={`${props.activeProvider.label} Domain`}
-                    placeholder="myCompanyName.my.salesforce.com"
-                    onValueChange={props.setStepState("domain")}
-                    value={props.activeProvider.domain || ""}
-                    width={InputWidths.LG}
-                    required
+class IDPEdit extends Component {
+    render() {
+        return (
+            <PageSection>
+                <InputRow>
+                    <FormTextField
+                        labelText={`${this.props.activeProvider.label} Domain`}
+                        placeholder="myCompanyName.my.salesforce.com"
+                        onValueChange={this.props.setStepState("domain")}
+                        value={this.props.activeProvider.domain || ""}
+                        width={InputWidths.LG}
+                        required
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextField
+                        labelText={"Client ID"}
+                        onValueChange={this.props.setStepState("clientID")}
+                        value={this.props.activeProvider.clientID || ""}
+                        width={InputWidths.LG}
+                        required
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextField
+                        labelText={"Client Secret"}
+                        onValueChange={this.props.setStepState("clientSecret")}
+                        value={this.props.activeProvider.clientSecret || ""}
+                        width={InputWidths.LG}
+                        required
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextField
+                        labelText={"Oauth Access Token"}
+                        onValueChange={this.props.setStepState("OAT")}
+                        value={this.props.activeProvider.OAT || ""}
+                        width={InputWidths.LG}
+                        required
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextField
+                        labelText={"Oauth Refresh Token"}
+                        onValueChange={this.props.setStepState("ORT")}
+                        value={this.props.activeProvider.ORT || ""}
+                        width={InputWidths.LG}
+                        required
+                    />
+                </InputRow>
+                <MessageButton
+                    label="Test Connection"
                 />
-            </InputRow>
-            <InputRow>
-                <FormTextField
-                    labelText={"Client ID"}
-                    onValueChange={props.setStepState("clientID")}
-                    value={props.activeProvider.clientID || ""}
-                    width={InputWidths.LG}
-                    required
-                />
-            </InputRow>
-            <InputRow>
-                <FormTextField
-                    labelText={"Client Secret"}
-                    onValueChange={props.setStepState("clientSecret")}
-                    value={props.activeProvider.clientSecret || ""}
-                    width={InputWidths.LG}
-                    required
-                />
-            </InputRow>
-            <InputRow>
-                <FormTextField
-                    labelText={"Oauth Access Token"}
-                    onValueChange={props.setStepState("OAT")}
-                    value={props.activeProvider.OAT || ""}
-                    width={InputWidths.LG}
-                    required
-                />
-            </InputRow>
-            <InputRow>
-                <FormTextField
-                    labelText={"Oauth Refresh Token"}
-                    onValueChange={props.setStepState("ORT")}
-                    value={props.activeProvider.ORT || ""}
-                    width={InputWidths.LG}
-                    required
-                />
-            </InputRow>
-            <Button type={buttonTypes.PRIMARY} label="Test Connection"/>
-        </PageSection>
-    );
-};
+            </PageSection>
+        );}
+}
 
-const AuthorizationEdit = (props) => {
+class AuthorizationEdit extends Component {
+    state = {
+        deprovisioningDropDownOption: null,
+        provisionChecked: false,
+    }
 
-    return (
-        <PageSection>
-            <InputRow>
-                <FormDropDownList
-                    label="Deprovisioning Action"
-                    required
-                    options={[
-                        { label: "Disable", value: "Disable" },
-                        { label: "Freeze", value: "Freeze" },
-                    ]}
-                    selectedOption={props.setStepState("deproAction")}
-                    width={InputWidths.MD}
-                />
-            </InputRow>
-            <InputRow>
-                <FormDropDownList
-                    label="Permission Set Management"
-                    required
-                    options={[
-                        { label: "Merge with permission sets", value: "Merge with permission sets" },
-                        { label: "Overwrite permission sets", value: "Overwrite permission sets" },
-                    ]}
-                    selectedOption={props.setStepState("permissionMgmt")}
-                    width={InputWidths.MD}
-                />
-            </InputRow>
-        </PageSection>
-    );
-};
+    setDropDown = dropDownName => opt => this.setState({
+        [dropDownName]: opt
+    })
+    deprovisioningDropDownChange = this.setDropDown("deprovisioningDropDownOption")
+    permissionDropDownChange = this.setDropDown("permissionDropDownOption")
+
+    setChecked = checkedName => () => this.setState(
+        ({ [checkedName]: checked }) => ({ [checkedName]: !checked })
+    )
+    provisionCheckChange = this.setChecked("provisionChecked")
+
+    render() {
+        const actionOptions = ([
+            { label: "Disable", value: "Disable" },
+            { label: "Freeze", value: "Freeze" },
+        ]);
+
+        return (
+            <PageSection>
+                <InputRow>
+                    <FormDropDownList
+                        label="Deprovisioning Action"
+                        required
+                        options={actionOptions}
+                        selectedOption={this.state.deprovisioningDropDownOption}
+                        width={InputWidths.MD}
+                        onValueChange={this.deprovisioningDropDownChange}
+                    />
+                    <InputRow/>
+                    <FormCheckbox
+                        label="Provision disabled users"
+                        onChange={this.provisionCheckChange}
+                        checked={this.state.provisionChecked}
+                        inline
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormDropDownList
+                        label="Permission Set Management"
+                        required
+                        options={[
+                            { label: "Merge with permission sets", value: "Merge with permission sets" },
+                            { label: "Overwrite permission sets", value: "Overwrite permission sets" },
+                        ]}
+                        selectedOption={this.state.permissionDropDownOption}
+                        width={InputWidths.MD}
+                        onValueChange={this.permissionDropDownChange}
+                    />
+                </InputRow>
+            </PageSection>
+        );}
+}
 
 const AttributesEdit = (props) => {
 
@@ -354,7 +387,6 @@ const AttributesEdit = (props) => {
                     <InputRow>
                         <RowBuilder
                             hasLineBetween={false}
-                            onAdd={props.addRow("first")}
                             rows={[
                                 {
                                     id: "first",
@@ -383,7 +415,7 @@ const AttributesEdit = (props) => {
                                 },
                                 {
                                     id: "sixth",
-                                    content: <AttributesSixthRow setStepState={props.activeProvider.setStepState} dropDownOptions={props.activeProvider.dropDownOptions} handleDropDownValueChange={props.handleDropDownValueChange} dropDownSelectedValue={props.activeProvider.dropDownSelectedValue} />,
+                                    content: <AttributesSixthRow setStepState={props.activeProvider.setStepState} />,
                                     removable: false
                                 },
                             ]}
@@ -454,7 +486,6 @@ const PopulationsEdit = () => {
                             label="Remove All"
                             noSpacing
                         />
-
                     </FlexRow>
                 }
             />
@@ -525,7 +556,7 @@ class WizardView extends Component {
     }))
 
     render() {
-        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider, addRow, createRows, firstRowIds, handleDropDownValueChange } = this.props;
+        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider } = this.props;
         const { wizardStep } = this.state;
         return (
             <PageWizard
@@ -677,7 +708,7 @@ class WizardView extends Component {
                         completed={wizardStep > 3}
                         key="linking"
                     >
-                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState} firstRowIds={firstRowIds} addRow={addRow} createRows={createRows} handleDropDownValueChange={handleDropDownValueChange}/>
+                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState} />
                     </Step>,
                     <Step
                         title={
@@ -729,9 +760,6 @@ export default class OutboundProvisioning extends Component {
             "population1"
         ],
         privacyType: "1",
-        firstRowIds: [uuidV4(), uuidV4()],
-        secondRowIds: [uuidV4(), uuidV4()],
-        thirdRowIds: [uuidV4()],
         dropDownSelectedValue: { label: "phone number", value: "1" },
     }
 
@@ -1098,10 +1126,6 @@ export default class OutboundProvisioning extends Component {
                         onSave={this.saveActiveProvider}
                         setStepState={this.setStepState}
                         openProviderWizard={this.openProviderWizard}
-                        addRow={this.addRow}
-                        createRows={this.createRows}
-                        firstRowIds={this.state.firstRowIds}
-                        handleDropDownValueChange={this.handleDropDownValueChange}
                     />
                     }
                 </div>
