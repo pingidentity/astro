@@ -9,6 +9,7 @@ import InputRow from "../../../components/layout/InputRow";
 
 import HR from "ui-library/lib/components/general/HR";
 import Button from "ui-library/lib/components/buttons/Button";
+import FieldSet from "ui-library/lib/components/layout/FieldSet";
 
 /**
 * @name TableDemo
@@ -161,6 +162,16 @@ const TableDemo = () => {
                     headData={mockData2.head}
                     bodyData={mockData2.body}
                 />
+            </InputRow>
+            <InputRow>
+                <FormLabel detached value="Fixed/full width in a fieldset" />
+                <FieldSet>
+                    <Table
+                        width="full-fixed"
+                        headData={mockData.head}
+                        bodyData={mockData.body}
+                    />
+                </FieldSet>
             </InputRow>
         </div>
     );
