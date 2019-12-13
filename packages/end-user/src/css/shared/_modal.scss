@@ -5,9 +5,9 @@
     $header-height: 46px;
     $max-modal-width: 960px;
 
+    left: 0;
+    right: 0;
     position: fixed;
-    left: 10px;
-    right: 10px;
     top: $default-top;
     bottom: 0;
     z-index: $zindex__modal;
