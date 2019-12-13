@@ -44,6 +44,12 @@ module.exports = class extends React.Component {
         dropDownListProps: {},
     };
 
+    unitInputRef = {};
+
+    calculateErrorRef = () => {
+        return this.unitInputRef.clientWidth;
+    }
+
     render() {
         const containerClassName = classnames(
             "input-textselect",
@@ -65,34 +71,35 @@ module.exports = class extends React.Component {
         } = this.props.dropDownListProps;
 
         return (
-            <div className={containerClassName}>
+            <div className={containerClassName} style={{ width: this.calculateErrorRef() }}>
                 <FormLabel
                     value= {this.props.labelText || this.props.label}
-                    data-id={this.props["data-id"]} detached>
-                    {this.props.errorMessage && (
-                        <FormMessage
-                            message={this.props.errorMessage}
-                        />
-                    )}
-                </FormLabel>
-                <FormTextField
-                    {...textFieldProps}
-                    className={ classnames(
-                        textFieldClassName,
-                        {
-                            "unit-input__text-field--error": this.props.errorMessage
-                        }
-                    )}
-                />
-                <FormDropDownList
-                    {...dropDownProps}
-                    className={ classnames(
-                        dropDownClassName,
-                        {
-                            "unit-input__drop-down-list--error": this.props.errorMessage
-                        }
-                    )}
-                />
+                    data-id={this.props["data-id"]} detached/>
+                <div ref={ref => this.unitInputRef = ref} className="unit-input__input-container">
+                    <FormTextField
+                        {...textFieldProps}
+                        className={ classnames(
+                            textFieldClassName,
+                            {
+                                "unit-input__text-field--error": this.props.errorMessage
+                            }
+                        )}
+                    />
+                    <FormDropDownList
+                        {...dropDownProps}
+                        className={ classnames(
+                            dropDownClassName,
+                            {
+                                "unit-input__drop-down-list--error": this.props.errorMessage
+                            }
+                        )}
+                    />
+                </div>
+                {this.props.errorMessage && (
+                    <FormMessage
+                        message={this.props.errorMessage}
+                    />
+                )}
             </div>
         );
     }
