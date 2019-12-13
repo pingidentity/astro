@@ -62,10 +62,7 @@ export function ExpandableCardRow({
  *      The title text.
  */
 class ExpandableCardStateless extends Component {
-    constructor(props) {
-        super(props);
-        this.card = React.createRef();
-    }
+    card = null;
 
     _getStatusBadge(status, content) {
         switch (status) {
@@ -89,7 +86,7 @@ class ExpandableCardStateless extends Component {
     componentDidUpdate = (prevProps) => {
         if (prevProps.expanded !== this.props.expanded && this.props.expanded) {
             setTimeout(() => {
-                this.card.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                this.card.scrollIntoView({ behavior: "smooth", block: "nearest" });
             }, 100);
         }
     }
@@ -132,7 +129,7 @@ class ExpandableCardStateless extends Component {
 
         return (
             <div className={holderClassNames} data-id={dataId}>
-                <div className={classNames} ref={this.card}>
+                <div className={classNames} ref={(ref) => this.card = ref}>
                     <div className="expandable-card__info">
                         <div>
                             <div className="expandable-card__title">
