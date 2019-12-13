@@ -1,5 +1,7 @@
+import React, { Component } from "react";
+
 import Aside from "ui-library/lib/components/layout/Aside";
-import Button from "ui-library/lib/components/buttons/Button";import React, { Component } from "react";
+import Button from "ui-library/lib/components/buttons/Button";
 import ColumnSelector, { ColumnTitle } from "ui-library/lib/components/list/ColumnSelector/ColumnSelector";
 import ColumnLayout from "ui-library/lib/components/general/ColumnLayout";
 import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
@@ -562,7 +564,7 @@ class WizardView extends Component {
     }))
 
     render() {
-        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider, addRow, createRows, firstRowIds, handleDropDownValueChange } = this.props;
+        const { closeWizard, onSave, setStepState, openProviderWizard, activeProvider } = this.props;
         const { wizardStep } = this.state;
         return (
             <PageWizard
@@ -714,7 +716,7 @@ class WizardView extends Component {
                         completed={wizardStep > 3}
                         key="linking"
                     >
-                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState} firstRowIds={firstRowIds} addRow={addRow} createRows={createRows} handleDropDownValueChange={handleDropDownValueChange}/>
+                        <AttributesEdit activeProvider={activeProvider} setStepState={setStepState}/>
                     </Step>,
                     <Step
                         title={
@@ -1132,10 +1134,6 @@ export default class OutboundProvisioning extends Component {
                         onSave={this.saveActiveProvider}
                         setStepState={this.setStepState}
                         openProviderWizard={this.openProviderWizard}
-                        addRow={this.addRow}
-                        createRows={this.createRows}
-                        firstRowIds={this.state.firstRowIds}
-                        handleDropDownValueChange={this.handleDropDownValueChange}
                     />
                     }
                 </div>
