@@ -1,6 +1,6 @@
 {
   "name": "ui-library",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons).",
   "author": "UX Front-End Development Team",
   "license": "ISC",
@@ -94,8 +94,8 @@
     "gulp-tap": "^1.0.1",
     "history": "^4.7.2",
     "html-loader": "^0.5.1",
-    "http-server": "^0.11.1",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
     "isomorphic-fetch": "^2.2.1",
     "jasmine": "^3.5.0",
     "jest": "^24.9.0",
