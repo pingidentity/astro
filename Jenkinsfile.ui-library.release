@@ -43,7 +43,7 @@ pipeline {
 
 
                   git add package.json
-                  git add package-lock.json
+                  git add yarn.lock
                   git config --global user.email 'devtools+jenkins@pingidentity.com'
                   git config --global user.name 'devtools-jenkins'
 
