@@ -20,9 +20,9 @@ pipeline {
         dir ("${env.WORKSPACE}/packages/end-user") {
           container('node-builder') {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
+            sh "yarn version --${params.VERSION_TYPE} --no-git-tag-version"
             script {
-              env.RELEASE_VERSION_V = sh(returnStdout: true, script: "yarn version --${params.VERSION_TYPE} --no-git-tag-version");
-              env.RELEASE_VERSION = RELEASE_VERSION_V.replaceAll("v","").trim()
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('./package.json').version")/$).trim();
               env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
             echo """
