@@ -1080,13 +1080,6 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_charting_PlaceHolderCardDemo.jsx.html"
                     },
                     {
-                        label: "Column Card",
-                        demo: require("../components/general/charting/ColumnCardDemo"),
-                        pathToDoc: "components/general/charting/ColumnCard.jsx",
-                        pathToSource: "components_general_charting_ColumnCard.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_ColumnCardDemo.jsx.html"
-                    },
-                    {
                         label: "Donut Card",
                         demo: require("../components/general/charting/DonutCardDemo"),
                         pathToDoc: "components/general/charting/DonutCard.jsx",
@@ -1228,6 +1221,13 @@ module.exports = [
                             message: "THIS COMPONENT IS STILL IN DEVELOPMENT.",
                             type: "version"
                         }
+                    },
+                    {
+                        label: "Column Card",
+                        demo: require("../components/general/charting/ColumnCardDemo"),
+                        pathToDoc: "components/general/charting/ColumnCard.jsx",
+                        pathToSource: "components_general_charting_ColumnCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_ColumnCardDemo.jsx.html"
                     },
                 ]
             }
