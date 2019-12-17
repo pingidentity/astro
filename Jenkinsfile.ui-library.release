@@ -25,7 +25,7 @@ pipeline {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             sh "yarn version --${params.VERSION_TYPE} --no-git-tag-version"
             script {
-              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('./package.json').version")/$).trim();
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
               env.GIT_RELEASE_TAG = "ui-library-${env.RELEASE_VERSION}"
             }
             echo """
@@ -40,8 +40,10 @@ pipeline {
                   git add *notes.json */release-notes/*.md
                   git commit -m 'UI Library Release notes ${env.RELEASE_VERSION}'
                   GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+              """
+              sleep 100 //wait 10 seconds for git push to trigger build job
 
-
+              sh """
                   git add package.json
                   git add yarn.lock
                   git config --global user.email 'devtools+jenkins@pingidentity.com'

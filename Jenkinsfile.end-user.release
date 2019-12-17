@@ -22,7 +22,7 @@ pipeline {
             echo "Incrementing the version: ${params.VERSION_TYPE}"
             sh "yarn version --${params.VERSION_TYPE} --no-git-tag-version"
             script {
-              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('./package.json').version")/$).trim();
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
               env.GIT_RELEASE_TAG = "end-user-${env.RELEASE_VERSION}"
             }
             echo """
