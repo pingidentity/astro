@@ -10,8 +10,8 @@ import ColumnCard from "ui-library/lib/components/general/charting/ColumnCard";
 class ColumnCardDemo extends React.Component {
     render() {
         const legend = [
-            { id: "Authenticators", color: "#49BF6B" },
-            { id: "Test Thing", color: "#379250" },
+            { label: "Authenticators", id: "authenticators", color: "#49BF6B" },
+            { label: "Test Thing", id: "test-thing", color: "#379250" },
         ];
 
         /**
@@ -26,22 +26,40 @@ class ColumnCardDemo extends React.Component {
                     {
                         id: "November 11, 2019",
                         data: [
-                            60,
-                            20,
+                            {
+                                id: "authenticators",
+                                value: 20,
+                            },
+                            {
+                                id: "test-thing",
+                                value: 43 ,
+                            }
                         ]
                     },
                     {
                         id: "November 12, 2019",
-                        data: [
-                            20,
-                            30,
+                        data: [ // Order does not matter
+                            {
+                                id: "test-thing",
+                                value: 10,
+                            },
+                            {
+                                id: "authenticators",
+                                value: 5,
+                            },
                         ]
                     },
                     {
                         id: "November 13, 2019",
                         data: [
-                            40,
-                            60,
+                            {
+                                id: "authenticators",
+                                value: 30,
+                            },
+                            {
+                                id: "test-thing",
+                                value: 12,
+                            }
                         ]
                     },
                 ]

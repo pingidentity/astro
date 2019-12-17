@@ -9,36 +9,48 @@ describe("ColumnChart", () => {
     const defaultProps = {
         data: [
             {
-                id: "1D",
-                helpText: "This is by day",
+                id: "November 11, 2019",
                 data: [
                     {
-                        id: "November 11, 2019",
-                        data: [
-                            60,
-                            20,
-                        ]
+                        id: "authenticators",
+                        value: 60,
                     },
                     {
-                        id: "November 12, 2019",
-                        data: [
-                            20,
-                            30,
-                        ]
-                    },
-                    {
-                        id: "November 13, 2019",
-                        data: [
-                            40,
-                            60,
-                        ]
-                    },
+                        id: "test-thing",
+                        value: 20,
+                    }
                 ]
-            }
+            },
+            {
+                id: "November 12, 2019",
+                data: [
+                    {
+                        id: "authenticators",
+                        value: 20,
+                    },
+                    {
+                        id: "test-thing",
+                        value: 30,
+                    }
+                ]
+            },
+            {
+                id: "November 13, 2019",
+                data: [
+                    {
+                        id: "authenticators",
+                        value: 40,
+                    },
+                    {
+                        id: "test-thing",
+                        value: 60,
+                    }
+                ]
+            },
         ],
         legend: [
-            { id: "Authenticators", color: "#49BF6B" },
-            { id: "Test Thing", color: "#379250" },
+            { label: "Authenticators", color: "#49BF6B", id: "authenticators" },
+            { label: "Test Thing", color: "#379250", id: "test-thing" },
         ],
         onMouseOut,
         onMouseOver,
@@ -77,7 +89,7 @@ describe("ColumnChart", () => {
                 label: "Your favorite value",
             },
             y: {
-                index: 1,
+                index: -1,
                 label: "Authenticators",
             },
         }, fakeEvent);
@@ -90,10 +102,10 @@ describe("ColumnChart", () => {
             />
         );
 
-        const value = { name: "Your favorite value" };
+        const value = { name: "November 11, 2019" };
         const fakeEvent = { target: "doesn't matter" };
 
-        component.instance()._handleMouseOver("Authenticators")(value, 0, fakeEvent);
+        component.instance()._handleMouseOver("authenticators")(value, 0, fakeEvent);
         const tooltip = component.instance()._renderTooltip();
 
         expect(tooltip).toBeDefined();

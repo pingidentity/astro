@@ -73,12 +73,17 @@ export default class ColumnChart extends React.Component {
         legend: [...this.props.legend].reverse(),
     };
 
-    _digestData = (data) => data.map(({ id, data: d }) => (
-        {
-            name: id,
-            ...d,
-        }
-    ));
+    _digestData = (data) =>
+        data.reduce((a, item) => ([
+            ...a,
+            {
+                name: item.id,
+                ...this.props.legend.reduce((b, key, index) => ({
+                    ...b,
+                    [index]: item.data.find(dataPoint => dataPoint.id === key.id).value,
+                }), {})
+            }
+        ]), []);
 
     _handleMouseOut = (value, index, e) => {
         this.setState({ selected: {} });
@@ -114,7 +119,9 @@ export default class ColumnChart extends React.Component {
             {
                 color: this.state.legend[this.state.selected.y.index].color,
                 label: this.state.selected.y.label,
-                value: [...this.props.data[this.state.selected.x.index].data].reverse()[this.state.selected.y.index],
+                value: this.props.data
+                    .find(o => o.id === this.state.selected.x.label).data
+                    .find(o => o.id === this.state.selected.y.label).value
             }
         ];
 
@@ -153,10 +160,10 @@ export default class ColumnChart extends React.Component {
                     cursor={false}
                 />
                 {
-                    legend.map(({ id, color }, key) => {
+                    legend.map(({ id, label, color }, key) => {
                         return (
                             <Bar
-                                label={id}
+                                label={label ? label : id}
                                 dataKey={key}
                                 key={id}
                                 stackId="a"
