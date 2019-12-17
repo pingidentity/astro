@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import ColumnChart from "../ColumnChart";
+import ColumnChart, { ColumnChartTitle } from "../ColumnChart";
 
 describe("ColumnChart", () => {
     const onMouseOut = jest.fn();
@@ -111,6 +111,23 @@ describe("ColumnChart", () => {
         expect(tooltip).toBeDefined();
     });
 
+    it("renderTooltip renders custom content", () => {
+        const component = shallow(
+            <ColumnChart
+                {...defaultProps}
+                renderTooltip={() => "BORK BORK BORK"}
+            />
+        );
+
+        const value = { name: "November 11, 2019" };
+        const fakeEvent = { target: "doesn't matter" };
+
+        component.instance()._handleMouseOver("authenticators")(value, 0, fakeEvent);
+        const tooltip = component.instance()._renderTooltip();
+
+        expect(tooltip.props.children).toEqual("BORK BORK BORK");
+    });
+
     it("doesn't render tooltip if there's nothing selected", () => {
         const component = shallow(
             <ColumnChart
@@ -132,5 +149,12 @@ describe("ColumnChart", () => {
 
         component.instance()._handleMouseOut();
         expect(onMouseOut).toHaveBeenCalled();
+    });
+
+    describe("ColumnCardTitle", () => {
+        it("renders the component", () => {
+            const component = shallow(<ColumnChartTitle title="SNAAAAAARF" />);
+            expect(component.exists()).toEqual(true);
+        });
     });
 });

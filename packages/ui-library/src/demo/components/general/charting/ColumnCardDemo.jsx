@@ -1,6 +1,7 @@
 import React from "react";
 import { CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
-import ColumnCard from "ui-library/lib/components/general/charting/ColumnCard";
+import ColumnChart, { ColumnChartTitle } from "../../../../components/general/charting/ColumnChart";
+import Legend, { alignments as legendAlignments } from "../../../../components/general/charting/Legend";
 
 /**
 * @name ColumnCardDemo
@@ -68,12 +69,39 @@ class ColumnCardDemo extends React.Component {
 
         return (
             <CardRow>
-                <ColumnCard
-                    title="SMS/Voice"
-                    data={columnData}
-                    legend={legend}
+                <DashboardCard
+                    front={
+                        <div>
+                            <ColumnChartTitle title="SMS/Voice" />
+                            <Legend
+                                alignment={legendAlignments.LEFT}
+                                data={[
+                                    {
+                                        color: "#49BF6B",
+                                        label: "Usage",
+                                        value: "0",
+                                    },
+                                    {
+                                        color: "#379250",
+                                        label: "Cost",
+                                        value: "0",
+                                    },
+                                ]}
+                            />
+                            <ColumnChart
+                                data={columnData[0].data}
+                                legend={legend}
+                                renderTooltip={(props, LegendItem) => (
+                                    <LegendItem
+                                        {...props}
+                                        value={`$${props.value}`}
+                                    />
+                                )}
+                            />
+                        </div>
+                    }
                 />
-                <DashboardCard size={2} />
+                <DashboardCard size={1} />
             </CardRow>
         );
     }
