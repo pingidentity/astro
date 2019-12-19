@@ -530,7 +530,8 @@ $fullwidthBreakpoint: 950px;
     opacity: 0.5;
 }
 
-.column-chart {
+.column-chart,
+.pie-chart {
     &__tooltip {
         border-width: 1px;
         border-color: $color-neutral-95;
@@ -538,6 +539,67 @@ $fullwidthBreakpoint: 950px;
         background: $color-white;
         border-radius: 3px;
         box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.pie-chart {
+    display: inline-block;
+    position: relative;
+
+    &__graph {
+        display: inline-block;
+    }
+
+    &__cell {
+        &--hovered {
+            animation-name: pulse;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+    }
+
+    &__tooltip {
+        &-top {
+            margin-bottom: $spacing-sm;
+        }
+    }
+
+    &__center {
+        &-info {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: $color-neutral-10;
+        }
+
+        &-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: $spacing-sm;
+        }
+
+        &-value {
+            font-size: 38px;
+            font-weight: 600;
+            color: $color-accent-neutral-10;
+        }
     }
 }
 

@@ -1223,6 +1223,17 @@ module.exports = [
                         }
                     },
                     {
+                        label: "PieChart",
+                        demo: require("../components/general/charting/PieChartDemo"),
+                        pathToDoc: "components/general/charting/PieChart.jsx",
+                        pathToSource: "components_general_charting_PieChartDemo.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_PieChartDemo.jsx.html",
+                        status: {
+                            message: "THIS COMPONENT IS STILL IN DEVELOPMENT.",
+                            type: "version"
+                        }
+                    },
+                    {
                         label: "Column Card",
                         demo: require("../components/general/charting/ColumnCardDemo"),
                         pathToDoc: "components/general/charting/ColumnCard.jsx",

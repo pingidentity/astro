@@ -9,16 +9,16 @@
             margin-bottom: $spacing-xs;
         }
 
-        &-left {
-            text-align: left;
+        &--left {
+            align-items: flex-start;
         }
 
-        &-center {
-            text-align: center;
+        &--center {
+            align-items: center;
         }
 
-        &-right {
-            text-align: right;
+        &--right {
+            align-items: flex-end;
         }
 
         &-badge {
@@ -42,6 +42,10 @@
             font-size: 22px;
             color: $color-accent-neutral-10;
             font-weight: 600;
+
+            &--sm {
+                font-size: 16px;
+            }
         }
     }
 }
