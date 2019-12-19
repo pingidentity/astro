@@ -1215,7 +1215,7 @@ module.exports = [
                         label: "LineChart",
                         demo: require("../components/general/charting/LineChartDemo"),
                         pathToDoc: "components/general/charting/LineChart.jsx",
-                        pathToSource: "components_general_charting_LineChartDemo.jsx.html",
+                        pathToSource: "components_general_charting_LineChart.jsx.html",
                         pathToDemoSource: "demo_components_general_charting_LineChartDemo.jsx.html",
                         status: {
                             message: "THIS COMPONENT IS STILL IN DEVELOPMENT.",
