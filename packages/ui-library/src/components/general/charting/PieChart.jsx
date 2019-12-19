@@ -1,123 +1,311 @@
-var PropTypes = require("prop-types");
-var React = require("react");
-var PieChart = require("recharts").PieChart;
-var Pie = require("recharts").Pie;
-var Cell = require("recharts").Cell;
-var Tooltip = require("recharts").Tooltip;
-var Legend = require("recharts").Legend;
-var LegendTypes = require("../../../constants/ChartingConstants.js").LegendTypes;
+import React from "react";
+import PropTypes from "prop-types";
+import {
+    PieChart as Chart,
+    Pie,
+    Cell,
+    Tooltip,
+} from "recharts";
+import { noop } from "underscore";
+import classnames from "classnames";
+import { LegendItem, alignments, valueSizes } from "./Legend";
+import { defaultRender } from "../../../util/PropUtils";
 
 /**
-* @typedef PieChart~DataItem
-* @desc An object describing a data item in the data list.
-*    Must contain a unique 'id' from other data items in the same list.
-*    Any additional fields will be used as series values (as they are specified via the series prop).
-*
-* @property {string|number} id
-*    The unique identifier for this data item.
+ * @class MetricsTooltip
+ * @desc Dynamic tooltip to display single or multiple valuves.
+ *
+ * @param {string} [color]
+ *     Define the color square next to the label.
+ * @param {string} [dataValue]
+ *     The item value refrence in the data structure.
+ * @param {string} [label]
+ *     The name of the item.
+ * @param {string} [series]
+ *     Array of labels and values.
+ * @param {string} [value]
+ *     Value of the item.
+ */
+export const MetricsTooltip = ({
+    color,
+    label,
+    value,
+    series,
+    dataValue
+}) => (
+    <div>
+        { series ? (
+            <div className="pie-chart__tooltip-top">
+                <LegendItem
+                    color={color}
+                    label={label}
+                />
+            </div>
+        ) : null }
+        <div className="pie-chart__tooltip-values">
+            { series ? (
+                series.map(item => (
+                    <LegendItem
+                        key={item.label}
+                        alignment={alignments.LEFT}
+                        label={item.label}
+                        value={item[dataValue]}
+                        valueSize={valueSizes.SM}
+                    />
+                ))
+            ) : (
+                <LegendItem
+                    alignment={alignments.LEFT}
+                    valueSize={valueSizes.SM}
+                    color={color}
+                    label={label}
+                    value={value}
+                />
+            )}
+        </div>
+    </div>
+);
+
+MetricsTooltip.propTypes = {
+    color: PropTypes.string,
+    label: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    series: PropTypes.arrayOf(PropTypes.shape({})),
+    dataValue: PropTypes.string,
+};
+
+MetricsTooltip.defaultProps = {
+    dataValue: "value",
+};
+
+/**
+ * @class PieChart
+ * @desc A chart with pie segments.
+ *
+ * @param {string} [data-id="pie-chart"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     A class name applied to the top-level element in the component.
+ * @param {Object[]} [data=[]]
+ *     The data to be passed to the component.
+ * @param {string} [data.id]
+ *     ID for individual x-axis points.
+ * @param {int[]} [data.data]
+ *     Array of integers representing the data within the chart.
+ * @param {string} [dataKey="id"]
+ *     The item id refrence in the data structure.
+ * @param {string} [dataValue="value"]
+ *     The item value refrence in the data structure.
+ */
+
+/**
+ * Callback triggered when a user clicks on a chart segment.
+ * @callback PieChart~onClick
+ * @param {Object} [data]
+ *     The datapoint being clicked on.
+ * @param {Object} [event]
+ *     The event that triggered the callback.
+ */
+
+/**
+ * Callback triggered when a user mouses out of the chart.
+ * @callback PieChart~onMouseOut
+ * @param {Object} [event]
+ *     The event that triggered the callback.
+ */
+
+/**
+ * Callback triggered when a user mouses over the chart.
+ * @callback PieChart~onMouseOver
+ * @param {Object} [data]
+ *     The datapoint being hovered over.
+ * @param {Object} [event]
+ *     The event that triggered the callback.
 */
 
 /**
-* @typedef PieChart~SectorItem
-* @desc An object describing a single series sector in the chart.
-*    Must contain a unique 'id' from other series items.
-*
-* @property {string|number} id
-*    The unique 'id' for this series sector item - it should map to the corresponding field in the data items this series represents.
-* @property {string} [color="#3182bd"]
-*    The color of the sector corresponding to this series.
+ * Function that can be used to change how the tooltip renders. For example,
+ * showing a value as $38 instead of just 38.
+ * @callback PieChart~renderTooltip
+ * @param {Object} props
+ *     The props of the default component; these can be spread into the component.
+ * @param {Object} defaultComponent
+ *     The component that the ColumnChart renders by default.
 */
-
-/**
-* @class PieChart
-* @desc A charting component that renders data as a series of sectors in a pie with optional cuztomizable legend and tooltips.
-*
-* @param {string} [data-id="pie-chart"]
-*    To define the base "data-id" value for top-level HTML container.
-*
-* @param {number} [width=700]
-*    The width of the chart.
-* @param {number} [height=500]
-*    The height of the chart.
-* @param {object} [margin={ top: 5, right: 5, bottom: 5, left: 5 }]
-*    The sizes of whitespace around the chart.
-* @param {bool} [showTooltips=true]
-*    Whether or not tooltips are displayed.
-* @param {bool} [showLegend=true]
-*    Whether or not a legend is displayed.
-* @param {module:constants/ChartingConstants.LegendTypes} [legendType=PieCmodule:constants/ChartingConstantshart.LegendTypes.TRIANGLE]
-*    The type of icon to be show for this pie's data in the legend. If set to 'none', no legend item will be rendered.
-* @param {bool} [animate=false]
-*    Whether or not to apply animation to the pie.
-* @param {bool} [donut=false]
-*    Set to true to activate a Donut chart instead of a Pie chart.
-*
-* @param {Array<PieChart~DataItem>} data
-*    The source data for the chart.
-* @param {Array<PieChart~SectorItem>} series
-*    The series data for the chart.
-*/
-class Chart extends React.Component {
-    static displayName = "PieChart";
-
-    static propTypes = {
-        "data-id": PropTypes.string,
-        width: PropTypes.number,
-        height: PropTypes.number,
-        margin: PropTypes.object,
-        showTooltips: PropTypes.bool,
-        showLegend: PropTypes.bool,
-        legendType: PropTypes.oneOf([ LegendTypes.LINE, LegendTypes.SQUARE, LegendTypes.RECTANGLE,
-            LegendTypes.CIRCLE, LegendTypes.CROSS, LegendTypes.DIAMOND, LegendTypes.STAR,
-            LegendTypes.TRIANGLE, LegendTypes.WYE, LegendTypes.NONE
-        ]),
-        animate: PropTypes.bool,
-        donut: PropTypes.bool,
-
-        data: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired
-        })).isRequired,
-
-        series: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]).isRequired,
-            color: PropTypes.string
-        })).isRequired
+class PieChart extends React.Component {
+    state = {
+        selected: {},
     };
 
-    static defaultProps = {
-        "data-id": "pie-chart",
-        showTooltips: true,
-        showLegend: true,
-        legendType: LegendTypes.TRIANGLE,
-        animate: false,
-        donut: false,
-        // TODO: Confirm with designers what would be appropriate defaults
-        width: 550,
-        height: 350,
-        margin: { top: 20, right: 20, bottom: 20, left: 20 }
+    /**
+     * Get the value or the total of the [series] values for an item
+     */
+    _getValue = (data) =>
+        data.series
+            ? data.series.reduce((total, subItem) => total + subItem[this.props.dataValue], 0)
+            : data[this.props.dataValue];
+
+    /**
+     * Sum of all values and [series] values in the data
+     */
+    _getTotalValue = (data) =>
+        data.reduce((total, item) => total + this._getValue(item), 0);
+
+
+    /**
+     * Transform data into a Recharts-readable style
+     */
+    _digestData = (data) =>
+        data.reduce((a, item) => ([
+            ...a,
+            {
+                id: item[this.props.dataKey],
+                [this.props.dataValue]: this._getValue(item),
+                color: item.color,
+            }
+        ]), []);
+
+    _mouseOver = (data, index, event) => {
+        const element = this.props.data.find((item) => item.id === data.id);
+
+        this.setState({
+            selected: element,
+        });
+
+        this.props.onMouseOver(element, event);
     };
 
-    _renderCells = () => {
-        return this.props.series.map(function (item) {
-            return <Cell key={"cell-" + item.id} fill={item.color} />;
+    _onClick = (data, index, event) => {
+        const element = this.props.data.find((item) => item.id === data.id);
+
+        this.setState({
+            selected: element,
+        });
+
+        this.props.onClick(element, event);
+    };
+
+    _mouseOut = (...args) => {
+        this.setState({ selected: {} });
+
+        // Just send the event
+        this.props.onMouseOut(args[2]);
+    }
+
+    _renderCells = (data) => {
+        return data.map((item) => {
+            const classNames = classnames("pie-chart__cell", {
+                "pie-chart__cell--hovered": this.state.selected && this.state.selected.id === item.id
+            });
+
+            return (
+                <Cell
+                    key={"cell-" + item.id}
+                    fill={item.color}
+                    className={classNames}
+                />
+            );
         });
     };
 
-    render() {
+    _renderTooltip = (d) => {
+        if (!d.payload[0]) {
+            return;
+        }
+
+        const id = d.payload[0].payload.id;
+
+        const element = this.props.data.find(item => item.id === id);
+
+        const data = {
+            color: element.color,
+            label: element.label,
+            ...(element[this.props.dataValue] && { value: element[this.props.dataValue] }),
+            ...(element.series && { series: element.series }),
+            dataValue: this.props.dataValue,
+        };
+
         return (
-            <div data-id={this.props["data-id"]}>
-                <PieChart width={this.props.width} height={this.props.height} margin={this.props.margin}>
-                    <Pie data={this.props.data} nameKey={this.props.sectorKey} valueKey={this.props.sectorDataKey}
-                        innerRadius={this.props.donut ? "50%" : null} label={this.props.sectorLabel}
-                        legendType={this.props.legendType} isAnimationActive={this.props.animate}>
-                        {this._renderCells()}
+            <div className="pie-chart__tooltip">
+                {this.props.renderTooltip(data, MetricsTooltip)}
+            </div>
+        );
+    };
+
+    render() {
+        const chartData = this._digestData(this.props.data);
+
+        const classNames = classnames("pie-chart", this.props.className);
+
+        return (
+            <div data-id={this.props["data-id"]} className={classNames}>
+                <div className="pie-chart__center-info">
+                    <div className="pie-chart__center-label">
+                        Total
+                    </div>
+                    <div className="pie-chart__center-value">
+                        {this._getTotalValue(this.props.data)}
+                    </div>
+                </div>
+
+                <Chart
+                    width={400}
+                    height={300}
+                    className="pie-chart__graph"
+                >
+                    <Pie
+                        data={chartData}
+                        nameKey={this.props.dataKey}
+                        dataKey={this.props.dataValue}
+                        paddingAngle={1}
+                        innerRadius="55%"
+                        legendType={this.props.legendType}
+                        onMouseOver={this._mouseOver}
+                        onMouseLeave={this._mouseOut}
+                        onClick={this._onClick}
+                    >
+                        {this._renderCells(chartData)}
                     </Pie>
-                    {this.props.showTooltips && <Tooltip />}
-                    {this.props.showLegend && <Legend />}
-                </PieChart>
+                    {this.props.showTooltips &&
+                        <Tooltip
+                            isAnimationActive={true}
+                            content={this._renderTooltip}
+                            cursor={false}
+                        />
+                    }
+                </Chart>
             </div>
         );
     }
 }
 
-module.exports = Chart;
+PieChart.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    data: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string,
+        color: PropTypes.string,
+        series: PropTypes.arrayOf(PropTypes.shape({
+            label: PropTypes.string,
+        }))
+    })),
+    dataKey: PropTypes.string,
+    dataValue: PropTypes.string,
+    onClick: PropTypes.func,
+    onMouseOver: PropTypes.func,
+    onMouseOut: PropTypes.func,
+    renderTooltip: PropTypes.func,
+};
+
+PieChart.defaultProps = {
+    "data-id": "pie-chart",
+    data: [],
+    dataKey: "id",
+    dataValue: "value",
+    onClick: noop,
+    onMouseOver: noop,
+    onMouseOut: noop,
+    renderTooltip: defaultRender,
+};
+
+export default PieChart;

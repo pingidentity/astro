@@ -14,6 +14,25 @@ export const alignments = {
 };
 
 /**
+ * @enum {string}
+ * @alias Legend.valueSizes
+ * @desc Enum for the different types of Legend valueSizes
+ */
+export const valueSizes = {
+    SM: "sm",
+};
+
+/**
+ * @enum {string}
+ * @alias Legend.spacings
+ * @desc Enum for the different types of Legend spacings
+ */
+export const spacings = {
+    SM: "sm",
+};
+
+
+/**
  * @class LegendItem
  * @desc LegendItem with a label, value, and color.
  *
@@ -31,27 +50,36 @@ export const LegendItem = ({
     label,
     value,
     alignment,
+    valueSize,
 }) => {
     const classNames = classnames("legend__item", {
-        "legend__item-left": alignment === alignments.LEFT,
-        "legend__item-center": alignment === alignments.CENTER,
-        "legend__item-right": alignment === alignments.RIGHT,
+        "legend__item--left": alignment === alignments.LEFT,
+        "legend__item--center": alignment === alignments.CENTER,
+        "legend__item--right": alignment === alignments.RIGHT,
+    });
+
+    const valueClassNames = classnames("legend__item-value", {
+        "legend__item-value--sm": valueSize === valueSizes.SM,
     });
 
     return (
         <div className={classNames}>
-            <div className="legend__item-info">
-                <div
-                    className="legend__item-badge"
-                    style={{
-                        backgroundColor: color,
-                    }}
-                />
-                <div className="legend__item-label">
-                    {label}
+            { label ? (
+                <div className="legend__item-info">
+                    { color ? (
+                        <div
+                            className="legend__item-badge"
+                            style={{
+                                backgroundColor: color,
+                            }}
+                        />
+                    ) : null }
+                    <div className="legend__item-label">
+                        {label}
+                    </div>
                 </div>
-            </div>
-            <div className="legend__item-value">
+            ) : null }
+            <div className={valueClassNames}>
                 { value ? value : (
                     <div className="legend__item-novalue"/>
                 )}
