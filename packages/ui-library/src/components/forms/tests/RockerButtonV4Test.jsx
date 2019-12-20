@@ -232,4 +232,15 @@ describe("RockerButton v4", function () {
         expect(helpHint.exists()).toEqual(false);
     });
 
+    it("renders with noMargin class if noMargin is true", () => {
+        const component = mount(<RockerButton labels={labelsArray} noMargin />);
+
+        expect(component.find(".rocker-button--no-margin").exists()).toEqual(true);
+    });
+
+    it("does not render with noMargin class if noMargin is false", () => {
+        const component = mount(<RockerButton labels={labelsArray} />);
+
+        expect(component.find(".rocker-button--no-margin").exists()).toEqual(false);
+    });
 });

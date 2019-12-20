@@ -1,7 +1,9 @@
 .legend {
     &__item {
         display: inline-block;
-        margin-right: $spacing-xl;
+        &:not(:last-of-type) {
+            margin-right: $spacing-xl;
+        }
 
         &-info {
             display: flex;

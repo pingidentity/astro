@@ -5,6 +5,7 @@ import {
     Line,
     XAxis,
     ReferenceLine,
+    ResponsiveContainer
 } from "recharts";
 import _ from "underscore";
 import uuid from "uuid";
@@ -37,6 +38,37 @@ import uuid from "uuid";
  *     If a range highlight should be shown.
  */
 export default class LineChart extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        data: PropTypes.array,
+        dataKey: PropTypes.string,
+        dataValue: PropTypes.string,
+        height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        highlightColor: PropTypes.string,
+        highlightRange: PropTypes.arrayOf(PropTypes.number),
+        lineColor: PropTypes.string,
+        onHoverDataPoint: PropTypes.func,
+        referenceLineColor: PropTypes.string,
+        referenceLabelColor: PropTypes.string,
+        showHighlight: PropTypes.bool,
+        width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    };
+
+    static defaultProps = {
+        "data-id": "line-chart",
+        data: [],
+        dataKey: "name",
+        dataValue: "value",
+        height: "100%",
+        highlightColor: "#5DA4EC",
+        highlightRange: [],
+        lineColor: "#193867",
+        onHoverDataPoint: _.noop,
+        referenceLineColor: "#57A0EA",
+        referenceLabelColor: "#676D74",
+        showHighlight: false,
+    };
+
     // Used to prevent unnecessary updates when the mouse moves
     mouseLockout = false;
     colorDefUUID = uuid.v4();
@@ -84,6 +116,7 @@ export default class LineChart extends React.Component {
     render() {
         const selected = this.props.data[this.state.activeTooltipIndex];
         const {
+            className,
             "data-id": dataId,
             layout,
             width,
@@ -99,126 +132,102 @@ export default class LineChart extends React.Component {
         } = this.props;
 
         return (
-            <Chart
-                className="line-chart"
-                data-id={dataId}
-                layout={layout}
-                width={width}
+            <ResponsiveContainer
+                className={className}
                 height={height}
-                data={data}
-                onMouseMove={this._onHoverDataPoint}
-                margin={{
-                    top: 20, right: 30, left: 30, bottom: 5,
-                }}
+                width={width}
             >
-                { this._renderData(data) }
-                { showHighlight ? (
-                    <defs>
-                        <linearGradient id={this.colorDefUUID} x1="0%" y1="0%" x2="100%" y2="0%">
-                            {
-                                highlightRange[0] !== undefined &&
-                                highlightRange[1] !== undefined
-                                    ? [
-                                        <stop
-                                            offset="0%"
-                                            stopColor={lineColor}
-                                            key="0"
-                                        />,
-                                        <stop
-                                            offset={
-                                                // % of data before first highlight element
-                                                `${Math.max(0, Math.ceil(
-                                                    highlightRange[0] / (data.length - 1) * 100
-                                                ))}%`
-                                            }
-                                            stopColor={lineColor}
-                                            key="1"
-                                        />,
-                                        <stop
-                                            offset={
-                                                // % of data before first highlight element
-                                                `${Math.max(
-                                                    0, Math.ceil(highlightRange[0] / (data.length - 1) * 100)
-                                                )}%`
-                                            }
-                                            stopColor={highlightColor}
-                                            key="2"
-                                        />,
-                                        <stop
-                                            offset={
-                                                // % of data before second highlight element
-                                                `${Math.max(
-                                                    0, Math.ceil(highlightRange[1] / (data.length-1) * 100)
-                                                )}%`
-                                            }
-                                            stopColor={highlightColor}
-                                            key="3"
-                                        />,
-                                        <stop
-                                            offset={
-                                                // % of data before second highlight element
-                                                `${Math.max(
-                                                    0, Math.ceil(highlightRange[1] / (data.length-1) * 100)
-                                                )}%`
-                                            }
-                                            stopColor={lineColor}
-                                            key="4"
-                                        />,
-                                        <stop
-                                            offset="100%"
-                                            stopColor={lineColor}
-                                            key="5"
-                                        />,
-                                    ] : (
-                                        <stop
-                                            offset="100%"
-                                            stopColor={lineColor}
-                                        />
-                                    )}
-                        </linearGradient>
-                    </defs>
-                ) : null }
-                <XAxis dataKey={dataKey} hide={true} />
-                <ReferenceLine
-                    x={selected ? selected.name : null}
-                    stroke={referenceLineColor}
-                    position="start"
-                    label={{
-                        position: "top",
-                        value: selected ? selected.name : null,
-                        fill: referenceLabelColor,
-                        fontSize: 14,
+                <Chart
+                    className="line-chart"
+                    data-id={dataId}
+                    layout={layout}
+                    data={data}
+                    onMouseMove={this._onHoverDataPoint}
+                    margin={{
+                        top: 20, right: 30, left: 30, bottom: 5,
                     }}
-                />
-            </Chart>
+                >
+                    { this._renderData(data) }
+                    { showHighlight ? (
+                        <defs>
+                            <linearGradient id={this.colorDefUUID} x1="0%" y1="0%" x2="100%" y2="0%">
+                                {
+                                    highlightRange[0] !== undefined &&
+                                    highlightRange[1] !== undefined
+                                        ? [
+                                            <stop
+                                                offset="0%"
+                                                stopColor={lineColor}
+                                                key="0"
+                                            />,
+                                            <stop
+                                                offset={
+                                                    // % of data before first highlight element
+                                                    `${Math.max(0, Math.ceil(
+                                                        highlightRange[0] / (data.length - 1) * 100
+                                                    ))}%`
+                                                }
+                                                stopColor={lineColor}
+                                                key="1"
+                                            />,
+                                            <stop
+                                                offset={
+                                                    // % of data before first highlight element
+                                                    `${Math.max(
+                                                        0, Math.ceil(highlightRange[0] / (data.length - 1) * 100)
+                                                    )}%`
+                                                }
+                                                stopColor={highlightColor}
+                                                key="2"
+                                            />,
+                                            <stop
+                                                offset={
+                                                    // % of data before second highlight element
+                                                    `${Math.max(
+                                                        0, Math.ceil(highlightRange[1] / (data.length-1) * 100)
+                                                    )}%`
+                                                }
+                                                stopColor={highlightColor}
+                                                key="3"
+                                            />,
+                                            <stop
+                                                offset={
+                                                    // % of data before second highlight element
+                                                    `${Math.max(
+                                                        0, Math.ceil(highlightRange[1] / (data.length-1) * 100)
+                                                    )}%`
+                                                }
+                                                stopColor={lineColor}
+                                                key="4"
+                                            />,
+                                            <stop
+                                                offset="100%"
+                                                stopColor={lineColor}
+                                                key="5"
+                                            />,
+                                        ] : (
+                                            <stop
+                                                offset="100%"
+                                                stopColor={lineColor}
+                                            />
+                                        )}
+                            </linearGradient>
+                        </defs>
+                    ) : null }
+                    <XAxis dataKey={dataKey} hide={true} />
+                    <ReferenceLine
+                        x={selected ? selected.name : null}
+                        stroke={referenceLineColor}
+                        position="start"
+                        label={{
+                            position: "top",
+                            value: selected ? selected.name : null,
+                            fill: referenceLabelColor,
+                            fontSize: 14,
+                        }}
+                    />
+                </Chart>
+            </ResponsiveContainer>
         );
     }
 }
-
-LineChart.propTypes = {
-    "data-id": PropTypes.string,
-    referenceLineColor: PropTypes.string,
-    referenceLabelColor: PropTypes.string,
-    showHighlight: PropTypes.bool,
-    highlightColor: PropTypes.string,
-    highlightRange: PropTypes.arrayOf(PropTypes.number),
-    lineColor: PropTypes.string,
-    data: PropTypes.array,
-    dataKey: PropTypes.string,
-    dataValue: PropTypes.string,
-    onHoverDataPoint: PropTypes.func,
-};
-
-LineChart.defaultProps = {
-    "data-id": "line-chart",
-    data: [],
-    dataKey: "name",
-    dataValue: "value",
-    referenceLineColor: "#57A0EA",
-    referenceLabelColor: "#676D74",
-    highlightColor: "#5DA4EC",
-    highlightRange: [],
-    lineColor: "#193867",
-    showHighlight: false,
-    onHoverDataPoint: _.noop,
-};
