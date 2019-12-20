@@ -40,8 +40,7 @@
     font-size: 14px;
 
     &::placeholder {
-        font-style: italic;
-        opacity: $inactive-opacity;
+        @include text-placeholder;
     }
 }
 
