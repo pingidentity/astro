@@ -1,4 +1,5 @@
 import React from "react";
+import classnames from "classnames";
 
 /**
  * @class ContentArea
@@ -14,6 +15,6 @@ const ContentArea = ({
     children,
     className,
     "data-id": dataId,
-}) => (<div data-id={dataId} id="content" className={className}>{children}</div>);
+}) => (<div data-id={dataId} className={classnames("content-area", className)}>{children}</div>);
 
 export default ContentArea;

@@ -773,7 +773,8 @@ $color-grey-minor-1: $color-neutral-30;
 
 }
 
-#content {
+#content,
+.content-area {
     @extend .stretch-content;
 
     position: absolute;
@@ -793,6 +794,11 @@ $color-grey-minor-1: $color-neutral-30;
         content: '';
         display: block;
         height: 2 * $spacing-xl;
+    }
+
+    .content-area {
+        top: 0;
+        left: 0;
     }
 }
 
