@@ -13,7 +13,7 @@ import Utils from "../../util/Utils";
 *     CSS classes to be set on the top-level HTML container.
 * @param {array} [labels]
 *     Array of label strings to use as button titles.
-* @param {string} [selectedlabel]
+* @param {string} [selectedLabel]
 *     Corresponding id for selcted label to match the ListNav to the array labels.
 * @param {function} [onSelect]
 *     Function that corresponds to the Id to figure out which item is clicked.
@@ -108,13 +108,11 @@ export default class ListNav extends Component {
         }
     }
 
-    renderedList = this._getRenderList(this.props.labels)
-
     render() {
         return (
             <div data-id={this.props["data-id"]} className={classnames("list-nav", this.props.className)}>
                 <div className="list-nav__nav">
-                    {this.renderedList}
+                    {this._getRenderList(this.props.labels)}
                     {this.props.listButton}
                 </div>
                 <div className="list-nav__content">
