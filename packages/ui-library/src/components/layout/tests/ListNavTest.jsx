@@ -1,4 +1,5 @@
 
+import { shallow } from "enzyme";
 describe("ListNav", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -92,6 +93,34 @@ describe("ListNav", function () {
         const element = TestUtils.findRenderedDOMNodeWithClass(component, "list-nav-item__link");
 
         expect(element).toBe(null);
+
+    });
+
+    it("updates selected item", function () {
+        let clickedOn;
+
+        const wrapper = shallow(
+            <ListNav
+                onSelect={(id) => {clickedOn = id;}}
+                labels={mockData}
+                selectedLabel={mockData[0].id}
+            />
+        );
+
+        const labels = wrapper.find(".list-nav-item__link");
+        const selected = wrapper.find(".list-nav-item--selected .list-nav-item__link");
+
+        expect(selected.text()).toEqual(mockData[0].label);
+
+        labels.at(3).simulate("click");
+        expect(clickedOn).toEqual(mockData[3].id);
+
+        wrapper.setProps({ selectedLabel: clickedOn });
+
+        const newSelected = wrapper.find(".list-nav-item--selected .list-nav-item__link");
+
+        expect(newSelected.text()).toEqual(mockData[3].label);
+
 
     });
 
