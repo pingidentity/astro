@@ -85,9 +85,8 @@ $body-text-color: $color-neutral-20;
 }
 
 @mixin text-placeholder {
-    @include text-value;
+    @include text-style($color-accent-neutral-40);
 
-    opacity: $inactive-opacity;
     font-style: italic;
 }
 
