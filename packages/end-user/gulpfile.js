@@ -45,5 +45,3 @@ gulp.task('build-dist', gulp.series(
     'move-files',
     done => done(),
 ));
-
-
