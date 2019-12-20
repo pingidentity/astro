@@ -8,8 +8,16 @@ import {
 } from "recharts";
 import { noop } from "underscore";
 import classnames from "classnames";
+import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem, alignments, valueSizes } from "./Legend";
 import { defaultRender } from "../../../util/PropUtils";
+
+export const PieChartTitle = ({ className, ...props }) => (
+    <DashboardCardTitle
+        {...props}
+        className={classnames(className, "dashboard-card__title--horizontal-bar-card")}
+    />
+);
 
 /**
  * @class MetricsTooltip
@@ -133,6 +141,39 @@ MetricsTooltip.defaultProps = {
  *     The component that the ColumnChart renders by default.
 */
 class PieChart extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        data: PropTypes.arrayOf(PropTypes.shape({
+            label: PropTypes.string,
+            color: PropTypes.string,
+            series: PropTypes.arrayOf(PropTypes.shape({
+                label: PropTypes.string,
+            }))
+        })),
+        dataKey: PropTypes.string,
+        dataValue: PropTypes.string,
+        height: PropTypes.number,
+        onClick: PropTypes.func,
+        onMouseOver: PropTypes.func,
+        onMouseOut: PropTypes.func,
+        renderTooltip: PropTypes.func,
+        width: PropTypes.number
+    };
+
+    static defaultProps = {
+        "data-id": "pie-chart",
+        data: [],
+        dataKey: "id",
+        dataValue: "value",
+        height: 300,
+        onClick: noop,
+        onMouseOver: noop,
+        onMouseOut: noop,
+        renderTooltip: defaultRender,
+        width: 400
+    };
+
     state = {
         selected: {},
     };
@@ -249,8 +290,8 @@ class PieChart extends React.Component {
                 </div>
 
                 <Chart
-                    width={400}
-                    height={300}
+                    width={this.props.width}
+                    height={this.props.height}
                     className="pie-chart__graph"
                 >
                     <Pie
@@ -278,34 +319,5 @@ class PieChart extends React.Component {
         );
     }
 }
-
-PieChart.propTypes = {
-    "data-id": PropTypes.string,
-    className: PropTypes.string,
-    data: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.string,
-        color: PropTypes.string,
-        series: PropTypes.arrayOf(PropTypes.shape({
-            label: PropTypes.string,
-        }))
-    })),
-    dataKey: PropTypes.string,
-    dataValue: PropTypes.string,
-    onClick: PropTypes.func,
-    onMouseOver: PropTypes.func,
-    onMouseOut: PropTypes.func,
-    renderTooltip: PropTypes.func,
-};
-
-PieChart.defaultProps = {
-    "data-id": "pie-chart",
-    data: [],
-    dataKey: "id",
-    dataValue: "value",
-    onClick: noop,
-    onMouseOver: noop,
-    onMouseOut: noop,
-    renderTooltip: defaultRender,
-};
 
 export default PieChart;

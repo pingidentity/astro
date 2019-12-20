@@ -503,6 +503,10 @@ button,
             z-index: 1;
         }
     }
+
+    &--no-margin {
+        margin-bottom: 0;
+    }
 }
 
 button.button--overflow {

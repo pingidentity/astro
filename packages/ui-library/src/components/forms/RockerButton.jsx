@@ -37,6 +37,8 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 *
 * @param {array} labels
 *     Array of label strings to use as button titles.
+* @param {boolean} noMargin
+*     Removes the margin below the RockerButton.
 *
 * @param {RockerButton~onValueChange} [onValueChange]
 *     Callback to be triggered when selection changes.
@@ -86,6 +88,7 @@ class RockerButtonStateless extends React.Component {
                     id: PropTypes.string
                 }),
             ])),
+        noMargin: PropTypes.bool,
         onValueChange: PropTypes.func,
         selectedIndex: PropTypes.oneOfType([
             PropTypes.number,
@@ -99,6 +102,7 @@ class RockerButtonStateless extends React.Component {
         className: "",
         "data-id": "rocker-button",
         disabled: false,
+        noMargin: false,
         onValueChange: _.noop,
         selectedIndex: 0,
     };
@@ -129,6 +133,7 @@ class RockerButtonStateless extends React.Component {
             disabled: this.props.disabled,
             "rocker-button--chart-rocker": type === rockerTypes.CHART || type === rockerTypes.CHART_SMALL,
             "rocker-button--chart-rocker-small": type === rockerTypes.CHART_SMALL,
+            "rocker-button--no-margin": this.props.noMargin
         });
 
 
