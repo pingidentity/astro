@@ -9,6 +9,7 @@ export const allFlags = [
     "fixed-messages-constants",
     "true-default",
     "v4",
+    "new-alert-modal",
 ];
 
 export const flagsPropType = PropTypes.arrayOf(PropTypes.oneOf(allFlags));

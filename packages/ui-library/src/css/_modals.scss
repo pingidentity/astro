@@ -128,6 +128,12 @@
         overflow-y: auto;
         max-height: calc(100% - #{2 * $min-bottom});
 
+        &.modal-body--flagged.alert {
+            border-radius: $modal-radius;
+            margin-top: 30%;
+            padding: $spacing-xx $spacing-lg;
+        }
+
         border-radius: 0 0 $modal-radius $modal-radius;
 
         h2 {
@@ -155,6 +161,7 @@
             border: none;
         }
     }
+
     &.wizard-modal {
         .modal-body {
             background-color: $color-elderly;
@@ -293,3 +300,4 @@
         }
     }
 }
+
