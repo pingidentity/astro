@@ -8,6 +8,12 @@ import CancelTooltip from "./../tooltips/CancelTooltip";
 import If from "./If";
 import classnames from "classnames";
 import { Portal } from "react-portal";
+import FlexRow, { justifyOptions } from "./../layout/FlexRow";
+import Icon, { iconSizes } from "./../general/Icon";
+import Text, { textTypes } from "./../general/Text";
+import Padding from "./../layout/Padding";
+import { flagsPropType } from "../../util/FlagUtils";
+
 
 /**
  * @enum {string}
@@ -44,11 +50,12 @@ var Type = {
  *     Title of the modal.
  * @param {boolean} [showHeader=true]
  *     Controls modal header rendering; if set to false,
- *     making modal effectivly a 'light box' for previews.
+ *     making modal effectively a 'light box' for previews.
  *
  * @param {object} [cancelTooltip]
  *     An object containing the props required to generate a details tooltip to confirm the closing of a modal.
- *
+ * @param {array} [flags]
+ *     For new design of alert modal pass "new-alert-modal"
  * @param {Modal~onClose} [onClose]
  *     Callback to be triggered when the modal is closed by clicking the close modal link.
  *     If this function returns false then closing will be prevented.
@@ -85,6 +92,7 @@ class Modal extends React.Component {
         ]),
         cancelTooltip: PropTypes.object,
         children: PropTypes.node,
+        flags: flagsPropType,
     };
 
     static childContextTypes = {
@@ -97,6 +105,7 @@ class Modal extends React.Component {
         showHeader: true,
         maximize: false,
         type: Type.BASIC,
+        flags: [],
     };
 
     /*
@@ -262,7 +271,57 @@ class Modal extends React.Component {
             </div>
         );
 
-        return <Portal>{renderedModal}</Portal>;
+        const flaggedModal = (
+            <div
+                data-id={this.props["data-id"]}
+                ref="container"
+                key="modal"
+                className={classnames("modal", this.props.className, modalClasses)}>
+                <div
+                    className="modal-bg"
+                    data-id="modal-bg"
+                    onClick={this._handleBgClick}
+                />
+                <div
+                    className="modal-content"
+                    tabIndex="-1"
+                    data-id="modal-content"
+                    onClick={this._handleBgClick}
+                >
+                    <span data-id="modal-inner-content">
+                        {this.props.showHeader === false}
+                        {this.props.showCloseBttn === false}
+                        <div className={classnames("modal-body", "modal-body--flagged",
+                            this.props.className, modalClasses)}
+                        data-id="modal-body" style={this._toggleIeScrollHack()}>
+                            <If test={(!this.props.showHeader || this.props.type === "dialog") && this.props.onClose}>
+                                {this._getCloseButton()}
+                            </If>
+                            {
+                                this.props.bodyTitle &&
+                                <div>
+                                    <FlexRow justify={justifyOptions.CENTER}>
+                                        <Text type={textTypes.WARNING}>
+                                            <Icon iconSize={iconSizes.XXL} iconName="alert"/>
+                                        </Text>
+                                    </FlexRow>
+                                    <FlexRow justify={justifyOptions.CENTER}>
+                                        <Padding vertical={Padding.sizes.LG}>
+                                            <Text type={textTypes.PAGETITLE}>{this.props.bodyTitle}</Text>
+                                        </Padding>
+                                    </FlexRow>
+                                </div>
+                            }
+                            {this.props.children}
+                        </div>
+                    </span>
+                </div>
+            </div>
+        );
+
+        return this.props.flags.includes("new-alert-modal")
+            ? <Portal>{flaggedModal}</Portal>
+            : <Portal>{renderedModal}</Portal>;
     }
 }
 
@@ -282,3 +341,4 @@ Modal.Type = Type;
 Modal.BodyTitle = BodyTitle;
 
 module.exports = Modal;
+

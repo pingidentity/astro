@@ -1,11 +1,11 @@
 import React from "react";
-import Modal from "./../../../components/general/Modal";
 
-import Button from "../../../components/buttons/Button";
-import InputRow from "../../../components/layout/InputRow";
-import ButtonGroup from "../../../components/layout/ButtonGroup";
-
+import Button from "ui-library/lib/components/buttons/Button";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import Modal from "ui-library/lib/components/general/Modal";
+import Text from "ui-library/lib/components/general/Text";
 
 /**
 * @name ModalDemo
@@ -16,7 +16,7 @@ class ModalDemo extends React.Component {
 
     state = {};
 
-    numDemos = 7;
+    numDemos = 8;
 
     _makeToggle = index => () => this.setState(state => ({ [`expanded${index}`]: !state[`expanded${index}`] }));
 
@@ -33,7 +33,7 @@ class ModalDemo extends React.Component {
         console.log("_resetModal");
 
         this._closeTooltip();
-        this._makeToggle(6)();
+        this._makeToggle(8)();
     };
 
     render() {
@@ -98,33 +98,33 @@ class ModalDemo extends React.Component {
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._makeToggle(7)}>Open Modal with Developer Controlled Close</a>
+                    <a onClick={this._makeToggle(4)}>Open Modal with Developer Controlled Close</a>
 
                     <Modal
                         modalTitle="Dev Controlled Close"
                         maximize={false}
-                        expanded={this.state.expanded7}
-                        onOpen={this._makeToggle(7)}>
+                        expanded={this.state.expanded4}
+                        onOpen={this._makeToggle(4)}>
                         <InputRow>
                             This modal has no onClose prop, so it is up to the developer to
                              provide the closing behavior as with the buttons below. <br />
                             This also removes the close button at the top of the modal, and centers the header.
                         </InputRow>
-                        <ButtonGroup onCancel={this._makeToggle(7)}>
-                            <Button type="primary" onClick={this._makeToggle(7)}>Save</Button>
+                        <ButtonGroup onCancel={this._makeToggle(4)}>
+                            <Button type="primary" onClick={this._makeToggle(4)}>Save</Button>
                         </ButtonGroup>
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._makeToggle(4)}>Open Dialog Modal</a>
+                    <a onClick={this._makeToggle(5)}>Open Dialog Modal</a>
 
                     <Modal
                         modalTitle="Dialog Modal"
                         type="dialog"
                         ref="dialogModal"
-                        expanded={this.state.expanded4}
-                        onOpen={this._makeToggle(4)}
-                        onClose={this._makeToggle(4)}
+                        expanded={this.state.expanded5}
+                        onOpen={this._makeToggle(5)}
+                        onClose={this._makeToggle(5)}
                         bodyTitle="Dialog modal content here!">
 
                         <FlexRow
@@ -136,39 +136,63 @@ class ModalDemo extends React.Component {
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <ButtonGroup>
-                                <Button onClick={this._makeToggle(4)}>Nope</Button>
-                                <Button type="primary" onClick={this._makeToggle(4)}>Yup</Button>
+                                <Button onClick={this._makeToggle(5)}>Nope</Button>
+                                <Button type="primary" onClick={this._makeToggle(5)}>Yup</Button>
                             </ButtonGroup>
                         </FlexRow>
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._makeToggle(5)}>Open Alert Modal</a>
+                    <a onClick={this._makeToggle(6)}>Open Alert Modal</a>
 
                     <Modal
                         type="alert"
                         ref="alertModal"
-                        expanded={this.state.expanded5}
+                        expanded={this.state.expanded6}
                         showCloseBttn={true}
-                        onOpen={this._makeToggle(5)}
+                        onOpen={this._makeToggle(6)}
                         bodyTitle="Alert Modal">
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>
-                        <ButtonGroup onCancel={this._makeToggle(5)}>
-                            <Button type="cancel" onClick={this._makeToggle(5)}>Discard Changes</Button>
-                            <Button type="primary" onClick={this._makeToggle(5)}>Save</Button>
+                        <ButtonGroup onCancel={this._makeToggle(6)}>
+                            <Button type="cancel" onClick={this._makeToggle(6)}>Discard Changes</Button>
+                            <Button type="primary" onClick={this._makeToggle(6)}>Save</Button>
                         </ButtonGroup>
                     </Modal>
                 </InputRow>
                 <InputRow>
-                    <a onClick={this._makeToggle(6)}>Open Modal with Close Confirmation</a>
+                    <a onClick={this._makeToggle(7)}>Open New Design Alert Modal</a>
+
+                    <Modal
+                        flags={["new-alert-modal"]}
+                        type="alert"
+                        ref="alertModal"
+                        expanded={this.state.expanded7}
+                        onOpen={this._makeToggle(7)}
+                        bodyTitle="Alert Modal">
+                        <div>
+                            <Text align={Text.alignments.CENTER}>Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+                        </div>
+                        <ButtonGroup onCancel={this._makeToggle(7)} cancelLabel="Cancel">
+                            <Button
+                                type={Button.buttonTypes.PRIMARY}
+                                onClick={this._makeToggle(7)}
+                            >
+                            Save
+                            </Button>
+                        </ButtonGroup>
+                    </Modal>
+                </InputRow>
+                <InputRow>
+                    <a onClick={this._makeToggle(8)}>Open Modal with Close Confirmation</a>
 
                     <Modal
                         modalTitle="Modal with Close Confirmation"
                         maximize={true}
-                        expanded={this.state.expanded6}
-                        onOpen={this._makeToggle(6)}
+                        expanded={this.state.expanded8}
+                        onOpen={this._makeToggle(8)}
                         onClose={this._openTooltip}
                         cancelTooltip={{
                             title: "Close Modal Confirmation",
@@ -179,7 +203,6 @@ class ModalDemo extends React.Component {
                             confirmButtonText: "Yes",
                             cancelButtonText: "No"
                         }}>
-
                         <div>
                             A maximized modal always occupies the full width that a modal may have, regardless of
                             its content.  As with the regular modal, the height of a maximized modal grows with its
