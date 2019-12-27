@@ -1,5 +1,10 @@
 [
     {
+        "title": "v4.4.0",
+        "date": "12/27/19",
+        "file": "./release-notes/v4-4-0.md"
+    },
+    {
         "title": "v4.3.2",
         "date": "12/20/19",
         "file": "./release-notes/v4-3-2.md"
