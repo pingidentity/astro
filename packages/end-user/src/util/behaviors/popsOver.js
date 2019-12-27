@@ -40,17 +40,17 @@ const popsOver = WrappedComponent =>
             }
         }
 
-        componentWillUpdate(nextProps, nextState) {
-            if (nextProps.open !== undefined) {
-                if (!this._isOpen() && nextProps.open) {
+        componentDidUpdate(prevProps, prevState) {
+            if (this.props.open !== undefined) {
+                if (this._isOpen() && !prevProps.open) {
                     this._bindWindowsEvents();
-                } else if (this._isOpen() && !nextProps.open) {
+                } else if (!this._isOpen() && prevProps.open) {
                     this._removeWindowsEvents();
                 }
             } else {
-                if (!this._isOpen() && nextState.open) {
+                if (this._isOpen() && !prevState.open) {
                     this._bindWindowsEvents();
-                } else if (this._isOpen() && !nextState.open) {
+                } else if (!this._isOpen() && prevState.open) {
                     this._removeWindowsEvents();
                 }
             }
