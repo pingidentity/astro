@@ -1,0 +1,47 @@
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+
+Buttons initiate actions. Sometimes these actions take immediate effect, and sometimes the button kicks off a workflow that ends with a finalized action being performed.
+
+## Primary Buttons
+The implied message of a primary button is that the user probably wants to click it. It is the current recommended action. As such, there should only be one primary button visible at any given moment. Common uses are as next buttons for wizards and as confirmation buttons on confirmation popovers. An exception is that primary buttons should not be used to confirm deletions. They also should not be used to confirm alternate actions that are presented when the user's desired action is not available.
+
+<Button label="Save" type={buttonTypes.PRIMARY} />
+
+## Secondary Buttons
+Secondary buttons are more common than primary buttons. There is no implied message for a secondary button. They present potential actions, but don't imply anything about whether the user should click them. In practice, this means that secondary buttons are generally used to initiate actions while primary buttons are used to continue and complete actions (with the aforementioned exception of deletions).
+
+<Button label="Add Application" iconName="plus" /><br />
+
+Secondary buttons can also be used for a simple acknowledgement action – when no data is being changed, but the user is acknowledging a presented message.
+
+## Cancel Buttons
+Cancel buttons are generally paired with primary buttons, and they represent an action that will cause the user to lose unwanted data.
+
+In general, we use link buttons for canceling actions, but a rectangular cancel button is appropriate when the action the user is performing is potentially desctructive.
+
+<Button label="Cancel" type={buttonTypes.CANCEL} />
+
+## Danger Buttons
+
+Sometimes we use red danger buttons to alert the user when an action could be very destructive and disruptive.
+
+<Button label="Delete Everything" type={buttonTypes.DANGER} />
+
+## Inline Buttons
+Inline buttons could be thought of as tertiary buttons. They represent actions related to specific items on a page rather than the entire page. The most clear-cut instance when an inline button is appropriate is when an action is attached to a specific piece of data being displayed. Another example is in data list items.
+
+<Text type={textTypes.VALUE} inline>Here is a value</Text> <Button inline>Change</Button>
+
+## Icon Buttons
+Inline buttons don't always need labels. If a button's action is common enough to be understood from an icon, then an icon can replace the label. For example, a button with only a trash can serves as an obvious "Delete" button.
+
+<Button iconName="delete" inline />
+
+## Link Buttons
+Sometimes we want to provide actions without much visual emphasis. There are two main cases for this: 1) the action of canceling a simple action and 2) actions that change the data on a form without triggering a save of that data. The list-building control uses a link button for adding items to it. Style-wise, link buttons follow all the same rules as links.
+
+<Button type={buttonTypes.LINK}>A Simple Link Button</Button>
+
+## Button Labels
+Generally, buttons should be labeled with the action they perform – preferably distilled to one or two words. Examples: "Remove", "Add Application", "Reset Password". The major exception for this rule is within wizards where button labels reflect how they change the state of the wizard: "Next" and "Done".

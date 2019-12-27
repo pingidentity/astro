@@ -18,6 +18,7 @@ import Validation from "../components/docs/standards/Validation.mdx";
 import Spacing from "../components/docs/standards/Spacing.mdx";
 import PageTypes from "../components/docs/standards/PageTypes.mdx";
 import Colors from "../components/docs/standards/Colors.mdx";
+import Buttons from "../components/docs/standards/Buttons.mdx";
 
 const contentPage = WrappedComponent => (props) => (
     <PageSection>
@@ -1443,6 +1444,12 @@ module.exports = [
     {
         label: "Design",
         children: [
+            {
+                label: "Button Types",
+                demo: contentPage(Buttons),
+                contentPage: true,
+                icon: "play"
+            },
             {
                 label: "Content",
                 demo: require("../components/docs/Content"),
