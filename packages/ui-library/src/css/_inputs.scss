@@ -2834,6 +2834,11 @@ a {
     }
 }
 
+// this is only used by the unit input
+.text-field--right-align input {
+    text-align: right;
+}
+
 // Input width settings
 $input-width-settings: (
     'width-max': 590px,
