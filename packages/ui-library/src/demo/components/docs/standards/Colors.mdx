@@ -1,0 +1,17 @@
+import { semantics, neutrals, strongs, accents, ColorScale, ColorSwatches } from "./ColorsDemos";
+
+The UI Library has three main types of colors: neutrals, semantic colors, and charting colors. The charting colors are more or less arbitrary, so they aren't listed here.
+
+## Neutrals
+
+Our neutral colors make up the bulk of our UI. These grays and blues create the visual structure of the page.
+
+<ColorScale name="Neutrals" colors={neutrals} />
+<ColorScale name="Strong Neutrals" colors={strongs} />
+<ColorScale name="Accent Neutrals" colors={accents} />
+
+## Semantic Colors
+
+Semantic colors have meaning. They are meant to pop out from the neutrals and communicate some kind of value to the user. They often appear in feedback-related components.
+
+<ColorSwatches colors={semantics} />

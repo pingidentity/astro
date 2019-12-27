@@ -39,6 +39,16 @@
         @include text-label;
     }
 
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin-top: $spacing-lg;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
 
     ul {
         margin: 0 0 1em $spacing-lg;

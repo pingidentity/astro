@@ -5,7 +5,7 @@ import classnames from "classnames";
 /**
  * @enum {string}
  * @alias Text.textTypes
- * @desc Enum for the different types of Messages
+ * @desc Enum for the different types of Text
  */
 export const textTypes = {
     /** body */
@@ -32,6 +32,20 @@ export const textTypes = {
     PRIMARY: "primary",
     /** section-title */
     SECTIONTITLE: "section-title",
+    /** success */
+    SUCCESS: "success",
+    /** value */
+    VALUE: "value",
+    /** warning */
+    WARNING: "warning",
+};
+
+/**
+ * @enum {string}
+ * @alias Text.textVariants
+ * @desc Enum for the different types that can be overlaid on another type
+ */
+export const textVariants = {
     /** success */
     SUCCESS: "success",
     /** value */
@@ -80,6 +94,8 @@ const alignments = {
 *     Way of showing overflowed text
 * @param {Text.textTypes} [type]
 *     Style of text
+* @param {Text.textVariants} [variant]
+*     Additional styles to add
 */
 
 const Text = ({
@@ -90,6 +106,7 @@ const Text = ({
     inline,
     type,
     overflow,
+    variant,
 }) => (
     <div
         className={classnames(
@@ -98,6 +115,7 @@ const Text = ({
             `text-${type}`,
             `text-component--overflow-${overflow}`,
             {
+                [`text-${variant}`]: variant,
                 "text-component--inline": inline,
                 "text-component--center": align === alignments.CENTER,
                 "text-component--right": align === alignments.RIGHT,
@@ -116,6 +134,7 @@ Text.propTypes = {
     "data-id": PropTypes.string,
     overflow: PropTypes.oneOf(Object.values(overflowTypes)),
     type: PropTypes.oneOf(Object.values(textTypes)),
+    variant: PropTypes.oneOf(Object.values(textVariants)),
 };
 
 Text.defaultProps = {
@@ -126,6 +145,7 @@ Text.defaultProps = {
 };
 
 Text.textTypes = textTypes;
+Text.textVariants = textVariants;
 Text.overflowTypes = overflowTypes;
 Text.alignments = alignments;
 
