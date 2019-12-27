@@ -26,9 +26,6 @@ import {
 import Icon from "../general/Icon";
 import { InputWidths, InputWidthProptypes, getInputWidthClass } from "./InputWidths";
 
-const placeholder = document.createElement("span");
-placeholder.className = "placeholder";
-
 const dontPropagate = e => e.stopPropagation();
 
 /**
@@ -196,6 +193,8 @@ class MultivaluesOption extends Component {
  *     Blur callback
  * @param {function} [onFocus]
  *     Focus callback
+ * @param {string} [placeholder]
+ *     Placeholder text to display when there are no entries or drafts.
  * @param {boolean} [required=false]
  *     If true, the user must enter an entry to the field.
  * @param {boolean} [stacked=false]
@@ -627,6 +626,14 @@ export class MultivaluesBase extends Component {
             : [];
     };
 
+    _renderPlaceholder = () => {
+        const { placeholder } = this.props;
+        const showPlaceholder = this.props.entries.length === 0 && this.state.draft.length === 0;
+        return (showPlaceholder && placeholder)
+            ? <div className="value-input__placeholder">{placeholder}</div>
+            : null ;
+    }
+
     render() {
         const {
             autoFocus,
@@ -711,6 +718,7 @@ export class MultivaluesBase extends Component {
                 <div className={entryClassNames} data-id="entries" ref={el => this.inputBox = el}>
                     {entryNodes}
                     <div className="value-input">
+                        {this._renderPlaceholder()}
                         <div className="value-input__wrapper">
                             <input
                                 data-id="value-entry"

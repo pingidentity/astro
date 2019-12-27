@@ -205,10 +205,16 @@
     &--focused .entries:hover {
         border-color: $color-active-blue;
     }
-
 }
 
 .modifier_light-inputs .input-multivalues .entries .entry {
     border-color: $color-accent-neutral-90;
     background-color: $color-accent-neutral-90;
 }
+
+.value-input__placeholder {
+    @include text-placeholder;
+    @include break-word;
+    margin-top: 6px;
+}
+

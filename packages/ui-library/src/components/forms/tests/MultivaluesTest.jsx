@@ -13,7 +13,7 @@ import TestUtils from "../../../testutil/TestUtils";
 import { MultivaluesBase as Multivalues } from "../Multivalues";
 import { KeyCodes } from "../../../util/KeyboardUtils";
 import options from "../../../demo/components/forms/data/userOptions";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 describe("Multivalues", function () {
 
@@ -729,4 +729,18 @@ describe("Multivalues", function () {
         expect(valueChangeCallback).not.toBeCalled();
     });
 
+    it("renders placeholder classname when there is a placeholder prop", function() {
+        const placeholderTest = shallow(
+            <Multivalues placeholder="placeholder text" />
+        );
+        expect(placeholderTest.find(".value-input__placeholder").exists()).toBeTruthy();
+    });
+
+    it("doesn't render placeholder classname when there is no placeholder prop", function() {
+        const placeholderTest = shallow(
+            <Multivalues />
+        );
+        expect(placeholderTest.find(".value-input__placeholder").exists()).toBeFalsy();
+    });
 });
+
