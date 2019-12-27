@@ -1684,6 +1684,10 @@ input[type=file] {
         overflow-x: hidden;
         overflow-y: auto;
 
+        &--remove-max-height {
+            max-height: unset;
+        }
+
         .input-radio {
             margin: 0 15px 10px 0;
         }
@@ -1730,6 +1734,10 @@ input[type=file] {
         .input-selection-list-items {
             max-height: 228px - 46px;
             margin-top: 1px;
+
+            &--remove-max-height {
+                max-height: unset;
+            }
         }
         a.clear-search {
             position: absolute;
@@ -1750,6 +1758,11 @@ input[type=file] {
     &.fluid-width {
         max-width: 400px;
         width: auto;
+    }
+
+    &--auto-width {
+        width: auto;
+        max-width: 100%;
     }
 
     &__add-option {
