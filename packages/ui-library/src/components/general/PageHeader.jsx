@@ -24,8 +24,8 @@ import Icon from "../general/Icon";
  *      of the header.
  * @param {string} [image]
  *     URL for an image that, when provided, appears to the left of the page title.
- * @param {string} [icon]
- *     HTTP path to an icon. When specified, the icon displays to the left of the title and subtitle.
+ * @param {node} [iconName]
+ *     HTTP path to an icon or JSX element. When specified, the icon displays to the left of the title and subtitle.
  *  @param {string} [bottomMarginSize]
  *     A prop that adds bottom margin to the heeader.
  *
@@ -51,7 +51,7 @@ const PageHeader = ({
     title,
     underlined,
     iconName,
-    bottomMarginSize
+    bottomMarginSize,
 }) => {
 
     const pageHeaderClass = classnames("page-header",
@@ -76,7 +76,10 @@ const PageHeader = ({
     };
 
     const renderIcon = () => {
-        return iconName && <Icon className="page-header__icon" iconName={iconName} type="leading" />;
+        if (!iconName) {return;}
+        return (typeof iconName !== "object")
+            ? <Icon className="page-header__icon" iconName={iconName} type="leading" />
+            : <div className="page-header__node">{iconName}</div>;
     };
 
     return (
@@ -102,7 +105,7 @@ PageHeader.propTypes = {
     underlined: PropTypes.bool,
     accessories: PropTypes.node,
     image: PropTypes.string,
-    iconName: PropTypes.string,
+    iconName: PropTypes.node,
     bottomMarginSize: PropTypes.oneOf([
         bottomMargin.XS,
         bottomMargin.SM,
@@ -113,7 +116,7 @@ PageHeader.propTypes = {
 
 PageHeader.defaultProps = {
     "data-id": "page-header",
-    underlined: false
+    underlined: false,
 };
 
 PageHeader.bottomMargin = bottomMargin;
