@@ -5,6 +5,7 @@ describe("PageHeader", () => {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         PageHeader = require("../PageHeader"),
+        SocialIcon = require("@pingux/end-user/components/SocialIcon/SocialIcon"),
         _ = require("underscore");
 
     const pageHeaderTitle = "Page Header",
@@ -77,5 +78,35 @@ describe("PageHeader", () => {
         const element = TestUtils.findRenderedDOMNodeWithClass(component, "page-header__image");
         expect(element).toBeTruthy();
         expect(element.children[0].src).toBe(imagePath);
+    });
+
+    it("renders the component with an iconName as an icon", () => {
+        const opts ={
+            iconName: "cog"
+        };
+
+        const component = getComponent(opts);
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "page-header__icon");
+        expect(element).toBeTruthy();
+    });
+
+    it("renders the component with an iconName as a JSX element", () => {
+        const opts ={
+            iconName: <SocialIcon.MARKETO/>
+        };
+
+        const component = getComponent(opts);
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "page-header__node");
+        expect(element).toBeTruthy();
+    });
+
+    it("does not render iconName prop if nothing is declared", () => {
+        const opts ={
+            iconName: ""
+        };
+
+        const component = getComponent(opts);
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "page-header__node");
+        expect(element).toBeFalsy();
     });
 });

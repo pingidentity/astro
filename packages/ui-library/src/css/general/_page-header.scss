@@ -68,7 +68,8 @@
     }
 }
 
-.page-header__image {
+.page-header__image,
+.page-header__node {
     $size: 40px;
 
     box-sizing: border-box;

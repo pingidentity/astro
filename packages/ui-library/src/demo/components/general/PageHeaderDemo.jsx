@@ -9,6 +9,8 @@ import PageHeader from "ui-library/lib/components/general/PageHeader";
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
 import Link from "ui-library/lib/components/general/Link";
 
+import SocialIcon from "@pingux/end-user/components/SocialIcon/SocialIcon";
+
 /**
 * @name PageHeaderDemo
 * @memberof PageHeader
@@ -17,7 +19,7 @@ import Link from "ui-library/lib/components/general/Link";
 const PageHeaderDemo = () => {
     return (
         <div>
-            <PageHeader title="A Page Header" />
+            <PageHeader title="A Page Header"/>
             <br/>
             <PageHeader title="A Page Header with Icon" iconName="cog"
             />
@@ -54,6 +56,7 @@ const PageHeaderDemo = () => {
                     </FlexRow>
                 }
             />
+            <PageHeader title="A Page Header with icon node" iconName={<SocialIcon.MARKETO/>}/>
         </div>
     );
 };
