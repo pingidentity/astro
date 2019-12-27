@@ -351,7 +351,7 @@ function ActiveStep(props) {
     const buttonBarProps = _.defaults({}, props.buttonBarProps, buttonBarDefaults);
 
     return (
-        <div>
+        <div data-id={`${props["data-id"]}-${props.step.props["data-id"]}`}>
             {props.step.props.loading && (
                 <PageSpinner
                     data-id={`${props["data-id"]}-loader`}
