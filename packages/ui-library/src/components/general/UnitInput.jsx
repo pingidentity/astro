@@ -80,6 +80,7 @@ module.exports = class extends React.Component {
                         {...textFieldProps}
                         className={ classnames(
                             textFieldClassName,
+                            "text-field--right-align",
                             {
                                 "unit-input__text-field--error": this.props.errorMessage
                             }
