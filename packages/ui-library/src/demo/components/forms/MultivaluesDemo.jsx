@@ -44,6 +44,7 @@ class MultivaluesDemo extends React.Component {
             "is",
             "repeated"
         ],
+        emptyEntry: [],
         optionsEntries: [],
         optionsEntries2: [],
         error: null
@@ -53,6 +54,10 @@ class MultivaluesDemo extends React.Component {
         this.setState({
             entries: entries
         });
+    };
+
+    _handleEmptyEntryValueChange = (emptyEntry) => {
+        this.setState({ emptyEntry: emptyEntry });
     };
 
     _handleIconChange = iconEntries => this.setState({
@@ -112,7 +117,14 @@ class MultivaluesDemo extends React.Component {
                         onFocus={()=>console.log("MultiValues focused!")}
                     />
                 </InputRow>
-
+                <InputRow>
+                    <Multivalues
+                        labelText="Multivalues with Placeholder Text"
+                        entries={this.state.emptyEntry}
+                        onValueChange={this._handleEmptyEntryValueChange}
+                        placeholder="Placeholder text"
+                    />
+                </InputRow>
                 <InputRow>
                     <Multivalues
                         labelText="Default multi-values input with icons (XL)"
