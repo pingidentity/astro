@@ -1,4 +1,18 @@
 .legend {
+    display: flex;
+
+    &--left {
+        justify-content: flex-start;
+    }
+
+    &--center {
+        justify-content: center;
+    }
+
+    &--right {
+        justify-content: flex-end;
+    }
+
     &__item {
         display: inline-block;
         &:not(:last-of-type) {
@@ -12,15 +26,15 @@
         }
 
         &--left {
-            align-items: flex-start;
+            text-align: left;
         }
 
         &--center {
-            align-items: center;
+            text-align: center;
         }
 
         &--right {
-            align-items: flex-end;
+            text-align: right;
         }
 
         &-badge {
