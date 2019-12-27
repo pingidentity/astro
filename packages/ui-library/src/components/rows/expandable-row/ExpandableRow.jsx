@@ -164,7 +164,6 @@ const ConfirmDeletePositions = {
  *         />
  * @param {ExpandableRow~onDelete} [onDelete]
  *     Callback to be triggered when the 'delete' button is clicked (if present).
- *
  * @param {string} [labelDeleteConfirm]
  *     The message to display within the delete confirm dialog when asking for confirmation to delete a row.
  * @param {boolean} [confirmDelete=false]
@@ -500,17 +499,20 @@ class StatelessExpandableRow extends React.Component {
                     onClick={this.props.onDelete} />);
             //details tooltip should be delete button
             if (this.props.confirmDelete || this.props.confirmDeleteContent) {
-                deleteButton = (<ConfirmDeleteDialog
-                    trigger={deleteObject}
-                    label={this.props.labelDeleteConfirm}
-                    open={this.props.expanded && this.props.showDeleteConfirm}
-                    onCancel={this.props.onDeleteCancelClick}
-                    confirmDeleteTitle={this.props.confirmDeleteTitle}
-                    onDeleteConfirm={this.props.onDeleteConfirmClick}
-                    confirmDeletePosition={this.props.confirmDeletePosition}
-                >
-                    {this.props.confirmDeleteContent}
-                </ConfirmDeleteDialog>);
+                deleteButton = (
+                    <ConfirmDeleteDialog
+                        data-id={`${this.props["data-id"]}-confirm-delete-dialog`}
+                        trigger={deleteObject}
+                        label={this.props.labelDeleteConfirm}
+                        open={this.props.expanded && this.props.showDeleteConfirm}
+                        onCancel={this.props.onDeleteCancelClick}
+                        confirmDeleteTitle={this.props.confirmDeleteTitle}
+                        onDeleteConfirm={this.props.onDeleteConfirmClick}
+                        confirmDeletePosition={this.props.confirmDeletePosition}
+                    >
+                        {this.props.confirmDeleteContent}
+                    </ConfirmDeleteDialog>
+                );
             }
             else {
                 deleteButton = deleteObject;
@@ -614,6 +616,7 @@ class ConfirmDeleteDialog extends React.Component {
     static displayName = "ConfirmDeleteDialog";
 
     static propTypes = {
+        "data-id": PropTypes.string,
         confirmDeletePosition: PropTypes.string,
         label: PropTypes.string,
         confirmDeleteTitle: PropTypes.string,
@@ -623,6 +626,7 @@ class ConfirmDeleteDialog extends React.Component {
     };
 
     static defaultProps = {
+        "data-id": "delete-confirm-dialog",
         label: "",
         onCancel: _.noop,
         onDeleteConfirm: _.noop,
@@ -664,7 +668,7 @@ class ConfirmDeleteDialog extends React.Component {
         return (
             <DetailsTooltip
                 placement={`${this.props.confirmDeletePosition} left`}
-                data-id="delete-confirm-dialog"
+                data-id={this.props["data-id"]}
                 title={this.props.confirmDeleteTitle}
                 label={this.props.trigger}
                 open={this.props.open}
