@@ -12,14 +12,15 @@ jest.mock("react-portal");
 
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import ColorPicker from "../ColorPicker";
+import FormLabel from "../../forms/FormLabel";
+import _ from "underscore";
+
 describe("ColorPicker v4", function () {
-    var React = require("react"),
-        ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        ColorPicker = require("../ColorPicker"),
-        FormLabel = require("../../forms/FormLabel"),
-        _ = require("underscore");
 
     window.addEventListener = jest.fn();
     window.removeEventListener = jest.fn();

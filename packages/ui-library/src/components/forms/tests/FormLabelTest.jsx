@@ -8,13 +8,13 @@ jest.dontMock("../../general/If");
 
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
-describe("FormLabel", function () {
-    var React = require("react"),
-        ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FormLabel = require("../FormLabel");
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import FormLabel from "../FormLabel";
 
+describe("FormLabel", function () {
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
             <FormLabel
@@ -100,6 +100,13 @@ describe("FormLabel", function () {
             <FormLabel value="hello" description="bar"/>
         );
         expect(component.find(".label-text__description").exists()).toBeTruthy();
+    });
+
+    it("Renders the formlabel with an explanation", () => {
+        const component = shallow(
+            <FormLabel value="hello" explanation="bar"/>
+        );
+        expect(component.find(".form-label__explanation").exists()).toBeTruthy();
     });
 
 });

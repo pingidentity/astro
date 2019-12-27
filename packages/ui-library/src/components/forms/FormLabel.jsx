@@ -1,7 +1,8 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    HelpHint = require("../tooltips/HelpHint");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import HelpHint from "../tooltips/HelpHint";
+import { pick } from "underscore";
 
 /** @class FormLabel
  * @desc Most form fields implement the same logic to display an optional label, with optional hint.
@@ -29,7 +30,21 @@ var React = require("react"),
  *     For passing through direct style attribute from parent
  * @param {node} [description]
  *     The text to display below the title. Can be a string or a node.
+ * @param {node} [explanation]
+ *     Explanation text for the field appears below it.
  */
+
+export const labelProps = {
+    description: PropTypes.node,
+    explanation: PropTypes.node,
+    helpClassName: PropTypes.string,
+    helpPlacement: PropTypes.oneOf(Object.values(HelpHint.placements)),
+    helpTarget: PropTypes.object,
+    hint: PropTypes.node,
+    lockText: PropTypes.string,
+};
+
+export const passLabelProps = props => pick(props, Object.keys(labelProps));
 
 class FormLabel extends React.Component {
 
@@ -37,14 +52,9 @@ class FormLabel extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         value: PropTypes.node,
-        hint: PropTypes.node,
-        lockText: PropTypes.string,
-        helpClassName: PropTypes.string,
-        helpPlacement: PropTypes.oneOf(Object.values(HelpHint.placements)),
-        helpTarget: PropTypes.object,
         style: PropTypes.object,
         detached: PropTypes.bool,
-        description: PropTypes.node
+        ...labelProps,
     };
 
     static defaultProps = {
@@ -98,30 +108,41 @@ class FormLabel extends React.Component {
     }
 
     render() {
-        var noLabel = typeof(this.props.value) === "undefined" || this.props.value === null;
+        const {
+            children,
+            className,
+            "data-id": dataId,
+            detached,
+            explanation,
+            style,
+            value,
+        } = this.props;
 
-        if (noLabel && !this.props.children) {
+        var noLabel = typeof(value) === "undefined" || value === null;
+
+        if (noLabel && !children) {
             return null;
         }
 
         return (
             <label
-                data-id={this.props["data-id"]}
-                className={classnames(this.props.className, this.props.detached && "detached")}
-                style={this.props.style}
+                data-id={dataId}
+                className={classnames(className, detached && "detached")}
+                style={style}
             >
                 { !noLabel && (
                     <span className="label-text" data-id="label">
-                        { this.props.value }
+                        { value }
                         { this._renderHint() }
                         { this._renderLockHint() }
                         { this._renderDescriptionText()}
                     </span>
                 )}
-                {this.props.children}
+                {children}
+                {explanation && <div className="form-label__explanation">{explanation}</div>}
             </label>
         );
     }
 }
 
-module.exports = FormLabel;
+export default FormLabel;

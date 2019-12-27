@@ -167,6 +167,7 @@ class MultivaluesDemo extends React.Component {
                         optionsStrict={false}
                         autoHeight
                         autoWidth
+                        explanation="The field grows with its contents."
                     />
                 </InputRow>
 

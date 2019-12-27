@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
 
-import FormLabel from "../FormLabel";
+import FormLabel, { labelProps, passLabelProps } from "../FormLabel";
 import FormMessage from "../FormMessage";
 import { InputWidthProptypes, getInputWidthClass } from "../InputWidths";
 import Translator from "../../../util/i18n/Translator.js";
@@ -89,6 +89,8 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {node} [description]
 *     Description to display below the label.
+* @param {node} [explanation]
+*     Explanation text for the field appears below it.
 * @param {string} [errorClassName]
 *     CSS classes to set on the FormTextFieldError component.
 * @param {string} [errorMessage]
@@ -260,7 +262,8 @@ class Stateless extends React.Component {
         size: PropTypes.number,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOf(InputWidthProptypes),
-        withArrow: PropTypes.bool
+        withArrow: PropTypes.bool,
+        ...labelProps,
     };
 
     static defaultProps = {
@@ -479,12 +482,12 @@ class Stateless extends React.Component {
                 className={className}
                 ref="container"
                 data-id={dataId}
-                description={this.props.description}
                 value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
                 lockText={this.props.labelLockText}
-                helpClassName={this.props.helpClassName}
-                style={this.state.labelWidth ?{ width: this.state.labelWidth } : null}>
+                style={this.state.labelWidth ?{ width: this.state.labelWidth } : null}
+                {...passLabelProps(this.props)}
+            >
                 <span
                     className={
                         classnames(

@@ -1,11 +1,11 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    Toggle = require("./form-toggle"),
-    If = require("../general/If"),
-    _ = require("underscore"),
-    FormLabel = require("./FormLabel"),
-    FormSearchBox = require("./FormSearchBox");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import Toggle from "./form-toggle";
+import If from "../general/If";
+import _ from "underscore";
+import FormLabel from "./FormLabel";
+import FormSearchBox from "./FormSearchBox";
 
 var _includesIgnoreCase = function (propName, substr) {
     return function (item) {
