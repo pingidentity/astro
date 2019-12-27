@@ -152,6 +152,13 @@ textarea {
     @include text-label;
 }
 
+.form-label__explanation {
+    @include text-body;
+
+    margin-top: $spacing-xs;
+    text-transform: none;
+}
+
 label {
     position: relative;
     display: inline-block;

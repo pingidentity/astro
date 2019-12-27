@@ -1,7 +1,7 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    FormLabel = require("./FormLabel");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import FormLabel from "./FormLabel";
 
 /**
 * @class SelectionFilterLabel

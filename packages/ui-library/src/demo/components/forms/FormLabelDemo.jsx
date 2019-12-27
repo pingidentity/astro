@@ -30,7 +30,7 @@ const FormLabelDemo = () => (
             <Button inline label="Separate Button" />
         </InputRow>
         <InputRow>
-            <FormLabel value="First a Label" description="Then a description.">
+            <FormLabel value="First a Label" description="Then a description." explanation="With some explanation...">
                 <Text type="primary">Finally, the content.</Text>
             </FormLabel>
         </InputRow>

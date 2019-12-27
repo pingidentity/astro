@@ -3,11 +3,12 @@ jest.dontMock("../FilterSelector");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import FilterSelector from "../FilterSelector";
+
 describe("FilterSelector", function () {
-    const React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FilterSelector = require("../FilterSelector");
 
     const options = [
         {

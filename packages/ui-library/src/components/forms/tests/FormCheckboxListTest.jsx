@@ -14,12 +14,13 @@ jest.dontMock("../../../testutil/TestUtils");
 
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
+import _ from "underscore";
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import FormCheckboxList from "../FormCheckboxList";
+
 describe("FormCheckboxList", function () {
-    var _ = require("underscore");
-    var React = require("react");
-    var ReactTestUtils = require("react-dom/test-utils");
-    var TestUtils = require("../../../testutil/TestUtils");
-    var FormCheckboxList = require("../FormCheckboxList");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {

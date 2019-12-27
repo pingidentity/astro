@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import FormFieldConstants from "../../../constants/FormFieldConstants";
-import FormLabel from "../FormLabel";
+import FormLabel, { labelProps, passLabelProps } from "../FormLabel";
 import FormError from "../FormError";
 import { InputWidthProptypes, getInputWidthClass } from "../InputWidths";
 
@@ -62,6 +62,8 @@ const inputHeights = {
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {node} [description]
 *     The text to display below the title. Can be a node or a string
+* @param {node} [explanation]
+*     Explanation text for the field appears below it.
 * @param {string} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
@@ -177,6 +179,7 @@ class FormTextAreaStateless extends React.Component {
         useAutocomplete: PropTypes.bool,
         value: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
+        ...labelProps,
     };
 
     static defaultProps = {
@@ -231,8 +234,8 @@ class FormTextAreaStateless extends React.Component {
                 className={className}
                 value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
-                helpClassName={this.props.helpClassName}
-                description={this.props.description}>
+                {...passLabelProps(this.props)}
+            >
                 <span className="input-container">
                     <textarea
                         data-id={this.props["data-id"] + "-textarea"}

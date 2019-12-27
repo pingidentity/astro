@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "underscore";
-import FormLabel from "./FormLabel";
+import FormLabel, { labelProps, passLabelProps } from "./FormLabel";
 import FormError from "./FormError";
 import OptionList from "./OptionList";
 import PopperContainer from "../tooltips/PopperContainer";
@@ -181,6 +181,8 @@ class MultivaluesOption extends Component {
  *     To define the base "data-id" value for the top-level HTML container.
  * @param {node} [description]
  *     Description to display below the label.
+ * @param {node} [explanation]
+ *     Explanation text for the field appears below it.
  * @param {array<string|Object>} [entries=[]]
  *     Array of strings used to display initial entry boxes.
  * @param {string} [name]
@@ -240,7 +242,6 @@ export class MultivaluesBase extends Component {
         autoWidth: PropTypes.bool,
         className: PropTypes.string,
         "data-id": PropTypes.string,
-        description: PropTypes.node,
         entries: PropTypes.arrayOf(PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.number,
@@ -269,6 +270,7 @@ export class MultivaluesBase extends Component {
         required: PropTypes.bool,
         stacked: PropTypes.bool,
         width: PropTypes.oneOf(InputWidthProptypes),
+        ...labelProps,
     };
 
     static defaultProps = {
@@ -704,7 +706,7 @@ export class MultivaluesBase extends Component {
                 value={labelText || label}
                 className={className}
                 data-id={this.props["data-id"]}
-                description={this.props.description}
+                {...passLabelProps(this.props)}
             >
                 <div className={entryClassNames} data-id="entries" ref={el => this.inputBox = el}>
                     {entryNodes}
