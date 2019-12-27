@@ -4,8 +4,19 @@ import classnames from "classnames";
 
 /**
  * @enum {string}
- * @alias Legend.alignments
+ * @alias Legend.boxAlignments
  * @desc Enum for the different types of Legend alignments
+ */
+export const boxAlignments = {
+    LEFT: "left",
+    CENTER: "center",
+    RIGHT: "right",
+};
+
+/**
+ * @enum {string}
+ * @alias Legend.alignments
+ * @desc Enum for the different types of Legend item internal alignments
  */
 export const alignments = {
     LEFT: "left",
@@ -105,9 +116,14 @@ const Legend = ({
     className,
     "data-id": dataId,
     alignment,
+    boxAlignment,
     data,
 }) => {
-    const classNames = classnames("legend", className);
+    const classNames = classnames("legend", className, {
+        "legend--left": boxAlignment === boxAlignments.LEFT,
+        "legend--center": boxAlignment === boxAlignments.CENTER,
+        "legend--right": boxAlignment === boxAlignments.RIGHT,
+    });
 
     return (
         <div data-id={dataId} className={classNames}>

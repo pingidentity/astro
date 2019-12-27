@@ -1,7 +1,7 @@
 import React from "react";
 import { CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
 import ColumnChart, { ColumnChartTitle } from "../../../../components/general/charting/ColumnChart";
-import Legend, { alignments as legendAlignments } from "../../../../components/general/charting/Legend";
+import Legend, { alignments as legendAlignments, boxAlignments } from "../../../../components/general/charting/Legend";
 
 /**
 * @name ColumnCardDemo
@@ -74,7 +74,8 @@ class ColumnCardDemo extends React.Component {
                         <div>
                             <ColumnChartTitle title="SMS/Voice" />
                             <Legend
-                                alignment={legendAlignments.LEFT}
+                                alignment={legendAlignments.CENTER}
+                                boxAlignment={boxAlignments.CENTER}
                                 data={[
                                     {
                                         color: "#49BF6B",
