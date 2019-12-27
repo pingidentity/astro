@@ -74,3 +74,38 @@ hr {
         height: 100%;
     }
 }
+
+.spacing-demo {
+    background: $color-slate;
+    display: inline-block;
+    margin-right: $spacing-lg;
+
+    @mixin square($width) {
+        width: $width;
+        height: $width;
+    }
+
+    &--xs {
+        @include square($spacing-xs);
+    }
+
+    &--sm {
+        @include square($spacing-sm);
+    }
+
+    &--md {
+        @include square($spacing-md);
+    }
+
+    &--lg {
+        @include square($spacing-lg);
+    }
+
+    &--xl {
+        @include square($spacing-xl);
+    }
+
+    &--xx {
+        @include square($spacing-xx);
+    }
+}

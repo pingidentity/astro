@@ -1,0 +1,35 @@
+## List Pages
+
+List pages present our standard view of a list of records. Users can perform actions on these pages but cannot change settings. You should not see a button bar at the bottom of a list page because it should not have unsaved changes on it.
+
+If a list page can be expected to have a lot more than 10 items, a search field should appear at the top of the page. Also, depending on the type of data listed, filtering controls may also appear.
+
+Lists are generally sorted alphabetically, but another sorting method can be used if it makes sense for the data type.
+
+## Edit Pages & Scopes
+
+An edit page contains form fields that can be changed and must be saved. A button bar will appear at the bottom of the page when unsaved changes exist. The user cannot navigate away from a page with unsaved changes unless they save or discard those changes.
+
+Sometimes, there will be an exception when some portion of a page is editable but the entire page is not an edit page. These portions are edit scopes, and they obey the same rules as edit pages. When an edit scope has been changed, the changes must be saved or discarded. The scope provides its own buttons to do this. When the user tries to hide an edit scope or navigate away from the containing page, they should be prompted to save or discard those changes.
+
+Other types of edit scopes are popups, popovers, and wizards that contain form inputs.
+
+## Record Pages
+
+When the user chooses to edit a record on a list page, they will be taken to an edit page for that record. This page will show a back link above its title that navigates back to the list page.
+
+## Modals
+
+We use modals to let the user perform actions in focused way. When a modal is triggered, it must be closed before any other action can be taken.
+
+### Popups
+
+Short actions can be placed in small popups, allowing us to ask the user for a simple choice or bit of data entry before completing an action.
+
+### Popovers
+
+Often it makes sense to attach a popup to the element that triggered it, maintaining context.
+
+### Wizards
+
+For complex actions like creating a new record, we have a full-page wizard. Functionally, it is still a modal. You can't do something else until you close it.

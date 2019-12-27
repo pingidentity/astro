@@ -28,7 +28,7 @@ class FormInputWidthsDemo extends React.Component {
         return (
             <div>
                 Input widths are no longer declared using CSS class names. While the CSS classes are still supported,
-                this usage is depricated.  Widths should now be specified using the "width" prop on each input.  See the
+                this usage is deprecated.  Widths should now be specified using the "width" prop on each input.  See the
                 examples below:
 
                 <HR />

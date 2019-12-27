@@ -15,6 +15,9 @@ import Changes from "../components/docs/cannonball/Changes.mdx";
 import GettingReady from "../components/docs/cannonball/GettingReadyV4.mdx";
 import RenderProps from "../components/docs/RenderProps.mdx";
 import Validation from "../components/docs/standards/Validation.mdx";
+import Spacing from "../components/docs/standards/Spacing.mdx";
+import PageTypes from "../components/docs/standards/PageTypes.mdx";
+import Colors from "../components/docs/standards/Colors.mdx";
 
 const contentPage = WrappedComponent => (props) => (
     <PageSection>
@@ -97,39 +100,9 @@ module.exports = [
                 icon: "code"
             },
             {
-                label: "Content",
-                demo: require("../components/docs/Content"),
-                contentPage: true,
-                icon: "notepad"
-            },
-            {
-                label: "Form Validation",
-                demo: contentPage(Validation),
-                contentPage: true,
-                icon: "check"
-            },
-            {
                 label: "Reference",
                 icon: "cabinet",
                 children: [
-                    {
-                        label: "Text Styles",
-                        demo: require("../components/docs/TextStyles"),
-                        contentPage: true,
-                        icon: "details"
-                    },
-                    {
-                        label: "Colors",
-                        demo: require("../components/tutorials/Colors"),
-                        contentPage: true,
-                        icon: "clipboard"
-                    },
-                    {
-                        label: "Icons",
-                        demo: require("../components/tutorials/Icons"),
-                        contentPage: true,
-                        icon: "clipboard"
-                    },
                     {
                         label: "Inputs",
                         demo: require("../components/tutorials/Inputs"),
@@ -1465,6 +1438,53 @@ module.exports = [
                     },
                 ]
             }
+        ]
+    },
+    {
+        label: "Design",
+        children: [
+            {
+                label: "Content",
+                demo: require("../components/docs/Content"),
+                contentPage: true,
+                icon: "notepad"
+            },
+            {
+                label: "Text Styles",
+                demo: require("../components/docs/TextStyles"),
+                contentPage: true,
+                icon: "details"
+            },
+            {
+                label: "Colors",
+                demo: contentPage(Colors),
+                contentPage: true,
+                icon: "camera"
+            },
+            {
+                label: "Icons",
+                demo: require("../components/tutorials/Icons"),
+                contentPage: true,
+                icon: "signpost"
+            },
+            {
+                label: "Form Validation",
+                demo: contentPage(Validation),
+                contentPage: true,
+                icon: "check"
+            },
+            {
+                label: "Spacing Scale",
+                demo: contentPage(Spacing),
+                contentPage: true,
+                icon: "menu"
+            },
+            {
+                label: "Page Types",
+                demo: contentPage(PageTypes),
+                contentPage: true,
+                icon: "browser"
+            },
         ]
     }
 ];

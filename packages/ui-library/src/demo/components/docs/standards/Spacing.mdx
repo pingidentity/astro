@@ -1,0 +1,48 @@
+import Stack from "ui-library/lib/components/layout/Stack";
+import FlexRow from "ui-library/lib/components/layout/FlexRow";
+import Padding from "ui-library/lib/components/layout/Padding";
+import Spacing from "ui-library/lib/components/layout/Spacing";
+
+Our library uses a standard spacing scale based on a Fibonacci Sequence that starts with 5.
+
+<div>
+    XS = 5px <div className="spacing-demo spacing-demo--xs" />
+    SM = 10px <div className="spacing-demo spacing-demo--sm" />
+    MD = 15px <div className="spacing-demo spacing-demo--md" />
+    LG = 25px <div className="spacing-demo spacing-demo--lg" />
+    XL = 40px <div className="spacing-demo spacing-demo--xl" />
+    XX = 65px <div className="spacing-demo spacing-demo--xx" />
+</div>
+
+---
+
+We have a few components that let you pass in values from this scale. You can use `Stack` for evenly-spaced vertical stacks. `FlexRow` lets you distribute items in a row. `Padding` and `Spacing` give you fine-grained control over the spacing on all sides of a box.
+
+---
+
+<Stack gap="lg">
+    <div>This is</div>
+    <div>A stack component</div>
+    <div>With a large gap</div>
+    <div>Between each line</div>
+</Stack>
+
+---
+
+<FlexRow spacing="md">
+    <div>Here's</div>
+    <div>a FlexRow</div>
+    <div>with</div>
+    <div>medium spacing</div>
+</FlexRow>
+
+---
+
+<div style={{ display: "inline-block", background: "lightgrey"}}>
+    <Padding top="xl" left="sm">Extra large top padding + small left padding</Padding>
+</div>
+<Spacing spacing="xx">
+    <div style={{ display: "inline-block", background: "lightgrey"}}>
+        Extra extra large spacing all around
+    </div>
+</Spacing>

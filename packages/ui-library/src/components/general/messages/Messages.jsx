@@ -44,7 +44,7 @@ import { Layouts } from "./MessagesConstants";
  * @property {Messages.Layouts} [layout=BANNER]
  *     When set to CORNER, displays the message in the top right corner
  * @property {boolean} isHtml
- *     DEPRICATED: no longer needed. You can now simply use html in your messages as needed.
+ *     DEPRECATED: no longer needed. You can now simply use html in your messages as needed.
  * @property {Messages~ProgressSpec}
  *     Object containing data to show a progress bar in the message.
  * @property {boolean} minimized
