@@ -5,15 +5,17 @@ import PropTypes from "prop-types";
 import Utils from "../../util/Utils";
 import EventUtils from "../../util/EventUtils.js";
 import CancelTooltip from "./../tooltips/CancelTooltip";
+import ButtonGroup from "../layout/ButtonGroup";
+import Button from "../buttons/Button";
 import If from "./If";
 import classnames from "classnames";
 import { Portal } from "react-portal";
+import { noop } from "underscore";
 import FlexRow, { justifyOptions } from "./../layout/FlexRow";
 import Icon, { iconSizes } from "./../general/Icon";
 import Text, { textTypes } from "./../general/Text";
 import Padding from "./../layout/Padding";
 import { flagsPropType } from "../../util/FlagUtils";
-
 
 /**
  * @enum {string}
@@ -339,6 +341,43 @@ BodyTitle.propTypes = {
 
 Modal.Type = Type;
 Modal.BodyTitle = BodyTitle;
+
+const UnsavedWarningPopup = ({
+    children,
+    discardLabel,
+    onClose,
+    onDiscard,
+    onSave,
+    saveLabel,
+    ...props
+}) => (
+    <Modal {...props} type={Modal.Type.ALERT}>
+        <div>{children}</div>
+        <ButtonGroup onCancel={onClose}>
+            <Button type="cancel" onClick={onDiscard}>{discardLabel}</Button>
+            <Button type="primary" onClick={onSave}>{saveLabel}</Button>
+        </ButtonGroup>
+    </Modal>
+);
+
+UnsavedWarningPopup.propTypes = {
+    bodyTitle: PropTypes.node,
+    discardLabel: PropTypes.node,
+    onDiscard: PropTypes.func,
+    onSave: PropTypes.func,
+    saveLabel: PropTypes.node,
+};
+
+UnsavedWarningPopup.defaultProps = {
+    bodyTitle: "Save Changes?",
+    children: "Please save or discard your changes before leaving this page.",
+    discardLabel: "Discard Changes",
+    onDiscard: noop,
+    onSave: noop,
+    saveLabel: "Save",
+};
+
+Modal.UnsavedWarningPopup = UnsavedWarningPopup;
 
 module.exports = Modal;
 

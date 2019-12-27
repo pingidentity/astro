@@ -282,4 +282,10 @@ describe("ModalTest v4", function () {
 
         expect(TitleNode.text()).toEqual(titleText);
     });
+
+    it("should render an Unsaved Changes warning popup with ALERT type", function() {
+        const component = shallow(<Modal.UnsavedWarningPopup />);
+
+        expect(component.find(Modal).first().props().type).toBe(Modal.Type.ALERT);
+    });
 });
