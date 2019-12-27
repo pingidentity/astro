@@ -21,6 +21,8 @@ export const listWidths = {
     FIXED: "fixed",
     /** fluid */
     FLUID: "fluid",
+    /** auto width */
+    AUTOWIDTH: "autowidth",
 };
 
 
@@ -33,15 +35,11 @@ export default class SelectionListStateless extends React.Component {
     static displayName = "SelectionListStateless";
 
     static propTypes = {
+        autoSelectAll: PropTypes.bool,
+        autoFilter: PropTypes.bool,
+        bottomPanel: PropTypes.node,
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        type: PropTypes.oneOf([
-            ListType.ADD,
-            ListType.SINGLE,
-            ListType.MULTI,
-            ListType.MULTIADD,
-            ListType.VIEWONLY
-        ]),
         items: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.oneOfType([
@@ -52,34 +50,39 @@ export default class SelectionListStateless extends React.Component {
                 disabled: PropTypes.bool,
             })
         ),
+        labelSelectAll: PropTypes.string,
+        labelUnselectAll: PropTypes.string,
+        labelOnlySelected: PropTypes.string,
+        labelShowAll: PropTypes.string,
+        name: PropTypes.string,
+        "no-border": PropTypes.bool,
+        multiAddButtonLabel: PropTypes.string,
+        multiAddButtonDisabledHint: PropTypes.string,
+        onValueChange: PropTypes.func,
+        onSelectAll: PropTypes.func,
+        onSearch: PropTypes.func.isRequired,
+        queryString: PropTypes.string,
+        onVisibilityChange: PropTypes.func,
+        optionsNote: PropTypes.node,
+        onMultiAdd: PropTypes.func,
+        removeMaxHeight: PropTypes.bool,
+        requiredText: PropTypes.string,
+        showSelectionOptions: PropTypes.bool,
+        showOnlySelected: PropTypes.bool,
+        showSearchBox: PropTypes.bool,
+        searchPlaceholder: PropTypes.string,
         selectedItemIds: PropTypes.oneOfType([
             PropTypes.array,
             PropTypes.string,
             PropTypes.number
         ]),
-        name: PropTypes.string,
-        onValueChange: PropTypes.func,
-        onSelectAll: PropTypes.func,
-        showSearchBox: PropTypes.bool,
-        searchPlaceholder: PropTypes.string,
-        onSearch: PropTypes.func.isRequired,
-        queryString: PropTypes.string,
-        onVisibilityChange: PropTypes.func,
-        showSelectionOptions: PropTypes.bool,
-        showOnlySelected: PropTypes.bool,
-        labelSelectAll: PropTypes.string,
-        labelUnselectAll: PropTypes.string,
-        labelOnlySelected: PropTypes.string,
-        labelShowAll: PropTypes.string,
-        optionsNote: PropTypes.node,
-        requiredText: PropTypes.string,
-        "no-border": PropTypes.bool,
-        bottomPanel: PropTypes.node,
-        multiAddButtonLabel: PropTypes.string,
-        multiAddButtonDisabledHint: PropTypes.string,
-        onMultiAdd: PropTypes.func,
-        autoSelectAll: PropTypes.bool,
-        autoFilter: PropTypes.bool,
+        type: PropTypes.oneOf([
+            ListType.ADD,
+            ListType.SINGLE,
+            ListType.MULTI,
+            ListType.MULTIADD,
+            ListType.VIEWONLY
+        ]),
         width: PropTypes.oneOf(Object.values(listWidths))
     };
 
@@ -206,6 +209,7 @@ export default class SelectionListStateless extends React.Component {
                 "show-selection-options": showSelectionOptions,
                 "input-selection-list--no-border": this.props["no-border"],
                 "fluid-width": this.props.width === listWidths.FLUID,
+                "input-selection-list--auto-width": this.props.width === listWidths.AUTOWIDTH,
             });
         const visibleItems = this.props.showOnlySelected ? this._filterVisible() : this._getItems();
 
@@ -238,6 +242,7 @@ export default class SelectionListStateless extends React.Component {
                     items={visibleItems}
                     onValueChange={this.props.onValueChange}
                     name={this.props.name}
+                    removeMaxHeight={this.props.removeMaxHeight}
                 />
                 <If test={showSelectionOptions}>
                     {this._getSelectionOptions(visibleItems)}
@@ -472,11 +477,21 @@ class ListOptions extends React.Component {
         });
     }
 
+
     render() {
+
+        const classname = classnames(
+            this.props.className,
+            "input-selection-list-items",
+            {
+                "input-selection-list-items--remove-max-height": this.props.removeMaxHeight,
+            }
+        );
+
         return (
             <div
                 data-id={this.props["data-id"]}
-                className="input-selection-list-items"
+                className={classname}
                 ref={(selectionElement) => this.selectionElement = selectionElement}
                 style={{
                     width: this.state.contentWidth,

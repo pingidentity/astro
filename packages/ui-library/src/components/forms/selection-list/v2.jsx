@@ -69,6 +69,8 @@ import SelectionListStateless, { listWidths } from "./v2-stateless";
  * @param {boolean} [autoFilter=false]
  *     When true, the items will be filtered by the queryString.
  *     This is set to true if the queryString is being controlled by the component.
+ * @param {boolean} [removeMaxHeight]
+ *   removes the Max height of the container
  * @param {boolean} [showSearchBox=true]
  *     Flag to determine the visibility of the search box
  * @param {boolean} [showOnlySelected=false]
