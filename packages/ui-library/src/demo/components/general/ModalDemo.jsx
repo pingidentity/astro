@@ -210,6 +210,19 @@ class ModalDemo extends React.Component {
                         </div>
                     </Modal>
                 </InputRow>
+                <InputRow>
+                    <Button
+                        type={Button.buttonTypes.LINK}
+                        onClick={this._makeToggle(9)}
+                        label="Prepackaged Unsaved Changes Warning"
+                    />
+                    <Modal.UnsavedWarningPopup
+                        expanded={this.state.expanded9}
+                        onClose={this._makeToggle(9)}
+                        onSave={this._makeToggle(9)}
+                        onDiscard={this._makeToggle(9)}
+                    />
+                </InputRow>
             </div>
         );
     }
