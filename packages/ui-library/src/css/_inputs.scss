@@ -2174,10 +2174,8 @@ input[type=file] {
         position: relative;
 
         .input-message__text {
-            top: 73px;
             box-sizing: border-box;
-            position: unset;
-            width: 100%;
+            width: calc(100% - 1px);
         }
 
         .unit-input__drop-down-list--error {
