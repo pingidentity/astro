@@ -223,16 +223,18 @@ export default class ColumnChart extends React.Component {
                             );
                         })
                     }
-                    <ReferenceLine
-                        x={this.state.selected.x ? this.state.selected.x.label : null}
-                        stroke="#57A0EA"
-                        label={{
-                            position: "top",
-                            value: this.state.selected.x ? this.state.selected.x.label : null,
-                            fill: this.props.referenceLineColor,
-                            fontSize: 14
-                        }}
-                    />
+                    {legend.length > 0 &&
+                        <ReferenceLine
+                            x={this.state.selected.x ? this.state.selected.x.label : null}
+                            stroke="#57A0EA"
+                            label={{
+                                position: "top",
+                                value: this.state.selected.x ? this.state.selected.x.label : null,
+                                fill: this.props.referenceLineColor,
+                                fontSize: 14
+                            }}
+                        />
+                    }
                 </BarChart>
             </ResponsiveContainer>
         );
