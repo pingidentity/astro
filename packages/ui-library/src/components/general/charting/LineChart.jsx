@@ -215,17 +215,19 @@ export default class LineChart extends React.Component {
                         </defs>
                     ) : null }
                     <XAxis dataKey={dataKey} hide={true} />
-                    <ReferenceLine
-                        x={selected ? selected.name : null}
-                        stroke={referenceLineColor}
-                        position="start"
-                        label={{
-                            position: "top",
-                            value: selected ? selected.name : null,
-                            fill: referenceLabelColor,
-                            fontSize: 14,
-                        }}
-                    />
+                    {data.length > 0 &&
+                        <ReferenceLine
+                            x={selected ? selected.name : null}
+                            stroke={referenceLineColor}
+                            position="start"
+                            label={{
+                                position: "top",
+                                value: selected ? selected.name : null,
+                                fill: referenceLabelColor,
+                                fontSize: 14,
+                            }}
+                        />
+                    }
                 </Chart>
             </ResponsiveContainer>
         );
