@@ -622,7 +622,7 @@ class ConfirmDeleteDialog extends React.Component {
         confirmDeleteTitle: PropTypes.string,
         onCancel: PropTypes.func,
         onDeleteConfirm: PropTypes.func,
-        children: PropTypes.oneOfType(PropTypes.node, PropTypes.func)
+        children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
     };
 
     static defaultProps = {
