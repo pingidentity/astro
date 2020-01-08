@@ -77,7 +77,10 @@ class DynamicFilter extends React.Component {
         [categoryName]: value
     }, e);
 
-    _handleBlur = () => this.setState({ focused: null });
+    _handleBlur = () => !this._holdingBlur && this.setState({ focused: null });
+
+    _holdBlur = () => this._holdingBlur = true;
+    _releaseBlur = () => this._holdingBlur = false;
 
     _focusCategory = categoryName => () => this.setState({ focused: categoryName });
 
@@ -113,6 +116,9 @@ class DynamicFilter extends React.Component {
                 key={category.value}
                 onClick={this._focusCategory(category.value)}
                 data-id={`link-${category.value}`}
+                onMouseDown={this._holdBlur}
+                onMouseOut={this._releaseBlur}
+                onMouseUp={this._releaseBlur}
             >
                 + {this._optionName(category)}
             </Link>

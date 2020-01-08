@@ -102,4 +102,20 @@ describe("DynamicFilter", function () {
         expect(callback.mock.calls[0][0]).toEqual({ "applications": ["Opela", "Bitchip"] });
     });
 
+    it("doesn't blur the category when only mousing down on a link", function() {
+        const component = getComponent();
+
+        const link = component.find("[data-id='link-Environments']").first();
+        link.simulate("click");
+        expect(component.exists("[data-id='filter-Environments']")).toBeTruthy();
+
+        const link2 = component.find("[data-id='link-applications']").first();
+        link2.simulate("mousedown");
+
+        const multivalues = component.find("[data-id='filter-Environments']").first();
+        const input = multivalues.find("[data-id='value-entry']").first();
+        input.simulate("blur");
+        expect(component.exists("[data-id='filter-Environments']")).toBeTruthy();
+    });
+
 });
