@@ -131,6 +131,9 @@ a .icon-plus {
         &__warning {
             border: 3px solid $color-warning-yellow;
         }
+        &__empty {
+            border: 2px solid $color-neutral-60;
+        }
         &__error {
             @extend .icon-clear;
             background-color: $color-critical-red;

@@ -2,7 +2,6 @@
 
 import PropTypes from "prop-types";
 import React from "react";
-import { MessageTypes } from "../general/messages/MessagesConstants";
 import ValueItem from "../layout/ValueItem";
 import classnames from "classnames";
 
@@ -12,7 +11,7 @@ import classnames from "classnames";
  *
  * @param {string} [data-id="status-indicator"]
  *     Defines the "data-id" for top-level HTML container.
- * @param {StatusIndicator.MessageTypes} [type=MessageTypes.NOTICE]
+ * @param {StatusIndicator.statusTypes} [type=MessageTypes.NOTICE]
  *     Type of icon to display (MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING)
  * @param {string} [className]
  *     CSS classes to add on the top-level HTML container.
@@ -24,6 +23,24 @@ import classnames from "classnames";
  *        foobar
  *    </StatusIndicator>
  */
+
+/**
+ * @enum {string}
+ * @alias StatusIndicator.statusTypes
+ * @desc Enum for the different types of status
+ */
+const statusTypes = {
+    /** notice */
+    NOTICE: "notice",
+    /** error */
+    ERROR: "error",
+    /** warning */
+    WARNING: "warning",
+    /** success */
+    SUCCESS: "success",
+    /** empty */
+    EMPTY: "empty",
+};
 
 const _getIcon = type => {
     return <span className={`status-indicator--icon status-indicator--icon__${type}`} />;
@@ -51,9 +68,7 @@ StatusIndicator.propTypes = {
     "data-id": PropTypes.string,
     className: PropTypes.string,
     inline: PropTypes.bool,
-    type: PropTypes.oneOf([
-        MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
-    ]),
+    type: PropTypes.oneOf(Object.values(statusTypes)),
 };
 
 StatusIndicator.defaultProps = {
@@ -61,5 +76,7 @@ StatusIndicator.defaultProps = {
     inline: false,
 };
 
-StatusIndicator.Types = MessageTypes;
+StatusIndicator.Types = statusTypes;
+StatusIndicator.statusTypes = statusTypes; // new standard
+
 export default StatusIndicator;
