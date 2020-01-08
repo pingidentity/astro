@@ -34,7 +34,7 @@ describe("ValidationMessages", function () {
         );
 
         // Expect one validation tooltip to be rendered with one fail message.
-        const fail = TestUtils.scryRenderedDOMNodesWithClass(component, "status-indicator--icon__error");
+        const fail = TestUtils.scryRenderedDOMNodesWithClass(component, "status-indicator--icon__empty");
         expect(fail.length).toEqual(1);
 
         // Expect a validation tooltip to be rendered with two pass messages.

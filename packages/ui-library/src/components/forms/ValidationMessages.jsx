@@ -41,7 +41,7 @@ var Status = {
 
 const StatusTypes = {
     [Status.PASS]: StatusIndicator.Types.SUCCESS,
-    [Status.FAIL]: StatusIndicator.Types.ERROR,
+    [Status.FAIL]: StatusIndicator.Types.EMPTY,
 };
 
 const ValidationMessages = function ({
