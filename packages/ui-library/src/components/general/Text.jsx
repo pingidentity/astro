@@ -8,10 +8,14 @@ import classnames from "classnames";
  * @desc Enum for the different types of Text
  */
 export const textTypes = {
+    /** page-title */
+    PAGETITLE: "page-title",
+    /** section-title */
+    SECTIONTITLE: "section-title",
+    /** parent-label */
+    PARENTLABEL: "parent-label",
     /** body */
     BODY: "body",
-    /** error */
-    ERROR: "error",
     /** label */
     LABEL: "label",
     /** normal-case-label */
@@ -22,20 +26,16 @@ export const textTypes = {
     NOVALUE: "no-value",
     /** page-subtitle */
     PAGESUBTITLE: "page-subtitle",
-    /** page-title */
-    PAGETITLE: "page-title",
-    /** parent-label */
-    PARENTLABEL: "parent-label",
     /** placeholder */
     PLACEHOLDER: "placeholder",
     /** primary */
     PRIMARY: "primary",
-    /** section-title */
-    SECTIONTITLE: "section-title",
-    /** success */
-    SUCCESS: "success",
     /** value */
     VALUE: "value",
+    /** error */
+    ERROR: "error",
+    /** success */
+    SUCCESS: "success",
     /** warning */
     WARNING: "warning",
 };
