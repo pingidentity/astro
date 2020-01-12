@@ -542,6 +542,12 @@ $fullwidthBreakpoint: 950px;
     }
 }
 
+.column-chart-wrapper {
+    &__rocker {
+        margin-top: $spacing-sm;
+    }
+}
+
 @keyframes pulse {
     0% {
         opacity: 1;
