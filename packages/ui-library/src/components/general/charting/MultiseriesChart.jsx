@@ -83,6 +83,8 @@ export const renderDefaultTooltip = ({
 * @param {boolean|function} [tooltip]
 *     Controls display of tooltip in chart. If false, no tooltip is displayed; if true, default tooltip
 *     is displayed. If a render function is passed in, will render custom tooltip.
+* @param {number} [total]
+*     The total value to display for the PieChart if you do not wish it to be calculated internally.
 * @param {string} [type]
 *     The type of chart to display. Must be one of available values of the chartTypes object exported
 *     by this component.

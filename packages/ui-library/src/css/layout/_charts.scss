@@ -218,6 +218,31 @@
         stroke-linecap: round;
         stroke-linejoin: round;
     }
+
+    &__error {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -100%);
+        color: $color-accent-neutral-10;
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+
+    &__loading {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -100%);
+        text-align: center;
+
+        &-text {
+            color: $color-accent-neutral-10;
+            font-size: 13px;
+            text-transform: uppercase;
+            margin-top: $spacing-sm;
+        }
+    }
 }
 
 .heatmap {

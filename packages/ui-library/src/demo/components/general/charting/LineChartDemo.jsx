@@ -1,5 +1,5 @@
 import React from "react";
-import LineChart from "../../../../components/general/charting/LineChart";
+import LineChartWrapper from "../../../../components/general/charting/LineChartWrapper";
 
 /**
 * @name LineChartDemo
@@ -8,49 +8,189 @@ import LineChart from "../../../../components/general/charting/LineChart";
 */
 class LineChartDemo extends React.Component {
     state = {
-        highlightRange: [],
-        data: [
-            {
-                name: "Day #1",
-                value: 3
-            }, {
-                name: "Day #2",
-                value: 6
-            }, {
-                name: "Day #3",
-                value: 2
-            }, {
-                name: "Day #4",
-                value: 4
-            }, {
-                name: "Day #5",
-                value: 5
-            }
-        ],
+        highlightRange: []
     };
 
     _onHoverDataPoint = (data) => {
         const padding = 1;
         this.setState({
-            highlightRange: [data - padding, data + padding],
+            highlightRange: [
+                data - padding < 0 ? 0 : data - padding,
+                data + padding > data.length ? data.length : data + padding
+            ],
         });
     }
 
     render() {
+        const lineColors = [
+            {
+                id: "mobile",
+                color: "#FFA9E7",
+            },
+            {
+                id: "desktop",
+                color: "#FF84E8",
+            }
+        ];
+
+        const legend = [
+            {
+                label: "Mobile",
+                id: "mobile",
+            }, {
+                label: "Desktop",
+                id: "desktop",
+            }
+        ];
+
+        const data = [
+            {
+                id: "jan",
+                label: "January",
+                data: [
+                    {
+                        label: "Day #1",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 3,
+                            },
+                            {
+                                id: "desktop",
+                                value: 6,
+                            }
+                        ]
+                    }, {
+                        label: "Day #2",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 6,
+                            },
+                            {
+                                id: "desktop",
+                                value: 3,
+                            }
+                        ]
+                    }, {
+                        label: "Day #3",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 2,
+                            },
+                            {
+                                id: "desktop",
+                                value: 4,
+                            }
+                        ]
+                    }, {
+                        label: "Day #4",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 4,
+                            },
+                            {
+                                id: "desktop",
+                                value: 1,
+                            }
+                        ]
+                    }, {
+                        label: "Day #5",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 5,
+                            },
+                            {
+                                id: "desktop",
+                                value: 7,
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "feb",
+                label: "February",
+                data: [
+                    {
+                        label: "Day #1",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 8,
+                            },
+                            {
+                                id: "desktop",
+                                value: 3,
+                            }
+                        ]
+                    }, {
+                        label: "Day #2",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 2,
+                            },
+                            {
+                                id: "desktop",
+                                value: 7,
+                            }
+                        ]
+                    }, {
+                        label: "Day #3",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 1,
+                            },
+                            {
+                                id: "desktop",
+                                value: 2,
+                            }
+                        ]
+                    }, {
+                        label: "Day #4",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 5,
+                            },
+                            {
+                                id: "desktop",
+                                value: 5,
+                            }
+                        ]
+                    }, {
+                        label: "Day #5",
+                        points: [
+                            {
+                                id: "mobile",
+                                value: 7,
+                            },
+                            {
+                                id: "desktop",
+                                value: 2,
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
         return (
-            <LineChart
-                data={this.state.data}
-                width={500}
-                height={150}
-                dataKey="name"
-                dataValue="value"
-                referenceLineColor="#5DA4EC"
-                referenceLabelColor="#676D74"
-                showHighlight={true}
-                highlightColor="#5DA4EC"
-                highlightRange={this.state.highlightRange}
-                lineColor="#193867"
-                onHoverDataPoint={this._onHoverDataPoint}
+            <LineChartWrapper
+                data={data}
+                legend={legend}
+                chartWidth="100%"
+                chartHeight={150}
+                theme={{
+                    referenceLineColor: "#7F2CCB",
+                    referenceLabelColor: "#676D74",
+                    highlightColor: "#7F2CCB",
+                    lineColors: lineColors
+                }}
             />
         );
     }

@@ -8,7 +8,6 @@ import Layout from "ui-library/lib/components/general/ColumnLayout";
 * @memberof DonutCard
 * @desc A demo for DonutCard
 */
-
 class DonutCardDemo extends React.Component {
 
     options = [
