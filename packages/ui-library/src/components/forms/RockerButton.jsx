@@ -129,6 +129,7 @@ class RockerButtonStateless extends React.Component {
     render() {
         const { type } = this.props;
 
+
         const className = classnames("rocker-button sel-" + this.buttonPos(), this.props.className, {
             disabled: this.props.disabled,
             "rocker-button--chart-rocker": type === rockerTypes.CHART || type === rockerTypes.CHART_SMALL,

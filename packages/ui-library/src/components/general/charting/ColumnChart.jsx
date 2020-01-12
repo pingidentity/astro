@@ -8,6 +8,7 @@ import Color from "color";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem } from "./Legend";
 import { defaultRender } from "../../../util/PropUtils";
+import Spinner from "../../general/Spinner";
 
 /**
  * @class ColumnChart
@@ -70,7 +71,7 @@ export default class ColumnChart extends React.Component {
         data: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.string,
-                data: PropTypes.arrayOf(PropTypes.number)
+                data: PropTypes.arrayOf(PropTypes.shape({}))
             })
         ),
         height: PropTypes.number,
@@ -162,68 +163,73 @@ export default class ColumnChart extends React.Component {
     render() {
         const {
             data,
+            errorMessage,
             legend,
+            loadingMessage,
             "data-id": dataId,
         } = this.props;
 
         const digestedData = this._digestData(data);
 
+        const hasCustomState = errorMessage !== undefined || loadingMessage !== undefined;
+
         return (
-            <ResponsiveContainer
-                className={this.props.className}
-                height={this.props.height}
-                width={this.props.width}
-            >
-                <BarChart
-                    data={digestedData}
-                    margin={{
-                        top: 20, right: 30, left: 20, bottom: 5,
-                    }}
-                    className="column-chart"
-                    data-id={dataId}
+            <>
+                <ResponsiveContainer
+                    className={this.props.className}
+                    height={this.props.height}
+                    width={this.props.width}
                 >
-                    <XAxis dataKey="name" hide={true} />
-                    <CartesianGrid vertical={false} />
-                    <Tooltip
-                        isAnimationActive={false}
-                        content={this._renderTooltip}
-                        cursor={false}
-                    />
-                    {
-                        legend.map(({ id, label, color }, key) => {
-                            return (
-                                <Bar
-                                    label={label ? label : id}
-                                    dataKey={key}
-                                    key={id}
-                                    stackId="a"
-                                    maxBarSize={60}
-                                    fill={color}
-                                    onMouseOver={this._handleMouseOver(id)}
-                                    onMouseOut={this._handleMouseOut}
-                                    radius={key === legend.length - 1 ? [3, 3, 0, 0] : null}
-                                >
-                                    {
-                                        digestedData.map((item) => (
-                                            <Cell
-                                                key={item.name}
-                                                className="column-chart__cell"
-                                                style={{
-                                                    stroke: this.state.selected.x &&
+                    <BarChart
+                        data={digestedData}
+                        margin={{
+                            top: 20, right: 30, left: 20, bottom: 5,
+                        }}
+                        className="column-chart"
+                        data-id={dataId}
+                    >
+                        <XAxis dataKey="name" hide={true} />
+                        <CartesianGrid vertical={false} />
+                        <Tooltip
+                            isAnimationActive={false}
+                            content={this._renderTooltip}
+                            cursor={false}
+                        />
+                        {
+                            !hasCustomState && legend.map(({ id, label, color }, key) => {
+                                return (
+                                    <Bar
+                                        label={label ? label : id}
+                                        dataKey={key}
+                                        key={id}
+                                        stackId="a"
+                                        maxBarSize={60}
+                                        fill={color}
+                                        onMouseOver={this._handleMouseOver(id)}
+                                        onMouseOut={this._handleMouseOut}
+                                        radius={key === legend.length - 1 ? [3, 3, 0, 0] : null}
+                                    >
+                                        {
+                                            digestedData.map((item) => (
+                                                <Cell
+                                                    key={item.name}
+                                                    className="column-chart__cell"
+                                                    style={{
+                                                        stroke: this.state.selected.x &&
                                                         this.state.selected.y &&
                                                         this.state.selected.x.label === item.name &&
                                                         this.state.selected.y.label === id
-                                                        ? Color(color).lighten(0.5)
-                                                        : color,
-                                                    strokeWidth: "1px",
-                                                }}
-                                            />
-                                        ))}
-                                </Bar>
-                            );
-                        })
-                    }
-                    {legend.length > 0 &&
+                                                            ? Color(color).lighten(0.5)
+                                                            : color,
+                                                        strokeWidth: "1px",
+                                                    }}
+                                                />
+                                            ))}
+                                    </Bar>
+                                );
+                            })
+                        }
+                        {legend.length > 0 && !hasCustomState &&
                         <ReferenceLine
                             x={this.state.selected.x ? this.state.selected.x.label : null}
                             stroke="#57A0EA"
@@ -234,9 +240,30 @@ export default class ColumnChart extends React.Component {
                                 fontSize: 14
                             }}
                         />
-                    }
-                </BarChart>
-            </ResponsiveContainer>
+                        }
+                    </BarChart>
+                </ResponsiveContainer>
+                {
+                    errorMessage ? (
+                        <div className="column-chart__error">
+                            {errorMessage}
+                        </div>
+                    ) : null
+                },
+                {
+                    loadingMessage ? (
+                        <div className="column-chart__loading">
+                            <Spinner
+                                show={true}
+                                defaultText={loadingMessage}
+                            />
+                            <div className="column-chart__loading-text">
+                                {loadingMessage}
+                            </div>
+                        </div>
+                    ) : null
+                }
+            </>
         );
     }
 }
