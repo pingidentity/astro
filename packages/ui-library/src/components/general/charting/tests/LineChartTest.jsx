@@ -12,12 +12,51 @@ describe("LineChart", () => {
         "data-id": "line-chart",
         width: 500,
         height: 150,
-        dataKey: "name",
-        dataValue: "value",
+        lineColors: [
+            {
+                id: "mobile",
+                color: "#FFA9E7",
+            },
+            {
+                id: "desktop",
+                color: "#FF84E8",
+            }
+        ],
+        legend: [
+            {
+                label: "Mobile",
+                id: "mobile",
+            }, {
+                label: "Desktop",
+                id: "desktop",
+            }
+        ],
         data: [
-            { name: "Test 1", value: 4 },
-            { name: "Test 2", value: 7 },
-            { name: "Test 3", value: 2 },
+            {
+                label: "Day #1",
+                points: [
+                    {
+                        id: "mobile",
+                        value: 8,
+                    },
+                    {
+                        id: "desktop",
+                        value: 3,
+                    }
+                ]
+            }, {
+                label: "Day #2",
+                points: [
+                    {
+                        id: "mobile",
+                        value: 2,
+                    },
+                    {
+                        id: "desktop",
+                        value: 7,
+                    }
+                ]
+            }
         ],
     };
 
@@ -34,9 +73,10 @@ describe("LineChart", () => {
     it("renders the highlight", function () {
         const component = getComponent({
             showHighlight: true,
+            highlightRange: [0, 1],
         });
 
-        const linearGradientId = component.find("linearGradient").prop("id");
+        const linearGradientId = component.find("linearGradient").first().prop("id");
 
         expect(component.find(`path[stroke="url(#${linearGradientId})"]`).exists()).toEqual(true);
     });
