@@ -2,42 +2,51 @@ import React from "react";
 import PropTypes from "prop-types";
 import { noop } from "underscore";
 
-import ColumnChart, { ColumnChartTitle } from "./ColumnChart";
+import PieChart, { PieChartTitle } from "./PieChart";
 import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from "../../layout/FlexRow";
 import Legend, { alignments as legendAlignments, boxAlignments } from "./Legend";
 import RockerButton, { rockerTypes } from "../../forms/RockerButton";
 import { inStateContainer } from "../../utils/StateContainer";
 
-const getTotalsAndColors = (data, dataColors, startingTotals = {}) =>
-    data.reduce(([ dataWithColors, totals ], { id, value }) => {
-        const { [id]: currentValues = 0 } = totals;
-        return [
-            [...dataWithColors, { id, value, color: (dataColors.find(color => color.id === id) || {}).color }],
-            {
-                ...totals,
-                [id]: value + currentValues,
-            }
-        ];
-    }, [[], startingTotals]);
+const getTotal = (data) => data.reduce((total, { value }) => total + value, 0);
 
 const getLegendAndData = (data, dataColors) =>
-    data.reduce(([dataAcc, totalAcc], { data: currentData, ...dataPoint }) => {
-        const [
-            withColors,
-            totals
-        ] = getTotalsAndColors(currentData, dataColors, totalAcc);
-        return [
-            [...dataAcc,
+    data.reduce(([dataAcc, totalAcc], { series, data: currentData = series, id, value, ...dataPoint }) => {
+        const color = (dataColors.find(entry => entry.id === id) || {}).color;
+        if (currentData) {
+            return [
+                [...dataAcc,
+                    {
+                        ...dataPoint,
+                        series: currentData,
+                        id,
+                        color
+                    }
+                ],
                 {
-                    ...dataPoint,
-                    data: withColors
+                    ...totalAcc,
+                    [id]: getTotal(currentData)
                 }
-            ],
-            totals
-        ];
+            ];
+        } else {
+            return [
+                [...dataAcc,
+                    {
+                        ...dataPoint,
+                        color,
+                        id,
+                        value
+                    }
+                ],
+                {
+                    ...totalAcc,
+                    [id]: value
+                }
+            ];
+        }
     }, [[], {}]);
 
-function ColumnChartWrapper({
+function PieChartWrapper({
     data,
     errorMessage,
     height,
@@ -51,8 +60,7 @@ function ColumnChartWrapper({
     renderTooltip,
     selectedDataSet = data[0].id,
     theme: {
-        dataColors,
-        referenceLineColor
+        dataColors
     },
     title,
     width,
@@ -93,13 +101,13 @@ function ColumnChartWrapper({
             flexDirection={flexDirectionOptions.COLUMN}
             spacing={spacingOptions.SM}
         >
-            <ColumnChartTitle title={title} />
+            <PieChartTitle title={title} />
             <Legend
                 alignment={legendAlignment}
                 boxAlignment={legendBoxAlignment}
                 data={legendData}
             />
-            <ColumnChart
+            <PieChart
                 data={dataWithColors}
                 errorMessage={errorMessage}
                 height={height}
@@ -107,8 +115,8 @@ function ColumnChartWrapper({
                 loadingMessage={loadingMessage}
                 onMouseOut={onMouseOut}
                 onMouseOver={onMouseOver}
-                referenceLineColor={referenceLineColor}
                 renderTooltip={renderTooltip}
+                showTooltip
                 width={width}
             />
             {
@@ -125,13 +133,13 @@ function ColumnChartWrapper({
     );
 }
 
-ColumnChartWrapper.defaultProps = {
+PieChartWrapper.defaultProps = {
     legendAlignment: legendAlignments.CENTER,
     legendBoxAlignment: boxAlignments.CENTER,
     onSelectDataSet: noop
 };
 
-ColumnChartWrapper.propTypes = {
+PieChartWrapper.propTypes = {
     data: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -170,4 +178,4 @@ export default inStateContainer([
         name: "selectedDataSet",
         setter: "onSelectDataSet"
     }
-])(ColumnChartWrapper);
+])(PieChartWrapper);

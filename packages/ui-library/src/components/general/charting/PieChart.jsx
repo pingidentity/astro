@@ -11,6 +11,7 @@ import classnames from "classnames";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem, alignments, valueSizes } from "./Legend";
 import { defaultRender } from "../../../util/PropUtils";
+import Spinner from "../../general/Spinner";
 
 export const PieChartTitle = ({ className, ...props }) => (
     <DashboardCardTitle
@@ -21,12 +22,12 @@ export const PieChartTitle = ({ className, ...props }) => (
 
 /**
  * @class MetricsTooltip
- * @desc Dynamic tooltip to display single or multiple valuves.
+ * @desc Dynamic tooltip to display single or multiple values.
  *
  * @param {string} [color]
  *     Define the color square next to the label.
  * @param {string} [dataValue]
- *     The item value refrence in the data structure.
+ *     The item value reference in the data structure.
  * @param {string} [label]
  *     The name of the item.
  * @param {string} [series]
@@ -101,9 +102,9 @@ MetricsTooltip.defaultProps = {
  * @param {int[]} [data.data]
  *     Array of integers representing the data within the chart.
  * @param {string} [dataKey="id"]
- *     The item id refrence in the data structure.
+ *     The item id reference in the data structure.
  * @param {string} [dataValue="value"]
- *     The item value refrence in the data structure.
+ *     The item value reference in the data structure.
  */
 
 /**
@@ -153,7 +154,9 @@ class PieChart extends React.Component {
         })),
         dataKey: PropTypes.string,
         dataValue: PropTypes.string,
+        errorMessage: PropTypes.string,
         height: PropTypes.number,
+        loadingMessage: PropTypes.string,
         onClick: PropTypes.func,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
@@ -274,40 +277,49 @@ class PieChart extends React.Component {
     };
 
     render() {
-        const chartData = this._digestData(this.props.data);
+        const {
+            data,
+            errorMessage,
+            loadingMessage
+        } = this.props;
+        const chartData = this._digestData(data);
 
         const classNames = classnames("pie-chart", this.props.className);
+        const hasCustomState = errorMessage !== undefined || loadingMessage !== undefined;
 
         return (
             <div data-id={this.props["data-id"]} className={classNames}>
-                <div className="pie-chart__center-info">
-                    <div className="pie-chart__center-label">
+                {!hasCustomState &&
+                    <div className="pie-chart__center-info">
+                        <div className="pie-chart__center-label">
                         Total
+                        </div>
+                        <div className="pie-chart__center-value">
+                            {this._getTotalValue(data)}
+                        </div>
                     </div>
-                    <div className="pie-chart__center-value">
-                        {this._getTotalValue(this.props.data)}
-                    </div>
-                </div>
-
+                }
                 <Chart
                     width={this.props.width}
                     height={this.props.height}
                     className="pie-chart__graph"
                 >
-                    <Pie
-                        data={chartData}
-                        nameKey={this.props.dataKey}
-                        dataKey={this.props.dataValue}
-                        paddingAngle={1}
-                        innerRadius="55%"
-                        legendType={this.props.legendType}
-                        onMouseOver={this._mouseOver}
-                        onMouseLeave={this._mouseOut}
-                        onClick={this._onClick}
-                    >
-                        {this._renderCells(chartData)}
-                    </Pie>
-                    {this.props.showTooltips &&
+                    {!hasCustomState &&
+                        <Pie
+                            data={chartData}
+                            nameKey={this.props.dataKey}
+                            dataKey={this.props.dataValue}
+                            paddingAngle={1}
+                            innerRadius="55%"
+                            legendType={this.props.legendType}
+                            onMouseOver={this._mouseOver}
+                            onMouseLeave={this._mouseOut}
+                            onClick={this._onClick}
+                        >
+                            {this._renderCells(chartData)}
+                        </Pie>
+                    }
+                    {!hasCustomState && this.props.showTooltips &&
                         <Tooltip
                             isAnimationActive={true}
                             content={this._renderTooltip}
@@ -315,6 +327,26 @@ class PieChart extends React.Component {
                         />
                     }
                 </Chart>
+                {
+                    errorMessage !== undefined ? (
+                        <div className="pie-chart__error">
+                            {errorMessage}
+                        </div>
+                    ) : null
+                },
+                {
+                    loadingMessage !== undefined ? (
+                        <div className="pie-chart__loading">
+                            <Spinner
+                                show={true}
+                                defaultText={loadingMessage}
+                            />
+                            <div className="pie-chart__loading-text">
+                                {loadingMessage}
+                            </div>
+                        </div>
+                    ) : null
+                }
             </div>
         );
     }

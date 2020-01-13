@@ -93,7 +93,7 @@ class StateContainer extends React.Component {
         stateDefs: PropTypes.arrayOf(
             PropTypes.shape({
                 name: PropTypes.string.isRequired, // name of the props
-                initial: PropTypes.any.isRequired, // starting value
+                initial: PropTypes.any, // starting value
                 setter: PropTypes.string, // name of the callback in the target component
                 callbacks: PropTypes.arrayOf( // when you need something different than a simple setter
                     PropTypes.shape({
