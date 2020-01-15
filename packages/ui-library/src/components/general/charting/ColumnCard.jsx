@@ -38,6 +38,8 @@ import ColumnChart from "./ColumnChart";
  *     Hex color for this part of the legend, formatted like "#000000".
  * @param {string} [title]
  *     Title of the chart.
+ * @param {boolean} [stacked=true]
+ *     Determines if the bars in each category should be stacked.
  */
 
 /**
@@ -120,6 +122,7 @@ export default class ColumnCard extends Component {
                                 legend={this.props.legend}
                                 onMouseOver={this._mouseOver}
                                 onMouseOut={this._mouseOut}
+                                stacked={this.props.stacked}
                             />,
                         ])}
                     </div>
@@ -153,6 +156,7 @@ export default class ColumnCard extends Component {
         loading: PropTypes.bool,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
+        stacked: PropTypes.bool,
         title: PropTypes.string,
     };
 
@@ -160,6 +164,6 @@ export default class ColumnCard extends Component {
         "data-id": "column-card",
         loading: false,
         onMouseOver: noop,
-        onMouseOut: noop
+        onMouseOut: noop,
     };
 }
