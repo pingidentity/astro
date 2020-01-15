@@ -29,6 +29,9 @@ import Spinner from "../../general/Spinner";
  * @param {string} [referenceLineColor]
  *     The color for the chart's reference line, represented by a hex
  *     color. For example, "#FFFFFF".
+ * @param {boolean} [stacked=true]
+ *     Determines if the bars in each category should be stacked. If set
+ *     to false, bars will display side-by-side.
  */
 
 /**
@@ -83,6 +86,7 @@ export default class ColumnChart extends React.Component {
         })),
         referenceLineColor: PropTypes.string,
         renderTooltip: PropTypes.func,
+        stacked: PropTypes.bool,
         width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     };
 
@@ -95,6 +99,7 @@ export default class ColumnChart extends React.Component {
         onMouseOut: _.noop,
         referenceLineColor: "#57A0EA",
         renderTooltip: defaultRender,
+        stacked: true,
         width: "100%"
     };
 
@@ -202,12 +207,12 @@ export default class ColumnChart extends React.Component {
                                         label={label ? label : id}
                                         dataKey={key}
                                         key={id}
-                                        stackId="a"
+                                        stackId={ this.props.stacked ? "a" : id }
                                         maxBarSize={60}
                                         fill={color}
                                         onMouseOver={this._handleMouseOver(id)}
                                         onMouseOut={this._handleMouseOut}
-                                        radius={key === legend.length - 1 ? [3, 3, 0, 0] : null}
+                                        radius={key === legend.length - 1 || !this.props.stacked ? [3, 3, 0, 0] : null}
                                     >
                                         {
                                             digestedData.map((item) => (

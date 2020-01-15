@@ -142,6 +142,7 @@ class ColumnCardDemo extends React.Component {
                                 <ColumnChart
                                     data={columnData[0].data}
                                     legend={legend}
+                                    stacked={false}
                                     renderTooltip={(props, LegendItem) => (
                                         <LegendItem
                                             {...props}
