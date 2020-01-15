@@ -590,6 +590,17 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
                     },
                     {
+                        label: "Show More",
+                        demo: require("../components/layout/ShowMoreDemo"),
+                        pathToDoc: "components/layout/ShowMore.jsx",
+                        pathToSource: "components_layout_ShowMore.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ShowMoreDemo.jsx.html",
+                        status: {
+                            type: "dependencies",
+                            dependencies: ["fragments"]
+                        }
+                    },
+                    {
                         label: "Spacing",
                         demo: require("../components/layout/SpacingDemo"),
                         pathToDoc: "components/layout/Spacing.jsx",
