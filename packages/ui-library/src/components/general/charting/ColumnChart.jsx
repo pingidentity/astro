@@ -249,7 +249,7 @@ export default class ColumnChart extends React.Component {
                             {errorMessage}
                         </div>
                     ) : null
-                },
+                }
                 {
                     loadingMessage ? (
                         <div className="column-chart__loading">
