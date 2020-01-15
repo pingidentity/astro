@@ -40,6 +40,10 @@ class DemoItem extends React.Component {
                         dependencies.includes("context") &&
                         <div>This component uses the latest context API and requires <strong>React 16.3</strong>.</div>
                     }
+                    {
+                        dependencies.includes("fragments") &&
+                        <div>This component uses fragments and requires <strong>React 16</strong>.</div>
+                    }
                 </InlineMessage>
             );
         } else if (message || type !== "design-deprecated") {

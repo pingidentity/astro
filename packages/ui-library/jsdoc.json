@@ -28,8 +28,8 @@
     "recurse": true
   },
   "plugins": [
-    "node_modules/jsdoc-babel",
-    "./node_modules/jsdoc-jsx",
+    "../../node_modules/jsdoc-babel",
+    "../../node_modules/jsdoc-jsx",
     "plugins/markdown"]
     ,
     "babel": {

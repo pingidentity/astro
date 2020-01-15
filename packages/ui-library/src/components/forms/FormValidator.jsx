@@ -5,7 +5,7 @@ import ButtonBar from "./ButtonBar";
 import FormTextField from "./form-text-field";
 import { usesStableContext } from "../../util/DependencyUtils";
 
-usesStableContext();
+usesStableContext("FormValidator");
 
 /**
  * @class FormValidator
