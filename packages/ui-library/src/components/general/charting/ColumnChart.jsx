@@ -202,6 +202,8 @@ export default class ColumnChart extends React.Component {
 
         const hasCustomState = errorMessage !== undefined || loadingMessage !== undefined;
 
+        const emptyLines = [...Array.from({ length: 4 }, (v, i) => this.props.height / (4) * i), this.props.height];
+
         return (
             <>
                 <ResponsiveContainer
@@ -218,7 +220,10 @@ export default class ColumnChart extends React.Component {
                         data-id={dataId}
                     >
                         <XAxis dataKey="name" hide={true} />
-                        <CartesianGrid vertical={false} />
+                        <CartesianGrid
+                            vertical={false}
+                            horizontalPoints={digestedData.length === 0 ? emptyLines : undefined}
+                        />
                         <Tooltip
                             isAnimationActive={false}
                             content={this._renderTooltip}

@@ -128,9 +128,6 @@
 
     &__box {
         text-align: center;
-        transform: translateX(-50%);
-        margin-left: 50%;
-        max-width: 310px;
     }
 
     &__text {
@@ -143,6 +140,7 @@
         text-align: center;
         color: $color-strong-neutral-10;
         background-color: rgba($color-white, 0.6);
+        max-width: 310px;
     }
 
     &--small {

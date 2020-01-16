@@ -6,6 +6,8 @@ import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/compon
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Modal from "ui-library/lib/components/general/Modal";
 import Text from "ui-library/lib/components/general/Text";
+import FormTextField from "ui-library/lib/components/forms/FormTextField";
+import FormTimeZone from "ui-library/lib/components/forms/FormTimeZone";
 
 /**
 * @name ModalDemo
@@ -53,6 +55,8 @@ class ModalDemo extends React.Component {
                             <p>
                                 Default modals size both vertically and horizontally with the content.
                             </p>
+                            <FormTextField />
+                            <FormTimeZone />
                             <p>
                                 The modal has a maximum width of 960px.
                             </p>

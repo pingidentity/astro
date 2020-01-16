@@ -1,0 +1,21 @@
+.chart-wrapper {
+    position: relative;
+    text-align: center;
+    &__loader,
+    &__message {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 12; //have to be above rocker labels
+    }
+    &__loader {
+        background: rgba($color-white, 0.6);
+    }
+
+}
