@@ -28,6 +28,8 @@ import Spinner from "../../general/Spinner";
  *     Array of objects to assiciate labels and ids.
  * @param {array} [lineColors]
  *     Array of objects of colors and ids.
+ * @param {function} [onClick]
+ *     Callback triggered when the mouse clicks a data point.
  * @param {function} [onHoverDataPoint]
  *     Callback triggered when the mouse moves over a new data point.
  * @param {string} [refrenceLabelColor]
@@ -58,6 +60,7 @@ export default class LineChart extends React.Component {
             color: PropTypes.string
         })),
         loadingMessage: PropTypes.string,
+        onClick: PropTypes.func,
         onHoverDataPoint: PropTypes.func,
         referenceLineColor: PropTypes.string,
         referenceLabelColor: PropTypes.string,
@@ -73,6 +76,7 @@ export default class LineChart extends React.Component {
         highlightRange: [],
         legend: [],
         lineColor: ["#193867"],
+        onClick: _.noop,
         onHoverDataPoint: _.noop,
         referenceLineColor: "#57A0EA",
         referenceLabelColor: "#676D74",
@@ -260,6 +264,7 @@ export default class LineChart extends React.Component {
             height,
             data,
             showHighlight,
+            onClick,
         } = this.props;
 
         const noCustomState = !this.props.errorMessage && !this.props.loadingMessage;
@@ -277,6 +282,7 @@ export default class LineChart extends React.Component {
                     layout={layout}
                     data={this._digestData(data, this.props.legend)}
                     onMouseMove={this._onHoverDataPoint}
+                    onClick={onClick}
                     margin={{
                         top: 20, right: 30, left: 30, bottom: 5,
                     }}

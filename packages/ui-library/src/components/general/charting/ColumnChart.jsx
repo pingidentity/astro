@@ -35,6 +35,13 @@ import Spinner from "../../general/Spinner";
  */
 
 /**
+ * Callback triggered when a user clicks on the chart.
+ * @callback ColumnChart~onClick
+ * @param {Object} [event]
+ *     The event that triggered the callback.
+ */
+
+/**
  * Callback triggered when a user mouses over the chart.
  * @callback ColumnChart~onMouseOver
  * @param {Object} [data]
@@ -78,6 +85,7 @@ export default class ColumnChart extends React.Component {
             })
         ),
         height: PropTypes.number,
+        onClick: PropTypes.func,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
         legend: PropTypes.arrayOf(PropTypes.shape({
@@ -95,6 +103,7 @@ export default class ColumnChart extends React.Component {
         data: [],
         height: 300,
         legend: [],
+        onClick: _.noop,
         onMouseOver: _.noop,
         onMouseOut: _.noop,
         referenceLineColor: "#57A0EA",
@@ -119,6 +128,21 @@ export default class ColumnChart extends React.Component {
                 }), {})
             }
         ]), []);
+
+    _handleClick = (id) => (value, index, e) => {
+        const data = {
+            x: {
+                index,
+                label: value.name
+            },
+            y: {
+                index: this.state.legend.findIndex((i) => i.id === id),
+                label: id
+            }
+        };
+
+        this.props.onClick(data, e);
+    }
 
     _handleMouseOut = (value, index, e) => {
         this.setState({ selected: {} });
@@ -210,6 +234,7 @@ export default class ColumnChart extends React.Component {
                                         stackId={ this.props.stacked ? "a" : id }
                                         maxBarSize={60}
                                         fill={color}
+                                        onClick={this._handleClick(id)}
                                         onMouseOver={this._handleMouseOver(id)}
                                         onMouseOut={this._handleMouseOut}
                                         radius={key === legend.length - 1 || !this.props.stacked ? [3, 3, 0, 0] : null}
