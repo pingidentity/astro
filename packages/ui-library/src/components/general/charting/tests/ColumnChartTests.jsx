@@ -3,6 +3,7 @@ import { shallow } from "enzyme";
 import ColumnChart, { ColumnChartTitle } from "../ColumnChart";
 
 describe("ColumnChart", () => {
+    const onClick = jest.fn();
     const onMouseOut = jest.fn();
     const onMouseOver = jest.fn();
 
@@ -52,6 +53,7 @@ describe("ColumnChart", () => {
             { label: "Authenticators", color: "#49BF6B", id: "authenticators" },
             { label: "Test Thing", color: "#379250", id: "test-thing" },
         ],
+        onClick,
         onMouseOut,
         onMouseOver,
         title: "VERY IMPORTANT PLEASE PAY ATTENTION"
@@ -70,6 +72,30 @@ describe("ColumnChart", () => {
     // Testing all of these internal methods isn't ideal, but
     // it seemed like a more maintainable solution than attempting to mock
     // Recharts and all of its interactions.
+
+    it("calls onClick with correct data", () => {
+        const component = shallow(
+            <ColumnChart
+                {...defaultProps}
+            />
+        );
+
+        const value = { name: "Your favorite value" };
+        const fakeEvent = { target: "doesn't matter" };
+
+        component.instance()._handleClick("Authenticators")(value, 1, fakeEvent);
+
+        expect(onClick).toHaveBeenCalledWith({
+            x: {
+                index: 1,
+                label: "Your favorite value",
+            },
+            y: {
+                index: -1,
+                label: "Authenticators",
+            },
+        }, fakeEvent);
+    });
 
     it("calls onMouseOver with correct data", () => {
         const component = shallow(
