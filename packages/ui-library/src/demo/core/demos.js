@@ -1225,6 +1225,13 @@ module.exports = [
                         pathToSource: "components_general_charting_ColumnCard.jsx.html",
                         pathToDemoSource: "demo_components_general_charting_ColumnCardDemo.jsx.html"
                     },
+                    {
+                        label: "Chart Wrapper",
+                        demo: require("../components/general/charting/ChartWrapperDemo"),
+                        pathToDoc: "components/general/charting/ChartWrapper.jsx",
+                        pathToSource: "components_general_charting_ChartWrapper.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_ChartWrapperDemo.jsx.html"
+                    },
                 ]
             }
         ]

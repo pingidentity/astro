@@ -1,11 +1,7 @@
 import React from "react";
 import { CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
-import ColumnChart, { ColumnChartTitle } from "ui-library/lib/components/general/charting/ColumnChart";
-import ColumnChartWrapper from "ui-library/lib/components/general/charting/ColumnChartWrapper";
-import Legend, {
-    alignments as legendAlignments,
-    boxAlignments
-} from "ui-library/lib/components/general/charting/Legend";
+import ColumnChart, { ColumnChartTitle } from "../../../../components/general/charting/ColumnChart";
+import Legend, { alignments as legendAlignments, boxAlignments } from "../../../../components/general/charting/Legend";
 
 /**
 * @name ColumnCardDemo
@@ -26,7 +22,7 @@ class ColumnCardDemo extends React.Component {
         const columnData = [
             {
                 id: "1D",
-                label: "1D",
+                helpText: "This is by day",
                 data: [
                     {
                         id: "November 11, 2019",
@@ -68,126 +64,46 @@ class ColumnCardDemo extends React.Component {
                         ]
                     },
                 ]
-            },
-            {
-                id: "1W",
-                label: "1W",
-                data: [
-                    {
-                        id: "Nov 11 - 18, 2019",
-                        data: [
-                            {
-                                id: "authenticators",
-                                value: 20,
-                            },
-                            {
-                                id: "test-thing",
-                                value: 43 ,
-                            }
-                        ]
-                    },
-                    {
-                        id: "Nov 19 - 26, 2019",
-                        data: [ // Order does not matter
-                            {
-                                id: "test-thing",
-                                value: 10,
-                            },
-                            {
-                                id: "authenticators",
-                                value: 5,
-                            },
-                        ]
-                    },
-                    {
-                        id: "Nov 27 - Dec 4, 2019",
-                        data: [
-                            {
-                                id: "authenticators",
-                                value: 30,
-                            },
-                            {
-                                id: "test-thing",
-                                value: 12,
-                            }
-                        ]
-                    },
-                ]
             }
         ];
 
         return (
-            <div>
-                <CardRow>
-                    <DashboardCard
-                        front={
-                            <div>
-                                <ColumnChartTitle title="SMS/Voice" />
-                                <Legend
-                                    alignment={legendAlignments.CENTER}
-                                    boxAlignment={boxAlignments.CENTER}
-                                    data={[
-                                        {
-                                            color: "#49BF6B",
-                                            label: "Usage",
-                                            value: "0",
-                                        },
-                                        {
-                                            color: "#379250",
-                                            label: "Cost",
-                                            value: "0",
-                                        },
-                                    ]}
-                                />
-                                <ColumnChart
-                                    data={columnData[0].data}
-                                    legend={legend}
-                                    stacked={false}
-                                    renderTooltip={(props, LegendItem) => (
-                                        <LegendItem
-                                            {...props}
-                                            value={`$${props.value}`}
-                                        />
-                                    )}
-                                />
-                            </div>
-                        }
-                    />
-                    <DashboardCard
-                        front={
-                            <ColumnChartWrapper
-                                legend={[
+            <CardRow>
+                <DashboardCard
+                    front={
+                        <div>
+                            <ColumnChartTitle title="SMS/Voice" />
+                            <Legend
+                                alignment={legendAlignments.CENTER}
+                                boxAlignment={boxAlignments.CENTER}
+                                data={[
                                     {
-                                        id: "authenticators",
-                                        label: "Authenticators"
+                                        color: "#49BF6B",
+                                        label: "Usage",
+                                        value: "0",
                                     },
                                     {
-                                        id: "test-thing",
-                                        label: "Test thing"
-                                    }
+                                        color: "#379250",
+                                        label: "Cost",
+                                        value: "0",
+                                    },
                                 ]}
-                                legendAlignment={legendAlignments.CENTER}
-                                legendBoxAlignment={boxAlignments.CENTER}
-                                data={columnData}
-                                theme={{
-                                    dataColors: [
-                                        {
-                                            id: "authenticators",
-                                            color: "#49BF6B"
-                                        },
-                                        {
-                                            id: "test-thing",
-                                            color: "#379250"
-                                        }
-                                    ]
-                                }}
-                                title="A Title"
                             />
-                        }
-                        size={1}
-                    />
-                </CardRow>
-            </div>
+                            <ColumnChart
+                                data={columnData[0].data}
+                                legend={legend}
+                                renderTooltip={(props, LegendItem) => (
+                                    <LegendItem
+                                        {...props}
+                                        value={`$${props.value}`}
+                                    />
+                                )}
+                            />
+                        </div>
+                    }
+                />
+                <DashboardCard size={1} />
+            </CardRow>
         );
     }
 }

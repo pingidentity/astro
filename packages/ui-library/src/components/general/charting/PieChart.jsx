@@ -11,7 +11,6 @@ import classnames from "classnames";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem, alignments, valueSizes } from "./Legend";
 import { defaultRender } from "../../../util/PropUtils";
-import Spinner from "../../general/Spinner";
 
 export const PieChartTitle = ({ className, ...props }) => (
     <DashboardCardTitle
@@ -327,26 +326,6 @@ class PieChart extends React.Component {
                         />
                     }
                 </Chart>
-                {
-                    errorMessage !== undefined ? (
-                        <div className="pie-chart__error">
-                            {errorMessage}
-                        </div>
-                    ) : null
-                },
-                {
-                    loadingMessage !== undefined ? (
-                        <div className="pie-chart__loading">
-                            <Spinner
-                                show={true}
-                                defaultText={loadingMessage}
-                            />
-                            <div className="pie-chart__loading-text">
-                                {loadingMessage}
-                            </div>
-                        </div>
-                    ) : null
-                }
             </div>
         );
     }
