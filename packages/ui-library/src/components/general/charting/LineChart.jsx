@@ -10,6 +10,8 @@ import {
 import _ from "underscore";
 import Spinner from "../../general/Spinner";
 
+import ChartLabel from "./ChartLabel";
+
 /**
  * @class LineChart
  * @desc Plot data points on a graph with a scrubber.
@@ -236,6 +238,7 @@ export default class LineChart extends React.Component {
             data,
             referenceLineColor,
             referenceLabelColor,
+            width
         } = this.props;
 
         const selected = data[this.state.activeTooltipIndex];
@@ -245,11 +248,18 @@ export default class LineChart extends React.Component {
                 x={selected ? selected.label : null}
                 stroke={referenceLineColor}
                 position="start"
-                label={{
-                    position: "top",
-                    value: selected ? selected.label : null,
-                    fill: referenceLabelColor,
-                    fontSize: 14,
+                label={({ viewBox: { x, y } }) => {
+                    // Have to have this here for scoping issues during testing
+                    const selectedDataPoint = data[this.state.activeTooltipIndex];
+                    return selectedDataPoint
+                        ? <ChartLabel
+                            chartWidth={width}
+                            color={referenceLabelColor}
+                            label={selectedDataPoint.label}
+                            x={x}
+                            y={y}
+                        />
+                        : null;
                 }}
             />
         );
@@ -266,8 +276,6 @@ export default class LineChart extends React.Component {
             showHighlight,
             onClick,
         } = this.props;
-
-        const noCustomState = !this.props.errorMessage && !this.props.loadingMessage;
 
         return [
             <ResponsiveContainer
@@ -287,23 +295,15 @@ export default class LineChart extends React.Component {
                         top: 20, right: 30, left: 30, bottom: 5,
                     }}
                 >
+                    {this._renderData(this.props.legend)}
                     {
-                        // Show data if not error/loading
-                        noCustomState
-                            ? this._renderData(this.props.legend)
-                            : null
-                    }
-                    {
-                        // Show highlight if prop is enabled and no error/loading
-                        noCustomState &&
+                        // Show highlight if prop is enabled
                         showHighlight
                             ? this._renderHighlight(this.props.legend, this.props.lineColors)
                             : null
                     }
                     <XAxis dataKey="name" hide={true} />
                     {
-                        // Render RefLine if no error/loading and there is data
-                        noCustomState &&
                         data.length > 0 &&
                         this._renderReferenceLine()
                     }
