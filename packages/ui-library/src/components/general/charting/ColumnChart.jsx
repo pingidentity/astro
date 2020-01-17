@@ -113,8 +113,7 @@ export default class ColumnChart extends React.Component {
     };
 
     state = {
-        selected: {},
-        legend: [...this.props.legend].reverse(),
+        selected: null,
     };
 
     _digestData = (data) =>
@@ -136,7 +135,7 @@ export default class ColumnChart extends React.Component {
                 label: value.name
             },
             y: {
-                index: this.state.legend.findIndex((i) => i.id === id),
+                index: [...this.props.legend].reverse().findIndex((i) => i.id === id),
                 label: id
             }
         };
@@ -145,37 +144,37 @@ export default class ColumnChart extends React.Component {
     }
 
     _handleMouseOut = (value, index, e) => {
-        this.setState({ selected: {} });
+        this.setState({ selected: null });
 
         this.props.onMouseOut(e);
     }
 
     _handleMouseOver = (id) => (value, index, e) => {
-        this.setState((prevState) => {
-            const data = {
-                x: {
-                    index,
-                    label: value.name
-                },
-                y: {
-                    index: prevState.legend.findIndex((i) => i.id === id),
-                    label: id
-                }
-            };
+        const data = {
+            x: {
+                index,
+                label: value.name
+            },
+            y: {
+                index: [...this.props.legend].reverse().findIndex((i) => i.id === id),
+                label: id
+            }
+        };
 
-            this.props.onMouseOver(data, e);
-
-            return { selected: data };
+        this.setState({
+            selected: data
         });
+
+        this.props.onMouseOver(data, e);
     }
 
     _renderTooltip = () => {
-        if (!this.state.selected.y) {
+        if (!this.state.selected) {
             return;
         }
 
         const data = {
-            color: this.state.legend[this.state.selected.y.index].color,
+            color: [...this.props.legend].reverse()[this.state.selected.y.index].color,
             label: this.state.selected.y.label,
             value: this.props.data
                 .find(o => o.id === this.state.selected.x.label).data
@@ -204,6 +203,11 @@ export default class ColumnChart extends React.Component {
 
         const emptyLines = [...Array.from({ length: 4 }, (v, i) => this.props.height / (4) * i), this.props.height];
 
+        const {
+            x = {},
+            y = {},
+        } = this.state.selected || {};
+
         return (
             <>
                 <ResponsiveContainer
@@ -218,6 +222,7 @@ export default class ColumnChart extends React.Component {
                         }}
                         className="column-chart"
                         data-id={dataId}
+                        onMouseOut={this._handleMouseOut}
                     >
                         <XAxis dataKey="name" hide={true} />
                         <CartesianGrid
@@ -225,7 +230,7 @@ export default class ColumnChart extends React.Component {
                             horizontalPoints={digestedData.length === 0 ? emptyLines : undefined}
                         />
                         <Tooltip
-                            isAnimationActive={false}
+                            isAnimationActive={true}
                             content={this._renderTooltip}
                             cursor={false}
                         />
@@ -250,10 +255,7 @@ export default class ColumnChart extends React.Component {
                                                     key={item.name}
                                                     className="column-chart__cell"
                                                     style={{
-                                                        stroke: this.state.selected.x &&
-                                                        this.state.selected.y &&
-                                                        this.state.selected.x.label === item.name &&
-                                                        this.state.selected.y.label === id
+                                                        stroke: x.label === item.name && y.label === id
                                                             ? Color(color).lighten(0.5)
                                                             : color,
                                                         strokeWidth: "1px",
@@ -266,11 +268,11 @@ export default class ColumnChart extends React.Component {
                         }
                         {legend.length > 0 && !hasCustomState &&
                         <ReferenceLine
-                            x={this.state.selected.x ? this.state.selected.x.label : null}
+                            x={this.state.selected ? this.state.selected.x.label : null}
                             stroke="#57A0EA"
                             label={{
                                 position: "top",
-                                value: this.state.selected.x ? this.state.selected.x.label : null,
+                                value: this.state.selected ? this.state.selected.x.label : null,
                                 fill: this.props.referenceLineColor,
                                 fontSize: 14
                             }}
