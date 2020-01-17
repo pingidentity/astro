@@ -107,11 +107,15 @@ class RockerButtonStateless extends React.Component {
         selectedIndex: 0,
     };
 
-    _handleClick = (label, index) => {
+    _handleClick = ({
+        id,
+        index,
+        label,
+    }, e) => {
         if (this.props.disabled) {
             return;
         }
-        this.props.onValueChange({ label: label, index: index });
+        this.props.onValueChange({ label, index, id }, e);
 
     };
 
@@ -137,27 +141,27 @@ class RockerButtonStateless extends React.Component {
             "rocker-button--no-margin": this.props.noMargin
         });
 
-
         return (
             <div ref="container" data-id={this.props["data-id"]} className={className}>
                 {
                     this.props.labels.map((data, index) => {
-                        let props = {
-                            onClick: this._handleClick,
-                            key: index,
-                            index,
-                            autoFocus: index === this.props.selectedIndex &&
-                                  this.props.autoFocus === true,
-                            helpText: this.props.labelHints ? this.props.labelHints[index] : undefined,
-                        };
-                        if (data && data.id) {
-                            props.text = data.label;
-                            props["data-id"] = data.id;
-                        } else {
-                            props.text = data;
-                        }
+                        const {
+                            id,
+                            label = id || data,
+                            ...props
+                        } = data;
+
                         return (
-                            <RockerButtonLabel {...props} />);
+                            <RockerButtonLabel
+                                autoFocus={index === this.props.selectedIndex && this.props.autoFocus === true}
+                                helpText={this.props.labelHints ? this.props.labelHints[index] : undefined}
+                                key={id || index}
+                                id={id}
+                                index={index}
+                                text={label}
+                                onClick={this._handleClick}
+                                {...props}
+                            />);
                     })
                 }
             </div>
@@ -165,51 +169,56 @@ class RockerButtonStateless extends React.Component {
     }
 }
 
-var RockerButtonLabel = function (props) {
-    var _handleClick = function (event) {
-        if (props["data-id"]) {
-            props.onClick(props.text, props["data-id"], event);
-        } else {
-            props.onClick(props.text, props.index, event);
-        }
+var RockerButtonLabel = function ({
+    autoFocus,
+    id,
+    helpText,
+    index,
+    onClick,
+    text = ""
+}) {
+    const _handleClick = function (event) {
+        onClick({
+            label: text,
+            id,
+            index
+        }, event);
     };
 
-    const { text = "" } = props;
-
     const sanitizedDataId = (() => {
-        if (typeof text === "string") {
+        if (id !== undefined) {
+            return id;
+        } else if (typeof text === "string") {
             return text.toLowerCase().replace(/[^0-9a-z]/gi, "");
-        } else if (props.id) {
-            return props.id;
         } else {
-            return props.index;
+            return index;
         }
     })();
 
-    return props.helpText
+    return helpText
         ? <HelpHint
             data-id={`helphint-button_${sanitizedDataId}`}
             placement="top"
             delayShow={500}
-            hintText={props.helpText} >
+            hintText={helpText} >
             <button
-                data-id={props["data-id"] || `rocker-label_${sanitizedDataId}`}
+                data-id={`rocker-label_${sanitizedDataId}`}
                 className="rocker-button__button"
                 onClick={_handleClick}
-                autoFocus={props.autoFocus}
+                autoFocus={autoFocus}
                 type="button"
             >
-                {props.text}
+                {text}
             </button>
         </HelpHint>
         : <button
-            data-id={props["data-id"] || `rocker-label_${sanitizedDataId}`}
+            data-id={`rocker-label_${sanitizedDataId}`}
             className="rocker-button__button"
             onClick={_handleClick}
-            autoFocus={props.autoFocus}
+            autoFocus={autoFocus}
             type="button"
         >
-            {props.text}
+            {text}
         </button>;
 };
 
@@ -229,7 +238,7 @@ const RockerButton = withFocusOutline(
             callbacks: [
                 {
                     name: "onValueChange",
-                    transform: ({ index }) => index
+                    transform: ({ index, id = index }) => id
                 }
             ],
         }

@@ -126,7 +126,7 @@ describe("LineChartWrapper", () => {
         const component = getComponent({
             onSelectDataSet
         });
-        component.find('[data-id="rocker-label_february"]').simulate("click");
+        component.find('[data-id="rocker-label_feb"]').simulate("click");
 
         expect(onSelectDataSet).toHaveBeenCalledWith("feb", undefined);
     });

@@ -3,13 +3,13 @@
 exports[`RockerButton v4 data-id's don't change 1`] = `
 Array [
   "rocker-button",
-  "rocker1",
+  "rocker-label_rocker1",
   "icon",
   "icon-graphic",
   "icon-content",
-  "rocker2",
-  "rocker3",
-  "rocker4",
+  "rocker-label_rocker2",
+  "rocker-label_rocker3",
+  "rocker-label_rocker4",
 ]
 `;
 

@@ -69,7 +69,7 @@ class TabSet extends Component {
             {
                 props: {
                     children: grandChildren,
-                    label,
+                    label = "",
                 }
             },idx) => {
                 return {
