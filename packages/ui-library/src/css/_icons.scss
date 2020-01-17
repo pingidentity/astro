@@ -29,7 +29,8 @@ a .icon-plus {
     margin: 0 5px 0 0;
 }
 
-.icon {
+//using camelCase instead of BEM standard because icon- is reserved by iconfont.
+.iconComponent {
     display: inline-flex;
     &__graphic {
         padding: 0 $spacing-sm 0 0;
@@ -70,6 +71,7 @@ a .icon-plus {
         cursor: pointer;
     }
 }
+
 
 .icon__rounded {
     $size: 23px;

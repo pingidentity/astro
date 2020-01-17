@@ -63,15 +63,18 @@ const Icon = withFocusOutline(({
     type,
     ...props
 }) => {
+
+    //using camelCase instead of BEM standard because icon- is reserved by iconfont
+    const baseClassName = "iconComponent";
     const graphicClassName = classnames(
-        "icon__graphic",
+        [`${baseClassName}__graphic`],
         getIconClassName(props),
         className, {
-            "icon__graphic--size-sm": iconSize === iconSizes.SM,
-            "icon__graphic--size-md": iconSize === iconSizes.MD,
-            "icon__graphic--size-lg": iconSize === iconSizes.LG,
-            "icon__graphic--size-xl": iconSize === iconSizes.XL,
-            "icon__graphic--size-xxl": iconSize === iconSizes.XXL,
+            [`${baseClassName}__graphic--size-sm`]: iconSize === iconSizes.SM,
+            [`${baseClassName}__graphic--size-md`]: iconSize === iconSizes.MD,
+            [`${baseClassName}__graphic--size-lg`]: iconSize === iconSizes.LG,
+            [`${baseClassName}__graphic--size-xl`]: iconSize === iconSizes.XL,
+            [`${baseClassName}__graphic--size-xxl`]: iconSize === iconSizes.XXL,
         });
 
     const onClickProps = onClick ? {
@@ -89,12 +92,12 @@ const Icon = withFocusOutline(({
                     containerClassName,
                     getIconClassName(props),
                     {
-                        "icon--clickable": onClick,
-                        "icon--size-sm": iconSize === iconSizes.SM,
-                        "icon--size-md": iconSize === iconSizes.MD,
-                        "icon--size-lg": iconSize === iconSizes.LG,
-                        "icon--size-xl": iconSize === iconSizes.XL,
-                        "icon--size-xxl": iconSize === iconSizes.XXL,
+                        [`${baseClassName}--clickable`]: onClick,
+                        [`${baseClassName}--size-sm`]: iconSize === iconSizes.SM,
+                        [`${baseClassName}--size-md`]: iconSize === iconSizes.MD,
+                        [`${baseClassName}--size-lg`]: iconSize === iconSizes.LG,
+                        [`${baseClassName}--size-xl`]: iconSize === iconSizes.XL,
+                        [`${baseClassName}--size-xxl`]: iconSize === iconSizes.XXL,
                     }
                 )}
                 {...onClickProps}
@@ -106,9 +109,10 @@ const Icon = withFocusOutline(({
         <div
             className={classnames(
                 containerClassName,
+                baseClassName,
                 "icon",
                 {
-                    "icon--clickable": onClick
+                    [`${baseClassName}--clickable`]: onClick,
                 }
             )}
             data-id={dataId}

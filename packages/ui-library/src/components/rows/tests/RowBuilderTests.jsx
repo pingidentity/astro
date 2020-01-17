@@ -169,7 +169,7 @@ describe("RowBuilder", () => {
             onRemove: callback,
         });
 
-        const icons = TestUtils.scryRenderedDOMNodesWithClass(component, "icon--clickable");
+        const icons = TestUtils.scryRenderedDOMNodesWithClass(component, "iconComponent--clickable");
         expect(icons.length).toBeTruthy();
 
         expect(callback).not.toBeCalled();
