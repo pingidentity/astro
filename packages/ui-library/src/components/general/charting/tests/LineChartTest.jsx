@@ -93,4 +93,26 @@ describe("LineChart", () => {
 
         expect(onHoverDataPoint).toHaveBeenCalledWith(1);
     });
+
+    it("renders a label if a point is highlighted", () => {
+        const component = getComponent();
+
+        component.instance()._onHoverDataPoint({
+            activeTooltipIndex: 1,
+        });
+
+        component.instance().forceUpdate();
+
+        const line = component.find("ReferenceLine");
+
+        expect(line.prop("label")({ viewBox: { x: 0, y: 0 } })).toBeTruthy();
+    });
+
+    it("does not render a label if a point is not highlighted", () => {
+        const component = getComponent();
+
+        const line = component.find("ReferenceLine");
+
+        expect(line.prop("label")({ viewBox: { x: 0, y: 0 } })).toEqual(null);
+    });
 });
