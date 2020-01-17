@@ -178,9 +178,8 @@ describe("RockerButton v4", function () {
         const testIndex = 2;
 
         ReactTestUtils.Simulate.click(labels[testIndex], {});
-        expect(component.props.onValueChange).toBeCalledWith(
-            { label: labelsArray[testIndex], index: testIndex },
-            undefined);
+        expect(component.props.onValueChange.mock.calls[0][0])
+            .toEqual({ label: labelsArray[testIndex], index: testIndex });
     });
 
     it("renders the selected class when the label is an object", function() {

@@ -14,7 +14,7 @@ describe("TabSet", function () {
     const defaults = {
         "data-id": componentId,
         labels: [],
-        children: [<div />, <div />]
+        children: [<TabContent label="a" />, <TabContent label="b" />]
     };
 
     function getTabSet (opts) {

@@ -37,8 +37,8 @@ class LineChartWrapper extends React.Component {
 
     _hasMultipleDataSets = (data) => data.length > 1;
 
-    _handleRockerValueChange = ({ index }) => {
-        this.props.onSelectDataSet(this.props.data[index].id);
+    _handleRockerValueChange = ({ id }) => {
+        this.props.onSelectDataSet(id);
     };
 
     /**
@@ -49,7 +49,7 @@ class LineChartWrapper extends React.Component {
             return null;
         }
 
-        const labels = data.map(({ label }) => label);
+        const labels = data.map(({ id, label }) => ({ id, label }));
 
         return (
             <RockerButton

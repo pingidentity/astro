@@ -106,9 +106,8 @@ describe("RockerButton", function () {
         const testIndex = 2;
 
         ReactTestUtils.Simulate.click(buttons[testIndex], {});
-        expect(component.props.onValueChange).toBeCalledWith(
-            { label: labelsArray[testIndex], index: testIndex },
-            undefined);
+        expect(component.props.onValueChange.mock.calls[0][0])
+            .toEqual({ label: labelsArray[testIndex], index: testIndex });
     });
 
 });

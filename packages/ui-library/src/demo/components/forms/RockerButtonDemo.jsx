@@ -25,7 +25,7 @@ class RockerButtonDemo extends React.Component {
         selectedLabel: "Label One",
         selectedIndex: 0,
         selectedLabel2: "Label One",
-        selectedIndex2: "rocker1",
+        selectedId: "rocker1",
     };
 
     _handleValueChange = (labelValues) => {
@@ -35,11 +35,13 @@ class RockerButtonDemo extends React.Component {
         });
     };
 
-    _handleChangeWithId = (labelValues) => {
+    _handleChangeWithId = ({
+        id,
+        label
+    }) => {
         this.setState({
-            selectedLabel2: labelValues.label,
-            selectedIndex2: labelValues.index,
-
+            selectedLabel2: label,
+            selectedId: id,
         });
     }
 
@@ -62,7 +64,7 @@ class RockerButtonDemo extends React.Component {
                     labels={labelsWithId}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel2},
-                id = {this.state.selectedIndex2},
+                id = {this.state.selectedId},
                 </div>
 
                 <br /><br />
