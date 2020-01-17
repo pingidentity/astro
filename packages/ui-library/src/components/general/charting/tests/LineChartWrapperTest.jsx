@@ -2,6 +2,7 @@ import React from "react";
 import _ from "underscore";
 import LineChartWrapper from "../LineChartWrapper";
 import { mount } from "enzyme";
+import { generateTheme } from "../../../../util/ChartingUtils";
 
 window.__DEV__ = true;
 
@@ -11,18 +12,15 @@ describe("LineChartWrapper", () => {
     const defaultProps = {
         width: 500,
         height: 150,
-        theme: {
-            lineColors: [
-                {
-                    id: "mobile",
-                    color: "#FFA9E7",
-                },
-                {
-                    id: "desktop",
-                    color: "#FF84E8",
-                }
-            ],
-        },
+        theme: generateTheme("#FFA9E7", [
+            {
+                label: "Mobile",
+                id: "mobile",
+            }, {
+                label: "Desktop",
+                id: "desktop",
+            }
+        ]),
         legend: [
             {
                 label: "Mobile",
