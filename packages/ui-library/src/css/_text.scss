@@ -173,3 +173,8 @@
         margin-right: $spacing-xs;
     }
 }
+
+
+.select-text {
+    @include break-word;
+}
