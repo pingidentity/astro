@@ -23,6 +23,8 @@ const LinkDemo = () => {
                 type={linkTypes.BLOCK}
                 iconColor={iconColors.ACTIVE}
             />
+            &nbsp;
+            <Link title="This is a disabled link" disabled url="#" type={linkTypes.BLOCK} />
             <HR />
             <p>
                 Here's a <Link url="https:/pingidentity.com" target="_blank">simple link</Link> in a block of text.

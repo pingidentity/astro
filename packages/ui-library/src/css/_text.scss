@@ -172,6 +172,10 @@
     &__icon {
         margin-right: $spacing-xs;
     }
+    &--disabled {
+        pointer-events: none;
+        opacity: $inactive-opacity;
+    }
 }
 
 
