@@ -2,6 +2,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom");
 
+import classnames from "classnames";
 /**
  * @callback SelectText~onClick
  */
@@ -84,7 +85,7 @@ class SelectText extends React.Component {
     };
 
     static defaultProps = {
-        "data-id": "select-text"
+        "data-id": "select-text",
     };
 
     /*
@@ -143,7 +144,11 @@ class SelectText extends React.Component {
     render() {
         var dataId = this.props.dataId || this.props["data-id"];
         return (
-            <span className={this.props.className}
+            <span
+                className={ classnames(
+                    "select-text",
+                    this.props.className
+                )}
                 onClick={this._selectText}
                 data-id={dataId}>
                 {this.props.children}
