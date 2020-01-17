@@ -196,4 +196,12 @@ describe("PieChart", () => {
 
         expect(tooltip.props.children).toEqual("BORK BORK BORK");
     });
+
+    it("renders center value as data total by default", () => {
+        const component = getComponent();
+
+        const value = component.find(".pie-chart__center-value");
+
+        expect(value.text()).toEqual("28");
+    });
 });

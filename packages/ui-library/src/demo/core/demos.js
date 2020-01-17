@@ -1208,10 +1208,10 @@ module.exports = [
                         }
                     },
                     {
-                        label: "PieChart",
+                        label: "Pie Chart",
                         demo: require("../components/general/charting/PieChartDemo"),
                         pathToDoc: "components/general/charting/PieChart.jsx",
-                        pathToSource: "components_general_charting_PieChartDemo.jsx.html",
+                        pathToSource: "components_general_charting_PieChart.jsx.html",
                         pathToDemoSource: "demo_components_general_charting_PieChartDemo.jsx.html",
                         status: {
                             message: "THIS COMPONENT IS STILL IN DEVELOPMENT.",

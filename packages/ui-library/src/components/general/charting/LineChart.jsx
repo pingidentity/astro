@@ -8,7 +8,6 @@ import {
     ResponsiveContainer
 } from "recharts";
 import _ from "underscore";
-import Spinner from "../../general/Spinner";
 
 import ChartLabel from "./ChartLabel";
 
@@ -47,7 +46,6 @@ export default class LineChart extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         data: PropTypes.array,
-        errorMessage: PropTypes.string,
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         highlightColor: PropTypes.string,
         highlightRange: PropTypes.arrayOf(PropTypes.number),
@@ -61,7 +59,6 @@ export default class LineChart extends React.Component {
             id: PropTypes.string,
             color: PropTypes.string
         })),
-        loadingMessage: PropTypes.string,
         onClick: PropTypes.func,
         onHoverDataPoint: PropTypes.func,
         referenceLineColor: PropTypes.string,
@@ -277,7 +274,7 @@ export default class LineChart extends React.Component {
             onClick,
         } = this.props;
 
-        return [
+        return (
             <ResponsiveContainer
                 className={className}
                 height={height}
@@ -308,27 +305,7 @@ export default class LineChart extends React.Component {
                         this._renderReferenceLine()
                     }
                 </Chart>
-            </ResponsiveContainer>,
-            (
-                this.props.errorMessage ? (
-                    <div className="line-chart__error" key="error">
-                        {this.props.errorMessage}
-                    </div>
-                ) : null
-            ),
-            (
-                this.props.loadingMessage ? (
-                    <div className="line-chart__loading" key="loading">
-                        <Spinner
-                            show={true}
-                            defaultText={this.props.loadingMessage}
-                        />
-                        <div className="line-chart__loading-text">
-                            {this.props.loadingMessage}
-                        </div>
-                    </div>
-                ) : null
-            )
-        ];
+            </ResponsiveContainer>
+        );
     }
 }
