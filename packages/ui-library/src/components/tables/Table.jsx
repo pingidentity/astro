@@ -4,6 +4,70 @@ import _ from "underscore";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 
+const cellClasses = {
+    "TOP": "grid__cell--top",
+    "MIDDLE": "grid__cell--middle",
+    "BOTTOM": "grid__cell--bottom",
+    "AUTO": "",
+};
+
+/**
+ * @enum {string}
+ * @alias Table.columnAlignments
+ */
+const columnAlignments = {
+    /** center */
+    CENTER: "center",
+    /** left */
+    LEFT: "left",
+    /** right */
+    RIGHT: "right"
+};
+
+const overflowOptions = {
+    ELLIPSIS: "ellipsis",
+    WRAP: "wrap"
+};
+
+/**
+ * @enum {string}
+ * @alias Table.tableLayouts
+ */
+const tableLayouts = {
+    /** auto */
+    AUTO: "auto",
+    /** fixed */
+    FIXED: "fixed"
+};
+
+/**
+ * @enum {string}
+ * @alias Table.tableWidths
+ */
+const tableWidths = {
+    /** auto */
+    AUTO: "auto",
+    /** full */
+    FULL: "full",
+    /** full-fixed */
+    FULL_FIXED: "full-fixed",
+};
+
+/**
+ * @enum {string}
+ * @alias Table.verticalAlignments
+ */
+const verticalAlignments = {
+    /** AUTO */
+    AUTO: "AUTO",
+    /** BOTTOM */
+    BOTTOM: "BOTTOM",
+    /** MIDDLE */
+    MIDDLE: "MIDDLE",
+    /** TOP */
+    TOP: "TOP"
+};
+
 /**
  * @callback Table~cellRenderer
  * @param {string|number} cell
@@ -32,9 +96,11 @@ import HelpHint from "../tooltips/HelpHint";
  *      An array of values for the table head.
  * @param {bool} [fullWidth]
  *          Whether or not the table is full-width.
- * @param {string} [verticalAlignment]
+ * @param {Table.tableLayouts} [layout]
+ *      Fixed or auto layout.
+ * @param {Table.verticalAlignments} [verticalAlignment]
  *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
- * @param {'auto'|'full'|'full-fixed'} [width]
+ * @param {Table.tableWidths} [width]
  *      The width of the table.
  */
 
@@ -42,7 +108,7 @@ import HelpHint from "../tooltips/HelpHint";
  *
  * @param {Object[]} [columnStyling]
  *      Styling options for the columns in the table.
- * @param {'center'|'left'|'right'} [columnStyling.alignment]
+ * @param {Table.columnAlignments} [columnStyling.alignment]
  *      The horizontal alignment of the column.
  * @param {string} [columnStyling.minWidth]
  *      The minimum width of the column. Must be a string including a unit, ie 90px.
@@ -57,42 +123,6 @@ import HelpHint from "../tooltips/HelpHint";
 
 const getHeadData = data => _.reduce(data, (headings, item) => _.union(headings, _.keys(item)), null);
 const getBodyData = (data, headData) => _.map(data, item => _.map(headData, heading => item[heading]));
-
-const cellClasses = {
-    "TOP": "grid__cell--top",
-    "MIDDLE": "grid__cell--middle",
-    "BOTTOM": "grid__cell--bottom",
-    "AUTO": "",
-};
-
-const columnAlignments = {
-    CENTER: "center",
-    LEFT: "left",
-    RIGHT: "right"
-};
-
-const overflowOptions = {
-    ELLIPSIS: "ellipsis",
-    WRAP: "wrap"
-};
-
-const tableLayouts = {
-    AUTO: "auto",
-    FIXED: "fixed"
-};
-
-const tableWidths = {
-    AUTO: "auto",
-    FULL: "full",
-    FULL_FIXED: "full-fixed"
-};
-
-const verticalAlignments = {
-    AUTO: "AUTO",
-    BOTTOM: "BOTTOM",
-    MIDDLE: "MIDDLE",
-    TOP: "TOP"
-};
 
 const renderColumnHeadings = (columnStyling = [], headData) => _.map(headData, (heading, idx) => {
     const {

@@ -54,7 +54,7 @@ var LegendTypes = require("../../../constants/ChartingConstants.js").LegendTypes
 * @param {string} [data-id="area-chart"]
 *    To define the base "data-id" value for top-level HTML container.
 *
-* @param {module:constants/ChartingConstants.Layouts} [layout=Armodule:constants/ChartingConstantseaChart.Layouts.HORIZONTAL]
+* @param {module:constants/ChartingConstants.Layouts} [layout=module:constants/ChartingConstants.Layouts.HORIZONTAL]
 *    The layout of the areas in the chart.
 * @param {number} [width=700]
 *    The width of the chart.

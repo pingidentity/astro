@@ -3,6 +3,21 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 /**
+ * @enum {string}
+ * @alias HR.spacings
+ */
+export const spacings = {
+    /** xs */
+    XS: "xs",
+    /** sm */
+    SM: "sm",
+    /** md */
+    MD: "md",
+    /** zero */
+    ZERO: "zero",
+};
+
+/**
  * @class HR
  * @desc A horizontal rule
  *
@@ -10,7 +25,7 @@ import classnames from "classnames";
  *     Defines the "data-id" for top-level HTML container.
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
- * @param {(XS | SM | MD | ZERO)} [spacing]
+ * @param {HR.spacings} [spacing]
  *     Sets the spacing above and below the line. Set to a constant on HR.spacings
  * @param {boolean} [solid=false]
  *     Renders a solid line rather than a dotted line.
@@ -35,23 +50,18 @@ const HR = ({
     />
 );
 
-HR.spacings = {
-    XS: "xs",
-    SM: "sm",
-    MD: "md",
-    ZERO: "zero",
-};
-
 HR.propTypes = {
     "data-id": PropTypes.string,
     className: PropTypes.string,
     solid: PropTypes.bool,
-    spacing: PropTypes.oneOf(Object.values(HR.spacings)),
+    spacing: PropTypes.oneOf(Object.values(spacings)),
 };
 
 HR.defaultProps = {
     "data-id": "hr",
     solid: false,
 };
+
+HR.spacings = spacings;
 
 export default HR;

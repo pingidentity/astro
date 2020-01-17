@@ -3,6 +3,23 @@ import React from "react";
 import classnames from "classnames";
 
 /**
+ * @enum {string}
+ * @alias CollapsibleLink.arrowPositions
+ * @desc Enum for the different options for CollapsibleLink arrow position.
+ * Add className {CollapsibleLink.arrowPositions.LEFT} for positioning the toggle arrow to the left of the title.
+ * Add className {CollapsibleLink.arrowPositions.RIGHT} for positioning the toggle arrow to the right of the title.
+ * Add className {CollapsibleLink.arrowPositions.NONE} to display without an arrow.
+ */
+const arrowPositions = {
+    /** left */
+    LEFT: "left",
+    /** right */
+    RIGHT: "right",
+    /** none */
+    NONE: "none"
+};
+
+/**
  * @callback CollapsibleLink~onToggle
  * @param {boolean} expanded
  *     Current expanded/collapsed state
@@ -97,18 +114,7 @@ class CollapsibleLink extends React.Component {
     }
 }
 
-/**
- * @enum {string}
- * @desc Enum for the different options for CollapsibleLink arrow position.
- * Add className {CollapsibleLink.arrowPositions.LEFT} for positioning the toggle arrow to the left of the title.
- * Add className {CollapsibleLink.arrowPositions.RIGHT} for positioning the toggle arrow to the right of the title.
- * Add className {CollapsibleLink.arrowPositions.NONE} to display without an arrow.
- */
-CollapsibleLink.arrowPositions = {
-    LEFT: "left",
-    RIGHT: "right",
-    NONE: "none"
-};
+CollapsibleLink.arrowPositions = arrowPositions;
 
 module.exports = CollapsibleLink;
 

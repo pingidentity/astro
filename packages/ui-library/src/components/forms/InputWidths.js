@@ -1,13 +1,25 @@
 import Utils from "../../util/Utils.js";
 
+/**
+ * @enum {string}
+ * @alias InputWidths
+ */
 export const InputWidths = {
+    /** XS */
     XS: "XS",
+    /** SM */
     SM: "SM",
+    /** MD */
     MD: "MD",
+    /** LG */
     LG: "LG",
+    /** XL */
     XL: "XL",
+    /** XX */
     XX: "XX",
+    /** MAX */
     MAX: "MAX",
+    /** AUTO */
     AUTO: "AUTO",
 };
 

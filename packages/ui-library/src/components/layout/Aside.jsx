@@ -3,6 +3,21 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 /**
+ * @enum {string}
+ * @alias Aside.widths
+ */
+export const widths = {
+    /** AUTO */
+    AUTO: "AUTO",
+    /** SM */
+    SM: "SM",
+    /** MD */
+    MD: "MD",
+    /** LG */
+    LG: "LG"
+};
+
+/**
 * @class Aside
 * @desc A container that lets you put secondary content next to main content.
 *
@@ -16,8 +31,8 @@ import classnames from "classnames";
 *     When true, stretch the aside element to the full height of the main element
 * @param {string} [position]
 *     Can specify behavior like "right-top"
-* @param {string} [width="AUTO"]
-*     Can hard-code the with to "SM" "MD" or "LG"
+* @param {Aside.widths} [width=AUTO]
+*     Can hard-code the width to "SM" "MD" or "LG"
 */
 
 const Aside = ({
@@ -32,9 +47,9 @@ const Aside = ({
     <div
         className={classnames("aside-container", className, {
             "aside-container--full-height": fullHeight,
-            "aside-container--sm": width === "SM",
-            "aside-container--md": width === "MD",
-            "aside-container--lg": width === "LG",
+            "aside-container--sm": width === widths.SM,
+            "aside-container--md": width === widths.MD,
+            "aside-container--lg": width === widths.LG,
         })}
         data-id={dataId}
     >
@@ -52,12 +67,14 @@ Aside.propTypes = {
     aside: PropTypes.element,
     fullHeight: PropTypes.bool,
     position: PropTypes.oneOf(["right", "top-right"]),
-    width: PropTypes.oneOf([ "AUTO", "SM", "MD", "LG" ]),
+    width: PropTypes.oneOf(Object.values(widths)),
 };
 
 Aside.defaultProps = {
     "data-id": "aside",
     width: "AUTO",
 };
+
+Aside.widths = widths;
 
 export default Aside;

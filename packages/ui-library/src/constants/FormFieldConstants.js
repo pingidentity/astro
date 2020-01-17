@@ -13,9 +13,13 @@ module.exports = {
      * @desc Form field types.
      */
     FormFieldMode: {
+        /** NEW */
         NEW: "NEW",
+        /** EDIT */
         EDIT: "EDIT",
+        /** READ_ONLY */
         READ_ONLY: "READ_ONLY",
+        /** SUMMARY */
         SUMMARY: "SUMMARY"
     }
 };

@@ -23,8 +23,11 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 * @desc An enum of expandable row statuses.
 */
 const Statuses = {
+    /** good */
     GOOD: "good",
+    /** warning */
     WARNING: "warning",
+    /** error */
     ERROR: "error"
 };
 
@@ -39,6 +42,7 @@ const StatusTypes = {
  * @alias ExpandableRow.RowMessageTypes
  */
 const RowMessageTypes = {
+    /** warning */
     WARNING: "warning"
 };
 
@@ -47,7 +51,9 @@ const RowMessageTypes = {
  * @alias ExpandableRow.ConfirmDeletePositions
  */
 const ConfirmDeletePositions = {
+    /** top */
     TOP: "top",
+    /** bottom */
     BOTTOM: "bottom"
 };
 
@@ -168,7 +174,7 @@ const ConfirmDeletePositions = {
  *     The message to display within the delete confirm dialog when asking for confirmation to delete a row.
  * @param {boolean} [confirmDelete=false]
  *     Whether or not a 'delete' action should show a confirmation dialog.
- * @param {string} [confirmDeletePosition=bottom]
+ * @param {ExpandableRow.ConfirmDeletePositions} [confirmDeletePosition=BOTTOM]
  *     Used to determine whether the confirm delete dialog will appear above or below the delete button.
  * @param {string} [confirmDeleteTitle]
  *     Title to set for Confirm Delete dialog tooltip

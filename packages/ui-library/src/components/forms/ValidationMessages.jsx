@@ -35,7 +35,9 @@ import StatusIndicator from "../general/StatusIndicator";
  * @alias ValidationMessages.Status
  */
 var Status = {
+    /** icon-success */
     PASS: "icon-success",
+    /** icon-fail */
     FAIL: "icon-fail"
 };
 

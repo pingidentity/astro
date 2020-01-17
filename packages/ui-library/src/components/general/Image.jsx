@@ -3,6 +3,30 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 /**
+ * @enum {string}
+ * @alias Image.imageSizes
+ */
+export const imageSizes = {
+    /** auto */
+    AUTO: "auto",
+    /** sm */
+    SM: "sm",
+    /** full */
+    FULL: "full",
+};
+
+/**
+ * @enum {string}
+ * @alias Image.imageTypes
+ */
+export const imageTypes = {
+    /** auto */
+    AUTOWIDTH: "auto",
+    /** square */
+    SQUARE: "square",
+};
+
+/**
  * @class Image
  * @desc A component for displaying an image.
  *
@@ -17,9 +41,9 @@ import classnames from "classnames";
  *     The source of the image- corresponds to the src attribute of a regular
  *     HTML <img/> tag. Can be a URL or a base64-encoded data URI. More information
  *     on data URI's can be found here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
- * @param {('AUTO'|'SM')} [size]
+ * @param {Image.imageSizes} [size]
  *     Size of the image.
- * @param {('AUTOWIDTH'|'SQUARE')} [type]
+ * @param {Image.imageTypes} [type]
  *     The display type of the image. Auto-width will allow the image to automatically resize horizontally;
  *     square will force the image into a square display by cutting off its sides.
  *
@@ -30,17 +54,6 @@ import classnames from "classnames";
  * <Image className="my-class" data-id="myImage" src="my-image.jpg" />
  *
  */
-
-export const imageSizes = {
-    AUTO: "auto",
-    SM: "sm",
-    FULL: "full"
-};
-
-export const imageTypes = {
-    AUTOWIDTH: "auto",
-    SQUARE: "square"
-};
 
 function Image({
     alt,

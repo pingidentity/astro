@@ -7,10 +7,31 @@ import { withFocusOutline } from "../../util/KeyboardUtils";
 import _ from "underscore";
 
 /**
+ * @enum {string}
+ * @alias Button.buttonTypes
+ */
+const buttonTypes = {
+    /** primary */
+    PRIMARY: "primary",
+    /** secondary */
+    SECONDARY: "secondary",
+    /** standard */
+    STANDARD: "standard",
+    /** success */
+    SUCCESS: "success",
+    /** cancel */
+    CANCEL: "cancel",
+    /** danger */
+    DANGER: "danger",
+    /** link */
+    LINK: "link",
+};
+
+/**
  * @class Button
  * @desc button component
  *
- * @param {("primary" | "secondary" | "standard" | "success" | "cancel" | "danger" | "link")} [type]
+ * @param {Button.buttonTypes} [type]
  *      CSS class applied to html.
  * @param {boolean} active
  *     Active style of the button for when it's being used as a toggle.
@@ -49,16 +70,6 @@ import _ from "underscore";
  *  </Button>
  *
  */
-
-const buttonTypes = {
-    PRIMARY: "primary",
-    SECONDARY: "secondary",
-    STANDARD: "standard",
-    SUCCESS: "success",
-    CANCEL: "cancel",
-    DANGER: "danger",
-    LINK: "link",
-};
 
 const buttonTypeList = Object.values(buttonTypes);
 

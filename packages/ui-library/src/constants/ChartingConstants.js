@@ -9,12 +9,14 @@
 module.exports = {
     /**
      * @enum {string}
-     * @alias module:constants/ChartingConstants.ChartLayouts
+     * @alias module:constants/ChartingConstants.Layouts
      * @desc Chart layouts.
      */
     Layouts: {
+        /** horizontal */
         HORIZONTAL: "horizontal",
-        VERTICAL: "vertical"
+        /** vertical */
+        VERTICAL: "vertical",
     },
 
     /**
@@ -23,8 +25,10 @@ module.exports = {
      * @desc Axis types.
      */
     AxisTypes: {
+        /** number */
         NUMBER: "number",
-        STRING: "category"
+        /** category */
+        STRING: "category",
     },
 
     /**
@@ -33,10 +37,14 @@ module.exports = {
      * @desc Axis orientations.
      */
     AxisOrientations: {
+        /** top */
         TOP: "top",
+        /** bottom */
         BOTTOM: "bottom",
+        /** left */
         LEFT: "left",
-        RIGHT: "right"
+        /** right */
+        RIGHT: "right",
     },
 
     /**
@@ -45,18 +53,30 @@ module.exports = {
      * @desc Line interpolation types.
      */
     LineTypes: {
+        /** basis */
         BASIS: "basis",
+        /** basisClosed */
         BASIS_CLOSED: "basisClosed",
+        /** basisOpen */
         BASIS_OPEN: "basisOpen",
+        /** linear */
         LINEAR: "linear",
+        /** linearClosed */
         LINEAR_CLOSED: "linearClosed",
+        /** natural */
         NATURAL: "natural",
+        /** monotoneX */
         MONOTONE_X: "monotoneX",
+        /** monotoneY */
         MONOTONE_Y: "monotoneY",
+        /** monotone */
         MONOTONE: "monotone",
+        /** step */
         STEP: "step",
+        /** stepBefore */
         STEP_BEFORE: "stepBefore",
-        STEP_AFTER: "stepAfter"
+        /** stepAfter */
+        STEP_AFTER: "stepAfter",
     },
 
     /**
@@ -65,15 +85,25 @@ module.exports = {
      * @desc Legend icon types.
      */
     LegendTypes: {
+        /** line */
         LINE: "line",
+        /** square */
         SQUARE: "square",
+        /** rect */
         RECTANGLE: "rect",
+        /** circle */
         CIRCLE: "circle",
+        /** cross */
         CROSS: "cross",
+        /** diamond */
         DIAMOND: "diamond",
+        /** star */
         STAR: "star",
+        /** triangle */
         TRIANGLE: "triangle",
+        /** wye */
         WYE: "wye",
-        NONE: "none"
+        /** none */
+        NONE: "none",
     }
 };

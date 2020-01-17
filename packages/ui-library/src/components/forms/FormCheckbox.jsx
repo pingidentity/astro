@@ -47,7 +47,7 @@ import classnames from "classnames";
  *    Render prop to display FormLabel
  * @param {string} [value]
  *    The value for the input.
-* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+* @param {InputWidths} [width]
 *    Specifies the width of the input.
  *
  * @param {boolean} [checked=false]

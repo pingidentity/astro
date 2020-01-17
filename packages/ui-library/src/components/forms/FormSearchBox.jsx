@@ -61,7 +61,7 @@ import { createProgressiveState } from "../utils/StateContainer";
 *     Hint text inside searchBox
 * @param {string} [name]
 *    Name attribute for the input.
-* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+* @param {InputWidths} [width]
 *    Specifies the width of the input.
 * @param {FormSearchBox~onValueChange} onValueChange
 *     Callback to be triggered when the searchbox value changes

@@ -6,6 +6,34 @@ import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
 
 
 /**
+ * @enum {string}
+ * @alias Icon.iconSizes
+ */
+const iconSizes = {
+    /** sm */
+    SM: "sm",
+    /** md */
+    MD: "md",
+    /** lg */
+    LG: "lg",
+    /** xl */
+    XL: "xl",
+    /** xxl */
+    XXL: "xxl",
+};
+
+/**
+ * @enum {string}
+ * @alias Icon.iconTypes
+ */
+const iconTypes = {
+    /** inline */
+    INLINE: "inline",
+    /** leading */
+    LEADING: "leading",
+};
+
+/**
  * @class Icon
  * @desc A component for displaying an icon by itself or next to next.
  *
@@ -15,11 +43,11 @@ import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
  *     The name of the icon.
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
- * @param {string} [type]
+ * @param {Icon.iconTypes} [type]
  *     Set to Icon.iconTypes.LEADING or Icon.iconTypes.INLINE to either provide extra spacing or not.
  * @param {string} [title]
  *     Title for the label within a stack gap.
- * @param {string} [iconSize]
+ * @param {Icon.iconSizes} [iconSize]
  *     Size of the icon, XS, SM, MD, LG, XL, or XXL
  *     When iconSize is defined there needs to be 2 child elements for it to look right.
  *     Example on how to use the new props below
@@ -37,19 +65,6 @@ import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
  *   </Icon>
  *
  */
-
-const iconSizes = {
-    SM: "sm",
-    MD: "md",
-    LG: "lg",
-    XL: "xl",
-    XXL: "xxl"
-};
-
-const iconTypes = {
-    INLINE: "inline",
-    LEADING: "leading",
-};
 
 
 const Icon = withFocusOutline(({

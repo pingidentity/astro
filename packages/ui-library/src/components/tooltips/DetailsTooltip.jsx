@@ -14,6 +14,51 @@ import ButtonGroup from "../layout/ButtonGroup";
 import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationUtils";
 
 /**
+ * @enum {string}
+ * @alias DetailsTooltip.tooltipPlacements
+ */
+const tooltipPlacements = {
+    /** top */
+    TOP: "top",
+    /** bottom */
+    BOTTOM: "bottom",
+    /** top left */
+    TOP_LEFT: "top left",
+    /** top right */
+    TOP_RIGHT: "top right",
+    /** bottom left */
+    BOTTOM_LEFT: "bottom left",
+    /** bottom right */
+    BOTTOM_RIGHT: "bottom right",
+};
+
+/**
+ * @enum {string}
+ * @alias DetailsTooltip.popupTypes
+ */
+const popupTypes = {
+    /** basic */
+    BASIC: "basic",
+    /** dialog */
+    DIALOG: "dialog",
+    /** alert */
+    ALERT: "alert",
+    /** selection-list */
+    SELECTION_LIST: "selection-list",
+};
+
+/**
+ * @enum {string}
+ * @alias DetailsTooltip.detailsWidths
+ */
+const detailsWidths = {
+    /** medium */
+    MD: "medium",
+    /** large */
+    LG: "large",
+};
+
+/**
  * @callback DetailsTooltip~onToggle
  */
 
@@ -36,7 +81,7 @@ import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationU
  *     CSS classes to apply to title container.
  * @param {string} [labelClassName]
  *     CSS classes to set on the trigger label.
- * @param {("top" | "bottom" | "top left" | "top right" | "bottom left" | "bottom right")} [placement]
+ * @param {DetailsTooltip.tooltipPlacements} [placement]
  *     How the tooltip is placed off of its trigger.
  * @param {node} [label]
  *     A string or JSX object that serves as the trigger label.
@@ -63,9 +108,9 @@ import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationU
  *     Callback to be triggered when escape key is clicked. Closes DetailsTooltip.
  * @param {boolean} [showClose=true]
  *     Show close control.
- * @param {("basic" | "alert" | "selection-list")} [type="basic"]
+ * @param {DetailsTooltip.popupTypes} [type="basic"]
  *     Determines basic appearance
-* @param {("MD, LG")} [width]
+* @param {DetailsTooltip.detailsWidths} [width]
  *      If supplied, with add different width sizes for the tooltip.
  *
  * @example
@@ -81,27 +126,6 @@ import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationU
 const DetailsTitle = ({ children }) => (
     <div className="title">{children}</div>
 );
-
-const tooltipPlacements = {
-    TOP: "top",
-    BOTTOM: "bottom",
-    TOP_LEFT: "top left",
-    TOP_RIGHT: "top right",
-    BOTTOM_LEFT: "bottom left",
-    BOTTOM_RIGHT: "bottom right",
-};
-
-const popupTypes = {
-    BASIC: "basic",
-    DIALOG: "dialog",
-    ALERT: "alert",
-    SELECTION_LIST: "selection-list",
-};
-
-const detailsWidths = {
-    MD: "medium",
-    LG: "large"
-};
 
 const getDetailsWidth = width => {
     switch (width) {

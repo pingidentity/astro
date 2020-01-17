@@ -6,9 +6,14 @@
  *     Set type prop to {SelectionList.types.MULTI} for a multi selection list with check boxes.
  */
 exports.ListType = {
+    /** add */
     ADD: "add",
+    /** single */
     SINGLE: "single",
+    /** multi */
     MULTI: "multi",
+    /** multiadd */
     MULTIADD: "multiadd",
+    /** viewonly */
     VIEWONLY: "viewonly"
 };

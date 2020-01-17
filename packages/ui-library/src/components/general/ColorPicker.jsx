@@ -65,7 +65,7 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  *     A property to disable the component
  * @param {boolean} [useInternalError=true]
  *     Turn on or off the internal hex format error
- * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX")} [width]
+ * @param {InputWidths} [width]
 *      Specifies the width of the input.
  * @param {ColorPicker~onValueChange} onValueChange
  *     Callback to be triggered when a color is chosen by passing the new color.

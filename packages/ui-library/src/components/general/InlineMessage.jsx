@@ -58,7 +58,7 @@ var React = require("react"),
  *      Primary button containing href and target.
  * @param {Array.<InlineMessage~secondaryButtons>} [secondaryButtons]
  *     List of secondary buttons
- * @param {InlineMessage.MessageTypes} [type=MessageTypes.NOTICE]
+ * @param {Messages.MessageTypes} [type=MessageTypes.NOTICE]
  *     Type of icon to display (MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING)
  *     an object for the primary button
  *
