@@ -157,6 +157,7 @@ class I18nPhoneInputStateless extends Component {
             dialCode = "",
             phoneNumber
         } = this.props;
+        /* istanbul ignore if */
         if (countryCode !== "") {
             return countryCode;
         } else if (phoneNumber !== "") {
