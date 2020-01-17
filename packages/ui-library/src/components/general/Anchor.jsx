@@ -17,7 +17,8 @@ const linkTypes = {
  *
  * @property {string} [data-id]
  *     To define the base "data-id" value for the top-level HTML container.
- *
+ * @param {boolean} [disabled=false]
+ *     Indicates whether component is disabled.
  * @param {function} [onClick]
  *     Callback to be triggered when trigger is clicked.
  */
@@ -26,12 +27,14 @@ class AnchorBase extends React.Component {
     static propTypes = {
         children: PropTypes.node,
         "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
         onClick: PropTypes.func,
         type: PropTypes.oneOf(Object.values(linkTypes)),
     };
 
     static defaultProps = {
         "data-id": "anchor",
+        disabled: false,
         onClick: _.noop,
         type: "block"
     };
@@ -60,7 +63,10 @@ class AnchorBase extends React.Component {
                 tabIndex="0"
                 {...props}
                 className={classnames("anchor", className,
-                    { disabled, "page-return-link": type === linkTypes.PAGE_RETURN })}
+                    {
+                        "anchor--disabled": disabled,
+                        "page-return-link": type === linkTypes.PAGE_RETURN
+                    })}
                 onKeyPress={this._handleKeyPress}
             >
                 {this._typeIcon(type)}
