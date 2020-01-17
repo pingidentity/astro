@@ -457,12 +457,17 @@ class FormDropDownListStateless extends React.Component {
     _filteredOptions = () => {
         return (this.props.canAdd || this.props.searchType === SearchTypes.BOX)
             ? filterOptions(this._getLabelOptions(this.props.options), this.props.searchString)
-            : this._getLabelOptions(this.props.options);}
+            : this._getLabelOptions(this.props.options);
+    }
+
     // Moving complexity of the stateful version's _handleToggle behavior here
     _onToggleProxy = () => {
         this.props.onToggle();
-        this.props.setSearchIndex(-1);
-        this.props.setSearchTime(0);
+        this.props.setSearchIndex(
+            this._orderedOptions.findIndex(o =>
+                this.props.selectedOption && this.props.selectedOption.value === o.value)
+        );
+        this.props.setSearchTime(-1);
     };
 
     _setupGroups = ({ groups }) => {
@@ -494,6 +499,8 @@ class FormDropDownListStateless extends React.Component {
                     this._orderedOptions = this._orderedOptions.concat(groupedOptions[groupItem.id]);
                 }
             });
+        } else {
+            this._orderedOptions = this.props.options;
         }
     };
 
@@ -519,7 +526,7 @@ class FormDropDownListStateless extends React.Component {
 
     _closeList = () => {
         this._onToggleProxy();
-        this._onSearchProxy("",0,0);
+        this._onSearchProxy("", 0, 0);
     };
 
     _getOrderedOptionsIndex = option => (
@@ -532,6 +539,19 @@ class FormDropDownListStateless extends React.Component {
 
     _isKeyboardSearch = () => !this.props.canAdd && this.props.searchType === SearchTypes.KEYBOARD;
 
+    _isPromptVisible = () => {
+        if (!this._isBoxSearch() || this.props.searchString === "" || !this.props.canAdd) {
+            return false;
+        } else {
+            const cleanSearch = this.props.searchString.toLowerCase().trim();
+            return this._getLabelOptions(this.props.options).some(({
+                label
+            }) => label.toLowerCase().trim() === cleanSearch)
+                ? false
+                : true;
+        }
+    }
+
     _getPrompt = () => {
         if (this._isBoxSearch()) {
             const className = "select-prompt",
@@ -539,7 +559,7 @@ class FormDropDownListStateless extends React.Component {
                 addClassName = classnames(
                     className,
                     "select-add",
-                    { highlighted: this._filteredOptions().length === 0 },
+                    { highlighted: this._filteredOptions().length === 0 || this.props.searchIndex === 0 },
                 );
 
             if (this.props.searchString === "") {
@@ -550,7 +570,7 @@ class FormDropDownListStateless extends React.Component {
                 return this._getLabelOptions(this.props.options).some(({
                     label
                 }) => label.toLowerCase().trim() === cleanSearch)
-                    ? undefined
+                    ? null
                     : (
                         <li data-id="add-prompt" className={addClassName} onClick={this._handleAddClick}>
                             {
@@ -569,7 +589,7 @@ class FormDropDownListStateless extends React.Component {
         if (!this.props.open) {
             this._onToggleProxy();
         }
-        this._onSearchProxy(searchString, 0, this.props.noneOption ? -1 : 0);
+        this._onSearchProxy(searchString, 0, 0);
     };
 
     _handleAdd = () => {
@@ -627,32 +647,50 @@ class FormDropDownListStateless extends React.Component {
             return;
         }
 
-        if (isEnter(keyCode)) { //enter, so pull previously entered search string
-            if (canAdd && this._filteredOptions().length === 0) {
-                if (searchString !== "" || noneOption) {
-                    this._handleAdd();
-                }
-            } else if (searchIndex > -1) {
+        if (isEnter(keyCode)) { // Enter, so pull previously entered search string
+            const hasPrompt = this._isPromptVisible();
+            const isItemSelected = (
+                (!canAdd && searchIndex >= 0) ||
+                (hasPrompt && searchIndex > 0) ||
+                (!hasPrompt && canAdd && searchIndex >= 0)
+            );
+            const isPromptSelected = (
+                hasPrompt &&
+                canAdd &&
+                (searchIndex === 0 || (searchIndex === -1 && searchString !== ""))
+            );
+
+            if (isPromptSelected && (searchString !== "" || noneOption)) { // Add the new option
+                this._handleAdd();
+            } else if (!isPromptSelected && isItemSelected) { // Select the current option
                 if (groups) {
-                    const option = this._orderedOptions[searchIndex];
+                    const option = this._orderedOptions[
+                        hasPrompt ? searchIndex - 1 : searchIndex
+                    ];
+
                     if (!option.group ||
-                        (this._groupById[option.group] && !this._groupById[option.group].disabled)) {
+                        (this._groupById[option.group] && !this._groupById[option.group].disabled)
+                    ) {
                         onValueChange(option);
                     }
                 } else {
-                    onValueChange(this._filteredOptions()[searchIndex]);
+                    onValueChange(this._filteredOptions()[
+                        hasPrompt ? searchIndex - 1 : searchIndex
+                    ]);
                 }
-            } else if (searchIndex === -1 && noneOption) {
+            } else if (searchIndex === -1 && noneOption) { // Select "none" option
                 onValueChange(noneOption);
             }
+
+            // Reset dropdown
             this._onSearchProxy("", 0, noneOption ? -1 : 0);
             this._onToggleProxy();
         } else if (isTab(keyCode)) {
             this._onToggleProxy();
-        } else if (isEsc(keyCode)) { // esc, so clear
+        } else if (isEsc(keyCode)) { // ESC, so clear
             this._onSearchProxy("", 0, noneOption ? -1 : 0);
             this._onToggleProxy();
-        } else if (this._isKeyboardSearch()) { // regex specifies valid characters, not i18n friendly right now
+        } else if (this._isKeyboardSearch()) { // Regex specifies valid characters, not i18n friendly right now
             e.preventDefault();
             e.stopPropagation();
             if (String.fromCharCode(keyCode).toLowerCase().search(validSearchCharsRegex) < 0) {
@@ -765,7 +803,10 @@ class FormDropDownListStateless extends React.Component {
         </li>
     );
 
-    _getSingleOption = hasIcon => (option, index) => {
+    _getSingleOption = hasIcon => (option, i) => {
+        const hasPrompt = this._isPromptVisible();
+
+        const index = hasPrompt ? i + 1 : i;
         const group = this.props.groups && this._groupById[option.group],
             disabled = group && group.disabled,
             className = classnames("select-option", {
