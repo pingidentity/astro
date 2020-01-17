@@ -33,6 +33,9 @@ describe("FilterSelector", function () {
         const component = getComponent({ options });
         const section = TestUtils.findRenderedDOMNodeWithDataId(component, "filter-selector");
         expect(section).toBeTruthy();
+
+        const popover = TestUtils.findRenderedDOMNodeWithDataId(component, "filter-selector-popover");
+        expect(popover).toBeTruthy();
     });
 
     it("triggers search callback", function () {
