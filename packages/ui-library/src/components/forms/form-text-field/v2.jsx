@@ -131,7 +131,7 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 * @param {string|number} [value=""]
 *     Current text field value.
 *     When not provided, the component will manage this value.
-* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+* @param {InputWidths} [width]
 *    Specifies the width of the input.
 *
 * @param {boolean|string} [autoComplete="new-password"]

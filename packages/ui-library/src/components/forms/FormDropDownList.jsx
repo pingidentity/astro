@@ -182,7 +182,7 @@ const SearchTypes = {
 *    The tooltip title to give the selected option.
 * @param {string} [validSearchCharsRegex=/[^a-zA-Z\d\s]+/]
 *    A regex of the valid characters for the search. Allows alphanumeric and whitespace by default.
-* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+* @param {InputWidths} [width]
 *    Specifies the width of the input.
 *
 * @param {array<FormDropDownList~option>} options

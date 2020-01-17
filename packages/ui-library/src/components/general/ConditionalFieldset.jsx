@@ -185,7 +185,7 @@ class ConditionalFieldsetStateless extends React.Component {
  * @param {string} [emptyMessage="-- Select an option --"]
  *     Only really applies if supportEmpty is set to true and no empty div was passed. If that's the case it will
  *     insert an empty div with the emptyMessage as the option.
- * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [inputWidth]
+ * @param {InputWidths} [inputWidth]
  *    Specifies the width of the drop-down input. Should be used in place of "listClassName" to control its width
  * @param {string} [listClassName]
  *     CSS class to set on the FormDropDownList

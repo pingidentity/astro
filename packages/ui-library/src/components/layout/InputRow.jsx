@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 /**
+ * @enum {string}
+ * @alias InputRow.rowAlignments
+ */
+const rowAlignments = {
+    /** top */
+    TOP: "top",
+    /** bottom */
+    BOTTOM: "bottom",
+};
+
+/**
  * @class InputRow
  * @desc A single horizontal line for one or more inputs
  *
@@ -12,7 +23,7 @@ import classnames from "classnames";
  *      css parameter
  * @param {boolean} [strict]
  *      adds flexbox styling to row
- * @param {string} [align=rowAlignments.BOTTOM]
+ * @param {InputRow.rowAlignments} [align=rowAlignments.BOTTOM]
  *      whether to align elements to the top or the bottom
  * @example
 <InputRow>
@@ -30,11 +41,6 @@ import classnames from "classnames";
     />
 </InputRow>
  */
-
-const rowAlignments = {
-    TOP: "top",
-    BOTTOM: "bottom",
-};
 
 const InputRow = ({
     alignment,

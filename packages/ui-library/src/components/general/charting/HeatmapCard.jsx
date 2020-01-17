@@ -58,9 +58,6 @@ import _ from "underscore";
 * @param {string} [valueKey="value"]
 *    The object property name (in the data prop) that contains the information that you want to be used as the value
 *    for each tooltip. Each cell tooltip has it's own value.
-* @param {string} [valueKey="value"]
-*    The object property name (in the data prop) that contains the information that you want to be used as the value
-*    for each tooltip. Each cell tooltip has it's own value.
 * @param {function} [tooltipRenderer]
 *    A function that renders the contents of the tooltip
 * @param {object|string} [tooltipSubtitle]

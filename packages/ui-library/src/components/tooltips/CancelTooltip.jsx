@@ -29,7 +29,7 @@ import ButtonGroup from "../layout/ButtonGroup";
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
  *     CancelTooltip.positionStyles enum and/or any extra css styling if needed.
- * @param {("top" | "bottom" | "top left" | "top right" | "bottom left" | "bottom right")} [placement]
+ * @param {DetailsTooltip.tooltipPlacements} [placement]
  *     How the tooltip is placed off of its trigger.
  * @param {string} title
  *     The title of the details tooltip.

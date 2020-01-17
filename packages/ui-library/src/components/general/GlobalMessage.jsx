@@ -6,10 +6,17 @@ import Button, { buttonTypes } from "../buttons/Button";
 import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
 import Icon from "./Icon";
 
+/**
+ * @enum {string}
+ * @alias GlobalMessage.messageTypes
+ */
 export const messageTypes = {
+    /** error */
     ERROR: "error",
+    /** info */
     INFO: "info",
-    WARNING: "warning"
+    /** warning */
+    WARNING: "warning",
 };
 
 /**
@@ -25,7 +32,7 @@ export const messageTypes = {
  *     A node that will appear in the component, to the left of the button.
  * @param {node} [buttonLabel]
  *     The label for the button.
- * @param {"error"|"info"|"warning"} [type="info"]
+ * @param {GlobalMessage.messageTypes} [type="info"]
  *     The type of warning message to show. This controls the background color,
  *     button styling and whether the clear button appears.
  * @param {function} [onButtonClick]

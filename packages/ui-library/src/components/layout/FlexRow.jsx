@@ -4,6 +4,49 @@ import { sizes as paddingSizes } from "../layout/Padding";
 import classnames from "classnames";
 
 /**
+ * @enum {string}
+ * @alias FlexRow.alignments
+ */
+export const alignments = {
+    BOTTOM: "bottom",
+    TOP: "TOP",
+    CENTER: "CENTER",
+    STRETCH: "STRETCH"
+};
+
+/**
+ * @enum {string}
+ * @alias FlexRow.justifyOptions
+ */
+export const justifyOptions = {
+    /** center */
+    CENTER: "center",
+    /** end */
+    END: "end",
+    /** spacebetween */
+    SPACEBETWEEN: "spacebetween",
+    /** spaceevenly */
+    SPACEEVENLY: "spaceevenly",
+    /** start */
+    START: "start",
+};
+
+/**
+ * @enum {string}
+ * @alias FlexRow.flexDirectionOptions
+ */
+export const flexDirectionOptions = {
+    /** row */
+    ROW: "row",
+    /** row-reverse */
+    ROWREVERSE: "row-reverse",
+    /** column */
+    COLUMN: "column",
+    /** column-reverse */
+    COLUMNREVERSE: "column-reverse",
+};
+
+/**
  * @class FlexRow
  * @desc A row for wrapping components in a flexbox container
  *
@@ -11,13 +54,13 @@ import classnames from "classnames";
  *      To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *      A class name to be applied to the row.
- * @param {("bottom" | "top" | "center" | "stretch" )} [alignment="bottom"]
+ * @param {FlexRow.alignments} [alignment=alignments.BOTTOM]
  *      The vertical alignment of the items.
  * @param {boolean} [inline=false]
  *      If true, makes the FlexRow inline.
- * @param {("center" | "end" | "spacebetween" | "spaceevenly" | "start" )} [justify="start"]
+ * @param {FlexRow.justifyOptions} [justify=justifyOptions.START]
  *      The horizontal justification of the items.
- * @param {("xs" | "sm" | "md" | "lg" | "xl" )} [spacing]
+ * @param {Spacing.Sizes} [spacing]
  *      If supplied, with add spacing in between items.
  * @example
 <FlexRow>
@@ -31,29 +74,6 @@ import classnames from "classnames";
     />
 </FlexRow>
  */
-
-export const alignments = {
-    BOTTOM: "bottom",
-    TOP: "TOP",
-    CENTER: "CENTER",
-    STRETCH: "STRETCH"
-};
-
-export const justifyOptions = {
-    CENTER: "center",
-    END: "end",
-    SPACEBETWEEN: "spacebetween",
-    SPACEEVENLY: "spaceevenly",
-    START: "start"
-};
-
-export const flexDirectionOptions = {
-    ROW: "row",
-    ROWREVERSE: "row-reverse",
-    COLUMN: "column",
-    COLUMNREVERSE: "column-reverse"
-};
-
 
 export const spacingOptions = paddingSizes;
 
@@ -155,5 +175,8 @@ FlexRow.defaultProps = {
     inline: false,
     justify: justifyOptions.START,
 };
+
+FlexRow.alignments = alignments;
+FlexRow.justifyOptions = justifyOptions;
 
 export default FlexRow;

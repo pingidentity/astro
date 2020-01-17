@@ -212,7 +212,7 @@ class MultivaluesOption extends Component {
  * @param {boolean} [includeDraftInEntries=false]
  *     When set to true, the draft that is currently being edited is treated
  *     as the last entry in the list of entries.
- * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width=LG]
+ * @param {InputWidths} [width=LG]
  *    Specifies the width of the input.
  *
  *

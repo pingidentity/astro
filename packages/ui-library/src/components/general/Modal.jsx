@@ -22,8 +22,11 @@ import { flagsPropType } from "../../util/FlagUtils";
  * @alias Modal.Type
  */
 var Type = {
+    /** basic */
     BASIC: "basic",
+    /** dialog */
     DIALOG: "dialog",
+    /** alert */
     ALERT: "alert"
 };
 

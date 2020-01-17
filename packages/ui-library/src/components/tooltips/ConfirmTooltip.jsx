@@ -37,7 +37,7 @@ import ButtonGroup from "../layout/ButtonGroup";
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning.
  *      When using multiple positions like "top left" or "bottom right" do not use dashes as it will not work.
- * @param {("top" | "bottom" | "top left" | "top right" | "bottom left" | "bottom right")} [placement]
+ * @param {DetailsTooltip.tooltipPlacements} [placement]
  *     How the tooltip is placed off of its trigger.
  * @param {string} title
  *     The title of the ConfirmTooltip tooltip.

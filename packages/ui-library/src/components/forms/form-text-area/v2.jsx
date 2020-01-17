@@ -96,7 +96,7 @@ const inputHeights = {
  *    When not provided, the component will manage this value.
 * @param {object} [initialState]
 *     initialState.value determines the initial state of 'value'.
-* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+* @param {InputWidths} [width]
 *    Specifies the width of the input.
 *
 * @param {boolean} [autoFocus=false]

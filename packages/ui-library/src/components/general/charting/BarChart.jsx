@@ -79,7 +79,7 @@ var LegendTypes = require("../../../constants/ChartingConstants.js").LegendTypes
 * @param {number} [xMax]
 *    The maximum value to be displayed on the x-axis (only applicable when the x-axis is of type BarChart.AxisTypes.NUMBER).
 *    If no value is provided, the chart will auto-generate a maximum.
-* @param {BarChmodule:constants/ChartingConstantsart.AxisOrientations} [xOrientation=module:constants/ChartingConstants.AxisOrientations.BOTTOM]
+* @param {module:constants/ChartingConstants.AxisOrientations} [xOrientation=module:constants/ChartingConstants.AxisOrientations.BOTTOM]
 *    The orientation of the x-axis of the chart.
 * @param {number} [xTickDensity=5]
 *    The density of ticks on the x-axis (only applicable when the x-axis is of type BarChart.AxisTypes.NUMBER).
@@ -88,7 +88,7 @@ var LegendTypes = require("../../../constants/ChartingConstants.js").LegendTypes
 *    Whether or not the y-axis is shown.
 * @param {string} [yDataKey]
 *    The key of the field from the data items to be displayed as labels on the y-axis.
-* @param {BarCmodule:constants/ChartingConstantshart.AxisTypes} [yType=Barmodule:constants/ChartingConstantsChart.AxisTypes.NUMBER]
+* @param {module:constants/ChartingConstants.AxisTypes} [yType=Barmodule:constants/ChartingConstantsChart.AxisTypes.NUMBER]
 *    The type of data being related to the y-axis.
 * @param {string} [yLabel]
 *    The label for the type of data shown on the y-axis.

@@ -7,13 +7,15 @@ import Chip, { chipColors, chipTypes } from "../layout/Chip";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import _ from "underscore";
 
-/*
+/**
  * @enum { string }
  * @alias ExpandableCard.statusTypes
  * @desc An enum of expandable card statuses.
  */
 export const statusTypes = {
+    /** info */
     INFO: "info",
+    /** error */
     ERROR: "error",
 };
 
