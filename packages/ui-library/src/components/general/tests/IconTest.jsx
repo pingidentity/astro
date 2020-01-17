@@ -67,8 +67,8 @@ describe("Icon", function () {
             children: childContent,
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
-        const icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon__graphic");
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "iconComponent");
+        const icon = TestUtils.findRenderedDOMNodeWithClass(component, "iconComponent__graphic");
 
         expect(element).toBeTruthy();
         expect(icon.className).toContain("xl");
@@ -83,7 +83,7 @@ describe("Icon", function () {
             />
         ).dive();
 
-        expect(component.find(".icon--size-sm").exists()).toEqual(true);
+        expect(component.find(".iconComponent--size-sm").exists()).toEqual(true);
     });
 
     it("renders title if that prop is passed in", () => {
