@@ -144,6 +144,7 @@ class PieChart extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        centerValue: PropTypes.number,
         data: PropTypes.arrayOf(PropTypes.shape({
             label: PropTypes.string,
             color: PropTypes.string,
@@ -153,9 +154,7 @@ class PieChart extends React.Component {
         })),
         dataKey: PropTypes.string,
         dataValue: PropTypes.string,
-        errorMessage: PropTypes.string,
         height: PropTypes.number,
-        loadingMessage: PropTypes.string,
         onClick: PropTypes.func,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
@@ -277,48 +276,45 @@ class PieChart extends React.Component {
 
     render() {
         const {
+            centerLabel = "Total",
             data,
-            errorMessage,
-            loadingMessage
+            centerValue = this._getTotalValue(data)
         } = this.props;
+
         const chartData = this._digestData(data);
 
         const classNames = classnames("pie-chart", this.props.className);
-        const hasCustomState = errorMessage !== undefined || loadingMessage !== undefined;
 
         return (
             <div data-id={this.props["data-id"]} className={classNames}>
-                {!hasCustomState &&
-                    <div className="pie-chart__center-info">
-                        <div className="pie-chart__center-label">
-                        Total
-                        </div>
-                        <div className="pie-chart__center-value">
-                            {this._getTotalValue(data)}
-                        </div>
+                <div className="pie-chart__center-info">
+                    <div className="pie-chart__center-label">
+                        {centerLabel}
                     </div>
-                }
+                    <div className="pie-chart__center-value">
+                        {centerValue}
+                    </div>
+                </div>
+
                 <Chart
                     width={this.props.width}
                     height={this.props.height}
                     className="pie-chart__graph"
                 >
-                    {!hasCustomState &&
-                        <Pie
-                            data={chartData}
-                            nameKey={this.props.dataKey}
-                            dataKey={this.props.dataValue}
-                            paddingAngle={1}
-                            innerRadius="55%"
-                            legendType={this.props.legendType}
-                            onMouseOver={this._mouseOver}
-                            onMouseLeave={this._mouseOut}
-                            onClick={this._onClick}
-                        >
-                            {this._renderCells(chartData)}
-                        </Pie>
-                    }
-                    {!hasCustomState && this.props.showTooltips &&
+                    <Pie
+                        data={chartData}
+                        nameKey={this.props.dataKey}
+                        dataKey={this.props.dataValue}
+                        paddingAngle={1}
+                        innerRadius="55%"
+                        legendType={this.props.legendType}
+                        onMouseOver={this._mouseOver}
+                        onMouseLeave={this._mouseOut}
+                        onClick={this._onClick}
+                    >
+                        {this._renderCells(chartData)}
+                    </Pie>
+                    {this.props.showTooltips &&
                         <Tooltip
                             isAnimationActive={true}
                             content={this._renderTooltip}
