@@ -1,4 +1,8 @@
-import { fromRechartsDataFormat, toRechartsDataFormat } from "../ChartingUtils";
+import {
+    fromRechartsDataFormat,
+    toRechartsDataFormat,
+    generateTheme
+} from "../ChartingUtils";
 
 window.__DEV__ = true;
 
@@ -50,5 +54,26 @@ describe("ChartingUtils", () => {
         ];
 
         expect(fromRechartsDataFormat(formatted)).toEqual(unformatted);
+    });
+
+    it("generateTheme correctly formats data", () => {
+        const seedColor = "#ff0000";
+
+        const data = [
+            { id: "foo" },
+            { id: "bar" },
+        ];
+
+        const result = {
+            highlightColor: "#00FFFF",
+            referenceLineColor: "#00FFFF",
+            referenceLabelColor: "#676D74",
+            dataColors: [
+                { id: "foo", color: "#FF0000" },
+                { id: "bar", color: "#00FFFF" }
+            ]
+        };
+
+        expect(generateTheme(seedColor, data)).toEqual(result);
     });
 });

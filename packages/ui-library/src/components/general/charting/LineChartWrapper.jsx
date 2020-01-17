@@ -22,7 +22,7 @@ import { inStateContainer } from "../../utils/StateContainer";
  *     Start and end indexes of data to be highlighted eg: [3, 5].
 * @param {array} [legend]
  *     Array of objects to associate labels and ids.
- * @param {array} [lineColors]
+ * @param {array} [dataColors]
  *     Array of objects of colors and ids.
  * @param {function} [onHoverDataPoint]
  *     Callback triggered when the mouse moves over a new data point.
@@ -118,7 +118,7 @@ class LineChartWrapper extends React.Component {
                     <Legend
                         alignment={legendAlignments.CENTER}
                         boxAlignment={boxAlignments.CENTER}
-                        data={this._buildLegend(legend, data, theme.lineColors)}
+                        data={this._buildLegend(legend, data, theme.dataColors)}
                     />
                 </Padding>
 
@@ -134,7 +134,7 @@ class LineChartWrapper extends React.Component {
                     showHighlight={showHighlight}
                     highlightColor={theme.highlightColor}
                     highlightRange={highlightRange}
-                    lineColors={theme.lineColors}
+                    lineColors={theme.dataColors}
                     onHoverDataPoint={onHoverDataPoint}
                 />
 
@@ -168,7 +168,7 @@ LineChartWrapper.propTypes = {
     theme: PropTypes.shape({
         referenceLineColor: PropTypes.string,
         referenceLabelColor: PropTypes.string,
-        lineColors: PropTypes.arrayOf(PropTypes.shape({
+        dataColors: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.string,
             color: PropTypes.string
         })),

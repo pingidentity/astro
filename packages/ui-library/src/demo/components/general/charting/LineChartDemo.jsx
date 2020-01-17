@@ -1,5 +1,6 @@
 import React from "react";
 import LineChartWrapper from "../../../../components/general/charting/LineChartWrapper";
+import { generateTheme } from "../../../../util/ChartingUtils";
 
 /**
 * @name LineChartDemo
@@ -22,17 +23,6 @@ class LineChartDemo extends React.Component {
     }
 
     render() {
-        const lineColors = [
-            {
-                id: "mobile",
-                color: "#FFA9E7",
-            },
-            {
-                id: "desktop",
-                color: "#FF84E8",
-            }
-        ];
-
         const legend = [
             {
                 label: "Mobile",
@@ -40,6 +30,9 @@ class LineChartDemo extends React.Component {
             }, {
                 label: "Desktop",
                 id: "desktop",
+            }, {
+                label: "API",
+                id: "api",
             }
         ];
 
@@ -58,6 +51,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 6,
+                            },
+                            {
+                                id: "api",
+                                value: 2,
                             }
                         ]
                     }, {
@@ -70,6 +67,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 3,
+                            },
+                            {
+                                id: "api",
+                                value: 4,
                             }
                         ]
                     }, {
@@ -82,6 +83,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 4,
+                            },
+                            {
+                                id: "api",
+                                value: 5,
                             }
                         ]
                     }, {
@@ -94,6 +99,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 1,
+                            },
+                            {
+                                id: "api",
+                                value: 3,
                             }
                         ]
                     }, {
@@ -106,6 +115,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 7,
+                            },
+                            {
+                                id: "api",
+                                value: 1,
                             }
                         ]
                     }
@@ -125,6 +138,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 3,
+                            },
+                            {
+                                id: "api",
+                                value: 7,
                             }
                         ]
                     }, {
@@ -137,6 +154,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 7,
+                            },
+                            {
+                                id: "api",
+                                value: 1,
                             }
                         ]
                     }, {
@@ -149,6 +170,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 2,
+                            },
+                            {
+                                id: "api",
+                                value: 3,
                             }
                         ]
                     }, {
@@ -161,6 +186,10 @@ class LineChartDemo extends React.Component {
                             {
                                 id: "desktop",
                                 value: 5,
+                            },
+                            {
+                                id: "api",
+                                value: 6,
                             }
                         ]
                     }, {
@@ -172,6 +201,10 @@ class LineChartDemo extends React.Component {
                             },
                             {
                                 id: "desktop",
+                                value: 2,
+                            },
+                            {
+                                id: "api",
                                 value: 2,
                             }
                         ]
@@ -185,12 +218,7 @@ class LineChartDemo extends React.Component {
                 legend={legend}
                 chartWidth="100%"
                 chartHeight={150}
-                theme={{
-                    referenceLineColor: "#7F2CCB",
-                    referenceLabelColor: "#676D74",
-                    highlightColor: "#7F2CCB",
-                    lineColors: lineColors
-                }}
+                theme={generateTheme("#4c8dca", legend)}
             />
         );
     }

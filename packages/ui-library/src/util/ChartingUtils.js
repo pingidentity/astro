@@ -1,8 +1,12 @@
+import Color from "color";
+
 const splitData = ({ id, data }) => data.map(point => ({ [id]: point }));
 
-// Takes data from the format of [{ id: [data] }, { id2: [data2] }] and converts
-// it to the format of [[{ id: dataPoint }, { id2: dataPoint to }]]
-// All incoming arrays of data must be of the same length
+/**
+ * Takes data from the format of [{ id: [data] }, { id2: [data2] }] and converts
+ * it to the format of [[{ id: dataPoint }, { id2: dataPoint to }]]
+ * All incoming arrays of data must be of the same length
+ */
 export const toRechartsDataFormat = dataSet => dataSet.reduce((acc, data) => {
     const split = splitData(data);
     return acc.length > 0
@@ -22,8 +26,10 @@ const addToExisting = (index, data, acc) => {
     };
 };
 
-// Takes data from the format of [[{ id: dataPoint }, { id2: dataPoint to }]] and converts
-// it to the format of [{ id: [data] }, { id2: [data2] }]
+/**
+ * Takes data from the format of [[{ id: dataPoint }, { id2: dataPoint to }]] and converts
+ * it to the format of [{ id: [data] }, { id2: [data2] }]
+ */
 export const fromRechartsDataFormat = dataSet => dataSet.reduce((acc, frame) =>
     Object.entries(frame).reduce((frameAcc, [id, data]) => {
         const idIndex = frameAcc.findIndex(entry => entry.id === id);
@@ -36,3 +42,27 @@ export const fromRechartsDataFormat = dataSet => dataSet.reduce((acc, frame) =>
             : [...frameAcc, { id, data: [data] }];
     }, acc)
 , []);
+
+/**
+ * Generates color props for chartes based on a given
+ * "seed" color provided by the user
+ */
+export const generateTheme = (seedColor, data) => {
+    const step = 360 / data.length;
+
+    const dataColors = data.map((item, index) => {
+        return {
+            ...item,
+            color: Color(seedColor).rotate(step * index).hex(),
+        };
+    });
+
+    const contrastedColor = Color(seedColor).rotate(180).hex();
+
+    return {
+        highlightColor: contrastedColor,
+        referenceLineColor: contrastedColor,
+        referenceLabelColor: "#676D74",
+        dataColors: dataColors,
+    };
+};
