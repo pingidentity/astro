@@ -4,6 +4,13 @@
 
 "use strict";
 
+function isPortal(node) {
+    if (!node || !node.dataset) {
+        return false;
+    }
+    return !!node.dataset.parent; // make sure node has data-parent tag
+}
+
 /**
  * @module util/EventUtils
  * @desc The module contains helper functions to deal with React/DOM events model.
@@ -73,6 +80,7 @@ exports.forwardTargetValueAsInt = function (callback) {
  */
 exports.callIfOutsideOfContainer = function (container, callback, e) {
 
+
     if (global.getSelection().toString()) {
         return false;
     }
@@ -80,7 +88,7 @@ exports.callIfOutsideOfContainer = function (container, callback, e) {
     var node = e.target;
 
     while (node.parentNode) {
-        if (node === container) {
+        if (node === container || isPortal(node)) {
             return false;
         }
         //if we've bubbled all the way up to the top of the dom and still havent matched the container then
