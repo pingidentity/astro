@@ -61,6 +61,8 @@ import { createProgressiveState } from "../utils/StateContainer";
 *     Hint text inside searchBox
 * @param {string} [name]
 *    Name attribute for the input.
+* @param {boolean} [noSpacing=false]
+*     When true, the default margin is removed.
 * @param {InputWidths} [width]
 *    Specifies the width of the input.
 * @param {FormSearchBox~onValueChange} onValueChange
@@ -108,7 +110,8 @@ class FormSearchBox extends React.Component {
         message: PropTypes.string,
         messageType: PropTypes.string,
         name: PropTypes.string,
-        onValueChange: PropTypes.func.isRequired,
+        noSpacing: PropTypes.bool,
+        onValueChange: PropTypes.func,
         onKeyDown: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -123,10 +126,12 @@ class FormSearchBox extends React.Component {
     static defaultProps = {
         "data-id": "FormSearchBox",
         iconName: "search",
+        noSpacing: false,
         onKeyDown: _.noop,
         onFocus: _.noop,
         onBlur: _.noop,
         onClear: _.noop,
+        onValueChange: _.noop,
         errorMessage: null,
         width: InputWidths.MD,
         autoFocus: false,
@@ -214,6 +219,7 @@ class FormSearchBox extends React.Component {
                     value={value}
                     placeholder={this.props.placeholder}
                     name={this.props.name}
+                    noSpacing={this.props.noSpacing}
                     onValueChange={this._search}
                     onKeyDown={this._handleSearchBoxKeyDown}
                     onFocus={this.props.onFocus}

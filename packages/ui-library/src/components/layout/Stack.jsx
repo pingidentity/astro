@@ -4,9 +4,10 @@ import classnames from "classnames";
 
 /**
  * @enum {string}
- * @alias Stack.gaps
+ * @alias Stack.gapSizes
+ * @desc Different sizes of gap
  */
-const gaps = {
+export const gapSizes = {
     /** ZERO */
     ZERO: "ZERO",
     /** XS */
@@ -31,7 +32,7 @@ const gaps = {
 *     The data-id of the component
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
-* @param {Stack.gaps} [gap="MD"]
+* @param {Stack.gapSizes} [gap="MD"]
 *     Space items in the stack by ZERO, XS, SM, MD, LG, XL, or XX
 */
 
@@ -52,7 +53,7 @@ const Stack = ({
 Stack.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
-    gap: PropTypes.oneOf(Object.values(gaps)),
+    gap: PropTypes.oneOf(Object.values(gapSizes)),
 };
 
 Stack.defaultProps = {

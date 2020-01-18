@@ -1,6 +1,6 @@
 var React = require("react");
 import HR from "ui-library/lib/components/general/HR";
-import Link, { linkTypes, iconColors } from "ui-library/lib/components/general/Link";
+import Link, { linkTypes, linkSizes, iconColors } from "ui-library/lib/components/general/Link";
 
 /**
 * @name LinkDemo
@@ -32,6 +32,9 @@ const LinkDemo = () => {
             <p>
                 Here's a <Link href="https:/pingidentity.com" target="_blank">simple link</Link> in
                 a block of text using the href prop.
+            </p>
+            <p>
+                Here's a <Link href="https:/pingidentity.com" size={linkSizes.SM} target="_blank">small link</Link>.
             </p>
             <p>
                 <Link type={linkTypes.ADD}>Add link</Link> and a <Link type={linkTypes.REMOVE}>Remove link</Link> and

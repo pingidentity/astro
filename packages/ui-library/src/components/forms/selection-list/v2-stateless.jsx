@@ -1,16 +1,20 @@
 import Button from "../../buttons/Button";
 import PropTypes from "prop-types";
 import React from "react";
-import classnames from "classnames";
 import _ from "underscore";
-import If from "../../general/If";
-import FlexRow, { justifyOptions } from "../../layout/FlexRow";
+import FlexRow, { justifyOptions, spacingOptions } from "../../layout/FlexRow";
 import FormRadioGroup from "../FormRadioGroup";
-import FormCheckbox from "../FormCheckbox";
+import CheckboxGroup from "../CheckboxGroup";
 import FormSearchBox from "../FormSearchBox";
 import HelpHint from "../../tooltips/HelpHint";
 import { ListType } from "./v2-constants";
-import { filterItemsFunction } from "./v2-reducer";
+import SegmentedBox, { boxSizes, SegmentedBoxMessage } from "../../layout/SegmentedBox";
+import PipeRow, { pipeGaps } from "../../layout/PipeRow";
+import Link, { linkSizes } from "../../general/Link";
+import { defaultRender, translateItemsToOptions } from "../../../util/PropUtils";
+import Stack, { gapSizes } from "../../layout/Stack";
+import Text, { textTypes } from "../../general/Text";
+import { filterFieldContains } from "../../../util/FilterUtils";
 
 /**
  * @enum {string}
@@ -23,8 +27,86 @@ export const listWidths = {
     FLUID: "fluid",
     /** auto width */
     AUTOWIDTH: "autowidth",
+    /** full width */
+    FULL: "full"
 };
 
+const ValueList = ({
+    "data-id": dataId,
+    options
+}) => (
+    <Stack gap={gapSizes.SM} data-id={dataId}>
+        {options.map(({
+            value,
+            label,
+            helpHintText,
+            hint = helpHintText,
+        }, i) => (
+            <FlexRow spacing={spacingOptions.XS} key={i} data-id={`value-item-${value}`}>
+                <span>{label}</span>
+                {hint && <HelpHint hintText={hint} placement="right" />}
+            </FlexRow>
+        ))}
+    </Stack>
+);
+
+const AddOptions = ({
+    "data-id": dataId,
+    onValueChange,
+    options
+}) => {
+    const valueChange = option => e => onValueChange(option, e);
+    return (
+        <Stack gap={gapSizes.SM} data-id={dataId}>
+            {options.map(option => (
+                <Text type={textTypes.VALUE} key={option.value} data-id="">
+                    <Button
+                        inline
+                        iconName="plus"
+                        data-id={`row-button-add_${option.value}`}
+                        onClick={valueChange(option)}
+                        disabled = {option.disabled}
+                    />
+                    {option.label}
+                </Text>
+            ))}
+        </Stack>
+    );
+};
+
+const itemProp = PropTypes.shape({
+    id: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]).isRequired,
+    name: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+});
+
+const optionProp = PropTypes.shape({
+    value: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]).isRequired,
+    label: PropTypes.string,
+    disabled: PropTypes.bool,
+});
+
+const listComponents = {
+    [ListType.ADD]: AddOptions,
+    [ListType.SINGLE]: FormRadioGroup,
+    [ListType.MULTI]: CheckboxGroup,
+    [ListType.MULTIADD]: CheckboxGroup,
+    [ListType.VIEWONLY]: ValueList,
+};
+
+const listDataIdPostfix = {
+    [ListType.ADD]: "-add-options",
+    [ListType.SINGLE]: "-options-single-selection",
+    [ListType.MULTI]: "-options-multi-selection",
+    [ListType.MULTIADD]: "-options-multi-selection",
+    [ListType.VIEWONLY]: "-read-only",
+};
 
 /**
  * @name SelectionListStateless
@@ -40,16 +122,7 @@ export default class SelectionListStateless extends React.Component {
         bottomPanel: PropTypes.node,
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        items: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.oneOfType([
-                    PropTypes.number,
-                    PropTypes.string
-                ]).isRequired,
-                name: PropTypes.string.isRequired,
-                disabled: PropTypes.bool,
-            })
-        ),
+        items: PropTypes.arrayOf(itemProp),
         labelSelectAll: PropTypes.string,
         labelUnselectAll: PropTypes.string,
         labelOnlySelected: PropTypes.string,
@@ -63,9 +136,11 @@ export default class SelectionListStateless extends React.Component {
         onSearch: PropTypes.func.isRequired,
         queryString: PropTypes.string,
         onVisibilityChange: PropTypes.func,
+        options: PropTypes.arrayOf(optionProp),
         optionsNote: PropTypes.node,
         onMultiAdd: PropTypes.func,
         removeMaxHeight: PropTypes.bool,
+        renderList: PropTypes.func,
         requiredText: PropTypes.string,
         showSelectionOptions: PropTypes.bool,
         showOnlySelected: PropTypes.bool,
@@ -76,18 +151,13 @@ export default class SelectionListStateless extends React.Component {
             PropTypes.string,
             PropTypes.number
         ]),
-        type: PropTypes.oneOf([
-            ListType.ADD,
-            ListType.SINGLE,
-            ListType.MULTI,
-            ListType.MULTIADD,
-            ListType.VIEWONLY
-        ]),
+        type: PropTypes.oneOf(Object.values(ListType)),
         width: PropTypes.oneOf(Object.values(listWidths))
     };
 
     static defaultProps = {
         "data-id": "selection-list",
+        renderList: defaultRender,
         showSearchBox: true,
         type: ListType.SINGLE,
         showSelectionOptions: false,
@@ -102,34 +172,15 @@ export default class SelectionListStateless extends React.Component {
         autoFilter: false,
     };
 
-    /**
-     * @desc Selects all checkboxes
-     *
-     * @private
-     */
     _selectAll = () => {
         this.props.onSelectAll();
         if (this.props.autoSelectAll) {
-            this.props.onValueChange(this._getItems().map(({ id }) => id));
+            this.props.onValueChange(this._getOptions().map(({ value }) => value));
         }
     };
 
-    /**
-     * @desc Toggle unchecking all checkboxes
-     *
-     * @private
-     */
-    _unselectAll = () => {
-        this.props.onValueChange([]);
-    };
+    _unselectAll = () => this.props.onValueChange([]);
 
-    /**
-     * @desc Toggle showing all or selected checkboxes
-     *
-     * @param {object} visibleItems currently displayed items on screen
-     * @param {array} e the event object
-     * @private
-     */
     _onShowOnlyAllToggle = () => {
         this.props.onVisibilityChange();
     };
@@ -140,8 +191,8 @@ export default class SelectionListStateless extends React.Component {
      * @private
      */
     _filterVisible = () => {
-        return _.filter(this._getItems(), (item) => {
-            return this.props.selectedItemIds.indexOf(item.id) > -1;
+        return _.filter(this._getOptions(), (item) => {
+            return this.props.selectedItemIds.indexOf(item.value) > -1;
         });
     };
 
@@ -150,22 +201,31 @@ export default class SelectionListStateless extends React.Component {
             ? this.props.selectedItemIds.length : !!this.props.selectedItemIds;
 
         return (
-            <div data-id={this.props["data-id"]} className="list-input__bottom-links">
-                <a
+            <PipeRow data-id={this.props["data-id"]} gap={pipeGaps.SM} key="selection-options">
+                <Link
                     data-id="show-only-or-all"
-                    className="option"
-                    onClick={this._onShowOnlyAllToggle}>
+                    onClick={this._onShowOnlyAllToggle}
+                    size={linkSizes.SM}
+                >
                     {this.props.showOnlySelected ? this.props.labelShowAll : this.props.labelOnlySelected}
-                </a>
+                </Link>
                 {itemsSelected || !this.props.labelSelectAll
-                    ? <a data-id="unselect-all" className="option" onClick={this._unselectAll}>
+                    ? <Link
+                        data-id="unselect-all"
+                        onClick={this._unselectAll}
+                        size={linkSizes.SM}
+                    >
                         {this.props.labelUnselectAll}
-                    </a>
-                    : <a data-id="select-all" className="option" onClick={this._selectAll}>
+                    </Link>
+                    : <Link
+                        data-id="select-all"
+                        onClick={this._selectAll}
+                        size={linkSizes.SM}
+                    >
                         {this.props.labelSelectAll}
-                    </a>
+                    </Link>
                 }
-            </div>
+            </PipeRow>
         );
     };
 
@@ -173,8 +233,8 @@ export default class SelectionListStateless extends React.Component {
         const onClick = () => this.props.onMultiAdd(this.props.selectedItemIds);
         return (
             <FlexRow
-                className="input-selection-list__multi-add-panel"
                 justify={justifyOptions.CENTER}
+                key="add-panel"
             >
                 <Button
                     data-id="add-button"
@@ -189,317 +249,103 @@ export default class SelectionListStateless extends React.Component {
     }
 
     // filter items if necessary
-    _getItems = () => this.props.autoFilter
-        ? filterItemsFunction(this.props.items, this.props.queryString)
-        : this.props.items;
+    _getOptions = () => {
+        const {
+            autoFilter,
+            items,
+            options = translateItemsToOptions(items),
+            queryString,
+        } = this.props;
+
+        return autoFilter
+            ? options.filter(_.partial(filterFieldContains, "label", queryString))
+            : options;
+    }
 
     render() {
         const {
+            className,
+            disabled,
             "data-id": dataId,
+            name,
+            "no-border": noBorder,
+            onSearch,
+            onValueChange,
             optionsNote,
+            queryString,
+            removeMaxHeight,
+            renderList,
             requiredText,
+            searchBoxProps,
+            searchPlaceholder,
+            selectedItemIds,
+            showSearchBox,
             showSelectionOptions,
-            type
+            type,
+            width
         } = this.props;
-        const className = classnames(
-            this.props.className,
-            "input-selection-list",
-            {
-                searchable: this.props.showSearchBox,
-                "show-selection-options": showSelectionOptions,
-                "input-selection-list--no-border": this.props["no-border"],
-                "fluid-width": this.props.width === listWidths.FLUID,
-                "input-selection-list--auto-width": this.props.width === listWidths.AUTOWIDTH,
-            });
-        const visibleItems = this.props.showOnlySelected ? this._filterVisible() : this._getItems();
+        const visibleOptions = this.props.showOnlySelected ? this._filterVisible() : this._getOptions();
 
-        return (
-            <div
-                data-id={dataId}
-                className={className}
-            >
-                {requiredText && (
-                    <div data-id={dataId + "-required-message"} className="required-message">
-                        <span>{requiredText}</span>
-                    </div>
-                )}
-                {this.props.showSearchBox && (
-                    <div data-id={dataId + "-search-box"} className="selection-list-search">
-                        <FormSearchBox
-                            queryString={this.props.queryString}
-                            placeholder={this.props.searchPlaceholder}
-                            onValueChange={this.props.onSearch}
-                            width="MAX"
-                            {...this.props.searchBoxProps} // band-aid fix to allow overriding the stateful text field
-                        />
-                    </div>
-                )}
-                {optionsNote && <div className="input-selection-list__note">{optionsNote}</div>}
-                <ListOptions
-                    data-id={dataId + "-options"}
-                    type={type}
-                    selectedItemIds={this.props.selectedItemIds}
-                    items={visibleItems}
-                    onValueChange={this.props.onValueChange}
-                    name={this.props.name}
-                    removeMaxHeight={this.props.removeMaxHeight}
+        const selectionOptions = showSelectionOptions && this._getSelectionOptions(visibleOptions);
+
+        const searchBox = showSearchBox ? (
+            <div data-id={dataId + "-search-box"} key="search">
+                <FormSearchBox
+                    queryString={queryString}
+                    placeholder={searchPlaceholder}
+                    onValueChange={onSearch}
+                    width="MAX"
+                    noSpacing
+                    {...searchBoxProps} // band-aid fix to allow overriding the stateful text field
                 />
-                <If test={showSelectionOptions}>
-                    {this._getSelectionOptions(visibleItems)}
-                </If>
-                {
-                    type === ListType.MULTIADD
-                        ? this._renderMultiAddPanel()
-                        : this.props.bottomPanel
-                }
             </div>
-        );
-    }
-}
+        ) : null;
 
-/**
- * @class ListOptions
- * @desc SelectionList implements a list of selectable items with search capability.
- *
- * @param {string} [data-id="list-options"]
- *     To define the base "data-id" value for top-level HTML container
- * @param {string} [className]
- *     CSS classes to set on the top-level HTML container
- * @param {SelectionList.types} [type=SelectionList.types.SINGLE]
- *     Enum to specify the type of list items to render
- *         SINGLE for radio inputs next to each list item
- *         MULTI for checkbox inputs next to each list item
- *         VIEWONLY for text only list items
- * @param {object[]} items
- *     Actual data to display in the component
- * @param {string} items.id
- *     The id of item in items array
- * @param {string} items.name
- *     The name of item in items array
- * @param {bool} items.disabled
- *     When true item in array is disabled
- *     Disabled does not work with a ViewOnly list
- * @param {array|string|number} [selectedItemIds]
- *     IDs of which list items are selected
- * @param {function} onValueChange
- *     Callback to be triggered when the item selection changes
- * @ignore
- */
-class ListOptions extends React.Component {
-    static propTypes = {
-        "data-id": PropTypes.string,
-        type: PropTypes.oneOf([
-            ListType.ADD,
-            ListType.SINGLE,
-            ListType.MULTI,
-            ListType.MULTIADD,
-            ListType.VIEWONLY
-        ]),
-        items: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.oneOfType([
-                    PropTypes.number,
-                    PropTypes.string
-                ]).isRequired,
-                name: PropTypes.string.isRequired,
-                disabled: PropTypes.disabled
-            })
-        ),
-        selectedItemIds: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.string,
-            PropTypes.number
-        ]),
-        onValueChange: PropTypes.func
-    };
+        const bottomPanel = type === ListType.MULTIADD
+            ? this._renderMultiAddPanel()
+            : (this.props.bottomPanel && <div key="bottom-panel">{this.props.bottomPanel}</div>);
 
-    static defaultProps = {
-        "data-id": "list-options",
-        type: ListType.SINGLE,
-        onValueChange: _.noop
-    };
-
-    state = {
-        contentHeight: null,
-        contentWidth: null,
-    }
-
-    /**
-    * @desc Generate list options as radio buttons
-    * @return {object}
-    *     The set of list options as radio buttons
-    * @private
-    * @ignore
-    */
-    _genAddOptions = () => {
-        const valueChange = item => e => this.props.onValueChange(item, e);
-        return this.props.items.map(item => (
-            <div className="input-selection-list__add-option" key={item.id} onClick={valueChange(item)}>
-                <Button
-                    inline
-                    iconName="plus"
-                    data-id={`row-button-add_${item.id}`}
-                    onClick={valueChange(item)}
-                    disabled = {item.disabled}
-                />
-                {item.name}
-            </div>
-        ));
-    }
-
-    /**
-    * @desc Generate list options as radio buttons
-    * @return {object}
-    *     The set of list options as radio buttons
-    * @private
-    * @ignore
-    */
-    _genRadioOptions = () => {
-        return (
-            <FormRadioGroup
-                data-id={this.props["data-id"] + "-single-selection"}
-                groupName={this.props.name || ("input-selection-list-items-" + this.props["data-id"])}
-                items={this.props.items}
-                stacked={true}
-                selected={this.props.selectedItemIds}
-                onValueChange={this.props.onValueChange}
-                disabled={this.props.disabled}
-            />
-        );
-    };
-
-    /**
-    * @desc Generate list options as checkboxes
-    * @return {object}
-    *     The set of list options as checkboxes
-    * @private
-    * @ignore
-    */
-    _genCheckboxOptions = () => {
-        const isSelected = item => {
-            return _.contains(this.props.selectedItemIds, item.id);
-        };
-
-        // add to the array of selected items (if it does not exist) or remove it (if it exists)
-        const onSelectionValueChange = (item, checked) => () => {
-            const updateFunction = checked ? _.union : _.difference;
-            const updatedSelection = updateFunction(this.props.selectedItemIds, [item.id]);
-            this.props.onValueChange(updatedSelection);
-        };
-
-        return this.props.items.map((item, index) => {
-            const checked = isSelected(item);
-            const onValueChangeFunc = onSelectionValueChange(item, !checked);
-
-            return (
-                <FormCheckbox
-                    data-id={"selectionList-Checkbox-" + item.id}
-                    key={item.id + "-" + index}
-                    label={item.name}
-                    checked={checked}
-                    conditionalContent={item.conditionalContent}
-                    onValueChange={onValueChangeFunc}
-                    labelHelpText={item.helpHintText}
-                    helpTarget={item.helpTarget}
-                    name={this.props.name}
-                    stacked
-                    disabled = {item.disabled}
-                />
-            );
-        });
-    };
-
-    /**
-    * @desc Generate tooltip for item with helpHintText property
-    * @param {object} item
-    *     and object with the items properties including the helpHintText
-    * @return {object}
-    *     The help icon with tooltip text
-    * @private
-    * @ignore
-    */
-    _genTooltip = (item) => {
-        return item.helpHintText
-            ? <HelpHint
-                hintText={item.helpHintText}
-                placement="right"
-                className="inline"
-            />
+        const renderedTopPanel = (requiredText || searchBox || optionsNote)
+            ? [
+                requiredText && (
+                    <SegmentedBoxMessage key="message" data-id={`${dataId}-required-message`}>
+                        {requiredText}
+                    </SegmentedBoxMessage>
+                ),
+                searchBox,
+                optionsNote && <Text type={textTypes.NOTE} key="note" data-id="options-note">{optionsNote}</Text>,
+            ]
             : null;
-    };
-
-    /**
-    * @desc Generate list of view-only items
-    * @return {object}
-    *     The list of view-only options
-    * @private
-    * @ignore
-    */
-    _genViewonlyOptions = () => {
-        return this.props.items.map((item, i) => {
-            return (
-                <div className="view-item"
-                    key={i}>
-                    {item.name}{this._genTooltip(item)}
-                </div>
-            );
-        });
-    };
-
-    /**
-    * @desc Generate the set of list options based on the type
-    * @return {object}
-    *     The set of list options
-    * @private
-    * @ignore
-    */
-    _genListOptions = () => {
-        switch (this.props.type) {
-            case ListType.ADD:
-                return this._genAddOptions();
-            case ListType.SINGLE:
-                return this._genRadioOptions();
-            case ListType.MULTI:
-            case ListType.MULTIADD:
-                return this._genCheckboxOptions();
-            case ListType.VIEWONLY:
-                return this._genViewonlyOptions();
-        }
-    };
-
-
-    componentDidMount() {
-        const height = this.selectionElement.clientHeight;
-        const width = this.selectionElement.clientWidth;
-        this.setState({
-            contentHeight: height,
-            contentWidth: width,
-        });
-    }
-
-
-    render() {
-
-        const classname = classnames(
-            this.props.className,
-            "input-selection-list-items",
-            {
-                "input-selection-list-items--remove-max-height": this.props.removeMaxHeight,
-            }
-        );
+        const renderedBottomPanel = (bottomPanel || selectionOptions) ? [selectionOptions, bottomPanel] : null;
 
         return (
-            <div
-                data-id={this.props["data-id"]}
-                className={classname}
-                ref={(selectionElement) => this.selectionElement = selectionElement}
-                style={{
-                    width: this.state.contentWidth,
-                    height: this.state.contentHeight,
-                }}
+            <SegmentedBox
+                data-id={dataId}
+                scroll-box-data-id={`${dataId}-options`}
+                className={className}
+                width={
+                    (width === listWidths.FLUID && boxSizes.SM) ||
+                    (width === listWidths.FULL && "full") ||
+                    (width !== listWidths.AUTOWIDTH && boxSizes.XS) || "none"
+                }
+                innerHeight={removeMaxHeight ? null : boxSizes.XS}
+                border={!noBorder}
+                topPanel={renderedTopPanel}
+                bottomPanel={renderedBottomPanel}
             >
-                {this._genListOptions()}
-            </div>
+                {renderList({
+                    "data-id": `${dataId}${listDataIdPostfix[type]}`,
+                    groupName: name || `input-selection-list-items-${dataId}`,
+                    stacked: true,
+                    disabled,
+                    onValueChange,
+                    options: visibleOptions,
+                    value: selectedItemIds,
+                    values: selectedItemIds,
+                    selected: selectedItemIds,
+                    setCheckboxDataId: (option, index) =>`selectionList-Checkbox-${index + 1}`, // backwards compatibility
+                }, listComponents[type])}
+            </SegmentedBox>
         );
     }
 }

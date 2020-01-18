@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "underscore";
-import SelectionList from "ui-library/lib/components/forms/selection-list/index";
+import SelectionList, { listWidths } from "ui-library/lib/components/forms/selection-list/index";
 import SelectionFilterLabel from "ui-library/lib/components/forms/SelectionFilterLabel";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 
@@ -49,7 +49,7 @@ var SINGLE_SELECT_ITEMS = [
 
     MULTI_SELECT_ITEMS = [
         { name: "Apple", id: 1 },
-        { name: "Orange", id: 2 },
+        { name: "Orange", id: 2, disabled: true },
         { name: "Banana", id: 3,
             helpHintText: "Help Hint with dynamic icon",
             helpTarget: testIcon },
@@ -145,6 +145,7 @@ class SelectionListDemo extends React.Component {
                     </Button>
                 </p>
                 <SelectionList
+                    optionsNote="noted"
                     data-id="radio-demo-1"
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS2}
@@ -321,7 +322,7 @@ class SelectionListDemo extends React.Component {
                 <hr />
 
                 <h3>
-                    Fluid-Width Selection List (grows to max-width of 400px)
+                    Fluid-Width Selection List (grows to max-width of 440px)
                 </h3>
                 <SelectionList
                     name="fluid-width"
@@ -347,6 +348,46 @@ class SelectionListDemo extends React.Component {
                     showSearchBox={true}
                     searchPlaceholder="Search..."
                     autoFilter
+                    width={SelectionList.listWidths.AUTOWIDTH}
+                />
+
+                <hr />
+
+                <h3>
+                    Add buttons
+                </h3>
+                <SelectionList
+                    name="fully-stateful"
+                    type={SelectionList.ListType.ADD}
+                    onValueChange={console.log}
+                    items={SINGLE_SELECT_ITEMS}
+                    showSearchBox={true}
+                    searchPlaceholder="Search..."
+                    autoFilter
+                    width={SelectionList.listWidths.AUTOWIDTH}
+                />
+
+                <hr />
+                <h3>No border</h3>
+                <SelectionList
+                    name="no-border"
+                    type={SelectionList.ListType.SINGLE}
+                    items={SINGLE_SELECT_ITEMS2}
+                    showSearchBox={true}
+                    searchPlaceholder="Search..."
+                    no-border
+                />
+
+                <hr />
+                <h3>No max height and full-width</h3>
+                <SelectionList
+                    type={SelectionList.ListType.SINGLE}
+                    items={SINGLE_SELECT_ITEMS2}
+                    showSearchBox={true}
+                    searchPlaceholder="Search..."
+                    width={listWidths.FULL}
+                    removeMaxHeight
+                    onValueChange={console.log}
                 />
             </div>
         );

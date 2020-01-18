@@ -32,6 +32,8 @@ import { pick } from "underscore";
  *     The text to display below the title. Can be a string or a node.
  * @param {node} [explanation]
  *     Explanation text for the field appears below it.
+ * @param {boolean} [noSpacing=false]
+ *     Remove margin
  */
 
 export const labelProps = {
@@ -42,6 +44,7 @@ export const labelProps = {
     helpTarget: PropTypes.object,
     hint: PropTypes.node,
     lockText: PropTypes.string,
+    noSpacing: PropTypes.bool,
 };
 
 export const passLabelProps = props => pick(props, Object.keys(labelProps));
@@ -49,17 +52,18 @@ export const passLabelProps = props => pick(props, Object.keys(labelProps));
 class FormLabel extends React.Component {
 
     static propTypes = {
-        "data-id": PropTypes.string,
         className: PropTypes.string,
-        value: PropTypes.node,
-        style: PropTypes.object,
+        "data-id": PropTypes.string,
         detached: PropTypes.bool,
+        style: PropTypes.object,
+        value: PropTypes.node,
         ...labelProps,
     };
 
     static defaultProps = {
         "data-id": "formLabel",
         detached: false,
+        noSpacing: false,
         style: {},
     };
 
@@ -114,6 +118,7 @@ class FormLabel extends React.Component {
             "data-id": dataId,
             detached,
             explanation,
+            noSpacing,
             style,
             value,
         } = this.props;
@@ -127,7 +132,14 @@ class FormLabel extends React.Component {
         return (
             <label
                 data-id={dataId}
-                className={classnames(className, detached && "detached")}
+                className={classnames(
+                    "form-label",
+                    className,
+                    {
+                        detached,
+                        "form-label--no-spacing": noSpacing,
+                    })
+                }
                 style={style}
             >
                 { !noLabel && (

@@ -37,8 +37,10 @@ import classnames from "classnames";
  *    The message to display if defined when external validation failed.
  * @param {node} [label]
  *    Label text to be displayed.
- * @param {string} [labelHelpText]
+ * @param {string} [hint]
  *    Label help text to be displayed.
+ * @param {string} [helpHintText]
+ *    Alias for hint
  * @param {string} [helpClassName]
  *    CSS classes to set on the HelpHint component.
  * @param {string} [name]
@@ -66,6 +68,8 @@ import classnames from "classnames";
  *    Callback to be triggered when checkbox is toggled. It will receive the triggering event.
  * @param {FormCheckbox~onValueChange} ]onValueChange]
  *    Callback to be triggered when checkbox is toggled. It will receive the component's value.
+ * @param {boolean} [noSpacing=false]
+ *    Removes margins
  *
  * @example
  *
@@ -79,6 +83,7 @@ class FormCheckbox extends React.Component {
         className: PropTypes.string,
         checked: PropTypes.bool,
         conditionalContent: PropTypes.node,
+        content: PropTypes.node,
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
         errorMessage: PropTypes.string,
@@ -86,13 +91,15 @@ class FormCheckbox extends React.Component {
         helpTarget: PropTypes.node,
         inline: PropTypes.bool,
         label: PropTypes.node,
-        labelHelpText: PropTypes.string,
+        labelHelpText: PropTypes.string, // use hint instead
+        hint: PropTypes.string,
         name: PropTypes.string,
+        noSpacing: PropTypes.bool,
         onChange: PropTypes.func,
         onValueChange: PropTypes.func,
         stacked: PropTypes.bool,
         renderLabel: PropTypes.func,
-        value: PropTypes.string,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOf(InputWidthProptypes),
     };
 
@@ -101,6 +108,7 @@ class FormCheckbox extends React.Component {
         "data-id": "form-checkbox",
         disabled: false,
         inline: false,
+        noSpacing: false,
         stacked: false,
         renderLabel: defaultRender,
     };
@@ -132,61 +140,80 @@ class FormCheckbox extends React.Component {
             }
         );
 
+        const {
+            checked,
+            conditionalContent,
+            "data-id": dataId,
+            helpClassName,
+            helpTarget,
+            disabled,
+            errorMessage,
+            label,
+            labelHelpText,
+            hint = labelHelpText,
+            name = dataId,
+            noSpacing,
+            value = dataId,
+            stacked,
+        } = this.props;
+
         const checkBox = this.props.renderLabel(
             {
-                "data-id": `${this.props["data-id"]}-container`,
+                "data-id": `${dataId}-container`,
                 className: labelClassName,
-                helpClassName: this.props.helpClassName,
-                helpTarget: this.props.helpTarget,
-                disabled: this.props.disabled,
-                value: this.props.label,
-                hint: this.props.labelHelpText,
+                helpClassName,
+                helpTarget,
+                disabled,
+                value: label,
+                hint,
                 children: [
-                    <input data-id={this.props["data-id"]}
+                    <input
+                        data-id={dataId}
                         type="checkbox"
-                        name={this.props.name ? this.props.name : this.props["data-id"]}
-                        value={this.props.value ? this.props.value: this.props["data-id"]}
+                        name={name}
+                        value={value}
                         onChange={this._handleChange}
-                        checked={this.props.checked}
-                        disabled={this.props.disabled}
+                        checked={checked}
+                        disabled={disabled}
                         key="input"
                     />,
                     <div className="icon" key="icon"/>,
-                    this.props.errorMessage && (
-                        <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} key="errorIcon" />
+                    errorMessage && (
+                        <FormError.Icon data-id={`${dataId}-error-message-icon`} key="errorIcon" />
                     ),
-                    this.props.errorMessage && (
+                    errorMessage && (
                         <FormError.Message
-                            value={this.props.errorMessage}
-                            data-id={this.props["data-id"] + "-error-message"}
+                            value={errorMessage}
+                            data-id={`${dataId}-error-message`}
                             key="errorMessage"
                         />
                     ),
-                ]
+                ],
+                noSpacing,
             },
             FormLabel
         );
 
 
-        const conditionalContent = this.props.conditionalContent && this.props.checked
-            ?(
+        const showConditionalContent = conditionalContent && checked
+            ? (
                 <div
                     className={classnames(
                         "input-checkbox__conditional-content",
                         {
-                            "input-checkbox__conditional-content--stacked": this.props.stacked
+                            "input-checkbox__conditional-content--stacked": stacked
                         }
                     )}>
-                    {this.props.conditionalContent}
+                    {conditionalContent}
                 </div>
             )
             : null;
 
         return (
-            this.props.stacked || conditionalContent
-                ? <div className={classnames({ "input-checkbox__container--stacked": this.props.stacked })}>
+            stacked || showConditionalContent
+                ? <div className={classnames({ "input-checkbox__container--stacked": stacked })}>
                     {checkBox}
-                    {conditionalContent}
+                    {showConditionalContent}
                 </div>
                 : checkBox
         );

@@ -3,7 +3,7 @@ import React from "react";
 import classnames from "classnames";
 import FormRadioInput from "./FormRadioInput";
 import FormLabel from "./FormLabel";
-import { defaultRender } from "../../util/PropUtils";
+import { defaultRender, translateItemsToOptions } from "../../util/PropUtils";
 import { noop } from "underscore";
 
 /**
@@ -14,25 +14,19 @@ import { noop } from "underscore";
 
 /**
  * @typedef FormRadioGroup~RadioGroupItem
- * @property {node} [description]
- *     Description to display below the label.
  * @property {boolean} [disabled]
  *     Disables the input.
- * @property {string} [helpHintText]
+ * @property {string} [hint]
  *     Text to display in help hint next to the item's name.
  * @param {object} [helpTarget]
  *     An optional icon or image to replace standard help hint icon.
  * @property {boolean} [hidden]
  *     Hides the input.
- * @property {string} [id]
+ * @property {string} [value]
  *     The item's identifier.
- * @property {string} [label]
- *     Text to display the label for the radio button.
- * @property {node} [labelHelpText]
+ * @property {node} [hint]
  *     Help hint text to display alongside label.
- * @property {node} [labelText]
- *     String or JSX element to display the label for the radio button.
- * @property {string} [name]
+ * @property {string} [label]
  *     The item's display text.
  */
 
@@ -46,12 +40,16 @@ import { noop } from "underscore";
  *     CSS classes to set on the top-level HTML container.
  * @param {string} [data-id="radio-btn"]
  *     To define the base "data-id" value for top-level HTML container.
+ * @property {node} [description]
+ *     Description to display below the label.
  * @param {boolean} [disabled=false]
  *     If radio buttons are disabled.
  * @param {string} [groupName]
  *     Name of the radio group.
  * @param {FormRadioGroup~RadioGroupItem[]} items
  *     Array of RadioGroupItem objects to render.
+ * @property {node} [label]
+ *     String or JSX element to display the label for the radio button.
  * @param {FormRadioGroup~onValueChange} [onValueChange]
  *     Callback to be triggered when the selection is changed.
  * @param {*} [selected]
@@ -110,29 +108,30 @@ import { noop } from "underscore";
 class FormRadioGroup extends React.Component {
 
     static propTypes = {
-        "data-id": PropTypes.string,
+        autoFocus: PropTypes.bool,
         className: PropTypes.string,
-        groupName: PropTypes.string.isRequired,
-        items: PropTypes.array.isRequired,
-        selected: PropTypes.any,
-        onValueChange: PropTypes.func,
+        "data-id": PropTypes.string,
         description: PropTypes.node,
         disabled: PropTypes.bool,
-        stacked: PropTypes.bool,
-        label: PropTypes.string,
+        groupName: PropTypes.string.isRequired,
+        items: PropTypes.array,
+        label: PropTypes.node,
         labelText: PropTypes.node,
         labelHelpText: PropTypes.node,
+        onValueChange: PropTypes.func,
+        options: PropTypes.array,
         renderRadio: PropTypes.func,
-        autoFocus: PropTypes.bool
+        selected: PropTypes.any,
+        stacked: PropTypes.bool,
     };
 
     static defaultProps = {
-        "data-id": "radio-btn",
-        stacked: true,
-        disabled: false,
-        renderRadio: defaultRender,
         autoFocus: false,
+        "data-id": "radio-btn",
+        disabled: false,
         onValueChange: noop,
+        renderRadio: defaultRender,
+        stacked: true,
     };
 
     _handleChange = (value) => {
@@ -146,45 +145,59 @@ class FormRadioGroup extends React.Component {
             disabled,
             groupName,
             items,
+            options = translateItemsToOptions(items),
             renderRadio,
             selected,
             stacked,
             autoFocus
         } = this.props;
 
-        return items.map((item) => {
-            var radioDisabled = disabled || item.disabled;
+        return options.map(({
+            helpHintText,
+            hint = helpHintText,
+            helpTarget,
+            hidden,
+            value,
+            label,
+            ...option
+        }) => {
+            const radioDisabled = disabled || option.disabled;
 
             const radioClassName = classnames("input-radio", "group", className, {
                 stacked: stacked,
                 disabled: radioDisabled,
-                hidden: item.hidden,
+                hidden,
             });
 
             return renderRadio({
                 className: radioClassName,
-                key: item.id,
-                label: item.name,
-                hint: item.helpHintText,
+                key: value,
+                label,
+                hint,
                 "data-id": dataId,
                 name: groupName,
-                value: item.id,
-                checked: String(item.id) === String(selected),
+                value,
+                checked: String(value) === String(selected),
                 onValueChange: this._handleChange,
                 disabled: radioDisabled,
-                helpTarget: item.helpTarget,
-                autoFocus: autoFocus && String(item.id) === String(selected)
+                helpTarget: helpTarget,
+                autoFocus: autoFocus && String(value) === String(selected)
             }, FormRadioInput);
         });
     };
 
     render() {
+        const {
+            labelText,
+            label = labelText,
+        } = this.props;
+
         return (
-            this.props.label || this.props.labelText ? (
+            label ? (
                 <FormLabel data-id={this.props["data-id"]}
                     description={this.props.description}
                     disabled={this.props.disabled}
-                    value={this.props.label || this.props.labelText}
+                    value={label}
                     hint={this.props.labelHelpText}
                     className="list">{this._getRadioButtons()}</FormLabel>
             ): <div data-id={this.props["data-id"]}

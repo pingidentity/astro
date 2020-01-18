@@ -87,6 +87,12 @@ import SelectionListStateless, { listWidths } from "./v2-stateless";
  *     Use FLUID to adjust the width to the content (up to 400px)
  */
 
+// In a certain mode, onValueChange passes a non-array
+// when it does, let's not update the selected IDs
+const transformNonArray = (value, current) => (
+    (value && (value.value !== undefined || value.id !== undefined)) ? current : value
+);
+
 const SelectionList = inStateContainer(
     [
         {
@@ -107,7 +113,13 @@ const SelectionList = inStateContainer(
         {
             name: "selectedItemIds",
             initial: [],
-            setter: "onValueChange",
+            callbacks: [
+                {
+                    name: "onValueChange",
+                    transform: transformNonArray,
+                    passTransformedValue: false,
+                }
+            ]
         },
     ], ({ queryString }) => ({ autoFilter: queryString === undefined ? false : true })
 )(SelectionListStateless);

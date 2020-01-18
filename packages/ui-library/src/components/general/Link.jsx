@@ -3,7 +3,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Icon from "./Icon";
-import Anchor, { linkTypes } from "./Anchor";
+import Anchor, { linkTypes, linkSizes } from "./Anchor";
 import classnames from "classnames";
 
 /**
@@ -37,12 +37,14 @@ const iconColors = {
  *          Changes the color for the icon.
  * @param {Link~onClick} [onClick]
  *     Callback to be triggered when Link selected.
+ * @param {Anchor.linkSizes} [size=AUTO]
+ *     Size of link. When AUTO, the size is determined by context.
  * @param {string} [target]
  *          Target for Link
  * @param {string} [title]
  *          title for Link
- * @param {string} [type]
- *          Specify what this link is being used for.
+ * @param {Anchor.linkTypes} [type=REGULAR]
+ *     Type of link
  * @param {string} [url]
  *          URL for Link
  *
@@ -149,7 +151,8 @@ Link.defaultProps = {
     iconAfter: false,
 };
 
+Link.linkSizes = linkSizes;
 Link.linkTypes = linkTypes;
 Link.iconColors = iconColors;
 
-module.exports = Link;
+export default Link;

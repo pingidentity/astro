@@ -159,6 +159,12 @@ textarea {
     text-transform: none;
 }
 
+.form-label--no-spacing,
+.form-label--no-spacing.input-checkbox.inline, // hacking specificity
+.form-label--no-spacing.input-checkbox.stacked { // hacking specificity
+    margin: 0;
+}
+
 label {
     position: relative;
     display: inline-block;
@@ -555,7 +561,7 @@ label {
         }
         &.stacked {
             display: block;
-            margin-bottom: 13px;
+            margin-bottom: $spacing-sm;
 
             &:last-of-type {
                 margin-bottom: 0;
@@ -689,6 +695,12 @@ label {
         color: $color-midnight;
         text-transform: none;
         font-size: 16px;
+    }
+}
+
+label.input-text {
+    &--nospacing {
+        margin-bottom: 0;
     }
 }
 
@@ -1630,155 +1642,6 @@ input[type=file] {
         .integer-controls {
             pointer-events: none;
         }
-    }
-}
-
-.input-selection-list {
-    position: relative;
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid $color-timberwolf;
-    width: 200px;
-    box-sizing: border-box;
-    overflow: hidden;
-
-    border-radius: 3px;
-
-    &--no-border {
-        border: none;
-    }
-
-    &__multi-add-panel {
-        margin-top: $spacing-sm;
-    }
-
-    &__note {
-        color: $color-strong-neutral-50;
-        font-size: $font-size-reduced;
-        font-style: italic;
-
-        &--error {
-            color: $color-critical-red;
-        }
-    }
-
-    .selection-list-search {
-        position: relative;
-
-        .input-text {
-            display: block;
-            margin: 0 0 10px;
-        }
-        .input-container {
-            input[type=text] {
-                height: 36px;
-                width: 100%;
-                padding-left: 35px;
-                padding-right: 25px;
-            }
-            &:before {
-                font-size: 16px;
-                bottom: 10px;
-                left: 10px;
-            }
-        }
-    }
-    .input-selection-list-items {
-        display: flex;
-        flex-direction: column;
-        max-height: 228px;
-        margin: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        &--remove-max-height {
-            max-height: unset;
-        }
-
-        .input-radio {
-            margin: 0 15px 10px 0;
-        }
-        .input-checkbox {
-            margin: 0 15px 10px 0;
-
-            .label-text {
-                text-transform: none;
-                word-break: break-word;
-                word-wrap: break-word;
-            }
-        }
-    }
-    .list-input__bottom-links {
-        position: absolute;
-        bottom: 0;
-    }
-    .required-message {
-        background-color: $color-warning-icon-yellow;
-        color: $color-white;
-        margin: -10px -10px 10px;
-        padding: 7px 10px;
-        font-size: 15px;
-        line-height: 1em;
-        text-align: center;
-
-        animation: fade-in 0.5s;
-
-        > span {
-            display: inline-block;
-            text-align: left;
-        }
-    }
-    .view-item {
-        color: $color-midnight;
-        font-size: 14px;
-        margin: 0 0 10px 1px;
-    }
-    .help-tooltip {
-        margin: 0 0 0 7px;
-    }
-
-    &.searchable {
-        .input-selection-list-items {
-            max-height: 228px - 46px;
-            margin-top: 1px;
-
-            &--remove-max-height {
-                max-height: unset;
-            }
-        }
-        a.clear-search {
-            position: absolute;
-            font-family: $icon-font;
-            text-decoration: none;
-            font-size: 12px;
-            right: 10px;
-
-            &:before {
-                content: 'X';
-            }
-        }
-    }
-    &.show-selection-options {
-        width: 220px;
-        padding-bottom: 30px;
-    }
-    &.fluid-width {
-        max-width: 400px;
-        width: auto;
-    }
-
-    &--auto-width {
-        width: auto;
-        max-width: 100%;
-    }
-
-    &__add-option {
-        align-items: center;
-        color: $color-accent-neutral-10;
-        display: inline-flex;
-        line-height: 1em;
-        margin: 0 $spacing-md $spacing-sm 0;
-        text-transform: none;
     }
 }
 

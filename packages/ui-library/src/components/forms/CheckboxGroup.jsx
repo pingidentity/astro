@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import _ from "underscore";
 import FormCheckbox from "./FormCheckbox";
 import InputRow from "../layout/InputRow";
+import { valueProp } from "../../util/PropUtils";
 
 /**
  * @class CheckboxGroup
@@ -31,17 +32,24 @@ import InputRow from "../layout/InputRow";
 * @typedef CheckboxGroup~option
 * @desc An option
 *
-* @property {string|number} value
-*     The value identifier.
-* @property {string} label
-*     The label.
-* @property {node} conditionalContent
+* @property {node} [conditionalContent]
 *     Content that appears below when the option is selected.
+* @property {boolean} [disabled = false]
+*     Disable the checkbox.
+* @property {string} [label]
+*     The label.
+* @property {node} hint
+*     Provides a help hint with provided text
+* @property {node} helpTarget
+*     Customize the target
+* @property {string|number} [value]
+*     The value identifier.
 */
 
 const CheckboxGroup = ({
     className,
     "data-id": dataId,
+    setCheckboxDataId, // for backward compatibility
     values,
     options,
     onValueChange,
@@ -66,7 +74,7 @@ const CheckboxGroup = ({
 
     return (
         <div className="stack-sm" data-id={dataId}>
-            {_.map(options, (option) => {
+            {_.map(options, (option, index) => {
                 if (typeof option !== "object") {
                     option = {
                         value: option,
@@ -76,31 +84,39 @@ const CheckboxGroup = ({
                 }
 
                 const handleValueChange = (value, e) => {
-                    if (value) {
-                        onValueChange(addToValues(option.value), e);
-                        onAdd(option.value);
-                    } else {
+                    if (isChecked(option)) {
                         onValueChange(removeFromValues(option.value), e);
                         onRemove(option.value);
+                    } else {
+                        onValueChange(addToValues(option.value), e);
+                        onAdd(option.value);
                     }
                 };
 
                 const checked = isChecked(option, values);
 
                 return (
-                    <InputRow className={className} key={option.value}>
+                    <InputRow data-id="" className={className} key={option.value}>
                         <FormCheckbox
-                            stacked
-                            data-id={dataId + "-" + option.value}
-                            disabled={option.disabled}
-                            label={option.label}
-                            value={option.value}
                             checked={checked}
+                            data-id={setCheckboxDataId
+                                ? setCheckboxDataId(option, index)
+                                : dataId + "-" + option.value
+                            }
+                            disabled={option.disabled}
+                            helpTarget={option.helpTarget}
+                            hint={option.hint || option.labelHelpText}
+                            label={option.label}
+                            noSpacing
                             onValueChange={handleValueChange}
-                            labelHelpText={option.labelHelpText}
+                            stacked
+                            value={option.value}
                         />
-                        {checked && option.conditionalContent &&
-                            <div className="checkbox-description">{option.conditionalContent}</div>
+                        {((checked && option.conditionalContent) || option.content) &&
+                            <div className="checkbox-description">
+                                {option.conditionalContent}
+                                {option.content}
+                            </div>
                         }
                     </InputRow>
                 );
@@ -110,13 +126,15 @@ const CheckboxGroup = ({
 };
 
 CheckboxGroup.propTypes = {
-    values: PropTypes.arrayOf(PropTypes.string),
+    values: PropTypes.arrayOf(valueProp),
     options: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.shape({
             disabled: PropTypes.bool,
-            value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).required,
+            value: valueProp.required,
             label: PropTypes.string,
-            labelHelpText: PropTypes.string,
+            labelHelpText: PropTypes.string, // just an alias for hint
+            hint: PropTypes.string,
+            helpTarget: PropTypes.node,
             conditionalContent: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.node

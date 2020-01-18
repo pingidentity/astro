@@ -144,6 +144,8 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 *     When true the width of the input will grow to fit the size of its content.
 * @param {boolean} [maskValue=false]
 *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
+* @param {boolean} [noSpacing=false]
+*     When true, the default margin is removed.
 * @param {boolean} [readOnly=false]
 *     Whether or not the input field is readonly.
 * @param {boolean} [required=false]
@@ -240,6 +242,7 @@ class Stateless extends React.Component {
         message: PropTypes.string,
         messageType: PropTypes.string,
         name: PropTypes.string,
+        noSpacing: PropTypes.bool,
         onChange: PropTypes.func,
         onValueChange: PropTypes.func,
         onBlur: PropTypes.func,
@@ -275,6 +278,7 @@ class Stateless extends React.Component {
         flexWidth: false,
         inline: false,
         maskValue: false,
+        noSpacing: false,
         onBlur: _.noop,
         onClick: _.noop,
         onChange: _.noop,
@@ -473,6 +477,7 @@ class Stateless extends React.Component {
                 "input-text--right-icon": this.props.iconRight,
                 "input-text--left-icon": this.props.iconLeft,
                 "input-text--right-arrow": this.props.withArrow,
+                "input-text--nospacing": this.props.noSpacing,
 
             },
         );

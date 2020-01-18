@@ -135,18 +135,6 @@
     font-size: 15px;
 }
 
-.pipe {
-    &:before {
-        content: '';
-        height: 1.2em;
-        width: 1px;
-        margin: 0 $spacing-sm;
-        display: inline-block;
-        vertical-align: middle;
-        background-color: $color-rabbit-fur;
-    }
-}
-
 .masked-value {
     color: $color-midnight;
     font-size: 14px;
@@ -172,9 +160,32 @@
     &__icon {
         margin-right: $spacing-xs;
     }
+
     &--disabled {
         pointer-events: none;
         opacity: $inactive-opacity;
+    }
+
+    &--sm {
+        font-size: $font-size-reduced;
+    }
+}
+
+.pipe-row {
+    line-height: 1em;
+}
+
+.pipe {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background: $color-rabbit-fur;
+    margin: 0 $spacing-sm;
+    transform: translateY(-1px);
+    vertical-align: middle;
+
+    &--sm {
+        margin: 0 $spacing-xs;
     }
 }
 

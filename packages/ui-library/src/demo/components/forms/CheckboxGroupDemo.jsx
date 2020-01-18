@@ -1,5 +1,7 @@
 import React from "react";
-import CheckboxGroup from "../../../components/forms/CheckboxGroup";
+import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
+import HR from "ui-library/lib/components/general/HR";
+import { partial } from "underscore";
 
 const optionsData = [
     {
@@ -23,6 +25,26 @@ const optionsData = [
     },
 ];
 
+const testIcon = <span className="icon-cog inline-icon"></span>;
+const testImage = <img src="./favicon.png" />;
+
+const optionsData2 = [
+    { label: "Apple", value: 1 },
+    { label: "Orange", value: 2, disabled: true },
+    { label: "Banana", value: 3,
+        hint: "Help Hint with dynamic icon",
+        helpTarget: testIcon },
+    { label: "Watermelon", value: 4,
+        hint: "Help Hint with custom image",
+        helpTarget: testImage } ,
+    { label: "Grape Fruit", value: 5 },
+    { label: "Peach", value: 6, conditionalContent: "Some content" },
+    { label: "Plum", value: 7,
+        hint: "Checkboxes may have Help Hints" },
+    { label: "Strawberry", value: 8 },
+    { label: "Kiwi", value: 9 }
+];
+
 /**
 * @name CheckboxGroupDemo
 * @memberof CheckboxGroup
@@ -30,18 +52,26 @@ const optionsData = [
 */
 class CheckboxGroupDemo extends React.Component {
     state = {
-        values: ["one"]
+        values1: ["one"]
     }
 
-    _handleValueChange = values => this.setState({ values })
+    _handleValueChange = (key, values) => this.setState({ [`values${key}`]: values });
 
     render() {
         return (
-            <CheckboxGroup
-                options={optionsData}
-                values={this.state.values}
-                onValueChange={this._handleValueChange}
-            />
+            <>
+                <CheckboxGroup
+                    options={optionsData}
+                    values={this.state.values1}
+                    onValueChange={partial(this._handleValueChange, "1")}
+                />
+                <HR />
+                <CheckboxGroup
+                    options={optionsData2}
+                    values={this.state.values2}
+                    onValueChange={partial(this._handleValueChange, "2")}
+                />
+            </>
         );
     }
 }
