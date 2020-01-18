@@ -76,14 +76,13 @@ describe("FormLabel", function () {
         // expect(lockText.textContent).toEqual("why locked");
     });
 
-    it("renders classname and data-id", function () {
+    it("renders data-id", function () {
         var label = ReactTestUtils.renderIntoDocument(
             <FormLabel value="hello" hint="my hint" data-id="my-id" className="my-label" />
         );
         var node = ReactDOM.findDOMNode(label);
 
         expect(node.getAttribute("data-id")).toBe("my-id");
-        expect(node.getAttribute("class")).toBe("my-label");
     });
 
     it("render component with default data-id", function () {

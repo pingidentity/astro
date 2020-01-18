@@ -548,6 +548,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_LinkingArrowDemo.jsx.html"
                     },
                     {
+                        label: "Pipe Row",
+                        demo: require("../components/layout/PipeRowDemo"),
+                        pathToDoc: "components/layout/PipeRow.jsx",
+                        pathToSource: "components_layout_PipeRow.jsx.html",
+                        pathToDemoSource: "demo_components_layout_PipeRowDemo.jsx.html"
+                    },
+                    {
                         label: "List Nav",
                         demo: require("../components/layout/ListNavDemo"),
                         pathToDoc: "components/layout/ListNav.jsx",
@@ -588,6 +595,13 @@ module.exports = [
                         pathToDoc: "components/layout/PageSection.jsx",
                         pathToSource: "components_layout_PageSection.jsx.html",
                         pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
+                    },
+                    {
+                        label: "Segmented Box",
+                        demo: require("../components/layout/SegmentedBoxDemo"),
+                        pathToDoc: "components/layout/SegmentedBox.jsx",
+                        pathToSource: "components_layout_SegmentedBox.jsx.html",
+                        pathToDemoSource: "demo_components_layout_SegmentedBoxDemo.jsx.html",
                     },
                     {
                         label: "Show More",

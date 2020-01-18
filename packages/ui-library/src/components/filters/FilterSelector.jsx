@@ -8,13 +8,14 @@ import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
 import InputModifier, { inputColors } from "../general/InputModifier";
+import { translateItemsToOptions } from "../../util/PropUtils";
 
 const optionsSelector = createSelector(
     state => state.search,
     state => state.options,
     (search, options) => _.filter(
         options,
-        option => containsString(option.name, search)
+        option => containsString(option.label, search)
     )
 );
 
@@ -47,7 +48,7 @@ const optionsSelector = createSelector(
 * @param {string} [search]
 *     Filters the list. If not provided, search is stored in state
 * @param {array} [selected]
-*     All the selected ids
+*     All the selected values
 */
 class FilterSelector extends React.Component {
     state = {
@@ -65,8 +66,10 @@ class FilterSelector extends React.Component {
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.string,
-            name: PropTypes.string,
+            id: PropTypes.string, // alias for value
+            name: PropTypes.string, // alias for label
+            value: PropTypes.string,
+            label: PropTypes.string,
         })),
         optionsNote: PropTypes.node,
         requiredText: PropTypes.string,
@@ -91,7 +94,10 @@ class FilterSelector extends React.Component {
         this.props.onSearch(value);
     }
 
-    _getOptions = () => optionsSelector({ search: this.state.search, options: this.props.options });
+    _getOptions = () => optionsSelector({
+        search: this.state.search,
+        options: translateItemsToOptions(this.props.options),
+    });
 
     _getFilterLabel = () => {
         const {
@@ -103,10 +109,10 @@ class FilterSelector extends React.Component {
         if (selected.length > 1) {
             return labelText ? labelText : "Selected";
         } else if (selected.length === 1) {
-            const result = _.find(options, (option) => {
-                return option.id === selected[0];
+            const result = _.find(translateItemsToOptions(options), (option) => {
+                return option.value === selected[0];
             });
-            return result ? result.name : null;
+            return result ? result.label : "Selected";
         }
     };
 
@@ -151,13 +157,12 @@ class FilterSelector extends React.Component {
                         <SelectionList
                             type={type}
                             bottomPanel={bottomPanel}
-                            items={this._getOptions()}
+                            options={this._getOptions()}
                             optionsNote={optionsNote}
                             showSearchBox={true}
                             searchPlaceholder="Search..."
                             onSearch={this._handleSearch}
                             onValueChange={onValueChange}
-                            no-border
                             queryString={this._getSearch()}
                             requiredText={requiredText}
                             selectedItemIds={selected}

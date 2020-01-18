@@ -4,19 +4,52 @@ import _ from "underscore";
 import classnames from "classnames";
 import KeyboardUtils, { withFocusOutline } from "../../util/KeyboardUtils";
 
+/**
+ * @enum {string}
+ * @alias Anchor.linkTypes
+ */
 const linkTypes = {
+    /** regular */
+    REGULAR: "regular",
+    /** add */
     ADD: "add",
+    /** remove */
     REMOVE: "remove",
+    /** pageReturn */
     PAGE_RETURN: "pageReturn",
+    /** block */
     BLOCK: "block",
+};
+
+/**
+ * @enum {string}
+ * @alias Anchor.linkSizes
+ */
+const linkSizes = {
+    /** auto */
+    AUTO: "auto",
+    /** sm */
+    SM: "sm",
+    /** md */
+    MD: "md",
 };
 
 /**
  * @class Anchor
  * @desc An accessible link that can supports keyboard interaction even when no href is set.
  *
+ * @param {string} [className]
+ *     CSS classes to be set on the root element.
  * @property {string} [data-id]
  *     To define the base "data-id" value for the top-level HTML container.
+ * @property {boolean} [disabled=false]
+ *     Disables the link.
+ * @param {function} [onClick]
+ *     Callback to be triggered when trigger is clicked.
+ * @param {Anchor.linkSizes} [size=AUTO]
+ *     Size of link. When AUTO, the size is determined by context.
+ * @param {Anchor.linkTypes} [type=REGULAR]
+ *     Type of link
  * @param {boolean} [disabled=false]
  *     Indicates whether component is disabled.
  * @param {function} [onClick]
@@ -29,6 +62,7 @@ class AnchorBase extends React.Component {
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
         onClick: PropTypes.func,
+        size: PropTypes.oneOf(Object.values(linkSizes)),
         type: PropTypes.oneOf(Object.values(linkTypes)),
     };
 
@@ -56,7 +90,7 @@ class AnchorBase extends React.Component {
     }
 
     render = () => {
-        const { children, className, type, disabled, iconAfter, ...props } = this.props;
+        const { children, className, size, type, disabled, iconAfter, ...props } = this.props;
 
         return (
             <a
@@ -64,8 +98,9 @@ class AnchorBase extends React.Component {
                 {...props}
                 className={classnames("anchor", className,
                     {
+                        "page-return-link": type === linkTypes.PAGE_RETURN,
+                        [`anchor--${size}`]: size !== linkSizes.AUTO,
                         "anchor--disabled": disabled,
-                        "page-return-link": type === linkTypes.PAGE_RETURN
                     })}
                 onKeyPress={this._handleKeyPress}
             >
@@ -79,5 +114,6 @@ class AnchorBase extends React.Component {
 const Anchor = withFocusOutline(AnchorBase);
 
 Anchor.linkTypes = linkTypes;
+Anchor.linkSizes = linkSizes;
 
 export default Anchor;

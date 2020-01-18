@@ -6,6 +6,7 @@ import { chartingColors } from "../../../constants/DashboardConstants";
 import ChipPanel from "./ChipPanel";
 import FilterSelector from "../../filters/FilterSelector";
 import { ListType } from "../../forms/selection-list";
+import { valueProp, translateItemsToOptions } from "../../../util/PropUtils";
 
 /**
 * @class DropDownSelector
@@ -47,11 +48,10 @@ export default class DropDownSelector extends Component {
         options: PropTypes.arrayOf(
             PropTypes.shape({
                 color: PropTypes.string,
-                id: PropTypes.oneOfType([
-                    PropTypes.number,
-                    PropTypes.string
-                ]).isRequired,
-                name: PropTypes.string.isRequired
+                id: valueProp, // alias for value
+                name: PropTypes.string, // alias for name
+                value: valueProp,
+                label: PropTypes.string,
             })
         ),
         optionsNote: PropTypes.node,
@@ -79,12 +79,12 @@ export default class DropDownSelector extends Component {
     // Have to use underscore's contains here because version of node in Jenkins
     // doesn't support array.includes
     _getChips = (selected, options) =>
-        options
-            .filter(({ id }) => contains(selected, id))
+        translateItemsToOptions(options)
+            .filter(({ value }) => contains(selected, value))
             .map((opt, index) => ({ color: chartingColors[index], ...opt }));
 
-    _filterOptions = () => this.props.options.filter(({ id }) =>
-        !contains(this.props.selectedOptionIds, id)
+    _filterOptions = () => translateItemsToOptions(this.props.options).filter(({ value }) =>
+        !contains(this.props.selectedOptionIds, value)
     );
 
     _toggle = val => {

@@ -150,6 +150,42 @@ export const generateNavTreePropType = (levels, extraProps = []) =>
         navTreePropType
         );
 
+/**
+ * @alias module:util/PropUtils.valueProp
+ *
+ * @desc A prop type for any values that can be numbers or strings
+ */
+export const valueProp = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
+
+/**
+ * @alias module:util/PropUtils.translateItemToOption
+ *
+ * @desc Turns object with id and name into object with value and label
+ */
+export const translateItemToOption = ({
+    id,
+    name,
+    value = id,
+    label = name,
+    helpHintText,
+    hint = helpHintText,
+    ...item
+}) => ({
+    ...item,
+    hint,
+    value,
+    label,
+    id: value,
+    name: label,
+});
+
+/**
+ * @alias module:util/PropUtils.translateItemsToOptions
+ *
+ * @desc Turns objects with ids and names into objects with values and labels
+ */
+export const translateItemsToOptions = items => items.map(translateItemToOption);
+
 export default {
     getIconClassName,
     defaultRender,

@@ -1,0 +1,67 @@
+.segmented-box {
+    display: inline-flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &__scroll-box {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+    }
+
+    &--border {
+        border: 1px solid $color-timberwolf;
+        border-radius: 3px;
+    }
+
+    &--border &__content {
+        margin: $spacing-sm;
+    }
+
+    &__top-panel {
+        padding-bottom: $spacing-sm;
+
+        > * + * {
+            margin-top: $spacing-sm;
+        }
+    }
+
+    &--border &__top-panel {
+        padding: $spacing-sm;
+    }
+
+    &__bottom-panel {
+        padding-top: $spacing-sm;
+    }
+
+    &--border &__bottom-panel {
+        padding: $spacing-sm;
+    }
+
+    &__message {
+        margin-left: -$spacing-sm;
+        margin-right: -$spacing-sm;
+        padding: $spacing-xs $spacing-sm;
+        text-align: center;
+
+        &--warning {
+            color: $color-white;
+            background: $color-warning-yellow;
+        }
+    }
+
+    &--border &__message {
+        margin-top: -$spacing-sm;
+    }
+
+    &--full-width {
+        display: block;
+    }
+}
+
+// non-BEM hack to maintain compatibility
+.details-content .segmented-box--border,
+.popover-display .segmented-box--border {
+    border: none;
+}

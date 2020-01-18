@@ -55,7 +55,7 @@ class FormCheckboxDemo extends React.Component {
                         onChange = {this._onChange(3)}
                         checked = {this.state.checkboxChecked3}
                         disabled = {true}
-                        labelHelpText = "Disabled with help"
+                        hint = "Disabled with help"
                     />
                 </InputRow>
                 <InputRow>
@@ -64,7 +64,7 @@ class FormCheckboxDemo extends React.Component {
                         value = ""
                         onChange = {this._onChange(4)}
                         checked = {this.state.checkboxChecked4}
-                        labelHelpText = "Check this box!"
+                        hint = "Check this box!"
                     />
                 </InputRow>
                 <InputRow>

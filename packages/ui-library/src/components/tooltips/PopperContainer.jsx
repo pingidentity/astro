@@ -149,14 +149,28 @@ class PopperContainer extends React.Component {
             );
 
             window.requestAnimationFrame(this.popperAPI.update);
+
+            // Run this so that popper repositions itself in case something makes the
+            // children have a different height than the last children - https://jira.pingidentity.com/browse/UIP-3005
+            if (global.MutationObserver) {
+                this.observer = new MutationObserver(() => {
+                    if (this.popperAPI&& this.popperAPI.scheduleUpdate) {
+                        this.popperAPI.scheduleUpdate();
+                    }
+                });
+
+                this.observer.observe(this.popper, {
+                    attributes: true,
+                    subtree: true,
+                    attributeFilter: ["class", "value"]
+                });
+            }
         }
     }
 
-    componentDidUpdate(prevProps) {
-        // Run this on componentDidUpdate so that popper repositions itself in case new children
-        // have a different height than the last children - https://jira.pingidentity.com/browse/UIP-3005
-        if (this.popperAPI&& this.popperAPI.scheduleUpdate && prevProps.children !== this.props.children) {
-            this.popperAPI.scheduleUpdate();
+    componentWillUnmount() {
+        if (this.observer) {
+            this.observer.disconnect();
         }
     }
 

@@ -369,7 +369,8 @@ describe("SelectionList v4", function () {
 
         ReactTestUtils.Simulate.change(checkboxes[3]);
 
-        expect(component.props.children.props.onValueChange).toBeCalledWith([4]);
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toEqual([4]);
     });
 
     it("should check few checkboxes", function () {
@@ -383,7 +384,8 @@ describe("SelectionList v4", function () {
 
         ReactTestUtils.Simulate.change(checkboxes[4]);
 
-        expect(component.props.children.props.onValueChange).toBeCalledWith([1, 2, 5]);
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toEqual([1, 2, 5]);
     });
 
     it("should check all checkboxes", function () {
@@ -395,9 +397,10 @@ describe("SelectionList v4", function () {
         const selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         const checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
-        ReactTestUtils.Simulate.change(checkboxes[8]);
+        ReactTestUtils.Simulate.change(checkboxes[8], { target: { value: true } });
 
-        expect(component.props.children.props.onValueChange).toBeCalledWith([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
     it("should uncheck one checkbox", function () {
@@ -409,8 +412,10 @@ describe("SelectionList v4", function () {
         const selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         const checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
         ReactTestUtils.Simulate.change(checkboxes[2]);
-        expect(component.props.children.props.onValueChange).toBeCalledWith([1]);
+        expect(component.props.children.props.onValueChange).toBeCalled();
+        expect(component.props.children.props.onValueChange.mock.calls[0][0]).toEqual([1]);
     });
 
     it("should do a start search with 2 chars keyword", function () {
@@ -618,12 +623,12 @@ describe("SelectionList v4", function () {
         const component = getComponent({
             type: SelectionList.ListType.VIEWONLY
         });
-        const viewItems = TestUtils.scryRenderedDOMNodesWithClass(component, "view-item");
+        const viewItems = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-read-only");
 
-        expect(viewItems.length).toBe(9);
+        expect(viewItems.children.length).toBe(9);
 
         listItems.map(function (listItem, index) {
-            expect(viewItems[index].textContent).toEqual(listItem.name);
+            expect(viewItems.children[index].textContent).toEqual(listItem.name);
         });
     });
 
@@ -632,7 +637,7 @@ describe("SelectionList v4", function () {
             optionsNote: "note"
         });
 
-        const note = TestUtils.findRenderedDOMNodeWithClass(component, "input-selection-list__note");
+        const note = TestUtils.findRenderedDOMNodeWithDataId(component, "options-note");
 
         expect(ReactTestUtils.isDOMComponent(note)).toEqual(true);
     });
@@ -642,12 +647,12 @@ describe("SelectionList v4", function () {
             type: SelectionList.ListType.ADD
         });
 
-        const addItems = TestUtils.scryRenderedDOMNodesWithClass(component, "input-selection-list__add-option");
+        const itemsList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-add-options");
 
-        expect(addItems.length).toBe(9);
+        expect(itemsList.children.length).toBe(9);
 
         listItems.map(function (listItem, index) {
-            expect(addItems[index].textContent).toEqual(listItem.name);
+            expect(itemsList.children[index].textContent).toEqual(listItem.name);
         });
     });
 
@@ -681,7 +686,7 @@ describe("SelectionList v4", function () {
             type: SelectionList.ListType.ADD
         });
 
-        const [firstItem] = TestUtils.scryRenderedDOMNodesWithClass(component, "input-selection-list__add-option");
+        const [firstItem] = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
 
         ReactTestUtils.Simulate.click(firstItem);
 

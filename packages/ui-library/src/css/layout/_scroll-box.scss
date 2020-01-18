@@ -1,23 +1,25 @@
 .scroll-box {
     $border-color: $color-neutral-90;
+    max-height: 100%;
 
     position: relative;
 
     &__content {
+        min-height: 0;
         overflow: auto;
     }
 
     &__top-shadow,
     &__bottom-shadow {
-        display: none;
+        visibility: hidden;
         position: absolute;
         left: 0;
         right: 0;
-        height: 2px;
-        background: rgba($color-neutral-70, 0.15);
+        height: 4px;
+        background: rgba($color-accent-neutral-70, 0.2);
 
         &--show {
-            display: block;
+            visibility: visible;
         }
     }
 
