@@ -25,6 +25,9 @@ class ExpandableRowDemo extends React.Component {
         order1: 40,
     };
 
+    static flags = ["expandable-row-ordering"];
+
+
     _onToggle = (index) => () => {
         var newState = {},
             key = "expanded" + index;
@@ -225,7 +228,7 @@ class ExpandableRowDemo extends React.Component {
                         rowAccessories={(
                             <span className="row-accessories-content">
                                 <a>Link</a>
-                                <Icon iconName="cog" key="icon" />,
+                                <Icon iconName="cog" key="icon" />
                                 <HelpHint className="width-auto bottom" hintText="Provisioning">
                                     <Chip type={chipTypes.CONDENSED}>Prov</Chip>
                                 </HelpHint>
@@ -239,8 +242,8 @@ class ExpandableRowDemo extends React.Component {
                         title="Row in Ordering Mode"
                         subtitle="Using positionValue"
                         ordering={{
-                            position: this.state.order1,
                             total: 50,
+                            position: this.state.order1,
                             onReorder: this._handleReorder(1),
                             positionValue: this.state.value1,
                             onPositionValueChange: this._handleValueChange(1),

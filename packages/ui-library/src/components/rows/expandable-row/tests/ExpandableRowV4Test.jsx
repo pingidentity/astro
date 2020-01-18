@@ -937,4 +937,21 @@ describe("ExpandableRow v4", function() {
 
         expect(callback).not.toBeCalled();
     });
+
+
+    it("renders with new class when flags are set", function() {
+        const callback = jest.fn();
+        const component = getComponent({
+            flags: [ "expandable-row-ordering" ],
+            ordering: {
+                position: 3,
+                onReorder: callback,
+            },
+        });
+
+        const row = TestUtils.findRenderedDOMNodeWithClass(component, "expandable-row--ordering");
+
+        expect(row).toBeTruthy();
+    });
+
 });

@@ -17,6 +17,7 @@ node/
 node_modules/
 yarn-error.log
 npm-debug.log
+package-lock.json
 
 # Istanbul
 **/coverage

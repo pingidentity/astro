@@ -23,6 +23,7 @@
 $expandable-row-height: 60px;
 $expandable-row-gap: 12px;
 
+
 .expandable-row {
     $button-height: $expandable-row-height;
     $button-width: 45px;
@@ -386,27 +387,6 @@ $expandable-row-gap: 12px;
             margin-right: 10px;
         }
     }
-    &--ordering,
-    &.item--ordering {
-        @include grab-cursor;
-        position: relative;
-
-        .row-accessories,
-        .row-btns {
-            opacity: $inactive-opacity;
-            pointer-events: none;
-        }
-
-        &:before {
-            content: '';
-            right: 0;
-            top: -1 * $expandable-row-gap - 1px;
-            left: 0;
-            height: $expandable-row-gap + 1px;
-            position: absolute;
-        }
-    }
-
 }
 
 
@@ -476,78 +456,7 @@ $expandable-row-gap: 12px;
     border-radius: 3px;
 }
 
-.draggable-item--drop-target {
-    margin-top: $spacing-xl;
 
-    .item--ordering,
-    .expandable-row--ordering {
-        border-top: 2px solid $color-active-blue;
-
-        &:before {
-            content: '';
-            top: -1 * $spacing-xl;
-            bottom: -1 * $spacing-xl;
-            height: auto;
-        }
-
-    }
-}
-
-.draggable-item {
-    transition: 0.25s margin;
-}
-
-.draggable-item--drop-target.draggable-item--drop-target-after {
-    margin-top: 0;
-    margin-bottom: $spacing-xl;
-
-    .item--ordering,
-    .expandable-row--ordering {
-        border-top: none;
-        border-bottom: 2px solid $color-active-blue;
-    }
-}
-
-.draggable-item--is-dragging .item--ordering,
-.draggable-item--is-dragging .expandable-row--ordering {
-    &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: $color-white;
-
-        opacity: 0.6;
-    }
-}
-
-.ordering-controls {
-    @include text-value;
-
-    background: $color-accent-neutral-80;
-    float: left;
-    line-height: $expandable-row-height;
-    padding-right: $spacing-sm * 2;
-}
-
-.ordering-controls__input,
-input.ordering-controls__input {
-    display: inline-block;
-    background: $color-white;
-    text-align: right;
-    width: $spacing-xl;
-    padding: 0 $spacing-xs;
-    margin-right: $spacing-xs;
-}
-
-.ordering-controls__grip {
-    font-size: 20px;
-    margin-left: $spacing-sm * 2;
-    margin-right: $spacing-md;
-    vertical-align: middle;
-}
 
 .result-set {
     $content-padding: $spacing-xl;
@@ -563,6 +472,8 @@ input.ordering-controls__input {
         overflow: scroll visible;
     }
 }
+
+@import 'rows/_expandable-row-ordering';
 
 // V1 - TO BE REMOVED OR MOVED - DEPRECATED OR SITE SPECIFIC -----------------------------------------------------------
 .result-set {
