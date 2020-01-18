@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import DropDownButton from "../../../components/forms/DropDownButton";
-import Icon from "../../../components/general/Icon";
+import DropDownButton from "ui-library/lib/components/forms/DropDownButton";
+import Icon from "ui-library/lib/components/general/Icon";
+import HR from "ui-library/lib/components/general/HR";
 
 /**
 * @name DropDownButtonDemo
@@ -51,6 +52,13 @@ export default class DropDownButtonDemo extends Component {
                 <div>
                     Selected menu item = {this.state.selectedLabel}
                 </div>
+                <HR />
+                <DropDownButton
+                    data-id="custom-icon"
+                    iconName="success"
+                    label="Custom Icon"
+                    options={this._dropDownOptions}
+                />
             </div>
         );
     }

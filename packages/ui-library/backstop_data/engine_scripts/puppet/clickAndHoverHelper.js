@@ -4,6 +4,7 @@ module.exports = async (page, scenario) => {
   const keyPressSelector = scenario.keyPressSelectors || scenario.keyPressSelector;
   const scrollToSelector = scenario.scrollToSelector;
   const postInteractionWait = scenario.postInteractionWait; // selector [str] | ms [int]
+  const interactions = scenario.interactions;
 
   if (keyPressSelector) {
     for (const keyPressSelectorItem of [].concat(keyPressSelector)) {
@@ -23,6 +24,19 @@ module.exports = async (page, scenario) => {
     for (const clickSelectorIndex of [].concat(clickSelector)) {
       await page.waitFor(clickSelectorIndex);
       await page.click(clickSelectorIndex);
+    }
+  }
+
+  // this is a custom script by jfal
+  if (interactions) {
+    for (const interaction of interactions) {
+      await page.waitFor(interaction.selector);
+
+      if (interaction.type === "click") {
+        await page.click(interaction.selector);
+      } else if (interaction.type === "hover") {
+        await page.hover(interaction.selector);
+      }
     }
   }
 
