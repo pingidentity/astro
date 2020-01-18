@@ -105,9 +105,9 @@ module.exports = class extends React.Component {
                     {...obj}
                     showEdit={true}
                     rowAccessories={ <Toggle /> }
+                    flags={["expandable-row-ordering"]}
                     ordering={{
                         position,
-                        total: this.props.rows.all.length,
                         onReorder: this._handleReorder
                     }}
                 />

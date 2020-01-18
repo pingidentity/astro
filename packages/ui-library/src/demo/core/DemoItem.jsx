@@ -102,7 +102,7 @@ class DemoItem extends React.Component {
             type,
             status,
         } = this.props;
-        const flags = this.props.flags ? [...this.props.flags, "v4"] : null;
+        const flags = this.props.flags ? [...this.props.flags] : null;
 
         // This is very important because Redux updates are not instant.  When replacing the demoItemReducer,
         // The new state will take some type to propagate.  We dont want to try and render without an initial
@@ -162,11 +162,6 @@ class DemoItem extends React.Component {
                                             <a href="/index.html#/?selectedSection=undefined&selectedNode=FlagsProvider&root=Components">
                                             FlagsProvider
                                             </a> component.
-                                        </p>
-                                        <p>V4: New apps and pages should be wrapped in&nbsp;
-                                            <code>
-                                                {`<FlagsProvider flags={["v4"]}></FlagsProvider>`}
-                                            </code> to future-proof your code.
                                         </p>
                                     </Stack>
                                 </FormattedContent>

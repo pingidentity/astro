@@ -16,7 +16,7 @@ import StretchContent from "../../layout/StretchContent";
 import ButtonGroup from "../../layout/ButtonGroup";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
-
+import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 /**
 * @enum {string}
 * @alias ExpandableRow.Statuses
@@ -112,6 +112,8 @@ const ConfirmDeletePositions = {
  * @param {boolean} [expanded=false]
  *     Whether the row is expanded or collapsed.
  *     When not provided, the component will manage this value.
+ * @param {array} [flags]
+ *     Set the flag for "expandable-row-ordering" to use the updated CSS className
  * @param {ExpandableRow~onToggle} [onToggle]
  *     Callback to be triggered when the expand/collapse button is clicked.
  *
@@ -340,12 +342,16 @@ class OrderingInput extends React.Component {
 }
 
 class StatelessExpandableRow extends React.Component {
+
     static displayName = "StatelessExpandableRow";
+
+    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         expanded: PropTypes.bool,
+        flags: flagsPropType,
         onToggle: PropTypes.func,
         title: PropTypes.oneOfType([
             PropTypes.object,
@@ -460,6 +466,8 @@ class StatelessExpandableRow extends React.Component {
         }
     }
 
+    _useNewClassName = () => hasFlag(this, "expandable-row-ordering")
+
     render() {
         const { icon } = this.props;
         const baseClassName = "expandable-row";
@@ -468,7 +476,8 @@ class StatelessExpandableRow extends React.Component {
             containerClassname = classnames(baseClassName, this.props.className, {
                 expanded: this.props.expanded,
                 waiting: this.props.waiting,
-                [`${baseClassName}--ordering`]: this.props.ordering,
+                [`${baseClassName}--ordering-old-style`]: this.props.ordering && !this._useNewClassName(),
+                [`${baseClassName}--ordering`]: this.props.ordering && this._useNewClassName(),
                 "has-image": !!this.props.image,
                 "has-icon": icon,
                 "no-delete": !this.props.showDelete,
@@ -539,14 +548,17 @@ class StatelessExpandableRow extends React.Component {
                         )}
                     </div>
                 )}
-                { (this.props.ordering) && (
+                { (this.props.ordering ) && (
                     <div data-id="ordering-controls" className="ordering-controls">
                         <span className="icon-grip ordering-controls__grip"/>
                         <OrderingInput
                             data-id="ordering-input"
                             {...this.props.ordering}
                         />
-                        / {this.props.ordering.total}
+                        {!this._useNewClassName() && this.props.ordering.total
+                            ? ` / ${this.props.ordering.total}`
+                            : null
+                        }
                     </div>
                 )}
                 <div

@@ -7,6 +7,7 @@ export const allFlags = [
     "use-portal",
     "add-button-margin",
     "expandable-row-class",
+    "expandable-row-ordering",
     "fix-discard-button",
     "fixed-messages-constants",
     "true-default",

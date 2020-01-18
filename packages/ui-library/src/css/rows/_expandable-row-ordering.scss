@@ -1,0 +1,145 @@
+.expandable-row--ordering,
+.expandable-row--ordering-old-style {
+    @include grab-cursor;
+    position: relative;
+
+    .row-accessories,
+    .row-btns {
+        opacity: $inactive-opacity;
+        pointer-events: none;
+    }
+
+    &:before {
+        content: '';
+        right: 0;
+        top: -1 * $expandable-row-gap - 1px;
+        left: 0;
+        height: $expandable-row-gap + 1px;
+        position: absolute;
+    }
+}
+
+.ordering-controls {
+    @include text-value;
+    line-height: $expandable-row-height;
+    height: $expandable-row-height;
+    float: left;
+    display: inline-flex;
+    align-items: center;
+}
+
+.ordering-controls__input,
+input.ordering-controls__input {
+    display: inline-block;
+    background: $color-white;
+    border-color: transparent;
+    padding: 0 $spacing-xs;
+    margin-right: $spacing-xs;
+    position: relative;
+    width: $spacing-xl;
+}
+
+.ordering-controls__grip {
+    font-size: 20px;
+    background: $color-accent-neutral-80;
+    height: 100%;
+    line-height: $expandable-row-height;
+}
+
+
+
+//new style (nesting can be removed when old style is deprecated)
+.expandable-row--ordering {
+    $offset-width: 40px;
+    margin-left: $offset-width;
+    .ordering-controls {
+        flex-direction: row-reverse;
+        margin-left: -$offset-width;
+    }
+    .ordering-controls__grip {
+        padding: 0 $spacing-sm;
+    }
+
+    .ordering-controls__input,
+    input.ordering-controls__input {
+        width: $offset-width - 5px;
+        color: $color-label-text;
+    }
+    &:hover {
+        .ordering-controls__input {
+            border-color: $color-input-border;
+            color: $color-value-text;
+        }
+    }
+    .ordering-controls__input {
+        &:focus,
+        &:active {
+            border-color: $color-active-blue;
+            color: $color-value-text;
+        }
+    }
+    //separate the old and new style so old can be removed in the future
+    &-old-style {
+        .ordering-controls {
+            padding-right: $spacing-sm * 2;
+            background: $color-accent-neutral-80;
+            &__grip {
+                margin-left: $spacing-sm * 2;
+                margin-right: $spacing-md;
+            }
+        }
+        .ordering-controls__input,
+        input.ordering-controls__input {
+            margin-right: $spacing-xs;
+            text-align: right;
+        }
+    }
+}
+
+
+.draggable-item--drop-target {
+    margin-top: $spacing-xl;
+
+    .expandable-row--ordering,
+    .expandable-row--ordering-old-style {
+        border-top: 2px solid $color-active-blue;
+
+        &:before {
+            content: '';
+            top: -1 * $spacing-xl;
+            bottom: -1 * $spacing-xl;
+            height: auto;
+        }
+
+    }
+}
+
+.draggable-item {
+    transition: 0.25s margin;
+}
+
+.draggable-item--drop-target.draggable-item--drop-target-after {
+    margin-top: 0;
+    margin-bottom: $spacing-xl;
+
+    .expandable-row--ordering,
+    .expandable-row--ordering-old-style {
+        border-top: none;
+        border-bottom: 2px solid $color-active-blue;
+    }
+}
+
+.draggable-item--is-dragging .expandable-row--ordering,
+.draggable-item--is-dragging .expandable-row--ordering-old-style {
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: $color-white;
+
+        opacity: 0.6;
+    }
+}
