@@ -903,7 +903,7 @@ $color-grey-minor-1: $color-neutral-30;
     position: relative;
     display: inline-block;
     font-size: 14px;
-    margin: 0 0 25px;
+    margin: 0 0 $spacing-md;
     white-space: nowrap;
     padding-left: $spacing-md;
 
@@ -1032,6 +1032,10 @@ $color-grey-minor-1: $color-neutral-30;
 
 .page-section-content {
     margin: 0 0 40px 25px;
+
+    .page-section & {
+        margin-bottom: 0;
+    }
 }
 
 .page-section-data-title {

@@ -1,5 +1,6 @@
 
 jest.dontMock("../FileDrop");
+import { mount } from "enzyme";
 
 
 describe("FileDrop", function () {
@@ -234,5 +235,28 @@ describe("FileDrop", function () {
         ["drop"].forEach(eventName => {
             expect(componentDom.removeEventListener).toBeCalledWith(eventName, component._onDrop);
         });
+    });
+
+    it("Renders a button that can click the FileDrop", function () {
+        const callback = jest.fn();
+        const component = mount(
+            <FileDrop
+                replaceContent
+                renderContent={
+                    ({ getInputRef }) => (
+                        <button
+                            data-id="the-button"
+                            onClick={() => getInputRef().click()}
+                        >Click me</button>
+                    )
+                }
+            />
+        );
+
+        component.instance().fileInput.click = callback;
+
+        expect(callback).not.toBeCalled();
+        component.find("button[data-id='the-button']").simulate("click");
+        expect(callback).toBeCalled();
     });
 });

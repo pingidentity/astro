@@ -1,11 +1,13 @@
 window.__DEV__ = true;
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import LabelValuePairs from "../LabelValuePairs";
+import _ from "underscore";
+import { shallow } from "enzyme";
+
 describe("LabelValuePairs", function () {
-    let React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        LabelValuePairs= require("../LabelValuePairs"),
-        _ = require("underscore");
 
     const mockData = [
         {
@@ -63,6 +65,24 @@ describe("LabelValuePairs", function () {
         },
     ];
 
+    const mockData2 = [
+        {
+            label: "Zero",
+            value: 0,
+        },
+        {
+            label: "One",
+            value: 1,
+        },
+        {
+            label: "Undefined",
+        },
+        {
+            label: "Blank",
+            value: "",
+        }
+    ];
+
     let componentId = "label-value-pairs";
 
     function getComponent (opts) {
@@ -113,6 +133,18 @@ describe("LabelValuePairs", function () {
         let elements = TestUtils.scryRenderedDOMNodesWithClass(component, "label-value-pairs__title");
 
         expect(elements.length).toEqual(2);
+    });
+
+    it("renders empty values", function() {
+        const component = shallow(<LabelValuePairs dataPairs={mockData2} />);
+
+        expect(component.find(".label-value-pairs__label").length).toBe(4);
+    });
+
+    it("does not render empty values", function() {
+        const component = shallow(<LabelValuePairs dataPairs={mockData2} pruneEmpty />);
+
+        expect(component.find(".label-value-pairs__label").length).toBe(2);
     });
 
 });

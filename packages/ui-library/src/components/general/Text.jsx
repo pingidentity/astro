@@ -48,8 +48,8 @@ export const textTypes = {
 export const textVariants = {
     /** success */
     SUCCESS: "success",
-    /** value */
-    VALUE: "value",
+    /** error */
+    ERROR: "error",
     /** warning */
     WARNING: "warning",
 };

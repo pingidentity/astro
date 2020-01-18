@@ -68,6 +68,25 @@ $expandable-row-gap: 12px;
         padding: $spacing-md 75px $spacing-xl $spacing-lg;
         min-height: 3 * $button-height - 4px;
     }
+    .expanded-content-scroller {
+        // trying to do some magic here to make sure indentation is always correct
+        > *,
+        > .flex-row > * {
+            margin-left: $spacing-lg;
+        }
+
+        .tab-set,
+        .rocker-button,
+        > .flex-row {
+            margin-left: 0;
+        }
+
+        // fighting against some of the built-in margins for other components
+        > :first-child,
+        > :first-child > :first-child {
+            margin-top: 0;
+        }
+    }
     &.expanded-content-scroll {
         .expanded-content-scroller {
             max-height: 700px;

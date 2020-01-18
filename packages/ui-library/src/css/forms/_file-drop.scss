@@ -28,6 +28,19 @@
         position: absolute;
         z-index: $zindex__hidden;
     }
+
+    &--replace-content {
+        background: transparent;
+        border: none;
+        height: auto;
+        line-height: inherit;
+        margin: 0;
+        padding: 0;
+
+        label {
+            z-index: -1;
+        }
+    }
 }
 
 .input-filedrop--hover,

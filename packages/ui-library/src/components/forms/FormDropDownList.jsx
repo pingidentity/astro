@@ -25,6 +25,7 @@ import _ from "underscore";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
+import { flagsPropType, hasFlag } from "../../util/FlagUtils";
 
 /**
 * @function FormDropDownList~filterOptions
@@ -192,7 +193,7 @@ const SearchTypes = {
 *    The selected list option.
 * @param {FormDropDownList~onValueChange} [onValueChange]
 *    Callback to be triggered when an option is selected.
-*
+*    onValueChange will be called with the value instead of the option object if the 'pass-value' flag is set.
 * @param {boolean} [autofocus=false]
 *    Whether or not this field should autofocus.
 * @param {boolean} [canAdd=false]
@@ -224,7 +225,8 @@ const SearchTypes = {
 * @param {FormDropDownList.SearchTypes} [searchType="KEYBOARD"]
 *    The type of search to use with the dropdown list.
 *    If the "add" prop is set to true, will override to use BOX type of searching.
-*
+* @param {string|number} [value]
+*    An alternative to selectedOption.
 * @param {element} [contentType=FormDropDownListDefaultContent]
 *    A custom element representing the contents of each option.
 *
@@ -336,6 +338,7 @@ class FormDropDownListStateless extends React.Component {
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
         errorMessage: PropTypes.string,
+        flags: flagsPropType,
         groups: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -380,6 +383,10 @@ class FormDropDownListStateless extends React.Component {
         selectedOptionLabelClassName: PropTypes.string,
         title: PropTypes.string,
         validSearchCharsRegex: PropTypes.string,
+        value: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
         width: PropTypes.oneOf(InputWidthProptypes),
     };
 
@@ -405,6 +412,10 @@ class FormDropDownListStateless extends React.Component {
         required: false,
         disabled: false,
         autofocus: false,
+    };
+
+    static contextTypes = {
+        flags: PropTypes.arrayOf(flagsPropType),
     };
 
     didPressKey = false;
@@ -602,6 +613,10 @@ class FormDropDownListStateless extends React.Component {
         this._onToggleProxy();
     }
 
+    _handleValueChange = (option, e) => (
+        hasFlag(this, "pass-value")
+    ) ? this.props.onValueChange(option.value, e) : this.props.onValueChange(option);
+
     /**
      * On key press open/close list or try and auto find the option that matches the characters typed on a starts with.
      * Doesn't reduce the list, but just goes to.
@@ -625,7 +640,6 @@ class FormDropDownListStateless extends React.Component {
             canAdd,
             groups,
             noneOption,
-            onValueChange,
             open,
             searchField,
             searchIndex,
@@ -671,15 +685,15 @@ class FormDropDownListStateless extends React.Component {
                     if (!option.group ||
                         (this._groupById[option.group] && !this._groupById[option.group].disabled)
                     ) {
-                        onValueChange(option);
+                        this._handleValueChange(option);
                     }
                 } else {
-                    onValueChange(this._filteredOptions()[
+                    this._handleValueChange(this._filteredOptions()[
                         hasPrompt ? searchIndex - 1 : searchIndex
                     ]);
                 }
-            } else if (searchIndex === -1 && noneOption) { // Select "none" option
-                onValueChange(noneOption);
+            } else if (searchIndex === -1 && noneOption) {
+                this._handleValueChange(noneOption);
             }
 
             // Reset dropdown
@@ -787,11 +801,21 @@ class FormDropDownListStateless extends React.Component {
     _handleOptionClick = (item, e) => {
         e.preventDefault(); // TODO: remove after refactor of DOM
 
-        this.props.onValueChange(item);
+        this._handleValueChange(item);
         this._onToggleProxy();
     };
 
     _getGroupSeparator = (index) => <div key={"group-separator" + index} className="group-separator" />;
+
+    _getSelectedOption = () => {
+        const { value, selectedOption, options } = this.props;
+        return selectedOption || options.find(({ value: optionValue }) => value === optionValue);
+    }
+
+    _getValue = () => {
+        const { value, selectedOption } = this.props;
+        return selectedOption ? selectedOption.value : value;
+    }
 
     _getSingleGroupHeader = ({ disabled, id, label }) => (
         <li
@@ -811,7 +835,7 @@ class FormDropDownListStateless extends React.Component {
             disabled = group && group.disabled,
             className = classnames("select-option", {
                 highlighted: !disabled && index === this.props.searchIndex,
-                selected: option.value === (this.props.selectedOption && this.props.selectedOption.value),
+                selected: option.value === this._getValue(),
                 disabled: disabled
             });
 
@@ -876,8 +900,10 @@ class FormDropDownListStateless extends React.Component {
     )
 
     _getSelectedOptionLabel = () => {
-        if (this.props.showSelectedOptionLabel && this.props.selectedOption) {
-            return this._getOptionLabel(this.props.selectedOption);
+        const selectedOption = this._getSelectedOption();
+
+        if (this.props.showSelectedOptionLabel && selectedOption) {
+            return this._getOptionLabel(selectedOption);
         }
     }
 
@@ -891,8 +917,16 @@ class FormDropDownListStateless extends React.Component {
         }, "");
     }
 
+    _isValueEntered = () => {
+        const selectedOption = this._getSelectedOption();
+        const { noneOption } = this.props;
+
+        return selectedOption && (!noneOption || selectedOption.label !== noneOption.label);
+    }
+
     render() {
         this._setupGroups(this.props);
+        const selectedOption = this._getSelectedOption();
 
 
         if (this.didPressKey && !this.props.open) {
@@ -911,8 +945,7 @@ class FormDropDownListStateless extends React.Component {
                 {
                     open: this.props.open,
                     "form-error": this.props.errorMessage,
-                    "value-entered": this.props.selectedOption &&
-                    (!this.props.noneOption || this.props.noneOption.label !== this.props.selectedOption.label),
+                    "value-entered": this._isValueEntered(),
                     required: this.props.required,
                     disabled: this.props.disabled,
                 }),
@@ -921,8 +954,7 @@ class FormDropDownListStateless extends React.Component {
                 "selected-option-label",
                 this.props.selectedOptionLabelClassName,
                 {
-                    "selected-option-label--icon-padding": this.props.selectedOption &&
-                    this.props.selectedOption.iconName
+                    "selected-option-label--icon-padding": selectedOption && selectedOption.iconName
                 }
             ),
             selectedOptionLabel = this._getSelectedOptionLabel(),
@@ -973,9 +1005,7 @@ class FormDropDownListStateless extends React.Component {
                                 placeholder={this.props.placeholder}
                                 name={this.props.name}
                                 onValueChange={this._handleInputValueChange}
-                                iconLeft={this.props.selectedOption && this.props.selectedOption.iconName
-                                    ? this.props.selectedOption.iconName
-                                    : undefined }
+                                iconLeft={selectedOption && selectedOption.iconName}
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                                 width={InputWidths.MAX }
                                 ref={el => this.reference = el}
@@ -1039,5 +1069,6 @@ DropDownList.SearchTypes = SearchTypes;
 DropDownList.searchTypes = SearchTypes; // we agreed on a new naming standard, but I'm also preserving bw compat
 DropDownList.filterOptions = filterOptions;
 DropDownList._statelessComponent = FormDropDownListStateless;
+DropDownList.optionFromValue = (options, fromValue) => options.find(({ value }) => (value === fromValue));
 
 export default DropDownList;

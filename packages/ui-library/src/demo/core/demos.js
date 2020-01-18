@@ -1414,6 +1414,12 @@ module.exports = [
                         icon: "details"
                     },
                     {
+                        label: "Subscriptions",
+                        demo: require("../../templates/Subscriptions"),
+                        pathToSource: "templates_Subscriptions.jsx.html",
+                        fullscreen: true,
+                    },
+                    {
                         label: "Metadata Import",
                         demo: require("../../templates/MetadataImport"),
                         pathToSource: "templates_MetadataImport.jsx.html",

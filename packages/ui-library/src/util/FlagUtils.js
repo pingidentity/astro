@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 
 export const allFlags = [
+    "pass-value",
+    // v4 flags
     "p-stateful",
     "use-portal",
     "add-button-margin",
@@ -18,5 +20,5 @@ export const getFlags = ({ props, context }) => props.flags || (context && conte
 
 export const hasFlag = (component, flag) => {
     const flags = getFlags(component);
-    return flags.includes(flag) || flags.includes("v4");
+    return flags.includes(flag);
 };

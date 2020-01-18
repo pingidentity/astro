@@ -1,6 +1,6 @@
 import React from "react";
 import HR from "ui-library/lib/components/general/HR";
-import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
+import Icon, { iconSizes, iconTypes, iconColors } from "ui-library/lib/components/general/Icon";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
@@ -23,7 +23,7 @@ const IconDemo = () => {
                 </Icon>
             </InputRow>
             <InputRow>
-                <Icon iconName="earth">
+                <Icon iconName="earth" color={iconColors.WARNING}>
                     <Text type={textTypes.PRIMARY}>Special Icon Styling</Text>
                     <Text>
                         Special icon title and description styling exists for targeted use.
@@ -40,9 +40,9 @@ const IconDemo = () => {
             <InputRow>
                 We can also render simple icons:
                 <Icon iconName="user_directory" type={iconTypes.INLINE} />
-                <Icon iconName="chat" type={iconTypes.INLINE} />
+                <Icon iconName="chat" type={iconTypes.INLINE} color={iconColors.SUCCESS} />
                 <Icon iconName="code" type={iconTypes.INLINE} />
-                <Icon iconName="puzzle" type={iconTypes.INLINE} />
+                <Icon iconName="puzzle" type={iconTypes.INLINE} color={iconColors.ERROR} />
             </InputRow>
             <InputRow>
                 <Icon iconName="facebook" iconSize={iconSizes.XL} title="hello" stackGap="ZERO">

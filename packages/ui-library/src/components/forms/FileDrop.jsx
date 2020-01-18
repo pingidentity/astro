@@ -66,6 +66,7 @@ export default class FileDrop extends Component {
         accept: PropTypes.array,
         className: PropTypes.string,
         fileName: PropTypes.node,
+        replaceContent: PropTypes.bool,
         onRemove: PropTypes.func,
         onValidateFile: PropTypes.func,
         onValueChange: PropTypes.func,
@@ -75,6 +76,7 @@ export default class FileDrop extends Component {
     static defaultProps = {
         "data-id": "input-filedrop",
         accept: [],
+        replaceContent: false,
         onValidateFile: _.noop,
         onValueChange: _.noop,
         strings: {},
@@ -136,6 +138,8 @@ export default class FileDrop extends Component {
         this.props.onRemove();
     }
 
+    _getInputRef = () => this.fileInput;
+
     componentDidMount () {
         ["dragenter", "dragleave", "dragover", "drop"].forEach(eventName => {
             this.dropFile.addEventListener(eventName, this._preventDefaults, false);
@@ -180,24 +184,33 @@ export default class FileDrop extends Component {
             "data-id": dataId,
             fileName,
             hovered,
+            replaceContent,
             onRemove,
         } = this.props;
 
         const fileSelected = !!fileName;
         const classNames = {
             "input-filedrop--hover": hovered,
-            "input-filedrop--selected": fileSelected,
+            "input-filedrop--replace-content": replaceContent,
         };
         const text = { ...this.defaultStrings, ...this.props.strings };
         const customContent = typeof renderContent === "function";
 
+        const Element = replaceContent ? "span" : "div";
+
         return (
-            <div
+            <Element
                 data-id={dataId}
                 ref={ (df) => this.dropFile = df }
-                className={classnames("input-filedrop", className, classNames)}>
+                className={classnames("input-filedrop", className, classNames, {
+                    "input-filedrop--replace-content": replaceContent,
+                })}
+            >
 
-                {customContent && renderContent({ inputRef: this.fileInput })}
+                {customContent &&
+                    // sending the ref over rather than a function to get the ref doesn't always work
+                    renderContent({ inputRef: this.fileInput, getInputRef: this._getInputRef })
+                }
                 {!customContent && (
                     fileSelected ? (
                         <div
@@ -256,7 +269,7 @@ export default class FileDrop extends Component {
                         ref={ (fi) => this.fileInput = fi }
                     />
                 </label>
-            </div>
+            </Element>
         );
     }
 

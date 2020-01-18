@@ -182,5 +182,6 @@ class InlineMessage extends React.Component {
 }
 
 InlineMessage.MessageTypes = MessageTypes;
+InlineMessage.messageTypes = MessageTypes; // new standard
 
 module.exports = InlineMessage;

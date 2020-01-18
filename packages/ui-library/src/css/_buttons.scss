@@ -359,7 +359,37 @@ button,
 
         &:hover {
             color: $color-active-blue-highlighted;
-            text-decoration: underline;
+
+            .button__text {
+                text-decoration: underline;
+            }
+        }
+
+        .button__icon {
+            position: static;
+            transform: none;
+            margin-right: $spacing-xs;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    &.button--icon-button {
+        border: none;
+        background: transparent;
+        color: $color-accent-neutral-10;
+        font-size: 15px;
+        height: auto;
+        padding: 0;
+
+        &:hover {
+            color: $color-active-blue;
+        }
+
+        .button__icon {
+            position: static;
         }
     }
 }
