@@ -32,13 +32,19 @@ a .icon-plus {
 //using camelCase instead of BEM standard because icon- is reserved by iconfont.
 .iconComponent {
     display: inline-flex;
+
     &__graphic {
         padding: 0 $spacing-sm 0 0;
+    }
+
+    &__graphic,
+    & {
         &--size-sm {
             font-size: 14px;
         }
         &--size-md {
             font-size: 21px;
+            line-height: 22px;
         }
         &--size-lg {
             font-size: 28px;
@@ -51,20 +57,14 @@ a .icon-plus {
         }
     }
 
-    &--size-sm {
-        font-size: 14px;
+    &--success {
+        color: $color-success-green;
     }
-    &--size-md {
-        font-size: 21px;
+    &--warning {
+        color: $color-warning-yellow;
     }
-    &--size-lg {
-        font-size: 28px;
-    }
-    &--size-xl {
-        font-size: 35px;
-    }
-    &--size-xxl {
-        font-size: 42px;
+    &--error {
+        color: $color-critical-red;
     }
 
     &--clickable {

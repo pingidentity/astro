@@ -6,34 +6,6 @@ import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
 
 
 /**
- * @enum {string}
- * @alias Icon.iconSizes
- */
-const iconSizes = {
-    /** sm */
-    SM: "sm",
-    /** md */
-    MD: "md",
-    /** lg */
-    LG: "lg",
-    /** xl */
-    XL: "xl",
-    /** xxl */
-    XXL: "xxl",
-};
-
-/**
- * @enum {string}
- * @alias Icon.iconTypes
- */
-const iconTypes = {
-    /** inline */
-    INLINE: "inline",
-    /** leading */
-    LEADING: "leading",
-};
-
-/**
  * @class Icon
  * @desc A component for displaying an icon by itself or next to next.
  *
@@ -43,6 +15,8 @@ const iconTypes = {
  *     The name of the icon.
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
+ * @param {Icon.iconColors} [color]
+ *     Use one of our semantic colors on the icon.
  * @param {Icon.iconTypes} [type]
  *     Set to Icon.iconTypes.LEADING or Icon.iconTypes.INLINE to either provide extra spacing or not.
  * @param {string} [title]
@@ -66,9 +40,55 @@ const iconTypes = {
  *
  */
 
+/**
+ * @enum {string}
+ * @alias Icon.iconsizes
+ */
+const iconSizes = {
+    /** sm */
+    SM: "sm",
+    /** md */
+    MD: "md",
+    /** lg */
+    LG: "lg",
+    /** xl */
+    XL: "xl",
+    /** xxl */
+    XXL: "xxl",
+    /** alias for xxl */
+    XX: "xxl"
+};
+
+/**
+ * @enum {string}
+ * @alias Icon.iconTypes
+ * @description Simple or block-level icon
+ */
+const iconTypes = {
+    /** inline */
+    INLINE: "inline",
+    /** leading */
+    LEADING: "leading",
+};
+
+/**
+ * @enum {string}
+ * @alias Icon.iconColors
+ * @description Simple or block-level icon
+ */
+const iconColors = {
+    /** error */
+    ERROR: "error",
+    /** warning */
+    WARNING: "warning",
+    /** success */
+    SUCCESS: "success",
+};
+
 
 const Icon = withFocusOutline(({
     className,
+    color,
     containerClassName,
     children,
     "data-id": dataId,
@@ -113,6 +133,7 @@ const Icon = withFocusOutline(({
                         [`${baseClassName}--size-lg`]: iconSize === iconSizes.LG,
                         [`${baseClassName}--size-xl`]: iconSize === iconSizes.XL,
                         [`${baseClassName}--size-xxl`]: iconSize === iconSizes.XXL,
+                        [`${baseClassName}--${color}`]: color,
                     }
                 )}
                 {...onClickProps}
@@ -128,6 +149,7 @@ const Icon = withFocusOutline(({
                 "icon",
                 {
                     [`${baseClassName}--clickable`]: onClick,
+                    [`${baseClassName}--${color}`]: color,
                 }
             )}
             data-id={dataId}
@@ -165,5 +187,6 @@ Icon.defaultProps = {
 
 Icon.iconSizes = iconSizes;
 Icon.iconTypes = iconTypes;
+Icon.iconColors = iconColors;
 
 export default Icon ;

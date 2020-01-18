@@ -13,15 +13,6 @@ import FlexRow, { alignments } from "../layout/FlexRow";
 */
 
 /**
-* @callback FileDrop~onValueChange
-*
-* @param {Object} e
-*     The even object provided with the onChange event
-* @param {Object} file
-*     The file object
-*/
-
-/**
 * @callback FileInput~onValidateFile
 *
 * @param {Object} e

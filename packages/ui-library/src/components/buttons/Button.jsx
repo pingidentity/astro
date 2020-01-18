@@ -25,6 +25,8 @@ const buttonTypes = {
     DANGER: "danger",
     /** link */
     LINK: "link",
+    /** button--icon-button */
+    ICON: "button--icon-button",
 };
 
 /**
@@ -71,8 +73,6 @@ const buttonTypes = {
  *
  */
 
-const buttonTypeList = Object.values(buttonTypes);
-
 const iconAliases = {
     "add": "plus",
     "remove": "minus",
@@ -115,7 +115,7 @@ function BaseButton ({
             disabled: disabled,
             "button--active": active,
             "ellipsis-loader-button": loading,
-            [type]: buttonTypeList.includes(type)
+            [type]: Object.values(buttonTypes).includes(type)
         }
     );
 
@@ -133,9 +133,13 @@ function BaseButton ({
             target={target}
         >
             {iconName && <span className={`icon-${iconAlias(iconName)} button__icon`} />}
-            {label}
-            {text}
-            {children}
+            {(label || text || children) &&
+                <span className="button__text">
+                    {label}
+                    {text}
+                    {children}
+                </span>
+            }
             <EllipsisLoader loading={loading}/>
         </TagName>
     );
@@ -173,7 +177,7 @@ Button.propTypes = {
     onMouseDown: PropTypes.func,
     submit: PropTypes.bool,
     target: PropTypes.string,
-    type: PropTypes.oneOf(buttonTypeList),
+    type: PropTypes.oneOf(Object.values(buttonTypes)),
 };
 
 Button.defaultProps = {

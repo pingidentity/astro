@@ -38,4 +38,12 @@ describe("Stack", function () {
 
         expect(element).toBeTruthy();
     });
+
+    it("renders with wrappers", function () {
+        const component = getComponent({ gap: "LG", wrappers: true });
+
+        const elements = TestUtils.scryRenderedDOMNodesWithClass(component, "stack__wrapper");
+
+        expect(elements.length).toEqual(3);
+    });
 });

@@ -34,6 +34,8 @@ export const gapSizes = {
 *     Class name(s) to add to the top-level container/div
 * @param {Stack.gapSizes} [gap="MD"]
 *     Space items in the stack by ZERO, XS, SM, MD, LG, XL, or XX
+* @param {boolean} [wrappers=false]
+*     When true, use wrapper elements around items.
 */
 
 const Stack = ({
@@ -41,12 +43,16 @@ const Stack = ({
     className,
     "data-id": dataId,
     gap,
+    wrappers,
 }) => (
     <div
         className={classnames("stack", className, `stack--${gap.toLowerCase()}`)}
         data-id={dataId}
     >
-        {children}
+        {wrappers ? React.Children.map(
+            children,
+            child => <div className="stack__wrapper">{child}</div>
+        ) : children}
     </div>
 );
 

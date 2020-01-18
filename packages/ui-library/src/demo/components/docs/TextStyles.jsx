@@ -96,7 +96,7 @@ const TextStyles = () => (
                 custom={true}
                 language="html"
                 content={
-                    `<Text type={textTypes.VALUE} variant={textVariants.ERROR}>Warning text</Text>`
+                    `<Text type={textTypes.VALUE} variant={textVariants.WARNING}>Warning text</Text>`
                 }
             />
             <HR />

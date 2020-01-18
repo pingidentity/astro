@@ -42,4 +42,8 @@ div.stack,
     &--xx > * {
         margin-bottom: $spacing-xx;
     }
+
+    > div.stack__wrapper > * {
+        margin: 0;
+    }
 }

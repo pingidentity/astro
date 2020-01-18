@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 import FormLabel, { labelProps, passLabelProps } from "../FormLabel";
 import FormMessage from "../FormMessage";
-import { InputWidthProptypes, getInputWidthClass } from "../InputWidths";
+import { InputWidths, InputWidthProptypes, getInputWidthClass } from "../InputWidths";
 import Translator from "../../../util/i18n/Translator.js";
 
 import _ from "underscore";
@@ -629,5 +629,7 @@ FormTextField.FormTextFieldStateless = Stateless; // we'd rather this were a nam
 FormTextField.propTypes = {
     stateless: deprecatedStatelessProp,
 };
+
+FormTextField.inputWidths = InputWidths;
 
 export default FormTextField;
