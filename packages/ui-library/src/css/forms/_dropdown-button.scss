@@ -1,6 +1,6 @@
 .dropdown-button {
     &__options {
-        box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
+        box-shadow: $popup-box-shadow;
         box-sizing: border-box;
         line-height: 20px;
         padding: $spacing-xs 0;
@@ -21,26 +21,23 @@
         position: relative;
         cursor: pointer;
 
-        &:before {
-            font-family: $icon-font;
-            content: $icon-plus;
+        &-icon {
             font-size: 10px;
             position: absolute;
             left: 7px;
-            top: 8px;
             color: $color-white;
             transition: all 0.3s;
+            top: 50%;
+            transform: translateY(-50%);
         }
-        &:hover {
-            background: $color-elderly;
-            text-decoration: none;
-            &:before {
-                color: inherit;
-            }
+
+        &:hover &-icon {
+            color: inherit;
         }
 
         &:hover,
         &.selected {
+            text-decoration: none;
             background-color: $color-elderly;
         }
 

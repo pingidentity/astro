@@ -29,7 +29,8 @@ describe("DropDownButton", function () {
 
         let menu = {
             optionOne: "Option One",
-            optionTwo: "Option Two"
+            optionTwo: "Option Two",
+            optionThree: undefined,
         };
 
         const dropDownButtonComponent = TestUtils.renderInWrapper(
@@ -241,27 +242,6 @@ describe("DropDownButton", function () {
         expect(callback).toBeCalled();
     });
 
-    it("register global listeners on mount", function () {
-
-
-        window.addEventListener = jest.fn();
-
-        const menu = {
-            optionOne: "Option One",
-            optionTwo: "Option Two"
-        };
-
-        TestUtils.renderInWrapper(
-            <DropDownButton label="Test Drop Down"
-                open={true}
-                options={menu}
-                onToggle={jest.fn()} />
-        );
-
-        expect(TestUtils.mockCallsContains(window.addEventListener, "click")).toEqual(true);
-        expect(TestUtils.mockCallsContains(window.addEventListener, "keydown")).toEqual(true);
-    });
-
     it("unregister global listeners on unmount", function () {
 
         window.removeEventListener = jest.fn();
@@ -283,155 +263,6 @@ describe("DropDownButton", function () {
 
         expect(TestUtils.mockCallsContains(window.removeEventListener, "click")).toEqual(true);
         expect(TestUtils.mockCallsContains(window.removeEventListener, "keydown")).toEqual(true);
-    });
-
-    it("triggers callback when clicked outside", function () {
-        window.addEventListener = jest.fn();
-        global.getSelection = jest.fn();
-        global.getSelection.mockReturnValue({
-            toString: () => "",
-        });
-        const callback = jest.fn();
-
-        const menu = {
-            optionOne: "Option One",
-            optionTwo: "Option Two"
-        };
-
-        TestUtils.renderInWrapper(
-            <DropDownButton label="Test Drop Down"
-                open={true}
-                onValueChange={jest.fn()}
-                options={menu}
-                onToggle={callback} />
-        );
-
-        const handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
-
-
-        const e = {
-            target: { parentNode: document.body },
-            stopPropagation: jest.fn(),
-            preventDefault: jest.fn()
-        };
-
-        //click outside
-        handler(e);
-        expect(callback).toHaveBeenCalled();
-    });
-
-    it("doesn't trigger callback when clicked outside if not open", function () {
-        window.addEventListener = jest.fn();
-        const callback = jest.fn();
-
-        const menu = {
-            optionOne: "Option One",
-            optionTwo: "Option Two"
-        };
-
-        TestUtils.renderInWrapper(
-            <DropDownButton label="Test Drop Down"
-                open={false}
-                onValueChange={jest.fn()}
-                options={menu}
-                onToggle={callback} />
-        );
-
-        const handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
-
-
-        const e = {
-            target: { parentNode: document.body },
-            stopPropagation: jest.fn(),
-            preventDefault: jest.fn()
-        };
-
-        //click outside
-        handler(e);
-        expect(callback).not.toHaveBeenCalled();
-    });
-
-    it("doesn't trigger callback when clicked outside and drop down is not open", function () {
-        const callback = jest.fn();
-
-        const menu = {
-            optionOne: "Option One",
-            optionTwo: "Option Two"
-        };
-
-        TestUtils.renderInWrapper(
-            <DropDownButton label="Test Drop Down"
-                open={false}
-                onValueChange={jest.fn()}
-                options={menu}
-                onToggle={callback} />
-        );
-
-        const handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
-        const e = {
-            target: { parentNode: document.body },
-            stopPropagation: jest.fn(),
-            preventDefault: jest.fn()
-        };
-
-        //click outside
-        handler(e);
-
-        expect(callback).not.toBeCalled();
-    });
-
-    it("triggers callback when drop down is open and ESC pressed", function () {
-
-        const globalKeyListener = TestUtils.captureGlobalListener("keyDown");
-
-        const callback = jest.fn();
-
-        const menu = {
-            optionOne: "Option One",
-            optionTwo: "Option Two"
-        };
-
-        TestUtils.renderInWrapper(
-            <DropDownButton label="Test Drop Down"
-                open={true}
-                onValueChange={jest.fn()}
-                options={menu}
-                onToggle={callback} />
-        );
-
-        //press ESC
-        globalKeyListener({
-            keyCode: 27
-        });
-
-        expect(callback).toBeCalled();
-    });
-
-    it("doesn't trigger callback when drop down is not open and ESC pressed", function () {
-
-        const globalKeyListener = TestUtils.captureGlobalListener("keyDown");
-
-        const callback = jest.fn();
-
-        const menu = {
-            optionOne: "Option One",
-            optionTwo: "Option Two"
-        };
-
-        TestUtils.renderInWrapper(
-            <DropDownButton label="Test Drop Down"
-                open={false}
-                onValueChange={jest.fn()}
-                options={menu}
-                onToggle={callback} />
-        );
-
-        //press ESC
-        globalKeyListener({
-            keyCode: 27
-        });
-
-        expect(callback).not.toBeCalled();
     });
 
     it("renders title if provided", function () {
@@ -507,7 +338,7 @@ describe("DropDownButton", function () {
 
         expect(component.find(".dropdown-button__options").exists()).toEqual(false);
 
-        component.find("[data-id=\"action\"]").simulate("click");
+        component.find("button[data-id=\"action\"]").simulate("click");
 
         expect(component.find(".dropdown-button__options").exists()).toEqual(true);
     });
