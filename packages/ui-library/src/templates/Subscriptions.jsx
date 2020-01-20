@@ -10,7 +10,7 @@ import Icon, { iconSizes, iconColors } from "ui-library/lib/components/general/I
 import FlexRow, { alignments, spacingOptions } from "ui-library/lib/components/layout/FlexRow";
 import InlineMessage, { messageTypes } from "ui-library/lib/components/general/InlineMessage";
 import FormTextField, { inputWidths } from "ui-library/lib/components/forms/form-text-field";
-import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import FormDropDownList, { optionFromValue } from "ui-library/lib/components/forms/FormDropDownList";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
@@ -30,6 +30,14 @@ import Stack from "ui-library/lib/components/layout/Stack";
 import { v4 as uuid } from "uuid";
 import Messages, { Actions as messageActions, Reducer as messageReducer }
     from "ui-library/lib/components/general/messages/Messages";
+
+const FormDropDownListPassValue = ({ value: selectedValue, onValueChange, ...props }) => (
+    <FormDropDownList
+        selectedOption={optionFromValue(props.options, selectedValue)}
+        onValueChange={({ value }) => onValueChange(value)}
+        {...props}
+    />
+);
 
 const initialSubscriptions = [
     {
@@ -412,12 +420,11 @@ const DestinationFields = ({ form, invalidCert, formFieldProps, listFieldProps, 
                             width={inputWidths.LG}
                             {...formFieldProps("destination")}
                         />
-                        <FormDropDownList
+                        <FormDropDownListPassValue
                             label="Format"
                             required
                             options={formatOptions}
                             {...formFieldProps("destinationFormat")}
-                            flags={["pass-value"]}
                         />
                     </InputRow>
                     <Stack wrappers>
