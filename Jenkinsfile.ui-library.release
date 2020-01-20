@@ -33,13 +33,13 @@ pipeline {
               git tag: ${env.GIT_RELEASE_TAG}
             """
             withCredentials([
-              sshUserPrivateKey(credentialsId: "hg-od01.corp.pingidentity.com-jira-user", keyFileVariable: 'gerritKeyPath')
+              sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]){
               sh  """
                   yarn run generate-release-notes ${env.RELEASE_VERSION} ${env.JIRA_CREDS}
                   git add *notes.json */release-notes/*.md
                   git commit -m 'UI Library Release notes ${env.RELEASE_VERSION}'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
               """
               sleep 100 //wait 10 seconds for git push to trigger build job
 
@@ -50,10 +50,10 @@ pipeline {
                   git config --global user.name 'devtools-jenkins'
 
                   git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}' git push origin ${params.RELEASE_BRANCH}
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
                   git tag ${env.GIT_RELEASE_TAG}
-                  GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${gerritKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+                  GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
                 """
             }
           }
