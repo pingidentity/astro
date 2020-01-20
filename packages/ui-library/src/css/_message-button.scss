@@ -5,6 +5,10 @@ button.message-button {
     line-height: 1em;
     transition: all 0.1s ease-out;
 
+    .button__text {
+        display: inline-flex;
+    }
+
     // !important used to override disabled button styling
 
     &--loading,
@@ -50,10 +54,10 @@ button.message-button {
         border-color: $color-critical-red !important;
         color: $color-critical-red !important;
     }
-    .icon {
+    .iconComponent {
         font-size: 16px !important;
 
-        .icon__content {
+        &__content {
             line-height: 1em;
         }
     }

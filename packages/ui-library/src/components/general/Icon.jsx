@@ -160,7 +160,7 @@ const Icon = withFocusOutline(({
                 data-id={`${dataId}-graphic`}
             />
             {(children || title) && (
-                <div className="icon__content" data-id={`${dataId}-content`}>
+                <div className={`${baseClassName}__content`} data-id={`${dataId}-content`}>
                     {title && <label>{title}</label>}
                     {children}
                 </div>
