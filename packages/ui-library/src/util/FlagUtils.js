@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 
 export const allFlags = [
-    "pass-value",
+    "expandable-row-ordering",
     // v4 flags
     "p-stateful",
     "use-portal",
     "add-button-margin",
     "expandable-row-class",
-    "expandable-row-ordering",
     "fix-discard-button",
     "fixed-messages-constants",
     "true-default",
