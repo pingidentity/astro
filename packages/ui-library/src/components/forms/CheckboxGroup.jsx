@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import FormCheckbox from "./FormCheckbox";
-import InputRow from "../layout/InputRow";
 import { valueProp } from "../../util/PropUtils";
 
 /**
@@ -96,7 +95,7 @@ const CheckboxGroup = ({
                 const checked = isChecked(option, values);
 
                 return (
-                    <InputRow data-id="" className={className} key={option.value}>
+                    <div className={className} key={option.value}>
                         <FormCheckbox
                             checked={checked}
                             data-id={setCheckboxDataId
@@ -118,7 +117,7 @@ const CheckboxGroup = ({
                                 {option.content}
                             </div>
                         }
-                    </InputRow>
+                    </div>
                 );
             })}
         </div>
