@@ -191,6 +191,7 @@ export default class FileDrop extends Component {
         const fileSelected = !!fileName;
         const classNames = {
             "input-filedrop--hover": hovered,
+            "input-filedrop--selected": fileSelected,
             "input-filedrop--replace-content": replaceContent,
         };
         const text = { ...this.defaultStrings, ...this.props.strings };
@@ -202,9 +203,7 @@ export default class FileDrop extends Component {
             <Element
                 data-id={dataId}
                 ref={ (df) => this.dropFile = df }
-                className={classnames("input-filedrop", className, classNames, {
-                    "input-filedrop--replace-content": replaceContent,
-                })}
+                className={classnames("input-filedrop", className, classNames)}
             >
 
                 {customContent &&
