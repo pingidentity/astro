@@ -1,13 +1,12 @@
 
-button.message-button {
+button.message-button,
+button.message-button.inline {
     display: inline-flex;
     align-items: center;
     line-height: 1em;
     transition: all 0.1s ease-out;
 
-    .button__text {
-        display: inline-flex;
-    }
+
 
     // !important used to override disabled button styling
 
@@ -17,6 +16,15 @@ button.message-button {
         padding-left: $spacing-md;
         padding-right: $spacing-md;
         opacity: 1 !important;
+    }
+
+
+    //This is weird, but helps center the icons
+    &--success,
+    &--error {
+        .button__text {
+            display: inline-flex;
+        }
     }
 
     &--loading {
