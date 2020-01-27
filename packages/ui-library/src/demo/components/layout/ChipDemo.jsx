@@ -26,7 +26,7 @@ export default function ChipDemo() {
             </InputRow>
             <InputRow>
                 <Chip
-                    color={chipColors.LIGHTGREY}
+                    color={chipColors.DARKBLUE}
                 >
                     <Icon
                         iconName="user"
