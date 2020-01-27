@@ -67,6 +67,14 @@
         }
     }
 
+    &--color-dark-blue {
+        @include chip ($color-white, $color-midnight);
+
+        &.chip-component--outline {
+            @include chipOutline($color-midnight);
+        }
+    }
+
     &--full-width {
         display: block;
     }

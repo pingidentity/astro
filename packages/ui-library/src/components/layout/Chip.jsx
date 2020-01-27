@@ -21,6 +21,8 @@ export const chipColors = {
     WHITE: "white",
     /** red */
     RED: "red",
+    /** Midnight */
+    DARKBLUE: "dark-blue"
 };
 
 /**
