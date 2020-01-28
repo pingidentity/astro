@@ -21,7 +21,7 @@ const DisabledDemo = () => (
         </Disabled>
         <br />
         <br />
-        <Disabled disabledText="disabled" placement="bottom">
+        <Disabled hintText="disabled" placement="bottom">
             this is disabled text with a helphint
             this is disabled text with a helphint
             this is disabled text with a helphint
