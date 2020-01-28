@@ -44,7 +44,7 @@ import { noop } from "underscore";
  *     Description to display below the label.
  * @param {boolean} [disabled=false]
  *     If radio buttons are disabled.
- * @param {string} [groupName]
+ * @param {string} groupName
  *     Name of the radio group.
  * @param {FormRadioGroup~RadioGroupItem[]} items
  *     Array of RadioGroupItem objects to render.
