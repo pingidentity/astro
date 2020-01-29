@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { sizes as paddingSizes } from "../layout/Padding";
 import classnames from "classnames";
 
+export { default as FlexItem } from "./FlexItem";
+
 /**
  * @enum {string}
  * @alias FlexRow.alignments
