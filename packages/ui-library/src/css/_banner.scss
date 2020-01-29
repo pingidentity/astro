@@ -1,0 +1,53 @@
+.banner {
+    @include text-body;
+    position: relative;
+    display: inline-flex;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid $color-rabbit-fur;
+
+    &--fullwidth {
+        display: flex;
+    }
+}
+
+.banner__icon {
+    padding-right: 10px;
+}
+
+.banner__content {
+    padding-right: 25px;
+    flex-grow: 1;
+}
+
+.banner__title {
+    @include break-word;
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-strong-neutral-10;
+}
+
+
+.banner__text {
+    @include break-word;
+}
+
+.banner__button {
+    margin-right: 40px;
+    &.primary {
+        background-color: #7093a8;
+        &:hover {
+            background-color: #84a8bd;
+        }
+    }
+    &.banner__button--left-sm {
+        margin-right: 10px;
+    }
+}
+
+.banner__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
