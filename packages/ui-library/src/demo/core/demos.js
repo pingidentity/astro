@@ -527,6 +527,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_FlexRowDemo.jsx.html"
                     },
                     {
+                        label: "Flex Item",
+                        demo: require("../components/layout/FlexItemDemo"),
+                        pathToDoc: "components/layout/FlexItem.jsx",
+                        pathToSource: "components_layout_FlexItem.jsx.html",
+                        pathToDemoSource: "demo_components_layout_FlexItemDemo.jsx.html"
+                    },
+                    {
                         label: "Input Row",
                         demo: require("../components/layout/InputRowDemo"),
                         pathToDoc: "components/layout/InputRow.jsx",

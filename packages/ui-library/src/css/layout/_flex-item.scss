@@ -1,0 +1,12 @@
+.flex-item {
+    &--force-end {
+        margin-left: auto;
+    }
+    &--force-start {
+        margin-right: auto;
+    }
+    &--force-center {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
