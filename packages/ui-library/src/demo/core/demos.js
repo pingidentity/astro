@@ -961,6 +961,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_InlineMessageDemo.jsx.html"
                     },
                     {
+                        label: "Banner",
+                        demo: require("../components/general/BannerDemo"),
+                        pathToDoc: "components/general/Banner.jsx",
+                        pathToSource: "components_general_Banner.jsx.html",
+                        pathToDemoSource: "demo_components_general_BannerDemo.jsx.html"
+                    },
+                    {
                         label: "Messages",
                         demo: require("../components/general/MessagesDemo"),
                         pathToDoc: "components/general/Messages.jsx",
