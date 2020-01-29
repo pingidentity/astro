@@ -1,7 +1,7 @@
 import React from "react";
 import Disabled from "ui-library/lib/components/layout/Disabled";
-import Button from "../../../components/buttons/Button";
-import FormCheckbox from "./../../../components/forms/FormCheckbox";
+import Button from "ui-library/lib/components/buttons/Button";
+import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
 
 /**
