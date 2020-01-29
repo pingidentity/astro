@@ -175,7 +175,8 @@ export default class ColumnChart extends React.Component {
 
         const data = {
             color: [...this.props.legend].reverse()[this.state.selected.y.index].color,
-            label: this.state.selected.y.label,
+            x: this.state.selected.x,
+            y: this.state.selected.y,
             value: this.props.data
                 .find(o => o.id === this.state.selected.x.label).data
                 .find(o => o.id === this.state.selected.y.label).value
