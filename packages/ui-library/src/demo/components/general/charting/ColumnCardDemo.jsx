@@ -94,7 +94,8 @@ class ColumnCardDemo extends React.Component {
                                 legend={legend}
                                 renderTooltip={(props, LegendItem) => (
                                     <LegendItem
-                                        {...props}
+                                        color={props.color}
+                                        label={props.y.label}
                                         value={`$${props.value}`}
                                     />
                                 )}
