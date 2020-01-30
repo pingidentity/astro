@@ -1407,6 +1407,13 @@ module.exports = [
                         icon: "details"
                     },
                     {
+                        label: "Branding",
+                        demo: require("../../templates/Branding"),
+                        pathToSource: "templates_Branding.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
                         label: "Certificate Management",
                         demo: require("../../templates/CertificateManagement"),
                         pathToSource: "templates_CertificateManagement.jsx.html",
