@@ -86,7 +86,7 @@ class CalendarDemo extends React.Component {
 
                 <br /><br />
 
-                <Calendar data-id="calendar-4"
+                <Calendar data-id="calendar-default-value"
                     closeOnSelect={true}
                     computableFormat="x"
                     labelText="Internally managed state"

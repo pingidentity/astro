@@ -1,15 +1,16 @@
 stages:
   - build-ci-image
   - test
+  - backstop
 
 
 build_ci_image:
   stage: build-ci-image
   # This was causing issues where some builds would fail to find the proper Docker hash.
   # It should be added back in at some point.
-  # only:
-  #   changes:
-  #     - Dockerfile
+  only:
+    changes:
+      - Dockerfile
   script:
     - docker build --pull --tag docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0 ./shared/docker
     - docker push docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
@@ -18,14 +19,26 @@ build_ci_image:
 
 test:
   stage: test
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
   tags:
     - platform-build-docker
+  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
   script:
     - yarn global add lerna
     - lerna bootstrap
     - lerna run lint
     - lerna run coverage-ci
     - lerna run pack
-    - lerna run backstop-ci
 
+backstop:
+  stage: backstop
+  tags:
+    - platform-build-docker
+  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
+  only:
+    refs:
+      - master
+      - merge_requests # This makes this job run in a detached pipeline
+  script:
+    - yarn global add lerna
+    - lerna bootstrap
+    - lerna run backstop-ci

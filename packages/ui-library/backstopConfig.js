@@ -22,7 +22,7 @@ const transformTestProps = baseUrl => ({
 }) => ({
     label: `${label}${sublabel && "__"}${sublabel}`,
     ...scenarioDefaults,
-    url: `http://${baseUrl}:8085/#/?selectedSection=${sanitizeLabel(section)}&selectedNode=${sanitizeLabel(label)}&root=${sanitizeLabel(root)}`,
+    url: `http://${baseUrl}/#/?selectedSection=${sanitizeLabel(section)}&selectedNode=${sanitizeLabel(label)}&root=${sanitizeLabel(root)}`,
     ...properties
 });
 
@@ -44,12 +44,14 @@ const getTests = baseUrl => (path = "", tests = []) => {
 };
 
 const skippedDemos = [
+    "Calendar",
     "Checkbox",
     "Documentation",
     "DashboardLayout",
     "DonutCard",
     "EllipsisLoader",
     "HeatmapCard",
+    "LineChart",
     "PageSpinner",
     "Spinner",
     "TimeZone"
@@ -81,10 +83,11 @@ const generateBaseDemoTests = ({
     if (skippedDemos.includes(id)) {
         return [];
     }
+
     return children === undefined
         ? [{
             label,
-            url: `http://${baseUrl}:8085/#/?selectedSection=${section || id}&selectedNode=${id}&root=${root}`,
+            url: `http://${baseUrl}/#/?selectedSection=${section || id}&selectedNode=${id}&root=${root}`,
             selectors: [
                 root === "Templates" ? ".demo-item" : ".output"
             ],
@@ -97,10 +100,10 @@ const generateBaseDemoTests = ({
         })(children);
 });
 
-const generateConfig = environment => {
+const generateConfig = (environment, port) => {
     // Set the URL based on whether this is a local run, since we use the Backstop Docker
     // option locally and just run directly from our own Gitlab Docker image in CI.
-    const baseUrl = environment === "local" ? "host.docker.internal" : "localhost";
+    const baseUrl = `${environment === "local" ? "host.docker.internal" : "localhost"}:${port}`;
 
     const baseTests = generateBaseDemoTests({ baseUrl })(demos);
 
