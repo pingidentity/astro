@@ -94,7 +94,6 @@ class FileInputDemo extends React.Component {
                     />
                 </InputRow>
 
-
                 <p>
                     With error state
                 </p>
@@ -161,6 +160,23 @@ class FileInputDemo extends React.Component {
                         onRemove={this._handleRemove2}
                         status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
                         selectedTitle="Certificate"
+                    />
+                </InputRow>
+
+                <p>
+                    disabled
+                </p>
+                <InputRow>
+                    <FileInput
+                        accept={["text/csv", "image/jpeg", "image/png", "pdf"]}
+                        fileName={this.state.selectedFile}
+                        onValidateFile={this._handleFileValidation}
+                        onValueChange={this._handleChange}
+                        onRemove={this._handleRemove}
+                        status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
+                        selectedTitle="Certificate"
+                        error={errorTypes.WARNING}
+                        disabled={true}
                     />
                 </InputRow>
                 <InputRow>

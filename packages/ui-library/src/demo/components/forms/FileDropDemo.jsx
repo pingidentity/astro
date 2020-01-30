@@ -52,6 +52,24 @@ class FileDropDemo extends React.Component {
                     fileName={this.state.selectedFile}
                     accept={["text/csv", "image/jpeg", "image/png", ".pdf"]}
                 />
+                <p>
+                    disabled:&nbsp;
+                    {this.state.fileStatus === null && (
+                        <i>no file selected</i>
+                    )}
+                    {this.state.fileStatus === true && "file selected"}
+                    {this.state.fileStatus === false && (
+                        <strong>File type not accepted</strong>
+                    )}
+                </p>
+                <FileDrop
+                    onValueChange={this._handleChange}
+                    onRemove={this._handleRemove}
+                    onValidateFile={this._handleFileValidation}
+                    fileName={this.state.selectedFile}
+                    accept={["text/csv", "image/jpeg", "image/png", ".pdf"]}
+                    disabled={true}
+                />
             </div>
         );
     }
