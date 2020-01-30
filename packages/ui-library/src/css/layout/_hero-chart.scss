@@ -92,9 +92,7 @@
     }
 
     &__bottom-chart {
-        .recharts-tooltip-wrapper {
-            margin-top: 8px;
-        }
+        margin-top: $spacing-xs;
     }
 
     &__rocker {

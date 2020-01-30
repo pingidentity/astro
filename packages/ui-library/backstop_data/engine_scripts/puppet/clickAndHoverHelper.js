@@ -3,6 +3,7 @@ module.exports = async (page, scenario) => {
   const clickSelector = scenario.clickSelectors || scenario.clickSelector;
   const keyPressSelector = scenario.keyPressSelectors || scenario.keyPressSelector;
   const scrollToSelector = scenario.scrollToSelector;
+  const hideSelector = scenario.hideSelectors || scenario.hideSelector;
   const postInteractionWait = scenario.postInteractionWait; // selector [str] | ms [int]
   const interactions = scenario.interactions;
 
@@ -49,5 +50,21 @@ module.exports = async (page, scenario) => {
     await page.evaluate(scrollToSelector => {
       document.querySelector(scrollToSelector).scrollIntoView();
     }, scrollToSelector);
+  }
+
+  if (hideSelector) {
+    for (const hideSelectorIndex of [].concat(hideSelector)) {
+      await page.waitFor(hideSelectorIndex);
+      await page.evaluate(sel => {
+        const elem = document.querySelector(sel);
+        const { parentNode } = elem;
+        parentNode.removeChild(elem);
+
+        const removedNode = document.createElement("div");
+        removedNode.appendChild(document.createTextNode("Removed by Backstop"));
+
+        parentNode.appendChild(removedNode);
+      }, hideSelectorIndex);
+    }
   }
 };

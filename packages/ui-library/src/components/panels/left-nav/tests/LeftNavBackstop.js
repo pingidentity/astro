@@ -7,6 +7,7 @@ const flows = [
     {
         "sublabel": "legacy",
         "clickSelector": "div[data-id='legacy']",
+        postInteractionWait: 250 // Wait for CSS transition
     },
     {
         "sublabel": "remove-top-content",

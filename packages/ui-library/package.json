@@ -179,9 +179,9 @@
     "generate-template-dictionary": "node ./generate-template-dictionary",
     "check-licenses": "license-checker --production --excludePackages '@pingone/net@0.1.3' --onlyAllow 'MIT;BSD-3-Clause;Apache-2.0;BSD-2-Clause;ISC;Public Domain'",
     "lint": "yarn run jslint && yarn run stylelint",
-    "backstop-ci": "rm -rf ./backstop.json && (http-server ./build --p 8085 & SERVER_ID=$! && node ./runBackstopTests.js --ci && kill -9 $SERVER_ID)",
-    "backstop-approve": "yarn run pack && (http-server ./build --p 8085 & SERVER_ID=$! && node ./runBackstopTests.js --approve && kill -9 $SERVER_ID)",
-    "backstop-test": "rm -rf ./backstop.json && yarn run pack && (http-server ./build --p 8085 & SERVER_ID=$! && node ./runBackstopTests.js && kill -9 $SERVER_ID)",
+    "backstop-ci": "mkdir build-doc && rm -rf ./backstop.json && node ./runBackstopTests.js --ci",
+    "backstop-approve": "rm -rf ./backstop.json && node ./runBackstopTests.js --approve",
+    "backstop-test": "rm -rf ./backstop.json && node ./runBackstopTests.js",
     "append-version": "node ../../append_current_version.js"
   },
   "csrfDataSourceApiConfig": {}
