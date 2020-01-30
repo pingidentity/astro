@@ -39,6 +39,8 @@ import _ from "underscore";
  *     An optional array of the the allowed file mime types or file extensions.
  * @param {string} [className]
  *     Optional CSS classname(s) applied to top-level container.
+ * @param {boolean} [disabled=false]
+ *     Input will will not function when true.
  * @param {node} [fileName]
  *     The name of the currently selected file.
  * @param {FileDrop~onRemove} [onRemove]
@@ -65,6 +67,7 @@ export default class FileDrop extends Component {
         "data-id": PropTypes.string,
         accept: PropTypes.array,
         className: PropTypes.string,
+        disabled: PropTypes.bool,
         fileName: PropTypes.node,
         replaceContent: PropTypes.bool,
         onRemove: PropTypes.func,
@@ -80,6 +83,7 @@ export default class FileDrop extends Component {
         onValidateFile: _.noop,
         onValueChange: _.noop,
         strings: {},
+        disabled: false,
     };
 
     state = {
@@ -108,6 +112,14 @@ export default class FileDrop extends Component {
     }
 
     _onDrop = (e) => {
+        const {
+            disabled
+        } = this.props;
+
+        if (disabled) {
+            return;
+        }
+
         this._preventDefaults(e);
 
         const file = e.dataTransfer && e.dataTransfer.files ? e.dataTransfer.files[0] : null;
@@ -134,6 +146,12 @@ export default class FileDrop extends Component {
     }
 
     _handleRemove = () => {
+        const {
+            disabled
+        } = this.props;
+        if (disabled) {
+            return;
+        }
         this.fileInput.value = null;
         this.props.onRemove();
     }
@@ -186,6 +204,7 @@ export default class FileDrop extends Component {
             hovered,
             replaceContent,
             onRemove,
+            disabled,
         } = this.props;
 
         const fileSelected = !!fileName;
@@ -193,6 +212,7 @@ export default class FileDrop extends Component {
             "input-filedrop--hover": hovered,
             "input-filedrop--selected": fileSelected,
             "input-filedrop--replace-content": replaceContent,
+            "input-filedrop--disabled": disabled,
         };
         const text = { ...this.defaultStrings, ...this.props.strings };
         const customContent = typeof renderContent === "function";
@@ -264,6 +284,7 @@ export default class FileDrop extends Component {
                         data-id={`${dataId}-input`}
                         accept={accept}
                         type="file"
+                        disabled={disabled}
                         onChange={this._onInputChange}
                         ref={ (fi) => this.fileInput = fi }
                     />

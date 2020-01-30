@@ -41,6 +41,13 @@
             z-index: -1;
         }
     }
+
+    &--disabled {
+        opacity: 0.5;
+        label {
+            cursor: default;
+        }
+    }
 }
 
 .input-filedrop--hover,
@@ -91,6 +98,9 @@
 
     .input-filedrop:hover .input-filedrop__upload-text & {
         text-decoration: underline;
+    }
+    .input-filedrop--disabled:hover .input-filedrop__upload-text & {
+        text-decoration: none;
     }
 }
 

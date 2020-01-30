@@ -37,6 +37,9 @@ import FlexRow, { alignments } from "../layout/FlexRow";
  *     Optional CSS classname(s) applied to top-level container.
  * @param {string} [data-id="file-drop"]
  *     Defines the "data-id" for top-level HTML container.
+ * @param {boolean} [disabled=false]
+ *     Buttons will not function when true.
+ *     FileDrop will will not function when true.
  * @param {string} [error=error]
  *    The type of error to display on the input (error = red, warning = yellow)
  * @param {node} [fileName]
@@ -80,6 +83,7 @@ class FileInput extends Component {
         buttonLabel: PropTypes.string,
         buttonNode: PropTypes.node,
         className: PropTypes.string,
+        disabled: PropTypes.bool,
         fileName: PropTypes.node,
         fileData: PropTypes.node,
         onRemove: PropTypes.func,
@@ -103,6 +107,7 @@ class FileInput extends Component {
         strings: {},
         noBorder: false,
         required: false,
+        disabled: false,
     }
 
     defaultStrings = {
@@ -131,6 +136,7 @@ class FileInput extends Component {
             strings,
             status,
             error,
+            disabled,
         } = this.props;
         const text = { ...this.defaultStrings, ...strings };
 
@@ -188,6 +194,7 @@ class FileInput extends Component {
                                 : <Button
                                     data-id="remove-button"
                                     className="input-file__remove-btn"
+                                    disabled={disabled}
                                     onClick={this._handleRemove(inputRef)}
                                     inline
                                 >
@@ -201,6 +208,7 @@ class FileInput extends Component {
                     <MessageButton
                         status={status ? status.type : "default" }
                         data-id="select-button"
+                        disabled={disabled}
                         onClick={this._clickButton(inputRef)}
                         label={status ? status.label : text.select}
                         inline
@@ -216,7 +224,8 @@ class FileInput extends Component {
     render () {
         const {
             fileName,
-            fullWidth
+            fullWidth,
+            disabled,
         } = this.props;
 
         const classNames = classnames(this.props.className, "input-file", {
@@ -229,6 +238,7 @@ class FileInput extends Component {
                 {...this.props}
                 renderContent={this._renderContent}
                 className={classNames}
+                disabled={disabled}
             />
 
         );

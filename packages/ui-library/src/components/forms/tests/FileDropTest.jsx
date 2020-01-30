@@ -147,7 +147,6 @@ describe("FileDrop", function () {
         expect(onValueChange).toHaveBeenCalled();
     });
 
-
     it("Triggers onValueChange on drop", function () {
         const onValueChange = jest.fn();
         const preventDefault = jest.fn();
@@ -201,6 +200,50 @@ describe("FileDrop", function () {
         expect(onValueChange).not.toHaveBeenCalled();
         component._onDrop(evtObj);
         expect(onValueChange).toHaveBeenCalledWith(fileObj, evtObj);
+    });
+
+    it("When disabled does not Triggers onValueChange on drop", function () {
+        const onValueChange = jest.fn();
+        const preventDefault = jest.fn();
+        const stopPropagation = jest.fn();
+        const fileObj = {
+            name: "myfile.jpg",
+            type: "image/jpg"
+        };
+        const evtObj = {
+            target: {
+                files: [fileObj],
+            },
+            dataTransfer: {
+                files: [fileObj],
+            },
+            preventDefault: preventDefault,
+            stopPropagation: stopPropagation
+        };
+        const component = getComponent({
+            accept: ["jpg"],
+            onValueChange: onValueChange,
+            disabled: true
+        });
+
+        expect(onValueChange).not.toHaveBeenCalled();
+        component._onDrop(evtObj);
+        expect(onValueChange).not.toHaveBeenCalled();
+    });
+
+    it("When disabled remove link onRemove will not be called", function () {
+        const customFileName = "myfilename.jpg";
+        const onRemove = jest.fn();
+        const component = getComponent({
+            fileName: customFileName,
+            strings: customStrings,
+            disabled: true,
+            onRemove: onRemove
+        });
+
+        component._handleRemove();
+
+        expect(onRemove).not.toHaveBeenCalled();
     });
 
     it("Hightlights the drop area on hover", function () {
