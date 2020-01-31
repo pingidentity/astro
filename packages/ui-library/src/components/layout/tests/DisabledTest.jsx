@@ -11,6 +11,15 @@ describe("Disabled", () => {
     });
 
     it("renders the disabled component with a helpHint", () => {
+        const component = shallow(<Disabled hintText="hello">this is text</Disabled>);
+
+        const disabledHelpHint = component.find(HelpHint);
+
+
+        expect(disabledHelpHint.exists()).toEqual(true);
+    });
+
+    it("renders the disabled component with a helpHint using disabledText", () => {
         const component = shallow(<Disabled disabledText="hello">this is text</Disabled>);
 
         const disabledHelpHint = component.find(HelpHint);
