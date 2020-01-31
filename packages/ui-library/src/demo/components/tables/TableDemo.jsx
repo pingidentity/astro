@@ -10,6 +10,7 @@ import InputRow from "../../../components/layout/InputRow";
 import HR from "ui-library/lib/components/general/HR";
 import Button from "ui-library/lib/components/buttons/Button";
 import FieldSet from "ui-library/lib/components/layout/FieldSet";
+import ScrollBox from "ui-library/lib/components/layout/ScrollBox";
 
 /**
 * @name TableDemo
@@ -26,6 +27,70 @@ const TableDemo = () => {
             ""
         ],
         body: [
+            [
+                "tom",
+                "25",
+                "denver",
+                <Button iconName="edit" inline />
+            ],
+            [
+                "jane",
+                "36",
+                <span>breckenridge<br />montrose</span>,
+                <Button iconName="edit" inline />
+            ],
+            [
+                "roy",
+                "19",
+                "arvada",
+                <Button iconName="edit" inline />
+            ]
+        ]
+    };
+    const scrollMockData = {
+        head: [
+            "name",
+            "age",
+            "city",
+            ""
+        ],
+        body: [
+            [
+                "tom",
+                "25",
+                "denver",
+                <Button iconName="edit" inline />
+            ],
+            [
+                "jane",
+                "36",
+                <span>breckenridge<br />montrose</span>,
+                <Button iconName="edit" inline />
+            ],
+            [
+                "roy",
+                "19",
+                "arvada",
+                <Button iconName="edit" inline />
+            ],
+            [
+                "tom",
+                "25",
+                "denver",
+                <Button iconName="edit" inline />
+            ],
+            [
+                "jane",
+                "36",
+                <span>breckenridge<br />montrose</span>,
+                <Button iconName="edit" inline />
+            ],
+            [
+                "roy",
+                "19",
+                "arvada",
+                <Button iconName="edit" inline />
+            ],
             [
                 "tom",
                 "25",
@@ -172,6 +237,18 @@ const TableDemo = () => {
                         bodyData={mockData.body}
                     />
                 </FieldSet>
+            </InputRow>
+
+            <InputRow>
+                <FormLabel detached value="Full width table in scroll box with fixed header" />
+                <ScrollBox height={150}>
+                    <Table
+                        fixedHeader
+                        width="full-fixed"
+                        headData={scrollMockData.head}
+                        bodyData={scrollMockData.body}
+                    />
+                </ScrollBox>
             </InputRow>
         </div>
     );

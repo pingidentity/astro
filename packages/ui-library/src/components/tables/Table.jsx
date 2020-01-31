@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
+import { measureWidth } from "../../util/DOMUtils";
 
 const cellClasses = {
     "TOP": "grid__cell--top",
@@ -94,6 +95,17 @@ const verticalAlignments = {
  *      An array of objects with data in key value pairs.
  * @param {array} [headData]
  *      An array of values for the table head.
+ * @param {bool} [fixedHeader=false]
+ *      Fixes the table header. Place table component inside scrollbox component with set height to enable fixedHeader.
+ * @example
+ *         <ScrollBox height={150}>
+ *            <Table
+ *               fixedHeader
+ *               width="full-fixed"
+ *               headData={scrollMockData.head}
+ *               bodyData={scrollMockData.body}
+ *            />
+ *          </ScrollBox>
  * @param {bool} [fullWidth]
  *          Whether or not the table is full-width.
  * @param {Table.tableLayouts} [layout]
@@ -124,7 +136,41 @@ const verticalAlignments = {
 const getHeadData = data => _.reduce(data, (headings, item) => _.union(headings, _.keys(item)), null);
 const getBodyData = (data, headData) => _.map(data, item => _.map(headData, heading => item[heading]));
 
-const renderColumnHeadings = (columnStyling = [], headData) => _.map(headData, (heading, idx) => {
+const renderColumnHeading = (
+    alignment,
+    widthStyles,
+    useEllipsis,
+    heading,
+    idx,
+) => (
+    <th
+        className={classnames(
+            `grid__column--alignment-${alignment}`
+        )}
+        key={heading || idx}
+        style={
+            useEllipsis
+                ? {}
+                : widthStyles
+                
+        }
+    >
+        {useEllipsis ? <div
+            className="grid__column-content--overflow-ellipsis"
+            style={widthStyles}
+            title={heading}
+        >{heading}</div>
+            : heading}
+    </th>
+);
+
+
+const getColumnWidth = (idx, fixedHeader) => {
+    const elem = fixedHeader.children[idx];
+    return measureWidth(elem);
+};
+
+const renderColumnHeadings = (columnStyling = [], headData, fixedHeader) => _.map(headData, (heading, idx) => {
     const {
         alignment = columnAlignments.LEFT,
         contentOverflow = overflowOptions.WRAP,
@@ -132,35 +178,18 @@ const renderColumnHeadings = (columnStyling = [], headData) => _.map(headData, (
         maxWidth,
         width,
     } = columnStyling[idx] || {};
+    
+
     const useEllipsis = contentOverflow === overflowOptions.ELLIPSIS;
-    return (
-        <th
-            className={classnames(
-                `grid__column--alignment-${alignment}`
-            )}
-            key={heading || idx}
-            style={
-                useEllipsis
-                    ? {}
-                    : {
-                        ...maxWidth !== undefined ? { maxWidth } : {},
-                        ...minWidth !== undefined ? { minWidth } : {},
-                        ...width !== undefined ? { width } : {},
-                    }
-            }
-        >
-            {useEllipsis ? <div
-                className="grid__column-content--overflow-ellipsis"
-                style={{
-                    ...maxWidth !== undefined ? { maxWidth } : {},
-                    ...minWidth !== undefined ? { minWidth } : {},
-                    ...width !== undefined ? { width } : {},
-                }}
-                title={heading}
-            >{heading}</div>
-                : heading}
-        </th>
-    );
+    const colWidth = fixedHeader ? getColumnWidth(idx, fixedHeader) : width;
+
+    const widthStyles = {
+        ...maxWidth !== undefined ? { maxWidth } : {},
+        ...minWidth !== undefined ? { minWidth } : {},
+        ...colWidth !== undefined ? { width: colWidth } : {},
+    };
+    return renderColumnHeading(alignment, widthStyles, useEllipsis, heading, idx);
+
 });
 
 class TableCell extends Component {
@@ -266,73 +295,111 @@ class TableCell extends Component {
     }
 }
 
-const Table = props => {
-    const {
-        cellRenderers,
-        className,
-        columnStyling,
-        data = [],
-        "data-id": dataId,
-        fullWidth,
-        layout,
-        lines,
-        rowLabels,
-        headData = getHeadData(data),
-        bodyData = getBodyData(data, headData),
-        verticalAlignment,
-        width
-    } = props;
+class Table extends React.Component {
+    state = {
+        loaded: !this.props.fixedHeader,
+    };
 
-    const classes = classnames("grid", className, {
-        "grid--no-lines": !lines,
-        "width-full": fullWidth || width === tableWidths.FULL_FIXED,
-        "grid--full-width": width === tableWidths.FULL,
-        "grid--fixed": layout === tableLayouts.FIXED,
+    shadowHeader= null;
 
-    });
+    componentDidMount() {
+        if (this.props.fixedHeader)
+        { window.addEventListener("DOMContentLoaded", () => {
+            this.setState({ loaded: true });
+        });
 
-    // if we're showing labels along the left side of the table, make sure the first column heading is empty
-    if (rowLabels && headData) {
-        if (headData.length < bodyData[0].length) {
-            headData.splice(0,"");
-        } else {
-            headData[0] = "";
-        }
+        window.addEventListener("resize", () => {
+            this.forceUpdate();
+        });}
     }
 
-    return (
-        <table className={classes} data-id={dataId}>
-            {headData &&
-                <thead>
-                    {/* Have to have fallback for heading as a key, since header cells might be empty */}
-                    <tr>{renderColumnHeadings(columnStyling, headData)}</tr>
-                </thead>
-            }
-            <tbody>
-                {_.map(bodyData, (item, index) => (
-                    <tr key={index}>
-                        {_.map(item, (entry, entryIndex) => {
-                            const cellValue = cellRenderers[entryIndex]
-                                ? cellRenderers[entryIndex](entry, item)
-                                : entry;
+    render() {
+        const {
+            cellRenderers,
+            className,
+            columnStyling,
+            data = [],
+            "data-id": dataId,
+            fixedHeader,
+            fullWidth,
+            layout,
+            lines,
+            rowLabels,
+            headData = getHeadData(data),
+            bodyData = getBodyData(data, headData),
+            verticalAlignment,
+            width
+        } = this.props;
 
-                            return (
-                                <TableCell
-                                    isLabel={rowLabels && entryIndex === 0}
-                                    key={`${index}-${entryIndex}`}
-                                    verticalAlignment={verticalAlignment}
-                                    {...columnStyling[entryIndex] || {}}
-                                >
-                                    {cellValue}
-                                </TableCell>
-                            );
-                        })}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    );
-};
+        const classes = classnames("grid", className, {
+            "grid--no-lines": !lines,
+            "width-full": fullWidth || width === tableWidths.FULL_FIXED,
+            "grid--full-width": width === tableWidths.FULL,
+            "grid--fixed": layout === tableLayouts.FIXED,
+
+        });
+
+        // if we're showing labels along the left side of the table, make sure the first column heading is empty
+        if (rowLabels && headData) {
+            if (headData.length < bodyData[0].length) {
+                headData.splice(0,"");
+            } else {
+                headData[0] = "";
+            }
+        }
+
+        return (
+            <table className={classes} data-id={dataId}>
+                {headData &&
+                    <thead>
+                        { this.state.loaded &&
+                            <tr className={classnames(fixedHeader ? "tr--fixed-header" : null)}>
+                                {renderColumnHeadings(columnStyling, headData, fixedHeader
+                                    ? this.shadowHeader
+                                    : false
+                                )}
+                            </tr>
+                        }
+
+                        { /* Render invisible headings to set widths of cols if fixed */ }
+                        {fixedHeader && (
+                            <tr
+                                style={{
+                                    visibility: "none",
+                                }}
+                                ref={ref => this.shadowHeader = ref}
+                            >
+                                {renderColumnHeadings(columnStyling, headData, false)}
+                            </tr>
+                        )}
+                    </thead>
+                }
+                <tbody>
+                    {_.map(bodyData, (item, index) => (
+                        <tr key={index}>
+                            {_.map(item, (entry, entryIndex) => {
+                                const cellValue = cellRenderers[entryIndex]
+                                    ? cellRenderers[entryIndex](entry, item)
+                                    : entry;
+
+                                return (
+                                    <TableCell
+                                        isLabel={rowLabels && entryIndex === 0}
+                                        key={`${index}-${entryIndex}`}
+                                        verticalAlignment={verticalAlignment}
+                                        {...columnStyling[entryIndex] || {}}
+                                    >
+                                        {cellValue}
+                                    </TableCell>
+                                );
+                            })}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        );
+    }
+}
 
 Table.propTypes = {
     bodyData: PropTypes.arrayOf(
@@ -359,6 +426,7 @@ Table.propTypes = {
     ),
     data: PropTypes.array,
     "data-id": PropTypes.string,
+    fixedHeader: PropTypes.bool,
     fullWidth: PropTypes.bool,
     headData: PropTypes.array,
     lines: PropTypes.bool,
@@ -371,6 +439,7 @@ Table.defaultProps = {
     cellRenderers: [],
     columnStyling: [],
     "data-id": "table",
+    fixedHeader: false,
     fullWidth: false,
     lines: true,
     rowLabels: false,
