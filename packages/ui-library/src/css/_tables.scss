@@ -211,6 +211,12 @@ table {
                     animation: fade-in 0.1s;
                 }
             }
+            &.tr--fixed-header {
+                position: absolute;
+                background-color: #fff;
+                z-index: $zindex__elevated;
+                word-break: break-word;
+            }
         }
         thead {
             th {

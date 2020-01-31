@@ -334,4 +334,71 @@ describe("Table", function () {
         );
         expect(component.exists()).toEqual(true);
     });
+
+    it("renders with fixedHeader class if fixedHeader prop is used", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                fixedHeader
+            />
+        );
+
+        component.instance().setState({ loaded: true });
+        expect(component.find(".tr--fixed-header").exists()).toBeTruthy();
+    });
+
+    it("does not render the fixedHeader class if fixedHeader prop is not used", () => {
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+            />
+        );
+        expect(component.find(".tr--fixed-header").exists()).toBeFalsy();
+    });
+
+    it("sets loaded state to true if fixedHeader prop is true", () => {
+        // Create our own "addEventListener" fxn
+        const map = {};
+        window.addEventListener = jest.fn((event, cb) => {
+            map[event] = cb;
+        });
+
+        const component = shallow(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                fixedHeader
+            />
+        );
+
+        // Fire synthetic event
+        map.DOMContentLoaded();
+
+        expect(component.state("loaded")).toEqual(true);
+    });
+
+    it("runs forceUpdate when called", () => {
+        const map = {};
+        window.addEventListener = jest.fn((event, cb) => {
+            map[event] = cb;
+        });
+
+        Table.prototype.forceUpdate = jest.fn();
+
+        mount(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                fixedHeader
+            />
+        );
+
+        // Fire synthetic event
+        map.resize();
+
+        expect(Table.prototype.forceUpdate).toHaveBeenCalled();
+    });
+
 });
