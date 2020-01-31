@@ -401,6 +401,16 @@
     content: $icon-key; 
   }
 }
+.icon-key-three {
+  &:before {
+    content: $icon-key-three; 
+  }
+}
+.icon-key-two {
+  &:before {
+    content: $icon-key-two; 
+  }
+}
 .icon-left {
   &:before {
     content: $icon-left; 
