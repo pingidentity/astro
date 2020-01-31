@@ -10,8 +10,9 @@ import HelpHint from "../tooltips/HelpHint";
  *      To define the base "data-id" value for the top-level HTML container.
  * @param {string} [hintText]
  *     Text for the help hint will be rendered when the same button has a the prop disabled set to true.
-  * @param {string} [disabledText]
+ * @param {string} [disabledText]
  *     Text for the help hint will be rendered when the same button has a the prop disabled set to true.
+ *     This will be deprecated soon. Use hintText instead.
  * @param {HelpHint.Placements} [placement]
  *     How to place the help hint.
  *
