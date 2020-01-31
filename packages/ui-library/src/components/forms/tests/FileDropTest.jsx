@@ -133,7 +133,7 @@ describe("FileDrop", function () {
 
         expect(onValueChange).not.toHaveBeenCalled();
         component._onInputChange(evtObj);
-        expect(onValueChange).toHaveBeenCalledWith(evtObj.target.files[0], evtObj);
+        expect(onValueChange).toHaveBeenCalledWith(evtObj.target.files[0], evtObj, { remove: component._handleRemove });
 
     });
 
@@ -163,7 +163,7 @@ describe("FileDrop", function () {
                 files: [fileObj],
             },
             preventDefault: preventDefault,
-            stopPropagation: stopPropagation
+            stopPropagation: stopPropagation,
         };
         const component = getComponent({
             onValueChange: onValueChange
@@ -171,7 +171,7 @@ describe("FileDrop", function () {
 
         expect(onValueChange).not.toHaveBeenCalled();
         component._onDrop(evtObj);
-        expect(onValueChange).toHaveBeenCalledWith(fileObj, evtObj);
+        expect(onValueChange).toHaveBeenCalledWith(fileObj, evtObj, { remove: component._handleRemove });
     });
 
     it("Triggers onValueChange on drop with valid file extension", function () {
@@ -199,7 +199,7 @@ describe("FileDrop", function () {
 
         expect(onValueChange).not.toHaveBeenCalled();
         component._onDrop(evtObj);
-        expect(onValueChange).toHaveBeenCalledWith(fileObj, evtObj);
+        expect(onValueChange).toHaveBeenCalledWith(fileObj, evtObj, { remove: component._handleRemove });
     });
 
     it("When disabled does not Triggers onValueChange on drop", function () {
@@ -301,5 +301,36 @@ describe("FileDrop", function () {
         expect(callback).not.toBeCalled();
         component.find("button[data-id='the-button']").simulate("click");
         expect(callback).toBeCalled();
+    });
+
+    it("check that remove is called", function () {
+        const onValueChange = (file, e, { remove }) => {
+            remove();
+        };
+        const onRemove = jest.fn();
+        const preventDefault = jest.fn();
+        const stopPropagation = jest.fn();
+        const fileObj = {
+            name: "myfile.jpg",
+            type: "image/jpg"
+        };
+        const evtObj = {
+            target: {
+                files: [fileObj],
+            },
+            dataTransfer: {
+                files: [fileObj],
+            },
+            preventDefault: preventDefault,
+            stopPropagation: stopPropagation
+        };
+        const component = getComponent({
+            accept: ["jpg"],
+            onValueChange: onValueChange,
+            onRemove: onRemove
+        });
+
+        component._onDrop(evtObj);
+        expect(onRemove).toHaveBeenCalled();
     });
 });

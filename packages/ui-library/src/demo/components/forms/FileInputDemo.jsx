@@ -75,6 +75,31 @@ class FileInputDemo extends React.Component {
         this.setState({ loading: !this.state.loading });
     }
 
+    _handleChange4 = (file, e, { remove } ) => {
+        if (file.name === "text.txt") {
+            this.setState({
+                selectedFile4: file.name,
+                fileStatus: "file selected"
+            });
+        } else {
+            remove();
+        }
+    }
+
+    _handleFileValidation4 = (valid) => {
+        if (!valid) {
+            this.setState({
+                fileStatus: "invalid file type selected"
+            });
+        }
+    }
+
+    _handleRemove4 = () => {
+        this.setState({
+            selectedFile4: null,
+        });
+    }
+
     render() {
         return (
             <div>
@@ -93,6 +118,26 @@ class FileInputDemo extends React.Component {
                         error={errorTypes.WARNING}
                     />
                 </InputRow>
+
+                <p>
+                    status: {this.state.fileStatus}
+                    <br />
+                    Passing in  "remove" as a parameter in handleChange and calling remove() will auto remove
+                    file if it is invalid. Check demo docs and see _handleChange4.
+                </p>
+                <InputRow>
+                    <FileInput
+                        accept={["text/csv", "image/jpeg", "image/png", "pdf", "text/*"]}
+                        fileName={this.state.selectedFile4}
+                        onValidateFile={this._handleFileValidation4}
+                        onValueChange={this._handleChange4}
+                        onRemove={this._handleRemove4}
+                        status={ this.state.loading ? { type: "loading", label: "Loading..." } :null }
+                        selectedTitle="Certificate"
+                        error={errorTypes.WARNING}
+                    />
+                </InputRow>
+
 
                 <p>
                     With error state

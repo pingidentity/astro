@@ -138,7 +138,7 @@ export default class FileDrop extends Component {
         // component duplicated the functionality of <input> accept and did it very badly.
         this.props.onValidateFile(true, file, e);
 
-        this.props.onValueChange(file, e);
+        this.props.onValueChange(file, e, { remove: this._handleRemove });
     }
 
     _clickInput = () => {
