@@ -338,6 +338,7 @@ export default class SelectionListStateless extends React.Component {
                     groupName: name || `input-selection-list-items-${dataId}`,
                     stacked: true,
                     disabled,
+                    queryString,
                     onValueChange,
                     options: visibleOptions,
                     value: selectedItemIds,

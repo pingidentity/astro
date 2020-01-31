@@ -88,7 +88,9 @@ class SelectionListDemo extends React.Component {
         multiSelectIds3: [1, 7],
         multiSelectIds4: [1, 3],
 
-        required: false
+        required: false,
+
+        queryString: ""
     };
 
     _onSingleSelectChange = index => selectedItemId => {
@@ -118,11 +120,26 @@ class SelectionListDemo extends React.Component {
         return matchedItems;
     };
 
+    _addSearch = (queryString) => {
+        const ellipsis = queryString.length > 10 ? queryString.substring(0, 10) + "..." : queryString;
+        this.setState({
+            queryString: ellipsis
+        });
+    };
+
+
     _toggleRequired = () => {
         this.setState({
             required: !this.state.required
         });
     };
+
+    renderButton = () => {
+        return (
+            <Button inline type="primary" label={`add "${this.state.queryString}"`} iconName="add"/>
+        );
+    }
+
 
     render() {
         return (
@@ -148,12 +165,38 @@ class SelectionListDemo extends React.Component {
                     optionsNote="noted"
                     data-id="radio-demo-1"
                     type={SelectionList.ListType.SINGLE}
-                    items={SINGLE_SELECT_ITEMS2}
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
+                    items={SINGLE_SELECT_ITEMS2}
+                    searchPlaceholder="Search..."
+                    onValueChange={this._onSingleSelectChange(2)}
+                />
+
+                <hr />
+
+                <h3>
+                    Single-Selection with renderProp add button.
+                    <br />
+                    <br />
+                    To show new button do a search with no results.
+                </h3>
+                <SelectionList
+                    optionsNote="noted"
+                    data-id="radio-demo-2"
+                    type={SelectionList.ListType.SINGLE}
+                    selectedItemIds={this.state.singleSelectId2}
+                    showSearchBox={true}
+                    items={SINGLE_SELECT_ITEMS2}
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange(2)}
                     requiredText={this.state.required ? "Select at least one" : ""}
+                    onSearch={this._addSearch}
+                    renderList={(props, ListComponents) => (
+                        <div>
+                            <ListComponents {...props} />
+                            { props.options.length === 0 ? this.renderButton() : null}
+                        </div>
+                    )}
                 />
 
                 <hr />
@@ -166,7 +209,7 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.singleSelectId3}
                 </p>
                 <SelectionList
-                    data-id="radio-demo-2"
+                    data-id="radio-demo-3"
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId3}
@@ -192,7 +235,7 @@ class SelectionListDemo extends React.Component {
                     onToggle={function () {}}>
 
                     <SelectionList
-                        data-id="radio-demo-3"
+                        data-id="radio-demo-4"
                         type={SelectionList.ListType.SINGLE}
                         items={SINGLE_SELECT_ITEMS}
                         selectedItemIds={this.state.singleSelectId1}

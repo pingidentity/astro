@@ -9,6 +9,9 @@ import FormRadioGroup from "../../FormRadioGroup";
 import FormLabel from "../../FormLabel";
 import KeyboardUtils from "../../../../util/KeyboardUtils.js";
 import StateContainer from "../../../utils/StateContainer";
+import { mount } from "enzyme";
+import Button from "../../../buttons/Button";
+
 
 window.__DEV__ = true;
 
@@ -692,5 +695,40 @@ describe("SelectionList v4", function () {
 
         expect(onValueChange).toHaveBeenCalled();
     });
+
+    it("renders a button with the renderprop when there is no matching item in the search", () => {
+        const component = mount(
+            <SelectionList
+                items={[
+                    { name: "Long Tran", id: 1 },
+                    { name: "Nam Tu", id: 2 },
+                    { name: "Viem Ong", id: 3 },
+                    { name: "Chien Cao", id: 4 },
+                    { name: "Thuy Vu", id: 5 },
+                    { name: "Quy Bui", id: 6 },
+                    { name: "Nam Duong", id: 7 },
+                    { name: "Thai Tran", id: 8 },
+                    { name: "Phu Le", id: 9 }
+                ]}
+                onValueChange={jest.fn()}
+                requiredText="YOU NEED ME"
+                showSearchBox
+                type={SelectionList.ListType.SINGLE}
+                renderList={(props, ListComponents) => (
+                    <div>
+                        <ListComponents {...props} />
+                        {
+                            props.options.length === 0
+                                ? <Button inline type="primary" label={"add"} iconName="add"/>
+                                : null
+                        }
+                    </div>
+                )}
+            />
+        );
+        component.find(`input[data-id="searchBox-input"]`).simulate("change", { target: { value: "hello" } });
+        expect(component.find(".button").exists()).toBeTruthy();
+    });
+
 
 });
