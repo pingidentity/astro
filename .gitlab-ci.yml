@@ -34,10 +34,6 @@ backstop:
   tags:
     - platform-build-docker
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
-  only:
-    refs:
-      - master
-      - merge_requests # This makes this job run in a detached pipeline
   script:
     - yarn global add lerna
     - lerna bootstrap
