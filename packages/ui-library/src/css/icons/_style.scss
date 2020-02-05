@@ -596,6 +596,11 @@
     content: $icon-settings; 
   }
 }
+.icon-shield-arrow {
+  &:before {
+    content: $icon-shield-arrow; 
+  }
+}
 .icon-shield {
   &:before {
     content: $icon-shield; 
