@@ -17,7 +17,7 @@ var Calendar = require("./../../../components/calendars/Calendar");
 
 class ExpandedRow extends React.Component {
     state = {
-        selectedDate: moment(new Date()) //current date
+        selectedDate: moment(new Date(2021, 1, 20))
     };
 
     _handleEnrollmentDateChanged = (newValue) => {
