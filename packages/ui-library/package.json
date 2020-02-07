@@ -169,7 +169,7 @@
     "coverage": "jest --coverage && node ./clean-after.js",
     "coverage-ci": "jest --coverage --ci && node ./clean-after.js",
     "test": "jest --silent",
-    "verify": "yarn run jslint && yarn run stylelint && yarn run test",
+    "verify": "yarn run jslint && yarn run stylelint && yarn run coverage",
     "integration": "wdio wdio.conf.js",
     "postintegration": "yarn run clean-processes",
     "clean-screenshots": "node ./clean-screenshot.js",
