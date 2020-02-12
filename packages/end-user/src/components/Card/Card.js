@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 const CardTypes = {
-    SLIM: 'slim'
+    SLIM: 'slim',
 };
-
 
 /**
  * @class Card
@@ -50,8 +49,6 @@ const Card = ({
     );
 };
 
-Card.CardTypes = CardTypes;
-
 Card.propTypes = {
     className: PropTypes.string,
     width: PropTypes.oneOf(['large']),
@@ -60,5 +57,7 @@ Card.propTypes = {
     header: PropTypes.node,
     'data-id': PropTypes.string,
 };
+
+Card.CardTypes = CardTypes;
 
 export default Card;

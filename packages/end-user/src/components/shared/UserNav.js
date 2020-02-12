@@ -8,7 +8,7 @@ import Link from './Link';
 
 const MENU_OPEN_CLASSNAME = 'menu-open';
 
-export const imageSizes = { 
+export const imageSizes = {
     SMALL: "small",
     MEDIUM: "medium",
     LARGE: "large",
