@@ -90,5 +90,6 @@ TextBlock.overflowTypes = overflowTypes;
 TextBlock.alignments = alignments;
 TextBlock.sizes = sizes;
 TextBlock.margins = margins;
+
 export default TextBlock;
 

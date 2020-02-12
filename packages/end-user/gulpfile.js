@@ -5,10 +5,9 @@ const debug = require('gulp-debug');
 
 const paths = {
     dist: 'dist',
-}
+};
 
 gulp.task('delete-dist', () => del([paths.dist]));
-
 
 gulp.task('transpile-components', () =>
     gulp

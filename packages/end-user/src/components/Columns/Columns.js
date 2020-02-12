@@ -68,4 +68,5 @@ Column.defaultProps = {
 Columns.Column = Column;
 Columns.alignments = alignments;
 Columns.widths = widths;
+
 export default Columns;
