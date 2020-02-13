@@ -68,8 +68,12 @@ import { defaultRender, getClickableA11yProps } from "../../util/PropUtils";
  *     />
  */
 
-const renderOptionNodes = (options, onValueChange, iconName) => _.map(options, (value = "", key) => {
-    const handleClick = _.partial(onValueChange, key);
+const renderOptionNodes = (options, onValueChange, iconName, onToggle) => _.map(options, (value = "", key) => {
+    const handleClick = () => {
+        onValueChange(key);
+        onToggle(false);
+    };
+
     return (
         <a
             data-id={`option-${_.isString(value) ? value.toLowerCase().replace(/[^0-9a-z]/gi, "") : key}`}
@@ -105,15 +109,20 @@ const DropDownButton = ({
             inline: true,
             label
         }, Button)}
-        onOpen={onToggle && _.partial(onToggle, false)}
-        onClose={onToggle && _.partial(onToggle, true)}
+        onOpen={_.partial(onToggle, false)}
+        onClose={_.partial(onToggle, true)}
         open={open}
     >
-        <div className="dropdown-button__options" data-id="options">
-            {title &&
-                <div className="dropdown-button__title" data-id="options-title">{title}</div>}
-            {renderOptionNodes(options, onValueChange, iconName)}
-        </div>
+        {({ onToggle: onPopoverToggle }) => (
+            <div className="dropdown-button__options" data-id="options">
+                {title &&
+                    <div className="dropdown-button__title" data-id="options-title">{title}</div>}
+                {renderOptionNodes(
+                    options, onValueChange, iconName, open === undefined ? onPopoverToggle : _.noop
+                    // checking for undefined open to preserve previous functionality
+                )}
+            </div>
+        )}
     </Popover>
 );
 
@@ -136,6 +145,7 @@ DropDownButton.propTypes = {
 DropDownButton.defaultProps = {
     "data-id": "drop-down-button",
     iconName: "plus",
+    onToggle: _.noop,
     onValueChange: _.noop,
     renderButton: defaultRender,
 };

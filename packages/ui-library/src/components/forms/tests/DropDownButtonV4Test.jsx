@@ -240,6 +240,10 @@ describe("DropDownButton", function () {
 
         //make sure callback was triggered
         expect(callback).toBeCalled();
+
+        // since we're letting the component control its own state, expect it to have closed menu
+        const stillMenus = TestUtils.scryRenderedDOMNodesWithDataId(dropDownButtonComponent, "menu");
+        expect(stillMenus.length).toEqual(0);
     });
 
     it("unregister global listeners on unmount", function () {
@@ -342,4 +346,43 @@ describe("DropDownButton", function () {
 
         expect(component.find(".dropdown-button__options").exists()).toEqual(true);
     });
+
+    it("renderButton renders correct content and passes toggle function", () => {
+        const renderButton = ({
+            onClick
+        }) => <button data-id="render-button" onClick={onClick} />;
+
+        const component = TestUtils.renderInWrapper(
+            <DropDownButton
+                label="Add"
+                options={{
+                    one: "one"
+                }}
+                renderButton={renderButton}
+            />
+        );
+
+        const button = TestUtils.findRenderedDOMNodeWithDataId(component, "render-button");
+        expect(button).toBeTruthy();
+
+        ReactTestUtils.Simulate.click(button);
+
+        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "option-one");
+        expect(option).toBeTruthy();
+    });
+
+    it("renders the key as the data-id when the value is not a string", () => {
+        const component = mount(
+            <DropDownButton
+                label="Label"
+                options={{
+                    one: <span>not a string</span>
+                }}
+                open
+            />
+        );
+
+        expect(component.find("a[data-id='option-one']").exists()).toEqual(true);
+    });
+
 });

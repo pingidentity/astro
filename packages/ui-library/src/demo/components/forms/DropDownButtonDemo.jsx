@@ -26,9 +26,9 @@ export default class DropDownButtonDemo extends Component {
     };
 
     _onToggle = () => {
-        this.setState({
-            open: !this.state.open
-        });
+        this.setState(state => ({
+            open: !state.open
+        }));
     };
 
     _onValueChange = (selectedLabel) =>
