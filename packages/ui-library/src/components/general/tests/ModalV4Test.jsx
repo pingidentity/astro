@@ -61,14 +61,17 @@ describe("ModalTest v4", function () {
     });
 
     it("no close event on unmount when component was never opened", function () {
-        const component = getComponent({ expanded: false });
+        const component = shallow (
+            <Modal expanded={false} />
+        );
+
         const close = jest.fn();
         const open = jest.fn();
         document.body.addEventListener("ui-library-modal-open", open);
         document.body.addEventListener("ui-library-modal-close", close);
 
         expect(open).not.toBeCalled();
-        component.componentWillUnmount();
+        component.unmount();
         expect(close).not.toBeCalled();
     });
 
@@ -278,7 +281,7 @@ describe("ModalTest v4", function () {
                 </BodyTitle>
             );
 
-        const TitleNode = component.find(".body-title");
+        const TitleNode = component.find(".modal-body__title");
 
         expect(TitleNode.text()).toEqual(titleText);
     });
@@ -286,6 +289,7 @@ describe("ModalTest v4", function () {
     it("should render an Unsaved Changes warning popup with ALERT type", function() {
         const component = shallow(<Modal.UnsavedWarningPopup />);
 
-        expect(component.find(Modal).first().props().type).toBe(Modal.Type.ALERT);
+        expect(component.prop("type")).toEqual("alert");
+
     });
 });
