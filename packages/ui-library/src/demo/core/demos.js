@@ -1247,11 +1247,11 @@ module.exports = [
                         }
                     },
                     {
-                        label: "Column Card",
-                        demo: require("../components/general/charting/ColumnCardDemo"),
-                        pathToDoc: "components/general/charting/ColumnCard.jsx",
-                        pathToSource: "components_general_charting_ColumnCard.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_ColumnCardDemo.jsx.html"
+                        label: "Column Chart",
+                        demo: require("../components/general/charting/ColumnChartDemo"),
+                        pathToDoc: "components/general/charting/ColumnChart.jsx",
+                        pathToSource: "components_general_charting_ColumnChart.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_ColumnChartDemo.jsx.html"
                     },
                     {
                         label: "Chart Wrapper",
