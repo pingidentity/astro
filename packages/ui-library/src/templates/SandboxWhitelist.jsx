@@ -108,6 +108,7 @@ export default class SandboxWhitelist extends Component {
                     >
                         <div />
                         <Button
+                            data-id={`remove-${id}`}
                             inline
                             iconName="minus"
                             onClick={this._removeFromList(id)}
@@ -157,6 +158,7 @@ export default class SandboxWhitelist extends Component {
                         <Popover
                             label={
                                 <Button
+                                    data-id="add-user-button"
                                     iconName="add"
                                     label="Add User"
                                     noSpacing

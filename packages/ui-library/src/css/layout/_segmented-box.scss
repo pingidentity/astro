@@ -65,3 +65,8 @@
 .popover-display .segmented-box--border {
     border: none;
 }
+
+// hack to make the Sandbox Whitelist template
+.popup-frame > .segmented-box {
+    margin: $spacing-sm;
+}
