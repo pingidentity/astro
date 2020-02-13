@@ -8,6 +8,7 @@ jest.dontMock("../../../tooltips/HelpHint");
 
 import StateContainer from "../../../utils/StateContainer";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
+import { mount } from "enzyme";
 
 describe("FormTextField v4", function () {
     const React = require("react"),
@@ -592,5 +593,20 @@ describe("FormTextField v4", function () {
 
         expect(handleReveal).not.toBeCalled();
     });
+
+    it("spaces do not clear the input", function () {
+        const value = "   ";
+        const component = mount(
+            <FormTextField
+                labelText="test label"
+                value={value}
+            />
+        );
+
+        expect(component.find(".value-entered").exists()).toBe(false);
+    });
+
+
+
 
 });
