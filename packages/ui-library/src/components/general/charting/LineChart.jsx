@@ -78,7 +78,7 @@ export default class LineChart extends React.Component {
         onClick: _.noop,
         onHoverDataPoint: _.noop,
         referenceLineColor: "#57A0EA",
-        referenceLabelColor: "#676D74",
+        referenceLabelColor: "#676e75",
         showHighlight: false,
         width: "100%",
     };
