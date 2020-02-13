@@ -38,6 +38,7 @@ export const chipTypes = {
     OUTLINE: "outline"
 };
 
+
 /**
 * @class Chip
 * @desc A small text "chip" with a background color.
@@ -48,11 +49,31 @@ export const chipTypes = {
 *     Class name(s) to add to the top-level container/div.
 * @param {Chip.chipColors} [color]
 *     The background color of the component.
+* @param {string || object} [color]
+*      An object that holds all of the styling information for the chip color.
+* @param {string} [color.background ]
+*     Changes the backgroundColor to whatever the user specifies.
+* @param {string} [color.text]
+*     Changes the text color to whatever the user specifies.
 * @param {Chip.chipTypes} [type]
 *     The type of the chip.
 * @param {boolean} [fullWidth=false]
 *     Whether the component takes up the full width of the container.
 */
+
+
+const getColor = ({ background, text } = {}) => {
+    if (background && text !== undefined) {
+        return {
+            backgroundColor: background,
+            color: text
+        };
+    } else {
+        return null;
+    }
+};
+
+const isValidColor = (color) => Object.values(chipColors).includes(color);
 
 function Chip({
     color,
@@ -64,6 +85,7 @@ function Chip({
 }) {
     return (
         <div
+            style={getColor(color)}
             className={
                 classnames(
                     className,
@@ -71,7 +93,7 @@ function Chip({
                         "chip-component": type !== chipTypes.COUNT,
                         "chip-component--condensed": type === chipTypes.CONDENSED,
                         "chip-component--outline": type === chipTypes.OUTLINE,
-                        [`chip-component--color-${color}`]: type !== chipTypes.COUNT,
+                        [`chip-component--color-${color}`]: type !== chipTypes.COUNT && isValidColor(color),
                         "chip-component--full-width": fullWidth,
                         "count": type === chipTypes.COUNT,
                     }
@@ -89,6 +111,13 @@ Chip.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
     fullWidth: PropTypes.bool,
+    color: PropTypes.oneOfType([
+        PropTypes.shape({
+            backgroundColor: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+        }),
+        PropTypes.oneOf(Object.values(chipColors))
+    ])
 };
 
 Chip.defaultProps = {

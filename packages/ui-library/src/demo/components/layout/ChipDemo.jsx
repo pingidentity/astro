@@ -26,7 +26,17 @@ export default function ChipDemo() {
             </InputRow>
             <InputRow>
                 <Chip
-                    color={chipColors.DARKBLUE}
+                    color={{
+                        background: "black",
+                        text: "gold",
+                    }}
+                >
+                    A chip with your own colors
+                </Chip>
+            </InputRow>
+            <InputRow>
+                <Chip
+                    color={chipColors.LIGHTGREY}
                 >
                     <Icon
                         iconName="user"
