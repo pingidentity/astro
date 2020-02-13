@@ -92,6 +92,7 @@ export default class ColumnChart extends React.Component {
             id: PropTypes.string,
             color: PropTypes.string
         })),
+        referenceLabelColor: PropTypes.string,
         referenceLineColor: PropTypes.string,
         renderTooltip: PropTypes.func,
         stacked: PropTypes.bool,
@@ -106,6 +107,7 @@ export default class ColumnChart extends React.Component {
         onClick: _.noop,
         onMouseOver: _.noop,
         onMouseOut: _.noop,
+        referenceLabelColor: "#676e75",
         referenceLineColor: "#57A0EA",
         renderTooltip: defaultRender,
         stacked: true,
@@ -113,7 +115,7 @@ export default class ColumnChart extends React.Component {
     };
 
     state = {
-        selected: null,
+        selected: { x: null, y: null },
     };
 
     _digestData = (data) =>
@@ -144,7 +146,7 @@ export default class ColumnChart extends React.Component {
     }
 
     _handleMouseOut = (value, index, e) => {
-        this.setState({ selected: null });
+        this.setState({ selected: { x: null, y: null } });
 
         this.props.onMouseOut(e);
     }
@@ -169,7 +171,7 @@ export default class ColumnChart extends React.Component {
     }
 
     _renderTooltip = () => {
-        if (!this.state.selected) {
+        if (!this.state.selected.y) {
             return;
         }
 
@@ -205,9 +207,9 @@ export default class ColumnChart extends React.Component {
         const emptyLines = [...Array.from({ length: 4 }, (v, i) => this.props.height / (4) * i), this.props.height];
 
         const {
-            x = {},
-            y = {},
-        } = this.state.selected || {};
+            x,
+            y,
+        } = this.state.selected;
 
         return (
             <>
@@ -256,7 +258,7 @@ export default class ColumnChart extends React.Component {
                                                     key={item.name}
                                                     className="column-chart__cell"
                                                     style={{
-                                                        stroke: x.label === item.name && y.label === id
+                                                        stroke: x && x.label === item.name && y.label === id
                                                             ? Color(color).lighten(0.5)
                                                             : color,
                                                         strokeWidth: "1px",
@@ -269,12 +271,12 @@ export default class ColumnChart extends React.Component {
                         }
                         {legend.length > 0 && !hasCustomState &&
                         <ReferenceLine
-                            x={this.state.selected ? this.state.selected.x.label : null}
-                            stroke="#57A0EA"
+                            x={this.state.selected.x ? this.state.selected.x.label : null}
+                            stroke={this.props.referenceLineColor}
                             label={{
                                 position: "top",
-                                value: this.state.selected ? this.state.selected.x.label : null,
-                                fill: this.props.referenceLineColor,
+                                value: this.state.selected.x ? this.state.selected.x.label : null,
+                                fill: this.props.referenceLabelColor,
                                 fontSize: 14
                             }}
                         />
