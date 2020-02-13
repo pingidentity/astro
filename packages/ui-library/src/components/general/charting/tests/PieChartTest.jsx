@@ -204,4 +204,10 @@ describe("PieChart", () => {
 
         expect(value.text()).toEqual("28");
     });
+
+    it("doesn't render center if there's data", () => {
+        const component = getComponent({ data: [] });
+
+        expect(component.find(".pie-chart__center-info").exists()).toEqual(false);
+    });
 });

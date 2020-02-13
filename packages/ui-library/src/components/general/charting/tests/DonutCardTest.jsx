@@ -1,30 +1,40 @@
 import React from "react";
+import _ from "underscore";
+import { shallow } from "enzyme";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";
-import _ from "underscore";
 import DonutCard from "../DonutCard";
 
 
 describe("DonutCard", function () {
 
-    const componentId = "donut-card";
+    const defaultProps = {
+        "data-id": "donut-card",
+        data: [
+            { id: "Enabled Users", value: 120543 , color: "#E12F51" },
+            { id: "Inactive Users", value: 51233 },
+            { id: "Disabled Users", value: 3000 },
+        ],
+        options: [
+            { label: "Current", value: "1" },
+            { label: "30 DAYS", value: "2" },
+            { label: "60 DAYS", value: "3" },
+            { label: "90 DAYS", value: "4" },
+        ]
+    };
+
+    const getPieChart = props => {
+        // Node props in Enzyme don't shallow mount on their own, so you have to
+        // do this malarkey.
+        const Wrapper = () => shallow(<DonutCard {...defaultProps} {...props}/>).prop("front");
+        const Chart = () => shallow(<Wrapper />).prop("chart");
+
+        return shallow(<Chart />);
+    };
 
     function getComponent (opts) {
-        const withDefaults = _.defaults(opts || {}, {
-            "data-id": componentId,
-            data: [
-                { id: "Enabled Users", value: 120543 , color: "#E12F51" },
-                { id: "Inactive Users", value: 51233 },
-                { id: "Disabled Users", value: 3000 },
-            ],
-            options: [
-                { label: "Current", value: "1" },
-                { label: "30 DAYS", value: "2" },
-                { label: "60 DAYS", value: "3" },
-                { label: "90 DAYS", value: "4" },
-            ]
-        });
+        const withDefaults = _.defaults(opts || {}, defaultProps);
 
         return ReactTestUtils.renderIntoDocument(<DonutCard {...withDefaults} />);
     }
@@ -51,57 +61,62 @@ describe("DonutCard", function () {
         const component = getComponent({
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "donut-card");
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
 
     it("renders a label and number", function () {
-        const component = getComponent({
-            label: "title",
-            value: 3
-        });
+        const chart = getPieChart({ label: "Title", value: "3" });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
+        const Center = () => chart.prop("centerValue");
 
-        expect(element.textContent).toEqual("3");
+        expect(shallow(<Center />).prop("children")).toEqual("3");
     });
 
     it("renders value correctly when greater than 1,000", function () {
-        const component = getComponent({
-            value: 1234
+        const component = getPieChart({
+            label: "Title",
+            value: "1234"
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
-        expect(element.textContent).toEqual("1.23k");
+        const Center = () => component.prop("centerValue");
+
+        expect(shallow(<Center />).prop("children")).toEqual("1.23k");
     });
 
     it("renders value correctly when greater than 10,000", function () {
-        const component = getComponent({
-            value: 12345
+        const component = getPieChart({
+            label: "Title",
+            value: "12345"
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
-        expect(element.textContent).toEqual("12.3k");
+        const Center = () => component.prop("centerValue");
+
+        expect(shallow(<Center />).prop("children")).toEqual("12.3k");
     });
 
     it("renders value correctly when greater than 100,000", function () {
-        const component = getComponent({
-            value: 123456
+        const component = getPieChart({
+            label: "Title",
+            value: "123456"
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
-        expect(element.textContent).toEqual("123k");
+        const Center = () => component.prop("centerValue");
+
+        expect(shallow(<Center />).prop("children")).toEqual("123k");
     });
 
     it("renders value correctly when than 1,000,000", function () {
-        const component = getComponent({
-            value: 1234567
+        const component = getPieChart({
+            label: "Title",
+            value: "1234567"
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
-        expect(element.textContent).toEqual("1.23m");
+        const Center = () => component.prop("centerValue");
+
+        expect(shallow(<Center />).prop("children")).toEqual("1.23m");
     });
 
     it("renders a path", function() {
@@ -113,17 +128,66 @@ describe("DonutCard", function () {
         expect(element).toBeDefined();
     });
 
-    it("populates the state on mouseover", function () {
-        const component = getComponent({});
+    it("calls onMouseOver function with correct arguments when mouse over happens", () => {
+        const onMouseOver = jest.fn();
+        const dataWithColors = [
+            { id: "Enabled Users", value: 120543, color: "#E12F51" },
+            { id: "Inactive Users", value: 51233, color: "#E12F52" },
+            { id: "Disabled Users", value: 3000, color: "#E12F513" },
+        ];
+        const chart = getPieChart({
+            data: dataWithColors,
+            onMouseOver
+        });
 
-        const e = {
-            preveventDefault: () => {}
-        };
 
-        component._mouseOver({
-            id: "test"
-        }, 0, e);
+        const fakeEvent = { preventDefault: () => {} };
 
-        expect(component.state.hoveredSection).toEqual("test");
+        chart.prop("onMouseOver")(dataWithColors[1], 1, fakeEvent);
+
+        expect(onMouseOver).toHaveBeenCalledWith(fakeEvent, dataWithColors[1]);
+    });
+
+    it("calls onMouseOut function with correct arguments when mouse out happens", () => {
+        const onMouseOut = jest.fn();
+        const dataWithColors = [
+            { id: "Enabled Users", value: 120543, color: "#E12F51" },
+            { id: "Inactive Users", value: 51233, color: "#E12F52" },
+            { id: "Disabled Users", value: 3000, color: "#E12F513" },
+        ];
+        const chart = getPieChart({
+            data: dataWithColors,
+            onMouseOut
+        });
+
+        const fakeEvent = { preventDefault: () => {} };
+
+        chart.prop("onMouseOut")(dataWithColors[1], 1, fakeEvent);
+
+        expect(onMouseOut).toHaveBeenCalledWith(fakeEvent, dataWithColors[1]);
+    });
+
+    it("renders selected cell with the proper styling", () => {
+        const component = getPieChart();
+
+        const renderCell = component.prop("renderCell");
+
+        const FakeComponent = () => renderCell({ selected: true, fill: "gross" }, props => <svg {...props} />);
+        const mountedFake = shallow(<FakeComponent />);
+
+        expect(mountedFake.prop("strokeWidth")).toEqual(2);
+        expect(mountedFake.prop("stroke")).toEqual("gross");
+    });
+
+    it("renders non-selected cells with proper styling", () => {
+        const component = getPieChart();
+
+        const renderCell = component.prop("renderCell");
+
+        const FakeComponent = () => renderCell({ selected: false, fill: "gross" }, props => <svg {...props} />);
+        const mountedFake = shallow(<FakeComponent />);
+
+        expect(mountedFake.prop("strokeWidth")).not.toEqual(2);
+        expect(mountedFake.prop("stroke")).not.toEqual("gross");
     });
 });
