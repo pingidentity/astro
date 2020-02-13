@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { PieChart, Pie, Cell } from "recharts";
+import { noop } from "underscore";
+import ChartTitle from "./ChartTitle";
+import ChartWrapper from "./ChartWrapper";
+import PieChart, { CenterLabel, CenterValue } from "./PieChart";
 import DashboardCard from "./Cards/DashboardCard";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
 import Colors from "../charting/Cards/dashboardColors";
-import FlexRow, { justifyOptions } from "../../layout/FlexRow";
 /**
  * @typedef {Object} DonutCard~data
  * @param {string} [id]
@@ -29,11 +31,11 @@ import FlexRow, { justifyOptions } from "../../layout/FlexRow";
  * @param {string} [title]
  *     Title of the card. Displayed at top of front and back.
  * @param {number} [value]
- *     The valuee shown on the front and back of the card.
+ *     The value shown on the front and back of the card.
  * @param {string} [errorMessage]
  *    When provided, the error message and icon will display in place of the regular front/back content.
  * @param {boolean} [loading=false]
- *    When true the splinner animation shows in place of the stats.
+ *    When true the spinner animation shows in place of the stats.
  * @param {function} [onMouseOver]
  *     Callback triggered when a chart data-point is hovered over.
  * @param {function} [onMouseOut]
@@ -41,7 +43,7 @@ import FlexRow, { justifyOptions } from "../../layout/FlexRow";
  * @param {object} [options]
  *     Provides the list of objects for the drop down.
  * @param {object} [selectedOption]
- *     Highlightes selected option.
+ *     Highlights selected option.
  * @param {object} [onSelect]
  *     Selects from the list of options.
  * @param {function} [onMakeDefault]
@@ -54,81 +56,47 @@ import FlexRow, { justifyOptions } from "../../layout/FlexRow";
  * */
 
 class DonutCard extends Component {
-    _getColors = (a) => {
-        let colors = [];
-        let defaultIndex = 0;
-
-        a.map(({ color }) => {
-            if (color) {
-                colors.push(color);
-            } else {
-                colors.push(Object.values(Colors.COLORS)[defaultIndex]);
-
-                /* istanbul ignore next */
-                if (defaultIndex === Object.values(Colors.COLORS).length - 1) {
-                    defaultIndex = 0;
-                } else {
-                    defaultIndex = defaultIndex + 1;
-                }
-            }
-        });
-
-        return colors;
-    }
-
     state = {
         statColor: null,
-        strokeColor: null,
-        strokeWidth: 1,
-        hoveredSection: null,
     }
 
-    _mouseOver = (value, index, e) => {
+    _getColors = data => {
+        return data.reduce(([colorsAcc, colorIndex], dataPoint) => {
+            const {
+                color = Colors.COLORS[Colors.KEYS[colorIndex]]
+            } = dataPoint;
+            return [
+                [
+                    ...colorsAcc,
+                    {
+                        ...dataPoint,
+                        color
+                    }
+                ],
+                dataPoint.color === undefined ? colorIndex + 1 : colorIndex
+            ];
+        }, [[], 0])[0];
+    }
 
-        if (this.props.onMouseOver) {
-            this.props.onMouseOver(e, value);
-        }
+    _mouseOver = colors => (value, index, e) => {
+        this.props.onMouseOver(e, value);
 
-        const color = this._getColors(this.props.data)[index];
+        const color = colors.find(({ id }) => id === value.id).color;
 
         this.setState({
-            hoveredSection: value.id,
             statColor: color,
-            strokeColor: color,
-            strokeWidth: 2,
         });
     };
 
-    /*
-    istanbul ignore next
-    */
     _mouseOut = (value, index, e) => {
-        if (this.props.onMouseOut) {
-            this.props.onMouseOut(e, value);
-        }
+        this.props.onMouseOut(e, value);
 
         this.setState({
-            hoveredSection: null,
             statColor: null,
-            strokeWidth: 1,
         });
     };
 
-    _renderCells = (data, colors) => {
-        return data.map(({ id }, key) => {
-            return this.state.hoveredSection === id ? (
-                <Cell
-                    className="donut-card__hovered" key={id}
-                    fill={colors[key]}
-                    style={{
-                        stroke: this.state.strokeColor,
-                        strokeWidth: this.state.strokeWidth,
-                    }}
-                />) : (<Cell key={id} fill={colors[key]} />);
-        });
-    };
-
-    _renderNumber = (value) => {
+    _getCenterValue = (value) => {
         if (value >= 1000000) {
             return `${Number.parseFloat((value / 1000000).toFixed(2))}m`;
         } else if (value >= 100000 ) {
@@ -153,12 +121,12 @@ class DonutCard extends Component {
                 data-id={`${this.props["data-id"]}-list`}
                 key="dashKey"
             >
-                {data.map(({ id, label, value }, key) => (
+                {data.map(({ color, id, label, value }) => (
                     <div key={id} className="donut-card__back-info">
                         <div className="dashboard-card__stat-row-label">{label || id}</div>
                         <div
                             className="dashboard-card__stat-row-number"
-                            style={{ color: this._getColors(data)[key] }}>
+                            style={{ color }}>
                             {this._renderCommas(value)}
                         </div>
                     </div>
@@ -168,65 +136,49 @@ class DonutCard extends Component {
     };
 
     render () {
-
         const classes = classnames(
             "donut-card",
             this.props.className,
         );
 
+        const dataWithColors = this._getColors(this.props.data);
+
         return (
             <DashboardCard {...this.props} data-id={this.props["data-id"]} className={classes}
-                front={(
-                    <div>
-                        <DashboardCardTitle
-                            className="dashboard-card__title--donut"
-                            title={this.props.title}
-                        />
-                        {!this.props.loading && (
-                            <FlexRow justify={justifyOptions.CENTER}>
-                                <FlexRow justify={justifyOptions.CENTER}>
-                                    <PieChart
-                                        key="chartKey"
-                                        height={202}
-                                        width={202}
-                                        data-id={`${this.props["data-id"]}-chart`}
-                                        className="donut-card__donut-chart"
-                                    >
-                                        <Pie
-                                            innerRadius={72}
-                                            outerRadius={100}
-                                            paddingAngle={1}
-                                            startAngle={90}
-                                            endAngle={450}
-                                            key="pieKey"
-                                            data={this.props.data}
-                                            dataKey="value"
-                                            nameKey="id"
-                                            onMouseOver={this._mouseOver}
-                                            onMouseOut={this._mouseOut}
-                                        >
-                                            {this._renderCells(this.props.data, this._getColors(this.props.data))}
-                                        </Pie>
-                                    </PieChart>
-                                </FlexRow>
-                                <div key="centerLabelKey" className="donut-card__center-info">
-                                    <div className="donut-card__center-label" style={{ color: this.state.statColor }}>
+                front={
+                    <ChartWrapper
+                        chart={!this.props.loading &&
+                            <PieChart
+                                centerLabel={
+                                    <CenterLabel color={this.state.statColor}>
                                         {this.props.label}
-                                    </div>
-                                    <div className="donut-card__center-number" style={{ color: this.state.statColor }}>
-                                        {this._renderNumber(this.props.value)}
-                                    </div>
-                                </div>
-                            </FlexRow>
-                        )}
-                    </div>
-                )}
+                                    </CenterLabel>
+                                }
+                                centerValue={
+                                    <CenterValue color={this.state.statColor}>
+                                        {this._getCenterValue(this.props.value)}
+                                    </CenterValue>
+                                }
+                                data={dataWithColors}
+                                onMouseOut={this._mouseOut}
+                                onMouseOver={this._mouseOver(dataWithColors)}
+                                renderCell={({ selected, ...props }, Cell) => (
+                                    <Cell
+                                        {...props}
+                                        {...selected ? { strokeWidth: 2, stroke: props.fill } : {}}
+                                    />
+                                )}
+                                showTooltips={false}
+                            />
+                        }
+                        title={<ChartTitle title={this.props.title} />}
+                    />
+                }
                 back={(
                     <div>
                         <DashboardCardTitle
                             backTitle
                             title={this.props.title}
-
                         />
                         {!this.props.loading && ([
                             <div key="backLineKey" className="donut-card__back-line" />,
@@ -238,7 +190,7 @@ class DonutCard extends Component {
                                 selectedOption={this.props.selectOption}
                                 onValueChange={this.props.onSelect}
                             />,
-                            this._renderBack(this.props.data)
+                            this._renderBack(dataWithColors)
                         ])}
                     </div>
                 )}
@@ -273,6 +225,8 @@ class DonutCard extends Component {
 
     static defaultProps = {
         "data-id": "donut-card",
+        onMouseOut: noop,
+        onMouseOver: noop,
     };
 }
 

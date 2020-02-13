@@ -2,15 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
     PieChart as Chart,
-    Pie,
     Cell,
+    Pie,
+    ResponsiveContainer,
     Tooltip,
 } from "recharts";
-import { noop } from "underscore";
+import { noop, isNumber, isString } from "underscore";
 import classnames from "classnames";
+import { defaultRender } from "../../../util/PropUtils";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem, alignments, valueSizes } from "./Legend";
-import { defaultRender } from "../../../util/PropUtils";
 
 export const PieChartTitle = ({ className, ...props }) => (
     <DashboardCardTitle
@@ -18,6 +19,15 @@ export const PieChartTitle = ({ className, ...props }) => (
         className={classnames(className, "dashboard-card__title--horizontal-bar-card")}
     />
 );
+
+export const CenterLabel = ({
+    children,
+    color,
+}) => <div className="pie-chart__center-label" style={{ color }}>{children}</div>;
+export const CenterValue = ({
+    children,
+    color,
+}) => <div className="pie-chart__center-value" style={{ color }}>{children}</div>;
 
 /**
  * @class MetricsTooltip
@@ -144,7 +154,7 @@ class PieChart extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        centerValue: PropTypes.number,
+        centerValue: PropTypes.oneOfType([PropTypes.number, PropTypes.node]),
         data: PropTypes.arrayOf(PropTypes.shape({
             label: PropTypes.string,
             color: PropTypes.string,
@@ -158,12 +168,14 @@ class PieChart extends React.Component {
         onClick: PropTypes.func,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
+        renderCell: PropTypes.func,
         renderTooltip: PropTypes.func,
         width: PropTypes.number
     };
 
     static defaultProps = {
         "data-id": "pie-chart",
+        centerLabel: "total",
         data: [],
         dataKey: "id",
         dataValue: "value",
@@ -171,6 +183,7 @@ class PieChart extends React.Component {
         onClick: noop,
         onMouseOver: noop,
         onMouseOut: noop,
+        renderCell: defaultRender,
         renderTooltip: defaultRender,
         width: 400
     };
@@ -190,9 +203,7 @@ class PieChart extends React.Component {
     /**
      * Sum of all values and [series] values in the data
      */
-    _getTotalValue = (data) =>
-        data.reduce((total, item) => total + this._getValue(item), 0);
-
+    _getTotalValue = (data) => data.length > 0 ? data.reduce((total, item) => total + this._getValue(item), 0) : null;
 
     /**
      * Transform data into a Recharts-readable style
@@ -206,6 +217,10 @@ class PieChart extends React.Component {
                 color: item.color,
             }
         ]), []);
+
+    _isPercentageValue = dimension => isString(dimension) && dimension.includes("%")
+
+    _isResponsive = () => this._isPercentageValue(this.props.height) || this._isPercentageValue(this.props.width);
 
     _mouseOver = (data, index, event) => {
         const element = this.props.data.find((item) => item.id === data.id);
@@ -235,18 +250,20 @@ class PieChart extends React.Component {
     }
 
     _renderCells = (data) => {
-        return data.map((item) => {
+        return data.map(({ id, color }) => {
+            const isSelected = this.state.selected && this.state.selected.id === id;
             const classNames = classnames("pie-chart__cell", {
-                "pie-chart__cell--hovered": this.state.selected && this.state.selected.id === item.id
+                "pie-chart__cell--hovered": this.state.selected && this.state.selected.id === id
             });
 
-            return (
-                <Cell
-                    key={"cell-" + item.id}
-                    fill={item.color}
-                    className={classNames}
-                />
-            );
+            return this.props.renderCell(
+                {
+                    key: `cell-${id}`,
+                    fill: color,
+                    className: classNames,
+                    selected: isSelected,
+                }
+                , Cell);
         });
     };
 
@@ -276,7 +293,7 @@ class PieChart extends React.Component {
 
     render() {
         const {
-            centerLabel = "Total",
+            centerLabel,
             data,
             centerValue = this._getTotalValue(data)
         } = this.props;
@@ -285,43 +302,59 @@ class PieChart extends React.Component {
 
         const classNames = classnames("pie-chart", this.props.className);
 
+        const chart = (
+            <Chart
+                width={this.props.width}
+                height={this.props.height}
+                className="pie-chart__graph"
+            >
+                <Pie
+                    data={chartData}
+                    nameKey={this.props.dataKey}
+                    dataKey={this.props.dataValue}
+                    paddingAngle={1}
+                    innerRadius="55%"
+                    legendType={this.props.legendType}
+                    onMouseOver={this._mouseOver}
+                    onMouseLeave={this._mouseOut}
+                    onClick={this._onClick}
+                >
+                    {this._renderCells(chartData)}
+                </Pie>
+                {this.props.showTooltips &&
+            <Tooltip
+                isAnimationActive={true}
+                content={this._renderTooltip}
+                cursor={false}
+            />
+                }
+            </Chart>
+        );
+
         return (
             <div data-id={this.props["data-id"]} className={classNames}>
+                {centerValue !== null &&
                 <div className="pie-chart__center-info">
-                    <div className="pie-chart__center-label">
-                        {centerLabel}
-                    </div>
-                    <div className="pie-chart__center-value">
-                        {centerValue}
-                    </div>
-                </div>
-
-                <Chart
-                    width={this.props.width}
-                    height={this.props.height}
-                    className="pie-chart__graph"
-                >
-                    <Pie
-                        data={chartData}
-                        nameKey={this.props.dataKey}
-                        dataKey={this.props.dataValue}
-                        paddingAngle={1}
-                        innerRadius="55%"
-                        legendType={this.props.legendType}
-                        onMouseOver={this._mouseOver}
-                        onMouseLeave={this._mouseOut}
-                        onClick={this._onClick}
-                    >
-                        {this._renderCells(chartData)}
-                    </Pie>
-                    {this.props.showTooltips &&
-                        <Tooltip
-                            isAnimationActive={true}
-                            content={this._renderTooltip}
-                            cursor={false}
-                        />
+                    {isString(centerLabel)
+                        ? <CenterLabel>{centerLabel}</CenterLabel>
+                        : centerLabel
                     }
-                </Chart>
+                    {isString(centerValue) || isNumber(centerValue)
+                        ? <CenterValue>{centerValue}</CenterValue>
+                        : centerValue
+                    }
+                </div>
+                }
+                {this._isResponsive()
+                    ? <ResponsiveContainer
+                        height={this.props.height}
+                        width={this.props.width}
+                    >
+                        {chart}
+                    </ResponsiveContainer>
+                    : chart
+                }
+
             </div>
         );
     }
