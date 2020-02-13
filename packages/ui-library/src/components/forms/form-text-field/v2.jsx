@@ -473,7 +473,7 @@ class Stateless extends React.Component {
                 "masking-controls": this.props.showReveal,
                 readonly: this.props.readOnly,
                 required: this.props.required,
-                "value-entered": this.props.value || this.props.value !== "",
+                "value-entered": this.props.value && `${this.props.value}`.trim() !== "",
                 "input-text--right-icon": this.props.iconRight,
                 "input-text--left-icon": this.props.iconLeft,
                 "input-text--right-arrow": this.props.withArrow,
