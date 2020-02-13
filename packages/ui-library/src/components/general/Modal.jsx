@@ -7,15 +7,13 @@ import EventUtils from "../../util/EventUtils.js";
 import CancelTooltip from "./../tooltips/CancelTooltip";
 import ButtonGroup from "../layout/ButtonGroup";
 import Button from "../buttons/Button";
-import If from "./If";
 import classnames from "classnames";
 import { Portal } from "react-portal";
 import { noop } from "underscore";
-import FlexRow, { justifyOptions } from "./../layout/FlexRow";
 import Icon, { iconSizes } from "./../general/Icon";
-import Text, { textTypes } from "./../general/Text";
-import Padding from "./../layout/Padding";
-import { flagsPropType } from "../../util/FlagUtils";
+import Text from "./../general/Text";
+import Padding, { sizes as paddingSizes } from "./../layout/Padding";
+import { hasFlag, flagsPropType } from "../../util/FlagUtils";
 
 /**
  * @enum {string}
@@ -77,7 +75,7 @@ var Type = {
  *          <p>Thank you for opening this modal.</p>
  *      </Modal>
  */
-class Modal extends React.Component {
+class BaseModal extends React.Component {
 
     static displayName = "Modal";
     static propTypes = {
@@ -97,7 +95,6 @@ class Modal extends React.Component {
         ]),
         cancelTooltip: PropTypes.object,
         children: PropTypes.node,
-        flags: flagsPropType,
     };
 
     static childContextTypes = {
@@ -238,6 +235,8 @@ class Modal extends React.Component {
             "wizard-modal": this.isWizard
         };
 
+        const showHeader = this.props.showHeader && this.props.type !== "dialog";
+
         const renderedModal = (
             <div
                 data-id={this.props["data-id"]}
@@ -256,19 +255,23 @@ class Modal extends React.Component {
                     onClick={this._handleBgClick}
                 >
                     <span data-id="modal-inner-content">
-                        <If test={this.props.showHeader && this.props.type !== "dialog"}>
+                        {showHeader &&
                             <div className="modal-header" data-id="modal-header">
                                 {this.props.modalTitle}
                                 {this.props.onClose && this._getCloseButton()}
                             </div>
-                        </If>
-                        <div className="modal-body" data-id="modal-body" style={this._toggleIeScrollHack()}>
-                            <If test={(!this.props.showHeader || this.props.type === "dialog") && this.props.onClose}>
-                                {this._getCloseButton()}
-                            </If>
-                            {
-                                this.props.bodyTitle && <BodyTitle>{this.props.bodyTitle}</BodyTitle>
+                        }
+
+                        <div
+                            className="modal-body"
+                            data-id="modal-body"
+                            style={this._toggleIeScrollHack()}
+                        >
+                            {!showHeader && this.props.onClose &&
+                                this._getCloseButton()
                             }
+
+                            {this.props.bodyTitle && <BodyTitle>{this.props.bodyTitle}</BodyTitle>}
                             {this.props.children}
                         </div>
                     </span>
@@ -276,64 +279,14 @@ class Modal extends React.Component {
             </div>
         );
 
-        const flaggedModal = (
-            <div
-                data-id={this.props["data-id"]}
-                ref="container"
-                key="modal"
-                className={classnames("modal", this.props.className, modalClasses)}>
-                <div
-                    className="modal-bg"
-                    data-id="modal-bg"
-                    onClick={this._handleBgClick}
-                />
-                <div
-                    className="modal-content"
-                    tabIndex="-1"
-                    data-id="modal-content"
-                    onClick={this._handleBgClick}
-                >
-                    <span data-id="modal-inner-content">
-                        {this.props.showHeader === false}
-                        {this.props.showCloseBttn === false}
-                        <div className={classnames("modal-body", "modal-body--flagged",
-                            this.props.className, modalClasses)}
-                        data-id="modal-body" style={this._toggleIeScrollHack()}>
-                            <If test={(!this.props.showHeader || this.props.type === "dialog") && this.props.onClose}>
-                                {this._getCloseButton()}
-                            </If>
-                            {
-                                this.props.bodyTitle &&
-                                <div>
-                                    <FlexRow justify={justifyOptions.CENTER}>
-                                        <Text type={textTypes.WARNING}>
-                                            <Icon iconSize={iconSizes.XXL} iconName="alert"/>
-                                        </Text>
-                                    </FlexRow>
-                                    <FlexRow justify={justifyOptions.CENTER}>
-                                        <Padding vertical={Padding.sizes.LG}>
-                                            <Text type={textTypes.PAGETITLE}>{this.props.bodyTitle}</Text>
-                                        </Padding>
-                                    </FlexRow>
-                                </div>
-                            }
-                            {this.props.children}
-                        </div>
-                    </span>
-                </div>
-            </div>
-        );
-
-        return this.props.flags.includes("new-alert-modal")
-            ? <Portal>{flaggedModal}</Portal>
-            : <Portal>{renderedModal}</Portal>;
+        return <Portal>{renderedModal}</Portal>;
     }
 }
 
 const BodyTitle = ({
     children,
 }) => (
-    <div className="body-title">
+    <div className="modal-body__title">
         { children }
     </div>
 );
@@ -342,8 +295,6 @@ BodyTitle.propTypes = {
 };
 
 
-Modal.Type = Type;
-Modal.BodyTitle = BodyTitle;
 
 const UnsavedWarningPopup = ({
     children,
@@ -354,14 +305,15 @@ const UnsavedWarningPopup = ({
     saveLabel,
     ...props
 }) => (
-    <Modal {...props} type={Modal.Type.ALERT}>
+    <BaseModal {...props} type={Type.ALERT}>
         <div>{children}</div>
         <ButtonGroup onCancel={onClose}>
             <Button type="cancel" onClick={onDiscard}>{discardLabel}</Button>
             <Button type="primary" onClick={onSave}>{saveLabel}</Button>
         </ButtonGroup>
-    </Modal>
+    </BaseModal>
 );
+
 
 UnsavedWarningPopup.propTypes = {
     bodyTitle: PropTypes.node,
@@ -380,7 +332,43 @@ UnsavedWarningPopup.defaultProps = {
     saveLabel: "Save",
 };
 
+function getNewAlertTitle(title) {
+    return (
+        <div>
+            <Text inline align={Text.alignments.CENTER} type={Text.textTypes.WARNING}>
+                <Icon iconSize={iconSizes.XXL} iconName="alert" title={title}/>
+            </Text>
+            <Padding top={paddingSizes.LG} bottom={paddingSizes.XS}>
+                { title }
+            </Padding>
+        </div>
+    );
+}
+const rendersNewModal = Component =>
+    class extends React.Component {
+        static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
+        render() {
+            return (
+                hasFlag(this, "new-alert-modal")
+                    ? <Component
+                        {...this.props}
+                        showHeader={false}
+                        bodyTitle={getNewAlertTitle(this.props.bodyTitle)}
+                        className={classnames(this.props.className, "modal--new-style")}
+                    />
+                    : <Component {...this.props} />
+            );
+        }
+    };
+
+const Modal = rendersNewModal(BaseModal);
+Modal.Type = Type;
+Modal.BodyTitle = BodyTitle;
 Modal.UnsavedWarningPopup = UnsavedWarningPopup;
+Modal.propTypes = { ...BaseModal.propTypes, flags: flagsPropType };
+Modal.defaultProps = { ...BaseModal.defaultProps, flags: [] };
+
+
 
 module.exports = Modal;
 

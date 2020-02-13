@@ -1,5 +1,6 @@
+$modal-radius: 4px;
+
 .modal {
-    $modal-radius: 4px;
     $default-top: 57px;
     $min-bottom: 40px;
     $header-height: 46px;
@@ -128,12 +129,6 @@
         overflow-y: auto;
         max-height: calc(100% - #{2 * $min-bottom});
 
-        &.modal-body--flagged.alert {
-            border-radius: $modal-radius;
-            margin-top: 30%;
-            padding: $spacing-xx $spacing-lg;
-        }
-
         border-radius: 0 0 $modal-radius $modal-radius;
 
         h2 {
@@ -160,6 +155,7 @@
             padding: 0;
             border: none;
         }
+
     }
 
     &.wizard-modal {
@@ -179,16 +175,6 @@
 
         .modal-content {
             width: $modal-width;
-        }
-
-        .modal-title,
-        .body-title {
-            font-size: 20px;
-            margin: 0 0 15px;
-        }
-
-        .body-title {
-            text-align: center;
         }
 
         .modal-body {
@@ -246,16 +232,6 @@
 
             border-radius: 0 0 $modal-radius $modal-radius;
 
-            .title,
-            .body-title {
-                color: $color-warning-text;
-                text-align: center;
-                font-weight: 400;
-                font-size: 24px;
-                margin: 0;
-                padding-bottom: 20px;
-            }
-
             .buttons {
                 margin: 25px 0 0;
                 text-align: center;
@@ -266,6 +242,16 @@
                 }
             }
         }
+
+        .modal-body__title {
+            color: $color-warning-text;
+            text-align: center;
+            font-weight: 400;
+            font-size: 24px;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+
     }
     .page-messages {
         left: 0;
@@ -301,3 +287,28 @@
     }
 }
 
+.modal-body__title,
+.modal .body-title {
+    font-size: 20px;
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+.modal--new-style {
+    .modal-body,
+    &.alert .modal-body {
+        border-radius: $modal-radius;
+        margin-top: 30%;
+        padding: $spacing-xx $spacing-lg;
+    }
+
+    //overriding alert title color until className refactor
+    &.alert {
+        .modal-body {
+            text-align: center;
+        }
+        .modal-body__title {
+            color: inherit;
+        }
+    }
+}

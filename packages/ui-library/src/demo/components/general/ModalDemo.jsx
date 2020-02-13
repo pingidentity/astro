@@ -5,7 +5,6 @@ import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Modal from "ui-library/lib/components/general/Modal";
-import Text from "ui-library/lib/components/general/Text";
 
 /**
 * @name ModalDemo
@@ -121,7 +120,6 @@ class ModalDemo extends React.Component {
                     <Modal
                         modalTitle="Dialog Modal"
                         type="dialog"
-                        ref="dialogModal"
                         expanded={this.state.expanded5}
                         onOpen={this._makeToggle(5)}
                         onClose={this._makeToggle(5)}
@@ -147,7 +145,6 @@ class ModalDemo extends React.Component {
 
                     <Modal
                         type="alert"
-                        ref="alertModal"
                         expanded={this.state.expanded6}
                         showCloseBttn={true}
                         onOpen={this._makeToggle(6)}
@@ -167,13 +164,12 @@ class ModalDemo extends React.Component {
                     <Modal
                         flags={["new-alert-modal"]}
                         type="alert"
-                        ref="alertModal"
                         expanded={this.state.expanded7}
                         onOpen={this._makeToggle(7)}
                         bodyTitle="Alert Modal">
                         <div>
-                            <Text align={Text.alignments.CENTER}>Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+                            Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                         <ButtonGroup onCancel={this._makeToggle(7)} cancelLabel="Cancel">
                             <Button
