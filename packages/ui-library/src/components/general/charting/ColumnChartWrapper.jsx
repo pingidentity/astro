@@ -158,7 +158,7 @@ ColumnChartWrapper.propTypes = {
                 id: PropTypes.string,
                 label: PropTypes.string
             })
-        ),
+        ).isRequired,
         referenceLineColor: PropTypes.string
     }),
     title: PropTypes.string,

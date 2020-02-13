@@ -4,7 +4,7 @@ import { Label } from "recharts";
 
 export default class ChartLabel extends Component {
     static propTypes = {
-        chartWidth: PropTypes.number,
+        chartWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         color: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         offset: PropTypes.oneOfType([

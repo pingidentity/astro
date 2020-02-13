@@ -21,24 +21,18 @@ import ChartLabel from "./ChartLabel";
  *     The data-id assigned to the top-most container of the component.
  * @param {string} [height]
  *     Height of the chart.
- * @param {string} [highlightColor]
- *     Color of the currently highlighted range.
  * @param {array} highlightRange
  *     Start and end indexes of data to be highlighted eg: [3, 5].
  * @param {array} [legend]
  *     Array of objects to assiciate labels and ids.
- * @param {array} [lineColors]
- *     Array of objects of colors and ids.
  * @param {function} [onClick]
  *     Callback triggered when the mouse clicks a data point.
  * @param {function} [onHoverDataPoint]
  *     Callback triggered when the mouse moves over a new data point.
- * @param {string} [refrenceLabelColor]
- *     Color of the scrubbing bar label.
- * @param {string} [refrenceLineColor]
- *     Color of the scrubbing bar line.
  * @param {boolean} [showHighLight=false]
  *     If a range highlight should be shown.
+ * @param {object} theme
+ *     Theme with refrenceLabelColor, refrenceLineColor, highlightColor, and dataColors
  * @param {string} [width]
  *     Width of the chart.
  */
@@ -47,7 +41,6 @@ export default class LineChart extends React.Component {
         "data-id": PropTypes.string,
         data: PropTypes.array,
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        highlightColor: PropTypes.string,
         highlightRange: PropTypes.arrayOf(PropTypes.number),
         legend: PropTypes.arrayOf(
             PropTypes.shape({
@@ -55,15 +48,17 @@ export default class LineChart extends React.Component {
                 id: PropTypes.string,
             })
         ),
-        lineColors: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.string,
-            color: PropTypes.string
-        })),
         onClick: PropTypes.func,
         onHoverDataPoint: PropTypes.func,
-        referenceLineColor: PropTypes.string,
-        referenceLabelColor: PropTypes.string,
         showHighlight: PropTypes.bool,
+        theme: PropTypes.shape({
+            referenceLineColor: PropTypes.string,
+            referenceLabelColor: PropTypes.string,
+            dataColors: PropTypes.arrayOf(PropTypes.shape({
+                id: PropTypes.string,
+                color: PropTypes.string
+            })),
+        }),
         width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     };
 
@@ -71,15 +66,17 @@ export default class LineChart extends React.Component {
         "data-id": "line-chart",
         data: [],
         height: "100%",
-        highlightColor: "#5DA4EC",
         highlightRange: [],
         legend: [],
-        lineColor: ["#193867"],
         onClick: _.noop,
         onHoverDataPoint: _.noop,
-        referenceLineColor: "#57A0EA",
-        referenceLabelColor: "#676e75",
         showHighlight: false,
+        theme: {
+            referenceLineColor: "#57A0EA",
+            referenceLabelColor: "#676e75",
+            dataColors: [],
+            highlightColor: "#5DA4EC",
+        },
         width: "100%",
     };
 
@@ -148,14 +145,13 @@ export default class LineChart extends React.Component {
      */
     _renderData = (legend) =>
         legend.map(({ id }) =>
-            this._renderLine(id, this.props.lineColors.find(c => c.id === id).color)
+            this._renderLine(id, this.props.theme.dataColors.find(c => c.id === id).color)
         );
 
     _renderHighlight = (legend, colors) => {
         const {
-            highlightRange,
             data,
-            highlightColor,
+            theme,
         } = this.props;
 
         return legend.map((item) => {
@@ -165,8 +161,8 @@ export default class LineChart extends React.Component {
                 <defs>
                     <linearGradient id={`color-${item.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
                         {
-                            highlightRange[0] !== undefined &&
-                            highlightRange[1] !== undefined
+                            theme.highlightRange[0] !== undefined &&
+                            theme.highlightRange[1] !== undefined
                                 ? [
                                     <stop
                                         offset="0%"
@@ -177,7 +173,7 @@ export default class LineChart extends React.Component {
                                         offset={
                                             // % of data before first highlight element
                                             `${Math.max(0, Math.ceil(
-                                                highlightRange[0] / (data.length - 1) * 100
+                                                theme.highlightRange[0] / (data.length - 1) * 100
                                             ))}%`
                                         }
                                         stopColor={lineColor}
@@ -187,27 +183,27 @@ export default class LineChart extends React.Component {
                                         offset={
                                             // % of data before first highlight element
                                             `${Math.max(
-                                                0, Math.ceil(highlightRange[0] / (data.length - 1) * 100)
+                                                0, Math.ceil(theme.highlightRange[0] / (data.length - 1) * 100)
                                             )}%`
                                         }
-                                        stopColor={highlightColor}
+                                        stopColor={theme.highlightColor}
                                         key="2"
                                     />,
                                     <stop
                                         offset={
                                             // % of data before second highlight element
                                             `${Math.max(
-                                                0, Math.ceil(highlightRange[1] / (data.length - 1) * 100)
+                                                0, Math.ceil(theme.highlightRange[1] / (data.length - 1) * 100)
                                             )}%`
                                         }
-                                        stopColor={highlightColor}
+                                        stopColor={theme.highlightColor}
                                         key="3"
                                     />,
                                     <stop
                                         offset={
                                             // % of data before second highlight element
                                             `${Math.max(
-                                                0, Math.ceil(highlightRange[1] / (data.length - 1) * 100)
+                                                0, Math.ceil(theme.highlightRange[1] / (data.length - 1) * 100)
                                             )}%`
                                         }
                                         stopColor={lineColor}
@@ -233,8 +229,7 @@ export default class LineChart extends React.Component {
     _renderReferenceLine = () => {
         const {
             data,
-            referenceLineColor,
-            referenceLabelColor,
+            theme,
             width
         } = this.props;
 
@@ -243,7 +238,7 @@ export default class LineChart extends React.Component {
         return (
             <ReferenceLine
                 x={selected ? selected.label : null}
-                stroke={referenceLineColor}
+                stroke={theme.referenceLineColor}
                 position="start"
                 label={({ viewBox: { x, y } }) => {
                     // Have to have this here for scoping issues during testing
@@ -251,7 +246,7 @@ export default class LineChart extends React.Component {
                     return selectedDataPoint
                         ? <ChartLabel
                             chartWidth={width}
-                            color={referenceLabelColor}
+                            color={theme.referenceLabelColor}
                             label={selectedDataPoint.label}
                             x={x}
                             y={y}
@@ -296,7 +291,7 @@ export default class LineChart extends React.Component {
                     {
                         // Show highlight if prop is enabled
                         showHighlight
-                            ? this._renderHighlight(this.props.legend, this.props.lineColors)
+                            ? this._renderHighlight(this.props.legend, this.props.theme.dataColors)
                             : null
                     }
                     <XAxis dataKey="name" hide={true} />
