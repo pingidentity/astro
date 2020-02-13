@@ -44,4 +44,20 @@ describe("Chip", () => {
 
         expect(fullWidth.exists()).toEqual(false);
     });
+
+    it("renders with custom background and text color", () => {
+        const component = shallow(
+            <Chip
+                color={{
+                    background: "black",
+                    text: "gold"
+                }}
+            />
+        );
+
+        const styles = component.find(".chip-component").get(0).props.style;
+
+        expect(styles.backgroundColor).toEqual("black");
+        expect(styles.color).toEqual("gold");
+    });
 });
