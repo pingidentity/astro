@@ -7,11 +7,20 @@ import PopperContainer from "./PopperContainer";
 import popsOver from "../../util/behaviors/popsOver";
 
 /**
+ * @typedef Popover.renderPopoverChildren
+ * @param {object} props
+ * @param {function} props.onToggle
+ */
+
+/**
  * @class Popover
  * @desc Popover creates a trigger component that controls the visibility of the content.
  *
  * @param {string} [data-id="popover"]
  *     To define the base "data-id" value for top-level HTML container.
+ * @param {node|Popover.renderPopoverChildren} [children]
+ *     Children can be passed as usual or as a function that renders the
+ *     children with the provided onToggle callback.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  * @param {string} [triggerClassName]
@@ -42,7 +51,7 @@ class PopoverBase extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         "data-parent": PropTypes.string,
-        children: PropTypes.node,
+        children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
         className: PropTypes.string,
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         onPopperClick: PropTypes.func,
@@ -85,7 +94,13 @@ class PopoverBase extends React.Component {
         return modifiers;
     }
 
-    renderContent = () => this.props.children;
+    renderContent = () => {
+        const { children = null, onToggle } = this.props;
+        if (typeof children === "function") {
+            return children({ onToggle });
+        }
+        return children;
+    }
 
     /*
      * Return of content based on props.open.

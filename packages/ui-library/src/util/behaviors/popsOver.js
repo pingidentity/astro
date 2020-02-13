@@ -24,7 +24,6 @@ export const handleClose = ({ onClose, onToggle, open }) => {
 const popsOver = WrappedComponent =>
     class extends React.Component {
         static propTypes = {
-            children: PropTypes.node,
             initialState: PropTypes.object,
             onClose: PropTypes.func,
             onOpen: PropTypes.func,
