@@ -1,6 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { BarChart, Bar, XAxis, Cell, Tooltip, ReferenceLine, ResponsiveContainer, CartesianGrid } from "recharts";
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    Cell,
+    Tooltip,
+    ReferenceLine,
+    ResponsiveContainer,
+    CartesianGrid,
+    YAxis
+} from "recharts";
 import _ from "underscore";
 import classnames from "classnames";
 
@@ -74,6 +84,8 @@ export const ColumnChartTitle = ({ className, ...props }) => (
         className={classnames(className, "dashboard-card__title--horizontal-bar-card")}
     />
 );
+
+const BASE_YAXIS_ID = "base";
 
 export default class ColumnChart extends React.Component {
     static propTypes = {
@@ -170,6 +182,20 @@ export default class ColumnChart extends React.Component {
         this.props.onMouseOver(data, e);
     }
 
+    _generateYAxes = (legend) => {
+        const yAxes = [];
+
+        return legend.map(axis => {
+            if (axis.yAxisId && !yAxes.includes(axis.yAxisId)) {
+                yAxes.push(axis.yAxisId);
+                return (<YAxis key={axis.yAxisId} yAxisId={axis.yAxisId} hide={true} />);
+            } else if (!axis.yAxisId && !yAxes.includes(BASE_YAXIS_ID)) {
+                yAxes.push(BASE_YAXIS_ID);
+                return (<YAxis key={BASE_YAXIS_ID} yAxisId={BASE_YAXIS_ID} hide={true} />);
+            }
+        });
+    };
+
     _renderTooltip = () => {
         if (!this.state.selected.y) {
             return;
@@ -228,6 +254,8 @@ export default class ColumnChart extends React.Component {
                         onMouseOut={this._handleMouseOut}
                     >
                         <XAxis dataKey="name" hide={true} />
+                        {this._generateYAxes(legend)}
+
                         <CartesianGrid
                             vertical={false}
                             horizontalPoints={digestedData.length === 0 ? emptyLines : undefined}
@@ -237,49 +265,58 @@ export default class ColumnChart extends React.Component {
                             content={this._renderTooltip}
                             cursor={false}
                         />
-                        {
-                            !hasCustomState && legend.map(({ id, label, color }, key) => {
-                                return (
-                                    <Bar
-                                        label={label ? label : id}
-                                        dataKey={key}
-                                        key={id}
-                                        stackId={ this.props.stacked ? "a" : id }
-                                        maxBarSize={60}
-                                        fill={color}
-                                        onClick={this._handleClick(id)}
-                                        onMouseOver={this._handleMouseOver(id)}
-                                        onMouseOut={this._handleMouseOut}
-                                        radius={key === legend.length - 1 || !this.props.stacked ? [3, 3, 0, 0] : null}
-                                    >
-                                        {
-                                            digestedData.map((item) => (
-                                                <Cell
-                                                    key={item.name}
-                                                    className="column-chart__cell"
-                                                    style={{
-                                                        stroke: x && x.label === item.name && y.label === id
-                                                            ? Color(color).lighten(0.5)
-                                                            : color,
-                                                        strokeWidth: "1px",
-                                                    }}
-                                                />
-                                            ))}
-                                    </Bar>
-                                );
-                            })
-                        }
-                        {legend.length > 0 && !hasCustomState &&
-                        <ReferenceLine
-                            x={this.state.selected.x ? this.state.selected.x.label : null}
-                            stroke={this.props.referenceLineColor}
-                            label={{
-                                position: "top",
-                                value: this.state.selected.x ? this.state.selected.x.label : null,
-                                fill: this.props.referenceLabelColor,
-                                fontSize: 14
-                            }}
-                        />
+                        { !hasCustomState && legend.map(({ id, label, color, yAxisId = BASE_YAXIS_ID }, key) => (
+                            <Bar
+                                label={label ? label : id}
+                                yAxisId={yAxisId}
+                                dataKey={key}
+                                key={id}
+                                stackId={this.props.stacked ? "a" : id}
+                                maxBarSize={60}
+                                fill={color}
+                                onClick={this._handleClick(id)}
+                                onMouseOver={this._handleMouseOver(id)}
+                                onMouseOut={this._handleMouseOut}
+                                radius={
+                                    key === legend.length - 1 ||
+                                        !this.props.stacked ||
+                                        legend.findIndex(legendItem => Object.keys(legendItem).includes("yAxisId")) > -1
+                                        ? [3, 3, 0, 0]
+                                        : null
+                                }
+                            >
+                                {
+                                    digestedData.map((item) => (
+                                        <Cell
+                                            key={item.name}
+                                            className="column-chart__cell"
+                                            style={{
+                                                stroke: x && x.label === item.name && y.label === id
+                                                    ? Color(color).lighten(0.5)
+                                                    : color,
+                                                strokeWidth: "1px",
+                                            }}
+                                        />
+                                    ))}
+                            </Bar>
+                        ))}
+
+                        {legend.length > 0 && !hasCustomState && this.state.selected.x &&
+                            <ReferenceLine
+                                x={x.label}
+                                yAxisId={
+                                    legend.find(({ id }) =>
+                                        y.label === id
+                                    ).yAxisId || BASE_YAXIS_ID
+                                }
+                                stroke={this.props.referenceLineColor}
+                                label={{
+                                    position: "top",
+                                    value: x.label,
+                                    fill: this.props.referenceLabelColor,
+                                    fontSize: 14
+                                }}
+                            />
                         }
                     </BarChart>
                 </ResponsiveContainer>

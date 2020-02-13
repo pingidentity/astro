@@ -69,6 +69,20 @@ describe("ColumnChart", () => {
         expect(component.exists()).toEqual(true);
     });
 
+    it("renders the proper number of y-axes", () => {
+        const component = shallow(
+            <ColumnChart
+                {...defaultProps}
+                legend={[
+                    { label: "Authenticators", color: "#49BF6B", id: "authenticators" },
+                    { label: "Test Thing", color: "#379250", yAxisId: "test-axis", id: "test-thing" },
+                ]}
+            />
+        );
+
+        expect(component.find("YAxis").length).toEqual(2);
+    });
+
     // Testing all of these internal methods isn't ideal, but
     // it seemed like a more maintainable solution than attempting to mock
     // Recharts and all of its interactions.
@@ -104,19 +118,19 @@ describe("ColumnChart", () => {
             />
         );
 
-        const value = { name: "Your favorite value" };
+        const value = { name: "November 11, 2019" };
         const fakeEvent = { target: "doesn't matter" };
 
-        component.instance()._handleMouseOver("Authenticators")(value, 1, fakeEvent);
+        component.instance()._handleMouseOver("authenticators")(value, 1, fakeEvent);
 
         expect(onMouseOver).toHaveBeenCalledWith({
             x: {
                 index: 1,
-                label: "Your favorite value",
+                label: "November 11, 2019",
             },
             y: {
-                index: -1,
-                label: "Authenticators",
+                index: 1,
+                label: "authenticators",
             },
         }, fakeEvent);
     });
