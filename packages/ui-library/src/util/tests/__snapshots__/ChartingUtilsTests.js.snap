@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChartingUtils returns correct coordinates for lines 1`] = `
+Array [
+  20,
+  138.75,
+  257.5,
+  376.25,
+  495,
+]
+`;

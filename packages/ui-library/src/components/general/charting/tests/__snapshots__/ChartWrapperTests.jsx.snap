@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ChartWrapper data-id's don't change 1`] = `Array []`;
+exports[`ChartWrapper data-id's don't change 1`] = `
+Array [
+  "padding-component",
+  "padding-component",
+  "padding-component",
+]
+`;

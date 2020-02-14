@@ -1,7 +1,8 @@
 import {
     fromRechartsDataFormat,
     toRechartsDataFormat,
-    generateTheme
+    generateTheme,
+    getEvenLineCoords,
 } from "../ChartingUtils";
 
 window.__DEV__ = true;
@@ -76,4 +77,25 @@ describe("ChartingUtils", () => {
 
         expect(generateTheme(seedColor, data)).toEqual(result);
     });
+
+    it("returns coordinates for drawing evenly spaced lines", () => {
+        const height = 500;
+        const numLines = 10;
+
+        expect(getEvenLineCoords(height, numLines).length).toEqual(10);
+    });
+
+    it("returns correct coordinates for lines", () => {
+        const height = 500;
+        const numLines = 5;
+
+        expect(getEvenLineCoords(height, numLines)).toMatchSnapshot();
+    });
+
+    it("returns default height for coordinates for drawing evenly spaced lines", () => {
+        const height = 500;
+
+        expect(getEvenLineCoords(height).length).toEqual(5);
+    });
+
 });

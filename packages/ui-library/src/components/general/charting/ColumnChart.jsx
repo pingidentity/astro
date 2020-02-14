@@ -18,6 +18,7 @@ import Color from "color";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem } from "./Legend";
 import { defaultRender } from "../../../util/PropUtils";
+import { getEvenLineCoords } from "../../../util/ChartingUtils";
 import Spinner from "../../general/Spinner";
 
 /**
@@ -230,7 +231,7 @@ export default class ColumnChart extends React.Component {
 
         const hasCustomState = errorMessage !== undefined || loadingMessage !== undefined;
 
-        const emptyLines = [...Array.from({ length: 4 }, (v, i) => this.props.height / (4) * i), this.props.height];
+        const horizontalPoints = getEvenLineCoords(this.props.height);
 
         const {
             x,
@@ -258,7 +259,7 @@ export default class ColumnChart extends React.Component {
 
                         <CartesianGrid
                             vertical={false}
-                            horizontalPoints={digestedData.length === 0 ? emptyLines : undefined}
+                            horizontalPoints={horizontalPoints}
                         />
                         <Tooltip
                             isAnimationActive={true}
