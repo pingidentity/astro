@@ -79,7 +79,7 @@ class FormTimeZoneDemo extends React.Component {
             <div>
                 <InputRow>
                     <FormTimeZone
-                        data-id="timezone-stateless"
+                        data-id="timezone-stateless-w-clear"
                         filterByCountry={this.state.filterByCountry0}
                         labelText="Stateless Version with clear"
                         onValueChange={this._handleChange(0)}
@@ -113,7 +113,7 @@ class FormTimeZoneDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTimeZone
-                        data-id="timezone-stateful"
+                        data-id="timezone-stateful-initial-open"
                         labelText="Stateful Version"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"

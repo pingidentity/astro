@@ -1678,7 +1678,7 @@ input[type=file] {
 
 .link-dropdown-list {
     @include drop-down-styles;
-    .collapsible-link {
+    & &__link { // specificity to override default .collapsible-link styles
         padding: 0;
     }
     //temporary. remove when lists are aligned
@@ -2974,7 +2974,7 @@ label {
     display: inline-block;
     vertical-align: bottom;
 
-    .collapsible-link {
+    & &__link {
         text-transform: none;
         padding: 0;
     }

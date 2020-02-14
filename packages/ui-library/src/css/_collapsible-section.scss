@@ -23,7 +23,7 @@
         @include font-pn-regular;
 
         &--circled {
-            &.collapsible-link {
+            &.collapsible-section-title {
                 margin-left: 28px;
             }
 
@@ -145,8 +145,7 @@
         }
     }
 
-    // Override for default collapsible-link styles
-    .collapsible-link {
+    .collapsible-section-title {
         margin: 0 0 0 24px;
 
         &:hover {
@@ -174,14 +173,6 @@
                 content: none;
             }
         }
-    }
-}
-
-// when present in a title, not stand alone
-.collapsible-link {
-    &.inline {
-        padding-bottom: 10px;
-        padding-left: 10px;
     }
 }
 

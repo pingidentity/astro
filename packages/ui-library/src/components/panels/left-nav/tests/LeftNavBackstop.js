@@ -1,8 +1,12 @@
 const flows = [
-    {},
+    {
+        "hoverSelector": "a[data-id='BasicInputs-label']",
+        postInteractionWait: 250 // Wait for CSS transition
+    },
     {
         "sublabel": "light-mode",
         "clickSelector": "div[data-id='light-mode']",
+        "postInteractionWait": 500,
     },
     {
         "sublabel": "legacy",

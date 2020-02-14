@@ -494,7 +494,7 @@ class LeftNavSection extends React.Component {
                 highlighted: this.props.selectedNode === this.props.id
             }),
             titleClassName = this.props.children
-                ? classnames("title collapsible-link right", {
+                ? classnames("title collapsible-link left-nav__title-link right", {
                     open: isOpen
                 })
                 : "title";

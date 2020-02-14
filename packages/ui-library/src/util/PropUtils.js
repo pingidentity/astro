@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { isObject } from "underscore";
 import { isEnter, isSpace } from "./KeyboardUtils";
 import Icon from "../components/general/Icon";
+import classnames from "classnames";
 
 /**
  * @module util/PropUtils
@@ -66,21 +67,21 @@ export const getIcon = (icon, props) => {
 export const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
 
 /**
- * @alias module:util/PropUtils.defaultRender
+ * @alias module:util/PropUtils.makeRenderWithClassName
  *
- * @desc Takes a constant object and sets up a oneOf propType for it.
+ * @desc Returns render function that inserts a new className into the props
  *
- * @param {object} constant
- *    A constant object, like:
- *      const Sizes = {
- *          SM: "sm",
- *          MD: "md",
- *          LG: "lg"
- *      }
+ * @param {string} className
  */
+export const makeRenderWithClassName = className => (props, DefaultComponent) => (
+    defaultRender({
+        ...props,
+        className: classnames(props.className, className),
+    }, DefaultComponent)
+);
 
 /**
- * @alias module:util/PropUtils.defaultRender
+ * @alias module:util/PropUtils.getClickableA11yProps
  *
  * @desc Gets an object of props that make an element that's not normally clickable
  *       act like an HTML <button />.

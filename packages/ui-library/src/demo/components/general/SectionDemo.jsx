@@ -56,6 +56,7 @@ class SectionDemo extends React.Component {
                     {this._getContent()}
                 </Section>
                 <Section
+                    data-id="section-w-accessories"
                     title="Section with accessories"
                     accessories={[
                         <Button key="1" inline iconName="edit"/>,

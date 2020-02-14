@@ -55,6 +55,7 @@ class SearchBarDemo extends React.Component {
             <div>
                 <p>Last event: {this.state.lastEvent}</p>
                 <SearchBar
+                    data-id="first"
                     formSearchBoxProps={formSearchBoxProps}
                     key="props"
                 >
@@ -65,6 +66,7 @@ class SearchBarDemo extends React.Component {
                 <HR />
                 <p>Passing the search box props directly:</p>
                 <SearchBar
+                    data-id="second"
                     onValueChange={this._handleValueChange("search1")}
                     placeholder="Search something"
                     showClear={true}
