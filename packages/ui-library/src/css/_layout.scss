@@ -183,7 +183,7 @@ $color-grey-minor-1: $color-neutral-30;
     display: flex;
     flex-direction: column;
 
-    .collapsible-link {
+    .left-nav__title-link {
         display: block;
 
         &:after {
@@ -406,7 +406,7 @@ $color-grey-minor-1: $color-neutral-30;
     color: $color-white;
     width: $layout-nav-width;
 
-    .collapsible-link {
+    .left-nav__title-link {
         display: block;
 
         &:after {
@@ -507,7 +507,7 @@ $color-grey-minor-1: $color-neutral-30;
             transition: background-color 0.2s;
             background-color: $color-grey-main-2;
         }
-        &.collapsible-link {
+        &.left-nav__title-link {
             margin-right: 0;
             &:after {
                 right: 15px;
@@ -842,63 +842,7 @@ $color-grey-minor-1: $color-neutral-30;
     border-radius: 7px;
 }
 
-.collapsible-link {
-    position: relative;
-    display: inline-block;
-    padding: 0 0 25px;
-    margin-right: 15px;
-    font-size: 14px;
-    color: $color-active-blue;
-    line-height: 1em;
-    cursor: pointer;
-    @include font-pn-regular;
-
-    &:hover {
-        color: $color-active-blue-highlighted;
-        text-decoration: underline;
-        &:after {
-            color: $color-active-blue-highlighted;
-        }
-    }
-    &.left:before,
-    &.right:after {
-        position: absolute;
-        top: 0;
-        content: $icon-expand-arrow;
-        font-family: $icon-font;
-        font-size: 8px;
-        color: $color-active-blue;
-        text-decoration: underline; // necessary to remove underline in IE -jfal
-
-        transition: (all 0.2s linear);
-    }
-    &.left:before,
-    &.left:hover:before,
-    &.right:hover:after,
-    &.right:after {
-        // necessary to remove underline in IE -jfal
-        // https://gist.github.com/gabskoro/bb1a73a684de6301413dd8efdf486c6a
-        text-decoration: none;
-    }
-    &.left:before {
-        left: -15px;
-    }
-    &.right:after {
-        right: -15px;
-    }
-    &.open {
-        &.left:before,
-        &.right:after {
-            transform: rotate(-180deg);
-            transition: (all 0.2s linear);
-        }
-    }
-
-    &--disabled {
-        opacity: $inactive-opacity;
-        pointer-events: none;
-    }
-}
+@import 'layout/collapsible-link';
 
 .page-return-link {
     position: relative;

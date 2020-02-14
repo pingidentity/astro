@@ -6,6 +6,7 @@ import classnames from "classnames";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 import Disabled from "../layout/Disabled";
+import { defaultRender } from "../../util/PropUtils";
 
 /**
  * @enum {string}
@@ -65,6 +66,8 @@ const alignments = {
  *     When not provided, the component will manage this value.
  * @param {object} [initialState]
  *     selectedOption determines the initial state of 'selectedOption'.
+ * @param {function} [renderLink]
+ *     Function to render the CollapsibleLink.
  * @param {FormDropDownList~option} selectedOption
  *     The selected list option.
  *     When not provided, the component will manage this value.
@@ -104,12 +107,14 @@ class LinkDropDownListStateless extends React.Component {
                 ]).isRequired
             })
         ),
+        renderLink: PropTypes.func,
         selectedOption: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([-1])]), // -1 means no value has been set
     };
 
     static defaultProps = {
         closeOnSelection: true,
         "data-id": "link-dropdown-list",
+        renderLink: defaultRender,
     };
 
     _handleClick = (selectedOption) => {
@@ -122,16 +127,13 @@ class LinkDropDownListStateless extends React.Component {
         }
     };
 
-    _renderLabel = () => {
-        return (
-            <CollapsibleLink
-                data-id={this.props["data-id"] + "-label"}
-                expanded={this.props.open}
-                title={this.props.label}
-                arrowPosition={this.props.labelArrowPosition}
-            />
-        );
-    };
+    _renderLabel = () => this.props.renderLink({
+        className: "link-dropdown-list__link",
+        "data-id": this.props["data-id"] + "-label",
+        expanded: this.props.open,
+        title: this.props.label,
+        arrowPosition: this.props.labelArrowPosition,
+    }, CollapsibleLink);
 
     _renderOptions = () => {
         return this.props.options.map(function (option, i) {

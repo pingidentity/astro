@@ -41,7 +41,15 @@ const runTests = server => backstop(isApprovalRun ? "approve" : "test", {
     .catch(e => exitWithError(server, e));
 
 const packAndRunTests = () => {
-    webpack(webpackProd, (err) => {
+    webpack({
+        ...webpackProd,
+        plugins: [
+            ...webpackProd.plugins,
+            new webpack.DefinePlugin({
+                "process.env.FIX_TIME": '"yes"', // this will override components that use the current time
+            }),
+        ],
+    }, (err) => {
         if (err) {
             exitWithError(null, "Webpack failed to pack. Please check your configuration");
         }

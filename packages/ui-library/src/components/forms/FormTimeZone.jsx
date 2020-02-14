@@ -31,8 +31,12 @@ const getCountryData = () => {
     });
 };
 
+const getCurrentUTCTime = () => process.env.FIX_TIME === "yes"
+    ? moment(new Date("2012-10-31 09:00:00")).utc()
+    : moment().utc();
+
 const getZoneData = () => {
-    const currentUtcTime = moment().utc();
+    const currentUtcTime = getCurrentUTCTime();
     const zoneNames = moment.tz.names();
 
     return zoneNames.map(function (tz) {
@@ -392,7 +396,7 @@ class TimeZoneStateless extends React.Component {
         ]);
     };
 
-    _getTimeForZone = tz => moment.tz(moment().utc(), tz.name).format("h:mm A");
+    _getTimeForZone = tz => moment.tz(getCurrentUTCTime(), tz.name).format("h:mm A");
 
     _renderZones = () => {
         return (
@@ -447,6 +451,7 @@ class TimeZoneStateless extends React.Component {
     _renderLabel = () => {
         return (
             <CollapsibleLink
+                className="input-timezone__link"
                 data-id={`${this.props["data-id"]}-collapsible-link`}
                 title={this.props.displayValue || getZoneNameDisplayValue(this.props.value) || this.props.selectLabel}
                 expanded={this.props.open}

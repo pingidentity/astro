@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import List from "./LinkDropDownList";
+import LinkDropDownList from "./LinkDropDownList";
+import { makeRenderWithClassName } from "../../util/PropUtils";
 
 
 /**
@@ -17,12 +18,15 @@ const TranslationIcon = (props) => {
     );
 };
 
+const renderLink = makeRenderWithClassName("translation-picker__link");
+
 const TranslationPicker = (props) => {
     return (
-        <List
+        <LinkDropDownList
             {...props}
             className="translation-picker"
             label={<TranslationIcon label={props.label} data-id={props["data-id"]}/>}
+            renderLink={renderLink}
         />
     );
 };

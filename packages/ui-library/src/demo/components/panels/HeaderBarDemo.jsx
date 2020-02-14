@@ -137,6 +137,7 @@ class HeaderBarDemo extends React.Component {
                 <HR />
                 <p>Using the provided reducer:</p>
                 <HeaderBar {...this.state}
+                    data-id="first-header-bar"
                     onItemValueChange={this._handleItemClick}
                     inline={true}
                     siteLogo="pingone"

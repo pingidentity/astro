@@ -95,6 +95,7 @@ class LinkDropDownListDemo extends React.Component {
                     />
                 </InputRow>
                 <LinkDropDownList
+                    data-id="stateful-dropdown"
                     closeOnClick={true}
                     label="Stateful Version"
                     onClick={this._handleClick}
@@ -106,6 +107,7 @@ class LinkDropDownListDemo extends React.Component {
                 <HR />
                 <Padding left="xl"><Padding left="xl">
                     <LinkDropDownList
+                        data-id="right-aligned"
                         closeOnClick={true}
                         label="Right-aligned"
                         options={_options}

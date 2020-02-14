@@ -4,7 +4,7 @@ import LinkDropDownList from "../../forms/LinkDropDownList";
 import Anchor from "../../general/Anchor";
 
 import _ from "underscore";
-import { getIconClassName } from "../../../util/PropUtils";
+import { getIconClassName, makeRenderWithClassName } from "../../../util/PropUtils";
 
 class EnvironmentSelector extends React.Component {
     state = { open: false };
@@ -73,6 +73,8 @@ class EnvironmentSelector extends React.Component {
         this._handleToggle();
     };
 
+    _renderLink = makeRenderWithClassName("environment-selector__link");
+
     render = () => {
         const selectedOption = this._getSelectedOption();
         const bottomPanel = this.props.onNewEnvironment
@@ -99,6 +101,7 @@ class EnvironmentSelector extends React.Component {
                 selectedOption={selectedOption}
                 className="environment-selector left"
                 bottomPanel={bottomPanel}
+                renderLink={this._renderLink}
             />
         );
     };

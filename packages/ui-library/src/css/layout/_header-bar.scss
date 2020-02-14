@@ -233,7 +233,7 @@ $topnav-bg: $color-neutral-10;
 }
 
 .environment-selector {
-    .collapsible-link {
+    & &__link {
         color: $color-neutral-90;
         @include font-pn-regular;
         font-size: $font-size-normal;

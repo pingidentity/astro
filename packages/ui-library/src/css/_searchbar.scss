@@ -68,7 +68,7 @@ $searchbar-input-height: 38px;
         color: $searchbar-link-text-color;
         text-align: center;
 
-        &.collapsible-link:after { // added specificity here to override defaults
+        .searchbar &:after { // added specificity here to override defaults
             color: $searchbar-link-text-color;
             display: inline-block;
             position: relative;
