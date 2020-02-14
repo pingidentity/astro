@@ -5,10 +5,12 @@ import {
     Line,
     XAxis,
     ReferenceLine,
-    ResponsiveContainer
+    ResponsiveContainer,
+    CartesianGrid
 } from "recharts";
 import _ from "underscore";
 
+import { getEvenLineCoords } from "../../../util/ChartingUtils";
 import ChartLabel from "./ChartLabel";
 
 /**
@@ -151,6 +153,7 @@ export default class LineChart extends React.Component {
     _renderHighlight = (legend, colors) => {
         const {
             data,
+            highlightRange,
             theme,
         } = this.props;
 
@@ -161,8 +164,8 @@ export default class LineChart extends React.Component {
                 <defs>
                     <linearGradient id={`color-${item.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
                         {
-                            theme.highlightRange[0] !== undefined &&
-                            theme.highlightRange[1] !== undefined
+                            highlightRange[0] !== undefined &&
+                            highlightRange[1] !== undefined
                                 ? [
                                     <stop
                                         offset="0%"
@@ -173,7 +176,7 @@ export default class LineChart extends React.Component {
                                         offset={
                                             // % of data before first highlight element
                                             `${Math.max(0, Math.ceil(
-                                                theme.highlightRange[0] / (data.length - 1) * 100
+                                                highlightRange[0] / (data.length - 1) * 100
                                             ))}%`
                                         }
                                         stopColor={lineColor}
@@ -183,7 +186,7 @@ export default class LineChart extends React.Component {
                                         offset={
                                             // % of data before first highlight element
                                             `${Math.max(
-                                                0, Math.ceil(theme.highlightRange[0] / (data.length - 1) * 100)
+                                                0, Math.ceil(highlightRange[0] / (data.length - 1) * 100)
                                             )}%`
                                         }
                                         stopColor={theme.highlightColor}
@@ -193,7 +196,7 @@ export default class LineChart extends React.Component {
                                         offset={
                                             // % of data before second highlight element
                                             `${Math.max(
-                                                0, Math.ceil(theme.highlightRange[1] / (data.length - 1) * 100)
+                                                0, Math.ceil(highlightRange[1] / (data.length - 1) * 100)
                                             )}%`
                                         }
                                         stopColor={theme.highlightColor}
@@ -203,7 +206,7 @@ export default class LineChart extends React.Component {
                                         offset={
                                             // % of data before second highlight element
                                             `${Math.max(
-                                                0, Math.ceil(theme.highlightRange[1] / (data.length - 1) * 100)
+                                                0, Math.ceil(highlightRange[1] / (data.length - 1) * 100)
                                             )}%`
                                         }
                                         stopColor={lineColor}
@@ -261,12 +264,14 @@ export default class LineChart extends React.Component {
         const {
             className,
             "data-id": dataId,
-            layout,
-            width,
-            height,
             data,
-            showHighlight,
+            height,
+            layout,
+            legend,
             onClick,
+            showHighlight,
+            theme,
+            width,
         } = this.props;
 
         return (
@@ -280,23 +285,27 @@ export default class LineChart extends React.Component {
                     className="line-chart"
                     data-id={dataId}
                     layout={layout}
-                    data={this._digestData(data, this.props.legend)}
+                    data={this._digestData(data, legend)}
                     onMouseMove={this._onHoverDataPoint}
                     onClick={onClick}
                     margin={{
                         top: 20, right: 30, left: 30, bottom: 5,
                     }}
                 >
-                    {this._renderData(this.props.legend)}
+                    {this._renderData(legend)}
                     {
                         // Show highlight if prop is enabled
                         showHighlight
-                            ? this._renderHighlight(this.props.legend, this.props.theme.dataColors)
+                            ? this._renderHighlight(legend, theme.dataColors)
                             : null
                     }
                     <XAxis dataKey="name" hide={true} />
+                    <CartesianGrid
+                        vertical={false}
+                        horizontalPoints={getEvenLineCoords(this.props.height)}
+                    />
                     {
-                        data.length > 0 &&
+                        data.length > 0 && legend.length > 0 &&
                         this._renderReferenceLine()
                     }
                 </Chart>
