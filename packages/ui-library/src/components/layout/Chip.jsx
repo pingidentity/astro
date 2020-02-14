@@ -113,7 +113,7 @@ Chip.propTypes = {
     fullWidth: PropTypes.bool,
     color: PropTypes.oneOfType([
         PropTypes.shape({
-            backgroundColor: PropTypes.string.isRequired,
+            background: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
         }),
         PropTypes.oneOf(Object.values(chipColors))
