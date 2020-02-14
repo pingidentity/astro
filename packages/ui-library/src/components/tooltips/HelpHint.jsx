@@ -1,7 +1,8 @@
+import ReactTooltip from "react-tooltip";
+
 var PropTypes = require("prop-types");
 var React = require("react");
 var Link = require("../general/Link");
-var ReactTooltip = require("react-tooltip");
 var classnames = require("classnames");
 var _ = require("underscore");
 
