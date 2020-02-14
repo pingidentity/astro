@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Spinner from "../../general/PageSpinner";
 import Text, { textTypes } from "../../general/Text";
+import Padding, { sizes } from "../../layout/Padding";
 
 
 const BASE_CLASS_NAME = "chart-wrapper";
+const BASE_SPACING = sizes.SM;
 
 function ChartWrapper({
     legend,
@@ -17,7 +19,9 @@ function ChartWrapper({
     return (
         <div className={BASE_CLASS_NAME}>
             {title}
+            <Padding bottom={BASE_SPACING} />
             {legend}
+            <Padding bottom={BASE_SPACING} />
             <div className={`${BASE_CLASS_NAME}__chart`}>
                 {loadingMessage ? (
                     <div className={`${BASE_CLASS_NAME}__loader`}>
@@ -34,6 +38,7 @@ function ChartWrapper({
                 }
                 {chart}
             </div>
+            <Padding bottom={BASE_SPACING} />
             {controls}
         </div>
     );

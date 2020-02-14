@@ -66,3 +66,24 @@ export const generateTheme = (seedColor, data) => {
         dataColors: dataColors,
     };
 };
+
+/**
+ * Returns coordinates for drawing evenly spaced lines with a min and max offset
+ */
+
+export const getEvenLineCoords = (height, numLines = 5) => {
+    //offsets are set to what recharts uses by default
+    const minOffset = 20;
+    const maxOffset = 5;
+
+    const actualMin = 0 + minOffset;
+    const actualMax = height - maxOffset;
+
+    const range = actualMax - actualMin;
+
+    const lines = Array.from( { length: numLines }, (v, i) => {
+        return ( range / (numLines - 1) * (i) + minOffset);
+    });
+
+    return lines;
+};

@@ -14,6 +14,9 @@
         flex-direction: column;
         z-index: 12; //have to be above rocker labels
     }
+    &__message {
+        pointer-events: none;
+    }
     &__loader {
         background: rgba($color-white, 0.6);
     }
