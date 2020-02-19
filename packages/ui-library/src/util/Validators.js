@@ -2,6 +2,7 @@
 
 "use strict";
 
+
 /**
  * @module util/Validators
  * @desc Validator library, containing reusable validation functions.
@@ -118,5 +119,66 @@ module.exports = {
     */
     isValidHexColorCharacter: function (str) {
         return /^$|^#?[0-9A-F]*$/i.test(str);
-    }
+    },
+
+    /**
+    * @alias module:util/Validators.isValidFileSize
+    * @desc Validate the file size.
+    *
+    * @param {number} fileSizeInBytes
+    *     The file size.
+    * @param {number} maxFileSizeKb
+    *     The maximum size (in KB) of the uploaded file (default 5MB).
+
+    */
+    isValidFileSize: function (fileSizeInBytes, maxFileSizeKb) {
+        if (maxFileSizeKb && fileSizeInBytes > (maxFileSizeKb * 1000)) {
+            return false;
+        } else {
+            return true;
+        }
+    },
+
+    /**
+    * @alias module:util/Validators.isValidMimeType
+    * @desc Validate the mime type.
+    *
+    * @param {string} type
+    *     The string to validate
+    * @param {string} [accept]
+    *    Comma-separated string of MIME types and/or file extensions that are fed to the 'accept' attribute of the &lt;input&gt;
+    *    element and used in the file type validation. Pass an empty string to the property to disable validation.
+    *    Further information can be found here: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers.
+    */
+    isValidMimeType: function (type, accept) {
+        if (accept && !accept.match(new RegExp("\\b" + type + "\\b"))) {
+            return false;
+        } else {
+            return true;
+        }
+    },
+
+    /**
+    * @alias module:util/Validators.readFile
+    * @desc Reads the file to make sure it will load.
+    *
+    * @param {object} file
+    *    Browser File object to validate.
+    * @param {function} readSuccessFunc
+    *     Function that reads the successful file and loads it.
+    * @param {function} errorFunc
+    *     Function that checks to see if there is an error.
+    * @param {string} errorCode
+    * @alias FileUpload.ErrorCodes
+    *   Error code given to the file
+    */
+    readFile: function (file, readSuccessFunc, errorFunc, errorCode) {
+
+        var reader = new FileReader();
+        reader.onloadend = function () { readSuccessFunc(file, reader.result); };
+        reader.onerror = function () { errorFunc(errorCode); };
+        reader.readAsDataURL(file);
+
+    },
+
 };

@@ -225,4 +225,5 @@ exports.run = function (getComponent, get) {
 
         expect(get(component, "accepted-types").textContent).toEqual("jpeg, jpg, gif, png");
     });
+
 };

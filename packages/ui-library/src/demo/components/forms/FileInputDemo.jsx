@@ -6,6 +6,7 @@ import FormCheckbox from "../../../components/forms/FormCheckbox";
 import InputRow from "../../../components/layout/InputRow";
 import FlexRow, { spacingOptions } from "../../../components/layout/FlexRow";
 import StatusIndicator, { Types } from "../../../components/general/StatusIndicator";
+
 /**
 * @name FileInputDemo
 * @memberof FileInput
@@ -99,6 +100,8 @@ class FileInputDemo extends React.Component {
             selectedFile4: null,
         });
     }
+
+
 
     render() {
         return (

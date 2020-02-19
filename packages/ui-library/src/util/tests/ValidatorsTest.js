@@ -145,4 +145,48 @@ describe("Validators", function () {
             expect(Validators.isValidHexColorCharacter("!@#$%^&*")).toBe(false);
         });
     });
+
+    describe("isValidFileSize", function () {
+
+        it("returns false if file is to big", function () {
+            const fileSizeInBytes = 3000;
+            const maxFileSizeKb = 1;
+            expect(Validators.isValidFileSize(fileSizeInBytes, maxFileSizeKb)).toBe(false);
+        });
+
+        it("returns true if file is not to big", function () {
+            const fileSizeInBytes = 1000;
+            const maxFileSizeKb = 1;
+            expect(Validators.isValidFileSize(fileSizeInBytes, maxFileSizeKb)).toBe(true);
+        });
+    });
+
+    describe("isValidMimeType", function () {
+
+        it("returns false if mime type is wrong", function () {
+            const type = "image/jpg";
+            const accept = "image/png";
+            expect(Validators.isValidMimeType(type, accept)).toBe(false);
+        });
+
+        it("returns true if mime type matches", function () {
+            const type = "image/jpg";
+            const accept = "image/jpg";
+            expect(Validators.isValidMimeType(type, accept)).toBe(true);
+        });
+    });
+
+    describe("readFile", function () {
+
+
+        it("reads the file", function () {
+            const fileContents = ["some text"];
+            const file = new File(fileContents, { type: "text" });
+            const readSuccessFunc = jest.fn();
+            const errorFunc = jest.fn();
+            Validators.readFile(file, readSuccessFunc, errorFunc);
+            setTimeout(()=>expect(readSuccessFunc).toHaveBeenCalled());
+            setTimeout(()=>expect(errorFunc).not.toHaveBeenCalled());
+        });
+    });
 });
