@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Constants from "./v2-constants.js";
 import StatelessFileUpload from "./v2-stateless";
 import Utils from "../../../util/Utils";
-import fixOrientation from "fix-orientation";
-import readExif from "exif-js";
 import _ from "underscore";
+import validator from "../../../util/Validators";
+import readExif from "exif-js";
+import fixOrientation from "fix-orientation";
+import Constants from "./v2-constants.js";
 
 /**
  * @name FileUploadStateful
@@ -23,20 +24,6 @@ export default class FileUpload extends Component {
         errorMessage: "",
         thumbnailSrc: this.props.thumbnailSrc,
         labelAcceptedFileTypes: this.props.labelAcceptedFileTypes || this.props.accept.split("image/").join("")
-    };
-
-    _validateFileSize = (fileSizeInBytes) => {
-        if (this.props.maxFileSizeKb && fileSizeInBytes > (this.props.maxFileSizeKb * 1000)) {
-            this.resetComponent();
-            throw Constants.ErrorCodes.TOO_BIG;
-        }
-    };
-
-    _validateMimeType = (type) => {
-        if (this.props.accept && !this.props.accept.match(new RegExp("\\b" + type + "\\b"))) {
-            this.resetComponent();
-            throw Constants.ErrorCodes.WRONG_MIME_TYPE;
-        }
     };
 
     _fileReadSuccess = (file, contentUrl) => {
@@ -59,25 +46,34 @@ export default class FileUpload extends Component {
         }
     };
 
-    _readFile = (file) => {
-        var reader = new FileReader();
-
-        reader.onloadend = function () { this._fileReadSuccess(file, reader.result); }.bind(this);
-        reader.onerror = function () { this.props.onError(Constants.ErrorCodes.CANT_READ); }.bind(this);
-        reader.readAsDataURL(file);
-    };
 
     _processWithHtml5Api = (file, path) => {
         this.setState({
             fileName: Utils.stripFakePath(path)
         });
 
+        const isValidFileSize = validator.isValidFileSize(file.size, this.props.maxFileSizeKb);
+
+        const isValidMimeType = validator.isValidMimeType(file.type, this.props.accept);
+
         try {
-            this._validateFileSize(file.size);
-            this._validateMimeType(file.type);
+            if (!isValidFileSize) {
+                this.resetComponent();
+                throw Constants.ErrorCodes.TOO_BIG;
+            }
+
+            if (!isValidMimeType) {
+                this.resetComponent();
+                throw Constants.ErrorCodes.WRONG_MIME_TYPE;
+            }
 
             if (this.props.showThumbnail && file.type.match("image.*")) {
-                this._readFile(file);
+                validator.readFile(
+                    file,
+                    this._fileReadSuccess,
+                    this.props.onError,
+                    Constants.ErrorCodes.CANT_READ
+                );
             } else {
                 this._processSimple();
             }
@@ -111,6 +107,7 @@ export default class FileUpload extends Component {
             }
         }
     };
+
 
     _handleChange = (e) => {
         if (this.props.onChange) {
