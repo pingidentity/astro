@@ -212,6 +212,7 @@ ExpandableCardStateless.propTypes = {
     showEdit: PropTypes.bool,
     editButton: PropTypes.node,
     onEditButtonClick: PropTypes.func,
+    expanded: PropTypes.bool,
 };
 
 ExpandableCardStateless.defaultProps = {
