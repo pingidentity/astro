@@ -2,6 +2,7 @@ const flows = [
     {
         "sublabel": "open-section",
         "clickSelector": "div[data-id='section-w-accessories-title']",
+        delay: 500,
     },
 ];
 

@@ -16,8 +16,10 @@ import RockerButton, { rockerTypes } from "ui-library/lib/components/forms/Rocke
 class ColumnCardDemo extends React.Component {
     render() {
         const legend = [
-            { label: "Mobile", id: "mobile", color: "#49BF6B" },
-            { label: "Test Thing", id: "desktop", color: "#379250" },
+            { label: "Usage", id: "usage", yAxisId: "users", color: "#2A713E" },
+            { label: "Visitors", id: "visitors", yAxisId: "users", color: "#48C06A" },
+            { label: "Cost", id: "cost", yAxisId: "cost", color: "#389251" },
+            { label: "Savings", id: "savings", yAxisId: "cost", color: "#5DEB85" },
         ];
 
         /**
@@ -33,12 +35,20 @@ class ColumnCardDemo extends React.Component {
                         id: "November 11, 2019",
                         data: [
                             {
-                                id: "mobile",
+                                id: "usage",
                                 value: 20,
                             },
                             {
-                                id: "desktop",
-                                value: 43 ,
+                                id: "cost",
+                                value: 0.45,
+                            },
+                            {
+                                id: "visitors",
+                                value: 15,
+                            },
+                            {
+                                id: "savings",
+                                value: 0.4,
                             }
                         ]
                     },
@@ -46,25 +56,41 @@ class ColumnCardDemo extends React.Component {
                         id: "November 12, 2019",
                         data: [ // Order does not matter
                             {
-                                id: "desktop",
+                                id: "cost",
+                                value: 0.87,
+                            },
+                            {
+                                id: "usage",
                                 value: 10,
                             },
                             {
-                                id: "mobile",
-                                value: 5,
+                                id: "visitors",
+                                value: 13,
                             },
+                            {
+                                id: "savings",
+                                value: 0.63,
+                            }
                         ]
                     },
                     {
                         id: "November 13, 2019",
                         data: [
                             {
-                                id: "mobile",
+                                id: "usage",
                                 value: 30,
                             },
                             {
-                                id: "desktop",
-                                value: 12,
+                                id: "cost",
+                                value: 0.32,
+                            },
+                            {
+                                id: "visitors",
+                                value: 4,
+                            },
+                            {
+                                id: "savings",
+                                value: 0.22,
                             }
                         ]
                     },
@@ -83,14 +109,24 @@ class ColumnCardDemo extends React.Component {
                         boxAlignment={boxAlignments.CENTER}
                         data={[
                             {
-                                color: "#49BF6B",
-                                label: "Desktop",
-                                value: "42",
+                                color: "#2A713E",
+                                label: "Usage",
+                                value: "0",
                             },
                             {
-                                color: "#379250",
-                                label: "Mobile",
-                                value: "55",
+                                color: "#389251",
+                                label: "Cost",
+                                value: "$0.00",
+                            },
+                            {
+                                color: "#48C06A",
+                                label: "Visitors",
+                                value: "0",
+                            },
+                            {
+                                color: "#5DEB85",
+                                label: "Savings",
+                                value: "$0.00",
                             },
                         ]}
                     />
@@ -99,11 +135,17 @@ class ColumnCardDemo extends React.Component {
                     <ColumnChart
                         data={columnData[0].data}
                         legend={legend}
+                        stacked={false}
                         renderTooltip={(props, LegendItem) => (
                             <LegendItem
                                 color={props.color}
                                 label={props.y.label}
-                                value={`$${props.value}`}
+                                value={
+                                    props.y.label === "cost" ||
+                                        props.y.label === "savings"
+                                        ? `$${props.value}`
+                                        : props.value
+                                }
                             />
                         )}
                     />
