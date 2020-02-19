@@ -526,7 +526,8 @@ export default class SocialLogin extends Component {
                                     <FileUpload
                                         accepts={[".jpg"]}
                                         defaultImage="src/demo/images/logo-facebook.png"
-                                        labelRemove={activeProvider.customLogo && "Remove"}
+                                        labelSelect="choose"
+                                        labelRemove={activeProvider.customLogo ? "Remove" : ""}
                                         showThumbnail
                                         label="Logo"
                                         onChange={this.setProviderImage}
@@ -552,7 +553,8 @@ export default class SocialLogin extends Component {
                                     <InputRow>
                                         <FileUpload
                                             accepts={[".jpg", ".jpeg", ".png"]}
-                                            labelRemove={activeProvider.socialButtonImage && "Remove"}
+                                            labelSelect="choose"
+                                            labelRemove={activeProvider.socialButtonImage ? "Remove" : ""}
                                             showThumbnail
                                             label="Social Button (80PX x 680PX, .JPG/.PNG)"
                                             onChange={this.setSocialButtonImage}
