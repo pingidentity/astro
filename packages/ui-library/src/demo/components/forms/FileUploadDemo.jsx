@@ -135,7 +135,6 @@ export default class FileUploadDemo extends React.Component {
                         labelSelect="Choose a File"
                         labelRemove="Remove"
                         name="second-one"
-                        defaultImage="src/demo/images/favicon.png"
                     />
                     <br /><br />
                     Selected file = {this.state.file1}

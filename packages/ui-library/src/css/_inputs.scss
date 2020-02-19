@@ -1263,12 +1263,11 @@ input[type=file] {
             &:before {
                 display: block;
                 position: absolute;
-                left: -10px;
                 color: $color-stratus;
                 font-family: $icon-font;
                 text-transform: none;
                 content: $icon-image;
-                font-size: 85px;
+                font-size: 90px;
                 height: $img-width;
                 line-height: 1.3em;
             }
