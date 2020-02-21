@@ -7,7 +7,6 @@ import FlexRow, { justifyOptions } from "ui-library/lib/components/layout/FlexRo
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import PageSection from "ui-library/lib/components/layout/PageSection";
-import Text from "ui-library/lib/components/general/Text";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import PasswordStrengthMeter from "ui-library/lib/components/general/PasswordStrengthMeter";
@@ -84,7 +83,7 @@ export default class PasswordPolicy extends Component {
                 value: "3",
                 label: (
                     <span>
-                        The password will be checked against a list of most commonly-used passwords
+                        The password will be checked against a list of most commonly-used passwords.
                     </span>
                 )
             }, {
@@ -93,7 +92,7 @@ export default class PasswordPolicy extends Component {
                     <span>
                         The password cannot have more than&nbsp;
                         <FormTextField inline size={5} errorMessage="Example Error Message"/>&nbsp;
-                        repeated characters
+                        repeated characters.
                     </span>
                 )
             }, {
@@ -101,7 +100,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password must have a minimum of&nbsp;
-                        <FormTextField inline size={5} /> unique characters
+                        <FormTextField inline size={5} /> unique characters.
                     </span>
                 )
             }, {
@@ -109,7 +108,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password must be between <FormTextField inline size={5} />
-                        and <FormTextField inline size={5} /> characters
+                        and <FormTextField inline size={5} /> characters.
                     </span>
                 )
             }, {
@@ -117,7 +116,7 @@ export default class PasswordPolicy extends Component {
                 label: (
                     <span>
                         The password must have at least&nbsp;
-                        <FormTextField inline={true} size={5} /> number(s)
+                        <FormTextField inline={true} size={5} /> number(s).
                     </span>
                 )
             }, {
@@ -126,7 +125,7 @@ export default class PasswordPolicy extends Component {
                     <span>
                         The password must have at least <FormTextField inline={true} size={5} />
                         &nbsp;
-                        lower case letter(s): abcdefghijklmnopqrstuvwxyz
+                        lower case letter(s): abcdefghijklmnopqrstuvwxyz.
                     </span>
                 )
             }, {
@@ -135,7 +134,7 @@ export default class PasswordPolicy extends Component {
                     <span>
                         The password must have at least <FormTextField inline={true} size={5} />
                         &nbsp;
-                        upper case letter(s): ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                        upper case letter(s): ABCDEFGHIJKLMNOPQRSTUVWXYZ.
                     </span>
                 )
             }, {
@@ -144,6 +143,7 @@ export default class PasswordPolicy extends Component {
                     <span>
                         The password must have at least&nbsp;
                         <FormTextField inline={true} size={5} />
+                        &nbsp;
                         special characters: {`~!@#$%^&*()-_=+[]{}|;:,.<>/?`}
                     </span>
                 )
@@ -215,17 +215,18 @@ export default class PasswordPolicy extends Component {
                 <PageSection
                     title="Password Requirements"
                 >
+
                     <Layout.Row data-id="columns-2" autoWidth>
                         <Layout.Column>
                             {requirementItems.map((o, key) => (
                                 <InputRow key={key}>
-                                    <Text>
-                                        <FormCheckbox
-                                            onChange={this._handleCheckboxChange(o.value)}
-                                            checked={this.state.checkboxes[o.value]}
-                                        />
-                                        {o.label}
-                                    </Text>
+                                    <FormCheckbox
+                                        onChange={this._handleCheckboxChange(o.value)}
+                                        checked={this.state.checkboxes[o.value]}
+                                        label={o.label}
+                                        inline
+                                        stacked
+                                    />
                                 </InputRow>
                             ))}
                         </Layout.Column>
@@ -240,13 +241,13 @@ export default class PasswordPolicy extends Component {
                 >
                     {policyItems.map((o, key) => (
                         <InputRow key={key}>
-                            <Text>
-                                <FormCheckbox
-                                    onChange={this._handleCheckboxChange(o.value)}
-                                    checked={this.state.checkboxes[o.value]}
-                                />
-                                {o.label}
-                            </Text>
+                            <FormCheckbox
+                                onChange={this._handleCheckboxChange(o.value)}
+                                checked={this.state.checkboxes[o.value]}
+                                label={o.label}
+                                inline
+                                stacked
+                            />
                         </InputRow>
                     ))}
                 </PageSection>
