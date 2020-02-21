@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "underscore";
-import DetailsTooltip, { detailsWidths, DetailsTitle } from "ui-library/lib/components/tooltips/DetailsTooltip";
+import DetailsTooltip, { detailsWidths, DetailsTitle, tooltipPlacements }
+    from "ui-library/lib/components/tooltips/DetailsTooltip";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
@@ -185,7 +186,7 @@ class DetailsTooltipDemo extends React.Component {
                 <DetailsTooltip
                     label="With alert styling"
                     type="alert"
-                    positionClassName="" // this is to override the default positionClassName
+                    placement={tooltipPlacements.BOTTOM}
                     title="Title won't display"
                     open={this.state.open5}
                     onToggle={this._handleToggle(5)}
