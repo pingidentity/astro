@@ -26,7 +26,9 @@ import ChartLabel from "./ChartLabel";
  * @param {array} highlightRange
  *     Start and end indexes of data to be highlighted eg: [3, 5].
  * @param {array} [legend]
- *     Array of objects to assiciate labels and ids.
+ *     Array of objects to associate labels and ids.
+ * @param {array} [lines=false]
+ *     If true, chart will show horizontal lines.
  * @param {function} [onClick]
  *     Callback triggered when the mouse clicks a data point.
  * @param {function} [onHoverDataPoint]
@@ -34,7 +36,7 @@ import ChartLabel from "./ChartLabel";
  * @param {boolean} [showHighLight=false]
  *     If a range highlight should be shown.
  * @param {object} theme
- *     Theme with refrenceLabelColor, refrenceLineColor, highlightColor, and dataColors
+ *     Theme with referenceLabelColor, referenceLineColor, highlightColor, and dataColors
  * @param {string} [width]
  *     Width of the chart.
  */
@@ -50,6 +52,7 @@ export default class LineChart extends React.Component {
                 id: PropTypes.string,
             })
         ),
+        lines: PropTypes.bool,
         onClick: PropTypes.func,
         onHoverDataPoint: PropTypes.func,
         showHighlight: PropTypes.bool,
@@ -70,6 +73,7 @@ export default class LineChart extends React.Component {
         height: "100%",
         highlightRange: [],
         legend: [],
+        lines: true,
         onClick: _.noop,
         onHoverDataPoint: _.noop,
         showHighlight: false,
@@ -268,6 +272,7 @@ export default class LineChart extends React.Component {
             height,
             layout,
             legend,
+            lines,
             onClick,
             showHighlight,
             theme,
@@ -292,6 +297,13 @@ export default class LineChart extends React.Component {
                         top: 20, right: 30, left: 30, bottom: 5,
                     }}
                 >
+                    {lines === true
+                        ? <CartesianGrid
+                            vertical={false}
+                            horizontalPoints={getEvenLineCoords(this.props.height)}
+                        />
+                        : null
+                    }
                     {this._renderData(legend)}
                     {
                         // Show highlight if prop is enabled
@@ -300,10 +312,6 @@ export default class LineChart extends React.Component {
                             : null
                     }
                     <XAxis dataKey="name" hide={true} />
-                    <CartesianGrid
-                        vertical={false}
-                        horizontalPoints={getEvenLineCoords(this.props.height)}
-                    />
                     {
                         data.length > 0 && legend.length > 0 &&
                         this._renderReferenceLine()
