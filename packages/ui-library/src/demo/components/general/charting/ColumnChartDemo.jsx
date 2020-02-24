@@ -86,7 +86,7 @@ class ColumnCardDemo extends React.Component {
                             },
                             {
                                 id: "visitors",
-                                value: 4,
+                                value: 0,
                             },
                             {
                                 id: "savings",

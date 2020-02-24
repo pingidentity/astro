@@ -274,6 +274,7 @@ export default class ColumnChart extends React.Component {
                                 key={id}
                                 stackId={this.props.stacked ? "a" : id}
                                 maxBarSize={60}
+                                minPointSize={15}
                                 fill={color}
                                 onClick={this._handleClick(id)}
                                 onMouseOver={this._handleMouseOver(id)}

@@ -91,7 +91,7 @@ export const LegendItem = ({
                 </div>
             ) : null }
             <div className={valueClassNames}>
-                { value ? value : (
+                { value !== undefined && value !== null ? value : (
                     <div className="legend__item-novalue"/>
                 )}
             </div>
