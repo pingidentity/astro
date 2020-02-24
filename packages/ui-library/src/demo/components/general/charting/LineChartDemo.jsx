@@ -6,6 +6,7 @@ import Legend, {
     boxAlignments
 } from "ui-library/lib/components/general/charting/Legend";
 import ChartTitle from "ui-library/lib/components/general/charting/ChartTitle";
+import HR from "ui-library/lib/components/general/HR";
 import RockerButton, { rockerTypes } from "ui-library/lib/components/forms/RockerButton";
 import { generateTheme } from "../../../../util/ChartingUtils";
 
@@ -215,33 +216,64 @@ class LineChartDemo extends React.Component {
         const controlLabels = ["1d", "1w"];
 
         return (
-            <ChartWrapper
-                title={<ChartTitle title="Visitors" />}
-                legend={
-                    <Legend
-                        alignment={legendAlignments.CENTER}
-                        boxAlignment={boxAlignments.CENTER}
-                        data={legend}
-                    />
-                }
-                chart={
-                    <LineChart
-                        data={data[0].data}
-                        legend={legend}
-                        width="100%"
-                        height={150}
-                        theme={generateTheme("#4c8dca", legend)}
-                    />
-                }
-                controls={
-                    <RockerButton
-                        labels={controlLabels}
-                        noMargin
-                        selectedIndex={0}
-                        type={rockerTypes.CHART}
-                    />
-                }
-            />
+            <div>
+                <ChartWrapper
+                    title={<ChartTitle title="Visitors" />}
+                    legend={
+                        <Legend
+                            alignment={legendAlignments.CENTER}
+                            boxAlignment={boxAlignments.CENTER}
+                            data={legend}
+                        />
+                    }
+                    chart={
+                        <LineChart
+                            data={data[0].data}
+                            legend={legend}
+                            width="100%"
+                            height={150}
+                            theme={generateTheme("#4c8dca", legend)}
+                        />
+                    }
+                    controls={
+                        <RockerButton
+                            labels={controlLabels}
+                            noMargin
+                            selectedIndex={0}
+                            type={rockerTypes.CHART}
+                        />
+                    }
+                />
+                <HR />
+                <ChartWrapper
+                    title={<ChartTitle title="Visitors" />}
+                    legend={
+                        <Legend
+                            alignment={legendAlignments.CENTER}
+                            boxAlignment={boxAlignments.CENTER}
+                            data={legend}
+                        />
+                    }
+                    chart={
+                        <LineChart
+                            data={data[0].data}
+                            legend={legend}
+                            lines={false}
+                            width="100%"
+                            height={150}
+                            theme={generateTheme("#4c8dca", legend)}
+                        />
+                    }
+                    controls={
+                        <RockerButton
+                            labels={controlLabels}
+                            noMargin
+                            selectedIndex={0}
+                            type={rockerTypes.CHART}
+                        />
+                    }
+                />
+            </div>
         );
     }
 }

@@ -128,4 +128,16 @@ describe("LineChart", () => {
 
         expect(line.prop("label")({ viewBox: { x: 0, y: 0 } })).toEqual(null);
     });
+
+    it("shows lines if lines prop is set to true", () => {
+        const component = getComponent({ lines: true });
+
+        expect(component.find("CartesianGrid").exists()).toEqual(true);
+    });
+
+    it("does not show lines if lines prop is set to false", () => {
+        const component = getComponent({ lines: false });
+
+        expect(component.find("CartesianGrid").exists()).toEqual(false);
+    });
 });
