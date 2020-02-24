@@ -30,8 +30,7 @@ const exitWithError = (server, e) => {
 const isApprovalRun = process.argv.includes("--approve");
 const isCIRun = process.argv.includes("--ci");
 
-const runTests = server => backstop(isApprovalRun ? "approve" : "test", {
-    docker: !isCIRun })
+const runTests = server => backstop("test", { docker: !isCIRun })
     .then(() => {
         if (server) {
             server.close();
@@ -83,7 +82,10 @@ const checkForServer = () => fetch("http://localhost:8080/")
 // Have to write out a backstop.json file in order to have Docker get the right config
 fs.writeFileSync("backstop.json", JSON.stringify(backstopConfig(isCIRun ? "ci" : "local", port)));
 
-if (isCIRun) {
+// Approve just promotes saved images, so there's no need to kick up a server.
+if (isApprovalRun) {
+    backstop("approve", { docker: true });
+} else if (isCIRun) {
     packAndRunTests();
 } else {
     checkForServer();

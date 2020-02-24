@@ -274,13 +274,18 @@ class PieChart extends React.Component {
 
         const id = d.payload[0].payload.id;
 
-        const element = this.props.data.find(item => item.id === id);
+        const {
+            color,
+            label,
+            series,
+            [this.props.dataValue]: value
+        } = this.props.data.find(item => item.id === id);
 
         const data = {
-            color: element.color,
-            label: element.label,
-            ...(element[this.props.dataValue] && { value: element[this.props.dataValue] }),
-            ...(element.series && { series: element.series }),
+            color: color,
+            label: label,
+            ...(value !== null && value !== undefined ? { value } : {}),
+            ...(series && { series }),
             dataValue: this.props.dataValue,
         };
 
@@ -313,6 +318,7 @@ class PieChart extends React.Component {
                     nameKey={this.props.dataKey}
                     dataKey={this.props.dataValue}
                     paddingAngle={1}
+                    minAngle={5}
                     innerRadius="55%"
                     legendType={this.props.legendType}
                     onMouseOver={this._mouseOver}

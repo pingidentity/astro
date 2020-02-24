@@ -50,7 +50,7 @@ const PieChartDemo = () => {
             color: "#96E7FF",
             id: "bears",
             label: "Bears",
-            value: 13,
+            value: 0,
         }
     ];
 
