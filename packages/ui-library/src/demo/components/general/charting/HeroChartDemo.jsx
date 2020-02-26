@@ -34,7 +34,7 @@ const data = {
 
     ],
     "7D": [
-        { id: "Sat 12/8", successes: 4000, failures: 200 },
+        { id: "Sat 12/8", successes: 2, failures: 200 },
         { id: "Sun 12/9", successes: 3000, failures: 198 },
         { id: "Mon 12/10", successes: 0, failures: 0 },
         { id: "Tue 12/11", successes: 3908, failures: 200 },
