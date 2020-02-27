@@ -49,7 +49,7 @@ export const chipTypes = {
 *     Class name(s) to add to the top-level container/div.
 * @param {Chip.chipColors} [color]
 *     The background color of the component.
-* @param {string || object} [color]
+* @param {(string | object)} [color]
 *      An object that holds all of the styling information for the chip color.
 * @param {string} [color.background ]
 *     Changes the backgroundColor to whatever the user specifies.

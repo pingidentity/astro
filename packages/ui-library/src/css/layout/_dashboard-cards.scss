@@ -95,6 +95,27 @@ $fullwidthBreakpoint: 950px;
         }
     }
 
+    &--padding-sm {
+        .dashboard-card__front,
+        .dashboard-card__back {
+            padding: $spacing-sm;
+        }
+    }
+
+    &--padding-md {
+        .dashboard-card__front,
+        .dashboard-card__back {
+            padding: $spacing-md;
+        }
+    }
+
+    &--padding-lg {
+        .dashboard-card__front,
+        .dashboard-card__back {
+            padding: $spacing-lg;
+        }
+    }
+
     label.dashboard-card__make-default {
         position: absolute;
         bottom: 21px;
@@ -563,8 +584,10 @@ $fullwidthBreakpoint: 950px;
 }
 
 .pie-chart {
-    display: inline-block;
+    display: flex;
     position: relative;
+    margin: -20px 0;
+    justify-content: center;
 
     &__graph {
         display: inline-block;
@@ -596,13 +619,15 @@ $fullwidthBreakpoint: 950px;
         }
 
         &-label {
-            font-size: 14px;
+            font-size: 12px;
+            line-height: 12px;
             text-transform: uppercase;
-            margin-bottom: $spacing-sm;
+            margin-bottom: $spacing-xs;
         }
 
         &-value {
-            font-size: 38px;
+            font-size: 26px;
+            line-height: 26px;
             font-weight: 600;
             color: $color-accent-neutral-10;
         }

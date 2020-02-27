@@ -70,7 +70,6 @@ export const generateTheme = (seedColor, data) => {
 /**
  * Returns coordinates for drawing evenly spaced lines with a min and max offset
  */
-
 export const getEvenLineCoords = (height, numLines = 5) => {
     //offsets are set to what recharts uses by default
     const minOffset = 20;
@@ -86,4 +85,21 @@ export const getEvenLineCoords = (height, numLines = 5) => {
     });
 
     return lines;
+};
+
+/**
+ * Abbreviates the given number
+ */
+export const getAbbreviatedValue = (value) => {
+    if (value >= 1000000) {
+        return `${Number.parseFloat((value / 1000000).toFixed(2))}m`;
+    } else if (value >= 100000) {
+        return `${Number.parseFloat((value / 1000).toFixed(0))}k`;
+    } else if (value >= 10000) {
+        return `${Number.parseFloat((value / 1000).toFixed(1))}k`;
+    } else if (value >= 1000) {
+        return `${Number.parseFloat((value / 1000).toFixed(2))}k`;
+    } else {
+        return value;
+    }
 };

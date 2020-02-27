@@ -12,6 +12,7 @@ import classnames from "classnames";
 import { defaultRender } from "../../../util/PropUtils";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem, alignments, valueSizes } from "./Legend";
+import { getAbbreviatedValue } from "../../../util/ChartingUtils";
 
 export const PieChartTitle = ({ className, ...props }) => (
     <DashboardCardTitle
@@ -24,10 +25,29 @@ export const CenterLabel = ({
     children,
     color,
 }) => <div className="pie-chart__center-label" style={{ color }}>{children}</div>;
+
+CenterLabel.propTypes = {
+    color: PropTypes.string,
+};
+
 export const CenterValue = ({
     children,
     color,
-}) => <div className="pie-chart__center-value" style={{ color }}>{children}</div>;
+    abbreviated,
+}) => (
+    <div className="pie-chart__center-value" style={{ color }}>
+        { abbreviated ? getAbbreviatedValue(children) : children }
+    </div>
+);
+
+CenterValue.propTypes = {
+    color: PropTypes.string,
+    abbreviated: PropTypes.bool,
+};
+
+CenterValue.defaultProps = {
+    abbreviated: true,
+};
 
 /**
  * @class MetricsTooltip
@@ -191,6 +211,7 @@ class PieChart extends React.Component {
     state = {
         selected: {},
     };
+    
 
     /**
      * Get the value or the total of the [series] values for an item
@@ -222,7 +243,7 @@ class PieChart extends React.Component {
 
     _isResponsive = () => this._isPercentageValue(this.props.height) || this._isPercentageValue(this.props.width);
 
-    _mouseOver = (data, index, event) => {
+    _mouseEnter = (data, index, event) => {
         const element = this.props.data.find((item) => item.id === data.id);
 
         this.setState({
@@ -242,7 +263,7 @@ class PieChart extends React.Component {
         this.props.onClick(element, event);
     };
 
-    _mouseOut = (...args) => {
+    _mouseLeave = (...args) => {
         this.setState({ selected: {} });
 
         // Just send the event
@@ -273,13 +294,19 @@ class PieChart extends React.Component {
         }
 
         const id = d.payload[0].payload.id;
+        const element = this.props.data.find(item => item.id === id);
+
+        // Check to see if elem exists
+        if (element === undefined) {
+            return;
+        }
 
         const {
             color,
             label,
             series,
             [this.props.dataValue]: value
-        } = this.props.data.find(item => item.id === id);
+        } = element;
 
         const data = {
             color: color,
@@ -312,27 +339,27 @@ class PieChart extends React.Component {
                 width={this.props.width}
                 height={this.props.height}
                 className="pie-chart__graph"
+                onMouseLeave={this._mouseLeave}
             >
                 <Pie
                     data={chartData}
                     nameKey={this.props.dataKey}
                     dataKey={this.props.dataValue}
                     paddingAngle={1}
-                    minAngle={5}
                     innerRadius="55%"
+                    minAngle={5}
                     legendType={this.props.legendType}
-                    onMouseOver={this._mouseOver}
-                    onMouseLeave={this._mouseOut}
+                    onMouseEnter={this._mouseEnter}
                     onClick={this._onClick}
                 >
                     {this._renderCells(chartData)}
                 </Pie>
                 {this.props.showTooltips &&
-            <Tooltip
-                isAnimationActive={true}
-                content={this._renderTooltip}
-                cursor={false}
-            />
+                    <Tooltip
+                        isAnimationActive={true}
+                        content={this._renderTooltip}
+                        cursor={false}
+                    />
                 }
             </Chart>
         );

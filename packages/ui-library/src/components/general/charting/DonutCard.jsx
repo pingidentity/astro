@@ -9,6 +9,8 @@ import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
 import Colors from "../charting/Cards/dashboardColors";
+import { getAbbreviatedValue } from "../../../util/ChartingUtils";
+
 /**
  * @typedef {Object} DonutCard~data
  * @param {string} [id]
@@ -96,20 +98,6 @@ class DonutCard extends Component {
         });
     };
 
-    _getCenterValue = (value) => {
-        if (value >= 1000000) {
-            return `${Number.parseFloat((value / 1000000).toFixed(2))}m`;
-        } else if (value >= 100000 ) {
-            return `${Number.parseFloat((value / 1000).toFixed(0))}k`;
-        } else if (value >= 10000) {
-            return `${Number.parseFloat((value / 1000).toFixed(1))}k`;
-        } else if (value >= 1000) {
-            return `${Number.parseFloat((value / 1000).toFixed(2))}k`;
-        } else {
-            return value;
-        }
-    };
-
     _renderCommas = (value) => {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
@@ -156,7 +144,7 @@ class DonutCard extends Component {
                                 }
                                 centerValue={
                                     <CenterValue color={this.state.statColor}>
-                                        {this._getCenterValue(this.props.value)}
+                                        {getAbbreviatedValue(this.props.value)}
                                     </CenterValue>
                                 }
                                 data={dataWithColors}

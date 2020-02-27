@@ -37,6 +37,8 @@ import Spinner from "../../general/Spinner";
  *     Array of integers representing the data within the chart.
  * @param {Object[]} [legend=[]]
  *     Legend for the chart.
+ * @param {boolean} [lines=true]
+ *     If true, chart will show horizontal lines.
  * @param {string} [referenceLineColor]
  *     The color for the chart's reference line, represented by a hex
  *     color. For example, "#FFFFFF".
@@ -105,6 +107,7 @@ export default class ColumnChart extends React.Component {
             id: PropTypes.string,
             color: PropTypes.string
         })),
+        lines: PropTypes.bool,
         referenceLabelColor: PropTypes.string,
         referenceLineColor: PropTypes.string,
         renderTooltip: PropTypes.func,
@@ -117,6 +120,7 @@ export default class ColumnChart extends React.Component {
         data: [],
         height: 300,
         legend: [],
+        lines: true,
         onClick: _.noop,
         onMouseOver: _.noop,
         onMouseOut: _.noop,
@@ -128,7 +132,7 @@ export default class ColumnChart extends React.Component {
     };
 
     state = {
-        selected: { x: null, y: null },
+        selected: { x: null, y: null }
     };
 
     _digestData = (data) =>
@@ -202,13 +206,18 @@ export default class ColumnChart extends React.Component {
             return;
         }
 
+        const valueData = this.props.data.find(o => o.id === this.state.selected.x.label);
+
+        // Check to see if selected.x is refrencing an old data set
+        if (!valueData) {
+            return;
+        }
+
         const data = {
             color: [...this.props.legend].reverse()[this.state.selected.y.index].color,
             x: this.state.selected.x,
             y: this.state.selected.y,
-            value: this.props.data
-                .find(o => o.id === this.state.selected.x.label).data
-                .find(o => o.id === this.state.selected.y.label).value
+            value: valueData.data.find(o => o.id === this.state.selected.y.label).value
         };
 
         return (
@@ -225,6 +234,7 @@ export default class ColumnChart extends React.Component {
             legend,
             loadingMessage,
             "data-id": dataId,
+            lines,
         } = this.props;
 
         const digestedData = this._digestData(data);
@@ -252,17 +262,18 @@ export default class ColumnChart extends React.Component {
                         }}
                         className="column-chart"
                         data-id={dataId}
-                        onMouseOut={this._handleMouseOut}
                     >
                         <XAxis dataKey="name" hide={true} />
                         {this._generateYAxes(legend)}
 
-                        <CartesianGrid
-                            vertical={false}
-                            horizontalPoints={horizontalPoints}
-                        />
+                        {lines
+                            ? <CartesianGrid
+                                vertical={false}
+                                horizontalPoints={horizontalPoints}
+                            />
+                            : null
+                        }
                         <Tooltip
-                            isAnimationActive={true}
                             content={this._renderTooltip}
                             cursor={false}
                         />
