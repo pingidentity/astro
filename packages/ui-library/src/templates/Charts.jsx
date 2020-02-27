@@ -289,6 +289,10 @@ class ChartView extends React.Component {
     }
 }
 
+/**
+ * @class Chart Layout
+ * @desc This is a template for dashboard Chart Layout
+ */
 class Charts extends React.Component {
     state = {
         selectedChart: null,
