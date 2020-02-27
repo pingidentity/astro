@@ -54,7 +54,8 @@ const skippedDemos = [
     "LineChart",
     "PageSpinner",
     "Spinner",
-    "TimeZone"
+    "TimeZone",
+    "ChartLayout"
 ];
 
 // Remove require statements to avoid parsing and resolving them

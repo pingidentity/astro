@@ -1,0 +1,16 @@
+.card-grid {
+    display: grid;
+    grid-gap: $spacing-sm;
+    place-items: start;
+    grid-auto-rows: min-content; // All rows same height
+
+    &__block {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+
+        & > * {
+            height: 100%;
+        }
+    }
+}

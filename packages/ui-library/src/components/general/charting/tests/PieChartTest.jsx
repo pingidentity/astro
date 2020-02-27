@@ -97,7 +97,7 @@ describe("PieChart", () => {
         expect(component.find(".pie-chart__center-value").text()).toEqual("28");
     });
 
-    it("calls onMouseOver with correct data", () => {
+    it("calls onMouseEnter with correct data", () => {
         const onMouseOver = jest.fn();
         const component = getComponent({
             onMouseOver: onMouseOver,
@@ -105,7 +105,7 @@ describe("PieChart", () => {
 
         const fakeEvent = { target: "doesn't matter" };
 
-        component.instance()._mouseOver({
+        component.instance()._mouseEnter({
             id: "dogs"
         }, 0, fakeEvent);
 
@@ -125,13 +125,13 @@ describe("PieChart", () => {
         }, fakeEvent);
     });
 
-    it("calls onMouseOut with correct arguments", () => {
+    it("calls onMouseLeave with correct arguments", () => {
         const onMouseOut = jest.fn();
         const component = getComponent({
             onMouseOut: onMouseOut,
         });
 
-        component.instance()._mouseOut();
+        component.instance()._mouseLeave();
         expect(onMouseOut).toHaveBeenCalled();
     });
 

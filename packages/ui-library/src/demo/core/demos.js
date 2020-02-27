@@ -1414,6 +1414,13 @@ module.exports = [
                         icon: "details"
                     },
                     {
+                        label: "Chart Layout",
+                        demo: require("../../templates/Charts"),
+                        pathToSource: "templates_Charts.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
                         label: "Certificate Management",
                         demo: require("../../templates/CertificateManagement"),
                         pathToSource: "templates_CertificateManagement.jsx.html",

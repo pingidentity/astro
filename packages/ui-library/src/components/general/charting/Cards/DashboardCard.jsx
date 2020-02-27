@@ -7,6 +7,12 @@ import classnames from "classnames";
 import Checkbox from "../../../forms/FormCheckbox";
 import InputModifier, { inputColors } from "../../../general/InputModifier";
 
+export const padding = {
+    SM: "sm",
+    MD: "md",
+    LG: "lg",
+};
+
 /**
  * @class DashboardCard
  * @desc A card that displays a single statistic, but can be flipped to reveal others as well.
@@ -69,6 +75,7 @@ class DashboardCard extends React.Component {
         onMakeDefault: PropTypes.func,
         makeDefaultLabel: PropTypes.string,
         maxWidth: PropTypes.string,
+        padding: PropTypes.oneOf(Object.values(padding)),
     }
 
     static defaultProps = {
@@ -109,6 +116,9 @@ class DashboardCard extends React.Component {
             {
                 "dashboard-card--flipped": this._isFlipped() && !this.props.errorMessage,
                 "dashboard-card--double": this.props.size === 2,
+                "dashboard-card--padding-sm": this.props.padding === padding.SM,
+                "dashboard-card--padding-md": this.props.padding === padding.MD,
+                "dashboard-card--padding-lg": this.props.padding === padding.LG,
             }
         );
 
