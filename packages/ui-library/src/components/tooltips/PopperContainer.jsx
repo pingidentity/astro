@@ -77,6 +77,7 @@ class PopperContainer extends React.Component {
     _matchReferenceWidth = data => {
         data.styles.minWidth = data.offsets.reference.width + "px";
         data.styles.maxWidth = data.offsets.reference.width + "px";
+        data.styles.left = data.offsets.reference.left + "px";
         return data;
     }
 

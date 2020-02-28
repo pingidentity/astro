@@ -5,6 +5,7 @@ import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
 import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Modal from "ui-library/lib/components/general/Modal";
+import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
 
 /**
 * @name ModalDemo
@@ -39,7 +40,7 @@ class ModalDemo extends React.Component {
         return (
             <div>
                 <InputRow>
-                    <a onClick={this._makeToggle(1)}>Open Default Modal</a>
+                    <a data-id="first-trigger" onClick={this._makeToggle(1)}>Open Default Modal</a>
 
                     <Modal
                         data-id="default-example"
@@ -58,6 +59,12 @@ class ModalDemo extends React.Component {
                             <p>
                                 The height will grow until it is 40px from the bottom of the users screen.
                             </p>
+                            <FormDropDownList data-id="test-dropdown" options={[
+                                {
+                                    value: "one",
+                                    label: "one"
+                                }
+                            ]} />
                         </div>
                     </Modal>
                 </InputRow>
