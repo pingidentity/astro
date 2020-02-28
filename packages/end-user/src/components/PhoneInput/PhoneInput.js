@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { noop } from 'underscore';
 import countryCodes from './countryCodes';
 import TextInput from '../TextInput';
 import utils from '../../util/Validators';
@@ -11,12 +12,12 @@ import GenericStateContainer from '../../util/GenericStateContainer';
  * @description A component for inputting a country code and number
  * @param {string} [data-id='phone-input']
  *      The data-id attribute value applied to the element.
- * @param {string} dialCode
- *      The value of the dial code input when dropdown closed.
+ * @param {string} country
+ *      2-character ISO code for country is selected.
  * @param {boolean} [dropdownOpen=false]
  *      The open state of the dial code dropdown.
- * @param {PhoneInput~onDialCodeChange} onDialCodeChange
- *      The callback triggered when the dial code value changes.
+ * @param {PhoneInput~onCountryChange} onCountryChange
+ *      The callback triggered when the country changes. Callback is provided with ISO country code.
  * @param {PhoneInput~onPhoneNumberValueChange} onPhoneNumberValueChange
  *      The callback triggered when the phone number input value changes.
  * @param {PhoneInput~onSearchValueChange} onSearchValueChange
@@ -25,8 +26,6 @@ import GenericStateContainer from '../../util/GenericStateContainer';
  *      The text to display in phone number input.
  * @param {string} placeholder
  *      The text to display in phone number input before a value is entered a a placeholder.
- * @param {string|number} value
- *      The current value of the input
  */
 const PhoneInputStateless = ({
     dropdownOpen,
@@ -59,6 +58,7 @@ const PhoneInputStateless = ({
                             label: `${country.name} +${country.dialCode}`,
                             searchTerm: country.name,
                             value: country.iso2,
+                            dialCode: country.dialCode,
                         }
                     })}
                     placeholder="Search countries..."
@@ -137,7 +137,7 @@ const CountryDropdown = ({
             {open &&
                 <ul className="dropdown__list">
                     {options.map((option) => {
-                        if (!option.searchTerm.toUpperCase().includes(searchValue.toUpperCase())) return
+                        if (!option.searchTerm.toUpperCase().includes(searchValue.toUpperCase())) return;
                         return (
                             <li
                                 className={classnames(
@@ -149,7 +149,7 @@ const CountryDropdown = ({
                                 key={option.value}
                                 value={option.value}
                                 role="button"
-                                onClick={(e) => onValueChange(option.value, e)}
+                                onClick={(e) => onValueChange(option.value, e, option)}
                             >
                                 {option.label}
                             </li>
@@ -184,8 +184,8 @@ CountryDropdown.defaultProps = {
     id: 'country-code-input',
     error: false,
     open: false,
-    onValueChange: () => { },
-    onSearchValueChange: () => { },
+    onValueChange: noop,
+    onSearchValueChange: noop,
     options: [],
 };
 
@@ -231,30 +231,22 @@ const PhoneInput = props => (
             const onPhoneNumberValueChange = (val, e) => {
                 if (utils.isValidPhoneNumber(val)) {
                     setPhoneNumber(val);
-
-                    if (props.onPhoneNumberValueChange) {
-                        props.onPhoneNumberValueChange(val, e);
-                    }
+                    props.onPhoneNumberValueChange(val, e);
                 }
             };
 
             const onSearchValueChange = (val, e) => {
                 setDialCodeSearchValue(val);
-
-                if (props.onSearchValueChange) {
-                    props.onSearchValueChange(val, e);
-                }
+                props.onSearchValueChange(val, e);
             };
 
-            const onCountryChange = (val, e) => {
-                setCountry(val);
+            const onCountryChange = (iso2, e, dialCode) => {
+                setCountry(iso2);
                 setDialCodeSearchValue('');
                 setDropDownOpen(false);
 
-                if (props.onDialCodeChange) {
-                    props.onCountryChange(val, e);
-                    props.onToggleDropdown();
-                }
+                props.onCountryChange(iso2, e, { dialCode, iso2 });
+                props.onToggleDropdown();
             };
 
             const onToggleDropdown = () => setDropDownOpen(!getDropdownOpen());
@@ -285,6 +277,13 @@ PhoneInput.propTypes = {
     country: PropTypes.string,
     phoneNumber: PropTypes.string,
     dropdownOpen: PropTypes.bool,
+};
+
+PhoneInput.defaultProps = {
+    onToggleDropdown: noop,
+    onCountryChange: noop,
+    onPhoneNumberValueChange: noop,
+    onSearchValueChange: noop
 };
 
 export default PhoneInput;
