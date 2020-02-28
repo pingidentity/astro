@@ -18,9 +18,11 @@ function ChartWrapper({
 }) {
     return (
         <div className={BASE_CLASS_NAME}>
-            {title}
-            <Padding bottom={BASE_SPACING} />
-            {legend}
+            <div className={`${BASE_CLASS_NAME}__info`}>
+                {title}
+                <Padding bottom={BASE_SPACING} />
+                {legend}
+            </div>
             <Padding bottom={BASE_SPACING} />
             <div className={`${BASE_CLASS_NAME}__chart`}>
                 {loadingMessage ? (
@@ -39,7 +41,9 @@ function ChartWrapper({
                 {chart}
             </div>
             <Padding bottom={BASE_SPACING} />
-            {controls}
+            <div className={`${BASE_CLASS_NAME}__controls`}>
+                {controls}
+            </div>
         </div>
     );
 }

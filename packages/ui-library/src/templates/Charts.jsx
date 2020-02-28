@@ -1,6 +1,7 @@
 import React from "react";
 
 import DashboardCard, { padding } from "ui-library/lib/components/general/charting/Cards/DashboardCard";
+import { CardRow } from "ui-library/lib/components/general/charting/Cards/";
 import PieChart from "ui-library/lib/components/general/charting/PieChart";
 import LineChart from "ui-library/lib/components/general/charting/LineChart";
 import ColumnChart from "ui-library/lib/components/general/charting/ColumnChart";
@@ -13,7 +14,6 @@ import RockerButton, { rockerTypes } from "ui-library/lib/components/forms/Rocke
 import ChartWrapper from "ui-library/lib/components/general/charting/ChartWrapper";
 import ChartTitle from "ui-library/lib/components/general/charting/ChartTitle";
 import { generateTheme } from "ui-library/lib/util/ChartingUtils";
-import CardGrid from "ui-library/lib/components/layout/CardGrid";
 import FlexRow, {
     justifyOptions,
     flexDirectionOptions,
@@ -344,44 +344,40 @@ class Charts extends React.Component {
                         </FlexRow>
                     </Padding>
 
-                    <CardGrid>
-                        <CardGrid.Block>
-                            <DashboardCard
-                                padding={padding.MD}
-                                front={(
-                                    <AuthByTypeWrapper
-                                        onClick={this._selectChart(<AuthByTypeWrapper/>)}
-                                    />
-                                )}/>
-                        </CardGrid.Block>
-                        <CardGrid.Block>
-                            <DashboardCard
-                                padding={padding.MD}
-                                front={(
-                                    <ColumnChartWrapper
-                                        onClick={this._selectChart(<ColumnChartWrapper/>)}
-                                    />
-                                )} />
-                        </CardGrid.Block>
-                        <CardGrid.Block>
-                            <DashboardCard
-                                padding={padding.MD}
-                                front={(
-                                    <LineChartWrapper
-                                        onClick={this._selectChart(<LineChartWrapper/>)}
-                                    />
-                                )} />
-                        </CardGrid.Block>
-                        <CardGrid.Block>
-                            <DashboardCard
-                                padding={padding.MD}
-                                front={(
-                                    <RegByDeviceWrapper
-                                        onClick={this._selectChart(<RegByDeviceWrapper/>)}
-                                    />
-                                )} />
-                        </CardGrid.Block>
-                    </CardGrid>
+                    <CardRow>
+                        <DashboardCard
+                            padding={padding.MD}
+                            front={(
+                                <AuthByTypeWrapper
+                                    onClick={this._selectChart(<AuthByTypeWrapper/>)}
+                                />
+                            )}/>
+
+                        <DashboardCard
+                            padding={padding.MD}
+                            front={(
+                                <ColumnChartWrapper
+                                    onClick={this._selectChart(<ColumnChartWrapper/>)}
+                                />
+                            )} />
+                    </CardRow>
+                    <CardRow>
+                        <DashboardCard
+                            padding={padding.MD}
+                            front={(
+                                <LineChartWrapper
+                                    onClick={this._selectChart(<LineChartWrapper/>)}
+                                />
+                            )} />
+
+                        <DashboardCard
+                            padding={padding.MD}
+                            front={(
+                                <RegByDeviceWrapper
+                                    onClick={this._selectChart(<RegByDeviceWrapper/>)}
+                                />
+                            )} />
+                    </CardRow>
                 </>
             ) : (
                 <ChartView

@@ -11,16 +11,20 @@ export const inputMargins = {
     STRIP: "strip",
 };
 
+export const getClassNames = ({ inputColor, inputMargin }) => {
+    return classnames({
+        "modifier_light-inputs": inputColor === inputColors.LIGHT,
+        "modifier_dark-inputs": inputColor === inputColors.DARK,
+        "modifier_strip-input-margins": inputMargin === inputMargins.STRIP,
+    });
+};
+
 export default function InputModifier({
     inputColor,
     inputMargin,
     children,
 }) {
-    const classNames = classnames({
-        "modifier_light-inputs": inputColor === inputColors.LIGHT,
-        "modifier_dark-inputs": inputColor === inputColors.DARK,
-        "modifier_strip-input-margins": inputMargin === inputMargins.STRIP,
-    });
+    const classNames = getClassNames({ inputColor, inputMargin });
 
     return (
         <div className={classNames}>

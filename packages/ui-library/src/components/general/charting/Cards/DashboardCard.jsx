@@ -5,7 +5,7 @@ import PageSpinner from "../../../general/PageSpinner";
 import ViewToggle from "../ViewToggle";
 import classnames from "classnames";
 import Checkbox from "../../../forms/FormCheckbox";
-import InputModifier, { inputColors } from "../../../general/InputModifier";
+import { inputColors, getClassNames } from "../../../general/InputModifier";
 
 export const padding = {
     SM: "sm",
@@ -129,10 +129,17 @@ class DashboardCard extends React.Component {
         return (
             <div className={classes} style={style} data-id={this.props["data-id"]}>
                 {!this.props.errorMessage && [
-                    <div key="back" className="dashboard-card__back">
-                        <InputModifier inputColor={inputColors.LIGHT}>
-                            {this.props.back}
-                            {this.props.onMakeDefault &&
+                    <div
+                        key="back"
+                        className={
+                            classnames(
+                                "dashboard-card__back",
+                                getClassNames({ inputColor: inputColors.LIGHT })
+                            )
+                        }
+                    >
+                        {this.props.back}
+                        {this.props.onMakeDefault &&
                                 <Checkbox
                                     data-id={`${this.props["data-id"]}-make-default`}
                                     className="dashboard-card__make-default stacked"
@@ -140,13 +147,18 @@ class DashboardCard extends React.Component {
                                     onValueChange={this._handleChecked}
                                     checked={this.state.defaultChecked}
                                 />
-                            }
-                        </InputModifier>
+                        }
                     </div>,
-                    <div key="front" className="dashboard-card__front">
-                        <InputModifier inputColor={inputColors.LIGHT} key="front">
-                            {this.props.front}
-                        </InputModifier>
+                    <div
+                        key="front"
+                        className={
+                            classnames(
+                                "dashboard-card__front",
+                                getClassNames({ inputColor: inputColors.LIGHT })
+                            )
+                        }
+                    >
+                        {this.props.front}
                     </div>,
                     <div key="control" className="dashboard-card__control">
                         {!this.props.loading && this.props.back &&
