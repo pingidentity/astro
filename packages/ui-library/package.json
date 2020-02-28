@@ -25,7 +25,7 @@
     "color": "^3.1.0",
     "core-js": "^3.2.1",
     "exif-js": "^2.1.1",
-    "fbjs": "^0.4.0",
+    "fbjs": "^1.0.0",
     "fix-orientation": "0.0.2",
     "highlight.js": "^9.15.10",
     "libphonenumber-js": "^1.7.25",
