@@ -4,7 +4,6 @@ import StateContainer from "../../utils/StateContainer";
 describe("RockerButton", function () {
 
     const React = require("react"),
-        ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         RockerButton = require("../RockerButton"),
@@ -77,11 +76,11 @@ describe("RockerButton", function () {
         const callback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
                 <RockerButton disabled={true} labels={labelsArray} />),
-            buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button"),
-            container = ReactDOM.findDOMNode(component);
+            buttons = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
 
         expect(component).toBeTruthy();
-        expect(container.getAttribute("class")).toContain("disabled");
+        const node = TestUtils.findRenderedDOMNodeWithDataId(component, "rocker-button");
+        expect(node.getAttribute("class")).toContain("disabled");
 
         ReactTestUtils.Simulate.click(buttons[2], {});
         expect(callback).not.toBeCalled();

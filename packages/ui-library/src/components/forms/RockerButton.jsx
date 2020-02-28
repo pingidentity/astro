@@ -142,29 +142,32 @@ class RockerButtonStateless extends React.Component {
         });
 
         return (
-            <div ref="container" data-id={this.props["data-id"]} className={className}>
-                {
-                    this.props.labels.map((data, index) => {
-                        const {
-                            id,
-                            label = id || data,
-                            ...props
-                        } = data;
+            <div className="rocker-button__container">
+                <div ref="container" data-id={this.props["data-id"]} className={className}>
+                    {
+                        this.props.labels.map((data, index) => {
+                            const {
+                                id,
+                                label = id || data,
+                                ...props
+                            } = data;
 
-                        return (
-                            <RockerButtonLabel
-                                autoFocus={index === this.props.selectedIndex && this.props.autoFocus === true}
-                                helpText={this.props.labelHints ? this.props.labelHints[index] : undefined}
-                                key={id || index}
-                                id={id}
-                                index={index}
-                                text={label}
-                                onClick={this._handleClick}
-                                {...props}
-                            />);
-                    })
-                }
+                            return (
+                                <RockerButtonLabel
+                                    autoFocus={index === this.props.selectedIndex && this.props.autoFocus === true}
+                                    helpText={this.props.labelHints ? this.props.labelHints[index] : undefined}
+                                    key={id || index}
+                                    id={id}
+                                    index={index}
+                                    text={label}
+                                    onClick={this._handleClick}
+                                    {...props}
+                                />);
+                        })
+                    }
+                </div>
             </div>
+
         );
     }
 }

@@ -1,6 +1,10 @@
 .chart-wrapper {
     position: relative;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
     &__loader,
     &__message {
         position: absolute;
@@ -19,6 +23,13 @@
     }
     &__loader {
         background: rgba($color-white, 0.6);
+    }
+
+    &__info {
+        margin-bottom: auto;
+    }
+    &__controls {
+        margin-top: auto;
     }
 
 }

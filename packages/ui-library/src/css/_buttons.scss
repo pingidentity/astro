@@ -448,6 +448,10 @@ button,
     border-radius: 3px;
     @include base-button-styles;
 
+    &__container {
+        display: inline-block;
+    }
+
     button,
     .help-tooltip > .helphint-button-target > button {
         @include text-style();
