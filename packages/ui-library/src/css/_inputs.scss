@@ -1546,7 +1546,6 @@ input[type=file] {
     input[type=text].input-calendar-value {
         padding: 0 30px;
         font-size: $default-input-font-size;
-        width: 226px;
         height: $default-input-height;
         line-height: 32px;
         &:focus {
@@ -1566,6 +1565,16 @@ input[type=file] {
     &--width-tight {
         input[type=text].input-calendar-value {
             width: 150px;
+        }
+    }
+
+    &__label {
+        margin-right: 0;
+    }
+
+    &.input-width-auto {
+        .input-calendar-value {
+            width: 226px;
         }
     }
 }
@@ -2639,8 +2648,6 @@ a {
 }
 
 @mixin input-width-css($size) {
-    vertical-align: bottom;
-
     .label-text {
         @include break-word;
     }
@@ -2756,6 +2763,7 @@ label {
     &.input-width-full,
     &.input-width-auto {
         margin-bottom: map-get($input-width-settings, 'vert-margin');
+        vertical-align: bottom;
 
         input[type=text],
         input[type=password],
@@ -2769,30 +2777,30 @@ label {
         margin-right: 0;
         max-width: none;
     }
+}
 
-    &.input-width-xsmall {
-        @include input-width-css('xsmall');
-    }
+.input-width-xsmall {
+    @include input-width-css('xsmall');
+}
 
-    &.input-width-small {
-        @include input-width-css('small');
-    }
+.input-width-small {
+    @include input-width-css('small');
+}
 
-    &.input-width-medium {
-        @include input-width-css('medium');
-    }
+.input-width-medium {
+    @include input-width-css('medium');
+}
 
-    &.input-width-large {
-        @include input-width-css('large');
-    }
+.input-width-large {
+    @include input-width-css('large');
+}
 
-    &.input-width-xlarge {
-        @include input-width-css('xlarge');
-    }
+.input-width-xlarge {
+    @include input-width-css('xlarge');
+}
 
-    &.input-width-full {
-        @include input-width-css('full');
-    }
+.input-width-full {
+    @include input-width-css('full');
 }
 
 // CUSTOM STYLES
