@@ -16,7 +16,9 @@
         border-radius: 3px;
         color: $color-accent-neutral-90;
         font-size: $font-size-reduced;
-        padding: 2px 5px;
+        padding: 3px 5px 2px;
         text-transform: uppercase;
+        @include break-word;
+        display: inline-block;
     }
 }
