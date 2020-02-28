@@ -14,6 +14,7 @@ import {
 import _ from "underscore";
 import classnames from "classnames";
 
+import ChartLabel from "./ChartLabel";
 import Color from "color";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
 import { LegendItem } from "./Legend";
@@ -169,10 +170,13 @@ export default class ColumnChart extends React.Component {
     }
 
     _handleMouseOver = (id) => (value, index, e) => {
+        console.log(value);
         const data = {
             x: {
                 index,
-                label: value.name
+                label: value.name,
+                location: value.x,
+                width: value.width
             },
             y: {
                 index: [...this.props.legend].reverse().findIndex((i) => i.id === id),
@@ -208,7 +212,7 @@ export default class ColumnChart extends React.Component {
 
         const valueData = this.props.data.find(o => o.id === this.state.selected.x.label);
 
-        // Check to see if selected.x is refrencing an old data set
+        // Check to see if selected.x is referencing an old data set
         if (!valueData) {
             return;
         }
@@ -227,6 +231,8 @@ export default class ColumnChart extends React.Component {
         );
     };
 
+    _labelTranslate = 0;
+
     render() {
         const {
             data,
@@ -235,6 +241,8 @@ export default class ColumnChart extends React.Component {
             loadingMessage,
             "data-id": dataId,
             lines,
+            referenceLabelColor,
+            width
         } = this.props;
 
         const digestedData = this._digestData(data);
@@ -276,6 +284,7 @@ export default class ColumnChart extends React.Component {
                         <Tooltip
                             content={this._renderTooltip}
                             cursor={false}
+                            offset={this._labelTranslate + 5}
                         />
                         { !hasCustomState && legend.map(({ id, label, color, yAxisId = BASE_YAXIS_ID }, key) => (
                             <Bar
@@ -314,7 +323,7 @@ export default class ColumnChart extends React.Component {
                             </Bar>
                         ))}
 
-                        {legend.length > 0 && !hasCustomState && this.state.selected.x &&
+                        {legend.length > 0 && !hasCustomState && x &&
                             <ReferenceLine
                                 x={x.label}
                                 yAxisId={
@@ -323,12 +332,19 @@ export default class ColumnChart extends React.Component {
                                     ).yAxisId || BASE_YAXIS_ID
                                 }
                                 stroke={this.props.referenceLineColor}
-                                label={{
-                                    position: "top",
-                                    value: x.label,
-                                    fill: this.props.referenceLabelColor,
-                                    fontSize: 14
+                                label={({ viewBox }) => {
+                                    // This is awful and I am sorry. It's the only way to find the x coordinate
+                                    // of the reference line/tooltip.
+                                    this._labelTranslate = 0 - (viewBox.x - x.location - (x.width / 2));
+                                    return (<ChartLabel
+                                        chartWidth={width}
+                                        color={referenceLabelColor}
+                                        label={x.label}
+                                        x={x.location + (x.width / 2)}
+                                        y={viewBox.y}
+                                    />);
                                 }}
+                                transform={`translate(${this._labelTranslate}, 0)`}
                             />
                         }
                     </BarChart>
