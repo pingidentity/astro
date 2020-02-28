@@ -17,8 +17,6 @@ import FormLabel from "./FormLabel";
 *     Description to display below the label.
 * @param {string} [filterLabel]
 *     The text to display inside of the SelectionFilterLabel
-* @param {string} [filterLabel]
-*     The text to display inside of the SelectionFilterLabel
 * @param {string} [labelText]
 *     The text to display as an input label above the SelectionFilterLabel
 * @param {string} [label]

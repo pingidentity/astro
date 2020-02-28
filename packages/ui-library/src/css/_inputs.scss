@@ -508,6 +508,15 @@ label {
                 bottom: auto;
             }
         }
+        // indeterminate checkboxes are so rare that this class is only added to the checkbox
+        // by other components that use it internally
+        &--indeterminate {
+            .icon:after {
+                color: $color-input-text;
+                content: $icon-minus;
+                font-weight: bold;
+            }
+        }
     }
 
     &.input-radio {

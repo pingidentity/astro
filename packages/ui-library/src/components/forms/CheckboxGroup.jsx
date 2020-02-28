@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import _ from "underscore";
 import FormCheckbox from "./FormCheckbox";
 import { valueProp } from "../../util/PropUtils";
+import Stack from "../layout/Stack";
+import CollapsibleLink from "../general/CollapsibleLink";
+import classnames from "classnames";
 
 /**
  * @class CheckboxGroup
@@ -45,6 +48,142 @@ import { valueProp } from "../../util/PropUtils";
 *     The value identifier.
 */
 
+const defaultRenderOption = ({
+    checked,
+    className,
+    "data-id": dataId,
+    onValueChange,
+    option,
+}) => (
+    <div className={className} key={option.value}>
+        <FormCheckbox
+            checked={checked}
+            data-id={dataId}
+            disabled={option.disabled}
+            helpTarget={option.helpTarget}
+            hint={option.hint || option.labelHelpText}
+            label={option.label}
+            noSpacing
+            onValueChange={_.partial(onValueChange, option)}
+            stacked
+            value={option.value}
+        />
+        {((checked && option.conditionalContent) || option.content) &&
+            <div className="checkbox-description">
+                {option.conditionalContent}
+                {option.content}
+            </div>
+        }
+    </div>
+);
+
+// this supports the add-on below
+class CollapsibleContent extends React.Component {
+    state = this.props.initialState;
+
+    _handleToggle = () => this.setState(({ expanded }) => ({ expanded: !expanded }));
+
+    render() {
+        const { children, showText, hideText = showText, "data-id": dataId } = this.props;
+        const { expanded } = this.state;
+
+        return (
+            <>
+                <CollapsibleLink
+                    data-id={dataId}
+                    title={expanded ? (hideText || "Hide") : (showText || "Show")}
+                    expanded={expanded}
+                    noSpacing
+                    onToggle={this._handleToggle}
+                />
+                {expanded &&
+                    children
+                }
+            </>
+        );
+    }
+}
+
+// this is an add-on for the basic checkbox group
+/** @function renderNestedCheckboxes
+ * @desc function that can be passed to CheckboxGroup's renderOption prop to enable nested checkboxes
+ * @memberof CheckboxGroup
+ *
+ * @param {object} props
+ *
+ * @param {boolean} props.checked
+ * @desc Whether this option is checked
+ * @param {string} className
+ * @param {string} data-id
+ * @param {function} onValueChange
+ * @param {CheckboxGroup~option} option
+ * @param {array} option.children
+ * @desc Additional property to nest options within options
+ * @param {string[]} values
+*/
+const renderNestedCheckboxes = ({
+    showText = option => `Show ${option.children.length}`,
+    hideText = "Hide",
+} = {}) => ({
+    checked: mainChecked,
+    className,
+    "data-id": dataId,
+    onValueChange,
+    option: mainOption,
+    values,
+}) => {
+    const renderCheckBox = (option, checked, checkboxDataId, disable = false, indeterminate = false) => (
+        <FormCheckbox
+            className={classnames({ "input-checkbox--indeterminate": indeterminate })}
+            key={option.value}
+            checked={checked}
+            data-id={checkboxDataId}
+            disabled={option.disabled || disable}
+            helpTarget={option.helpTarget}
+            hint={option.hint || option.labelHelpText}
+            label={option.label}
+            noSpacing
+            onValueChange={_.partial(onValueChange, option)}
+            stacked
+            value={option.value}
+        />
+    );
+
+    // if the parent is not checked, but some children are, show as indeterminate
+    const indeterminate = (
+        mainOption.children &&
+        !mainChecked &&
+        mainOption.children.reduce((result, option) => (result || values.includes(option.value)), false)
+    );
+    return (
+        <div className={className} key={mainOption.value}>
+            {renderCheckBox(mainOption, mainChecked, dataId, false, indeterminate)}
+            {mainOption.children &&
+                <div className="checkbox-description">
+                    <Stack wrappers>
+                        <CollapsibleContent
+                            data-id={`${dataId}-collapsible`}
+                            showText={typeof showText === "function" ? showText(mainOption) : showText}
+                            hideText={typeof hideText === "function" ? hideText(mainOption) : hideText}
+                            initialState={{ expanded: mainOption.expanded }}
+                            key={mainOption.expanded ? "collapsible-expanded" : "collapsible-collapsed"}
+                        >
+                            <Stack gap="SM">
+                                {mainOption.children.map(option => renderCheckBox(
+                                    option,
+                                    values.includes(mainOption.value) || values.includes(option.value),
+                                    `${dataId}-${option.value}`,
+                                    values.includes(mainOption.value),
+                                ))}
+                            </Stack>
+                        </CollapsibleContent>
+                    </Stack>
+                </div>
+            }
+        </div>
+    );
+};
+
 const CheckboxGroup = ({
     className,
     "data-id": dataId,
@@ -54,21 +193,19 @@ const CheckboxGroup = ({
     onValueChange,
     onAdd,
     onRemove,
+    renderOption,
 }) => {
     const isChecked = option => _.find(values, value => value === option.value) ? true : false;
 
-    const addToValues = value => (
-        _.pluck(
-            _.filter(options, option => (option.value === value || isChecked(option))),
-            "value"
-        )
+    const removeFromValues = value => (
+        _.filter(values, eachValue => (eachValue !== value))
     );
 
-    const removeFromValues = value => (
-        _.pluck(
-            _.filter(options, option => (option.value !== value && isChecked(option))),
-            "value"
-        )
+    const addToValues = value => (
+        [
+            ...removeFromValues(value),
+            value,
+        ]
     );
 
     return (
@@ -82,43 +219,30 @@ const CheckboxGroup = ({
                     };
                 }
 
-                const handleValueChange = (value, e) => {
-                    if (isChecked(option)) {
-                        onValueChange(removeFromValues(option.value), e);
-                        onRemove(option.value);
+                const handleValueChange = (thisOption, value, e) => {
+                    if (isChecked(thisOption)) {
+                        onValueChange(removeFromValues(thisOption.value), e);
+                        onRemove(thisOption.value);
                     } else {
-                        onValueChange(addToValues(option.value), e);
-                        onAdd(option.value);
+                        onValueChange(addToValues(thisOption.value), e);
+                        onAdd(thisOption.value);
                     }
                 };
 
                 const checked = isChecked(option, values);
 
-                return (
-                    <div className={className} key={option.value}>
-                        <FormCheckbox
-                            checked={checked}
-                            data-id={setCheckboxDataId
-                                ? setCheckboxDataId(option, index)
-                                : dataId + "-" + option.value
-                            }
-                            disabled={option.disabled}
-                            helpTarget={option.helpTarget}
-                            hint={option.hint || option.labelHelpText}
-                            label={option.label}
-                            noSpacing
-                            onValueChange={handleValueChange}
-                            stacked
-                            value={option.value}
-                        />
-                        {((checked && option.conditionalContent) || option.content) &&
-                            <div className="checkbox-description">
-                                {option.conditionalContent}
-                                {option.content}
-                            </div>
-                        }
-                    </div>
-                );
+                return renderOption({
+                    checked,
+                    className,
+                    "data-id": (
+                        setCheckboxDataId
+                            ? setCheckboxDataId(option, index)
+                            : dataId + "-" + option.value
+                    ),
+                    onValueChange: handleValueChange,
+                    option,
+                    values,
+                });
             })}
         </div>
     );
@@ -153,6 +277,9 @@ CheckboxGroup.defaultProps = {
     onValueChange: _.noop,
     onAdd: _.noop,
     onRemove: _.noop,
+    renderOption: defaultRenderOption,
 };
+
+CheckboxGroup.renderNestedCheckboxes = renderNestedCheckboxes;
 
 export default CheckboxGroup;

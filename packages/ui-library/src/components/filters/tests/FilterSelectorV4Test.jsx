@@ -1,13 +1,13 @@
-jest.dontMock("../FilterSelector");
-
 jest.mock("popper.js");
 jest.mock("react-portal");
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import FilterSelector from "../FilterSelector";
+import { mount } from "enzyme";
+
 describe("FilterSelector", function () {
-    const React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FilterSelector = require("../FilterSelector");
 
     const options = [
         {
@@ -74,6 +74,74 @@ describe("FilterSelector", function () {
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, "filter-selector");
         expect(element).toBeTruthy();
         expect(element.textContent).toEqual(labelText);
+    });
+
+    it("should filter out unselected options", function() {
+        const component = mount(<FilterSelector options={options} selected={["Fruits", "Vegetables"]} />);
+
+        component.find("a[data-id='filter-selector-popover-trigger']").simulate("click");
+        expect(component.find("label[data-id='selectionList-Checkbox-3-container']").exists()).toBeTruthy();
+
+        component.find("button[data-id='only-selected-button']").simulate("click");
+        expect(component.find("label[data-id='selectionList-Checkbox-3-container']").exists()).not.toBeTruthy();
+    });
+
+    it("should call onValueChange with an empty list", function() {
+        const callback = jest.fn();
+        const component = mount(
+            <FilterSelector
+                options={options}
+                selected={["Fruits", "Vegetables"]}
+                onValueChange={callback}
+            />
+        );
+
+        expect(callback).not.toBeCalled();
+        component.find("a[data-id='filter-selector-popover-trigger']").simulate("click");
+        component.find("button[data-id='clear-button']").simulate("click");
+        expect(callback).toBeCalled();
+        expect(callback.mock.calls[0][0]).toEqual([]);
+    });
+
+    const nestedOptions = [
+        {
+            label: "Fruits",
+            value: "Fruits",
+            children: [
+                { label: "Apple", value: "Apple" },
+                { label: "Orange", value: "Orange" },
+                { label: "Banana", value: "Banana" },
+            ],
+        },
+        {
+            label: "Vegetables",
+            value: "Vegetables",
+            children: [
+                { label: "Carrot", value: "Carrot" },
+                { label: "Lettuce", value: "Lettuce" },
+                { label: "Pepper", value: "Pepper" },
+                { label: "Cucumber", value: "Cucumber" },
+            ],
+        },
+        {
+            label: "Bread",
+            value: "Bread",
+            children: [
+                { label: "White Bread", value: "White Bread", disabled: true },
+                { label: "Whole Wheat", value: "Whole Wheat" },
+                { label: "Sourdough", value: "Sourdough" },
+            ],
+        },
+    ];
+
+    it("should filter out unselected options from a nested list", function() {
+        const component = mount(<FilterSelector options={nestedOptions} selected={["Fruits", "Carrot"]} />);
+
+        component.find("a[data-id='filter-selector-popover-trigger']").simulate("click");
+        expect(component.find("label[data-id='selectionList-Checkbox-3-container']").exists()).toBeTruthy();
+
+        component.find("button[data-id='only-selected-button']").simulate("click");
+        expect(component.find("label[data-id='selectionList-Checkbox-3-container']").exists()).not.toBeTruthy();
     });
 
 });

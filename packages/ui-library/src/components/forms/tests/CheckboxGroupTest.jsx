@@ -1,12 +1,11 @@
-jest.dontMock("../CheckboxGroup");
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import CheckboxGroup from "../CheckboxGroup";
+import _ from "underscore";
+import { mount } from "enzyme";
 
 describe("CheckboxGroup", function () {
-
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        CheckboxGroup = require("../CheckboxGroup"),
-        _ = require("underscore");
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
@@ -86,5 +85,49 @@ describe("CheckboxGroup", function () {
         component = getComponent({ values: ["one", "three"] });
         content = TestUtils.findRenderedDOMNodeWithClass(component, "checkbox-description");
         expect(content).not.toBeTruthy();
+    });
+
+    const nestedOptions = [
+        {
+            label: "Fruits",
+            value: "Fruits",
+            children: [
+                { label: "Apple", value: "Apple" },
+                { label: "Orange", value: "Orange" },
+                { label: "Banana", value: "Banana" },
+            ],
+        },
+        {
+            label: "Vegetables",
+            value: "Vegetables",
+            children: [
+                { label: "Carrot", value: "Carrot" },
+                { label: "Lettuce", value: "Lettuce" },
+                { label: "Pepper", value: "Pepper" },
+                { label: "Cucumber", value: "Cucumber" },
+            ],
+        },
+        {
+            label: "Bread",
+            value: "Bread",
+            children: [
+                { label: "White Bread", value: "White Bread", disabled: true },
+                { label: "Whole Wheat", value: "Whole Wheat" },
+                { label: "Sourdough", value: "Sourdough" },
+            ],
+        },
+    ];
+
+    it("shows nested checkboxes on click", function() {
+        const component = mount(
+            <CheckboxGroup
+                options={nestedOptions}
+                renderOption={CheckboxGroup.renderNestedCheckboxes()}
+            />
+        );
+
+        expect(component.find("label[data-id='checkbox-group-Fruits-Apple-container']").exists()).not.toBeTruthy();
+        component.find("div[data-id='checkbox-group-Fruits-collapsible']").simulate("click");
+        expect(component.find("label[data-id='checkbox-group-Fruits-Apple-container']").exists()).toBeTruthy();
     });
 });

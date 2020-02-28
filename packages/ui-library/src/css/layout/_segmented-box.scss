@@ -5,6 +5,7 @@
 
     &__scroll-box {
         display: flex;
+        -ms-flex-preferred-size: auto !important;
         flex-direction: column;
         flex: 1;
         min-height: 0;
