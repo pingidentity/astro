@@ -62,6 +62,23 @@ describe("ExpandableCard", () => {
         expect(toggleCallback).toHaveBeenCalled();
     });
 
+    it("shows the cardControls when opened", () => {
+        const toggleCallback = jest.fn();
+        const component = getComponent({
+            onToggle: toggleCallback,
+            cardControls: (
+                <h1>Hi, Mom!</h1>
+            )
+        });
+        const expandButton = getExpandButton(component);
+
+        expandButton.simulate("click");
+
+        const cardControls = component.find(".expandable-card__cardControls");
+
+        expect(cardControls.exists()).toEqual(true);
+    });
+
     it("scrolls content into view after expanded", () => {
         const component = getComponent();
         const expandButton = getExpandButton(component);
