@@ -74,8 +74,8 @@ class CollapsibleLink extends React.Component {
         arrowPosition: PropTypes.oneOf(["left", "right", "none"]),
         expanded: PropTypes.bool,
         disabled: PropTypes.bool,
-        onToggle: PropTypes.func
-
+        onToggle: PropTypes.func,
+        noSpacing: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -83,6 +83,7 @@ class CollapsibleLink extends React.Component {
         arrowPosition: "right",
         expanded: false,
         disabled: false,
+        noSpacing: false,
     };
 
     _handleToggle = () => {
@@ -99,7 +100,8 @@ class CollapsibleLink extends React.Component {
             this.props.arrowPosition,
             {
                 open: this.props.expanded,
-                "collapsible-link--disabled": this.props.disabled
+                "collapsible-link--disabled": this.props.disabled,
+                "collapsible-link--no-spacing": this.props.noSpacing,
             }
         );
         const title = this.props.toggledTitle && this.props.expanded

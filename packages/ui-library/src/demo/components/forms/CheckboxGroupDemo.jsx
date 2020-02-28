@@ -1,5 +1,5 @@
 import React from "react";
-import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
+import CheckboxGroup, { renderNestedCheckboxes } from "ui-library/lib/components/forms/CheckboxGroup";
 import HR from "ui-library/lib/components/general/HR";
 import { partial } from "underscore";
 
@@ -45,6 +45,42 @@ const optionsData2 = [
     { label: "Kiwi", value: 9 }
 ];
 
+const nestedOptions = [
+    {
+        label: "Fruits",
+        value: "Fruits",
+        children: [
+            { label: "Apple", value: "Apple" },
+            { label: "Orange", value: "Orange" },
+            { label: "Banana", value: "Banana" },
+        ],
+    },
+    {
+        label: "Vegetables",
+        value: "Vegetables",
+        children: [
+            { label: "Carrot", value: "Carrot" },
+            { label: "Lettuce", value: "Lettuce" },
+            { label: "Pepper", value: "Pepper" },
+            { label: "Cucumber", value: "Cucumber" },
+        ],
+    },
+    {
+        label: "Bread",
+        value: "Bread",
+        children: [
+            { label: "White Bread", value: "White Bread", disabled: true },
+            { label: "Whole Wheat", value: "Whole Wheat" },
+            { label: "Sourdough", value: "Sourdough" },
+        ],
+    },
+];
+
+const queryFilter = (query, options) => {
+    const pattern = new RegExp(query, "i");
+    return options.filter(({ label }) => (label.search(pattern) >= 0));
+};
+
 /**
 * @name CheckboxGroupDemo
 * @memberof CheckboxGroup
@@ -52,7 +88,8 @@ const optionsData2 = [
 */
 class CheckboxGroupDemo extends React.Component {
     state = {
-        values1: ["one"]
+        values1: ["one"],
+        query: "",
     }
 
     _handleValueChange = (key, values) => this.setState({ [`values${key}`]: values });
@@ -70,6 +107,13 @@ class CheckboxGroupDemo extends React.Component {
                     options={optionsData2}
                     values={this.state.values2}
                     onValueChange={partial(this._handleValueChange, "2")}
+                />
+                <HR />
+                <CheckboxGroup
+                    options={queryFilter(this.state.query, nestedOptions)}
+                    values={this.state.values3}
+                    onValueChange={partial(this._handleValueChange, "3")}
+                    renderOption={renderNestedCheckboxes()}
                 />
             </>
         );

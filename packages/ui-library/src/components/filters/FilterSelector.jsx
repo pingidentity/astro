@@ -9,14 +9,46 @@ import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
 import InputModifier, { inputColors } from "../general/InputModifier";
 import { translateItemsToOptions } from "../../util/PropUtils";
+import { renderNestedCheckboxes } from "../forms/CheckboxGroup";
+import PipeRow, { pipeGaps } from "../layout/PipeRow";
+import Button from "../buttons/Button";
+
+const onlySelected = (values, options) => {
+    if (values) {
+        return options.flatMap(option => {
+            if (values.includes(option.value)) {
+                return option;
+            } else if (option.children) {
+                return option.children.filter(({ value }) => values.includes(value));
+            }
+            return [];
+        });
+    }
+    return options;
+};
+
+const filteredOption = (search, option) => {
+    if (containsString(option.label, search)) {
+        return option;
+    }
+    if (option.children) {
+        const filteredChildren = filterOptions(search, null, option.children); // eslint-disable-line no-use-before-define
+        if (filteredChildren.length > 0) {
+            return { ...option, children: filteredChildren, expanded: true };
+        }
+    }
+    return null;
+};
+
+const filterOptions = (search, values, options) => (
+    onlySelected(values, options).map(_.partial(filteredOption, search)).filter(option => option !== null)
+);
 
 const optionsSelector = createSelector(
     state => state.search,
+    state => state.values,
     state => state.options,
-    (search, options) => _.filter(
-        options,
-        option => containsString(option.label, search)
-    )
+    (search, values, options) => filterOptions(search, values, options),
 );
 
 /**
@@ -50,9 +82,10 @@ const optionsSelector = createSelector(
 * @param {array} [selected]
 *     All the selected values
 */
-class FilterSelector extends React.Component {
+class FilterSelectorBase extends React.Component {
     state = {
-        search: ""
+        search: "",
+        showOnlySelected: false,
     };
 
     static propTypes = {
@@ -96,6 +129,7 @@ class FilterSelector extends React.Component {
 
     _getOptions = () => optionsSelector({
         search: this.state.search,
+        values: this.state.showOnlySelected ? this.props.selected : null,
         options: translateItemsToOptions(this.props.options),
     });
 
@@ -117,6 +151,24 @@ class FilterSelector extends React.Component {
     };
 
     _getSearch = () => this.props.search !== undefined ? this.props.search : this.state.search;
+
+    _renderList = (props, Component) => <Component {...props} renderOption={renderNestedCheckboxes()} />
+
+    _toggleOnlySelected = () => this.setState(({ showOnlySelected }) => ({ showOnlySelected: !showOnlySelected }));
+
+    _unselectAll = () => {
+        this.props.onValueChange([]);
+        this.setState({ showOnlySelected: false });
+    }
+
+    _getSelectedCount = () => this._getOptions().flatMap(option => {
+        if (this.props.selected.includes(option.value)) {
+            return option.children || option;
+        } else if (option.children) {
+            return option.children.filter(({ value }) => this.props.selected.includes(value));
+        }
+        return [];
+    }).length;
 
     render = () => {
         const {
@@ -147,7 +199,7 @@ class FilterSelector extends React.Component {
                             description={description}
                             label={label}
                             placeholder="Select One"
-                            count={selected.length > 0 ? selected.length : -1}
+                            count={selected.length > 0 ? this._getSelectedCount() : -1}
                         />
                     }
                     open={open}
@@ -156,7 +208,25 @@ class FilterSelector extends React.Component {
                     <InputModifier inputColor={inputColors.DARK}>
                         <SelectionList
                             type={type}
-                            bottomPanel={bottomPanel}
+                            bottomPanel={[
+                                <PipeRow gap={pipeGaps.SM} key="selection-options">
+                                    <Button
+                                        data-id="only-selected-button"
+                                        type={Button.buttonTypes.LINK}
+                                        onClick={this._toggleOnlySelected}
+                                        noSpacing
+                                    >
+                                        {this.state.showOnlySelected ? "Show All" : "Show Only Selected"}
+                                    </Button>
+                                    <Button
+                                        data-id="clear-button"
+                                        type={Button.buttonTypes.LINK}
+                                        onClick={this._unselectAll}
+                                        noSpacing
+                                    >Clear</Button>
+                                </PipeRow>,
+                                bottomPanel
+                            ]}
                             options={this._getOptions()}
                             optionsNote={optionsNote}
                             showSearchBox={true}
@@ -166,6 +236,7 @@ class FilterSelector extends React.Component {
                             queryString={this._getSearch()}
                             requiredText={requiredText}
                             selectedItemIds={selected}
+                            renderList={this._renderList}
                         />
                     </InputModifier>
                 </Popover>
@@ -174,4 +245,4 @@ class FilterSelector extends React.Component {
     };
 }
 
-export default togglesOpen(FilterSelector);
+export default togglesOpen(FilterSelectorBase);

@@ -54,4 +54,9 @@
         opacity: $inactive-opacity;
         pointer-events: none;
     }
+
+    &--no-spacing {
+        margin: 0;
+        padding: 0;
+    }
 }
