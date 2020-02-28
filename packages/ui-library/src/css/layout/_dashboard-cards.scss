@@ -133,6 +133,7 @@ $fullwidthBreakpoint: 950px;
 
 
     &__title {
+        @include break-word;
         font-size: 18px;
         text-transform: uppercase;
         color: $color-neutral-10;

@@ -4,6 +4,7 @@ module.exports = async (page, scenario) => {
   const keyPressSelector = scenario.keyPressSelectors || scenario.keyPressSelector;
   const scrollToSelector = scenario.scrollToSelector;
   const hideSelector = scenario.hideSelectors || scenario.hideSelector;
+  const textReplaceSelector = scenario.textReplaceSelector || scenario.textReplaceSelector;
   const postInteractionWait = scenario.postInteractionWait; // selector [str] | ms [int]
   const interactions = scenario.interactions;
 
@@ -41,8 +42,14 @@ module.exports = async (page, scenario) => {
     }
   }
 
-  if (postInteractionWait) {
-    await page.waitFor(postInteractionWait);
+  if (textReplaceSelector) {
+    for (const replaceSelectorIndex of [].concat(textReplaceSelector)) {
+      await page.waitFor(replaceSelectorIndex.selector);
+      await page.evaluate(replace => {
+        const elem = document.querySelector(replace.selector);
+        elem.innerText = replace.replacement;
+      }, replaceSelectorIndex);
+    }
   }
 
   if (scrollToSelector) {
@@ -66,5 +73,9 @@ module.exports = async (page, scenario) => {
         parentNode.appendChild(removedNode);
       }, hideSelectorIndex);
     }
+  }
+
+  if (postInteractionWait) {
+    await page.waitFor(postInteractionWait);
   }
 };

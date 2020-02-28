@@ -29,8 +29,14 @@ const exitWithError = (server, e) => {
 
 const isApprovalRun = process.argv.includes("--approve");
 const isCIRun = process.argv.includes("--ci");
+const filter = process.argv.includes("--filterTests") ? process.argv[process.argv.indexOf("--filterTests") + 1] : "";
 
-const runTests = server => backstop("test", { docker: !isCIRun })
+const runTests = server => backstop(
+    "test",
+    {
+        docker: !isCIRun,
+        filter: filter
+    })
     .then(() => {
         if (server) {
             server.close();
