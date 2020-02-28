@@ -36,6 +36,8 @@ export function ExpandableCardRow({
  * @description Basic expandable row component.
  * @param {object} [cardAccessories]
  *      Element(s) to be displayed in top-right of card.
+ * @param {object} [cardControls]
+ *      Element(s) to be displayed in top-left of card.
  * @param {string} [data-id='expandable-card']
  *      The data-id attribute value applied to the element.
  * @param {object} [deleteButton]
@@ -104,6 +106,7 @@ class ExpandableCardStateless extends Component {
             statusText,
 
             cardAccessories,
+            cardControls,
             expanded,
             onToggle,
 
@@ -132,6 +135,11 @@ class ExpandableCardStateless extends Component {
         return (
             <div className={holderClassNames} data-id={dataId}>
                 <div className={classNames} ref={(ref) => this.card = ref}>
+                    {expanded &&
+                        <div className="expandable-card__cardControls">
+                            {cardControls}
+                        </div>
+                    }
                     <div className="expandable-card__info">
                         <div>
                             <div className="expandable-card__title">
@@ -205,6 +213,7 @@ ExpandableCardStateless.propTypes = {
     status: PropTypes.oneOf(Object.values(statusTypes)),
     statusText: PropTypes.node,
     cardAccessories: PropTypes.node,
+    cardControls: PropTypes.node,
     onDelete: PropTypes.func,
     showDelete: PropTypes.bool,
     deleteButton: PropTypes.node,
