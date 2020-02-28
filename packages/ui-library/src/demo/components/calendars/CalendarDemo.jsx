@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment-range";
-import Calendar, { FormLabel } from "../../../components/calendars/Calendar";
+import Calendar, { FormLabel, widths as calendarWidths } from "../../../components/calendars/Calendar";
 
 /**
 * @name CalendarDemo
@@ -98,6 +98,13 @@ class CalendarDemo extends React.Component {
                     computableFormat="x"
                     labelText="Sets date prop / no handler"
                     required
+                />
+                <br /><br />
+                <Calendar
+                    closeOnSelect
+                    computableFormat="x"
+                    labelText="With a large width"
+                    width={calendarWidths.LG}
                 />
             </div>
         );

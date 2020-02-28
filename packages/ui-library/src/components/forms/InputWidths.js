@@ -53,9 +53,9 @@ export const getInputWidthClass = ({
     width = null
 }) => {
 
-    const hasClass = Object.values(InputWidthClasses).map((value) => {
+    const hasClass = Object.values(InputWidthClasses).some((value) => {
         return className.indexOf(value) > -1;
-    }).includes(true);
+    });
 
     if (hasClass && !Utils.isProduction()) {
         Utils.deprecateWarn(

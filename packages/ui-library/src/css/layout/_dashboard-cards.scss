@@ -138,6 +138,7 @@ $fullwidthBreakpoint: 950px;
         color: $color-neutral-10;
         display: flex;
         justify-content: center;
+        word-break: break-word;
 
         &--donut,
         &--multiseries,

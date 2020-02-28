@@ -10,6 +10,7 @@ import CalendarUtils from "./Utils";
 import Translator from "../../util/i18n/Translator.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
+import { InputWidths, InputWidthProptypesAuto, getInputWidthClass } from "../forms/InputWidths";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -145,6 +146,7 @@ class BaseCalendar extends React.Component {
         placeholder: PropTypes.string,
         required: PropTypes.bool,
         tight: PropTypes.bool,
+        width: PropTypes.oneOf(InputWidthProptypesAuto),
 
         onValueChange: PropTypes.func,
     };
@@ -157,6 +159,7 @@ class BaseCalendar extends React.Component {
         required: false,
         format: Translator.translate("dateformat"),
         tight: false,
+        width: InputWidths.AUTO
     };
 
     constructor(props) {
@@ -377,7 +380,7 @@ class BaseCalendar extends React.Component {
                     dateRange={this.props.dateRange} />);
                 break;
             case Views.MONTHS:
-                view = (<MonthsView date={calendarDate} onSetDate={this.setDate} //eslint-disable-line
+                view = (<MonthsView date={calendarDate} onSetDate={this.setDate}
                     onNextView={this.nextView} onPrevView={this.prevView}
                     dateRange={this.props.dateRange} />);
                 break;
@@ -397,7 +400,6 @@ class BaseCalendar extends React.Component {
 
         const popup = (
             <PopperContainer
-                data-parent={this.props["data-id"]}
                 className="calendar-popup"
                 data-parent={this.props["data-id"]}
                 getReference={this._getReference}
@@ -412,12 +414,15 @@ class BaseCalendar extends React.Component {
             ? this._getFormattedDate()
             : this.state.inputValue;
 
-        const className = classnames("input-calendar", this.props.className, {
-            active: this.state.isVisible,
-            required: this.props.required,
-            "value-entered": !!inputValue,
-            "input-calendar--width-tight": this.props.tight,
-        });
+        const className = classnames("input-calendar",
+            this.props.className,
+            getInputWidthClass({ width: this.props.width }),
+            {
+                active: this.state.isVisible,
+                required: this.props.required,
+                "value-entered": !!inputValue,
+                "input-calendar--width-tight": this.props.tight,
+            });
 
         return (
             <div
@@ -427,7 +432,7 @@ class BaseCalendar extends React.Component {
             >
                 {this.props.labelNode ||
                     <FormLabel
-                        className={classnames(this.props.labelClassName)}
+                        className={classnames("input-calendar__label", this.props.labelClassName)}
                         helpClassName={classnames(this.props.helpClassName)}
                         helpPlacement={this.props.helpPlacement}
                         data-id={this.props["data-id"] + "-label"}
@@ -464,6 +469,7 @@ const Calendar = inStateContainer([
 
 Calendar.Views = Views;
 Calendar.FormLabel = FormLabel;
+Calendar.widths = InputWidths;
 
 export default Calendar;
 

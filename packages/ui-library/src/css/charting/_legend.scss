@@ -56,12 +56,18 @@
             font-weight: 400;
             display: inline-block;
             text-transform: uppercase;
+            text-overflow: ellipsis;
+            max-width: calc(20vw - 17px);
+            overflow: hidden;
         }
 
         &-value {
             font-size: 22px;
             color: $color-accent-neutral-10;
             font-weight: 600;
+            text-overflow: ellipsis;
+            max-width: 20vw;
+            overflow: hidden;
 
             &--sm {
                 font-size: 16px;
