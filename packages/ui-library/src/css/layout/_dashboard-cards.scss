@@ -565,6 +565,10 @@ $fullwidthBreakpoint: 950px;
     }
 }
 
+.column-chart__line {
+    pointer-events: none;
+}
+
 .column-chart-wrapper {
     &__rocker {
         margin-top: $spacing-sm;

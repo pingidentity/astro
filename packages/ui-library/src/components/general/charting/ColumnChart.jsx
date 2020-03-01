@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import PropTypes from "prop-types";
 import {
     BarChart,
@@ -136,6 +136,9 @@ export default class ColumnChart extends React.Component {
         selected: { x: null, y: null }
     };
 
+    _barChartRef = createRef();
+    _lastChartWidth = 0;
+
     _digestData = (data) =>
         data.reduce((a, item) => ([
             ...a,
@@ -170,7 +173,6 @@ export default class ColumnChart extends React.Component {
     }
 
     _handleMouseOver = (id) => (value, index, e) => {
-        console.log(value);
         const data = {
             x: {
                 index,
@@ -242,7 +244,6 @@ export default class ColumnChart extends React.Component {
             "data-id": dataId,
             lines,
             referenceLabelColor,
-            width
         } = this.props;
 
         const digestedData = this._digestData(data);
@@ -255,6 +256,13 @@ export default class ColumnChart extends React.Component {
             x,
             y,
         } = this.state.selected;
+
+        // Have to do all of this to figure out if the tooltip would go outside the container.
+        // If that happens normally, the tooltip will jump to a pretty random spot.
+        this._lastChartWidth = this._barChartRef.current ? this._barChartRef.current.props.width : this._lastChartWidth;
+        const tooltipWidth = 150;
+        const tooltipOverflow = (x ? x.location : 0) + tooltipWidth - this._lastChartWidth;
+        const tooltipOffset = tooltipOverflow > 0 ? this._labelTranslate - tooltipOverflow : this._labelTranslate + 5;
 
         return (
             <>
@@ -270,6 +278,7 @@ export default class ColumnChart extends React.Component {
                         }}
                         className="column-chart"
                         data-id={dataId}
+                        ref={this._barChartRef}
                     >
                         <XAxis dataKey="name" hide={true} />
                         {this._generateYAxes(legend)}
@@ -284,7 +293,7 @@ export default class ColumnChart extends React.Component {
                         <Tooltip
                             content={this._renderTooltip}
                             cursor={false}
-                            offset={this._labelTranslate + 5}
+                            offset={tooltipOffset}
                         />
                         { !hasCustomState && legend.map(({ id, label, color, yAxisId = BASE_YAXIS_ID }, key) => (
                             <Bar
@@ -337,7 +346,7 @@ export default class ColumnChart extends React.Component {
                                     // of the reference line/tooltip.
                                     this._labelTranslate = 0 - (viewBox.x - x.location - (x.width / 2));
                                     return (<ChartLabel
-                                        chartWidth={width}
+                                        chartWidth={this._lastChartWidth}
                                         color={referenceLabelColor}
                                         label={x.label}
                                         x={x.location + (x.width / 2)}
@@ -345,6 +354,7 @@ export default class ColumnChart extends React.Component {
                                     />);
                                 }}
                                 transform={`translate(${this._labelTranslate}, 0)`}
+                                className="column-chart__line"
                             />
                         }
                     </BarChart>
