@@ -6,6 +6,8 @@ import FlexRow, { flexDirectionOptions, alignments } from "ui-library/lib/compon
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import Modal from "ui-library/lib/components/general/Modal";
 import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+import Calendar from "ui-library/lib/components/calendars/Calendar";
+import Multivalues from "ui-library/lib/components/forms/Multivalues";
 
 /**
 * @name ModalDemo
@@ -65,6 +67,15 @@ class ModalDemo extends React.Component {
                                     label: "one"
                                 }
                             ]} />
+                            <br />
+                            <Calendar label="Test Calendar in a Modal" data-id="test-calendar" />
+                            <br />
+                            <Multivalues options={[
+                                {
+                                    label: "one",
+                                    value: "one"
+                                }
+                            ]} autoHeight data-id="test-multivalues" />
                         </div>
                     </Modal>
                 </InputRow>
