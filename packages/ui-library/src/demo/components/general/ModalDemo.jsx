@@ -68,7 +68,7 @@ class ModalDemo extends React.Component {
                                 }
                             ]} />
                             <br />
-                            <Calendar label="Test Calendar in a Modal" data-id="test-calendar" />
+                            <Calendar label="Test Calendar in a Modal" data-id="test-calendar" date="2020-03-01" />
                             <br />
                             <Multivalues options={[
                                 {
