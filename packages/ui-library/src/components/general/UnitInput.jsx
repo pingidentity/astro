@@ -1,6 +1,3 @@
-"use strict";
-
-
 import React from "react";
 import PropTypes from "prop-types";
 import FormDropDownList from "../forms/FormDropDownList";
@@ -47,7 +44,9 @@ module.exports = class extends React.Component {
     unitInputRef = {};
 
     calculateErrorRef = () => {
-        return this.unitInputRef.clientWidth;
+        //input fields stack when error state is added or removed without extra 2 pixels
+        return this.props.errorMessage ? this.unitInputRef.clientWidth : this.unitInputRef.clientWidth + 2;
+       
     }
 
     render() {
@@ -105,4 +104,5 @@ module.exports = class extends React.Component {
         );
     }
 };
+
 

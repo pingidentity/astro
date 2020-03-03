@@ -22,8 +22,8 @@ class UnitInputDemo extends React.Component {
 
 
     state = {
-        unitInputExample1: "1",
-        unitInputExample2: "1",
+        unitInputExample1: 1,
+        unitInputExample2: 1,
         selectedValue1: { label: "Day(s)", value: "Day(s)" },
         selectedValue2: { label: "Day(s)", value: "Day(s)" }
     };
@@ -42,7 +42,7 @@ class UnitInputDemo extends React.Component {
 
     _handleTextValueChange2 = (input) => {
         this.setState({
-            unitInputExample2: input
+            unitInputExample2: parseInt(input,10)
         });
     };
 
@@ -79,7 +79,9 @@ class UnitInputDemo extends React.Component {
                 <InputRow>
                     <UnitInput
                         labelText="Unit Input Text With Error"
-                        errorMessage ="Unit Input Error Message."
+                        errorMessage ={
+                            this.state.unitInputExample2 < 11 ? "Please enter value greater than 10" : undefined
+                        }
                         textFieldProps={{
                             onValueChange: this._handleTextValueChange2,
                             value: this.state.unitInputExample2,
@@ -103,3 +105,4 @@ class UnitInputDemo extends React.Component {
 }
 
 module.exports = UnitInputDemo;
+
