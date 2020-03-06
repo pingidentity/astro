@@ -1,5 +1,13 @@
 # ???
 .*.swp
+rust_mozprofile*
+logs
+
+# Examples
+**/examples/node_modules
+**/examples/basic-app/src/ui-lib-assets
+
+# Built directories
 reports/
 mvn/
 build*
@@ -7,21 +15,6 @@ dist
 cdn
 lib
 temp
-**/examples/node_modules
-**/examples/basic-app/src/ui-lib-assets
-rust_mozprofile*
-logs
-
-# Node / NPM / Yarn
-node/
-node_modules/
-yarn-error.log
-npm-debug.log
-package-lock.json
-
-# Istanbul
-**/coverage
-**/coverage-reference
 
 # index.js
 /index.js
@@ -30,20 +23,9 @@ package-lock.json
 *.iml
 .idea/
 
-# Eclipse
-.project
-.settings
-
-# VS Code
-*.code-workspace
-.vscode/*
-
+# Selenium
 selenium-standalone.log*
 http-server.log
 
 # Programatically generated internal files
 src/demo/core/templates.json
-
-# Mac
-.DS_Store
-**/.DS_Store

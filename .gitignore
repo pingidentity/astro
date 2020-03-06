@@ -1,12 +1,23 @@
+# NPM / YARN
+node
 node_modules
+yarn-error.log
+npm-debug.log
+package-lock.json
 
+# Mac
 .DS_Store
+**/.DS_Store
 
-packages/end-user/build-css
-packages/end-user/static
+# Istanbul
+**/*/coverage
+**/*/coverage-reference
 
-packages/ui-library/backstop_data/html_report/
-packages/ui-library/backstop_data/bitmaps_test/*
-packages/ui-library/backstop.json
+# Backstop
+**/**/backstop_data/html_report/
+**/**/backstop_data/bitmaps_test/*
+**/**/backstop.json
 
-build
+# VS Code
+*.code-workspace
+.vscode/*
