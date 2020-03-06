@@ -1,20 +1,9 @@
-# npm / yarn
-node_modules
-npm-debug.log
-yarn.lock
-yarn-error.log
-package-lock.json
+# Built directories
 dist
 cdn
 static
-
-# Istanbul
-**/coverage
-**/coverage-reference
-
-# Mac
-.DS_Store
-**/.DS_Store
+build
+build-css
 
 # JSDoc
 build-doc
