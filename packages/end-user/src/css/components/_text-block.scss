@@ -8,6 +8,10 @@
         text-align: left;
     }
 
+    &--overflow-wrap {
+        @include break-word;
+    }
+
     &--overflow-ellipsis {
         overflow: hidden;
         text-overflow: ellipsis;
