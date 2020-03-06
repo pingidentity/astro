@@ -3,7 +3,7 @@ import React from 'react';
 const SocialIcons = {
     GOOGLE: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <g>
                     <path
                         style={{ fill: '#4285F4' }}
@@ -31,7 +31,7 @@ const SocialIcons = {
     },
     LINKEDIN: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <path
                     style={{ fill: '#0073D1' }}
                     d="M92.9,0H7.1C3.2,0,0,3.2,0,7.2v85.6c0,4,3.2,7.2,7.1,7.2h85.7c3.9,0,7.1-3.2,7.1-7.2V7.2C100,3.2,96.8,0,92.9,0
@@ -43,7 +43,7 @@ const SocialIcons = {
     },
     TWITTER: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <path
                     style={{ fill: '#1DA1F2' }}
                     d="M89.3,0H10.7C4.8,0,0,4.8,0,10.7v78.6C0,95.2,4.8,100,10.7,100h78.6c5.9,0,10.7-4.8,10.7-10.7V10.7
@@ -58,7 +58,7 @@ const SocialIcons = {
     },
     FACEBOOK: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <rect x="35.5" y="10.3" style={{ fill: '#FFFFFF' }} width="52.8" height="89.7" />
                 <path
                     style={{ fill: '#1877f2' }}
@@ -71,7 +71,7 @@ const SocialIcons = {
     },
     MARKETO: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <path
                     style={{ fill: '#5944B0' }}
                     d="M67,0.7v98.6l25.2-20.1V14.4L67,0.7z M55.3,77.8L35,86.6V9.3l20.3,6V77.8z M7.8,75.5l15.5-4.1V22L7.8,19.5L7.8,75.5z"/>
@@ -80,7 +80,7 @@ const SocialIcons = {
     },
     SALESFORCE: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <g>
                     <path
                         style={{ fill: '#00A1E0' }}
@@ -143,7 +143,7 @@ const SocialIcons = {
     },
     SCIM: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <rect style={{ fill: "#000", stroke: "#000", strokeMiterlimit: 10 }} width="100" height="100" />
                 <rect style={{ fill: "#010101" }} x="6.02" y="36.11" width="87.96" height="31.04" />
                 <path
@@ -173,7 +173,7 @@ const SocialIcons = {
     },
     OPENID_CONNECT: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <polygon style={{ fill: "#F7921C" }} points="45.5,11.5 45.5,86.4 45.5,95.8 60.5,88.8 60.5,4.2 "/>
                 <polyline style={{ fill: "#BBBDBF" }} points="97.4,36.2 99.5,57.7 70.5,51.4 "/>
                 <path style={{ fill: "#BBBDBF" }} d="M63.1,31.9v9.5c6.3,1.1,11.9,3.2,16.4,5.9l10.6-6.6C82.9,36.3,73.6,33.2,63.1,31.9 M15.5,63.7
