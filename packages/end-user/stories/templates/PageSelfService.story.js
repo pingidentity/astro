@@ -513,7 +513,7 @@ class LinkedAccountsPage extends React.Component {
                         spacing={spacingOptions.SM}
                     >
                         <AccountTable
-                            onUnlink={(accountName) => {
+                            onUnlink={({ name: accountName }) => {
                                 this.setState((prevState) => prevState.accounts.map((account) => {
                                     if (account.name === accountName) {
                                         account.unlinked = true;
@@ -521,14 +521,14 @@ class LinkedAccountsPage extends React.Component {
                                     return account;
                                 }));
                             }}
-                            onRemove={(accountName) => {
+                            onRemove={({ name: accountName }) => {
                                 this.setState((prevState) => {
                                     return {
                                         accounts: prevState.accounts.filter(({ name }) => name !== accountName)
                                     };
                                 });
                             }}
-                            onUnlinkClick={(name) => {
+                            onUnlinkClick={({ name }) => {
                                 this.setState({ accountToUnlink: name });
                             }}
                             accounts={this.state.accounts}
