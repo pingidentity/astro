@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import TextBlock, { overflowTypes, alignments as textAlignments } from '../TextBlock';
 import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from '../shared/FlexRow';
 import Modal from '../shared/Modal';
-import Button, { ButtonTypes } from '../Button';
+import Button from '../Button';
 import { noop } from "underscore";
 
 const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText) => {
-    return accounts.map(({ image, name, unlinked }) => {
+    return accounts.map((account) => {
+        const { image, name, unlinked } = account;
         return (
             <FlexRow className="account-table__row no-mobile-break" key={name} alignment={alignments.CENTER}>
                 <div className="account-table__icon">
@@ -29,12 +30,12 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
                 </div>
                 <div className="account-table__row-unlink">
                     { !unlinked ? (
-                        <Button onClick={unlinkAccount(name)} inline>
+                        <Button onClick={unlinkAccount(account)} inline>
                             { unlinkAccountText }
                         </Button>
                     ) : (
                         <Button disabled inline>
-                            <span className="pingicon-unlink"></span> { unlinkAccountSuccessText }
+                            <span className="pingicon-unlink"/> { unlinkAccountSuccessText }
                         </Button>
                     )}
                 </div>
@@ -42,6 +43,12 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
         );
     });
 };
+
+function delayedPromise(delay) {
+    return new Promise((done) => {
+        setTimeout(done, delay);
+    });
+}
 
 /**
  * @class AccountTable
@@ -57,40 +64,41 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
  * @param {AccountTable~onRemove} onRemove
  *      Fires three seconds after the unlink callback fires.
  */
-
 class AccountTable extends React.Component {
     state = {
         isUnlinkModalExpanded: false,
         accountToUnlink: null,
     };
 
-    _closeUnlinkModal = () => {
+    _closeUnlinkModal = (e) => {
+        e.preventDefault();
         this.setState({
             isUnlinkModalExpanded: false,
             accountToUnlink: null,
         });
-    }
+    };
 
-    _onUnlinkClick = (name) => () => {
-        this.props.onUnlinkClick(name);
+    _onUnlinkClick = (account) => () => {
+        this.props.onUnlinkClick(account);
 
         this.setState({
-            accountToUnlink: name,
+            accountToUnlink: account,
             isUnlinkModalExpanded: true,
         });
     };
 
 
-    _unlinkAccount = (name) => {
+    _unlinkAccount = (account) => {
         this.setState({
             accountToUnlink: null,
             isUnlinkModalExpanded: false,
         });
 
-        this.props.onUnlink(name);
-
-        setTimeout(() => this.props.onRemove(name), 3000);
-    }
+        Promise.all([
+            Promise.resolve(this.props.onUnlink(account)),
+            delayedPromise(3000)
+        ]).then(() => this.props.onRemove(account)).catch(noop);
+    };
 
     render() {
         return [
@@ -106,15 +114,19 @@ class AccountTable extends React.Component {
                     flexDirection={flexDirectionOptions.COLUMN}
                     spacing={spacingOptions.MD}
                 >
-                    <h1 className="heading-text centered-text"><span className="pingicon-unlink"></span></h1>
+                    <h1 className="heading-text centered-text"><span className="pingicon-unlink"/></h1>
                     <h1 className="heading-text centered-text">
                         {this.props.unlinkModalTitle}
                     </h1>
                     <p className="normal-text centered-text">
                         {this.props.unlinkModalMessage}
                     </p>
-                    <Button label="Delete" type={ButtonTypes.DANGER} onClick={() => this._unlinkAccount(this.state.accountToUnlink)} />
-                    <TextBlock size="small"><a href="#" onClick={() => this._closeUnlinkModal()}>
+                    <Button
+                        label={this.props.unlinkModalConfirmText}
+                        type={Button.ButtonTypes.DANGER}
+                        onClick={() => this._unlinkAccount(this.state.accountToUnlink)}
+                    />
+                    <TextBlock size="small"><a onClick={this._closeUnlinkModal}>
                         {this.props.cancelText}
                     </a></TextBlock>
                 </FlexRow>
@@ -140,7 +152,7 @@ class AccountTable extends React.Component {
             </FlexRow>
         ];
     }
-};
+}
 
 AccountTable.propTypes = {
     'data-id': PropTypes.string,
@@ -149,6 +161,7 @@ AccountTable.propTypes = {
     onUnlink: PropTypes.func,
     unlinkModalMessage: PropTypes.node.isRequired,
     unlinkModalTitle: PropTypes.node.isRequired,
+    unlinkModalConfirmText: PropTypes.node.isRequired,
     onUnlinkClick: PropTypes.func,
     cancelText: PropTypes.string,
     unlinkAccountText: PropTypes.string,
@@ -165,6 +178,7 @@ AccountTable.defaultProps = {
     cancelText: 'Cancel',
     unlinkAccountText: 'Unlink Account',
     unlinkAccountSuccessText: 'Account Unlinked',
-}
+    unlinkModalConfirmText: 'Unlink'
+};
 
 export default AccountTable;
