@@ -51,6 +51,7 @@ class RockerButtonDemo extends React.Component {
                 <RockerButton
                     onValueChange={this._handleValueChange}
                     labels={labels}
+                    selectedIndex={this.state.selectedIndex}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
 
@@ -62,6 +63,7 @@ class RockerButtonDemo extends React.Component {
                 <RockerButton
                     onValueChange={this._handleChangeWithId}
                     labels={labelsWithId}
+                    selected={this.state.selectedId}
                 />
                 <div>Selected rocker label = {this.state.selectedLabel2},
                 id = {this.state.selectedId},
@@ -79,7 +81,6 @@ class RockerButtonDemo extends React.Component {
 
                 <RockerButton
                     type={RockerButton.rockerTypes.CHART}
-                    onValueChange={this._handleValueChange}
                     labels={years}
                 />
                 <div>chart rocker button</div>
@@ -88,7 +89,6 @@ class RockerButtonDemo extends React.Component {
 
                 <RockerButton
                     type={RockerButton.rockerTypes.CHART_SMALL}
-                    onValueChange={this._handleValueChange}
                     labels={days}
                 />
                 <div>small chart rocker button</div>

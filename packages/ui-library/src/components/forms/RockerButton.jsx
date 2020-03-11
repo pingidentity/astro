@@ -46,6 +46,9 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 * @param {number} [selectedIndex=0]
 *     The index of the selected label.
 *     When not provided, the component will manage this value.
+* @param {string} [selected=0]
+*     The id or index of the selected label.
+*     When not provided, the component will manage this value.
 * @param {RockerButton.rockerTypes} [type]
 *     Set to CHART for special style.
 *
@@ -73,106 +76,114 @@ const rockerTypes = {
     CHART_SMALL: "chart-small",
 };
 
-class RockerButtonStateless extends React.Component {
-    static propTypes = {
-        autoFocus: PropTypes.bool,
-        className: PropTypes.string,
-        "data-id": PropTypes.string,
-        disabled: PropTypes.bool,
-        labelHints: PropTypes.arrayOf(PropTypes.string),
-        labels: PropTypes.arrayOf(
-            PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.shape({
-                    label: PropTypes.node.isRequired,
-                    id: PropTypes.string
-                }),
-            ])),
-        noMargin: PropTypes.bool,
-        onValueChange: PropTypes.func,
-        selectedIndex: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string
-        ]),
-        type: PropTypes.oneOf(Object.values(rockerTypes)),
-    };
-
-    static defaultProps = {
-        autoFocus: false,
-        className: "",
-        "data-id": "rocker-button",
-        disabled: false,
-        noMargin: false,
-        onValueChange: _.noop,
-        selectedIndex: 0,
-    };
-
-    _handleClick = ({
-        id,
-        index,
-        label,
-    }, e) => {
-        if (this.props.disabled) {
-            return;
+const getButtonPosition = (labels, selected) => {
+    if (typeof labels[0] === "object") {
+        if (selected) {
+            return labels.findIndex(({ id }) => id === selected);
         }
-        this.props.onValueChange({ label, index, id }, e);
-
-    };
-
-    buttonPos = () => {
-        if (typeof this.props.labels[0] === "object") {
-            if (this.props.selectedIndex) {
-                return this.props.labels.findIndex(({ id }) => id === this.props.selectedIndex);
-            }
-            return 0;
-        } else {
-            return this.props.selectedIndex;
-        }
-    };
-
-    render() {
-        const { type } = this.props;
-
-
-        const className = classnames("rocker-button sel-" + this.buttonPos(), this.props.className, {
-            disabled: this.props.disabled,
-            "rocker-button--chart-rocker": type === rockerTypes.CHART || type === rockerTypes.CHART_SMALL,
-            "rocker-button--chart-rocker-small": type === rockerTypes.CHART_SMALL,
-            "rocker-button--no-margin": this.props.noMargin
-        });
-
-        return (
-            <div className="rocker-button__container">
-                <div ref="container" data-id={this.props["data-id"]} className={className}>
-                    {
-                        this.props.labels.map((data, index) => {
-                            const {
-                                id,
-                                label = id || data,
-                                ...props
-                            } = data;
-
-                            return (
-                                <RockerButtonLabel
-                                    autoFocus={index === this.props.selectedIndex && this.props.autoFocus === true}
-                                    helpText={this.props.labelHints ? this.props.labelHints[index] : undefined}
-                                    key={id || index}
-                                    id={id}
-                                    index={index}
-                                    text={label}
-                                    onClick={this._handleClick}
-                                    {...props}
-                                />);
-                        })
-                    }
-                </div>
-            </div>
-
-        );
+        return 0;
+    } else {
+        return selected;
     }
+};
+
+function RockerButtonBase({
+    autoFocus,
+    className,
+    "data-id": dataId,
+    disabled,
+    labelHints,
+    labels,
+    noMargin,
+    onValueChange,
+    selectedIndex,
+    selected,
+    type
+}) {
+    const selectedValue = selectedIndex === undefined ? selected : selectedIndex;
+    const position = getButtonPosition(labels, selectedValue);
+
+    const classes = classnames("rocker-button", className, {
+        disabled: disabled,
+        "rocker-button--chart-rocker": type === rockerTypes.CHART || type === rockerTypes.CHART_SMALL,
+        "rocker-button--chart-rocker-small": type === rockerTypes.CHART_SMALL,
+        "rocker-button--no-margin": noMargin,
+        [`sel-${position}`]: selectedValue !== null && selectedValue !== undefined
+    });
+
+    return (
+        <div className="rocker-button__container">
+            <div data-id={dataId} className={classes}>
+                {
+                    labels.map((data, index) => {
+                        const {
+                            id,
+                            label = id || data,
+                            ...props
+                        } = data;
+
+                        return (
+                            <RockerButtonLabel
+                                autoFocus={index === position && autoFocus === true}
+                                helpText={labelHints ? labelHints[index] : undefined}
+                                key={id || index}
+                                id={id}
+                                index={index}
+                                text={label}
+                                onClick={(payload, e) => {
+                                    if (disabled) {
+                                        return;
+                                    }
+                                    onValueChange(payload, e);
+
+                                }}
+                                {...props}
+                            />);
+                    })
+                }
+            </div>
+        </div>
+    );
 }
 
-var RockerButtonLabel = function ({
+RockerButtonBase.propTypes = {
+    autoFocus: PropTypes.bool,
+    className: PropTypes.string,
+    "data-id": PropTypes.string,
+    disabled: PropTypes.bool,
+    labelHints: PropTypes.arrayOf(PropTypes.string),
+    labels: PropTypes.arrayOf(
+        PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.shape({
+                label: PropTypes.node.isRequired,
+                id: PropTypes.string
+            }),
+        ])),
+    noMargin: PropTypes.bool,
+    onValueChange: PropTypes.func,
+    selectedIndex: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    selected: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    type: PropTypes.oneOf(Object.values(rockerTypes)),
+};
+
+RockerButtonBase.defaultProps = {
+    autoFocus: false,
+    className: "",
+    "data-id": "rocker-button",
+    disabled: false,
+    noMargin: false,
+    onValueChange: _.noop,
+    selected: 0
+};
+
+function RockerButtonLabel({
     autoFocus,
     id,
     helpText,
@@ -223,7 +234,7 @@ var RockerButtonLabel = function ({
         >
             {text}
         </button>;
-};
+}
 
 RockerButtonLabel.propTypes = {
     "data-id": PropTypes.string,
@@ -236,7 +247,7 @@ RockerButtonLabel.propTypes = {
 const RockerButton = withFocusOutline(
     inStateContainer([
         {
-            name: "selectedIndex",
+            name: "selected",
             initial: 0,
             callbacks: [
                 {
@@ -245,7 +256,7 @@ const RockerButton = withFocusOutline(
                 }
             ],
         }
-    ])(RockerButtonStateless)
+    ])(RockerButtonBase)
 );
 
 RockerButton.displayName = "RockerButton";
