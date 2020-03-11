@@ -211,7 +211,7 @@ class PieChart extends React.Component {
     state = {
         selected: {},
     };
-    
+
 
     /**
      * Get the value or the total of the [series] values for an item
@@ -230,14 +230,13 @@ class PieChart extends React.Component {
      * Transform data into a Recharts-readable style
      */
     _digestData = (data) =>
-        data.reduce((a, item) => ([
-            ...a,
+        data.map((item) => (
             {
                 id: item[this.props.dataKey],
                 [this.props.dataValue]: this._getValue(item),
                 color: item.color,
             }
-        ]), []);
+        ));
 
     _isPercentageValue = dimension => isString(dimension) && dimension.includes("%")
 
@@ -327,12 +326,21 @@ class PieChart extends React.Component {
         const {
             centerLabel,
             data,
-            centerValue = this._getTotalValue(data)
+            centerValue = this._getTotalValue(data),
         } = this.props;
 
-        const chartData = this._digestData(data);
+        const chartData = this._digestData(data)
+            .filter( dataObj => dataObj.chartValue !== 0); // filter out 0 for min size
+
+        console.log(chartData);
 
         const classNames = classnames("pie-chart", this.props.className);
+
+        const showPlaceholder = chartData.length === 0 || centerValue === 0;
+        const renderedChartData = showPlaceholder ? [{ id: "none", chartValue: 1, color: "#E4E4E4" }] : chartData; //render empty gray chart
+
+
+        console.log(chartData);
 
         const chart = (
             <Chart
@@ -342,17 +350,18 @@ class PieChart extends React.Component {
                 onMouseLeave={this._mouseLeave}
             >
                 <Pie
-                    data={chartData}
+                    data={ renderedChartData }
                     nameKey={this.props.dataKey}
                     dataKey={this.props.dataValue}
-                    paddingAngle={1}
                     innerRadius="55%"
-                    minAngle={5}
+                    minAngle={15}
                     legendType={this.props.legendType}
                     onMouseEnter={this._mouseEnter}
                     onClick={this._onClick}
+                    animationDuration={1000}
+
                 >
-                    {this._renderCells(chartData)}
+                    {this._renderCells(renderedChartData)}
                 </Pie>
                 {this.props.showTooltips &&
                     <Tooltip

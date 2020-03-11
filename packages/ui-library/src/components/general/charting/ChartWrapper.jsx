@@ -18,32 +18,46 @@ function ChartWrapper({
 }) {
     return (
         <div className={BASE_CLASS_NAME}>
-            <div className={`${BASE_CLASS_NAME}__info`}>
-                {title}
-                <Padding bottom={BASE_SPACING} />
-                {legend}
-            </div>
-            <Padding bottom={BASE_SPACING} />
-            <div className={`${BASE_CLASS_NAME}__chart`}>
-                {loadingMessage ? (
-                    <div className={`${BASE_CLASS_NAME}__loader`}>
-                        <Spinner small show={true} />
-                        <Text type={textTypes.SECTIONTITLE}>{loadingMessage}</Text>
-                    </div>
-                ): null}
-                {
-                    message !== undefined ? (
-                        <div className={`${BASE_CLASS_NAME}__message`}>
-                            <Text type={textTypes.SECTIONTITLE}>{message}</Text>
-                        </div>
-                    ) : null
-                }
-                {chart}
-            </div>
-            <Padding bottom={BASE_SPACING} />
-            <div className={`${BASE_CLASS_NAME}__controls`}>
-                {controls}
-            </div>
+            { (title || legend) &&
+                <div className={`${BASE_CLASS_NAME}__info`}>
+                    {title &&
+                        <Padding bottom={BASE_SPACING}>
+                            {title}
+                        </Padding>
+                    }
+                    {legend &&
+                        <Padding bottom={BASE_SPACING}>
+                            {legend}
+                        </Padding>
+                    }
+                </div>
+            }
+
+            { loadingMessage &&
+                <div className={`${BASE_CLASS_NAME}__loader`}>
+                    <Spinner small show={true} />
+                    <Text type={textTypes.SECTIONTITLE}>{loadingMessage}</Text>
+                </div>
+            }
+            { message &&
+                <div className={`${BASE_CLASS_NAME}__message`}>
+                    <Text type={textTypes.PAGETITLE}>{message}</Text>
+                </div>
+            }
+
+            { chart &&
+                <div className={`${BASE_CLASS_NAME}__chart`}>
+                    {chart}
+                </div>
+            }
+
+            { controls &&
+                <div className={`${BASE_CLASS_NAME}__controls`}>
+                    <Padding bottom={BASE_SPACING} />
+                    {controls}
+                </div>
+            }
+
         </div>
     );
 }
