@@ -172,6 +172,7 @@ class Charts extends React.Component {
                             data={AuthByType}
                             title="Authentications By Type"
                             renderChart={(data) => {
+                                //just using this transform to match PingID existing data. Not needed for component.
                                 const transformData = (d) => d.chartData.map((item) => (
                                     {
                                         ...item,
@@ -253,6 +254,7 @@ class Charts extends React.Component {
                             data={RegByDevice}
                             title="Registrations By Device"
                             renderChart={(data) => {
+                                //just using this transform to match PingID existing data. Not needed for component.
                                 const transformData = d => d.chartData.map((item) => (
                                     {
                                         ...item,

@@ -215,9 +215,7 @@ export default class ColumnChart extends React.Component {
         const valueData = this.props.data.find(o => o.id === this.state.selected.x.label);
 
         // Check to see if selected.x is referencing an old data set
-        if (!valueData) {
-            return;
-        }
+        if (!valueData) { return; }
 
         const data = {
             color: [...this.props.legend].reverse()[this.state.selected.y.index].color,
@@ -351,8 +349,6 @@ export default class ColumnChart extends React.Component {
                                     if (this.state.refLineTranslate !== ref) {
                                         this.setState({ refLineTranslate: ref });
                                     }
-
-
                                     return (<ChartLabel
                                         chartWidth={this._lastChartWidth}
                                         color={referenceLabelColor}

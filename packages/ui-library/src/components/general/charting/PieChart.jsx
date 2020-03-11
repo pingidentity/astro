@@ -332,15 +332,11 @@ class PieChart extends React.Component {
         const chartData = this._digestData(data)
             .filter( dataObj => dataObj.chartValue !== 0); // filter out 0 for min size
 
-        console.log(chartData);
 
         const classNames = classnames("pie-chart", this.props.className);
 
         const showPlaceholder = chartData.length === 0 || centerValue === 0;
         const renderedChartData = showPlaceholder ? [{ id: "none", chartValue: 1, color: "#E4E4E4" }] : chartData; //render empty gray chart
-
-
-        console.log(chartData);
 
         const chart = (
             <Chart
