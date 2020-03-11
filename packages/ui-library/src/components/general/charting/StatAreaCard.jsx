@@ -194,7 +194,6 @@ class StatAreaCard extends React.Component {
             ),
             type: RockerButton.rockerTypes.CHART_SMALL,
             labels: [],
-            selected: this.props.selected,
             onValueChange: this.props.onRangeChange,
             disabled: this.props.isNoData
         };

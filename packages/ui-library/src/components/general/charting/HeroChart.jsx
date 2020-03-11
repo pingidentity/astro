@@ -227,7 +227,7 @@ export default class HeroChart extends Component {
             labels,
             onValueChange: onValueChange,
             initialState: {
-                selectedIndex: labels.indexOf(selected),
+                selected: labels.indexOf(selected),
             }
         };
 
