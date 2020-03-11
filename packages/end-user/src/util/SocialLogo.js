@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Without backgrounds
+ */
+
 const SocialLogos = {
     MICROSOFT: ({ width = 180, height = 180 }) => {
         return (
