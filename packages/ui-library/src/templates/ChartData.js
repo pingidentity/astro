@@ -16,7 +16,7 @@ export const ColumnData = [
                 "value": "$156.6"
             }
         ],
-        "columnData": [
+        "data": [
             {
                 "id": "12-4 AM, February 25, 2020",
                 "data": [
@@ -60,13 +60,13 @@ export const ColumnData = [
                     },
                     {
                         "id": "Cost",
-                        "value": 27.761,
+                        "value": 0,
                         "legend": {
                             "label": "Cost",
                             "id": "Cost",
                             "color": "#398F5E",
                             "yAxisId": "CURRENCY",
-                            "value": "$27.8"
+                            "value": "0"
                         }
                     }
                 ]
@@ -103,24 +103,24 @@ export const ColumnData = [
                 "data": [
                     {
                         "id": "Usage",
-                        "value": 2173,
+                        "value": 21,
                         "legend": {
                             "label": "Usage",
                             "id": "Usage",
                             "color": "#49BD74",
                             "yAxisId": "DEFAULT",
-                            "value": "2.2K"
+                            "value": "21"
                         }
                     },
                     {
                         "id": "Cost",
-                        "value": 23.897,
+                        "value": .50,
                         "legend": {
                             "label": "Cost",
                             "id": "Cost",
                             "color": "#398F5E",
                             "yAxisId": "CURRENCY",
-                            "value": "$23.9"
+                            "value": "$0.50"
                         }
                     }
                 ]
@@ -197,7 +197,7 @@ export const ColumnData = [
                 "value": "$1.1K"
             }
         ],
-        "columnData": [
+        "data": [
             {
                 "id": "February 19, 2020",
                 "data": [
@@ -405,7 +405,7 @@ export const ColumnData = [
                 "value": "$5.5K"
             }
         ],
-        "columnData": [
+        "data": [
             {
                 "id": "January 26 - February 2, 2020",
                 "data": [
@@ -560,7 +560,7 @@ export const ColumnData = [
                 "value": "$349.1"
             }
         ],
-        "columnData": [
+        "data": [
             {
                 "id": "September, 2019",
                 "data": [
@@ -1204,8 +1204,8 @@ export const AuthByType = [
             {
                 "id": "Mobile App",
                 "label": "Mobile App",
-                "chartValue": 18495,
-                "value": "18.5K",
+                "chartValue": 0,
+                "value": "0",
                 "color": "#FF6400"
             },
             {
@@ -1227,8 +1227,8 @@ export const AuthByType = [
             {
                 "id": "Mobile App",
                 "label": "Mobile App",
-                "chartValue": 18495,
-                "value": "18.5K",
+                "chartValue": 0,
+                "value": "0",
                 "color": "#FF6400"
             },
             {
@@ -1400,22 +1400,22 @@ export const RegByDevice = [
             {
                 "id": "Mobile App",
                 "label": "Mobile App",
-                "chartValue": 2995,
-                "value": "3K",
+                "chartValue": 0,
+                "value": "0",
                 "color": "#193967"
             },
             {
-                "id": "FIDO2 Biometrics",
-                "label": "FIDO2 Biometrics",
-                "chartValue": 1946,
-                "value": "1.9K",
-                "color": "#7E6B8F"
+                "id": "Voice",
+                "label": "Voice",
+                "chartValue": 0,
+                "value": "0",
+                "color": "#78CAD2"
             },
             {
                 "id": "Other",
                 "label": "Other",
-                "chartValue": 4112,
-                "value": "4.1K",
+                "chartValue": 0,
+                "value": "0",
                 "color": "#DDE9E6"
             }
         ],
@@ -1423,22 +1423,22 @@ export const RegByDevice = [
             {
                 "id": "Mobile App",
                 "label": "Mobile App",
-                "chartValue": 2995,
-                "value": "3K",
+                "chartValue": 0,
+                "value": "0",
                 "color": "#193967"
             },
             {
-                "id": "FIDO2 Biometrics",
-                "label": "FIDO2 Biometrics",
-                "chartValue": 1946,
-                "value": "1.9K",
-                "color": "#7E6B8F"
+                "id": "Voice",
+                "label": "Voice",
+                "chartValue": 0,
+                "value": "0",
+                "color": "#78CAD2"
             },
             {
                 "id": "Other",
                 "label": "Other",
-                "chartValue": 4112,
-                "value": "4.1K",
+                "chartValue": 0,
+                "value": "0",
                 "color": "#DDE9E6"
             }
         ]
@@ -1448,22 +1448,22 @@ export const RegByDevice = [
             {
                 "id": "Mobile App",
                 "label": "Mobile App",
-                "chartValue": 20422,
-                "value": "20.4K",
+                "chartValue": 2995,
+                "value": "3K",
                 "color": "#193967"
             },
             {
-                "id": "Voice",
-                "label": "Voice",
-                "chartValue": 10692,
-                "value": "10.7K",
-                "color": "#78CAD2"
+                "id": "FIDO2 Biometrics",
+                "label": "FIDO2 Biometrics",
+                "chartValue": 1946,
+                "value": "1.9K",
+                "color": "#7E6B8F"
             },
             {
                 "id": "Other",
                 "label": "Other",
-                "chartValue": 31539,
-                "value": "31.5K",
+                "chartValue": 4112,
+                "value": "4.1K",
                 "color": "#DDE9E6"
             }
         ],
@@ -1471,22 +1471,22 @@ export const RegByDevice = [
             {
                 "id": "Mobile App",
                 "label": "Mobile App",
-                "chartValue": 20422,
-                "value": "20.4K",
+                "chartValue": 2995,
+                "value": "3K",
                 "color": "#193967"
             },
             {
-                "id": "Voice",
-                "label": "Voice",
-                "chartValue": 10692,
-                "value": "10.7K",
-                "color": "#78CAD2"
+                "id": "FIDO2 Biometrics",
+                "label": "FIDO2 Biometrics",
+                "chartValue": 1946,
+                "value": "1.9K",
+                "color": "#7E6B8F"
             },
             {
                 "id": "Other",
                 "label": "Other",
-                "chartValue": 31539,
-                "value": "31.5K",
+                "chartValue": 4112,
+                "value": "4.1K",
                 "color": "#DDE9E6"
             }
         ]

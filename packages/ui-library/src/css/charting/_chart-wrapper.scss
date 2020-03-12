@@ -3,6 +3,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     height: 100%;
 
     &__loader,
@@ -20,6 +21,7 @@
     }
     &__message {
         pointer-events: none;
+        text-transform: uppercase;
     }
     &__loader {
         background: rgba($color-white, 0.6);

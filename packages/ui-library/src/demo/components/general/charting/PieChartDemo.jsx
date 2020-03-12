@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ChartTitle from "ui-library/lib/components/general/charting/ChartTitle";
 import PieChart from "ui-library/lib/components/general/charting/PieChart";
 import Legend, {
@@ -15,6 +15,8 @@ import ChartWrapper from "ui-library/lib/components/general/charting/ChartWrappe
 * @desc A demo for PieChart
 */
 const PieChartDemo = () => {
+
+    const [location, setLocation] = useState("regional");
     const data = [
         {
             // This is passed in via the "theme" prop
@@ -25,10 +27,10 @@ const PieChartDemo = () => {
             series: [
                 {
                     label: "Beagles",
-                    value: 5
+                    value: 3
                 }, {
                     label: "Yorkies",
-                    value: 10,
+                    value: 5,
                 }
             ]
         },
@@ -39,10 +41,10 @@ const PieChartDemo = () => {
             series: [
                 {
                     label: "Goldfish",
-                    value: 3
+                    value: 80
                 }, {
                     label: "Bass",
-                    value: 7,
+                    value: 2,
                 }
             ]
         },
@@ -53,6 +55,15 @@ const PieChartDemo = () => {
             value: 0,
         }
     ];
+
+    const getCount = (d) => (id) => {
+        const part = d.find(el => el.id === id);
+        return part.series
+            ? part.series.reduce((acc, curr) => acc + curr.value, 0)
+            : part.value;
+    };
+
+    const countData = getCount(data);
 
     return (
         <ChartWrapper
@@ -65,17 +76,17 @@ const PieChartDemo = () => {
                         {
                             label: "Dog",
                             color: "#0EA4D1",
-                            value: 15
+                            value: countData("dogs")
                         },
                         {
                             label: "Fish",
                             color: "#0DC8FF",
-                            value: 4
+                            value: countData("fish")
                         },
                         {
                             label: "Bears",
                             color: "#96E7FF",
-                            value: 13,
+                            value: countData("bears")
                         }
                     ]}
                 />
@@ -100,7 +111,8 @@ const PieChartDemo = () => {
                         { label: "National", id: "national" }
                     ]}
                     noMargin
-                    onValueChange={(labelValues) => console.log("Rocker values", labelValues)}
+                    onValueChange={({ id }) => setLocation(id)}
+                    selectedIndex={location}
                     type={rockerTypes.CHART}
                 />
             }

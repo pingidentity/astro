@@ -133,15 +133,15 @@ export default class ColumnChart extends React.Component {
     };
 
     state = {
-        selected: { x: null, y: null }
+        selected: { x: null, y: null },
+        refLineTranslate: 0,
     };
 
     _barChartRef = createRef();
     _lastChartWidth = 0;
 
     _digestData = (data) =>
-        data.reduce((a, item) => ([
-            ...a,
+        data.map(item => (
             {
                 name: item.id,
                 ...this.props.legend.reduce((b, key, index) => ({
@@ -149,7 +149,7 @@ export default class ColumnChart extends React.Component {
                     [index]: item.data.find(dataPoint => dataPoint.id === key.id).value,
                 }), {})
             }
-        ]), []);
+        ));
 
     _handleClick = (id) => (value, index, e) => {
         const data = {
@@ -215,9 +215,7 @@ export default class ColumnChart extends React.Component {
         const valueData = this.props.data.find(o => o.id === this.state.selected.x.label);
 
         // Check to see if selected.x is referencing an old data set
-        if (!valueData) {
-            return;
-        }
+        if (!valueData) { return; }
 
         const data = {
             color: [...this.props.legend].reverse()[this.state.selected.y.index].color,
@@ -253,16 +251,18 @@ export default class ColumnChart extends React.Component {
         const horizontalPoints = getEvenLineCoords(this.props.height);
 
         const {
-            x,
-            y,
+            x: selectedX,
+            y: selectedY,
         } = this.state.selected;
 
         // Have to do all of this to figure out if the tooltip would go outside the container.
         // If that happens normally, the tooltip will jump to a pretty random spot.
         this._lastChartWidth = this._barChartRef.current ? this._barChartRef.current.props.width : this._lastChartWidth;
         const tooltipWidth = 150;
-        const tooltipOverflow = (x ? x.location : 0) + tooltipWidth - this._lastChartWidth;
-        const tooltipOffset = tooltipOverflow > 0 ? this._labelTranslate - tooltipOverflow : this._labelTranslate + 5;
+        const tooltipOverflow = (selectedX ? selectedX.location : 0) + tooltipWidth - this._lastChartWidth;
+        const tooltipOffset = tooltipOverflow > 0
+            ? this.state.refLineTranslate - tooltipOverflow
+            : this.state.refLineTranslate + 5;
 
         return (
             <>
@@ -295,65 +295,69 @@ export default class ColumnChart extends React.Component {
                             cursor={false}
                             offset={tooltipOffset}
                         />
-                        { !hasCustomState && legend.map(({ id, label, color, yAxisId = BASE_YAXIS_ID }, key) => (
-                            <Bar
-                                label={label ? label : id}
-                                yAxisId={yAxisId}
-                                dataKey={key}
-                                key={id}
-                                stackId={this.props.stacked ? "a" : id}
-                                maxBarSize={60}
-                                minPointSize={15}
-                                fill={color}
-                                onClick={this._handleClick(id)}
-                                onMouseOver={this._handleMouseOver(id)}
-                                onMouseOut={this._handleMouseOut}
-                                radius={
-                                    key === legend.length - 1 ||
+                        { !hasCustomState && legend.map(({ id, label, color, yAxisId = BASE_YAXIS_ID }, index) => {
+                            return (
+                                <Bar
+                                    label={label ? label : id}
+                                    yAxisId={yAxisId}
+                                    dataKey={index}
+                                    key={id}
+                                    stackId={this.props.stacked ? "a" : id}
+                                    maxBarSize={60}
+                                    background ={{ fillOpacity: 0, strokeOpacity: 0 }} //empty background so we can hover on whole row
+                                    onClick={this._handleClick(id)}
+                                    onMouseOver={this._handleMouseOver(id)}
+                                    onMouseOut={this._handleMouseOut}
+                                    radius={
+                                        index === legend.length - 1 ||
                                         !this.props.stacked ||
                                         legend.findIndex(legendItem => Object.keys(legendItem).includes("yAxisId")) > -1
-                                        ? [3, 3, 0, 0]
-                                        : null
-                                }
-                            >
-                                {
-                                    digestedData.map((item) => (
-                                        <Cell
-                                            key={item.name}
-                                            className="column-chart__cell"
-                                            style={{
-                                                stroke: x && x.label === item.name && y.label === id
-                                                    ? Color(color).lighten(0.5)
-                                                    : color,
-                                                strokeWidth: "1px",
-                                            }}
-                                        />
-                                    ))}
-                            </Bar>
-                        ))}
+                                            ? [3, 3, 0, 0]
+                                            : null
+                                    }
+                                >
+                                    {
+                                        digestedData.map((item) => {
+                                            return (
+                                                <Cell
+                                                    key={item.name}
+                                                    stroke = {selectedX &&
+                                                        selectedX.label === item.name &&
+                                                        selectedY.label === id
+                                                        ? Color(color).lighten(0.5)
+                                                        : color}
+                                                    strokeWidth= "1px"
+                                                    fill={color}
+                                                />
+                                            );})}
+                                </Bar>
+                            );})}
 
-                        {legend.length > 0 && !hasCustomState && x &&
+                        {legend.length > 0 && !hasCustomState && selectedX &&
                             <ReferenceLine
-                                x={x.label}
+                                x={selectedX.label}
                                 yAxisId={
                                     legend.find(({ id }) =>
-                                        y.label === id
+                                        selectedY.label === id
                                     ).yAxisId || BASE_YAXIS_ID
                                 }
                                 stroke={this.props.referenceLineColor}
                                 label={({ viewBox }) => {
                                     // This is awful and I am sorry. It's the only way to find the x coordinate
                                     // of the reference line/tooltip.
-                                    this._labelTranslate = 0 - (viewBox.x - x.location - (x.width / 2));
+                                    const ref = 0 - (viewBox.x - selectedX.location - (selectedX.width / 2));
+                                    if (this.state.refLineTranslate !== ref) {
+                                        this.setState({ refLineTranslate: ref });
+                                    }
                                     return (<ChartLabel
                                         chartWidth={this._lastChartWidth}
                                         color={referenceLabelColor}
-                                        label={x.label}
-                                        x={x.location + (x.width / 2)}
+                                        label={selectedX.label}
+                                        x={selectedX.location + (selectedX.width / 2)}
                                         y={viewBox.y}
                                     />);
                                 }}
-                                transform={`translate(${this._labelTranslate}, 0)`}
+                                transform={`translate(${this.state.refLineTranslate}, 0)`}
                                 className="column-chart__line"
                             />
                         }

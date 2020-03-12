@@ -34,241 +34,65 @@ import {
     RegByDevice,
 } from "./ChartData";
 
-class AuthByTypeWrapper extends React.Component {
+class DemoChart extends React.Component {
+    static defaultProps = {
+        data: {}
+    }
+    controlLabels = ["1D", "1W", "1M", "6M", "No Data"];
     state = {
         selectedRocker: 0,
-    };
+        loading: true
+    }
+    componentDidMount() {
+        //randomly load data from 1 - 3 s
+        setTimeout(() => this.setState({ loading: false }), Math.floor(Math.random() * 3000) + 1000);
+    }
 
     _handleRockerChange = (labelValues) => {
         this.setState({ selectedRocker: labelValues.index });
     }
 
-    _digestData = (data) => {
-        return data.reduce((acc, item) => [
-            ...acc,
-            {
-                ...item,
-                value: item.value
-                    ? item.value
-                    : item.series.reduce((total, seriesItem) => total = total + seriesItem.value, 0),
-            }
-        ], []);
-    };
-
     render() {
-        const controlLabels = ["1D", "1W", "1M", "6M"];
+        const { selectedRocker, loading } = this.state;
+        const { legendData = [], data = [] } = this.props.data[selectedRocker] || {};
 
         return (
-            <ChartWrapper
-                title={<ChartTitle title="Authentications by Type" />}
-                legend={
-                    <Legend
-                        alignment={legendAlignments.CENTER}
-                        boxAlignment={boxAlignments.CENTER}
-                        data={AuthByType[this.state.selectedRocker].legendData}
-                    />
-                }
-                chart={
-                    <PieChart
-                        onClick={this.props.onClick}
-                        showTooltips={true}
-                        data={this._digestData(AuthByType[this.state.selectedRocker].data)}
-                        dataValue="chartValue"
-                        width={250}
-                        height={250}
-                        renderTooltip={(props, Tooltip) => (
-                            <Tooltip
-                                {...props}
-                                value={`${props.value}`}
+            <DashboardCard
+                padding={padding.MD}
+                front={
+                    <ChartWrapper
+                        loadingMessage={loading && "loading"}
+                        message={selectedRocker === 4 && "no data"}
+                        title={<ChartTitle title={this.props.title} />}
+                        legend={
+                            <Legend
+                                alignment={legendAlignments.CENTER}
+                                boxAlignment={boxAlignments.CENTER}
+                                data={loading ? [] : legendData}
                             />
+                        }
+                        chart={this.props.renderChart(
+                            loading
+                                ? { chartData: [], legendData: [] }
+                                : { chartData: data, legendData }
                         )}
-                    />
-                }
-                controls={
-                    <RockerButton
-                        labels={controlLabels}
-                        noMargin
-                        onValueChange={this._handleRockerChange}
-                        selectedIndex={this.state.selectedRocker}
-                        type={rockerTypes.CHART}
-                    />
-                }
-            />
-        );
-    }
-}
-
-class RegByDeviceWrapper extends React.Component {
-    state = {
-        selectedRocker: 0,
-    };
-
-    _handleRockerChange = (labelValues) => {
-        this.setState({ selectedRocker: labelValues.index });
-    }
-
-    _digestData = (data) => {
-        return data.reduce((acc, item) => [
-            ...acc,
-            {
-                ...item,
-                value: item.value
-                    ? item.value
-                    : item.series.reduce((total, seriesItem) => total = total + seriesItem.value, 0),
-            }
-        ], []);
-    };
-
-    render() {
-        const controlLabels = ["1D", "1W", "1M", "6M"];
-
-        return (
-            <ChartWrapper
-                title={<ChartTitle title="Authentications by Type" />}
-                legend={
-                    <Legend
-                        alignment={legendAlignments.CENTER}
-                        boxAlignment={boxAlignments.CENTER}
-                        data={RegByDevice[this.state.selectedRocker].legendData}
-                    />
-                }
-                chart={
-                    <PieChart
-                        onClick={this.props.onClick}
-                        showTooltips={true}
-                        data={this._digestData(RegByDevice[this.state.selectedRocker].data)}
-                        dataValue="chartValue"
-                        width={250}
-                        height={250}
-                        renderTooltip={(props, Tooltip) => (
-                            <Tooltip
-                                {...props}
-                                value={`${props.value}`}
+                        controls={
+                            <RockerButton
+                                labels={this.controlLabels}
+                                noMargin
+                                onValueChange={this._handleRockerChange}
+                                selectedIndex={selectedRocker}
+                                type={rockerTypes.CHART}
                             />
-                        )}
-                    />
-                }
-                controls={
-                    <RockerButton
-                        labels={controlLabels}
-                        noMargin
-                        onValueChange={this._handleRockerChange}
-                        selectedIndex={this.state.selectedRocker}
-                        type={rockerTypes.CHART}
-                    />
-                }
-            />
-        );
-    }
-}
-
-class LineChartWrapper extends React.Component {
-    state = {
-        selectedRocker: 0,
-    };
-
-    _handleRockerChange = (labelValues) => {
-        this.setState({ selectedRocker: labelValues.index });
-    }
-
-    render() {
-        const controlLabels = ["1D", "1W", "1M", "6M"];
-
-        return (
-            <ChartWrapper
-                title={<ChartTitle title="Visitors" />}
-                legend={
-                    <Legend
-                        alignment={legendAlignments.CENTER}
-                        boxAlignment={boxAlignments.CENTER}
-                        data={LineData[this.state.selectedRocker].legendData}
-                    />
-                }
-                chart={
-                    <LineChart
-                        onClick={this.props.onClick}
-                        data={LineData[this.state.selectedRocker].data}
-                        legend={LineData[this.state.selectedRocker].legendData}
-                        width="100%"
-                        height={200}
-                        lines={false}
-                        theme={
-                            generateTheme(
-                                LineData[this.state.selectedRocker].legendData[0].color,
-                                LineData[this.state.selectedRocker].legendData
-                            )
                         }
                     />
                 }
-                controls={
-                    <RockerButton
-                        labels={controlLabels}
-                        noMargin
-                        onValueChange={this._handleRockerChange}
-                        selectedIndex={this.state.selectedRocker}
-                        type={rockerTypes.CHART}
-                    />
-                }
             />
         );
     }
 }
 
-class ColumnChartWrapper extends React.Component {
-    state = {
-        selectedRocker: 0,
-    };
 
-    _handleRockerChange = (labelValues) => {
-        this.setState({ selectedRocker: labelValues.index });
-    }
-
-    render() {
-        const controlLabels = ["1D", "1W", "1M", "6M"];
-
-        return (
-            <ChartWrapper
-                title={<ChartTitle title="Users" />}
-                legend={
-                    <Legend
-                        alignment={legendAlignments.CENTER}
-                        boxAlignment={boxAlignments.CENTER}
-                        data={ColumnData[this.state.selectedRocker].legendData}
-                    />
-                }
-                chart={
-                    <ColumnChart
-                        onClick={this.props.onClick}
-                        data={ColumnData[this.state.selectedRocker].columnData}
-                        legend={ColumnData[this.state.selectedRocker].legendData}
-                        height={200}
-                        lines={false}
-                        renderTooltip={(props, LegendItem) => (
-                            <LegendItem
-                                color={props.color}
-                                label={props.y.label}
-                                value={
-                                    props.y.label === "Cost"
-                                        ? `$${props.value}`
-                                        : props.value
-                                }
-                            />
-                        )}
-                    />
-                }
-                controls={
-                    <RockerButton
-                        labels={controlLabels}
-                        noMargin
-                        onValueChange={this._handleRockerChange}
-                        selectedIndex={this.state.selectedRocker}
-                        type={rockerTypes.CHART}
-                    />
-                }
-            />
-        );
-    }
-}
 
 class ChartView extends React.Component {
     render() {
@@ -299,7 +123,6 @@ class Charts extends React.Component {
     };
 
     _selectChart = (chart) => () => {
-        console.log(chart);
         this.setState({
             selectedChart: chart,
         });
@@ -345,38 +168,123 @@ class Charts extends React.Component {
                     </Padding>
 
                     <CardRow>
-                        <DashboardCard
-                            padding={padding.MD}
-                            front={(
-                                <AuthByTypeWrapper
-                                    onClick={this._selectChart(<AuthByTypeWrapper/>)}
-                                />
-                            )}/>
+                        <DemoChart
+                            data={AuthByType}
+                            title="Authentications By Type"
+                            renderChart={(data) => {
+                                //just using this transform to match PingID existing data. Not needed for component.
+                                const transformData = (d) => d.chartData.map((item) => (
+                                    {
+                                        ...item,
+                                        value: item.value
+                                            ? item.value
+                                            : item.series.reduce(
+                                                (total, seriesItem) => total = total + seriesItem.value,
+                                                0
+                                            ),
+                                    }
+                                ));
 
-                        <DashboardCard
-                            padding={padding.MD}
-                            front={(
-                                <ColumnChartWrapper
-                                    onClick={this._selectChart(<ColumnChartWrapper/>)}
+                                return (
+                                    <PieChart
+                                        data={data ? transformData(data) : undefined}
+                                        showTooltips={true}
+                                        dataValue="chartValue"
+                                        width={250}
+                                        height={250}
+                                        renderTooltip={(props, Tooltip) => (
+                                            <Tooltip
+                                                {...props}
+                                                value={`${props.value}`}
+                                            />
+                                        )}
+                                    />
+                                );
+                            }}
+                        />
+
+                        <DemoChart
+                            data={ColumnData}
+                            title="Users"
+                            renderChart={(data) => (
+                                <ColumnChart
+                                    onClick={this.props.onClick}
+                                    legend={data && data.legendData}
+                                    data={data && data.chartData}
+                                    height={200}
+                                    //lines={false}
+                                    renderTooltip={(props, LegendItem) => (
+                                        <LegendItem
+                                            color={props.color}
+                                            label={props.y.label}
+                                            value={
+                                                props.y.label === "Cost"
+                                                    ? `$${props.value}`
+                                                    : props.value
+                                            }
+                                        />
+                                    )}
                                 />
-                            )} />
+                            )}
+
+                        />
+
                     </CardRow>
                     <CardRow>
-                        <DashboardCard
-                            padding={padding.MD}
-                            front={(
-                                <LineChartWrapper
-                                    onClick={this._selectChart(<LineChartWrapper/>)}
+                        <DemoChart
+                            data={LineData}
+                            title="Visitors"
+                            renderChart={(data) => {console.log(data); return (
+                                <LineChart
+                                    width="100%"
+                                    height={200}
+                                    data={data.chartData}
+                                    legend={data.legendData}
+                                    theme={data.legendData.length > 0 &&
+                                        generateTheme(
+                                            data.legendData[0].color,
+                                            data.legendData
+                                        )
+                                    }
                                 />
-                            )} />
+                            );}}
+                        />
 
-                        <DashboardCard
-                            padding={padding.MD}
-                            front={(
-                                <RegByDeviceWrapper
-                                    onClick={this._selectChart(<RegByDeviceWrapper/>)}
-                                />
-                            )} />
+                        <DemoChart
+                            data={RegByDevice}
+                            title="Registrations By Device"
+                            renderChart={(data) => {
+                                //just using this transform to match PingID existing data. Not needed for component.
+                                const transformData = d => d.chartData.map((item) => (
+                                    {
+                                        ...item,
+                                        value: item.value
+                                            ? item.value
+                                            : item.series.reduce(
+                                                (total, seriesItem) => total = total + seriesItem.value,
+                                                0
+                                            ),
+                                    }
+                                ));
+                                return (
+                                    <PieChart
+                                        data={data.chartData ? transformData(data) : undefined}
+                                        showTooltips={true}
+                                        dataValue="chartValue"
+                                        width={250}
+                                        height={250}
+                                        renderTooltip={(props, Tooltip) => (
+                                            <Tooltip
+                                                {...props}
+                                                value={`${props.value}`}
+                                            />
+                                        )}
+                                    />
+                                );
+                            }
+
+                            }
+                        />
                     </CardRow>
                 </>
             ) : (

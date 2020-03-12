@@ -405,6 +405,8 @@ class BaseCalendar extends React.Component {
                 getReference={this._getReference}
                 placement="bottom-start"
                 ref={el => this.popperContainer = el}
+                noGPUAcceleration
+                matchWidth
             >
                 {calendar}
             </PopperContainer>
