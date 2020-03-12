@@ -158,7 +158,7 @@ export default class MultiseriesChart extends Component {
         color: chartingColors[index],
     }))
 
-    dataWithColors = this.addColors(this.props.options)
+    dataWithColors = () => this.addColors(this.props.options)
 
     getTicks = (data, key) => data.map(({ [key]: tick }) => tick)
 
@@ -195,7 +195,7 @@ export default class MultiseriesChart extends Component {
     }
 
     renderData = (isLine, dataKeys) => dataKeys.map((key) => {
-        const { color } = this.dataWithColors.find(({ id }) => id === key);
+        const { color } = this.dataWithColors().find(({ id }) => id === key);
         const libColor = colorLib(color);
         const sharedProps = {
             dataKey: key,
@@ -227,7 +227,7 @@ export default class MultiseriesChart extends Component {
         const renderer = isFunction(this.props.tooltip) ? this.props.tooltip : renderDefaultTooltip;
         return renderer({
             data: payload ? payload.map(({ dataKey, value }) => {
-                const { color, name } = this.dataWithColors.find(({ id }) => id === dataKey);
+                const { color, name } = this.dataWithColors().find(({ id }) => id === dataKey);
                 return {
                     color,
                     id: dataKey,
@@ -291,7 +291,7 @@ export default class MultiseriesChart extends Component {
                         onDeselectOption={this.handleDeselectDataSet}
                         onSelectOption={this.handleSelectDataSet}
                         onToggle={this.props.onMenuToggle}
-                        options={this.dataWithColors}
+                        options={this.dataWithColors()}
                         requiredText={
                             isFunction(menuRequiredText)
                                 ? menuRequiredText({ ...this.state })
