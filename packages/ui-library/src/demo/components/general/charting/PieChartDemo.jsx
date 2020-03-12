@@ -94,7 +94,7 @@ const PieChartDemo = () => {
             chart={
                 <PieChart
                     showTooltips={true}
-                    data={location === "regional" ? [] : data}
+                    data={data}
                     renderTooltip={(props, Tooltip) => (
                         <Tooltip
                             {...props}
