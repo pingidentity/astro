@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import HelpHint from "../tooltips/HelpHint";
 import classnames from "classnames";
+import Utils from "../../util/Utils";
 
 /**
  * @class LabelValuePairs
@@ -44,6 +45,9 @@ const renderLabel = ({
     divider,
     title,
 }, dividerIndex) => {
+    // IE doesn't support css grid, so we render a table instead
+    const Tag = Utils.isIE() ? "td" : "div";
+
     const renderHint = () => (hintText &&
         <HelpHint
             className="inline label-value-pairs__help-hint"
@@ -54,21 +58,22 @@ const renderLabel = ({
     );
 
     if (divider) {
-        return <hr key={dividerIndex} className="label-value-pairs__divider" />;
+        const HRTag = Utils.isIE() ? "td" : "hr";
+        return <HRTag key={dividerIndex} colSpan="2" className="label-value-pairs__divider" />;
     } else if (title) {
         return (
-            <div key={title} className="label-value-pairs__title">
+            <Tag key={title} className="label-value-pairs__title" colSpan="2">
                 {title}
                 {renderHint()}
-            </div>
+            </Tag>
         );
     } else {
         return [
-            <div key={`${label}-${value}-${dividerIndex}`} className="label-value-pairs__label">{label}</div>,
-            <div key={`${value}-${label}-${dividerIndex}`}className="label-value-pairs__value">
+            <Tag key={`${label}-${value}-${dividerIndex}`} className="label-value-pairs__label">{label}</Tag>,
+            <Tag key={`${value}-${label}-${dividerIndex}`} className="label-value-pairs__value">
                 {value}
                 {renderHint()}
-            </div>
+            </Tag>
         ];
     }
 };
@@ -78,11 +83,17 @@ const LabelValuePairs = ({
     dataPairs,
     "data-id": dataId,
     pruneEmpty,
-}) => (
-    <div data-id={dataId} className={classnames("label-value-pairs", className)}>
-        {(pruneEmpty ? pruneEmptyPairs(dataPairs) : dataPairs).map(renderLabel)}
-    </div>
-);
+}) => {
+    const Tag = Utils.isIE() ? "table" : "div";
+
+    return (
+        <Tag data-id={dataId} className={classnames("label-value-pairs", className)}>
+            {(pruneEmpty ? pruneEmptyPairs(dataPairs) : dataPairs).map(
+                Utils.isIE() ? (item => <tr>{renderLabel(item)}</tr>) : renderLabel
+            )}
+        </Tag>
+    );
+};
 
 LabelValuePairs.defaultProps = {
     "data-id": "label-value-pairs",
