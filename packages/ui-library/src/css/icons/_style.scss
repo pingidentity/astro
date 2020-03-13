@@ -411,6 +411,12 @@
     content: $icon-key-two; 
   }
 }
+.icon-ldap {
+  &:before {
+    content: $icon-ldap;     
+    color: #4b637c;
+  }
+}
 .icon-left {
   &:before {
     content: $icon-left; 
