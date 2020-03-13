@@ -147,4 +147,20 @@ describe("LabelValuePairs", function () {
         expect(component.find(".label-value-pairs__label").length).toBe(2);
     });
 
+    it("doesn't normally render table tags", function() {
+        const component = shallow(<LabelValuePairs dataPairs={mockData2} pruneEmpty />);
+
+        expect(component.find("td").length).toBe(0);
+    });
+
+    it("renders table tags for IE", function() {
+        window.navigator.__defineGetter__("userAgent", function () {
+            return "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
+        });
+
+        const component = shallow(<LabelValuePairs dataPairs={mockData2} pruneEmpty />);
+
+        expect(component.find("td").length).toBeGreaterThan(0);
+    });
+
 });

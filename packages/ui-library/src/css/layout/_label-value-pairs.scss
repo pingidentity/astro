@@ -17,6 +17,18 @@
     }
 }
 
+// IE Version
+td.label-value-pairs__label {
+    padding-right: $spacing-md;
+}
+
+.label-value-pairs {
+    td {
+        vertical-align: top;
+        padding-bottom: $spacing-md;
+    }
+}
+
 .label-value-pairs__value {
     @include text-value;
 
