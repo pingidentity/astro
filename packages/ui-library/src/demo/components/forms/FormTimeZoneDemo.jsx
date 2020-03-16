@@ -17,7 +17,7 @@ class FormTimeZoneDemo extends React.Component {
             state["open" + i] = false;
             state["searchString" + i] = "";
             state["filterByCountry" + i] = "";
-            state["selectedIndex" + i] = 0;
+            state["selectedIndex" + i] = -1;
         }
 
         state.value0 = {

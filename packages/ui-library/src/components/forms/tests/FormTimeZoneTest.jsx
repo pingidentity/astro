@@ -191,19 +191,7 @@ describe("FormTimeZone", function () {
         expect(selectedCountry.textContent).toContain(countryMetadata[3].name);
     });
 
-    it("selects the top country when the ENTER key is pressed while searching", function () {
-        const component = getComponent({ open: true });
-        const countryRows = getRows(component);
-        const searchInput = getSearchInput(component);
-        let selectedCountry;
-
-        ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
-        selectedCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-country");
-        expect(selectedCountry.textContent).toContain(countryMetadata[0].name);
-        expect(countryRows[0].className).toContain("selected");
-    });
-
-    it("selects the second country when the UP/DOWN-ARROW keys are pressed then ENTER key is pressed", function () {
+    it("selects the first country when the UP/DOWN-ARROW keys are pressed then ENTER key is pressed", function () {
         const component = getComponent({ open: true });
         const countryRows = getRows(component);
         const searchInput = getSearchInput(component);
@@ -214,8 +202,8 @@ describe("FormTimeZone", function () {
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_UP });
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
         selectedCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-country");
-        expect(selectedCountry.textContent).toContain(countryMetadata[1].name);
-        expect(countryRows[1].className).toContain("selected");
+        expect(selectedCountry.textContent).toContain(countryMetadata[0].name);
+        expect(countryRows[0].className).toContain("selected");
     });
 
     it("renders the zones with the proper text", function () {
