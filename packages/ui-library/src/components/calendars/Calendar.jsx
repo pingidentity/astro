@@ -11,6 +11,7 @@ import Translator from "../../util/i18n/Translator.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { inStateContainer } from "../utils/StateContainer";
 import { InputWidths, InputWidthProptypesAuto, getInputWidthClass } from "../forms/InputWidths";
+import { noop } from "underscore";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -40,6 +41,13 @@ var Views = {
  *
  * @param {number} date
  *    The numeric value for the selected date.
+ */
+
+/**
+ * @callback Calendar~onInputTextValueChange
+ *
+ * @param {number} date
+ *    The numeric value for the date typed in the text input field.
  */
 
 /**
@@ -86,6 +94,8 @@ var Views = {
  *    Set the minimal view.
  * @param {Calendar~onValueChange} [onValueChange]
  *    Callback to be triggered when a date is selected.
+ * @param {Calendar~onTextInputValueChange} [onTextInputValueChange]
+ *    Callback to be triggered when a date is typed into the text input field.
  *
  * @param {string} [placeholder]
  *    Placeholder text for the calendar field.
@@ -147,8 +157,9 @@ class BaseCalendar extends React.Component {
         required: PropTypes.bool,
         tight: PropTypes.bool,
         width: PropTypes.oneOf(InputWidthProptypesAuto),
-
+        onInputTextValueChange: PropTypes.func,
         onValueChange: PropTypes.func,
+        
     };
 
     static defaultProps = {
@@ -158,8 +169,10 @@ class BaseCalendar extends React.Component {
         minView: Views.DAYS,
         required: false,
         format: Translator.translate("dateformat"),
+        onInputTextValueChange: noop,
         tight: false,
-        width: InputWidths.AUTO
+        width: InputWidths.AUTO,
+
     };
 
     constructor(props) {
@@ -260,9 +273,14 @@ class BaseCalendar extends React.Component {
      * @param  {Object} e The event object
      */
     changeDate = (e) => {
+        const { onInputTextValueChange } = this.props;
+        const inputValue = e.target.value;
+
         this.setState({
-            inputValue: e.target.value
+            inputValue
         });
+
+        onInputTextValueChange(inputValue);
     };
 
     // handles when a new date is selected
