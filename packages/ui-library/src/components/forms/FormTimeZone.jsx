@@ -259,7 +259,7 @@ class TimeZoneStateless extends React.Component {
         open: false,
         selectCountryLabel: LABEL_DEFAULTS["SELECT-COUNTRY"],
         selectLabel: LABEL_DEFAULTS["SELECT-TIME-ZONE"],
-        selectedIndex: 0,
+        selectedIndex: -1,
         value: moment.tz.guess(),
     };
 
@@ -323,7 +323,7 @@ class TimeZoneStateless extends React.Component {
             searchString,
         } = this.props;
 
-        if (isEnter(keyCode)) {
+        if (isEnter(keyCode) && selectedIndex > -1) {
 
             if (filterByCountry && zones[selectedIndex]) {
                 this._onValueChange("zone", {
@@ -335,7 +335,7 @@ class TimeZoneStateless extends React.Component {
                 this._onValueChange("country", countries[selectedIndex].abbr);
             }
 
-        } else if (isArrowUp(keyCode)) {
+        } else if (isArrowUp(keyCode) && selectedIndex > -1) {
             newIndex = selectedIndex - 1;
             newIndex = newIndex < 0 ? 0 : newIndex;
 
@@ -346,7 +346,7 @@ class TimeZoneStateless extends React.Component {
         } else if (isArrowDown(keyCode)) {
             const items = filterByCountry ? zones : countries;
 
-            newIndex = selectedIndex + 1;
+            newIndex = (selectedIndex || 0) + 1;
             newIndex = newIndex > items.length - 1
                 ? items.length - 1 : newIndex;
 
@@ -619,7 +619,7 @@ const stateDefs = [
     },
     {
         name: "selectedIndex",
-        initial: 0,
+        initial: -1,
         setter: "setSelectedIndex",
     },
     {
