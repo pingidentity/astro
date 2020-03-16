@@ -111,10 +111,24 @@ describe("NavSidebar", () => {
         expect(selected.props.selected).toEqual(true);
     });
 
-    it("renders correct group and renders correct node as selected", () => {
+    it("does not render SidebarGroup if collapsed", () => {
         const component = shallow(
             <NavSidebar
                 {...defaultProps}
+                collapsed={true}
+                selectedSection="-2"
+                selectedNode="-5"
+            />
+        );
+
+        expect(component.find(SidebarGroup).exists()).toEqual(false);
+    });
+
+    it("renders correct group and renders correct node as selected when sidebar is not collapsed", () => {
+        const component = shallow(
+            <NavSidebar
+                {...defaultProps}
+                collapsed={false}
                 selectedSection="-2"
                 selectedNode="-5"
             />

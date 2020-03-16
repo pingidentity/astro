@@ -9,14 +9,14 @@ export const SidebarNode = ({
     id,
     label,
     onClick,
-    selected
+    selected,
 }) => (
     <li
         className={
             classnames(
                 "nav-sidebar__node",
                 {
-                    "nav-sidebar__node--selected": selected
+                    "nav-sidebar__node--selected": selected,
                 }
             )
         }
@@ -77,13 +77,15 @@ export const SidebarSection = ({
     id,
     label,
     onClick,
-    selected
+    selected,
+    collapsed,
 }) => (
     <li
         className={classnames(
             "nav-sidebar__section",
             {
-                "nav-sidebar__section--selected": selected
+                "nav-sidebar__section--selected": selected,
+                "nav-sidebar__section--collapsed": collapsed,
             }
         )}
         data-id={`sidebar-section_${id}`}
@@ -167,15 +169,16 @@ const containsSelectedNode = (tree, selectedNode) => {
 
 export default function NavSidebar(props) {
     const {
-        copyrightYear,
+        collapsed,
+        copyright,
         "data-id": dataId,
         navTree,
+        onCollapse,
         onSelectItem,
         selectedHeaderLabel,
         selectedNode,
         selectedSection,
     } = props;
-
     const [renderedSections, selectedGroup, selectedLabel] = navTree.reduce((
         [
             sectionsAcc,
@@ -204,6 +207,7 @@ export default function NavSidebar(props) {
                     label={label}
                     onClick={onSelectItem}
                     selected={isSelected}
+                    collapsed={isSelected && children && collapsed}
                 />,
             ],
             isSelected ? children : groupAcc,
@@ -219,7 +223,7 @@ export default function NavSidebar(props) {
                     "nav-sidebar__sections",
                     {
                         // Add divider above groups with this modifier
-                        "nav-sidebar__sections--group-visible": selectedGroup,
+                        "nav-sidebar__sections--group-visible": selectedGroup && !collapsed,
                     }
                 )}
             >
@@ -228,22 +232,22 @@ export default function NavSidebar(props) {
                 </div>
                 {renderedSections}
                 <div
-                    classnames="nav-sidebar__copyright"
+                    className="nav-sidebar__copyright"
                 >
-                    {copyrightYear}
+                    {copyright}
                 </div>
             </ul>
             {
-                selectedGroup &&
-                    <ul className="nav-sidebar__group-container">
-                        <div
-                            className="nav-sidebar__group-container-title"
-                        >
-                            {/* <a className="nav-sidebar__group-collapse"> */}
-                            {selectedLabel}
-                        </div>
-                        {selectedGroup.map(renderNode(props))}
-                    </ul>
+                selectedGroup && !collapsed &&
+                        <ul className="nav-sidebar__group-container">
+                            <div
+                                className="nav-sidebar__group-container-title"
+                            >
+                                <a className="nav-sidebar__group-collapse" onClick={onCollapse} />
+                                {selectedLabel}
+                            </div>
+                            {selectedGroup.map(renderNode(props))}
+                        </ul>
             }
 
         </nav>
@@ -252,6 +256,12 @@ export default function NavSidebar(props) {
 
 NavSidebar.propTypes = {
     "data-id": PropTypes.string,
+    collapsed: PropTypes.bool,
+    navTree: generateNavTreePropType(
+        3,
+        [null, { icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]) }]
+    ).isRequired,
+    onCollapse: PropTypes.func,
     onSelectItem: PropTypes.func,
     selectedHeaderLabel: PropTypes.node,
     selectedNode: PropTypes.oneOfType([
@@ -262,13 +272,11 @@ NavSidebar.propTypes = {
         PropTypes.number,
         PropTypes.string
     ]),
-    navTree: generateNavTreePropType(
-        3,
-        [null, { icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]) }]
-    ).isRequired,
 };
 
 NavSidebar.defaultProps = {
+    collapsed: true,
     "data-id": "nav-sidebar",
+    onCollapse: noop,
     onSelectItem: noop,
 };

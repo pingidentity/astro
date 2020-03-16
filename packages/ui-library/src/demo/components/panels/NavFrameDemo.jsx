@@ -1,27 +1,80 @@
 import React from "react";
-import NavFrame from "../../../components/panels/NavFrame";
-
+import NavFrame, { Logo, NavLink, NavMenu, Copyright } from "ui-library/lib/components/panels/NavFrame";
+import GlobalMessage, { messageTypes } from "ui-library/lib/components/general/GlobalMessage";
 
 
 /**
-* @name HeaderBarDemo
-* @memberof HeaderBar
-* @desc A demo for HeaderBar
+* @name NavFrameDemo
+* @memberof NavFrame
+* @desc A demo for NavFrame
 */
-class HeaderBarDemo extends React.Component {
+export default class NavFrameDemo extends React.Component {
     state = {
 
     }
 
     _tempNavTree = [
         {
-            id: "SNAAAARF",
+            id: "SNAAAARF1",
             label: "Header 1",
             children: [
                 {
-                    id: "evenworse",
+                    id: "4evenworse",
                     icon: "globe",
-                    label: "Section without children"
+                    label: "Section without children",
+                    children: [
+                        {
+                            id: 44,
+                            label: "Group",
+                            children: [
+                                {
+                                    id: 645,
+                                    label: "really really really really really long node"
+                                },
+                                {
+                                    id: 445,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 4545,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 454,
+                                    label: "End node"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "evenworse5",
+                    icon: "globe",
+                    label: "Section without children",
+                    children: [
+                        {
+                            id: 45,
+                            label: "Group",
+                            children: [
+                                {
+                                    id: 55,
+                                    label: "really really really really really long node"
+                                },
+                                {
+                                    id: 455,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 5455,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 545,
+                                    label: "End node"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
@@ -31,15 +84,27 @@ class HeaderBarDemo extends React.Component {
             children: [
                 {
                     icon: "globe",
-                    id: 2,
-                    label: "Section",
+                    id: 12,
+                    label: "Connections",
                     children: [
                         {
-                            id: 4,
+                            id: 14,
                             label: "Group",
                             children: [
                                 {
-                                    id: 5,
+                                    id: 15,
+                                    label: "really really really really really long node"
+                                },
+                                {
+                                    id: 145,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 1545,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 154,
                                     label: "End node"
                                 }
                             ]
@@ -47,9 +112,33 @@ class HeaderBarDemo extends React.Component {
                     ]
                 },
                 {
-                    id: 3,
+                    id: 23,
                     icon: "link",
-                    label: "SPLEHRT"
+                    label: "Applications",
+                    children: [
+                        {
+                            id: 24,
+                            label: "Group",
+                            children: [
+                                {
+                                    id: 25,
+                                    label: "really really really really really long node"
+                                },
+                                {
+                                    id: 245,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 2545,
+                                    label: "End node"
+                                },
+                                {
+                                    id: 254,
+                                    label: "End node"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
@@ -57,9 +146,36 @@ class HeaderBarDemo extends React.Component {
 
     render() {
         return (
-            <div style={{ height: "300px" }}>
-
+            <div style={{ height: "500px" }}>
                 <NavFrame
+                    autoSelectFirstNode={false}
+                    appMessage={
+                        <GlobalMessage type={messageTypes.WARNING} buttonLabel="Solve My Problem">
+                            I have a problem
+                        </GlobalMessage>
+                    }
+                    headerLeft={<Logo id="pingfed" />}
+                    headerRight={[
+                        <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />,
+                        <NavMenu
+                            iconName="account"
+                            items={[
+                                {
+                                    icon: "globe",
+                                    id: "id",
+                                    label: "About"
+                                },
+                                {
+                                    icon: "on-off",
+                                    id: "signout",
+                                    label: "Sign Out"
+                                },
+                            ]}
+                            key="nav-menu"
+                            onItemClick={(item) => console.log(item)}
+                        />
+                    ]}
+                    copyright={<Copyright copyrightYear={2003} />}
                     navTree={this._tempNavTree}
                     onSelectItem={id => this.setState({ selectedNode: id })}
                     selectedNode={this.state.selectedNode}
@@ -71,5 +187,3 @@ class HeaderBarDemo extends React.Component {
         );
     }
 }
-
-module.exports = HeaderBarDemo;

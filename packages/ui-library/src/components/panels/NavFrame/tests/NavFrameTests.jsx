@@ -80,10 +80,11 @@ describe("NavFrame", () => {
         expect(component.exists()).toEqual(true);
     });
 
-    it("selects first node if no selectedNode is passed in", () => {
+    it("selects first node if no selectedNode is passed in and autoSelectFirstNode is true", () => {
         const component = shallow(
             <NavFrame
                 {...defaultProps}
+                autoSelectFirstNode={true}
             />
         );
 
@@ -93,6 +94,23 @@ describe("NavFrame", () => {
         const sidebar = component.find(NavSidebar);
         expect(sidebar.prop("selectedSection")).toEqual(2);
         expect(sidebar.prop("selectedNode")).toEqual(5);
+    });
+
+
+    it("only selects first header if no selectedNode is passed in and autoSelectFirstNode is false", () => {
+        const component = shallow(
+            <NavFrame
+                {...defaultProps}
+                autoSelectFirstNode={false}
+            />
+        );
+
+        const header = component.find(NavHeader);
+        expect(header.prop("selectedHeader")).toEqual("SNAAAARF");
+
+        const sidebar = component.find(NavSidebar);
+        expect(sidebar.prop("selectedSection")).toBeUndefined();
+        expect(sidebar.prop("selectedNode")).toBeUndefined();
     });
 
     it("gets correct header and section if given a selectedNode", () => {
@@ -109,5 +127,53 @@ describe("NavFrame", () => {
         const sidebar = component.find(NavSidebar);
         expect(sidebar.prop("selectedSection")).toEqual("-2");
         expect(sidebar.prop("selectedNode")).toEqual("-7");
+    });
+
+    it("expands sidebar when item is selected from sidebar", () => {
+        const component = shallow(
+            <NavFrame
+                {...defaultProps}
+                collapsed={true}
+                selectedNode="-7"
+            />
+        );
+
+        const sidebar = component.find(NavSidebar);
+        expect(sidebar.prop("collapsed")).toEqual(true);
+
+        sidebar.prop("onSelectItem")(-7);
+        expect(component.find(NavSidebar).prop("collapsed")).toEqual(false);
+    });
+
+    it("collapses sidebar when item is selected from sidebar", () => {
+        const component = shallow(
+            <NavFrame
+                {...defaultProps}
+                selectedNode="-7"
+            />
+        );
+
+        const sidebar = component.find(NavSidebar);
+        sidebar.prop("onSelectItem")("-7");
+        expect(component.find(NavSidebar).prop("collapsed")).toEqual(false);
+
+        component.find(NavHeader).prop("onSelectItem")("1");
+        expect(component.find(NavSidebar).prop("collapsed")).toEqual(true);
+    });
+
+    it("collapses sidebar when onCollapse is called", () => {
+        const component = shallow(
+            <NavFrame
+                {...defaultProps}
+                selectedNode="-7"
+            />
+        );
+
+        const sidebar = component.find(NavSidebar);
+        sidebar.prop("onSelectItem")("-7");
+        expect(component.find(NavSidebar).prop("collapsed")).toEqual(false);
+
+        sidebar.prop("onCollapse")();
+        expect(component.find(NavSidebar).prop("collapsed")).toEqual(true);
     });
 });
