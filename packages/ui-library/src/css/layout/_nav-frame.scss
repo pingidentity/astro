@@ -14,17 +14,21 @@
 }
 
 .nav-sidebar {
-    $nav-frame-width: 200px;
     $nav-item-padding: $spacing-md;
+    $nav-width: 200px;
     display: flex;
+    width: $nav-width;
     > * {
         box-sizing: border-box;
     }
     &__sections {
-        max-width: $nav-frame-width;
-        background: $color-sonic;
+        background: $color-timberwolf;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
 
         &--group-visible {
+            flex-grow: 0;
             .nav-sidebar__section-title {
                 visibility: hidden;
                 width: 0;
@@ -34,7 +38,7 @@
                 display: none;
                 position: absolute;
             }
-            .nav-sidebar__section:hover {
+            .nav-sidebar__section:not(.nav-sidebar__section--selected):hover {
                 .nav-sidebar__section-label {
                     $left-gap: 3px;
                     display: inline-block;
@@ -49,6 +53,9 @@
                     transform: translateY(-50%);
                 }
             }
+            .nav-sidebar__copyright {
+                display: none;
+            }
         }
     }
     &__section {
@@ -56,11 +63,12 @@
         display: flex;
         cursor: pointer;
         position: relative;
-        z-index: 1;
         justify-content: stretch;
+        align-items: center;
 
         &:hover {
-            background: rgba($color-white, 0.8);
+            background: $color-white;
+            z-index: 1;
         }
 
         &-label {
@@ -70,6 +78,7 @@
         &-icon {
             display: flex;
             align-items: center;
+            font-size: 20px;
         }
         &-title {
             padding: $spacing-lg $spacing-sm $spacing-md;
@@ -78,7 +87,24 @@
         }
 
         &--selected {
-            color: $color-active-blue-highlighted;
+            font-weight: 700;
+            background: $color-neutral-95;
+            [class^=icon-] {
+                color: $color-active-blue;
+            }
+        }
+        &--collapsed {
+            position: relative;
+            &:after {
+                font-family: $icon-font;
+                content: $icon-close-arrow;
+                transform: rotate(90deg);
+                display: inline-block;
+                margin-left: auto;
+                font-size: 10px;
+                color: $color-active-blue;
+
+            }
         }
     }
 
@@ -87,7 +113,7 @@
         cursor: pointer;
         &:hover {
             @include font-pn-semibold;
-            background: $color-chilly;
+            background: $color-white;
         }
         &--selected {
             .nav-sidebar__node-label {
@@ -107,9 +133,11 @@
     }
 
     &__group-container {
+        flex-basis: 166px;
         font-size: 13px;
         padding: $spacing-sm 0 $spacing-sm $spacing-sm;
         border-right: 2px solid $color-timberwolf;
+        background: $color-neutral-95;
         &-title {
             padding: $nav-item-padding;
             font-size: 16px;
@@ -118,19 +146,61 @@
     }
     &__group {
         padding-left: $nav-item-padding;
+        &-collapse {
+            position: relative;
+            &:before {
+                font-family: $icon-font;
+                content: $icon-close-arrow;
+                transform: rotate(-90deg);
+                display: inline-block;
+                position: absolute;
+                right: 100%;
+                font-size: 10px;
+                margin-right: 5px;
+            }
+        }
         &-title {
             @include text-label;
             font-size: 11px;
         }
     }
+    &__copyright {
+        margin-top: auto;
+        padding: $nav-item-padding;
+        font-size: 10px;
+        line-height: 1.3em;
+    }
+
 
 
 }
 
 .nav-content {
-    padding: $spacing-lg $spacing-xl 0;
     box-sizing: border-box;
     flex-grow: 1;
+    position: relative;
 }
 
+.nav-divider {
+    border-left: 1px solid $color-neutral-30;
+    height: 30px;
+}
 
+.header-bar__nav-icon {
+    font-size: 20px;
+}
+
+.nav-header__link {
+    display: inline-block;
+    color: $color-elephant;
+    height: 22px;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:hover,
+    &.active {
+        color: $color-white;
+    }
+}
