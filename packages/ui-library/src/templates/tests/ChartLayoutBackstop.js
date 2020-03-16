@@ -1,7 +1,7 @@
 const flows = [
     {
         "sublabel": "base",
-        delay: 1000,
+        delay: 4500,
     },
 ];
 
