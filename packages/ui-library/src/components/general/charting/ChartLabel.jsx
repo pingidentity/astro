@@ -1,28 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Label } from "recharts";
 
-export default class ChartLabel extends Component {
-    static propTypes = {
-        chartWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        color: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        offset: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.shape({
-                left: PropTypes.number,
-                right: PropTypes.number
-            })
-        ]),
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
-    };
+class ChartLabel extends React.Component {
+    labelRef = React.createRef();
 
-    static defaultProps = {
-        offset: 0,
+    state = {
+        labelWidth: 0,
     };
-
-    labelRef = null;
 
     _getLabelWidth = () => this.labelRef && this.labelRef.getBBox ? this.labelRef.getBBox().width : 0;
 
@@ -30,7 +15,6 @@ export default class ChartLabel extends Component {
 
     render() {
         const {
-            // TODO: Have this work with a responsive, percentage-based width
             chartWidth,
             color,
             label,
@@ -61,7 +45,7 @@ export default class ChartLabel extends Component {
         })();
 
         return (
-            <g ref={this._setLabelRef}>
+            <g ref={this.labelRef}>
                 <Label
                     fill={color}
                     fontSize={14}
@@ -78,3 +62,25 @@ export default class ChartLabel extends Component {
         );
     }
 }
+
+ChartLabel.propTypes = {
+    chartWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    color: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    offset: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.shape({
+            left: PropTypes.number,
+            right: PropTypes.number
+        })
+    ]),
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+};
+
+ChartLabel.defaultProps = {
+    offset: 0,
+};
+
+
+export default ChartLabel;

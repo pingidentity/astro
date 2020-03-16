@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import PropTypes from "prop-types";
 import {
     LineChart as Chart,
@@ -85,6 +85,9 @@ export default class LineChart extends React.Component {
         },
         width: "100%",
     };
+
+    chartRef = createRef();
+    lastChartWidth = null;
 
     // Used to prevent unnecessary updates when the mouse moves
     mouseLockout = false;
@@ -236,8 +239,7 @@ export default class LineChart extends React.Component {
     _renderReferenceLine = () => {
         const {
             data,
-            theme,
-            width
+            theme
         } = this.props;
 
         const selected = data[this.state.activeTooltipIndex];
@@ -252,9 +254,11 @@ export default class LineChart extends React.Component {
                     const selectedDataPoint = data[this.state.activeTooltipIndex];
                     return selectedDataPoint
                         ? <ChartLabel
-                            chartWidth={width}
+                            // Have to use the ref
+                            chartWidth={this.chartRef.current.props.width}
                             color={theme.referenceLabelColor}
                             label={selectedDataPoint.label}
+                            offset={5}
                             x={x}
                             y={y}
                         />
@@ -296,6 +300,7 @@ export default class LineChart extends React.Component {
                     margin={{
                         top: 20, right: 30, left: 30, bottom: 5,
                     }}
+                    ref={this.chartRef}
                 >
                     {lines === true
                         ? <CartesianGrid
