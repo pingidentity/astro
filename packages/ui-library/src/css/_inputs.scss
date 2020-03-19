@@ -2418,6 +2418,10 @@ input[type=file] {
                 top: 0;
                 bottom: unset;
             }
+            .form-error-message {
+                line-height: normal;
+                top: calc(100% - 5px);
+            }
         }
     }
 
