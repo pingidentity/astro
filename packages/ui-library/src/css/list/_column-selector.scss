@@ -150,10 +150,12 @@
     }
 
     &__row-subtitle {
+        @include break-word;
         color: $color-strong-neutral-60;
     }
 
     &__row-title {
+        @include break-word;
         align-items: center;
         color: $color-strong-neutral-40;
         display: inline-flex;
