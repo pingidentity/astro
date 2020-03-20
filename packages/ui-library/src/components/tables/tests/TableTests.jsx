@@ -205,9 +205,9 @@ describe("Table", function () {
             />
         );
 
-        const [firstHeader, secondHeader] = component.find("th");
+        const [firstHeader, secondHeader] = component.find("th Text");
 
-        expect(firstHeader.props.children.props.className).toContain("grid__column-content--overflow-ellipsis");
+        expect(firstHeader.props.overflow).toEqual("ellipsis");
         expect(secondHeader.props.children.props).toBeUndefined();
 
         const [firstCell, secondCell] = component.find("td");
