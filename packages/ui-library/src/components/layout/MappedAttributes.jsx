@@ -110,6 +110,15 @@ function MappedAttributes({
                     required && <span className="mapped-attributes__required" key="required">Required</span>
                 ]))
             }
+            // Add a minWidth here in case one column is very wide; the other columns will get extremely
+            // squished otherwise.
+            columnStyling={[
+                { minWidth: "100px" },
+                {},
+                { minWidth: "100px" },
+                { minWidth: "80px" },
+                { minWidth: "80px" }
+            ]}
             headData={
                 // Always have four labels so that label line extends for the correct length
                 getLabels(labels)

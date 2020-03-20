@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
+import Text, { textTypes } from "../general/Text";
 import { measureWidth } from "../../util/DOMUtils";
 
 const cellClasses = {
@@ -114,6 +115,10 @@ const verticalAlignments = {
  *      Set vertical alignment for all the cells like TOP, MIDDLE, BOTTOM.
  * @param {Table.tableWidths} [width]
  *      The width of the table.
+ * @param {bool} useEllipsis=true
+ *      If true, cells and their headers will ellipsize if they overflow their
+ *      containers. This only works when using a fixedHeader or when setting
+ *      widths via the columnStyling prop.
  */
 
 /**
@@ -142,27 +147,32 @@ const renderColumnHeading = (
     useEllipsis,
     heading,
     idx,
-) => (
-    <th
-        className={classnames(
-            `grid__column--alignment-${alignment}`
-        )}
-        key={heading || idx}
-        style={
-            useEllipsis
-                ? {}
-                : widthStyles
-                
-        }
-    >
-        {useEllipsis ? <div
-            className="grid__column-content--overflow-ellipsis"
+) => {
+    const content = (
+        <Text
+            overflow={useEllipsis ? overflowOptions.ELLIPSIS : overflowOptions.WRAP}
+            type={textTypes.LABEL}
+        >
+            {heading}
+        </Text>
+    );
+
+    return (
+        <th
+            className={classnames(
+                `grid__column--alignment-${alignment}`
+            )}
+            key={heading || idx}
             style={widthStyles}
-            title={heading}
-        >{heading}</div>
-            : heading}
-    </th>
-);
+        >
+            {useEllipsis ? <div
+                style={widthStyles}
+                title={heading}
+            >{content}</div>
+                : content}
+        </th>
+    );
+};
 
 
 const getColumnWidth = (idx, fixedHeader) => {
@@ -178,7 +188,7 @@ const renderColumnHeadings = (columnStyling = [], headData, fixedHeader) => _.ma
         maxWidth,
         width,
     } = columnStyling[idx] || {};
-    
+
 
     const useEllipsis = contentOverflow === overflowOptions.ELLIPSIS;
     const colWidth = fixedHeader ? getColumnWidth(idx, fixedHeader) : width;
