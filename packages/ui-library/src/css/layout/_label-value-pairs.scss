@@ -6,6 +6,7 @@
 }
 
 .label-value-pairs__label {
+    @include break-word;
     @include text-label;
 
     grid-column: 1;
