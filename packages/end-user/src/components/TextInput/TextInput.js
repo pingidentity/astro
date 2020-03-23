@@ -95,8 +95,8 @@ const TextInput = ({
     width,
 }) => {
     const classNames = classnames('text-input', className, {
-        'text-input--error-icon': type === textInputTypes.ERROR,
-        'text-input--success-icon': type === textInputTypes.SUCCESS,
+        'text-input--error': type === textInputTypes.ERROR,
+        'text-input--success': type === textInputTypes.SUCCESS,
         'text-input--primary': type === textInputTypes.PRIMARY,
     });
 
