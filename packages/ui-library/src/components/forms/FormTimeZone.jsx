@@ -293,13 +293,14 @@ class TimeZoneStateless extends React.Component {
 
     _onValueChange = (type, value) => {
         this.props.onValueChange(type, value);
+        this._handleSearch("", -1);
+
         if (type === "country") {
             this.props.onCountryChange(value);
         } else if (type === "zone") {
             this.props.onZoneChange(value.name);
             this.props.setOpen(false);
         }
-        this._handleSearch(this.props.searchString, 0);
     };
 
     _onGlobalClick = (e) => {
