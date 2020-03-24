@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-import FlexRow, { justifyOptions, alignments } from "ui-library/lib/components/layout/FlexRow";
+import FlexRow, {
+    justifyOptions,
+    alignments,
+    flexDirectionOptions,
+    wrapOptions,
+    spacingOptions,
+} from "ui-library/lib/components/layout/FlexRow";
+import FlexItem from "ui-library/lib/components/layout/FlexItem";
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
 import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
 import FormTextField from "ui-library/lib/components/forms/FormTextField";
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
-import TileButton from "ui-library/lib/components/buttons/TileButton";
+import TileButton, { TopContent, Badge } from "ui-library/lib/components/buttons/TileButton";
 import TileSelector from "ui-library/lib/components/buttons/TileSelector";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
 import Modal from "ui-library/lib/components/general/Modal";
-import ColorPicker from "ui-library/lib/components/general/ColorPicker";
+import ColorPicker, { pickerTypes } from "ui-library/lib/components/general/ColorPicker";
 import Padding from "ui-library/lib/components/layout/Padding";
 import FileUpload from "ui-library/lib/components/forms/FileUpload";
-import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import HR from "ui-library/lib/components/general/HR";
+import FormTextArea from "ui-library/lib/components/forms/form-text-area";
+import PopoverMenu from "ui-library/lib/components/tooltips/PopoverMenu";
+import RockerButton from "ui-library/lib/components/forms/RockerButton";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import FormLabel from "../components/forms/FormLabel";
 
 /**
  * Example themes
@@ -31,16 +43,36 @@ const THEMES = [
             />
         ),
         colors: [{
-            color: "#504136",
+            color: "#44a19d",
             title: "Some Thing",
             helpText: "Some help text...",
         }, {
-            color: "#689689",
+            color: "#66fcf0",
             title: "Another Thing",
             helpText: "Some help text...",
         }, {
-            color: "#A49E8D",
+            color: "#c4c6c7",
             title: "Last Thing",
+            helpText: "Some help text...",
+        }, {
+            color: "#354453",
+            title: "Another Thing",
+            helpText: "Some help text...",
+        }, {
+            color: "#0a0b10",
+            title: "Another Thing",
+            helpText: "Some help text...",
+        }, {
+            color: "#edf4e0",
+            title: "Another Thing",
+            helpText: "Some help text...",
+        }, {
+            color: "#d73e87",
+            title: "Another Thing",
+            helpText: "Some help text...",
+        }, {
+            color: "#fdffff",
+            title: "Another Thing",
             helpText: "Some help text...",
         }],
     },
@@ -110,34 +142,60 @@ Color.propTypes = {
 };
 
 /**
- * Theme tile (title, description, component, colors)
+ * Theme tile (title, component)
  */
 const BrandingTile = ({
     title,
-    description,
     component,
-    colors,
-    onClick
-}) => (
-    <TileButton onClick={onClick}>
-        {component}
-        <Padding top={Padding.sizes.MD} bottom={Padding.sizes.SM}>
-            <Text type={textTypes.PAGETITLE}>{title}</Text>
-        </Padding>
-        <Text type={textTypes.BODY}>{description}</Text>
-        <div>
-            {colors.map(color => <Color key={color.title} color={color.color}/>)}
-        </div>
-    </TileButton>
-);
+    onClick,
+    active,
+}) => {
+    const [open, setOpen] = useState(false);
+
+    const clickToggle = () => {
+        setOpen(!open);
+    };
+
+    const buttons = [
+        {
+            label: "Customize"
+        },
+        {
+            label: "Preview"
+        },
+        {
+            label: "Delete"
+        }
+    ];
+
+    return (
+        <TileButton
+            onClick={onClick}
+        >
+            <TopContent
+                left={
+                    active && <Badge text="⭑ Active" />
+                }
+                right={
+                    <PopoverMenu
+                        label={<Text type={textTypes.PAGETITLE}>⋮</Text>}
+                        buttons={buttons}
+                        open={open}
+                        noHoverEffect
+                        onToggle={clickToggle}
+                    />
+                }
+            />
+            {component}
+            <Padding top={Padding.sizes.LG} bottom={Padding.sizes.MD}>
+                <Text type={textTypes.PAGETITLE}>{title}</Text>
+            </Padding>
+        </TileButton>
+    );
+};
 
 BrandingTile.propTypes = {
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    colors: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string,
-        color: PropTypes.string,
-    })),
     onClick: PropTypes.func,
 };
 
@@ -152,7 +210,19 @@ const NewBrandingTile = ({
     onClick
 }) => (
     <TileButton onClick={onClick}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+        <div style={
+            {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                // Have to do this for Safari to fix 100% height
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+            }
+        }>
             <Icon iconName="plus-rounded" iconSize={iconSizes.XL}/>
         </div>
     </TileButton>
@@ -212,8 +282,31 @@ const PreviewModal = ({
         >
             <FlexRow
                 justify={justifyOptions.SPACEBETWEEN}
-                alignment={alignments.CENTER}
+                alignment={alignments.BOTTOM}
             >
+                <FormTextField
+                    labelText="Name"
+                    width={InputWidths.XL}
+                    value={theme.title}
+                />
+                <InputRow>
+                    <Padding right={Padding.sizes.SM}>
+                        <RockerButton
+                            type={RockerButton.rockerTypes.ICON}
+                            noMargin
+                            labels={[
+                                {
+                                    id: "desktop",
+                                    icon: "desktop",
+                                },
+                                {
+                                    id: "mobile",
+                                    icon: "mobile",
+                                }
+                            ]}
+                        />
+                    </Padding>
+                </InputRow>
                 <FormDropDownList
                     options={[
                         { label: "Registration", value: "registration" },
@@ -226,7 +319,16 @@ const PreviewModal = ({
                     onValueChange={(option) => setSelectedPreviewOption(option)}
                     width={InputWidths.MD}
                 />
-                <div>
+            </FlexRow>
+
+            {theme.component}
+
+            <Padding top={Padding.sizes.XL}>
+                <FlexRow
+                    spacing={spacingOptions.SM}
+                    justify={justifyOptions.CENTER}
+                    alignment={alignments.CENTER}
+                >
                     <Button
                         label="Customize"
                         submit
@@ -237,23 +339,8 @@ const PreviewModal = ({
                         type={buttonTypes.PRIMARY}
                         onClick={onClickAddTheme}
                     />
-                </div>
-            </FlexRow>
-
-            {theme.component}
-
-            <div>
-                <h1>{theme.title}</h1>
-                <p>{theme.description}</p>
-                <Padding vertical={Padding.sizes.MD}>
-                    {
-                        theme.colors &&
-                        theme.colors.map(({ color, title }) =>
-                            <Color key={title} color={color} title={title} />
-                        )
-                    }
-                </Padding>
-            </div>
+                </FlexRow>
+            </Padding>
         </Modal>
     );
 };
@@ -311,7 +398,7 @@ const CustomizeModal = ({
                         labelText="Name"
                         value={themeName}
                         onValueChange={(value) => setThemeName(value)}
-                        width={InputWidths.MD}
+                        width={InputWidths.XL}
                     />
                 </div>
                 <div>
@@ -333,54 +420,69 @@ const CustomizeModal = ({
             {theme.component}
 
             <Padding vertical={Padding.sizes.MD}>
-                <div>
-                    {
-                        customColors &&
-                        customColors.map(({ color, title, helpText }, key) =>
-                            <ColorPicker
-                                key={title}
-                                color={color}
-                                onValueChange={(newColor) => updateColor(newColor, key)}
-                                labelText={title}
-                                hintText={helpText ? helpText : null}
-                            />
-                        )
-                    }
-                </div>
+                <FlexRow
+                    justify={justifyOptions.SPACEBETWEEN}
+                    alignment={alignments.TOP}
+                >
+                    <FlexItem basis="100%">
+                        <FlexRow
+                            alignment={alignments.CENTER}
+                            flexDirection={flexDirectionOptions.ROW}
+                            wrap={wrapOptions.WRAP}
+                        >
+                            {
+                                customColors &&
+                                customColors.map(({ color, title, helpText }, key) =>
+                                    <FlexItem key={title}>
+                                        <ColorPicker
+                                            type={pickerTypes.SIMPLE}
+                                            color={color}
+                                            onValueChange={(newColor) => updateColor(newColor, key)}
+                                            labelText={title}
+                                            hintText={helpText ? helpText : null}
+                                        />
+                                    </FlexItem>
+                                )
+                            }
+                        </FlexRow>
+                    </FlexItem>
+                    <FlexItem basis="100%">
+                        <FlexRow
+                            alignment={alignments.TOP}
+                            flexDirection={flexDirectionOptions.ROW}
+                        >
+                            <FlexItem>
+                                <FileUpload
+                                    accept=""
+                                    label={<div>Theme Logo</div>}
+                                    showThumbnail={true}
+                                />
+                            </FlexItem>
+                            <FlexItem>
+                                <FileUpload
+                                    accept=""
+                                    label={<div>Background</div>}
+                                    showThumbnail={true}
+                                />
+                            </FlexItem>
+                        </FlexRow>
+                        <FormTextArea
+                            labelText="Footer"
+                            width={InputWidths.XL}
+                        />
+                    </FlexItem>
+                </FlexRow>
             </Padding>
 
             <FlexRow
-                justify={justifyOptions.SPACEBETWEEN}
-                alignment={alignments.CENTER}
+                justify={justifyOptions.CENTER}
             >
-                <FileUpload
-                    accept="image/png"
-                    label={<div>Organization Logo<HelpHint hintText="Help Hint" /></div>}
-                    showThumbnail={true}
-                    labelSelect="Choose a File"
-                    labelRemove="Remove"
-                />
-                <FileUpload
-                    accept="image/png"
-                    label={<div>Background Image<HelpHint hintText="Help Hint" /></div>}
-                    showThumbnail={true}
-                    labelSelect="Choose a File"
-                    labelRemove="Remove"
-                />
-            </FlexRow>
-
-            <div>
                 <Button
-                    label="Add Theme"
+                    label="Save Changes"
                     type={buttonTypes.PRIMARY}
                     onClick={onClickAddTheme}
                 />
-                <Button
-                    label="Cancel"
-                    type={buttonTypes.LINK}
-                    onClick={onModalClose}
-                />
-            </div>
+            </FlexRow>
         </Modal>
     );
 };
@@ -412,13 +514,40 @@ const Branding = () => {
 
     return (
         <>
-            <PageHeader title="Theme Library" />
+            <PageHeader title="Branding & Themes" />
+
+            <Padding bottom={Padding.sizes.LG}>
+                <FormLabel>Brand Settings</FormLabel>
+            </Padding>
+
+            <FlexRow
+                justify={justifyOptions.START}
+                alignment={alignments.CENTER}
+                spacing={spacingOptions.LG}
+            >
+                <div>
+                    <FileUpload
+                        accept="image/png"
+                        showThumbnail={true}
+                    />
+                </div>
+                <div>
+                    <PageHeader title="Logo Corp." />
+                </div>
+            </FlexRow>
+
+            <HR />
+
+            <Padding bottom={Padding.sizes.LG} top={Padding.sizes.LG}>
+                <FormLabel>My Themes</FormLabel>
+            </Padding>
 
             <TileSelector>
-                {THEMES.map(theme => (
+                {THEMES.map((theme, key) => (
                     <BrandingTile
                         key={theme.title}
                         title={theme.title}
+                        active={key === 0}
                         component={theme.component}
                         description={theme.description}
                         colors={theme.colors}

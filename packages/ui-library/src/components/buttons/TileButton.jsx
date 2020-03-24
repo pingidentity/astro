@@ -154,7 +154,11 @@ const TileButton = ({
                         {renderedDetails}
                     </div>
                 ) : (
-                    [renderedContent, renderedDetails, renderedTitle]
+                    [
+                        renderedContent,
+                        renderedDetails,
+                        renderedTitle
+                    ]
                 )
             }
         </TagName>
@@ -183,6 +187,33 @@ TileButton.defaultProps = {
     "data-id": "tile-button",
     type: types.TOPICON,
     onClick: _.noop,
+};
+
+export const TopContent = ({
+    left,
+    right,
+}) => (
+    <>
+        <div className="tile-button__top-left">{left}</div>
+        <div className="tile-button__top-right">{right}</div>
+    </>
+);
+
+TopContent.propTypes = {
+    left: PropTypes.node,
+    right: PropTypes.node,
+};
+
+export const Badge = ({
+    text,
+}) => (
+    <div className="feat-badge">
+        {text}
+    </div>
+);
+
+Badge.propTypes = {
+    text: PropTypes.string,
 };
 
 export default TileButton;

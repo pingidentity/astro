@@ -688,6 +688,18 @@ button.tile-button {
         text-align: left;
     }
 
+    &__top-left {
+        position: absolute;
+        top: $spacing-sm;
+        left: $spacing-sm;
+    }
+
+    &__top-right {
+        position: absolute;
+        top: $spacing-sm;
+        right: $spacing-sm;
+    }
+
     &__title {
         color: $color-active-blue;
         font-size: 17px;

@@ -1,4 +1,10 @@
-import FlexRow, { justifyOptions, alignments, spacingOptions, flexDirectionOptions } from "../FlexRow";
+import FlexRow, {
+    justifyOptions,
+    alignments,
+    spacingOptions,
+    flexDirectionOptions,
+    wrapOptions,
+} from "../FlexRow";
 import React from "react";
 import { shallow } from "enzyme";
 
@@ -7,6 +13,24 @@ describe("Flex Row", () => {
         const component = shallow(<FlexRow />);
 
         expect(component.exists()).toBeTruthy();
+    });
+
+    it("renders with correct wrap wrap class", () => {
+        const component = shallow(<FlexRow wrap={wrapOptions.WRAP} />);
+
+        expect(component.find(".flex-row--wrap-wrap").exists()).toBeTruthy();
+    });
+
+    it("renders with correct nowrap wrap class", () => {
+        const component = shallow(<FlexRow wrap={wrapOptions.NOWRAP} />);
+
+        expect(component.find(".flex-row--wrap-nowrap").exists()).toBeTruthy();
+    });
+
+    it("renders with correct reverse wrap class", () => {
+        const component = shallow(<FlexRow wrap={wrapOptions.REVERSE} />);
+
+        expect(component.find(".flex-row--wrap-reverse").exists()).toBeTruthy();
     });
 
     it("renders with correct center alignment class", () => {

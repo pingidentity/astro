@@ -1,5 +1,5 @@
 import React from "react";
-import ColorPicker from "../../../components/general/ColorPicker";
+import ColorPicker, { pickerTypes } from "../../../components/general/ColorPicker";
 import InputRow from "../../../components/layout/InputRow";
 
 /**
@@ -11,6 +11,7 @@ class ColorPickerDemo extends React.Component {
     state = {
         picker1color: "#fff",
         picker2color: "#000",
+        picker3color: "#000",
         picker2open: false,
         errorMessage: ""
     };
@@ -24,6 +25,10 @@ class ColorPickerDemo extends React.Component {
 
     _handleChange2 = (color) => {
         this.setState({ picker2color: color });
+    };
+
+    _handleChange3 = (color) => {
+        this.setState({ picker3color: color });
     };
 
     _handleToggle = () => {
@@ -59,6 +64,18 @@ class ColorPickerDemo extends React.Component {
                         onError={this._handleError}
                         errorMessage={this.state.errorMessage}
                         open={this.state.picker2open}
+                    />
+                </InputRow>
+                <InputRow>
+                    <ColorPicker
+                        data-id="color-picker3"
+                        color={this.state.picker3color}
+                        type={pickerTypes.SIMPLE}
+                        onValueChange={this._handleChange3}
+                        labelText="Background color"
+                        name="stateful-demo"
+                        hintText="Pick a color or type in the hex code"
+                        description="Sample Description"
                     />
                 </InputRow>
             </div>);

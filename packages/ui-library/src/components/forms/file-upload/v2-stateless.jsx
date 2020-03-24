@@ -21,9 +21,9 @@ export default class extends Component {
         //labels
         labelText: PropTypes.string,
         label: PropTypes.node,
-        labelSelect: PropTypes.string.isRequired,
+        labelSelect: PropTypes.string,
         labelSelectOther: PropTypes.string,
-        labelRemove: PropTypes.string.isRequired,
+        labelRemove: PropTypes.string,
         labelMaxFileSize: PropTypes.string,
         description: PropTypes.node,
         //callbacks

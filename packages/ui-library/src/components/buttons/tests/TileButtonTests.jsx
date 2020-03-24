@@ -1,6 +1,6 @@
 import React from "react";
-import { shallow } from "enzyme";
-import TileButton from "../TileButton";
+import { shallow, mount } from "enzyme";
+import TileButton, { TopContent, Badge } from "../TileButton";
 
 window.__DEV__ = true;
 
@@ -92,5 +92,38 @@ describe("TileButton", () => {
 
         component.find("button").simulate("mousedown", mockE);
         expect(mockE.preventDefault).toHaveBeenCalled();
+    });
+
+    it("renders the badge", function () {
+        const component = mount(
+            <TileButton>
+                <Badge text="Some text" />
+            </TileButton>
+        );
+
+        const element = component.find(".feat-badge");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("renders the left top content", function () {
+        const component = mount(
+            <TileButton>
+                <TopContent left="Some text" />
+            </TileButton>
+        );
+
+        const element = component.find(".tile-button__top-left");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("renders the right top content", function () {
+        const component = mount(
+            <TileButton>
+                <TopContent right="Some text" />
+            </TileButton>
+        );
+
+        const element = component.find(".tile-button__top-right");
+        expect(element.exists()).toEqual(true);
     });
 });

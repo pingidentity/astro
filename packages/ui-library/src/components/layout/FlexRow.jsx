@@ -7,6 +7,16 @@ export { default as FlexItem } from "./FlexItem";
 
 /**
  * @enum {string}
+ * @alias FlexRow.wrapOptions
+ */
+export const wrapOptions = {
+    WRAP: "wrap",
+    NOWRAP: "no-wrap",
+    REVERSE: "reverse",
+};
+
+/**
+ * @enum {string}
  * @alias FlexRow.alignments
  */
 export const alignments = {
@@ -62,6 +72,8 @@ export const flexDirectionOptions = {
  *      If true, makes the FlexRow inline.
  * @param {FlexRow.justifyOptions} [justify=justifyOptions.START]
  *      The horizontal justification of the items.
+ * @param {FlexRow.wrap} [wrap=wrapOptions.NOWRAP]
+ *      How to wrap the items.
  * @param {Spacing.Sizes} [spacing]
  *      If supplied, with add spacing in between items.
  * @example
@@ -78,6 +90,18 @@ export const flexDirectionOptions = {
  */
 
 export const spacingOptions = paddingSizes;
+
+const getWrapClass = wrap => {
+    switch (wrap) {
+        case wrapOptions.WRAP:
+            return "flex-row--wrap-wrap";
+        case wrapOptions.REVERSE:
+            return "flex-row--wrap-reverse";
+        case wrapOptions.NOWRAP:
+        default:
+            return "flex-row--wrap-nowrap";
+    }
+};
 
 const getAlignmentClass = alignment => {
     switch (alignment) {
@@ -130,6 +154,7 @@ function FlexRow({
     flexDirection,
     inline,
     justify,
+    wrap,
     spacing
 }) {
     const isColumn =
@@ -141,6 +166,7 @@ function FlexRow({
                 className,
                 getAlignmentClass(alignment),
                 getJustifyClass(justify),
+                getWrapClass(wrap),
                 getFlexDirection(flexDirection),
                 {
                     [`flex-row--${isColumn ? "column" : "row" }-spacing-${spacing}`]: spacing !== undefined,
@@ -169,6 +195,9 @@ FlexRow.propTypes = {
     spacing: PropTypes.oneOf(
         Object.values(spacingOptions)
     ),
+    wrap: PropTypes.oneOf(
+        Object.values(wrapOptions)
+    ),
 };
 
 FlexRow.defaultProps = {
@@ -176,9 +205,7 @@ FlexRow.defaultProps = {
     "data-id": "flex-row",
     inline: false,
     justify: justifyOptions.START,
+    wrap: wrapOptions.NOWRAP,
 };
-
-FlexRow.alignments = alignments;
-FlexRow.justifyOptions = justifyOptions;
 
 export default FlexRow;

@@ -8,6 +8,37 @@
         }
     }
 
+    .color-picker-simple {
+        position: relative;
+        display: inline-block;
+
+        .color-picker-simple__dot {
+            width: 80px;
+            height: 80px;
+            margin: 9px;
+            border-radius: 6px;
+            box-shadow: 0 2px 2px 0 rgba($color-black, 0.2);
+            border-width: 0;
+            position: relative;
+
+            &:hover {
+                &:after {
+                    content: '';
+                    width: 80px;
+                    height: 80px;
+                    padding: 6px;
+                    border: 1px solid;
+                    border-radius: 6px;
+                    border-color: inherit;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+
     .color-picker {
         position: relative;
         display: inline-block;
@@ -38,6 +69,7 @@
             }
         }
     }
+
     label {
         display: block;
     }

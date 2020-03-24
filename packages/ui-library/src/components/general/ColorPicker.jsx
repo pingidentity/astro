@@ -1,6 +1,3 @@
-"use strict";
-
-
 import { ChromePicker } from "react-color";
 import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 
@@ -18,6 +15,11 @@ import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import StateContainer, { toggleTransform } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
+
+export const pickerTypes = {
+    DETAILED: "detailed",
+    SIMPLE: "simple",
+};
 
 /**
  * @callback ColorPicker~onValueChange
@@ -118,6 +120,7 @@ class Stateless extends React.Component {
         internalError: PropTypes.string, // internal use only, leaving out of JSDocs on purpose
         onError: PropTypes.func,
         width: PropTypes.oneOf(InputWidthProptypes),
+        type: PropTypes.oneOf(Object.values(pickerTypes)),
     };
 
     static defaultProps = {
@@ -130,6 +133,7 @@ class Stateless extends React.Component {
         errorMessage: "",
         internalError: "",
         width: InputWidths.SM,
+        type: pickerTypes.DETAILED,
     };
 
     /*
@@ -263,12 +267,11 @@ class Stateless extends React.Component {
     _errorMessage = () => this.props.errorMessage || this.props.internalError;
 
     render() {
-        var containerCss = {
+        const classNames = css(this.props.className, {
             "input-color-picker": true,
             open: this.props.open,
             "color-picker-error": this._errorMessage(),
-        };
-        containerCss[this.props.className] = !!this.props.className;
+        });
 
         const picker = (
             <ChromePicker
@@ -283,46 +286,74 @@ class Stateless extends React.Component {
 
         return (
             /* eslint-disable max-len */
-            <div data-id={this.props["data-id"]} className={css(containerCss)}>
-                <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText} description={this.props.description}/>
-                <div className="color-picker" ref="swatch">
-                    <span
-                        className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
-                        data-id="inner-swatch"
-                        ref="innerSwatch"
-                        onClick={this._handleClick}>
-                        <FormTextField
-                            data-id="colorInput"
-                            className="colors-label"
-                            inputClassName="colors-input btn-fg-color"
-                            value={this.props.color}
-                            maxLength={7}
-                            name={this.props.name}
-                            disabled={this.props.disabled}
-                            errorMessage={this._errorMessage()}
-                            onValueChange={this._handleColorInputChange}
-                            onKeyDown={this._handleColorInputKeyDown}
-                            onBlur={this._handleColorInputBlur}
-                            width={this.props.width}
+            <div data-id={this.props["data-id"]} className={classNames}>
+                {this.props.type === pickerTypes.DETAILED ? (
+                    <>
+                        <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText} description={this.props.description} />
+                        <div className="color-picker" ref="swatch">
+                            <span
+                                className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
+                                data-id="inner-swatch"
+                                ref="innerSwatch"
+                                onClick={this._handleClick}>
+                                <FormTextField
+                                    data-id="colorInput"
+                                    className="colors-label"
+                                    inputClassName="colors-input btn-fg-color"
+                                    value={this.props.color}
+                                    maxLength={7}
+                                    name={this.props.name}
+                                    disabled={this.props.disabled}
+                                    errorMessage={this._errorMessage()}
+                                    onValueChange={this._handleColorInputChange}
+                                    onKeyDown={this._handleColorInputKeyDown}
+                                    onBlur={this._handleColorInputBlur}
+                                    width={this.props.width}
+                                />
+                                <span className="colors-swatch" data-id={this.props["data-id"] + "-colors-swatch"} >
+                                    <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
+                                </span>
+                            </span>
+                            <If test={this.props.open && !this.props.disabled}>
+                                <PopperContainer
+                                    data-id="colorpicker-container"
+                                    data-parent={this.props["data-id"]}
+                                    className="popover-display"
+                                    getReference={this._getReference}
+                                    pointerClassName="popup-frame__pointer"
+                                    ref={el => this.popperContainer = el}
+                                    positionFixed
+                                >
+                                    <div className="popup-frame popup-frame--padded">{picker}</div>
+                                </PopperContainer>
+                            </If>
+                        </div>
+                    </>
+                ) : null }
+                {this.props.type === pickerTypes.SIMPLE ? (
+                    <div className="color-picker-simple" onClick={this._handleClick} ref="swatch">
+                        <div
+                            className="color-picker-simple__dot"
+                            style={{
+                                backgroundColor: this.props.color,
+                                borderColor: this.props.color,
+                            }}
                         />
-                        <span className="colors-swatch" data-id={this.props["data-id"] + "-colors-swatch"} >
-                            <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
-                        </span>
-                    </span>
-                    <If test={this.props.open && !this.props.disabled}>
-                        <PopperContainer
-                            data-id="colorpicker-container"
-                            data-parent={this.props["data-id"]}
-                            className="popover-display"
-                            getReference={this._getReference}
-                            pointerClassName="popup-frame__pointer"
-                            ref={el => this.popperContainer = el}
-                            positionFixed
-                        >
-                            <div className="popup-frame popup-frame--padded">{picker}</div>
-                        </PopperContainer>
-                    </If>
-                </div>
+                        <If test={this.props.open && !this.props.disabled}>
+                            <PopperContainer
+                                data-id="colorpicker-container"
+                                data-parent={this.props["data-id"]}
+                                className="popover-display"
+                                getReference={this._getReference}
+                                pointerClassName="popup-frame__pointer"
+                                ref={el => this.popperContainer = el}
+                                positionFixed
+                            >
+                                <div className="popup-frame popup-frame--padded">{picker}</div>
+                            </PopperContainer>
+                        </If>
+                    </div>
+                ) : null}
             </div>
             /* eslint-enable max-len */
         );
