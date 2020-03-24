@@ -54,7 +54,7 @@ class PopoverMenuBase extends PopoverBase {
         {
             "data-id": "popover-menu",
             items: [],
-            buttons: []
+            buttons: [],
         });
 
     _getDataId = (id, label, index) => {

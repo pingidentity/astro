@@ -128,6 +128,12 @@ $max-popover-width: 360px;
 
     &__trigger {
         display: inline-block;
+
+        &--no-hover {
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 }
 

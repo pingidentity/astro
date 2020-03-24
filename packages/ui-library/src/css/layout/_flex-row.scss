@@ -5,6 +5,16 @@
         display: inline-flex;
     }
 
+    &--wrap-wrap {
+        flex-wrap: wrap;
+    }
+    &--wrap-nowrap {
+        flex-wrap: nowrap;
+    }
+    &--wrap-reverse {
+        flex-wrap: wrap-reverse;
+    }
+
     &--justify-center {
         justify-content: center;
     }

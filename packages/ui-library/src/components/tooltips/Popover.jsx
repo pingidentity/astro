@@ -34,7 +34,8 @@ import popsOver from "../../util/behaviors/popsOver";
  *
  * @param {boolean} [padded=false]
  *     If true, the content will be padded from the frame.
- *
+* @param {bool} [noHoverEffect=false]
+ *     If there should be a hover effect
  * @param {boolean} [open=false]
  *     If true, tooltip is open or else closed.
  * @param {function} [onToggle]
@@ -58,6 +59,7 @@ class PopoverBase extends React.Component {
         onKeyDown: PropTypes.func,
         onToggle: PropTypes.func,
         padded: PropTypes.bool,
+        noHoverEffect: PropTypes.bool,
         open: PropTypes.bool,
         placement: PropTypes.string,
         triggerClassName: PropTypes.string,
@@ -70,6 +72,7 @@ class PopoverBase extends React.Component {
         onPopperClick: _.noop,
         onKeyDown: _.noop,
         onToggle: _.noop,
+        noHoverEffect: false,
         placement: "",
         triggerClassName: "",
         popperClassName: "",
@@ -176,7 +179,8 @@ class PopoverBase extends React.Component {
                         "popover__trigger",
                         this.props.triggerClassName,
                         {
-                            active: this.props.open
+                            active: this.props.open,
+                            "popover__trigger--no-hover": this.props.noHoverEffect,
                         }
                     )}
                     data-id={`${this.props["data-id"]}-trigger`}

@@ -14,6 +14,16 @@ const labels = ["Label 1", "Label 2", "Label Three", "Longer Label Four"];
 const years = ["3M", "6M", "1Y"];
 const days = ["1D", "1W", "1M"];
 
+const icons = [
+    {
+        id: "cogs",
+        icon: "cogs",
+    }, {
+        id: "globe",
+        icon: "globe",
+    },
+];
+
 const labelsWithId = [
     { label: <Icon iconName="globe">Label One</Icon>, id: "rocker1" },
     { label: "Label 2", id: "rocker2" },
@@ -92,6 +102,14 @@ class RockerButtonDemo extends React.Component {
                     labels={days}
                 />
                 <div>small chart rocker button</div>
+
+                <br /><br />
+
+                <RockerButton
+                    type={RockerButton.rockerTypes.ICON}
+                    labels={icons}
+                />
+                <div>icon rocker button</div>
             </div>
         );
     }

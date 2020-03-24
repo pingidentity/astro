@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
+import Icon, { iconSizes } from "../general/Icon";
 import _ from "underscore";
 import { withFocusOutline } from "../../util/KeyboardUtils";
 import { inStateContainer } from "../utils/StateContainer";
@@ -74,6 +75,8 @@ const rockerTypes = {
     CHART: "chart",
     /** chart-small */
     CHART_SMALL: "chart-small",
+    /** icon */
+    ICON: "icon",
 };
 
 const getButtonPosition = (labels, selected) => {
@@ -107,6 +110,7 @@ function RockerButtonBase({
         disabled: disabled,
         "rocker-button--chart-rocker": type === rockerTypes.CHART || type === rockerTypes.CHART_SMALL,
         "rocker-button--chart-rocker-small": type === rockerTypes.CHART_SMALL,
+        "rocker-button--icon-rocker": type === rockerTypes.ICON,
         "rocker-button--no-margin": noMargin,
         [`sel-${position}`]: selectedValue !== null && selectedValue !== undefined
     });
@@ -119,6 +123,7 @@ function RockerButtonBase({
                         const {
                             id,
                             label = id || data,
+                            icon,
                             ...props
                         } = data;
 
@@ -129,7 +134,11 @@ function RockerButtonBase({
                                 key={id || index}
                                 id={id}
                                 index={index}
-                                text={label}
+                                text={
+                                    type !== rockerTypes.ICON
+                                        ? label
+                                        : <Icon iconName={icon} iconSize={iconSizes.SM} />
+                                }
                                 onClick={(payload, e) => {
                                     if (disabled) {
                                         return;
@@ -156,7 +165,8 @@ RockerButtonBase.propTypes = {
         PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.shape({
-                label: PropTypes.node.isRequired,
+                label: PropTypes.node,
+                icon: PropTypes.string,
                 id: PropTypes.string
             }),
         ])),
