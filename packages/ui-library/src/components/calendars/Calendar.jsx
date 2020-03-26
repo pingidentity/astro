@@ -3,6 +3,7 @@ import React from "react";
 import classnames from "classnames";
 import moment from "moment-range";
 import DaysView from "./DaysView";
+import FormError from "../forms/FormError";
 import FormLabel from "../forms/FormLabel";
 import MonthsView from "./MonthsView";
 import YearsView from "./YearsView";
@@ -75,6 +76,8 @@ var Views = {
  *    A date range to restrict the selectable dates in the calendar.
  *    If provided, will restrict calendar date selection so it can't be less and/or can't be greater than the date range.
  *    An undefined start/end date will result in no restrictions in that direction for the allowable calendar dates.
+ * @param {string} [errorMessage]
+ *    Text which appears on input field hover as a red error message.
  * @param {string} [format="MM-DD-YYYY"]
  *    String value of the date format you want to display (e.g. "YYYY-MM-DD").
  * @param {string} [computableFormat="MM-DD-YYYY"]
@@ -442,6 +445,7 @@ class BaseCalendar extends React.Component {
                 required: this.props.required,
                 "value-entered": !!inputValue,
                 "input-calendar--width-tight": this.props.tight,
+                "form-error": this.props.errorMessage
             });
 
         return (
@@ -474,6 +478,15 @@ class BaseCalendar extends React.Component {
                     />
                 </div>
                 {this.state.isVisible && popup}
+                {this.props.errorMessage && (
+                    <FormError.Icon data-id="calendar-error-message-icon" />
+                )}
+                {this.props.errorMessage && (
+                    <FormError.Message
+                        value={this.props.errorMessage}
+                        data-id="calendar-error-message"
+                    />
+                )}
             </div>
         );
     }

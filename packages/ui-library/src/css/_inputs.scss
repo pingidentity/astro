@@ -1552,6 +1552,13 @@ input[type=file] {
             transform: rotate(180deg);
         }
     }
+    &:hover {
+        .form-error-message {
+            display: block;
+            @include break-word;
+        }
+    }
+
     input[type=text].input-calendar-value {
         padding: 0 30px;
         font-size: $default-input-font-size;
@@ -1903,6 +1910,25 @@ input[type=file] {
             }
         }
     }
+    &.input-calendar {
+        .input-container {
+            border: 1px solid $color-input-error;
+            border-radius: 2px;
+        }
+        .form-error-icon {
+            top: 34px;
+            right: -20px;
+        }
+        .form-error-message {
+            width: 100%;
+        }
+        &.active {
+            .form-error-message {
+                display: none;
+            }
+        }
+    }
+
     &.input-textarea {
         textarea {
             border-color: $color-input-error;

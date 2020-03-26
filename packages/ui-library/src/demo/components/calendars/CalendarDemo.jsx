@@ -15,6 +15,7 @@ class CalendarDemo extends React.Component {
         selectedDate1: moment(new Date(2021, 1, 20)), //last day!
         selectedDate2: moment("2015-10-15"), //Feb 20 2017
         selectedDate3: moment(new Date(2016, 2, 7)), //Broncos won Superbowl 50!
+        selectedDate4: moment(new Date(2019, 1, 1)),
         dateRange: {
             startDate: new Date(2015, 9, 10), //Oct 10 2015
             endDate: new Date(2015, 10, 20) //Nov 20 2015
@@ -32,6 +33,10 @@ class CalendarDemo extends React.Component {
     _getSelectedDateLabel = (date) => {
         return date ? moment(date).format("MMMM Do YYYY") : "NONE";
     };
+
+    _compareDates = (date) => {
+        return moment(date).isBefore(moment()) ? "Please enter a future date." : null;
+    }
 
     render() {
         return (
@@ -106,6 +111,18 @@ class CalendarDemo extends React.Component {
                     labelText="With a large width"
                     width={calendarWidths.LG}
                 />
+                <br/><br/>
+                <Calendar data-id="calendar"
+                    closeOnSelect
+                    computableFormat="x"
+                    date={this.state.selectedDate4}
+                    format="YYYY-MM-DD"
+                    labelText="Calendar with error message"
+                    name="calendar-demo"
+                    onValueChange={this._onEnrollmentDateChanged(4)}
+                    errorMessage={this._compareDates(this.state.selectedDate4)}
+                />
+          
             </div>
         );
     }
