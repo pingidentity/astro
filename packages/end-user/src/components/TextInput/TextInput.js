@@ -14,6 +14,20 @@ export const textInputTypes = {
     SUCCESS: 'success',
 };
 
+export const textInputFormats = {
+    TEXT: 'text',
+    NUMERIC: 'numeric',
+    EMAIL: 'email',
+    DEFAULT: ''
+};
+
+const inputmodeByFormats = {
+    [textInputFormats.TEXT]: { inputmode: 'text' },
+    [textInputFormats.NUMERIC]: { inputmode: 'numeric', pattern: '\d*', novalidate: true },
+    [textInputFormats.EMAIL]: { inputmode: 'email' },
+    [textInputFormats.DEFAULT]: {}
+};
+
 /**
  * @callback TextInput~onChange
  *
@@ -93,6 +107,7 @@ const TextInput = ({
     type,
     value,
     width,
+    format
 }) => {
     const classNames = classnames('text-input', className, {
         'text-input--error': type === textInputTypes.ERROR,
@@ -124,6 +139,7 @@ const TextInput = ({
             style={{width}}
             type="text"
             key="textinput"
+            {...inputmodeByFormats[format]}
         />,
     ];
 };
@@ -161,6 +177,11 @@ TextInput.propTypes = {
         PropTypes.number,
         PropTypes.string,
     ]),
+    format: PropTypes.oneOf(Object.keys(textInputFormats))
+};
+
+TextInput.defaultProps = {
+    format: textInputFormats.DEFAULT
 };
 
 export default TextInput;
