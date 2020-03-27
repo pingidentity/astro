@@ -2081,12 +2081,14 @@ input[type=file] {
 
         .input-message__text {
             box-sizing: border-box;
-            width: calc(100% - 1px);
+            width: calc(100% - 21px);
         }
 
         .unit-input__drop-down-list--error {
             border-left-width: 0;
             margin-left: -1px;
+            padding-right: 21px;
+            margin-bottom: 0;
         }
 
         .unit-input__text-field--error input[type=text],
@@ -2096,7 +2098,6 @@ input[type=file] {
 
             &:hover {
                 border: 1px solid $color-critical-red;
-                margin-bottom: 0 !important;
             }
         }
 
@@ -2105,7 +2106,7 @@ input[type=file] {
 
             .input-message__icon,
             .form-error-icon {
-                right: -20px;
+                right: 2px;
                 top: -28px;
             }
         }
