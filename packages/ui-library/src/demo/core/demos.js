@@ -19,6 +19,7 @@ import Spacing from "../components/docs/standards/Spacing.mdx";
 import PageTypes from "../components/docs/standards/PageTypes.mdx";
 import Colors from "../components/docs/standards/Colors.mdx";
 import Buttons from "../components/docs/standards/Buttons.mdx";
+import Content from "../components/docs/standards/Content.mdx";
 
 const contentPage = WrappedComponent => (props) => (
     <PageSection>
@@ -1518,7 +1519,7 @@ module.exports = [
             },
             {
                 label: "Content",
-                demo: require("../components/docs/Content"),
+                demo: contentPage(Content),
                 contentPage: true,
                 icon: "notepad"
             },
