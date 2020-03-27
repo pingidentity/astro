@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
 import FormTextField from "ui-library/lib/components/forms/FormTextField";
-import FlexRow, { justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+import FlexRow, { alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
 import PageSection from "ui-library/lib/components/layout/PageSection";
@@ -11,6 +11,7 @@ import PageHeader from "ui-library/lib/components/general/PageHeader";
 import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import PasswordStrengthMeter from "ui-library/lib/components/general/PasswordStrengthMeter";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
+import Text from "ui-library/lib/components/general/Text";
 
 class PasswordStrength extends Component {
     render() {
@@ -220,13 +221,15 @@ export default class PasswordPolicy extends Component {
                         <Layout.Column>
                             {requirementItems.map((o, key) => (
                                 <InputRow key={key}>
-                                    <FormCheckbox
-                                        onChange={this._handleCheckboxChange(o.value)}
-                                        checked={this.state.checkboxes[o.value]}
-                                        label={o.label}
-                                        inline
-                                        stacked
-                                    />
+                                    <FlexRow alignment={alignments.CENTER}>
+                                        <FormCheckbox
+                                            onChange={this._handleCheckboxChange(o.value)}
+                                            checked={this.state.checkboxes[o.value]}
+                                        />
+                                        <Text inline>
+                                            {o.label}
+                                        </Text>
+                                    </FlexRow>
                                 </InputRow>
                             ))}
                         </Layout.Column>
@@ -241,13 +244,15 @@ export default class PasswordPolicy extends Component {
                 >
                     {policyItems.map((o, key) => (
                         <InputRow key={key}>
-                            <FormCheckbox
-                                onChange={this._handleCheckboxChange(o.value)}
-                                checked={this.state.checkboxes[o.value]}
-                                label={o.label}
-                                inline
-                                stacked
-                            />
+                            <FlexRow alignment={alignments.CENTER}>
+                                <FormCheckbox
+                                    onChange={this._handleCheckboxChange(o.value)}
+                                    checked={this.state.checkboxes[o.value]}
+                                />
+                                <Text inline>
+                                    {o.label}
+                                </Text>
+                            </FlexRow>
                         </InputRow>
                     ))}
                 </PageSection>
