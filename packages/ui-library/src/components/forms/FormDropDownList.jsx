@@ -664,15 +664,21 @@ class FormDropDownListStateless extends React.Component {
                         hasPrompt ? searchIndex - 1 : searchIndex
                     ];
 
-                    if (!option.group ||
-                        (this._groupById[option.group] && !this._groupById[option.group].disabled)
-                    ) {
+                    if (option.disabled) {
+                        // option itself is disabled; ignoring;
+                    } else if (option.group &&
+                        this._groupById[option.group] && this._groupById[option.group].disabled) {
+                        // option's parent group is disabled; ignoring;
+                    } else {
                         onValueChange(option);
                     }
                 } else {
-                    onValueChange(this._filteredOptions()[
+                    const option = this._filteredOptions()[
                         hasPrompt ? searchIndex - 1 : searchIndex
-                    ]);
+                    ];
+                    if (!option.disabled) {
+                        onValueChange(option);
+                    }
                 }
             } else if (searchIndex === -1 && noneOption) {
                 onValueChange(noneOption);
@@ -802,7 +808,7 @@ class FormDropDownListStateless extends React.Component {
 
         const index = hasPrompt ? i + 1 : i;
         const group = this.props.groups && this._groupById[option.group],
-            disabled = group && group.disabled,
+            disabled = (group && group.disabled) || option.disabled,
             className = classnames("select-option", {
                 highlighted: !disabled && index === this.props.searchIndex,
                 selected: option.value === (this.props.selectedOption && this.props.selectedOption.value),
