@@ -1,0 +1,120 @@
+This page is an attempt to track correct content usage in our products. Post questions, suggestions, and additions to [#ux-questions](https://pingidentity.slack.com/archives/CRL34MKUM).
+
+You can also view and make comments on the working document here: https://docs.google.com/spreadsheets/d/1ZVti3Ok-teI40A_pHKRpvkb5iBy1GV7Ub8MM9HCN2Yc/edit?usp=sharing
+
+## Capitalization
+* Buttons are title case, like "Delete Application"
+* Links can be either sentence case or title case, depending on context
+* If a link is being used to perform an action, it should be title case, like "+ Add Row"
+* Links should be sentence case when they appear within other content
+* If a standalone link is not an action and is a complete sentence, it should be sentence case like "Read more about this on our documentation site"
+
+## Formats
+Our standard datetime format is 'YYYY-MM-DD hh:MM:SSa'.
+
+* Dates should look like "2018-09-05"
+* Times should look like "03:12:00pm"
+* Datetimes should look like "2018-09-05 03:12:00pm"
+
+## Language
+* Buttons and link button labels should be phrased as verbs with objects when appropriate, like "+ Add Certificate" or "Change Token Provider"
+* The titles of popups and popovers should match the labels of the buttons that triggered them
+* Buttons for completing or confirming an action can be more terse, like "Save" or "Done" or "Delete"
+* "Save" should refer to a singular change. "Done" is used when completing a multi-step process (like a wizard)
+
+## Feedback Banners
+
+| Text                                              | Description                                         |
+|---------------------------------------------------|-----------------------------------------------------|
+| [Entity Name] was successfully deleted.           | Feedback message after an entity is deleted.        |
+| [Entity Name] was successfully updated.           | Feedback message after an existing entity is saved. |
+| [Name] is now disabled and can no longer sign on. | After disabling a user.                             |
+| [Name] is now enabled and can sign on.            | After enabling a user.                              |
+| [Entity Name] was successfully added.             | Feedback message after a new entity is saved.       |
+
+## Record Management Actions
+
+| Text & Style                                                                                                                  | Description                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| Add [Entity Type]                                                                                                             | Button above list of entities -- like users or applications.                                             |
+| To [Entity Type] List                                                                                                         | Link back to list page that appears at the top of the edit page for an entity.                           |
+| Are you sure you want to delete [Entity Name]?                                                                                | Message in confirmation dialog when deleting an entity.                                                  |
+| Delete [Entity Name]                                                                                                          | Title of confirmation dialog when deleting an entity.                                                    |
+| Discard Changes                                                                                                               | Button that reverts all unsaved changes on a page.                                                       |
+| Cancel                                                                                                                        | Button or link that cancels the current action, restoring the user to where they were before the action. |
+| Save                                                                                                                          | Button to save edits to a record.                                                                        |
+| Are you sure you want to delete [Application Name]? Deleting an application may cause connection or access issues with users. | Confirmation when deleting an application                                                                |
+| Search [Plural Entity Type]                                                                                                   | Placeholder for search field on list page                                                                |
+| I understand                                                                                                                  | Label for checkbox that is required to confirm a destructive action like deleting a user or application  |
+
+## Signing On and Off
+
+| Text                                   | Description                                       |
+|----------------------------------------|---------------------------------------------------|
+| Sign Off                               | Action to end authenticated session               |
+| Sign On                                | Title of sign-on page                             |
+| Username                               | Placeholder for username field on sign-on page    |
+| Password                               | Placeholder for password field on sign-on page    |
+| Sign On                                | Primary button on sign-on page                    |
+| Change Password                        | Link to change password flow                      |
+| Remember username                      | Label of checkbox to store username               |
+| No account? Register now.              | Link from sign-on page to registration flow       |
+| Have a registration code? Sign up now. | Link from sign-on page to use a registration code |
+
+## Validation
+
+| Text & Style                                     | Description                                |
+|--------------------------------------------------|--------------------------------------------|
+| [Field name] can't be less than [minimum value]. | When there is a minimum range for a value. |
+| [Field name] can't be more than [maximum value]. | When there is a maximum range for a value. |
+
+## Preferred Terms
+
+| Preferred                       | Avoid                     | Description                                                                                                             |
+|---------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Sign On                         | Log In, Login, Sign In    | The act of signing on. This is different from "Authentication" because it's related to the act of entering credentials. |
+| Sign-on                         |                           | The offered capability (noun) of entering credentials to access something.                                              |
+| Sign Off                        | Log Out, Sign Out         | Exception: "Single Log-out (SLO)"                                                                                       |
+| Multi-factor Authentication     | Two-factor Authentication |                                                                                                                         |
+| Authentication                  |                           |                                                                                                                         |
+| Client                          |                           |                                                                                                                         |
+| User                            |                           | An identifier for a human                                                                                             |
+| User Store                      |                           |                                                                                                                         |
+| Identity                        |                           | Identities can be several things: humans, devices, client applications, etc.                                            |
+| Connection                      |                           |                                                                                                                         |
+| Population                      |                           |                                                                                                                         |
+| Environment                     |                           |                                                                                                                         |
+| Identity Provider               |                           |                                                                                                                         |
+| Provisioning                    |                           |                                                                                                                         |
+| Certificate                     |                           |                                                                                                                         |
+| Directory                       |                           |                                                                                                                         |
+| Region                          |                           |                                                                                                                         |
+| Policy                          |                           |                                                                                                                         |
+| Rule                            |                           |                                                                                                                         |
+| Condition                       |                           |                                                                                                                         |
+| Organization                    |                           |                                                                                                                         |
+| Verification                    |                           |                                                                                                                         |
+| Backend (noun)                  |                           |                                                                                                                         |
+| Checkbox                        |                           |                                                                                                                         |
+| Check mark                      |                           |                                                                                                                         |
+| Data source                     |                           |                                                                                                                         |
+| Datastore                       |                           |                                                                                                                         |
+| File name (when not a variable) |                           |                                                                                                                         |
+| Homepage                        |                           |                                                                                                                         |
+| Host name (when not a variable) |                           |                                                                                                                         |
+| Key store                       |                           |                                                                                                                         |
+| Lifecycle (noun)                |                           |                                                                                                                         |
+| Lifecycle (adjective)           |                           |                                                                                                                         |
+| Log file                        |                           |                                                                                                                         |
+| Plugin                          |                           |                                                                                                                         |
+| Roadmap                         |                           |                                                                                                                         |
+| Runtime (noun)                  |                           |                                                                                                                         |
+| Standalone                      |                           |                                                                                                                         |
+| Timestamp                       |                           |                                                                                                                         |
+| Truststore                      |                           |                                                                                                                         |
+| Username                        |                           |                                                                                                                         |
+| Web page                        |                           |                                                                                                                         |
+| White paper                     |                           |                                                                                                                         |
+| White space                     |                           |                                                                                                                         |
+| Radio button                    |                           |                                                                                                                         |
+| Key pair                        |                           |                                                                                                                         |
