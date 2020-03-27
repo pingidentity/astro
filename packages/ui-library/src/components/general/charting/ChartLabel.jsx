@@ -1,66 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Label } from "recharts";
+import { usePreventOverflow } from "../../../util/ChartingUtils";
 
-class ChartLabel extends React.Component {
-    labelRef = React.createRef();
+export default function ChartLabel({
+    chartWidth,
+    color,
+    label,
+    offset,
+    x,
+    y,
+}) {
+    const [labelRef, adjustment] = usePreventOverflow(chartWidth, x, offset);
 
-    state = {
-        labelWidth: 0,
-    };
-
-    _getLabelWidth = () => this.labelRef && this.labelRef.getBBox ? this.labelRef.getBBox().width : 0;
-
-    _setLabelRef = ref => { this.labelRef = ref; }
-
-    render() {
-        const {
-            chartWidth,
-            color,
-            label,
-            offset,
-            x,
-            y,
-        } = this.props;
-
-        const {
-            left = offset,
-            right = offset
-        } = offset;
-
-        const labelWidth = this._getLabelWidth();
-
-        // Calculate whether label would go outside the bounds of the chart
-        const overflowsLeft = (labelWidth / 2) > (x + left);
-        const overflowsRight = ((labelWidth / 2) + x) > (chartWidth - right);
-
-        const adjustedX = (() => {
-            if (overflowsLeft) {
-                return left + (labelWidth / 2);
-            } else if (overflowsRight) {
-                return chartWidth - ((labelWidth / 2) + right);
-            } else {
-                return x;
-            }
-        })();
-
-        return (
-            <g ref={this.labelRef}>
-                <Label
-                    fill={color}
-                    fontSize={14}
-                    position="top"
-                    value={label}
-                    viewBox={{
-                        height: 125,
-                        width: 0,
-                        x: adjustedX,
-                        y
-                    }}
-                />
-            </g>
-        );
-    }
+    return (
+        <g ref={labelRef}>
+            <Label
+                fill={color}
+                fontSize={14}
+                position="top"
+                value={label}
+                viewBox={{
+                    height: 125,
+                    width: 0,
+                    x: x + adjustment,
+                    y
+                }}
+            />
+        </g>
+    );
 }
 
 ChartLabel.propTypes = {
@@ -81,6 +49,3 @@ ChartLabel.propTypes = {
 ChartLabel.defaultProps = {
     offset: 0,
 };
-
-
-export default ChartLabel;

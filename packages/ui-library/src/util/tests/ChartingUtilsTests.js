@@ -2,7 +2,7 @@ import {
     fromRechartsDataFormat,
     toRechartsDataFormat,
     generateTheme,
-    getEvenLineCoords,
+    getEvenLineCoords
 } from "../ChartingUtils";
 
 window.__DEV__ = true;
@@ -98,4 +98,58 @@ describe("ChartingUtils", () => {
         expect(getEvenLineCoords(height).length).toEqual(5);
     });
 
+    // TODO: Get these working. Testing hooks is really hard in Enzyme,
+    // especially useRef. We might have to pull in another library.
+    // describe("usePreventOverflow", () => {
+    //     // let originalUseRef = null;
+    //     // beforeAll(() => {
+    //     //     originalUseRef = React.useRef;
+    //     //     React.useRef = () => []
+    //     // });
+    //     // afterAll(() => {
+    //     //     React.useRef = originalUseRef;
+    //     // });
+    //     const TestComponent = ({
+    //         elemWidth,
+    //         offset,
+    //         x,
+    //         width
+    //     }) => {
+    //         const [ref, adjustment] = usePreventOverflow(width, x, offset);
+    //         return (
+    //             <div
+
+    //                 ref={ref}
+    //                 style={{ elemWidth }}
+    //             >
+    //                 {adjustment}
+    //             </div>
+    //         );
+    //     };
+
+    //     it("returns a zero adjustment if element does not overflow", () => {
+    //         const component = mount(
+    //             <TestComponent
+    //                 elemWidth={20}
+    //                 x={200}
+    //                 width={400}
+    //             />
+    //         );
+
+    //         expect(component.find("div").prop("children")).toEqual(0);
+    //     });
+
+    //     it("gives correct left overflow adjustment value", () => {
+    //         const component = mount(
+    //             <TestComponent
+    //                 elemWidth={40}
+    //                 x={0}
+    //                 width={400}
+    //             />
+    //         );
+
+    //         component.update();
+    //         expect(component.find("div").prop("children")).toEqual(-20);
+    //     });
+    // });
 });

@@ -139,6 +139,7 @@ export default class ColumnChart extends React.Component {
 
     _barChartRef = createRef();
     _lastChartWidth = 0;
+    _tooltipRef = createRef();
 
     _digestData = (data) =>
         data.map(item => (
@@ -225,7 +226,7 @@ export default class ColumnChart extends React.Component {
         };
 
         return (
-            <div className="column-chart__tooltip">
+            <div className="column-chart__tooltip" ref={this._tooltipRef}>
                 {this.props.renderTooltip(data, LegendItem)}
             </div>
         );
@@ -258,10 +259,10 @@ export default class ColumnChart extends React.Component {
         // Have to do all of this to figure out if the tooltip would go outside the container.
         // If that happens normally, the tooltip will jump to a pretty random spot.
         this._lastChartWidth = this._barChartRef.current ? this._barChartRef.current.props.width : this._lastChartWidth;
-        const tooltipWidth = 150;
-        const tooltipOverflow = (selectedX ? selectedX.location : 0) + tooltipWidth - this._lastChartWidth;
+        const tooltipWidth = this._tooltipRef.current ? this._tooltipRef.current.getBoundingClientRect().width : 150;
+        const tooltipOverflow = (selectedX ? selectedX.location : 0) + (tooltipWidth / 2) - this._lastChartWidth;
         const tooltipOffset = tooltipOverflow > 0
-            ? this.state.refLineTranslate - tooltipOverflow
+            ? (this.state.refLineTranslate - tooltipOverflow)
             : this.state.refLineTranslate + 5;
 
         return (

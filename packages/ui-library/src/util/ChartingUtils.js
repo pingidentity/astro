@@ -1,4 +1,5 @@
 import Color from "color";
+import { useEffect, useRef, useState } from "react";
 
 const splitData = ({ id, data }) => data.map(point => ({ [id]: point }));
 
@@ -102,4 +103,34 @@ export const getAbbreviatedValue = (value) => {
     } else {
         return value;
     }
+};
+
+export const usePreventOverflow = (chartWidth, x, offset = 0) => {
+    const labelRef = useRef(null);
+    const [refWidth, setRefWidth] = useState(0);
+    useEffect(() => {
+        if (labelRef.current && labelRef.current.getBBox) {
+            setRefWidth(labelRef.current.getBBox().width);
+        }
+    }, [labelRef]);
+    const {
+        left = offset,
+        right = offset
+    } = offset;
+
+    // Calculate whether label would go outside the bounds of the chart
+    const rightOverflow = (refWidth / 2) + x - (chartWidth - right);
+    const leftOverflow = (x - left) - (refWidth / 2);
+
+    const adjustment = (() => {
+        if (leftOverflow < 0) {
+            return -leftOverflow;
+        } else if (rightOverflow > 0) {
+            return -rightOverflow;
+        } else {
+            return 0;
+        }
+    })();
+
+    return [labelRef, adjustment, refWidth];
 };
