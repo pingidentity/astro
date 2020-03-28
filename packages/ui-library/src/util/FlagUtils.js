@@ -12,6 +12,7 @@ export const allFlags = [
     "true-default",
     "v4",
     "new-alert-modal",
+    "mouse-hover-select",
 ];
 
 export const flagsPropType = PropTypes.arrayOf(PropTypes.oneOf(allFlags));

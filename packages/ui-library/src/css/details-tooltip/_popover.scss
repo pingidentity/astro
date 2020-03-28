@@ -179,7 +179,7 @@ $max-popover-width: 360px;
     width: 100%;
 
     &:hover {
-        color: $color-active-blue;
+        background-color: rgba($color-active-blue, 0.05);
         text-decoration: none;
     }
 
@@ -190,6 +190,17 @@ $max-popover-width: 360px;
     &--nopad {
         padding-left: 5px;
         padding-right: 5px;
+    }
+
+    /**
+     * NOTE: Used to prevent "double selection" if a mouse is over the list
+     * and uses the keyboard to navigate after the fact
+     */
+    &--inactive {
+        &:hover {
+            background-color: unset;
+            color: $color-slate;
+        }
     }
 }
 
