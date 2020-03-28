@@ -121,6 +121,7 @@ const generateConfig = (environment, port) => {
             }
         ],
         "scenarios": [...baseTests, ...templateTests, ...componentTests],
+        "onBeforeScript": "puppet/mockCurrentDate.js",
         "paths": {
             "bitmaps_reference": "backstop_data/bitmaps_reference",
             "bitmaps_test": "backstop_data/bitmaps_test",

@@ -1,7 +1,6 @@
 const flows = [
     {
         "sublabel": "base",
-        "hideSelector": "[data-id='calendar-default-value']",
     },
 ];
 
