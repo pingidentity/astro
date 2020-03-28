@@ -1084,6 +1084,9 @@ input[type=file] {
     input[type=text] {
         transition: none;
         &.selected-option-label {
+            padding-right: 25px;
+            margin-right: -10px;
+            text-overflow: ellipsis;
             border-radius: $default-input-border-radius $default-input-border-radius 0 0;
             &:hover,
             &:focus {
