@@ -53,6 +53,8 @@ export const pickerTypes = {
  *    Name attribute for the input.
  * @param {string} [labelText]
  *     A label to render at the top of the color picker.
+ * @param {bool} [showLabel=true]
+ *     Sets `visibility: visible` for the label if enabled.
  * @param {string} [label]
  *     Alias for labelText
  * @param {node} [description]
@@ -111,9 +113,12 @@ class Stateless extends React.Component {
         hintText: PropTypes.node,
         labelText: PropTypes.string,
         label: PropTypes.string,
+        showLabel: PropTypes.bool,
         color: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
         onValueChange: PropTypes.func,
+        onMouseEnter: PropTypes.func,
+        onMouseLeave: PropTypes.func,
         open: PropTypes.bool,
         onToggle: PropTypes.func.isRequired,
         errorMessage: PropTypes.string,
@@ -128,7 +133,10 @@ class Stateless extends React.Component {
         open: false,
         disabled: false,
         cpid: Math.random(),
+        showLabel: true,
         onValueChange: _.noop,
+        onMouseEnter: _.noop,
+        onMouseLeave: _.noop,
         onError: _.noop,
         errorMessage: "",
         internalError: "",
@@ -267,10 +275,10 @@ class Stateless extends React.Component {
     _errorMessage = () => this.props.errorMessage || this.props.internalError;
 
     render() {
-        const classNames = css(this.props.className, {
-            "input-color-picker": true,
+        const classNames = css(this.props.className, "input-color-picker", {
             open: this.props.open,
             "color-picker-error": this._errorMessage(),
+            "input-color-picker--label-visible": this.props.showLabel,
         });
 
         const picker = (
@@ -286,8 +294,13 @@ class Stateless extends React.Component {
 
         return (
             /* eslint-disable max-len */
-            <div data-id={this.props["data-id"]} className={classNames}>
-                {this.props.type === pickerTypes.DETAILED ? (
+            <div
+                data-id={this.props["data-id"]}
+                className={classNames}
+                onMouseEnter={this.props.onMouseEnter}
+                onMouseLeave={this.props.onMouseLeave}
+            >
+                { this.props.type === pickerTypes.DETAILED ? (
                     <>
                         <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText} description={this.props.description} />
                         <div className="color-picker" ref="swatch">
@@ -330,14 +343,24 @@ class Stateless extends React.Component {
                         </div>
                     </>
                 ) : null }
-                {this.props.type === pickerTypes.SIMPLE ? (
-                    <div className="color-picker-simple" onClick={this._handleClick} ref="swatch">
+                { this.props.type === pickerTypes.SIMPLE ? (
+                    <div className="color-picker-simple" ref="swatch">
                         <div
+                            data-id="inner-swatch"
                             className="color-picker-simple__dot"
+                            onClick={this._handleClick}
                             style={{
                                 backgroundColor: this.props.color,
                                 borderColor: this.props.color,
                             }}
+                        />
+                        <FormLabel
+                            data-id="color-label"
+                            className="color-picker-simple__label"
+                            noSpacing
+                            value={
+                                this.props.labelText || this.props.label
+                            }
                         />
                         <If test={this.props.open && !this.props.disabled}>
                             <PopperContainer
@@ -349,11 +372,18 @@ class Stateless extends React.Component {
                                 ref={el => this.popperContainer = el}
                                 positionFixed
                             >
-                                <div className="popup-frame popup-frame--padded">{picker}</div>
+                                <div className="popup-frame popup-frame--padded">
+                                    {(this.props.labelText || this.props.label) &&
+                                        <div className="color-picker-simple__popover-title">
+                                            { this.props.labelText || this.props.label }
+                                        </div>
+                                    }
+                                    {picker}
+                                </div>
                             </PopperContainer>
                         </If>
                     </div>
-                ) : null}
+                ) : null }
             </div>
             /* eslint-enable max-len */
         );

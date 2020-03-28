@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import TileButton, { TopContent, Badge } from "../TileButton";
+import TileButton, { TileGrid, TopContent, Badge } from "../TileButton";
 
 window.__DEV__ = true;
 
@@ -90,7 +90,7 @@ describe("TileButton", () => {
         const mockE = { preventDefault: jest.fn() };
         const component = getComponent();
 
-        component.find("button").simulate("mousedown", mockE);
+        component.find("div").simulate("mousedown", mockE);
         expect(mockE.preventDefault).toHaveBeenCalled();
     });
 
@@ -101,7 +101,7 @@ describe("TileButton", () => {
             </TileButton>
         );
 
-        const element = component.find(".feat-badge");
+        const element = component.find(".feature-badge");
         expect(element.exists()).toEqual(true);
     });
 
@@ -124,6 +124,17 @@ describe("TileButton", () => {
         );
 
         const element = component.find(".tile-button__top-right");
+        expect(element.exists()).toEqual(true);
+    });
+
+    it("renders the TileGid", function () {
+        const component = mount(
+            <TileGrid>
+                <TileButton />
+            </TileGrid>
+        );
+
+        const element = component.find(".tile-button__grid");
         expect(element.exists()).toEqual(true);
     });
 });

@@ -1,9 +1,62 @@
-.feat-badge {
-    padding: $spacing-xs $spacing-sm;
+.feature-badge {
+    padding: $spacing-xs;
     background: #2a95cc;
-    color: $color-white;
-    display: inline-block;
     border-radius: 22px;
-    text-transform: uppercase;
-    font-size: 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 20px;
+    max-width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    // Wait 0.1s for label to fade out when leaving
+    transition: max-width 0.2s ease 0.1s, min-width 2s ease 0.1s;
+
+    &__icon {
+        font-size: 18px;
+        color: $color-white;
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translate(-50%, -50%);
+        stroke-width: 3px;
+    }
+
+    &__label {
+        text-transform: uppercase;
+        font-size: 16px;
+        color: $color-white;
+        opacity: 0;
+        margin: 0 $spacing-sm 0 $spacing-lg;
+
+        // Fade in on hover
+        transition: opacity 0.1s;
+    }
+
+    &--inactive {
+        background: $color-white;
+        border: 1px solid $color-strong-neutral-10;
+        color: $color-strong-neutral-10;
+
+        .feature-badge__label,
+        .feature-badge__icon {
+            color: $color-strong-neutral-10;
+        }
+    }
+
+    &--expanded {
+        width: unset;
+        max-width: 200px;
+        min-width: 20px;
+
+        // Wait for label to fade out before shrinking
+        transition: max-width 0.2s, min-width 0.2s;
+
+        .feature-badge__label {
+            // Fade in after box expanded
+            transition: opacity 0.1s ease 0.1s;
+            opacity: 1;
+        }
+    }
 }

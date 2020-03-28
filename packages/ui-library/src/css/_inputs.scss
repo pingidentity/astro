@@ -310,6 +310,8 @@ label {
     }
 
     &.input-textarea {
+        width: 100%;
+
         textarea {
             padding: 12px 15px;
             line-height: 1.2em;
@@ -2806,6 +2808,7 @@ label {
         vertical-align: bottom;
 
         input[type=text],
+        textarea,
         input[type=password],
         textarea {
             width: 100%;

@@ -1,3 +1,11 @@
+.color-picker-simple__popover-title {
+    font-size: 18px;
+    margin-top: $spacing-xs;
+    color: $color-strong-neutral-10;
+    font-weight: 600;
+    margin-bottom: $spacing-sm;
+}
+
 .input-color-picker {
     position: relative;
     display: inline-block;
@@ -10,22 +18,38 @@
 
     .color-picker-simple {
         position: relative;
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-        .color-picker-simple__dot {
-            width: 80px;
-            height: 80px;
-            margin: 9px;
+        &__label {
+            .label-text {
+                font-size: 13px;
+                margin-top: $spacing-xs;
+                color: $color-strong-neutral-10;
+                text-transform: none;
+                font-weight: 500;
+                width: 75px;
+                @include break-word;
+                text-align: center;
+            }
+        }
+
+        &__dot {
+            width: 70px;
+            height: 70px;
+            margin: 5px;
             border-radius: 6px;
             box-shadow: 0 2px 2px 0 rgba($color-black, 0.2);
             border-width: 0;
             position: relative;
+            cursor: pointer;
 
             &:hover {
                 &:after {
                     content: '';
-                    width: 80px;
-                    height: 80px;
+                    width: 70px;
+                    height: 70px;
                     padding: 6px;
                     border: 1px solid;
                     border-radius: 6px;
@@ -55,7 +79,6 @@
             color: $color-midnight;
             padding: 5px;
             pointer-events: none;
-
             transition: all 0.3s;
         }
     }
@@ -72,7 +95,15 @@
 
     label {
         display: block;
+        visibility: hidden;
     }
+
+    &--label-visible {
+        label {
+            visibility: visible;
+        }
+    }
+
     .colors-label,
     .colors-label .label-text {
         margin: 0;
