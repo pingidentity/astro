@@ -11,6 +11,7 @@ jest.dontMock("../../general/CollapsibleLink");
 jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../../util/KeyboardUtils.js");
 
+import { mount } from "enzyme";
 
 describe("FormTimeZone", function () {
 
@@ -59,7 +60,8 @@ describe("FormTimeZone", function () {
             stateless: false,
             countryLabel: countryLabel,
             "data-id": componentId,
-            value: initialValue
+            value: initialValue,
+            flags: ["mouse-hover-select"],
         });
         return ReactTestUtils.renderIntoDocument(<FormTimeZone {...options} />);
     }
@@ -303,6 +305,28 @@ describe("FormTimeZone", function () {
         const renderedLabelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
 
         expect(renderedLabelText).toBeFalsy();
+    });
+
+    it("sets the state with _selectWithMouse", function () {
+        const component = mount(
+            <FormTimeZone
+                countryLabel="select a Country"
+                flags={["mouse-hover-select"]}
+                open
+            />
+        );
+
+        // Get Portal
+        const portal = component.find("Portal");
+
+        // Select first country
+        const country = portal.find(".button-menu__scroller").childAt(0);
+        country.simulate("mouseMove");
+
+        // Get ref to the "Stateless" TimeZone
+        const inner = component.find("TimeZoneStateless");
+
+        expect(inner.state().selectedIndex).toEqual(0);
     });
 
     /*

@@ -52,6 +52,7 @@ describe("FormTimeZone v4", function () {
             initialState: {
                 value: initialValue,
             },
+            flags: ["mouse-hover-select"],
         });
         return ReactTestUtils.renderIntoDocument(<FormTimeZone {...options} />);
     }

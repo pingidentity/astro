@@ -137,6 +137,16 @@ class FormTimeZoneDemo extends React.Component {
                         errorMessage="Example error message"
                     />
                 </InputRow>
+                <InputRow>
+                    <FormTimeZone
+                        data-id="timezone-stateful2"
+                        labelText="Stateful Version with 'new-mouse' flag"
+                        labelHelpText="Help hints are optional for both versions"
+                        helpClassName="bottom right"
+                        flags={["mouse-hover-select"]}
+                        showClear={true}
+                    />
+                </InputRow>
                 <p>
                     * Note that the browser's timezone is guessed if the passed value is undefined.
                 </p>

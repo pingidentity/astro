@@ -12,6 +12,7 @@ import FormSearchBox from "./FormSearchBox";
 import { isEnter, isArrowDown, isArrowUp } from "../../util/KeyboardUtils.js";
 import _ from "underscore";
 import StateContainer, { toggleTransform } from "../utils/StateContainer";
+import { hasFlag, flagsPropType } from "../../util/FlagUtils";
 
 import Popover from "../tooltips/Popover";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
@@ -153,6 +154,8 @@ var getZoneNameDisplayValue = function (zoneName) {
 * @param {string} [filterByCountry]
 *     The two character country code that, when set, displays a list of time zones associated with that country
 *     When not provided, the component will manage this value.
+ * @param {array} [flags]
+ *     For new moust interactions pass "mouse-hover-select"
 * @param {string} [helpClassName]
 *     CSS classes to apply to the label help hint (bottom, left, etc)
 * @param {string} [labelHelpText]
@@ -223,6 +226,7 @@ class TimeZoneStateless extends React.Component {
         displayValue: PropTypes.string,
         errorMessage: PropTypes.string,
         filterByCountry: PropTypes.string,
+        flags: flagsPropType,
         helpClassName: PropTypes.string,
         labelHelpText: PropTypes.string,
         labelText: PropTypes.string,
@@ -247,6 +251,7 @@ class TimeZoneStateless extends React.Component {
         clearLabel: LABEL_DEFAULTS.CLEAR,
         countryLabel: LABEL_DEFAULTS.COUNTRY,
         filterByCountry: undefined,
+        flags: [],
         onValueChange: _.noop,
         onZoneChange: _.noop,
         onCountryChange: _.noop,
@@ -263,6 +268,11 @@ class TimeZoneStateless extends React.Component {
         value: moment.tz.guess(),
     };
 
+    state = {
+        selectWithKeyboard: true,
+        selectedIndex: -1,
+    };
+
     constructor(props) {
         super(props);
 
@@ -273,7 +283,12 @@ class TimeZoneStateless extends React.Component {
     _handleSearch = (searchString, selectedIndex = this.props.selectedIndex) => {
         this.props.onSearch(searchString, selectedIndex);
         this.props.setSearchString(searchString);
-        this.props.setSelectedIndex(selectedIndex);
+
+        if (hasFlag(this, "mouse-hover-select")) {
+            this.setState({ selectedIndex });
+        } else {
+            this.props.setSelectedIndex(selectedIndex);
+        }
     }
 
     _clearSearchString = () => {
@@ -319,10 +334,11 @@ class TimeZoneStateless extends React.Component {
         const countries = this._getCountries();
         const zones = this._getZones();
         const {
-            selectedIndex,
             filterByCountry,
             searchString,
         } = this.props;
+
+        const selectedIndex = hasFlag(this, "mouse-hover-select") ? this.state.selectedIndex : this.props.selectedIndex;
 
         if (isEnter(keyCode) && selectedIndex > -1) {
 
@@ -341,6 +357,7 @@ class TimeZoneStateless extends React.Component {
             newIndex = newIndex < 0 ? 0 : newIndex;
 
             if (newIndex !== selectedIndex) {
+                this.setState({ selectWithKeyboard: true });
                 this._handleSearch(searchString, newIndex);
             }
 
@@ -352,6 +369,7 @@ class TimeZoneStateless extends React.Component {
                 ? items.length - 1 : newIndex;
 
             if (newIndex !== selectedIndex) {
+                this.setState({ selectWithKeyboard: true });
                 this._handleSearch(searchString, newIndex);
             }
         }
@@ -366,7 +384,18 @@ class TimeZoneStateless extends React.Component {
         this._handleSearch(value);
     };
 
+    _selectWithMouse = (index) => () => {
+        if (hasFlag(this, "mouse-hover-select")) {
+            this.setState({
+                selectWithKeyboard: false,
+                selectedIndex: index,
+            });
+        }
+    }
+
     _renderCountries = () => {
+        const selectedIndex = hasFlag(this, "mouse-hover-select") ? this.state.selectedIndex : this.props.selectedIndex;
+
         return ([
             <div className="label-text underlined" key="country-label">
                 {this.props.selectCountryLabel}
@@ -377,17 +406,22 @@ class TimeZoneStateless extends React.Component {
                 className="button-menu__scroller"
                 data-id={`${this.props["data-id"]}-tooltip-menu-options`}>
                 {this._getCountries().map((country, i) => {
-                    const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
+                    const rowCss = i === selectedIndex ? "button-menu__button--selected" : null;
                     return (
                         <button
                             data-id={`country-option_${country.abbr}`}
                             data-value={country.abbr}
                             onClick={this._onCountryChange}
+                            onMouseMove={this._selectWithMouse(i)}
                             ref={"country-option-" + i}
                             key={"country-option-" + i}
                             className={classnames(
                                 "button-menu__button button-menu__button button-menu__button--nopad",
-                                rowCss
+                                rowCss,
+                                {
+                                    "button-menu__button--inactive": selectedIndex !== i &&
+                                        hasFlag(this, "mouse-hover-select"),
+                                }
                             )}>
                             {country.name}
                         </button>
@@ -400,6 +434,8 @@ class TimeZoneStateless extends React.Component {
     _getTimeForZone = tz => moment.tz(getCurrentUTCTime(), tz.name).format("h:mm A");
 
     _renderZones = () => {
+        const selectedIndex = hasFlag(this, "mouse-hover-select") ? this.state.selectedIndex : this.props.selectedIndex;
+
         return (
             <div>
                 {zonesMetadata.countries[this.props.filterByCountry] && (
@@ -423,17 +459,22 @@ class TimeZoneStateless extends React.Component {
                     ref="zone-menu"
                     data-id={`${this.props["data-id"]}-tooltip-menu-options`}>
                     {this._getZones().map((tz, i) => {
-                        const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
+                        const rowCss = i === selectedIndex ? "button-menu__button--selected" : null;
                         return (
                             <button
                                 data-id={`country-code_time-zone_${tz.abbr}`}
                                 data-index={i}
                                 onClick={this._onZoneChange}
+                                onMouseMove={this._selectWithMouse(i)}
                                 ref={"zone-option-" + i}
                                 key={"zone-option-" + i}
                                 className={classnames(
                                     "button-menu__button button-menu__button--nopad",
-                                    rowCss
+                                    rowCss,
+                                    {
+                                        "button-menu__button--inactive": selectedIndex !== i &&
+                                            hasFlag(this, "mouse-hover-select"),
+                                    }
                                 )}>
                                 <span className="timezone-abbr">{tz.abbr}</span>
                                 &nbsp;-&nbsp;
@@ -502,12 +543,14 @@ class TimeZoneStateless extends React.Component {
             return;
         }
 
-        const updatedItem = this.props.filterByCountry ? "zone" : "country";
-        const menuItem = ReactDOM.findDOMNode(this.refs[updatedItem + "-option-" + this.props.selectedIndex]);
+        const selectedIndex = hasFlag(this, "mouse-hover-select") ? this.state.selectedIndex : this.props.selectedIndex;
 
-        if (menuItem && menuItem.offsetTop) {
+        const updatedItem = this.props.filterByCountry ? "zone" : "country";
+        const menuItem = ReactDOM.findDOMNode(this.refs[updatedItem + "-option-" + selectedIndex]);
+
+        if (menuItem) {
             const menu = ReactDOM.findDOMNode(this.refs[updatedItem + "-menu"]);
-            menu.scrollTop = menuItem.offsetTop + 1; // add 1 for the border on each option
+            menu.scrollTop = menuItem ? (menuItem.offsetTop - 100) : 0;
         }
     };
 
@@ -533,7 +576,10 @@ class TimeZoneStateless extends React.Component {
         if (this.props.open) {
             ReactDOM.findDOMNode(this.refs.searchString).focus();
         }
-        this._setListPosition();
+
+        if (this.state.selectWithKeyboard) {
+            this._setListPosition();
+        }
     }
 
     _focusSearch = () => this.refs.searchString.searchBoxFocus();
