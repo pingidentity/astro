@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getIconClassName } from "../../util/PropUtils";
+import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
 import classnames from "classnames";
 import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from "../layout/FlexRow";
 import Link from "../general/Link";
 import _ from "underscore";
-
 
 const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking
 export const types = {
@@ -60,6 +59,8 @@ const TileButton = ({
     link,
     note,
     onClick,
+    onMouseEnter,
+    onMouseLeave,
     panel,
     selected,
     title,
@@ -118,16 +119,18 @@ const TileButton = ({
         link && <Link className="tile-button__link" onClick={link.onClick} data-id={`${dataId}-link`}>{link.text}</Link>
     );
 
-    const TagName = link ? "div" : "button";
-
+    // The display on this messes up with a div if it's a square button.
+    const Tag = isSquare ? "button" : "div";
 
     return (
-        <TagName
+        <Tag
             className={classNames}
             data-id={dataId}
             onClick={onClick}
             onMouseDown={handleMouseDown}
-            role="button"
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            {...isSquare ? getClickableA11yProps(onClick) : {}}
         >
             {renderedIcon &&
                 <div
@@ -161,7 +164,7 @@ const TileButton = ({
                     ]
                 )
             }
-        </TagName>
+        </Tag>
     );
 };
 
@@ -173,6 +176,8 @@ TileButton.propTypes = {
     icon: PropTypes.node,
     iconName: PropTypes.string,
     onClick: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
     panel: PropTypes.bool,
     title: PropTypes.string,
     type: PropTypes.oneOf(Object.values(types)),
@@ -193,10 +198,10 @@ export const TopContent = ({
     left,
     right,
 }) => (
-    <>
+    <div className="tile-button__top">
         <div className="tile-button__top-left">{left}</div>
         <div className="tile-button__top-right">{right}</div>
-    </>
+    </div>
 );
 
 TopContent.propTypes = {
@@ -204,16 +209,55 @@ TopContent.propTypes = {
     right: PropTypes.node,
 };
 
-export const Badge = ({
-    text,
+export const TileGrid = ({
+    children,
 }) => (
-    <div className="feat-badge">
-        {text}
+    <div className="tile-button__grid">
+        {children}
     </div>
 );
 
+export const Badge = ({
+    expanded,
+    "data-id": dataId,
+    icon,
+    active,
+    label,
+    onClick,
+}) => {
+    const classNames = classnames("feature-badge", {
+        "feature-badge--expanded": expanded,
+        "feature-badge--inactive": !active,
+    });
+
+    const iconClassNames = classnames("feature-badge__icon", `icon-${icon}`);
+
+    return (
+        <div
+            data-id={dataId}
+            className={classNames}
+            onClick={onClick}
+        >
+            <div className={iconClassNames}></div>
+            { active && <div className="feature-badge__label">{label}</div> }
+        </div>
+    );
+};
+
 Badge.propTypes = {
-    text: PropTypes.string,
+    "data-id": PropTypes.string,
+    expanded: PropTypes.bool,
+    active: PropTypes.bool,
+    icon: PropTypes.node,
+    label: PropTypes.node,
+    onClick: PropTypes.func,
+};
+
+Badge.defaultProps = {
+    "data-id": "badge",
+    expanded: false,
+    active: false,
+    onClick: _.noop,
 };
 
 export default TileButton;

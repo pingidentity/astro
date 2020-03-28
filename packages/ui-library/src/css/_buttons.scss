@@ -599,6 +599,7 @@ button.tile-button {
 
     display: flex;
     flex-direction: column;
+    position: relative;
 
     align-items: center;
     justify-content: space-between;
@@ -682,22 +683,32 @@ button.tile-button {
 
     &__content {
         flex-grow: 1;
+        max-width: 100%;
+        overflow: hidden;
         @include break-word;
 
         line-height: 1.3em;
         text-align: left;
     }
 
-    &__top-left {
+    &__top {
         position: absolute;
-        top: $spacing-sm;
-        left: $spacing-sm;
-    }
+        top: 0;
+        left: 0;
+        right: 0;
 
-    &__top-right {
-        position: absolute;
-        top: $spacing-sm;
-        right: $spacing-sm;
+        &-left {
+            position: absolute;
+            top: $spacing-md;
+            left: $spacing-sm;
+        }
+
+        &-right {
+            position: absolute;
+            top: $spacing-md;
+            right: $spacing-sm;
+            z-index: 1000;
+        }
     }
 
     &__title {
@@ -935,6 +946,29 @@ button.tile-button--side-icon {
                 border-color: $color-white;
                 box-shadow: 0 0 3px #0e4054;
             }
+        }
+    }
+}
+
+.tile-button__grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(#{$spacing-sm} * -1);
+    margin-right: calc(#{$spacing-sm} * -1);
+
+    & > * {
+        flex: 1;
+        flex-grow: 0;
+        flex-basis: calc((100% / 3) - #{$spacing-sm} * 2) !important;
+        box-sizing: border-box;
+        margin: 0 $spacing-sm $spacing-md $spacing-sm;
+
+        @media only screen and (max-width: 1250px) {
+            flex-basis: calc((100% / 2) - #{$spacing-sm} * 2) !important;
+        }
+
+        @media only screen and (max-width: 1000px) {
+            flex-basis: 100% !important;
         }
     }
 }

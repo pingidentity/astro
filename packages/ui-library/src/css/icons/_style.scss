@@ -26,6 +26,47 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-star-outline {
+  &:before {
+    content: $icon-star-outline; 
+  }
+}
+.icon-star {
+  &:before {
+    content: $icon-star; 
+  }
+}
+.icon-kebab {
+  &:before {
+    content: $icon-kebab; 
+  }
+}
+.icon-ldap {
+  &:before {
+    content: $icon-ldap;     
+    color: #4b637c;
+  }
+}
+.icon-shield-arrow {
+  &:before {
+    content: $icon-shield-arrow; 
+  }
+}
+.icon-key-three {
+  &:before {
+    content: $icon-key-three; 
+  }
+}
+.icon-key-two {
+  &:before {
+    content: $icon-key-two; 
+  }
+}
+.icon-open-lock {
+  &:before {
+    content: $icon-open-lock; 
+  }
+}
 .icon-download-box {
   &:before {
     content: $icon-download-box; 
@@ -401,22 +442,6 @@
     content: $icon-key; 
   }
 }
-.icon-key-three {
-  &:before {
-    content: $icon-key-three; 
-  }
-}
-.icon-key-two {
-  &:before {
-    content: $icon-key-two; 
-  }
-}
-.icon-ldap {
-  &:before {
-    content: $icon-ldap;     
-    color: #4b637c;
-  }
-}
 .icon-left {
   &:before {
     content: $icon-left; 
@@ -507,11 +532,6 @@
     content: $icon-on-off; 
   }
 }
-.icon-open-lock {
-  &:before {
-    content: $icon-open-lock; 
-  }
-}
 .icon-org-chart {
   &:before {
     content: $icon-org-chart; 
@@ -600,11 +620,6 @@
 .icon-settings {
   &:before {
     content: $icon-settings; 
-  }
-}
-.icon-shield-arrow {
-  &:before {
-    content: $icon-shield-arrow; 
   }
 }
 .icon-shield {
@@ -747,4 +762,3 @@
     content: $icon-welcome; 
   }
 }
-

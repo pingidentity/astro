@@ -16,7 +16,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
-import ColorPicker from "../ColorPicker";
+import ColorPicker, { pickerTypes } from "../ColorPicker";
 import FormLabel from "../../forms/FormLabel";
 import _ from "underscore";
 
@@ -626,4 +626,13 @@ describe("ColorPicker v4", function () {
         expect(element).toBeDefined();
     });
 
+    it("renders the Simple ColorPicker", function () {
+        var component = getComponent({
+            type: pickerTypes.SIMPLE,
+        });
+
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "color-picker-simple");
+
+        expect(element).toBeDefined();
+    });
 });

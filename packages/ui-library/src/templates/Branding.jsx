@@ -5,16 +5,15 @@ import FlexRow, {
     justifyOptions,
     alignments,
     flexDirectionOptions,
-    wrapOptions,
     spacingOptions,
+    wrapOptions,
 } from "ui-library/lib/components/layout/FlexRow";
 import FlexItem from "ui-library/lib/components/layout/FlexItem";
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
 import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
 import FormTextField from "ui-library/lib/components/forms/FormTextField";
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
-import TileButton, { TopContent, Badge } from "ui-library/lib/components/buttons/TileButton";
-import TileSelector from "ui-library/lib/components/buttons/TileSelector";
+import TileButton, { TileGrid, TopContent, Badge } from "ui-library/lib/components/buttons/TileButton";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
 import Modal from "ui-library/lib/components/general/Modal";
@@ -38,107 +37,109 @@ const THEMES = [
         description: "This is the description text...",
         component: (
             <img
-                src="https://placebear.com/500/280"
+                src="src/demo/images/theme-preview.png"
                 style={{ width: "100%", height: "auto" }}
             />
         ),
-        colors: [{
-            color: "#44a19d",
-            title: "Some Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#66fcf0",
-            title: "Another Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#c4c6c7",
-            title: "Last Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#354453",
-            title: "Another Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#0a0b10",
-            title: "Another Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#edf4e0",
-            title: "Another Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#d73e87",
-            title: "Another Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#fdffff",
-            title: "Another Thing",
-            helpText: "Some help text...",
-        }],
+        colors: [
+            { color: "#44a19d", title: "Button", id: "button" },
+            { color: "#66fcf0", title: "Link", id: "link" },
+            { color: "#c4c6c7", title: "Background", id: "background" },
+            { color: "#354453", title: "Text", id: "text" },
+            { color: "#0a0b10", title: "Error", id: "error" },
+            { color: "#edf4e0", title: "Color 1", id: "color1" },
+            { color: "#d73e87", title: "Color 2", id: "color2" },
+            { color: "#fdffff", title: "Color 3", id: "color3" }
+        ],
     },
     {
-        title: "Anotha' One",
+        title: "Theme Two",
         description: "This is the description text...",
         component: (
             <img
-                src="https://placebear.com/500/280"
+                src="src/demo/images/theme-preview.png"
                 style={{ width: "100%", height: "auto" }}
             />
         ),
-        colors: [{
-            color: "#504136",
-            title: "Some Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#689689",
-            title: "Another Thing",
-            helpText: "Some help text...",
-        }, {
-            color: "#A49E8D",
-            title: "Last Thing",
-            helpText: "Some help text...",
-        }],
+        colors: [
+            { color: "#44a19d", title: "Button", id: "button" },
+            { color: "#66fcf0", title: "Link", id: "link" },
+            { color: "#c4c6c7", title: "Background", id: "background" },
+            { color: "#354453", title: "Text", id: "text" },
+        ],
+    },
+    {
+        title: "Theme Three",
+        description: "This is the description text...",
+        component: (
+            <img
+                src="src/demo/images/theme-preview.png"
+                style={{ width: "100%", height: "auto" }}
+            />
+        ),
+        colors: [
+            { color: "#44a19d", title: "Button", id: "button" },
+            { color: "#66fcf0", title: "Link", id: "link" },
+            { color: "#c4c6c7", title: "Background", id: "background" },
+            { color: "#354453", title: "Text", id: "text" },
+        ],
+    },
+    {
+        title: "Theme Four",
+        description: "This is the description text...",
+        component: (
+            <img
+                src="src/demo/images/theme-preview.png"
+                style={{ width: "100%", height: "auto" }}
+            />
+        ),
+        colors: [
+            { color: "#44a19d", title: "Button", id: "button" },
+            { color: "#66fcf0", title: "Link", id: "link" },
+            { color: "#c4c6c7", title: "Background", id: "background" },
+            { color: "#354453", title: "Text", id: "text" },
+        ],
     }
 ];
 
-/**
- * Color circle to be used in theme previews
- */
-const Color = ({
-    color,
-    title,
-}) => (
-    <div style={{
-        display: "inline-block"
-    }}>
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-            marginRight: title ? "25px" : null,
-        }}>
-            <div style={{
-                width: "16px",
-                height: "16px",
-                background: color,
-                borderWidth: "1px",
-                borderStyle: "solid",
-                borderColor: "#c2c6ca",
-                borderRadius: "50%",
-                display: "inline-block",
-                marginRight: "4px",
-            }}></div>
-            <p style={{
-                display: "inline-block",
-            }}>
-                {title}
-            </p>
-        </div>
-    </div>
-);
+const ColorPickerGroup = ({
+    colors,
+    onValueChange
+}) => {
+    const [openColor, setOpenColor] = useState(null);
+    const [hoveredColor, setHoveredColor] = useState(null);
 
-Color.propTypes = {
-    color: PropTypes.string.isRequired,
-    title: PropTypes.string,
+    const toggleOpenColor = (id) => {
+        if (!openColor) {
+            setOpenColor(id);
+        } else {
+            setOpenColor(null);
+        }
+    };
+
+    return (
+        <FlexRow
+            alignment={alignments.CENTER}
+            flexDirection={flexDirectionOptions.ROW}
+            wrap={wrapOptions.WRAP}
+        >
+            {
+                colors.map((color) => (
+                    <ColorPicker
+                        key={color.id}
+                        type={pickerTypes.SIMPLE}
+                        color={color.color}
+                        onValueChange={(newColor, e) => onValueChange(newColor, e, { id: color.id })}
+                        onMouseEnter={() => setHoveredColor(color.id)}
+                        onMouseLeave={() => setHoveredColor(null)}
+                        labelText={color.title}
+                        showLabel={!!openColor || !!hoveredColor}
+                        onToggle={() => toggleOpenColor(color.id)}
+                    />
+                ))
+            }
+        </FlexRow>
+    );
 };
 
 /**
@@ -149,12 +150,9 @@ const BrandingTile = ({
     component,
     onClick,
     active,
+    showTop,
 }) => {
-    const [open, setOpen] = useState(false);
-
-    const clickToggle = () => {
-        setOpen(!open);
-    };
+    const [topVisible, setTopVisible] = useState(false);
 
     const buttons = [
         {
@@ -171,21 +169,33 @@ const BrandingTile = ({
     return (
         <TileButton
             onClick={onClick}
+            onMouseEnter={() => setTopVisible(true)}
+            onMouseLeave={() => setTopVisible(false)}
         >
-            <TopContent
-                left={
-                    active && <Badge text="⭑ Active" />
-                }
-                right={
-                    <PopoverMenu
-                        label={<Text type={textTypes.PAGETITLE}>⋮</Text>}
-                        buttons={buttons}
-                        open={open}
-                        noHoverEffect
-                        onToggle={clickToggle}
-                    />
-                }
-            />
+            { showTop &&
+                <TopContent
+                    left={
+                        <Badge
+                            icon={active ? "star" : "star-outline"}
+                            label="Active"
+                            active={active}
+                            expanded={topVisible}
+                        />
+                    }
+                    right={
+                        topVisible &&
+                        <PopoverMenu
+                            label={
+                                <Text type={textTypes.SECTIONTITLE}>
+                                    <Icon iconName="kebab" iconSize={Icon.iconSizes.MD} />
+                                </Text>
+                            }
+                            noHoverEffect
+                            buttons={buttons}
+                        />
+                    }
+                />
+            }
             {component}
             <Padding top={Padding.sizes.LG} bottom={Padding.sizes.MD}>
                 <Text type={textTypes.PAGETITLE}>{title}</Text>
@@ -244,7 +254,7 @@ const NewThemeModal = ({
         expanded={expanded}
         onClose={onModalClose}
     >
-        <TileSelector>
+        <TileGrid>
             {themes.map((theme, key) => (
                 <BrandingTile
                     key={theme.title}
@@ -252,10 +262,11 @@ const NewThemeModal = ({
                     component={theme.component}
                     description={theme.description}
                     colors={theme.colors}
+                    showTop={false}
                     onClick={onClickTheme(key)}
                 />
             ))}
-        </TileSelector>
+        </TileGrid>
     </Modal>
 );
 
@@ -266,19 +277,34 @@ const PreviewModal = ({
     onModalClose,
     isExpanded,
     onClickAddTheme,
-    onClickCustomize,
     theme,
 }) => {
     const [selectedPreviewOption, setSelectedPreviewOption] = useState(
         { label: "Registration", value: "registration" }
     );
 
+    const [isCustomizing, setisCustomizing] = useState(false);
+
+    const handleCustomize = () => {
+        setisCustomizing(true);
+    };
+
+    const handleAddTheme = () => {
+        setisCustomizing(false);
+        onClickAddTheme();
+    };
+
+    const handleModalClose = (e) => {
+        setisCustomizing(false);
+        onModalClose(e);
+    };
+
     return (
         <Modal
             modalTitle="Preview"
             maximize={true}
             expanded={isExpanded}
-            onClose={onModalClose}
+            onClose={handleModalClose}
         >
             <FlexRow
                 justify={justifyOptions.SPACEBETWEEN}
@@ -323,58 +349,62 @@ const PreviewModal = ({
 
             {theme.component}
 
-            <Padding top={Padding.sizes.XL}>
+            { isCustomizing && <CustomizeControls theme={theme} /> }
+
+            { !isCustomizing ? (
+                <Padding top={Padding.sizes.XL}>
+                    <FlexRow
+                        spacing={spacingOptions.SM}
+                        justify={justifyOptions.CENTER}
+                        alignment={alignments.CENTER}
+                    >
+                        <Button
+                            label="Customize"
+                            submit
+                            onClick={handleCustomize}
+                        />
+                        <Button
+                            label="Add Theme"
+                            onClick={handleAddTheme}
+                        />
+                    </FlexRow>
+                </Padding>
+            ) : (
                 <FlexRow
-                    spacing={spacingOptions.SM}
                     justify={justifyOptions.CENTER}
-                    alignment={alignments.CENTER}
                 >
                     <Button
-                        label="Customize"
-                        submit
-                        onClick={onClickCustomize}
-                    />
-                    <Button
-                        label="Add Theme"
+                        label="Save Changes"
                         type={buttonTypes.PRIMARY}
-                        onClick={onClickAddTheme}
+                        onClick={handleAddTheme}
                     />
                 </FlexRow>
-            </Padding>
+            ) }
         </Modal>
     );
 };
 
 /**
- * Customize Modal
+ * Customize Controls
  */
-const CustomizeModal = ({
-    onModalClose,
-    isExpanded,
-    onClickAddTheme,
+const CustomizeControls = ({
     theme,
 }) => {
-    const [selectedPreviewOption, setSelectedPreviewOption] = useState(
-        { label: "Registration", value: "registration" }
-    );
-
     const [customColors, setCustomColors] = useState([]);
 
-    const [themeName, setThemeName] = useState("");
 
     // Watch for prop changes
     useEffect(() => {
-        setThemeName(theme.title);
         setCustomColors(theme.colors);
     }, [theme]);
 
-    const updateColor = (color, key) => {
+    const updateColor = (color, id) => {
         setCustomColors(
-            customColors.map((customColor, i) => {
-                if (i === key) {
+            customColors.map((customColor) => {
+                if (customColor.id === id) {
                     return {
                         ...customColor,
-                        color: color
+                        color
                     };
                 }
                 return customColor;
@@ -383,107 +413,44 @@ const CustomizeModal = ({
     };
 
     return (
-        <Modal
-            modalTitle="Customize"
-            maximize={true}
-            expanded={isExpanded}
-            onClose={onModalClose}
-        >
+        <Padding vertical={Padding.sizes.MD}>
             <FlexRow
                 justify={justifyOptions.SPACEBETWEEN}
-                alignment={alignments.CENTER}
+                alignment={alignments.TOP}
             >
-                <div>
-                    <FormTextField
-                        labelText="Name"
-                        value={themeName}
-                        onValueChange={(value) => setThemeName(value)}
-                        width={InputWidths.XL}
+                <FlexItem basis="100%">
+                    <ColorPickerGroup
+                        colors={customColors}
+                        onValueChange={(color, e, details) => updateColor(color, details.id)}
                     />
-                </div>
-                <div>
-                    <FormDropDownList
-                        options={[
-                            { label: "Registration", value: "registration" },
-                            { label: "Signup", value: "signup" },
-                            { label: "Error", value: "error" },
-                            { label: "Login", value: "login" },
-                        ]}
-                        label="Preview"
-                        selectedOption={selectedPreviewOption}
-                        onValueChange={(option) => setSelectedPreviewOption(option)}
-                        width={InputWidths.MD}
+                </FlexItem>
+                <FlexItem basis="100%">
+                    <FlexRow
+                        alignment={alignments.TOP}
+                        flexDirection={flexDirectionOptions.ROW}
+                    >
+                        <FlexItem>
+                            <FileUpload
+                                accept=""
+                                label={<div>Theme Logo</div>}
+                                showThumbnail={true}
+                            />
+                        </FlexItem>
+                        <FlexItem>
+                            <FileUpload
+                                accept=""
+                                label={<div>Background</div>}
+                                showThumbnail={true}
+                            />
+                        </FlexItem>
+                    </FlexRow>
+                    <FormTextArea
+                        labelText="Footer"
+                        width={InputWidths.MAX}
                     />
-                </div>
+                </FlexItem>
             </FlexRow>
-
-            {theme.component}
-
-            <Padding vertical={Padding.sizes.MD}>
-                <FlexRow
-                    justify={justifyOptions.SPACEBETWEEN}
-                    alignment={alignments.TOP}
-                >
-                    <FlexItem basis="100%">
-                        <FlexRow
-                            alignment={alignments.CENTER}
-                            flexDirection={flexDirectionOptions.ROW}
-                            wrap={wrapOptions.WRAP}
-                        >
-                            {
-                                customColors &&
-                                customColors.map(({ color, title, helpText }, key) =>
-                                    <FlexItem key={title}>
-                                        <ColorPicker
-                                            type={pickerTypes.SIMPLE}
-                                            color={color}
-                                            onValueChange={(newColor) => updateColor(newColor, key)}
-                                            labelText={title}
-                                            hintText={helpText ? helpText : null}
-                                        />
-                                    </FlexItem>
-                                )
-                            }
-                        </FlexRow>
-                    </FlexItem>
-                    <FlexItem basis="100%">
-                        <FlexRow
-                            alignment={alignments.TOP}
-                            flexDirection={flexDirectionOptions.ROW}
-                        >
-                            <FlexItem>
-                                <FileUpload
-                                    accept=""
-                                    label={<div>Theme Logo</div>}
-                                    showThumbnail={true}
-                                />
-                            </FlexItem>
-                            <FlexItem>
-                                <FileUpload
-                                    accept=""
-                                    label={<div>Background</div>}
-                                    showThumbnail={true}
-                                />
-                            </FlexItem>
-                        </FlexRow>
-                        <FormTextArea
-                            labelText="Footer"
-                            width={InputWidths.XL}
-                        />
-                    </FlexItem>
-                </FlexRow>
-            </Padding>
-
-            <FlexRow
-                justify={justifyOptions.CENTER}
-            >
-                <Button
-                    label="Save Changes"
-                    type={buttonTypes.PRIMARY}
-                    onClick={onClickAddTheme}
-                />
-            </FlexRow>
-        </Modal>
+        </Padding>
     );
 };
 
@@ -491,7 +458,6 @@ const Branding = () => {
     const [selectedTheme, setSelectedTheme] = useState({});
     const [newThemeOpen, setNewThemeOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
-    const [customizeOpen, setCustomizeOpen] = useState(false);
 
     const _handleThemePreview = (index) => () => {
         // Close new theme modal if open
@@ -507,9 +473,6 @@ const Branding = () => {
     const _handleThemeCustomize = () => {
         // Close new theme modal if open
         setPreviewOpen(false);
-
-        // Open customize modal
-        setCustomizeOpen(true);
     };
 
     return (
@@ -542,7 +505,7 @@ const Branding = () => {
                 <FormLabel>My Themes</FormLabel>
             </Padding>
 
-            <TileSelector>
+            <TileGrid>
                 {THEMES.map((theme, key) => (
                     <BrandingTile
                         key={theme.title}
@@ -551,10 +514,11 @@ const Branding = () => {
                         component={theme.component}
                         description={theme.description}
                         colors={theme.colors}
+                        showTop={true}
                     />
                 ))}
                 <NewBrandingTile onClick={() => setNewThemeOpen(true)}/>
-            </TileSelector>
+            </TileGrid>
 
             <NewThemeModal
                 expanded={newThemeOpen}
@@ -568,13 +532,6 @@ const Branding = () => {
                 onModalClose={() => setPreviewOpen(false)}
                 onClickAddTheme={() => setPreviewOpen(false)}
                 onClickCustomize={() => _handleThemeCustomize()}
-                theme={selectedTheme}
-            />
-
-            <CustomizeModal
-                isExpanded={customizeOpen}
-                onModalClose={() => setCustomizeOpen(false)}
-                onClickAddTheme={() => setCustomizeOpen(false)}
                 theme={selectedTheme}
             />
         </>
