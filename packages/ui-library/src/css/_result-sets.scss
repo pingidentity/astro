@@ -70,8 +70,8 @@ $expandable-row-gap: 12px;
         min-height: 3 * $button-height - 4px;
     }
     .expanded-content-scroller {
-        overflow-x: hidden;
         @include break-word;
+        overflow-x: hidden;
 
         // trying to do some magic here to make sure indentation is always correct
         > *,

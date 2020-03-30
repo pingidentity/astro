@@ -1,4 +1,6 @@
 .field-set-component {
+    @include font-pn-regular;
+    @include break-word;
     border: 1px solid $color-dolphin;
     border-radius: 5px;
     margin: 0;
@@ -6,12 +8,10 @@
     line-height: 1em;
     background-color: transparent;
     padding: $spacing-md;
-    @include font-pn-regular;
-    @include break-word;
 
     legend {
-        padding: 0 $spacing-sm;
         @include text-parent-label;
+        padding: 0 $spacing-sm;
     }
 
     & .input-file__selected-content {

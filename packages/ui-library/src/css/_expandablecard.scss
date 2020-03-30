@@ -20,10 +20,10 @@
     }
 
     &__title {
+        @include break-word;
         color: $color-neutral-10;
         font-size: 18px;
         margin-bottom: 5px;
-        @include break-word;
         width: calc(100% - 20px);
     }
 
@@ -60,9 +60,9 @@
     }
 
     &__subtitle {
+        @include break-word;
         color: $color-accent-neutral-20;
         font-size: 14px;
-        @include break-word;
     }
 
     &__cardAccessories {
@@ -72,12 +72,12 @@
     }
 
     &__description {
+        @include break-word;
         color: $color-neutral-20;
         font-size: 14px;
         height: 40px;
         display: flex;
         align-items: flex-end;
-        @include break-word;
     }
 
     &__chip {

@@ -682,10 +682,10 @@ button.tile-button {
     }
 
     &__content {
+        @include break-word;
         flex-grow: 1;
         max-width: 100%;
         overflow: hidden;
-        @include break-word;
 
         line-height: 1.3em;
         text-align: left;

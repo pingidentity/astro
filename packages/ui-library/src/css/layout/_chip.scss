@@ -13,12 +13,12 @@
 }
 
 .chip-component {
+    @include break-word;
     border-radius: 3px;
     color: $color-neutral-20;
     display: inline-block;
     padding: $spacing-xs $spacing-sm;
     border-width: 0;
-    @include break-word;
 
     &--color-cyan {
         @include chip($color-neutral-20, $color-charting-cyan);
