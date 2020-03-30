@@ -43,10 +43,10 @@
 }
 
 .page-header__title {
-    font-size: 24px;
     @include font-pn-regular;
-    color: $color-slate;
     @include break-word;
+    font-size: 24px;
+    color: $color-slate;
     line-height: 1.2em;
 
     margin-right: $spacing-sm;

@@ -1,4 +1,6 @@
 .file-details {
+    @include font-pn-regular;
+    @include break-word;
     border: none;
     padding: 0;
     margin: 0;
@@ -7,8 +9,6 @@
     font-size: 14px;
     line-height: 1em;
     background-color: transparent;
-    @include font-pn-regular;
-    @include break-word;
 
     &.input-file--selected {
         background-color: transparent;

@@ -144,8 +144,8 @@ $fullwidthBreakpoint: 950px;
         &--donut,
         &--multiseries,
         &--horizontal-bar-card {
-            margin: -24px 50px 6px;
             @include break-word;
+            margin: -24px 50px 6px;
         }
 
         &--frequency-card {

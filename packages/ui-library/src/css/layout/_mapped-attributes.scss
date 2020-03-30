@@ -12,13 +12,13 @@
     }
 
     &__required {
+        @include break-word;
         background-color: $color-accent-neutral-10;
         border-radius: 3px;
         color: $color-accent-neutral-90;
         font-size: $font-size-reduced;
         padding: 3px 5px 2px;
         text-transform: uppercase;
-        @include break-word;
         display: inline-block;
     }
 }

@@ -57,12 +57,12 @@
             border-radius: 2px;
 
             label {
+                @include break-word;
+                @include text-value;
                 max-width: 100%;
                 text-transform: none;
                 color: $color-midnight;
-                @include text-value;
                 margin: 0;
-                @include break-word;
             }
 
             &__edit {

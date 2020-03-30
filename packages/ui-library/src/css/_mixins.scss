@@ -102,6 +102,8 @@
 
 @mixin break-word {
     overflow-wrap: break-word;
+    // Added this line for IE, which won't wrap inline elements without a width.
+    max-width: 100%;
     word-wrap: break-word;
     word-break: break-word;
 }
