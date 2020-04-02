@@ -1,5 +1,6 @@
 %normal-text,
 .normal-text {
+    @include break-word;
     color: $color-neutral-20;
     font-size: $font-size-md;
     font-family: $font-default;
@@ -7,6 +8,7 @@
 
 %heading-text,
 .heading-text {
+    @include break-word;
     color: $color-neutral-20;
     font-weight: 400;
     font-size: $font-size-lg;
@@ -30,6 +32,7 @@
 
 %tiny-text,
 .tiny-text {
+    @include break-word;
     color: $color-neutral-10;
     font-weight: 200;
     font-size: $font-size-sm;
