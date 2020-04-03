@@ -105,6 +105,50 @@ class ButtonsDemo extends Component {
                     label="Configure"
                 />
                 <HR />
+                <Text>Disabled buttons</Text>
+                <Button
+                    disabled
+                    label="Button"
+                    submit
+                />
+                <Button
+                    disabled
+                    label="Primary"
+                    type={buttonTypes.PRIMARY}
+                />
+                <Button
+                    disabled
+                    label="Success"
+                    type={buttonTypes.SUCCESS}
+                />
+                <Button
+                    disabled
+                    label="Cancel"
+                    type={buttonTypes.CANCEL}
+                />
+                <Button
+                    disabled
+                    label="Danger"
+                    type={buttonTypes.DANGER}
+                />
+                <Button
+                    disabled
+                    label="Inline"
+                    inline
+                />
+                <Button
+                    disabled
+                    label="Inline"
+                    inline>
+                    <span className="badge">4</span>
+                </Button>
+                <Button
+                    disabled
+                    label="Here's a Link Button"
+                    inline
+                    type={buttonTypes.LINK}
+                />
+                <HR />
                 <Text>Loading States (click to show ellipsis)</Text>
                 <Button
                     label="Primary"
