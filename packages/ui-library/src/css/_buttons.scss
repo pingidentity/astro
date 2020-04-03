@@ -1,6 +1,8 @@
 @import 'message-button';
 @import 'ellipsis-loader-button';
 
+$enabled-hover: '&:hover:not(.disabled), &:hover:not([disabled])';
+
 @mixin base-button-styles {
     @include text-style($color-slate, $font-size-primary);
 
@@ -49,6 +51,7 @@ input[type=button],
 input[type=submit],
 button,
 .button {
+    $button-types: '.primary', '.success', '.cancel', '.danger';
     $height: 36px;
 
     padding: 0 $spacing-lg;
@@ -66,7 +69,7 @@ button,
         margin-right: 0;
     }
 
-    &:hover {
+    #{$enabled-hover} {
         color: $color-active;
         border-color: $color-active;
         &.inline .badge {
@@ -77,43 +80,42 @@ button,
         border: 1px solid $color-rhino;
     }
 
-    &.primary,
-    &.success,
-    &.cancel,
-    &.danger {
-        color: $color-white;
-        border: none;
-        background: none;
-
-        &:hover {
+    @each $button-type in $button-types {
+        &#{$button-type} {
             color: $color-white;
+            border: none;
+            background: none;
+
+            &:hover {
+                color: $color-white;
+            }
         }
     }
     &.primary {
         background-color: $color-active-blue;
 
-        &:hover {
+        #{$enabled-hover} {
             background-color: $color-active-blue-highlighted;
         }
     }
     &.success {
         background-color: $color-success;
 
-        &:hover {
+        #{$enabled-hover} {
             background-color: $color-success-highlighted;
         }
     }
     &.cancel {
         background-color: $color-neutral-40;
 
-        &:hover {
+        #{$enabled-hover} {
             background-color: tint($color-neutral-40, 10%);
         }
     }
     &.danger {
         background-color: $color-critical-red;
 
-        &:hover {
+        #{$enabled-hover} {
             background-color: $color-critical-red-highlighted;
         }
     }
@@ -122,7 +124,7 @@ button,
         color: $color-slate;
         border: 1px solid $color-rhino;
 
-        &:hover {
+        #{$enabled-hover} {
             color: $color-active-blue-highlighted;
             border-color: $color-active-blue-highlighted;
         }
@@ -155,31 +157,7 @@ button,
     &.disabled,
     &[disabled] {
         cursor: default;
-
         opacity: $inactive-opacity;
-
-        &:hover {
-            color: $color-slate;
-            border-color: $color-rhino;
-        }
-        &.primary,
-        &.success {
-            &:hover {
-                color: $color-white;
-            }
-        }
-        &.primary {
-            &.ellipsis {
-                color: $color-active-blue;
-
-                &:hover {
-                    color: $color-active-blue;
-                }
-            }
-            &:hover {
-                background-color: $color-active-blue;
-            }
-        }
     }
     &.add {
         @include button-with-icon();
@@ -415,7 +393,7 @@ button,
         border-color: $color-midnight;
         color: $color-white;
 
-        &:hover {
+        #{$enabled-hover} {
             color: $color-white;
             background: tint($color-midnight, 10%);
         }
