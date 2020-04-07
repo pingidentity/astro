@@ -28,7 +28,6 @@ gulp.task('transpile-utils', () =>
 gulp.task('move-files', () =>
     gulp
         .src([
-            './.npmrc',
             './package.json',
             './src/css**/**/*',
             './src/icons**/**/*',
