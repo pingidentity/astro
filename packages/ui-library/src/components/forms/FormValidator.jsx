@@ -141,7 +141,7 @@ export default class FormValidator extends React.Component {
     }
 
     _allRequired = () => this.props.requiredValues.every(
-        value => (value !== undefined && value !== "")
+        value => (value !== undefined && `${value}`.trim() !== "")
     );
 
     _anyInvalid = () => {
