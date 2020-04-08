@@ -19,7 +19,7 @@ describe("FormDropDownList v4", function () {
         { label: "One", value: 1 },
         { label: "Two", value: 2, group: 3 },
         { label: "Three", value: 3, group: 2 },
-        { label: "Four", value: 4, group: 1 },
+        { label: "Four", value: 4, group: 1, disabled: true },
         { label: "Five", value: 5 }
     ];
 
@@ -409,6 +409,16 @@ describe("FormDropDownList v4", function () {
         expect(component.props.children.props.onValueChange).toBeCalled();
     });
 
+    it("list option does not trigger onValueChange callback on disabled item click", function () {
+        const component = getComponent({ open: true });
+        const option4 = TestUtils.findRenderedDOMNodeWithDataId(component, "option_4");
+
+        ReactTestUtils.Simulate.click(option4);
+
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
+
+    });
+
     it("global click handler closes open list when click outside of component", function () {
         const component = getComponent({ open: true });
         const handler = ReactTestUtils.findRenderedComponentWithType(
@@ -479,7 +489,7 @@ describe("FormDropDownList v4", function () {
         const orderedOptions = [
             { label: "One", value: 1 },
             { label: "Five", value: 5 },
-            { label: "Four", value: 4, group: 1 },
+            { label: "Four", value: 4, group: 1, disabled: true },
             { label: "Three", value: 3, group: 2 },
             { label: "Two", value: 2, group: 3 }
         ];
@@ -618,6 +628,23 @@ describe("FormDropDownList v4", function () {
         expect(component.props.children.props.onValueChange).toBeCalled();
         expect(component.props.children.props.onValueChange.mock.calls[0][0].label).toBe("Two");
         expect(component.props.children.props.onToggle).toBeCalled();
+    });
+
+    it("find does not select with enter when option is disabled", () => {
+        const component = getComponent({
+            open: true
+        });
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
+
+        const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
+        expect(component.props.children.props.onToggle).toBeCalled();
+
     });
 
     it("calls onValueChange with none option props when enter is pressed and none option is selected", () => {
@@ -849,7 +876,7 @@ describe("FormDropDownList v4", function () {
             open: true,
             options,
             searchType: FormDropDownList.SearchTypes.BOX,
-            searchString: "Four",
+            searchString: "Three",
             searchIndex: 0,
         });
 
@@ -857,6 +884,20 @@ describe("FormDropDownList v4", function () {
         ReactTestUtils.Simulate.keyDown(input, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
         expect(component.props.children.props.onValueChange).toBeCalled();
         expect(component.props.children.props.onValueChange.mock.calls[0][0]).toEqual(
-            { label: "Four", value: 4, group: 1 });
+            { label: "Three", value: 3, group: 2 });
+    });
+
+    it("does not select option by searching and pressing enter if option is disabled", function() {
+        const component = getComponent({
+            open: true,
+            options,
+            searchType: FormDropDownList.SearchTypes.BOX,
+            searchString: "Four",
+            searchIndex: 0,
+        });
+
+        const input = getTextInput(component);
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.children.props.onValueChange).not.toBeCalled();
     });
 });
