@@ -298,6 +298,14 @@ class FormTextFieldDemo extends React.Component {
                         iconRight={<Text type="success"><Icon iconName="success-round"/></Text>}
                     />
                 </InputRow>
+                <InputRow>
+                    <FormTextField
+                        labelText="Error message and right icon"
+                        errorMessage="Example has error icon and right icon"
+                        width={InputWidths.MD}
+                        iconRight={<Icon iconName="undo"/>}
+                    />
+                </InputRow>
             </div>
         );
     }
