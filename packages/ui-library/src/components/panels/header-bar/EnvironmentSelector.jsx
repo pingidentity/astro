@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import LinkDropDownList from "../../forms/LinkDropDownList";
 import Anchor from "../../general/Anchor";
+import Spacing from "../../layout/Spacing";
+import FormSearchBox from "../../forms/FormSearchBox";
 
 import _ from "underscore";
 import { getIconClassName, makeRenderWithClassName } from "../../../util/PropUtils";
@@ -83,6 +85,17 @@ class EnvironmentSelector extends React.Component {
                 data-id="new-environment"
             >{this.props.newEnvironmentLabel}</Anchor>
             : null;
+        const { search, onSearch } = this.props;
+        const searchPanel = (search !== undefined || onSearch) ? (
+            <Spacing spacing={Spacing.sizes.SM}>
+                <FormSearchBox
+                    noSpacing
+                    onValueChange={this.props.onSearch}
+                    value={this.props.search}
+                    width={FormSearchBox.inputWidths.MAX}
+                />
+            </Spacing>
+        ) : null;
 
         return (
             <LinkDropDownList
@@ -102,6 +115,7 @@ class EnvironmentSelector extends React.Component {
                 className="environment-selector left"
                 bottomPanel={bottomPanel}
                 renderLink={this._renderLink}
+                topPanel={searchPanel}
             />
         );
     };

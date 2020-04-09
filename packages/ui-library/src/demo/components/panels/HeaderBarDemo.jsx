@@ -85,10 +85,10 @@ const customRenderProductNav = (props, DefaultNav) => (
 * @desc A demo for HeaderBar
 */
 class HeaderBarDemo extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
+            environmentSearch: "",
             environmentSelected: "production",
             navSelected: "main",
             marketSelected: "customers",
@@ -110,6 +110,8 @@ class HeaderBarDemo extends React.Component {
 
     }
 
+    _handleEnvironmentSearch = value => this.setState({ environmentSearch: value });
+
     _handleItemClick = (id) => {
         this.setState(HeaderBar.Reducer(this.state, HeaderBar.Actions.toggleItem(id)));
     };
@@ -130,6 +132,12 @@ class HeaderBarDemo extends React.Component {
         this.setState({ newEnvironment: true });
     }
 
+    _filterEnvironments = (options, search, selected) => (
+        options.filter(({ id, label = "" }) => (
+            label.toLowerCase().search(search.toLowerCase()) >= 0) || id === selected
+        )
+    );
+
 
     render() {
         return (
@@ -141,9 +149,13 @@ class HeaderBarDemo extends React.Component {
                     onItemValueChange={this._handleItemClick}
                     inline={true}
                     siteLogo="pingone"
-                    environmentOptions={environments}
+                    environmentOptions={this._filterEnvironments(
+                        environments, this.state.environmentSearch, this.state.environmentSelected)
+                    }
+                    environmentSearch={this.state.environmentSearch}
                     navOptions={navItems}
                     onEnvironmentChange={this._handleEnvironment}
+                    onEnvironmentSearch={this._handleEnvironmentSearch}
                     onNewEnvironment={this._handleNewEnvironment}
                     onNavChange={this._handleNav}
                     onMarketChange={this._handleMarket}

@@ -138,6 +138,8 @@ class FormSearchBox extends React.Component {
         initialState: {},
     };
 
+    static inputWidths = InputWidths;
+
     constructor(props) {
         super(props);
         const { queryString, value, onValueChange } = props;

@@ -5,7 +5,7 @@ jest.dontMock("../../tooltips/DetailsTooltip");
 jest.mock("popper.js");
 jest.mock("react-portal");
 
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import DetailsTooltip from "../../tooltips/DetailsTooltip";
 
 describe("LinkDropDownList v4", function () {
@@ -245,5 +245,18 @@ describe("LinkDropDownList v4", function () {
         const tooltip = component.find(DetailsTooltip);
 
         expect(tooltip.prop("placement")).toEqual(DetailsTooltip.tooltipPlacements.BOTTOM_LEFT);
+    });
+
+    it("renders the top panel", () => {
+        const component = mount(
+            <LinkDropDownList
+                label="link"
+                options={options}
+                topPanel={<span>top panel</span>}
+                open
+            />
+        );
+
+        expect(component.find("div[data-id='link-dropdown-list-top-panel']").exists()).toBeTruthy();
     });
 });
