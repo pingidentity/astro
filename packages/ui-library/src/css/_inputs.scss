@@ -1901,6 +1901,10 @@ input[type=file] {
         .input-container {
             padding-right: $icon-spacing;
             border-color: $color-input-error;
+
+            .input-icon--right {
+                right: 30px;
+            }
         }
         .integer-controls {
             right: 33px;
