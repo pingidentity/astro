@@ -286,6 +286,8 @@ ProductNav.defaultProps = {
  *          Content to display to the right of the "siteLogo" and "siteTitle"
  * @param {array} [environmentOptions]
  *          Choices for environment in the environment selector
+ * @param {string} [environmentSearch]
+ *          Query string for the environment selector's search
  * @param {string|number} [environmentSelected]
  *          Current environment selected by the environment selector
  * @param {boolean} [inline=false]
@@ -296,6 +298,8 @@ ProductNav.defaultProps = {
  *          Active item in the header nav
  * @param {HeaderBar~onEnvironmentChange} [onEnvironmentChange]
  *          Callback for when the selected environment changes.
+ * @param {function} [onEnvironmentSearch]
+ *          Callback for the search field in the environment selector
  * @param {HeaderBar~onNewEnvironment} [onNewEnvironment]
  *          Callback for when the user clicks the "+New Environment" link.
  * @param {string} [newEnvironmentLabel = "+ New environment"]
@@ -380,6 +384,7 @@ class HeaderBar extends React.Component {
             PropTypes.object
         ]),
         environmentOptions: PropTypes.arrayOf(PropTypes.object),
+        environmentSearch: PropTypes.string,
         environmentSelected: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.number
@@ -399,6 +404,7 @@ class HeaderBar extends React.Component {
         ]),
         newEnvironmentLabel: PropTypes.string,
         onEnvironmentChange: PropTypes.func,
+        onEnvironmentSearch: PropTypes.func,
         onNewEnvironment: PropTypes.func,
         onItemValueChange: PropTypes.func,
         onMenuValueChange: PropTypes.func,
@@ -578,7 +584,9 @@ class HeaderBar extends React.Component {
                         <EnvironmentSelector
                             options={this.props.environmentOptions}
                             environment={this.props.environmentSelected}
+                            search={this.props.environmentSearch}
                             onEnvironmentChange={this.props.onEnvironmentChange}
+                            onSearch={this.props.onEnvironmentSearch}
                             onNewEnvironment={this.props.onNewEnvironment}
                             newEnvironmentLabel={this.props.newEnvironmentLabel}
                         />

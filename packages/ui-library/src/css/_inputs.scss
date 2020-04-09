@@ -159,10 +159,14 @@ textarea {
     text-transform: none;
 }
 
-.form-label--no-spacing,
-.form-label--no-spacing.input-checkbox.inline, // hacking specificity
-.form-label--no-spacing.input-checkbox.stacked { // hacking specificity
-    margin: 0;
+.form-label--no-spacing {
+    &.input-checkbox.inline, // hacking specificity
+    &.input-checkbox.stacked, // hacking specificity
+    &.input-width-medium,
+    &.input-width-small,
+    & {
+        margin: 0;
+    }
 }
 
 label {
@@ -1713,6 +1717,10 @@ input[type=file] {
     //temporary. remove when lists are aligned
     .list-input__bottom-links {
         margin: 0 $spacing-sm $spacing-xs;
+    }
+
+    .list-input__top-panel {
+        border-bottom: 1px solid $color-input-fill;
     }
 }
 

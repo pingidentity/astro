@@ -71,6 +71,8 @@ const alignments = {
  * @param {FormDropDownList~option} selectedOption
  *     The selected list option.
  *     When not provided, the component will manage this value.
+ * @param {node} topPanel
+ *     When provided, render content above the options in the dropdown.
  * @param {LinkDropDownList~onClick} [onClick]
  *     Callback triggered when a menu item is selected
  * @param {LinkDropDownList~onToggle} [onToggle]
@@ -166,6 +168,14 @@ class LinkDropDownListStateless extends React.Component {
                 open={this.props.open}
                 onToggle={this.props.onToggle}
             >
+                {this.props.topPanel && (
+                    <div
+                        data-id={this.props["data-id"] + "-top-panel"}
+                        className="list-input__top-panel"
+                    >
+                        {this.props.topPanel}
+                    </div>
+                )}
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}
                 </ul>

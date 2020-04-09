@@ -8,6 +8,9 @@ import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Ic
 import Stack from "ui-library/lib/components/layout/Stack";
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
+import FormSearchBox from "ui-library/lib/components/forms/FormSearchBox";
+import Spacing from "ui-library/lib/components/layout/Spacing";
+
 /**
 * @name LinkDropDownListDemo
 * @memberof LinkDropDownList
@@ -115,6 +118,11 @@ class LinkDropDownListDemo extends React.Component {
                             selectedOption: _options[0]
                         }}
                         alignment={LinkDropDownList.alignments.RIGHT}
+                        topPanel={
+                            <Spacing spacing={Spacing.sizes.SM}>
+                                <FormSearchBox noSpacing width={FormSearchBox.inputWidths.MAX} />
+                            </Spacing>
+                        }
                     />
                 </Padding></Padding>
                 <HR />
