@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Messages v4 data-id's don't change 1`] = `
+exports[`Messages data-id's don't change 1`] = `
 Array [
   "messages",
   "messages-message-0",
