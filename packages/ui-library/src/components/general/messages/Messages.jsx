@@ -1,5 +1,3 @@
-"use strict";
-
 import PropTypes from "prop-types";
 
 import React from "react";
@@ -7,6 +5,7 @@ import classnames from "classnames";
 import _ from "underscore";
 
 import { Layouts } from "./MessagesConstants";
+import { createCustomEvent } from "../../../util/Utils";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -177,6 +176,7 @@ class Message extends React.Component {
     };
 
     componentDidMount() {
+        document.body.dispatchEvent(createCustomEvent("ui-library-message", this.displayName));
         // Close after configured time interval
         // Interval of 0 (or undefined) will result in no automatic message clearing (which is intended).
         const interval = (this.props.message.duration) ? this.props.message.duration : this.props.defaultTimeout;
@@ -194,10 +194,10 @@ class Message extends React.Component {
     }
 
     _renderProgress = () => {
-        let progress = this.props.message.progress;
-        let percent = progress.percent || 50;
+        const progress = this.props.message.progress;
+        const percent = progress.percent || 50;
 
-        let text = progress.text ||
+        const text = progress.text ||
             (progress.textTemplate && progress.textTemplate(percent)) ||
                 `${progress.percent}%`;
 

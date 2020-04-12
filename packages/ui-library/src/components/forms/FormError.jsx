@@ -1,9 +1,7 @@
-"use strict";
-
-var PropTypes = require("prop-types");
-
-var React = require("react"),
-    classnames = require("classnames");
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import classnames from "classnames";
+import { createCustomEvent } from "../../util/Utils";
 
 /** @class FormError
  * @desc A private component shared between form components which display a validation error.
@@ -21,48 +19,67 @@ var React = require("react"),
 * @memberof FormError
 * @desc The child tag/object used to display the error message text
 *
-* @param {string} [data-id="row"]
+* @param {string} [data-id="form-error"]
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
 */
-class Message extends React.Component {
-    static propTypes = {
-        value: PropTypes.string,
-        "data-id": PropTypes.string
-    };
+export const Message = ({
+    className,
+    ["data-id"]: dataId,
+    value
+}) => {
+    useEffect(() => {
+        const event = createCustomEvent("ui-library-error", "FormErrorMessage");
+        document.body.dispatchEvent(event);
+    }, []);
+    return (
+        <div
+            data-id={dataId}
+            className={classnames(className, "form-error-message")}>
+            {value}
+        </div>
+    );
+};
 
-    render() {
-        return (
-            <div
-                data-id={this.props["data-id"]}
-                className={classnames(this.props.className, "form-error-message")}>
-                {this.props.value}
-            </div>
-        );
-    }
-}
+Message.displayName = "FormErrorMessage";
+
+Message.propTypes = {
+    value: PropTypes.string,
+    "data-id": PropTypes.string
+};
+
+Message.defaultProps = {
+    "data-id": "form-error"
+};
 
 /**
 * @class Icon
 * @memberof FormError
 * @desc The child tag/object used to display the error icon.
 *
-* @param {string} [data-id="row"]
+* @param {string} [data-id="form-error-icon"]
 *     To define the base "data-id" value for the top-level HTML container.
 */
-class Icon extends React.Component {
-    static propTypes = {
-        show: PropTypes.bool,
-        "data-id": PropTypes.string
-    };
+export const Icon = ({
+    ["data-id"]: dataId
+}) => {
+    return (
+        <div data-id={dataId} className="form-error-icon" />
+    );
+};
 
-    render() {
-        return (
-            <div data-id={this.props["data-id"]} className="form-error-icon" />
-        );
-    }
-}
+Icon.displayName = "FormErrorIcon";
 
-exports.Message = Message;
-exports.Icon = Icon;
+Icon.propTypes = {
+    "data-id": PropTypes.string
+};
+
+Icon.defaultProps = {
+    "data-id": "form-error-icon"
+};
+
+export default {
+    Icon,
+    Message
+};

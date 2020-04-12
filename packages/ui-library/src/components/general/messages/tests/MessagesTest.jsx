@@ -10,10 +10,11 @@ import ReactDOM from "react-dom";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";
 import Messages from "../index.js";
+import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 const setTimeout = window.setTimeout;
 
-describe("Messages", function () {
 
+describe("Messages", function () {
     beforeEach(function () {
         jest.useFakeTimers();
         window.setTimeout = jest.fn();
@@ -34,6 +35,16 @@ describe("Messages", function () {
     function getComponent (props) {
         return ReactTestUtils.renderIntoDocument(<Messages {...defaultProps} {...props} />);
     }
+
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <Messages
+                messages={
+                    [{ text: "Test message text", progress: { text: "uploading" } }]
+                }
+            />
+        );
+    });
 
     it("Render empty messages", function () {
         var component = getComponent({ messages: null });
@@ -79,29 +90,6 @@ describe("Messages", function () {
 
         expect(messages.length).toEqual(1);
         expect(messages[0].textContent).toEqual("Test message text");
-    });
-
-    it("Render single message with a passed i18n function using the supplied key", function () {
-        const myKey = "m1";
-        const myText = "Test message!";
-        const _onI18n = (key) => {
-            const myMessages = {
-                [myKey]: myText
-            };
-            return myMessages[key];
-        };
-        const component = getComponent({
-            messages: [{
-                key: myKey,
-                type: MessageTypes.SUCCESS,
-            }],
-            onI18n: _onI18n,
-        });
-
-        const messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
-
-        expect(messages.length).toEqual(1);
-        expect(messages[0].textContent).toEqual(myText);
     });
 
     it("Render single message with custom interval", function () {
@@ -202,6 +190,30 @@ describe("Messages", function () {
         expect(progressText.textContent).toBe("37 per cent");
     });
 
+    it("Render single message with a passed i18n function using the supplied key", function () {
+        const myKey = "m1";
+        const myText = "Test message!";
+        const _onI18n = (key) => {
+            const myMessages = {
+                [myKey]: myText
+            };
+            return myMessages[key];
+        };
+        const component = getComponent({
+            messages: [{
+                key: myKey,
+                type: MessageTypes.SUCCESS,
+            }],
+            onI18n: _onI18n,
+        });
+
+        const messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
+
+        expect(messages.length).toEqual(1);
+        expect(messages[0].textContent).toEqual(myText);
+    });
+
+
     it("Component has the class page-messages", function () {
         var component = getComponent();
         var node = ReactDOM.findDOMNode(component);
@@ -232,6 +244,44 @@ describe("Messages", function () {
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "messages");
 
         expect(element).toBeDefined();
+    });
+
+    it("emits message event in Chrome", () => {
+        navigator = {
+            ...navigator,
+            userAgent: "chrome"
+        };
+
+        const callback = jest.fn();
+        document.body.addEventListener("ui-library-message", callback);
+
+        expect(callback).not.toHaveBeenCalled();
+
+        getComponent();
+
+        expect(callback).toHaveBeenCalledTimes(1);
+    });
+
+    it("emits message event in IE", () => {
+        navigator = {
+            ...navigator,
+            userAgent: "msie"
+        };
+
+        const callback = jest.fn();
+        document.body.addEventListener("ui-library-message", callback);
+
+        expect(callback).not.toHaveBeenCalled();
+
+        getComponent();
+
+        expect(callback).toHaveBeenCalledTimes(1);
+
+        // Reset to avoid IE stuff in other tests
+        navigator = {
+            ...navigator,
+            userAgent: "chrome"
+        };
     });
 
 });
