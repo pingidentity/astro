@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Dropdown from '../Dropdown';
 
+/**
+ * Dropdown with a FloatLabel
+ */
 const FloatLabelDropdown = ({
-    label, id = 'dropdown', inputClassName, children, ...props
+    label,
+    id,
+    inputClassName,
+    children,
+    ...props
 }) => {
     const inputClassNames = classnames('float-label__input', inputClassName);
 
@@ -25,9 +32,26 @@ const FloatLabelDropdown = ({
 };
 
 FloatLabelDropdown.propTypes = {
+    /**
+     * The label for the Dropdown
+     */
     label: PropTypes.string,
+    /**
+     * The ID for the Dropdown
+     */
     id: PropTypes.string,
+    /**
+     * The CSS class to apply to the Dropdown
+     */
     inputClassName: PropTypes.string,
+    /**
+     * Props to spread to the Dropdown
+     */
+    props: PropTypes.shape({}),
+};
+
+FloatLabelDropdown.defaultProps = {
+    id: 'dropdown',
 };
 
 export default FloatLabelDropdown;

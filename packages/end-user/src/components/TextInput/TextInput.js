@@ -29,49 +29,6 @@ const inputmodeByFormats = {
 };
 
 /**
- * @callback TextInput~onChange
- *
- * @param {object} e
- *    The ReactJS synthetic event object.
- */
-
-/**
-* @callback TextInput~onBlur
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback TextInput~onFocus
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback TextInput~onKeyDown
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback TextInput~onKeyPress
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback TextInput~onMouseDown
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-
-/**
  * @class TextInput
  * @description A component for rendering a text input
  *
@@ -155,28 +112,74 @@ TextInput.defaultProps = {
 };
 
 TextInput.propTypes = {
+    /**
+     * CSS class(es) applied to the TextInput
+     */
+    className: PropTypes.string,
+    /**
+     * Sets a data-id property on the TextInput element to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * The default value of the input
+     */
     defaultValue: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string,
     ]),
+    /**
+     * ID to be applied to the TextInput
+     */
     id: PropTypes.string,
+    /**
+     * The callback triggered when the input value changes
+     */
     onChange: PropTypes.func,
+    /**
+     * The callback triggered when the input recieves a focus event
+     */
     onFocus: PropTypes.func,
+    /**
+     * The callback triggered when the input recieves a blur event
+     */
     onBlur: PropTypes.func,
+    /**
+     * The callback triggered when the input recieves a keypress event
+     */
     onKeyPress: PropTypes.func,
+    /**
+     * The callback triggered when the input recieves a keydown event
+     */
     onKeyDown: PropTypes.func,
+    /**
+     * The callback triggered when the input recieves a mousedown event
+     */
     onMouseDown: PropTypes.func,
+    /**
+     * Placeholder for the TextInput
+     */
     placeholder: PropTypes.string,
+    /**
+     * Determines the styling of the input
+     */
     type: PropTypes.oneOf(Object.values(textInputTypes)),
+    /**
+     * The current value of the input
+     */
     value: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string,
     ]),
+    /**
+     * Width of the TextInput
+     */
     width: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string,
     ]),
+    /**
+     * Type of value format the TextInput accepts
+     */
     format: PropTypes.oneOf(Object.keys(textInputFormats))
 };
 

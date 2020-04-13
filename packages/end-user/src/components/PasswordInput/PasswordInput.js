@@ -4,64 +4,7 @@ import classnames from 'classnames';
 import { noop } from 'underscore';
 
 /**
- * @callback PasswordInput~onChange
- *
- * @param {object} e
- *    The ReactJS synthetic event object.
- */
-
-/**
-* @callback PasswordInput~onBlur
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback PasswordInput~onFocus
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback PasswordInput~onKeyDown
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback PasswordInput~onKeyPress
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback PasswordInput~onMouseDown
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
- * @class PasswordInput
- * @desc Hidden input field
- *
- * @param {string} [classname]
- *      Sets the Input class
- * @param {string} [id]
- *      Sets the id prop of the Input
- * @param {string} [data-id]
- *      To define the base "data-id" value for the input
- * @param {string} [placeholder]
- *      Sets the Input placeholder
- * @param {bool} [error]
- *      Added error style to the input
- * @param {bool} [success]
- *      Added success style to the input
- *
+ * Hidden input field
  */
 const PasswordInput = ({
     placeholder,
@@ -103,27 +46,63 @@ const PasswordInput = ({
 };
 
 PasswordInput.propTypes = {
-    placeholder: PropTypes.string,
-    id: PropTypes.string,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onKeyPress: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    onMouseDown: PropTypes.func,
+    /**
+     * Sets error state for the PasswordInput if enabled
+     */
     error: PropTypes.bool,
-    success: PropTypes.bool,
-    defaultValue: PropTypes.string,
+    /**
+     * Sets a data-id property on the PasswordInput to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * Default value for the PasswordInput
+     */
+    defaultValue: PropTypes.string,
+    /**
+     * Sets the ID of the PasswordInput
+     */
+    id: PropTypes.string,
+    /**
+     * Called when the PasswordInput is blurred
+     */
+    onBlur: PropTypes.func,
+    /**
+     * Called when the value of PasswordInput changes
+     */
+    onChange: PropTypes.func,
+    /**
+     * Called when the PasswordInput is focused
+     */
+    onFocus: PropTypes.func,
+    /**
+     * Called when a key is hit in the PasswordInput
+     */
+    onKeyDown: PropTypes.func,
+    /**
+     * Called when a key is pressed in the PasswordInput
+     */
+    onKeyPress: PropTypes.func,
+    /**
+     * Called when there is a mousedown event in the PasswordInput
+     */
+    onMouseDown: PropTypes.func,
+    /**
+     * Placeholder for the PasswordInput
+     */
+    placeholder: PropTypes.string,
+    /**
+     * Sets the success state of the PasswordInput if enabled
+     */
+    success: PropTypes.bool,
 };
 
 PasswordInput.defaultProps = {
     'data-id': 'password-input',
+    onBlur: noop,
     onChange: noop,
     onFocus: noop,
-    onBlur: noop,
-    onKeyPress: noop,
     onKeyDown: noop,
+    onKeyPress: noop,
     onMouseDown: noop,
 };
 

@@ -23,11 +23,17 @@ const renderObject = object => (Array.isArray(object)
     : Object.keys(object).map(dataKey => renderRow(dataKey, renderValue(object[dataKey])))
 );
 
+/**
+ * Display an array or object in an organized fashion
+ */
 const SerializedData = ({ data }) => (
     <div className="serialized-data">{renderObject(data)}</div>
 );
 
 SerializedData.propTypes = {
+    /**
+     * Data to show in the rows
+     */
     data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 

@@ -1,9 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { noop } from "underscore";
 import Button from '../Button';
 import SocialLogos from '../../util/SocialLogo';
 
+/**
+ * Brands type for SocialButton
+ * @typedef brandType
+ * @property {string} color The color the the brand.
+ * @property {Function} logo The JSX logo for the brand.
+ */
+
+/**
+ * Brands types for SocialButton
+ * @typedef brandTypes
+ * @property {brandType} LINKEDIN - A brandType object
+ * @property {brandType} GOOGLE - A brandType object
+ * @property {brandType} TWITTER - A brandType object
+ * @property {brandType} FACEBOOK - A brandType object
+ * @property {brandType} APPLE - A brandType object
+ * @property {brandType} MICROSOFT- A brandType object
+ * @property {brandType} INSTAGRAM - A brandType object
+ * @property {brandType} AMAZON - A brandType object
+ */
 const brandTypes = {
     LINKEDIN: {
         fill: '#0a66c2',
@@ -43,23 +63,9 @@ const brandTypes = {
 };
 
 /**
- * @class SocialButton
- * @desc Button with social media branding
- *
- * @param {object} [branding]
- *      Brand to display on the button
- *      (LINKEDIN|TWITTER|GOOGLE|FACEBOOK|INSTAGRAM|AMAZON|APPLE|MICROSOFT)
- * @param {bool} [disabled]
- *      Sets the button disabled state
- * @param {func} [onClick]
- *      onClick event handler
- * @param {string} [image]
- *      Image to display inplace of the branding
- * @param {string} [label]
- *      Button text
- *
+ * Branded buttons
  */
-const SocialButton = ({
+export const UnstyledSocialButton = ({
     'data-id': dataId,
     disabled,
     onClick,
@@ -119,33 +125,42 @@ const SocialButton = ({
     );
 };
 
-SocialButton.defaultProps = {
+UnstyledSocialButton.propTypes = {
+    /**
+     * Brand to display on the SocialButton (from brandingTypes)
+     *
+     * (LINKEDIN|GOOGLE|TWITTER|FACEBOOK|APPLE|MICROSOFT|INSTAGRAM|AMAZON)
+     */
+    branding: PropTypes.oneOf(Object.values(brandTypes)),
+    /**
+     * Sets a data-id property on the SocialButton element to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * Sets the button disabled state
+     */
+    disabled: PropTypes.bool,
+    /**
+     * Image to display inplace of the branding
+     */
+    image: PropTypes.string,
+    /**
+     * Button text
+     */
+    label: PropTypes.node,
+    /**
+     * onClick event handler
+     */
+    onClick: PropTypes.func,
+};
+
+UnstyledSocialButton.defaultProps = {
     'data-id': 'social-button',
     disabled: false,
-    onClick: () => {},
+    onClick: noop,
 };
 
-SocialButton.propTypes = {
-    disabled: PropTypes.bool,
-    'data-id': PropTypes.string,
-    onClick: PropTypes.func,
-    label: PropTypes.node,
-    branding: PropTypes.oneOfType([
-        PropTypes.oneOf(Object.values(brandTypes)),
-        PropTypes.shape({
-            fill: PropTypes.string,
-            color: PropTypes.string,
-            border: PropTypes.string,
-            lightBg: PropTypes.bool,
-            logo: PropTypes.node,
-        }),
-    ]),
-    image: PropTypes.string,
-};
-
-SocialButton.BrandTypes = brandTypes;
-
-export default styled(SocialButton)`
+const SocialButton = styled(UnstyledSocialButton)`
     .social-button__container {
         width: 100%;
         display: flex;
@@ -226,3 +241,7 @@ export default styled(SocialButton)`
         }
     }
 `;
+
+SocialButton.BrandTypes = brandTypes;
+
+export default SocialButton;

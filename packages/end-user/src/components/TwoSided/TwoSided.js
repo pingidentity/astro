@@ -3,16 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 /**
- * @class TwoSided
- * @desc Card with front and back
- *
- * @param {bool} [flipped]
- *      Sets if the back of the card is showing
- * @param {array} [childen]
- *      Front and back elements of the card [front, back]
- * @param {string} [data-id]
- *      Sets a data-id property on the tooltip element to be used as a test hook
- *
+ * Card with front and back
  */
 const TwoSided = ({ children: [front, back], flipped, 'data-id': dataId }) => (
     <div
@@ -27,13 +18,19 @@ const TwoSided = ({ children: [front, back], flipped, 'data-id': dataId }) => (
 );
 
 TwoSided.propTypes = {
-    flipped: PropTypes.bool,
+    /**
+     * Sets a data-id property on the TwoSided element to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * Flips the card to the back of enabled
+     */
+    flipped: PropTypes.bool,
 };
 
 TwoSided.defaultProps = {
-    flipped: false,
     'data-id': 'two-sided',
+    flipped: false,
 };
 
 export default TwoSided;

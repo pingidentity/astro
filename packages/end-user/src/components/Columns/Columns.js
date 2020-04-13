@@ -2,13 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const alignments = {
+/**
+ * Column alignments
+ * @alias Columns.alignments
+ */
+export const alignments = {
     LEFT: 'left',
     CENTER: 'center',
     RIGHT: 'right',
 };
 
-const widths = {
+/**
+ * Column widths
+ * @alias Columns.widths
+ */
+export const widths = {
     ONE: 'one',
     TWO: 'two',
     THREE: 'three',
@@ -33,7 +41,10 @@ const Columns = ({
     );
 };
 
-const Column = ({
+/**
+ * A singular column
+ */
+export const Column = ({
     className,
     'data-id': dataId,
     children,
@@ -54,19 +65,29 @@ const Column = ({
 };
 
 Column.propTypes = {
-    'data-id': PropTypes.string,
-    className: PropTypes.string,
-    width: PropTypes.oneOf(Object.values(widths)),
+    /**
+     * Alignment of the Column
+     * @param {Columns.alignments}
+     */
     alignments: PropTypes.oneOf(Object.values(alignments)),
+    /**
+     * CSS class to be applied to the Column
+     */
+    className: PropTypes.string,
+    /**
+     * Sets a data-id property on the Column to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * Width of the Column
+     * @param {Columns.widths}
+     */
+    width: PropTypes.oneOf(Object.values(widths)),
 };
 
 Column.defaultProps = {
     width: widths.ONE,
     alignment: alignments.LEFT,
 };
-
-Columns.Column = Column;
-Columns.alignments = alignments;
-Columns.widths = widths;
 
 export default Columns;

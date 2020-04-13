@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { noop } from "underscore";
 
 import { inStateContainer, toggleTransform } from '../../util/StateContainer';
 
 /**
- * @class Checkbox
- * @desc Toggle an option
- *
- * @param {Checkbox~onChange} [onChange]
- *      Fired when the value of the checkbox changes
- * @param {bool} [checked]
- *      Sets the checkbox's state
- * @param {string} [data-id]
- *      Sets a data-id property on the checkbox element to be used as a test hook
- *
+ * Toggles an option
  */
-const StatelessCheckbox = ({
+export const StatelessCheckbox = ({
     'data-id': dataId,
     checked,
     id,
@@ -38,16 +30,31 @@ const StatelessCheckbox = ({
 };
 
 StatelessCheckbox.propTypes = {
-    'data-id': PropTypes.string,
-    label: PropTypes.string,
-    id: PropTypes.string,
+    /**
+     * Sets the checkbox's state
+     */
     checked: PropTypes.bool,
+    /**
+     * Sets a data-id property on the Checkbox to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * ID to apply to the Checkbox element itself
+     */
+    id: PropTypes.string,
+    /**
+     * Label for the Checkbox
+     */
+    label: PropTypes.string,
+    /**
+     * Fired when the value of the checkbox changes
+     */
     onChange: PropTypes.func,
 };
 
 StatelessCheckbox.defaultProps = {
     checked: false,
-    onChange: () => { },
+    onChange: noop,
 };
 
 const Checkbox = inStateContainer([
@@ -62,18 +69,5 @@ const Checkbox = inStateContainer([
         ],
     },
 ])(StatelessCheckbox);
-
-Checkbox.propTypes = {
-    'data-id': PropTypes.string,
-    label: PropTypes.string,
-    id: PropTypes.string,
-    checked: PropTypes.bool,
-    onChange: PropTypes.func,
-};
-
-Checkbox.defaultProps = {
-    checked: false,
-    onChange: () => { },
-};
 
 export default Checkbox;

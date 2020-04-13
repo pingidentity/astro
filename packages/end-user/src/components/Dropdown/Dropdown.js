@@ -8,28 +8,9 @@ const getValue = option => (option.value ? option.value : option);
 const getLabel = option => (option.label ? option.label : option);
 
 /**
- * @class Dropdown
- * @desc Toggle an option
- *
- * @param {Dropdown~onChange} [onChange]
- *      Fired when the value of the dropdown changes
- * @param {string} [classname]
- *      Sets the dropdown class
- * @param {string} [id]
- *      Sets the id prop of the dropdown select
- * @param {string} [selectClassName]
- *      Sets the dropdown select class
- * @param {array} [options]
- *      Sets the dropdown's options
-* @param {string} [placeholder]
- *      Sets the placeholder text of the dropdown
- * @param {string} [value]
- *      Sets the currently selected dropdown option
- * @param {string} [data-id]
- *      Sets a data-id property on the dropdown element to be used as a test hook
- *
+ * Toggle between options
  */
-const StatelessDropdown = ({
+export const StatelessDropdown = ({
     children,
     className,
     error,
@@ -71,10 +52,29 @@ const StatelessDropdown = ({
 };
 
 StatelessDropdown.propTypes = {
-    id: PropTypes.string,
-    selectClassName: PropTypes.string,
+    /**
+     * Sets the Dropdown class
+     */
+    className: PropTypes.string,
+    /**
+     * Sets a data-id property on the Dropdown to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * Sets the error state of the Dropdown
+     */
     error: PropTypes.bool,
+    /**
+     * Sets the ID prop of the Dropdown select
+     */
+    id: PropTypes.string,
+    /**
+     * Fired when the value of the Dropdown changes
+     */
     onChange: PropTypes.func,
+    /**
+     * Sets the Dropdown's options
+     */
     options: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
@@ -82,9 +82,18 @@ StatelessDropdown.propTypes = {
             label: PropTypes.string,
         }),
     ])),
+    /**
+     * Sets the placeholder text of the Dropdown
+     */
     placeholder: PropTypes.string,
+    /**
+     * Sets the Dropdown select class
+     */
+    selectClassName: PropTypes.string,
+    /**
+     * Sets the currently selected Dropdown option
+     */
     value: PropTypes.string,
-    'data-id': PropTypes.string,
 };
 
 StatelessDropdown.defaultProps = {

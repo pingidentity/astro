@@ -1,64 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { noop } from "underscore";
 import Button from '../Button';
 
-
 /**
-* @callback FileInput~onChange
-*
-* @param {object} fileInput
-*    A reference to the file input
-*/
-
-/**
-* @callback FileInput~renderSelectedContent
-*
-* @param {object} e
-*    The ReactJS synthetic event object.
-*/
-
-/**
- * @class FileInput
- * @desc A file selection component
- *
- * @param {Array.<String>} [accept]
- *      An array of strings containing the accepted mime types or extensions.
- * @param {string} [className]
- *      CSS class(es) applied to the top-level element.
- * @param {string} [data-id='file-input']
- *      The data-id attribute value applied to the top-level element.
- * @param {FileInput~onChange} onChange
- *      The callback triggered when the file input changes value.
- * @param {FileInput~onRemove} onRemove
- *      The callback triggered when the remove button is clicked.
- * @param {FileInput~renderContentSelector} [renderContentSelector]
- *      A function that renders the content shown before a file is selected.
- * @param {FileInput~renderSelectedContent} [renderSelectedContent]
- *      A function that renders the content shown after a file is selected.
- * @param {string} [value]
- *      The name of the selected file
+ * A file selection component
  */
-
-
-export default class FileInput extends Component {
-
-    static propTypes = {
-        accept: PropTypes.arrayOf(PropTypes.string),
-        'data-id': PropTypes.string,
-        onChange: PropTypes.func,
-        onRemove: PropTypes.func,
-        renderContentSelector: PropTypes.func,
-        renderSelectedContent: PropTypes.func,
-        value: PropTypes.string,
-    };
-
-    static defaultProps = {
-        accept: [],
-        'data-id': 'file-input',
-        onChange: () => {},
-    };
-
+class FileInput extends Component {
     state = {
         hovered: false,
     };
@@ -216,3 +165,46 @@ export default class FileInput extends Component {
         );
     }
 }
+
+FileInput.propTypes = {
+    /**
+     * An array of strings containing the accepted mime types or extensions
+     */
+    accept: PropTypes.arrayOf(PropTypes.string),
+    /**
+     * CSS class(es) applied to the top-level element
+     */
+    className: PropTypes.string,
+    /**
+     * Sets a data-id property on the FileInput to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * The callback triggered when the file input changes value
+     */
+    onChange: PropTypes.func,
+    /**
+     * The callback triggered when the remove button is clicked
+     */
+    onRemove: PropTypes.func,
+    /**
+     * A function that renders the content shown before a file is selected
+     */
+    renderContentSelector: PropTypes.func,
+    /**
+     * A function that renders the content shown after a file is selected
+     */
+    renderSelectedContent: PropTypes.func,
+    /**
+     * The name of the selected file
+     */
+    value: PropTypes.string,
+};
+
+FileInput.defaultProps = {
+    accept: [],
+    'data-id': 'file-input',
+    onChange: noop,
+};
+
+export default FileInput;

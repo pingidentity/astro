@@ -1,3 +1,3 @@
-import Dropdown from './Dropdown';
+import Dropdown, { StatelessDropdown } from './Dropdown';
 
-export default Dropdown;
+export { Dropdown as default, StatelessDropdown };

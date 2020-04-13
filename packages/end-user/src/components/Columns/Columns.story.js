@@ -3,7 +3,7 @@ import Columns, { Column, widths } from './Columns';
 
 export default {
     title: 'Components/WIP/Columns',
-    component: Columns,
+    component: Column,
 };
 
 export const Default = () => (

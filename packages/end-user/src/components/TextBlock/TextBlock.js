@@ -3,46 +3,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+/**
+ * Types of overflow
+ * @alias overflowTypes
+ */
 const overflowTypes = {
     WRAP: 'wrap',
     ELLIPSIS: 'ellipsis',
 };
 
+/**
+ * Types of alignments
+ * @alias alignments
+ */
 const alignments = {
     LEFT: 'left',
     RIGHT: 'right',
 };
 
+/**
+ * Sizes for the TextBlock
+ * @alias sizes
+ */
 const sizes = {
     SM: 'small',
     LG: 'large',
     SMALLRIGHT: 'small-right',
 };
 
+/**
+ * Margins for the TextBlock
+ * @alias margins
+ */
 const margins = {
     SM: 'small',
     XXL: 'xxlarge',
 };
 
 /**
- * @class TextBlock
- * @desc Display a block of text
- *
-* @param {string} [alignments]
- *      Aligns the textblock contents (left|right)
- * @param {node} [children]
- *      Buttons to display in the set
- * @param {string} [className]
- *      Classname to apply to the TextBlock
- * @param {string} [data-id]
- *      Sets a data-id property on the TextBlock element to be used as a test hook
- * @param {string} [size]
- *      Set the size of the TextBlock (small|small-right|large)
- * @param {string} [spacing]
- *      Set the spacing of the TextBlock (small|xxlarge)
- *
+ * Display a block of text
  */
-
 const TextBlock = ({
     children,
     size,
@@ -73,12 +73,34 @@ const TextBlock = ({
 };
 
 TextBlock.propTypes = {
-    size: PropTypes.oneOf(Object.values(sizes)),
-    spacing: PropTypes.oneOf(Object.values(margins)),
-    className: PropTypes.string,
-    'data-id': PropTypes.string,
+    /**
+     * Aligns the TextBlock contents
+     * @param {alignments}
+     */
     alignment: PropTypes.oneOf(Object.values(alignments)),
+    /**
+     * Classname to apply to the top-level container
+     */
+    className: PropTypes.string,
+    /**
+     * Sets a data-id property on the TextBlock element to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * Overflow behavior for the TextBlock
+     * @param {overflowTypes}
+     */
     overflow: PropTypes.oneOf(Object.values(overflowTypes)),
+    /**
+     * Set the size of the TextBlock
+     * @param {sizes}
+     */
+    size: PropTypes.oneOf(Object.values(sizes)),
+    /**
+     * Set the spacing of the TextBlock
+     * @param {margins}
+     */
+    spacing: PropTypes.oneOf(Object.values(margins)),
 };
 
 TextBlock.defaultProps = {

@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+/**
+ * Types of Icons
+ * @alias typeIcons
+ */
 const typeIcons = {
     success: 'pingicon-ghost-success',
     error: 'pingicon-ghost-error',
@@ -12,7 +16,15 @@ const typeIcons = {
     safe: 'pingicon-safe',
 };
 
-const IconFeedback = ({ type, children, small, bold }) => {
+/**
+ * Icon for user feedback
+ */
+const IconFeedback = ({
+    type,
+    children,
+    small,
+    bold
+}) => {
     const classNames = classnames('icon-feedback', `icon-feedback--${type}`, {
         'icon-feedback--small': small,
         'icon-feedback--bold': bold,
@@ -32,9 +44,19 @@ const IconFeedback = ({ type, children, small, bold }) => {
 };
 
 IconFeedback.propTypes = {
-    type: PropTypes.string,
-    small: PropTypes.bool,
+    /**
+     * Sets the Icon to bold if enabled
+     */
     bold: PropTypes.bool,
+    /**
+     * Scales the Icon down if enabled
+     */
+    small: PropTypes.bool,
+    /**
+     * Sets the Icon
+     * @param {typeIcons}
+     */
+    type: PropTypes.oneOf(Object.keys(typeIcons)),
 };
 
 IconFeedback.defaultProps = {

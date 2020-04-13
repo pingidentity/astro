@@ -2,18 +2,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 /**
- * @class ButtonSet
- * @desc Display mutiple buttons
- *
- * @param {node} [children]
- *      Buttons to display in the set
- * @param {string} [data-id]
- *      To define the base "data-id" value for the card
- *
+ * Display mutiple buttons
  */
-const ButtonSet = ({ children, 'data-id': dataId }) => <div className="button-set" data-id={dataId}>{children}</div>;
+const ButtonSet = ({
+    children,
+    'data-id': dataId
+}) => <div className="button-set" data-id={dataId}>{children}</div>;
 
 ButtonSet.propTypes = {
+    /**
+     * Sets a data-id property on the ButtonSet to be used as a test hook
+     */
     'data-id': PropTypes.string,
 };
 

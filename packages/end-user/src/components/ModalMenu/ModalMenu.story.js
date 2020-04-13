@@ -1,9 +1,9 @@
 import React from 'react';
-import ModalMenu from './ModalMenu';
+import ModalMenu, { StatelessModalMenu } from './ModalMenu';
 
 export default {
     title: 'Components/Inputs/ModalMenu',
-    component: ModalMenu,
+    component: StatelessModalMenu,
 };
 
 export const Default = () => (

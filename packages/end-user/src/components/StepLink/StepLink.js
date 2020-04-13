@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+/**
+ * Link to advance forwards or backwards
+ */
 const StepLink = ({
     type = 'forward',
     children,
@@ -13,6 +16,9 @@ const StepLink = ({
 );
 
 StepLink.propTypes = {
+    /**
+     * Where to show the arrow
+     */
     type: PropTypes.oneOf(['forward', 'back']),
 };
 

@@ -2,16 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * @class Heading
- * @desc Heading text
- *
- * @param {node} [children]
- *      Buttons to display in the set
- * @param {string} [data-id]
- *      Sets a data-id property on the Heading element to be used as a test hook
- * @param {number} [level]
- *      Size of the Heading text
- *
+ * Heading text
  */
 const Heading = ({ children, level, 'data-id': dataId }) => {
     if (level === 4) {
@@ -21,8 +12,14 @@ const Heading = ({ children, level, 'data-id': dataId }) => {
 };
 
 Heading.propTypes = {
-    level: PropTypes.number,
+    /**
+     * Sets a data-id property on the Heading element to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * Size of the Heading text
+     */
+    level: PropTypes.oneOf([1 ,4]),
 };
 
 Heading.defaultProps = {

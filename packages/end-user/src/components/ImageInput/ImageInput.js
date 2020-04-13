@@ -1,60 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { noop } from "underscore";
 import FileInput from '../FileInput';
 import FileUtils from '../../util/FileUtils';
 import { callIfOutsideOfContainer } from '../../util/EventUtils';
 
-
 /**
-* @callback FileInput~onChange
-*
-* @param {object} fileInput
-*    A reference to the file input
-*/
-
-/**
-* @callback FileInput~renderSelectedContent
-*
-* @param {object} e
-*    The ReactJS synthetic event object.
-*/
-
-/**
- * @class FileInput
- * @desc A file selection component
- *
- * @param {Array.<String>} [accept]
- *      An array of strings containing the accepted mime types or extensions.
- * @param {string} [className]
- *      CSS class(es) applied to the top-level element.
- * @param {string} [data-id='file-input']
- *      The data-id attribute value applied to the top-level element.
- * @param {FileInput~onChange} onChange
- *      The callback triggered when the file input changes value.
- * @param {FileInput~onRemove} onRemove
- *      The callback triggered when the remove button is clicked.
- * @param {string} [value]
- *      The name of the selected file
+ * An image selection component
  */
-
-
-export default class ImageInput extends Component {
-
-    static propTypes = {
-        accept: PropTypes.arrayOf(PropTypes.string),
-        onChange: PropTypes.func,
-        onError: PropTypes.func,
-        'data-id': PropTypes.string,
-    };
-
-    static defaultProps = {
-        accept: ['image/jpeg', 'image/png'],
-        onChange: () => {},
-        onError: () => {},
-        'data-id': 'image-input',
-    };
-
+class ImageInput extends Component {
     state = {
         showMenu: false,
         value: this.props.value,
@@ -193,3 +148,35 @@ export default class ImageInput extends Component {
         );
     }
 }
+
+ImageInput.propTypes = {
+    /**
+     * Types of images to accept
+     */
+    accept: PropTypes.arrayOf(PropTypes.string),
+    /**
+     * Sets a data-id property on the ImageInput to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * Called once the image in the Input changes
+     */
+    onChange: PropTypes.func,
+    /**
+     * Called if there is an error with the selection
+     */
+    onError: PropTypes.func,
+    /**
+     * The value of the selected image
+     */
+    value: PropTypes.value,
+};
+
+ImageInput.defaultProps = {
+    accept: ['image/jpeg', 'image/png'],
+    onChange: noop,
+    onError: noop,
+    'data-id': 'image-input',
+};
+
+export default ImageInput;
