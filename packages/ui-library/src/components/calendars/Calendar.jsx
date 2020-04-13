@@ -92,6 +92,9 @@ var Views = {
  *     Alias for labelText.
  * @param {string} [name]
  *     Name attribute for the input.
+ * @param {string} [utcOffset]
+ *     When prop is enabled, custom UTC offset value overwrites default browser utc offset.
+ *     Format as positive or negative for HH:MM such as +01:50.
  *
  * @param {Calendar.Views} [minView=Calendar.Views.DAYS]
  *    Set the minimal view.
@@ -162,7 +165,7 @@ class BaseCalendar extends React.Component {
         width: PropTypes.oneOf(InputWidthProptypesAuto),
         onInputTextValueChange: PropTypes.func,
         onValueChange: PropTypes.func,
-        
+
     };
 
     static defaultProps = {
@@ -186,7 +189,7 @@ class BaseCalendar extends React.Component {
         this.state = {
             date: props.date || moment(),
             currentView: props.minView,
-            isVisible: false
+            isVisible: false,
         };
     }
 
@@ -194,9 +197,9 @@ class BaseCalendar extends React.Component {
     _getDate = (date = this.props.date) => {
         // we have a habit of passing back stringified time numbers
         if (date && date.match && date.match(/^\-?[0-9]+$/)) {
-            return moment(parseInt(date));
+            return this._handleUtcOffset(parseInt(date));
         }
-        return date ? moment(date) : null;
+        return date ? this._handleUtcOffset(date) : null;
     };
 
     // formats the date according to the supplied viewing format
@@ -250,6 +253,7 @@ class BaseCalendar extends React.Component {
         if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
             this._handleValueChange(date);
         }
+
     };
 
     /**
@@ -297,7 +301,15 @@ class BaseCalendar extends React.Component {
         });
 
         if (onValueChange) {
-            onValueChange(this._getComputableDate(moment(value)));
+            onValueChange(this._getComputableDate(this._handleUtcOffset(value)));
+        }
+    }
+
+    _handleUtcOffset = (date) => {
+        if (this.props.utcOffset) {
+            return moment(date).utcOffset(this.props.utcOffset);
+        } else {
+            return moment(date);
         }
     }
 
@@ -315,11 +327,10 @@ class BaseCalendar extends React.Component {
 
         if (date) {
             // format, with strict parsing true, so we catch bad dates
-            newDate = moment(date, format, true);
-
+            newDate = this._handleUtcOffset(moment(date, format, true));
             // if the new date didn't match our format, parse it otherwise
             if (!newDate.isValid()) {
-                newDate = moment(date);
+                newDate = this._handleUtcOffset(moment(date));
             }
 
             if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
@@ -392,22 +403,28 @@ class BaseCalendar extends React.Component {
 
     render() {
 
-        const calendarDate = this._getDate() || moment();
+        const calendarDate = this._getDate() || this._handleUtcOffset();
         let view;
+        const viewProps = {
+            date: calendarDate,
+            onSetDate: this.setDate,
+            onNextView: this.nextView,
+            dateRange: this.props.dateRange,
+            onPrevView: this.prevView,
+            utcOffset: this.props.utcOffset,
+        };
         switch (this.state.currentView) {
             case Views.DAYS:
-                calendarDate.locale(Translator.currentLanguage);
-                view = (<DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView}
-                    dateRange={this.props.dateRange} />);
+                if (calendarDate.locale) {
+                    calendarDate.locale(Translator.currentLanguage);
+                }
+                view = (<DaysView {...viewProps}/>);
                 break;
             case Views.MONTHS:
-                view = (<MonthsView date={calendarDate} onSetDate={this.setDate}
-                    onNextView={this.nextView} onPrevView={this.prevView}
-                    dateRange={this.props.dateRange} />);
+                view = (<MonthsView {...viewProps}/>);
                 break;
             case Views.YEARS:
-                view = (<YearsView date={calendarDate} onSetDate={this.setDate} onPrevView={this.prevView}
-                    dateRange={this.props.dateRange} />);
+                view = (<YearsView {...viewProps} />);
                 break;
         }
 
