@@ -1,8 +1,22 @@
 stages:
   - build-ci-image
+  - pack
   - test
-  - backstop
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm
+    - node_modules
+    - packages/end-user/.npm
+    - packages/end-user/node_modules
+    - packages/ui-library/.npm
+    - packages/ui-library/node_modules
+
+# This has to be done before each script because Gitlab's caching can fail in a
+# number of circumstances.
+# before_script:
+#   - lerna bootstrap
 
 build_ci_image:
   stage: build-ci-image
@@ -12,29 +26,48 @@ build_ci_image:
     changes:
       - Dockerfile
   script:
-    - docker build --pull --tag docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0 ./shared/docker
-    - docker push docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
+    - docker build --pull --tag docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1 ./shared/docker
+    - docker push docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   tags:
     - platform-publish-docker
 
-test:
+
+# Do this as a separate stage to make sure everything builds
+pack:
+  stage: pack
+  tags:
+    - platform-build-docker
+  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+  script:
+    - lerna bootstrap
+    - lerna run pack
+  artifacts:
+    paths:
+      - ./packages/ui-library/build
+
+lint:
   stage: test
   tags:
     - platform-build-docker
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
+  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
-    - yarn global add lerna
     - lerna bootstrap
     - lerna run lint
-    - lerna run coverage-ci
-    - lerna run pack
 
-backstop:
-  stage: backstop
+coverage:
+  stage: test
   tags:
     - platform-build-docker
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.0
+  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
-    - yarn global add lerna
+    - lerna bootstrap
+    - lerna run coverage-ci
+
+backstop:
+  stage: test
+  tags:
+    - platform-build-docker
+  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+  script:
     - lerna bootstrap
     - lerna run backstop-ci

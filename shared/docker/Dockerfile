@@ -37,3 +37,5 @@ RUN apt-get -qqy update \
     fonts-wqy-zenhei \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get -qyy clean
+
+RUN yarn global add lerna
