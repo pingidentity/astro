@@ -1,9 +1,9 @@
 import React from 'react';
-import Checkbox from './Checkbox';
+import Checkbox, { StatelessCheckbox } from './Checkbox';
 
 export default {
     title: 'Components/Inputs/Checkbox',
-    component: Checkbox,
+    component: StatelessCheckbox,
 };
 
 export const Default = () => (

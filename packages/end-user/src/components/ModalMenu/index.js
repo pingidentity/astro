@@ -1,3 +1,3 @@
-import ModalMenu from './ModalMenu';
+import ModalMenu, { StatelessModalMenu } from './ModalMenu';
 
-export default ModalMenu;
+export { ModalMenu as default, StatelessModalMenu };

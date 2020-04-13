@@ -2,22 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * @class Logo
- * @desc Display a menu with a list of selections
- *
- * @param {string} [src]
- *      Logo image src
- *
+ * Display a logo
  */
-const Logo = ({ src, 'data-id': dataId }) => (
+const Logo = ({
+    src,
+    'data-id': dataId
+}) => (
     <div className="org-logo" data-id={dataId}>
         <img className="org-logo__image" src={src} alt="Company Logo" />
     </div>
 );
 
 Logo.propTypes = {
-    src: PropTypes.string.isRequired,
+    /**
+     * Sets a data-id property on the Logo to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * The Logo image's src
+     */
+    src: PropTypes.string.isRequired,
 };
 
 export default Logo;

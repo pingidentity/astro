@@ -3,16 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 /**
- * @class TextStyle
- * @desc Apply custom effects and styling to text
- *
- * @param {node} [children]
- *      Buttons to display in the set
- * @param {string} [data-id]
- *      To define the base "data-id" value for the card
- * @param {boolean} [muted=false]
- *     Mute the text's color
- *
+ * Apply custom effects and styling to text
  */
 const TextStyle = ({ muted, children, 'data-id': dataId }) => {
     const classes = classnames({
@@ -25,8 +16,14 @@ const TextStyle = ({ muted, children, 'data-id': dataId }) => {
 };
 
 TextStyle.propTypes = {
-    muted: PropTypes.bool,
+    /**
+     * Sets a data-id property on the TextStyle element to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * Mutes the text if enabled
+     */
+    muted: PropTypes.bool,
 };
 
 export default TextStyle;

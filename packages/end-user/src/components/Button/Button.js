@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 /**
- * @enum {string}
+ * Types of Button styling
  * @alias Button.ButtonTypes
- * @desc Enum for the different types of Button styling
  */
 const ButtonTypes = {
     PRIMARY: 'primary',
@@ -15,31 +14,7 @@ const ButtonTypes = {
 };
 
 /**
-* @callback Button~onClick
-*
-* @param {object}
-*    The ReactJS synthetic event object.
-*/
-
-/**
- * @class Button
- * @desc A button component
- *
- * @param {string} [className]
- *      CSS class(es) applied to the button element.
- * @param {string} [data-id='button']
- *      The data-id attribute value applied to the button element.
- * @param {boolean} [disabled=false]
- *      When true, the button is disabled.
- * @param {boolean} [inline=false]
- *      When true, the button is displayed inline (not full width).
- * @param {string} label
- *      The text or markup to appear within button.
- * @param {Button~onClick} onClick
- *      The callback triggered when the button is clicked.
- * @param {Button.ButtonTypes} [type]
- *      Determines the styling of the button.
- *
+ * A button component
  */
 const Button = ({
     className,
@@ -81,23 +56,50 @@ const Button = ({
     );
 };
 
+Button.propTypes = {
+    /**
+     * CSS class(es) applied to the Button element
+     */
+    className: PropTypes.string,
+    /**
+     * Sets a data-id property on the Button to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * When true, the Button is disabled
+     */
+    disabled: PropTypes.bool,
+    /**
+     * When true, the Button is displayed inline (not full width)
+     */
+    inline: PropTypes.bool,
+    /**
+     * The text or markup to appear within Button
+     */
+    label: PropTypes.string,
+    /**
+     * The callback triggered when the Button is clicked
+     */
+    onClick: PropTypes.func,
+    /**
+     * Custom Button renderer
+     */
+    render: PropTypes.func,
+    /**
+     * Custom CSS inline styles to be applied to the Button
+     */
+    style: PropTypes.shape({}),
+    /**
+     * Determines the styling of the Button
+     */
+    type: PropTypes.oneOf(Object.values(ButtonTypes)),
+};
+
 Button.defaultProps = {
     'data-id': 'button',
     disabled: false,
     inline: false,
-    onClick: () => {},
-};
-
-Button.propTypes = {
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    'data-id': PropTypes.string,
-    inline: PropTypes.bool,
-    label: PropTypes.string,
-    onClick: PropTypes.func,
-    render: PropTypes.func,
-    style: PropTypes.shape({}),
-    type: PropTypes.oneOf(Object.values(ButtonTypes)),
+    onClick: () => { },
 };
 
 Button.ButtonTypes = ButtonTypes;

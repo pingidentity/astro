@@ -2,25 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+/**
+ * Types of different Cards
+ * @enum {string}
+ */
 const CardTypes = {
     SLIM: 'slim',
 };
 
 /**
- * @class Card
- * @desc Contains UI elements
- *
- * @param {string} [className]
- *      Classname to apply to the card
- * @param {string} [width]
- *      Width of the card element
- * @param {string} [type]
- *      Type of card that is to be used.
- * @param {node} [children]
- *      Children of the card component
- * @param {string} [data-id]
- *      Sets a data-id property on the card element to be used as a test hook
- *
+ * Contains UI elements.
  */
 const Card = ({
     children,
@@ -50,12 +41,31 @@ const Card = ({
 };
 
 Card.propTypes = {
+    /**
+     * Classname to apply to the card
+     */
     className: PropTypes.string,
-    width: PropTypes.oneOf(['large']),
-    error: PropTypes.bool,
-    type: PropTypes.oneOf(Object.values(CardTypes)),
-    header: PropTypes.node,
+    /**
+     * Sets a data-id property on the Card to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * Width of the card element
+     */
+    width: PropTypes.oneOf(['large']),
+    /**
+     * Show the error state
+     */
+    error: PropTypes.bool,
+    /**
+     * Type of card that is to be used
+     * @param {CardTypes}
+     */
+    type: PropTypes.oneOf(Object.values(CardTypes)),
+    /**
+     * Card header
+     */
+    header: PropTypes.node,
 };
 
 Card.CardTypes = CardTypes;

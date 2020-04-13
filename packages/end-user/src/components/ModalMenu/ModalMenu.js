@@ -1,17 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { noop } from "underscore";
 
 import { inStateContainer } from '../../util/StateContainer';
 
+/**
+ * Types of Icons
+ * @alias icons
+ */
 const icons = {
     sms: 'pingicon-chat',
     email: 'pingicon-email',
     mobile: 'pingicon-mobile',
 };
 
-const StatelessModalMenu = ({
-    options, onChange, onClose, expanded, 'data-id': dataId,
+/**
+ * Modal-style menu
+ */
+export const StatelessModalMenu = ({
+    options,
+    onChange,
+    onClose,
+    expanded,
+    'data-id': dataId,
 }) => {
     const closeDialog = () => {
         onClose();
@@ -58,16 +70,31 @@ const StatelessModalMenu = ({
 };
 
 StatelessModalMenu.propTypes = {
+    /**
+     * Sets a data-id property on the ModalMenu to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * Expands the ModalMenu if enabled
+     */
+    expanded: PropTypes.bool,
+    /**
+     * The ModalMenu items
+     */
     options: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         sublabel: PropTypes.string,
         icon: PropTypes.string,
         selected: PropTypes.bool,
     })),
+    /**
+     * Called when the ModalMenu selection chnanges
+     */
     onChange: PropTypes.func,
+    /**
+     * Called when ModalMenu closed
+     */
     onClose: PropTypes.func,
-    expanded: PropTypes.bool,
-    'data-id': PropTypes.string,
 };
 
 
@@ -84,30 +111,6 @@ const PStatefulModalMenu = inStateContainer([
     },
 ])(StatelessModalMenu);
 
-/**
- * @class ModalMenu
- * @desc Display a menu with a list of selections
- *
- * @param {string} [options]
- *      A list of the objects to display
- * @param {ModalMenu~onChange} [onChange]
- *      Called after a selection is made in the menu
- *
- */
 const ModalMenu = props => <PStatefulModalMenu {...props} initialState={{}} />;
-
-ModalMenu.propTypes = {
-    options: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.string,
-        sublabel: PropTypes.string,
-        icon: PropTypes.string,
-        selected: PropTypes.bool,
-    })),
-    onChange: PropTypes.func,
-};
-
-ModalMenu.defaultProps = {
-    onChange: () => { },
-};
 
 export default ModalMenu;

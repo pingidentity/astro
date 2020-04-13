@@ -1,3 +1,3 @@
-import SocialButton from './SocialButton';
+import SocialButton, { UnstyledSocialButton } from './SocialButton';
 
-export default SocialButton;
+export { SocialButton as default, UnstyledSocialButton };

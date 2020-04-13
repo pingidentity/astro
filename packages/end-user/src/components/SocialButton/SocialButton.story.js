@@ -1,9 +1,9 @@
 import React from 'react';
-import SocialButton from './SocialButton';
+import SocialButton, { UnstyledSocialButton } from './SocialButton';
 
 export default {
     title: 'Components/Actions/SocialButton',
-    component: SocialButton,
+    component: UnstyledSocialButton,
 };
 
 export const Buttons = () => (

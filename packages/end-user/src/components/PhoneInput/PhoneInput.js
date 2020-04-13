@@ -189,6 +189,9 @@ CountryDropdown.defaultProps = {
     options: [],
 };
 
+/**
+ * Component for inputting a country code and number
+ */
 const PhoneInput = props => (
     <GenericStateContainer
         values={[
@@ -269,13 +272,37 @@ const PhoneInput = props => (
 );
 
 PhoneInput.propTypes = {
+    /**
+    * The callback triggered when the dropdown is toggled
+    */
     onToggleDropdown: PropTypes.func,
+    /**
+    *  The callback triggered when the phone number input value changes
+    */
     onPhoneNumberValueChange: PropTypes.func,
+    /**
+    * The callback triggered when the country changes. Callback is provided with ISO country code
+    */
     onCountryChange: PropTypes.func,
+    /**
+     * The callback triggered when the dial code search value changes
+     */
     onSearchValueChange: PropTypes.func,
+    /**
+    * The dial code input search value
+    */
     dialCodeSearchValue: PropTypes.string,
+    /**
+    * 2-character ISO code for the selected country
+    */
     country: PropTypes.string,
+    /**
+    * The text to display in phone number input
+    */
     phoneNumber: PropTypes.string,
+    /**
+    * The open state of the dial code dropdown
+    */
     dropdownOpen: PropTypes.bool,
 };
 

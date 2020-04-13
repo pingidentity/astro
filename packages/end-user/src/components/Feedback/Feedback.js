@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 /**
- * @class Feedback
- * @desc Display text and an icon to a user
- *
- * @param {string} [type]
- *      Sets the feedback's type (error|alert|success)
- * @param {string} [data-id]
- *      Sets a data-id property on the feedback element to be used as a test hook
- *
+ * Display text and an icon to a user
  */
 const Message = ({ children, type, 'data-id': dataId }) => {
     const classNames = classnames('feedback', {
@@ -30,8 +23,14 @@ const Message = ({ children, type, 'data-id': dataId }) => {
 };
 
 Message.propTypes = {
-    type: PropTypes.string,
+    /**
+     * Sets a data-id property on the Message to be used as a test hook
+     */
     'data-id': PropTypes.string,
+    /**
+     * Sets the feedback's type (error|alert|success)
+     */
+    type: PropTypes.string,
 };
 
 Message.defaultProps = {

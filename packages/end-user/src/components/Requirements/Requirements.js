@@ -25,16 +25,7 @@ Requirement.propTypes = {
 };
 
 /**
- * @class Requirements
- * @desc Display a list of requirements
- *
- * @param {node} [children]
- *      Elements to appear after the requirements
- * @param {string} [data-id]
- *      Sets a data-id property on the Requirements element to be used as a test hook
- * @param {array} [requirements]
- *      List of requirements [{status, name}]
- *
+ * Display a list of requirements
  */
 const Requirements = ({ requirements, children, 'data-id': dataId }) => (
     <div className="requirements" data-id={dataId}>
@@ -44,11 +35,17 @@ const Requirements = ({ requirements, children, 'data-id': dataId }) => (
 );
 
 Requirements.propTypes = {
+    /**
+     * Sets a data-id property on the Requirements element to be used as a test hook
+     */
+    'data-id': PropTypes.string,
+    /**
+     * List of requirements [{status, name}]
+     */
     requirements: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         status: PropTypes.string,
     })),
-    'data-id': PropTypes.string,
 };
 
 Requirements.defaultProps = {

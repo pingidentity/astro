@@ -5,6 +5,7 @@ import IconFeedback from './IconFeedback';
 export default {
     title: 'Components/Display/IconFeedback',
     decorators: [withKnobs],
+    component: IconFeedback,
 };
 
 export const Success = () => (

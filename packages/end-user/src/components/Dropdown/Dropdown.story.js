@@ -1,9 +1,9 @@
 import React from 'react';
-import Dropdown from './Dropdown';
+import Dropdown, { StatelessDropdown } from './Dropdown';
 
 export default {
     title: 'Components/Inputs/Dropdowns/Basic',
-    component: Dropdown,
+    component: StatelessDropdown,
 };
 
 export const Default = () => (

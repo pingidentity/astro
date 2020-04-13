@@ -3,7 +3,6 @@ import React from 'react';
 /**
  * With backgrounds
  */
-
 const SocialIcons = {
     GOOGLE: ({ width = '100%', height = '100%' }) => {
         return (
