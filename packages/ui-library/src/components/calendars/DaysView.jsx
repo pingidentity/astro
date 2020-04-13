@@ -47,7 +47,7 @@ module.exports = class extends React.Component {
         /* istanbul ignore next  */
         var cell = e.target,
             date = parseInt(cell.innerHTML, 10),
-            newDate = this.props.date ? this.props.date.clone() : moment();
+            newDate = this.props.date ? this.props.date.clone() : this.getNow();
 
         /* istanbul ignore if  */
         if (isNaN(date)) {
@@ -70,18 +70,22 @@ module.exports = class extends React.Component {
         }
     };
 
+    getNow = () => {
+        return this.props.utcOffset ? moment().utcOffset(this.props.utcOffset, true) : moment();
+    }
+
     getDays = () => {
         /* istanbul ignore next  */
-        var now = this.props.date ? this.props.date : moment(),
+        var now = this.props.date ? this.props.date : this.getNow(),
             start = now.clone().startOf("month").day(0),
             end = now.clone().endOf("month").day(6),
             month = now.month(),
-            today = moment(),
+            today = this.getNow(),
             currDay = now.date(),
             year = now.year(),
             days = [];
 
-        moment()
+        today
             .range(start, end)
             .by("days", function (day) {
                 days.push({
@@ -115,7 +119,7 @@ module.exports = class extends React.Component {
         });
 
         /* istanbul ignore next  */
-        var currentDate = this.props.date ? this.props.date.clone().format("MMMM") : moment().format("MMMM");
+        var currentDate = this.props.date ? this.props.date.clone().format("MMMM") : this.getNow().format("MMMM");
         var start = this.props.dateRange && this.props.dateRange.startDate && moment(this.props.dateRange.startDate);
         var end = this.props.dateRange && this.props.dateRange.endDate && moment(this.props.dateRange.endDate);
 

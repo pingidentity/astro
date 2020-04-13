@@ -45,6 +45,10 @@ module.exports = class extends React.Component {
         return this.years[0].label <= currYear && this.years[this.years.length - 1].label >= currYear;
     };
 
+    getNow = () => {
+        return this.props.utcOffset ? moment().utcOffset(this.props.utcOffset, true) : moment();
+    }
+
     getYears = () => {
         var now = this.props.date,
             start = now.clone().subtract(5, "year"),
@@ -57,7 +61,7 @@ module.exports = class extends React.Component {
             return this.years;
         }
 
-        moment()
+        this.getNow()
             .range(start, end)
             .by("years", function (year) {
                 items.push({

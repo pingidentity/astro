@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import Calendar from "../Calendar";
 import moment from "moment-range";
 import _ from "underscore";
+import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import { mount } from "enzyme";
@@ -35,10 +36,16 @@ describe("Calendar", function () {
         callback.mockClear();
     });
 
+    it("data-id's don't change", () => {
+        mountSnapshotDataIds(
+            <Calendar />
+        );
+    });
+
     it("renders with default data-id", function () {
         const component = getComponent({ date: selectedDate });
 
-        var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar");
+        const calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar");
 
         expect(calendar).toBeDefined();
     });
@@ -55,11 +62,11 @@ describe("Calendar", function () {
     });
 
     it("renders with given data-id", function () {
-        var component = ReactTestUtils.renderIntoDocument(
+        const component = ReactTestUtils.renderIntoDocument(
             <Calendar data-id="myCalendar" date={selectedDate} />
         );
 
-        var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "myCalendar");
+        const calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "myCalendar");
 
         expect(calendar).toBeDefined();
     });
@@ -70,7 +77,7 @@ describe("Calendar", function () {
     does not populate its content until it is displayed, the content of the tooltip cannot yet be tested.
     */
     it("renders the label and label help text with a custom label css class and custom help css class", function () {
-        var dataId = "my-label",
+        const dataId = "my-label",
             customLabelText = "My Label",
             customLabelClass = "label-css-class",
             customHelpClass = "help-css-class",
@@ -111,7 +118,7 @@ describe("Calendar", function () {
     });
 
     it("is rendering closed view", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -128,8 +135,127 @@ describe("Calendar", function () {
         expect(cells.length).toEqual(0);
     });
 
+    it("is rendering days view", function () {
+        const component = getComponent({
+            format: "YYYY-MM-DD",
+            initialState: {
+                date: selectedDate,
+            },
+            computableFormat: "x",
+            closeOnSelect: true,
+            onValueChange: callback,
+        });
+
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+
+        // open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        const cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
+
+        // make sure calendar cells rendered: 35 days + 7 headers (MON-SUN)
+        expect(cells.length).toEqual(42);
+
+        // Navigate to September (previous month)
+        const prev = TestUtils.findRenderedDOMNodeWithClass(component, "icon-left");
+        ReactTestUtils.Simulate.click(prev, {});
+        let month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("September");
+
+        // Navigate back to October (next month)
+        const next = TestUtils.findRenderedDOMNodeWithClass(component, "icon-right");
+        ReactTestUtils.Simulate.click(next, {});
+        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
+    });
+
+    it("is rendering months view", function () {
+        const component = getComponent({
+            format: "YYYY-MM-DD",
+            initialState: {
+                date: selectedDate,
+            },
+            computableFormat: "x",
+            closeOnSelect: true,
+            onValueChange: callback,
+        });
+
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+
+        // open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        // switch to months view
+        const navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(navigation, {});
+
+        let cells = TestUtils.scryRenderedDOMNodesWithClass(component, "month");
+
+        expect(cells.length).toEqual(12);
+
+        // Navigate to previous year
+        const prev = TestUtils.findRenderedDOMNodeWithClass(component, "icon-left");
+        ReactTestUtils.Simulate.click(prev, {});
+        let year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(parseInt(year.textContent)).toBe(moment(selectedDate).subtract(1, "years").year());
+
+        // Navigate back to selectedDate year
+        const next = TestUtils.findRenderedDOMNodeWithClass(component, "icon-right");
+        ReactTestUtils.Simulate.click(next, {});
+        year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(parseInt(year.textContent)).toBe(moment(selectedDate).year());
+
+        // let's select month and make sure we go back to days view
+        ReactTestUtils.Simulate.click(cells[0]);
+        cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
+        expect(cells.length).toEqual(42);
+
+    });
+
+    it("is rendering years view", function () {
+        const component = getComponent({
+            format: "YYYY-MM-DD",
+            initialState: {
+                date: selectedDate,
+            },
+            computableFormat: "x",
+            closeOnSelect: true,
+            onValueChange: callback,
+        });
+
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //Switch to months view
+        let navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(navigation, {});
+
+        //Switch to years view
+        navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(navigation, {});
+
+        // Navigate to previous year range
+        const prev = TestUtils.findRenderedDOMNodeWithClass(component, "icon-left");
+        ReactTestUtils.Simulate.click(prev, {});
+        let yearRange = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(yearRange.textContent).toBe("2000-2011");
+
+        // Navigate back to current year range
+        const next = TestUtils.findRenderedDOMNodeWithClass(component, "icon-right");
+        ReactTestUtils.Simulate.click(next, {});
+        yearRange = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(yearRange.textContent).toBe("2010-2021");
+
+        const cells = TestUtils.scryRenderedDOMNodesWithClass(component, "year");
+
+        //make sure calendar cells rendered: 12 years
+        expect(cells.length).toEqual(12);
+    });
+
     it("renders as required when required set", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -142,7 +268,7 @@ describe("Calendar", function () {
     });
 
     it("is triggering onValueChange callback on date selection", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -150,12 +276,12 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        var cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
+        const cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
 
         ReactTestUtils.Simulate.mouseDown(cells[7], {});
 
@@ -163,18 +289,18 @@ describe("Calendar", function () {
     });
 
     it("is not triggering onValueChange callback when an empty cell is clicked", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        var cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
+        const cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
 
         ReactTestUtils.Simulate.mouseDown(cells[0], {});
 
@@ -182,7 +308,7 @@ describe("Calendar", function () {
     });
 
     it("onValueChange changes date via input field", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -190,7 +316,7 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "2016-10-15" } });
 
@@ -199,7 +325,7 @@ describe("Calendar", function () {
     });
 
     it("is supporting min view", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             minView: 1,
@@ -208,12 +334,12 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        var cells = TestUtils.scryRenderedDOMNodesWithClass(component, "month");
+        const cells = TestUtils.scryRenderedDOMNodesWithClass(component, "month");
 
         expect(cells.length).toEqual(12);
 
@@ -222,10 +348,10 @@ describe("Calendar", function () {
         expect(callback).toBeCalled();
     });
 
-    it("is triggering onValueChange callback on arrow navigation", function () {
-        var globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
+    it("is triggering onValueChange callback on arrow nagivation", function () {
+        const globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
 
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -233,7 +359,7 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
@@ -244,9 +370,9 @@ describe("Calendar", function () {
     });
 
     it("stops arrow navigation keyDown event propagation", function () {
-        var globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
+        const globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
 
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -254,12 +380,12 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        var mockpreventDefault = jest.fn();
+        const mockpreventDefault = jest.fn();
         globalKeyListener({ keyCode: 39, preventDefault: mockpreventDefault }); //arrow right
 
         expect(callback).toBeCalledWith("1444953600000");
@@ -270,7 +396,7 @@ describe("Calendar", function () {
         document.addEventListener = jest.fn();
         document.removeEventListener = jest.fn();
 
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -288,7 +414,7 @@ describe("Calendar", function () {
     });
 
     it("does nothing with a blur event if nothing's changed", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -296,7 +422,7 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         ReactTestUtils.Simulate.blur(input, {});
 
@@ -304,7 +430,7 @@ describe("Calendar", function () {
     });
 
     it("handles input blur event", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -312,7 +438,7 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         expect(callback).not.toBeCalled();
         ReactTestUtils.Simulate.change(input, { target: { value: "03-13-2019" } });
@@ -322,7 +448,7 @@ describe("Calendar", function () {
     });
 
     it("handles input blur with invalid date", function () {
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -330,7 +456,7 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "not a date" } });
         ReactTestUtils.Simulate.blur(input, {});
@@ -339,9 +465,9 @@ describe("Calendar", function () {
     });
 
     it("is closing calendar on click outside", function () {
-        var globalClickListener = TestUtils.captureGlobalListener("click", document);
+        const globalClickListener = TestUtils.captureGlobalListener("click", document);
 
-        var component = getComponent({
+        const component = getComponent({
             format: "YYYY-MM-DD",
             date: selectedDate,
             computableFormat: "x",
@@ -349,7 +475,7 @@ describe("Calendar", function () {
             onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
@@ -358,34 +484,69 @@ describe("Calendar", function () {
         //click outside
         globalClickListener();
 
-        var cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
+        const cells = TestUtils.scryRenderedDOMNodesWithClass(component, "day");
 
         //make sure calendar was closed
         expect(cells.length).toEqual(0);
     });
 
+    it("renders with dates outside range disabled", function () {
+        const component = getComponent({
+            initialState: {
+                date: selectedDate,
+            },
+            dateRange: dateRange,
+        });
+
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October
+        let cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "day"));
+        cells = cells.filter(function (cell) {
+            return cell.classList.contains("disabled") && !cell.classList.contains("prev");
+        });
+
+        expect(cells.length).toBe(9); // dates 1 to 9 out of range
+
+        //Navigate to November
+        const next = TestUtils.scryRenderedDOMNodesWithClass(component, "icon")[1];
+        ReactTestUtils.Simulate.click(next, {});
+        const month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("November");
+
+        cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "day"));
+        cells = cells.filter(function (cell) {
+            return cell.classList.contains("disabled") && !cell.classList.contains("next");
+        });
+
+        expect(cells.length).toBe(10); // dates 21 - 30 out of range
+    });
+
     it("renders with months outside range disabled", function () {
-        var component = getComponent({
+        const component = getComponent({
             date: new Date(2015, 9, 15),
             dateRange
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         //In October & Switch to months view
-        var navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        const navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(navigation, {});
 
-        var cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "month"));
-        var disabled = cells.filter(function (cell) {
+        const cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "month"));
+        const disabled = cells.filter(function (cell) {
             return cell.classList.contains("disabled");
         });
         expect(disabled.length).toBe(10);
 
-        var enabled = cells.filter(function (cell) {
+        const enabled = cells.filter(function (cell) {
             return !cell.classList.contains("disabled");
         });
         expect(enabled.length).toBe(2); // only Oct & Nov not disabled
@@ -394,30 +555,30 @@ describe("Calendar", function () {
     });
 
     it("renders with years outside range disabled", function () {
-        var component = getComponent({
+        const component = getComponent({
             date: selectedDate, dateRange,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         //In October & Switch to months view
-        var navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        let navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(navigation, {});
 
         //Switch to years view
         navigation = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(navigation, {});
 
-        var cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "year"));
-        var disabled = cells.filter(function (cell) {
+        const cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "year"));
+        const disabled = cells.filter(function (cell) {
             return cell.classList.contains("disabled");
         });
         expect(disabled.length).toBe(11);
 
-        var enabled = cells.filter(function (cell) {
+        const enabled = cells.filter(function (cell) {
             return !cell.classList.contains("disabled");
         });
         expect(enabled.length).toBe(1); // only 2015 not disabled
@@ -425,13 +586,13 @@ describe("Calendar", function () {
     });
 
     it("input display date can't be out of range", function () {
-        var component = getComponent({
+        const component = getComponent({
             date: selectedDate,
             dateRange: dateRange,
             format: "YYYY-MM-DD",
         });
 
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "2080-12-04" } });
         ReactTestUtils.Simulate.blur(input, {});
@@ -440,38 +601,82 @@ describe("Calendar", function () {
         expect(input.value).not.toBe("2080-12-04");
     });
 
-    it("disables header arrow navigation if month out of range", function () {
-        var component = getComponent({
-            date: selectedDate,
+    it("disables header arrow navigation if date out of range", function () {
+        const component = getComponent({
+            initialState: {
+                date: selectedDate,
+            },
             dateRange: dateRange,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         //In October
-        var month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        let month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
+
+        let arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
+        expect(arrows.length).toBe(2); // prev & next
+
+        //Nothing happens clicking disabled prev
+        const prev = arrows[0];
+        expect(prev.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(prev, {});
+        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
+
+        //Navigate to with enabled next
+        let next = arrows[1];
+        ReactTestUtils.Simulate.click(next, {});
+        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("November");
+
+        arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
+        expect(arrows.length).toBe(2); // prev & next
+
+        //Nothing happens clicking disabled next
+        next = arrows[1];
+        expect(next.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(next, {});
+        month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("November");
+    });
+
+    it("disables header arrow navigation if month out of range", function () {
+        const component = getComponent({
+            date: selectedDate,
+            dateRange: dateRange,
+        });
+
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October
+        const month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         expect(month.textContent).toBe("October");
 
         //Switch to months view
         ReactTestUtils.Simulate.click(month, {});
-        var year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        let year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         expect(year.textContent).toBe("2015");
 
-        var arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
+        const arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
         expect(arrows.length).toBe(2); // prev & next
 
         //Nothing happens clicking disabled prev
-        var prev = arrows[0];
+        const prev = arrows[0];
         expect(prev.classList.contains("disabled")).toBe(true);
         ReactTestUtils.Simulate.click(prev, {});
         year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         expect(year.textContent).toBe("2015");
 
         //Nothing happens clicking disabled next
-        var next = arrows[1];
+        const next = arrows[1];
         expect(next.classList.contains("disabled")).toBe(true);
         ReactTestUtils.Simulate.click(next, {});
         year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
@@ -479,41 +684,41 @@ describe("Calendar", function () {
     });
 
     it("disables header arrow navigation if year out of range", function () {
-        var component = getComponent({
+        const component = getComponent({
             date: selectedDate,
             dateRange: dateRange,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         //In October
-        var month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        const month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         expect(month.textContent).toBe("October");
 
         //Switch to years view
         ReactTestUtils.Simulate.click(month, {});
-        var year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        const year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         expect(year.textContent).toBe("2015");
 
         ReactTestUtils.Simulate.click(year, {});
-        var years = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        let years = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         expect(years.textContent).toBe("2010-2021");
 
-        var arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
+        const arrows = TestUtils.scryRenderedDOMNodesWithClass(component, "icon");
         expect(arrows.length).toBe(2); // prev & next
 
         //Nothing happens clicking disabled prev
-        var prev = arrows[0];
+        const prev = arrows[0];
         expect(prev.classList.contains("disabled")).toBe(true);
         ReactTestUtils.Simulate.click(prev, {});
         years = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         expect(years.textContent).toBe("2010-2021");
 
         //Nothing happens clicking disabled next
-        var next = arrows[1];
+        const next = arrows[1];
         expect(next.classList.contains("disabled")).toBe(true);
         ReactTestUtils.Simulate.click(next, {});
         years = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
@@ -521,19 +726,19 @@ describe("Calendar", function () {
     });
 
     it("does not change date if out of range date selected", function () {
-        var component = getComponent({
+        const component = getComponent({
             date: selectedDate,
             dateRange: dateRange,
             onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         //In October
-        var cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "day"));
+        let cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "day"));
         cells = cells.filter(function (cell) {
             return cell.classList.contains("disabled") && !cell.classList.contains("prev");
         });
@@ -544,20 +749,20 @@ describe("Calendar", function () {
     });
 
     it("does not change date if out of range month selected", function () {
-        var component = getComponent({
+        const component = getComponent({
             date: selectedDate, dateRange: dateRange, onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         //In October & switch to months view
-        var month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        const month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(month, {});
 
-        var cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "month"));
+        let cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "month"));
         cells = cells.filter(function (cell) {
             return cell.classList.contains("disabled");
         });
@@ -568,22 +773,22 @@ describe("Calendar", function () {
     });
 
     it("does not change year if out of range year selected", function () {
-        var component = getComponent({
+        const component = getComponent({
             date: selectedDate, dateRange: dateRange, onValueChange: callback,
         });
 
-        var container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
 
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         //In October & switch to years view
-        var month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        const month = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(month, {});
-        var year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
+        const year = TestUtils.findRenderedDOMNodeWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(year, {});
 
-        var cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "year"));
+        let cells = Object.values(TestUtils.scryRenderedDOMNodesWithClass(component, "year"));
         cells = cells.filter(function (cell) {
             return cell.classList.contains("disabled");
         });
@@ -593,8 +798,39 @@ describe("Calendar", function () {
         expect(callback).not.toBeCalled();
     });
 
+
+    it("prevView navigation does not trigger onValueChange callback when date out of range", function () {
+        const wrapper = mountComponent({
+            date: selectedDate, dateRange: dateRange, onValueChange: callback,
+        });
+        const component = wrapper.childAt(0).childAt(0);
+
+        component.instance().prevView(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
+        expect(callback).not.toBeCalled();
+    });
+
+    it("prevView navigation does trigger onValueChange callback when there's no date range", function () {
+        const wrapper = mountComponent({
+            date: selectedDate, onValueChange: callback,
+        });
+        const component = wrapper.childAt(0).childAt(0);
+
+        component.instance().prevView(moment(new Date(2015, 9, 1)));
+        expect(callback).toBeCalled();
+    });
+
+    it("setDate does not trigger onValueChange callback when date out of range", function () {
+        const wrapper = mountComponent({
+            date: selectedDate, dateRange: dateRange, onValueChange: callback,
+        });
+        const component = wrapper.childAt(0).childAt(0);
+
+        component.instance().setDate(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
+        expect(callback).not.toBeCalled();
+    });
+
     it("should hide calendar when clicking input text to type date", () => {
-        var component = getComponent();
+        const component = getComponent();
 
         ReactTestUtils.Simulate.click(TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input"));
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "input-calendar-wrapper")).toBeFalsy();
@@ -631,14 +867,6 @@ describe("Calendar", function () {
         const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
 
         expect(textInput.value).toBe("03-16-2019");
-    });
-
-    it("puts empty string in input when date is null", function() {
-        const component = getComponent({ date: null });
-
-        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
-
-        expect(textInput.value).toBe("");
     });
 
 });
