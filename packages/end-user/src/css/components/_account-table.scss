@@ -6,6 +6,7 @@
     &__icon {
         flex: 1;
         flex-grow: 0;
+        flex-basis: auto;
         fill: $color-neutral-20;
 
         @media (max-width: $breakpoint-mobile) {
