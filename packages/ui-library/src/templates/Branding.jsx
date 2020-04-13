@@ -44,7 +44,7 @@ const THEMES = [
         colors: [
             { color: "#44a19d", title: "Button", id: "button" },
             { color: "#66fcf0", title: "Link", id: "link" },
-            { color: "#c4c6c7", title: "Background", id: "background" },
+            { color: "#c4c6c7", title: "Background Color", id: "background" },
             { color: "#354453", title: "Text", id: "text" },
             { color: "#0a0b10", title: "Error", id: "error" },
             { color: "#edf4e0", title: "Color 1", id: "color1" },
@@ -119,9 +119,9 @@ const ColorPickerGroup = ({
 
     return (
         <FlexRow
-            alignment={alignments.CENTER}
             flexDirection={flexDirectionOptions.ROW}
             wrap={wrapOptions.WRAP}
+            alignment={alignments.TOP}
         >
             {
                 colors.map((color) => (
