@@ -45,7 +45,7 @@ const runTests = server => backstop(
     }) // Exit with success code
     .catch(e => exitWithError(server, e));
 
-const startServerAndrunTests = () => {
+const startServerAndRunTests = () => {
     const server = startServer(port);
 
     fetch(`http://localhost:${port}/`)
@@ -72,7 +72,9 @@ const packAndRunTests = () => {
         if (err) {
             exitWithError(null, "Webpack failed to pack. Please check your configuration");
         }
+        startServerAndRunTests();
     });
+
 };
 
 // Have to write out a backstop.json file in order to have Docker get the right config
@@ -83,7 +85,7 @@ if (isApprovalRun) {
     backstop("approve", { docker: true });
 } else if (isCIRun) {
     // Gitlab has already packed everything, so just run the tests.
-    startServerAndrunTests();
+    startServerAndRunTests();
 } else {
     packAndRunTests();
 }
