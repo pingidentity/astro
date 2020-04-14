@@ -1962,6 +1962,9 @@ input[type=file] {
         .form-error-icon {
             top: $message-icon-margin;
         }
+        .undo {
+            right: 30px;
+        }
     }
     &.input-select {
         .wrapper {
