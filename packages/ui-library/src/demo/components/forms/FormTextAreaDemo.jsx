@@ -87,6 +87,19 @@ class FormTextAreaDemo extends React.Component {
                 </InputRow>
                 <InputRow>
                     <FormTextArea
+                        data-id="error-w-undo-prop-id"
+                        labelText="With defaultValue, undo (stateful), and error message"
+                        initialState={{
+                            value: "Lorem ipsum dolor sit amet",
+                        }}
+                        originalValue="Lorem ipsum dolor sit amet"
+                        showUndo={true}
+                        width={InputWidths.MD}
+                        errorMessage="The undo icon is properly spaced for the error icon"
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormTextArea
                         labelText="With defaultValue and undo (stateless)"
                         value={this.state.onUndoValue}
                         onValueChange={this._handleUndoValueChange}
