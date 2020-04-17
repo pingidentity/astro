@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import React from "react";
 import classnames from "classnames";
-import Utils from "../../../util/Utils";
+import { isProduction, deprecatePropError } from "../../../util/Utils";
 import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 import _ from "underscore";
 
@@ -127,15 +127,15 @@ module.exports = class extends React.Component {
 
     constructor(props) {
         super(props);
-        if (!Utils.isProduction()) {
+        if (!isProduction()) {
             if (props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(deprecatePropError("id", "data-id"));
             }
             if (props.removeMessage) {
-                throw new Error(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
+                throw new Error(deprecatePropError("removeMessage", "onRemoveMessage"));
             }
             if (props.i18n) {
-                throw new Error(Utils.deprecatePropError("i18n", "onI18n"));
+                throw new Error(deprecatePropError("i18n", "onI18n"));
             }
         }
     }
