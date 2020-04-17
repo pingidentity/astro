@@ -12,7 +12,7 @@ import Page from '../../src/components/Page';
 import Requirements from '../../src/components/Requirements';
 import Tooltip from '../../src/components/Tooltip';
 
-
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -20,7 +20,7 @@ export default {
 };
 
 const branding = {
-    logo: '/ping-logo.svg',
+    logo,
     backgroundColor: '#ffffff',
 };
 

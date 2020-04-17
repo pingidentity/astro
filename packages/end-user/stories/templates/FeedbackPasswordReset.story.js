@@ -9,6 +9,7 @@ import Form from '../../src/components/Form';
 import Feedback from '../../src/components/Feedback';
 import FloatLabelTextInput from '../../src/components/FloatLabelTextInput';
 
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -17,7 +18,7 @@ export default {
 
 export const Basic = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>
             Reset Your Password
         </Heading>
@@ -34,7 +35,7 @@ export const Basic = () => (
 
 export const ResetCode = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>
             Reset Your Password
         </Heading>
@@ -50,7 +51,7 @@ export const ResetCode = () => (
 
 export const ResetCodeExpired = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>
             Reset Your Password
         </Heading>

@@ -8,7 +8,7 @@ import Page from '../../src/components/Page';
 import Spinner from '../../src/components/Spinner';
 import TextBlock from '../../src/components/TextBlock';
 
-
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -16,7 +16,7 @@ export default {
 };
 
 const branding = {
-    logo: '/ping-logo.svg',
+    logo,
     backgroundColor: '#ffffff',
 };
 

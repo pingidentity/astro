@@ -1,6 +1,8 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
+const package = require('./package.json');
 const routes = require('./src/demo/routes.js');
 
 const extractDemoCSS = new ExtractTextPlugin('demo.css');
@@ -15,6 +17,11 @@ for (let i = 0; i < routes.length; i += 1) {
 module.exports = {
     entry: entries,
     devtool: 'source-map',
+    plugins: [
+        new webpack.DefinePlugin({
+            END_USER_VERSION: JSON.stringify(package.version)
+        })
+    ],
     module: {
         rules: [
             {

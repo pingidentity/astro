@@ -10,6 +10,7 @@ import FloatLabelTextInput from '../../src/components/FloatLabelTextInput';
 import FloatLabelPasswordInput from '../../src/components/FloatLabelPasswordInput';
 import Form from '../../src/components/Form';
 
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -17,7 +18,7 @@ export default {
 };
 
 const branding = {
-    logo: '/ping-logo.svg',
+    logo,
     backgroundColor: '#ffffff',
 };
 

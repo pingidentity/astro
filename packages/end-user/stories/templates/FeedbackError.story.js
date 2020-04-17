@@ -10,6 +10,7 @@ import StepLink from '../../src/components/StepLink';
 import SerializedData from '../../src/components/SerializedData';
 import TwoSidedDemo from '../../src/components/stateful/TwoSidedDemo';
 
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -18,7 +19,7 @@ export default {
 
 export const Basic = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="error">Error</IconFeedback>
         <TextBlock size="small">
             <p>The actor attempting to perform the request is not authorized.</p>
@@ -34,7 +35,7 @@ export const Basic = () => (
 
 export const InvalidURL = () => (
     <Card width="large">
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading> Invalid Sign-on URL </Heading>
         <TextBlock>
             <p>
@@ -53,7 +54,7 @@ export const WithDetails = () => (
     <TwoSidedDemo
         renderSides={onFlip => ([
             <Card key="front">
-                <Logo src="/ping-logo.svg" />
+                <Logo src={logo} />
                 <IconFeedback type="error">Error</IconFeedback>
                 <StepLink onClick={onFlip}>View Details</StepLink>
             </Card>,

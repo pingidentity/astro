@@ -1,0 +1,46 @@
+{
+    "focus": {
+        "color" : {
+            "button": {
+                "value": "#cb0020"
+
+            },
+            "buttonText": {
+                "value": "#ffffff"
+
+            },
+            "bodyText": {
+                "value": "#4a4a4a"
+
+            },
+            "headingText": {
+                "value": "#cb0020"
+
+            },
+            "link": {
+                "value": "#2996cc"
+
+            },
+            "card": {
+                "value": "#fcfcfc"
+
+            },
+            "background": {
+                "value": "#ededed"
+            }
+        },
+        "image": {
+            "background": {
+                "value": ""
+            }
+        },
+        "meta": {
+            "displayName": {
+                "value": "Focus"
+            },
+            "cssLink": {
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/focus/focus.css"
+            }
+        }
+    }
+}

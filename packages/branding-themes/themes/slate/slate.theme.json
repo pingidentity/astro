@@ -1,0 +1,41 @@
+{
+    "slate": {
+        "color": {
+            "button": {
+                "value": "#4a4a4a"
+            },
+            "buttonText": {
+                "value": "#4a4a4a"
+            },
+            "bodyText": {
+                "value": "#4a4a4a"
+            },
+            "headingText": {
+                "value": "#4a4a4a"
+            },
+            "link": {
+                "value": "#4a4a4a"
+            },
+            "card": {
+                "value": "#fcfcfc"
+            },
+            "background": {
+                "value": ""
+            }
+        },
+        "image": {
+            "background": {
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/slate/bg.jpg"
+            }
+        },
+        "meta": {
+            "displayName": {
+                "value": "Slate"
+            },
+            "cssLink": {
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/slate/slate.css"
+            }
+        }
+
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "split": {
+        "color": {
+            "button": {
+                "value": "#263956"
+            },
+            "buttonText": {
+                "value": "#ffffff"
+            },
+            "bodyText": {
+                "value": "#263956"
+            },
+            "headingText": {
+                "value": "#686f77"
+            },
+            "link": {
+                "value": "#263956"
+            },
+            "card": {
+                "value": "#fcfcfc"
+            },
+            "background": {
+                "value": "#263956"
+            }
+        },
+        "image": {
+            "background": {
+                "value": ""
+            }
+        },
+        "meta": {
+            "displayName": {
+                "value": "Split"
+            },
+            "cssLink": {
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/split/split.css"
+            }
+        }
+    }
+}

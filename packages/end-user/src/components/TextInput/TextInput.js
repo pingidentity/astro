@@ -101,16 +101,6 @@ const TextInput = ({
     ];
 };
 
-TextInput.defaultProps = {
-    'data-id': 'text-input',
-    onChange: noop,
-    onFocus: noop,
-    onBlur: noop,
-    onKeyPress: noop,
-    onKeyDown: noop,
-    onMouseDown: noop,
-};
-
 TextInput.propTypes = {
     /**
      * CSS class(es) applied to the TextInput
@@ -180,10 +170,17 @@ TextInput.propTypes = {
     /**
      * Type of value format the TextInput accepts
      */
-    format: PropTypes.oneOf(Object.keys(textInputFormats))
+    format: PropTypes.oneOf(Object.values(textInputFormats))
 };
 
 TextInput.defaultProps = {
+    'data-id': 'text-input',
+    onChange: noop,
+    onFocus: noop,
+    onBlur: noop,
+    onKeyPress: noop,
+    onKeyDown: noop,
+    onMouseDown: noop,
     format: textInputFormats.DEFAULT
 };
 

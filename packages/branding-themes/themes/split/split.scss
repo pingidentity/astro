@@ -1,0 +1,134 @@
+@import '../../scss/helpers';
+$THEME_NAME: 'split';
+$colors: getThemeColors($THEME_NAME);
+$images: getThemeImages($THEME_NAME);
+
+body {
+    background: map-get($colors, 'background');
+}
+
+.card {
+    max-width: 600px;
+    height: auto;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    border-radius: 3px;
+
+    @media only screen and (max-width: 600px) {
+        border-radius: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.card__content {
+    padding: 0;
+    height: auto;
+}
+
+/* flexRow added too much unwanted styling for right border */
+.flex-container {
+    display: flex;
+
+    @media only screen and (max-width: 600px) {
+        flex-direction: column;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.branding-template-logo-container {
+    width: 30%;
+    border-right: 10px solid map-get($colors, 'background');
+    padding: 50px 30px;
+
+    @media only screen and (max-width: 600px) {
+        border-right: none;
+        width: auto;
+        border-bottom: 4px solid map-get($colors, 'background');
+    }
+}
+
+.branding-template-form-container {
+    width: 70%;
+    padding: 50px 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    @media only screen and (max-width: 600px) {
+        width: initial;
+    }
+}
+
+.org-logo {
+    position: relative;
+    width: 100%;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    @media only screen and (max-width: 600px) {
+        position: relative;
+        top: 50%;
+        transform: none;
+        margin-bottom: 0;
+    }
+}
+
+.branding-template-logo {
+    height: 100%;
+}
+
+.branding-template-heading,
+.branding-template-primary-text {
+    text-align: left;
+}
+
+.branding-template-heading {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.feedback--error,
+.feedback__icon {
+    font-size: 22px;
+}
+
+.branding-template-form {
+    margin: 4%;
+}
+
+.text-input {
+    border: 1px solid map-get($colors, 'background');
+    border-radius: 2px;
+}
+
+.branding-template-primary-button {
+    color: #fff;
+    background: map-get($colors, 'button');
+    border-color: map-get($colors, 'button');
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.social-button__button {
+    width: 100%;
+}
+
+.branding-template-link-text {
+    margin: 0 0 5px;
+}
+
+.form>:last-child {
+    margin-top: 0;
+}
+
+.text-input {
+    &:placeholder {
+        color: transparent;
+    }
+}

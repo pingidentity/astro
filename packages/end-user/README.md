@@ -41,11 +41,10 @@ localhost:4040/signingon.html
 
 #### Release Process (for UX devs)
 
-1. `git fetch`, `git checkout master`, and `git pull` to make sure you've got the latest code.
-2. Update the version number in `package.json` (in the root folder)
-3. `yarn run build` to produce the distributable code
-4. `cd dist` (Publishing from the root folder won't work)
-5. `yarn login` with your corp credentials
-6. `yarn publish`
+Once the latest changes you want to release are in `master`:
 
-One way to confirm your release was good is to look at the archive that is generated. You can do that by using `yarn info @pingux/end-user dist.tarball` and then downloading from the URL that command shows you.
+1. Go to the Jenkins Ice Cream
+2. Click `End_user-release_Pipeline`
+3. Click `Build with Paramaters`
+4. Set your properties
+5. Click Build
