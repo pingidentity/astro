@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
 	stories: ['../stories/**/*.story.js', '../src/components/**/*.story.js'],
@@ -23,19 +24,16 @@ module.exports = {
 			include: path.resolve(__dirname, '../')
 		});
 
+		config.plugins.push(
+			new webpack.DefinePlugin({
+				END_USER_VERSION: JSON.stringify(require('../package.json').version)
+			})
+		);
+
 		config.module.rules.push({
 			test: /\.story.js$/,
 			loaders: [require.resolve('@storybook/addon-storysource/loader')],
 			enforce: 'pre',
-		});
-
-		config.module.rules.push({
-			test: /\.svg$/,
-			loader: 'file-loader',
-			include: path.resolve(__dirname, '../'),
-			options: {
-				name: '[name].[ext]',
-			},
 		});
 
 		return config;

@@ -10,6 +10,7 @@ import Heading from '../../src/components/Heading';
 import Form from '../../src/components/Form';
 import TextStyle from '../../src/components/TextStyle';
 
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -18,7 +19,7 @@ export default {
 
 export const Basic = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="success" small>Registered</IconFeedback>
         <TextBlock>
             Now that you&apos;ve registered, you can either continue on or edit your profile.
@@ -32,7 +33,7 @@ export const Basic = () => (
 
 export const Email = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>Thank You!</Heading>
         <TextBlock>
             We&apos;ve sent a verification email to IronMan1@ping.com.
@@ -44,7 +45,7 @@ export const Email = () => (
 
 export const Success = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="success" small>You&apos;re Registered</IconFeedback>
         <TextBlock spacing="xxlarge">Your account is setup and ready to go.</TextBlock>
         <Button label="Sign On" type={Button.ButtonTypes.PRIMARY} />
@@ -53,7 +54,7 @@ export const Success = () => (
 
 export const Error = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="error" small>Something Went Wrong</IconFeedback>
         <TextBlock>An unknown error is preventing us from signing you on.</TextBlock>
         <Form><Button label="Try Again" /></Form>
@@ -67,7 +68,7 @@ export const Error = () => (
 
 export const Expired = () => (
     <Card error>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="hourGlass" bold>Trial Expired</IconFeedback>
         <TextBlock size="large">To extend your trial, please contact us.</TextBlock>
         <Button label="Contact Us" type={Button.ButtonTypes.PRIMARY} />
@@ -76,7 +77,7 @@ export const Expired = () => (
 
 export const Inactive = () => (
     <Card error>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="safe" bold>Account Inactive</IconFeedback>
         <TextBlock size="large">This service is no longer active.</TextBlock>
     </Card>

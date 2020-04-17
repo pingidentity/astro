@@ -1,0 +1,22 @@
+@import '../build/css/variables';
+
+/// Fetch nested keys
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Keys to fetch
+/// @return {*}
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+      }
+
+    @return $map;
+}
+
+@function getThemeColors($theme) {
+    @return map-deep-get($themes,  $theme, 'color');
+}
+
+@function getThemeImages($theme) {
+    @return map-deep-get($themes, $theme, 'image');
+}

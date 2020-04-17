@@ -46,6 +46,7 @@ const Button = ({
                     disabled={disabled}
                     onClick={onClick}
                     style={style}
+                    type="button"
                 >
                     {label}{children}
                 </button>

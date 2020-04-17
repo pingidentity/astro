@@ -10,6 +10,7 @@ import Requirements from '../../src/components/Requirements';
 import FloatLabelPasswordInput from '../../src/components/FloatLabelPasswordInput';
 import IconFeedback from '../../src/components/IconFeedback';
 
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -18,7 +19,7 @@ export default {
 
 export const Basic = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>Change Password</Heading>
         <Form>
             <FloatLabelPasswordInput label="New Password" id="newPwD4" defaultValue="eightPassword" success>
@@ -54,7 +55,7 @@ export const Basic = () => (
 
 export const Success = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="success" medium>Password Changed</IconFeedback>
         <Button label="Continue" type={Button.ButtonTypes.SECONDARY} />
     </Card>

@@ -1,0 +1,131 @@
+@import '../../scss/helpers';
+$THEME_NAME: 'slate';
+$colors: getThemeColors($THEME_NAME);
+$images: getThemeImages($THEME_NAME);
+
+body {
+    background: url(map-get($images, 'background'));
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: map-get($colors, 'bodyText');
+    text-align: left;
+}
+
+.card {
+    height: auto;
+    max-width: 40%;
+    margin-right: 60%;
+
+    @media only screen and (max-width: 600px) {
+        margin: 10px;
+        width: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}
+
+.card__content {
+    padding: 0;
+    height: auto;
+}
+
+/* flexRow added too much unwanted styling for right border */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.branding-template-logo-container {
+    padding: 50px 30px 0px 30px;
+    border-right: none;
+}
+
+.branding-template-form-container {
+    width: 80%;
+    padding: 50px 30px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.org-logo {
+    justify-content: start;
+    position: relative;
+
+    &__image {
+        max-width: 150px;
+        height: auto;
+    }
+}
+
+.branding-template-heading,
+.branding-template-primary-text {
+    text-align: left;
+}
+
+.branding-template-error-text {
+    font-size: 22px;
+    text-align: left;
+}
+
+.branding-template-heading {
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    color: map-get($colors, 'headingText');
+}
+
+.feedback--error,
+.feedback__icon {
+    font-size: 18px;
+    color: #cb0020;
+}
+
+.branding-template-form {
+    margin: 4%;
+}
+
+.text-input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid map-get($colors, 'button');
+    border-radius: 0;
+}
+
+.branding-template-primary-button {
+    background: transparent;
+    color: map-get($colors, 'buttonText');
+    border-color: map-get($colors, 'button');
+    width: 60%;
+    font-size: 18px;
+
+    &:hover {
+        color: map-get($colors, 'buttonText');
+    }
+}
+
+.social-button__button {
+    width: 100%;
+}
+
+.branding-template-link-text {
+    margin: 0 0 5px;
+    text-align: left;
+    color: map-get($colors, 'link');
+}
+
+a {
+    color: map-get($colors, 'link');
+    text-decoration: underline;
+}
+
+.form>:last-child {
+    margin-top: 0;
+}
+
+.text-input {
+    &:placeholder {
+        color: transparent;
+    }
+}

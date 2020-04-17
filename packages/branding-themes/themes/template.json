@@ -1,0 +1,39 @@
+{
+    "themeName": {
+        "colors": {
+            "button": {
+                "value": ""
+            },
+            "buttonText": {
+                "value": ""
+            },
+            "bodyText": {
+                "value": ""
+            },
+            "headingText": {
+                "value": ""
+            },
+            "link": {
+                "value": ""
+            },
+            "card": {
+                "value": ""
+            },
+            "background": {
+                "value": ""
+            }
+        },
+        "images": {
+            "background": {
+                "value": ""
+
+            }
+        },
+        "meta": {
+            "displayName": {
+                "value": ""
+            }
+        }
+
+    }
+}

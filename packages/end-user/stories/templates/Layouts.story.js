@@ -25,6 +25,7 @@ import Link from '../../src/components/shared/Link.js';
 import TileSelector from '../../src/components/shared/TileSelector.js';
 import { UserInfo, imageSizes } from '../../src/components/shared/UserNav';
 
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -39,7 +40,7 @@ export const SocialProviders = () => (
             </CardMessage>
         )}
     >
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Form>
             <FloatLabelTextInput label="Username" id="username6" />
             <FloatLabelPasswordInput label="Password" id="password2" />
@@ -59,7 +60,7 @@ export const SocialProviders = () => (
 
 export const SigninError = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Feedback type="error">Cannot sign on. There is a problem with either your username or password.</Feedback>
         <Form>
             <FloatLabelTextInput label="Username" id="username7" />
@@ -72,7 +73,7 @@ export const SigninError = () => (
 
 export const OnlyPassword = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>Hello Cindy Lou Who,</Heading>
         <TextBlock>Please enter your password below:</TextBlock>
         <Form>
@@ -85,7 +86,7 @@ export const OnlyPassword = () => (
 
 export const TooManyAttempts = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Feedback type="error">Too many unsuccessful sign-on attempts. Please reset your password.</Feedback>
         <Form>
             <Button label="Reset Password" type={Button.ButtonTypes.PRIMARY} />
@@ -96,7 +97,7 @@ export const TooManyAttempts = () => (
 
 export const Error = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="error">Error</IconFeedback>
         <TextBlock size="small">
             <p>The actor attempting to perform the request is not authorized.</p>
@@ -110,7 +111,7 @@ export const Error = () => (
 
 export const SignedOff = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="success">Signed Off</IconFeedback>
         <Button label="Sign On" />
     </Card>
@@ -118,7 +119,7 @@ export const SignedOff = () => (
 
 export const ChangePassword = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>Change Password</Heading>
         <Feedback type="alert">Your password has expired. Please create a new one.</Feedback>
         <Form>
@@ -161,7 +162,7 @@ export const ChangePassword = () => (
 
 export const RegisterSuccess = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="success" small>Registered</IconFeedback>
         <TextBlock>
             Now that you&apos;ve registered, you can either continue on or edit your profile.
@@ -175,7 +176,7 @@ export const RegisterSuccess = () => (
 
 export const SignOn = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Form>
             <FloatLabelTextInput label="Username" id="username9" />
             <FloatLabelPasswordInput label="Password" id="password6" />
@@ -187,7 +188,7 @@ export const SignOn = () => (
 
 export const CreateProfile = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Heading>Create Your Profile</Heading>
         <TextBlock size="small">Enter the required information below.</TextBlock>
         <Form spacing="large" >

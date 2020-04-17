@@ -1,0 +1,102 @@
+pipeline {
+  agent {
+    label 'ui-library-cdn-deploy'
+  }
+  stages {
+    stage('run-tests') {
+      steps {
+        dir("${env.WORKSPACE}/packages/branding-themes") {
+          container('node-builder') {
+            echo "Running branding themes linting and tests"
+            sh "yarn install --ignore-engines"
+            //sh "yarn run lint"
+            //sh "yarn run coverage"
+          }
+        }
+      }
+    }
+    stage('version and commit') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/branding-themes") {
+          container('node-builder') {
+            echo "Incrementing the version: ${params.VERSION_TYPE}"
+            sh "yarn version --${params.VERSION_TYPE} --no-git-tag-version"
+            script {
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
+            }
+            echo """
+              release version: ${env.RELEASE_VERSION}
+            """
+            withCredentials([
+              sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
+            ]){
+              sh  """
+                git add package.json
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+                git commit -m 'Branding module ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
+              """
+            }
+          }
+        }
+      }
+    }
+    stage('yarn-publish') {
+      steps {
+        dir("${env.WORKSPACE}/packages/branding-themes") {
+          container('node-builder') {
+            echo "Building & publishing"
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              sh "yarn run build"
+            }
+          }
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: "packages/branding-themes/build/cdn/**", fingerprint: true
+        }
+      }
+    }
+    stage('cdn deploy') {
+      steps {
+        dir("${env.WORKSPACE}/packages/branding-themes/build") {
+          container('node-builder') {
+            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
+              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/branding-themes/", file: "cdn/")
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // stage('update-library-demo') {
+    //   steps {
+    //     dir("${env.WORKSPACE}/packages/end-user") {
+    //       container('node-builder'){
+    //         withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+    //           sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.RELEASE_VERSION} package-and-upload-end-user"
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+  }
+  post {
+    success {
+       slackSend channel: '#ux-deployments', message: ":verynice: Great Success! Branding-themes ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
+      //  slackSend channel: '#ui-announcements', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+      //  slackSend channel: '#ui-coalition', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+    }
+    unsuccessful {
+       slackSend channel: '#ux-deployments', message: "@here ${BUILD_URL} failed!", color: "#a31300"
+    }
+
+    cleanup {
+        cleanWs()
+    }
+  }
+}

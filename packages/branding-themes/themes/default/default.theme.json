@@ -1,0 +1,39 @@
+{
+    "default": {
+        "color": {
+            "button": {
+                "value": "#2996cc"
+            },
+            "buttonText": {
+                "value": "#ffffff"
+            },
+            "bodyText": {
+                "value": "#686f77"
+            },
+            "headingText": {
+                "value": "#686f77"
+            },
+            "link": {
+                "value": "#2996cc"
+            },
+            "card": {
+                "value": "#ffffff"
+            },
+            "background": {
+                "value": "#ededed"
+            }
+        },
+        "image": {
+            "background": {
+                "value": ""
+
+            }
+        },
+        "meta": {
+            "displayName": {
+                "value": "Ping Default"
+            }
+        }
+
+    }
+}

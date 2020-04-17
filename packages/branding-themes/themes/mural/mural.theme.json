@@ -1,0 +1,40 @@
+{
+    "mural": {
+        "color": {
+            "button": {
+                "value": "#61b375"
+            },
+            "buttonText": {
+                "value": "#ffffff"
+            },
+            "bodyText": {
+                "value": "#000000"
+            },
+            "headingText": {
+                "value": "#000000"
+            },
+            "link": {
+                "value": "#2996cc"
+            },
+            "card": {
+                "value": "#fcfcfc"
+            },
+            "background": {
+                "value": ""
+            }
+        },
+        "image": {
+            "background": {
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/mural/bg.jpg"
+            }
+        },
+        "meta": {
+            "displayName": {
+                "value": "Mural"
+            },
+            "cssLink": {
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/mural/mural.css"
+            }
+        }
+    }
+}

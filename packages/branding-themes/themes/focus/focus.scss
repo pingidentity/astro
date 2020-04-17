@@ -1,0 +1,115 @@
+@import '../../scss/helpers';
+$THEME_NAME: 'focus';
+$colors: getThemeColors($THEME_NAME);
+$images: getThemeImages($THEME_NAME);
+
+body {
+    background: map-get($colors, 'background');
+    color: map-get($colors, 'bodyText');
+}
+
+.card {
+    height: auto;
+    width: 450px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 3px;
+
+    @media only screen and (max-width: 600px) {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.card__content {
+    padding: 0;
+    height: auto;
+}
+
+/* flexRow added too much unwanted styling for right border */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.branding-template-logo-container {
+    padding: 50px 30px 0px 30px;
+    border-right: none;
+}
+
+.branding-template-form-container {
+    width: 80%;
+    padding: 50px 30px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.org-logo {
+    position: relative;
+
+    &__image {
+        max-width: 150px;
+        height: auto;
+    }
+}
+
+.branding-template-heading,
+.branding-template-primary-text {
+    text-align: left;
+}
+
+.branding-template-error-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.branding-template-heading {
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    color: map-get($colors, 'headingText');
+}
+
+.feedback--error,
+.feedback__icon {
+    font-size: 18px;
+    color: #4b647d;
+}
+
+.branding-template-form {
+    margin: 4%;
+}
+
+.text-input {
+    border: 1px solid;
+    border-radius: 2px;
+}
+
+.branding-template-primary-button {
+    color: #fff;
+    background: map-get($colors, 'button');
+    border-color: map-get($colors, 'button');
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: 800;
+}
+
+.social-button__button {
+    width: 100%;
+}
+
+.branding-template-link-text {
+    margin: 0 0 5px;
+}
+
+.form > :last-child {
+    margin-top: 0;
+}
+
+.text-input {
+    &:placeholder {
+        color: transparent;
+    }
+}

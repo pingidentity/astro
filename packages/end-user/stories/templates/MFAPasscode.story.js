@@ -11,6 +11,7 @@ import IconFeedback from '../../src/components/IconFeedback';
 import Button from '../../src/components/Button';
 import ModalMenu from '../../src/components/ModalMenu';
 
+import logo from '../../src/images/ping-logo.svg';
 import '../../src/css/styles.scss';
 
 export default {
@@ -19,7 +20,7 @@ export default {
 
 export const Basic = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <TextBlock>Enter the passcode you received to complete authentication.</TextBlock>
         <Form>
             <TextInput type={textInputTypes.PRIMARY} defaultValue="012345" />
@@ -36,7 +37,7 @@ export const Basic = () => (
 
 export const InvalidPasscode = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <Feedback type="error">Invalid passcode</Feedback>
         <TextBlock>Enter the passcode you received to complete authentication.</TextBlock>
         <Form>
@@ -54,14 +55,14 @@ export const InvalidPasscode = () => (
 
 export const Success = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="success">Authenticated</IconFeedback>
     </Card>
 );
 
 export const TimedOut = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="timeout">Timed Out</IconFeedback>
         <Button label="Back" />
     </Card>
@@ -69,7 +70,7 @@ export const TimedOut = () => (
 
 export const Error = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="error">Error</IconFeedback>
         <TextBlock size="small">
             Error message content will appear here when required to further
@@ -82,7 +83,7 @@ export const Error = () => (
 
 export const Blocked = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="stopped">Blocked</IconFeedback>
         <TextBlock size="small">
             Blocked is a policy enforcement situation where the user isn’t
@@ -94,7 +95,7 @@ export const Blocked = () => (
 
 export const Canceled = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="stopped">Canceled</IconFeedback>
         <Button label="Back" />
     </Card>
@@ -102,14 +103,14 @@ export const Canceled = () => (
 
 export const Disabled = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <IconFeedback type="disabled">Disabled</IconFeedback>
     </Card>
 );
 
 export const Complete = () => (
     <Card>
-        <Logo src="/ping-logo.svg" />
+        <Logo src={logo} />
         <TextBlock>Enter the passcode you received to complete authentication.</TextBlock>
         <Form>
             <TextInput type={textInputTypes.PRIMARY} defaultValue="012345" />
