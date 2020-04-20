@@ -9,12 +9,28 @@ import classnames from "classnames";
  *      To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *     Class name(s) to add to the top-level container/div.
+ * @param {bool} [noLeftPadding]
+ *     Removes left padding from component.
  */
 
 const ContentArea = ({
     children,
     className,
     "data-id": dataId,
-}) => (<div data-id={dataId} className={classnames("content-area", className)}>{children}</div>);
+    noLeftPadding,
+}) => (<div data-id={dataId} className={
+    classnames(
+        className,
+        "content-area",
+        {
+            "content-area--no-left-padding": noLeftPadding,
+        }
+    )}>
+    {children}
+</div>);
+
+ContentArea.defaultProps = {
+    noLeftPadding: false,
+};
 
 export default ContentArea;
