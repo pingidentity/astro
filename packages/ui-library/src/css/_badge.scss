@@ -1,3 +1,4 @@
+
 .feature-badge {
     padding: $spacing-xs;
     background: #2a95cc;
@@ -42,6 +43,21 @@
         .feature-badge__label,
         .feature-badge__icon {
             color: $color-strong-neutral-10;
+        }
+
+        // Offset for stroke
+        .feature-badge__icon {
+            top: calc(50% - 1px);
+            left: 15.5px;
+        }
+
+        &:hover {
+            background-color: #2a95cc;
+            border-color: $color-white;
+
+            .feature-badge__icon {
+                color: $color-white;
+            }
         }
     }
 

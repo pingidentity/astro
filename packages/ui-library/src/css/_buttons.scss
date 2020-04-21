@@ -937,6 +937,7 @@ button.tile-button--side-icon {
     & > * {
         flex: 1;
         flex-grow: 0;
+        min-height: 300px;
         flex-basis: calc((100% / 3) - #{$spacing-sm} * 2) !important;
         box-sizing: border-box;
         margin: 0 $spacing-sm $spacing-md $spacing-sm;

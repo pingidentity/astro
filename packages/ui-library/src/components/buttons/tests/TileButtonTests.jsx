@@ -127,7 +127,21 @@ describe("TileButton", () => {
         expect(element.exists()).toEqual(true);
     });
 
-    it("renders the TileGid", function () {
+    it("stops click propagation on TopContent", function () {
+        const stopPropagation = jest.fn();
+        const event = { stopPropagation };
+
+        const component = mount(
+            <TileGrid>
+                <TopContent right="Some text" />
+            </TileGrid>
+        );
+
+        component.find(TopContent).simulate("click", event);
+        expect(stopPropagation).toHaveBeenCalled();
+    });
+
+    it("renders the TileGrid", function () {
         const component = mount(
             <TileGrid>
                 <TileButton />
