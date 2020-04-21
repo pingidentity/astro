@@ -198,7 +198,7 @@ export const TopContent = ({
     left,
     right,
 }) => (
-    <div className="tile-button__top">
+    <div className="tile-button__top" onClick={(e) => e.stopPropagation()}>
         <div className="tile-button__top-left">{left}</div>
         <div className="tile-button__top-right">{right}</div>
     </div>

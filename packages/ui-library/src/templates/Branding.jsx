@@ -26,6 +26,7 @@ import FormTextArea from "ui-library/lib/components/forms/form-text-area";
 import PopoverMenu from "ui-library/lib/components/tooltips/PopoverMenu";
 import RockerButton from "ui-library/lib/components/forms/RockerButton";
 import InputRow from "ui-library/lib/components/layout/InputRow";
+import ConditionalFieldset from "ui-library/lib/components/general/ConditionalFieldset";
 import FormLabel from "../components/forms/FormLabel";
 
 /**
@@ -44,7 +45,6 @@ const THEMES = [
         colors: [
             { color: "#44a19d", title: "Button", id: "button" },
             { color: "#66fcf0", title: "Link", id: "link" },
-            { color: "#c4c6c7", title: "Background Color", id: "background" },
             { color: "#354453", title: "Text", id: "text" },
             { color: "#0a0b10", title: "Error", id: "error" },
             { color: "#edf4e0", title: "Color 1", id: "color1" },
@@ -61,11 +61,15 @@ const THEMES = [
                 style={{ width: "100%", height: "auto" }}
             />
         ),
+        background: "https://assets.pingone.com/ux/branding-themes/0.10.0/mural/bg.jpg",
         colors: [
             { color: "#44a19d", title: "Button", id: "button" },
             { color: "#66fcf0", title: "Link", id: "link" },
-            { color: "#c4c6c7", title: "Background", id: "background" },
             { color: "#354453", title: "Text", id: "text" },
+            { color: "#0a0b10", title: "Error", id: "error" },
+            { color: "#edf4e0", title: "Color 1", id: "color1" },
+            { color: "#d73e87", title: "Color 2", id: "color2" },
+            { color: "#fdffff", title: "Color 3", id: "color3" }
         ],
     },
     {
@@ -77,29 +81,17 @@ const THEMES = [
                 style={{ width: "100%", height: "auto" }}
             />
         ),
+        background: "https://assets.pingone.com/ux/branding-themes/0.10.0/mural/bg.jpg",
         colors: [
             { color: "#44a19d", title: "Button", id: "button" },
             { color: "#66fcf0", title: "Link", id: "link" },
-            { color: "#c4c6c7", title: "Background", id: "background" },
             { color: "#354453", title: "Text", id: "text" },
+            { color: "#0a0b10", title: "Error", id: "error" },
+            { color: "#edf4e0", title: "Color 1", id: "color1" },
+            { color: "#d73e87", title: "Color 2", id: "color2" },
+            { color: "#fdffff", title: "Color 3", id: "color3" }
         ],
     },
-    {
-        title: "Theme Four",
-        description: "This is the description text...",
-        component: (
-            <img
-                src="src/demo/images/theme-preview.png"
-                style={{ width: "100%", height: "auto" }}
-            />
-        ),
-        colors: [
-            { color: "#44a19d", title: "Button", id: "button" },
-            { color: "#66fcf0", title: "Link", id: "link" },
-            { color: "#c4c6c7", title: "Background", id: "background" },
-            { color: "#354453", title: "Text", id: "text" },
-        ],
-    }
 ];
 
 const ColorPickerGroup = ({
@@ -110,7 +102,7 @@ const ColorPickerGroup = ({
     const [hoveredColor, setHoveredColor] = useState(null);
 
     const toggleOpenColor = (id) => {
-        if (!openColor) {
+        if (!openColor && hoveredColor) {
             setOpenColor(id);
         } else {
             setOpenColor(null);
@@ -131,9 +123,12 @@ const ColorPickerGroup = ({
                         color={color.color}
                         onValueChange={(newColor, e) => onValueChange(newColor, e, { id: color.id })}
                         onMouseEnter={() => setHoveredColor(color.id)}
-                        onMouseLeave={() => setHoveredColor(null)}
+                        onMouseLeave={() => {
+                            setHoveredColor(null);
+                        }}
                         labelText={color.title}
                         showLabel={!!openColor || !!hoveredColor}
+                        open={openColor === color.id}
                         onToggle={() => toggleOpenColor(color.id)}
                     />
                 ))
@@ -186,9 +181,11 @@ const BrandingTile = ({
                         topVisible &&
                         <PopoverMenu
                             label={
-                                <Text type={textTypes.SECTIONTITLE}>
-                                    <Icon iconName="kebab" iconSize={Icon.iconSizes.MD} />
-                                </Text>
+                                <Padding left={Padding.sizes.SM} right={Padding.sizes.SM}>
+                                    <Text type={textTypes.SECTIONTITLE}>
+                                        <Icon iconName="kebab" iconSize={Icon.iconSizes.MD} />
+                                    </Text>
+                                </Padding>
                             }
                             noHoverEffect
                             buttons={buttons}
@@ -250,7 +247,7 @@ const NewThemeModal = ({
 }) => (
     <Modal
         modalTitle="New Theme"
-        maximize={true}
+        maximize={false}
         expanded={expanded}
         onClose={onModalClose}
     >
@@ -302,7 +299,7 @@ const PreviewModal = ({
     return (
         <Modal
             modalTitle="Preview"
-            maximize={true}
+            maximize={false}
             expanded={isExpanded}
             onClose={handleModalClose}
         >
@@ -391,6 +388,10 @@ const CustomizeControls = ({
     theme,
 }) => {
     const [customColors, setCustomColors] = useState([]);
+    const [backgroundColor, setBackgroundColor] = useState("#e0e7ec");
+    const [selectedBackground, setSelectedBackground] = useState(
+        theme.background ? 1 : 2
+    );
 
 
     // Watch for prop changes
@@ -417,35 +418,63 @@ const CustomizeControls = ({
             <FlexRow
                 justify={justifyOptions.SPACEBETWEEN}
                 alignment={alignments.TOP}
+                spacing={spacingOptions.MD}
             >
                 <FlexItem basis="100%">
-                    <ColorPickerGroup
-                        colors={customColors}
-                        onValueChange={(color, e, details) => updateColor(color, details.id)}
-                    />
+                    <InputRow>
+                        <ColorPickerGroup
+                            colors={customColors}
+                            onValueChange={(color, e, details) => updateColor(color, details.id)}
+                        />
+                    </InputRow>
                 </FlexItem>
                 <FlexItem basis="100%">
-                    <FlexRow
-                        alignment={alignments.TOP}
-                        flexDirection={flexDirectionOptions.ROW}
-                    >
-                        <FlexItem>
-                            <FileUpload
-                                accept=""
-                                label={<div>Theme Logo</div>}
-                                showThumbnail={true}
-                            />
-                        </FlexItem>
-                        <FlexItem>
-                            <FileUpload
-                                accept=""
-                                label={<div>Background</div>}
-                                showThumbnail={true}
-                            />
-                        </FlexItem>
-                    </FlexRow>
+                    <InputRow>
+                        <FileUpload
+                            label={<div>Logo</div>}
+                            maxFileSizeKb={4096}
+                            showThumbnail={true}
+                            labelMaxFileSize="Max Size 4MB"
+                            accept="image/jpeg, image/jpg, image/png"
+                            labelSelect="Choose a File"
+                            labelRemove="Remove"
+                            defaultImage="src/demo/images/favicon.png"
+                        />
+                    </InputRow>
+                    <InputRow>
+                        <ConditionalFieldset
+                            label="Background"
+                            type={ConditionalFieldset.Types.RADIO}
+                            onValueChange={(value) => setSelectedBackground(value)}
+                            selectedIndex={selectedBackground}
+                        >
+                            <div title="None"></div>
+                            <div title="Image">
+                                <FileUpload
+                                    label={<div>Background</div>}
+                                    maxFileSizeKb={4096}
+                                    showThumbnail={true}
+                                    labelMaxFileSize="Max Size 4MB"
+                                    accept="image/jpeg, image/jpg, image/png"
+                                    labelSelect="Choose a File"
+                                    labelRemove="Remove"
+                                    defaultImage={theme.background}
+                                />
+                            </div>
+                            <div title="Color">
+                                <ColorPicker
+                                    type={pickerTypes.SIMPLE}
+                                    color={backgroundColor}
+                                    onValueChange={(newColor) => setBackgroundColor(newColor)}
+                                    showLabel={false}
+                                />
+                            </div>
+                        </ConditionalFieldset>
+                    </InputRow>
                     <FormTextArea
                         labelText="Footer"
+                        rows={3}
+                        noResize={true}
                         width={InputWidths.MAX}
                     />
                 </FlexItem>
@@ -459,12 +488,23 @@ const Branding = () => {
     const [newThemeOpen, setNewThemeOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
 
-    const _handleThemePreview = (index) => () => {
+    const _handleNewThemePreview = (index) => () => {
         // Close new theme modal if open
         setNewThemeOpen(false);
 
         // Set currently selected theme
         setSelectedTheme(THEMES[index]);
+
+        // Open preview modal
+        setPreviewOpen(true);
+    };
+
+    const _handleThemePreview = (theme) => {
+        // Close new theme modal if open
+        setNewThemeOpen(false);
+
+        // Set currently selected theme
+        setSelectedTheme(theme);
 
         // Open preview modal
         setPreviewOpen(true);
@@ -515,6 +555,7 @@ const Branding = () => {
                         description={theme.description}
                         colors={theme.colors}
                         showTop={true}
+                        onClick={() => _handleThemePreview(theme)}
                     />
                 ))}
                 <NewBrandingTile onClick={() => setNewThemeOpen(true)}/>
@@ -524,7 +565,7 @@ const Branding = () => {
                 expanded={newThemeOpen}
                 onModalClose={() => setNewThemeOpen(false)}
                 themes={THEMES}
-                onClickTheme={(key) => _handleThemePreview(key)}
+                onClickTheme={(key) => _handleNewThemePreview(key)}
             />
 
             <PreviewModal
