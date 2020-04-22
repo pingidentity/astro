@@ -29,173 +29,129 @@ jest.setMock("../../countryCodes", [
 jest.mock("popper.js");
 
 import React from "react";
-import ReactTestUtils from "react-dom/test-utils";
-import TestUtils from "../../../../../testutil/TestUtils";
 import I18nPhoneInput, { I18nPhoneInputStateless } from "../v2";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 
-describe.skip("I18nPhoneInput", function () {
+describe("I18nPhoneInput", function () {
     const defaults = {
         onSearch: jest.fn(),
         onToggle: jest.fn(),
         onValueChange: jest.fn(),
     };
 
-    function getComponent (props) {
-        return ReactTestUtils.renderIntoDocument(
-            <I18nPhoneInput
-                {...defaults}
-                {...props}
-            />
-        );
-    }
+    const shallowMountComponent = props => shallow(
+        <I18nPhoneInput
+            {...defaults}
+            {...props}
+        />
+    ).dive().dive();
 
     it("renders the component", function () {
-        const component = getComponent();
+        const component = shallowMountComponent();
 
-        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-phone-input");
-
-        expect(input).toBeTruthy();
+        expect(component.exists()).toEqual(true);
     });
 
-    it("stateless: renders the component", function () {
-        const component = getComponent({
-            stateless: true
+    it("doesn't show error message for valid phone number", function () {
+        const component = shallowMountComponent({
+            "data-id": "phoneInput",
+            dialCode: "1",
+            phoneNumber: "303 555 5555"
         });
 
-        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-phone-input");
+        const textField = component.find("FormTextField");
 
-        expect(input).toBeTruthy();
+        expect(textField.prop("errorMessage")).toEqual(null);
     });
 
-    it("doesn't show error message", function () {
-        const dataId = "phoneInput",
-            component = getComponent({
-                "data-id": "phoneInput",
-                dialCode: "1",
-                phoneNumber: "303 555 5555"
-            });
+    it("shows error message for invalid phone number", function () {
+        const component = shallowMountComponent({
+            "data-id": "phoneInput",
+            dialCode: "1",
+            phoneNumber: "asdf"
+        });
 
-        const error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
-        expect(error).toBeFalsy();
-    });
+        const textField = component.find("FormTextField");
 
-    it("shows error message", function () {
-        const dataId = "phoneInput",
-            component = getComponent({
-                "data-id": "phoneInput",
-                dialCode: "1",
-                phoneNumber: "asdf"
-            });
-
-        const error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
-        expect(error.textContent).toEqual("Please enter a valid phone number.");
-    });
-
-    it("shows error message when forced", function () {
-        const dataId = "phoneInput",
-            component = getComponent({
-                "data-id": "phoneInput",
-                dialCode: "1",
-                phoneNumber: "303 555 5555"
-            });
-
-        const error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
-        expect(error.textContent).toEqual("Please enter a valid phone number.");
+        expect(textField.prop("errorMessage")).toEqual("Please enter a valid phone number.");
     });
 
     it("prepopulates phone number", function () {
         const phoneNumber = "123 456 7890";
         const inputId = "phoneInput";
 
-        const component = getComponent({
+        const component = shallowMountComponent({
             "data-id": inputId,
             phoneNumber: phoneNumber
         });
 
-        const phoneInput = TestUtils.findRenderedDOMNodeWithDataId(component, inputId + "-phoneNumber" + "-input");
+        const textField = component.find("FormTextField");
 
-        expect(phoneInput.value).toEqual(phoneNumber);
+        expect(textField.prop("value")).toEqual(phoneNumber);
     });
 
     it("updates callback on country select", function () {
-        const component = getComponent({
-            open: true
-        });
+        const component = mount(<I18nPhoneInput {...defaults} open />);
 
-        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        const canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
-        const afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
+        const flag = component.find("[data-id=\"selected-option\"]");
+        const canada = component.find("li[data-id=\"option_ca\"]");
+        const afghanistan = component.find("li[data-id=\"option_af\"]");
 
-        ReactTestUtils.Simulate.click(flag);
+        flag.simulate("click");
 
-        ReactTestUtils.Simulate.click(afghanistan);
-        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "af", dialCode: "93", phoneNumber: "" });
+        afghanistan.simulate("click");
+        expect(defaults.onValueChange).toBeCalledWith({ countryCode: "af", dialCode: "93", phoneNumber: "" });
 
-        ReactTestUtils.Simulate.click(flag);
+        flag.simulate("click");
 
-        ReactTestUtils.Simulate.click(canada);
-        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "ca", dialCode: "1", phoneNumber: "" });
+        canada.simulate("click");
+        expect(defaults.onValueChange).toBeCalledWith({ countryCode: "ca", dialCode: "1", phoneNumber: "" });
     });
 
     it("gets correct country when more than one country has the same dial code", function () {
-        const component = getComponent({
-            open: true
-        });
+        const component = mount(<I18nPhoneInput {...defaults} open />);
 
-        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        const canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
-        const unitedStates = TestUtils.findRenderedDOMNodeWithDataId(component, "country-us");
+        const flag = component.find("[data-id=\"selected-option\"]");
+        const canada = component.find("li[data-id=\"option_ca\"]");
+        const unitedStates = component.find("li[data-id=\"option_us\"]");
 
-        ReactTestUtils.Simulate.click(flag);
+        flag.simulate("click");
 
-        ReactTestUtils.Simulate.click(canada);
-        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "ca", dialCode: "1", phoneNumber: "" });
+        canada.simulate("click");
+        expect(defaults.onValueChange).toBeCalledWith({ countryCode: "ca", dialCode: "1", phoneNumber: "" });
 
-        ReactTestUtils.Simulate.click(flag);
+        flag.simulate("click");
 
-        ReactTestUtils.Simulate.click(unitedStates);
-        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "us", dialCode: "1", phoneNumber: "" });
+        unitedStates.simulate("click");
+        expect(defaults.onValueChange).toBeCalledWith({ countryCode: "us", dialCode: "1", phoneNumber: "" });
     });
 
     it("handles clearing selected country", function () {
         const phoneNumber = "123 456 7890";
+        const onValueChange = jest.fn();
 
-        const component = getComponent({
-            countryCode: "us",
-            phoneNumber: phoneNumber,
-            open: true
-        });
+        const component = mount(
+            <I18nPhoneInput
+                {...defaults}
+                countryCode="us"
+                onValueChange={onValueChange}
+                phoneNumber={phoneNumber}
+                open
+            />
+        );
 
-        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        const flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
+        const flag = component.find("[data-id=\"selected-option\"]");
+        const flagInner = flag.find(".iti-flag");
 
-        expect(flagInner.className).toContain("us");
+        expect(flagInner.prop("className")).toContain("us");
 
-        ReactTestUtils.Simulate.click(flag);
+        flag.simulate("click");
 
-        const noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "none-option");
+        const noCountry = component.find(".none-option").first();
 
-        ReactTestUtils.Simulate.click(noCountry);
-        expect(component.props.onValueChange).toBeCalledWith(
+        noCountry.simulate("click");
+        expect(onValueChange).toBeCalledWith(
             { countryCode: "", dialCode: "", phoneNumber: phoneNumber });
-    });
-
-    it("triggers callback on phone number change", function () {
-        const component = getComponent({
-            "data-id": "phoneInput",
-            dialCode: "1"
-        });
-
-        const phoneInput = TestUtils.findRenderedDOMNodeWithDataId(component, "phoneInput" + "-phoneNumber" + "-input");
-
-        ReactTestUtils.Simulate.change(phoneInput, {
-            target: {
-                value: "111-222"
-            }
-        });
-
-        expect(component.props.onValueChange).toBeCalledWith({ dialCode: "1", phoneNumber: "111-222" });
     });
 
     it("onToggle callback opens and closes component when open is not supplied", function () {
@@ -262,29 +218,33 @@ describe.skip("I18nPhoneInput", function () {
         expect(getStatelessProps().searchString).toBe("");
     });
 
-    it("stateless: triggers onSearch callback when typing and search string provided", function () {
-        const component = getComponent({
-            stateless: true,
-            open: true,
-            searchString: "",
-            searchTime: 0
+    it("passes correct country code if country code provided in props", () => {
+        const component = shallowMountComponent({
+            countryCode: "ca",
+            phoneNumber: "+1 877-898-2905"
         });
 
-        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
-        expect(component.props.onSearch).toBeCalled();
+        const flagList = component.find("CountryFlagList");
+
+        expect(flagList.prop("selectedCountryCode")).toEqual("ca");
     });
 
-    it("gets correct country code if given dial code and phone number for a specific country", () => {
-        const component = getComponent({
-            dialCode: "+1",
-            // This is the main phone number for Ping
-            phoneNumber: "8778982905"
+    it("gets country code based on phone number", () => {
+        const component = shallowMountComponent({
+            phoneNumber: "+1 877-898-2905"
         });
 
-        const usFlag = TestUtils.findRenderedDOMNodeWithClass(component, "selected-option-label us");
+        const flagList = component.find("CountryFlagList");
 
-        expect(usFlag).toBeTruthy();
+        expect(flagList.prop("selectedCountryCode")).toEqual("us");
+    });
+
+    it("doesn't pass selected country if no countryCode or phoneNumber provided", () => {
+        const component = shallowMountComponent();
+
+        const flagList = component.find("CountryFlagList");
+
+        expect(flagList.prop("selectedCountryCode")).toEqual("");
     });
 
 });
