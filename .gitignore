@@ -4,6 +4,8 @@ node_modules
 yarn-error.log
 npm-debug.log
 package-lock.json
+#ignore project level lockfiles
+**/*/yarn.lock
 
 # Mac
 .DS_Store
