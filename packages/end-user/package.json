@@ -21,7 +21,7 @@
     "re-mutable": "^1.2.6",
     "react-color": "^2.18.0",
     "react-portal": "^4.2.0",
-    "react-tooltip": "^3.11.0",
+    "react-tooltip": "3.11.5",
     "styled-components": "^4.3.2",
     "underscore": "^1.9.1"
   },
