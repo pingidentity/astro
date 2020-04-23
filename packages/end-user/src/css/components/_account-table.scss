@@ -46,13 +46,9 @@
     }
 
     &__row-unlink {
-        flex: 2;
+        flex: 0 1 auto;
         text-align: right;
         min-width: 0;
-
-        @media (max-width: $breakpoint-mobile) {
-            flex: 3;
-        }
     }
 
     &__row-details {
