@@ -493,6 +493,14 @@ module.exports = [
                         keywords: ["ColumnLayout"]
                     },
                     {
+                        label: "Content Area",
+                        demo: require("../components/layout/ContentAreaDemo"),
+                        pathToDoc: "components/layout/ContentArea.jsx",
+                        pathToSource: "components_layout_ContentArea.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ContentAreaDemo.jsx.html",
+                        fullscreen: false,
+                    },
+                    {
                         label: "Callout Box",
                         demo: require("../components/layout/CalloutBoxDemo"),
                         pathToDoc: "components/layout/CalloutBox.jsx",

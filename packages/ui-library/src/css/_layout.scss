@@ -804,7 +804,13 @@ $color-grey-minor-1: $color-neutral-30;
     .content-area {
         top: 0;
         left: 0;
+
+        &--no-left-padding {
+            padding: 25px 40px 0 0;
+        }
+
     }
+
 }
 
 @mixin message-button-css {
