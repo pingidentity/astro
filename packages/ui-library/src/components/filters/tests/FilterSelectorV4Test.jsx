@@ -61,6 +61,13 @@ describe("FilterSelector", function () {
         expect(label.textContent).toEqual(labelText);
     });
 
+    it("renders supplied placeholder", function() {
+        const placeholder = "placeholder";
+        const component = getComponent({ options, placeholder, selected: [] });
+        const label = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-filter");
+        expect(label.textContent).toEqual(placeholder);
+    });
+
     it("renders supplied label", function() {
         const labelText = "some label";
         const component = getComponent({ options, label: labelText, selected: ["one", "two"] });

@@ -95,6 +95,8 @@ class FilterSelectorBase extends React.Component {
         description: PropTypes.node,
         labelText: PropTypes.string,
         label: PropTypes.string,
+        placeholder: PropTypes.string,
+        required: PropTypes.bool,
         onValueChange: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
@@ -115,6 +117,8 @@ class FilterSelectorBase extends React.Component {
 
     static defaultProps = {
         "data-id": "filter-selector",
+        placeholder: "Select One",
+        required: false,
         onToggle: _.noop,
         onSearch: _.noop,
         onValueChange: _.noop,
@@ -178,6 +182,8 @@ class FilterSelectorBase extends React.Component {
             description,
             labelText,
             label,
+            placeholder,
+            required,
             selected,
             onToggle,
             onValueChange,
@@ -198,7 +204,8 @@ class FilterSelectorBase extends React.Component {
                             labelText={labelText}
                             description={description}
                             label={label}
-                            placeholder="Select One"
+                            placeholder={placeholder}
+                            required={required}
                             count={selected.length > 0 ? this._getSelectedCount() : -1}
                         />
                     }
