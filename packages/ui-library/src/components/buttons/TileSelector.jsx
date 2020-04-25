@@ -5,18 +5,13 @@ import _ from "underscore";
 import TileButton, { types as buttonTypes } from "./TileButton";
 import TileGroup from "./TileGroup";
 import TilePanel from "./TilePanel";
+import TileSelectorContext, { selectorTypes } from "./TileSelectorContext";
 
 const getPanelPosition = (options, selected) => {
     const selectedPosition = options.findIndex(({ id }) => id === selected);
     return (selectedPosition + 1) <= Math.ceil(options.length / 2)
         ? "left"
         : "right";
-};
-
-const selectorTypes = {
-    ROW: "row",
-    SQUARE: "square",
-    STACKED: "stacked",
 };
 
 /**
@@ -182,17 +177,21 @@ const TileSelector = props => {
         options,
         type
     } = props;
+
     const [buttons, panel] = groups ? renderGroupedOptions(props) : renderOptions(props)(options);
 
     return (
         <div data-id={dataId}>
-            <div className={classnames("tile-selector", className, {
-                "tile-selector--stacked": type === "stacked",
-            })}>
-                {children}
-                {buttons}
-            </div>
-            {panel}
+            <TileSelectorContext.Provider value={type}>
+                <div className={classnames("tile-selector", className, {
+                    "tile-selector--stacked": type === selectorTypes.STACKED,
+                    "tile-selector--action": type === selectorTypes.ACTION
+                })}>
+                    {children}
+                    {buttons}
+                </div>
+                {panel}
+            </TileSelectorContext.Provider>
         </div>
     );
 };
@@ -246,7 +245,7 @@ TileSelector.propTypes = {
         })
     ),
     selected: PropTypes.string,
-    type: PropTypes.oneOf([ "stacked", "row" ]),
+    type: PropTypes.oneOf([ "row", "stacked", "square" ]),
 };
 
 TileSelector.defaultProps = {

@@ -2,7 +2,6 @@ import React from "react";
 import HR from "../../../components/general/HR";
 import TileSelector, {
     TileButton,
-    tileButtonTypes,
     TileGroup,
     selectorTypes
 } from "../../../components/buttons/TileSelector";
@@ -289,50 +288,89 @@ class TileSelectorDemo extends React.Component {
                     ]}
                 />
                 <HR />
-                <TileSelector>
+                <TileSelector
+                    type={selectorTypes.SQUARE}
+                >
                     <TileButton
                         title="Facebook"
                         iconName="facebook"
-                        type={tileButtonTypes.SQUARE}
                     />
                     <TileButton
                         title="Twitter"
                         iconName="twitter"
-                        type={tileButtonTypes.SQUARE}
                     />
                     <TileButton
                         title="LinkedIn"
                         iconName="linkedin"
-                        type={tileButtonTypes.SQUARE}
                     />
                 </TileSelector>
                 <HR />
-                <TileSelector>
+                <TileSelector
+                    type={selectorTypes.SQUARE}
+                >
                     <TileGroup
                         title="Square group"
-                        type={selectorTypes.SQUARE}
                     >
                         <TileButton
                             title="Facebook"
                             iconName="facebook"
-                            type={tileButtonTypes.SQUARE}
                         />
                         <TileButton
                             title="Twitter"
                             iconName="twitter"
-                            type={tileButtonTypes.SQUARE}
                         />
                     </TileGroup>
                     <TileGroup
                         title="Second group"
-                        type={selectorTypes.SQUARE}
                     >
                         <TileButton
                             title="LinkedIn"
                             iconName="linkedin"
-                            type={tileButtonTypes.SQUARE}
                         />
                     </TileGroup>
+                </TileSelector>
+                <HR />
+                <TileSelector
+                    type={selectorTypes.ACTION}
+                >
+                    <TileButton
+                        title="OAuth Authorization Server Settings"
+                        iconName="facebook"
+                    >
+                        Manage global OAuth settings.
+                    </TileButton>
+                    <TileButton
+                        title="OAuth Scopes"
+                        iconName="twitter"
+                    >
+                        Manage the copes that can be requested by OAuth Clients.
+                    </TileButton>
+                    <TileButton
+                        title="Extended Properties"
+                        iconName="linkedin"
+                    >
+                        Define additional opportunities for Connections and OAuth Clients
+                        that can be used in authentication policy decisions.
+                    </TileButton>
+                    <TileButton
+                        title="Data Stores"
+                        iconName="cog"
+                    >
+                        Connect to existing data stores for authentication credential validation and attribute lookup.
+                    </TileButton>
+                    <TileButton
+                        title="Password Credential Validators"
+                        iconName="globe"
+                    >
+                        Manage the way passwords are validated.
+                    </TileButton>
+                    <TileButton
+                        title="Active Directory and Kerberos"
+                        iconName="cog"
+                    >
+                        Manage the integration with Active Directory for Kerberos authentication, such as seamless
+                        authentication from a Microsoft Windows desktop session.
+                    </TileButton>
                 </TileSelector>
             </div>
         );

@@ -1,15 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../TileSelector");
-jest.dontMock("../TileButton");
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import { mount } from "enzyme";
+import _ from "underscore";
+import TestUtils from "../../../testutil/TestUtils";
+import TileSelector, { selectorTypes } from "../TileSelector";
+import TileButton from "../TileButton";
 
 describe("TileSelector", function() {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        TileSelector = require("../TileSelector"),
-        _ = require("underscore");
-
     function getComponent(opts) {
         opts = _.defaults(opts || {}, {
             selected: "webapp",
@@ -45,6 +44,14 @@ describe("TileSelector", function() {
 
         return ReactTestUtils.renderIntoDocument(<div><TileSelector {...opts} /></div>);
     }
+
+    const mountComponent = props => mount(
+        <TileSelector
+            {...props}
+        >
+            <TileButton title="WHY AM I HERE WHAT DO I MEAN" />
+        </TileSelector>
+    );
 
     it("clicks trigger correct callback", function() {
         const callback = jest.fn();
@@ -309,5 +316,37 @@ describe("TileSelector", function() {
         );
 
         expect(noninteractive).toBeTruthy();
+    });
+
+    it("applies row context to TileButton", () => {
+        const component = mountComponent({
+            type: selectorTypes.ROW
+        });
+
+        expect(component.find("RowButton").exists()).toEqual(true);
+    });
+
+    it("applies stacked context to TileButton", () => {
+        const component = mountComponent({
+            type: selectorTypes.STACKED
+        });
+
+        expect(component.find("StackedButton").exists()).toEqual(true);
+    });
+
+    it("applies square context to TileButton", () => {
+        const component = mountComponent({
+            type: selectorTypes.SQUARE
+        });
+
+        expect(component.find("SquareButton").exists()).toEqual(true);
+    });
+
+    it("applies action context to TileButton", () => {
+        const component = mountComponent({
+            type: selectorTypes.ACTION
+        });
+
+        expect(component.find("ActionButton").exists()).toEqual(true);
     });
 });
