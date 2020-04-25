@@ -638,7 +638,13 @@ button.tile-button {
     &__icon {
         font-size: $icon-size;
         color: $color-midnight;
+
+        &--action {
+            font-size: 28px;
+            margin-bottom: $spacing-lg;
+        }
     }
+
     &__icon-container {
         height: $icon-size;
         margin-bottom: $spacing-lg;
@@ -667,6 +673,10 @@ button.tile-button {
 
         line-height: 1.3em;
         text-align: left;
+
+        &--action {
+            text-align: center;
+        }
     }
 
     &__top {
@@ -701,6 +711,10 @@ button.tile-button {
         }
     }
 
+    &__action-title.text-primary {
+        font-weight: 600;
+    }
+
     &--panel {
         @include arrow(20px);
 
@@ -716,6 +730,28 @@ button.tile-button {
         min-height: 165px;
         min-width: 165px;
         padding: 25px;
+    }
+
+    &--action {
+        flex-grow: 0;
+        justify-content: flex-start;
+        margin-bottom: $spacing-xl;
+        min-width: 180px;
+        padding: $spacing-lg $spacing-sm;
+
+        &:hover {
+            box-shadow: 0 2px 5px 0 rgba($color-black, 0.2);
+
+            // Overriding default hover style
+            border: 1px solid $color-accent-neutral-70;
+            .tile-button__icon {
+                color: $color-slate;
+            }
+        }
+
+        &:active {
+            box-shadow: inset 0 2px 5px 0 rgba($color-black, 0.2);
+        }
     }
 }
 
@@ -752,6 +788,15 @@ button.tile-button {
             &:last-child {
                 margin-bottom: 0;
             }
+        }
+    }
+
+    // Putting this here instead of in .tile-button--action due to specificity issues from the rule above
+    &--action {
+        flex-wrap: wrap;
+        > * {
+            flex-grow: 0;
+            margin-right: $spacing-xl;
         }
     }
 

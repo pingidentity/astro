@@ -48,7 +48,8 @@ $default-input-border-radius: 2px;
 .delete-btn,
 .button-menu__button,
 .input-image-thumb,
-.image-icon {
+.image-icon,
+.tile-button {
     &:focus {
         outline-width: 0;
         outline-style: solid;
@@ -70,7 +71,8 @@ $default-input-border-radius: 2px;
     .delete-btn,
     .button-menu__button,
     .input-image-thumb,
-    .image-icon {
+    .image-icon,
+    .tile-button {
         &:focus {
             outline-width: 5px;
         }

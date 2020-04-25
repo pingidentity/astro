@@ -1,21 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import FlexRow, { alignments } from "../layout/FlexRow";
-
-const selectorTypes = {
-    ROW: "row",
-    SQUARE: "square",
-    STACKED: "stacked",
-};
+import TileSelectorContext, { selectorTypes } from "./TileSelectorContext";
 
 function TileGroup({
     children,
     className,
     "data-id": dataId,
     title,
-    type
+    type: propsType
 }) {
+    const type = propsType || useContext(TileSelectorContext) || selectorTypes.ROW;
     return (
         <FlexRow
             className={
@@ -63,8 +59,7 @@ TileGroup.propTypes = {
 };
 
 TileGroup.defaultProps ={
-    "data-id": "tile-group",
-    type: selectorTypes.ROW
+    "data-id": "tile-group"
 };
 
 TileGroup.selectorTypes = selectorTypes;
