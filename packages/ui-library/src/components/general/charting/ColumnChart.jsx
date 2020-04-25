@@ -232,6 +232,16 @@ export default class ColumnChart extends React.Component {
         );
     };
 
+    _getYAxisId = (selectedY) => {
+        const selectedYItem =
+            selectedY !== null
+                ? this.props.legend.find(({ id }) => selectedY.label === id)
+                : null;
+        return selectedYItem
+            ? selectedYItem.yAxisId
+            : BASE_YAXIS_ID;
+    }
+
     _labelTranslate = 0;
 
     render() {
@@ -337,11 +347,7 @@ export default class ColumnChart extends React.Component {
                         {legend.length > 0 && !hasCustomState && selectedX &&
                             <ReferenceLine
                                 x={selectedX.label}
-                                yAxisId={
-                                    legend.find(({ id }) =>
-                                        selectedY.label === id
-                                    ).yAxisId || BASE_YAXIS_ID
-                                }
+                                yAxisId={this._getYAxisId(selectedY)}
                                 stroke={this.props.referenceLineColor}
                                 label={({ viewBox }) => {
                                     // This is awful and I am sorry. It's the only way to find the x coordinate
