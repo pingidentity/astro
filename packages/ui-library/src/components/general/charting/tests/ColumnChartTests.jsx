@@ -69,6 +69,18 @@ describe("ColumnChart", () => {
         expect(component.exists()).toEqual(true);
     });
 
+    it("renders the component unstacked", () => {
+        const component = shallow(
+            <ColumnChart
+                {...defaultProps}
+                stacked={false}
+            />
+        );
+
+        expect(component.exists()).toEqual(true);
+    });
+
+
     it("renders the proper number of y-axes", () => {
         const component = shallow(
             <ColumnChart
