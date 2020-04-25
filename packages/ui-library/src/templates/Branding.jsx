@@ -27,6 +27,7 @@ import PopoverMenu from "ui-library/lib/components/tooltips/PopoverMenu";
 import RockerButton from "ui-library/lib/components/forms/RockerButton";
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import ConditionalFieldset from "ui-library/lib/components/general/ConditionalFieldset";
+import ConfirmTooltip from "ui-library/lib/components/tooltips/ConfirmTooltip";
 import FormLabel from "../components/forms/FormLabel";
 
 /**
@@ -35,7 +36,10 @@ import FormLabel from "../components/forms/FormLabel";
 const THEMES = [
     {
         title: "Ping Default",
+        id: "theme1",
         description: "This is the description text...",
+        active: true,
+        customized: false,
         component: (
             <img
                 src="src/demo/images/theme-preview.png"
@@ -54,6 +58,8 @@ const THEMES = [
     },
     {
         title: "Theme Two",
+        id: "theme2",
+        customized: true,
         description: "This is the description text...",
         component: (
             <img
@@ -74,6 +80,8 @@ const THEMES = [
     },
     {
         title: "Theme Three",
+        id: "theme3",
+        customized: true,
         description: "This is the description text...",
         component: (
             <img
@@ -144,28 +152,46 @@ const BrandingTile = ({
     title,
     component,
     onClick,
+    onDelete,
+    customized,
     active,
     showTop,
+    id,
 }) => {
     const [topVisible, setTopVisible] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    const _handleClick = () => {
+        setTopVisible(false);
+        onClick();
+    };
 
     const buttons = [
         {
-            label: "Customize"
+            label: "Customize",
+            onClick: _handleClick
         },
-        {
-            label: "Preview"
-        },
-        {
-            label: "Delete"
-        }
     ];
+
+    if (!customized) {
+        buttons.push({
+            label: "Preview",
+            onClick: _handleClick
+        });
+    }
+
+    if (!active) {
+        buttons.push({
+            label: "Delete",
+            onClick: () => setIsDeleting(true)
+        });
+    }
 
     return (
         <TileButton
-            onClick={onClick}
+            onClick={_handleClick}
             onMouseEnter={() => setTopVisible(true)}
-            onMouseLeave={() => setTopVisible(false)}
+            onMouseLeave={() => { if (!isDeleting) { setTopVisible(false); } }}
         >
             { showTop &&
                 <TopContent
@@ -178,18 +204,46 @@ const BrandingTile = ({
                         />
                     }
                     right={
-                        topVisible &&
-                        <PopoverMenu
-                            label={
-                                <Padding left={Padding.sizes.SM} right={Padding.sizes.SM}>
-                                    <Text type={textTypes.SECTIONTITLE}>
-                                        <Icon iconName="kebab" iconSize={Icon.iconSizes.MD} />
-                                    </Text>
-                                </Padding>
-                            }
-                            noHoverEffect
-                            buttons={buttons}
-                        />
+                        (topVisible && !isDeleting) ? (
+                            <PopoverMenu
+                                label={
+                                    <Padding left={Padding.sizes.SM} right={Padding.sizes.SM}>
+                                        <Text type={textTypes.SECTIONTITLE}>
+                                            <Icon iconName="kebab" iconSize={Icon.iconSizes.MD} />
+                                        </Text>
+                                    </Padding>
+                                }
+                                noHoverEffect
+                                buttons={buttons}
+                            />
+                        ) : (topVisible && isDeleting) ? (
+                            <ConfirmTooltip
+                                placement="bottom right"
+                                label={
+                                    <Padding left={Padding.sizes.SM} right={Padding.sizes.SM}>
+                                        <Text type={textTypes.SECTIONTITLE}>
+                                            <Icon iconName="kebab" iconSize={Icon.iconSizes.MD} />
+                                        </Text>
+                                    </Padding>
+                                }
+                                title="Confirm Delete"
+                                open={true}
+                                onConfirm={() => {
+                                    setIsDeleting(false);
+                                    setTopVisible(false);
+                                    onDelete(id);
+                                }}
+                                onCancel={() => {
+                                    setTopVisible(false);
+                                    setIsDeleting(false);
+                                }}
+                                buttonLabel="Delete"
+                                cancelText="Cancel"
+                                disableSave={false}
+                            >
+                                Are you sure you want to delete this theme?
+                            </ConfirmTooltip>
+                        ) : null
                     }
                 />
             }
@@ -256,6 +310,7 @@ const NewThemeModal = ({
                 <BrandingTile
                     key={theme.title}
                     title={theme.title}
+                    id={theme.id}
                     component={theme.component}
                     description={theme.description}
                     colors={theme.colors}
@@ -277,7 +332,7 @@ const PreviewModal = ({
     theme,
 }) => {
     const [selectedPreviewOption, setSelectedPreviewOption] = useState(
-        { label: "Registration", value: "registration" }
+        { label: "Sign On", value: "signon" }
     );
 
     const [isCustomizing, setisCustomizing] = useState(false);
@@ -332,10 +387,10 @@ const PreviewModal = ({
                 </InputRow>
                 <FormDropDownList
                     options={[
+                        { label: "Sign On", value: "signon" },
                         { label: "Registration", value: "registration" },
-                        { label: "Signup", value: "signup" },
-                        { label: "Error", value: "error" },
-                        { label: "Login", value: "login" },
+                        { label: "Forgot Password", value: "forgotpassword" },
+                        { label: "Error Message", value: "errormessage" },
                     ]}
                     label="Preview"
                     selectedOption={selectedPreviewOption}
@@ -346,9 +401,9 @@ const PreviewModal = ({
 
             {theme.component}
 
-            { isCustomizing && <CustomizeControls theme={theme} /> }
+            { (isCustomizing || theme.customized) && <CustomizeControls theme={theme} /> }
 
-            { !isCustomizing ? (
+            { !isCustomizing && !theme.customized ? (
                 <Padding top={Padding.sizes.XL}>
                     <FlexRow
                         spacing={spacingOptions.SM}
@@ -487,6 +542,7 @@ const Branding = () => {
     const [selectedTheme, setSelectedTheme] = useState({});
     const [newThemeOpen, setNewThemeOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
+    const [userThemes, setUserThemes] = useState(THEMES);
 
     const _handleNewThemePreview = (index) => () => {
         // Close new theme modal if open
@@ -510,6 +566,12 @@ const Branding = () => {
         setPreviewOpen(true);
     };
 
+    const _handleThemeDelete = (id) => {
+        const filteredThemes = userThemes.filter((theme) => theme.id !== id);
+
+        setUserThemes(filteredThemes);
+    };
+
     const _handleThemeCustomize = () => {
         // Close new theme modal if open
         setPreviewOpen(false);
@@ -519,8 +581,15 @@ const Branding = () => {
         <>
             <PageHeader title="Branding & Themes" />
 
-            <Padding bottom={Padding.sizes.LG}>
-                <FormLabel>Brand Settings</FormLabel>
+            <div>
+                <FormTextField
+                    labelText="Company Name"
+                    width={InputWidths.SM}
+                />
+            </div>
+
+            <Padding bottom={Padding.sizes.SM}>
+                <FormLabel>Organization Logo</FormLabel>
             </Padding>
 
             <FlexRow
@@ -546,16 +615,19 @@ const Branding = () => {
             </Padding>
 
             <TileGrid>
-                {THEMES.map((theme, key) => (
+                {userThemes.map((theme) => (
                     <BrandingTile
                         key={theme.title}
                         title={theme.title}
-                        active={key === 0}
+                        id={theme.id}
+                        customized={theme.customized}
+                        active={theme.active}
                         component={theme.component}
                         description={theme.description}
                         colors={theme.colors}
                         showTop={true}
                         onClick={() => _handleThemePreview(theme)}
+                        onDelete={(id) => _handleThemeDelete(id)}
                     />
                 ))}
                 <NewBrandingTile onClick={() => setNewThemeOpen(true)}/>
