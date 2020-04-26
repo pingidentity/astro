@@ -71,7 +71,11 @@ module.exports = class extends React.Component {
     };
 
     getNow = () => {
-        return this.props.utcOffset ? moment().utcOffset(this.props.utcOffset, true) : moment();
+        const now = moment();
+        if (this.props.utcOffset) {
+            now.utcOffset(this.props.utcOffset);
+        }
+        return now;
     }
 
     getDays = () => {
@@ -87,7 +91,7 @@ module.exports = class extends React.Component {
 
         today
             .range(start, end)
-            .by("days", function (day) {
+            .by("days", (day) => {
                 days.push({
                     label: day.format("D"),
                     prev: (day.month() < month && (day.year() <= year)) || day.year() < year,
@@ -96,7 +100,7 @@ module.exports = class extends React.Component {
                     today: day.date() === today.date() && day.month() === today.month(),
                     outOfRange: !CalendarUtils.inDateRange(day, this.props.dateRange)
                 });
-            }.bind(this));
+            });
 
         return days;
     };
@@ -120,8 +124,7 @@ module.exports = class extends React.Component {
 
         /* istanbul ignore next  */
         var currentDate = this.props.date ? this.props.date.clone().format("MMMM") : this.getNow().format("MMMM");
-        var start = this.props.dateRange && this.props.dateRange.startDate && moment(this.props.dateRange.startDate);
-        var end = this.props.dateRange && this.props.dateRange.endDate && moment(this.props.dateRange.endDate);
+        const { startDate, endDate } = this.props.dateRange || {};
 
         return (
             <div data-id={this.props["data-id"]} className="view days-view">
@@ -129,9 +132,10 @@ module.exports = class extends React.Component {
                 <ViewHeader
                     onPrev={this.prev}
                     onNext={this.next}
-                    prevDisabled={start &&
-                        this.props.date.clone().date(1).subtract(1, "months").isBefore(start.date(1))}
-                    nextDisabled={end && this.props.date.clone().date(31).add(1, "months").isAfter(end.date(31))}
+                    prevDisabled={startDate &&
+                        this.props.date.clone().date(1).subtract(1, "months").isBefore(startDate.date(1))}
+                    nextDisabled={endDate &&
+                        this.props.date.clone().date(31).add(1, "months").isAfter(endDate.date(31))}
                     data={currentDate}
                     onClick={this.props.onNextView} />
 

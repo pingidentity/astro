@@ -10,7 +10,6 @@ import YearsView from "./YearsView";
 import CalendarUtils from "./Utils";
 import Translator from "../../util/i18n/Translator.js";
 import PopperContainer from "../tooltips/PopperContainer";
-import { inStateContainer } from "../utils/StateContainer";
 import { InputWidths, InputWidthProptypesAuto, getInputWidthClass } from "../forms/InputWidths";
 import { noop } from "underscore";
 
@@ -136,7 +135,7 @@ var Views = {
  *     }
  */
 
-class BaseCalendar extends React.Component {
+class Calendar extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
@@ -181,30 +180,65 @@ class BaseCalendar extends React.Component {
 
     };
 
+    // runs the date through moment
+    _getDate = (date, utcOffset) => {
+        // we have a habit of passing back stringified time numbers
+        if (date && date.match && date.match(/^\-?[0-9]+$/)) {
+            return this._handleUtcOffset(parseInt(date), utcOffset);
+        }
+        return date ? this._handleUtcOffset(date, utcOffset) : null;
+    };
+
+    _parseDateRange = ({ startDate, endDate } = {}) =>
+        (startDate || endDate)
+            ? ({
+                startDate: startDate ? this._getDate(startDate) : undefined,
+                endDate: endDate ? this._getDate(endDate) : undefined
+            })
+            : undefined;
+
     constructor(props) {
         super(props);
 
         moment.locale(Translator.currentLanguage);
 
+        const now = moment();
+
+        if (props.utcOffset) {
+            // Change the current time to match the current time in the
+            // timezone represented by the UTC offset.
+            now.utcOffset(props.utcOffset);
+        }
+
+        const {
+            initialState = {},
+            date = initialState.date
+        } = props;
+
         this.state = {
-            date: props.date || moment(),
+            date: this._getDate(date, props.utcOffset) || now,
             currentView: props.minView,
             isVisible: false,
         };
     }
 
-    // runs the date through moment
-    _getDate = (date = this.props.date) => {
-        // we have a habit of passing back stringified time numbers
-        if (date && date.match && date.match(/^\-?[0-9]+$/)) {
-            return this._handleUtcOffset(parseInt(date));
+    componentWillReceiveProps({ date: nextDate }) {
+        if (this.props.date !== nextDate) {
+            this.setState({
+                date: this._getDate(nextDate)
+            });
         }
-        return date ? this._handleUtcOffset(date) : null;
-    };
+    }
 
     // formats the date according to the supplied viewing format
-    _getFormattedDate = (date = this._getDate(), format = this.props.format) => {
-        return date ? date.format(format) : "";
+    _getFormattedDate = (date) => {
+        if (date && this.props.format) {
+            return date.format(this.props.format);
+        } else if (date) {
+            return date;
+        } else {
+            return "";
+        }
     };
 
     componentDidMount() {
@@ -250,7 +284,7 @@ class BaseCalendar extends React.Component {
                 currentView: this.state.currentView - 1
             });
         }
-        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+        if (CalendarUtils.inDateRange(this._getDate(date), this._parseDateRange(this.props.dateRange))) {
             this._handleValueChange(date);
         }
 
@@ -263,7 +297,7 @@ class BaseCalendar extends React.Component {
      * @param {Boolean} isDayView [description]
      */
     setDate = (date, isDayView) => {
-        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+        if (CalendarUtils.inDateRange(this._getDate(date), this._parseDateRange(this.props.dateRange))) {
             this._handleValueChange(date);
 
             if (this.props.closeOnSelect && isDayView) {
@@ -290,13 +324,19 @@ class BaseCalendar extends React.Component {
         onInputTextValueChange(inputValue);
     };
 
+    // formats the date according to the provided computable format
+    _getComputableDate = (date) => date.format(this.props.computableFormat);
+
     // handles when a new date is selected
     // updates the text input as well
     _handleValueChange = value => {
         const { onValueChange } = this.props;
 
+        // Doing p-stateful implementation here. Because of the computed format change
+        // below and the fact that the keyboard interactions use this.state.date,
+        // the StateContainer just creates a second source of truth.
         this.setState({
-            date: value,
+            date: this.props.date ? this._getDate(this.props.date) : value,
             inputValue: undefined,
         });
 
@@ -306,15 +346,12 @@ class BaseCalendar extends React.Component {
     }
 
     _handleUtcOffset = (date) => {
-        if (this.props.utcOffset) {
-            return moment(date).utcOffset(this.props.utcOffset);
-        } else {
-            return moment(date);
-        }
+        const convertedDate = moment(date).clone();
+        // .utcOffset doesn't actually change the date if the argument is undefined,
+        // so calling this when there's no utcOffset won't have any effect.
+        convertedDate.utcOffset(this.props.utcOffset);
+        return convertedDate;
     }
-
-    // formats the date according to the provided computable format
-    _getComputableDate = (date) => date.format(this.props.computableFormat);
 
     /**
      * When the input blurs, use it to set the value for the component
@@ -330,10 +367,10 @@ class BaseCalendar extends React.Component {
             newDate = this._handleUtcOffset(moment(date, format, true));
             // if the new date didn't match our format, parse it otherwise
             if (!newDate.isValid()) {
-                newDate = this._handleUtcOffset(moment(date));
+                newDate = this._handleUtcOffset(date);
             }
 
-            if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+            if (CalendarUtils.inDateRange(this._getDate(date), this._parseDateRange(this.props.dateRange))) {
                 this._handleValueChange(newDate);
             }
             this.setState({
@@ -402,17 +439,20 @@ class BaseCalendar extends React.Component {
     _getReference = () => this.reference;
 
     render() {
-
-        const calendarDate = this._getDate() || this._handleUtcOffset();
+        const calendarDate = this._getDate(this.state.date.clone()) || this._handleUtcOffset();
         let view;
+
         const viewProps = {
             date: calendarDate,
             onSetDate: this.setDate,
             onNextView: this.nextView,
-            dateRange: this.props.dateRange,
+            // Run these through getDate so that they're both moment object going into
+            // the views and they both have the correct UTC offset, if needed.
+            dateRange: this._parseDateRange(this.props.dateRange),
             onPrevView: this.prevView,
             utcOffset: this.props.utcOffset,
         };
+
         switch (this.state.currentView) {
             case Views.DAYS:
                 if (calendarDate.locale) {
@@ -451,7 +491,7 @@ class BaseCalendar extends React.Component {
         );
 
         const inputValue = this.state.inputValue === undefined
-            ? this._getFormattedDate()
+            ? this._getFormattedDate(this._getDate(this.state.date.clone()))
             : this.state.inputValue;
 
         const className = classnames("input-calendar",
@@ -486,7 +526,7 @@ class BaseCalendar extends React.Component {
                         data-id="calendar-input"
                         className="input-calendar-value"
                         name={this.props.name}
-                        value={inputValue}
+                        value={this.props.date === "" ? "" : inputValue}
                         onBlur={this.inputBlur}
                         onChange={this.changeDate}
                         onClick={this.inputClick}
@@ -508,14 +548,6 @@ class BaseCalendar extends React.Component {
         );
     }
 }
-
-const Calendar = inStateContainer([
-    {
-        name: "date",
-        initial: moment(),
-        setter: "onValueChange",
-    },
-])(BaseCalendar);
 
 Calendar.Views = Views;
 Calendar.FormLabel = FormLabel;

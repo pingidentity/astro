@@ -73,29 +73,30 @@ module.exports = {
         }
     },
 
-    inDateRange: function (date, dateRange, unit) {
-        if (!date || !dateRange) {
+    inDateRange: function (date, { startDate, endDate } = {}, unit) {
+        if (!date || (!startDate && !endDate)) {
             return true;
         }
-        var current = moment(date),
-            start = dateRange.startDate && moment(dateRange.startDate),
-            end = dateRange.endDate && moment(dateRange.endDate);
+        // The else cases here are only in case somebody outside the library is using
+        // this function and not passing a moment object.
+        const start = startDate && startDate.clone ? startDate.clone() : moment(startDate);
+        const end = endDate && endDate.clone ? endDate.clone() : moment(endDate);
 
         switch (unit) {
             case "months":
                 // Disregard different date of month when comparing months by setting all to 1
-                if ((start && current.clone().date(1).isBefore(start.date(1))) ||
-                        (end && current.clone().date(1).isAfter(end.date(1)))) {
+                if ((start && date.clone().date(1).isBefore(start.date(1))) ||
+                        (end && date.clone().date(1).isAfter(end.date(1)))) {
                     return false;
                 }
                 break;
             case "years":
-                if ((start && current.clone().year() < start.year()) || (end && current.clone().year() > end.year())) {
+                if ((start && date.clone().year() < start.year()) || (end && date.clone().year() > end.year())) {
                     return false;
                 }
                 break;
             default:
-                if ((start && current.isBefore(start)) || (end && current.isAfter(end))) {
+                if ((start && date.isBefore(start)) || (end && date.isAfter(end))) {
                     return false;
                 }
                 break;
@@ -107,9 +108,12 @@ module.exports = {
         if (module.exports.inDateRange(date, dateRange, unit)) {
             return date;
         } else {
-            var start = dateRange && dateRange.startDate && moment(dateRange.startDate),
-                end = dateRange && dateRange.endDate && moment(dateRange.endDate),
-                nearest = date.clone();
+            const { startDate = {}, endDate = {} } = dateRange || {};
+            // The else cases here are only in case somebody outside the library is using
+            // this function and not passing a moment object.
+            const start = startDate.clone ? startDate.clone() : moment(startDate);
+            const end = endDate.clone ? endDate.clone() : moment(endDate);
+            let nearest = date.clone();
 
             switch (unit) {
                 case "months":

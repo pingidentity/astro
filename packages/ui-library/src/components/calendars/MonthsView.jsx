@@ -70,16 +70,15 @@ module.exports = class extends React.Component {
         });
 
         var currentDate = this.props.date.clone().format("YYYY");
-        var start = this.props.dateRange && this.props.dateRange.startDate && moment(this.props.dateRange.startDate);
-        var end = this.props.dateRange && this.props.dateRange.endDate && moment(this.props.dateRange.endDate);
+        const { startDate, endDate } = this.props.dateRange || {};
 
         return (
             <div data-id={this.props["data-id"]} className="months-view" >
                 <ViewHeader
                     onPrev={this.prev}
                     onNext={this.next}
-                    prevDisabled={start && (this.props.date.year() - 1) < start.year()}
-                    nextDisabled={end && (this.props.date.year() + 1) > end.year()}
+                    prevDisabled={startDate && (this.props.date.year() - 1) < startDate.year()}
+                    nextDisabled={endDate && (this.props.date.year() + 1) > endDate.year()}
                     data={currentDate}
                     onClick={this.props.onNextView} />
 

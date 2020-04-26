@@ -52,7 +52,7 @@ describe("Calendar", function () {
 
     it("renders open state in portal", function () {
         const wrapper = mountComponent({ date: selectedDate });
-        const component = wrapper.childAt(0).childAt(0);
+        const component = wrapper;
 
         component.instance().setState({ isVisible: true });
         wrapper.update();
@@ -803,7 +803,7 @@ describe("Calendar", function () {
         const wrapper = mountComponent({
             date: selectedDate, dateRange: dateRange, onValueChange: callback,
         });
-        const component = wrapper.childAt(0).childAt(0);
+        const component = wrapper;
 
         component.instance().prevView(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
         expect(callback).not.toBeCalled();
@@ -813,7 +813,7 @@ describe("Calendar", function () {
         const wrapper = mountComponent({
             date: selectedDate, onValueChange: callback,
         });
-        const component = wrapper.childAt(0).childAt(0);
+        const component = wrapper;
 
         component.instance().prevView(moment(new Date(2015, 9, 1)));
         expect(callback).toBeCalled();
@@ -823,7 +823,7 @@ describe("Calendar", function () {
         const wrapper = mountComponent({
             date: selectedDate, dateRange: dateRange, onValueChange: callback,
         });
-        const component = wrapper.childAt(0).childAt(0);
+        const component = wrapper;
 
         component.instance().setDate(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
         expect(callback).not.toBeCalled();
@@ -867,6 +867,42 @@ describe("Calendar", function () {
         const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
 
         expect(textInput.value).toBe("03-16-2019");
+    });
+
+    it("returns a utcOffset when utcOffset prop is passed", function() {
+
+        const component = getComponent({
+            date: "02/02/2002",
+            utcOffset: "+05:00",
+            format: "DD-MM-YYYY Z"
+        });
+
+        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
+
+        expect(textInput.value ).toBe("02-02-2002 +05:00");
+
+    });
+
+    it("returns a utcOffset when utcOffset prop is passed wtih a date range", function() {
+
+        const component = getComponent({
+            dateRange: {
+                startDate: new Date(2015, 9, 10), //Oct 10 2015
+                endDate: new Date(2015, 10, 20) //Nov 20 2015
+            },
+            format: "YYYY-MM-DD Z",
+            utcOffset: "+05:00",
+        });
+
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "2015-11-18" } });
+        ReactTestUtils.Simulate.blur(input, {});
+
+        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
+
+        expect(textInput.value ).toBe("2015-11-18 +05:00");
+
     });
 
 });

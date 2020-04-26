@@ -46,7 +46,11 @@ module.exports = class extends React.Component {
     };
 
     getNow = () => {
-        return this.props.utcOffset ? moment().utcOffset(this.props.utcOffset, true) : moment();
+        const now = moment();
+        if (this.props.utcOffset) {
+            now.utcOffset(this.props.utcOffset);
+        }
+        return now;
     }
 
     getYears = () => {
@@ -100,16 +104,15 @@ module.exports = class extends React.Component {
         });
 
         var currentDate = [years[0].label, years[years.length - 1].label].join("-");
-        var start = this.props.dateRange && this.props.dateRange.startDate && moment(this.props.dateRange.startDate);
-        var end = this.props.dateRange && this.props.dateRange.endDate && moment(this.props.dateRange.endDate);
+        const { startDate, endDate } = this.props.dateRange || {};
 
         return (
             <div data-id={this.props["data-id"]} className="years-view">
                 <ViewHeader
                     onPrev={this.prev}
                     onNext={this.next}
-                    prevDisabled={start && (parseInt(years[0].label) - 1) < start.year()}
-                    nextDisabled={end && (parseInt(years[years.length - 1].label) + 1) > end.year()}
+                    prevDisabled={startDate && (parseInt(years[0].label) - 1) < startDate.year()}
+                    nextDisabled={endDate && (parseInt(years[years.length - 1].label) + 1) > endDate.year()}
                     data={currentDate} />
                 <div
                     className="years"
