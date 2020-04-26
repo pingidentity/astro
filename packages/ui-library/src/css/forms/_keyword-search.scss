@@ -3,13 +3,15 @@
         width: 100%;
     }
 
-    &__box > * {
-        margin: 0;
-        width: 100%;
+    &__box {
+        margin: $spacing-md 0 0 0;
+
+        & > * {
+            width: 100%;
+        }
     }
 
     &__results {
-        line-height: 49px;
         max-height: 60vh;
         overflow-y: scroll;
         position: relative;
@@ -22,7 +24,9 @@
     &__result {
         color: $color-slate;
         display: block;
-        padding: 0 $spacing-sm;
+        height: 20px;
+        padding: $spacing-md $spacing-sm;
+        border-radius: 3px;
 
         &--selected,
         &:hover {
@@ -37,6 +41,26 @@
             padding-top: $spacing-sm;
         }
 
-        border-radius: 3px;
+        &-label {
+            max-width: 55%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    }
+
+    &__result-section {
+        line-height: 13px;
+    }
+
+    &__result-root {
+        line-height: 14px;
+    }
+
+    // Have to do this because of text component specificity
+    &__title.text-component {
+        color: $color-strong-neutral-40;
+        margin-left: 10px;
     }
 }

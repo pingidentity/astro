@@ -31,9 +31,9 @@ describe("SearchUtils", () => {
     ];
 
     it("creates a usable search function with createSearch that retrieves the correct item", () => {
-        const search = createSearch(tree);
+        const [search] = createSearch(tree);
 
-        const results = search("item");
+        const { startsWith } = search("item");
 
         const expected = {
             id: "item",
@@ -43,28 +43,29 @@ describe("SearchUtils", () => {
             root: "column"
         };
 
-        expect(results[0]).toEqual(expected);
+        expect(startsWith[0]).toEqual(expected);
     });
 
     it("returns no results if no match is found", () => {
-        const search = createSearch(tree);
+        const [search] = createSearch(tree);
 
-        const results = search("quack");
+        const { startsWith, contains } = search("quack");
 
-        expect(results).toEqual([]);
+        expect(startsWith).toEqual([]);
+        expect(contains).toEqual([]);
     });
 
     it("returns all results when given empty query", () => {
-        const search = createSearch(tree);
-        const results = search("item");
+        const [search] = createSearch(tree);
+        const { contains, startsWith } = search("item");
 
-        expect(results.length).toEqual(2);
+        expect([...contains, ...startsWith].length).toEqual(2);
     });
 
     it("it sorts matches starting with query before matches containing query", () => {
-        const search = createSearch(tree);
+        const [search] = createSearch(tree);
 
-        const results = search("item");
+        const { startsWith } = search("item");
 
         const expected = {
             id: "item",
@@ -74,15 +75,16 @@ describe("SearchUtils", () => {
             root: "column"
         };
 
-        expect(results[0]).toEqual(expected);
+        expect(startsWith[0]).toEqual(expected);
     });
 
     it("it handles an undefined tree", () => {
-        const search = createSearch(undefined);
+        const [search] = createSearch(undefined);
 
-        const results = search("item");
+        const { startsWith, contains } = search("item");
 
-        expect(results).toEqual([]);
+        expect(startsWith).toEqual([]);
+        expect(contains).toEqual([]);
     });
 
     it("_addToSearchTerms adds to search terms", () => {

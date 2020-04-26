@@ -1,5 +1,5 @@
 import React from "react";
-import NavFrame, { Logo, NavLink, NavMenu, Copyright } from "ui-library/lib/components/panels/NavFrame";
+import NavFrame, { Logo, NavLink, NavMenu, NavSearch, Copyright } from "ui-library/lib/components/panels/NavFrame";
 import GlobalMessage, { messageTypes } from "ui-library/lib/components/general/GlobalMessage";
 
 
@@ -156,6 +156,16 @@ export default class NavFrameDemo extends React.Component {
                     }
                     headerLeft={<Logo id="pingfed" />}
                     headerRight={[
+                        <NavSearch
+                            initialTitle="Previous searches"
+                            initialResults={[145, 1545]}
+                            navTree={this._tempNavTree}
+                            onClose={e => console.log("Closed", e)}
+                            onOpen={e => console.log("Opened", e)}
+                            onSearchClick={result => console.log(result)}
+                            sort={({ startsWith, contains }) => [...startsWith, ...contains]}
+                            title="Results"
+                        />,
                         <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />,
                         <NavMenu
                             iconName="account"
@@ -173,7 +183,7 @@ export default class NavFrameDemo extends React.Component {
                             ]}
                             key="nav-menu"
                             onItemClick={(item) => console.log(item)}
-                        />
+                        />,
                     ]}
                     copyright={<Copyright copyrightYear={2003} />}
                     navTree={this._tempNavTree}

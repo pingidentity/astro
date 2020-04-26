@@ -93,7 +93,7 @@ describe("KeywordSearchView", () => {
         expect(onValueChange).toBeCalled();
     });
 
-    it("should render nav tree above result name", () => {
+    it("should render section title above result name", () => {
         const component = getComponent({
             results: [
                 {
@@ -103,11 +103,11 @@ describe("KeywordSearchView", () => {
             ]
         });
 
-        const icon = TestUtils.findRenderedDOMNodeWithClass(
+        const title = TestUtils.findRenderedDOMNodeWithClass(
             component,
-            "keyword-search__result__nav"
+            "keyword-search__result-label"
         );
 
-        expect(icon).toBeTruthy();
+        expect(title).toBeTruthy();
     });
 });

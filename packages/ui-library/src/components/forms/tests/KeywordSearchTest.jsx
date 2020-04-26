@@ -5,8 +5,8 @@ jest.dontMock("../KeywordSearchView.jsx");
 
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
+import { mount } from "enzyme";
 import KeywordSearch from "../KeywordSearch";
-
 
 describe("KeywordSearch", () => {
     const searchDefaults = {
@@ -20,8 +20,9 @@ describe("KeywordSearch", () => {
                         label: "Section",
                         id: "section",
                         children: [
-                            { label: "Item", id: "item" },
-                            { label: "Item2", id: "item2" }
+                            { label: "Item", id: "item1" },
+                            { label: "A third item, even", id: "item3" },
+                            { label: "Item2", id: "item2" },
                         ]
                     }
                 ],
@@ -33,10 +34,8 @@ describe("KeywordSearch", () => {
     const getComponent = (props) => {
         return ReactTestUtils.renderIntoDocument(
             <KeywordSearch
-                {...{
-                    ...searchDefaults,
-                    ...props
-                }}
+                {...searchDefaults}
+                {...props}
             />
         );
     };
@@ -58,8 +57,8 @@ describe("KeywordSearch", () => {
             { label: "test" }
         );
 
-        expect(component.state.query).toEqual("");
-        expect(component.state.results.length).toEqual(2);
+        expect(component.state.query).toEqual(null);
+        expect(component.state.results.length).toEqual(3);
     });
 
     it("_resultClicked should call onResultClick prop if passed in", () => {
@@ -90,7 +89,7 @@ describe("KeywordSearch", () => {
         const component = getComponent();
         component._onValueChange("item");
 
-        expect(component.state.results.length).toEqual(2);
+        expect(component.state.results.length).toEqual(3);
     });
 
     it("should not have results if a query doesn't match one of its search terms", () => {
@@ -173,4 +172,21 @@ describe("KeywordSearch", () => {
 
         expect(component.state.selectedIndex).toEqual(0);
     });
+
+    it("default sort correctly sorts alphabetically, first by starts with and then contains", () => {
+        const component = mount(
+            <KeywordSearch
+                {...searchDefaults}
+            />
+        );
+
+        component.find("[data-id=\"searchBox-input\"]").simulate("change", { target: { value: "t" } });
+
+        const results = component.find("KeywordSearchView").prop("results");
+
+        expect(results[0].id).toEqual("item1");
+        expect(results[2].id).toEqual("item3");
+    });
+
+
 });

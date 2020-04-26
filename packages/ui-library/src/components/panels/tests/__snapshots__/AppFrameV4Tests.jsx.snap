@@ -40,9 +40,17 @@ Array [
   "searchBox-input",
   "search-result_columna-section-1-item1",
   "link-anchor",
+  "flex-row",
+  "styled-text",
+  "styled-text",
   "search-result_columna-section-2-item2",
   "link-anchor",
+  "flex-row",
+  "styled-text",
+  "styled-text",
   "search-result_columna-undefined-section3",
   "link-anchor",
+  "flex-row",
+  "styled-text",
 ]
 `;

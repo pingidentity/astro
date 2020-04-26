@@ -204,3 +204,19 @@
         color: $color-white;
     }
 }
+
+.nav-search {
+    line-height: 20px;
+}
+
+.nav-search__modal {
+    // Have to do this because of specificity issues with the modal
+    &.modal.dialog .modal-content {
+        width: 600px;
+    }
+}
+
+.nav-search__icon {
+    color: $color-strong-neutral-50;
+    font-size: 20px;
+}
