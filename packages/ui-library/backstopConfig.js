@@ -45,6 +45,7 @@ const getTests = baseUrl => (path = "", tests = []) => {
 
 const skippedDemos = [
     "Calendar",
+    "ChartLayout",
     "Checkbox",
     "Documentation",
     "DashboardLayout",

@@ -4,7 +4,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
+
+    &__chart {
+        max-height: 100%;
+    }
 
     &__loader,
     &__message {

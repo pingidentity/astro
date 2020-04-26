@@ -101,64 +101,124 @@ class ColumnCardDemo extends React.Component {
         const controlLabels = ["1d", "1w"];
 
         return (
-            <ChartWrapper
-                title={<ChartTitle title="Users" />}
-                legend={
-                    <Legend
-                        alignment={legendAlignments.CENTER}
-                        boxAlignment={boxAlignments.CENTER}
-                        data={[
-                            {
-                                color: "#2A713E",
-                                label: "Usage",
-                                value: "0",
-                            },
-                            {
-                                color: "#389251",
-                                label: "Cost",
-                                value: "$0.00",
-                            },
-                            {
-                                color: "#48C06A",
-                                label: "Visitors",
-                                value: "0",
-                            },
-                            {
-                                color: "#5DEB85",
-                                label: "Savings",
-                                value: "$0.00",
-                            },
-                        ]}
-                    />
-                }
-                chart={
-                    <ColumnChart
-                        data={columnData[0].data}
-                        legend={legend}
-                        stacked={false}
-                        renderTooltip={(props, LegendItem) => (
-                            <LegendItem
-                                color={props.color}
-                                label={props.y.label}
-                                value={
-                                    props.y.label === "cost" ||
-                                        props.y.label === "savings"
-                                        ? `$${props.value}`
-                                        : props.value
-                                }
-                            />
-                        )}
-                    />
-                }
-                controls={
-                    <RockerButton
-                        labels={controlLabels}
-                        noMargin
-                        selectedIndex={0}
-                        type={rockerTypes.CHART}
-                    />
-                }
-            />
+            <>
+                <ChartWrapper
+                    title={<ChartTitle title="Users" />}
+                    legend={
+                        <Legend
+                            alignment={legendAlignments.CENTER}
+                            boxAlignment={boxAlignments.CENTER}
+                            data={[
+                                {
+                                    color: "#2A713E",
+                                    label: "Usage",
+                                    value: "0",
+                                },
+                                {
+                                    color: "#389251",
+                                    label: "Cost",
+                                    value: "$0.00",
+                                },
+                                {
+                                    color: "#48C06A",
+                                    label: "Visitors",
+                                    value: "0",
+                                },
+                                {
+                                    color: "#5DEB85",
+                                    label: "Savings",
+                                    value: "$0.00",
+                                },
+                            ]}
+                        />
+                    }
+                    chart={
+                        <ColumnChart
+                            data={columnData[0].data}
+                            legend={legend}
+                            stacked={false}
+                            renderTooltip={(props, LegendItem) => (
+                                <LegendItem
+                                    color={props.color}
+                                    label={props.y.label}
+                                    value={
+                                        props.y.label === "cost" ||
+                                            props.y.label === "savings"
+                                            ? `$${props.value}`
+                                            : props.value
+                                    }
+                                />
+                            )}
+                        />
+                    }
+                    controls={
+                        <RockerButton
+                            labels={controlLabels}
+                            noMargin
+                            selectedIndex={0}
+                            type={rockerTypes.CHART}
+                        />
+                    }
+                />
+                <ChartWrapper
+                    title={<ChartTitle title="Users" />}
+                    legend={
+                        <Legend
+                            alignment={legendAlignments.CENTER}
+                            boxAlignment={boxAlignments.CENTER}
+                            data={[
+                                {
+                                    color: "#2A713E",
+                                    label: "Usage",
+                                    value: "0",
+                                },
+                                {
+                                    color: "#389251",
+                                    label: "Cost",
+                                    value: "$0.00",
+                                },
+                                {
+                                    color: "#48C06A",
+                                    label: "Visitors",
+                                    value: "0",
+                                },
+                                {
+                                    color: "#5DEB85",
+                                    label: "Savings",
+                                    value: "$0.00",
+                                },
+                            ]}
+                        />
+                    }
+                    chart={
+                        <ColumnChart
+                            data={columnData[0].data}
+                            legend={legend}
+                            renderTooltip={(props, LegendItem) => (
+                                <LegendItem
+                                    color={props.color}
+                                    label={props.y.label}
+                                    value={
+                                        props.y.label === "cost" ||
+                                            props.y.label === "savings"
+                                            ? `$${props.value}`
+                                            : props.value
+                                    }
+                                />
+                            )}
+                        />
+                    }
+                    controls={
+                        <RockerButton
+                            labels={controlLabels}
+                            noMargin
+                            selectedIndex={0}
+                            type={rockerTypes.CHART}
+                        />
+                    }
+                />
+            </>
+
         );
     }
 }
