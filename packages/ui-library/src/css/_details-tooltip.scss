@@ -17,6 +17,9 @@
         *[x-placement^='bottom'] & {
             @include makePointer($arrow-height, $color-walrus, up);
         }
+        *[x-placement^='bottom'].details-tooltip--no-header & {
+            @include makePointer($arrow-height, $color-white, up);
+        }
         *[x-placement^='bottom'].link-dropdown-list &,
         *[x-placement^='bottom'].input-selection-list-tooltip & {
             @include makeBorderedPointer($arrow-height, $color-white, $popup-border-color, up);
