@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import Button from "../buttons/Button";
+import DetailsTooltip from "../tooltips/DetailsTooltip";
 import HR, { spacings } from "../general/HR";
 import Chip, { chipColors, chipTypes } from "../layout/Chip";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
@@ -113,6 +114,7 @@ class ExpandableCardStateless extends Component {
             onDelete,
             showDelete,
             deleteButton,
+            infoMessage,
 
             isEditEnabled,
             showEdit,
@@ -168,10 +170,30 @@ class ExpandableCardStateless extends Component {
                         </div>
                     </div>
                     <div className="expandable-card__footer">
-                        <Button
-                            iconName="download-box"
-                            inline
-                        />
+                        {/* Tyler did this. It is very bad. He will remove it by 5-8-2020 or finder of this gets $5 */}
+                        <style dangerouslySetInnerHTML={{ __html: `
+                                .expandable-card-special-temporary-button-icon-override button {
+                                    overflow: hidden;
+                                }
+                            ` }} />
+                        <span className="expandable-card-special-temporary-button-icon-override">
+                            <DetailsTooltip
+                                placement="top right"
+                                label={
+                                    <Button
+                                        inline
+                                        className="button--circle"
+                                    >
+                                        <div className="icon-info" style={{ transform: "scale(2.1)" }} />
+
+                                    </Button>
+                                }
+                                width="large"
+                            >
+                                {infoMessage}
+                            </DetailsTooltip>
+
+                        </span>
                         {showDelete && (deleteButton || (
                             <Button
                                 iconName="delete"
@@ -215,6 +237,7 @@ ExpandableCardStateless.propTypes = {
     cardAccessories: PropTypes.node,
     cardControls: PropTypes.node,
     onDelete: PropTypes.func,
+    infoMessage: PropTypes.node, //This is a temp prop removed in next release
     showDelete: PropTypes.bool,
     deleteButton: PropTypes.node,
     isEditEnabled: PropTypes.bool,

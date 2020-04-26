@@ -324,7 +324,8 @@ class DetailsTooltipStateless extends React.Component {
                     this.props.className,
                     getDetailsWidth(this.props.width),
                     {
-                        "input-selection-list-tooltip": this.props.type === popupTypes.SELECTION_LIST
+                        "input-selection-list-tooltip": this.props.type === popupTypes.SELECTION_LIST,
+                        "details-tooltip--no-header": !this.props.title
                     }
                 )}
                 pointerClassName="details-tooltip-display__pointer"
