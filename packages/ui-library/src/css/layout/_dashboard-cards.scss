@@ -309,6 +309,14 @@ $fullwidthBreakpoint: 950px;
 
 }
 
+// TODO: Take this out because it's shameful and wrong. Just here as a stopgap,
+// since we're replacing the DashboardCards with a grid system soon.
+.dashboard-card {
+    .chart-wrapper {
+        height: 100%;
+    }
+}
+
 .dashboard-card-row {
     margin-bottom: $spacing-md;
 

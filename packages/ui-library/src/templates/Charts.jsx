@@ -240,11 +240,12 @@ class Charts extends React.Component {
                                     height={200}
                                     data={data.chartData}
                                     legend={data.legendData}
-                                    theme={data.legendData.length > 0 &&
-                                        generateTheme(
+                                    theme={data.legendData.length > 0
+                                        ? generateTheme(
                                             data.legendData[0].color,
                                             data.legendData
                                         )
+                                        : null
                                     }
                                 />
                             );}}

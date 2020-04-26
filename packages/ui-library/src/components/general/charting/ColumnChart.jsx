@@ -315,7 +315,7 @@ export default class ColumnChart extends React.Component {
                                     key={id}
                                     stackId={this.props.stacked ? "a" : id}
                                     maxBarSize={60}
-                                    background ={{ fillOpacity: 0, strokeOpacity: 0 }} //empty background so we can hover on whole row
+                                    background ={!this.props.stacked && { fillOpacity: 0, strokeOpacity: 0 }} //empty background so we can hover on whole row
                                     onClick={this._handleClick(id)}
                                     onMouseOver={this._handleMouseOver(id)}
                                     onMouseOut={this._handleMouseOut}
@@ -332,11 +332,13 @@ export default class ColumnChart extends React.Component {
                                             return (
                                                 <Cell
                                                     key={item.name}
-                                                    stroke = {selectedX &&
+                                                    style={{
+                                                        stroke: selectedX &&
                                                         selectedX.label === item.name &&
                                                         selectedY.label === id
-                                                        ? Color(color).lighten(0.5)
-                                                        : color}
+                                                            ? Color(color).lighten(0.5)
+                                                            : color
+                                                    }}
                                                     strokeWidth= "1px"
                                                     fill={color}
                                                 />
