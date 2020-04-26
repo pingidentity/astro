@@ -1,9 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useRef } from "react";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 import Link from "../general/Link";
+import FlexRow, { alignments, spacingOptions } from "../layout/FlexRow";
 import FormSearchBox from "./FormSearchBox";
-import classNames from "classnames";
+import InputWidths from "./InputWidths";
+import Text, { textTypes } from "../general/Text";
 
 const KeywordSearchView = ({
     className,
@@ -13,53 +15,57 @@ const KeywordSearchView = ({
     onValueChange,
     queryString,
     results,
-    selectedIndex
+    selectedIndex,
+    title,
 }) => {
-    let _selected = null;
-    let _container = null;
-
-    const _getNav = (root, section) => {
-        const nav =
-            [root, section]
-                .filter(node => node)
-                .join(" > ");
-
-        return (
-            <div className="keyword-search__result__nav">
-                {nav}
-            </div>
-        );
-    };
+    const selectedRef = useRef();
+    const containerRef = useRef();
 
     const _renderSearchResult = (result, idx) => {
         const {
+            id,
             label,
             root,
             section
         } = result;
 
         const resultClicked = () => onResultClick(result);
-        const nav = _getNav(root, section);
         const isSelected = idx === selectedIndex;
         const resultClass = `keyword-search__result ${isSelected ? "keyword-search__result--selected" : ""}`;
 
-        const title = (
-            <div ref={ref => _selected = isSelected ? ref : _selected } >
-                {nav}
-                {label}
-            </div>
+        const resultTitle = (
+            <FlexRow alignment={alignments.BOTTOM} spacing={spacingOptions.XS}>
+                <div
+                    className="keyword-search__result-label"
+                    {...isSelected ? { ref: selectedRef } : {}}
+                >
+                    {`${label} - `}
+                </div>
+                {section &&
+                <Text
+                    className="keyword-search__result-section"
+                    inline
+                    type={textTypes.LABEL}
+                >{`${section}  > `}</Text>}
+                <Text
+                    className="keyword-search__result-root"
+                    inline
+                    type={textTypes.PARENTLABEL}
+                >
+                    {root}
+                </Text>
+            </FlexRow>
         );
 
         const sanitizedLabel = label.toLowerCase().replace(/[^0-9a-z]/gi, "");
 
         return (
-            <li key={`${root}-${section}-${sanitizedLabel}`}>
+            <li key={id}>
                 <Link
                     className={resultClass}
                     data-id={`search-result_${root}-${section}-${sanitizedLabel}`}
                     focusable
-                    key={`Result ${idx}`}
-                    title={title}
+                    title={resultTitle}
                     onClick={resultClicked}
                     type="block"
                 />
@@ -71,13 +77,14 @@ const KeywordSearchView = ({
 
     /* istanbul ignore next */
     const scrollResultIntoView = () => {
-        if (_selected) {
+        const selected = selectedRef.current;
+        if (selected) {
             const {
-                offsetHeight: containerHeight,
-                scrollTop: containerScroll
-            } = ReactDOM.findDOMNode(_container);
-
-            const selected = ReactDOM.findDOMNode(_selected);
+                current: {
+                    offsetHeight: containerHeight,
+                    scrollTop: containerScroll
+                }
+            } = containerRef;
 
             const scrollDifference = selected.offsetTop - containerScroll;
 
@@ -99,8 +106,17 @@ const KeywordSearchView = ({
                 onKeyDown={onKeyDown}
                 onValueChange={onValueChange}
                 ref={search => search && search.searchBoxFocus()}
+                width={InputWidths.AUTO}
             />
-            <ul className="keyword-search__results" ref={ref => _container = ref }>
+            {title &&
+                <Text
+                    className="keyword-search__title"
+                    type={textTypes.SECTIONTITLE}
+                >
+                    {title}
+                </Text>
+            }
+            <ul className="keyword-search__results" ref={containerRef}>
                 {results.map(_renderSearchResult)}
             </ul>
         </div>

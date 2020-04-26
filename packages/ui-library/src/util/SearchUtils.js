@@ -164,10 +164,10 @@ const _checkForMatch = searchTerms => possibleResults => query => {
         }
     }, { startsWith: [], contains: [] });
 
-    return [
-        ...startsWith.sort(_sort),
-        ...contains.sort(_sort)
-    ];
+    return {
+        startsWith,
+        contains
+    };
 };
 
 /**
@@ -183,7 +183,7 @@ export const createSearch = (tree = []) => {
         searchTerms
     } = _buildSearchProps(tree);
 
-    return _checkForMatch(searchTerms)(possibleResults);
+    return [_checkForMatch(searchTerms)(possibleResults), possibleResults];
 };
 
 // Would use string.contains() here, but Jest doesn't like it. Probably related to our Node.js version.

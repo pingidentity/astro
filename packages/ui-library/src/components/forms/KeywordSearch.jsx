@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { noop } from "underscore";
 import KeywordSearchView from "./KeywordSearchView";
 import {
     isArrowDown,
@@ -27,11 +28,23 @@ import { createSearch } from "../../util/SearchUtils";
  *
  */
 
+export const defaultSort = ({ startsWith, contains }) => {
+    const sort = ({ id: a }, { id: b }) => a > b ? 1 : -1;
+    return [
+        ...startsWith.sort(sort),
+        ...contains.sort(sort)
+    ];
+};
+
 export default class KeywordSearch extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        initialResults: PropTypes.arrayOf(PropTypes.string),
+        onResultClick: PropTypes.func,
         searchBuffer: PropTypes.number,
+        sort: PropTypes.func,
+        title: PropTypes.node,
         tree: PropTypes.arrayOf(
             PropTypes.shape({
                 children: PropTypes.array,
@@ -39,38 +52,60 @@ export default class KeywordSearch extends React.Component {
                 label: PropTypes.string.isRequired,
             })
         ).isRequired,
-        onResultClick: PropTypes.func
     }
 
     static defaultProps = {
         "data-id": "keyword-search",
-        searchBuffer: 0
+        searchBuffer: 0,
+        sort: defaultSort
     }
 
-    checkForMatch = createSearch(this.props.tree)
+    searchTree = noop
+    resultsIndex = {}
+    createSearchAndIndex = props => {
+        const [search, resultsIndex] = createSearch(props.tree);
+        this.searchTree = search;
+        this.resultsIndex = resultsIndex;
+    }
 
-    state = {
-        query: "",
-        results: this.checkForMatch(""),
-        selectedIndex: 0
+    checkForMatch = term => this.props.sort(this.searchTree(term))
+
+    getInitialResults = () =>
+        this.props.initialResults
+            ? this.props.initialResults.map(id => this.resultsIndex[id])
+            : this.checkForMatch("")
+
+    constructor(props) {
+        super(props);
+
+        this.createSearchAndIndex(props);
+        this.state = {
+            query: null,
+            results: this.getInitialResults(),
+            selectedIndex: 0
+        };
+    }
+
+    componentDidUpdate({ navTree: prevNavTree }) {
+        if (prevNavTree !== this.props.navTree) {
+            this.createSearchAndIndex(this.props);
+        }
     }
 
     _resetSearch = () => this.setState({
-        query: "",
-        results: this.checkForMatch(""),
+        query: null,
+        results: this.getInitialResults(),
         selectedIndex: 0
     })
 
     _onKeyDown = ({ keyCode }) => {
         if (isArrowUp(keyCode)) {
-            this.setState(({ selectedIndex, ...previous }) => ({
-                ...previous,
+            this.setState(({ selectedIndex }) => ({
                 selectedIndex: selectedIndex === 0 ? 0 : selectedIndex - 1
             }));
         } else if (isArrowDown(keyCode)) {
             /* istanbul ignore next */
-            this.setState(({ results, selectedIndex, ...previous }) => ({
-                ...previous,
+            this.setState(({ results, selectedIndex }) => ({
                 selectedIndex: selectedIndex === results.length - 1 ? results.length - 1 : selectedIndex + 1
             }));
         } else /* istanbul ignore next */ if (isEnter(keyCode)) {
@@ -95,12 +130,12 @@ export default class KeywordSearch extends React.Component {
             query.length >= this.props.searchBuffer
                 ? this.checkForMatch(query)
                 : [];
-
-        this.setState(() => ({
+                
+        this.setState({
             results: resultsFromStore,
             selectedIndex: 0,
             query
-        }));
+        });
     };
 
     _resultClicked = (result) => {
@@ -114,10 +149,17 @@ export default class KeywordSearch extends React.Component {
     }
 
     render () {
+        const {
+            className,
+            "data-id": dataId,
+            title,
+            initialTitle = title,
+        } = this.props;
+
         return (
             <KeywordSearchView
-                className={this.props.className}
-                data-id={this.props["data-id"]}
+                className={className}
+                data-id={dataId}
                 onKeyDown={this._onKeyDown}
                 onResultClick={this._resultClicked}
                 onResultRender={this._onResultRender}
@@ -125,6 +167,7 @@ export default class KeywordSearch extends React.Component {
                 queryString={this.state.query}
                 results={this.state.results}
                 selectedIndex={this.state.selectedIndex}
+                title={this.state.query === null ? initialTitle : title}
             />
         );
     }

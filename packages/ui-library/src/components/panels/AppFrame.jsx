@@ -265,6 +265,7 @@ class AppFrame extends React.Component {
             const closeModal = () => this.setState({ searchOpen: false });
             return (
                 <Modal
+                    className="nav-search__modal"
                     closeOnBgClick={true}
                     expanded={true}
                     modalTitle="Search"

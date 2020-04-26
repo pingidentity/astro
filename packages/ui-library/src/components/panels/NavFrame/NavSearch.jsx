@@ -11,30 +11,39 @@ import { inStateContainer } from "../../utils/StateContainer";
 
 const NavSearchBase = ({
     "data-id": dataId,
+    initialTitle,
+    initialResults,
     navTree,
     open,
     onClose,
     onOpen,
-    onSearchClick
+    onSearchClick,
+    sort,
+    title,
 }) => (
-    <div>
+    <div className="nav-search">
         <Icon
+            className="nav-search__icon"
             data-id={dataId}
             iconName="search"
             onClick={onOpen}
             type="leading"
         />
         <Modal
+            className="nav-search__modal"
             closeOnBgClick
             expanded={open}
             modalTitle="Search"
             type="dialog"
             onClose={onClose}
-            flags={["p-stateful", "use-portal"]}
         >
             <KeywordSearch
                 data-id="app-frame-search"
+                initialResults={initialResults}
+                initialTitle={initialTitle}
                 onResultClick={onSearchClick}
+                sort={sort}
+                title={title}
                 tree={navTree}
             />
         </Modal>
