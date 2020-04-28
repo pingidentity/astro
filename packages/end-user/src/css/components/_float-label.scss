@@ -12,25 +12,31 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 }
 
 .float-label__label {
-    color: $input-placeholder-color;
+        color: $input-placeholder-color;
 
-    transition: 0.05s;
+        transition: 0.05s;
 
-    display: block;
-    position: absolute;
-    font-size: 10px;
-    font-family: $font-default;
+        display: block;
+        position: absolute;
+        font-size: 10px;
+        font-family: $font-default;
 
-    top: 0;
-    left: 0;
-    right: 0;
-    margin-top: $spacing-xs + 1px;
-    margin-left: $spacing-sm;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin-top: $spacing-xs + 1px;
+        margin-left: $spacing-sm;
 
-    pointer-events: none;
-    z-index: 0;
+        pointer-events: none;
+        z-index: 0;
 
-    cursor: text;
+        cursor: text;
+}
+
+.float-label {
+    :-ms-input-placeholder {
+        color: rgba(0, 0, 0, 0);
+    }
 }
 
 .float-label__input, .float-label .float-label__input {
@@ -38,7 +44,7 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
     padding-bottom: $float-label-input-padding-bottom;
 
     &::placeholder {
-        color: rgba(255,255,255,0);
+        color: rgba(0, 0, 0, 0);
     }
 }
 
@@ -46,26 +52,27 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
     color: $input-focus-border-color;
 }
 
-/* doing this as a mixin because IE has an issue with the placeholder-shown selector */
 @mixin placeholderShown {
     padding-top: $input-padding-vertical;
     padding-bottom: $input-padding-vertical;
     padding-left: $spacing-sm;
 
     & + .float-label__label {
-        @extend %placeholder-text;
-
         margin-top: $input-padding-vertical + 1px;
         margin-left: $input-padding-horizontal + 1px;
     }
 }
 
-.float-label__input:placeholder-shown {
-    @include placeholderShown;
-}
+.placeholder-shown {
+    .float-label__input {
+        @include placeholderShown;
+    }
 
-.float-label__input.placeholder-shown {
-    @include placeholderShown;
+    .float-label__label {
+        @extend %input-text;
+        font-weight: $input-font-weight;
+        text-transform: none;
+    }
 }
 
 input:-webkit-autofill ~ .float-label__label,
