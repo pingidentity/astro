@@ -8,6 +8,6 @@ export default {
 
 export const Default = () => (
     <FloatLabelTextInput
-        label="Password"
+        label="Username"
     />
 );
