@@ -22,9 +22,9 @@ export const textInputFormats = {
 };
 
 const inputmodeByFormats = {
-    [textInputFormats.TEXT]: { inputmode: 'text' },
-    [textInputFormats.NUMERIC]: { inputmode: 'numeric', pattern: '\d*', novalidate: true },
-    [textInputFormats.EMAIL]: { inputmode: 'email' },
+    [textInputFormats.TEXT]: { inputMode: 'text' },
+    [textInputFormats.NUMERIC]: { inputMode: 'numeric', pattern: '\d*', noValidate: true },
+    [textInputFormats.EMAIL]: { inputMode: 'email' },
     [textInputFormats.DEFAULT]: {}
 };
 

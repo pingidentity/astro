@@ -51,23 +51,23 @@ describe('TextInput', () => {
         it('numeric', () => {
             const wrapper = getComponent({ format: textInputFormats.NUMERIC });
             const input = getInput(wrapper);
-            expect(input.props().inputmode).toEqual('numeric');
+            expect(input.props().inputMode).toEqual('numeric');
             expect(input.props().pattern).toEqual('\d*');
-            expect(input.props().novalidate).toBe(true);
+            expect(input.props().noValidate).toBe(true);
         });
         it('text', () => {
             const wrapper = getComponent({ format: textInputFormats.TEXT });
             const input = getInput(wrapper);
-            expect(input.props().inputmode).toEqual('text');
+            expect(input.props().inputMode).toEqual('text');
             expect(input.props().pattern).toBeUndefined();
-            expect(input.props().novalidate).toBeUndefined();
+            expect(input.props().noValidate).toBeUndefined();
         });
         it('email', () => {
             const wrapper = getComponent({ format: textInputFormats.EMAIL });
             const input = getInput(wrapper);
-            expect(input.props().inputmode).toEqual('email');
+            expect(input.props().inputMode).toEqual('email');
             expect(input.props().pattern).toBeUndefined();
-            expect(input.props().novalidate).toBeUndefined();
+            expect(input.props().noValidate).toBeUndefined();
         });
     });
 });
