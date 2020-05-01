@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import Preview, { Frame, EndUserSandbox } from './Preview';
+import Preview, { Frame, EndUserSandbox, ThemeStyles } from './Preview';
 
 window.__DEV__ = true;
 
@@ -28,6 +28,10 @@ const getPreview = props => shallow(
     <Preview {...defaultProps} {...props}>
         <p>Some text...</p>
     </Preview>
+);
+
+const getThemeStyles = props => shallow(
+    <ThemeStyles {...props} />
 );
 
 describe('Frame', () => {
@@ -126,8 +130,8 @@ describe('Preview', () => {
 
     it('adds custom theme CSS', () => {
         const path = 'http://example.com/example.css';
-        const wrapper = getPreview({
-            themeStyleSheet: path,
+        const wrapper = getThemeStyles({
+            stylesheet: path,
         });
 
         const preview = wrapper.children();
@@ -145,7 +149,7 @@ describe('Preview', () => {
         expect(wrapper.props().style.opacity).toEqual(0);
 
         const preview = wrapper.children();
-        const link = preview.find('link');
+        const link = preview.find(ThemeStyles);
 
         link.simulate('load');
 

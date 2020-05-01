@@ -3,12 +3,12 @@ $THEME_NAME: 'slate';
 $colors: getThemeColors($THEME_NAME);
 $images: getThemeImages($THEME_NAME);
 
+@include base($images, $colors);
+
+/**
+ * Styles
+ */
 body {
-    background: url(map-get($images, 'background'));
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: map-get($colors, 'bodyText');
     text-align: left;
 }
 
@@ -16,11 +16,13 @@ body {
     height: auto;
     max-width: 40%;
     margin-right: 60%;
+    box-shadow: none;
 
-    @media only screen and (max-width: 600px) {
+    @media all and (max-width: 600px) {
         margin: 10px;
         width: calc(100% - 20px);
         max-width: calc(100% - 20px);
+        height: calc(100% - 20px);
     }
 }
 
@@ -72,13 +74,14 @@ body {
     margin-bottom: 15px;
     font-size: 20px;
     font-weight: 600;
-    color: map-get($colors, 'headingText');
 }
 
-.feedback--error,
-.feedback__icon {
-    font-size: 18px;
-    color: #cb0020;
+.branding-template-feedback {
+    .feedback--error,
+    .feedback__icon {
+        font-size: 18px;
+        color: #cb0020;
+    }
 }
 
 .branding-template-form {
@@ -89,20 +92,15 @@ body {
     border: 0;
     outline: 0;
     background: transparent;
-    border-bottom: 1px solid map-get($colors, 'button');
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
     border-radius: 0;
 }
 
 .branding-template-primary-button {
     background: transparent;
-    color: map-get($colors, 'buttonText');
-    border-color: map-get($colors, 'button');
     width: 60%;
     font-size: 18px;
-
-    &:hover {
-        color: map-get($colors, 'buttonText');
-    }
 }
 
 .social-button__button {
@@ -112,11 +110,9 @@ body {
 .branding-template-link-text {
     margin: 0 0 5px;
     text-align: left;
-    color: map-get($colors, 'link');
 }
 
 a {
-    color: map-get($colors, 'link');
     text-decoration: underline;
 }
 

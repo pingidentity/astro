@@ -32,8 +32,10 @@
         "meta": {
             "displayName": {
                 "value": "Ping Default"
+            },
+            "cssLink": {
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/default/default.css"
             }
         }
-
     }
 }

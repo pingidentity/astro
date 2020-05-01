@@ -3,19 +3,21 @@ $THEME_NAME: 'focus';
 $colors: getThemeColors($THEME_NAME);
 $images: getThemeImages($THEME_NAME);
 
-body {
-    background: map-get($colors, 'background');
-    color: map-get($colors, 'bodyText');
-}
+@include base($images, $colors);
 
+/**
+ * Styles
+ */
 .card {
     height: auto;
-    width: 450px;
+    max-width: 450px;
     margin-bottom: 20px;
     margin-top: 20px;
     border-radius: 3px;
 
     @media only screen and (max-width: 600px) {
+        height: 100%;
+        max-width: 100%;
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -69,13 +71,13 @@ body {
     margin-bottom: 15px;
     font-size: 20px;
     font-weight: 600;
-    color: map-get($colors, 'headingText');
 }
 
-.feedback--error,
-.feedback__icon {
-    font-size: 18px;
-    color: #4b647d;
+.branding-template-feedback {
+    .feedback--error,
+    .feedback__icon {
+        font-size: 18px;
+    }
 }
 
 .branding-template-form {
@@ -89,11 +91,14 @@ body {
 
 .branding-template-primary-button {
     color: #fff;
-    background: map-get($colors, 'button');
-    border-color: map-get($colors, 'button');
     margin-right: auto;
     margin-left: auto;
     font-weight: 800;
+    border-width: 0;
+
+    &:hover {
+        opacity: 0.9;
+    }
 }
 
 .social-button__button {

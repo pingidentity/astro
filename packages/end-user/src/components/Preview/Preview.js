@@ -3,6 +3,85 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { noop } from 'underscore';
 
+export const applyStyles = (colors, bgImg) => {
+    const cssTemplate = `
+        body {
+            background: ${
+                bgImg ? `url(${bgImg})` : colors.background
+            };
+            color: ${colors.bodyText};
+        }
+
+        .card {
+            background: ${colors.card};
+        }
+
+        .branding-template-heading {
+            color: ${colors.headingText};
+        }
+
+        .text-input {
+            border-color: ${colors.button};
+        }
+
+        .branding-template-logo-container {
+            border-color: ${colors.background};
+        }
+
+        .branding-template-primary-button {
+            color: ${colors.buttonText};
+            background: ${colors.button};
+            border-color: ${colors.button};
+
+            &:hover {
+                color: ${colors.buttonText};
+            }
+        }
+
+        .branding-template-link-text, a {
+            color: ${colors.link};
+        }
+    `;
+
+    return cssTemplate;
+};
+
+export const ThemeStyles = ({
+    stylesheet,
+    styles,
+    onLoad,
+    bgImg,
+}) => {
+    const userStyleElem = React.createElement('style', null, applyStyles(styles, bgImg));
+
+    return (
+        <>
+            {
+                stylesheet &&
+                <link
+                    rel="stylesheet"
+                    type="text/css"
+                    href={stylesheet}
+                    onLoad={onLoad}
+                />
+            }
+            { userStyleElem }
+        </>
+    );
+};
+
+ThemeStyles.propTypes = {
+    bgImg: PropTypes.string,
+    themeStyleSheet: PropTypes.string,
+    userStyles: PropTypes.shape({}),
+    onLoad: PropTypes.func,
+};
+
+ThemeStyles.defaultProps = {
+    onLoad: noop,
+    styles: {},
+};
+
 export class Frame extends React.Component {
     componentDidUpdate() {
         this.paintFrame(this.withSignature(this.props.iframeDidUpdate));
@@ -226,6 +305,19 @@ EndUserSandbox.defaultProps = {
     title: 'End User Sandbox',
 };
 
+export const devices = {
+    DESKTOP: {
+        width: '100%',
+        height: '500px',
+        scale: 1,
+    },
+    MOBILE: {
+        width: '281.25px',
+        height: '500px',
+        scale: 0.8,
+    },
+};
+
 /**
  * Preview an end-user theme with custom styling
  */
@@ -237,42 +329,40 @@ const ThemePreview = ({
     scale,
     themeStyleSheet,
     userStyles,
+    bgImg,
+    device,
     width,
 }) => {
     // Using this to hide the component until the CSS is loaded to avoid FoUC
     const [themeLoaded, setThemeLoaded] = useState(!themeStyleSheet);
 
-    const userStyleElem = React.createElement('style', null, userStyles);
-
     return (
         <div
-            style={{ opacity: themeLoaded ? 1 : 0, textAlign: 'center' }}
+            style={{
+                opacity: themeLoaded ? 1 : 0,
+                textAlign: 'center'
+            }}
             data-id={dataId}
         >
             <EndUserSandbox
                 title="Preview"
                 style={{
-                    boxShadow: '0 1px 4px 1px rgba(121,128,135,.35)',
+                    boxShadow: '0 1px 4px 1px rgba(121, 128, 135,.35)',
                     marginLeft: 'auto',
                     marginRight: 'auto',
                     pointerEvents: interactive ? 'all' : 'none',
                 }}
-                userStyles={userStyles}
-                width={width}
-                height={height}
-                scale={scale}
+                width={device ? device.width : width}
+                height={device ? device.height : height}
+                scale={device ? device.scale : scale}
             >
-                {
-                    themeStyleSheet &&
-                        <link
-                            rel="stylesheet"
-                            type="text/css"
-                            href={themeStyleSheet}
-                            onLoad={() => setThemeLoaded(true)}
-                        />
-                }
+                <ThemeStyles
+                    stylesheet={themeStyleSheet}
+                    onLoad={() => setThemeLoaded(true)}
+                    styles={userStyles}
+                    bgImg={bgImg}
+                />
                 {children}
-                {userStyleElem}
             </EndUserSandbox>
         </div>
     );
@@ -280,9 +370,17 @@ const ThemePreview = ({
 
 ThemePreview.propTypes = {
     /**
+     * Background image for the component
+     */
+    bgImg: PropTypes.string,
+    /**
      * Sets a data-id property on the Preview to be used as a test hook
      */
     'data-id': PropTypes.string,
+    /**
+     * Preconfigured widths and heights for Preview
+     */
+    device: PropTypes.oneOf(Object.values(devices)),
     /**
      * Allows for cursor events
      */
@@ -302,7 +400,7 @@ ThemePreview.propTypes = {
     /**
      * Style over-rides from user prefrences
      */
-    userStyles: PropTypes.string,
+    userStyles: PropTypes.shape({}),
     /**
      * Width for the Frame
      */
@@ -312,7 +410,7 @@ ThemePreview.propTypes = {
 ThemePreview.defaultProps = {
     'data-id': 'preview',
     interactive: true,
-    userStyles: '',
+    userStyles: {},
 };
 
 export default ThemePreview;

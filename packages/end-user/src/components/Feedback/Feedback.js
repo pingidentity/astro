@@ -5,8 +5,13 @@ import classnames from 'classnames';
 /**
  * Display text and an icon to a user
  */
-const Message = ({ children, type, 'data-id': dataId }) => {
-    const classNames = classnames('feedback', {
+const Message = ({
+    className,
+    children,
+    type,
+    'data-id': dataId
+}) => {
+    const classNames = classnames('feedback', className, {
         'feedback--error': type === 'error',
         'feedback--alert': type === 'alert',
         'feedback--success': type === 'success',

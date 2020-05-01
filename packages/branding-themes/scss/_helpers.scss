@@ -4,7 +4,6 @@
 /// @param {Map} $map - Map
 /// @param {Arglist} $keys - Keys to fetch
 /// @return {*}
-
 @function map-deep-get($map, $keys...) {
     @each $key in $keys {
         $map: map-get($map, $key);
@@ -13,10 +12,64 @@
     @return $map;
 }
 
+// Get colors for theme
 @function getThemeColors($theme) {
     @return map-deep-get($themes,  $theme, 'color');
 }
 
+// Get images for theme
 @function getThemeImages($theme) {
     @return map-deep-get($themes, $theme, 'image');
+}
+
+// Baseline styles for every theme; vars should only be used in this
+// It's up to the themes to disable these via things like border-width: 0
+// This allows for standardization for over-writing theme styles in the client
+@mixin base($images, $colors) {
+    body,
+    html {
+        height: 100%;
+    }
+
+    body {
+        @if type-of($images) == 'map' {
+            background: url(map-get($images, 'background'));
+        } @else {
+            background: map-get($colors, 'background');
+        }
+        color: map-get($colors, 'bodyText');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .card {
+        background: map-get($colors, 'card');
+    }
+
+    .branding-template-heading {
+        color: map-get($colors, 'headingText');
+    }
+
+    .text-input {
+        border-color: map-get($colors, 'button');
+    }
+
+    .branding-template-logo-container {
+        border-color: map-get($colors, 'background');
+    }
+
+    .branding-template-primary-button {
+        color: map-get($colors, 'buttonText');
+        background: map-get($colors, 'button');
+        border-color: map-get($colors, 'button');
+
+        &:hover {
+            color: map-get($colors, 'buttonText');
+        }
+    }
+
+    .branding-template-link-text, a {
+        color: map-get($colors, 'link');
+    }
 }
