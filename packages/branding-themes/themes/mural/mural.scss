@@ -3,34 +3,28 @@ $THEME_NAME: 'mural';
 $colors: getThemeColors($THEME_NAME);
 $images: getThemeImages($THEME_NAME);
 
-body {
-    background: url(map-get($images, 'background'));
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: map-get($colors, 'bodyText');
-}
+@include base($images, $colors);
 
-a {
-    color: map-get($colors, 'link');
-}
-
+/**
+ * Styles
+ */
 .card {
     height: auto;
-    width: 450px;
+    max-width: 450px;
     margin-bottom: 20px;
     margin-top: 80px;
     margin-left: 80px;
     border-radius: 3px;
-    background: rgba(map-get($colors, 'card'), 0.9);
+    box-shadow: none;
 
-    @media only screen and (max-width: 600px) {
+    @media all and (max-width: 600px) {
         border-radius: 0;
         margin-top: 0;
         margin-left: 0;
         margin-bottom: 0;
         width: initial;
         max-width: 100%;
+        height: 100%;
     }
 }
 
@@ -81,13 +75,14 @@ a {
     margin-bottom: 15px;
     font-size: 20px;
     font-weight: 600;
-    color: map-get($colors, 'headingText');
 }
 
-.feedback--error,
-.feedback__icon {
-    font-size: 18px;
-    color: #cb0020;
+.branding-template-feedback {
+    .feedback--error,
+    .feedback__icon {
+        font-size: 18px;
+        color: #cb0020;
+    }
 }
 
 .branding-template-form {
@@ -100,13 +95,15 @@ a {
 }
 
 .branding-template-primary-button {
-    color: map-get($colors, 'buttonText');
-    background: map-get($colors, 'button');
-    border-color: map-get($colors, 'button');
     margin-right: auto;
     margin-left: auto;
     font-weight: 800;
     width: 60%;
+    border-width: 0;
+
+    &:hover {
+        opacity: 0.9;
+    }
 }
 
 .social-button__button {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Preview from './Preview';
+import Preview, { devices, applyStyles } from './Preview';
 import Card from '../Card';
 import Logo from '../Logo';
 import Form from '../Form';
@@ -8,7 +8,10 @@ import FloatLabelTextInput from '../FloatLabelTextInput';
 import FloatLabelPasswordInput from '../FloatLabelPasswordInput';
 import Button from '../Button';
 import TextBlock from '../TextBlock';
+import Heading from '../Heading';
 import Padding, { sizes } from '../shared/Padding';
+import Feedback from '../Feedback';
+import SocialButton from '../SocialButton';
 
 import logo from '../../images/ping-logo.png';
 
@@ -17,124 +20,240 @@ export default {
     component: Preview,
 };
 
+const themes = [
+    'https://assets.pingone.com/ux/branding-themes/0.11.0/default/default.css',
+    'https://assets.pingone.com/ux/branding-themes/0.11.0/split/split.css',
+    'https://assets.pingone.com/ux/branding-themes/0.11.0/slate/slate.css',
+    'https://assets.pingone.com/ux/branding-themes/0.11.0/mural/mural.css',
+    'https://assets.pingone.com/ux/branding-themes/0.11.0/focus/focus.css',
+];
+
 export const Default = () => {
     return (
-        <>
-            <Preview
-                width="500px"
-                height="300px"
-                scale={0.5}
-                interactive={false}
+        themes.map((theme) => (
+            <div
+                key={theme}
             >
-                <Card>
-                    <div className="flex-container">
-                        <div className="branding-template-logo-container">
-                            <Logo className="branding-template-logo" src={logo} />
-                        </div>
-                        <div className="branding-template-form-container">
-                            <Form classname="branding-template-form">
-                                <FloatLabelTextInput className="branding-template-text-input" label="Username" id="username1" />
-                                <FloatLabelPasswordInput className="branding-template-password-input" label="Password" id="password1" />
-                                <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                <TextBlock className="branding-template-link-text"><a href="">Forgot Password</a></TextBlock>
-                                <TextBlock className="branding-template-link-text"><a href="/template1.html">No Account? Register Now!</a></TextBlock>
-                            </Form>
-                        </div>
-                    </div>
-                </Card>
-            </Preview>
+                <div
+                    style={{
+                        height: '500px',
+                        width: '100%',
+                    }}
+                >
+                    <Preview
+                        themeStyleSheet={theme}
+                        device={devices.MOBILE}
+                    >
+                        { /* Login */ }
+                        <Card>
+                            <div className="flex-container">
+                                <div className="branding-template-logo-container">
+                                    <Logo className="branding-template-logo" src={logo} />
+                                </div>
+                                <div className="branding-template-form-container">
+                                    <Form classname="branding-template-form">
+                                        <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="username1" />
+                                        <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Password" id="password1" />
+                                        <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
+                                        <TextBlock className="branding-template-link-text"><a href="#">Forgot Password</a></TextBlock>
+                                        <TextBlock className="branding-template-link-text"><a href="#">No Account? Register Now!</a></TextBlock>
+                                    </Form>
+                                </div>
+                            </div>
+                        </Card>
+                    </Preview>
+                </div>
 
-            <Padding top={sizes.XL} />
+                <Padding top={sizes.XL} />
 
-            <Preview
-                themeStyleSheet="https://assets.pingone.com/ux/branding-themes/0.10.0/split/split.css"
-            >
-                <Card>
-                    <div className="flex-container">
-                        <div className="branding-template-logo-container">
-                            <Logo className="branding-template-logo" src={logo} />
+                <Preview
+                    themeStyleSheet={theme}
+                >
+                    { /* Recover */ }
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <Heading className="branding-template-heading">Enter New Password</Heading>
+                                <TextBlock className="branding-template-primary-text">
+                                    If you have an active account with a valid email address,
+                                    you will receive an email with a recovery code which you may enter here,
+                                    along with a new password. If you do not have an account or email,
+                                    please contact your administrator to recover your password.
+                                    </TextBlock>
+                                <Form className="branding-template-form">
+                                    <FloatLabelTextInput inputClassName="branding-template-text-input" label="Recovery Code" id="recoverycode3" />
+                                    <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Enter New Password" id="newpassword3" />
+                                    <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Verify New Password" id="verifypassword3" />
+                                    <Padding top={sizes.SM} />
+                                    <Button label="Save" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
+                                    <TextBlock className="branding-template-link-text">Didn't receive an email?<a href="#"> Resend</a></TextBlock>
+                                </Form>
+                            </div>
                         </div>
-                        <div className="branding-template-form-container">
-                            <Form classname="branding-template-form">
-                                <FloatLabelTextInput className="branding-template-text-input" label="Username" id="username1" />
-                                <FloatLabelPasswordInput className="branding-template-password-input" label="Password" id="password1" />
-                                <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                <TextBlock className="branding-template-link-text"><a href="">Forgot Password</a></TextBlock>
-                                <TextBlock className="branding-template-link-text"><a href="/template1.html">No Account? Register Now!</a></TextBlock>
-                            </Form>
-                        </div>
-                    </div>
-                </Card>
-            </Preview>
+                    </Card>
+                </Preview>
 
-            <Padding top={sizes.XL} />
+                <Padding top={sizes.XL} />
 
-            <Preview
-                themeStyleSheet="https://assets.pingone.com/ux/branding-themes/0.10.0/slate/slate.css"
-            >
-                <Card>
-                    <div className="flex-container">
-                        <div className="branding-template-logo-container">
-                            <Logo className="branding-template-logo" src={logo} />
+                <Preview
+                    themeStyleSheet={theme}
+                >
+                    { /* Create profile */}
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <Heading className="branding-template-heading">Create Your Profile</Heading>
+                                <TextBlock className="branding-template-primary-text">
+                                    Enter the required information below.
+                                </TextBlock>
+                                <Form className="branding-template-form">
+                                    <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="username4" />
+                                    <FloatLabelTextInput inputClassName="branding-template-text-input" label="Email Address" id="emailAddress4" />
+                                    <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Create Password" id="password4" />
+                                    <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Re-enter Password" id="verifypassword4" />
+                                    <Padding top={sizes.SM} />
+                                    <Button label="Create Account" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
+                                    <TextBlock className="branding-template-link-text">Already have an account?<a href="#"> Sign In</a></TextBlock>
+                                </Form>
+                            </div>
                         </div>
-                        <div className="branding-template-form-container">
-                            <Form classname="branding-template-form">
-                                <FloatLabelTextInput className="branding-template-text-input" label="Username" id="username1" />
-                                <FloatLabelPasswordInput className="branding-template-password-input" label="Password" id="password1" />
-                                <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                <TextBlock className="branding-template-link-text"><a href="">Forgot Password</a></TextBlock>
-                                <TextBlock className="branding-template-link-text"><a href="/template1.html">No Account? Register Now!</a></TextBlock>
-                            </Form>
-                        </div>
-                    </div>
-                </Card>
-            </Preview>
+                    </Card>
+                </Preview>
 
-            <Padding top={sizes.XL} />
+                <Padding top={sizes.XL} />
 
-            <Preview
-                themeStyleSheet="https://assets.pingone.com/ux/branding-themes/0.10.0/mural/mural.css"
-            >
-                <Card>
-                    <div className="flex-container">
-                        <div className="branding-template-logo-container">
-                            <Logo className="branding-template-logo" src={logo} />
+                <Preview
+                    themeStyleSheet={theme}
+                >
+                    { /* Error */ }
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <Feedback type="error" className="branding-template-feedback">Something went wrong.</Feedback>
+                                <TextBlock className="branding-template-error-text">Access Denied</TextBlock>
+                                <TextBlock className="branding-template-primary-text">
+                                    Request denied: User does not have any role assignments
+                                    (Correlation ID: 38942-309482-38947y23947)
+                                </TextBlock>
+                            </div>
                         </div>
-                        <div className="branding-template-form-container">
-                            <Form classname="branding-template-form">
-                                <FloatLabelTextInput className="branding-template-text-input" label="Username" id="username1" />
-                                <FloatLabelPasswordInput className="branding-template-password-input" label="Password" id="password1" />
-                                <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                <TextBlock className="branding-template-link-text"><a href="">Forgot Password</a></TextBlock>
-                                <TextBlock className="branding-template-link-text"><a href="/template1.html">No Account? Register Now!</a></TextBlock>
-                            </Form>
-                        </div>
-                    </div>
-                </Card>
-            </Preview>
+                    </Card>
+                </Preview>
 
-            <Padding top={sizes.XL} />
+                <Padding top={sizes.XL} />
 
-            <Preview
-                themeStyleSheet="https://assets.pingone.com/ux/branding-themes/0.10.0/focus/focus.css"
-            >
-                <Card>
-                    <div className="flex-container">
-                        <div className="branding-template-logo-container">
-                            <Logo className="branding-template-logo" src={logo} />
+                <Preview
+                    themeStyleSheet={theme}
+                >
+                    { /* Phone # */ }
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <TextBlock className="branding-template-primary-text">
+                                    To make your experience with us even better, please add the following information to your account:
+                                </TextBlock>
+                                <Form className="branding-template-form">
+                                    <FloatLabelTextInput inputClassName="branding-template-text-input" label="Phone Number" id="phoneNumber6" />
+                                    <Padding top={sizes.SM} />
+                                    <Button label="Skip this for now" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
+                                </Form>
+                            </div>
                         </div>
-                        <div className="branding-template-form-container">
-                            <Form classname="branding-template-form">
-                                <FloatLabelTextInput className="branding-template-text-input" label="Username" id="username1" />
-                                <FloatLabelPasswordInput className="branding-template-password-input" label="Password" id="password1" />
-                                <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                <TextBlock className="branding-template-link-text"><a href="">Forgot Password</a></TextBlock>
-                                <TextBlock className="branding-template-link-text"><a href="/template1.html">No Account? Register Now!</a></TextBlock>
-                            </Form>
+                    </Card>
+                </Preview>
+
+                <Padding top={sizes.XL} />
+
+                <Preview
+                    themeStyleSheet={theme}
+                >
+                    { /* Enter password */}
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <Heading className="branding-template-heading">Hello Erika,</Heading>
+                                <TextBlock className="branding-template-primary-text">
+                                    Please enter your password below:
+                                </TextBlock>
+                                <Padding top={sizes.SM} />
+                                <Form className="branding-template-form">
+                                    <FloatLabelTextInput inputClassName="branding-template-text-input" label="Password" id="password7" />
+                                    <Padding top={sizes.SM} />
+                                    <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
+                                    <TextBlock className="branding-template-link-text"><a href="#">Forgot Password</a></TextBlock>
+                                    <TextBlock className="branding-template-link-text"><a href="#">Not You? Switch Accounts.</a></TextBlock>
+                                </Form>
+                            </div>
                         </div>
-                    </div>
-                </Card>
-            </Preview>
-        </>
-    );
+                    </Card>
+                </Preview>
+
+                <Padding top={sizes.XL} />
+
+                <Preview
+                    themeStyleSheet={theme}
+                >
+                    { /* Enter username */ }
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <Form className="branding-template-form">
+                                    <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="password" />
+                                    <Padding top={sizes.SM} />
+                                    <Button label="Submit" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
+                                    <TextBlock className="branding-template-link-text"><a href="#">Cancel</a></TextBlock>
+                                </Form>
+                            </div>
+                        </div>
+                    </Card>
+                </Preview>
+
+                <Padding top={sizes.XL} />
+
+                <Preview
+                    themeStyleSheet={theme}
+                >
+                    { /* Login with provider */ }
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <Form className="branding-template-form">
+                                    <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="username7" />
+                                    <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Password" id="password3" />
+                                    <Padding top={sizes.SM} />
+                                    <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
+                                    <SocialButton label="Login with Facebook" className="branding-template-social-button" branding={SocialButton.BrandTypes.FACEBOOK} />
+                                    <TextBlock className="branding-template-link-text"><a href="#">Forgot Password</a></TextBlock>
+                                    <TextBlock className="branding-template-link-text"><a href="#">No Account? Register Now!</a></TextBlock>
+                                </Form>
+                            </div>
+                        </div>
+                    </Card>
+                </Preview>
+
+                <Padding top={sizes.XL} />
+            </div>
+        )
+    ));
 };

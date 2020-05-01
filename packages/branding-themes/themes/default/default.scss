@@ -1,0 +1,13 @@
+@import '../../scss/helpers';
+$THEME_NAME: 'default';
+$colors: getThemeColors($THEME_NAME);
+$images: getThemeImages($THEME_NAME);
+
+@include base($images, $colors);
+
+.card {
+    @media all and (max-width: 600px) {
+        height: 100%;
+        max-width: 100%;
+    }
+}
