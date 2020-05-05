@@ -27,8 +27,6 @@ import PageSpinner from "../../general/PageSpinner";
 *     When provided, the error message and icon will display in place of the chart and center text.
 * @param {string} greeting
 *     The text renderered in the upper-left of the component
-* @param {string} greetingText
-*     DEPRECATED. Use "greeting" instead.
 * @param {boolean} [loading=false]
 *     When true the splinner animation shows in place of the charts
 * @param {string} [loadingMessage]
@@ -117,7 +115,7 @@ export default class HeroChart extends Component {
         const greetingElement = ReactDOM.findDOMNode(this._greeting);
         const titleElement = ReactDOM.findDOMNode(this._title);
         // +60px to width described in the requirements
-        const greetingWidth = greetingElement.clientWidth + greetingElement.offsetLeft + 60;
+        const greetingWidth = greetingElement && (greetingElement.clientWidth + greetingElement.offsetLeft + 60);
         const titleOffsetLeft = titleElement.offsetLeft;
 
         this.setState({ isGreetingHidden: greetingWidth >= titleOffsetLeft });
@@ -200,7 +198,6 @@ export default class HeroChart extends Component {
             chartWidth,
             errorMessage,
             greeting,
-            greetingText,
             loading,
             loadingMessage,
             onValueChange,
@@ -238,8 +235,8 @@ export default class HeroChart extends Component {
         const botChartPercent = 1 - topChartPercent;
 
         const hMinusX = chartHeight - xAxisHeight;
-        const topChartHeight = Math.round(topChartPercent * hMinusX) + xAxisHeight;
-        const botChartHeight = Math.round(botChartPercent * hMinusX);
+        const topChartHeight = (Math.round(topChartPercent * hMinusX) + xAxisHeight) || 0;
+        const botChartHeight = (Math.round(botChartPercent * hMinusX)) || 0;
 
         const chartProps = {
             barCategoryGap: 7,
@@ -272,11 +269,7 @@ export default class HeroChart extends Component {
 
         return (
             <div data-id={dataId} className="hero-chart" style={heroStyles}>
-                {(greeting || greetingText) &&
-                    <div className={greetingClassNames} ref={node => this._greeting = node}>
-                        {greeting || greetingText}
-                    </div>
-                }
+                {greeting && <div className={greetingClassNames} ref={node => this._greeting = node}>{greeting}</div>}
                 {!errorMessage &&
                     <div key="center-text" className="hero-chart__center-text">
                         <div className="hero-chart__title" ref={node => this._title = node}>{title || titleText}</div>
