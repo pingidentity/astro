@@ -20,6 +20,19 @@
     padding: $spacing-xs $spacing-sm;
     border-width: 0;
 
+    /* keep rule for condensed before any variant with custom color; see UIP-3495 for details */
+    &--condensed {
+        display: inline-block;
+        margin: 0;
+        padding: 4px 5px 1px;
+        font-size: 13px;
+        line-height: 1em;
+        text-transform: uppercase;
+        color: $color-white;
+        background-color: $color-elephant;
+        border-radius: 3px;
+    }
+
     &--color-cyan {
         @include chip($color-neutral-20, $color-charting-cyan);
 
@@ -78,18 +91,5 @@
 
     &--full-width {
         display: block;
-    }
-
-    &--condensed {
-        display: inline-block;
-        margin: 0;
-        padding: 4px 5px 1px;
-        font-size: 13px;
-        line-height: 1em;
-        text-transform: uppercase;
-        color: $color-white;
-        background-color: $color-elephant;
-
-        border-radius: 3px;
     }
 }

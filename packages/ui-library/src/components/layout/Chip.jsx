@@ -83,9 +83,17 @@ function Chip({
     fullWidth,
     type,
 }) {
+    let colorToUse; // to fix UIP-3495 preserving backward compatibility for default color value
+    if (color) {
+        colorToUse = color;
+    } else if (type === chipTypes.CONDENSED) {
+        colorToUse = chipColors.DARKGREY;
+    } else {
+        colorToUse = chipColors.LIGHTGREY;
+    }
     return (
         <div
-            style={getColor(color)}
+            style={getColor(colorToUse)}
             className={
                 classnames(
                     className,
@@ -93,7 +101,7 @@ function Chip({
                         "chip-component": type !== chipTypes.COUNT,
                         "chip-component--condensed": type === chipTypes.CONDENSED,
                         "chip-component--outline": type === chipTypes.OUTLINE,
-                        [`chip-component--color-${color}`]: type !== chipTypes.COUNT && isValidColor(color),
+                        [`chip-component--color-${colorToUse}`]: type !== chipTypes.COUNT && isValidColor(colorToUse),
                         "chip-component--full-width": fullWidth,
                         "count": type === chipTypes.COUNT,
                     }
@@ -122,7 +130,7 @@ Chip.propTypes = {
 
 Chip.defaultProps = {
     "data-id": "chip-component",
-    color: chipColors.LIGHTGREY,
+    color: null, // we need to set this conditionally, see UIP-3495
     fullWidth: false,
 };
 
