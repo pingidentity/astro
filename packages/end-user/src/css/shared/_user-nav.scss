@@ -261,10 +261,10 @@
                     margin: 0 auto;
                     margin-bottom: $spacing-sm;
                 }
+            }
 
-                &:after {
-                    display: none;
-                }
+            &:after {
+                display: none;
             }
         }
     }
