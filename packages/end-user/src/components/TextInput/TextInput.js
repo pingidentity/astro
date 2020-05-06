@@ -64,7 +64,9 @@ const TextInput = ({
     type,
     value,
     width,
-    format
+    format,
+    autoFocus,
+    useAutoComplete,
 }) => {
     const classNames = classnames('text-input', className, {
         'text-input--error': type === textInputTypes.ERROR,
@@ -96,6 +98,8 @@ const TextInput = ({
             style={{width}}
             type="text"
             key="textinput"
+            autoFocus={autoFocus}
+            autoComplete={useAutoComplete ? 'on' : 'off'}
             {...inputmodeByFormats[format]}
         />,
     ];
@@ -170,7 +174,15 @@ TextInput.propTypes = {
     /**
      * Type of value format the TextInput accepts
      */
-    format: PropTypes.oneOf(Object.values(textInputFormats))
+    format: PropTypes.oneOf(Object.values(textInputFormats)),
+    /**
+     * Focus field upon mount
+     */
+    autoFocus: PropTypes.bool,
+    /**
+     * Should browser autocompletion be enabled
+     */
+    useAutoComplete: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -181,7 +193,9 @@ TextInput.defaultProps = {
     onKeyPress: noop,
     onKeyDown: noop,
     onMouseDown: noop,
-    format: textInputFormats.DEFAULT
+    format: textInputFormats.DEFAULT,
+    autoFocus: false,
+    useAutoComplete: true,
 };
 
 export default TextInput;

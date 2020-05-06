@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
 import countryCodes from './countryCodes';
-import TextInput from '../TextInput';
+import TextInput, { textInputFormats } from '../TextInput';
 import utils from '../../util/Validators';
 import GenericStateContainer from '../../util/GenericStateContainer';
+import DropdownCustomSearchable from "../DropdownCustomSearchable";
 
 /**
  * @class PhoneInput
@@ -30,8 +31,8 @@ import GenericStateContainer from '../../util/GenericStateContainer';
 const PhoneInputStateless = ({
     dropdownOpen,
     'data-id': dataId,
-    onToggleDropdown,
-    country,
+    setOpen,
+    country: countryName,
     phoneNumber,
     placeholder,
     dialCodeSearchValue,
@@ -42,31 +43,33 @@ const PhoneInputStateless = ({
     const dropdownClasses = classnames('phone-input__code', {
         'phone-input__code--open': dropdownOpen,
     });
+    const country = countryCodes.find(({ iso2 }) => iso2 === countryName);
+    const optionsFiltered = countryCodes
+        .filter(({ name }) => name.toUpperCase().indexOf(dialCodeSearchValue.toUpperCase()) > -1)
+        .map(({ name, iso2, dialCode }) => {
+        return {
+            label: `${name} +${dialCode}`,
+            value: iso2,
+            dialCode: dialCode,
+        }
+    })
 
     return (
         <div className="phone-input" data-id={dataId}>
             <div
                 className={dropdownClasses}
-                role="button"
-                onClick={onToggleDropdown}
-                tabIndex="0"
             >
-                <CountryDropdown
-                    id="dropdownCustom2"
-                    options={countryCodes.map((country) => {
-                        return {
-                            label: `${country.name} +${country.dialCode}`,
-                            searchTerm: country.name,
-                            value: country.iso2,
-                            dialCode: country.dialCode,
-                        }
-                    })}
-                    placeholder="Search countries..."
-                    value={country}
+                <DropdownCustomSearchable
+                    id='country-code-input'
+                    value={country ? `+${country.dialCode}` : ''}
+                    options={optionsFiltered}
+                    data-id="country-search"
+                    searchPlaceholder="Search countries..."
                     searchValue={dialCodeSearchValue}
                     onValueChange={onCountryChange}
                     onSearchValueChange={onSearchValueChange}
                     open={dropdownOpen}
+                    onToggle={setOpen}
                 />
             </div>
             <div className="phone-input__number">
@@ -74,6 +77,7 @@ const PhoneInputStateless = ({
                     value={phoneNumber}
                     onChange={e => onPhoneNumberValueChange(e.target.value, e)}
                     placeholder={placeholder}
+                    format={textInputFormats.NUMERIC}
                 />
             </div>
         </div>
@@ -96,97 +100,6 @@ PhoneInputStateless.propTypes = {
 PhoneInputStateless.defaultProps = {
     'data-id': 'phone-input',
     placeholder: 'Phone number...',
-};
-
-const CountryDropdown = ({
-    children,
-    className,
-    error,
-    id,
-    inputClassName,
-    options,
-    placeholder,
-    onValueChange,
-    onSearchValueChange,
-    searchValue,
-    value,
-    open,
-}) => {
-    const classNames = classnames('dropdown', className, {
-        'dropdown--error': error,
-        'dropdown--open': open,
-    });
-    const inputClassNames = classnames('dropdown__input', inputClassName);
-
-    const country = countryCodes.find(({ iso2 }) => iso2 === value);
-
-    return (
-        <div className={classNames}>
-            <input
-                className={inputClassNames}
-                name={id}
-                placeholder={open ? placeholder : null}
-                type="text"
-                value={open ? searchValue : (country ? `+${country.dialCode}` : '')}
-                autoFocus
-                autoComplete="new-password"
-                onChange={e => onSearchValueChange(e.target.value, e)}
-                readOnly={!open}
-            />
-            {children}
-            {open &&
-                <ul className="dropdown__list">
-                    {options.map((option) => {
-                        if (!option.searchTerm.toUpperCase().includes(searchValue.toUpperCase())) return;
-                        return (
-                            <li
-                                className={classnames(
-                                    'dropdown__option',
-                                    {
-                                        'dropdown__option--selected': option.value === value,
-                                    },
-                                )}
-                                key={option.value}
-                                value={option.value}
-                                role="button"
-                                onClick={(e) => onValueChange(option.value, e, option)}
-                            >
-                                {option.label}
-                            </li>
-                        )
-                    })}
-                </ul>
-            }
-        </div>
-    );
-};
-
-CountryDropdown.propTypes = {
-    id: PropTypes.string,
-    inputClassName: PropTypes.string,
-    error: PropTypes.bool,
-    open: PropTypes.bool,
-    onValueChange: PropTypes.func,
-    onSearchValueChange: PropTypes.func,
-    options: PropTypes.arrayOf(PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.shape({
-            value: PropTypes.string,
-            label: PropTypes.string,
-        }),
-    ])),
-    placeholder: PropTypes.string,
-    value: PropTypes.string,
-    searchValue: PropTypes.string,
-};
-
-CountryDropdown.defaultProps = {
-    id: 'country-code-input',
-    error: false,
-    open: false,
-    onValueChange: noop,
-    onSearchValueChange: noop,
-    options: [],
 };
 
 /**
@@ -243,7 +156,7 @@ const PhoneInput = props => (
                 props.onSearchValueChange(val, e);
             };
 
-            const onCountryChange = (iso2, e, dialCode) => {
+            const onCountryChange = (iso2, e, { dialCode }) => {
                 setCountry(iso2);
                 setDialCodeSearchValue('');
                 setDropDownOpen(false);
@@ -252,15 +165,13 @@ const PhoneInput = props => (
                 props.onToggleDropdown();
             };
 
-            const onToggleDropdown = () => setDropDownOpen(!getDropdownOpen());
-
             return (
                 <PhoneInputStateless
                     {...props}
                     onPhoneNumberValueChange={onPhoneNumberValueChange}
                     onSearchValueChange={onSearchValueChange}
                     onCountryChange={onCountryChange}
-                    onToggleDropdown={onToggleDropdown}
+                    setOpen={setDropDownOpen}
                     dropdownOpen={getDropdownOpen()}
                     country={getCountry()}
                     phoneNumber={getPhoneNumber()}
