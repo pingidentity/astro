@@ -25,15 +25,6 @@ describe('PhoneInput', () => {
         expect(phoneInput.exists()).toEqual(true);
     });
 
-    it('toggles the dropdown', () => {
-        const wrapper = getComponent();
-        const dropdownButton = wrapper.find('.phone-input__code');
-        dropdownButton.simulate('click');
-        expect(wrapper.find('.phone-input__code--open').length).toEqual(1);
-        dropdownButton.simulate('click');
-        expect(wrapper.find('.phone-input__code--open').length).toEqual(0);
-    });
-
     it('doesn\'t allow alphas in phonenumber input', () => {
         const testCallback = jest.fn();
         const mockEvent = { target: { value: 'a' } };

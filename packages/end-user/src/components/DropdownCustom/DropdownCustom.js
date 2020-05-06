@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import _noop from 'lodash';
 
 const getValue = option => (option.value ? option.value : option);
 const getLabel = option => (option.label ? option.label : option);
@@ -14,6 +15,9 @@ const DropdownCustom = ({
     open = false,
     options,
     placeholder,
+    onValueChange = _noop,
+    onBlur = _noop,
+    onFocus = _noop,
     value,
 }) => {
     const classNames = classnames('dropdown', className, {
@@ -32,6 +36,8 @@ const DropdownCustom = ({
                 type="text"
                 value={value}
                 readOnly
+                onBlur={onBlur}
+                onFocus={onFocus}
             />
             {children}
             {open &&
@@ -46,6 +52,8 @@ const DropdownCustom = ({
                             )}
                             key={getValue(option)}
                             value={getValue(option)}
+                            role="button"
+                            onClick={(e) => onValueChange(getValue(option), e, option)}
                         >
                             {getLabel(option)}
                         </li>
@@ -70,6 +78,9 @@ DropdownCustom.propTypes = {
     ])),
     placeholder: PropTypes.string,
     value: PropTypes.string,
+    onValueChange: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
 };
 
 export default DropdownCustom;
