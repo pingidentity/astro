@@ -8,13 +8,12 @@ jest.mock("react-portal");
 import { shallow, mount } from "enzyme";
 import DetailsTooltip from "../../tooltips/DetailsTooltip";
 
-describe("LinkDropDownList v4", function () {
+describe("LinkDropDownList", function () {
 
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        LinkDropDownList = require("../LinkDropDownList"),
-        _ = require("underscore");
+        LinkDropDownList = require("../LinkDropDownList");
 
     var componentId = "link-dropdown-list",
         labelText = "The Label",
@@ -27,16 +26,21 @@ describe("LinkDropDownList v4", function () {
             { label: "Five", value: "5" }
         ];
 
-    function getComponent (opts) {
-        opts = _.defaults(opts || {}, {
-            "data-id": componentId,
-            closeOnSelection: false,
-            label: labelText,
+    const defaultProps = {
+        "data-id": componentId,
+        closeOnSelection: false,
+        label: labelText,
+        options: options,
+        selectedOption: options[selectedIndex],
+    };
+
+    function getComponent (opts = {}) {
+        opts = {
+            ...defaultProps,
+            ...opts,
             onClick: jest.fn(),
             onToggle: jest.fn(),
-            options: options,
-            selectedOption: options[selectedIndex],
-        });
+        };
         return TestUtils.renderInWrapper(<LinkDropDownList {...opts} />);
     }
 
@@ -85,6 +89,20 @@ describe("LinkDropDownList v4", function () {
 
         expect(menuItems.length).toEqual(options.length);
         expect(menuItems[selectedIndex].getAttribute("class")).toContain("selected");
+    });
+
+    it("Renders menu items correctly when updated", function () {
+        const component = mount(
+            <TestUtils.StateWrapper initialState={defaultProps}>
+                {props => <LinkDropDownList {...props} open />}
+            </TestUtils.StateWrapper>
+        );
+        const menu = `*[data-id="${componentId}-menu"]`;
+
+        expect(component.find(menu).childAt(selectedIndex).find(".selected").exists()).toBeTruthy();
+
+        component.setState({ selectedOption: options[0] });
+        expect(component.find(menu).childAt(0).find(".selected").exists()).toBeTruthy();
     });
 
     it("Triggers onToggle callback when label clicked", function () {

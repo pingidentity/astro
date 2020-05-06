@@ -138,7 +138,7 @@ class LinkDropDownListStateless extends React.Component {
     }, CollapsibleLink);
 
     _renderOptions = () => {
-        return this.props.options.map(function (option, i) {
+        return this.props.options.map((option, i) => {
             return (
                 <LinkDropDownListOption
                     data-id={`list-option-${option.value}`}
@@ -149,7 +149,7 @@ class LinkDropDownListStateless extends React.Component {
                     disabled={option.disabled}
                 />
             );
-        }.bind(this));
+        });
     };
 
     render() {
@@ -237,18 +237,18 @@ class LinkDropDownListOption extends React.Component {
         }
     };
 
-    classNames = {
-        "select-option": true,
-        disabled: this.props.disabled,
-        selected: this.props.selected,
-    };
-
     render() {
+        const classNames = {
+            "select-option": true,
+            disabled: this.props.disabled,
+            selected: this.props.selected,
+        };
+
         const list = (
             <li
                 data-id={this.props["data-id"]}
                 data-value={this.props.option.value}
-                className={classnames(this.classNames)}
+                className={classnames(classNames)}
                 onClick={this._handleClick}
             >
                 {this.props.option.label}
