@@ -1,6 +1,7 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom");
+import React from "react";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import { selectTextWithinElement } from "../../util/DOMUtils";
 
 import classnames from "classnames";
 /**
@@ -75,6 +76,10 @@ import classnames from "classnames";
  */
 
 class SelectText extends React.Component {
+    constructor(props) {
+        super(props);
+        this.selectTextRef = React.createRef();
+    }
 
     static propTypes = {
         "data-id": PropTypes.string,
@@ -88,41 +93,17 @@ class SelectText extends React.Component {
         "data-id": "select-text",
     };
 
-    /*
-     * Select the text of the clicked element using
-     * browser text selection functionality provided
-     * as part of the global object.
-     *
-     */
     _selectText = (event) => {
-        // Handle input elements (which have their
-        // own select method) specially to provide
-        // better / un-styled selection.  It is assumed
-        // that if an input field exists within a
-        // SelectText element that clicking the input
-        // should only select the text within the input.
-
-        const selection = global.getSelection();
-
-        if (selection.toString() === "") {
-            if (event && event.target.select) {
-                event.target.select();
-            } else {
-                var text = ReactDOM.findDOMNode(this);
-                var range;
-
-                if (global.document.body.createTextRange) {
-                    range = global.document.body.createTextRange();
-                    range.moveToElementText(text);
-                    range.select();
-                } else if (global.getSelection) {
-                    range = global.document.createRange();
-                    range.selectNodeContents(text);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                }
-            }
-        }
+        /*
+        * If the event target element has a native select function, use it
+        * Otherwise, use the component element
+        */
+        const targetElement = (
+            _.get(event, "target.select")
+                ? event.target
+                : this.selectTextRef.current
+        );
+        selectTextWithinElement(targetElement);
 
         if (this.props.onClick) {
             this.props.onClick();
@@ -135,8 +116,8 @@ class SelectText extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.select && nextProps.select) {
+    componentDidUpdate(prevProps) {
+        if (!prevProps.select && this.props.select) {
             this._selectText();
         }
     }
@@ -150,7 +131,9 @@ class SelectText extends React.Component {
                     this.props.className
                 )}
                 onClick={this._selectText}
-                data-id={dataId}>
+                data-id={dataId}
+                ref={this.selectTextRef}
+            >
                 {this.props.children}
             </span>
         );

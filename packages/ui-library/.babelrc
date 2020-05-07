@@ -4,11 +4,12 @@
             "@babel/preset-env",
             {
                 "modules": "commonjs"
-            },
+            }
         ],
         "@babel/preset-react"
     ],
     "plugins": [
+        "lodash",
         "@babel/plugin-proposal-class-properties",
         [
             "transform-es2015-spread",
@@ -28,5 +29,5 @@
                 "corejs": 3
             }
         ]
-    ],
+    ]
 }

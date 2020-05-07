@@ -1,7 +1,9 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import clipboard from "clipboard-polyfill";
+import * as clipboard from "clipboard-polyfill";
 import _ from "underscore";
+import { selectTextWithinElement } from "../DOMUtils";
 import HelpHint from "../../components/tooltips/HelpHint";
 
 /**
@@ -28,9 +30,20 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
         message: 0,
     };
 
+    _selectText = () => {
+        // FIXME: findDOMNode should be avoided, see:
+        // https://reactjs.org/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components
+        // Ideally, we should be implementing React.forwardRef on any child components, but this
+        // would be a breaking change to those components, see:
+        // https://reactjs.org/docs/forwarding-refs.html#note-for-component-library-maintainers
+        const component = ReactDOM.findDOMNode(this);
+        const copyField = component.querySelector("[data-id='copy-field']");
+        selectTextWithinElement(copyField);
+    }
+
     _copyText = () => {
         clipboard.writeText(this.props.text).then(() => {
-            this.setState({ message: 1 });
+            this.setState({ message: 1 }, () => this._selectText());
         }).catch(() => {
             this.setState({ message: -1 });
         });
@@ -70,7 +83,11 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
                     afterHide: this._resetMessage,
                 }}
             >
-                <WrappedComponent {...props} {...this._getMappedProps()} onClick={this._copyText} />
+                <WrappedComponent
+                    {...props}
+                    {...this._getMappedProps()}
+                    onClick={this._copyText}
+                />
             </HelpHint>
         );
     }
