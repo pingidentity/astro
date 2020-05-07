@@ -5,7 +5,7 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import copiesText from "../copiesText";
-import clipboard from "clipboard-polyfill";
+import * as clipboard from "clipboard-polyfill";
 import _ from "underscore";
 
 const SomeLink = props => <a {...props}>Hello</a>;
