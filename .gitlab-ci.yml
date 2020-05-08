@@ -3,16 +3,6 @@ stages:
   - pack
   - test
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .npm
-    - node_modules
-    - packages/end-user/.npm
-    - packages/end-user/node_modules
-    - packages/ui-library/.npm
-    - packages/ui-library/node_modules
-
 # This has to be done before each script because Gitlab's caching can fail in a
 # number of circumstances.
 # before_script:

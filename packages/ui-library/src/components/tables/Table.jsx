@@ -152,6 +152,7 @@ const renderColumnHeading = (
         <Text
             overflow={useEllipsis ? overflowOptions.ELLIPSIS : overflowOptions.WRAP}
             type={textTypes.LABEL}
+            align={alignment}
         >
             {heading}
         </Text>
