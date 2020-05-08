@@ -277,6 +277,20 @@ $modal-radius: 4px;
             opacity: 0;
         }
     }
+    
+    // Anchors message component to top of modal
+    .message {
+        margin: 0;
+        max-width: 100%;
+    }
+
+    // IE-specific solution
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        .page-messages {
+            position: absolute;
+            top: 0;
+        }
+    }
 }
 
 .edit-form {
