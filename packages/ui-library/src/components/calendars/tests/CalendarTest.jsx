@@ -883,26 +883,35 @@ describe("Calendar", function () {
 
     });
 
-    it("returns a utcOffset when utcOffset prop is passed wtih a date range", function() {
+    it("Does not allow dates outside of range with UTC offset", function() {
 
         const component = getComponent({
             dateRange: {
-                startDate: new Date(2015, 9, 10), //Oct 10 2015
-                endDate: new Date(2015, 10, 20) //Nov 20 2015
+                startDate: "2015-10-10", //Oct 10 2015
+                endDate: "2015-11-20" //Nov 20 2015
             },
-            format: "YYYY-MM-DD Z",
-            utcOffset: "+05:00",
+            format: "YYYY-MM-DD",
+            utcOffset: "-24:00",
         });
 
         const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
-        ReactTestUtils.Simulate.change(input, { target: { value: "2015-11-18" } });
+        ReactTestUtils.Simulate.change(input, { target: { value: "2015-10-17" } });
         ReactTestUtils.Simulate.blur(input, {});
 
         const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
 
-        expect(textInput.value ).toBe("2015-11-18 +05:00");
+        expect(textInput.value).toBe("2015-10-17");
 
+        ReactTestUtils.Simulate.change(input, { target: { value: "2015-10-09" } });
+        ReactTestUtils.Simulate.blur(input, {});
+
+        expect(textInput.value).toBe("2015-10-17");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "2015-11-21" } });
+        ReactTestUtils.Simulate.blur(input, {});
+
+        expect(textInput.value).toBe("2015-10-17");
     });
 
 });

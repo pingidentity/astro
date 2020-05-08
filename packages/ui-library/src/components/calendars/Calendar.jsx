@@ -284,8 +284,9 @@ class Calendar extends React.Component {
                 currentView: this.state.currentView - 1
             });
         }
-        if (CalendarUtils.inDateRange(this._getDate(date), this._parseDateRange(this.props.dateRange))) {
-            this._handleValueChange(date);
+        const parsedDate = this._getDate(date);
+        if (CalendarUtils.inDateRange(parsedDate, this._parseDateRange(this.props.dateRange))) {
+            this._handleValueChange(parsedDate);
         }
 
     };
@@ -297,8 +298,9 @@ class Calendar extends React.Component {
      * @param {Boolean} isDayView [description]
      */
     setDate = (date, isDayView) => {
+        const parsedDate = this._getDate(date);
         if (CalendarUtils.inDateRange(this._getDate(date), this._parseDateRange(this.props.dateRange))) {
-            this._handleValueChange(date);
+            this._handleValueChange(parsedDate);
 
             if (this.props.closeOnSelect && isDayView) {
                 this.setState({
@@ -336,12 +338,12 @@ class Calendar extends React.Component {
         // below and the fact that the keyboard interactions use this.state.date,
         // the StateContainer just creates a second source of truth.
         this.setState({
-            date: this.props.date ? this._getDate(this.props.date) : value,
+            ...(this.props.date ? {} : { date: value }),
             inputValue: undefined,
         });
 
         if (onValueChange) {
-            onValueChange(this._getComputableDate(this._handleUtcOffset(value)));
+            onValueChange(this._getComputableDate(value));
         }
     }
 
@@ -349,7 +351,7 @@ class Calendar extends React.Component {
         const convertedDate = moment(date).clone();
         // .utcOffset doesn't actually change the date if the argument is undefined,
         // so calling this when there's no utcOffset won't have any effect.
-        convertedDate.utcOffset(this.props.utcOffset);
+        convertedDate.utcOffset(this.props.utcOffset, true);
         return convertedDate;
     }
 
@@ -365,12 +367,13 @@ class Calendar extends React.Component {
         if (date) {
             // format, with strict parsing true, so we catch bad dates
             newDate = this._handleUtcOffset(moment(date, format, true));
+
             // if the new date didn't match our format, parse it otherwise
             if (!newDate.isValid()) {
                 newDate = this._handleUtcOffset(date);
             }
 
-            if (CalendarUtils.inDateRange(this._getDate(date), this._parseDateRange(this.props.dateRange))) {
+            if (CalendarUtils.inDateRange(newDate, this._parseDateRange(this.props.dateRange))) {
                 this._handleValueChange(newDate);
             }
             this.setState({
