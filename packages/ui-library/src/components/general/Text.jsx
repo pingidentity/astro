@@ -118,6 +118,7 @@ const Text = ({
                 [`text-${variant}`]: variant,
                 "text-component--inline": inline,
                 "text-component--center": align === alignments.CENTER,
+                "text-component--left": align === alignments.LEFT,
                 "text-component--right": align === alignments.RIGHT,
                 "text-component--overflow-wrap": overflow === overflowTypes.WRAP
             }
