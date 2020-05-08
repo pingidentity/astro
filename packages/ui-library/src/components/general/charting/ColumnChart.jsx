@@ -89,8 +89,6 @@ export const ColumnChartTitle = ({ className, ...props }) => (
     />
 );
 
-const BASE_YAXIS_ID = "base";
-
 export default class ColumnChart extends React.Component {
     static propTypes = {
         className: PropTypes.string,
@@ -109,6 +107,7 @@ export default class ColumnChart extends React.Component {
             color: PropTypes.string
         })),
         lines: PropTypes.bool,
+        baseYAxisId: PropTypes.string,
         referenceLabelColor: PropTypes.string,
         referenceLineColor: PropTypes.string,
         renderTooltip: PropTypes.func,
@@ -125,6 +124,7 @@ export default class ColumnChart extends React.Component {
         onClick: _.noop,
         onMouseOver: _.noop,
         onMouseOut: _.noop,
+        baseYAxisId: "BASE_YAXIS_ID",
         referenceLabelColor: "#676e75",
         referenceLineColor: "#57A0EA",
         renderTooltip: defaultRender,
@@ -201,9 +201,9 @@ export default class ColumnChart extends React.Component {
             if (axis.yAxisId && !yAxes.includes(axis.yAxisId)) {
                 yAxes.push(axis.yAxisId);
                 return (<YAxis key={axis.yAxisId} yAxisId={axis.yAxisId} hide={true} />);
-            } else if (!axis.yAxisId && !yAxes.includes(BASE_YAXIS_ID)) {
-                yAxes.push(BASE_YAXIS_ID);
-                return (<YAxis key={BASE_YAXIS_ID} yAxisId={BASE_YAXIS_ID} hide={true} />);
+            } else if (!axis.yAxisId && !yAxes.includes(this.props.baseYAxisId)) {
+                yAxes.push(this.props.baseYAxisId);
+                return (<YAxis key={this.props.baseYAxisId} yAxisId={this.props.baseYAxisId} hide={true} />);
             }
         });
     };
@@ -213,16 +213,18 @@ export default class ColumnChart extends React.Component {
             return;
         }
 
-        const valueData = this.props.data.find(o => o.id === this.state.selected.x.label);
+        const valueByX = this.props.data.find(o => o.id === this.state.selected.x.label);
+        const valueByY = valueByX ? valueByX.data.find(o => o.id === this.state.selected.y.label) : null;
+        const legendItem = [...this.props.legend][this.state.selected.y.index];
 
-        // Check to see if selected.x is referencing an old data set
-        if (!valueData) { return; }
+        // Check to see if this.props.data has selected bar's info to show
+        if (!valueByY || !legendItem) { return; }
 
         const data = {
-            color: [...this.props.legend].reverse()[this.state.selected.y.index].color,
+            color: legendItem.color,
             x: this.state.selected.x,
             y: this.state.selected.y,
-            value: valueData.data.find(o => o.id === this.state.selected.y.label).value
+            value: valueByY.value
         };
 
         return (
@@ -239,7 +241,7 @@ export default class ColumnChart extends React.Component {
                 : null;
         return selectedYItem
             ? selectedYItem.yAxisId
-            : BASE_YAXIS_ID;
+            : this.props.baseYAxisId;
     }
 
     _labelTranslate = 0;
@@ -253,6 +255,7 @@ export default class ColumnChart extends React.Component {
             "data-id": dataId,
             lines,
             referenceLabelColor,
+            baseYAxisId
         } = this.props;
 
         const digestedData = this._digestData(data);
@@ -306,7 +309,7 @@ export default class ColumnChart extends React.Component {
                             cursor={false}
                             offset={tooltipOffset}
                         />
-                        { !hasCustomState && legend.map(({ id, label, color, yAxisId = BASE_YAXIS_ID }, index) => {
+                        { !hasCustomState && legend.map(({ id, label, color, yAxisId = baseYAxisId }, index) => {
                             return (
                                 <Bar
                                     label={label ? label : id}
