@@ -133,6 +133,18 @@ class CalendarDemo extends React.Component {
                     onValueChange={this._getSelectedUTCOffset}
                     utcOffset = "+24:00"
                 />
+                <br/><br/>
+                <Calendar data-id="calendar"
+                    validateInputValue={value => {
+                        console.log("Date valid: " + !/[^0-9-]/.test(value));
+                        return !/[^0-9-]/.test(value);
+                    }}
+                    closeOnSelect
+                    computableFormat="x"
+                    format="YYYY-MM-DD"
+                    labelText="Calendar with validation"
+                    name="calendar-demo"
+                />
             </div>
         );
     }

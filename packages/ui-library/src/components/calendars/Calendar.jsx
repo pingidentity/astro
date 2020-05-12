@@ -11,7 +11,7 @@ import CalendarUtils from "./Utils";
 import Translator from "../../util/i18n/Translator.js";
 import PopperContainer from "../tooltips/PopperContainer";
 import { InputWidths, InputWidthProptypesAuto, getInputWidthClass } from "../forms/InputWidths";
-import { noop } from "underscore";
+import { isFunction, noop } from "underscore";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -101,6 +101,10 @@ var Views = {
  *    Callback to be triggered when a date is selected.
  * @param {Calendar~onTextInputValueChange} [onTextInputValueChange]
  *    Callback to be triggered when a date is typed into the text input field.
+ * @param {Calendar~validateInputValue} [validateInputValue]
+ *    Validator function called whenever the value of the Calendar input is changed. Receives
+ *    the input's value as an argument; if it returns true, allows the value to be entered. If
+ *    false, it does not allow the value to be entered.
  *
  * @param {string} [placeholder]
  *    Placeholder text for the calendar field.
@@ -316,14 +320,19 @@ class Calendar extends React.Component {
      * @param  {Object} e The event object
      */
     changeDate = (e) => {
-        const { onInputTextValueChange } = this.props;
+        const {
+            onInputTextValueChange,
+            validateInputValue
+        } = this.props;
         const inputValue = e.target.value;
 
-        this.setState({
-            inputValue
-        });
-
-        onInputTextValueChange(inputValue);
+        // If there's no validator or if the value is valid, set a new value.
+        if (!isFunction(validateInputValue) || validateInputValue(inputValue)) {
+            this.setState({
+                inputValue
+            });
+            onInputTextValueChange(inputValue);
+        }
     };
 
     // formats the date according to the provided computable format
