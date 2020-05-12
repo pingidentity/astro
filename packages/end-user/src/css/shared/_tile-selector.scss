@@ -194,6 +194,10 @@ button.tile-button {
         }
     }
 
+    &__content-container {
+        flex-basis: 0;
+    }
+
     &__content {
         @include flexbox-grow(1);
 

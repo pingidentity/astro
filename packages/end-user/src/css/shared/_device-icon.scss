@@ -1,11 +1,7 @@
 .device-icon {
     display: inline-block;
     vertical-align: middle;
-    svg {
-        max-width: 30px;
-        max-height: 30px;
 
-    }
     &__title {
         text-transform: uppercase;
         color: $color-active-blue;
