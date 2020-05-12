@@ -86,6 +86,10 @@
                 line-height: 35px;
                 font-size: 16px;
                 margin-right: $spacing-md;
+
+                &.pingicon-error-triangle {
+                    line-height: 32px;
+                }
             }
         }
 
@@ -116,6 +120,9 @@
                 margin-right: 0;
                 margin-bottom: $spacing-md;
                 background: transparent;
+                &.pingicon-error-triangle {
+                    line-height: 46px;
+                }
             }
 
             .message__title {
@@ -188,6 +195,10 @@
             line-height: 20px;
 
             font-size: 10px;
+
+            &.pingicon-error-triangle {
+                line-height: 18px;
+            }
         }
 
         &__progress {
