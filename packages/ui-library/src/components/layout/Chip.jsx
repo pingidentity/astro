@@ -130,7 +130,6 @@ Chip.propTypes = {
 
 Chip.defaultProps = {
     "data-id": "chip-component",
-    color: null, // we need to set this conditionally, see UIP-3495
     fullWidth: false,
 };
 
