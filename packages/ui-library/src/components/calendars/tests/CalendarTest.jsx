@@ -914,4 +914,22 @@ describe("Calendar", function () {
         expect(textInput.value).toBe("2015-10-17");
     });
 
+    it("handles invalid characters written into the input using validateInputValue", function() {
+        const validateInputValue = jest.fn(() => true);
+        const component = getComponent({
+            validateInputValue,
+            date: "02-02-2002",
+            format: "DD-MM-YYYY"
+        });
+
+        const input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "abc" } });
+        ReactTestUtils.Simulate.blur(input, {});
+
+        const textInput = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar-input");
+
+        expect(validateInputValue).toHaveBeenCalled();
+        expect(textInput.value).toEqual("02-02-2002");
+    });
 });
