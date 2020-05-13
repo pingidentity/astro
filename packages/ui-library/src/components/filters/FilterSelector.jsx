@@ -165,15 +165,6 @@ class FilterSelectorBase extends React.Component {
         this.setState({ showOnlySelected: false });
     }
 
-    _getSelectedCount = () => this._getOptions().flatMap(option => {
-        if (this.props.selected.includes(option.value)) {
-            return option.children || option;
-        } else if (option.children) {
-            return option.children.filter(({ value }) => this.props.selected.includes(value));
-        }
-        return [];
-    }).length;
-
     render = () => {
         const {
             "data-id": dataId,
@@ -206,7 +197,7 @@ class FilterSelectorBase extends React.Component {
                             label={label}
                             placeholder={placeholder}
                             required={required}
-                            count={selected.length > 0 ? this._getSelectedCount() : -1}
+                            count={selected.length > 0 ? selected.length : -1}
                         />
                     }
                     open={open}
