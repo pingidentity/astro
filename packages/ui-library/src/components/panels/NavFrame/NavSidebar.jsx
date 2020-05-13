@@ -260,7 +260,7 @@ NavSidebar.propTypes = {
     navTree: generateNavTreePropType(
         3,
         [null, { icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]) }]
-    ).isRequired,
+    ),
     onCollapse: PropTypes.func,
     onSelectItem: PropTypes.func,
     selectedHeaderLabel: PropTypes.node,
@@ -277,6 +277,7 @@ NavSidebar.propTypes = {
 NavSidebar.defaultProps = {
     collapsed: true,
     "data-id": "nav-sidebar",
+    navTree: [],
     onCollapse: noop,
     onSelectItem: noop,
 };
