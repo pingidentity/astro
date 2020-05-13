@@ -1234,6 +1234,17 @@ module.exports = [
                         }
                     },
                     {
+                        label: "Quick Actions",
+                        demo: require("../components/panels/QuickActionsDemo"),
+                        pathToDoc: "components/panels/QuickActions.jsx",
+                        pathToSource: "components_panels_QuickActions.jsx.html",
+                        pathToDemoSource: "demo_components_panels_QuickActionsDemo.jsx.html",
+                        status: {
+                            message: "THIS COMPONENT IS STILL IN DEVELOPMENT. FOR PINGFEDERATE USE ONLY.",
+                            type: "version"
+                        }
+                    },
+                    {
                         label: "LineChart",
                         demo: require("../components/general/charting/LineChartDemo"),
                         pathToDoc: "components/general/charting/LineChart.jsx",
@@ -1509,6 +1520,13 @@ module.exports = [
                         label: "Gateways",
                         demo: require("../../templates/Gateways"),
                         pathToSource: "templates_Gateways.jsx.html",
+                        fullscreen: true,
+                        icon: "details",
+                    },
+                    {
+                        label: "Ping Fed Admin",
+                        demo: require("../../templates/PingFedAdmin"),
+                        pathToSource: "templates_PingFedAdmin.jsx.html",
                         fullscreen: true,
                         icon: "details",
                     },

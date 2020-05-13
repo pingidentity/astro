@@ -1,0 +1,24 @@
+.nav-card {
+    display: flex;
+
+    .dashboard-card__front {
+        border-radius: 4px;
+
+        //setting temp background
+        background-color: #021e3585;
+    }
+}
+
+.nav-card__title {
+    // Needed for specificity
+    &.text-page-title {
+        font-size: 20px;
+        color: #ededed;
+    }
+}
+
+.nav-card__divider {
+    border-left: 1px dotted $color-white;
+    margin-top: 57px;
+    margin-bottom: 10px;
+}
