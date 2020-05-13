@@ -21,7 +21,7 @@ if (userPass === undefined) {
     console.log("Please supply a username:password");
 }
 
-const params = `project = "UIP" AND fixversion =  ${version} AND status = "Ready for Release" `;
+const params = `project = "UIP" AND fixversion =  "ui-library@${version}" AND status = "Ready for Release" `;
 const requestUri = `https://jira.pingidentity.com/rest/api/2/search?jql=${encodeURIComponent(params)}`;
 
 function addNotesToDoc(v, p) {
