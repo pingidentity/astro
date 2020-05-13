@@ -44,6 +44,8 @@ import { generateNavTreePropType } from "../../../util/PropUtils";
 *     The React nodes to show on the left side of the header.
 * @param {Object[]} [headerRight]
 *     An array of React nodes shown on the right side of the header.
+* @param {boolean} isFullscreen=false
+*     If set to true, hides the left nav bar.
 * @param {NavFrame~navTreeNode[]} navTree
 *     The nav tree object use to generate the navigation nodes of the NavFrame.
 * @param {string|number} [selectedNode]
@@ -163,13 +165,14 @@ const getSelectedNode = (firstNode, selectedNode, autoSelectFirstNode) => {
 };
 
 export default function NavFrame({
+    appMessage,
     autoSelectFirstNode,
     children: componentChildren,
     copyright,
     "data-id": dataId,
     headerLeft,
     headerRight,
-    appMessage,
+    isFullscreen,
     navTree,
     onSelectItem,
     selectedNode
@@ -187,12 +190,12 @@ export default function NavFrame({
     const {
         header: selectedHeader,
         section: selectedSection
-    } = indexedTree[selectedNode !== undefined ? selectedNode : firstNode];
+    } = indexedTree[selectedNode !== undefined ? selectedNode : firstNode] || {};
 
     const {
         children: sectionNodes,
         label: selectedHeaderLabel
-    } = navTree.find(({ id }) => id === selectedHeader);
+    } = navTree.find(({ id }) => id === selectedHeader) || {};
 
     const [collapsedState, setCollapsed] = useState(true);
 
@@ -210,19 +213,21 @@ export default function NavFrame({
                 selectedHeader={selectedHeader}
             />
             <div className="nav-frame__bottom">
-                <NavSidebar
-                    collapsed={collapsedState}
-                    copyright={copyright}
-                    onCollapse={() => setCollapsed(true)}
-                    onSelectItem={(id, e) => {
-                        setCollapsed(false);
-                        onSelectItem(id, e);
-                    }}
-                    selectedHeaderLabel={selectedHeaderLabel}
-                    selectedNode={selected}
-                    selectedSection={selected ? selectedSection : undefined}
-                    navTree={sectionNodes}
-                />
+                {!isFullscreen &&
+                    <NavSidebar
+                        collapsed={collapsedState}
+                        copyright={copyright}
+                        onCollapse={() => setCollapsed(true)}
+                        onSelectItem={(id, e) => {
+                            setCollapsed(false);
+                            onSelectItem(id, e);
+                        }}
+                        selectedHeaderLabel={selectedHeaderLabel}
+                        selectedNode={selected}
+                        selectedSection={selected ? selectedSection : undefined}
+                        navTree={sectionNodes}
+                    />
+                }
                 <div className="nav-content">
                     {componentChildren}
                 </div>
@@ -238,6 +243,7 @@ NavFrame.propTypes = {
     "data-id": PropTypes.string,
     headerLeft: PropTypes.node,
     headerRight: PropTypes.node,
+    isFullscreen: PropTypes.bool,
     navTree: generateNavTreePropType(4),
     onSelectItem: PropTypes.func,
     selectedNode: PropTypes.oneOfType([
@@ -249,5 +255,7 @@ NavFrame.propTypes = {
 NavFrame.defaultProps = {
     autoSelectFirstNode: true,
     "data-id": "nav-frame",
+    isFullscreen: false,
+    navTree: [],
     onSelectItem: noop
 };

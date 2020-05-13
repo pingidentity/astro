@@ -176,4 +176,15 @@ describe("NavFrame", () => {
         sidebar.prop("onCollapse")();
         expect(component.find(NavSidebar).prop("collapsed")).toEqual(true);
     });
+
+    it("does not render sidebar when isFullScreen is set to true", () => {
+        const component = shallow(
+            <NavFrame
+                {...defaultProps}
+                isFullscreen
+            />
+        );
+
+        expect(component.find(NavSidebar).exists()).toEqual(false);
+    });
 });
