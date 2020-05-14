@@ -67,8 +67,10 @@ class MaskedValue extends React.Component {
 
         return (
             <span className={classNames} data-id={this.props["data-id"]}>
-                <span className="masked-value__value">{children}</span>
-                <Anchor data-id="reveal" className={iconClassNames} onClick={this._handleToggleReveal} />
+                <div className="masked-value__container">
+                    <div className="masked-value__value">{children}</div>
+                    <Anchor data-id="reveal" className={iconClassNames} onClick={this._handleToggleReveal} />
+                </div>
             </span>
         );
     };

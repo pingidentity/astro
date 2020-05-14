@@ -146,13 +146,26 @@
     &--masked {
         letter-spacing: 2px;
     }
+    &__container {
+        display: inline-flex;
+        max-width: 100%;
+    }
+    &--masked &__value {
+        max-height: 1em;
+        overflow: hidden;
+    }
+
+    &__value {
+        flex: 1 1 auto;
+        word-break: break-word;
+    }
 
     &__icon {
         color: $color-midnight;
         font-size: 20px;
         margin-left: $spacing-sm;
-        vertical-align: middle;
-        line-height: 11px;
+        line-height: 18px;
+        flex: 0 0 auto;
 
         &:hover {
             text-decoration: none;
