@@ -1,5 +1,6 @@
-var PropTypes = require("prop-types");
-var React = require("react");
+import React from "react";
+import PropTypes from "prop-types";
+import noop from "lodash/noop";
 
 module.exports = class extends React.Component {
     static propTypes = {
@@ -9,7 +10,8 @@ module.exports = class extends React.Component {
     };
 
     static defaultProps = {
-        "data-id": "cell"
+        "data-id": "cell",
+        onClick: noop
     };
 
     render() {
@@ -17,7 +19,16 @@ module.exports = class extends React.Component {
         var className = this.props.className + " cell";
 
         return (
-            <div data-id={this.props["data-id"]} className={className}>{label}</div>
+            <div
+                data-id={this.props["data-id"]}
+                className={className}
+                // TODO: Change this to actually fire onClick. This only has to be a mouse down
+                // because the Calendar component input expects to blur when an option is clicked
+                // and so this needs to fire before that happens.
+                onMouseDown={e => this.props.onClick(this.props.value, e)}
+            >
+                {label}
+            </div>
         );
     }
 };
