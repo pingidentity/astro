@@ -47,16 +47,15 @@ module.exports = class extends React.Component {
     };
 
     getMonth = () => {
-        var now = this.props.date,
-            month = now.month();
+        const month = this.props.date.month();
 
-        return moment.monthsShort().map(function (item, i) {
+        return moment.monthsShort().map((item, i) => {
             return {
                 label: item,
                 curr: i === month,
-                outOfRange: !CalendarUtils.inDateRange(now.clone().month(i), this.props.dateRange, "months")
+                outOfRange: !CalendarUtils.inDateRange(this.props.date.clone().month(i), this.props.dateRange, "months")
             };
-        }.bind(this));
+        });
     };
 
     render() {
