@@ -24,8 +24,9 @@ var _keyDownViewHelper = [
     }
 ];
 
-module.exports = {
+const normalizeTime = date => date.clone().hours(0).minutes(0).seconds(0);
 
+module.exports = {
     keyDownActions: function (code) {
         var _viewHelper = _keyDownViewHelper[this.state.currentView];
         var unit = _viewHelper.unit;
@@ -72,6 +73,7 @@ module.exports = {
             this.setDate(newDate);
         }
     },
+    normalizeTime,
 
     inDateRange: function (date, { startDate, endDate } = {}, unit) {
         if (!date || (!startDate && !endDate)) {
@@ -84,9 +86,12 @@ module.exports = {
 
         switch (unit) {
             case "months":
-                // Disregard different date of month when comparing months by setting all to 1
-                if ((start && date.clone().date(1).isBefore(start.date(1))) ||
-                        (end && date.clone().date(1).isAfter(end.date(1)))) {
+                // Normalize months by setting it to the same day and time in the month. Can't set it
+                // to the first or last day of the month because UTC offset might cause the local date
+                // to be in a different month. Also adjust start and end by 5 minutes because moment's
+                // isBefore and isAfter evaluate identical dates to true.
+                if ((start && normalizeTime(date).date(5).isBefore(normalizeTime(start.date(5)).minutes(-5))) ||
+                        (end && normalizeTime(date).date(5).isAfter(normalizeTime(end.date(5)).minutes(5)))) {
                     return false;
                 }
                 break;
