@@ -43,33 +43,6 @@ module.exports = class extends React.Component {
         this.props.onSetDate(date);
     };
 
-    cellClick = (e) => {
-        /* istanbul ignore next  */
-        var cell = e.target,
-            date = parseInt(cell.innerHTML, 10),
-            newDate = this.props.date ? this.props.date.clone() : this.getNow();
-
-        /* istanbul ignore if  */
-        if (isNaN(date)) {
-            return;
-        }
-
-        /* istanbul ignore if  */
-        if (cell.className.indexOf("prev") > -1) {
-            newDate.subtract(1, "months");
-
-        /* istanbul ignore elseif */
-        } else if (cell.className.indexOf("next") > -1) {
-            /* istanbul ignore next  */
-            newDate.add(1, "months");
-        }
-
-        newDate.date(date);
-        if (CalendarUtils.inDateRange(newDate, this.props.dateRange)) {
-            this.props.onSetDate(newDate, true);
-        }
-    };
-
     getNow = () => {
         const now = moment();
         if (this.props.utcOffset) {
@@ -80,20 +53,21 @@ module.exports = class extends React.Component {
 
     getDays = () => {
         /* istanbul ignore next  */
-        var now = this.props.date ? this.props.date : this.getNow(),
-            start = now.clone().startOf("month").day(0),
-            end = now.clone().endOf("month").day(6),
-            month = now.month(),
-            today = this.getNow(),
-            currDay = now.date(),
-            year = now.year(),
-            days = [];
+        const now = this.props.date ? this.props.date : this.getNow();
+        const start = now.clone().startOf("month").day(0);
+        const end = now.clone().endOf("month").day(6);
+        const month = now.month();
+        const today = this.getNow();
+        const currDay = now.date();
+        const year = now.year();
+        const days = [];
 
         today
             .range(start, end)
             .by("days", (day) => {
                 days.push({
                     label: day.format("D"),
+                    value: day,
                     prev: (day.month() < month && (day.year() <= year)) || day.year() < year,
                     next: day.month() > month || day.year() > year,
                     curr: day.date() === currDay && day.month() === month,
@@ -137,12 +111,12 @@ module.exports = class extends React.Component {
     }
 
     render() {
-        var titles = this.getDaysTitles().map(function (item, i) {
+        const titles = this.getDaysTitles().map(function (item, i) {
             return <Cell data-id={"titles-cell-" + item.val} value={item.label} className="day title" key={i} />;
         });
 
-        var days = this.getDays().map(function (item, i) {
-            var className = classnames({
+        const days = this.getDays().map((item, i) => {
+            const className = classnames({
                 day: true,
                 next: item.next,
                 prev: item.prev,
@@ -150,7 +124,15 @@ module.exports = class extends React.Component {
                 today: item.today,
                 disabled: item.outOfRange
             });
-            return <Cell data-id={"days-cell-" + item.label} value={item.label} className={className} key={i} />;
+            return (
+                <Cell
+                    data-id={"days-cell-" + item.label}
+                    value={item.label}
+                    className={className}
+                    key={i}
+                    onClick={!item.outOfRange ? () => this.props.onSetDate(item.value, true) : undefined}
+                />
+            );
         });
 
         /* istanbul ignore next  */
@@ -168,10 +150,7 @@ module.exports = class extends React.Component {
                     onClick={this.props.onNextView} />
 
                 <div className="days-title">{titles}</div>
-                {
-                    /* onMouseDown instead of onClick so cell selection event is caught BEFORE input blur event */
-                }
-                <div className="days" onMouseDown={this.cellClick} >{days}</div>
+                <div className="days" >{days}</div>
             </div>
         );
     }

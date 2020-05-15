@@ -303,14 +303,12 @@ class Calendar extends React.Component {
      */
     setDate = (date, isDayView) => {
         const parsedDate = this._getDate(date);
-        if (CalendarUtils.inDateRange(this._getDate(date), this._parseDateRange(this.props.dateRange))) {
-            this._handleValueChange(parsedDate);
+        this._handleValueChange(parsedDate);
 
-            if (this.props.closeOnSelect && isDayView) {
-                this.setState({
-                    isVisible: false,
-                });
-            }
+        if (this.props.closeOnSelect && isDayView) {
+            this.setState({
+                isVisible: false,
+            });
         }
     };
 

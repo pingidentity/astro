@@ -819,16 +819,6 @@ describe("Calendar", function () {
         expect(callback).toBeCalled();
     });
 
-    it("setDate does not trigger onValueChange callback when date out of range", function () {
-        const wrapper = mountComponent({
-            date: selectedDate, dateRange: dateRange, onValueChange: callback,
-        });
-        const component = wrapper;
-
-        component.instance().setDate(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
-        expect(callback).not.toBeCalled();
-    });
-
     it("should hide calendar when clicking input text to type date", () => {
         const component = getComponent();
 
@@ -848,11 +838,9 @@ describe("Calendar", function () {
 
         // open calendar
         ReactTestUtils.Simulate.click(container);
-
-        const clickArea = TestUtils.findRenderedDOMNodeWithClass(component, "days");
         const cell = TestUtils.findRenderedDOMNodeWithDataId(component, "days-cell-4");
 
-        ReactTestUtils.Simulate.mouseDown(clickArea, { target: cell });
+        ReactTestUtils.Simulate.mouseDown(cell);
 
         const activeCell = TestUtils.findRenderedDOMNodeWithClass(component, "current");
         expect(activeCell).toEqual(cell);
@@ -912,6 +900,34 @@ describe("Calendar", function () {
         ReactTestUtils.Simulate.blur(input, {});
 
         expect(textInput.value).toBe("2015-10-17");
+    });
+
+    it("calls onValueChange when clicking last day in range with utcOffset", function () {
+        const onValueChange = jest.fn();
+        const component = getComponent({
+            date: "2015-10-15",
+            dateRange: {
+                startDate: "2015-10-05",
+                endDate: "2015-10-17"
+            },
+            onValueChange,
+            utcOffset: "-20:00"
+        });
+
+        const container = TestUtils.findRenderedDOMNodeWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        const endDate = TestUtils.findRenderedDOMNodeWithDataId(component, "days-cell-17");
+        ReactTestUtils.Simulate.mouseDown(endDate);
+
+        expect(onValueChange).toHaveBeenCalledTimes(1);
+        expect(onValueChange).toHaveBeenCalledWith("10-17-2015");
+
+        const afterEndDate = TestUtils.findRenderedDOMNodeWithDataId(component, "days-cell-18");
+        ReactTestUtils.Simulate.mouseDown(afterEndDate);
+        expect(onValueChange).toHaveBeenCalledTimes(1);
     });
 
     it("handles invalid characters written into the input using validateInputValue", function() {
