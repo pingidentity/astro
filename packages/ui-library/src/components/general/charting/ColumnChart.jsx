@@ -215,7 +215,7 @@ export default class ColumnChart extends React.Component {
 
         const valueByX = this.props.data.find(o => o.id === this.state.selected.x.label);
         const valueByY = valueByX ? valueByX.data.find(o => o.id === this.state.selected.y.label) : null;
-        const legendItem = [...this.props.legend][this.state.selected.y.index];
+        const legendItem = [...this.props.legend].reverse()[this.state.selected.y.index];
 
         // Check to see if this.props.data has selected bar's info to show
         if (!valueByY || !legendItem) { return; }
