@@ -12,7 +12,7 @@ export default {
 };
 
 export const Default = () => [
-    <Row><TextInput format={textInputFormats.TEXT} placeholder="Ordinary text"/></Row>,
-    <Row><TextInput format={textInputFormats.NUMERIC} placeholder="Numbers only"/></Row>,
-    <Row><TextInput format={textInputFormats.EMAIL} placeholder="Type your email here"/></Row>,
+    <Row key="simple"><TextInput format={textInputFormats.TEXT} placeholder="Ordinary text" /></Row>,
+    <Row key="numeric"><TextInput format={textInputFormats.NUMERIC} placeholder="Numbers only" /></Row>,
+    <Row key="email"><TextInput format={textInputFormats.EMAIL} placeholder="Type your email here" /></Row>,
 ];
