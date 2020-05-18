@@ -19,7 +19,7 @@ $ npm install ui-library@[VERSION] --save
 You can also install the library from its full URL, which lets you bypass changing your npm registry. You have to hard-code the version when you do this.
 
 ```bash
-$ npm install http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library/[VERSION]/ui-library-[VERSION].tar.gz --save
+$ npm install https://art01.corp.pingidentity.com/artifactory/npm-local/ui-library/-/ui-library-[VERSION].tgz --save
 ```
 
 A snapshot version of the UI Library can be used in development by appending "-SNAPSHOT" to the version, but you should never use a snapshot of the library in a released product. You might want to perform a check during the release build of your project that the UI Library dependency is not on a SNAPSHOT and block the package release if the UI Library dependency is a SNAPSHOT.
