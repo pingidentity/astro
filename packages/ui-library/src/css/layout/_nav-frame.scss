@@ -114,8 +114,10 @@
         &:hover {
             @include font-pn-semibold;
             background: $color-white;
+            padding-right: 12px;
         }
         &--selected {
+            padding-right: 12px;
             .nav-sidebar__node-label {
                 @include font-pn-bold;
                 position: relative;
