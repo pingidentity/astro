@@ -23,6 +23,7 @@ import Utils from "../../util/Utils.js";
 import _ from "underscore";
 
 import PopperContainer from "../tooltips/PopperContainer";
+import PopperContainerContext from "../tooltips/PopperContainerContext";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
 /**
@@ -990,6 +991,7 @@ class FormDropDownListStateless extends React.Component {
                                 placement="bottom-start"
                                 matchWidth
                                 noGPUAcceleration
+                                hasPopperParent={this.context}
                             >
                                 {menuList}
                             </PopperContainer>
@@ -1000,6 +1002,8 @@ class FormDropDownListStateless extends React.Component {
         );
     }
 }
+
+FormDropDownListStateless.contextType = PopperContainerContext;
 
 const DropDownList = inStateContainer([
     {

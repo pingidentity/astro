@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import Popper from "popper.js";
 import { Portal } from "react-portal";
 import classnames from "classnames";
+import PopperContainerContext, { isNested } from "./PopperContainerContext";
 
 /**
  * @class PopperContainer
@@ -41,6 +42,7 @@ class PopperContainer extends React.Component {
         config: PropTypes.object,
         pointerClassName: PropTypes.string,
         role: PropTypes.string,
+        hasPopperParent: PropTypes.bool,
         onClick: PropTypes.func,
         placement: PropTypes.string,
         matchWidth: PropTypes.bool,
@@ -56,6 +58,7 @@ class PopperContainer extends React.Component {
         matchWidth: false,
         noGPUAcceleration: false,
         positionFixed: false,
+        hasPopperParent: false,
     }
 
     _popperAPI = null;
@@ -185,6 +188,7 @@ class PopperContainer extends React.Component {
             pointerClassName,
             role,
             onClick,
+            hasPopperParent
         } = this.props;
 
         const rendered = (
@@ -206,7 +210,11 @@ class PopperContainer extends React.Component {
             </div>
         );
 
-        return <Portal>{rendered}</Portal>;
+        return (
+            <PopperContainerContext.Provider value={isNested}>
+                {!hasPopperParent ? <Portal>{rendered}</Portal> : rendered }
+            </PopperContainerContext.Provider>
+        );
     }
 }
 
