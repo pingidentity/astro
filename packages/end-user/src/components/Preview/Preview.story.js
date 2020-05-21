@@ -55,8 +55,8 @@ export const Default = () => {
                                         <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="username1" />
                                         <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Password" id="password1" />
                                         <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                        <TextBlock className="branding-template-link-text"><a href="#">Forgot Password</a></TextBlock>
-                                        <TextBlock className="branding-template-link-text"><a href="#">No Account? Register Now!</a></TextBlock>
+                                        <TextBlock><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                        <TextBlock><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
                                     </Form>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ export const Default = () => {
                                     <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Verify New Password" id="verifypassword3" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Save" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-text">Didn't receive an email?<a href="#"> Resend</a></TextBlock>
+                                    <TextBlock>Didn't receive an email? <a href="#" className="branding-template-link-text">Resend</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -119,7 +119,7 @@ export const Default = () => {
                                     <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Re-enter Password" id="verifypassword4" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Create Account" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-text">Already have an account?<a href="#"> Sign In</a></TextBlock>
+                                    <TextBlock>Already have an account? <a href="#" className="branding-template-link-text">Sign In</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -195,8 +195,8 @@ export const Default = () => {
                                     <FloatLabelTextInput inputClassName="branding-template-text-input" label="Password" id="password7" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-text"><a href="#">Forgot Password</a></TextBlock>
-                                    <TextBlock className="branding-template-link-text"><a href="#">Not You? Switch Accounts.</a></TextBlock>
+                                    <TextBlock><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                    <TextBlock><a href="#" className="branding-template-link-text">Not You? Switch Accounts.</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -219,7 +219,7 @@ export const Default = () => {
                                     <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="password" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Submit" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-text"><a href="#">Cancel</a></TextBlock>
+                                    <TextBlock><a href="#" className="branding-template-link-text">Cancel</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -244,8 +244,8 @@ export const Default = () => {
                                     <Padding top={sizes.SM} />
                                     <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
                                     <SocialButton label="Login with Facebook" className="branding-template-social-button" branding={SocialButton.BrandTypes.FACEBOOK} />
-                                    <TextBlock className="branding-template-link-text"><a href="#">Forgot Password</a></TextBlock>
-                                    <TextBlock className="branding-template-link-text"><a href="#">No Account? Register Now!</a></TextBlock>
+                                    <TextBlock><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                    <TextBlock><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
                                 </Form>
                             </div>
                         </div>

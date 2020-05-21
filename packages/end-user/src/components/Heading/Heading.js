@@ -1,17 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 /**
  * Heading text
  */
-const Heading = ({ children, level, 'data-id': dataId }) => {
+const Heading = ({
+    children,
+    className,
+    level,
+    'data-id': dataId
+}) => {
+    const classNames = classnames('heading', className, {
+        'heading--4': level === 4,
+    });
+
+    let Tag = 'h1';
     if (level === 4) {
-        return <h4 className="heading heading--4" data-id={dataId}>{children}</h4>;
+        Tag = 'h4';
     }
-    return <h1 className="heading" data-id={dataId}>{children}</h1>;
+
+    return <Tag className={classNames} data-id={dataId}>{children}</Tag>;
 };
 
 Heading.propTypes = {
+    /**
+     * Sets the className for the header element
+     */
+    className: PropTypes.string,
     /**
      * Sets a data-id property on the Heading element to be used as a test hook
      */
