@@ -25,12 +25,16 @@ $input-placeholder-color: $color-neutral-40;
     font-weight: 400;
 }
 
-%primary-input-text,
-.primary-input-text {
+@mixin primary-input-text {
     font-family: $font-default;
     font-size: $font-size-xx;
     font-weight: 200;
     color: $input-text-color;
+}
+
+%primary-input-text,
+.primary-input-text {
+    @include primary-input-text;
 }
 
 %input-border,
@@ -54,12 +58,17 @@ $input-placeholder-color: $color-neutral-40;
     @extend %input-padding;
 }
 
-%placeholder-text,
-.placeholder-text {
+// Must use mixin when targeting pseudo-elements (See https://stackoverflow.com/a/49192449/5983154)
+@mixin placeholder-text {
     color: $input-placeholder-color;
     font-size: $input-font-size;
     font-weight: 400;
     text-transform: unset;
+}
+
+%placeholder-text,
+.placeholder-text {
+    @include placeholder-text
 }
 
 // WIDTHS

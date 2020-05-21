@@ -80,7 +80,11 @@ const TextInput = ({
     });
 
     return [
-        (type ? <div className={iconClassNames} key="type-icon"></div> : null),
+        (
+            type === 'success' || type === 'error' 
+                ? <div className={iconClassNames} key="type-icon"></div>
+                : null
+        ),
         <input
             className={classNames}
             data-id={dataId}
