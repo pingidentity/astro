@@ -13,21 +13,19 @@
     &--error, &--error:focus {
         border-color: $color-critical-red;
 
-        background: right $spacing-sm center no-repeat url("../icons/error.svg");
         background-color: $color-white;
 
         padding-right: $spacing-xl;
     }
 
     &--success {
-        background: right $spacing-sm center no-repeat url("../icons/success.svg");
         background-color: $color-white;
 
         padding-right: $spacing-xl;
     }
 
     &--primary {
-        @extend %primary-input-text;
+        @include primary-input-text;
 
         padding: $spacing-xs + 1px $spacing-sm $spacing-xs - 2px $spacing-sm;
         text-align: center;
@@ -35,6 +33,11 @@
         &.text-input--error {
             padding-right: $spacing-sm;
             background-image: none;
+        }
+
+        &::placeholder {
+            @include primary-input-text;
+            color: $input-placeholder-color;
         }
     }
 
