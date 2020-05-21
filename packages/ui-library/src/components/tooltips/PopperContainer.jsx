@@ -167,7 +167,8 @@ class PopperContainer extends React.Component {
                 this.observer.observe(this.popper, {
                     attributes: true,
                     subtree: true,
-                    attributeFilter: ["class", "value"]
+                    childList: true,
+                    attributeFilter: ["class", "value"],
                 });
             }
         }
@@ -219,4 +220,3 @@ class PopperContainer extends React.Component {
 }
 
 export default PopperContainer;
-
