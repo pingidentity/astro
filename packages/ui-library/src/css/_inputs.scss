@@ -206,6 +206,11 @@ label {
         margin: 0 0 8px;
         text-align: left;
 
+        .label-container {
+            align-items: baseline;
+            display: flex;
+        }
+
         .help-tooltip {
             margin-left: 10px;
             height: 12px;
@@ -2267,13 +2272,17 @@ input[type=file] {
         .input-container {
             opacity: $disabled-opacity;
         }
-        .label-text {
+        .label-container {
             span {
                 opacity: $disabled-opacity;
                 &.icon-help,
                 &.icon-lock {
                     opacity: $normal-opacity;
                 }
+            }
+
+            .label-container {
+                opacity: 1;
             }
         }
         .password-show-button {
@@ -2286,7 +2295,7 @@ input[type=file] {
         .icon {
             opacity: $disabled-opacity;
         }
-        .label-text {
+        .label-container {
             span {
                 opacity: $disabled-opacity;
                 &.icon-help,
