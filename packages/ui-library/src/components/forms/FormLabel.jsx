@@ -144,9 +144,11 @@ class FormLabel extends React.Component {
             >
                 { !noLabel && (
                     <span className="label-text" data-id="label">
-                        { value }
-                        { this._renderHint() }
-                        { this._renderLockHint() }
+                        <span className="label-container">
+                            {value}
+                            {this._renderHint()}
+                            {this._renderLockHint()}
+                        </span>
                         { this._renderDescriptionText()}
                     </span>
                 )}
