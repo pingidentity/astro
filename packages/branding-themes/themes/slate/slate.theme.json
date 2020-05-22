@@ -2,22 +2,22 @@
     "slate": {
         "color": {
             "button": {
-                "value": "#4a4a4a"
+                "value": "“#000000"
             },
             "buttonText": {
-                "value": "#4a4a4a"
+                "value": "#4A4A4A"
             },
             "bodyText": {
-                "value": "#4a4a4a"
+                "value": "#4C4C4C"
             },
             "headingText": {
-                "value": "#4a4a4a"
+                "value": "#4A4A4A"
             },
             "link": {
-                "value": "#4a4a4a"
+                "value": "#5F5F5F"
             },
             "card": {
-                "value": "#fcfcfc"
+                "value": "#FFFFFF"
             },
             "background": {
                 "value": ""
