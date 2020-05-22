@@ -32,7 +32,9 @@ const FloatLabel = ({
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
-        if (props.onChange) props.onChange(e);
+        if (onChange) {
+            onChange(e);
+        }
     };
 
     const floatClassNames = classnames('float-label', {

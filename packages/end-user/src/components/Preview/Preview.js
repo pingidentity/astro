@@ -3,47 +3,80 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { noop } from 'underscore';
 
+const cleanStyles = (styles) => {
+    return styles
+        .replace(/(\r\n|\n|\r)/gm, '') // Remove carriage returns
+        .replace(/  +/g, ' ') // Remove any # of spaces >= 2
+        .trim(); // Clean up extra spaces on ends
+};
+
 export const applyStyles = (colors, bgImg) => {
     const cssTemplate = `
-        body {
-            background: ${
-                bgImg ? `url(${bgImg})` : colors.background
-            };
-            color: ${colors.bodyText};
-        }
-
-        .card {
-            background: ${colors.card};
-        }
-
-        .branding-template-heading {
-            color: ${colors.headingText};
-        }
-
-        .text-input {
-            border-color: ${colors.button};
-        }
-
-        .branding-template-logo-container {
-            border-color: ${colors.background};
-        }
-
-        .branding-template-primary-button {
-            color: ${colors.buttonText};
-            background: ${colors.button};
-            border-color: ${colors.button};
-
-            &:hover {
-                color: ${colors.buttonText};
+        ${(bgImg || colors.background || colors.bodyText) ? `
+            .page {
+                ${colors.background ? `background: ${colors.background} !important;` : ''}
+                ${bgImg ? `background-image: url(${bgImg}) !important;` : ''}
             }
-        }
+        ` : ''}
 
-        .branding-template-link-text, a {
-            color: ${colors.link};
-        }
+        ${colors.bodyText ? `
+            .branding-template-primary-text {
+                color: ${colors.bodyText};
+            }
+
+            .branding-template-link-container {
+                color: ${colors.bodyText};
+            }
+        ` : ''}
+
+        ${colors.card ? `
+            .card {
+                background: ${colors.card};
+            }
+        ` : ''}
+
+        ${colors.headingText ? `
+            .branding-template-heading {
+                color: ${colors.headingText};
+            }
+        ` : ''}
+
+        ${colors.button ? `
+            .text-input {
+                border-color: ${colors.button};
+            }
+        ` : ''}
+
+        ${colors.background ? `
+            .branding-template-logo-container {
+                border-color: ${colors.background};
+            }
+        ` : ''}
+
+        ${(colors.buttonText || colors.button) ? `
+            .branding-template-primary-button {
+                ${colors.buttonText ? `color: ${colors.buttonText};` : ''}
+                ${colors.button ? `background: ${colors.button};` : ''}
+                ${colors.button ? `border-color: ${colors.button};` : ''}
+            }
+
+            .branding-template-primary-button:hover {
+                ${colors.buttonText ? `color: ${colors.buttonText};` : ''}
+            }
+
+            .branding-template-primary-button:active {
+                ${colors.button ? `background-color: ${colors.button};` : ''}
+            }
+        ` : ''}
+
+        ${colors.link ? `
+            .branding-template-link-text, a {
+                color: ${colors.link};
+            }
+        ` : ''}
     `;
 
-    return cssTemplate;
+    return cleanStyles(cssTemplate);
 };
 
 export const ThemeStyles = ({

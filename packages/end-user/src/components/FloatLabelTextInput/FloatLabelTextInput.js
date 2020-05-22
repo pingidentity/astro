@@ -15,20 +15,18 @@ const FloatLabelTextInput = ({
     label,
     id,
     ...props
-}) => {
-    return (
-        <FloatLabel
-            defaultValue={defaultValue}
-            label={label}
-            id={id}
-            InputType={TextInput}
-            inputClassName={inputClassName}
-            onChange={onChange}
-            value={value}
-            {...props}
-        />
-    );
-};
+}) => (
+    <FloatLabel
+        defaultValue={defaultValue}
+        label={label}
+        id={id}
+        InputType={TextInput}
+        inputClassName={inputClassName}
+        onChange={onChange}
+        value={value}
+        {...props}
+    />
+);
 
 FloatLabelTextInput.propTypes = {
     /**

@@ -11,3 +11,9 @@ $images: getThemeImages($THEME_NAME);
         max-width: 100%;
     }
 }
+
+.branding-template-primary-button {
+    &:hover {
+        opacity: 0.9;
+    }
+}

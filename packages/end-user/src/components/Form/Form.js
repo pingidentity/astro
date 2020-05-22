@@ -8,6 +8,7 @@ import classnames from 'classnames';
 const Form = ({
     children,
     margin,
+    onSubmit,
     spacing,
     'data-id': dataId,
 }) => {
@@ -17,7 +18,13 @@ const Form = ({
     });
 
     return (
-        <form className={classNames} data-id={dataId}>{children}</form>
+        <form
+            className={classNames}
+            data-id={dataId}
+            onSubmit={onSubmit}
+        >
+            {children}
+        </form>
     );
 };
 
@@ -31,6 +38,10 @@ Form.propTypes = {
      */
     margin: PropTypes.oneOf(['small']),
     /**
+     * Submit handler for the Form
+     */
+    onSubmit: PropTypes.func,
+    /**
      * Define spacing for the Form
      */
     spacing: PropTypes.oneOf(['large']),
@@ -38,6 +49,7 @@ Form.propTypes = {
 
 Form.defaultProps = {
     'data-id': 'form',
+    onSubmit: () => {},
 };
 
 export default Form;
