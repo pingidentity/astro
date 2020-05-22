@@ -21,6 +21,7 @@ const Button = ({
     'data-id': dataId,
     disabled,
     inline,
+    isSubmit,
     label,
     onClick,
     children,
@@ -46,7 +47,7 @@ const Button = ({
                     disabled={disabled}
                     onClick={onClick}
                     style={style}
-                    type="button"
+                    type={isSubmit ? 'submit' : 'button'}
                 >
                     {label}{children}
                 </button>
@@ -75,6 +76,10 @@ Button.propTypes = {
      */
     inline: PropTypes.bool,
     /**
+     * Sets the Button's type to 'submit'
+     */
+    isSubmit: PropTypes.bool,
+    /**
      * The text or markup to appear within Button
      */
     label: PropTypes.string,
@@ -100,6 +105,7 @@ Button.defaultProps = {
     'data-id': 'button',
     disabled: false,
     inline: false,
+    isSubmit: false,
     onClick: () => { },
 };
 

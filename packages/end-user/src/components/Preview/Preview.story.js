@@ -21,30 +21,30 @@ export default {
 };
 
 const themes = [
-    'https://assets.pingone.com/ux/branding-themes/0.11.0/default/default.css',
-    'https://assets.pingone.com/ux/branding-themes/0.11.0/split/split.css',
-    'https://assets.pingone.com/ux/branding-themes/0.11.0/slate/slate.css',
-    'https://assets.pingone.com/ux/branding-themes/0.11.0/mural/mural.css',
-    'https://assets.pingone.com/ux/branding-themes/0.11.0/focus/focus.css',
+    'https://assets.pingone.com/ux/branding-themes/0.14.0/default/default.css',
+    'https://assets.pingone.com/ux/branding-themes/0.14.0/split/split.css',
+    'https://assets.pingone.com/ux/branding-themes/0.14.0/slate/slate.css',
+    'https://assets.pingone.com/ux/branding-themes/0.14.0/mural/mural.css',
+    'https://assets.pingone.com/ux/branding-themes/0.14.0/focus/focus.css',
 ];
 
-export const Default = () => {
-    return (
-        themes.map((theme) => (
+export const Default = () =>
+    themes.map(theme => (
+        <div
+            key={theme}
+        >
             <div
-                key={theme}
+                style={{
+                    height: '500px',
+                    width: '100%',
+                }}
             >
-                <div
-                    style={{
-                        height: '500px',
-                        width: '100%',
-                    }}
+                <Preview
+                    themeStyleSheet={theme}
+                    device={devices.MOBILE}
                 >
-                    <Preview
-                        themeStyleSheet={theme}
-                        device={devices.MOBILE}
-                    >
-                        { /* Login */ }
+                    { /* Login */ }
+                    <div className="page" style={{ width: '100%', height: '100%' }}>
                         <Card>
                             <div className="flex-container">
                                 <div className="branding-template-logo-container">
@@ -55,21 +55,23 @@ export const Default = () => {
                                         <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="username1" />
                                         <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Password" id="password1" />
                                         <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                        <TextBlock><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
-                                        <TextBlock><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
+                                        <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                        <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
                                     </Form>
                                 </div>
                             </div>
                         </Card>
-                    </Preview>
-                </div>
+                    </div>
+                </Preview>
+            </div>
 
-                <Padding top={sizes.XL} />
+            <Padding top={sizes.XL} />
 
-                <Preview
-                    themeStyleSheet={theme}
-                >
-                    { /* Recover */ }
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Recover */ }
+                <div className="page" style={{ width: '100%', height: '100%' }}>
                     <Card>
                         <div className="flex-container">
                             <div className="branding-template-logo-container">
@@ -82,26 +84,28 @@ export const Default = () => {
                                     you will receive an email with a recovery code which you may enter here,
                                     along with a new password. If you do not have an account or email,
                                     please contact your administrator to recover your password.
-                                    </TextBlock>
+                                </TextBlock>
                                 <Form className="branding-template-form">
                                     <FloatLabelTextInput inputClassName="branding-template-text-input" label="Recovery Code" id="recoverycode3" />
                                     <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Enter New Password" id="newpassword3" />
                                     <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Verify New Password" id="verifypassword3" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Save" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock>Didn't receive an email? <a href="#" className="branding-template-link-text">Resend</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container">Didn't receive an email? <a href="#" className="branding-template-link-text">Resend</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
                     </Card>
-                </Preview>
+                </div>
+            </Preview>
 
-                <Padding top={sizes.XL} />
+            <Padding top={sizes.XL} />
 
-                <Preview
-                    themeStyleSheet={theme}
-                >
-                    { /* Create profile */}
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Create profile */}
+                <div className="page" style={{ width: '100%', height: '100%' }}>
                     <Card>
                         <div className="flex-container">
                             <div className="branding-template-logo-container">
@@ -119,19 +123,21 @@ export const Default = () => {
                                     <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Re-enter Password" id="verifypassword4" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Create Account" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock>Already have an account? <a href="#" className="branding-template-link-text">Sign In</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container">Already have an account? <a href="#" className="branding-template-link-text">Sign In</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
                     </Card>
-                </Preview>
+                </div>
+            </Preview>
 
-                <Padding top={sizes.XL} />
+            <Padding top={sizes.XL} />
 
-                <Preview
-                    themeStyleSheet={theme}
-                >
-                    { /* Error */ }
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Error */ }
+                <div className="page" style={{ width: '100%', height: '100%' }}>
                     <Card>
                         <div className="flex-container">
                             <div className="branding-template-logo-container">
@@ -147,14 +153,16 @@ export const Default = () => {
                             </div>
                         </div>
                     </Card>
-                </Preview>
+                </div>
+            </Preview>
 
-                <Padding top={sizes.XL} />
+            <Padding top={sizes.XL} />
 
-                <Preview
-                    themeStyleSheet={theme}
-                >
-                    { /* Phone # */ }
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Phone # */ }
+                <div className="page" style={{ width: '100%', height: '100%' }}>
                     <Card>
                         <div className="flex-container">
                             <div className="branding-template-logo-container">
@@ -172,14 +180,16 @@ export const Default = () => {
                             </div>
                         </div>
                     </Card>
-                </Preview>
+                </div>
+            </Preview>
 
-                <Padding top={sizes.XL} />
+            <Padding top={sizes.XL} />
 
-                <Preview
-                    themeStyleSheet={theme}
-                >
-                    { /* Enter password */}
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Enter password */}
+                <div className="page" style={{ width: '100%', height: '100%' }}>
                     <Card>
                         <div className="flex-container">
                             <div className="branding-template-logo-container">
@@ -195,20 +205,22 @@ export const Default = () => {
                                     <FloatLabelTextInput inputClassName="branding-template-text-input" label="Password" id="password7" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
-                                    <TextBlock><a href="#" className="branding-template-link-text">Not You? Switch Accounts.</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Not You? Switch Accounts.</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
                     </Card>
-                </Preview>
+                </div>
+            </Preview>
 
-                <Padding top={sizes.XL} />
+            <Padding top={sizes.XL} />
 
-                <Preview
-                    themeStyleSheet={theme}
-                >
-                    { /* Enter username */ }
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Enter username */ }
+                <div className="page" style={{ width: '100%', height: '100%' }}>
                     <Card>
                         <div className="flex-container">
                             <div className="branding-template-logo-container">
@@ -219,19 +231,21 @@ export const Default = () => {
                                     <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="password" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Submit" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock><a href="#" className="branding-template-link-text">Cancel</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Cancel</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
                     </Card>
-                </Preview>
+                </div>
+            </Preview>
 
-                <Padding top={sizes.XL} />
+            <Padding top={sizes.XL} />
 
-                <Preview
-                    themeStyleSheet={theme}
-                >
-                    { /* Login with provider */ }
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Login with provider */ }
+                <div className="page" style={{ width: '100%', height: '100%' }}>
                     <Card>
                         <div className="flex-container">
                             <div className="branding-template-logo-container">
@@ -244,16 +258,15 @@ export const Default = () => {
                                     <Padding top={sizes.SM} />
                                     <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
                                     <SocialButton label="Login with Facebook" className="branding-template-social-button" branding={SocialButton.BrandTypes.FACEBOOK} />
-                                    <TextBlock><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
-                                    <TextBlock><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
                     </Card>
-                </Preview>
+                </div>
+            </Preview>
 
-                <Padding top={sizes.XL} />
-            </div>
-        )
+            <Padding top={sizes.XL} />
+        </div>
     ));
-};

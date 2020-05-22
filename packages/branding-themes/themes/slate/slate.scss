@@ -8,7 +8,7 @@ $images: getThemeImages($THEME_NAME);
 /**
  * Styles
  */
-body {
+.page {
     text-align: left;
 }
 
@@ -61,6 +61,10 @@ body {
 
 .branding-template-heading,
 .branding-template-primary-text {
+    text-align: left;
+}
+
+.branding-template-link-container {
     text-align: left;
 }
 

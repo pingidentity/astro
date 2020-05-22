@@ -9,5 +9,6 @@ export default {
 export const Default = () => (
     <FloatLabelTextInput
         label="Username"
+        onChange={(e) => console.log(e.target.value)}
     />
 );
