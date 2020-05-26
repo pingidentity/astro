@@ -134,6 +134,8 @@ MetricsTooltip.defaultProps = {
  *     The item id reference in the data structure.
  * @param {string} [dataValue="value"]
  *     The item value reference in the data structure.
+ * @param {number} [minAngle]
+ *     The minimum angle of each unzero data.
  */
 
 /**
@@ -185,6 +187,7 @@ class PieChart extends React.Component {
         dataKey: PropTypes.string,
         dataValue: PropTypes.string,
         height: PropTypes.number,
+        minAngle: PropTypes.number,
         onClick: PropTypes.func,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
@@ -200,6 +203,7 @@ class PieChart extends React.Component {
         dataKey: "id",
         dataValue: "value",
         height: 300,
+        minAngle: 15,
         onClick: noop,
         onMouseOver: noop,
         onMouseOut: noop,
@@ -350,11 +354,12 @@ class PieChart extends React.Component {
                     nameKey={this.props.dataKey}
                     dataKey={this.props.dataValue}
                     innerRadius="55%"
-                    minAngle={15}
+                    minAngle={this.props.minAngle}
                     legendType={this.props.legendType}
                     onMouseEnter={this._mouseEnter}
                     onClick={this._onClick}
                     animationDuration={1000}
+                    stroke=""
 
                 >
                     {this._renderCells(renderedChartData)}
