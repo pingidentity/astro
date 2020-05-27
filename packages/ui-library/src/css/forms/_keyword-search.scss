@@ -42,12 +42,17 @@
         }
 
         &-label {
-            max-width: 55%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            max-width: 55%;
         }
 
+        &-section.text-component,
+        &-root.text-component {
+            width: unset;
+            max-width: 45%;
+        }
     }
 
     &__result-section {

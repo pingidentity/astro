@@ -46,11 +46,13 @@ const KeywordSearchView = ({
                     className="keyword-search__result-section"
                     inline
                     type={textTypes.LABEL}
+                    overflow={Text.overflowTypes.ELLIPSIS}
                 >{`${section}  > `}</Text>}
                 <Text
                     className="keyword-search__result-root"
                     inline
                     type={textTypes.PARENTLABEL}
+                    overflow={Text.overflowTypes.ELLIPSIS}
                 >
                     {root}
                 </Text>
