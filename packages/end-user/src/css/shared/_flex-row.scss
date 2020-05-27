@@ -127,7 +127,7 @@
             width: 100%;
         }
 
-        *:not(:last-child) {
+        & > *:not(:last-child) {
             margin-bottom: 10px;
             margin-right: 0;
         }
