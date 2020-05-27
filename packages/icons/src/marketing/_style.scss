@@ -1,0 +1,1125 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?t29y06') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?t29y06') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?t29y06') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?t29y06##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="picicon-"], [class*=" picicon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.picicon-certificate {
+  &:before {
+    content: $picicon-certificate; 
+  }
+}
+.picicon-mobile-apps-alt {
+  &:before {
+    content: $picicon-mobile-apps-alt; 
+  }
+}
+.picicon-mobile-locked {
+  &:before {
+    content: $picicon-mobile-locked; 
+  }
+}
+.picicon-data {
+  &:before {
+    content: $picicon-data; 
+  }
+}
+.picicon-law {
+  &:before {
+    content: $picicon-law; 
+  }
+}
+.picicon-temp {
+  &:before {
+    content: $picicon-temp; 
+  }
+}
+.picicon-smart-car {
+  &:before {
+    content: $picicon-smart-car; 
+  }
+}
+.picicon-smart-house {
+  &:before {
+    content: $picicon-smart-house; 
+  }
+}
+.picicon-smart-lights {
+  &:before {
+    content: $picicon-smart-lights; 
+  }
+}
+.picicon-smart-watch {
+  &:before {
+    content: $picicon-smart-watch; 
+  }
+}
+.picicon-central-management {
+  &:before {
+    content: $picicon-central-management; 
+  }
+}
+.picicon-customizable {
+  &:before {
+    content: $picicon-customizable; 
+  }
+}
+.picicon-fingerprint {
+  &:before {
+    content: $picicon-fingerprint; 
+  }
+}
+.picicon-mobile-interaction {
+  &:before {
+    content: $picicon-mobile-interaction; 
+  }
+}
+.picicon-adaptive-mfa-alt {
+  &:before {
+    content: $picicon-adaptive-mfa-alt; 
+  }
+}
+.picicon-credit-card {
+  &:before {
+    content: $picicon-credit-card; 
+  }
+}
+.picicon-honey-pot {
+  &:before {
+    content: $picicon-honey-pot; 
+  }
+}
+.picicon-intelligence {
+  &:before {
+    content: $picicon-intelligence; 
+  }
+}
+.picicon-wireless {
+  &:before {
+    content: $picicon-wireless; 
+  }
+}
+.picicon-api-new {
+  &:before {
+    content: $picicon-api-new; 
+  }
+}
+.picicon-user-selfservice {
+  &:before {
+    content: $picicon-user-selfservice; 
+  }
+}
+.picicon-app-partner {
+  &:before {
+    content: $picicon-app-partner; 
+  }
+}
+.picicon-centralized-administration {
+  &:before {
+    content: $picicon-centralized-administration; 
+  }
+}
+.picicon-idp-adapter {
+  &:before {
+    content: $picicon-idp-adapter; 
+  }
+}
+.picicon-idp-many {
+  &:before {
+    content: $picicon-idp-many; 
+  }
+}
+.picicon-server-checkmark {
+  &:before {
+    content: $picicon-server-checkmark; 
+  }
+}
+.picicon-accelerate {
+  &:before {
+    content: $picicon-accelerate; 
+  }
+}
+.picicon-all-content {
+  &:before {
+    content: $picicon-all-content; 
+  }
+}
+.picicon-application-approval {
+  &:before {
+    content: $picicon-application-approval; 
+  }
+}
+.picicon-article {
+  &:before {
+    content: $picicon-article; 
+  }
+}
+.picicon-401k {
+  &:before {
+    content: $picicon-401k; 
+  }
+}
+.picicon-access-broker {
+  &:before {
+    content: $picicon-access-broker; 
+  }
+}
+.picicon-access-management {
+  &:before {
+    content: $picicon-access-management; 
+  }
+}
+.picicon-access {
+  &:before {
+    content: $picicon-access; 
+  }
+}
+.picicon-account-credentials {
+  &:before {
+    content: $picicon-account-credentials; 
+  }
+}
+.picicon-account-provisioning {
+  &:before {
+    content: $picicon-account-provisioning; 
+  }
+}
+.picicon-admin-user {
+  &:before {
+    content: $picicon-admin-user; 
+  }
+}
+.picicon-api {
+  &:before {
+    content: $picicon-api; 
+  }
+}
+.picicon-application {
+  &:before {
+    content: $picicon-application; 
+  }
+}
+.picicon-applications {
+  &:before {
+    content: $picicon-applications; 
+  }
+}
+.picicon-bank {
+  &:before {
+    content: $picicon-bank; 
+  }
+}
+.picicon-bio-pharmaceuticals {
+  &:before {
+    content: $picicon-bio-pharmaceuticals; 
+  }
+}
+.picicon-bonus-plan {
+  &:before {
+    content: $picicon-bonus-plan; 
+  }
+}
+.picicon-bus {
+  &:before {
+    content: $picicon-bus; 
+  }
+}
+.picicon-call-center {
+  &:before {
+    content: $picicon-call-center; 
+  }
+}
+.picicon-centralized-infrastructure {
+  &:before {
+    content: $picicon-centralized-infrastructure; 
+  }
+}
+.picicon-charity {
+  &:before {
+    content: $picicon-charity; 
+  }
+}
+.picicon-cloud-directory {
+  &:before {
+    content: $picicon-cloud-directory; 
+  }
+}
+.picicon-cloud-upload {
+  &:before {
+    content: $picicon-cloud-upload; 
+  }
+}
+.picicon-cloud {
+  &:before {
+    content: $picicon-cloud; 
+  }
+}
+.picicon-commuter-offset {
+  &:before {
+    content: $picicon-commuter-offset; 
+  }
+}
+.picicon-computer-connect {
+  &:before {
+    content: $picicon-computer-connect; 
+  }
+}
+.picicon-console {
+  &:before {
+    content: $picicon-console; 
+  }
+}
+.picicon-consumer {
+  &:before {
+    content: $picicon-consumer; 
+  }
+}
+.picicon-customer {
+  &:before {
+    content: $picicon-customer; 
+  }
+}
+.picicon-cycle {
+  &:before {
+    content: $picicon-cycle; 
+  }
+}
+.picicon-database {
+  &:before {
+    content: $picicon-database; 
+  }
+}
+.picicon-desktop {
+  &:before {
+    content: $picicon-desktop; 
+  }
+}
+.picicon-developer {
+  &:before {
+    content: $picicon-developer; 
+  }
+}
+.picicon-diamond {
+  &:before {
+    content: $picicon-diamond; 
+  }
+}
+.picicon-directory {
+  &:before {
+    content: $picicon-directory; 
+  }
+}
+.picicon-download {
+  &:before {
+    content: $picicon-download; 
+  }
+}
+.picicon-education-reimbursement {
+  &:before {
+    content: $picicon-education-reimbursement; 
+  }
+}
+.picicon-education {
+  &:before {
+    content: $picicon-education; 
+  }
+}
+.picicon-employee {
+  &:before {
+    content: $picicon-employee; 
+  }
+}
+.picicon-enterprise {
+  &:before {
+    content: $picicon-enterprise; 
+  }
+}
+.picicon-firewall {
+  &:before {
+    content: $picicon-firewall; 
+  }
+}
+.picicon-fitness {
+  &:before {
+    content: $picicon-fitness; 
+  }
+}
+.picicon-flexible-schedule {
+  &:before {
+    content: $picicon-flexible-schedule; 
+  }
+}
+.picicon-free-healthcare {
+  &:before {
+    content: $picicon-free-healthcare; 
+  }
+}
+.picicon-globe {
+  &:before {
+    content: $picicon-globe; 
+  }
+}
+.picicon-governance {
+  &:before {
+    content: $picicon-governance; 
+  }
+}
+.picicon-graph-up {
+  &:before {
+    content: $picicon-graph-up; 
+  }
+}
+.picicon-healthcare-doctor {
+  &:before {
+    content: $picicon-healthcare-doctor; 
+  }
+}
+.picicon-healthcare-plan {
+  &:before {
+    content: $picicon-healthcare-plan; 
+  }
+}
+.picicon-holiday {
+  &:before {
+    content: $picicon-holiday; 
+  }
+}
+.picicon-identities {
+  &:before {
+    content: $picicon-identities; 
+  }
+}
+.picicon-invitation {
+  &:before {
+    content: $picicon-invitation; 
+  }
+}
+.picicon-kiosk {
+  &:before {
+    content: $picicon-kiosk; 
+  }
+}
+.picicon-legacy-app {
+  &:before {
+    content: $picicon-legacy-app; 
+  }
+}
+.picicon-lightbulb {
+  &:before {
+    content: $picicon-lightbulb; 
+  }
+}
+.picicon-like {
+  &:before {
+    content: $picicon-like; 
+  }
+}
+.picicon-lock {
+  &:before {
+    content: $picicon-lock; 
+  }
+}
+.picicon-messenger {
+  &:before {
+    content: $picicon-messenger; 
+  }
+}
+.picicon-mfa {
+  &:before {
+    content: $picicon-mfa; 
+  }
+}
+.picicon-mobile-apps {
+  &:before {
+    content: $picicon-mobile-apps; 
+  }
+}
+.picicon-mobile-auth {
+  &:before {
+    content: $picicon-mobile-auth; 
+  }
+}
+.picicon-mobile-download {
+  &:before {
+    content: $picicon-mobile-download; 
+  }
+}
+.picicon-mobile-sdk {
+  &:before {
+    content: $picicon-mobile-sdk; 
+  }
+}
+.picicon-mobile {
+  &:before {
+    content: $picicon-mobile; 
+  }
+}
+.picicon-on-prem {
+  &:before {
+    content: $picicon-on-prem; 
+  }
+}
+.picicon-open-pto {
+  &:before {
+    content: $picicon-open-pto; 
+  }
+}
+.picicon-parental-leave {
+  &:before {
+    content: $picicon-parental-leave; 
+  }
+}
+.picicon-partner {
+  &:before {
+    content: $picicon-partner; 
+  }
+}
+.picicon-pingone-cloud {
+  &:before {
+    content: $picicon-pingone-cloud; 
+  }
+}
+.picicon-plugin {
+  &:before {
+    content: $picicon-plugin; 
+  }
+}
+.picicon-preference-settings {
+  &:before {
+    content: $picicon-preference-settings; 
+  }
+}
+.picicon-present {
+  &:before {
+    content: $picicon-present; 
+  }
+}
+.picicon-presentation {
+  &:before {
+    content: $picicon-presentation; 
+  }
+}
+.picicon-private-cloud {
+  &:before {
+    content: $picicon-private-cloud; 
+  }
+}
+.picicon-provisioning {
+  &:before {
+    content: $picicon-provisioning; 
+  }
+}
+.picicon-safe {
+  &:before {
+    content: $picicon-safe; 
+  }
+}
+.picicon-seamless {
+  &:before {
+    content: $picicon-seamless; 
+  }
+}
+.picicon-search-settings {
+  &:before {
+    content: $picicon-search-settings; 
+  }
+}
+.picicon-secure-auth {
+  &:before {
+    content: $picicon-secure-auth; 
+  }
+}
+.picicon-self-service {
+  &:before {
+    content: $picicon-self-service; 
+  }
+}
+.picicon-server {
+  &:before {
+    content: $picicon-server; 
+  }
+}
+.picicon-setup-config {
+  &:before {
+    content: $picicon-setup-config; 
+  }
+}
+.picicon-shopping-cart {
+  &:before {
+    content: $picicon-shopping-cart; 
+  }
+}
+.picicon-sms {
+  &:before {
+    content: $picicon-sms; 
+  }
+}
+.picicon-snacks {
+  &:before {
+    content: $picicon-snacks; 
+  }
+}
+.picicon-speed-stopwatch {
+  &:before {
+    content: $picicon-speed-stopwatch; 
+  }
+}
+.picicon-speedometer {
+  &:before {
+    content: $picicon-speedometer; 
+  }
+}
+.picicon-spotlight {
+  &:before {
+    content: $picicon-spotlight; 
+  }
+}
+.picicon-sso {
+  &:before {
+    content: $picicon-sso; 
+  }
+}
+.picicon-stack {
+  &:before {
+    content: $picicon-stack; 
+  }
+}
+.picicon-swipe {
+  &:before {
+    content: $picicon-swipe; 
+  }
+}
+.picicon-threat {
+  &:before {
+    content: $picicon-threat; 
+  }
+}
+.picicon-token {
+  &:before {
+    content: $picicon-token; 
+  }
+}
+.picicon-user-desktop {
+  &:before {
+    content: $picicon-user-desktop; 
+  }
+}
+.picicon-user-devices {
+  &:before {
+    content: $picicon-user-devices; 
+  }
+}
+.picicon-user-profile {
+  &:before {
+    content: $picicon-user-profile; 
+  }
+}
+.picicon-user {
+  &:before {
+    content: $picicon-user; 
+  }
+}
+.picicon-username-password {
+  &:before {
+    content: $picicon-username-password; 
+  }
+}
+.picicon-userpass-laptop {
+  &:before {
+    content: $picicon-userpass-laptop; 
+  }
+}
+.picicon-vpn {
+  &:before {
+    content: $picicon-vpn; 
+  }
+}
+.picicon-web-app {
+  &:before {
+    content: $picicon-web-app; 
+  }
+}
+.picicon-web-apps {
+  &:before {
+    content: $picicon-web-apps; 
+  }
+}
+.picicon-adaptive-mfa {
+  &:before {
+    content: $picicon-adaptive-mfa; 
+  }
+}
+.picicon-website {
+  &:before {
+    content: $picicon-website; 
+  }
+}
+.picicon-annual-renewal {
+  &:before {
+    content: $picicon-annual-renewal; 
+  }
+}
+.picicon-events-webinars {
+  &:before {
+    content: $picicon-events-webinars; 
+  }
+}
+.picicon-featured-customer-stories {
+  &:before {
+    content: $picicon-featured-customer-stories; 
+  }
+}
+.picicon-in-the-news {
+  &:before {
+    content: $picicon-in-the-news; 
+  }
+}
+.picicon-key {
+  &:before {
+    content: $picicon-key; 
+  }
+}
+.picicon-pingfed {
+  &:before {
+    content: $picicon-pingfed; 
+  }
+}
+.picicon-pingone {
+  &:before {
+    content: $picicon-pingone; 
+  }
+}
+.picicon-identify-enterprise {
+  &:before {
+    content: $picicon-identify-enterprise; 
+  }
+}
+.picicon-identify-key {
+  &:before {
+    content: $picicon-identify-key; 
+  }
+}
+.picicon-identify-lightbulb {
+  &:before {
+    content: $picicon-identify-lightbulb; 
+  }
+}
+.picicon-identify-platform {
+  &:before {
+    content: $picicon-identify-platform; 
+  }
+}
+.picicon-circle-checkmark {
+  &:before {
+    content: $picicon-circle-checkmark; 
+  }
+}
+.picicon-plan {
+  &:before {
+    content: $picicon-plan; 
+  }
+}
+.picicon-clock {
+  &:before {
+    content: $picicon-clock; 
+  }
+}
+.picicon-flexibility {
+  &:before {
+    content: $picicon-flexibility; 
+  }
+}
+.picicon-reduce {
+  &:before {
+    content: $picicon-reduce; 
+  }
+}
+.picicon-scale {
+  &:before {
+    content: $picicon-scale; 
+  }
+}
+.picicon-training {
+  &:before {
+    content: $picicon-training; 
+  }
+}
+.picicon-datasheet {
+  &:before {
+    content: $picicon-datasheet; 
+  }
+}
+.picicon-downloads-product {
+  &:before {
+    content: $picicon-downloads-product; 
+  }
+}
+.picicon-analyst-report {
+  &:before {
+    content: $picicon-analyst-report; 
+  }
+}
+.picicon-customer-stories {
+  &:before {
+    content: $picicon-customer-stories; 
+  }
+}
+.picicon-infosheet {
+  &:before {
+    content: $picicon-infosheet; 
+  }
+}
+.picicon-unified {
+  &:before {
+    content: $picicon-unified; 
+  }
+}
+.picicon-white-paper {
+  &:before {
+    content: $picicon-white-paper; 
+  }
+}
+.picicon-e-mail {
+  &:before {
+    content: $picicon-e-mail; 
+  }
+}
+.picicon-buyers-guide {
+  &:before {
+    content: $picicon-buyers-guide; 
+  }
+}
+.picicon-brain-lightbulb {
+  &:before {
+    content: $picicon-brain-lightbulb; 
+  }
+}
+.picicon-blog {
+  &:before {
+    content: $picicon-blog; 
+  }
+}
+.picicon-faq {
+  &:before {
+    content: $picicon-faq; 
+  }
+}
+.picicon-infographic {
+  &:before {
+    content: $picicon-infographic; 
+  }
+}
+.picicon-press-release {
+  &:before {
+    content: $picicon-press-release; 
+  }
+}
+.picicon-support-ticket {
+  &:before {
+    content: $picicon-support-ticket; 
+  }
+}
+.picicon-quick-guide {
+  &:before {
+    content: $picicon-quick-guide; 
+  }
+}
+.picicon-techincal-brief {
+  &:before {
+    content: $picicon-techincal-brief; 
+  }
+}
+.picicon-call {
+  &:before {
+    content: $picicon-call; 
+  }
+}
+.picicon-ebook {
+  &:before {
+    content: $picicon-ebook; 
+  }
+}
+.picicon-video {
+  &:before {
+    content: $picicon-video; 
+  }
+}
+.picicon-executive-brief {
+  &:before {
+    content: $picicon-executive-brief; 
+  }
+}
+.picicon-ultimate-guide {
+  &:before {
+    content: $picicon-ultimate-guide; 
+  }
+}
+.picicon-contact-talk {
+  &:before {
+    content: $picicon-contact-talk; 
+  }
+}
+.picicon-executive-summary {
+  &:before {
+    content: $picicon-executive-summary; 
+  }
+}
+.picicon-access-everything {
+  &:before {
+    content: $picicon-access-everything; 
+  }
+}
+.picicon-connect-everything {
+  &:before {
+    content: $picicon-connect-everything; 
+  }
+}
+.picicon-continuous-auth {
+  &:before {
+    content: $picicon-continuous-auth; 
+  }
+}
+.picicon-frictionless {
+  &:before {
+    content: $picicon-frictionless; 
+  }
+}
+.picicon-flexible-deployment {
+  &:before {
+    content: $picicon-flexible-deployment; 
+  }
+}
+.picicon-internet-scale {
+  &:before {
+    content: $picicon-internet-scale; 
+  }
+}
+.picicon-secure-access {
+  &:before {
+    content: $picicon-secure-access; 
+  }
+}
+.picicon-event {
+  &:before {
+    content: $picicon-event; 
+  }
+}
+.picicon-federated-identity {
+  &:before {
+    content: $picicon-federated-identity; 
+  }
+}
+.picicon-tenant-in-tenant {
+  &:before {
+    content: $picicon-tenant-in-tenant; 
+  }
+}
+.picicon-multiple-environments {
+  &:before {
+    content: $picicon-multiple-environments; 
+  }
+}
+.picicon-embed {
+  &:before {
+    content: $picicon-embed; 
+  }
+}
+.picicon-custom-schema {
+  &:before {
+    content: $picicon-custom-schema; 
+  }
+}
+.picicon-bidirectional-sync {
+  &:before {
+    content: $picicon-bidirectional-sync; 
+  }
+}
+.picicon-api-first {
+  &:before {
+    content: $picicon-api-first; 
+  }
+}
+.picicon-icons_cloud {
+  &:before {
+    content: $picicon-icons_cloud; 
+  }
+}
+.picicon-icons_private-cloud {
+  &:before {
+    content: $picicon-icons_private-cloud; 
+  }
+}
+.picicon-icons_software {
+  &:before {
+    content: $picicon-icons_software; 
+  }
+}
+.picicon-push-notification-icon-r2 {
+  &:before {
+    content: $picicon-push-notification-icon-r2; 
+  }
+}
+.picicon-social-login-icons-r2 {
+  &:before {
+    content: $picicon-social-login-icons-r2; 
+  }
+}
+.picicon-list {
+  &:before {
+    content: $picicon-list; 
+  }
+}
+.picicon-all {
+  &:before {
+    content: $picicon-all; 
+  }
+}
+.picicon-article1 {
+  &:before {
+    content: $picicon-article1; 
+  }
+}
+.picicon-demo {
+  &:before {
+    content: $picicon-demo; 
+  }
+}
+.picicon-solution-brief {
+  &:before {
+    content: $picicon-solution-brief; 
+  }
+}
+.picicon-white-paper1 {
+  &:before {
+    content: $picicon-white-paper1; 
+  }
+}
+.picicon-analyst-report1 {
+  &:before {
+    content: $picicon-analyst-report1; 
+  }
+}
+.picicon-customer-story {
+  &:before {
+    content: $picicon-customer-story; 
+  }
+}
+.picicon-datasheet1 {
+  &:before {
+    content: $picicon-datasheet1; 
+  }
+}
+.picicon-ebook1 {
+  &:before {
+    content: $picicon-ebook1; 
+  }
+}
+.picicon-guide {
+  &:before {
+    content: $picicon-guide; 
+  }
+}
+.picicon-infographic1 {
+  &:before {
+    content: $picicon-infographic1; 
+  }
+}
+.picicon-misc {
+  &:before {
+    content: $picicon-misc; 
+  }
+}
+.picicon-solution-accelerator {
+  &:before {
+    content: $picicon-solution-accelerator; 
+  }
+}
+.picicon-video1 {
+  &:before {
+    content: $picicon-video1; 
+  }
+}
+.picicon-webinar {
+  &:before {
+    content: $picicon-webinar; 
+  }
+}
+.picicon-competitive-content {
+  &:before {
+    content: $picicon-competitive-content; 
+  }
+}
+.picicon-customer-stories1 {
+  &:before {
+    content: $picicon-customer-stories1; 
+  }
+}
+.picicon-deck-library {
+  &:before {
+    content: $picicon-deck-library; 
+  }
+}
+.picicon-messaging {
+  &:before {
+    content: $picicon-messaging; 
+  }
+}
+.picicon-opportunity {
+  &:before {
+    content: $picicon-opportunity; 
+  }
+}
+.picicon-partner-story {
+  &:before {
+    content: $picicon-partner-story; 
+  }
+}
+.picicon-product {
+  &:before {
+    content: $picicon-product; 
+  }
+}
+.picicon-solution {
+  &:before {
+    content: $picicon-solution; 
+  }
+}
+.picicon-value-card {
+  &:before {
+    content: $picicon-value-card; 
+  }
+}
+.picicon-videos-and-whiteboard {
+  &:before {
+    content: $picicon-videos-and-whiteboard; 
+  }
+}
+.picicon-workforce-story {
+  &:before {
+    content: $picicon-workforce-story; 
+  }
+}
+
