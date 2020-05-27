@@ -190,7 +190,7 @@ export default function NavFrame({
     const {
         header: selectedHeader,
         section: selectedSection
-    } = indexedTree[selectedNode !== undefined ? selectedNode : firstNode] || {};
+    } = indexedTree[selected] || {};
 
     const {
         children: sectionNodes,
@@ -224,7 +224,7 @@ export default function NavFrame({
                         }}
                         selectedHeaderLabel={selectedHeaderLabel}
                         selectedNode={selected}
-                        selectedSection={selected ? selectedSection : undefined}
+                        selectedSection={selectedSection}
                         navTree={sectionNodes}
                     />
                 }
