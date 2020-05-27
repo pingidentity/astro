@@ -1,0 +1,49 @@
+{
+  "name": "@pingux/icons",
+  "version": "0.2.0",
+  "description": "Ping icons. Components, iconfonts and svgs.",
+  "author": "Ping UX Development Team",
+  "homepage": "",
+  "license": "UNLICENSED",
+  "main": "lib/ui-library/cjs/index.js",
+  "module": "lib/ui-library/components/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "rm -rf lib && npm-run-all build:*",
+    "build:css": "node-sass --output-style 'compressed' src/ -o lib",
+    "build:move-files": "gulp move-files",
+    "build:components": "svgr -d lib/ui-library/components src/ui-library/svg --icon && create-index lib/ui-library/components -i",
+    "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js lib/ui-library/components --out-dir lib/ui-library/cjs",
+    "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js lib/ui-library/components --out-dir lib/ui-library/components",
+    "build:cdn": "rm -rf cdn && gulp cdn"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/plugin-transform-spread": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@svgr/cli": "^5.3.1",
+    "create-index": "^2.5.0",
+    "gulp": "^4.0.2",
+    "gulp-debug": "^4.0.0",
+    "node-sass": "^4.13.1",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.2"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0"
+  }
+}

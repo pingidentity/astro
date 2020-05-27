@@ -1,0 +1,766 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?3ng3db') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?3ng3db') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?3ng3db') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?3ng3db##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="pingicon-"], [class*=" pingicon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pingicon-star-outline {
+  &:before {
+    content: $pingicon-star-outline;
+  }
+}
+.pingicon-star {
+  &:before {
+    content: $pingicon-star;
+  }
+}
+.pingicon-kebab {
+  &:before {
+    content: $pingicon-kebab;
+  }
+}
+.pingicon-ldap {
+  &:before {
+    content: $pingicon-ldap;
+    color: #4b637c;
+  }
+}
+.pingicon-shield-arrow {
+  &:before {
+    content: $pingicon-shield-arrow;
+  }
+}
+.pingicon-key-three {
+  &:before {
+    content: $pingicon-key-three;
+  }
+}
+.pingicon-key-two {
+  &:before {
+    content: $pingicon-key-two;
+  }
+}
+.pingicon-open-lock {
+  &:before {
+    content: $pingicon-open-lock;
+  }
+}
+.pingicon-download-box {
+  &:before {
+    content: $pingicon-download-box;
+  }
+}
+.pingicon-camera {
+  &:before {
+    content: $pingicon-camera;
+  }
+}
+.pingicon-email {
+  &:before {
+    content: $pingicon-email;
+  }
+}
+.pingicon-ghost-disabled {
+  &:before {
+    content: $pingicon-ghost-disabled;
+  }
+}
+.pingicon-ghost-timed-out {
+  &:before {
+    content: $pingicon-ghost-timed-out;
+  }
+}
+.pingicon-spinner-alt {
+  &:before {
+    content: $pingicon-spinner-alt;
+  }
+}
+.pingicon-error {
+  &:before {
+    content: $pingicon-error;
+  }
+}
+.pingicon-hour-glass {
+  &:before {
+    content: $pingicon-hour-glass;
+  }
+}
+.pingicon-safe {
+  &:before {
+    content: $pingicon-safe;
+  }
+}
+.pingicon-success-alt {
+  &:before {
+    content: $pingicon-success-alt;
+  }
+}
+.pingicon-ghost-error {
+  &:before {
+    content: $pingicon-ghost-error;
+  }
+}
+.pingicon-ghost-success {
+  &:before {
+    content: $pingicon-ghost-success;
+  }
+}
+.pingicon-incomplete {
+  &:before {
+    content: $pingicon-incomplete;
+  }
+}
+.pingicon-mobile {
+  &:before {
+    content: $pingicon-mobile;
+  }
+}
+.pingicon-account {
+  &:before {
+    content: $pingicon-account;
+  }
+}
+.pingicon-admin-account {
+  &:before {
+    content: $pingicon-admin-account;
+  }
+}
+.pingicon-alert {
+  &:before {
+    content: $pingicon-alert;
+  }
+}
+.pingicon-alert-solid {
+  &:before {
+    content: $pingicon-alert-solid;
+  }
+}
+.pingicon-approve {
+  &:before {
+    content: $pingicon-approve;
+  }
+}
+.pingicon-apps {
+  &:before {
+    content: $pingicon-apps;
+  }
+}
+.pingicon-as {
+  &:before {
+    content: $pingicon-as;
+  }
+}
+.pingicon-badge {
+  &:before {
+    content: $pingicon-badge;
+  }
+}
+.pingicon-bar-chart {
+  &:before {
+    content: $pingicon-bar-chart;
+  }
+}
+.pingicon-bar-line-chart {
+  &:before {
+    content: $pingicon-bar-line-chart;
+  }
+}
+.pingicon-beaker {
+  &:before {
+    content: $pingicon-beaker;
+  }
+}
+.pingicon-books {
+  &:before {
+    content: $pingicon-books;
+  }
+}
+.pingicon-browser {
+  &:before {
+    content: $pingicon-browser;
+  }
+}
+.pingicon-bullet-list {
+  &:before {
+    content: $pingicon-bullet-list;
+  }
+}
+.pingicon-cabinet {
+  &:before {
+    content: $pingicon-cabinet;
+  }
+}
+.pingicon-calendar {
+  &:before {
+    content: $pingicon-calendar;
+  }
+}
+.pingicon-cert-connection {
+  &:before {
+    content: $pingicon-cert-connection;
+  }
+}
+.pingicon-certificate {
+  &:before {
+    content: $pingicon-certificate;
+  }
+}
+.pingicon-chat {
+  &:before {
+    content: $pingicon-chat;
+  }
+}
+.pingicon-chat-square {
+  &:before {
+    content: $pingicon-chat-square;
+  }
+}
+.pingicon-circle {
+  &:before {
+    content: $pingicon-circle;
+  }
+}
+.pingicon-circle-o {
+  &:before {
+    content: $pingicon-circle-o;
+  }
+}
+.pingicon-clear {
+  &:before {
+    content: $pingicon-clear;
+  }
+}
+.pingicon-clipboard {
+  &:before {
+    content: $pingicon-clipboard;
+  }
+}
+.pingicon-close {
+  &:before {
+    content: $pingicon-close;
+  }
+}
+.pingicon-close-arrow {
+  &:before {
+    content: $pingicon-close-arrow;
+  }
+}
+.pingicon-code {
+  &:before {
+    content: $pingicon-code;
+  }
+}
+.pingicon-cog {
+  &:before {
+    content: $pingicon-cog;
+  }
+}
+.pingicon-cog-filled {
+  &:before {
+    content: $pingicon-cog-filled;
+  }
+}
+.pingicon-cogs {
+  &:before {
+    content: $pingicon-cogs;
+  }
+}
+.pingicon-collapse {
+  &:before {
+    content: $pingicon-collapse;
+  }
+}
+.pingicon-connection-status {
+  &:before {
+    content: $pingicon-connection-status;
+  }
+}
+.pingicon-curly-braces {
+  &:before {
+    content: $pingicon-curly-braces;
+  }
+}
+.pingicon-delete {
+  &:before {
+    content: $pingicon-delete;
+  }
+}
+.pingicon-desktop {
+  &:before {
+    content: $pingicon-desktop;
+  }
+}
+.pingicon-details {
+  &:before {
+    content: $pingicon-details;
+  }
+}
+.pingicon-device {
+  &:before {
+    content: $pingicon-device;
+  }
+}
+.pingicon-directory {
+  &:before {
+    content: $pingicon-directory;
+  }
+}
+.pingicon-directory-hollow {
+  &:before {
+    content: $pingicon-directory-hollow;
+  }
+}
+.pingicon-docs {
+  &:before {
+    content: $pingicon-docs;
+  }
+}
+.pingicon-download {
+  &:before {
+    content: $pingicon-download;
+  }
+}
+.pingicon-dropdown-arrow {
+  &:before {
+    content: $pingicon-dropdown-arrow;
+  }
+}
+.pingicon-earth {
+  &:before {
+    content: $pingicon-earth;
+  }
+}
+.pingicon-edit {
+  &:before {
+    content: $pingicon-edit;
+  }
+}
+.pingicon-error-triangle {
+  &:before {
+    content: $pingicon-error-triangle;
+  }
+}
+.pingicon-expand {
+  &:before {
+    content: $pingicon-expand;
+  }
+}
+.pingicon-expand-arrow {
+  &:before {
+    content: $pingicon-expand-arrow;
+  }
+}
+.pingicon-facebook {
+  &:before {
+    content: $pingicon-facebook;
+  }
+}
+.pingicon-file {
+  &:before {
+    content: $pingicon-file;
+  }
+}
+.pingicon-filter {
+  &:before {
+    content: $pingicon-filter;
+  }
+}
+.pingicon-fingerprint {
+  &:before {
+    content: $pingicon-fingerprint;
+  }
+}
+.pingicon-globe {
+  &:before {
+    content: $pingicon-globe;
+  }
+}
+.pingicon-grip {
+  &:before {
+    content: $pingicon-grip;
+  }
+}
+.pingicon-group {
+  &:before {
+    content: $pingicon-group;
+  }
+}
+.pingicon-help {
+  &:before {
+    content: $pingicon-help;
+  }
+}
+.pingicon-help-rounded {
+  &:before {
+    content: $pingicon-help-rounded;
+  }
+}
+.pingicon-help-solid {
+  &:before {
+    content: $pingicon-help-solid;
+  }
+}
+.pingicon-idp {
+  &:before {
+    content: $pingicon-idp;
+  }
+}
+.pingicon-image {
+  &:before {
+    content: $pingicon-image;
+  }
+}
+.pingicon-info {
+  &:before {
+    content: $pingicon-info;
+  }
+}
+.pingicon-key {
+  &:before {
+    content: $pingicon-key;
+  }
+}
+.pingicon-left {
+  &:before {
+    content: $pingicon-left;
+  }
+}
+.pingicon-line-chart {
+  &:before {
+    content: $pingicon-line-chart;
+  }
+}
+.pingicon-link {
+  &:before {
+    content: $pingicon-link;
+  }
+}
+.pingicon-linkedin {
+  &:before {
+    content: $pingicon-linkedin;
+  }
+}
+.pingicon-lock {
+  &:before {
+    content: $pingicon-lock;
+  }
+}
+.pingicon-lock-large {
+  &:before {
+    content: $pingicon-lock-large;
+  }
+}
+.pingicon-lockout {
+  &:before {
+    content: $pingicon-lockout;
+  }
+}
+.pingicon-menu {
+  &:before {
+    content: $pingicon-menu;
+  }
+}
+.pingicon-minus {
+  &:before {
+    content: $pingicon-minus;
+  }
+}
+.pingicon-minus-rounded {
+  &:before {
+    content: $pingicon-minus-rounded;
+  }
+}
+.pingicon-native-app {
+  &:before {
+    content: $pingicon-native-app;
+  }
+}
+.pingicon-network {
+  &:before {
+    content: $pingicon-network;
+  }
+}
+.pingicon-new-window {
+  &:before {
+    content: $pingicon-new-window;
+  }
+}
+.pingicon-next {
+  &:before {
+    content: $pingicon-next;
+  }
+}
+.pingicon-nodes {
+  &:before {
+    content: $pingicon-nodes;
+  }
+}
+.pingicon-non-interactive {
+  &:before {
+    content: $pingicon-non-interactive;
+  }
+}
+.pingicon-notepad {
+  &:before {
+    content: $pingicon-notepad;
+  }
+}
+.pingicon-on-off {
+  &:before {
+    content: $pingicon-on-off;
+  }
+}
+.pingicon-org-chart {
+  &:before {
+    content: $pingicon-org-chart;
+  }
+}
+.pingicon-overview {
+  &:before {
+    content: $pingicon-overview;
+  }
+}
+.pingicon-pin {
+  &:before {
+    content: $pingicon-pin;
+  }
+}
+.pingicon-play {
+  &:before {
+    content: $pingicon-play;
+  }
+}
+.pingicon-plus {
+  &:before {
+    content: $pingicon-plus;
+  }
+}
+.pingicon-plus-rounded {
+  &:before {
+    content: $pingicon-plus-rounded;
+  }
+}
+.pingicon-population {
+  &:before {
+    content: $pingicon-population;
+  }
+}
+.pingicon-previous {
+  &:before {
+    content: $pingicon-previous;
+  }
+}
+.pingicon-puzzle {
+  &:before {
+    content: $pingicon-puzzle;
+  }
+}
+.pingicon-radar {
+  &:before {
+    content: $pingicon-radar;
+  }
+}
+.pingicon-resend {
+  &:before {
+    content: $pingicon-resend;
+  }
+}
+.pingicon-resource {
+  &:before {
+    content: $pingicon-resource;
+  }
+}
+.pingicon-right {
+  &:before {
+    content: $pingicon-right;
+  }
+}
+.pingicon-robot {
+  &:before {
+    content: $pingicon-robot;
+  }
+}
+.pingicon-saml {
+  &:before {
+    content: $pingicon-saml;
+  }
+}
+.pingicon-search {
+  &:before {
+    content: $pingicon-search;
+  }
+}
+.pingicon-server {
+  &:before {
+    content: $pingicon-server;
+  }
+}
+.pingicon-settings {
+  &:before {
+    content: $pingicon-settings;
+  }
+}
+.pingicon-shield {
+  &:before {
+    content: $pingicon-shield;
+  }
+}
+.pingicon-signpost {
+  &:before {
+    content: $pingicon-signpost;
+  }
+}
+.pingicon-slider {
+  &:before {
+    content: $pingicon-slider;
+  }
+}
+.pingicon-sort-asc {
+  &:before {
+    content: $pingicon-sort-asc;
+  }
+}
+.pingicon-sort-desc {
+  &:before {
+    content: $pingicon-sort-desc;
+  }
+}
+.pingicon-sort-none {
+  &:before {
+    content: $pingicon-sort-none;
+  }
+}
+.pingicon-sp {
+  &:before {
+    content: $pingicon-sp;
+  }
+}
+.pingicon-spin-down {
+  &:before {
+    content: $pingicon-spin-down;
+  }
+}
+.pingicon-spin-up {
+  &:before {
+    content: $pingicon-spin-up;
+  }
+}
+.pingicon-spinner {
+  &:before {
+    content: $pingicon-spinner;
+  }
+}
+.pingicon-success {
+  &:before {
+    content: $pingicon-success;
+  }
+}
+.pingicon-success-round {
+  &:before {
+    content: $pingicon-success-round;
+  }
+}
+.pingicon-support {
+  &:before {
+    content: $pingicon-support;
+  }
+}
+.pingicon-tag {
+  &:before {
+    content: $pingicon-tag;
+  }
+}
+.pingicon-terminal {
+  &:before {
+    content: $pingicon-terminal;
+  }
+}
+.pingicon-thumb {
+  &:before {
+    content: $pingicon-thumb;
+  }
+}
+.pingicon-timer {
+  &:before {
+    content: $pingicon-timer;
+  }
+}
+.pingicon-twitter {
+  &:before {
+    content: $pingicon-twitter;
+  }
+}
+.pingicon-undo {
+  &:before {
+    content: $pingicon-undo;
+  }
+}
+.pingicon-unlink {
+  &:before {
+    content: $pingicon-unlink;
+  }
+}
+.pingicon-user {
+  &:before {
+    content: $pingicon-user;
+  }
+}
+.pingicon-user_directory {
+  &:before {
+    content: $pingicon-user_directory;
+  }
+}
+.pingicon-users {
+  &:before {
+    content: $pingicon-users;
+  }
+}
+.pingicon-view {
+  &:before {
+    content: $pingicon-view;
+  }
+}
+.pingicon-view-hidden {
+  &:before {
+    content: $pingicon-view-hidden;
+  }
+}
+.pingicon-walkthrough {
+  &:before {
+    content: $pingicon-walkthrough;
+  }
+}
+.pingicon-wand {
+  &:before {
+    content: $pingicon-wand;
+  }
+}
+.pingicon-welcome {
+  &:before {
+    content: $pingicon-welcome;
+  }
+}
+
