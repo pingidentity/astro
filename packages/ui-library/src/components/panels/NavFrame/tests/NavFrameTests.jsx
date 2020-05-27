@@ -97,7 +97,7 @@ describe("NavFrame", () => {
     });
 
 
-    it("only selects first header if no selectedNode is passed in and autoSelectFirstNode is false", () => {
+    it("does not select a header if no selectedNode is passed in and autoSelectFirstNode is false", () => {
         const component = shallow(
             <NavFrame
                 {...defaultProps}
@@ -106,7 +106,7 @@ describe("NavFrame", () => {
         );
 
         const header = component.find(NavHeader);
-        expect(header.prop("selectedHeader")).toEqual("SNAAAARF");
+        expect(header.prop("selectedHeader")).toBeUndefined();
 
         const sidebar = component.find(NavSidebar);
         expect(sidebar.prop("selectedSection")).toBeUndefined();
