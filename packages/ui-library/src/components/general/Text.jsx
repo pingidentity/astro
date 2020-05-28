@@ -155,6 +155,7 @@ Text.propTypes = {
     overflow: PropTypes.oneOf(Object.values(overflowTypes)),
     type: PropTypes.oneOf(Object.values(textTypes)),
     variant: PropTypes.oneOf(Object.values(textVariants)),
+    weight: PropTypes.oneOf(Object.values(weights)),
 };
 
 Text.defaultProps = {
