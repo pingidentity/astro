@@ -40,6 +40,10 @@
         flex-basis: auto;
         text-align: left;
         min-width: 0;
+
+        @media (max-width: $breakpoint-mobile) {
+            flex: 4;
+        }
     }
 
     &__row-details {
@@ -60,5 +64,9 @@
         text-align: right;
         flex-grow: 0;
         flex-basis: auto;
+
+        @media (max-width: $breakpoint-mobile) {
+            flex: 1;
+        }
     }
 }
