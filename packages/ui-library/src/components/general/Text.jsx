@@ -79,6 +79,19 @@ const alignments = {
 };
 
 /**
+ * @enum {string}
+ * @alias Text.weights
+ */
+const weights = {
+    /** normal */
+    NORMAL: "normal",
+    /** bold */
+    BOLD: "bold",
+    /** bold on hover */
+    BOLD_ON_HOVER: "hover",
+};
+
+/**
 * @class Text
 * @desc A block of text
 *
@@ -96,6 +109,8 @@ const alignments = {
 *     Style of text
 * @param {Text.textVariants} [variant]
 *     Additional styles to add
+* @param {Text.weights} [weight]
+*     Font weight of text
 */
 
 const Text = ({
@@ -107,6 +122,7 @@ const Text = ({
     type,
     overflow,
     variant,
+    weight,
 }) => (
     <div
         className={classnames(
@@ -120,7 +136,10 @@ const Text = ({
                 "text-component--center": align === alignments.CENTER,
                 "text-component--left": align === alignments.LEFT,
                 "text-component--right": align === alignments.RIGHT,
-                "text-component--overflow-wrap": overflow === overflowTypes.WRAP
+                "text-component--overflow-wrap": overflow === overflowTypes.WRAP,
+                "text-weight--normal": weight === weights.NORMAL,
+                "text-weight--bold": weight === weights.BOLD,
+                "text-weight--hover": weight === weights.BOLD_ON_HOVER
             }
         )}
         data-id={dataId}
@@ -143,11 +162,13 @@ Text.defaultProps = {
     "data-id": "styled-text",
     overflow: overflowTypes.WRAP,
     type: textTypes.BODY,
+    weight: weights.NORMAL,
 };
 
 Text.textTypes = textTypes;
 Text.textVariants = textVariants;
 Text.overflowTypes = overflowTypes;
 Text.alignments = alignments;
+Text.weights = weights;
 
 export default Text;
