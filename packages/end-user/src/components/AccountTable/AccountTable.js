@@ -29,15 +29,26 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
                     </div>
                 </div>
                 <div className="account-table__row-unlink">
-                    { !unlinked ? (
-                        <Button onClick={unlinkAccount(account)} inline>
-                            { unlinkAccountText }
-                        </Button>
-                    ) : (
-                        <Button disabled inline>
-                            <span className="pingicon-unlink"/> { unlinkAccountSuccessText }
-                        </Button>
-                    )}
+                    <div className="account-table__row-unlink--normal">
+                        { unlinked ? (
+                            <Button disabled inline>
+                                <span className="pingicon-unlink"/> {unlinkAccountSuccessText}
+                            </Button>
+                        ) : (
+                            <Button onClick={unlinkAccount(account)} inline>
+                                {unlinkAccountText}
+                            </Button>
+                        )}
+                    </div>
+                    <div className="account-table__row-unlink--mobile">
+                        { unlinked ? (
+                            <Button disabled inline>
+                                <span className="pingicon-unlink"/>
+                            </Button>
+                        ) : (
+                            <Button onClick={unlinkAccount(account)} inline iconName="delete"/>
+                        )}
+                    </div>
                 </div>
             </FlexRow>
         );

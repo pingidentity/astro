@@ -1,17 +1,7 @@
 .account-table {
-    @media (max-width: 480px) {
-        flex-direction: column;
-    }
-
     &__icon {
-        flex: 1;
-        flex-grow: 0;
-        flex-basis: auto;
+        flex: 0 0 auto;
         fill: $color-neutral-20;
-
-        @media (max-width: $breakpoint-mobile) {
-            flex-grow: 1;
-        }
     }
 
     &__row {
@@ -19,9 +9,10 @@
 
         @media (max-width: $breakpoint-mobile) {
             flex-direction: row;
-
+            > * {
+                width: auto;
+            }
             *:not(:last-child) {
-                width: unset;
                 margin-bottom: unset;
                 margin-right: unset;
             }
@@ -37,19 +28,34 @@
     }
 
     &__row-info {
-        flex: 1;
+        flex-shrink: 1;
+        flex-grow: 1;
+        flex-basis: 0; /* unitless shorthand flex: 1 1 0 does not work in IE11, while flex: 1 1 0px makes linter alarm */
         text-align: left;
         min-width: 0;
-
-        @media (max-width: $breakpoint-mobile) {
-            display: none;
-        }
     }
 
     &__row-unlink {
         flex: 0 1 auto;
         text-align: right;
         min-width: 0;
+
+        &--normal {
+            display: block;
+        }
+
+        &--mobile {
+            display: none;
+        }
+
+        @media (max-width: $breakpoint-mobile) {
+            &--normal {
+                display: none;
+            }
+            &--mobile {
+                display: block;
+            }
+        }
     }
 
     &__row-details {
