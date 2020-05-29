@@ -45,6 +45,7 @@ const ChartTooltip = ({
             <div
                 className={classnames(
                     `${baseClass}__values`,
+                    getTextAlignmentClass(textAlignment),
                     {
                         [`${baseClass}__values--horizontal`]: isHorizontal
                     }
