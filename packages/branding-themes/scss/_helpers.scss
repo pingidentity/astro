@@ -82,6 +82,10 @@
         &:active {
             background-color: map-get($colors, 'button');
         }
+
+        &:disabled {
+            opacity: 0.2 !important;
+        }
     }
 
     .branding-template-link-text, a {
