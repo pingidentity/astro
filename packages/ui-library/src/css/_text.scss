@@ -8,6 +8,7 @@
     }
 
     &--bold {
+        // Text shadow used in place of font-weight to eliminate text changing size when bold
         text-shadow: 0 0 0.65px #333, 0 0 0.65px #333;
     }
 
