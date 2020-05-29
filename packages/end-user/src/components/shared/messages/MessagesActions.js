@@ -80,10 +80,9 @@ exports.pushMessage = function (containerId, text, status, timer, index, isHtml)
 exports.addMessage = function (containerId, message, status, removeAfterMs) {
     let isHtml, progress, messageId, minimized, minimizeAfterMS = 0, iconName, layout, hideClose, key;
 
-    if ((arguments.length === 1 && typeof(containerId) !== "object") ||
+    if ((arguments.length === 1 && typeof (containerId) !== "object") ||
         (arguments.length === 2 && MessageTypeValues.indexOf(message) > -1) ||
-        (arguments.length === 3 && typeof(status) === "number"))
-    {
+        (arguments.length === 3 && typeof (status) === "number")) {
         removeAfterMs = arguments[2];
         status = arguments[1];
         message = arguments[0];
@@ -104,7 +103,7 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         key = arguments[0].key;
     }
     // error messages should stay until dismissed
-    if (typeof(removeAfterMs) === "undefined" ) {
+    if (typeof (removeAfterMs) === "undefined") {
         //OUR NAMES ARE REALLY TERRIBLE SO WE HAVE TO DO THIS
         const isError = status === MessageTypes.NOTICE ||
             status === MessageTypes.WARNING || status === MessageTypes.ERROR;

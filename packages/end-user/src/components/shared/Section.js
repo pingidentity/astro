@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import CollapsibleLink from './CollapsibleLink';
 
 import classnames from 'classnames';
-import { cannonballProgressivelyStatefulWarning } from '../../util/DeprecationUtils';
-import { inStateContainer, toggleTransform } from '../../util/StateContainer';
-import Utils from '../../util/Utils';
+import { inStateContainer, toggleTransform } from '../util/StateContainer';
 import _ from 'underscore';
-import { flagsPropType, hasFlag } from '../../util/FlagUtils';
+import { deprecatedStatelessProp } from '../../util/DeprecationUtils';
 
 /**
  * @callback Section~onToggle
@@ -48,6 +46,7 @@ import { flagsPropType, hasFlag } from '../../util/FlagUtils';
  *     Text to be displayed in the center of the component; switches between collapsed and expanded versions.
  * @param {boolean} [expanded=false]
  *     Whether or not section is expanded and showing body content.
+ *     When not provided, the component will manage this value.
  * @param {boolean} [contentMargin=true]
  *     Controls whether the section's content has a left margin.
  * @param {boolean} [underlined=true]
@@ -69,47 +68,6 @@ import { flagsPropType, hasFlag } from '../../util/FlagUtils';
  *
  */
 
-
-export default class Section extends React.Component {
-
-    static propTypes = {
-        flags: flagsPropType,
-        stateless: PropTypes.bool,
-    };
-
-    static defaultProps = {
-        stateless: true,
-    };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    componentDidMount() {
-        if (!this._usePStateful()) {
-            cannonballProgressivelyStatefulWarning({ name: "Section" });
-        }
-    }
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    render() {
-        if (this._usePStateful()) {
-            return (
-                <PStatefulSection
-                    {...this.props}
-                />
-            );
-        }
-
-        return this.props.stateless
-            ? <SectionStateless {..._.defaults({ ref: "SectionStateless" }, this.props)}>
-                {this.props.children}
-            </SectionStateless>
-            : <SectionStateful {..._.defaults({ ref: "SectionStateful" }, this.props)}>
-                {this.props.children}
-            </SectionStateful>;
-    }
-}
-
 class SectionStateless extends React.Component {
     static propTypes = {
         accessories: PropTypes.oneOfType([
@@ -125,7 +83,7 @@ class SectionStateless extends React.Component {
         onToggle: PropTypes.func,
         title: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.object
+            PropTypes.node
         ]),
         titleValue: PropTypes.oneOfType([
             PropTypes.string,
@@ -206,7 +164,9 @@ class SectionStateless extends React.Component {
                         classnames(
                             "collapsible-section-title",
                             {
-                                "collapsible-section-title--circled": this.props.arrowCircle
+                                "collapsible-section-title--circled": this.props.arrowCircle,
+                                "collapsible-section-title--node": this.props.title
+                                    ? typeof this.props.title !== "string" : this.props.title
                             }
                         )}
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}
@@ -238,33 +198,7 @@ class SectionStateless extends React.Component {
     }
 }
 
-class SectionStateful extends React.Component {
-    state = {
-        expanded: this.props.expanded || false
-    };
-
-    _handleToggle = () => {
-        this.setState({
-            expanded: !this.state.expanded
-        });
-    };
-
-    render() {
-        var props = _.defaults({
-            ref: "SectionStateless",
-            expanded: this.state.expanded,
-            onToggle: this._handleToggle
-        }, this.props);
-
-        return (
-            <SectionStateless {...props}>
-                {this.props.children}
-            </SectionStateless>
-        );
-    }
-}
-
-const PStatefulSection = inStateContainer([
+const Section = inStateContainer([
     {
         name: "expanded",
         initial: false,
@@ -274,3 +208,11 @@ const PStatefulSection = inStateContainer([
         }],
     },
 ])(SectionStateless);
+
+Section.displayName = "Section";
+
+Section.propTypes = {
+    stateless: deprecatedStatelessProp,
+};
+
+export default Section;

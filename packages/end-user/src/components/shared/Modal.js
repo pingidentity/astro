@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Portal } from 'react-portal';
-import { isIE, isProduction } from '../../util/Utils';
+import { isIE } from '../../util/Utils';
 import EventUtils from '../../util/EventUtils.js';
 import CancelTooltip from '../Tooltip/CancelTooltip';
-import { cannonballPortalWarning } from '../../util/DeprecationUtils';
-import { flagsPropType, hasFlag } from '../../util/FlagUtils';
 
 /**
  * @enum {string}
@@ -15,7 +13,7 @@ import { flagsPropType, hasFlag } from '../../util/FlagUtils';
 const Type = {
     BASIC: 'basic',
     DIALOG: 'dialog',
-    ALERT: 'alert',
+    ALERT: 'alert'
 };
 
 /**
@@ -55,8 +53,6 @@ const Type = {
  * @param {Modal.Type} [type=Modal.Type.BASIC]
  *     Basic modal when not specified; a DIALOG modal has the "dialog" CSS class on it,
  *     same goes for the ALERT dialog.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with react-portal.
  *
  * @example
  *      <a onClick={this._toggleModal}>Open the Modal</a>
@@ -80,15 +76,14 @@ class Modal extends React.Component {
         type: PropTypes.oneOf([
             Type.BASIC,
             Type.DIALOG,
-            Type.ALERT,
+            Type.ALERT
         ]),
-        cancelTooltip: PropTypes.shape({}),
+        cancelTooltip: PropTypes.object,
         children: PropTypes.node,
-        flags: flagsPropType,
     };
 
     static childContextTypes = {
-        close: PropTypes.func,
+        close: PropTypes.func
     };
 
     static defaultProps = {
@@ -99,17 +94,26 @@ class Modal extends React.Component {
         type: Type.BASIC,
     };
 
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
     /*
      * Set close method into context to allow children
      * to easily close modal.
      */
     getChildContext() {
         return {
-            close: this.props.onClose,
+            close: this.props.onClose
         };
     }
+
+    _handleKeyDown = (e) => {
+        if (!this.props.expanded) {
+            return;
+        }
+
+        EventUtils.callIfOutsideOfContainer(this.refs.container, function () {
+            e.stopPropagation();
+            e.preventDefault();
+        }, e);
+    };
 
     _handleBgClick = (e) => {
         if (!this.props.closeOnBgClick ||
@@ -126,7 +130,7 @@ class Modal extends React.Component {
     };
 
     _getCloseButton = () => {
-        var closeBtn;
+        let closeBtn;
 
         if (this.props.cancelTooltip) {
             closeBtn = (
@@ -189,29 +193,7 @@ class Modal extends React.Component {
         if (this.props.expanded) {
             this._triggerEvent(true);
         }
-
-        if (!this._usePortal()) {
-            cannonballPortalWarning({ name: 'Modal' });
-        }
-
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!isProduction() && this.props.id) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError('id', 'data-id'));
-        }
     }
-
-    _handleKeyDown = (e) => {
-        if (!this.props.expanded) {
-            return;
-        }
-
-        EventUtils.callIfOutsideOfContainer(this.refs.container, () => {
-            e.stopPropagation();
-            e.preventDefault();
-        }, e);
-    };
 
     componentDidUpdate(prevProps) {
         if (this.isWizard === null && this.props.expanded) {
@@ -230,8 +212,6 @@ class Modal extends React.Component {
         }
     }
 
-    _usePortal = () => hasFlag(this, 'use-portal');
-
     render() {
         if (!this.props.expanded) {
             return null;
@@ -243,7 +223,7 @@ class Modal extends React.Component {
             'no-close': !this.props.onClose,
             maximize: this.props.maximize,
             show: this.props.expanded,
-            'wizard-modal': this.isWizard,
+            'wizard-modal': this.isWizard
         };
 
         const renderedModal = (
@@ -251,8 +231,7 @@ class Modal extends React.Component {
                 data-id={this.props['data-id']}
                 ref="container"
                 key="modal"
-                className={classnames('modal', this.props.className, modalClasses)}
-            >
+                className={classnames('modal', this.props.className, modalClasses)}>
                 <div
                     className="modal-bg"
                     data-id="modal-bg"
@@ -282,18 +261,17 @@ class Modal extends React.Component {
             </div>
         );
 
-        return this._usePortal() ? <Portal>{renderedModal}</Portal> : renderedModal;
+        return <Portal>{renderedModal}</Portal>;
     }
 }
 
 const BodyTitle = ({
     children,
 }) => (
-    <div className="body-title">
-        {children}
-    </div>
-);
-
+        <div className="body-title">
+            {children}
+        </div>
+    );
 BodyTitle.propTypes = {
     children: PropTypes.node,
 };

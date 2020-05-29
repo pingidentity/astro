@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Utils from '../../util/Utils';
 import _ from 'underscore';
-import { cannonballChangeWarning } from '../../util/DeprecationUtils';
 import { inStateContainer, toggleTransform } from '../../util/StateContainer';
-import { flagsPropType, hasFlag } from '../../util/FlagUtils';
+import { deprecatedStatelessProp } from '../../util/DeprecationUtils';
 
 /**
  * @enum {string}
@@ -36,6 +34,7 @@ const Status = {
 *     False or not specified will cause the component to manage state internally.
 * @param {boolean} [toggled=false]
 *     Toggle state; either true for "on" or false for "off".
+*     When not provided, the component will manage this value.
 * @param {string} [name]
 *     Name attribute for the input.
 *
@@ -64,23 +63,8 @@ class Stateless extends Component {
         "data-id": "toggle",
         className: "",
         disabled: false,
-        onToggle: () => { }
+        onToggle: _.noop,
     };
-
-    componentDidMount() {
-        if (!hasFlag(this, "p-stateful")) {
-            if (
-                (typeof this.props.toggled === "undefined" && this.props.stateless) ||
-                (typeof this.props.toggled !== "undefined" && !this.props.stateless)
-            ) {
-                cannonballChangeWarning({
-                    message: `The 'toggled' prop will no longer serve as an initial state. ` +
-                        `If it is present, it will control the current value of the component. ` +
-                        `Set the 'p-stateful' flag to switch to this behavior now.`,
-                });
-            }
-        }
-    }
 
     _handleToggle = () => {
         if (this.props.disabled) {
@@ -107,34 +91,7 @@ class Stateless extends Component {
     }
 }
 
-class Stateful extends React.Component {
-    static defaultProps = {
-        onToggle: /* istanbul ignore next  */ () => { }
-    };
-
-    state = {
-        toggled: this.props.toggled || false
-    };
-
-    _handleToggle = () => {
-        this.props.onToggle(!this.state.toggled);
-        this.setState({
-            toggled: !this.state.toggled
-        });
-    };
-
-    render() {
-        const props = _.defaults({
-            ref: "ToggleStateless",
-            toggled: this.state.toggled,
-            onToggle: this._handleToggle
-        }, this.props);
-
-        return <Stateless {...props} />;
-    }
-}
-
-const PStatefulToggle = inStateContainer([
+const Toggle = inStateContainer([
     {
         name: "toggled",
         initial: false,
@@ -147,32 +104,11 @@ const PStatefulToggle = inStateContainer([
     }
 ])(Stateless);
 
-PStatefulToggle.displayName = "PStatefulToggle";
+Toggle.displayName = "Toggle";
 
-export default class Toggle extends Component {
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
-
-    static defaultProps = {
-        stateless: true,
-    };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    render() {
-        if (this._usePStateful()) {
-            return <PStatefulToggle {...this.props} />;
-        }
-
-        return this.props.stateless
-            ? <Stateless ref="ToggleStateless" {...this.props} />
-            : <Stateful ref="ToggleStateful" {...this.props} />;
-    }
-}
+Toggle.propTypes = {
+    stateless: deprecatedStatelessProp,
+};
 
 Toggle.Status = Status;
 
