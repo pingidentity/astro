@@ -4,11 +4,22 @@ import { noop } from "underscore";
 import classnames from "classnames";
 import Button from "../buttons/Button";
 import { Title } from "../layout/NavCard";
-import FlexRow, { wrapOptions } from "../layout/FlexRow";
+import FlexRow, { alignments, wrapOptions } from "../layout/FlexRow";
 import Icon from "../general/Icon";
 import Text, { textTypes } from "../general/Text";
 
-export { default as Container, Divider, Title } from "../layout/NavCard";
+export { default as Container, Title } from "../layout/NavCard";
+
+/**
+ * @class Divider
+ * @desc A divider to put between QuickActions.Section components.
+ *
+ */
+
+
+export const Divider = () => (
+    <div className="quick-actions__divider" />
+);
 
 /**
  * @class Action
@@ -72,18 +83,35 @@ Action.defaultProps = {
     onClick: noop
 };
 
+/**
+ * @class EditButton
+ * @desc An edit button for the QuickActions.
+ *
+ * @param {string} [className]
+ *   A class name applied at the component's top level.
+ * @param {string} [data-id]
+ *   A data-id test hook applied at the root element.
+ *
+ */
+
+/**
+ * @callback EditButton~onClick
+ * @param {Object} event
+ *   The click event object.
+ */
+
 export const EditButton = ({
     className,
+    "data-id": dataId,
     onClick,
-    onMouseDown
 }) => {
     return (
         <Button
             className={classnames("quick-actions__edit-button", className)}
+            data-id={dataId}
             iconName="edit"
             inline
             onClick={onClick}
-            onMouseDown={onMouseDown}
         />
     );
 };
@@ -116,7 +144,8 @@ export const Section = ({
         <div className={classnames("quick-actions__section", className)} data-id={dataId}>
             <Title>{title}</Title>
             <FlexRow
-                inline
+                alignment={alignments.TOP}
+                className="quick-actions__section-actions"
                 wrap={wrapOptions.WRAP}
             >
                 {children}

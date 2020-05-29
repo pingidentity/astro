@@ -23,6 +23,11 @@ describe("Quick Actions", () => {
         expect(component.exists()).toEqual(true);
     });
 
+    it("renders the Divider component", () => {
+        const component = shallow(<QuickActions.Divider />);
+        expect(component.exists()).toEqual(true);
+    });
+
     it("renders the EditButton component", () => {
         const component = shallow(
             <QuickActions.EditButton onClick={() => console.log("Clicked")} />
