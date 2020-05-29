@@ -1,7 +1,7 @@
 import React from "react";
 import NavFrame, { Logo, NavLink, NavMenu, NavSearch } from "ui-library/lib/components/panels/NavFrame";
 import * as QuickActions from "ui-library/lib/components/panels/QuickActions";
-import NavCard, { Divider } from "ui-library/lib/components/layout/NavCard";
+import NavCard from "ui-library/lib/components/layout/NavCard";
 
 /**
  * @class Ping Fed Admin Template
@@ -222,7 +222,7 @@ export default function PingFedAdminTemplate() {
                         onClick={() => console.log("Action clicked")}
                     />
                 </QuickActions.Section>
-                <Divider />
+                <QuickActions.Divider />
                 <QuickActions.Section
                     title={
                         <>
@@ -237,12 +237,12 @@ export default function PingFedAdminTemplate() {
                         label="IdP Connection"
                         iconName="globe"
                         onClick={() => console.log("Action clicked")}
-                    />,
+                    />
                     <QuickActions.Action
                         label="IdP Connection"
                         iconName="globe"
                         onClick={() => console.log("Action clicked")}
-                    />,
+                    />
                     <QuickActions.Action
                         label="IdP Connection"
                         iconName="globe"
