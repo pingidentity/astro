@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 
 import FormLabel from './FormLabel';
 import { default as FormTextFieldStateless } from '../TextInput';
+import HelpHint from '../tooltips/HelpHint';
 import { InputWidths, InputWidthProptypes, getInputWidthClass } from './InputWidths';
 
 import Icon from './Icon';
@@ -16,14 +17,14 @@ import {
     isEnter,
     isEsc,
     isSpace,
-    isTab,
+    isTab
 } from '../../util/KeyboardUtils.js';
-import { isIE } from '../../util/Utils.js';
+import Utils from '../../util/Utils.js';
 import _ from 'underscore';
 
 import PopperContainer from './PopperContainer';
-import { inStateContainer, toggleTransform } from '../../util/StateContainer';
-import { flagsPropType, hasFlag } from '../../util/FlagUtils';
+import { inStateContainer, toggleTransform } from '../utils/StateContainer';
+import { deprecatedStatelessProp } from '../../util/DeprecationUtils';
 
 /**
 * @function FormDropDownList~filterOptions
@@ -91,6 +92,8 @@ const SearchTypes = {
 *     The value of the option.
 * @property {string|number} [group]
 *     The id of the group the option belongs to.
+* @property {string} helpHintText
+*     The help text to display in a tooltip when hovering over an option
 */
 
 /**
@@ -116,6 +119,8 @@ const SearchTypes = {
 *    CSS classes to set on the top-level HTML container.
 * @param {string} [errorMessage]
 *     The message to display if defined when external validation failed.
+* @param {string} [helpClassName]
+*     CSS classes to set on the HelpHint component.
 * @param {string} [iconName]
 *     adds an icon to the option
 * @param {string} [label]
@@ -124,12 +129,6 @@ const SearchTypes = {
 *     Description to display below the label.
 * @param {string} [name]
 *     The name attribute for the input.
-* @param {boolean} [stateless=false]
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
-* @param {array} [flags]
-*     Set the flag for "use-portal" to render with popper.js and react-portal
-*
 * @param {array<FormDropDownList~option>} options
 *    Array of options for the dropdown list. Each option should have a label and value,
 *    but value is required and label is not. If no label is passed in Value will take the place of label.
@@ -168,10 +167,13 @@ const SearchTypes = {
 *    The field value to use in the search.
 * @param {number} [searchIndex=-1]
 *    The index of the option that was just searched. Allows for highlighting and up/down arrow movement.
+*    When not provided, the component will manage this value.
 * @param {string} [searchString=""]
 *    Value to help with finding an option on keydown.
+*    When not provided, the component will manage this value.
 * @param {number} [searchTime=0]
 *    Time to help clear the search when the user delays their search.
+*    When not provided, the component will manage this value.
 * @param {string} [selectClassName]
 *    CSS classes to set on the select.
 * @param {string} [selectedOptionLabelClassName]
@@ -200,14 +202,11 @@ const SearchTypes = {
 *     If true, the select element will be disabled.
 * @param {boolean} [open=false]
 *    State of the open/closed dropdown menu.
+*    When not provided, the component will manage this value.
 * @param {boolean} [required=false]
 *     If true, the user must select a value for this field.
 * @param {boolean} [showSelectedOptionLabel=true]
 *    Whether or not to display the label text for the selected option.
-* @param {boolean} [stateless=false]
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
-*
 * @param {FormDropDownList.onAdd} [onAdd]
 *    Callback to be triggered when a new option is to be added to the list.
 * @param {FormDropDownList~onSearch} [onSearch]
@@ -293,11 +292,24 @@ class OptionItem extends React.Component {
             )
             : <div>{this.props.content}</div>;
 
-        return content;
+        if (this.props.option.helpHintText) {
+            return (
+                <HelpHint
+                    data-id={this.props["data-id"] + "-helphint"}
+                    delayHide={0}
+                    placement="right"
+                    hintText={this.props.option.helpHintText}>
+                    {content}
+                </HelpHint>
+            );
+        } else {
+            return content;
+        }
     };
 
     render() {
         const className = {
+            "help-hint-option": this.props.option.helpHintText,
             "select-option__placeholder": this.props.iconPlaceholder && this.props.iconName === undefined
         };
         return (
@@ -367,7 +379,6 @@ class FormDropDownListStateless extends React.Component {
         title: PropTypes.string,
         validSearchCharsRegex: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
@@ -394,10 +405,8 @@ class FormDropDownListStateless extends React.Component {
         autofocus: false,
     };
 
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
     didPressKey = false;
-    inlineMenuStyle = isIE() ? { border: "none" } : {};
+    inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
 
     constructor(props) {
         super(props);
@@ -826,8 +835,6 @@ class FormDropDownListStateless extends React.Component {
 
     _getReference = () => this.reference;
 
-    _usePortal = () => hasFlag(this, "use-portal");
-
     render() {
         this._setupGroups(this.props);
 
@@ -894,7 +901,7 @@ class FormDropDownListStateless extends React.Component {
                             onKeyDown={this._handleKeyDown}
                             className={selectClassName}
                             title={this.props.title}>
-                            {this._usePortal() &&
+                            {
                                 <span className="wrapper__spacer">{inputValue}</span>
                                 // for auto-sized dropdowns, it pushes out the width of the input
                             }
@@ -906,7 +913,6 @@ class FormDropDownListStateless extends React.Component {
                                 errorMessage={this.props.errorMessage}
                                 autoFocus={this.props.autofocus}
                                 selectOnFocus={this._isBoxSearch()}
-                                stateless={true}
                                 value={inputValue}
                                 placeholder={this.props.placeholder}
                                 name={this.props.name}
@@ -917,25 +923,22 @@ class FormDropDownListStateless extends React.Component {
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                                 width={InputWidths.MAX}
                                 ref={el => this.reference = el}
-                                flags={["p-stateful"]}
                             />
                             {!this.props.disabled && <div className="arrow" />}
                         </div>
-                        {this._usePortal()
-                            ? (this.props.open &&
-                                <PopperContainer
-                                    data-id={this.props["data-id"] + "-dropdown"}
-                                    data-parent={this.props["data-id"]}
-                                    getReference={this._getReference}
-                                    className={containerClassName}
-                                    placement="bottom-start"
-                                    matchWidth
-                                    noGPUAcceleration
-                                >
-                                    {menuList}
-                                </PopperContainer>
-                            )
-                            : menuList
+                        {this.props.open &&
+                            <PopperContainer
+                                data-parent={this.props["data-id"]}
+                                data-id={this.props["data-id"] + "-dropdown"}
+                                data-parent={this.props["data-id"]}
+                                getReference={this._getReference}
+                                className={containerClassName}
+                                placement="bottom-start"
+                                matchWidth
+                                noGPUAcceleration
+                            >
+                                {menuList}
+                            </PopperContainer>
                         }
                     </div>
                 </div>
@@ -944,64 +947,7 @@ class FormDropDownListStateless extends React.Component {
     }
 }
 
-class FormDropDownListStateful extends React.Component {
-    static displayName = "FormDropDownListStateful";
-
-    state = {
-        open: this.props.open || false,
-        searchIndex: null,
-        searchString: "",
-        searchTime: 0,
-        matchedOptions: this.props.options
-    };
-
-    componentWillReceiveProps(nextProps) {
-        if (!_.isEqual(this.props.options, nextProps.options)) {
-            this.setState({
-                matchedOptions: nextProps.options
-            });
-        }
-    }
-
-    _handleToggle = () => {
-        this.setState({
-            open: !this.state.open,
-            searchIndex: null,
-            searchTime: 0
-        });
-    };
-
-    _handleSearch = (search, time, index) => {
-        const matchedOptions =
-            this.props.canAdd || this.props.searchType === SearchTypes.BOX
-                ? (search === "" ? this.props.options : filterOptions(this.props.options, search))
-                : this.state.matchedOptions;
-
-        this.setState({
-            searchString: search,
-            searchTime: time,
-            searchIndex: index,
-            matchedOptions
-        });
-    };
-
-    render() {
-        const props = _.defaults({
-            ref: "FormDropDownListStateless",
-            options: this.state.matchedOptions,
-            open: this.state.open,
-            onToggle: this._handleToggle,
-            onSearch: this._handleSearch,
-            searchIndex: this.state.searchIndex,
-            searchString: this.state.searchString,
-            searchTime: this.state.searchTime
-        }, this.props);
-
-        return <FormDropDownListStateless {...props} />;
-    }
-}
-
-const PStatefulDropDownList = inStateContainer([
+const FormDropDownList = inStateContainer([
     {
         name: "open",
         initial: false,
@@ -1026,39 +972,16 @@ const PStatefulDropDownList = inStateContainer([
         setter: "setSearchTime",
     },
 ])(FormDropDownListStateless);
-PStatefulDropDownList.displayName = PStatefulDropDownList;
 
-export default class FormDropDownList extends React.Component {
+FormDropDownList.displayName = "FormDropDownList";
 
-    static displayName = "FormDropDownList";
+FormDropDownList.propTypes = {
+    stateless: deprecatedStatelessProp,
+};
 
-    static propTypes = {
-        stateless: PropTypes.bool,
-        flags: flagsPropType,
-    };
+FormDropDownList.SearchTypes = SearchTypes;
+FormDropDownList.searchTypes = SearchTypes; // we agreed on a new naming standard, but I'm also preserving bw compat
+FormDropDownList.filterOptions = filterOptions;
+FormDropDownList._statelessComponent = FormDropDownListStateless;
 
-    static defaultProps = {
-        stateless: false,
-    };
-
-    static SearchTypes = SearchTypes;
-    static searchTypes = SearchTypes; // we agreed on a new naming standard, but I'm also preserving bw compat
-    static filterOptions = filterOptions;
-    static _statelessComponent = FormDropDownListStateless;
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    _usePStateful = () => hasFlag(this, "p-stateful");
-
-    render() {
-        if (this._usePStateful()) {
-            return <PStatefulDropDownList {...this.props} />;
-        }
-
-        return (
-            this.props.stateless
-                ? <FormDropDownListStateless ref="FormDropDownListStateless" {...this.props} />
-                : <FormDropDownListStateful ref="FormDropDownListStateful" {...this.props} />
-        );
-    }
-}
+export default FormDropDownList;

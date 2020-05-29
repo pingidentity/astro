@@ -4,16 +4,16 @@ var _ = require("underscore"),
 
 var initialState = {};
 
-function deleteMessageAt (state, containerId, index) {
+function deleteMessageAt(state, containerId, index) {
     clearTimeout(state[containerId][index].timer);
     return update.unset(state, [containerId, index]);
 }
 
-function emptyContainer (state, containerId) {
+function emptyContainer(state, containerId) {
     return update.set(state, [containerId], []);
 }
 
-function updateProgressAt (state, containerId, index, percent) {
+function updateProgressAt(state, containerId, index, percent) {
     return update.set(state, [containerId, index, "progress", "percent"], percent);
 }
 
@@ -23,7 +23,7 @@ module.exports = function (state, action) {
 
     switch (action.type) {
         case Actions.Types.ADD_MESSAGE:
-            if (typeof(nextState[action.containerId]) === "undefined") {
+            if (typeof (nextState[action.containerId]) === "undefined") {
                 nextState = emptyContainer(nextState, action.containerId);
             }
             nextState = update.push(nextState, [action.containerId], _.defaults({ type: action.status }, action));

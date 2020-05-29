@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // import Icon from './Icon';
 import Anchor, { linkTypes } from './Anchor';
 import classnames from 'classnames';
-import { cannonballChangeWarning } from '../../util/DeprecationUtils';
+
 
 /**
  * @class Link
@@ -54,21 +54,16 @@ const Link = (props) => {
         "data-id": dataId,
     } = props;
 
-    const isNotBlock = type !== "block";
+    const isNotBlock = type !== linkTypes.BLOCK;
 
     if ((children || (type && isNotBlock)) && !(title || count)) {
         return <Anchor className={className} data-id={dataId} href={url} {...props} />;
     }
 
-    if (isNotBlock) {
-        cannonballChangeWarning({
-            message: "Link will be used mainly for simple links. For block links, set the 'type' prop to 'block'."
-        });
-    }
-
     const {
         disabled,
         icon,
+        iconAfter,
         onClick,
     } = props;
 
@@ -79,7 +74,8 @@ const Link = (props) => {
     };
 
     const linkCss = classnames(className, {
-        disabled
+        disabled,
+        "text-first": iconAfter,
     });
 
     const _renderTitle = () => {
@@ -131,7 +127,6 @@ Link.defaultProps = {
     disabled: false,
     className: "",
     target: "_self"
-
 };
 
 Link.linkTypes = linkTypes;

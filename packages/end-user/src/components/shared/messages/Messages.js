@@ -1,15 +1,11 @@
-"use strict";
+import PropTypes from 'prop-types';
 
-import PropTypes from "prop-types";
+import React from 'react';
+import classnames from 'classnames';
+import _ from 'underscore';
+import { isProduction, deprecatePropError } from '../../../util/Utils';
 
-import React from "react";
-import classnames from "classnames";
-import { isProduction, deprecatePropError } from "../../../util/Utils";
-import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
-import _ from "underscore";
-
-import { MessageTypes, Layouts } from "./MessagesConstants";
-import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
+import { Layouts } from './MessagesConstants';
 
 /**
  * @callback Messages~onRemoveMessage
@@ -87,10 +83,8 @@ import { flagsPropType, hasFlag, getFlags } from "../../../util/FlagUtils";
  * @param {number} [defaultMessageTimeout]
  *     Default message timeout in ms. Messages will remove themselves after this time, unless the message specifically
  *     overrides the default timeout itself.
- * @param {Messages.Layouts} [defaultMessageLayout=Banner]
+ * @param {Messages.Layouts} [defaultMessageLayout=CORNER]
  *     Default message layout for this messages component. Messages that don't set their own layout type will receive this on.
- * @param {array} [flags]
- *     Set the flag for "fixed-messages-constants" to use WARNING and INFO correctly
  *
  * @example
  * Usage:
@@ -104,8 +98,8 @@ module.exports = class extends React.Component {
     static displayName = "Messages";
 
     static propTypes = {
-        "data-id": PropTypes.string,
-        containerType: PropTypes.oneOf(["full", "page-messages--sidebar-fix"]),
+        'data-id': PropTypes.string,
+        containerType: PropTypes.oneOf(['full', 'page-messages--sidebar-fix']),
         messages: PropTypes.array,
         onRemoveMessage: PropTypes.func,
         removeMessage: PropTypes.func,
@@ -113,37 +107,19 @@ module.exports = class extends React.Component {
         i18n: PropTypes.func,
         defaultMessageTimeout: PropTypes.number,
         defaultMessageLayout: PropTypes.oneOf(Object.values(Layouts)),
-        flags: flagsPropType,
     };
 
     static defaultProps = {
-        "data-id": "messages",
+        'data-id': 'messages',
         onRemoveMessage: null,
-        onI18n: (key) => key,
-        defaultMessageLayout: Layouts.BANNER,
+        onI18n: key => key,
+        defaultMessageLayout: Layouts.CORNER,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    constructor(props) {
-        super(props);
-        if (!isProduction()) {
-            if (props.id) {
-                throw new Error(deprecatePropError("id", "data-id"));
-            }
-            if (props.removeMessage) {
-                throw new Error(deprecatePropError("removeMessage", "onRemoveMessage"));
-            }
-            if (props.i18n) {
-                throw new Error(deprecatePropError("i18n", "onI18n"));
-            }
-        }
-    }
 
     render() {
         const {
             containerType,
-            "data-id": dataId,
+            'data-id': dataId,
             defaultMessageTimeout,
             defaultMessageLayout,
             key,
@@ -151,7 +127,7 @@ module.exports = class extends React.Component {
             onI18n,
             onRemoveMessage,
         } = this.props;
-        const className = classnames("page-messages", containerType );
+        const className = classnames('page-messages', containerType);
 
         return (
             <div data-id={dataId} className={className}>
@@ -167,7 +143,6 @@ module.exports = class extends React.Component {
                                 defaultTimeout={defaultMessageTimeout}
                                 defaultLayout={defaultMessageLayout}
                                 data-id={`${dataId}-message-${i}`}
-                                flags={getFlags(this)}
                             />
                         );
                     })
@@ -184,7 +159,6 @@ module.exports = class extends React.Component {
  */
 class Message extends React.Component {
     static propTypes = {
-        flags: flagsPropType,
         onRemoveMessage: PropTypes.func,
         iconName: PropTypes.string,
         defaultMessageLayout: PropTypes.oneOf(Object.values(Layouts)),
@@ -193,8 +167,6 @@ class Message extends React.Component {
     static defaultProps = {
         onRemoveMessage: _.noop,
     }
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
 
     /*
      * Remove the message by calling the removeMessage callback if it exists.
@@ -211,15 +183,6 @@ class Message extends React.Component {
         if (interval) {
             this.interval = global.setInterval(this._handleRemove, interval);
         }
-
-        if (this.props.message.type === MessageTypes.WARNING && !this._fixedConstants()) {
-            cannonballChangeWarning({
-                message: (
-                    `The WARNING message type will use the yellow style instead of the red. ` +
-                    `Add the 'fixed-messages-constants' flag to Messages or use the ERROR or NOTICE constant.`
-                ),
-            });
-        }
     }
 
     componentWillUnmount() {
@@ -235,18 +198,18 @@ class Message extends React.Component {
 
         let text = progress.text ||
             (progress.textTemplate && progress.textTemplate(percent)) ||
-                `${progress.percent}%`;
+            `${progress.percent}%`;
 
         return (
-            <div className="message__progress" data-id={this.props["data-id"]+"-progress"}>
+            <div className="message__progress" data-id={`${this.props['data-id']}-progress` }>
                 {percent >= 100 && <div className="message__progress-icon pingicon-check" />}
-                <div className="message__progress-text" data-id={this.props["data-id"]+"-progress-text"}>{text}</div>
+                <div className="message__progress-text" data-id={`${this.props['data-id']}-progress-text`}>{text}</div>
                 {percent < 100 &&
                     <div className="message__progress-border">
                         <div
                             className="message__progress-bar"
                             style={{
-                                width: `${percent}%`
+                                width: `${percent}%`,
                             }}
                         />
                     </div>
@@ -255,49 +218,39 @@ class Message extends React.Component {
         );
     }
 
-    _translatedConstants = {
-        [MessageTypes.SUCCESS]: MessageTypes.SUCCESS,
-        [MessageTypes.ERROR]: MessageTypes.ERROR,
-        [MessageTypes.WARNING]: MessageTypes.NOTICE,
-        [MessageTypes.NOTICE]: MessageTypes.NOTICE,
-        [MessageTypes.FEATURE]: MessageTypes.FEATURE,
-        [MessageTypes.INFO]: MessageTypes.FEATURE,
+    _iconName = {
+        success: 'check',
+        warning: 'error-triangle',
+        error: 'alert',
+        info: 'info',
     };
-
-    _fixedConstants = () => hasFlag(this, "fixed-messages-constants");
-
-    _transformType = type => (
-        this._fixedConstants()
-            ? this._translatedConstants[type]
-            : type
-    );
 
     render() {
         const {
             defaultLayout,
             message: {
-                iconName,
+                type,
+                iconName = this._iconName[type],
                 key,
                 hideClose,
                 layout = defaultLayout,
                 minimized,
                 params,
                 progress,
-                type,
                 ...message
             }
         } = this.props;
 
         const text = message.text || this.props.onI18n(key, params);
-        const classes = classnames("message show", this._transformType(type), {
-            "message--minimized": minimized,
-            "message--corner": layout === Layouts.CORNER,
-            "message--center": layout === Layouts.CENTER,
+        const classes = classnames('message show', type, {
+            'message--minimized': minimized,
+            'message--corner': layout === Layouts.CORNER,
+            'message--center': layout === Layouts.CENTER,
         });
 
         return (
-            <div className={classes} data-id={this.props["data-id"]}>
-                {iconName && <div className={classnames("message__icon", `pingicon-${iconName}`)} />}
+            <div className={classes} data-id={this.props['data-id']}>
+                {iconName && <div className={classnames('message__icon', `pingicon-${iconName}`)} />}
                 {!minimized && text && (<span className="message__text">{text}</span>)}
                 {progress && this._renderProgress()}
                 {!hideClose && <a className="close" onClick={this._handleRemove} data-id="message-close"></a>}

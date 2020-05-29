@@ -5,7 +5,6 @@ import _ from 'underscore';
 import PopperContainer from './PopperContainer';
 
 import popsOver from '../../util/behaviors/popsOver';
-import { flagsPropType, hasFlag } from '../../util/FlagUtils';
 
 /**
  * @class Popover
@@ -15,8 +14,6 @@ import { flagsPropType, hasFlag } from '../../util/FlagUtils';
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {array} [flags]
- *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} [triggerClassName]
  *     CSS classes to set on the link that triggers the popover.
  *
@@ -47,7 +44,6 @@ class PopoverBase extends React.Component {
         "data-parent": PropTypes.string,
         children: PropTypes.node,
         className: PropTypes.string,
-        flags: flagsPropType,
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         onPopperClick: PropTypes.func,
         onKeyDown: PropTypes.func,
@@ -70,10 +66,6 @@ class PopoverBase extends React.Component {
         popperClassName: "",
         padded: false,
     };
-
-    static contextTypes = { flags: PropTypes.arrayOf(PropTypes.string) };
-
-    _usePortal = () => hasFlag(this, "use-portal");
 
     /*
      * Check if placement contains a word (like top, right, or left)
@@ -109,10 +101,8 @@ class PopoverBase extends React.Component {
             "popup-frame",
             this.props.className,
             this._getModifiers("popup-frame"), {
-                "popup-frame--padded": this.props.padded,
-            }, {
-                "popup-frame--pointer": !this._usePortal(),
-            }
+            "popup-frame--padded": this.props.padded,
+        }
         );
 
         const contents = <div className={frameClassName}>{this.renderContent()}</div>;
@@ -137,8 +127,9 @@ class PopoverBase extends React.Component {
             }
         };
 
-        return this._usePortal() ? (
+        return (
             <PopperContainer
+                data-parent={this.props["data-id"]}
                 className={classnames("popover-display", this.props.popperClassName)}
                 data-id="popup-frame"
                 data-parent={this.props["data-id"]}
@@ -150,9 +141,7 @@ class PopoverBase extends React.Component {
             >
                 {contents}
             </PopperContainer>
-        ) : (
-                <div className="popover__container">{contents}</div>
-            );
+        );
     };
 
     _getReference = () => this.reference;
@@ -161,10 +150,7 @@ class PopoverBase extends React.Component {
         var containerClassName = classnames(
             "popover",
             this.props.className,
-            this._getModifiers("popover"),
-            {
-                "popover--use-portal": this._usePortal(),
-            }
+            this._getModifiers("popover")
         );
 
         return (

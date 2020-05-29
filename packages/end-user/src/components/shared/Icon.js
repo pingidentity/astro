@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { cannonballChangeWarning } from '../../util/DeprecationUtils';
 import { withFocusOutline } from '../../util/KeyboardUtils';
 import { getClickableA11yProps, getIconClassName } from '../../util/PropUtils';
 
@@ -17,7 +16,7 @@ import { getClickableA11yProps, getIconClassName } from '../../util/PropUtils';
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {string} [type]
- *     Set to "leading" or "inline" to either provide extra spacing or not.
+ *     Set to Icon.iconTypes.LEADING or Icon.iconTypes.INLINE to either provide extra spacing or not.
  * @param {string} [title]
  *     Title for the label within a stack gap.
  * @param {string} [iconSize]
@@ -47,6 +46,11 @@ const iconSizes = {
     XXL: "xxl"
 };
 
+const iconTypes = {
+    INLINE: "inline",
+    LEADING: "leading",
+};
+
 
 const Icon = withFocusOutline(({
     className,
@@ -63,12 +67,12 @@ const Icon = withFocusOutline(({
         "icon__graphic",
         getIconClassName(props),
         className, {
-            "icon__graphic--size-sm": iconSize === iconSizes.SM,
-            "icon__graphic--size-md": iconSize === iconSizes.MD,
-            "icon__graphic--size-lg": iconSize === iconSizes.LG,
-            "icon__graphic--size-xl": iconSize === iconSizes.XL,
-            "icon__graphic--size-xxl": iconSize === iconSizes.XXL,
-        });
+        "icon__graphic--size-sm": iconSize === iconSizes.SM,
+        "icon__graphic--size-md": iconSize === iconSizes.MD,
+        "icon__graphic--size-lg": iconSize === iconSizes.LG,
+        "icon__graphic--size-xl": iconSize === iconSizes.XL,
+        "icon__graphic--size-xxl": iconSize === iconSizes.XXL,
+    });
 
     const onClickProps = onClick ? {
         onClick,
@@ -76,28 +80,26 @@ const Icon = withFocusOutline(({
         ...getClickableA11yProps(onClick)
     } : {};
 
-    if (type === "inline") {
+    if ((type !== iconTypes.LEADING && !children) || (type === iconTypes.INLINE)) {
         return (
             <span
                 data-id={dataId}
                 className={classnames(
+                    className,
                     containerClassName,
                     getIconClassName(props),
                     {
-                        "icon--clickable": onClick
+                        "icon--clickable": onClick,
+                        "icon--size-sm": iconSize === iconSizes.SM,
+                        "icon--size-md": iconSize === iconSizes.MD,
+                        "icon--size-lg": iconSize === iconSizes.LG,
+                        "icon--size-xl": iconSize === iconSizes.XL,
+                        "icon--size-xxl": iconSize === iconSizes.XXL,
                     }
                 )}
                 {...onClickProps}
             />
         );
-    } else if (type !== "leading" && !children) {
-        cannonballChangeWarning({
-            message: (
-                `By default, Icon will display a simple icon when no children are provided. ` +
-                `You can use this rendering behavior now by setting the 'type' prop to 'inline'. ` +
-                `To display a leading icon that includes the right margin, set 'type' to 'leading'.`
-            ),
-        });
     }
 
     return (
@@ -126,20 +128,16 @@ const Icon = withFocusOutline(({
     );
 });
 
+Icon.displayName = "Icon";
+
 Icon.propTypes = {
     "data-id": PropTypes.string,
     className: PropTypes.string,
     iconName: PropTypes.string,
     textType: PropTypes.string,
     title: PropTypes.string,
-    type: PropTypes.oneOf(["leading", "inline"]),
-    iconSize: PropTypes.oneOf([
-        iconSizes.SM,
-        iconSizes.MD,
-        iconSizes.LG,
-        iconSizes.XL,
-        iconSizes.XXL
-    ]),
+    type: PropTypes.oneOf(Object.values(iconTypes)),
+    iconSize: PropTypes.oneOf(Object.values(iconSizes)),
 };
 
 Icon.defaultProps = {
@@ -147,4 +145,6 @@ Icon.defaultProps = {
 };
 
 Icon.iconSizes = iconSizes;
+Icon.iconTypes = iconTypes;
+
 export default Icon;
