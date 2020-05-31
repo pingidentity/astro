@@ -36,10 +36,7 @@ pipeline {
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]){
               sh  """
-                  yarn run generate-release-notes ${env.RELEASE_VERSION} ${env.JIRA_CREDS}
-                  git add *notes.json */release-notes/*.md
-                  git commit -m 'UI Library Release notes ${env.RELEASE_VERSION}'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
+
               """
               sleep 100 //wait 10 seconds for git push to trigger build job
 
