@@ -24,6 +24,8 @@ if (userPass === undefined) {
 const params = `project = "UIP" AND fixversion =  "ui-library@${version}" AND status = "Ready for Release" `;
 const requestUri = `https://jira.pingidentity.com/rest/api/2/search?jql=${encodeURIComponent(params)}`;
 
+console.log(`Requesting release notes ${params} from ${requestUri}`);
+
 function addNotesToDoc(v, p) {
     const notePath = "./src/demo/components/docs/notes.json";
     const previousNotes = require(`${notePath}`);
