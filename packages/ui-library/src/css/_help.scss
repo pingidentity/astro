@@ -1,24 +1,214 @@
+/**
+* Tippy vendor styles
+*/
+.tippy-box[data-animation=fade][data-state=hidden] {
+    opacity: 0;
+}
+
+.tippy-iOS {
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+[data-tippy-root] {
+    max-width: calc(100vw - 10px);
+}
+
+//Error Type
+.tippy-box[data-theme~='error'] {
+    background-color: $color-critical-red;
+    color: $color-white;
+
+    &[data-placement^='top'] > .tippy-arrow:before {
+        border-top-color: $color-critical-red;
+    }
+    &[data-placement^='bottom'] > .tippy-arrow:before {
+        border-bottom-color: $color-critical-red;
+    }
+    &[data-placement^='left'] > .tippy-arrow:before {
+        border-left-color: $color-critical-red;
+    }
+    &[data-placement^='right'] > .tippy-arrow:before {
+        border-right-color: $color-critical-red;
+    }
+}
+
+//Success Type
+.tippy-box[data-theme~='success'] {
+    background-color: $color-success-green;
+    color: $color-white;
+
+    &[data-placement^='top'] > .tippy-arrow:before {
+        border-top-color: $color-success-green;
+    }
+    &[data-placement^='bottom'] > .tippy-arrow:before {
+        border-bottom-color: $color-success-green;
+    }
+    &[data-placement^='left'] > .tippy-arrow:before {
+        border-left-color: $color-success-green;
+    }
+    &[data-placement^='right'] > .tippy-arrow:before {
+        border-right-color: $color-success-green;
+    }
+}
+
+//Light Type 
+.tippy-box[data-theme~='light'] {
+    background: $color-white;
+    border: 1px solid rgba(0, 8, 16, 0.15);
+    color: $color-midnight;
+    box-shadow: 0 3px 14px -0.5px rgba(0, 8, 16, 0.1);
+
+    &[data-placement^='top'] > .tippy-arrow {
+        &:after {
+            border-top-color: rgba(0, 8, 16, 0.15);
+            border-width: 8px 8px 0;
+            bottom: -8px;
+            left: 0;
+        }
+    }
+    &[data-placement^='bottom'] > .tippy-arrow {
+        &:after {
+            border-bottom-color: rgba(0, 8, 16, 0.15);
+            border-width: 0 8px 8px;
+            top: -8px;
+            left: 0;
+        }
+    }
+    &[data-placement^='left'] > .tippy-arrow {
+        &:after {
+            border-left-color: rgba(0, 8, 16, 0.15);
+            border-width: 8px 0 8px 8px;
+            right: -8px;
+            top: 0;
+        }
+    }
+    &[data-placement^='right'] > .tippy-arrow {
+        &:after {
+            border-width: 8px 8px 8px 0;
+            left: -8px;
+            top: 0;
+            border-right-color: rgba(0, 8, 16, 0.15);
+        }
+    }
+}
+
+.tippy-box[data-theme~='light'] .tippy-arrow {
+    transform-style: preserve-3d;
+    color: $color-white;
+
+    &:after {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        border-color: transparent;
+        border-style: solid;
+    }
+}
+
+//Warning Type
+.tippy-box[data-theme~='warning'] {
+    background-color: $color-warning-yellow;
+    color: $color-white;
+
+    &[data-placement^='top'] > .tippy-arrow:before {
+        border-top-color: $color-warning-yellow;
+    }
+    &[data-placement^='bottom'] > .tippy-arrow:before {
+        border-bottom-color: $color-warning-yellow;
+    }
+    &[data-placement^='left'] > .tippy-arrow:before {
+        border-left-color: $color-warning-yellow;
+    }
+    &[data-placement^='right'] > .tippy-arrow:before {
+        border-right-color: $color-warning-yellow;
+    }
+}
+
+.tippy-box {
+    position: relative;
+    background-color: $color-midnight;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+    outline: 0;
+    transition-property: transform, visibility, opacity;
+}
+
+.tippy-box[data-placement^=top] > .tippy-arrow {
+    bottom: 0;
+}
+
+.tippy-box[data-placement^=top] > .tippy-arrow:before {
+    bottom: -7px;
+    left: 0;
+    border-width: 8px 8px 0;
+    border-top-color: initial;
+    transform-origin: center top;
+}
+
+.tippy-box[data-placement^=bottom] > .tippy-arrow {
+    top: 0;
+}
+
+.tippy-box[data-placement^=bottom] > .tippy-arrow:before {
+    top: -7px;
+    left: 0;
+    border-width: 0 8px 8px;
+    border-bottom-color: initial;
+    transform-origin: center bottom;
+}
+
+.tippy-box[data-placement^=left] > .tippy-arrow {
+    right: 0;
+}
+
+.tippy-box[data-placement^=left] > .tippy-arrow:before {
+    border-width: 8px 0 8px 8px;
+    border-left-color: initial;
+    right: -7px;
+    transform-origin: center left;
+}
+
+.tippy-box[data-placement^=right] > .tippy-arrow {
+    left: 0;
+}
+
+.tippy-box[data-placement^=right] > .tippy-arrow:before {
+    left: -7px;
+    border-width: 8px 8px 8px 0;
+    border-right-color: initial;
+    transform-origin: center right;
+}
+
+.tippy-box[data-inertia][data-state=visible] {
+    transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
+}
+
+.tippy-arrow {
+    width: 16px;
+    height: 16px;
+    color: $color-midnight;
+}
+
+.tippy-arrow:before {
+    content: '';
+    position: absolute;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.tippy-content {
+    position: relative;
+    padding: 8px 9px;
+    z-index: 1;
+    visibility: visible;
+}
 
 .help-tooltip {
     $help-icon-size: 18px;
     $inline-icon-height: 13px;
-
-    @mixin bg-styles($bg-color) {
-        background-color: $bg-color;
-
-        &.place-right:after {
-            border-right-color: $bg-color;
-        }
-        &.place-left:after {
-            border-left-color: $bg-color;
-        }
-        &.place-top:after {
-            border-top-color: $bg-color;
-        }
-        &.place-bottom:after {
-            border-bottom-color: $bg-color;
-        }
-    }
 
     @mixin default-icon-styles {
         height: $inline-icon-height;
@@ -27,66 +217,8 @@
         color: $color-blue-grey;
         display: inline-block;
     }
-
+    line-height: $inline-icon-height + 1px;
     display: inline-block;
-    background: transparent;
-    line-height: 14px;
-
-    // overrides for the default react-tooltip styling
-    .tooltip-text {
-        text-align: left;
-        color: $color-white;
-        @include font-pn-regular;
-        font-size: 14px;
-        text-transform: none;
-        white-space: normal;
-        font-weight: normal;
-        padding: 8px 10px;
-        @include break-word;
-        max-width: 400px;
-        pointer-events: auto !important;
-        -webkit-box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
-        -moz-box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
-        box-shadow: 4px 4px 9px -8px rgba(0, 0, 0, 0.64);
-
-        @include bg-styles($color-midnight);
-
-        &.show {
-            opacity: 1;
-        }
-        &.tooltip-text-link {
-            &:hover {
-                visibility: visible;
-
-                opacity: 1;
-            }
-            a {
-                text-decoration: none;
-            }
-            a:hover {
-                text-decoration: underline;
-            }
-        }
-        .content-link {
-            font-weight: bold;
-            &:before {
-                content: '';
-                height: 1px;
-                background-color: $color-white;
-                display: inline-block;
-                margin: 10px 0 8px;
-                position: relative;
-                width: 100%;
-            }
-            .icon-info {
-                color: $color-white;
-            }
-        }
-        a {
-            color: $color-white;
-            text-decoration: underline;
-        }
-    }
 
     .inline {
         &:hover {
@@ -129,42 +261,57 @@
         color: $color-accent-neutral-10;
     }
 
-    &--warning {
-        .tooltip-text {
-            @include bg-styles($color-warning-yellow);
-        }
+}
+
+.help-tooltip {
+    @mixin bg-styles($bg-color) {
+        background-color: $bg-color;
     }
 
-    &--error {
-        .tooltip-text {
-            @include bg-styles($color-critical-red);
+    .tooltip-text {
+        text-align: left;
+        @include font-pn-regular;
+        font-size: 14px;
+        text-transform: none;
+        white-space: normal;
+        font-weight: normal;
+        max-width: 400px;
+        pointer-events: auto;
+
+        &.show {
+            opacity: 1;
         }
-    }
 
-    &--success {
-        .tooltip-text {
-            @include bg-styles($color-success-green);
-        }
-    }
-
-    &--light {
-        .tooltip-text {
-            color: $color-accent-neutral-10;
-
-            @include bg-styles($color-white);
-            box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
-            border: 1px solid $color-blue-grey;
-
-            &.place-right:before {
-                @include makePointer(7px, $color-blue-grey, left);
-                left: -14px;
-                top: 49%;
+        &.tooltip-text-link {
+            &:hover {
+                visibility: visible;
+                opacity: 1;
             }
-
-            &.place-right:after {
-                @include makePointer(5px, white, left);
-                left: -10px;
+            a {
+                text-decoration: none;
             }
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+        .content-link {
+            font-weight: bold;
+            &:before {
+                content: '';
+                height: 1px;
+                background-color: $color-white;
+                display: inline-block;
+                margin: 10px 0 8px;
+                position: relative;
+                width: 100%;
+            }
+            .icon-info {
+                color: $color-white;
+            }
+        }
+        a {
+            color: $color-white;
+            text-decoration: underline;
         }
     }
 

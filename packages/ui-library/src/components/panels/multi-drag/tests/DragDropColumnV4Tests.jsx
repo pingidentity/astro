@@ -17,6 +17,7 @@ import DragDrop from "../../../rows/DragDrop";
 import _ from "underscore";
 import TestBackend from "react-dnd-test-backend";
 import { DragDropContext } from "react-dnd";
+import { shallow } from "enzyme";
 
 describe("DragDropColumn v4", function () {
 
@@ -204,27 +205,14 @@ describe("DragDropColumn v4", function () {
         expect(callback).not.toBeCalled();
     });
 
-    it("renders the column title helphint", () => {
-        const dataId = "testdataid";
-        const name = "Test column name";
-        const helpText = "Test help text!";
-
-        getWrappedComponent({
-            "data-id": dataId,
-            helpText: helpText,
-            name: name,
-        });
-
-        const component = thisComponent;
-
-        const helpHintElement = TestUtils.findRenderedDOMNodeWithDataId(component, `${dataId}-helphint`);
-        expect(helpHintElement).toBeTruthy();
-
-        const helpHintTarget = TestUtils.findRenderedDOMNodeWithDataId(component, `${dataId}-helphint-target`);
-        expect(helpHintTarget.className).toContain("row-selector__column-helptext inline");
-
-        const helpHintText = TestUtils.findRenderedDOMNodeWithDataId(helpHintElement, "tooltip");
-        expect(helpHintText.textContent).toEqual(helpText);
+    it("renders helpText when helpText prop is utilized", () => {
+        const input = shallow (
+            <DragDropColumn
+                helpText="testing"
+            />
+        );
+        expect(input.find("HelpHint").prop("hintText")).toEqual("testing");
+        
     });
 
     it("accepts render prop as contentType with correct onAdd", () => {

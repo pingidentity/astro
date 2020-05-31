@@ -114,7 +114,7 @@ describe("LabelValuePairs", function () {
     it("renders a helphint", function () {
         let component = getComponent({});
 
-        let elements = TestUtils.scryRenderedDOMNodesWithClass(component, "__react_component_tooltip");
+        let elements = TestUtils.scryRenderedDOMNodesWithClass(component, "help-tooltip");
 
         expect(elements.length).toEqual(2);
     });
