@@ -90,6 +90,7 @@ function BaseButton ({
     disabled,
     disabledText,
     href,
+    helpHintPlacement,
     iconName,
     inline,
     label,
@@ -149,7 +150,7 @@ function BaseButton ({
             ? <HelpHint
                 data-id="button_help-hint"
                 hintText={disabledText}
-                placement="top"
+                placement={helpHintPlacement}
             >
                 {Tags}
             </HelpHint>
@@ -167,6 +168,7 @@ Button.propTypes = {
     "data-id": PropTypes.string,
     disabled: PropTypes.bool,
     disabledText: PropTypes.string,
+    helpHintPlacement: PropTypes.string,
     href: PropTypes.string,
     iconName: PropTypes.string,
     inline: PropTypes.bool,
@@ -184,6 +186,7 @@ Button.defaultProps = {
     active: false,
     "data-id": "button",
     disabled: false,
+    helpHintPlacement: "top",
     loading: false,
     noSpacing: false,
     onClick: _.noop,

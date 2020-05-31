@@ -47,8 +47,6 @@ describe("HelpHint", function () {
         expect(icon).toBeTruthy();
     });
 
-
-
     /*
     TODO: fix this test
     NOTE: Currently weve not been able to test the react-tooltip helpHint in it's shown state. Since the React Tooltip
@@ -135,6 +133,16 @@ describe("HelpHint", function () {
         );
 
         var element = TestUtils.findRenderedDOMNodeWithClass(component, "content-link");
+
+        expect(element).toBeDefined();
+    });
+
+    it("renders correct class when link prop is declared", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <HelpHint hintText={text} className={classValue} link={link} />
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text-link");
 
         expect(element).toBeDefined();
     });

@@ -80,7 +80,7 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
                 placement="top"
                 delayHide={100}
                 tooltipProps={{
-                    afterHide: this._resetMessage,
+                    onUntrigger: this._resetMessage,
                 }}
             >
                 <WrappedComponent

@@ -1,11 +1,9 @@
-import ReactTooltip from "react-tooltip";
-
-var PropTypes = require("prop-types");
-var React = require("react");
-var Link = require("../general/Link");
-var classnames = require("classnames");
-var _ = require("underscore");
-
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import _ from "underscore";
+import Tippy from "@tippyjs/react";
+import Link from "../general/Link";
 
 /**
  * @enum {string}
@@ -14,12 +12,28 @@ var _ = require("underscore");
 const Placements = {
     /** top */
     TOP: "top",
+    /** top-start */
+    TOP_START: "top-start",
+    /** top-end */
+    TOP_END: "top-end",
     /** bottom */
     BOTTOM: "bottom",
+    /** bottom-start */
+    BOTTOM_START: "bottom-start",
+    /** bottom-end */
+    BOTTOM_END: "bottom-end",
     /** left */
     LEFT: "left",
+    /** left-start */
+    LEFT_START: "left-start",
+    /** left-end */
+    LEFT_END: "left-end",
     /** right */
-    RIGHT: "right"
+    RIGHT: "right",
+    /** right-start */
+    RIGHT_START: "right-start",
+    /** right-end */
+    RIGHT_END: "right-end",
 };
 
 /**
@@ -103,10 +117,11 @@ class HelpHint extends React.Component {
         className: "",
         leftMargin: false,
         unstyleTrigger: false,
+        placement: "right",
     };
 
     _handleClick = (e) => {
-        // kill click event to prevent event from triggering label from checking a checkbox/radio
+        // Kill click event to prevent event from triggering label from checking a checkbox/radio
         e.preventDefault();
     };
 
@@ -165,10 +180,6 @@ class HelpHint extends React.Component {
             : children
     );
 
-    show = () => {
-        ReactTooltip.show(this.target);
-    };
-
     tooltipClassName = this.props.link ? classnames("tooltip-text", "tooltip-text-link") : "tooltip-text";
 
     render() {
@@ -186,41 +197,49 @@ class HelpHint extends React.Component {
                 ? children
                 : <span className={iconName} data-id={dataId + "-icon"} />;
 
-        const containerClassNames = classnames(
-            this._getTypeClass(),
-            {
-                "help-tooltip": !unstyleTrigger,
-                "help-tooltip--left-margin": leftMargin,
-                [containerClassName]: containerClassName !== undefined
-            }
-        );
+        const containerClassNames = classnames("help-tooltip", {
+            [containerClassName]: containerClassName !== undefined,
+            "help-tooltip--left-margin": leftMargin,
+        });
+
+        const tippyClassNames = classnames(this._getTypeClass(), {
+            "help-tooltip": !unstyleTrigger,
+            
+        });
 
         return (
             <div className={containerClassNames} data-id={dataId}>
-                <div
-                    data-id={dataId + "-target"}
-                    className={classnames(this.props.className, "help-tooltip-target", {
-                        "inline": (!children && !this.props.className), // make the icon inline if no other class is specified
-                    })}
-                    onClick={this._handleClick}
-                    data-tip={true}
-                    data-for={uid}
-                    ref={(target) => { this.target = target; }}>
-                    {display}
-                </div>
-                {this.maybeRenderExtraContainer(
-                    <ReactTooltip
-                        id={uid}
-                        place={this._getPlacement()}
-                        className={this.tooltipClassName}
-                        effect="solid"
-                        delayShow={this.props.delayShow}
-                        delayHide={this.props.delayHide}
-                        {...this.props.tooltipProps}>
-                        {this.props.hintText}
-                        {this.maybeRenderLink()}
-                    </ReactTooltip>
-                )}
+                <Tippy
+                    placement={this.props.placement}
+                    className={tippyClassNames}
+                    interactive
+                    content={
+                        <span
+                            id={uid}
+                            className={this.tooltipClassName}
+                        >
+                            {this.props.hintText}
+                            {this.maybeRenderLink()}
+                        </span>
+                    }
+                    appendTo={document.body}
+                    theme= {this.props.type}
+                    delay={[this.props.delayShow, this.props.delayHide]}
+                    {...this.props.tooltipProps}
+                >
+                    <div
+                        data-id={dataId + "-target"}
+                        className={classnames(this.props.className, "help-tooltip-target", {
+                            "inline": (!children && !this.props.className), // make the icon inline if no other class is specified
+                        })}
+                        onClick={this._handleClick}
+                        data-tip={true}
+                        data-for={uid}
+                        ref={(target) => { this.target = target; }}
+                    >
+                        {display}
+                    </div>
+                </Tippy>
             </div>
         );
     }
