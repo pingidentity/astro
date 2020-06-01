@@ -335,4 +335,15 @@ describe("FormTextArea v4", function () {
         const textarea = component.find("textarea.input-textarea__input--no-resize");
         expect(textarea.exists()).toBeTruthy();
     });
+
+    it("renders as empty for space-only value", function () {
+        const component = mount(
+            <FormTextArea
+                value=" "
+            />
+        );
+        const nonEmpty = component.find(".value-entered");
+
+        expect(nonEmpty.exists()).toEqual(false);
+    });
 });

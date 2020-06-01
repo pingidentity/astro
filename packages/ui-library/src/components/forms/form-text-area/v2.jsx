@@ -221,7 +221,7 @@ class FormTextAreaStateless extends React.Component {
                     "form-error": this.props.errorMessage,
                     disabled: this.props.disabled,
                     edited: this.props.edited,
-                    "value-entered": !!this.props.value,
+                    "value-entered": this.props.value && `${this.props.value}`.trim() !== "",
                     readonly: readonly,
                     actions: this.props.showUndo,
                     [`textarea-height--${this.props.height}`]: this.props.height !== inputHeights.AUTO,
