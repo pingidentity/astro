@@ -16,7 +16,7 @@ import TextBlock from '../../src/components/TextBlock';
 import Toggle from '../../src/components/shared/Toggle';
 import DeviceTable from '../../src/components/shared/DeviceTable';
 import AccountTable from '../../src/components/AccountTable';
-import SocialLogos from '../../src/util/SocialLogo';
+import SocialIcons from '../../src/components/SocialIcon';
 import ImageInput from '../../src/components/ImageInput';
 import FloatLabelDropdownCustom from '../../src/components/FloatLabelDropdownCustom';
 import Columns, { Column, alignments as colAlignments, widths as colWidths } from '../../src/components/Columns';
@@ -490,11 +490,11 @@ class LinkedAccountsPage extends React.Component {
         accounts: [
             {
                 name: "Google",
-                image: <SocialLogos.GOOGLE width={40} height={40} />,
+                image: <SocialIcons.GOOGLE width={40} height={40} />,
             },
             {
                 name: "Facebook",
-                image: <SocialLogos.FACEBOOK width={40} height={40} />,
+                image: <SocialIcons.FACEBOOK width={40} height={40} />,
             },
         ],
         accountToUnlink: ''
