@@ -113,8 +113,9 @@ const TextInput = ({
         fieldMessage && (
             <FieldMessage
                 type={type}
-                value={fieldMessage}
-            />
+            >
+                {fieldMessage}
+            </FieldMessage>
         )
     ];
 };
