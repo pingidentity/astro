@@ -1,6 +1,7 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import * as QuickActions from "../QuickActions";
+import { Title } from "../../layout/NavCard";
 
 describe("Quick Actions", () => {
     it("renders the Action component", () => {
@@ -8,11 +9,13 @@ describe("Quick Actions", () => {
             <QuickActions.Action
                 label="IdP Connection"
                 iconName="globe"
+                invertColor
                 onClick={() => console.log("Action clicked")}
             />
         );
 
         expect(component.exists()).toEqual(true);
+        expect(component.hasClass("quick-actions__action-card--inverted")).toEqual(true);
     });
 
     it("renders the Container component", () => {
@@ -30,36 +33,44 @@ describe("Quick Actions", () => {
 
     it("renders the EditButton component", () => {
         const component = shallow(
-            <QuickActions.EditButton onClick={() => console.log("Clicked")} />
-        );
-
-        expect(component.exists()).toEqual(true);
-    });
-
-    it("renders the Section component", () => {
-        const component = shallow(
-            <QuickActions.Section
-                actions={[
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />,
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />,
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                ]}
-                title="Helpful Links"
+            <QuickActions.EditButton
+                invertColor
+                onClick={() => console.log("Clicked")}
             />
         );
 
         expect(component.exists()).toEqual(true);
+        expect(component.hasClass("quick-actions__edit-button--inverted")).toEqual(true);
+    });
+
+    it("renders the Section component", () => {
+        const component = mount(
+            <QuickActions.Section
+                title="Helpful Links"
+                invertColor
+            >
+                <QuickActions.Action
+                    label="IdP Connection"
+                    iconName="globe"
+                    onClick={() => console.log("Action clicked")}
+                />
+                <QuickActions.Action
+                    label="IdP Connection"
+                    iconName="globe"
+                    onClick={() => console.log("Action clicked")}
+                />
+                <QuickActions.Action
+                    label="IdP Connection"
+                    iconName="globe"
+                    onClick={() => console.log("Action clicked")}
+                />
+            </QuickActions.Section>
+        );
+
+        expect(component.exists()).toEqual(true);
+        expect(component.find(Title).props().invertColor).toEqual(true);
+        component.children(QuickActions.Action).forEach((child) => {
+            expect(child.props().invertColor).toEqual(true);
+        });
     });
 });
