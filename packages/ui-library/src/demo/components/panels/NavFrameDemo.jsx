@@ -162,7 +162,7 @@ export default class NavFrameDemo extends React.Component {
                             navTree={this._tempNavTree}
                             onClose={e => console.log("Closed", e)}
                             onOpen={e => console.log("Opened", e)}
-                            onSearchClick={result => console.log(result)}
+                            onSearchClick={result => this.setState({ selectedNode: result && result.id })}
                             sort={({ startsWith, contains }) => [...startsWith, ...contains]}
                             title="Results"
                         />,

@@ -1,75 +1,78 @@
 import React from "react";
+import { render, screen } from "@testing-library/react";
 import { shallow } from "enzyme";
 import NavFrame from "../NavFrame";
 import NavHeader from "../NavHeader";
 import NavSidebar from "../NavSidebar";
 
-describe("NavFrame", () => {
-    const defaultProps = {
-        navTree: [
-            {
-                id: "SNAAAARF",
-                label: "Header 1",
-                children: [
-                    {
-                        icon: "globe",
-                        id: 2,
-                        label: "Section",
-                        children: [
-                            {
-                                id: 4,
-                                label: "Group",
-                                children: [
-                                    {
-                                        id: 5,
-                                        label: "End node"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                ]
-            },
-            {
-                id: "1",
-                label: "Header 2",
-                children: [
-                    {
-                        icon: "globe",
-                        id: "-2",
-                        label: "The cheap seats",
-                        children: [
-                            {
-                                id: "-4",
-                                label: "Lots of mysterious stains",
-                                children: [
-                                    {
-                                        id: "-5",
-                                        label: "and a startling amount of gum"
-                                    },
-                                    {
-                                        id: "-8",
-                                        label: "I don't like this one bit"
-                                    }
-                                ]
-                            },
-                            {
-                                id: "-6",
-                                label: "Oh no, this one is even worse",
-                                children: [
-                                    {
-                                        id: "-7",
-                                        label: "How could a floor be this sticky?"
-                                    }
-                                ]
-                            },
-                        ]
-                    },
-                ]
-            }
-        ]
-    };
+const defaultProps = {
+    navTree: [
+        {
+            id: "SNAAAARF",
+            label: "Header 1",
+            children: [
+                {
+                    icon: "globe",
+                    id: 2,
+                    label: "Section",
+                    children: [
+                        {
+                            id: 4,
+                            label: "Group",
+                            children: [
+                                {
+                                    id: 5,
+                                    label: "End node"
+                                }
+                            ]
+                        }
+                    ]
+                },
+            ]
+        },
+        {
+            id: "1",
+            label: "Header 2",
+            children: [
+                {
+                    icon: "globe",
+                    id: "-2",
+                    label: "The cheap seats",
+                    children: [
+                        {
+                            id: "-4",
+                            label: "Lots of mysterious stains",
+                            children: [
+                                {
+                                    id: "-5",
+                                    label: "and a startling amount of gum"
+                                },
+                                {
+                                    id: "-8",
+                                    label: "I don't like this one bit"
+                                }
+                            ]
+                        },
+                        {
+                            id: "-6",
+                            label: "Oh no, this one is even worse",
+                            children: [
+                                {
+                                    id: "-7",
+                                    label: "How could a floor be this sticky?"
+                                }
+                            ]
+                        },
+                    ]
+                },
+            ]
+        }
+    ]
+};
 
+const renderComponent = (props) => render(<NavFrame {...defaultProps} {...props} />);
+
+describe("NavFrame", () => {
     it("renders the component", () => {
         const component = shallow(
             <NavFrame
@@ -186,5 +189,17 @@ describe("NavFrame", () => {
         );
 
         expect(component.find(NavSidebar).exists()).toEqual(false);
+    });
+
+    it("shows a collapsed sidebar when no node is selected", () => {
+        renderComponent();
+        const collapsible = screen.queryByTestId("nav-sidebar-collapsible");
+        expect(collapsible).not.toBeInTheDocument();
+    });
+
+    it("shows a non-collapsed sidebar when a node within a group is selected", () => {
+        renderComponent({ selectedNode: 2 });
+        const collapsible = screen.queryByTestId("nav-sidebar-collapsible");
+        expect(collapsible).toBeInTheDocument();
     });
 });

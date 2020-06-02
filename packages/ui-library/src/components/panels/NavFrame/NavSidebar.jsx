@@ -216,8 +216,10 @@ export default function NavSidebar(props) {
     }, [[]]);
 
     return (
-        <nav data-id={dataId} className="nav-sidebar">
-
+        <nav
+            data-id={dataId}
+            className="nav-sidebar"
+        >
             <ul
                 className={classnames(
                     "nav-sidebar__sections",
@@ -239,7 +241,10 @@ export default function NavSidebar(props) {
             </ul>
             {
                 selectedGroup && !collapsed &&
-                        <ul className="nav-sidebar__group-container">
+                        <ul
+                            className="nav-sidebar__group-container"
+                            data-testid="nav-sidebar-collapsible"
+                        >
                             <div
                                 className="nav-sidebar__group-container-title"
                             >

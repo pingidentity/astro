@@ -30,6 +30,9 @@ module.exports = {
         "<rootDir>/src/devUtil/enzymeSetup.js",
         "<rootDir>/src/devUtil/jestSetup.js"
     ],
+    "setupFilesAfterEnv": [
+        "<rootDir>/src/devUtil/jestAfterEnvSetup.js"
+    ],
     "coverageThreshold": {
         "global": {
             "lines": 92,
