@@ -1586,5 +1586,17 @@ module.exports = [
                 icon: "browser"
             },
         ]
+    },
+    {
+        label: "Playground",
+        listOrder: true,
+        icon: "details",
+        children: [
+            {
+                label: "Playground",
+                demo: require("./playground"),
+                contentPage: true,
+            },
+        ]
     }
 ];
