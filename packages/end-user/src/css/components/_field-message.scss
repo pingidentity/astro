@@ -1,0 +1,24 @@
+
+    .field-message {
+        color: $color-neutral-20;
+        background-color: $color-neutral-95;
+        z-index: $zindex__popover;
+        padding: 15px;
+        box-sizing: border-box;
+        min-width: 169px;
+        text-transform: none;
+        -webkit-backface-visibility: hidden; // keeps animation from flickering in Chrome
+
+        border-radius: 0 0 $default-input-border-radius $default-input-border-radius;
+        animation: fade-down-in 0.2s;
+
+        &--error {
+            color: $color-white;
+            background-color: $color-critical-red;
+        }
+
+        &--success {
+            color: $color-white;
+            background-color: $color-success-green;
+        }
+    }
