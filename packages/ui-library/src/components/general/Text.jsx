@@ -83,6 +83,8 @@ const alignments = {
  * @alias Text.weights
  */
 const weights = {
+    /** default */
+    DEFAULT: "normal",
     /** normal */
     NORMAL: "normal",
     /** bold */
