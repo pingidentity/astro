@@ -7,12 +7,15 @@
         //setting temp background
         background-color: #021e3585;
     }
-}
 
-.nav-card__title {
-    // Needed for specificity
-    &.text-page-title {
+    &__title.text-page-title {
         font-size: 20px;
-        color: #ededed;
+        color: $color-white;
+    }
+
+    &--inverted & {
+        &__title.text-page-title {
+            color: $color-midnight;
+        }
     }
 }

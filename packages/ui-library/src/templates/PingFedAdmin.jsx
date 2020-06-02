@@ -1,12 +1,20 @@
 import React from "react";
 import NavFrame, { Logo, NavLink, NavMenu, NavSearch } from "ui-library/lib/components/panels/NavFrame";
+import ContentArea from "ui-library/lib/components/layout/ContentArea";
 import * as QuickActions from "ui-library/lib/components/panels/QuickActions";
 import NavCard from "ui-library/lib/components/layout/NavCard";
 
-/**
- * @class Ping Fed Admin Template
- * @desc This is a template for the redesigned Ping Fed admin screen.
- */
+// Custom class style applied to the ContentArea component used in the demo
+// .my-custom-navframe-content {
+//     background: url(https://images.pexels.com/photos/1054201/pexels-photo-1054201.jpeg?cs=srgb&dl=brown-snowy-mountain-1054201.jpg&fm=jpg) no-repeat center center fixed;
+//     background-size: cover;
+// }
+
+// Custom class style applied to the NavCard component used in the demo
+// .my-custom-navcard .dashboard-card__front {
+//     background-color: rgba($color-white, 0.5);
+//     border: none;
+// }
 
 const tree = [
     {
@@ -139,6 +147,10 @@ const tree = [
     }
 ];
 
+/**
+ * @class Ping Fed Admin Template
+ * @desc This is a template for the redesigned Ping Fed admin screen.
+ */
 export default function PingFedAdminTemplate() {
     return (
         <NavFrame
@@ -175,81 +187,85 @@ export default function PingFedAdminTemplate() {
             ]}
             navTree={tree}
         >
-            <NavCard>
-                <QuickActions.Section
-                    title={
-                        <>
-                            Shortcuts
-                            <QuickActions.EditButton
-                                onClick={() => console.log("Edit button clicked")}
-                            />
-                        </>
-                    }
-                >
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="SP Connections"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="Signing Certificates"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="OAuth Authorization Server Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="Metadata Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="SMS Provider Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="SMS Provider Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                </QuickActions.Section>
-                <QuickActions.Divider />
-                <QuickActions.Section
-                    title={
-                        <>
-                            Helpful Links
-                            <QuickActions.EditButton
-                                onClick={() => console.log("Edit button clicked")}
-                            />
-                        </>
-                    }
-                >
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                </QuickActions.Section>
-            </NavCard>
+            <ContentArea className="my-custom-navframe-content">
+                <NavCard className="my-custom-navcard" invertColor>
+                    <QuickActions.Section
+                        title={
+                            <>
+                                Shortcuts
+                                <QuickActions.EditButton
+                                    invertColor
+                                    onClick={() => console.log("Edit button clicked")}
+                                />
+                            </>
+                        }
+                    >
+                        <QuickActions.Action
+                            label="IdP Connection"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="SP Connections"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="Signing Certificates"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="OAuth Authorization Server Settings"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="Metadata Settings"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="SMS Provider Settings"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="SMS Provider Settings"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                    </QuickActions.Section>
+                    <QuickActions.Divider />
+                    <QuickActions.Section
+                        title={
+                            <>
+                                Helpful Links
+                                <QuickActions.EditButton
+                                    invertColor
+                                    onClick={() => console.log("Edit button clicked")}
+                                />
+                            </>
+                        }
+                    >
+                        <QuickActions.Action
+                            label="IdP Connection"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="IdP Connection"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                        <QuickActions.Action
+                            label="IdP Connection"
+                            iconName="globe"
+                            onClick={() => console.log("Action clicked")}
+                        />
+                    </QuickActions.Section>
+                </NavCard>
+            </ContentArea>
         </NavFrame>
     );
 }
