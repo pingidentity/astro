@@ -48,6 +48,7 @@ const skippedDemos = [
     "ChartLayout",
     "Checkbox",
     "Documentation",
+    "Playground",
     "DashboardLayout",
     "DonutCard",
     "EllipsisLoader",
