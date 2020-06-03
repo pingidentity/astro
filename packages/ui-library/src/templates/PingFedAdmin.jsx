@@ -3,6 +3,8 @@ import NavFrame, { Logo, NavLink, NavMenu, NavSearch } from "ui-library/lib/comp
 import ContentArea from "ui-library/lib/components/layout/ContentArea";
 import * as QuickActions from "ui-library/lib/components/panels/QuickActions";
 import NavCard from "ui-library/lib/components/layout/NavCard";
+import FlexRow, { alignments } from "ui-library/lib/components/layout/FlexRow";
+import Spacing from "ui-library/lib/components/layout/Spacing";
 
 // Custom class style applied to the ContentArea component used in the demo
 // .my-custom-navframe-content {
@@ -156,17 +158,21 @@ export default function PingFedAdminTemplate() {
         <NavFrame
             headerLeft={<Logo id="pingfed" />}
             headerRight={[
-                <NavSearch
-                    initialTitle="Previous searches"
-                    initialResults={[145, 1545]}
-                    navTree={tree}
-                    onClose={e => console.log("Closed", e)}
-                    onOpen={e => console.log("Opened", e)}
-                    onSearchClick={result => console.log(result)}
-                    sort={({ startsWith, contains }) => [...startsWith, ...contains]}
-                    title="Results"
-                />,
-                <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />,
+                <FlexRow alignment={alignments.CENTER}>
+                    <NavSearch
+                        initialTitle="Previous searches"
+                        initialResults={[145, 1545]}
+                        navTree={tree}
+                        onClose={e => console.log("Closed", e)}
+                        onOpen={e => console.log("Opened", e)}
+                        onSearchClick={result => console.log(result)}
+                        sort={({ startsWith, contains }) => [...startsWith, ...contains]}
+                        title="Results"
+                    />
+                    <Spacing left={Spacing.sizes.SM}>
+                        <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />
+                    </Spacing>
+                </FlexRow>,
                 <NavMenu
                     iconName="account"
                     items={[

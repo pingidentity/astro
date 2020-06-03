@@ -22,7 +22,7 @@
         box-sizing: border-box;
     }
     &__sections {
-        background: $color-timberwolf;
+        background: #eef4f7;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -81,7 +81,7 @@
             font-size: 20px;
         }
         &-title {
-            padding: $spacing-lg $spacing-sm $spacing-md;
+            padding: $spacing-lg $spacing-md $spacing-md;
             @include text-label;
             font-size: 11px;
         }

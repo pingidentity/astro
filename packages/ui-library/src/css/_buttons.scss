@@ -738,6 +738,7 @@ button.tile-button {
         margin-bottom: $spacing-xl;
         min-width: 180px;
         padding: $spacing-lg $spacing-sm;
+        min-height: 180px;
 
         &:hover {
             box-shadow: 0 2px 5px 0 rgba($color-black, 0.2);
