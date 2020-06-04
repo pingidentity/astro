@@ -221,4 +221,8 @@
 .nav-search__icon {
     color: $color-strong-neutral-50;
     font-size: 20px;
+
+    &:hover {
+        color: $color-white;
+    }
 }

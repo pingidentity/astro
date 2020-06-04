@@ -4,7 +4,7 @@ import _ from "underscore";
 import { messageTypes, FormTextFieldStateless } from "./form-text-field/index";
 import KeyboardUtils from "../../util/KeyboardUtils.js";
 import classnames from "classnames";
-import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
+import { InputWidths, InputWidthProptypesAuto } from "../forms/InputWidths";
 import { createProgressiveState } from "../utils/StateContainer";
 
 /**
@@ -118,7 +118,7 @@ class FormSearchBox extends React.Component {
         onClear: PropTypes.func,
         placeholder: PropTypes.string,
         queryString: PropTypes.string,
-        width: PropTypes.oneOf(InputWidthProptypes),
+        width: PropTypes.oneOf(InputWidthProptypesAuto),
         autoFocus: PropTypes.bool,
         initialState: PropTypes.object,
     };

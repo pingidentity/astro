@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { noop } from "underscore";
 
 import { generateNavTreePropType } from "../../../util/PropUtils";
-import Icon from "../../general/Icon";
+import Icon, { iconSizes, iconTypes } from "../../general/Icon";
 import KeywordSearch from "../../forms/KeywordSearch";
 import Modal from "../../general/Modal";
 import { inStateContainer } from "../../utils/StateContainer";
@@ -27,7 +27,9 @@ const NavSearchBase = ({
             data-id={dataId}
             iconName="search"
             onClick={onOpen}
-            type="leading"
+            inline
+            iconSize={iconSizes.MD}
+            type={iconTypes.INLINE}
         />
         <Modal
             className="nav-search__modal"
