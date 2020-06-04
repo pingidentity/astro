@@ -120,12 +120,9 @@ export default function NavHeader({
                 justify={justifyOptions.END}
                 spacing={spacingOptions.MD}
             >
-                {right.flatMap(({ key = uuidv4(), ...node }, idx) => [
+                {right.flatMap((node, idx) => [
                     ...idx > 0 ? [<div className="nav-divider" key={uuidv4()} />] : [],
-                    {
-                        key,
-                        ...node
-                    }
+                    React.cloneElement(node, { key: uuidv4() })
                 ])}
             </FlexRow>
         </FlexRow>

@@ -42,7 +42,7 @@ export const InputWidthProptypes = [
     InputWidths.LG,
     InputWidths.XL,
     InputWidths.XX,
-    InputWidths.MAX,
+    InputWidths.MAX
 ];
 
 export const InputWidthProptypesAuto = [...InputWidthProptypes, InputWidths.AUTO];
