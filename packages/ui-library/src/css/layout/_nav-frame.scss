@@ -18,6 +18,7 @@
     $nav-width: 200px;
     display: flex;
     width: $nav-width;
+    min-width: $nav-width;
     > * {
         box-sizing: border-box;
     }
