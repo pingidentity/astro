@@ -1,5 +1,6 @@
 import React from 'react';
 import TextInput, { textInputTypes } from '../TextInput';
+import FloatLabelTextInput from '../FloatLabelTextInput'
 
 export default {
     title: 'Components/Inputs/FieldMessage',
@@ -25,5 +26,9 @@ export const Default = () => (<React.Fragment>
         placeholder="Primary"
         type={textInputTypes.PRIMARY}
         fieldMessage="Here is a primary (default) message"
+    />
+    <FloatLabelTextInput
+        label="Field Message"
+        fieldMessage="Message in a float label text input"
     />
 </React.Fragment>);

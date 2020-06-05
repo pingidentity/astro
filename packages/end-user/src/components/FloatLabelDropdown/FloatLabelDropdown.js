@@ -7,6 +7,8 @@ import Dropdown from '../Dropdown';
  * Dropdown with a FloatLabel
  */
 const FloatLabelDropdown = ({
+    error,
+    errorMessage,
     label,
     id,
     inputClassName,
@@ -21,6 +23,8 @@ const FloatLabelDropdown = ({
             selectClassName={inputClassNames}
             placeholder={label}
             id={id}
+            error={error}
+            errorMessage={errorMessage}
             {...props}
         >
             <label className="float-label__label" htmlFor={id}>
@@ -32,6 +36,14 @@ const FloatLabelDropdown = ({
 };
 
 FloatLabelDropdown.propTypes = {
+    /**
+     * Sets error state for the PasswordInput if enabled
+     */
+    error: PropTypes.bool,
+    /**
+     * Sets error message active when error state is true
+     */
+    errorMessage: PropTypes.node,
     /**
      * The label for the Dropdown
      */
@@ -51,6 +63,7 @@ FloatLabelDropdown.propTypes = {
 };
 
 FloatLabelDropdown.defaultProps = {
+    error: false,
     id: 'dropdown',
 };
 

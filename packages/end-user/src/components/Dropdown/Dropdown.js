@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import FieldMessage from '../FieldMessage'
 
 import { inStateContainer } from '../../util/StateContainer';
 
@@ -14,6 +15,7 @@ export const StatelessDropdown = ({
     children,
     className,
     error,
+    errorMessage,
     id,
     selectClassName = '',
     onChange,
@@ -23,9 +25,11 @@ export const StatelessDropdown = ({
     'data-id': dataId,
 }) => {
     const classNames = classnames('dropdown', className, {
-        'dropdown--error': error,
+        'dropdown--error': error && errorMessage,
     });
-    const selectClassNames = classnames('dropdown__select', selectClassName);
+    const selectClassNames = classnames('dropdown__select', selectClassName, {
+        'dropdown__select--error': error,
+    });
 
     return (
         <div className={classNames} data-id={dataId}>
@@ -47,6 +51,13 @@ export const StatelessDropdown = ({
                 ))}
             </select>
             {children}
+            {error && errorMessage && (
+                <FieldMessage
+                    type={error && "error"}
+                >
+                    {errorMessage}
+                </FieldMessage>
+            )}
         </div>
     );
 };
@@ -64,6 +75,10 @@ StatelessDropdown.propTypes = {
      * Sets the error state of the Dropdown
      */
     error: PropTypes.bool,
+    /**
+     * Sets error message active when error state is true
+     */
+    errorMessage: PropTypes.node,
     /**
      * Sets the ID prop of the Dropdown select
      */
@@ -97,6 +112,7 @@ StatelessDropdown.propTypes = {
 };
 
 StatelessDropdown.defaultProps = {
+    error: false,
     options: [],
     value: '',
     'data-id': 'dropdown',

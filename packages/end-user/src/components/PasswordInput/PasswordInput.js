@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
+import FieldMessage from '../FieldMessage'
 
 /**
  * Hidden input field
@@ -11,6 +12,7 @@ const PasswordInput = ({
     id,
     className,
     error,
+    errorMessage,
     success,
     defaultValue,
     'data-id': dataId,
@@ -27,21 +29,30 @@ const PasswordInput = ({
     });
 
     return (
-        <input
-            className={classNames}
-            id={id}
-            name={id}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onKeyPress={onKeyPress}
-            onKeyDown={onKeyDown}
-            onMouseDown={onMouseDown}
-            placeholder={placeholder}
-            type="password"
-            defaultValue={defaultValue}
-            data-id={dataId}
-        />
+        <div>
+            <input
+                className={classNames}
+                id={id}
+                name={id}
+                onChange={onChange}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onKeyPress={onKeyPress}
+                onKeyDown={onKeyDown}
+                onMouseDown={onMouseDown}
+                placeholder={placeholder}
+                type="password"
+                defaultValue={defaultValue}
+                data-id={dataId}
+            />
+            {error && errorMessage && (
+                <FieldMessage
+                    type={error && "error"}
+                >
+                    {errorMessage}
+                </FieldMessage>
+            )}
+        </div>
     );
 };
 
@@ -50,6 +61,10 @@ PasswordInput.propTypes = {
      * Sets error state for the PasswordInput if enabled
      */
     error: PropTypes.bool,
+    /**
+     * Sets error message active when error state is true
+     */
+    errorMessage: PropTypes.node,
     /**
      * Sets a data-id property on the PasswordInput to be used as a test hook
      */
@@ -98,6 +113,7 @@ PasswordInput.propTypes = {
 
 PasswordInput.defaultProps = {
     'data-id': 'password-input',
+    error: false,
     onBlur: noop,
     onChange: noop,
     onFocus: noop,

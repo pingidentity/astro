@@ -16,6 +16,22 @@ $caret-height: 16px;
     }
 }
 
+@mixin field-message-caret {
+    &:after {
+        font-family: $icon-font;
+        content: $pingicon-dropdown-arrow;
+        font-size: 13px;
+        line-height: 13px;
+        position: absolute;
+        right: $spacing-sm;
+        top: 26%;
+        transform: translateY(-50%);
+        height: 16px;
+        width: 16px;
+        pointer-events: none;
+    }
+}
+
 @mixin rotate-caret {
     &:after {
         transform: translateY(-50%) rotate(180deg);
@@ -33,6 +49,10 @@ $caret-height: 16px;
 
     @include caret;
 
+    &--error {
+        @include field-message-caret;
+    }
+
     &--open {
         @include rotate-caret;
     }
@@ -48,6 +68,10 @@ $caret-height: 16px;
 
         cursor: pointer;
         padding-right: $caret-height + $spacing-sm + $spacing-sm;
+
+        &--error {
+            border-color: $color-critical-red;
+        }
     }
 
     &__select {

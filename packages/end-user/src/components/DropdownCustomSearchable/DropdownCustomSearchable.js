@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import _noop from 'lodash';
 import TextInput from '../TextInput';
+import FieldMessage from '../FieldMessage';
 
 
 const getValue = option => (option.value ? option.value : option);
@@ -12,6 +13,7 @@ const DropdownCustomSearchable = ({
     children,
     className,
     error,
+    errorMessage,
     id,
     inputClassName,
     open,
@@ -25,10 +27,12 @@ const DropdownCustomSearchable = ({
     onToggle
 }) => {
     const classNames = classnames('dropdown  dropdown--search', className, {
-        'dropdown--error': error,
+        'dropdown--error': error && errorMessage,
         'dropdown--open': open,
     });
-    const inputClassNames = classnames('dropdown__input', inputClassName);
+    const inputClassNames = classnames('dropdown__input', inputClassName, {
+        'dropdown__input--error': error,
+    });
     const _onSearchValueChange = (e) => onSearchValueChange(e.target.value, e);
     const doOpen = () => {
         onToggle(true);
@@ -87,6 +91,11 @@ const DropdownCustomSearchable = ({
                     ))}
                 </ul>
             )}
+            {error &&  errorMessage && (
+            <FieldMessage type={error && 'error'}>
+                {errorMessage}
+            </FieldMessage>
+            )}
         </div>
     );
 };
@@ -95,6 +104,7 @@ DropdownCustomSearchable.propTypes = {
     id: PropTypes.string,
     inputClassName: PropTypes.string,
     error: PropTypes.bool,
+    errorMessage: PropTypes.node,
     open: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.string,

@@ -33,6 +33,8 @@ const PhoneInputStateless = ({
     'data-id': dataId,
     setOpen,
     country: countryName,
+    error,
+    errorMessage,
     phoneNumber,
     placeholder,
     dialCodeSearchValue,
@@ -64,6 +66,7 @@ const PhoneInputStateless = ({
                     value={country ? `+${country.dialCode}` : ''}
                     options={optionsFiltered}
                     data-id="country-search"
+                    error={error}
                     searchPlaceholder="Search countries..."
                     searchValue={dialCodeSearchValue}
                     onValueChange={onCountryChange}
@@ -78,6 +81,8 @@ const PhoneInputStateless = ({
                     onChange={e => onPhoneNumberValueChange(e.target.value, e)}
                     placeholder={placeholder}
                     format={textInputFormats.NUMERIC}
+                    type={error && "error"}
+                    fieldMessage={error && errorMessage}
                 />
             </div>
         </div>
@@ -86,6 +91,8 @@ const PhoneInputStateless = ({
 
 PhoneInputStateless.propTypes = {
     'data-id': PropTypes.string,
+    error: PropTypes.bool,
+    errorMessage: PropTypes.node,
     onToggleDropdown: PropTypes.func,
     onPhoneNumberValueChange: PropTypes.func,
     onCountryChange: PropTypes.func,

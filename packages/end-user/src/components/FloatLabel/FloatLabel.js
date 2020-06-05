@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import FieldMessage from '../FieldMessage'
 
 /**
  * @class FloatLabel
@@ -24,6 +25,8 @@ const FloatLabel = ({
     defaultValue,
     value,
     children,
+    fieldMessage,
+    type,
     InputType,
     'data-id': dataId,
     ...props
@@ -57,11 +60,19 @@ const FloatLabel = ({
                 {label}
             </label>
             {children}
+            {fieldMessage && (
+                <FieldMessage
+                    type={type}
+                >
+                    {fieldMessage}
+                </FieldMessage>
+            )}
         </div>
     );
 };
 
 FloatLabel.propTypes = {
+    fieldMessage: PropTypes.node,
     label: PropTypes.string,
     id: PropTypes.string,
     InputType: PropTypes.func,

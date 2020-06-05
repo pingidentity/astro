@@ -14,11 +14,13 @@ const FloatLabelTextInput = ({
     inputClassName,
     label,
     id,
+    fieldMessage,
     ...props
 }) => (
     <FloatLabel
         defaultValue={defaultValue}
         label={label}
+        fieldMessage={fieldMessage}
         id={id}
         InputType={TextInput}
         inputClassName={inputClassName}
@@ -35,6 +37,10 @@ FloatLabelTextInput.propTypes = {
     defaultValue: PropTypes.string,
     /**
      * ID to add to the input
+     */
+    fieldMessage: PropTypes.node,
+    /**
+     * Message below field
      */
     id: PropTypes.string,
     /**
