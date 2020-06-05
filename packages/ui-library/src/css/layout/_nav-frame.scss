@@ -18,6 +18,7 @@
     $nav-width: 200px;
     display: flex;
     width: $nav-width;
+    min-width: $nav-width;
     > * {
         box-sizing: border-box;
     }
@@ -221,4 +222,8 @@
 .nav-search__icon {
     color: $color-strong-neutral-50;
     font-size: 20px;
+
+    &:hover {
+        color: $color-white;
+    }
 }

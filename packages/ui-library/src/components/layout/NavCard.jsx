@@ -1,8 +1,7 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { DashboardCard } from "../general/charting/Cards";
-import FlexRow, { alignments, spacingOptions } from "../layout/FlexRow";
 import Text, { alignments as textAlignments, textTypes } from "../general/Text";
 
 /**
@@ -57,6 +56,8 @@ Title.propTypes = {
     invertColor: PropTypes.bool,
 };
 
+Title.alignments = textAlignments;
+
 /**
  * @class NavCard
  * @desc A card container for layout out inside of the NavFrame component.
@@ -72,12 +73,13 @@ Title.propTypes = {
  *
  */
 
-export default function NavCard({
+const NavCard = forwardRef(({
     children: propsChildren,
     className,
     "data-id": dataId,
     invertColor,
-}) {
+    title
+}, ref) => {
     const children = React.Children.map(propsChildren, (child) => {
         return React.cloneElement(child, { invertColor });
     });
@@ -86,17 +88,14 @@ export default function NavCard({
         <DashboardCard
             className={classnames("nav-card", className, { "nav-card--inverted": invertColor })}
             data-id={dataId}
-            front={
-                <FlexRow
-                    alignment={alignments.STRETCH}
-                    spacing={spacingOptions.MD}
-                >
-                    {children}
-                </FlexRow>
-            }
+            front={children}
+            ref={ref}
+            title={title}
         />
     );
-}
+});
+
+export default NavCard;
 
 NavCard.propTypes = {
     className: PropTypes.string,

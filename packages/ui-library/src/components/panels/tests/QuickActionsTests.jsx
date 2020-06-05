@@ -18,14 +18,6 @@ describe("Quick Actions", () => {
         expect(component.hasClass("quick-actions__action-card--inverted")).toEqual(true);
     });
 
-    it("renders the Container component", () => {
-        const component = shallow(
-            <QuickActions.Container> A child </QuickActions.Container>
-        );
-
-        expect(component.exists()).toEqual(true);
-    });
-
     it("renders the Divider component", () => {
         const component = shallow(<QuickActions.Divider />);
         expect(component.exists()).toEqual(true);

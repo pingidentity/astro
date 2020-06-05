@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 import FormLabel, { labelProps, passLabelProps } from "../FormLabel";
 import FormMessage from "../FormMessage";
-import { InputWidths, InputWidthProptypes, getInputWidthClass } from "../InputWidths";
+import { InputWidths, InputWidthProptypesAuto, getInputWidthClass } from "../InputWidths";
 import Translator from "../../../util/i18n/Translator.js";
 
 import _ from "underscore";
@@ -264,7 +264,7 @@ class Stateless extends React.Component {
         showUndo: PropTypes.bool,
         size: PropTypes.number,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        width: PropTypes.oneOf(InputWidthProptypes),
+        width: PropTypes.oneOf(InputWidthProptypesAuto),
         withArrow: PropTypes.bool,
         ...labelProps,
     };

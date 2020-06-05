@@ -1,7 +1,7 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import { sizes as paddingSizes } from "../layout/Padding";
 import classnames from "classnames";
+import { sizes as paddingSizes } from "../layout/Padding";
 
 export { default as FlexItem } from "./FlexItem";
 
@@ -146,7 +146,7 @@ const getFlexDirection = flexDirection => {
     }
 };
 
-function FlexRow({
+const FlexRow = forwardRef(({
     alignment,
     children,
     className,
@@ -155,12 +155,15 @@ function FlexRow({
     inline,
     justify,
     wrap,
-    spacing
-}) {
+    spacing,
+    // Catch generic props, like event handlers
+    ...props
+}, ref) => {
     const isColumn =
         flexDirection === flexDirectionOptions.COLUMN || flexDirection === flexDirectionOptions.COLUMNREVERSE;
     return (
         <div
+            {...props}
             className={classnames(
                 "flex-row",
                 className,
@@ -174,11 +177,12 @@ function FlexRow({
                 }
             )}
             data-id={dataId}
+            ref={ref}
         >
             {children}
         </div>
     );
-}
+});
 
 FlexRow.propTypes = {
     alignment: PropTypes.oneOf(
@@ -192,6 +196,7 @@ FlexRow.propTypes = {
     justify: PropTypes.oneOf(
         Object.values(justifyOptions)
     ),
+    onMouseLeave: PropTypes.func,
     spacing: PropTypes.oneOf(
         Object.values(spacingOptions)
     ),
