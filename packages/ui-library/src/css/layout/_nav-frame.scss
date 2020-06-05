@@ -30,6 +30,7 @@
 
         &--group-visible {
             flex-grow: 0;
+            min-width: 50px;
             .nav-sidebar__section-title {
                 visibility: hidden;
                 width: 0;
