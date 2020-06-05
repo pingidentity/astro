@@ -47,12 +47,12 @@ const CustomSearchable = compose(
 export const Default = () => (<React.Fragment>
     <PasswordInput
         error
-        errorMessage="Username or password is invalid"
+        errorMessage="Password error message"
         placeholder="Password"
     />
     <FloatLabelPasswordInput
         error
-        errorMessage="Float label password error"
+        errorMessage="Float label password error message"
         label="Password"
     />
     <Dropdown
@@ -73,6 +73,6 @@ export const Default = () => (<React.Fragment>
     />
     <PhoneInput
         error
-        errorMessage="You must enter a valid phone number"
+        errorMessage="Phone input error message"
     />
 </React.Fragment>);
