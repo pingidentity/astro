@@ -35,6 +35,10 @@ $topnav-bg: $color-neutral-10;
     white-space: nowrap;
 }
 
+.header-bar__left {
+    justify-content: flex-start;
+}
+
 .header-bar__left > * {
     margin-right: $spacing-md;
 
