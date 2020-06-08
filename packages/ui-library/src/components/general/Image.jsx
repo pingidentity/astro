@@ -104,7 +104,7 @@ Image.propTypes = {
     "data-id": PropTypes.string,
     onClick: PropTypes.func,
     size: PropTypes.oneOf(Object.values(imageSizes)),
-    source: PropTypes.string.isRequired,
+    source: PropTypes.string,
     type: PropTypes.oneOf(Object.values(imageTypes))
 };
 
