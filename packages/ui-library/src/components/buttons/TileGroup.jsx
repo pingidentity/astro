@@ -23,7 +23,8 @@ function TileGroup({
                         // buttons in different groups will be different sizes otherwise.
                         [`tile-selector__group--grow-${React.Children.count(children)}`]: type === selectorTypes.ROW,
                         "tile-selector__group--stacked": type === selectorTypes.STACKED,
-                        "tile-selector__group--square": type === selectorTypes.SQUARE
+                        "tile-selector__group--square": type === selectorTypes.SQUARE,
+                        "tile-selector__group--action": type === selectorTypes.ACTION,
                     }
                 )
             }
