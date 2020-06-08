@@ -124,7 +124,6 @@ class Step extends React.Component {
         renderHidden: false,
         canProceed: true,
         isModal: true,
-        showEdit: false,
         when: true,
         onCancel: _.noop,
         showPulsing: false,
