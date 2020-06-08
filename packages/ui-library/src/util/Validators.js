@@ -132,7 +132,7 @@ module.exports = {
 
     */
     isValidFileSize: function (fileSizeInBytes, maxFileSizeKb) {
-        if (maxFileSizeKb && fileSizeInBytes > (maxFileSizeKb * 1000)) {
+        if ((fileSizeInBytes === 0) || (maxFileSizeKb && fileSizeInBytes > (maxFileSizeKb * 1000))) {
             return false;
         } else {
             return true;
@@ -173,12 +173,10 @@ module.exports = {
     *   Error code given to the file
     */
     readFile: function (file, readSuccessFunc, errorFunc, errorCode) {
-
         var reader = new FileReader();
         reader.onloadend = function () { readSuccessFunc(file, reader.result); };
         reader.onerror = function () { errorFunc(errorCode); };
         reader.readAsDataURL(file);
-
     },
 
 };
