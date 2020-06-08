@@ -64,27 +64,29 @@ const DropdownCustomSearchable = ({
                         />
                         <button className="dropdown__close" onClick={doClose} />
                     </li>
-                    {options.map(option => (
-                        <li
-                            className={classnames(
-                                'dropdown__option',
-                                {
-                                    'dropdown__option--selected': getValue(option) === getValue(value),
-                                },
-                            )}
-                            key={getValue(option)}
-                            value={getValue(option)}
-                            role="button"
-                            onMouseDown={(e) => {
-                                /* required; otherwise input's onBlur will happen before onClick
-                                 and it will collapse dropdown list preventing onClick be fired */
-                                e.preventDefault();
-                            }}
-                            onClick={(e) => onValueChange(getValue(option), e, option)}
-                        >
-                            {getLabel(option)}
-                        </li>
-                    ))}
+                    <span className="dropdown__option--container">
+                        {options.map(option => (
+                            <li
+                                className={classnames(
+                                    'dropdown__option',
+                                    {
+                                        'dropdown__option--selected': getValue(option) === getValue(value),
+                                    },
+                                )}
+                                key={getValue(option)}
+                                value={getValue(option)}
+                                role="button"
+                                onMouseDown={(e) => {
+                                    /* required; otherwise input's onBlur will happen before onClick
+                                     and it will collapse dropdown list preventing onClick be fired */
+                                    e.preventDefault();
+                                }}
+                                onClick={(e) => onValueChange(getValue(option), e, option)}
+                            >
+                                {getLabel(option)}
+                            </li>
+                        ))}
+                    </span>
                 </ul>
             )}
         </div>

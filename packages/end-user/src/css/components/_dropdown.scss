@@ -123,8 +123,16 @@ $caret-height: 16px;
 
     &--search {
         .dropdown__list {
-            position: absolute;
+            height: 250px;
             top: 0;
+
+            .dropdown__option--container {
+                position: absolute;
+                height: 200px;
+                overflow: hidden;
+                overflow-y: scroll;
+                width: 100%;
+            }
         }
         &.dropdown--open {
             &:after {
