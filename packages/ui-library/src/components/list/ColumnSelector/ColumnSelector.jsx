@@ -69,6 +69,7 @@ const baseClassName = "column-selector";
  * @param {function} [customSort]
  *     A custom sort function that the column selector will run to sort columns.
  *     The function will be passed to an Array.sort function.
+ *     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
  * @param {boolean} [draggable=false]
  *     Determines whether rows can be dragged to add and rearrange. Not fully
  *     implemented.

@@ -398,7 +398,7 @@ describe("MultiDrag v4", function () {
     });
 
     it("sorts rows using customSort", () => {
-        const sort = row => row.sort(({ name: nameA }, { name: nameB }) => nameA > nameB);
+        const sort = row => row.sort(({ name: nameA }, { name: nameB }) => nameA > nameB ? 1 : -1);
 
         const rows = [
             {
