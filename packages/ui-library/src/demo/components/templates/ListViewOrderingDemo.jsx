@@ -1,8 +1,6 @@
 var React = require("react"),
     Redux = require("redux"),
-    PropsToUrlWatcher = require("ui-library/lib/components/offscreen/PropsToUrlWatcher"),
-    ListViewOrdering = require("ui-library/lib/templates/list-view-ordering"),
-    _ = require("underscore");
+    ListViewOrdering = require("ui-library/lib/templates/list-view-ordering");
 
 /**
 * @name ListViewOrderingDemo
@@ -21,8 +19,6 @@ class ListViewOrderingDemo extends React.Component {
     };
 
     render() {
-        var demoWatch = _.pick(this.props, "page", "filters", "advancedSearch");
-
         return (
             <div>
                 <ListViewOrdering {...this.props}
@@ -30,13 +26,6 @@ class ListViewOrderingDemo extends React.Component {
                     onSearchFilterChange={this.actions.setFilter}
                     onPageChange={this.actions.setPage}
                     onReorder={this.actions.reorder} />
-                {
-                    /* Because the DemoApp also writes the url, the open/selected nodes need to be passed in */
-                }
-                <PropsToUrlWatcher ignoreFalse={true}
-                    location={this.props.location}
-                    onReplaceUrl={this.props.replace}
-                    watch={_.defaults(demoWatch, this.props.watch)} />
             </div>
         );
     }
