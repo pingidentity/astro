@@ -30,6 +30,7 @@
     "exif-js": "^2.1.1",
     "fbjs": "^1.0.0",
     "fix-orientation": "0.0.2",
+    "focus-trap-react": "^6.0.0",
     "highlight.js": "^9.15.10",
     "lerna": "^3.16.4",
     "libphonenumber-js": "^1.7.25",

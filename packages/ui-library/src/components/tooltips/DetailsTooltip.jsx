@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
+import FocusTrap from "focus-trap-react/dist/focus-trap-react";
 import _ from "underscore";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import StateContainer, { toggleTransform } from "../utils/StateContainer";
@@ -12,6 +13,7 @@ import Button from "../buttons/Button";
 import PopperContainer from "./PopperContainer";
 import ButtonGroup from "../layout/ButtonGroup";
 import { deprecatedProp, deprecatedStatelessProp } from "../../util/DeprecationUtils";
+import { getClickableA11yProps } from "../../util/PropUtils";
 
 /**
  * @enum {string}
@@ -180,10 +182,32 @@ class DetailsTooltipStateless extends React.Component {
 
     static popupTypes = popupTypes;
 
+    state = {
+        isUsingKeyboard: false,
+    };
+
+    constructor(props) {
+        super(props);
+        this.popperContent = React.createRef();
+    }
+
     /*
-     * Call the props toggle() function .
+     * Call the props toggle() function.
      */
     _handleToggle = () => {
+        this.setState({ isUsingKeyboard: false });
+        this.props.onToggle();
+    };
+
+
+    /*
+     * Call the props toggle() function.
+     */
+    _handleKeyboardToggle = () => {
+        this.setState({ isUsingKeyboard: true });
+        if (this.props.open && this.popperContent.current) {
+            this.popperContent.current.focus();
+        }
         this.props.onToggle();
     };
 
@@ -201,8 +225,10 @@ class DetailsTooltipStateless extends React.Component {
             <Button
                 data-id={dataId}
                 type="cancel"
+                {...getClickableA11yProps(value)}
                 onClick={value}
-                key={label}>
+                key={label}
+            >
                 {label}
             </Button>
         );
@@ -223,6 +249,7 @@ class DetailsTooltipStateless extends React.Component {
                 data-id={dataId}
                 type="primary"
                 onClick={value}
+                {...getClickableA11yProps(value)}
                 key={label}>
                 {label}
             </Button>
@@ -262,7 +289,9 @@ class DetailsTooltipStateless extends React.Component {
                         <a
                             className="cancel"
                             data-id="cancel-action"
-                            onClick={this._handleToggle}>
+                            {...getClickableA11yProps(this._handleKeyboardToggle)}
+                            onClick={this._handleToggle}
+                        >
                             {this.props.cancelLabel}
                         </a>
                     </span>
@@ -301,9 +330,15 @@ class DetailsTooltipStateless extends React.Component {
                 className="details-content-inner"
                 // Stop events from bubbling up out of tooltip
                 onClick={this._stopClickPropagation}
+                ref={this.popperContent}
             >
                 {this.props.showClose && (
-                    <span className="details-close" data-id="details-close" onClick={this._handleToggle}></span>
+                    <span
+                        className="details-close"
+                        data-id="details-close"
+                        {...getClickableA11yProps(this._handleKeyboardToggle)}
+                        onClick={this._handleToggle}
+                    />
                 )}
                 {this.props.title && (
                     <div className={this.props.titleClassName} data-id="details-title">{this.props.title}</div>
@@ -334,7 +369,11 @@ class DetailsTooltipStateless extends React.Component {
                 placement={getPlacement()}
                 onClick={hide}
                 ref={el => this.popperContainer = el}
-            >{contents}</PopperContainer>
+            >
+                <FocusTrap active={this.state.isUsingKeyboard}>
+                    {contents}
+                </FocusTrap>
+            </PopperContainer>
         );
     };
 
@@ -416,6 +455,7 @@ class DetailsTooltipStateless extends React.Component {
                         data-id="action-btn"
                         className={classnames("details-target", targetCss, this.props.labelClassName)}
                         onClick={!this.props.disabled ? this._handleToggle : null}
+                        {...getClickableA11yProps(!this.props.disabled ? this._handleKeyboardToggle : null)}
                         ref={el => this.trigger = el}
                     >
                         {this.props.label}
