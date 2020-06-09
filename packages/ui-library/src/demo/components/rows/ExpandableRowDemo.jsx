@@ -141,6 +141,8 @@ class ExpandableRowDemo extends React.Component {
                 <ExpandableRow.SimpleWrapper data-id="idp-row">
                     <ExpandableRow
                         title="Basic Row"
+                        onDelete={() => console.log("Deleted")}
+                        onEditButtonClick={() => console.log("Edited")}
                         subtitle="Row Subtitle">
                         <LabelValuePairs dataPairs={mockData} />
                     </ExpandableRow>

@@ -17,6 +17,8 @@ import ButtonGroup from "../../layout/ButtonGroup";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
+import { getClickableA11yProps } from "../../../util/PropUtils";
+
 /**
 * @enum {string}
 * @alias ExpandableRow.Statuses
@@ -495,23 +497,32 @@ class StatelessExpandableRow extends React.Component {
             editButton = this.props.editButton || (
                 <a data-id="edit-btn" className={editButtonClassname}
                     href={this._getEditViewRoute(this.props.editViewRoute)}
+                    {...getClickableA11yProps(this.props.onEditButtonClick)}
                     onClick={this.props.onEditButtonClick} />);
         }
 
         if (this.props.showDelete) {
             deleteButton = this.props.deleteButton || (
-                <a data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
+                <a
+                    data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
                     className="delete-btn"
-                    onClick={this.props.onDelete}/>);
+                    {...getClickableA11yProps(this.props.onDelete)}
+                    onClick={this.props.onDelete}
+                />
+            );
         }
 
         var titleClassName = classnames("item-title", this.props.titleClassName);
 
         if (this.props.showDelete) {
             var deleteObject = this.props.deleteButton || (
-                <button data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
+                <button
+                    data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
                     className="delete-btn"
-                    onClick={this.props.onDelete} />);
+                    {...getClickableA11yProps(this.props.onDelete)}
+                    onClick={this.props.onDelete}
+                />
+            );
             //details tooltip should be delete button
             if (this.props.confirmDelete || this.props.confirmDeleteContent) {
                 deleteButton = (
@@ -548,7 +559,7 @@ class StatelessExpandableRow extends React.Component {
                         )}
                     </div>
                 )}
-                { (this.props.ordering ) && (
+                { (this.props.ordering) && (
                     <div data-id="ordering-controls" className="ordering-controls">
                         <span className="icon-grip ordering-controls__grip"/>
                         <OrderingInput
@@ -603,6 +614,7 @@ class StatelessExpandableRow extends React.Component {
                     <a
                         data-id="expand-btn"
                         className="expand-btn"
+                        {...getClickableA11yProps(this._handleExpandButtonClick)}
                         onClick={this._handleExpandButtonClick}
                     />
                     {!this.props.showEdit && (
