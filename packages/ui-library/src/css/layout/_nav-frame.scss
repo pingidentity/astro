@@ -215,7 +215,7 @@
 .nav-search__modal {
     // Have to do this because of specificity issues with the modal
     &.modal.dialog .modal-content {
-        width: 600px;
+        width: 700px;
     }
 }
 

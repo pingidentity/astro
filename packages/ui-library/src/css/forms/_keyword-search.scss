@@ -50,16 +50,14 @@
 
         &-section.text-component,
         &-root.text-component {
-            width: unset;
+            width: auto;
             max-width: 45%;
         }
     }
 
-    &__result-section {
-        line-height: 13px;
-    }
-
-    &__result-root {
+    &__result-section,
+    &__result-root,
+    &__result-carat {
         line-height: 14px;
     }
 
@@ -67,5 +65,9 @@
     &__title.text-component {
         color: $color-strong-neutral-40;
         margin-left: 10px;
+    }
+
+    &__result-root.text-component {
+        color: $color-strong-neutral-60;
     }
 }

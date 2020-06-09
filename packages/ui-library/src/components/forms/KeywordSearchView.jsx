@@ -41,13 +41,7 @@ const KeywordSearchView = ({
                 >
                     {`${label} - `}
                 </div>
-                {section &&
-                <Text
-                    className="keyword-search__result-section"
-                    inline
-                    type={textTypes.LABEL}
-                    overflow={Text.overflowTypes.ELLIPSIS}
-                >{`${section}  > `}</Text>}
+
                 <Text
                     className="keyword-search__result-root"
                     inline
@@ -56,6 +50,21 @@ const KeywordSearchView = ({
                 >
                     {root}
                 </Text>
+                <Text
+                    inline
+                    type={textTypes.PARENTLABEL}
+                    className="keyword-search__result-carat">
+                    {section ? "> " : ""}
+                </Text>
+                {section &&
+                <Text
+                    className="keyword-search__result-section"
+                    inline
+                    type={textTypes.PARENTLABEL}
+                    overflow={Text.overflowTypes.ELLIPSIS}
+                >
+                    {section}
+                </Text>}
             </FlexRow>
         );
 
