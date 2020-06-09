@@ -37,7 +37,7 @@ const FloatLabelDropdown = ({
 
 FloatLabelDropdown.propTypes = {
     /**
-     * Sets error state for the PasswordInput if enabled
+     * Sets error state for the FloatLabelDropdown if enabled
      */
     error: PropTypes.bool,
     /**
