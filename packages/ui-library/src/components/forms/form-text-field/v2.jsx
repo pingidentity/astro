@@ -368,7 +368,7 @@ class Stateless extends React.Component {
                 disabled: this.props.disabled,
                 edited: this.props.isEdited,
                 "flex-width": this.props.flexWidth,
-                [`flex-width-${this.props.width}`]: this.props.flexWidth,
+                [`flex-width-${this.props.width ? this.props.width : "MD"}`]: this.props.flexWidth,
                 "input-message": message,
                 [`input-message--${this.props.messageType}`]: this.props.messageType,
                 "inline-save": this.props.showSave,

@@ -525,30 +525,6 @@ describe("FormTextField", function () {
         expect(input.select).toBeCalled();
     });
 
-    it("makes width bigger", function() {
-        const component = getComponent({ value: "something", flexWidth: true });
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-
-        stateless.initialInputWidth = 100;
-        stateless._contentMeasurerLabel = { offsetWidth: 150 };
-        stateless.lastValue = "something else";
-        stateless.setState({ nothing: "nothing" }); // force update
-
-        expect(stateless.state.labelWidth).toBe(160);
-    });
-
-    it("makes width initial for a password field", function() {
-        const component = getComponent({ value: "something", flexWidth: true, maskValue: true, reveal: false });
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-
-        stateless.initialInputWidth = 100;
-        stateless._contentMeasurerLabel = { offsetWidth: 90 };
-        stateless.lastValue = "something else";
-        stateless.setState({ nothing: "nothing" }); // force update
-
-        expect(stateless.state.labelWidth).toBe(100);
-    });
-
     it("doesn't fire toggle callback when disabled", function() {
         var handleReveal = jest.fn();
         var component = getComponent({
