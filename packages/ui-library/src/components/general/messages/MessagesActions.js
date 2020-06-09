@@ -3,6 +3,8 @@ import React from "react";
 
 var keyMirror = require("fbjs/lib/keyMirror");
 
+/** @module MessagesActions */
+
 /*
  * This is a private incrementing variable used to give each message object a unique id.  It's only
  * exposed to allow unit tests to reset it.
@@ -11,8 +13,6 @@ exports.lastId = 0;
 
 /**
 * @enum {string}
-* @alias Actions.Types
-* @memberof Messages
 * @desc An enum of Messages action types.
 */
 exports.Types = keyMirror({
@@ -26,8 +26,6 @@ exports.Types = keyMirror({
 });
 
 /**
- * @alias Actions.shiftMessage
- * @memberof Messages
  * @desc remove the first message from messages array
  * @param {string} [containerId="messages"]
  *     The grouping of the message
@@ -54,10 +52,8 @@ exports.pushMessage = function (containerId, text, status, timer, index, isHtml)
 };
 
 /**
- * @alias Actions.addMessage
- * @memberof Messages
  * @desc Originally the messages component was designed to be a singleton, so the reducer/actions assumed there
- *     would only ever be one array of messages.  Since this is no longer the case, all actions now allow specifying
+ *     would only ever be one array of messagesActions.  Since this is no longer the case, all actions now allow specifying
  *     a containerId.  To remain backwards compatible however, the actions will determine if the first argument is a
  *     containerId and behave one way, otherwise, they will set the containerId to "messages" which will preserve the
  *     legacy behavior.
@@ -65,7 +61,7 @@ exports.pushMessage = function (containerId, text, status, timer, index, isHtml)
  *     The grouping of the message
  * @param {string} message
  *     The body of the message
- * @param {Messages.MessageTypes} [status]
+ * @param {MessagesActions.MessageTypes} [status]
  *     The type of message
  * @param {number} [removeAfterMs]
  *     The timeout before the message will be auto removed
@@ -148,8 +144,15 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
 };
 
 /**
- * @alias Actions.addCenterMessage
- * @memberof Messages
+ * @desc Add a message that's centered in the page
+ * @param {string} [containerId="messages"]
+ *     The grouping of the message
+ * @param {string} messageTitle
+ *     The title of the message
+ * @param {string} messageDescription
+ *     The description of the message
+ * @returns {function}
+ *     The action
  */
 exports.addCenterMessage = function (containerId, messageTitle, messageDescription) {
     let messageId;
@@ -187,8 +190,6 @@ exports.addCenterMessage = function (containerId, messageTitle, messageDescripti
 };
 
 /**
- * @alias Actions.removeAt
- * @memberof Messages
  * @desc remove the message at the give index
  * @param {string} [containerId="messages"]
  *     If the first parameter is a number, containerId will be set to "messages" for backwards compatibility.
@@ -212,8 +213,6 @@ exports.removeAt = function (containerId, index) {
 };
 
 /**
- * @alias Actions.removeMessage
- * @memberof Messages
  * @desc remove the message with the given id.  This is called by the scheduled job to remove the
  *     message.  Since the index of Message may change between the time it mounts and this is called, we
  *     need some way to remove a specific id.
@@ -239,8 +238,6 @@ exports.removeMessage = function (containerId, messageId) {
 };
 
 /**
- * @alias Actions.removeAllMessages
- * @memberof Messages
  * @desc remove all the messages from a container.
  * @param {string} [containerId="messages"]
  *     The grouping of the message
@@ -255,8 +252,6 @@ exports.removeAllMessages = function (containerId = "messages") {
 };
 
 /**
- * @alias Actions.updateProgress
- * @memberof Messages
  * @desc update the percentage for the progress meter
  * @param {string} [containerId="messages"]
  *     The grouping of the message
@@ -279,8 +274,6 @@ exports.updateProgress = function (containerId, messageId, percent) {
 };
 
 /**
- * @alias Actions.minimizeMessage
- * @memberof Messages
  * @desc updates an existing message to be minimized
  * @param {string} [containerId="messages"]
  *     The grouping of the message
