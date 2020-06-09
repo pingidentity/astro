@@ -455,35 +455,12 @@ describe("FormTextField", function () {
         expect(input.getAttribute("type")).toEqual(type);
     });
 
-    it("v4: shows content measuring DOM when flexWidth is true", function () {
-        const initialValue = "initial input text";
-        const newValue = "something really long entered into the text input for testing purposes";
-        const component = getComponent({
-            "data-id": "ftf",
-            stateless: false,
-            flexWidth: true,
-            required: false,
-            label: "test",
-            initialState: {
-                value: initialValue
-            },
-        });
-        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-        const contentMeasurer = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-content-measurer");
+    it("renders flex width", function() {
+        const component = getComponent({ flexWidth: true });
 
-        jest.runAllTimers();
+        const flexClass = TestUtils.findRenderedDOMNodeWithClass(component, "flex-width-MD");
 
-        expect(input.value).toEqual(initialValue);
-        expect(contentMeasurer).toBeTruthy();
-        expect(stateless.pwChar).toEqual("•");
-
-        ReactTestUtils.Simulate.change(input, { target: { value: newValue } });
-        expect(input.value).toEqual(newValue);
-
-        // Im not able get any information from the content-measurer and it seems that the style attribute of the
-        // input is not updating in the test even though it does so in a browser
-        // TODO: figure out a way to test this functionality
+        expect(flexClass).toBeTruthy();
     });
 
     it("sets the proper input type", function () {
