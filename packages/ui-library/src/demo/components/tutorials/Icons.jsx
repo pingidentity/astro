@@ -6,7 +6,13 @@ import FormSearchBox from "../../../components/forms/FormSearchBox";
 import InputRow from "../../../components/layout/InputRow";
 
 const CUSTOM_ICONS = ["check"]; //css mapping to other icons in icons.scss
-const ICONS = ICOMOON_ICONS.icons.map((icon) => icon.properties.name).concat(CUSTOM_ICONS).sort();
+const ICONS =
+    ICOMOON_ICONS.icons
+        .map((icon) => icon.properties.name)
+        // Filter out Ping Fed icons
+        .filter(name => !name.startsWith("pf-"))
+        .concat(CUSTOM_ICONS)
+        .sort();
 
 var ICON_COLUMNS = 5;
 
@@ -33,7 +39,7 @@ const iconKeywords =
 
 
 class Icons extends Component {
-   
+
     getIconSearchTerms = (icons) => {
         const iconList = icons.reduce(
             (acc, value) => ({ ...acc, [value]: [value] }),
@@ -62,7 +68,7 @@ class Icons extends Component {
         }
         return content;
     };
- 
+
     _checkForMatch = searchTerms => query => {
         const {
             startsWith,
@@ -76,7 +82,7 @@ class Icons extends Component {
                     startsWith: startsAcc,
                     contains: containsAcc
                 };
-                    
+
             } else if (keyIndex > 0) {
                 const { [key]: idResults } = searchTerms;
                 idResults.forEach(result => containsAcc.add(result));
