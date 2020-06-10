@@ -116,23 +116,27 @@
         &:hover {
             @include font-pn-semibold;
             background: $color-white;
-            padding-right: 13px;
-        }
-        &--selected {
-            padding-right: 12px;
-            .nav-sidebar__node-label {
-                @include font-pn-bold;
-                position: relative;
-                &:before {
-                    content: '';
-                    width: 3px;
-                    height: 100%;
-                    background-color: $color-active-blue-highlighted;
-                    position: absolute;
-                    left: -$spacing-sm;
-                }
-            }
 
+            // Prevents text from wrapping differently on hover
+            letter-spacing: -0.11px;
+        }
+    }
+
+    &__node-label {
+        &--selected {
+            @include font-pn-bold;
+            position: relative;
+
+            // Prevents text from wrapping differently on selected.
+            letter-spacing: -0.22px;
+            &:before {
+                content: '';
+                width: 3px;
+                height: 100%;
+                background-color: $color-active-blue-highlighted;
+                position: absolute;
+                left: -$spacing-sm;
+            }
         }
     }
 

@@ -12,21 +12,23 @@ export const SidebarNode = ({
     selected,
 }) => (
     <li
-        className={
-            classnames(
-                "nav-sidebar__node",
-                {
-                    "nav-sidebar__node--selected": selected,
-                }
-            )
-        }
+        className="nav-sidebar__node"
         data-id={`sidebar-node_${id}`}
         onClick={e => {
             e.stopPropagation();
             onClick(id, e);
         }}
     >
-        <div className="nav-sidebar__node-label">{label}</div>
+        <div
+            className={classnames(
+                "nav-sidebar__node-label",
+                {
+                    "nav-sidebar__node-label--selected": selected,
+                }
+            )}
+        >
+            {label}
+        </div>
         {selected}
     </li>
 );
