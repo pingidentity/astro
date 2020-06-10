@@ -439,7 +439,11 @@ class Stateless extends React.Component {
                         style={{ width: this.props.size ? "auto" : null }}
                     />
                     {this.props.flexWidth && (
-                        <div className="flex-width-spacer">{this.props.value}</div>
+                        <div className={
+                            `flex-width-spacer
+                            ${this.props.maskValue && "flex-width-spacer__password"}
+                            ${this.props.showReveal && "flex-width-spacer__reveal"}`
+                        }>{this.props.value}</div>
                     )}
                     {this.props.showReveal && (
                         <a

@@ -480,20 +480,6 @@ describe("FormTextField v4", function () {
         expect(input.type).toEqual("password");
     });
 
-    it("uses proper password character for IE when flexWidth is true", function () {
-        window.navigator.__defineGetter__("userAgent", function () {
-            return "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
-        });
-
-        const component = getComponent({
-            "data-id": "ftf",
-            flexWidth: true
-        });
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-
-        expect(stateless.pwChar).toEqual("●");
-    });
-
     it("logs warning for type color when not in production", function () {
         console.warn = jest.fn();
         getComponent({ type: "color" });
