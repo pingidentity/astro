@@ -4,6 +4,9 @@
         padding: 15px;
         flex-basis: 115px;
         text-align: center;
+
+        // Needed for IE. Quick Actions will overflow container otherwise.
+        max-width: 50%;
     }
 
     &__action-card--inverted & {
@@ -31,6 +34,9 @@
 
         &__divider {
             border-left-color: $color-midnight;
+
+            // Consistency with the other 50% width IE fix above.
+            max-width: 50%;
         }
     }
 
