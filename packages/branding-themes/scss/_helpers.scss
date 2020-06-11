@@ -29,7 +29,15 @@
     body,
     html,
     .page {
-        height: 100%;
+        height: 100vh;
+
+        &__content {
+            height: 100vh;
+
+            &__content > div {
+                height: 100vh;
+            }
+        }
     }
 
     .page {
