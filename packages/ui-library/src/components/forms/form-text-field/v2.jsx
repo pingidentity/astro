@@ -521,7 +521,6 @@ class Stateless extends React.Component {
                         onKeyDown={this.props.onKeyDown}
                         onMouseDown={this.props.onMouseDown}
                         onChange={this._handleFieldChange}
-                        onPaste={this._handleFieldChange}
                         placeholder={this.props.placeholder}
                         ref={dataId + "-input"}
                         readOnly={this.props.readOnly}
