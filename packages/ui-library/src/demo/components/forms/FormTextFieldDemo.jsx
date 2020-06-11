@@ -271,6 +271,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Flex Width Input"
                         labelHelpText="A flex-width input grows with the content once it gets wider than the intial
                             width"
+                        maskValue
                         width={InputWidths.MD}
                         flexWidth={true}
                         placeholder="try entering text longer than this field"

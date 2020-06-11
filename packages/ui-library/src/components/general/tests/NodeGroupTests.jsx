@@ -211,4 +211,19 @@ describe("NodeGroup", () => {
 
         expect(component.find("Tooltip").prop("nodes").length).toEqual(3);
     });
+
+    it("doesn't render label if cluster doesn't have a label property", () => {
+        const component = mount(
+            <NodeGroup
+                {...defaultProps}
+                nodeClusters={[
+                    {
+                        nodes: makeNodes(3, "first-")
+                    }
+                ]}
+            />
+        );
+
+        expect(component.find("Label").exists()).toEqual(false);
+    });
 });

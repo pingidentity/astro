@@ -54,14 +54,17 @@ export default function NodeGroup({
             <FlexRow
                 alignment={alignments.STRETCH}
                 data-id={dataId}
-                justify={justifyOptions.CENTER}
+                justify={justifyOptions.SPACEBETWEEN}
             >
-                {nodeClusters.map(({ label, nodes }, index) => {
-                    return (
+                {nodeClusters.flatMap(({ label, nodes }, index) => {
+                    return [
                         <NodeField.Container
-                            bottomContent={<NodeField.Label>{label}</NodeField.Label>}
+                            bottomContent={
+                                label !== undefined
+                                    ? <NodeField.Label>{label}</NodeField.Label>
+                                    : <div className="node-field__label-placeholder" />
+                            }
                             key={label}
-                            hasDivider={index < (nodeClusters.length - 1)}
                         >
                             <NodeField.default
                                 // The tooltip shows every node in a cluster if that cluster has 3 or less
@@ -79,8 +82,9 @@ export default function NodeGroup({
                                 selectedNodeId={selectedNode ? selectedNode.id : undefined}
                                 width={clusterWidth}
                             />
-                        </NodeField.Container>
-                    );
+                        </NodeField.Container>,
+                        ...index < (nodeClusters.length - 1) ? [<div className="node-group__divider" />] : []
+                    ];
                 })}
                 {selectedNode &&
                 <NodeField.Tooltip
