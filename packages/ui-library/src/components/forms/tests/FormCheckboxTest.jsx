@@ -5,7 +5,7 @@ jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../FormLabel");
 jest.dontMock("../FormError");
 
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 describe("FormCheckbox", function () {
     var React = require("react"),
@@ -171,7 +171,7 @@ describe("FormCheckbox", function () {
     });
 
     it("renders conditional content when conditionalContent prop is passed in and checked is true", () => {
-        const component = shallow(
+        const component = mount(
             <FormCheckbox
                 checked
                 conditionalContent={<div id="SNAAAAAARF" />}

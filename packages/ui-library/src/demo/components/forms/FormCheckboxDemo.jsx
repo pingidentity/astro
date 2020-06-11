@@ -33,6 +33,7 @@ class FormCheckboxDemo extends React.Component {
             <div>
                 <InputRow>
                     <FormCheckbox
+                        data-id="test-checkbox"
                         label = {"Regular Checkbox; checked: " + this.state.checkboxChecked1}
                         value = ""
                         onChange = {this._onChange(1)}
