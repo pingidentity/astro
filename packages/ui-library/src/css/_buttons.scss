@@ -684,6 +684,7 @@ button.tile-button {
         top: 0;
         left: 0;
         right: 0;
+        z-index: 1000;
 
         &-left {
             position: absolute;
@@ -695,7 +696,6 @@ button.tile-button {
             position: absolute;
             top: $spacing-md;
             right: $spacing-sm;
-            z-index: 1000;
         }
     }
 
