@@ -1,3 +1,5 @@
+$label-chip-height: 28px;
+
 /**
 * Nodes
 */
@@ -60,6 +62,7 @@
         color: $color-white;
         font-size: 11px;
         margin-bottom: 0;
+        max-width: 100px;
     }
 }
 
@@ -74,6 +77,7 @@
     &.text-component {
         color: $color-white;
         font-size: 12px;
+        max-width: 200px;
     }
 }
 
@@ -88,7 +92,17 @@
     padding: 5px 10px;
 }
 
+.node-field__label-placeholder {
+    height: $label-chip-height;
+}
+
 // Putting a class for the other component in here because the whole thing is a one-off
 .node-group {
     width: 100%;
+}
+
+.node-group__divider {
+    border-right: 1px dashed $color-white;
+    margin-bottom: $label-chip-height;
+    width: 0;
 }

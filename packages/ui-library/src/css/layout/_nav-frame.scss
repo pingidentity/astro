@@ -114,21 +114,16 @@
         padding: $nav-item-padding;
         cursor: pointer;
         &:hover {
-            @include font-pn-semibold;
+            @include semi-bold-text;
             background: $color-white;
-
-            // Prevents text from wrapping differently on hover
-            letter-spacing: -0.11px;
         }
     }
 
     &__node-label {
         &--selected {
-            @include font-pn-bold;
+            @include bold-text;
             position: relative;
 
-            // Prevents text from wrapping differently on selected.
-            letter-spacing: -0.22px;
             &:before {
                 content: '';
                 width: 3px;
@@ -147,9 +142,9 @@
         border-right: 2px solid $color-timberwolf;
         background: $color-neutral-95;
         &-title {
+            @include semi-bold-text;
             padding: $nav-item-padding;
             font-size: 16px;
-            @include font-pn-semibold;
         }
     }
     &__group {

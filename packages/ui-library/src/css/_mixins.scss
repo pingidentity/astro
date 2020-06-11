@@ -108,6 +108,13 @@
     word-break: break-word;
 }
 
+@mixin bold-text {
+    text-shadow: 0 0 0.65px #333, 0 0 0.65px #333;
+}
+
+@mixin semi-bold-text {
+    text-shadow: 0 0 0.4px #333, 0 0 0.4px #333;
+}
 
 // ANIMATION --------------------------------------------------------------------------------------
 

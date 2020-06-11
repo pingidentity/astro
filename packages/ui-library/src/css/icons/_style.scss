@@ -779,32 +779,31 @@
     content: $icon-pf-applications-token-exchange;
   }
 }
-.icon-pf-authentication-integration .path1 {
+.icon-pf-authentication-integration {
   &:before {
     content: $icon-pf-authentication-integration-path1;
     color: rgb(0, 0, 0);
   }
-}
-.icon-pf-authentication-integration .path2 {
-  &:before {
+
+  &:after {
     content: $icon-pf-authentication-integration-path2;
     margin-left: -1em;
     color: rgb(255, 255, 255);
   }
 }
-.icon-pf-authentication-oauth .path1 {
+.icon-pf-authentication-oauth {
   &:before {
     content: $icon-pf-authentication-oauth-path1;
     color: rgb(0, 0, 0);
   }
-}
-.icon-pf-authentication-oauth .path2 {
-  &:before {
+
+  &:after {
     content: $icon-pf-authentication-oauth-path2;
     margin-left: -1em;
     color: rgb(255, 255, 255);
   }
 }
+
 .icon-pf-authentication-policies {
   &:before {
     content: $icon-pf-authentication-policies;
