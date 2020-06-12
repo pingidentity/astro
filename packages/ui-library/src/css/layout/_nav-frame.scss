@@ -113,15 +113,22 @@
     &__node {
         padding: $nav-item-padding;
         cursor: pointer;
+
         &:hover {
-            @include semi-bold-text;
             background: $color-white;
+            & .nav-sidebar__node-label {
+                opacity: 0.95;
+
+            }
         }
     }
 
     &__node-label {
+        @include font-pn-semibold;
+        opacity: 0.875;
+
         &--selected {
-            @include bold-text;
+            opacity: 1;
             position: relative;
 
             &:before {
@@ -142,7 +149,7 @@
         border-right: 2px solid $color-timberwolf;
         background: $color-neutral-95;
         &-title {
-            @include semi-bold-text;
+            @include font-pn-semibold;
             padding: $nav-item-padding;
             font-size: 16px;
         }
