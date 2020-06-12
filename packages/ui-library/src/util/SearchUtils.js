@@ -50,7 +50,10 @@ const _getSearchProps = ({
     const ancestorProps = root && !section && children.length > 0
         ? {
             root,
-            section: id
+            section: {
+                id,
+                label
+            }
         }
         : {
             root
@@ -112,9 +115,9 @@ export const _sort = ({ id: a }, { id: b }) => a > b ? 1 : -1;
  * @desc Return the results lookup and the keyword lookup for search
  */
 export const _buildSearchProps = (tree) => {
-    return tree.reduce(({ possibleResults, searchTerms }, { id, children }) => {
+    return tree.reduce(({ possibleResults, searchTerms }, { id, label, children }) => {
         return children.reduce(({ possibleResults: accResults, searchTerms: accSearch }, child) => {
-            return _getSearchProps({ ...child, root: id }, accResults, accSearch);
+            return _getSearchProps({ ...child, root: { id, label } }, accResults, accSearch);
         }, { possibleResults, searchTerms });
     }, { possibleResults: {}, searchTerms: {} });
 };

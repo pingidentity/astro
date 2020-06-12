@@ -5,6 +5,9 @@ jest.dontMock("../header-bar/HeaderBar");
 jest.dontMock("../left-nav/LeftNavBar");
 jest.dontMock("../../forms/KeywordSearch.jsx");
 
+import { mount } from "enzyme";
+import { snapshotDataIds } from "../../../devUtil/EnzymeUtils";
+
 describe("AppFrame", () => {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -65,21 +68,23 @@ describe("AppFrame", () => {
         }
     ];
 
+    const getDefaults = () => ({
+        onItemChange: jest.fn(),
+        onSectionChange: jest.fn(),
+        onRootChange: jest.fn(),
+        navTree: navData,
+        root: "ColumnA",
+        autoSelectItemFromRoot: true,
+        autoSelectItemfromSection: true,
+        autoSelectSectionFromItem: true,
+        oneSectionOnly: true,
+        leftNavBarProps: {
+            openSections: { "section-3": true }
+        },
+    });
+
     function getWrappedComponent(opts) {
-        opts = _.defaults(opts || {}, {
-            onItemChange: jest.fn(),
-            onSectionChange: jest.fn(),
-            onRootChange: jest.fn(),
-            navTree: navData,
-            root: "ColumnA",
-            autoSelectItemFromRoot: true,
-            autoSelectItemfromSection: true,
-            autoSelectSectionFromItem: true,
-            oneSectionOnly: true,
-            leftNavBarProps: {
-                openSections: { "section-3": true }
-            }
-        });
+        opts = _.defaults(opts || {}, getDefaults());
         return ReactTestUtils.renderIntoDocument(
             <ReduxTestUtils.Wrapper type={AppFrame} opts={opts} />
         );
@@ -94,6 +99,18 @@ describe("AppFrame", () => {
 
         return node;
     };
+
+    it("data-id's don't change", () => {
+        const component = mount(
+            <AppFrame
+                {...getDefaults()}
+                searchable
+            />
+        );
+
+        component.find("a[data-id=\"search\"]").simulate("click");
+        snapshotDataIds(component);
+    });
 
     it("clicks trigger correct callback for items", function() {
         var wrapper = getWrappedComponent();
