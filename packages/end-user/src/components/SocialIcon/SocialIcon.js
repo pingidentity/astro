@@ -6,7 +6,7 @@ import React from 'react';
 const SocialIcons = {
     MICROSOFT: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 100 100" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <rect style={{ fill: '#F25022' }} width="47.37" height="47.37" />
                 <rect y="52.63" style={{ fill: '#00A4EF' }} width="47.37" height="47.37" />
                 <rect x="52.63" style={{ fill: '#7FBA00' }} width="47.37" height="47.37" />
@@ -71,7 +71,7 @@ const SocialIcons = {
     },
     INSTAGRAM: ({ width = '100%', height = '100%' }) => {
         return (
-            <svg x="0px" y="0px" viewBox="0 0 500 500" style={{ enableBackground: `new 0 0 ${width} ${height}`, width, height }}>
+            <svg x="0px" y="0px" viewBox="0 0 500 500" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
                 <path class="st0" fill='#E33E5C' d="M474.3,500H25.7C11.5,500,0,488.5,0,474.3V25.7C0,11.5,11.5,0,25.7,0h448.7C488.5,0,500,11.5,500,25.7v448.7
 	C500,488.5,488.5,500,474.3,500z"/>
                 <g>
