@@ -39,8 +39,14 @@ describe("SearchUtils", () => {
             id: "item",
             label: "Item",
             hasChildren: false,
-            section: "section",
-            root: "column"
+            section: {
+                id: "section",
+                label: "Section"
+            },
+            root: {
+                id: "column",
+                label: "Column"
+            }
         };
 
         expect(startsWith[0]).toEqual(expected);
@@ -71,8 +77,14 @@ describe("SearchUtils", () => {
             id: "item",
             label: "Item",
             hasChildren: false,
-            section: "section",
-            root: "column"
+            section: {
+                id: "section",
+                label: "Section"
+            },
+            root: {
+                id: "column",
+                label: "Column"
+            }
         };
 
         expect(startsWith[0]).toEqual(expected);

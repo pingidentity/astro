@@ -25,7 +25,10 @@ const KeywordSearchView = ({
         const {
             id,
             label,
-            root,
+            root: {
+                id: rootId,
+                label: root = rootId
+            },
             section
         } = result;
 
@@ -63,7 +66,7 @@ const KeywordSearchView = ({
                     type={textTypes.PARENTLABEL}
                     overflow={Text.overflowTypes.ELLIPSIS}
                 >
-                    {section}
+                    {section.label || section.id}
                 </Text>}
             </FlexRow>
         );
@@ -74,7 +77,7 @@ const KeywordSearchView = ({
             <li key={id}>
                 <Link
                     className={resultClass}
-                    data-id={`search-result_${root}-${section}-${sanitizedLabel}`}
+                    data-id={`search-result_${rootId}${section ? `-${section.id}` : ""}-${sanitizedLabel}`}
                     focusable
                     title={resultTitle}
                     onClick={resultClicked}

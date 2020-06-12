@@ -11,10 +11,17 @@ describe("KeywordSearchView", () => {
         TestUtils = require("../../../testutil/TestUtils"),
         KeywordSearchView = require("../KeywordSearchView");
 
+    const defaultProps = {
+        results: [
+            { root: {}, label: "test" },
+            { root: {}, label: "Also a test" }
+        ]
+    };
     const getComponent = (props) => {
         return ReactTestUtils.renderIntoDocument(
             <div>
                 <KeywordSearchView
+                    {...defaultProps}
                     {...props}
                 />
             </div>
@@ -27,12 +34,7 @@ describe("KeywordSearchView", () => {
     });
 
     it("should render results", () => {
-        const component = getComponent({
-            results: [
-                { label: "test" },
-                { label: "Also a test" }
-            ]
-        });
+        const component = getComponent();
         const results = TestUtils.scryRenderedDOMNodesWithClass(
             component,
             "keyword-search__result"
@@ -43,10 +45,6 @@ describe("KeywordSearchView", () => {
     it("should call onResultClick when a result is clicked", () => {
         const onResultClick = jest.fn();
         const component = getComponent({
-            results: [
-                { label: "test" },
-                { label: "Also a test" }
-            ],
             onResultClick
         });
 
@@ -62,12 +60,7 @@ describe("KeywordSearchView", () => {
 
     it("should handle result clicks if onResultClick is not passed in", () => {
         const onResultClick = jest.fn();
-        const component = getComponent({
-            results: [
-                { label: "test" },
-                { label: "Also a test" }
-            ]
-        });
+        const component = getComponent();
 
         const results = TestUtils.scryRenderedDOMNodesWithClass(
             component,
@@ -98,7 +91,8 @@ describe("KeywordSearchView", () => {
             results: [
                 {
                     id: "dirTest",
-                    label: "dirTest"
+                    label: "dirTest",
+                    root: {}
                 }
             ]
         });

@@ -248,10 +248,10 @@ class AppFrame extends React.Component {
             }
         };
 
-        onRootChange(root || id);
+        onRootChange(root.id || id);
 
         if (section) {
-            openSection(section);
+            openSection(section.id);
         }
         onItemChange(id);
 
