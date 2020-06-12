@@ -5,10 +5,19 @@ $images: getThemeImages($THEME_NAME);
 
 @include base($images, $colors);
 
+/**
+ * Styles
+ */
 .card {
-    @media all and (max-width: 600px) {
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    @media only screen and (max-width: 600px) {
         height: 100%;
         max-width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
