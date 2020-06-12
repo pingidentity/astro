@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
 import FieldMessage from '../FieldMessage'
+import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
+
+/**
+ * @enum {string}
+ * @alias TextInput~textInputTypes
+ * @desc Enum for the different types of text input styling
+ */
+export const textInputTypes = {
+    PRIMARY: 'primary',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
 
 /**
  * Hidden input field
@@ -11,9 +23,9 @@ const PasswordInput = ({
     placeholder,
     id,
     className,
-    error,
-    errorMessage,
-    success,
+    fieldMessage,
+    fieldMessageStatus,
+    type,
     defaultValue,
     'data-id': dataId,
     onChange,
@@ -24,12 +36,23 @@ const PasswordInput = ({
     onMouseDown,
 }) => {
     const classNames = classnames('text-input', className, {
-        'text-input--error': error,
-        'text-input--success': success,
+        'text-input--error': type === textInputTypes.ERROR,
+        'text-input--success': type === textInputTypes.SUCCESS,
+        'text-input--primary': type === textInputTypes.PRIMARY,
+    });
+
+    const iconClassNames = classnames('text-input__icon', {
+        'text-input__icon--error': type === textInputTypes.ERROR,
+        'text-input__icon--success': type === textInputTypes.SUCCESS,
     });
 
     return (
         <div>
+            {
+                type === 'success' || type === 'error'
+                    ? <div className={iconClassNames} key="type-icon"></div>
+                    : null
+            }
             <input
                 className={classNames}
                 id={id}
@@ -45,11 +68,11 @@ const PasswordInput = ({
                 defaultValue={defaultValue}
                 data-id={dataId}
             />
-            {error && errorMessage && (
+            {fieldMessage && (
                 <FieldMessage
-                    type={error && "error"}
+                    status={fieldMessageStatus || type}
                 >
-                    {errorMessage}
+                    {fieldMessage}
                 </FieldMessage>
             )}
         </div>
@@ -58,14 +81,6 @@ const PasswordInput = ({
 
 PasswordInput.propTypes = {
     /**
-     * Sets error state for the PasswordInput if enabled
-     */
-    error: PropTypes.bool,
-    /**
-     * Sets error message active when error state is true
-     */
-    errorMessage: PropTypes.node,
-    /**
      * Sets a data-id property on the PasswordInput to be used as a test hook
      */
     'data-id': PropTypes.string,
@@ -73,6 +88,14 @@ PasswordInput.propTypes = {
      * Default value for the PasswordInput
      */
     defaultValue: PropTypes.string,
+    /**
+     * Sets field message
+     */
+    fieldMessage: PropTypes.node,
+    /**
+     * Sets field message status to override provided status
+     */
+    fieldMessageStatus: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
     /**
      * Sets the ID of the PasswordInput
      */

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
 import FieldMessage from '../FieldMessage'
+import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 /**
  * @enum {string}
@@ -68,6 +69,7 @@ const TextInput = ({
     value,
     width,
     fieldMessage,
+    fieldMessageStatus,
     format,
     autoFocus,
     useAutoComplete,
@@ -112,7 +114,7 @@ const TextInput = ({
         />,
         fieldMessage && (
             <FieldMessage
-                type={type}
+                status={fieldMessageStatus || type}
             >
                 {fieldMessage}
             </FieldMessage>
@@ -136,6 +138,14 @@ TextInput.propTypes = {
         PropTypes.number,
         PropTypes.string,
     ]),
+    /**
+     * Sets field message
+     */
+    fieldMessage: PropTypes.node,
+    /**
+     * Sets field message status to override provided status
+     */
+    fieldMessageStatus: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
     /**
      * ID to be applied to the TextInput
      */

@@ -9,6 +9,18 @@ import GenericStateContainer from '../../util/GenericStateContainer';
 import DropdownCustomSearchable from "../DropdownCustomSearchable";
 
 /**
+ * @enum {string}
+ * @alias PhoneInput~phoneInputStatuses
+ * @desc Enum for the different types of text input styling
+ */
+
+export const phoneInputStatuses = {
+    PRIMARY: 'primary',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
+
+/**
  * @class PhoneInput
  * @description A component for inputting a country code and number
  * @param {string} [data-id='phone-input']
@@ -33,10 +45,11 @@ const PhoneInputStateless = ({
     'data-id': dataId,
     setOpen,
     country: countryName,
-    error,
-    errorMessage,
     phoneNumber,
     placeholder,
+    status,
+    fieldMessage,
+    fieldMessageStatus,
     dialCodeSearchValue,
     onCountryChange,
     onSearchValueChange,
@@ -66,13 +79,13 @@ const PhoneInputStateless = ({
                     value={country ? `+${country.dialCode}` : ''}
                     options={optionsFiltered}
                     data-id="country-search"
-                    error={error}
                     searchPlaceholder="Search countries..."
                     searchValue={dialCodeSearchValue}
                     onValueChange={onCountryChange}
                     onSearchValueChange={onSearchValueChange}
                     open={dropdownOpen}
                     onToggle={setOpen}
+                    status={status}
                 />
             </div>
             <div className="phone-input__number">
@@ -81,8 +94,9 @@ const PhoneInputStateless = ({
                     onChange={e => onPhoneNumberValueChange(e.target.value, e)}
                     placeholder={placeholder}
                     format={textInputFormats.NUMERIC}
-                    type={error && "error"}
-                    fieldMessage={error && errorMessage}
+                    type={status}
+                    fieldMessage={fieldMessage}
+                    fieldMessageStatus={fieldMessageStatus}
                 />
             </div>
         </div>
@@ -91,8 +105,6 @@ const PhoneInputStateless = ({
 
 PhoneInputStateless.propTypes = {
     'data-id': PropTypes.string,
-    error: PropTypes.bool,
-    errorMessage: PropTypes.node,
     onToggleDropdown: PropTypes.func,
     onPhoneNumberValueChange: PropTypes.func,
     onCountryChange: PropTypes.func,

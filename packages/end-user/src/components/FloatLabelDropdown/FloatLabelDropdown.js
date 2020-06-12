@@ -4,11 +4,20 @@ import classnames from 'classnames';
 import Dropdown from '../Dropdown';
 
 /**
+ * @enum {string}
+ * @alias Droppdown~dropdownStatuses
+ * @desc Enum for the different types of text input styling
+ */
+export const dropdownStatuses = {
+    INFO: 'info',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
+
+/**
  * Dropdown with a FloatLabel
  */
 const FloatLabelDropdown = ({
-    error,
-    errorMessage,
     label,
     id,
     inputClassName,
@@ -23,8 +32,6 @@ const FloatLabelDropdown = ({
             selectClassName={inputClassNames}
             placeholder={label}
             id={id}
-            error={error}
-            errorMessage={errorMessage}
             {...props}
         >
             <label className="float-label__label" htmlFor={id}>
@@ -37,13 +44,13 @@ const FloatLabelDropdown = ({
 
 FloatLabelDropdown.propTypes = {
     /**
-     * Sets error state for the FloatLabelDropdown if enabled
+     * Sets field message
      */
-    error: PropTypes.bool,
+    fieldMessage: PropTypes.node,
     /**
-     * Sets error message active when error state is true
+     * Determines the styling of the input
      */
-    errorMessage: PropTypes.node,
+    status: PropTypes.oneOf(Object.values(dropdownStatuses)),
     /**
      * The label for the Dropdown
      */

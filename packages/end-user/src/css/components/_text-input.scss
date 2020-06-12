@@ -19,6 +19,7 @@
     }
 
     &--success {
+        border-color: $color-success-green;
         background-color: $color-white;
 
         padding-right: $spacing-xl;

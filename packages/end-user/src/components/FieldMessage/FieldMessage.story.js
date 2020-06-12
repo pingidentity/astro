@@ -1,6 +1,7 @@
 import React from 'react';
 import TextInput, { textInputTypes } from '../TextInput';
 import FloatLabelTextInput from '../FloatLabelTextInput'
+import { fieldMessageStatuses } from './FieldMessage';
 
 export default {
     title: 'Components/Inputs/FieldMessage',
@@ -14,21 +15,27 @@ export const Default = () => (<React.Fragment>
     />
     <TextInput
         placeholder="Error"
-        type={textInputTypes.ERROR}
         fieldMessage="Here is an error message"
+        fieldMessageStatus={fieldMessageStatuses.ERROR}
+    />
+    <TextInput
+        placeholder="Info"
+        fieldMessage="Here is a success message"
+        fieldMessageStatus={fieldMessageStatuses.INFO}
     />
     <TextInput
         placeholder="Success"
-        type={textInputTypes.SUCCESS}
         fieldMessage="Here is a success message"
+        fieldMessageStatus={fieldMessageStatuses.SUCCESS}
+    />
+    <TextInput
+        placeholder="Warning"
+        fieldMessage="Here is a success message"
+        fieldMessageStatus={fieldMessageStatuses.WARNING}
     />
     <TextInput
         placeholder="Primary"
-        type={textInputTypes.PRIMARY}
         fieldMessage="Here is a primary (default) message"
-    />
-    <FloatLabelTextInput
-        label="Field Message"
-        fieldMessage="Message in a float label text input"
+        fieldMessageStatus={fieldMessageStatuses.PRIMARY}
     />
 </React.Fragment>);

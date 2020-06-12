@@ -25,8 +25,6 @@ const FloatLabel = ({
     defaultValue,
     value,
     children,
-    fieldMessage,
-    type,
     InputType,
     'data-id': dataId,
     ...props
@@ -60,13 +58,6 @@ const FloatLabel = ({
                 {label}
             </label>
             {children}
-            {fieldMessage && (
-                <FieldMessage
-                    type={type}
-                >
-                    {fieldMessage}
-                </FieldMessage>
-            )}
         </div>
     );
 };

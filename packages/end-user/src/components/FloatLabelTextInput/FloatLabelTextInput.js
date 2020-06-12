@@ -14,13 +14,11 @@ const FloatLabelTextInput = ({
     inputClassName,
     label,
     id,
-    fieldMessage,
     ...props
 }) => (
     <FloatLabel
         defaultValue={defaultValue}
         label={label}
-        fieldMessage={fieldMessage}
         id={id}
         InputType={TextInput}
         inputClassName={inputClassName}

@@ -9,8 +9,6 @@ import { noop } from "underscore";
  */
 const FloatLabelPasswordInput = ({
     defaultValue,
-    error,
-    errorMessage,
     onChange,
     value,
     inputClassName,
@@ -27,8 +25,6 @@ const FloatLabelPasswordInput = ({
             onChange={onChange}
             defaultValue={defaultValue}
             value={value}
-            error={error}
-            errorMessage={errorMessage}
             {...props}
         />
     );
@@ -39,14 +35,6 @@ FloatLabelPasswordInput.propTypes = {
      * Default value for the input
      */
     defaultValue: PropTypes.string,
-    /**
-     * Sets error state for the PasswordInput if enabled
-     */
-    error: PropTypes.bool,
-    /**
-     * Sets error message active when error state is true
-     */
-    errorMessage: PropTypes.node,
     /**
     /**
      * ID to add to the input

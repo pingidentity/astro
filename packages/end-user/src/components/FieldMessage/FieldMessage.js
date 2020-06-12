@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 /**
+ * @enum {string}
+ * @alias FieldMessage~fieldMessageStatuses
+ * @desc Enum for the different types of text input styling
+ */
+export const fieldMessageStatuses = {
+    PRIMARY: 'primary',
+    INFO: 'info',
+    ERROR: 'error',
+    SUCCESS: 'success',
+    WARNING: 'warning',
+};
+
+/**
  * @class FieldMessage
  * @description A component for inputting a country code and number
  * @param {node} [children]
@@ -18,12 +31,15 @@ import classnames from 'classnames';
 const FieldMessage = ({
     className,
     ["data-id"]: dataId,
-    type,
+    status,
     children
 }) => {
     const classNames = classnames(className, "field-message", {
-        "field-message--error": type === "error",
-        "field-message--success": type === "success"
+        "field-message--error": status === fieldMessageStatuses.ERROR,
+        "field-message--info": status === fieldMessageStatuses.INFO,
+        "field-message--primary": status === fieldMessageStatuses.PRIMARY,
+        "field-message--success": status === fieldMessageStatuses.SUCCESS,
+        "field-message--warning": status === fieldMessageStatuses.WARNING
     });
 
     return (
@@ -39,7 +55,11 @@ const FieldMessage = ({
 FieldMessage.propTypes = {
     'data-id': PropTypes.string,
     children: PropTypes.node,
-    type: PropTypes.string,
+    status: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
+};
+
+FieldMessage.defaultProps = {
+    status: fieldMessageStatuses.PRIMARY
 };
 
 export default FieldMessage;

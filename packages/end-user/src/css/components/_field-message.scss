@@ -1,7 +1,5 @@
 
     .field-message {
-        color: $color-neutral-20;
-        background-color: $color-neutral-95;
         z-index: $zindex__popover;
         padding: 15px;
         box-sizing: border-box;
@@ -17,8 +15,23 @@
             background-color: $color-critical-red;
         }
 
+        &--info {
+            color: $color-white;
+            background-color: $color-active-blue;
+        }
+
+        &--primary {
+            color: $color-neutral-20;
+            background-color: $color-neutral-95;
+        }
+
         &--success {
             color: $color-white;
             background-color: $color-success-green;
+        }
+
+        &--warning {
+            color: $color-white;
+            background-color: $color-warning-yellow;
         }
     }
