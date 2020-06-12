@@ -27,6 +27,11 @@ export const applyStyles = (colors, bgImg) => {
             .branding-template-link-container {
                 color: ${colors.bodyText};
             }
+
+            .branding-template-tertiary-button {
+                color: ${colors.bodyText};
+                border-color: ${colors.bodyText};
+            }
         ` : ''}
 
         ${colors.card ? `
@@ -71,6 +76,10 @@ export const applyStyles = (colors, bgImg) => {
 
         ${colors.link ? `
             .branding-template-link-text, a {
+                color: ${colors.link};
+            }
+
+            .branding-template-tertiary-button:hover {
                 color: ${colors.link};
             }
         ` : ''}
