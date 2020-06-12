@@ -88,6 +88,16 @@
         }
     }
 
+    .branding-template-tertiary-button {
+        color: map-get($colors, 'bodyText');
+        border-color: map-get($colors, 'bodyText');
+        background: transparent;
+
+        &:hover {
+            color: map-get($colors, 'link');
+        }
+    }
+
     .branding-template-link-text, a {
         color: map-get($colors, 'link');
     }

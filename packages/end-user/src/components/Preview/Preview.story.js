@@ -21,11 +21,11 @@ export default {
 };
 
 const themes = [
-    'https://assets.pingone.com/ux/branding-themes/0.14.0/default/default.css',
-    'https://assets.pingone.com/ux/branding-themes/0.14.0/split/split.css',
-    'https://assets.pingone.com/ux/branding-themes/0.14.0/slate/slate.css',
-    'https://assets.pingone.com/ux/branding-themes/0.14.0/mural/mural.css',
-    'https://assets.pingone.com/ux/branding-themes/0.14.0/focus/focus.css',
+    'https://assets.pingone.com/ux/branding-themes/0.15.0/default/default.css',
+    'https://assets.pingone.com/ux/branding-themes/0.15.0/split/split.css',
+    'https://assets.pingone.com/ux/branding-themes/0.15.0/slate/slate.css',
+    'https://assets.pingone.com/ux/branding-themes/0.15.0/mural/mural.css',
+    'https://assets.pingone.com/ux/branding-themes/0.15.0/focus/focus.css',
 ];
 
 export const Default = () =>
