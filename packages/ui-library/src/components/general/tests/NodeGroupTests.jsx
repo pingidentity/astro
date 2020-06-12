@@ -1,6 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import NodeGroup from "../NodeGroup";
+import { justifyOptions } from "../../layout/FlexRow";
 
 describe("NodeGroup", () => {
     const makeNodes = (count, idPrefix) => new Array(count).fill({
@@ -225,5 +226,32 @@ describe("NodeGroup", () => {
         );
 
         expect(component.find("Label").exists()).toEqual(false);
+    });
+
+    it("justifies the clusters to the center when there's only one", () => {
+        const component = getComponent({
+            nodeClusters: [
+                {
+                    nodes: makeNodes(1, "first-")
+                }
+            ]
+        });
+
+        expect(component.find("ForwardRef").prop("justify")).toEqual(justifyOptions.CENTER);
+    });
+
+    it("justifies the clusters as space between when there's more than one", () => {
+        const component = getComponent({
+            nodeClusters: [
+                {
+                    nodes: makeNodes(1, "first-")
+                },
+                {
+                    nodes: makeNodes(1, "second-")
+                },
+            ]
+        });
+
+        expect(component.find("ForwardRef").prop("justify")).toEqual(justifyOptions.SPACEBETWEEN);
     });
 });

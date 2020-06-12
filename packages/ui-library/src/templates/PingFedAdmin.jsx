@@ -255,7 +255,7 @@ export default function PingFedAdminTemplate() {
                             >
                                 <QuickActions.Action
                                     label="IdP Connection"
-                                    iconName="globe"
+                                    iconName="pf-authentication-integration"
                                     onClick={() => console.log("Action clicked")}
                                 />
                                 <QuickActions.Action

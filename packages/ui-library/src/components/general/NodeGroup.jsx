@@ -54,7 +54,8 @@ export default function NodeGroup({
             <FlexRow
                 alignment={alignments.STRETCH}
                 data-id={dataId}
-                justify={justifyOptions.SPACEBETWEEN}
+                // Space between left-aligns a single option.
+                justify={nodeClusters.length === 1 ? justifyOptions.CENTER : justifyOptions.SPACEBETWEEN}
             >
                 {nodeClusters.flatMap(({ label, nodes }, index) => {
                     return [
