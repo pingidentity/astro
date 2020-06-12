@@ -30,6 +30,18 @@ import { deprecatedStatelessProp } from "../../../../util/DeprecationUtils";
 * /
 
 /**
+* @callback I18nPhoneInput~onBlur
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
+* @callback I18nPhoneInput~onBlur
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
 * @callback I18nPhoneInput~onSearch
 *
 * @param {string} searchString
@@ -92,6 +104,10 @@ import { deprecatedStatelessProp } from "../../../../util/DeprecationUtils";
 *     Passes to and auto focuses the FormTextField input.
 * @param {boolean} [useAutoComplete="false"]
 *     Whether or not the field will support autocomplete.
+* @param {I18nPhoneInput~onBlur} [onBlur]
+*     Callback to be triggered when the field loses focus (is blurred).
+* @param {I18nPhoneInput~onFocus} [onFocus]
+*     Callback to be triggered when the field gets focus.
 *
 * @example
 *       <I18nPhoneInput
@@ -128,6 +144,8 @@ class I18nPhoneInputStateless extends Component {
         autoFocus: PropTypes.bool,
         useAutoComplete: PropTypes.bool,
         disabled: PropTypes.bool,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
     };
 
     static defaultProps = {
@@ -143,6 +161,8 @@ class I18nPhoneInputStateless extends Component {
         searchString: "",
         searchTime: 0,
         onSearch: _.noop,
+        onBlur: _.noop,
+        onFocus: _.noop,
         errorMessage: "Please enter a valid phone number.",
         showError: false,
         placeholder: "",
@@ -214,7 +234,12 @@ class I18nPhoneInputStateless extends Component {
         );
 
         return (
-            <div data-id={this.props["data-id"]} className={classname}>
+            <div
+                data-id={this.props["data-id"]}
+                className={classname}
+                onFocus={this.props.onFocus}
+                onBlur={this.props.onBlur}
+            >
                 <CountryFlagList
                     data-id={this.props["data-id"] + "-countryFlagList"}
                     countryCodeClassName="dial-code"

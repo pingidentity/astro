@@ -5,6 +5,19 @@ import FormTextField from "../forms/form-text-field";
 import FormMessage from "../forms/FormMessage";
 import FormLabel from "../forms/FormLabel";
 import classnames from "classnames";
+import _ from "underscore";
+
+/**
+ * @callback UnitInput~onBlur
+ * @param {object} e
+ *     The ReactJS synthetic event object.
+ */
+
+/**
+ * @callback UnitInput~onBlur
+ * @param {object} e
+ *     The ReactJS synthetic event object.
+ */
 
 /**
  * @class UnitInput
@@ -22,6 +35,10 @@ import classnames from "classnames";
  *              The value to the properties for the FormTextField
  * @param {object} [dropDownListProps]
  *              The value of the properties for the DropDownList
+ * @param {UnitInput~onBlur} [onBlur]
+ *     Callback to be triggered when the field loses focus (is blurred).
+ * @param {UnitInput~onFocus} [onFocus]
+ *     Callback to be triggered when the field gets focus.
  */
 module.exports = class extends React.Component {
     static propTypes = {
@@ -33,12 +50,16 @@ module.exports = class extends React.Component {
         labelHelpText: PropTypes.string,
         textFieldProps: PropTypes.object,
         dropDownListProps: PropTypes.object,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
     };
 
     static defaultProps = {
         "data-id": "unit-input",
         textFieldProps: {},
         dropDownListProps: {},
+        onFocus: _.noop,
+        onBlur: _.noop
     };
 
     unitInputRef = {};
@@ -46,7 +67,7 @@ module.exports = class extends React.Component {
     calculateErrorRef = () => {
         //input fields stack when error state is added or removed without extra 2 pixels
         return this.props.errorMessage ? this.unitInputRef.clientWidth : this.unitInputRef.clientWidth + 2;
-       
+
     }
 
     render() {
@@ -70,7 +91,12 @@ module.exports = class extends React.Component {
         } = this.props.dropDownListProps;
 
         return (
-            <div className={containerClassName} style={{ width: this.calculateErrorRef() }}>
+            <div
+                className={containerClassName}
+                style={{ width: this.calculateErrorRef() }}
+                onFocus={this.props.onFocus}
+                onBlur={this.props.onBlur}
+            >
                 <FormLabel
                     value= {this.props.labelText || this.props.label}
                     data-id={this.props["data-id"]} detached/>
