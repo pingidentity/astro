@@ -37,6 +37,8 @@ describe("FormDropDownList v4", function () {
             onToggle: jest.fn(),
             onSearch: jest.fn(),
             onValueChange: jest.fn(),
+            onBlur: jest.fn(),
+            onFocus: jest.fn(),
         });
         return TestUtils.renderInWrapper(<FormDropDownList {...props} />);
     }
@@ -398,6 +400,24 @@ describe("FormDropDownList v4", function () {
 
         ReactTestUtils.Simulate.change(input, { target: { value: "foo" } });
         expect(component.props.children.props.onSearch).toBeCalledWith("foo", 0, 0);
+    });
+
+    it("triggers onFocus when search input becomes focused", function () {
+        const component = getComponent();
+        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        expect(component.props.children.props.onFocus).not.toBeCalled();
+        ReactTestUtils.Simulate.focus(input);
+        expect(component.props.children.props.onFocus).toBeCalled();
+    });
+
+    it("triggers onBlur when search input looses focus", function () {
+        const component = getComponent();
+        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        expect(component.props.children.props.onBlur).not.toBeCalled();
+        ReactTestUtils.Simulate.blur(input);
+        expect(component.props.children.props.onBlur).toBeCalled();
     });
 
     it("list option triggers onValueChange callback on item click", function () {

@@ -54,6 +54,18 @@ const SearchTypes = {
 */
 
 /**
+* @callback FormDropDownList~onFocus
+ * @param {Event} event
+ *      Synthetic React focus event
+*/
+
+/**
+* @callback FormDropDownList~onBlur
+ * @param {Event} event
+ *      Synthetic React blur event
+*/
+
+/**
 * @callback FormDropDownList~onSearch
 *
 * @param {string} searchString
@@ -210,6 +222,10 @@ const SearchTypes = {
 *    Callback to be triggered when a new option is to be added to the list.
 * @param {FormDropDownList~onSearch} [onSearch]
 *    Callback to be triggered when the state of the search of an option when the list dropdown is expanded changes.
+* @param {FormDropDownList~onBlur} [onBlur]
+*    Callback to be triggered when search input looses focus
+* @param {FormDropDownList~onFocus} [onFocus]
+*    Callback to be triggered when search input gets focus
 * @param {FormDropDownList~onToggle} [onToggle]
 *    Callback to be triggered when the open/closed state changes.
 * @param {array<FormDropDownList~group>} [groups]
@@ -351,6 +367,8 @@ class FormDropDownListStateless extends React.Component {
         noneOption: PropTypes.object,
         noneOptionLabelClassName: PropTypes.string,
         onValueChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
         open: PropTypes.bool,
         options: PropTypes.arrayOf(
             PropTypes.shape({
@@ -387,6 +405,8 @@ class FormDropDownListStateless extends React.Component {
         contentType: <FormDropDownListDefaultContent />,
         open: false,
         onToggle: _.noop,
+        onFocus: _.noop,
+        onBlur: _.noop,
         canAdd: false,
         searchString: "",
         searchField: "label",
@@ -968,6 +988,8 @@ class FormDropDownListStateless extends React.Component {
                                 errorMessage={this.props.errorMessage}
                                 autoFocus={this.props.autofocus}
                                 selectOnFocus={this._isBoxSearch()}
+                                onFocus={this.props.onFocus}
+                                onBlur={this.props.onBlur}
                                 value={inputValue}
                                 placeholder={this.props.placeholder}
                                 name={this.props.name}
@@ -985,7 +1007,6 @@ class FormDropDownListStateless extends React.Component {
                             <PopperContainer
                                 data-parent={this.props["data-id"]}
                                 data-id={this.props["data-id"]+"-dropdown"}
-                                data-parent={this.props["data-id"]}
                                 getReference={this._getReference}
                                 className={containerClassName}
                                 placement="bottom-start"

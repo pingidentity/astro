@@ -1,6 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import _ from "underscore";
 import TextField from "./FormTextField";
+
+/**
+ * @callback InlineTextField~onBlur
+ * @param {object} e
+ *     The ReactJS synthetic event object.
+ */
 
 /**
 * @class InlineTextField
@@ -18,6 +25,8 @@ import TextField from "./FormTextField";
 *     When true, text field is inline.
 * @param {InlineTextField~onValueChange} [onValueChange]
 *     Callback to be triggered when the field value changes. It will receive the component's value.
+* @param {InlineTextField~onBlur} [onBlur]
+*     Callback to be triggered when the field loses focus (is blurred).
 * @param {number} [size]
 *     Maximum character length supported by the text field.
 * @param {string|number} [value=""]
@@ -41,7 +50,8 @@ function InlineTextField({
     inline,
     onValueChange,
     size,
-    value
+    value,
+    onBlur
 }) {
     return (
         <TextField
@@ -53,6 +63,7 @@ function InlineTextField({
             onValueChange={onValueChange}
             size={size}
             value={value}
+            onBlur={onBlur}
         />
     );
 }
@@ -66,12 +77,14 @@ InlineTextField.propTypes = {
     onValueChange: PropTypes.func,
     size: PropTypes.number,
     value: PropTypes.string,
+    onBlur: PropTypes.func,
 
 };
 
 InlineTextField.defaultProps = {
     "data-id": "inline-text-field",
     inline: true,
+    onBlur: _.noop,
 };
 
 export default InlineTextField;

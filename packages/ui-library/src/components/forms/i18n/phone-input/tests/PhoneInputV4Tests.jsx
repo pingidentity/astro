@@ -247,4 +247,32 @@ describe("I18nPhoneInput", function () {
         expect(flagList.prop("selectedCountryCode")).toEqual("");
     });
 
+    it("handles onFocus event", () => {
+        const onBlur = jest.fn();
+        const onFocus = jest.fn();
+        const component = mount(<I18nPhoneInput {...defaults} open onBlur={onBlur} onFocus={onFocus} />);
+
+        expect(onFocus).not.toHaveBeenCalled();
+
+        const input = component.find("[data-id=\"i18n-phone-input-phoneNumber-input\"]");
+        input.simulate("focus");
+        expect(onFocus).toHaveBeenCalledTimes(1);
+
+        expect(onBlur).not.toHaveBeenCalled();
+    });
+
+    it("handles onBlur event", () => {
+        const onBlur = jest.fn();
+        const onFocus = jest.fn();
+        const component = mount(<I18nPhoneInput {...defaults} open onBlur={onBlur} onFocus={onFocus} />);
+
+        expect(onBlur).not.toHaveBeenCalled();
+
+        const input = component.find("[data-id=\"i18n-phone-input-phoneNumber-input\"]");
+        input.simulate("blur");
+        expect(onBlur).toHaveBeenCalledTimes(1);
+
+        expect(onFocus).not.toHaveBeenCalled();
+    });
+
 });

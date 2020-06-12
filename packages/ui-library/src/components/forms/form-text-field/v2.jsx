@@ -351,11 +351,11 @@ class Stateless extends React.Component {
         }
     };
 
-    _handleFocus = () => {
+    _handleFocus = (e) => {
         if (this.props.selectOnFocus && this.refs[this.props["data-id"] + "-input"]) {
             this.selectField();
         }
-        this.props.onFocus();
+        this.props.onFocus(e);
     };
 
     selectField = /* istanbul ignore next */ () => {
