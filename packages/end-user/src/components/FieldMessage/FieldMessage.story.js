@@ -36,6 +36,6 @@ export const Default = () => (<React.Fragment>
     <TextInput
         placeholder="Primary"
         fieldMessage="Here is a primary (default) message"
-        fieldMessageStatus={fieldMessageStatuses.PRIMARY}
+        fieldMessageStatus={fieldMessageStatuses.DEFAULT}
     />
 </React.Fragment>);
