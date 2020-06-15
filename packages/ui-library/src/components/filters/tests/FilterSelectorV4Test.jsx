@@ -48,6 +48,29 @@ describe("FilterSelector", function () {
         expect(callback).lastCalledWith("a search");
     });
 
+    it("renders with selection options by default", function () {
+        const component = mount(
+            <FilterSelector
+                options={options}
+                selected={["Fruits", "Vegetables"]}
+            />
+        );
+        const selectionOptions = component.find("[data-id='only-selected-button']");
+        expect(selectionOptions).toBeTruthy();
+    });
+
+    it("renders without selection options by default", function () {
+        const component = mount(
+            <FilterSelector
+                options={options}
+                selected={[]}
+                hideSelectionOptions={true}
+            />
+        );
+        const selectionOptions = component.find("[data-id='only-selected-button']");
+        expect(selectionOptions).toHaveLength(0);
+    });
+
     it("renders when some are selected", function () {
         const component = getComponent({ options, selected: ["one", "two"] });
         const section = TestUtils.findRenderedDOMNodeWithDataId(component, "filter-selector");
