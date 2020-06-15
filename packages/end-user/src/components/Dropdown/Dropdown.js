@@ -16,7 +16,7 @@ const getLabel = option => (option.label ? option.label : option);
  */
 
 export const dropdownStatuses = {
-    PRIMARY: 'primary',
+    DEFAULT: 'default',
     ERROR: 'error',
     SUCCESS: 'success',
 };
@@ -40,21 +40,19 @@ export const StatelessDropdown = ({
     const classNames = classnames('dropdown', className, {
         'dropdown--with-icon-and-message': fieldMessage && status === dropdownStatuses.ERROR || fieldMessage && status === dropdownStatuses.SUCCESS,
         'dropdown--with-status-icon': !fieldMessage && status === dropdownStatuses.ERROR || !fieldMessage && status === dropdownStatuses.SUCCESS,
-        'dropdown--with-message': fieldMessage && status === dropdownStatuses.PRIMARY,
-        'dropdown--standard': !fieldMessage && status === dropdownStatuses.PRIMARY,
+        'dropdown--with-message': fieldMessage && status === dropdownStatuses.DEFAULT,
+        'dropdown--standard': !fieldMessage && status === dropdownStatuses.DEFAULT,
     });
     const selectClassNames = classnames('dropdown__select', selectClassName, {
         'dropdown__select--error': status === dropdownStatuses.ERROR,
         'dropdown__select--success': status === dropdownStatuses.SUCCESS,
-        'dropdown__select--info': status === dropdownStatuses.PRIMARY,
+        'dropdown__select--info': status === dropdownStatuses.DEFAULT,
     });
 
     const iconClassNames = classnames('text-input__icon', {
         'text-input__icon--error': status === dropdownStatuses.ERROR,
         'text-input__icon--success': status === dropdownStatuses.SUCCESS,
     });
-
-    console.log(fieldMessage, 'fieldmesage')
 
     return (
         <div className={classNames} data-id={dataId}>
@@ -146,9 +144,8 @@ StatelessDropdown.propTypes = {
 };
 
 StatelessDropdown.defaultProps = {
-    error: false,
     options: [],
-    status: dropdownStatuses.PRIMARY,
+    status: dropdownStatuses.DEFAULT,
     value: '',
     'data-id': 'dropdown',
 };

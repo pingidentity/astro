@@ -136,7 +136,6 @@ PasswordInput.propTypes = {
 
 PasswordInput.defaultProps = {
     'data-id': 'password-input',
-    error: false,
     onBlur: noop,
     onChange: noop,
     onFocus: noop,

@@ -36,7 +36,6 @@ FloatLabelPasswordInput.propTypes = {
      */
     defaultValue: PropTypes.string,
     /**
-    /**
      * ID to add to the input
      */
     id: PropTypes.string,
@@ -59,7 +58,6 @@ FloatLabelPasswordInput.propTypes = {
 };
 
 FloatLabelPasswordInput.defaultProps = {
-    error: false,
     onChange: noop,
 };
 

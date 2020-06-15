@@ -70,7 +70,6 @@ FloatLabelDropdown.propTypes = {
 };
 
 FloatLabelDropdown.defaultProps = {
-    error: false,
     id: 'dropdown',
 };
 

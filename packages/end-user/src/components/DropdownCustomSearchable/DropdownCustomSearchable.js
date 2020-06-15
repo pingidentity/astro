@@ -13,7 +13,7 @@ import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
  */
 
 export const dropdownStatuses = {
-    PRIMARY: 'primary',
+    DEFAULT: 'default',
     ERROR: 'error',
     SUCCESS: 'success',
 };
@@ -44,12 +44,8 @@ const DropdownCustomSearchable = ({
         'dropdown--open': open,
         'dropdown--with-icon-and-message': fieldMessage && status === dropdownStatuses.ERROR || fieldMessage && status === dropdownStatuses.SUCCESS,
         'dropdown--with-status-icon': !fieldMessage && status === dropdownStatuses.ERROR || !fieldMessage && status === dropdownStatuses.SUCCESS,
-        'dropdown--with-message': fieldMessage && status === dropdownStatuses.PRIMARY,
-        'dropdown--standard': !fieldMessage && status === dropdownStatuses.PRIMARY,
-    });
-
-    const inputClassNames = classnames('dropdown__input', inputClassName, {
-        // 'dropdown__input--error': error,
+        'dropdown--with-message': fieldMessage && status === dropdownStatuses.DEFAULT,
+        'dropdown--standard': !fieldMessage && status === dropdownStatuses.DEFAULT,
     });
 
     const iconClassNames = classnames('text-input__icon', {
@@ -132,7 +128,7 @@ DropdownCustomSearchable.propTypes = {
     id: PropTypes.string,
     inputClassName: PropTypes.string,
     fieldMessage: PropTypes.string,
-    fieldMessage: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
+    fieldMessageStatus: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
     open: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.string,
@@ -157,7 +153,7 @@ DropdownCustomSearchable.defaultProps = {
     placeholder: '',
     searchPlaceholder: 'Search',
     searchValue: '',
-    status: dropdownStatuses.PRIMARY,
+    status: dropdownStatuses.DEFAULT,
     onSearchValueChange: _noop,
     value: '',
     onValueChange: _noop,

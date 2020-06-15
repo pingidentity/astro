@@ -8,7 +8,7 @@ import classnames from 'classnames';
  * @desc Enum for the different types of text input styling
  */
 export const fieldMessageStatuses = {
-    PRIMARY: 'primary',
+    DEFAULT: 'default',
     INFO: 'info',
     ERROR: 'error',
     SUCCESS: 'success',
@@ -21,10 +21,10 @@ export const fieldMessageStatuses = {
  * @param {node} [children]
  *    Elements to display as the message
  * @param {string} [className]
- *    Optional classname to apply to the error container
+ *    Optional classname to apply to the fieldMessage container
  * @param {string} [data-id]
  *    Optional data-id
- * @param {string} [type]
+ * @param {string} [status]
  *    Determines the styling of the message
  */
 
@@ -37,7 +37,7 @@ const FieldMessage = ({
     const classNames = classnames(className, "field-message", {
         "field-message--error": status === fieldMessageStatuses.ERROR,
         "field-message--info": status === fieldMessageStatuses.INFO,
-        "field-message--primary": status === fieldMessageStatuses.PRIMARY,
+        "field-message--default": status === fieldMessageStatuses.DEFAULT || status === 'primary',
         "field-message--success": status === fieldMessageStatuses.SUCCESS,
         "field-message--warning": status === fieldMessageStatuses.WARNING
     });
@@ -59,7 +59,7 @@ FieldMessage.propTypes = {
 };
 
 FieldMessage.defaultProps = {
-    status: fieldMessageStatuses.PRIMARY
+    status: fieldMessageStatuses.DEFAULT
 };
 
 export default FieldMessage;

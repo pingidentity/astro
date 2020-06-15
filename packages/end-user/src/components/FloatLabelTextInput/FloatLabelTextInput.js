@@ -34,11 +34,11 @@ FloatLabelTextInput.propTypes = {
      */
     defaultValue: PropTypes.string,
     /**
-     * ID to add to the input
+     * Message below field
      */
     fieldMessage: PropTypes.node,
     /**
-     * Message below field
+     * ID to add to the input
      */
     id: PropTypes.string,
     /**
