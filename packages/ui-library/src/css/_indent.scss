@@ -125,6 +125,10 @@
         }
     }
 
+    &__title-content {
+        white-space: nowrap;
+    }
+
     &--with-colors {
         &__title {
             // Necessary for very small indents; will not be centered otherwise.
