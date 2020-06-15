@@ -61,6 +61,10 @@ const optionsSelector = createSelector(
 *     Class name(s) to add to the top-level container/div
 * @param {node} [bottomPanel]
 *     Content to be shown after the list of options.
+* @param {boolean} [required=false]
+*     If true, filter input marked as required.
+* @param {boolean} [hideSelectionOptions=false]
+*     If true, hides selection options.
 * @param {node} [description]
 *     Description to display below the label.
 * @param {string} [labelText]
@@ -97,6 +101,7 @@ class FilterSelectorBase extends React.Component {
         label: PropTypes.string,
         placeholder: PropTypes.string,
         required: PropTypes.bool,
+        hideSelectionOptions: PropTypes.bool,
         onValueChange: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
@@ -119,6 +124,7 @@ class FilterSelectorBase extends React.Component {
         "data-id": "filter-selector",
         placeholder: "Select One",
         required: false,
+        hideSelectionOptions: false,
         onToggle: _.noop,
         onSearch: _.noop,
         onValueChange: _.noop,
@@ -165,10 +171,39 @@ class FilterSelectorBase extends React.Component {
         this.setState({ showOnlySelected: false });
     }
 
+    _getBottomPanel = () => {
+        const { bottomPanel, hideSelectionOptions } = this.props;
+        const bottomPanelElements = [];
+        if (!hideSelectionOptions) {
+            bottomPanelElements.push(
+                <PipeRow gap={pipeGaps.SM} key="selection-options">
+                    <Button
+                        data-id="only-selected-button"
+                        type={Button.buttonTypes.LINK}
+                        onClick={this._toggleOnlySelected}
+                        noSpacing
+                    >
+                        {this.state.showOnlySelected ? "Show All" : "Show Only Selected"}
+                    </Button>
+                    <Button
+                        data-id="clear-button"
+                        type={Button.buttonTypes.LINK}
+                        onClick={this._unselectAll}
+                        noSpacing
+                    >Clear</Button>
+                </PipeRow>
+            );
+        }
+        if (bottomPanel) {
+            bottomPanelElements.push(bottomPanel);
+        }
+
+        return !_.isEmpty(bottomPanelElements) && bottomPanelElements;
+    }
+
     render = () => {
         const {
             "data-id": dataId,
-            bottomPanel,
             className,
             description,
             labelText,
@@ -206,25 +241,7 @@ class FilterSelectorBase extends React.Component {
                     <InputModifier inputColor={inputColors.DARK}>
                         <SelectionList
                             type={type}
-                            bottomPanel={[
-                                <PipeRow gap={pipeGaps.SM} key="selection-options">
-                                    <Button
-                                        data-id="only-selected-button"
-                                        type={Button.buttonTypes.LINK}
-                                        onClick={this._toggleOnlySelected}
-                                        noSpacing
-                                    >
-                                        {this.state.showOnlySelected ? "Show All" : "Show Only Selected"}
-                                    </Button>
-                                    <Button
-                                        data-id="clear-button"
-                                        type={Button.buttonTypes.LINK}
-                                        onClick={this._unselectAll}
-                                        noSpacing
-                                    >Clear</Button>
-                                </PipeRow>,
-                                bottomPanel
-                            ]}
+                            bottomPanel={this._getBottomPanel()}
                             options={this._getOptions()}
                             optionsNote={optionsNote}
                             showSearchBox={true}
