@@ -52,6 +52,8 @@ const DropdownCustomSearchable = ({
         'text-input__icon--error': status === dropdownStatuses.ERROR,
         'text-input__icon--success': status === dropdownStatuses.SUCCESS,
     });
+
+    const inputClassNames = classnames('dropdown__input', inputClassName);
     
     const _onSearchValueChange = (e) => onSearchValueChange(e.target.value, e);
     const doOpen = () => {
@@ -69,7 +71,7 @@ const DropdownCustomSearchable = ({
                     : null
             }
             <input
-                className={inputClassName}
+                className={inputClassNames}
                 id={id}
                 name={id}
                 placeholder={placeholder}
