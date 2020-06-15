@@ -81,7 +81,7 @@ const TextInput = ({
 
     return [
         (
-            type === 'success' || type === 'error' 
+            type === 'success' || type === 'error'
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
         ),

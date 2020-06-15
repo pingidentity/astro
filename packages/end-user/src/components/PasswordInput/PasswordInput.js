@@ -4,14 +4,26 @@ import classnames from 'classnames';
 import { noop } from 'underscore';
 
 /**
+ * @enum {string}
+ * @alias PasswordInput~passwordInputTypes
+ * @desc Enum for the different types of password input styling
+ */
+export const passwordInputTypes = {
+    DEFAULT: 'default',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
+
+/**
  * Hidden input field
  */
 const PasswordInput = ({
     placeholder,
     id,
     className,
-    error,
-    success,
+    type,
+    error = type === passwordInputTypes.ERROR,
+    success = type === passwordInputTypes.SUCCESS,
     defaultValue,
     'data-id': dataId,
     onChange,
@@ -26,7 +38,17 @@ const PasswordInput = ({
         'text-input--success': success,
     });
 
-    return (
+    const iconClassNames = classnames('text-input__icon', {
+        'text-input__icon--error': error,
+        'text-input__icon--success': success,
+    });
+
+    return [
+        (
+            (success || error)
+                ? <div className={iconClassNames} key="type-icon"></div>
+                : null
+        ),
         <input
             className={classNames}
             id={id}
@@ -39,10 +61,11 @@ const PasswordInput = ({
             onMouseDown={onMouseDown}
             placeholder={placeholder}
             type="password"
+            key="passwordinput"
             defaultValue={defaultValue}
             data-id={dataId}
         />
-    );
+    ];
 };
 
 PasswordInput.propTypes = {
@@ -94,6 +117,10 @@ PasswordInput.propTypes = {
      * Sets the success state of the PasswordInput if enabled
      */
     success: PropTypes.bool,
+    /**
+     * Determines the styling of the input
+     */
+    type: PropTypes.oneOf(Object.values(passwordInputTypes)),
 };
 
 PasswordInput.defaultProps = {
@@ -104,6 +131,8 @@ PasswordInput.defaultProps = {
     onKeyDown: noop,
     onKeyPress: noop,
     onMouseDown: noop,
+    type: passwordInputTypes.DEFAULT,
 };
 
+PasswordInput.passwordInputTypes = passwordInputTypes;
 export default PasswordInput;
