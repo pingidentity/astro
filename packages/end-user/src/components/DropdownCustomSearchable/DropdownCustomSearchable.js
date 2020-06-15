@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import _noop from 'lodash';
 import TextInput from '../TextInput';
 import FieldMessage from '../FieldMessage';
-import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 /**
  * @enum {string}
@@ -26,7 +25,7 @@ const DropdownCustomSearchable = ({
     children,
     className,
     fieldMessage,
-    fieldMessageStatus,
+    fieldMessageProps,
     id,
     inputClassName,
     open,
@@ -119,7 +118,10 @@ const DropdownCustomSearchable = ({
                 </ul>
             )}
             {fieldMessage && (
-                <FieldMessage status={fieldMessageStatus || status}>
+                <FieldMessage
+                    status={status}
+                    {...fieldMessageProps}
+                >
                     {fieldMessage}
                 </FieldMessage>
             )}
@@ -131,7 +133,6 @@ DropdownCustomSearchable.propTypes = {
     id: PropTypes.string,
     inputClassName: PropTypes.string,
     fieldMessage: PropTypes.string,
-    fieldMessageStatus: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
     open: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.string,

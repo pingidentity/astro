@@ -1,6 +1,5 @@
 import React from 'react';
 import TextInput, { textInputTypes } from './TextInput';
-import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 export default {
     title: 'Components/Inputs/Text/Basic',
@@ -15,7 +14,6 @@ export const Default = () => (<React.Fragment>
         placeholder="Error"
         type={textInputTypes.ERROR}
         fieldMessage='asdf'
-        fieldMessageStatus={fieldMessageStatuses.ERROR}
     />
     <TextInput
         placeholder="Success"

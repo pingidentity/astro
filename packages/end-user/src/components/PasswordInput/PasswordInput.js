@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
 import FieldMessage from '../FieldMessage'
-import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 /**
  * @enum {string}
@@ -24,7 +23,7 @@ const PasswordInput = ({
     id,
     className,
     fieldMessage,
-    fieldMessageStatus,
+    fieldMessageProps,
     type,
     defaultValue,
     'data-id': dataId,
@@ -70,7 +69,8 @@ const PasswordInput = ({
             />
             {fieldMessage && (
                 <FieldMessage
-                    status={fieldMessageStatus || type}
+                    status={type}
+                    {...fieldMessageProps}
                 >
                     {fieldMessage}
                 </FieldMessage>
@@ -92,10 +92,6 @@ PasswordInput.propTypes = {
      * Sets field message
      */
     fieldMessage: PropTypes.node,
-    /**
-     * Sets field message status to override provided status
-     */
-    fieldMessageStatus: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
     /**
      * Sets the ID of the PasswordInput
      */

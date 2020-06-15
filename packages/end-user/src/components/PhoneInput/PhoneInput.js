@@ -49,7 +49,7 @@ const PhoneInputStateless = ({
     placeholder,
     status,
     fieldMessage,
-    fieldMessageStatus,
+    fieldMessageProps,
     dialCodeSearchValue,
     onCountryChange,
     onSearchValueChange,
@@ -96,7 +96,7 @@ const PhoneInputStateless = ({
                     format={textInputFormats.NUMERIC}
                     type={status}
                     fieldMessage={fieldMessage}
-                    fieldMessageStatus={fieldMessageStatus}
+                    fieldMessageProps={fieldMessageProps}
                 />
             </div>
         </div>

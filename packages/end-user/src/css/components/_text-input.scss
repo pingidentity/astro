@@ -2,6 +2,8 @@
     @extend %input-text;
     @extend %input-box;
 
+    margin: 0px;
+
     &:focus {
         border-color: $input-focus-border-color;
     }

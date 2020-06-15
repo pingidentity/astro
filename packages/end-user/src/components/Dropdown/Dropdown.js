@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import FieldMessage from '../FieldMessage'
 
 import { inStateContainer } from '../../util/StateContainer';
-import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 const getValue = option => (option.value ? option.value : option);
 const getLabel = option => (option.label ? option.label : option);
@@ -27,7 +26,7 @@ export const StatelessDropdown = ({
     children,
     className,
     fieldMessage,
-    fieldMessageStatus,
+    fieldMessageProps,
     id,
     selectClassName = '',
     onChange,
@@ -81,7 +80,8 @@ export const StatelessDropdown = ({
             {children}
             {fieldMessage && (
                 <FieldMessage
-                    status={fieldMessageStatus || status}
+                    status={status}
+                    {...fieldMessageProps}
                 >
                     {fieldMessage}
                 </FieldMessage>
@@ -103,10 +103,6 @@ StatelessDropdown.propTypes = {
      * Sets field message
      */
     fieldMessage: PropTypes.node,
-    /**
-     * Sets field message status to override provided status
-     */
-    fieldMessageStatus: PropTypes.oneOf(Object.values(fieldMessageStatuses)),
     /**
      * Determines the styling of the input
      */
