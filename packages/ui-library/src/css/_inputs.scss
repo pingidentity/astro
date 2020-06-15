@@ -1321,6 +1321,14 @@ input[type=file] {
                 width: 72px;
                 padding: 5px 0 0;
             }
+
+            &.disabled {
+                cursor: default;
+
+                &:after {
+                    color: $color-rhino;
+                }
+            }
         }
         .with-logo {
             width: 90px;

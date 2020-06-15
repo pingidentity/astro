@@ -102,6 +102,7 @@ export default class extends Component {
                     value={this.props.labelText || this.props.label}
                     description={this.props.description}>
                     <ImagePreview
+                        disabled={this.props.disabled}
                         isDefault={useDefault}
                         onClick={this._clickFileInput}
                         show={this.props.showThumbnail}
@@ -116,6 +117,7 @@ export default class extends Component {
                     {!this.props.showThumbnail &&
                     <Button
                         data-id="upload-button"
+                        disabled={this.props.disabled}
                         inline
                         className= {classnames (
                             "choose",
@@ -165,6 +167,7 @@ export default class extends Component {
 }
 
 const ImagePreview = withFocusOutline(({
+    disabled,
     isDefault,
     onClick,
     src,
@@ -177,7 +180,10 @@ const ImagePreview = withFocusOutline(({
             <span
                 onClick={onClick}
                 {...getClickableA11yProps(onClick)}
-                className="image-icon"
+                className={classnames(
+                    "image-icon",
+                    { "disabled": disabled }
+                )}
             />}
             <span
                 className={classnames(
