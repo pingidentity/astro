@@ -45,4 +45,5 @@ const brandTypes = {
     YAHOO: {
         fill: '#5D04CA',
         logo: <SocialLogos.YAHOO width={20} height={20} />,
+    },
 };
