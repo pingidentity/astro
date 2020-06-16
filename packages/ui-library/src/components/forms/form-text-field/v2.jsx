@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
 import classnames from "classnames";
 
 import FormLabel, { labelProps, passLabelProps } from "../FormLabel";
@@ -315,27 +314,6 @@ class Stateless extends React.Component {
         this.props.onChange(e);
     };
 
-    _setFlexWidth = () => {
-        const content = this._getInputType() === "password"
-            ? Array(this.props.value.length + 1).join(this.pwChar)
-            : this.props.value;
-        let newWidth;
-
-        this._contentMeasurerInput.innerHTML = content;
-        const contentWidth = this._contentMeasurerLabel.offsetWidth;
-
-        if (contentWidth > this.initialInputWidth) {
-            newWidth = contentWidth + 10;
-
-        } else if (contentWidth < this.initialInputWidth) {
-            newWidth = this.initialInputWidth;
-        }
-
-        this.setState({
-            labelWidth: newWidth
-        });
-    };
-
     _getInputType = () => {
         if (this.props.maskValue && !this.props.reveal) {
             return "password";
@@ -362,83 +340,6 @@ class Stateless extends React.Component {
         this.refs[this.props["data-id"] + "-input"].select();
     };
 
-    componentDidMount() {
-        const
-            label = ReactDOM.findDOMNode(this.refs["container"]),
-            container = this.refs["input-container"],
-            input = this.refs[this.props["data-id"] + "-input"],
-            copyLabelProperties = [
-                "box-sizing",
-                "padding-left",
-                "padding-right",
-            ],
-            copyContainerProperties = [
-                "box-sizing",
-                "padding-left",
-                "padding-right",
-                "margin-left",
-                "margin-right"
-            ],
-            copyInputProperties = [
-                "box-sizing",
-                "padding-left",
-                "padding-right",
-                "font-size",
-                "font-family",
-                "text-transform",
-                "border-left-width",
-                "border-right-width",
-                "border-left-style",
-                "border-right-style"
-            ];
-
-        let labelStyles = "",
-            containerStyles = "",
-            inputStyles = "white-space: nowrap; ";
-
-        if (this.props.flexWidth) {
-            // copy label, container, and input css to width measuring elements
-            copyLabelProperties.map(function (property) {
-                labelStyles += `${property}:${window.getComputedStyle(label, null).getPropertyValue(property)}; `;
-            });
-            copyContainerProperties.map(function (property) {
-                containerStyles += `${property}:${window.getComputedStyle(container, null)
-                    .getPropertyValue(property)}; `;
-            });
-            copyInputProperties.map(function (property) {
-                inputStyles += `${property}:${window.getComputedStyle(input, null).getPropertyValue(property)}; `;
-            });
-            this.contentMeasurerLabel.setAttribute("style", labelStyles);
-            this.contentMeasurerContainer.setAttribute("style", containerStyles);
-            this.contentMeasurerInput.setAttribute("style", inputStyles);
-
-            // get initial width for later use
-            this.initialInputWidth = label.offsetWidth;
-
-            // detect if IE and set password character for later use
-            this.pwChar = Utils.browserType() === Utils.Browsers.IE ? "●" : "•";
-
-            // set ref to content measuring elements
-            this._contentMeasurerLabel = ReactDOM.findDOMNode(this.contentMeasurerLabel);
-            this._contentMeasurerContainer = ReactDOM.findDOMNode(this.contentMeasurerContainer);
-            this._contentMeasurerInput = ReactDOM.findDOMNode(this.contentMeasurerInput);
-
-            this.lastValue = this.props.value;
-
-            // initial call with long content was measuring wrong width - delay allows for complete loading of DOM
-            setTimeout(this._setFlexWidth, 10);
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.props.flexWidth) {
-            if (this.lastValue !== this.props.value) {
-                this._setFlexWidth();
-            }
-            this.lastValue = this.props.value;
-        }
-    }
-
     _getAutoComplete = () => {
         if (typeof this.props.autoComplete === "string") {
             return this.props.autoComplete;
@@ -458,7 +359,7 @@ class Stateless extends React.Component {
 
         const className = classnames(
             this.props.className,
-            this.props.size ? null : getInputWidthClass({
+            this.props.size || this.props.flexWidth ? null : getInputWidthClass({
                 className: this.props.className,
                 width: this.props.width,
             }),
@@ -467,6 +368,7 @@ class Stateless extends React.Component {
                 disabled: this.props.disabled,
                 edited: this.props.isEdited,
                 "flex-width": this.props.flexWidth,
+                [`flex-width-${this.props.width ? this.props.width : "MD"}`]: this.props.flexWidth,
                 "input-message": message,
                 [`input-message--${this.props.messageType}`]: this.props.messageType,
                 "inline-save": this.props.showSave,
@@ -536,19 +438,11 @@ class Stateless extends React.Component {
                         style={{ width: this.props.size ? "auto" : null }}
                     />
                     {this.props.flexWidth && (
-                        <div
-                            data-id={dataId + "-content-measurer"}
-                            className="content-measurer"
-                            ref={node => { this.contentMeasurerLabel = node; }}>
-                            <div
-                                className="content-measurer-container"
-                                ref={node => { this.contentMeasurerContainer = node; }}>
-                                <div
-                                    className="content-measurer-input"
-                                    ref={node => { this.contentMeasurerInput = node; }}
-                                />
-                            </div>
-                        </div>
+                        <div className={
+                            `flex-width-spacer
+                            ${this.props.maskValue && "flex-width-spacer__password"}
+                            ${this.props.showReveal && "flex-width-spacer__reveal"}`
+                        }>{this.props.value}</div>
                     )}
                     {this.props.showReveal && (
                         <a

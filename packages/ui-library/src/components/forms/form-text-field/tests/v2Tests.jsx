@@ -455,35 +455,12 @@ describe("FormTextField", function () {
         expect(input.getAttribute("type")).toEqual(type);
     });
 
-    it("v4: shows content measuring DOM when flexWidth is true", function () {
-        const initialValue = "initial input text";
-        const newValue = "something really long entered into the text input for testing purposes";
-        const component = getComponent({
-            "data-id": "ftf",
-            stateless: false,
-            flexWidth: true,
-            required: false,
-            label: "test",
-            initialState: {
-                value: initialValue
-            },
-        });
-        const input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-        const contentMeasurer = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-content-measurer");
+    it("renders flex width", function() {
+        const component = getComponent({ flexWidth: true });
 
-        jest.runAllTimers();
+        const flexClass = TestUtils.findRenderedDOMNodeWithClass(component, "flex-width-MD");
 
-        expect(input.value).toEqual(initialValue);
-        expect(contentMeasurer).toBeTruthy();
-        expect(stateless.pwChar).toEqual("•");
-
-        ReactTestUtils.Simulate.change(input, { target: { value: newValue } });
-        expect(input.value).toEqual(newValue);
-
-        // Im not able get any information from the content-measurer and it seems that the style attribute of the
-        // input is not updating in the test even though it does so in a browser
-        // TODO: figure out a way to test this functionality
+        expect(flexClass).toBeTruthy();
     });
 
     it("sets the proper input type", function () {
@@ -494,20 +471,6 @@ describe("FormTextField", function () {
             input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
 
         expect(input.type).toEqual("password");
-    });
-
-    it("uses proper password character for IE when flexWidth is true", function () {
-        window.navigator.__defineGetter__("userAgent", function () {
-            return "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
-        });
-
-        const component = getComponent({
-            "data-id": "ftf",
-            flexWidth: true
-        });
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-
-        expect(stateless.pwChar).toEqual("●");
     });
 
     it("logs warning for type color when not in production", function () {
@@ -546,30 +509,6 @@ describe("FormTextField", function () {
         expect(input.select).not.toBeCalled();
         ReactTestUtils.Simulate.focus(input);
         expect(input.select).toBeCalled();
-    });
-
-    it("makes width bigger", function() {
-        const component = getComponent({ value: "something", flexWidth: true });
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-
-        stateless.initialInputWidth = 100;
-        stateless._contentMeasurerLabel = { offsetWidth: 150 };
-        stateless.lastValue = "something else";
-        stateless.setState({ nothing: "nothing" }); // force update
-
-        expect(stateless.state.labelWidth).toBe(160);
-    });
-
-    it("makes width initial for a password field", function() {
-        const component = getComponent({ value: "something", flexWidth: true, maskValue: true, reveal: false });
-        const stateless = ReactTestUtils.findRenderedComponentWithType(component, FormTextField.FormTextFieldStateless);
-
-        stateless.initialInputWidth = 100;
-        stateless._contentMeasurerLabel = { offsetWidth: 90 };
-        stateless.lastValue = "something else";
-        stateless.setState({ nothing: "nothing" }); // force update
-
-        expect(stateless.state.labelWidth).toBe(100);
     });
 
     it("doesn't fire toggle callback when disabled", function() {

@@ -2775,6 +2775,16 @@ a {
     }
 }
 
+@mixin flex-width-css($size) {
+    .label-text {
+        @include break-word;
+    }
+    &.input-text {
+        min-width: map-get($input-width-settings-map-text, $size);
+        width: auto;
+    }
+}
+
 // this is only used by the unit input
 .text-field--right-align input {
     text-align: right;
@@ -3235,4 +3245,62 @@ label.input-text--right-icon {
     right: 0;
     font-size: 10px;
     text-transform: lowercase;
+}
+
+.flex-width-XS {
+    @include flex-width-css('xsmall');
+}
+
+.flex-width-SM {
+    @include flex-width-css('small');
+}
+
+.flex-width-MD {
+    @include flex-width-css('medium');
+}
+
+.flex-width-LG {
+    @include flex-width-css('large');
+}
+
+.flex-width-XL {
+    @include flex-width-css('xlarge');
+}
+
+.flex-width-XX {
+    @include flex-width-css('full');
+}
+
+.flex-width-spacer {
+    font-size: 1.09em;
+    height: 0;
+    padding: 0 15px;
+    text-transform: none;
+    visibility: hidden;
+
+    &__password {
+        font-size: 0.4em;
+        // Icon font used for monospacing to match password masking character
+        font-family: $icon-font;
+    }
+
+    &__reveal {
+        margin-left: 25px;
+    }
+}
+
+// IE-specific CSS
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+    .flex-width-spacer {
+        &__password {
+            font-size: 0.66em;
+            font-family: $icon-font;
+            margin-left: 30px;
+        }
+
+        &__reveal {
+            margin-left: 55px;
+        }
+    }
 }
