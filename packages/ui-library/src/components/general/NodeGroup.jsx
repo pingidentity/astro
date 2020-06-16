@@ -66,7 +66,7 @@ export default function NodeGroup({
                             bottomContent={
                                 // Specific ask from the Ping Fed team not to have 0 count as false here.
                                 label !== undefined && label !== null && label !== ""
-                                    ? <NodeField.Label>{label}</NodeField.Label>
+                                    ? <NodeField.Label width={clusterWidth}>{label}</NodeField.Label>
                                     : <div className="node-field__label-placeholder" />
                             }
                             key={key}
