@@ -9337,6 +9337,21 @@ focus-lock@^0.6.7:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/focus-lock/-/focus-lock-0.6.8.tgz#61985fadfa92f02f2ee1d90bc738efaf7f3c9f46"
   integrity sha1-YZhfrfqS8C8u4dkLxzjvr388n0Y=
 
+focus-trap-react@^6.0.0:
+  version "6.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/focus-trap-react/-/focus-trap-react-6.0.0.tgz#3f5a9f68447dd374d22388fb4c50018be83e74a5"
+  integrity sha1-P1qfaER903TSI4j7TFABi+g+dKU=
+  dependencies:
+    focus-trap "^4.0.2"
+
+focus-trap@^4.0.2:
+  version "4.0.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/focus-trap/-/focus-trap-4.0.2.tgz#4ee2b96547c9ea0e4252a2d4b2cca68944194663"
+  integrity sha1-TuK5ZUfJ6g5CUqLUssymiUQZRmM=
+  dependencies:
+    tabbable "^3.1.2"
+    xtend "^4.0.1"
+
 follow-redirects@^1.0.0:
   version "1.11.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/follow-redirects/-/follow-redirects-1.11.0.tgz#afa14f08ba12a52963140fe43212658897bc0ecb"
@@ -20013,6 +20028,11 @@ synesthesia@^1.0.1:
   integrity sha1-XvlepUjA1cbm+btLDQcx3/hkp3c=
   dependencies:
     css-color-names "0.0.3"
+
+tabbable@^3.1.2:
+  version "3.1.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tabbable/-/tabbable-3.1.2.tgz#f2d16cccd01f400e38635c7181adfe0ad965a4a2"
+  integrity sha1-8tFszNAfQA44Y1xxga3+CtllpKI=
 
 table@4.0.2:
   version "4.0.2"
