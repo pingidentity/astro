@@ -57,10 +57,11 @@ Container.defaultProps = {
 };
 
 export const Label = ({
-    children
+    children,
+    width
 }) => {
     return (
-        <div className="node-field__label-chip">
+        <div className="node-field__label-chip" style={{ maxWidth: width }}>
             {children}
         </div>
     );
@@ -109,9 +110,11 @@ export const Tooltip = ({
             {nodes.map(({ label, values }, nodeIndex) => {
                 return (
                     <React.Fragment key={`${label}${values.length}`}>
-                        <Text className="node-field__tooltip-title" type={textTypes.LABEL}>
-                            {label}
-                        </Text>
+                        {label &&
+                            <Text className="node-field__tooltip-title" type={textTypes.LABEL}>
+                                {label}
+                            </Text>
+                        }
                         <FlexRow
                             alignment={alignments.TOP}
                             flexDirection={flexDirectionOptions.COLUMN}
