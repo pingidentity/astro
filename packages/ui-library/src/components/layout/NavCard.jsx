@@ -22,19 +22,10 @@ import Text, { alignments as textAlignments, textTypes } from "../general/Text";
 
 export const Title = ({
     align,
-    children: propsChildren,
+    children,
     className,
-    "data-id": dataId,
-    invertColor,
+    "data-id": dataId
 }) => {
-    const children = React.Children.map(propsChildren, (child) => {
-        let wrappedChild = child;
-        // Need to wrap any string nodes so they are valid elements to be cloned
-        if (!React.isValidElement(wrappedChild)) {
-            wrappedChild = <>{wrappedChild}</>;
-        }
-        return React.cloneElement(wrappedChild, { invertColor });
-    });
 
     return (
         <Text
@@ -53,7 +44,6 @@ Title.alignments = textAlignments;
 Title.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
-    invertColor: PropTypes.bool,
 };
 
 Title.alignments = textAlignments;
@@ -74,19 +64,14 @@ Title.alignments = textAlignments;
  */
 
 const NavCard = forwardRef(({
-    children: propsChildren,
+    children,
     className,
     "data-id": dataId,
-    invertColor,
     title
 }, ref) => {
-    const children = React.Children.map(propsChildren, (child) => {
-        return React.cloneElement(child, { invertColor });
-    });
-
     return (
         <DashboardCard
-            className={classnames("nav-card", className, { "nav-card--inverted": invertColor })}
+            className={classnames("nav-card", className)}
             data-id={dataId}
             front={children}
             ref={ref}
@@ -100,5 +85,4 @@ export default NavCard;
 NavCard.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
-    invertColor: PropTypes.bool,
 };
