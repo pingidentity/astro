@@ -94,6 +94,7 @@ class FilterSelectorDemo extends React.Component {
                     options={nestedOptions}
                     selected={this.state.values2}
                     onValueChange={this._handleChange(2)}
+                    hideSelectionOptions={true}
                 />
             </div>
         );

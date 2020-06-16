@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import { getClickableA11yProps } from "../../util/PropUtils";
 
 /**
  * @class ButtonGroup
@@ -32,6 +33,7 @@ const ButtonGroup = ({
                     key="cancel"
                     className="cancel"
                     data-id="button-group-cancel"
+                    {...getClickableA11yProps(onCancel)}
                     onClick={onCancel}
                 >{cancelLabel}</a>,
             ]

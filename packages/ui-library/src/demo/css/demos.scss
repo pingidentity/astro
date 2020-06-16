@@ -109,3 +109,13 @@ hr {
         @include square($spacing-xx);
     }
 }
+
+.my-custom-navframe-content {
+    background: url(https://images.pexels.com/photos/1054201/pexels-photo-1054201.jpeg?cs=srgb&dl=brown-snowy-mountain-1054201.jpg&fm=jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.my-custom-navcard .dashboard-card__front {
+    background-color: rgba($color-white, 0.5);
+    border: none;
+}

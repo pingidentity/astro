@@ -1,5 +1,14 @@
 window.__DEV__ = true;
 
+import React from "react";
+import ReactDOM from "react-dom";
+import TestUtils from "../../../testutil/TestUtils";
+import ReactTestUtils from "react-dom/test-utils";
+import Wizard from "../Wizard";
+import assign from "object-assign";
+import { mount } from "enzyme";
+const Step = Wizard.Step;
+
 jest.mock("popper.js");
 jest.mock("react-portal");
 
@@ -13,13 +22,6 @@ jest.dontMock("../../tooltips/DetailsTooltip");
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("Wizard v4", function () {
-    var React = require("react"),
-        ReactDOM = require("react-dom"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        Wizard = require("../Wizard"),
-        Step = Wizard.Step,
-        assign = require("object-assign");
 
     var defaultText = {
         title: "My Wizard",
@@ -253,6 +255,30 @@ describe("Wizard v4", function () {
         expect(component).toBeTruthy();
         expect(progress).toBeFalsy();
         expect(content).toBeFalsy(); // testing that the task-content class is not added
+    });
+
+    it("should show the edit link if showEdit is not set", () => {
+        const wrapper = mount(
+            <Wizard activeStep={2}>
+                <Step title="step 1">Step 1</Step>
+                <Step title="step 2">Step 2</Step>
+            </Wizard>
+        );
+
+        const editButton = wrapper.find('a[data-id="edit-button"]');
+        expect(editButton.exists()).toBeTruthy();
+    });
+
+    it("should not show the edit link if showEdit is set to false", () => {
+        const wrapper = mount(
+            <Wizard activeStep={2}>
+                <Step title="step 1" showEdit={false}>Step 1</Step>
+                <Step title="step 2">Step 2</Step>
+            </Wizard>
+        );
+
+        const editButton = wrapper.find('a[data-id="edit-button"]');
+        expect(editButton.exists()).toBeFalsy();
     });
 
 });

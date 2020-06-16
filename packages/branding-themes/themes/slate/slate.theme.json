@@ -2,7 +2,7 @@
     "slate": {
         "color": {
             "button": {
-                "value": "“#000000"
+                "value": "#000000"
             },
             "buttonText": {
                 "value": "#4A4A4A"

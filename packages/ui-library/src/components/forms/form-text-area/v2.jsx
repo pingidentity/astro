@@ -47,6 +47,12 @@ const inputHeights = {
 */
 
 /**
+* @callback FormTextArea~onFocus
+* @param {object} e
+*     The ReactJS synthetic event object.
+*/
+
+/**
 * @callback FormTextArea~onUndo
 */
 
@@ -68,7 +74,7 @@ const inputHeights = {
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
 *     CSS classes to set on the HelpHint component.
-* @param {TextArea.inputHeights} [height]
+* @param {FormTextArea.inputHeights} [height]
 *     Hard-coded heights for text areas.
 * @param {string} [inputClassName]
 *     CSS classes to set on the input element.
@@ -115,6 +121,8 @@ const inputHeights = {
 *     Whether or not the field will support autocomplete.
 * @param {FormTextArea~onBlur} [onBlur]
 *     Callback to be triggered when the field loses focus (is blurred).
+* @param {FormTextArea~onFocus} [onFocus]
+*     Callback to be triggered when the field gets focus.
 * @param {FormTextArea~onChange} [onChange]
 *     Callback to be triggered when the field changes. It will receive the triggering event.
 *     The onValueChange callback will also be triggered.
@@ -168,6 +176,7 @@ class FormTextAreaStateless extends React.Component {
         name: PropTypes.string,
         noResize: PropTypes.bool,
         onBlur: PropTypes.func,
+        onFocus: PropTypes.func,
         onChange: PropTypes.func,
         onUndo: PropTypes.func,
         onValueChange: PropTypes.func,
@@ -192,6 +201,7 @@ class FormTextAreaStateless extends React.Component {
         monospaced: false,
         noResize: false,
         onBlur: _.noop,
+        onFocus: _.noop,
         onChange: _.noop,
         onUndo: _.noop,
         onValueChange: _.noop,
@@ -221,7 +231,7 @@ class FormTextAreaStateless extends React.Component {
                     "form-error": this.props.errorMessage,
                     disabled: this.props.disabled,
                     edited: this.props.edited,
-                    "value-entered": !!this.props.value,
+                    "value-entered": this.props.value && `${this.props.value}`.trim() !== "",
                     readonly: readonly,
                     actions: this.props.showUndo,
                     [`textarea-height--${this.props.height}`]: this.props.height !== inputHeights.AUTO,
@@ -255,6 +265,7 @@ class FormTextAreaStateless extends React.Component {
                         value={this.props.value}
                         onChange={this._handleChange}
                         onBlur={this.props.onBlur}
+                        onFocus={this.props.onFocus}
                         cols={this.props.cols}
                         rows={this.props.rows}
                         autoFocus={this.props.autoFocus}

@@ -10,6 +10,7 @@
     ],
     "plugins": [
         "lodash",
+        "wildcard",
         "@babel/plugin-proposal-class-properties",
         [
             "transform-es2015-spread",

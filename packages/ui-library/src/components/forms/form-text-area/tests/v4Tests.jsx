@@ -16,6 +16,7 @@ describe("FormTextArea v4", function () {
             onChange: jest.fn(),
             onValueChange: jest.fn(),
             onBlur: jest.fn(),
+            onFocus: jest.fn(),
         });
 
         return TestUtils.renderInWrapper(<FormTextArea {...props} />);
@@ -125,6 +126,16 @@ describe("FormTextArea v4", function () {
         ReactTestUtils.Simulate.blur(field);
 
         expect(component.props.children.props.onBlur).toBeCalled();
+    });
+
+    it("triggers the onFocus callback on field getting focus", function () {
+        var component = getComponent();
+
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
+
+        ReactTestUtils.Simulate.focus(field);
+
+        expect(component.props.children.props.onFocus).toBeCalled();
     });
 
     it("does not show the undo button if showUndo is not set to true", function () {
@@ -334,5 +345,16 @@ describe("FormTextArea v4", function () {
         );
         const textarea = component.find("textarea.input-textarea__input--no-resize");
         expect(textarea.exists()).toBeTruthy();
+    });
+
+    it("renders as empty for space-only value", function () {
+        const component = mount(
+            <FormTextArea
+                value=" "
+            />
+        );
+        const nonEmpty = component.find(".value-entered");
+
+        expect(nonEmpty.exists()).toEqual(false);
     });
 });

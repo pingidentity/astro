@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { noop } from "underscore";
 
-import { inStateContainer, toggleTransform } from '../../util/StateContainer';
-
 /**
  * Toggles an option
  */
-export const StatelessCheckbox = ({
+const Checkbox = ({
     'data-id': dataId,
     checked,
     id,
@@ -29,7 +27,7 @@ export const StatelessCheckbox = ({
     );
 };
 
-StatelessCheckbox.propTypes = {
+Checkbox.propTypes = {
     /**
      * Sets the checkbox's state
      */
@@ -52,22 +50,9 @@ StatelessCheckbox.propTypes = {
     onChange: PropTypes.func,
 };
 
-StatelessCheckbox.defaultProps = {
+Checkbox.defaultProps = {
     checked: false,
     onChange: noop,
 };
-
-const Checkbox = inStateContainer([
-    {
-        name: 'checked',
-        initial: false,
-        callbacks: [
-            {
-                name: 'onChange',
-                transform: toggleTransform,
-            },
-        ],
-    },
-])(StatelessCheckbox);
 
 export default Checkbox;

@@ -34,4 +34,16 @@ const brandTypes = {
         fill: '#FF9900',
         logo: <SocialLogos.AMAZON width={20} height={20} />,
     },
+    PAYPAL: {
+        fill: '#008ED8',
+        logo: <SocialLogos.PAYPAL width={20} height={20} />,
+    },
+    GITHUB: {
+        fill: '#1B1F23',
+        logo: <SocialLogos.GITHUB width={20} height={20} />,
+    },
+    YAHOO: {
+        fill: '#5D04CA',
+        logo: <SocialLogos.YAHOO width={20} height={20} />,
+    },
 };

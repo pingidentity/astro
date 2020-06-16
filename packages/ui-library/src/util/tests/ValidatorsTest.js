@@ -159,6 +159,12 @@ describe("Validators", function () {
             const maxFileSizeKb = 1;
             expect(Validators.isValidFileSize(fileSizeInBytes, maxFileSizeKb)).toBe(true);
         });
+
+        it("returns false if the file is empty", () => {
+            const fileSizeInBytes = 0;
+            const maxFileSizeKb = 1;
+            expect(Validators.isValidFileSize(fileSizeInBytes, maxFileSizeKb)).toBe(false);
+        });
     });
 
     describe("isValidMimeType", function () {

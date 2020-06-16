@@ -1,0 +1,108 @@
+$label-chip-height: 28px;
+
+/**
+* Nodes
+*/
+.node-field__root {
+    fill: $color-white;
+    stroke: $color-white;
+    stroke-width: 1px;
+    position: relative;
+}
+
+.node-field__node {
+    cursor: pointer;
+    fill: $color-white;
+    stroke: #0091ff;
+    stroke-width: 4px;
+    position: relative;
+    transition: stroke 0.2s;
+}
+
+.node-field__node:hover {
+    stroke: #02e6ff;
+}
+
+.node-field__node--selected {
+    stroke: #44d7b6;
+}
+
+.node-field__thread {
+    stroke: $color-white;
+    stroke-width: 0.5;
+}
+
+.node-field__tooltip {
+    background: $color-strong-neutral-10;
+    padding: $spacing-md;
+    border-radius: 6px;
+    box-shadow: 0 0 5px $color-neutral-30;
+    font-size: 12px;
+    min-width: 100px;
+    color: $color-white;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.node-field__container--divider {
+    border-right: 1px dashed $color-white;
+}
+
+// Have to add .text-component to the rules below because of ordering.
+.node-field__property-label {
+    &.text-component {
+        color: $color-white;
+        font-size: 13px;
+        margin-bottom: $spacing-xs;
+    }
+}
+
+.node-field__property-value {
+    &.text-component {
+        color: $color-white;
+        font-size: 11px;
+        margin-bottom: 0;
+        max-width: 100px;
+    }
+}
+
+.node-field__tooltip-divider {
+    align-self: stretch;
+    border-top: 1px dashed $color-white;
+    margin: $spacing-sm 0;
+    width: 100%;
+}
+
+.node-field__tooltip-title {
+    &.text-component {
+        color: $color-white;
+        font-size: 12px;
+        max-width: 200px;
+    }
+}
+
+.node-field__label-chip {
+    @include break-word;
+    background-color: $color-strong-neutral-40;
+    border-radius: 20px;
+    border-width: 0;
+    color: $color-white;
+    display: inline-block;
+    max-width: 100%;
+    padding: 5px 10px;
+}
+
+.node-field__label-placeholder {
+    height: $label-chip-height;
+}
+
+// Putting a class for the other component in here because the whole thing is a one-off
+.node-group {
+    width: 100%;
+}
+
+.node-group__divider {
+    border-right: 1px dashed $color-white;
+    margin-bottom: $label-chip-height;
+    width: 0;
+}

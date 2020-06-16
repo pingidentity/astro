@@ -22,6 +22,7 @@
 
     &--success {
         border-color: $color-success-green;
+
         background-color: $color-white;
 
         padding-right: $spacing-xl;
@@ -47,6 +48,10 @@
     &--dropdown-search {
         border-width: 0 0 1px 0;
         border-color: $color-neutral-70;
+    }
+
+    &:focus {
+        border-color: $input-focus-border-color;
     }
 }
 

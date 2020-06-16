@@ -74,7 +74,6 @@ const renderOptions = ({
     onValueChange,
     options: propsOptions,
     selected,
-    type
 }) => options => options.reduce((
     [buttonsAcc, activePanel],
     {
@@ -106,7 +105,6 @@ const renderOptions = ({
                     onClick={handleChange}
                     panel={optionPanel ? true : false}
                     details={details}
-                    type={type === "stacked" ? "side-icon" : "top-icon"}
                     link={link}
                     note={note}
                 >
@@ -132,7 +130,6 @@ const renderGroupedOptions = props => {
     const {
         groups,
         options,
-        type
     } = props;
     // Group options by their group id
     const grouped = _.groupBy(options, "group");
@@ -158,7 +155,6 @@ const renderGroupedOptions = props => {
                 <TileGroup
                     key={id}
                     title={title}
-                    type={type}
                 >
                     {childOpts}
                 </TileGroup>
@@ -185,7 +181,8 @@ const TileSelector = props => {
             <TileSelectorContext.Provider value={type}>
                 <div className={classnames("tile-selector", className, {
                     "tile-selector--stacked": type === selectorTypes.STACKED,
-                    "tile-selector--action": type === selectorTypes.ACTION
+                    "tile-selector--action": type === selectorTypes.ACTION,
+                    "tile-selector--square": type === selectorTypes.SQUARE,
                 })}>
                     {children}
                     {buttons}
@@ -245,7 +242,7 @@ TileSelector.propTypes = {
         })
     ),
     selected: PropTypes.string,
-    type: PropTypes.oneOf([ "row", "stacked", "square" ]),
+    type: PropTypes.oneOf([ "row", "stacked", "square", "action" ]),
 };
 
 TileSelector.defaultProps = {

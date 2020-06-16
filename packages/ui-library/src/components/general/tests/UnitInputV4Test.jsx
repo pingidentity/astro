@@ -117,6 +117,58 @@ describe("UnitInput", function () {
         expect(_.contains(dropDownClasses, "disabled")).toEqual(true);
     });
 
+    it("handles onBlur event in its subcomponents", function () {
+        var onBlur = jest.fn();
+        var onFocus = jest.fn();
+        var component1 = ReactTestUtils.renderIntoDocument(
+            <UnitInput
+                labelText="Unit Input Text"
+                className="custom-container-class"
+                data-id= "my-custom-select"
+                onBlur={onBlur}
+                onFocus={onFocus}
+                dropDownListProps={{
+                    options: options,
+                }}
+            /> );
+        expect(onBlur).not.toHaveBeenCalled();
+        var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component1, "form-text-field");
+        ReactTestUtils.Simulate.blur(formTextField);
+        expect(onBlur).toHaveBeenCalledTimes(1);
+
+        var formDropDown = TestUtils.findRenderedDOMNodeWithDataId(component1, "form-drop-down-list");
+        ReactTestUtils.Simulate.blur(formDropDown);
+        expect(onBlur).toHaveBeenCalledTimes(2);
+
+        expect(onFocus).not.toHaveBeenCalled();
+    });
+
+    it("handles onFocus event in its subcomponents", function () {
+        var onBlur = jest.fn();
+        var onFocus = jest.fn();
+        var component1 = ReactTestUtils.renderIntoDocument(
+            <UnitInput
+                labelText="Unit Input Text"
+                className="custom-container-class"
+                data-id= "my-custom-select"
+                onBlur={onBlur}
+                onFocus={onFocus}
+                dropDownListProps={{
+                    options: options,
+                }}
+            /> );
+        expect(onFocus).not.toHaveBeenCalled();
+        var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component1, "form-text-field");
+        ReactTestUtils.Simulate.focus(formTextField);
+        expect(onFocus).toHaveBeenCalledTimes(1);
+
+        var formDropDown = TestUtils.findRenderedDOMNodeWithDataId(component1, "form-drop-down-list");
+        ReactTestUtils.Simulate.focus(formDropDown);
+        expect(onFocus).toHaveBeenCalledTimes(2);
+
+        expect(onBlur).not.toHaveBeenCalled();
+    });
+
     it("renders list of options", function () {
         component = render({
             labelText: "Unit Input Text",

@@ -147,7 +147,7 @@ class ConditionalFieldsetStateless extends React.Component {
         const className = classNames({ focused: showFieldset, unfocused: !showFieldset }, "conditional-fieldset");
 
         return (
-            <div>
+            <div className={this.props.className}>
                 <FormLabel data-id={`${dataId}-label`} className="detached" description={this.props.description}>
                     {label}
                 </FormLabel>

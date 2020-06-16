@@ -18,17 +18,19 @@
     $nav-width: 200px;
     display: flex;
     width: $nav-width;
+    min-width: $nav-width;
     > * {
         box-sizing: border-box;
     }
     &__sections {
-        background: $color-timberwolf;
+        background: #eef4f7;
         flex: 1;
         display: flex;
         flex-direction: column;
 
         &--group-visible {
             flex-grow: 0;
+            min-width: 50px;
             .nav-sidebar__section-title {
                 visibility: hidden;
                 width: 0;
@@ -81,7 +83,7 @@
             font-size: 20px;
         }
         &-title {
-            padding: $spacing-lg $spacing-sm $spacing-md;
+            padding: $spacing-lg $spacing-md $spacing-md;
             @include text-label;
             font-size: 11px;
         }
@@ -111,26 +113,32 @@
     &__node {
         padding: $nav-item-padding;
         cursor: pointer;
-        &:hover {
-            @include font-pn-semibold;
-            background: $color-white;
-            padding-right: 12px;
-        }
-        &--selected {
-            padding-right: 12px;
-            .nav-sidebar__node-label {
-                @include font-pn-bold;
-                position: relative;
-                &:before {
-                    content: '';
-                    width: 3px;
-                    height: 100%;
-                    background-color: $color-active-blue-highlighted;
-                    position: absolute;
-                    left: -$spacing-sm;
-                }
-            }
 
+        &:hover {
+            background: $color-white;
+            & .nav-sidebar__node-label {
+                opacity: 0.95;
+
+            }
+        }
+    }
+
+    &__node-label {
+        @include font-pn-semibold;
+        opacity: 0.875;
+
+        &--selected {
+            opacity: 1;
+            position: relative;
+
+            &:before {
+                content: '';
+                width: 3px;
+                height: 100%;
+                background-color: $color-active-blue-highlighted;
+                position: absolute;
+                left: -$spacing-sm;
+            }
         }
     }
 
@@ -141,9 +149,9 @@
         border-right: 2px solid $color-timberwolf;
         background: $color-neutral-95;
         &-title {
+            @include font-pn-semibold;
             padding: $nav-item-padding;
             font-size: 16px;
-            @include font-pn-semibold;
         }
     }
     &__group {
@@ -214,11 +222,15 @@
 .nav-search__modal {
     // Have to do this because of specificity issues with the modal
     &.modal.dialog .modal-content {
-        width: 600px;
+        width: 700px;
     }
 }
 
 .nav-search__icon {
     color: $color-strong-neutral-50;
     font-size: 20px;
+
+    &:hover {
+        color: $color-white;
+    }
 }

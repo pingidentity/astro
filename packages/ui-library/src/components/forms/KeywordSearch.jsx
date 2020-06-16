@@ -40,7 +40,7 @@ export default class KeywordSearch extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        initialResults: PropTypes.arrayOf(PropTypes.string),
+        initialResults: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
         onResultClick: PropTypes.func,
         searchBuffer: PropTypes.number,
         sort: PropTypes.func,
@@ -130,7 +130,7 @@ export default class KeywordSearch extends React.Component {
             query.length >= this.props.searchBuffer
                 ? this.checkForMatch(query)
                 : [];
-                
+
         this.setState({
             results: resultsFromStore,
             selectedIndex: 0,

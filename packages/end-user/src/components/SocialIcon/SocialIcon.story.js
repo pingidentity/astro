@@ -9,14 +9,19 @@ export default {
 
 export const Icons = () => (
     <div>
+        <SocialIcon.MICROSOFT width="50px" height="50px" />
         <SocialIcon.GOOGLE width="50px" height="50px" />
         <SocialIcon.LINKEDIN width="50px" height="50px" />
         <SocialIcon.TWITTER width="50px" height="50px" />
+        <SocialIcon.INSTAGRAM width="50px" height="50px" />
         <SocialIcon.FACEBOOK width="50px" height="50px" />
         <SocialIcon.MARKETO width="50px" height="50px" />
         <SocialIcon.SALESFORCE width="50px" height="50px" />
         <SocialIcon.SCIM width="50px" height="50px" />
         <SocialIcon.APPLE width="50px" height="50px" />
         <SocialIcon.AMAZON width="50px" height="50px" />
+        <SocialIcon.PAYPAL width="50px" height="50px" />
+        <SocialIcon.GITHUB width="50px" height="50px" />
+        <SocialIcon.YAHOO width="50px" height="50px" />
     </div>
 );

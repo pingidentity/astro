@@ -1,8 +1,7 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { DashboardCard } from "../general/charting/Cards";
-import FlexRow, { alignments, spacingOptions } from "../layout/FlexRow";
 import Text, { alignments as textAlignments, textTypes } from "../general/Text";
 
 /**
@@ -23,10 +22,20 @@ import Text, { alignments as textAlignments, textTypes } from "../general/Text";
 
 export const Title = ({
     align,
-    children,
+    children: propsChildren,
     className,
-    "data-id": dataId
+    "data-id": dataId,
+    invertColor,
 }) => {
+    const children = React.Children.map(propsChildren, (child) => {
+        let wrappedChild = child;
+        // Need to wrap any string nodes so they are valid elements to be cloned
+        if (!React.isValidElement(wrappedChild)) {
+            wrappedChild = <>{wrappedChild}</>;
+        }
+        return React.cloneElement(wrappedChild, { invertColor });
+    });
+
     return (
         <Text
             data-id={dataId}
@@ -44,7 +53,10 @@ Title.alignments = textAlignments;
 Title.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
+    invertColor: PropTypes.bool,
 };
+
+Title.alignments = textAlignments;
 
 /**
  * @class NavCard
@@ -61,28 +73,32 @@ Title.propTypes = {
  *
  */
 
-export default function NavCard({
-    children,
+const NavCard = forwardRef(({
+    children: propsChildren,
     className,
     "data-id": dataId,
-}) {
+    invertColor,
+    title
+}, ref) => {
+    const children = React.Children.map(propsChildren, (child) => {
+        return React.cloneElement(child, { invertColor });
+    });
+
     return (
         <DashboardCard
-            className={classnames("nav-card", className)}
+            className={classnames("nav-card", className, { "nav-card--inverted": invertColor })}
             data-id={dataId}
-            front={
-                <FlexRow
-                    alignment={alignments.STRETCH}
-                    spacing={spacingOptions.MD}
-                >
-                    {children}
-                </FlexRow>
-            }
+            front={children}
+            ref={ref}
+            title={title}
         />
     );
-}
+});
+
+export default NavCard;
 
 NavCard.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
+    invertColor: PropTypes.bool,
 };

@@ -1,20 +1,35 @@
 import React from "react";
+import FlexRow, {
+    alignments,
+    flexDirectionOptions,
+    spacingOptions ,
+} from "ui-library/lib/components/layout/FlexRow";
 import NavFrame, { Logo, NavLink, NavMenu, NavSearch } from "ui-library/lib/components/panels/NavFrame";
+import ContentArea from "ui-library/lib/components/layout/ContentArea";
 import * as QuickActions from "ui-library/lib/components/panels/QuickActions";
-import NavCard from "ui-library/lib/components/layout/NavCard";
+import Spacing from "ui-library/lib/components/layout/Spacing";
+import NavCard, { Title } from "ui-library/lib/components/layout/NavCard";
+import NodeGroup from "ui-library/lib/components/general/NodeGroup";
 
-/**
- * @class Ping Fed Admin Template
- * @desc This is a template for the redesigned Ping Fed admin screen.
- */
+// Custom class style applied to the ContentArea component used in the demo
+// .my-custom-navframe-content {
+//     background: url(https://images.pexels.com/photos/1054201/pexels-photo-1054201.jpeg?cs=srgb&dl=brown-snowy-mountain-1054201.jpg&fm=jpg) no-repeat center center fixed;
+//     background-size: cover;
+// }
+
+// Custom class style applied to the NavCard component used in the demo
+// .my-custom-navcard .dashboard-card__front {
+//     background-color: rgba($color-white, 0.5);
+//     border: none;
+// }
 
 const tree = [
     {
-        id: "SNAAAARF1",
+        id: "root1",
         label: "Header 1",
         children: [
             {
-                id: "4evenworse",
+                id: "section4",
                 icon: "globe",
                 label: "Section without children",
                 children: [
@@ -139,22 +154,62 @@ const tree = [
     }
 ];
 
+const makeNodes = (count, idPrefix) => new Array(count).fill({
+    values: [
+        {
+            label: "Node Index",
+            value: 121413
+        },
+        {
+            label: "IP Address",
+            value: "10.1.232.123"
+        },
+        {
+            label: "Version",
+            value: "1.0.3"
+        },
+        {
+            label: "Node Index",
+            value: 121413
+        },
+        {
+            label: "Tags",
+            value: [
+                "EastDataCenter",
+                "WestDataCenter",
+                "NorthDataCenter",
+                "SouthDataCenter",
+                "GalaxyDataCenter",
+                "UniverseDataCenter"
+            ]
+        }
+    ]
+}).map((node, index) => ({ ...node, id: `${idPrefix}-${index}`, label: `Node ${index}` }));
+
+/**
+ * @class Ping Fed Admin Template
+ * @desc This is a template for the redesigned Ping Fed admin screen.
+ */
 export default function PingFedAdminTemplate() {
     return (
         <NavFrame
             headerLeft={<Logo id="pingfed" />}
             headerRight={[
-                <NavSearch
-                    initialTitle="Previous searches"
-                    initialResults={[145, 1545]}
-                    navTree={tree}
-                    onClose={e => console.log("Closed", e)}
-                    onOpen={e => console.log("Opened", e)}
-                    onSearchClick={result => console.log(result)}
-                    sort={({ startsWith, contains }) => [...startsWith, ...contains]}
-                    title="Results"
-                />,
-                <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />,
+                <FlexRow alignment={alignments.CENTER}>
+                    <NavSearch
+                        initialTitle="Previous searches"
+                        initialResults={[145, 1545]}
+                        navTree={tree}
+                        onClose={e => console.log("Closed", e)}
+                        onOpen={e => console.log("Opened", e)}
+                        onSearchClick={result => console.log(result)}
+                        sort={({ startsWith, contains }) => [...startsWith, ...contains]}
+                        title="Results"
+                    />
+                    <Spacing left={Spacing.sizes.SM}>
+                        <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />
+                    </Spacing>
+                </FlexRow>,
                 <NavMenu
                     iconName="account"
                     items={[
@@ -173,83 +228,127 @@ export default function PingFedAdminTemplate() {
                     onItemClick={(item) => console.log(item)}
                 />,
             ]}
+            isFullscreen
             navTree={tree}
         >
-            <NavCard>
-                <QuickActions.Section
-                    title={
-                        <>
-                            Shortcuts
-                            <QuickActions.EditButton
-                                onClick={() => console.log("Edit button clicked")}
-                            />
-                        </>
-                    }
+            <ContentArea className="my-custom-navframe-content">
+                <FlexRow
+                    alignment={alignments.STRETCH}
+                    flexDirection={flexDirectionOptions.COLUMN}
+                    spacing={spacingOptions.MD}
                 >
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="SP Connections"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="Signing Certificates"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="OAuth Authorization Server Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="Metadata Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="SMS Provider Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="SMS Provider Settings"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                </QuickActions.Section>
-                <QuickActions.Divider />
-                <QuickActions.Section
-                    title={
-                        <>
-                            Helpful Links
-                            <QuickActions.EditButton
-                                onClick={() => console.log("Edit button clicked")}
+                    <NavCard className="my-custom-navcard" invertColor>
+                        <FlexRow
+                            alignment={alignments.STRETCH}
+                            spacing={spacingOptions.MD}
+                        >
+                            <QuickActions.Section
+                                title={
+                                    <>
+                                Shortcuts
+                                        <QuickActions.EditButton
+                                            invertColor
+                                            onClick={() => console.log("Edit button clicked")}
+                                        />
+                                    </>
+                                }
+                            >
+                                <QuickActions.Action
+                                    label="IdP Connection"
+                                    iconName="pf-authentication-integration"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="SP Connections"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="Signing Certificates"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="OAuth Authorization Server Settings"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="Metadata Settings"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="SMS Provider Settings"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="SMS Provider Settings"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                            </QuickActions.Section>
+                            <QuickActions.Divider />
+                            <QuickActions.Section
+                                title={
+                                    <>
+                                Helpful Links
+                                        <QuickActions.EditButton
+                                            invertColor
+                                            onClick={() => console.log("Edit button clicked")}
+                                        />
+                                    </>
+                                }
+                            >
+                                <QuickActions.Action
+                                    label="IdP Connection"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="IdP Connection"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                                <QuickActions.Action
+                                    label="IdP Connection"
+                                    iconName="globe"
+                                    onClick={() => console.log("Action clicked")}
+                                />
+                            </QuickActions.Section>
+                        </FlexRow>
+                    </NavCard>
+                    <NavCard>
+                        <FlexRow
+                            alignment={alignments.STRETCH}
+                            flexDirection={flexDirectionOptions.COLUMN}
+                            spacing={spacingOptions.SM}
+                        >
+                            <Title align="center">Cluster Node Groups</Title>
+                            <NodeGroup
+                                clusterWidth={300}
+                                data-id="demo-node-group"
+                                nodeClusters={[
+                                    {
+                                        label: "Pantheon",
+                                        nodes: makeNodes(3, "first-")
+                                    },
+                                    {
+                                        label: "MilkyWay",
+                                        nodes: makeNodes(2, "-second")
+                                    },
+                                    {
+                                        label: "Mars",
+                                        nodes: makeNodes(15, "-third")
+                                    }
+                                ]}
+                                onNodeClick={(id, e, node) => console.log("Node clicked!", id, e, node)}
                             />
-                        </>
-                    }
-                >
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                    <QuickActions.Action
-                        label="IdP Connection"
-                        iconName="globe"
-                        onClick={() => console.log("Action clicked")}
-                    />
-                </QuickActions.Section>
-            </NavCard>
+                        </FlexRow>
+                    </NavCard>
+                </FlexRow>
+            </ContentArea>
         </NavFrame>
     );
 }

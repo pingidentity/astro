@@ -153,8 +153,9 @@ class WizardDemo extends React.Component {
                                 onCancel: this._closeSaveTooltip,
                                 open: this.state.showSaveTooltip,
                             }}
+                            showEdit={false}
                         >
-                            Step 1 content goes here.
+                            Step 1 content goes here. You can't edit this step afterward.
                         </Step>
                         <Step title="Wizard 1 - Step 2" cancelTooltip={cancelTooltipParams}>
                             Step 2 content goes here.

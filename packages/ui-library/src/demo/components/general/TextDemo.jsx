@@ -53,6 +53,11 @@ const TextDemo = () => {
                 <Text align={Text.alignments.CENTER}>Centered</Text>
                 <Text align={Text.alignments.RIGHT}>Right-aligned</Text>
             </PageSection>
+            <PageSection title="Text Weights">
+                <Text>Normal</Text>
+                <Text weight={Text.weights.BOLD}>Bold</Text>
+                <Text weight={Text.weights.BOLD_ON_HOVER}>Bold on hover</Text>
+            </PageSection>
         </div>
     );
 };

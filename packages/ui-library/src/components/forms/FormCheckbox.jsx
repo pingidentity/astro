@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import FormError from "./FormError";
 import FormLabel from "./FormLabel";
+import KeyboardUtils from "../../util/KeyboardUtils";
 import { defaultRender } from "../../util/PropUtils";
 import { InputWidthProptypes, getInputWidthClass } from "./InputWidths";
 
@@ -78,7 +79,7 @@ import classnames from "classnames";
  *         onChange={this._changeCallback}
  *     />
  */
-class FormCheckbox extends React.Component {
+class FormCheckboxBase extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         checked: PropTypes.bool,
@@ -220,4 +221,6 @@ class FormCheckbox extends React.Component {
     }
 }
 
-module.exports=FormCheckbox;
+const FormCheckbox = KeyboardUtils.withFocusOutline(FormCheckboxBase);
+
+module.exports = FormCheckbox;

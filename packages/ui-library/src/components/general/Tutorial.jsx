@@ -178,7 +178,7 @@ export default class Tutorial extends React.Component {
 
         /* istanbul ignore if  */
         if (prevSpotlight !== undefined) {
-            prevSpotlight.remove();
+            prevSpotlight.parentNode.removeChild(prevSpotlight);
         }
 
         if (prevProps.active !== this.props.active &&
@@ -205,7 +205,7 @@ export default class Tutorial extends React.Component {
                 }
 
                 // Add clone by existing element to preserve contextual styles
-                document.body.append(lightbox);
+                document.body.appendChild(lightbox);
             }
         }
     }

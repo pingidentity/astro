@@ -1,6 +1,25 @@
 @import 'general/page-header';
 @import 'general/formatted-content';
 
+.text-weight {
+
+    &--normal {
+        font-weight: normal;
+    }
+
+    &--bold {
+        // Text shadow used in place of font-weight to eliminate text changing size when bold
+        text-shadow: 0 0 0.65px #333, 0 0 0.65px #333;
+    }
+
+    &--hover {
+
+        &:hover {
+            text-shadow: 0 0 0.65px #333, 0 0 0.65px #333;
+        }
+    }
+}
+
 .content-link {
     line-height: inherit;
     a {

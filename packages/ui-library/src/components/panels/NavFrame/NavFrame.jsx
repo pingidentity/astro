@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { noop } from "underscore";
 import NavHeader from "./NavHeader";
@@ -198,6 +198,7 @@ export default function NavFrame({
     } = navTree.find(({ id }) => id === selectedHeader) || {};
 
     const [collapsedState, setCollapsed] = useState(true);
+    useEffect(() => selectedNode && setCollapsed(false), [selectedNode]);
 
     return (
         <div className="nav-frame" data-id={dataId}>

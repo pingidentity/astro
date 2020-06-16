@@ -4,6 +4,40 @@
         padding: 15px;
         flex-basis: 115px;
         text-align: center;
+
+        // Needed for IE. Quick Actions will overflow container otherwise.
+        max-width: 50%;
+    }
+
+    &__action-card--inverted & {
+        &__action-icon-base {
+            background-color: $color-midnight;
+        }
+
+        &__action-icon {
+            color: $color-white;
+        }
+
+        &__action-label.text-normal-case-label {
+            color: $color-midnight;
+        }
+
+        &__edit-button.button.inline {
+            &:hover {
+                border-color: $color-midnight;
+
+                .button__icon {
+                    color: $color-midnight;
+                }
+            }
+        }
+
+        &__divider {
+            border-left-color: $color-midnight;
+
+            // Consistency with the other 50% width IE fix above.
+            max-width: 50%;
+        }
     }
 
     &__action-icon-base {
@@ -14,6 +48,7 @@
         width: 50px;
         height: 50px;
     }
+
     &__action-icon {
         color: $color-midnight;
         display: table-cell;
@@ -34,31 +69,53 @@
         color: $color-white;
     }
 
-    &__edit-button.button.inline {
-        background-color: transparent;
-        border: 1px solid $color-strong-neutral-60;
-        margin-left: $spacing-sm;
-        height: 18px;
-        width: 18px;
-        min-width: 18px;
+    &__edit-button {
+        &.button.inline {
+            background-color: transparent;
+            border: 1px solid $color-strong-neutral-60;
+            margin-left: $spacing-sm;
+            height: 18px;
+            width: 18px;
+            min-width: 18px;
 
-        &:hover {
-            border-color: $color-white;
+            &:hover {
+                border-color: $color-white;
+
+                .button__icon {
+                    color: $color-white;
+                }
+            }
 
             .button__icon {
-                color: $color-white;
+                color: $color-strong-neutral-60;
+                font-size: 10px;
             }
         }
 
-        .button__icon {
-            color: $color-strong-neutral-60;
-            font-size: 10px;
+        &--inverted.button.inline {
+            border-color: $color-midnight;
+
+            &:hover {
+                border-color: $color-blue-grey;
+
+                .button__icon {
+                    color: $color-blue-grey;
+                }
+            }
+
+            .button__icon {
+                color: $color-midnight;
+            }
         }
     }
 
     &__divider {
-        border-left: 1px dotted $color-white;
+        border-left: 1px dashed $color-white;
         margin-top: 57px;
         margin-bottom: 10px;
+
+        &--inverted {
+            border-left-color: $color-midnight;
+        }
     }
 }

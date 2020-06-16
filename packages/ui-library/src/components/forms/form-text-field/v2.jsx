@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 import FormLabel, { labelProps, passLabelProps } from "../FormLabel";
 import FormMessage from "../FormMessage";
-import { InputWidths, InputWidthProptypes, getInputWidthClass } from "../InputWidths";
+import { InputWidths, InputWidthProptypesAuto, getInputWidthClass } from "../InputWidths";
 import Translator from "../../../util/i18n/Translator.js";
 
 import _ from "underscore";
@@ -264,7 +264,7 @@ class Stateless extends React.Component {
         showUndo: PropTypes.bool,
         size: PropTypes.number,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        width: PropTypes.oneOf(InputWidthProptypes),
+        width: PropTypes.oneOf(InputWidthProptypesAuto),
         withArrow: PropTypes.bool,
         ...labelProps,
     };
@@ -351,11 +351,11 @@ class Stateless extends React.Component {
         }
     };
 
-    _handleFocus = () => {
+    _handleFocus = (e) => {
         if (this.props.selectOnFocus && this.refs[this.props["data-id"] + "-input"]) {
             this.selectField();
         }
-        this.props.onFocus();
+        this.props.onFocus(e);
     };
 
     selectField = /* istanbul ignore next */ () => {
@@ -521,7 +521,6 @@ class Stateless extends React.Component {
                         onKeyDown={this.props.onKeyDown}
                         onMouseDown={this.props.onMouseDown}
                         onChange={this._handleFieldChange}
-                        onPaste={this._handleFieldChange}
                         placeholder={this.props.placeholder}
                         ref={dataId + "-input"}
                         readOnly={this.props.readOnly}

@@ -92,6 +92,7 @@ import { createCustomEvent } from "../../../util/Utils";
  *      data-id="page-messages"
  *      onRemoveMessage={this._handleRemoveMessage} />
  *
+ * @see {@link module:MessagesActions} for documentation on interacting with the Messages reducer.
  */
 
 module.exports = class extends React.Component {

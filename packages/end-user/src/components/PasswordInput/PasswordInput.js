@@ -16,6 +16,17 @@ export const textInputTypes = {
 };
 
 /**
+ * @enum {string}
+ * @alias PasswordInput~passwordInputTypes
+ * @desc Enum for the different types of password input styling
+ */
+export const passwordInputTypes = {
+    DEFAULT: 'default',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
+
+/**
  * Hidden input field
  */
 const PasswordInput = ({
@@ -64,6 +75,7 @@ const PasswordInput = ({
                 onMouseDown={onMouseDown}
                 placeholder={placeholder}
                 type="password"
+                key="passwordinput"
                 defaultValue={defaultValue}
                 data-id={dataId}
             />
@@ -128,6 +140,10 @@ PasswordInput.propTypes = {
      * Sets the success state of the PasswordInput if enabled
      */
     success: PropTypes.bool,
+    /**
+     * Determines the styling of the input
+     */
+    type: PropTypes.oneOf(Object.values(passwordInputTypes)),
 };
 
 PasswordInput.defaultProps = {
@@ -138,6 +154,8 @@ PasswordInput.defaultProps = {
     onKeyDown: noop,
     onKeyPress: noop,
     onMouseDown: noop,
+    type: passwordInputTypes.DEFAULT,
 };
 
+PasswordInput.passwordInputTypes = passwordInputTypes;
 export default PasswordInput;

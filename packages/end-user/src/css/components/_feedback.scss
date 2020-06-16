@@ -13,6 +13,10 @@
     @extend %icon-pair__label;
 }
 
+.feedback--alert {
+    color: $color-warning-yellow;
+}
+
 .feedback--error {
     color: $color-critical-red;
 }

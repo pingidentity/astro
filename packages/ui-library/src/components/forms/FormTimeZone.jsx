@@ -131,6 +131,12 @@ var getZoneNameDisplayValue = function (zoneName) {
 */
 
 /**
+ * @callback FormTimeZone~onBlur
+ * @param {object} e
+ *     The ReactJS synthetic event object.
+ */
+
+/**
 * @class FormTimeZone
 * @desc Input for selecting a time zone
 *
@@ -194,6 +200,8 @@ var getZoneNameDisplayValue = function (zoneName) {
 *     When not provided, the component will manage this value.
 * @param {FormTimeZone~setOpen} setOpen
 *     Callback that will be triggered when the open state is set directly
+* @param {FormTimeZone~onBlur} [onBlur]
+*     Callback to be triggered when the field loses focus (is blurred).
 *
 * @example
 *     <FormTimeZone
@@ -245,6 +253,7 @@ class TimeZoneStateless extends React.Component {
         selectLabel: PropTypes.string,
         selectedIndex: PropTypes.number,
         value: PropTypes.string,
+        onBlur: PropTypes.func,
     };
 
     static defaultProps = {
@@ -266,6 +275,7 @@ class TimeZoneStateless extends React.Component {
         selectLabel: LABEL_DEFAULTS["SELECT-TIME-ZONE"],
         selectedIndex: -1,
         value: moment.tz.guess(),
+        onBlur: _.noop,
     };
 
     state = {
@@ -617,6 +627,7 @@ class TimeZoneStateless extends React.Component {
                             onValueChange={this._onSearch}
                             onKeyDown={this._onKeyDown}
                             onClear={this._clearSearchString}
+                            onBlur={this.props.onBlur}
                             ref="searchString"
                             autoFocus
                         />

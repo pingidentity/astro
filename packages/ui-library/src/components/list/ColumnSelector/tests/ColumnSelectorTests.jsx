@@ -316,7 +316,7 @@ describe("ColumnSelector", () => {
     });
 
     it("sorts rows using customSort function", () => {
-        const sort = ({ id: idA }, { id: idB }) => idA > idB;
+        const sort = ({ id: idA }, { id: idB }) => idA > idB ? 1 : -1;
         const options = [
             {
                 id: "second",
