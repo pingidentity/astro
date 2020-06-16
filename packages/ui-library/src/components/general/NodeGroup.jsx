@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
 import classnames from "classnames";
+import uuid from "uuid";
 import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
 import * as NodeField from "./NodeField";
 
@@ -58,14 +59,17 @@ export default function NodeGroup({
                 justify={nodeClusters.length === 1 ? justifyOptions.CENTER : justifyOptions.SPACEBETWEEN}
             >
                 {nodeClusters.flatMap(({ label, nodes }, index) => {
+                    // Generate a new key when nodes change.
+                    const key = useMemo(uuid, [nodes]);
                     return [
                         <NodeField.Container
                             bottomContent={
-                                label !== undefined
+                                // Specific ask from the Ping Fed team not to have 0 count as false here.
+                                label !== undefined && label !== null && label !== ""
                                     ? <NodeField.Label>{label}</NodeField.Label>
                                     : <div className="node-field__label-placeholder" />
                             }
-                            key={label}
+                            key={key}
                         >
                             <NodeField.default
                                 // The tooltip shows every node in a cluster if that cluster has 3 or less
@@ -84,7 +88,9 @@ export default function NodeGroup({
                                 width={clusterWidth}
                             />
                         </NodeField.Container>,
-                        ...index < (nodeClusters.length - 1) ? [<div className="node-group__divider" />] : []
+                        ...index < (nodeClusters.length - 1)
+                            ? [<div className="node-group__divider" key={`divider-${index}`} />]
+                            : []
                     ];
                 })}
                 {selectedNode &&
