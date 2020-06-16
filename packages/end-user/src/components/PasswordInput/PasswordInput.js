@@ -6,17 +6,6 @@ import FieldMessage from '../FieldMessage'
 
 /**
  * @enum {string}
- * @alias TextInput~textInputTypes
- * @desc Enum for the different types of text input styling
- */
-export const textInputTypes = {
-    PRIMARY: 'primary',
-    ERROR: 'error',
-    SUCCESS: 'success',
-};
-
-/**
- * @enum {string}
  * @alias PasswordInput~passwordInputTypes
  * @desc Enum for the different types of password input styling
  */
@@ -46,14 +35,14 @@ const PasswordInput = ({
     onMouseDown,
 }) => {
     const classNames = classnames('text-input', className, {
-        'text-input--error': type === textInputTypes.ERROR,
-        'text-input--success': type === textInputTypes.SUCCESS,
-        'text-input--primary': type === textInputTypes.PRIMARY,
+        'text-input--error': type === passwordInputTypes.ERROR,
+        'text-input--success': type === passwordInputTypes.SUCCESS,
+        'text-input--default': type === passwordInputTypes.DEFAULT,
     });
 
     const iconClassNames = classnames('text-input__icon', {
-        'text-input__icon--error': type === textInputTypes.ERROR,
-        'text-input__icon--success': type === textInputTypes.SUCCESS,
+        'text-input__icon--error': type === passwordInputTypes.ERROR,
+        'text-input__icon--success': type === passwordInputTypes.SUCCESS,
     });
 
     return (
