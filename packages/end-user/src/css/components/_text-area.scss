@@ -1,0 +1,32 @@
+.text-area {
+    @extend %input-text;
+    @extend %input-box;
+
+    &:focus {
+        border-color: $input-focus-border-color;
+    }
+
+    &::placeholder {
+        @extend %placeholder-text;
+    }
+
+    &--error, &--error:focus {
+        border-color: $color-critical-red;
+
+        background-color: $color-white;
+
+        padding-right: $spacing-xl;
+    }
+
+    &--success {
+        background-color: $color-white;
+
+        border-color: $color-success-green;
+
+        padding-right: $spacing-xl;
+    }
+
+    &--no-resize {
+        resize: none;
+    }
+}
