@@ -7,6 +7,7 @@
     &__content {
         min-height: 0;
         overflow: auto;
+        overflow-x: hidden;
     }
 
     &__top-shadow,
