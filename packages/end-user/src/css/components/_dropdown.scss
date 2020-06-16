@@ -16,6 +16,56 @@ $caret-height: 16px;
     }
 }
 
+@mixin caret-with-icon {
+    &:after {
+        font-family: $icon-font;
+        content: $pingicon-dropdown-arrow;
+        font-size: 13px;
+        line-height: 13px;
+        position: absolute;
+        right: $spacing-sm;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 16px;
+        width: 16px;
+        pointer-events: none;
+        margin-right: 25px;
+    }
+}
+
+@mixin field-message-caret {
+    &:after {
+        font-family: $icon-font;
+        content: $pingicon-dropdown-arrow;
+        font-size: 13px;
+        line-height: 13px;
+        position: absolute;
+        right: $spacing-sm;
+        top: 26%;
+        transform: translateY(-50%);
+        height: 16px;
+        width: 16px;
+        pointer-events: none;
+    }
+}
+
+@mixin field-message-caret-with-icon {
+    &:after {
+        font-family: $icon-font;
+        content: $pingicon-dropdown-arrow;
+        font-size: 13px;
+        line-height: 13px;
+        position: absolute;
+        right: $spacing-sm;
+        top: 26%;
+        transform: translateY(-50%);
+        height: 16px;
+        width: 16px;
+        pointer-events: none;
+        margin-right: 25px;
+    }
+}
+
 @mixin rotate-caret {
     &:after {
         transform: translateY(-50%) rotate(180deg);
@@ -31,7 +81,21 @@ $caret-height: 16px;
 
     position: relative;
 
-    @include caret;
+    &--standard {
+        @include caret;
+    }
+
+    &--with-message {
+        @include field-message-caret;
+    }
+
+    &--with-status-icon {
+        @include caret-with-icon;
+    }
+
+    &--with-icon-and-message {
+        @include field-message-caret-with-icon;
+    }
 
     &--open {
         @include rotate-caret;
@@ -48,6 +112,18 @@ $caret-height: 16px;
 
         cursor: pointer;
         padding-right: $caret-height + $spacing-sm + $spacing-sm;
+
+        &--error {
+            border-color: $color-critical-red;
+
+            background-color: $color-white;
+        }
+
+        &--success {
+            border-color: $color-success-green;
+
+            background-color: $color-white;
+        }
     }
 
     &__select {
@@ -154,6 +230,35 @@ $caret-height: 16px;
         }
         .dropdown__close {
             display: none;
+        }
+    }
+}
+
+.dropdown__icon {
+    font-family: $icon-font;
+    font-size: 16px;
+    line-height: 16px;
+    text-transform: none;
+    position: relative;
+    width: 100%;
+
+    &::before {
+        position: absolute;
+        right: $spacing-md;
+        top: calc(45px * 0.5 - (16px / 2));
+    }
+
+    &--error {
+        &::before {
+            content: $pingicon-error-triangle;
+            color: $color-critical-red;
+        }
+    }
+
+    &--success {
+        &::before {
+            content: $pingicon-success-round;
+            color: $color-success-green;
         }
     }
 }

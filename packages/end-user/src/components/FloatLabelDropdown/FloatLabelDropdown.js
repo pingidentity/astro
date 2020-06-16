@@ -4,6 +4,17 @@ import classnames from 'classnames';
 import Dropdown from '../Dropdown';
 
 /**
+ * @enum {string}
+ * @alias Droppdown~dropdownStatuses
+ * @desc Enum for the different types of text input styling
+ */
+export const dropdownStatuses = {
+    INFO: 'info',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
+
+/**
  * Dropdown with a FloatLabel
  */
 const FloatLabelDropdown = ({
@@ -32,6 +43,14 @@ const FloatLabelDropdown = ({
 };
 
 FloatLabelDropdown.propTypes = {
+    /**
+     * Sets field message
+     */
+    fieldMessage: PropTypes.node,
+    /**
+     * Determines the styling of the input
+     */
+    status: PropTypes.oneOf(Object.values(dropdownStatuses)),
     /**
      * The label for the Dropdown
      */

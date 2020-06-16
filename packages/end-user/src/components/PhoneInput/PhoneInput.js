@@ -9,6 +9,18 @@ import GenericStateContainer from '../../util/GenericStateContainer';
 import DropdownCustomSearchable from "../DropdownCustomSearchable";
 
 /**
+ * @enum {string}
+ * @alias PhoneInput~phoneInputStatuses
+ * @desc Enum for the different types of text input styling
+ */
+
+export const phoneInputStatuses = {
+    PRIMARY: 'primary',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
+
+/**
  * @class PhoneInput
  * @description A component for inputting a country code and number
  * @param {string} [data-id='phone-input']
@@ -35,6 +47,9 @@ const PhoneInputStateless = ({
     country: countryName,
     phoneNumber,
     placeholder,
+    status,
+    fieldMessage,
+    fieldMessageProps,
     dialCodeSearchValue,
     onCountryChange,
     onSearchValueChange,
@@ -70,6 +85,7 @@ const PhoneInputStateless = ({
                     onSearchValueChange={onSearchValueChange}
                     open={dropdownOpen}
                     onToggle={setOpen}
+                    status={status}
                 />
             </div>
             <div className="phone-input__number">
@@ -78,6 +94,9 @@ const PhoneInputStateless = ({
                     onChange={e => onPhoneNumberValueChange(e.target.value, e)}
                     placeholder={placeholder}
                     format={textInputFormats.NUMERIC}
+                    type={status}
+                    fieldMessage={fieldMessage}
+                    fieldMessageProps={fieldMessageProps}
                 />
             </div>
         </div>

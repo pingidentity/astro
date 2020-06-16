@@ -9,6 +9,37 @@
         max-width: 50%;
     }
 
+    &__action-card--inverted & {
+        &__action-icon-base {
+            background-color: $color-midnight;
+        }
+
+        &__action-icon {
+            color: $color-white;
+        }
+
+        &__action-label.text-normal-case-label {
+            color: $color-midnight;
+        }
+
+        &__edit-button.button.inline {
+            &:hover {
+                border-color: $color-midnight;
+
+                .button__icon {
+                    color: $color-midnight;
+                }
+            }
+        }
+
+        &__divider {
+            border-left-color: $color-midnight;
+
+            // Consistency with the other 50% width IE fix above.
+            max-width: 50%;
+        }
+    }
+
     &__action-icon-base {
         display: inline-block;
         background-color: $color-white;
@@ -60,11 +91,31 @@
                 font-size: 10px;
             }
         }
+
+        &--inverted.button.inline {
+            border-color: $color-midnight;
+
+            &:hover {
+                border-color: $color-blue-grey;
+
+                .button__icon {
+                    color: $color-blue-grey;
+                }
+            }
+
+            .button__icon {
+                color: $color-midnight;
+            }
+        }
     }
 
     &__divider {
         border-left: 1px dashed $color-white;
         margin-top: 57px;
         margin-bottom: 10px;
+
+        &--inverted {
+            border-left-color: $color-midnight;
+        }
     }
 }

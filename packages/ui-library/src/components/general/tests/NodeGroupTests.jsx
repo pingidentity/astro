@@ -228,38 +228,6 @@ describe("NodeGroup", () => {
         expect(component.find("Label").exists()).toEqual(false);
     });
 
-    it("doesn't render label if label is null", () => {
-        const component = mount(
-            <NodeGroup
-                {...defaultProps}
-                label={null}
-                nodeClusters={[
-                    {
-                        nodes: makeNodes(3, "first-")
-                    }
-                ]}
-            />
-        );
-
-        expect(component.find("Label").exists()).toEqual(false);
-    });
-
-    it("doesn't render label if label is empty string", () => {
-        const component = mount(
-            <NodeGroup
-                {...defaultProps}
-                label=""
-                nodeClusters={[
-                    {
-                        nodes: makeNodes(3, "first-")
-                    }
-                ]}
-            />
-        );
-
-        expect(component.find("Label").exists()).toEqual(false);
-    });
-
     it("justifies the clusters to the center when there's only one", () => {
         const component = getComponent({
             nodeClusters: [

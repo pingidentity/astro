@@ -13,13 +13,16 @@ export const Default = () => (<React.Fragment>
     <TextInput
         placeholder="Error"
         type={textInputTypes.ERROR}
+        fieldMessage='asdf'
     />
     <TextInput
         placeholder="Success"
         type={textInputTypes.SUCCESS}
+        fieldMessage='asdf'
     />
     <TextInput
         placeholder="Primary"
         type={textInputTypes.PRIMARY}
+        fieldMessage='asdf'
     />
 </React.Fragment>);

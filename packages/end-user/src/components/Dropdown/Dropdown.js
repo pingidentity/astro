@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import FieldMessage from '../FieldMessage'
 
 import { inStateContainer } from '../../util/StateContainer';
 
@@ -8,27 +9,57 @@ const getValue = option => (option.value ? option.value : option);
 const getLabel = option => (option.label ? option.label : option);
 
 /**
+ * @enum {string}
+ * @alias Droppdown~dropdownStatuses
+ * @desc Enum for the different types of text input styling
+ */
+
+export const dropdownStatuses = {
+    DEFAULT: 'default',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
+/**
  * Toggle between options
  */
 export const StatelessDropdown = ({
     children,
     className,
-    error,
+    fieldMessage,
+    fieldMessageProps,
     id,
     selectClassName = '',
     onChange,
     options,
     placeholder,
+    status,
     value,
     'data-id': dataId,
 }) => {
     const classNames = classnames('dropdown', className, {
-        'dropdown--error': error,
+        'dropdown--with-icon-and-message': fieldMessage && status === dropdownStatuses.ERROR || fieldMessage && status === dropdownStatuses.SUCCESS,
+        'dropdown--with-status-icon': !fieldMessage && status === dropdownStatuses.ERROR || !fieldMessage && status === dropdownStatuses.SUCCESS,
+        'dropdown--with-message': fieldMessage && status === dropdownStatuses.DEFAULT,
+        'dropdown--standard': !fieldMessage && status === dropdownStatuses.DEFAULT,
     });
-    const selectClassNames = classnames('dropdown__select', selectClassName);
+    const selectClassNames = classnames('dropdown__select', selectClassName, {
+        'dropdown__select--error': status === dropdownStatuses.ERROR,
+        'dropdown__select--success': status === dropdownStatuses.SUCCESS,
+        'dropdown__select--info': status === dropdownStatuses.DEFAULT,
+    });
+
+    const iconClassNames = classnames('text-input__icon', {
+        'text-input__icon--error': status === dropdownStatuses.ERROR,
+        'text-input__icon--success': status === dropdownStatuses.SUCCESS,
+    });
 
     return (
         <div className={classNames} data-id={dataId}>
+        {
+            status === 'success' || status === 'error' 
+                ? <div className={iconClassNames} key="type-icon"></div>
+                : null
+        }
             <select
                 id={id}
                 name={id}
@@ -47,6 +78,14 @@ export const StatelessDropdown = ({
                 ))}
             </select>
             {children}
+            {fieldMessage && (
+                <FieldMessage
+                    status={status}
+                    {...fieldMessageProps}
+                >
+                    {fieldMessage}
+                </FieldMessage>
+            )}
         </div>
     );
 };
@@ -61,9 +100,13 @@ StatelessDropdown.propTypes = {
      */
     'data-id': PropTypes.string,
     /**
-     * Sets the error state of the Dropdown
+     * Sets field message
      */
-    error: PropTypes.bool,
+    fieldMessage: PropTypes.node,
+    /**
+     * Determines the styling of the input
+     */
+    status: PropTypes.oneOf(Object.values(dropdownStatuses)),
     /**
      * Sets the ID prop of the Dropdown select
      */
@@ -98,6 +141,7 @@ StatelessDropdown.propTypes = {
 
 StatelessDropdown.defaultProps = {
     options: [],
+    status: dropdownStatuses.DEFAULT,
     value: '',
     'data-id': 'dropdown',
 };

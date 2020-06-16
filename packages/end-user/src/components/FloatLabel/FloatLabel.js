@@ -62,6 +62,7 @@ const FloatLabel = ({
 };
 
 FloatLabel.propTypes = {
+    fieldMessage: PropTypes.node,
     label: PropTypes.string,
     id: PropTypes.string,
     InputType: PropTypes.func,

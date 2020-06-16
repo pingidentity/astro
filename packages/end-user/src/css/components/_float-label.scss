@@ -69,6 +69,7 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
     }
 
     .float-label__label {
+        margin-top: $input-padding-vertical + 1px;
         @extend %input-text;
         font-weight: $input-font-weight;
         text-transform: none;

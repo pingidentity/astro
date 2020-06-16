@@ -14,15 +14,19 @@ export { default as Container, Title } from "../layout/NavCard";
  * @class Divider
  * @desc A divider to put between QuickActions.Section components.
  *
+ * @param {bool} [invertColor]
+ *   Whether the divider has its color inverted
  */
 
 
-export const Divider = ({ className }) => {
+export const Divider = ({ className, invertColor }) => {
 
     return (
         <div
             className={
-                classnames("quick-actions__divider", className)
+                classnames("quick-actions__divider", className, {
+                    "quick-actions__divider--inverted": invertColor
+                })
             }
         />
     );
@@ -38,6 +42,8 @@ export const Divider = ({ className }) => {
  *   A data-id test hook applied at the root element.
  * @param {string} iconName
  *   The name of the icon for the action.
+ * @param {bool} [invertColor]
+ *   Whether the action has its color inverted
  * @param {Object} [label]
  *   The label for the action.
  *
@@ -53,12 +59,17 @@ export const Action = ({
     className,
     "data-id": dataId,
     iconName,
+    invertColor,
     label,
     onClick
 }) => {
     return (
         <div
-            className={classnames("quick-actions__action-card", className)}
+            className={
+                classnames("quick-actions__action-card", className, {
+                    "quick-actions__action-card--inverted": invertColor
+                })
+            }
             data-id={dataId}
         >
             <div className="quick-actions__action-icon-base">
@@ -84,6 +95,7 @@ Action.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
     iconName: PropTypes.string.isRequired,
+    invertColor: PropTypes.bool,
     label: PropTypes.node,
     onClick: PropTypes.func
 };
@@ -101,6 +113,8 @@ Action.defaultProps = {
  *   A class name applied at the component's top level.
  * @param {string} [data-id]
  *   A data-id test hook applied at the root element.
+ * @param {bool} [invertColor]
+ *   Whether the edit button has its color inverted
  */
 
 /**
@@ -112,11 +126,14 @@ Action.defaultProps = {
 export const EditButton = ({
     className,
     "data-id": dataId,
+    invertColor,
     onClick,
 }) => {
     return (
         <Button
-            className={classnames("quick-actions__edit-button", className)}
+            className={classnames("quick-actions__edit-button", className, {
+                "quick-actions__edit-button--inverted": invertColor,
+            })}
             data-id={dataId}
             iconName="edit"
             inline
@@ -138,20 +155,27 @@ export const EditButton = ({
  *   up with a flex display, so multiple Quick Actions put into
  *   a separate container element and then passed as children here
  *   may not lay out as expected.
+ * @param {bool} [invertColor]
+ *   Whether the section has its color inverted
  * @param {Object} [title]
  *   The title for the section.
  *
  */
 
 export const Section = ({
-    children,
+    children: propsChildren,
     className,
     "data-id": dataId,
+    invertColor,
     title,
 }) => {
+    const children = React.Children.map(propsChildren, (child) => {
+        return React.cloneElement(child, { invertColor });
+    });
+
     return (
         <div className={classnames("quick-actions__section", className)} data-id={dataId}>
-            <Title>{title}</Title>
+            <Title invertColor={invertColor}>{title}</Title>
             <FlexRow
                 alignment={alignments.TOP}
                 className="quick-actions__section-actions"
@@ -166,5 +190,6 @@ export const Section = ({
 Section.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
+    invertColor: PropTypes.bool,
     title: PropTypes.node
 };

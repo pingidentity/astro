@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import _noop from 'lodash';
 import TextInput from '../TextInput';
+import FieldMessage from '../FieldMessage';
+
+/**
+ * @enum {string}
+ * @alias Droppdown~dropdownStatuses
+ * @desc Enum for the different types of text input styling
+ */
+
+export const dropdownStatuses = {
+    DEFAULT: 'default',
+    ERROR: 'error',
+    SUCCESS: 'success',
+};
 
 
 const getValue = option => (option.value ? option.value : option);
@@ -11,7 +24,8 @@ const getLabel = option => (option.label ? option.label : option);
 const DropdownCustomSearchable = ({
     children,
     className,
-    error,
+    fieldMessage,
+    fieldMessageProps,
     id,
     inputClassName,
     open,
@@ -19,16 +33,27 @@ const DropdownCustomSearchable = ({
     placeholder,
     searchPlaceholder,
     searchValue,
+    status,
     onSearchValueChange,
     value,
     onValueChange,
     onToggle
 }) => {
-    const classNames = classnames('dropdown  dropdown--search', className, {
-        'dropdown--error': error,
+    const classNames = classnames('dropdown dropdown--search', className, {
         'dropdown--open': open,
+        'dropdown--with-icon-and-message': fieldMessage && status === dropdownStatuses.ERROR || fieldMessage && status === dropdownStatuses.SUCCESS,
+        'dropdown--with-status-icon': !fieldMessage && status === dropdownStatuses.ERROR || !fieldMessage && status === dropdownStatuses.SUCCESS,
+        'dropdown--with-message': fieldMessage && status === dropdownStatuses.DEFAULT,
+        'dropdown--standard': !fieldMessage && status === dropdownStatuses.DEFAULT,
     });
+
+    const iconClassNames = classnames('text-input__icon', {
+        'text-input__icon--error': status === dropdownStatuses.ERROR,
+        'text-input__icon--success': status === dropdownStatuses.SUCCESS,
+    });
+
     const inputClassNames = classnames('dropdown__input', inputClassName);
+    
     const _onSearchValueChange = (e) => onSearchValueChange(e.target.value, e);
     const doOpen = () => {
         onToggle(true);
@@ -39,6 +64,11 @@ const DropdownCustomSearchable = ({
 
     return (
         <div className={classNames}>
+            {
+                status === 'success' || status === 'error'
+                    ? <div className={iconClassNames} key="type-icon"></div>
+                    : null
+            }
             <input
                 className={inputClassNames}
                 id={id}
@@ -89,6 +119,14 @@ const DropdownCustomSearchable = ({
                     </span>
                 </ul>
             )}
+            {fieldMessage && (
+                <FieldMessage
+                    status={status}
+                    {...fieldMessageProps}
+                >
+                    {fieldMessage}
+                </FieldMessage>
+            )}
         </div>
     );
 };
@@ -96,7 +134,7 @@ const DropdownCustomSearchable = ({
 DropdownCustomSearchable.propTypes = {
     id: PropTypes.string,
     inputClassName: PropTypes.string,
-    error: PropTypes.bool,
+    fieldMessage: PropTypes.string,
     open: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.string,
@@ -109,6 +147,7 @@ DropdownCustomSearchable.propTypes = {
     value: PropTypes.string,
     searchValue: PropTypes.string,
     searchPlaceholder: PropTypes.string,
+    status: PropTypes.oneOf(Object.values(dropdownStatuses)),
     onSearchValueChange: PropTypes.func,
     onValueChange: PropTypes.func,
     onToggle: PropTypes.func,
@@ -118,9 +157,9 @@ DropdownCustomSearchable.defaultProps = {
     open: false,
     options: [],
     placeholder: '',
-    error: false,
     searchPlaceholder: 'Search',
     searchValue: '',
+    status: dropdownStatuses.DEFAULT,
     onSearchValueChange: _noop,
     value: '',
     onValueChange: _noop,

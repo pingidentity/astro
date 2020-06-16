@@ -237,7 +237,7 @@ export default function PingFedAdminTemplate() {
                     flexDirection={flexDirectionOptions.COLUMN}
                     spacing={spacingOptions.MD}
                 >
-                    <NavCard className="my-custom-navcard">
+                    <NavCard className="my-custom-navcard" invertColor>
                         <FlexRow
                             alignment={alignments.STRETCH}
                             spacing={spacingOptions.MD}
@@ -247,6 +247,7 @@ export default function PingFedAdminTemplate() {
                                     <>
                                 Shortcuts
                                         <QuickActions.EditButton
+                                            invertColor
                                             onClick={() => console.log("Edit button clicked")}
                                         />
                                     </>
@@ -294,6 +295,7 @@ export default function PingFedAdminTemplate() {
                                     <>
                                 Helpful Links
                                         <QuickActions.EditButton
+                                            invertColor
                                             onClick={() => console.log("Edit button clicked")}
                                         />
                                     </>
@@ -329,7 +331,7 @@ export default function PingFedAdminTemplate() {
                                 data-id="demo-node-group"
                                 nodeClusters={[
                                     {
-                                        label: "",
+                                        label: "Pantheon",
                                         nodes: makeNodes(3, "first-")
                                     },
                                     {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
+import FieldMessage from '../FieldMessage'
 
 /**
  * @enum {string}
@@ -21,9 +22,9 @@ const PasswordInput = ({
     placeholder,
     id,
     className,
+    fieldMessage,
+    fieldMessageProps,
     type,
-    error = type === passwordInputTypes.ERROR,
-    success = type === passwordInputTypes.SUCCESS,
     defaultValue,
     'data-id': dataId,
     onChange,
@@ -34,45 +35,52 @@ const PasswordInput = ({
     onMouseDown,
 }) => {
     const classNames = classnames('text-input', className, {
-        'text-input--error': error,
-        'text-input--success': success,
+        'text-input--error': type === passwordInputTypes.ERROR,
+        'text-input--success': type === passwordInputTypes.SUCCESS,
+        'text-input--default': type === passwordInputTypes.DEFAULT,
     });
 
     const iconClassNames = classnames('text-input__icon', {
-        'text-input__icon--error': error,
-        'text-input__icon--success': success,
+        'text-input__icon--error': type === passwordInputTypes.ERROR,
+        'text-input__icon--success': type === passwordInputTypes.SUCCESS,
     });
 
-    return [
-        (
-            (success || error)
-                ? <div className={iconClassNames} key="type-icon"></div>
-                : null
-        ),
-        <input
-            className={classNames}
-            id={id}
-            name={id}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onKeyPress={onKeyPress}
-            onKeyDown={onKeyDown}
-            onMouseDown={onMouseDown}
-            placeholder={placeholder}
-            type="password"
-            key="passwordinput"
-            defaultValue={defaultValue}
-            data-id={dataId}
-        />
-    ];
+    return (
+        <div>
+            {
+                type === 'success' || type === 'error'
+                    ? <div className={iconClassNames} key="type-icon"></div>
+                    : null
+            }
+            <input
+                className={classNames}
+                id={id}
+                name={id}
+                onChange={onChange}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onKeyPress={onKeyPress}
+                onKeyDown={onKeyDown}
+                onMouseDown={onMouseDown}
+                placeholder={placeholder}
+                type="password"
+                key="passwordinput"
+                defaultValue={defaultValue}
+                data-id={dataId}
+            />
+            {fieldMessage && (
+                <FieldMessage
+                    status={type}
+                    {...fieldMessageProps}
+                >
+                    {fieldMessage}
+                </FieldMessage>
+            )}
+        </div>
+    );
 };
 
 PasswordInput.propTypes = {
-    /**
-     * Sets error state for the PasswordInput if enabled
-     */
-    error: PropTypes.bool,
     /**
      * Sets a data-id property on the PasswordInput to be used as a test hook
      */
@@ -81,6 +89,10 @@ PasswordInput.propTypes = {
      * Default value for the PasswordInput
      */
     defaultValue: PropTypes.string,
+    /**
+     * Sets field message
+     */
+    fieldMessage: PropTypes.node,
     /**
      * Sets the ID of the PasswordInput
      */

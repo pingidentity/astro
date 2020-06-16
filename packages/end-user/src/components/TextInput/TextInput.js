@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
+import FieldMessage from '../FieldMessage'
 
 /**
  * @enum {string}
@@ -38,6 +39,8 @@ const inputmodeByFormats = {
  *      The data-id attribute value applied to the input element.
  * @param {string|number} defaultValue
  *      The default value of the input
+ * @param {node} fieldMessage
+ *      The field message below the input
  * @param {TextInput~onChange} onChange
  *      The callback triggered when the input value changes.
  * @param {string} placeholder
@@ -64,6 +67,8 @@ const TextInput = ({
     type,
     value,
     width,
+    fieldMessage,
+    fieldMessageProps,
     format,
     autoFocus,
     useAutoComplete,
@@ -106,6 +111,14 @@ const TextInput = ({
             autoComplete={useAutoComplete ? 'on' : 'off'}
             {...inputmodeByFormats[format]}
         />,
+        fieldMessage && (
+            <FieldMessage
+                status={type}
+                {...fieldMessageProps}
+            >
+                {fieldMessage}
+            </FieldMessage>
+        )
     ];
 };
 
@@ -125,6 +138,10 @@ TextInput.propTypes = {
         PropTypes.number,
         PropTypes.string,
     ]),
+    /**
+     * Sets field message
+     */
+    fieldMessage: PropTypes.node,
     /**
      * ID to be applied to the TextInput
      */
@@ -177,6 +194,10 @@ TextInput.propTypes = {
     ]),
     /**
      * Type of value format the TextInput accepts
+     */
+    fieldMessage: PropTypes.node,
+    /**
+     * Message below field
      */
     format: PropTypes.oneOf(Object.values(textInputFormats)),
     /**

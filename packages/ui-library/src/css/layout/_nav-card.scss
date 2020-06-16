@@ -13,4 +13,10 @@
         font-size: 20px;
         color: $color-white;
     }
+
+    &--inverted & {
+        &__title.text-page-title {
+            color: $color-midnight;
+        }
+    }
 }
