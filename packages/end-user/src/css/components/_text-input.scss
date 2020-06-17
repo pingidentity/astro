@@ -28,7 +28,7 @@
         padding-right: $spacing-xl;
     }
 
-    &--default {
+    &--primary {
         @include primary-input-text;
 
         padding: $spacing-xs + 1px $spacing-sm $spacing-xs - 2px $spacing-sm;
