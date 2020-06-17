@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
+import FieldMessage from '../FieldMessage';
 
 /**
  * @enum {string}
@@ -51,6 +52,8 @@ const TextArea = ({
     onMouseDown,
     id,
     placeholder,
+    fieldMessage,
+    fieldMessageProps,
     isReadOnly,
     resize,
     type,
@@ -68,12 +71,12 @@ const TextArea = ({
         'text-input__icon--success': type === textAreaTypes.SUCCESS,
     });
 
-    return [
-        (
-            type === 'success' || type === 'error'
+    return (
+        <div style={{ width }}>
+            {type === 'success' || type === 'error'
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
-        ),
+            }
         <textarea
             className={classNames}
             data-id={dataId}
@@ -92,8 +95,17 @@ const TextArea = ({
             resize={resize.toString()}
             value={value}
             style={{ width, height }}
-        />,
-    ];
+        />
+        {fieldMessage && (
+            <FieldMessage
+                status={type}
+                {...fieldMessageProps}
+            >
+                {fieldMessage}
+            </FieldMessage>
+        )}
+        </div>
+    )
 };
 
 TextArea.propTypes = {
@@ -112,6 +124,10 @@ TextArea.propTypes = {
         PropTypes.number,
         PropTypes.string,
     ]),
+    /**
+     * Sets field message
+     */
+    fieldMessage: PropTypes.node,
     /**
      * Height of the TextArea
      */
@@ -188,7 +204,7 @@ TextArea.defaultProps = {
     onKeyDown: noop,
     onMouseDown: noop,
     isReadOnly: false,
-    resize: true
+    resize: true,
 };
 
 export default TextArea;
