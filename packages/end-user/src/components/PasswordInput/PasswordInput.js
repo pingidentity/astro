@@ -10,7 +10,7 @@ import FieldMessage from '../FieldMessage'
  * @desc Enum for the different types of password input styling
  */
 export const passwordInputTypes = {
-    DEFAULT: 'default',
+    PRIMARY: 'primary',
     ERROR: 'error',
     SUCCESS: 'success',
 };
@@ -37,7 +37,7 @@ const PasswordInput = ({
     const classNames = classnames('text-input', className, {
         'text-input--error': type === passwordInputTypes.ERROR,
         'text-input--success': type === passwordInputTypes.SUCCESS,
-        'text-input--default': type === passwordInputTypes.DEFAULT,
+        'text-input--primary': type === passwordInputTypes.PRIMARY,
     });
 
     const iconClassNames = classnames('text-input__icon', {
@@ -143,7 +143,6 @@ PasswordInput.defaultProps = {
     onKeyDown: noop,
     onKeyPress: noop,
     onMouseDown: noop,
-    type: passwordInputTypes.DEFAULT,
 };
 
 PasswordInput.passwordInputTypes = passwordInputTypes;
