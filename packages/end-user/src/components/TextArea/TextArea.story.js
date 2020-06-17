@@ -3,7 +3,7 @@ import TextArea from './TextArea';
 
 
 export default {
-    title: 'Components/Inputs/TextArea',
+    title: 'Components/Inputs/TextArea/Basic',
     component: TextArea,
 };
 
