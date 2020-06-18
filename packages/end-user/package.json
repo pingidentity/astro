@@ -22,7 +22,7 @@
     "react-color": "^2.18.0",
     "react-portal": "^4.2.0",
     "react-tooltip": "3.11.5",
-    "styled-components": "^4.3.2",
+    "styled-components": "^5.1.1",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
