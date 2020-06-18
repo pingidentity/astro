@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { noop } from 'underscore';
-import classnames from 'classnames';
 import Button from '../Button';
 import SocialLogos from '../../util/SocialLogo';
 
@@ -80,7 +80,7 @@ const brandTypes = {
 /**
  * Branded buttons
  */
-export const SocialButton = ({
+const UnstyledSocialButton = ({
     'data-id': dataId,
     disabled,
     onClick,
@@ -102,10 +102,6 @@ export const SocialButton = ({
         color,
     };
 
-    const socialButtonClassnames = classnames("social-button__button", {
-        "social-button__button--light-bg": branding.lightBg,
-    });
-
     return (
         <div className={className}>
             { !image ? (
@@ -114,7 +110,7 @@ export const SocialButton = ({
                     disabled={disabled}
                     render={({ children }) => (
                         <button
-                            className={socialButtonClassnames}
+                            className="social-button__button"
                             style={style}
                             onClick={onClick}
                             data-id={dataId}
@@ -144,7 +140,7 @@ export const SocialButton = ({
     );
 };
 
-SocialButton.propTypes = {
+UnstyledSocialButton.propTypes = {
     /**
      * Brand to display on the SocialButton (from brandingTypes)
      *
@@ -173,11 +169,93 @@ SocialButton.propTypes = {
     onClick: PropTypes.func,
 };
 
-SocialButton.defaultProps = {
+UnstyledSocialButton.defaultProps = {
     'data-id': 'social-button',
     disabled: false,
     onClick: noop,
 };
+
+const SocialButton = styled(UnstyledSocialButton)`
+    .social-button__container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .social-button__button {
+        border-radius: 2px;
+        border-style: solid;
+        font-size: 15px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: "proxima-nova", sans-serif;
+        height: 40px;
+        line-height: unset;
+        position: relative;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        padding: 1px 6px;
+
+        &::after {
+            content: "";
+            background-color: #CCC;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        &:hover {
+            &::after {
+                opacity: 0.1;
+            }
+        }
+
+        &:disabled {
+            cursor: unset;
+            &::after {
+                opacity: 0.2;
+            }
+        }
+    }
+
+    .social-button__logo {
+        flex: 1;
+        text-align: left;
+        display: flex;
+        align-items: center;
+    }
+
+    .social-button__label {
+        flex: 4;
+        text-align: center;
+    }
+
+    .social-button__spacer {
+        flex: 1;
+    }
+
+    .social-button__image-button {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        overflow: hidden;
+        cursor: pointer;
+
+        &:disabled {
+                cursor: unset;
+            &::after {
+                opacity: 0.2;
+            }
+        }
+    }
+`;
 
 SocialButton.BrandTypes = brandTypes;
 
