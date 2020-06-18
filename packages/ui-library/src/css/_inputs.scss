@@ -1322,7 +1322,7 @@ input[type=file] {
                 padding: 5px 0 0;
             }
 
-            &.disabled {
+            &--disabled {
                 cursor: default;
 
                 &:after {
@@ -1346,6 +1346,11 @@ input[type=file] {
                 display: block;
                 width: $img-width;
                 border: 1px solid $color-timberwolf;
+
+                &--disabled {
+                    opacity: $inactive-opacity;
+                    cursor: default;
+                }
             }
 
             &--default {

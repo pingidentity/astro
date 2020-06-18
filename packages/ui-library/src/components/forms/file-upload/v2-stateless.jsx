@@ -182,7 +182,7 @@ const ImagePreview = withFocusOutline(({
                 {...getClickableA11yProps(onClick)}
                 className={classnames(
                     "image-icon",
-                    { "disabled": disabled }
+                    { "image-icon--disabled": disabled }
                 )}
             />}
             <span
@@ -197,7 +197,10 @@ const ImagePreview = withFocusOutline(({
                 {isNode
                     ? src
                     : <img
-                        className="input-image-thumb__img"
+                        className={classnames(
+                            "input-image-thumb__img",
+                            { "input-image-thumb__img--disabled": disabled }
+                        )}
                         src={src}
                         data-id="imageThumb"
                         alt="Thumbnail"
