@@ -198,6 +198,13 @@ class ButtonsDemo extends Component {
                     label="Disabled with Help Hint"
                     disabledText="helphint"
                 />
+                <Button
+                    type={buttonTypes.PRIMARY}
+                    disabled={true}
+                    label="With Placement"
+                    disabledText="helphint"
+                    helpHintPlacement="bottom"
+                />
             </div>
         );
     }
