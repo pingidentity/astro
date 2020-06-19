@@ -43,6 +43,7 @@ const TextArea = ({
     'data-id': dataId,
     defaultValue,
     height,
+    name,
     onChange,
     onFocus,
     onBlur,
@@ -80,7 +81,7 @@ const TextArea = ({
             defaultValue={defaultValue}
             id={id}
             key='textarea'
-            name={id}
+            name={name ? name : id}
             onChange={onChange}
             onFocus={onFocus}
             onBlur={onBlur}
@@ -123,6 +124,10 @@ TextArea.propTypes = {
      * ID to be applied to the TextArea
      */
     id: PropTypes.string,
+    /**
+     * Name for the input
+     */
+    name: PropTypes.name,
     /**
      * The callback triggered when the input value changes
      */

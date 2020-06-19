@@ -65,6 +65,7 @@ const TextInput = ({
     id,
     placeholder,
     type,
+    name,
     value,
     width,
     fieldMessage,
@@ -95,7 +96,7 @@ const TextInput = ({
             data-id={dataId}
             defaultValue={defaultValue}
             id={id}
-            name={id}
+            name={name ? name : id}
             onChange={onChange}
             onFocus={onFocus}
             onBlur={onBlur}
@@ -146,6 +147,10 @@ TextInput.propTypes = {
      * ID to be applied to the TextInput
      */
     id: PropTypes.string,
+    /**
+     * Name for the input
+     */
+    name: PropTypes.string,
     /**
      * The callback triggered when the input value changes
      */
