@@ -129,6 +129,10 @@ TextArea.propTypes = {
      */
     fieldMessage: PropTypes.node,
     /**
+     * Sets field message props
+     */
+    fieldMessageProps: PropTypes.object,
+    /**
      * Height of the TextArea
      */
     height: PropTypes.oneOfType([
