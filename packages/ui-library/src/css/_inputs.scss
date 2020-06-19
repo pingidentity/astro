@@ -1323,7 +1323,11 @@ input[type=file] {
             }
 
             &--disabled {
-                cursor: default;
+                pointer-events: none;
+
+                &:before {
+                    opacity: $inactive-opacity;
+                }
 
                 &:after {
                     color: $color-rhino;
