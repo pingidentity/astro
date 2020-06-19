@@ -44,7 +44,10 @@ const buttonTypes = {
  * @param {boolean} [disabled=false]
  *     Button will not function when true.
  * @param {string} [disabledText]
- *     Text for the help hint will be rendered when the same button has a the prop disabled set to true.
+ *     Text for the help hint will be rendered when the same button has disabled prop set to true.
+ * @param {string} [helpHintPlacement="top"]
+ *     How to position the helphint when disabledText is provided. Options can be found here:
+ *     https://atomiks.github.io/tippyjs/v6/all-props/#placement
  * @param {string} [href]
  *     Pass in a string to give the button an href.
  * @param {string} [iconName]
@@ -131,6 +134,7 @@ function BaseButton ({
             disabled={disabled}
             type={submit ? "submit" : "button"}
             href={href}
+            role="button"
             target={target}
         >
             {iconName && <span className={`icon-${iconAlias(iconName)} button__icon`} />}
