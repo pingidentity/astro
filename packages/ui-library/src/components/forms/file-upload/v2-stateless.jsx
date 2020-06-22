@@ -139,7 +139,7 @@ export default class extends Component {
                     )}
                 </FormLabel>
 
-                {fileSelected &&
+                {fileSelected && !this.props.disabled &&
                     <div className="file-info">
                         <Filename
                             show={this.props.showFilename}
