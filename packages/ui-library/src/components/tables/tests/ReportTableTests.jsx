@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 import React from "react";
+import { render, screen } from "@testing-library/react";
 import ReactTestUtils from "react-dom/test-utils";
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 import TestUtils from "../../../testutil/TestUtils";
@@ -9,49 +10,53 @@ import ReportTable from "../ReportTable";
 
 jest.useFakeTimers();
 
+const mockData = {
+    cols: [
+        "name",
+        "age",
+        "city"
+    ],
+    data: [
+        [
+            "tom",
+            "25",
+            "denver"
+        ],
+        [
+            "jane",
+            "36",
+            "breckenridge"
+        ],
+        [
+            "roy",
+            "19",
+            "arvada"
+        ],
+        [
+            "sue",
+            "74",
+            "colorado springs"
+        ],
+        [
+            "amy",
+            "56",
+            "salida"
+        ]
+    ]
+};
+const defaultProps = {
+    "data-id": "report-table",
+    headData: mockData.cols,
+    bodyData: mockData.data,
+};
+const renderComponent = (props) => render(<ReportTable {...defaultProps} {...props} />);
 
 describe("ReportTable", function () {
-
-    var mockData = {
-        cols: [
-            "name",
-            "age",
-            "city"
-        ],
-        data: [
-            [
-                "tom",
-                "25",
-                "denver"
-            ],
-            [
-                "jane",
-                "36",
-                "breckenridge"
-            ],
-            [
-                "roy",
-                "19",
-                "arvada"
-            ],
-            [
-                "sue",
-                "74",
-                "colorado springs"
-            ],
-            [
-                "amy",
-                "56",
-                "salida"
-            ]
-        ]
-    };
-
     function getComponent (props) {
         props = _.defaults(props || {}, {
             "data-id": "drag-drop-table",
             headData: mockData.cols,
-            bodyData: mockData.data
+            bodyData: mockData.data,
         });
         return ReactTestUtils.renderIntoDocument(<ReportTable {...props} />);
     }
@@ -170,6 +175,56 @@ describe("ReportTable", function () {
         const component = getComponent({ fixedHead: true });
 
         expect(component.state.columnWidths.length).toBe(3);
+    });
+
+    it("sets widths when head data changes on component update", () => {
+        // Store original function
+        const original = global.HTMLElement.prototype.getBoundingClientRect;
+        const mock = jest.fn(() => ({ width: 100 }));
+        // Replace with mock
+        global.HTMLElement.prototype.getBoundingClientRect = mock;
+
+        const { rerender } = renderComponent({ fixedHead: true, headData: [] });
+        expect(mock).not.toHaveBeenCalled();
+
+        rerender(<ReportTable {...defaultProps} fixedHead />);
+        expect(mock).toHaveBeenCalledTimes(defaultProps.headData.length);
+        screen.getAllByRole("columnheader").forEach((header) => {
+            expect(header).toHaveStyle({
+                "min-width": "100px",
+                "max-width": "100px",
+            });
+        });
+
+        // Restore original function
+        global.HTMLElement.prototype.getBoundingClientRect = original;
+    });
+
+    it("sets widths when head data objects change on component update", () => {
+        const stateSpy = jest.spyOn(ReportTable.prototype, "setState");
+        const gbcrSpy = jest.spyOn(global.HTMLElement.prototype, "getBoundingClientRect");
+        const headData = defaultProps.headData.map((content, index) => ({
+            content,
+            width: 100 * (index + 1),
+        }));
+        const { rerender } = renderComponent({ fixedHead: true, headData: [] });
+        expect(stateSpy).toHaveBeenNthCalledWith(1, { columnWidths: [] });
+        expect(gbcrSpy).not.toHaveBeenCalled();
+
+        rerender(<ReportTable {...defaultProps} fixedHead headData={headData} />);
+        expect(stateSpy).toHaveBeenNthCalledWith(2, { columnWidths: [100, 200, 300] });
+        expect(gbcrSpy).not.toHaveBeenCalled();
+        screen.getAllByRole("columnheader").forEach((header, index) => {
+            expect(header).toHaveStyle({
+                "min-width": `${100 * (index + 1)}px`,
+                "max-width": `${100 * (index + 1)}px`,
+            });
+        });
+
+        // Make sure it does a deep equality check to ensure setState is not called unneccessarily
+        rerender(<ReportTable {...defaultProps} fixedHead headData={[...headData]} />);
+        expect(stateSpy).toHaveBeenCalledTimes(2);
+        expect(gbcrSpy).not.toHaveBeenCalled();
     });
 
     it("handles headData with specific widths", () => {

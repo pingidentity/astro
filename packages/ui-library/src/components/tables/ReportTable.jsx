@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import InfiniteScroll from "../list/InfiniteScroll";
 import classnames from "classnames";
-import _ from "underscore";
+import _ from "lodash";
 import uuid from "uuid";
 import { defaultRender } from "../../util/PropUtils";
 
@@ -23,7 +23,7 @@ const Head = ({
     const suffixedId = fixed ? dataId + "-fixedHead" : dataId + "-Head";
     return (
         <div data-id={suffixedId} className={classnames("thead", fixed && "fixed")}>
-            <div className="tr">
+            <div className="tr" role="row">
                 {columnOrder.map((headIndex, index) => {
                     const { content = headData[headIndex] } = headData[headIndex];
                     const style = widths
@@ -42,15 +42,18 @@ const Head = ({
                         className: className,
                         onDrop: onDrop,
                         onCancel: onCancel,
+                        role: "columnheader",
                         children: (
                             headContentType
                                 ? React.cloneElement(
                                     headContentType,
                                     _.defaults(
-                                        { id: headIndex,
+                                        {
+                                            id: headIndex,
                                             key: headIndex,
                                             index: headIndex,
-                                            data: content }
+                                            data: content,
+                                        }
                                     )
                                 )
                                 : content
@@ -235,14 +238,13 @@ class ReportTable extends React.Component {
         columnWidths: null
     };
 
+    // Determine the width of the columns based on the width of the fixed table header box
     _setWidths = () => {
-        //this function reads the width of the initial table columns and uses it to set widths for the fixed table
         const headerTh = this.tableHead.getElementsByClassName("th");
-
         this.setState({
-            columnWidths: this.props.headData.map(
-                ({ width }, idx) => width !== undefined ? width : headerTh[idx].getBoundingClientRect().width
-            )
+            columnWidths: this.props.headData.map(({ width }, idx) => {
+                return width !== undefined ? width : headerTh[idx].getBoundingClientRect().width;
+            })
         });
     };
 
@@ -275,6 +277,12 @@ class ReportTable extends React.Component {
     componentDidMount() {
         this.tableHead = ReactDOM.findDOMNode(this.rootElement.getElementsByClassName("thead")[0]);
         if (this.props.fixedHead && !this.state.columnWidths) {
+            this._setWidths();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.fixedHead && !_.isEqual(prevProps.headData, this.props.headData)) {
             this._setWidths();
         }
     }
@@ -322,7 +330,7 @@ class ReportTable extends React.Component {
                 ref={ref => this.rootElement = ref}
             >
                 <div className="dd-table-container" onScroll={onScroll} data-id={this.props["data-id"] + "-container"}>
-                    <div className="table" data-id={this.props["data-id"] + "-table"}>
+                    <div className="table" role="table" data-id={this.props["data-id"] + "-table"}>
                         {tableHead}
                         {tableBody}
                     </div>
