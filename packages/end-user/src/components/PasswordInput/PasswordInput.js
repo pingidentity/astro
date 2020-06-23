@@ -27,6 +27,7 @@ const PasswordInput = ({
     type,
     defaultValue,
     'data-id': dataId,
+    name,
     onChange,
     onFocus,
     onBlur,
@@ -55,7 +56,7 @@ const PasswordInput = ({
             <input
                 className={classNames}
                 id={id}
-                name={id}
+                name={name ? name : id}
                 onChange={onChange}
                 onFocus={onFocus}
                 onBlur={onBlur}
@@ -97,6 +98,10 @@ PasswordInput.propTypes = {
      * Sets the ID of the PasswordInput
      */
     id: PropTypes.string,
+    /**
+     * Name for the input
+     */
+    name: PropTypes.string,
     /**
      * Called when the PasswordInput is blurred
      */
