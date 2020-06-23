@@ -189,11 +189,10 @@ exports.run = function (getComponent, get) {
     it("will not respond to actions while disabled", function () {
         var fileName = "someFile.png";
         var component = getComponent({ disabled: true, fileName: fileName });
-        var removeButton = get(component, "removeButton");
         var fileInput = get(component, "input");
 
         expect(fileInput.disabled).toEqual(true);
-        ReactTestUtils.Simulate.click(removeButton);
+        ReactTestUtils.Simulate.click(fileInput);
 
         expect(component.props.onValidate).not.toBeCalled();
     });

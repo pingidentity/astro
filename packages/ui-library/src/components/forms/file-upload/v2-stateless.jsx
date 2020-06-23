@@ -102,6 +102,7 @@ export default class extends Component {
                     value={this.props.labelText || this.props.label}
                     description={this.props.description}>
                     <ImagePreview
+                        disabled={this.props.disabled}
                         isDefault={useDefault}
                         onClick={this._clickFileInput}
                         show={this.props.showThumbnail}
@@ -116,6 +117,7 @@ export default class extends Component {
                     {!this.props.showThumbnail &&
                     <Button
                         data-id="upload-button"
+                        disabled={this.props.disabled}
                         inline
                         className= {classnames (
                             "choose",
@@ -137,7 +139,7 @@ export default class extends Component {
                     )}
                 </FormLabel>
 
-                {fileSelected &&
+                {fileSelected && !this.props.disabled &&
                     <div className="file-info">
                         <Filename
                             show={this.props.showFilename}
@@ -165,6 +167,7 @@ export default class extends Component {
 }
 
 const ImagePreview = withFocusOutline(({
+    disabled,
     isDefault,
     onClick,
     src,
@@ -177,7 +180,10 @@ const ImagePreview = withFocusOutline(({
             <span
                 onClick={onClick}
                 {...getClickableA11yProps(onClick)}
-                className="image-icon"
+                className={classnames(
+                    "image-icon",
+                    { "image-icon--disabled": disabled }
+                )}
             />}
             <span
                 className={classnames(
@@ -191,7 +197,10 @@ const ImagePreview = withFocusOutline(({
                 {isNode
                     ? src
                     : <img
-                        className="input-image-thumb__img"
+                        className={classnames(
+                            "input-image-thumb__img",
+                            { "input-image-thumb__img--disabled": disabled }
+                        )}
                         src={src}
                         data-id="imageThumb"
                         alt="Thumbnail"

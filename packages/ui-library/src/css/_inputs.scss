@@ -1323,6 +1323,18 @@ input[type=file] {
                 width: 72px;
                 padding: 5px 0 0;
             }
+
+            &--disabled {
+                pointer-events: none;
+
+                &:before {
+                    opacity: $inactive-opacity;
+                }
+
+                &:after {
+                    color: $color-rhino;
+                }
+            }
         }
         .with-logo {
             width: 90px;
@@ -1340,6 +1352,11 @@ input[type=file] {
                 display: block;
                 width: $img-width;
                 border: 1px solid $color-timberwolf;
+
+                &--disabled {
+                    opacity: $inactive-opacity;
+                    cursor: default;
+                }
             }
 
             &--default {
