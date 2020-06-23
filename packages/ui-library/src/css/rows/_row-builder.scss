@@ -1,8 +1,9 @@
 .row-builder {
     &__rows {
-        display: flex;
+        display: inline-flex;
         flex-direction: column;
         align-items: stretch;
+        max-width: 100%;
 
         > *:last-child {
             margin-bottom: 0;
