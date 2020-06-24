@@ -2,6 +2,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Dropdown from './Dropdown';
+import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 window.__DEV__ = true;
 
@@ -28,5 +29,15 @@ describe('Dropdown', () => {
         const items = wrapper.find(`div[data-id="${defaultProps['data-id']}"] > select > option`);
 
         expect(items.length).toEqual(2);
+    });
+    it('renders fieldMessage',() => {
+        const wrapper = getComponent({ fieldMessage: 'Text input message' })
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.exists()).toEqual(true)
+    });
+    it('renders fieldMessage with custom status',() => {
+        const wrapper = getComponent({ fieldMessage: 'Text input message', fieldMessageProps: { status: fieldMessageStatuses.ERROR } });
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.props().status).toEqual('error');
     });
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import TextInput, { textInputFormats } from './TextInput';
+import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 window.__DEV__ = true;
 
@@ -46,6 +47,16 @@ describe('TextInput', () => {
 
         input.simulate('blur');
         expect(testCallback).toHaveBeenCalled();
+    });
+    it('renders fieldMessage',() => {
+        const wrapper = getComponent({ fieldMessage: 'Text input message' })
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.exists()).toEqual(true)
+    });
+    it('renders fieldMessage with custom status',() => {
+        const wrapper = getComponent({ fieldMessage: 'Text input message', fieldMessageProps: { status: fieldMessageStatuses.ERROR } });
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.props().status).toEqual('error');
     });
     describe('supports formats', () => {
         it('numeric', () => {
