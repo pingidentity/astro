@@ -143,7 +143,7 @@ const renderNestedCheckboxes = ({
             hint={option.hint || option.labelHelpText}
             label={option.label}
             noSpacing
-            onValueChange={_.partial(onValueChange, option)}
+            onValueChange={() => onValueChange(option)}
             stacked
             value={option.value}
         />
@@ -153,7 +153,7 @@ const renderNestedCheckboxes = ({
     const indeterminate = (
         mainOption.children &&
         !mainChecked &&
-        mainOption.children.reduce((result, option) => (result || values.includes(option.value)), false)
+        mainOption.children.some(child => values.includes(child.value))
     );
     return (
         <div className={className} key={mainOption.value}>
