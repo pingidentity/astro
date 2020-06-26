@@ -15,7 +15,8 @@ export const types = {
     TOPICON: "top-icon",
     // Types below are here to match the TileSelector and TileGroup types to avoid confusion
     STACKED: "side-icon",
-    ROW: "top-icon"
+    ROW: "top-icon",
+    STACKEDSMALL: "stacked-small",
 };
 
 const TileButtonContent = ({
@@ -191,6 +192,13 @@ export const StackedButton = ({
     );
 };
 
+export const StackedSmallButton = ({ className, ...others }) => (
+    <StackedButton
+        className={[className, "tile-button--stacked-small"].filter(Boolean).join(" ")}
+        {...others}
+    />
+);
+
 export const ActionButton = ({
     children,
     className,
@@ -237,6 +245,7 @@ const selectorButtonTypes = {
     row: RowButton,
     square: SquareButton,
     stacked: StackedButton,
+    "stacked-small": StackedSmallButton,
     action: ActionButton,
     // These are only necessary because the TileButton does not use the same
     // keyword values as the TileSelector.
