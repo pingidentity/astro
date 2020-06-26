@@ -792,6 +792,22 @@ button.tile-button {
         }
     }
 
+    &--square {
+        flex-wrap: wrap;
+        margin-bottom: -30px;
+
+        .tile-button--square {
+            margin-bottom: 30px;
+        }
+
+        .tile-selector__group {
+
+            .tile-button--square {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
     // Putting this here instead of in .tile-button--action due to specificity issues from the rule above
     &--action {
         flex-wrap: wrap;

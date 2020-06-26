@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import FlexRow, { alignments } from "../layout/FlexRow";
+import FlexRow, { alignments, wrapOptions } from "../layout/FlexRow";
 import TileSelectorContext, { selectorTypes } from "./TileSelectorContext";
 
 function TileGroup({
@@ -45,6 +45,7 @@ function TileGroup({
                         }
                     )
                 }
+                wrap={type === selectorTypes.SQUARE && wrapOptions.WRAP}
             >
                 {children}
             </FlexRow>
