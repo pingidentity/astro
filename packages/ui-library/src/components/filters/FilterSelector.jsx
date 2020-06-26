@@ -201,6 +201,24 @@ class FilterSelectorBase extends React.Component {
         return !_.isEmpty(bottomPanelElements) && bottomPanelElements;
     }
 
+    // Return the count of all selected options, minus selected parent nodes for nested options
+    _getSelectedCount = (options, selected = []) => {
+        let count = 0;
+        options.forEach((item) => {
+            const hasChildren = item.hasOwnProperty("children");
+            const isSelected = selected.includes(item.value);
+            if (hasChildren && isSelected) {
+                count += this._getSelectedCount(item.children, item.children.map(c => c.value));
+            } else if (hasChildren) {
+                count += this._getSelectedCount(item.children, selected);
+            } else if (isSelected) {
+                count += 1;
+            }
+        });
+
+        return count;
+    }
+
     render = () => {
         const {
             "data-id": dataId,
@@ -218,6 +236,8 @@ class FilterSelectorBase extends React.Component {
             requiredText,
             type
         } = this.props;
+        const options = this._getOptions();
+        const count = this._getSelectedCount(options, selected);
 
         return (
             <span data-id={dataId} className={className}>
@@ -232,7 +252,7 @@ class FilterSelectorBase extends React.Component {
                             label={label}
                             placeholder={placeholder}
                             required={required}
-                            count={selected.length > 0 ? selected.length : -1}
+                            count={count > 0 ? count : -1}
                         />
                     }
                     open={open}
@@ -242,7 +262,7 @@ class FilterSelectorBase extends React.Component {
                         <SelectionList
                             type={type}
                             bottomPanel={this._getBottomPanel()}
-                            options={this._getOptions()}
+                            options={options}
                             optionsNote={optionsNote}
                             showSearchBox={true}
                             searchPlaceholder="Search..."

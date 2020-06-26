@@ -2,32 +2,86 @@ jest.mock("popper.js");
 jest.mock("react-portal");
 
 import React from "react";
+import { render, screen } from "@testing-library/react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import FilterSelector from "../FilterSelector";
 import { mount } from "enzyme";
 
+const options = [
+    {
+        id: "one",
+        name: "One",
+    },
+    {
+        id: "two",
+        name: "Two",
+    },
+    {
+        id: "three",
+        name: "Three",
+    },
+];
+const nestedOptions = [
+    {
+        label: "Fruits",
+        value: "Fruits",
+        children: [
+            { label: "Apple", value: "Apple" },
+            { label: "Orange", value: "Orange" },
+            { label: "Banana", value: "Banana" },
+        ],
+    },
+    {
+        label: "Vegetables",
+        value: "Vegetables",
+        children: [
+            { label: "Carrot", value: "Carrot" },
+            { label: "Lettuce", value: "Lettuce" },
+            { label: "Pepper", value: "Pepper" },
+            { label: "Cucumber", value: "Cucumber" },
+        ],
+    },
+    {
+        label: "Bread",
+        value: "Bread",
+        children: [
+            { label: "White Bread", value: "White Bread", disabled: true },
+            { label: "Whole Wheat", value: "Whole Wheat" },
+            { label: "Sourdough", value: "Sourdough" },
+        ],
+    },
+];
+const mixedOptions = [
+    {
+        label: "Fruits",
+        value: "Fruits",
+        children: [
+            { label: "Apple", value: "Apple" },
+            { label: "Orange", value: "Orange" },
+            { label: "Banana", value: "Banana" },
+        ],
+    },
+    {
+        label: "Vegetables",
+        value: "Vegetables",
+    },
+    {
+        label: "Bread",
+        value: "Bread",
+    },
+];
+
+const defaultProps = {
+    options,
+};
+const renderComponent = (props) => render(<FilterSelector {...defaultProps} {...props} />);
+
+function getComponent (props) {
+    return ReactTestUtils.renderIntoDocument(<div><FilterSelector {...props} /></div>);
+}
+
 describe("FilterSelector", function () {
-
-    const options = [
-        {
-            id: "one",
-            name: "One",
-        },
-        {
-            id: "two",
-            name: "Two",
-        },
-        {
-            id: "three",
-            name: "Three",
-        },
-    ];
-
-    function getComponent (props) {
-        return ReactTestUtils.renderIntoDocument(<div><FilterSelector {...props} /></div>);
-    }
-
     it("renders with default data-id", function () {
         const component = getComponent({ options });
         const section = TestUtils.findRenderedDOMNodeWithDataId(component, "filter-selector");
@@ -133,37 +187,6 @@ describe("FilterSelector", function () {
         expect(callback.mock.calls[0][0]).toEqual([]);
     });
 
-    const nestedOptions = [
-        {
-            label: "Fruits",
-            value: "Fruits",
-            children: [
-                { label: "Apple", value: "Apple" },
-                { label: "Orange", value: "Orange" },
-                { label: "Banana", value: "Banana" },
-            ],
-        },
-        {
-            label: "Vegetables",
-            value: "Vegetables",
-            children: [
-                { label: "Carrot", value: "Carrot" },
-                { label: "Lettuce", value: "Lettuce" },
-                { label: "Pepper", value: "Pepper" },
-                { label: "Cucumber", value: "Cucumber" },
-            ],
-        },
-        {
-            label: "Bread",
-            value: "Bread",
-            children: [
-                { label: "White Bread", value: "White Bread", disabled: true },
-                { label: "Whole Wheat", value: "Whole Wheat" },
-                { label: "Sourdough", value: "Sourdough" },
-            ],
-        },
-    ];
-
     it("should filter out unselected options from a nested list", function() {
         const component = mount(<FilterSelector options={nestedOptions} selected={["Fruits", "Carrot"]} />);
 
@@ -174,4 +197,31 @@ describe("FilterSelector", function () {
         expect(component.find("label[data-id='selectionList-Checkbox-3-container']").exists()).not.toBeTruthy();
     });
 
+    it("should show the count for all child options if parent is selected and ignore parent in count", () => {
+        renderComponent({
+            options: nestedOptions,
+            selected: [
+                "Fruits",
+                "Apple",
+            ],
+        });
+        const expectedCount = nestedOptions[0].children.length;
+        const counter = screen.getByText(`${expectedCount}`);
+        expect(counter).toBeInTheDocument();
+    });
+
+    it("should show the proper count when there are nested and non-nested options", () => {
+        renderComponent({
+            options: mixedOptions,
+            selected: [
+                "Fruits",
+                "Apple",
+                "Bread",
+                "Vegetables",
+            ],
+        });
+        const expectedCount = nestedOptions[0].children.length + 2;
+        const counter = screen.getByText(`${expectedCount}`);
+        expect(counter).toBeInTheDocument();
+    });
 });
