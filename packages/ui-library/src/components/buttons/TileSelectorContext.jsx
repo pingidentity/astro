@@ -5,6 +5,7 @@ export const selectorTypes = {
     ROW: "row",
     SQUARE: "square",
     STACKED: "stacked",
+    STACKEDSMALL: "stacked-small",
 };
 
 export default createContext();
