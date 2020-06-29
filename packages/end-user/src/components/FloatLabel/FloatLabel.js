@@ -21,6 +21,7 @@ const FloatLabel = ({
     input,
     onChange,
     inputClassName,
+    labelClassName,
     defaultValue,
     value,
     children,
@@ -41,6 +42,7 @@ const FloatLabel = ({
         'placeholder-shown': !inputValue
     });
     const inputClassNames = classnames('float-label__input', inputClassName);
+    const labelClassNames = classnames('float-label__label', labelClassName);
 
     return (
         <div className={floatClassNames} data-id={dataId}>
@@ -53,7 +55,7 @@ const FloatLabel = ({
                 className={inputClassNames}
                 {...props}
             />
-            <label className="float-label__label" htmlFor={id}>
+            <label className={labelClassNames} htmlFor={id}>
                 {label}
             </label>
             {children}

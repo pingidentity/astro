@@ -31,6 +31,13 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
         z-index: 0;
 
         cursor: text;
+
+        &-text-area {
+            background-color: #fff;
+            top: 1px;
+            margin-top: 0px;
+            padding-top: $spacing-xs + 1px;
+        }
 }
 
 .float-label {

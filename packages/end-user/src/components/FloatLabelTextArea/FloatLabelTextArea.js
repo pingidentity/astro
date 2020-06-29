@@ -22,6 +22,7 @@ const FloatLabelTextArea = ({
         id={id}
         InputType={TextArea}
         inputClassName={inputClassName}
+        labelClassName='float-label__label-text-area'
         onChange={onChange}
         value={value}
         {...props}
