@@ -45,7 +45,7 @@ function TileGroup({
                         }
                     )
                 }
-                wrap={type === selectorTypes.SQUARE && wrapOptions.WRAP}
+                wrap={type === selectorTypes.SQUARE ? wrapOptions.WRAP : wrapOptions.NOWRAP}
             >
                 {children}
             </FlexRow>
