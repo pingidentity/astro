@@ -66,6 +66,14 @@
         border-color: map-get($colors, 'button');
     }
 
+    .branding-template-user-card {
+        background-color: #fff !important;
+
+        &:hover {
+            border-color: map-get($colors, 'link') !important;
+        }
+    }
+
     .branding-template-primary-text {
         color: map-get($colors, 'bodyText');
     }
