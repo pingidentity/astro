@@ -1,29 +1,256 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from '../../components/shared/FlexRow';
-import Link from '../../components/shared/Link';
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import _ from "underscore";
+import Link from "./Link";
+import Text, { textTypes } from "../TextBlock";
+import TileSelectorContext from "./TileSelectorContext";
+import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from "./FlexRow";
 
+import { getClickableA11yProps, getIconClassName } from "../../util/PropUtils";
 
-const handleMouseDown = (e) => e.preventDefault(); //prevent focus halo when clicking
 export const types = {
     SIDEICON: "side-icon",
     SQUARE: "square",
     TOPICON: "top-icon",
     // Types below are here to match the TileSelector and TileGroup types to avoid confusion
     STACKED: "side-icon",
-    ROW: "top-icon"
+    ROW: "top-icon",
+    STACKEDSMALL: "stacked-small",
 };
 
-const getIconClassName = (props, options = {}) => {
-    const icon = props.iconClassName || props.iconName || props.icon || (options.useId && props.id);
-    if (!icon || typeof icon !== "string") {
+const TileButtonContent = ({
+    children,
+    className
+}) => !React.Children.toArray(children).every(child => child === undefined) ? (
+    <div className={classnames("tile-button__content", className)}>
+        {children}
+    </div>
+) : null;
+
+const TileButtonIcon = ({
+    className,
+    iconClassName,
+    icon,
+}) => {
+    if (!icon) {
         return null;
     }
-    if (props.iconClassName) {
-        return icon;
-    }
-    return `pingicon-${icon}`;
+    const renderedIcon = _.isString(icon)
+        ? <div className={classnames("tile-button__icon", icon, iconClassName)} />
+        : icon;
+
+    return (
+        <div
+            className={classnames(
+                "tile-button__icon-container",
+                className
+            )}
+        >
+            {renderedIcon}
+        </div>
+    );
+};
+
+const TileButtonTitle = ({
+    children,
+    className,
+    note
+    // If all children are undefined, don't create a div
+}) => !React.Children.toArray(children).every(child => child === undefined) ? (
+    <div
+        className={classnames(
+            "tile-button__title",
+            className
+        )}
+    >
+        {children}
+        {note}
+    </div>
+) : null;
+
+export const SquareButton = ({
+    children,
+    className,
+    "data-id": dataId,
+    details,
+    icon,
+    note,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    title
+}) => {
+    const classNames = classnames("tile-button--square", className);
+
+    return (
+        <button
+            className={classNames}
+            data-id={dataId}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            {...getClickableA11yProps(onClick)}
+        >
+            <TileButtonIcon
+                className="tile-button__icon-container--square"
+                icon={icon}
+            />
+            <TileButtonContent>
+                {children}
+            </TileButtonContent>
+            {details}
+            <TileButtonTitle className="tile-button__title--square">
+                {title}
+                {note}
+            </TileButtonTitle>
+        </button>
+    );
+};
+
+export const RowButton = ({
+    children,
+    className,
+    "data-id": dataId,
+    details,
+    icon,
+    note,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    title
+}) => {
+    return (
+        <div
+            className={className}
+            data-id={dataId}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            {...getClickableA11yProps(onClick)}
+        >
+            <TileButtonIcon
+                icon={icon}
+            />
+            <TileButtonContent>
+                {children}
+            </TileButtonContent>
+            {details}
+            <TileButtonTitle>
+                {title}
+                {note}
+            </TileButtonTitle>
+        </div>
+    );
+};
+
+export const StackedButton = ({
+    children,
+    className,
+    "data-id": dataId,
+    details,
+    icon,
+    link,
+    note,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    title,
+}) => {
+    const classNames = classnames("tile-button--side-icon", className);
+
+    return (
+        <div
+            className={classNames}
+            data-id={dataId}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            {...getClickableA11yProps(onClick)}
+        >
+            <TileButtonIcon
+                icon={icon}
+            />
+            <div className="tile-button__content-container">
+                <FlexRow
+                    alignment={alignments.STRETCH}
+                    flexDirection={flexDirectionOptions.COLUMN}
+                    spacing={spacingOptions.SM}
+                >
+                    <TileButtonTitle>
+                        {title}
+                        {note}
+                    </TileButtonTitle>
+                    <TileButtonContent>
+                        {children}
+                    </TileButtonContent>
+                    {link}
+                </FlexRow>
+                {details}
+            </div>
+        </div>
+    );
+};
+
+export const StackedSmallButton = ({ className, ...others }) => (
+    <StackedButton
+        className={[className, "tile-button--stacked-small"].filter(Boolean).join(" ")}
+        {...others}
+    />
+);
+
+export const ActionButton = ({
+    children,
+    className,
+    "data-id": dataId,
+    icon,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    title,
+}) => {
+    const classNames = classnames("tile-button--action", className);
+    const renderedIcon = _.isString(icon)
+        ? <div className={classnames("tile-button__icon", "tile-button__icon--action", icon)} />
+        : icon;
+
+    return (
+        <div
+            className={classNames}
+            data-id={dataId}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            {...getClickableA11yProps(onClick)}
+        >
+            {renderedIcon}
+            <Text
+                align={Text.alignments.CENTER}
+                className="tile-button__action-title"
+                type={textTypes.PRIMARY}
+            >
+                {title}
+            </Text>
+            <Text
+                align={Text.alignments.CENTER}
+                type={textTypes.BODY}
+            >
+                {children}
+            </Text>
+        </div>
+    );
+};
+
+const selectorButtonTypes = {
+    row: RowButton,
+    square: SquareButton,
+    stacked: StackedButton,
+    "stacked-small": StackedSmallButton,
+    action: ActionButton,
+    // These are only necessary because the TileButton does not use the same
+    // keyword values as the TileSelector.
+    "side-icon": StackedButton,
+    "top-icon": RowButton
 };
 
 /**
@@ -48,8 +275,8 @@ const getIconClassName = (props, options = {}) => {
  *     A boolean that indicates whether to show an arrow for the TilePanel
  * @param {string} [title]
  *     Title of the button
- * @param {string} [type]
- *     Format of the tile can be "top-icon" or "side-icon"
+ * @param {string} type="top-icon"
+ *     Format of the tile can be "top-icon", "side-icon" or "square"
  * @param {object} [link]
  *     Object with text and onClick that becomes a link below the content
  * @param {string} [note]
@@ -64,113 +291,78 @@ const getIconClassName = (props, options = {}) => {
 const TileButton = ({
     children,
     className,
-    'data-id': dataId,
+    "data-id": dataId,
     details,
     link,
     note,
     onClick,
+    onMouseEnter,
+    onMouseLeave,
     panel,
+    renderButton,
     selected,
     title,
     type,
     ...props
 }) => {
-    const isSquare = type === types.SQUARE;
-    const isSideIcon = type === types.SIDEICON;
-    const iconClassName = getIconClassName(props);
-    const renderedIcon = iconClassName
-        ? <div className={classnames('tile-button__icon', iconClassName)} />
-        : props.icon;
+    const typeFromContext = useContext(TileSelectorContext);
 
-    const classNames = classnames('tile-button', className, {
-        'tile-button--selected': selected,
-        'tile-button--side-icon': isSideIcon,
-        'tile-button--square': isSquare
+    // For backwards compatibility, look to see if type is defined first. If it's not,
+    // check for context and use that context if it's defined. Otherwise, just default to a row button.
+    const ButtonToRender = selectorButtonTypes[type || typeFromContext || types.ROW];
+    const iconClassName = getIconClassName(props);
+
+    const classNames = classnames("tile-button", className, {
+        "tile-button--selected": selected,
     },
-        (panel && selected) ? 'tile-button--panel' : ''
+        (panel && selected) ? "tile-button--panel" : ""
     );
 
     const renderedDetails = (
-        details && [
-            <div className="tile-button__divider" key="divider" />,
-            <ul key="details" className="tile-button__details">
+        details && <>
+            <div className="tile-button__divider" key="divider" />
+            <ul className="tile-button__details">
                 {details.map(detail => <li key={detail}>{detail}</li>)}
             </ul>
-        ]
+        </>
     );
 
     const renderedNote = (
         note && <div className="tile-button__note">{note}</div>
     );
 
-    const renderedTitle = (
-        title &&
-        <div
-            key="title"
-            className={classnames(
-                'tile-button__title',
-                isSquare ? 'tile-button__title--square' : ''
-            )}
-        >
-            {title}
-            {renderedNote}
-        </div>
-    );
-
-    const renderedContent = children && (
-        <div key="content" className="tile-button__content">
-            {children}
-        </div>
-    );
-
-    const renderLink = (
+    const renderedLink = (
         link && <Link className="tile-button__link" onClick={link.onClick} data-id={`${dataId}-link`}>{link.text}</Link>
     );
 
-    const TagName = link ? "div" : "button";
-
     return (
-        <TagName className={classNames} data-id={dataId} onClick={onClick} onMouseDown={handleMouseDown} role="button">
-            {renderedIcon &&
-                <div
-                    className={classnames(
-                        'tile-button__icon-container',
-                        isSquare ? 'tile-button__icon-container--square' : ''
-                    )}
-                >
-                    {renderedIcon}
-                </div>
-            }
-            {isSideIcon
-                ? (
-                    <div className="tile-button__content-container">
-                        <FlexRow
-                            alignment={alignments.STRETCH}
-                            flexDirection={flexDirectionOptions.COLUMN}
-                            spacing={spacingOptions.SM}
-                        >
-                            {renderedTitle}
-                            {renderedContent}
-                            {renderLink}
-                        </FlexRow>
-                        {renderedDetails}
-                    </div>
-                ) : (
-                    [renderedContent, renderedDetails, renderedTitle]
-                )
-            }
-        </TagName>
+        <ButtonToRender
+            className={classNames}
+            data-id={dataId}
+            details={renderedDetails}
+            icon={iconClassName || props.icon}
+            link={renderedLink}
+            note={renderedNote}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            title={title}
+        >
+            {children}
+        </ButtonToRender>
     );
 };
 
 TileButton.propTypes = {
     className: PropTypes.string,
-    'data-id': PropTypes.string,
+    "data-id": PropTypes.string,
     description: PropTypes.string,
     details: PropTypes.arrayOf(PropTypes.string),
     icon: PropTypes.node,
     iconName: PropTypes.string,
     onClick: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
     panel: PropTypes.bool,
     title: PropTypes.string,
     type: PropTypes.oneOf(Object.values(types)),
@@ -181,9 +373,76 @@ TileButton.propTypes = {
     })
 };
 
+
 TileButton.defaultProps = {
-    'data-id': 'tile-button',
-    type: types.TOPICON,
+    "data-id": "tile-button",
+    onClick: _.noop,
+};
+
+export const TopContent = ({
+    left,
+    right,
+}) => (
+        <div className="tile-button__top" onClick={(e) => e.stopPropagation()}>
+            <div className="tile-button__top-left">{left}</div>
+            <div className="tile-button__top-right">{right}</div>
+        </div>
+    );
+
+TopContent.propTypes = {
+    left: PropTypes.node,
+    right: PropTypes.node,
+};
+
+export const TileGrid = ({
+    children,
+}) => (
+        <div className="tile-button__grid">
+            {children}
+        </div>
+    );
+
+export const Badge = ({
+    expanded,
+    "data-id": dataId,
+    icon,
+    active,
+    label,
+    onClick,
+}) => {
+    const classNames = classnames("feature-badge", {
+        "feature-badge--expanded": expanded,
+        "feature-badge--inactive": !active,
+    });
+
+    const iconClassNames = classnames("feature-badge__icon", `icon-${icon}`);
+
+    return (
+        <div
+            data-id={dataId}
+            className={classNames}
+            onClick={onClick}
+        >
+            <div className={iconClassNames}></div>
+            {active && <div className="feature-badge__label">{label}</div>}
+        </div>
+    );
+};
+
+Badge.propTypes = {
+    "data-id": PropTypes.string,
+    expanded: PropTypes.bool,
+    active: PropTypes.bool,
+    icon: PropTypes.node,
+    label: PropTypes.node,
+    onClick: PropTypes.func,
+};
+
+Badge.defaultProps = {
+    "data-id": "badge",
+    expanded: false,
+    active: false,
+    onClick: _.noop,
 };
 
 export default TileButton;
