@@ -726,6 +726,7 @@ button.tile-button {
     }
 
     &--square {
+        flex-basis: 165px;
         flex-grow: 0;
         min-height: 165px;
         min-width: 165px;
@@ -801,6 +802,7 @@ button.tile-button {
         }
 
         .tile-selector__group {
+            width: 100%;
 
             .tile-button--square {
                 margin-bottom: 30px;
