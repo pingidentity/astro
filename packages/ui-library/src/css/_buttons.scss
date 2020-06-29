@@ -802,7 +802,8 @@ button.tile-button {
         }
 
         .tile-selector__group {
-            width: 100%;
+            flex-shrink: 0;
+            max-width: 100%;
 
             .tile-button--square {
                 margin-bottom: 30px;
