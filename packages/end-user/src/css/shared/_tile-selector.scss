@@ -1,104 +1,3 @@
-.tile-selector {
-    @include flexbox;
-
-    > * {
-        @include flexbox-grow(1);
-        @include flexbox-shrink(1);
-        margin-right: $spacing-md;
-        flex-basis: 0;
-
-        &:last-child {
-            margin-right: 0;
-        }
-    }
-
-    &--stacked {
-        display: block;
-
-        > * {
-            margin-right: 0;
-            margin-bottom: $spacing-md;
-            width: 100%;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-    }
-
-    &__group {
-        flex-flow: column wrap;
-        height: auto;
-
-        &:not(:last-of-type) {
-            margin-right: $spacing-xl;
-        }
-
-        &--grow-1 {
-            @include flexbox-grow(1);
-        }
-
-        &--grow-2 {
-            @include flexbox-grow(2);
-        }
-
-        &--grow-3 {
-            @include flexbox-grow(3);
-        }
-
-        &--grow-4 {
-            @include flexbox-grow(4);
-        }
-
-        &--square {
-            @include flexbox-grow(0);
-            flex-basis: auto;
-        }
-
-        &--stacked {
-            margin-right: 0;
-        }
-
-    }
-
-    &__group-tiles {
-        flex: 1;
-        margin-top: $spacing-sm;
-        width: 100%;
-
-        > * {
-            @include flexbox-grow(1);
-            @include flexbox-shrink(1);
-
-            margin-right: $spacing-md;
-            flex-basis: 0%;
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-
-        &--stacked {
-            flex-flow: column nowrap;
-
-            > * {
-                margin-bottom: $spacing-md;
-                margin-right: 0;
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
-    }
-
-    &__group-title {
-        color: $color-accent-neutral-40;
-        font-size: $font-size-reduced;
-        text-transform: uppercase;
-        width: 100%;
-    }
-}
-
 .tile-button,
 button.tile-button {
     background: $color-white;
@@ -106,17 +5,18 @@ button.tile-button {
     color: $color-slate;
     cursor: pointer;
     font-size: 15px;
+    padding: $spacing-xl $spacing-lg $spacing-lg $spacing-lg;
     line-height: normal;
     height: auto;
     white-space: normal;
-    padding: $spacing-lg;
 
-    @include flexbox;
-    @include flexbox-direction(column);
-    flex-basis: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 
     align-items: center;
     justify-content: space-between;
+    -ms-flex: 1 1 100%;
 
     $icon-size: 80px;
 
@@ -135,7 +35,7 @@ button.tile-button {
         }
     }
     &.tile-button--selected {
-        @include box-shadow(0 2px 5px 0 rgba($color-black, 0.2));
+        box-shadow: 0 2px 5px 0 rgba($color-black, 0.2);
 
         & .tile-button__title {
             @include font-pn-semibold;
@@ -173,7 +73,13 @@ button.tile-button {
     &__icon {
         font-size: $icon-size;
         color: $color-midnight;
+
+        &--action {
+            font-size: 28px;
+            margin-bottom: $spacing-lg;
+        }
     }
+
     &__icon-container {
         height: $icon-size;
         margin-bottom: $spacing-lg;
@@ -194,15 +100,38 @@ button.tile-button {
         }
     }
 
-    &__content-container {
-        flex-basis: 0;
-    }
-
     &__content {
-        @include flexbox-grow(1);
+        @include break-word;
+        flex-grow: 1;
+        max-width: 100%;
+        overflow: hidden;
 
         line-height: 1.3em;
         text-align: left;
+
+        &--action {
+            text-align: center;
+        }
+    }
+
+    &__top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+
+        &-left {
+            position: absolute;
+            top: $spacing-md;
+            left: $spacing-sm;
+        }
+
+        &-right {
+            position: absolute;
+            top: $spacing-md;
+            right: $spacing-sm;
+        }
     }
 
     &__title {
@@ -215,6 +144,10 @@ button.tile-button {
         &--square {
             margin-top: 0;
         }
+    }
+
+    &__action-title.text-primary {
+        font-weight: 600;
     }
 
     &--panel {
@@ -233,12 +166,155 @@ button.tile-button {
         min-width: 165px;
         padding: 25px;
     }
+
+    &--action {
+        flex-grow: 0;
+        justify-content: flex-start;
+        margin-bottom: $spacing-xl;
+        min-width: 180px;
+        padding: $spacing-lg $spacing-sm;
+        min-height: 180px;
+
+        &:hover {
+            box-shadow: 0 2px 5px 0 rgba($color-black, 0.2);
+
+            // Overriding default hover style
+            border: 1px solid $color-accent-neutral-70;
+            .tile-button__icon {
+                color: $color-slate;
+            }
+        }
+
+        &:active {
+            box-shadow: inset 0 2px 5px 0 rgba($color-black, 0.2);
+        }
+    }
+}
+
+.tile-selector {
+    display: flex;
+
+    > * {
+        flex-grow: 1;
+        flex-shrink: 1;
+        margin-right: $spacing-md;
+        flex-basis: 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &--stacked {
+        display: block;
+
+        .flex-row {
+            display: block;
+
+            a {
+                display: flex;
+            }
+        }
+
+        > * {
+            margin-right: 0;
+            margin-bottom: $spacing-md;
+            width: 100%;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // Putting this here instead of in .tile-button--action due to specificity issues from the rule above
+    &--action {
+        flex-wrap: wrap;
+        > * {
+            flex-grow: 0;
+            margin-right: $spacing-xl;
+        }
+    }
+
+    &__group {
+        flex-flow: column wrap;
+        height: auto;
+
+        &:not(:last-of-type) {
+            margin-right: $spacing-xl;
+        }
+
+        &--grow-1 {
+            flex-grow: 1;
+        }
+
+        &--grow-2 {
+            flex-grow: 2;
+        }
+
+        &--grow-3 {
+            flex-grow: 3;
+        }
+
+        &--grow-4 {
+            flex-grow: 4;
+        }
+
+        &--square {
+            flex-grow: 0;
+            flex-basis: auto;
+        }
+
+        &--stacked {
+            margin-right: 0;
+        }
+
+    }
+
+    &__group-tiles {
+        flex: 1;
+        margin-top: $spacing-sm;
+        width: 100%;
+
+        > * {
+            flex-grow: 1;
+            flex-shrink: 1;
+
+            margin-right: $spacing-md;
+            flex-basis: 0%;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &--stacked {
+            flex-flow: column nowrap;
+
+            > * {
+                margin-bottom: $spacing-md;
+                margin-right: 0;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    &__group-title {
+        color: $color-accent-neutral-40;
+        font-size: $font-size-reduced;
+        text-transform: uppercase;
+        width: 100%;
+    }
 }
 
 .tile-button--side-icon,
 button.tile-button--side-icon {
-    @include flexbox-direction(row);
+    flex-direction: row;
+
     box-sizing: border-box;
+
     padding: $spacing-md $spacing-lg;
 
     .tile-button {
@@ -260,13 +336,13 @@ button.tile-button--side-icon {
         }
 
         &__content-container {
-            @include flexbox-grow(1);
+            flex-grow: 1;
 
             text-align: left;
         }
 
         &__title {
-            @include flexbox();
+            display: flex;
 
             margin-top: 0;
             text-align: left;
@@ -275,8 +351,8 @@ button.tile-button--side-icon {
         &__note {
             @include text-body;
 
-            @include flexbox-grow(1);
-            @include flexbox-shrink(0);
+            flex-grow: 1;
+            flex-shrink: 0;
 
             text-transform: none;
             text-align: right;
@@ -289,8 +365,42 @@ button.tile-button--side-icon {
     }
 }
 
+.tile-button--stacked-small,
+button.tile-button--stacked-small {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-md;
+    margin-right: 0;
+
+    .tile-button {
+        &__icon {
+            line-height: 40px;
+
+            &:before {
+                font-size: 40px;
+                line-height: 40px;
+                height: 40px;
+            }
+        }
+
+        &__icon-container {
+            height: 40px;
+            width: 40px;
+            margin: 0 $spacing-md 0 0;
+        }
+
+        &__title {
+            display: flex;
+            color: $color-accent-neutral-10;
+            text-transform: none;
+            margin-top: 0;
+            margin-bottom: 0 !important;
+            text-align: left;
+        }
+    }
+}
+
 .tile-panel {
-    @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
+    box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
 
     background-color: $color-active-blue;
     box-sizing: border-box;
@@ -322,6 +432,7 @@ button.tile-button--side-icon {
         }
 
         &__label {
+            @include font-pn-semibold;
             font-size: 17px;
             margin-bottom: $spacing-xs;
         }
@@ -336,6 +447,30 @@ button.tile-button--side-icon {
                 border-color: $color-white;
                 box-shadow: 0 0 3px #0e4054;
             }
+        }
+    }
+}
+
+.tile-button__grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(#{$spacing-sm} * -1);
+    margin-right: calc(#{$spacing-sm} * -1);
+
+    & > * {
+        flex: 1;
+        flex-grow: 0;
+        min-height: 300px;
+        flex-basis: calc((100% / 3) - #{$spacing-sm} * 2) !important;
+        box-sizing: border-box;
+        margin: 0 $spacing-sm $spacing-md $spacing-sm;
+
+        @media only screen and (max-width: 1250px) {
+            flex-basis: calc((100% / 2) - #{$spacing-sm} * 2) !important;
+        }
+
+        @media only screen and (max-width: 1000px) {
+            flex-basis: 100% !important;
         }
     }
 }
