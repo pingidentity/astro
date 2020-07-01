@@ -9,6 +9,22 @@ $checkbox-border-color: $color-neutral-40;
     font-size: $font-size-sm;
     color: $checkbox-label-color;
     display: inline-block;
+
+    &--stacked {
+        display: flex;
+        margin-bottom: $spacing-base;
+
+        .checkbox__label {
+            align-self: center;
+            line-height: $spacing-lg;
+        }
+
+        .checkbox__input {
+            flex-shrink: 0;
+            flex-basis: $spacing-lg;
+            min-width: $spacing-lg;
+        }
+    }
 }
 
 .checkbox > :first-child {
