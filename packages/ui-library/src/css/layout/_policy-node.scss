@@ -25,6 +25,8 @@
 
     &__head {
         margin-bottom: $spacing-sm;
+        display: flex;
+        align-items: center;
     }
 
     &--parent > * > &__label {
@@ -62,7 +64,6 @@
         margin: 0 1px + $spacing-xs 0 0;
         position: relative;
         text-align: center;
-        transform: translateY(-1px);
         vertical-align: middle;
         width: $height;
 
