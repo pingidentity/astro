@@ -58,6 +58,9 @@ import _ from "underscore";
 * @param {string} [valueKey="value"]
 *    The object property name (in the data prop) that contains the information that you want to be used as the value
 *    for each tooltip. Each cell tooltip has it's own value.
+* @param {object} [tooltipProps={interactive: false}]
+*    An object which gets passed along to the Tippy component in the HelpHint. See the
+*    [Tippy.js docs](https://atomiks.github.io/tippyjs/v6/all-props/) for a full list of options.
 * @param {function} [tooltipRenderer]
 *    A function that renders the contents of the tooltip
 * @param {object|string} [tooltipSubtitle]
@@ -103,6 +106,7 @@ class HeatMapCard extends React.Component {
         loading: PropTypes.bool,
         onValueChange: PropTypes.func,
         rockerButtonProps: PropTypes.object,
+        tooltipProps: PropTypes.object,
         tooltipRenderer: PropTypes.func,
         tooltipSubtitle: PropTypes.string,
         valueKey: PropTypes.string,
@@ -129,6 +133,9 @@ class HeatMapCard extends React.Component {
         labelKey: "label",
         onValueChange: _.noop,
         rockerButtonProps: null,
+        tooltipProps: {
+            interactive: false,
+        },
         tooltipRenderer: _defaultRender,
         valueKey: "value",
         xAxisLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, "00"],
@@ -179,11 +186,14 @@ class HeatMapCard extends React.Component {
                         <HelpHint
                             data-id={`heatmap-hint_${cellValue}_${rowIndex}`}
                             delayHide={0}
+                            delayShow={0}
                             hintText={cellContent}
                             key={`cell-${rowIndex}-${cellIndex}`}
                             placement={HelpHint.Placements.BOTTOM}
                             type={HelpHint.Types.LIGHT}
-                            triggerClassName="heatmap__cell-color">
+                            triggerClassName="heatmap__cell-color"
+                            tooltipProps={this.props.tooltipProps}
+                        >
                             <div
                                 className="heatmap__cell-color"
                                 style={{

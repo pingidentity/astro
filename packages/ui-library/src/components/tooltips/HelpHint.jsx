@@ -223,7 +223,7 @@ class HelpHint extends React.Component {
                         </span>
                     }
                     appendTo={document.body}
-                    theme= {this.props.type}
+                    theme={this.props.type}
                     delay={[this.props.delayShow, this.props.delayHide]}
                     {...this.props.tooltipProps}
                 >
