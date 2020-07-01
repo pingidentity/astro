@@ -949,6 +949,40 @@ button.tile-button--side-icon {
     }
 }
 
+.tile-button--stacked-small,
+button.tile-button--stacked-small {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-md;
+    margin-right: 0;
+
+    .tile-button {
+        &__icon {
+            line-height: 40px;
+
+            &:before {
+                font-size: 40px;
+                line-height: 40px;
+                height: 40px;
+            }
+        }
+
+        &__icon-container {
+            height: 40px;
+            width: 40px;
+            margin: 0 $spacing-md 0 0;
+        }
+
+        &__title {
+            display: flex;
+            color: $color-accent-neutral-10;
+            text-transform: none;
+            margin-top: 0;
+            margin-bottom: 0 !important;
+            text-align: left;
+        }
+    }
+}
+
 .tile-panel {
     box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
 

@@ -1,13 +1,21 @@
 import React from 'react';
 
-import Preview, { devices, applyStyles } from './Preview';
+import Preview, { devices } from './Preview';
 import Card from '../Card';
 import Logo from '../Logo';
 import Form from '../Form';
 import FloatLabelTextInput from '../FloatLabelTextInput';
 import FloatLabelPasswordInput from '../FloatLabelPasswordInput';
+import FlexRow, {
+    spacingOptions,
+    flexDirectionOptions,
+    justifyOptions,
+    alignments as flexRowAlignments,
+} from '../shared/FlexRow.js';
+import TileSelector from '../shared/TileSelector.js';
+import { UserInfo, imageSizes } from '../shared/UserNav.js';
 import Button from '../Button';
-import TextBlock from '../TextBlock';
+import TextBlock, { alignments } from '../TextBlock';
 import Heading from '../Heading';
 import Padding, { sizes } from '../shared/Padding';
 import Feedback from '../Feedback';
@@ -21,11 +29,11 @@ export default {
 };
 
 const themes = [
-    'https://assets.pingone.com/ux/branding-themes/0.15.0/default/default.css',
-    'https://assets.pingone.com/ux/branding-themes/0.15.0/split/split.css',
-    'https://assets.pingone.com/ux/branding-themes/0.15.0/slate/slate.css',
-    'https://assets.pingone.com/ux/branding-themes/0.15.0/mural/mural.css',
-    'https://assets.pingone.com/ux/branding-themes/0.15.0/focus/focus.css',
+    'https://assets.pingone.com/ux/branding-themes/0.16.0/default/default.css',
+    'https://assets.pingone.com/ux/branding-themes/0.16.0/split/split.css',
+    'https://assets.pingone.com/ux/branding-themes/0.16.0/slate/slate.css',
+    'https://assets.pingone.com/ux/branding-themes/0.16.0/mural/mural.css',
+    'https://assets.pingone.com/ux/branding-themes/0.16.0/focus/focus.css',
 ];
 
 export const Default = () =>
@@ -93,6 +101,109 @@ export const Default = () =>
                                     <Button label="Save" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
                                     <TextBlock className="branding-template-link-container">Didn't receive an email? <a href="#" className="branding-template-link-text">Resend</a></TextBlock>
                                 </Form>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </Preview>
+
+            <Padding top={sizes.XL} />
+
+            <Preview
+                themeStyleSheet={theme}
+            >
+                { /* Account Selector */ }
+                <div className="page" style={{ width: '100%', height: '100%' }}>
+                    <Card>
+                        <div className="flex-container">
+                            <div className="branding-template-logo-container">
+                                <Logo className="branding-template-logo" src={logo} />
+                            </div>
+                            <div className="branding-template-form-container">
+                                <TextBlock className="branding-template-primary-text">
+                                    Please select the account to login with:
+                                </TextBlock>
+                                <FlexRow spacing={spacingOptions.MD} alignment={flexRowAlignments.CENTER} flexDirection={flexDirectionOptions.COLUMN}>
+                                    <TileSelector.TileButton type="side-icon" className="branding-template-user-card">
+                                        <FlexRow spacing={spacingOptions.MD} alignment={flexRowAlignments.CENTER}>
+                                            <FlexRow justify={justifyOptions.CENTER} alignment={flexRowAlignments.CENTER}>
+                                                <UserInfo
+                                                    imageSrc="https://placedog.net/200/200"
+                                                    imageSize={imageSizes.MEDIUM}
+                                                />
+                                            </FlexRow>
+                                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{ flex: 1 }}>
+                                                <TextBlock
+                                                    className="branding-template-primary-text"
+                                                    inline
+                                                    alignment={alignments.LEFT}
+                                                    spacing="small"
+                                                >
+                                                    Username:
+                                                </TextBlock>
+                                                <TextBlock
+                                                    className="branding-template-primary-text"
+                                                    inline
+                                                    alignment={alignments.LEFT}
+                                                    spacing="small"
+                                                >
+                                                    Email:
+                                                </TextBlock>
+                                                <TextBlock
+                                                    className="branding-template-primary-text"
+                                                    inline
+                                                    alignment={alignments.LEFT}
+                                                    spacing="small"
+                                                >
+                                                    Last login:
+                                                </TextBlock>
+                                            </FlexRow>
+                                            <FlexRow flexDirection={flexDirectionOptions.COLUMN} style={{ flex: 1 }} justify={justifyOptions.SPACEEVENLY}>
+                                                <TextBlock
+                                                    className="branding-template-primary-text"
+                                                    inline
+                                                    alignment={alignments.LEFT}
+                                                    spacing="small"
+                                                >
+                                                    da****
+                                                </TextBlock>
+                                                <TextBlock
+                                                    className="branding-template-primary-text"
+                                                    inline
+                                                    alignment={alignments.LEFT}
+                                                    spacing="small"
+                                                >
+                                                    da**@gmail.com
+                                                </TextBlock>
+                                                <TextBlock
+                                                    className="branding-template-primary-text"
+                                                    inline
+                                                    alignment={alignments.LEFT}
+                                                    spacing="small"
+                                                >
+                                                    Today, 9:48
+                                                </TextBlock>
+                                            </FlexRow>
+                                        </FlexRow>
+                                    </TileSelector.TileButton>
+                                    <FlexRow justify={justifyOptions.END} >
+                                        <a href="#" className="branding-template-link-text">
+                                            See 6 more accounts
+                                        </a>
+                                    </FlexRow>
+                                    <Padding top={sizes.SM} />
+                                    <TextBlock>or</TextBlock>
+                                    <Button
+                                        className="branding-template-primary-button"
+                                        label="Create New Account"
+                                        type={Button.ButtonTypes.PRIMARY}
+                                    />
+                                    <FlexRow justify={justifyOptions.CENTER} >
+                                        <a href="#" className="branding-template-link-text">
+                                            Already have an account? Sign on.
+                                        </a>
+                                    </FlexRow>
+                                </FlexRow>
                             </div>
                         </div>
                     </Card>

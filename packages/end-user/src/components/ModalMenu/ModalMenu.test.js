@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import ModalMenu from './ModalMenu';
+import TileButton from '../shared/TileButton';
 
 window.__DEV__ = true;
 
@@ -40,7 +41,7 @@ describe('ModalMenu', () => {
         expect(modal.exists()).toEqual(true);
         expect(testCallback).not.toHaveBeenCalled();
 
-        wrapper.find('.modal-menu__button').first().simulate('click');
+        wrapper.find(TileButton).first().simulate('click');
 
         expect(testCallback).toHaveBeenCalled();
     });

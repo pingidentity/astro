@@ -180,7 +180,7 @@ const TileSelector = props => {
         <div data-id={dataId}>
             <TileSelectorContext.Provider value={type}>
                 <div className={classnames("tile-selector", className, {
-                    "tile-selector--stacked": type === selectorTypes.STACKED,
+                    "tile-selector--stacked": (type === selectorTypes.STACKED || type === selectorTypes.STACKEDSMALL),
                     "tile-selector--action": type === selectorTypes.ACTION,
                     "tile-selector--square": type === selectorTypes.SQUARE,
                 })}>
@@ -242,7 +242,7 @@ TileSelector.propTypes = {
         })
     ),
     selected: PropTypes.string,
-    type: PropTypes.oneOf([ "row", "stacked", "square", "action" ]),
+    type: PropTypes.oneOf([ "row", "stacked", "stacked-small", "square", "action" ]),
 };
 
 TileSelector.defaultProps = {

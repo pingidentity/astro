@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { noop } from "underscore";
 
 /**
@@ -8,12 +9,18 @@ import { noop } from "underscore";
 const Checkbox = ({
     'data-id': dataId,
     checked,
+    className,
     id,
     label,
     onChange,
+    isStacked,
 }) => {
+    const classNames = classnames('checkbox', className, {
+        'checkbox--stacked': isStacked,
+    });
+
     return (
-        <label className="checkbox" htmlFor={id} data-id={dataId}>
+        <label className={classNames} htmlFor={id} data-id={dataId}>
             <input
                 type="checkbox"
                 className="checkbox__input"
@@ -33,6 +40,10 @@ Checkbox.propTypes = {
      */
     checked: PropTypes.bool,
     /**
+     * CSS class(es) applied to the Checkbox element
+     */
+    className: PropTypes.string,
+    /**
      * Sets a data-id property on the Checkbox to be used as a test hook
      */
     'data-id': PropTypes.string,
@@ -48,11 +59,16 @@ Checkbox.propTypes = {
      * Fired when the value of the checkbox changes
      */
     onChange: PropTypes.func,
+    /**
+     * Determines whether the checkbox is meant to be stacked with other checkboxes
+     */
+    isStacked: PropTypes.bool,
 };
 
 Checkbox.defaultProps = {
     checked: false,
     onChange: noop,
+    isStacked: false,
 };
 
 export default Checkbox;

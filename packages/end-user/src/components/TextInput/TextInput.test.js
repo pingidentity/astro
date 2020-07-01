@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import TextInput, { textInputFormats } from './TextInput';
+import TextInput, { textInputFormats, textInputTypes } from './TextInput';
+import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 
 window.__DEV__ = true;
 
@@ -46,6 +47,26 @@ describe('TextInput', () => {
 
         input.simulate('blur');
         expect(testCallback).toHaveBeenCalled();
+    });
+    it('renders fieldMessage',() => {
+        const wrapper = getComponent({ fieldMessage: 'Text input message' })
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.exists()).toEqual(true)
+    });
+    it('does not render fieldMessage if fieldMessage is not defined',() => {
+        const wrapper = getComponent()
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.exists()).toEqual(false)
+    });
+    it('renders fieldMessage with custom status',() => {
+        const wrapper = getComponent({ fieldMessage: 'Text input message', fieldMessageProps: { status: fieldMessageStatuses.ERROR } });
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.props().status).toEqual('error');
+    });
+    it('renders fieldMessage with custom status overriding textInput type',() => {
+        const wrapper = getComponent({ fieldMessage: 'Text input message', type: textInputTypes.ERROR, fieldMessageProps: { status: fieldMessageStatuses.INFO } });
+        const fieldMessage = wrapper.find('FieldMessage');
+        expect(fieldMessage.props().status).toEqual('info');
     });
     describe('supports formats', () => {
         it('numeric', () => {

@@ -13,7 +13,7 @@ export const Default = () => (
                 id: 'sms',
                 label: 'SMS',
                 sublabel: '+972 3xx-xxx-x03',
-                icon: 'sms',
+                icon: 'mobile',
                 selected: true,
             },
             {

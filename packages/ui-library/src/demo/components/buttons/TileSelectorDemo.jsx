@@ -289,6 +289,27 @@ class TileSelectorDemo extends React.Component {
                 />
                 <HR />
                 <TileSelector
+                    type="stacked-small"
+                    options={[
+                        {
+                            id: "webapp",
+                            title: "Web App",
+                            iconName: "network",
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            link: { text: "Read More" },
+                            note: "A Good Tile",
+                        },
+                        {
+                            id: "noninteractive",
+                            title: "Non-Interactive",
+                            icon: <img src="./images/src/images/logo-pingidentity.png" />,
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            note: "A Good Tile",
+                        }
+                    ]}
+                />
+                <HR />
+                <TileSelector
                     type={selectorTypes.SQUARE}
                 >
                     <TileButton

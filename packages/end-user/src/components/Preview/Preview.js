@@ -79,6 +79,11 @@ export const applyStyles = (colors, bgImg) => {
                 color: ${colors.link};
             }
 
+            .branding-template-user-card:hover {
+                border-color: ${colors.link} !important;
+            }
+    }
+
             .branding-template-tertiary-button:hover {
                 color: ${colors.link};
             }

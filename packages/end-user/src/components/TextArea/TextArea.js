@@ -147,7 +147,7 @@ TextArea.propTypes = {
     /**
      * Name for the input
      */
-    name: PropTypes.name,
+    name: PropTypes.string,
     /**
      * The callback triggered when the input value changes
      */
