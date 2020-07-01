@@ -113,7 +113,7 @@ export default class Tutorial extends React.Component {
         return (
             <Portal>
                 <FocusTrap>
-                    <div className={welcomeClassnames} role="modal">
+                    <div className={welcomeClassnames} onKeyDown={(e) => this._keyEscape(e)} role="modal">
                         {/* Inner div necessary for focus trap */}
                         <div tabIndex="0" className="focusable-element">
                             <div className="tutorial__welcome-content">
@@ -177,20 +177,11 @@ export default class Tutorial extends React.Component {
         );
     }
 
-    componentDidMount() {
-        document.addEventListener("keydown", (event) => {
-            if (event.keyCode === 27) {
-                this.props.onClose();
-            }
-        }, false);
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener("keydown", (event) => {
-            if (event.keyCode === 27) {
-                this.props.onClose();
-            }
-        }, false);
+    _keyEscape = (e) => {
+        if (e.keyCode === 27) {
+            e.preventDefault();
+            this.props.onClose();
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -265,7 +256,7 @@ export default class Tutorial extends React.Component {
                     scrollTo={true}
                 >
                     <FocusTrap>
-                        <div className={modalClassnames} role="modal">
+                        <div className={modalClassnames} onKeyDown={(e) => this._keyEscape(e)} role="modal">
                             {/* Inner div necessary for focus trap */}
                             <div tabIndex="0" className="focusable-element">
                                 <div className="tutorial__modal-close">

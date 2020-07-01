@@ -221,4 +221,28 @@ describe("UnitInput", () => {
         expect(component.find(".tutorial__modal-step--active").length).toEqual(1);
         expect(component.find(".tutorial__modal-step--inactive").length).toEqual(1);
     });
+
+    it("calls onClose on welcome modal ESC keypress", () => {
+        const onClose = jest.fn();
+        const component = getComponent({
+            visible: true,
+            active: 0,
+            onClose
+        });
+        const welcomeModal = component.find(".tutorial__welcome-actions");
+        welcomeModal.simulate("keydown", { "keyCode": 27 });
+        expect(onClose).toHaveBeenCalled();
+    });
+
+    it("calls onClose on tutorial modal ESC keypress", () => {
+        const onClose = jest.fn();
+        const component = getComponent({
+            visible: true,
+            active: 2,
+            onClose
+        });
+        const tutorialModal = component.find(".tutorial__modal");
+        tutorialModal.simulate("keydown", { "keyCode": 27 });
+        expect(onClose).toHaveBeenCalled();
+    });
 });
