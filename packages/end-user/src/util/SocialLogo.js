@@ -190,6 +190,7 @@ const SocialLogos = {
         )
     }
 };
+SocialLogos.PAYPAL_SANDBOX = SocialLogos.PAYPAL;
 
 
 export default SocialLogos;

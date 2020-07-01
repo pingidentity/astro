@@ -76,6 +76,7 @@ const brandTypes = {
         logo: <SocialLogos.YAHOO width={20} height={20} />,
     },
 };
+brandTypes.PAYPAL_SANDBOX = brandTypes.PAYPAL;
 
 /**
  * Branded buttons
