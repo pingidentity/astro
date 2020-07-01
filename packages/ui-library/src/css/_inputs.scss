@@ -50,6 +50,7 @@ $default-input-border-radius: 2px;
 .button-menu__button,
 .input-image-thumb,
 .image-icon,
+.focusable-element,
 .tile-button {
     &:focus {
         outline-width: 0;
@@ -74,6 +75,7 @@ $default-input-border-radius: 2px;
     .button-menu__button,
     .input-image-thumb,
     .image-icon,
+    .focusable-element,
     .tile-button {
         &:focus {
             outline-width: 5px;

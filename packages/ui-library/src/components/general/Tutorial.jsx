@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import FocusTrap from "focus-trap-react/dist/focus-trap-react";
 import { Portal } from "react-portal";
 import Button, { buttonTypes } from "../../components/buttons/Button";
 import Link from "../../components/general/Link";
@@ -111,24 +112,29 @@ export default class Tutorial extends React.Component {
 
         return (
             <Portal>
-                <div className={welcomeClassnames}>
-                    <div className="tutorial__welcome-content">
-                        <div className="tutorial__welcome-title">
-                            {messageWelcomeTitle}
-                        </div>
-                        <div className="tutorial__welcome-description">
-                            {messageWelcomeDescription}
+                <FocusTrap>
+                    <div className={welcomeClassnames} role="modal">
+                        {/* Inner div necessary for focus trap */}
+                        <div tabIndex="0" className="focusable-element">
+                            <div className="tutorial__welcome-content">
+                                <div className="tutorial__welcome-title">
+                                    {messageWelcomeTitle}
+                                </div>
+                                <div className="tutorial__welcome-description">
+                                    {messageWelcomeDescription}
+                                </div>
+                            </div>
+                            <div className="tutorial__welcome-actions">
+                                <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
+                                    {labelGetStarted}
+                                </Button>
+                                <div>
+                                    <Link onClick={onClose}>{labelDismiss}</Link>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="tutorial__welcome-actions">
-                        <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
-                            {labelGetStarted}
-                        </Button>
-                        <div>
-                            <Link onClick={onClose}>{labelDismiss}</Link>
-                        </div>
-                    </div>
-                </div>
+                </FocusTrap>
             </Portal>
         );
     }
@@ -136,11 +142,11 @@ export default class Tutorial extends React.Component {
     _renderStepContent = ({ title, description, headerContent }) => {
         return (
             <div className="tutorial__modal-content">
-                { headerContent ? (
+                {headerContent ? (
                     <div className="tutorial__modal-header">
                         {headerContent}
                     </div>
-                ) : null }
+                ) : null}
                 <div className="tutorial__modal-title">{title}</div>
                 <div className="tutorial__modal-description">{description}</div>
             </div>
@@ -169,6 +175,22 @@ export default class Tutorial extends React.Component {
                 </ul>
             </div>
         );
+    }
+
+    componentDidMount() {
+        document.addEventListener("keydown", (event) => {
+            if (event.keyCode === 27) {
+                this.props.onClose();
+            }
+        }, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", (event) => {
+            if (event.keyCode === 27) {
+                this.props.onClose();
+            }
+        }, false);
     }
 
     componentDidUpdate(prevProps) {
@@ -233,32 +255,39 @@ export default class Tutorial extends React.Component {
 
         if (active > 0 && step) {
             return (
+
                 <PopperContainer
                     getReference={step.target}
                     key={step.target}
                     placement={step.side}
                     pointerClassName={pointerClassnames}
                     className="tutorial__modal-popper"
+                    scrollTo={true}
                 >
-                    <div className={modalClassnames} ref={this.modal}>
-                        <div className="tutorial__modal-close">
-                            <Icon iconName="clear" type={iconTypes.INLINE} onClick={onClose}/>
-                        </div>
-                        {this._renderStepContent(step)}
-                        <div className="tutorial__modal-footer">
-                            <FlexRow alignment={alignments.CENTER} justify={justifyOptions.SPACEBETWEEN}>
-                                <div>
-                                    {this._renderProgress(active, steps.length)}
+                    <FocusTrap>
+                        <div className={modalClassnames} role="modal">
+                            {/* Inner div necessary for focus trap */}
+                            <div tabIndex="0" className="focusable-element">
+                                <div className="tutorial__modal-close">
+                                    <Icon iconName="clear" type={iconTypes.INLINE} onClick={onClose} />
                                 </div>
-                                <div className="tutorial__modal-actions">
-                                    <Link onClick={onPrevious}>{labelPrevious}</Link>
-                                    <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
-                                        { active === steps.length ? labelFinal : labelNext }
-                                    </Button>
+                                {this._renderStepContent(step)}
+                                <div className="tutorial__modal-footer">
+                                    <FlexRow alignment={alignments.CENTER} justify={justifyOptions.SPACEBETWEEN}>
+                                        <div>
+                                            {this._renderProgress(active, steps.length)}
+                                        </div>
+                                        <div className="tutorial__modal-actions">
+                                            <Link onClick={onPrevious}>{labelPrevious}</Link>
+                                            <Button type={buttonTypes.PRIMARY} onClick={onNext} noSpacing>
+                                                {active === steps.length ? labelFinal : labelNext}
+                                            </Button>
+                                        </div>
+                                    </FlexRow>
                                 </div>
-                            </FlexRow>
+                            </div>
                         </div>
-                    </div>
+                    </FocusTrap>
                 </PopperContainer>
             );
         }
