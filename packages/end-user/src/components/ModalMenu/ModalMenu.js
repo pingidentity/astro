@@ -4,16 +4,6 @@ import TileSelector from '../shared/TileSelector';
 import { noop } from "underscore";
 
 /**
- * Types of Icons
- * @alias icons
- */
-const icons = {
-    sms: 'pingicon-chat',
-    email: 'pingicon-email',
-    mobile: 'pingicon-mobile',
-};
-
-/**
  * Modal-style menu
  */
 export const ModalMenu = ({
@@ -32,7 +22,7 @@ export const ModalMenu = ({
             onValueChange={itemClicked}
             options={options.map(option => (
                 {
-                    id: option.label,
+                    id: option.id,
                     title: option.label,
                     iconName: option.icon,
                     description: option.sublabel,
@@ -51,10 +41,10 @@ ModalMenu.propTypes = {
      * The ModalMenu items
      */
     options: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         label: PropTypes.string,
         sublabel: PropTypes.string,
-        icon: PropTypes.string,
-        selected: PropTypes.bool,
+        icon: PropTypes.string
     })),
     /**
      * Called when the ModalMenu selection chnanges
