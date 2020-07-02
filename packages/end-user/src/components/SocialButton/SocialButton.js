@@ -87,6 +87,7 @@ const UnstyledSocialButton = ({
     className,
     branding = {},
     image,
+    isSubmit,
     label,
 }) => {
     const {
@@ -115,6 +116,7 @@ const UnstyledSocialButton = ({
                             onClick={onClick}
                             data-id={dataId}
                             disabled={disabled}
+                            type={isSubmit && "submit"}
                         >
                             {children}
                         </button>
@@ -160,6 +162,10 @@ UnstyledSocialButton.propTypes = {
      */
     image: PropTypes.string,
     /**
+     * If button type should be "submit"
+     */
+    isSubmit: PropTypes.bool,
+    /**
      * Button text
      */
     label: PropTypes.node,
@@ -172,6 +178,7 @@ UnstyledSocialButton.propTypes = {
 UnstyledSocialButton.defaultProps = {
     'data-id': 'social-button',
     disabled: false,
+    isSubmit: false,
     onClick: noop,
 };
 

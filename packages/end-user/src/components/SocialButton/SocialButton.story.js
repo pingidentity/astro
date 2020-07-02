@@ -8,7 +8,7 @@ export default {
 
 export const Buttons = () => (
     <div>
-        <SocialButton label="Login with Facebook" branding={SocialButton.BrandTypes.FACEBOOK} />
+        <SocialButton isSubmit label="Login with Facebook" branding={SocialButton.BrandTypes.FACEBOOK} />
         <SocialButton label="Login with Apple" branding={SocialButton.BrandTypes.APPLE} />
         <SocialButton label="Login with Google" branding={SocialButton.BrandTypes.GOOGLE} />
         <SocialButton label="Login with Amazon" branding={SocialButton.BrandTypes.AMAZON} />
