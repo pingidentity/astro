@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import Checkbox from './Checkbox';
 
 window.__DEV__ = true;
@@ -9,6 +10,7 @@ const defaultProps = {
 };
 
 const getComponent = props => mount(<Checkbox {...defaultProps} {...props} />);
+const renderComponent = props => render(<Checkbox {...defaultProps} {...props} />);
 
 describe('Checkbox', () => {
     it('renders the Checkbox in the default state', () => {
@@ -30,5 +32,17 @@ describe('Checkbox', () => {
         wrapper.find('.checkbox__input').first().simulate('change');
 
         expect(testCallback).toHaveBeenCalled();
+    });
+
+    it('does not display the label with Markdown when hasMarkdown prop is false', () => {
+        renderComponent({ label: '# Markdown!' });
+        const heading = screen.queryByRole('heading');
+        expect(heading).not.toBeInTheDocument();
+    });
+
+    it('displays the label with Markdown when hasMarkdown prop is true', () => {
+        renderComponent({ hasMarkdown: true, label: '# Markdown!' });
+        const heading = screen.queryByRole('heading');
+        expect(heading).toBeInTheDocument();
     });
 });

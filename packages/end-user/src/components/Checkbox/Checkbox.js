@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from "underscore";
 
+import Markdown from '../Markdown';
+
 /**
  * Toggles an option
  */
@@ -14,6 +16,7 @@ const Checkbox = ({
     label,
     onChange,
     isStacked,
+    hasMarkdown,
 }) => {
     const classNames = classnames('checkbox', className, {
         'checkbox--stacked': isStacked,
@@ -29,7 +32,9 @@ const Checkbox = ({
                 onChange={onChange}
             />
             <span className="checkbox__standin" />
-            <span className="checkbox__label">{label}</span>
+            <span className="checkbox__label">
+                <Markdown hasMarkdown={hasMarkdown} source={label} />
+            </span>
         </label>
     );
 };
@@ -63,12 +68,17 @@ Checkbox.propTypes = {
      * Determines whether the checkbox is meant to be stacked with other checkboxes
      */
     isStacked: PropTypes.bool,
+    /**
+     * Determines whether the checkbox label has Markdown applied to it
+     */
+    hasMarkdown: PropTypes.bool,
 };
 
 Checkbox.defaultProps = {
     checked: false,
     onChange: noop,
     isStacked: false,
+    hasMarkdown: false,
 };
 
 export default Checkbox;

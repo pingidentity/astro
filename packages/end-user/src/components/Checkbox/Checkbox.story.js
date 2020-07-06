@@ -24,3 +24,10 @@ export const Stacked = () => (
         <Checkbox isStacked label="I'm a checkbox!" />
     </div>
 );
+
+export const Markdown = () => (
+    <>
+        <Checkbox hasMarkdown label="I'm a checkbox! And now I have __MARKDOWN__... Isn't it *DREAMY*?" />
+        <Checkbox hasMarkdown label="Here's a link to [Wikipedia](https://wikipedia.org)" />
+    </>
+);
