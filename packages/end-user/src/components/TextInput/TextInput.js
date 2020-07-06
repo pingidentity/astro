@@ -200,10 +200,6 @@ TextInput.propTypes = {
     /**
      * Type of value format the TextInput accepts
      */
-    fieldMessage: PropTypes.node,
-    /**
-     * Message below field
-     */
     format: PropTypes.oneOf(Object.values(textInputFormats)),
     /**
      * Focus field upon mount

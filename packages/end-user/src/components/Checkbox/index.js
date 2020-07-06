@@ -1,3 +1,3 @@
-import Checkbox, { StatelessCheckbox } from './Checkbox';
+import Checkbox, { StatelessCheckbox, checkboxStatuses } from './Checkbox';
 
-export { Checkbox as default, StatelessCheckbox };
+export { Checkbox as default, StatelessCheckbox, checkboxStatuses };
