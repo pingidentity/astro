@@ -2,6 +2,17 @@
 $checkbox-label-color: $color-neutral-20;
 $checkbox-border-color: $color-neutral-40;
 
+.checkbox-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: $spacing-base;
+
+    > .field-message {
+        margin-left: 2px;
+        margin-top: -1px;
+    }
+}
+
 .checkbox {
     cursor: pointer;
     position: relative;
@@ -12,7 +23,6 @@ $checkbox-border-color: $color-neutral-40;
 
     &--stacked {
         display: flex;
-        margin-bottom: $spacing-base;
 
         .checkbox__label {
             align-self: center;
@@ -23,6 +33,12 @@ $checkbox-border-color: $color-neutral-40;
             flex-shrink: 0;
             flex-basis: $spacing-lg;
             min-width: $spacing-lg;
+        }
+    }
+
+    &--error {
+        .checkbox__input + .checkbox__standin {
+            border: 2px solid $color-critical-red;
         }
     }
 }

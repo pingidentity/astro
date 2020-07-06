@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { render, screen } from '@testing-library/react';
-import Checkbox from './Checkbox';
+import Checkbox, { statuses } from './Checkbox';
 
 window.__DEV__ = true;
 
@@ -44,5 +44,15 @@ describe('Checkbox', () => {
         renderComponent({ hasMarkdown: true, label: '# Markdown!' });
         const heading = screen.queryByRole('heading');
         expect(heading).toBeInTheDocument();
+    });
+
+    it('displays the error status and message', () => {
+        const fieldMessage = 'error';
+        renderComponent({ status: statuses.ERROR, fieldMessage });
+
+        const status = screen.getByRole('status');
+        expect(status).toHaveClass('field-message--error');
+        expect(status).toBeInTheDocument();
+        expect(status).toHaveTextContent(fieldMessage);
     });
 });

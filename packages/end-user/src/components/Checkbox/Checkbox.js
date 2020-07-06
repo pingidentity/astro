@@ -3,7 +3,19 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from "underscore";
 
+import FieldMessage from '../FieldMessage';
 import Markdown from '../Markdown';
+
+/**
+ * @enum {string}
+ * @alias Checkbox~statuses
+ * @desc Enum for the different types of checkbox styling
+ */
+
+export const statuses = {
+    DEFAULT: 'default',
+    ERROR: 'error',
+};
 
 /**
  * Toggles an option
@@ -17,25 +29,37 @@ const Checkbox = ({
     onChange,
     isStacked,
     hasMarkdown,
+    fieldMessage,
+    fieldMessageProps,
+    status,
 }) => {
     const classNames = classnames('checkbox', className, {
         'checkbox--stacked': isStacked,
+        'checkbox--error': status === statuses.ERROR,
     });
 
     return (
-        <label className={classNames} htmlFor={id} data-id={dataId}>
-            <input
-                type="checkbox"
-                className="checkbox__input"
-                id={id}
-                defaultChecked={checked}
-                onChange={onChange}
-            />
-            <span className="checkbox__standin" />
-            <span className="checkbox__label">
-                <Markdown hasMarkdown={hasMarkdown} source={label} />
-            </span>
-        </label>
+        <div className="checkbox-container">
+            <label className={classNames} htmlFor={id} data-id={dataId}>
+                <input
+                    type="checkbox"
+                    className="checkbox__input"
+                    id={id}
+                    defaultChecked={checked}
+                    onChange={onChange}
+                />
+                <span className="checkbox__standin" />
+                <span className="checkbox__label">
+                    <Markdown hasMarkdown={hasMarkdown} source={label} />
+                </span>
+            </label>
+            {
+                fieldMessage &&
+                <FieldMessage status={status} {...fieldMessageProps}>
+                    {fieldMessage}
+                </FieldMessage>
+            }
+        </div>
     );
 };
 
@@ -53,9 +77,25 @@ Checkbox.propTypes = {
      */
     'data-id': PropTypes.string,
     /**
+     * Message below field
+     */
+    fieldMessage: PropTypes.node,
+    /**
+     * Sets field message props
+     */
+    fieldMessageProps: PropTypes.object,
+    /**
+     * Determines whether the checkbox label has Markdown applied to it
+     */
+    hasMarkdown: PropTypes.bool,
+    /**
      * ID to apply to the Checkbox element itself
      */
     id: PropTypes.string,
+    /**
+     * Determines whether the checkbox is meant to be stacked with other checkboxes
+     */
+    isStacked: PropTypes.bool,
     /**
      * Label for the Checkbox
      */
@@ -65,20 +105,17 @@ Checkbox.propTypes = {
      */
     onChange: PropTypes.func,
     /**
-     * Determines whether the checkbox is meant to be stacked with other checkboxes
+     * Controls styling effects
      */
-    isStacked: PropTypes.bool,
-    /**
-     * Determines whether the checkbox label has Markdown applied to it
-     */
-    hasMarkdown: PropTypes.bool,
+    status: PropTypes.oneOf(Object.values(statuses)),
 };
 
 Checkbox.defaultProps = {
     checked: false,
-    onChange: noop,
-    isStacked: false,
     hasMarkdown: false,
+    isStacked: false,
+    onChange: noop,
+    status: statuses.DEFAULT,
 };
 
 export default Checkbox;

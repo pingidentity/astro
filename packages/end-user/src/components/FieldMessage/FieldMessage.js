@@ -46,6 +46,7 @@ const FieldMessage = ({
         <div
             data-id={dataId}
             className={classNames}
+            role="status"
         >
             {children}
         </div>
