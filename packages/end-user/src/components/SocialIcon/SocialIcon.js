@@ -362,6 +362,7 @@ const SocialIcons = {
         )
     },
 };
+SocialIcons.PAYPAL_SANDBOX = SocialIcons.PAYPAL;
 
 
 export default SocialIcons;
