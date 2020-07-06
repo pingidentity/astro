@@ -117,7 +117,7 @@ const UnstyledSocialButton = ({
                             onClick={onClick}
                             data-id={dataId}
                             disabled={disabled}
-                            type={isSubmit && "submit"}
+                            type={isSubmit ? 'submit' : 'button'}
                         >
                             {children}
                         </button>
