@@ -11,8 +11,8 @@
         animation: fade-down-in 0.2s;
 
         &--error {
-            color: $color-white;
-            background-color: $color-critical-red;
+            color: $color-critical-red;
+            background-color: $color-critical-red-light;
         }
 
         &--info {
@@ -31,7 +31,7 @@
         }
 
         &--warning {
-            color: $color-white;
-            background-color: $color-warning-yellow;
+            color: $color-warning-text;
+            background-color: $color-warning-yellow-light;
         }
     }
