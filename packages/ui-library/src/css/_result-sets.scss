@@ -160,7 +160,8 @@ $expandable-row-gap: 12px;
     .edit-btn,
     .view-btn,
     .no-edit,
-    .btn-fill {
+    .btn-fill,
+    .btn-helphint {
         position: relative;
         background-color: $color-chilly;
         text-align: center;
@@ -197,7 +198,8 @@ $expandable-row-gap: 12px;
     }
     .edit-btn,
     .view-btn,
-    .btn-fill {
+    .btn-fill,
+    .btn-helphint {
         display: none;
         height: calc(100% - #{2 * $button-height} - 2px);
     }
@@ -256,6 +258,13 @@ $expandable-row-gap: 12px;
         .btn-fill {
             display: block;
         }
+
+        .btn-helphint {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
         .delete-btn {
             display: block;
             margin: 1px 0 0;

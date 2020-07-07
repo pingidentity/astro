@@ -14,6 +14,7 @@ import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
 import ButtonGroup from "../../layout/ButtonGroup";
+import HelpHint from "../../tooltips/HelpHint";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
@@ -137,6 +138,9 @@ const ConfirmDeletePositions = {
  *
  * @param {string} [editViewRoute=""]
  *     Route to the 'edit mode' view.
+ *
+ * @param {boolean} [editHelpHintText]
+ *     Text for help hint on edit button
  * @param {boolean} [isEditEnabled=true]
  *     Whether or not the 'edit' button is enabled.
  * @param {boolean} [showEdit=true]
@@ -372,6 +376,7 @@ class StatelessExpandableRow extends React.Component {
         children: PropTypes.node,
         content: PropTypes.object,
         editViewRoute: PropTypes.string,
+        editHelpHintText: PropTypes.string,
         isEditEnabled: PropTypes.bool,
         showEdit: PropTypes.bool,
         editButton: PropTypes.object,
@@ -493,12 +498,25 @@ class StatelessExpandableRow extends React.Component {
             deleteButton,
             editButton;
 
-        if (this.props.showEdit) {
+        if (this.props.showEdit && !this.props.editHelpHintText) {
             editButton = this.props.editButton || (
                 <a data-id="edit-btn" className={editButtonClassname}
                     href={this._getEditViewRoute(this.props.editViewRoute)}
                     {...getClickableA11yProps(this.props.onEditButtonClick)}
                     onClick={this.props.onEditButtonClick} />);
+        }
+
+        if (this.props.showEdit && this.props.editHelpHintText) {
+            editButton = (
+                <div className="btn-helphint">
+                    <HelpHint hintText={this.props.editHelpHintText} placement="left">
+                        <a data-id="edit-btn"
+                            className={editButtonClassname}
+                            href={this._getEditViewRoute(this.props.editViewRoute)}
+                            {...getClickableA11yProps(this.props.onEditButtonClick)}
+                            onClick={this.props.onEditButtonClick}>a</a>
+                    </HelpHint>
+                </div>);
         }
 
         if (this.props.showDelete) {
@@ -551,7 +569,7 @@ class StatelessExpandableRow extends React.Component {
                 data-id={this.props["data-id"]}
                 className={containerClassname}
             >
-                { (this.props.rowAccessories || this.props.status) && (
+                {(this.props.rowAccessories || this.props.status) && (
                     <div data-id="row-accessories" className="row-accessories">
                         {this.props.rowAccessories}
                         {this.props.status && (
@@ -559,9 +577,9 @@ class StatelessExpandableRow extends React.Component {
                         )}
                     </div>
                 )}
-                { (this.props.ordering) && (
+                {(this.props.ordering) && (
                     <div data-id="ordering-controls" className="ordering-controls">
-                        <span className="icon-grip ordering-controls__grip"/>
+                        <span className="icon-grip ordering-controls__grip" />
                         <OrderingInput
                             data-id="ordering-input"
                             {...this.props.ordering}
