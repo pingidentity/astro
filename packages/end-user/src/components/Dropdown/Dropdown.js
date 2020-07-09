@@ -72,6 +72,7 @@ export const StatelessDropdown = ({
                     <option
                         key={getValue(option)}
                         value={getValue(option)}
+                        disabled={option.disabled || false}
                     >
                         {getLabel(option)}
                     </option>
