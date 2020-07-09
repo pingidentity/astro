@@ -216,6 +216,9 @@ $topnav-bg: $color-neutral-10;
         position: absolute;
         right: 50%;
         transition: 0.1s;
+
+        // On some displays, the after gets a non-zero width and shows a single pixel.
+        visibility: hidden;
     }
 }
 
@@ -223,6 +226,7 @@ $topnav-bg: $color-neutral-10;
     right: 0;
     left: 0;
     transition: 0.05s;
+    visibility: visible;
 }
 
 .header-nav__item--selected .header-nav__item-label {
@@ -233,6 +237,7 @@ $topnav-bg: $color-neutral-10;
         left: 0;
         right: 0;
         transition: 0.05s;
+        visibility: visible;
     }
 }
 
