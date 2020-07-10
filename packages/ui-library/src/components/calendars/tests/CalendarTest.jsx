@@ -14,13 +14,13 @@ import TestUtils from "../../../testutil/TestUtils";
 import { mount } from "enzyme";
 
 describe("Calendar", function () {
-    const callback = jest.fn(),
-        selectedDateString = "2015-10-15",
-        dateRange = {
-            startDate: new Date(2015, 9, 10), //Oct 10 2015
-            endDate: new Date(2015, 10, 20) //Nov 20 2015
-        },
-        selectedDate = moment(new Date(selectedDateString));
+    const callback = jest.fn();
+    const selectedDateString = "2015-10-15";
+    const dateRange = {
+        startDate: new Date(2015, 9, 10), //Oct 10 2015
+        endDate: new Date(2015, 10, 20) //Nov 20 2015
+    };
+    const selectedDate = moment(new Date(selectedDateString));
 
     function getComponent (props) {
         return ReactTestUtils.renderIntoDocument(
@@ -947,5 +947,17 @@ describe("Calendar", function () {
 
         expect(validateInputValue).toHaveBeenCalled();
         expect(textInput.value).toEqual("02-02-2002");
+    });
+
+    it("Handles the date prop changing from a valid value to an invalid one", function() {
+        const component = mountComponent({ date: selectedDateString, format: "YYYY-MM-DD" });
+
+        const input = component.find("[data-id=\"calendar-input\"]");
+
+        expect(input.props().value).toBe("2015-10-15");
+
+        component.setProps({ date: null });
+
+        expect(component.find("[data-id=\"calendar-input\"]").props().value).toEqual("");
     });
 });

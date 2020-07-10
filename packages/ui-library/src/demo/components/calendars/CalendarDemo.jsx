@@ -34,7 +34,7 @@ class CalendarDemo extends React.Component {
     _getSelectedDateLabel = (date) => {
         return date ? moment(date).format("MMMM Do YYYY") : "NONE";
     };
-    
+
     _compareDates = (date) => {
         return moment(date).isBefore(moment()) ? "Please enter a future date." : null;
     }

@@ -382,10 +382,11 @@ class Calendar extends React.Component {
 
             if (CalendarUtils.inDateRange(newDate, this._parseDateRange(this.props.dateRange))) {
                 this._handleValueChange(newDate);
+            } else {
+                this.setState({
+                    inputValue: undefined,
+                });
             }
-            this.setState({
-                inputValue: undefined,
-            });
         }
     };
 
@@ -449,7 +450,7 @@ class Calendar extends React.Component {
     _getReference = () => this.reference;
 
     render() {
-        const calendarDate = this._getDate(this.state.date.clone()) || this._handleUtcOffset();
+        const calendarDate = this._getDate(this.state.date) || this._handleUtcOffset();
         let view;
 
         const viewProps = {
@@ -501,7 +502,7 @@ class Calendar extends React.Component {
         );
 
         const inputValue = this.state.inputValue === undefined
-            ? this._getFormattedDate(this._getDate(this.state.date.clone()))
+            ? this._getFormattedDate(this._getDate(this.state.date))
             : this.state.inputValue;
 
         const className = classnames("input-calendar",
