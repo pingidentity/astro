@@ -58,6 +58,7 @@ export const spacings = {
  */
 export const LegendItem = ({
     color,
+    textColor,
     label,
     value,
     alignment,
@@ -78,19 +79,14 @@ export const LegendItem = ({
             { label ? (
                 <div className="legend__item-info">
                     { color ? (
-                        <div
-                            className="legend__item-badge"
-                            style={{
-                                backgroundColor: color,
-                            }}
-                        />
+                        <div className="legend__item-badge" style={{ backgroundColor: color }} />
                     ) : null }
-                    <div className="legend__item-label">
+                    <div className="legend__item-label" style={{ color: textColor }}>
                         {label}
                     </div>
                 </div>
             ) : null }
-            <div className={valueClassNames}>
+            <div className={valueClassNames} style={{ color: textColor }}>
                 { value !== undefined && value !== null ? value : (
                     <div className="legend__item-novalue"/>
                 )}
@@ -132,6 +128,7 @@ const Legend = ({
                     <LegendItem
                         key={item.label}
                         color={item.color}
+                        textColor={item.textColor}
                         label={item.label}
                         value={item.value}
                         alignment={alignment}

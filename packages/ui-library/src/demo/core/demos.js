@@ -1088,6 +1088,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_charting_HeroChartDemo.jsx.html"
                     },
                     {
+                        label: "Hero Multi Bar Chart",
+                        demo: require("../components/general/charting/HeroMultiBarChartDemo"),
+                        pathToDoc: "components/general/charting/HeroMultiBarChart.jsx",
+                        pathToSource: "components_general_charting_HeroMultiBarChart.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_HeroMultiBarChartDemo.jsx.html"
+                    },
+                    {
                         label: "Stat Area Card",
                         demo: require("../components/general/charting/StatAreaCardDemo"),
                         pathToDoc: "components/general/charting/StatAreaCard.jsx",

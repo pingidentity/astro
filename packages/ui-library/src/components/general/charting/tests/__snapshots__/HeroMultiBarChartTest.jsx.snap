@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeroMultiBarChart data-id's don't change 1`] = `
+Array [
+  "custom-chart",
+  "padding-component",
+]
+`;
