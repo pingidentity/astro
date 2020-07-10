@@ -11,6 +11,7 @@ import FlexRow, {
 } from "../../components/layout/FlexRow";
 import Icon, { iconTypes } from "../../components/general/Icon";
 import PopperContainer from "../../components/tooltips/PopperContainer";
+import KeyboardUtils from "../../util/KeyboardUtils.js";
 
 export const themes = {
     LIGHT: "light",
@@ -113,7 +114,7 @@ export default class Tutorial extends React.Component {
         return (
             <Portal>
                 <FocusTrap>
-                    <div className={welcomeClassnames} onKeyDown={(e) => this._keyEscape(e)} role="modal">
+                    <div className={welcomeClassnames} onKeyDown={this._handleKeyDown} role="modal">
                         {/* Inner div necessary for focus trap */}
                         <div tabIndex="0" className="focusable-element">
                             <div className="tutorial__welcome-content">
@@ -177,10 +178,11 @@ export default class Tutorial extends React.Component {
         );
     }
 
-    _keyEscape = (e) => {
-        if (e.keyCode === 27) {
+    _handleKeyDown = (e) => {
+        if (e.keyCode === KeyboardUtils.KeyCodes.ESC) {
             e.preventDefault();
-            this.props.onClose();
+            e.persist();
+            this.props.onClose(e);
         }
     }
 
@@ -256,7 +258,7 @@ export default class Tutorial extends React.Component {
                     scrollTo={true}
                 >
                     <FocusTrap>
-                        <div className={modalClassnames} onKeyDown={(e) => this._keyEscape(e)} role="modal">
+                        <div className={modalClassnames} onKeyDown={this._handleKeyDown} role="modal">
                             {/* Inner div necessary for focus trap */}
                             <div tabIndex="0" className="focusable-element">
                                 <div className="tutorial__modal-close">
