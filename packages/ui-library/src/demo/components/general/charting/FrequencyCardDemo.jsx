@@ -1,6 +1,6 @@
 import React from "react";
 import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
-import { FrequencyCard, CardRow, DashboardCard } from "ui-library/lib/components/general/charting/Cards";
+import { FrequencyCard, CardRow } from "ui-library/lib/components/general/charting/Cards";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 /**
@@ -47,7 +47,11 @@ export default class FrequencyCardDemo extends React.Component {
             { id: "Within the last 24 hours", value: 1205 },
             { id: "1 day - 1 week ago", value: 512 },
             { id: "1 week - 4 weeks ago", value: 200 },
+            { id: "4 weeks - 12 weeks ago", value: 200 },
+            { id: "Over 12 weeks ago", value: 200 },
+            { id: "Inactive users", value: 200, color: "#888888" },
         ];
+
 
         const exampleData = [
             60,
@@ -274,12 +278,14 @@ export default class FrequencyCardDemo extends React.Component {
                 <CardRow>
                     <FrequencyCard
                         errorMessage={this.state.errorMessage}
+                        loading={this.state.loading}
 
                         frontTitle="Users By Last Activity"
                         frontLegendLabel="Last activity was:"
-                        donutData={donutData}
                         donutLabel="Total Users"
                         donutUnits="Users"
+                        donutTooltip="Click to view report"
+                        donutData={donutData}
 
                         backTitle="Average distribution of user activity"
                         backTitleHelpHint="This is the back title help hint"
@@ -288,18 +294,20 @@ export default class FrequencyCardDemo extends React.Component {
                         backLegendLabel="Active on average:"
                         barData={barData}
 
-                        loading={this.state.loading}
-                        onMakeDefault={this._handleMakeDefault}
-                        makeDefaultLabel="Make Default View"
-                        defaultChecked={false}
-
                         onBarChartClick={this._onFrequencyChartClick}
                         onDonutChartClick={this._onDonutChartClick}
                         onFrontLegendClick={this._onFrontLegendClick}
-
-                        size={2}
                     />
-                    <DashboardCard size={1} />
+                    <FrequencyCard
+                        frontTitle="Frequency Card without back data"
+                        frontLegendLabel="Last activity was:"
+                        donutLabel="Total Users"
+                        donutUnits="Users"
+                        donutData={donutData}
+
+                        onDonutChartClick={this._onDonutChartClick}
+                        onFrontLegendClick={this._onFrontLegendClick}
+                    />
                 </CardRow>
             </div>
         );

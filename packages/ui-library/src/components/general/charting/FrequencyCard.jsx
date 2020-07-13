@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import _ from "lodash";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import RockerButton from "../../forms/RockerButton";
 import HelpHint from "../../tooltips/HelpHint";
@@ -12,7 +13,7 @@ import ChartLegend from "./ChartLegend";
 import Colors from "../../general/charting/Cards/dashboardColors";
 
 /**
- * @typedef {Object} FrequencyCard~data
+ * @typedef {Object} FrequencyCard~DonutItemData
  * @param {string} [id]
  *     Identifier for this data label
  * @param {string|number} [value]
@@ -20,54 +21,66 @@ import Colors from "../../general/charting/Cards/dashboardColors";
  * @param {string} [color]
  *     color of the data
  *
+ *
  * @class FrequencyCard
  * @desc A card that displays a donut chart on a dashboard card.
  *
- * @param {string} [className]
- *    Custom class name(s) applied to the top-level container.
  * @param {array} [data-id="frequency-card"]
  *     The data-id attribute applied to the top-level container.
- * @param {string} [label]
- *     Label for the card.
- * @param {string} [keyLabel]
- *     Label for the key.
- * @param {string} [units]
- *     Used for hover-state label.
- * @param {string} [frontTitle]
- *     Title of the card. Displayed at top of the front card.
- * @param {string} [backTitle]
- *     Title of the card. Displayed at top of the back.
- * @param {number} [value]
- *     The valuee shown on the front and back of the card.
+ * @param {string} [className]
+ *    Custom class name(s) applied to the top-level container.
  * @param {string} [errorMessage]
  *     When provided, the error message and icon will display in place of the regular front/back content.
  * @param {boolean} [loading=false]
  *     When true the splinner animation shows in place of the stats.
- * @param {function} [onMouseOver]
- *     Callback triggered when a chart data-point is hovered over.
- * @param {function} [onMouseOut]
- *     Callback triggered when the mouse is hovered out of the chart.
- * @param {object} [options]
- *     Provides the list of objects for the drop down.
- * @param {object} [selectedOption]
- *     Highlightes selected option.
- * @param {object} [onSelect]
- *     Selects from the list of options.
+
+ * @param {string} [frontTitle]
+ *     Title of the card. Displayed at top of the front card.
+ * @param {string} [frontLegendLabel]
+ *     Label for legend back card.
+ * @param {string} [donutLabel]
+ *     The value shown on the front card in the middle of donut.
+ * @param {string} [donutUnits]
+ *     Used for hover-state on the front card in the middle of donut.
+ * @param {string} [donutTooltip]
+ *     Value for help hints.
+ * @param {array} [donutData]
+ *    A list of objects that needs for render donut chart.
+ * @param {string} [backTitle]
+ *     Title of the card. Displayed at top of the back.
+ * @param {string} [backTitleHelpHint]
+ *     HelpHint value for title of the back card.
+ * @param {string} [backTerminateLabel]
+ *     Text for terminate line.
+ * @param {string} [barUnits]
+ *     Used for hover-state on the back card.
+ * @param {string} [backLegendLabel]
+ *     Label for legend back card.
+ * @param {array} [barData]
+ *    A list of objects that needs for render bar chart.
+ *
+ * @param {function} [onFrontLegendClick]
+ *     Callback triggered when clicked on front legend.
+ * @param {function} [onDonutChartClick]
+ *     Callback triggered when clicked on donut chart.
+ * @param {function} [onBackLegendClick]
+ *     Callback triggered when clicked on back legend.
+ * @param {function} [onBackLegendClick]
+ *     Callback triggered when clicked on bar chart.
+ *
  * @param {function} [onMakeDefault]
  *     Callback triggered when the make-default checkbox is changed.  When provided a checkbox will render on the back
  *     of the card.
- * @param {object} [Array.DonutCard~data]
- *     A list of objects that provides the data for the chart.
  * @param {bool} [defaultChecked]
  *     state of the checkbox set to false. If set to true will render with onMakeDefault already checked.
  * */
 
 export default class FrequencyCard extends Component {
-    _getColors = (a) => {
+    _getColors = (data) => {
         let colors = [];
         let defaultIndex = 0;
 
-        a.map(({ color }) => {
+        data.map(({ color }) => {
             if (color) {
                 colors.push(color);
             } else {
@@ -199,8 +212,10 @@ export default class FrequencyCard extends Component {
         this.props.onBackLegendClick({ index, label }, e);
 
     // Renders donut pieces
-    _renderCells = (data, colors) =>
-        data.map(({ id }, key) =>
+    _renderCells = (data) => {
+        const colors = this._getColors(data);
+
+        return data.map(({ id }, key) =>
             this.state.hoveredItem.id === id ? (
                 <Cell
                     className="frequency-card__hovered"
@@ -215,6 +230,8 @@ export default class FrequencyCard extends Component {
                 <Cell data-id={`donut-pie-cell_${id}`} key={id} fill={colors[key]}/>
             )
         );
+    }
+
 
     // Shrinks large num's with dot notation (eg. 1240 -> 1.2k)
     _renderNumber = (value) => {
@@ -246,15 +263,17 @@ export default class FrequencyCard extends Component {
 
     // Adds commas at proper locations in long num
     _renderCommas = (value) => {
-        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return value && value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
     _renderTooltip = (data) => {
-        if (data.payload[0]) {
+        const { donutTooltip } = this.props;
+
+        if (donutTooltip && data.payload[0]) {
             return (
                 <div className="frequency-tooltip">
                     <div className="frequency-tooltip__data">
-                        Click to view report
+                        {donutTooltip}
                     </div>
                 </div>
             );
@@ -272,181 +291,199 @@ export default class FrequencyCard extends Component {
         });
     }
 
-    render () {
-        const classes = classnames(
-            "frequency-card",
-            this.props.className,
-        );
-
+    _getFront = () => {
         const {
+            loading,
+            frontTitle,
+            frontTitleHelpHint,
             frontLegendLabel,
-            donutUnits,
             donutInnerRadius,
             donutOuterRadius,
-            donutData,
             donutLabel,
+            donutUnits,
+            donutTooltip,
+            donutData,
+        } = this.props;
+        const {
+            hoveredItem,
+            originalDonutValue,
+        } = this.state;
 
+        return !_.isEmpty(donutData) && (
+            <div>
+                <DashboardCardTitle
+                    className="dashboard-card__title--frequency-card"
+                    title={frontTitle}
+                >
+                    {frontTitleHelpHint &&
+                    <HelpHint
+                        data-id="helphint-bottomplacement"
+                        placement="bottom"
+                        leftMargin
+                        hintText={frontTitleHelpHint}
+                    />
+                    }
+                </DashboardCardTitle>
+                <div className="frequency-card__holder">
+                    {!loading && ([
+                        <div key="chartKey" className="frequency-card__wrapper">
+                            <PieChart
+                                height={202}
+                                width={202}
+                                data-id={`${this.props["data-id"]}-chart`}
+                                className="frequency-card__donut-chart"
+                                cursor="pointer"
+                            >
+                                <Pie
+                                    innerRadius={donutInnerRadius}
+                                    outerRadius={donutOuterRadius}
+                                    startAngle={90}
+                                    endAngle={-270}
+                                    paddingAngle={1}
+                                    data={donutData}
+                                    dataKey="value"
+                                    nameKey="id"
+                                    onMouseEnter={this._donutChartMouseOver}
+                                    onMouseLeave={this._donutChartMouseOut}
+                                    onClick={this._handleDonutChartClick}
+                                >
+                                    {this._renderCells(donutData)}
+                                </Pie>
+                                <Tooltip
+                                    wrapperStyle={{ zIndex: 1000 }}
+                                    isAnimationActive={true}
+                                    content={this._renderTooltip}
+                                    active={hoveredItem.id !== undefined ? true : false}
+                                    cursor={{ fill: "transparent" }}
+                                />
+                            </PieChart>
+                            <div key="centerLabelKey" className="frequency-card__center-info">
+                                <div
+                                    className="frequency-card__center-number"
+                                    style={{ color: hoveredItem.color }}
+                                >
+                                    {!hoveredItem.id ? (
+                                        `${this._renderNumber(originalDonutValue)}`
+                                    ) : (
+                                        `${this._renderDonutLabel(donutData, hoveredItem.value)}`
+                                    )}
+                                </div>
+                                <div className="frequency-card__front-line" />
+                                <div
+                                    data-id="donut-chart-center-label"
+                                    className="frequency-card__center-label"
+                                    style={{ color: hoveredItem.color }}
+                                >
+                                    {hoveredItem.id ? (
+                                        `${this._renderCommas(hoveredItem.value)} ${donutUnits}`
+                                    ) : (
+                                        `${donutLabel}`
+                                    )}
+                                </div>
+                            </div>
+                        </div>,
+                        <ChartLegend
+                            key="asideKey"
+                            data-id="donut-chart-legend"
+                            legend={donutData}
+                            colors={this._getColors(donutData)}
+                            legendLabel={frontLegendLabel}
+                            helpLabel={donutTooltip}
+                            selectedId={hoveredItem.id}
+                            onMouseOver={this._frontLegendMouseOver}
+                            onMouseOut={this._legendMouseOut}
+                            onClick={this._handleFrontLegendClick}
+                        />
+                    ])}
+                </div>
+            </div>
+        );
+    }
+
+    _getBack = () => {
+        const {
+            backTitle,
+            backTitleHelpHint,
             backLegendLabel,
             barData,
             barUnits,
             backTerminateLabel,
         } = this.props;
-
         const {
             hoveredItem,
-            originalDonutValue,
             selectedStacked,
             hoverBarChart,
         } = this.state;
 
-        return (
-            <DashboardCard {...this.props} data-id={this.props["data-id"]} className={classes}
-                front={(
-                    <div>
-                        <DashboardCardTitle
-                            className="dashboard-card__title--frequency-card"
-                            title={this.props.frontTitle}
-                        >
-                            {this.props.frontTitleHelpHint &&
-                            <HelpHint
-                                data-id="helphint-bottomplacement"
-                                placement="bottom"
-                                leftMargin
-                                hintText={this.props.frontTitleHelpHint}
-                            />
-                            }
-                        </DashboardCardTitle>
+        return !_.isEmpty(barData) && (
+            <div>
+                <div className="frequency-card__title" style={{ zIndex: 100 }}>
+                    <DashboardCardTitle
+                        title={backTitle}
+                    >
+                        {backTitleHelpHint &&
+                        <HelpHint
+                            data-id="helphint-bottomplacement"
+                            placement="bottom"
+                            leftMargin
+                            hintText={backTitleHelpHint}
+                        />
+                        }
+                    </DashboardCardTitle>
+                </div>
+                {!this.props.loading && ([
+                    <div key="freqCardHolder">
                         <div className="frequency-card__holder">
-                            {!this.props.loading && ([
-                                <div key="chartKey" className="frequency-card__wrapper">
-                                    <PieChart
-                                        height={202}
-                                        width={202}
-                                        data-id={`${this.props["data-id"]}-chart`}
-                                        className="frequency-card__donut-chart"
-                                        cursor="pointer"
-                                    >
-                                        <Pie
-                                            innerRadius={donutInnerRadius}
-                                            outerRadius={donutOuterRadius}
-                                            startAngle={90}
-                                            endAngle={450}
-                                            paddingAngle={1}
-                                            data={donutData}
-                                            dataKey="value"
-                                            nameKey="id"
-                                            onMouseEnter={this._donutChartMouseOver}
-                                            onMouseLeave={this._donutChartMouseOut}
-                                            onClick={this._handleDonutChartClick}
-                                        >
-                                            {this._renderCells(donutData, this._getColors(donutData).reverse())}
-                                        </Pie>
-                                        <Tooltip
-                                            wrapperStyle={{ zIndex: 1000 }}
-                                            isAnimationActive={true}
-                                            content={this._renderTooltip}
-                                            active={hoveredItem.id !== undefined ? true : false}
-                                            cursor={{ fill: "transparent" }}
-                                        />
-                                    </PieChart>
-                                    <div key="centerLabelKey" className="frequency-card__center-info">
-                                        <div
-                                            className="frequency-card__center-number"
-                                            style={{ color: hoveredItem.color }}
-                                        >
-                                            {!hoveredItem.id ? (
-                                                `${this._renderNumber(originalDonutValue)}`
-                                            ) : (
-                                                `${this._renderDonutLabel(donutData, hoveredItem.value)}`
-                                            )}
-                                        </div>
-                                        <div className="frequency-card__front-line" />
-                                        <div
-                                            className="frequency-card__center-label"
-                                            style={{ color: hoveredItem.color }}
-                                        >
-                                            {hoveredItem.id ? (
-                                                `${this._renderCommas(donutData.reduce((a, o) => a + o.value, 0))} ${donutUnits}`
-                                            ) : (
-                                                `${donutLabel}`
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>,
-                                <ChartLegend
-                                    key="asideKey"
-                                    data-id="donut-chart-legend"
-                                    reverseKeys={true}
-                                    legend={donutData}
-                                    colors={this._getColors(donutData).reverse()}
-                                    label={frontLegendLabel}
+                            <div key="chartKey" className="frequency-card__wrapper" style={{ width: 0 }}>
+                                <StackedChart
+                                    data={barData[selectedStacked].data}
+                                    units={barUnits}
+                                    legend={barData[selectedStacked].legend}
+                                    colors={this._getColors(barData[selectedStacked].legend)}
+                                    terminateLabel={backTerminateLabel}
                                     selectedId={hoveredItem.id}
-                                    onMouseOver={this._frontLegendMouseOver}
-                                    onMouseOut={this._legendMouseOut}
-                                    onClick={this._handleFrontLegendClick}
-                                    helpLabel="Click to view report"
+                                    highlightRow={!hoverBarChart}
+                                    onMouseOver={this._barChartMouseOver}
+                                    onMouseOut={this._barChartMouseOut}
+                                    onClick={this._handleBarChartClick}
                                 />
-                            ])}
-                        </div>
-                    </div>
-                )}
-                back={(
-                    <div>
-                        <div className="frequency-card__title" style={{ zIndex: 100 }}>
-                            <DashboardCardTitle
-                                title={this.props.backTitle}
-                            >
-                                {this.props.backTitleHelpHint &&
-                                <HelpHint
-                                    data-id="helphint-bottomplacement"
-                                    placement="bottom"
-                                    leftMargin
-                                    hintText={this.props.backTitleHelpHint}
-                                />
-                                }
-                            </DashboardCardTitle>
-                        </div>
-                        {!this.props.loading && ([
-                            <div key="freqCardHolder">
-                                <div className="frequency-card__holder">
-                                    <div key="chartKey" className="frequency-card__wrapper" style={{ width: 0 }}>
-                                        <StackedChart
-                                            data={barData[selectedStacked].data}
-                                            units={barUnits}
-                                            legend={barData[selectedStacked].legend}
-                                            colors={this._getColors(barData[selectedStacked].legend)}
-                                            terminateLabel={backTerminateLabel}
-                                            selectedId={hoveredItem.id}
-                                            highlightRow={!hoverBarChart}
-                                            onMouseOver={this._barChartMouseOver}
-                                            onMouseOut={this._barChartMouseOut}
-                                            onClick={this._handleBarChartClick}
-                                        />
-                                    </div>
-                                    <ChartLegend
-                                        key="asideKey"
-                                        data-id="stacked-chart-legend"
-                                        legend={barData[selectedStacked].legend}
-                                        colors={this._getColors(barData[selectedStacked].legend)}
-                                        label={backLegendLabel}
-                                        selectedId={hoveredItem.id}
-                                        onMouseOver={this._backLegendMouseOver}
-                                        onMouseOut={this._legendMouseOut}
-                                        onClick={this._handleBackLegendClick}
-                                    />
-                                </div>
-                                <div className="frequency-card__nav-holder">
-                                    <RockerButton
-                                        type={RockerButton.rockerTypes.CHART}
-                                        onValueChange={this._handleRockerChange}
-                                        labels={barData.map(i => i.id)}
-                                        labelHints={barData.map(i => i.helpText)}
-                                    />
-                                </div>
                             </div>
-                        ])}
+                            <ChartLegend
+                                key="asideKey"
+                                data-id="stacked-chart-legend"
+                                legend={barData[selectedStacked].legend}
+                                colors={this._getColors(barData[selectedStacked].legend)}
+                                label={backLegendLabel}
+                                selectedId={hoveredItem.id}
+                                onMouseOver={this._backLegendMouseOver}
+                                onMouseOut={this._legendMouseOut}
+                                onClick={this._handleBackLegendClick}
+                            />
+                        </div>
+                        <div className="frequency-card__nav-holder">
+                            <RockerButton
+                                type={RockerButton.rockerTypes.CHART}
+                                onValueChange={this._handleRockerChange}
+                                labels={barData.map(i => i.id)}
+                                labelHints={barData.map(i => i.helpText)}
+                            />
+                        </div>
                     </div>
-                )}
+                ])}
+            </div>
+        );
+    }
+
+    render () {
+        const classes = classnames("frequency-card", this.props.className);
+
+        return (
+            <DashboardCard
+                {...this.props}
+                data-id={this.props["data-id"]}
+                className={classes}
+                front={this._getFront()}
+                back={this._getBack()}
             />
         );
     }
@@ -460,7 +497,16 @@ export default class FrequencyCard extends Component {
         frontTitle: PropTypes.string,
         frontTitleHelpHint: PropTypes.string,
         frontLegendLabel: PropTypes.string,
+        donutInnerRadius: PropTypes.number,
+        donutOuterRadius: PropTypes.number,
+        donutLabel: PropTypes.string,
         donutUnits: PropTypes.string,
+        donutTooltip: PropTypes.string,
+        donutData: PropTypes.arrayOf(PropTypes.shape({
+            label: PropTypes.string,
+            value: PropTypes.number,
+            color: PropTypes.string,
+        })),
         onFrontLegendClick: PropTypes.func, // Clicked on front legend
         onDonutChartClick: PropTypes.func, // Clicked on donut chart
 
@@ -471,28 +517,20 @@ export default class FrequencyCard extends Component {
         barUnits: PropTypes.string,
         onBackLegendClick: PropTypes.func, // Clicked on back legend,
         onBarChartClick: PropTypes.func, // Clicked on bar chart
-
-        donutInnerRadius: PropTypes.number,
-        donutOuterRadius: PropTypes.number,
-
-        donutData: PropTypes.arrayOf(PropTypes.shape({
-            label: PropTypes.string,
-            value: PropTypes.number,
-            color: PropTypes.string,
-        })).isRequired,
-
         barData: PropTypes.arrayOf(
             PropTypes.shape({
                 legend: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string, color: PropTypes.string })),
                 data: PropTypes.arrayOf(PropTypes.object)
             })
-        ).isRequired,
+        ),
     };
 
     static defaultProps = {
         "data-id": "frequency-card",
         donutInnerRadius: 60,
         donutOuterRadius: 100,
+        donutData: [],
+        barData: [],
 
         // Ignore default mouse events for testing
         onValueChange: /* istanbul ignore next  */ () => {},
