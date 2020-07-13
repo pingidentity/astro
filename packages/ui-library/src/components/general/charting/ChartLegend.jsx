@@ -7,16 +7,17 @@ import HelpHint from "../../tooltips/HelpHint";
 
 const ChartLegend = (
     {
+        "data-id": dataId,
         legend,
         colors,
-        label: legendLabel,
+        legendLabel,
         reverseKeys,
         selectedId,
         onMouseOut,
         onMouseOver,
         onClick,
         helpLabel,
-        "data-id": dataId
+        helpPlacement
     }) => {
     const _handleMouseOver = /* istanbul ignore next  */ (index, label) => (e) => {
         onMouseOver({ index, label }, e);
@@ -67,7 +68,7 @@ const ChartLegend = (
                         helpLabel ? (
                             <HelpHint
                                 data-id={`helphint-topplacement_${id}`}
-                                placement="right"
+                                placement={helpPlacement}
                                 delayShow={500}
                                 hintText={helpLabel}
                                 key={key}
@@ -91,7 +92,9 @@ ChartLegend.propTypes = {
     ).isRequired,
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     reverseKeys: PropTypes.bool,
-    label: PropTypes.string.isRequired,
+    legendLabel: PropTypes.string,
+    helpLabel: PropTypes.string,
+    helpPlacement: PropTypes.string,
     selectedId: PropTypes.string,
     onMouseOver: PropTypes.func,
     onMouseOut: PropTypes.func,
@@ -104,6 +107,7 @@ ChartLegend.defaultProps = {
     onMouseOver: /* istanbul ignore next  */ () => {},
     onClick: /* istanbul ignore next  */ () => {},
     reverseKeys: false,
+    helpPlacement: "top",
 };
 
 export default ChartLegend;
