@@ -12,3 +12,22 @@ export const Default = () => (
         placeholder="Select one"
     />
 );
+
+export const DisabledOptions = () => {
+    const options = [
+        'First Value',
+        {
+            label: 'Second Value',
+            value: 'Second Value',
+            disabled: true
+        },
+        'Third Value',
+        'Fourth Value',
+    ];
+    return (
+        <Dropdown
+            options={options}
+            placeholder="Select one"
+        />
+    );
+};
