@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
@@ -35,24 +35,38 @@ const PasswordInput = ({
     onKeyDown,
     onMouseDown,
 }) => {
-    const classNames = classnames('text-input', className, {
+    const [isHidden, setIsHidden] = useState(true);
+    const containerClassNames = classnames('text-input-container', {
+        'text-input-container--error': type === passwordInputTypes.ERROR,
+        'text-input-container--success': type === passwordInputTypes.SUCCESS,
+    });
+    const classNames = classnames('text-input', 'text-input--password', className, {
         'text-input--error': type === passwordInputTypes.ERROR,
         'text-input--success': type === passwordInputTypes.SUCCESS,
         'text-input--primary': type === passwordInputTypes.PRIMARY,
     });
-
     const iconClassNames = classnames('text-input__icon', {
-        'text-input__icon--error': type === passwordInputTypes.ERROR,
-        'text-input__icon--success': type === passwordInputTypes.SUCCESS,
+        'text-input__icon--hidden': isHidden,
+        'text-input__icon--view-hidden': !isHidden,
+    });
+    const statusIconClassNames = classnames('text-input__status-icon', {
+        'text-input__status-icon--error': type === passwordInputTypes.ERROR,
+        'text-input__status-icon--success': type === passwordInputTypes.SUCCESS,
     });
 
     return (
-        <div>
-            {
-                type === 'success' || type === 'error'
-                    ? <div className={iconClassNames} key="type-icon"></div>
-                    : null
-            }
+        <div className={containerClassNames}>
+            <div
+                className={statusIconClassNames}
+                key="password-icon-status"
+            />
+            <div
+                role="button"
+                aria-pressed={!isHidden}
+                className={iconClassNames}
+                onClick={() => setIsHidden(!isHidden)}
+                key="password-icon"
+            />
             <input
                 className={classNames}
                 id={id}
@@ -64,7 +78,7 @@ const PasswordInput = ({
                 onKeyDown={onKeyDown}
                 onMouseDown={onMouseDown}
                 placeholder={placeholder}
-                type="password"
+                type={isHidden ? 'password' : 'text'}
                 key="passwordinput"
                 defaultValue={defaultValue}
                 data-id={dataId}
