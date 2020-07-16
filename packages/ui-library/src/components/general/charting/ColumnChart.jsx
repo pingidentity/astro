@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import _ from "underscore";
 import classnames from "classnames";
-
+import get from "lodash/get";
 import ChartLabel from "./ChartLabel";
 import Color from "color";
 import DashboardCardTitle from "./Cards/DashboardCardTitle";
@@ -147,7 +147,7 @@ export default class ColumnChart extends React.Component {
                 name: item.id,
                 ...this.props.legend.reduce((b, key, index) => ({
                     ...b,
-                    [index]: item.data.find(dataPoint => dataPoint.id === key.id).value,
+                    [index]: get(item.data.find(dataPoint => dataPoint.id === key.id), "value", 0),
                 }), {})
             }
         ));
