@@ -82,7 +82,9 @@ class AccountTable extends React.Component {
     };
 
     _closeUnlinkModal = (e) => {
-        e.preventDefault();
+        if(e) {
+            e.preventDefault();
+        }
         this.setState({
             isUnlinkModalExpanded: false,
             accountToUnlink: null,
@@ -118,6 +120,7 @@ class AccountTable extends React.Component {
                 type="dialog"
                 expanded={this.state.isUnlinkModalExpanded}
                 onClose={this._closeUnlinkModal}
+                closeOnBgClick
                 key="unlink-modal"
             >
                 <FlexRow
