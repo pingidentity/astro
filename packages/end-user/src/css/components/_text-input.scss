@@ -75,9 +75,8 @@
     }
 }
 
-.text-input__status-icon {
+.text-input__icon {
     @include input-icon();
-    position: absolute;
     right: 0;
 
     &--error {
@@ -93,19 +92,23 @@
             color: $color-success-green;
         }
     }
-}
 
-.text-input__icon {
-    @include input-icon();
-    cursor: pointer;
+    &--error + &--action,
+    &--success + &--action {
+        &::before {
+            margin-right: $spacing-lg;
+        }
+    }
 
     &--hidden {
+        cursor: pointer;
         &::before {
             content: $pingicon-view-hidden;
         }
     }
 
     &--view-hidden {
+        cursor: pointer;
         &::before {
             content: $pingicon-view;
         }
