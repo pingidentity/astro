@@ -379,6 +379,10 @@ class AuthenticationPage extends React.Component {
                                             name: "951345279578",
                                             type: "SMS",
                                         },
+                                        {
+                                            type: "totp",
+                                            typeLabel: "Authenticator App"
+                                        }
                                     ]
                                 }
                             />
