@@ -498,25 +498,12 @@ class StatelessExpandableRow extends React.Component {
             deleteButton,
             editButton;
 
-        if (this.props.showEdit && !this.props.editHelpHintText) {
+        if (this.props.showEdit) {
             editButton = this.props.editButton || (
                 <a data-id="edit-btn" className={editButtonClassname}
                     href={this._getEditViewRoute(this.props.editViewRoute)}
                     {...getClickableA11yProps(this.props.onEditButtonClick)}
                     onClick={this.props.onEditButtonClick} />);
-        }
-
-        if (this.props.showEdit && this.props.editHelpHintText) {
-            editButton = (
-                <div className="btn-helphint">
-                    <HelpHint hintText={this.props.editHelpHintText} placement="left">
-                        <a data-id="edit-btn"
-                            className={editButtonClassname}
-                            href={this._getEditViewRoute(this.props.editViewRoute)}
-                            {...getClickableA11yProps(this.props.onEditButtonClick)}
-                            onClick={this.props.onEditButtonClick}>a</a>
-                    </HelpHint>
-                </div>);
         }
 
         if (this.props.showDelete) {
@@ -866,6 +853,51 @@ RowSection.defaultProps = {
     title: "",
 };
 
+/**
+* @class HelpHintEditButton
+* @memberof ExpandableRow
+* @desc Edit button with Help hint
+*
+* @param {string} [editViewRoute=""]
+*     Route to the 'edit mode' view.
+* @param {function} [onEditButtonClick]
+*     Click handler
+* @param {boolean} [showViewIcon]
+*     Show view icon instead of edit
+*/
+
+const HelpHintEditButton = ({ "data-id": dataId, editViewRoute, onClick, showViewIcon, ...props }) => (
+    <div className="btn-helphint">
+        <HelpHint
+            data-id={dataId}
+            placement="left"
+            {...props}
+        >
+            <a data-id="edit-btn"
+                className={classnames({
+                    "edit-btn": !showViewIcon,
+                    "view-btn": showViewIcon
+                })}
+                href={editViewRoute}
+                {...getClickableA11yProps(onClick)}
+                onClick={onClick} />
+        </HelpHint>
+    </div>
+);
+
+HelpHintEditButton.propTypes = {
+    "data-id": PropTypes.string,
+    editViewRoute: PropTypes.string,
+    onClick: PropTypes.func,
+    showViewIcon: PropTypes.bool
+};
+
+HelpHintEditButton.defaultProps = {
+    "data-id": "edit-button_help-hint",
+    onClick: _.noop,
+    showViewIcon: false,
+};
+
 
 ExpandableRow.Statuses = Statuses;
 ExpandableRow.RowMessageTypes = RowMessageTypes;
@@ -873,4 +905,5 @@ ExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
 ExpandableRow.ScrollingWrapper = ScrollingWrapper;
 ExpandableRow.SimpleWrapper = SimpleWrapper;
 ExpandableRow.RowSection = RowSection;
+ExpandableRow.HelpHintEditButton = HelpHintEditButton;
 module.exports = ExpandableRow;
