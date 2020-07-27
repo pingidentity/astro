@@ -12,32 +12,34 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 }
 
 .float-label__label {
-        color: $input-placeholder-color;
+    color: $input-placeholder-color;
 
-        transition: 0.05s;
+    transition: 0.05s;
 
-        display: block;
-        position: absolute;
-        font-size: 10px;
-        font-family: $font-default;
+    display: block;
+    position: absolute;
+    font-size: 10px;
+    font-family: $font-default;
+    white-space: nowrap;
+    overflow: hidden;
 
-        top: 0;
-        left: 0;
-        right: 0;
-        margin-top: $spacing-xs + 1px;
-        margin-left: $spacing-sm;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: $spacing-xs + 1px;
+    margin-left: $spacing-sm;
 
-        pointer-events: none;
-        z-index: 0;
+    pointer-events: none;
+    z-index: 0;
 
-        cursor: text;
+    cursor: text;
 
-        &-text-area {
-            @include input-background-light;
-            top: 1px;
-            margin-top: 0px;
-            padding-top: $spacing-xs + 1px;
-        }
+    &-text-area {
+        @include input-background-light;
+        top: 1px;
+        margin-top: 0px;
+        padding-top: $spacing-xs + 1px;
+    }
 }
 
 .float-label {
