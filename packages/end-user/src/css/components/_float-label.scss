@@ -80,6 +80,11 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
         @extend %input-text;
         font-weight: $input-font-weight;
         text-transform: none;
+
+        &-text-area {
+            background-color: transparent;
+            padding-top: 0;
+        }
     }
 }
 
