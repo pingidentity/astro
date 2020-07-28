@@ -87,13 +87,14 @@ const TextInput = ({
         'text-input__icon--success': type === textInputTypes.SUCCESS,
     });
 
-    return [
-        (
+    return (
+        <>
+        {(
             type === 'success' || type === 'error'
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
-        ),
-        actionComponent,
+        )}
+        {actionComponent}
         <input
             className={classNames}
             data-id={dataId}
@@ -115,16 +116,17 @@ const TextInput = ({
             autoComplete={useAutoComplete ? 'on' : 'off'}
             {...inputmodeByFormats[format]}
             {...inputProps}
-        />,
-        fieldMessage && (
+        />
+        {fieldMessage && (
             <FieldMessage
                 status={type !== textInputTypes.PRIMARY ? type : 'default'}
                 {...fieldMessageProps}
             >
                 {fieldMessage}
             </FieldMessage>
-        )
-    ];
+        )}
+        </>
+    );
 };
 
 TextInput.propTypes = {

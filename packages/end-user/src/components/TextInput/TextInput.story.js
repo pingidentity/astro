@@ -10,19 +10,22 @@ export const Default = () => (<React.Fragment>
     <TextInput
         placeholder="Text"
     />
+    <br/>
     <TextInput
         placeholder="Error"
         type={textInputTypes.ERROR}
-        fieldMessage='asdf'
+        fieldMessage='Error Example Message'
     />
+     <br/>
     <TextInput
         placeholder="Success"
         type={textInputTypes.SUCCESS}
-        fieldMessage='asdf'
+        fieldMessage='Success Example Message'
     />
+     <br/>
     <TextInput
         placeholder="Primary"
         type={textInputTypes.PRIMARY}
-        fieldMessage='asdf'
+        fieldMessage='Primary Example Message'
     />
 </React.Fragment>);
