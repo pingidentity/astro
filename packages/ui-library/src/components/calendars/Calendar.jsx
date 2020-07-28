@@ -450,7 +450,8 @@ class Calendar extends React.Component {
     _getReference = () => this.reference;
 
     render() {
-        const calendarDate = this._getDate(this.state.date) || this._handleUtcOffset();
+        const parsedDate = this._getDate(this.state.date);
+        const calendarDate = parsedDate && parsedDate.isValid() ? parsedDate : this._handleUtcOffset();
         let view;
 
         const viewProps = {
@@ -511,7 +512,7 @@ class Calendar extends React.Component {
             {
                 active: this.state.isVisible,
                 required: this.props.required,
-                "value-entered": !!inputValue,
+                "value-entered": !!inputValue.trim(),
                 "input-calendar--width-tight": this.props.tight,
                 "form-error": this.props.errorMessage
             });
