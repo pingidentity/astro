@@ -114,7 +114,7 @@ class ExpandableRowDemo extends React.Component {
 
         var customDeleteButton = (
             <DetailsTooltip
-                label={(<button type="button" className="delete-btn" onClick={this._toggleCustomDelete}/>)}
+                label={(<button type="button" className="delete-btn" onClick={this._toggleCustomDelete} />)}
                 placement="top left"
                 title="Tooltip Title"
                 open={this.state.showCustomDeleteConfirm}
@@ -271,6 +271,17 @@ class ExpandableRowDemo extends React.Component {
                         }
                         title="Row With Custom Edit Button"
                     />
+                    <ExpandableRow
+                        title="Row With HelpHint"
+                        subtitle="Row Subtitle"
+                        editButton={(
+                            <ExpandableRow.EditWrapper>
+                                <HelpHint placement="left" hintText="Edit button">
+                                    <ExpandableRow.EditButton />
+                                </HelpHint>
+                            </ExpandableRow.EditWrapper>
+                        )}
+                    />
                     {!this.state.rowDeleted && (
                         <ExpandableRow
                             title="Row with Delete Confirmation with Custom Confirmation Popup"
@@ -345,7 +356,7 @@ class ExpandableRowDemo extends React.Component {
                                 hint="See Contributing Data"
                                 trend="+ 8.6%"
                             />,
-                            <Toggle key="toggle"/>
+                            <Toggle key="toggle" />
                         ]}
                     />
                     <ExpandableRow
@@ -378,7 +389,7 @@ class ExpandableRowDemo extends React.Component {
                                 hint={<Link>See Contributing Data</Link>}
                                 trend="- 8.6%"
                             />,
-                            <Toggle key="toggle"/>
+                            <Toggle key="toggle" />
                         ]}
                     />
                     <ExpandableRow
@@ -439,7 +450,7 @@ class ExpandableRowDemo extends React.Component {
                                 hintProps={{ type: HelpHint.Types.LIGHT }}
                                 trend="+ 0%"
                             />,
-                            <Toggle key="toggle"/>
+                            <Toggle key="toggle" />
                         ]}
                     />
                 </ExpandableRow.SimpleWrapper>

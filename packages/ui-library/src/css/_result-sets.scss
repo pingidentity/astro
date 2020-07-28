@@ -98,6 +98,12 @@ $expandable-row-gap: 12px;
             overflow-y: auto;
         }
     }
+    &__edit-wrapper {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: calc(100% - #{2 * $button-height} - 2px);
+    }
     .item-title {
         font-size: 17px;
         line-height: 1.1em;
@@ -161,7 +167,7 @@ $expandable-row-gap: 12px;
     .view-btn,
     .no-edit,
     .btn-fill,
-    .btn-helphint {
+    .expandable-row__edit-wrapper {
         position: relative;
         background-color: $color-chilly;
         text-align: center;
@@ -198,8 +204,7 @@ $expandable-row-gap: 12px;
     }
     .edit-btn,
     .view-btn,
-    .btn-fill,
-    .btn-helphint {
+    .btn-fill, {
         display: none;
         height: calc(100% - #{2 * $button-height} - 2px);
     }
@@ -257,12 +262,6 @@ $expandable-row-gap: 12px;
         .view-btn,
         .btn-fill {
             display: block;
-        }
-
-        .btn-helphint {
-            align-items: center;
-            display: flex;
-            justify-content: center;
         }
 
         .delete-btn {

@@ -14,7 +14,6 @@ import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
 import ButtonGroup from "../../layout/ButtonGroup";
-import HelpHint from "../../tooltips/HelpHint";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
@@ -445,21 +444,6 @@ class StatelessExpandableRow extends React.Component {
         }
     };
 
-    /*
-     * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
-     * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
-     * starts with a '/'.
-     */
-    _getEditViewRoute = (route) => {
-        if (!route) {
-            return null;
-        }
-        if (route[0] === "/") {
-            return route;
-        }
-        return "#/" + route;
-    };
-
     componentDidUpdate(prevProps) {
         if (this.props.expanded && !prevProps.expanded) {
             setTimeout(
@@ -491,19 +475,15 @@ class StatelessExpandableRow extends React.Component {
                 "has-subtitle": this.props.subtitle,
                 "no-edit": !showEditIcon
             }),
-            editButtonClassname = classnames({
-                "edit-btn": !showViewIcon,
-                "view-btn": showViewIcon
-            }),
             deleteButton,
             editButton;
 
         if (this.props.showEdit) {
             editButton = this.props.editButton || (
-                <a data-id="edit-btn" className={editButtonClassname}
-                    href={this._getEditViewRoute(this.props.editViewRoute)}
-                    {...getClickableA11yProps(this.props.onEditButtonClick)}
-                    onClick={this.props.onEditButtonClick} />);
+                <EditButton
+                    editViewRoute={this.props.editViewRoute}
+                    onEditButtonClick={this.onEditButtonClick}
+                    showViewIcon={showViewIcon} />);
         }
 
         if (this.props.showDelete) {
@@ -715,6 +695,51 @@ class ConfirmDeleteDialog extends React.Component {
     }
 }
 
+class EditButton extends React.Component {
+
+    /*
+     * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
+     * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
+     * starts with a '/'.
+     */
+    _getEditViewRoute = (route) => {
+        if (!route) {
+            return null;
+        }
+        if (route[0] === "/") {
+            return route;
+        }
+        return "#/" + route;
+    };
+
+    render() {
+        return (
+            <a data-id={this.props.dataId}
+                className={classnames({
+                    "edit-btn": !this.props.showViewIcon,
+                    "view-btn": this.props.showViewIcon
+                })}
+                href={this._getEditViewRoute(this.props.editViewRoute)}
+                {...getClickableA11yProps(this.props.onEditButtonClick)}
+                onClick={this.props.onEditButtonClick}
+            />
+        );
+    }
+
+    static propTypes = {
+        "data-id": PropTypes.string,
+        editViewRoute: PropTypes.string,
+        onEditButtonClick: PropTypes.func,
+        showViewIcon: PropTypes.bool
+    };
+
+    static defaultProps = {
+        "data-id": "edit-btn",
+        onClick: _.noop,
+        showViewIcon: false,
+    };
+}
+
 const ExpandableRow = inStateContainer([
     {
         name: "expanded",
@@ -818,6 +843,31 @@ SimpleWrapper.defaultProps = {
     "data-id": "simple-wrapper",
 };
 
+/**
+* @class EditWrapper
+* @memberof ExpandableRow
+* @desc Wraps around a list of ExpandableRow components to display a scrolling list properly
+*
+* @param {string} [data-id="scrolling-wrapper"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*     CSS classes to set on the top-level HTML container.
+*/
+
+const EditWrapper = ({ "data-id": dataId, className, children, ...props }) => (
+    <div data-id={dataId} className={classnames("expandable-row__edit-wrapper", className)} {...props}>{children}</div>
+);
+
+EditWrapper.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.node,
+};
+
+EditWrapper.defaultProps = {
+    "data-id": "edit-wrapper",
+};
+
 
 /**
 * @class RowSection
@@ -853,57 +903,13 @@ RowSection.defaultProps = {
     title: "",
 };
 
-/**
-* @class HelpHintEditButton
-* @memberof ExpandableRow
-* @desc Edit button with Help hint
-*
-* @param {string} [editViewRoute=""]
-*     Route to the 'edit mode' view.
-* @param {function} [onEditButtonClick]
-*     Click handler
-* @param {boolean} [showViewIcon]
-*     Show view icon instead of edit
-*/
-
-const HelpHintEditButton = ({ "data-id": dataId, editViewRoute, onClick, showViewIcon, ...props }) => (
-    <div className="btn-helphint">
-        <HelpHint
-            data-id={dataId}
-            placement="left"
-            {...props}
-        >
-            <a data-id="edit-btn"
-                className={classnames({
-                    "edit-btn": !showViewIcon,
-                    "view-btn": showViewIcon
-                })}
-                href={editViewRoute}
-                {...getClickableA11yProps(onClick)}
-                onClick={onClick} />
-        </HelpHint>
-    </div>
-);
-
-HelpHintEditButton.propTypes = {
-    "data-id": PropTypes.string,
-    editViewRoute: PropTypes.string,
-    onClick: PropTypes.func,
-    showViewIcon: PropTypes.bool
-};
-
-HelpHintEditButton.defaultProps = {
-    "data-id": "edit-button_help-hint",
-    onClick: _.noop,
-    showViewIcon: false,
-};
-
 
 ExpandableRow.Statuses = Statuses;
 ExpandableRow.RowMessageTypes = RowMessageTypes;
 ExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
 ExpandableRow.ScrollingWrapper = ScrollingWrapper;
 ExpandableRow.SimpleWrapper = SimpleWrapper;
+ExpandableRow.EditWrapper = EditWrapper;
 ExpandableRow.RowSection = RowSection;
-ExpandableRow.HelpHintEditButton = HelpHintEditButton;
+ExpandableRow.EditButton = EditButton;
 module.exports = ExpandableRow;
