@@ -714,7 +714,7 @@ class EditButton extends React.Component {
 
     render() {
         return (
-            <a data-id={this.props.dataId}
+            <a data-id={this.props["data-id"]}
                 className={classnames({
                     "edit-btn": !this.props.showViewIcon,
                     "view-btn": this.props.showViewIcon
