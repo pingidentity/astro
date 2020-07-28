@@ -482,7 +482,7 @@ class StatelessExpandableRow extends React.Component {
             editButton = this.props.editButton || (
                 <EditButton
                     editViewRoute={this.props.editViewRoute}
-                    onEditButtonClick={this.onEditButtonClick}
+                    onEditButtonClick={this.props.onEditButtonClick}
                     showViewIcon={showViewIcon} />);
         }
 
