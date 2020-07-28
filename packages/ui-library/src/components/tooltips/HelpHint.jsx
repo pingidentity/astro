@@ -83,6 +83,8 @@ const Types = {
  *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
  * @param {HelpHint.Placements} [placement]
  *     How to place the help hint.
+ * @param {boolean} [preventDefault]
+ *     Prevent default on helphint icon click
  * @param {HelpHint.Types} [type]
  *     Sets special styling for the help hint.
  * @param {bool} [unstyleTrigger=false]
@@ -105,6 +107,7 @@ class HelpHint extends React.Component {
         leftMargin: PropTypes.bool,
         link: PropTypes.string,
         placement: PropTypes.oneOf(Object.values(Placements)),
+        preventDefault: PropTypes.bool,
         type: PropTypes.oneOf(Object.values(Types)),
         tooltipProps: PropTypes.object,
         unstyleTrigger: PropTypes.bool,
@@ -118,6 +121,7 @@ class HelpHint extends React.Component {
         leftMargin: false,
         unstyleTrigger: false,
         placement: "right",
+        preventDefault: true,
     };
 
     _handleClick = (e) => {
@@ -232,7 +236,7 @@ class HelpHint extends React.Component {
                         className={classnames(this.props.className, "help-tooltip-target", {
                             "inline": (!children && !this.props.className), // make the icon inline if no other class is specified
                         })}
-                        onClick={this._handleClick}
+                        onClick={this.props.preventDefault ? this._handleClick : null}
                         data-tip={true}
                         data-for={uid}
                         ref={(target) => { this.target = target; }}
