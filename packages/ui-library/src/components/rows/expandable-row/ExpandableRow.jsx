@@ -137,9 +137,6 @@ const ConfirmDeletePositions = {
  *
  * @param {string} [editViewRoute=""]
  *     Route to the 'edit mode' view.
- *
- * @param {boolean} [editHelpHintText]
- *     Text for help hint on edit button
  * @param {boolean} [isEditEnabled=true]
  *     Whether or not the 'edit' button is enabled.
  * @param {boolean} [showEdit=true]
@@ -375,7 +372,6 @@ class StatelessExpandableRow extends React.Component {
         children: PropTypes.node,
         content: PropTypes.object,
         editViewRoute: PropTypes.string,
-        editHelpHintText: PropTypes.string,
         isEditEnabled: PropTypes.bool,
         showEdit: PropTypes.bool,
         editButton: PropTypes.object,
@@ -482,7 +478,7 @@ class StatelessExpandableRow extends React.Component {
             editButton = this.props.editButton || (
                 <EditButton
                     editViewRoute={this.props.editViewRoute}
-                    onEditButtonClick={this.props.onEditButtonClick}
+                    onClick={this.props.onEditButtonClick}
                     showViewIcon={showViewIcon} />);
         }
 
@@ -695,14 +691,18 @@ class ConfirmDeleteDialog extends React.Component {
     }
 }
 
-class EditButton extends React.Component {
-
+function EditButton({
+    "data-id": dataId,
+    editViewRoute,
+    onClick,
+    showViewIcon
+}) {
     /*
      * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
      * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
      * starts with a '/'.
      */
-    _getEditViewRoute = (route) => {
+    const _getEditViewRoute = (route) => {
         if (!route) {
             return null;
         }
@@ -712,33 +712,31 @@ class EditButton extends React.Component {
         return "#/" + route;
     };
 
-    render() {
-        return (
-            <a data-id={this.props["data-id"]}
-                className={classnames({
-                    "edit-btn": !this.props.showViewIcon,
-                    "view-btn": this.props.showViewIcon
-                })}
-                href={this._getEditViewRoute(this.props.editViewRoute)}
-                {...getClickableA11yProps(this.props.onEditButtonClick)}
-                onClick={this.props.onEditButtonClick}
-            />
-        );
-    }
-
-    static propTypes = {
-        "data-id": PropTypes.string,
-        editViewRoute: PropTypes.string,
-        onEditButtonClick: PropTypes.func,
-        showViewIcon: PropTypes.bool
-    };
-
-    static defaultProps = {
-        "data-id": "edit-btn",
-        onClick: _.noop,
-        showViewIcon: false,
-    };
+    return (
+        <a data-id={dataId}
+            className={classnames({
+                "edit-btn": !showViewIcon,
+                "view-btn": showViewIcon
+            })}
+            href={_getEditViewRoute(editViewRoute)}
+            {...getClickableA11yProps(onClick)}
+            onClick={onClick}
+        />
+    );
 }
+
+EditButton.propTypes = {
+    "data-id": PropTypes.string,
+    editViewRoute: PropTypes.string,
+    onClick: PropTypes.func,
+    showViewIcon: PropTypes.bool
+};
+
+EditButton.defaultProps = {
+    "data-id": "edit-btn",
+    onClick: _.noop,
+    showViewIcon: false,
+};
 
 const ExpandableRow = inStateContainer([
     {
