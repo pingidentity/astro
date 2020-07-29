@@ -685,8 +685,8 @@ class FormDropDownListStateless extends React.Component {
                         hasPrompt ? searchIndex - 1 : searchIndex
                     ];
 
-                    if (option.disabled) {
-                        // option itself is disabled; ignoring;
+                    if (!option || option.disabled) {
+                        // option itself is disabled or does not exist; ignoring;
                     } else if (option.group &&
                         this._groupById[option.group] && this._groupById[option.group].disabled) {
                         // option's parent group is disabled; ignoring;
