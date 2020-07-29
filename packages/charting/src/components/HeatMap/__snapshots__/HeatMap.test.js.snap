@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeatMap calls addSource and addLayer with correct arguments 1`] = `
+Array [
+  "data",
+  Object {
+    "cluster": true,
+    "clusterMaxZoom": 14,
+    "clusterProperties": Object {
+      "count": Array [
+        "+",
+        Array [
+          "get",
+          "count",
+        ],
+      ],
+    },
+    "clusterRadius": 50,
+    "data": Object {
+      "features": Array [
+        Object {
+          "geometry": Object {
+            "coordinates": Array [
+              -4,
+              57.75,
+            ],
+            "type": "Point",
+          },
+          "properties": Object {
+            "count": 1,
+            "id": 1,
+            "property": "value",
+          },
+          "type": "Feature",
+        },
+        Object {
+          "geometry": Object {
+            "coordinates": Array [
+              -4,
+              58,
+            ],
+            "type": "Point",
+          },
+          "properties": Object {
+            "count": 30,
+            "id": 2,
+            "property": "value",
+          },
+          "type": "Feature",
+        },
+        Object {
+          "geometry": Object {
+            "coordinates": Array [
+              -4,
+              58.25,
+            ],
+            "type": "Point",
+          },
+          "properties": Object {
+            "count": 500,
+            "id": 3,
+            "property": "value",
+          },
+          "type": "Feature",
+        },
+        Object {
+          "geometry": Object {
+            "coordinates": Array [
+              -4,
+              58.5,
+            ],
+            "type": "Point",
+          },
+          "properties": Object {
+            "count": 1,
+            "id": 4,
+            "property": "value",
+          },
+          "type": "Feature",
+        },
+      ],
+      "type": "FeatureCollection",
+    },
+    "type": "geojson",
+  },
+]
+`;
+
+exports[`HeatMap calls addSource and addLayer with correct arguments 2`] = `
+Array [
+  Object {
+    "filter": Array [
+      ">",
+      Array [
+        "get",
+        "count",
+      ],
+      1,
+    ],
+    "id": "clusters",
+    "paint": Object {
+      "circle-color": Array [
+        "step",
+        Array [
+          "get",
+          "count",
+        ],
+        "#51bbd6",
+        100,
+        "#f1f075",
+        750,
+        "#f28cb1",
+      ],
+      "circle-radius": Array [
+        "step",
+        Array [
+          "get",
+          "count",
+        ],
+        20,
+        100,
+        30,
+        750,
+        40,
+      ],
+    },
+    "source": "data",
+    "type": "circle",
+  },
+]
+`;
+
+exports[`HeatMap calls addSource and addLayer with correct arguments 3`] = `
+Array [
+  Object {
+    "filter": Array [
+      ">",
+      Array [
+        "get",
+        "count",
+      ],
+      1,
+    ],
+    "id": "cluster-count",
+    "layout": Object {
+      "text-field": "{count}",
+      "text-font": Array [
+        "DIN Offc Pro Medium",
+        "Arial Unicode MS Bold",
+      ],
+      "text-size": 12,
+    },
+    "source": "data",
+    "type": "symbol",
+  },
+]
+`;
+
+exports[`HeatMap calls addSource and addLayer with correct arguments 4`] = `
+Array [
+  Object {
+    "filter": Array [
+      ">=",
+      1,
+      Array [
+        "get",
+        "count",
+      ],
+    ],
+    "id": "unclustered-point",
+    "paint": Object {
+      "circle-color": "#11b4da",
+      "circle-radius": 4,
+      "circle-stroke-color": "#fff",
+      "circle-stroke-width": 1,
+    },
+    "source": "data",
+    "type": "circle",
+  },
+]
+`;
+
+exports[`HeatMap updates source when data prop changes 1`] = `
+Array [
+  Object {
+    "features": Array [
+      Object {
+        "geometry": Object {
+          "coordinates": Array [
+            -4,
+            57.75,
+          ],
+          "type": "Point",
+        },
+        "properties": Object {
+          "count": 1,
+          "id": 1,
+          "property": "value",
+        },
+        "type": "Feature",
+      },
+      Object {
+        "geometry": Object {
+          "coordinates": Array [
+            -4,
+            58,
+          ],
+          "type": "Point",
+        },
+        "properties": Object {
+          "count": 30,
+          "id": 2,
+          "property": "value",
+        },
+        "type": "Feature",
+      },
+    ],
+    "type": "FeatureCollection",
+  },
+]
+`;

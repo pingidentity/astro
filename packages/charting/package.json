@@ -1,0 +1,45 @@
+{
+    "name": "@pingux/charting",
+    "version": "0.1.0",
+    "description": "Charting components",
+    "author": "Tyler Grove <tgrove@pingidentity.com>",
+    "homepage": "",
+    "license": "UNLICENSED",
+    "directories": {
+        "lib": "lib"
+      },
+      "files": [
+        "lib"
+      ],
+    "repository": {
+        "type": "git",
+        "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+    },
+    "publishConfig": {
+        "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+    },
+    "scripts": {
+        "build": "npm-run-all build:*",
+        "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/components --out-dir lib/cjs/components",
+        "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/components --out-dir lib/components",
+        "coverage": "jest --coverage",
+        "verify": "yarn lint && yarn docs && yarn build-demo && test",
+        "coverage-ci": "jest",
+        "lint": "eslint .",
+        "start": "start-storybook -p 1339",
+        "test": "jest",
+        "test-watch": "jest --watch",
+        "docs": "gulp docs"
+    },
+    "dependencies": {
+        "lodash": "^4.17.15",
+        "mapbox-gl": "^1.11.0",
+        "prop-types": "^15.7.2",
+        "recharts": "^1.8.5",
+        "uuid": "^7.0.3"
+    },
+    "peerDependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.13.1"
+    }
+}
