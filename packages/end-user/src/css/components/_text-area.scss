@@ -14,17 +14,13 @@
 
     &--error, &--error:focus {
         border-color: $color-critical-red;
-
         background-color: $color-white;
-
         padding-right: $spacing-xl;
     }
 
     &--success {
         background-color: $color-white;
-
         border-color: $color-success-green;
-
         padding-right: $spacing-xl;
     }
 
