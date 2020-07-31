@@ -7,9 +7,8 @@ $caret-height: 16px;
         font-size: 13px;
         line-height: 13px;
         position: absolute;
-        right: $spacing-sm;
-        top: 50%;
-        transform: translateY(-50%);
+        right: $spacing-md;
+        top: $spacing-md + 3px;
         height: 16px;
         width: 16px;
         pointer-events: none;
@@ -23,9 +22,8 @@ $caret-height: 16px;
         font-size: 13px;
         line-height: 13px;
         position: absolute;
-        right: $spacing-sm;
-        top: 50%;
-        transform: translateY(-50%);
+        right: $spacing-md;
+        top: $spacing-md + 3px;
         height: 16px;
         width: 16px;
         pointer-events: none;
@@ -40,9 +38,8 @@ $caret-height: 16px;
         font-size: 13px;
         line-height: 13px;
         position: absolute;
-        right: $spacing-sm;
-        top: 26%;
-        transform: translateY(-50%);
+        right: $spacing-md;
+        top: $spacing-md + 3px;
         height: 16px;
         width: 16px;
         pointer-events: none;
@@ -56,9 +53,8 @@ $caret-height: 16px;
         font-size: 13px;
         line-height: 13px;
         position: absolute;
-        right: $spacing-sm;
-        top: 26%;
-        transform: translateY(-50%);
+        right: $spacing-md;
+        top: $spacing-md + 3px;
         height: 16px;
         width: 16px;
         pointer-events: none;
@@ -111,18 +107,20 @@ $caret-height: 16px;
         }
 
         cursor: pointer;
-        padding-right: $caret-height + $spacing-sm + $spacing-sm;
+        padding-right: $spacing-xl;
 
         &--error {
             border-color: $color-critical-red;
-
-            background-color: $color-white;
         }
 
         &--success {
             border-color: $color-success-green;
+        }
 
+        &--error,
+        &--success {
             background-color: $color-white;
+            padding-right: $spacing-xx;
         }
     }
 
