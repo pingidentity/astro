@@ -58,7 +58,8 @@ export const textVariants = {
  * @enum {string}
  * @alias Text.overflowTypes
  */
-const overflowTypes = {
+export const overflowTypes = {
+    NOWRAP: "no-wrap",
     /** wrap */
     WRAP: "wrap",
     /** ellipsis */
@@ -69,7 +70,7 @@ const overflowTypes = {
  * @enum {string}
  * @alias Text.alignments
  */
-const alignments = {
+export const alignments = {
     /** left */
     LEFT: "left",
     /** center */
@@ -120,6 +121,7 @@ const Text = ({
     children,
     className,
     "data-id": dataId,
+    disabled,
     inline,
     type,
     overflow,
@@ -139,6 +141,7 @@ const Text = ({
                 "text-component--left": align === alignments.LEFT,
                 "text-component--right": align === alignments.RIGHT,
                 "text-component--overflow-wrap": overflow === overflowTypes.WRAP,
+                "text-component--disabled": disabled,
                 "text-weight--normal": weight === weights.NORMAL,
                 "text-weight--bold": weight === weights.BOLD,
                 "text-weight--hover": weight === weights.BOLD_ON_HOVER
@@ -154,6 +157,7 @@ Text.propTypes = {
     align: PropTypes.oneOf(Object.values(alignments)),
     className: PropTypes.string,
     "data-id": PropTypes.string,
+    disabled: PropTypes.bool,
     overflow: PropTypes.oneOf(Object.values(overflowTypes)),
     type: PropTypes.oneOf(Object.values(textTypes)),
     variant: PropTypes.oneOf(Object.values(textVariants)),
@@ -163,6 +167,7 @@ Text.propTypes = {
 Text.defaultProps = {
     align: alignments.LEFT,
     "data-id": "styled-text",
+    disabled: false,
     overflow: overflowTypes.WRAP,
     type: textTypes.BODY,
     weight: weights.NORMAL,

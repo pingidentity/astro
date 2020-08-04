@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+
 /**
  * @method
  * @name _addToSearchTerms
@@ -189,7 +192,19 @@ export const createSearch = (tree = []) => {
     return [_checkForMatch(searchTerms)(possibleResults), possibleResults];
 };
 
+const getSearchableContent = string => {
+    // Some searchable labels might contain JSX. If they do, convert them to a string and then
+    // strip out the markup with the regex below.
+    if (React.isValidElement(string)) {
+        const asString = ReactDOMServer.renderToStaticMarkup(string);
+        return asString.replace(/(<([^>]+)>)/ig);
+    } else {
+        return string;
+    }
+};
+
 // Would use string.contains() here, but Jest doesn't like it. Probably related to our Node.js version.
 export function containsString(string, searchTerm) {
-    return string.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    const searchable = getSearchableContent(string);
+    return searchable.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
 }

@@ -165,6 +165,10 @@ textarea {
     @include text-label;
 }
 
+.form-label {
+    max-width: 100%;
+}
+
 .form-label__explanation {
     @include text-body;
 
@@ -531,6 +535,9 @@ label {
                 bottom: auto;
             }
         }
+        &.disabled {
+            cursor: default;
+        }
         // indeterminate checkboxes are so rare that this class is only added to the checkbox
         // by other components that use it internally
         &--indeterminate {
@@ -727,12 +734,6 @@ label {
         color: $color-midnight;
         text-transform: none;
         font-size: 16px;
-    }
-}
-
-label.input-text {
-    &--nospacing {
-        margin-bottom: 0;
     }
 }
 
@@ -2914,6 +2915,12 @@ label {
     @include input-width-css('full');
 }
 
+label.input-text {
+    &--nospacing {
+        margin-bottom: 0;
+    }
+}
+
 // CUSTOM STYLES
 
 .icon-selector-button {
@@ -3139,13 +3146,17 @@ label {
     @include font-pn-regular;
     background-color: $color-white;
     min-width: 170px;
+    max-width: 100%;
     text-align: left;
     text-transform: none;
     vertical-align: middle;
     cursor: pointer;
     outline: none;
-    white-space: nowrap;
     color: $color-midnight;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     border-radius: $default-input-border-radius;
     box-sizing: border-box;

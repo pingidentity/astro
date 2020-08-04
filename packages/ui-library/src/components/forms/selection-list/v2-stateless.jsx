@@ -21,6 +21,7 @@ import { filterFieldContains } from "../../../util/FilterUtils";
  * @alias SelectionList.ListWidths
  */
 export const listWidths = {
+    ...boxSizes,
     /** fixed */
     FIXED: "fixed",
     /** fluid */
@@ -88,7 +89,7 @@ const optionProp = PropTypes.shape({
         PropTypes.number,
         PropTypes.string
     ]).isRequired,
-    label: PropTypes.string,
+    label: PropTypes.node,
     disabled: PropTypes.bool,
 });
 
@@ -324,6 +325,7 @@ export default class SelectionListStateless extends React.Component {
                 scroll-box-data-id={`${dataId}-options`}
                 className={className}
                 width={
+                    (Object.values(boxSizes).includes(width) && width) ||
                     (width === listWidths.FLUID && boxSizes.SM) ||
                     (width === listWidths.FULL && "full") ||
                     (width !== listWidths.AUTOWIDTH && boxSizes.XS) || "none"
