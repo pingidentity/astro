@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Toggle from "ui-library/lib/components/forms/form-toggle";
-import Text from "ui-library/lib/components/general/Text";
-import ExpandableCard, { ExpandableCardRow, statusTypes } from "ui-library/lib/components/rows/ExpandableCard";
-import Link, { linkTypes } from "ui-library/lib/components/general/Link";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import ExpandableCard, { ExpandableCardRow } from "ui-library/lib/components/rows/ExpandableCard";
+import Button from "ui-library/lib/components/buttons/Button";
+import Chip, { chipTypes, chipColors } from "ui-library/lib/components/layout/Chip";
 
 /**
 * @name ExpandableCardDemo
@@ -15,32 +16,80 @@ export default class ExpandableCardDemo extends Component {
         return (
             <ExpandableCardRow>
                 <ExpandableCard
-                    title="First Expandable Card"
-                    subtitle="Expandable Card"
-                    description="Some Text"
-                    status={statusTypes.ERROR}
-                    statusText="Error Status"
+                    title={(
+                        <>
+                            <Text type={textTypes.PAGETITLE}>
+                                Card Title
+                            </Text>
+                            <Text type={textTypes.BODY}>
+                                Card Subtitle
+                            </Text>
+                        </>
+                    )}
+                    collapsedContent={(
+                        <Chip type={chipTypes.OUTLINE} color={chipColors.RED}>
+                            Error Status
+                        </Chip>
+                    )}
                     cardAccessories={(
                         <Toggle toggled={true} />
                     )}
                     cardControls={(
-                        <Link type={linkTypes.PAGE_RETURN}>Return to Page</Link>
+                        <>
+                            <Button
+                                iconName="delete"
+                                data-id="delete-btn"
+                                inline
+                            />
+                            <Button
+                                iconName="edit"
+                                data-id="edit-btn"
+                                inline
+                            />
+                        </>
                     )}
                 >
                     <Text>This is content in the ExpandableCard.</Text>
 
                 </ExpandableCard>
+
                 <ExpandableCard
-                    title="Second Expandable Card"
-                    subtitle="Expandable Card"
-                    description="Some Text"
-                    status={statusTypes.ERROR}
-                    statusText="Error Status"
+                    title={(
+                        <>
+                            <Text type={textTypes.PAGETITLE}>
+                                Card Title
+                            </Text>
+                            <Text type={textTypes.BODY}>
+                                Card Subtitle
+                            </Text>
+                        </>
+                    )}
+                    collapsedContent={(
+                        <Chip type={chipTypes.OUTLINE} color={chipColors.RED}>
+                            Error Status
+                        </Chip>
+                    )}
                     cardAccessories={(
                         <Toggle toggled={true} />
                     )}
+                    cardControls={(
+                        <>
+                            <Button
+                                iconName="delete"
+                                data-id="delete-btn"
+                                inline
+                            />
+                            <Button
+                                iconName="edit"
+                                data-id="edit-btn"
+                                inline
+                            />
+                        </>
+                    )}
+                    renderToggle={(props) => <Button {...props} iconName={null}>Expand</Button>}
                 >
                     <Text>This is content in the ExpandableCard.</Text>
+
                 </ExpandableCard>
             </ExpandableCardRow>
         );

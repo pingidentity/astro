@@ -1,35 +1,33 @@
 window.__DEV__ = true;
 
 import React from "react";
+import { render, screen } from "@testing-library/react";
 import { mount } from "enzyme";
 
 const defaultProps = {
     title: <div>Test Title</div>,
-    subtitle: <div>Test Subtitle</div>,
-    description: <div>Some words go here...</div>
+    collapsedContent: <div>Some words go here...</div>
 };
 
 jest.useFakeTimers();
 
 describe("ExpandableCard", () => {
-    const { default: ExpandableCard, ExpandableCardRow, statusTypes }= require("../ExpandableCard");
+    const { default: ExpandableCard, ExpandableCardRow } = require("../ExpandableCard");
 
-    const getComponent = props => mount((
+    const getComponent = (props) => mount(
         <ExpandableCardRow>
             <ExpandableCard {...defaultProps} {...props} />
         </ExpandableCardRow>
-    ));
+    );
+
+    const renderComponent = (props) => render(
+        <ExpandableCardRow>
+            <ExpandableCard {...defaultProps} {...props} />
+        </ExpandableCardRow>
+    );
 
     const getExpandButton = (component) => {
         return component.find("[data-id='expand-btn'] > button");
-    };
-
-    const getEditButton = (component) => {
-        return component.find("[data-id='edit-btn'] > button");
-    };
-
-    const getDeleteButton = (component) => {
-        return component.find("[data-id='delete-btn'] > button");
     };
 
     it("renders with default data-id", () => {
@@ -62,23 +60,6 @@ describe("ExpandableCard", () => {
         expect(toggleCallback).toHaveBeenCalled();
     });
 
-    it("shows the cardControls when opened", () => {
-        const toggleCallback = jest.fn();
-        const component = getComponent({
-            onToggle: toggleCallback,
-            cardControls: (
-                <h1>Hi, Mom!</h1>
-            )
-        });
-        const expandButton = getExpandButton(component);
-
-        expandButton.simulate("click");
-
-        const cardControls = component.find(".expandable-card__cardControls");
-
-        expect(cardControls.exists()).toEqual(true);
-    });
-
     it("scrolls content into view after expanded", () => {
         const component = getComponent();
         const expandButton = getExpandButton(component);
@@ -94,71 +75,27 @@ describe("ExpandableCard", () => {
         expect(scrollIntoViewMock).toHaveBeenCalled();
     });
 
-    it("don't show delete button is showDelete=false", () => {
-        const component = getComponent({
-            showDelete: false
+    it("shows collapsedContent when collapsed", () => {
+        renderComponent({
+            expanded: false,
         });
-
-        const deleteButton = getDeleteButton(component);
-
-        expect(deleteButton.exists()).toEqual(false);
+        const collapsible = screen.queryByTestId("expandable-card-collapsed-content");
+        expect(collapsible).toBeVisible();
     });
 
-    it("calls onDelete when clicked", () => {
-        const onDelete = jest.fn();
+    it("hides children when collapsed", () => {
         const component = getComponent({
-            onDelete
+            expanded: false,
         });
 
-        const deleteButton = getDeleteButton(component);
-
-        deleteButton.simulate("click");
-
-        expect(onDelete).toHaveBeenCalled();
+        expect(component.exists(".expandable-card__content--expanded")).toEqual(false);
     });
 
-    it("disables edit if isEditEnabled=false", () => {
+    it("shows children when expanded", () => {
         const component = getComponent({
-            isEditEnabled: false,
+            expanded: true,
         });
 
-        const editButton = getEditButton(component);
-
-        expect(editButton.props().disabled).toEqual(true);
-    });
-
-    it("hides edit if showEdit=false", () => {
-        const component = getComponent({
-            showEdit: false,
-        });
-
-        const editButton = getEditButton(component);
-
-        expect(editButton.exists()).toEqual(false);
-    });
-
-    it("calls onEditButtonClick when clicked", () => {
-        const onEdit = jest.fn();
-        const component = getComponent({
-            onEditButtonClick: onEdit,
-        });
-
-        const editButton = getEditButton(component);
-
-        editButton.simulate("click");
-
-        expect(onEdit).toHaveBeenCalled();
-    });
-
-    it("adds a status if provided", () => {
-        const component = getComponent({
-            status: statusTypes.ERROR,
-            statusText: "Status Text"
-        });
-
-        const status = component.find("[data-id='status-badge'] > .chip-component");
-
-        expect(status.exists()).toEqual(true);
-        expect(status.text()).toEqual("Status Text");
+        expect(component.exists(".expandable-card__content--expanded")).toEqual(true);
     });
 });

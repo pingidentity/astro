@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import Button from "../buttons/Button";
-import DetailsTooltip from "../tooltips/DetailsTooltip";
 import HR, { spacings } from "../general/HR";
-import Chip, { chipColors, chipTypes } from "../layout/Chip";
+import { defaultRender } from "../../util/PropUtils";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import _ from "underscore";
 
@@ -35,60 +34,28 @@ export function ExpandableCardRow({
 /**
  * @class ExpandableCard
  * @description Basic expandable row component.
+ * @param {object} [collapsedContent]
+ *      Element(s) to be shown when the card is collapsed.
  * @param {object} [cardAccessories]
  *      Element(s) to be displayed in top-right of card.
  * @param {object} [cardControls]
  *      Element(s) to be displayed in top-left of card.
  * @param {string} [data-id='expandable-card']
  *      The data-id attribute value applied to the element.
- * @param {object} [deleteButton]
- *      The node to be rendered as the delete button.
- * @param {string} description
- *      The description text.
- * @param {object} [editButton]
- *      The node to be rendered as the edit button.
- * @param {boolean} [isEditEnabled=true]
- *      If the edit button should be enabled or not.
- * @param {function} onDelete
- *      Function to be called when the delete button is clicked.
- * @param {function} onEditButtonClick
- *      Function to be called when the edit button is clicked.
- * @param {boolean} [showDelete=true]
- *      If the delete button should be visible or not.
- * @param {boolean} [showEdit=true]
- *      If the edit button should be visible or not.
- * @param {ExpandableCard.statusTypes} [status]
- *      The ExpandableCard.statusTypes status to show below the description.
- * @param {string} [statusText]
- *      The text to display in the status badge.
- * @param {string} subtitle
- *      Text placed immediately below the title.
- * @param {string} title
+ * @param {function} renderToggle
+ *      Render prop for the toggle button
+ * @param {boolean} [expanded]
+ *      Sets the card's expanded state.
+ * @param {function} [onToggle]
+ *      Callback for when the card is open/closed.
+ * @param {string} [title]
  *      The title text.
  */
 class ExpandableCardStateless extends Component {
     card = null;
 
-    _getStatusBadge(status, content) {
-        switch (status) {
-            case statusTypes.ERROR:
-                return (
-                    <Chip type={chipTypes.OUTLINE} color={chipColors.RED} data-id="status-badge">
-                        {content}
-                    </Chip>
-                );
-            case statusTypes.INFO:
-                return (
-                    <Chip type={chipTypes.OUTLINE} color={chipColors.DARKGREY} data-id="status-badge">
-                        {content}
-                    </Chip>
-                );
-            default:
-                return null;
-        }
-    }
-
     componentDidUpdate = (prevProps) => {
+        /* istanbul ignore else */
         if (prevProps.expanded !== this.props.expanded && this.props.expanded) {
             setTimeout(() => {
                 this.card.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -99,27 +66,13 @@ class ExpandableCardStateless extends Component {
     render() {
         const {
             "data-id": dataId,
-
+            renderToggle,
             title,
-            subtitle,
-            description,
-            status,
-            statusText,
-
-            cardAccessories,
+            collapsedContent,
             cardControls,
+            cardAccessories,
             expanded,
             onToggle,
-
-            onDelete,
-            showDelete,
-            deleteButton,
-            infoMessage,
-
-            isEditEnabled,
-            showEdit,
-            editButton,
-            onEditButtonClick,
         } = this.props;
 
         const holderClassNames = classnames("expandable-card__holder", {
@@ -137,29 +90,19 @@ class ExpandableCardStateless extends Component {
         return (
             <div className={holderClassNames} data-id={dataId}>
                 <div className={classNames} ref={(ref) => this.card = ref}>
-                    {expanded &&
-                        <div className="expandable-card__cardControls">
-                            {cardControls}
-                        </div>
-                    }
                     <div className="expandable-card__info">
                         <div>
-                            <div className="expandable-card__title">
-                                {title}
+                            {title}
+                            <div
+                                className="expandable-card__description"
+                                data-testid="expandable-card-collapsed-content"
+                            >
+                                {collapsedContent}
                             </div>
-                            <div className="expandable-card__subtitle">
-                                {subtitle}
-                            </div>
-                            <div className="expandable-card__description">
-                                {description}
-                            </div>
-                            <div className="expandable-card__cardAccessories">
+                            <div
+                                className="expandable-card__cardAccessories"
+                            >
                                 {cardAccessories}
-                            </div>
-                        </div>
-                        <div>
-                            <div className="expandable-card__chip">
-                                {this._getStatusBadge(status, statusText)}
                             </div>
                         </div>
                     </div>
@@ -170,55 +113,17 @@ class ExpandableCardStateless extends Component {
                         </div>
                     </div>
                     <div className="expandable-card__footer">
-                        {/* Tyler did this. It is very bad. He will remove it by 5-8-2020 or finder of this gets $5 */}
-                        <style dangerouslySetInnerHTML={{ __html: `
-                                .expandable-card-special-temporary-button-icon-override button {
-                                    overflow: hidden;
-                                }
-                            ` }} />
-                        <span className="expandable-card-special-temporary-button-icon-override">
-                            <DetailsTooltip
-                                placement="top right"
-                                label={
-                                    <Button
-                                        inline
-                                        className="button--circle"
-                                    >
-                                        <div className="icon-info" style={{ transform: "scale(2.1)" }} />
-
-                                    </Button>
-                                }
-                                width="large"
-                            >
-                                {infoMessage}
-                            </DetailsTooltip>
-
-                        </span>
-                        {showDelete && (deleteButton || (
-                            <Button
-                                iconName="delete"
-                                data-id="delete-btn"
-                                inline
-                                onClick={onDelete}
-                            />
-                        ))}
-                        {showEdit && (editButton || (
-                            <Button
-                                iconName="edit"
-                                data-id="edit-btn"
-                                inline
-                                onClick={onEditButtonClick}
-                                disabled={!isEditEnabled}
-                            />
-                        ))}
+                        <div className="expandable-card__controls">
+                            {cardControls}
+                        </div>
                         <div className="expandable-card__expand">
-                            <Button
-                                iconName="expand"
-                                data-id="expand-btn"
-                                onClick={onToggle}
-                                inline
-                                noSpacing
-                            />
+                            {renderToggle({
+                                iconName: "expand",
+                                "data-id": "expand-btn",
+                                onClick: onToggle,
+                                inline: true,
+                                noSpacing: true
+                            }, Button)}
                         </div>
                     </div>
                 </div>
@@ -229,32 +134,19 @@ class ExpandableCardStateless extends Component {
 
 ExpandableCardStateless.propTypes = {
     "data-id": PropTypes.string,
-    title: PropTypes.node,
-    subtitle: PropTypes.node,
-    description: PropTypes.node,
-    status: PropTypes.oneOf(Object.values(statusTypes)),
-    statusText: PropTypes.node,
-    cardAccessories: PropTypes.node,
     cardControls: PropTypes.node,
-    onDelete: PropTypes.func,
-    infoMessage: PropTypes.node, //This is a temp prop removed in next release
-    showDelete: PropTypes.bool,
-    deleteButton: PropTypes.node,
-    isEditEnabled: PropTypes.bool,
-    showEdit: PropTypes.bool,
-    editButton: PropTypes.node,
-    onEditButtonClick: PropTypes.func,
+    collapsedContent: PropTypes.node,
+    title: PropTypes.node,
+    cardAccessories: PropTypes.node,
+    onToggle: PropTypes.func,
     expanded: PropTypes.bool,
+    renderToggle: PropTypes.func,
 };
 
 ExpandableCardStateless.defaultProps = {
     "data-id": "expandable-card",
     onToggle: _.noop,
-    onDelete: _.noop,
-    onEditButtonClick: _.noop,
-    showDelete: true,
-    showEdit: true,
-    isEditEnabled: true,
+    renderToggle: defaultRender,
 };
 
 const ExpandableCard = inStateContainer([
