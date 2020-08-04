@@ -125,9 +125,11 @@ $max-popover-width: 360px;
 .popover {
     position: relative;
     display: inline-block;
+    max-width: 100%;
 
     &__trigger {
         display: inline-block;
+        max-width: 100%;
 
         &--no-hover {
             &:hover {

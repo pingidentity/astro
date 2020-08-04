@@ -254,7 +254,7 @@ CheckboxGroup.propTypes = {
         PropTypes.shape({
             disabled: PropTypes.bool,
             value: valueProp.required,
-            label: PropTypes.string,
+            label: PropTypes.node,
             labelHelpText: PropTypes.string, // just an alias for hint
             hint: PropTypes.string,
             helpTarget: PropTypes.node,

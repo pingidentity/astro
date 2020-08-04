@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import SelectionFilterLabel from "../forms/SelectionFilterLabel";
-import SelectionList from "../forms/selection-list";
-import Popover from "../tooltips/Popover";
 import _ from "underscore";
+import SelectionFilterLabel from "../forms/SelectionFilterLabel";
+import SelectionList, { listWidths } from "../forms/selection-list";
+import Popover from "../tooltips/Popover";
 import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
@@ -12,6 +12,7 @@ import { translateItemsToOptions } from "../../util/PropUtils";
 import { renderNestedCheckboxes } from "../forms/CheckboxGroup";
 import PipeRow, { pipeGaps } from "../layout/PipeRow";
 import Button from "../buttons/Button";
+import { usePStateful } from "../../util/PropUtils";
 
 const onlySelected = (values, options) => {
     if (values) {
@@ -51,6 +52,132 @@ const optionsSelector = createSelector(
     (search, values, options) => filterOptions(search, values, options),
 );
 
+export const SelectionOptions = ({
+    clearLabel,
+    onClear,
+    onShowClick,
+    showLabel
+}) => (
+    <PipeRow gap={pipeGaps.SM}>
+        <Button
+            data-id="only-selected-button"
+            type={Button.buttonTypes.LINK}
+            onClick={onShowClick}
+            noSpacing
+        >
+            {showLabel}
+        </Button>
+        <Button
+            data-id="clear-button"
+            type={Button.buttonTypes.LINK}
+            onClick={onClear}
+            noSpacing
+        >{clearLabel}</Button>
+    </PipeRow>
+);
+
+SelectionOptions.propTypes = {
+    clearLabel: PropTypes.node,
+    onClear: PropTypes.func,
+    onShowClick: PropTypes.func,
+    showLabel: PropTypes.node
+};
+
+SelectionOptions.defaultProps = {
+    clearLabel: "Clear",
+    onClear: _.noop,
+    onShowClick: _.noop,
+    showLabel: "Show All"
+};
+
+// Return the count of all selected options, minus selected parent nodes for nested options
+const getSelectedCount = (options, selected = []) => {
+    let count = 0;
+    options.forEach((item) => {
+        const hasChildren = item.hasOwnProperty("children");
+        const isSelected = selected.includes(item.value);
+        if (hasChildren && isSelected) {
+            count += getSelectedCount(item.children, item.children.map(c => c.value));
+        } else if (hasChildren) {
+            count += getSelectedCount(item.children, selected);
+        } else if (isSelected) {
+            count += 1;
+        }
+    });
+
+    return count;
+};
+
+export const useFilterSelector = ({
+    initialSelected,
+    options = [],
+    search = "",
+    selected: propSelected,
+    showOnlySelected = false
+}) => {
+    const [selected, setSelected] = usePStateful(propSelected, initialSelected);
+    const filteredOptions = optionsSelector({
+        search: search,
+        values: showOnlySelected ? selected : null,
+        options: translateItemsToOptions(options),
+    });
+    const count = getSelectedCount(filteredOptions, selected);
+
+    return {
+        count,
+        options: filteredOptions,
+        selected,
+        setSelected
+    };
+};
+
+export const Content = ({
+    onSearch,
+    search,
+    searchPlaceholder,
+    selected,
+    type,
+    ...props
+}) => {
+    const [stateSearch, setSearch] = usePStateful(search);
+    return (
+        <InputModifier inputColor={inputColors.DARK}>
+            <SelectionList
+                onSearch={value => {
+                    setSearch(value);
+                    onSearch(value);
+                }}
+                queryString={stateSearch}
+                renderList={
+                    (listProps, Component) => <Component {...listProps} renderOption={renderNestedCheckboxes()} />
+                }
+                searchPlaceholder={searchPlaceholder}
+                selectedItemIds={selected}
+                showSearchBox
+                type={type}
+                {...props}
+            />
+        </InputModifier>
+    );
+};
+
+Content.propTypes = {
+    ...SelectionList.propTypes,
+    onSearch: PropTypes.func,
+    search: PropTypes.string,
+    searchPlaceholder: PropTypes.string,
+    selected: PropTypes.arrayOf(PropTypes.string),
+    type: PropTypes.oneOf([
+        SelectionList.ListType.ADD,
+        SelectionList.ListType.MULTI
+    ]),
+};
+
+Content.defaultProps = {
+    searchPlaceholder: "...Search",
+    type: SelectionList.ListType.MULTI
+};
+
 /**
 * @class FilterSelector
 * @desc Popover selection list that lets you choose from many filters
@@ -86,70 +213,64 @@ const optionsSelector = createSelector(
 * @param {array} [selected]
 *     All the selected values
 */
-class FilterSelectorBase extends React.Component {
-    state = {
-        search: "",
-        showOnlySelected: false,
-    };
+const FilterSelectorBase = ({
+    "data-id": dataId,
+    bottomPanel,
+    hideSelectionOptions,
+    className,
+    description,
+    labelText,
+    label,
+    placeholder,
+    required,
+    selected,
+    onSearch,
+    onToggle,
+    onValueChange,
+    open,
+    options,
+    optionsNote,
+    requiredText,
+    search: propsSearch,
+    type
+}) => {
 
-    static propTypes = {
-        "data-id": PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        bottomPanel: PropTypes.node,
-        className: PropTypes.string,
-        description: PropTypes.node,
-        labelText: PropTypes.string,
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-        required: PropTypes.bool,
-        hideSelectionOptions: PropTypes.bool,
-        onValueChange: PropTypes.func,
-        onToggle: PropTypes.func,
-        open: PropTypes.bool,
-        options: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.string, // alias for value
-            name: PropTypes.string, // alias for label
-            value: PropTypes.string,
-            label: PropTypes.string,
-        })),
-        optionsNote: PropTypes.node,
-        requiredText: PropTypes.string,
-        selected: PropTypes.arrayOf(PropTypes.string),
-        type: PropTypes.oneOf([
-            SelectionList.ListType.ADD,
-            SelectionList.ListType.MULTI
-        ]),
-    };
+    const [showOnlySelected, setOnlySelected] = useState(false);
+    const [search, setSearch] = usePStateful(propsSearch);
 
-    static defaultProps = {
-        "data-id": "filter-selector",
-        placeholder: "Select One",
-        required: false,
-        hideSelectionOptions: false,
-        onToggle: _.noop,
-        onSearch: _.noop,
-        onValueChange: _.noop,
-        selected: [],
-        type: SelectionList.ListType.MULTI
-    };
-
-    _handleSearch = value => {
-        this.setState({ search: value });
-        this.props.onSearch(value);
-    }
-
-    _getOptions = () => optionsSelector({
-        search: this.state.search,
-        values: this.state.showOnlySelected ? this.props.selected : null,
-        options: translateItemsToOptions(this.props.options),
+    const {
+        count,
+        options: optionsToShow
+    } = useFilterSelector({
+        options,
+        search,
+        selected,
+        showOnlySelected
     });
 
-    _getFilterLabel = () => {
-        const {
-            selected,
-            labelText,
-            options,
-        } = this.props;
+    const getBottomPanel = () => {
+        const bottomPanelElements = [];
+        if (!hideSelectionOptions) {
+            bottomPanelElements.push(
+                <SelectionOptions
+                    key="selection-options"
+                    onClear={() => {
+                        onValueChange([]);
+                        setOnlySelected(false);
+                    }}
+                    onShowClick={() => setOnlySelected(!showOnlySelected)}
+                    showLabel={showOnlySelected ? "Show All" : "Show Only Selected"}
+                />
+            );
+        }
+        if (bottomPanel) {
+            bottomPanelElements.push(bottomPanel);
+        }
 
+        return !_.isEmpty(bottomPanelElements) && bottomPanelElements;
+    };
+
+    const getFilterLabel = () => {
         if (selected.length > 1) {
             return labelText ? labelText : "Selected";
         } else if (selected.length === 1) {
@@ -160,124 +281,87 @@ class FilterSelectorBase extends React.Component {
         }
     };
 
-    _getSearch = () => this.props.search !== undefined ? this.props.search : this.state.search;
+    return (
+        <span data-id={dataId} className={className}>
+            <Popover
+                data-id={`${dataId}-popover`}
+                label={
+                    <SelectionFilterLabel
+                        open={open}
+                        filterLabel={getFilterLabel() || ""}
+                        labelText={labelText}
+                        description={description}
+                        label={label}
+                        placeholder={placeholder}
+                        required={required}
+                        count={count > 0 ? count : -1}
+                    />
+                }
+                open={open}
+                onToggle={onToggle}
+            >
+                <Content
+                    type={type}
+                    bottomPanel={getBottomPanel()}
+                    options={optionsToShow}
+                    optionsNote={optionsNote}
+                    onSearch={val => {
+                        setSearch(val);
+                        onSearch(val);
+                    }}
+                    onValueChange={onValueChange}
+                    requiredText={requiredText}
+                    search={search}
+                    searchPlaceholder="Search..."
+                    selectedItemIds={selected}
+                />
+            </Popover>
+        </span>
+    );
+};
 
-    _renderList = (props, Component) => <Component {...props} renderOption={renderNestedCheckboxes()} />
+FilterSelectorBase.propTypes = {
+    "data-id": PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    bottomPanel: PropTypes.node,
+    className: PropTypes.string,
+    description: PropTypes.node,
+    labelText: PropTypes.string,
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
+    required: PropTypes.bool,
+    hideSelectionOptions: PropTypes.bool,
+    onValueChange: PropTypes.func,
+    onToggle: PropTypes.func,
+    open: PropTypes.bool,
+    options: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string, // alias for value
+        name: PropTypes.string, // alias for label
+        value: PropTypes.string,
+        label: PropTypes.string,
+    })),
+    optionsNote: PropTypes.node,
+    requiredText: PropTypes.string,
+    selected: PropTypes.arrayOf(PropTypes.string),
+    type: PropTypes.oneOf([
+        SelectionList.ListType.ADD,
+        SelectionList.ListType.MULTI
+    ]),
+};
 
-    _toggleOnlySelected = () => this.setState(({ showOnlySelected }) => ({ showOnlySelected: !showOnlySelected }));
+FilterSelectorBase.defaultProps = {
+    "data-id": "filter-selector",
+    placeholder: "Select One",
+    required: false,
+    hideSelectionOptions: false,
+    onToggle: _.noop,
+    onSearch: _.noop,
+    onValueChange: _.noop,
+    selected: []
+};
 
-    _unselectAll = () => {
-        this.props.onValueChange([]);
-        this.setState({ showOnlySelected: false });
-    }
-
-    _getBottomPanel = () => {
-        const { bottomPanel, hideSelectionOptions } = this.props;
-        const bottomPanelElements = [];
-        if (!hideSelectionOptions) {
-            bottomPanelElements.push(
-                <PipeRow gap={pipeGaps.SM} key="selection-options">
-                    <Button
-                        data-id="only-selected-button"
-                        type={Button.buttonTypes.LINK}
-                        onClick={this._toggleOnlySelected}
-                        noSpacing
-                    >
-                        {this.state.showOnlySelected ? "Show All" : "Show Only Selected"}
-                    </Button>
-                    <Button
-                        data-id="clear-button"
-                        type={Button.buttonTypes.LINK}
-                        onClick={this._unselectAll}
-                        noSpacing
-                    >Clear</Button>
-                </PipeRow>
-            );
-        }
-        if (bottomPanel) {
-            bottomPanelElements.push(bottomPanel);
-        }
-
-        return !_.isEmpty(bottomPanelElements) && bottomPanelElements;
-    }
-
-    // Return the count of all selected options, minus selected parent nodes for nested options
-    _getSelectedCount = (options, selected = []) => {
-        let count = 0;
-        options.forEach((item) => {
-            const hasChildren = item.hasOwnProperty("children");
-            const isSelected = selected.includes(item.value);
-            if (hasChildren && isSelected) {
-                count += this._getSelectedCount(item.children, item.children.map(c => c.value));
-            } else if (hasChildren) {
-                count += this._getSelectedCount(item.children, selected);
-            } else if (isSelected) {
-                count += 1;
-            }
-        });
-
-        return count;
-    }
-
-    render = () => {
-        const {
-            "data-id": dataId,
-            className,
-            description,
-            labelText,
-            label,
-            placeholder,
-            required,
-            selected,
-            onToggle,
-            onValueChange,
-            open,
-            optionsNote,
-            requiredText,
-            type
-        } = this.props;
-        const options = this._getOptions();
-        const count = this._getSelectedCount(options, selected);
-
-        return (
-            <span data-id={dataId} className={className}>
-                <Popover
-                    data-id={`${dataId}-popover`}
-                    label={
-                        <SelectionFilterLabel
-                            open={open}
-                            filterLabel={this._getFilterLabel() || ""}
-                            labelText={labelText}
-                            description={description}
-                            label={label}
-                            placeholder={placeholder}
-                            required={required}
-                            count={count > 0 ? count : -1}
-                        />
-                    }
-                    open={open}
-                    onToggle={onToggle}
-                >
-                    <InputModifier inputColor={inputColors.DARK}>
-                        <SelectionList
-                            type={type}
-                            bottomPanel={this._getBottomPanel()}
-                            options={options}
-                            optionsNote={optionsNote}
-                            showSearchBox={true}
-                            searchPlaceholder="Search..."
-                            onSearch={this._handleSearch}
-                            onValueChange={onValueChange}
-                            queryString={this._getSearch()}
-                            requiredText={requiredText}
-                            selectedItemIds={selected}
-                            renderList={this._renderList}
-                        />
-                    </InputModifier>
-                </Popover>
-            </span>
-        );
-    };
-}
+export const Container = Popover;
+Content.types = SelectionList.ListType;
+Content.widths = listWidths;
+export const Label = SelectionFilterLabel;
 
 export default togglesOpen(FilterSelectorBase);

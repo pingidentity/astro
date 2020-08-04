@@ -107,6 +107,10 @@
         @include break-word;
     }
 
+    &--overflow-no-wrap {
+        white-space: nowrap;
+    }
+
     &--center {
         text-align: center;
     }
@@ -117,6 +121,10 @@
 
     &--right {
         text-align: right;
+    }
+
+    &--disabled {
+        opacity: $inactive-opacity;
     }
 }
 
