@@ -98,6 +98,12 @@ $expandable-row-gap: 12px;
             overflow-y: auto;
         }
     }
+    &__edit-wrapper {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: calc(100% - #{2 * $button-height} - 2px);
+    }
     .item-title {
         font-size: 17px;
         line-height: 1.1em;
@@ -160,7 +166,8 @@ $expandable-row-gap: 12px;
     .edit-btn,
     .view-btn,
     .no-edit,
-    .btn-fill {
+    .btn-fill,
+    .expandable-row__edit-wrapper {
         position: relative;
         background-color: $color-chilly;
         text-align: center;
@@ -197,7 +204,7 @@ $expandable-row-gap: 12px;
     }
     .edit-btn,
     .view-btn,
-    .btn-fill {
+    .btn-fill, {
         display: none;
         height: calc(100% - #{2 * $button-height} - 2px);
     }
@@ -260,6 +267,7 @@ $expandable-row-gap: 12px;
         .btn-fill {
             display: block;
         }
+
         .delete-btn {
             display: block;
             margin: 1px 0 0;

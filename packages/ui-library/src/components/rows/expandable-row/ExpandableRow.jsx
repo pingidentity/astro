@@ -18,6 +18,7 @@ import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 import { withFocusOutline } from "../../../util/KeyboardUtils";
+import { getClickableA11yProps } from "../../../util/PropUtils";
 
 /**
 * @enum {string}
@@ -440,21 +441,6 @@ class StatelessExpandableRow extends React.Component {
         }
     };
 
-    /*
-     * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
-     * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
-     * starts with a '/'.
-     */
-    _getEditViewRoute = (route) => {
-        if (!route) {
-            return null;
-        }
-        if (route[0] === "/") {
-            return route;
-        }
-        return "#/" + route;
-    };
-
     componentDidUpdate(prevProps) {
         if (this.props.expanded && !prevProps.expanded) {
             setTimeout(
@@ -486,18 +472,15 @@ class StatelessExpandableRow extends React.Component {
                 "has-subtitle": this.props.subtitle,
                 "no-edit": !showEditIcon
             }),
-            editButtonClassname = classnames({
-                "edit-btn": !showViewIcon,
-                "view-btn": showViewIcon
-            }),
             deleteButton,
             editButton;
 
         if (this.props.showEdit) {
             editButton = this.props.editButton || (
-                <Button data-id="edit-btn" className={editButtonClassname}
-                    href={this._getEditViewRoute(this.props.editViewRoute)}
-                    onClick={this.props.onEditButtonClick}/>);
+                <EditButton
+                    editViewRoute={this.props.editViewRoute}
+                    onClick={this.props.onEditButtonClick}
+                    showViewIcon={showViewIcon} />);
         }
 
         if (this.props.showDelete) {
@@ -548,7 +531,7 @@ class StatelessExpandableRow extends React.Component {
                 data-id={this.props["data-id"]}
                 className={containerClassname}
             >
-                { (this.props.rowAccessories || this.props.status) && (
+                {(this.props.rowAccessories || this.props.status) && (
                     <div data-id="row-accessories" className="row-accessories">
                         {this.props.rowAccessories}
                         {this.props.status && (
@@ -556,9 +539,9 @@ class StatelessExpandableRow extends React.Component {
                         )}
                     </div>
                 )}
-                { (this.props.ordering) && (
+                {(this.props.ordering) && (
                     <div data-id="ordering-controls" className="ordering-controls">
-                        <span className="icon-grip ordering-controls__grip"/>
+                        <span className="icon-grip ordering-controls__grip" />
                         <OrderingInput
                             data-id="ordering-input"
                             {...this.props.ordering}
@@ -706,6 +689,53 @@ class ConfirmDeleteDialog extends React.Component {
     }
 }
 
+function EditButton({
+    "data-id": dataId,
+    editViewRoute,
+    onClick,
+    showViewIcon
+}) {
+    /*
+     * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
+     * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
+     * starts with a '/'.
+     */
+    const _getEditViewRoute = (route) => {
+        if (!route) {
+            return null;
+        }
+        if (route[0] === "/") {
+            return route;
+        }
+        return "#/" + route;
+    };
+
+    return (
+        <a data-id={dataId}
+            className={classnames({
+                "edit-btn": !showViewIcon,
+                "view-btn": showViewIcon
+            })}
+            href={_getEditViewRoute(editViewRoute)}
+            {...getClickableA11yProps(onClick)}
+            onClick={onClick}
+        />
+    );
+}
+
+EditButton.propTypes = {
+    "data-id": PropTypes.string,
+    editViewRoute: PropTypes.string,
+    onClick: PropTypes.func,
+    showViewIcon: PropTypes.bool
+};
+
+EditButton.defaultProps = {
+    "data-id": "edit-btn",
+    onClick: _.noop,
+    showViewIcon: false,
+};
+
 const ExpandableRow = inStateContainer([
     {
         name: "expanded",
@@ -809,6 +839,31 @@ SimpleWrapper.defaultProps = {
     "data-id": "simple-wrapper",
 };
 
+/**
+* @class EditWrapper
+* @memberof ExpandableRow
+* @desc Wraps around a list of ExpandableRow components to display a scrolling list properly
+*
+* @param {string} [data-id="scrolling-wrapper"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*     CSS classes to set on the top-level HTML container.
+*/
+
+const EditWrapper = ({ "data-id": dataId, className, children, ...props }) => (
+    <div data-id={dataId} className={classnames("expandable-row__edit-wrapper", className)} {...props}>{children}</div>
+);
+
+EditWrapper.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.node,
+};
+
+EditWrapper.defaultProps = {
+    "data-id": "edit-wrapper",
+};
+
 
 /**
 * @class RowSection
@@ -851,4 +906,6 @@ FocusOutlineExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
 FocusOutlineExpandableRow.ScrollingWrapper = ScrollingWrapper;
 FocusOutlineExpandableRow.SimpleWrapper = SimpleWrapper;
 FocusOutlineExpandableRow.RowSection = RowSection;
+FocusOutlineExpandableRow.EditButton = EditButton;
+FocusOutlineExpandableRow.EditWrapper = EditWrapper;
 module.exports = FocusOutlineExpandableRow;
