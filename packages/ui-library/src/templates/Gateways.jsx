@@ -15,51 +15,8 @@ import Table, {
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 import Icon, { iconSizes } from "ui-library/lib/components/general/Icon";
 import InputRow from "ui-library/lib/components/layout/InputRow";
-import ExpandableCard, { ExpandableCardRow, statusTypes } from "ui-library/lib/components/rows/ExpandableCard";
-
-import Fieldset from "ui-library/lib/components/layout/FieldSet";
-import FormattedContent from "ui-library/lib/components/general/FormattedContent";
-
-const DownloadMessage = () => {
-    return (
-        <>
-            <PageHeader
-                title="Download Gateway"
-                subtitle="Instructions on how to download and setup a gateway container."
-
-            />
-
-
-            <Fieldset legend="Running a test Gateway">
-                <FormattedContent>
-
-                    <h2>Pre-requisites</h2>
-                    <ul>
-                        <li>Have docker running on the machine you will run the Gateway</li>
-                        <li>Create a new Gateway credential,
-                            or use an existing Gateway credential,
-                            and put in it the command below
-                        </li>
-                    </ul>
-                    <h2>Instructions</h2>
-                    <ol>
-                        <li><h3>Run The Image</h3></li>
-                        <pre>
-                            {
-                                // eslint-disable-next-line max-len
-                                "docker run -e gatewayCredential=<INSERT_GATEWAY_CREDENTIAL_HERE>\ndocker.corp.pingidentity.com:5000/lightning/lightning-ldap-gateway:1.7.0 "
-                            }
-                        </pre>
-
-                    </ol>
-
-                </FormattedContent>
-
-            </Fieldset>
-        </>
-
-
-    );};
+import ExpandableCard, { ExpandableCardRow } from "ui-library/lib/components/rows/ExpandableCard";
+import Chip, { chipTypes, chipColors } from "ui-library/lib/components/layout/Chip";
 
 /**
  * @class Gateway Template
@@ -104,14 +61,44 @@ export default class GatewayTemplate extends Component {
                     {
                         Array.from({ length: 16 }, () => (
                             <ExpandableCard
-                                title="North America Users"
-                                subtitle="2 Instances"
-                                description="LDAP/PROXY Gateway"
-                                status={statusTypes.ERROR}
-                                statusText="Update Required"
-                                infoMessage={<DownloadMessage />}
+                                title={(
+                                    <>
+                                        <Text type={textTypes.PAGETITLE}>
+                                            North America Users
+                                        </Text>
+                                        <Text type={textTypes.BODY}>
+                                            2 Instances
+                                        </Text>
+                                    </>
+                                )}
+                                collapsedContent={(
+                                    <>
+                                        <div>
+                                            <Text type={textTypes.BODY}>
+                                                LDAP/PROXY Gateway
+                                            </Text>
+                                        </div>
+                                        <Chip type={chipTypes.OUTLINE} color={chipColors.RED}>
+                                            Update Required
+                                        </Chip>
+                                    </>
+                                )}
                                 cardAccessories={(
-                                    <Toggle toggled={true}/>
+                                    <Toggle toggled={true} />
+                                )}
+                                cardControls={(
+                                    <>
+                                        <Button
+                                            iconName="delete"
+                                            data-id="delete-btn"
+                                            inline
+                                        />
+                                        <Button
+                                            iconName="edit"
+                                            data-id="edit-btn"
+                                            inline
+                                        />
+                                    </>
                                 )}
                             >
                                 <InputRow>
