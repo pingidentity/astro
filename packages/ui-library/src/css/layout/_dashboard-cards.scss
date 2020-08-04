@@ -651,6 +651,7 @@ $fullwidthBreakpoint: 950px;
 .frequency-card {
     overflow: visible;
     display: block;
+    min-height: 307px;
 
     &__title {
         margin-bottom: -24px;
@@ -675,6 +676,11 @@ $fullwidthBreakpoint: 950px;
 
     .dashboard-card__front {
         align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 
     .dashboard-card__back {

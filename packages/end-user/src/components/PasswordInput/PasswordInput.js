@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
+import TextInput from '../TextInput';
 import FieldMessage from '../FieldMessage'
 
 /**
@@ -35,49 +36,45 @@ const PasswordInput = ({
     onKeyDown,
     onMouseDown,
 }) => {
-    const classNames = classnames('text-input', className, {
-        'text-input--error': type === passwordInputTypes.ERROR,
-        'text-input--success': type === passwordInputTypes.SUCCESS,
-        'text-input--primary': type === passwordInputTypes.PRIMARY,
+    const [isHidden, setIsHidden] = useState(true);
+    const classNames = classnames('text-input--pasword', className);
+    const actionIconClassNames = classnames('text-input__icon', 'text-input__icon--action', {
+        'text-input__icon--hidden': isHidden,
+        'text-input__icon--view-hidden': !isHidden,
     });
-
-    const iconClassNames = classnames('text-input__icon', {
-        'text-input__icon--error': type === passwordInputTypes.ERROR,
-        'text-input__icon--success': type === passwordInputTypes.SUCCESS,
-    });
+    const actionComponent = (
+        <div
+            role="button"
+            aria-pressed={!isHidden}
+            className={actionIconClassNames}
+            onClick={() => setIsHidden(!isHidden)}
+            key="password-icon"
+        />
+    );
 
     return (
-        <div>
-            {
-                type === 'success' || type === 'error'
-                    ? <div className={iconClassNames} key="type-icon"></div>
-                    : null
-            }
-            <input
-                className={classNames}
-                id={id}
-                name={name ? name : id}
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onKeyPress={onKeyPress}
-                onKeyDown={onKeyDown}
-                onMouseDown={onMouseDown}
-                placeholder={placeholder}
-                type="password"
-                key="passwordinput"
-                defaultValue={defaultValue}
-                data-id={dataId}
-            />
-            {fieldMessage && (
-                <FieldMessage
-                    status={type}
-                    {...fieldMessageProps}
-                >
-                    {fieldMessage}
-                </FieldMessage>
-            )}
-        </div>
+        <TextInput
+            className={classNames}
+            id={id}
+            name={name ? name : id}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onKeyPress={onKeyPress}
+            onKeyDown={onKeyDown}
+            onMouseDown={onMouseDown}
+            placeholder={placeholder}
+            inputProps={{
+                key: 'passwordinput',
+                type: isHidden ? 'password' : 'text',
+            }}
+            defaultValue={defaultValue}
+            data-id={dataId}
+            actionComponent={actionComponent}
+            fieldMessage={fieldMessage}
+            fieldMessageProps={fieldMessageProps}
+            type={type}
+        />
     );
 };
 

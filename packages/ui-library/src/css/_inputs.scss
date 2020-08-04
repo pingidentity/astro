@@ -47,9 +47,13 @@ $default-input-border-radius: 2px;
 .integer-up,
 .view-toggle,
 .delete-btn,
+.expand-btn,
+.edit-btn,
+.view-btn,
 .button-menu__button,
 .input-image-thumb,
 .image-icon,
+.focusable-element,
 .tile-button {
     &:focus {
         outline-width: 0;
@@ -71,9 +75,13 @@ $default-input-border-radius: 2px;
     .integer-up,
     .view-toggle,
     .delete-btn,
+    .expand-btn,
+    .edit-btn,
+    .view-btn,
     .button-menu__button,
     .input-image-thumb,
     .image-icon,
+    .focusable-element,
     .tile-button {
         &:focus {
             outline-width: 5px;
@@ -840,6 +848,7 @@ input[type=file] {
     line-height: 1em;
     color: $color-midnight;
     padding: 5px;
+    pointer-events: none;
 }
 
 // Input types

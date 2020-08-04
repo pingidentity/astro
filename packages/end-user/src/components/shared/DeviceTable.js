@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Table from './Table';
 import TextBlock, { alignments } from '../TextBlock';
-import FlexRow, { alignment, flexDirectionOptions, spacing } from './FlexRow';
+import FlexRow, { flexDirectionOptions } from './FlexRow';
 import Button from '../Button';
-import DeviceIcon, { deviceTypes } from './DeviceIcon';
+import DeviceIcon from './DeviceIcon';
 import { overflowTypes } from '../TextBlock/TextBlock';
 
-const getDevices = (devices, onDelete, hasDetails) => {
-    return devices.map(({ details = "", name, type }) => {
+const getDevices = (devices, onDelete) => {
+    return devices.map((device, index) => {
+        const { name, type, typeLabel, id } = device;
         return (
-            <FlexRow className="device-table__row no-mobile-break" key={name}>
-                <div className="device-table__icon">
+            <FlexRow className="device-table__row no-mobile-break" key={id || name || index}>
+                <div className="device-table__icon" key="icon">
                     <DeviceIcon icon={type.toLowerCase()} />
                 </div>
-                <div className="device-table__row-info">
+                <div className="device-table__row-info" key="info">
                     <div className="device-table__row-details">
                         <span>
                             <TextBlock
@@ -23,22 +23,24 @@ const getDevices = (devices, onDelete, hasDetails) => {
                                 alignment={alignments.LEFT}
                                 overflow={overflowTypes.ELLIPSIS}
                                 spacing="small"
+                                key="device-type"
                             >
-                                {type}
+                                {typeLabel || type}
                             </TextBlock>
                             <TextBlock
                                 className="device-table__row-name"
                                 alignment={alignments.LEFT}
                                 overflow={overflowTypes.ELLIPSIS}
                                 spacing="small"
+                                key="device-name"
                             >
                                 {name}
                             </TextBlock>
                         </span>
                     </div>
                 </div>
-                <div className="device-table__row-delete">
-                    <Button iconName="delete" onClick={onDelete(name)} inline />
+                <div className="device-table__row-delete" key="delete">
+                    <Button iconName="delete" onClick={onDelete(name, id)} inline />
                 </div>
             </FlexRow>
         );
@@ -46,7 +48,6 @@ const getDevices = (devices, onDelete, hasDetails) => {
 };
 
 const DeviceTable = ({ devices, onDelete }) => {
-    const hasDetails = devices.some(({ details }) => details !== undefined);
     return (
         <FlexRow flexDirection={flexDirectionOptions.COLUMN} className="device-table no-mobile-break">
             {getDevices(devices, onDelete)}
@@ -58,6 +59,8 @@ DeviceTable.propTypes = {
     devices: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         type: PropTypes.string,
+        typeLabel: PropTypes.string,
+        id: PropTypes.string,
     })),
     onDelete: PropTypes.func,
 };

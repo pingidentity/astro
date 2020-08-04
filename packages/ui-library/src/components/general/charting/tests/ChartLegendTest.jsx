@@ -57,6 +57,13 @@ describe("ChartLegend", function () {
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
+    it("rendered component with key reversed order", function () {
+        const component = getComponent({ reverseKeys: true });
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "legend__aside-keys-revese");
+
+        expect(element).toBeTruthy();
+    });
+
     it("fires a mouseOver event", function () {
         const cb = jest.fn();
         const component = getComponent({

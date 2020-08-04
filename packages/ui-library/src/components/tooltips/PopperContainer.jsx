@@ -49,6 +49,7 @@ class PopperContainer extends React.Component {
         matchMinWidth: PropTypes.bool,
         noGPUAcceleration: PropTypes.bool,
         positionFixed: PropTypes.bool,
+        scrollTo: PropTypes.bool,
     }
 
     static defaultProps = {
@@ -106,6 +107,10 @@ class PopperContainer extends React.Component {
         const reference = this.props.getReference();
         const zIndex = this._getComputedZIndex(ReactDOM.findDOMNode(reference));
 
+        if (reference && this.props.scrollTo) {
+            reference.scrollIntoView();
+        }
+
         const config = this.props.config || {
             placement,
             computeStyle: {
@@ -159,7 +164,7 @@ class PopperContainer extends React.Component {
             // children have a different height than the last children - https://jira.pingidentity.com/browse/UIP-3005
             if (global.MutationObserver) {
                 this.observer = new MutationObserver(() => {
-                    if (this.popperAPI&& this.popperAPI.scheduleUpdate) {
+                    if (this.popperAPI && this.popperAPI.scheduleUpdate) {
                         this.popperAPI.scheduleUpdate();
                     }
                 });
@@ -213,7 +218,7 @@ class PopperContainer extends React.Component {
 
         return (
             <PopperContainerContext.Provider value={isNested}>
-                {!hasPopperParent ? <Portal>{rendered}</Portal> : rendered }
+                {!hasPopperParent ? <Portal>{rendered}</Portal> : rendered}
             </PopperContainerContext.Provider>
         );
     }

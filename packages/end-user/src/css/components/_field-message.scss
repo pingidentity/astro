@@ -4,6 +4,7 @@
         padding: 15px;
         box-sizing: border-box;
         min-width: 169px;
+        color: $color-strong-neutral-10;
         text-transform: none;
         -webkit-backface-visibility: hidden; // keeps animation from flickering in Chrome
 
@@ -16,22 +17,18 @@
         }
 
         &--info {
-            color: $color-white;
-            background-color: $color-active-blue;
+            background-color: $color-info-blue-light;
         }
 
         &--default {
-            color: $color-neutral-20;
-            background-color: $color-neutral-95;
+            background-color: $color-neutral-90;
         }
 
         &--success {
-            color: $color-white;
-            background-color: $color-success-green;
+            background-color: $color-success-green-light;
         }
 
         &--warning {
-            color: $color-warning-text;
             background-color: $color-warning-yellow-light;
         }
     }

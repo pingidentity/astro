@@ -12,3 +12,31 @@ export const Default = () => (
         placeholder="Select one"
     />
 );
+
+export const Error = () => (
+    <Dropdown
+        options={['First Value', 'Second Value', 'Third Value', 'Fourth Value']}
+        placeholder="Select one"
+        status="error"
+        fieldMessage="This is an error"
+    />
+);
+
+export const DisabledOptions = () => {
+    const options = [
+        'First Value',
+        {
+            label: 'Second Value',
+            value: 'Second Value',
+            disabled: true
+        },
+        'Third Value',
+        'Fourth Value',
+    ];
+    return (
+        <Dropdown
+            options={options}
+            placeholder="Select one"
+        />
+    );
+};

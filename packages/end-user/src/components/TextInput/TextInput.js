@@ -63,11 +63,13 @@ const TextInput = ({
     onKeyDown,
     onMouseDown,
     id,
+    inputProps,
     placeholder,
     type,
     name,
     value,
     width,
+    actionComponent,
     fieldMessage,
     fieldMessageProps,
     format,
@@ -85,12 +87,14 @@ const TextInput = ({
         'text-input__icon--success': type === textInputTypes.SUCCESS,
     });
 
-    return [
-        (
+    return (
+        <>
+        {(
             type === 'success' || type === 'error'
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
-        ),
+        )}
+        {actionComponent}
         <input
             className={classNames}
             data-id={dataId}
@@ -105,22 +109,24 @@ const TextInput = ({
             onMouseDown={onMouseDown}
             placeholder={placeholder}
             value={value}
-            style={{width}}
+            style={{ width }}
             type="text"
             key="textinput"
             autoFocus={autoFocus}
             autoComplete={useAutoComplete ? 'on' : 'off'}
             {...inputmodeByFormats[format]}
-        />,
-        fieldMessage && (
+            {...inputProps}
+        />
+        {fieldMessage && (
             <FieldMessage
-                status={type}
+                status={type !== textInputTypes.PRIMARY ? type : 'default'}
                 {...fieldMessageProps}
             >
                 {fieldMessage}
             </FieldMessage>
-        )
-    ];
+        )}
+        </>
+    );
 };
 
 TextInput.propTypes = {
@@ -147,6 +153,10 @@ TextInput.propTypes = {
      * ID to be applied to the TextInput
      */
     id: PropTypes.string,
+    /**
+     * Props that get passed as-is to the underlying input element
+     */
+    inputProps: PropTypes.shape({}),
     /**
      * Name for the input
      */
@@ -197,6 +207,7 @@ TextInput.propTypes = {
         PropTypes.number,
         PropTypes.string,
     ]),
+    actionComponent: PropTypes.node,
     /**
      * Type of value format the TextInput accepts
      */

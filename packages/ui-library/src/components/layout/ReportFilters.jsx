@@ -11,6 +11,8 @@ import Button from "../../components/buttons/Button";
  *    Html name of the button.
  * @param {string} [data-id="reporting-filter"]
  *     Defines the "data-id" for top-level HTML container.
+ * @param {bool} [disabled]
+ *    Disabled state of button
  * @param {array} [filters]
  *    An array that lets you pass in multiple jsx elements.
 * @param {function} [onClick]
@@ -80,6 +82,7 @@ const _renderInputs = (data) => {
 const ReportFilters = ({
     buttonLabel,
     "data-id": dataId,
+    disabled,
     filters,
     onClick
 }) => {
@@ -92,6 +95,7 @@ const ReportFilters = ({
                     label={buttonLabel}
                     type="primary"
                     onClick={onClick}
+                    disabled={disabled}
                 />
             </div>
         </div>
@@ -102,6 +106,7 @@ const ReportFilters = ({
 ReportFilters.propTypes = {
     buttonLabel: PropTypes.string,
     dataId: PropTypes.string,
+    disabled: PropTypes.bool,
     filters: PropTypes.arrayOf(
         PropTypes.arrayOf(
             PropTypes.node
@@ -112,6 +117,7 @@ ReportFilters.propTypes = {
 
 ReportFilters.defaultProps = {
     "data-id": "reporting-filters",
+    disabled: false,
     filters: []
 };
 

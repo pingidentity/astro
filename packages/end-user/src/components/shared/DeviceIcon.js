@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 export const deviceTypes = {
     SMS: "sms",
     EMAIL: "email",
-    MOBILE: "mobile"
+    MOBILE: "mobile",
+    TOTP: "totp"
 };
 
 const getIcon = (icon) => {
@@ -29,6 +30,7 @@ const getIcon = (icon) => {
                 </svg>
                 /*eslint-enable*/
             );
+        case "totp":
         case "mobile":
             return (
                 <svg

@@ -30,6 +30,8 @@ pack:
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
     - lerna bootstrap
+    # Building this on its own for now because it doesn't have its own pack command.
+    - lerna run build --scope @pingux/charting
     - lerna run pack
   artifacts:
     paths:

@@ -1,3 +1,18 @@
+@mixin input-icon {
+    font-family: $icon-font;
+    font-size: 16px;
+    line-height: 16px;
+    text-transform: none;
+    position: relative;
+    width: 100%;
+
+    &::before {
+        position: absolute;
+        right: $spacing-md;
+        top: $spacing-md;
+    }
+}
+
 .text-input {
     @extend %input-text;
     @extend %input-box;
@@ -12,19 +27,16 @@
         @extend %placeholder-text;
     }
 
-    &--error, &--error:focus {
+    &--error,
+    &--error:focus {
         border-color: $color-critical-red;
-
         background-color: $color-white;
-
         padding-right: $spacing-xl;
     }
 
     &--success {
         border-color: $color-success-green;
-
         background-color: $color-white;
-
         padding-right: $spacing-xl;
     }
 
@@ -55,19 +67,17 @@
     }
 }
 
-.text-input__icon {
-    font-family: $icon-font;
-    font-size: 16px;
-    line-height: 16px;
-    text-transform: none;
-    position: relative;
-    width: 100%;
-
-    &::before {
-        position: absolute;
-        right: $spacing-md;
-        top: calc(45px * 0.5 - (16px / 2));
+.text-input-container {
+    &--error,
+    &--success {
+        position: relative;
+        padding-right: $spacing-xl;
     }
+}
+
+.text-input__icon {
+    @include input-icon();
+    right: 0;
 
     &--error {
         &::before {
@@ -82,4 +92,22 @@
             color: $color-success-green;
         }
     }
+
+    &--hidden {
+        cursor: pointer;
+        &::before {
+            content: $pingicon-view-hidden;
+        }
+    }
+
+    &--view-hidden {
+        cursor: pointer;
+        &::before {
+            content: $pingicon-view;
+        }
+    }
+}
+
+.text-input__icon ~ .text-input__icon::before {
+    margin-right: $spacing-lg;
 }

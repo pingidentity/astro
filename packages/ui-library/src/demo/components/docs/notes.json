@@ -1,5 +1,15 @@
 [
     {
+        "title": "v4.18.1",
+        "date": "07/20/20",
+        "file": "./release-notes/v4-18-1.md"
+    },
+    {
+        "title": "v4.18.0",
+        "date": "07/13/20",
+        "file": "./release-notes/v4-18-0.md"
+    },
+    {
         "title": "v4.17.0",
         "date": "07/01/20",
         "file": "./release-notes/v4-17-0.md"

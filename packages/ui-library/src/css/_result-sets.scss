@@ -219,15 +219,19 @@ $expandable-row-gap: 12px;
             font-size: 13px;
         }
     }
-    .delete-btn {
-        display: none;
-        height: $button-height;
-
-        //changed to <button> from <a>
+    .delete-btn,
+    .edit-btn,
+    .view-btn,
+    .expand-btn {
         width: $button-width;
         padding: 0;
         border: none;
         border-radius: 0;
+        min-height: $button-height;
+    }
+
+    .delete-btn {
+        display: none;
 
         &:after {
             content: $icon-delete;

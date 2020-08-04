@@ -17,7 +17,7 @@ import ButtonGroup from "../../layout/ButtonGroup";
 import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
-import { getClickableA11yProps } from "../../../util/PropUtils";
+import { withFocusOutline } from "../../../util/KeyboardUtils";
 
 /**
 * @enum {string}
@@ -484,10 +484,9 @@ class StatelessExpandableRow extends React.Component {
 
         if (this.props.showDelete) {
             deleteButton = this.props.deleteButton || (
-                <a
+                <Button
                     data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
                     className="delete-btn"
-                    {...getClickableA11yProps(this.props.onDelete)}
                     onClick={this.props.onDelete}
                 />
             );
@@ -497,10 +496,9 @@ class StatelessExpandableRow extends React.Component {
 
         if (this.props.showDelete) {
             var deleteObject = this.props.deleteButton || (
-                <button
+                <Button
                     data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
                     className="delete-btn"
-                    {...getClickableA11yProps(this.props.onDelete)}
                     onClick={this.props.onDelete}
                 />
             );
@@ -592,10 +590,9 @@ class StatelessExpandableRow extends React.Component {
                     </div>
                 )}
                 <div className="row-btns">
-                    <a
+                    <Button
                         data-id="expand-btn"
                         className="expand-btn"
-                        {...getClickableA11yProps(this._handleExpandButtonClick)}
                         onClick={this._handleExpandButtonClick}
                     />
                     {!this.props.showEdit && (
@@ -901,13 +898,12 @@ RowSection.defaultProps = {
     title: "",
 };
 
-
-ExpandableRow.Statuses = Statuses;
-ExpandableRow.RowMessageTypes = RowMessageTypes;
-ExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
-ExpandableRow.ScrollingWrapper = ScrollingWrapper;
-ExpandableRow.SimpleWrapper = SimpleWrapper;
-ExpandableRow.EditWrapper = EditWrapper;
-ExpandableRow.RowSection = RowSection;
-ExpandableRow.EditButton = EditButton;
-module.exports = ExpandableRow;
+const FocusOutlineExpandableRow = withFocusOutline(ExpandableRow);
+FocusOutlineExpandableRow.Statuses = Statuses;
+FocusOutlineExpandableRow.RowMessageTypes = RowMessageTypes;
+FocusOutlineExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
+FocusOutlineExpandableRow.ScrollingWrapper = ScrollingWrapper;
+FocusOutlineExpandableRow.SimpleWrapper = SimpleWrapper;
+FocusOutlineExpandableRow.RowSection = RowSection;
+FocusOutlineExpandableRow.EditButton = EditButton;
+module.exports = FocusOutlineExpandableRow;

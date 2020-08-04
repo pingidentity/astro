@@ -37,6 +37,9 @@ const Checkbox = ({
         'checkbox--stacked': isStacked,
         'checkbox--error': status === statuses.ERROR,
     });
+    const iconClassNames = classnames('checkbox__icon', {
+        'feedback--error pingicon-error-triangle': status === statuses.ERROR,
+    });
 
     return (
         <div className="checkbox-container">
@@ -50,6 +53,7 @@ const Checkbox = ({
                 />
                 <span className="checkbox__standin" />
                 <span className="checkbox__label">
+                    {status !== statuses.DEFAULT && <span className={iconClassNames} />}
                     <Markdown hasMarkdown={hasMarkdown} source={label} />
                 </span>
             </label>

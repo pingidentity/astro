@@ -3,8 +3,6 @@ import { mount } from 'enzyme';
 import { render, screen } from '@testing-library/react';
 import Checkbox, { statuses } from './Checkbox';
 
-window.__DEV__ = true;
-
 const defaultProps = {
     'data-id': 'checkbox',
 };
@@ -52,7 +50,6 @@ describe('Checkbox', () => {
 
         const status = screen.getByRole('status');
         expect(status).toHaveClass('field-message--error');
-        expect(status).toBeInTheDocument();
         expect(status).toHaveTextContent(fieldMessage);
     });
 });

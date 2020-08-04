@@ -291,19 +291,28 @@ describe("FrequencyCard", function () {
     });
 
     it("populates the selected item from the donut cell on mouseover", () => {
-        const item = {
-            id: "Test item",
+        const item1 = {
+            id: "Test item1",
             color: "#000000",
             value: 100
         };
+        const item2 = {
+            id: "Test item2",
+            color: "#000000",
+            value: 200
+        };
+        const props = {
+            donutUnits: "Users",
+            donutLabel: "Total Users",
+            donutData: [item1, item2]
+        };
+        const component = getComponent(props);
+        const centerLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "donut-chart-center-label");
 
-        const component = getComponent({
-            donutData: [ item ]
-        });
-
-        component._donutChartMouseOver(item);
-
-        expect(component.state.hoveredItem).toEqual({ ...item, strokeWidth: 2 });
+        expect(centerLabel.textContent).toEqual(props.donutLabel);
+        component._donutChartMouseOver(item1);
+        expect(centerLabel.textContent).toEqual(`${item1.value} ${props.donutUnits}`);
+        expect(component.state.hoveredItem).toEqual({ ...item1, strokeWidth: 2 });
     });
 
     it("clears the selected item from the donut cell on mouseout", () => {

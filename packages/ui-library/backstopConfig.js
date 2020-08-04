@@ -53,6 +53,7 @@ const skippedDemos = [
     "DonutCard",
     "EllipsisLoader",
     "HeatmapCard",
+    "HeatMap",
     "LineChart",
     "PageSpinner",
     "Spinner",

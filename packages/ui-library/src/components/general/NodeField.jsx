@@ -178,6 +178,7 @@ Tooltip.defaultProps = {
 };
 
 const Node = forwardRef(({
+    showAnimation,
     id,
     onClick,
     onMouseOver,
@@ -186,21 +187,49 @@ const Node = forwardRef(({
     selected,
     x,
     y,
-}, ref) => (
-    <g
-        onMouseOver={(e) => onMouseOver(e.clientX, e.clientY)}
-        onMouseOut={(e) => onMouseOut(e)}
-    >
-        <circle
-            data-id={`node_${id}`}
-            cx={x} cy={y} r={radius}
-            className={classnames("node-field__node", {
-                "node-field__node--selected": selected
-            })}
-            onClick={e => onClick(id, e)}
-            ref={ref} />
-    </g>
-));
+}, ref) => {
+    const timeout = Math.floor(Math.random() * 14) + 1;
+    return (
+        <g
+            onMouseOver={(e) => onMouseOver(e.clientX, e.clientY)}
+            onMouseOut={(e) => onMouseOut(e)}
+        >
+            {showAnimation && (
+                <circle
+                    cx={x} cy={y} r={radius}
+                    className="node-field__ping"
+                >
+                    <animate
+                        id="scaleanim"
+                        attributeName="r"
+                        begin="0s"
+                        dur="1s"
+                        from={radius}
+                        to={radius * 3}
+                        begin={`${timeout}s;scaleanim.end+${timeout}s`}
+                    />
+                    <animate
+                        id="opacityanim"
+                        attributeName="opacity"
+                        begin="0s"
+                        dur="1s"
+                        from="1"
+                        to="0"
+                        begin={`${timeout}s;opacityanim.end+${timeout}s`}
+                    />
+                </circle>
+            )}
+            <circle
+                data-id={`node_${id}`}
+                cx={x} cy={y} r={radius}
+                className={classnames("node-field__node", {
+                    "node-field__node--selected": selected
+                })}
+                onClick={e => onClick(id, e)}
+                ref={ref} />
+        </g>
+    );
+});
 
 Node.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -236,6 +265,7 @@ Node.propTypes = {
  */
 
 export default function NodeField({
+    showAnimation,
     className,
     "data-id": dataId,
     nodes,
@@ -314,6 +344,7 @@ export default function NodeField({
                             />
                         }
                         <Node
+                            showAnimation={showAnimation}
                             id={id}
                             label={nodeLabel}
                             onClick={(clickedId, e) => {
@@ -355,6 +386,7 @@ export default function NodeField({
 }
 
 NodeField.propTypes = {
+    showAnimation: PropTypes.bool,
     className: PropTypes.string,
     "data-id": PropTypes.string,
     nodes: PropTypes.arrayOf(nodePropType),
@@ -364,6 +396,7 @@ NodeField.propTypes = {
 };
 
 NodeField.defaultProps = {
+    showAnimation: false,
     nodes: [],
     threshold: 20,
     width: 300
