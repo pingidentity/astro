@@ -6,8 +6,15 @@ $label-chip-height: 28px;
 .node-field__root {
     fill: $color-white;
     stroke: $color-white;
+    opacity: 0.5;
     stroke-width: 1px;
     position: relative;
+}
+
+.node-field__ping {
+    stroke: #0091ff;
+    stroke-width: 1px;
+    fill: transparent;
 }
 
 .node-field__node {
@@ -30,6 +37,7 @@ $label-chip-height: 28px;
 .node-field__thread {
     stroke: $color-white;
     stroke-width: 0.5;
+    opacity: 0.5;
 }
 
 .node-field__tooltip {
