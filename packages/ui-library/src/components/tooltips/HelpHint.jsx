@@ -204,7 +204,7 @@ class HelpHint extends React.Component {
 
         const tippyClassNames = classnames(this._getTypeClass(), {
             "help-tooltip": !unstyleTrigger,
-            
+
         });
 
         return (

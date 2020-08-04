@@ -848,6 +848,7 @@ input[type=file] {
     line-height: 1em;
     color: $color-midnight;
     padding: 5px;
+    pointer-events: none;
 }
 
 // Input types
