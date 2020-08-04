@@ -387,7 +387,7 @@ describe("ExpandableRow v4", function() {
         const component = getComponent({ expanded: true, isEditEnabled: false });
         const viewButton = TestUtils.findRenderedDOMNodeWithDataId(component, "edit-btn");
 
-        expect(viewButton.className).toEqual("button view-btn");
+        expect(viewButton.className).toEqual("view-btn");
     });
 
     it("renders an empty disabled button when showEdit prop is set to false", function() {
