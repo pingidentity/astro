@@ -18,6 +18,7 @@ import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 import { flagsPropType, hasFlag } from "../../../util/FlagUtils";
 import { withFocusOutline } from "../../../util/KeyboardUtils";
+import { getClickableA11yProps } from "../../../util/PropUtils";
 
 /**
 * @enum {string}
@@ -906,4 +907,5 @@ FocusOutlineExpandableRow.ScrollingWrapper = ScrollingWrapper;
 FocusOutlineExpandableRow.SimpleWrapper = SimpleWrapper;
 FocusOutlineExpandableRow.RowSection = RowSection;
 FocusOutlineExpandableRow.EditButton = EditButton;
+FocusOutlineExpandableRow.EditWrapper = EditWrapper;
 module.exports = FocusOutlineExpandableRow;
