@@ -26,6 +26,7 @@ import PopperContainer from "../tooltips/PopperContainer";
 import PopperContainerContext from "../tooltips/PopperContainerContext";
 import { inStateContainer, toggleTransform } from "../utils/StateContainer";
 import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
+import { defaultRender } from "../../util/PropUtils";
 /**
 * @function FormDropDownList~filterOptions
 * @desc Filters the given list of options with the filter string
@@ -243,6 +244,10 @@ const SearchTypes = {
 * @param {element} [contentType=FormDropDownListDefaultContent]
 *    A custom element representing the contents of each option.
 *
+* @param {FormSearchBox~renderList} [renderList]
+*     Renders a custom list
+* @param {FormSearchBox~renderInput} [onClear]
+*     Rende function for the input
 */
 
 /**
@@ -397,6 +402,8 @@ class FormDropDownListStateless extends React.Component {
         title: PropTypes.string,
         validSearchCharsRegex: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
+        renderInput: PropTypes.func,
+        renderList: PropTypes.func,
     };
 
     static defaultProps = {
@@ -423,6 +430,8 @@ class FormDropDownListStateless extends React.Component {
         required: false,
         disabled: false,
         autofocus: false,
+        renderInput: defaultRender,
+        renderList: defaultRender,
     };
     didPressKey = false;
     inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
@@ -714,8 +723,6 @@ class FormDropDownListStateless extends React.Component {
             this._onSearchProxy("", 0, noneOption ? -1 : 0);
             this._onToggleProxy();
         } else if (this._isKeyboardSearch()) { // Regex specifies valid characters, not i18n friendly right now
-            e.preventDefault();
-            e.stopPropagation();
             if (String.fromCharCode(keyCode).toLowerCase().search(validSearchCharsRegex) < 0) {
                 const char = String.fromCharCode(keyCode).toLowerCase();
                 const time = Date.now();
@@ -948,16 +955,6 @@ class FormDropDownListStateless extends React.Component {
             inputValue = this._isBoxSearch() &&
                 this.didPressKey && this.props.open ? this.props.searchString : selectedOptionLabel;
 
-        const menuList = (
-            <ul
-                data-id="select-list"
-                className="select-list"
-                ref="selectList"
-                style={this.inlineMenuStyle}>
-                {this._getPrompt()}
-                {this._generateOptions(hasIcon)}
-            </ul>
-        );
 
         return (
             <FormLabel
@@ -980,27 +977,30 @@ class FormDropDownListStateless extends React.Component {
                                 <span className="wrapper__spacer">{this._getLongestString()}</span>
                                 // for auto-sized dropdowns, it pushes out the width of the input
                             }
-                            <FormTextFieldStateless
-                                data-id="selected-input"
-                                disabled={this.props.disabled}
-                                inputClassName={selectedOptionLabelClassName}
-                                helpClassName={this.props.helpClassName}
-                                errorMessage={this.props.errorMessage}
-                                autoFocus={this.props.autofocus}
-                                selectOnFocus={this._isBoxSearch()}
-                                onFocus={this.props.onFocus}
-                                onBlur={this.props.onBlur}
-                                value={inputValue}
-                                placeholder={this.props.placeholder}
-                                name={this.props.name}
-                                onValueChange={this._handleInputValueChange}
-                                iconLeft={this.props.selectedOption && this.props.selectedOption.iconName
-                                    ? this.props.selectedOption.iconName
-                                    : undefined }
-                                readOnly={this.props.disabled || this._isKeyboardSearch()}
-                                width={InputWidths.MAX }
-                                ref={el => this.reference = el}
-                            />
+                            {
+                                this.props.renderInput({
+                                    "data-id": "selected-input",
+                                    disabled: this.props.disabled,
+                                    inputClassName: selectedOptionLabelClassName,
+                                    helpClassName: this.props.helpClassName,
+                                    errorMessage: this.props.errorMessage,
+                                    autoFocus: this.props.autofocus,
+                                    selectOnFocus: this._isBoxSearch(),
+                                    onFocus: this.props.onFocus,
+                                    onBlur: this.props.onBlur,
+                                    value: inputValue,
+                                    placeholder: this.props.placeholder,
+                                    name: this.props.name,
+                                    onValueChange: this._handleInputValueChange,
+                                    iconLeft: this.props.selectedOption && this.props.selectedOption.iconName
+                                        ? this.props.selectedOption.iconName
+                                        : undefined,
+                                    readOnly: this.props.disabled || this._isKeyboardSearch(),
+                                    width: InputWidths.MAX ,
+                                    ref: el => this.reference = el,
+                                }, FormTextFieldStateless)
+                            }
+
                             {!this.props.disabled && <div className="arrow" /> }
                         </div>
                         {this.props.open &&
@@ -1014,7 +1014,17 @@ class FormDropDownListStateless extends React.Component {
                                 noGPUAcceleration
                                 hasPopperParent={this.context}
                             >
-                                {menuList}
+                                {
+                                    this.props.renderList({
+                                        "data-id": "select-list",
+                                        className: "select-list",
+                                        ref: "selectList",
+                                        style: this.inlineMenuStyle,
+                                        children: [this._getPrompt(), this._generateOptions(hasIcon)],
+                                    }, "ul"
+                                    )
+                                }
+
                             </PopperContainer>
                         }
                     </div>
