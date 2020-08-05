@@ -9,6 +9,7 @@ module.exports = {
 		'@storybook/addon-knobs/register',
 		'@storybook/addon-notes/register',
 		'@storybook/addon-docs',
+		'@whitespace/storybook-addon-html',
 		{
 			name: '@storybook/addon-storysource',
 			options: {
