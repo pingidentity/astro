@@ -33,6 +33,8 @@ import ChartLabel from "./ChartLabel";
  *     Callback triggered when the mouse clicks a data point.
  * @param {function} [onHoverDataPoint]
  *     Callback triggered when the mouse moves over a new data point.
+ * @param {function} [onMouseLeave]
+ *     Callback triggered when the mouse moves leaves a chart.
  * @param {boolean} [showHighLight=false]
  *     If a range highlight should be shown.
  * @param {object} theme
@@ -55,6 +57,7 @@ export default class LineChart extends React.Component {
         lines: PropTypes.bool,
         onClick: PropTypes.func,
         onHoverDataPoint: PropTypes.func,
+        onMouseLeave: PropTypes.func,
         showHighlight: PropTypes.bool,
         theme: PropTypes.shape({
             referenceLineColor: PropTypes.string,
@@ -111,6 +114,13 @@ export default class LineChart extends React.Component {
             }
         ]), []);
     }
+
+    _onLeaveChart = () => {
+        this.setState({ activeTooltipIndex: -1 });
+        if (this.props.onMouseLeave) {
+            this.props.onMouseLeave();
+        }
+    };
 
     _onHoverDataPoint = (data) => {
         /* istanbul ignore if  */
@@ -296,6 +306,7 @@ export default class LineChart extends React.Component {
                     layout={layout}
                     data={this._digestData(data, legend)}
                     onMouseMove={this._onHoverDataPoint}
+                    onMouseLeave={this._onLeaveChart}
                     onClick={onClick}
                     margin={{
                         top: 20, right: 30, left: 30, bottom: 5,
