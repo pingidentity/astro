@@ -54,6 +54,22 @@
         align-items: flex-start;
     }
 
+    &--content-bottom {
+        align-content: flex-end;
+    }
+
+    &--content-center {
+        align-content: center;
+    }
+
+    &--content-stretch {
+        align-content: stretch;
+    }
+
+    &--content-top {
+        align-content: flex-start;
+    }
+
     &--flex-direction-row {
         flex-direction: row;
     }

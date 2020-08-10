@@ -17,6 +17,17 @@ export const wrapOptions = {
 
 /**
  * @enum {string}
+ * @alias FlexRow.alignContentOptions
+ */
+export const alignContentOptions = {
+    BOTTOM: "bottom",
+    TOP: "TOP",
+    CENTER: "CENTER",
+    STRETCH: "STRETCH"
+};
+
+/**
+ * @enum {string}
  * @alias FlexRow.alignments
  */
 export const alignments = {
@@ -117,6 +128,20 @@ const getAlignmentClass = alignment => {
     }
 };
 
+const getContentClass = content => {
+    switch (content) {
+        case alignContentOptions.STRETCH:
+            return "flex-row--content-stretch";
+        case alignContentOptions.CENTER:
+            return "flex-row--content-center";
+        case alignContentOptions.TOP:
+            return "flex-row--content-top";
+        case alignContentOptions.BOTTOM:
+        default:
+            return "";
+    }
+};
+
 const getJustifyClass = justify => {
     switch (justify) {
         case justifyOptions.CENTER:
@@ -150,6 +175,7 @@ const FlexRow = forwardRef(({
     alignment,
     children,
     className,
+    alignContent,
     "data-id": dataId,
     flexDirection,
     inline,
@@ -171,6 +197,7 @@ const FlexRow = forwardRef(({
                 getJustifyClass(justify),
                 getWrapClass(wrap),
                 getFlexDirection(flexDirection),
+                getContentClass(alignContent),
                 {
                     [`flex-row--${isColumn ? "column" : "row" }-spacing-${spacing}`]: spacing !== undefined,
                     "flex-row--inline": inline
@@ -187,6 +214,9 @@ const FlexRow = forwardRef(({
 FlexRow.propTypes = {
     alignment: PropTypes.oneOf(
         Object.values(alignments)
+    ),
+    alignContent: PropTypes.oneOf(
+        Object.values(alignContentOptions)
     ),
     "data-id": PropTypes.string,
     flexDirection: PropTypes.oneOf(

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import FlexRow, { alignments, wrapOptions } from "../layout/FlexRow";
+import FlexRow, { alignments, wrapOptions, alignContentOptions } from "../layout/FlexRow";
 import TileSelectorContext, { selectorTypes } from "./TileSelectorContext";
 
 function TileGroup({
@@ -37,6 +37,7 @@ function TileGroup({
             </div>
             <FlexRow
                 alignment={alignments.STRETCH}
+                alignContent={alignContentOptions.TOP}
                 className={
                     classnames(
                         "tile-selector__group-tiles",
