@@ -2,6 +2,7 @@ import React from "react";
 import HeaderBar from "../../../components/panels/header-bar";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 import HR from "ui-library/lib/components/general/HR";
+import pingCentralLogo from "../../images/PingCentral-white.svg";
 
 const environments = [
     {
@@ -207,6 +208,13 @@ class HeaderBarDemo extends React.Component {
                     marketSelected="customers"
 
                     siteTitle="UI Library" />
+                <HR />
+                <p>With custom image and set height</p>
+                <HeaderBar
+                    siteLogo={pingCentralLogo}
+                    logoHeight={21}
+                    inline={true}
+                />
                 <HR />
                 <p> With Mode signifier </p>
                 <HeaderBar

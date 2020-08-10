@@ -292,6 +292,8 @@ ProductNav.defaultProps = {
  *          Current environment selected by the environment selector
  * @param {boolean} [inline=false]
  *          When true, the header bar is positioned inline with the content, not at the top of the page
+ * @param {string|number} [logoHeight]
+ *          When specified, sets the height of the logo image and removes the max-width for it.
  * @param {array} [navOptions]
  *          Choices in the header nav
  * @param {string|number} [navSelected]
@@ -390,6 +392,7 @@ class HeaderBar extends React.Component {
             PropTypes.number
         ]),
         inline: PropTypes.bool,
+        logoHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         mode: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.shape({
@@ -538,6 +541,10 @@ class HeaderBar extends React.Component {
                                 className="header-bar__site-logo"
                                 data-id={this.props["data-id"] + "-site-logo"}
                                 src={this.props.siteLogo}
+                                style={this.props.logoHeight ? {
+                                    height: this.props.logoHeight,
+                                    maxWidth: "none",
+                                } : {}}
                             />
                         ))}
 
