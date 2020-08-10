@@ -12,6 +12,8 @@ export const textTypes = {
     PAGETITLE: "page-title",
     /** section-title */
     SECTIONTITLE: "section-title",
+    /** item-title */
+    ITEMTITLE: "item-title",
     /** parent-label */
     PARENTLABEL: "parent-label",
     /** body */
