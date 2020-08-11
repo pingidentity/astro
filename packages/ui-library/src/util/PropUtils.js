@@ -180,6 +180,14 @@ export const translateItemToOption = ({
     name: label,
 });
 
+export const usePStateful = (propValue, initial) => {
+    if (propValue === undefined) {
+        return useState(initial);
+    } else {
+        return [propValue, () => {}];
+    }
+};
+
 /**
  * @alias module:util/PropUtils.usePStateful
  *
