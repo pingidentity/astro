@@ -47,7 +47,7 @@ export default class FieldSetDemo extends Component {
 
             &nbsp;
 
-                <Text type="label">FieldSet with icon legend and text</Text>
+                <Text type="label">FieldSet with icon legend and text and Full Width</Text>
                 <FieldSet legend={<Icon iconName="earth"> Example Legend</Icon>}>
                     <FormRadioGroup
                         groupName="DemoName"
@@ -60,6 +60,15 @@ export default class FieldSetDemo extends Component {
                         onValueChange={this._handleSelectChange("radioSelected")}
                     />
                 </FieldSet>
+                &nbsp;
+                <Text type="label">Full width fieldset</Text>
+                <FieldSet legend="I'm full width" isFullWidth>
+                    <Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Mauris at maximus nibh.
+                    </Text>
+                </FieldSet>
+
             </div>
         );
     }
