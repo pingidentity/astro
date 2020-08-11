@@ -8,24 +8,33 @@ import { noop } from "underscore";
 
 const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText) => {
     return accounts.map((account) => {
-        const { image, name, unlinked } = account;
+        const { image, name, unlinked, id, details = [] } = account;
         return (
-            <FlexRow className="account-table__row no-mobile-break" key={name} alignment={alignments.CENTER}>
+            <FlexRow className="account-table__row no-mobile-break" key={id || name} alignment={alignments.CENTER}>
                 <div className="account-table__icon">
                     {image}
                 </div>
                 <div className="account-table__row-info">
                     <div className="account-table__row-details">
-                        <span>
+                        <TextBlock
+                            className="account-table__row-name"
+                            alignment={textAlignments.LEFT}
+                            spacing={TextBlock.margins.MD}
+                            overflow={overflowTypes.ELLIPSIS}
+                            key="name"
+                        >
+                            {name}
+                        </TextBlock>
+                        {details.map((detailsRow, i) => (
                             <TextBlock
-                                className="account-table__row-name"
+                                className="account-table__row-subdetails"
                                 alignment={textAlignments.LEFT}
-                                overflow={overflowTypes.ELLIPSIS}
-                                spacing="small"
+                                spacing={TextBlock.margins.SM}
+                                key={`details-${i}`}
                             >
-                                {name}
+                                {detailsRow}
                             </TextBlock>
-                        </span>
+                        ))}
                     </div>
                 </div>
                 <div className="account-table__row-unlink">

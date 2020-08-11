@@ -69,6 +69,10 @@
     }
 
     &__row-name {
-        color: $color-charting-indigo;
+        color: $color-accent-neutral-20;
+    }
+
+    &__row-subdetails {
+        color: $color-neutral-20;
     }
 }

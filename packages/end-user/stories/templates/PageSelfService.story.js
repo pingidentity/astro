@@ -22,6 +22,7 @@ import FloatLabelDropdownCustom from '../../src/components/FloatLabelDropdownCus
 import Columns, { Column, alignments as colAlignments, widths as colWidths } from '../../src/components/Columns';
 
 import '../../src/css/styles.scss';
+import PropTypes from "prop-types";
 
 export default {
     title: 'Templates/Pages/Self Service',
@@ -487,7 +488,7 @@ class AuthenticationPage extends React.Component {
             </Modal>
         </Container>
     );
-};
+}
 
 class LinkedAccountsPage extends React.Component {
     state = {
@@ -499,6 +500,40 @@ class LinkedAccountsPage extends React.Component {
             {
                 name: "Facebook",
                 image: <SocialIcons.FACEBOOK width={40} height={40} />,
+                details: [
+                    "Some",
+                    "Details",
+                    "Below",
+                ],
+            },
+            {
+                name: "Amazon",
+                image: <SocialIcons.AMAZON width={40} height={40} />,
+                details: [
+                    <b>Never used</b>,
+                ],
+            },
+        ],
+        sessions: [
+            {
+                name: "Chrome 77.25",
+                image: <SocialIcons.GOOGLE width={40} height={40} />,
+                details: [
+                    "Aus, TX",
+                    "2020-01-01 20:05 CST",
+                ],
+                unlinked: true,
+            },
+            {
+                name: "Internet Explorer",
+                image: <div style={{ width: 40, height: 40}} />,
+                details: [
+                    "MacOs",
+                ],
+            },
+            {
+                name: <i>Unknown</i>,
+                image: <div style={{ width: 40, height: 40}} />
             },
         ],
         accountToUnlink: ''
@@ -507,9 +542,6 @@ class LinkedAccountsPage extends React.Component {
         return (
             <Container maxWidth="400px">
                 <h2 className="heading-text centered-text">Linked Accounts</h2>
-                <p className="normal-text centered-text">
-                    Text explaining that this is. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                </p>
                 <Card type={CardTypes.SLIM}>
                     <FlexRow
                         alignment={alignments.CENTER}
@@ -538,6 +570,31 @@ class LinkedAccountsPage extends React.Component {
                             accounts={this.state.accounts}
                             unlinkModalMessage={`Are you sure you want to unlink your ${this.state.accountToUnlink} account? Unlinking this account will not allow you to access PingOne with your ${this.state.accountToUnlink} credentials.`}
                             unlinkModalTitle={`Unlink Linked Account: ${this.state.accountToUnlink}`}
+                        />
+                    </FlexRow>
+                </Card>
+                <h2 className="heading-text centered-text">Sessions</h2>
+                <Card type={CardTypes.SLIM}>
+                    <FlexRow
+                        alignment={alignments.CENTER}
+                        flexDirection={flexDirectionOptions.COLUMN}
+                        spacing={spacingOptions.SM}
+                    >
+                        <AccountTable
+                            onUnlink={({ name: nameToDelete }) => {
+                                this.setState(({ sessions }) => ({
+                                    sessions: sessions.filter(
+                                        (({ name }) => name !== nameToDelete),
+                                    ),
+                                }));
+                            }}
+                            accounts={this.state.sessions}
+                            unlinkModalMessage="Are you sure you want to sign off this session?"
+                            unlinkModalTitle="Sign Off Session"
+                            unlinkModalConfirmText="Sign Off"
+                            cancelText="Don't Sign Off"
+                            unlinkAccountText="Sign Off"
+                            unlinkAccountSuccessText="Cannot be Signed Off"
                         />
                     </FlexRow>
                 </Card>
