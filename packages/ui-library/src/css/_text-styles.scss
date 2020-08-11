@@ -141,7 +141,7 @@ $body-text-color: $color-neutral-20;
     @include text-style($color-midnight, $font-size-primary);
     @include font-pn-semibold;
 
-    text-transform: normal;
+    text-transform: none;
 }
 
 .text-item-title {
