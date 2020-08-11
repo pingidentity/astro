@@ -41,7 +41,7 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
                     <div className="account-table__row-unlink--normal">
                         { unlinked ? (
                             <Button disabled inline>
-                                <span className="pingicon-unlink"/> {unlinkAccountSuccessText}
+                                {unlinkAccountSuccessText}
                             </Button>
                         ) : (
                             <Button onClick={unlinkAccount(account)} inline>
@@ -51,9 +51,7 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
                     </div>
                     <div className="account-table__row-unlink--mobile">
                         { unlinked ? (
-                            <Button disabled inline>
-                                <span className="pingicon-unlink"/>
-                            </Button>
+                            <Button disabled inline iconName="delete" />
                         ) : (
                             <Button onClick={unlinkAccount(account)} inline iconName="delete"/>
                         )}
@@ -137,7 +135,6 @@ class AccountTable extends React.Component {
                     flexDirection={flexDirectionOptions.COLUMN}
                     spacing={spacingOptions.MD}
                 >
-                    <h1 className="heading-text centered-text"><span className="pingicon-unlink"/></h1>
                     <h1 className="heading-text centered-text">
                         {this.props.unlinkModalTitle}
                     </h1>
@@ -165,7 +162,8 @@ class AccountTable extends React.Component {
                         this.props.accounts,
                         this._onUnlinkClick,
                         this.props.unlinkAccountText,
-                        this.props.unlinkAccountSuccessText
+                        this.props.unlinkAccountSuccessText,
+                        this.props.showUnlinkIcon,
                     ) : (
                         <p className="normal-text centered-text">
                             {this.props.noConnectedAccountsMessage}
@@ -187,8 +185,8 @@ AccountTable.propTypes = {
     unlinkModalConfirmText: PropTypes.node.isRequired,
     onUnlinkClick: PropTypes.func,
     cancelText: PropTypes.string,
-    unlinkAccountText: PropTypes.string,
-    unlinkAccountSuccessText: PropTypes.string,
+    unlinkAccountText: PropTypes.node,
+    unlinkAccountSuccessText: PropTypes.node,
 };
 
 AccountTable.defaultProps = {
@@ -201,7 +199,10 @@ AccountTable.defaultProps = {
     cancelText: 'Cancel',
     unlinkAccountText: 'Unlink Account',
     unlinkAccountSuccessText: 'Account Unlinked',
-    unlinkModalConfirmText: 'Unlink'
+    unlinkModalConfirmText: 'Unlink',
 };
 
 export default AccountTable;
+
+AccountTable.UnlinkIcon = () => <span className="pingicon-unlink"/>;
+AccountTable.UnlinkIcon.displayName = 'UnlinkIcon';

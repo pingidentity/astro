@@ -595,6 +595,7 @@ class LinkedAccountsPage extends React.Component {
                             cancelText="Don't Sign Off"
                             unlinkAccountText="Sign Off"
                             unlinkAccountSuccessText="Cannot be Signed Off"
+                            showUnlinkIcon={false}
                         />
                     </FlexRow>
                 </Card>
