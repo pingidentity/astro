@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { isObject } from "underscore";
 import { isEnter, isSpace } from "./KeyboardUtils";
@@ -179,6 +179,14 @@ export const translateItemToOption = ({
     id: value,
     name: label,
 });
+
+export const usePStateful = (propValue, initial) => {
+    if (propValue === undefined) {
+        return useState(initial);
+    } else {
+        return [propValue, () => {}];
+    }
+};
 
 /**
  * @alias module:util/PropUtils.translateItemsToOptions

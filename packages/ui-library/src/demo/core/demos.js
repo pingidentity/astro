@@ -728,6 +728,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_buttons_OverflowMenuDemo.jsx.html"
                     },
                     {
+                        label: "Slider",
+                        demo: require("../components/general/SliderDemo"),
+                        pathToDoc: "components/general/Slider.jsx",
+                        pathToSource: "components_general_Slider.jsx.html",
+                        pathToDemoSource: "demo_components_general_SliderDemo.jsx.html"
+                    },
+                    {
                         label: "Tile Selector",
                         demo: require("../components/buttons/TileSelectorDemo"),
                         pathToDoc: "components/buttons/TileSelector.jsx",
