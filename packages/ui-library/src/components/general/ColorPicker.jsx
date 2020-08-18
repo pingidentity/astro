@@ -21,6 +21,11 @@ export const pickerTypes = {
     SIMPLE: "simple",
 };
 
+export const simplePickerSizes = {
+    NORMAL: "normal",
+    SMALL: "small"
+};
+
 /**
  * @callback ColorPicker~onValueChange
  * @param {string} color
@@ -73,6 +78,8 @@ export const pickerTypes = {
 *      Specifies the width of the input.
  * @param {ColorPicker~onValueChange} onValueChange
  *     Callback to be triggered when a color is chosen by passing the new color.
+ * @param {simpePickerSizes} [size]
+*      Specifies the size of the simple picker.
  *
  * @param {boolean} [open=false]
  *     Boolean state of open/closed menu. Used only in stateless mode.
@@ -126,6 +133,7 @@ class Stateless extends React.Component {
         onError: PropTypes.func,
         width: PropTypes.oneOf(InputWidthProptypes),
         type: PropTypes.oneOf(Object.values(pickerTypes)),
+        size: PropTypes.oneOf(simplePickerSizes)
     };
 
     static defaultProps = {
@@ -142,6 +150,7 @@ class Stateless extends React.Component {
         internalError: "",
         width: InputWidths.SM,
         type: pickerTypes.DETAILED,
+        size: simplePickerSizes.NORMAL
     };
 
     /*
@@ -281,6 +290,10 @@ class Stateless extends React.Component {
             "input-color-picker--label-visible": this.props.showLabel,
         });
 
+        const simplePickerClassNames = css("color-picker-simple__dot", {
+            "color-picker-simple__dot--small": this.props.size === "small"
+        });
+
         const picker = (
             <ChromePicker
                 ref={component => this.reactColorPicker = component}
@@ -347,7 +360,7 @@ class Stateless extends React.Component {
                     <div className="color-picker-simple" ref="swatch">
                         <div
                             data-id="inner-swatch"
-                            className="color-picker-simple__dot"
+                            className={simplePickerClassNames}
                             onClick={this._handleClick}
                             style={{
                                 backgroundColor: this.props.color,

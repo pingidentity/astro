@@ -181,6 +181,24 @@
             color: rgba($color-white, 0.3);
         }
     }
+
+    .details-close-black {
+        position: absolute;
+        top: $spacing-md;
+        right: $spacing-md;
+        color: transparent;
+        z-index: 2;
+        line-height: 1em;
+        cursor: pointer;
+
+        &:after {
+            font-family: 'iconfont';
+            content: $icon-close;
+            text-transform: none;
+            font-size: 18px;
+            color: rgba($color-black, 0.3);
+        }
+    }
     &.input-selection-list-tooltip,
     &.link-dropdown-list {
         .details-content-inner {

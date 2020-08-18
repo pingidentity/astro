@@ -5,12 +5,16 @@ import Chip, { chipColors } from "../components/layout/Chip";
 import ColumnSelector, {
     ColumnTitle,
 } from "../components/list/ColumnSelector";
+import DetailsTooltip, { detailsWidths, tooltipPlacements } from "../components/tooltips/DetailsTooltip";
 import ExpandableRow from "../components/rows/ExpandableRow";
+import FileDrop from "../components/forms/FileDrop";
 import FileUpload from "../components/forms/FileUpload";
 import FlexRow, { alignments, spacingOptions } from "../components/layout/FlexRow";
+import FormCheckbox from "../components/forms/FormCheckbox";
 import FormDropDownList from "../components/forms/FormDropDownList";
 import FormTextArea from "../components/forms/FormTextArea";
 import FormTextField from "../components/forms/FormTextField";
+import FormRadioInput from "../components/forms/FormRadioInput";
 import FormToggle from "../components/forms/form-toggle";
 import HelpHint, { Placements as HelpHintPlacements } from "../components/tooltips/HelpHint";
 import Icon, { iconSizes } from "../components/general/Icon";
@@ -33,6 +37,7 @@ import SocialIcon from "@pingux/end-user/components/SocialIcon";
 import SocialButton, { BrandTypes } from "@pingux/end-user/components/SocialButton";
 import Link from "../components/general/Link";
 import Image, { imageSizes } from "../components/general/Image";
+import ColorPicker, { pickerTypes, simplePickerSizes } from "../components/general/ColorPicker";
 
 const initialState = {
     attributes: [],
@@ -95,6 +100,15 @@ export default class SocialLogin extends Component {
         }],
         wizardStep: 0,
         displayCustomSocialButton: false,
+        buttonType: "upload",
+        buttonColor: null,
+        buttonOutline: null,
+        buttonFont: null,
+        buttonText: null,
+        buttonLogo: true,
+        buttonFile: null,
+        buttonFileName: null,
+        tooltipOpen: false
     }
 
     addAttribute = () => this.setState(({ activeProvider: { attributes, ...activeProvider } }) => ({
@@ -160,7 +174,12 @@ export default class SocialLogin extends Component {
             expanded: true,
             ...provider
         },
-        wizardStep: 0
+        wizardStep: 0,
+        buttonColor: provider.branding && provider.branding.fill,
+        buttonOutline: provider.branding && provider.branding.border,
+        buttonFont: provider.branding && provider.branding.color,
+        buttonText: provider.branding && provider.brandingLabel,
+        buttonType: provider.branding ? "html" : "upload"
     })
 
     saveActiveProvider = () => this.setState(({ activeProvider, providers }) => ({
@@ -210,19 +229,15 @@ export default class SocialLogin extends Component {
         }));
     }
 
-    setSocialButtonImage = ({
-        target: {
-            files: [file] = []
-        } = {}
-    }) => {
+    setSocialButtonImage = (file) => {
         const reader = new FileReader();
-        reader.onloadend = ({ target: { result } }) => this.setState(({ activeProvider }) => ({
-            activeProvider: {
-                ...activeProvider,
-                socialButtonImage: result
-            }
-        }));
+        reader.onloadend = ({ target: { result } }) => this.setState({ buttonFile: result });
+        this.setState({ buttonFileName: file.name });
         reader.readAsDataURL(file);
+
+        setTimeout(() => {
+            this.setState({ tooltipOpen: !this.state.tooltipOpen });
+        }, 1000);
     };
 
     removeSocialButtonImage = () => {
@@ -366,7 +381,7 @@ export default class SocialLogin extends Component {
                                                 <Text
                                                     type={textTypes.NOTE}
                                                 >
-                                                id, first_name, last_name
+                                                    id, first_name, last_name
                                                 </Text>
                                             </FlexRow>
                                         </Chip>
@@ -417,7 +432,7 @@ export default class SocialLogin extends Component {
                     title={
                         <FlexRow inline>
                             <Padding right={paddingSizes.LG}>
-                                    Social Identity Providers
+                                Social Identity Providers
                             </Padding>
                             <TutorialButton />
                         </FlexRow>
@@ -433,55 +448,55 @@ export default class SocialLogin extends Component {
                         onNext={this.goToNextStep}
                     >
                         {activeProvider.token === possibleProviders.INITIAL.token &&
-                        <Step
-                            title="Add a Social or Custom Identity Provider"
-                            description={"Make login and registration frictionless, easy," +
+                            <Step
+                                title="Add a Social or Custom Identity Provider"
+                                description={"Make login and registration frictionless, easy," +
                                     " and more secure by enabling a trusted external IDP"}
-                            clickDisabled
-                            hideMenu
-                            hideButtonBar
-                            required
-                        >
-                            <PageSection
-                                title="Select an identity provider from the options below"
+                                clickDisabled
+                                hideMenu
+                                hideButtonBar
+                                required
                             >
-                                <TileSelector>
-                                    <TileButton
-                                        title={possibleProviders.FACEBOOK.label}
-                                        icon={
-                                            <SocialIcon.FACEBOOK />
-                                        }
-                                        onClick={this.openProviderWizard(possibleProviders.FACEBOOK)}
-                                        type={tileButtonTypes.SQUARE}
-                                    />
-                                    <TileButton
-                                        title={possibleProviders.TWITTER.label}
-                                        icon={
-                                            <SocialIcon.TWITTER />
-                                        }
-                                        onClick={this.openProviderWizard(possibleProviders.TWITTER)}
-                                        type={tileButtonTypes.SQUARE}
-                                    />
-                                    <TileButton
-                                        title={possibleProviders.LINKEDIN.label}
-                                        icon={
-                                            <SocialIcon.LINKEDIN />
-                                        }
-                                        onClick={this.openProviderWizard(possibleProviders.LINKEDIN)}
-                                        type={tileButtonTypes.SQUARE}
-                                    />
-                                    <TileButton
-                                        title={possibleProviders.GOOGLE.label}
-                                        icon={
-                                            <SocialIcon.GOOGLE />
-                                        }
-                                        onClick={this.openProviderWizard(possibleProviders.GOOGLE)}
-                                        type={tileButtonTypes.SQUARE}
-                                    />
-                                </TileSelector>
-                            </PageSection>
-                            {/* TODO: Add "social" with faded out styling */}
-                        </Step>
+                                <PageSection
+                                    title="Select an identity provider from the options below"
+                                >
+                                    <TileSelector>
+                                        <TileButton
+                                            title={possibleProviders.FACEBOOK.label}
+                                            icon={
+                                                <SocialIcon.FACEBOOK />
+                                            }
+                                            onClick={this.openProviderWizard(possibleProviders.FACEBOOK)}
+                                            type={tileButtonTypes.SQUARE}
+                                        />
+                                        <TileButton
+                                            title={possibleProviders.TWITTER.label}
+                                            icon={
+                                                <SocialIcon.TWITTER />
+                                            }
+                                            onClick={this.openProviderWizard(possibleProviders.TWITTER)}
+                                            type={tileButtonTypes.SQUARE}
+                                        />
+                                        <TileButton
+                                            title={possibleProviders.LINKEDIN.label}
+                                            icon={
+                                                <SocialIcon.LINKEDIN />
+                                            }
+                                            onClick={this.openProviderWizard(possibleProviders.LINKEDIN)}
+                                            type={tileButtonTypes.SQUARE}
+                                        />
+                                        <TileButton
+                                            title={possibleProviders.GOOGLE.label}
+                                            icon={
+                                                <SocialIcon.GOOGLE />
+                                            }
+                                            onClick={this.openProviderWizard(possibleProviders.GOOGLE)}
+                                            type={tileButtonTypes.SQUARE}
+                                        />
+                                    </TileSelector>
+                                </PageSection>
+                                {/* TODO: Add "social" with faded out styling */}
+                            </Step>
                         }
                         {activeProvider.token !== possibleProviders.INITIAL.token && [
                             <Step
@@ -551,35 +566,176 @@ export default class SocialLogin extends Component {
                                 </InputRow>
                                 <InputRow>
                                     <InputRow>
-                                        <FileUpload
-                                            accepts={[".jpg", ".jpeg", ".png"]}
-                                            labelSelect="choose"
-                                            labelRemove={activeProvider.socialButtonImage ? "Remove" : ""}
-                                            showThumbnail
-                                            label="Social Button (80PX x 680PX, .JPG/.PNG)"
-                                            onChange={this.setSocialButtonImage}
-                                            onRemove={this.removeSocialButtonImage}
-                                            thumbnailSrc={
-                                                <div>
-                                                    <div style={{
-                                                        width: "340px",
-                                                        marginBottom: "8px",
-                                                        opacity: !activeProvider.socialButtonImage ? .5 : 1
-                                                    }}>
+                                        <div>
+                                            <div style={{
+                                                alignItems: "center",
+                                                display: "flex",
+                                                flexDirection: "row",
+                                                marginBottom: "8px"
+                                            }}>
+                                                <div style={{
+                                                    marginRight: "15px",
+                                                    width: "340px",
+                                                    opacity: !activeProvider.socialButtonImage ? .5 : 1
+                                                }}>
+                                                    {this.state.buttonFile ? (
+                                                        <Image
+                                                            alt={this.state.buttonFile}
+                                                            size={imageSizes.AUTO}
+                                                            source={this.state.buttonFile}
+                                                        />
+                                                    ) : (
                                                         <SocialButton
-                                                            branding={activeProvider.branding}
-                                                            label={activeProvider.label}
+                                                            branding={{
+                                                                ...activeProvider.branding,
+                                                                fill: this.state.buttonColor &&
+                                                                    this.state.buttonColor,
+                                                                border: this.state.buttonOutline &&
+                                                                    this.state.buttonOutline,
+                                                                color: this.state.buttonFont &&
+                                                                    this.state.buttonFont,
+                                                                logo: this.state.buttonLogo &&
+                                                                    activeProvider.branding ? (
+                                                                        activeProvider.branding.logo
+                                                                    ) : null
+                                                            }}
+                                                            label={this.state.buttonText && this.state.buttonText}
                                                             image={activeProvider.socialButtonImage}
                                                         />
-                                                    </div>
-                                                    <div style={{ textTransform: "none", fontSize: "14px" }}>
-                                                        { !activeProvider.socialButtonImage && (
-                                                            <Link>Change</Link>
+                                                    )}
+                                                </div>
+                                                <DetailsTooltip
+                                                    label={<Icon iconName="edit" iconSize={iconSizes.MD} />}
+                                                    showClose
+                                                    width={detailsWidths.LG}
+                                                    placement={tooltipPlacements.RIGHT}
+                                                    open={this.state.tooltipOpen}
+                                                    onToggle={() => this.setState({
+                                                        tooltipOpen: !this.state.tooltipOpen
+                                                    })}
+                                                >
+                                                    {activeProvider.branding && (
+                                                        <div>
+                                                            <FormRadioInput
+                                                                checked={this.state.buttonType === "html"}
+                                                                onValueChange={() => this.setState({
+                                                                    buttonType: "html" })}
+                                                                label="Customize HTML"
+                                                            />
+                                                            <div style={{ marginBottom: "25px", marginLeft: "40px" }}>
+                                                                {this.state.buttonType === "html" && (
+                                                                    <React.Fragment>
+                                                                        <div style={{
+                                                                            display: "flex",
+                                                                            flexDirection: "row"
+                                                                        }}>
+                                                                            <div>
+                                                                                <p style={{
+                                                                                    color: "#93999f",
+                                                                                    fontSize: "13px",
+                                                                                    margin: 0,
+                                                                                    whiteSpace: "nowrap"
+                                                                                }}>BUTTON COLOR</p>
+                                                                                <ColorPicker
+                                                                                    color={this.state.buttonColor}
+                                                                                    onValueChange={(color) =>
+                                                                                        this.setState(
+                                                                                            { buttonColor: color }
+                                                                                        )
+                                                                                    }
+                                                                                    type={pickerTypes.SIMPLE}
+                                                                                    size={simplePickerSizes.SMALL}
+                                                                                />
+                                                                            </div>
+                                                                            <div style={{ margin: "0px 15px" }}>
+                                                                                <p style={{
+                                                                                    color: "#93999f",
+                                                                                    fontSize: "13px",
+                                                                                    margin: 0,
+                                                                                    whiteSpace: "nowrap"
+                                                                                }}>OUTLINE COLOR</p>
+                                                                                <ColorPicker
+                                                                                    color={this.state.buttonOutline}
+                                                                                    onValueChange={(color) =>
+                                                                                        this.setState(
+                                                                                            { buttonOutline: color }
+                                                                                        )
+                                                                                    }
+                                                                                    type={pickerTypes.SIMPLE}
+                                                                                    size={simplePickerSizes.SMALL}
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <p style={{
+                                                                                    color: "#93999f",
+                                                                                    fontSize: "13px",
+                                                                                    margin: 0,
+                                                                                    whiteSpace: "nowrap"
+                                                                                }}>FONT COLOR</p>
+                                                                                <ColorPicker
+                                                                                    color={this.state.buttonFont}
+                                                                                    onValueChange={(color) =>
+                                                                                        this.setState({
+                                                                                            buttonFont: color })
+                                                                                    }
+                                                                                    type={pickerTypes.SIMPLE}
+                                                                                    size={simplePickerSizes.SMALL}
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                        <FormTextField
+                                                                            label="BUTTON TEXT"
+                                                                            onChange={(e) =>
+                                                                                this.setState(
+                                                                                    { buttonText: e.target.value }
+                                                                                )
+                                                                            }
+                                                                            value={this.state.buttonText}
+                                                                        />
+                                                                        <FormCheckbox
+                                                                            label="Show provided logo"
+                                                                            onChange={(e) =>
+                                                                                this.setState(
+                                                                                    { buttonLogo: e.target.checked }
+                                                                                )
+                                                                            }
+                                                                            checked={this.state.buttonLogo}
+                                                                            stacked
+                                                                        />
+                                                                    </React.Fragment>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    <div>
+                                                        {activeProvider.branding && (
+                                                            <FormRadioInput
+                                                                label="Upload image"
+                                                                checked={this.state.buttonType === "upload"}
+                                                                onValueChange={() =>
+                                                                    this.setState({ buttonType: "upload" })
+                                                                }
+                                                            />
+                                                        )}
+                                                        {this.state.buttonType === "upload" && (
+                                                            <div>
+                                                                <p>
+                                                                    Social Button (40PX x 340PX, .JPG/.PNG)
+                                                                </p>
+                                                                <FileDrop
+                                                                    onValueChange={this.setSocialButtonImage}
+                                                                    onRemove={this._handleRemove}
+                                                                    onValidateFile={this._handleFileValidation}
+                                                                    fileName={this.state.buttonFileName &&
+                                                                        this.state.buttonFileName}
+                                                                    accept={[".jpg", ".jpeg", ".png"]}
+                                                                />
+                                                            </div>
                                                         )}
                                                     </div>
-                                                </div>
-                                            }
-                                        />
+                                                </DetailsTooltip>
+                                            </div>
+                                        </div>
                                     </InputRow>
                                 </InputRow>
                             </Step>,
@@ -810,7 +966,7 @@ export default class SocialLogin extends Component {
                                                             autofocus={true}
                                                             label={
                                                                 <div>
-                                                                Sync Frequency
+                                                                    Sync Frequency
                                                                     <HelpHint
                                                                         hintText="Hint"
                                                                     />
@@ -861,7 +1017,7 @@ export default class SocialLogin extends Component {
                                                         <FormDropDownList
                                                             label={
                                                                 <div>
-                                                                Sync Frequency
+                                                                    Sync Frequency
                                                                     <HelpHint
                                                                         hintText="Hint"
                                                                     />

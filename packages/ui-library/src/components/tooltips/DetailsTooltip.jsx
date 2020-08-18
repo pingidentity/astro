@@ -334,7 +334,7 @@ class DetailsTooltipStateless extends React.Component {
             >
                 {this.props.showClose && (
                     <span
-                        className="details-close"
+                        className={this.props.title ? "details-close" : "details-close-black"}
                         data-id="details-close"
                         {...getClickableA11yProps(this._handleKeyboardToggle)}
                         onClick={this._handleToggle}

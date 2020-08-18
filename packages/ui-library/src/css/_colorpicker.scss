@@ -60,6 +60,19 @@
                     transform: translate(-50%, -50%);
                 }
             }
+
+            &--small {
+                height: 24px;
+                width: 24px;
+
+                &:hover {
+                    &:after {
+                        height: 24px;
+                        width: 24px;
+                        padding: 1px;
+                    }
+                }
+            }
         }
     }
 
