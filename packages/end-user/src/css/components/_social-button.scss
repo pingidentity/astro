@@ -1,0 +1,79 @@
+.social-button__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.social-button__button {
+    border-radius: 2px;
+    border-style: solid;
+    font-size: 15px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "proxima-nova", sans-serif;
+    height: 40px;
+    line-height: unset;
+    position: relative;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    padding: 1px 6px;
+
+    &::after {
+        content: "";
+        background-color: #CCC;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &:hover {
+        &::after {
+            opacity: 0.1;
+        }
+    }
+
+    &:disabled {
+        cursor: unset;
+        &::after {
+            opacity: 0.2;
+        }
+    }
+}
+
+.social-button__logo {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.social-button__label {
+    flex: 4;
+    text-align: center;
+}
+
+.social-button__spacer {
+    flex: 1;
+}
+
+.social-button__image-button {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:disabled {
+            cursor: unset;
+        &::after {
+            opacity: 0.2;
+        }
+    }
+}
