@@ -4,6 +4,10 @@
     height: 10px;
     width: 100%;
 
+    :focus {
+        border: 2px blue solid;
+    }
+
     &--disabled {
         opacity: $inactive-opacity;
     }

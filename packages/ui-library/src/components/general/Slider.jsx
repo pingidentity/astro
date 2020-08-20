@@ -5,13 +5,15 @@ import Draggable from "react-draggable";
 import _ from "underscore";
 import { usePStateful } from "../../util/PropUtils";
 
+const DEFAULT_BACKGROUND_COLOR = "#f2f2f2";
+
 /**
  * @class Slider
  * @desc The grouped buttons in a dialog
  *
  * @param {string} [data-id="slider"]
  *      To define the base "data-id" value for the top-level HTML container.
- * @param {string | array} [background]
+ * @param {string | array | function} [background]
  *      Background color of slider (single color string, array of color strings, array of objects with color and point)
  * @param {array} [backgroundVariant]
  *      Solid or gradient background
@@ -62,7 +64,12 @@ function Slider({
     };
 
     useEffect(() => {
-        setPoints(getValueArray());
+        if (typeof points === "number") {
+            setPoints(points);
+        }
+        else {
+            setPoints(getValueArray());
+        }
     }, []);
 
     const getValuePosition = (val) => {
@@ -94,54 +101,46 @@ function Slider({
         const pointValue = point - min;
         const pointPercentage = (pointValue / scale) * 100;
 
-        return `${pointPercentage}%`;
+        return pointPercentage;
     };
 
-    const getBackground = () => {
-        if (typeof background === "string") {
-            return background;
-        } else if (backgroundVariant === "gradient") {
-            const linearGradientProp = background.reduce((acc, val, index) => {
-                if (val.color) {
-                    return [...acc, `${val.color} ${getPercentageFromPoint(val.point)}`];
-                } else {
-                    return [...acc, `${val} ${(index / (background.length - 1)) * 100}%`];
+    const backgroundToCSS = (bg) => {
+        const backgroundPoints = bg.reduce((acc, val, index) => {
+            const color = typeof val === "object" ? (val.color || DEFAULT_BACKGROUND_COLOR) : val;
+            const position = val.point ? getPercentageFromPoint(val.point) : index / (bg.length - 1) * 100;
+            const stop = { color, position };
+
+            //add hard stops if solid so gradient doesn't blend
+            const hardStop = backgroundVariant === "solid"
+                ? {
+                    color: color,
+                    position: getPercentageFromPoint(acc[acc.length-1] ? acc[acc.length-1].position : min) //start color at previous position or min (for first one)
                 }
-            }, []);
-            const linearGradientJoined = linearGradientProp.join(", ");
-            return `linear-gradient(to right, ${linearGradientJoined})`;
-        } else if (backgroundVariant === "solid") {
-            const backgroundProp = background.reduce((acc, val, index) => {
-                if (typeof val === "object") {
-                    if (index === 0) {
-                        return [...acc,
-                            `${val.color ? val.color : "#f2f2f2"},
-                            ${val.color ? val.color : "#f2f2f2"}
-                            ${getPercentageFromPoint(val.point)}`
-                        ];
-                    } else {
-                        return [...acc,
-                            `${val.color ? val.color : "#f2f2f2"}
-                            ${getPercentageFromPoint(background[index - 1].point)}`,
-                            `${val.color ? val.color : "#f2f2f2"} ${getPercentageFromPoint(val.point)}`
-                        ];
-                    }
-                } else {if (index === 0) {
-                    return [...acc,
-                        `${val},
-                        ${val}
-                        ${((index + 1)/ background.length) * 100}%`
-                    ];
-                } else {
-                    return [...acc,
-                        `${val} ${((index)/ background.length) * 100}%`,
-                        `${val} ${((index + 1)/ background.length) * 100}%`
-                    ];
-                }
-                }
-            }, []);
-            const backgroundPropJoined = backgroundProp.join(", ");
-            return `linear-gradient(to right, ${backgroundPropJoined})`;
+                : [];
+
+            return ([
+                ...acc,
+                ...hardStop,
+                ...stop
+            ]);
+        }, []);
+
+
+        return backgroundPoints.reduce((acc, val) => {
+            return `${acc}, ${val.color} ${val.position}%`;
+        }, "linear-gradient(to right");
+
+
+    };
+
+    const getBackground = (bg, position=0) => {
+        switch (typeof bg) {
+            case "function":
+                return getBackground(bg(position)); //send the results of the function back through
+            case "string":
+                return bg;
+            default:
+                return backgroundToCSS(bg);
         }
     };
 
@@ -175,7 +174,7 @@ function Slider({
         <div className="slider__container" style={{ width: width }} data-id={dataId}>
             <div className={sliderClassName}
                 ref={sliderRef}
-                style={{ background: background ? getBackground() : "#f2f2f2" }}
+                style={{ background: getBackground(background, points) }}
             />
             {sliderWidthMinusIndicator && (
                 getValueArray().map((val, index) => {
@@ -226,7 +225,9 @@ Slider.defaultProps = {
     min: 0,
     onValueChange: _.noop,
     steps: 1,
-    width: "100%"
+    width: "100%",
+    backgroundVariant: "solid",
+    background: DEFAULT_BACKGROUND_COLOR,
 };
 
 export default Slider;
