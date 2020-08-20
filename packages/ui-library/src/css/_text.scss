@@ -9,13 +9,13 @@
 
     &--bold {
         // Text shadow used in place of font-weight to eliminate text changing size when bold
-        text-shadow: 0 0 0.65px #333, 0 0 0.65px #333;
+        text-shadow: 0 0 0.65px currentColor, 0 0 0.65px currentColor;
     }
 
     &--hover {
 
         &:hover {
-            text-shadow: 0 0 0.65px #333, 0 0 0.65px #333;
+            text-shadow: 0 0 0.65px currentColor, 0 0 0.65px currentColor;
         }
     }
 }
