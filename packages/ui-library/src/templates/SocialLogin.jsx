@@ -101,12 +101,7 @@ export default class SocialLogin extends Component {
         wizardStep: 0,
         displayCustomSocialButton: false,
         buttonType: "upload",
-        buttonColor: null,
-        buttonOutline: null,
-        buttonFont: null,
-        buttonText: null,
         buttonLogo: true,
-        buttonFile: null,
         buttonFileName: null,
         tooltipOpen: false
     }
@@ -175,10 +170,6 @@ export default class SocialLogin extends Component {
             ...provider
         },
         wizardStep: 0,
-        buttonColor: provider.branding && provider.branding.fill,
-        buttonOutline: provider.branding && provider.branding.border,
-        buttonFont: provider.branding && provider.branding.color,
-        buttonText: provider.branding && provider.brandingLabel,
         buttonType: provider.branding ? "html" : "upload"
     })
 
@@ -231,7 +222,12 @@ export default class SocialLogin extends Component {
 
     setSocialButtonImage = (file) => {
         const reader = new FileReader();
-        reader.onloadend = ({ target: { result } }) => this.setState({ buttonFile: result });
+        reader.onloadend = ({ target: { result } }) => this.setState(({ activeProvider }) => ({
+            activeProvider: {
+                ...activeProvider,
+                socialButtonImage: result
+            }
+        }));
         this.setState({ buttonFileName: file.name });
         reader.readAsDataURL(file);
 
@@ -272,6 +268,51 @@ export default class SocialLogin extends Component {
             ...provider
         }))
     }))
+
+    updateFill = (color) => {
+        this.setState({
+            activeProvider: {
+                ...this.state.activeProvider,
+                branding: {
+                    ...this.state.activeProvider.branding,
+                    fill: color
+                }
+            }
+        });
+    }
+
+    updateBorder = (color) => {
+        this.setState({
+            activeProvider: {
+                ...this.state.activeProvider,
+                branding: {
+                    ...this.state.activeProvider.branding,
+                    border: color
+                }
+            }
+        });
+    }
+
+    updateColor = (color) => {
+        this.setState({
+            activeProvider: {
+                ...this.state.activeProvider,
+                branding: {
+                    ...this.state.activeProvider.branding,
+                    color: color
+                }
+            }
+        });
+    }
+
+    updateLabel= (value) => {
+        this.setState({
+            activeProvider: {
+                ...this.state.activeProvider,
+                brandingLabel: value
+            }
+        });
+    }
 
     render() {
         // NOTE: any of these properties- including the following function- should be
@@ -578,28 +619,22 @@ export default class SocialLogin extends Component {
                                                     width: "340px",
                                                     opacity: !activeProvider.socialButtonImage ? .5 : 1
                                                 }}>
-                                                    {this.state.buttonFile ? (
+                                                    {activeProvider.socialButtonImage ? (
                                                         <Image
-                                                            alt={this.state.buttonFile}
+                                                            alt={activeProvider.socialButtonImage}
                                                             size={imageSizes.AUTO}
-                                                            source={this.state.buttonFile}
+                                                            source={activeProvider.socialButtonImage}
                                                         />
                                                     ) : (
                                                         <SocialButton
                                                             branding={{
                                                                 ...activeProvider.branding,
-                                                                fill: this.state.buttonColor &&
-                                                                    this.state.buttonColor,
-                                                                border: this.state.buttonOutline &&
-                                                                    this.state.buttonOutline,
-                                                                color: this.state.buttonFont &&
-                                                                    this.state.buttonFont,
                                                                 logo: this.state.buttonLogo &&
                                                                     activeProvider.branding ? (
                                                                         activeProvider.branding.logo
                                                                     ) : null
                                                             }}
-                                                            label={this.state.buttonText && this.state.buttonText}
+                                                            label={activeProvider.brandingLabel}
                                                             image={activeProvider.socialButtonImage}
                                                         />
                                                     )}
@@ -619,7 +654,8 @@ export default class SocialLogin extends Component {
                                                             <FormRadioInput
                                                                 checked={this.state.buttonType === "html"}
                                                                 onValueChange={() => this.setState({
-                                                                    buttonType: "html" })}
+                                                                    buttonType: "html"
+                                                                })}
                                                                 label="Customize HTML"
                                                             />
                                                             <div style={{ marginBottom: "25px", marginLeft: "40px" }}>
@@ -637,12 +673,11 @@ export default class SocialLogin extends Component {
                                                                                     whiteSpace: "nowrap"
                                                                                 }}>BUTTON COLOR</p>
                                                                                 <ColorPicker
-                                                                                    color={this.state.buttonColor}
+                                                                                    color={
+                                                                                        activeProvider.branding.fill||
+                                                                                        "#FFF"}
                                                                                     onValueChange={(color) =>
-                                                                                        this.setState(
-                                                                                            { buttonColor: color }
-                                                                                        )
-                                                                                    }
+                                                                                        this.updateFill(color)}
                                                                                     type={pickerTypes.SIMPLE}
                                                                                     size={simplePickerSizes.SMALL}
                                                                                 />
@@ -655,12 +690,11 @@ export default class SocialLogin extends Component {
                                                                                     whiteSpace: "nowrap"
                                                                                 }}>OUTLINE COLOR</p>
                                                                                 <ColorPicker
-                                                                                    color={this.state.buttonOutline}
+                                                                                    color={
+                                                                                        activeProvider.branding.border||
+                                                                                        "#FFF"}
                                                                                     onValueChange={(color) =>
-                                                                                        this.setState(
-                                                                                            { buttonOutline: color }
-                                                                                        )
-                                                                                    }
+                                                                                        this.updateBorder(color)}
                                                                                     type={pickerTypes.SIMPLE}
                                                                                     size={simplePickerSizes.SMALL}
                                                                                 />
@@ -673,11 +707,11 @@ export default class SocialLogin extends Component {
                                                                                     whiteSpace: "nowrap"
                                                                                 }}>FONT COLOR</p>
                                                                                 <ColorPicker
-                                                                                    color={this.state.buttonFont}
+                                                                                    color={
+                                                                                        activeProvider.branding.color||
+                                                                                        "#FFF"}
                                                                                     onValueChange={(color) =>
-                                                                                        this.setState({
-                                                                                            buttonFont: color })
-                                                                                    }
+                                                                                        this.updateColor(color)}
                                                                                     type={pickerTypes.SIMPLE}
                                                                                     size={simplePickerSizes.SMALL}
                                                                                 />
@@ -686,11 +720,8 @@ export default class SocialLogin extends Component {
                                                                         <FormTextField
                                                                             label="BUTTON TEXT"
                                                                             onChange={(e) =>
-                                                                                this.setState(
-                                                                                    { buttonText: e.target.value }
-                                                                                )
-                                                                            }
-                                                                            value={this.state.buttonText}
+                                                                                this.updateLabel(e.target.value)}
+                                                                            value={activeProvider.brandingLabel}
                                                                         />
                                                                         <FormCheckbox
                                                                             label="Show provided logo"
