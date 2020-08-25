@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { noop } from "underscore";
 import ButtonBar from "./ButtonBar";
@@ -23,6 +23,8 @@ usesStableContext("FormValidator");
  *     Customize the message that shows when some required fields are empty. Shows as a help hint on the save button.
  * @param {function} onInvalidSave
  *     Callback for when the save button is clicked while there are validation problems. Receives the validationErrorMessage.
+ *
+ * @see FormValidatorResult
  */
 
 /**
@@ -42,6 +44,32 @@ const ValidationContext = React.createContext({
     onInvalidSave: noop,
 });
 
+/**
+ * @typedef {function} FormValidatorResult~ValidatorData
+ * @param {object} data
+ * @param {Object.<FormValidator~FieldData>} data.fields
+ *      Field data provided to FormValidator
+ * @param {string} data.disabledText
+ *      If the save button is disabled, this will contain a message for why
+ * @param {function} data.makeTouchField
+ *      A higher-order function that returns a callback to mark a certain form field as touched.
+ *      Takes the key of that form field as an argument and return a function that takes no arguments.
+ * @param {function} data.onSaveMouseDown
+ *      Handler for the save button.
+ * @param {function} data.clearTouches
+ *      Function that clears all touched fields.
+ */
+
+/** @class FormValidatorResult
+ *  @desc The consumer component for the context created by FormValidator.
+ *      You can also use a hook called `useFormValidator`, which gives you the same
+ *      data object that is passed to children.
+ *  @param {FormValidatorResult~ValidatorData} children
+ *      Render function
+ */
+export const FormValidatorResult = ValidationContext.Consumer;
+export const useFormValidator = () => useContext(ValidationContext);
+
 const makeOnBlur = (touchField, onBlur = noop) => e => {
     touchField();
     onBlur(e);
@@ -49,7 +77,7 @@ const makeOnBlur = (touchField, onBlur = noop) => e => {
 
 export const validatesField = WrappedComponent => {
     const NewComponent = ({ formKey, onBlur, errorMessage, ...props }) => (
-        <ValidationContext.Consumer>
+        <FormValidatorResult>
             {({
                 touched: {
                     [formKey]: isTouched = false
@@ -73,7 +101,7 @@ export const validatesField = WrappedComponent => {
                     />
                 );
             }}
-        </ValidationContext.Consumer>
+        </FormValidatorResult>
     );
 
     NewComponent.displayName = WrappedComponent.displayName;
@@ -88,7 +116,7 @@ export const validatesField = WrappedComponent => {
  * @see ButtonBar
  */
 export const ButtonBarValidated = ({ saveDisabled, saveDisabledText, onDiscard = noop, ...props }) => (
-    <ValidationContext.Consumer>
+    <FormValidatorResult>
         {({ disabledText, onSaveMouseDown, clearTouches }) => (
             <ButtonBar
                 {...props}
@@ -103,7 +131,7 @@ export const ButtonBarValidated = ({ saveDisabled, saveDisabledText, onDiscard =
                 }
             />
         )}
-    </ValidationContext.Consumer>
+    </FormValidatorResult>
 );
 
 /**
