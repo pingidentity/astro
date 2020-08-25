@@ -20,6 +20,8 @@ exports.KeyCodes = {
     LEFT_SHIFT: 16,
     LEFT_CTRL: 17,
     LEFT_ALT: 18,
+    END: 35,
+    HOME: 36,
     ARROW_LEFT: 37,
     ARROW_UP: 38,
     ARROW_RIGHT: 39,
@@ -85,7 +87,8 @@ exports.isModifier = function (code) {
 */
 exports.isArrowKey = function (code) {
     return exports.isArrowUp(code) || exports.isArrowDown(code) ||
-        exports.isArrowLeft(code) || exports.isArrowRight(code);
+        exports.isArrowLeft(code) || exports.isArrowRight(code) ||
+        exports.isHome(code) || exports.isEnd(code);
 };
 
 

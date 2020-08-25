@@ -79,9 +79,7 @@ function SliderDemo({ }) {
             <Label detached>Background as function with spot gradient</Label>
             <Slider
                 defaultValue={58}
-                onValueChange={console.log}
                 background={val => {
-                    console.log(val);
                     return [{ color: dangerGradient.rgbAt(val[0]/ 100).toHexString(), point: val[0] }, { point: 100 }];
                 }}
             />

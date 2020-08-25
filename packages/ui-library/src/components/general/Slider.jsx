@@ -4,6 +4,15 @@ import classnames from "classnames";
 import Draggable from "react-draggable";
 import _ from "underscore";
 import { usePStateful } from "../../util/PropUtils";
+import {
+    isArrowDown,
+    isArrowLeft,
+    isArrowUp,
+    isArrowRight,
+    isEnd,
+    isHome,
+    withFocusOutline
+} from "../../util/KeyboardUtils";
 
 const DEFAULT_BACKGROUND_COLOR = "#f2f2f2";
 
@@ -114,7 +123,7 @@ function Slider({
             const hardStop = backgroundVariant === "solid"
                 ? {
                     color: color,
-                    position: getPercentageFromPoint(acc[acc.length-1] ? acc[acc.length-1].position : min) //start color at previous position or min (for first one)
+                    position: getPercentageFromPoint(acc[acc.length - 1] ? acc[acc.length - 1].position : min) //start color at previous position or min (for first one)
                 }
                 : [];
 
@@ -133,7 +142,7 @@ function Slider({
 
     };
 
-    const getBackground = (bg, position=0) => {
+    const getBackground = (bg, position = 0) => {
         switch (typeof bg) {
             case "function":
                 return getBackground(bg(position)); //send the results of the function back through
@@ -162,11 +171,124 @@ function Slider({
         return stepWidth;
     };
 
+    const formArray = (inputValue, index) => {
+        const array = points.map((val, i) => {
+            if (index === i) {
+                return inputValue;
+            } else {
+                return val;
+            }
+        });
+
+        return array;
+    };
+
+    const endKey = (index) => {
+        if (typeof points === "number") {
+            const difference = max - value;
+            const remainder = difference % steps;
+            const maxValue = max - remainder;
+
+            return maxValue;
+        } else if (typeof points[index + 1] === "undefined") {
+            const difference = max - points[index];
+            const remainder = difference % steps;
+            const maxValue = max - remainder;
+
+            return formArray(maxValue, index);
+        } else {
+            const difference = points[index + 1] - points[index];
+            const remainder = difference % steps;
+            const maxValue = points[index + 1] - remainder;
+            const finalValue = maxValue - steps;
+
+            return formArray(finalValue, index);
+        }
+    };
+
+    const homeKey = (index) => {
+        if (typeof points === "number") {
+            const remainder = value % steps;
+
+            return remainder;
+        } else if (typeof points[index - 1] === "undefined") {
+            const remainder = points[index] % steps;
+            const minValue = remainder !== 0 ? remainder + steps : remainder;
+
+            return formArray(minValue, index);
+        } else {
+            const difference = points[index] - points[index - 1];
+            const remainder = difference % steps;
+            const minValue = points[index - 1] + remainder;
+            const finalValue = minValue === points[index - 1] ? minValue + steps : minValue;
+
+            return formArray(finalValue, index);
+        }
+    };
+
+    const incrementKey = (index) => {
+        if (typeof points[index + 1] !== "undefined" && points[index] + steps >= points[index + 1]) {
+            return points;
+        } else if (points + steps > max) {
+            return points;
+        } else if (typeof points === "number") {
+            return points + steps;
+        } else {
+            const newArray = points.map((val, i) => {
+                if (index === i) {
+                    return val + steps;
+                } else {
+                    return val;
+                }
+            });
+
+            return newArray;
+        }
+    };
+
+    const decrementKey = (index) => {
+        if (typeof points[index - 1] !== "undefined" && points[index] - steps <= points[index - 1]) {
+            return points;
+        } else if (points - steps < min) {
+            return points;
+        } else if (typeof points === "number") {
+            return points - steps;
+        } else {
+            const newArray = points.map((val, i) => {
+                if (index === i) {
+                    return val - steps;
+                } else {
+                    return val;
+                }
+            });
+
+            return newArray;
+        }
+    };
+
+    const _handleKeyDown = (e, index) => {
+        const { keyCode } = e;
+
+        if (isArrowLeft(keyCode) || isArrowDown(keyCode)) {
+            e.preventDefault();
+            onValueChange(decrementKey(index));
+        } else if (isArrowRight(keyCode) || isArrowUp(keyCode)) {
+            e.preventDefault();
+            onValueChange(incrementKey(index));
+        } else if (isHome(keyCode)) {
+            e.preventDefault();
+            onValueChange(homeKey(index));
+        } else if (isEnd(keyCode)) {
+            e.preventDefault();
+            onValueChange(endKey(index));
+        }
+    };
+
     const sliderClassName = classnames("slider", {
         "slider--disabled": disabled
     });
 
-    const indicatorClassname = classnames("slider__indicator", {
+    const indicatorClassname = classnames("slider__indicator", "focusable-element", {
         "slider__indicator--disabled": disabled
     });
 
@@ -190,7 +312,12 @@ function Slider({
                             key={index}
                             onDrag={(e, data) => getPositionValue(data, index)}
                             position={{ x: getValuePosition(val), y: 0 }}>
-                            <div className={indicatorClassname} />
+                            <div
+                                className={indicatorClassname}
+                                tabIndex={0}
+                                onKeyDown={(e) => _handleKeyDown(e, index)}
+                                role="slider"
+                            />
                         </Draggable>
                     );
                 })
@@ -230,4 +357,4 @@ Slider.defaultProps = {
     background: DEFAULT_BACKGROUND_COLOR,
 };
 
-export default Slider;
+export default withFocusOutline(Slider);
