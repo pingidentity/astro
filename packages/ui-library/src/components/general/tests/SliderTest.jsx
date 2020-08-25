@@ -131,9 +131,8 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732,
-                        #a9d732
-                        25%, #e2d714 25%, #e2d714 50%, #e78726 50%, #e78726 75%, #eb2c38 75%, #eb2c38 100%)`
+            `linear-gradient(to right, #a9d732 0%, #a9d732 0%, #e2d714 0%, #e2d714 33.33333333333333%,\
+ #e78726 33.33333333333333%, #e78726 66.66666666666666%, #eb2c38 66.66666666666666%, #eb2c38 100%`
         ));
     });
 
@@ -148,10 +147,7 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732,
-                            #a9d732
-                            50%, #eb2c38
-                            50%, #eb2c38 100%)`
+            `linear-gradient(to right, #a9d732 0%, #a9d732 50%, #eb2c38 50%, #eb2c38 100%`
         ));
     });
 
@@ -166,7 +162,7 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732 0%, #e2d714 50%, #eb2c38 100%)`
+            `linear-gradient(to right, #a9d732 0%, #e2d714 50%, #eb2c38 100%`
         ));
     });
 
@@ -184,7 +180,7 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732 10%, #e2d714 30%, #e78726 50%, #eb2c38 70%)`
+            `linear-gradient(to right, #a9d732 10%, #e2d714 30%, #e78726 50%, #eb2c38 70%`
         ));
     });
 });
