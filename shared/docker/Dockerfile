@@ -35,6 +35,7 @@ RUN apt-get -qqy update \
     fonts-liberation \
     fonts-ipafont-gothic \
     fonts-wqy-zenhei \
+    libxss1 \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get -qyy clean
 
