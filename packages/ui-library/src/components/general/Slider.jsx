@@ -317,6 +317,9 @@ function Slider({
                                 tabIndex={0}
                                 onKeyDown={(e) => _handleKeyDown(e, index)}
                                 role="slider"
+                                aria-valuemin={points[index - 1] ? points[index - 1] + steps : min}
+                                aria-valuemax={points[index + 1] ? points[index + 1] - steps : max}
+                                aria-valuenow={typeof points === "number" ? points : points[index]}
                             />
                         </Draggable>
                     );
