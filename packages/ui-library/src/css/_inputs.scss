@@ -1586,6 +1586,7 @@ input[type=file] {
     .input-container:after {
         @include dropdown-caret();
         cursor: pointer;
+        pointer-events: unset;
 
         transition: $default-input-transition;
     }
