@@ -547,6 +547,11 @@
     content: $icon-pin;
   }
 }
+.icon-ping-logo {
+  &:before {
+    content: $icon-ping-logo;
+  }
+}
 .icon-play {
   &:before {
     content: $icon-play;
