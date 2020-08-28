@@ -51,6 +51,7 @@
     }
     .message {
         @include flexbox();
+        @include break-word;
         pointer-events: auto;
         align-items: center;
         clear: both;
