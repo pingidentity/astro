@@ -1,35 +1,129 @@
 import React, { useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
-import noop from 'lodash/noop';
 import PropTypes from 'prop-types';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import flatMap from 'lodash/flatMap';
+import noop from 'lodash/noop';
 import { containerStyles, getOuterContainerStyles } from './HeatMap.styles';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZG9jdG9yajg5IiwiYSI6ImNrN2F3Y2E4eTAwN3Uzbm00ems2YjhlZmgifQ.R4AOWq-qsmMs4AR7ZA1Kbw';
 
-export const pointsToGeoJson = points => ({
-    // Add in a default count so that the point filters just have to worry about one variable.
-    // Latitude and longitude could also be separate properties of the object.
-    features: points.map(({ id, longLat, properties: { count = 1, ...properties } }) => ({
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Point',
-            'coordinates': longLat,
-        },
+export const pointsToGeoJson = (points) => {
+    return ({
+        // Add in a default count so that the point filters just have to worry about one variable.
+        // Latitude and longitude could also be separate properties of the object.
+        features: points.map(({ id, longLat, properties: { count = 1, ...properties } }) => ({
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': longLat,
+            },
+            properties: {
+                ...properties,
+                count,
+                id,
+            },
+        })),
+        type: 'FeatureCollection',
+    });
+};
+
+export const getCircleColor = scoreGradient => [
+    'interpolate',
+    ['linear'],
+    // If an element has a point_count, that means it's a cluster and we can
+    // calculate a mean of its score values. Otherwise, it's a single point
+    // and we can use the raw score.
+    ['case', ['has', 'point_count'], ['/', ['get', 'score'], ['get', 'point_count']], ['get', 'score']],
+    ...flatMap(scoreGradient, item => item),
+];
+
+// Moving callbacks outside of component for testing.
+export const panToCluster = (map, coordinates) => (err, zoom) => {
+    if (err) { return; }
+
+    map.easeTo({
+        center: coordinates,
+        zoom,
+    });
+};
+
+// Pan to a point on whether it's a cluster or a point internally.
+export const panToPoint = (map, feature) => {
+    const {
         properties: {
-            ...properties,
-            count,
-            id,
+            cluster_id: clusterId,
         },
-    })),
-    type: 'FeatureCollection',
-});
+        geometry: {
+            coordinates,
+        },
+    } = feature;
 
+    if (clusterId) {
+        map.getSource('mapData').getClusterExpansionZoom(
+            clusterId,
+            panToCluster(map, coordinates),
+        );
+    } else {
+        map.easeTo({
+            center: coordinates,
+            zoom: map.getZoom() + 1,
+        });
+    }
+};
 
+export const clusterClick = (map, onClusterClick) => (e) => {
+    onClusterClick(e);
+
+    // Pan to the clicked point/cluster.
+    const features = map.queryRenderedFeatures(e.point, {
+        layers: ['clusters'],
+    });
+
+    if (!features || features.length === 0) {
+        return;
+    }
+
+    panToPoint(map, features[0]);
+};
+
+export const pointClick = onPointClick => e => onPointClick(e);
+
+export const updateSource = ({ getSource }, points) => {
+    if (getSource) {
+        getSource('mapData').setData(pointsToGeoJson(points));
+    }
+};
+
+export const mouseLeave = (map, onMouseLeave) => (e) => {
+    onMouseLeave(e);
+    const style = map.getCanvas().style;
+    style.cursor = '';
+};
+
+export const mouseEnter = (map, onMouseEnter) => (e) => {
+    onMouseEnter(e);
+    const style = map.getCanvas().style;
+    style.cursor = 'pointer';
+};
+
+export const callbackWithBoundsAndZoom = (map, callback) => (e) => {
+    const {
+        _nw: nwBound,
+        _se: seBound,
+    } = map.getBounds();
+    callback({
+        nwBound,
+        seBound,
+        zoom: map.getZoom(),
+    }, e);
+};
+
+/**
+ * Component that shows a map with various points with customizable colors.
+ */
 export default function HeatMap({
-    // TODO: Implement these
-    // categories,
     center,
-    className,
     'data-id': dataId,
     height,
     maxZoom,
@@ -42,7 +136,9 @@ export default function HeatMap({
     onPointMouseLeave,
     onZoom,
     points,
+    scoreGradient,
     startingZoom,
+    width,
 }) {
     const mapContainer = useRef();
     const mapObject = useRef({});
@@ -51,45 +147,62 @@ export default function HeatMap({
         const map = new mapboxgl.Map({
             center,
             container: mapContainer.current,
-            height: 500,
             maxZoom,
             style: 'mapbox://styles/mapbox/streets-v11',
             zoom: startingZoom,
         });
 
         map.on('load', () => {
-            map.addSource('data', {
+            map.addSource('mapData', {
                 type: 'geojson',
                 data: pointsToGeoJson(points),
                 // Path to a very large Mapbox dataset for testing.
-                // data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+                // data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
                 cluster: true,
                 clusterMaxZoom: 14,
                 clusterRadius: 50,
                 clusterProperties: {
                     // Create a custom property so that individual points in the dataset
-                    // can behave as though they were clusters. This pulls out "count"
-                    // from each point and adds them together.
+                    // can behave as though they were clusters. This pulls out "count" from
+                    // each point and adds them together.
                     'count': ['+', ['get', 'count']],
+                    ...scoreGradient ? {
+                        score: ['+', ['get', 'score']],
+                    } : {},
+                },
+            });
+
+            // Add two similar layers so we can distinguish Mapbox clusters in callbacks.
+            map.addLayer({
+                id: 'unclustered-point',
+                type: 'circle',
+                source: 'mapData',
+                // This only gets clusters and points that have a
+                // "count" property of more than one.
+                filter: ['<', ['get', 'count'], 2],
+                paint: {
+                    'circle-color': getCircleColor(scoreGradient),
+                    'circle-radius': [
+                        'step',
+                        ['get', 'count'],
+                        20,
+                        100,
+                        30,
+                        750,
+                        40,
+                    ],
                 },
             });
 
             map.addLayer({
                 id: 'clusters',
                 type: 'circle',
-                source: 'data',
-                // This only gets clusters and points that have a "count" property of more than one.
+                source: 'mapData',
+                // This only gets clusters and points that have a
+                // "count" property of more than one.
                 filter: ['>', ['get', 'count'], 1],
                 paint: {
-                    'circle-color': [
-                        'step',
-                        ['get', 'count'],
-                        '#51bbd6',
-                        100,
-                        '#f1f075',
-                        750,
-                        '#f28cb1',
-                    ],
+                    'circle-color': getCircleColor(scoreGradient),
                     'circle-radius': [
                         'step',
                         ['get', 'count'],
@@ -105,92 +218,44 @@ export default function HeatMap({
             map.addLayer({
                 id: 'cluster-count',
                 type: 'symbol',
-                source: 'data',
-                filter: ['>', ['get', 'count'], 1],
+                source: 'mapData',
+                filter: ['>', ['get', 'count'], 0],
                 layout: {
                     'text-field': '{count}',
-                    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                    'text-font': ['Arial Unicode MS Bold'],
                     'text-size': 12,
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
                 },
             });
 
-            map.addLayer({
-                id: 'unclustered-point',
-                type: 'circle',
-                source: 'data',
-                // Only things with a count of
-                filter: ['>=', 1, ['get', 'count']],
-                paint: {
-                    'circle-color': '#11b4da',
-                    'circle-radius': 4,
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': '#fff',
-                },
-            });
+
+            map.on('move', callbackWithBoundsAndZoom(map, onMapMove));
+
+            map.on('zoom', callbackWithBoundsAndZoom(map, onZoom));
+
+            map.on('click', 'clusters', clusterClick(map, onClusterClick));
+
+            map.on('click', 'unclustered-point', pointClick(onPointClick));
+
+            map.on('mouseenter', 'clusters', mouseEnter(map, onClusterMouseEnter));
+
+            map.on('mouseleave', 'clusters', mouseLeave(map, onClusterMouseLeave));
+
+            map.on('mouseenter', 'unclustered-point', mouseEnter(map, onPointMouseEnter));
+
+            map.on('mouseleave', 'unclustered-point', mouseLeave(map, onPointMouseLeave));
 
             mapObject.current = map;
         });
-
-        map.on('move', (e) => {
-            onMapMove(e);
-        });
-
-        map.on('click', 'clusters', (e) => {
-            onClusterClick(e);
-
-            // TODO: Keeping this here in case we do want to pan to clicked points/clusters.
-
-            //     const features = map.queryRenderedFeatures(e.point, {
-            //         layers: ["clusters"]
-            //     });
-            //     const clusterId = features[0].properties.cluster_id;
-            //     map.getSource("earthquakes").getClusterExpansionZoom(
-            //         clusterId,
-            //         function (err, zoom) {
-            //             if (err) {return;}
-
-            //             map.easeTo({
-            //                 center: features[0].geometry.coordinates,
-            //                 zoom: zoom
-            //             });
-            //         }
-            //     );
-        });
-
-        map.on('click', 'unclustered-point', (e) => {
-            onPointClick(e);
-        });
-
-
-        map.on('zoom', e => onZoom(e));
-
-        map.on('mouseenter', 'clusters', (e) => {
-            onClusterMouseEnter(e);
-            map.getCanvas().style.cursor = 'pointer';
-        });
-
-        map.on('mouseleave', 'clusters', (e) => {
-            onClusterMouseLeave(e);
-            map.getCanvas().style.cursor = '';
-        });
-
-        map.on('mouseenter', 'unclustered-point', (e) => {
-            onPointMouseEnter(e);
-            map.getCanvas().style.cursor = 'pointer';
-        });
-
-        map.on('mouseleave', 'unclustered-point', (e) => {
-            onPointMouseLeave(e);
-            map.getCanvas().style.cursor = '';
-        });
     }, []);
 
-    useEffect(() => {
-        if (mapObject.current.getSource) {
-            mapObject.current.getSource('data').setData(pointsToGeoJson(points));
-        }
-    // Might be necessary to stringify this one as well for deep equality.
-    }, [points]);
+    useEffect(
+        () => updateSource(mapObject.current, points),
+        // Might be necessary to stringify this one as well for deep equality.
+        [points],
+    );
 
     useEffect(() => {
         if (mapObject.current.setCenter) {
@@ -198,8 +263,14 @@ export default function HeatMap({
         }
     }, [JSON.stringify(center)]);
 
+    useEffect(() => {
+        if (mapObject.current.setPaintProperty) {
+            mapObject.current.setPaintProperty('clusters', 'circleColor', getCircleColor(scoreGradient));
+        }
+    }, [JSON.stringify(scoreGradient)]);
+
     return (
-        <div css={getOuterContainerStyles(height)} data-id={dataId}>
+        <div css={getOuterContainerStyles(height, width)} data-id={dataId}>
             <div
                 ref={mapContainer}
                 css={containerStyles}
@@ -208,32 +279,111 @@ export default function HeatMap({
     );
 }
 
+const zoomPropType = PropTypes.oneOf(new Array(22).fill(undefined).map((val, idx) => idx + 1));
+
 HeatMap.propTypes = {
-    // TODO: Implement categories
-    // categories: PropTypes.objectOf(PropTypes.string),
+    /**
+     * The center of the map, formatted as [longitude, latitude]. For example, [10, 10].
+     */
     center: PropTypes.arrayOf(PropTypes.number),
-    className: PropTypes.string,
+    /**
+     * A test hook applied to the root element.
+     */
     'data-id': PropTypes.string,
+    /**
+     * The height of the map in pixels. Defaults to 400px.
+     */
     height: PropTypes.number,
-    maxZoom: PropTypes.number,
+    /**
+     * The maximum zoom level of the map. Higher zoom levels mean a closer zoom.
+     * This maxes out at 22, which is also the default. 1 is the minimum.
+     */
+    maxZoom: zoomPropType,
+    /**
+     * Called when a cluster of points is clicked. This is a Mapbox cluster,
+     * representing more than one point of underlying data as passed in through the points prop.
+     */
     onClusterClick: PropTypes.func,
+    /**
+     * Called when the mouse enters a cluster of points.
+     */
     onClusterMouseEnter: PropTypes.func,
+    /**
+     * Called when the mouse leaves a cluster of points.
+     */
     onClusterMouseLeave: PropTypes.func,
+    /**
+     * Called when the map is moved. This is not throttled and may fire many times.
+     */
     onMapMove: PropTypes.func,
+    /**
+     * Called when an individual, unclustered point is clicked.
+     */
     onPointClick: PropTypes.func,
+    /**
+     * Called when the mouse enters an individual, unclustered point.
+     */
     onPointMouseEnter: PropTypes.func,
+    /**
+     * Called when the mouse leaves individual, unclustered point is clicked.
+     */
     onPointMouseLeave: PropTypes.func,
+    /**
+     * Called when zooming in or out. This is not throttled and may fire many times.
+     */
     onZoom: PropTypes.func,
+    /**
+     * The points to be represented on the map.
+     */
     points: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+            /**
+             * The id of the point, used for internal logic and callbacks.
+             */
+            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+            /**
+             * The longitude and latitude of the point, formatted as [longitude, latitude].
+             */
             longLat: PropTypes.arrayOf(PropTypes.number),
-            properties: PropTypes.objectOf(
-                PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-            ),
+            /**
+             * Additional information about the point.
+             */
+            properties: PropTypes.shape({
+                /**
+                 * The number of events represented by a particular point. This will make the point
+                 * behave like a Mapbox-generated point cluster.
+                 */
+                count: PropTypes.number,
+                /**
+                 * The value of the point. This changes its color in the UI based on the
+                 * scoreGradient prop. Clusters of points will take the average score of
+                 * their individual points.
+                 */
+                score: PropTypes.number,
+            }),
         }),
     ),
-    startingZoom: PropTypes.number,
+    /**
+     * The colors assigned to points and clusters based on their underlying "score" values.
+     * Structured as an array of arrays, where each internal array is [lowerPointBound, hexColor].
+     * For example, [50, #FFFFFF] would mean all points above 50 would be white, unless there was
+     * another value that had a color for numbers above another value, like 60.
+     *
+     * To get a single-color map, pass in a single value with zero as its lower bound.
+     * For example, a scoreGradient prop of [[0, #FFFFFF]] would make all points white.
+     */
+    scoreGradient: PropTypes.arrayOf(PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    )).isRequired,
+    /**
+     * A number from 1-22 representing the map's initial zoom level. Higher numbers indicate
+     * a closer zoom.
+     */
+    startingZoom: zoomPropType,
+    /**
+     * The width of the map in pixels. Defaults to 100% of its parent container.
+     */
+    width: PropTypes.number,
 };
 
 HeatMap.defaultProps = {
@@ -248,4 +398,3 @@ HeatMap.defaultProps = {
     onZoom: noop,
     points: [],
 };
-

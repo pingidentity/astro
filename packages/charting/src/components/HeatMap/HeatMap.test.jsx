@@ -1,21 +1,36 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import mapboxGl from 'mapbox-gl';
-import HeatMap, { pointsToGeoJson } from './HeatMap';
+import HeatMap, {
+    callbackWithBoundsAndZoom,
+    clusterClick,
+    mouseEnter,
+    mouseLeave,
+    panToCluster,
+    pointClick,
+    pointsToGeoJson,
+} from './HeatMap';
 
-jest.mock('mapbox-gl', () => {
+jest.mock('mapbox-gl', (replacements) => {
     const setData = jest.fn();
+    const getClusterExpansionZoom = jest.fn();
     const mapProps = {
-        getSource: jest.fn(() => ({
-            setData,
-        })),
         addLayer: jest.fn(),
         addSource: jest.fn(),
+        easeTo: jest.fn(),
         getCanvas: jest.fn(() => ({
             style: { cursor: '' },
         })),
-        on: (type, callback) => [type, callback],
+        getSource: jest.fn(() => ({
+            getClusterExpansionZoom,
+            setData,
+        })),
+        getZoom: jest.fn(() => 5),
+        on: jest.fn((type, callback) => [type, callback]),
+        queryRenderedFeatures: jest.fn(),
         setCenter: jest.fn(),
+        setPaintProperty: jest.fn(),
+        ...replacements,
     };
     return ({
         Map: jest.fn(() => mapProps),
@@ -61,6 +76,18 @@ describe('HeatMap', () => {
         points,
         height: 500,
         maxZoom: 18,
+        scoreGradient: [
+            [0, '#48C06A'],
+            [10, '#6BC856'],
+            [20, '#8CD043'],
+            [30, '#ACD732'],
+            [40, '#CBDF20'],
+            [50, '#E2E413'],
+            [60, '#E4AD1E'],
+            [70, '#E78227'],
+            [80, '#EA5630'],
+            [90, '#EC203A'],
+        ],
         startingZoom: 10,
     };
 
@@ -74,8 +101,21 @@ describe('HeatMap', () => {
 
     const map = new mapboxGl.Map();
 
+    const clearMock = (...spies) => {
+        [...Object.values(map), ...spies].forEach((mock) => {
+            if (mock.mockClear) { mock.mockClear(); }
+        });
+    };
+
+    afterEach(() => clearMock());
+
     it('renders the component', () => {
         const component = getComponent();
+        expect(component.exists()).toEqual(true);
+    });
+
+    it('renders the component with a width', () => {
+        const component = getComponent({ width: 500 });
         expect(component.exists()).toEqual(true);
     });
 
@@ -151,210 +191,158 @@ describe('HeatMap', () => {
         expect(geoJson).toEqual(expected);
     });
 
-    it('calls onMove when map moves', () => {
-        const onMapMove = jest.fn();
-
-        const mapBoxOn = jest.spyOn(map, 'on');
-
-        getComponent({
-            onMapMove,
-        });
-
-        const [, onMoveCallback] = mapBoxOn.mock.calls.find(([key]) => key === 'move');
-        onMoveCallback('test value');
-
-        expect(onMapMove).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
-    });
-
     it('calls onPointClick when a point is clicked', () => {
         const onPointClick = jest.fn();
 
-        const mapBoxOn = jest.spyOn(map, 'on');
+        pointClick(onPointClick)({});
 
-        getComponent({
-            onPointClick,
-        });
-
-        const [, , onClickCallback] = mapBoxOn.mock.calls.find(
-            ([event, type]) => event === 'click' && type === 'unclustered-point',
-        );
-        onClickCallback('test value');
-
-        expect(onPointClick).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
+        expect(onPointClick).toHaveBeenCalledTimes(1);
     });
 
     it('calls onClusterClick when a point is clicked', () => {
         const onClusterClick = jest.fn();
 
-        const mapBoxOn = jest.spyOn(map, 'on');
+        clusterClick(new mapboxGl.Map(), onClusterClick)({});
 
-        getComponent({
-            onClusterClick,
-        });
-
-        const [, , onClickCallback] = mapBoxOn.mock.calls.find(
-            ([event, type]) => event === 'click' && type === 'clusters',
-        );
-        onClickCallback('test value');
-
-        expect(onClusterClick).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
+        expect(onClusterClick).toHaveBeenCalledTimes(1);
     });
 
-    it('calls onPointMouseEnter when mousing into a point', () => {
-        const onPointMouseEnter = jest.fn();
+    it('clusterClick does not ease to point if no features are found', () => {
+        map.queryRenderedFeatures.mockImplementationOnce(() => []);
+        clusterClick(map, jest.fn())({});
 
-        const mapBoxOn = jest.spyOn(map, 'on');
-
-        getComponent({
-            onPointMouseEnter,
-        });
-
-        const [, , callback] = mapBoxOn.mock.calls.find(
-            ([event, type]) => event === 'mouseenter' && type === 'unclustered-point',
-        );
-        callback('test value');
-
-        expect(onPointMouseEnter).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
+        expect(map.easeTo).not.toHaveBeenCalled();
     });
 
-    it('calls onClusterMouseEnter when mousing into a cluster', () => {
-        const onClusterMouseEnter = jest.fn();
+    it('clusterClick eases to a point if feature has a cluster_id', () => {
+        const feature = {
+            properties: {
+                cluster_id: 'id',
+            },
+            geometry: {
+                coordinates: [10, 10],
+            },
+        };
+        map.queryRenderedFeatures.mockImplementationOnce(() => [feature]);
+        clusterClick(map, jest.fn())(feature);
 
-        const mapBoxOn = jest.spyOn(map, 'on');
-
-        getComponent({
-            onClusterMouseEnter,
-        });
-
-        const [, , callback] = mapBoxOn.mock.calls.find(
-            ([event, type]) => event === 'mouseenter' && type === 'clusters',
-        );
-        callback('test value');
-
-        expect(onClusterMouseEnter).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
+        expect(map.getSource().getClusterExpansionZoom).toHaveBeenCalledTimes(1);
     });
 
-    it('calls onPointMouseLeave when mousing out of a point', () => {
-        const onPointMouseLeave = jest.fn();
+    it('clusterClick eases to a point if features does not have a cluster_id', () => {
+        const feature = {
+            properties: {
+                cluster_id: null,
+            },
+            geometry: {
+                coordinates: [10, 10],
+            },
+        };
+        map.queryRenderedFeatures.mockImplementationOnce(() => [feature]);
+        map.getZoom.mockImplementationOnce(() => 10);
 
-        const mapBoxOn = jest.spyOn(map, 'on');
+        clusterClick(map, jest.fn())(feature);
 
-        getComponent({
-            onPointMouseLeave,
-        });
-
-        const [, , callback] = mapBoxOn.mock.calls.find(
-            ([event, type]) => event === 'mouseleave' && type === 'unclustered-point',
-        );
-        callback('test value');
-
-        expect(onPointMouseLeave).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
+        expect(map.easeTo).toHaveBeenCalledWith({ center: [10, 10], zoom: 11 });
     });
 
-    it('calls onClusterMouseLeave when mousing out of a cluster', () => {
-        const onClusterMouseLeave = jest.fn();
+    it('does not ease to cluster if cluster expansion throws error', () => {
+        panToCluster(map, [10, 10])('I AM ERROR', 15);
 
-        const mapBoxOn = jest.spyOn(map, 'on');
-
-        getComponent({
-            onClusterMouseLeave,
-        });
-
-        const [, , callback] = mapBoxOn.mock.calls.find(
-            ([event, type]) => event === 'mouseleave' && type === 'clusters',
-        );
-        callback('test value');
-
-        expect(onClusterMouseLeave).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
+        expect(map.easeTo).toHaveBeenCalledTimes(0);
     });
 
-    it('calls onZoom when zooming', () => {
+    it('eases to cluster if cluster expansion does not throw error', () => {
+        panToCluster(map, [10, 10])(undefined, 15);
+
+        expect(map.easeTo).toHaveBeenCalledWith({ center: [10, 10], zoom: 15 });
+    });
+
+    it('sets style and calls callback for mouseEnter', () => {
+        const onMouseEnter = jest.fn();
+        const style = {};
+        map.getCanvas.mockImplementationOnce(() => ({ style }));
+        mouseEnter(map, onMouseEnter)('event');
+
+        expect(onMouseEnter).toHaveBeenCalledWith('event');
+        expect(style.cursor).toEqual('pointer');
+    });
+
+    it('sets style and calls callback for mouseLeave', () => {
+        const onMouseLeave = jest.fn();
+        const style = {};
+        map.getCanvas.mockImplementationOnce(() => ({ style }));
+        mouseLeave(map, onMouseLeave)('event');
+
+        expect(onMouseLeave).toHaveBeenCalledWith('event');
+        expect(style.cursor).toEqual('');
+    });
+
+    it('callbackWithBoundsAndZoom calls callback with bounds and zoom', () => {
         const onZoom = jest.fn();
-
-        const mapBoxOn = jest.spyOn(map, 'on');
-
-        getComponent({
+        callbackWithBoundsAndZoom(
+            {
+                getBounds: () => ({
+                    _nw: [10, 10],
+                    _se: [20, 20],
+                }),
+                getZoom: () => 10,
+            },
             onZoom,
-        });
+        )('event');
 
-        const [, callback] = mapBoxOn.mock.calls.find(
-            ([event]) => event === 'zoom',
-        );
-        callback('test value');
-
-        expect(onZoom).toHaveBeenCalledWith('test value');
-        mapBoxOn.mockClear();
+        expect(onZoom).toHaveBeenCalledWith({ nwBound: [10, 10], seBound: [20, 20], zoom: 10 }, 'event');
     });
 
-    it('calls addSource and addLayer with correct arguments', () => {
-        const mapBoxOn = jest.spyOn(map, 'on');
-        const addLayerSpy = jest.spyOn(map, 'addLayer');
-        const addSourceSpy = jest.spyOn(map, 'addSource');
-
-        getComponent();
-
-        expect(addLayerSpy).not.toHaveBeenCalled();
-        expect(addSourceSpy).not.toHaveBeenCalled();
-
-        const [, loadCallback] = mapBoxOn.mock.calls.find(([event]) => event === 'load');
-        loadCallback();
-
-        const [addClusters, addCount, addPoints] = addLayerSpy.mock.calls;
-
-        expect(addSourceSpy.mock.calls[0]).toMatchSnapshot();
-        expect(addClusters).toMatchSnapshot();
-        expect(addCount).toMatchSnapshot();
-        expect(addPoints).toMatchSnapshot();
-
-        mapBoxOn.mockClear();
-        addLayerSpy.mockClear();
-        addSourceSpy.mockClear();
-    });
-
+    // Using a more complex mock here because it's important to test that this update is actually
+    // happening in the component's lifecycle.
     it('updates source when data prop changes', () => {
-        const mapBoxOn = jest.spyOn(map, 'on');
-        const getSourceSpy = jest.spyOn(map, 'getSource');
-        const setDataSpy = jest.spyOn(map.getSource(), 'setData');
-        getSourceSpy.mockClear();
-
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
-        const [, load] = mapBoxOn.mock.calls.find(([event]) => event === 'load');
+        const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
         load();
 
-        expect(getSourceSpy).not.toHaveBeenCalled();
-        expect(setDataSpy).not.toHaveBeenCalled();
+        expect(map.getSource).not.toHaveBeenCalled();
 
         component.setProps({ ...defaultProps, points: defaultProps.points.slice(0, 2) });
 
-        expect(getSourceSpy).toHaveBeenCalledWith('data');
-        expect(setDataSpy.mock.calls[0]).toMatchSnapshot();
-
-        mapBoxOn.mockClear();
-        getSourceSpy.mockClear();
-        setDataSpy.mockClear();
+        expect(map.getSource).toHaveBeenCalledTimes(1);
+        clearMock(map);
     });
 
+    // Using a more complex mock here because it's important to test that this update is actually
+    // happening in the component's lifecycle.
     it('updates center when center prop changes', () => {
-        const setCenterSpy = jest.spyOn(map, 'setCenter');
-        const mapBoxOn = jest.spyOn(map, 'on');
-
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
-        const [, load] = mapBoxOn.mock.calls.find(([event]) => event === 'load');
+        const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
         load();
 
-        expect(setCenterSpy).not.toHaveBeenCalled();
+        expect(map.setCenter).not.toHaveBeenCalled();
 
         component.setProps({ ...defaultProps, center: [0, 0] });
 
-        expect(setCenterSpy).toHaveBeenCalledWith([0, 0]);
+        expect(map.setCenter).toHaveBeenCalledWith([0, 0]);
+        clearMock(map);
+    });
+
+    it('updates circle color property when scoreGradient prop changes', () => {
+        const component = getComponent();
+        // Have to call this because the map object ref is set in the load event.
+        const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
+        load();
+
+        expect(map.setPaintProperty).not.toHaveBeenCalled();
+
+        component.setProps(
+            { ...defaultProps,
+                scoreGradient: [
+                    [0, '#48C06A'],
+                    [10, '#6BC856'],
+                ],
+            });
+
+        expect(map.setPaintProperty).toHaveBeenCalledTimes(1);
+        clearMock(map);
     });
 });
