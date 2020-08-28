@@ -158,7 +158,6 @@ const ColorPickerGroup = ({
                             setHoveredColor(null);
                         }}
                         labelText={color.title}
-                        showLabel={!!openColor || !!hoveredColor}
                         open={openColor === color.id}
                         onToggle={() => toggleOpenColor(color.id)}
                     />
@@ -329,7 +328,7 @@ const NewThemeModal = ({
         onClose={onModalClose}
     >
         <ScrollBox height="500px">
-            <TileGrid>
+            <TileGrid columns={2}>
                 {themes.map((theme, key) => (
                     <BrandingTile
                         key={theme.title}
@@ -489,94 +488,100 @@ const CustomizeControls = ({
     };
 
     return (
-        <FlexRow>
-            <FlexItem basis="80%">
-                <Padding vertical={Padding.sizes.MD}>
-                    <InputRow>
-                        <FormLabel>Theme Colors</FormLabel>
-                        <ColorPickerGroup
-                            colors={customColors}
-                            onValueChange={(color, e, details) => updateColor(color, details.id)}
-                        />
-                    </InputRow>
-                    <InputRow>
-                        <FlexRow
-                            justify={justifyOptions.SPACEBETWEEN}
-                            alignment={alignments.TOP}
-                            spacing={spacingOptions.MD}
-                            flexDirection={flexDirectionOptions.ROW}
-                        >
-                            <FlexItem basis="50%">
-                                <Padding bottom={Padding.sizes.MD}>
-                                    <FormLabel>Orgnization Logo</FormLabel>
-                                </Padding>
-                                <FlexRow
-                                    justify={justifyOptions.SPACEBETWEEN}
-                                    alignment={alignments.TOP}
-                                    spacing={spacingOptions.MD}
-                                    flexDirection={flexDirectionOptions.ROW}
-                                >
-                                    <FlexItem basis="20%">
-                                        <FormRadioGroup
-                                            groupName="org-logo"
-                                            selected={"image"}
-                                            onValueChange={() => {}}
-                                            items={[
-                                                { id: "none", name: "None" },
-                                                { id: "image", name: "Image" }
-                                            ]}
-                                        />
-                                    </FlexItem>
-                                    <FlexItem basis="80%">
-                                        <FileUpload
-                                            maxFileSizeKb={4096}
-                                            showThumbnail={true}
-                                            labelMaxFileSize="Max Size 4MB"
-                                            accept="image/jpeg, image/jpg, image/png"
-                                            labelSelect="Choose a File"
-                                            labelRemove="Remove"
-                                            defaultImage="src/demo/images/favicon.png"
-                                        />
-                                    </FlexItem>
-                                </FlexRow>
-                            </FlexItem>
-                            <FlexItem basis="50%">
-                                <Padding bottom={Padding.sizes.MD}>
-                                    <FormLabel>Background Image</FormLabel>
-                                </Padding>
-                                <FlexRow
-                                    justify={justifyOptions.SPACEBETWEEN}
-                                    alignment={alignments.TOP}
-                                    spacing={spacingOptions.MD}
-                                    flexDirection={flexDirectionOptions.ROW}
-                                >
-                                    <FlexItem basis="20%">
-                                        <FormRadioGroup
-                                            groupName="bg-image"
-                                            selected={"image"}
-                                            onValueChange={() => { }}
-                                            items={[
-                                                { id: "none", name: "None" },
-                                                { id: "image", name: "Image" },
-                                                { id: "color", name: "Color" }
-                                            ]}
-                                        />
-                                    </FlexItem>
-                                    <FlexItem basis="80%">
-                                        <FileUpload
-                                            maxFileSizeKb={4096}
-                                            showThumbnail={true}
-                                            labelMaxFileSize="Max Size 4MB"
-                                            accept="image/jpeg, image/jpg, image/png"
-                                            labelSelect="Choose a File"
-                                            labelRemove="Remove"
-                                            defaultImage={theme.background}
-                                        />
-                                    </FlexItem>
-                                </FlexRow>
-                            </FlexItem>
-                        </FlexRow>
-                    </InputRow>
+        <>
+            <FlexRow>
+                <FlexItem basis="80%">
+                    <Padding vertical={Padding.sizes.MD}>
+                        <InputRow>
+                            <FormLabel>Theme Colors</FormLabel>
+                            <ColorPickerGroup
+                                colors={customColors}
+                                onValueChange={(color, e, details) => updateColor(color, details.id)}
+                            />
+                        </InputRow>
+                        <InputRow>
+                            <FlexRow
+                                justify={justifyOptions.SPACEBETWEEN}
+                                alignment={alignments.TOP}
+                                spacing={spacingOptions.MD}
+                                flexDirection={flexDirectionOptions.ROW}
+                            >
+                                <FlexItem basis="50%">
+                                    <Padding bottom={Padding.sizes.MD}>
+                                        <FormLabel>Logo</FormLabel>
+                                    </Padding>
+                                    <FlexRow
+                                        justify={justifyOptions.SPACEBETWEEN}
+                                        alignment={alignments.TOP}
+                                        spacing={spacingOptions.MD}
+                                        flexDirection={flexDirectionOptions.ROW}
+                                    >
+                                        <FlexItem basis="20%">
+                                            <FormRadioGroup
+                                                groupName="org-logo"
+                                                selected={"image"}
+                                                onValueChange={() => {}}
+                                                items={[
+                                                    { id: "none", name: "None" },
+                                                    { id: "image", name: "Image" }
+                                                ]}
+                                            />
+                                        </FlexItem>
+                                        <FlexItem basis="80%">
+                                            <FileUpload
+                                                maxFileSizeKb={4096}
+                                                showThumbnail={true}
+                                                labelMaxFileSize="Max Size 4MB"
+                                                accept="image/jpeg, image/jpg, image/png"
+                                                labelSelect="Choose a File"
+                                                labelRemove="Remove"
+                                                defaultImage="src/demo/images/favicon.png"
+                                            />
+                                        </FlexItem>
+                                    </FlexRow>
+                                </FlexItem>
+                                <FlexItem basis="50%">
+                                    <Padding bottom={Padding.sizes.MD}>
+                                        <FormLabel>Background Image</FormLabel>
+                                    </Padding>
+                                    <FlexRow
+                                        justify={justifyOptions.SPACEBETWEEN}
+                                        alignment={alignments.TOP}
+                                        spacing={spacingOptions.MD}
+                                        flexDirection={flexDirectionOptions.ROW}
+                                    >
+                                        <FlexItem basis="20%">
+                                            <FormRadioGroup
+                                                groupName="bg-image"
+                                                selected={"image"}
+                                                onValueChange={() => { }}
+                                                items={[
+                                                    { id: "none", name: "None" },
+                                                    { id: "image", name: "Image" },
+                                                    { id: "color", name: "Color" }
+                                                ]}
+                                            />
+                                        </FlexItem>
+                                        <FlexItem basis="80%">
+                                            <FileUpload
+                                                maxFileSizeKb={4096}
+                                                showThumbnail={true}
+                                                labelMaxFileSize="Max Size 4MB"
+                                                accept="image/jpeg, image/jpg, image/png"
+                                                labelSelect="Choose a File"
+                                                labelRemove="Remove"
+                                                defaultImage={theme.background}
+                                            />
+                                        </FlexItem>
+                                    </FlexRow>
+                                </FlexItem>
+                            </FlexRow>
+                        </InputRow>
+                    </Padding>
+                </FlexItem>
+            </FlexRow>
+            <FlexRow>
+                <FlexItem basis="100%">
                     <InputRow>
                         <FormTextArea
                             labelText="Footer"
@@ -585,9 +590,9 @@ const CustomizeControls = ({
                             width={InputWidths.MAX}
                         />
                     </InputRow>
-                </Padding>
-            </FlexItem>
-        </FlexRow>
+                </FlexItem>
+            </FlexRow>
+        </>
     );
 };
 
@@ -642,7 +647,7 @@ const Branding = () => {
             </div>
 
             <Padding bottom={Padding.sizes.SM}>
-                <FormLabel>Organization Logo</FormLabel>
+                <FormLabel>Default Logo</FormLabel>
             </Padding>
 
             <FlexRow
