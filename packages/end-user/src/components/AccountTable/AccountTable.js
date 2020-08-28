@@ -6,50 +6,59 @@ import Modal from '../shared/Modal';
 import Button from '../Button';
 import { noop } from "underscore";
 
-const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText) => {
+const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText, canDelete) => {
     return accounts.map((account) => {
-        const { image, name, unlinked } = account;
+        const { image, name, unlinked, id, details = [] } = account;
         return (
-            <FlexRow className="account-table__row no-mobile-break" key={name} alignment={alignments.CENTER}>
+            <FlexRow className="account-table__row no-mobile-break" key={id || name} alignment={alignments.CENTER}>
                 <div className="account-table__icon">
                     {image}
                 </div>
                 <div className="account-table__row-info">
                     <div className="account-table__row-details">
-                        <span>
+                        <TextBlock
+                            className="account-table__row-name"
+                            alignment={textAlignments.LEFT}
+                            spacing={TextBlock.margins.MD}
+                            overflow={overflowTypes.ELLIPSIS}
+                            key="name"
+                        >
+                            {name}
+                        </TextBlock>
+                        {details.map((detailsRow, i) => (
                             <TextBlock
-                                className="account-table__row-name"
+                                className="account-table__row-subdetails"
                                 alignment={textAlignments.LEFT}
-                                overflow={overflowTypes.ELLIPSIS}
-                                spacing="small"
+                                spacing={TextBlock.margins.SM}
+                                key={`details-${i}`}
                             >
-                                {name}
+                                {detailsRow}
                             </TextBlock>
-                        </span>
+                        ))}
                     </div>
                 </div>
-                <div className="account-table__row-unlink">
-                    <div className="account-table__row-unlink--normal">
-                        { unlinked ? (
-                            <Button disabled inline>
-                                <span className="pingicon-unlink"/> {unlinkAccountSuccessText}
-                            </Button>
-                        ) : (
-                            <Button onClick={unlinkAccount(account)} inline>
-                                {unlinkAccountText}
-                            </Button>
-                        )}
+                {canDelete && (
+                    <div className="account-table__row-unlink">
+                        <div className="account-table__row-unlink--normal">
+                            { unlinked ? (
+                                <Button disabled inline>
+                                    {unlinkAccountSuccessText}
+                                </Button>
+                            ) : (
+                                <Button onClick={unlinkAccount(account)} inline>
+                                    {unlinkAccountText}
+                                </Button>
+                            )}
+                        </div>
+                        <div className="account-table__row-unlink--mobile">
+                            { unlinked ? (
+                                <Button disabled inline iconName="delete" />
+                            ) : (
+                                <Button onClick={unlinkAccount(account)} inline iconName="delete"/>
+                            )}
+                        </div>
                     </div>
-                    <div className="account-table__row-unlink--mobile">
-                        { unlinked ? (
-                            <Button disabled inline>
-                                <span className="pingicon-unlink"/>
-                            </Button>
-                        ) : (
-                            <Button onClick={unlinkAccount(account)} inline iconName="delete"/>
-                        )}
-                    </div>
-                </div>
+                )}
             </FlexRow>
         );
     });
@@ -128,7 +137,6 @@ class AccountTable extends React.Component {
                     flexDirection={flexDirectionOptions.COLUMN}
                     spacing={spacingOptions.MD}
                 >
-                    <h1 className="heading-text centered-text"><span className="pingicon-unlink"/></h1>
                     <h1 className="heading-text centered-text">
                         {this.props.unlinkModalTitle}
                     </h1>
@@ -156,7 +164,8 @@ class AccountTable extends React.Component {
                         this.props.accounts,
                         this._onUnlinkClick,
                         this.props.unlinkAccountText,
-                        this.props.unlinkAccountSuccessText
+                        this.props.unlinkAccountSuccessText,
+                        this.props.canDelete
                     ) : (
                         <p className="normal-text centered-text">
                             {this.props.noConnectedAccountsMessage}
@@ -178,8 +187,9 @@ AccountTable.propTypes = {
     unlinkModalConfirmText: PropTypes.node.isRequired,
     onUnlinkClick: PropTypes.func,
     cancelText: PropTypes.string,
-    unlinkAccountText: PropTypes.string,
-    unlinkAccountSuccessText: PropTypes.string,
+    unlinkAccountText: PropTypes.node,
+    unlinkAccountSuccessText: PropTypes.node,
+    canDelete: PropTypes.bool,
 };
 
 AccountTable.defaultProps = {
@@ -192,7 +202,11 @@ AccountTable.defaultProps = {
     cancelText: 'Cancel',
     unlinkAccountText: 'Unlink Account',
     unlinkAccountSuccessText: 'Account Unlinked',
-    unlinkModalConfirmText: 'Unlink'
+    unlinkModalConfirmText: 'Unlink',
+    canDelete: true,
 };
 
 export default AccountTable;
+
+AccountTable.UnlinkIcon = () => <span className="pingicon-unlink"/>;
+AccountTable.UnlinkIcon.displayName = 'UnlinkIcon';

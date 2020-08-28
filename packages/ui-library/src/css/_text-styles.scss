@@ -136,6 +136,18 @@ $body-text-color: $color-neutral-20;
     @include text-section-title;
 }
 
+// ITEM TITLE
+@mixin text-item-title {
+    @include text-style($color-midnight, $font-size-primary);
+    @include font-pn-semibold;
+
+    text-transform: none;
+}
+
+.text-item-title {
+    @include text-item-title;
+}
+
 // LINK
 @mixin text-link {
     color: $color-active-blue;

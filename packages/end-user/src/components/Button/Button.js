@@ -26,6 +26,7 @@ const Button = ({
     onClick,
     children,
     iconName,
+    loading,
     type,
     style,
     render,
@@ -37,6 +38,8 @@ const Button = ({
         'button--tertiary': type === ButtonTypes.TERTIARY,
         'button--danger': type === ButtonTypes.DANGER,
         'brand-primary-bg': type === ButtonTypes.PRIMARY,
+        loading: loading,
+        "button--loading": loading,
     });
     return (
         <div>
@@ -49,11 +52,12 @@ const Button = ({
                     style={style}
                     type={isSubmit ? 'submit' : 'button'}
                 >
-                    {label}{children}
+                    {loading && <span className={"button--loading-ellipsis"}><span></span></span>}
+                    {!loading && <>{label}{children}</>}
                 </button>
             ) : (
                 render({ children })
-            )}
+            )}          
         </div>
     );
 };
@@ -84,6 +88,10 @@ Button.propTypes = {
      */
     label: PropTypes.string,
     /**
+     * Displays loading state animation in place of button label
+     */
+    loading: PropTypes.bool,
+    /**
      * The callback triggered when the Button is clicked
      */
     onClick: PropTypes.func,
@@ -107,6 +115,7 @@ Button.defaultProps = {
     inline: false,
     isSubmit: false,
     onClick: () => { },
+    loading: false,
 };
 
 Button.ButtonTypes = ButtonTypes;

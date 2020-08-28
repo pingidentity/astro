@@ -106,7 +106,7 @@ const UnstyledSocialButton = ({
 
     return (
         <div className={className}>
-            { !image ? (
+            {!image ? (
                 <Button
                     data-id={dataId}
                     disabled={disabled}
@@ -130,15 +130,15 @@ const UnstyledSocialButton = ({
                     </div>
                 </Button>
             ) : (
-                <button
-                    onClick={onClick}
-                    className="social-button__image-button"
-                    disabled={disabled}
-                    data-id={dataId}
-                >
-                    <img src={image} width="100%" height="auto" alt={label} />
-                </button>
-            )}
+                    <button
+                        onClick={onClick}
+                        className="social-button__image-button"
+                        disabled={disabled}
+                        data-id={dataId}
+                    >
+                        <img src={image} width="100%" height="auto" alt={label} />
+                    </button>
+                )}
         </div>
     );
 };

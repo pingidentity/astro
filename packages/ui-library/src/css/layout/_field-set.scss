@@ -18,4 +18,8 @@
         margin: $spacing-sm;
     }
 
+    &--full-width {
+        flex-basis: 100%;
+    }
+
 }

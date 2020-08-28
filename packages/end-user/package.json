@@ -1,6 +1,6 @@
 {
   "name": "@pingux/end-user",
-  "version": "0.27.1",
+  "version": "0.29.1",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "uxdev@pingidentity.com",
@@ -156,7 +156,7 @@
   },
   "scripts": {
     "pack": "rm -rf ./build && build-storybook -o build",
-    "cdn": "rm -rf ./cdn && webpack --config webpack.cdn.js && for dir in ./cdn/*/; do mkdir $dir/icons; done && cp -R ./src/icons/ ./cdn/*/icons/ && cp -R ./src/images/ ./cdn/*/",
+    "cdn": "rm -rf ./cdn && webpack --config webpack.cdn.js && for dir in ./cdn/*/; do mkdir $dir/icons; mkdir $dir/logos; mkdir $dir/images; done && cp -R ./src/icons/. ./cdn/*/icons/ && cp -R ./src/logos/. ./cdn/*/logos/ && cp -R ./src/images/. ./cdn/*/images",
     "start": "start-storybook -p 6006",
     "lint": "eslint src/** && stylelint src/**/*.scss",
     "doc": "jsdoc -c ./jsdoc.json",

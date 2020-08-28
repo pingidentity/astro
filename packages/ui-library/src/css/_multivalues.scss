@@ -18,7 +18,7 @@
         @include input-background;
 
         position: relative;
-        z-index: $zindex__base;
+        z-index: $zindex__elevated;
         display: block;
         min-height: 36px;
         outline: none;

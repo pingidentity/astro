@@ -1,10 +1,11 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
 import classnames from "classnames";
 import uuid from "uuid";
 import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
 import * as NodeField from "./NodeField";
+import { callIfOutsideOfContainer } from "../../util/EventUtils";
 
 /**
  * @class NodeGroup
@@ -45,18 +46,31 @@ export default function NodeGroup({
     const [selectedNode, setSelected] = useState();
     const containerRef = useRef();
 
+    useEffect(() => {
+        const deselectNode = (e) => {
+            callIfOutsideOfContainer(
+                containerRef.current,
+                () => setSelected(null),
+                e
+            );
+        };
+
+        document.addEventListener("click", deselectNode);
+
+        return () => document.removeEventListener("click", deselectNode);
+    }, []);
+
     return (
         <div
             className={classnames("node-group", className)}
             ref={containerRef}
             onClick={() => setSelected(null)}
-            onMouseLeave={() => setSelected(null)}
         >
             <FlexRow
                 alignment={alignments.STRETCH}
                 data-id={dataId}
                 // Space between left-aligns a single option.
-                justify={nodeClusters.length === 1 ? justifyOptions.CENTER : justifyOptions.SPACEBETWEEN}
+                justify={nodeClusters.length === 1 ? justifyOptions.CENTER : justifyOptions.SPACEEVENLY}
             >
                 {nodeClusters.flatMap(({ label, nodes }, index) => {
                     // Generate a new key when nodes change.

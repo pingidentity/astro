@@ -38,6 +38,7 @@ const sizes = {
 const margins = {
     SM: 'small',
     XXL: 'xxlarge',
+    MD: 'medium'
 };
 
 /**
@@ -58,6 +59,7 @@ const TextBlock = ({
         'text-block--small-right': size === sizes.SMALLRIGHT,
         'text-block--margin-sm': spacing === margins.SM,
         'text-block--margin-xx': spacing === margins.XXL,
+        'text-block--margin-md': spacing === margins.MD,
         'text-block--right': alignment === alignments.RIGHT,
         'text-block--left': alignment === alignments.LEFT,
     });

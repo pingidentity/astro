@@ -16,6 +16,8 @@ import FlexRow, { alignments } from "./FlexRow";
  *    Text that will appear within the border.
  * @param {node} [children]
  *    A node that will appear in the component.
+ * @param {bool} [isFullWidth=false]
+ *   Whether or not the fieldset box takes up the full width
  * @example
  *     <FieldSet legend="IDs">
  *          <Text> Lorem Ipsum...</Text>
@@ -27,14 +29,15 @@ export default function FieldSet({
     children,
     "data-id": dataId,
     className,
+    isFullWidth
 }) {
 
     return (
         <FlexRow
-            className={classnames(className)}
+            className={className}
             alignment={alignments.CENTER}
             data-id={dataId}>
-            <fieldset className="field-set-component">
+            <fieldset className={classnames("field-set-component", { "field-set-component--full-width": isFullWidth })}>
                 {legend ? <legend>{legend}</legend> : null }
                 {children}
             </fieldset>
@@ -45,5 +48,10 @@ export default function FieldSet({
 FieldSet.propTypes = {
     legend: PropTypes.node,
     "data-id": PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    isFullWidth: PropTypes.bool
+};
+
+FieldSet.defaultProps = {
+    isFullWidth: false
 };

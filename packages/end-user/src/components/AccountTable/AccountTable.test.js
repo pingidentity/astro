@@ -28,10 +28,19 @@ describe('AccountTable', () => {
                 {
                     name: "Facebook",
                     image: <SocialLogos.FACEBOOK width={40} height={40} />,
+                    details: [
+                        "_details_",
+                        "_another details_"
+                    ]
                 },
             ]
         });
 
         expect(wrapper.find('.account-table > .account-table__row').length).toEqual(2);
+        expect(
+            wrapper
+                .find('.account-table .account-table__row-details > .account-table__row-subdetails')
+                .map(block => block.text())
+        ).toEqual(["_details_", "_another details_"]);
     });
 });

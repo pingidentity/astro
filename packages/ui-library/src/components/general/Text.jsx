@@ -12,6 +12,8 @@ export const textTypes = {
     PAGETITLE: "page-title",
     /** section-title */
     SECTIONTITLE: "section-title",
+    /** item-title */
+    ITEMTITLE: "item-title",
     /** parent-label */
     PARENTLABEL: "parent-label",
     /** body */
@@ -84,8 +86,6 @@ export const alignments = {
  * @alias Text.weights
  */
 const weights = {
-    /** default */
-    DEFAULT: "normal",
     /** normal */
     NORMAL: "normal",
     /** bold */
@@ -169,8 +169,7 @@ Text.defaultProps = {
     "data-id": "styled-text",
     disabled: false,
     overflow: overflowTypes.WRAP,
-    type: textTypes.BODY,
-    weight: weights.NORMAL,
+    type: textTypes.BODY
 };
 
 Text.textTypes = textTypes;

@@ -21,6 +21,7 @@
     &__key {
         font-weight: 600;
         padding-right: $spacing-md;
+        word-break: normal;
     }
 
     &__value {
