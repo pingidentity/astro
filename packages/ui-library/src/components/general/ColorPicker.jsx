@@ -78,7 +78,7 @@ export const simplePickerSizes = {
 *      Specifies the width of the input.
  * @param {ColorPicker~onValueChange} onValueChange
  *     Callback to be triggered when a color is chosen by passing the new color.
- * @param {simpePickerSizes} [size]
+ * @param {simplePickerSizes} [size]
 *      Specifies the size of the simple picker.
  *
  * @param {boolean} [open=false]
