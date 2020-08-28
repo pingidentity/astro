@@ -506,13 +506,20 @@ class Calendar extends React.Component {
             ? this._getFormattedDate(this._getDate(this.state.date))
             : this.state.inputValue;
 
+        const { date } = this.props;
+        // This bit of silliness is needed because the required indicator needs to not
+        // appear if a user passes in all spaces for a date prop, but we want to make sure
+        // that, if date is undefined, everything can still fall through and line 547 still
+        // works.
+        const trimmedDateProp = (date !== undefined && date !== null && date.trim) ? date.trim() : date;
+
         const className = classnames("input-calendar",
             this.props.className,
             getInputWidthClass({ width: this.props.width }),
             {
                 active: this.state.isVisible,
                 required: this.props.required,
-                "value-entered": !!inputValue.trim(),
+                "value-entered": trimmedDateProp !== "" && !!inputValue.trim(),
                 "input-calendar--width-tight": this.props.tight,
                 "form-error": this.props.errorMessage
             });
@@ -538,7 +545,9 @@ class Calendar extends React.Component {
                         data-id="calendar-input"
                         className="input-calendar-value"
                         name={this.props.name}
-                        value={this.props.date === "" ? "" : inputValue}
+                        // This is weird. Only keeping it around because it causes regressions in one
+                        // of our demos.
+                        value={trimmedDateProp === "" ? "" : inputValue}
                         onBlur={this.inputBlur}
                         onChange={this.changeDate}
                         onClick={this.inputClick}
