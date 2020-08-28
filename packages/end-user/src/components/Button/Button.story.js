@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import Button from './Button';
@@ -9,15 +9,22 @@ export default {
     decorators: [withKnobs],
 };
 
-export const Buttons = () => (
-    <div>
+
+export const Buttons = () => {
+const [loading, setLoading] = useState(false);
+   const _toggleLoadingButton = () => {
+        setLoading(!loading);
+    };
+
+    return (
+        <div>
         <Button
             type={Button.ButtonTypes.PRIMARY}
             disabled={boolean('Disabled', false)}
-            onClick={action('clicked')}
         >
             Primary Button
         </Button>
+        <br/>
         <Button
             type={Button.ButtonTypes.SECONDARY}
             disabled={boolean('Disabled', false)}
@@ -25,6 +32,7 @@ export const Buttons = () => (
         >
             Secondary Button
         </Button>
+        <br/>
         <Button
             type={Button.ButtonTypes.TERTIARY}
             disabled={boolean('Disabled', false)}
@@ -32,6 +40,7 @@ export const Buttons = () => (
         >
             Tertiary Button
         </Button>
+        <br/>
         <Button
             type={Button.ButtonTypes.DANGER}
             disabled={boolean('Disabled', false)}
@@ -39,5 +48,17 @@ export const Buttons = () => (
         >
             Danger Button
         </Button>
+        <br/>
+        <Button
+            type={Button.ButtonTypes.PRIMARY}
+            disabled={boolean('Disabled', false)}
+            loading={loading}
+            onClick={_toggleLoadingButton}
+        >
+            Loading State Button - Click Me!
+        </Button>
     </div>
-);
+    )
+};
+
+
