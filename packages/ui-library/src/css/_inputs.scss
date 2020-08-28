@@ -333,6 +333,11 @@ label {
         .password-meter {
             margin: 6px 0 0;
         }
+        &--flex-icon-left {
+            input {
+                padding: 4px 30px 3px;
+            }
+        }
     }
 
     &.input-textarea {
@@ -3325,6 +3330,10 @@ label.input-text--right-icon {
     &__reveal {
         margin-left: 25px;
     }
+
+    &__icon-left {
+        margin-left: 30px;
+    }
 }
 
 // IE-specific CSS
@@ -3339,6 +3348,10 @@ label.input-text--right-icon {
 
         &__reveal {
             margin-left: 55px;
+        }
+
+        &__icon-left {
+            margin-left: 30px;
         }
     }
 }

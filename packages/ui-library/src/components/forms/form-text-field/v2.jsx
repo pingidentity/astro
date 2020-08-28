@@ -380,6 +380,7 @@ class Stateless extends React.Component {
                 "input-text--left-icon": this.props.iconLeft,
                 "input-text--right-arrow": this.props.withArrow,
                 "input-text--nospacing": this.props.noSpacing,
+                "input-text--flex-icon-left": this.props.flexWidth && this.props.iconLeft
 
             },
         );
@@ -441,7 +442,9 @@ class Stateless extends React.Component {
                         <div className={
                             `flex-width-spacer
                             ${this.props.maskValue && "flex-width-spacer__password"}
-                            ${this.props.showReveal && "flex-width-spacer__reveal"}`
+                            ${this.props.showReveal || this.props.iconRight && "flex-width-spacer__reveal"}
+                            ${this.props.iconLeft && "flex-width-spacer__icon-left"}`
+
                         }>{this.props.value}</div>
                     )}
                     {this.props.showReveal && (
