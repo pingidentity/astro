@@ -53,8 +53,6 @@ export const pickerTypes = {
  *    Name attribute for the input.
  * @param {string} [labelText]
  *     A label to render at the top of the color picker.
- * @param {bool} [showLabel=true]
- *     Sets `visibility: visible` for the label if enabled.
  * @param {string} [label]
  *     Alias for labelText
  * @param {node} [description]
@@ -113,7 +111,6 @@ class Stateless extends React.Component {
         hintText: PropTypes.node,
         labelText: PropTypes.string,
         label: PropTypes.string,
-        showLabel: PropTypes.bool,
         color: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
         onValueChange: PropTypes.func,
@@ -133,7 +130,6 @@ class Stateless extends React.Component {
         open: false,
         disabled: false,
         cpid: Math.random(),
-        showLabel: true,
         onValueChange: _.noop,
         onMouseEnter: _.noop,
         onMouseLeave: _.noop,
@@ -277,8 +273,7 @@ class Stateless extends React.Component {
     render() {
         const classNames = css(this.props.className, "input-color-picker", {
             open: this.props.open,
-            "color-picker-error": this._errorMessage(),
-            "input-color-picker--label-visible": this.props.showLabel,
+            "color-picker-error": this._errorMessage()
         });
 
         const picker = (

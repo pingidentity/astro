@@ -694,7 +694,7 @@ button.tile-button {
 
         &-right {
             position: absolute;
-            top: $spacing-xs;
+            top: $spacing-sm;
             right: $spacing-xs;
         }
     }
@@ -1055,6 +1055,12 @@ button.tile-button--stacked-small {
 
         @media only screen and (max-width: 1000px) {
             flex-basis: 100%;
+        }
+    }
+
+    &--2-cols {
+        & > * {
+            flex-basis: calc((100% / 2) - #{$spacing-sm} * 2);
         }
     }
 }

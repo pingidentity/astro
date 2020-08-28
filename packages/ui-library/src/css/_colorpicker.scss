@@ -31,7 +31,11 @@
                 font-weight: 500;
                 width: 75px;
                 @include break-word;
-                text-align: left;
+
+                .label-container {
+                    justify-content: center;
+                    text-align: center;
+                }
             }
         }
 
@@ -94,14 +98,8 @@
     }
 
     label {
+        visibility: visible;
         display: block;
-        visibility: hidden;
-    }
-
-    &--label-visible {
-        label {
-            visibility: visible;
-        }
     }
 
     .colors-label,
