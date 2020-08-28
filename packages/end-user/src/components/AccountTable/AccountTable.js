@@ -6,7 +6,7 @@ import Modal from '../shared/Modal';
 import Button from '../Button';
 import { noop } from "underscore";
 
-const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText) => {
+const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText, canDelete) => {
     return accounts.map((account) => {
         const { image, name, unlinked, id, details = [] } = account;
         return (
@@ -37,26 +37,28 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
                         ))}
                     </div>
                 </div>
-                <div className="account-table__row-unlink">
-                    <div className="account-table__row-unlink--normal">
-                        { unlinked ? (
-                            <Button disabled inline>
-                                {unlinkAccountSuccessText}
-                            </Button>
-                        ) : (
-                            <Button onClick={unlinkAccount(account)} inline>
-                                {unlinkAccountText}
-                            </Button>
-                        )}
+                {canDelete && (
+                    <div className="account-table__row-unlink">
+                        <div className="account-table__row-unlink--normal">
+                            { unlinked ? (
+                                <Button disabled inline>
+                                    {unlinkAccountSuccessText}
+                                </Button>
+                            ) : (
+                                <Button onClick={unlinkAccount(account)} inline>
+                                    {unlinkAccountText}
+                                </Button>
+                            )}
+                        </div>
+                        <div className="account-table__row-unlink--mobile">
+                            { unlinked ? (
+                                <Button disabled inline iconName="delete" />
+                            ) : (
+                                <Button onClick={unlinkAccount(account)} inline iconName="delete"/>
+                            )}
+                        </div>
                     </div>
-                    <div className="account-table__row-unlink--mobile">
-                        { unlinked ? (
-                            <Button disabled inline iconName="delete" />
-                        ) : (
-                            <Button onClick={unlinkAccount(account)} inline iconName="delete"/>
-                        )}
-                    </div>
-                </div>
+                )}
             </FlexRow>
         );
     });
@@ -163,7 +165,7 @@ class AccountTable extends React.Component {
                         this._onUnlinkClick,
                         this.props.unlinkAccountText,
                         this.props.unlinkAccountSuccessText,
-                        this.props.showUnlinkIcon,
+                        this.props.canDelete
                     ) : (
                         <p className="normal-text centered-text">
                             {this.props.noConnectedAccountsMessage}
@@ -187,6 +189,7 @@ AccountTable.propTypes = {
     cancelText: PropTypes.string,
     unlinkAccountText: PropTypes.node,
     unlinkAccountSuccessText: PropTypes.node,
+    canDelete: PropTypes.bool,
 };
 
 AccountTable.defaultProps = {
@@ -200,6 +203,7 @@ AccountTable.defaultProps = {
     unlinkAccountText: 'Unlink Account',
     unlinkAccountSuccessText: 'Account Unlinked',
     unlinkModalConfirmText: 'Unlink',
+    canDelete: true,
 };
 
 export default AccountTable;
