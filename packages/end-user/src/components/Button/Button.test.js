@@ -6,7 +6,7 @@ window.__DEV__ = true;
 
 const defaultProps = {
     'data-id': 'test-button',
-    label: 'Test Button',
+    label: 'Test Button'
 };
 const getComponent = props => mount(<Button {...defaultProps} {...props} />);
 
@@ -49,6 +49,14 @@ describe('Button', () => {
         const button = wrapper.find(`button[data-id="${defaultProps['data-id']}"]`);
 
         expect(button.hasClass('button--tertiary')).toEqual(true);
+    });
+    it('renders the button in the loading state', () => {
+        const wrapper = getComponent({ loading: true });
+        
+        const button = wrapper.find(`button[data-id="${defaultProps['data-id']}"]`);
+        button.simulate('click');
+
+        expect(button.hasClass('loading')).toEqual(true);
     });
     it('calls the onClick', () => {
         const testCallback = jest.fn();

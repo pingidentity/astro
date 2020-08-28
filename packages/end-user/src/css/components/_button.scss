@@ -182,3 +182,126 @@
         }
     }
 }
+
+.button--loading-ellipsis {
+    $color: $color-white;
+    $size: 8px;
+    $spacing: 6px;
+    $timing: 1s ease-out infinite;
+
+    position: relative;
+    display: inline-block;
+    width: 3 * $size + 2 * $spacing;
+    height: $size;
+
+    > span,
+    &:before,
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: $size;
+        width: $size;
+        background-color: $color;
+        opacity: 0;
+
+        border-radius: ceil($size/2);
+    }
+
+    @include keyframes(pulse-1) {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        60% {
+            opacity: 0;
+        }
+    }
+
+    @include keyframes(pulse-2) {
+        0% {
+            opacity: 0;
+        }
+        20% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        80% {
+            opacity: 0;
+        }
+    }
+
+    @include keyframes(pulse-3) {
+        0% {
+            opacity: 0;
+        }
+        40% {
+            opacity: 0;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    span {
+        left: 0;
+
+        animation: pulse-1 $timing;
+    }
+    &:before {
+        left: $size + $spacing;
+
+        animation: pulse-2 $timing;
+    }
+    &:after {
+        left: 2*($size + $spacing);
+
+        animation: pulse-3 $timing;
+    }
+}
+
+.button--loading {
+    .icon-ellipsis {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+    &.loading {
+        color: transparent !important;
+        cursor: default;
+
+        .icon-ellipsis {
+            display: block;
+        }
+        &.primary {
+            &:hover {
+                background-color: $color-active-blue;
+            }
+        }
+        &:hover {
+            color: transparent;
+        }
+    }
+
+    &.primary,
+    &.success,
+    &.cancel {
+        .icon-ellipsis {
+            span,
+            &:before,
+            &:after {
+                background-color: $color-white;
+            }
+        }
+    }
+}
+
