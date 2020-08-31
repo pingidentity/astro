@@ -87,8 +87,21 @@ exports.isModifier = function (code) {
 */
 exports.isArrowKey = function (code) {
     return exports.isArrowUp(code) || exports.isArrowDown(code) ||
-        exports.isArrowLeft(code) || exports.isArrowRight(code) ||
-        exports.isHome(code) || exports.isEnd(code);
+        exports.isArrowLeft(code) || exports.isArrowRight(code)
+};
+
+/**
+* @alias module:util/KeyboardUtils.isNavigationKey
+* @desc Checks whether code is a navigation key (up/down/left/right/home/end) key code.
+*
+* @param {number} code
+*    The code to check.
+*
+* @return {boolean}
+*    Whether or not the code is a navigation key (up/down/left/right/home/end) key code.
+*/
+exports.isNavigationKey = function (code) {
+    return exports.isArrowKey(code) || exports.isHome(code) || exports.isEnd(code);
 };
 
 

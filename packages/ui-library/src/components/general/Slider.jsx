@@ -183,7 +183,7 @@ function Slider({
         return array;
     };
 
-    const endKey = (index) => {
+    const lastValueKey = (index) => {
         if (typeof points === "number") {
             const difference = max - value;
             const remainder = difference % steps;
@@ -206,7 +206,7 @@ function Slider({
         }
     };
 
-    const homeKey = (index) => {
+    const firstValueKey = (index) => {
         if (typeof points === "number") {
             const remainder = value % steps;
 
@@ -277,10 +277,10 @@ function Slider({
             onValueChange(incrementKey(index));
         } else if (isHome(keyCode)) {
             e.preventDefault();
-            onValueChange(homeKey(index));
+            onValueChange(firstValueKey(index));
         } else if (isEnd(keyCode)) {
             e.preventDefault();
-            onValueChange(endKey(index));
+            onValueChange(lastValueKey(index));
         }
     };
 
