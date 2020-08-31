@@ -53,6 +53,7 @@ const FloatLabel = ({
                 value={value}
                 onChange={handleChange}
                 className={inputClassNames}
+                data-id={`${dataId}-input`}
                 {...props}
             />
             <label className={labelClassNames} htmlFor={id}>
