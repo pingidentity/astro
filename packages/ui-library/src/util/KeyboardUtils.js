@@ -87,7 +87,7 @@ exports.isModifier = function (code) {
 */
 exports.isArrowKey = function (code) {
     return exports.isArrowUp(code) || exports.isArrowDown(code) ||
-        exports.isArrowLeft(code) || exports.isArrowRight(code)
+        exports.isArrowLeft(code) || exports.isArrowRight(code);
 };
 
 /**
