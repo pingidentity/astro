@@ -1,5 +1,5 @@
 import React from "react";
-import ColorPicker, { pickerTypes } from "../../../components/general/ColorPicker";
+import ColorPicker, { pickerTypes, simplePickerSizes } from "../../../components/general/ColorPicker";
 import InputRow from "../../../components/layout/InputRow";
 
 /**
@@ -12,6 +12,7 @@ class ColorPickerDemo extends React.Component {
         picker1color: "#fff",
         picker2color: "#000",
         picker3color: "#000",
+        picker4color: "#000",
         picker2open: false,
         errorMessage: ""
     };
@@ -29,6 +30,10 @@ class ColorPickerDemo extends React.Component {
 
     _handleChange3 = (color) => {
         this.setState({ picker3color: color });
+    };
+
+    _handleChange4 = (color) => {
+        this.setState({ picker4color: color });
     };
 
     _handleToggle = () => {
@@ -73,6 +78,16 @@ class ColorPickerDemo extends React.Component {
                         type={pickerTypes.SIMPLE}
                         onValueChange={this._handleChange3}
                         labelText="Another Color"
+                    />
+                </InputRow>
+                <InputRow>
+                    <ColorPicker
+                        data-id="color-picker4"
+                        color={this.state.picker4color}
+                        type={pickerTypes.SIMPLE}
+                        size={simplePickerSizes.SMALL}
+                        onValueChange={this._handleChange4}
+                        label="Another color"
                     />
                 </InputRow>
             </div>);
