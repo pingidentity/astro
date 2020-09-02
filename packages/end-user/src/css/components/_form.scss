@@ -13,8 +13,4 @@
     &--spacing-lg > * {
         margin-bottom: $spacing-lg;
     }
-
-    > *:last-child {
-        margin-top: $spacing-lg;
-    }
 }

@@ -62,6 +62,7 @@ export const Default = () =>
                                     <Form classname="branding-template-form">
                                         <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="username1" />
                                         <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Password" id="password1" />
+                                        <Padding top={sizes.SM} />
                                         <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
                                         <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
                                         <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
@@ -193,6 +194,7 @@ export const Default = () =>
                                     </FlexRow>
                                     <Padding top={sizes.SM} />
                                     <TextBlock>or</TextBlock>
+                                    <Padding top={sizes.SM} />
                                     <Button
                                         className="branding-template-primary-button"
                                         label="Create New Account"
