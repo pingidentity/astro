@@ -7,7 +7,7 @@ import Button from '../Button';
 import { noop } from "underscore";
 
 const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText, canDelete) => {
-    return accounts.map((account) => {
+    return accounts.map((account, index) => {
         const { image, name, unlinked, id, details = [] } = account;
         return (
             <FlexRow className="account-table__row no-mobile-break" key={id || name} alignment={alignments.CENTER}>
@@ -41,11 +41,11 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
                     <div className="account-table__row-unlink">
                         <div className="account-table__row-unlink--normal">
                             { unlinked ? (
-                                <Button disabled inline>
+                                <Button disabled inline data-id={`delete-${id || index}-button`}>
                                     {unlinkAccountSuccessText}
                                 </Button>
                             ) : (
-                                <Button onClick={unlinkAccount(account)} inline>
+                                <Button onClick={unlinkAccount(account)} inline data-id={`delete-${id || index}-button`}>
                                     {unlinkAccountText}
                                 </Button>
                             )}
