@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import FlexRow, {
     alignments,
     flexDirectionOptions,
-    spacingOptions ,
+    spacingOptions,
+    justifyOptions,
 } from "ui-library/lib/components/layout/FlexRow";
 import NavFrame, { Logo, NavLink, NavMenu, NavSearch } from "ui-library/lib/components/panels/NavFrame";
 import ContentArea from "ui-library/lib/components/layout/ContentArea";
@@ -10,6 +11,13 @@ import * as QuickActions from "ui-library/lib/components/panels/QuickActions";
 import Spacing from "ui-library/lib/components/layout/Spacing";
 import NavCard, { Title } from "ui-library/lib/components/layout/NavCard";
 import NodeGroup from "ui-library/lib/components/general/NodeGroup";
+
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import Chip, { chipTypes } from "ui-library/lib/components/layout/Chip";
+import Link from "ui-library/lib/components/general/Link";
+import Modal from "ui-library/lib/components/general/Modal";
+import Section from "ui-library/lib/components/general/Section";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 // Custom class style applied to the ContentArea component used in the demo
 // .my-custom-navframe-content {
@@ -191,6 +199,96 @@ const makeNodes = (count, idPrefix) => new Array(count).fill({
  * @desc This is a template for the redesigned Ping Fed admin screen.
  */
 export default function PingFedAdminTemplate() {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const [selected, setSelected] = useState(["idp"]);
+    const [recent, setRecent] = useState([]);
+
+    const draggableActions = QuickActions.useRecentAndSelected(
+        cb => {
+            setRecent(cb.recent);
+            setSelected(cb.selected);
+        },
+        {
+            "applications": [
+                {
+                    id: "idp",
+                    label: "IdP Connection",
+                    iconName: "pf-authentication-integration",
+                },
+                {
+                    id: "spc",
+                    label: "SP Connections",
+                    iconName: "globe",
+                },
+                {
+                    id: "sc",
+                    label: "Signing Certificates",
+                    iconName: "globe",
+                },
+                {
+                    id: "oauth",
+                    label: "OAuth Authorization Server Settings",
+                    iconName: "globe",
+                },
+                {
+                    id: "meta",
+                    label: "Metadata Settings",
+                    iconName: "globe",
+                },
+                {
+                    id: "sms",
+                    label: "SMS Provider Settings",
+                    iconName: "globe",
+                },
+                {
+                    id: "sms2",
+                    label: "SMS Provider Settings",
+                    iconName: "globe",
+                },
+            ],
+            "authentication": [
+                {
+                    id: "idp1",
+                    label: "IdP Connection",
+                    iconName: "pf-authentication-integration",
+                },
+                {
+                    id: "spc1",
+                    label: "SP Connections",
+                    iconName: "globe",
+                },
+                {
+                    id: "sc1",
+                    label: "Signing Certificates",
+                    iconName: "globe",
+                },
+                {
+                    id: "oauth1",
+                    label: "OAuth Authorization Server Settings",
+                    iconName: "globe",
+                },
+                {
+                    id: "meta1",
+                    label: "Metadata Settings",
+                    iconName: "globe",
+                },
+                {
+                    id: "sms1",
+                    label: "SMS Provider Settings",
+                    iconName: "globe",
+                },
+                {
+                    id: "sms21",
+                    label: "SMS Provider Settings",
+                    iconName: "globe",
+                },
+            ]
+        },
+        selected,
+        recent
+    );
+
     return (
         <NavFrame
             headerLeft={<Logo id="pingfed" />}
@@ -247,7 +345,7 @@ export default function PingFedAdminTemplate() {
                                     <>
                                 Shortcuts
                                         <QuickActions.EditButton
-                                            onClick={() => console.log("Edit button clicked")}
+                                            onClick={() => setModalOpen(true)}
                                         />
                                     </>
                                 }
@@ -321,7 +419,7 @@ export default function PingFedAdminTemplate() {
                         <FlexRow
                             alignment={alignments.STRETCH}
                             flexDirection={flexDirectionOptions.COLUMN}
-                            spacing={spacingOptions.SM}
+                            spacing={spacingOptions.XL}
                         >
                             <Title align="center">Cluster Node Groups</Title>
                             <NodeGroup
@@ -347,6 +445,103 @@ export default function PingFedAdminTemplate() {
                     </NavCard>
                 </FlexRow>
             </ContentArea>
+            <Modal
+                // Probably need to change the Modal to get this working; right now it shows the "x"
+                // whenever onClose gets passed in
+                className="my-custom-modal"
+                closeOnBgClick
+                expanded={modalOpen}
+                maximize
+                showHeader={false}
+            >
+                <FlexRow
+                    alignment={alignments.STRETCH}
+                    flexDirection={flexDirectionOptions.COLUMN}
+                    spacing={spacingOptions.MD}
+                >
+                    <FlexRow
+                        alignment={alignments.CENTER}
+                        justify={justifyOptions.SPACEBETWEEN}
+                    >
+                        <Text inline>
+                            Drag and Drop to customize your Shortcuts bar.
+                        </Text>
+                        <FlexRow alignment={alignments.CENTER} spacing={spacingOptions.MD}>
+                            <Link onClick={() => setModalOpen(false)}>
+                                Cancel
+                            </Link>
+                            <Button
+                                onClick={() => setModalOpen(false)}
+                                inline type={buttonTypes.PRIMARY}
+                                disabled={draggableActions.selected.length === 0 ? true : false}>
+                                Save Changes
+                            </Button>
+                        </FlexRow>
+                    </FlexRow>
+                    <FlexRow spacing={spacingOptions.LG}>
+                        <Text inline type={textTypes.SECTIONTITLE}>
+                            Shortcuts
+                        </Text>
+                        <Link onClick={() => {
+                            setRecent(selected.filter(id => id !== "idp"));
+                            setSelected(["idp"]);
+                        }}>
+                            Restore Default
+                        </Link>
+                    </FlexRow>
+                    <NavCard className="my-custom-modal-navcard">
+                        {draggableActions.selected.length === 0 && (
+                            <QuickActions.PlaceholderLabel
+                                label="You need at least 1 shortcut to save customization"
+                            />
+                        )}
+                        {draggableActions.selected.length > 0 &&
+                            <QuickActions.Section invertColors>
+                                {draggableActions.selected}
+                            </QuickActions.Section>
+                        }
+                    </NavCard>
+                    <div>
+                        <FlexRow spacing={spacingOptions.LG}>
+                            <Text inline type={textTypes.SECTIONTITLE}>
+                            Recently Used
+                            </Text>
+                            <Link onClick={() => setRecent([])}>
+                            Clear All
+                            </Link>
+                        </FlexRow>
+                        <QuickActions.Section invertColors>
+                            {draggableActions.recent}
+                        </QuickActions.Section>
+                    </div>
+                    <div>
+                        <Section
+                            title="Applications"
+                            accessories={
+                                <Chip
+                                    type={chipTypes.COUNT}
+                                >{draggableActions.applications.length}</Chip>
+                            }
+                        >
+                            <QuickActions.Section invertColors>
+                                {draggableActions.applications}
+                            </QuickActions.Section>
+                        </Section>
+                        <Section
+                            title="Authentication"
+                            accessories={
+                                <Chip
+                                    type={chipTypes.COUNT}
+                                >{draggableActions.authentication.length}</Chip>
+                            }
+                        >
+                            <QuickActions.Section invertColors>
+                                {draggableActions.authentication}
+                            </QuickActions.Section>
+                        </Section>
+                    </div>
+                </FlexRow>
+            </Modal>
         </NavFrame>
     );
 }

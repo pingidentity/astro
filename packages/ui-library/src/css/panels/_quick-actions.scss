@@ -1,12 +1,54 @@
 
 .quick-actions {
     &__action-card {
+        box-sizing: border-box;
         padding: 15px;
-        flex-basis: 115px;
+        flex-basis: 145px;
+        min-width: 145px;
         text-align: center;
+        cursor: pointer;
 
         // Needed for IE. Quick Actions will overflow container otherwise.
         max-width: 50%;
+
+        &:hover:not(.quick-actions__action-card--inactive) {
+            .quick-actions__action-icon {
+                color: $color-accent-neutral-50;
+            }
+
+            .quick-actions__action-icon--inverted {
+                color: $color-white;
+            }
+
+            .quick-actions__action-icon-base--inverted {
+                background-color: $color-accent-neutral-10;
+            }
+        }
+
+        &--inactive {
+            cursor: default;
+        }
+    }
+
+    &__draggable-card {
+        flex-basis: 145px;
+        max-width: 50%;
+
+        & .quick-actions__action-card {
+            max-width: 100%;
+        }
+    }
+
+    &__drag-placeholder {
+        height: 100px;
+        width: 100%;
+
+        background-color: $color-active-blue;
+        border: 1px solid $color-active-blue;
+        border-radius: 4px;
+        opacity: 0.5;
+
+        margin: 15px;
     }
 
     &__action-icon-base {
@@ -16,6 +58,11 @@
         border-radius: 54%;
         width: 50px;
         height: 50px;
+        position: relative;
+
+        &--inverted {
+            background-color: $color-accent-neutral-30;
+        }
     }
 
     &__action-icon {
@@ -27,15 +74,42 @@
         height: 50px;
         font-size: 20px;
 
-        &:hover {
-            color: $color-accent-neutral-50;
+        &--inverted {
+            color: $color-white;
+
+            &:after {
+                color: $color-accent-neutral-30;
+            }
+        }
+
+        &--inverted {
+            color: $color-white;
+
+            &:hover {
+                color: $color-white;
+            }
+
+            &:after {
+                color: $color-accent-neutral-30;
+            }
         }
     }
 
     //text.normal added because just label gets overwritten
 
-    &__action-label.text-normal-case-label {
+    &__action-label.text-normal-case-label:not(.quick-actions__action-label--inverted) {
         color: $color-white;
+    }
+
+    &__corner-icon {
+        background-color: $color-neutral-95;
+        border-radius: 50%;
+        color: $color-active-blue;
+        padding: 3px;
+        position: absolute;
+        font-size: 10px;
+        top: 0;
+        right: 0;
     }
 
     &__edit-button {
@@ -66,5 +140,14 @@
         border-left: 1px dashed $color-white;
         margin-top: 57px;
         margin-bottom: 10px;
+    }
+
+    &__placeholder {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+
     }
 }

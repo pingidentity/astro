@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 
 /*eslint-disable valid-jsdoc*/
 
@@ -243,6 +243,41 @@ const addFocusClass = ({ keyCode }) => {
 /* istanbul ignore next  */
 const removeFocusClass = () => document.body.classList.remove("ui-library-focus-visible");
 
+const addCountAndListeners = () => {
+    const componentCount = parseInt(document.body.dataset.uiLibComponentCount || 0, 10);
+    if (componentCount > 0) {
+        document.body.dataset.uiLibComponentCount = componentCount + 1;
+    } else {
+        document.body.dataset.uiLibComponentCount = 1;
+        document.addEventListener("keydown", addFocusClass);
+        document.addEventListener("mousedown", removeFocusClass);
+    }
+};
+
+const removeCountAndListeners = () => {
+    const componentCount = parseInt(document.body.dataset.uiLibComponentCount || 0, 10);
+
+    if (componentCount === 1) {
+        document.body.dataset.uiLibComponentCount = 0;
+        document.removeEventListener("keydown", addFocusClass);
+        document.removeEventListener("mousedown", removeFocusClass);
+        removeFocusClass();
+    } else {
+        document.body.dataset.uiLibComponentCount = componentCount - 1;
+    }
+};
+
+const useFocusOutline = () => {
+    useEffect(() => {
+        addCountAndListeners();
+        return () => {
+            removeCountAndListeners();
+        };
+    });
+};
+
+exports.useFocusOutline = useFocusOutline;
+
 /**
 * @function module:util/KeyboardUtils.withFocusOutline
 * @desc
@@ -256,27 +291,11 @@ const removeFocusClass = () => document.body.classList.remove("ui-library-focus-
 exports.withFocusOutline = WrappedComponent => class extends Component {
     static displayName = WrappedComponent.displayName || WrappedComponent.name;
     componentDidMount() {
-        const componentCount = parseInt(document.body.dataset.uiLibComponentCount || 0, 10);
-        if (componentCount > 0) {
-            document.body.dataset.uiLibComponentCount = componentCount + 1;
-        } else {
-            document.body.dataset.uiLibComponentCount = 1;
-            document.addEventListener("keydown", addFocusClass);
-            document.addEventListener("mousedown", removeFocusClass);
-        }
+        addCountAndListeners();
     }
 
     componentWillUnmount() {
-        const componentCount = parseInt(document.body.dataset.uiLibComponentCount || 0, 10);
-
-        if (componentCount === 1) {
-            document.body.dataset.uiLibComponentCount = 0;
-            document.removeEventListener("keydown", addFocusClass);
-            document.removeEventListener("mousedown", removeFocusClass);
-            removeFocusClass();
-        } else {
-            document.body.dataset.uiLibComponentCount = componentCount - 1;
-        }
+        removeCountAndListeners();
     }
 
     render() {
