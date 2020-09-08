@@ -11,4 +11,12 @@ export const getOuterContainerStyles = (height, width) => css`
     height: ${height}px;
     position: relative;
     ${width !== undefined ? `${width}px` : ''}
+
+    .mapboxgl-ctrl-top-right {
+        display: none;
+    }
+
+    .mapboxgl-canvas {
+        outline-width: 0;
+    }
 `;

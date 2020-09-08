@@ -6,13 +6,13 @@ import flatMap from 'lodash/flatMap';
 import noop from 'lodash/noop';
 import { containerStyles, getOuterContainerStyles } from './HeatMap.styles';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZG9jdG9yajg5IiwiYSI6ImNrN2F3Y2E4eTAwN3Uzbm00ems2YjhlZmgifQ.R4AOWq-qsmMs4AR7ZA1Kbw';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ3d5bmV0aHJvc2UiLCJhIjoiY2tlaXp2MmQ4MTNxZzJxbW40MGJzem0xciJ9.bZtH4xxOuRcW7MlxQ8y3MQ';
 
 export const pointsToGeoJson = (points) => {
     return ({
         // Add in a default count so that the point filters just have to worry about one variable.
         // Latitude and longitude could also be separate properties of the object.
-        features: points.map(({ id, longLat, properties: { count = 1, ...properties } }) => ({
+        features: points.map(({ id, longLat, properties: { count = 1, ...properties } = {} }) => ({
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
@@ -89,9 +89,9 @@ export const clusterClick = (map, onClusterClick) => (e) => {
 
 export const pointClick = onPointClick => e => onPointClick(e);
 
-export const updateSource = ({ getSource }, points) => {
-    if (getSource) {
-        getSource('mapData').setData(pointsToGeoJson(points));
+export const updateSource = (map, points) => {
+    if (map.getSource) {
+        map.getSource('mapData').setData(pointsToGeoJson(points));
     }
 };
 
@@ -127,6 +127,7 @@ export default function HeatMap({
     'data-id': dataId,
     height,
     maxZoom,
+    minZoom,
     onClusterClick,
     onClusterMouseEnter,
     onClusterMouseLeave,
@@ -145,9 +146,12 @@ export default function HeatMap({
 
     useEffect(() => {
         const map = new mapboxgl.Map({
+            attributionControl: false,
             center,
             container: mapContainer.current,
+            logoPosition: 'top-right',
             maxZoom,
+            minZoom,
             style: 'mapbox://styles/mapbox/streets-v11',
             zoom: startingZoom,
         });
@@ -299,6 +303,11 @@ HeatMap.propTypes = {
      * This maxes out at 22, which is also the default. 1 is the minimum.
      */
     maxZoom: zoomPropType,
+    /**
+     * The minimum zoom level of the map. Higher zoom levels mean a closer zoom.
+     * This maxes out at 22. 1 is the minimum and also the default.
+     */
+    minZoom: zoomPropType,
     /**
      * Called when a cluster of points is clicked. This is a Mapbox cluster,
      * representing more than one point of underlying data as passed in through the points prop.
