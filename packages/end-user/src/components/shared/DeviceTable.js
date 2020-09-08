@@ -41,7 +41,7 @@ const getDevices = (devices, onDelete, canDelete) => {
                 </div>
                 {canDelete && (
                     <div className="device-table__row-delete" key="delete">
-                        <Button iconName="delete" onClick={onDelete(name, id)} inline/>
+                        <Button iconName="delete" onClick={onDelete(name, id)} inline data-id={`delete-${id || index}-button`} />
                     </div>
                 )}
             </FlexRow>
