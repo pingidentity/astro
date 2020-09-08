@@ -119,3 +119,13 @@ hr {
     background-color: rgba($color-white, 0.5);
     border: none;
 }
+
+.my-custom-modal-navcard .dashboard-card__front {
+    background-color: $color-neutral-95;
+    box-shadow: none;
+    padding: 0;
+}
+
+.my-custom-modal .modal-body {
+    background-color: $color-neutral-95;
+}
