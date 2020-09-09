@@ -255,6 +255,9 @@ Node.propTypes = {
  *   The id of the node.
  * @param {string} nodes.label
  *   The label for the node.
+ * @param {number} fieldsOnHover=2
+ *   The number of fields to show in the hover tooltip when hovering over a node. For example,
+ *   passing in "3" will show the first three properties of that node.
  * @param {number} threshold=20
  *   The number of nodes at which to start breaking them into separate levels. The levels
  *   will even themselves out so that each level has an even number of nodes, although the top
@@ -265,12 +268,13 @@ Node.propTypes = {
  */
 
 export default function NodeField({
-    showAnimation,
     className,
     "data-id": dataId,
     nodes,
+    fieldsOnHover,
     onNodeClick,
     selectedNodeId,
+    showAnimation,
     threshold: baseThreshold,
     width,
 }) {
@@ -337,7 +341,7 @@ export default function NodeField({
                                 nodes={[
                                     {
                                         ...node,
-                                        values: values.slice(0, 3)
+                                        values: values.slice(0, fieldsOnHover)
                                     }
                                 ]}
 
@@ -389,6 +393,7 @@ NodeField.propTypes = {
     showAnimation: PropTypes.bool,
     className: PropTypes.string,
     "data-id": PropTypes.string,
+    fieldsOnHover: PropTypes.number,
     nodes: PropTypes.arrayOf(nodePropType),
     onNodeClick: PropTypes.func,
     threshold: PropTypes.number,
@@ -396,8 +401,9 @@ NodeField.propTypes = {
 };
 
 NodeField.defaultProps = {
-    showAnimation: false,
+    fieldOnHover: 2,
     nodes: [],
+    showAnimation: false,
     threshold: 20,
     width: 300
 };
