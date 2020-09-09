@@ -34,6 +34,9 @@ import { callIfOutsideOfContainer } from "../../util/EventUtils";
  *   The actual value.
  * @param {boolean} [nodeClusters.nodes.values.isDivider]
  *   If true, this will display a divider in the tooltip instead of a node value.
+ * @param {number} fieldsOnHover
+ *   The number of fields to show in the hover tooltip when hovering over a node. For example,
+ *   passing in "3" will show the first three properties of that node.
  */
 
 export default function NodeGroup({
@@ -41,6 +44,7 @@ export default function NodeGroup({
     clusterWidth,
     "data-id": dataId,
     nodeClusters,
+    fieldsOnHover,
     onNodeClick
 }) {
     const [selectedNode, setSelected] = useState();
@@ -93,6 +97,7 @@ export default function NodeGroup({
                                     nodes.length < 4
                                         ? nodes.map(node => ({ ...node, inSmallCluster: true }))
                                         : nodes}
+                                fieldsOnHover={fieldsOnHover}
                                 onNodeClick={(id, e, node) => {
                                     e.stopPropagation();
                                     onNodeClick(id, e, node);
@@ -126,12 +131,17 @@ export default function NodeGroup({
 }
 
 NodeGroup.propTypes = {
+    className: PropTypes.string,
+    clusterWidth: PropTypes.number,
+    "data-id": PropTypes.string,
+    fieldsOnHover: PropTypes.number,
     nodeClusters: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string,
             nodes: PropTypes.arrayOf(NodeField.nodePropType)
         })
-    )
+    ),
+    onNodeClick: PropTypes.func,
 };
 
 NodeGroup.defaultProps = {

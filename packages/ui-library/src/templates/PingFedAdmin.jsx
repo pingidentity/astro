@@ -439,6 +439,8 @@ export default function PingFedAdminTemplate() {
                                         nodes: makeNodes(15, "-third")
                                     }
                                 ]}
+                                // Controls how many nodes are shown when hovering over a small cluster
+                                fieldsOnHover={2}
                                 onNodeClick={(id, e, node) => console.log("Node clicked!", id, e, node)}
                             />
                         </FlexRow>

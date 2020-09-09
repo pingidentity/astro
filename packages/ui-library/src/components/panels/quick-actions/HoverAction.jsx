@@ -29,7 +29,7 @@ export default function HoverAction({ hoverIcon, iconName, isInactive, ...props 
 
 HoverAction.propTypes = {
     ...Action.propTypes,
-    hoverIcon: PropTypes.string.isRequired,
+    hoverIcon: PropTypes.string,
     isInactive: PropTypes.bool,
 };
 
