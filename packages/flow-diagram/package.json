@@ -1,0 +1,57 @@
+{
+    "name": "@pingux/flow-diagram",
+    "version": "0.1.0",
+    "description": "Flow Diagram library",
+    "author": "Ping UX Development Team",
+    "homepage": "",
+    "license": "UNLICENSED",
+    "directories": {
+        "lib": "lib"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+    },
+    "publishConfig": {
+        "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+    },
+    "scripts": {
+        "build": "npm-run-all build:*",
+        "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/components --out-dir lib/cjs/components",
+        "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/components --out-dir lib/components",
+        "coverage": "jest --coverage",
+        "verify": "yarn lint && yarn docs && yarn build-demo && test",
+        "coverage-ci": "yarn coverage",
+        "lint": "eslint .",
+        "start": "start-storybook -p 1339",
+        "test": "jest",
+        "test-watch": "jest --watch",
+        "docs": "gulp docs"
+    },
+    "dependencies": {
+        "@emotion/core": "^10.0.28",
+        "gojs": "^2.1.16",
+        "gojs-react": "^1.0.7",
+        "lodash": "^4.17.15",
+        "mapbox-gl": "^1.11.0",
+        "prop-types": "^15.7.2",
+        "uuid": "^7.0.3"
+    },
+    "devDependencies": {
+        "@storybook/addon-actions": "^5.3.12",
+        "@storybook/addon-docs": "^5.3.18",
+        "@storybook/addon-knobs": "^5.3.12",
+        "@storybook/addon-links": "^5.3.12",
+        "@storybook/addon-notes": "^5.3.19",
+        "@storybook/addon-storysource": "^5.3.12",
+        "@storybook/react": "^5.3.12",
+        "react-testing-library": "^8.0.1"
+    },
+    "peerDependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.13.1"
+    }
+}
