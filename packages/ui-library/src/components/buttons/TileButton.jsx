@@ -396,8 +396,11 @@ TopContent.propTypes = {
 
 export const TileGrid = ({
     children,
+    columns,
 }) => (
-    <div className="tile-button__grid">
+    <div className={classnames("tile-button__grid", {
+        "tile-button__grid--2-cols": columns === 2,
+    })}>
         {children}
     </div>
 );

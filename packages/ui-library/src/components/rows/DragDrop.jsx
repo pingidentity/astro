@@ -62,8 +62,16 @@ function handleDragEvent (callback, props, monitor, component) {
     const itemBeingDragged = monitor.getItem();
     const locationType = props.type === "column" ? isInLeftHalf : isInTopHalf;
     const offset = locationType(monitor, renderedNode, props.dragToEdge) ? 0 : 1;
+
     if (props[callback]) {
-        props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
+        props[callback](
+            props.index + offset,
+            itemBeingDragged.index,
+            props.column,
+            itemBeingDragged.column,
+            props.id,
+            itemBeingDragged.id
+        );
     }
 
     if (component.state && component.state.dropAfter !== offset) {
@@ -170,7 +178,7 @@ class DragDropBase extends React.Component {
             PropTypes.string
         ]).isRequired,
         onDrag: PropTypes.func,
-        onDrop: PropTypes.func.isRequired,
+        onDrop: PropTypes.func,
         onCancel: PropTypes.func,
 
         onDragStart: PropTypes.func,
@@ -189,10 +197,11 @@ class DragDropBase extends React.Component {
         "data-id": "drag-drop-item",
         disabled: false,
         tagName: "div",
-        onDragStart: _.noop,
-        onDrag: _.noop,
         onCancel: _.noop,
+        onDrag: _.noop,
         onDragEnd: _.noop,
+        onDragStart: _.noop,
+        onDrop: _.noop,
         dragToEdge: false
     };
 

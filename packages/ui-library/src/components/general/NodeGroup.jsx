@@ -1,10 +1,11 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
 import classnames from "classnames";
 import uuid from "uuid";
 import FlexRow, { alignments, justifyOptions } from "../layout/FlexRow";
 import * as NodeField from "./NodeField";
+import { callIfOutsideOfContainer } from "../../util/EventUtils";
 
 /**
  * @class NodeGroup
@@ -33,6 +34,9 @@ import * as NodeField from "./NodeField";
  *   The actual value.
  * @param {boolean} [nodeClusters.nodes.values.isDivider]
  *   If true, this will display a divider in the tooltip instead of a node value.
+ * @param {number} fieldsOnHover
+ *   The number of fields to show in the hover tooltip when hovering over a node. For example,
+ *   passing in "3" will show the first three properties of that node.
  */
 
 export default function NodeGroup({
@@ -40,23 +44,37 @@ export default function NodeGroup({
     clusterWidth,
     "data-id": dataId,
     nodeClusters,
+    fieldsOnHover,
     onNodeClick
 }) {
     const [selectedNode, setSelected] = useState();
     const containerRef = useRef();
+
+    useEffect(() => {
+        const deselectNode = (e) => {
+            callIfOutsideOfContainer(
+                containerRef.current,
+                () => setSelected(null),
+                e
+            );
+        };
+
+        document.addEventListener("click", deselectNode);
+
+        return () => document.removeEventListener("click", deselectNode);
+    }, []);
 
     return (
         <div
             className={classnames("node-group", className)}
             ref={containerRef}
             onClick={() => setSelected(null)}
-            onMouseLeave={() => setSelected(null)}
         >
             <FlexRow
                 alignment={alignments.STRETCH}
                 data-id={dataId}
                 // Space between left-aligns a single option.
-                justify={nodeClusters.length === 1 ? justifyOptions.CENTER : justifyOptions.SPACEBETWEEN}
+                justify={nodeClusters.length === 1 ? justifyOptions.CENTER : justifyOptions.SPACEEVENLY}
             >
                 {nodeClusters.flatMap(({ label, nodes }, index) => {
                     // Generate a new key when nodes change.
@@ -79,6 +97,7 @@ export default function NodeGroup({
                                     nodes.length < 4
                                         ? nodes.map(node => ({ ...node, inSmallCluster: true }))
                                         : nodes}
+                                fieldsOnHover={fieldsOnHover}
                                 onNodeClick={(id, e, node) => {
                                     e.stopPropagation();
                                     onNodeClick(id, e, node);
@@ -112,12 +131,17 @@ export default function NodeGroup({
 }
 
 NodeGroup.propTypes = {
+    className: PropTypes.string,
+    clusterWidth: PropTypes.number,
+    "data-id": PropTypes.string,
+    fieldsOnHover: PropTypes.number,
     nodeClusters: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string,
             nodes: PropTypes.arrayOf(NodeField.nodePropType)
         })
-    )
+    ),
+    onNodeClick: PropTypes.func,
 };
 
 NodeGroup.defaultProps = {

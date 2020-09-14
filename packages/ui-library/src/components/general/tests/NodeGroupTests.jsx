@@ -68,7 +68,6 @@ describe("NodeGroup", () => {
                 nodes: makeNodes(18, "third-")
             }
         ],
-        onNodeClick: (id, e, node) => console.log("Node clicked!", id, e, node)
     };
 
     const getComponent = props => shallow(
@@ -97,28 +96,6 @@ describe("NodeGroup", () => {
         expect(clickedField.prop("selectedNodeId")).toEqual("first-0");
     });
 
-    it("deselects on mouseLeave", () => {
-        const component = getComponent();
-        const field = component.find("NodeField").first();
-
-        expect(component.find("Tooltip").exists()).toEqual(false);
-        expect(field.prop("selectedNodeId")).toBeUndefined();
-
-        field.prop("onNodeClick")("first-one", { stopPropagation: () => {} }, makeNodes(1, "first")[0]);
-
-        const clickedField = component.find("NodeField").first();
-
-        expect(component.find("Tooltip").exists()).toEqual(true);
-        expect(clickedField.prop("selectedNodeId")).toEqual("first-0");
-
-        component.find(".node-group").simulate("mouseLeave");
-
-        const mouseLeaveField = component.find("NodeField").first();
-
-        expect(component.find("Tooltip").exists()).toEqual(false);
-        expect(mouseLeaveField.prop("selectedNodeId")).toBeUndefined();
-    });
-
     it("deselects on clicking anything other than the node outside container", () => {
         const component = getComponent();
         const field = component.find("NodeField").first();
@@ -139,6 +116,44 @@ describe("NodeGroup", () => {
 
         expect(component.find("Tooltip").exists()).toEqual(false);
         expect(mouseLeaveField.prop("selectedNodeId")).toBeUndefined();
+    });
+
+    it("deselects on clicking outside of the component", () => {
+        const addSpy = jest.spyOn(document, "addEventListener").mockImplementation(() => {});
+        const component = mount(<NodeGroup {...defaultProps} />);
+        const field = component.find("NodeField").first();
+
+        expect(component.find("Tooltip").exists()).toEqual(false);
+        expect(field.prop("selectedNodeId")).toBeUndefined();
+
+        field.prop("onNodeClick")("first-one", { stopPropagation: () => {} }, makeNodes(1, "first")[0]);
+
+        component.update();
+        const clickedField = component.find("NodeField").first();
+
+        expect(component.find("Tooltip").exists()).toEqual(true);
+        expect(clickedField.prop("selectedNodeId")).toEqual("first-0");
+
+        // Simulate a click on the body of the document.
+        addSpy.mock.calls[addSpy.mock.calls.length - 1][1]({ target: document.body });
+
+        component.update();
+
+        const mouseLeaveField = component.find("NodeField").first();
+
+        expect(component.find("Tooltip").exists()).toEqual(false);
+        expect(mouseLeaveField.prop("selectedNodeId")).toBeUndefined();
+    });
+
+    it("removes global click listener when component is unmounted", () => {
+        const removeSpy = jest.spyOn(document, "removeEventListener");
+        const component = mount(<NodeGroup {...defaultProps} />);
+
+        expect(removeSpy).not.toHaveBeenCalled();
+
+        component.unmount();
+
+        expect(removeSpy).toHaveBeenCalledTimes(1);
     });
 
     it("gives tooltip left placement for last group", () => {
@@ -284,6 +299,6 @@ describe("NodeGroup", () => {
             ]
         });
 
-        expect(component.find("ForwardRef").prop("justify")).toEqual(justifyOptions.SPACEBETWEEN);
+        expect(component.find("ForwardRef").prop("justify")).toEqual(justifyOptions.SPACEEVENLY);
     });
 });

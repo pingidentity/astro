@@ -1,5 +1,35 @@
 [
     {
+        "title": "v4.23.0",
+        "date": "09/08/20",
+        "file": "./release-notes/v4-23-0.md"
+    },
+    {
+        "title": "v4.22.0",
+        "date": "09/08/20",
+        "file": "./release-notes/v4-22-0.md"
+    },
+    {
+        "title": "v4.21.1",
+        "date": "08/26/20",
+        "file": "./release-notes/v4-21-1.md"
+    },
+    {
+        "title": "v4.21.0",
+        "date": "08/20/20",
+        "file": "./release-notes/v4-21-0.md"
+    },
+    {
+        "title": "v4.20.1",
+        "date": "08/11/20",
+        "file": "./release-notes/v4-20-1.md"
+    },
+    {
+        "title": "v4.20.0",
+        "date": "08/11/20",
+        "file": "./release-notes/v4-20-0.md"
+    },
+    {
         "title": "v4.19.0",
         "date": "08/04/20",
         "file": "./release-notes/v4-19-0.md"

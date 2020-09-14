@@ -31,7 +31,11 @@
                 font-weight: 500;
                 width: 75px;
                 @include break-word;
-                text-align: center;
+
+                .label-container {
+                    justify-content: center;
+                    text-align: center;
+                }
             }
         }
 
@@ -58,6 +62,19 @@
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                }
+            }
+
+            &--small {
+                height: 24px;
+                width: 24px;
+
+                &:hover {
+                    &:after {
+                        height: 24px;
+                        width: 24px;
+                        padding: 1px;
+                    }
                 }
             }
         }
@@ -94,14 +111,8 @@
     }
 
     label {
+        visibility: visible;
         display: block;
-        visibility: hidden;
-    }
-
-    &--label-visible {
-        label {
-            visibility: visible;
-        }
     }
 
     .colors-label,

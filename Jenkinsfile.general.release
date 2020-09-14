@@ -39,7 +39,7 @@ pipeline {
                 git add package.json
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
-                git commit -m 'End user ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                git commit -m '${params.PACKAGE}-${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
                 git tag ${env.GIT_RELEASE_TAG}

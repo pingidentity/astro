@@ -43,6 +43,10 @@ import Padding from "../../layout/Padding";
 *     An object containing the props passed to the range-selector RockerButton component
 * @param {function} [labelFormater]
 *     An optional prop with formater for tooltip label
+* @param {function} [onBarMouseOver]
+*     An optional prop with handler for bar mouse over
+* @param {function} [onBarMouseOut]
+*     An optional prop with handler for bar mouse out
 */
 
 const labelHeight = 20;
@@ -63,6 +67,8 @@ export default class HeroMultiBarChart extends Component {
         data: PropTypes.array,
         dataKeys: PropTypes.array.isRequired,
         rockerButtonProps: PropTypes.object,
+        onBarMouseOver: PropTypes.func,
+        onBarMouseOut: PropTypes.func,
     };
 
     static defaultProps = {
@@ -73,15 +79,23 @@ export default class HeroMultiBarChart extends Component {
         loading: false,
         loadingMessage: "Loading...",
         xAxisKey: "id",
+        onBarMouseOver: _.noop,
+        onBarMouseOut: _.noop,
     };
 
     state = {
         barSelected: null
     };
 
-    _handleBarMouseOver = (key, index, entry) => () => this.setState({ barSelected: { key, index, entry } });
+    _handleBarMouseOver = (key, index, entry) => () => {
+        this.props.onBarMouseOver(key, index, entry);
+        this.setState({ barSelected: { key, index, entry } });
+    }
 
-    _handleBarMouseOut = () => this.setState({ barSelected: null });
+    _handleBarMouseOut = () => {
+        this.props.onBarMouseOut();
+        this.setState({ barSelected: null });
+    }
 
     _kFormatter = (value) => Math.abs(value) > 999
         ? Math.sign(value) * ((Math.abs(value) / 1000).toFixed(1)) + "K"

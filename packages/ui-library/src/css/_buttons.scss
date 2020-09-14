@@ -688,14 +688,14 @@ button.tile-button {
 
         &-left {
             position: absolute;
-            top: $spacing-md;
-            left: $spacing-sm;
+            top: $spacing-xs;
+            left: $spacing-xs;
         }
 
         &-right {
             position: absolute;
-            top: $spacing-md;
-            right: $spacing-sm;
+            top: $spacing-sm;
+            right: $spacing-xs;
         }
     }
 
@@ -707,6 +707,7 @@ button.tile-button {
         word-break: break-word;
 
         &--square {
+            flex-grow: 1;
             margin-top: 0;
         }
     }
@@ -726,7 +727,6 @@ button.tile-button {
     }
 
     &--square {
-        align-self: flex-start;
         flex-basis: 165px;
         flex-grow: 0;
         min-height: 165px;
@@ -1039,23 +1039,28 @@ button.tile-button--stacked-small {
 .tile-button__grid {
     display: flex;
     flex-wrap: wrap;
-    margin-left: calc(#{$spacing-sm} * -1);
-    margin-right: calc(#{$spacing-sm} * -1);
 
     & > * {
-        flex: 1;
-        flex-grow: 0;
-        min-height: 300px;
-        flex-basis: calc((100% / 3) - #{$spacing-sm} * 2) !important;
+        flex-basis: calc((100% / 3) - #{$spacing-sm} * 2);
         box-sizing: border-box;
         margin: 0 $spacing-sm $spacing-md $spacing-sm;
 
+        .tile-button__content {
+            min-height: 350px;
+        }
+
         @media only screen and (max-width: 1250px) {
-            flex-basis: calc((100% / 2) - #{$spacing-sm} * 2) !important;
+            flex-basis: calc((100% / 2) - #{$spacing-sm} * 2);
         }
 
         @media only screen and (max-width: 1000px) {
-            flex-basis: 100% !important;
+            flex-basis: 100%;
+        }
+    }
+
+    &--2-cols {
+        & > * {
+            flex-basis: calc((100% / 2) - #{$spacing-sm} * 2);
         }
     }
 }

@@ -211,11 +211,11 @@ describe("DragDrop", function () {
         //simulate a drap event to same index
         DragDrop.dropSpec.hover(props, monitor, targetComponent);
 
-        expect(props.onDrag).toBeCalledWith(1, 1, undefined, undefined);
+        expect(props.onDrag).toBeCalledWith(1, 1, undefined, undefined, 1, 1);
 
         DragDrop.dropSpec.drop(props, monitor, targetComponent);
 
-        expect(props.onDrop).toBeCalledWith(1, 1, undefined, undefined);
+        expect(props.onDrop).toBeCalledWith(1, 1, undefined, undefined, 1, 1);
 
     });
 
@@ -231,7 +231,7 @@ describe("DragDrop", function () {
 
         DragDrop.dropSpec.hover(props, monitor, targetComponent);
 
-        expect(props.onDrag).toBeCalledWith(3, 1, undefined, undefined);
+        expect(props.onDrag).toBeCalledWith(3, 1, undefined, undefined, 2, 1);
     });
 
     it("Processes drag to top half of row", function () {
@@ -246,7 +246,7 @@ describe("DragDrop", function () {
 
         DragDrop.dropSpec.hover(props, monitor, targetComponent);
 
-        expect(props.onDrag).toBeCalledWith(2, 1, undefined, undefined);
+        expect(props.onDrag).toBeCalledWith(2, 1, undefined, undefined, 2, 1);
     });
 
     it("disables drag based on prop", function () {

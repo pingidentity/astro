@@ -7,7 +7,7 @@ import Button from '../Button';
 import DeviceIcon from './DeviceIcon';
 import { overflowTypes } from '../TextBlock/TextBlock';
 
-const getDevices = (devices, onDelete) => {
+const getDevices = (devices, onDelete, canDelete) => {
     return devices.map((device, index) => {
         const { name, type, typeLabel, id } = device;
         return (
@@ -39,18 +39,20 @@ const getDevices = (devices, onDelete) => {
                         </span>
                     </div>
                 </div>
-                <div className="device-table__row-delete" key="delete">
-                    <Button iconName="delete" onClick={onDelete(name, id)} inline />
-                </div>
+                {canDelete && (
+                    <div className="device-table__row-delete" key="delete">
+                        <Button iconName="delete" onClick={onDelete(name, id)} inline data-id={`delete-${id || index}-button`} />
+                    </div>
+                )}
             </FlexRow>
         );
     });
 };
 
-const DeviceTable = ({ devices, onDelete }) => {
+const DeviceTable = ({ devices, onDelete, canDelete }) => {
     return (
         <FlexRow flexDirection={flexDirectionOptions.COLUMN} className="device-table no-mobile-break">
-            {getDevices(devices, onDelete)}
+            {getDevices(devices, onDelete, canDelete)}
         </FlexRow>
     );
 };
@@ -63,11 +65,13 @@ DeviceTable.propTypes = {
         id: PropTypes.string,
     })),
     onDelete: PropTypes.func,
+    canDelete: PropTypes.bool,
 };
 
 DeviceTable.defaultProps = {
     devices: [],
     onDelete: () => { },
+    canDelete: true,
 };
 
 export default DeviceTable;

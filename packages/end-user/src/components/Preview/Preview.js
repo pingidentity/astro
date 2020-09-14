@@ -398,6 +398,7 @@ const ThemePreview = ({
                     marginLeft: 'auto',
                     marginRight: 'auto',
                     pointerEvents: interactive ? 'all' : 'none',
+                    transition: 'width 0.3s',
                 }}
                 width={device ? device.width : width}
                 height={device ? device.height : height}
