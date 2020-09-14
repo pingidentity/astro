@@ -10,7 +10,7 @@ export const containerStyles = css`
 export const getOuterContainerStyles = (height, width) => css`
     height: ${height}px;
     position: relative;
-    ${width !== undefined ? `${width}px` : ''}
+    ${width !== undefined ? `width: ${width}px;` : ''}
 
     .mapboxgl-ctrl-top-right {
         display: none;
