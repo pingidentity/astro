@@ -73,7 +73,7 @@ export default function useRecentAndSelected(onValueChange, actions, selectedIds
                         <DragDrop
                             className="quick-actions__draggable-card"
                             data-id={`draggable-action_${action.id}`}
-                            disabled={isSelectedFull}
+                            disabled={isSelected || isSelectedFull}
                             dropTarget={false}
                             id={action.id}
                             key={action.id}
@@ -89,7 +89,7 @@ export default function useRecentAndSelected(onValueChange, actions, selectedIds
                         >
                             <HoverAction
                                 {...action}
-                                isInactive={isSelected || isSelectedFull || isDragging}
+                                isInactive={isSelected || isDragging}
                                 hoverIcon="plus"
                                 onClick={!isSelected ? id => addToSelected(id, 0) : undefined}
                                 cornerIcon={isSelected ? "check" : null}
