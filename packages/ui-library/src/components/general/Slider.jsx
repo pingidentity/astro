@@ -266,21 +266,26 @@ function Slider({
         }
     };
 
+    const setPointsAndValue = (val) => {
+        setPoints(val);
+        onValueChange(val);
+    };
+
     const _handleKeyDown = (e, index) => {
         const { keyCode } = e;
 
         if (isArrowLeft(keyCode) || isArrowDown(keyCode)) {
             e.preventDefault();
-            onValueChange(decrementKey(index));
+            setPointsAndValue(decrementKey(index));
         } else if (isArrowRight(keyCode) || isArrowUp(keyCode)) {
             e.preventDefault();
-            onValueChange(incrementKey(index));
+            setPointsAndValue(incrementKey(index));
         } else if (isHome(keyCode)) {
             e.preventDefault();
-            onValueChange(firstValueKey(index));
+            setPointsAndValue(firstValueKey(index));
         } else if (isEnd(keyCode)) {
             e.preventDefault();
-            onValueChange(lastValueKey(index));
+            setPointsAndValue(lastValueKey(index));
         }
     };
 
