@@ -1,0 +1,28 @@
+.diagram-component {
+  flex: 1 1 auto;
+  border: 1px solid #ccc;
+  background: #F5F5F5;
+}
+.palette-wrapper {
+  flex: 0 0 300px;
+  border: 1px solid black;
+  padding-top: 50px;
+
+}
+
+.palette-component {
+  width: 100%;
+  height: 100%;
+}
+.wrapper {
+  display: flex;
+  height: 70%;
+
+}
+html, body, #root, #root > * {
+  height: 100%;
+}
+.overview-component {
+  height: 30%;
+  width: 400px;
+}
