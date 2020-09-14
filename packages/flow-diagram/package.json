@@ -24,7 +24,6 @@
         "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/components --out-dir lib/components",
         "coverage": "jest --coverage",
         "verify": "yarn lint && yarn docs && yarn build-demo && test",
-        "coverage-ci": "yarn coverage",
         "lint": "eslint .",
         "start": "start-storybook -p 1339",
         "test": "jest",
@@ -36,7 +35,6 @@
         "gojs": "^2.1.16",
         "gojs-react": "^1.0.7",
         "lodash": "^4.17.15",
-        "mapbox-gl": "^1.11.0",
         "prop-types": "^15.7.2",
         "uuid": "^7.0.3"
     },
