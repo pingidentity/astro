@@ -4,6 +4,17 @@ import classnames from "classnames";
 import Draggable from "react-draggable";
 import _ from "underscore";
 import { usePStateful } from "../../util/PropUtils";
+import {
+    isArrowDown,
+    isArrowLeft,
+    isArrowUp,
+    isArrowRight,
+    isEnd,
+    isHome,
+    withFocusOutline
+} from "../../util/KeyboardUtils";
+
+const DEFAULT_BACKGROUND_COLOR = "#f2f2f2";
 
 /**
  * @class Slider
@@ -11,7 +22,7 @@ import { usePStateful } from "../../util/PropUtils";
  *
  * @param {string} [data-id="slider"]
  *      To define the base "data-id" value for the top-level HTML container.
- * @param {string | array} [background]
+ * @param {string | array | function} [background]
  *      Background color of slider (single color string, array of color strings, array of objects with color and point)
  * @param {array} [backgroundVariant]
  *      Solid or gradient background
@@ -62,7 +73,12 @@ function Slider({
     };
 
     useEffect(() => {
-        setPoints(getValueArray());
+        if (typeof points === "number") {
+            setPoints(points);
+        }
+        else {
+            setPoints(getValueArray());
+        }
     }, []);
 
     const getValuePosition = (val) => {
@@ -94,54 +110,46 @@ function Slider({
         const pointValue = point - min;
         const pointPercentage = (pointValue / scale) * 100;
 
-        return `${pointPercentage}%`;
+        return pointPercentage;
     };
 
-    const getBackground = () => {
-        if (typeof background === "string") {
-            return background;
-        } else if (backgroundVariant === "gradient") {
-            const linearGradientProp = background.reduce((acc, val, index) => {
-                if (val.color) {
-                    return [...acc, `${val.color} ${getPercentageFromPoint(val.point)}`];
-                } else {
-                    return [...acc, `${val} ${(index / (background.length - 1)) * 100}%`];
+    const backgroundToCSS = (bg) => {
+        const backgroundPoints = bg.reduce((acc, val, index) => {
+            const color = typeof val === "object" ? (val.color || DEFAULT_BACKGROUND_COLOR) : val;
+            const position = val.point ? getPercentageFromPoint(val.point) : index / (bg.length - 1) * 100;
+            const stop = { color, position };
+
+            //add hard stops if solid so gradient doesn't blend
+            const hardStop = backgroundVariant === "solid"
+                ? {
+                    color: color,
+                    position: getPercentageFromPoint(acc[acc.length - 1] ? acc[acc.length - 1].position : min) //start color at previous position or min (for first one)
                 }
-            }, []);
-            const linearGradientJoined = linearGradientProp.join(", ");
-            return `linear-gradient(to right, ${linearGradientJoined})`;
-        } else if (backgroundVariant === "solid") {
-            const backgroundProp = background.reduce((acc, val, index) => {
-                if (typeof val === "object") {
-                    if (index === 0) {
-                        return [...acc,
-                            `${val.color ? val.color : "#f2f2f2"},
-                            ${val.color ? val.color : "#f2f2f2"}
-                            ${getPercentageFromPoint(val.point)}`
-                        ];
-                    } else {
-                        return [...acc,
-                            `${val.color ? val.color : "#f2f2f2"}
-                            ${getPercentageFromPoint(background[index - 1].point)}`,
-                            `${val.color ? val.color : "#f2f2f2"} ${getPercentageFromPoint(val.point)}`
-                        ];
-                    }
-                } else {if (index === 0) {
-                    return [...acc,
-                        `${val},
-                        ${val}
-                        ${((index + 1)/ background.length) * 100}%`
-                    ];
-                } else {
-                    return [...acc,
-                        `${val} ${((index)/ background.length) * 100}%`,
-                        `${val} ${((index + 1)/ background.length) * 100}%`
-                    ];
-                }
-                }
-            }, []);
-            const backgroundPropJoined = backgroundProp.join(", ");
-            return `linear-gradient(to right, ${backgroundPropJoined})`;
+                : [];
+
+            return ([
+                ...acc,
+                ...hardStop,
+                ...stop
+            ]);
+        }, []);
+
+
+        return backgroundPoints.reduce((acc, val) => {
+            return `${acc}, ${val.color} ${val.position}%`;
+        }, "linear-gradient(to right");
+
+
+    };
+
+    const getBackground = (bg, position = 0) => {
+        switch (typeof bg) {
+            case "function":
+                return getBackground(bg(position)); //send the results of the function back through
+            case "string":
+                return bg;
+            default:
+                return backgroundToCSS(bg);
         }
     };
 
@@ -163,11 +171,129 @@ function Slider({
         return stepWidth;
     };
 
+    const formArray = (inputValue, index) => {
+        const array = points.map((val, i) => {
+            if (index === i) {
+                return inputValue;
+            } else {
+                return val;
+            }
+        });
+
+        return array;
+    };
+
+    const lastValueKey = (index) => {
+        if (typeof points === "number") {
+            const difference = max - value;
+            const remainder = difference % steps;
+            const maxValue = max - remainder;
+
+            return maxValue;
+        } else if (typeof points[index + 1] === "undefined") {
+            const difference = max - points[index];
+            const remainder = difference % steps;
+            const maxValue = max - remainder;
+
+            return formArray(maxValue, index);
+        } else {
+            const difference = points[index + 1] - points[index];
+            const remainder = difference % steps;
+            const maxValue = points[index + 1] - remainder;
+            const finalValue = maxValue - steps;
+
+            return formArray(finalValue, index);
+        }
+    };
+
+    const firstValueKey = (index) => {
+        if (typeof points === "number") {
+            const remainder = value % steps;
+
+            return remainder;
+        } else if (typeof points[index - 1] === "undefined") {
+            const remainder = points[index] % steps;
+            const minValue = remainder !== 0 ? remainder + steps : remainder;
+
+            return formArray(minValue, index);
+        } else {
+            const difference = points[index] - points[index - 1];
+            const remainder = difference % steps;
+            const minValue = points[index - 1] + remainder;
+            const finalValue = minValue === points[index - 1] ? minValue + steps : minValue;
+
+            return formArray(finalValue, index);
+        }
+    };
+
+    const incrementKey = (index) => {
+        if (typeof points[index + 1] !== "undefined" && points[index] + steps >= points[index + 1]) {
+            return points;
+        } else if (points + steps > max) {
+            return points;
+        } else if (typeof points === "number") {
+            return points + steps;
+        } else {
+            const newArray = points.map((val, i) => {
+                if (index === i) {
+                    return val + steps;
+                } else {
+                    return val;
+                }
+            });
+
+            return newArray;
+        }
+    };
+
+    const decrementKey = (index) => {
+        if (typeof points[index - 1] !== "undefined" && points[index] - steps <= points[index - 1]) {
+            return points;
+        } else if (points - steps < min) {
+            return points;
+        } else if (typeof points === "number") {
+            return points - steps;
+        } else {
+            const newArray = points.map((val, i) => {
+                if (index === i) {
+                    return val - steps;
+                } else {
+                    return val;
+                }
+            });
+
+            return newArray;
+        }
+    };
+
+    const setPointsAndValue = (val) => {
+        setPoints(val);
+        onValueChange(val);
+    };
+
+    const _handleKeyDown = (e, index) => {
+        const { keyCode } = e;
+
+        if (isArrowLeft(keyCode) || isArrowDown(keyCode)) {
+            e.preventDefault();
+            setPointsAndValue(decrementKey(index));
+        } else if (isArrowRight(keyCode) || isArrowUp(keyCode)) {
+            e.preventDefault();
+            setPointsAndValue(incrementKey(index));
+        } else if (isHome(keyCode)) {
+            e.preventDefault();
+            setPointsAndValue(firstValueKey(index));
+        } else if (isEnd(keyCode)) {
+            e.preventDefault();
+            setPointsAndValue(lastValueKey(index));
+        }
+    };
+
     const sliderClassName = classnames("slider", {
         "slider--disabled": disabled
     });
 
-    const indicatorClassname = classnames("slider__indicator", {
+    const indicatorClassname = classnames("slider__indicator", "focusable-element", {
         "slider__indicator--disabled": disabled
     });
 
@@ -175,7 +301,7 @@ function Slider({
         <div className="slider__container" style={{ width: width }} data-id={dataId}>
             <div className={sliderClassName}
                 ref={sliderRef}
-                style={{ background: background ? getBackground() : "#f2f2f2" }}
+                style={{ background: getBackground(background, points) }}
             />
             {sliderWidthMinusIndicator && (
                 getValueArray().map((val, index) => {
@@ -191,7 +317,15 @@ function Slider({
                             key={index}
                             onDrag={(e, data) => getPositionValue(data, index)}
                             position={{ x: getValuePosition(val), y: 0 }}>
-                            <div className={indicatorClassname} />
+                            <div
+                                className={indicatorClassname}
+                                tabIndex={0}
+                                onKeyDown={(e) => _handleKeyDown(e, index)}
+                                role="slider"
+                                aria-valuemin={points[index - 1] ? points[index - 1] + steps : min}
+                                aria-valuemax={points[index + 1] ? points[index + 1] - steps : max}
+                                aria-valuenow={typeof points === "number" ? points : points[index]}
+                            />
                         </Draggable>
                     );
                 })
@@ -226,7 +360,9 @@ Slider.defaultProps = {
     min: 0,
     onValueChange: _.noop,
     steps: 1,
-    width: "100%"
+    width: "100%",
+    backgroundVariant: "solid",
+    background: DEFAULT_BACKGROUND_COLOR,
 };
 
-export default Slider;
+export default withFocusOutline(Slider);

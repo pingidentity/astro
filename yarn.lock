@@ -2916,7 +2916,7 @@
     regenerator-runtime "^0.13.3"
     util-deprecate "^1.0.2"
 
-"@storybook/addons@5.3.19":
+"@storybook/addons@5.3.19", "@storybook/addons@^5.3.19":
   version "5.3.19"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@storybook/addons/-/addons-5.3.19.tgz#3a7010697afd6df9a41b8c8a7351d9a06ff490a4"
   integrity sha1-OnAQaXr9bfmkG4yKc1HZoG/0kKQ=
@@ -3948,6 +3948,11 @@
     "@types/react-dom" "*"
     "@types/testing-library__dom" "*"
     pretty-format "^25.1.0"
+
+"@types/tinycolor2@^1.4.0":
+  version "1.4.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/tinycolor2/-/tinycolor2-1.4.2.tgz#721ca5c5d1a2988b4a886e35c2ffc5735b6afbdf"
+  integrity sha1-chylxdGimItKiG41wv/Fc1tq+98=
 
 "@types/uglify-js@*":
   version "3.9.2"
@@ -8608,6 +8613,15 @@ dom-serializer@0, dom-serializer@^0.2.1:
   integrity sha1-GvuB9TNxcXXUeGVd68XjMtn5u1E=
   dependencies:
     domelementtype "^2.0.1"
+    entities "^2.0.0"
+
+dom-serializer@^1.0.1:
+  version "1.0.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/dom-serializer/-/dom-serializer-1.0.1.tgz#79695eb49af3cd8abc8d93a73da382deb1ca0795"
+  integrity sha1-eWletJrzzYq8jZOnPaOC3rHKB5U=
+  dependencies:
+    domelementtype "^2.0.1"
+    domhandler "^3.0.0"
     entities "^2.0.0"
 
 dom-serializer@~0.1.0, dom-serializer@~0.1.1:
@@ -21632,10 +21646,18 @@ tiny-warning@^1.0.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
   integrity sha1-lKMNtFPfTGQ9D9VmBg1gqHXYR1Q=
 
-tinycolor2@^1.1.2, tinycolor2@^1.4.1:
+tinycolor2@^1.0.0, tinycolor2@^1.1.2, tinycolor2@^1.4.1:
   version "1.4.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
   integrity sha1-9PrTM0R7wLB9TcjpIJ2POaisd+g=
+
+tinygradient@^1.1.2:
+  version "1.1.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tinygradient/-/tinygradient-1.1.2.tgz#95bcf18fb0d5db989c8a109ead8e5da9867b4e07"
+  integrity sha1-lbzxj7DV25icihCerY5dqYZ7Tgc=
+  dependencies:
+    "@types/tinycolor2" "^1.4.0"
+    tinycolor2 "^1.0.0"
 
 tinyqueue@^2.0.3:
   version "2.0.3"
