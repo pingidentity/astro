@@ -141,7 +141,7 @@ export default function HeatMap({
     startingZoom,
     width,
 }) {
-    const mapContainer = useRef();
+    const mapContainer = useRef({});
     const mapObject = useRef({});
 
     useEffect(() => {
@@ -272,6 +272,12 @@ export default function HeatMap({
             mapObject.current.setPaintProperty('clusters', 'circleColor', getCircleColor(scoreGradient));
         }
     }, [JSON.stringify(scoreGradient)]);
+
+    useEffect(() => {
+        if (mapObject.current.resize) {
+            mapObject.current.resize();
+        }
+    }, [mapContainer.current.offsetWidth]);
 
     return (
         <div css={getOuterContainerStyles(height, width)} data-id={dataId}>
