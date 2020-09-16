@@ -6,7 +6,6 @@ export default {
     component: FlowManager,
 };
 
-
 const loginStepJSON = {
     'title': 'My first step type!',
     'description': 'This is an example step type',
@@ -63,8 +62,6 @@ function Demo() {
     ]);
     const [paletteLinkDataArray] = useState([]);
     const [linkDataArray] = useState([{ from: 0, to: 1 }]);
-    const [modelData] = useState({ canRelink: false });
-    const [selectedData] = useState(null);
     const [skipsDiagramUpdate] = useState(false);
 
     return (
@@ -72,11 +69,9 @@ function Demo() {
             <FlowManager
                 nodeDataArray={nodeDataArray}
                 linkDataArray={linkDataArray}
-                modelData={modelData}
                 skipsDiagramUpdate={skipsDiagramUpdate}
                 paletteDataArray={paletteDataArray}
                 paletteLinkDataArray={paletteLinkDataArray}
-                selectedData={selectedData}
             />
         </div>
     );
