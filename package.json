@@ -1,0 +1,55 @@
+{
+  "name": "@pingux/astro",
+  "version": "0.1.0-beta.0",
+  "description": "PingUX themeable React component library",
+  "author": "uxdev@pingidentity.com",
+  "license": "UNLICENSED",
+  "main": "index.cjs.js",
+  "module": "index.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+  },
+  "publishConfig": {
+    "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@storybook/addon-a11y": "^6.0.21",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/addons": "^6.0.21",
+    "@storybook/react": "^6.0.21",
+    "@storybook/theming": "^6.0.21",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-node-env-inline": "^0.4.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.35",
+    "@styled-system/prop-types": "^5.1.5",
+    "@styled-system/props": "^5.1.5",
+    "@styled-system/theme-get": "^5.1.2",
+    "chroma-js": "^2.1.0",
+    "emotion-normalize": "^10.1.0",
+    "emotion-theming": "^10.0.27",
+    "lodash": "^4.17.20",
+    "prop-types": "^15.7.2",
+    "styled-system": "^5.1.5"
+  }
+}
