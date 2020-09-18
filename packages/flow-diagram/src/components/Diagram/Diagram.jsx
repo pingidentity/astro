@@ -7,7 +7,7 @@ import { COLORS } from '../../utils/constants';
 import { RealtimeDragSelectingTool } from '../../RealtimeDragSelectingTool';
 
 export default function Diagram({
-    baseTemplate,
+    groupTemplates,
     linkDataArray,
     nodeDataArray,
     nodeTemplates,
@@ -92,10 +92,12 @@ export default function Diagram({
                         }),
                 });
 
-        diagram.nodeTemplate = baseTemplate();
-
         nodeTemplates.forEach(([name, template]) => {
             diagram.nodeTemplateMap.add(name, template());
+        });
+
+        groupTemplates.forEach(([name, template]) => {
+            diagram.groupTemplateMap.add(name, template());
         });
 
         diagram.nodeTemplateMap.add('Start',
@@ -180,7 +182,6 @@ export default function Diagram({
 }
 
 Diagram.propTypes = {
-    baseTemplate: PropTypes.func,
     linkDataArray: PropTypes.arrayOf(
         PropTypes.shape({
             from: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

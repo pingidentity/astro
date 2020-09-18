@@ -1,11 +1,11 @@
 import * as go from 'gojs';
-import { ReactDiagram, ReactPalette } from 'gojs-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import play from '../../img/play.svg';
 import page from '../../img/page.svg';
 import { COLORS } from '../../utils/constants';
 import Diagram from '../Diagram';
+import Palette from '../Palette';
 
 import './FlowManager.css';
 
@@ -138,18 +138,11 @@ const nodeTemplateAction = () => {
     );
 };
 
+const groupTemplate = () => {
+    const $ = go.GraphObject.make;
 
-function DiagramWrapper({
-    paletteDataArray,
-    paletteLinkDataArray,
-    nodeDataArray,
-    linkDataArray,
-    onModelChange,
-}) {
-    const initPalette = () => {
-        const $ = go.GraphObject.make;
-
-        const groupTemplate = $(go.Group, go.Panel.Auto,
+    return (
+        $(go.Group, go.Panel.Auto,
             {
                 isSubGraphExpanded: false,
                 ungroupable: true,
@@ -172,39 +165,41 @@ function DiagramWrapper({
                     },
                     new go.Binding('text').makeTwoWay()),
             ),
-        );
-
-        const myPalette =
-            $(go.Palette,
-                {
-                    layout: $(go.GridLayout,
-                    ),
-                    maxSelectionCount: 1,
-                },
-            );
-        myPalette.nodeTemplate = nodeTemplate(280);
-        myPalette.groupTemplate = groupTemplate;
+        )
+    );
+};
 
 
-        return myPalette;
-    };
-
-
+function DiagramWrapper({
+    paletteDataArray,
+    paletteLinkDataArray,
+    nodeDataArray,
+    linkDataArray,
+    onModelChange,
+}) {
     return (
         <div className="wrapper">
             <div className="palette-wrapper">
-                <ReactPalette
-                    initPalette={initPalette}
+                <Palette
+                    groupTemplates={[
+                        ['', groupTemplate],
+                    ]}
+                    nodeTemplates={[
+                        ['', () => nodeTemplate(280)],
+                    ]}
                     divClassName="palette-component"
                     nodeDataArray={paletteDataArray}
                     linkDataArray={paletteLinkDataArray}
                 />
             </div>
             <Diagram
-                baseTemplate={nodeTemplateForm}
+                groupTemplates={[
+                    ['', groupTemplate],
+                ]}
                 linkDataArray={linkDataArray}
                 nodeDataArray={nodeDataArray}
                 nodeTemplates={[
+                    ['', nodeTemplateForm],
                     ['action', nodeTemplateAction],
                 ]}
                 onModelChange={onModelChange}
