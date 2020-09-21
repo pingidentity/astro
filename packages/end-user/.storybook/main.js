@@ -1,43 +1,30 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
-	stories: ['../stories/**/*.story.js', '../src/components/**/*.story.js'],
-	addons: [
-		'@storybook/addon-actions',
-		'@storybook/addon-links',
-		'@storybook/addon-knobs/register',
-		'@storybook/addon-notes/register',
-		'@storybook/addon-docs',
-		'@whitespace/storybook-addon-html',
-		{
-			name: '@storybook/addon-storysource',
-			options: {
-				rule: {
-					include: [path.resolve(__dirname, '../src/components/**/*.story.js')],
-				},
-			},
-		},
-	],
-	webpackFinal: async (config) => {
-		config.module.rules.push({
-			test: /\.scss$/,
-			loaders: ['style-loader', 'css-loader', 'sass-loader'],
-			include: path.resolve(__dirname, '../')
-		});
+const main = require('../../../shared/storybook/v6/main');
 
-		config.plugins.push(
-			new webpack.DefinePlugin({
-				END_USER_VERSION: JSON.stringify(require('../package.json').version)
-			})
-		);
+main.addons = [
+	'@storybook/addon-actions',
+	'@storybook/addon-links',
+	'@storybook/addon-knobs/register',
+	'@storybook/addon-notes/register',
+	'@storybook/addon-docs',
+	'@whitespace/storybook-addon-html',
+];
+main.webpackFinal = async (config) => {
+	config.module.rules.push({
+		test: /\.scss$/,
+		loaders: ['style-loader', 'css-loader', 'sass-loader'],
+		include: path.resolve(__dirname, '../')
+	});
 
-		config.module.rules.push({
-			test: /\.story.js$/,
-			loaders: [require.resolve('@storybook/addon-storysource/loader')],
-			enforce: 'pre',
-		});
+	config.plugins.push(
+		new webpack.DefinePlugin({
+			END_USER_VERSION: JSON.stringify(require('../package.json').version)
+		})
+	);
 
-		return config;
-	},
+	return config;
 };
+
+module.exports = main;
