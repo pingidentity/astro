@@ -2,7 +2,6 @@ import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import start from '../../img/start.svg';
 import { COLORS } from '../../utils/constants';
 import { RealtimeDragSelectingTool } from '../../RealtimeDragSelectingTool';
 
@@ -99,26 +98,6 @@ export default function Diagram({
         groupTemplates.forEach(([name, template]) => {
             diagram.groupTemplateMap.add(name, template());
         });
-
-        diagram.nodeTemplateMap.add('Start',
-            $(go.Node, 'Auto',
-                {
-                    groupable: false,
-                    movable: false,
-                    selectable: false,
-                    deletable: false,
-                    toSpot: go.Spot.Left,
-                    fromSpot: go.Spot.Right,
-                },
-                new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
-
-                $(go.Picture, start, { width: 30, height: 30 }),
-                $(go.Panel, 'Auto',
-                    { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, cursor: 'pointer' },
-                    $(go.Shape, 'Circle',
-                        { width: 5, height: 5, fill: '#27AF14', strokeWidth: 0 }),
-                ),
-            ));
 
         diagram.groupTemplate =
             $(go.Group, 'Auto',
