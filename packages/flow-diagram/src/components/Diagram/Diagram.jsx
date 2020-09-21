@@ -182,6 +182,7 @@ export default function Diagram({
 }
 
 Diagram.propTypes = {
+    groupTemplates: PropTypes.arrayOf(PropTypes.array),
     linkDataArray: PropTypes.arrayOf(
         PropTypes.shape({
             from: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
