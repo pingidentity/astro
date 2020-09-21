@@ -1,6 +1,7 @@
 import * as go from 'gojs';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Input } from '@pingux/compass';
 import play from '../../img/play.svg';
 import page from '../../img/page.svg';
 import { COLORS } from '../../utils/constants';
@@ -8,6 +9,7 @@ import Diagram from '../Diagram';
 import Palette from '../Palette';
 
 import './FlowManager.css';
+import LeftContainer from '../LeftContainer/LeftContainer';
 
 const toNode = (fill, type = 'circle') => {
     const $ = go.GraphObject.make;
@@ -179,7 +181,10 @@ function DiagramWrapper({
 }) {
     return (
         <div className="wrapper">
-            <div className="palette-wrapper">
+            <LeftContainer
+                title={<h2 style={{ marginLeft: 15 }}>Toolbox</h2>}
+            >
+                <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
                 <Palette
                     groupTemplates={[
                         ['', groupTemplate],
@@ -191,7 +196,7 @@ function DiagramWrapper({
                     nodeDataArray={paletteDataArray}
                     linkDataArray={paletteLinkDataArray}
                 />
-            </div>
+            </LeftContainer>
             <Diagram
                 groupTemplates={[
                     ['', groupTemplate],
