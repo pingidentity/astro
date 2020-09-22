@@ -10,7 +10,6 @@ export const makeUseDefaultTheme = defaultTheme => () => {
   return useMemo(() => merge(defaultTheme, overlayTheme), [overlayTheme]);
 };
 
-
 export const placement = ({
   flexDirection,
   gap,
