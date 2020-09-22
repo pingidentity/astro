@@ -14,6 +14,9 @@
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "scripts": {
+    "coverage": "yarn test --coverage",
+    "coverage-ci": "yarn test --coverage --ci",
+    "test": "jest",
     "lint": "eslint .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -32,6 +35,8 @@
     "@storybook/theming": "^6.0.21",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-node-env-inline": "^0.4.3",
+    "jest-emotion": "^10.0.32",
+    "mutationobserver-shim": "^0.3.7",
     "react": "^16.8.6",
     "react-dom": "^16.13.1",
     "react-is": "^16.13.1"
@@ -50,6 +55,7 @@
     "emotion-theming": "^10.0.27",
     "lodash": "^4.17.20",
     "prop-types": "^15.7.2",
+    "rebass": "^4.0.7",
     "styled-system": "^5.1.5"
   }
 }
