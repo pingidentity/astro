@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import FlowManager from './FlowManager';
+import {
+    outletTemplate,
+    successNode,
+    failureNode,
+    nodeTemplateStart,
+} from './templates';
 
 export default {
     title: 'Flow Manager',
@@ -213,6 +219,12 @@ function Demo() {
     return (
         <div>
             <FlowManager
+                typeDefinitions={[
+                    ['outlet', outletTemplate('#000')],
+                    ['success', successNode],
+                    ['failure', failureNode],
+                    ['START', nodeTemplateStart],
+                ]}
                 skipsDiagramUpdate={skipsDiagramUpdate}
                 paletteDataArray={paletteDataArray}
                 paletteLinkDataArray={paletteLinkDataArray}
