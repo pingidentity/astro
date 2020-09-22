@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import Desktop from '@pingux/icons/ui-library/components/Desktop';
 import FlowManager from './FlowManager';
 import {
     outletTemplate,
     successNode,
     failureNode,
     nodeTemplateStart,
+    stepTemplate,
 } from './templates';
 
 export default {
@@ -154,6 +156,7 @@ function Demo() {
     [
         {
             id: 'user-login', // Used for internal calculations and callbacks
+            name: 'User login',
             stepId: 'userLogin',
             'type': 'LOGIN',
             'configuration': {
@@ -185,7 +188,7 @@ function Demo() {
         {
             id: 'finished',
             stepId: 'finished',
-            'type': 'END_FLOW',
+            'type': 'finished',
             'configuration': {
                 'redirect': 'https://example.com',
             },
@@ -193,7 +196,7 @@ function Demo() {
         {
             id: 'error',
             stepId: 'error',
-            'type': 'END_FLOW',
+            'type': 'error',
             'configuration': {
                 'error': {
                     'code': '{step.context.status}',
@@ -201,28 +204,31 @@ function Demo() {
                 },
             },
         },
-        {
-            id: 'registration',
-            stepId: 'registration',
-            'type': 'EXECUTE_FLOW',
-            'configuration': {
-                'flowDefinition': {
-                    'id': '1234',
-                },
-                'flowConfiguration': {
-                    'username': '{flow.steps.context.username}',
-                },
-            },
-        },
+        // {
+        //     id: 'registration',
+        //     stepId: 'registration',
+        //     'type': 'EXECUTE_FLOW',
+        //     'configuration': {
+        //         'flowDefinition': {
+        //             'id': '1234',
+        //         },
+        //         'flowConfiguration': {
+        //             'username': '{flow.steps.context.username}',
+        //         },
+        //     },
+        // },
     ];
 
     return (
         <div>
             <FlowManager
                 typeDefinitions={[
-                    ['outlet', outletTemplate('#000')],
-                    ['success', successNode],
-                    ['failure', failureNode],
+                    ['LOGIN', stepTemplate('#028CFF', <Desktop />)],
+                    ['success', outletTemplate('#0bbf01')],
+                    ['failure', outletTemplate('#ce0808')],
+                    ['not_found', outletTemplate('#000')],
+                    ['finished', successNode],
+                    ['error', failureNode],
                     ['START', nodeTemplateStart],
                 ]}
                 skipsDiagramUpdate={skipsDiagramUpdate}
