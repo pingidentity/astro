@@ -136,10 +136,12 @@ const loginStepJSON = {
 //   }
 
 function Demo() {
+    const [nodeDataArray] = useState([{ key: 0, category: 'Start', loc: '0 0' }, { key: 1, text: 'Action', category: 'action' }, { key: 2, text: 'Success', fill: '#5e6adb', category: 'outlet' }, { key: 3, category: 'success' }]);
     const [paletteDataArray] = useState([
         { ...loginStepJSON, key: 0, text: loginStepJSON.title },
     ]);
     const [paletteLinkDataArray] = useState([]);
+    const [linkDataArray] = useState([{ from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 }]);
     const [skipsDiagramUpdate] = useState(false);
 
     const stepDefinitions =

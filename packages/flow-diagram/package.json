@@ -31,8 +31,9 @@
         "docs": "gulp docs"
     },
     "dependencies": {
-        "@pingux/compass": "^0.1.0-beta.28",
         "@emotion/core": "^10.0.28",
+        "@pingux/compass": "^0.1.0-beta.28",
+        "@pingux/icons": "^0.2.0",
         "gojs": "^2.1.16",
         "gojs-react": "^1.0.7",
         "lodash": "^4.17.15",
