@@ -3,9 +3,7 @@ import * as go from 'gojs';
 import Success from '@pingux/icons/ui-library/components/Success';
 import Close from '@pingux/icons/ui-library/components/Close';
 import ReactDOMServer from 'react-dom/server';
-import page from '../../img/page.svg';
 import start from '../../img/start.svg';
-import { COLORS } from '../../utils/constants';
 
 function encodeSvg(svgString) {
     return svgString.replace('<svg', (~svgString.indexOf('xmlns') ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"'))
@@ -20,20 +18,12 @@ function encodeSvg(svgString) {
 }
 const $ = go.GraphObject.make;
 
-const toNode = (fill, type = 'circle') => {
+const toNode = (fill) => {
     return (
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
-            type === 'circle' ?
-                $(go.Shape, 'Circle',
-                    { width: 10, height: 10, fill, stroke: 'white', strokeWidth: 3 })
-                :
-                $(go.Panel, 'Spot',
-                    $(go.Shape, 'Diamond',
-                        { width: 25, height: 25, fill: 'white', stroke: fill, strokeWidth: 1 }),
-                    $(go.Shape, 'Diamond',
-                        { width: 15, height: 15, fill, stroke: 'white' }),
-                ),
+            $(go.Shape, 'Circle',
+                { width: 10, height: 10, fill, stroke: 'white', strokeWidth: 3 })
         )
 
     );
@@ -49,7 +39,7 @@ const fromNode = (fill) => {
     );
 };
 
-export const nodeTemplateForm = () => {
+export const stepTemplate = (color, svg) => () => {
     return (
         $(go.Node, 'Spot',
             { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
@@ -60,7 +50,7 @@ export const nodeTemplateForm = () => {
                     { fill: 'white', stroke: '#EBECEC', minSize: new go.Size(200, 0) },
                     new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : '#EBECEC'; }).ofObject()),
                 $(go.Panel, 'Horizontal', { padding: 15, alignment: go.Spot.Left },
-                    $(go.Picture, page, { width: 20, height: 20 }),
+                    $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(svg, { fill: color })))}`, width: 20, height: 20 }),
                     $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 0, 10) },
                         $(go.TextBlock,
                             {
@@ -73,12 +63,12 @@ export const nodeTemplateForm = () => {
                                 stroke: 'black', font: '500 12px sans-serif', alignment: go.Spot.Left, editable: false,
 
                             },
-                            new go.Binding('text').makeTwoWay()),
+                            new go.Binding('text', 'stepId').makeTwoWay()),
                     ),
                 ),
             ),
-            fromNode(COLORS.BLUE),
-            toNode(COLORS.BLUE),
+            fromNode(color),
+            toNode(color),
         )
     );
 };

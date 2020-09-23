@@ -2,12 +2,13 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 import { Input } from '@pingux/compass';
+import Details from '@pingux/icons/ui-library/components/Details';
 import Diagram from '../Diagram';
 import Palette from '../Palette';
 import {
     nodeTemplate,
     groupTemplate,
-    nodeTemplateForm,
+    stepTemplate,
 } from './templates';
 
 import './FlowManager.css';
@@ -140,7 +141,7 @@ function DiagramWrapper({
                 linkDataArray={[...links, ...triggerLinks]}
                 nodeDataArray={[...steps, ...triggerNodes]}
                 nodeTemplates={[
-                    ['', nodeTemplateForm],
+                    ['', stepTemplate('#028CFF', <Details />)],
                     ...typeDefinitions]}
                 onModelChange={onModelChange}
             />
