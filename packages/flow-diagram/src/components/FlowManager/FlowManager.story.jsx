@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Desktop from '@pingux/icons/ui-library/components/Desktop';
+import { Desktop } from '@pingux/icons';
 import FlowManager from './FlowManager';
 import {
     outletTemplate,
@@ -171,7 +171,7 @@ function Demo() {
             'outlets': [{
                 'name': 'On Success',
                 'type': 'success',
-                'next': 'finished',
+                'next': 'registration',
             },
             {
                 'name': 'On Failure',
@@ -181,7 +181,7 @@ function Demo() {
             {
                 'name': 'no such user',
                 'type': 'not_found',
-                'next': 'registration',
+                'next': 'error',
             },
             ],
         },
@@ -204,19 +204,35 @@ function Demo() {
                 },
             },
         },
-        // {
-        //     id: 'registration',
-        //     stepId: 'registration',
-        //     'type': 'EXECUTE_FLOW',
-        //     'configuration': {
-        //         'flowDefinition': {
-        //             'id': '1234',
-        //         },
-        //         'flowConfiguration': {
-        //             'username': '{flow.steps.context.username}',
-        //         },
-        //     },
-        // },
+        {
+            id: 'registration',
+            stepId: 'registration',
+            'type': 'EXECUTE_FLOW',
+            'configuration': {
+                'flowDefinition': {
+                    'id': '1234',
+                },
+                'flowConfiguration': {
+                    'username': '{flow.steps.context.username}',
+                },
+            },
+            'outlets': [{
+                'name': 'On Success',
+                'type': 'success',
+                'next': 'registration',
+            },
+            {
+                'name': 'On Failure',
+                'type': 'failure',
+                'next': 'error',
+            },
+            {
+                'name': 'no such user',
+                'type': 'not_found',
+                'next': 'error',
+            },
+            ],
+        },
     ];
 
     return (

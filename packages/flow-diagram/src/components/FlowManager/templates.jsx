@@ -1,7 +1,6 @@
 import React from 'react';
 import * as go from 'gojs';
-import Success from '@pingux/icons/ui-library/components/Success';
-import Close from '@pingux/icons/ui-library/components/Close';
+import { Success, Close } from '@pingux/icons';
 import ReactDOMServer from 'react-dom/server';
 import start from '../../img/start.svg';
 

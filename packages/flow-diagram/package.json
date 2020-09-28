@@ -5,6 +5,8 @@
     "author": "Ping UX Development Team",
     "homepage": "",
     "license": "UNLICENSED",
+    "main": "lib/cjs/index.js",
+    "module": "lib/ndex.js",
     "directories": {
         "lib": "lib"
     },
@@ -19,13 +21,15 @@
         "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
     },
     "scripts": {
-        "build": "npm-run-all build:*",
-        "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/components --out-dir lib/cjs/components",
-        "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/components --out-dir lib/components",
+        "build": "rm -rf lib && npm-run-all build:*",
+        "build:icons": "cd ../icons && yarn build",
+        "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
+        "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/ --out-dir lib/",
         "coverage": "jest --coverage",
+        "demo": "rm -rf ./upload && yarn build:icons && build-storybook -o upload",
         "verify": "yarn lint && yarn docs && yarn build-demo && test",
         "lint": "eslint .",
-        "start": "start-storybook -p 1339",
+        "start": "yarn build:icons && start-storybook -p 1339",
         "test": "jest",
         "test-watch": "jest --watch",
         "docs": "gulp docs"
