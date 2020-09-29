@@ -1,7 +1,8 @@
 import spacing from './spacing';
 import colors, { accent, brand, neutral, line, shadow } from './colors';
-import { fontSizes } from './text';
+import { fontSizes, fontWeights, textColors } from './text';
 import breakpoints from './breakpoints';
+import { text, variants } from './variants/text';
 
 export default {
   space: spacing,
@@ -20,6 +21,7 @@ export default {
     standard: '"Helvetica Neue", Helvetica, sans-serif',
   },
   fontSizes,
+  fontWeights,
   sizes: {
     buttonHeight: 36,
     column: 400,
@@ -28,4 +30,7 @@ export default {
     standard: `0 1px 6px ${shadow}`,
     row: `0 0 9px ${accent[95]}`,
   },
+  text,
+  textColors,
+  variants,
 };
