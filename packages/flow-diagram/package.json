@@ -22,7 +22,7 @@
     },
     "scripts": {
         "build": "rm -rf lib && npm-run-all build:*",
-        "build:icons": "cd ../icons && yarn build",
+
         "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
         "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/ --out-dir lib/",
         "coverage": "jest --coverage",
