@@ -14,7 +14,7 @@ export const fontSizes = {
   'xx': getFontSize(3),
 };
 
-const weights = {
+export const fontWeights = {
   [-1]: 300,
   0: 400,
   1: 500,
@@ -31,22 +31,3 @@ export const textColors = {
   active,
 };
 
-export const allCapsStyle = ({ isAllCaps }) => (
-  isAllCaps ? `
-        text-transform: uppercase;
-        letter-spacing: 0.03ch;
-    ` : '');
-
-export const textProps = ({
-  size = 'md',
-  weight = 0,
-  color,
-  isAllCaps,
-} = {}) => ({
-  color: `text.${color}`,
-  fontFamily: 'standard',
-  fontSize: size,
-  lineHeight: '1.4em',
-  fontWeight: weights[weight],
-  isAllCaps,
-});
