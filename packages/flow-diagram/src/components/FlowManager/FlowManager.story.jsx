@@ -171,7 +171,7 @@ function Demo() {
             'outlets': [{
                 'name': 'On Success',
                 'type': 'success',
-                'next': 'registration',
+                'next': 'finished',
             },
             {
                 'name': 'On Failure',
@@ -181,7 +181,7 @@ function Demo() {
             {
                 'name': 'no such user',
                 'type': 'not_found',
-                'next': 'error',
+                'next': 'registration',
             },
             ],
         },
@@ -216,22 +216,6 @@ function Demo() {
                     'username': '{flow.steps.context.username}',
                 },
             },
-            'outlets': [{
-                'name': 'On Success',
-                'type': 'success',
-                'next': 'registration',
-            },
-            {
-                'name': 'On Failure',
-                'type': 'failure',
-                'next': 'error',
-            },
-            {
-                'name': 'no such user',
-                'type': 'not_found',
-                'next': 'error',
-            },
-            ],
         },
     ];
 

@@ -3659,18 +3659,18 @@
     "@svgr/babel-plugin-transform-react-native-svg" "^5.4.0"
     "@svgr/babel-plugin-transform-svg-component" "^5.4.0"
 
-"@svgr/cli@^5.3.1":
-  version "5.4.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/cli/-/cli-5.4.0.tgz#6eb153ff460a67f82fb833959d38e59749c38188"
-  integrity sha1-brFT/0YKZ/gvuDOVnTjll0nDgYg=
+"@svgr/cli@5.3.1":
+  version "5.3.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/cli/-/cli-5.3.1.tgz#3762b4db805eb2dfcb396abff084c770fb2619d9"
+  integrity sha1-N2K024Best/LOWq/8ITHcPsmGdk=
   dependencies:
-    "@svgr/core" "^5.4.0"
-    "@svgr/plugin-jsx" "^5.4.0"
-    "@svgr/plugin-prettier" "^5.4.0"
-    "@svgr/plugin-svgo" "^5.4.0"
-    camelcase "^6.0.0"
+    "@svgr/core" "^5.3.1"
+    "@svgr/plugin-jsx" "^5.3.1"
+    "@svgr/plugin-prettier" "^5.3.1"
+    "@svgr/plugin-svgo" "^5.3.0"
+    camelcase "^5.3.1"
     chalk "^4.0.0"
-    commander "^5.1.0"
+    commander "^5.0.0"
     dashify "^2.0.0"
     glob "^7.1.4"
     output-file-sync "^2.0.1"
@@ -3684,7 +3684,7 @@
     camelcase "^5.3.1"
     cosmiconfig "^5.2.1"
 
-"@svgr/core@^5.4.0":
+"@svgr/core@^5.3.1":
   version "5.4.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/core/-/core-5.4.0.tgz#655378ee43679eb94fee3d4e1976e38252dff8e7"
   integrity sha1-ZVN47kNnnrlP7j1OGXbjglLf+Oc=
@@ -3717,7 +3717,7 @@
     "@svgr/hast-util-to-babel-ast" "^4.3.2"
     svg-parser "^2.0.0"
 
-"@svgr/plugin-jsx@^5.4.0":
+"@svgr/plugin-jsx@^5.3.1", "@svgr/plugin-jsx@^5.4.0":
   version "5.4.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/plugin-jsx/-/plugin-jsx-5.4.0.tgz#ab47504c55615833c6db70fca2d7e489f509787c"
   integrity sha1-q0dQTFVhWDPG23D8otfkifUJeHw=
@@ -3727,7 +3727,7 @@
     "@svgr/hast-util-to-babel-ast" "^5.4.0"
     svg-parser "^2.0.2"
 
-"@svgr/plugin-prettier@^5.4.0":
+"@svgr/plugin-prettier@^5.3.1":
   version "5.4.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/plugin-prettier/-/plugin-prettier-5.4.0.tgz#64039e118e3cc026e7754e943f3d044d81611561"
   integrity sha1-ZAOeEY48wCbndU6UPz0ETYFhFWE=
@@ -3744,7 +3744,7 @@
     merge-deep "^3.0.2"
     svgo "^1.2.2"
 
-"@svgr/plugin-svgo@^5.4.0":
+"@svgr/plugin-svgo@^5.3.0":
   version "5.4.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/plugin-svgo/-/plugin-svgo-5.4.0.tgz#45d9800b7099a6f7b4d85ebac89ab9abe8592f64"
   integrity sha1-RdmAC3CZpve02F66yJq5q+hZL2Q=
@@ -7221,7 +7221,7 @@ commander@^4.0.1, commander@^4.1.1:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
   integrity sha1-n9YCvZNilOnp70aj9NaWQESxgGg=
 
-commander@^5.1.0:
+commander@^5.0.0:
   version "5.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha1-Rqu9FlL44Fm92u+Zu9yyrZzxea4=

@@ -26,10 +26,10 @@
         "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
         "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/ --out-dir lib/",
         "coverage": "jest --coverage",
-        "demo": "rm -rf ./upload && yarn build:icons && build-storybook -o upload",
+        "demo": "rm -rf ./upload && build-storybook -o upload",
         "verify": "yarn lint && yarn docs && yarn build-demo && test",
         "lint": "eslint .",
-        "start": "yarn build:icons && start-storybook -p 1339",
+        "start": "start-storybook -p 1339",
         "test": "jest",
         "test-watch": "jest --watch",
         "docs": "gulp docs"
