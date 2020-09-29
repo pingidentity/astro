@@ -1,6 +1,6 @@
 {
     "name": "@pingux/flow-diagram",
-    "version": "0.1.0",
+    "version": "0.1.1-0",
     "description": "Flow Diagram library",
     "author": "Ping UX Development Team",
     "homepage": "",
@@ -22,7 +22,6 @@
     },
     "scripts": {
         "build": "rm -rf lib && npm-run-all build:*",
-
         "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
         "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/ --out-dir lib/",
         "coverage": "jest --coverage",
