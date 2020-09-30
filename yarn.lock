@@ -2495,6 +2495,102 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@react-aria/button@^3.2.1":
+  version "3.2.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/button/-/button-3.2.1.tgz#d1c65ddbd47a7a7349321a72f013b98034812a40"
+  integrity sha1-0cZd29R6enNJMhpy8BO5gDSBKkA=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.2.0"
+    "@react-aria/i18n" "^3.1.0"
+    "@react-aria/interactions" "^3.2.0"
+    "@react-aria/utils" "^3.2.0"
+    "@react-stately/toggle" "^3.2.0"
+    "@react-types/button" "^3.2.0"
+
+"@react-aria/focus@^3.2.0", "@react-aria/focus@^3.2.1":
+  version "3.2.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/focus/-/focus-3.2.1.tgz#c51c91472737468a0633e34aaa76459f6df1aa8a"
+  integrity sha1-xRyRRyc3RooGM+NKqnZFn23xqoo=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.2.0"
+    "@react-aria/utils" "^3.2.1"
+    "@react-types/shared" "^3.2.0"
+    clsx "^1.1.1"
+
+"@react-aria/i18n@^3.1.0":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/i18n/-/i18n-3.1.1.tgz#f92d9d2577ed4d7993b6ac3553b7c9da8dcdfa73"
+  integrity sha1-+S2dJXftTXmTtqw1U7fJ2o3N+nM=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/ssr" "^3.0.0"
+    "@react-types/shared" "^3.1.0"
+    intl-messageformat "^2.2.0"
+
+"@react-aria/interactions@^3.2.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/interactions/-/interactions-3.2.0.tgz#43d28489f8e1ec333127221ed1a2a7c92783dd01"
+  integrity sha1-Q9KEifjh7DMxJyIe0aKnySeD3QE=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/utils" "^3.2.0"
+    "@react-types/shared" "^3.2.0"
+
+"@react-aria/ssr@^3.0.0":
+  version "3.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/ssr/-/ssr-3.0.0.tgz#6e31ac63f2ee3f6b706ef6ffc72858114b19c2ca"
+  integrity sha1-bjGsY/LuP2twbvb/xyhYEUsZwso=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
+"@react-aria/utils@^3.2.0", "@react-aria/utils@^3.2.1":
+  version "3.2.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.2.1.tgz#9242308ee9f1106a6bd9cb3af8702bf6528d110a"
+  integrity sha1-kkIwjunxEGpr2cs6+HAr9lKNEQo=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/ssr" "^3.0.0"
+    "@react-types/shared" "^3.2.0"
+    clsx "^1.1.1"
+
+"@react-stately/toggle@^3.2.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/toggle/-/toggle-3.2.0.tgz#35a9edcd1c47bfb9d2744d9fb08cfd6d7cb14b9b"
+  integrity sha1-NantzRxHv7nSdE2fsIz9bXyxS5s=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.1.0"
+    "@react-types/checkbox" "^3.1.0"
+    "@react-types/shared" "^3.2.0"
+
+"@react-stately/utils@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/utils/-/utils-3.1.0.tgz#16cade0ec299241e261f6b9cca81a15e2eada23c"
+  integrity sha1-FsreDsKZJB4mH2ucyoGhXi6tojw=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
+"@react-types/button@^3.2.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/button/-/button-3.2.0.tgz#797d9fd00b4b3d8066d38833b80cce2298e554c3"
+  integrity sha1-eX2f0AtLPYBm04gzuAzOIpjlVMM=
+  dependencies:
+    "@react-types/shared" "^3.2.0"
+
+"@react-types/checkbox@^3.1.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/checkbox/-/checkbox-3.2.0.tgz#a77dd9378449760494ce7cf56492aa61b6357bc3"
+  integrity sha1-p33ZN4RJdgSUznz1ZJKqYbY1e8M=
+  dependencies:
+    "@react-types/shared" "^3.1.0"
+
+"@react-types/shared@^3.1.0", "@react-types/shared@^3.2.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.2.0.tgz#531c320e6b8f01f614336c14cee50ecf9fca4a4d"
+  integrity sha1-UxwyDmuPAfYUM2wUzuUOz5/KSk0=
+
 "@rebass/forms@^4.0.6":
   version "4.0.6"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@rebass/forms/-/forms-4.0.6.tgz#19a3af64f855baa65dec65aecadda5cd95a09dd7"
@@ -7387,6 +7483,11 @@ cloneable-readable@^1.0.0:
     inherits "^2.0.1"
     process-nextick-args "^2.0.0"
     readable-stream "^2.3.5"
+
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha1-mLMTT5q73yOyZjSRrOE8XAOnMYg=
 
 co@^4.6.0:
   version "4.6.0"
@@ -12737,6 +12838,18 @@ interpret@^2.0.0:
   version "2.2.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/interpret/-/interpret-2.2.0.tgz#1a78a0b5965c40a5416d007ad6f50ad27c417df9"
   integrity sha1-GnigtZZcQKVBbQB61vUK0nxBffk=
+
+intl-messageformat-parser@1.4.0:
+  version "1.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/intl-messageformat-parser/-/intl-messageformat-parser-1.4.0.tgz#b43d45a97468cadbe44331d74bb1e8dea44fc075"
+  integrity sha1-tD1FqXRoytvkQzHXS7Ho3qRPwHU=
+
+intl-messageformat@^2.2.0:
+  version "2.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/intl-messageformat/-/intl-messageformat-2.2.0.tgz#345bcd46de630b7683330c2e52177ff5eab484fc"
+  integrity sha1-NFvNRt5jC3aDMwwuUhd/9eq0hPw=
+  dependencies:
+    intl-messageformat-parser "1.4.0"
 
 invariant@^2.0.0, invariant@^2.1.0, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
   version "2.2.4"
