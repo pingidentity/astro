@@ -1,9 +1,9 @@
 import spacing from './spacing';
-import colors, { accent, brand, neutral, line, shadow } from './colors';
+import colors, { accent, brand, neutral, line, shadow, focus } from './colors';
 import { fontSizes, fontWeights, textColors } from './text';
 import breakpoints from './breakpoints';
 import forms from './forms';
-import variants, { text } from './variants';
+import variants, { buttons, text } from './variants';
 
 export default {
   space: spacing,
@@ -30,7 +30,9 @@ export default {
   shadows: {
     standard: `0 1px 6px ${shadow}`,
     row: `0 0 9px ${accent[95]}`,
+    focus: `0 0 5px ${focus}`,
   },
+  buttons,
   forms,
   text,
   textColors,
