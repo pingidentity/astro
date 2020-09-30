@@ -2538,6 +2538,16 @@
     "@react-aria/utils" "^3.2.0"
     "@react-types/shared" "^3.2.0"
 
+"@react-aria/label@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/label/-/label-3.1.0.tgz#ca9acd8e338cd37e52d4b85f84daeb2e5c49f47f"
+  integrity sha1-yprNjjOM035S1LhfhNrrLlxJ9H8=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/utils" "^3.1.0"
+    "@react-types/label" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
+
 "@react-aria/ssr@^3.0.0":
   version "3.0.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/ssr/-/ssr-3.0.0.tgz#6e31ac63f2ee3f6b706ef6ffc72858114b19c2ca"
@@ -2545,7 +2555,7 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@react-aria/utils@^3.2.0", "@react-aria/utils@^3.2.1":
+"@react-aria/utils@^3.1.0", "@react-aria/utils@^3.2.0", "@react-aria/utils@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.2.1.tgz#9242308ee9f1106a6bd9cb3af8702bf6528d110a"
   integrity sha1-kkIwjunxEGpr2cs6+HAr9lKNEQo=
@@ -2585,6 +2595,13 @@
   integrity sha1-p33ZN4RJdgSUznz1ZJKqYbY1e8M=
   dependencies:
     "@react-types/shared" "^3.1.0"
+
+"@react-types/label@^3.1.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/label/-/label-3.2.0.tgz#b0829792b8d74aa3d5b2bc21ae68c53e4e1f1728"
+  integrity sha1-sIKXkrjXSqPVsrwhrmjFPk4fFyg=
+  dependencies:
+    "@react-types/shared" "^3.2.0"
 
 "@react-types/shared@^3.1.0", "@react-types/shared@^3.2.0":
   version "3.2.0"
