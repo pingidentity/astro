@@ -2495,6 +2495,13 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@rebass/forms@^4.0.6":
+  version "4.0.6"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@rebass/forms/-/forms-4.0.6.tgz#19a3af64f855baa65dec65aecadda5cd95a09dd7"
+  integrity sha1-GaOvZPhVuqZd7GWuyt2lzZWgndc=
+  dependencies:
+    reflexbox "^4.0.6"
+
 "@storybook/addon-a11y@^6.0.21":
   version "6.0.21"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@storybook/addon-a11y/-/addon-a11y-6.0.21.tgz#8685ac4c52f676e2428c8ade1c1bafcd5644dd65"
