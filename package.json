@@ -50,6 +50,9 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.35",
+    "@react-aria/button": "^3.2.1",
+    "@react-aria/focus": "^3.2.1",
+    "@react-aria/utils": "^3.2.1",
     "@rebass/forms": "^4.0.6",
     "@styled-system/prop-types": "^5.1.5",
     "@styled-system/props": "^5.1.5",
