@@ -15,6 +15,8 @@ const Field = forwardRef((props, ref) => {
     labelProps,
     controlProps,
     render,
+    afterContent,
+    hasWrappedLabel,
     ...others
   } = props;
   const {
@@ -22,10 +24,23 @@ const Field = forwardRef((props, ref) => {
     fieldProps: raFieldProps,
   } = useLabel({ ...props, ...controlProps });
 
+  if (hasWrappedLabel) {
+    return (
+      <Box ref={ref} {...others}>
+        <Label {...mergeProps(labelProps, raLabelProps)}>
+          {render(raFieldProps)}
+          {label}
+        </Label>
+        {afterContent}
+      </Box>
+    );
+  }
+
   return (
     <Box ref={ref} {...others}>
       <Label {...mergeProps(labelProps, raLabelProps)}>{label}</Label>
       {render(raFieldProps)}
+      {afterContent}
     </Box>
   );
 });
@@ -33,16 +48,20 @@ const Field = forwardRef((props, ref) => {
 Field.propTypes = {
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
-  /** The content to display as the label */
+  /** The content to display as the label. */
   label: PropTypes.node.isRequired,
-  /** The props passed along to the label */
+  /** The props passed along to the label. */
   labelProps: PropTypes.shape({}),
-  /** The props passed along to the control */
+  /** The props passed along to the control. */
   controlProps: PropTypes.shape({
     id: PropTypes.string,
   }),
-  /** Render prop function to handle displaying the associated control for the label */
+  /** Render prop function to handle displaying the associated control for the label. */
   render: PropTypes.func.isRequired,
+  /** Content to render after the control. */
+  afterContent: PropTypes.node,
+  /** Whether the control is wrapped in the label or is separately linked. */
+  hasWrappedLabel: PropTypes.bool,
 };
 
 Field.defaultProps = {

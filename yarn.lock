@@ -2519,7 +2519,7 @@
     "@react-types/shared" "^3.2.0"
     clsx "^1.1.1"
 
-"@react-aria/i18n@^3.1.0":
+"@react-aria/i18n@^3.1.0", "@react-aria/i18n@^3.1.1":
   version "3.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/i18n/-/i18n-3.1.1.tgz#f92d9d2577ed4d7993b6ac3553b7c9da8dcdfa73"
   integrity sha1-+S2dJXftTXmTtqw1U7fJ2o3N+nM=
@@ -2529,7 +2529,7 @@
     "@react-types/shared" "^3.1.0"
     intl-messageformat "^2.2.0"
 
-"@react-aria/interactions@^3.2.0":
+"@react-aria/interactions@^3.1.0", "@react-aria/interactions@^3.2.0":
   version "3.2.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/interactions/-/interactions-3.2.0.tgz#43d28489f8e1ec333127221ed1a2a7c92783dd01"
   integrity sha1-Q9KEifjh7DMxJyIe0aKnySeD3QE=
@@ -2548,6 +2548,20 @@
     "@react-types/label" "^3.1.0"
     "@react-types/shared" "^3.1.0"
 
+"@react-aria/radio@^3.1.1":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/radio/-/radio-3.1.1.tgz#48898c605fb275bf3be555bbe4cc2bcd3b0aa29e"
+  integrity sha1-SImMYF+ydb875VW75MwrzTsKop4=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.2.1"
+    "@react-aria/i18n" "^3.1.1"
+    "@react-aria/interactions" "^3.1.0"
+    "@react-aria/label" "^3.1.0"
+    "@react-aria/utils" "^3.2.1"
+    "@react-stately/radio" "^3.2.0"
+    "@react-types/radio" "^3.1.0"
+
 "@react-aria/ssr@^3.0.0":
   version "3.0.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/ssr/-/ssr-3.0.0.tgz#6e31ac63f2ee3f6b706ef6ffc72858114b19c2ca"
@@ -2564,6 +2578,15 @@
     "@react-aria/ssr" "^3.0.0"
     "@react-types/shared" "^3.2.0"
     clsx "^1.1.1"
+
+"@react-stately/radio@^3.2.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/radio/-/radio-3.2.0.tgz#e4b6746d2ceecf5d51399d7226740420417b1483"
+  integrity sha1-5LZ0bSzuz11ROZ1yJnQEIEF7FIM=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.1.0"
+    "@react-types/radio" "^3.1.0"
 
 "@react-stately/toggle@^3.2.0":
   version "3.2.0"
@@ -2602,6 +2625,13 @@
   integrity sha1-sIKXkrjXSqPVsrwhrmjFPk4fFyg=
   dependencies:
     "@react-types/shared" "^3.2.0"
+
+"@react-types/radio@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/radio/-/radio-3.1.0.tgz#9871aedacc398b9d3a68b203ee4212467a8d8ed5"
+  integrity sha1-mHGu2sw5i506aLID7kISRnqNjtU=
+  dependencies:
+    "@react-types/shared" "^3.1.0"
 
 "@react-types/shared@^3.1.0", "@react-types/shared@^3.2.0":
   version "3.2.0"
@@ -4079,6 +4109,19 @@
     aria-query "^4.0.2"
     dom-accessibility-api "^0.4.4"
     pretty-format "^25.5.0"
+
+"@testing-library/dom@^7.24.3":
+  version "7.24.3"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@testing-library/dom/-/dom-7.24.3.tgz#dae3071463cf28dc7755b43d9cf2202e34cbb85d"
+  integrity sha1-2uMHFGPPKNx3VbQ9nPIgLjTLuF0=
+  dependencies:
+    "@babel/code-frame" "^7.10.4"
+    "@babel/runtime" "^7.10.3"
+    "@types/aria-query" "^4.2.0"
+    aria-query "^4.2.2"
+    chalk "^4.1.0"
+    dom-accessibility-api "^0.5.1"
+    pretty-format "^26.4.2"
 
 "@testing-library/jest-dom@^5.11.0":
   version "5.11.2"
@@ -20102,7 +20145,7 @@ regenerator-runtime@^0.11.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha1-vgWtf5v30i4Fb5cmzuUBf78Z4uk=
 
-regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.3, regenerator-runtime@^0.13.4:
+regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.3, regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.7"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha1-ysLazIoepnX+qrrriugziYrkb1U=

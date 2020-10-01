@@ -2,6 +2,7 @@ import { format } from 'util';
 import '@testing-library/jest-dom/extend-expect';
 import { matchers } from 'jest-emotion';
 import 'mutationobserver-shim';
+import 'regenerator-runtime';
 
 expect.extend(matchers);
 
