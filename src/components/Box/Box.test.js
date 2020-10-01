@@ -6,11 +6,7 @@ const testId = 'test-box';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(
-  <Box {...defaultProps} {...props}>
-    {props.children}
-  </Box>,
-);
+const getComponent = (props = {}) => render(<Box {...defaultProps} {...props} />);
 
 test('default box', () => {
   getComponent();
