@@ -42,9 +42,9 @@ export default {
     row: `0 0 9px ${accent[95]}`,
     focus: `0 0 5px ${focus}`,
   },
-  buttons,
   forms,
   text,
+  buttons,
   textColors,
   variants,
 };
