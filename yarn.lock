@@ -2508,7 +2508,20 @@
     "@react-stately/toggle" "^3.2.0"
     "@react-types/button" "^3.2.0"
 
-"@react-aria/focus@^3.2.0", "@react-aria/focus@^3.2.1":
+"@react-aria/checkbox@^3.2.0":
+  version "3.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/checkbox/-/checkbox-3.2.0.tgz#8c33df5a0319a8df776bdf9a9d0184e1c0ed30d0"
+  integrity sha1-jDPfWgMZqN93a9+anQGE4cDtMNA=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/label" "^3.1.0"
+    "@react-aria/toggle" "^3.1.0"
+    "@react-aria/utils" "^3.2.1"
+    "@react-stately/checkbox" "^3.0.0"
+    "@react-stately/toggle" "^3.1.0"
+    "@react-types/checkbox" "^3.2.0"
+
+"@react-aria/focus@^3.1.0", "@react-aria/focus@^3.2.0", "@react-aria/focus@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/focus/-/focus-3.2.1.tgz#c51c91472737468a0633e34aaa76459f6df1aa8a"
   integrity sha1-xRyRRyc3RooGM+NKqnZFn23xqoo=
@@ -2569,6 +2582,20 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
+"@react-aria/toggle@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/toggle/-/toggle-3.1.0.tgz#3f0423ff3b05187b4e374bbb65421fe5d95895d7"
+  integrity sha1-PwQj/zsFGHtON0u7ZUIf5dlYldc=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.1.0"
+    "@react-aria/interactions" "^3.1.0"
+    "@react-aria/utils" "^3.1.0"
+    "@react-stately/toggle" "^3.1.0"
+    "@react-types/checkbox" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
+    "@react-types/switch" "^3.1.0"
+
 "@react-aria/utils@^3.1.0", "@react-aria/utils@^3.2.0", "@react-aria/utils@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.2.1.tgz#9242308ee9f1106a6bd9cb3af8702bf6528d110a"
@@ -2579,6 +2606,16 @@
     "@react-types/shared" "^3.2.0"
     clsx "^1.1.1"
 
+"@react-stately/checkbox@^3.0.0":
+  version "3.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/checkbox/-/checkbox-3.0.0.tgz#80609889bf3c7bd2c1221a9fee6400f34fa76e4f"
+  integrity sha1-gGCYib88e9LBIhqf7mQA80+nbk8=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/toggle" "^3.1.0"
+    "@react-stately/utils" "^3.1.0"
+    "@react-types/checkbox" "^3.2.0"
+
 "@react-stately/radio@^3.2.0":
   version "3.2.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/radio/-/radio-3.2.0.tgz#e4b6746d2ceecf5d51399d7226740420417b1483"
@@ -2588,7 +2625,7 @@
     "@react-stately/utils" "^3.1.0"
     "@react-types/radio" "^3.1.0"
 
-"@react-stately/toggle@^3.2.0":
+"@react-stately/toggle@^3.1.0", "@react-stately/toggle@^3.2.0":
   version "3.2.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/toggle/-/toggle-3.2.0.tgz#35a9edcd1c47bfb9d2744d9fb08cfd6d7cb14b9b"
   integrity sha1-NantzRxHv7nSdE2fsIz9bXyxS5s=
@@ -2612,7 +2649,7 @@
   dependencies:
     "@react-types/shared" "^3.2.0"
 
-"@react-types/checkbox@^3.1.0":
+"@react-types/checkbox@^3.1.0", "@react-types/checkbox@^3.2.0":
   version "3.2.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/checkbox/-/checkbox-3.2.0.tgz#a77dd9378449760494ce7cf56492aa61b6357bc3"
   integrity sha1-p33ZN4RJdgSUznz1ZJKqYbY1e8M=
@@ -2637,6 +2674,14 @@
   version "3.2.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.2.0.tgz#531c320e6b8f01f614336c14cee50ecf9fca4a4d"
   integrity sha1-UxwyDmuPAfYUM2wUzuUOz5/KSk0=
+
+"@react-types/switch@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/switch/-/switch-3.1.0.tgz#a286251e9455364e622a480c3be176e49b1affed"
+  integrity sha1-ooYlHpRVNk5iKkgMO+F25Jsa/+0=
+  dependencies:
+    "@react-types/checkbox" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
 
 "@rebass/forms@^4.0.6":
   version "4.0.6"
