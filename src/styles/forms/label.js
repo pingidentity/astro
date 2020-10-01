@@ -5,5 +5,11 @@ import { text } from '../variants/text';
 export const label = {
   display: 'block',
   mb: 'xs',
+  alignItems: 'center',
   ...text.label,
+};
+
+export const radioLabel = {
+  cursor: 'pointer',
+  alignItems: 'center',
 };
