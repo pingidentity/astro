@@ -50,10 +50,12 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.35",
-    "@react-aria/label": "^3.1.0",
-    "@react-aria/button": "^3.2.1",
     "@react-aria/focus": "^3.2.1",
+    "@react-aria/radio": "^3.1.1",
+    "@react-aria/label": "^3.1.0",
     "@react-aria/utils": "^3.2.1",
+    "@react-stately/radio": "^3.2.0",
+    "@react-aria/button": "^3.2.1",
     "@rebass/forms": "^4.0.6",
     "@styled-system/prop-types": "^5.1.5",
     "@styled-system/props": "^5.1.5",
@@ -64,6 +66,7 @@
     "lodash": "^4.17.20",
     "prop-types": "^15.7.2",
     "rebass": "^4.0.7",
+    "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5"
   }
 }
