@@ -6,6 +6,16 @@ import forms from './forms';
 import variants, { buttons, text } from './variants';
 
 export default {
+  styles: {
+    // Applied to the body element
+    root: {
+      color: 'red',
+      '*:disabled': {
+        opacity: 0.5,
+        pointerEvents: 'none',
+      },
+    },
+  },
   space: spacing,
   colors: {
     ...colors,
