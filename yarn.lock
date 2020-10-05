@@ -3009,6 +3009,12 @@
     regenerator-runtime "^0.13.3"
     util-deprecate "^1.0.2"
 
+<<<<<<< HEAD
+"@storybook/addons@5.3.19":
+  version "5.3.19"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@storybook/addons/-/addons-5.3.19.tgz#3a7010697afd6df9a41b8c8a7351d9a06ff490a4"
+  integrity sha1-OnAQaXr9bfmkG4yKc1HZoG/0kKQ=
+=======
 "@storybook/addon-storysource@^6.0.21":
   version "6.0.21"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@storybook/addon-storysource/-/addon-storysource-6.0.21.tgz#fce9a6de8b276239dbb49b809f3b5efd9fbcecb4"
@@ -3034,6 +3040,7 @@
   version "6.0.21"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@storybook/addon-toolbars/-/addon-toolbars-6.0.21.tgz#ed7adfdf89fb900dfa05ad91440b101e9204e6ab"
   integrity sha1-7Xrf34n7kA36Ba2RRAsQHpIE5qs=
+>>>>>>> master
   dependencies:
     "@storybook/addons" "6.0.21"
     "@storybook/api" "6.0.21"
@@ -9427,6 +9434,8 @@ dom-serializer@0:
     domelementtype "^2.0.1"
     entities "^2.0.0"
 
+<<<<<<< HEAD
+=======
 dom-serializer@^1.0.1:
   version "1.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/dom-serializer/-/dom-serializer-1.1.0.tgz#5f7c828f1bfc44887dc2a315ab5c45691d544b58"
@@ -9436,6 +9445,7 @@ dom-serializer@^1.0.1:
     domhandler "^3.0.0"
     entities "^2.0.0"
 
+>>>>>>> master
 dom-serializer@~0.1.0, dom-serializer@~0.1.1:
   version "0.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/dom-serializer/-/dom-serializer-0.1.1.tgz#1ec4059e284babed36eec2941d4a970a189ce7c0"

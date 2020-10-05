@@ -329,7 +329,6 @@ class DetailsTooltipStateless extends React.Component {
             <div
                 className="details-content-inner"
                 // Stop events from bubbling up out of tooltip
-                onClick={this._stopClickPropagation}
                 ref={this.popperContent}
             >
                 {this.props.showClose && (
@@ -402,7 +401,6 @@ class DetailsTooltipStateless extends React.Component {
         });
     };
 
-    _stopClickPropagation = e => e.stopPropagation()
 
     componentWillReceiveProps(nextProps) {
         if (!this.props.open && nextProps.open) {
