@@ -160,7 +160,7 @@ class Stateless extends React.Component {
             var picker = ReactDOM.findDOMNode(this.reactColorPicker);
 
             //dont close the color picker if the click is inside
-            callIfOutsideOfContainer(picker, this.props.onToggle, e);
+            callIfOutsideOfContainer(picker, this.props.onToggle, e, true);
         }
     };
 
@@ -221,6 +221,7 @@ class Stateless extends React.Component {
      *     The ReactJS synthetic event object
      */
     _handleClick = (e) => {
+        e.preventDefault();
         if (!this.props.disabled) {
             //store a reference to this event so that we dont open and then close the colorpicker when the
             //global click event listener gets triggered.
