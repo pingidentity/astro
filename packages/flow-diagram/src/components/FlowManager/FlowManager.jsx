@@ -77,6 +77,7 @@ const stepsToArrays = (stepDefinitions, stepDictionary) => {
             outlets = [],
             type,
             name,
+            configuration,
         } = step;
 
         stepDictionary.set(id, step);
@@ -91,6 +92,7 @@ const stepsToArrays = (stepDefinitions, stepDictionary) => {
                     category: type,
                     name,
                     stepId,
+                    errorMessage: configuration.error ? configuration.error.message : '',
                 },
                 ...outletNodes,
             ],
