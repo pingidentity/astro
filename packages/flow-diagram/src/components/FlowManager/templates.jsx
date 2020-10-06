@@ -16,6 +16,8 @@ function encodeSvg(svgString) {
         .replace(/>/g, '%3E')
         .replace(/\s+/g, ' ');
 }
+
+
 const $ = go.GraphObject.make;
 
 const toNode = (fill) => {
@@ -76,10 +78,10 @@ const getNodeHoverAdornment = () => {
     );
 };
 
-export const stepTemplate = (color, svg) => () => {
+export const stepTemplate = (color, svg) => (onNodeClick) => {
     return (
         $(go.Node, 'Spot',
-            { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
+            { click: onNodeClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
             new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
             $(go.Panel, 'Auto',
                 { name: 'BODY' },

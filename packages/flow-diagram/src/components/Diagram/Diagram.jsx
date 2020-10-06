@@ -12,6 +12,7 @@ export default function Diagram({
     nodeDataArray,
     nodeTemplates,
     onModelChange,
+    onNodeClick,
 }) {
     const diagramRef = useRef();
 
@@ -94,7 +95,7 @@ export default function Diagram({
                 });
 
         nodeTemplates.forEach(([name, template]) => {
-            diagram.nodeTemplateMap.add(name, template());
+            diagram.nodeTemplateMap.add(name, template(onNodeClick));
         });
 
         groupTemplates.forEach(([name, template]) => {
@@ -173,5 +174,6 @@ Diagram.propTypes = {
     nodeDataArray: PropTypes.array,
     nodeTemplates: PropTypes.arrayOf(PropTypes.array),
     onModelChange: PropTypes.func,
+    onNodeClick: PropTypes.func,
 };
 
