@@ -209,6 +209,10 @@ function Demo() {
             stepId: 'registration',
             'type': 'EXECUTE_FLOW',
             'configuration': {
+                'error': {
+                    'code': '{step.context.status}',
+                    'message': 'authentication failed',
+                },
                 'flowDefinition': {
                     'id': '1234',
                 },

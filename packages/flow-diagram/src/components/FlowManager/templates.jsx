@@ -1,12 +1,13 @@
 import React from 'react';
 import * as go from 'gojs';
-import { Success, Close } from '@pingux/icons';
+import { Success, Close, Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import start from '../../img/start.svg';
+import { COLORS } from '../../utils/constants'
 
 function encodeSvg(svgString) {
     return svgString.replace('<svg', (~svgString.indexOf('xmlns') ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"'))
-        .replace(/"/g, '\'')
+        .replace(/'/g, '\'')
         .replace(/%/g, '%25')
         .replace(/#/g, '%23')
         .replace(/{/g, '%7B')
@@ -22,7 +23,7 @@ const toNode = (fill) => {
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
             $(go.Shape, 'Circle',
-                { width: 10, height: 10, fill, stroke: 'white', strokeWidth: 3 })
+                { width: 10, height: 10, fill, stroke: COLORS.WHITE, strokeWidth: 3 })
         )
 
     );
@@ -33,8 +34,45 @@ const fromNode = (fill) => {
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, cursor: 'pointer' },
             $(go.Shape, 'Circle',
-                { width: 10, height: 10, fill, stroke: 'white', strokeWidth: 3 }),
+                { width: 10, height: 10, fill, stroke: COLORS.WHITE, strokeWidth: 3 }),
         )
+    );
+};
+
+const getNodeHoverAdornment = () => {
+    return $(go.Adornment, 'Spot',
+        {
+            background: 'transparent',
+            mouseLeave: (e, obj) => {
+                const ad = obj.part;
+                ad.adornedPart.removeAdornment('mouseHover');
+            },
+        },
+        $(go.Placeholder,
+            {
+                margin: new go.Margin(10, 10, 10, 10),
+                background: 'transparent',
+                isActionable: true,
+                click: (e, obj) => {
+                    const node = obj.part.adornedPart;
+                    node.diagram.select(node);
+                },
+            }),
+        $(go.Panel, 'Auto', { alignment: go.Spot.Top },
+            { name: 'BODY' },
+            $(go.Shape, 'RoundedRectangle',
+                { fill: COLORS.ERROR_LIGHT, stroke: 'transparent', strokeWidth: 0, margin: new go.Margin(0, 0, 10, 0) }),
+            $(go.Panel, 'Horizontal', { padding: 10, alignment: go.Spot.Top },
+                $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 10, 0) },
+                    $(go.TextBlock,
+                        {
+                            stroke: COLORS.ERROR, font: 'bold 11px sans-serif', alignment: go.Spot.Left, editable: false,
+
+                        },
+                        new go.Binding('text', 'errorMessage').makeTwoWay()),
+                ),
+            ),
+        ),
     );
 };
 
@@ -46,28 +84,47 @@ export const stepTemplate = (color, svg) => () => {
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
                 $(go.Shape, 'RoundedRectangle',
-                    { fill: 'white', stroke: '#EBECEC', minSize: new go.Size(200, 0) },
-                    new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : '#EBECEC'; }).ofObject()),
-                $(go.Panel, 'Horizontal', { padding: 15, alignment: go.Spot.Left },
-                    $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(svg, { fill: color })))}`, width: 20, height: 20 }),
-                    $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 0, 10) },
-                        $(go.TextBlock,
-                            {
-                                stroke: '#9DA2A8', font: '11px sans-serif', alignment: go.Spot.Left, editable: false,
+                    { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, minSize: new go.Size(200, 150)}),
+                $(go.Panel, 'Vertical', { padding: 15, alignment: go.Spot.Top },
+                    new go.Binding('visible', 'errorMessage', (s) => { return s.length > 0; }),
+                    $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20 }),
+                    {
+                        mouseHover: (e, obj) => {
+                            const node = obj.part;
+                            const nodeHoverAdornment = getNodeHoverAdornment();
+                            nodeHoverAdornment.adornedObject = node;
+                            node.addAdornment('mouseHover', nodeHoverAdornment);
+                        },
+                    },
+                ),
+                $(go.Panel, 'Auto',
+                    { name: 'BODY' },
+                    $(go.Shape, 'RoundedRectangle',
+                        { fill: COLORS.WHITE, minSize: new go.Size(200, 55) },
+                        new go.Binding('stroke', 'errorMessage', (s) => { return s.length > 0 ? COLORS.ERROR : COLORS.GRAY; }),
+                        new go.Binding('strokeWidth', 'errorMessage', (s) => { return s.length > 0 ? 2 : 0; }),
+                    ),
+                    $(go.Panel, 'Horizontal', { padding: 15, alignment: go.Spot.Left },
+                        $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(svg, { fill: color })))}`, width: 20, height: 20 }),
+                        $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 0, 10) },
+                            $(go.TextBlock,
+                                {
+                                    stroke: '#9DA2A8', font: '11px sans-serif', alignment: go.Spot.Left, editable: false,
 
-                            },
-                            new go.Binding('text', 'category').makeTwoWay()),
-                        $(go.TextBlock,
-                            {
-                                stroke: 'black', font: '500 12px sans-serif', alignment: go.Spot.Left, editable: false,
+                                },
+                                new go.Binding('text', 'category').makeTwoWay()),
+                            $(go.TextBlock,
+                                {
+                                    stroke: COLORS.BLACK, font: '500 12px sans-serif', alignment: go.Spot.Left, editable: false,
 
-                            },
-                            new go.Binding('text', 'stepId').makeTwoWay()),
+                                },
+                                new go.Binding('text', 'stepId').makeTwoWay()),
+                        ),
                     ),
                 ),
+                fromNode(color),
+                toNode(color),
             ),
-            fromNode(color),
-            toNode(color),
         )
     );
 };
@@ -79,10 +136,9 @@ export const nodeTemplate = (width = 120) => {
             new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
-
                 $(go.Shape, 'Rectangle',
-                    { fill: 'white', stroke: '#EBECEC', minSize: new go.Size(width, 0) },
-                    new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : '#EBECEC'; }).ofObject()),
+                    { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(width, 0) },
+                    new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : COLORS.GRAY; }).ofObject()),
                 $(go.Panel, 'Horizontal',
                     $(go.TextBlock,
                         {
@@ -94,7 +150,6 @@ export const nodeTemplate = (width = 120) => {
                         },
                         new go.Binding('text').makeTwoWay()),
                 ),
-
             ),
         )
     );
@@ -108,12 +163,12 @@ export const outletTemplate = fill => () => {
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
                 $(go.Shape, 'RoundedRectangle',
-                    { stroke: '#EBECEC', width: '100%', fill }),
+                    { stroke: COLORS.GRAY, width: '100%', fill }),
 
                 $(go.Panel, 'Horizontal',
                     $(go.TextBlock,
                         {
-                            stroke: 'white',
+                            stroke: COLORS.WHITE,
                             font: 'bold 12px sans-serif',
                             editable: true,
                             margin: new go.Margin(5, 10, 5, 10),
@@ -143,9 +198,9 @@ export const circleNode = (color, svg) => {
     );
 };
 
-export const successNode = () => circleNode('#0bbf01', <Success height={10} fill="#fff" />);
+export const successNode = () => circleNode(COLORS.GREEN, <Success height={10} fill={COLORS.WHITE} />);
 
-export const failureNode = () => circleNode('#ce0808', <Close height={10} width={10} fill="#fff" />);
+export const failureNode = () => circleNode(COLORS.RED, <Close height={10} width={10} fill={COLORS.WHITE} />);
 
 export const nodeTemplateStart = () =>
     $(go.Node, 'Auto',
@@ -177,8 +232,8 @@ export const groupTemplate = () => {
             { name: 'BODY' },
 
             $(go.Shape, 'Rectangle',
-                { fill: 'white', stroke: '#EBECEC', minSize: new go.Size(280, 0) },
-                new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : '#EBECEC'; }).ofObject()),
+                { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(280, 0) },
+                new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : COLORS.GRAY; }).ofObject()),
             $(go.Panel, 'Horizontal',
 
 

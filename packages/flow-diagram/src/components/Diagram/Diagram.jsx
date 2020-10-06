@@ -34,6 +34,7 @@ export default function Diagram({
             $(go.Diagram,
 
                 {
+                    hoverDelay: 0,
                     'undoManager.isEnabled': true,
                     dragSelectingTool:
                         $(RealtimeDragSelectingTool,
