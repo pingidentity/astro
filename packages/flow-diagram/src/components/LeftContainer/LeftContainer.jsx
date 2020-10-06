@@ -7,7 +7,7 @@ export default function LeftContainer({
     title,
 }) {
     return (
-        <Box width="20%" className="left-container">
+        <Box width="20%" border="1px solid black">
             {title}
             {children}
         </Box>

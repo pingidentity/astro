@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 import { Input } from '@pingux/compass';
 import { Details } from '@pingux/icons';
+import ConfigPanel from '../ConfigPanel';
 import Diagram from '../Diagram';
 import Palette from '../Palette';
 import {
@@ -78,6 +79,7 @@ const stepsToArrays = (stepDefinitions, stepDictionary) => {
             type,
             name,
             configuration,
+            outputMapping,
         } = step;
 
         stepDictionary.set(id, step);
@@ -92,6 +94,8 @@ const stepsToArrays = (stepDefinitions, stepDictionary) => {
                     category: type,
                     name,
                     stepId,
+                    configuration,
+                    outputMapping,
                     errorMessage: configuration.error ? configuration.error.message : '',
                 },
                 ...outletNodes,
@@ -118,23 +122,42 @@ function DiagramWrapper({
         triggerNodes,
         triggerLinks,
     ] = triggersToArrays(triggers);
+    const [selectedNode, setSelectedNode] = useState(null);
+
+    const onNodeClick = (e, obj) => {
+        setSelectedNode(obj.part.data.key);
+    };
+
+    const onPanelClose = () => {
+        setSelectedNode(null);
+    };
+
     return (
         <div className="wrapper">
             <LeftContainer
                 title={<h2 style={{ marginLeft: 15 }}>Toolbox</h2>}
             >
-                <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
-                <Palette
-                    groupTemplates={[
-                        ['', groupTemplate],
-                    ]}
-                    nodeTemplates={[
-                        ['', () => nodeTemplate(280)],
-                    ]}
-                    divClassName="palette-component"
-                    nodeDataArray={paletteDataArray}
-                    linkDataArray={paletteLinkDataArray}
-                />
+                {selectedNode !== null ? (
+                    <ConfigPanel
+                        data={stepDictionary.current.get(selectedNode)}
+                        onClose={onPanelClose}
+                    />
+                ) : (
+                    <React.Fragment>
+                        <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
+                        <Palette
+                            groupTemplates={[
+                                ['', groupTemplate],
+                            ]}
+                            nodeTemplates={[
+                                ['', () => nodeTemplate(280)],
+                            ]}
+                            divClassName="palette-component"
+                            nodeDataArray={paletteDataArray}
+                            linkDataArray={paletteLinkDataArray}
+                        />
+                    </React.Fragment>
+                )}
             </LeftContainer>
             <Diagram
                 groupTemplates={[
@@ -146,6 +169,7 @@ function DiagramWrapper({
                     ['', stepTemplate('#028CFF', <Details />)],
                     ...typeDefinitions]}
                 onModelChange={onModelChange}
+                onNodeClick={onNodeClick}
             />
         </div>
     );
