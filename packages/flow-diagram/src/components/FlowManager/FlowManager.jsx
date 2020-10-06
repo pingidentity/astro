@@ -113,6 +113,7 @@ function DiagramWrapper({
     paletteLinkDataArray,
     typeDefinitions,
     onModelChange,
+    renderTopPanel,
     stepDefinitions,
     triggers,
 }) {
@@ -134,43 +135,49 @@ function DiagramWrapper({
 
     return (
         <div className="wrapper">
-            <LeftContainer
-                title={<h2 style={{ marginLeft: 15 }}>Toolbox</h2>}
-            >
-                {selectedNode !== null ? (
-                    <ConfigPanel
-                        data={stepDictionary.current.get(selectedNode)}
-                        onClose={onPanelClose}
-                    />
-                ) : (
-                    <React.Fragment>
-                        <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
-                        <Palette
-                            groupTemplates={[
-                                ['', groupTemplate],
-                            ]}
-                            nodeTemplates={[
-                                ['', () => nodeTemplate(280)],
-                            ]}
-                            divClassName="palette-component"
-                            nodeDataArray={paletteDataArray}
-                            linkDataArray={paletteLinkDataArray}
+            <div className="top-panel">
+                {/* stepDefinitons is a placeholder. Something different will be passed in later */}
+                {renderTopPanel(stepDefinitions)}
+            </div>
+            <div className="body-wrapper">
+                <LeftContainer
+                    title={<h2 style={{ marginLeft: 15 }}>Toolbox</h2>}
+                >
+                    {selectedNode !== null ? (
+                        <ConfigPanel
+                            data={stepDictionary.current.get(selectedNode)}
+                            onClose={onPanelClose}
                         />
-                    </React.Fragment>
-                )}
-            </LeftContainer>
-            <Diagram
-                groupTemplates={[
-                    ['', groupTemplate],
-                ]}
-                linkDataArray={[...links, ...triggerLinks]}
-                nodeDataArray={[...steps, ...triggerNodes]}
-                nodeTemplates={[
-                    ['', stepTemplate('#028CFF', <Details />)],
-                    ...typeDefinitions]}
-                onModelChange={onModelChange}
-                onNodeClick={onNodeClick}
-            />
+                    ) : (
+                        <React.Fragment>
+                            <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
+                            <Palette
+                                groupTemplates={[
+                                    ['', groupTemplate],
+                                ]}
+                                nodeTemplates={[
+                                    ['', () => nodeTemplate(280)],
+                                ]}
+                                divClassName="palette-component"
+                                nodeDataArray={paletteDataArray}
+                                linkDataArray={paletteLinkDataArray}
+                            />
+                        </React.Fragment>
+                    )}
+                </LeftContainer>
+                <Diagram
+                    groupTemplates={[
+                        ['', groupTemplate],
+                    ]}
+                    linkDataArray={[...links, ...triggerLinks]}
+                    nodeDataArray={[...steps, ...triggerNodes]}
+                    nodeTemplates={[
+                        ['', stepTemplate('#028CFF', <Details />)],
+                        ...typeDefinitions]}
+                    onModelChange={onModelChange}
+                    onNodeClick={onNodeClick}
+                />
+            </div>
         </div>
     );
 }
@@ -182,6 +189,7 @@ DiagramWrapper.propTypes = {
     paletteDataArray: PropTypes.array,
     paletteLinkDataArray: PropTypes.array,
     onModelChange: PropTypes.func,
+    renderTopPanel: PropTypes.func,
     stepDefinitions: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         stepId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

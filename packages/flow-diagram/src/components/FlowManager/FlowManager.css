@@ -17,15 +17,26 @@
 
 .wrapper {
   display: flex;
+  flex-direction: column;
   height: 70%;
-
 }
+
+.body-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
 html, body, #root, #root > * {
   height: 100%;
 }
 .overview-component {
   height: 30%;
   width: 400px;
+}
+
+.top-panel {
+  border-bottom: 1px solid gray;
 }
 
 canvas {

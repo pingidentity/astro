@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Desktop } from '@pingux/icons';
+import { Desktop, Error } from '@pingux/icons';
+import { Button } from '@pingux/compass';
 import FlowManager from './FlowManager';
 import {
     outletTemplate,
@@ -153,79 +154,85 @@ function Demo() {
     const [skipsDiagramUpdate] = useState(false);
 
     const stepDefinitions =
-    [
-        {
-            id: 'user-login', // Used for internal calculations and callbacks
-            name: 'User login',
-            stepId: 'userLogin',
-            'type': 'LOGIN',
-            'configuration': {
-                'enableRegistration': true,
-                'accountRecovery': '{flow.context.recoveryEnabled}',
-            },
-            outputMapping: {
-                usernameProvided: '{this.outputs.username}',
-                id: '123fdsj23521fsdf',
-                initialUsername: '{flow.inputs.user.id}',
-            },
-            'outlets': [{
-                'name': 'On Success',
-                'type': 'success',
-                'next': 'finished',
+        [
+            {
+                id: 'user-login', // Used for internal calculations and callbacks
+                name: 'User login',
+                stepId: 'userLogin',
+                'type': 'LOGIN',
+                'configuration': {
+                    'enableRegistration': true,
+                    'accountRecovery': '{flow.context.recoveryEnabled}',
+                },
+                outputMapping: {
+                    usernameProvided: '{this.outputs.username}',
+                    id: '123fdsj23521fsdf',
+                    initialUsername: '{flow.inputs.user.id}',
+                },
+                'outlets': [{
+                    'name': 'On Success',
+                    'type': 'success',
+                    'next': 'finished',
+                },
+                {
+                    'name': 'On Failure',
+                    'type': 'failure',
+                    'next': 'error',
+                },
+                {
+                    'name': 'no such user',
+                    'type': 'not_found',
+                    'next': 'registration',
+                },
+                ],
             },
             {
-                'name': 'On Failure',
-                'type': 'failure',
-                'next': 'error',
+                id: 'finished',
+                stepId: 'finished',
+                'type': 'finished',
+                'configuration': {
+                    'redirect': 'https://example.com',
+                },
             },
             {
-                'name': 'no such user',
-                'type': 'not_found',
-                'next': 'registration',
-            },
-            ],
-        },
-        {
-            id: 'finished',
-            stepId: 'finished',
-            'type': 'finished',
-            'configuration': {
-                'redirect': 'https://example.com',
-            },
-        },
-        {
-            id: 'error',
-            stepId: 'error',
-            'type': 'error',
-            'configuration': {
-                'error': {
-                    'code': '{step.context.status}',
-                    'message': 'authentication failed',
+                id: 'registration',
+                stepId: 'registration',
+                'type': 'EXECUTE_FLOW',
+                'configuration': {
+                    'error': {
+                        'code': '{step.context.status}',
+                        'message': 'authentication failed',
+                    },
+                    'flowDefinition': {
+                        'id': '1234',
+                    },
                 },
             },
-        },
-        {
-            id: 'registration',
-            stepId: 'registration',
-            'type': 'EXECUTE_FLOW',
-            'configuration': {
-                'error': {
-                    'code': '{step.context.status}',
-                    'message': 'authentication failed',
-                },
-                'flowDefinition': {
-                    'id': '1234',
-                },
-                'flowConfiguration': {
-                    'username': '{flow.steps.context.username}',
-                },
-            },
-        },
-    ];
+        ];
 
     return (
         <div>
             <FlowManager
+                renderTopPanel={(flowDefinition) => {
+                    return (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: 10 }}>
+                            <div>
+                                <p style={{ color: 'gray', fontWeight: 'bold', margin: 0 }}>Flow Manager</p>
+                                <h2 style={{ margin: 0 }}>Registration</h2>
+                            </div>
+                            <div style={{ alignItems: 'center', display: 'flex' }}>
+                                <Error fill="#a30303" />
+                                <p style={{ color: '#a30303', fontWeight: 'bold', marginLeft: 10 }}>1 error. To publish this flow, fix all errors.</p>
+                            </div>
+                            <div style={{ display: 'flex' }}>
+                                <Button style={{ border: 'none' }}>Cancel</Button>
+                                <Button style={{ marginLeft: 10, marginRight: 15 }}>Save</Button>
+                                <Button style={{ background: '#4462ED', color: 'white' }} onClick={() => console.log(flowDefinition)}>Save & Close</Button>
+                            </div>
+                        </div>
+                    );
+                }
+                }
                 typeDefinitions={[
                     ['LOGIN', stepTemplate('#028CFF', <Desktop />)],
                     ['success', outletTemplate('#0bbf01')],
