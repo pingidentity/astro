@@ -33,7 +33,7 @@ function ConfigPanel({ data, onClose }) {
             <div css={configPanelClose}>
                 <Clear onClick={onClose} />
             </div>
-            <Text m="15px 0px 15px 0px" fontSize={18} fontWeight="bold">{data.type}</Text>
+            <Text m="15px 0px 15px 0px" fontSize={18} fontWeight="bold">{data.category}</Text>
             {Object.entries(data.configuration).map(([name, value]) => {
                 return getInput(name, value);
             })}

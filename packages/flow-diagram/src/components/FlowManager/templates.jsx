@@ -3,7 +3,7 @@ import * as go from 'gojs';
 import { Success, Close, Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import start from '../../img/start.svg';
-import { COLORS } from '../../utils/constants'
+import { COLORS } from '../../utils/constants';
 
 function encodeSvg(svgString) {
     return svgString.replace('<svg', (~svgString.indexOf('xmlns') ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"'))
@@ -25,7 +25,7 @@ const toNode = (fill) => {
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
             $(go.Shape, 'Circle',
-                { width: 10, height: 10, fill, stroke: COLORS.WHITE, strokeWidth: 3 })
+                { width: 10, height: 10, fill, stroke: COLORS.WHITE, strokeWidth: 3 }),
         )
 
     );
@@ -86,7 +86,7 @@ export const stepTemplate = (color, svg) => (onNodeClick) => {
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
                 $(go.Shape, 'RoundedRectangle',
-                    { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, minSize: new go.Size(200, 150)}),
+                    { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, minSize: new go.Size(200, 150) }),
                 $(go.Panel, 'Vertical', { padding: 15, alignment: go.Spot.Top },
                     new go.Binding('visible', 'errorMessage', (s) => { return s.length > 0; }),
                     $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20 }),
@@ -200,9 +200,11 @@ export const circleNode = (color, svg) => {
     );
 };
 
-export const successNode = () => circleNode(COLORS.GREEN, <Success height={10} fill={COLORS.WHITE} />);
+export const successNode = () =>
+    circleNode(COLORS.GREEN, <Success height={10} fill={COLORS.WHITE} />);
 
-export const failureNode = () => circleNode(COLORS.RED, <Close height={10} width={10} fill={COLORS.WHITE} />);
+export const failureNode = () =>
+    circleNode(COLORS.RED, <Close height={10} width={10} fill={COLORS.WHITE} />);
 
 export const nodeTemplateStart = () =>
     $(go.Node, 'Auto',
