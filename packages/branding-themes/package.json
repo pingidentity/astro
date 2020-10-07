@@ -1,6 +1,6 @@
 {
   "name": "@pingux/branding-templates",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "Branding templates for end-user projects",
   "scripts": {
     "build": "rm -rf ./build && npm-run-all build:*",
