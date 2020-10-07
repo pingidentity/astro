@@ -1,0 +1,12 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import ThemeDocumentation from './ThemeDocumentation';
+
+<Meta title="Compass Theme" />
+
+# Theme Values
+
+This is the raw theme object that is passed to all Compass components. Its values can be referenced in `styled-system` properties. See [https://styled-system.com/table](https://styled-system.com/table) for details.
+
+For example, to set a background color on a `Box` component, you can reference one of the keys under the `colors` section. Like: `bg="black"`, `bg="accent.20"`, `bg="decorative.4"`, or `bg="critical.bright"`.
+
+<ThemeDocumentation />

@@ -4,7 +4,7 @@ import { fieldMessageStatuses } from './FieldMessage';
 
 export default {
     title: 'Components/Inputs/FieldMessage',
-    decorators: [],
+    
     component: TextInput,
 };
 

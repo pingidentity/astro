@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Product Icons / PingIntelligence for APIs</title>
+    <g id="Product-Icons-/-PingIntelligence-for-APIs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PingIntelligence_basic" transform="translate(1.500000, 2.500000)" fill-rule="nonzero">
+            <polygon id="Path" fill="#437D9B" points="48.5 46.75 2.4 46.75 2.4 39.79 5.61 39.79 5.61 43.54 45.3 43.54 45.3 3.85 5.61 3.85 5.61 14.12 2.4 14.12 2.4 0.65 48.5 0.65"></polygon>
+            <g id="Group" transform="translate(0.000000, 19.000000)" fill="#263947">
+                <path d="M8.04,0.63 L13.62,14.92 L11.52,14.92 L9.96,10.62 L3.91,10.62 L2.31,14.92 L0.37,14.92 L5.93,0.63 L8.04,0.63 L8.04,0.63 Z M9.36,9.01 L6.98,2.35 L6.94,2.35 L4.52,9.01 L9.36,9.01 Z" id="Shape"></path>
+                <path d="M21.68,0.63 C23.12,0.63 24.21,1 24.95,1.74 C25.69,2.48 26.06,3.52 26.06,4.85 C26.06,6.18 25.69,7.23 24.95,7.97 C24.21,8.71 23.12,9.08 21.68,9.07 L17.32,9.07 L17.32,14.91 L15.42,14.91 L15.42,0.63 L21.68,0.63 Z M21.04,7.47 C22.12,7.48 22.91,7.26 23.41,6.81 C23.91,6.36 24.16,5.7 24.16,4.85 C24.16,4 23.91,3.35 23.41,2.9 C22.91,2.45 22.12,2.23 21.04,2.23 L17.32,2.23 L17.32,7.47 L21.04,7.47 Z" id="Shape"></path>
+                <polygon id="Path" points="30.77 0.63 30.77 14.92 28.87 14.92 28.87 0.63"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

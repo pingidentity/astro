@@ -1,0 +1,9 @@
+icon: true
+ref: true
+titleProp: true
+replaceAttrValues:
+  "#00000": "{props.fill || 'currentColor'}"
+svgProps:
+  fill: "{props.fill || props.color || 'currentColor'}"
+  width: "{props.width || props.size || '1em'}"
+  height: "{props.height || props.size || '1em'}"
