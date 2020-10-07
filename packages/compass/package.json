@@ -1,0 +1,79 @@
+{
+  "name": "@pingux/compass",
+  "version": "0.1.0-beta.29",
+  "description": "Compass components",
+  "author": "Tyler Grove <tgrove@pingidentity.com>",
+  "homepage": "",
+  "license": "UNLICENSED",
+  "main": "index.cjs.js",
+  "module": "index.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+  },
+  "publishConfig": {
+    "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+  },
+  "scripts": {
+    "demo": "rm -rf ./upload && build-storybook -o upload",
+    "start": "yarn build:core && parcel demo/index.html",
+    "build": "yarn build:core && rollup -c",
+    "build:core": "cd ../compass-core && yarn build",
+    "dist": "rm -rf build && yarn build",
+    "lint": "eslint .",
+    "storybook": "yarn build:core && start-storybook -p 3443",
+    "postversion": "yarn build && yarn run demo",
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@mdi/svg": "^5.0.45",
+    "@pingux/compass-core": "0.0.0",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@svgr/parcel-plugin-svgr": "^5.2.0",
+    "@svgr/rollup": "^5.3.1",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.4",
+    "babel-plugin-emotion": "^10.0.29",
+    "babel-plugin-transform-node-env-inline": "^0.4.3",
+    "parcel-bundler": "^1.12.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1",
+    "rollup": "^2.3.4",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-generate-package-json": "^3.2.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "@babel/runtime": "^7.9.2",
+    "@babel/runtime-corejs3": "^7.9.2",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@styled-system/prop-types": "^5.1.5",
+    "@styled-system/props": "^5.1.5",
+    "@styled-system/theme-get": "^5.1.2",
+    "chroma-js": "^2.1.0",
+    "emotion-normalize": "^10.1.0",
+    "emotion-theming": "^10.0.27",
+    "prop-types": "^15.7.2",
+    "react-portal": "^4.2.1",
+    "reflexbox": "^4.0.6",
+    "styled-system": "^5.1.5",
+    "ui-library": "^4.10.0",
+    "underscore": "^1.10.2",
+    "uuid": "^7.0.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1"
+  }
+}
