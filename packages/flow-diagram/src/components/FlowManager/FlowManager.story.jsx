@@ -215,7 +215,7 @@ function Demo() {
             <FlowManager
                 renderTopPanel={(flowDefinition) => {
                     return (
-                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: 10 }}>
+                        <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', padding: 10 }}>
                             <div>
                                 <p style={{ color: 'gray', fontWeight: 'bold', margin: 0 }}>Flow Manager</p>
                                 <h2 style={{ margin: 0 }}>Registration</h2>
