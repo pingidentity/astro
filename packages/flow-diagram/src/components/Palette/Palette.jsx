@@ -2,6 +2,8 @@ import * as go from 'gojs';
 import { ReactPalette } from 'gojs-react';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { paletteWrapper } from './Palette.styles';
+
 
 export default function Palette({
     groupTemplates,
@@ -34,12 +36,14 @@ export default function Palette({
     };
 
     return (
-        <ReactPalette
-            initPalette={initPalette}
-            divClassName="palette-component"
-            nodeDataArray={nodeDataArray}
-            linkDataArray={linkDataArray}
-        />
+        <div css={paletteWrapper}>
+            <ReactPalette
+                initPalette={initPalette}
+                divClassName="palette-component"
+                nodeDataArray={nodeDataArray}
+                linkDataArray={linkDataArray}
+            />
+        </div>
     );
 }
 

@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
-import { Input } from '@pingux/compass';
+import { Global } from '@emotion/core';
+import { Input, Text } from '@pingux/compass';
 import { Details } from '@pingux/icons';
 import ConfigPanel from '../ConfigPanel';
 import Diagram from '../Diagram';
@@ -11,8 +12,7 @@ import {
     groupTemplate,
     stepTemplate,
 } from './templates';
-
-import './FlowManager.css';
+import { bodyWrapper, globalStyles, topPanel, wrapper } from './FlowManager.styles';
 import LeftContainer from '../LeftContainer/LeftContainer';
 
 const triggersToArrays = (triggers) => {
@@ -134,51 +134,52 @@ function DiagramWrapper({
     };
 
     return (
-        <div className="wrapper">
-            <div className="top-panel">
-                {/* stepDefinitons is a placeholder. Something different will be passed in later */}
-                {renderTopPanel(stepDefinitions)}
-            </div>
-            <div className="body-wrapper">
-                <LeftContainer
-                    title={<h2 style={{ marginLeft: 15 }}>Toolbox</h2>}
-                >
-                    {selectedNode !== null ? (
-                        <ConfigPanel
-                            data={stepDictionary.current.get(selectedNode)}
-                            onClose={onPanelClose}
-                        />
-                    ) : (
-                        <React.Fragment>
-                            <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
-                            <Palette
-                                groupTemplates={[
-                                    ['', groupTemplate],
-                                ]}
-                                nodeTemplates={[
-                                    ['', () => nodeTemplate(280)],
-                                ]}
-                                divClassName="palette-component"
-                                nodeDataArray={paletteDataArray}
-                                linkDataArray={paletteLinkDataArray}
+        <>
+            <Global styles={globalStyles} />
+            <div css={wrapper}>
+                <div css={topPanel}>
+                    {/* This is a placeholder. Something different will be passed in later */}
+                    {renderTopPanel(stepDefinitions)}
+                </div>
+                <div css={bodyWrapper}>
+                    <LeftContainer>
+                        {selectedNode !== null ? (
+                            <ConfigPanel
+                                data={stepDictionary.current.get(selectedNode)}
+                                onClose={onPanelClose}
                             />
-                        </React.Fragment>
-                    )}
-                </LeftContainer>
-                <Diagram
-                    groupTemplates={[
-                        ['', groupTemplate],
-                    ]}
-                    linkDataArray={[...links, ...triggerLinks]}
-                    nodeDataArray={[...steps, ...triggerNodes]}
-                    nodeTemplates={[
-                        ['', stepTemplate('#028CFF', <Details />)],
-                        ...typeDefinitions]}
-                    onModelChange={onModelChange}
-                    onNodeClick={onNodeClick}
-                />
+                        ) : (
+                            <React.Fragment>
+                                <Text m="10px 0px 15px 15px" fontSize={24}>Toolbox</Text>
+                                <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
+                                <Palette
+                                    groupTemplates={[
+                                        ['', groupTemplate],
+                                    ]}
+                                    nodeTemplates={[
+                                        ['', () => nodeTemplate(280)],
+                                    ]}
+                                    nodeDataArray={paletteDataArray}
+                                    linkDataArray={paletteLinkDataArray}
+                                />
+                            </React.Fragment>
+                        )}
+                    </LeftContainer>
+                    <Diagram
+                        groupTemplates={[
+                            ['', groupTemplate],
+                        ]}
+                        linkDataArray={[...links, ...triggerLinks]}
+                        nodeDataArray={[...steps, ...triggerNodes]}
+                        nodeTemplates={[
+                            ['', stepTemplate('#028CFF', <Details />)],
+                            ...typeDefinitions]}
+                        onModelChange={onModelChange}
+                        onNodeClick={onNodeClick}
+                    />
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
