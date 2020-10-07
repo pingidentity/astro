@@ -9,6 +9,7 @@ import {
     nodeTemplateStart,
     stepTemplate,
 } from './templates';
+import { stepsToFlowDiagram, triggersToFlowDiagram } from '../../utils/dataUtils';
 
 export default {
     title: 'Flow Manager',
@@ -145,12 +146,10 @@ const loginStepJSON = {
 //   }
 
 function Demo() {
-    const [nodeDataArray] = useState([{ key: 0, category: 'Start', loc: '0 0' }, { key: 1, text: 'Action', category: 'action' }, { key: 2, text: 'Success', fill: '#5e6adb', category: 'outlet' }, { key: 3, category: 'success' }]);
     const [paletteDataArray] = useState([
         { ...loginStepJSON, key: 0, text: loginStepJSON.title },
     ]);
     const [paletteLinkDataArray] = useState([]);
-    const [linkDataArray] = useState([{ from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 }]);
     const [skipsDiagramUpdate] = useState(false);
 
     const stepDefinitions =
@@ -210,6 +209,16 @@ function Demo() {
             },
         ];
 
+    const triggers = [
+        {
+            type: 'START',
+            next: 'user-login',
+        },
+    ];
+
+    const [steps, links] = stepsToFlowDiagram(stepDefinitions);
+    const [triggerNodes, triggerLinks] = triggersToFlowDiagram(triggers);
+
     return (
         <div>
             <FlowManager
@@ -231,8 +240,10 @@ function Demo() {
                             </div>
                         </div>
                     );
-                }
-                }
+                }}
+                // How to decide whether or not these get put into the list of the left?
+                // Can't just extrapolate based on stepDefinitions, because that would mean
+                // that empty workflows would be missing most options.
                 typeDefinitions={[
                     ['LOGIN', stepTemplate('#028CFF', <Desktop />)],
                     ['success', outletTemplate('#0bbf01')],
@@ -245,7 +256,9 @@ function Demo() {
                 skipsDiagramUpdate={skipsDiagramUpdate}
                 paletteDataArray={paletteDataArray}
                 paletteLinkDataArray={paletteLinkDataArray}
-                stepDefinitions={stepDefinitions}
+                // stepDefinitions={stepDefinitions}
+                links={[...links, ...triggerLinks]}
+                nodes={[...steps, ...triggerNodes]}
                 triggers={[
                     {
                         'type': 'START',
