@@ -367,9 +367,10 @@ button.tile-button--side-icon {
 
 .tile-button--stacked-small,
 button.tile-button--stacked-small {
-    padding: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
     margin-bottom: $spacing-md;
     margin-right: 0;
+    min-height: 75px;
 
     .tile-button {
         &__icon {
