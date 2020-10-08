@@ -1,0 +1,82 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './Conditionals.stories.js';
+
+<Meta title="usage/Conditionals" />
+
+# Custom Conditionals
+
+
+## Form Props
+
+
+### `Rules`
+When building a form, you may want to render some fields conditionally based off of the user's selection. Fortunately `rules` prop
+allows for just this! 
+
+The below example uses 'not' to determine which fields should be shown based off a user's response. 
+
+<Canvas>
+  <Story story={stories.ConditionalsExample} />
+</Canvas>
+
+The first condition translates as -  when dropdownExample is not yes, trigger remove event for colorList.
+Essentially, if the user selects 'no', we do not need any more information from them, so we don't want to render any more fields.
+
+```html
+const rules = [{
+  conditions: {
+    dropdownExample: {
+      not: {
+        is: 'Yes',
+      },
+    },
+  },
+  event: {
+    type: 'remove',
+    params: {
+      field: 'colorList',
+    },
+  },
+},
+{
+  conditions: {
+    colorList: {
+      not: {
+        is: 'Other',
+      },
+    },
+  },
+  event: {
+    type: 'remove',
+    params: {
+      field: 'otherField',
+    },
+  },
+},
+];
+
+ <Form
+      schema={('Schema', schema)}
+      uiSchema={('uiSchema', uiSchema)}
+      rules={rules}
+/>
+```
+
+
+## How to customize conditionals
+Fortunately, there are a lot of ways to utilize and customize conditional logic. 
+More indepth examples of conditionally rendering fields can be found at https://github.com/RxNT/json-rules-engine-simplified#conditional-logic
+
+- [Single Line Conditionals](https://github.com/RxNT/json-rules-engine-simplified#single-line-conditionals)
+- [Conditionals with arguments](https://github.com/RxNT/json-rules-engine-simplified#conditionals-with-arguments)
+- [Boolean operations on a single field - AND, NOT, OR](https://github.com/RxNT/json-rules-engine-simplified#boolean-operations-on-a-single-field)
+- [Boolean operations on multi fields](https://github.com/RxNT/json-rules-engine-simplified#boolean-operations-on-multi-fields)
+- [Nested object queries](https://github.com/RxNT/json-rules-engine-simplified#nested-object-queries)
+- [Nested arrays object queries](https://github.com/RxNT/json-rules-engine-simplified#nested-arrays-object-queries)
+- [Extending available predicates](https://github.com/RxNT/json-rules-engine-simplified#extending-available-predicates)
+- [Logic on nested objects](https://github.com/RxNT/json-rules-engine-simplified#logic-on-nested-objects)
+- [Relevant conditional logic](https://github.com/RxNT/json-rules-engine-simplified#relevant-conditional-logic)
+- [Events](https://github.com/RxNT/json-rules-engine-simplified#events)
+
+
+

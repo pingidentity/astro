@@ -1,0 +1,35 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks';
+import * as stories from './TextInput.stories.js';
+import Form from '../src/components/SchemaForm';
+
+<Meta title="widgets/Text Input" />
+
+# Basic text input widget
+
+<Canvas>
+  <Story story={stories.Basic} />
+</Canvas>
+
+# Password text input widget
+Please select "see code" option and notice format, ui:widget, and inputType have been set to password.
+
+This allows for password validation.
+<Canvas>
+  <Story story={stories.PasswordInput} />
+</Canvas>
+
+# Email text input widget
+Please select "see code" option and notice format, ui:widget, and inputType has been set to email.
+
+This allows for email validation.
+<Canvas>
+  <Story story={stories.EmailInput} />
+</Canvas>
+
+# Props
+Currently, standard props from React JSON Schema Form are supported for this widget:
+
+- [uiSchema Props](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/)
+
+However, please understand this is a work in progress. If you have questions or issues implementing any of the linked props,
+please reach out to the #ui-coalition slack channel or open a ticket following the steps in the contribution section of [overview](/?path=/docs/overview--page#contributing).

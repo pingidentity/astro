@@ -1,0 +1,36 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks';
+import * as stories from './Validation.stories.js';
+
+<Meta title="usage/Validation" />
+
+# Custom Validation
+
+
+## Form Props
+
+
+### `Validate`
+
+
+To add custom validation, utilize the Form's validate prop to trigger a validation function.
+The below example uses the following:
+
+
+```html
+function validate(formData, errors) {
+  if (formData.Password1 !== formData.Password) {
+    errors.Password2.addError("Passwords don't match");
+  }
+  return errors;
+}
+
+<Form
+  schema={('Schema', schema)}
+  validate={validate}
+/>
+```
+
+
+<Canvas>
+  <Story story={stories.basic} />
+</Canvas>

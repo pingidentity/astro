@@ -1,0 +1,265 @@
+<html>
+  <head>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      var schema = {
+        "title": "Example Title",
+        "type": "object",
+        "properties": {
+          "additionalInformation": {
+            "type": "string"
+          },
+          "captchaKey": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "interacted": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+            },
+            "uniqueItems": true
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "requestType": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "iAmAn": {
+            "type": "string"
+          },
+          "acceptTermsAndConditions": {
+            "type": "boolean"
+          },
+        },
+        "required": [
+          "country",
+          "emailAddress",
+          "firstName",
+          "interacted",
+          "lastName",
+          "requestType",
+          "iAmAn",
+          "acceptTermsAndConditions",
+          "captchaKey",
+        ],
+        "$schema": "http://json-schema.org/draft-04/schema#"
+      };
+
+      var iAmAn = ['Custom','Prospect','Employee (Former, current, prospective)'];
+	    var requestTypes = ['General Privacy Inquiry','Restrict Processing','Data Deletion', 'Data Portability', 'Data Rectification', 'Data Access'];
+      var states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+      var countries = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas (the)", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia (Plurinational State of)", "Bonaire, Sint Eustatius and Saba", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory (the)", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands (the)", "Central African Republic (the)", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands (the)", "Colombia", "Comoros (the)", "Congo (the Democratic Republic of the)", "Congo (the)", "Cook Islands (the)", "Costa Rica", "Croatia", "Cuba", "Curaçao", "Cyprus", "Czechia", "Côte d'Ivoire", "Denmark", "Djibouti", "Dominica", "Dominican Republic (the)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Falkland Islands (the) [Malvinas]", "Faroe Islands (the)", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern Territories (the)", "Gabon", "Gambia (the)", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands", "Holy See (the)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (the Democratic People's Republic of)", "Korea (the Republic of)", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic (the)", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands (the)", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia (Federated States of)", "Moldova (the Republic of)", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands (the)", "New Caledonia", "New Zealand", "Nicaragua", "Niger (the)", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands (the)", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State of", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines (the)", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic of North Macedonia", "Romania", "Russian Federation (the)", "Rwanda", "Réunion", "Saint Barthélemy", "Saint Helena, Ascension and Tristan da Cunha", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin (French part)", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten (Dutch part)", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "South Sudan", "Spain", "Sri Lanka", "Sudan (the)", "Suriname", "Svalbard and Jan Mayen", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan (Province of China)", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands (the)", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates (the)", "United Kingdom of Great Britain and Northern Ireland (the)", "United States Minor Outlying Islands (the)", "United States of America (the)", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela (Bolivarian Republic of)", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe", "Åland Islands"];
+      var interactions = ['Visiting and interacting with Ping Identity\'s website', 'Employment opportunities with Ping Identity', 'Receiving emails or outreach from Ping Identity', 'Use of Ping Identity\'s products (this most often arises if you work for a company that uses Ping Identity\'s products, or are a customer or consumer of one of Ping Identity\'s customers).', 'Other'];
+
+      schema.properties.iAmAn.enum = iAmAn;
+	    schema.properties.requestType.enum = requestTypes;
+      schema.properties.state.enum = states;
+      schema.properties.country.enum = countries;
+      schema.properties.interacted.items.enum = interactions;
+
+      var uiSchema = {
+        "ui:order": [
+          "iAmAn",
+          "requestType",
+          "interacted",
+          "additionalInformation",
+          "firstName",
+          "lastName",
+          "emailAddress",
+          "state",
+          "country",
+          "acceptTermsAndConditions",
+          "captchaKey"
+        ],
+        "_form": {
+          "ui:options": {
+            "hasMarkdownErrors": true,
+          },
+        },
+        "iAmAn": {
+          "ui:options": {
+            "label": "I am a(n)"
+          },
+        },        
+        "additionalInformation": {
+          "ui:options": {
+            "label": "Additional Information",
+            "resize": false
+          },
+          "ui:widget": "textarea"          
+        },
+        "country": {
+          "ui:options": {
+            "label": "Country"
+          },
+        },
+        "emailAddress": {
+          "ui:options": {
+            "label": "Email Address"
+          },
+        },
+        "firstName": {
+          "ui:options": {
+            "label": "First Name"
+          },
+          "ui:help": "Passwords must be of the type blah blah blah"
+        },
+        "interacted": {
+          "ui:widget": "checkboxes",
+          "ui:options": {
+            "label": "How did you hear about Ping?"
+          },
+        },
+        "lastName": {
+          "ui:options": {
+            "label": "Last Name"
+          },
+          "ui:widget": "password"
+        },
+        "requestType": {
+          "ui:options": {
+            "label": "Request Type"
+          },
+        },
+        "state": {
+          "ui:options": {
+            "label": "Choose a State"
+          },
+        },
+        "captchaKey": {
+          "ui:widget": "recaptchaV2"
+        },
+        "acceptTermsAndConditions": {
+          "ui:options": {
+            "hasMarkdownErrors": true,
+            "hasMarkdownLabel": true,
+            "label": "I accept the Terms and Conditions as outlined in [blah](https://google.com)"
+          }
+        }
+      };
+      var formData = {
+        interacted: ["Other"],
+        acceptTermsAndConditions: false,
+      };
+      var rules = [
+        {
+          conditions: {
+            country: {
+              not: {
+                is: "United States of America (the)"
+              }
+            }
+          },
+          event: {
+            type: "remove",
+            params: {
+              field: "state"
+            }
+          }
+        },
+        {
+          conditions: {
+            country: {
+              is: "United States of America (the)"
+            }
+          },
+          event: {
+            type: "require",
+            params: {
+              field: "state"
+            }
+          }
+        },
+        {
+          conditions: {
+            interacted: {
+              not: {
+                contains: "Other"
+              }
+            }
+          },
+          event: {
+            type: "remove",
+            params: {
+              field: "additionalInformation"
+            }
+          }
+        },
+        {
+          conditions: {
+            interacted: {
+              contains: "Other"
+            }
+          },
+          event: {
+            type: "require",
+            params: {
+              field: "additionalInformation"
+            }
+          }
+        },
+      ];
+
+      function validate(formData, errors) {
+        if (formData.acceptTermsAndConditions !== true) {
+          errors.acceptTermsAndConditions.addError("You must accept the Terms and Conditions outlined in [blah](https://google.com) before proceeding");
+        }
+
+        return errors;
+      }
+      
+      // Should return a Promise which resolves to an errors object. See RJSF validation documentation for exact format:
+      // https://react-jsonschema-form.readthedocs.io/en/latest/usage/validation/#async-validation
+      // Form-level errors should be handled by adding a "_form" field to the returned object.
+      // e.g. { "firstName": { "__errors": ["test error"] }, "_form": { "__errors": ["a form error"] } };
+      function handleServerErrors(response) {
+        // response is a Response object: https://developer.mozilla.org/en-US/docs/Web/API/Response
+        // return response.text().then((data) => ({ "_form": { "__errors": ["test error"]}}));
+        return Promise.resolve({ "_form": { "__errors": ["test error"]}});
+      }
+
+      // Example custom callback which will hide the form when it is successfully submitted.
+      // Must be enabled in the props that are passed into the form.
+      function handleServerSuccess(response) {
+        console.log(response);
+        const form = document.querySelector('#root');
+        form.style.display = 'none';
+      }
+
+      // NOTE: This sitekey is only for development purposes
+      ReactDOM.render(React.createElement(pingSchemaForm.Form, {
+        endpoint: '/test',
+        formData,
+        formSuccessMessage: 'Your request has been received and we will contact you if necessary.',
+        formSuccessTitle: 'This is a title!',
+        onServerError: handleServerErrors,
+        // onServerSuccess: handleServerSuccess,
+        rules,
+        schema,
+        sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+        uiSchema,
+        validate,
+      }), document.getElementById("root"));
+    </script>
+  </body>
+</html>
