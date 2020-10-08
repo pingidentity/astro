@@ -1,0 +1,80 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Overview" />
+
+# Schema Forms
+
+Automatically build out forms with [JSON Schema](https://json-schema.org/) data!
+
+This project utilizes several others to achieve a robust form builder:
+- [RJSF](https://github.com/rjsf-team/react-jsonschema-form) to generate the form
+- [RJSF Conditionals](https://github.com/ivarprudnikov/rjsf-conditionals) and [JSON  Rules Engine Simplified](https://github.com/RxNT/json-rules-engine-simplified) to apply conditional logic to the schema data
+- [Ping's End User Library](https://uilibrary.ping-eng.com/) to display themed field components
+
+## Installing
+
+`yarn add @pingux/schema-forms`
+
+## Usage
+
+The exported `Form` component can be used in at least a couple of different ways.
+
+### ESM Import
+It can be imported as a typical ES6 module.
+```javascript
+import Form from '@pingux/schema-forms/ping-schema-form';
+
+<Form schema={mySchema} />
+```
+### UMD Script
+<!-- TODO: Update this to point to a versioned CDN script?** -->
+
+Or, it can be used as a UMD script in a typical webpage when React is pulled in alongside.
+```html
+<body>
+  <div id="root"></div>
+
+  <!-- Using React 16 -->
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="<location of ping-schema-form.js>"></script>
+
+  <script>
+    var schema = { ... };
+
+    ReactDOM.render(React.createElement(pingSchemaForm.Form, {
+      schema,
+      // ... other props
+    }), document.getElementById("root"));
+  </script>
+</body>
+```
+
+## UI Schema
+`UISchema` applies customization options for the look and feel of the form. For more information and examples, navigate to the
+[UISchema](/?path=/docs/usage-form--ui-schema) documentation. 
+<!-- FIXME: Describe UI Schema or at least point to docs for it -->
+
+## Applying Conditional Logic
+Utlizing the `rules` prop on `Form` custom logic can be applied to show / hide relevant fields. For more information and examples,
+navigate to the [Conditional Logic](/?path=/docs/usage-conditionals--conditionals-example) documentation.
+
+## Contributing
+
+Code submissions and requests for the growing Schema Forms project are greatly appreciated. The project is managed on Gitlab -- https://gitlab.corp.pingidentity.com/ux/pingux
+
+To submit a change:
+
+1. Create a UIP ticket for your issue in Jira.
+2. Create a branch using the following naming conventions:
+  - Please use a single dash in place of a space
+  - Branch name should start with UIP ticket info, schema-forms, and contain a short title in lower case
+
+      Example: UIP-1001-schema-forms-short-title-of-ticket
+3. Commit and push your change and add a short commit message.
+4. Create a merge request on Gitlab (ensure the target branch is set to master), and the build process will kick off.
+
+   If the build fails, reach out for help on #ui-coalition.
+5. We require two members of the team to approve a change set. 
+6. After your changeset has been approved, assign your Jira ticket to a member of the UX Dev team, and they will merge your change into master for the next release.
+7. Once your change is merged, the UX Dev team member will close your ticket.

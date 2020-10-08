@@ -1,0 +1,19 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks';
+import * as stories from './TextArea.stories.js';
+import Form from '../src/components/SchemaForm';
+
+<Meta title="widgets/TextArea" />
+
+# Text area widget
+
+<Canvas>
+  <Story story={stories.Basic} />
+</Canvas>
+
+# Props
+Currently, standard props from React JSON Schema Form are supported for this widget:
+
+- [uiSchema Props](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/)
+
+However, please understand this is a work in progress. If you have questions or issues implementing any of the linked props,
+please reach out to the #ui-coalition slack channel or open a ticket following the steps in the contribution section of [overview](/?path=/docs/overview--page#contributing).

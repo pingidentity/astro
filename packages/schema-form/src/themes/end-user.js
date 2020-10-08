@@ -1,0 +1,116 @@
+import React from 'react';
+import _ from 'lodash';
+import Button from '@pingux/end-user/components/Button';
+import Checkbox from '@pingux/end-user/components/Checkbox';
+import FloatLabelDropdown from '@pingux/end-user/components/FloatLabelDropdown';
+import FloatLabelPasswordInput from '@pingux/end-user/components/FloatLabelPasswordInput';
+import FloatLabelTextArea from '@pingux/end-user/components/FloatLabelTextArea';
+import FloatLabelTextInput from '@pingux/end-user/components/FloatLabelTextInput';
+import FormRow from '@pingux/end-user/components/FormRow';
+import Heading from '@pingux/end-user/components/Heading';
+import Markdown from '@pingux/end-user/components/Markdown';
+
+import { getDisabledEnumOptions } from '../utils/props';
+import Error from '../components/themes/end-user/Error';
+import FieldLabel from '../components/themes/end-user/FieldLabel';
+import SuccessMessage from '../components/themes/end-user/SuccessMessage';
+
+export const EndUserComponents = {
+  button: Button,
+  checkbox: Checkbox,
+  email: FloatLabelTextInput,
+  error: Error,
+  fieldLabel: FieldLabel,
+  formTitle: Heading,
+  formDescription: FieldLabel,
+  password: FloatLabelPasswordInput,
+  select: FloatLabelDropdown,
+  successMessage: SuccessMessage,
+  textinput: FloatLabelTextInput,
+  textarea: FloatLabelTextArea,
+  wrapper: FormRow,
+};
+
+/**
+ * Return the proper fieldMessage and fieldMessageProps for end-user consumption
+ * @param {{}} props - The list of props from RJSF
+ */
+const getFieldMessageData = (props) => {
+  const { rawErrors = [], options: { help: uiHelp, hasMarkdownErrors } } = props;
+  let fieldMessage;
+  let fieldMessageProps;
+
+  if (rawErrors.length) {
+    fieldMessage = rawErrors.map(_.capitalize).join(', ');
+    fieldMessageProps = { status: 'error' };
+  } else if (uiHelp) {
+    fieldMessage = uiHelp;
+    fieldMessageProps = { status: 'info' };
+  }
+
+  if (hasMarkdownErrors) {
+    fieldMessage = fieldMessage && fieldMessage.length && <Markdown source={fieldMessage} />;
+  }
+
+  return { fieldMessage, fieldMessageProps };
+};
+
+/**
+ * Transforms the given props to the shape expected by Ping's End User library
+ * @param {Object} props The props supplied by RJSF from the schema and uiSchema objects supplied
+ * to the form
+ */
+export const toEndUserInputProps = (props) => {
+  const {
+    autofocus,
+    checked,
+    disabled,
+    formContext,
+    id,
+    label,
+    onBlur,
+    onChange,
+    onFocus,
+    options: {
+      enumDisabled,
+      enumOptions,
+      help: uiHelp,
+      label: uiLabel,
+      hasMarkdownLabel: hasMarkdown,
+      hasMarkdownErrors,
+      ...custom
+    },
+    placeholder,
+    rawErrors,
+    readonly,
+    required,
+  } = props;
+  const isStacked = _.get(custom, 'isStacked', true);
+  const { fieldMessage, fieldMessageProps } = getFieldMessageData(props);
+  const getStatus = (errors) => (errors && errors.length ? 'error' : undefined);
+
+  const inputProps = {
+    autofocus,
+    checked,
+    ...custom,
+    disabled,
+    fieldMessage,
+    fieldMessageProps,
+    formContext,
+    hasMarkdown,
+    id,
+    isStacked,
+    label: uiLabel || label,
+    onBlur,
+    onChange,
+    onFocus,
+    options: getDisabledEnumOptions(enumOptions, enumDisabled),
+    placeholder: placeholder || undefined,
+    readonly,
+    required,
+    status: getStatus(rawErrors),
+    type: getStatus(rawErrors),
+  };
+
+  return _.omitBy(inputProps, _.isUndefined);
+};

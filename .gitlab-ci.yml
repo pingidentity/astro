@@ -33,9 +33,14 @@ pack:
     # Building this on its own for now because it doesn't have its own pack command.
     - lerna run build --scope @pingux/charting
     - lerna run pack
+    - lerna run dist --scope @pingux/end-user
+    - lerna link
+    - lerna run dist --scope @pingux/schema-form
   artifacts:
     paths:
       - ./packages/ui-library/build
+      - ./packages/end-user/dist
+      - ./packages/schema-forms/dist
 
 lint:
   stage: test
@@ -44,6 +49,7 @@ lint:
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
     - lerna bootstrap
+    - lerna link
     - lerna run lint
 
 coverage:
@@ -53,6 +59,7 @@ coverage:
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
     - lerna bootstrap
+    - lerna link
     - lerna run coverage-ci
 
 backstop:

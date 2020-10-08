@@ -1,0 +1,581 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`form elements form success message 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <div
+      class="card card--no-padding"
+    >
+      <div
+        class="card__content"
+      >
+        <div
+          class="text-block text-block--margin-xx"
+          data-id="textblock"
+        >
+          <div
+            class="text-block--overflow-wrap"
+          >
+            test
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`form elements form success title 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <div
+      class="card card--no-padding"
+    >
+      <div
+        class="card__content"
+      >
+        <h1
+          class="heading"
+          data-id="heading"
+        >
+          hi
+        </h1>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields checkbox field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="form__row"
+      >
+        <div
+          class="checkbox-container"
+        >
+          <label
+            class="checkbox checkbox--stacked"
+            for="rjsf"
+          >
+            <input
+              class="checkbox__input"
+              id="rjsf"
+              type="checkbox"
+            />
+            <span
+              class="checkbox__standin"
+            />
+            <span
+              class="checkbox__label"
+            />
+          </label>
+        </div>
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields checkboxes field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        id="rjsf_test"
+      >
+        <div
+          class="form__row"
+        >
+          <div
+            class="checkbox-container"
+          >
+            <label
+              class="checkbox checkbox--stacked"
+            >
+              <input
+                class="checkbox__input"
+                type="checkbox"
+              />
+              <span
+                class="checkbox__standin"
+              />
+              <span
+                class="checkbox__label"
+              >
+                foo
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          class="form__row"
+        >
+          <div
+            class="checkbox-container"
+          >
+            <label
+              class="checkbox checkbox--stacked"
+            >
+              <input
+                class="checkbox__input"
+                type="checkbox"
+              />
+              <span
+                class="checkbox__standin"
+              />
+              <span
+                class="checkbox__label"
+              >
+                bar
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          class="form__row"
+        >
+          <div
+            class="checkbox-container"
+          >
+            <label
+              class="checkbox checkbox--stacked"
+            >
+              <input
+                class="checkbox__input"
+                type="checkbox"
+              />
+              <span
+                class="checkbox__standin"
+              />
+              <span
+                class="checkbox__label"
+              >
+                fuzz
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          class="form__row"
+        >
+          <div
+            class="checkbox-container"
+          >
+            <label
+              class="checkbox checkbox--stacked"
+            >
+              <input
+                class="checkbox__input"
+                type="checkbox"
+              />
+              <span
+                class="checkbox__standin"
+              />
+              <span
+                class="checkbox__label"
+              >
+                qux
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields password field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <div
+          aria-pressed="false"
+          class="text-input__icon text-input__icon--action text-input__icon--hidden"
+          role="button"
+        />
+        <input
+          autocomplete="on"
+          class="text-input text-input--pasword float-label__input"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="password"
+          value=""
+        />
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields select field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="dropdown float-label dropdown--standard"
+        data-id="dropdown"
+      >
+        <select
+          class="dropdown__select float-label__input dropdown__select--info"
+          id="rjsf"
+          name="rjsf"
+        >
+          <option
+            value="foo"
+          >
+            foo
+          </option>
+          <option
+            value="bar"
+          >
+            bar
+          </option>
+        </select>
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field format email 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <input
+          autocomplete="on"
+          class="text-input float-label__input"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="text"
+          value=""
+        />
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field regular 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <input
+          autocomplete="on"
+          class="text-input float-label__input"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="text"
+          value=""
+        />
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with help text 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <input
+          autocomplete="on"
+          class="text-input float-label__input"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="text"
+          value=""
+        />
+        <div
+          class="field-message field-message--info"
+          role="status"
+        >
+          help text
+        </div>
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with markdown errors 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <input
+          autocomplete="on"
+          class="text-input float-label__input"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="text"
+          value=""
+        />
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with placeholder 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <input
+          autocomplete="on"
+          class="text-input float-label__input"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          placeholder="placeholder"
+          type="text"
+          value=""
+        />
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields textarea field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1tfaxjj-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <div>
+          <textarea
+            class="text-area float-label__input"
+            data-id="undefined-input"
+            id="rjsf"
+            name="rjsf"
+            resize="true"
+          />
+        </div>
+        <label
+          class="float-label__label float-label__label-text-area"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;

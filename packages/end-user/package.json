@@ -6,6 +6,7 @@
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
   "publishConfig": {
+    "directory": "dist",
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "dependencies": {
