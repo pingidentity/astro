@@ -24,7 +24,8 @@ export const ModalMenu = ({
                 {
                     id: option.id,
                     title: option.label,
-                    iconName: option.icon,
+                    icon: typeof option.icon === 'object' ? option.icon : undefined,
+                    iconName: typeof option.icon === 'string' ? option.icon : undefined,
                     description: option.sublabel,
                 }
             ))}
@@ -44,7 +45,7 @@ ModalMenu.propTypes = {
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         label: PropTypes.string,
         sublabel: PropTypes.string,
-        icon: PropTypes.string
+        icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     })),
     /**
      * Called when the ModalMenu selection chnanges
