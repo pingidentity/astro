@@ -30,8 +30,9 @@ const Box = forwardRef((props, ref) => {
     <RBox
       ref={ref}
       flexDirection={fd}
-      sx={custom}
+      variant="boxes.base"
       {...others}
+      sx={custom}
     />
   );
 });
@@ -48,7 +49,6 @@ Box.propTypes = {
 Box.defaultProps = {
   as: 'div',
   isRow: false,
-  display: 'flex', // eslint-disable-line
 };
 
 export default Box;

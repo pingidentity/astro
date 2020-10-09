@@ -14,9 +14,7 @@ export const radioLabel = {
   alignItems: 'center',
 };
 
-/*
-FIXME: Label uses 'flex' by default, see if there is a better alternative to using '!important' here
-*/
+// NOTE: Rebass label adds 'flex' after other styles, so we have to use !important to override it
 export const checkboxLabel = {
   display: 'inline-flex !important',
   width: 'auto',

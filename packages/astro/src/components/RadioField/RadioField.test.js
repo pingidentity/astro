@@ -3,14 +3,6 @@ import { useFocusRing } from '@react-aria/focus';
 import { render, screen } from '@testing-library/react';
 import RadioField, { RadioContext } from './RadioField';
 
-jest.mock('@react-aria/focus', () => ({
-  ...jest.requireActual('@react-aria/focus'),
-  useFocusRing: jest.fn(() => ({
-    isFocusVisible: false,
-    focusProps: {},
-  })),
-}));
-
 const testId = 'test-radio';
 const testLabel = 'Test Label';
 const testValue = 'test';

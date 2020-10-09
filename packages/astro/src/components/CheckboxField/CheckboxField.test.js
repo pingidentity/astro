@@ -4,14 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { useFocusRing } from '@react-aria/focus';
 import CheckboxField from '../CheckboxField';
 
-jest.mock('@react-aria/focus', () => ({
-  ...jest.requireActual('@react-aria/focus'),
-  useFocusRing: jest.fn(() => ({
-    isFocusVisible: false,
-    focusProps: {},
-  })),
-}));
-
 const testLabel = 'Test Label';
 const defaultProps = {
   children: testLabel,
