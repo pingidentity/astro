@@ -30,4 +30,3 @@ export const textColors = {
   button: button.label,
   active,
 };
-

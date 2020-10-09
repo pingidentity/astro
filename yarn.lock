@@ -2839,7 +2839,7 @@
     "@react-types/shared" "^3.2.1"
     intl-messageformat "^2.2.0"
 
-"@react-aria/interactions@^3.2.1":
+"@react-aria/interactions@^3.1.0", "@react-aria/interactions@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/interactions/-/interactions-3.2.1.tgz#ac009d553af37399b335980b390ccb727a778367"
   integrity sha1-rACdVTrzc5mzNZgLOQzLcnp3g2c=
@@ -2857,6 +2857,17 @@
     "@react-aria/utils" "^3.3.0"
     "@react-types/label" "^3.2.1"
     "@react-types/shared" "^3.2.1"
+
+"@react-aria/link@^3.1.1":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/link/-/link-3.1.1.tgz#32f87e5f8332514221187e29f2c8e9f02ecb9d1a"
+  integrity sha1-Mvh+X4MyUUIhGH4p8sjp8C7LnRo=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.1.0"
+    "@react-aria/utils" "^3.2.1"
+    "@react-types/link" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
 
 "@react-aria/radio@^3.1.1":
   version "3.1.2"
@@ -2960,6 +2971,14 @@
   dependencies:
     "@react-types/shared" "^3.2.1"
 
+"@react-types/link@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/link/-/link-3.1.0.tgz#1af394aed73e44ca811aa27b1403fb97a3b6542a"
+  integrity sha1-GvOUrtc+RMqBGqJ7FAP7l6O2VCo=
+  dependencies:
+    "@react-aria/interactions" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
+
 "@react-types/radio@^3.1.1":
   version "3.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/radio/-/radio-3.1.1.tgz#5b1b11ff3043ac902e8970e49260f2664da80e5e"
@@ -2967,7 +2986,7 @@
   dependencies:
     "@react-types/shared" "^3.2.1"
 
-"@react-types/shared@^3.2.1":
+"@react-types/shared@^3.1.0", "@react-types/shared@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.2.1.tgz#cbcffec02a7592f019916e4bd0807950a1376bcf"
   integrity sha1-y8/+wCp1kvAZkW5L0IB5UKE3a88=
@@ -10827,7 +10846,7 @@ eslint-config-airbnb@^18.1.0:
     object.assign "^4.1.0"
     object.entries "^1.1.2"
 
-eslint-import-resolver-node@^0.3.4:
+eslint-import-resolver-node@^0.3.3, eslint-import-resolver-node@^0.3.4:
   version "0.3.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.4.tgz#85ffa81942c25012d8231096ddf679c03042c717"
   integrity sha1-hf+oGULCUBLYIxCW3fZ5wDBCxxc=
