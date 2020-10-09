@@ -1,3 +1,15 @@
+const base = {
+  display: 'flex',
+};
+
+const panel = {
+  outline: 'none',
+  position: 'relative',
+  bg: 'white',
+  borderLeft: 'separator',
+  transition: 'margin 0.25s ease-in',
+};
+
 // Used to give a blue left border to inputs
 const inputContainer = {
   position: 'relative',
@@ -31,7 +43,9 @@ const radioCheckedContent = {
 };
 
 export default {
+  base,
   inputContainer,
+  panel,
   radioContainer,
   radioCheckedContent,
 };

@@ -7,7 +7,9 @@ import { mergeProps } from '@react-aria/utils';
 
 const Button = forwardRef((props, ref) => {
   const {
+    onPress,
     sx, // eslint-disable-line
+    ...others
   } = props;
   const { isFocusVisible, focusProps } = useFocusRing();
   const { buttonProps } = useButton(props, ref);
@@ -20,13 +22,14 @@ const Button = forwardRef((props, ref) => {
   return (
     <RButton
       ref={ref}
-      {...mergeProps(props, focusProps, buttonProps)}
+      {...mergeProps(others, focusProps, buttonProps)}
       sx={{ ...dynamicStyles, ...sx }}
     />
   );
 });
 
 Button.propTypes = {
+  onPress: PropTypes.func,
   variant: PropTypes.oneOf(['default', 'primary', 'text', 'success', 'critical']),
 };
 

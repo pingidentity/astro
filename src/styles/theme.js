@@ -6,16 +6,6 @@ import forms from './forms';
 import variants, { buttons, text } from './variants';
 
 export default {
-  styles: {
-    // Applied to the body element
-    root: {
-      color: 'red',
-      '*:disabled': {
-        opacity: 0.5,
-        pointerEvents: 'none',
-      },
-    },
-  },
   space: spacing,
   colors: {
     ...colors,
@@ -41,6 +31,9 @@ export default {
     standard: `0 1px 6px ${shadow}`,
     row: `0 0 9px ${accent[95]}`,
     focus: `0 0 5px ${focus}`,
+  },
+  transitions: {
+    panel: 'margin 0.25s',
   },
   forms,
   text,
