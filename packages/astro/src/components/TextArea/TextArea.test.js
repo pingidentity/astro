@@ -17,4 +17,3 @@ test('TextArea renders', () => {
   expect(textArea).toBeInstanceOf(HTMLTextAreaElement);
   expect(textArea).toBeInTheDocument();
 });
-

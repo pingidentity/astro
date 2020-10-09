@@ -28,4 +28,3 @@ export const textarea = {
     display: 'none',
   },
 };
-
