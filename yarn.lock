@@ -2505,6 +2505,16 @@
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@mapbox/whoots-js/-/whoots-js-3.1.0.tgz#497c67a1cef50d1a2459ba60f315e448d2ad87fe"
   integrity sha1-SXxnoc71DRokWbpg8xXkSNKth/4=
 
+"@mdi/js@^5.5.55":
+  version "5.6.55"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@mdi/js/-/js-5.6.55.tgz#d1e99da22c8d462c17d4c5b530a7d1b77e668230"
+  integrity sha1-0emdoiyNRiwX1MW1MKfRt35mgjA=
+
+"@mdi/react@^1.4.0":
+  version "1.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@mdi/react/-/react-1.4.0.tgz#7f6bad1bd8801226d0e5bad91659b215ce68a93f"
+  integrity sha1-f2utG9iAEibQ5brZFlmyFc5oqT8=
+
 "@mdi/svg@^5.0.45":
   version "5.6.55"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@mdi/svg/-/svg-5.6.55.tgz#993b9a8914416794c001eb662b9ddb3628de4d12"

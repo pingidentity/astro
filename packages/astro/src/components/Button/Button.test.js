@@ -3,11 +3,6 @@ import { useFocusRing } from '@react-aria/focus';
 import { render, screen } from '@testing-library/react';
 import Button from '.';
 
-jest.mock('@react-aria/focus', () => ({
-  ...jest.requireActual('@react-aria/focus'),
-  useFocusRing: jest.fn(),
-}));
-
 const testId = 'test-button';
 const defaultProps = {
   'data-testid': testId,
