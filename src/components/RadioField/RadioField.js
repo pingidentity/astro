@@ -30,7 +30,7 @@ const RadioField = forwardRef((props, ref) => {
   const state = useContext(RadioContext);
   const { isDisabled } = state;
   const { inputProps: raInputProps } = useRadio({ isDisabled, ...props, ...controlProps }, state);
-  const { checked, disabled } = raInputProps;
+  const { checked } = raInputProps;
   const { isFocusVisible, focusProps } = useFocusRing();
   const dynamicStyles = {
     'input:focus ~ &': {
@@ -41,6 +41,7 @@ const RadioField = forwardRef((props, ref) => {
   return (
     <Field
       ref={ref}
+      isDisabled={isDisabled}
       variant="boxes.radioContainer"
       sx={{
         borderColor: checked ? 'active' : 'line.light',
@@ -48,10 +49,6 @@ const RadioField = forwardRef((props, ref) => {
       }}
       hasWrappedLabel
       label={children}
-      labelProps={{
-        isDisabled: disabled,
-        ...labelProps,
-      }}
       render={renderProps => (
         <Radio
           {...mergeProps(controlProps, raInputProps, focusProps, renderProps)}
