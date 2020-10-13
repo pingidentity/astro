@@ -32,13 +32,15 @@ pack:
     - lerna bootstrap
     # Building this on its own for now because it doesn't have its own pack command.
     - lerna run build --scope @pingux/charting
-    - lerna run pack
+    - lerna run build --scope @pingux/icons
     - lerna run dist --scope @pingux/end-user
+    - lerna run pack
     - lerna link
     - lerna run dist --scope @pingux/schema-form
   artifacts:
     paths:
       - ./packages/ui-library/build
+      - ./packages/icons/lib
       - ./packages/end-user/dist
       - ./packages/schema-forms/dist
 
