@@ -258,7 +258,7 @@ export default function HeatMap({
     useEffect(
         () => updateSource(mapObject.current, points),
         // Might be necessary to stringify this one as well for deep equality.
-        [points],
+        [JSON.stringify(points)],
     );
 
     useEffect(() => {
