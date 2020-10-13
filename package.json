@@ -14,6 +14,7 @@
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "scripts": {
+    "build:icons": "cd ../icons && yarn build",
     "coverage": "yarn test --coverage",
     "coverage-ci": "yarn test --coverage --ci",
     "test": "jest",
@@ -50,15 +51,16 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.35",
+    "@pingux/icons": "^0.2.0",
+    "@react-aria/button": "^3.2.1",
     "@react-aria/checkbox": "^3.2.0",
     "@react-aria/focus": "^3.2.1",
-    "@react-aria/radio": "^3.1.1",
     "@react-aria/label": "^3.1.0",
+    "@react-aria/radio": "^3.1.1",
     "@react-aria/link": "^3.1.1",
     "@react-aria/utils": "^3.2.1",
     "@react-stately/radio": "^3.2.0",
     "@react-stately/toggle": "^3.2.0",
-    "@react-aria/button": "^3.2.1",
     "@rebass/forms": "^4.0.6",
     "@styled-system/prop-types": "^5.1.5",
     "@styled-system/props": "^5.1.5",
