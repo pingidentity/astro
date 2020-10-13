@@ -1,30 +1,23 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
-import Input from '../Input';
+import Box from '../Box';
 import Field from '../Field';
+import Input from '../Input';
 
 /**
  * General wrapper for a label + text input. Alternative interface for `Field` with an `Input`.
  */
-const TextField = forwardRef((props, ref) => {
-  const {
-    controlProps,
-    ...others
-  } = props;
-
-  return (
-    <Field
-      ref={ref}
-      render={renderProps => (
-        <Input
-          {...mergeProps(controlProps, renderProps)}
-        />
-      )}
-      {...others}
-    />
-  );
-});
+const TextField = forwardRef((props, ref) => (
+  <Field
+    ref={ref}
+    render={renderProps => (
+      <Box variant="boxes.inputContainer">
+        <Input {...renderProps} />
+      </Box>
+    )}
+    {...props}
+  />
+));
 
 TextField.propTypes = {
   /** The content to display as the label */

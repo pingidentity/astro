@@ -19,7 +19,6 @@ const CheckboxField = forwardRef((props, ref) => {
     children,
     controlProps,
     isDisabled,
-    labelProps,
     ...others
   } = props;
   const {
@@ -52,10 +51,7 @@ const CheckboxField = forwardRef((props, ref) => {
       ref={ref}
       hasWrappedLabel
       label={children}
-      labelProps={{
-        isDisabled,
-        ...labelProps,
-      }}
+      isDisabled={isDisabled}
       render={renderProps => (
         <Checkbox
           {...mergeProps(raInputProps, focusProps, renderProps)}
