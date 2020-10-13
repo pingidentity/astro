@@ -4,6 +4,7 @@ import { useLabel } from '@react-aria/label';
 import { mergeProps } from '@react-aria/utils';
 import Box from '../Box';
 import Label from '../Label';
+import { getDisabledStyles } from '../../utils/styleUtils';
 
 /**
  * General wrapper for a label + control. A control is any form element that is supported by
@@ -17,6 +18,7 @@ const Field = forwardRef((props, ref) => {
     render,
     afterContent,
     hasWrappedLabel,
+    isDisabled,
     ...others
   } = props;
   const {
@@ -24,11 +26,15 @@ const Field = forwardRef((props, ref) => {
     fieldProps: raFieldProps,
   } = useLabel({ ...props, ...controlProps });
 
+  const sx = {
+    ...getDisabledStyles(isDisabled),
+  };
+
   if (hasWrappedLabel) {
     return (
       <Box ref={ref} {...others}>
-        <Label {...mergeProps(labelProps, raLabelProps)}>
-          {render(raFieldProps)}
+        <Label {...mergeProps(labelProps, raLabelProps)} isDisabled={isDisabled}>
+          {render({ ...raFieldProps, ...controlProps, disabled: isDisabled, sx })}
           {label}
         </Label>
         {afterContent}
@@ -38,8 +44,8 @@ const Field = forwardRef((props, ref) => {
 
   return (
     <Box ref={ref} {...others}>
-      <Label {...mergeProps(labelProps, raLabelProps)}>{label}</Label>
-      {render(raFieldProps)}
+      <Label {...mergeProps(labelProps, raLabelProps)} isDisabled={isDisabled}>{label}</Label>
+      {render({ ...raFieldProps, ...controlProps, disabled: isDisabled, sx })}
       {afterContent}
     </Box>
   );
@@ -62,12 +68,15 @@ Field.propTypes = {
   afterContent: PropTypes.node,
   /** Whether the control is wrapped in the label or is separately linked. */
   hasWrappedLabel: PropTypes.bool,
+  /** Whether or not the field is disabled */
+  isDisabled: PropTypes.bool,
 };
 
 Field.defaultProps = {
   controlProps: {
     id: null, // Set to override the top-level `id` prop when passed to `useLabel`
   },
+  isDisabled: false,
 };
 
 export default Field;

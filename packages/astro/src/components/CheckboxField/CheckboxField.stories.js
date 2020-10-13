@@ -6,8 +6,8 @@ export default {
   component: CheckboxField,
 };
 
-export const Default = () => (
-  <CheckboxField>Click me</CheckboxField>
+export const Default = args => (
+  <CheckboxField {...args}>Click me</CheckboxField>
 );
 
 export const DefaultSelected = () => (

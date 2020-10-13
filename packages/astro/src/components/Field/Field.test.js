@@ -65,3 +65,13 @@ test('id can be set distinctly on container and control', () => {
   expect(control).toHaveAttribute('id', 'test-control');
   expect(label).toHaveAttribute('for', 'test-control');
 });
+
+test('field with isDisabled prop disables input and applies disabled styling to label', () => {
+  const renderProp = props => <textarea {...props} />;
+  getComponent({ isDisabled: true, render: renderProp });
+  const input = document.querySelector('textarea');
+  expect(input).toBeDisabled();
+  const label = screen.getByText(testLabel);
+  expect(label).toHaveStyleRule('opacity', '0.5');
+});
+
