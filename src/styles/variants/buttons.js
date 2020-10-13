@@ -1,11 +1,14 @@
+import { text } from './text';
+
 const base = {
   cursor: 'pointer',
   height: 36,
   inlineHeight: 30,
-  px: 15,
+  px: 'md',
   '&:focus': {
     outline: 'none',
   },
+  ...text.buttonLabel,
 };
 
 export const buttons = {
@@ -14,12 +17,12 @@ export const buttons = {
     bg: 'white',
     border: '1px solid',
     borderColor: 'active',
-    color: 'active',
     '&:hover': {
       bg: 'accent.99',
       border: '1px solid',
       borderColor: 'accent.40',
       color: 'accent.40',
+      boxShadow: 'standard',
     },
     '&:active': {
       bg: 'active',
@@ -39,6 +42,7 @@ export const buttons = {
       border: '1px solid',
       borderColor: 'accent.40',
       color: 'white',
+      boxShadow: 'standard',
     },
     '&:active': {
       bg: 'accent.20',
