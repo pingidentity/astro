@@ -74,4 +74,3 @@ test('field with isDisabled prop disables input and applies disabled styling to 
   const label = screen.getByText(testLabel);
   expect(label).toHaveStyleRule('opacity', '0.5');
 });
-
