@@ -38,8 +38,12 @@
         "@emotion/core": "^10.0.28",
         "@pingux/compass": "^0.1.0-beta.28",
         "@pingux/icons": "^0.2.0",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.0.4",
         "gojs": "^2.1.16",
         "gojs-react": "^1.0.7",
+        "jest-canvas-mock": "^2.3.0",
+        "jest-emotion": "^10.0.32",
         "lodash": "^4.17.15",
         "prop-types": "^15.7.2",
         "uuid": "^7.0.3"

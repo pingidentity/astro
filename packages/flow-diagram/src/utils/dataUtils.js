@@ -5,6 +5,7 @@ const getOutletData = (id, outlets, getLinkId) => outlets.reduce(
             [
                 ...nodes,
                 {
+                    id: key,
                     key,
                     category: type,
                     text: name,
@@ -48,6 +49,7 @@ export const stepsToFlowDiagram = (stepDefinitions, getLinkId = ({ from, to }) =
             [
                 ...nodes,
                 {
+                    id,
                     key: id,
                     category: type,
                     name,
@@ -74,6 +76,7 @@ export const triggersToFlowDiagram = (triggers) => {
                     // TODO: When we have multiple triggers, it might be possible to have
                     // several with the same type. We'll need to figure out a better ID solution
                     // at that point.
+                    id: type,
                     key: type,
                     category: type,
                     // We'll need to change this for multiple starts, but that may not matter yet.
@@ -83,6 +86,7 @@ export const triggersToFlowDiagram = (triggers) => {
             next ? [
                 ...links,
                 {
+                    id: `${type}_${next}`,
                     from: type,
                     to: next,
                 },

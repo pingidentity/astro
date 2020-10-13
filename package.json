@@ -29,5 +29,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "mutationobserver-shim": "^0.3.7"
+  }
 }
