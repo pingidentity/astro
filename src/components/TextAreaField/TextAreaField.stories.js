@@ -1,5 +1,5 @@
 import React from 'react';
-import TextAreaField from './TextAreaField';
+import TextAreaField from '.';
 
 export default {
   title: 'TextAreaField',

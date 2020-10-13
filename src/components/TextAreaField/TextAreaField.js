@@ -14,11 +14,7 @@ import Box from '../Box/Box';
 const TextAreaField = forwardRef((props, ref) => {
   const {
     controlProps,
-    isDisabled,
-    labelProps,
-    ...others
   } = props;
-
 
   const {
     sx,// eslint-disable-line
@@ -34,28 +30,18 @@ const TextAreaField = forwardRef((props, ref) => {
   return (
     <Field
       ref={ref}
-      labelProps={{
-        isDisabled,
-        ...labelProps,
-      }}
-      controlProps={{
-        disabled: isDisabled,
-        ...controlProps,
-      }}
-
       render={renderProps => (
         <Box variant="boxes.inputContainer">
           <TextArea
-            disabled={isDisabled}
-            {...mergeProps(controlProps, focusProps, renderProps)}
+            {...mergeProps(focusProps, renderProps)}
             sx={{
-                ...dynamicStyles,
-                ...sx,
-              }}
+              ...dynamicStyles,
+              ...sx,
+            }}
           />
         </Box>
-          )}
-      {...others}
+      )}
+      {...props}
     />
   );
 });

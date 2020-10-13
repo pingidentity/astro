@@ -82,12 +82,6 @@ test('name for checkbox', () => {
   expect(input).toHaveAttribute('name', name);
 });
 
-test('disabled checkbox disables input and the label', () => {
-  getComponent({ controlProps: { isDisabled: true } });
-  const input = screen.getByRole('checkbox');
-  expect(input).toBeDisabled();
-});
-
 test('read only checkbox', () => {
   getComponent({ controlProps: { isReadOnly: true } });
   const input = screen.getByRole('checkbox');

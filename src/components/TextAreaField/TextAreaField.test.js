@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFocusRing } from '@react-aria/focus';
 import { render } from '@testing-library/react';
-import TextAreaField from './TextAreaField';
+import TextAreaField from '.';
 
 
 jest.mock('@react-aria/focus', () => ({
