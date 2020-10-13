@@ -10,6 +10,7 @@ export default function Palette({
     nodeTemplates,
     nodeDataArray,
     linkDataArray,
+    ...others
 }) {
     const initPalette = () => {
         const $ = go.GraphObject.make;
@@ -36,7 +37,7 @@ export default function Palette({
     };
 
     return (
-        <div css={paletteWrapper}>
+        <div css={paletteWrapper} {...others}>
             <ReactPalette
                 initPalette={initPalette}
                 divClassName="palette-component"

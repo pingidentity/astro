@@ -23,6 +23,7 @@ function DiagramWrapper({
     links,
     nodes,
     renderTopPanel,
+    ...others
 }) {
     const linkDictionary = useRef(new Map());
     const stepDictionary = useRef(new Map());
@@ -125,7 +126,7 @@ function DiagramWrapper({
     return (
         <>
             <Global styles={globalStyles} />
-            <div css={wrapper}>
+            <div css={wrapper} {...others}>
                 <div css={topPanel}>
                     {/* This is a placeholder. Something different will be passed in later */}
                     {renderTopPanel([nodes, links])}

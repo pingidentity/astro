@@ -14,6 +14,7 @@ export default function Diagram({
     nodeTemplates,
     onModelChange,
     onNodeClick,
+    ...others
 }) {
     const diagramRef = useRef();
 
@@ -149,7 +150,7 @@ export default function Diagram({
     };
 
     return (
-        <div css={diagramComponent}>
+        <div css={diagramComponent} {...others}>
             <ReactDiagram
                 ref={diagramRef}
                 diagramId="myDiagramDiv"

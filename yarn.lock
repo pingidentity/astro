@@ -39,6 +39,13 @@
   dependencies:
     "@babel/highlight" "^7.10.3"
 
+"@babel/code-frame@^7.10.4":
+  version "7.10.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
+  integrity sha1-Fo2ho26Q2miujUnA8bSMfGJJITo=
+  dependencies:
+    "@babel/highlight" "^7.10.4"
+
 "@babel/compat-data@^7.10.1":
   version "7.10.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/compat-data/-/compat-data-7.10.1.tgz#b1085ffe72cd17bf2c0ee790fc09f9626011b2db"
@@ -456,6 +463,15 @@
   integrity sha1-xjO7NK3wfFwTFWaS9ZIsgexT8o0=
   dependencies:
     "@babel/helper-validator-identifier" "^7.10.3"
+    chalk "^2.0.0"
+    js-tokens "^4.0.0"
+
+"@babel/highlight@^7.10.4":
+  version "7.10.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/highlight/-/highlight-7.10.4.tgz#7d1bdfd65753538fabe6c38596cdb76d9ac60143"
+  integrity sha1-fRvf1ldTU4+r5sOFls23bZrGAUM=
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.10.4"
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
@@ -1346,6 +1362,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.11.2":
+  version "7.11.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
+  integrity sha1-9UnBPHVMxAuHZEufqfCaapX+BzY=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.10.1", "@babel/template@^7.4.0", "@babel/template@^7.8.6":
   version "7.10.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/template/-/template-7.10.1.tgz#e167154a94cb5f14b28dc58f5356d2162f539811"
@@ -1830,6 +1853,17 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
+
+"@jest/types@^26.5.2":
+  version "26.5.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@jest/types/-/types-26.5.2.tgz#44c24f30c8ee6c7f492ead9ec3f3c62a5289756d"
+  integrity sha1-RMJPMMjubH9JLq2ew/PGKlKJdW0=
+  dependencies:
+    "@types/istanbul-lib-coverage" "^2.0.0"
+    "@types/istanbul-reports" "^3.0.0"
+    "@types/node" "*"
+    "@types/yargs" "^15.0.0"
+    chalk "^4.0.0"
 
 "@lerna/add@3.21.0":
   version "3.21.0"
@@ -3788,6 +3822,19 @@
     dom-accessibility-api "^0.4.4"
     pretty-format "^25.5.0"
 
+"@testing-library/dom@^7.24.2":
+  version "7.24.5"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@testing-library/dom/-/dom-7.24.5.tgz#862124eec8c37ad184716379f09742476b23815d"
+  integrity sha1-hiEk7sjDetGEcWN58JdCR2sjgV0=
+  dependencies:
+    "@babel/code-frame" "^7.10.4"
+    "@babel/runtime" "^7.10.3"
+    "@types/aria-query" "^4.2.0"
+    aria-query "^4.2.2"
+    chalk "^4.1.0"
+    dom-accessibility-api "^0.5.1"
+    pretty-format "^26.4.2"
+
 "@testing-library/jest-dom@^5.11.0":
   version "5.11.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@testing-library/jest-dom/-/jest-dom-5.11.2.tgz#c49de331555c70127b5d7fc97344ad5265f4c54c"
@@ -3801,6 +3848,20 @@
     css.escape "^1.5.1"
     jest-diff "^25.1.0"
     jest-matcher-utils "^25.1.0"
+    lodash "^4.17.15"
+    redent "^3.0.0"
+
+"@testing-library/jest-dom@^5.11.4":
+  version "5.11.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@testing-library/jest-dom/-/jest-dom-5.11.4.tgz#f325c600db352afb92995c2576022b35621ddc99"
+  integrity sha1-8yXGANs1KvuSmVwldgIrNWId3Jk=
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    "@types/testing-library__jest-dom" "^5.9.1"
+    aria-query "^4.2.2"
+    chalk "^3.0.0"
+    css "^3.0.0"
+    css.escape "^1.5.1"
     lodash "^4.17.15"
     redent "^3.0.0"
 
@@ -3835,6 +3896,14 @@
   dependencies:
     "@babel/runtime" "^7.10.3"
     "@testing-library/dom" "^7.17.1"
+
+"@testing-library/react@^11.0.4":
+  version "11.0.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@testing-library/react/-/react-11.0.4.tgz#c84082bfe1593d8fcd475d46baee024452f31dee"
+  integrity sha1-yECCv+FZPY/NR11Guu4CRFLzHe4=
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    "@testing-library/dom" "^7.24.2"
 
 "@tippyjs/react@^4.0.0-alpha.4":
   version "4.0.2"
@@ -3953,6 +4022,13 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/istanbul-reports@^3.0.0":
+  version "3.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/istanbul-reports/-/istanbul-reports-3.0.0.tgz#508b13aa344fa4976234e75dddcc34925737d821"
+  integrity sha1-UIsTqjRPpJdiNOdd3cw0klc32CE=
+  dependencies:
+    "@types/istanbul-lib-report" "*"
+
 "@types/jest@*":
   version "25.2.3"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/jest/-/jest-25.2.3.tgz#33d27e4c4716caae4eced355097a47ad363fdcaf"
@@ -3960,6 +4036,11 @@
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
+
+"@types/jest@^23.0.2":
+  version "23.3.14"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/jest/-/jest-23.3.14.tgz#37daaf78069e7948520474c87b80092ea912520a"
+  integrity sha1-N9qveAaeeUhSBHTIe4AJLqkSUgo=
 
 "@types/json5@^0.0.29":
   version "0.0.29"
@@ -6591,6 +6672,14 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chalk@^4.1.0:
+  version "4.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
+  integrity sha1-ThSHCmGNni7dl92DRf2dncMVZGo=
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
 change-emitter@^0.1.2:
   version "0.1.6"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/change-emitter/-/change-emitter-0.1.6.tgz#e8b2fe3d7f1ab7d69a32199aff91ea6931409515"
@@ -8751,6 +8840,11 @@ dom-accessibility-api@^0.4.6:
   version "0.4.7"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/dom-accessibility-api/-/dom-accessibility-api-0.4.7.tgz#31d01c113af49f323409b3ed09e56967aba485a8"
   integrity sha1-MdAcETr0nzI0CbPtCeVpZ6ukhag=
+
+dom-accessibility-api@^0.5.1:
+  version "0.5.3"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/dom-accessibility-api/-/dom-accessibility-api-0.5.3.tgz#0ea493c924d4070dfbf531c4aaca3d7a2c601aab"
+  integrity sha1-DqSTySTUBw379THEqso9eixgGqs=
 
 dom-converter@^0.2:
   version "0.2.0"
@@ -13000,6 +13094,16 @@ jest-each@^24.9.0:
     jest-util "^24.9.0"
     pretty-format "^24.9.0"
 
+jest-emotion@^10.0.32:
+  version "10.0.32"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/jest-emotion/-/jest-emotion-10.0.32.tgz#8e36a871911f78841701224a95b7c535c65b70b6"
+  integrity sha1-jjaocZEfeIQXASJKlbfFNcZbcLY=
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    "@types/jest" "^23.0.2"
+    chalk "^2.4.1"
+    css "^2.2.1"
+
 jest-environment-jsdom@^24.9.0:
   version "24.9.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/jest-environment-jsdom/-/jest-environment-jsdom-24.9.0.tgz#4b0806c7fc94f95edb369a69cc2778eec2b7375b"
@@ -15405,6 +15509,11 @@ murmurhash-js@^1.0.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
+mutationobserver-shim@^0.3.7:
+  version "0.3.7"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/mutationobserver-shim/-/mutationobserver-shim-0.3.7.tgz#8bf633b0c0b0291a1107255ed32c13088a8c5bf3"
+  integrity sha1-i/YzsMCwKRoRByVe0ywTCIqMW/M=
+
 mute-stdout@^1.0.0:
   version "1.0.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/mute-stdout/-/mute-stdout-1.0.1.tgz#acb0300eb4de23a7ddeec014e3e96044b3472331"
@@ -17711,6 +17820,16 @@ pretty-format@^25.1.0, pretty-format@^25.2.1, pretty-format@^25.5.0:
   integrity sha1-eHPB13T2gsNLjUi2dDor8qxVeRo=
   dependencies:
     "@jest/types" "^25.5.0"
+    ansi-regex "^5.0.0"
+    ansi-styles "^4.0.0"
+    react-is "^16.12.0"
+
+pretty-format@^26.4.2:
+  version "26.5.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/pretty-format/-/pretty-format-26.5.2.tgz#5d896acfdaa09210683d34b6dc0e6e21423cd3e1"
+  integrity sha1-XYlqz9qgkhBoPTS23A5uIUI80+E=
+  dependencies:
+    "@jest/types" "^26.5.2"
     ansi-regex "^5.0.0"
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
