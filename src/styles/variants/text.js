@@ -7,5 +7,6 @@ export const text = {
   bodyWeak: { fontSize: 'sm', color: 'text.secondary' },
   label: { fontSize: 'sm', color: 'text.secondary' },
   capsLabel: { color: 'text.secondary', textTransform: 'uppercase' },
-  base: { color: 'text.primary' },
+  base: { fontSize: 'md', color: 'text.primary' },
+  buttonLabel: { fontSize: 'md', fontWeight: 1, color: 'accent.30' },
 };

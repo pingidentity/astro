@@ -18,17 +18,12 @@ export const warning = {
   light: '#fbf0d0',
 };
 
-// BRAND COLORS
-export const brand = {
-  slate: '#253746',
-};
-
 // NEUTRAL COLORS
 export const black = '#000';
 export const white = '#fff';
 
 const steps = 9;
-const neutralScale = chroma.scale([brand.slate, 'white']).mode('lab');
+const neutralScale = chroma.scale(['#253746', 'white']).mode('lab');
 
 export const neutral = {
   10: neutralScale(0).hex(),
@@ -43,21 +38,24 @@ export const neutral = {
   95: neutralScale(8.5 / steps).hex(),
 };
 
-const accentSteps = 10;
-const accentScale = chroma.scale(['black', active, 'white']).mode('lab');
+const accentBase = '303F5F';
+const accentLight = 'F7F8FD';
+
+const accentSteps = 8;
+const accentScale = chroma.scale([accentBase, accentLight]).mode('hsl');
 
 export const accent = {
-  10: accentScale(1 / accentSteps).hex(),
-  20: accentScale(2 / accentSteps).hex(),
-  30: accentScale(3 / accentSteps).hex(),
-  40: accentScale(4 / accentSteps).hex(),
-  50: accentScale(5 / accentSteps).hex(),
-  60: accentScale(6 / accentSteps).hex(),
-  70: accentScale(7 / accentSteps).hex(),
-  80: accentScale(8 / accentSteps).hex(),
-  90: accentScale(9 / accentSteps).hex(),
-  95: accentScale(9.5 / accentSteps).hex(),
-  99: accentScale(9.85 / accentSteps).hex(),
+  10: chroma(accentBase).darken(1).hex(),
+  20: accentScale(0).hex(),
+  30: accentScale(1 / accentSteps).hex(),
+  40: accentScale(2 / accentSteps).hex(),
+  50: accentScale(3 / accentSteps).hex(),
+  60: accentScale(4 / accentSteps).hex(),
+  70: accentScale(5 / accentSteps).hex(),
+  80: accentScale(6 / accentSteps).hex(),
+  90: accentScale(7 / accentSteps).hex(),
+  95: accentScale(7.5 / accentSteps).hex(),
+  99: accentScale(8 / accentSteps).hex(),
 };
 
 const [cHue, cSaturation, cLightness] = chroma('#D033FF').hsl();
@@ -102,7 +100,6 @@ export const shadow = rgbaString(chroma(neutral[10]).alpha(0.25).rgba());
 export default {
   black,
   white,
-  brand,
   neutral,
   accent,
   decorative,

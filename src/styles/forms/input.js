@@ -1,7 +1,10 @@
+import { text } from '../variants/text';
+
 // Styles for default input and variants go here.
 
 // Default input styling
 export const input = {
+  ...text.base,
   appearance: 'none',
   boxSizing: 'border-box',
   lineHeight: '1em',
@@ -9,9 +12,8 @@ export const input = {
   bg: 'white',
   borderWidth: 1,
   borderStyle: 'solid',
-  borderColor: 'white',
+  borderColor: 'neutral.80',
   borderRadius: 2,
-  boxShadow: 'standard',
   px: 'md',
   py: 'sm',
   width: '100%',
