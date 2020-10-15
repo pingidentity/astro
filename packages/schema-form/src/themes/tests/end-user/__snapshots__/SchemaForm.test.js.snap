@@ -3,7 +3,7 @@
 exports[`form elements form success message 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <div
       class="card card--no-padding"
@@ -30,7 +30,7 @@ exports[`form elements form success message 1`] = `
 exports[`form elements form success title 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <div
       class="card card--no-padding"
@@ -53,7 +53,7 @@ exports[`form elements form success title 1`] = `
 exports[`single fields checkbox field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -102,7 +102,7 @@ exports[`single fields checkbox field 1`] = `
 exports[`single fields checkboxes field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -227,7 +227,7 @@ exports[`single fields checkboxes field 1`] = `
 exports[`single fields password field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -274,7 +274,7 @@ exports[`single fields password field 1`] = `
 exports[`single fields select field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -324,7 +324,7 @@ exports[`single fields select field 1`] = `
 exports[`single fields string field format email 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -366,7 +366,7 @@ exports[`single fields string field format email 1`] = `
 exports[`single fields string field regular 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -405,10 +405,116 @@ exports[`single fields string field regular 1`] = `
 </DocumentFragment>
 `;
 
+exports[`single fields string field with custom errors as markdown 1`] = `
+<DocumentFragment>
+  <div
+    class="css-b06tw8-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <div
+          class="text-input__icon text-input__icon--error"
+        />
+        <input
+          autocomplete="on"
+          class="text-input float-label__input text-input--error"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="text"
+          value=""
+        />
+        <div
+          class="field-message field-message--error"
+          role="status"
+        >
+          <div
+            class="end-user-markdown"
+          >
+            should be string blah
+          </div>
+        </div>
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with custom errors as sentence 1`] = `
+<DocumentFragment>
+  <div
+    class="css-b06tw8-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <div
+          class="text-input__icon text-input__icon--error"
+        />
+        <input
+          autocomplete="on"
+          class="text-input float-label__input text-input--error"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="text"
+          value=""
+        />
+        <div
+          class="field-message field-message--error"
+          role="status"
+        >
+          Should be string, Blah
+        </div>
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`single fields string field with help text 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -456,7 +562,7 @@ exports[`single fields string field with help text 1`] = `
 exports[`single fields string field with markdown errors 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -498,7 +604,7 @@ exports[`single fields string field with markdown errors 1`] = `
 exports[`single fields string field with placeholder 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"
@@ -541,7 +647,7 @@ exports[`single fields string field with placeholder 1`] = `
 exports[`single fields textarea field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1tfaxjj-FormWrapper"
+    class="css-b06tw8-FormWrapper"
   >
     <form
       autocomplete="off"

@@ -82,6 +82,45 @@ describe('single fields', () => {
       expect(asFragment()).toMatchSnapshot();
     });
 
+    test('with custom errors as markdown', () => {
+      const schema = {
+        type: 'string',
+      };
+      const uiSchema = {
+        'ui:options': {
+          hasMarkdownErrors: true,
+        },
+      };
+      const validate = (_formData, errors) => {
+        errors.addError('blah');
+        return errors;
+      };
+      const { asFragment } = render((
+        <Form
+          schema={schema}
+          uiSchema={uiSchema}
+          validate={validate}
+        />
+      ));
+      const submitButton = screen.getByRole('button');
+      fireEvent.click(submitButton);
+      expect(asFragment()).toMatchSnapshot();
+    });
+
+    test('with custom errors as sentence', () => {
+      const schema = {
+        type: 'string',
+      };
+      const validate = (_formData, errors) => {
+        errors.addError('blah');
+        return errors;
+      };
+      const { asFragment } = render(<Form schema={schema} validate={validate} />);
+      const submitButton = screen.getByRole('button');
+      fireEvent.click(submitButton);
+      expect(asFragment()).toMatchSnapshot();
+    });
+
     test('format email', () => {
       const schema = {
         type: 'string',

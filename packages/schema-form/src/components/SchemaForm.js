@@ -20,11 +20,17 @@ import SubmitButton from './SubmitButton';
 import SuccessMessage from './SuccessMessage';
 
 // Icons need to be globally accessible
-import iconStyles from '../styles/icons.css';
+import globalStyles from '../styles';
+
+const LIVE_VALIDATE = {
+  ON: 'on',
+  OFF: 'off',
+  POST_SUBMIT: 'postSubmit',
+};
 
 const FormWrapper = (props) => {
-  const { styles, children } = props; // eslint-disable-line
-  return <div css={css`${iconStyles} ${styles}`}>{children}</div>;
+  const { themeStyles, children } = props; // eslint-disable-line
+  return <div css={css`${themeStyles} ${globalStyles} `}>{children}</div>;
 };
 
 const SchemaForm = (props) => {
@@ -35,6 +41,7 @@ const SchemaForm = (props) => {
     formData: propsFormData,
     formSuccessMessage,
     formSuccessTitle,
+    liveValidate,
     onServerError,
     onServerSuccess,
     onSubmit,
@@ -46,8 +53,20 @@ const SchemaForm = (props) => {
     uiSchema,
     ...others
   } = props;
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [formState, setFormState] = useState(FORM_STATE.DEFAULT);
   const [asyncErrors, setAsyncErrors] = useState(extraErrors);
+  const hasLiveValidation = useMemo(() => {
+    switch (liveValidate) {
+      case LIVE_VALIDATE.ON:
+        return true;
+      case LIVE_VALIDATE.POST_SUBMIT:
+        return formSubmitted;
+      case LIVE_VALIDATE.OFF:
+      default:
+        return false;
+    }
+  }, [liveValidate, formSubmitted]);
   const correctedSchema = useMemo(() => getCorrectedSchema(schema), [schema]);
   const idHash = useMemo(() => {
     // Prefix all tests the same for DOM consistency
@@ -56,7 +75,7 @@ const SchemaForm = (props) => {
     }
     return v4uuid();
   }, []);
-  const styles = useThemedStyles(theme);
+  const themeStyles = useThemedStyles(theme);
   const FormWithConditionals = useMemo(() => applyRules(
     correctedSchema,
     uiSchema,
@@ -67,6 +86,12 @@ const SchemaForm = (props) => {
   [correctedSchema, uiSchema, rules, extraActions]);
 
   useEffect(() => {
+    // Set state to show form has been submitted once
+    if (formState !== FORM_STATE.DEFAULT && !formSubmitted) {
+      setFormSubmitted(true);
+    }
+
+    // Reset form state after error state is triggered
     if (formState === FORM_STATE.ERROR) {
       setFormState(FORM_STATE.DEFAULT);
     }
@@ -135,7 +160,7 @@ const SchemaForm = (props) => {
 
   if (formState === FORM_STATE.SUCCESS) {
     return (
-      <FormWrapper styles={styles}>
+      <FormWrapper themeStyles={themeStyles}>
         <SuccessMessage
           theme={theme}
           formSuccessMessage={formSuccessMessage}
@@ -146,29 +171,30 @@ const SchemaForm = (props) => {
   }
 
   return (
-    <FormWrapper styles={styles}>
+    <FormWrapper themeStyles={themeStyles}>
       <Errors
         errors={formLevelErrors}
         hasMarkdown={_.get(uiSchema, '_form["ui:options"].hasMarkdownErrors', false)}
         theme={theme}
       />
       <FormWithConditionals
-        formData={propsFormData}
+        additionalMetaSchemas={[JSONSchemaV4]}
+        autoComplete="off"
         className="form"
+        disabled={formState === FORM_STATE.PENDING}
+        extraErrors={asyncErrors}
+        formContext={{ formState, sitekey, theme }}
+        formData={propsFormData}
         id={`${idHash}_form`}
         idPrefix={idHash}
-        disabled={formState === FORM_STATE.PENDING}
+        liveValidate={hasLiveValidation}
+        onError={handleValidationError}
         onSubmit={handleSubmit}
-        extraErrors={asyncErrors}
-        additionalMetaSchemas={[JSONSchemaV4]}
+        noHtml5Validate
+        showErrorList={false}
+        widgets={widgets}
         FieldTemplate={FieldTemplate}
         ObjectFieldTemplate={ObjectFieldTemplate}
-        widgets={widgets}
-        formContext={{ formState, sitekey, theme }}
-        autoComplete="off"
-        showErrorList={false}
-        noHtml5Validate
-        onError={handleValidationError}
         {...others}
       >
         <SubmitButton
@@ -185,7 +211,8 @@ SchemaForm.propTypes = {
   /** When provided, will send a `POST` request to the given endpoint with the form data */
   endpoint: PropTypes.string,
   /** Refer to the [rjsf-conditionals docs](https://github.com/ivarprudnikov/rjsf-conditionals#extension-mechanism)
-   * for more info */
+   * for more information.
+  */
   extraActions: PropTypes.shape({}),
   /** Apply any default errors */
   extraErrors: PropTypes.shape({}),
@@ -200,18 +227,28 @@ SchemaForm.propTypes = {
   formSuccessMessage: PropTypes.string,
   /** Title of form message when successfully submitted. */
   formSuccessTitle: PropTypes.string,
-  /** Callback triggered if the server responds to the request with a status
-   * outside of the `2XX` range. */
+  /** Options for real-time schema validation. */
+  liveValidate: PropTypes.oneOf(['on', 'off', 'postSubmit']),
+  /**
+   * Callback triggered if the server responds to the request with a status
+   * outside of the `2XX` range.
+  */
   onServerError: PropTypes.func,
-  /** Callback triggered if the server responds to the request with a status within
-   *  the `2XX` range. */
+  /**
+   * Callback triggered if the server responds to the request with a status within
+   * the `2XX` range.
+  */
   onServerSuccess: PropTypes.func,
-  /** Overrides the default form submission event allowing for various custom behaviors,
-  * please be warned that this may also lead to unpredictable outcomes.
-  * See [usage docs](/?path=/docs/usage-async-behavior--custom-submit) for more info. */
+  /**
+   * Overrides the default form submission event allowing for various custom behaviors,
+   * please be warned that this may also lead to unpredictable outcomes.
+   * See [usage docs](/?path=/docs/usage-async-behavior--custom-submit) for more info.
+  */
   onSubmit: PropTypes.func,
-  /** Applies conditional logic to show/hide fields.
-   * See [usage docs](/?path=/docs/usage-conditionals--conditionals-example) for more info. */
+  /**
+   * Applies conditional logic to show/hide fields.
+   * See [usage docs](/?path=/docs/usage-conditionals--conditionals-example) for more info.
+  */
   rules: PropTypes.arrayOf(PropTypes.shape({})),
   /** The JSON schema object */
   schema: PropTypes.shape({
@@ -234,6 +271,7 @@ SchemaForm.defaultProps = {
   formData: {},
   formSuccessMessage: '',
   formSuccessTitle: '',
+  liveValidate: 'off',
   onServerError: _.noop,
   onServerSuccess: _.noop,
   onSubmit: undefined,

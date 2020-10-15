@@ -36,12 +36,18 @@ export const EndUserComponents = {
  * @param {{}} props - The list of props from RJSF
  */
 const getFieldMessageData = (props) => {
-  const { rawErrors = [], options: { help: uiHelp, hasMarkdownErrors } } = props;
+  const {
+    rawErrors = [],
+    options: {
+      help: uiHelp = false,
+      hasMarkdownErrors = false,
+    } = {},
+  } = props;
   let fieldMessage;
   let fieldMessageProps;
 
   if (rawErrors.length) {
-    fieldMessage = rawErrors.map(_.capitalize).join(', ');
+    fieldMessage = rawErrors.join(' ');
     fieldMessageProps = { status: 'error' };
   } else if (uiHelp) {
     fieldMessage = uiHelp;
@@ -49,7 +55,11 @@ const getFieldMessageData = (props) => {
   }
 
   if (hasMarkdownErrors) {
+    // Convert to markdown WITHOUT additional logic if the option exists
     fieldMessage = fieldMessage && fieldMessage.length && <Markdown source={fieldMessage} />;
+  } else if (rawErrors.length) {
+    // Convert to a string if the option does not exist and it's meant to be an error
+    fieldMessage = rawErrors.map(_.capitalize).join(', ');
   }
 
   return { fieldMessage, fieldMessageProps };

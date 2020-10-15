@@ -16,13 +16,13 @@ const uiSchema = {
     'ui:options': {
       label: 'Label',
     },
-    'ui:widget': 'textarea',
   },
 };
 const error = 'test error';
 const extraErrors = { _form: { __errors: [error] } };
 const onServerError = jest.fn(() => extraErrors);
 const onServerSuccess = jest.fn();
+const validationErrorText = 'Should not be shorter than 3 characters';
 
 const defaultResponse = new Response(new Blob([JSON.stringify({
   status: 200,
@@ -66,7 +66,6 @@ test('it displays but does not persist async errors when validation fails', asyn
 });
 
 test('it displays and clears client errors when async errors come through', async () => {
-  const validationErrorText = 'Should not be shorter than 3 characters';
   global.fetch.mockImplementation(() => new Response(null, { status: 400 }));
 
   renderSchemaForm({
@@ -167,4 +166,51 @@ test('successful submission when given an endpoint', async () => {
 
   // Expect async success message to be rendered
   await screen.findByText(formSuccessMessage);
+});
+
+test('turns on live validation after initial submit if option is given', async () => {
+  renderSchemaForm({
+    liveValidate: 'postSubmit',
+    schema,
+    uiSchema,
+  });
+  const input = screen.getByRole('textbox');
+  const submitButton = screen.getByRole('button');
+
+  // Ensure validation fails, length = 2
+  fireEvent.change(input, { target: { value: '12' } });
+  // Ensure live validation is not happening yet
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  fireEvent.click(submitButton);
+
+  // Expect validation error
+  const validationError = await screen.findByRole('status');
+  expect(validationError).toHaveTextContent(validationErrorText);
+
+  // Expect live validation to happen after initial submit (no need to submit again)
+  fireEvent.change(input, { target: { value: '123' } });
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+});
+
+test('live validation happens all of the time if option is given', async () => {
+  // Will fail initial fetch, but second one will be the default above and will succeed
+  renderSchemaForm({
+    liveValidate: 'on',
+    schema,
+    uiSchema,
+  });
+  const input = screen.getByRole('textbox');
+
+  // Ensure validation fails, length = 2
+  fireEvent.change(input, { target: { value: '12' } });
+  // Ensure live validation is happening already
+  expect(screen.queryByRole('status')).toBeInTheDocument();
+
+  // Expect validation error
+  const validationError = await screen.findByRole('status');
+  expect(validationError).toHaveTextContent(validationErrorText);
+
+  // Expect live validation to keep happening
+  fireEvent.change(input, { target: { value: '123' } });
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
 });
