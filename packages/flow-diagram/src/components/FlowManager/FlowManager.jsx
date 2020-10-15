@@ -23,6 +23,7 @@ function DiagramWrapper({
     links,
     nodes,
     renderTopPanel,
+    nodeClick,
     ...others
 }) {
     const linkDictionary = useRef(new Map());
@@ -117,6 +118,8 @@ function DiagramWrapper({
 
     const onNodeClick = (e, obj) => {
         setSelectedNode(obj.part.data.key);
+        // temp code to demonstrate adding error state. Will be removed.
+        nodeClick(obj.part.data.id);
     };
 
     const onPanelClose = () => {

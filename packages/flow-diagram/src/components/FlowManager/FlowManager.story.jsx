@@ -216,8 +216,29 @@ function Demo() {
         },
     ];
 
-    const [steps, links] = stepsToFlowDiagram(stepDefinitions);
     const [triggerNodes, triggerLinks] = triggersToFlowDiagram(triggers);
+    const [stepDefs, setStepDefs] = useState(stepDefinitions);
+    const [steps, links] = stepsToFlowDiagram(stepDefs);
+
+    // temp code to demonstrate adding error state. Will be removed.
+    const nodeClick = (id) => {
+        const updatedStep = {
+            ...stepDefinitions[0],
+            configuration: {
+                ...stepDefinitions[0].configuration,
+                error: {
+                    code: 'error',
+                    message: 'This is an example error',
+                },
+            },
+        };
+
+        const updatedDefinitions = stepDefinitions.map((obj) => {
+            return Array(updatedStep).find(() => id === obj.id) || obj;
+        });
+
+        setStepDefs(updatedDefinitions);
+    };
 
     return (
         <div>
@@ -265,6 +286,7 @@ function Demo() {
                         'next': 'user-login',
                     },
                 ]}
+                nodeClick={nodeClick}
             />
         </div>
     );
