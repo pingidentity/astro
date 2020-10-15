@@ -38,6 +38,7 @@ export default function Diagram({
 
                 {
                     hoverDelay: 0,
+                    'animationManager.isEnabled': false,
                     'undoManager.isEnabled': true,
                     dragSelectingTool:
                         $(RealtimeDragSelectingTool,

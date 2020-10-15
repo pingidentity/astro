@@ -160,7 +160,7 @@ export const nodeTemplate = (width = 120) => {
 export const outletTemplate = fill => () => {
     return (
         $(go.Node, 'Spot',
-            { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
+            { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', movable: false, deletable: false },
             new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
