@@ -312,6 +312,24 @@ describe('HeatMap', () => {
 
     // Using a more complex mock here because it's important to test that this update is actually
     // happening in the component's lifecycle.
+    it('updates source when data prop changes, but is still the same object', () => {
+        const mutatingPoints = [...defaultProps.points];
+        const component = getComponent({ points: mutatingPoints });
+        // Have to call this because the map object ref is set in the load event.
+        const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
+        load();
+
+        expect(map.getSource).not.toHaveBeenCalled();
+        mutatingPoints.pop();
+
+        component.setProps({ ...defaultProps, points: mutatingPoints });
+
+        expect(map.getSource).toHaveBeenCalledTimes(1);
+        clearMock(map);
+    });
+
+    // Using a more complex mock here because it's important to test that this update is actually
+    // happening in the component's lifecycle.
     it('updates center when center prop changes', () => {
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
