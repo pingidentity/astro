@@ -283,15 +283,15 @@ describe('HeatMap', () => {
         callbackWithBoundsAndZoom(
             {
                 getBounds: () => ({
-                    _nw: [10, 10],
-                    _se: [20, 20],
+                    _ne: [10, 10],
+                    _sw: [20, 20],
                 }),
                 getZoom: () => 10,
             },
             onZoom,
         )('event');
 
-        expect(onZoom).toHaveBeenCalledWith({ nwBound: [10, 10], seBound: [20, 20], zoom: 10 }, 'event');
+        expect(onZoom).toHaveBeenCalledWith({ neBound: [10, 10], swBound: [20, 20], zoom: 10 }, 'event');
     });
 
     // Using a more complex mock here because it's important to test that this update is actually

@@ -109,12 +109,12 @@ export const mouseEnter = (map, onMouseEnter) => (e) => {
 
 export const callbackWithBoundsAndZoom = (map, callback) => (e) => {
     const {
-        _nw: nwBound,
-        _se: seBound,
+        _ne: neBound,
+        _sw: swBound,
     } = map.getBounds();
     callback({
-        nwBound,
-        seBound,
+        neBound,
+        swBound,
         zoom: map.getZoom(),
     }, e);
 };
