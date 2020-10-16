@@ -67,10 +67,6 @@ test('it displays but does not persist async errors when validation fails', asyn
   await waitFor(() => fireEvent.change(input, { target: { value: '12' } }));
   user.click(submitButton);
 
-  // FIXME: Should not have to click submit twice to clear field-level async errors and display
-  // validation errors.
-  user.click(submitButton);
-
   // Expect async error to be cleared
   expect(screen.queryByText(error)).not.toBeInTheDocument();
 });
@@ -100,7 +96,8 @@ test('it displays and clears client errors when async errors come through', asyn
   user.click(submitButton);
 
   // Expect async error to be rendered
-  await screen.findByText(error);
+  await screen.findByText(new RegExp(error));
+  expect(screen.queryByText(new RegExp(validationErrorText))).not.toBeInTheDocument();
 
   // Expect async error to be cleared
   expect(screen.queryByText(validationErrorText)).not.toBeInTheDocument();

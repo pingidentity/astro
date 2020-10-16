@@ -110,16 +110,10 @@ const SchemaForm = (props) => {
 
   const formLevelErrors = _.get(asyncErrors, '_form.__errors', undefined);
   const handleChange = (formInfo, ...args) => {
-    // Only clear async errors on change if live validation is meant to be active
-    if (hasLiveValidation && Object.keys(asyncErrors).length) {
+    // Only figure out whether the async errors need to be cleared if there are any
+    if (Object.keys(asyncErrors).length) {
       const { formData } = formInfo;
-
       // Get only the updated form data from the last change event
-      // const differences = Object.entries(formData).reduce((acc, cur) => {
-      //   const [key, value] = cur;
-      //   if (value !== currentData[key]) return [...acc, [key, value]];
-      //   return acc;
-      // }, []);
       const differences = _.differenceWith(
         Object.entries(formData),
         Object.entries(currentData),
