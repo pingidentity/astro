@@ -42,10 +42,23 @@ const radioCheckedContent = {
   py: 'md',
 };
 
+const listItem = {
+  ...base,
+  flex: '1 1 0px',
+  cursor: 'pointer',
+  minHeight: '80px',
+  justifyContent: 'center',
+  bg: 'accent.99',
+  '&:hover': {
+    bg: 'white',
+  },
+};
+
 export default {
   base,
   inputContainer,
   panel,
   radioContainer,
   radioCheckedContent,
+  listItem,
 };
