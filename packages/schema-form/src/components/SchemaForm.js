@@ -20,7 +20,7 @@ import SubmitButton from './SubmitButton';
 import SuccessMessage from './SuccessMessage';
 
 // Icons need to be globally accessible
-import globalStyles from '../styles';
+import styles from '../styles';
 
 const LIVE_VALIDATE = {
   ON: 'on',
@@ -30,7 +30,16 @@ const LIVE_VALIDATE = {
 
 const FormWrapper = (props) => {
   const { themeStyles, children } = props; // eslint-disable-line
-  return <div css={css`${themeStyles} ${globalStyles} `}>{children}</div>;
+  return (
+    <div
+      css={css`
+        ${themeStyles}
+        ${styles}
+      `}
+    >
+      {children}
+    </div>
+  );
 };
 
 const SchemaForm = (props) => {
@@ -42,6 +51,7 @@ const SchemaForm = (props) => {
     formSuccessMessage,
     formSuccessTitle,
     liveValidate,
+    onChange: propsOnChange,
     onServerError,
     onServerSuccess,
     onSubmit,
@@ -53,6 +63,7 @@ const SchemaForm = (props) => {
     uiSchema,
     ...others
   } = props;
+  const [currentData, setCurrentData] = useState(propsFormData);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formState, setFormState] = useState(FORM_STATE.DEFAULT);
   const [asyncErrors, setAsyncErrors] = useState(extraErrors);
@@ -98,7 +109,41 @@ const SchemaForm = (props) => {
   });
 
   const formLevelErrors = _.get(asyncErrors, '_form.__errors', undefined);
+  const handleChange = (formInfo, ...args) => {
+    // Only clear async errors on change if live validation is meant to be active
+    if (hasLiveValidation && Object.keys(asyncErrors).length) {
+      const { formData } = formInfo;
+
+      // Get only the updated form data from the last change event
+      // const differences = Object.entries(formData).reduce((acc, cur) => {
+      //   const [key, value] = cur;
+      //   if (value !== currentData[key]) return [...acc, [key, value]];
+      //   return acc;
+      // }, []);
+      const differences = _.differenceWith(
+        Object.entries(formData),
+        Object.entries(currentData),
+        _.isEqual,
+      );
+
+      // Remove any async errors related to the differences
+      if (differences.length) {
+        const newAsyncErrors = { ...asyncErrors };
+        differences.forEach((diff) => {
+          const [fieldId] = diff;
+          delete newAsyncErrors[fieldId];
+        });
+        setAsyncErrors(newAsyncErrors);
+      }
+      // Update the current form data state so we can keep track of it for differences again
+      setCurrentData(formData);
+    }
+
+    // Call the onChange prop if one was passed in
+    propsOnChange(formInfo, ...args);
+  };
   const handleValidationError = () => {
+    // FIXME: Submit must be clicked twice to display new validation errors.
     // Clear all async errors if validation errors occur. Otherwise, they stick around.
     setAsyncErrors({});
     setFormState(FORM_STATE.ERROR);
@@ -188,6 +233,7 @@ const SchemaForm = (props) => {
         id={`${idHash}_form`}
         idPrefix={idHash}
         liveValidate={hasLiveValidation}
+        onChange={handleChange}
         onError={handleValidationError}
         onSubmit={handleSubmit}
         noHtml5Validate
@@ -229,6 +275,8 @@ SchemaForm.propTypes = {
   formSuccessTitle: PropTypes.string,
   /** Options for real-time schema validation. */
   liveValidate: PropTypes.oneOf(['on', 'off', 'postSubmit']),
+  /** Callback triggered on each change to the form data. */
+  onChange: PropTypes.func,
   /**
    * Callback triggered if the server responds to the request with a status
    * outside of the `2XX` range.
@@ -272,6 +320,7 @@ SchemaForm.defaultProps = {
   formSuccessMessage: '',
   formSuccessTitle: '',
   liveValidate: 'off',
+  onChange: _.noop,
   onServerError: _.noop,
   onServerSuccess: _.noop,
   onSubmit: undefined,
