@@ -11,6 +11,7 @@ export const customErrors = () => {
     properties: {
       test: {
         type: 'string',
+        minLength: 3,
       },
     },
     $schema: 'http://json-schema.org/draft-04/schema#',
