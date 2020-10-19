@@ -1,8 +1,5 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import Text from '../Text/Text';
 import Box from '../Box/Box';
-import Separator from '../Separator/Separator';
 
 /**
  * List Item component.
@@ -12,31 +9,14 @@ import Separator from '../Separator/Separator';
 const ListItem = forwardRef((props, ref) => {
   const {
     children,
-    title,
     ...others
   } = props;
 
-
   return (
-    <Box role="listitem" ref={ref} {...others}>
-      <Separator margin="0px" bg="line.hairline" />
-      <Box variant="boxes.listItem">
-        <Box isRow p="md">
-          <Box mr="auto">
-            <Text variant="itemTitle">
-              {title}
-            </Text>
-          </Box>
-          {children}
-        </Box>
-      </Box>
+    <Box role="listitem" ref={ref} as="li" variant="boxes.listItem" isRow p="md" {...others}>
+      {children}
     </Box>
   );
 });
 
 export default ListItem;
-
-ListItem.propTypes = {
-  /** title for the List Item */
-  title: PropTypes.string,
-};

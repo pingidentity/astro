@@ -11,7 +11,7 @@ const PageHeader = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Box isRow justifyContent="space-between" {...others} role="heading" aria-level="1" ref={ref}>
+    <Box isRow justifyContent="space-between" role="heading" aria-level="1" ref={ref} {...others}>
       <Text variant="title" mb="md">
         {title}
       </Text>
