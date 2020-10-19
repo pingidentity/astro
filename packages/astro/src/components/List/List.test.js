@@ -14,13 +14,6 @@ const getComponent = (props = {}) => render(
 test('renders List component', () => {
   getComponent();
   const list = screen.getByRole('list');
-  expect(list).toBeInstanceOf(HTMLDivElement);
+  expect(list).toBeInstanceOf(HTMLUListElement);
   expect(list).toBeInTheDocument();
-});
-
-
-test('renders List title prop', () => {
-  getComponent({ title: 'Cool Label' });
-  const title = screen.getByText('Cool Label');
-  expect(title).toBeInTheDocument();
 });

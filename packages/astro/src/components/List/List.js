@@ -1,6 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import Text from '../Text/Text';
 import Box from '../Box/Box';
 
 /**
@@ -11,23 +9,14 @@ import Box from '../Box/Box';
 const List = forwardRef((props, ref) => {
   const {
     children,
-    title,
     ...others
   } = props;
 
   return (
-    <Box ref={ref} role="list" {...others}>
-      <Text variant="itemTitle" mb="sm" color="text.secondary">
-        {title}
-      </Text>
+    <Box ref={ref} role="list" as="ul" pl="0" {...others}>
       {children}
     </Box>
   );
 });
 
 export default List;
-
-List.propTypes = {
-  /** title for the List. */
-  title: PropTypes.string,
-};
