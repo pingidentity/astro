@@ -29,6 +29,9 @@ export const buttons = {
       border: '1px solid',
       borderColor: 'active',
       color: 'white',
+      'path': {
+        fill: 'white',
+      },
     },
   },
   primary: {
@@ -83,5 +86,26 @@ export const buttons = {
     border: '1px solid',
     borderColor: 'critical.bright',
     color: 'transparent',
+  },
+  icon: {
+    cursor: 'pointer',
+    bg: 'transparent',
+    'path': {
+      fill: 'text.secondary',
+    },
+    '&:hover': {
+      bg: 'accent.90',
+      borderRadius: '50%',
+    },
+    '&:active': {
+      'path': {
+        fill: 'white',
+      },
+      bg: 'active',
+    },
+    '&:focus': {
+      outline: 'none',
+      color: 'white',
+    },
   },
 };

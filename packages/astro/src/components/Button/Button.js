@@ -30,7 +30,7 @@ const Button = forwardRef((props, ref) => {
 
 Button.propTypes = {
   onPress: PropTypes.func,
-  variant: PropTypes.oneOf(['default', 'primary', 'text', 'success', 'critical']),
+  variant: PropTypes.oneOf(['default', 'primary', 'text', 'success', 'critical', 'icon']),
 };
 
 Button.defaultProps = {
