@@ -215,6 +215,7 @@ export const nodeTemplateStart = () =>
             deletable: false,
             toSpot: go.Spot.Left,
             fromSpot: go.Spot.Right,
+            isAnimated: false,
         },
         new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
 
