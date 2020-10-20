@@ -1,11 +1,17 @@
 {
   "name": "@pingux/astro",
-  "version": "0.1.0-beta.0",
+  "version": "0.1.0-beta.3",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
-  "main": "index.cjs.js",
-  "module": "index.esm.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
@@ -14,13 +20,17 @@
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "scripts": {
+    "build": "rm -rf lib && npm-run-all build:*",
+    "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs",
+    "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir lib/",
     "build:icons": "cd ../icons && yarn build",
     "coverage": "yarn test --coverage",
     "coverage-ci": "yarn test --coverage --ci",
+    "demo": "rm -rf ./demo && build-storybook -o demo",
     "test": "jest",
     "lint": "eslint .",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "start": "start-storybook -p 6006",
+    "storybook": "yarn start"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

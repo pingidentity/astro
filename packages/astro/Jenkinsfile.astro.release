@@ -1,0 +1,91 @@
+pipeline {
+  agent {
+    label 'ui-pipeline-shared'
+  }
+  stages {
+    stage('run-tests') {
+      steps {
+        dir("${env.WORKSPACE}/packages/astro") {
+          container('node-builder') {
+            echo "Running astro linting and tests"
+            sh "yarn install --frozen-lockfile --ignore-engines"
+            sh "yarn run lint"
+            sh "yarn run test"
+            sh "npm version prerelease"
+          }
+        }
+      }
+    }
+
+    stage('version, tag and commit') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/astro") {
+          container('node-builder') {
+
+            script {
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
+              env.GIT_RELEASE_TAG = "astro-${env.RELEASE_VERSION}"
+            }
+            echo """
+              release version: ${env.RELEASE_VERSION}
+              git tag: ${env.GIT_RELEASE_TAG}
+            """
+            withCredentials([
+              sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
+            ]){
+
+            sh """
+                git add package.json
+                git add ../../yarn.lock
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+
+                git commit -m 'UI Library ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
+
+                git tag ${env.GIT_RELEASE_TAG}
+                GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+            """
+            }
+
+          }
+        }
+      }
+    }
+    stage('yarn-publish') {
+      steps {
+        dir("${env.WORKSPACE}/packages/astro/") {
+          container('node-builder') {
+            echo "Building & publishing"
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              sh "npm publish --tag beta"
+            }
+          }
+        }
+      }
+    }
+    stage('update-demo') {
+      steps {
+        dir("${env.WORKSPACE}/packages/astro") {
+          container('node-builder'){
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=astro package-and-upload-astro"
+            }
+          }
+        }
+      }
+    }
+  }
+  post {
+    success {
+       slackSend channel: '#ux-deployments', message: "@here :verynice: Great Success! Astro ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/astro.", color: "#4aba78"
+    }
+    unsuccessful {
+       slackSend channel: '#ux-deployments', message: "@here Astro deploy failed! ${BUILD_URL}", color: "#a31300"
+    }
+
+    cleanup {
+        cleanWs()
+    }
+  }
+}
