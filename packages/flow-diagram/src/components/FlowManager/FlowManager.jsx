@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 import { Global } from '@emotion/core';
@@ -52,6 +52,19 @@ function FlowDiagram({
 }) {
     const linkDictionary = useRef(new Map());
     const stepDictionary = useRef(new Map());
+
+    useEffect(() => {
+        nodes.reduce((node, step) => {
+            const {
+                stepId,
+                id = stepId,
+            } = step;
+
+            stepDictionary.current.set(id, step);
+
+            return {};
+        }, []);
+    }, []);
 
     const modelChange = (changes) => {
         const {
@@ -151,6 +164,18 @@ function FlowDiagram({
 
     const selectedNode = stepDictionary.current.get(selectedNodeId) ?? {};
 
+    const selectedNodeConfig = () => {
+        if (typeDefinitions.find(def =>
+            def.id === stepDictionary.current.get(selectedNodeId).category).renderConfig
+        ) {
+            return typeDefinitions.find(def =>
+                def.id === stepDictionary.current.get(selectedNodeId).category)
+                .renderConfig(selectedNodeId);
+        }
+
+        return null;
+    };
+
     const itemsInPalette = typeDefinitions.filter(({ showInPalette = true }) => showInPalette);
 
     return (
@@ -163,29 +188,32 @@ function FlowDiagram({
                 </div>
                 <div css={bodyWrapper}>
                     <LeftContainer>
-                        {selectedNodeId !== null ? (
-                            <ConfigPanel
-                                category={selectedNode.category}
-                                configuration={selectedNode.configuration}
-                                onClose={onPanelClose}
-                            />
-                        ) : (
-                            <React.Fragment>
-                                <Text m="10px 0px 15px 15px" fontSize={24}>Toolbox</Text>
-                                <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
-                                <Palette
-                                    groupTemplates={[
-                                        ['', groupTemplate],
-                                    ]}
-                                    nodeTemplates={[
-                                        ['', paletteItemTemplate({ width: 280 })],
-                                        ...getPaletteTemplates(itemsInPalette),
-                                    ]}
-                                    nodeDataArray={getPaletteItems(itemsInPalette)}
-                                    linkDataArray={[]}
-                                />
-                            </React.Fragment>
-                        )}
+                        <>
+                            {selectedNodeId !== null ? (
+                                <ConfigPanel
+                                    category={selectedNode.category}
+                                    onClose={onPanelClose}
+                                >
+                                    {selectedNodeConfig()}
+                                </ConfigPanel>
+                            ) : (
+                                <React.Fragment>
+                                    <Text m="10px 0px 15px 15px" fontSize={24}>Toolbox</Text>
+                                    <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
+                                    <Palette
+                                        groupTemplates={[
+                                            ['', groupTemplate],
+                                        ]}
+                                        nodeTemplates={[
+                                            ['', paletteItemTemplate({ width: 280 })],
+                                            ...getPaletteTemplates(itemsInPalette),
+                                        ]}
+                                        nodeDataArray={getPaletteItems(itemsInPalette)}
+                                        linkDataArray={[]}
+                                    />
+                                </React.Fragment>
+                            )}
+                        </>
                     </LeftContainer>
                     <Diagram
                         groupTemplates={[
