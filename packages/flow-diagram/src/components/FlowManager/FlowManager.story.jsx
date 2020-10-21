@@ -16,54 +16,56 @@ export default {
     component: FlowManager,
 };
 
-const loginStepJSON = {
-    'title': 'My first step type!',
-    'description': 'This is an example step type',
-    'type': 'object',
-    'properties': {
-        'stepType': {
-            'const': 'LOGIN',
-        },
-        'configuration': {
-            'properties': {
-                'enableRegistration': {
-                    'type': 'boolean',
-                },
-                'redirectUrl': {
-                    'type': 'string',
-                    'format': 'uri',
-                },
-            },
-            'additionalProperties': false,
-        },
-        'outlets': {
-            'type': 'array',
-            'items': {
-                'type': 'object',
-                'properties': {
-                    'name': {
-                        'enum': [
-                            'On Success',
-                            'Bad Password',
-                        ],
-                    },
-                    'next': {
-                        'type': 'string',
-                    },
-                },
-            },
-        },
-        'outputSchema': {
-            'properties': {
-                'someOutputParam': {
-                    'type': 'string',
-                    'title': 'The example output param',
-                    'description': 'This is just an example output parameter.',
-                },
-            },
-        },
-    },
-};
+// KEEP THIS- Sample step type from API
+//
+// const loginStepJSON = {
+//     'title': 'My first step type!',
+//     'description': 'This is an example step type',
+//     'type': 'object',
+//     'properties': {
+//         'stepType': {
+//             'const': 'LOGIN',
+//         },
+//         'configuration': {
+//             'properties': {
+//                 'enableRegistration': {
+//                     'type': 'boolean',
+//                 },
+//                 'redirectUrl': {
+//                     'type': 'string',
+//                     'format': 'uri',
+//                 },
+//             },
+//             'additionalProperties': false,
+//         },
+//         'outlets': {
+//             'type': 'array',
+//             'items': {
+//                 'type': 'object',
+//                 'properties': {
+//                     'name': {
+//                         'enum': [
+//                             'On Success',
+//                             'Bad Password',
+//                         ],
+//                     },
+//                     'next': {
+//                         'type': 'string',
+//                     },
+//                 },
+//             },
+//         },
+//         'outputSchema': {
+//             'properties': {
+//                 'someOutputParam': {
+//                     'type': 'string',
+//                     'title': 'The example output param',
+//                     'description': 'This is just an example output parameter.',
+//                 },
+//             },
+//         },
+//     },
+// };
 
 // KEEP THIS- for reference during development
 // {
@@ -146,10 +148,6 @@ const loginStepJSON = {
 //   }
 
 function Demo() {
-    const [paletteDataArray] = useState([
-        { ...loginStepJSON, key: 0, text: loginStepJSON.title },
-    ]);
-    const [paletteLinkDataArray] = useState([]);
     const [skipsDiagramUpdate] = useState(false);
 
     const stepDefinitions =
@@ -233,11 +231,13 @@ function Demo() {
             },
         };
 
-        const updatedDefinitions = stepDefinitions.map((obj) => {
-            return Array(updatedStep).find(() => id === obj.id) || obj;
-        });
+        if (stepDefinitions[0].id === id) {
+            const updatedDefinitions = stepDefinitions.map((obj) => {
+                return Array(updatedStep).find(() => id === obj.id) || obj;
+            });
 
-        setStepDefs(updatedDefinitions);
+            setStepDefs(updatedDefinitions);
+        }
     };
 
     return (
@@ -266,18 +266,47 @@ function Demo() {
                 // Can't just extrapolate based on stepDefinitions, because that would mean
                 // that empty workflows would be missing most options.
                 typeDefinitions={[
-                    ['LOGIN', stepTemplate('#028CFF', <Desktop />)],
-                    ['success', outletTemplate('#0bbf01')],
-                    ['failure', outletTemplate('#ce0808')],
-                    ['not_found', outletTemplate('#000')],
-                    ['finished', successNode],
-                    ['error', failureNode],
-                    ['START', nodeTemplateStart],
+                    {
+                        id: 'LOGIN',
+                        displayName: 'Login',
+                        icon: <Desktop />,
+                        color: '#028CFF',
+                        template: stepTemplate,
+                    },
+                    {
+                        id: 'success',
+                        template: outletTemplate,
+                        showInPalette: false,
+                        color: '#0bbf01',
+                    },
+                    {
+                        id: 'failure',
+                        template: outletTemplate,
+                        showInPalette: false,
+                        color: '#ce0808',
+                    },
+                    {
+                        id: 'not_found',
+                        template: outletTemplate,
+                        showInPalette: false,
+                        color: '#000',
+                    },
+                    {
+                        id: 'finished',
+                        template: successNode,
+                        displayName: 'Complete',
+                    },
+                    {
+                        id: 'error',
+                        template: failureNode,
+                        displayName: 'Failure',
+                    },
+                    {
+                        id: 'START',
+                        template: nodeTemplateStart,
+                        showInPalette: false,
+                    },
                 ]}
-                skipsDiagramUpdate={skipsDiagramUpdate}
-                paletteDataArray={paletteDataArray}
-                paletteLinkDataArray={paletteLinkDataArray}
-                // stepDefinitions={stepDefinitions}
                 links={[...links, ...triggerLinks]}
                 nodes={[...steps, ...triggerNodes]}
                 triggers={[
@@ -286,7 +315,7 @@ function Demo() {
                         'next': 'user-login',
                     },
                 ]}
-                nodeClick={nodeClick}
+                onNodeClick={nodeClick}
             />
         </div>
     );

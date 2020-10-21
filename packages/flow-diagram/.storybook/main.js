@@ -6,7 +6,9 @@ module.exports = {
 	addons: [
 		'@storybook/addon-actions',
 		'@storybook/addon-links',
-		'@storybook/addon-knobs/register',
+		// DO NOT ADD THIS BACK IN. It breaks GoJS in some cases, probably because they're
+		// both trying to edit the same global/browser variable.
+		// '@storybook/addon-knobs/register',
 		'@storybook/addon-docs',
 		{
 			name: '@storybook/addon-storysource',

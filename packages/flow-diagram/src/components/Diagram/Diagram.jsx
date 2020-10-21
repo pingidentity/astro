@@ -6,14 +6,13 @@ import { COLORS } from '../../utils/constants';
 import { RealtimeDragSelectingTool } from '../../RealtimeDragSelectingTool';
 import { diagramComponent } from './Diagram.styles';
 
-go.Diagram.licenseKey = "73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741";
+go.Diagram.licenseKey = '73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741';
 export default function Diagram({
     groupTemplates,
     linkDataArray,
     nodeDataArray,
     nodeTemplates,
     onModelChange,
-    onNodeClick,
     ...others
 }) {
     const diagramRef = useRef();
@@ -38,7 +37,6 @@ export default function Diagram({
 
                 {
                     hoverDelay: 0,
-                    'undoManager.isEnabled': true,
                     dragSelectingTool:
                         $(RealtimeDragSelectingTool,
                             { isPartialInclusion: true, delay: 0 },
@@ -97,11 +95,11 @@ export default function Diagram({
                 });
 
         nodeTemplates.forEach(([name, template]) => {
-            diagram.nodeTemplateMap.add(name, template(onNodeClick));
+            diagram.nodeTemplateMap.add(name, template);
         });
 
         groupTemplates.forEach(([name, template]) => {
-            diagram.groupTemplateMap.add(name, template());
+            diagram.groupTemplateMap.add(name, template);
         });
 
         diagram.groupTemplate =
@@ -161,7 +159,7 @@ export default function Diagram({
                 modelData={{ canRelink: false }}
                 onModelChange={onModelChange}
                 // TODO: Wire this in. Certain state updates require that this be set to true.
-                skipsDiagramUpdate={false}
+                // skipsDiagramUpdate={false}
             />
         </div>
     );
@@ -178,6 +176,5 @@ Diagram.propTypes = {
     nodeDataArray: PropTypes.array,
     nodeTemplates: PropTypes.arrayOf(PropTypes.array),
     onModelChange: PropTypes.func,
-    onNodeClick: PropTypes.func,
 };
 

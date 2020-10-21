@@ -4,7 +4,7 @@ import { Clear } from '@pingux/icons';
 import { Checkbox, Field, Input, Text } from '@pingux/compass';
 import { configPanel, configPanelClose, configPanelInput } from './ConfigPanel.styles';
 
-function ConfigPanel({ data, onClose, ...others }) {
+function ConfigPanel({ category, configuration, onClose, ...others }) {
     const getInput = (label, value) => {
         switch (typeof value) {
             case 'string':
@@ -33,8 +33,8 @@ function ConfigPanel({ data, onClose, ...others }) {
             <div css={configPanelClose}>
                 <Clear onClick={onClose} data-testid="config-panel-close" />
             </div>
-            <Text m="15px 0px 15px 0px" fontSize={18} fontWeight="bold">{data.category}</Text>
-            {Object.entries(data.configuration).map(([name, value], i) => {
+            <Text m="15px 0px 15px 0px" fontSize={18} fontWeight="bold">{category}</Text>
+            {configuration && Object.entries(configuration).map(([name, value], i) => {
                 return (
                     <React.Fragment key={name}>
                         {getInput(name, value)}
@@ -46,7 +46,8 @@ function ConfigPanel({ data, onClose, ...others }) {
 }
 
 ConfigPanel.propTypes = {
-    data: PropTypes.object,
+    category: PropTypes.string,
+    configuration: PropTypes.shape({}),
     onClose: PropTypes.func,
 };
 

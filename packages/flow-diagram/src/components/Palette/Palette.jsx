@@ -25,11 +25,11 @@ export default function Palette({
             );
 
         nodeTemplates.forEach(([name, template]) => {
-            myPalette.nodeTemplateMap.add(name, template());
+            myPalette.nodeTemplateMap.add(name, template);
         });
 
         groupTemplates.forEach(([name, template]) => {
-            myPalette.groupTemplateMap.add(name, template());
+            myPalette.groupTemplateMap.add(name, template);
         });
 
 

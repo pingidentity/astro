@@ -8,22 +8,46 @@ import ConfigPanel from '../ConfigPanel';
 import Diagram from '../Diagram';
 import Palette from '../Palette';
 import {
-    nodeTemplate,
+    paletteItemTemplate,
     groupTemplate,
     stepTemplate,
 } from './templates';
 import { bodyWrapper, globalStyles, topPanel, wrapper } from './FlowManager.styles';
 import LeftContainer from '../LeftContainer/LeftContainer';
 
-function DiagramWrapper({
-    paletteDataArray,
-    paletteLinkDataArray,
-    typeDefinitions,
-    onModelChange,
+const getPaletteItems = typeDefinitions => typeDefinitions.map(({
+    id,
+    displayName = '',
+    properties = {
+        configuration: {},
+    },
+    template,
+    ...rest
+}) => ({
+    // key: id,
+    text: displayName,
+    id,
+    properties,
+    type: 'object',
+    ...rest,
+}));
+
+const getPaletteTemplates = typeDefinitions => typeDefinitions.map(({
+    id,
+    icon,
+    color,
+}) => [
+    id,
+    paletteItemTemplate({ width: 280, icon, color }),
+]);
+
+function FlowDiagram({
     links,
     nodes,
+    onModelChange,
     renderTopPanel,
-    nodeClick,
+    typeDefinitions,
+    onNodeClick,
     ...others
 }) {
     const linkDictionary = useRef(new Map());
@@ -39,7 +63,6 @@ function DiagramWrapper({
             removedNodeKeys,
         } = changes;
         if (removedNodeKeys) {
-            removedNodeKeys.forEach(key => stepDictionary.current.delete(key));
             onModelChange('node-deleted', {
                 // TODO: Once we wire in deleting outlets when their anchor gets deleted,
                 // we'll need to filter out the links that existed between the node and its
@@ -64,7 +87,7 @@ function DiagramWrapper({
                 }),
             });
         } else if (insertedNodeKeys) {
-            const insertedNodes = modifiedNodeData.filter((node) => {
+            const insertedNodes = (modifiedNodeData ?? []).filter((node) => {
                 const { key } = node;
                 // TODO: Once we start adding outputs on drop, they will need to be ignored here.
                 if (insertedNodeKeys.includes(key)) {
@@ -114,17 +137,21 @@ function DiagramWrapper({
         // location changes, which users don't need to customize at this time.
     };
 
-    const [selectedNode, setSelectedNode] = useState(null);
+    const [selectedNodeId, setSelectedNodeId] = useState(null);
 
-    const onNodeClick = (e, obj) => {
-        setSelectedNode(obj.part.data.key);
+    const nodeClick = (e, obj) => {
+        setSelectedNodeId(obj.part.data.key);
         // temp code to demonstrate adding error state. Will be removed.
-        nodeClick(obj.part.data.id);
+        onNodeClick(obj.part.data.id);
     };
 
     const onPanelClose = () => {
-        setSelectedNode(null);
+        setSelectedNodeId(null);
     };
+
+    const selectedNode = stepDictionary.current.get(selectedNodeId) ?? {};
+
+    const itemsInPalette = typeDefinitions.filter(({ showInPalette = true }) => showInPalette);
 
     return (
         <>
@@ -136,9 +163,10 @@ function DiagramWrapper({
                 </div>
                 <div css={bodyWrapper}>
                     <LeftContainer>
-                        {selectedNode !== null ? (
+                        {selectedNodeId !== null ? (
                             <ConfigPanel
-                                data={stepDictionary.current.get(selectedNode)}
+                                category={selectedNode.category}
+                                configuration={selectedNode.configuration}
                                 onClose={onPanelClose}
                             />
                         ) : (
@@ -150,10 +178,11 @@ function DiagramWrapper({
                                         ['', groupTemplate],
                                     ]}
                                     nodeTemplates={[
-                                        ['', () => nodeTemplate(280)],
+                                        ['', paletteItemTemplate({ width: 280 })],
+                                        ...getPaletteTemplates(itemsInPalette),
                                     ]}
-                                    nodeDataArray={paletteDataArray}
-                                    linkDataArray={paletteLinkDataArray}
+                                    nodeDataArray={getPaletteItems(itemsInPalette)}
+                                    linkDataArray={[]}
                                 />
                             </React.Fragment>
                         )}
@@ -165,10 +194,12 @@ function DiagramWrapper({
                         linkDataArray={links}
                         nodeDataArray={nodes}
                         nodeTemplates={[
-                            ['', stepTemplate('#028CFF', <Details />)],
-                            ...typeDefinitions]}
+                            ['', stepTemplate({ color: '#028CFF', icon: <Details />, onClick: nodeClick })],
+                            ...typeDefinitions.map(({ id, template, icon, color }) =>
+                                [id, template({ icon, color, onClick: nodeClick })],
+                            ),
+                        ]}
                         onModelChange={modelChange}
-                        onNodeClick={onNodeClick}
                     />
                 </div>
             </div>
@@ -176,13 +207,23 @@ function DiagramWrapper({
     );
 }
 
-DiagramWrapper.propTypes = {
+FlowDiagram.propTypes = {
     // TODO: Make this show the editor on the left.
     // selectedData: PropTypes.any,
-    typeDefinitions: PropTypes.array,
-    paletteDataArray: PropTypes.array,
-    paletteLinkDataArray: PropTypes.array,
+    typeDefinitions: PropTypes.arrayOf(PropTypes.shape({
+        // TODO: Add this in, but only once we've got generated steps.
+        // configuration: PropTypes.shape({}),
+        description: PropTypes.string,
+        displayName: PropTypes.string,
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        showInPalette: PropTypes.bool,
+        // The template that shows on the Diagram/canvas
+        template: PropTypes.func,
+        color: PropTypes.string,
+        icon: PropTypes.node,
+    })),
     onModelChange: PropTypes.func,
+    onNodeClick: PropTypes.func,
     links: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         from: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -204,8 +245,8 @@ DiagramWrapper.propTypes = {
     skipsDiagramUpdate: PropTypes.bool
 };
 
-DiagramWrapper.defaultProps = {
+FlowDiagram.defaultProps = {
     onModelChange: noop,
 };
 
-export default DiagramWrapper;
+export default FlowDiagram;
