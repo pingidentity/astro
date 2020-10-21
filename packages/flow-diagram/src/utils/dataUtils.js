@@ -41,7 +41,7 @@ export const stepsToFlowDiagram = (stepDefinitions, getLinkId = ({ from, to }) =
             configuration,
         } = step;
 
-        const { error = '' } = configuration;
+        const errorMessage = configuration?.error?.message ?? '';
 
         const [outletNodes, outletLinks] = getOutletData(id, outlets, getLinkId);
 
@@ -55,7 +55,7 @@ export const stepsToFlowDiagram = (stepDefinitions, getLinkId = ({ from, to }) =
                     name,
                     stepId,
                     configuration,
-                    errorMessage: error.message ? error.message : error,
+                    errorMessage,
                 },
                 ...outletNodes,
             ],

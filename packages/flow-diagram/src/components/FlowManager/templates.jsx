@@ -4,9 +4,10 @@ import { Success, Close, Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import start from '../../img/start.svg';
 import { COLORS } from '../../utils/constants';
+import Diagram from '../Diagram';
 
 function encodeSvg(svgString) {
-    return svgString.replace('<svg', (~svgString.indexOf('xmlns') ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"'))
+    return svgString.replace('<svg', (svgString.indexOf('xmlns') > -1 ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"'))
         .replace(/'/g, '\'')
         .replace(/%/g, '%25')
         .replace(/#/g, '%23')
@@ -20,23 +21,23 @@ function encodeSvg(svgString) {
 
 const $ = go.GraphObject.make;
 
-const toNode = (fill) => {
+const toNode = ({ color }) => {
     return (
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
             $(go.Shape, 'Circle',
-                { width: 10, height: 10, fill, stroke: COLORS.WHITE, strokeWidth: 3 }),
+                { width: 10, height: 10, fill: color, stroke: COLORS.WHITE, strokeWidth: 3 }),
         )
 
     );
 };
 
-const fromNode = (fill) => {
+const fromNode = ({ color }) => {
     return (
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, cursor: 'pointer' },
             $(go.Shape, 'Circle',
-                { width: 10, height: 10, fill, stroke: COLORS.WHITE, strokeWidth: 3 }),
+                { width: 10, height: 10, fill: color, stroke: COLORS.WHITE, strokeWidth: 3 }),
         )
     );
 };
@@ -78,10 +79,10 @@ const getNodeHoverAdornment = () => {
     );
 };
 
-export const stepTemplate = (color, svg) => (onNodeClick) => {
+export const stepTemplate = ({ color, icon, onClick }) => {
     return (
         $(go.Node, 'Spot',
-            { click: onNodeClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
+            { click: onClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
             new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
@@ -99,15 +100,21 @@ export const stepTemplate = (color, svg) => (onNodeClick) => {
                         },
                     },
                 ),
-                $(go.Panel, 'Auto',
+                $(go.Panel, 'Position', { position: new go.Point(0, 0) },
                     { name: 'BODY' },
                     $(go.Shape, 'RoundedRectangle',
-                        { fill: COLORS.WHITE, minSize: new go.Size(200, 55) },
+                        { fill: COLORS.WHITE, desiredSize: new go.Size(200, 55) },
                         new go.Binding('stroke', 'errorMessage', (s) => { return s.length > 0 ? COLORS.ERROR : COLORS.GRAY; }),
                         new go.Binding('strokeWidth', 'errorMessage', (s) => { return s.length > 0 ? 2 : 0; }),
                     ),
-                    $(go.Panel, 'Horizontal', { padding: 15, alignment: go.Spot.Left },
-                        $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(svg, { fill: color })))}`, width: 20, height: 20 }),
+                    $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+                        $(go.Panel, 'Auto',
+                            $(go.Shape, 'RoundedRectangle',
+                                { fill: color, stroke: 'transparent' },
+                                new go.Binding('strokeWidth', 'errorMessage', (s) => { return s.length > 0 ? 4 : 0; }),
+                                new go.Binding('desiredSize', 'errorMessage', (s) => { return s.length > 0 ? new go.Size(60, 53) : new go.Size(60, 55); })),
+                            $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(icon, { fill: COLORS.WHITE })))}`, width: 20, height: 20 }),
+                        ),
                         $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 0, 10) },
                             $(go.TextBlock,
                                 {
@@ -124,14 +131,14 @@ export const stepTemplate = (color, svg) => (onNodeClick) => {
                         ),
                     ),
                 ),
-                fromNode(color),
-                toNode(color),
+                fromNode({ color }),
+                toNode({ color }),
             ),
         )
     );
 };
 
-export const nodeTemplate = (width = 120) => {
+export const paletteItemTemplate = ({ width = 120, icon, color }) => {
     return (
         $(go.Node, 'Spot',
             { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
@@ -142,6 +149,11 @@ export const nodeTemplate = (width = 120) => {
                     { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(width, 0) },
                     new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : COLORS.GRAY; }).ofObject()),
                 $(go.Panel, 'Horizontal',
+                    // $(go.Panel, 'Auto',
+                    //     $(go.Shape, 'RoundedRectangle',
+                    //         { fill: color, desiredSize: new go.Size(60, 55), strokeWidth: 0 }),
+                    //     $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(icon, { fill: COLORS.WHITE })))}`, width: 20, height: 20 }),
+                    // ),
                     $(go.TextBlock,
                         {
                             stroke: '#9DA2A8',
@@ -157,7 +169,7 @@ export const nodeTemplate = (width = 120) => {
     );
 };
 
-export const outletTemplate = fill => () => {
+export const outletTemplate = ({ color }) => {
     return (
         $(go.Node, 'Spot',
             { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', movable: false, deletable: false },
@@ -165,7 +177,7 @@ export const outletTemplate = fill => () => {
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
                 $(go.Shape, 'RoundedRectangle',
-                    { stroke: COLORS.GRAY, width: '100%', fill }),
+                    { stroke: COLORS.GRAY, width: '100%', fill: color }),
 
                 $(go.Panel, 'Horizontal',
                     $(go.TextBlock,
@@ -183,7 +195,7 @@ export const outletTemplate = fill => () => {
     );
 };
 
-export const circleNode = (color, svg) => {
+export const circleNode = ({ color, icon }) => {
     return (
         $(go.Node, 'Spot',
             { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
@@ -194,17 +206,17 @@ export const circleNode = (color, svg) => {
                     { fill: 'transparent', stroke: color, strokeWidth: 1, width: 20, alignment: go.Spot.Center }),
                 $(go.Shape, 'Circle',
                     { fill: color, stroke: 'transparent', strokeWidth: 1, width: 12, margin: new go.Margin(0, 0, 0, 0), alignment: go.Spot.Center }),
-                $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(svg))}`, width: 12, height: 12, margin: (0, 0, 0, 1) }),
+                $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(icon))}`, width: 12, height: 12, margin: (0, 0, 0, 1) }),
             ),
         )
     );
 };
 
 export const successNode = () =>
-    circleNode(COLORS.GREEN, <Success height={10} fill={COLORS.WHITE} />);
+    circleNode({ color: COLORS.GREEN, icon: <Success height={10} fill={COLORS.WHITE} /> });
 
 export const failureNode = () =>
-    circleNode(COLORS.RED, <Close height={10} width={10} fill={COLORS.WHITE} />);
+    circleNode({ color: COLORS.RED, icon: <Close height={10} width={10} fill={COLORS.WHITE} /> });
 
 export const nodeTemplateStart = () =>
     $(go.Node, 'Auto',
@@ -227,31 +239,28 @@ export const nodeTemplateStart = () =>
         ));
 
 
-export const groupTemplate = () => {
-    return (
-        $(go.Group, go.Panel.Auto,
-            {
-                isSubGraphExpanded: false,
-                ungroupable: true,
-            },
-            { name: 'BODY' },
+export const groupTemplate =
+    $(go.Group, go.Panel.Auto,
+        {
+            isSubGraphExpanded: false,
+            ungroupable: true,
+        },
+        { name: 'BODY' },
 
-            $(go.Shape, 'Rectangle',
-                { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(280, 0) },
-                new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : COLORS.GRAY; }).ofObject()),
-            $(go.Panel, 'Horizontal',
+        $(go.Shape, 'Rectangle',
+            { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(280, 0) },
+            new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : COLORS.GRAY; }).ofObject()),
+        $(go.Panel, 'Horizontal',
 
 
-                $(go.TextBlock,
-                    {
-                        stroke: '#9DA2A8',
-                        font: 'bold 12px sans-serif',
-                        editable: true,
-                        margin: 20,
-                        alignment: go.Spot.Left,
-                    },
-                    new go.Binding('text').makeTwoWay()),
-            ),
-        )
+            $(go.TextBlock,
+                {
+                    stroke: '#9DA2A8',
+                    font: 'bold 12px sans-serif',
+                    editable: true,
+                    margin: 20,
+                    alignment: go.Spot.Left,
+                },
+                new go.Binding('text').makeTwoWay()),
+        ),
     );
-};
