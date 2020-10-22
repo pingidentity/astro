@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Desktop, Error } from '@pingux/icons';
-import { Button } from '@pingux/compass';
+import { Desktop, Error, Walkthrough } from '@pingux/icons';
+import { Button, Checkbox, Field, Input } from '@pingux/compass';
 import FlowManager from './FlowManager';
 import {
     outletTemplate,
@@ -218,26 +218,26 @@ function Demo() {
     const [stepDefs, setStepDefs] = useState(stepDefinitions);
     const [steps, links] = stepsToFlowDiagram(stepDefs);
 
-    // temp code to demonstrate adding error state. Will be removed.
-    const nodeClick = (id) => {
+    const onChangeConfig = (id, field, val) => {
+        const selectedStep = stepDefs.find(def => def.id === id);
+
         const updatedStep = {
-            ...stepDefinitions[0],
+            ...selectedStep,
             configuration: {
-                ...stepDefinitions[0].configuration,
-                error: {
-                    code: 'error',
-                    message: 'This is an example error',
-                },
+                ...selectedStep.configuration,
+                [field]: val,
             },
         };
 
-        if (stepDefinitions[0].id === id) {
-            const updatedDefinitions = stepDefinitions.map((obj) => {
-                return Array(updatedStep).find(() => id === obj.id) || obj;
-            });
+        const updatedDefinitions = stepDefinitions.map((obj) => {
+            return Array(updatedStep).find(() => id === obj.id) || obj;
+        });
 
-            setStepDefs(updatedDefinitions);
-        }
+        setStepDefs(updatedDefinitions);
+    };
+
+    const getConfig = (id) => {
+        return stepDefs.find(def => def.id === id).configuration;
     };
 
     return (
@@ -271,6 +271,21 @@ function Demo() {
                         displayName: 'Login',
                         icon: <Desktop />,
                         color: '#028CFF',
+                        template: stepTemplate,
+                        renderConfig: id => (
+                            <>
+                                <Field label="Account Recovery" mb={20}>
+                                    <Input value={getConfig(id).accountRecovery} onValueChange={val => onChangeConfig(id, 'accountRecovery', val)} width="90%" />
+                                </Field>
+                                <Checkbox isChecked={getConfig(id).enableRegistration} label="Enable Registration" onChange={val => onChangeConfig(id, 'enableRegistration', val)} />
+                            </>
+                        ),
+                    },
+                    {
+                        id: 'EXECUTE_FLOW',
+                        displayName: 'Execute Flow',
+                        icon: <Walkthrough />,
+                        color: '#228C22',
                         template: stepTemplate,
                     },
                     {
@@ -315,7 +330,6 @@ function Demo() {
                         'next': 'user-login',
                     },
                 ]}
-                onNodeClick={nodeClick}
             />
         </div>
     );
