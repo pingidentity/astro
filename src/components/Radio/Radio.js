@@ -16,4 +16,6 @@ const Radio = forwardRef((props, ref) => (
   />
 ));
 
+Radio.displayName = 'Radio';
+
 export default Radio;

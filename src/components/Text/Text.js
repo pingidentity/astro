@@ -25,4 +25,6 @@ Text.defaultProps = {
   variant: 'base',
 };
 
+Text.displayName = 'Text';
+
 export default Text;

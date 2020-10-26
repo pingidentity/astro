@@ -20,6 +20,8 @@ const PageHeader = forwardRef((props, ref) => {
   );
 });
 
+PageHeader.displayName = 'PageHeader';
+
 export default PageHeader;
 
 PageHeader.propTypes = {

@@ -79,4 +79,6 @@ Field.defaultProps = {
   isDisabled: false,
 };
 
+Field.displayName = 'Field';
+
 export default Field;
