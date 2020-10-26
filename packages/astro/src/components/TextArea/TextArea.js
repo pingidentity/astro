@@ -16,4 +16,6 @@ const TextArea = forwardRef((props, ref) => (
   />
 ));
 
+TextArea.displayName = 'TextArea';
+
 export default TextArea;

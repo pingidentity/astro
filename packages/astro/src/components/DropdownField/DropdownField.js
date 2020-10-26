@@ -57,4 +57,6 @@ DropdownField.propTypes = {
     'aria-details': PropTypes.string,
   }),
 };
+DropdownField.displayName = 'DropdownField';
+
 export default DropdownField;

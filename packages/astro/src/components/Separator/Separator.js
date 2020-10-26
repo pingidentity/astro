@@ -45,4 +45,6 @@ Separator.defaultProps = {
   orientation: 'horizontal',
 };
 
+Separator.displayName = 'Separator';
+
 export default Separator;

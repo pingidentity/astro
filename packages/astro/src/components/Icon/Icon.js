@@ -33,4 +33,6 @@ Icon.propTypes = {
   color: PropTypes.string,
 };
 
+Icon.displayName = 'Icon';
+
 export default Icon;
