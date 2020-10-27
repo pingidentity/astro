@@ -21,15 +21,11 @@ const getPaletteItems = typeDefinitions => typeDefinitions.map(({
     properties = {
         configuration: {},
     },
-    template,
-    ...rest
 }) => ({
-    // key: id,
     text: displayName,
     id,
     properties,
     type: 'object',
-    ...rest,
 }));
 
 const getPaletteTemplates = typeDefinitions => typeDefinitions.map(({
@@ -219,7 +215,7 @@ function FlowDiagram({
                         groupTemplates={[
                             ['', groupTemplate],
                         ]}
-                        linkDataArray={links}
+                        linkDataArray={links.map(({ id, ...link }) => ({ ...link, key: id }))}
                         nodeDataArray={nodes}
                         nodeTemplates={[
                             ['', stepTemplate({ color: '#028CFF', icon: <Details />, onClick: nodeClick })],
