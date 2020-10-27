@@ -21,6 +21,26 @@ export default function Palette({
                     layout: $(go.GridLayout,
                     ),
                     maxSelectionCount: 1,
+                    model: $(go.GraphLinksModel,
+                        {
+                            linkKeyProperty: 'key',
+                            makeUniqueKeyFunction: (m, data) => {
+                                let k = data.key || 1;
+                                // eslint-disable-next-line
+                                while (m.findNodeDataForKey(k)) k++;
+                                // eslint-disable-next-line
+                                data.key = k;
+                                return k;
+                            },
+                            makeUniqueLinkKeyFunction: (m, data) => {
+                                let k = data.key || -1;
+                                // eslint-disable-next-line
+                                while (m.findLinkDataForKey(k)) k--;
+                                // eslint-disable-next-line
+                                data.key = k;
+                                return k;
+                            },
+                        }),
                 },
             );
 

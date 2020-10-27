@@ -18,13 +18,13 @@ import LeftContainer from '../LeftContainer/LeftContainer';
 const getPaletteItems = typeDefinitions => typeDefinitions.map(({
     id,
     displayName = '',
-    properties = {
-        configuration: {},
-    },
+    configuration,
 }) => ({
+    key: id,
+    category: id,
     text: displayName,
     id,
-    properties,
+    configuration,
     type: 'object',
 }));
 
@@ -64,84 +64,76 @@ function FlowDiagram({
 
     const modelChange = (changes) => {
         const {
-            insertedNodeKeys,
-            insertedLinkKeys,
-            modifiedLinkData,
-            modifiedNodeData,
-            removedLinkKeys,
-            removedNodeKeys,
+            insertedNodeKeys = [],
+            insertedLinkKeys = [],
+            modifiedLinkData = [],
+            modifiedNodeData = [],
+            removedLinkKeys = [],
+            removedNodeKeys = [],
         } = changes;
-        if (removedNodeKeys) {
-            onModelChange('node-deleted', {
-                // TODO: Once we wire in deleting outlets when their anchor gets deleted,
-                // we'll need to filter out the links that existed between the node and its
-                // outlets.
-                removedLinks: removedLinkKeys.map((key) => {
-                    const link = linkDictionary.current.get(key);
-                    linkDictionary.current.delete(key);
-                    return link;
-                }),
-                removedNodes: removedNodeKeys.map((key) => {
-                    const step = stepDictionary.current.get(key);
-                    stepDictionary.current.delete(key);
-                    return step;
-                }),
-            });
-        } else if (removedLinkKeys) {
-            onModelChange('link-deleted', {
-                removedLinks: removedLinkKeys.map((key) => {
-                    const link = linkDictionary.current.get(key);
-                    linkDictionary.current.delete(key);
-                    return link;
-                }),
-            });
-        } else if (insertedNodeKeys) {
-            const insertedNodes = (modifiedNodeData ?? []).filter((node) => {
-                const { key } = node;
-                // TODO: Once we start adding outputs on drop, they will need to be ignored here.
-                if (insertedNodeKeys.includes(key)) {
-                    // Pull step data here from the step types- need some kind of start situation.
-                    stepDictionary.current.set(key, node);
-                    return true;
-                }
 
-                return false;
-            });
+        const insertedNodes = (modifiedNodeData ?? []).filter((node) => {
+            const { key } = node;
+            // TODO: Once we start adding outputs on drop, they will need to be ignored here.
+            if (insertedNodeKeys.includes(key)) {
+                // Pull step data here from the step types- need some kind of start situation.
+                stepDictionary.current.set(key, node);
+                return true;
+            }
 
-            const insertedLinks = modifiedLinkData.filter((link) => {
-                const { key } = link;
+            return false;
+        });
 
-                if (insertedLinkKeys.includes(key)) {
-                    // Pull step data here from the step types- need some kind of start situation.
-                    linkDictionary.current.set(key, link);
-                    return true;
-                }
+        const insertedLinks = (modifiedLinkData ?? []).filter((link) => {
+            const { key } = link;
 
-                return false;
-            });
+            if (insertedLinkKeys.includes(key)) {
+                // Pull step data here from the step types- need some kind of start situation.
+                linkDictionary.current.set(key, link);
+                return true;
+            }
 
-            onModelChange('node-added', {
-                insertedNodes,
-                insertedLinks,
-            });
-        } else if (insertedLinkKeys) {
-            const insertedLinks = modifiedLinkData.filter((link) => {
-                const { key } = link;
+            return false;
+        });
 
-                if (insertedLinkKeys.includes(key)) {
-                    // Pull step data here from the step types- need some kind of start situation.
-                    linkDictionary.current.set(key, link);
-                    return true;
-                }
+        const removedLinks = removedLinkKeys.map((key) => {
+            const link = linkDictionary.current.get(key);
+            linkDictionary.current.delete(key);
+            return link;
+        });
 
-                return false;
-            });
+        const removedNodes = removedNodeKeys.map((key) => {
+            const step = stepDictionary.current.get(key);
+            stepDictionary.current.delete(key);
+            return step;
+        });
 
-            onModelChange('link-added', {
-                modifiedNodes: modifiedNodeData,
-                insertedLinks,
-            });
-        }
+        const modifiedNodes = modifiedNodeData.map((node) => {
+            const { key } = node;
+
+            const { configuration } = stepDictionary.current.get(key);
+
+            return {
+                ...node,
+                configuration,
+            };
+        });
+
+        const allNodes = Array.from(stepDictionary.current.values());
+        const allLinks = Array.from(linkDictionary.current.values());
+        onModelChange({
+            // TODO: Once we wire in deleting outlets when their anchor gets deleted,
+            // we'll need to filter out the links that existed between the node and its
+            // outlets.
+            removedLinks,
+            removedNodes,
+            insertedLinks,
+            insertedNodes,
+            modifiedLink: modifiedLinkData,
+            modifiedNodes,
+            allNodes,
+            allLinks,
+        });
         // Not worrying about modified links or nodes right now because those would just be
         // location changes, which users don't need to customize at this time.
     };
@@ -160,17 +152,9 @@ function FlowDiagram({
 
     const selectedNode = stepDictionary.current.get(selectedNodeId) ?? {};
 
-    const selectedNodeConfig = () => {
-        if (typeDefinitions.find(def =>
-            def.id === stepDictionary.current.get(selectedNodeId).category).renderConfig
-        ) {
-            return typeDefinitions.find(def =>
-                def.id === stepDictionary.current.get(selectedNodeId).category)
-                .renderConfig(selectedNodeId);
-        }
+    const selectedTypeDefinition = typeDefinitions.find(def =>
+        def.id === stepDictionary.current.get(selectedNodeId)?.category);
 
-        return null;
-    };
 
     const itemsInPalette = typeDefinitions.filter(({ showInPalette = true }) => showInPalette);
 
@@ -187,10 +171,12 @@ function FlowDiagram({
                         <>
                             {selectedNodeId !== null ? (
                                 <ConfigPanel
+                                    icon={selectedTypeDefinition.icon}
+                                    color={selectedTypeDefinition.color}
                                     category={selectedNode.category}
                                     onClose={onPanelClose}
                                 >
-                                    {selectedNodeConfig()}
+                                    {selectedTypeDefinition.renderConfig?.(selectedNode)}
                                 </ConfigPanel>
                             ) : (
                                 <React.Fragment>
