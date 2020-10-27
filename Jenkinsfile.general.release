@@ -63,19 +63,6 @@ pipeline {
         }
       }
     }
-    stage('cdn deploy') {
-      steps {
-        dir("${env.WORKSPACE}/packages/${params.PACKAGE}") {
-          container('node-builder') {
-            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/${params.PACKAGE}/", file: "cdn/")
-              }
-            }
-          }
-        }
-      }
-    }
   }
   post {
     success {
