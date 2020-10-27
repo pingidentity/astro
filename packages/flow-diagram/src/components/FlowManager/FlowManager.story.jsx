@@ -215,22 +215,22 @@ function Demo() {
     ];
 
     const [triggerNodes, triggerLinks] = triggersToFlowDiagram(triggers);
-    const [stepDefs, setStepDefs] = useState(stepDefinitions);
-    const [steps, links] = stepsToFlowDiagram(stepDefs);
+    const [steps, links] = stepsToFlowDiagram(stepDefinitions);
+    const [stepDefs, setStepDefs] = useState(steps);
 
     const onChangeConfig = (id, field, val) => {
-        const selectedStep = stepDefs.find(def => def.id === id);
-
-        const updatedStep = {
-            ...selectedStep,
-            configuration: {
-                ...selectedStep.configuration,
-                [field]: val,
-            },
-        };
-
-        const updatedDefinitions = stepDefinitions.map((obj) => {
-            return Array(updatedStep).find(() => id === obj.id) || obj;
+        const updatedDefinitions = stepDefs.map((obj) => {
+            if (obj.id === id) {
+                const updatedStep = {
+                    ...obj,
+                    configuration: {
+                        ...obj.configuration,
+                        [field]: val,
+                    },
+                };
+                return updatedStep;
+            }
+            return obj;
         });
 
         setStepDefs(updatedDefinitions);
@@ -238,6 +238,14 @@ function Demo() {
 
     const getConfig = (id) => {
         return stepDefs.find(def => def.id === id).configuration;
+    };
+
+    const nodeClick = (id) => {
+        console.log(id);
+    };
+
+    const onModelChange = (updates) => {
+        setStepDefs([...stepDefs, ...updates.insertedNodes]);
     };
 
     return (
@@ -272,12 +280,16 @@ function Demo() {
                         icon: <Desktop />,
                         color: '#028CFF',
                         template: stepTemplate,
-                        renderConfig: id => (
+                        configuration: {
+                            'enableRegistration': true,
+                            'accountRecovery': '{flow.context.recoveryEnabled}',
+                        },
+                        renderConfig: node => (
                             <>
                                 <Field label="Account Recovery" mb={20}>
-                                    <Input value={getConfig(id).accountRecovery} onValueChange={val => onChangeConfig(id, 'accountRecovery', val)} width="90%" />
+                                    <Input value={getConfig(node.id).accountRecovery} onValueChange={val => onChangeConfig(node.id, 'accountRecovery', val)} width="90%" />
                                 </Field>
-                                <Checkbox isChecked={getConfig(id).enableRegistration} label="Enable Registration" onChange={val => onChangeConfig(id, 'enableRegistration', val)} />
+                                <Checkbox isChecked={getConfig(node.id).enableRegistration} label="Enable Registration" onChange={val => onChangeConfig(node.id, 'enableRegistration', val)} />
                             </>
                         ),
                     },
@@ -330,6 +342,8 @@ function Demo() {
                         'next': 'user-login',
                     },
                 ]}
+                onModelChange={onModelChange}
+                onNodeClick={nodeClick}
             />
         </div>
     );

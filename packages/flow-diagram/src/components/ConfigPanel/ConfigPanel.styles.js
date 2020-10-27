@@ -11,3 +11,9 @@ export const configPanelClose = css`
     position: absolute;
     top: 4%
 `;
+
+export const line = css`
+    border-top: 1px solid #E2E5E8;
+    margin:  0px 15px 15px 0px;
+`;
+

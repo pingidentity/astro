@@ -37,6 +37,7 @@ export default function Diagram({
 
                 {
                     hoverDelay: 0,
+                    'undoManager.isEnabled': true,
                     dragSelectingTool:
                         $(RealtimeDragSelectingTool,
                             { isPartialInclusion: true, delay: 0 },
@@ -159,7 +160,7 @@ export default function Diagram({
                 modelData={{ canRelink: false }}
                 onModelChange={onModelChange}
                 // TODO: Wire this in. Certain state updates require that this be set to true.
-                // skipsDiagramUpdate={false}
+                skipsDiagramUpdate
             />
         </div>
     );
