@@ -4,7 +4,6 @@ import { Success, Close, Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import start from '../../img/start.svg';
 import { COLORS } from '../../utils/constants';
-import Diagram from '../Diagram';
 
 function encodeSvg(svgString) {
     return svgString.replace('<svg', (svgString.indexOf('xmlns') > -1 ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"'))
