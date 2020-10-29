@@ -26,18 +26,12 @@
 // It's up to the themes to disable these via things like border-width: 0
 // This allows for standardization for over-writing theme styles in the client
 @mixin base($images, $colors) {
-    body,
-    html,
-    .page {
-        height: 100vh;
+    body, html, .page {
+        height: auto;
+    }
 
-        &__content {
-            height: 100vh;
-
-            &__content > div {
-                height: 100vh;
-            }
-        }
+    body__content, html__content, .page__content {
+        height: 100%;
     }
 
     .page {
