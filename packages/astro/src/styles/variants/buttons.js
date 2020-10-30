@@ -11,6 +11,24 @@ const base = {
   ...text.buttonLabel,
 };
 
+const defaultActive = {
+  bg: 'active',
+  border: '1px solid',
+  borderColor: 'active',
+  color: 'white',
+  'path': {
+    fill: 'white',
+  },
+};
+
+const defaultHover = {
+  bg: 'accent.99',
+  border: '1px solid',
+  borderColor: 'accent.40',
+  color: 'accent.40',
+  boxShadow: 'standard',
+};
+
 export const buttons = {
   default: {
     ...base,
@@ -18,20 +36,10 @@ export const buttons = {
     border: '1px solid',
     borderColor: 'active',
     '&:hover': {
-      bg: 'accent.99',
-      border: '1px solid',
-      borderColor: 'accent.40',
-      color: 'accent.40',
-      boxShadow: 'standard',
+      ...defaultHover,
     },
     '&:active': {
-      bg: 'active',
-      border: '1px solid',
-      borderColor: 'active',
-      color: 'white',
-      'path': {
-        fill: 'white',
-      },
+      ...defaultActive,
     },
   },
   primary: {
@@ -106,6 +114,25 @@ export const buttons = {
     '&:focus': {
       outline: 'none',
       color: 'white',
+    },
+  },
+  inline: {
+    ...base,
+    bg: 'white',
+    height: '26px',
+    lineHeight: '26px',
+    fontSize: '14px',
+    borderRadius: '15px',
+    border: '1px solid',
+    borderColor: 'active',
+    alignSelf: 'center',
+    paddingTop: '0px',
+    paddingBottom: '0px',
+    '&:hover': {
+      ...defaultHover,
+    },
+    '&:active': {
+      ...defaultActive,
     },
   },
 };

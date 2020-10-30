@@ -42,11 +42,11 @@ const RadioField = forwardRef((props, ref) => {
     <Field
       ref={ref}
       isDisabled={isDisabled}
-      variant="boxes.radioContainer"
       sx={{
         borderColor: checked ? 'active' : 'line.light',
         ...sx,
       }}
+      labelProps={labelProps}
       hasWrappedLabel
       label={children}
       render={renderProps => (
