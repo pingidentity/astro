@@ -12,6 +12,8 @@ export const label = {
 export const radioLabel = {
   cursor: 'pointer',
   alignItems: 'center',
+  mb: 'xs',
+  ...text.base,
 };
 
 // NOTE: Rebass label adds 'flex' after other styles, so we have to use !important to override it
