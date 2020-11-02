@@ -168,6 +168,7 @@ class Calendar extends React.Component {
         width: PropTypes.oneOf(InputWidthProptypesAuto),
         onInputTextValueChange: PropTypes.func,
         onValueChange: PropTypes.func,
+        onClose: PropTypes.func,
 
     };
 
@@ -181,6 +182,7 @@ class Calendar extends React.Component {
         onInputTextValueChange: noop,
         tight: false,
         width: InputWidths.AUTO,
+        onClose: () => {},
 
     };
 
@@ -251,6 +253,12 @@ class Calendar extends React.Component {
 
     componentWillUnmount() {
         document.removeEventListener("click", this.documentClick);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.isVisible === true && this.state.isVisible === false) {
+            this.props.onClose(this.state.date);
+        }
     }
 
     /**
