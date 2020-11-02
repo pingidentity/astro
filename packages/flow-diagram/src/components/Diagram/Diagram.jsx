@@ -2,11 +2,13 @@ import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidV4 } from 'uuid';
 import { COLORS } from '../../utils/constants';
 import { RealtimeDragSelectingTool } from '../../RealtimeDragSelectingTool';
 import { diagramComponent } from './Diagram.styles';
 
 go.Diagram.licenseKey = '73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741';
+
 export default function Diagram({
     groupTemplates,
     linkDataArray,
@@ -77,20 +79,18 @@ export default function Diagram({
                         {
                             linkKeyProperty: 'key',
                             makeUniqueKeyFunction: (m, data) => {
-                                let k = data.key || 1;
+                                const key = `${data.key}_${uuidV4()}`;
+
                                 // eslint-disable-next-line
-                                while (m.findNodeDataForKey(k)) k++;
-                                // eslint-disable-next-line
-                                data.key = k;
-                                return k;
+                                data.key = key;
+                                return key;
                             },
                             makeUniqueLinkKeyFunction: (m, data) => {
-                                let k = data.key || -1;
+                                const key = `${data.key}_${uuidV4()}`;
+
                                 // eslint-disable-next-line
-                                while (m.findLinkDataForKey(k)) k--;
-                                // eslint-disable-next-line
-                                data.key = k;
-                                return k;
+                                data.key = key;
+                                return key;
                             },
                         }),
                 });

@@ -205,6 +205,20 @@ function Demo() {
                     },
                 },
             },
+            {
+                id: 'registration2',
+                stepId: 'registration',
+                'type': 'EXECUTE_FLOW',
+                'configuration': {
+                    'error': {
+                        'code': '{step.context.status}',
+                        'message': 'authentication failed',
+                    },
+                    'flowDefinition': {
+                        'id': '1234',
+                    },
+                },
+            },
         ];
 
     const triggers = [
