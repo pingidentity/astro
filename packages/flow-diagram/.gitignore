@@ -1,4 +1,5 @@
 build-doc
 build-demo
 lib
+node_modules
 upload
