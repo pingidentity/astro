@@ -10,6 +10,6 @@ module.exports = flows.map(flow => ({
     "label": "Calendar",
     "section": "ComplexInputs",
     "selectors": [
-        "body"
+        ".output"
     ],
 }));

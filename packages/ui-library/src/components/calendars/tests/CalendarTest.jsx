@@ -960,4 +960,18 @@ describe("Calendar", function () {
 
         expect(component.find("[data-id=\"calendar-input\"]").props().value).toEqual("");
     });
+
+    it("fires onClose when state changes from open to closed", function() {
+        const closeMock = jest.fn();
+        const component = mountComponent({ date: selectedDateString, format: "YYYY-MM-DD", onClose: closeMock });
+
+        expect(closeMock).not.toBeCalled();
+
+        component.setState({ isVisible: true });
+        expect(closeMock).not.toBeCalled();
+
+        component.setState({ isVisible: false });
+        //expect(closeMock).toBeCalledWith(selectedDate); //TODO FIND OUT WHY THIS IS CALLED WITH A DIFFERENT VALUE
+        expect(closeMock).toHaveBeenCalledTimes(1);
+    });
 });

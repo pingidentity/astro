@@ -137,6 +137,7 @@ export default class HeroChart extends Component {
                 name={key}
                 isAnimationActive={false}
                 minPointSize={5}
+                background={{ fill: "transparent" }}
             >
                 {data.map((entry, index) => (
                     <Cell

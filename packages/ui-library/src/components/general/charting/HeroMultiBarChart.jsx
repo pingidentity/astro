@@ -174,6 +174,7 @@ export default class HeroMultiBarChart extends Component {
                     name={key}
                     isAnimationActive={false}
                     minPointSize={5}
+                    background={{ fill: "transparent" }}
                 >
                     {data.map((entry, index) => {
                         const isHovered = barSelected && barSelected.key === key && barSelected.index === index;
