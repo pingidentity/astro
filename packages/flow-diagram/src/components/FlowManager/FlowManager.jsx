@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
+import isEqual from 'lodash/isEqual';
 import { Global } from '@emotion/core';
 import { Input, Text } from '@pingux/compass';
 import { Details } from '@pingux/icons';
@@ -26,6 +27,7 @@ const getPaletteItems = typeDefinitions => typeDefinitions.map(({
     id,
     configuration,
     type: 'object',
+    isPaletteItem: true,
 }));
 
 const getPaletteTemplates = typeDefinitions => typeDefinitions.map(({
@@ -50,17 +52,16 @@ function FlowDiagram({
     const stepDictionary = useRef(new Map());
 
     useEffect(() => {
-        nodes.reduce((node, step) => {
+        stepDictionary.current.clear();
+        nodes.forEach((node) => {
             const {
                 stepId,
                 id = stepId,
-            } = step;
+            } = node;
 
-            stepDictionary.current.set(id, step);
-
-            return {};
-        }, []);
-    }, []);
+            stepDictionary.current.set(id, node);
+        });
+    }, [JSON.stringify(nodes)]);
 
     const modelChange = (changes) => {
         const {
@@ -202,7 +203,7 @@ function FlowDiagram({
                             ['', groupTemplate],
                         ]}
                         linkDataArray={links.map(({ id, ...link }) => ({ ...link, key: id }))}
-                        nodeDataArray={nodes}
+                        nodeDataArray={nodes.map(({ id, ...node }) => ({ ...node, id, key: id }))}
                         nodeTemplates={[
                             ['', stepTemplate({ color: '#028CFF', icon: <Details />, onClick: nodeClick })],
                             ...typeDefinitions.map(({ id, template, icon, color }) =>
