@@ -9,6 +9,7 @@ pipeline {
           container('node-builder') {
             echo "Running astro linting and tests"
             sh "yarn install --frozen-lockfile --ignore-engines"
+            sh "cd ../icons && yarn build"
             sh "yarn run lint"
             sh "yarn run test"
             sh "npm version prerelease"
@@ -58,6 +59,7 @@ pipeline {
           container('node-builder') {
             echo "Building & publishing"
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              sh "yarn build"
               sh "npm publish --tag beta"
             }
           }
