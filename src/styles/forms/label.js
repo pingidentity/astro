@@ -18,6 +18,7 @@ export const radioLabel = {
 
 // NOTE: Rebass label adds 'flex' after other styles, so we have to use !important to override it
 export const checkboxLabel = {
+  ...text.base,
   display: 'inline-flex !important',
   width: 'auto',
   alignItems: 'center',
