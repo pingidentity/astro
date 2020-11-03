@@ -34,7 +34,7 @@ const Field = forwardRef((props, ref) => {
     return (
       <Box ref={ref} {...others}>
         <Label {...mergeProps(labelProps, raLabelProps)} isDisabled={isDisabled}>
-          {render({ ...raFieldProps, ...controlProps, disabled: isDisabled, sx })}
+          {render({ ...controlProps, ...raFieldProps, disabled: isDisabled, sx })}
           {label}
         </Label>
         {afterContent}
@@ -45,7 +45,7 @@ const Field = forwardRef((props, ref) => {
   return (
     <Box ref={ref} {...others}>
       <Label {...mergeProps(labelProps, raLabelProps)} isDisabled={isDisabled}>{label}</Label>
-      {render({ ...raFieldProps, ...controlProps, disabled: isDisabled, sx })}
+      {render({ ...controlProps, ...raFieldProps, disabled: isDisabled, sx })}
       {afterContent}
     </Box>
   );
@@ -73,10 +73,10 @@ Field.propTypes = {
 };
 
 Field.defaultProps = {
-  controlProps: {
-    id: null, // Set to override the top-level `id` prop when passed to `useLabel`
-  },
   isDisabled: false,
+  controlProps: {
+    id: null, // Id set to override the top-level `id` prop when passed to `useLabel`
+  },
 };
 
 export default Field;
