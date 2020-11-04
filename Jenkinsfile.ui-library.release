@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'ui-library-cdn-deploy'
+    label 'ui-pipeline-shared'
   }
   environment {
     JIRA_CREDS = credentials('jira-creds')
