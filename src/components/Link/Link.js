@@ -46,4 +46,6 @@ Link.defaultProps = {
   variant: 'default',
 };
 
+Link.displayName = 'Link';
+
 export default Link;

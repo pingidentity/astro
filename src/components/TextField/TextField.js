@@ -28,4 +28,6 @@ TextField.propTypes = {
   controlProps: PropTypes.shape({}),
 };
 
+TextField.displayName = 'TextField';
+
 export default TextField;

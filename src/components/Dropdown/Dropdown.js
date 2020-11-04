@@ -66,4 +66,6 @@ Dropdown.defaultProps = {
   noneLabel: 'None',
 };
 
+Dropdown.displayName = 'Dropdown';
+
 export default Dropdown;

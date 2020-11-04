@@ -68,4 +68,6 @@ RadioGroup.propTypes = {
   'aria-errormessage': PropTypes.string,
 };
 
+RadioGroup.displayName = 'RadioGroup';
+
 export default RadioGroup;

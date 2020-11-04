@@ -127,4 +127,6 @@ RadioField.defaultProps = {
   },
 };
 
+RadioField.displayName = 'RadioField';
+
 export default RadioField;

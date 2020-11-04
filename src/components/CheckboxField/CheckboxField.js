@@ -145,4 +145,6 @@ CheckboxField.defaultProps = {
   },
 };
 
+CheckboxField.displayName = 'CheckboxField';
+
 export default CheckboxField;

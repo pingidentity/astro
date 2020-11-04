@@ -26,4 +26,6 @@ Label.propTypes = {
   isDisabled: PropTypes.bool,
 };
 
+Label.displayName = 'Label';
+
 export default Label;
