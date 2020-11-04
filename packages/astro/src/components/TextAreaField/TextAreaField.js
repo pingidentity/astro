@@ -74,4 +74,6 @@ TextAreaField.defaultProps = {
   controlProps: {},
 };
 
+TextAreaField.displayName = 'TextAreaField';
+
 export default TextAreaField;

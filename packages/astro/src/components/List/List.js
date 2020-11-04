@@ -19,4 +19,6 @@ const List = forwardRef((props, ref) => {
   );
 });
 
+List.displayName = 'List';
+
 export default List;

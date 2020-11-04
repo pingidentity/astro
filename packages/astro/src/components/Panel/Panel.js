@@ -42,4 +42,6 @@ Panel.defaultProps = {
   width: '100%',
 };
 
+Panel.displayName = 'Panel';
+
 export default Panel;
