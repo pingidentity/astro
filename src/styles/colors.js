@@ -45,7 +45,8 @@ const accentSteps = 8;
 const accentScale = chroma.scale([accentBase, accentLight]).mode('hsl');
 
 export const accent = {
-  10: chroma(accentBase).darken(1).hex(),
+  5: chroma(accentBase).darken(1).hex(),
+  10: chroma(accentBase).darken(0.5).hex(),
   20: accentScale(0).hex(),
   30: accentScale(1 / accentSteps).hex(),
   40: accentScale(2 / accentSteps).hex(),
