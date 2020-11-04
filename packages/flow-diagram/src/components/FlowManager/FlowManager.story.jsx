@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Desktop, Error, Walkthrough } from '@pingux/icons';
+import { Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Button, Checkbox, Field, Input } from '@pingux/compass';
 import FlowManager from './FlowManager';
 import {
@@ -336,11 +336,15 @@ function Demo() {
                         id: 'finished',
                         template: successNode,
                         displayName: 'Complete',
+                        icon: <Success />,
+                        color: '#00B111',
                     },
                     {
                         id: 'error',
                         template: failureNode,
                         displayName: 'Failure',
+                        icon: <Error />,
+                        color: '#BB0101',
                     },
                     {
                         id: 'START',

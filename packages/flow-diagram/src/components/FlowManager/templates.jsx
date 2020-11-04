@@ -1,6 +1,6 @@
 import React from 'react';
 import * as go from 'gojs';
-import { Success, Close, Error } from '@pingux/icons/';
+import { Success, Close, Error, Grip } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import start from '../../img/start.svg';
 import { COLORS } from '../../utils/constants';
@@ -147,12 +147,15 @@ export const paletteItemTemplate = ({ width = 120, icon, color }) => {
                 $(go.Shape, 'Rectangle',
                     { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(width, 0) },
                     new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : COLORS.GRAY; }).ofObject()),
-                $(go.Panel, 'Horizontal',
-                    // $(go.Panel, 'Auto',
-                    //     $(go.Shape, 'RoundedRectangle',
-                    //         { fill: color, desiredSize: new go.Size(60, 55), strokeWidth: 0 }),
-                    //     $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(icon, { fill: COLORS.WHITE })))}`, width: 20, height: 20 }),
-                    // ),
+                $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+                    $(go.Panel, 'Auto',
+                        $(go.Shape, 'RoundedRectangle',
+                            { fill: color, desiredSize: new go.Size(70, 55), strokeWidth: 0 }),
+                        $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+                            $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(<Grip />, { fill: COLORS.WHITE })))}`, width: 20, height: 20, margin: new go.Margin(0, 7, 0, 0) }),
+                            $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(icon, { fill: COLORS.WHITE })))}`, width: 20, height: 20 }),
+                        ),
+                    ),
                     $(go.TextBlock,
                         {
                             stroke: '#9DA2A8',
