@@ -25,6 +25,7 @@ const getPaletteItems = typeDefinitions => typeDefinitions.map(({
     text: displayName,
     id,
     configuration,
+    errorMessage: '',
     type: 'object',
 }));
 
@@ -187,7 +188,6 @@ function FlowDiagram({
                                             ['', groupTemplate],
                                         ]}
                                         nodeTemplates={[
-                                            ['', paletteItemTemplate({ width: 280 })],
                                             ...getPaletteTemplates(itemsInPalette),
                                         ]}
                                         nodeDataArray={getPaletteItems(itemsInPalette)}
