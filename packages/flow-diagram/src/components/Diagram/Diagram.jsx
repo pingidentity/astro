@@ -2,6 +2,7 @@ import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { differenceWith } from 'lodash';
 import { v4 as uuidV4 } from 'uuid';
 import { COLORS } from '../../utils/constants';
 import { RealtimeDragSelectingTool } from '../../RealtimeDragSelectingTool';
@@ -31,6 +32,36 @@ export default function Diagram({
 
         return () => { };
     }, [diagramRef.current]);
+
+    const isKeyEqual = (a, b) => {
+        return a.key === b.key;
+    };
+
+    useEffect(() => {
+        const diagram = diagramRef.current ? diagramRef.current.getDiagram() : null;
+        if (diagram instanceof go.Diagram) {
+            const addedNode = differenceWith(nodeDataArray,
+                diagram.model.nodeDataArray, isKeyEqual);
+            const removedNode = differenceWith(diagram.model.nodeDataArray,
+                nodeDataArray, isKeyEqual);
+            const addedLink = differenceWith(linkDataArray,
+                diagram.model.linkDataArray, isKeyEqual);
+            const removedLink = differenceWith(diagram.model.linkDataArray,
+                linkDataArray, isKeyEqual);
+            if (addedNode.length > 0) {
+                diagram.model.addNodeDataCollection(addedNode);
+            }
+            if (removedNode.length > 0) {
+                diagram.model.removeNodeDataCollection(removedNode);
+            }
+            if (addedLink.length > 0) {
+                diagram.model.addLinkDataCollection(addedLink);
+            }
+            if (removedLink.length > 0) {
+                diagram.model.removeLinkDataCollection(removedLink);
+            }
+        }
+    }, [nodeDataArray, linkDataArray]);
 
     const initDiagram = () => {
         const $ = go.GraphObject.make;
