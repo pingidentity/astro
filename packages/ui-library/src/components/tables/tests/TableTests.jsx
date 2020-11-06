@@ -1,4 +1,4 @@
-jest.dontMock("../Table");
+// jest.dontMock("../Table");
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
@@ -11,6 +11,7 @@ import Table, {
     Divider
 } from "../Table";
 
+jest.useFakeTimers();
 describe("Table", function () {
     const headData = [
         "name",
@@ -359,11 +360,6 @@ describe("Table", function () {
     });
 
     it("sets loaded state to true if fixedHeader prop is true", () => {
-        // Create our own "addEventListener" fxn
-        const map = {};
-        window.addEventListener = jest.fn((event, cb) => {
-            map[event] = cb;
-        });
 
         const component = shallow(
             <Table
@@ -373,19 +369,19 @@ describe("Table", function () {
             />
         );
 
-        // Fire synthetic event
-        map.DOMContentLoaded();
+        expect(component.state("loaded")).toEqual(false);
+
+        jest.runAllTimers();
 
         expect(component.state("loaded")).toEqual(true);
     });
 
-    it("runs forceUpdate when called", () => {
-        const map = {};
-        window.addEventListener = jest.fn((event, cb) => {
-            map[event] = cb;
-        });
+    it("adds resize listener on mount", () => {
+        window.addEventListener = jest.fn();
 
-        Table.prototype.forceUpdate = jest.fn();
+        expect(window.addEventListener.mock.calls.find(([event]) => {
+            return event === "resize";
+        })).not.toBeDefined();
 
         mount(
             <Table
@@ -395,10 +391,34 @@ describe("Table", function () {
             />
         );
 
-        // Fire synthetic event
-        map.resize();
+        const resizeListener = window.addEventListener.mock.calls.find(([event]) => {
+            return event === "resize";
+        });
 
-        expect(Table.prototype.forceUpdate).toHaveBeenCalled();
+        expect(resizeListener).toBeDefined();
+        // Just calling the function here to make sure it doesn't error out.
+        resizeListener[1]();
     });
 
+    it("removes resize listener on unmount", () => {
+        window.removeEventListener = jest.fn();
+
+        const component = mount(
+            <Table
+                bodyData={bodyData}
+                headData={headData}
+                fixedHeader
+            />
+        );
+
+        expect(window.removeEventListener.mock.calls.find(([event]) => {
+            return event === "resize";
+        })).not.toBeDefined();
+
+        component.unmount();
+
+        expect(window.removeEventListener.mock.calls.find(([event]) => {
+            return event === "resize";
+        })).toBeDefined();
+    });
 });
