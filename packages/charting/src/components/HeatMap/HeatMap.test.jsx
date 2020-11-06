@@ -10,6 +10,7 @@ import HeatMap, {
     pointClick,
     pointsToGeoJson,
 } from './HeatMap';
+import { act } from 'react-dom/test-utils';
 
 jest.mock('mapbox-gl', (replacements) => {
     const setData = jest.fn();
@@ -28,6 +29,7 @@ jest.mock('mapbox-gl', (replacements) => {
         getZoom: jest.fn(() => 5),
         on: jest.fn((type, callback) => [type, callback]),
         queryRenderedFeatures: jest.fn(),
+        resize: jest.fn(),
         setCenter: jest.fn(),
         setPaintProperty: jest.fn(),
         ...replacements,
@@ -300,13 +302,13 @@ describe('HeatMap', () => {
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
         const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
-        load();
+        act(() => load());
 
-        expect(map.getSource).not.toHaveBeenCalled();
+        expect(map.getSource).toHaveBeenCalledTimes(1);
 
         component.setProps({ ...defaultProps, points: defaultProps.points.slice(0, 2) });
 
-        expect(map.getSource).toHaveBeenCalledTimes(1);
+        expect(map.getSource).toHaveBeenCalledTimes(2);
         clearMock(map);
     });
 
@@ -317,14 +319,14 @@ describe('HeatMap', () => {
         const component = getComponent({ points: mutatingPoints });
         // Have to call this because the map object ref is set in the load event.
         const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
-        load();
+        act(() => load());
 
-        expect(map.getSource).not.toHaveBeenCalled();
+        expect(map.getSource).toHaveBeenCalledTimes(1);
         mutatingPoints.pop();
 
         component.setProps({ ...defaultProps, points: mutatingPoints });
 
-        expect(map.getSource).toHaveBeenCalledTimes(1);
+        expect(map.getSource).toHaveBeenCalledTimes(2);
         clearMock(map);
     });
 
@@ -334,7 +336,7 @@ describe('HeatMap', () => {
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
         const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
-        load();
+        act(() => load());
 
         expect(map.setCenter).not.toHaveBeenCalled();
 
@@ -348,7 +350,7 @@ describe('HeatMap', () => {
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
         const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
-        load();
+        act(() => load());
 
         expect(map.setPaintProperty).not.toHaveBeenCalled();
 
