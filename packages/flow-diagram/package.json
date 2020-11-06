@@ -45,7 +45,7 @@
         "gojs-react": "^1.0.7",
         "jest-canvas-mock": "^2.3.0",
         "jest-emotion": "^10.0.32",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.20",
         "prop-types": "^15.7.2",
         "uuid": "^7.0.3"
     },

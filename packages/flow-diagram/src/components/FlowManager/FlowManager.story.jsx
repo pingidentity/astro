@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import isEqual from 'lodash/isEqual';
 import { Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Button, Checkbox, Field, Input } from '@pingux/compass';
 import FlowManager from './FlowManager';
@@ -231,6 +232,7 @@ function Demo() {
     const [triggerNodes, triggerLinks] = triggersToFlowDiagram(triggers);
     const [steps, links] = stepsToFlowDiagram(stepDefinitions);
     const [stepDefs, setStepDefs] = useState(steps);
+    const [linkDefs, setLinkDefs] = useState(links);
 
     const onChangeConfig = (id, field, val) => {
         const updatedDefinitions = stepDefs.map((obj) => {
@@ -259,7 +261,13 @@ function Demo() {
     };
 
     const onModelChange = (updates) => {
-        setStepDefs([...stepDefs, ...updates.insertedNodes]);
+        if (!isEqual(updates.insertedNodes, updates.allNodes)) {
+            setStepDefs([...stepDefs, ...updates.insertedNodes]);
+        }
+
+        if (!isEqual(updates.insertedLinks, updates.allLinks)) {
+            setLinkDefs([...linkDefs, ...updates.insertedLinks]);
+        }
     };
 
     return (
@@ -352,8 +360,8 @@ function Demo() {
                         showInPalette: false,
                     },
                 ]}
-                links={[...links, ...triggerLinks]}
-                nodes={[...steps, ...triggerNodes]}
+                links={[...linkDefs, ...triggerLinks]}
+                nodes={[...stepDefs, ...triggerNodes]}
                 triggers={[
                     {
                         'type': 'START',
