@@ -137,6 +137,7 @@ export default function HeatMap({
     onPointMouseLeave,
     onZoom,
     points,
+    render,
     scoreGradient,
     startingZoom,
     width,
@@ -279,7 +280,7 @@ export default function HeatMap({
         }
     }, [mapContainer.current.offsetWidth]);
 
-    return (
+    const mapNode = (
         <div css={getOuterContainerStyles(height, width)} data-id={dataId}>
             <div
                 ref={mapContainer}
@@ -287,6 +288,8 @@ export default function HeatMap({
             />
         </div>
     );
+
+    return render({ mapObject: mapObject.current, mapNode });
 }
 
 const zoomPropType = PropTypes.oneOf(new Array(22).fill(undefined).map((val, idx) => idx + 1));
@@ -391,6 +394,13 @@ HeatMap.propTypes = {
         PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     )).isRequired,
     /**
+     * A function used to render the map's container and its anchor element, which Mapbox
+     * attaches the map to. This is passed an object with two properties: the mapNode, which is
+     * the React node that the map renders into, and the mapObject, which is the JavaScript object
+     * used to interact with Mapbox's API.
+     */
+    render: PropTypes.func,
+    /**
      * A number from 1-22 representing the map's initial zoom level. Higher numbers indicate
      * a closer zoom.
      */
@@ -412,4 +422,5 @@ HeatMap.defaultProps = {
     onPointMouseLeave: noop,
     onZoom: noop,
     points: [],
+    render: ({ mapNode }) => mapNode,
 };

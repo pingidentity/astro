@@ -363,4 +363,13 @@ describe('HeatMap', () => {
         expect(map.setPaintProperty).toHaveBeenCalledTimes(1);
         clearMock(map);
     });
+
+    it('renders correctly when render is passed in', () => {
+        const component = getComponent({
+            'data-id': 'test-id',
+            render: ({ mapNode }) => mapNode,
+        });
+
+        expect(component.find('[data-id="test-id"]').exists()).toEqual(true);
+    });
 });
