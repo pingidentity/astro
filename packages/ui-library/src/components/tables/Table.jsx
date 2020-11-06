@@ -313,15 +313,21 @@ class Table extends React.Component {
 
     shadowHeader= null;
 
-    componentDidMount() {
-        if (this.props.fixedHeader)
-        { window.addEventListener("DOMContentLoaded", () => {
-            this.setState({ loaded: true });
-        });
+    forceComponentUpdate = () => { this.forceUpdate(); }
 
-        window.addEventListener("resize", () => {
-            this.forceUpdate();
-        });}
+    componentDidMount() {
+        if (this.props.fixedHeader) {
+            window.setTimeout(() => {
+                this.setState({ loaded: true });
+            }, 0);
+            window.addEventListener("resize", this.forceComponentUpdate);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.props.fixedHeader) {
+            window.removeEventListener("resize", this.forceComponentUpdate);
+        }
     }
 
     render() {
