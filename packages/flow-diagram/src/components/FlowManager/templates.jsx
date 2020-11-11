@@ -1,6 +1,6 @@
 import React from 'react';
 import * as go from 'gojs';
-import { Success, Close, Error, Grip } from '@pingux/icons/';
+import { Success, Close, Error, Grip, Desktop } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import start from '../../img/start.svg';
 import { COLORS } from '../../utils/constants';
@@ -240,29 +240,56 @@ export const nodeTemplateStart = () =>
                 { width: 5, height: 5, fill: '#27AF14', strokeWidth: 0 }),
         ));
 
-
-export const groupTemplate =
+export const diagramGroupTemplate =
     $(go.Group, go.Panel.Auto,
+        {
+            isSubGraphExpanded: true,
+            ungroupable: true,
+            selectionAdorned: false,
+            layout: $(go.LayeredDigraphLayout,
+                {
+                    setsPortSpots: true,
+                    columnSpacing: 20,
+                    layerSpacing: 20,
+                    isInitial: true,
+                    isOngoing: true,
+                },
+            ),
+        },
+        $(go.Shape, 'Rectangle',
+            { fill: 'transparent', strokeWidth: 0 },
+        ));
+
+
+export const paletteGroupTemplate =
+    $(go.Group,
         {
             isSubGraphExpanded: false,
             ungroupable: true,
+            selectionAdorned: false,
         },
-        { name: 'BODY' },
-
-        $(go.Shape, 'Rectangle',
-            { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(280, 0) },
-            new go.Binding('stroke', 'isSelected', (s) => { return s ? 'dodgerblue' : COLORS.GRAY; }).ofObject()),
-        $(go.Panel, 'Horizontal',
-
-
-            $(go.TextBlock,
-                {
-                    stroke: '#9DA2A8',
-                    font: 'bold 12px sans-serif',
-                    editable: true,
-                    margin: 20,
-                    alignment: go.Spot.Left,
-                },
-                new go.Binding('text').makeTwoWay()),
+        $(go.Panel, 'Auto',
+            { name: 'BODY' },
+            $(go.Shape, 'Rectangle',
+                { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(280, 0) }),
+            $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+                $(go.Panel, 'Auto',
+                    $(go.Shape, 'RoundedRectangle',
+                        { fill: '#028CFF', desiredSize: new go.Size(70, 55), strokeWidth: 0 }),
+                    $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+                        $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(<Grip />, { fill: COLORS.WHITE })))}`, width: 20, height: 20, margin: new go.Margin(0, 7, 0, 0) }),
+                        $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(<Desktop />, { fill: COLORS.WHITE })))}`, width: 20, height: 20 }),
+                    ),
+                ),
+                $(go.TextBlock,
+                    {
+                        stroke: '#9DA2A8',
+                        font: 'bold 12px sans-serif',
+                        editable: true,
+                        margin: 20,
+                        alignment: go.Spot.Left,
+                    },
+                    new go.Binding('text').makeTwoWay()),
+            ),
         ),
-    );
+    )

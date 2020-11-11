@@ -10,8 +10,9 @@ import Diagram from '../Diagram';
 import Palette from '../Palette';
 import {
     paletteItemTemplate,
-    groupTemplate,
+    diagramGroupTemplate,
     stepTemplate,
+    paletteGroupTemplate,
 } from './templates';
 import { bodyWrapper, globalStyles, topPanel, wrapper } from './FlowManager.styles';
 import LeftContainer from '../LeftContainer/LeftContainer';
@@ -36,9 +37,9 @@ const getPaletteTemplates = typeDefinitions => typeDefinitions.map(({
     icon,
     color,
 }) => [
-    id,
-    paletteItemTemplate({ width: 280, icon, color }),
-]);
+        id,
+        paletteItemTemplate({ width: 280, icon, color }),
+    ]);
 
 function FlowDiagram({
     links,
@@ -113,7 +114,7 @@ function FlowDiagram({
         const modifiedNodes = modifiedNodeData.map((node) => {
             const { key } = node;
 
-            const { configuration } = stepDictionary.current.get(key);
+            const { configuration } = stepDictionary.current.get(key) || {};
 
             return {
                 ...node,
@@ -186,13 +187,20 @@ function FlowDiagram({
                                     <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
                                     <Palette
                                         groupTemplates={[
-                                            ['', groupTemplate],
+                                            ['', paletteGroupTemplate],
                                         ]}
                                         nodeTemplates={[
                                             ...getPaletteTemplates(itemsInPalette),
                                         ]}
-                                        nodeDataArray={getPaletteItems(itemsInPalette)}
-                                        linkDataArray={[]}
+                                        nodeDataArray={[...getPaletteItems(itemsInPalette),
+                                            // { type: 'object', key: 'G', id: 'G', text: 'Login Group', isGroup: true },
+                                            // { key: 'Ga', category: 'LOGIN', id: 'Ga', text: 'A block', group: 'G', errorMessage: '', loc: '0 0' },
+                                            // { key: 'Gb', category: 'outlet', id: 'Gb', text: 'Outlet 1', group: 'G' },
+                                            // { key: 'Gc', category: 'outlet', id: 'Gc', text: 'Outlet 2', group: 'G' }
+                                        ]}
+                                        linkDataArray={[
+                                            // { from: 'Ga', to: 'Gc' }, { from: 'Ga', to: 'Gb' }
+                                        ]}
                                     />
                                 </React.Fragment>
                             )}
@@ -200,7 +208,7 @@ function FlowDiagram({
                     </LeftContainer>
                     <Diagram
                         groupTemplates={[
-                            ['', groupTemplate],
+                            ['', diagramGroupTemplate],
                         ]}
                         linkDataArray={links.map(({ id, ...link }) => ({ ...link, key: id }))}
                         nodeDataArray={nodes.map(({ id, ...node }) => ({ ...node, id, key: id }))}

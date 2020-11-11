@@ -2,6 +2,7 @@ import * as go from 'gojs';
 import { ReactPalette } from 'gojs-react';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidV4 } from 'uuid';
 import { paletteWrapper } from './Palette.styles';
 
 
@@ -25,20 +26,18 @@ export default function Palette({
                         {
                             linkKeyProperty: 'key',
                             makeUniqueKeyFunction: (m, data) => {
-                                let k = data.key || 1;
+                                const key = `${data.key}_${uuidV4()}`;
+
                                 // eslint-disable-next-line
-                                while (m.findNodeDataForKey(k)) k++;
-                                // eslint-disable-next-line
-                                data.key = k;
-                                return k;
+                                data.key = key;
+                                return key;
                             },
                             makeUniqueLinkKeyFunction: (m, data) => {
-                                let k = data.key || -1;
+                                const key = `${data.key}_${uuidV4()}`;
+
                                 // eslint-disable-next-line
-                                while (m.findLinkDataForKey(k)) k--;
-                                // eslint-disable-next-line
-                                data.key = k;
-                                return k;
+                                data.key = key;
+                                return key;
                             },
                         }),
                 },
