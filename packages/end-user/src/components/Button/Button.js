@@ -16,7 +16,7 @@ const ButtonTypes = {
 /**
  * A button component
  */
-const Button = ({
+const Button = React.forwardRef(({
     className,
     'data-id': dataId,
     disabled,
@@ -30,7 +30,7 @@ const Button = ({
     type,
     style,
     render,
-}) => {
+}, ref) => {
     const classNames = classnames('button file-input--button', className, iconName, {
         'button--disabled': disabled,
         'button--inline': inline,
@@ -50,6 +50,7 @@ const Button = ({
                     disabled={disabled}
                     onClick={onClick}
                     style={style}
+                    ref={ref}
                     type={isSubmit ? 'submit' : 'button'}
                 >
                     {loading && <span className={"button--loading-ellipsis"}><span></span></span>}
@@ -57,10 +58,10 @@ const Button = ({
                 </button>
             ) : (
                 render({ children })
-            )}          
+            )}
         </div>
     );
-};
+});
 
 Button.propTypes = {
     /**

@@ -1,0 +1,62 @@
+@mixin truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.device-selector {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: $spacing-md 0;
+        border-bottom: 1px dashed $color-neutral-50;
+        min-width: 0;
+
+        &-icon {
+            flex-grow: 0;
+            flex-basis: auto;
+        }
+
+        &-details {
+            flex: 1 1 auto;
+            margin: 0 $spacing-md;
+            min-width: 0;
+        }
+
+        &-title {
+            color: $color-accent-neutral-10;
+            font-size: $font-size-md;
+            margin-bottom: $spacing-xs;
+
+            @include truncate;
+        }
+
+        &-description {
+            color: $color-neutral-10;
+            font-size: $font-size-sm;
+
+            @include truncate;
+        }
+
+        &-status {
+            flex-grow: 0;
+            flex-basis: auto;
+            white-space: nowrap;
+        }
+
+        &-controls {
+            flex-grow: 0;
+            flex-basis: auto;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}

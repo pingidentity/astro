@@ -75,6 +75,9 @@
 @import './components/column';
 @import './components/phone-input';
 @import './components/social-button';
+@import './components/device-selector';
+@import './components/saveable-textinput';
+@import './components/popover-menu';
 
 // Spacing components are after so they take precedence
 @import './components/form-aside';

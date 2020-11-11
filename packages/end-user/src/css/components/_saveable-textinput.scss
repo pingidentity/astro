@@ -1,0 +1,65 @@
+@mixin input-icon {
+    font-family: $icon-font;
+    text-transform: none;
+    position: relative;
+    display: block;
+
+    &:before {
+        position: absolute;
+    }
+}
+
+.saveable-textinput {
+    display: flex;
+    flex-direction: row;
+
+    &__save {
+        @include input-icon();
+        right: 0;
+        font-size: 24px;
+        line-height: 24px;
+        top: -24px;
+        z-index: 1;
+
+        &:before {
+            content: $pingicon-success-round;
+            color: $color-astro-blue;
+            right: $spacing-md;
+            top: 11px;
+            cursor: pointer;
+        }
+    }
+
+    &__input {
+        flex: 1;
+        position: relative;
+    }
+
+    &__control {
+        position: absolute;
+        top: -24px;
+        padding-right: 48px;
+    }
+
+    &__cancel {
+        @include input-icon();
+        right: 0;
+        width: 34px;
+        font-size: 16px;
+        line-height: 16px;
+        top: -24px;
+
+        &:before {
+            content: $pingicon-clear;
+            color: $color-neutral-60;
+            right: $spacing-sm;
+            top: $spacing-md;
+            cursor: pointer;
+        }
+
+        &:hover:before {
+            color: $color-neutral-20;
+            transition: all 0.2s;
+        }
+    }
+}
