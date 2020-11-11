@@ -134,32 +134,6 @@ export default function Diagram({
             diagram.groupTemplateMap.add(name, template);
         });
 
-        diagram.groupTemplate =
-            $(go.Group, 'Auto',
-                {
-                    layout: $(go.LayeredDigraphLayout,
-                        {
-                            setsPortSpots: true,
-                            columnSpacing: 20,
-                            layerSpacing: 20,
-                            isInitial: true,
-                            isOngoing: true,
-                        }),
-                    isSubGraphExpanded: true,
-                    ungroupable: true,
-                },
-                $(go.Shape, 'Rectangle',
-                    { fill: null, stroke: null }),
-                $(go.Panel, 'Vertical',
-                    { defaultAlignment: go.Spot.Left, margin: 4 },
-                    $(go.Panel, 'Horizontal',
-                        { defaultAlignment: go.Spot.Top },
-                    ),
-                    $(go.Placeholder,
-                        { padding: new go.Margin(0, 10) }),
-                ),
-            );
-
         diagram.linkTemplate =
             $(go.Link,
                 {

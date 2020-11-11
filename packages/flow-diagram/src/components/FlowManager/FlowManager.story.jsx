@@ -335,6 +335,12 @@ function Demo() {
                         color: '#ce0808',
                     },
                     {
+                        id: 'outlet',
+                        template: outletTemplate,
+                        showInPalette: false,
+                        color: '#A3B1E1',
+                    },
+                    {
                         id: 'not_found',
                         template: outletTemplate,
                         showInPalette: false,
