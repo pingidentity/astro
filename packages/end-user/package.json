@@ -160,7 +160,7 @@
     }
   },
   "scripts": {
-    "pack": "rm -rf ./build && build-storybook -o build",
+    "pack": "rm -rf ./build && build-storybook -o build --no-dll",
     "cdn": "rm -rf ./cdn && webpack --config webpack.cdn.js && for dir in ./cdn/*/; do mkdir $dir/icons; mkdir $dir/logos; mkdir $dir/images; done && cp -R ./src/icons/. ./cdn/*/icons/ && cp -R ./src/logos/. ./cdn/*/logos/ && cp -R ./src/images/. ./cdn/*/images",
     "start": "start-storybook -p 6006 --no-dll",
     "lint": "eslint src/** && stylelint src/**/*.scss",
