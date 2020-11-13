@@ -140,14 +140,15 @@ export default function Diagram({
                     routing: go.Link.AvoidsNodes,
                     curve: go.Link.JumpOver,
                     corner: 5,
-                    toShortLength: 4,
+                    fromShortLength: -2,
+                    toShortLength: -2,
                     selectable: false,
                     layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
                 },
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                $(go.Shape, { stroke: '#8C9199' }),
-                $(go.Shape, { toArrow: 'Standard', stroke: '#8C9199', fill: '#8C9199', segmentIndex: -Infinity }),
+                $(go.Shape, { stroke: '#4462ED' }),
+                $(go.Shape, { toArrow: 'Standard', stroke: '#4462ED', fill: '#4462ED', segmentIndex: -Infinity }),
             );
 
         return diagram;
