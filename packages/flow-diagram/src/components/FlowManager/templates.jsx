@@ -25,7 +25,7 @@ const toNode = ({ color }) => {
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
             $(go.Shape, 'Circle',
-                { width: 9, height: 9, fill: color, stroke: COLORS.WHITE, strokeWidth: 1 }),
+                { width: 9, height: 9, fill: color, stroke: COLORS.WHITE, strokeWidth: 2 }),
         )
 
     );
@@ -36,7 +36,7 @@ const fromNode = ({ color }) => {
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, cursor: 'pointer' },
             $(go.Shape, 'Circle',
-                { width: 9, height: 9, fill: color, stroke: COLORS.WHITE, strokeWidth: 1 }),
+                { width: 9, height: 9, fill: color, stroke: COLORS.WHITE, strokeWidth: 2 }),
         )
     );
 };
@@ -86,7 +86,8 @@ export const stepTemplate = ({ color, icon, onClick }) => {
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
                 $(go.Shape, 'RoundedRectangle',
-                    { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, minSize: new go.Size(200, 150) }),
+                    { fill: 'transparent', stroke: 'transparent', strokeWidth: 0 }),
+                new go.Binding('minSize', 'errorMessage', (s) => { return s.length > 0 ? new go.Size(200, 150) : new go.Size(200, 55); }),
                 $(go.Panel, 'Vertical', { padding: 15, alignment: go.Spot.Top },
                     new go.Binding('visible', 'errorMessage', (s) => { return s.length > 0; }),
                     $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20 }),
@@ -102,28 +103,48 @@ export const stepTemplate = ({ color, icon, onClick }) => {
                 $(go.Panel, 'Position', { position: new go.Point(0, 0) },
                     { name: 'BODY' },
                     $(go.Shape, 'RoundedRectangle',
-                        { fill: COLORS.WHITE, desiredSize: new go.Size(200, 55) },
-                        new go.Binding('stroke', 'errorMessage', (s) => { return s.length > 0 ? COLORS.ERROR : COLORS.GRAY; }),
-                        new go.Binding('strokeWidth', 'errorMessage', (s) => { return s.length > 0 ? 2 : 0; }),
+                        { fill: 'transparent', desiredSize: new go.Size(210, 55), stroke: 'transparent', parameter1: 3 },
+                    ),
+                    $(go.Shape, 'RoundedRectangle',
+                        { fill: COLORS.WHITE, desiredSize: new go.Size(200, 55), margin: new go.Margin(0, 0, 0, 5), parameter1: 3 },
+                        new go.Binding('stroke', 'isSelected', (condition, node) => {
+                            if (condition) {
+                                return color;
+                            } else if (node.part.kb.errorMessage.length > 0) {
+                                return COLORS.ERROR;
+                            }
+                            return 'transparent';
+                        }).ofObject(''),
+                        new go.Binding('strokeWidth', 'isSelected', (condition, node) => {
+                            if (condition) {
+                                return 2;
+                            } else if (node.part.kb.errorMessage.length > 0) {
+                                return 2;
+                            }
+                            return 0;
+                        }).ofObject(''),
                     ),
                     $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                         $(go.Panel, 'Auto',
                             $(go.Shape, 'RoundedRectangle',
-                                { fill: color, stroke: 'transparent' },
+                                { fill: color, stroke: 'transparent', margin: new go.Margin(0, 0, 0, 5), parameter1: 2 },
                                 new go.Binding('strokeWidth', 'errorMessage', (s) => { return s.length > 0 ? 4 : 0; }),
                                 new go.Binding('desiredSize', 'errorMessage', (s) => { return s.length > 0 ? new go.Size(60, 53) : new go.Size(60, 55); })),
-                            $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(icon, { fill: COLORS.WHITE })))}`, width: 20, height: 20 }),
+                            $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(icon, { fill: COLORS.WHITE })))}`, width: 20, height: 20, margin: new go.Margin(0, 0, 0, -9) }),
                         ),
-                        $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 0, 10) },
+                        $(go.Shape, 'Ellipse',
+                            { fill: 'white', stroke: 'transparent', margin: new go.Margin(0, 0, 0, -13) },
+                            new go.Binding('desiredSize', 'errorMessage', (s) => { return s.length > 0 ? new go.Size(20, 52) : new go.Size(20, 55); })),
+                        $(go.Panel, 'Vertical', { margin: new go.Margin(0, 0, 0, -5) },
                             $(go.TextBlock,
                                 {
-                                    stroke: '#9DA2A8', font: '11px sans-serif', alignment: go.Spot.Left, editable: false,
+                                    stroke: '#253746', font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false,
 
                                 },
                                 new go.Binding('text', 'category').makeTwoWay()),
                             $(go.TextBlock,
                                 {
-                                    stroke: COLORS.BLACK, font: '500 12px sans-serif', alignment: go.Spot.Left, editable: false,
+                                    stroke: '#68747F', font: 'normal normal normal 12px Helvetica', alignment: go.Spot.Left, editable: false,
 
                                 },
                                 new go.Binding('text', 'stepId').makeTwoWay()),
