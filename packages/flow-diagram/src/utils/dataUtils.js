@@ -1,6 +1,9 @@
+
+import { v4 as uuidV4 } from 'uuid';
+
 const getOutletData = (id, outlets, getLinkId) => outlets.reduce(
     ([nodes, links], { name, type, next }) => {
-        const key = `${id}-${type}`;
+        const key = `${id}-${type}_${uuidV4()}`;
         return [
             [
                 ...nodes,

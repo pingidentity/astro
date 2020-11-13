@@ -168,18 +168,18 @@ function Demo() {
                     initialUsername: '{flow.inputs.user.id}',
                 },
                 'outlets': [{
-                    'name': 'On Success',
-                    'type': 'success',
+                    'name': 'Credentials valid',
+                    'type': 'blue_outlet',
                     'next': 'finished',
                 },
                 {
-                    'name': 'On Failure',
-                    'type': 'failure',
+                    'name': 'Credentials invalid',
+                    'type': 'gray_outlet',
                     'next': 'error',
                 },
                 {
-                    'name': 'no such user',
-                    'type': 'not_found',
+                    'name': 'No such user',
+                    'type': 'gray_outlet',
                     'next': 'registration',
                 },
                 ],
@@ -188,6 +188,14 @@ function Demo() {
                 id: 'finished',
                 stepId: 'finished',
                 'type': 'finished',
+                'configuration': {
+                    'redirect': 'https://example.com',
+                },
+            },
+            {
+                id: 'error',
+                stepId: 'error',
+                'type': 'error',
                 'configuration': {
                     'redirect': 'https://example.com',
                 },
@@ -323,28 +331,16 @@ function Demo() {
                         template: stepTemplate,
                     },
                     {
-                        id: 'success',
+                        id: 'blue_outlet',
                         template: outletTemplate,
                         showInPalette: false,
-                        color: '#0bbf01',
+                        color: '#D5DCF3',
                     },
                     {
-                        id: 'failure',
+                        id: 'gray_outlet',
                         template: outletTemplate,
                         showInPalette: false,
-                        color: '#ce0808',
-                    },
-                    {
-                        id: 'outlet',
-                        template: outletTemplate,
-                        showInPalette: false,
-                        color: '#A3B1E1',
-                    },
-                    {
-                        id: 'not_found',
-                        template: outletTemplate,
-                        showInPalette: false,
-                        color: '#000',
+                        color: '#E4E7E9',
                     },
                     {
                         id: 'finished',

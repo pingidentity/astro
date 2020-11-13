@@ -25,7 +25,7 @@ const toNode = ({ color }) => {
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
             $(go.Shape, 'Circle',
-                { width: 10, height: 10, fill: color, stroke: COLORS.WHITE, strokeWidth: 3 }),
+                { width: 9, height: 9, fill: color, stroke: COLORS.WHITE, strokeWidth: 1 }),
         )
 
     );
@@ -36,7 +36,7 @@ const fromNode = ({ color }) => {
         $(go.Panel, 'Auto',
             { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, cursor: 'pointer' },
             $(go.Shape, 'Circle',
-                { width: 10, height: 10, fill: color, stroke: COLORS.WHITE, strokeWidth: 3 }),
+                { width: 9, height: 9, fill: color, stroke: COLORS.WHITE, strokeWidth: 1 }),
         )
     );
 };
@@ -179,20 +179,20 @@ export const outletTemplate = ({ color }) => {
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
                 $(go.Shape, 'RoundedRectangle',
-                    { stroke: COLORS.GRAY, width: '100%', fill: color }),
-
+                    { height: 24, fill: color, strokeWidth: 1, stroke: '#98A0A8', parameter1: 2 }),
                 $(go.Panel, 'Horizontal',
                     $(go.TextBlock,
                         {
-                            stroke: COLORS.WHITE,
-                            font: 'bold 12px sans-serif',
+                            stroke: '#253746',
+                            font: 'normal 12px Helvetica',
                             editable: true,
-                            margin: new go.Margin(5, 10, 5, 10),
+                            margin: new go.Margin(2, 10, 0, 10),
                             alignment: go.Spot.Left,
                         },
                         new go.Binding('text').makeTwoWay()),
                 ),
             ),
+            fromNode({ color: '#4262ed' }),
         )
     );
 };
