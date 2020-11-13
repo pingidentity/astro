@@ -67,9 +67,6 @@ describe('HeatMap', () => {
         {
             id: 4,
             longLat: [-4, 58.5],
-            properties: {
-                'property': 'value',
-            },
         },
     ];
 
@@ -182,7 +179,6 @@ describe('HeatMap', () => {
                     },
                     'properties': {
                         'id': 4,
-                        'property': 'value',
                         count: 1,
                     },
                     'type': 'Feature',
