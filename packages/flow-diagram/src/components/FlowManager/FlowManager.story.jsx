@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import isEqual from 'lodash/isEqual';
 import { Desktop, Error, Success, Walkthrough } from '@pingux/icons';
-import { Button, Checkbox, Field, Input } from '@pingux/compass';
+import { Button, Checkbox, Field, Input, Text } from '@pingux/compass';
 import FlowManager from './FlowManager';
 import {
     outletTemplate,
@@ -25,7 +25,7 @@ export default {
 //     'type': 'object',
 //     'properties': {
 //         'stepType': {
-//             'const': 'LOGIN',
+//             'const': 'Login',
 //         },
 //         'configuration': {
 //             'properties': {
@@ -92,7 +92,7 @@ export default {
 
 //     "stepDefinitions": {
 //      "userLogin": {
-//         "type": "LOGIN",
+//         "type": "Login",
 //         "configuration": {
 //           "enableRegistration": true,
 //           "accountRecovery": "${flow.context.recoveryEnabled}"
@@ -135,7 +135,7 @@ export default {
 //         }
 //       },
 //       "registration": {
-//         "type": "EXECUTE_FLOW",
+//         "type": "Execute flow",
 //         "configuration": {
 //           "flowDefinition": {
 //             "id": "1234"
@@ -157,7 +157,7 @@ function Demo() {
                 id: 'user-login', // Used for internal calculations and callbacks
                 name: 'User login',
                 stepId: 'userLogin',
-                'type': 'LOGIN',
+                'type': 'Login',
                 'configuration': {
                     'enableRegistration': true,
                     'accountRecovery': '{flow.context.recoveryEnabled}',
@@ -195,7 +195,7 @@ function Demo() {
             {
                 id: 'registration',
                 stepId: 'registration',
-                'type': 'EXECUTE_FLOW',
+                'type': 'Execute flow',
                 'configuration': {
                     'error': {
                         'code': '{step.context.status}',
@@ -209,7 +209,7 @@ function Demo() {
             {
                 id: 'registration2',
                 stepId: 'registration',
-                'type': 'EXECUTE_FLOW',
+                'type': 'Execute flow',
                 'configuration': {
                     'error': {
                         'code': '{step.context.status}',
@@ -275,17 +275,17 @@ function Demo() {
             <FlowManager
                 renderTopPanel={(flowDefinition) => {
                     return (
-                        <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', padding: 10 }}>
+                        <div style={{ alignItems: 'center', backgroundColor: '#F7F8FD', borderTop: '1px solid #CACED3', display: 'flex', justifyContent: 'space-between', padding: 10 }}>
                             <div>
-                                <p style={{ color: 'gray', fontWeight: 'bold', margin: 0 }}>Flow Manager</p>
-                                <h2 style={{ margin: 0 }}>Registration</h2>
+                                <Text color="#68747F" fontSize={14} fontFamily="Helvetica">Flow Manager</Text>
+                                <Text color="#253746" fontSize={18} fontFamily="Helvetica">Generic Registration</Text>
                             </div>
                             <div style={{ alignItems: 'center', display: 'flex' }}>
                                 <Error fill="#a30303" />
-                                <p style={{ color: '#a30303', fontWeight: 'bold', marginLeft: 10 }}>1 error. To publish this flow, fix all errors.</p>
+                                <Text color="#A31300" fontSize={14} fontFamily="Helvetica" ml="10px">2 errors. To save this flow, fix all errors.</Text>
                             </div>
                             <div style={{ display: 'flex' }}>
-                                <Button style={{ border: 'none' }}>Cancel</Button>
+                                <Button style={{ background: 'transparent', border: 'none' }}>Cancel</Button>
                                 <Button style={{ marginLeft: 10, marginRight: 15 }}>Save</Button>
                                 <Button style={{ background: '#4462ED', color: 'white' }} onClick={() => console.log(flowDefinition)}>Save & Close</Button>
                             </div>
@@ -297,7 +297,7 @@ function Demo() {
                 // that empty workflows would be missing most options.
                 typeDefinitions={[
                     {
-                        id: 'LOGIN',
+                        id: 'Login',
                         displayName: 'Login',
                         icon: <Desktop />,
                         color: '#028CFF',
@@ -316,7 +316,7 @@ function Demo() {
                         ),
                     },
                     {
-                        id: 'EXECUTE_FLOW',
+                        id: 'Execute flow',
                         displayName: 'Execute Flow',
                         icon: <Walkthrough />,
                         color: '#228C22',

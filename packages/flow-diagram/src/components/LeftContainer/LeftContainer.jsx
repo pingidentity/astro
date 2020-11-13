@@ -8,7 +8,7 @@ export default function LeftContainer({
     ...others
 }) {
     return (
-        <Box width="20%" css={leftContainer} {...others}>
+        <Box width="360px" height="100%" css={leftContainer} {...others}>
             {children}
         </Box>
     );
