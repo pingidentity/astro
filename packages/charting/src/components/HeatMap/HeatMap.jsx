@@ -146,13 +146,12 @@ export default function HeatMap({
     width,
 }) {
     const mapContainer = useRef({});
-    const mapObject = useRef({});
     const [isLoaded, setIsLoaded] = useState(false);
+    const [mapObject, setMapObject] = useState();
 
     useEffect(() => {
-        if (isLoaded) {
-            updateSource(mapObject.current, points);
-        } else {
+        // Only set up the map if we don't already have a map in state.
+        if (!mapObject) {
             const map = new mapboxgl.Map({
                 attributionControl: false,
                 center,
@@ -164,7 +163,14 @@ export default function HeatMap({
                 zoom: startingZoom,
             });
 
+            // Set the map object in state to use it later and so that we know the initial setup
+            // has occurred.
+            setMapObject(map);
+
             map.on('load', () => {
+                // Many map events can't fire until the map's load event fires.
+                setIsLoaded(true);
+
                 map.addSource('mapData', {
                     type: 'geojson',
                     data: pointsToGeoJson(points),
@@ -258,10 +264,9 @@ export default function HeatMap({
                 map.on('mouseenter', 'unclustered-point', mouseEnter(map, onPointMouseEnter));
 
                 map.on('mouseleave', 'unclustered-point', mouseLeave(map, onPointMouseLeave));
-
-                setIsLoaded(true);
             });
-            mapObject.current = map;
+        } else if (isLoaded) {
+            updateSource(mapObject, points);
         }
         // Also rerender on load, because the data prop can change before the map is finished
         // initializing, which causes it to be loaded with the original dataset.
@@ -269,21 +274,21 @@ export default function HeatMap({
 
     useEffect(() => {
         if (isLoaded) {
-            mapObject.current.setCenter(center);
+            mapObject.setCenter(center);
         }
     }, [JSON.stringify(center)]);
 
     useEffect(() => {
         if (isLoaded) {
-            mapObject.current.setPaintProperty('clusters', 'circleColor', getCircleColor(scoreGradient));
+            mapObject.setPaintProperty('clusters', 'circleColor', getCircleColor(scoreGradient));
         }
     }, [JSON.stringify(scoreGradient)]);
 
     useEffect(() => {
         if (isLoaded) {
-            mapObject.current.resize();
+            mapObject.resize();
         }
-    }, [mapContainer.current.offsetWidth]);
+    }, [mapContainer.offsetWidth]);
 
     const mapNode = (
         <div css={getOuterContainerStyles(height, width)} data-id={dataId}>
@@ -294,7 +299,7 @@ export default function HeatMap({
         </div>
     );
 
-    return render({ mapObject: mapObject.current, mapNode });
+    return render({ mapObject, mapNode });
 }
 
 const zoomPropType = PropTypes.oneOf(new Array(22).fill(undefined).map((val, idx) => idx + 1));
