@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Clear } from '@pingux/icons';
 import { Box, Text } from '@pingux/compass';
-import { configPanel, configPanelClose, line } from './ConfigPanel.styles';
+import Icon from '@mdi/react';
+import { mdiDotsVertical } from '@mdi/js';
+import { configPanel, configPanelClose, configPanelHeader, line } from './ConfigPanel.styles';
 
 function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
     return (
@@ -10,10 +12,17 @@ function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
             <div css={configPanelClose}>
                 <Clear onClick={onClose} data-testid="config-panel-close" />
             </div>
-            <Box isRow alignItems="center">
-                {React.cloneElement(icon, { fill: color, height: 18, width: 18 })}
-                <Text m="15px 0px 15px 15px" fontSize={18} fontWeight="bold">{category}</Text>
-            </Box>
+            <div css={configPanelHeader}>
+                <Box isRow>
+                    {React.cloneElement(icon, { fill: color, height: 22, width: 22 })}
+                    <Text ml="12px" color="#253746" fontSize={15} fontWeight="bold" fontFamily="Helvetica">{category}</Text>
+                </Box>
+                <Icon
+                    path={mdiDotsVertical}
+                    size="33px"
+                    color="#68747F"
+                />
+            </div>
             <hr css={line} />
             {children}
         </div>

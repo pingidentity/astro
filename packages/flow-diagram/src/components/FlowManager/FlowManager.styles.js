@@ -12,8 +12,24 @@ export const bodyWrapper = css`
     width: 100%;
 `;
 
-export const topPanel = css`
-    border-bottom: 1px solid gray;
+export const panelHeader = css`
+    border-bottom: 1px solid #E1DDFD;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 30px 15px 20px 15px;
+`;
+
+export const panelHeaderItem = css`
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+`;
+
+export const panelHeaderItemActive = css`
+    border-bottom: 2px solid #4462ED;
 `;
 
 export const globalStyles = css`

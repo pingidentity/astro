@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
-import isEqual from 'lodash/isEqual';
 import { Global } from '@emotion/core';
-import { Input, Text } from '@pingux/compass';
+import { Text, Box } from '@pingux/compass';
 import { Details } from '@pingux/icons';
+import { mdiTools, mdiFormSelect } from '@mdi/js';
+import Icon from '@mdi/react';
 import ConfigPanel from '../ConfigPanel';
 import Diagram from '../Diagram';
 import Palette from '../Palette';
@@ -14,7 +15,7 @@ import {
     stepTemplate,
     paletteGroupTemplate,
 } from './templates';
-import { bodyWrapper, globalStyles, topPanel, wrapper } from './FlowManager.styles';
+import { bodyWrapper, globalStyles, panelHeader, panelHeaderItem, panelHeaderItemActive, topPanel, wrapper } from './FlowManager.styles';
 import LeftContainer from '../LeftContainer/LeftContainer';
 
 const getPaletteItems = typeDefinitions => typeDefinitions.map(({
@@ -38,7 +39,7 @@ const getPaletteTemplates = typeDefinitions => typeDefinitions.map(({
     color,
 }) => [
         id,
-        paletteItemTemplate({ width: 280, icon, color }),
+        paletteItemTemplate({ width: 250, icon, color }),
     ]);
 
 function FlowDiagram({
@@ -183,8 +184,25 @@ function FlowDiagram({
                                 </ConfigPanel>
                             ) : (
                                 <React.Fragment>
-                                    <Text m="10px 0px 15px 15px" fontSize={24}>Toolbox</Text>
-                                    <Input m="0px 0px 20px 15px" width="90%" placeholder="Search Objects" />
+                                    <div css={panelHeader}>
+                                        <div css={panelHeaderItem}>
+                                            <Icon
+                                                path={mdiFormSelect}
+                                                size={1}
+                                                color="#68747F"
+                                            />
+                                            <Text color="#68747F" fontSize={13} fontFamily="Helvetica" mt="5px">PROPERTIES</Text>
+                                        </div>
+                                        <Box width={25} />
+                                        <div css={[panelHeaderItem, panelHeaderItemActive]}>
+                                            <Icon
+                                                path={mdiTools}
+                                                size={1}
+                                                color="#526BDB"
+                                            />
+                                            <Text color="#526BDB" fontSize={13} fontFamily="Helvetica" mt="5px">TOOLBOX</Text>
+                                        </div>
+                                    </div>
                                     <Palette
                                         groupTemplates={[
                                             ['', paletteGroupTemplate],

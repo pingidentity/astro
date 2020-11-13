@@ -12,8 +12,15 @@ export const configPanelClose = css`
     top: 4%
 `;
 
+export const configPanelHeader = css`
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin:  40px 15px 12px 0px;
+`;
+
 export const line = css`
     border-top: 1px solid #E2E5E8;
-    margin:  0px 15px 15px 0px;
+    margin:  0px 15px 25px 0px;
 `;
 
