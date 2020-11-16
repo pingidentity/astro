@@ -102,8 +102,8 @@ export const buttons = {
       fill: 'text.secondary',
     },
     '&:hover': {
-      bg: 'accent.90',
-      borderRadius: '50%',
+      bg: 'accent.99',
+      borderRadius: '100%',
     },
     '&:active': {
       'path': {

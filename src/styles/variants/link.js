@@ -1,11 +1,7 @@
 export const link = {
-  default: {
+  defaultLink: {
     color: 'active',
     fontFamily: 'standard',
     fontSize: 'md',
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
   },
 };
