@@ -8,9 +8,11 @@ import Box from '../Box';
  * aspect ratio.
  * Use SVGR to import SVG files as React components and pass them into this component, and you can
  * use the theme to color the icon.
+ * Icons can also be used from the [Material UI Icon Library](https://materialdesignicons.com/).
  * Built on top of the [Box from Rebass](https://rebassjs.org/box) and uses the
  * available [props from Rebass](https://rebassjs.org/props/).
 */
+
 const Icon = forwardRef((props, ref) => {
   const {
     color,
@@ -27,12 +29,18 @@ const Icon = forwardRef((props, ref) => {
 Icon.propTypes = {
   /** The icon to render. */
   icon: PropTypes.elementType.isRequired,
-  /** The size of the icon container. If given a number value, it will be converted to pixels. */
+  /**
+   * The size of the icon container. If given a number value, it will be converted to pixels.
+   * Standard icon sizes are 15, 22, and 40.
+  */
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** A theme-aware prop to set the icon's color. */
   color: PropTypes.string,
 };
 
+Icon.defaultProps = {
+  size: '22',
+};
 Icon.displayName = 'Icon';
 
 export default Icon;

@@ -20,7 +20,14 @@ const Link = React.forwardRef((props, ref) => {
     <RLink
       ref={ref}
       {...mergeProps(props, focusProps, linkProps)}
-      sx={{ ...dynamicStyles, ...sx }}
+      sx={{
+        'textDecoration': 'none',
+        '&:hover': {
+          textDecoration: 'underline',
+        },
+        ...dynamicStyles,
+        ...sx,
+      }}
     />
   );
 });
@@ -36,14 +43,14 @@ Link.propTypes = {
   href: PropTypes.string,
   /**  Specifies the window where the linked page is loaded */
   target: PropTypes.string,
-  variant: PropTypes.oneOf(['default']),
+  variant: PropTypes.oneOf(['defaultLink']),
 };
 
 
 Link.defaultProps = {
   isDisabled: false,
   as: 'a',
-  variant: 'default',
+  variant: 'defaultLink',
 };
 
 Link.displayName = 'Link';
