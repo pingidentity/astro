@@ -35,7 +35,7 @@
         "react/boolean-prop-naming": 2,
         "function-paren-newline": 0,
         "quote-props": 0,
-        "object-curly-newline": 0
+        "object-curly-newline": ["error", { "consistent": true }]
     },
     "settings": {
         "import/resolver": {

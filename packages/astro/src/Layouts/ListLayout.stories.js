@@ -61,8 +61,8 @@ export const Default = () => {
 
   return (
     <Box isRow bg="accent.99" >
-      <Box flexGrow={1} p="md">
-        <PageHeader title="Forms" pr="md">
+      <Box flexGrow={1}>
+        <PageHeader title="Forms" p="md">
           <Button mb="sm">
             <Box isRow alignItems="center">
               <Icon icon={PlusIcon} mr="sm" color="active" size={20} />
@@ -70,7 +70,7 @@ export const Default = () => {
             </Box>
           </Button>
         </PageHeader>
-        <Text variant="itemTitle" mb="md" color="text.secondary">Registration Forms</Text>
+        <Text variant="itemTitle" mb="md" p="md" color="text.secondary">Registration Forms</Text>
         <List title="Registration Forms">
           <Separator margin="0" />
           {exampleListItemContent}
