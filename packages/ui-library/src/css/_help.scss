@@ -52,7 +52,7 @@
     }
 }
 
-//Light Type 
+//Light Type
 .tippy-box[data-theme~='light'] {
     background: $color-white;
     border: 1px solid rgba(0, 8, 16, 0.15);
@@ -264,6 +264,7 @@
 }
 
 .help-tooltip {
+    max-width: 100%; //added so it can be used with ellipsis
     @mixin bg-styles($bg-color) {
         background-color: $bg-color;
     }
