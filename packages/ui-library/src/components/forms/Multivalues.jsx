@@ -161,6 +161,16 @@ class MultivaluesOption extends Component {
  */
 
 /**
+ * @callback Multivalues~onPasteValue
+ *
+ * @param {string} string
+ *     string of pasted text
+ * @return {array}
+ *     array of new entries to add based on pasted value
+ */
+
+
+/**
  * @class Multivalues
  *
  * @desc Multivalues takes an array of strings and creates "boxed" text entries of each. Free form typing creates
@@ -255,6 +265,7 @@ export class MultivaluesBase extends Component {
         onBlur: PropTypes.func,
         onFocus: PropTypes.func,
         onNewValue: PropTypes.func,
+        onPasteValue: PropTypes.func,
         onValueChange: PropTypes.func.isRequired,
         options: PropTypes.arrayOf(
             PropTypes.shape({
@@ -284,6 +295,9 @@ export class MultivaluesBase extends Component {
         onFocus: _.noop,
         onNewValue: (keyCode, value) => (
             value !== "" && (isEnter(keyCode) || isComma(keyCode) || isTab(keyCode) || isSpace(keyCode))
+        ),
+        onPasteValue: (string) => (
+            string.split(/(?:,| |\n|\r|\t)+/)
         ),
         onValueChange: _.noop,
         optionsStrict: true,
@@ -335,6 +349,18 @@ export class MultivaluesBase extends Component {
             activeEntry: -1,
         }));
     };
+
+    _handlePaste = (e) => {
+        if (this.props.options && this.props.optionsStrict) {
+            return;
+        }
+        const pastedText = e.clipboardData.getData("text");
+        const newEntries = this.props.onPasteValue(pastedText, e);
+
+        this.props.onValueChange([...this.props.entries, ...newEntries]);
+        e.stopPropagation();
+        e.preventDefault();
+    }
 
     /**
      * add the last entered value to the multivalue list if enter/comma/tab wasn't used
@@ -736,6 +762,7 @@ export class MultivaluesBase extends Component {
                                 onFocus={this._handleFocus}
                                 value={draft}
                                 autoComplete="off"
+                                onPaste={this._handlePaste}
                             />
                         </div>
                         <div className="value-input__hidden">{draft}</div>
