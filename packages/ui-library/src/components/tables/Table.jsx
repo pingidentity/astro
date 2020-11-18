@@ -175,7 +175,7 @@ const renderColumnHeading = (
 };
 
 
-const renderColumnHeadings = (columnStyling = [], headData, fixedHeader) => _.map(headData, (heading, idx) => {
+const renderColumnHeadings = (columnStyling = [], headData) => _.map(headData, (heading, idx) => {
     const {
         alignment = columnAlignments.LEFT,
         contentOverflow = overflowOptions.WRAP,
