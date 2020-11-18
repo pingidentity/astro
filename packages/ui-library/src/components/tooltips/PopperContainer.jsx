@@ -35,6 +35,21 @@ import PopperContainerContext, { isNested } from "./PopperContainerContext";
  *     Turns on a popper.js feature
  */
 
+/**
+ * @enum {string}
+ * @desc Enum for the different position options.
+ */
+const positions = {
+    /** Left */
+    LEFT: "left",
+    /** Right */
+    RIGHT: "right",
+    /** Top */
+    TOP: "top",
+    /** Bottom */
+    BOTTOM: "bottom"
+};
+
 class PopperContainer extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
@@ -50,6 +65,7 @@ class PopperContainer extends React.Component {
         noGPUAcceleration: PropTypes.bool,
         positionFixed: PropTypes.bool,
         scrollTo: PropTypes.bool,
+        isDetachable: PropTypes.bool,
     }
 
     static defaultProps = {
@@ -60,6 +76,7 @@ class PopperContainer extends React.Component {
         noGPUAcceleration: false,
         positionFixed: false,
         hasPopperParent: false,
+        isDetachable: false,
     }
 
     _popperAPI = null;
@@ -100,12 +117,16 @@ class PopperContainer extends React.Component {
     });
 
     componentDidMount() {
-        const { placement } = this.props;
+        const { placement, isDetachable } = this.props;
         const flipBehavior = placement.search(/top/) >= 0
-            ? ["top", "bottom", "top"]
-            : ["bottom", "top", "bottom"];
+            ? [positions.TOP, positions.BOTTOM, positions.TOP]
+            : [positions.BOTTOM,positions.TOP, positions.BOTTOM,];
         const reference = this.props.getReference();
         const zIndex = this._getComputedZIndex(ReactDOM.findDOMNode(reference));
+
+        const priorityOverflow = isDetachable
+            ? [positions.RIGHT, positions.LEFT, positions.TOP, positions.BOTTOM] //revert to default behavior
+            : [positions.RIGHT, positions.LEFT];
 
         if (reference && this.props.scrollTo) {
             reference.scrollIntoView();
@@ -113,15 +134,16 @@ class PopperContainer extends React.Component {
 
         const config = this.props.config || {
             placement,
+            isDetachable,
             computeStyle: {
                 gpuAcceleration: false,
             },
             modifiers: {
-                // Let tooltip escape scrolling container, but not app frame
+                //Let tooltip escape scrolling container, but not app frame
                 preventOverflow: {
                     boundariesElement: "scrollParent",
                     padding: 40,
-                    priority: ["right", "left"],
+                    priority: priorityOverflow,
                 },
                 addZIndex: {
                     enabled: (zIndex !== "auto"),

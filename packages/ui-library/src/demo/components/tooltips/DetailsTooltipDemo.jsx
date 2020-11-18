@@ -297,15 +297,28 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br />
                 <DetailsTooltip
+                    isDetachable
                     placement="bottom right"
-                    label="Large details tool tip"
+                    label="Large Details Tooltip with isDetachable Prop"
                     title="Tooltip Title"
                     open={this.state.open9}
                     onToggle={this._handleToggle(9)}
                     width={detailsWidths.LG}
                 >
-
                     <p>
+                        Resize page to watch tooltip detach from anchor.<br/><br/>
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
