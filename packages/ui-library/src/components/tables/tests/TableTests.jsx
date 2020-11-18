@@ -4,10 +4,7 @@ import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import { mount, shallow } from "enzyme";
 import Table, {
-    columnAlignments,
     overflowOptions,
-    tableLayouts,
-    tableWidths,
     Divider
 } from "../Table";
 
