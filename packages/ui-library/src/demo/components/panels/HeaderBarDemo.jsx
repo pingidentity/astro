@@ -3,6 +3,7 @@ import HeaderBar from "../../../components/panels/header-bar";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 import HR from "ui-library/lib/components/general/HR";
 import pingCentralLogo from "../../images/PingCentral-white.svg";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
 
 const environments = [
     {
@@ -95,6 +96,7 @@ class HeaderBarDemo extends React.Component {
             marketSelected: "customers",
             tree: [
                 { id: "help", title: "Help" },
+                {id: "earth", title: "Environment", children:[]},
                 {
                     id: "account",
                     label: "John Doe",
@@ -139,7 +141,28 @@ class HeaderBarDemo extends React.Component {
         )
     );
 
-
+    renderProductNav = (props, Nav) => {
+        return (<Nav {...props} renderNavItem={this.setEnvironment}  />)
+    }
+    setEnvironment = (props, Item) => {
+        console.log(props);
+        if (props.id === "earth") {
+            return <Item {...props} renderMenu={(props, Menu) => {
+                console.log(props)
+                return (
+                <HelpHint
+                    hintText="Default Environment"
+                    placement="bottom"
+                >
+                    <div className={props.triggerClassName}>{props.label}
+                    <span style={{fontSize: "14px", color: "#e8ebed", marginLeft:"10px"}}>Default</span></div>
+                    </HelpHint>)
+            }} />
+        }
+        else {
+            return <Item {...props} />
+        }
+    }
     render() {
         return (
             <div>
@@ -150,17 +173,13 @@ class HeaderBarDemo extends React.Component {
                     onItemValueChange={this._handleItemClick}
                     inline={true}
                     siteLogo="pingone"
-                    environmentOptions={this._filterEnvironments(
-                        environments, this.state.environmentSearch, this.state.environmentSelected)
-                    }
-                    environmentSearch={this.state.environmentSearch}
+
                     navOptions={navItems}
-                    onEnvironmentChange={this._handleEnvironment}
-                    onEnvironmentSearch={this._handleEnvironmentSearch}
-                    onNewEnvironment={this._handleNewEnvironment}
+
                     onNavChange={this._handleNav}
                     onMarketChange={this._handleMarket}
                     marketOptions={markets}
+                    renderProductNav={this.renderProductNav}
                 />
                 {this.state.newEnvironment && <p>Clicked +New Environment</p>}
                 <HR />

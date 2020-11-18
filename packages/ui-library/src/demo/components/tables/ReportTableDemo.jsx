@@ -3,6 +3,12 @@ var React = require("react"),
     mockData = require("./mockData.json"),
     _ = require("underscore");
 
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+import Button from "ui-library/lib/components/buttons/Button";
+import HR from "ui-library/lib/components/general/HR";
+import Text from "ui-library/lib/components/general/Text";
+
 /**
 * @name ReportTableDemo
 * @memberof ReportTable
@@ -132,7 +138,7 @@ class ReportTableDemo extends React.Component {
         const withWidth = [
             {
                 content: first,
-                width: 250
+                width: 100
             },
             ...headings
         ];
@@ -145,7 +151,18 @@ class ReportTableDemo extends React.Component {
                     headData={withWidth}
                     columnOrder={this.state.order}
                     headContentType={this._getHeadContentType(this._sort)}
-                    bodyData={this.state.rows}
+                    bodyData={
+                        this.state.rows.map(row => row.map((item, index) => {
+                            if (index === 0) {
+                                return                 <HelpHint
+                                data-id="helphint-button"
+                                hintText="Help hint text">
+                                <Text overflow="ellipsis">{item}</Text>
+                            </HelpHint>
+                            }
+                            return item;
+                        }))
+                    }
                     fixedHead={true}
                 />
 
