@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import { ResponsiveContainer, BarChart, XAxis, YAxis, CartesianGrid, Bar, Cell, LabelList } from "recharts";
+import { ResponsiveContainer, BarChart, XAxis, YAxis, CartesianGrid, Bar, Cell, LabelList, Tooltip, ReferenceLine } from "recharts";
 import ChartTitle from "./ChartTitle";
 import PageSpinner from "../PageSpinner";
 import Icon, { iconSizes } from "../Icon";
@@ -10,6 +10,14 @@ import Legend, {
     boxAlignments,
 } from "./Legend";
 import Padding from "../../layout/Padding";
+
+const SectionHoverHandler = ({onChange, ...rest}) => {
+    useEffect(() => {
+       onChange(rest);
+    },[rest.label, rest.active]);
+
+    return null;
+}
 
 /**
 * @class HeroMultiBarChart
@@ -69,6 +77,7 @@ export default class HeroMultiBarChart extends Component {
         rockerButtonProps: PropTypes.object,
         onBarMouseOver: PropTypes.func,
         onBarMouseOut: PropTypes.func,
+        onGroupSelectionChange: PropTypes.func,
     };
 
     static defaultProps = {
@@ -81,6 +90,7 @@ export default class HeroMultiBarChart extends Component {
         xAxisKey: "id",
         onBarMouseOver: _.noop,
         onBarMouseOut: _.noop,
+        onGroupSelectionChange: _.noop,
     };
 
     state = {
@@ -219,6 +229,7 @@ export default class HeroMultiBarChart extends Component {
             data,
             chartHeight,
             chartWidth,
+            onGroupSelectionChange,
         } = this.props;
         const heroStyles = { backgroundImage: bgImage ? `url("${bgImage}")` : null };
 
@@ -262,9 +273,13 @@ export default class HeroMultiBarChart extends Component {
                                 margin={{ top: labelHeight }}
                             >
                                 <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.4)" />
+                                <Tooltip
+                                cursor={false}
+                                content={<SectionHoverHandler onChange={onGroupSelectionChange} />} />
                                 {this._renderYAxis()}
                                 {this._renderXAxis()}
                                 {this._renderBars()}
+
                             </BarChart>
                         </ResponsiveContainer>
                     ]

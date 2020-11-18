@@ -78,6 +78,7 @@ class HeroMuliBarChartDemo extends React.Component {
         errorMessage: null,
         loading: false,
         totalValue: "24,458",
+        chartData: null,
     };
 
     _toggleError = () => {
@@ -101,15 +102,22 @@ class HeroMuliBarChartDemo extends React.Component {
         return [
             {
                 label: "MFA",
-                value: _.sumBy(data[label], "mfaSuccess"),
+                value: this.state.chartData ? this.state.chartData["mfaSuccess"] : _.sumBy(data[label], "mfaSuccess"),
                 textColor: "#fff",
             },
             {
                 label: "MFA Failed",
-                value: _.sumBy(data[label], "mfaFailed"),
+                value: this.state.chartData ? this.state.chartData["mfaFailed"] :_.sumBy(data[label], "mfaFailed"),
                 textColor: "#fff",
             },
         ];
+    }
+
+    _onGroupOver = ({payload}) => {
+        const newData = payload.length > 0 ?
+            payload[0].payload :
+            null;
+        this.setState({chartData: newData});
     }
 
     _onRangeChange = range => {
@@ -117,7 +125,7 @@ class HeroMuliBarChartDemo extends React.Component {
     }
 
     render () {
-        const { loading, errorMessage, range } = this.state;
+        const { loading, errorMessage, range, chartData } = this.state;
 
         return (
             <div>
@@ -141,7 +149,8 @@ class HeroMuliBarChartDemo extends React.Component {
                     loading={loading}
                     loadingMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                     errorMessage={errorMessage}
-                    title="Totals for Today"
+                    title={`Totals ${chartData ? chartData.id : ""}`}
+
                     legend={this._getLegend()}
                     bgImage={"src/images/herochart-bg1.png"}
                     data={data[range.label]}
@@ -151,6 +160,7 @@ class HeroMuliBarChartDemo extends React.Component {
                         mfaSuccess: { hoverColor: "#ffa500" },
                         mfaFailed: { hoverColor: "#e34234" },
                     }}
+                    onGroupSelectionChange={this._onGroupOver}
                     rockerButton={(
                         <RockerButton
                             type={RockerButton.rockerTypes.CHART}
