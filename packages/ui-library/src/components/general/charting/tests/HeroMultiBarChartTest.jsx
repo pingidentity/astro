@@ -102,7 +102,8 @@ describe("HeroMultiBarChart", function () {
     it("renders the x-axis", function () {
         const wrapper = getMountedComponent();
         const topChart = wrapper.find(BarChart).get(0);
-        const xAxis = topChart.props.children[2];
+
+        const xAxis = topChart.props.children[3];
 
         expect(xAxis.props.dataKey).toBe("id");
     });
@@ -125,7 +126,7 @@ describe("HeroMultiBarChart", function () {
 
             const wrapper = getMountedComponent({ data: customChartData });
             const topChart = wrapper.find(BarChart).get(0);
-            const xAxis = topChart.props.children[2];
+            const xAxis = topChart.props.children[3];
             expect(xAxis.props.tick.fontSize).toEqual(item.size);
         });
     });

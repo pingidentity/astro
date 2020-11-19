@@ -113,11 +113,11 @@ class HeroMuliBarChartDemo extends React.Component {
         ];
     }
 
-    _onGroupOver = ({payload}) => {
-        const newData = payload.length > 0 ?
-            payload[0].payload :
-            null;
-        this.setState({chartData: newData});
+    _onGroupOver = ({ payload }) => {
+        const newData = payload.length > 0
+            ? payload[0].payload
+            : null;
+        this.setState({ chartData: newData });
     }
 
     _onRangeChange = range => {

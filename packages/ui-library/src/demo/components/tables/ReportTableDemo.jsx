@@ -4,9 +4,6 @@ var React = require("react"),
     _ = require("underscore");
 
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
-import FormLabel from "ui-library/lib/components/forms/FormLabel";
-import Button from "ui-library/lib/components/buttons/Button";
-import HR from "ui-library/lib/components/general/HR";
 import Text from "ui-library/lib/components/general/Text";
 
 /**
@@ -153,16 +150,16 @@ class ReportTableDemo extends React.Component {
                     headContentType={this._getHeadContentType(this._sort)}
                     bodyData={
                         this.state.rows.map(row => {
-                            const [first, ...rest] = row;
+                            const [firstItem, ...rest] = row;
                             return [
                                 <HelpHint
-                                data-id="helphint-button"
-                                hintText="Help hint text">
-                                <Text overflow="ellipsis">{first}</Text>
-                            </HelpHint>,
-                            ...rest
-                            ]
-                          })
+                                    data-id="helphint-button"
+                                    hintText="Help hint text">
+                                    <Text overflow="ellipsis">{firstItem}</Text>
+                                </HelpHint>,
+                                ...rest
+                            ];
+                        })
                     }
                     fixedHead={true}
                 />

@@ -1,7 +1,16 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import { ResponsiveContainer, BarChart, XAxis, YAxis, CartesianGrid, Bar, Cell, LabelList, Tooltip, ReferenceLine } from "recharts";
+import {
+    ResponsiveContainer,
+    BarChart,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Bar,
+    Cell,
+    LabelList,
+    Tooltip } from "recharts";
 import ChartTitle from "./ChartTitle";
 import PageSpinner from "../PageSpinner";
 import Icon, { iconSizes } from "../Icon";
@@ -11,13 +20,13 @@ import Legend, {
 } from "./Legend";
 import Padding from "../../layout/Padding";
 
-const SectionHoverHandler = ({onChange, ...rest}) => {
+const SectionHoverHandler = ({ onChange, ...rest }) => {
     useEffect(() => {
-       onChange(rest);
+        onChange(rest);
     },[rest.label, rest.active]);
 
     return null;
-}
+};
 
 /**
 * @class HeroMultiBarChart
@@ -276,8 +285,8 @@ export default class HeroMultiBarChart extends Component {
 
                                 {/* tooltip is the only way for us to get any feedback when mousing over a group */}
                                 <Tooltip
-                                cursor={false}
-                                content={<SectionHoverHandler onChange={onGroupSelectionChange} />} />
+                                    cursor={false}
+                                    content={<SectionHoverHandler onChange={onGroupSelectionChange} />} />
                                 {this._renderYAxis()}
                                 {this._renderXAxis()}
                                 {this._renderBars()}

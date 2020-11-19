@@ -133,7 +133,7 @@ describe("Table", function () {
         const component = shallow(
             <Table
                 bodyData={bodyData}
-                width={tableWidths.FULL}
+                width={Table.tableWidths.FULL}
             />
         );
 
@@ -154,7 +154,7 @@ describe("Table", function () {
         const component = shallow(
             <Table
                 bodyData={bodyData}
-                layout={tableLayouts.FIXED}
+                layout={Table.tableLayouts.FIXED}
             />
         );
 
@@ -178,7 +178,7 @@ describe("Table", function () {
                 headData={headData}
                 columnStyling={[
                     {
-                        alignment: columnAlignments.CENTER
+                        alignment: Table.columnAlignments.CENTER
                     }
                 ]}
             />
