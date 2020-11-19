@@ -3,7 +3,6 @@ import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import Button from "ui-library/lib/components/buttons/Button";
 import HR from "ui-library/lib/components/general/HR";
-import Text from "ui-library/lib/components/general/Text";
 
 /**
 * @name HelpHintDemo

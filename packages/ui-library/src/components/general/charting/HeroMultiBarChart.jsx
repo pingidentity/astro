@@ -273,6 +273,8 @@ export default class HeroMultiBarChart extends Component {
                                 margin={{ top: labelHeight }}
                             >
                                 <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.4)" />
+
+                                {/* tooltip is the only way for us to get any feedback when mousing over a group */}
                                 <Tooltip
                                 cursor={false}
                                 content={<SectionHoverHandler onChange={onGroupSelectionChange} />} />

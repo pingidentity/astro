@@ -152,16 +152,17 @@ class ReportTableDemo extends React.Component {
                     columnOrder={this.state.order}
                     headContentType={this._getHeadContentType(this._sort)}
                     bodyData={
-                        this.state.rows.map(row => row.map((item, index) => {
-                            if (index === 0) {
-                                return                 <HelpHint
+                        this.state.rows.map(row => {
+                            const [first, ...rest] = row;
+                            return [
+                                <HelpHint
                                 data-id="helphint-button"
                                 hintText="Help hint text">
-                                <Text overflow="ellipsis">{item}</Text>
-                            </HelpHint>
-                            }
-                            return item;
-                        }))
+                                <Text overflow="ellipsis">{first}</Text>
+                            </HelpHint>,
+                            ...rest
+                            ]
+                          })
                     }
                     fixedHead={true}
                 />
