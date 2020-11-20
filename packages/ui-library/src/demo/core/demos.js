@@ -762,6 +762,13 @@ module.exports = [
                 icon: "details",
                 children: [
                     {
+                        label: "About Popup",
+                        demo: require("../components/general/AboutDemo"),
+                        pathToDoc: "components/general/AboutModal.jsx",
+                        pathToSource: "components_general_About.jsx.html",
+                        pathToDemoSource: "demo_components_general_AboutDemo.jsx.html"
+                    },
+                    {
                         label: "Confirm Tooltip",
                         demo: require("../components/tooltips/ConfirmTooltipDemo"),
                         pathToDoc: "components/tooltips/ConfirmTooltip.jsx",
