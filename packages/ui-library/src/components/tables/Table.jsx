@@ -4,7 +4,6 @@ import _ from "underscore";
 import classnames from "classnames";
 import HelpHint from "../tooltips/HelpHint";
 import Text, { textTypes } from "../general/Text";
-import { measureWidth } from "../../util/DOMUtils";
 
 const cellClasses = {
     "TOP": "grid__cell--top",
@@ -176,12 +175,7 @@ const renderColumnHeading = (
 };
 
 
-const getColumnWidth = (idx, fixedHeader) => {
-    const elem = fixedHeader.children[idx];
-    return measureWidth(elem);
-};
-
-const renderColumnHeadings = (columnStyling = [], headData, fixedHeader) => _.map(headData, (heading, idx) => {
+const renderColumnHeadings = (columnStyling = [], headData) => _.map(headData, (heading, idx) => {
     const {
         alignment = columnAlignments.LEFT,
         contentOverflow = overflowOptions.WRAP,
@@ -192,12 +186,11 @@ const renderColumnHeadings = (columnStyling = [], headData, fixedHeader) => _.ma
 
 
     const useEllipsis = contentOverflow === overflowOptions.ELLIPSIS;
-    const colWidth = fixedHeader ? getColumnWidth(idx, fixedHeader) : width;
 
     const widthStyles = {
         ...maxWidth !== undefined ? { maxWidth } : {},
         ...minWidth !== undefined ? { minWidth } : {},
-        ...colWidth !== undefined ? { width: colWidth } : {},
+        ...width !== undefined ? { width } : {},
     };
     return renderColumnHeading(alignment, widthStyles, useEllipsis, heading, idx);
 
@@ -307,29 +300,6 @@ class TableCell extends Component {
 }
 
 class Table extends React.Component {
-    state = {
-        loaded: !this.props.fixedHeader,
-    };
-
-    shadowHeader= null;
-
-    forceComponentUpdate = () => { this.forceUpdate(); }
-
-    componentDidMount() {
-        if (this.props.fixedHeader) {
-            window.setTimeout(() => {
-                this.setState({ loaded: true });
-            }, 0);
-            window.addEventListener("resize", this.forceComponentUpdate);
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.props.fixedHeader) {
-            window.removeEventListener("resize", this.forceComponentUpdate);
-        }
-    }
-
     render() {
         const {
             cellRenderers,
@@ -369,26 +339,9 @@ class Table extends React.Component {
             <table className={classes} data-id={dataId}>
                 {headData &&
                     <thead>
-                        { this.state.loaded &&
-                            <tr className={classnames(fixedHeader ? "tr--fixed-header" : null)}>
-                                {renderColumnHeadings(columnStyling, headData, fixedHeader
-                                    ? this.shadowHeader
-                                    : false
-                                )}
-                            </tr>
-                        }
-
-                        { /* Render invisible headings to set widths of cols if fixed */ }
-                        {fixedHeader && (
-                            <tr
-                                style={{
-                                    visibility: "none",
-                                }}
-                                ref={ref => this.shadowHeader = ref}
-                            >
-                                {renderColumnHeadings(columnStyling, headData, false)}
-                            </tr>
-                        )}
+                        <tr className={classnames(fixedHeader ? "tr--fixed-header" : null)}>
+                            {renderColumnHeadings(columnStyling, headData)}
+                        </tr>
                     </thead>
                 }
                 <tbody>

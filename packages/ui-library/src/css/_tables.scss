@@ -212,10 +212,13 @@ table {
                 }
             }
             &.tr--fixed-header {
-                position: absolute;
-                background-color: #fff;
-                z-index: $zindex__elevated;
-                word-break: break-word;
+                th {
+                    position: sticky;
+                    top: 0;
+                    background-color: #fff;
+                    z-index: $zindex__elevated;
+                    word-break: break-word;
+                }
             }
         }
         thead {
