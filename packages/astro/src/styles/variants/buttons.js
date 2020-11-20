@@ -96,6 +96,7 @@ export const buttons = {
     color: 'transparent',
   },
   icon: {
+    borderRadius: '100%',
     cursor: 'pointer',
     bg: 'transparent',
     'path': {
@@ -103,7 +104,6 @@ export const buttons = {
     },
     '&:hover': {
       bg: 'accent.99',
-      borderRadius: '100%',
     },
     '&:active': {
       'path': {
