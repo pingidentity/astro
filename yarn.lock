@@ -5513,17 +5513,17 @@
   dependencies:
     "@babel/runtime" "^7.10.2"
 
+"@tippyjs/react@4.2.0", "@tippyjs/react@^4.0.2":
+  version "4.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@tippyjs/react/-/react-4.2.0.tgz#a1cb369d0051099e8a7e4ceb59f809abd9955283"
+  integrity sha1-ocs2nQBRCZ6KfkzrWfgJq9mVUoM=
+  dependencies:
+    tippy.js "^6.2.0"
+
 "@tippyjs/react@^4.0.0-alpha.4":
   version "4.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@tippyjs/react/-/react-4.1.0.tgz#be4e826ac198d2394a5ffed3508ca9c098c527f1"
   integrity sha1-vk6CasGY0jlKX/7TUIypwJjFJ/E=
-  dependencies:
-    tippy.js "^6.2.0"
-
-"@tippyjs/react@^4.0.2":
-  version "4.2.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@tippyjs/react/-/react-4.2.0.tgz#a1cb369d0051099e8a7e4ceb59f809abd9955283"
-  integrity sha1-ocs2nQBRCZ6KfkzrWfgJq9mVUoM=
   dependencies:
     tippy.js "^6.2.0"
 
@@ -26126,6 +26126,13 @@ tinyqueue@^2.0.3:
   version "2.0.3"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tinyqueue/-/tinyqueue-2.0.3.tgz#64d8492ebf39e7801d7bd34062e29b45b2035f08"
   integrity sha1-ZNhJLr8554Ade9NAYuKbRbIDXwg=
+
+tippy.js@6.2.7:
+  version "6.2.7"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tippy.js/-/tippy.js-6.2.7.tgz#62fb34eda23f7d78151ddca922b62818c1ab9869"
+  integrity sha1-Yvs07aI/fXgVHdypIrYoGMGrmGk=
+  dependencies:
+    "@popperjs/core" "^2.4.4"
 
 tippy.js@^6.1.0, tippy.js@^6.2.0:
   version "6.2.6"
