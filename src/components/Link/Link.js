@@ -19,15 +19,10 @@ const Link = React.forwardRef((props, ref) => {
   return (
     <RLink
       ref={ref}
-      {...mergeProps(props, focusProps, linkProps)}
-      sx={{
-        'textDecoration': 'none',
-        '&:hover': {
-          textDecoration: 'underline',
-        },
-        ...dynamicStyles,
-        ...sx,
-      }}
+      {...props}
+      {...mergeProps(focusProps, linkProps)}
+      role="link"
+      sx={{ ...dynamicStyles, ...sx }}
     />
   );
 });
