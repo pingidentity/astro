@@ -20,7 +20,7 @@ import Legend, {
 } from "./Legend";
 import Padding from "../../layout/Padding";
 
-const SectionHoverHandler = ({ onChange, ...rest }) => {
+export const SectionHoverHandler = ({ onChange, ...rest }) => {
     useEffect(() => {
         onChange(rest);
     },[rest.label, rest.active]);

@@ -2,7 +2,7 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import { mount } from "enzyme";
 import TestUtils from "../../../../testutil/TestUtils";
-import HeroMultiBarChart from "../HeroMultiBarChart";
+import HeroMultiBarChart, { SectionHoverHandler } from "../HeroMultiBarChart";
 import _ from "underscore";
 import { BarChart } from "recharts";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
@@ -256,5 +256,27 @@ describe("HeroMultiBarChart", function () {
 
         expect(component._kFormatter(111)).toEqual(111);
         expect(component._kFormatter(22222)).toEqual("22.2K");
+    });
+
+    it("triggers callback for group when label changes and active changes", function () {
+        const mockPayloads = [
+            { label: "first", active: "true" },
+            { label: "second", active: "true" },
+            { label: "second", active: "false" },
+        ];
+
+        const onChange = jest.fn();
+        const component = mount(<SectionHoverHandler onChange={onChange} {...mockPayloads[0]} />);
+
+        expect(onChange).toHaveBeenCalledWith(mockPayloads[0]);
+        onChange.mockReset();
+
+        component.setProps({ ...mockPayloads[1] });
+        expect(onChange).toHaveBeenCalledWith(mockPayloads[1]);
+        onChange.mockReset();
+
+        component.setProps({ ...mockPayloads[2] });
+        expect(onChange).toHaveBeenCalledWith(mockPayloads[2]);
+
     });
 });
