@@ -1,6 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { useFocusRing } from '@react-aria/focus';
+import userEvent from '@testing-library/user-event';
+
+import { render, screen } from '../../utils/testUtils/testWrapper';
+import theme from '../../styles/theme';
 import Panel from '.';
 
 const testId = 'test-panel';
@@ -19,21 +21,32 @@ test('default panel', () => {
   const child = screen.queryByText('Test');
   expect(panel).toBeInTheDocument();
   expect(child).not.toBeInTheDocument();
-  expect(panel).toHaveStyleRule('margin-right', '-100%');
-  expect(panel).toHaveStyleRule('visibility', 'hidden');
-  expect(panel).toHaveStyleRule('box-shadow', 'none', { target: ':focus' });
+  expect(panel).toHaveStyle({
+    marginRight: '-100%',
+    visibility: 'hidden',
+  });
+  expect(panel).not.toHaveStyle({ boxShadow: theme.shadows.focus });
   expect(panel).toHaveAttribute('tabIndex', '-1');
 });
 
 test('panel when visible', () => {
-  useFocusRing.mockImplementation(() => ({ isFocusVisible: true, focusProps: {} }));
   getComponent({ isVisible: true, children: <div>Test</div> });
   const panel = screen.getByTestId(testId);
   const child = screen.queryByText('Test');
   expect(panel).toBeInTheDocument();
   expect(child).toBeInTheDocument();
-  expect(panel).toHaveStyleRule('margin-right', '0');
-  expect(panel).toHaveStyleRule('visibility', 'visible');
-  expect(panel).toHaveStyleRule('box-shadow', 'focus', { target: ':focus' });
+  expect(panel).toHaveStyle({
+    marginRight: 0,
+    visibility: 'visible',
+  });
   expect(panel).toHaveAttribute('tabIndex', '0');
+});
+
+test('panel with focus', () => {
+  getComponent({ isVisible: true, children: <div>Test</div> });
+  const panel = screen.getByTestId(testId);
+
+  userEvent.tab();
+  expect(panel).toHaveFocus();
+  expect(panel).toHaveStyle({ boxShadow: theme.shadows.focus });
 });

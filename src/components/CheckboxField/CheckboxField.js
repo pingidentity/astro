@@ -1,9 +1,8 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { useToggleState } from '@react-stately/toggle';
 import { useCheckbox } from '@react-aria/checkbox';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
+
 import Checkbox from '../Checkbox';
 import Field from '../Field';
 
@@ -16,6 +15,7 @@ import Field from '../Field';
  */
 const CheckboxField = forwardRef((props, ref) => {
   const {
+    className,
     children,
     controlProps,
     isDisabled,
@@ -25,7 +25,6 @@ const CheckboxField = forwardRef((props, ref) => {
   const {
     isDefaultSelected,
     hasAutoFocus,
-    sx, // eslint-disable-line
   } = controlProps;
   const checkboxProps = {
     children,
@@ -35,19 +34,14 @@ const CheckboxField = forwardRef((props, ref) => {
     ...controlProps,
   };
   const state = useToggleState(checkboxProps);
-  const checkboxRef = useRef(null);
+  const checkboxRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => checkboxRef.current);
+
   const { inputProps: raInputProps } = useCheckbox({
     isDisabled,
     ...checkboxProps,
   }, state, checkboxRef);
-  const { isFocusVisible, focusProps } = useFocusRing();
-  const dynamicStyles = {
-    'input:focus ~ &': {
-      bg: isFocusVisible ? 'highlight' : 'transparent',
-    },
-  };
 
   return (
     <Field
@@ -58,18 +52,12 @@ const CheckboxField = forwardRef((props, ref) => {
         variant: 'checkboxLabel',
         ...labelProps,
       }}
+      controlProps={{
+        ...controlProps,
+        ...raInputProps,
+      }}
       isDisabled={isDisabled}
-      controlProps={controlProps}
-      render={renderProps => (
-        <Checkbox
-          {...renderProps} // Don't put in mergeProps or else events from here will be chained
-          {...mergeProps(focusProps, raInputProps)}
-          sx={{
-            ...dynamicStyles,
-            ...sx,
-          }}
-        />
-      )}
+      render={renderProps => <Checkbox {...renderProps} />}
       {...others}
     />
   );
@@ -140,7 +128,7 @@ CheckboxField.propTypes = {
     variant: PropTypes.string,
   }),
   /** The label for the element. */
-  children: PropTypes.node,
+  label: PropTypes.node,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
   /** Whether the control and label are disabled. */

@@ -8,6 +8,13 @@ const panel = {
   bg: 'white',
   borderLeft: 'separator',
   transition: 'margin 0.25s ease-in',
+  visibility: 'hidden',
+  '&.is-focused': {
+    boxShadow: 'focus',
+  },
+  '&.is-visible': {
+    visibility: 'visible',
+  },
 };
 
 // Used to give a blue left border to inputs

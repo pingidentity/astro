@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { Select as RSelect } from '@rebass/forms';
 import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
+
+import useStatusClasses from '../../hooks/useStatusClasses';
 
 /**
  * Basic dropdown menu input.
@@ -12,28 +13,27 @@ import { mergeProps } from '@react-aria/utils';
 
 const Dropdown = React.forwardRef((props, ref) => {
   const {
-    sx,// eslint-disable-line
+    className,
     children,
     hasNoneOption,
     noneLabel,
     ...others
   } = props;
 
+  const dropdownRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => dropdownRef.current);
   const { isFocusVisible, focusProps } = useFocusRing();
-  const dynamicStyles = {
-    '&:focus': {
-      boxShadow: isFocusVisible ? 'focus' : 'none',
-    },
-  };
+  const { classNames } = useStatusClasses(className, {
+    isFocused: isFocusVisible,
+  });
 
   return (
     <RSelect
-      ref={ref}
-      {...mergeProps(others, focusProps)}
-      sx={{
-        ...dynamicStyles,
-        ...sx,
-      }}
+      ref={dropdownRef}
+      className={classNames}
+      {...others}
+      {...focusProps}
     >
       {
         hasNoneOption && (

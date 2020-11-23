@@ -1,16 +1,21 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { useLabel } from '@react-aria/label';
+import { useFocusRing } from '@react-aria/focus';
+import { useHover } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
+
+import useStatusClasses from '../../hooks/useStatusClasses';
 import Box from '../Box';
 import Label from '../Label';
-import { getDisabledStyles } from '../../utils/styleUtils';
 
 /**
  * General wrapper for a label + control. A control is any form element that is supported by
- * a label. This may include an `input`, `select`, 'textarea', etc.
+ * a label. This may include an `input`, `select`, `textarea`, etc.
  */
 const Field = forwardRef((props, ref) => {
   const {
+    className,
     label,
     labelProps,
     controlProps,
@@ -20,20 +25,34 @@ const Field = forwardRef((props, ref) => {
     isDisabled,
     ...others
   } = props;
+
+  const fieldRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => fieldRef.current);
   const {
     labelProps: raLabelProps,
     fieldProps: raFieldProps,
   } = useLabel({ ...props, ...controlProps });
-
-  const sx = {
-    ...getDisabledStyles(isDisabled),
+  const { isFocusVisible, focusProps } = useFocusRing();
+  const { isHovered, hoverProps } = useHover(props);
+  const { classNames } = useStatusClasses(className, {
+    isFocused: isFocusVisible,
+    isHovered,
+    isDisabled,
+  });
+  const renderProps = {
+    ref: fieldRef,
+    className: classNames,
+    ...controlProps,
+    disabled: isDisabled,
+    ...mergeProps(focusProps, hoverProps, raFieldProps),
   };
 
   if (hasWrappedLabel) {
     return (
-      <Box ref={ref} {...others}>
-        <Label {...labelProps} {...raLabelProps} isDisabled={isDisabled}>
-          {render({ ...controlProps, ...raFieldProps, disabled: isDisabled, sx })}
+      <Box {...others}>
+        <Label className={classNames} {...labelProps} {...raLabelProps}>
+          {render(renderProps)}
           {label}
         </Label>
         {afterContent}
@@ -42,9 +61,9 @@ const Field = forwardRef((props, ref) => {
   }
 
   return (
-    <Box ref={ref} {...others}>
-      <Label {...labelProps} {...raLabelProps} isDisabled={isDisabled}>{label}</Label>
-      {render({ ...controlProps, ...raFieldProps, disabled: isDisabled, sx })}
+    <Box {...others}>
+      <Label className={classNames} {...labelProps} {...raLabelProps}>{label}</Label>
+      {render(renderProps)}
       {afterContent}
     </Box>
   );

@@ -17,9 +17,10 @@ export const input = {
   px: 'md',
   py: 'sm',
   width: '100%',
-  '&:focus': {
-    outline: 'none',
+  outline: 'none',
+  '&.is-focused': {
     borderColor: 'accent.80',
+    boxShadow: 'focus',
   },
   '&::placeholder': {
     fontStyle: 'italic',

@@ -9,6 +9,20 @@ export default {
 
 export const Default = args => (
   <RadioGroup label="Pick one" {...args}>
+    <RadioField value="A">
+      The first choice
+    </RadioField>
+    <RadioField value="B">
+      The second choice
+    </RadioField>
+    <RadioField value="C">
+      The third choice
+    </RadioField>
+  </RadioGroup>
+);
+
+export const CheckedContent = args => (
+  <RadioGroup label="Pick one" {...args}>
     <RadioField value="A" checkedContent="First choice content...">
       The first choice
     </RadioField>

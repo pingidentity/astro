@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useFocusRing } from '@react-aria/focus';
+
+import { render, screen } from '../../utils/testUtils/testWrapper';
 import CheckboxField from '../CheckboxField';
 
 const testLabel = 'Test Label';
@@ -25,19 +25,19 @@ test('default checkbox', () => {
 });
 
 test('checkbox with focus', () => {
-  useFocusRing.mockImplementation(() => ({ isFocusVisible: true, focusProps: {} }));
   getComponent();
   const icon = document.querySelector('svg');
-  expect(icon).toHaveStyleRule('background-color', 'highlight', { target: ':focus' });
+
+  userEvent.tab();
+  expect(icon).toHaveStyle({ backgroundColor: 'highlight' });
 });
 
 test('disabled checkbox disables input and the label', () => {
   getComponent({ isDisabled: true });
   const label = screen.getByText(testLabel);
   const input = screen.getByRole('checkbox');
-  expect(label).toHaveStyleRule('opacity', '0.5');
-  expect(label).toHaveStyleRule('pointer-events', 'none');
   expect(input).toBeDisabled();
+  expect(label).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
 });
 
 test('checkbox interaction', () => {
