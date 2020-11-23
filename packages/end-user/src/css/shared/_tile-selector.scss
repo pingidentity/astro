@@ -384,9 +384,10 @@ button.tile-button--stacked-small {
         }
 
         &__icon-container {
+            flex-shrink: 0;
             height: 40px;
             width: 40px;
-            margin: 0 $spacing-md 0 0;
+            margin: 0 $spacing-sm 0 0;
         }
 
         &__title {
@@ -394,8 +395,14 @@ button.tile-button--stacked-small {
             color: $color-accent-neutral-10;
             text-transform: none;
             margin-top: 0;
-            margin-bottom: 0 !important;
+            margin-bottom: 2px !important;
             text-align: left;
+            font-size: $font-size-md;
+        }
+
+        &__content {
+            font-size: $font-size-md;
+            line-height: 16px;
         }
     }
 }
