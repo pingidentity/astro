@@ -2762,11 +2762,6 @@
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@popperjs/core/-/core-2.4.4.tgz#11d5db19bd178936ec89cd84519c4de439574398"
   integrity sha1-EdXbGb0XiTbsic2EUZxN5DlXQ5g=
 
-"@popperjs/core@^2.5.3":
-  version "2.5.4"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@popperjs/core/-/core-2.5.4.tgz#de25b5da9f727985a3757fd59b5d028aba75841a"
-  integrity sha1-3iW12p9yeYWjdX/Vm10Cirp1hBo=
-
 "@reach/router@^1.2.1", "@reach/router@^1.3.3":
   version "1.3.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@reach/router/-/router-1.3.4.tgz#d2574b19370a70c80480ed91f3da840136d10f8c"
@@ -2832,6 +2827,15 @@
     "@babel/runtime" "^7.6.2"
     "@react-aria/utils" "^3.3.0"
     "@react-types/shared" "^3.2.1"
+
+"@react-aria/interactions@^3.3.0":
+  version "3.3.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/interactions/-/interactions-3.3.0.tgz#76ce163dba7432d6c2691d3e9ca21bf5f4b40bcf"
+  integrity sha1-ds4WPbp0MtbCaR0+nKIb9fS0C88=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/utils" "^3.4.0"
+    "@react-types/shared" "^3.3.0"
 
 "@react-aria/label@^3.1.0", "@react-aria/label@^3.1.1":
   version "3.1.1"
@@ -2934,6 +2938,16 @@
     "@babel/runtime" "^7.6.2"
     "@react-aria/ssr" "^3.0.1"
     "@react-types/shared" "^3.2.1"
+    clsx "^1.1.1"
+
+"@react-aria/utils@^3.4.0":
+  version "3.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.4.0.tgz#f54ebbeb12e6438d616b87086cb4bfba624ba608"
+  integrity sha1-9U676xLmQ41ha4cIbLS/umJLpgg=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/ssr" "^3.0.1"
+    "@react-types/shared" "^3.3.0"
     clsx "^1.1.1"
 
 "@react-stately/checkbox@^3.0.1":
@@ -3048,6 +3062,11 @@
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.2.1.tgz#cbcffec02a7592f019916e4bd0807950a1376bcf"
   integrity sha1-y8/+wCp1kvAZkW5L0IB5UKE3a88=
+
+"@react-types/shared@^3.3.0":
+  version "3.3.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.3.0.tgz#4f959df32f3ae94fcc910546088489144fc8d753"
+  integrity sha1-T5Wd8y866U/MkQVGCISJFE/I11M=
 
 "@react-types/switch@^3.1.1":
   version "3.1.1"
@@ -22285,7 +22304,7 @@ react-error-overlay@^6.0.3, react-error-overlay@^6.0.7:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha1-Hc+0WatnHVP2YKmRUTyy8KBVMQg=
 
-react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
+react-fast-compare@^3.2.0:
   version "3.2.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha1-ZBqdqBtqYyDycOiXJPtFoLOeQ7s=
@@ -22408,14 +22427,6 @@ react-popper@^1.3.7:
     popper.js "^1.14.4"
     prop-types "^15.6.1"
     typed-styles "^0.0.7"
-    warning "^4.0.2"
-
-react-popper@^2.2.3:
-  version "2.2.4"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/react-popper/-/react-popper-2.2.4.tgz#d2ad3d2474ac9f1abf93df3099d408e5aa6a2e22"
-  integrity sha1-0q09JHSsnxq/k98wmdQI5apqLiI=
-  dependencies:
-    react-fast-compare "^3.0.1"
     warning "^4.0.2"
 
 react-portal@^4.2.0, react-portal@^4.2.1:

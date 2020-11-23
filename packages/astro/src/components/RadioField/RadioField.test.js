@@ -1,6 +1,6 @@
 import React from 'react';
-import { useFocusRing } from '@react-aria/focus';
-import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 import RadioField, { RadioContext } from './RadioField';
 
 const testId = 'test-radio';
@@ -39,11 +39,26 @@ test('default radio', () => {
   expect(icon).toHaveStyleRule('background-color', 'transparent', { target: ':focus' });
 });
 
-test('radio with focus', () => {
-  useFocusRing.mockImplementation(() => ({ isFocusVisible: true, focusProps: {} }));
-  getComponent();
+test('disabled radio', () => {
+  getComponent({ isDisabled: true });
+  const label = screen.getByText(testLabel);
   const icon = document.querySelector('svg');
-  expect(icon).toHaveStyleRule('background-color', 'highlight', { target: ':focus' });
+
+  expect(label).toHaveClass('is-disabled');
+  expect(icon).toHaveClass('is-disabled');
+
+  expect(label).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
+  expect(icon).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
+});
+
+test('radio with focus', () => {
+  getComponent();
+  const input = screen.getByLabelText(testLabel);
+  const icon = document.querySelector('svg');
+
+  userEvent.tab();
+  expect(input).toHaveFocus();
+  expect(icon).toHaveStyle({ backgroundColor: 'highlight' });
 });
 
 test('radio with checked content does not display if not checked', () => {

@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import PropTypes from 'prop-types';
 import { Link as RLink } from 'rebass';
 import { useLink } from '@react-aria/link';
-import { mergeProps } from '@react-aria/utils';
 import { useFocusRing } from '@react-aria/focus';
-import PropTypes from 'prop-types';
+import { useHover } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
+import useStatusClasses from '../../hooks/useStatusClasses';
 
-const Link = React.forwardRef((props, ref) => {
-  const {
-    sx,// eslint-disable-line
-  } = props;
+const Link = forwardRef((props, ref) => {
+  const { className, isDisabled, ...others } = props;
+
+  const linkRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => linkRef.current);
   const { isFocusVisible, focusProps } = useFocusRing();
-  const dynamicStyles = {
-    '&:focus': {
-      boxShadow: isFocusVisible ? 'focus' : 'none',
-    },
-  };
-  const { linkProps } = useLink(props, ref);
+  const { linkProps } = useLink(props, linkRef);
+  const { hoverProps, isHovered } = useHover(props);
+  const { classNames } = useStatusClasses(className, {
+    isDisabled,
+    isFocused: isFocusVisible,
+    isHovered,
+  });
+
   return (
     <RLink
-      ref={ref}
-      {...props}
-      {...mergeProps(focusProps, linkProps)}
+      className={classNames}
+      ref={linkRef}
       role="link"
-      sx={{ ...dynamicStyles, ...sx }}
+      {...others}
+      {...mergeProps(hoverProps, focusProps, linkProps)}
     />
   );
 });
@@ -38,16 +44,13 @@ Link.propTypes = {
   href: PropTypes.string,
   /**  Specifies the window where the linked page is loaded */
   target: PropTypes.string,
-  variant: PropTypes.oneOf(['defaultLink']),
 };
 
 
 Link.defaultProps = {
   isDisabled: false,
   as: 'a',
-  variant: 'defaultLink',
 };
 
 Link.displayName = 'Link';
-
 export default Link;

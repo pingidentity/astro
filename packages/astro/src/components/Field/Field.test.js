@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 import Field from '.';
 
 const testId = 'test-field';
@@ -72,5 +72,5 @@ test('field with isDisabled prop disables input and applies disabled styling to 
   const input = document.querySelector('textarea');
   expect(input).toBeDisabled();
   const label = screen.getByText(testLabel);
-  expect(label).toHaveStyleRule('opacity', '0.5');
+  expect(label).toHaveStyle('opacity: 0.5');
 });

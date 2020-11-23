@@ -4,4 +4,7 @@ import { input } from './input';
 // Default select
 export const select = {
   ...input,
+  '&.is-focused': {
+    boxShadow: 'focus',
+  },
 };
