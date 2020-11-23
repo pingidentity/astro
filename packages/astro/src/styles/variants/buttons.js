@@ -105,6 +105,8 @@ export const buttons = {
     color: 'white',
   },
   icon: {
+    alignSelf: 'flex-start',
+    flexGrow: 0,
     borderRadius: '100%',
     cursor: 'pointer',
     bg: 'transparent',

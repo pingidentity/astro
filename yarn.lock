@@ -2916,6 +2916,20 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
+"@react-aria/tabs@^3.0.0-alpha.1":
+  version "3.0.0-alpha.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/tabs/-/tabs-3.0.0-alpha.1.tgz#67bbab2799dec9a4d95ddaafd3e1885125786ba9"
+  integrity sha1-Z7urJ5neyaTZXdqv0+GIUSV4a6k=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.1.2"
+    "@react-aria/interactions" "^3.2.1"
+    "@react-aria/selection" "^3.2.1"
+    "@react-aria/utils" "^3.3.0"
+    "@react-stately/list" "^3.2.1"
+    "@react-types/shared" "^3.2.1"
+    "@react-types/tabs" "3.0.0-alpha.1"
+
 "@react-aria/toggle@^3.1.1":
   version "3.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/toggle/-/toggle-3.1.1.tgz#5a1e523af0a2425c4cd73dbeb9e9116c65ea7437"
@@ -3074,6 +3088,13 @@
   integrity sha1-eQmo98LLaKt1Nu/QOvO+NBfg7KM=
   dependencies:
     "@react-types/checkbox" "^3.2.1"
+    "@react-types/shared" "^3.2.1"
+
+"@react-types/tabs@3.0.0-alpha.1":
+  version "3.0.0-alpha.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/tabs/-/tabs-3.0.0-alpha.1.tgz#2ad54e308977e3e7c622d2c9cab2a40805e0162f"
+  integrity sha1-KtVOMIl34+fGItLJyrKkCAXgFi8=
+  dependencies:
     "@react-types/shared" "^3.2.1"
 
 "@rebass/forms@^4.0.6":
