@@ -4,11 +4,10 @@
 export const checkbox = {
   color: 'active',
   mr: 'sm',
-  'input ~ &': {
-    pointer: 'cursor',
+  'input:focus ~ &': {
+    bg: 'transparent',
   },
-  'input:disabled ~ &': {
-    opacity: 0.5,
-    pointerEvents: 'none',
+  'input ~ &.is-focused': {
+    bg: 'highlight',
   },
 };

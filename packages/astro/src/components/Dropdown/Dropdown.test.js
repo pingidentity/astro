@@ -1,16 +1,9 @@
 import React from 'react';
-import { useFocusRing } from '@react-aria/focus';
-import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import { render, screen, within } from '../../utils/testUtils/testWrapper';
+import theme from '../../styles/theme';
 import Dropdown from '.';
-
-
-jest.mock('@react-aria/focus', () => ({
-  ...jest.requireActual('@react-aria/focus'),
-  useFocusRing: jest.fn(() => ({
-    isFocusVisible: false,
-    focusProps: {},
-  })),
-}));
 
 const testId = 'test-box';
 const defaultProps = {
@@ -35,8 +28,10 @@ test('hasNoneOption prop renders none option', () => {
 });
 
 test('dropdown has focus styles', () => {
-  useFocusRing.mockImplementation(() => ({ isFocusVisible: true, focusProps: {} }));
   getComponent();
-  const dropdownMenu = document.querySelector('select');
-  expect(dropdownMenu).toHaveStyleRule('box-shadow', 'focus', { target: ':focus' });
+  const dropdown = screen.getByTestId(testId);
+  expect(dropdown).not.toHaveStyle({ boxShadow: theme.shadows.focus });
+
+  userEvent.tab();
+  expect(dropdown).toHaveStyle({ boxShadow: theme.shadows.focus });
 });

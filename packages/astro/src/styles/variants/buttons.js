@@ -5,9 +5,7 @@ const base = {
   height: 36,
   inlineHeight: 30,
   px: 'md',
-  '&:focus': {
-    outline: 'none',
-  },
+  outline: 'none',
   ...text.buttonLabel,
 };
 
@@ -29,17 +27,25 @@ const defaultHover = {
   boxShadow: 'standard',
 };
 
+const defaultFocus = {
+  outline: 'none',
+  boxShadow: 'focus',
+};
+
 export const buttons = {
   default: {
     ...base,
     bg: 'white',
     border: '1px solid',
     borderColor: 'active',
-    '&:hover': {
+    '&.is-hovered': {
       ...defaultHover,
     },
-    '&:active': {
+    '&.is-pressed': {
       ...defaultActive,
+    },
+    '&.is-focused': {
+      ...defaultFocus,
     },
   },
   primary: {
@@ -48,18 +54,21 @@ export const buttons = {
     border: '1px solid',
     borderColor: 'active',
     color: 'white',
-    '&:hover': {
+    '&.is-hovered': {
       bg: 'accent.40',
       border: '1px solid',
       borderColor: 'accent.40',
       color: 'white',
       boxShadow: 'standard',
     },
-    '&:active': {
+    '&.is-pressed': {
       bg: 'accent.20',
       border: '1px solid',
       borderColor: 'accent.20',
       color: 'white',
+    },
+    '&.is-focused': {
+      ...defaultFocus,
     },
   },
   text: {
@@ -68,13 +77,13 @@ export const buttons = {
     border: '1px solid',
     borderColor: 'transparent',
     color: 'active',
-    '&:hover': {
+    '&.is-hovered': {
       bg: 'accent.95',
       border: '1px solid',
       borderColor: 'accent.95',
       color: 'accent.40',
     },
-    '&:active': {
+    '&.is-pressed': {
       bg: 'active',
       border: '1px solid',
       borderColor: 'active',
@@ -86,14 +95,14 @@ export const buttons = {
     bg: 'success.bright',
     border: '1px solid',
     borderColor: 'success.bright',
-    color: 'transparent',
+    color: 'white',
   },
   critical: {
     ...base,
     bg: 'critical.bright',
     border: '1px solid',
     borderColor: 'critical.bright',
-    color: 'transparent',
+    color: 'white',
   },
   icon: {
     borderRadius: '100%',
@@ -102,18 +111,19 @@ export const buttons = {
     'path': {
       fill: 'text.secondary',
     },
-    '&:hover': {
-      bg: 'accent.99',
+    outline: 'none',
+    color: 'white',
+    '&.is-hovered': {
+      bg: 'accent.90',
     },
-    '&:active': {
+    '&.is-pressed': {
       'path': {
         fill: 'white',
       },
       bg: 'active',
     },
-    '&:focus': {
-      outline: 'none',
-      color: 'white',
+    '&.is-focused': {
+      ...defaultFocus,
     },
   },
   inline: {
@@ -128,10 +138,10 @@ export const buttons = {
     alignSelf: 'center',
     paddingTop: '0px',
     paddingBottom: '0px',
-    '&:hover': {
+    '&.is-hovered': {
       ...defaultHover,
     },
-    '&:active': {
+    '&.is-pressed': {
       ...defaultActive,
     },
   },

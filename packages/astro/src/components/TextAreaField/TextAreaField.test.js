@@ -1,42 +1,37 @@
 import React from 'react';
-import { useFocusRing } from '@react-aria/focus';
-import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { screen, render } from '../../utils/testUtils/testWrapper';
+import theme from '../../styles/theme';
 import TextAreaField from '.';
-
-
-jest.mock('@react-aria/focus', () => ({
-  ...jest.requireActual('@react-aria/focus'),
-  useFocusRing: jest.fn(() => ({
-    isFocusVisible: false,
-    focusProps: {},
-  })),
-}));
 
 const testId = 'test-textAreaField';
 const defaultProps = {
   'data-testid': testId,
+  label: 'testLabel',
 };
 const getComponent = (props = {}) => render(
-  <TextAreaField {...defaultProps} {...props} label="test" />,
+  <TextAreaField {...defaultProps} {...props} />,
 );
-
 
 test('disabled prop disables input', () => {
   getComponent({ isDisabled: true });
-  const textArea = document.querySelector('textArea');
+  const textArea = screen.getByLabelText(defaultProps.label);
   expect(textArea).toBeDisabled();
 });
 
 test('textAreaField has focus', () => {
-  useFocusRing.mockImplementation(() => ({ isFocusVisible: true, focusProps: {} }));
   getComponent();
-  const icon = document.querySelector('textArea');
-  expect(icon).toHaveStyleRule('background-color', 'highlight', { target: ':focus' });
+  const textArea = screen.getByLabelText(defaultProps.label);
+
+  userEvent.tab();
+  expect(textArea).toHaveFocus();
+  expect(textArea).toHaveClass('is-focused');
+  expect(textArea).toHaveStyle({ borderColor: theme.colors.accent[80] });
 });
 
-
 test('disabled prop disables text field label', () => {
-  getComponent({ isDisabled: true, label: 'testLabel' });
-  const label = document.querySelector('label');
-  expect(label).toHaveStyleRule('opacity', '0.5');
+  getComponent({ isDisabled: true });
+  const label = screen.getByText(defaultProps.label);
+  expect(label).toHaveClass('is-disabled');
+  expect(label).toHaveStyle({ opacity: 0.5 });
 });

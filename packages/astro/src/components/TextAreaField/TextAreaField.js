@@ -1,7 +1,5 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
 import TextArea from '../TextArea';
 import Field from '../Field';
 import Box from '../Box/Box';
@@ -12,33 +10,16 @@ import Box from '../Box/Box';
  * uses the available [props from Rebass](https://rebassjs.org/props/).
  */
 const TextAreaField = forwardRef((props, ref) => {
-  const {
-    controlProps,
-  } = props;
-
-  const {
-    sx,// eslint-disable-line
-  } = controlProps;
-
-  const { isFocusVisible, focusProps } = useFocusRing();
-  const dynamicStyles = {
-    'input:focus ~ &': {
-      bg: isFocusVisible ? 'highlight' : 'transparent',
-    },
-  };
+  const textAreaRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => textAreaRef.current);
 
   return (
     <Field
-      ref={ref}
+      ref={textAreaRef}
       render={renderProps => (
         <Box variant="boxes.inputContainer">
-          <TextArea
-            {...mergeProps(focusProps, renderProps)}
-            sx={{
-              ...dynamicStyles,
-              ...sx,
-            }}
-          />
+          <TextArea {...renderProps} />
         </Box>
       )}
       {...props}
@@ -75,5 +56,4 @@ TextAreaField.defaultProps = {
 };
 
 TextAreaField.displayName = 'TextAreaField';
-
 export default TextAreaField;

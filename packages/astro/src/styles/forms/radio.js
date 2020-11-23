@@ -6,11 +6,11 @@ export const radio = {
   height: 20,
   color: 'active',
   mr: 'sm',
-  'input ~ &': {
-    pointer: 'cursor',
+  // override the default focus styling
+  'input:focus ~ &': {
+    bg: 'transparent',
   },
-  'input:disabled ~ &': {
-    opacity: 0.5,
-    pointerEvents: 'none',
+  'input ~ &.is-focused': {
+    bg: 'highlight',
   },
 };
