@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Text as RText } from 'rebass';
 
 const Text = React.forwardRef((props, ref) => (
-  <RText {...props} ref={ref} />
+  <RText variant="base" {...props} ref={ref} />
 ));
 
 Text.propTypes = {
@@ -17,6 +17,7 @@ Text.propTypes = {
     'label',
     'capsLabel',
     'base',
+    'tabLabel',
   ]),
 };
 
