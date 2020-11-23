@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useToggleState } from '@react-stately/toggle';
 import { useCheckbox } from '@react-aria/checkbox';
@@ -19,6 +19,7 @@ const CheckboxField = forwardRef((props, ref) => {
     children,
     controlProps,
     isDisabled,
+    labelProps,
     ...others
   } = props;
   const {
@@ -34,7 +35,9 @@ const CheckboxField = forwardRef((props, ref) => {
     ...controlProps,
   };
   const state = useToggleState(checkboxProps);
-  const checkboxRef = ref || React.useRef();
+  const checkboxRef = useRef(null);
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => checkboxRef.current);
   const { inputProps: raInputProps } = useCheckbox({
     isDisabled,
     ...checkboxProps,
@@ -48,13 +51,19 @@ const CheckboxField = forwardRef((props, ref) => {
 
   return (
     <Field
-      ref={ref}
+      ref={checkboxRef}
       hasWrappedLabel
       label={children}
+      labelProps={{
+        variant: 'checkboxLabel',
+        ...labelProps,
+      }}
       isDisabled={isDisabled}
+      controlProps={controlProps}
       render={renderProps => (
         <Checkbox
-          {...mergeProps(raInputProps, focusProps, renderProps)}
+          {...renderProps} // Don't put in mergeProps or else events from here will be chained
+          {...mergeProps(focusProps, raInputProps)}
           sx={{
             ...dynamicStyles,
             ...sx,
@@ -140,9 +149,7 @@ CheckboxField.propTypes = {
 
 CheckboxField.defaultProps = {
   controlProps: {},
-  labelProps: {
-    'variant': 'checkboxLabel', // Key is in quotes for Storybook Controls
-  },
+  labelProps: {},
 };
 
 CheckboxField.displayName = 'CheckboxField';
