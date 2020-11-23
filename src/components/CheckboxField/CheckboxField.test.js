@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useFocusRing } from '@react-aria/focus';
 import CheckboxField from '../CheckboxField';
@@ -46,11 +46,11 @@ test('checkbox interaction', () => {
   const input = screen.getByRole('checkbox');
   expect(onChange).not.toHaveBeenCalled();
 
-  act(() => userEvent.click(input));
+  userEvent.click(input);
   expect(input).toBeChecked();
   expect(onChange).toHaveBeenNthCalledWith(1, true);
 
-  act(() => userEvent.click(input));
+  userEvent.click(input);
   expect(input).not.toBeChecked();
   expect(onChange).toHaveBeenNthCalledWith(2, false);
 });
@@ -61,7 +61,7 @@ test('isSelected for controlled checkbox', () => {
   expect(input).toBeChecked();
 
   // Ensure it is controlled.
-  act(() => userEvent.click(input));
+  userEvent.click(input);
   expect(input).toBeChecked();
 });
 
@@ -71,7 +71,7 @@ test('defaultValue for uncontrolled checkbox', () => {
   expect(input).toBeChecked();
 
   // Ensure it is uncontrolled.
-  act(() => userEvent.click(input));
+  userEvent.click(input);
   expect(input).not.toBeChecked();
 });
 

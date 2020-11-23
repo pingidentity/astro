@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useLabel } from '@react-aria/label';
-import { mergeProps } from '@react-aria/utils';
 import Box from '../Box';
 import Label from '../Label';
 import { getDisabledStyles } from '../../utils/styleUtils';
@@ -33,7 +32,7 @@ const Field = forwardRef((props, ref) => {
   if (hasWrappedLabel) {
     return (
       <Box ref={ref} {...others}>
-        <Label {...mergeProps(labelProps, raLabelProps)} isDisabled={isDisabled}>
+        <Label {...labelProps} {...raLabelProps} isDisabled={isDisabled}>
           {render({ ...controlProps, ...raFieldProps, disabled: isDisabled, sx })}
           {label}
         </Label>
@@ -44,7 +43,7 @@ const Field = forwardRef((props, ref) => {
 
   return (
     <Box ref={ref} {...others}>
-      <Label {...mergeProps(labelProps, raLabelProps)} isDisabled={isDisabled}>{label}</Label>
+      <Label {...labelProps} {...raLabelProps} isDisabled={isDisabled}>{label}</Label>
       {render({ ...controlProps, ...raFieldProps, disabled: isDisabled, sx })}
       {afterContent}
     </Box>
