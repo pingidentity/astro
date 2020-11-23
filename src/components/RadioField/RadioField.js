@@ -1,8 +1,13 @@
-import React, { forwardRef, createContext, useContext } from 'react';
+import React, {
+  forwardRef,
+  createContext,
+  useContext,
+  useRef,
+  useImperativeHandle,
+} from 'react';
 import PropTypes from 'prop-types';
 import { useRadio } from '@react-aria/radio';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
+import useStatusClasses from '../../hooks/useStatusClasses';
 import Box from '../Box';
 import Field from '../Field';
 import Radio from '../Radio';
@@ -17,6 +22,7 @@ export const RadioContext = createContext();
  */
 const RadioField = forwardRef((props, ref) => {
   const {
+    className,
     checkedContent,
     children,
     controlProps,
@@ -24,41 +30,35 @@ const RadioField = forwardRef((props, ref) => {
     sx, // eslint-disable-line
     ...others
   } = props;
-  const {
-    sx: radioSX, // eslint-disable-line
-  } = controlProps;
+
+  const radioFieldRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => radioFieldRef.current);
   const state = useContext(RadioContext);
   const { isDisabled } = state;
-  const { inputProps: raInputProps } = useRadio({ isDisabled, ...props, ...controlProps }, state);
-  const { checked } = raInputProps;
-  const { isFocusVisible, focusProps } = useFocusRing();
-  const dynamicStyles = {
-    'input:focus ~ &': {
-      bg: isFocusVisible ? 'highlight' : 'transparent',
-    },
-  };
+  const { inputProps: raInputProps } = useRadio(
+    { isDisabled, ...props, ...controlProps }, state, radioFieldRef,
+  );
+  const { checked: isChecked } = raInputProps;
+  const { classNames } = useStatusClasses(className, {
+    isDisabled,
+    isChecked,
+  });
 
   return (
     <Field
-      ref={ref}
+      ref={radioFieldRef}
+      className={classNames}
       isDisabled={isDisabled}
-      sx={{
-        borderColor: checked ? 'active' : 'line.light',
-        ...sx,
-      }}
       labelProps={labelProps}
       hasWrappedLabel
       label={children}
-      render={renderProps => (
-        <Radio
-          {...mergeProps(controlProps, raInputProps, focusProps, renderProps)}
-          sx={{
-            ...dynamicStyles,
-            ...radioSX,
-          }}
-        />
-      )}
-      afterContent={checked && checkedContent && (
+      controlProps={{
+        ...controlProps,
+        ...raInputProps,
+      }}
+      render={renderProps => <Radio {...renderProps} />}
+      afterContent={isChecked && checkedContent && (
         <Box variant="boxes.radioCheckedContent">
           {checkedContent}
         </Box>

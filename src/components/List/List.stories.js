@@ -1,12 +1,12 @@
 import React from 'react';
 import List from '.';
-import ListItem from '../ListItem/ListItem';
+import ListItem from '../ListItem';
 import Text from '../Text';
 import Separator from '../Separator';
 
 export default {
   title: 'List',
-  component: List,
+  component: [List, ListItem],
 };
 
 export const Default = () => (

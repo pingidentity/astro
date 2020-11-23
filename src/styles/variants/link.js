@@ -1,12 +1,18 @@
-export const link = {
-  defaultLink: {
-    color: 'active',
-    fontFamily: 'standard',
-    fontSize: 'md',
-    textDecoration: 'none',
-    cursor: 'pointer',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
+const link = {
+  color: 'active',
+  fontFamily: 'standard',
+  fontSize: 'md',
+  textDecoration: 'none',
+  outline: 'none',
+  '&.is-hovered': {
+    textDecoration: 'underline',
+  },
+  '&.is-focused': {
+    textDecoration: 'underline',
+  },
+  '&.is-disabled': {
+    pointerEvents: 'none',
   },
 };
+
+export default link;
