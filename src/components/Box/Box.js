@@ -29,6 +29,7 @@ const Box = forwardRef((props, ref) => {
   return (
     <RBox
       ref={ref}
+      display="flex"
       flexDirection={fd}
       variant="boxes.base"
       {...others}

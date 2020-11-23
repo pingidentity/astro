@@ -43,5 +43,10 @@
                 "extensions": [".js", ".jsx", ".mdx"]
             }
         }
-    }
+    },
+    "overrides": [
+        {
+            "files": [ "src/**/*.js", "src/**/*.jsx" ]
+        }
+    ]
 }
