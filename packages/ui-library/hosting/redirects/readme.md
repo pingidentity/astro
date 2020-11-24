@@ -10,7 +10,7 @@
         //Copy After this line
 pipeline {
     agent {
-        label 'ui-library-cdn-deploy'
+        label 'ui-pipeline-shared'
     }
     stages {
         stage ('package and upload for hosting') {
