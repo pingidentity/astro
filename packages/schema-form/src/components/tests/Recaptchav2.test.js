@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 import { useMediaQuery } from 'react-responsive';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { generateSchema, renderSchemaForm } from './utils';
@@ -42,10 +42,16 @@ test('it renders', () => {
   screen.getByTestId('recaptcha');
 });
 
-test('it sends up data when it is interacted with', () => {
+test('it sends up data when it is interacted with', async () => {
+  // React will warn about unhandled state changes if we don't wait for this promise on change.
+  // The currentData has no visual update directly tied to it so we must work around it for now
+  // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning#an-alternative-waiting-for-the-mocked-promise
+  const promise = Promise.resolve();
+  const onChange = jest.fn(() => promise);
   const onError = jest.fn();
   const onSubmit = jest.fn();
   renderSchemaForm({
+    onChange,
     onError,
     onSubmit,
     schema,
@@ -61,6 +67,7 @@ test('it sends up data when it is interacted with', () => {
   fireEvent.click(submitBtn);
   expect(onError).not.toHaveBeenCalled();
   expect(onSubmit).toHaveBeenCalled();
+  await act(() => promise);
 });
 
 test('it displays an error when the captcha fails validation', () => {
