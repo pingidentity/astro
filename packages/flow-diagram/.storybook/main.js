@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-	stories: ['../src/components/**/*.story.js?(x)'],
+	stories: ['../src/**/*.story.js?(x)'],
 	addons: [
 		'@storybook/addon-actions',
 		'@storybook/addon-links',
@@ -14,7 +14,7 @@ module.exports = {
 			name: '@storybook/addon-storysource',
 			options: {
 				rule: {
-					include: [path.resolve(__dirname, '../src/components/**/*.story.js')],
+					include: [path.resolve(__dirname, '../src/**/*.story.js')],
 				},
 			},
 		},

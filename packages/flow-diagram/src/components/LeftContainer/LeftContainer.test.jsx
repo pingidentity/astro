@@ -16,8 +16,3 @@ test('Renders container', () => {
     const container = screen.getByTestId(testId);
     expect(container).toBeInTheDocument();
 });
-test('Has correct styling', () => {
-    getComponent();
-    const container = screen.getByTestId(testId);
-    expect(container).toHaveStyleRule('border', '1px solid black');
-});

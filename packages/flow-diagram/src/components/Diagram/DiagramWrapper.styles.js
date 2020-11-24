@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-export const diagramComponent = css`
+export const diagramWrapper = css`
     width: 100%;
 
     .diagram-component {
@@ -8,5 +8,9 @@ export const diagramComponent = css`
         border: 1px solid #CACED3;
         background: #F7F8FD;
         height: 100%;
+    }
+
+    canvas {
+        outline-width: 0;
     }
 `;

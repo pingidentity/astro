@@ -14,7 +14,7 @@ function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
             </div>
             <div css={configPanelHeader}>
                 <Box isRow>
-                    {React.cloneElement(icon, { fill: color, height: 22, width: 22 })}
+                    {icon}
                     <Text ml="12px" color="#253746" fontSize={15} fontWeight="bold" fontFamily="Helvetica">{category}</Text>
                 </Box>
                 <Icon
