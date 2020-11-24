@@ -179,7 +179,6 @@ test('successful submission when given an endpoint', async () => {
 });
 
 test('turns on live validation after initial submit if option is given', async () => {
-  // When dealing with live validation, we must check differences in form data, but that means
   // React will warn about unhandled state changes if we don't wait for this promise on change.
   // The currentData has no visual update directly tied to it so we must work around it for now
   // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning#an-alternative-waiting-for-the-mocked-promise
@@ -211,7 +210,6 @@ test('turns on live validation after initial submit if option is given', async (
 });
 
 test('live validation happens all of the time if option is given', async () => {
-  // When dealing with live validation, we must check differences in form data, but that means
   // React will warn about unhandled state changes if we don't wait for this promise on change.
   // The currentData has no visual update directly tied to it so we must work around it for now
   // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning#an-alternative-waiting-for-the-mocked-promise

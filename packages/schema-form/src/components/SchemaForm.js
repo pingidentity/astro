@@ -11,6 +11,7 @@ import JSONSchemaV4 from 'ajv/lib/refs/json-schema-draft-04.json';
 import useThemedStyles from '../hooks/useThemedStyles';
 import { THEMES } from '../themes/utils';
 import { FORM_STATE } from '../utils/constants';
+import { isRecaptchaResetChange } from '../utils/helpers';
 import { getCorrectedSchema } from '../utils/props';
 import widgets from '../utils/widgets';
 import FieldTemplate from './FieldTemplate';
@@ -109,35 +110,35 @@ const SchemaForm = (props) => {
   });
 
   const formLevelErrors = _.get(asyncErrors, '_form.__errors', undefined);
-  const handleChange = (formInfo, ...args) => {
-    // Only figure out whether the async errors need to be cleared if there are any
-    if (Object.keys(asyncErrors).length) {
-      const { formData } = formInfo;
-      // Get only the updated form data from the last change event
-      const differences = _.differenceWith(
-        Object.entries(formData),
-        Object.entries(currentData),
-        _.isEqual,
-      );
+  const handleChange = (formInfo = {}, ...args) => {
+    const { formData } = formInfo;
+    // Get only the updated form data from the last change event
+    const differences = _.differenceWith(
+      Object.entries(formData),
+      Object.entries(currentData),
+      _.isEqual,
+    );
 
-      // Remove any async errors related to the differences
-      if (differences.length) {
-        const newAsyncErrors = { ...asyncErrors };
-        differences.forEach((diff) => {
-          const [fieldId] = diff;
-          delete newAsyncErrors[fieldId];
-        });
-        setAsyncErrors(newAsyncErrors);
-      }
-      // Update the current form data state so we can keep track of it for differences again
-      setCurrentData(formData);
+    // Ignore a recaptcha reset event
+    const ignoreChange = isRecaptchaResetChange(differences, uiSchema);
+
+    // Remove any async errors related to the differences
+    if (!ignoreChange && differences.length && Object.keys(asyncErrors).length) {
+      const newAsyncErrors = { ...asyncErrors };
+      differences.forEach((diff) => {
+        const [fieldId] = diff;
+        delete newAsyncErrors[fieldId];
+      });
+      setAsyncErrors(newAsyncErrors);
     }
+
+    // Update the current form data state so we can keep track of it for differences again
+    setCurrentData(formData);
 
     // Call the onChange prop if one was passed in
     propsOnChange(formInfo, ...args);
   };
   const handleValidationError = () => {
-    // FIXME: Submit must be clicked twice to display new validation errors.
     // Clear all async errors if validation errors occur. Otherwise, they stick around.
     setAsyncErrors({});
     setFormState(FORM_STATE.ERROR);

@@ -1,6 +1,10 @@
 import React from 'react';
 import {
-  fireEvent, render, screen, waitFor,
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
 } from '@testing-library/react';
 import Form from '../../../components/SchemaForm';
 
@@ -261,7 +265,12 @@ describe('single fields', () => {
 
   // NOTE: It won't work without an object wrapper. The default value is
   // an object, but should be an array according to the formData prop.
-  test('checkboxes field', () => {
+  test('checkboxes field', async () => {
+    // React will warn about unhandled state changes if we don't wait for this promise on change.
+    // The currentData has no visual update directly tied to it so we must work around it for now
+    // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning#an-alternative-waiting-for-the-mocked-promise
+    const promise = Promise.resolve();
+    const onChange = jest.fn(() => promise);
     const schema = {
       type: 'object',
       properties: {
@@ -280,8 +289,16 @@ describe('single fields', () => {
         'ui:widget': 'checkboxes',
       },
     };
-    const { asFragment } = render(<Form schema={schema} uiSchema={uiSchema} formData={[]} />);
+    const { asFragment } = render((
+      <Form
+        onChange={onChange}
+        schema={schema}
+        uiSchema={uiSchema}
+        formData={[]}
+      />
+    ));
     expect(asFragment()).toMatchSnapshot();
+    await act(() => promise);
   });
 
   test.skip('radio field', () => {
