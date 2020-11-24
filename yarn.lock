@@ -1369,6 +1369,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.5.4":
+  version "7.12.5"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
+  integrity sha1-QQ5+SHRB4bNgwpvnFdhw2bmFiC4=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.10.1", "@babel/template@^7.4.0", "@babel/template@^7.8.6":
   version "7.10.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/template/-/template-7.10.1.tgz#e167154a94cb5f14b28dc58f5356d2162f539811"
@@ -2599,6 +2606,16 @@
   version "3.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@mapbox/whoots-js/-/whoots-js-3.1.0.tgz#497c67a1cef50d1a2459ba60f315e448d2ad87fe"
   integrity sha1-SXxnoc71DRokWbpg8xXkSNKth/4=
+
+"@mdi/js@^5.8.55":
+  version "5.8.55"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@mdi/js/-/js-5.8.55.tgz#630bc5fafd8b1d2f6e63489a9ab170177559e41b"
+  integrity sha1-YwvF+v2LHS9uY0iamrFwF3VZ5Bs=
+
+"@mdi/react@^1.4.0":
+  version "1.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@mdi/react/-/react-1.4.0.tgz#7f6bad1bd8801226d0e5bad91659b215ce68a93f"
+  integrity sha1-f2utG9iAEibQ5brZFlmyFc5oqT8=
 
 "@mdx-js/loader@^1.5.1":
   version "1.6.4"
@@ -3880,6 +3897,14 @@
     lodash "^4.17.15"
     redent "^3.0.0"
 
+"@testing-library/react-hooks@^3.4.2":
+  version "3.4.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@testing-library/react-hooks/-/react-hooks-3.4.2.tgz#8deb94f7684e0d896edd84a4c90e5b79a0810bc2"
+  integrity sha1-jeuU92hODYlu3YSkyQ5beaCBC8I=
+  dependencies:
+    "@babel/runtime" "^7.5.4"
+    "@types/testing-library__react-hooks" "^3.4.0"
+
 "@testing-library/react@^10.0.4":
   version "10.0.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@testing-library/react/-/react-10.0.4.tgz#8e0e299cd91acc626d81ed8489fdc13df864c31d"
@@ -4128,6 +4153,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-test-renderer@*":
+  version "17.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/react-test-renderer/-/react-test-renderer-17.0.0.tgz#9be47b375eeb906fced37049e67284a438d56620"
+  integrity sha1-m+R7N17rkG/O03BJ5nKEpDjVZiA=
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-textarea-autosize@^4.3.3":
   version "4.3.5"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/react-textarea-autosize/-/react-textarea-autosize-4.3.5.tgz#6c4d2753fa1864c98c0b2b517f67bb1f6e4c46de"
@@ -4178,6 +4210,13 @@
   integrity sha1-WeR3Ghz4fVHomlzIGVzTtkfLoyI=
   dependencies:
     "@types/jest" "*"
+
+"@types/testing-library__react-hooks@^3.4.0":
+  version "3.4.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/testing-library__react-hooks/-/testing-library__react-hooks-3.4.1.tgz#b8d7311c6c1f7db3103e94095fe901f8fef6e433"
+  integrity sha1-uNcxHGwffbMQPpQJX+kB+P725DM=
+  dependencies:
+    "@types/react-test-renderer" "*"
 
 "@types/testing-library__react@^10.0.1":
   version "10.0.1"
@@ -18760,11 +18799,6 @@ react-test-renderer@^16.0.0, react-test-renderer@^16.0.0-0:
     prop-types "^15.6.2"
     react-is "^16.8.6"
     scheduler "^0.19.1"
-
-react-testing-library@^8.0.1:
-  version "8.0.1"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/react-testing-library/-/react-testing-library-8.0.1.tgz#b3dd43bce3fa88423cf0a23292fb819023c227cc"
-  integrity sha1-s91DvOP6iEI88KIykvuBkCPCJ8w=
 
 react-textarea-autosize@^7.1.0:
   version "7.1.2"

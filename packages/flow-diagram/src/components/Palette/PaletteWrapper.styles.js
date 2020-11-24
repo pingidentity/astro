@@ -7,5 +7,9 @@ export const paletteWrapper = css`
     width: 100%;
     height: 100%;
     }
+
+    canvas {
+        outline-width: 0;
+    }
 `;
 

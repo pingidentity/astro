@@ -2,8 +2,8 @@ import React from 'react';
 import * as go from 'gojs';
 import { Success, Close, Error, Grip, Desktop } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
-import start from '../../img/start.svg';
-import { COLORS } from '../../utils/constants';
+import start from '../img/start.svg';
+import { COLORS } from './constants';
 
 function encodeSvg(svgString) {
     return svgString.replace('<svg', (svgString.indexOf('xmlns') > -1 ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"'))
@@ -69,7 +69,6 @@ const getNodeHoverAdornment = () => {
                     $(go.TextBlock,
                         {
                             stroke: COLORS.ERROR, font: 'bold 11px sans-serif', alignment: go.Spot.Left, editable: false,
-
                         },
                         new go.Binding('text', 'errorMessage').makeTwoWay()),
                 ),
@@ -78,7 +77,7 @@ const getNodeHoverAdornment = () => {
     );
 };
 
-export const stepTemplate = ({ color, icon, onClick }) => {
+export const stepTemplate = ({ color, icon, onClick = () => {} }) => {
     return (
         $(go.Node, 'Spot',
             { click: onClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
@@ -106,7 +105,12 @@ export const stepTemplate = ({ color, icon, onClick }) => {
                         { fill: 'transparent', desiredSize: new go.Size(210, 55), stroke: 'transparent', parameter1: 3 },
                     ),
                     $(go.Shape, 'RoundedRectangle',
-                        { fill: COLORS.WHITE, desiredSize: new go.Size(200, 55), margin: new go.Margin(0, 0, 0, 5), parameter1: 3 },
+                        {
+                            fill: COLORS.WHITE,
+                            desiredSize: new go.Size(200, 55),
+                            margin: new go.Margin(0, 0, 0, 5),
+                            parameter1: 3,
+                        },
                         new go.Binding('stroke', 'isSelected', (condition, node) => {
                             if (condition) {
                                 return color;
@@ -166,7 +170,7 @@ export const paletteItemTemplate = ({ width = 120, icon, color }) => {
             $(go.Panel, 'Auto',
                 { name: 'BODY' },
                 $(go.Shape, 'RoundedRectangle',
-                    { fill: COLORS.WHITE, stroke: '#98A0A8', desiredSize: new go.Size(width, 35), parameter1: 1}),
+                    { fill: COLORS.WHITE, stroke: '#98A0A8', desiredSize: new go.Size(width, 35), parameter1: 1 }),
                 $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                     $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                         $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(<Grip />, { fill: '#98A0A8' })))}`, width: 15, height: 15, margin: new go.Margin(0, 7, 0, 5) }),
@@ -308,4 +312,4 @@ export const paletteGroupTemplate =
                     new go.Binding('text').makeTwoWay()),
             ),
         ),
-    )
+    );

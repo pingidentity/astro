@@ -1,6 +1,6 @@
 {
     "name": "@pingux/flow-diagram",
-    "version": "0.3.1-1",
+    "version": "0.3.1-2",
     "description": "Flow Diagram library",
     "author": "Ping UX Development Team",
     "homepage": "",
@@ -58,7 +58,8 @@
         "@storybook/addon-notes": "^5.3.19",
         "@storybook/addon-storysource": "^5.3.12",
         "@storybook/react": "^5.3.12",
-        "react-testing-library": "^8.0.1"
+        "@testing-library/react": "11.2.1",
+        "@testing-library/react-hooks": "^3.4.2"
     },
     "peerDependencies": {
         "react": "^16.8.6",

@@ -1,12 +1,15 @@
-/* eslint-disable import/export */
-export { default as Diagram } from './components/Diagram';
-export * from './components/Diagram';
+// Can't use 'export * from' here because the Jenkins box chokes on it.
+import * as constantsImports from './utils/constants';
+import * as templatesImports from './utils/templates';
 
-export { default as FlowManager } from './components/FlowManager';
-export * from './components/FlowManager';
+export const constants = constantsImports;
+export const templates = templatesImports;
 
+export { Diagram, DiagramWrapper, useDiagram } from './components/Diagram';
+export { Palette, PaletteWrapper, usePalette } from './components/Palette';
+
+export { default as Body } from './components/Body';
+export { default as ConfigPanel } from './components/ConfigPanel';
 export { default as LeftContainer } from './components/LeftContainer';
-export * from './components/LeftContainer';
-
-export { default as Palette } from './components/Palette';
-export * from './components/Palette';
+export { default as TopPanel } from './components/TopPanel';
+export { default as OuterContainer } from './components/OuterContainer';
