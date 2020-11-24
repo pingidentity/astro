@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "0.1.0-beta.6",
+  "version": "0.1.0-beta.7",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
@@ -90,7 +90,7 @@
     "rebass": "^4.0.7",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",
-    "@tippyjs/react":"4.2.0",
-    "tippy.js":"6.2.7"
+    "@tippyjs/react": "4.2.0",
+    "tippy.js": "6.2.7"
   }
 }
