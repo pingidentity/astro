@@ -2,8 +2,6 @@ import * as go from 'gojs';
 import { useEffect, useState } from 'react';
 import { differenceWith } from 'lodash';
 import { v4 as uuidV4 } from 'uuid';
-import { COLORS } from '../../utils/constants';
-import { RealtimeDragSelectingTool } from '../../RealtimeDragSelectingTool';
 
 go.Diagram.licenseKey = '73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741';
 
@@ -63,6 +61,21 @@ export default function useDiagram({
         }
     }, [nodeDataArray, linkDataArray]);
 
+    const renderPortCursor = (node) => {
+        const fromPort = node.findPort('from');
+        const toPort = node.findPort('to');
+        if (node.findNodesOutOf().count > 0) {
+            fromPort.cursor = 'normal';
+        } else {
+            fromPort.cursor = 'pointer';
+        }
+        if (node.findNodesInto().count > 0) {
+            toPort.cursor = 'normal';
+        } else {
+            toPort.cursor = 'pointer';
+        }
+    };
+
     const initDiagram = () => {
         const diagramObject =
         $(go.Diagram,
@@ -70,21 +83,6 @@ export default function useDiagram({
             {
                 hoverDelay: 0,
                 'undoManager.isEnabled': true,
-                dragSelectingTool:
-                    $(RealtimeDragSelectingTool,
-                        { isPartialInclusion: true, delay: 0 },
-                        {
-                            box: $(go.Part,
-                                { layerName: 'Tool', selectable: false },
-                                $(go.Shape,
-                                    {
-                                        name: 'SHAPE',
-                                        fill: 'rgba(2, 140, 255, 0.01)',
-                                        stroke: COLORS.BLUE,
-                                        strokeWidth: 1,
-                                    })),
-                        },
-                    ),
                 layout:
                     $(go.LayeredDigraphLayout,
                         {
@@ -103,6 +101,16 @@ export default function useDiagram({
                             node
                                 .location.copy()
                                 .snapToGridPoint(grid.gridOrigin, grid.gridCellSize);
+                    });
+                },
+                'InitialAnimationStarting': (e) => {
+                    e.diagram.nodes.each((node) => {
+                        renderPortCursor(node);
+                    });
+                },
+                'LinkDrawn': (e) => {
+                    e.diagram.nodes.each((node) => {
+                        renderPortCursor(node);
                     });
                 },
                 model: $(go.GraphLinksModel,

@@ -5,8 +5,11 @@ import * as templatesImports from './utils/templates';
 export const constants = constantsImports;
 export const templates = templatesImports;
 
-export { Diagram, DiagramWrapper, useDiagram } from './components/Diagram';
-export { Palette, PaletteWrapper, usePalette } from './components/Palette';
+export { Diagram, DiagramWrapper } from './components/Diagram';
+export { Palette, PaletteWrapper } from './components/Palette';
+
+export { default as useDiagram } from './hooks/useDiagram';
+export { default as usePalette } from './hooks/usePalette';
 
 export { default as Body } from './components/Body';
 export { default as ConfigPanel } from './components/ConfigPanel';
