@@ -1,3 +1,3 @@
-import Body from './Body.jsx';
+import Body from './Body';
 
 export default Body;
