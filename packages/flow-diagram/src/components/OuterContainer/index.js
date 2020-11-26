@@ -1,3 +1,3 @@
-import OuterContainer from './OuterContainer.jsx';
+import OuterContainer from './OuterContainer';
 
 export default OuterContainer;
