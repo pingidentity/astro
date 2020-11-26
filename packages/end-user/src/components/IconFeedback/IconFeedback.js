@@ -38,7 +38,7 @@ const IconFeedback = ({
     return (
         <div className={classNames}>
             <span className={iconClassNames}></span>
-            <p className="icon-feedback__label">{children}</p>
+            <span className="icon-feedback__label">{children}</span>
         </div>
     );
 };
