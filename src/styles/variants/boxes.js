@@ -54,6 +54,17 @@ const listItem = {
   },
 };
 
+const chip = {
+  cursor: 'pointer',
+  height: '15px',
+  p: '10px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minWidth: '50px',
+  display: 'inline-flex',
+  borderRadius: '5px',
+};
+
 export default {
   base,
   inputContainer,
@@ -61,4 +72,5 @@ export default {
   radioContainer,
   radioCheckedContent,
   listItem,
+  chip,
 };
