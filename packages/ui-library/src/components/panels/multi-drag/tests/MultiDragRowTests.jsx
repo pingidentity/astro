@@ -2,13 +2,13 @@ window.__DEV__ = true;
 
 jest.dontMock("../MultiDragRow");
 jest.dontMock("../../../buttons/Button.jsx");
+import MultiDragRow from "../MultiDragRow";
 import { mount } from "enzyme";
 import { mountSnapshotDataIds } from "../../../../devUtil/EnzymeUtils";
 
 describe("MultiDragRow", function() {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        MultiDragRow = require("../MultiDragRow"),
         _ = require("underscore");
 
     function getComponent(props) {
