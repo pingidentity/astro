@@ -2,11 +2,13 @@ import React from "react";
 const Redux = require("redux");
 import deepClone from "clone";
 import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
+import Disabled from "../../../components/layout/Disabled";
 import FormLabel from "../../../components/forms/FormLabel";
 import FormRadioGroup from "../../../components/forms/FormRadioGroup";
 import Layout from "../../../components/general/ColumnLayout";
 import MultiDrag, { MultiDragRow } from "../../../components/panels/multi-drag";
 import Messages from "../../../components/general/messages/";
+import { statuses } from "../../../components/panels/multi-drag/MultiDragRow";
 import Toggle from "../../../components/forms/form-toggle";
 import update from "re-mutable";
 import keyMirror from "fbjs/lib/keyMirror";
@@ -33,7 +35,7 @@ const STYLE_OPTIONS = [
     { id: "iconSrc", name: "with image" },
     { id: "icon", name: "with icon" },
     { id: "count", name: "with random count" },
-    { id: "tooltip", name: "with delete tooltip" }
+    { id: "tooltip", name: "with delete tooltip, disabled item, error state" },
 ];
 
 
@@ -336,12 +338,34 @@ class MultiDragDemo extends React.Component {
             </ ConfirmTooltip>
         ) : <RowButton onClick={onClick} {...props} />;
 
-        const contentTypeWithTooltip = (props) => (
-            <MultiDragRow
-                renderButton={renderCustomButton}
-                {...props}
-            />
-        );
+        const contentTypeWithTooltip = (props) => {
+            if (props.id === 12) {
+                return (
+                    <Disabled>
+                        <MultiDragRow
+                            {...props}
+                            renderButton={() => {return null;}}
+                        />
+                    </Disabled>
+                );
+            }
+                
+            if (props.id === 3) {
+                return (
+                    <MultiDragRow
+                        renderButton={(renderCustomButton)}
+                        {...props}
+                        status={statuses.ERROR}
+                    />);
+            }
+
+            return (
+                <MultiDragRow
+                    renderButton={renderCustomButton}
+                    {...props}
+                />
+            );
+        };
 
         const contentTypeStateful = (
             <Row
@@ -408,7 +432,8 @@ class MultiDragDemo extends React.Component {
                                 items={[
                                     { id: "none", name: "none" },
                                     { id: "first", name: "first column only" },
-                                    { id: "all", name: "all" }
+                                    { id: "all", name: "all" },
+                                    { id: "withRadio", name: "with radio" }
                                 ]}
                             />
                         </Layout.Column>
@@ -448,7 +473,7 @@ class MultiDragDemo extends React.Component {
                             <MultiDrag
                                 stateless={true}
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
-                                showSearch={this.props.demo.search === "first"}
+                                showSearch={this.props.demo.search !== "none"}
                                 onSearch={this._handleSearchStateless}
                                 categoryList={this._getCategoryOptions()}
                                 columns={columnsStateless}
@@ -469,6 +494,19 @@ class MultiDragDemo extends React.Component {
                                 {...this.props.demo.style === "tooltip" ? {
                                     contentType: contentTypeWithTooltip
                                 } : {}}
+                                rightAccessories={
+                                    this.props.demo.search === "withRadio"
+                                        ? (<FormRadioGroup
+                                            selected={this.state.selectedId1}
+                                            onValueChange={()=> {}}
+                                            groupName="radio example"
+                                            items={[
+                                                { id: "1", name: "Radio1" },
+                                                { id: "2", name: "Radio2" },
+                                            ]}
+                                            stacked={true}/>)
+                                        : null
+                                }
                             />
                         </div>
                     }
