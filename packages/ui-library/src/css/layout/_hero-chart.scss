@@ -118,6 +118,32 @@
         transform: translateX(-50%) translateY(-70%);
         margin: 0;
     }
+
+    &--astro {
+        background: linear-gradient(to bottom, #f4f6fc 0%, #e5e9f8 100%);
+
+        .hero-chart {
+            &__title {
+                color: #253746;
+            }
+            &__subtitle,
+            &__error,
+            &__greeting {
+                color: #808993;
+            }
+            &__value {
+                color: #3c5080;
+            }
+        }
+        .hero-tooltip {
+            color: #3c5080;
+            &__bottom-value {
+                color: rgba(163, 19, 0, 0.6);
+            }
+        }
+
+
+    }
 }
 
 

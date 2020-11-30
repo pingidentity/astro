@@ -55,6 +55,7 @@ class HeroChartDemo extends React.Component {
         range: "7D",
         errormessage: null,
         loading: false,
+        astro: false,
         totalValue: "24,458",
     };
 
@@ -103,13 +104,20 @@ class HeroChartDemo extends React.Component {
                             onChange={this._toggleLoading}
                         />
                     </Layout.Column>
+                    <Layout.Column>
+                        <Checkbox
+                            label="Show Astro Theme"
+                            checked={this.state.astro}
+                            onChange={() => this.setState((state) => ({ astro: !state.astro }))}
+                        />
+                    </Layout.Column>
                 </Layout.Row>
                 <HeroChart
                     loading={this.state.loading}
                     loadingMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                     errorMessage={this.state.errorMessage}
-
-                    bgImage={"src/images/herochart-bg1.png"}
+                    bgImage={!this.state.astro && "src/images/herochart-bg1.png"}
+                    isAstro={this.state.astro}
                     data={this._getData()}
                     onValueChange={this._handleRangeChange}
                     selected="1W"
