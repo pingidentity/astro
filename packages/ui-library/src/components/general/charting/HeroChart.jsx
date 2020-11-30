@@ -176,7 +176,7 @@ export default class HeroChart extends Component {
                 dataKey={xAxisKey}
                 domain={["dataMin", "dataMax"]}
                 dy={4}
-                stroke={"rgba(255, 255, 255, 0.9)"}
+                stroke={this.props.isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.9)"}
                 tick={{ fontSize: fontSize }}
                 tickLine={false}
                 height={xAxisHeight}
@@ -214,6 +214,7 @@ export default class HeroChart extends Component {
             totalValue,
             value,
             xAxisKey,
+            isAstro,
         } = this.props;
 
         const labels = ["1D", "1W", "1M", "3M"];
@@ -268,8 +269,15 @@ export default class HeroChart extends Component {
             { "hero-chart__greeting--hidden": this.state.isGreetingHidden }
         );
 
+
+        const topColor = isAstro ? "#3C5080" : "#fff";
+        const bottomColor = isAstro ? "rgba(163, 19, 0, 0.6)": "#ffa500";
+
         return (
-            <div data-id={dataId} className="hero-chart" style={heroStyles}>
+            <div data-id={dataId}
+                className={classnames("hero-chart", { "hero-chart--astro": isAstro })}
+                style={heroStyles}
+            >
                 {greeting && <div className={greetingClassNames} ref={node => this._greeting = node}>{greeting}</div>}
                 {!errorMessage &&
                     <div key="center-text" className="hero-chart__center-text">
@@ -296,7 +304,7 @@ export default class HeroChart extends Component {
                                 position={{ y: -25 }}
                                 selected={this.state.barSelected}
                             />
-                            {this._renderBars(data, topSeriesKey, "#fff")}
+                            {this._renderBars(data, topSeriesKey, topColor)}
                         </BarChart>
                     </ResponsiveContainer>
                     ,
@@ -318,7 +326,7 @@ export default class HeroChart extends Component {
                                 position={{ y: botChartHeight }}
                                 selected={this.state.barSelected}
                             />
-                            {this._renderBars(data, bottomSeriesKey, "#ffa500")}
+                            {this._renderBars(data, bottomSeriesKey, bottomColor)}
                         </BarChart>
                     </ResponsiveContainer>
                 ]}
@@ -361,6 +369,7 @@ export default class HeroChart extends Component {
         strings: PropTypes.object,
         topSeriesKey: PropTypes.string,
         xAxisKey: PropTypes.string,
+        isAstro: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -372,5 +381,6 @@ export default class HeroChart extends Component {
         onValueChange: _.noop,
         rockerButtonProps: {},
         xAxisKey: "id",
+        isAstro: false,
     };
 }
