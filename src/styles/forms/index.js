@@ -3,6 +3,7 @@ import * as input from './input';
 import * as label from './label';
 import * as radio from './radio';
 import * as select from './select';
+import * as switchable from './switch'; // 'switch' is a reserved keyword
 import * as textarea from './textarea';
 
 // See https://rebassjs.org/forms/ for the intended structure.
@@ -14,4 +15,5 @@ export default {
   ...radio,
   ...select,
   ...textarea,
+  switch: { ...switchable },
 };

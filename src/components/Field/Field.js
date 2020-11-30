@@ -73,7 +73,7 @@ Field.propTypes = {
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
   /** The content to display as the label. */
-  label: PropTypes.node.isRequired,
+  label: PropTypes.node,
   /** The props passed along to the label. */
   labelProps: PropTypes.shape({}),
   /** The props passed along to the control. */
