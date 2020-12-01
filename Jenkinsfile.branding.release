@@ -1,6 +1,18 @@
+@Library(['mpl-library', 'jenkins-ci-library']) _
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
+
+def ortCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/ort-cdn-deploy.yaml';
+def prodCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/prod-cdn-deploy.yaml';
+def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def centralCluster = 'central-us-east-2-k8s'
+
 pipeline {
   agent {
-    label 'ui-pipeline-shared'
+    kubernetes {
+      cloud centralCluster
+      yaml uiPipelineShared
+    }
   }
   stages {
     stage('run-tests') {
@@ -52,6 +64,7 @@ pipeline {
             }
           }
         }
+        stash includes: 'packages/branding-themes/build/**/*', name: 'package'
       }
       post {
         always {
@@ -59,24 +72,52 @@ pipeline {
         }
       }
     }
-    stage('cdn deploy') {
+    stage('cdn deploy test') {
+      agent { label 'test-cdn-deploy' }
       steps {
+        unstash 'package'
         dir("${env.WORKSPACE}/packages/branding-themes/build") {
-          container('node-builder') {
-            withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
+          container('cdn-deploy') {
+            withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
                 s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/branding-themes/', file: "cdn/")
-              }
             }
-            withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
+          }
+        }
+      }
+    }
+
+    stage('cdn deploy ort') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml ortCdnDeploy
+        }
+      }
+      steps {
+        unstash 'package'
+        dir("${env.WORKSPACE}/packages/branding-themes/build") {
+          container('cdn-deploy') {
+            withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
                 s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/branding-themes/', file: "cdn/")
-              }
             }
-            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
+          }
+        }
+      }
+    }
+
+    stage('cdn deploy prod') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml prodCdnDeploy
+        }
+      }
+      steps {
+        unstash 'package'
+        dir("${env.WORKSPACE}/packages/branding-themes/build") {
+          container('cdn-deploy') {
+            withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
                 s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/branding-themes/", file: "cdn/")
-              }
             }
           }
         }
