@@ -76,7 +76,7 @@ export const Composed = () => {
                 iconSrc: svgComponentToBase64(<Walkthrough fill={COLORS.WHITE} />),
                 color: '#228C22',
             },
-            { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success' },
+            { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', width: 100, 'text': 'On Success' },
             { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure' },
             { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user' },
             { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
@@ -85,7 +85,7 @@ export const Composed = () => {
             // onClick can also be defined per node.
             ['step', stepTemplate({ onClick: onStepClick })],
             // The outletTemplate can also be defined with a color on its own.
-            ['outlet', outletTemplate()],
+            ['outlet', outletTemplate({ width: 100 })],
             ['finished', successNode],
             ['error', failureNode],
             ['START', nodeTemplateStart],
