@@ -88,7 +88,7 @@ export const Composed = () => {
             ['outlet', outletTemplate()],
             ['finished', successNode],
             ['error', failureNode],
-            ['START', nodeTemplateStart],
+            ['START', nodeTemplateStart()],
         ],
         onModelChange: ({
             insertedNodeKeys,
