@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
-    <title>Group 2</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Desktop-HD-Copy-3" transform="translate(-322.000000, -586.000000)">
-            <g id="Group-2" transform="translate(323.000000, 587.000000)">
-                <path d="M15,30 C6.71612046,30 0,23.2838795 0,15 C0,6.71501329 6.71612046,0 15,0 C23.2838795,0 30,6.71501329 30,15 C30,23.2838795 23.2838795,30 15,30 Z" id="Stroke-2479" stroke="#27AF14" stroke-width="2" transform="translate(15.000000, 15.000000) rotate(-90.000000) translate(-15.000000, -15.000000) "></path>
-                <polygon id="Fill-2480" fill="#27AF14" transform="translate(15.000000, 15.000000) rotate(-90.000000) translate(-15.000000, -15.000000) " points="21.1175763 16.7731585 23 16.3997616 23 8 7 8 7 9.86674615 13.5878817 9.86674615 13.5878817 15.0935877 11.7066603 15.4657924 11.7066603 22 21.1175763 22"></polygon>
-            </g>
-        </g>
-    </g>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#00AF18" d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z" />
 </svg>

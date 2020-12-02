@@ -1,6 +1,6 @@
 import React from 'react';
 import * as go from 'gojs';
-import { Success, Close, Error, Grip, Desktop } from '@pingux/icons/';
+import { Success, Clear, Error, Grip, Desktop } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import start from '../img/start.svg';
 import { COLORS } from './constants';
@@ -240,60 +240,66 @@ export const outletTemplate = ({ color = COLORS.BLACK } = {}) => $(go.Node, 'Spo
     fromNode({ color: '#4262ed' }),
 );
 
-export const circleNode = ({ color = COLORS.BLACK, iconSrc } = {}) => {
+export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height } = {}) => {
     return (
         $(go.Node, 'Spot',
             { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
             new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
             $(go.Panel, 'Auto',
-                { name: 'BODY' },
+                { name: 'BODY', cursor: 'normal' },
                 $(go.Shape, 'Circle',
-                    { fill: 'transparent', stroke: color, strokeWidth: 1, width: 20, alignment: go.Spot.Center },
-                    new go.Binding('stroke', 'color'),
-                ),
-                $(go.Shape, 'Circle',
-                    { fill: color, stroke: 'transparent', strokeWidth: 1, width: 12, margin: new go.Margin(0, 0, 0, 0), alignment: go.Spot.Center },
-                    new go.Binding('fill', 'color'),
+                    { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 0) },
                 ),
                 $(
                     go.Picture,
-                    { source: iconSrc, width: 12, height: 12, margin: (0, 0, 0, 1) },
+                    { source: iconSrc, width, height, margin: (0, 0, 0, 1) },
                     new go.Binding('source', 'iconSrc'),
                 ),
             ),
+            toNode({ color }),
         )
     );
 };
 
 export const successNode = circleNode({
     color: COLORS.GREEN,
-    iconSrc: svgComponentToBase64(<Success height={10} fill={COLORS.WHITE} />),
+    iconSrc: svgComponentToBase64(<Success height={10} fill={COLORS.GREEN} />),
+    height: 20,
+    width: 30,
 });
 
 export const failureNode = circleNode({
     color: COLORS.RED,
-    iconSrc: svgComponentToBase64(<Close height={10} width={10} fill={COLORS.WHITE} />),
+    iconSrc: svgComponentToBase64(<Clear height={1} width={1} fill={COLORS.RED} />),
+    height: 20,
+    width: 20,
 });
 
-export const nodeTemplateStart =
-    $(go.Node, 'Auto',
-        {
-            groupable: false,
-            movable: false,
-            selectable: false,
-            deletable: false,
-            toSpot: go.Spot.Left,
-            fromSpot: go.Spot.Right,
-            isAnimated: false,
-        },
-        new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
-
-        $(go.Picture, start, { width: 30, height: 30 }),
-        $(go.Panel, 'Auto',
-            { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, cursor: 'pointer' },
+export const nodeTemplateStart = () => {
+    return (
+        $(go.Node, 'Auto',
+            {
+                groupable: false,
+                movable: false,
+                selectable: false,
+                deletable: false,
+                toSpot: go.Spot.Left,
+                fromSpot: go.Spot.Right,
+                isAnimated: false,
+                fromMaxLinks: 1,
+            },
+            new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
             $(go.Shape, 'Circle',
-                { width: 5, height: 5, fill: '#27AF14', strokeWidth: 0 }),
-        ));
+                { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(65, 65), cursor: 'normal' },
+            ),
+            $(go.Shape, 'Circle',
+                { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 4, 0, 0), cursor: 'normal' },
+            ),
+            $(go.Picture, { source: start, width: 25, height: 25, margin: new go.Margin(0, 3, 0, 0), cursor: 'normal' }),
+            fromNode({ color: COLORS.BLUE }),
+        )
+    );
+};
 
 export const diagramGroupTemplate =
     $(go.Group, go.Panel.Auto,
