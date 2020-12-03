@@ -14,6 +14,11 @@ pipeline {
       yaml uiPipelineShared
     }
   }
+  environment {
+    PATH_TO_PACKAGE_JSON = "packages/branding-themes"
+    PING_TEAM_NAME = "ux"
+    PING_SERVICE_NAME = "branding-themes"
+  }
   stages {
     stage('run-tests') {
       steps {
@@ -74,14 +79,16 @@ pipeline {
     }
     stage('cdn deploy test') {
       agent { label 'test-cdn-deploy' }
+      environment{
+        ENVIRONMENT = "test"
+        CDN_SOURCE = "packages/branding-themes/build/cdn/${env.RELEASE_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+      }
       steps {
-        unstash 'package'
-        dir("${env.WORKSPACE}/packages/branding-themes/build") {
-          container('cdn-deploy') {
-            withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/branding-themes/', file: "cdn/")
-            }
-          }
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
         }
       }
     }
@@ -93,14 +100,16 @@ pipeline {
           yaml ortCdnDeploy
         }
       }
+      environment{
+        ENVIRONMENT = "staging"
+        CDN_SOURCE = "packages/branding-themes/build/cdn/${env.RELEASE_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+      }
       steps {
-        unstash 'package'
-        dir("${env.WORKSPACE}/packages/branding-themes/build") {
-          container('cdn-deploy') {
-            withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/branding-themes/', file: "cdn/")
-            }
-          }
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
         }
       }
     }
@@ -112,14 +121,16 @@ pipeline {
           yaml prodCdnDeploy
         }
       }
+      environment{
+        ENVIRONMENT = "production"
+        CDN_SOURCE = "packages/branding-themes/build/cdn/${env.RELEASE_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+      }
       steps {
-        unstash 'package'
-        dir("${env.WORKSPACE}/packages/branding-themes/build") {
-          container('cdn-deploy') {
-            withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/branding-themes/", file: "cdn/")
-            }
-          }
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
         }
       }
     }
