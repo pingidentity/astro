@@ -113,6 +113,11 @@ export default function useDiagram({
                         renderPortCursor(node);
                     });
                 },
+                'SelectionDeleted': (e) => {
+                    e.diagram.nodes.each((node) => {
+                        renderPortCursor(node);
+                    });
+                },
                 model: $(go.GraphLinksModel,
                     {
                         linkKeyProperty: 'key',
@@ -142,21 +147,27 @@ export default function useDiagram({
         });
 
         diagramObject.linkTemplate =
-            $(go.Link,
-                {
-                    routing: go.Link.AvoidsNodes,
-                    curve: go.Link.JumpOver,
-                    corner: 5,
-                    fromShortLength: 0,
-                    toShortLength: 0,
-                    selectable: false,
-                    layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
-                },
-                new go.Binding('relinkableFrom', 'canRelink').ofModel(),
-                new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                $(go.Shape, { stroke: '#4462ED' }),
-                $(go.Shape, { toArrow: 'Standard', stroke: '#4462ED', fill: '#4462ED', segmentIndex: -Infinity }),
-            );
+                $(go.Link,
+                    {
+                        routing: go.Link.AvoidsNodes,
+                        curve: go.Link.JumpOver,
+                        corner: 5,
+                        fromShortLength: -10,
+                        toShortLength: -10,
+                        selectable: true,
+                        layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
+                        selectionAdorned: false,
+                        fromPortId: 'from',
+                        toPortId: 'to',
+                        layerName: 'Background',
+                    },
+                    new go.Binding('relinkableFrom', 'canRelink').ofModel(),
+                    new go.Binding('relinkableTo', 'canRelink').ofModel(),
+                    $(go.Shape, { stroke: '#4462ED' },
+                        new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
+                    $(go.Shape, { toArrow: 'Standard', stroke: '#4462ED', fill: '#4462ED', segmentIndex: -Infinity },
+                        new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
+                );
 
         return diagramObject;
     };
