@@ -13,6 +13,11 @@ pipeline {
       yaml uiPipelineShared
     }
   }
+  environment {
+    PATH_TO_PACKAGE_JSON = "packages/branding-themes"
+    PING_TEAM_NAME = "ux"
+    PING_SERVICE_NAME = "${params.PACKAGE}"
+  }
   stages {
     stage('yarn install') {
         steps {
@@ -82,14 +87,16 @@ pipeline {
           yaml prodCdnDeploy
         }
       }
+      environment{
+        ENVIRONMENT = "production"
+        CDN_SOURCE = "packages/${params.PACKAGE}/cdn/${env.RELEASE_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+      }
       steps {
-        unstash 'package'
-        dir("${env.WORKSPACE}/packages/${params.PACKAGE}") {
-          container('cdn-deploy') {
-            withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:"ux/${params.PACKAGE}/", file: "cdn/")
-            }
-          }
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
         }
       }
     }
