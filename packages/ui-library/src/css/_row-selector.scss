@@ -354,7 +354,7 @@
             color: $color-neutral-80;
         }
 
-        .selector-row--error {
+        &.selector-row--error {
             background-color: $color-white;
             border-color: $color-critical-red;
             .icon-grip,
