@@ -2,6 +2,7 @@ import * as go from 'gojs';
 import { useEffect, useState } from 'react';
 import { differenceWith } from 'lodash';
 import { v4 as uuidV4 } from 'uuid';
+import { ZoomSlider } from '../../components/ZoomSlider/ZoomSlider';
 
 go.Diagram.licenseKey = '73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741';
 
@@ -78,65 +79,65 @@ export default function useDiagram({
 
     const initDiagram = () => {
         const diagramObject =
-        $(go.Diagram,
+            $(go.Diagram,
 
-            {
-                hoverDelay: 0,
-                'undoManager.isEnabled': true,
-                layout:
-                    $(go.LayeredDigraphLayout,
+                {
+                    hoverDelay: 0,
+                    'undoManager.isEnabled': true,
+                    layout:
+                        $(go.LayeredDigraphLayout,
+                            {
+                                setsPortSpots: true,
+                                columnSpacing: 20,
+                                layerSpacing: 20,
+                                isInitial: true,
+                                isOngoing: true,
+                            }),
+                    'ExternalObjectsDropped': (e) => {
+                        e.subject.each((node) => {
+                            if (node instanceof go.Link) return;
+                            const grid = e.diagram.grid;
+                            // eslint-disable-next-line
+                            node.location =
+                                node
+                                    .location.copy()
+                                    .snapToGridPoint(grid.gridOrigin, grid.gridCellSize);
+                        });
+                    },
+                    'InitialAnimationStarting': (e) => {
+                        e.diagram.nodes.each((node) => {
+                            renderPortCursor(node);
+                        });
+                    },
+                    'LinkDrawn': (e) => {
+                        e.diagram.nodes.each((node) => {
+                            renderPortCursor(node);
+                        });
+                    },
+                    'SelectionDeleted': (e) => {
+                        e.diagram.nodes.each((node) => {
+                            renderPortCursor(node);
+                        });
+                    },
+                    model: $(go.GraphLinksModel,
                         {
-                            setsPortSpots: true,
-                            columnSpacing: 20,
-                            layerSpacing: 20,
-                            isInitial: true,
-                            isOngoing: true,
+                            linkKeyProperty: 'key',
+                            makeUniqueKeyFunction: (m, data) => {
+                                const key = `${data.key}_${uuidV4()}`;
+
+                                // eslint-disable-next-line
+                                data.key = key;
+                                return key;
+                            },
+                            makeUniqueLinkKeyFunction: (m, data) => {
+                                const key = `${data.key}_${uuidV4()}`;
+
+                                // eslint-disable-next-line
+                                data.key = key;
+                                return key;
+                            },
                         }),
-                'ExternalObjectsDropped': (e) => {
-                    e.subject.each((node) => {
-                        if (node instanceof go.Link) return;
-                        const grid = e.diagram.grid;
-                        // eslint-disable-next-line
-                        node.location =
-                            node
-                                .location.copy()
-                                .snapToGridPoint(grid.gridOrigin, grid.gridCellSize);
-                    });
-                },
-                'InitialAnimationStarting': (e) => {
-                    e.diagram.nodes.each((node) => {
-                        renderPortCursor(node);
-                    });
-                },
-                'LinkDrawn': (e) => {
-                    e.diagram.nodes.each((node) => {
-                        renderPortCursor(node);
-                    });
-                },
-                'SelectionDeleted': (e) => {
-                    e.diagram.nodes.each((node) => {
-                        renderPortCursor(node);
-                    });
-                },
-                model: $(go.GraphLinksModel,
-                    {
-                        linkKeyProperty: 'key',
-                        makeUniqueKeyFunction: (m, data) => {
-                            const key = `${data.key}_${uuidV4()}`;
-
-                            // eslint-disable-next-line
-                            data.key = key;
-                            return key;
-                        },
-                        makeUniqueLinkKeyFunction: (m, data) => {
-                            const key = `${data.key}_${uuidV4()}`;
-
-                            // eslint-disable-next-line
-                            data.key = key;
-                            return key;
-                        },
-                    }),
-            });
+                });
         setDiagram(diagramObject);
         nodeTemplates.forEach(([name, template]) => {
             diagramObject.nodeTemplateMap.add(name, template);
@@ -168,6 +169,19 @@ export default function useDiagram({
                     $(go.Shape, { toArrow: 'Standard', stroke: '#4462ED', fill: '#4462ED', segmentIndex: -Infinity },
                         new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
                 );
+
+        diagramObject.div = document.getElementsByClassName('diagram-component')[0];
+
+        /* eslint-disable */ 
+        // assignment necessary for zoom slider to work correctly
+        const zoomSlider = new ZoomSlider(diagramObject,
+            {
+                alignment: go.Spot.TopRight,
+                alignmentFocus: go.Spot.TopRight,
+                size: 150,
+                buttonSize: 30,
+                orientation: 'horizontal',
+            });
 
         return diagramObject;
     };
