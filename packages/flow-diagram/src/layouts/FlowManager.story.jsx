@@ -4,6 +4,8 @@ import { Box, Button, Text } from '@pingux/compass';
 import { css } from '@emotion/core';
 import { mdiTools, mdiFormSelect } from '@mdi/js';
 import Icon from '@mdi/react';
+import partition from 'lodash/partition';
+import { v4 as uuidV4 } from 'uuid';
 
 import {
     diagramGroupTemplate,
@@ -43,44 +45,50 @@ export const Composed = () => {
         setSelectedNode(null);
     };
 
+    const [diagramNodes, setDiagramNodes] = useState([
+        {
+            'key': 'user-login',
+            'category': 'step',
+            'text': 'User login',
+            'stepId': 'userLogin',
+            canLinkFrom: false,
+            getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
+            color: '#028CFF',
+        },
+        {
+            'key': 'step',
+            'category': 'step',
+            'stepId': 'registration',
+            'text': 'Execute Flow',
+            canLinkFrom: false,
+            getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
+            color: '#228C22',
+        },
+        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100 },
+        { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure' },
+        { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user' },
+        { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
+        { 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' }]);
+
+    const [diagramLinks, setDiagramLinks] = useState([
+        { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success' },
+        { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
+        { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure' },
+        { 'from': 'user-login-failure', 'to': 'error', 'key': 'user-login-failure_error' },
+        { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found' },
+        { 'from': 'user-login-not_found', 'to': 'registration', 'key': 'user-login-not_found_registration' },
+        { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
+    ]);
 
     const { diagramProps, diagramObject } = useDiagram({
-        groupTemplates: [['', diagramGroupTemplate]],
-        linkDataArray: [
-            { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success' },
-            { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
-            { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure' },
-            { 'from': 'user-login-failure', 'to': 'error', 'key': 'user-login-failure_error' },
-            { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found' },
-            { 'from': 'user-login-not_found', 'to': 'registration', 'key': 'user-login-not_found_registration' },
-            { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
+        groupTemplates: [
+            ['', diagramGroupTemplate],
+            // Add a template for groups dragged from palette so that they look correct
+            // when dragging.
+            ['palette-group', paletteGroupTemplate()],
         ],
-        nodeDataArray: [
-            {
-                'key': 'user-login',
-                'category': 'step',
-                'name': 'User login',
-                'stepId': 'userLogin',
-                canLinkFrom: false,
-                getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
-                iconSrc: svgComponentToBase64(<Desktop fill={COLORS.WHITE} />),
-                color: '#028CFF',
-            },
-            {
-                'key': 'step',
-                'category': 'step',
-                'stepId': 'registration',
-                'name': 'Execute Flow',
-                canLinkFrom: false,
-                getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
-                iconSrc: svgComponentToBase64(<Walkthrough fill={COLORS.WHITE} />),
-                color: '#228C22',
-            },
-            { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', width: 100, 'text': 'On Success' },
-            { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure' },
-            { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user' },
-            { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
-            { 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' }],
+        linkDataArray: diagramLinks,
+        nodeDataArray: diagramNodes,
         nodeTemplates: [
             // onClick can also be defined per node.
             ['step', stepTemplate({ onClick: onStepClick })],
@@ -89,60 +97,167 @@ export const Composed = () => {
             ['finished', successNode],
             ['error', failureNode],
             ['START', nodeTemplateStart()],
+            // Add a palette item template so that the above node types
+            // look correct while dragging into diagram.
+            ['palette-item', paletteItemTemplate()],
         ],
         onModelChange: ({
             insertedNodeKeys,
+            modifiedNodeData,
+            removedNodeKeys,
             insertedLinkKeys,
             modifiedLinkData,
-            modifiedNodeData,
             removedLinkKeys,
-            removedNodeKeys,
         }) => {
-            console.log('insertedNodeKeys');
+            // onModelChange gets called once at the beginning with every node,
+            // so ignore key adds that involve too many new keys to have come from
+            // the palette.
+            if (insertedNodeKeys?.length > 2) {
+                return;
+            }
+            if (insertedNodeKeys) {
+                // Don't worry about other modified nodes, since these will just be
+                // location changes that GoJS is already tracking.
+                const addedNodes =
+                    modifiedNodeData.filter(node => insertedNodeKeys.includes(node.key));
+
+                let groupKey;
+                setDiagramNodes([
+                    ...diagramNodes,
+                    // Remove placeholder categories from nodes
+                    ...addedNodes.flatMap(({ category, key, loc, ...node }) => {
+                        const replacementKey = uuidV4();
+                        const modifiedNode = {
+                            ...node,
+                            // Remove palette categories so that nodes display correctly in diagram.
+                            category: category === 'palette-group' ? '' : 'step',
+                            key: replacementKey,
+                        };
+                        if (node.isGroup) {
+                            groupKey = replacementKey;
+                            return [
+                                modifiedNode,
+                                ...key === 'login-group' ? [{
+                                    'key': `${replacementKey}-success`,
+                                    group: replacementKey,
+                                    'category': 'outlet',
+                                    color: '#D5DCF3',
+                                    'text': 'On Success',
+                                }] : [],
+                            ];
+                        } else if (node.group) {
+                            return {
+                                ...modifiedNode,
+                                key: `${groupKey}-step`,
+                                group: groupKey,
+                            };
+                        }
+
+                        return modifiedNode;
+                    }),
+                ]);
+
+                // Add a link between
+                if (groupKey) {
+                    setDiagramLinks([
+                        ...diagramLinks,
+                        {
+                            'from': `${groupKey}-step`,
+                            'to': `${groupKey}-success`,
+                            'key': `${groupKey}-step-success-link`,
+                            canRelink: false,
+                        },
+                    ]);
+                }
+            }
+
+            if (insertedLinkKeys) {
+                setDiagramLinks([
+                    ...diagramLinks,
+                    ...modifiedLinkData.filter(link => insertedLinkKeys.includes(link.key)),
+                ]);
+            }
+            if (removedNodeKeys) {
+                setDiagramNodes(diagramNodes.filter(node => !removedNodeKeys.includes(node.key)));
+            }
+            if (removedLinkKeys) {
+                setDiagramLinks(diagramLinks.filter(link => !removedLinkKeys.includes(link.key)));
+            }
         },
     });
 
     const { paletteProps, paletteObject } = usePalette({
         groupTemplates: [
-            ['', paletteGroupTemplate],
+            ['', paletteGroupTemplate()],
         ],
         nodeTemplates: [
             ['', paletteItemTemplate()],
         ],
         nodeDataArray: [
             {
-                'key': 'LOGIN',
-                'category': 'step',
-                'text': 'Login',
+                isGroup: true,
+                'key': 'login-group',
+                'category': 'palette-group',
+                'text': 'User Login',
                 getIconSrc: (color = '#028CFF') => svgComponentToBase64(<Desktop fill={color} />),
                 color: '#028CFF',
                 stepId: 'newLogin',
                 name: 'User Login',
             },
             {
-                'key': 'EXECUTE_FLOW',
+                group: 'login-group',
+                'key': 'login',
+                'category': 'step',
+                'text': 'User Login',
+                getIconSrc: (color = '#028CFF') => svgComponentToBase64(<Desktop fill={color} />),
+                color: '#028CFF',
+                stepId: 'newLogin',
+                name: 'User Login',
+            },
+            {
+                'key': 'execute-flow-group',
+                'category': 'palette-group',
+                isGroup: true,
+                'text': 'Execute Flow',
+                getIconSrc: (color = '#228C22') => svgComponentToBase64(<Walkthrough fill={color} />),
+                color: '#228C22',
+                stepId: 'newLogin',
+            },
+            {
+                'key': 'execute-flow',
+                group: 'execute-flow-group',
                 'category': 'step',
                 'text': 'Execute Flow',
                 getIconSrc: (color = '#228C22') => svgComponentToBase64(<Walkthrough fill={color} />),
                 color: '#228C22',
                 stepId: 'newLogin',
-                name: 'Execute Flow',
             },
             {
                 'key': 'finished',
-                'category': 'finished',
+                'category': 'palette-item',
                 'text': 'Complete',
                 getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'error',
-                'category': 'error',
+                'category': 'palette-item',
                 'text': 'Failure',
                 getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
             },
         ],
         linkDataArray: [],
     });
+
+    // The diagram object is populated after the initial render, so check to see if it's defined
+    // before adding listeners.
+    if (diagramObject) {
+        diagramObject.addDiagramListener('ChangedSelection', (e) => {
+            // If a node is deselected in diagram, clear selected node.
+            if (e.diagram.selection.count === 0) {
+                setSelectedNode(null);
+            }
+        });
+    }
 
     return (
         <OuterContainer>
