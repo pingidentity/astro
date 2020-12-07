@@ -49,6 +49,7 @@
     "@testing-library/react-hooks": "^3.4.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-node-env-inline": "^0.4.3",
+    "faker":"5.1.0",
     "jest-emotion": "^10.0.32",
     "mutationobserver-shim": "^0.3.7",
     "react": "^16.8.6",
