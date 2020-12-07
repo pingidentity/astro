@@ -8,3 +8,12 @@ export const select = {
     boxShadow: 'focus',
   },
 };
+
+select.transparent = {
+  'select': {
+    bg: 'transparent',
+  },
+  '> div:after': {
+    bg: 'transparent',
+  },
+};
