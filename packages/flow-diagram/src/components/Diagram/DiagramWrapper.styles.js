@@ -2,6 +2,7 @@ import { css } from '@emotion/core';
 
 export const diagramWrapper = css`
     width: 100%;
+        position: relative;
 
     .diagram-component {
         flex: 1 1 auto;
