@@ -174,7 +174,7 @@ export const stepTemplate = ({ color = COLORS.BLACK, iconSrc, onClick = () => {}
                 new go.Binding('stroke', 'isSelected', (condition, node) => {
                     if (condition) {
                         return COLORS.BLUE;
-                    } else if (node.part.kb.errorMessage?.length > 0) {
+                    } else if (node.part.data.errorMessage) {
                         return COLORS.ERROR;
                     }
                     return 'transparent';

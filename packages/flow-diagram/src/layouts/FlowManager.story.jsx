@@ -4,7 +4,6 @@ import { Box, Button, Text } from '@pingux/compass';
 import { css } from '@emotion/core';
 import { mdiTools, mdiFormSelect } from '@mdi/js';
 import Icon from '@mdi/react';
-import partition from 'lodash/partition';
 import { v4 as uuidV4 } from 'uuid';
 
 import {
@@ -63,6 +62,7 @@ export const Composed = () => {
             canLinkFrom: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#228C22',
+            errorMessage: 'Some data is invalid here',
         },
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100 },
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure' },
