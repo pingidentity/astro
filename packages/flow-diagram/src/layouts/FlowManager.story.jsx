@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Box, Button, Text } from '@pingux/compass';
 import { css } from '@emotion/core';
-import { mdiTools, mdiFormSelect } from '@mdi/js';
+import { mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
 import Icon from '@mdi/react';
 
 import {
+    branchNode,
     diagramGroupTemplate,
     failureNode,
     nodeTemplateStart,
@@ -88,6 +89,7 @@ export const Composed = () => {
             ['outlet', outletTemplate({ width: 100 })],
             ['finished', successNode],
             ['error', failureNode],
+            ['branch', branchNode],
             ['START', nodeTemplateStart()],
         ],
         onModelChange: ({
@@ -139,6 +141,12 @@ export const Composed = () => {
                 'category': 'error',
                 'text': 'Failure',
                 getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
+            },
+            {
+                'key': 'branch',
+                'category': 'branch',
+                'text': 'Branch',
+                getIconSrc: (color = COLORS.ORANGE) => svgComponentToBase64(<Icon path={mdiSourceBranch} color={color} width="20px" height="20px" />),
             },
         ],
         linkDataArray: [],

@@ -2,7 +2,8 @@ import React from 'react';
 import * as go from 'gojs';
 import { Success, Clear, Error, Grip, Desktop } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
-import start from '../img/start.svg';
+import Icon from '@mdi/react';
+import { mdiSourceBranch, mdiFlag } from '@mdi/js';
 import { COLORS } from './constants';
 
 function encodeSvg(svgString) {
@@ -276,6 +277,18 @@ export const failureNode = circleNode({
     width: 20,
 });
 
+export const branchNode = circleNode({
+    color: COLORS.ORANGE,
+    iconSrc: (svgComponentToBase64(<Icon
+        path={mdiSourceBranch}
+        height="20px"
+        width="20px"
+        color={COLORS.ORANGE}
+    />)),
+    height: 25,
+    width: 25,
+});
+
 export const nodeTemplateStart = () => {
     return (
         $(go.Node, 'Auto',
@@ -296,7 +309,7 @@ export const nodeTemplateStart = () => {
             $(go.Shape, 'Circle',
                 { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 4, 0, 0), cursor: 'normal' },
             ),
-            $(go.Picture, { source: start, width: 25, height: 25, margin: new go.Margin(0, 3, 0, 0), cursor: 'normal' }),
+            $(go.Picture, { source: svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />), width: 25, height: 25, margin: new go.Margin(0, 3, 0, 0), cursor: 'normal' }),
             fromNode({ color: COLORS.BLUE }),
         )
     );
