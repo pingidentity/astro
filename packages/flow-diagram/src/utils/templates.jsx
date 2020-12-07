@@ -154,7 +154,7 @@ export const stepTemplate = ({ color = COLORS.BLACK, iconSrc, onClick = () => {}
                             stroke: '#253746', font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false,
 
                         },
-                        new go.Binding('text', 'name').makeTwoWay()),
+                        new go.Binding('text').makeTwoWay()),
                     $(go.TextBlock,
                         {
                             stroke: '#68747F', font: 'normal normal normal 12px Helvetica', alignment: go.Spot.Left, editable: false,
@@ -216,6 +216,42 @@ export const paletteItemTemplate = ({ iconSrc } = {}) => $(go.Node, 'Spot',
         ),
     ),
 );
+
+export const paletteGroupTemplate = ({ iconSrc } = {}) =>
+    $(go.Group,
+        {
+            isSubGraphExpanded: false,
+            ungroupable: true,
+            selectionAdorned: false,
+        },
+        new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
+        $(go.Panel, 'Auto',
+            { name: 'BODY' },
+            $(
+                go.Shape, 'RoundedRectangle',
+                { fill: COLORS.WHITE, stroke: '#98A0A8', desiredSize: new go.Size(250, 35), parameter1: 1 },
+            ),
+            $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+                $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+                    $(go.Picture, { source: svgComponentToBase64(React.cloneElement(<Grip />, { fill: '#98A0A8' })), width: 15, height: 15, margin: new go.Margin(0, 7, 0, 5) }),
+                    $(
+                        go.Picture,
+                        { source: iconSrc, width: 18, height: 18 },
+                        // Don't pass a color to getSrc so that the user uses their own.
+                        new go.Binding('source', 'getIconSrc', getSrc => getSrc()),
+                    ),
+                ),
+                $(go.TextBlock,
+                    {
+                        stroke: '#253746',
+                        font: 'normal normal normal 14px Helvetica',
+                        margin: new go.Margin(0, 0, 0, 13),
+                        alignment: go.Spot.Left,
+                    },
+                    new go.Binding('text').makeTwoWay()),
+            ),
+        ),
+    );
 
 export const outletTemplate = ({ color = COLORS.BLACK, width = 100 } = {}) => $(go.Node, 'Spot',
     { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', deletable: false },
@@ -321,37 +357,3 @@ export const diagramGroupTemplate =
         $(go.Shape, 'Rectangle',
             { fill: 'transparent', strokeWidth: 0 },
         ));
-
-
-export const paletteGroupTemplate =
-    $(go.Group,
-        {
-            isSubGraphExpanded: false,
-            ungroupable: true,
-            selectionAdorned: false,
-        },
-        $(go.Panel, 'Auto',
-            { name: 'BODY' },
-            $(go.Shape, 'Rectangle',
-                { fill: COLORS.WHITE, stroke: COLORS.GRAY, minSize: new go.Size(280, 0) }),
-            $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
-                $(go.Panel, 'Auto',
-                    $(go.Shape, 'RoundedRectangle',
-                        { fill: '#028CFF', desiredSize: new go.Size(70, 55), strokeWidth: 0 }),
-                    $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
-                        $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(<Grip />, { fill: COLORS.WHITE })))}`, width: 20, height: 20, margin: new go.Margin(0, 7, 0, 0) }),
-                        $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(React.cloneElement(<Desktop />, { fill: COLORS.WHITE })))}`, width: 20, height: 20 }),
-                    ),
-                ),
-                $(go.TextBlock,
-                    {
-                        stroke: '#9DA2A8',
-                        font: 'bold 12px sans-serif',
-                        editable: true,
-                        margin: 20,
-                        alignment: go.Spot.Left,
-                    },
-                    new go.Binding('text').makeTwoWay()),
-            ),
-        ),
-    );
