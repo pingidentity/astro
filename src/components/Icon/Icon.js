@@ -22,7 +22,12 @@ const Icon = forwardRef((props, ref) => {
   } = props;
 
   return (
-    <Box as={IconComponent} ref={ref} {...props} sx={{ fill: color, size, ...sx }} />
+    <Box
+      as={IconComponent}
+      ref={ref}
+      {...props}
+      sx={{ fill: color, size, minWidth: size, ...sx }}
+    />
   );
 });
 

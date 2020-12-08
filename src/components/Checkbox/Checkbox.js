@@ -11,6 +11,7 @@ import { Checkbox as RCheckbox } from '@rebass/forms';
 const Checkbox = forwardRef((props, ref) => (
   <RCheckbox
     ref={ref}
+    __css={{ top: 0, left: 0 }}
     {...props}
   />
 ));
