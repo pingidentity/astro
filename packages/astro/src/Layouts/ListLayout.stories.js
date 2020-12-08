@@ -44,15 +44,15 @@ export const Default = () => {
 
   const exampleListItemContent = (
     <ListItem onClick={() => (!visible ? setVisible(!visible) : '')} flexGrow={1}>
-      <Box isRow mr="auto" >
-        <Icon icon={FormSelectIcon} alignSelf="center" mr="sm" color="text.primary" size={25} />
-        <Text variant="itemTitle" alignSelf="center">Form Name</Text>
+      <Box isRow mr="auto" flexBasis="0px" flexGrow="1">
+        <Icon icon={FormSelectIcon} alignSelf="center" mr="sm" color="text.primary" size={25} flexShrink={0} />
+        <Text variant="itemTitle" alignSelf="center" mr="sm">Form Name</Text>
       </Box>
       <Box isRow alignSelf="center">
-        <Button variant="icon" onClick={() => (!visible ? setVisible(!visible) : '')}>
+        <Button variant="icon" onClick={() => (!visible ? setVisible(!visible) : '')} flexShrink={0} >
           <Icon icon={EditIcon} size={20} />
         </Button>
-        <Button variant="icon" onClick={() => (!visible ? setVisible(!visible) : '')}>
+        <Button variant="icon" onClick={() => (!visible ? setVisible(!visible) : '')} flexShrink={0} >
           <Icon icon={DotsVerticalIcon} size={20} />
         </Button>
       </Box>
@@ -61,7 +61,7 @@ export const Default = () => {
 
   return (
     <Box isRow bg="accent.99" >
-      <Box flexGrow={1}>
+      <Box flexGrow={1} maxWidth="100%">
         <PageHeader title="Forms" p="md">
           <Button mb="sm">
             <Box isRow alignItems="center">

@@ -1,7 +1,8 @@
 import React from 'react';
-import Box from '../Box/Box';
+import Box from '../Box';
 import Button from '.';
 import Icon from '../Icon';
+import Text from '../Text';
 
 export default {
   title: 'Button',
@@ -44,5 +45,11 @@ export const TextIconButton = () => (
       <Icon icon={PlusIcon} mr="sm" color="active" size={20} />
       Add a Form
     </Box>
+  </Button>
+);
+
+export const TextButton = () => (
+  <Button mb="sm" variant="text">
+    <Text variant="label" color="active"> + Add Option</Text>
   </Button>
 );
