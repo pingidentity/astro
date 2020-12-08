@@ -77,17 +77,13 @@ export const buttons = {
     border: '1px solid',
     borderColor: 'transparent',
     color: 'active',
+    height: 'auto',
+    padding: '0',
     '&.is-hovered': {
-      bg: 'accent.95',
-      border: '1px solid',
-      borderColor: 'accent.95',
-      color: 'accent.40',
+      textDecoration: 'underline',
     },
-    '&.is-pressed': {
-      bg: 'active',
-      border: '1px solid',
-      borderColor: 'active',
-      color: 'white',
+    '&.is-focused': {
+      ...defaultFocus,
     },
   },
   success: {
@@ -145,6 +141,9 @@ export const buttons = {
     },
     '&.is-pressed': {
       ...defaultActive,
+    },
+    '&.is-focused': {
+      ...defaultFocus,
     },
   },
 };
