@@ -186,6 +186,8 @@ export const stepTemplate = ({ color = COLORS.BLACK, iconSrc, onClick = () => {}
     ),
 );
 
+const isDraggingItem = node => node.part.layerName === 'Tool';
+
 export const paletteItemTemplate = ({ iconSrc } = {}) => $(go.Node, 'Spot',
     { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
@@ -194,8 +196,21 @@ export const paletteItemTemplate = ({ iconSrc } = {}) => $(go.Node, 'Spot',
         $(
             go.Shape, 'RoundedRectangle',
             { fill: COLORS.WHITE, stroke: '#98A0A8', desiredSize: new go.Size(250, 35), parameter1: 1 },
+            new go.Binding('fill', 'isBeingDragged', (isBeingDragged, node) => {
+                if (isDraggingItem(node) || !isBeingDragged) {
+                    return COLORS.WHITE;
+                }
+                return '#E5E9F8';
+            }),
+            new go.Binding('stroke', 'isBeingDragged', (isBeingDragged, node) => {
+                if (isDraggingItem(node) || !isBeingDragged) {
+                    return '#98A0A8';
+                }
+                return '#E5E9F8';
+            }),
         ),
-        $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+        $(go.Panel, 'Horizontal', { alignment: go.Spot.Left, visible: true },
+            new go.Binding('visible', 'isBeingDragged', (isBeingDragged, node) => !isBeingDragged || isDraggingItem(node)),
             $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                 $(go.Picture, { source: svgComponentToBase64(React.cloneElement(<Grip />, { fill: '#98A0A8' })), width: 15, height: 15, margin: new go.Margin(0, 7, 0, 5) }),
                 $(
@@ -230,8 +245,21 @@ export const paletteGroupTemplate = ({ iconSrc } = {}) =>
             $(
                 go.Shape, 'RoundedRectangle',
                 { fill: COLORS.WHITE, stroke: '#98A0A8', desiredSize: new go.Size(250, 35), parameter1: 1 },
+                new go.Binding('fill', 'isBeingDragged', (isBeingDragged, node) => {
+                    if (isDraggingItem(node) || !isBeingDragged) {
+                        return COLORS.WHITE;
+                    }
+                    return '#E5E9F8';
+                }),
+                new go.Binding('stroke', 'isBeingDragged', (isBeingDragged, node) => {
+                    if (isDraggingItem(node) || !isBeingDragged) {
+                        return '#98A0A8';
+                    }
+                    return '#E5E9F8';
+                }),
             ),
-            $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
+            $(go.Panel, 'Horizontal', { alignment: go.Spot.Left, visible: true },
+                new go.Binding('visible', 'isBeingDragged', (isBeingDragged, node) => !isBeingDragged || isDraggingItem(node)),
                 $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                     $(go.Picture, { source: svgComponentToBase64(React.cloneElement(<Grip />, { fill: '#98A0A8' })), width: 15, height: 15, margin: new go.Margin(0, 7, 0, 5) }),
                     $(

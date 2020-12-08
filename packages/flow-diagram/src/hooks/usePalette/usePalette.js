@@ -48,6 +48,19 @@ export default function usePalette({
             paletteObject.groupTemplateMap.add(name, template);
         });
 
+        // Set a data property on palette items so that we can know when they're being dragged.
+        paletteObject.toolManager.draggingTool.doStart = () => {
+            const draggable = paletteObject.toolManager.draggingTool.findDraggablePart();
+            const nodeData = paletteObject.model.findNodeDataForKey(draggable.data.key);
+            paletteObject.model.setDataProperty(nodeData, 'isBeingDragged', true);
+        };
+
+        paletteObject.toolManager.draggingTool.doStop = () => {
+            const draggable = paletteObject.toolManager.draggingTool.findDraggablePart();
+            const nodeData = paletteObject.model.findNodeDataForKey(draggable.data.key);
+            paletteObject.model.setDataProperty(nodeData, 'isBeingDragged', false);
+        };
+
         return paletteObject;
     };
 
