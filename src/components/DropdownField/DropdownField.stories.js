@@ -15,6 +15,21 @@ export const Default = args => (
   </DropdownField>
 );
 
+export const withOptionGroups = args => (
+  <DropdownField {...args} label="Select one">
+    <optgroup label="Cheeses">
+      <option>Brie</option>
+      <option>Gouda</option>
+      <option>Swiss</option>
+    </optgroup>
+    <optgroup label="Breads">
+      <option>Sourdough</option>
+      <option>Rye</option>
+      <option>Focaccia</option>
+    </optgroup>
+  </DropdownField>
+);
+
 export const NoneOption = args => (
   <DropdownField {...args} label="Select one" controlProps={{ hasNoneOption: true }} >
     <option>Option 1</option>
