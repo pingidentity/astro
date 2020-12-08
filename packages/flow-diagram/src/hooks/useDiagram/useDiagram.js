@@ -59,6 +59,9 @@ export default function useDiagram({
             removeNodes(diagram, nodeDataArray);
             addLinks(diagram, linkDataArray);
             removeLinks(diagram, linkDataArray);
+            // Since we're setting skipsDiagramUpdate to true, this is necessary
+            // to have existing diagram nodes update.
+            diagram.model.mergeNodeDataArray(nodeDataArray);
         }
     }, [nodeDataArray, linkDataArray]);
 
@@ -172,7 +175,7 @@ export default function useDiagram({
 
         diagramObject.div = document.getElementsByClassName('diagram-component')[0];
 
-        /* eslint-disable */ 
+        /* eslint-disable */
         // assignment necessary for zoom slider to work correctly
         const zoomSlider = new ZoomSlider(diagramObject,
             {

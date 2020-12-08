@@ -172,10 +172,12 @@ export const stepTemplate = ({ color = COLORS.BLACK, iconSrc, onClick = () => {}
                     parameter1: 2,
                     strokeWidth: 1,
                 },
-                new go.Binding('stroke', 'isSelected', (condition, node) => {
-                    if (condition) {
+                // Have to bind this to the empty string so that it runs this check on every update,
+                // not just when isSelected changes or just when errorMessage changes.
+                new go.Binding('stroke', '', ({ data }) => {
+                    if (data.isSelected) {
                         return COLORS.BLUE;
-                    } else if (node.part.data.errorMessage) {
+                    } else if (data.errorMessage) {
                         return COLORS.ERROR;
                     }
                     return 'transparent';

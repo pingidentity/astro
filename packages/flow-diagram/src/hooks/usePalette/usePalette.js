@@ -58,7 +58,7 @@ export default function usePalette({
             initPalette,
             // This is a temporary band-aid; the step template has issues handling an
             // undefined errorMessage.
-            nodeDataArray: nodeDataArray.map(({ errorMessage = '', ...rest }) => ({ errorMessage, ...rest })),
+            nodeDataArray,
             linkDataArray,
         },
     });
