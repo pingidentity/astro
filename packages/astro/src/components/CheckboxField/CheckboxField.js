@@ -49,7 +49,7 @@ const CheckboxField = forwardRef((props, ref) => {
       hasWrappedLabel
       label={children}
       labelProps={{
-        variant: 'checkboxLabel',
+        variant: 'forms.label.checkbox',
         ...labelProps,
       }}
       controlProps={{

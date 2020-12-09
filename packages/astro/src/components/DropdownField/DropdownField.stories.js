@@ -31,7 +31,7 @@ export const withOptionGroups = args => (
 );
 
 export const NoneOption = args => (
-  <DropdownField {...args} label="Select one" controlProps={{ hasNoneOption: true }} >
+  <DropdownField {...args} label="Select one" controlProps={{ hasNoneOption: true }}>
     <option>Option 1</option>
     <option>Option 2</option>
     <option>Option 3</option>
@@ -39,7 +39,20 @@ export const NoneOption = args => (
 );
 
 export const IsDisabled = args => (
-  <DropdownField {...args} label="Select one" isDisabled >
+  <DropdownField {...args} label="Select one" isDisabled>
+    <option>Option 1</option>
+    <option>Option 2</option>
+    <option>Option 3</option>
+  </DropdownField>
+);
+
+export const HelperText = args => (
+  <DropdownField
+    label="Select one"
+    helperText="Here is some helpful text..."
+    status="error"
+    {...args}
+  >
     <option>Option 1</option>
     <option>Option 2</option>
     <option>Option 3</option>

@@ -12,3 +12,11 @@ export const Default = args => (
     label="Example label"
   />
 );
+
+export const HelperText = () => (
+  <TextAreaField
+    helperText="Here is some helpful text..."
+    label="Example Label"
+    status="error"
+  />
+);

@@ -1,6 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import statuses from '../../utils/devUtils/constants/statuses';
 import RadioGroup from '.';
 import RadioField from '../RadioField';
 
@@ -96,4 +98,18 @@ test('read only radio group', () => {
   getComponent({ isReadOnly: true });
   const group = screen.getByRole('radiogroup');
   expect(group).toHaveAttribute('aria-readonly', 'true');
+});
+
+test('required radio group', () => {
+  getComponent({ isRequired: true });
+  const group = screen.getByRole('radiogroup');
+  expect(group).toBeRequired();
+});
+
+test('radio group with helper text', () => {
+  const helperText = 'some text';
+  getComponent({ helperText, status: statuses.ERROR });
+  const fieldHelperText = screen.getByText(helperText);
+  expect(fieldHelperText).toBeInTheDocument();
+  expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
 });
