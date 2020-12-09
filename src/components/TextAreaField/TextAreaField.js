@@ -18,7 +18,7 @@ const TextAreaField = forwardRef((props, ref) => {
     <Field
       ref={textAreaRef}
       render={renderProps => (
-        <Box variant="boxes.inputContainer">
+        <Box variant="forms.input.container" className={renderProps.className}>
           <TextArea {...renderProps} />
         </Box>
       )}

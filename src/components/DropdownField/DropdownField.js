@@ -11,7 +11,7 @@ const DropdownField = forwardRef((props, ref) => {
     <Field
       ref={ref}
       render={renderProps => (
-        <Box variant="boxes.inputContainer">
+        <Box variant="forms.input.container" className={renderProps.className}>
           <Dropdown {...renderProps}>
             {children}
           </Dropdown>

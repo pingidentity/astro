@@ -2,28 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text as RText } from 'rebass';
 
+import { textVariants } from '../../utils/devUtils/constants/variants';
+
 const Text = React.forwardRef((props, ref) => (
   <RText variant="base" {...props} ref={ref} />
 ));
 
 Text.propTypes = {
-  variant: PropTypes.oneOf([
-    'title',
-    'sectionTitle',
-    'itemTitle',
-    'subtitle',
-    'bodyStrong',
-    'bodyWeak',
-    'label',
-    'capsLabel',
-    'base',
-    'tabLabel',
-  ]),
+  variant: PropTypes.oneOf(Object.values(textVariants)),
 };
 
 
 Text.defaultProps = {
-  variant: 'base',
+  variant: textVariants.BASE,
 };
 
 Text.displayName = 'Text';

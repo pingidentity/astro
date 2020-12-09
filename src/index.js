@@ -17,6 +17,8 @@ export { default as DropdownField } from './components/DropdownField';
 export * from './components/DropdownField';
 export { default as Field } from './components/Field';
 export * from './components/Field';
+export { default as FieldHelperText } from './components/FieldHelperText';
+export * from './components/FieldHelperText';
 export { default as Icon } from './components/Icon';
 export * from './components/Icon';
 export { default as Image } from './components/Image';

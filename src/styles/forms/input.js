@@ -1,4 +1,5 @@
 import { text } from '../variants/text';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 // Styles for default input and variants go here.
 
@@ -33,8 +34,42 @@ export const input = {
 };
 
 // Example variant input
-export const largeInput = {
+input.large = {
   ...input,
   lineHeight: '2em',
   height: '4em',
+};
+
+// Used to give a blue left border to inputs
+input.container = {
+  position: 'relative',
+  '&:after': {
+    borderRadius: 5,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    content: '""',
+    position: 'absolute',
+    bg: 'active',
+    width: 3,
+    top: 0,
+    left: 0,
+    bottom: 0,
+  },
+  '&.is-disabled': {
+    // Override global opacity for disabled items because the children will handle their own opacity
+    // and it will otherwise stack the opacity effect.
+    opacity: 1,
+    '&:after': {
+      opacity: 0.5,
+    },
+  },
+  [`&.is-${statuses.ERROR}::after`]: {
+    bg: 'critical.bright',
+  },
+  [`&.is-${statuses.SUCCESS}::after`]: {
+    bg: 'success.bright',
+  },
+  [`&.is-${statuses.WARNING}::after`]: {
+    bg: 'warning.bright',
+  },
 };

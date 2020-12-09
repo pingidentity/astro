@@ -3,21 +3,28 @@ import { text } from '../variants/text';
 
 // Default label
 export const label = {
+  ...text.label,
   display: 'block',
   mb: 'xs',
   alignItems: 'center',
-  ...text.label,
 };
 
-export const radioLabel = {
+// Variants below
+
+label.indicator = {
+  color: 'red',
+  ml: 5,
+};
+
+label.radio = {
+  ...text.base,
   cursor: 'pointer',
   alignItems: 'center',
   mb: 'xs',
-  ...text.base,
 };
 
 // NOTE: Rebass label adds 'flex' after other styles, so we have to use !important to override it
-export const checkboxLabel = {
+label.checkbox = {
   ...text.base,
   display: 'inline-flex !important',
   width: 'auto',
