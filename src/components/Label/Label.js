@@ -1,31 +1,61 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Label as RLabel } from '@rebass/forms';
-import { getDisabledStyles } from '../../utils/styleUtils';
 
+import useStatusClasses from '../../hooks/useStatusClasses';
+import Box from '../Box';
+
+const defaultIndicator = (
+  <Box variant="forms.label.indicator">
+    *
+  </Box>
+);
+
+/**
+ * Basic label for an input.
+ * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
+ * Built on top of the [Label from Rebass.js](https://rebassjs.org/forms/label).
+ */
 const Label = forwardRef((props, ref) => {
   const {
+    children,
+    className,
     isDisabled,
-    sx, // eslint-disable-line
+    isRequired,
+    requiredIndicator,
+    ...others
   } = props;
+  const { classNames } = useStatusClasses(className, {
+    isDisabled,
+    isRequired,
+  });
 
   return (
     <RLabel
       ref={ref}
-      {...props}
-      sx={{
-        ...getDisabledStyles(isDisabled),
-        ...sx,
-      }}
-    />
+      className={classNames}
+      {...others}
+    >
+      {children}
+      {
+        isRequired
+        && requiredIndicator
+      }
+    </RLabel>
   );
 });
 
 Label.propTypes = {
   /** Whether the label has disabled styling applied. */
   isDisabled: PropTypes.bool,
+  /** Whether the label has required indicator styling applied. */
+  isRequired: PropTypes.bool,
+  requiredIndicator: PropTypes.node,
+};
+
+Label.defaultProps = {
+  requiredIndicator: defaultIndicator,
 };
 
 Label.displayName = 'Label';
-
 export default Label;

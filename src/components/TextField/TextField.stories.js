@@ -1,5 +1,5 @@
-import React from 'react';
-import TextField from '.';
+import React, { useState } from 'react';
+import TextField, { isEmpty } from '.';
 
 export default {
   title: 'TextField',
@@ -8,14 +8,47 @@ export default {
 
 export const Default = () => (
   <TextField
-    label="Hi, this is a label"
+    label="Example Label"
   />
 );
 
 export const Password = () => (
   <TextField
-    label="Hi, this is a label"
+    label="Example Label"
     labelProps={{ color: 'red' }}
     controlProps={{ type: 'password' }}
+  />
+);
+
+export const Required = () => (
+  <TextField
+    isRequired
+    label="Example Label"
+  />
+);
+
+export const DynamicRequired = () => {
+  const [value, setValue] = useState('');
+  return (
+    <TextField
+      isRequired={isEmpty(value)}
+      label="Example Label"
+      controlProps={{ onChange: e => setValue(e.target.value) }}
+    />
+  );
+};
+
+export const Disabled = () => (
+  <TextField
+    isDisabled
+    label="Example Label"
+  />
+);
+
+export const HelperText = () => (
+  <TextField
+    helperText="Here is some helpful text..."
+    label="Example Label"
+    status="error"
   />
 );
