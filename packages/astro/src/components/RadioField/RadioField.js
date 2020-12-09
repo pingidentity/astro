@@ -50,7 +50,10 @@ const RadioField = forwardRef((props, ref) => {
       ref={radioFieldRef}
       className={classNames}
       isDisabled={isDisabled}
-      labelProps={labelProps}
+      labelProps={{
+        variant: 'forms.label.radio',
+        ...labelProps,
+      }}
       hasWrappedLabel
       label={children}
       controlProps={{
@@ -122,9 +125,7 @@ RadioField.propTypes = {
 
 RadioField.defaultProps = {
   controlProps: {},
-  labelProps: {
-    'variant': 'radioLabel', // Key is in quotes for Storybook Controls
-  },
+  labelProps: {},
 };
 
 RadioField.displayName = 'RadioField';

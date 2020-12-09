@@ -15,5 +15,5 @@ export const Password = args => (
 );
 
 export const LargeInput = args => (
-  <Input variant="largeInput" placeholder="This is a large input" {...args} />
+  <Input variant="forms.input.large" placeholder="This is a large input" {...args} />
 );

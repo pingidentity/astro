@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import Field from '.';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const testId = 'test-field';
 const testLabel = 'Test Label';
@@ -73,4 +74,29 @@ test('field with isDisabled prop disables input and applies disabled styling to 
   expect(input).toBeDisabled();
   const label = screen.getByText(testLabel);
   expect(label).toHaveStyle('opacity: 0.5');
+});
+
+test('field with wrapped label and helper text', () => {
+  const helperText = 'example test';
+  getComponent({ hasWrappedLabel: true, helperText, status: statuses.ERROR });
+  const fieldHelperText = screen.getByText(helperText);
+  expect(fieldHelperText).toBeInTheDocument();
+  expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
+});
+
+test('field with helper text', () => {
+  const helperText = 'example test';
+  getComponent({ helperText, status: statuses.ERROR });
+  const fieldHelperText = screen.getByText(helperText);
+  expect(fieldHelperText).toBeInTheDocument();
+  expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
+});
+
+test('required field', () => {
+  getComponent({ isRequired: true });
+  const label = screen.getByText(testLabel);
+  const control = screen.getByLabelText(testLabel, { exact: false });
+
+  expect(control).toBeRequired();
+  expect(label).toHaveTextContent('*');
 });

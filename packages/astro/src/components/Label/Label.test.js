@@ -16,6 +16,20 @@ test('default label', () => {
   expect(label).toBeInTheDocument();
 });
 
+test('required label', () => {
+  getComponent({ isRequired: true });
+  const label = screen.getByTestId(testId);
+  expect(label).toHaveTextContent('*');
+});
+
+test('required label with custom indicator', () => {
+  const requiredIndicator = '>Required<';
+  getComponent({ isRequired: true, requiredIndicator });
+  const label = screen.getByTestId(testId);
+  expect(label).not.toHaveTextContent('*');
+  expect(label).toHaveTextContent(requiredIndicator);
+});
+
 test('label with an input', () => {
   const labelText = 'This is a label';
   const inputId = 'blah';
