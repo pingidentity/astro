@@ -104,7 +104,7 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
 });
 
 export const stepTemplate = ({ color = COLORS.BLACK, iconSrc, onClick = () => {} } = {}) => $(go.Node, 'Spot',
-    { click: onClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', isShadowed: true, shadowColor: 'rgb(211, 211, 211, .75)', shadowOffset: new go.Point(0, 1), shadowBlur: 10 },
+    { click: onClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', isShadowed: true, shadowColor: 'rgb(211, 211, 211, .75)', shadowOffset: new go.Point(0, 1), shadowBlur: 10, },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     new go.Binding('click', 'onClick'),
     $(go.Panel, 'Auto',
@@ -283,10 +283,10 @@ export const paletteGroupTemplate = ({ iconSrc } = {}) =>
     );
 
 export const outletTemplate = ({ color = COLORS.BLACK, width = 100 } = {}) => $(go.Node, 'Spot',
-    { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', deletable: false },
+    { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', deletable: false, movable: false, selectable: false },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     $(go.Panel, 'Auto',
-        { name: 'BODY' },
+        { name: 'BODY', cursor: 'normal' },
         $(go.Shape, 'RoundedRectangle',
             { fill: color, width, height: 24, strokeWidth: 1, stroke: '#98A0A8', parameter1: 2 },
             new go.Binding('fill', 'color'),
@@ -383,8 +383,11 @@ export const diagramGroupTemplate =
     $(go.Group, go.Panel.Auto,
         {
             isSubGraphExpanded: true,
-            ungroupable: true,
+            ungroupable: false,
             selectionAdorned: false,
+            deletable: false,
+            handlesDragDropForMembers: true,
+            resizable: false,
             layout: $(go.LayeredDigraphLayout,
                 {
                     setsPortSpots: true,
@@ -396,5 +399,9 @@ export const diagramGroupTemplate =
             ),
         },
         $(go.Shape, 'Rectangle',
-            { fill: 'transparent', strokeWidth: 0 },
-        ));
+            { fill: 'transparent', strokeWidth: 0, cursor: 'normal' },
+        ),
+        $(go.Placeholder,
+            { padding: 5 },
+        ),
+    );
