@@ -84,6 +84,17 @@ export default function useDiagram({
                 {
                     hoverDelay: 0,
                     'undoManager.isEnabled': true,
+                    'draggingTool.computeEffectiveCollection': function (parts, options) {
+                        const all = new go.List();
+                        parts.each((p) => {
+                            all.add(p);
+                            if (p.containingGroup !== null && !(p instanceof go.Link)) {
+                                all.add(p.containingGroup);
+                            }
+                        });
+                        return go.DraggingTool.prototype
+                            .computeEffectiveCollection.call(this, all, options);
+                    },
                     layout:
                         $(go.LayeredDigraphLayout,
                             {
