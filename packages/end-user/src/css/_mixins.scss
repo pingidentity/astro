@@ -196,8 +196,8 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
+    -ms-word-break: break-all; /*UIP-3887 since word-break: break-word does not work in IE11*/
 }
-
 
 // ANIMATION --------------------------------------------------------------------------------------
 
