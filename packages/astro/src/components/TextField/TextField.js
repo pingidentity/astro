@@ -33,5 +33,4 @@ TextField.propTypes = {
 
 TextField.displayName = 'TextField';
 
-export * from '../Field';
 export default TextField;
