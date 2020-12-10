@@ -137,5 +137,4 @@ Field.defaultProps = {
 
 Field.displayName = 'Field';
 
-export { default as isEmpty } from 'lodash/isEmpty';
 export default Field;

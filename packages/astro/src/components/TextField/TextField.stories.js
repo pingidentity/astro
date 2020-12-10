@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import TextField, { isEmpty } from '.';
+import isEmpty from 'lodash/isEmpty';
+import TextField from '.';
 
 export default {
   title: 'TextField',
@@ -31,7 +32,7 @@ export const DynamicRequired = () => {
   const [value, setValue] = useState('');
   return (
     <TextField
-      isRequired={isEmpty(value)}
+      isRequired={isEmpty(value)} // isEmpty from lodash
       label="Example Label"
       controlProps={{ onChange: e => setValue(e.target.value) }}
     />
