@@ -25,7 +25,7 @@ export default {
         column: 400,
     },
     shadows: {
-        standard: `0 1px 6px ${shadow}`,
+        standard: `0 1px 14px ${shadow}`,
         row: `0 0 9px ${accent[95]}`,
     },
 };
