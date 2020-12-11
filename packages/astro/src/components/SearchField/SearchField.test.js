@@ -70,7 +70,8 @@ test('search isReadOnly', () => {
 
 test('search isRequired', () => {
   getComponent({ isRequired: true });
-  const search = screen.getByLabelText(testLabel);
+  // { exact: false } is used because of the required indicator asterisk
+  const search = screen.getByLabelText(testLabel, { exact: false });
   expect(search).toBeRequired();
 });
 
