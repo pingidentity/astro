@@ -3754,6 +3754,21 @@
     "@react-stately/radio" "^3.2.1"
     "@react-types/radio" "^3.1.1"
 
+"@react-aria/searchfield@^3.1.1":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/searchfield/-/searchfield-3.1.1.tgz#5fdd74d0b39633aebf2f66050a74d6cc03fd953f"
+  integrity sha1-X9100LOWM66/L2YFCnTWzAP9lT8=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.1.2"
+    "@react-aria/interactions" "^3.2.1"
+    "@react-aria/textfield" "^3.2.1"
+    "@react-aria/utils" "^3.3.0"
+    "@react-stately/searchfield" "^3.1.1"
+    "@react-types/button" "^3.2.1"
+    "@react-types/searchfield" "^3.1.1"
+    "@react-types/shared" "^3.2.1"
+
 "@react-aria/selection@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/selection/-/selection-3.2.1.tgz#c2c010c4c4350c2ac0e851fbaedc0cc3a9c0f18e"
@@ -3808,6 +3823,18 @@
     "@react-types/shared" "^3.2.1"
     "@react-types/tabs" "3.0.0-alpha.1"
 
+"@react-aria/textfield@^3.2.1":
+  version "3.2.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/textfield/-/textfield-3.2.2.tgz#2e8195668464911d4f7a363d19da8786c10afd22"
+  integrity sha1-LoGVZoRkkR1PejY9GdqHhsEK/SI=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.2.2"
+    "@react-aria/label" "^3.1.1"
+    "@react-aria/utils" "^3.4.1"
+    "@react-types/shared" "^3.2.1"
+    "@react-types/textfield" "^3.2.2"
+
 "@react-aria/toggle@^3.1.1":
   version "3.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/toggle/-/toggle-3.1.1.tgz#5a1e523af0a2425c4cd73dbeb9e9116c65ea7437"
@@ -3836,6 +3863,16 @@
   version "3.4.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.4.0.tgz#f54ebbeb12e6438d616b87086cb4bfba624ba608"
   integrity sha1-9U676xLmQ41ha4cIbLS/umJLpgg=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/ssr" "^3.0.1"
+    "@react-types/shared" "^3.3.0"
+    clsx "^1.1.1"
+
+"@react-aria/utils@^3.4.1":
+  version "3.4.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.4.1.tgz#941479a06021de530acedfff1cce59859ca46c6d"
+  integrity sha1-lBR5oGAh3lMKzt//HM5ZhZykbG0=
   dependencies:
     "@babel/runtime" "^7.6.2"
     "@react-aria/ssr" "^3.0.1"
@@ -3889,6 +3926,16 @@
     "@babel/runtime" "^7.6.2"
     "@react-stately/utils" "^3.1.1"
     "@react-types/radio" "^3.1.1"
+
+"@react-stately/searchfield@^3.1.1":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/searchfield/-/searchfield-3.1.1.tgz#fcada7bff9cac5bc4ffed11ba9cd06b8513be72a"
+  integrity sha1-/K2nv/nKxbxP/tEbqc0GuFE75yo=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.1.1"
+    "@react-types/searchfield" "^3.1.1"
+    "@react-types/shared" "^3.2.1"
 
 "@react-stately/selection@^3.2.1":
   version "3.2.1"
@@ -3960,6 +4007,13 @@
   dependencies:
     "@react-types/shared" "^3.2.1"
 
+"@react-types/searchfield@^3.1.1":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/searchfield/-/searchfield-3.1.1.tgz#bbbb8984706c02559810328791cdfb8d418336a0"
+  integrity sha1-u7uJhHBsAlWYEDKHkc37jUGDNqA=
+  dependencies:
+    "@react-types/textfield" "^3.2.1"
+
 "@react-types/shared@^3.1.0", "@react-types/shared@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.2.1.tgz#cbcffec02a7592f019916e4bd0807950a1376bcf"
@@ -3982,6 +4036,13 @@
   version "3.0.0-alpha.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/tabs/-/tabs-3.0.0-alpha.1.tgz#2ad54e308977e3e7c622d2c9cab2a40805e0162f"
   integrity sha1-KtVOMIl34+fGItLJyrKkCAXgFi8=
+  dependencies:
+    "@react-types/shared" "^3.2.1"
+
+"@react-types/textfield@^3.2.1", "@react-types/textfield@^3.2.2":
+  version "3.2.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/textfield/-/textfield-3.2.2.tgz#2f310c125df7c4a64a19d7c5064537218f909d38"
+  integrity sha1-LzEMEl33xKZKGdfFBkU3IY+QnTg=
   dependencies:
     "@react-types/shared" "^3.2.1"
 
@@ -19353,6 +19414,11 @@ mdast-util-to-string@^1.0.0:
   version "1.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/mdast-util-to-string/-/mdast-util-to-string-1.1.0.tgz#27055500103f51637bd07d01da01eb1967a43527"
   integrity sha1-JwVVABA/UWN70H0B2gHrGWekNSc=
+
+mdi-react@^7.4.0:
+  version "7.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/mdi-react/-/mdi-react-7.4.0.tgz#9d0f1c977a18518db5a24777ff85b67efa5a5359"
+  integrity sha1-nQ8cl3oYUY21okd3/4W2fvpaU1k=
 
 mdn-data@2.0.4:
   version "2.0.4"
