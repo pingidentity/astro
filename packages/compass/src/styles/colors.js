@@ -97,7 +97,7 @@ export const text = {
 };
 
 const rgbaString = rgba => `rgba(${rgba.join(', ')})`;
-export const shadow = rgbaString(chroma(neutral[10]).alpha(0.25).rgba());
+export const shadow = rgbaString(chroma(neutral[10]).alpha(0.15).rgba());
 
 export default {
     black,

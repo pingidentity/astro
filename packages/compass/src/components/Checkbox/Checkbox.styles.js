@@ -8,6 +8,7 @@ export const getCheckboxLabelStyle = (props) => {
         display: inline-flex;
         align-items: center;
         cursor: pointer;
+        text-transform: none;
 
         ${isDisabled ? disabledCSS : ''}
     `;
