@@ -81,6 +81,8 @@ const Types = {
  *
  * @param {string} link
  *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
+ * @param {Object} linkProps
+ *     Props object that is passed into the Link node when link is present.
  * @param {HelpHint.Placements} [placement]
  *     How to place the help hint.
  * @param {HelpHint.Types} [type]
@@ -104,6 +106,7 @@ class HelpHint extends React.Component {
         iconName: PropTypes.string,
         leftMargin: PropTypes.bool,
         link: PropTypes.string,
+        linkProps: PropTypes.shape({}),
         placement: PropTypes.oneOf(Object.values(Placements)),
         type: PropTypes.oneOf(Object.values(Types)),
         tooltipProps: PropTypes.object,
@@ -170,8 +173,9 @@ class HelpHint extends React.Component {
     }
 
     maybeRenderLink() {
-        const { link } = this.props;
-        return link && <Link title="More on this topic" url={link} icon="info" type="block" />;
+        const { link, linkProps } = this.props;
+        return (link || linkProps) &&
+            <Link title="More on this topic" url={link} icon="info" type="block" {...linkProps} />;
     }
 
     maybeRenderExtraContainer = children => (
