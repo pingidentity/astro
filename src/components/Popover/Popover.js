@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
-import Tippy from '@tippyjs/react';
+import Tippy from '@tippyjs/react/headless';
 import PropTypes from 'prop-types';
-import 'tippy.js/dist/tippy.css';
-import * as colors from '../../styles/colors';
+import Box from '../Box';
 
 /**
  * Popover component used for popover button menus and help hints.
@@ -10,19 +9,32 @@ import * as colors from '../../styles/colors';
  * available [props from Tippy.js](https://atomiks.github.io/tippyjs/v6/all-props/).
 */
 
-const Popover = forwardRef((props, ref) => (
-  <Tippy
-    ref={ref}
-    interactive
-    {...props}
-    css={{
-      '.tippy-arrow': {
-        color: colors.neutral[10],
-      },
-      backgroundColor: colors.neutral[10],
-    }}
-  />
-));
+const Popover = forwardRef((props, ref) => {
+  const {
+    content,
+    ...others
+  } = props;
+
+  return (
+    <Tippy
+      ref={ref}
+      interactive
+      render={attrs => (
+        <Box {...attrs} variant="popover.container">
+          <Box role="tooltip" variant="popover.content">
+            {content}
+          </Box>
+          <Box
+            className="tippy-arrow"
+            data-popper-arrow=""
+            variant="popover.arrow"
+          />
+        </Box>
+      )}
+      {...others}
+    />
+  );
+});
 
 Popover.propTypes = {
   /** The content of the popover. */
