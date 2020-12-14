@@ -1255,6 +1255,17 @@ module.exports = [
                         }
                     },
                     {
+                        label: "NavFrameAstro",
+                        demo: require("../components/panels/NavFrameAstroDemo"),
+                        pathToDoc: "components/panels/NavFrame/NavFrameAstro.jsx",
+                        pathToSource: "components_panels_NavFrame_NavFrameAstro.jsx.html",
+                        pathToDemoSource: "demo_components_panels_NavFrame_NavFrameAstroDemo.jsx.html",
+                        status: {
+                            message: "THIS COMPONENT IS STILL IN DEVELOPMENT. FOR PINGFEDERATE USE ONLY.",
+                            type: "version"
+                        }
+                    },
+                    {
                         label: "Quick Actions",
                         demo: require("../components/panels/QuickActionsDemo"),
                         pathToDoc: "components/panels/QuickActions.jsx",
