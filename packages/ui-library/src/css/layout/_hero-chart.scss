@@ -120,20 +120,49 @@
     }
 
     &--astro {
+        $astro-stack: 'Helvetica Neue', Helvetica, 'Segoe UI', Roboto, sans-serif;
         background: linear-gradient(to bottom, #f4f6fc 0%, #e5e9f8 100%);
-
+        font-family: $astro-stack;
         .hero-chart {
-            &__title {
+            &__title,
+            &__value,
+            &__greeting {
                 color: #253746;
+                font-weight: 700;
+                font-family: $astro-stack;
+            }
+            &__greeting {
+                text-transform: none;
+                font-size: 23px;
             }
             &__subtitle,
-            &__error,
-            &__greeting {
-                color: #808993;
+            &__error {
+                color: #515f6b;
+                font-weight: 500;
+                font-family: $astro-stack;
+            }
+            &__center-text {
+                font-family: $astro-stack;
             }
             &__value {
-                color: #3c5080;
+                font-size: 50px;
             }
+            &__subtitle {
+                font-size: 15px;
+            }
+            &__rocker {
+                box-shadow: 0 1px 14px rgba(#253746, 0.15);
+                &[class*='sel']:after {
+                    background-color: #303f5f;
+                }
+                .rocker-button__button {
+                    font-family: $astro-stack;
+                    color: #303f5f;
+                    font-weight: 500;
+
+                }
+            }
+
         }
         .hero-tooltip {
             color: #3c5080;

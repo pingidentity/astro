@@ -130,6 +130,10 @@ export default class HeroChart extends Component {
     }
 
     _renderBars = (data, key, color) => {
+
+        const getOpacity = (index) => this.props.isAstro
+            ? this.state.barSelected === `${key}-${index}` ? 0.6 : 1
+            : this.state.barSelected === `${key}-${index}` ? 1 : 0.6;
         return (
             <Bar
                 key={"bar-" + key}
@@ -146,7 +150,7 @@ export default class HeroChart extends Component {
                         cursor="pointer"
                         fill={color}
                         style={{
-                            opacity: this.state.barSelected === `${key}-${index}` ? 1 : 0.6
+                            opacity: getOpacity(index)
                         }}
                         key={`cell-${index}`}
                     />
@@ -176,7 +180,7 @@ export default class HeroChart extends Component {
                 dataKey={xAxisKey}
                 domain={["dataMin", "dataMax"]}
                 dy={4}
-                stroke={this.props.isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.9)"}
+                stroke={this.props.isAstro ? "#515F6B" : "rgba(255, 255, 255, 0.9)"}
                 tick={{ fontSize: fontSize }}
                 tickLine={false}
                 height={xAxisHeight}
