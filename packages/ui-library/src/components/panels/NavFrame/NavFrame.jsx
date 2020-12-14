@@ -187,6 +187,8 @@ export default function NavFrame({
 
     const selected = getSelectedNode(firstNode, selectedNode, autoSelectFirstNode);
 
+    console.log(indexedTree);
+
     const {
         header: selectedHeader,
         section: selectedSection

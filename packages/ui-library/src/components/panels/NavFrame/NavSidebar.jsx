@@ -3,33 +3,67 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { noop } from "underscore";
 
-import { getIcon, generateNavTreePropType } from "../../../util/PropUtils";
+import { getIcon, generateNavTreePropType, defaultRender } from "../../../util/PropUtils";
+
+export const BaseSidebarNode = ({
+    onClick,
+    "data-id": dataId,
+    className,
+    children,
+    item,
+    renderNode,
+}) => (
+    renderNode({
+        className,
+        "data-id": dataId,
+        onClick,
+        children,
+        item,
+    },"a")
+);
+
+BaseSidebarNode.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    onClick: PropTypes.func,
+};
+
+BaseSidebarNode.defaultProps = {
+    onClick: noop,
+    renderNode: defaultRender,
+};
+
+
 
 export const SidebarNode = ({
     id,
     label,
     onClick,
     selected,
+    renderNode,
 }) => (
-    <li
-        className="nav-sidebar__node"
-        data-id={`sidebar-node_${id}`}
-        onClick={e => {
-            e.stopPropagation();
-            onClick(id, e);
-        }}
-    >
-        <div
-            className={classnames(
-                "nav-sidebar__node-label",
-                {
-                    "nav-sidebar__node-label--selected": selected,
-                }
-            )}
+    <li>
+        <BaseSidebarNode
+            item={{ id, label }}
+            renderNode={renderNode}
+            className="nav-sidebar__node"
+            data-id={`sidebar-node_${id}`}
+            onClick={e => {
+                e.stopPropagation();
+                onClick(id, e);
+            }}
         >
-            {label}
-        </div>
-        {selected}
+            <div
+                className={classnames(
+                    "nav-sidebar__node-label",
+                    {
+                        "nav-sidebar__node-label--selected": selected,
+                    }
+                )}
+            >
+                {label}
+            </div>
+        </BaseSidebarNode>
     </li>
 );
 
@@ -53,7 +87,8 @@ export const SidebarGroup = ({
     hasDivider,
     label
 }) => (
-    <div
+    <BaseSidebarNode
+        renderNode={(props) => <ul {...props} />}
         className={classnames(
             "nav-sidebar__group",
             {
@@ -66,7 +101,7 @@ export const SidebarGroup = ({
             {label}
         </div>
         {children}
-    </div>
+    </BaseSidebarNode>
 );
 
 SidebarGroup.propTypes = {
@@ -81,29 +116,38 @@ export const SidebarSection = ({
     onClick,
     selected,
     collapsed,
+    renderNode,
+    renderIcon
 }) => (
-    <li
-        className={classnames(
-            "nav-sidebar__section",
-            {
-                "nav-sidebar__section--selected": selected,
-                "nav-sidebar__section--collapsed": collapsed,
-            }
-        )}
-        data-id={`sidebar-section_${id}`}
-        onClick={e => {
-            e.stopPropagation();
-            onClick(id, e);
-        }}
-    >
-        {icon &&
-            <div className="nav-sidebar__section-icon">
-                {getIcon(icon, { type: "inline" })}
-            </div>
-        }
-        <div className="nav-sidebar__section-label">
-            {label}
-        </div>
+    <li>
+        <BaseSidebarNode
+            className={classnames(
+                "nav-sidebar__section",
+                {
+                    "nav-sidebar__section--selected": selected,
+                    "nav-sidebar__section--collapsed": collapsed,
+                }
+            )}
+            data-id={`sidebar-section_${id}`}
+            onClick={e => {
+                onClick(id, e);
+            }}
+            renderNode={renderNode}
+            item={{ id, label }}
+        >
+            <>
+                {icon &&
+                    renderIcon({
+                        className: "nav-sidebar__section-icon",
+                        icon: icon,
+                        children: getIcon(icon, { type: "inline" }),
+                    }, "div")
+                }
+                <div className="nav-sidebar__section-label">
+                    {label}
+                </div>
+            </>
+        </BaseSidebarNode>
     </li>
 );
 
@@ -119,15 +163,18 @@ SidebarSection.propTypes = {
     label: PropTypes.string,
     onClick: PropTypes.func,
     selected: PropTypes.bool,
+    renderNode: PropTypes.func,
+    renderIcon: PropTypes.func,
 };
 
 SidebarSection.defaultProps = {
     onClick: noop,
-    selected: false
+    selected: false,
+    renderIcon: defaultRender,
 };
 
 // Recursively render the groups and nodes
-const renderNode = props => ({
+const getNode = props => ({
     children,
     id,
     label,
@@ -136,6 +183,7 @@ const renderNode = props => ({
     const {
         onSelectItem,
         selectedNode,
+        renderNode,
     } = props;
     const isGroup = children !== undefined;
 
@@ -150,8 +198,9 @@ const renderNode = props => ({
             label={label}
             onClick={onSelectItem}
             selected={id === selectedNode}
+            renderNode={renderNode}
         >
-            {children && children.map(child => renderNode(props)({
+            {children && children.map(child => getNode(props)({
                 ...child,
                 group
             }))}
@@ -179,8 +228,12 @@ export default function NavSidebar(props) {
         onSelectItem,
         selectedHeaderLabel,
         selectedNode,
+        renderNode,
+        renderIcon,
         selectedSection,
+        menuTop,
     } = props;
+
     const [renderedSections, selectedGroup, selectedLabel] = navTree.reduce((
         [
             sectionsAcc,
@@ -210,6 +263,8 @@ export default function NavSidebar(props) {
                     onClick={onSelectItem}
                     selected={isSelected}
                     collapsed={isSelected && children && collapsed}
+                    renderNode={renderNode}
+                    renderIcon={renderIcon}
                 />,
             ],
             isSelected ? children : groupAcc,
@@ -218,46 +273,53 @@ export default function NavSidebar(props) {
     }, [[]]);
 
     return (
-        <nav
-            data-id={dataId}
-            className="nav-sidebar"
-        >
-            <ul
-                className={classnames(
-                    "nav-sidebar__sections",
-                    {
-                        // Add divider above groups with this modifier
-                        "nav-sidebar__sections--group-visible": selectedGroup && !collapsed,
-                    }
-                )}
+        <div className="nav-sidebar__container">
+            <div className="nav-sidebar__top-container">
+                {menuTop}
+            </div>
+            <nav
+                data-id={dataId}
+                className="nav-sidebar"
             >
-                <div className="nav-sidebar__section-title">
-                    {selectedHeaderLabel}
-                </div>
-                {renderedSections}
-                <div
-                    className="nav-sidebar__copyright"
+
+                <ul
+                    className={classnames(
+                        "nav-sidebar__sections",
+                        {
+                        // Add divider above groups with this modifier
+                            "nav-sidebar__sections--group-visible": selectedGroup && !collapsed,
+                        }
+                    )}
                 >
-                    {copyright}
-                </div>
-            </ul>
-            {
-                selectedGroup && !collapsed &&
-                        <ul
+                    <div className="nav-sidebar__section-title">
+                        {selectedHeaderLabel}
+                    </div>
+                    {renderedSections}
+                    <div
+                        className="nav-sidebar__copyright"
+                    >
+                        {copyright}
+                    </div>
+                </ul>
+                {
+                    selectedGroup && !collapsed &&
+                        <div
                             className="nav-sidebar__group-container"
                             data-testid="nav-sidebar-collapsible"
                         >
                             <div
                                 className="nav-sidebar__group-container-title"
+                                onClick={onCollapse}
                             >
-                                <a className="nav-sidebar__group-collapse" onClick={onCollapse} />
+                                <a className="nav-sidebar__group-collapse" />
                                 {selectedLabel}
                             </div>
-                            {selectedGroup.map(renderNode(props))}
-                        </ul>
-            }
+                            {selectedGroup.map(getNode(props))}
+                        </div>
+                }
 
-        </nav>
+            </nav>
+        </div>
     );
 }
 
@@ -279,6 +341,8 @@ NavSidebar.propTypes = {
         PropTypes.number,
         PropTypes.string
     ]),
+    renderNode: PropTypes.func,
+    renderIcon: PropTypes.func,
 };
 
 NavSidebar.defaultProps = {
