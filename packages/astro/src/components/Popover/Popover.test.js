@@ -1,14 +1,14 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Popover from './Popover';
 import Button from '../Button/Button';
 import Link from '../Link/Link';
 
-
 const defaultProps = {
   content: <Link>Click Me!</Link>,
 };
+
 const getComponent = () => render((
   <>
     <Popover {...defaultProps}>
@@ -17,10 +17,11 @@ const getComponent = () => render((
   </>
 ));
 
-test('renders a popover when target is clicked', () => {
+// NOTE: We must use waitFor to assert the async DOM changes that occur
+test('renders a popover when target is clicked', async () => {
   getComponent();
   const button = screen.getByRole('button');
-  act(() => userEvent.click(button));
+  await waitFor(() => userEvent.click(button));
   const popover = screen.getByRole('tooltip');
   expect(popover).toBeInTheDocument();
 });
@@ -31,10 +32,10 @@ test('it does not render a popover when the target is not clicked', () => {
   expect(popover).not.toBeInTheDocument();
 });
 
-test('renders content in the popover', () => {
-  getComponent({ });
+test('renders content in the popover', async () => {
+  getComponent();
   const button = screen.getByRole('button');
-  act(() => userEvent.click(button));
+  await waitFor(() => userEvent.click(button));
   const link = screen.getByRole('link');
   expect(link).toBeInTheDocument();
 });
