@@ -26,6 +26,9 @@ export const GlobalStyles = () => (
           opacity: 0.5;
           pointer-events: none;
         }
+        [data-tippy-root] {
+          max-width:calc(100vw - 10px)
+        }
       `
     }
   />
