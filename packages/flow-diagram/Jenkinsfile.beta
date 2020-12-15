@@ -59,7 +59,7 @@ pipeline {
     // }
     stage('update-demo') {
       steps {
-        dir("${env.WORKSPACE}/packages/compass") {
+        dir("${env.WORKSPACE}/packages/flow-diagram") {
           container('node-builder'){
             withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
               sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=flow-diagram initial-upload"
