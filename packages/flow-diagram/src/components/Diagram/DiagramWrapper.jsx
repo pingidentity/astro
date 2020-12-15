@@ -1,11 +1,11 @@
-import * as go from 'gojs';
 import React from 'react';
+import { Box } from '@pingux/astro';
 import { diagramWrapper } from './DiagramWrapper.styles';
 
 export default function DiagramWrapper({ children, ...others }) {
     return (
-        <div css={diagramWrapper} {...others}>
+        <Box sx={diagramWrapper} {...others}>
             {children}
-        </div>
+        </Box>
     );
 }

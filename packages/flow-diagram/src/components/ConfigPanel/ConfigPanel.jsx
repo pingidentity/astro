@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Clear } from '@pingux/icons';
-import { Box, Text } from '@pingux/compass';
+import { Box, Text } from '@pingux/astro';
 import Icon from '@mdi/react';
 import { mdiDotsVertical } from '@mdi/js';
-import { configPanel, configPanelClose, configPanelHeader, line } from './ConfigPanel.styles';
+import Separator from '@pingux/astro/lib/components/Separator';
+import { configPanel, configPanelClose, configPanelHeader } from './ConfigPanel.styles';
 
 function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
     return (
-        <div css={configPanel} {...others}>
-            <div css={configPanelClose}>
+        <Box sx={configPanel} {...others}>
+            <Box sx={configPanelClose}>
                 <Clear onClick={onClose} data-testid="config-panel-close" />
-            </div>
-            <div css={configPanelHeader}>
+            </Box>
+            <Box sx={configPanelHeader} isRow>
                 <Box isRow>
                     {icon}
                     <Text ml="12px" color="#253746" fontSize={15} fontWeight="bold" fontFamily="Helvetica">{category}</Text>
@@ -22,10 +23,10 @@ function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
                     size="33px"
                     color="#68747F"
                 />
-            </div>
-            <hr css={line} />
+            </Box>
+            <Separator />
             {children}
-        </div>
+        </Box>
     );
 }
 

@@ -1,13 +1,12 @@
-import * as go from 'gojs';
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Box } from '@pingux/astro';
 import { paletteWrapper } from './PaletteWrapper.styles';
 
 export default function PaletteWrapper({ children, ...others }) {
     return (
-        <div css={paletteWrapper} {...others}>
+        <Box sx={paletteWrapper} {...others}>
             {children}
-        </div>
+        </Box>
     );
 }
 
