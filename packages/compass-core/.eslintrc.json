@@ -42,5 +42,13 @@
                 "extensions": [".js", ".jsx", ".mdx"]
             }
         }
-    }
+    },
+    "overrides": [
+        {
+            "files": ["src/**/*.stories.js", "src/**/*.story.js", "src/**/*.stories.jsx", "src/**/*.story.jsx"],
+            "rules": {
+                "react/prop-types": 0
+            }
+        }
+    ]
 }
