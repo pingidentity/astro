@@ -27,7 +27,7 @@
         "build:esm": "BABEL_ENV=esm NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/",
         "build:assets": "cp -r ./src/img ./lib && cp -r ./src/img ./lib/cjs",
         "coverage": "jest --coverage",
-        "demo": "rm -rf ./upload && yarn build:icons && build-storybook -o upload",
+        "demo": "rm -rf ./demo && yarn build:icons && build-storybook -o demo",
         "verify": "yarn lint && yarn docs && yarn build-demo && test",
         "lint": "eslint .",
         "start": "yarn build:icons && start-storybook -p 1339",
