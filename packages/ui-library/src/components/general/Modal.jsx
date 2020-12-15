@@ -242,7 +242,9 @@ class BaseModal extends React.Component {
                 data-id={this.props["data-id"]}
                 ref="container"
                 key="modal"
-                className={classnames("modal", this.props.className, modalClasses)}>
+                className={classnames("modal", this.props.className, modalClasses)}
+                role="dialog"
+            >
                 <div
                     className="modal-bg"
                     data-id="modal-bg"

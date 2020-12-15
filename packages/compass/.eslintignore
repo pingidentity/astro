@@ -1,0 +1,8 @@
+.cache
+dist
+build
+lib
+node_modules
+src/core
+.storybook
+upload

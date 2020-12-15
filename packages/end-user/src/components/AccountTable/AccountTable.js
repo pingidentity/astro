@@ -147,8 +147,9 @@ class AccountTable extends React.Component {
                         label={this.props.unlinkModalConfirmText}
                         type={Button.ButtonTypes.DANGER}
                         onClick={() => this._unlinkAccount(this.state.accountToUnlink)}
+                        data-id={`${this.props['data-id']}-confirm-unlink`}
                     />
-                    <TextBlock size="small"><a onClick={this._closeUnlinkModal}>
+                    <TextBlock size="small"><a onClick={this._closeUnlinkModal} data-id={`${this.props['data-id']}-cancel-unlink`}>
                         {this.props.cancelText}
                     </a></TextBlock>
                 </FlexRow>

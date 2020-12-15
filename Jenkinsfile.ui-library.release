@@ -1,9 +1,24 @@
+@Library(['mpl-library', 'jenkins-ci-library']) _
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
+
+def ortCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/ort-cdn-deploy.yaml';
+def prodCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/prod-cdn-deploy.yaml';
+def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def centralCluster = 'central-us-east-2-k8s'
+
 pipeline {
   agent {
-    label 'ui-library-cdn-deploy'
+    kubernetes {
+      cloud centralCluster
+      yaml uiPipelineShared
+    }
   }
   environment {
     JIRA_CREDS = credentials('jira-creds')
+    PATH_TO_PACKAGE_JSON = "packages/ui-library"
+    PING_TEAM_NAME = "ux"
+    PING_SERVICE_NAME = "ui-library"
   }
   stages {
      stage('run-tests') {
@@ -65,6 +80,7 @@ pipeline {
             }
           }
         }
+        stash includes: 'packages/ui-library/**/*', name: 'package'
      }
       post {
           always {
@@ -87,26 +103,60 @@ pipeline {
       }
 
     }
-    stage('cdn deploy') {
+    stage('cdn deploy test') {
+      agent { label 'test-cdn-deploy' }
+      environment{
+        ENVIRONMENT = "test"
+        CDN_SOURCE = "packages/ui-library/cdn/${env.RELEASE_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+      }
       steps {
-        dir("${env.WORKSPACE}/packages/ui-library") {
-          container('node-builder') {
-            withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
-              }
-            }
-            withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
-              }
-            }
-            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
-              }
-            }
-          }
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
+        }
+      }
+    }
+
+    stage('cdn deploy ort') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml ortCdnDeploy
+        }
+      }
+      environment{
+        ENVIRONMENT = "staging"
+        CDN_SOURCE = "packages/ui-library/cdn/${env.RELEASE_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
+        }
+      }
+    }
+
+    stage('cdn deploy prod') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml prodCdnDeploy
+        }
+      }
+      environment{
+        ENVIRONMENT = "production"
+        CDN_SOURCE = "packages/ui-library/cdn/${env.RELEASE_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
         }
       }
     }

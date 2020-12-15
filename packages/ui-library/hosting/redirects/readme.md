@@ -8,10 +8,20 @@
 
     ```groovy
         //Copy After this line
+@Library(['mpl-library', 'jenkins-ci-library']) _
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
+
+def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def centralCluster = 'central-us-east-2-k8s'
+
 pipeline {
-    agent {
-        label 'ui-library-cdn-deploy'
+  agent {
+    kubernetes {
+      cloud centralCluster
+      yaml uiPipelineShared
     }
+  }
     stages {
         stage ('package and upload for hosting') {
         steps {

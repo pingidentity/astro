@@ -1,0 +1,81 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './AsyncBehavior.stories.js';
+
+<Meta title="usage/Async Behavior" />
+
+# Async Behavior
+
+Do you need more control over how the form presents errors or what happens after a submission is successful? Read on.
+
+## Form Props
+
+The following props control the flow of how data gets sent between the server and the `Form` component:
+### `endpoint: string`
+  - Must be formatted as a URL
+  - Must be supplied if not directly handling `onSubmit`. This will trigger a `POST` to the given URL with the form data as JSON in the request body.
+
+### `onServerError: (response: Response) => Promise<Object>`
+  - This callback is triggered if the server responds to the request with a status outside of the `2XX` range.
+  - Form-level errors should be wrapped in a `_form` object, while fields should be wrapped in an object of the same name.
+  - Example:
+    ```js
+    const onServerError = async (response) => {
+      // Do something with the response here...
+
+      return Promise.resolve({
+        _form: {
+          __errors: ['form-level error'],
+        },
+        myField: {
+          __errors: ['server error']
+        },
+      });
+    };
+    ```
+### `onServerSuccess: (response: Response) => void`
+  - This callback is triggered if the server responds to the request with a status within the `2XX` range.
+  - Example:
+    ```js
+    const onServerSuccess = (response) => {
+      // Do something with the response here...
+      // Or manipulate the DOM...
+      // Or redirect...
+    };
+    ```
+
+### `onSubmit: (data: Object, event: SubmitEvent, onError: Function, onSuccess: Function) => void`
+  - **WARNING** Overriding the default form submission event allows a ton of custom behaviors, but might also lead to unpredictable outcomes.
+  - You are responsible for calling the `onError` and `onSuccess` functions to update the form manually.
+  - The `onError` and `onSuccess` functions provided will be the same ones supplied to the form's `onServerError` and `onServerSuccess` props. Or, if not supplied, will be a default function which updates the form's state respectively.
+  - Example:
+    ```js
+    const onSubmit = (data, _event, onError, onSuccess) => {
+      const response = /* handle the server request here */;
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onError();
+      }
+    };
+    ```
+
+## Rendering Server-Side Errors
+Below is a basic example of how to handle server-side errors.
+
+<Canvas>
+  <Story story={stories.customErrors} />
+</Canvas>
+
+## Customizing Form Success Behavior
+Below is a basic example of how to add custom behavior when the form is successfully submitted. 
+
+<Canvas>
+  <Story story={stories.customSuccess} />
+</Canvas>
+
+## Customizing Form Submission
+Below is an example of how to combine custom behavior when the form is submitted. Enter `abc` into the field to see a successful result, otherwise the error behavior will be presented.
+
+<Canvas>
+  <Story story={stories.customSubmit} />
+</Canvas>

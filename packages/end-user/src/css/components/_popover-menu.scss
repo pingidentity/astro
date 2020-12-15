@@ -1,0 +1,67 @@
+.popover-menu {
+    &__control {
+        background: none;
+        border: 0;
+        cursor: pointer;
+        min-height: 0;
+        width: unset;
+    }
+
+    &__dialog {
+        z-index: 1;
+        background: $color-white;
+        border-radius: 4px;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+        border: 1px solid $color-neutral-90;
+    }
+
+    &__item {
+        border: 0;
+        width: 100%;
+        text-align: left;
+        padding: $spacing-sm $spacing-md;
+        cursor: pointer;
+        background: $color-white;
+        display: block;
+        color: $color-neutral-10;
+        border-radius: 4px;
+        min-height: 0;
+        font-size: 13px;
+        text-overflow: unset;
+
+        &:hover {
+            background: $color-neutral-95;
+        }
+    }
+}
+
+#arrow,
+#arrow::before {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    z-index: -1;
+}
+
+#arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    background: $color-white;
+    border: 1px solid $color-neutral-90;
+}
+
+.popover-menu__dialog[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+}
+
+.popover-menu__dialog[data-popper-placement^='bottom'] > #arrow {
+    top: -5px;
+}
+
+.popover-menu__dialog[data-popper-placement^='left'] > #arrow {
+    right: -5px;
+}
+
+.popover-menu__dialog[data-popper-placement^='right'] > #arrow {
+    left: -5px;
+}

@@ -10,6 +10,7 @@ import HeatMap, {
     pointClick,
     pointsToGeoJson,
 } from './HeatMap';
+import { act } from 'react-dom/test-utils';
 
 jest.mock('mapbox-gl', (replacements) => {
     const setData = jest.fn();
@@ -28,6 +29,7 @@ jest.mock('mapbox-gl', (replacements) => {
         getZoom: jest.fn(() => 5),
         on: jest.fn((type, callback) => [type, callback]),
         queryRenderedFeatures: jest.fn(),
+        resize: jest.fn(),
         setCenter: jest.fn(),
         setPaintProperty: jest.fn(),
         ...replacements,
@@ -65,9 +67,6 @@ describe('HeatMap', () => {
         {
             id: 4,
             longLat: [-4, 58.5],
-            properties: {
-                'property': 'value',
-            },
         },
     ];
 
@@ -180,7 +179,6 @@ describe('HeatMap', () => {
                     },
                     'properties': {
                         'id': 4,
-                        'property': 'value',
                         count: 1,
                     },
                     'type': 'Feature',
@@ -283,15 +281,15 @@ describe('HeatMap', () => {
         callbackWithBoundsAndZoom(
             {
                 getBounds: () => ({
-                    _nw: [10, 10],
-                    _se: [20, 20],
+                    _ne: [10, 10],
+                    _sw: [20, 20],
                 }),
                 getZoom: () => 10,
             },
             onZoom,
         )('event');
 
-        expect(onZoom).toHaveBeenCalledWith({ nwBound: [10, 10], seBound: [20, 20], zoom: 10 }, 'event');
+        expect(onZoom).toHaveBeenCalledWith({ neBound: [10, 10], swBound: [20, 20], zoom: 10 }, 'event');
     });
 
     // Using a more complex mock here because it's important to test that this update is actually
@@ -300,13 +298,31 @@ describe('HeatMap', () => {
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
         const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
-        load();
+        act(() => load());
 
-        expect(map.getSource).not.toHaveBeenCalled();
+        expect(map.getSource).toHaveBeenCalledTimes(1);
 
         component.setProps({ ...defaultProps, points: defaultProps.points.slice(0, 2) });
 
+        expect(map.getSource).toHaveBeenCalledTimes(2);
+        clearMock(map);
+    });
+
+    // Using a more complex mock here because it's important to test that this update is actually
+    // happening in the component's lifecycle.
+    it('updates source when data prop changes, but is still the same object', () => {
+        const mutatingPoints = [...defaultProps.points];
+        const component = getComponent({ points: mutatingPoints });
+        // Have to call this because the map object ref is set in the load event.
+        const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
+        act(() => load());
+
         expect(map.getSource).toHaveBeenCalledTimes(1);
+        mutatingPoints.pop();
+
+        component.setProps({ ...defaultProps, points: mutatingPoints });
+
+        expect(map.getSource).toHaveBeenCalledTimes(2);
         clearMock(map);
     });
 
@@ -316,7 +332,7 @@ describe('HeatMap', () => {
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
         const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
-        load();
+        act(() => load());
 
         expect(map.setCenter).not.toHaveBeenCalled();
 
@@ -330,7 +346,7 @@ describe('HeatMap', () => {
         const component = getComponent();
         // Have to call this because the map object ref is set in the load event.
         const [, load] = map.on.mock.calls.find(([event]) => event === 'load');
-        load();
+        act(() => load());
 
         expect(map.setPaintProperty).not.toHaveBeenCalled();
 
@@ -344,5 +360,14 @@ describe('HeatMap', () => {
 
         expect(map.setPaintProperty).toHaveBeenCalledTimes(1);
         clearMock(map);
+    });
+
+    it('renders correctly when render is passed in', () => {
+        const component = getComponent({
+            'data-id': 'test-id',
+            render: ({ mapNode }) => mapNode,
+        });
+
+        expect(component.find('[data-id="test-id"]').exists()).toEqual(true);
     });
 });

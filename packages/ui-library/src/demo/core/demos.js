@@ -762,6 +762,13 @@ module.exports = [
                 icon: "details",
                 children: [
                     {
+                        label: "About Popup",
+                        demo: require("../components/general/AboutDemo"),
+                        pathToDoc: "components/general/AboutModal.jsx",
+                        pathToSource: "components_general_About.jsx.html",
+                        pathToDemoSource: "demo_components_general_AboutDemo.jsx.html"
+                    },
+                    {
                         label: "Confirm Tooltip",
                         demo: require("../components/tooltips/ConfirmTooltipDemo"),
                         pathToDoc: "components/tooltips/ConfirmTooltip.jsx",
@@ -1242,6 +1249,17 @@ module.exports = [
                         pathToDoc: "components/panels/NavFrame.jsx",
                         pathToSource: "components_panels_NavFrame_NavFrame.jsx.html",
                         pathToDemoSource: "demo_components_panels_NavFrameDemo.jsx.html",
+                        status: {
+                            message: "THIS COMPONENT IS STILL IN DEVELOPMENT. FOR PINGFEDERATE USE ONLY.",
+                            type: "version"
+                        }
+                    },
+                    {
+                        label: "NavFrameAstro",
+                        demo: require("../components/panels/NavFrameAstroDemo"),
+                        pathToDoc: "components/panels/NavFrame/NavFrameAstro.jsx",
+                        pathToSource: "components_panels_NavFrame_NavFrameAstro.jsx.html",
+                        pathToDemoSource: "demo_components_panels_NavFrame_NavFrameAstroDemo.jsx.html",
                         status: {
                             message: "THIS COMPONENT IS STILL IN DEVELOPMENT. FOR PINGFEDERATE USE ONLY.",
                             type: "version"

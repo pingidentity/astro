@@ -1,3 +1,7 @@
+import React from "react";
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 window.__DEV__ = true;
 
 jest.dontMock("../HelpHint");
@@ -5,7 +9,6 @@ jest.dontMock("../HelpHint");
 import { mountSnapshotDataIds } from "../../../devUtil/EnzymeUtils";
 
 describe("HelpHint", function () {
-    var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var HelpHint = require("../HelpHint");
@@ -145,5 +148,38 @@ describe("HelpHint", function () {
         var element = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text-link");
 
         expect(element).toBeDefined();
+    });
+
+    it("renders link with linkProps", () => {
+        render(
+            <HelpHint
+                hintText={text}
+                className={classValue}
+                link={link}
+                linkProps={{
+                    target: "_blank",
+                }}
+            />
+        );
+
+        userEvent.hover(document.querySelector("[data-id='helpHint-icon']"));
+        expect(document.querySelector("a")).toHaveAttribute("target", "_blank");
+    });
+
+    it("renders link with only linkProps", () => {
+        render(
+            <HelpHint
+                hintText={text}
+                className={classValue}
+                linkProps={{
+                    url: "my-url",
+                    target: "_blank",
+                }}
+            />
+        );
+
+        userEvent.hover(document.querySelector("[data-id='helpHint-icon']"));
+        expect(document.querySelector("a")).toHaveAttribute("target", "_blank");
+        expect(document.querySelector("a")).toHaveAttribute("href", "my-url");
     });
 });

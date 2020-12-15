@@ -1,7 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import { ResponsiveContainer, BarChart, XAxis, YAxis, CartesianGrid, Bar, Cell, LabelList } from "recharts";
+import classnames from "classnames";
+import {
+    ResponsiveContainer,
+    BarChart,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Bar,
+    Cell,
+    LabelList,
+    Tooltip } from "recharts";
 import ChartTitle from "./ChartTitle";
 import PageSpinner from "../PageSpinner";
 import Icon, { iconSizes } from "../Icon";
@@ -10,6 +20,14 @@ import Legend, {
     boxAlignments,
 } from "./Legend";
 import Padding from "../../layout/Padding";
+
+export const SectionHoverHandler = ({ onChange, ...rest }) => {
+    useEffect(() => {
+        onChange(rest);
+    },[rest.label, rest.active]);
+
+    return null;
+};
 
 /**
 * @class HeroMultiBarChart
@@ -69,6 +87,8 @@ export default class HeroMultiBarChart extends Component {
         rockerButtonProps: PropTypes.object,
         onBarMouseOver: PropTypes.func,
         onBarMouseOut: PropTypes.func,
+        onGroupSelectionChange: PropTypes.func,
+        isAstro: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -81,6 +101,8 @@ export default class HeroMultiBarChart extends Component {
         xAxisKey: "id",
         onBarMouseOver: _.noop,
         onBarMouseOut: _.noop,
+        onGroupSelectionChange: _.noop,
+        isAstro: false
     };
 
     state = {
@@ -123,7 +145,7 @@ export default class HeroMultiBarChart extends Component {
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize }}
-                stroke="rgba(255, 255, 255, 0.8)"
+                stroke={this.props.isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.8)"}
                 dataKey={xAxisKey}
                 domain={["dataMin", "dataMax"]}
                 dy={4}
@@ -137,7 +159,7 @@ export default class HeroMultiBarChart extends Component {
             <YAxis
                 axisLine={false}
                 tickLine={false}
-                stroke="rgba(255, 255, 255, 0.8)"
+                stroke={this.props.isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.8)"}
                 tickCount={6}
                 tickFormatter={this._kFormatter}
             />
@@ -150,11 +172,19 @@ export default class HeroMultiBarChart extends Component {
         const { x, y, width, height, value, index, labelKey } = props;
         const middleWidth = x + width / 2;
 
+        const textColor = this.props.isAstro ? props.fill : "#fff";
+
         return barSelected && (index === barSelected.index) && (labelKey === barSelected.key)
             ? (
                 <g>
                     <line x1={middleWidth} y1={labelHeight} x2={middleWidth} y2={y + height} stroke="#57A0EA" />
-                    <text x={middleWidth} y={labelHeight/2} fill="#fff" textAnchor="middle" dominantBaseline="middle">
+                    <text
+                        x={middleWidth}
+                        y={labelHeight/2}
+                        fill={textColor}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                    >
                         {labelFormater ? labelFormater(barSelected) : value }
                     </text>
                 </g>
@@ -174,6 +204,7 @@ export default class HeroMultiBarChart extends Component {
                     name={key}
                     isAnimationActive={false}
                     minPointSize={5}
+                    background={{ fill: "transparent" }}
                 >
                     {data.map((entry, index) => {
                         const isHovered = barSelected && barSelected.key === key && barSelected.index === index;
@@ -218,11 +249,17 @@ export default class HeroMultiBarChart extends Component {
             data,
             chartHeight,
             chartWidth,
+            onGroupSelectionChange,
+            isAstro,
         } = this.props;
         const heroStyles = { backgroundImage: bgImage ? `url("${bgImage}")` : null };
 
         return (
-            <div data-id={dataId} className="hero-chart" style={heroStyles}>
+            <div
+                data-id={dataId}
+                className={classnames("hero-chart", { "hero-chart--astro": isAstro })}
+                style={heroStyles}
+            >
                 {
                     errorMessage &&
                     <div className="hero-chart__error">
@@ -260,10 +297,19 @@ export default class HeroMultiBarChart extends Component {
                                 barCategoryGap="30%"
                                 margin={{ top: labelHeight }}
                             >
-                                <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.4)" />
+                                <CartesianGrid
+                                    vertical={false}
+                                    stroke={isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.4)"}
+                                />
+
+                                {/* tooltip is the only way for us to get any feedback when mousing over a group */}
+                                <Tooltip
+                                    cursor={false}
+                                    content={<SectionHoverHandler onChange={onGroupSelectionChange} />} />
                                 {this._renderYAxis()}
                                 {this._renderXAxis()}
                                 {this._renderBars()}
+
                             </BarChart>
                         </ResponsiveContainer>
                     ]

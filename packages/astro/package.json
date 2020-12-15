@@ -1,0 +1,102 @@
+{
+  "name": "@pingux/astro",
+  "version": "0.1.0-beta.12",
+  "description": "PingUX themeable React component library",
+  "author": "uxdev@pingidentity.com",
+  "license": "UNLICENSED",
+  "main": "lib/cjs/index.js",
+  "module": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+  },
+  "publishConfig": {
+    "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+  },
+  "scripts": {
+    "build": "rm -rf lib && npm-run-all build:*",
+    "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs",
+    "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir lib/",
+    "build:icons": "cd ../icons && yarn build",
+    "coverage": "yarn test --coverage",
+    "coverage-ci": "yarn test --coverage --ci",
+    "demo": "rm -rf ./demo && build-storybook -o demo",
+    "test": "jest",
+    "lint": "eslint .",
+    "start": "start-storybook -p 6006",
+    "storybook": "yarn start"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@storybook/addon-a11y": "^6.0.28",
+    "@storybook/addon-actions": "^6.0.28",
+    "@storybook/addon-essentials": "^6.0.28",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/addons": "^6.0.28",
+    "@storybook/react": "^6.0.28",
+    "@storybook/theming": "^6.0.28",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/react-hooks": "^3.4.1",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-node-env-inline": "^0.4.3",
+    "faker": "5.1.0",
+    "jest-emotion": "^10.0.32",
+    "mdi-react": "^7.4.0",
+    "mutationobserver-shim": "^0.3.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.35",
+    "@pingux/icons": "^0.2.0",
+    "@react-aria/button": "^3.2.1",
+    "@react-aria/checkbox": "^3.2.0",
+    "@react-aria/focus": "^3.2.1",
+    "@react-aria/interactions": "^3.3.0",
+    "@react-aria/label": "^3.1.0",
+    "@react-aria/link": "^3.1.1",
+    "@react-aria/listbox": "^3.2.1",
+    "@react-aria/radio": "^3.1.1",
+    "@react-aria/searchfield": "^3.1.1",
+    "@react-aria/separator": "^3.1.1",
+    "@react-aria/switch": "3.1.1",
+    "@react-aria/tabs": "^3.0.0-alpha.1",
+    "@react-aria/utils": "^3.2.1",
+    "@react-aria/visually-hidden": "3.2.1",
+    "@react-stately/collections": "^3.2.1",
+    "@react-stately/list": "^3.2.1",
+    "@react-stately/radio": "^3.2.0",
+    "@react-stately/searchfield": "^3.1.1",
+    "@react-stately/toggle": "^3.2.0",
+    "@rebass/forms": "^4.0.6",
+    "@styled-system/prop-types": "^5.1.5",
+    "@styled-system/props": "^5.1.5",
+    "@styled-system/theme-get": "^5.1.2",
+    "@tippyjs/react": "4.2.0",
+    "chroma-js": "^2.1.0",
+    "classnames": "^2.2.6",
+    "emotion-normalize": "^10.1.0",
+    "emotion-theming": "^10.0.27",
+    "lodash": "^4.17.20",
+    "prop-types": "^15.7.2",
+    "rebass": "^4.0.7",
+    "regenerator-runtime": "^0.13.7",
+    "styled-system": "^5.1.5",
+    "tippy.js": "6.2.7"
+  }
+}

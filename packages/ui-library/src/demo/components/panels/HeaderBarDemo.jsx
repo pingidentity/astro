@@ -2,7 +2,11 @@ import React from "react";
 import HeaderBar from "../../../components/panels/header-bar";
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 import HR from "ui-library/lib/components/general/HR";
-import pingCentralLogo from "../../images/PingCentral-white.svg";
+import Text, { textTypes } from "ui-library/lib/components/general/Text";
+import pingCentralDark from "../../images/PingCentral.svg";
+import { AboutModal, AboutLogo, AboutVersion } from "ui-library/lib/components/general/About";
+
+const { BODY } = textTypes;
 
 const environments = [
     {
@@ -94,7 +98,22 @@ class HeaderBarDemo extends React.Component {
             navSelected: "main",
             marketSelected: "customers",
             tree: [
-                { id: "help", title: "Help" },
+                {
+                    id: "help",
+                    title: "Help",
+                    children: [
+                        {
+                            id: "docs",
+                            icon: "help",
+                            label: "Documentation",
+                        },
+                        {
+                            id: "about",
+                            icon: "info",
+                            label: "About",
+                        }
+                    ]
+                },
                 {
                     id: "account",
                     label: "John Doe",
@@ -107,6 +126,7 @@ class HeaderBarDemo extends React.Component {
                 }
             ],
             newEnvironment: false,
+            about: false,
         };
 
     }
@@ -114,19 +134,19 @@ class HeaderBarDemo extends React.Component {
     _handleEnvironmentSearch = value => this.setState({ environmentSearch: value });
 
     _handleItemClick = (id) => {
-        this.setState(HeaderBar.Reducer(this.state, HeaderBar.Actions.toggleItem(id)));
+        this.setState(state => HeaderBar.Reducer(state, HeaderBar.Actions.toggleItem(id)));
     };
 
     _handleEnvironment = environment => {
-        this.setState(HeaderBar.Reducer(this.state, HeaderBar.Actions.setEnvironment(environment)));
+        this.setState(state => HeaderBar.Reducer(state, HeaderBar.Actions.setEnvironment(environment)));
     }
 
     _handleNav = nav => {
-        this.setState(HeaderBar.Reducer(this.state, HeaderBar.Actions.setNav(nav)));
+        this.setState(state => HeaderBar.Reducer(state, HeaderBar.Actions.setNav(nav)));
     }
 
     _handleMarket = market => {
-        this.setState(HeaderBar.Reducer(this.state, HeaderBar.Actions.setMarket(market)));
+        this.setState(state => HeaderBar.Reducer(state, HeaderBar.Actions.setMarket(market)));
     }
 
     _handleNewEnvironment = () => {
@@ -139,6 +159,13 @@ class HeaderBarDemo extends React.Component {
         )
     );
 
+    _handleMenuValueChange = (id) => {
+        if (id === "about") {
+            this.setState({ about: true });
+        }
+    }
+
+    _handleCloseAbout = () => this.setState({ about: false });
 
     render() {
         return (
@@ -161,6 +188,7 @@ class HeaderBarDemo extends React.Component {
                     onNavChange={this._handleNav}
                     onMarketChange={this._handleMarket}
                     marketOptions={markets}
+                    onMenuValueChange={this._handleMenuValueChange}
                 />
                 {this.state.newEnvironment && <p>Clicked +New Environment</p>}
                 <HR />
@@ -208,13 +236,6 @@ class HeaderBarDemo extends React.Component {
                     marketSelected="customers"
 
                     siteTitle="UI Library" />
-                <HR />
-                <p>With custom image and set height</p>
-                <HeaderBar
-                    siteLogo={pingCentralLogo}
-                    logoHeight={21}
-                    inline={true}
-                />
                 <HR />
                 <p> With Mode signifier </p>
                 <HeaderBar
@@ -274,6 +295,15 @@ class HeaderBarDemo extends React.Component {
                     renderProductNav={customRenderProductNav}
                     legacy
                 />
+                <AboutModal
+                    modalTitle="About PingCentral"
+                    expanded={this.state.about}
+                    onClose={this._handleCloseAbout}
+                >
+                    <AboutLogo src={pingCentralDark} />
+                    <AboutVersion>Version 1.5.1</AboutVersion>
+                    <Text type={BODY}>Copyright © 2013-2020 Ping Identity Corporation. All rights reserved.</Text>
+                </AboutModal>
             </div>
         );
     }

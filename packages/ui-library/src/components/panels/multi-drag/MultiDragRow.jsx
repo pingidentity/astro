@@ -26,6 +26,8 @@ import Button from "../../buttons/Button";
  *    The name of the row, to be displayed to the right of the other options.
  * @param {preview} [bool]
  *    Whether or not the row is a preview. Preview rows do not render their contents.
+ * @param {status} [MultiDragRow.statuses]
+ *    Add status styling to row
  */
 
 /**
@@ -68,6 +70,15 @@ import Button from "../../buttons/Button";
  *    The props passed to the MultiDragRow.
  */
 
+/**
+ * @enum {string}
+ * @desc Enum for the different statuses.
+ */
+export const statuses = {
+    /** Error */
+    ERROR: "error",
+};
+
 function MultiDragRow(props) {
     const {
         category,
@@ -81,6 +92,7 @@ function MultiDragRow(props) {
         onRemove,
         preview,
         renderButton,
+        status,
     } = props;
 
     const isAdd = column === 0;
@@ -122,7 +134,8 @@ function MultiDragRow(props) {
         <div
             className={classnames(
                 "selector-row",
-                { "selector-row--preview": preview }
+                { "selector-row--preview": preview,
+                    "selector-row--error": status === statuses.ERROR }
             )} data-id={dataId}>
             {preview ? null : rowContent}
         </div>
@@ -143,7 +156,8 @@ MultiDragRow.propTypes = {
     onAdd: PropTypes.func,
     onRemove: PropTypes.func,
     preview: PropTypes.bool,
-    renderButton: PropTypes.func
+    renderButton: PropTypes.func,
+    status: PropTypes.oneOf(Object.values(statuses)),
 };
 
 MultiDragRow.defaultProps = {

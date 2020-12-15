@@ -1,6 +1,23 @@
+@Library(['mpl-library', 'jenkins-ci-library']) _
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
+
+def ortCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/ort-cdn-deploy.yaml';
+def prodCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/prod-cdn-deploy.yaml';
+def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def centralCluster = 'central-us-east-2-k8s'
+
 pipeline {
   agent {
-    label 'ui-library-cdn-deploy'
+    kubernetes {
+      cloud centralCluster
+      yaml uiPipelineShared
+    }
+  }
+  environment{
+    PATH_TO_PACKAGE_JSON = "packages/ui-library"
+    PING_TEAM_NAME = "ux"
+    PING_SERVICE_NAME = "ui-library"
   }
   stages {
     stage('version') {
@@ -26,7 +43,7 @@ pipeline {
       steps {
         dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
-            configFileProvider([configFile(fileId: 'art01.jenkins.settings.xml', targetLocation: 'settings.xml')]) {
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
                 sh """
                     make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.VERSION} package-and-upload-for-hosting
@@ -36,6 +53,7 @@ pipeline {
             }
           }
         }
+        stash includes: 'packages/ui-library/**/*', name: 'package'
       }
 
     }
@@ -54,6 +72,7 @@ pipeline {
             }
           }
         }
+        stash includes: 'packages/ui-library/**/*', name: 'package'
       }
       post {
         always {
@@ -62,26 +81,60 @@ pipeline {
       }
     }
 
-    stage('cdn deploy') {
+    stage('cdn deploy test') {
+      agent { label 'test-cdn-deploy' }
+      environment{
+        ENVIRONMENT = "test"
+        CDN_SOURCE = "packages/ui-library/cdn/${env.SNAPSHOT_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.SNAPSHOT_VERSION}"
+      }
       steps {
-        dir("${env.WORKSPACE}/packages/ui-library") {
-          container('node-builder') {
-            withAWS(region: 'us-east-2', role: 'test-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'test-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-test-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
-              }
-            }
-            withAWS(region: 'us-east-2', role: 'ort-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'ort-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-staging-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
-              }
-            }
-            withAWS(region: 'us-east-2', role: 'prod-k8s-cdn-deployer', roleAccount: '208980577242') {
-              withAWS(region: 'us-east-2', role: 'prod-cdn-deploy-role', roleAccount: '208980577242') {
-                s3Upload(bucket:'pingidentity-prod-assets-us-east-2', path:'ux/ui-library/', file: "cdn/")
-              }
-            }
-          }
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
+        }
+      }
+    }
+
+    stage('cdn deploy ort') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml ortCdnDeploy
+        }
+      }
+      environment{
+        ENVIRONMENT = "staging"
+        CDN_SOURCE = "packages/ui-library/cdn/${env.SNAPSHOT_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.SNAPSHOT_VERSION}"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
+        }
+      }
+    }
+
+    stage('cdn deploy prod') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml prodCdnDeploy
+        }
+      }
+      environment{
+        ENVIRONMENT = "production"
+        CDN_SOURCE = "packages/ui-library/cdn/${env.SNAPSHOT_VERSION}"
+        UNIQUE_CDN_FOLDER = "${env.SNAPSHOT_VERSION}"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'package'
+          sh 'upload_ui'
         }
       }
     }

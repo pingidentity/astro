@@ -30,6 +30,8 @@
         position: relative;
         box-sizing: border-box;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
 
         &--expanded {
             .expandable-card__info {
@@ -68,6 +70,12 @@
         flex-grow: 0;
         flex-basis: calc(100% / 9);
         box-sizing: border-box;
+        display: flex;
+
+        & > * {
+            flex: 1;
+            align-self: stretch;
+        }
 
         @media only screen and (max-width: 2750px) {
             flex-basis: calc(100% / 8);
@@ -132,7 +140,8 @@
     &__footer {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-end;
+        flex-grow: 1;
     }
 
     &__controls {

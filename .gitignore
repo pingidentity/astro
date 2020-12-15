@@ -23,6 +23,10 @@ package-lock.json
 # VS Code
 *.code-workspace
 .vscode/*
+**/.vscode/*
+
+# Parcel
+.cache
 
 #project specific
 lib

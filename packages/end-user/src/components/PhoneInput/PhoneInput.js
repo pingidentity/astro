@@ -60,7 +60,12 @@ const PhoneInputStateless = ({
     });
     const country = countryCodes.find(({ iso2 }) => iso2 === countryName);
     const optionsFiltered = countryCodes
-        .filter(({ name }) => name.toUpperCase().indexOf(dialCodeSearchValue.toUpperCase()) > -1)
+      .filter(({ name, dialCode }) => {
+          return (
+            dialCode.toUpperCase().indexOf(dialCodeSearchValue.toUpperCase()) > -1 ||
+            name.toUpperCase().indexOf(dialCodeSearchValue.toUpperCase()) > -1
+          )
+      })
         .map(({ name, iso2, dialCode }) => {
         return {
             label: `${name} +${dialCode}`,

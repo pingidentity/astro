@@ -1,6 +1,16 @@
 // PATHS ---------------------------------------------------------------------------------------------------------------
 
-@import url('https://use.typekit.net/nxh5mrb.css');
+// Allow library users to specify whether or not to use typekit by
+// setting the $use-typekit variable in their sass file.
+$use-typekit: true !default;
+
+@mixin importTypekit($should-import: true) {
+    @if $should-import {
+        @import url('https://use.typekit.net/nxh5mrb.css');
+    }
+}
+
+@include importTypekit($use-typekit);
 
 
 // SPACING SCALE
@@ -17,6 +27,7 @@ $layout-nav-width: 190px;       // used in miltiple include
 $line-height-default: 1.3em;
 
 // COLOR TOKENS
+$color-astro-blue: #2996cc;
 $color-active-blue: #277ba5;
 $color-active-blue-highlighted: #3d88ae;
 $color-critical-red: #a31300;

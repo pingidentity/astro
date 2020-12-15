@@ -149,7 +149,16 @@ UnstyledSocialButton.propTypes = {
      *
      * (LINKEDIN|GOOGLE|TWITTER|FACEBOOK|APPLE|MICROSOFT|INSTAGRAM|AMAZON)
      */
-    branding: PropTypes.oneOf(Object.values(brandTypes)),
+    branding: PropTypes.oneOfType([
+        PropTypes.oneOf(Object.values(brandTypes)),
+        PropTypes.shape({
+            fill: PropTypes.string,
+            lightBg: PropTypes.bool,
+            border: PropTypes.string,
+            color: PropTypes.string,
+            logo: PropTypes.node,
+        })
+    ]),
     /**
      * Sets a data-id property on the SocialButton element to be used as a test hook
      */

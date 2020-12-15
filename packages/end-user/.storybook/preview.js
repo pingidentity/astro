@@ -4,10 +4,10 @@ import { withHTML } from '@whitespace/storybook-addon-html/react';
 
 import '../src/css/styles.scss';
 
-addDecorator(storyFn => (
+const withPadding = (Story, context) => (
     <div style={{ padding: "50px" }}>
-        {storyFn()}
+        <Story {...context} />
     </div>
-));
+);
 
-addDecorator(withHTML);
+export const decorators = [withPadding, withHTML];

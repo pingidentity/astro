@@ -1,0 +1,13 @@
+.float-label input:not(:placeholder-shown) ~ label,
+.float-label input:-webkit-autofill ~ label {
+  font-size: 10px !important;
+  margin-top: 6px !important;
+  margin-left: 10px !important;
+  font-weight: default !important;
+}
+
+.float-label .float-label__input:not(:placeholder-shown),
+.float-label .float-label__input:-webkit-autofill {
+  padding-top: 20px !important;
+  padding-bottom: 10px !important;
+}

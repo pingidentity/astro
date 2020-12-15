@@ -612,6 +612,11 @@
     content: $icon-saml;
   }
 }
+.icon-scale-balance {
+  &:before {
+    content: $icon-scale-balance; 
+  }
+}
 .icon-search {
   &:before {
     content: $icon-search;

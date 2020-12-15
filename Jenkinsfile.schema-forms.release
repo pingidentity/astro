@@ -1,0 +1,109 @@
+@Library(['mpl-library', 'jenkins-ci-library']) _
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
+
+def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def centralCluster = 'central-us-east-2-k8s'
+
+def configuration = [
+    vaultUrl: 'https://prod-vault-us-east-2.awscloud.pingidentity.net',
+    vaultCredentialId: 'jenkins-icecream-pipeline',
+    engineVersion: 2
+]
+
+def secrets = [
+    [
+        path: 'secret/central/jenkins-icecream/ux/pingux',
+        engineVersion: 2,
+        secretValues: [
+            [envVar: 'NPM_TOKEN', vaultKey: 'NPM_TOKEN']
+        ]
+    ]
+]
+
+pipeline {
+  agent {
+    kubernetes {
+      cloud centralCluster
+      yaml uiPipelineShared
+    }
+  }
+  stages {
+    stage('run-tests') {
+      steps {
+        dir("${env.WORKSPACE}/packages/schema-form") {
+          container('node-builder') {
+            echo "Running schema-forms linting and tests"
+            sh "yarn install --ignore-engines"
+            sh "yarn build:end-user"
+            sh "cd ../end-user/dist && yarn link"
+            sh "cd ../schema-form && yarn link \"@pingux/end-user\""
+            sh "yarn run lint"
+            sh "yarn run coverage"
+          }
+        }
+      }
+    }
+    stage('version, tag and commit') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/schema-form") {
+          container('node-builder') {
+            echo "Incrementing the version: ${params.VERSION_TYPE}"
+            sh "yarn version --${params.VERSION_TYPE} --no-git-tag-version"
+            script {
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
+              env.GIT_RELEASE_TAG = "schema-forms-${env.RELEASE_VERSION}"
+            }
+            echo """
+              release version: ${env.RELEASE_VERSION}
+              git tag: ${env.GIT_RELEASE_TAG}
+            """
+            withCredentials([
+              sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
+            ]){
+              sh  """
+                git add package.json
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+                git commit -m 'Schema Forms: ${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
+
+                git tag ${env.GIT_RELEASE_TAG}
+                GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+              """
+            }
+          }
+        }
+      }
+    }
+    stage('yarn-publish') {
+      steps {
+        dir("${env.WORKSPACE}/packages/schema-form") {
+          container('node-builder') {
+            echo "Building & publishing"
+            withVault([configuration: configuration, vaultSecrets: secrets]) {
+              sh "yarn run dist"
+              sh "echo \"registry=https://registry.npmjs.org/\" >> ~/.npmrc"
+              sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> ~/.npmrc"
+              sh "cd dist && npm publish"
+            }
+          }
+        }
+      }
+    }
+  }
+  post {
+    success {
+      slackSend channel: '#ux-deployments', message: ":verynice: Great Success! Schema-Forms ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
+    //     //    slackSend channel: '#ui-announcements', message: "@here Schema-Forms ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+    //     //    slackSend channel: '#ui-coalition', message: "@here Schema-Forms ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+    }
+    unsuccessful {
+      slackSend channel: '#ux-deployments', message: "@here ${BUILD_URL} failed!", color: "#a31300"
+    }
+
+    cleanup {
+        cleanWs()
+    }
+  }
+}

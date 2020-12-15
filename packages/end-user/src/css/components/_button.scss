@@ -304,4 +304,20 @@
         }
     }
 }
+// Consolidates styles for centered group of buttons with optional cancel link
+.button-group {
+    text-align: center;
+    white-space: nowrap;
+    a {
+        text-transform: none;
+        &.secondary {
+            color: $color-rhino;
+        }
+        &.cancel {
+            display: inline-block;
+            font-weight: normal;
+            font-size: $font-size-md;
+        }
+    }
+}
 

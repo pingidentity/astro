@@ -3,7 +3,17 @@
 $img-path: '../images/';
 $pn-font-path: '../fonts/proxima-nova/' !default;
 
-@import url('https://use.typekit.net/nxh5mrb.css');
+// Allow library users to specify whether or not to use typekit by
+// setting the $use-typekit variable in their sass file.
+$use-typekit: true !default;
+
+@mixin importTypekit($should-import: true) {
+    @if $should-import {
+        @import url('https://use.typekit.net/nxh5mrb.css');
+    }
+}
+
+@include importTypekit($use-typekit);
 
 $img-path: '../images/';
 

@@ -16,6 +16,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.KeyCodes.LEFT_SHIFT).toBe(16); //LEFT_SHIFT
             expect(KeyboardUtils.KeyCodes.LEFT_CTRL).toBe(17); //LEFT_CTRL
             expect(KeyboardUtils.KeyCodes.LEFT_ALT).toBe(18); //LEFT_ALT
+            expect(KeyboardUtils.KeyCodes.END).toBe(35); //END
+            expect(KeyboardUtils.KeyCodes.HOME).toBe(36); //HOME
             expect(KeyboardUtils.KeyCodes.ARROW_LEFT).toBe(37); //ARROW_LEFT
             expect(KeyboardUtils.KeyCodes.ARROW_UP).toBe(38); //ARROW_UP
             expect(KeyboardUtils.KeyCodes.ARROW_RIGHT).toBe(39); //ARROW_RIGHT
@@ -39,6 +41,8 @@ describe("KeyboardUtils", function () {
         it("does not have none-modifier codes", function () {
             expect(KeyboardUtils.ModifierCodes.indexOf(9) === -1).toBe(true); //TAB
             expect(KeyboardUtils.ModifierCodes.indexOf(27) === -1).toBe(true); //ESC
+            expect(KeyboardUtils.ModifierCodes.indexOf(35) === -1).toBe(true); //END
+            expect(KeyboardUtils.ModifierCodes.indexOf(36) === -1).toBe(true); //HOME
             expect(KeyboardUtils.ModifierCodes.indexOf(37) === -1).toBe(true); //ARROW_LEFT
             expect(KeyboardUtils.ModifierCodes.indexOf(38) === -1).toBe(true); //ARROW_UP
             expect(KeyboardUtils.ModifierCodes.indexOf(39) === -1).toBe(true); //ARROW_RIGHT
@@ -64,6 +68,31 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.HOME)).toBe(false);
+        });
+    });
+
+    describe("isNavigationKey", function () {
+        it("returns true for navigation key codes", function () {
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(true);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(true);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.ARROW_LEFT)).toBe(true);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(true);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.END)).toBe(true);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.HOME)).toBe(true);
+        });
+
+        it("returns false for non-navigation key codes", function () {
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.TAB)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.ESC)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.ENTER)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.LEFT_SHIFT)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.LEFT_CTRL)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.LEFT_ALT)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
+            expect(KeyboardUtils.isNavigationKey(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
         });
     });
 
@@ -82,6 +111,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -103,6 +134,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isEsc(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -124,6 +157,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isEnter(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -145,6 +180,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isLeftShift(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -166,6 +203,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isLeftCtrl(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -187,6 +226,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isLeftAlt(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -208,6 +249,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowLeft(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -229,6 +272,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.ARROW_LEFT)).toBe(false);
             expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowUp(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -250,6 +295,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.ARROW_LEFT)).toBe(false);
             expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowRight(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
@@ -271,9 +318,55 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.ARROW_LEFT)).toBe(false);
             expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
+            expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isArrowDown(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
+        });
+    });
+
+    describe("isEnd", function () {
+        it("returns true for end key code", function () {
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.END)).toBe(true);
+        });
+
+        it("returns false for non-tab key codes", function () {
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.TAB)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.ESC)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.ENTER)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.LEFT_SHIFT)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.LEFT_CTRL)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.LEFT_ALT)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.ARROW_LEFT)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.HOME)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
+            expect(KeyboardUtils.isEnd(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
+        });
+    });
+
+    describe("isHome", function () {
+        it("returns true for end key code", function () {
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.HOME)).toBe(true);
+        });
+
+        it("returns false for non-tab key codes", function () {
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.TAB)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.ESC)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.ENTER)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.LEFT_SHIFT)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.LEFT_CTRL)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.LEFT_ALT)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.ARROW_LEFT)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
+            expect(KeyboardUtils.isHome(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
         });
     });
 
@@ -293,6 +386,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isLeftCmd(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isLeftCmd(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isLeftCmd(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isLeftCmd(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isLeftCmd(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isLeftCmd(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
             expect(KeyboardUtils.isLeftCmd(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
         });
@@ -314,6 +409,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isRightCmd(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isRightCmd(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isRightCmd(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isRightCmd(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isRightCmd(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isRightCmd(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isRightCmd(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
         });
@@ -335,6 +432,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isRightAlt(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isRightAlt(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isRightAlt(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isRightAlt(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isRightAlt(KeyboardUtils.KeyCodes.HOME)).toBe(false);
             expect(KeyboardUtils.isRightAlt(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
             expect(KeyboardUtils.isRightAlt(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
         });
@@ -357,6 +456,8 @@ describe("KeyboardUtils", function () {
             expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(false);
             expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(false);
             expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(false);
+            expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.END)).toBe(false);
+            expect(KeyboardUtils.isModifier(KeyboardUtils.KeyCodes.HOME)).toBe(false);
         });
     });
 

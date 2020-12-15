@@ -1,16 +1,14 @@
-jest.dontMock("../Table");
+// jest.dontMock("../Table");
 import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import { mount, shallow } from "enzyme";
 import Table, {
-    columnAlignments,
     overflowOptions,
-    tableLayouts,
-    tableWidths,
     Divider
 } from "../Table";
 
+jest.useFakeTimers();
 describe("Table", function () {
     const headData = [
         "name",
@@ -135,7 +133,7 @@ describe("Table", function () {
         const component = shallow(
             <Table
                 bodyData={bodyData}
-                width={tableWidths.FULL}
+                width={Table.tableWidths.FULL}
             />
         );
 
@@ -156,7 +154,7 @@ describe("Table", function () {
         const component = shallow(
             <Table
                 bodyData={bodyData}
-                layout={tableLayouts.FIXED}
+                layout={Table.tableLayouts.FIXED}
             />
         );
 
@@ -180,7 +178,7 @@ describe("Table", function () {
                 headData={headData}
                 columnStyling={[
                     {
-                        alignment: columnAlignments.CENTER
+                        alignment: Table.columnAlignments.CENTER
                     }
                 ]}
             />
@@ -357,48 +355,4 @@ describe("Table", function () {
         );
         expect(component.find(".tr--fixed-header").exists()).toBeFalsy();
     });
-
-    it("sets loaded state to true if fixedHeader prop is true", () => {
-        // Create our own "addEventListener" fxn
-        const map = {};
-        window.addEventListener = jest.fn((event, cb) => {
-            map[event] = cb;
-        });
-
-        const component = shallow(
-            <Table
-                bodyData={bodyData}
-                headData={headData}
-                fixedHeader
-            />
-        );
-
-        // Fire synthetic event
-        map.DOMContentLoaded();
-
-        expect(component.state("loaded")).toEqual(true);
-    });
-
-    it("runs forceUpdate when called", () => {
-        const map = {};
-        window.addEventListener = jest.fn((event, cb) => {
-            map[event] = cb;
-        });
-
-        Table.prototype.forceUpdate = jest.fn();
-
-        mount(
-            <Table
-                bodyData={bodyData}
-                headData={headData}
-                fixedHeader
-            />
-        );
-
-        // Fire synthetic event
-        map.resize();
-
-        expect(Table.prototype.forceUpdate).toHaveBeenCalled();
-    });
-
 });

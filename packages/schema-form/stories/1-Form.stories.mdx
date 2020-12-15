@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks';
+import * as stories from './Form.stories.js';
+import Form from '../src/components/SchemaForm';
+
+<Meta title="Schema Form/Form" component={Form} />
+
+# Props
+In addition to the props listed, any props from the [RJSF docs](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/form-props) can be passed through.
+<Props for={Form} />
+
+# Schema Form
+Schema form will generate a React form based off the JSON schema provided. You can almost think of this as the skeleton to your form.
+To customize the look and feel of your form, you will also need to include UISchema.
+<Canvas>
+  <Story story={stories.basic} />
+</Canvas>
+
+# uiSchema Form
+A UI schema provides information on how the form should be rendered, while the JSON schema tells what should be rendered. With UISchema,
+you're able to add custom widgets using `'ui:widget'`, and more options using `'ui:options'`. 
+
+## uiSchema ui:widget
+The uiSchema ui:widget property tells the form which UI widget should be used to render a field.
+For more information and examples please visit: https://react-jsonschema-form.readthedocs.io/en/latest/usage/widgets/
+
+## uiSchema ui:options
+The uiSchema ui:options property allows for further customization of the form. Properties within ui:options should be rendered as
+`{"ui:options": {[property]: [value]}}`. For example:
+```html
+{
+  "ui:options": {
+    "title": "Title",
+    "description": "Description"
+  }
+}
+```
+<Canvas>
+  <Story story={stories.UISchema} />
+</Canvas>

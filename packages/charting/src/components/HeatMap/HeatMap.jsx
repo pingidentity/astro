@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -91,7 +91,10 @@ export const pointClick = onPointClick => e => onPointClick(e);
 
 export const updateSource = (map, points) => {
     if (map.getSource) {
-        map.getSource('mapData').setData(pointsToGeoJson(points));
+        const source = map.getSource('mapData');
+        if (source) {
+            source.setData(pointsToGeoJson(points));
+        }
     }
 };
 
@@ -109,12 +112,12 @@ export const mouseEnter = (map, onMouseEnter) => (e) => {
 
 export const callbackWithBoundsAndZoom = (map, callback) => (e) => {
     const {
-        _nw: nwBound,
-        _se: seBound,
+        _ne: neBound,
+        _sw: swBound,
     } = map.getBounds();
     callback({
-        nwBound,
-        seBound,
+        neBound,
+        swBound,
         zoom: map.getZoom(),
     }, e);
 };
@@ -137,143 +140,157 @@ export default function HeatMap({
     onPointMouseLeave,
     onZoom,
     points,
+    render,
     scoreGradient,
     startingZoom,
     width,
 }) {
-    const mapContainer = useRef();
-    const mapObject = useRef({});
+    const mapContainer = useRef({});
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [mapObject, setMapObject] = useState();
 
     useEffect(() => {
-        const map = new mapboxgl.Map({
-            attributionControl: false,
-            center,
-            container: mapContainer.current,
-            logoPosition: 'top-right',
-            maxZoom,
-            minZoom,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            zoom: startingZoom,
-        });
-
-        map.on('load', () => {
-            map.addSource('mapData', {
-                type: 'geojson',
-                data: pointsToGeoJson(points),
-                // Path to a very large Mapbox dataset for testing.
-                // data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
-                cluster: true,
-                clusterMaxZoom: 14,
-                clusterRadius: 50,
-                clusterProperties: {
-                    // Create a custom property so that individual points in the dataset
-                    // can behave as though they were clusters. This pulls out "count" from
-                    // each point and adds them together.
-                    'count': ['+', ['get', 'count']],
-                    ...scoreGradient ? {
-                        score: ['+', ['get', 'score']],
-                    } : {},
-                },
+        // Only set up the map if we don't already have a map in state.
+        if (!mapObject) {
+            const map = new mapboxgl.Map({
+                attributionControl: false,
+                center,
+                container: mapContainer.current,
+                logoPosition: 'top-right',
+                maxZoom,
+                minZoom,
+                style: 'mapbox://styles/mapbox/streets-v11',
+                zoom: startingZoom,
             });
 
-            // Add two similar layers so we can distinguish Mapbox clusters in callbacks.
-            map.addLayer({
-                id: 'unclustered-point',
-                type: 'circle',
-                source: 'mapData',
-                // This only gets clusters and points that have a
-                // "count" property of more than one.
-                filter: ['<', ['get', 'count'], 2],
-                paint: {
-                    'circle-color': getCircleColor(scoreGradient),
-                    'circle-radius': [
-                        'step',
-                        ['get', 'count'],
-                        20,
-                        100,
-                        30,
-                        750,
-                        40,
-                    ],
-                },
+            // Set the map object in state to use it later and so that we know the initial setup
+            // has occurred.
+            setMapObject(map);
+
+            map.on('load', () => {
+                // Many map events can't fire until the map's load event fires.
+                setIsLoaded(true);
+
+                map.addSource('mapData', {
+                    type: 'geojson',
+                    data: pointsToGeoJson(points),
+                    // Path to a very large Mapbox dataset for testing.
+                    // data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
+                    cluster: true,
+                    clusterMaxZoom: 14,
+                    clusterRadius: 50,
+                    clusterProperties: {
+                        // Create a custom property so that individual points in the dataset
+                        // can behave as though they were clusters. This pulls out "count" from
+                        // each point and adds them together.
+                        'count': ['+', ['get', 'count']],
+                        ...scoreGradient ? {
+                            score: ['+', ['get', 'score']],
+                        } : {},
+                    },
+                });
+
+                // Add two similar layers so we can distinguish Mapbox clusters in callbacks.
+                map.addLayer({
+                    id: 'unclustered-point',
+                    type: 'circle',
+                    source: 'mapData',
+                    // This only gets clusters and points that have a
+                    // "count" property of more than one.
+                    filter: ['<', ['get', 'count'], 2],
+                    paint: {
+                        'circle-color': getCircleColor(scoreGradient),
+                        'circle-radius': [
+                            'step',
+                            ['get', 'count'],
+                            20,
+                            100,
+                            30,
+                            750,
+                            40,
+                        ],
+                    },
+                });
+
+                map.addLayer({
+                    id: 'clusters',
+                    type: 'circle',
+                    source: 'mapData',
+                    // This only gets clusters and points that have a
+                    // "count" property of more than one.
+                    filter: ['>', ['get', 'count'], 1],
+                    paint: {
+                        'circle-color': getCircleColor(scoreGradient),
+                        'circle-radius': [
+                            'step',
+                            ['get', 'count'],
+                            20,
+                            100,
+                            30,
+                            750,
+                            40,
+                        ],
+                    },
+                });
+
+                map.addLayer({
+                    id: 'cluster-count',
+                    type: 'symbol',
+                    source: 'mapData',
+                    filter: ['>', ['get', 'count'], 0],
+                    layout: {
+                        'text-field': '{count}',
+                        'text-font': ['Arial Unicode MS Bold'],
+                        'text-size': 12,
+                    },
+                    paint: {
+                        'text-color': '#FFFFFF',
+                    },
+                });
+
+
+                map.on('move', callbackWithBoundsAndZoom(map, onMapMove));
+
+                map.on('zoom', callbackWithBoundsAndZoom(map, onZoom));
+
+                map.on('click', 'clusters', clusterClick(map, onClusterClick));
+
+                map.on('click', 'unclustered-point', pointClick(onPointClick));
+
+                map.on('mouseenter', 'clusters', mouseEnter(map, onClusterMouseEnter));
+
+                map.on('mouseleave', 'clusters', mouseLeave(map, onClusterMouseLeave));
+
+                map.on('mouseenter', 'unclustered-point', mouseEnter(map, onPointMouseEnter));
+
+                map.on('mouseleave', 'unclustered-point', mouseLeave(map, onPointMouseLeave));
             });
-
-            map.addLayer({
-                id: 'clusters',
-                type: 'circle',
-                source: 'mapData',
-                // This only gets clusters and points that have a
-                // "count" property of more than one.
-                filter: ['>', ['get', 'count'], 1],
-                paint: {
-                    'circle-color': getCircleColor(scoreGradient),
-                    'circle-radius': [
-                        'step',
-                        ['get', 'count'],
-                        20,
-                        100,
-                        30,
-                        750,
-                        40,
-                    ],
-                },
-            });
-
-            map.addLayer({
-                id: 'cluster-count',
-                type: 'symbol',
-                source: 'mapData',
-                filter: ['>', ['get', 'count'], 0],
-                layout: {
-                    'text-field': '{count}',
-                    'text-font': ['Arial Unicode MS Bold'],
-                    'text-size': 12,
-                },
-                paint: {
-                    'text-color': '#FFFFFF',
-                },
-            });
-
-
-            map.on('move', callbackWithBoundsAndZoom(map, onMapMove));
-
-            map.on('zoom', callbackWithBoundsAndZoom(map, onZoom));
-
-            map.on('click', 'clusters', clusterClick(map, onClusterClick));
-
-            map.on('click', 'unclustered-point', pointClick(onPointClick));
-
-            map.on('mouseenter', 'clusters', mouseEnter(map, onClusterMouseEnter));
-
-            map.on('mouseleave', 'clusters', mouseLeave(map, onClusterMouseLeave));
-
-            map.on('mouseenter', 'unclustered-point', mouseEnter(map, onPointMouseEnter));
-
-            map.on('mouseleave', 'unclustered-point', mouseLeave(map, onPointMouseLeave));
-
-            mapObject.current = map;
-        });
-    }, []);
-
-    useEffect(
-        () => updateSource(mapObject.current, points),
-        // Might be necessary to stringify this one as well for deep equality.
-        [points],
-    );
+        } else if (isLoaded) {
+            updateSource(mapObject, points);
+        }
+        // Also rerender on load, because the data prop can change before the map is finished
+        // initializing, which causes it to be loaded with the original dataset.
+    }, [JSON.stringify(points), isLoaded]);
 
     useEffect(() => {
-        if (mapObject.current.setCenter) {
-            mapObject.current.setCenter(center);
+        if (isLoaded) {
+            mapObject.setCenter(center);
         }
     }, [JSON.stringify(center)]);
 
     useEffect(() => {
-        if (mapObject.current.setPaintProperty) {
-            mapObject.current.setPaintProperty('clusters', 'circleColor', getCircleColor(scoreGradient));
+        if (isLoaded) {
+            mapObject.setPaintProperty('clusters', 'circleColor', getCircleColor(scoreGradient));
         }
     }, [JSON.stringify(scoreGradient)]);
 
-    return (
+    useEffect(() => {
+        if (isLoaded) {
+            mapObject.resize();
+        }
+    }, [mapContainer.offsetWidth]);
+
+    const mapNode = (
         <div css={getOuterContainerStyles(height, width)} data-id={dataId}>
             <div
                 ref={mapContainer}
@@ -281,6 +298,8 @@ export default function HeatMap({
             />
         </div>
     );
+
+    return render({ mapObject, mapNode });
 }
 
 const zoomPropType = PropTypes.oneOf(new Array(22).fill(undefined).map((val, idx) => idx + 1));
@@ -385,6 +404,13 @@ HeatMap.propTypes = {
         PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     )).isRequired,
     /**
+     * A function used to render the map's container and its anchor element, which Mapbox
+     * attaches the map to. This is passed an object with two properties: the mapNode, which is
+     * the React node that the map renders into, and the mapObject, which is the JavaScript object
+     * used to interact with Mapbox's API.
+     */
+    render: PropTypes.func,
+    /**
      * A number from 1-22 representing the map's initial zoom level. Higher numbers indicate
      * a closer zoom.
      */
@@ -406,4 +432,5 @@ HeatMap.defaultProps = {
     onPointMouseLeave: noop,
     onZoom: noop,
     points: [],
+    render: ({ mapNode }) => mapNode,
 };

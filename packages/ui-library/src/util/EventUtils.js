@@ -78,7 +78,7 @@ exports.forwardTargetValueAsInt = function (callback) {
  * @returns {boolean}
  *     Whether or not the event was outside of the container.  True means the event was outside
  */
-exports.callIfOutsideOfContainer = function (container, callback, e) {
+exports.callIfOutsideOfContainer = function (container, callback, e, closeIfPortal = false) {
 
 
     if (global.getSelection().toString()) {
@@ -86,9 +86,9 @@ exports.callIfOutsideOfContainer = function (container, callback, e) {
     }
 
     var node = e.target;
-
+    
     while (node.parentNode) {
-        if (node === container || isPortal(node)) {
+        if ((node === container) || (closeIfPortal ? false : isPortal(node))) {
             return false;
         }
         //if we've bubbled all the way up to the top of the dom and still havent matched the container then

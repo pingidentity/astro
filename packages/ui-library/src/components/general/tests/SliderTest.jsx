@@ -131,9 +131,8 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732,
-                        #a9d732
-                        25%, #e2d714 25%, #e2d714 50%, #e78726 50%, #e78726 75%, #eb2c38 75%, #eb2c38 100%)`
+            `linear-gradient(to right, #a9d732 0%, #a9d732 0%, #e2d714 0%, #e2d714 33.33333333333333%,\
+ #e78726 33.33333333333333%, #e78726 66.66666666666666%, #eb2c38 66.66666666666666%, #eb2c38 100%`
         ));
     });
 
@@ -148,10 +147,7 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732,
-                            #a9d732
-                            50%, #eb2c38
-                            50%, #eb2c38 100%)`
+            `linear-gradient(to right, #a9d732 0%, #a9d732 50%, #eb2c38 50%, #eb2c38 100%`
         ));
     });
 
@@ -166,7 +162,7 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732 0%, #e2d714 50%, #eb2c38 100%)`
+            `linear-gradient(to right, #a9d732 0%, #e2d714 50%, #eb2c38 100%`
         ));
     });
 
@@ -184,7 +180,119 @@ describe("Slider", () => {
 
 
         expect(componentStyle).toHaveProperty("background", (
-            `linear-gradient(to right, #a9d732 10%, #e2d714 30%, #e78726 50%, #eb2c38 70%)`
+            `linear-gradient(to right, #a9d732 10%, #e2d714 30%, #e78726 50%, #eb2c38 70%`
         ));
+    });
+
+    it("gets correct value on right arrow", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: 0 });
+        const indicator = component.find(".slider__indicator");
+        indicator.simulate("keyDown", { keyCode: 39 });
+        expect(testCallback).toHaveBeenCalledWith(1);
+    });
+
+    it("gets correct value on increment of first array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [0, 50] });
+        const indicator = component.find(".slider__indicator").at(0);
+        indicator.simulate("keyDown", { keyCode: 39 });
+        expect(testCallback).toHaveBeenCalledWith([1, 50]);
+    });
+
+    it("gets correct value on increment of second array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [0, 50] });
+        const indicator = component.find(".slider__indicator").at(1);
+        indicator.simulate("keyDown", { keyCode: 39 });
+        expect(testCallback).toHaveBeenCalledWith([0, 51]);
+    });
+
+    it("gets correct value on up arrow", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: 0 });
+        const indicator = component.find(".slider__indicator");
+        indicator.simulate("keyDown", { keyCode: 38 });
+        expect(testCallback).toHaveBeenCalledWith(1);
+    });
+
+    it("gets correct value on left arrow", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: 1 });
+        const indicator = component.find(".slider__indicator");
+        indicator.simulate("keyDown", { keyCode: 37 });
+        expect(testCallback).toHaveBeenCalledWith(0);
+    });
+
+    it("gets correct value on decrement of first array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [1, 50] });
+        const indicator = component.find(".slider__indicator").at(0);
+        indicator.simulate("keyDown", { keyCode: 37 });
+        expect(testCallback).toHaveBeenCalledWith([0, 50]);
+    });
+
+    it("gets correct value on decrement of second array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [0, 50] });
+        const indicator = component.find(".slider__indicator").at(1);
+        indicator.simulate("keyDown", { keyCode: 37 });
+        expect(testCallback).toHaveBeenCalledWith([0, 49]);
+    });
+
+    it("gets correct value on down arrow", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: 1 });
+        const indicator = component.find(".slider__indicator");
+        indicator.simulate("keyDown", { keyCode: 40 });
+        expect(testCallback).toHaveBeenCalledWith(0);
+    });
+
+    it("gets correct value on on end key", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: 50 });
+        const indicator = component.find(".slider__indicator");
+        indicator.simulate("keyDown", { keyCode: 35 });
+        expect(testCallback).toHaveBeenCalledWith(100);
+    });
+
+    it("gets correct value on end key of first array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [0, 50] });
+        const indicator = component.find(".slider__indicator").at(0);
+        indicator.simulate("keyDown", { keyCode: 35 });
+        expect(testCallback).toHaveBeenCalledWith([49, 50]);
+    });
+
+    it("gets correct value on end key of second array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [0, 50] });
+        const indicator = component.find(".slider__indicator").at(1);
+        indicator.simulate("keyDown", { keyCode: 35 });
+        expect(testCallback).toHaveBeenCalledWith([0, 100]);
+    });
+
+    it("gets correct value on on home key", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: 50 });
+        const indicator = component.find(".slider__indicator");
+        indicator.simulate("keyDown", { keyCode: 36 });
+        expect(testCallback).toHaveBeenCalledWith(0);
+    });
+
+    it("gets correct value on home key of first array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [1, 50] });
+        const indicator = component.find(".slider__indicator").at(0);
+        indicator.simulate("keyDown", { keyCode: 36 });
+        expect(testCallback).toHaveBeenCalledWith([0, 50]);
+    });
+
+    it("gets correct value on home key of second array value", () => {
+        const testCallback = jest.fn();
+        const component = getComponent({ onValueChange: testCallback, value: [1, 50] });
+        const indicator = component.find(".slider__indicator").at(1);
+        indicator.simulate("keyDown", { keyCode: 36 });
+        expect(testCallback).toHaveBeenCalledWith([1, 2]);
     });
 });

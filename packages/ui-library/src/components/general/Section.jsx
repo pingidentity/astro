@@ -38,8 +38,6 @@ import { deprecatedStatelessProp } from "../../util/DeprecationUtils";
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally. WARNING. Default value will be
  *     set to false from next version.
- * @param {object} [rowAccessories]
- *     A right-aligned container where buttons and toggles may be passed in to render on the right side of the section
  * @param {string|object} [title]
  *     The text to display in the the collapsed view and along the top in the expanded view (adjacent to the arrow)
  * @param {string|object} [titleValue]
@@ -168,7 +166,9 @@ class SectionStateless extends React.Component {
                             {
                                 "collapsible-section-title--circled": this.props.arrowCircle,
                                 "collapsible-section-title--node": this.props.title
-                                    ? typeof this.props.title !== "string" : this.props.title
+                                    ? typeof this.props.title !== "string" : this.props.title,
+                                "collapsible-section-title--full-width": !this.props.accessories &&
+                                    !this.props.titleValue && !this.props.detailsText
                             }
                         )}
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}

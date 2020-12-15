@@ -156,6 +156,8 @@ function convertFilteredIndexes (columns, desc) {
  *    Display searchbar on all columns.
  * @param {boolean} [showSearch=false]
  *    Display searchbar on the first column.
+ * @param {object} [rightAccessories]
+ *    Display accessories to the right of the search bar, must be used in conjunction with search bar.
  * @param {boolean} [showCategoryFilterOnAllColumns=false]
  *    Display category list on all columns.
  * @param {boolean} [showCategoryFilter=false]
@@ -231,6 +233,7 @@ class MultiDragStateless extends React.Component {
                 rows: PropTypes.array
             })
         ).isRequired,
+        rightAccessories: PropTypes.object,
         showSearchOnAllColumns: PropTypes.bool,
         showSearch: PropTypes.bool,
         showCategoryFilterOnAllColumns: PropTypes.bool,
@@ -408,18 +411,23 @@ class MultiDragStateless extends React.Component {
 
     _renderSearch = (column, index) => {
         const handleSearch = (value) => this.props.onSearch(index, value);
-
         return (
-            <FormSearchBox
-                data-id={`search-${index}`}
-                key={`search-${index}`}
-                onValueChange={handleSearch}
-                className="input-search row-selector__search"
-                placeholder={`Search ${column.searchName || column.name}`}
-                showClear={true}
-                autoFocus={this.props.autoFocus}
-                value={column.search}
-            />
+            <>
+                <FormSearchBox
+                    data-id={`search-${index}`}
+                    key={`search-${index}`}
+                    onValueChange={handleSearch}
+                    className="input-search row-selector__search"
+                    placeholder={`Search ${column.searchName || column.name}`}
+                    showClear={true}
+                    autoFocus={this.props.autoFocus}
+                    value={column.search}
+                />
+                
+                {this.props.rightAccessories
+                    ? <div className="row-selector__right-accessories">{this.props.rightAccessories}</div>
+                    : ""}
+            </>
         );
     };
 
@@ -444,6 +452,7 @@ class MultiDragStateless extends React.Component {
                     {columns.map((column, index) => (
                         (showSearch && index === 0) || showSearchOnAllColumns
                             ? this._renderSearch(column, index)
+                            //create empty column to size single search column.
                             : <div key={"search"+column.name} className="row-selector__search"/>
                     ))}
                 </div>

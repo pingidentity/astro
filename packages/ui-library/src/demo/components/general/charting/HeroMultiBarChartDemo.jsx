@@ -78,6 +78,8 @@ class HeroMuliBarChartDemo extends React.Component {
         errorMessage: null,
         loading: false,
         totalValue: "24,458",
+        chartData: null,
+        astro: false,
     };
 
     _toggleError = () => {
@@ -95,21 +97,28 @@ class HeroMuliBarChartDemo extends React.Component {
         });
     }
 
-    _getLegend = () => {
+    _getLegend = (isAstro) => {
         const { label } = this.state.range;
 
         return [
             {
                 label: "MFA",
-                value: _.sumBy(data[label], "mfaSuccess"),
-                textColor: "#fff",
+                value: this.state.chartData ? this.state.chartData["mfaSuccess"] : _.sumBy(data[label], "mfaSuccess"),
+                textColor: isAstro ? "#3C5080" : "#fff",
             },
             {
                 label: "MFA Failed",
-                value: _.sumBy(data[label], "mfaFailed"),
-                textColor: "#fff",
+                value: this.state.chartData ? this.state.chartData["mfaFailed"] :_.sumBy(data[label], "mfaFailed"),
+                textColor: isAstro ? "#A31300" : "#fff",
             },
         ];
+    }
+
+    _onGroupOver = ({ payload }) => {
+        const newData = payload.length > 0
+            ? payload[0].payload
+            : null;
+        this.setState({ chartData: newData });
     }
 
     _onRangeChange = range => {
@@ -117,7 +126,19 @@ class HeroMuliBarChartDemo extends React.Component {
     }
 
     render () {
-        const { loading, errorMessage, range } = this.state;
+        const { loading, errorMessage, range, chartData } = this.state;
+
+        const dataKeysStyleBase = {
+            mfaSuccess: { hoverColor: "#ffa500" },
+            mfaFailed: { hoverColor: "#e34234" },
+        };
+
+        const dataKeysStyleAstro = {
+            mfaSuccess: { color: "#3C5080" },
+            mfaFailed: { color: "#A31300" },
+        };
+
+        const dataKeysStyle = this.state.astro ? dataKeysStyleAstro : dataKeysStyleBase;
 
         return (
             <div>
@@ -136,21 +157,28 @@ class HeroMuliBarChartDemo extends React.Component {
                             onChange={this._toggleLoading}
                         />
                     </Layout.Column>
+                    <Layout.Column>
+                        <Checkbox
+                            label="Show Astro Theme"
+                            checked={this.state.astro}
+                            onChange={() => this.setState((state) => ({ astro: !state.astro }))}
+                        />
+                    </Layout.Column>
                 </Layout.Row>
                 <HeroMultiBarChart
                     loading={loading}
                     loadingMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                     errorMessage={errorMessage}
-                    title="Totals for Today"
-                    legend={this._getLegend()}
-                    bgImage={"src/images/herochart-bg1.png"}
+                    title={`Totals ${chartData ? chartData.id : ""}`}
+
+                    legend={this._getLegend(this.state.astro)}
+                    bgImage={!this.state.astro && "src/images/herochart-bg1.png"}
+                    isAstro={this.state.astro}
                     data={data[range.label]}
                     xAxisKey="id"
                     dataKeys={["mfaSuccess", "mfaFailed"]}
-                    dataKeysStyle={{
-                        mfaSuccess: { hoverColor: "#ffa500" },
-                        mfaFailed: { hoverColor: "#e34234" },
-                    }}
+                    dataKeysStyle={dataKeysStyle}
+                    onGroupSelectionChange={this._onGroupOver}
                     rockerButton={(
                         <RockerButton
                             type={RockerButton.rockerTypes.CHART}

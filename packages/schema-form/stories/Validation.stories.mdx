@@ -1,0 +1,95 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks';
+import * as stories from './Validation.stories.js';
+
+<Meta title="usage/Validation" />
+
+# Custom Validation
+
+
+## Form Props
+
+
+### `validate`
+
+
+To add custom validation, utilize the Form's validate prop to trigger a validation function.
+The below example uses the following:
+
+
+```html
+function validate(formData, errors) {
+  if (formData.Password1 !== formData.Password2) {
+    errors.Password2.addError("Passwords don't match");
+  }
+  return errors;
+}
+
+<Form
+  schema={('Schema', schema)}
+  validate={validate}
+/>
+```
+
+
+<Canvas>
+  <Story story={stories.basic} />
+</Canvas>
+
+
+### `liveValidate="on"`
+
+
+To add live validation, utilize the Form's liveValidate prop to trigger real-time validation.
+The below example uses the following:
+
+
+```html
+function validate(formData, errors) {
+  if (formData.Password1 !== formData.Password2) {
+    errors.Password2.addError("Passwords don't match");
+  }
+  return errors;
+}
+
+<Form
+  schema={('Schema', schema)}
+  validate={validate}
+  liveValidate="on"
+/>
+```
+
+
+<Canvas>
+  <Story story={stories.liveOn} />
+</Canvas>
+
+
+### `liveValidate="postSubmit"`
+
+
+To add live validation ONLY AFTER the first form submission, utilize the Form's liveValidate prop
+and pass in the option `"postSubmit"`
+
+
+The below example uses the following:
+
+
+```html
+function validate(formData, errors) {
+  if (formData.Password1 !== formData.Password2) {
+    errors.Password2.addError("Passwords don't match");
+  }
+  return errors;
+}
+
+<Form
+  schema={('Schema', schema)}
+  validate={validate}
+  liveValidate="postSubmit"
+/>
+```
+
+
+<Canvas>
+  <Story story={stories.livePostSubmit} />
+</Canvas>

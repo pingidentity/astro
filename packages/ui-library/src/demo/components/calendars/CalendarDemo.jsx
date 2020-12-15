@@ -52,6 +52,7 @@ class CalendarDemo extends React.Component {
                     labelHelpText="Help text can go here"
                     name="calendar-demo"
                     onValueChange={this._onEnrollmentDateChanged(1)}
+                    onClose={console.log}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate1)}</div>
 

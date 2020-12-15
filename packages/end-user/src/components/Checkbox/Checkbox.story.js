@@ -12,9 +12,7 @@ export const Default = () => (
         <Checkbox label="I'm a checkbox!" />
     </>
 );
-Default.story = {
-    name: 'Inline (Default)'
-};
+Default.storyName = 'Inline (Default)';
 
 export const Stacked = () => (
     <div style={{ maxWidth: 300 }}>

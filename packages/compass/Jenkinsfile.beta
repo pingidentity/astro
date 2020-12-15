@@ -1,0 +1,72 @@
+@Library(['mpl-library', 'jenkins-ci-library']) _
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
+
+def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def centralCluster = 'central-us-east-2-k8s'
+
+pipeline {
+  agent {
+    kubernetes {
+      cloud centralCluster
+      yaml uiPipelineShared
+    }
+  }
+  stages {
+
+    stage('version, tag and commit') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/compass") {
+          container('node-builder') {
+
+            script {
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
+              env.GIT_RELEASE_TAG = "compass-${env.RELEASE_VERSION}"
+            }
+            echo """
+              release version: ${env.RELEASE_VERSION}
+              git tag: ${env.GIT_RELEASE_TAG}
+            """
+
+          }
+        }
+      }
+    }
+    stage('yarn-publish') {
+      steps {
+        dir("${env.WORKSPACE}/packages/compass/build") {
+          container('node-builder') {
+            echo "Building & publishing"
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              sh "npm publish --tag beta"
+            }
+          }
+        }
+      }
+    }
+    stage('update-demo') {
+      steps {
+        dir("${env.WORKSPACE}/packages/compass") {
+          container('node-builder'){
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=compass package-and-upload-compass"
+            }
+          }
+        }
+      }
+    }
+  }
+  post {
+    success {
+       slackSend channel: '#ux-deployments', message: ":verynice: Great Success! Compass ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/compass.", color: "#4aba78"
+       slackSend channel: '#compass_actual_dev', message: ":verynice: Great Success! Compass ${env.RELEASE_VERSION} has been released. Demo site is available at https://uilibrary.ping-eng.com/compass.", color: "#4aba78"
+    }
+    unsuccessful {
+       slackSend channel: '#ux-deployments', message: "@here Compass deploy failed! ${BUILD_URL}", color: "#a31300"
+    }
+
+    cleanup {
+        cleanWs()
+    }
+  }
+}

@@ -82,6 +82,7 @@ export const Score = () => {
             onPointMouseLeave={value => console.log('onPointMouseLeave: ', value)} // eslint-disable-line
             onZoom={value => console.log('onZoom: ', value)} // eslint-disable-line
             startingZoom={6}
+            minZoom={2}
         />
     );
 };

@@ -1,0 +1,38 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": false
+            }
+        ],
+        "@babel/preset-react",
+        "@emotion/babel-preset-css-prop"
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": true
+            }
+        ],
+        [
+            "transform-es2015-spread",
+            {
+                "loose": true
+            }
+        ],
+        [
+            "add-module-exports",
+            {
+                "addDefaultProperty": true
+            }
+        ],
+        [
+            "@babel/plugin-transform-runtime",
+            {
+                "corejs": 3
+            }
+        ]
+    ]
+}

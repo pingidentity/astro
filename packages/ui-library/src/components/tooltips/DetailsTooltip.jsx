@@ -101,6 +101,8 @@ const detailsWidths = {
  *     If true then disable button activity and add "disabled" css style to label link.
  * @param {boolean} [hideOnClick=false]
  *     Whether to close tooltip on content area click.
+ * @param {boolean} [isDetachable=false]
+ *     Allows tooltip to detach fully from its anchor on small screen sizes.
  * @param {boolean} [open=false]
  *     If true, tooltip is open or else closed.
  *     When not provided, the component will manage this value.
@@ -156,6 +158,7 @@ class DetailsTooltipStateless extends React.Component {
         type: PropTypes.oneOf(Object.values(popupTypes)),
         disabled: PropTypes.bool,
         hideOnClick: PropTypes.bool,
+        isDetachable: PropTypes.bool,
         open: PropTypes.bool,
         onToggle: PropTypes.func,
         showClose: PropTypes.bool,
@@ -175,6 +178,7 @@ class DetailsTooltipStateless extends React.Component {
         disabled: false,
         showClose: true,
         hideOnClick: false,
+        isDetachable: false,
         type: popupTypes.BASIC,
         placement: tooltipPlacements.BOTTOM,
         width: detailsWidths.MD
@@ -329,7 +333,6 @@ class DetailsTooltipStateless extends React.Component {
             <div
                 className="details-content-inner"
                 // Stop events from bubbling up out of tooltip
-                onClick={this._stopClickPropagation}
                 ref={this.popperContent}
             >
                 {this.props.showClose && (
@@ -369,6 +372,7 @@ class DetailsTooltipStateless extends React.Component {
                 placement={getPlacement()}
                 onClick={hide}
                 ref={el => this.popperContainer = el}
+                isDetachable={this.props.isDetachable}
             >
                 <FocusTrap active={this.state.isUsingKeyboard}>
                     {contents}
@@ -402,7 +406,6 @@ class DetailsTooltipStateless extends React.Component {
         });
     };
 
-    _stopClickPropagation = e => e.stopPropagation()
 
     componentWillReceiveProps(nextProps) {
         if (!this.props.open && nextProps.open) {

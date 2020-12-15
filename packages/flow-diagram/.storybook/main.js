@@ -18,14 +18,5 @@ module.exports = {
 				},
 			},
 		},
-	],
-	webpackFinal: async (config) => {
-		config.module.rules.push({
-			test: /\.story.js?(x)$/,
-			loaders: [require.resolve('@storybook/addon-storysource/loader')],
-			enforce: 'pre',
-		});
-
-		return config;
-	},
+	]
 };

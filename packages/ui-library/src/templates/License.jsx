@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-
-import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
-import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
-import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
-import FlexRow, { spacingOptions, alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
-import FormattedContent from "ui-library/lib/components/general/FormattedContent";
-import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
-import InputRow from "ui-library/lib/components/layout/InputRow";
-import Layout from "ui-library/lib/components/general/ColumnLayout";
-import Link from "ui-library/lib/components/general/Link";
-import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
-import Modal from "ui-library/lib/components/general/Modal";
-import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
-import Stack from "ui-library/lib/components/layout/Stack";
 import Section from "ui-library/lib/components/general/Section";
-import Table, {
-    columnAlignments,
-} from "ui-library/lib/components/tables/Table";
+import FlexRow, { spacingOptions, alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+import FlexItem, { flexPositions } from "ui-library/lib/components/layout/FlexItem";
+import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
+import Stack from "ui-library/lib/components/layout/Stack";
+import FormattedContent from "ui-library/lib/components/general/FormattedContent";
+import Modal from "ui-library/lib/components/general/Modal";
+import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
+import InputRow from "ui-library/lib/components/layout/InputRow";
+import Link from "ui-library/lib/components/general/Link";
+import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+import RowAccessoriesLineChart from "ui-library/lib/components/rows/expandable-row/AccessoriesLineChart";
+import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
+import Table, { columnAlignments } from "ui-library/lib/components/tables/Table";
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**
@@ -49,11 +47,17 @@ const LicenseOption = ({
     </Padding>
 );
 
+const licenseRowItemPaddings = {
+    top: sizes.MD,
+    bottom: sizes.LG,
+    right: sizes.XL,
+};
+
 const LicenseRow = ({
     created,
     envLines = [],
     expires,
-    identityLines = [],
+    identityLines,
     onFeatureClick,
     renderTable,
     renderModal,
@@ -61,34 +65,52 @@ const LicenseRow = ({
     type,
 }) => (
     <Section
-        flags={["p-stateful"]}
         title={
-            <Layout.Row autoWidth>
-                <Layout.Column>
-                    <Stack gap="XS">
-                        <Text type={textTypes.PARENTLABEL}>{type}</Text>
-                        {renewed && <Text type={textTypes.VALUE}>Renewed {renewed}</Text>}
-                        {created && <Text type={textTypes.VALUE}>Created {created}</Text>}
-                        <Text type={textTypes.VALUE}>Expires {expires}</Text>
-                    </Stack>
-                </Layout.Column>
-                <Layout.Column>
-                    <Icon iconName="earth" iconSize={iconSizes.XL} title="environments">
+            <FlexRow alignment={alignments.STRETCH}>
+                <FlexItem shrink="0">
+                    <Padding {...licenseRowItemPaddings}>
                         <Stack gap="XS">
-                            {envLines.map(line => <Text type={textTypes.VALUE} key={line}>{line}</Text>)}
+                            <Text type={textTypes.PARENTLABEL}>{type}</Text>
+                            {renewed && <Text type={textTypes.VALUE}>Renewed {renewed}</Text>}
+                            {created && <Text type={textTypes.VALUE}>Created {created}</Text>}
+                            <Text type={textTypes.VALUE}>Expires {expires}</Text>
                         </Stack>
-                    </Icon>
-                </Layout.Column>
-                <Layout.Column>
-                    <Icon iconName="users" iconSize={iconSizes.XL} title="identites">
-                        <FormattedContent>
+                    </Padding>
+                </FlexItem>
+                <FlexItem shrink="1">
+                    <Padding {...licenseRowItemPaddings}>
+                        <Icon iconName="earth" iconSize={iconSizes.XL} title="environments">
                             <Stack gap="XS">
-                                {identityLines.map(line => <Text type={textTypes.VALUE} key={line}>{line}</Text>)}
+                                {envLines.map(line => <Text type={textTypes.VALUE} key={line}>{line}</Text>)}
                             </Stack>
-                        </FormattedContent>
-                    </Icon>
-                </Layout.Column>
-            </Layout.Row>}
+                        </Icon>
+                    </Padding>
+                </FlexItem>
+                {identityLines &&
+                <FlexItem shrink="1">
+                    <Padding {...licenseRowItemPaddings}>
+                        <Icon iconName="users" iconSize={iconSizes.XL} title="identites">
+                            <FormattedContent>
+                                <Stack gap="XS">
+                                    {identityLines.map(line => <Text type={textTypes.VALUE} key={line}>{line}</Text>)}
+                                </Stack>
+                            </FormattedContent>
+                        </Icon>
+                    </Padding>
+                </FlexItem>
+                }
+                <FlexItem flexPosition={flexPositions.FORCEEND} className="row-accessories">
+                    <RowAccessoriesLineChart
+                        count="0"
+                        countLabel="Current year"
+                        data={[]}
+                        chartLabel="14 month trend"
+                        isTrendPositive={true}
+                        trend="+ 0%"
+
+                    />
+                </FlexItem>
+            </FlexRow>}
     >
         <Stack gap="MD">
             <Link title="View Feature List" onClick={onFeatureClick} type="block"/>
@@ -217,7 +239,7 @@ export default class License extends Component {
                         </ul>
                     </FormattedContent>
                     <div>
-                        <Link>Compare License Types <Icon iconName="new-window" flags={["v4"]} /></Link>
+                        <Link>Compare License Types <Icon iconName="new-window" /></Link>
                     </div>
                     <ButtonGroup>
                         <Button onClick={this.handleClick}>Close</Button>
@@ -528,9 +550,6 @@ export default class License extends Component {
                                 "11 (15 maximum)",
                                 "All regions",
                             ]}
-                            identityLines={[
-                                "10 million / environment"
-                            ]}
                             onFeatureClick={this._toggleFeatureClick}
                             renderModal={this.renderModal}
                             renderTable={this.renderTable3}
@@ -546,6 +565,3 @@ export default class License extends Component {
         );
     }
 }
-
-
-

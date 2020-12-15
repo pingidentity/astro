@@ -1,6 +1,6 @@
 {
   "name": "ui-library",
-  "version": "4.22.0",
+  "version": "4.33.0",
   "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons).",
   "author": "UX Front-End Development Team",
   "license": "ISC",
@@ -67,6 +67,7 @@
     "@pingux/gulp-export": "^2.2.0",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.0.4",
+    "@testing-library/user-event": "12.1.6",
     "acorn": "^6.0.4",
     "autoprefixer": "^9.6.4",
     "babel-eslint": "10.0.1",
@@ -144,6 +145,7 @@
     "stylelint": "7.0.2",
     "stylelint-config-standard": "11.0.0",
     "svgo": "1.3.0",
+    "tinygradient": "^1.1.2",
     "tty-table": "1.0.7",
     "url-loader": "^2.2.0",
     "wdio": "^3.0.0",

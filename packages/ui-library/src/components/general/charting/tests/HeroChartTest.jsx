@@ -267,4 +267,14 @@ describe("HeroChart", function () {
 
         expect(component.state.barSelected).toEqual(null);
     });
+
+
+    it("renders the strings", function () {
+        const component = getComponent({ isAstro: true });
+
+        const node = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart--astro");
+        expect(node).toBeTruthy();
+
+    });
+
 });
