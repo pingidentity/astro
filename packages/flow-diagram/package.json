@@ -36,29 +36,25 @@
         "docs": "gulp docs"
     },
     "dependencies": {
-        "@emotion/core": "^10.0.28",
         "@mdi/js": "^5.8.55",
         "@mdi/react": "^1.4.0",
-        "@pingux/compass": "^0.1.0-beta.28",
+        "@pingux/astro": "0.1.0-beta.8",
         "@pingux/icons": "^0.2.0",
-        "@testing-library/jest-dom": "^5.11.4",
-        "@testing-library/react": "^11.0.4",
         "gojs": "^2.1.16",
         "gojs-react": "^1.0.7",
         "jest-canvas-mock": "^2.3.0",
-        "jest-emotion": "^10.0.32",
         "lodash": "^4.17.20",
         "prop-types": "^15.7.2",
         "uuid": "^7.0.3"
     },
     "devDependencies": {
-        "@storybook/addon-actions": "^5.3.12",
-        "@storybook/addon-docs": "^5.3.18",
-        "@storybook/addon-links": "^5.3.12",
-        "@storybook/addon-notes": "^5.3.19",
-        "@storybook/addon-storysource": "^5.3.12",
-        "@storybook/react": "^5.3.12",
-        "@testing-library/react": "11.2.1",
+        "@storybook/addon-actions": "^6.1.9",
+        "@storybook/addon-docs": "^6.1.9",
+        "@storybook/addon-links": "^6.1.9",
+        "@storybook/addon-storysource": "^6.1.9",
+        "@storybook/react": "^6.1.9",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.0.4",
         "@testing-library/react-hooks": "^3.4.2"
     },
     "peerDependencies": {

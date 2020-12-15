@@ -1,18 +1,21 @@
 import React from 'react';
 import { addDecorator } from '@storybook/react';
-import { css, Global } from '@emotion/core';
+import { AstroWrapper } from '@pingux/astro';
+import { Box } from '@pingux/astro';
 
-const globalStyles = css`
-    html, body, #root, #root > * {
-        height: 100%;
-    }
-`;
-
-addDecorator(storyFn => (
-    <>
-        <Global styles={globalStyles} />
-        <div style={{ padding: "5px" }}>
+const withTheme = storyFn => (
+    <AstroWrapper>
+        <style>
+            {`
+            html, body, #root, #root > * {
+                height: 100%;
+            }
+            `}
+        </style>
+        <Box sx={{ padding: "5px", height: "100%" }}>
             {storyFn()}
-        </div>
-    </>
-));
+        </Box>
+    </AstroWrapper>
+);
+
+addDecorator(withTheme);

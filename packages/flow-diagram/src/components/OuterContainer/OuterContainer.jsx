@@ -1,10 +1,11 @@
 import React from 'react';
+import { Box } from '@pingux/astro';
 import { outerContainer } from './OuterContainer.styles';
 
 export default function OuterContainer({ children, ...others }) {
     return (
-        <div css={outerContainer} {...others}>
+        <Box sx={outerContainer} {...others}>
             {children}
-        </div>
+        </Box>
     );
 }

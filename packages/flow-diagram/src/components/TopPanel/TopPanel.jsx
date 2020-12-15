@@ -1,10 +1,11 @@
 import React from 'react';
+import { Box } from '@pingux/astro';
 import { topPanel } from './TopPanel.styles';
 
 const TopPanel = ({ children, ...others }) => (
-    <div css={topPanel} {...others}>
+    <Box sx={topPanel} {...others}>
         {children}
-    </div>
+    </Box>
 );
 
 export default TopPanel;

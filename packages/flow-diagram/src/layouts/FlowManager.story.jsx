@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
-import { Box, Button, Text } from '@pingux/compass';
-import { css } from '@emotion/core';
+import { Box, Button, Text } from '@pingux/astro';
 import { mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
 import Icon from '@mdi/react';
 import { v4 as uuidV4 } from 'uuid';
@@ -30,11 +29,7 @@ import usePalette from '../hooks/usePalette';
 import TopPanel from '../components/TopPanel';
 import OuterContainer from '../components/OuterContainer';
 
-export default {
-    title: 'Flow Manager Layout',
-};
-
-export const Composed = () => {
+const Demo = () => {
     const [selectedNode, setSelectedNode] = useState();
 
     const onStepClick = (e, obj) => {
@@ -270,21 +265,21 @@ export const Composed = () => {
     return (
         <OuterContainer>
             <TopPanel>
-                <div style={{ alignItems: 'center', backgroundColor: '#F7F8FD', borderTop: '1px solid #CACED3', display: 'flex', justifyContent: 'space-between', padding: 10 }}>
-                    <div>
+                <Box isRow sx={{ alignItems: 'center', backgroundColor: '#F7F8FD', borderTop: '1px solid #CACED3', justifyContent: 'space-between', padding: 10 }}>
+                    <Box>
                         <Text color="#68747F" fontSize={14} fontFamily="Helvetica">Flow Manager</Text>
                         <Text color="#253746" fontSize={18} fontFamily="Helvetica">Generic Registration</Text>
-                    </div>
-                    <div style={{ alignItems: 'center', display: 'flex' }}>
+                    </Box>
+                    <Box isRow sx={{ alignItems: 'center' }}>
                         <Error fill="#a30303" />
                         <Text color="#A31300" fontSize={14} fontFamily="Helvetica" ml="10px">2 errors. To save this flow, fix all errors.</Text>
-                    </div>
-                    <div style={{ display: 'flex' }}>
-                        <Button style={{ background: 'transparent', border: 'none' }}>Cancel</Button>
-                        <Button style={{ marginLeft: 10, marginRight: 15 }}>Save</Button>
-                        <Button style={{ background: '#4462ED', color: 'white' }}>Save & Close</Button>
-                    </div>
-                </div>
+                    </Box>
+                    <Box isRow>
+                        <Button sx={{ background: 'transparent', border: 'none' }}>Cancel</Button>
+                        <Button sx={{ marginLeft: 10, marginRight: 15 }}>Save</Button>
+                        <Button sx={{ background: '#4462ED', color: 'white' }}>Save & Close</Button>
+                    </Box>
+                </Box>
             </TopPanel>
             <Body>
                 <LeftContainer>
@@ -299,21 +294,19 @@ export const Composed = () => {
                         </ConfigPanel>
                     ) : (
                         <React.Fragment>
-                            <div css={css`
-                                border-bottom: 1px solid #E1DDFD;
-                                display: flex;
-                                flex-direction: row;
-                                justify-content: center;
-                                margin: 30px 15px 20px 15px;
-                                `}
+                            <Box
+                                isRow
+                                sx={{
+                                    borderBottom: '1px solid #E1DDFD',
+                                    justifyContent: 'center',
+                                    margin: '30px 15px 20px 15px',
+                                }}
                             >
-                                <div css={css`
-                                    align-items: center;
-                                    border-bottom: 2px solid transparent;
-                                    display: flex;
-                                    flex-direction: column;
-                                    padding-bottom: 5px;
-                                    `}
+                                <Box sx={{
+                                    alignItems: 'center',
+                                    borderBottom: '2px solid transparent',
+                                    paddingBottom: 5,
+                                }}
                                 >
                                     <Icon
                                         path={mdiFormSelect}
@@ -321,15 +314,13 @@ export const Composed = () => {
                                         color="#68747F"
                                     />
                                     <Text color="#68747F" fontSize={13} fontFamily="Helvetica" mt="5px">PROPERTIES</Text>
-                                </div>
+                                </Box>
                                 <Box width={25} />
-                                <div css={css`
-                                        align-items: center;
-                                        border-bottom: 2px solid #4462ED;
-                                        display: flex;
-                                        flex-direction: column;
-                                        padding-bottom: 5px;
-                                        `}
+                                <Box sx={{
+                                    alignItems: 'center',
+                                    borderBottom: '2px solid #4462ED',
+                                    paddingBottom: 5,
+                                }}
                                 >
                                     <Icon
                                         path={mdiTools}
@@ -337,8 +328,8 @@ export const Composed = () => {
                                         color="#526BDB"
                                     />
                                     <Text color="#526BDB" fontSize={13} fontFamily="Helvetica" mt="5px">TOOLBOX</Text>
-                                </div>
-                            </div>
+                                </Box>
+                            </Box>
                             <PaletteWrapper>
                                 <Palette {...paletteProps} />
                             </PaletteWrapper>
@@ -351,4 +342,13 @@ export const Composed = () => {
             </Body>
         </OuterContainer>
     );
+};
+
+export const Composed = () => (
+    <Demo />
+);
+
+export default {
+    title: 'Flow Manager Layout',
+    component: Composed,
 };
