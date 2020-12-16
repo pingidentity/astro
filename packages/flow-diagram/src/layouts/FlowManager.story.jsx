@@ -67,11 +67,11 @@ const Demo = () => {
         { 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' }]);
 
     const [diagramLinks, setDiagramLinks] = useState([
-        { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success' },
+        { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success', 'category': 'outlet' },
         { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
-        { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure' },
+        { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure', 'category': 'outlet' },
         { 'from': 'user-login-failure', 'to': 'error', 'key': 'user-login-failure_error' },
-        { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found' },
+        { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found', 'category': 'outlet' },
         { 'from': 'user-login-not_found', 'to': 'registration', 'key': 'user-login-not_found_registration' },
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ]);
