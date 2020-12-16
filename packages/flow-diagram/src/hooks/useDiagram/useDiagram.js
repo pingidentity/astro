@@ -184,6 +184,26 @@ export default function useDiagram({
                         new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
                 );
 
+        diagramObject.linkTemplateMap.add('outlet',
+            $(go.Link,
+                {
+                    curve: go.Link.Bezier,
+                    fromShortLength: -10,
+                    toShortLength: 0,
+                    selectable: false,
+                    layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
+                    selectionAdorned: false,
+                    fromPortId: 'from',
+                    toPortId: 'to',
+                    layerName: 'Background',
+                },
+                new go.Binding('relinkableFrom', 'canRelink').ofModel(),
+                new go.Binding('relinkableTo', 'canRelink').ofModel(),
+                $(go.Shape, { stroke: '#4462ED' },
+                    new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
+            ),
+        );
+
         diagramObject.div = document.getElementsByClassName('diagram-component')[0];
 
         /* eslint-disable */
