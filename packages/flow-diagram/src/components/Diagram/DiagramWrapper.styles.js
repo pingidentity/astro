@@ -10,6 +10,6 @@ export const diagramWrapper = {
     },
 
     canvas: {
-        outlineWidth: 0,
+        outline: 'none',
     },
 };
