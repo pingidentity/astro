@@ -7,7 +7,7 @@ export const paletteWrapper = {
     },
 
     'canvas': {
-        outlineWidth: 0,
+        outline: 'none',
     },
 };
 
