@@ -19,6 +19,8 @@ import classnames from 'classnames';
  *      The horizontal justification of the items.
  * @param {("xs" | "sm" | "md" | "lg" | "xl" )} [spacing]
  *      If supplied, with add spacing in between items.
+ * @param {("wrap" | "no-wrap" | "reverse")} [wrap="no-wrap"]
+ *      How to wrap the items.
  * @example
 <FlexRow>
     <Button label="Button" noSpacing />
@@ -32,6 +34,16 @@ import classnames from 'classnames';
 </FlexRow>
  */
 
+/**
+ * @enum {string}
+ * @alias FlexRow.wrapOptions
+ */
+export const wrapOptions = {
+    WRAP: 'wrap',
+    NOWRAP: 'no-wrap',
+    REVERSE: 'reverse',
+};
+
 export const alignments = {
     BOTTOM: 'bottom',
     TOP: 'TOP',
@@ -43,17 +55,29 @@ export const justifyOptions = {
     CENTER: 'center',
     END: 'end',
     SPACEBETWEEN: 'spacebetween',
-    START: 'start'
+    START: 'start',
 };
 
 export const flexDirectionOptions = {
     ROW: 'row',
     ROWREVERSE: 'row-reverse',
     COLUMN: 'column',
-    COLUMNREVERSE: 'column-reverse'
+    COLUMNREVERSE: 'column-reverse',
 };
 
 export const spacingOptions = paddingSizes;
+
+const getWrapClass = (wrap) => {
+    switch (wrap) {
+        case wrapOptions.WRAP:
+            return 'flex-row--wrap-wrap';
+        case wrapOptions.REVERSE:
+            return 'flex-row--wrap-reverse';
+        case wrapOptions.NOWRAP:
+        default:
+            return 'flex-row--wrap-nowrap';
+    }
+};
 
 const getAlignmentClass = alignment => {
     switch (alignment) {
@@ -104,7 +128,8 @@ function FlexRow({
     flexDirection,
     inline,
     justify,
-    spacing
+    spacing,
+    wrap,
 }) {
     const isColumn =
         flexDirection === flexDirectionOptions.COLUMN || flexDirection === flexDirectionOptions.COLUMNREVERSE;
@@ -115,6 +140,7 @@ function FlexRow({
                 className,
                 getAlignmentClass(alignment),
                 getJustifyClass(justify),
+                getWrapClass(wrap),
                 getFlexDirection(flexDirection),
                 {
                     [`flex-row--${isColumn ? "column" : "row"}-spacing-${spacing}`]: spacing !== undefined,
@@ -143,6 +169,9 @@ FlexRow.propTypes = {
     spacing: PropTypes.oneOf(
         Object.values(spacingOptions)
     ),
+    wrap: PropTypes.oneOf(
+        Object.values(wrapOptions)
+    ),
 };
 
 FlexRow.defaultProps = {
@@ -150,6 +179,7 @@ FlexRow.defaultProps = {
     "data-id": "flex-row",
     inline: false,
     justify: justifyOptions.START,
+    wrap: wrapOptions.NOWRAP,
 };
 
 export default FlexRow;
