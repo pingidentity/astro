@@ -8,6 +8,7 @@ import classnames from 'classnames';
  */
 const CardTypes = {
     SLIM: 'slim',
+    SKINNY: 'skinny',
 };
 
 /**
@@ -25,6 +26,7 @@ const Card = ({
     const classNames = classnames('card', 'card--no-padding', className, {
         'card--wide': width === 'large',
         'card--slim': type === CardTypes.SLIM,
+        'card--skinny': type === CardTypes.SKINNY,
         'card--error': error === true,
     });
 

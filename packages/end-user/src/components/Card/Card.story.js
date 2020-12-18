@@ -7,7 +7,17 @@ export default {
 };
 
 export const Default = () => (
-    <Card>
-        I&apos;m a card!
-    </Card>
+    <>
+        <Card>
+            I&apos;m a card!
+        </Card>
+    </>
+);
+
+export const Skinny = () => (
+    <>
+        <Card type={Card.CardTypes.SKINNY}>
+            I&apos;m a (skinny) card!
+        </Card>
+    </>
 );
