@@ -21,7 +21,7 @@ const Box = forwardRef((props, ref) => {
   const custom = { ...sx };
 
   if (gap) {
-    custom['& > * + *'] = {
+    custom['& > * + *:not(:first-child) /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */'] = {
       [fd === 'row' ? 'marginLeft' : 'marginTop']: gap,
     };
   }
