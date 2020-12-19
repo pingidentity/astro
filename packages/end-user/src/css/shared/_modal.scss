@@ -129,7 +129,19 @@
         box-sizing: border-box;
         background-color: $color-white;
         overflow-x: visible;
-        overflow-y: auto;
+
+        &.overflow-auto {
+            overflow-y: auto;
+        }
+        &.overflow-visible {
+            overflow-y: visible;
+        }
+        &.overflow-hidden {
+            overflow-y: hidden;
+        }
+        &.overflow-scroll {
+            overflow-y: scroll;
+        }
 
         @include border-radius(0 0 $modal-radius $modal-radius);
 
