@@ -10,7 +10,7 @@ import FormLabel from '../../src/components/shared/FormLabel';
 import PageSection from '../../src/components/shared/PageSection';
 import Padding, { sizes as paddingSizes } from '../../src/components/shared/Padding';
 import FlexRow, { spacingOptions, alignments, flexDirectionOptions, justifyOptions } from '../../src/components/shared/FlexRow';
-import Modal from '../../src/components/shared/Modal';
+import Modal, { BodyOverflowTypes } from '../../src/components/shared/Modal';
 import TextInput from '../../src/components/TextInput';
 import TextBlock from '../../src/components/TextBlock';
 import Toggle from '../../src/components/shared/Toggle';
@@ -23,6 +23,7 @@ import Columns, { Column, alignments as colAlignments, widths as colWidths } fro
 
 import '../../src/css/styles.scss';
 import PropTypes from "prop-types";
+import PhoneInput from '../../src/components/PhoneInput';
 
 export default {
     title: 'Templates/Pages/Self Service',
@@ -400,6 +401,7 @@ class AuthenticationPage extends React.Component {
                 expanded={this.state.isExpanded1}
                 onOpen={this._openModal(1)}
                 onClose={this._closeModal(1)}
+                overflow={BodyOverflowTypes.VISIBLE}
             >
 
                 <FlexRow
@@ -409,9 +411,9 @@ class AuthenticationPage extends React.Component {
                 >
                     <h1 className="heading-text centered-text">SMS Pairing</h1>
                     <p className="normal-text centered-text">
-                        Enter the mobile number you would like to recieve authentication codes with.
+                        Enter the mobile number you would like to receive authentication codes with.
                     </p>
-                    <TextInput width="100%" />
+                    <PhoneInput />
                     <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(1)(); this._openModal(2)(); }} />
                     <TextBlock size="small"><a href="#" onClick={() => this._closeModal(1)()}>Cancel</a></TextBlock>
                 </FlexRow>

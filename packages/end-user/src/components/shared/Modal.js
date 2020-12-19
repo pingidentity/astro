@@ -15,6 +15,16 @@ const Type = {
     DIALOG: 'dialog',
     ALERT: 'alert'
 };
+/**
+ * @enum {string}
+ * @alias Modal.BodyOverflowTypes
+ */
+const BodyOverflowTypes = {
+    VISIBLE: 'visible',
+    HIDDEN: 'hidden',
+    AUTO: 'auto',
+    SCROLL: 'scroll',
+};
 
 /**
 * @callback Modal~onClose
@@ -54,6 +64,9 @@ const Type = {
  *     Basic modal when not specified; a DIALOG modal has the "dialog" CSS class on it,
  *     same goes for the ALERT dialog.
  *
+ * @param {overflowTypes}
+ *     Overflow behavior for the Modal Body
+
  * @example
  *      <a onClick={this._toggleModal}>Open the Modal</a>
  *      <Modal modalTitle="My wonderful modal" onClose={this._toggleModal} expanded={this.state.expanded}>
@@ -78,6 +91,7 @@ class Modal extends React.Component {
             Type.DIALOG,
             Type.ALERT
         ]),
+        overflow: PropTypes.oneOf(Object.values(BodyOverflowTypes)),
         cancelTooltip: PropTypes.object,
         children: PropTypes.node,
     };
@@ -92,6 +106,7 @@ class Modal extends React.Component {
         showHeader: true,
         maximize: false,
         type: Type.BASIC,
+        overflow: BodyOverflowTypes.AUTO,
     };
 
     /*
@@ -223,8 +238,9 @@ class Modal extends React.Component {
             'no-close': !this.props.onClose,
             maximize: this.props.maximize,
             show: this.props.expanded,
-            'wizard-modal': this.isWizard
+            'wizard-modal': this.isWizard,
         };
+        const { overflow } = this.props;
 
         const renderedModal = (
             <div
@@ -250,7 +266,10 @@ class Modal extends React.Component {
                                 {this.props.onClose && this._getCloseButton()}
                             </div>
                         ) : null}
-                        <div className="modal-body" data-id="modal-body" style={this._toggleIeScrollHack()}>
+                        <div
+                          className={classnames('modal-body', `overflow-${overflow}`)}
+                          data-id="modal-body"
+                          style={this._toggleIeScrollHack()}>
                             {(!this.props.showHeader || this.props.type === 'dialog') && this.props.onClose ? (
                                 this._getCloseButton()
                             ) : null}
@@ -279,5 +298,6 @@ BodyTitle.propTypes = {
 
 Modal.Type = Type;
 Modal.BodyTitle = BodyTitle;
+Modal.BodyOverflowTypes = BodyOverflowTypes;
 
 module.exports = Modal;
