@@ -25,6 +25,9 @@ package-lock.json
 .vscode/*
 **/.vscode/*
 
+# IDEA
+.idea/*
+
 # Parcel
 .cache
 
