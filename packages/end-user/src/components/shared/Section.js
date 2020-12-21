@@ -125,7 +125,7 @@ class SectionStateless extends React.Component {
                 <div
                     key="accessories"
                     data-id={this.props["data-id"] + "-collapsible-section-accessories"}
-                    className="row-accessories">
+                    className="row-accessories collapsible-section__row-accessories">
                     {this.props.accessories}
                 </div>;
 
