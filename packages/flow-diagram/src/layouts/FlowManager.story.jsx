@@ -4,6 +4,7 @@ import { Box, Button, Text } from '@pingux/astro';
 import { mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
 import Icon from '@mdi/react';
 import { v4 as uuidV4 } from 'uuid';
+import '../css/main.css';
 
 import {
     branchNode,
