@@ -114,12 +114,12 @@ pipeline {
     }
   }
   post {
-    // success {
-    //    slackSend channel: '#ux-deployments', message: ":verynice: Great Success! ${params.PACKAGE} ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
-    // }
-    // unsuccessful {
-    //    slackSend channel: '#ux-deployments', message: "@here ${params.PACKAGE} ${BUILD_URL} failed!", color: "#a31300"
-    // }
+    success {
+       slackSend channel: '#ux-deployments', message: ":verynice: Great Success! ${params.PACKAGE} ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
+    }
+    unsuccessful {
+       slackSend channel: '#ux-deployments', message: "@here ${params.PACKAGE} ${BUILD_URL} failed!", color: "#a31300"
+    }
 
     cleanup {
         cleanWs()
