@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import PopoverMenu from './PopoverMenu';
 
 window.__DEV__ = true;
-
+jest.mock('popper.js');
 const defaultProps = {
     'data-id': 'test-popovermenu',
 };
