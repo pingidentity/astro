@@ -1,6 +1,12 @@
 import * as go from 'gojs';
 import { useState } from 'react';
-import { v4 as uuidV4 } from 'uuid';
+import { generateKey } from '../../utils/diagramUtils';
+
+export const setDragState = (paletteObject, dragValue) => () => {
+    const draggable = paletteObject.toolManager.draggingTool.findDraggablePart();
+    const nodeData = paletteObject.model.findNodeDataForKey(draggable.data.key);
+    paletteObject.model.setDataProperty(nodeData, 'isBeingDragged', dragValue);
+};
 
 export default function usePalette({
     groupTemplates,
@@ -21,20 +27,8 @@ export default function usePalette({
                     model: $(go.GraphLinksModel,
                         {
                             linkKeyProperty: 'key',
-                            makeUniqueKeyFunction: (m, data) => {
-                                const key = `${data.key}_${uuidV4()}`;
-
-                                // eslint-disable-next-line
-                                data.key = key;
-                                return key;
-                            },
-                            makeUniqueLinkKeyFunction: (m, data) => {
-                                const key = `${data.key}_${uuidV4()}`;
-
-                                // eslint-disable-next-line
-                                data.key = key;
-                                return key;
-                            },
+                            makeUniqueKeyFunction: generateKey,
+                            makeUniqueLinkKeyFunction: generateKey,
                         }),
                 },
             );
@@ -49,17 +43,9 @@ export default function usePalette({
         });
 
         // Set a data property on palette items so that we can know when they're being dragged.
-        paletteObject.toolManager.draggingTool.doStart = () => {
-            const draggable = paletteObject.toolManager.draggingTool.findDraggablePart();
-            const nodeData = paletteObject.model.findNodeDataForKey(draggable.data.key);
-            paletteObject.model.setDataProperty(nodeData, 'isBeingDragged', true);
-        };
+        paletteObject.toolManager.draggingTool.doStart = setDragState(paletteObject, true);
 
-        paletteObject.toolManager.draggingTool.doStop = () => {
-            const draggable = paletteObject.toolManager.draggingTool.findDraggablePart();
-            const nodeData = paletteObject.model.findNodeDataForKey(draggable.data.key);
-            paletteObject.model.setDataProperty(nodeData, 'isBeingDragged', false);
-        };
+        paletteObject.toolManager.draggingTool.doStop = setDragState(paletteObject, false);
 
         return paletteObject;
     };
