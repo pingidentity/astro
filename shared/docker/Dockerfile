@@ -1,4 +1,4 @@
-FROM node:10-stretch
+FROM docker.corp.pingidentity.com:5400/node:10-stretch
 
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
