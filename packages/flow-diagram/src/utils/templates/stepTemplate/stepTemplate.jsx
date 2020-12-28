@@ -12,10 +12,10 @@ export const getIfLengthGreater = (ifTrue, ifFalse, target) => (s) => {
     return s.length > target ? ifTrue : ifFalse;
 };
 
-export const getBorderColor = (selectedColor, errorColor, defaultColor) => ({ data }) => {
-    if (data.isSelected) {
+export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part) => {
+    if (part.isSelected || part.data.isSelected) {
         return selectedColor;
-    } else if (data.errorMessage) {
+    } else if (part.lb.errorMessage || part.data.errorMessage) {
         return errorColor;
     }
     return defaultColor;

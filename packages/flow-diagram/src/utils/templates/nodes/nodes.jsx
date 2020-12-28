@@ -14,7 +14,7 @@ export const bindIfColor = (color) => {
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
 export const toNode = ({ color } = {}) => $(go.Panel, 'Auto',
-    { alignment: go.Spot.Left, portId: 'to', toLinkable: true, toMaxLinks: 1 },
+    { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
     new go.Binding('visible', 'canLinkTo'),
     $(go.Shape, 'Circle',
         {
