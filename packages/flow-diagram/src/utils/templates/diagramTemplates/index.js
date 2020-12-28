@@ -1,0 +1,1 @@
+export { diagramGroupTemplate } from './diagramTemplates';
