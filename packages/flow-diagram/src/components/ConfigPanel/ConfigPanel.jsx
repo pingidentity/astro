@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Clear } from '@pingux/icons';
-import { Box, Text } from '@pingux/astro';
+import { Box, Text, Separator } from '@pingux/astro';
 import Icon from '@mdi/react';
 import { mdiDotsVertical } from '@mdi/js';
-import Separator from '@pingux/astro/lib/components/Separator';
 import { configPanel, configPanelClose, configPanelHeader } from './ConfigPanel.styles';
 
 function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
@@ -24,7 +23,7 @@ function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
                     color="#68747F"
                 />
             </Box>
-            <Separator />
+            <Separator width="95%" mb={15} />
             {children}
         </Box>
     );

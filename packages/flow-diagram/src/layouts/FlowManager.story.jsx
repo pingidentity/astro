@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
-import { Box, Button, Text } from '@pingux/astro';
+import { Box, Button, Image, Text, TextField } from '@pingux/astro';
 import { mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
 import Icon from '@mdi/react';
 import { v4 as uuidV4 } from 'uuid';
@@ -296,6 +296,12 @@ const Demo = () => {
         });
     }
 
+    const updateStepId = (selected, id, field) => {
+        const currentNode = diagramNodes.find(node => node.key === selected.key);
+        setSelectedNode({ ...currentNode, [field]: id });
+        setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ? { ...currentNode, [field]: id } : node)));
+    };
+
     return (
         <OuterContainer>
             <TopPanel>
@@ -319,12 +325,13 @@ const Demo = () => {
                 <LeftContainer>
                     {selectedNode ? (
                         <ConfigPanel
-                            icon={<Desktop fill="#028CFF" height={22} width={22} />}
-                            color="#028CFF"
-                            category={selectedNode.category}
+                            icon={<Image src={selectedNode.getIconSrc(selectedNode.color)} />}
+                            color={selectedNode.color}
+                            category={selectedNode.text}
                             onClose={onPanelClose}
                         >
-                            {/* Add configuration component here */}
+                            <TextField label="Step name" controlProps={{ value: selectedNode.stepId }} onChange={e => updateStepId(selectedNode, e.target.value, 'stepId')} width="95%" />
+                            <TextField mt={20} label="Description" controlProps={{ value: selectedNode.description }} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="95%" />
                         </ConfigPanel>
                     ) : (
                         <React.Fragment>
