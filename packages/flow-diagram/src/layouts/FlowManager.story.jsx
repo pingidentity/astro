@@ -43,10 +43,15 @@ const Demo = () => {
 
     const [diagramNodes, setDiagramNodes] = useState([
         {
+            isGroup: 'true',
+            'key': 'group',
+        },
+        {
             'key': 'user-login',
             'category': 'step',
             'text': 'User login',
             'stepId': 'userLogin',
+            'group': 'group',
             canLinkFrom: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
@@ -61,9 +66,9 @@ const Demo = () => {
             color: '#228C22',
             errorMessage: 'Some data is invalid here',
         },
-        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100 },
-        { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure' },
-        { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user' },
+        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' },
+        { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
+        { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
         { 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' }]);
 
@@ -71,9 +76,7 @@ const Demo = () => {
         { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success', 'category': 'outlet' },
         { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
         { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure', 'category': 'outlet' },
-        { 'from': 'user-login-failure', 'to': 'error', 'key': 'user-login-failure_error' },
         { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found', 'category': 'outlet' },
-        { 'from': 'user-login-not_found', 'to': 'registration', 'key': 'user-login-not_found_registration' },
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ]);
 
@@ -128,7 +131,7 @@ const Demo = () => {
                         const modifiedNode = {
                             ...node,
                             // Remove palette categories so that nodes display correctly in diagram.
-                            category: category === 'palette-group' ? '' : 'step',
+                            category: category === 'palette-group' ? '' : category,
                             key: replacementKey,
                         };
                         if (node.isGroup) {
@@ -156,7 +159,7 @@ const Demo = () => {
                 ]);
 
                 // Add a link between
-                if (groupKey) {
+                if (addedNodes[0].key === 'login-group') {
                     setDiagramLinks([
                         ...diagramLinks,
                         {
@@ -231,20 +234,50 @@ const Demo = () => {
                 stepId: 'newLogin',
             },
             {
+                'key': 'finished-group',
+                'category': 'palette-group',
+                isGroup: true,
+                'text': 'Complete',
+                getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
+                color: '#228C22',
+                stepId: 'newLogin',
+            },
+            {
                 'key': 'finished',
-                'category': 'palette-item',
+                'category': 'finished',
+                group: 'finished-group',
                 'text': 'Complete',
                 getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
+                'key': 'error-group',
+                'category': 'palette-group',
+                isGroup: true,
+                'text': 'Failure',
+                getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
+                color: '#228C22',
+                stepId: 'newLogin',
+            },
+            {
                 'key': 'error',
-                'category': 'palette-item',
+                'category': 'error',
+                group: 'error-group',
                 'text': 'Failure',
                 getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
             },
             {
+                'key': 'branch-group',
+                'category': 'palette-group',
+                isGroup: true,
+                'text': 'Execute Flow',
+                getIconSrc: (color = COLORS.ORANGE) => svgComponentToBase64(<Icon path={mdiSourceBranch} color={color} width="20px" height="20px" />),
+                color: '#228C22',
+                stepId: 'newLogin',
+            },
+            {
                 'key': 'branch',
                 'category': 'branch',
+                group: 'branch-group',
                 'text': 'Branch',
                 getIconSrc: (color = COLORS.ORANGE) => svgComponentToBase64(<Icon path={mdiSourceBranch} color={color} width="20px" height="20px" />),
             },
