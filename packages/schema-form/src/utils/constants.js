@@ -9,3 +9,8 @@ export const FORM_STATE = {
   PENDING: 'pending',
   SUCCESS: 'success',
 };
+
+export const FORM_MODE = {
+  DEFAULT: 'default',
+  SIMPLIFIED: 'simplified',
+};

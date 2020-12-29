@@ -248,6 +248,7 @@
 
       // NOTE: This sitekey is only for development purposes
       ReactDOM.render(React.createElement(pingSchemaForm.Form, {
+        liveValidate: 'postSubmit',
         endpoint: '/test',
         formData,
         formSuccessMessage: 'Your request has been received and we will contact you if necessary.',

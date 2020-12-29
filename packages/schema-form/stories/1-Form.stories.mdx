@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import * as stories from './Form.stories.js';
 import Form from '../src/components/SchemaForm';
 
@@ -6,7 +6,7 @@ import Form from '../src/components/SchemaForm';
 
 # Props
 In addition to the props listed, any props from the [RJSF docs](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/form-props) can be passed through.
-<Props for={Form} />
+<ArgsTable of={Form} />
 
 # Schema Form
 Schema form will generate a React form based off the JSON schema provided. You can almost think of this as the skeleton to your form.
