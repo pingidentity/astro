@@ -155,7 +155,7 @@ var getZoneNameDisplayValue = function (zoneName) {
 *     Description to display below the label.
 * @param {string} [displayValue] Value to be displayed other than the unique string value. For example the abbreviation
 *     could be displayed instead.
-* @param {string} [errorMessage]
+* @param {node} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [filterByCountry]
 *     The two character country code that, when set, displays a list of time zones associated with that country
@@ -232,7 +232,7 @@ class TimeZoneStateless extends React.Component {
         countryLabel: PropTypes.string,
         description: PropTypes.node,
         displayValue: PropTypes.string,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         filterByCountry: PropTypes.string,
         flags: flagsPropType,
         helpClassName: PropTypes.string,

@@ -34,7 +34,7 @@ import classnames from "classnames";
  *    To define the base "data-id" value for the top-level HTML container.
  *    Note that "-container" will be appended to the "data-id" set on the top-level HTML container,
  *    and the "data-id" string will be set on the checkbox "input" elelment under the top-level HTML container.
- * @param {string} [errorMessage]
+ * @param {node} [errorMessage]
  *    The message to display if defined when external validation failed.
  * @param {node} [label]
  *    Label text to be displayed.
@@ -87,7 +87,7 @@ class FormCheckboxBase extends React.Component {
         content: PropTypes.node,
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         helpClassName: PropTypes.string,
         helpTarget: PropTypes.node,
         inline: PropTypes.bool,

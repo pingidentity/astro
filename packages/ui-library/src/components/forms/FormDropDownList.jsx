@@ -130,7 +130,7 @@ const SearchTypes = {
 *    To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *    CSS classes to set on the top-level HTML container.
-* @param {string} [errorMessage]
+* @param {node} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
 *     CSS classes to set on the HelpHint component.
@@ -354,7 +354,7 @@ class FormDropDownListStateless extends React.Component {
         contentType: PropTypes.element,
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         groups: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -77,7 +77,7 @@ var Types = {
 *    Current time field value.
 * @param {string} [defaultValue]
 *    The default (initial) value to be shown in the time field.
-* @param {string} [errorMessage]
+* @param {node} [errorMessage]
 *    The message to display if defined when external validation failed.
 * @param {FormTimeField.Types} [type=FormTimeField.Types.TIME]
 *    The type of time component.
@@ -109,7 +109,7 @@ class FormTimeField extends React.Component {
         "data-id": PropTypes.string,
         type: PropTypes.oneOf(_.values(Types)),
         value: PropTypes.string,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         //callbacks
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,

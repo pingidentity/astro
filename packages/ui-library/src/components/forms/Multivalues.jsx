@@ -209,7 +209,7 @@ class MultivaluesOption extends Component {
  *     If true, the user must enter an entry to the field.
  * @param {boolean} [stacked=false]
  *     If true, each value occupies its own line.
- * @param {string} [errorMessage]
+ * @param {node} [errorMessage]
  *     An error message to be displayed below the component body.
  * @param {array.OptionList~Option} [options]
  *     An array of value-label pairs. When supplied, the behavior changes a bit.
@@ -259,7 +259,7 @@ export class MultivaluesBase extends Component {
                 icon: PropTypes.string.isRequired
             })
         ])),
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         includeDraftInEntries: PropTypes.bool,
         name: PropTypes.string,
         onBlur: PropTypes.func,

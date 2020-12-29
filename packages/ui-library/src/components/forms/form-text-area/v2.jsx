@@ -70,7 +70,7 @@ const inputHeights = {
 *     The text to display below the title. Can be a node or a string
 * @param {node} [explanation]
 *     Explanation text for the field appears below it.
-* @param {string} [errorMessage]
+* @param {node} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
 *     CSS classes to set on the HelpHint component.
@@ -155,7 +155,7 @@ class FormTextAreaStateless extends React.Component {
         description: PropTypes.node,
         disabled: PropTypes.bool,
         edited: PropTypes.bool,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         height: PropTypes.oneOf(Object.values(inputHeights)),
         helpClassName: PropTypes.string,
         inputClassName: PropTypes.string,

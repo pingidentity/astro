@@ -5,7 +5,7 @@ import { createCustomEvent } from "../../util/Utils";
 
 /** @class FormError
  * @desc A private component shared between form components which display a validation error.
- * @param {string} value
+ * @param {node} value
  *    The error message
  * @param {string} [className]
  *    Optional classname to apply to the error container
@@ -45,7 +45,7 @@ export const Message = ({
 Message.displayName = "FormErrorMessage";
 
 Message.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.node,
     "data-id": PropTypes.string
 };
 

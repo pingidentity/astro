@@ -39,7 +39,7 @@ export default class extends Component {
             PropTypes.element,
             PropTypes.string,
         ]),
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         filesAcceptedMessage: PropTypes.string,
         fileName: PropTypes.string,
         name: PropTypes.string,

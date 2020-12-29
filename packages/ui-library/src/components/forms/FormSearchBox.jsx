@@ -103,7 +103,7 @@ class FormSearchBox extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         iconName: PropTypes.string,
         inputFieldClassName: PropTypes.string,
         maxLength: PropTypes.number,
