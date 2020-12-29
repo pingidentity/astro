@@ -5,7 +5,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
 
 // Default input styling
 export const input = {
-  ...text.base,
+  ...text.inputValue,
   appearance: 'none',
   boxSizing: 'border-box',
   lineHeight: '1em',
@@ -23,11 +23,7 @@ export const input = {
     borderColor: 'accent.80',
     boxShadow: 'focus',
   },
-  '&::placeholder': {
-    fontStyle: 'italic',
-    fontWeight: 300,
-    color: 'text.secondary',
-  },
+  '&::placeholder': text.placeholder,
   '&::-ms-expand': {
     display: 'none',
   },
