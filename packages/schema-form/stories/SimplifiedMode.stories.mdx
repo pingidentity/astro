@@ -1,0 +1,14 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './SimplifiedMode.stories.js';
+
+<Meta title="usage/Simplified Mode" />
+
+## Simplified Mode
+The default mode of this package includes internal state handling and other custom capabilities to
+support teams who need that functionality. If that functionality is not needed or desired, it can
+be turned off by passing `mode="simplified"` into the Form props. This will return the form to a
+basic wrapper around RJSF while still supporting Ping UX theming out of the box.
+
+<Canvas>
+  <Story story={stories.simplified} />
+</Canvas>

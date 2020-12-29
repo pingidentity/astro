@@ -1,0 +1,12 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './CustomSubmitButton.stories.js';
+
+<Meta title="usage/Custom Submit Button" />
+
+## Custom Submit Button
+A custom button can be passed into the form as `children`. It will not have access to the internal
+state of the form so control is left up to the developer.
+
+<Canvas>
+  <Story story={stories.customSubmitButton} />
+</Canvas>
