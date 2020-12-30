@@ -1,10 +1,61 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks';
+import * as go from 'gojs';
 import useDiagram, {
     addLinks,
     addNodes,
+    dragGroupTogether,
+    getBorderWidth,
     removeLinks,
     removeNodes,
+    renderPortCursor,
 } from './useDiagram';
+
+jest.mock('../../components/ZoomSlider/ZoomSlider.js');
+
+jest.mock('gojs', (replacements) => {
+    const paletteObjectProps = {
+        ...replacements,
+        model: {
+            findNodeDataForKey: jest.fn(() => 'node data'),
+            setDataProperty: jest.fn(),
+        },
+        groupTemplateMap: {
+            add: jest.fn(),
+        },
+        linkTemplateMap: {
+            add: jest.fn(),
+        },
+        nodeTemplateMap: {
+            add: jest.fn(),
+        },
+        toolManager: {
+            draggingTool: {
+                findDraggablePart: jest.fn(() => ({
+                    data: {
+                        key: 'very cool key',
+                    },
+                })),
+            },
+        },
+    };
+    return ({
+        Binding: jest.fn(() => ({
+            ofModel: jest.fn(),
+            ofObject: jest.fn(),
+        })),
+        Diagram: () => {},
+        DraggingTool: () => ({ computeEffectiveCollection: () => {} }),
+        GraphObject: {
+            make: jest.fn(() => paletteObjectProps),
+        },
+        Link: () => {},
+        List: jest.fn(() => ({
+            add: jest.fn(),
+        })),
+        Part: () => {},
+        Spot: () => {},
+    });
+});
 
 describe('useDiagram', () => {
     const defaultNodes = [
@@ -23,6 +74,12 @@ describe('useDiagram', () => {
         { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found' },
         { 'from': 'user-login-not_found', 'to': 'registration', 'key': 'user-login-not_found_registration' },
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
+    ];
+
+    const defaultTemplates = [
+        ['name', 'template'],
+        ['Darrell Hall', 'Private Eyes'],
+        ['John Oates', 'Rich Girl'],
     ];
 
     it('useDiagram returns correct props', () => {
@@ -55,6 +112,40 @@ describe('useDiagram', () => {
         expect(onModelChange).not.toHaveBeenCalled();
         diagramProps.onModelChange();
         expect(onModelChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('useDiagram adds node templates to node template map', () => {
+        const diagramObject = go.GraphObject.make();
+        const { result: { current: { diagramProps } } } = renderHook(() => useDiagram({
+            groupTemplates: [],
+            linkDataArray: defaultLinks,
+            nodeDataArray: defaultNodes,
+            nodeTemplates: defaultTemplates,
+            onModelChange: () => {},
+        }));
+
+        expect(diagramObject.nodeTemplateMap.add).not.toHaveBeenCalled();
+        act(() => { diagramProps.initDiagram(); });
+
+        expect(diagramObject.nodeTemplateMap.add).toHaveBeenCalledTimes(3);
+        expect(diagramObject.nodeTemplateMap.add.mock.calls).toEqual(defaultTemplates);
+    });
+
+    it('useDiagram adds group templates to group template map', () => {
+        const diagramObject = go.GraphObject.make();
+        const { result: { current: { diagramProps } } } = renderHook(() => useDiagram({
+            groupTemplates: defaultTemplates,
+            linkDataArray: defaultLinks,
+            nodeDataArray: defaultNodes,
+            nodeTemplates: [],
+            onModelChange: () => {},
+        }));
+
+        expect(diagramObject.groupTemplateMap.add).not.toHaveBeenCalled();
+        act(() => { diagramProps.initDiagram(); });
+
+        expect(diagramObject.groupTemplateMap.add).toHaveBeenCalledTimes(3);
+        expect(diagramObject.groupTemplateMap.add.mock.calls).toEqual(defaultTemplates);
     });
 
     it('addNodes adds nodes with new keys', () => {
@@ -163,5 +254,77 @@ describe('useDiagram', () => {
         removeLinks(diagramMock, defaultLinks);
 
         expect(diagramMock.model.removeLinkDataCollection).not.toHaveBeenCalled();
+    });
+
+    it('renderPortCursor gives ports with connections a default cursor', () => {
+        const fromPort = {};
+        const toPort = {};
+        const node = {
+            findNodesInto: () => ({ count: 2 }),
+            findNodesOutOf: () => ({ count: 2 }),
+            findPort: name => (
+                name === 'from' ? fromPort : toPort
+            ),
+        };
+
+        renderPortCursor(node);
+
+        expect(fromPort.cursor).toEqual('normal');
+        expect(toPort.cursor).toEqual('normal');
+    });
+
+    it('renderPortCursor gives ports with no connections a pointer cursor', () => {
+        const fromPort = {};
+        const toPort = {};
+        const node = {
+            findNodesInto: () => ({ count: 0 }),
+            findNodesOutOf: () => ({ count: 0 }),
+            findPort: name => (
+                name === 'from' ? fromPort : toPort
+            ),
+        };
+
+        renderPortCursor(node);
+
+        expect(fromPort.cursor).toEqual('pointer');
+        expect(toPort.cursor).toEqual('pointer');
+    });
+
+    it('getBorderWidth returns correct with if isSelected is true', () => {
+        expect(getBorderWidth(true)).toEqual(2);
+    });
+
+    it('getBorderWidth returns correct with if isSelected is false', () => {
+        expect(getBorderWidth(false)).toEqual(1);
+    });
+
+    it('dragGroupTogether adds grouped objects if there is a containing group', () => {
+        const compute = jest.fn();
+
+        const parts = {
+            each: jest.fn(),
+        };
+        dragGroupTogether(compute)(parts, {});
+
+        const each = parts.each.mock.calls[0][0];
+        each({ containingGroup: 'group' });
+
+        const [all] = compute.mock.calls[0];
+        expect(all.add).toHaveBeenCalledTimes(2);
+    });
+
+    it('dragGroupTogether adds single object if there is not a containing group', () => {
+        const compute = jest.fn();
+
+        const parts = {
+            each: jest.fn(),
+        };
+        dragGroupTogether(compute)(parts, {});
+
+        const each = parts.each.mock.calls[0][0];
+        each({ containingGroup: null });
+
+        const [all] = compute.mock.calls[0];
+        expect(all.add).toHaveBeenCalledTimes(1);
     });
 });

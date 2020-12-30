@@ -44,6 +44,52 @@ export const removeLinks = (diagram, linkDataArray) => {
     }
 };
 
+export const renderPortCursor = (node) => {
+    const fromPort = node.findPort('from');
+    const toPort = node.findPort('to');
+    if (node.findNodesOutOf().count > 0) {
+        fromPort.cursor = 'normal';
+    } else {
+        fromPort.cursor = 'pointer';
+    }
+    if (node.findNodesInto().count > 0) {
+        toPort.cursor = 'normal';
+    } else {
+        toPort.cursor = 'pointer';
+    }
+};
+
+export const renderPortCursors = e => e.diagram.nodes.each(renderPortCursor);
+
+export const dragGroupTogether = compute =>
+    // GoJS references the context of its computeEffectiveCollection function,
+    // so this has be a named function that calls the GoJS compute with its own
+    // this context.
+    function computeEffectiveCollection(parts, options) {
+        const all = new go.List();
+        parts.each((part) => {
+            all.add(part);
+            if (part.containingGroup !== null && !(part instanceof go.Link)) {
+                all.add(part.containingGroup);
+            }
+        });
+        return compute.call(this, all, options);
+    };
+
+export const externalObjectsDropped = (e) => {
+    e.subject.each((node) => {
+        if (node instanceof go.Link) return;
+        const grid = e.diagram.grid;
+        // eslint-disable-next-line
+        node.location =
+            node
+                .location.copy()
+                .snapToGridPoint(grid.gridOrigin, grid.gridCellSize);
+    });
+};
+
+export const getBorderWidth = isSelected => (isSelected ? 2 : 1);
+
 export default function useDiagram({
     groupTemplates,
     linkDataArray,
@@ -54,7 +100,7 @@ export default function useDiagram({
     const [diagram, setDiagram] = useState();
 
     useEffect(() => {
-        if (diagram instanceof go.Diagram) {
+        if (diagram.model) {
             addNodes(diagram, nodeDataArray);
             removeNodes(diagram, nodeDataArray);
             addLinks(diagram, linkDataArray);
@@ -65,21 +111,6 @@ export default function useDiagram({
         }
     }, [nodeDataArray, linkDataArray]);
 
-    const renderPortCursor = (node) => {
-        const fromPort = node.findPort('from');
-        const toPort = node.findPort('to');
-        if (node.findNodesOutOf().count > 0) {
-            fromPort.cursor = 'normal';
-        } else {
-            fromPort.cursor = 'pointer';
-        }
-        if (node.findNodesInto().count > 0) {
-            toPort.cursor = 'normal';
-        } else {
-            toPort.cursor = 'pointer';
-        }
-    };
-
     const initDiagram = () => {
         const diagramObject =
             $(go.Diagram,
@@ -87,17 +118,8 @@ export default function useDiagram({
                 {
                     hoverDelay: 0,
                     'undoManager.isEnabled': true,
-                    'draggingTool.computeEffectiveCollection': function (parts, options) {
-                        const all = new go.List();
-                        parts.each((p) => {
-                            all.add(p);
-                            if (p.containingGroup !== null && !(p instanceof go.Link)) {
-                                all.add(p.containingGroup);
-                            }
-                        });
-                        return go.DraggingTool.prototype
-                            .computeEffectiveCollection.call(this, all, options);
-                    },
+                    'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
+                        .computeEffectiveCollection),
                     layout:
                         $(go.LayeredDigraphLayout,
                             {
@@ -107,32 +129,10 @@ export default function useDiagram({
                                 isInitial: true,
                                 isOngoing: true,
                             }),
-                    'ExternalObjectsDropped': (e) => {
-                        e.subject.each((node) => {
-                            if (node instanceof go.Link) return;
-                            const grid = e.diagram.grid;
-                            // eslint-disable-next-line
-                            node.location =
-                                node
-                                    .location.copy()
-                                    .snapToGridPoint(grid.gridOrigin, grid.gridCellSize);
-                        });
-                    },
-                    'InitialAnimationStarting': (e) => {
-                        e.diagram.nodes.each((node) => {
-                            renderPortCursor(node);
-                        });
-                    },
-                    'LinkDrawn': (e) => {
-                        e.diagram.nodes.each((node) => {
-                            renderPortCursor(node);
-                        });
-                    },
-                    'SelectionDeleted': (e) => {
-                        e.diagram.nodes.each((node) => {
-                            renderPortCursor(node);
-                        });
-                    },
+                    'ExternalObjectsDropped': externalObjectsDropped,
+                    'InitialAnimationStarting': renderPortCursors,
+                    'LinkDrawn': renderPortCursors,
+                    'SelectionDeleted': renderPortCursors,
                     model: $(go.GraphLinksModel,
                         {
                             linkKeyProperty: 'key',
@@ -167,9 +167,9 @@ export default function useDiagram({
                     new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                     new go.Binding('relinkableTo', 'canRelink').ofModel(),
                     $(go.Shape, { stroke: '#4462ED' },
-                        new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
+                        new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
                     $(go.Shape, { toArrow: 'Standard', stroke: '#4462ED', fill: '#4462ED', segmentIndex: -Infinity },
-                        new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
+                        new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
                 );
 
         diagramObject.linkTemplateMap.add('outlet',
@@ -188,7 +188,7 @@ export default function useDiagram({
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
                 $(go.Shape, { stroke: '#4462ED' },
-                    new go.Binding('strokeWidth', 'isSelected', (s) => { return s ? 2 : 1; }).ofObject('')),
+                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
             ),
         );
 
@@ -215,7 +215,7 @@ export default function useDiagram({
             initDiagram,
             // This is a temporary band-aid; the step template has issues handling an
             // undefined errorMessage.
-            nodeDataArray: nodeDataArray.map(({ errorMessage = '', ...rest }) => ({ errorMessage, ...rest })),
+            nodeDataArray,
             linkDataArray,
             onModelChange,
             skipsDiagramUpdate: true,
