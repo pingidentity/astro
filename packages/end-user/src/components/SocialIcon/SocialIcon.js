@@ -353,6 +353,24 @@ const SocialIcons = {
             </svg>
         )
     },
+    OFFICE: ({ width = '100%', height = '100%' }) => {
+        return (
+        <svg x="0px" y="0px" viewBox="0 0 278050 333334" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
+            <path fill="#ea3e23" d="M278050 305556l-29-16V28627L178807 0 448 66971l-448 87 22 200227 60865-23821V80555l117920-28193-17 239519L122 267285l178668 65976v73l99231-27462v-316z"/>
+        </svg>
+        )
+    },
+    AQUERA: ({ width = '100%', height = '100%' }) => {
+        return (
+            <svg x="0px" y="0px" viewBox="0 0 64 64" style={{ enableBackground: `new 0 0 ${width} ${height}`, maxWidth: width, height }}>
+                <title>aquera</title>
+                <g id="aquera" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <circle id="Oval" fill="#005FA9" cx="32" cy="32" r="32"></circle>
+                    <path d="M37.4153499,12 L51,49 L40.3995485,49 L37.41,40 L26.604,40 L23.6388262,49 L13,49 L26.5846501,12 L37.4153499,12 Z M31.987,23.667 L28.91,33 L35.085,33 L31.987,23.667 Z" id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+                </g>
+            </svg>
+        )
+    },
 };
 SocialIcons.PAYPAL_SANDBOX = SocialIcons.PAYPAL;
 
