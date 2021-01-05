@@ -100,7 +100,7 @@ export default function useDiagram({
     const [diagram, setDiagram] = useState();
 
     useEffect(() => {
-        if (diagram.model) {
+        if (diagram?.model) {
             addNodes(diagram, nodeDataArray);
             removeNodes(diagram, nodeDataArray);
             addLinks(diagram, linkDataArray);
