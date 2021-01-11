@@ -24,5 +24,7 @@ export const Icons = () => (
         <SocialIcon.PAYPAL_SANDBOX width="50px" height="50px" />
         <SocialIcon.GITHUB width="50px" height="50px" />
         <SocialIcon.YAHOO width="50px" height="50px" />
+        <SocialIcon.OFFICE width="50px" height="50px" />
+        <SocialIcon.AQUERA width="50px" height="50px" />
     </div>
 );
