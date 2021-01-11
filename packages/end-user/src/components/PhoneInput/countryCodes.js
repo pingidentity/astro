@@ -7,7 +7,8 @@
 // and Vatican City from +379 to +39 (see issue 50)
 // and Caribean Netherlands from +5997 to +599
 // and Curacao from +5999 to +599
-// Removed:  Kosovo, Pitcairn Islands, South Georgia
+// and Kosovo +383 (see issue 3874)
+// Removed: Pitcairn Islands, South Georgia
 
 // UPDATE Sept 12th 2015
 // List of regions that have iso2 country codes, which I have chosen to omit:
@@ -512,6 +513,10 @@ const allCountries = [
     [
         "Kiribati",
         ["ki", "296"],
+    ],
+    [
+        "Kosovo (Republika e Kosovës)",
+        ["xk", "383"],
     ],
     [
         "Kuwait (‫الكويت‬‎)",
