@@ -60,7 +60,7 @@ const PhoneInputStateless = ({
     });
     const country = countryCodes.find(({ iso2 }) => iso2 === countryName);
     const phoneInputClasses = classnames('phone-input', {
-      'phone-input__longDialCode': country && (country.dialCode).length > 1
+      'phone-input__longDialCode': (country && !dropdownOpen) && (country.dialCode).length > 1
     })
     const optionsFiltered = countryCodes
       .filter(({ name, dialCode }) => {
@@ -93,7 +93,6 @@ const PhoneInputStateless = ({
                     onSearchValueChange={onSearchValueChange}
                     open={dropdownOpen}
                     onToggle={setOpen}
-                    status={status}
                 />
             </div>
             <div className="phone-input__number">
