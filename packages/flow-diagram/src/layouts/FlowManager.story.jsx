@@ -32,6 +32,7 @@ import OuterContainer from '../components/OuterContainer';
 
 const Demo = () => {
     const [selectedNode, setSelectedNode] = useState();
+    const [enabled, setEnabled] = useState(true)
 
     const onStepClick = (e, obj) => {
         setSelectedNode(obj.part.data);
@@ -81,6 +82,7 @@ const Demo = () => {
     ]);
 
     const { diagramProps, diagramObject } = useDiagram({
+        isEnabled: enabled,
         groupTemplates: [
             ['', diagramGroupTemplate],
             // Add a template for groups dragged from palette so that they look correct

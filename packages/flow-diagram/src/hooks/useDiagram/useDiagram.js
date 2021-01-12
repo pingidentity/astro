@@ -50,6 +50,7 @@ export default function useDiagram({
     nodeDataArray,
     nodeTemplates,
     onModelChange,
+    isEnabled = true,
 }) {
     const [diagram, setDiagram] = useState();
 
@@ -207,6 +208,12 @@ export default function useDiagram({
 
         return diagramObject;
     };
+
+    if (diagram instanceof go.Diagram) {
+        diagram.addDiagramListener('LayoutCompleted', (e) => {
+        e.diagram.isEnabled = isEnabled;
+        },
+    )};
 
     return {
         diagramObject: diagram,
