@@ -324,13 +324,14 @@ const Demo = () => {
                 </Box>
             </TopPanel>
             <Body>
-                <LeftContainer>
+                <LeftContainer styles={{ width: 360 }}>
                     {selectedNode ? (
                         <ConfigPanel
                             icon={<Image src={selectedNode.getIconSrc(selectedNode.color)} />}
                             color={selectedNode.color}
                             category={selectedNode.text}
                             onClose={onPanelClose}
+                            styles={{ marginLeft: 15 }}
                         >
                             <TextField label="Step name" controlProps={{ value: selectedNode.stepId }} onChange={e => updateStepId(selectedNode, e.target.value, 'stepId')} width="95%" />
                             <TextField mt={20} label="Description" controlProps={{ value: selectedNode.description }} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="95%" />
