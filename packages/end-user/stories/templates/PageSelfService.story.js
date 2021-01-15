@@ -22,15 +22,15 @@ import FloatLabelDropdownCustom from '../../src/components/FloatLabelDropdownCus
 import Columns, { Column, alignments as colAlignments, widths as colWidths } from '../../src/components/Columns';
 
 import '../../src/css/styles.scss';
-import PropTypes from "prop-types";
 import PhoneInput from '../../src/components/PhoneInput';
+import HelpHint, { Placements } from '../../src/components/shared/HelpHint';
 
 export default {
     title: 'Templates/Pages/Self Service',
 };
 
 export const Default = () => (
-    <SelfService/>
+    <SelfService />
 );
 
 class SelfService extends React.Component {
@@ -69,7 +69,7 @@ class SelfService extends React.Component {
             {this.state.selectedIndex === 3 ? <LinkedAccountsPage /> : null}
         </>
     );
-};
+}
 
 class MyProfilePage extends React.Component {
     state = {
@@ -285,7 +285,7 @@ class MyProfilePage extends React.Component {
             </Container>
         );
     }
-};
+}
 
 const ChangePasswordPage = () => (
     <Container maxWidth="400px">
@@ -353,7 +353,7 @@ class AuthenticationPage extends React.Component {
                                 <Toggle
                                     data-id="user-toggle1"
                                     className="row-status-toggle"
-                                    stateless={true}
+                                    stateless
                                     toggled={this.state.multifactorAuth}
                                     onToggle={() => this._toggleValue('multifactorAuth')()}
                                     name="the-toggle"
@@ -374,17 +374,17 @@ class AuthenticationPage extends React.Component {
                                 devices={
                                     [
                                         {
-                                            name: "CMaxwell@pingidentity.com",
-                                            type: "Email",
+                                            name: 'CMaxwell@pingidentity.com',
+                                            type: 'Email',
                                         },
                                         {
-                                            name: "951345279578",
-                                            type: "SMS",
+                                            name: '951345279578',
+                                            type: 'SMS',
                                         },
                                         {
-                                            type: "totp",
-                                            typeLabel: "Authenticator App"
-                                        }
+                                            type: 'totp',
+                                            typeLabel: 'Authenticator App',
+                                        },
                                     ]
                                 }
                             />
@@ -413,6 +413,15 @@ class AuthenticationPage extends React.Component {
                     <p className="normal-text centered-text">
                         Enter the mobile number you would like to receive authentication codes with.
                     </p>
+                    <TextInput width="100%" />
+                    <Button
+                        label="Next"
+                        type={ButtonTypes.PRIMARY}
+                        onClick={() => { this._closeModal(1)(); this._openModal(2)(); }}
+                    />
+                    <TextBlock size="small">
+                        <a href="#" onClick={() => this._closeModal(1)()}>Cancel</a>
+                    </TextBlock>
                     <PhoneInput />
                     <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(1)(); this._openModal(2)(); }} />
                     <TextBlock size="small"><a href="#" onClick={() => this._closeModal(1)()}>Cancel</a></TextBlock>
@@ -425,7 +434,8 @@ class AuthenticationPage extends React.Component {
                 type="dialog"
                 expanded={this.state.isExpanded2}
                 onclose={this._openModal(2)}
-                onClose={this._closeModal(2)}>
+                onClose={this._closeModal(2)}
+            >
 
                 <FlexRow
                     alignment={alignments.CENTER}
@@ -449,7 +459,8 @@ class AuthenticationPage extends React.Component {
                 type="dialog"
                 expanded={this.state.isExpanded3}
                 onclose={this._openModal(3)}
-                onClose={this._closeModal(3)}>
+                onClose={this._closeModal(3)}
+            >
 
                 <FlexRow
                     alignment={alignments.CENTER}
@@ -461,7 +472,10 @@ class AuthenticationPage extends React.Component {
                         Enter the email address you would like to recieve authentication codes with.
                     </p>
                     <TextInput width="100%" />
-                    <Button label="Next" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(3)(); this._openModal(4)(); }} />
+                    <Button
+                        label="Next"
+                        type={ButtonTypes.PRIMARY}
+                        onClick={() => { this._closeModal(3)(); this._openModal(4)(); }} />
                 </FlexRow>
             </Modal>
 
@@ -483,9 +497,16 @@ class AuthenticationPage extends React.Component {
                         Enter the passcode you recieved to complete email pairing.
                     </p>
                     <TextInput width="150px" />
-                    <TextBlock size="small"><a href="#">Resend passcode</a></TextBlock>
-                    <Button label="Save" type={ButtonTypes.PRIMARY} onClick={() => { this._closeModal(4)(); this._showData(); }} />
-                    <TextBlock size="small"><a href="#" onClick={() => this._closeModal(4)()}>Cancel</a></TextBlock>
+                    <TextBlock size="small">
+                        <a href="#">Resend passcode</a>
+                    </TextBlock>
+                    <Button
+                        label="Save"
+                        type={ButtonTypes.PRIMARY}
+                        onClick={() => { this._closeModal(4)(); this._showData(); }} />
+                    <TextBlock size="small">
+                        <a href="#" onClick={() => this._closeModal(4)()}>Cancel</a>
+                    </TextBlock>
                 </FlexRow>
             </Modal>
         </Container>
@@ -496,20 +517,20 @@ class LinkedAccountsPage extends React.Component {
     state = {
         accounts: [
             {
-                name: "Google",
+                name: 'Google',
                 image: <SocialIcons.GOOGLE width={40} height={40} />,
             },
             {
-                name: "Facebook",
+                name: 'Facebook',
                 image: <SocialIcons.FACEBOOK width={40} height={40} />,
                 details: [
-                    "Some",
-                    "Details",
-                    "Below",
+                    'Some',
+                    'Details',
+                    'Below',
                 ],
             },
             {
-                name: "Amazon",
+                name: 'Amazon',
                 image: <SocialIcons.AMAZON width={40} height={40} />,
                 details: [
                     <b>Never used</b>,
@@ -518,27 +539,27 @@ class LinkedAccountsPage extends React.Component {
         ],
         sessions: [
             {
-                name: "Chrome 77.25",
+                name: 'Chrome 77.25',
                 image: <SocialIcons.GOOGLE width={40} height={40} />,
                 details: [
-                    "Aus, TX",
-                    "2020-01-01 20:05 CST",
+                    'Aus, TX',
+                    '2020-01-01 20:05 CST',
                 ],
                 unlinked: true,
             },
             {
-                name: "Internet Explorer",
-                image: <div style={{ width: 40, height: 40}} />,
+                name: 'Internet Explorer',
+                image: <div style={{ width: 40, height: 40 }} />,
                 details: [
-                    "MacOs",
+                    'MacOs',
                 ],
             },
             {
                 name: <i>Unknown</i>,
-                image: <div style={{ width: 40, height: 40}} />
+                image: <div style={{ width: 40, height: 40 }} />,
             },
         ],
-        accountToUnlink: ''
+        accountToUnlink: '',
     }
     render() {
         return (
@@ -552,7 +573,7 @@ class LinkedAccountsPage extends React.Component {
                     >
                         <AccountTable
                             onUnlink={({ name: accountName }) => {
-                                this.setState((prevState) => prevState.accounts.map((account) => {
+                                this.setState(prevState => prevState.accounts.map((account) => {
                                     if (account.name === accountName) {
                                         account.unlinked = true;
                                     }
@@ -560,11 +581,9 @@ class LinkedAccountsPage extends React.Component {
                                 }));
                             }}
                             onRemove={({ name: accountName }) => {
-                                this.setState((prevState) => {
-                                    return {
-                                        accounts: prevState.accounts.filter(({ name }) => name !== accountName)
-                                    };
-                                });
+                                this.setState(prevState => ({
+                                    accounts: prevState.accounts.filter(({ name }) => name !== accountName),
+                                }));
                             }}
                             onUnlinkClick={({ name }) => {
                                 this.setState({ accountToUnlink: name });
@@ -585,9 +604,7 @@ class LinkedAccountsPage extends React.Component {
                         <AccountTable
                             onUnlink={({ name: nameToDelete }) => {
                                 this.setState(({ sessions }) => ({
-                                    sessions: sessions.filter(
-                                        (({ name }) => name !== nameToDelete),
-                                    ),
+                                    sessions: sessions.filter((({ name }) => name !== nameToDelete)),
                                 }));
                             }}
                             accounts={this.state.sessions}
@@ -596,8 +613,21 @@ class LinkedAccountsPage extends React.Component {
                             unlinkModalConfirmText="Sign Off"
                             cancelText="Don't Sign Off"
                             unlinkAccountText="Sign Off"
-                            unlinkAccountSuccessText="Cannot be Signed Off"
                             showUnlinkIcon={false}
+                            unlinkAccountSuccessText="Cannot be Signed Off"
+                            renderUnlinked={() => (
+                                <HelpHint
+                                    placement={Placements.TOP}
+                                    hintText="This is your current session. It can not be deleted"
+                                >
+                                    <Button
+                                      data-id="delete-disabled-button"
+                                      disabled
+                                      inline
+                                    >
+                                        Cannot be Signed Off
+                                    </Button>
+                                </HelpHint>)}
                         />
                     </FlexRow>
                 </Card>

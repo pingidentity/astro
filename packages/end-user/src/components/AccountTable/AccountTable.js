@@ -4,9 +4,55 @@ import TextBlock, { overflowTypes, alignments as textAlignments } from '../TextB
 import FlexRow, { alignments, flexDirectionOptions, spacingOptions } from '../shared/FlexRow';
 import Modal from '../shared/Modal';
 import Button from '../Button';
-import { noop } from "underscore";
+import { isFunction, noop } from "underscore";
 
-const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSuccessText, canDelete) => {
+const renderDefaultButton = ({ unlinkAccount, account, unlinkAccountText, id, index }) => {
+    return (
+      <div className="account-table__row-unlink">
+          <div className="account-table__row-unlink--normal">
+              <Button onClick={unlinkAccount(account)} inline data-id={`delete-${id || index}-button`}>
+                {unlinkAccountText}
+              </Button>
+          </div>
+          <div className="account-table__row-unlink--mobile">
+              <Button
+                onClick={unlinkAccount(account)}
+                inline iconName="delete"
+                data-id={`delete-${id || index}-button`}/>
+          </div>
+      </div>
+    )
+}
+
+const getAccounts = (
+  accounts,
+  unlinkAccount,
+  unlinkAccountText,
+  canDelete,
+  unlinkAccountSuccessText,
+  renderUnlinked,
+  ) => {
+    const renderUnlinkedComponent = ({unlinked, account, index, id}) => {
+        if (unlinked) {
+            const component = isFunction(renderUnlinked)
+              ? renderUnlinked()
+              : <Button disabled inline data-id={`delete-${id || index}-button`}>
+                  {unlinkAccountSuccessText}
+              </Button>
+
+            return (
+              <div className="account-table__row-unlink">
+                  <div className="account-table__row-unlink--normal">{component}</div>
+                  <div className="account-table__row-unlink--mobile">
+                    <Button disabled inline iconName="delete" />
+                  </div>
+              </div>
+            )
+        } else {
+            return renderDefaultButton({unlinkAccount, account, unlinkAccountText, index, id})
+        }
+    };
+
     return accounts.map((account, index) => {
         const { image, name, unlinked, id, details = [] } = account;
         return (
@@ -37,28 +83,7 @@ const getAccounts = (accounts, unlinkAccount, unlinkAccountText, unlinkAccountSu
                         ))}
                     </div>
                 </div>
-                {canDelete && (
-                    <div className="account-table__row-unlink">
-                        <div className="account-table__row-unlink--normal">
-                            { unlinked ? (
-                                <Button disabled inline data-id={`delete-${id || index}-button`}>
-                                    {unlinkAccountSuccessText}
-                                </Button>
-                            ) : (
-                                <Button onClick={unlinkAccount(account)} inline data-id={`delete-${id || index}-button`}>
-                                    {unlinkAccountText}
-                                </Button>
-                            )}
-                        </div>
-                        <div className="account-table__row-unlink--mobile">
-                            { unlinked ? (
-                                <Button disabled inline iconName="delete" />
-                            ) : (
-                                <Button onClick={unlinkAccount(account)} inline iconName="delete"/>
-                            )}
-                        </div>
-                    </div>
-                )}
+                {canDelete && renderUnlinkedComponent({unlinked, account, index, id})}
             </FlexRow>
         );
     });
@@ -79,6 +104,9 @@ function delayedPromise(delay) {
  *      The list of the accounts.
  * @param {boolean} [dropdownOpen=false]
  *      The open state of the dial code dropdown.
+ * @param {boolean|function} [renderUnlinked]
+ *     Controls display of unlinked button. If false, no button is displayed; if true, default button
+ *     is displayed. If a render function is passed in, will render custom button.
  * @param {AccountTable~onUnlink} onUnlink
  *      When the unlink button is pressed in the modal.
  * @param {AccountTable~onRemove} onRemove
@@ -165,8 +193,9 @@ class AccountTable extends React.Component {
                         this.props.accounts,
                         this._onUnlinkClick,
                         this.props.unlinkAccountText,
+                        this.props.canDelete,
                         this.props.unlinkAccountSuccessText,
-                        this.props.canDelete
+                        this.props.renderUnlinked
                     ) : (
                         <p className="normal-text centered-text">
                             {this.props.noConnectedAccountsMessage}
@@ -189,8 +218,9 @@ AccountTable.propTypes = {
     onUnlinkClick: PropTypes.func,
     cancelText: PropTypes.string,
     unlinkAccountText: PropTypes.node,
-    unlinkAccountSuccessText: PropTypes.node,
     canDelete: PropTypes.bool,
+    unlinkAccountSuccessText: PropTypes.string,
+    renderUnlinked: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
 };
 
 AccountTable.defaultProps = {
@@ -202,9 +232,10 @@ AccountTable.defaultProps = {
     onUnlinkClick: noop,
     cancelText: 'Cancel',
     unlinkAccountText: 'Unlink Account',
-    unlinkAccountSuccessText: 'Account Unlinked',
     unlinkModalConfirmText: 'Unlink',
+    unlinkAccountSuccessText: "",
     canDelete: true,
+    renderUnlinked: true
 };
 
 export default AccountTable;
