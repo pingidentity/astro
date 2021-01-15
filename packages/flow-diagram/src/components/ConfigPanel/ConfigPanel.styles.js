@@ -1,5 +1,4 @@
 export const configPanel = {
-    marginLeft: 15,
     position: 'relative',
 };
 

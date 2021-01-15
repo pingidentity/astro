@@ -6,9 +6,9 @@ import Icon from '@mdi/react';
 import { mdiDotsVertical } from '@mdi/js';
 import { configPanel, configPanelClose, configPanelHeader } from './ConfigPanel.styles';
 
-function ConfigPanel({ category, children, onClose, icon, color, ...others }) {
+function ConfigPanel({ category, children, onClose, icon, styles, color, ...others }) {
     return (
-        <Box sx={configPanel} {...others}>
+        <Box sx={{ ...configPanel, ...styles }} {...others}>
             <Box sx={configPanelClose}>
                 <Clear onClick={onClose} data-testid="config-panel-close" />
             </Box>
@@ -34,6 +34,7 @@ ConfigPanel.propTypes = {
     color: PropTypes.string,
     icon: PropTypes.node,
     onClose: PropTypes.func,
+    styles: PropTypes.object,
 };
 
 export default ConfigPanel;
