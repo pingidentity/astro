@@ -26,60 +26,60 @@ pipeline {
             }
         }
     }
-    // stage('test') {
-    //   steps {
-    //       container('node-builder') {
-    //         echo "Running linting and tests"
-    //         // sh "lerna run --scope ${params.PACKAGE} test"
-    //       }
-    //   }
-    // }
-    // stage('version, tag and commit') {
-    //   steps {
-    //     dir ("${env.WORKSPACE}/packages/${params.PACKAGE}") {
-    //       container('node-builder') {
-    //         echo "Incrementing the version: ${params.VERSION_TYPE}"
-    //         sh "npm version ${params.VERSION_TYPE} --no-git-tag-version"
-    //         script {
-    //           env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
-    //           env.GIT_RELEASE_TAG = "${params.PACKAGE}-${env.RELEASE_VERSION}"
-    //         }
-    //         echo """
-    //           release version: ${env.RELEASE_VERSION}
-    //           git tag: ${env.GIT_RELEASE_TAG}
-    //         """
-    //         withCredentials([
-    //           sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
-    //         ]){
-    //           sh  """
-    //             git add package.json
-    //             git config --global user.email 'devtools+jenkins@pingidentity.com'
-    //             git config --global user.name 'devtools-jenkins'
-    //             git commit -m '${params.PACKAGE}-${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-    //             GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
+    stage('test') {
+      steps {
+          container('node-builder') {
+            echo "Running linting and tests"
+            sh "lerna run --scope ${params.PACKAGE} test"
+          }
+      }
+    }
+    stage('version, tag and commit') {
+      steps {
+        dir ("${env.WORKSPACE}/packages/${params.PACKAGE}") {
+          container('node-builder') {
+            echo "Incrementing the version: ${params.VERSION_TYPE}"
+            sh "npm version ${params.VERSION_TYPE} --no-git-tag-version"
+            script {
+              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
+              env.GIT_RELEASE_TAG = "${params.PACKAGE}-${env.RELEASE_VERSION}"
+            }
+            echo """
+              release version: ${env.RELEASE_VERSION}
+              git tag: ${env.GIT_RELEASE_TAG}
+            """
+            withCredentials([
+              sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
+            ]){
+              sh  """
+                git add package.json
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+                git commit -m '${params.PACKAGE}-${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
 
-    //             git tag ${env.GIT_RELEASE_TAG}
-    //             GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
-    //           """
-    //         }
-    //       }
-    //     }
-    //   }
+                git tag ${env.GIT_RELEASE_TAG}
+                GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+              """
+            }
+          }
+        }
+      }
     // }
-    // stage('yarn-publish') {
-    //   steps {
-    //     dir("${env.WORKSPACE}/packages/${params.PACKAGE}") {
-    //       container('node-builder') {
-    //         echo "Building & publishing"
-    //         configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
-    //           sh "yarn run build"
-    //           sh "yarn publish"
-    //         }
-    //       }
-    //     }
-    //     stash includes: packages/${params.PACKAGE}/**/*', name: 'package'
-    //   }
-    // }
+    stage('yarn-publish') {
+      steps {
+        dir("${env.WORKSPACE}/packages/${params.PACKAGE}") {
+          container('node-builder') {
+            echo "Building & publishing"
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              sh "yarn run build"
+              sh "yarn publish"
+            }
+          }
+        }
+       // stash includes: packages/${params.PACKAGE}/**/*', name: 'package'
+      }
+    }
     // stage('cdn deploy prod') {
     //   agent {
     //     kubernetes {
@@ -103,10 +103,10 @@ pipeline {
 
     stage('update-demo') {
       steps {
-        dir("${env.WORKSPACE}/packages/flow-diagram") {
+        dir("${env.WORKSPACE}/packages/${params.PACKAGE}") {
           container('node-builder'){
             withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
-              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=flow-diagram initial-upload"
+              sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${params.PACKAGE} package-and-upload"
             }
           }
         }
