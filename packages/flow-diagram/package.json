@@ -23,12 +23,13 @@
     "scripts": {
         "build": "rm -rf lib && npm-run-all build:*",
         "build:icons": "cd ../icons && yarn build",
+        "build:astro": "cd ../astro && yarn build",
         "build:cjs": "BABEL_ENV=cjs NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
         "build:esm": "BABEL_ENV=esm NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/",
         "build:assets": "cp -r ./src/img ./lib && cp -r ./src/img ./lib/cjs",
         "build:css": "mkdir ./lib/css && cp -r ./src/css/*.css ./lib/css/",
         "coverage": "jest --coverage",
-        "demo": "rm -rf ./upload && yarn build:icons && build-storybook -o upload",
+        "demo": "rm -rf ./demo && yarn build:icons && yarn build:astro && build-storybook -o demo",
         "verify": "yarn lint && yarn docs && yarn build-demo && test",
         "lint": "eslint .",
         "start": "yarn build:icons && start-storybook -p 1339",
@@ -49,6 +50,7 @@
         "uuid": "^7.0.3"
     },
     "devDependencies": {
+        "@pingux/astro": "0.1.0-beta.12",
         "@storybook/addon-actions": "^6.1.9",
         "@storybook/addon-docs": "^6.1.9",
         "@storybook/addon-links": "^6.1.9",
@@ -59,6 +61,7 @@
         "@testing-library/react-hooks": "^3.4.2"
     },
     "peerDependencies": {
+        "@pingux/astro": "0.1.0-beta.12",
         "react": "^16.8.6",
         "react-dom": "^16.13.1"
     }
