@@ -1,6 +1,6 @@
 include ../../Makefile
 
-package-and-upload-flow-diagram:
+package-and-upload:
 	# PRIVATE_SSH_KEY_PATH, LIB_VERSION variables will be passed in from the command line, see Jenkinsfile.ui-library.build for example
 	set -eo;\
 
