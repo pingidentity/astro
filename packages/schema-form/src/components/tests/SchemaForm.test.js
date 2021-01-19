@@ -5,6 +5,7 @@ import {
   waitFor,
 } from '@testing-library/react';
 import user from '@testing-library/user-event';
+import { FORM_MODE } from '../../utils/constants';
 import { renderSchemaForm } from './utils';
 
 const schema = {
@@ -217,7 +218,7 @@ test('live validation happens all of the time if option is given', async () => {
   const onChange = jest.fn(() => promise);
   // Will fail initial fetch, but second one will be the default above and will succeed
   renderSchemaForm({
-    liveValidate: 'on',
+    liveValidate: true,
     onChange,
     schema,
     uiSchema,
@@ -273,4 +274,16 @@ test('it clears async errors on change when live validation is enabled post subm
   // Expect async error to be cleared
   expect(screen.queryByText(error)).not.toBeInTheDocument();
   await act(() => promise);
+});
+
+test('simplified form mode renders', () => {
+  renderSchemaForm({
+    mode: FORM_MODE.SIMPLIFIED,
+    schema,
+    uiSchema,
+  });
+
+  expect(document.querySelector('form')).toBeInTheDocument();
+  expect(screen.getByLabelText(uiSchema.value['ui:options'].label)).toBeInTheDocument();
+  expect(screen.getByRole('button')).toBeInTheDocument();
 });

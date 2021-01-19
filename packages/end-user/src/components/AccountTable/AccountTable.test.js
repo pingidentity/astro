@@ -2,6 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import AccountTable from './AccountTable';
 import SocialLogos from '../../util/SocialLogo';
+import HelpHint, {Placements} from "../shared/HelpHint";
+import Button from "../Button";
 
 window.__DEV__ = true;
 
@@ -43,4 +45,31 @@ describe('AccountTable', () => {
                 .map(block => block.text())
         ).toEqual(["_details_", "_another details_"]);
     });
+    it('renders custom element if prop renderUnlinked is function', () => {
+
+        const wrapper = getComponent({
+              renderUnlinked: () => (
+                <HelpHint
+                  placement={Placements.TOP}
+                  hintText="This is your current session. It can not be deleted"
+                >
+                    <Button className="a-real-button" disabled inline>Cannot be Signed Off</Button>
+                </HelpHint>),
+              unlinkAccountSuccessText: "Cannot be Signed Off",
+              accounts: [
+                  {
+                      name: "Google",
+                      unlinked: true,
+                      image: <SocialLogos.GOOGLE width={40} height={40} />,
+                  },
+                  {
+                      name: "Facebook",
+                      image: <SocialLogos.FACEBOOK width={40} height={40} />,
+                  },
+              ]
+        }
+        )
+        const component = wrapper.find('button.a-real-button');
+        expect(component.exists()).toEqual(true);
+    })
 });

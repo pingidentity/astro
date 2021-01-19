@@ -46,7 +46,8 @@ $card-padding-horizontal: $spacing-xl;
     }
 
 
-    &--slim {
+    &--slim,
+    &--skinny {
         min-height: auto;
     }
 
@@ -54,9 +55,13 @@ $card-padding-horizontal: $spacing-xl;
         padding: 20px;
     }
 
+    &--skinny > &__content {
+        padding: 0 20px;
+    }
+
     &__content {
         padding: $card-padding-top $card-padding-horizontal $card-padding-bottom $card-padding-horizontal;
-        position:relative;
+        position: relative;
     }
 
     &__message {

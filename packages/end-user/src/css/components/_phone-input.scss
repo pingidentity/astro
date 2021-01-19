@@ -24,4 +24,14 @@
         right: 0;
         width: 75%;
     }
+    &__longDialCode {
+        .phone-input {
+            &__code {
+                width: calc(30% - #{$spacing-xs});
+            }
+            &__number {
+                width: 70%;
+            }
+        }
+    }
 }

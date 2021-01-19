@@ -37,7 +37,7 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
     &-text-area {
         @include input-background-light;
         top: 1px;
-        margin-top: 0px;
+        margin-top: 0;
         padding-top: $spacing-xs + 1px;
     }
 }
@@ -45,6 +45,17 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 .float-label {
     :-ms-input-placeholder {
         color: rgba(0, 0, 0, 0);
+    }
+
+    input:-webkit-autofill {
+        -webkit-text-fill-color: $input-text-color;
+
+        ~ label {
+            font-size: 10px;
+            margin-top: $spacing-xs + 1px!important;
+            margin-left: $spacing-sm!important;
+            text-transform: uppercase;
+        }
     }
 }
 
@@ -54,6 +65,11 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 
     &::placeholder {
         color: rgba(0, 0, 0, 0);
+    }
+    &:not(:placeholder-shown),
+    &:-webkit-autofill {
+        padding-top: $float-label-input-padding-top;
+        padding-bottom: $float-label-input-padding-bottom;
     }
 }
 

@@ -26,6 +26,8 @@ import SocialLogos from '../../util/SocialLogo';
  * @property {brandType} PAYPAL - A brandType object
  * @property {brandType} GITHUB - A brandType object
  * @property {brandType} YAHOO - A brandType object
+ * @property {brandType} OFFICE - A brandType object
+ * @property {brandType} AQUERA - A brandType object
  */
 const brandTypes = {
     LINKEDIN: {
@@ -74,6 +76,14 @@ const brandTypes = {
     YAHOO: {
         fill: '#5D04CA',
         logo: <SocialLogos.YAHOO width={20} height={20} />,
+    },
+    OFFICE: {
+        fill: '#EA3F23',
+        logo: <SocialLogos.OFFICE width={20} height={20} />,
+    },
+    AQUERA: {
+        fill: '#125FA4',
+        logo: <SocialLogos.AQUERA width={20} height={20} />,
     },
 };
 brandTypes.PAYPAL_SANDBOX = brandTypes.PAYPAL;

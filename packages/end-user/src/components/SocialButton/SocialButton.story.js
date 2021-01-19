@@ -20,5 +20,7 @@ export const Buttons = () => (
         <SocialButton label="Login with Paypal Sandbox" branding={SocialButton.BrandTypes.PAYPAL_SANDBOX} />
         <SocialButton label="Login with Github" branding={SocialButton.BrandTypes.GITHUB} />
         <SocialButton label="Login with Yahoo" branding={SocialButton.BrandTypes.YAHOO} />
+        <SocialButton label="Login with Office" branding={SocialButton.BrandTypes.OFFICE} />
+        <SocialButton label="Login with Aquera" branding={SocialButton.BrandTypes.AQUERA} />
     </div>
 );

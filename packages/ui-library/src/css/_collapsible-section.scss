@@ -89,11 +89,12 @@
         }
     }
     .row-accessories {
-        float: unset;
-
         > * {
             margin-left: 10px;
         }
+    }
+    &__row-accessories {
+        float: unset;
     }
     &.disable-expand {
         .left:before,
