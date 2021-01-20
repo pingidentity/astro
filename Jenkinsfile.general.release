@@ -65,7 +65,7 @@ pipeline {
           }
         }
       }
-    // }
+    }
     stage('yarn-publish') {
       steps {
         dir("${env.WORKSPACE}/packages/${params.PACKAGE}") {
