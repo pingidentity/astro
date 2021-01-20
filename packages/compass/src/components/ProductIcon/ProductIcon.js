@@ -17,6 +17,7 @@ import workforce360 from '../../icons/WorkForce_360.svg';
 import risk from '../../icons/Risk_basic.svg';
 import customer360 from '../../icons/Customer_360.svg';
 import pingintelligence from '../../icons/PingIntelligence_basic.svg';
+import verify from '../../icons/Verify.svg';
 
 import p14cBox from '../../icons/P14C_box.svg';
 import p14eBox from '../../icons/P14E_box.svg';
@@ -101,6 +102,11 @@ export const products = {
         component: mfa,
         component_box: mfaBox,
         color: '#9DAD40',
+    },
+    'verify': {
+        component: verify,
+        component_box: verify,
+        color: '#899D96',
     },
 };
 
