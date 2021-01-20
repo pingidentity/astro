@@ -26,14 +26,14 @@ pipeline {
             }
         }
     }
-    stage('test') {
-      steps {
-          container('node-builder') {
-            echo "Running linting and tests"
-            sh "lerna run --scope ${params.PACKAGE} test"
-          }
-      }
-    }
+    // stage('test') {
+    //   steps {
+    //       container('node-builder') {
+    //         echo "Running linting and tests"
+    //         sh "lerna run --scope ${params.PACKAGE} test"
+    //       }
+    //   }
+    // }
     stage('version, tag and commit') {
       steps {
         dir ("${env.WORKSPACE}/packages/${params.PACKAGE}") {
