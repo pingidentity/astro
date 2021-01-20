@@ -77,7 +77,7 @@ pipeline {
             }
           }
         }
-       // stash includes: packages/${params.PACKAGE}/**/*', name: 'package'
+
       }
     }
     // stage('cdn deploy prod') {
