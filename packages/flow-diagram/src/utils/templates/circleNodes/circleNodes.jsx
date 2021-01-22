@@ -14,7 +14,7 @@ export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height } = {}
     return (
         $(go.Node, 'Spot',
             { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
-            new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
+            new go.Binding('location', 'loc', go.Point.parse),
             $(go.Panel, 'Auto',
                 { name: 'BODY', cursor: 'normal' },
                 $(go.Shape, 'Circle',

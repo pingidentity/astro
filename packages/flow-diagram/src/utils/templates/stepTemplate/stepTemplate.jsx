@@ -101,7 +101,7 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
 // Would have to mock a lot of gojs to test. May do this later.
 export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(go.Node, 'Spot',
     { click: onClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', isShadowed: true, shadowColor: 'rgb(211, 211, 211, .75)', shadowOffset: new go.Point(0, 1), shadowBlur: 10, },
-    new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
+    new go.Binding('location', 'loc', go.Point.parse),
     new go.Binding('click', 'onClick'),
     $(go.Panel, 'Auto',
         { name: 'BODY' },

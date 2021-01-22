@@ -6,7 +6,7 @@ const $ = go.GraphObject.make;
 
 export const outletTemplate = ({ color = COLORS.BLACK, width = 100 } = {}) => $(go.Node, 'Spot',
     { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', deletable: false, movable: false, selectable: false },
-    new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
+    new go.Binding('location', 'loc', go.Point.parse),
     $(go.Panel, 'Auto',
         { name: 'BODY', cursor: 'normal' },
         $(go.Shape, 'RoundedRectangle',
