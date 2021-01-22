@@ -22,7 +22,7 @@ export const nodeTemplateStart = () => {
                 isAnimated: false,
                 fromMaxLinks: 1,
             },
-            new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
+            new go.Binding('location', 'loc', go.Point.parse),
             $(go.Shape, 'Circle',
                 { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(65, 65), cursor: 'normal' },
             ),
