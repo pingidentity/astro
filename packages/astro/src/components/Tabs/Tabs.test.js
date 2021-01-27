@@ -214,3 +214,13 @@ test('vertical tabs style', () => {
   // Expect the tab to have the given icon element
   testSingleTab(tabs, tab0, 'toHaveStyle', [{ backgroundColor: theme.colors.accent[95] }]);
 });
+
+
+test('accepts tabPanelProps and applies them to tabpanel only', () => {
+  getComponent({ tabPanelProps: { color: 'green' } });
+  const tabPanel = screen.getByRole('tabpanel');
+  expect(tabPanel).toHaveStyleRule('color', 'green');
+
+  const tabList = screen.getByRole('tablist');
+  expect(tabList).not.toHaveStyleRule('color', 'green');
+});
