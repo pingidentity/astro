@@ -20,13 +20,17 @@ const Tabs = forwardRef((props, ref) => {
     onSelectionChange,
     orientation,
     tabListProps,
+    tabPanelProps,
     ...others
   } = props;
   const tabListRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabListRef.current);
   const state = useSingleSelectListState({ ...props, onSelectionChange });
-  const { tabListProps: raTabListProps, tabPanelProps } = useTabs(props, state, tabListRef);
+  const {
+    tabListProps: raTabListProps,
+    tabPanelProps: raTabPanelProps,
+  } = useTabs(props, state, tabListRef);
 
   return (
     <TabsContext.Provider value={state}>
@@ -47,7 +51,11 @@ const Tabs = forwardRef((props, ref) => {
             />
           ))}
         </Box>
-        <Box variant="tabPanel" {...tabPanelProps}>
+        <Box
+          variant="tabPanel"
+          {...tabPanelProps}
+          {...raTabPanelProps}
+        >
           {state.selectedItem && state.selectedItem.props.children}
         </Box>
       </Box>
@@ -68,6 +76,8 @@ Tabs.propTypes = {
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   /** A props object that is subsequently spread into the rendered tablist. */
   tabListProps: PropTypes.shape({}),
+  /** Props object that is spread directly into all of the tab panel wrapper elements. */
+  tabPanelProps: PropTypes.shape({}),
 };
 
 Tabs.defaultProps = {
