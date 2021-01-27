@@ -104,3 +104,13 @@ export const Orientation = () => (
     ))}
   </Tabs>
 );
+
+export const TabPanelProps = () => (
+  <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }}>
+    {tabs.map(tab => (
+      <Tab key={tab.name} title={tab.name}>
+        {tab.children}
+      </Tab>
+    ))}
+  </Tabs>
+);

@@ -13,6 +13,10 @@ export const tab = {
   },
 };
 
+export const tabPanel = {
+  outlineColor: 'transparent',
+};
+
 export const tabs = {
   borderBottomWidth: 1,
   borderBottomStyle: 'solid',
