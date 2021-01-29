@@ -147,6 +147,8 @@ export class Frame extends React.Component {
     withSignature = callback => () => callback(this.getEventSignature());
 
     paintFrame = (callback) => {
+        // If not present for this render, skip it.
+        if (!this.reactContainer) return;
         ReactDOM.render(
             this.props.children,
             this.reactContainer,

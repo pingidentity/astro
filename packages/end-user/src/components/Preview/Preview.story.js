@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Preview, { devices } from './Preview';
 import Card from '../Card';
@@ -20,6 +20,7 @@ import Heading from '../Heading';
 import Padding, { sizes } from '../shared/Padding';
 import Feedback from '../Feedback';
 import SocialButton from '../SocialButton';
+import Modal from '../shared/Modal';
 
 import logo from '../../images/ping-logo.png';
 
@@ -383,3 +384,19 @@ export const Default = () =>
             <Padding top={sizes.XL} />
         </div>
     ));
+
+export const WithModal = () => {
+    const [expanded, setExpanded] = useState(false);
+
+    return (
+        <div>
+            <Modal expanded={expanded}>
+            <Preview>
+                <p className="page">Preview Content</p>
+            </Preview>
+            <button onClick={() => setExpanded(false)}>Close</button>
+            </Modal>
+            <button onClick={() => setExpanded(true)}>Open</button>
+        </div>
+    );
+};
