@@ -257,6 +257,7 @@ export default function useDiagram({
     if (diagram instanceof go.Diagram) {
         diagram.addDiagramListener('LayoutCompleted', (e) => {
         e.diagram.isEnabled = isEnabled;
+        e.diagram.allowDelete = isEnabled;
         },
     )};
 
