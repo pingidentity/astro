@@ -42,6 +42,33 @@ export const getAdornmentOnHover = adornment => (e, obj) => {
     node.addAdornment('mouseHover', nodeHoverAdornment);
 };
 
+// Would require mocking node
+/* istanbul ignore next */
+export const dragEnter = (e, obj) => {
+    const node = obj.part;
+    node.findObject('borderRectangle').stroke = COLORS.PURPLE;
+    node.findObject('fromNode').stroke = '#D033FF';
+    node.findObject('fromNode').fill = COLORS.PURPLE;
+    node.findObject('fromNodeOuter').fill = 'rgba(208, 51, 255, 0.5)';
+};
+
+// Would require mocking node
+/* istanbul ignore next */
+export const dragLeave = (selectedColor, errorColor, defaultColor) => (e, obj) => {
+    const node = obj.part;
+    if (node.isSelected || node.data.isSelected) {
+        node.findObject('borderRectangle').stroke = selectedColor;
+    } else if (node.lb.errorMessage || node.data.errorMessage) {
+        node.findObject('borderRectangle').stroke = errorColor;
+    } else {
+        node.findObject('borderRectangle').stroke = defaultColor;
+    }
+
+    node.findObject('fromNode').stroke = COLORS.WHITE;
+    node.findObject('fromNode').fill = node.data.color;
+    node.findObject('fromNodeOuter').fill = 'transparent';
+};
+
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
 export const getNodeHoverAdornment = () => {
@@ -100,8 +127,19 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
 export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(go.Node, 'Spot',
-    { click: onClick, selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', isShadowed: true, shadowColor: 'rgb(211, 211, 211, .75)', shadowOffset: new go.Point(0, 1), shadowBlur: 10, },
-    new go.Binding('location', 'loc', go.Point.parse),
+    {
+        mouseDragEnter: dragEnter,
+        mouseDragLeave: dragLeave(COLORS.BLUE, COLORS.ERROR, 'transparent'),
+        click: onClick,
+        selectionAdorned: false,
+        textEditable: true,
+        locationObjectName: 'BODY',
+        isShadowed: true,
+        shadowColor: 'rgb(211, 211, 211, .75)',
+        shadowOffset: new go.Point(0, 1),
+        shadowBlur: 10,
+    },
+    new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     new go.Binding('click', 'onClick'),
     $(go.Panel, 'Auto',
         { name: 'BODY' },
@@ -118,13 +156,13 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         $(go.Panel, 'Position', { position: new go.Point(0, 0) },
             { name: 'BODY' },
             $(go.Shape, 'RoundedRectangle',
-                { fill: 'transparent', desiredSize: new go.Size(210, 55), stroke: 'transparent', parameter1: 3 },
+                { fill: 'transparent', desiredSize: new go.Size(218, 55), stroke: 'transparent', parameter1: 3 },
             ),
             $(go.Shape, 'RoundedRectangle',
                 {
                     fill: COLORS.WHITE,
                     desiredSize: new go.Size(200, 55),
-                    margin: new go.Margin(0, 0, 0, 5),
+                    margin: new go.Margin(0, 0, 0, 10),
                     parameter1: 3,
                     strokeWidth: 0,
                     shadowVisible: true,
@@ -133,7 +171,7 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
             $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                 $(go.Panel, 'Auto',
                     $(go.Shape, 'StepIconBG',
-                        { stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(60, 55), margin: new go.Margin(0, 0, 0, 5), parameter1: 2 },
+                        { stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(60, 55), margin: new go.Margin(0, 0, 0, 10), parameter1: 2 },
                         new go.Binding('fill', 'color')),
                     $(go.Picture,
                         { source: iconSrc, width: 20, height: 20, margin: new go.Margin(0, 0, 0, -9) },
@@ -157,9 +195,10 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
             ),
             $(go.Shape, 'RoundedRectangle',
                 {
+                    name: 'borderRectangle',
                     fill: 'transparent',
                     desiredSize: new go.Size(199, 54),
-                    margin: new go.Margin(0, 0, 0, 5),
+                    margin: new go.Margin(0, 0, 0, 10),
                     parameter1: 2,
                     strokeWidth: 1,
                 },

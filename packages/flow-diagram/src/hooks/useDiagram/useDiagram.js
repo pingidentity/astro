@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { differenceWith } from 'lodash';
 import { generateKey } from '../../utils/diagramUtils';
 import ZoomSlider from '../../components/ZoomSlider';
+import { COLORS } from '../../utils/constants';
 
 go.Diagram.licenseKey = '73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741';
 
@@ -88,6 +89,8 @@ export const externalObjectsDropped = (e) => {
     });
 };
 
+export const handleHighlight = isHighlighted => (isHighlighted ? COLORS.PURPLE : COLORS.BLUE);
+
 export const getBorderWidth = isSelected => (isSelected ? 2 : 1);
 
 export default function useDiagram({
@@ -99,6 +102,8 @@ export default function useDiagram({
     isEnabled = true,
 }) {
     const [diagram, setDiagram] = useState();
+    const [droppedOntoLinkKey, setDroppedOntoLinkKey] = useState(undefined);
+    const [droppedOntoNodeKey, setDroppedOntoNodeKey] = useState(undefined);
 
     useEffect(() => {
         if (diagram?.model) {
@@ -110,7 +115,14 @@ export default function useDiagram({
             // to have existing diagram nodes update.
             diagram.model.mergeNodeDataArray(nodeDataArray);
         }
+        setDroppedOntoLinkKey(undefined);
+        setDroppedOntoNodeKey(undefined);
     }, [nodeDataArray, linkDataArray]);
+
+    // Adds link or node that was dropped onto to onModelChange
+    const modelChange = (args) => {
+        onModelChange({ ...args, droppedOntoLinkKey, droppedOntoNodeKey });
+    };
 
     const initDiagram = () => {
         const diagramObject =
@@ -143,7 +155,9 @@ export default function useDiagram({
                 });
         setDiagram(diagramObject);
         nodeTemplates.forEach(([name, template]) => {
-            diagramObject.nodeTemplateMap.add(name, template);
+            const updatedTemplate = template;
+            updatedTemplate.mouseDrop = (e, node) => setDroppedOntoNodeKey(node.key);
+            diagramObject.nodeTemplateMap.add(name, updatedTemplate);
         });
 
         groupTemplates.forEach(([name, template]) => {
@@ -151,27 +165,58 @@ export default function useDiagram({
         });
 
         diagramObject.linkTemplate =
-                $(go.Link,
-                    {
-                        routing: go.Link.AvoidsNodes,
-                        curve: go.Link.JumpOver,
-                        corner: 5,
-                        fromShortLength: -10,
-                        toShortLength: -10,
-                        selectable: true,
-                        layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
-                        selectionAdorned: false,
-                        fromPortId: 'from',
-                        toPortId: 'to',
-                        layerName: 'Background',
+            $(go.Link,
+                {
+                    routing: go.Link.AvoidsNodes,
+                    curve: go.Link.JumpOver,
+                    corner: 5,
+                    fromShortLength: -10,
+                    toShortLength: -10,
+                    selectable: true,
+                    layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
+                    selectionAdorned: false,
+                    fromPortId: 'from',
+                    toPortId: 'to',
+                    layerName: 'Background',
+                    mouseDragEnter: (e, link) => {
+                        const selectedLink = link.part;
+                        selectedLink.fromNode.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
+                        selectedLink.fromNode.findObject('fromNodeOuter').stroke = selectedLink.fromNode.findObject('fromNode').fill;
+                        selectedLink.fromNode.findObject('fromNode').fill = COLORS.PURPLE;
+                        selectedLink.fromNode.findObject('fromNode').stroke = COLORS.PURPLE;
+                        selectedLink.toNode.findObject('toNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
+                        selectedLink.toNode.findObject('toNodeOuter').stroke = selectedLink.toNode.findObject('toNode').fill;
+                        selectedLink.toNode.findObject('toNode').fill = COLORS.PURPLE;
+                        selectedLink.toNode.findObject('toNode').stroke = COLORS.PURPLE;
+                        selectedLink.findObject('arrow').fill = COLORS.PURPLE;
+                        selectedLink.findObject('arrow').stroke = COLORS.PURPLE;
+                        // eslint-disable-next-line
+                        link.isHighlighted = true;
                     },
-                    new go.Binding('relinkableFrom', 'canRelink').ofModel(),
-                    new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                    $(go.Shape, { stroke: '#4462ED' },
-                        new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
-                    $(go.Shape, { toArrow: 'Standard', stroke: '#4462ED', fill: '#4462ED', segmentIndex: -Infinity },
-                        new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
-                );
+                    mouseDragLeave: (e, link) => {
+                        const selectedLink = link.part;
+                        selectedLink.fromNode.findObject('fromNode').fill = selectedLink.fromNode.findObject('fromNodeOuter').stroke;
+                        selectedLink.fromNode.findObject('fromNode').stroke = COLORS.WHITE;
+                        selectedLink.fromNode.findObject('fromNodeOuter').fill = 'transparent';
+                        selectedLink.toNode.findObject('toNode').fill = selectedLink.toNode.findObject('toNodeOuter').stroke;
+                        selectedLink.toNode.findObject('toNode').stroke = COLORS.WHITE;
+                        selectedLink.toNode.findObject('toNodeOuter').fill = 'transparent';
+                        selectedLink.findObject('arrow').fill = COLORS.BLUE;
+                        selectedLink.findObject('arrow').stroke = COLORS.BLUE;
+                        // eslint-disable-next-line
+                        link.isHighlighted = false;
+                    },
+                    mouseDrop: (e, link) => setDroppedOntoLinkKey(link.key),
+                },
+                new go.Binding('relinkableFrom', 'canRelink').ofModel(),
+                new go.Binding('relinkableTo', 'canRelink').ofModel(),
+                $(go.Shape,
+                    new go.Binding('stroke', 'isHighlighted', handleHighlight).ofObject(),
+                    new go.Binding('strokeWidth', 'isHighlighted', getBorderWidth).ofObject(''),
+                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+                $(go.Shape, { name: 'arrow', toArrow: 'Standard', stroke: COLORS.BLUE, fill: COLORS.BLUE, segmentIndex: -Infinity },
+                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+            );
 
         diagramObject.linkTemplateMap.add('outlet',
             $(go.Link,
@@ -188,7 +233,7 @@ export default function useDiagram({
                 },
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                $(go.Shape, { stroke: '#4462ED' },
+                $(go.Shape, { stroke: COLORS.BLUE },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
             ),
         );
@@ -224,7 +269,7 @@ export default function useDiagram({
             // undefined errorMessage.
             nodeDataArray,
             linkDataArray,
-            onModelChange,
+            onModelChange: modelChange,
             skipsDiagramUpdate: true,
         },
     };

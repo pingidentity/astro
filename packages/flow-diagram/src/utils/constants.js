@@ -6,8 +6,11 @@ export const COLORS = {
     GRAY: '#EBECEC',
     GREEN: '#0bbf01',
     PINK: '#FF00FF',
+    PURPLE: '#D033FF',
     RED: '#ce0808',
     WHITE: '#fff',
     YELLOW: '#E58E05',
     ORANGE: '#FF8324',
+    OUTLETNODE: '#4262ed',
+    TRANSLUCENTPURPLE: 'rgba(208, 51, 255, 0.5)',
 };

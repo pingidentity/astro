@@ -30,7 +30,7 @@ test('Renders configPanel', () => {
 test('Has correct styling', () => {
     getComponent();
     const configPanel = screen.getByTestId(testId);
-    expect(configPanel).toHaveStyleRule('margin-left', '15px');
+    expect(configPanel).toHaveStyleRule('position', 'relative');
 });
 test('Clicking close fires onClose', () => {
     getComponent();

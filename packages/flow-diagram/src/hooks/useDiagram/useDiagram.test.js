@@ -5,10 +5,12 @@ import useDiagram, {
     addNodes,
     dragGroupTogether,
     getBorderWidth,
+    handleHighlight,
     removeLinks,
     removeNodes,
     renderPortCursor,
 } from './useDiagram';
+import { COLORS } from '../../utils/constants';
 
 jest.mock('../../components/ZoomSlider/ZoomSlider.js');
 
@@ -77,9 +79,9 @@ describe('useDiagram', () => {
     ];
 
     const defaultTemplates = [
-        ['name', 'template'],
-        ['Darrell Hall', 'Private Eyes'],
-        ['John Oates', 'Rich Girl'],
+        ['name', {}],
+        ['Darrell Hall', {}],
+        ['John Oates', {}],
     ];
 
     it('useDiagram returns correct props', () => {
@@ -296,6 +298,14 @@ describe('useDiagram', () => {
 
     it('getBorderWidth returns correct with if isSelected is false', () => {
         expect(getBorderWidth(false)).toEqual(1);
+    });
+
+    it('handleHilight returns correct with if isHighlighted is true', () => {
+        expect(handleHighlight(true)).toEqual(COLORS.PURPLE);
+    });
+
+    it('handleHilight returns correct with if isHighlighted is false', () => {
+        expect(handleHighlight(false)).toEqual(COLORS.BLUE);
     });
 
     it('dragGroupTogether adds grouped objects if there is a containing group', () => {
