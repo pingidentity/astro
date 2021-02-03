@@ -2,7 +2,7 @@ import fit from '../../img/fit.svg';
 
 // This component is largely copied from GoJS. It needs a serious refactor and could
 // probably be done a lot more smoothly with React.
-
+/* istanbul ignore file */
 export default class ZoomSlider {
     /**
          * Constructs a ZoomSlider and sets up properties based on the options provided.

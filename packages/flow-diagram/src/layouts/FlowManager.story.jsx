@@ -111,6 +111,8 @@ const Demo = () => {
             insertedLinkKeys,
             modifiedLinkData,
             removedLinkKeys,
+            droppedOntoNodeKey,
+            droppedOntoLinkKey,
         }) => {
             // onModelChange gets called once at the beginning with every node,
             // so ignore key adds that involve too many new keys to have come from
@@ -160,16 +162,101 @@ const Demo = () => {
                     }),
                 ]);
 
-                // Add a link between
-                if (addedNodes[0].key === 'login-group') {
+                const createLinkedNodes = (key) => {
+                    return {
+                        'from': `${key}-step`,
+                        'to': `${key}-success`,
+                        'key': `${key}-step-success-link`,
+                        canRelink: false,
+                    };
+                };
+
+                if (droppedOntoLinkKey) {
+                    let linkTo;
+                    // Changing existing link to go to dropped node
+                    const newLinks = diagramLinks.map((link) => {
+                        if (link.key === droppedOntoLinkKey) {
+                            linkTo = link.to;
+                            return { from: link.from, to: `${groupKey}-step` }
+                        }
+                        return link;
+                    });
+                    // Adding link from dropped node to previously linked node
+                    if (addedNodes[0].key !== 'login-group') {
+                        setDiagramLinks([
+                            ...newLinks,
+                            { from: `${groupKey}-step`, to: linkTo },
+                        ]);
+                    } else {
+                        setDiagramLinks([
+                            ...newLinks,
+                            createLinkedNodes(groupKey),
+                            { from: `${groupKey}-success`, to: linkTo },
+                        ]);
+                    }
+                } else if (droppedOntoNodeKey) {
+                    let linkTo;
+                    let linkedFrom = false;
+                    // Changing link after node dropped onto to go to dropped node
+                    const newLinks = diagramLinks.map((link) => {
+                        if (link.from === droppedOntoNodeKey) {
+                            linkedFrom = true;
+                            linkTo = link.to;
+                            return { from: link.from, to: `${groupKey}-step` };
+                        }
+                        return link;
+                    });
+                    // Either adding link from dropped onto node to dropped node, or from dropped node to previously linked node
+                    if (addedNodes[0].key !== 'login-group') {
+                        setDiagramLinks([
+                            ...newLinks,
+                            linkedFrom ? { from: `${groupKey}-step`, to: linkTo } : { from: droppedOntoNodeKey, to: `${groupKey}-step` },
+                        ]);
+                    } else {
+                        setDiagramLinks([
+                            ...newLinks,
+                            createLinkedNodes(groupKey),
+                            { from: droppedOntoNodeKey, to: `${groupKey}-step` },
+                            { from: `${groupKey}-success`, to: linkTo },
+                        ]);
+                    }
+                } else if (addedNodes[0].key === 'login-group') {
                     setDiagramLinks([
                         ...diagramLinks,
-                        {
-                            'from': `${groupKey}-step`,
-                            'to': `${groupKey}-success`,
-                            'key': `${groupKey}-step-success-link`,
-                            canRelink: false,
-                        },
+                        createLinkedNodes(groupKey),
+                    ]);
+                }
+            }
+
+            if (modifiedNodeData && !insertedNodeKeys) {
+                const sortedNodeData = modifiedNodeData.sort((a, b) => (Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1 )
+                if (droppedOntoLinkKey) {
+                    let linkTo;
+                    const newLinks = diagramLinks.map((link) => {
+                        if (link.key === droppedOntoLinkKey) {
+                            linkTo = link.to;
+                            return { from: link.from, to: sortedNodeData[0].key }
+                        }
+                        return link;
+                    });
+                    setDiagramLinks([
+                        ...newLinks,
+                        { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo },
+                    ]);
+                } else if (droppedOntoNodeKey) {
+                    let linkTo;
+                    let linkedFrom = false;
+                    const newLinks = diagramLinks.map((link) => {
+                        if (link.from === droppedOntoNodeKey) {
+                            linkedFrom = true;
+                            linkTo = link.to;
+                            return { from: link.from, to: sortedNodeData[0].key }
+                        }
+                        return link;
+                    });
+                    setDiagramLinks([
+                        ...newLinks,
+                        linkedFrom ? { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo } : { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
                     ]);
                 }
             }

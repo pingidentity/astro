@@ -4,8 +4,31 @@ import { fromNode } from '../nodes';
 
 const $ = go.GraphObject.make;
 
+export const dragEnter = (e, obj) => {
+    const node = obj.part;
+    node.findObject('fromNode').stroke = COLORS.PURPLE;
+    node.findObject('fromNode').fill = COLORS.PURPLE;
+    node.findObject('fromNodeOuter').fill = 'rgba(208, 51, 255, 0.5)';
+};
+
+export const dragLeave = (e, obj) => {
+    const node = obj.part;
+    node.findObject('fromNode').stroke = COLORS.WHITE;
+    node.findObject('fromNode').fill = '#4262ed';
+    node.findObject('fromNodeOuter').fill = 'transparent';
+};
+
 export const outletTemplate = ({ color = COLORS.BLACK, width = 100 } = {}) => $(go.Node, 'Spot',
-    { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY', deletable: false, movable: false, selectable: false },
+    {
+        mouseDragEnter: dragEnter,
+        mouseDragLeave: dragLeave,
+        selectionAdorned: false,
+        textEditable: true,
+        locationObjectName: 'BODY',
+        deletable: false,
+        movable: false,
+        selectable: false,
+    },
     new go.Binding('location', 'loc', go.Point.parse),
     $(go.Panel, 'Auto',
         { name: 'BODY', cursor: 'normal' },
