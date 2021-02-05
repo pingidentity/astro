@@ -12,10 +12,15 @@ const defaultIndicator = (
 );
 
 /**
- * Basic label for an input.
+ * Base label for an input.
+ *
  * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
  * Built on top of the [Label from Rebass.js](https://rebassjs.org/forms/label).
+ *
+ * **NOTE**: Specialized field components contain built-in support for labels. It's
+ * recommended to use those instead of a standalone `Label`.
  */
+
 const Label = forwardRef((props, ref) => {
   const {
     children,

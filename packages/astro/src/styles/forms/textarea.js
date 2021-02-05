@@ -3,4 +3,7 @@ import { input } from './input';
 
 export const textarea = {
   ...input,
+  '&.is-unresizable': {
+    resize: 'none',
+  },
 };

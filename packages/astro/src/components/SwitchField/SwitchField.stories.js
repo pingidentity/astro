@@ -2,37 +2,56 @@ import React, { useState } from 'react';
 import SwitchField from '.';
 
 export default {
-  title: 'SwitchField',
+  title: 'Form/SwitchField',
   component: SwitchField,
 };
 
 export const Default = () => (
-  <SwitchField>
-    Example Label
-  </SwitchField>
-);
-
-export const DefaultSelected = () => (
-  <SwitchField controlProps={{ isDefaultSelected: true }}>
-    Default selected
-  </SwitchField>
-);
-
-export const Disabled = () => (
-  <SwitchField isDisabled>
-    Disabled switch
-  </SwitchField>
+  <SwitchField
+    label="Example label"
+    value="my-switch"
+  />
 );
 
 export const Controlled = () => {
-  const [isSelected, setIsSelected] = useState(true);
+  const [isSelected, setIsSelected] = useState(false);
   return (
-    <SwitchField controlProps={{ isSelected, onChange: setIsSelected }}>
-      Example Label
-    </SwitchField>
+    <SwitchField
+      isSelected={isSelected}
+      label="Controlled"
+      onChange={setIsSelected}
+      value="my-switch"
+    />
   );
 };
 
+export const DefaultSelected = () => (
+  <SwitchField
+    isDefaultSelected
+    label="Default selected"
+    value="my-switch"
+  />
+);
+
+export const Disabled = () => (
+  <SwitchField
+    isDisabled
+    label="Disabled"
+    value="my-switch"
+  />
+);
+
 export const NoVisibleLabel = () => (
-  <SwitchField controlProps={{ 'aria-label': 'my-label' }} />
+  <SwitchField
+    aria-label="my-label"
+    value="my-switch"
+  />
+);
+
+export const Required = () => (
+  <SwitchField
+    isRequired
+    label="Required"
+    value="my-switch"
+  />
 );

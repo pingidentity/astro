@@ -1,4 +1,4 @@
-// WARNING: Named exports must be unique across files, otherwise collisions will occur.
+// NOTE: Named exports must be unique across files, otherwise collisions will occur.
 
 /* eslint-disable import/export */
 
@@ -25,9 +25,6 @@ export * from './components/Dropdown';
 
 export { default as DropdownField } from './components/DropdownField';
 export * from './components/DropdownField';
-
-export { default as Field } from './components/Field';
-export * from './components/Field';
 
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
@@ -68,8 +65,11 @@ export * from './components/Radio';
 export { default as RadioField } from './components/RadioField';
 export * from './components/RadioField';
 
-export { default as RadioGroup } from './components/RadioGroup';
-export * from './components/RadioGroup';
+export { default as RadioGroupField } from './components/RadioGroupField';
+export * from './components/RadioGroupField';
+
+export { default as SearchField } from './components/SearchField';
+export * from './components/SearchField';
 
 export { default as Separator } from './components/Separator';
 export * from './components/Separator';
