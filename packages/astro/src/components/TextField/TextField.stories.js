@@ -3,21 +3,48 @@ import isEmpty from 'lodash/isEmpty';
 import TextField from '.';
 
 export default {
-  title: 'TextField',
+  title: 'Form/TextField',
   component: TextField,
 };
 
 export const Default = () => (
   <TextField
+    id="custom-id"
+    name="custom-name"
     label="Example Label"
   />
 );
 
+export const Controlled = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <TextField
+      label="Example Label"
+      onChange={e => setValue(e.target.value)}
+      value={value}
+    />
+  );
+};
+
 export const Password = () => (
   <TextField
     label="Example Label"
-    labelProps={{ color: 'red' }}
-    controlProps={{ type: 'password' }}
+    type="password"
+  />
+);
+
+export const Disabled = () => (
+  <TextField
+    isDisabled
+    label="Example Label"
+  />
+);
+export const ReadOnly = () => (
+  <TextField
+    isReadOnly
+    label="Example Label"
+    value="This is read only"
   />
 );
 
@@ -34,22 +61,31 @@ export const DynamicRequired = () => {
     <TextField
       isRequired={isEmpty(value)} // isEmpty from lodash
       label="Example Label"
-      controlProps={{ onChange: e => setValue(e.target.value) }}
+      onChange={e => setValue(e.target.value)}
     />
   );
 };
 
-export const Disabled = () => (
-  <TextField
-    isDisabled
-    label="Example Label"
-  />
-);
-
-export const HelperText = () => (
+export const Error = () => (
   <TextField
     helperText="Here is some helpful text..."
     label="Example Label"
     status="error"
+  />
+);
+
+export const Success = () => (
+  <TextField
+    helperText="Here is some helpful text..."
+    label="Example Label"
+    status="success"
+  />
+);
+
+export const Warning = () => (
+  <TextField
+    helperText="Here is some helpful text..."
+    label="Example Label"
+    status="warning"
   />
 );

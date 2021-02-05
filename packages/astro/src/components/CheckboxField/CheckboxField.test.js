@@ -6,7 +6,7 @@ import CheckboxField from '../CheckboxField';
 
 const testLabel = 'Test Label';
 const defaultProps = {
-  children: testLabel,
+  label: testLabel,
 };
 const getComponent = (props = {}) => render((
   <CheckboxField {...defaultProps} {...props} />
@@ -42,7 +42,7 @@ test('disabled checkbox disables input and the label', () => {
 
 test('checkbox interaction', () => {
   const onChange = jest.fn();
-  getComponent({ controlProps: { onChange } });
+  getComponent({ onChange });
   const input = screen.getByRole('checkbox');
   expect(onChange).not.toHaveBeenCalled();
 
@@ -56,7 +56,7 @@ test('checkbox interaction', () => {
 });
 
 test('isSelected for controlled checkbox', () => {
-  getComponent({ controlProps: { isSelected: true } });
+  getComponent({ isSelected: true });
   const input = screen.getByRole('checkbox');
   expect(input).toBeChecked();
 
@@ -66,7 +66,7 @@ test('isSelected for controlled checkbox', () => {
 });
 
 test('defaultValue for uncontrolled checkbox', () => {
-  getComponent({ controlProps: { isDefaultSelected: true } });
+  getComponent({ isDefaultSelected: true });
   const input = screen.getByRole('checkbox');
   expect(input).toBeChecked();
 
@@ -77,13 +77,13 @@ test('defaultValue for uncontrolled checkbox', () => {
 
 test('name for checkbox', () => {
   const name = 'custom';
-  getComponent({ controlProps: { name } });
+  getComponent({ name });
   const input = screen.getByRole('checkbox');
   expect(input).toHaveAttribute('name', name);
 });
 
 test('read only checkbox', () => {
-  getComponent({ controlProps: { isReadOnly: true } });
+  getComponent({ isReadOnly: true });
   const input = screen.getByRole('checkbox');
   expect(input).toHaveAttribute('readonly');
 });

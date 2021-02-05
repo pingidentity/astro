@@ -2,7 +2,7 @@ import React from 'react';
 import FieldHelperText from '.';
 
 export default {
-  title: 'FieldHelperText',
+  title: 'Form/Base Components/FieldHelperText',
   component: FieldHelperText,
 };
 

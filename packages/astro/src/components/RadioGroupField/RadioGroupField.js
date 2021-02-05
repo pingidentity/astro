@@ -10,13 +10,14 @@ import { RadioContext } from '../RadioField';
 import FieldHelperText from '../FieldHelperText';
 
 /**
- * Radio group wrapper for individual `Radio` components.
- * Built on top of the [Box from Rebass Forms](https://rebassjs.org/box) and uses the
- * available [props from Rebass](https://rebassjs.org/props/).
- * Utilizes [React Aria](https://react-spectrum.adobe.com/react-aria/useRadioGroup.html) and
- * [React Stately](https://react-spectrum.adobe.com/react-stately/useRadioGroupState.html).
+ * Radio group component for a single-choice list of options.
+ *
+ * Utilizes [useRadioGroup](https://react-spectrum.adobe.com/react-aria/useRadioGroup.html) from
+ * React Aria and
+ * [useRadioGroupState](https://react-spectrum.adobe.com/react-stately/useRadioGroupState.html)
+ * from React Stately.
  */
-const RadioGroup = forwardRef((props, ref) => {
+const RadioGroupField = forwardRef((props, ref) => {
   const { children, helperText, isDisabled, isRequired, label, status } = props;
   const state = useRadioGroupState(props);
   const { radioGroupProps, labelProps } = useRadioGroup(props, state);
@@ -42,8 +43,8 @@ const RadioGroup = forwardRef((props, ref) => {
   );
 });
 
-RadioGroup.propTypes = {
-  /** The name of the RadioGroup, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name_and_radio_buttons). */
+RadioGroupField.propTypes = {
+  /** The name of the RadioGroupField, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name_and_radio_buttons). */
   name: PropTypes.string,
   /** The current value (controlled). */
   value: PropTypes.string,
@@ -53,7 +54,11 @@ RadioGroup.propTypes = {
   helperText: PropTypes.node,
   /** Determines the helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
-  /** Handler that is called when the value changes. */
+  /**
+   * Handler that is called when the value changes.
+   *
+   * `(newValue) => void`
+   */
   onChange: PropTypes.func,
   /** Whether the radio group is disabled. */
   isDisabled: PropTypes.bool,
@@ -81,6 +86,6 @@ RadioGroup.propTypes = {
   'aria-errormessage': PropTypes.string,
 };
 
-RadioGroup.displayName = 'RadioGroup';
+RadioGroupField.displayName = 'RadioGroupField';
 
-export default RadioGroup;
+export default RadioGroupField;

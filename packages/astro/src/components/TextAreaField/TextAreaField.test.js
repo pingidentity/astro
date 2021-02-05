@@ -19,7 +19,7 @@ test('disabled prop disables input', () => {
   expect(textArea).toBeDisabled();
 });
 
-test('textAreaField has focus', () => {
+test('text area field has focus', () => {
   getComponent();
   const textArea = screen.getByLabelText(defaultProps.label);
 
@@ -34,4 +34,11 @@ test('disabled prop disables text field label', () => {
   const label = screen.getByText(defaultProps.label);
   expect(label).toHaveClass('is-disabled');
   expect(label).toHaveStyle({ opacity: 0.5 });
+});
+
+test('text area field with helper text', () => {
+  const helperText = 'helper text';
+  getComponent({ helperText });
+  const helper = screen.getByText(helperText);
+  expect(helper).toBeInTheDocument();
 });
