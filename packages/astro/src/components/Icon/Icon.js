@@ -26,7 +26,7 @@ const Icon = forwardRef((props, ref) => {
       as={IconComponent}
       ref={ref}
       {...props}
-      sx={{ fill: color, size, minWidth: size, ...sx }}
+      sx={{ fill: color, size: `${size}px`, minWidth: size, ...sx }}
     />
   );
 });

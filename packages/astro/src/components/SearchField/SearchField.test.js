@@ -81,7 +81,7 @@ test('search autoFocus', () => {
   expect(search).toHaveFocus();
 });
 
-test.only('search focus events', () => {
+test('search focus events', () => {
   const onBlur = jest.fn();
   const onFocus = jest.fn();
   getComponent({ onBlur, onFocus });
