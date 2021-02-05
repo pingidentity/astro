@@ -4,35 +4,49 @@ import Link from '../Link';
 import Text from '../Text';
 
 export default {
-  title: 'CheckboxField',
+  title: 'Form/CheckboxField',
   component: CheckboxField,
 };
 
 export const Default = () => (
-  <CheckboxField>Click me</CheckboxField>
+  <CheckboxField
+    label="Click me"
+  />
 );
 
 export const DefaultSelected = () => (
-  <CheckboxField controlProps={{ isDefaultSelected: true }}>Click me</CheckboxField>
+  <CheckboxField
+    isDefaultSelected
+    label="Click me"
+  />
 );
 
 export const Controlled = () => {
-  const [isSelected, setSelected] = React.useState();
+  const [isSelected, setSelected] = React.useState(false);
   return (
-    <CheckboxField controlProps={{ isSelected, onChange: setSelected }}>
-      Click me
-    </CheckboxField>
+    <CheckboxField
+      isSelected={isSelected}
+      onChange={setSelected}
+      label="Click me"
+    />
   );
 };
 
 export const Required = () => (
-  <CheckboxField isRequired>
-    <Text>
-      I agree to the <Link href="https://pingidentity.com" target="_blank">Terms and Conditions</Link>
-    </Text>
-  </CheckboxField>
+  <CheckboxField
+    isRequired
+    label={
+      <Text>
+        I agree to the <Link href="https://pingidentity.com" target="_blank">Terms and Conditions</Link>
+      </Text>
+    }
+  />
 );
 
 export const HelperText = () => (
-  <CheckboxField status="error" helperText="Here is some helpful text...">Click me</CheckboxField>
+  <CheckboxField
+    status="error"
+    helperText="Here is some helpful text..."
+    label="Click me"
+  />
 );

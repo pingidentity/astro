@@ -6,15 +6,16 @@ import SwitchField from './SwitchField';
 const testId = 'test-switch';
 
 const defaultProps = {
+  label: 'Example label',
   'data-testid': testId,
 };
 
-const getComponent = (props = {}) => render(
-  <SwitchField {...defaultProps} {...props}> Label </SwitchField>,
-);
+const getComponent = (props = {}) => render((
+  <SwitchField {...defaultProps} {...props} />
+));
 
 test('renders Switch component', () => {
-  getComponent();
+  getComponent({ 'aria-label': 'test' });
   const switchComponent = screen.getByTestId(testId);
   screen.getByRole('switch');
   expect(switchComponent).toBeInstanceOf(HTMLDivElement);
@@ -23,14 +24,14 @@ test('renders Switch component', () => {
 
 test('renders label', () => {
   getComponent();
-  const label = screen.getByText('Label');
+  const label = screen.getByText(defaultProps.label);
   expect(label).toBeInTheDocument();
 });
 
 
 test('switch toggles on click', () => {
   const onChange = jest.fn();
-  getComponent({ controlProps: { onChange } });
+  getComponent({ onChange });
   const input = screen.getByRole('switch');
   expect(onChange).not.toHaveBeenCalled();
 
@@ -46,7 +47,7 @@ test('switch toggles on click', () => {
 
 test('isDisabled disables switch functionality', () => {
   const onChange = jest.fn();
-  getComponent({ isDisabled: true, controlProps: { onChange } });
+  getComponent({ isDisabled: true, onChange });
 
   const input = screen.getByRole('switch');
   userEvent.click(input);
@@ -55,7 +56,7 @@ test('isDisabled disables switch functionality', () => {
 
 test('isDisabled adds disabled styles to label and switch', () => {
   getComponent({ isDisabled: true });
-  const label = screen.getByText('Label');
+  const label = screen.getByText(defaultProps.label);
   expect(label).toHaveClass('is-disabled');
   const switchComponent = screen.getByRole('switch');
   expect(switchComponent).toHaveClass('is-disabled');
@@ -63,7 +64,7 @@ test('isDisabled adds disabled styles to label and switch', () => {
 
 test('does not have isDisabled styling without isDisabled prop', () => {
   getComponent();
-  const label = screen.getByText('Label');
+  const label = screen.getByText(defaultProps.label);
   expect(label).not.toHaveClass('is-disabled');
   const switchComponent = screen.getByRole('switch');
   expect(switchComponent).not.toHaveClass('is-disabled');
@@ -78,7 +79,7 @@ test('Switch focuses when tabbed to', () => {
 
 test('Switch toggles with keyboard', () => {
   const onChange = jest.fn();
-  getComponent({ controlProps: { onChange } });
+  getComponent({ onChange });
   const input = screen.getByRole('switch');
   expect(input).not.toHaveFocus();
   expect(onChange).not.toHaveBeenCalled();
@@ -87,4 +88,11 @@ test('Switch toggles with keyboard', () => {
   expect(input).toHaveFocus();
   userEvent.type(input, '{space}');
   expect(onChange).toHaveBeenCalled();
+});
+
+test('switch field with helper text', () => {
+  const helperText = 'helper text';
+  getComponent({ helperText });
+  const helper = screen.getByText(helperText);
+  expect(helper).toBeInTheDocument();
 });
