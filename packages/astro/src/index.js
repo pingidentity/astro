@@ -71,6 +71,9 @@ export * from './components/RadioGroupField';
 export { default as SearchField } from './components/SearchField';
 export * from './components/SearchField';
 
+export { default as SelectField } from './components/SelectField';
+export * from './components/SelectField';
+
 export { default as Separator } from './components/Separator';
 export * from './components/Separator';
 

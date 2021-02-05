@@ -72,7 +72,7 @@ Button.propTypes = {
    */
   onPressUp: PropTypes.func,
   /** The styling variation of the button. */
-  variant: PropTypes.oneOf(['default', 'primary', 'text', 'success', 'critical', 'icon', 'inline']),
+  variant: PropTypes.oneOf(['default', 'primary', 'text', 'success', 'critical', 'icon', 'inline', 'forms.select']),
 };
 
 Button.defaultProps = {
