@@ -6,7 +6,10 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import Text from '../Text';
 
 /**
- * Displays a styled message. Used internally in many of the `Field` component variants.
+ * Displays a styled message.
+ *
+ * **NOTE**: Specialized field components contain built-in support for helper text. It's
+ * recommended to use those instead of a standalone `FieldHelperText`.
  */
 const FieldHelperText = forwardRef((props, ref) => {
   const { className, status, ...others } = props;

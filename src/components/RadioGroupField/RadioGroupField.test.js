@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import statuses from '../../utils/devUtils/constants/statuses';
-import RadioGroup from '.';
+import RadioGroupField from '.';
 import RadioField from '../RadioField';
 
 const testId = 'test-radio-group';
@@ -14,11 +14,11 @@ const defaultProps = {
   label: testLabel,
 };
 const getComponent = (groupProps = {}, radioProps = []) => render((
-  <RadioGroup {...defaultProps} {...groupProps}>
-    <RadioField value={testValues[0]} {...radioProps[0]}>{testValues[0]}</RadioField>
-    <RadioField value={testValues[1]} {...radioProps[1]}>{testValues[1]}</RadioField>
-    <RadioField value={testValues[2]} {...radioProps[2]}>{testValues[2]}</RadioField>
-  </RadioGroup>
+  <RadioGroupField {...defaultProps} {...groupProps}>
+    <RadioField value={testValues[0]} label={testValues[0]} {...radioProps[0]} />
+    <RadioField value={testValues[1]} label={testValues[1]} {...radioProps[1]} />
+    <RadioField value={testValues[2]} label={testValues[2]} {...radioProps[2]} />
+  </RadioGroupField>
 ));
 
 test('default radio group', () => {

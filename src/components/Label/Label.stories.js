@@ -2,10 +2,10 @@ import React from 'react';
 import Label from '.';
 
 export default {
-  title: 'Label',
+  title: 'Form/Base Components/Label',
   component: Label,
 };
 
-export const Default = args => (
-  <Label {...args}>This is a label</Label>
+export const Default = () => (
+  <Label>This is a label</Label>
 );

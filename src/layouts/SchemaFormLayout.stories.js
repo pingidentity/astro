@@ -9,7 +9,7 @@ import Separator from '../components/Separator/Separator';
 import TextField from '../components/TextField/TextField';
 import TextAreaField from '../components/TextAreaField/TextAreaField';
 import DropdownField from '../components/DropdownField/DropdownField';
-import RadioGroup from '../components/RadioGroup/RadioGroup';
+import RadioGroupField from '../components/RadioGroupField/RadioGroupField';
 import RadioField from '../components/RadioField/RadioField';
 import Tabs from '../components/Tabs/Tabs';
 import Tab from '../components/Tab/Tab';
@@ -34,7 +34,7 @@ export const Default = () => {
         </Box>
         <Box isRow alignItem="center">
           <Text variant="base" mr="lg" color="active" alignSelf="center">Cancel</Text>
-          <Button bg="active" color="white"> Save and Close</Button>
+          <Button bg="active" color="white">Save and Close</Button>
         </Box>
       </Box>
       <Separator margin="0" />
@@ -70,20 +70,16 @@ export const Default = () => {
               <option>Option 2</option>
               <option>Option 3</option>
             </DropdownField>
-            <RadioGroup label="Required Fields" variant="radioGroupBasic">
-              <RadioField value="A">
-                The first choice
-              </RadioField>
-              <RadioField value="B">
-                The second choice
-              </RadioField>
-            </RadioGroup>
+            <RadioGroupField label="Required Fields" variant="radioGroupBasic">
+              <RadioField value="A" label="Option A" />
+              <RadioField value="B" label="Option B" />
+            </RadioGroupField>
           </Box>
         </Box>
         <Panel isVisible={visible} width="70%" bg="accent.99">
           <Box p="lg" onClick={() => setVisible(!visible)}>
             <Box p="lg" bg="white">
-              <Text> Your content here.</Text>
+              <Text>Your content here.</Text>
             </Box>
           </Box>
         </Panel>

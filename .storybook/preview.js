@@ -28,4 +28,21 @@ export const parameters = {
   docs: {
     theme: yourTheme,
   },
+  options: {
+    storySort: {
+      order: [
+        'Form',
+        [
+          'CheckboxField',
+          'DropdownField',
+          'RadioGroupField',
+          'SearchField',
+          'SwitchField',
+          'TextAreaField',
+          'TextField',
+          'Base Components'
+        ],
+      ],
+    },
+  },
 };
