@@ -1,6 +1,8 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 
+// TODO: Deprecate this component in Astro-UI 1.0.0
+import useDeprecationWarning from '../../hooks/useDeprecationWarning';
 import useField from '../../hooks/useField';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
@@ -9,6 +11,8 @@ import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
 
 /**
+ * **WARNING: Will be deprecated in Astro 1.0.0, use `SelectField` instead.**
+ *
  * Combines a dropdown, label, and helper text for a complete, form-ready solution.
  */
 const DropdownField = forwardRef((props, ref) => {
@@ -24,6 +28,8 @@ const DropdownField = forwardRef((props, ref) => {
   const dropdownRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => dropdownRef.current);
+
+  useDeprecationWarning('`DropdownField` will be deprecated in Astro-UI 1.0.0, use `SelectField` instead.');
 
   return (
     <Box {...fieldContainerProps}>

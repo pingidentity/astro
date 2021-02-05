@@ -34,13 +34,14 @@ export const parameters = {
         'Form',
         [
           'CheckboxField',
-          'DropdownField',
           'RadioGroupField',
           'SearchField',
+          'SelectField',
           'SwitchField',
           'TextAreaField',
           'TextField',
-          'Base Components'
+          'Base Components',
+          'DropdownField',
         ],
       ],
     },
