@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { differenceWith } from 'lodash';
 import { generateKey } from '../../utils/diagramUtils';
 import ZoomSlider from '../../components/ZoomSlider';
+import NonRealtimeDraggingTool from '../../components/NonRealtimeDraggingTool';
 import { COLORS } from '../../utils/constants';
 
 go.Diagram.licenseKey = '73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741';
@@ -133,6 +134,7 @@ export default function useDiagram({
                     'undoManager.isEnabled': true,
                     'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
                         .computeEffectiveCollection),
+                    draggingTool: $(NonRealtimeDraggingTool, { duration: 600 }),
                     layout:
                         $(go.LayeredDigraphLayout,
                             {
