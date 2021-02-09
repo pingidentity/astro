@@ -22,6 +22,7 @@ $option-padding: 7px $spacing-xl 7px $spacing-md;
     // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
     // will overlap, and also looks bad if one item overflows onto 2 lines
     @include text-value;
+    @include break-word;
 
     box-sizing: border-box;
     padding: $option-padding;
