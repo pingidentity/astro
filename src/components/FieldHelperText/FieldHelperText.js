@@ -21,6 +21,7 @@ const FieldHelperText = forwardRef((props, ref) => {
       ref={ref}
       pt="sm"
       variant="fieldHelperText"
+      role="status"
       {...others}
       className={classNames}
     />
