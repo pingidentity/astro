@@ -38,11 +38,21 @@ export const applyStyles = (colors, bgImg) => {
             .card {
                 background: ${colors.card};
             }
+
+            .branding-themes-footer-container {
+                background: ${colors.card};
+            }
         ` : ''}
 
         ${colors.headingText ? `
             .branding-template-heading {
                 color: ${colors.headingText};
+            }
+        ` : ''}
+
+        ${colors.headerBackground ? `
+            .branding-template-logo-container {
+                background: ${colors.headerBackground}
             }
         ` : ''}
 
