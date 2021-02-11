@@ -93,7 +93,7 @@ import { deprecatedStatelessProp } from "../../../../util/DeprecationUtils";
 * @param {I18nPhoneInput~onSearch} [onSearch]
 *     Callback to be triggered when the state of the search of a country when the flag dropdown is expanded changes.
 *
-* @param {string} [errorMessage="Please enter a valid phone number."]
+* @param {node} [errorMessage="Please enter a valid phone number."]
 *     The message to display if an invalid phone number is entered.
 * @param {boolean} [showError=false]
 *     When true, the error message will show regardless of validation.
@@ -138,7 +138,7 @@ class I18nPhoneInputStateless extends Component {
         setSearchString: PropTypes.func,
         setSearchTime: PropTypes.func,
         onSearch: PropTypes.func,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         showError: PropTypes.bool,
         placeholder: PropTypes.string,
         autoFocus: PropTypes.bool,
