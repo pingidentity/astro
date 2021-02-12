@@ -95,8 +95,8 @@ pipeline {
   post {
     success {
       slackSend channel: '#ux-deployments', message: ":verynice: Great Success! Schema-Forms ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
-    //     //    slackSend channel: '#ui-announcements', message: "@here Schema-Forms ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
-    //     //    slackSend channel: '#ui-coalition', message: "@here Schema-Forms ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+      slackSend channel: '#ui-announcements', message: "@here Schema-Forms ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+      slackSend channel: '#ui-schema-forms', message: "@here Schema-Forms ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
     }
     unsuccessful {
       slackSend channel: '#ux-deployments', message: "@here ${BUILD_URL} failed!", color: "#a31300"

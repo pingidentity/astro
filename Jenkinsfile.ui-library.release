@@ -170,7 +170,7 @@ pipeline {
   post {
     success {
         slackSend channel: '#ux-deployments', message: "@here :verynice: Great Success! UI Library ${env.RELEASE_VERSION} has been released. ${BUILD_URL} ", color: "#4aba78"
-        slackSend channel: '#ui-coalition', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+        slackSend channel: '#ui-library', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
         slackSend channel: '#ui-announcements', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
     }
     unsuccessful {
