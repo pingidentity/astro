@@ -91,6 +91,8 @@ pipeline {
   post {
     success {
        slackSend channel: '#ux-deployments', message: "@here :verynice: Great Success! Astro ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/astro.", color: "#4aba78"
+       slackSend channel: '#ui-announcements', message: "@here Astro ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/astro.", color: "#4aba78"
+       slackSend channel: '#ui-astro', message: "@here Astro ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/astro.", color: "#4aba78"
     }
     unsuccessful {
        slackSend channel: '#ux-deployments', message: "@here Astro deploy failed! ${BUILD_URL}", color: "#a31300"
