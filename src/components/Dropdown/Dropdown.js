@@ -16,7 +16,11 @@ const Dropdown = React.forwardRef((props, ref) => {
     className,
     children,
     hasNoneOption,
+    hasDisabledFirstOption,
+    firstLabel,
     noneLabel,
+    defaultValue,
+    value,
     ...others
   } = props;
 
@@ -32,14 +36,32 @@ const Dropdown = React.forwardRef((props, ref) => {
     <RSelect
       ref={dropdownRef}
       className={classNames}
+      defaultValue={value ? undefined : (defaultValue || '')}
+      value={value}
       {...others}
       {...focusProps}
     >
       {
+        !hasNoneOption &&
+        <option
+          key="__empty"
+          value=""
+          disabled={hasDisabledFirstOption}
+        >
+          {firstLabel}
+        </option>
+      }
+      {
         hasNoneOption && (
           <>
-            <option value="">{noneLabel}</option>
-            <option disabled>--------</option>
+            <option
+              key="__empty"
+              value=""
+              disabled={hasDisabledFirstOption}
+            >
+              {noneLabel || firstLabel}
+            </option>
+            <option key="__spacer" disabled>--------</option>
           </>
         )
       }
@@ -51,19 +73,25 @@ const Dropdown = React.forwardRef((props, ref) => {
 Dropdown.propTypes = {
   /** Displays a none option within the dropdown options */
   hasNoneOption: PropTypes.bool,
+  /** Whether the first option is disabled. Useful to prevent reselection of the first option. */
+  hasDisabledFirstOption: PropTypes.bool,
   /** Id of the selected element */
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /** Label for none option */
+  /** Label for first option. */
+  firstLabel: PropTypes.string,
+  /** Label for none option. `firstLabel` prop can also be used. */
   noneLabel: PropTypes.string,
-  /** Value of the option input */
+  /** Value of the select (controlled). */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** Default value of the select (uncontrolled). */
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** Handler that is called when the element's selection state changes. */
   onChange: PropTypes.func,
 };
 
 Dropdown.defaultProps = {
   hasNoneOption: false,
-  noneLabel: 'None',
+  firstLabel: 'Select an option',
 };
 
 Dropdown.displayName = 'Dropdown';

@@ -16,13 +16,30 @@ import Label from '../Label';
  * Combines a dropdown, label, and helper text for a complete, form-ready solution.
  */
 const DropdownField = forwardRef((props, ref) => {
-  const { hasAutoFocus, children, helperText, status } = props;
+  const {
+    children,
+    controlProps,
+    firstLabel,
+    hasAutoFocus,
+    hasDisabledFirstOption,
+    hasNoneOption,
+    helperText,
+    noneLabel,
+    status,
+  } = props;
   const {
     fieldContainerProps,
     fieldControlProps,
     fieldLabelProps,
   } = useField({
     autoFocus: hasAutoFocus,
+    controlProps: {
+      firstLabel,
+      hasDisabledFirstOption,
+      hasNoneOption,
+      noneLabel,
+      ...controlProps,
+    },
     ...props,
   });
   const dropdownRef = useRef();
@@ -54,6 +71,14 @@ DropdownField.propTypes = {
   defaultValue: PropTypes.string,
   /** The value of the select field (controlled). */
   value: PropTypes.string,
+  /** Displays a none option within the dropdown options */
+  hasNoneOption: PropTypes.bool,
+  /** Whether the first option is disabled. Useful to prevent reselection of the first option. */
+  hasDisabledFirstOption: PropTypes.bool,
+  /** Label for first option. */
+  firstLabel: PropTypes.string,
+  /** Label for none option. `firstLabel` prop can also be used. */
+  noneLabel: PropTypes.string,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
   /** Whether the Dropdown is required. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/required). */
@@ -87,7 +112,14 @@ DropdownField.propTypes = {
    * object.
   */
   'aria-details': PropTypes.string,
+  /** Props object that is spread directly into the select element. */
+  controlProps: PropTypes.shape({}),
 };
-DropdownField.displayName = 'DropdownField';
 
+DropdownField.defaultProps = {
+  hasNoneOption: false,
+  firstLabel: 'Select an option',
+};
+
+DropdownField.displayName = 'DropdownField';
 export default DropdownField;

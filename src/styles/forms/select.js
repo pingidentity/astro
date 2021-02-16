@@ -5,6 +5,7 @@ import { text } from '../variants/text';
 // Default select
 export const select = {
   ...input,
+  lineHeight: 'unset',
   display: 'flex',
   alignItems: 'center',
   '&.is-focused': {
