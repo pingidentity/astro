@@ -15,7 +15,15 @@ export const Default = args => (
   </DropdownField>
 );
 
-export const DefaultSelected = args => (
+export const DisabledFirstOption = args => (
+  <DropdownField {...args} label="Select one" hasDisabledFirstOption>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </DropdownField>
+);
+
+export const DefaultValue = args => (
   <DropdownField {...args} label="Select one" defaultValue="2">
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
@@ -23,11 +31,16 @@ export const DefaultSelected = args => (
   </DropdownField>
 );
 
-export const Controlled = () => {
-  const [value, setValue] = useState('1');
+export const Controlled = (args) => {
+  const [selected, setSelected] = useState('3');
 
   return (
-    <DropdownField label="Select one" value={value} onChange={e => setValue(e.target.value)}>
+    <DropdownField
+      {...args}
+      label="Select one"
+      value={selected}
+      onChange={e => setSelected(e.target.value)}
+    >
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
@@ -52,6 +65,20 @@ export const WithOptionGroups = args => (
 
 export const NoneOption = args => (
   <DropdownField {...args} label="Select one" hasNoneOption>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </DropdownField>
+);
+
+export const CustomNoneOption = args => (
+  <DropdownField
+    {...args}
+    label="Select one"
+    hasNoneOption
+    hasDisabledFirstOption
+    noneLabel="None"
+  >
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
     <option value="3">Option 3</option>
