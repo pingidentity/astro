@@ -73,7 +73,6 @@ const getFieldMessageData = (props) => {
 export const toEndUserInputProps = (props) => {
   const {
     autofocus,
-    checked,
     disabled,
     formContext,
     id,
@@ -94,15 +93,17 @@ export const toEndUserInputProps = (props) => {
     rawErrors,
     readonly,
     required,
+    value,
   } = props;
   const isStacked = _.get(custom, 'isStacked', true);
   const { fieldMessage, fieldMessageProps } = getFieldMessageData(props);
   const getStatus = (errors) => (errors && errors.length ? 'error' : undefined);
 
   const inputProps = {
-    autofocus,
-    checked,
     ...custom,
+    autofocus,
+    checked: _.isObject(value) ? false : (value || false),
+    defaultValue: _.isObject(value) ? '' : (value || ''),
     disabled,
     fieldMessage,
     fieldMessageProps,
