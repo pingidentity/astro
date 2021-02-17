@@ -5,7 +5,7 @@ import { v4 as v4uuid } from 'uuid';
 import { css } from '@emotion/core';
 import JSONSchemaV4 from 'ajv/lib/refs/json-schema-draft-04.json';
 import Form from '@rjsf/core';
-
+import { PageWrapper } from '@pingux/astro';
 import useStatefulForm from '../hooks/useStatefulForm';
 import useThemedStyles from '../hooks/useThemedStyles';
 import { THEMES } from '../themes/utils';
@@ -21,7 +21,23 @@ import SuccessMessage from './SuccessMessage';
 import styles from '../styles';
 
 const FormWrapper = (props) => {
-  const { themeStyles, children } = props; // eslint-disable-line
+  const { themeStyles, children, theme } = props; // eslint-disable-line
+
+  if (theme === THEMES.ASTRO) {
+    return (
+      <PageWrapper>
+        <div
+          css={css`
+            ${themeStyles}
+            ${styles}
+          `}
+        >
+          {children}
+        </div>
+      </PageWrapper>
+    );
+  }
+
   return (
     <div
       css={css`
@@ -65,7 +81,7 @@ const SchemaForm = (props) => {
 
   if (formState === FORM_STATE.SUCCESS) {
     return (
-      <FormWrapper themeStyles={themeStyles}>
+      <FormWrapper themeStyles={themeStyles} theme={theme}>
         <SuccessMessage
           theme={theme}
           formSuccessMessage={formSuccessMessage}
@@ -76,7 +92,7 @@ const SchemaForm = (props) => {
   }
 
   return (
-    <FormWrapper themeStyles={themeStyles}>
+    <FormWrapper themeStyles={themeStyles} theme={theme}>
       <Errors
         errors={formLevelErrors}
         hasMarkdown={_.get(uiSchema, '_form["ui:options"].hasMarkdownErrors', false)}

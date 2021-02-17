@@ -38,6 +38,9 @@ pipeline {
             sh "yarn build:end-user"
             sh "cd ../end-user/dist && yarn link"
             sh "cd ../schema-form && yarn link \"@pingux/end-user\""
+            sh "yarn build:astro"
+            sh "cd ../astro/lib && yarn link"
+            sh "cd ../schema-form && yarn link \"@pingux/astro\""
             sh "yarn run lint"
             sh "yarn run coverage"
           }

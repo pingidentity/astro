@@ -1,6 +1,6 @@
 {
   "name": "@pingux/schema-form",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Create component forms from JSON Schema",
   "author": "Tyler Grove <tgrove@pingidentity.com>",
   "homepage": "",
@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build:end-user": "cd ../end-user && yarn dist",
+    "build:astro": "cd ../astro && yarn build",
     "coverage": "jest --coverage",
     "coverage-ci": "jest --coverage --ci",
     "dist": "webpack && cp package.json dist/package.json && cp README_DIST.md dist/README.md",
@@ -30,6 +31,7 @@
     "@babel/preset-react": "^7.10.4",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.34",
+    "@pingux/astro": "0.1.0-beta.13",
     "@pingux/end-user": "0.30.0",
     "@rjsf/core": "2.0.0",
     "@storybook/addon-actions": "^6.0.21",
@@ -79,5 +81,9 @@
   },
   "peerDependencies": {
     "react": ">=16"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.1.1",
+    "emotion-theming": "^11.0.0"
   }
 }

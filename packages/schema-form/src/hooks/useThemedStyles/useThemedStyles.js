@@ -10,6 +10,9 @@ function useThemedStyles(theme) {
   const themeStyles = useMemo(() => {
     switch (theme) {
       case THEMES.END_USER:
+        return endUserStyles;
+      case THEMES.ASTRO:
+        return null;
       default:
         return endUserStyles;
     }
