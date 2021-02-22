@@ -90,46 +90,4 @@ export const PageWrapper = ({ children, ...props }) => {
   );
 };
 
-/** Wrapper for the Astro application w/o global styles.
- *  It provides the standard background and the Astro theme.
- */
-export const PageWrapper = ({ children, ...props }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <Global
-        styles={
-          css`
-            @import url("https://use.typekit.net/icz8cni.css");
-
-            [data-tippy-root] {
-              max-width: calc(100vw - 10px);
-            }
-          `
-        }
-      />
-      <Box
-        css={
-          css`
-            ${emotionNormalize}
-            background: white;
-
-            * {
-              box-sizing: border-box;
-              font-family: "Helvetica Neue", Helvetica, sans-serif;
-
-              .is-disabled {
-                opacity: 0.5;
-                pointer-events: none;
-              }
-            }
-          `
-        }
-        {...props}
-      >
-        {children}
-      </Box>
-    </ThemeProvider>
-  );
-};
-
 export default AstroWrapper;
