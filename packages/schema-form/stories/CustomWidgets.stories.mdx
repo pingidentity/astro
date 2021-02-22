@@ -1,0 +1,15 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './CustomWidgets.stories.js';
+
+<Meta title="usage/Custom Widgets" />
+
+# Custom Widgets
+Custom widgets can be passed into the Schema Form through the `widgets` prop. They will be merged
+with any existing themed widgets. It's also possible to override existing themed widgets since
+custom widgets have priority. To do this, pass in a custom widget component as the value and an
+existing widget name as the key, e.g. `{ TextWidget: MyWidget }`. A complete list of default widget 
+names is viewable [in the RJSF documentation](https://react-jsonschema-form.readthedocs.io/en/latest/advanced-customization/custom-widgets-fields/).
+
+<Canvas>
+  <Story story={stories.CustomWidgets} />
+</Canvas>

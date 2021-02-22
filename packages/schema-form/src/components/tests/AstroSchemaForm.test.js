@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   act,
   fireEvent,
@@ -299,4 +300,52 @@ test('simplified form mode renders', () => {
   expect(document.querySelector('form')).toBeInTheDocument();
   expect(screen.getByLabelText(uiSchema.value['ui:options'].label)).toBeInTheDocument();
   expect(screen.getByRole('button')).toBeInTheDocument();
+});
+
+test('custom widgets get passed through', () => {
+  const MyWidget = () => <div data-testid="my-widget" />;
+  const customSchema = {
+    ...schema,
+    properties: {
+      ...schema.properties,
+      myThing: {
+        type: 'string',
+      },
+    },
+  };
+  const customUiSchema = {
+    ...uiSchema,
+    myThing: {
+      'ui:widget': 'myWidget',
+    },
+  };
+  renderSchemaForm({
+    theme: THEMES.ASTRO,
+    schema: customSchema,
+    uiSchema: customUiSchema,
+    widgets: { myWidget: MyWidget },
+  });
+
+  expect(screen.queryByTestId('my-widget')).toBeInTheDocument();
+});
+
+test('custom widgets override existing widgets', () => {
+  const MyWidget = () => <div data-testid="my-widget" />;
+  const customSchema = {
+    ...schema,
+    properties: {
+      ...schema.properties,
+      myThing: {
+        type: 'string',
+      },
+    },
+  };
+  renderSchemaForm({
+    theme: THEMES.ASTRO,
+    schema: customSchema,
+    uiSchema,
+    widgets: { TextWidget: MyWidget },
+  });
+
+  expect(screen.getAllByTestId('my-widget')).toHaveLength(2);
 });
