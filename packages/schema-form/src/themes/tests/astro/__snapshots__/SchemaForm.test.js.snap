@@ -6,7 +6,7 @@ exports[`form elements form success message 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <div
         class="css-m0o3up"
@@ -28,7 +28,7 @@ exports[`form elements form success title 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <div
         class="css-m0o3up"
@@ -56,7 +56,7 @@ exports[`single fields checkbox field 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -126,7 +126,7 @@ exports[`single fields checkboxes field 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -333,7 +333,7 @@ exports[`single fields password field 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -376,7 +376,7 @@ exports[`single fields select field 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -442,7 +442,7 @@ exports[`single fields select field with default 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -508,7 +508,7 @@ exports[`single fields string field format email 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -551,7 +551,7 @@ exports[`single fields string field regular 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -594,7 +594,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -643,7 +643,7 @@ exports[`single fields string field with help text 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -692,7 +692,7 @@ exports[`single fields string field with markdown errors 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -735,7 +735,7 @@ exports[`single fields string field with placeholder 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"
@@ -779,7 +779,7 @@ exports[`single fields textarea field 1`] = `
     class="css-11y6zog-PageWrapper"
   >
     <div
-      class="css-990vwd-FormWrapper"
+      class="css-1otsgan-FormWrapper"
     >
       <form
         autocomplete="off"

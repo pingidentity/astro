@@ -60,6 +60,7 @@ const SchemaForm = (props) => {
     submitText,
     theme,
     uiSchema,
+    widgets: propWidgets,
   } = props;
   const {
     statefulProps = {
@@ -106,12 +107,12 @@ const SchemaForm = (props) => {
         formContext={{ formState, sitekey, theme }}
         noHtml5Validate
         showErrorList={false}
-        widgets={widgets}
         FieldTemplate={FieldTemplate}
         ObjectFieldTemplate={ObjectFieldTemplate}
         id={`${uuid}_form`}
         idPrefix={uuid}
         {...props}
+        widgets={{ ...widgets, ...propWidgets }}
         {...statefulProps}
       >
         {
@@ -196,6 +197,12 @@ SchemaForm.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEMES)),
   /** Customization options for the look and feel of the form. */
   uiSchema: PropTypes.shape({}),
+  /**
+   * Mapping of widget names (key) and rendered components (value) that
+   * gets merged with the themed widgets. Any options passed to this prop
+   * have the potential to override existing themed widgets.
+   */
+  widgets: PropTypes.shape({}),
 };
 
 SchemaForm.defaultProps = {
@@ -217,6 +224,7 @@ SchemaForm.defaultProps = {
   submitText: 'Submit',
   theme: THEMES.END_USER,
   uiSchema: {},
+  widgets: undefined,
 };
 
 export default SchemaForm;
