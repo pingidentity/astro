@@ -77,29 +77,29 @@ pipeline {
             }
           }
         }
-        stash includes: packages/${params.PACKAGE}/**/*', name: 'package'
+        // stash includes: packages/${params.PACKAGE}/**/*', name: 'package'
       }
     }
-    stage('cdn deploy prod') {
-      agent {
-        kubernetes {
-          cloud centralCluster
-          yaml prodCdnDeploy
-        }
-      }
-      environment{
-        ENVIRONMENT = "production"
-        CDN_SOURCE = "packages/${params.PACKAGE}/cdn/${env.RELEASE_VERSION}"
-        UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
-      }
-      steps {
-        container('cdn-deploy') {
-          checkout scm
-          unstash 'package'
-          sh 'upload_ui'
-        }
-      }
-    }
+    // stage('cdn deploy prod') {
+    //   agent {
+    //     kubernetes {
+    //       cloud centralCluster
+    //       yaml prodCdnDeploy
+    //     }
+    //   }
+    //   environment{
+    //     ENVIRONMENT = "production"
+    //     CDN_SOURCE = "packages/${params.PACKAGE}/cdn/${env.RELEASE_VERSION}"
+    //     UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
+    //   }
+    //   steps {
+    //     container('cdn-deploy') {
+    //       checkout scm
+    //       unstash 'package'
+    //       sh 'upload_ui'
+    //     }
+    //   }
+    // }
   }
   post {
     success {
