@@ -39,7 +39,7 @@ exports[`form elements form success title 1`] = `
           role="heading"
         >
           <div
-            class="css-1vyax5l"
+            class="css-1xm1pjt"
           >
             hi
           </div>
@@ -352,7 +352,7 @@ exports[`single fields password field 1`] = `
             class="is-default css-1exf7pj"
           >
             <input
-              class="is-default css-13gthc0"
+              class="is-default css-1yybwhv"
               type="text"
               value=""
             />
@@ -398,7 +398,7 @@ exports[`single fields select field 1`] = `
               class="css-4cffwv"
             >
               <select
-                class="is-default css-11julpd"
+                class="is-default css-k5yxk"
               >
                 <option
                   value="foo"
@@ -464,7 +464,7 @@ exports[`single fields select field with default 1`] = `
               class="css-4cffwv"
             >
               <select
-                class="is-default css-11julpd"
+                class="is-default css-k5yxk"
               >
                 <option
                   value="foo"
@@ -527,7 +527,7 @@ exports[`single fields string field format email 1`] = `
             class="is-default css-1exf7pj"
           >
             <input
-              class="is-default css-13gthc0"
+              class="is-default css-1yybwhv"
               type="text"
               value=""
             />
@@ -570,7 +570,7 @@ exports[`single fields string field regular 1`] = `
             class="is-default css-1exf7pj"
           >
             <input
-              class="is-default css-13gthc0"
+              class="is-default css-1yybwhv"
               type="text"
               value=""
             />
@@ -613,7 +613,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
             class="is-error css-1exf7pj"
           >
             <input
-              class="is-error css-13gthc0"
+              class="is-error css-1yybwhv"
               type="text"
               value=""
             />
@@ -662,7 +662,7 @@ exports[`single fields string field with help text 1`] = `
             class="is-default css-1exf7pj"
           >
             <input
-              class="is-default css-13gthc0"
+              class="is-default css-1yybwhv"
               type="text"
               value=""
             />
@@ -711,7 +711,7 @@ exports[`single fields string field with markdown errors 1`] = `
             class="is-default css-1exf7pj"
           >
             <input
-              class="is-default css-13gthc0"
+              class="is-default css-1yybwhv"
               type="text"
               value=""
             />
@@ -754,7 +754,7 @@ exports[`single fields string field with placeholder 1`] = `
             class="is-default css-1exf7pj"
           >
             <input
-              class="is-default css-13gthc0"
+              class="is-default css-1yybwhv"
               placeholder="placeholder"
               type="text"
               value=""
@@ -798,7 +798,7 @@ exports[`single fields textarea field 1`] = `
             class="is-default css-1exf7pj"
           >
             <textarea
-              class="is-default css-13gthc0"
+              class="is-default css-1yybwhv"
             />
           </div>
         </div>
