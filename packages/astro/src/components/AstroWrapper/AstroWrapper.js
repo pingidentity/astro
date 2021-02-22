@@ -34,22 +34,24 @@ export const GlobalStyles = () => (
   />
 );
 
-/** The main wrapper for the Astro application.
- *  It provides the standard background, some global styles, and the Astro theme.
+/**
+ * The main wrapper for the Astro application.
+ * It provides the standard background, some global styles, and the Astro theme.
  */
 const AstroWrapper = ({ children, ...props }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Box bg="background" height="100%" css={css`overflow: hidden;`} {...props}>
+      <Box bg="background" height="100%" {...props}>
         {children}
       </Box>
     </ThemeProvider>
   );
 };
 
-/** Wrapper for the Astro application w/o global styles.
- *  It provides the standard background and the Astro theme.
+/**
+ * Wrapper for the Astro application w/o global styles.
+ * It provides the standard background and the Astro theme.
  */
 export const PageWrapper = ({ children, ...props }) => {
   return (
@@ -90,4 +92,5 @@ export const PageWrapper = ({ children, ...props }) => {
   );
 };
 
+export { ThemeProvider };
 export default AstroWrapper;
