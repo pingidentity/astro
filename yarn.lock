@@ -27706,17 +27706,17 @@ tinyqueue@^2.0.3:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tinyqueue/-/tinyqueue-2.0.3.tgz#64d8492ebf39e7801d7bd34062e29b45b2035f08"
   integrity sha1-ZNhJLr8554Ade9NAYuKbRbIDXwg=
 
+tippy.js@6.2.6, tippy.js@^6.1.0, tippy.js@^6.2.0:
+  version "6.2.6"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tippy.js/-/tippy.js-6.2.6.tgz#4991bbe8f75e741fb92b5ccfeebcd072d71f8345"
+  integrity sha1-SZG76PdedB+5K1zP7rzQctcfg0U=
+  dependencies:
+    "@popperjs/core" "^2.4.4"
+
 tippy.js@6.2.7:
   version "6.2.7"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tippy.js/-/tippy.js-6.2.7.tgz#62fb34eda23f7d78151ddca922b62818c1ab9869"
   integrity sha1-Yvs07aI/fXgVHdypIrYoGMGrmGk=
-  dependencies:
-    "@popperjs/core" "^2.4.4"
-
-tippy.js@^6.1.0, tippy.js@^6.2.0:
-  version "6.2.6"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tippy.js/-/tippy.js-6.2.6.tgz#4991bbe8f75e741fb92b5ccfeebcd072d71f8345"
-  integrity sha1-SZG76PdedB+5K1zP7rzQctcfg0U=
   dependencies:
     "@popperjs/core" "^2.4.4"
 
