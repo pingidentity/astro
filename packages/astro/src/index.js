@@ -68,6 +68,12 @@ export * from './components/RadioField';
 export { default as RadioGroupField } from './components/RadioGroupField';
 export * from './components/RadioGroupField';
 
+export { default as RockerButton } from './components/RockerButton';
+export * from './components/RockerButton';
+
+export { default as RockerButtonGroup } from './components/RockerButtonGroup';
+export * from './components/RockerButtonGroup';
+
 export { default as SearchField } from './components/SearchField';
 export * from './components/SearchField';
 
