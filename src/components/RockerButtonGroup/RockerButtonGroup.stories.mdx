@@ -1,0 +1,42 @@
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
+
+import {CollectionRockerButton} from '../RockerButton/RockerButton.js';
+import RockerButtonGroup from '../RockerButtonGroup/RockerButtonGroup.js';
+import * as stories from './RockerButtonGroup.stories.js';
+
+<Meta title="RockerButtonGroup" component={RockerButtonGroup} />
+
+# Rocker Button Group
+This component handles a single selection state for a group of rocker buttons.
+It is intended to be used with `RockerButton` as children.
+
+
+## Examples
+
+<Canvas>
+  <Story story={stories.Uncontrolled} />
+</Canvas>
+
+<Canvas>
+  <Story story={stories.Controlled} />
+</Canvas>
+
+<Canvas>
+  <Story story={stories.withCustomSelectedColors} />
+</Canvas>
+
+<Canvas>
+  <Story story={stories.DisabledSingleButton} />
+</Canvas>
+
+<Canvas>
+  <Story story={stories.DisabledRockerButtonGroup} />
+</Canvas>
+
+## `RockerButtonGroup` Props
+
+<ArgsTable of={RockerButtonGroup} />
+
+## `RockerButton` Props
+
+<ArgsTable of={CollectionRockerButton} />

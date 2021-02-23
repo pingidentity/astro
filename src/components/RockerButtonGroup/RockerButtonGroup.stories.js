@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import RockerButtonGroup, { Item } from '../RockerButtonGroup';
-
-export default {
-  title: 'RockerButtonGroup',
-  component: RockerButtonGroup,
-};
+import RockerButtonGroup from '../RockerButtonGroup';
+import RockerButton from '../RockerButton';
 
 export const Uncontrolled = () => (
   <RockerButtonGroup>
-    <Item name="and" key="and" keyColor="#640099">And</Item>
-    <Item name="or" key="or" keyColor="#4660A2">Or</Item>
-    <Item name="maybe" key="maybe" keyColor="accent.30">Maybe</Item>
+    <RockerButton name="and" key="and">And</RockerButton>
+    <RockerButton name="or" key="or" >Or</RockerButton>
+    <RockerButton name="maybe" key="maybe" >Maybe</RockerButton>
   </RockerButtonGroup>
 );
 
@@ -18,25 +14,58 @@ export const Controlled = () => {
   const [currentTab, setCurrentTab] = useState('and');
   return (
     <RockerButtonGroup selectedKey={currentTab} onSelectionChange={setCurrentTab} >
-      <Item name="and" key="and" keyColor="#640099">And</Item>
-      <Item name="or" key="or" keyColor="#4660A2">Or</Item>
-      <Item name="maybe" key="maybe" keyColor="accent.30">Maybe</Item>
+      <RockerButton name="and" key="and" >And</RockerButton>
+      <RockerButton name="or" key="or">Or</RockerButton>
+      <RockerButton name="maybe" key="maybe" >Maybe</RockerButton>
     </RockerButtonGroup>
   );
 };
 
+export const withCustomSelectedColors = () => (
+  <RockerButtonGroup>
+    <RockerButton
+      name="and"
+      key="and"
+      selectedStyles={{
+        bg: '#640099',
+      }}
+    >
+      And
+    </RockerButton>
+    <RockerButton
+      name="or"
+      key="or"
+      selectedStyles={{
+        bg: '#4660A2',
+      }}
+    >
+      Or
+    </RockerButton>
+    <RockerButton
+      name="maybe"
+      key="maybe"
+      selectedStyles={{
+        bg: 'accent.30',
+        color: 'yellow',
+      }}
+    >
+      Maybe
+    </RockerButton>
+  </RockerButtonGroup>
+);
+
 export const DisabledSingleButton = () => (
   <RockerButtonGroup defaultSelectedKey="or">
-    <Item name="and" key="and" keyColor="#640099" isDisabled>And</Item>
-    <Item name="or" key="or" keyColor="#4660A2">Or</Item>
-    <Item name="maybe" key="maybe" keyColor="accent.30">Maybe</Item>
+    <RockerButton name="and" key="and" isDisabled>And</RockerButton>
+    <RockerButton name="or" key="or">Or</RockerButton>
+    <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
   </RockerButtonGroup>
 );
 
 export const DisabledRockerButtonGroup = () => (
   <RockerButtonGroup isDisabled defaultSelectedKey="and">
-    <Item name="and" key="and" keyColor="#640099">And</Item>
-    <Item name="or" key="or" keyColor="#4660A2">Or</Item>
-    <Item name="maybe" key="maybe" keyColor="accent.30">Maybe</Item>
+    <RockerButton name="and" key="and">And</RockerButton>
+    <RockerButton name="or" key="or">Or</RockerButton>
+    <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
   </RockerButtonGroup>
 );
