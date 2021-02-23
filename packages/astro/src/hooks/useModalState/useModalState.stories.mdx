@@ -1,0 +1,78 @@
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+import useModalState, { DummyComponent } from './useModalState';
+
+<Meta title="Hooks/useModalState" />
+
+# useModalState
+
+A hook that manages and supplies state intended for Astro-UI's `Modal` component.
+
+## Overview
+
+This hook utilizes React Stately's [useOverlayTriggerState](https://react-spectrum.adobe.com/react-stately/useOverlayTriggerState.html) hook to generate the necessary state management for
+a `Modal` component with minimal modifications.
+
+## API
+
+<br />
+
+### useModalState([props]) => result
+
+<br />
+
+#### props
+
+Type: `Object` Default: `{}`
+
+* **isDefaultOpen**
+
+  Type: `boolean`
+
+  Whether the modal is open by default (uncontrolled).
+
+* **isOpen**
+
+  Type: `boolean`
+
+  Whether the modal is currently open (controlled).
+
+* **onOpenChange**
+
+  Type: `Function`
+
+  Handler that is called when the open state changes. `(isOpen: boolean) => void`
+
+#### result
+
+Type: `Object`
+
+* **isOpen**
+
+  Type: `boolean`
+
+  Whether the modal is currently open.
+
+* **open**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to `true`.
+
+* **close**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to `false`.
+  
+* **toggle**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to the opposite of what it just was.
+
+
+## Example
+
+See the <LinkTo kind="Modal" story="Default">Modal docs</LinkTo> for an example of how to 
+implement this hook.
