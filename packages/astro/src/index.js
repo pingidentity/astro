@@ -50,6 +50,9 @@ export * from './components/List';
 export { default as ListItem } from './components/ListItem';
 export * from './components/ListItem';
 
+export { default as Modal } from './components/Modal';
+export * from './components/Modal';
+
 export { default as PageHeader } from './components/PageHeader';
 export * from './components/PageHeader';
 
