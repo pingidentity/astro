@@ -1,14 +1,15 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
-import RockerButtonGroup, { Item } from './RockerButtonGroup';
+import RockerButtonGroup from './RockerButtonGroup';
+import RockerButton from '../RockerButton';
 
 
 const testId = 'testId';
 const testButtons = [
-  { name: 'And', key: 'And', keyColor: '#640099' },
-  { name: 'Or', key: 'Or', keyColor: '#4660A2' },
-  { name: 'Maybe?', key: 'Maybe?', keyColor: 'accent.30' },
+  { name: 'And', key: 'And', selectedStyles: { bg: '#640099' } },
+  { name: 'Or', key: 'Or' },
+  { name: 'Maybe?', key: 'Maybe?' },
 ];
 const defaultProps = {
   'data-testid': testId,
@@ -17,10 +18,10 @@ const defaultProps = {
 const getComponent = (props = {}, { buttons = testButtons, renderFn = render } = {}) => renderFn((
   <RockerButtonGroup {...defaultProps} {...props} data-id="test-container">
     {buttons.map(button => (
-      <Item
+      <RockerButton
         title={button.name}
         key={button.key}
-        keyColor={button.keyColor}
+        selectedStyles={button.selectedStyles}
       />
     ))}
   </RockerButtonGroup>
@@ -53,23 +54,23 @@ test('each button is disabled when isDisabled prop is passed to RockerButtonGrou
   });
 });
 
-test('rockerButton renders colorKey prop when selected', () => {
+test('rockerButton renders selectedStyles prop when selected', () => {
   getComponent();
   const buttonColorKey = screen.getByText(testButtons[0].key);
   expect(buttonColorKey).toHaveClass('is-selected');
-  expect(buttonColorKey).toHaveStyleRule('background-color', '#640099');
+  expect(buttonColorKey).toHaveStyle({ backgroundColor: '#640099' });
 });
 
 test('rockerButton renders defaultSelected prop, only default selected button has selected styling', () => {
   getComponent();
   const buttonSelectedKey = screen.getByText(testButtons[0].key);
-  expect(buttonSelectedKey).toHaveStyleRule('background-color', '#640099');
+  expect(buttonSelectedKey).toHaveStyle({ backgroundColor: '#640099' });
 
   // unselected buttons should have inactive grey background
   const button1 = screen.getByText(testButtons[1].key);
-  expect(button1).toHaveStyleRule('background-color', '#e5e9f8');
+  expect(button1).toHaveStyle({ backgroundColor: '#e5e9f8' });
   const button2 = screen.getByText(testButtons[2].key);
-  expect(button2).toHaveStyleRule('background-color', '#e5e9f8');
+  expect(button2).toHaveStyle({ backgroundColor: '#e5e9f8' });
 });
 
 test('selected button can be changed by keyboard interaction', () => {

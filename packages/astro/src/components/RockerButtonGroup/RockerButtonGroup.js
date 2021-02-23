@@ -7,9 +7,8 @@ import PropTypes from 'prop-types';
 import { useSingleSelectListState } from '@react-stately/list';
 import { useTabs } from '@react-aria/tabs';
 import Box from '../Box';
-import RockerButton from '../RockerButton';
+import { CollectionRockerButton } from '../RockerButton';
 
-export { Item } from '@react-stately/collections';
 export const RockerContext = React.createContext({});
 
 /**
@@ -46,7 +45,7 @@ const RockerButtonGroup = forwardRef((props, ref) => {
           ref={buttonGroupRef}
         >
           {Array.from(state.collection).map(item => (
-            <RockerButton
+            <CollectionRockerButton
               key={item.key}
               item={item}
               isDisabled={isDisabled}
