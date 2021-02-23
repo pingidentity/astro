@@ -46,6 +46,18 @@ test('button press', () => {
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
+test('keyboard button press', () => {
+  const onPress = jest.fn();
+  getComponent({ onPress });
+  const button = screen.getByRole('button');
+  expect(button).toHaveStyle(`background-color: ${theme.colors.white}`);
+  expect(onPress).not.toHaveBeenCalled();
+
+  fireEvent.keyDown(button, { key: 'Enter', code: 13 });
+  fireEvent.keyUp(button, { key: 'Enter', code: 13 });
+  expect(onPress).toHaveBeenCalledTimes(1);
+});
+
 test('button focus', () => {
   getComponent();
   const button = screen.getByRole('button');
