@@ -102,7 +102,7 @@ const SelectField = forwardRef((props, ref) => {
       />
       <Box variant="forms.input.container" className={classNames}>
         <Button ref={dropdownRef} variant="forms.select" {...triggerProps}>
-          <Box as="span" {...valueProps}>
+          <Box as="span" variant="forms.select.currentValue" {...valueProps}>
             {state.selectedItem ? state.selectedItem.rendered : defaultText}
           </Box>
           <Box as="span" aria-hidden="true" marginLeft="auto">
