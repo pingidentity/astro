@@ -13,6 +13,17 @@ export const select = {
   },
 };
 
+select.currentValue = {
+  textAlign: 'left',
+  flex: '1 1 0',
+  minWidth: 0,
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  // rebass adds display: flex after other styles and ellipsis goes away
+  display: 'inline !important',
+};
+
 select.listBoxPopup = {
   position: 'absolute',
   width: '100%',
@@ -22,6 +33,8 @@ select.listBoxPopup = {
   background: 'white',
   outline: 'none',
   boxShadow: 'standard',
+  zIndex: 1,
+  overflow: 'hidden',
 };
 
 select.option = {
@@ -30,6 +43,7 @@ select.option = {
   py: 'sm',
   alignItems: 'center',
   outline: 'none',
+  wordBreak: 'break-word',
   cursor: 'pointer',
   '&.is-selected': {
     ...text.inputValue,
