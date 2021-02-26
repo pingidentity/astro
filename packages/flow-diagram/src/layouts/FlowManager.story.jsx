@@ -414,14 +414,20 @@ const Demo = () => {
                 <LeftContainer styles={{ width: 360 }}>
                     {selectedNode ? (
                         <ConfigPanel
-                            icon={<Image src={selectedNode.getIconSrc(selectedNode.color)} />}
-                            color={selectedNode.color}
-                            category={selectedNode.text}
                             onClose={onPanelClose}
-                            styles={{ marginLeft: 15 }}
+                            topPanel={
+                                <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
+                                    <Box isRow>
+                                        <Image src={selectedNode.getIconSrc(selectedNode.color)} />
+                                        <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
+                                    </Box>
+                                </Box>
+                            }
                         >
-                            <TextField label="Step name" controlProps={{ value: selectedNode.stepId }} onChange={e => updateStepId(selectedNode, e.target.value, 'stepId')} width="95%" />
-                            <TextField mt={20} label="Description" controlProps={{ value: selectedNode.description }} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="95%" />
+                            <Box alignItems="center">
+                                <TextField label="Step name" controlProps={{ value: selectedNode.stepId }} onChange={e => updateStepId(selectedNode, e.target.value, 'stepId')} width="90%" />
+                                <TextField mt={20} label="Description" controlProps={{ value: selectedNode.description }} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="90%" />
+                            </Box>
                         </ConfigPanel>
                     ) : (
                         <React.Fragment>
