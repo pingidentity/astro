@@ -1,40 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Clear } from '@pingux/icons';
-import { Box, Text, Separator } from '@pingux/astro';
-import Icon from '@mdi/react';
-import { mdiDotsVertical } from '@mdi/js';
-import { configPanel, configPanelClose, configPanelHeader } from './ConfigPanel.styles';
+import { Box, Separator } from '@pingux/astro';
+import { configPanel, configPanelClose } from './ConfigPanel.styles';
 
-function ConfigPanel({ category, children, onClose, icon, styles, color, ...others }) {
+function ConfigPanel({ children, onClose, topPanel, styles, ...others }) {
     return (
         <Box sx={{ ...configPanel, ...styles }} {...others}>
             <Box sx={configPanelClose}>
                 <Clear onClick={onClose} data-testid="config-panel-close" />
             </Box>
-            <Box sx={configPanelHeader} isRow>
-                <Box isRow>
-                    {icon}
-                    <Text ml="12px" color="#253746" fontSize={15} fontWeight="bold" fontFamily="Helvetica">{category}</Text>
-                </Box>
-                <Icon
-                    path={mdiDotsVertical}
-                    size="33px"
-                    color="#68747F"
-                />
+            {topPanel}
+            <Box alignItems="center">
+                <Separator width="90%" mb={15} />
             </Box>
-            <Separator width="95%" mb={15} />
             {children}
         </Box>
     );
 }
 
 ConfigPanel.propTypes = {
-    category: PropTypes.string,
-    color: PropTypes.string,
-    icon: PropTypes.node,
     onClose: PropTypes.func,
     styles: PropTypes.object,
+    topPanel: PropTypes.node,
 };
 
 export default ConfigPanel;
