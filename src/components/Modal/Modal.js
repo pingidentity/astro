@@ -173,5 +173,5 @@ Modal.defaultProps = {
   role: 'dialog',
 };
 
-export { OverlayProvider } from '@react-aria/overlays';
+Modal.displayName = 'Modal';
 export default Modal;
