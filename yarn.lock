@@ -9995,20 +9995,10 @@ caniuse-db@^1.0.30000187, caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, ca
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/caniuse-db/-/caniuse-db-1.0.30001131.tgz#0b032ba8a9f9ceb8e15811f43396a550016668d3"
   integrity sha1-CwMrqKn5zrjhWBH0M5alUAFmaNM=
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000864, caniuse-lite@^1.0.30000989, caniuse-lite@^1.0.30001035, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001131:
-  version "1.0.30001131"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/caniuse-lite/-/caniuse-lite-1.0.30001131.tgz#afad8a28fc2b7a0d3ae9407e71085a0ead905d54"
-  integrity sha1-r62KKPwreg066UB+cQhaDq2QXVQ=
-
-caniuse-lite@^1.0.30001135:
-  version "1.0.30001146"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/caniuse-lite/-/caniuse-lite-1.0.30001146.tgz#c61fcb1474520c1462913689201fb292ba6f447c"
-  integrity sha1-xh/LFHRSDBRikTaJIB+ykrpvRHw=
-
-caniuse-lite@^1.0.30001157:
-  version "1.0.30001161"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/caniuse-lite/-/caniuse-lite-1.0.30001161.tgz#64f7ffe79ee780b8c92843ff34feb36cea4651e0"
-  integrity sha1-ZPf/557ngLjJKEP/NP6zbOpGUeA=
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000864, caniuse-lite@^1.0.30000989, caniuse-lite@^1.0.30001035, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001131, caniuse-lite@^1.0.30001135, caniuse-lite@^1.0.30001157:
+  version "1.0.30001192"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/caniuse-lite/-/caniuse-lite-1.0.30001192.tgz#b848ebc0ab230cf313d194a4775a30155d50ae40"
+  integrity sha1-uEjrwKsjDPMT0ZSkd1owFV1QrkA=
 
 capture-exit@^2.0.0:
   version "2.0.0"

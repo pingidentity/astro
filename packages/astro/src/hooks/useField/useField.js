@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import omit from 'lodash/omit';
+import noop from 'lodash/noop';
 import { useLabel } from '@react-aria/label';
+import { useFocusWithin } from '@react-aria/interactions';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
 import statuses from '../../utils/devUtils/constants/statuses';
 import useStatusClasses from '../../hooks/useStatusClasses';
+import { modes as labelModes } from '../../components/Label/constants';
 
 /**
  * Generates the necessary props to be used in field components.
@@ -14,11 +18,15 @@ import useStatusClasses from '../../hooks/useStatusClasses';
 const useField = (props = {}) => {
   const {
     autocomplete,
+    children,
     className,
     containerProps,
     controlProps,
+    defaultText,
     defaultValue,
+    disabledKeys,
     hasAutoFocus,
+    helperText,
     id,
     isDefaultSelected,
     isDisabled,
@@ -26,21 +34,44 @@ const useField = (props = {}) => {
     isRequired,
     isSelected,
     label,
+    labelMode,
     labelProps,
     name,
     onBlur,
-    onChange,
+    onChange = noop,
     onClear,
     onFocus,
     onFocusChange,
+    onOpenChange,
+    onSelectionChange,
     placeholder,
     role,
+    selectedKey,
     status = statuses.DEFAULT,
     statusClasses,
     type,
     value,
     ...others
   } = props;
+
+  const [, setControlValue] = useState(value);
+  // 0 could be a valid input for fields, but null, undefined, and '' are not
+  const [hasValue, setHasValue] = useState(!!value || value === 0);
+  const [hasFocusWithin, setFocusWithin] = useState(false);
+
+  // Capture value changes so we can apply the has-value class to the container
+  const fieldOnChange = (e) => {
+    const eventValue = e?.target?.value;
+    setControlValue(eventValue);
+    if (!!eventValue || eventValue === 0) {
+      setHasValue(true);
+    } else {
+      setHasValue(false);
+    }
+
+    // Make sure to call the original onChange event
+    return onChange(e);
+  };
 
   const {
     labelProps: raLabelProps,
@@ -58,9 +89,28 @@ const useField = (props = {}) => {
     return { ...acc };
   }, {});
 
+  // Handle focus within and value state for the container. These are needed for float labels.
+  const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
+  const isFloatLabel = labelMode === labelModes.FLOAT;
+  const isFloatLabelActive = isFloatLabel && (
+    hasValue || hasFocusWithin || containerProps?.isFloatLabelActive
+  );
+  const { classNames: containerClasses } = useStatusClasses(containerProps?.className, {
+    'field-container': true, // generates 'field-container' class
+    hasValue,
+    hasFocusWithin,
+    isFloatLabel,
+    isFloatLabelActive,
+  });
+  const nonAriaOthers = { ...omit(others, Object.keys(ariaProps)) };
   const fieldContainerProps = {
-    ...omit(others, Object.keys(ariaProps)),
-    ...containerProps,
+    ...nonAriaOthers,
+    ...mergeProps(containerProps, focusWithinProps),
+    className: containerClasses,
+    sx: {
+      position: 'relative',
+      ...containerProps?.sx,
+    },
   };
 
   const fieldControlProps = {
@@ -72,7 +122,7 @@ const useField = (props = {}) => {
     disabled: isDisabled,
     id,
     name,
-    onChange,
+    onChange: fieldOnChange,
     placeholder,
     readOnly: isReadOnly,
     required: isRequired,
@@ -89,8 +139,9 @@ const useField = (props = {}) => {
     children: label,
     className: classNames,
     isRequired,
-    ...labelProps,
+    mode: labelMode,
     ...raLabelProps,
+    ...labelProps,
   };
 
   return {
