@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import theme from '../../styles/theme';
 import statuses from '../../utils/devUtils/constants/statuses';
-import SelectField, { Item } from './SelectField';
+import { SelectField, Item } from '../../index';
 
 const testId = 'test-dropdown';
 const testValue = 'test';
