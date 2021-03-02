@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.35",
+    "@emotion/react": "^11.1.5",
     "@pingux/icons": "^0.2.0",
     "@react-aria/button": "^3.2.1",
     "@react-aria/checkbox": "^3.2.0",
@@ -74,6 +75,7 @@
     "@react-aria/listbox": "^3.2.3",
     "@react-aria/menu": "^3.1.4",
     "@react-aria/overlays": "^3.6.0",
+    "@react-aria/progress": "^3.1.1",
     "@react-aria/radio": "^3.1.1",
     "@react-aria/searchfield": "^3.1.1",
     "@react-aria/select": "^3.2.3",
