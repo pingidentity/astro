@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Label as RLabel } from '@rebass/forms';
 
 import useStatusClasses from '../../hooks/useStatusClasses';
+import { modes } from './constants';
 import Box from '../Box';
 
 const defaultIndicator = (
@@ -27,12 +28,14 @@ const Label = forwardRef((props, ref) => {
     className,
     isDisabled,
     isRequired,
+    mode,
     requiredIndicator,
     ...others
   } = props;
   const { classNames } = useStatusClasses(className, {
     isDisabled,
     isRequired,
+    isFloatLabel: mode === modes.FLOAT,
   });
 
   return (
@@ -55,10 +58,14 @@ Label.propTypes = {
   isDisabled: PropTypes.bool,
   /** Whether the label has required indicator styling applied. */
   isRequired: PropTypes.bool,
+  /** Determines the behavior pattern for the label. */
+  mode: PropTypes.oneOf(Object.values(modes)),
+  /** The visual component used to mark an input as required within the label. */
   requiredIndicator: PropTypes.node,
 };
 
 Label.defaultProps = {
+  mode: modes.DEFAULT,
   requiredIndicator: defaultIndicator,
 };
 

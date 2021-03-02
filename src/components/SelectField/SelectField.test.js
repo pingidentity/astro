@@ -7,12 +7,13 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import SelectField, { Item } from './SelectField';
 
 const testId = 'test-dropdown';
+const controlTestId = `${testId}-input`;
 const testValue = 'test';
 const defaultProps = {
   label: 'testLabel',
   'data-testid': testId,
   controlProps: {
-    'data-testid': `${testId}-input`,
+    'data-testid': controlTestId,
   },
   value: testValue,
 };
@@ -65,9 +66,15 @@ test('isDefaultOpen prop', () => {
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 });
 
-test('isDisabled prop for field', () => {
+test('should disable the label and control when isDisabled is true', () => {
   getComponent({ isDisabled: true });
-  expect(screen.getByTestId(testId)).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
+  expect(screen.getAllByText(defaultProps.label)[0]).toHaveClass('is-disabled');
+  expect(screen.getAllByText(defaultProps.label)[0]).toHaveStyle({
+    opacity: 0.5,
+    pointerEvents: 'none',
+  });
+  expect(screen.getByTestId(controlTestId)).toHaveClass('is-disabled');
+  expect(screen.getByTestId(controlTestId)).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
 });
 
 test('select field with helper text', () => {

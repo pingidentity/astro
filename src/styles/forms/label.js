@@ -1,12 +1,32 @@
 // Styles for default label and variants go here.
 import { text } from '../variants/text';
 
+const activeFloatLabel = {
+  fontWeight: 0,
+  transform: 'translate(0, -8px) scale(0.75)',
+};
+
 // Default label
 export const label = {
   ...text.label,
   display: 'block',
   mb: 'xs',
   alignItems: 'center',
+  '&.is-float-label': {
+    fontSize: 'md',
+    fontWeight: -1,
+    position: 'absolute',
+    zIndex: 1,
+    top: '13px',
+    left: 'md',
+    mb: 0,
+    transformOrigin: 'top left',
+    transition: 'all 0.2s ease-out',
+    pointerEvents: 'none',
+  },
+  '.is-float-label-active &.is-float-label': {
+    ...activeFloatLabel,
+  },
 };
 
 // Variants below

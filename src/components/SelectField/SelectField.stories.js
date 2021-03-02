@@ -15,6 +15,14 @@ export const Default = () => (
   </SelectField>
 );
 
+export const FloatLabel = () => (
+  <SelectField label="What's your favorite color?" labelMode="float">
+    <Item key="red">Red</Item>
+    <Item key="blue">Blue</Item>
+    <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
+
 export const Controlled = () => {
   const [selectedKey, setSelectedKey] = useState('yellow');
   const handleSelectionChange = key => setSelectedKey(key);

@@ -15,6 +15,13 @@ export const Default = () => (
   />
 );
 
+export const FloatLabel = () => (
+  <TextField
+    label="Example Label"
+    labelMode="float"
+  />
+);
+
 export const Controlled = () => {
   const [value, setValue] = useState('');
 
