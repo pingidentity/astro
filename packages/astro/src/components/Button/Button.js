@@ -6,16 +6,19 @@ import { useHover } from '@react-aria/interactions';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import useStatusClasses from '../../hooks/useStatusClasses';
+import Loader from '../Loader';
 
 const Button = forwardRef((props, ref) => {
   const {
     className,
     isDisabled,
+    isLoading,
     onPress,
     onPressStart,
     onPressEnd,
     onPressChange,
     onPressUp,
+    children,
     ...others
   } = props;
   const buttonRef = useRef();
@@ -37,13 +40,18 @@ const Button = forwardRef((props, ref) => {
       className={classNames}
       {...others}
       {...mergeProps(hoverProps, focusProps, buttonProps)}
-    />
+    >
+      {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
+      {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} /> }
+    </RButton>
   );
 });
 
 Button.propTypes = {
   /** Whether the button is disabled. */
   isDisabled: PropTypes.bool,
+  /** Shows loader instead of children */
+  isLoading: PropTypes.bool,
   /**
    * Handler that is called when the press is released over the target.
    * (e: PressEvent) => void

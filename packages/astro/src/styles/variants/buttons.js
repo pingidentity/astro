@@ -6,6 +6,9 @@ const base = {
   inlineHeight: 30,
   px: 'md',
   outline: 'none',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   ...text.buttonLabel,
 };
 

@@ -2025,6 +2025,19 @@
     "@emotion/weak-memoize" "^0.2.5"
     hoist-non-react-statics "^3.3.1"
 
+"@emotion/react@^11.1.5":
+  version "11.1.5"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@emotion/react/-/react-11.1.5.tgz#15e78f9822894cdc296e6f4e0688bac8120dfe66"
+  integrity sha1-FeePmCKJTNwpbm9OBoi6yBIN/mY=
+  dependencies:
+    "@babel/runtime" "^7.7.2"
+    "@emotion/cache" "^11.1.3"
+    "@emotion/serialize" "^1.0.0"
+    "@emotion/sheet" "^1.0.1"
+    "@emotion/utils" "^1.0.0"
+    "@emotion/weak-memoize" "^0.2.5"
+    hoist-non-react-statics "^3.3.1"
+
 "@emotion/serialize@^0.11.15", "@emotion/serialize@^0.11.16":
   version "0.11.16"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@emotion/serialize/-/serialize-0.11.16.tgz#dee05f9e96ad2fb25a5206b6d759b2d1ed3379ad"
@@ -3960,6 +3973,18 @@
     "@react-types/overlays" "^3.4.0"
     dom-helpers "^3.3.1"
 
+"@react-aria/progress@^3.1.1":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/progress/-/progress-3.1.1.tgz#053b7c15a67ca4a4c9feb50f4a4f2f5c2345521f"
+  integrity sha1-BTt8FaZ8pKTJ/rUPSk8vXCNFUh8=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.1.2"
+    "@react-aria/label" "^3.1.1"
+    "@react-aria/utils" "^3.3.0"
+    "@react-types/progress" "^3.1.1"
+    "@react-types/shared" "^3.2.1"
+
 "@react-aria/radio@^3.1.1":
   version "3.1.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/radio/-/radio-3.1.2.tgz#b5ae516b04d6cb400381850947c7a4e704575134"
@@ -4334,6 +4359,13 @@
   integrity sha1-PEYZkGuxLjaX53C1nCCQuxjaJb0=
   dependencies:
     "@react-types/shared" "^3.3.0"
+
+"@react-types/progress@^3.1.1":
+  version "3.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/progress/-/progress-3.1.1.tgz#e2a99eab26e2b3117f65f78ccb320eae1cdbf693"
+  integrity sha1-4qmeqybisxF/ZfeMyzIOrhzb9pM=
+  dependencies:
+    "@react-types/shared" "^3.2.1"
 
 "@react-types/radio@^3.1.1":
   version "3.1.1"

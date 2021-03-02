@@ -8,11 +8,13 @@ import popover from './popover';
 import popoverMenu from './popoverMenu';
 import rockerbutton from './rockerbutton';
 import * as tabs from './tabs';
+import loader from './loader';
 
 
 export default {
   boxes,
   images,
+  loader,
   link,
   menu,
   menuItem,
