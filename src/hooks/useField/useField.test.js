@@ -1,7 +1,8 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 
 import useField from './useField';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { modes as labelModes } from '../../components/Label/constants';
 
 const defaultProps = {
   autocomplete: 'off',
@@ -44,7 +45,11 @@ test('should return props objects for field components', () => {
   } = result.current;
 
   expect(fieldContainerProps).toEqual({
+    className: 'field-container has-value',
     id: defaultProps.containerProps.id,
+    onBlur: expect.any(Function),
+    onFocus: expect.any(Function),
+    sx: expect.objectContaining({ position: 'relative' }),
   });
   expect(fieldControlProps).toEqual({
     autocomplete: defaultProps.autocomplete,
@@ -57,7 +62,7 @@ test('should return props objects for field components', () => {
     readOnly: true,
     required: true,
     onBlur: expect.any(Function),
-    onChange: undefined,
+    onChange: expect.any(Function),
     onFocus: expect.any(Function),
     name: defaultProps.name,
     placeholder: defaultProps.placeholder,
@@ -74,4 +79,65 @@ test('should return props objects for field components', () => {
     htmlFor: expect.any(String),
     isRequired: true,
   });
+});
+
+test('should return isFloatLabelActive class for container', () => {
+  const { result, rerender } = renderHook(initialProps => useField(initialProps), {
+    initialProps: defaultProps,
+  });
+  // Does not have the class if the label mode is not set to float
+  expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
+
+  // Has the class if the value is valid and label mode is float
+  rerender({ ...defaultProps, labelMode: labelModes.FLOAT });
+  expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
+
+  // Does not have the class if the value is invalid
+  act(() => result.current.fieldControlProps.onChange({ target: { value: undefined } }));
+  expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
+
+  // Has the class if the container has focus within it
+  act(() => result.current.fieldContainerProps.onFocus({}));
+  expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
+
+  // Does not have the class if the container loses focus within it
+  act(() => result.current.fieldContainerProps.onBlur({ currentTarget: { contains: jest.fn() } }));
+  expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
+
+  // Has the class if the mode is float and the isFloatLabelActive containerProp is passed in
+  rerender({
+    ...defaultProps,
+    labelMode: labelModes.FLOAT,
+    containerProps: {
+      isFloatLabelActive: true,
+    },
+  });
+  expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
+});
+
+test('should return hasValue class for container when onChange updates internal state', () => {
+  const onChange = jest.fn();
+  let numCalls = 0;
+  const { result } = renderHook(() => useField({ ...defaultProps, onChange, value: '' }));
+  // Empty string is not a valid value
+  expect(result.current.fieldContainerProps.className).not.toContain('has-value');
+
+  // 0 should be a valid value
+  act(() => result.current.fieldControlProps.onChange({ target: { value: 0 } }));
+  expect(result.current.fieldContainerProps.className).toContain('has-value');
+  numCalls += 1;
+
+  // undefined is not a valid value
+  act(() => result.current.fieldControlProps.onChange({ target: { value: undefined } }));
+  expect(result.current.fieldContainerProps.className).not.toContain('has-value');
+  numCalls += 1;
+
+  // a non-empty string is a valid value
+  act(() => result.current.fieldControlProps.onChange({ target: { value: 'a' } }));
+  expect(result.current.fieldContainerProps.className).toContain('has-value');
+  numCalls += 1;
+
+  // the original onChange should be called each time
+  expect(numCalls).toBeGreaterThan(0);
+  expect(onChange).toHaveBeenCalledTimes(numCalls);
 });

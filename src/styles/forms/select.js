@@ -2,14 +2,21 @@
 import { input } from './input';
 import { text } from '../variants/text';
 
+const activeFloatLabel = {
+  pt: 'md',
+  pb: 'xs',
+};
+
 // Default select
 export const select = {
   ...input,
-  lineHeight: 'unset',
   display: 'flex',
   alignItems: 'center',
   '&.is-focused': {
     boxShadow: 'focus',
+  },
+  '.is-float-label &': {
+    ...activeFloatLabel,
   },
 };
 
@@ -61,5 +68,12 @@ select.transparent = {
   },
   '> div:after': {
     bg: 'transparent',
+  },
+};
+
+select.arrow = {
+  ml: 'auto',
+  '.is-float-label &': {
+    mt: -10,
   },
 };

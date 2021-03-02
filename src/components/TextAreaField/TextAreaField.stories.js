@@ -12,6 +12,13 @@ export const Default = () => (
   />
 );
 
+export const FloatLabel = () => (
+  <TextAreaField
+    label="Example label"
+    labelMode="float"
+  />
+);
+
 export const Controlled = () => {
   const [value, setValue] = useState();
 

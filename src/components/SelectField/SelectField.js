@@ -4,15 +4,15 @@ import { useSelectState } from '@react-stately/select';
 import { useSelect, HiddenSelect } from '@react-aria/select';
 import MenuDown from 'mdi-react/MenuDownIcon';
 
-// NOTE: This component does not use useField, unlike all other form fields.
 import statuses from '../../utils/devUtils/constants/statuses';
+import useField from '../../hooks/useField';
 import Box from '../Box';
 import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
 import Icon from '../Icon';
 import Label from '../Label';
 import ListBoxPopup from './ListBoxPopup';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import Text from '../Text';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -24,7 +24,6 @@ import useStatusClasses from '../../hooks/useStatusClasses';
 const SelectField = forwardRef((props, ref) => {
   const {
     children,
-    className,
     defaultSelectedKey,
     defaultText,
     disabledKeys,
@@ -46,7 +45,6 @@ const SelectField = forwardRef((props, ref) => {
     onOpenChange,
     onSelectionChange,
     controlProps,
-    ...others
   } = props;
   // We use falsy booleans as defaults, but React Aria has this as true by default so we need to
   // negate this.
@@ -85,27 +83,43 @@ const SelectField = forwardRef((props, ref) => {
     state,
     dropdownRef,
   );
-  const { classNames } = useStatusClasses(className, {
-    isDisabled,
-    [`is-${status}`]: true,
+  const {
+    fieldContainerProps,
+    fieldControlProps,
+    fieldLabelProps,
+  } = useField({
+    ...props,
+    labelProps,
+    containerProps: {
+      isFloatLabelActive: true,
+    },
   });
 
   return (
-    <Box sx={{ position: 'relative' }} className={classNames} {...others}>
+    <Box {...fieldContainerProps}>
       {/* Actual label is applied to the hidden select */}
-      <Label isRequired={isRequired} {...labelProps}>{label}</Label>
+      <Label {...fieldLabelProps}>{label}</Label>
       <HiddenSelect
         state={state}
         triggerRef={dropdownRef}
         label={label}
         name={name}
       />
-      <Box variant="forms.input.container" className={classNames}>
-        <Button ref={dropdownRef} variant="forms.select" {...triggerProps}>
+      <Box className={fieldControlProps.className} variant="forms.input.container">
+        <Button
+          ref={dropdownRef}
+          variant="forms.select"
+          className={fieldControlProps.className}
+          {...triggerProps}
+        >
           <Box as="span" variant="forms.select.currentValue" {...valueProps}>
-            {state.selectedItem ? state.selectedItem.rendered : defaultText}
+            {
+              state.selectedItem
+                ? state.selectedItem.rendered
+                : <Text variant="placeholder">{defaultText}</Text>
+            }
           </Box>
-          <Box as="span" aria-hidden="true" marginLeft="auto">
+          <Box as="span" aria-hidden="true" variant="forms.select.arrow">
             <Icon icon={MenuDown} />
           </Box>
         </Button>
