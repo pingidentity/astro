@@ -1,9 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render, screen, fireEvent } from '../../../utils/testUtils/testWrapper';
-import Modal, { OverlayProvider } from '../Modal';
+import { OverlayProvider, Modal, Button } from '../../../index';
 import { useModalState } from '../../../hooks';
-import Button from '../../Button';
 
 // For testing the connection between the state hook, the trigger, and the modal itself
 /* eslint-disable react/prop-types */

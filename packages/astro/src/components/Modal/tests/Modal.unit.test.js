@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
-import Modal, { OverlayProvider } from '../Modal';
+import { OverlayProvider, Modal } from '../../../index';
 
 // For testing the modal alone
 const getComponent = (props = {}) => render((

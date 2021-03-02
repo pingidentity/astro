@@ -53,6 +53,8 @@ export * from './components/List';
 export { default as ListItem } from './components/ListItem';
 export * from './components/ListItem';
 
+export { default as Menu } from './components/Menu';
+
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
 
@@ -64,6 +66,8 @@ export * from './components/Panel';
 
 export { default as Popover } from './components/Popover';
 export * from './components/Popover';
+
+export { default as PopoverMenu } from './components/PopoverMenu';
 
 export { default as Radio } from './components/Radio';
 export * from './components/Radio';
@@ -114,3 +118,6 @@ export { default as TextAreaField } from './components/TextAreaField';
 export * from './components/TextAreaField';
 
 /* eslint-enable import/export */
+
+export { Item } from '@react-stately/collections';
+export { OverlayProvider } from '@react-aria/overlays';

@@ -1,3 +1,4 @@
+// TODO: popover-deprecate Remove when popover is deprecated in 1.0.0
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Popover from '../Popover/Popover';

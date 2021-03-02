@@ -3913,6 +3913,23 @@
     "@react-types/menu" "^3.1.1"
     "@react-types/shared" "^3.2.1"
 
+"@react-aria/menu@^3.1.4":
+  version "3.1.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/menu/-/menu-3.1.4.tgz#5ad8c360505ab079c05c30a401331b55b1038794"
+  integrity sha1-WtjDYFBasHnAXDCkATMbVbEDh5Q=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.3.3"
+    "@react-aria/overlays" "^3.6.1"
+    "@react-aria/selection" "^3.3.2"
+    "@react-aria/utils" "^3.6.0"
+    "@react-stately/collections" "^3.3.0"
+    "@react-stately/menu" "^3.2.1"
+    "@react-stately/tree" "^3.1.2"
+    "@react-types/button" "^3.3.1"
+    "@react-types/menu" "^3.1.1"
+    "@react-types/shared" "^3.4.0"
+
 "@react-aria/overlays@^3.6.0":
   version "3.6.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/overlays/-/overlays-3.6.0.tgz#f226f3ce2fcf6db614dde0719f47fd98da931fb8"
@@ -3925,6 +3942,21 @@
     "@react-aria/visually-hidden" "^3.2.1"
     "@react-stately/overlays" "^3.1.1"
     "@react-types/button" "^3.3.0"
+    "@react-types/overlays" "^3.4.0"
+    dom-helpers "^3.3.1"
+
+"@react-aria/overlays@^3.6.1":
+  version "3.6.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/overlays/-/overlays-3.6.1.tgz#0354088b27f925d64c6900f236198b6a869f83d3"
+  integrity sha1-A1QIiyf5JdZMaQDyNhmLaoafg9M=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.3.0"
+    "@react-aria/interactions" "^3.3.3"
+    "@react-aria/utils" "^3.6.0"
+    "@react-aria/visually-hidden" "^3.2.1"
+    "@react-stately/overlays" "^3.1.1"
+    "@react-types/button" "^3.3.1"
     "@react-types/overlays" "^3.4.0"
     dom-helpers "^3.3.1"
 
@@ -4243,6 +4275,13 @@
   integrity sha1-abkLBIlIMANCq6dUa2ta3X7kAfg=
   dependencies:
     "@react-types/shared" "^3.2.1"
+
+"@react-types/button@^3.3.1":
+  version "3.3.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/button/-/button-3.3.1.tgz#4bdd325bc7df19c33911af256f63eae91e2a452e"
+  integrity sha1-S90yW8ffGcM5Ea8lb2Pq6R4qRS4=
+  dependencies:
+    "@react-types/shared" "^3.4.0"
 
 "@react-types/checkbox@^3.2.1":
   version "3.2.1"
