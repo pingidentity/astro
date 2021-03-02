@@ -39,7 +39,7 @@ export const applyStyles = (colors, bgImg) => {
                 background: ${colors.card};
             }
 
-            .branding-themes-footer-container {
+            .branding-template-footer-container {
                 background: ${colors.card};
             }
         ` : ''}
