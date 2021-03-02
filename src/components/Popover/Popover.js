@@ -16,6 +16,7 @@ import useDeprecationWarning from '../../hooks/useDeprecationWarning';
 const Popover = forwardRef((props, ref) => {
   const {
     content,
+    trigger,
     ...others
   } = props;
 
@@ -37,6 +38,7 @@ const Popover = forwardRef((props, ref) => {
           />
         </Box>
       )}
+      {...(trigger && { trigger })}
       {...others}
     />
   );
