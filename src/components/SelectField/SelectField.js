@@ -187,6 +187,5 @@ SelectField.defaultProps = {
   status: statuses.DEFAULT,
 };
 
-export { Item } from '@react-stately/collections';
 SelectField.displayName = 'SelectField';
 export default SelectField;

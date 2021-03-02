@@ -1,14 +1,13 @@
 import React from 'react';
 import { useModalState } from '../../hooks';
-import Modal, { OverlayProvider } from '.';
-import { Box, Button, Text } from '../../';
+import { OverlayProvider, Box, Button, Text, Modal } from '../../index';
 
 export const Default = () => {
   const state = useModalState();
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
-    // readers when a modal opens.
+    // readers when an overlay opens.
     <OverlayProvider>
       <Button onPress={state.open}>Open Modal</Button>
 

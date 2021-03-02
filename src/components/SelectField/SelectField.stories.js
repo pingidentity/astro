@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import SelectField, { Item } from '.';
-import Separator from '../Separator';
+import { SelectField, Item, Separator } from '../../index';
 
 export default {
   title: 'Form/SelectField',
