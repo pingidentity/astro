@@ -114,14 +114,14 @@ const useStatefulForm = (props = {}) => {
     setFormState(FORM_STATE.SUCCESS);
   };
   const handleSubmit = async (...args) => {
-    const { submittedFormData } = args[0];
+    const submittedFormData = args[0];
     if (onSubmit) {
       setFormState(FORM_STATE.PENDING);
       onSubmit(...args, handleServerError, handleServerSuccess);
     } else if (endpoint) {
       let isError;
       let response;
-      const payload = submittedFormData;
+      const payload = submittedFormData.formData;
 
       setFormState(FORM_STATE.PENDING);
       try {
