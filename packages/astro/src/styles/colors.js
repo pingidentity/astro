@@ -98,7 +98,7 @@ export const text = {
 const rgbaString = rgba => `rgba(${rgba.join(', ')})`;
 export const shadow = rgbaString(chroma(neutral[10]).alpha(0.25).rgba());
 
-export default {
+const allColors = {
   black,
   white,
   neutral,
@@ -115,3 +115,25 @@ export default {
   button,
   warning,
 };
+
+export default allColors;
+
+function flattenColors(obj, prefix = '') {
+  return Object.entries(obj)
+    .map(([key, value]) => {
+      if (typeof value === 'string') {
+        return [`${prefix}${key}`, value];
+      } else if (typeof value === 'object') {
+        return flattenColors(value, `${prefix}${key}.`);
+      }
+      return [];
+    })
+    .reduce(
+      (result, current) =>
+        (typeof current[0] === 'string' ? [...result, current] : [...result, ...current]),
+      [],
+    );
+}
+
+/* used by Storybook's stories */
+export const flatColorList = flattenColors(allColors);
