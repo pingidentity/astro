@@ -99,7 +99,7 @@ export default function useDiagram({
     nodeDataArray,
     nodeTemplates,
     onModelChange,
-    isEnabled = true,
+    isDisabled = false,
 }) {
     const [diagram, setDiagram] = useState();
     const [droppedOntoLinkKey, setDroppedOntoLinkKey] = useState(undefined);
@@ -118,6 +118,13 @@ export default function useDiagram({
         setDroppedOntoLinkKey(undefined);
         setDroppedOntoNodeKey(undefined);
     }, [nodeDataArray, linkDataArray]);
+
+    useEffect(() => {
+        if (diagram instanceof go.Diagram) {
+            diagram.isEnabled = !isDisabled;
+            diagram.allowDelete = !isDisabled;
+        }
+    }, [isDisabled]);
 
     // Adds link or node that was dropped onto to onModelChange
     const modelChange = (args) => {
@@ -253,13 +260,6 @@ export default function useDiagram({
 
         return diagramObject;
     };
-
-    if (diagram instanceof go.Diagram) {
-        diagram.addDiagramListener('LayoutCompleted', (e) => {
-        e.diagram.isEnabled = isEnabled;
-        e.diagram.allowDelete = isEnabled;
-        },
-    )};
 
     return {
         diagramObject: diagram,
