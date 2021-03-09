@@ -10,6 +10,7 @@ const ThemedWidget = (componentType) => {
     const {
       formContext: { theme },
       schema: { type },
+      options: { emptyValue },
     } = props;
     const Component = getThemedComponent(theme, componentType);
     const Wrapper = type === FIELD_TYPES.BOOLEAN
@@ -19,7 +20,10 @@ const ThemedWidget = (componentType) => {
 
     const onChange = (event) => {
       const eventProperty = type === FIELD_TYPES.BOOLEAN ? 'checked' : 'value';
-      const value = _.get(event, `target.${eventProperty}`, event);
+      let value = _.get(event, `target.${eventProperty}`, event);
+      if (value === '') { // see https://github.com/rjsf-team/react-jsonschema-form/issues/1052#issuecomment-431495633
+        value = emptyValue;
+      }
       props.onChange(value);
     };
 
@@ -44,6 +48,9 @@ const ThemedWidget = (componentType) => {
     schema: PropTypes.shape({
       type: PropTypes.string,
     }),
+    options: PropTypes.shape({
+      emptyValue: PropTypes.string,
+    }),
     onChange: PropTypes.func,
   };
 
@@ -52,6 +59,7 @@ const ThemedWidget = (componentType) => {
     formContext: undefined,
     label: undefined,
     schema: undefined,
+    options: {},
     onChange: _.noop,
   };
 
