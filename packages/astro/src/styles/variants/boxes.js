@@ -17,6 +17,14 @@ const panel = {
   },
 };
 
+const card = {
+  boxShadow: 'standard',
+  p: 'lg',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flex: '1 1 0',
+};
+
 // Used to give a border to radio elements
 const radioContainer = {
   borderWidth: 1,
@@ -62,4 +70,5 @@ export default {
   radioCheckedContent,
   listItem,
   chip,
+  card,
 };

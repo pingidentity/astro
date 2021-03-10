@@ -46,6 +46,18 @@ test('button press', () => {
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
+test('keyboard button press', () => {
+  const onPress = jest.fn();
+  getComponent({ onPress });
+  const button = screen.getByRole('button');
+  expect(button).toHaveStyle(`background-color: ${theme.colors.white}`);
+  expect(onPress).not.toHaveBeenCalled();
+
+  fireEvent.keyDown(button, { key: 'Enter', code: 13 });
+  fireEvent.keyUp(button, { key: 'Enter', code: 13 });
+  expect(onPress).toHaveBeenCalledTimes(1);
+});
+
 test('button focus', () => {
   getComponent();
   const button = screen.getByRole('button');
@@ -55,4 +67,24 @@ test('button focus', () => {
   userEvent.tab();
   expect(button).toHaveFocus();
   expect(button).toHaveStyle(`box-shadow: ${theme.shadows.focus}`);
+});
+
+test('button loading hides children and shows loader', () => {
+  const textContent = "I'ma button";
+  getComponent({ isLoading: true, children: textContent });
+  const childWrapper = screen.getByText(textContent);
+
+  expect(childWrapper).toBeInTheDocument();
+  expect(childWrapper).not.toBeVisible();
+  expect(screen.getByRole('progressbar')).toBeInTheDocument();
+});
+
+test('button renders children when not loading', () => {
+  const textContent = "I'ma button";
+  getComponent({ children: textContent });
+  const childWrapper = screen.getByText(textContent);
+
+  expect(childWrapper).toBeInTheDocument();
+  expect(childWrapper).toBeVisible();
+  expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
 });

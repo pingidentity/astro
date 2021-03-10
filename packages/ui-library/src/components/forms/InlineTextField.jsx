@@ -19,7 +19,7 @@ import TextField from "./FormTextField";
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {boolean} [disabled=false]
 *     If true, the text field will be disabled.
-* @param {string} [errorMessage]
+* @param {node} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {boolean} [inline]
 *     When true, text field is inline.
@@ -72,7 +72,7 @@ InlineTextField.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
     disabled: PropTypes.bool,
-    errorMessage: PropTypes.string,
+    errorMessage: PropTypes.node,
     inline: PropTypes.bool,
     onValueChange: PropTypes.func,
     size: PropTypes.number,

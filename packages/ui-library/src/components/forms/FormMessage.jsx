@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
  *
  * @param {string} [data-id]
  *    Optional data-id
- * @param {string} [message]
+ * @param {node} [message]
  *    The message text to display
  * @param {string} [type=error]
  *    The type of message (error = red, info = blue, success = green, warning = yellow)

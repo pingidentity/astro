@@ -61,6 +61,7 @@ const Checkboxes = (props) => {
               onChange={(e) => handleChange(option.value, e)}
               options={{
                 isStacked: true,
+                isSelected: values[option.value] || value.includes(option.value),
               }}
               schema={{
                 type: FIELD_TYPES.BOOLEAN,

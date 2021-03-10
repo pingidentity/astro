@@ -6,7 +6,7 @@ import flatMap from 'lodash/flatMap';
 import noop from 'lodash/noop';
 import { containerStyles, getOuterContainerStyles } from './HeatMap.styles';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ3d5bmV0aHJvc2UiLCJhIjoiY2tlaXp2MmQ4MTNxZzJxbW40MGJzem0xciJ9.bZtH4xxOuRcW7MlxQ8y3MQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ3d5bmV0aHJvc2UiLCJhIjoiY2tpajZ2Y2VmMHd5bzJzbGNmYXY1MXB2NCJ9.Epol6Ia3tFKqOFkUn-wyCw';
 
 export const pointsToGeoJson = (points) => {
     return ({

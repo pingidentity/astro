@@ -33,6 +33,7 @@ pack:
     # Building this on its own for now because it doesn't have its own pack command.
     - lerna run build --scope @pingux/charting
     - lerna run build --scope @pingux/icons
+    - lerna run build --scope @pingux/astro
     - lerna run dist --scope @pingux/end-user
     - lerna run pack
     - lerna link
@@ -43,6 +44,7 @@ pack:
       - ./packages/icons/lib
       - ./packages/end-user/dist
       - ./packages/schema-forms/dist
+      - ./packages/astro/lib
 
 lint:
   stage: test
@@ -72,3 +74,4 @@ backstop:
   script:
     - lerna bootstrap
     - lerna run backstop-ci
+

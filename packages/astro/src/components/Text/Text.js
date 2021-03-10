@@ -9,7 +9,7 @@ const Text = React.forwardRef((props, ref) => (
 ));
 
 Text.propTypes = {
-  variant: PropTypes.oneOf(Object.values(textVariants)),
+  variant: PropTypes.string,
 };
 
 

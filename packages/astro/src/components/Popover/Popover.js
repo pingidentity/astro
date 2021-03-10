@@ -1,9 +1,13 @@
+// TODO: popover-deprecate Remove when popover is deprecated in 1.0.0
 import React, { forwardRef } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import PropTypes from 'prop-types';
 import Box from '../Box';
+import useDeprecationWarning from '../../hooks/useDeprecationWarning';
 
 /**
+ * **WARNING: Will be deprecated in Astro 1.0.0, use `PopoverMenu` instead.**
+ *
  * Popover component used for popover button menus and help hints.
  * Built using Tippy.js [Tippy.js](https://atomiks.github.io/tippyjs/) and uses the
  * available [props from Tippy.js](https://atomiks.github.io/tippyjs/v6/all-props/).
@@ -12,8 +16,11 @@ import Box from '../Box';
 const Popover = forwardRef((props, ref) => {
   const {
     content,
+    trigger,
     ...others
   } = props;
+
+  useDeprecationWarning('`Popover` will be deprecated in Astro-UI 1.0.0, use `PopoverMenu` for menus instead. Or `Tooltip` when it is available.');
 
   return (
     <Tippy
@@ -31,6 +38,7 @@ const Popover = forwardRef((props, ref) => {
           />
         </Box>
       )}
+      {...(trigger && { trigger })}
       {...others}
     />
   );

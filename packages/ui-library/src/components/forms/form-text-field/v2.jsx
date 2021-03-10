@@ -92,7 +92,7 @@ import { deprecatedStatelessProp } from "../../../util/DeprecationUtils";
 *     Explanation text for the field appears below it.
 * @param {string} [errorClassName]
 *     CSS classes to set on the FormTextFieldError component.
-* @param {string} [errorMessage]
+* @param {node} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
 *     CSS classes to apply to the label help hint (bottom, left, etc)
@@ -213,7 +213,7 @@ class Stateless extends React.Component {
         subText: PropTypes.node,
         "data-id": PropTypes.string,
         disabled: PropTypes.bool,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         errorClassName: PropTypes.string,
         flexWidth: PropTypes.bool,
         helpClassName: PropTypes.string,

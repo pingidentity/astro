@@ -3,16 +3,18 @@ import { render, screen } from '@testing-library/react';
 import DropdownField from './DropdownField';
 
 const testId = 'test-dropdown';
-const testValue = 'test';
 const defaultProps = {
   'data-testid': testId,
   controlProps: {
     'data-testid': `${testId}-input`,
   },
-  value: testValue,
+  label: 'testLabel',
 };
 const getComponent = (props = {}) => render((
-  <DropdownField {...defaultProps} {...props} />
+  <DropdownField {...defaultProps} {...props}>
+    <option value="a">A</option>
+    <option value="b">B</option>
+  </DropdownField>
 ));
 
 afterEach(() => {
@@ -20,7 +22,7 @@ afterEach(() => {
 });
 
 test('default dropdownfield', () => {
-  getComponent({ label: 'testLabel' });
+  getComponent();
   const container = screen.getByTestId(testId);
   const input = screen.getByLabelText('testLabel');
   const label = screen.getByText('testLabel');
@@ -32,9 +34,20 @@ test('default dropdownfield', () => {
   expect(label).toBeInTheDocument();
 });
 
-
 test('disabled prop disables dropdown input', () => {
-  getComponent({ isDisabled: true, label: 'testLabel' });
+  getComponent({ isDisabled: true });
   const dropdown = document.querySelector('select');
   expect(dropdown).toBeDisabled();
+});
+
+test('input is not disabled without disabled prop', () => {
+  getComponent();
+  const dropdown = document.querySelector('select');
+  expect(dropdown).not.toBeDisabled();
+});
+
+test('displays helper text when helperText prop is passed', () => {
+  getComponent({ helperText: 'helper text!' });
+  const label = screen.getByText('helper text!');
+  expect(label).toBeInTheDocument();
 });

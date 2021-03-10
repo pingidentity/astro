@@ -86,7 +86,7 @@ export const simplePickerSizes = {
  *     Callback to be triggered when open/closed state changed. Used only with stateless mode. Will receive current
  *     open status value.
  *
- * @param {string} [errorMessage=""]
+ * @param {node} [errorMessage=""]
  *     The message to display if an error occurs.
  * @param {ColorPicker~onError} [onError]
  *     Callback to be triggered when input is an invalid color
@@ -125,7 +125,7 @@ class Stateless extends React.Component {
         onMouseLeave: PropTypes.func,
         open: PropTypes.bool,
         onToggle: PropTypes.func.isRequired,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         internalError: PropTypes.string, // internal use only, leaving out of JSDocs on purpose
         onError: PropTypes.func,
         width: PropTypes.oneOf(InputWidthProptypes),

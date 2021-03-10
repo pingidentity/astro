@@ -100,7 +100,7 @@ const isValid = (value, enforceRange, min, max) => {
  * @param {FormTextField~onUndo} [onUndo]
  *     Callback to be triggred when the 'undo' icon is clicked.
  *
- * @param {string} [errorMessage]
+ * @param {node} [errorMessage]
  *     The message to display if defined when external validation failed.
  * @param {string} [outOfRangeErrorMessage]
  *     When present, the message that displays when the value is out of range of the min/max.
@@ -180,7 +180,7 @@ class Stateless extends Component {
         showUndo: PropTypes.bool,
         onUndo: PropTypes.func,
 
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         errorClassName: PropTypes.string,
         outOfRangeErrorMessage: PropTypes.string,
 

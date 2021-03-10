@@ -1,0 +1,815 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`form elements form success message 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <div
+        class="css-m0o3up"
+      >
+        <div
+          class="css-1azbljw"
+        >
+          test
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`form elements form success title 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <div
+        class="css-m0o3up"
+      >
+        <div
+          aria-level="1"
+          class="css-192x0ed"
+          role="heading"
+        >
+          <div
+            class="css-1xm1pjt"
+          >
+            hi
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields checkbox field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <div
+            class="css-m0o3up"
+          >
+            <label
+              class="is-default css-1r5s3tb"
+            >
+              <div
+                class="css-vurnku"
+              >
+                <input
+                  aria-checked="false"
+                  class="css-xyotvu"
+                  type="checkbox"
+                  value="test"
+                />
+                <svg
+                  aria-hidden="true"
+                  class="is-default css-1bg6idj"
+                  fill="currentcolor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="is-default css-4amxue"
+                  fill="currentcolor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                  />
+                </svg>
+              </div>
+              Label
+            </label>
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields checkboxes field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div>
+          <div
+            class="css-m0o3up"
+          >
+            <div
+              class="css-m0o3up"
+            >
+              <label
+                class="is-default css-1r5s3tb"
+              >
+                <div
+                  class="css-vurnku"
+                >
+                  <input
+                    aria-checked="false"
+                    class="css-xyotvu"
+                    type="checkbox"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-1bg6idj"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                    />
+                  </svg>
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-4amxue"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                    />
+                  </svg>
+                </div>
+                foo
+              </label>
+            </div>
+          </div>
+          <div
+            class="css-m0o3up"
+          >
+            <div
+              class="css-m0o3up"
+            >
+              <label
+                class="is-default css-1r5s3tb"
+              >
+                <div
+                  class="css-vurnku"
+                >
+                  <input
+                    aria-checked="false"
+                    class="css-xyotvu"
+                    type="checkbox"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-1bg6idj"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                    />
+                  </svg>
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-4amxue"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                    />
+                  </svg>
+                </div>
+                bar
+              </label>
+            </div>
+          </div>
+          <div
+            class="css-m0o3up"
+          >
+            <div
+              class="css-m0o3up"
+            >
+              <label
+                class="is-default css-1r5s3tb"
+              >
+                <div
+                  class="css-vurnku"
+                >
+                  <input
+                    aria-checked="false"
+                    class="css-xyotvu"
+                    type="checkbox"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-1bg6idj"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                    />
+                  </svg>
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-4amxue"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                    />
+                  </svg>
+                </div>
+                fuzz
+              </label>
+            </div>
+          </div>
+          <div
+            class="css-m0o3up"
+          >
+            <div
+              class="css-m0o3up"
+            >
+              <label
+                class="is-default css-1r5s3tb"
+              >
+                <div
+                  class="css-vurnku"
+                >
+                  <input
+                    aria-checked="false"
+                    class="css-xyotvu"
+                    type="checkbox"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-1bg6idj"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                    />
+                  </svg>
+                  <svg
+                    aria-hidden="true"
+                    class="is-default css-4amxue"
+                    fill="currentcolor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                    />
+                  </svg>
+                </div>
+                qux
+              </label>
+            </div>
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields password field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <input
+              class="is-default css-1yybwhv"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields select field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <div
+              class="css-4cffwv"
+            >
+              <select
+                class="is-default css-k5yxk"
+              >
+                <option
+                  value="foo"
+                >
+                  foo
+                </option>
+                <option
+                  value="bar"
+                >
+                  bar
+                </option>
+              </select>
+              <svg
+                class="css-6ibwe0"
+                fill="currentcolor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields select field with default 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <div
+              class="css-4cffwv"
+            >
+              <select
+                class="is-default css-k5yxk"
+              >
+                <option
+                  value="foo"
+                >
+                  foo
+                </option>
+                <option
+                  value="bar"
+                >
+                  bar
+                </option>
+              </select>
+              <svg
+                class="css-6ibwe0"
+                fill="currentcolor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field format email 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <input
+              class="is-default css-1yybwhv"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field regular 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <input
+              class="is-default css-1yybwhv"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with custom errors as sentence 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-error css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-error css-1exf7pj"
+          >
+            <input
+              class="is-error css-1yybwhv"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="is-error css-qkmpma"
+            role="status"
+          >
+            Should be string, Blah
+          </div>
+        </div>
+        <button
+          class="is-focused css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with help text 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <input
+              class="is-default css-1yybwhv"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="is-default css-qkmpma"
+            role="status"
+          >
+            help text
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with markdown errors 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Test
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <input
+              class="is-default css-1yybwhv"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with placeholder 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <input
+              class="is-default css-1yybwhv"
+              placeholder="placeholder"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields textarea field 1`] = `
+<DocumentFragment>
+  <div
+    class="css-11y6zog-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="css-m0o3up"
+        >
+          <label
+            class="is-default css-1exrzrz"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1exf7pj"
+          >
+            <textarea
+              class="is-default css-1yybwhv"
+            />
+          </div>
+        </div>
+        <button
+          class=" css-1bd8883"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;

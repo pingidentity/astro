@@ -2,7 +2,7 @@
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
 
-def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def uiPipelineShared = libraryResource 'podTemplates/ui-pipeline-shared.yaml';
 def centralCluster = 'central-us-east-2-k8s'
 
 pipeline {
@@ -22,7 +22,7 @@ pipeline {
             sh "cd ../icons && yarn build"
             sh "yarn run lint"
             sh "yarn run test"
-            sh "npm version prerelease"
+            sh "npm version minor"
           }
         }
       }
@@ -35,7 +35,7 @@ pipeline {
 
             script {
               env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
-              env.GIT_RELEASE_TAG = "astro-${env.RELEASE_VERSION}"
+              env.GIT_RELEASE_TAG = "@pingux/astro@${env.RELEASE_VERSION}"
             }
             echo """
               release version: ${env.RELEASE_VERSION}
@@ -70,7 +70,7 @@ pipeline {
             echo "Building & publishing"
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               sh "yarn build"
-              sh "npm publish --tag beta"
+              sh "npm publish --tag ${env.GIT_RELEASE_TAG}"
             }
           }
         }
@@ -91,6 +91,8 @@ pipeline {
   post {
     success {
        slackSend channel: '#ux-deployments', message: "@here :verynice: Great Success! Astro ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/astro.", color: "#4aba78"
+       slackSend channel: '#ui-announcements', message: "@here Astro ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/astro.", color: "#4aba78"
+       slackSend channel: '#ui-astro', message: "@here Astro ${env.RELEASE_VERSION} has been released ${BUILD_URL}. Demo site is available at https://uilibrary.ping-eng.com/astro.", color: "#4aba78"
     }
     unsuccessful {
        slackSend channel: '#ux-deployments', message: "@here Astro deploy failed! ${BUILD_URL}", color: "#a31300"

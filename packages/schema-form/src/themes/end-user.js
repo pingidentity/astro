@@ -11,6 +11,7 @@ import Heading from '@pingux/end-user/components/Heading';
 import Markdown from '@pingux/end-user/components/Markdown';
 
 import { getDisabledEnumOptions } from '../utils/props';
+import { FIELD_TYPES } from '../utils/constants';
 import Error from '../components/themes/end-user/Error';
 import FieldLabel from '../components/themes/end-user/FieldLabel';
 import SuccessMessage from '../components/themes/end-user/SuccessMessage';
@@ -73,7 +74,6 @@ const getFieldMessageData = (props) => {
 export const toEndUserInputProps = (props) => {
   const {
     autofocus,
-    checked,
     disabled,
     formContext,
     id,
@@ -94,15 +94,33 @@ export const toEndUserInputProps = (props) => {
     rawErrors,
     readonly,
     required,
+    schema,
+    value,
   } = props;
+  const getDefaultValue = () => {
+    if (schema.type === FIELD_TYPES.BOOLEAN) return schema.id || id;
+    if (schema.type === FIELD_TYPES.STRING && _.isObject(value)) return '';
+
+    return value;
+  };
+
   const isStacked = _.get(custom, 'isStacked', true);
   const { fieldMessage, fieldMessageProps } = getFieldMessageData(props);
   const getStatus = (errors) => (errors && errors.length ? 'error' : undefined);
+  /* istanbul ignore next */
+  const onValueChange = (e) => {
+    if (schema?.type === FIELD_TYPES.BOOLEAN) {
+      return onChange(e);
+    }
+
+    return onChange(e.target.value);
+  };
 
   const inputProps = {
-    autofocus,
-    checked,
     ...custom,
+    autofocus,
+    checked: _.isObject(value) ? false : (value || false),
+    defaultValue: getDefaultValue(),
     disabled,
     fieldMessage,
     fieldMessageProps,
@@ -112,7 +130,7 @@ export const toEndUserInputProps = (props) => {
     isStacked,
     label: uiLabel || label,
     onBlur,
-    onChange,
+    onChange: onValueChange,
     onFocus,
     options: getDisabledEnumOptions(enumOptions, enumDisabled),
     placeholder: placeholder || undefined,

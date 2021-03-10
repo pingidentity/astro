@@ -1,5 +1,7 @@
 const path = require('path');
 
+const conf = require('../webpack.config');
+
 module.exports = {
   stories: ['../stories/**/*.stories.@(js|mdx)'],
   addons: [
@@ -24,6 +26,22 @@ module.exports = {
       use: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader'],
       include: path.resolve(__dirname, '../'),
     });
+
+    /**
+     * Remove `style-loader` from the css test in the default
+     * Storybook webpack config as we do not want to dynamically
+     * load theme styles into the <head>
+     */
+    // Find the CSS rule and get its loaders
+    const cssRuleLoaders = config.module.rules
+      .find((rule) => rule.test.toString() === /\.css$/.toString()).use;
+
+    // Get the index of style-loader
+    const styleLoaderIndex = cssRuleLoaders
+      .findIndex((loader) => loader.includes('style-loader'));
+
+    // Remove style-loader from the array
+    cssRuleLoaders.splice(styleLoaderIndex, 1);
 
     // Return the altered config
     return config;

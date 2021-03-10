@@ -8,7 +8,7 @@ const testLabel = 'Test Label';
 const testValue = 'test';
 const defaultProps = {
   'data-testid': testId,
-  children: testLabel,
+  label: testLabel,
   controlProps: {
     'data-testid': `${testId}-input`,
   },

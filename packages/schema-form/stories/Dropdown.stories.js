@@ -6,6 +6,7 @@ export const Dropdown = () => {
     type: 'object',
     properties: {
       dropdownExample: {
+        title: 'Example List',
         type: 'string',
         enum: [
           'Selection 1',
@@ -16,18 +17,9 @@ export const Dropdown = () => {
     },
   };
 
-  const uischema = {
-    dropdownExample: {
-      'ui:options': {
-        label: 'Example Label',
-      },
-    },
-  };
-
   return (
     <Form
       schema={('Schema', schema)}
-      uiSchema={('uiSchema', uischema)}
     />
   );
 };

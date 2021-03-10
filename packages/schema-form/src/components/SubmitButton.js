@@ -12,7 +12,12 @@ const SubmitButton = (props) => {
       type="primary"
       isSubmit
       disabled={formState === FORM_STATE.PENDING}
-      loading={formState === FORM_STATE.PENDING}
+      {
+        ...((formState === FORM_STATE.PENDING && theme === THEMES.END_USER)
+          ? { loading: true }
+          : {}
+        )
+      }
     >
       {submitText}
     </Button>

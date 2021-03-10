@@ -34,3 +34,10 @@ test('text field with label props', () => {
   const label = screen.getByText(testLabel);
   expect(label).toHaveStyleRule('color', 'red');
 });
+
+test('text field with helper text', () => {
+  const helperText = 'helper text';
+  getComponent({ helperText });
+  const helper = screen.getByText(helperText);
+  expect(helper).toBeInTheDocument();
+});

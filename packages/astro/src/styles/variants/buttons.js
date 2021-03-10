@@ -6,6 +6,9 @@ const base = {
   inlineHeight: 30,
   px: 'md',
   outline: 'none',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   ...text.buttonLabel,
 };
 
@@ -141,6 +144,24 @@ export const buttons = {
     },
     '&.is-pressed': {
       ...defaultActive,
+    },
+    '&.is-focused': {
+      ...defaultFocus,
+    },
+  },
+  rocker: {
+    ...base,
+    height: '26px',
+    lineHeight: '26px',
+    fontSize: '14px',
+    borderRadius: '15px',
+    alignSelf: 'center',
+    paddingTop: '0px',
+    paddingBottom: '0px',
+    textTransform: 'uppercase',
+    bg: 'accent.95',
+    '&.is-selected': {
+      color: 'white',
     },
     '&.is-focused': {
       ...defaultFocus,

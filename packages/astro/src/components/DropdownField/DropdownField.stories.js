@@ -1,48 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DropdownField from '.';
 import Box from '../Box/Box';
 
 export default {
-  title: 'DropdownField',
+  title: 'Form/DropdownField',
   component: DropdownField,
 };
 
 export const Default = args => (
   <DropdownField {...args} label="Select one">
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
   </DropdownField>
 );
 
-export const withOptionGroups = args => (
+export const DisabledFirstOption = args => (
+  <DropdownField {...args} label="Select one" hasDisabledFirstOption>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </DropdownField>
+);
+
+export const DefaultValue = args => (
+  <DropdownField {...args} label="Select one" defaultValue="2">
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </DropdownField>
+);
+
+export const Controlled = (args) => {
+  const [selected, setSelected] = useState('3');
+
+  return (
+    <DropdownField
+      {...args}
+      label="Select one"
+      value={selected}
+      onChange={e => setSelected(e.target.value)}
+    >
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </DropdownField>
+  );
+};
+
+export const WithOptionGroups = args => (
   <DropdownField {...args} label="Select one">
     <optgroup label="Cheeses">
-      <option>Brie</option>
-      <option>Gouda</option>
-      <option>Swiss</option>
+      <option value="brie">Brie</option>
+      <option value="gouda">Gouda</option>
+      <option value="swiss">Swiss</option>
     </optgroup>
     <optgroup label="Breads">
-      <option>Sourdough</option>
-      <option>Rye</option>
-      <option>Focaccia</option>
+      <option value="sourdough">Sourdough</option>
+      <option value="rye">Rye</option>
+      <option value="focaccia">Focaccia</option>
     </optgroup>
   </DropdownField>
 );
 
 export const NoneOption = args => (
-  <DropdownField {...args} label="Select one" controlProps={{ hasNoneOption: true }}>
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
+  <DropdownField {...args} label="Select one" hasNoneOption>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </DropdownField>
+);
+
+export const CustomNoneOption = args => (
+  <DropdownField
+    {...args}
+    label="Select one"
+    hasNoneOption
+    hasDisabledFirstOption
+    noneLabel="None"
+  >
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
   </DropdownField>
 );
 
 export const IsDisabled = args => (
   <DropdownField {...args} label="Select one" isDisabled>
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
   </DropdownField>
 );
 
@@ -53,9 +100,9 @@ export const HelperText = args => (
     status="error"
     {...args}
   >
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
   </DropdownField>
 );
 
@@ -66,9 +113,9 @@ export const Transparent = args => (
       label="Select one"
       variant="forms.select.transparent"
     >
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
     </DropdownField>
   </Box>
 );

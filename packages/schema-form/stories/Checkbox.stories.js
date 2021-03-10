@@ -7,15 +7,7 @@ export const Checkbox = () => {
     properties: {
       singleCheckbox: {
         type: 'boolean',
-      },
-    },
-  };
-
-  const uischema = {
-    singleCheckbox: {
-      'ui:widget': 'checkbox',
-      'ui:options': {
-        label: 'Example Label',
+        title: 'Example Label',
       },
     },
   };
@@ -23,7 +15,6 @@ export const Checkbox = () => {
   return (
     <Form
       schema={('Schema', schema)}
-      uiSchema={('uiSchema', uischema)}
     />
   );
 };

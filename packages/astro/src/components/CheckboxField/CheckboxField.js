@@ -3,34 +3,33 @@ import PropTypes from 'prop-types';
 import { useToggleState } from '@react-stately/toggle';
 import { useCheckbox } from '@react-aria/checkbox';
 
+import useField from '../../hooks/useField';
+import statuses from '../../utils/devUtils/constants/statuses';
+import Box from '../Box';
 import Checkbox from '../Checkbox';
-import Field from '../Field';
+import FieldHelperText from '../FieldHelperText';
+import Label from '../Label';
 
 /**
- * Basic checkbox input wrapped in a label.
- * Built on top of the [Checkbox from Rebass Forms](https://rebassjs.org/forms/checkbox) and
- * uses the available [props from Rebass](https://rebassjs.org/props/).
- * Utilizes [React Aria](https://react-spectrum.adobe.com/react-aria/useCheckbox.html) and
- * [React Stately](https://react-spectrum.adobe.com/react-stately/useToggleState.html).
+ * Combines a checkbox, label, and helper text for a complete, form-ready solution.
+ *
+ * Utilizes [useCheckbox](https://react-spectrum.adobe.com/react-aria/useCheckbox.html) from React Aria and
+ * [useToggleState](https://react-spectrum.adobe.com/react-stately/useToggleState.html) from React Stately.
  */
 const CheckboxField = forwardRef((props, ref) => {
   const {
-    className,
-    children,
-    controlProps,
-    isDisabled,
-    labelProps,
-    ...others
-  } = props;
-  const {
-    isDefaultSelected,
+    label,
+    controlProps = {},
     hasAutoFocus,
-  } = controlProps;
+    helperText,
+    isDefaultSelected,
+    status,
+  } = props;
   const checkboxProps = {
-    children,
-    isDisabled,
-    defaultSelected: isDefaultSelected,
-    autoFocus: hasAutoFocus,
+    children: label,
+    autoFocus: hasAutoFocus || controlProps.hasAutoFocus,
+    defaultSelected: isDefaultSelected || controlProps.isDefaultSelected,
+    ...props,
     ...controlProps,
   };
   const state = useToggleState(checkboxProps);
@@ -38,106 +37,98 @@ const CheckboxField = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => checkboxRef.current);
 
-  const { inputProps: raInputProps } = useCheckbox({
-    isDisabled,
-    ...checkboxProps,
-  }, state, checkboxRef);
+  const { inputProps } = useCheckbox(checkboxProps, state, checkboxRef);
+  const {
+    fieldContainerProps,
+    fieldControlProps,
+    fieldLabelProps,
+  } = useField({
+    ...props,
+    controlProps: { ...controlProps, ...inputProps },
+  });
 
   return (
-    <Field
-      ref={checkboxRef}
-      hasWrappedLabel
-      label={children}
-      labelProps={{
-        variant: 'forms.label.checkbox',
-        ...labelProps,
-      }}
-      controlProps={{
-        ...controlProps,
-        ...raInputProps,
-      }}
-      isDisabled={isDisabled}
-      render={renderProps => <Checkbox {...renderProps} />}
-      {...others}
-    />
+    <Box {...fieldContainerProps}>
+      <Label variant="forms.label.checkbox" {...fieldLabelProps}>
+        <Checkbox ref={checkboxRef} {...fieldControlProps} />
+        {label}
+      </Label>
+      {
+        helperText &&
+        <FieldHelperText status={status}>
+          {helperText}
+        </FieldHelperText>
+      }
+    </Box>
   );
 });
 
 CheckboxField.propTypes = {
-  /**
-   * Props object passed directly to the checkbox control. See the [Checkbox](/?path=/docs/checkbox)
-   * component for a complete list of available props.
-  */
-  controlProps: PropTypes.shape({
-    /**
-     * Indeterminism is presentational only. The indeterminate visual representation remains
-     * regardless of user interaction.
-    */
-    isIndeterminate: PropTypes.bool,
-    /** Whether the element should be selected (uncontrolled). */
-    isDefaultSelected: PropTypes.bool,
-    /** Whether the element should be selected (controlled). */
-    isSelected: PropTypes.bool,
-    /** Handler that is called when the element's selection state changes. */
-    onChange: PropTypes.func,
-    /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
-    value: PropTypes.string,
-    /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
-    name: PropTypes.string,
-    /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-    id: PropTypes.string,
-    /** Whether the input is disabled. */
-    isDisabled: PropTypes.bool,
-    /** Whether the input can be selected, but not changed by the user. */
-    isReadOnly: PropTypes.bool,
-    /** Whether user input is required on the input before form submission. */
-    isRequired: PropTypes.bool,
-    /** Whether the element should receive focus on render. */
-    hasAutoFocus: PropTypes.bool,
-    /** Handler that is called when the element receives focus. */
-    onFocus: PropTypes.func,
-    /** Handler that is called when the element loses focus. */
-    onBlur: PropTypes.func,
-    /** Handler that is called when the element's focus status changes. */
-    onFocusChange: PropTypes.func,
-    /** Handler that is called when a key is pressed. */
-    onKeyDown: PropTypes.func,
-    /** Handler that is called when a key is released. */
-    onKeyUp: PropTypes.func,
-    /**
-     * Identifies the element (or elements) whose contents or presence are controlled by the current
-     * element.
-    */
-    'aria-controls': PropTypes.string,
-    /** Defines a string value that labels the current element. */
-    'aria-label': PropTypes.string,
-    /** Identifies the element (or elements) that labels the current element. */
-    'aria-labelledby': PropTypes.string,
-    /** Identifies the element (or elements) that describes the object. */
-    'aria-describedby': PropTypes.string,
-    /**
-     * Identifies the element (or elements) that provide a detailed, extended description for the
-     * object.
-    */
-    'aria-details': PropTypes.string,
-    /** Identifies the element that provides an error message for the object. */
-    'aria-errormessage': PropTypes.string,
-  }),
-  /** Props object passed directly to the checkbox label. */
-  labelProps: PropTypes.shape({
-    variant: PropTypes.string,
-  }),
-  /** The label for the element. */
-  label: PropTypes.node,
+  /** Whether the element should receive focus on render. */
+  hasAutoFocus: PropTypes.bool,
+  /** Text rendered below the input. */
+  helperText: PropTypes.node,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
-  /** Whether the control and label are disabled. */
+  /** Whether the element should be selected (uncontrolled). */
+  isDefaultSelected: PropTypes.bool,
+  /** Whether the input is disabled. */
   isDisabled: PropTypes.bool,
-};
-
-CheckboxField.defaultProps = {
-  controlProps: {},
-  labelProps: {},
+  /**
+   * Indeterminism is presentational only. The indeterminate visual representation remains
+   * regardless of user interaction.
+  */
+  isIndeterminate: PropTypes.bool,
+  /** Whether the input can be selected, but not changed by the user. */
+  isReadOnly: PropTypes.bool,
+  /** Whether user input is required on the input before form submission. */
+  isRequired: PropTypes.bool,
+  /** Whether the element should be selected (controlled). */
+  isSelected: PropTypes.bool,
+  /** The rendered label for the field. */
+  label: PropTypes.node,
+  /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
+  name: PropTypes.string,
+  /** Determines the textarea status indicator and helper text styling. */
+  status: PropTypes.oneOf(Object.values(statuses)),
+  /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
+  value: PropTypes.string,
+  /** Handler that is called when the element's selection state changes. */
+  onChange: PropTypes.func,
+  /** Handler that is called when the element receives focus. */
+  onFocus: PropTypes.func,
+  /** Handler that is called when the element loses focus. */
+  onBlur: PropTypes.func,
+  /** Handler that is called when the element's focus status changes. */
+  onFocusChange: PropTypes.func,
+  /** Handler that is called when a key is pressed. */
+  onKeyDown: PropTypes.func,
+  /** Handler that is called when a key is released. */
+  onKeyUp: PropTypes.func,
+  /**
+   * Identifies the element (or elements) whose contents or presence are controlled by the current
+   * element.
+  */
+  'aria-controls': PropTypes.string,
+  /** Defines a string value that labels the current element. */
+  'aria-label': PropTypes.string,
+  /** Identifies the element (or elements) that labels the current element. */
+  'aria-labelledby': PropTypes.string,
+  /** Identifies the element (or elements) that describes the object. */
+  'aria-describedby': PropTypes.string,
+  /**
+   * Identifies the element (or elements) that provide a detailed, extended description for the
+   * object.
+  */
+  'aria-details': PropTypes.string,
+  /** Identifies the element that provides an error message for the object. */
+  'aria-errormessage': PropTypes.string,
+  /** Props object that is spread directly into the root (top-level) element. */
+  containerProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the input element. */
+  controlProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the label element. */
+  labelProps: PropTypes.shape({}),
 };
 
 CheckboxField.displayName = 'CheckboxField';

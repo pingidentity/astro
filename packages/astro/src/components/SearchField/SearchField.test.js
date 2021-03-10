@@ -84,25 +84,19 @@ test('search autoFocus', () => {
 test('search focus events', () => {
   const onBlur = jest.fn();
   const onFocus = jest.fn();
-  const onFocusChange = jest.fn();
-  getComponent({ onBlur, onFocus, onFocusChange });
+  getComponent({ onBlur, onFocus });
   const search = screen.getByLabelText(testLabel);
   expect(search).not.toHaveFocus();
   expect(onBlur).not.toHaveBeenCalled();
   expect(onFocus).not.toHaveBeenCalled();
-  expect(onFocusChange).not.toHaveBeenCalled();
 
   userEvent.tab();
   expect(search).toHaveFocus();
   expect(onFocus).toHaveBeenCalled();
-  // FIXME: Not being triggered -- bug in React Aria?
-  // expect(onFocusChange).toHaveBeenCalledTimes(1);
 
   userEvent.tab();
   expect(search).not.toHaveFocus();
   expect(onBlur).toHaveBeenCalled();
-  // FIXME: Not being triggered -- bug in React Aria?
-  // expect(onFocusChange).toHaveBeenCalledTimes(2);
 });
 
 test('search keyboard events', () => {

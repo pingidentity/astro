@@ -2,9 +2,9 @@
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
 
-def ortCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/ort-cdn-deploy.yaml';
-def prodCdnDeploy = libraryResource 'com/icecream/central-cluster-agent-definitions/prod-cdn-deploy.yaml';
-def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def ortCdnDeploy = libraryResource 'podTemplates/ort-cdn-deploy.yaml';
+def prodCdnDeploy = libraryResource 'podTemplates/prod-cdn-deploy.yaml';
+def uiPipelineShared = libraryResource 'podTemplates/ui-pipeline-shared.yaml';
 def centralCluster = 'central-us-east-2-k8s'
 
 pipeline {
@@ -164,7 +164,7 @@ pipeline {
   post {
     success {
         slackSend channel: '#ux-deployments', message: "@here :verynice: Great Success! UI Library ${env.RELEASE_VERSION} has been released. ${BUILD_URL} ", color: "#4aba78"
-        slackSend channel: '#ui-coalition', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+        slackSend channel: '#ui-library', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
         slackSend channel: '#ui-announcements', message: "@here UI Library ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
     }
     unsuccessful {

@@ -5,7 +5,7 @@ import { v4 as v4uuid } from 'uuid';
 import { css } from '@emotion/core';
 import JSONSchemaV4 from 'ajv/lib/refs/json-schema-draft-04.json';
 import Form from '@rjsf/core';
-
+import { PageWrapper } from '@pingux/astro';
 import useStatefulForm from '../hooks/useStatefulForm';
 import useThemedStyles from '../hooks/useThemedStyles';
 import { THEMES } from '../themes/utils';
@@ -21,7 +21,23 @@ import SuccessMessage from './SuccessMessage';
 import styles from '../styles';
 
 const FormWrapper = (props) => {
-  const { themeStyles, children } = props; // eslint-disable-line
+  const { themeStyles, children, theme } = props; // eslint-disable-line
+
+  if (theme === THEMES.ASTRO) {
+    return (
+      <PageWrapper>
+        <div
+          css={css`
+            ${themeStyles}
+            ${styles}
+          `}
+        >
+          {children}
+        </div>
+      </PageWrapper>
+    );
+  }
+
   return (
     <div
       css={css`
@@ -44,6 +60,7 @@ const SchemaForm = (props) => {
     submitText,
     theme,
     uiSchema,
+    widgets: propWidgets,
   } = props;
   const {
     statefulProps = {
@@ -65,7 +82,7 @@ const SchemaForm = (props) => {
 
   if (formState === FORM_STATE.SUCCESS) {
     return (
-      <FormWrapper themeStyles={themeStyles}>
+      <FormWrapper themeStyles={themeStyles} theme={theme}>
         <SuccessMessage
           theme={theme}
           formSuccessMessage={formSuccessMessage}
@@ -76,7 +93,7 @@ const SchemaForm = (props) => {
   }
 
   return (
-    <FormWrapper themeStyles={themeStyles}>
+    <FormWrapper themeStyles={themeStyles} theme={theme}>
       <Errors
         errors={formLevelErrors}
         hasMarkdown={_.get(uiSchema, '_form["ui:options"].hasMarkdownErrors', false)}
@@ -90,12 +107,12 @@ const SchemaForm = (props) => {
         formContext={{ formState, sitekey, theme }}
         noHtml5Validate
         showErrorList={false}
-        widgets={widgets}
         FieldTemplate={FieldTemplate}
         ObjectFieldTemplate={ObjectFieldTemplate}
         id={`${uuid}_form`}
         idPrefix={uuid}
         {...props}
+        widgets={{ ...widgets, ...propWidgets }}
         {...statefulProps}
       >
         {
@@ -180,6 +197,12 @@ SchemaForm.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEMES)),
   /** Customization options for the look and feel of the form. */
   uiSchema: PropTypes.shape({}),
+  /**
+   * Mapping of widget names (key) and rendered components (value) that
+   * gets merged with the themed widgets. Any options passed to this prop
+   * have the potential to override existing themed widgets.
+   */
+  widgets: PropTypes.shape({}),
 };
 
 SchemaForm.defaultProps = {
@@ -201,6 +224,7 @@ SchemaForm.defaultProps = {
   submitText: 'Submit',
   theme: THEMES.END_USER,
   uiSchema: {},
+  widgets: undefined,
 };
 
 export default SchemaForm;

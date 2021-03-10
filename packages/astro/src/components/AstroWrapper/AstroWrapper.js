@@ -34,18 +34,59 @@ export const GlobalStyles = () => (
   />
 );
 
-/** The main wrapper for the Astro application.
- *  It provides the standard background, some global styles, and the Astro theme.
+/**
+ * The main wrapper for the Astro application.
+ * It provides the standard background, some global styles, and the Astro theme.
  */
-const AstroWrapper = ({ children, ...props }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Box bg="background" height="100%" css={css`overflow: hidden;`} {...props}>
-        {children}
-      </Box>
-    </ThemeProvider>
-  );
-};
+const AstroWrapper = ({ children, ...props }) => (
+  <ThemeProvider theme={theme}>
+    <GlobalStyles />
+    <Box bg="background" height="100%" {...props}>
+      {children}
+    </Box>
+  </ThemeProvider>
+);
 
+/**
+ * Wrapper for the Astro application w/o global styles.
+ * It provides the standard background and the Astro theme.
+ */
+export const PageWrapper = ({ children, ...props }) => (
+  <ThemeProvider theme={theme}>
+    <Global
+      styles={
+        css`
+          @import url("https://use.typekit.net/icz8cni.css");
+
+          [data-tippy-root] {
+            max-width: calc(100vw - 10px);
+          }
+        `
+      }
+    />
+    <Box
+      css={
+        css`
+          ${emotionNormalize}
+          background: white;
+
+          * {
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+
+            .is-disabled {
+              opacity: 0.5;
+              pointer-events: none;
+            }
+          }
+        `
+      }
+      {...props}
+    >
+      {children}
+    </Box>
+  </ThemeProvider>
+);
+
+export { ThemeProvider };
 export default AstroWrapper;

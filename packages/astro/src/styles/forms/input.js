@@ -3,12 +3,17 @@ import statuses from '../../utils/devUtils/constants/statuses';
 
 // Styles for default input and variants go here.
 
+const activeFloatLabel = {
+  pt: 'md',
+  pb: 'xs',
+};
+
 // Default input styling
 export const input = {
   ...text.inputValue,
   appearance: 'none',
   boxSizing: 'border-box',
-  lineHeight: '1em',
+  lineHeight: '1.25em',
   textOverflow: 'ellipsis',
   bg: 'white',
   borderWidth: 1,
@@ -22,6 +27,9 @@ export const input = {
   '&.is-focused': {
     borderColor: 'accent.80',
     boxShadow: 'focus',
+  },
+  '.is-float-label-active &': {
+    ...activeFloatLabel,
   },
   '&::placeholder': text.placeholder,
   '&::-ms-expand': {
@@ -39,6 +47,12 @@ input.large = {
 // Used to give a blue left border to inputs
 input.container = {
   position: 'relative',
+  '> input': {
+    borderLeftWidth: 0,
+  },
+  '> button': {
+    borderLeftWidth: 0,
+  },
   '&:after': {
     borderRadius: 5,
     borderTopRightRadius: 0,

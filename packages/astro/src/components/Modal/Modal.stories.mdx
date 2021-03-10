@@ -1,0 +1,37 @@
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
+import Modal from './Modal';
+import * as stories from './Modal.stories.js';
+
+<Meta title="Modal" component={Modal} />
+
+# Modal
+
+An overlay dialog for presenting important content that eclipses the rest of the application on screen.
+
+## Overview
+
+Astro-UI's `Modal` component is built with several hooks from React Aria. See the [useDialog](https://react-spectrum.adobe.com/react-aria/useDialog.html) documentation for more info.
+
+## Usage
+
+The `useModalState` hook from this library is a helper utility to enable easy state management that
+the `Modal` component requires. We encourage developers to use these in tandem for supportability
+reasons.
+
+## Examples
+
+<Canvas>
+  <Story story={stories.Default} />
+</Canvas>
+
+<Canvas>
+  <Story story={stories.DarkVariant} />
+</Canvas>
+
+## Props
+
+<ArgsTable of={Modal} />
+
+## Notes
+
+* Even if the `isDismissable` prop is set to `false` or not provided, the `Modal` component can still be close by pressing the `Escape` key.

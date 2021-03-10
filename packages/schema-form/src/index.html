@@ -11,6 +11,9 @@
         "title": "Example Title",
         "type": "object",
         "properties": {
+          "password": {
+            "type": "string"
+          },
           "additionalInformation": {
             "type": "string"
           },
@@ -79,6 +82,7 @@
 
       var uiSchema = {
         "ui:order": [
+          "password",
           "iAmAn",
           "requestType",
           "interacted",
@@ -94,6 +98,17 @@
         "_form": {
           "ui:options": {
             "hasMarkdownErrors": true,
+          },
+        },
+        "password": {
+          "ui:widget": "passwordWithRequirements",
+          "ui:options": {
+            "requirementsTitle": "Minimum Password Requirements",
+            "requirementsData": [
+              { "name": "requirement A", "status": "yes" },
+              { "name": "requirement B", "status": "no" },
+              { "name": "requirement C", "status": "error" }
+            ]
           },
         },
         "iAmAn": {

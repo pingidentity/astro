@@ -44,7 +44,7 @@ module.exports = class extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        errorMessage: PropTypes.string,
+        errorMessage: PropTypes.node,
         labelText: PropTypes.string,
         label: PropTypes.string,
         labelHelpText: PropTypes.string,

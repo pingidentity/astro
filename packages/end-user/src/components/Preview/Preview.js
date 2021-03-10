@@ -38,11 +38,21 @@ export const applyStyles = (colors, bgImg) => {
             .card {
                 background: ${colors.card};
             }
+
+            .branding-template-footer-container {
+                background: ${colors.card};
+            }
         ` : ''}
 
         ${colors.headingText ? `
             .branding-template-heading {
                 color: ${colors.headingText};
+            }
+        ` : ''}
+
+        ${colors.headerBackground ? `
+            .branding-template-logo-container {
+                background: ${colors.headerBackground}
             }
         ` : ''}
 
@@ -147,6 +157,8 @@ export class Frame extends React.Component {
     withSignature = callback => () => callback(this.getEventSignature());
 
     paintFrame = (callback) => {
+        // If not present for this render, skip it.
+        if (!this.reactContainer) return;
         ReactDOM.render(
             this.props.children,
             this.reactContainer,

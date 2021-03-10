@@ -35,3 +35,28 @@ test('dropdown has focus styles', () => {
   userEvent.tab();
   expect(dropdown).toHaveStyle({ boxShadow: theme.shadows.focus });
 });
+
+test('default option is first one', () => {
+  getComponent();
+  const dropdown = screen.getByTestId(testId);
+  const firstOption = dropdown.querySelector('option');
+  expect(firstOption.value).toEqual('');
+  expect(firstOption).toHaveAttribute('selected', '');
+  expect(firstOption).not.toBeDisabled();
+});
+
+test('default option is disabled when hasDisabledFirstOption is passed in', () => {
+  getComponent({ hasDisabledFirstOption: true });
+  const dropdown = screen.getByTestId(testId);
+  const firstOption = dropdown.querySelector('option');
+  expect(firstOption.value).toEqual('');
+  expect(firstOption).toHaveAttribute('selected', '');
+  expect(firstOption).toBeDisabled();
+});
+
+test('default option is not first one when custom defaultValue is passed in', () => {
+  getComponent({ defaultValue: '1' });
+  const dropdown = screen.getByTestId(testId);
+  const firstOption = dropdown.querySelector('option');
+  expect(firstOption).not.toHaveAttribute('selected', '');
+});

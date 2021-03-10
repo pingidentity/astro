@@ -12,7 +12,7 @@
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
 
-def uiPipelineShared = libraryResource 'com/icecream/central-cluster-agent-definitions/ui-pipeline-shared.yaml';
+def uiPipelineShared = libraryResource 'podTemplates/ui-pipeline-shared.yaml';
 def centralCluster = 'central-us-east-2-k8s'
 
 pipeline {
