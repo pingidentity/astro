@@ -19,6 +19,13 @@ export const FloatLabel = () => (
   />
 );
 
+export const LeftLabel = () => (
+  <TextAreaField
+    label="Example label"
+    labelMode="left"
+  />
+);
+
 export const Controlled = () => {
   const [value, setValue] = useState();
 
