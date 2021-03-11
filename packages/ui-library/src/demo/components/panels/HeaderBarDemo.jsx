@@ -5,6 +5,7 @@ import HR from "ui-library/lib/components/general/HR";
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 import pingCentralDark from "../../images/PingCentral.svg";
 import { AboutModal, AboutLogo, AboutVersion } from "ui-library/lib/components/general/About";
+import pingAccessLogo from "../../images/PingAccess-White.svg";
 
 const { BODY } = textTypes;
 
@@ -222,7 +223,15 @@ class HeaderBarDemo extends React.Component {
                     siteLogo="pingaccess"
                     marketOptions={markets}
                     marketSelected="customers"
-
+                    userMenu={userMenuItems}
+                />
+                <HR />
+                <p>With a custom logo passed in via props</p>
+                <HeaderBar
+                    inline={true}
+                    siteLogo={pingAccessLogo}
+                    marketOptions={markets}
+                    marketSelected="customers"
                     userMenu={userMenuItems}
                 />
                 <HR />

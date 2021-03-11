@@ -75,6 +75,10 @@ $topnav-bg: $color-neutral-10;
     max-width: 150px;
 }
 
+.header-bar__site-logo {
+    height: $topnav-height - 25px;
+}
+
 .header-bar__pingone-logo {
     fill: $color-white;
 }
