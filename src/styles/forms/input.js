@@ -44,6 +44,15 @@ input.large = {
   height: '4em',
 };
 
+input.small = {
+  ...input,
+  height: '28px',
+  pb: '2px,',
+  pt: '2px',
+  pl: 'sm',
+  pr: 'sm',
+};
+
 input.wrapper = {
   '&.is-left-label': {
     flexDirection: 'row',
