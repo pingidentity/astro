@@ -23,7 +23,7 @@ const TextField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => inputRef.current);
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box {...fieldContainerProps} variant="forms.input.wrapper">
       <Label {...fieldLabelProps} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <Input ref={inputRef} {...fieldControlProps} />
