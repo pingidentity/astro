@@ -115,6 +115,18 @@ test('should return isFloatLabelActive class for container', () => {
   expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
 });
 
+test('should return isLeftLabel class for container', () => {
+  const { result, rerender } = renderHook(initialProps => useField(initialProps), {
+    initialProps: defaultProps,
+  });
+  // Does not have the class if the label mode is not set to left
+  expect(result.current.fieldContainerProps.className).not.toContain('is-left-label');
+
+  // Has the class if the value is valid and label mode is left
+  rerender({ ...defaultProps, labelMode: labelModes.LEFT });
+  expect(result.current.fieldContainerProps.className).toContain('is-left-label');
+});
+
 test('should return hasValue class for container when onChange updates internal state', () => {
   const onChange = jest.fn();
   let numCalls = 0;

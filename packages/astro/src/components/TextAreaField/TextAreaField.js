@@ -24,7 +24,7 @@ const TextAreaField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => textAreaRef.current);
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box {...fieldContainerProps} variant="forms.input.wrapper">
       <Label {...fieldLabelProps} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} />
