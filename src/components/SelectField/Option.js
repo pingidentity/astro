@@ -13,6 +13,7 @@ const Option = forwardRef((props, ref) => {
   const {
     item,
     state,
+    hasVirtualFocus,
     ...others
   } = props;
   const {
@@ -38,6 +39,8 @@ const Option = forwardRef((props, ref) => {
       isSelected,
       shouldSelectOnPressUp: true,
       shouldFocusOnHover: true,
+      shouldUseVirtualFocus: hasVirtualFocus,
+      ...others,
     },
     state,
     optionRef,
@@ -49,7 +52,7 @@ const Option = forwardRef((props, ref) => {
   const { focusProps } = useFocus({ onFocusChange: setFocused });
   const { classNames } = useStatusClasses(null, {
     isDisabled,
-    isFocused,
+    isFocused: isFocused || state?.selectionManager?.focusedKey === item.key,
     isSelected,
   });
 
@@ -70,6 +73,7 @@ const Option = forwardRef((props, ref) => {
 });
 
 Option.propTypes = {
+  hasVirtualFocus: PropTypes.bool,
   item: PropTypes.shape({
     key: PropTypes.string,
     props: PropTypes.shape({}),
@@ -78,6 +82,7 @@ Option.propTypes = {
   state: PropTypes.shape({
     disabledKeys: PropTypes.instanceOf(Set),
     selectionManager: PropTypes.shape({
+      focusedKey: PropTypes.string,
       isSelected: PropTypes.func,
     }),
   }),
