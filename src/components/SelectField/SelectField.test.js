@@ -179,3 +179,11 @@ test('clicking the visually hidden dismiss buttons close the listbox popup', () 
   userEvent.click(document.querySelectorAll('button[aria-label="Dismiss"]')[1]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
+
+test('clicking outside of the listbox popup closes it', () => {
+  getComponent({ isDefaultOpen: true });
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+
+  userEvent.click(global.document.body);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+});
