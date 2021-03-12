@@ -23,6 +23,8 @@ export * from './components/CheckboxField';
 export { default as Chip } from './components/Chip';
 export * from './components/Chip';
 
+export { default as ComboBoxField } from './components/ComboBoxField';
+
 export { default as Dropdown } from './components/Dropdown';
 export * from './components/Dropdown';
 
@@ -53,7 +55,6 @@ export * from './components/List';
 export { default as ListItem } from './components/ListItem';
 export * from './components/ListItem';
 
-
 export { default as Loader } from './components/Loader';
 export * from './components/Loader';
 
@@ -61,7 +62,6 @@ export { default as Menu } from './components/Menu';
 
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
-
 
 export { default as PageHeader } from './components/PageHeader';
 export * from './components/PageHeader';
