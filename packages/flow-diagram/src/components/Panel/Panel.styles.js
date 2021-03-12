@@ -3,7 +3,6 @@ export const panel = {
     flex: 'auto',
     justifyContent: 'flex-start',
     marginRight: 25,
-    overflowY: 'auto',
     padding: 0,
 };
 
@@ -13,4 +12,8 @@ export const panelTop = {
     justifyContent: 'space-between',
     padding: '10px 15px 10px 25px',
     width: '100%',
+};
+
+export const panelBody = {
+    overflowY: 'auto',
 };
