@@ -15,7 +15,7 @@ export const getIfLengthGreater = (ifTrue, ifFalse, target) => (s) => {
 export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part) => {
     if (part.isSelected || part.data.isSelected) {
         return selectedColor;
-    } else if (part.lb.errorMessage || part.data.errorMessage) {
+    } else if (part.data.errorMessage) {
         return errorColor;
     }
     return defaultColor;
@@ -58,7 +58,7 @@ export const dragLeave = (selectedColor, errorColor, defaultColor) => (e, obj) =
     const node = obj.part;
     if (node.isSelected || node.data.isSelected) {
         node.findObject('borderRectangle').stroke = selectedColor;
-    } else if (node.lb.errorMessage || node.data.errorMessage) {
+    } else if (node.data.errorMessage) {
         node.findObject('borderRectangle').stroke = errorColor;
     } else {
         node.findObject('borderRectangle').stroke = defaultColor;
