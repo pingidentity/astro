@@ -37,25 +37,12 @@ describe('Step Template', () => {
     });
     test('getBorderColor returns correct error value', () => {
         const errorData = {
-            lb: {
-                errorMessage: '',
-            },
             data: {
                 isSelected: false,
                 errorMessage: 'error',
-            },
-        };
-        const errorLb = {
-            lb: {
-                errorMessage: 'error',
-            },
-            data: {
-                isSelected: false,
-                errorMessage: '',
             },
         };
         expect(getBorderColor('blue', 'red', 'transparent')(errorData)).toBe('red');
-        expect(getBorderColor('blue', 'red', 'transparent')(errorLb)).toBe('red');
     });
     test('getBorderColor returns correct default value', () => {
         const none = {

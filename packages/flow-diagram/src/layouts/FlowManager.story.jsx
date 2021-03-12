@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
-import { Box, Button, Image, Text, TextField } from '@pingux/astro';
+import { Box, Button, Image, Separator, Text, TextField } from '@pingux/astro';
 import { mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
 import Icon from '@mdi/react';
 import { v4 as uuidV4 } from 'uuid';
@@ -426,10 +426,15 @@ const Demo = () => {
                         <ConfigPanel
                             onClose={onPanelClose}
                             topPanel={
-                                <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
-                                    <Box isRow>
-                                        <Image src={selectedNode.getIconSrc(selectedNode.color)} />
-                                        <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
+                                <Box>
+                                    <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
+                                        <Box isRow>
+                                            <Image src={selectedNode.getIconSrc(selectedNode.color)} />
+                                            <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
+                                        </Box>
+                                    </Box>
+                                    <Box alignItems="center">
+                                        <Separator width="90%" mb={15} />
                                     </Box>
                                 </Box>
                             }
@@ -488,10 +493,11 @@ const Demo = () => {
                     <PanelContainer>
                         {!isScrolling ? (
                             <Connections
-                                links={[{ from: 'output4', to: 'input1' }, { from: 'output6', to: 'input4' }]}
+                                links={[{ from: 'output4', to: 'input1' }, { from: 'output6', to: 'input4' }, { from: 'output10', to: 'input5' }]}
+                                panels={['outputsPanel', 'inputsPanel']}
                             />
                         ) : null}
-                        <Panel title="User login" subtitle="Outputs" onScroll={() => onScroll()}>
+                        <Panel title="User login" subtitle="Outputs" id="outputsPanel" onScroll={() => onScroll()}>
                             <Button variant="inline" mb={10} id="output1">
                                 Here is the first output
                             </Button>
@@ -510,26 +516,26 @@ const Demo = () => {
                             <Button variant="inline" mb={10} id="output6">
                                 Output 6
                             </Button>
-                            <Button variant="inline" mb={10} id="output6">
-                                Output 6
+                            <Button variant="inline" mb={10} id="output7">
+                                Output 7
                             </Button>
-                            <Button variant="inline" mb={10} id="output6">
-                                Output 6
+                            <Button variant="inline" mb={10} id="output8">
+                                Output 8
                             </Button>
-                            <Button variant="inline" mb={10} id="output6">
-                                Output 6
+                            <Button variant="inline" mb={10} id="output9">
+                                Output 9
                             </Button>
-                            <Button variant="inline" mb={10} id="output6">
-                                Output 6
+                            <Button variant="inline" mb={10} id="output10">
+                                Output 10
                             </Button>
-                            <Button variant="inline" mb={10} id="output6">
-                                Output 6
+                            <Button variant="inline" mb={10} id="output11">
+                                Output 11
                             </Button>
-                            <Button variant="inline" mb={10} id="output6">
-                                Output 6
+                            <Button variant="inline" mb={10} id="output12">
+                                Output 12
                             </Button>
                         </Panel>
-                        <Panel title="Execute flow" subtitle="Inputs" onScroll={() => onScroll()}>
+                        <Panel title="Execute flow" subtitle="Inputs" id="inputsPanel" onScroll={() => onScroll()}>
                             <TextField label="Input 1" width="95%" mb={10} id="input1" />
                             <Button variant="inline" mb={10} id="input2">
                                 Input 2

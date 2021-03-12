@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Card, Text } from '@pingux/astro';
 import { mdiArrowCollapseLeft } from '@mdi/js';
 import Icon from '@mdi/react';
-import { panel, panelTop } from './Panel.styles';
+import { panel, panelBody, panelTop } from './Panel.styles';
 
 export default function Panel({ children, onCollapse, title, subtitle, styles, ...others }) {
     return (
@@ -20,7 +20,7 @@ export default function Panel({ children, onCollapse, title, subtitle, styles, .
                     onClick={onCollapse}
                 />
             </Box>
-            <Box p={25} w="100%">
+            <Box sx={panelBody} p={25} w="100%">
                 {children}
             </Box>
         </Card>
