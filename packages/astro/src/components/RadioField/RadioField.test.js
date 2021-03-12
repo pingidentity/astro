@@ -14,8 +14,11 @@ const defaultProps = {
   },
   value: testValue,
 };
-const getComponent = (props = {}, value = {}) => render((
-  <RadioContext.Provider value={value}>
+const defaultState = {
+  setLastFocusedValue: () => {},
+};
+const getComponent = (props = {}, state = defaultState) => render((
+  <RadioContext.Provider value={state}>
     <RadioField {...defaultProps} {...props} />
   </RadioContext.Provider>
 ));

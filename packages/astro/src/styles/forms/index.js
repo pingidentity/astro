@@ -1,4 +1,5 @@
 import * as checkbox from './checkbox';
+import comboBox from './comboBox';
 import * as input from './input';
 import * as label from './label';
 import * as radio from './radio';
@@ -11,6 +12,7 @@ import * as textarea from './textarea';
 // Variants should be defined in the approprate file.
 export default {
   ...checkbox,
+  comboBox,
   ...input,
   ...label,
   ...radio,

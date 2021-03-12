@@ -18,12 +18,15 @@ import { modes as labelModes } from '../../components/Label/constants';
 const useField = (props = {}) => {
   const {
     autocomplete,
+    autoComplete,
+    autoCorrect,
     children,
     className,
-    containerProps,
-    controlProps,
+    containerProps = {},
+    controlProps = {},
     defaultText,
     defaultValue,
+    direction,
     disabledKeys,
     hasAutoFocus,
     helperText,
@@ -35,7 +38,7 @@ const useField = (props = {}) => {
     isSelected,
     label,
     labelMode,
-    labelProps,
+    labelProps = {},
     name,
     onBlur,
     onChange = noop,
@@ -47,6 +50,7 @@ const useField = (props = {}) => {
     placeholder,
     role,
     selectedKey,
+    spellCheck,
     status = statuses.DEFAULT,
     statusClasses,
     type,
@@ -105,6 +109,7 @@ const useField = (props = {}) => {
     isFloatLabelActive,
   });
   const nonAriaOthers = { ...omit(others, Object.keys(ariaProps)) };
+
   const fieldContainerProps = {
     ...nonAriaOthers,
     ...mergeProps(containerProps, focusWithinProps),
@@ -116,7 +121,8 @@ const useField = (props = {}) => {
   };
 
   const fieldControlProps = {
-    autocomplete,
+    autocomplete: autocomplete || autoComplete,
+    autoCorrect,
     autoFocus: hasAutoFocus,
     className: classNames,
     defaultSelected: isDefaultSelected,
@@ -129,12 +135,12 @@ const useField = (props = {}) => {
     readOnly: isReadOnly,
     required: isRequired,
     role,
+    spellCheck,
     type,
     value,
     ...ariaProps,
-    ...controlProps,
     ...raFieldProps,
-    ...mergeProps({ onBlur, onFocus }, focusProps),
+    ...mergeProps({ onBlur, onFocus }, controlProps, focusProps),
   };
 
   const fieldLabelProps = {

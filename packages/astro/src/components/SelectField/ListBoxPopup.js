@@ -7,10 +7,31 @@ import { useOverlay, DismissButton } from '@react-aria/overlays';
 
 import Option from './Option';
 import Box from '../Box';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
 const ListBoxPopup = forwardRef((props, ref) => {
   const {
+    defaultSelectedKeys,
+    disabledKeys,
+    hasAutoFocus,
+    hasFocusWrap,
+    hasNoEmptySelection,
+    hasVirtualFocus,
+    id,
+    isLoading,
+    isVirtualized,
+    items,
+    keyboardDelegate,
+    label,
+    onLoadMore,
+    onSelectionChange,
+    selectedKeys,
+    selectionMode,
     state,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledby,
+    'aria-describedby': ariaDescribedby,
+    'aria-details': ariaDetails,
     ...others
   } = props;
   const {
@@ -19,20 +40,36 @@ const ListBoxPopup = forwardRef((props, ref) => {
     focusStrategy,
     isOpen,
   } = state;
+  // Object matching React Aria API with all options
+  const listBoxOptions = {
+    autoFocus: hasAutoFocus || focusStrategy,
+    defaultSelectedKeys,
+    disabledKeys,
+    disallowEmptySelection: hasNoEmptySelection,
+    id,
+    isLoading,
+    isVirtualized,
+    items,
+    keyboardDelegate,
+    label,
+    onLoadMore,
+    onSelectionChange,
+    selectedKeys,
+    selectionMode,
+    shouldFocusWrap: hasFocusWrap,
+    shouldUseVirtualFocus: hasVirtualFocus,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledby,
+    'aria-describedby': ariaDescribedby,
+    'aria-details': ariaDetails,
+  };
+
   const listBoxRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => listBoxRef.current);
 
   // Get props for the listbox
-  const { listBoxProps } = useListBox(
-    {
-      autoFocus: focusStrategy || true,
-      disallowEmptySelection: true,
-      ...others,
-    },
-    state,
-    listBoxRef,
-  );
+  const { listBoxProps } = useListBox(listBoxOptions, state, listBoxRef);
 
   // Handle events that should cause the popup to close,
   // e.g. blur, clicking outside, or pressing the escape key.
@@ -62,7 +99,12 @@ const ListBoxPopup = forwardRef((props, ref) => {
           {...mergeProps(listBoxProps, others)}
         >
           {Array.from(collection).map(item => (
-            <Option key={item.key} item={item} state={state} />
+            <Option
+              key={item.key}
+              item={item}
+              state={state}
+              hasVirtualFocus={hasVirtualFocus}
+            />
           ))}
         </Box>
         <DismissButton onDismiss={() => close()} />
@@ -72,6 +114,26 @@ const ListBoxPopup = forwardRef((props, ref) => {
 });
 
 ListBoxPopup.propTypes = {
+  defaultSelectedKeys: isIterableProp,
+  disabledKeys: isIterableProp,
+  hasAutoFocus: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  hasFocusWrap: PropTypes.bool,
+  hasNoEmptySelection: PropTypes.bool,
+  hasVirtualFocus: PropTypes.bool,
+  id: PropTypes.string,
+  isLoading: PropTypes.bool,
+  isVirtualized: PropTypes.bool,
+  items: isIterableProp,
+  keyboardDelegate: PropTypes.any,
+  label: PropTypes.node,
+  onLoadMore: PropTypes.func,
+  onSelectionChange: PropTypes.func,
+  selectedKeys: isIterableProp,
+  selectionMode: PropTypes.any,
+  'aria-label': PropTypes.string,
+  'aria-labelledby': PropTypes.string,
+  'aria-describedby': PropTypes.string,
+  'aria-details': PropTypes.string,
   state: PropTypes.shape({
     close: PropTypes.func,
     collection: PropTypes.shape({}),

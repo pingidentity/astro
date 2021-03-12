@@ -1,5 +1,6 @@
 const base = {
   display: 'flex',
+  width: '100%',
 };
 
 const panel = {
