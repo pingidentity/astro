@@ -5,6 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import { encodeSvg } from '../templateUtils';
 import { COLORS } from '../../constants';
 import { toNode, fromNode } from '../nodes';
+import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
 const $ = go.GraphObject.make;
 
@@ -23,23 +24,6 @@ export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part
 
 export const getIcon = iconColor => (iconSrc) => {
     return iconSrc(iconColor);
-};
-
-export const adornmentMouseLeave = (e, obj) => {
-    const ad = obj.part;
-    ad.adornedPart.removeAdornment('mouseHover');
-};
-
-export const selectFromAdornment = (e, obj) => {
-    const node = obj.part.adornedPart;
-    node.diagram.select(node);
-};
-
-export const getAdornmentOnHover = adornment => (e, obj) => {
-    const node = obj.part;
-    const nodeHoverAdornment = adornment;
-    nodeHoverAdornment.adornedObject = node;
-    node.addAdornment('mouseHover', nodeHoverAdornment);
 };
 
 // Would require mocking node
@@ -67,38 +51,6 @@ export const dragLeave = (selectedColor, errorColor, defaultColor) => (e, obj) =
     node.findObject('fromNode').stroke = COLORS.WHITE;
     node.findObject('fromNode').fill = node.data.color;
     node.findObject('fromNodeOuter').fill = 'transparent';
-};
-
-/* istanbul ignore next */
-// Would have to mock a lot of gojs to test. May do this later.
-export const getNodeHoverAdornment = () => {
-    return $(go.Adornment, 'Spot',
-        {
-            background: 'transparent',
-            mouseLeave: adornmentMouseLeave,
-        },
-        $(go.Placeholder,
-            {
-                margin: new go.Margin(10, 10, 10, 10),
-                background: 'transparent',
-                isActionable: true,
-                click: selectFromAdornment,
-            }),
-        $(go.Panel, 'Auto', { alignment: go.Spot.Top },
-            { name: 'BODY' },
-            $(go.Shape, 'RoundedRectangle',
-                { fill: COLORS.ERROR_LIGHT, stroke: 'transparent', strokeWidth: 0, margin: new go.Margin(0, 0, 10, 0) }),
-            $(go.Panel, 'Horizontal', { padding: 10, alignment: go.Spot.Top },
-                $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 10, 0) },
-                    $(go.TextBlock,
-                        {
-                            stroke: COLORS.ERROR, font: 'bold 11px sans-serif', alignment: go.Spot.Left, editable: false,
-                        },
-                        new go.Binding('text', 'errorMessage').makeTwoWay()),
-                ),
-            ),
-        ),
-    );
 };
 
 /* istanbul ignore next */

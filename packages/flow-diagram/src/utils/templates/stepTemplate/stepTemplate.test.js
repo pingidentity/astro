@@ -6,9 +6,6 @@ import {
     getIfLengthGreater,
     getBorderColor,
     getIcon,
-    adornmentMouseLeave,
-    selectFromAdornment,
-    getAdornmentOnHover,
 } from './stepTemplate';
 
 jest.mock('gojs', () => {
@@ -76,55 +73,5 @@ describe('Step Template', () => {
     test('getIcon returns correct color and icon', () => {
         const coloredIcon = svgComponentToBase64(<Desktop fill="white" />);
         expect(getIcon('white')(color => svgComponentToBase64(<Desktop fill={color} />))).toEqual(coloredIcon);
-    });
-
-    test('adornmentMouseLeave called with correct arguments', () => {
-        const removeAdornment = jest.fn();
-        const e = {
-            anything: 'anything',
-        };
-        const obj = {
-            part: {
-                adornedPart: {
-                    removeAdornment,
-                },
-            },
-        };
-        adornmentMouseLeave(e, obj);
-        expect(removeAdornment).toHaveBeenCalledWith('mouseHover');
-    });
-
-    test('selectFromAdornment called with correct arguments', () => {
-        const select = jest.fn();
-        const e = {
-            anything: 'anything',
-        };
-        const obj = {
-            part: {
-                adornedPart: {
-                    diagram: {
-                        select,
-                    },
-                },
-            },
-        };
-        const node = obj.part.adornedPart;
-        selectFromAdornment(e, obj);
-        expect(select).toHaveBeenCalledWith(node);
-    });
-
-    test('getAdornmentOnHover called with correct arguments', () => {
-        const addAdornment = jest.fn();
-        const e = {
-            anything: 'anything',
-        };
-        const obj = {
-            part: {
-                addAdornment,
-            },
-        };
-        const adornment = {};
-        getAdornmentOnHover(adornment)(e, obj);
-        expect(addAdornment).toHaveBeenCalledWith('mouseHover', adornment);
     });
 });
