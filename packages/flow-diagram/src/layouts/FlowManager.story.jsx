@@ -29,9 +29,13 @@ import { Palette, PaletteWrapper } from '../components/Palette';
 import usePalette from '../hooks/usePalette';
 import TopPanel from '../components/TopPanel';
 import OuterContainer from '../components/OuterContainer';
+import Panel from '../components/Panel';
+import PanelContainer from '../components/PanelContainer';
+import Connections from '../components/Connections';
 
 const Demo = () => {
     const [selectedNode, setSelectedNode] = useState();
+    const [isScrolling, setIsScrolling] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
     const onStepClick = (e, obj) => {
@@ -390,6 +394,12 @@ const Demo = () => {
         setSelectedNode({ ...currentNode, [field]: id });
         setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ? { ...currentNode, [field]: id } : node)));
     };
+    function onScroll() {
+        setIsScrolling(true);
+        setTimeout(() => {
+            setIsScrolling(false);
+        }, 500);
+    }
 
     return (
         <OuterContainer>
@@ -475,6 +485,66 @@ const Demo = () => {
                 </LeftContainer>
                 <DiagramWrapper>
                     <Diagram {...diagramProps} />
+                    <PanelContainer>
+                        {!isScrolling ? (
+                            <Connections
+                                links={[{ from: 'output4', to: 'input1' }, { from: 'output6', to: 'input4' }]}
+                            />
+                        ) : null}
+                        <Panel title="User login" subtitle="Outputs" onScroll={() => onScroll()}>
+                            <Button variant="inline" mb={10} id="output1">
+                                Here is the first output
+                            </Button>
+                            <Button variant="inline" mb={10} id="output2">
+                                Output 2
+                            </Button>
+                            <Button variant="inline" mb={10} id="output3">
+                                Output 3
+                            </Button>
+                            <Button variant="inline" mb={10} id="output4">
+                                Output 4
+                            </Button>
+                            <Button variant="inline" mb={10} id="output5">
+                                Output 5
+                            </Button>
+                            <Button variant="inline" mb={10} id="output6">
+                                Output 6
+                            </Button>
+                            <Button variant="inline" mb={10} id="output6">
+                                Output 6
+                            </Button>
+                            <Button variant="inline" mb={10} id="output6">
+                                Output 6
+                            </Button>
+                            <Button variant="inline" mb={10} id="output6">
+                                Output 6
+                            </Button>
+                            <Button variant="inline" mb={10} id="output6">
+                                Output 6
+                            </Button>
+                            <Button variant="inline" mb={10} id="output6">
+                                Output 6
+                            </Button>
+                            <Button variant="inline" mb={10} id="output6">
+                                Output 6
+                            </Button>
+                        </Panel>
+                        <Panel title="Execute flow" subtitle="Inputs" onScroll={() => onScroll()}>
+                            <TextField label="Input 1" width="95%" mb={10} id="input1" />
+                            <Button variant="inline" mb={10} id="input2">
+                                Input 2
+                            </Button>
+                            <Button variant="inline" mb={10} id="input3">
+                                Input 3
+                            </Button>
+                            <Button variant="inline" mb={10} id="input4">
+                                Input 4
+                            </Button>
+                            <Button variant="inline" mb={10} id="input5">
+                                Input 5
+                            </Button>
+                        </Panel>
+                    </PanelContainer>
                 </DiagramWrapper>
             </Body>
         </OuterContainer>

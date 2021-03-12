@@ -1,3 +1,3 @@
 export const outerContainer = {
-    height: '70%',
+    height: '90%',
 };
