@@ -68,7 +68,6 @@ export const PageWrapper = ({ children, ...props }) => (
       css={
         css`
           ${emotionNormalize}
-          background: white;
 
           * {
             box-sizing: border-box;
