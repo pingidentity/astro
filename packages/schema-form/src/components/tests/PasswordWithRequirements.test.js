@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, act } from '@testing-library/react';
 import { renderSchemaForm } from './utils';
 
 const name = 'password';
@@ -42,4 +42,16 @@ test('it renders a password with requirements popover', () => {
   // Ensure the popover is hidden again when the input is blurred
   fireEvent.blur(input);
   expect(screen.queryByRole('tooltip')).not.toBeVisible();
+});
+
+test('it fires onchange event', async () => {
+  const onChange = jest.fn();
+
+  renderSchemaForm({ onChange, schema, uiSchema });
+  const input = screen.queryByLabelText(name);
+  expect(input).toBeInTheDocument();
+
+  await act(async () => fireEvent.change(input, { target: { value: 'Hello' } }));
+  expect(input.value).toBe('Hello');
+  expect(onChange).toHaveBeenCalled();
 });

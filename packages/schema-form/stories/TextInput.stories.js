@@ -40,7 +40,7 @@ export const PasswordInput = () => {
   };
   const uischema = {
     exampleTextBox: {
-      'ui:widget': 'password',
+      'ui:widget': 'passwordWithRequirements',
       'ui:options': {
         label: false,
       },
