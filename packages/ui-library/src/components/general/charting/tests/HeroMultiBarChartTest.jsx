@@ -108,6 +108,42 @@ describe("HeroMultiBarChart", function () {
         expect(xAxis.props.dataKey).toBe("id");
     });
 
+    it("does not render the x-axis when hideXAxis prop = true", function () {
+        const props = {
+            hideXAxis: true,
+            isAstro: true
+        };
+        const wrapper = getMountedComponent(props);
+        const topChart = wrapper.find(BarChart).get(0);
+
+        const xAxis = topChart.props.children[3];
+
+        expect(xAxis).toBe(null);
+    });
+
+    it("renders the y-axis", function () {
+        const wrapper = getMountedComponent();
+        const topChart = wrapper.find(BarChart).get(0);
+
+        const yAxis = topChart.props.children[2];
+
+        expect(yAxis.type.displayName).toBe("YAxis");
+    });
+
+    it("does not render the y-axis when hideXAxis prop = true", function () {
+        const props = {
+            hideYAxis: true,
+            isAstro: true
+        };
+        const wrapper = getMountedComponent(props);
+        const topChart = wrapper.find(BarChart).get(0);
+
+        const yAxis = topChart.props.children[2];
+
+        expect(yAxis).toBe(null);
+    });
+
+
     it("renders the x-axis in the various font sizes", function () {
         const fontSizeData = [
             { size: 15, threshold: 1 },
@@ -278,5 +314,25 @@ describe("HeroMultiBarChart", function () {
         component.setProps({ ...mockPayloads[2] });
         expect(onChange).toHaveBeenCalledWith(mockPayloads[2]);
 
+    });
+
+    it("Removes cartesian grid when prop hideGridLines = true", () =>{
+        const props = {
+            hideGridLines: true,
+            isAstro: true,
+        };
+        const wrapper = getMountedComponent(props);
+        const topChart = wrapper.find(BarChart).get(0);
+        expect(topChart.props.children[0]).toBe(null);
+    });
+
+    it("Adds cartesian grid when prop hideGridLines = false", () =>{
+        const props = {
+            hideGridLines: false,
+            isAstro: true,
+        };
+        const wrapper = getMountedComponent(props);
+        const topChart = wrapper.find(BarChart).get(0);
+        expect(topChart.props.children[0].type.displayName).toBe("CartesianGrid");
     });
 });
