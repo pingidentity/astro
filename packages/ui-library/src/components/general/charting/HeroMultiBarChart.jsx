@@ -145,7 +145,7 @@ export default class HeroMultiBarChart extends Component {
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize }}
-                stroke={this.props.isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.8)"}
+                stroke={this.props.isAstro ? "#515F6B" : "rgba(255, 255, 255, 0.8)"}
                 dataKey={xAxisKey}
                 domain={["dataMin", "dataMax"]}
                 dy={4}
@@ -159,7 +159,7 @@ export default class HeroMultiBarChart extends Component {
             <YAxis
                 axisLine={false}
                 tickLine={false}
-                stroke={this.props.isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.8)"}
+                stroke={this.props.isAstro ? "#515F6B" : "rgba(255, 255, 255, 0.8)"}
                 tickCount={6}
                 tickFormatter={this._kFormatter}
             />
@@ -172,7 +172,7 @@ export default class HeroMultiBarChart extends Component {
         const { x, y, width, height, value, index, labelKey } = props;
         const middleWidth = x + width / 2;
 
-        const textColor = this.props.isAstro ? props.fill : "#fff";
+        const textColor = this.props.isAstro ? "#253746" : "#fff";
 
         return barSelected && (index === barSelected.index) && (labelKey === barSelected.key)
             ? (
@@ -251,6 +251,9 @@ export default class HeroMultiBarChart extends Component {
             chartWidth,
             onGroupSelectionChange,
             isAstro,
+            hideGridLines,
+            hideYAxis,
+            hideXAxis
         } = this.props;
         const heroStyles = { backgroundImage: bgImage ? `url("${bgImage}")` : null };
 
@@ -297,17 +300,18 @@ export default class HeroMultiBarChart extends Component {
                                 barCategoryGap="30%"
                                 margin={{ top: labelHeight }}
                             >
-                                <CartesianGrid
-                                    vertical={false}
-                                    stroke={isAstro ? "#98A0A8" : "rgba(255, 255, 255, 0.4)"}
-                                />
+                                {isAstro && hideGridLines ? null
+                                    :<CartesianGrid
+                                        vertical={false}
+                                        stroke={isAstro ? "#515F6B" : "rgba(255, 255, 255, 0.4)"}
+                                    />}
 
                                 {/* tooltip is the only way for us to get any feedback when mousing over a group */}
                                 <Tooltip
                                     cursor={false}
                                     content={<SectionHoverHandler onChange={onGroupSelectionChange} />} />
-                                {this._renderYAxis()}
-                                {this._renderXAxis()}
+                                {isAstro && hideYAxis ? null : this._renderYAxis()}
+                                {isAstro && hideXAxis ? null : this._renderXAxis()}
                                 {this._renderBars()}
 
                             </BarChart>
