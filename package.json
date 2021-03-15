@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
