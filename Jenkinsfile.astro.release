@@ -22,7 +22,7 @@ pipeline {
             sh "cd ../icons && yarn build"
             sh "yarn run lint"
             sh "yarn run test"
-            sh "npm version patch"
+            sh "npm version minor"
           }
         }
       }
