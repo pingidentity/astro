@@ -380,6 +380,7 @@ class MultiDragStateless extends React.Component {
             <DragDropColumn
                 // Columns can have their own labelEmpty; this lets this.props.labelEmpty
                 // be the default
+                rowCount={this.props.rowCount}
                 labelEmpty={this.props.labelEmpty}
                 {...column}
                 categoryList={categoryList}
@@ -490,7 +491,7 @@ class MultiDragStateful extends React.Component {
         });
     }
 
-
+    
     _handleSearch = (index, value) => {
         this.setState(
             search(this.state, {

@@ -211,6 +211,7 @@ class MultiDragDemo extends React.Component {
      * unfiltered list should look like. We have to do some logic to covert back the indexes
      * relative to the unfiltered rows.
      */
+    
     _handleDropStateless = (desc) => {
         var convertedDesc = MultiDrag.convertFilteredIndexes(this.props.drag.columns, desc);
 
@@ -471,6 +472,7 @@ class MultiDragDemo extends React.Component {
                                 First column has sort within column disabled.
                             </h2>
                             <MultiDrag
+                                rowCount={columnsStateless[1]? columnsStateless[1].rows.length : null}
                                 stateless={true}
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
                                 showSearch={this.props.demo.search !== "none"}
