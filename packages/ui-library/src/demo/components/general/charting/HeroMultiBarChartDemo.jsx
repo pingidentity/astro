@@ -80,6 +80,9 @@ class HeroMuliBarChartDemo extends React.Component {
         totalValue: "24,458",
         chartData: null,
         astro: false,
+        hideGridLines: false,
+        hideXAxis: false,
+        hideYAxis: false,
     };
 
     _toggleError = () => {
@@ -95,7 +98,28 @@ class HeroMuliBarChartDemo extends React.Component {
             loading: !loading,
             totalValue: !loading ? null : "24,458",
         });
-    }
+    };
+
+    _toggleGrid = () =>{
+        const { hideGridLines } = this.state;
+        this.setState({
+            hideGridLines: !hideGridLines
+        });
+    };
+
+    _toggleXAxis = () =>{
+        const { hideXAxis } = this.state;
+        this.setState({
+            hideXAxis: !hideXAxis
+        });
+    };
+
+    _toggleYAxis = () =>{
+        const { hideYAxis } = this.state;
+        this.setState({
+            hideYAxis: !hideYAxis
+        });
+    };
 
     _getLegend = (isAstro) => {
         const { label } = this.state.range;
@@ -134,8 +158,8 @@ class HeroMuliBarChartDemo extends React.Component {
         };
 
         const dataKeysStyleAstro = {
-            mfaSuccess: { color: "#3C5080" },
-            mfaFailed: { color: "#A31300" },
+            mfaSuccess: { color: "#3C5080", hoverColor: "#A31300" },
+            mfaFailed: { color: "#3C5080", hoverColor: "#A31300" },
         };
 
         const dataKeysStyle = this.state.astro ? dataKeysStyleAstro : dataKeysStyleBase;
@@ -164,8 +188,33 @@ class HeroMuliBarChartDemo extends React.Component {
                             onChange={() => this.setState((state) => ({ astro: !state.astro }))}
                         />
                     </Layout.Column>
+                    {this.state.astro ? <Layout.Column>
+                        <Checkbox
+                            label="Hide Grid"
+                            checked={this.state.hideGridLines}
+                            onChange={this._toggleGrid}
+                        />
+                    </Layout.Column>: null}
+
+                    {this.state.astro? <Layout.Column>
+                        <Checkbox
+                            label="Hide X Axis"
+                            checked={this.state.hideXAxis}
+                            onChange={this._toggleXAxis}
+                        />
+                    </Layout.Column>: null}
+                    {this.state.astro ? <Layout.Column>
+                        <Checkbox
+                            label="Hide Y Axis"
+                            checked={this.state.hideYAxis}
+                            onChange={this._toggleYAxis}
+                        />
+                    </Layout.Column>: null}
                 </Layout.Row>
                 <HeroMultiBarChart
+                    hideYAxis={this.state.hideYAxis}
+                    hideXAxis={this.state.hideXAxis}
+                    hideGridLines={this.state.hideGridLines}
                     loading={loading}
                     loadingMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                     errorMessage={errorMessage}

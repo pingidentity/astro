@@ -45,6 +45,7 @@ describe("MultiDrag v4", function () {
                     showCategoryList: true },
                 { name: "Added Rows", id: 2, rows: addedRows, filteredRows: addedRows }
             ],
+            rowCount: null
         });
 
         var WrappedComponent = wrapInTestContext(MultiDrag);
@@ -424,5 +425,14 @@ describe("MultiDrag v4", function () {
         const firstLabel = TestUtils.findRenderedDOMNodeWithDataId(rowNodes[0], "row-name");
 
         expect(firstLabel.textContent).toEqual("a");
+    });
+
+    it("recieves and renders prop rowCount", () => {
+        const component = getWrappedComponent({
+            rowCount: 100
+        });
+
+        const countNode = TestUtils.scryRenderedDOMNodesWithClass(component, "row-selector__column-count");
+        expect(countNode[0].textContent).toEqual("100");
     });
 });

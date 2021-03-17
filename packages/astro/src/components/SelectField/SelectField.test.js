@@ -184,6 +184,6 @@ test('clicking outside of the listbox popup closes it', () => {
   getComponent({ isDefaultOpen: true });
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
-  userEvent.click(document.body);
+  userEvent.click(global.document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });

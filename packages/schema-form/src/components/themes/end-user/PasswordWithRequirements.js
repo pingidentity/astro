@@ -19,7 +19,21 @@ const PasswordWithRequirements = (props) => {
   const blur = () => setIsVisible(false);
   const ref = useRef();
   const inputProps = getThemedProps(theme, props);
-  const { requirementsTitle, requirementsData, tippyProps } = inputProps;
+  const {
+    requirementsTitle,
+    requirementsData,
+    /* istanbul ignore next */
+    validateRequirements = (e, data) => data,
+    tippyProps,
+    onChange: onChangeCb,
+  } = inputProps;
+  const [reqs, setReqs] = useState(requirementsData);
+
+  const onChange = (e) => {
+    const res = validateRequirements(e, requirementsData);
+    setReqs(res);
+    onChangeCb(e);
+  };
 
   const insertedStyles = css`
     ${endUserStyles}
@@ -37,7 +51,12 @@ const PasswordWithRequirements = (props) => {
     // state.
     <>
       <div ref={ref}>
-        <FloatLabelPasswordInput {...inputProps} onFocus={focus} onBlur={blur} />
+        <FloatLabelPasswordInput
+          {...inputProps}
+          onChange={onChange}
+          onFocus={focus}
+          onBlur={blur}
+        />
       </div>
       <Tippy
         theme="light"
@@ -47,7 +66,7 @@ const PasswordWithRequirements = (props) => {
           <div css={insertedStyles} style={{ padding: '10px' }}>
             <Global styles={css`${tippyStyles} ${tippyLightTheme}`} />
             <Heading level={4}>{requirementsTitle}</Heading>
-            <Requirements requirements={requirementsData} />
+            <Requirements requirements={reqs} />
           </div>
         )}
         {...tippyProps}
@@ -61,5 +80,9 @@ PasswordWithRequirements.propTypes = {
     theme: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+// PasswordWithRequirements.defaultProps = {
+//   onChange: noop,
+// };
 
 export default PasswordWithRequirements;

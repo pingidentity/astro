@@ -59,7 +59,8 @@ const chip = {
   alignItems: 'center',
   justifyContent: 'center',
   minWidth: '50px',
-  display: 'inline-flex',
+  alignSelf: 'flex-start',
+  display: 'inline-flex !important',
   borderRadius: '5px',
 };
 

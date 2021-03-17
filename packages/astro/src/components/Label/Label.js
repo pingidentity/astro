@@ -36,6 +36,7 @@ const Label = forwardRef((props, ref) => {
     isDisabled,
     isRequired,
     isFloatLabel: mode === modes.FLOAT,
+    isLeftLabel: mode === modes.LEFT,
   });
 
   return (

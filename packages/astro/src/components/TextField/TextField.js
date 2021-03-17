@@ -12,7 +12,7 @@ import Label from '../Label';
  * Combines a text input, label, and helper text for a complete, form-ready solution.
  */
 const TextField = forwardRef((props, ref) => {
-  const { helperText, status } = props;
+  const { helperText, slots, status } = props;
   const {
     fieldContainerProps,
     fieldControlProps,
@@ -23,10 +23,11 @@ const TextField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => inputRef.current);
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box variant="forms.input.wrapper" {...fieldContainerProps}>
       <Label {...fieldLabelProps} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <Input ref={inputRef} {...fieldControlProps} />
+        {slots?.inContainer}
       </Box>
       {
         helperText &&
@@ -80,6 +81,11 @@ TextField.propTypes = {
   onFocus: PropTypes.func,
   /** The placeholder text to display in the input element. */
   placeholder: PropTypes.string,
+  /** Provides a way to insert markup in specified places. */
+  slots: PropTypes.shape({
+    /** The given node will be inserted into the field container. */
+    inContainer: PropTypes.node,
+  }),
   /** Determines the input status indicator and helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */

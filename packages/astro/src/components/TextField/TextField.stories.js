@@ -15,10 +15,26 @@ export const Default = () => (
   />
 );
 
+export const SmallVariant = () => (
+  <TextField
+    id="custom-id"
+    name="custom-name"
+    label="Example Label"
+    controlProps={{ variant: 'input.small' }}
+  />
+);
+
 export const FloatLabel = () => (
   <TextField
     label="Example Label"
     labelMode="float"
+  />
+);
+
+export const LeftLabel = () => (
+  <TextField
+    label="Example Label"
+    labelMode="left"
   />
 );
 

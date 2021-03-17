@@ -76,6 +76,7 @@ module.exports = class extends React.Component {
             PropTypes.func
         ]).isRequired,
         labelEmpty: PropTypes.string,
+        rowCount: PropTypes.number,
         // optional
         ghostRowAt: PropTypes.number,
         className: PropTypes.string,
@@ -274,8 +275,10 @@ module.exports = class extends React.Component {
                         {name}
                         {helpHint}
                     </span>
-                    {showCount &&
-                        <span className="row-selector__column-count">{rows.length}</span>
+                    {showCount && rows &&
+                        <span className="row-selector__column-count">
+                            {this.props.rowCount ? this.props.rowCount: rows.length}
+                        </span>
                     }
                     <span className="row-selector__filters">
                         {filterLabel && (
