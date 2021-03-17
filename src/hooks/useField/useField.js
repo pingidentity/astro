@@ -18,12 +18,15 @@ import { modes as labelModes } from '../../components/Label/constants';
 const useField = (props = {}) => {
   const {
     autocomplete,
+    autoComplete,
+    autoCorrect,
     children,
     className,
-    containerProps,
-    controlProps,
+    containerProps = {},
+    controlProps = {},
     defaultText,
     defaultValue,
+    direction,
     disabledKeys,
     hasAutoFocus,
     helperText,
@@ -35,7 +38,7 @@ const useField = (props = {}) => {
     isSelected,
     label,
     labelMode,
-    labelProps,
+    labelProps = {},
     name,
     onBlur,
     onChange = noop,
@@ -47,6 +50,7 @@ const useField = (props = {}) => {
     placeholder,
     role,
     selectedKey,
+    spellCheck,
     status = statuses.DEFAULT,
     statusClasses,
     type,
@@ -92,6 +96,7 @@ const useField = (props = {}) => {
   // Handle focus within and value state for the container. These are needed for float labels.
   const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
   const isFloatLabel = labelMode === labelModes.FLOAT;
+  const isLeftLabel = labelMode === labelModes.LEFT;
   const isFloatLabelActive = isFloatLabel && (
     hasValue || hasFocusWithin || containerProps?.isFloatLabelActive
   );
@@ -99,10 +104,12 @@ const useField = (props = {}) => {
     'field-container': true, // generates 'field-container' class
     hasValue,
     hasFocusWithin,
+    isLeftLabel,
     isFloatLabel,
     isFloatLabelActive,
   });
   const nonAriaOthers = { ...omit(others, Object.keys(ariaProps)) };
+
   const fieldContainerProps = {
     ...nonAriaOthers,
     ...mergeProps(containerProps, focusWithinProps),
@@ -114,7 +121,8 @@ const useField = (props = {}) => {
   };
 
   const fieldControlProps = {
-    autocomplete,
+    autocomplete: autocomplete || autoComplete,
+    autoCorrect,
     autoFocus: hasAutoFocus,
     className: classNames,
     defaultSelected: isDefaultSelected,
@@ -127,12 +135,12 @@ const useField = (props = {}) => {
     readOnly: isReadOnly,
     required: isRequired,
     role,
+    spellCheck,
     type,
     value,
     ...ariaProps,
-    ...controlProps,
     ...raFieldProps,
-    ...mergeProps({ onBlur, onFocus }, focusProps),
+    ...mergeProps({ onBlur, onFocus }, controlProps, focusProps),
   };
 
   const fieldLabelProps = {

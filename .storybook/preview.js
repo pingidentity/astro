@@ -34,6 +34,7 @@ export const parameters = {
         'Form',
         [
           'CheckboxField',
+          'ComboBoxField',
           'RadioGroupField',
           'SearchField',
           'SelectField',

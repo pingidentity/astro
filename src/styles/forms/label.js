@@ -27,6 +27,11 @@ export const label = {
   '.is-float-label-active &.is-float-label': {
     ...activeFloatLabel,
   },
+  '&.is-left-label': {
+    width: 'auto',
+    pr: 'sm',
+    mb: 0,
+  },
 };
 
 // Variants below
