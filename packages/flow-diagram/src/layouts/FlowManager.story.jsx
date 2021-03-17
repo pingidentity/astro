@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Box, Button, Image, Separator, Text, TextField } from '@pingux/astro';
-import { mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
+import { mdiArrowCollapseLeft, mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
 import Icon from '@mdi/react';
 import { v4 as uuidV4 } from 'uuid';
 import '../css/main.css';
@@ -497,7 +497,17 @@ const Demo = () => {
                                 panels={['outputsPanel', 'inputsPanel']}
                             />
                         ) : null}
-                        <Panel title="User login" subtitle="Outputs" id="outputsPanel" onScroll={() => onScroll()}>
+                        <Panel
+                            title="User login"
+                            subtitle="Outputs"
+                            id="outputsPanel"
+                            onScroll={() => onScroll()}
+                            icon={<Icon
+                                path={mdiArrowCollapseLeft}
+                                size={1}
+                                color="#253746"
+                            />}
+                        >
                             <Button variant="inline" mb={10} id="output1">
                                 Here is the first output
                             </Button>
@@ -535,7 +545,17 @@ const Demo = () => {
                                 Output 12
                             </Button>
                         </Panel>
-                        <Panel title="Execute flow" subtitle="Inputs" id="inputsPanel" onScroll={() => onScroll()}>
+                        <Panel
+                            title="Execute flow"
+                            subtitle="Inputs"
+                            id="inputsPanel"
+                            onScroll={() => onScroll()}
+                            icon={<Icon
+                                path={mdiArrowCollapseLeft}
+                                size={1}
+                                color="#253746"
+                            />}
+                        >
                             <TextField label="Input 1" width="95%" mb={10} id="input1" />
                             <Button variant="inline" mb={10} id="input2">
                                 Input 2
