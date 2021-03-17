@@ -129,6 +129,7 @@ export const toAstroInputProps = (props) => {
     },
     formContext,
     isDisabled: disabled,
+    isRequired: required,
     label: inputLabel,
     helperText,
     options: getDisabledEnumOptions(enumOptions, enumDisabled),
