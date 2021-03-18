@@ -39,7 +39,7 @@ exports[`form elements form success title 1`] = `
           role="heading"
         >
           <div
-            class="css-1vyax5l"
+            class="css-dhd2g"
           >
             hi
           </div>
@@ -67,7 +67,7 @@ exports[`single fields checkbox field 1`] = `
           class="css-uliqdc"
         >
           <div
-            class="field-container css-jblfrf"
+            class="css-uliqdc"
           >
             <label
               class="is-default css-knfhfe"
@@ -109,7 +109,7 @@ exports[`single fields checkbox field 1`] = `
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -138,7 +138,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="field-container css-jblfrf"
+              class="css-uliqdc"
             >
               <label
                 class="is-default css-knfhfe"
@@ -183,7 +183,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="field-container css-jblfrf"
+              class="css-uliqdc"
             >
               <label
                 class="is-default css-knfhfe"
@@ -228,7 +228,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="field-container css-jblfrf"
+              class="css-uliqdc"
             >
               <label
                 class="is-default css-knfhfe"
@@ -273,7 +273,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="field-container css-jblfrf"
+              class="css-uliqdc"
             >
               <label
                 class="is-default css-knfhfe"
@@ -316,7 +316,7 @@ exports[`single fields checkboxes field 1`] = `
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -341,25 +341,25 @@ exports[`single fields password field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-4y926w"
               type="password"
               value=""
             />
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -384,28 +384,22 @@ exports[`single fields select field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <div
               class="css-4cffwv"
             >
               <select
-                class="is-default css-1lnj870"
+                class="is-default css-4y926w"
               >
-                <option
-                  selected=""
-                  value=""
-                >
-                  Select an option
-                </option>
                 <option
                   value="foo"
                 >
@@ -431,7 +425,7 @@ exports[`single fields select field 1`] = `
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -456,28 +450,22 @@ exports[`single fields select field with default 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <div
               class="css-4cffwv"
             >
               <select
-                class="is-default css-1lnj870"
+                class="is-default css-4y926w"
               >
-                <option
-                  selected=""
-                  value=""
-                >
-                  Select an option
-                </option>
                 <option
                   value="foo"
                 >
@@ -503,7 +491,7 @@ exports[`single fields select field with default 1`] = `
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -528,24 +516,25 @@ exports[`single fields string field format email 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-4y926w"
+              type="text"
               value=""
             />
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -570,24 +559,25 @@ exports[`single fields string field regular 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-4y926w"
+              type="text"
               value=""
             />
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -612,18 +602,19 @@ exports[`single fields string field with custom errors as sentence 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-error css-n7nceq"
+            class="is-error css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-error css-1vjef0r"
+            class="is-error css-uliqdc"
           >
             <input
-              class="is-error css-1ljx8fg"
+              class="is-error css-4y926w"
+              type="text"
               value=""
             />
           </div>
@@ -635,7 +626,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
           </div>
         </div>
         <button
-          class="is-focused css-fl4xzn"
+          class="is-focused css-vhv7r1"
           type="primary"
         >
           Submit
@@ -660,18 +651,19 @@ exports[`single fields string field with help text 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-4y926w"
+              type="text"
               value=""
             />
           </div>
@@ -683,7 +675,7 @@ exports[`single fields string field with help text 1`] = `
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -708,24 +700,25 @@ exports[`single fields string field with markdown errors 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Test
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-4y926w"
+              type="text"
               value=""
             />
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -750,25 +743,26 @@ exports[`single fields string field with placeholder 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-4y926w"
               placeholder="placeholder"
+              type="text"
               value=""
             />
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
@@ -793,25 +787,23 @@ exports[`single fields textarea field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
-          rows="2"
+          class="css-uliqdc"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-knfhfe"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            class="is-default css-uliqdc"
           >
             <textarea
-              class="is-default css-8szvo2"
-              rows="2"
+              class="is-default css-4y926w"
             />
           </div>
         </div>
         <button
-          class=" css-fl4xzn"
+          class=" css-vhv7r1"
           type="primary"
         >
           Submit
