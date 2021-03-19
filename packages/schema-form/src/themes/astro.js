@@ -15,6 +15,8 @@ import Error from '../components/themes/astro/Error';
 import FieldLabel from '../components/themes/astro/FieldLabel';
 import SuccessMessage from '../components/themes/astro/SuccessMessage';
 import SectionTitle from '../components/themes/astro/SectionTitle';
+// eslint-disable-next-line
+import PasswordWithRequirements from '../components/themes/astro/PasswordWithRequirements';
 import { FIELD_TYPES } from '../utils/constants';
 
 export const AstroComponents = {
@@ -26,6 +28,7 @@ export const AstroComponents = {
   formTitle: SectionTitle,
   formDescription: FieldLabel,
   password: PasswordInput,
+  passwordWithRequirements: PasswordWithRequirements,
   select: Dropdown,
   successMessage: SuccessMessage,
   textinput: TextField,
@@ -85,6 +88,7 @@ export const toAstroInputProps = (props) => {
       label: uiLabel,
       hasMarkdownLabel: hasMarkdown,
       hasMarkdownErrors,
+      labelMode,
       ...custom
     },
     placeholder,
@@ -131,6 +135,7 @@ export const toAstroInputProps = (props) => {
     isDisabled: disabled,
     label: inputLabel,
     helperText,
+    labelMode,
     options: getDisabledEnumOptions(enumOptions, enumDisabled),
     status,
   };

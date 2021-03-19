@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownField } from '@pingux/astro';
+import { SelectField, Item } from '@pingux/astro';
 
-const Dropdown = ({ options, ...props }) => (
-  <DropdownField {...props}>
-    {options.map((option) => (
-      <option key={option.value} value={option.value}>{option.label}</option>
-    ))}
-  </DropdownField>
-);
+const Dropdown = ({ options, ...props }) => {
+  const items = options.map((option) => (
+    <Item key={option.value}>{option.label}</Item>
+  ));
+
+  return (
+    <SelectField {...props}>
+      {items}
+    </SelectField>
+  );
+};
 
 Dropdown.propTypes = {
   controlProps: PropTypes.shape({

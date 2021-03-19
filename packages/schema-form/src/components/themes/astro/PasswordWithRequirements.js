@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react';
 import { noop } from 'lodash';
 import { Global, css } from '@emotion/core';
-import endUserStyles from '@pingux/end-user/end-user.css';
+import { TextField, Text, PageWrapper } from '@pingux/astro';
 import tippyStyles from 'tippy.js/dist/tippy.css';
 
-import FloatLabelPasswordInput from '@pingux/end-user/components/FloatLabelPasswordInput';
-import Heading from '@pingux/end-user/components/Heading';
 import Requirements from '@pingux/end-user/components/Requirements';
 
+// eslint-disable-next-line
+import { getThemedProps } from '../../../themes/utils';
+
 const PasswordWithRequirements = (props) => {
+  const { onChange: onChangeCb, controlProps } = props;
   const [isVisible, setIsVisible] = useState(false);
   const focus = () => setIsVisible(true);
   const blur = () => setIsVisible(false);
@@ -18,10 +20,10 @@ const PasswordWithRequirements = (props) => {
   const {
     requirementsTitle,
     requirementsData,
-    validateRequirements,
+    /* istanbul ignore next */
+    validateRequirements = (e, data) => data,
     tippyProps,
-    onChange: onChangeCb,
-  } = props;
+  } = controlProps;
   const [reqs, setReqs] = useState(requirementsData);
 
   const onChange = (e) => {
@@ -31,12 +33,41 @@ const PasswordWithRequirements = (props) => {
   };
 
   const insertedStyles = css`
-    ${endUserStyles}
-
     .requirement {
+      -webkit-font-smoothing: antialiased;
+      word-wrap: break-word;
+      word-break: break-word;
+      color: #575f67;
+      font-weight: 200;
+      font-size: 13px;
+      font-family: "proxima-nova", sans-serif;
+      margin-bottom: 10px;
       display: flex;
       flex-direction: row;
       align-items: center;
+    }
+
+    .requirement__icon {
+      margin-right: 10px;
+    }
+
+    .requirement__icon--success {
+      color: #4aba78;
+    }
+
+    .requirement__name {
+      -webkit-font-smoothing: antialiased;
+      word-wrap: break-word;
+      word-break: break-word;
+      color: #575f67;
+      font-weight: 200;
+      font-size: 13px;
+      font-family: "proxima-nova", sans-serif;
+      display: flex;
+      flex-direction: column;
+      margin-top: 0.15em;
+      width: 100%;
+      flex-shrink: 1;
     }
   `;
 
@@ -46,11 +77,15 @@ const PasswordWithRequirements = (props) => {
     // state.
     <>
       <div ref={ref}>
-        <FloatLabelPasswordInput
+        <TextField
           {...props}
-          onChange={onChange}
-          onFocus={focus}
-          onBlur={blur}
+          type="password"
+          controlProps={{
+            controlProps,
+            onChange,
+            onFocus: focus,
+            onBlur: blur,
+          }}
         />
       </div>
       <Tippy
@@ -58,8 +93,9 @@ const PasswordWithRequirements = (props) => {
         reference={ref}
         visible={isVisible}
         content={(
-          <div css={insertedStyles} style={{ padding: '10px' }}>
-            <Global styles={css`
+          <PageWrapper>
+            <div css={insertedStyles} style={{ padding: '10px' }}>
+              <Global styles={css`
                 ${tippyStyles}
                 .tippy-content {
                   background-color: #FFF;
@@ -74,10 +110,11 @@ const PasswordWithRequirements = (props) => {
                   border-color: white;
                 }
               `}
-            />
-            <Heading level={4}>{requirementsTitle}</Heading>
-            <Requirements requirements={reqs} />
-          </div>
+              />
+              <Text variant="label" mb="sm">{requirementsTitle}</Text>
+              <Requirements requirements={reqs} />
+            </div>
+          </PageWrapper>
         )}
         {...tippyProps}
       />
@@ -89,17 +126,17 @@ PasswordWithRequirements.propTypes = {
   formContext: PropTypes.shape({
     theme: PropTypes.string.isRequired,
   }).isRequired,
-  requirementsTitle: PropTypes.string.isRequired,
-  requirementsData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  validateRequirements: PropTypes.func,
-  tippyProps: PropTypes.shape({}),
+  controlProps: PropTypes.shape({
+    requirementsTitle: PropTypes.string.isRequired,
+    requirementsData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    validateRequirements: PropTypes.func,
+    tippyProps: PropTypes.shape({}),
+  }),
   onChange: PropTypes.func,
 };
 
 PasswordWithRequirements.defaultProps = {
-  /* istanbul ignore next */
-  validateRequirements: (e, data) => data,
-  tippyProps: {},
+  controlProps: {},
   onChange: noop,
 };
 

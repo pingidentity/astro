@@ -3,7 +3,7 @@
 exports[`form elements form success message 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -25,7 +25,7 @@ exports[`form elements form success message 1`] = `
 exports[`form elements form success title 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -53,7 +53,7 @@ exports[`form elements form success title 1`] = `
 exports[`single fields checkbox field 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -123,7 +123,7 @@ exports[`single fields checkbox field 1`] = `
 exports[`single fields checkboxes field 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -330,7 +330,7 @@ exports[`single fields checkboxes field 1`] = `
 exports[`single fields password field 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -341,10 +341,10 @@ exports[`single fields password field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
@@ -352,7 +352,7 @@ exports[`single fields password field 1`] = `
             class="is-default css-1vjef0r"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-zad3la"
               type="password"
               value=""
             />
@@ -373,7 +373,7 @@ exports[`single fields password field 1`] = `
 exports[`single fields select field 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -387,25 +387,25 @@ exports[`single fields select field 1`] = `
           class="field-container css-jblfrf"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            aria-hidden="true"
+            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
           >
-            <div
-              class="css-4cffwv"
-            >
+            <input
+              style="font-size: 16px;"
+              tabindex="0"
+              type="text"
+            />
+            <label>
+              Label
               <select
-                class="is-default css-1lnj870"
+                size="2"
+                tabindex="-1"
               >
-                <option
-                  selected=""
-                  value=""
-                >
-                  Select an option
-                </option>
                 <option
                   value="foo"
                 >
@@ -417,17 +417,43 @@ exports[`single fields select field 1`] = `
                   bar
                 </option>
               </select>
-              <svg
-                class="css-6ibwe0"
-                fill="currentcolor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            </label>
+          </div>
+          <div
+            class="is-default css-1vjef0r"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="is-default css-1a159uv"
+              type="button"
+            >
+              <span
+                class="css-15o6gnw"
               >
-                <path
-                  d="M7 10l5 5 5-5z"
-                />
-              </svg>
-            </div>
+                <div
+                  class="css-1iqd8s3"
+                >
+                  Select an option
+                </div>
+              </span>
+              <span
+                aria-hidden="true"
+                class="css-1yxvfaj"
+              >
+                <svg
+                  class="mdi-icon css-9y7ajs"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M7,10L12,15L17,10H7Z"
+                  />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
         <button
@@ -445,7 +471,7 @@ exports[`single fields select field 1`] = `
 exports[`single fields select field with default 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -459,25 +485,25 @@ exports[`single fields select field with default 1`] = `
           class="field-container css-jblfrf"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
           <div
-            class="is-default css-1vjef0r"
+            aria-hidden="true"
+            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
           >
-            <div
-              class="css-4cffwv"
-            >
+            <input
+              style="font-size: 16px;"
+              tabindex="0"
+              type="text"
+            />
+            <label>
+              Label
               <select
-                class="is-default css-1lnj870"
+                size="2"
+                tabindex="-1"
               >
-                <option
-                  selected=""
-                  value=""
-                >
-                  Select an option
-                </option>
                 <option
                   value="foo"
                 >
@@ -489,17 +515,43 @@ exports[`single fields select field with default 1`] = `
                   bar
                 </option>
               </select>
-              <svg
-                class="css-6ibwe0"
-                fill="currentcolor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            </label>
+          </div>
+          <div
+            class="is-default css-1vjef0r"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="is-default css-1a159uv"
+              type="button"
+            >
+              <span
+                class="css-15o6gnw"
               >
-                <path
-                  d="M7 10l5 5 5-5z"
-                />
-              </svg>
-            </div>
+                <div
+                  class="css-1iqd8s3"
+                >
+                  Select an option
+                </div>
+              </span>
+              <span
+                aria-hidden="true"
+                class="css-1yxvfaj"
+              >
+                <svg
+                  class="mdi-icon css-9y7ajs"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M7,10L12,15L17,10H7Z"
+                  />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
         <button
@@ -517,7 +569,7 @@ exports[`single fields select field with default 1`] = `
 exports[`single fields string field format email 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -528,10 +580,10 @@ exports[`single fields string field format email 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
@@ -539,7 +591,7 @@ exports[`single fields string field format email 1`] = `
             class="is-default css-1vjef0r"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-zad3la"
               value=""
             />
           </div>
@@ -559,7 +611,7 @@ exports[`single fields string field format email 1`] = `
 exports[`single fields string field regular 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -570,10 +622,10 @@ exports[`single fields string field regular 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
@@ -581,7 +633,7 @@ exports[`single fields string field regular 1`] = `
             class="is-default css-1vjef0r"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-zad3la"
               value=""
             />
           </div>
@@ -601,7 +653,7 @@ exports[`single fields string field regular 1`] = `
 exports[`single fields string field with custom errors as sentence 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -612,10 +664,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
         >
           <label
-            class="is-error css-n7nceq"
+            class="is-error css-dzfozd"
           >
             Label
           </label>
@@ -623,7 +675,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
             class="is-error css-1vjef0r"
           >
             <input
-              class="is-error css-1ljx8fg"
+              class="is-error css-zad3la"
               value=""
             />
           </div>
@@ -649,7 +701,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 exports[`single fields string field with help text 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -660,10 +712,10 @@ exports[`single fields string field with help text 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
@@ -671,7 +723,7 @@ exports[`single fields string field with help text 1`] = `
             class="is-default css-1vjef0r"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-zad3la"
               value=""
             />
           </div>
@@ -697,7 +749,7 @@ exports[`single fields string field with help text 1`] = `
 exports[`single fields string field with markdown errors 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -708,10 +760,10 @@ exports[`single fields string field with markdown errors 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Test
           </label>
@@ -719,7 +771,7 @@ exports[`single fields string field with markdown errors 1`] = `
             class="is-default css-1vjef0r"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-zad3la"
               value=""
             />
           </div>
@@ -739,7 +791,7 @@ exports[`single fields string field with markdown errors 1`] = `
 exports[`single fields string field with placeholder 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -750,10 +802,10 @@ exports[`single fields string field with placeholder 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
@@ -761,7 +813,7 @@ exports[`single fields string field with placeholder 1`] = `
             class="is-default css-1vjef0r"
           >
             <input
-              class="is-default css-1ljx8fg"
+              class="is-default css-zad3la"
               placeholder="placeholder"
               value=""
             />
@@ -782,7 +834,7 @@ exports[`single fields string field with placeholder 1`] = `
 exports[`single fields textarea field 1`] = `
 <DocumentFragment>
   <div
-    class="css-11y6zog-PageWrapper"
+    class="css-1qe3vap-PageWrapper"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -793,11 +845,11 @@ exports[`single fields textarea field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container css-jblfrf"
+          class="field-container css-15nhbbq"
           rows="2"
         >
           <label
-            class="is-default css-n7nceq"
+            class="is-default css-dzfozd"
           >
             Label
           </label>
@@ -805,7 +857,7 @@ exports[`single fields textarea field 1`] = `
             class="is-default css-1vjef0r"
           >
             <textarea
-              class="is-default css-8szvo2"
+              class="is-default css-lwvz9e"
               rows="2"
             />
           </div>
