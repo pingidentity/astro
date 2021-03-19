@@ -17,9 +17,19 @@ export const Dropdown = () => {
     },
   };
 
+  const uischema = {
+    dropdownExample: {
+      'ui:widget': 'select',
+      'ui:options': {
+        labelMode: 'float',
+      },
+    },
+  };
+
   return (
     <Form
       schema={('Schema', schema)}
+      uiSchema={('uiSchema', uischema)}
     />
   );
 };

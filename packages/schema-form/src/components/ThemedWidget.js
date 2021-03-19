@@ -11,11 +11,19 @@ const ThemedWidget = (componentType) => {
       formContext: { theme },
       schema: { type },
     } = props;
+    const {
+      schema,
+      formContext,
+    } = props;
     const Component = getThemedComponent(theme, componentType);
     const Wrapper = type === FIELD_TYPES.BOOLEAN
       ? getThemedComponent(theme, 'wrapper')
       : React.Fragment;
-    const inputProps = getThemedProps(theme, props);
+    const inputProps = {
+      ...getThemedProps(theme, props),
+      schema,
+      formContext,
+    };
 
     const onChange = (event) => {
       const eventProperty = type === FIELD_TYPES.BOOLEAN ? 'checked' : 'value';

@@ -15,6 +15,8 @@ import { FIELD_TYPES } from '../utils/constants';
 import Error from '../components/themes/end-user/Error';
 import FieldLabel from '../components/themes/end-user/FieldLabel';
 import SuccessMessage from '../components/themes/end-user/SuccessMessage';
+// eslint-disable-next-line
+import PasswordWithRequirements from '../components/themes/end-user/PasswordWithRequirements';
 
 export const EndUserComponents = {
   button: Button,
@@ -25,6 +27,7 @@ export const EndUserComponents = {
   formTitle: Heading,
   formDescription: FieldLabel,
   password: FloatLabelPasswordInput,
+  passwordWithRequirements: PasswordWithRequirements,
   select: FloatLabelDropdown,
   successMessage: SuccessMessage,
   textinput: FloatLabelTextInput,
