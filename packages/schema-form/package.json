@@ -31,7 +31,7 @@
     "@babel/preset-react": "^7.10.4",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.34",
-    "@pingux/astro": "0.5.0",
+    "@pingux/astro": "0.5.1",
     "@pingux/end-user": "0.30.0",
     "@rjsf/core": "2.0.0",
     "@storybook/addon-actions": "^6.0.21",
