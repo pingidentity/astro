@@ -11,6 +11,7 @@ export const radio = {
     bg: 'transparent',
   },
   'input ~ &.is-focused': {
-    bg: 'highlight',
+    outline: 'none',
+    boxShadow: 'focus',
   },
 };
