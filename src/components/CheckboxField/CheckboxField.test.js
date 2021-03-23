@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-
+import theme from '../../styles/theme';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import CheckboxField from '../CheckboxField';
 
@@ -29,7 +29,7 @@ test('checkbox with focus', () => {
   const icon = document.querySelector('svg');
 
   userEvent.tab();
-  expect(icon).toHaveStyle({ backgroundColor: 'highlight' });
+  expect(icon).toHaveStyle({ outline: 'none', 'box-shadow': theme.shadows.focus });
 });
 
 test('disabled checkbox disables input and the label', () => {
