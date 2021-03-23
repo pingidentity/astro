@@ -48,7 +48,7 @@ StyleDictionary.registerTransform({
   name: 'version-css',
   type: 'value',
   matcher: (prop) => {
-    return prop.value.includes('PACKAGE_VERSION');
+    return typeof prop.value === 'string' && prop.value.includes('PACKAGE_VERSION');
   },
   transformer: function(prop) {
     //console.log(prop)

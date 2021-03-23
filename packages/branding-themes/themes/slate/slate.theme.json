@@ -29,6 +29,15 @@
             }
         },
         "meta": {
+            "signOnPageHeading": {
+                "value": false
+            },
+            "attachedForgotPassword": {
+                "value": false
+            },
+            "fixedHeaderAndFooter": {
+                "value": false
+            },
             "displayName": {
                 "value": "Slate"
             },

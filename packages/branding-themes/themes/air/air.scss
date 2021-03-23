@@ -1,0 +1,226 @@
+@import '../../scss/helpers';
+$THEME_NAME: 'air';
+$colors: getThemeColors($THEME_NAME);
+$images: getThemeImages($THEME_NAME);
+
+@include base($images, $colors);
+
+html,
+body {
+    height: 100%;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    background: #F0F8FF;
+
+    &__content {
+        margin-top: 100px;
+        margin-bottom: 150px;
+        height: 100%;
+
+        @media only screen and (max-width: 600px) {
+            margin: 0;
+        }
+    }
+}
+
+/**
+ * Styles
+ */
+.card {
+    height: auto;
+    max-width: 450px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 3px;
+
+    @media only screen and (max-width: 600px) {
+        height: 100%;
+        max-width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.card__content {
+    padding: 0;
+    height: auto;
+}
+
+/* flexRow added too much unwanted styling for right border */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.branding-template-logo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: map-get($colors, 'headerBackground');
+    min-height: 50px; /* new */
+    max-height: 100px; /* new */
+    z-index: 1000; /* required or the form input fields will be above this logo container */
+
+    @media all and (max-width: 600px) {
+        position: relative;
+    }
+}
+
+.branding-template-form-container {
+    width: 80%;
+    padding: 50px 30px 20px 30px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.org-logo {
+    position: relative;
+    justify-content: flex-start;
+    margin: 0;
+    height: unset;
+    padding: 10px 20px;
+
+    &__image {
+        height: auto;
+        width: auto;
+    }
+}
+
+.branding-template-heading,
+.branding-template-primary-text {
+    text-align: left;
+}
+
+.branding-template-link-container {
+    text-align: center;
+}
+
+.branding-template-error-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.branding-template-heading {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.branding-template-feedback {
+    .feedback--error,
+    .feedback__icon {
+        font-size: 18px;
+    }
+}
+
+.branding-template-form {
+    margin: 4%;
+}
+
+.text-input {
+    border: 1px solid;
+    border-radius: 2px;
+}
+
+.branding-template-primary-button {
+    color: #fff;
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: 500;
+    border-width: 0;
+    max-width: 125px;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.social-button__button {
+    width: 100%;
+}
+
+.branding-template-link-text {
+    margin: 0 0 5px;
+}
+
+.form > :last-child {
+    margin-top: 0;
+}
+
+.text-input {
+    &:placeholder {
+        color: transparent;
+    }
+}
+
+#usernameInput { order: 1; }
+
+#passwordInput { order: 2; }
+
+#paddingComponent { order: 5; }
+
+#signOnButton { order: 4; }
+
+#forgotPasswordLink {
+    order: 3;
+    text-align: right;
+    font-size: 13px;
+}
+
+#registerLink { order: 6; }
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.branding-template-footer-container {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: map-get($colors, 'card');
+    padding: 25px 20px;
+    max-height: 100px;
+    overflow: scroll;
+
+    @media all and (max-width: 600px) {
+        position: relative;
+    }
+}
+
+.org-logo__image {
+    width: auto;
+}
+
+.branding-template-forgot-password {
+    text-align: right;
+}
+
+.branding-template-footer-container div[class^="padding-component--"] {
+    display: none;
+}
+
+.branding-template-branding-template-link-container {
+    padding: 17px;
+    text-align: center;
+    color: map-get($colors, 'bodyText');
+}
+
+.branding-template-login-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.branding-template-login-button-container button {
+  width: 125px;
+}

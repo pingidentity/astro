@@ -1,48 +1,51 @@
 {
-    "mural": {
+    "air": {
         "color": {
             "button": {
-                "value": "#61b375"
+                "value": "#FF6600"
             },
             "buttonText": {
-                "value": "#ffffff"
+                "value": "#FFFFFF"
             },
             "bodyText": {
-                "value": "#000000"
+                "value": "#341C0B"
             },
             "headingText": {
-                "value": "#000000"
+                "value": "#002942"
             },
             "link": {
-                "value": "#2996cc"
+                "value": "#313B87"
             },
             "card": {
-                "value": "#fcfcfc"
+                "value": "#FFFFFF"
             },
             "background": {
-                "value": ""
+                "value": "#F0F8FF"
+            },
+            "headerBackground": {
+                "value": "#002942"
             }
         },
         "image": {
             "background": {
-                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/mural/bg.jpg"
+                "value": ""
             }
         },
         "meta": {
             "signOnPageHeading": {
-                "value": false
+                "value": true
             },
             "attachedForgotPassword": {
-                "value": false
+                "value": true
             },
             "fixedHeaderAndFooter": {
-                "value": false
+                "value": true
             },
             "displayName": {
-                "value": "Mural"
+                "value": "Air"
             },
             "cssLink": {
-                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/mural/mural.css"
+                "value": "https://assets.pingone.com/ux/branding-themes/PACKAGE_VERSION/air/air.css"
             }
         }
     }
