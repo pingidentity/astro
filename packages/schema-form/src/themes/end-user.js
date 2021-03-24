@@ -32,6 +32,7 @@ export const EndUserComponents = {
   successMessage: SuccessMessage,
   textinput: FloatLabelTextInput,
   textarea: FloatLabelTextArea,
+  url: FloatLabelTextInput,
   wrapper: FormRow,
 };
 
