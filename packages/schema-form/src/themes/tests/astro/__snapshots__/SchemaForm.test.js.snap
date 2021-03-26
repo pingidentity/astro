@@ -79,7 +79,7 @@ exports[`single fields checkbox field 1`] = `
                   aria-checked="false"
                   class="css-xyotvu"
                   type="checkbox"
-                  value="test"
+                  value=""
                 />
                 <svg
                   aria-hidden="true"
