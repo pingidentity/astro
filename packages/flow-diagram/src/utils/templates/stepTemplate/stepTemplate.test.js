@@ -29,8 +29,10 @@ describe('Step Template', () => {
     test('getBorderColor returns correct selected value', () => {
         const selected = {
             data: {
-                isSelected: true,
                 errorMessage: null,
+            },
+            containingGroup: {
+                isSelected: true,
             },
         };
         expect(getBorderColor('blue', 'red', 'transparent')(selected)).toBe('blue');
@@ -38,20 +40,21 @@ describe('Step Template', () => {
     test('getBorderColor returns correct error value', () => {
         const errorData = {
             data: {
-                isSelected: false,
                 errorMessage: 'error',
+            },
+            containingGroup: {
+                isSelected: false,
             },
         };
         expect(getBorderColor('blue', 'red', 'transparent')(errorData)).toBe('red');
     });
     test('getBorderColor returns correct default value', () => {
         const none = {
-            lb: {
-                errorMessage: '',
-            },
             data: {
-                isSelected: false,
                 errorMessage: null,
+            },
+            containingGroup: {
+                isSelected: false,
             },
         };
         expect(getBorderColor('blue', 'red', 'transparent')(none)).toBe('transparent');
