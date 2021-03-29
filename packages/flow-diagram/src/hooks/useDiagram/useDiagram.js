@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { differenceWith } from 'lodash';
 import { generateKey } from '../../utils/diagramUtils';
 import ZoomSlider from '../../components/ZoomSlider';
+import NonRealtimeDraggingTool from '../../components/NonRealtimeDraggingTool';
 import { COLORS } from '../../utils/constants';
 
 go.Diagram.licenseKey = '73f947e5b46031b700ca0d2b113f69ed1bb37f3b9ed41bf1595546f0ef0c6d463089ef2c01848ac581aa19f8187fc28ad5c06c799e480132e161d3dd44b084fbe26377b2400f458aa7512e91ccaa2fa2ee6877a792b377f08a799ee2e8a9c09d43e0ecd741';
@@ -111,12 +112,8 @@ export default function useDiagram({
             removeNodes(diagram, nodeDataArray);
             addLinks(diagram, linkDataArray);
             removeLinks(diagram, linkDataArray);
-            // Since we're setting skipsDiagramUpdate to true, this is necessary
-            // to have existing diagram nodes update.
             diagram.model.mergeNodeDataArray(nodeDataArray);
         }
-        setDroppedOntoLinkKey(undefined);
-        setDroppedOntoNodeKey(undefined);
     }, [nodeDataArray, linkDataArray]);
 
     useEffect(() => {
@@ -128,7 +125,16 @@ export default function useDiagram({
 
     // Adds link or node that was dropped onto to onModelChange
     const modelChange = (args) => {
+        addNodes(diagram, nodeDataArray);
+        removeNodes(diagram, nodeDataArray);
+        addLinks(diagram, linkDataArray);
+        removeLinks(diagram, linkDataArray);
+        // Since we're setting skipsDiagramUpdate to true, this is necessary
+        // to have existing diagram nodes update.
+        diagram.model.mergeNodeDataArray(nodeDataArray);
         onModelChange({ ...args, droppedOntoLinkKey, droppedOntoNodeKey });
+        setDroppedOntoLinkKey(undefined);
+        setDroppedOntoNodeKey(undefined);
     };
 
     const initDiagram = () => {
@@ -140,6 +146,7 @@ export default function useDiagram({
                     'undoManager.isEnabled': true,
                     'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
                         .computeEffectiveCollection),
+                    draggingTool: $(NonRealtimeDraggingTool, { duration: 600 }),
                     layout:
                         $(go.LayeredDigraphLayout,
                             {

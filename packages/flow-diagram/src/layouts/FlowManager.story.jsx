@@ -62,10 +62,15 @@ const Demo = () => {
             color: '#028CFF',
         },
         {
+            isGroup: 'true',
+            'key': 'execute_group',
+        },
+        {
             'key': 'step',
             'category': 'step',
             'stepId': 'registration',
             'text': 'Execute Flow',
+            'group': 'execute_group',
             canLinkFrom: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#228C22',
@@ -131,40 +136,47 @@ const Demo = () => {
                     modifiedNodeData.filter(node => insertedNodeKeys.includes(node.key));
 
                 let groupKey;
-                setDiagramNodes([
-                    ...diagramNodes,
-                    // Remove placeholder categories from nodes
-                    ...addedNodes.flatMap(({ category, key, loc, ...node }) => {
-                        const replacementKey = uuidV4();
-                        const modifiedNode = {
-                            ...node,
-                            // Remove palette categories so that nodes display correctly in diagram.
-                            category: category === 'palette-group' ? '' : category,
-                            key: replacementKey,
-                        };
-                        if (node.isGroup) {
-                            groupKey = replacementKey;
-                            return [
-                                modifiedNode,
-                                ...key === 'login-group' ? [{
-                                    'key': `${replacementKey}-success`,
-                                    group: replacementKey,
-                                    'category': 'outlet',
-                                    color: '#D5DCF3',
-                                    'text': 'On Success',
-                                }] : [],
-                            ];
-                        } else if (node.group) {
-                            return {
-                                ...modifiedNode,
-                                key: `${groupKey}-step`,
-                                group: groupKey,
+                if (droppedOntoLinkKey || droppedOntoNodeKey) {
+                    setDiagramNodes([
+                        ...diagramNodes,
+                        // Remove placeholder categories from nodes
+                        ...addedNodes.flatMap(({ category, key, loc, ...node }) => {
+                            const replacementKey = uuidV4();
+                            const modifiedNode = {
+                                ...node,
+                                // Remove palette categories so that nodes display correctly in diagram.
+                                category: category === 'palette-group' ? '' : category,
+                                key: replacementKey,
                             };
-                        }
 
-                        return modifiedNode;
-                    }),
-                ]);
+                            if (node.isGroup) {
+                                groupKey = replacementKey;
+                                const returnNode = [
+                                    modifiedNode,
+                                    ...key === 'login-group' ? [{
+                                        'key': `${replacementKey}-success`,
+                                        group: replacementKey,
+                                        'category': 'outlet',
+                                        color: '#D5DCF3',
+                                        'text': 'On Success',
+                                    }] : [],
+                                ];
+                                return returnNode;
+                            } else if (node.group) {
+                                const returnNode = {
+                                    ...modifiedNode,
+                                    key: `${groupKey}-step`,
+                                    group: groupKey,
+                                };
+                                return returnNode;
+                            }
+
+
+
+                            return modifiedNode;
+                        }),
+                    ]);
+                }
 
                 const createLinkedNodes = (key) => {
                     return {
