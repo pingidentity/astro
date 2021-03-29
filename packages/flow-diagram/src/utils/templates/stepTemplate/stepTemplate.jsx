@@ -14,7 +14,7 @@ export const getIfLengthGreater = (ifTrue, ifFalse, target) => (s) => {
 };
 
 export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part) => {
-    if (part.isSelected || part.data.isSelected) {
+    if (part.containingGroup.isSelected) {
         return selectedColor;
     } else if (part.data.errorMessage) {
         return errorColor;
@@ -90,6 +90,9 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         shadowColor: 'rgb(211, 211, 211, .75)',
         shadowOffset: new go.Point(0, 1),
         shadowBlur: 10,
+        movable: false,
+        selectable: false,
+        deletable: false,
     },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     new go.Binding('click', 'onClick'),
