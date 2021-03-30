@@ -391,4 +391,49 @@ describe('single fields', () => {
     );
     expect(removeIds(asFragment())).toMatchSnapshot();
   });
+
+  test('required flag is passed to components', async () => {
+    const promise = Promise.resolve();
+    const onChange = jest.fn(() => promise);
+    const schema = {
+      title: 'Example Title',
+      description: 'Example of schema forms using uiSchema',
+      type: 'object',
+      properties: {
+        textInput: {
+          type: 'string',
+        },
+        textArea: {
+          type: 'string',
+        },
+        checkbox: {
+          type: 'boolean',
+        },
+        dropdown: {
+          type: 'string',
+          enum: ['value1', 'value2'],
+        },
+        number: {
+          type: 'number',
+        },
+      },
+      required: ['textInput', 'textArea', 'checkbox', 'dropdown', 'number'],
+    };
+    const uiSchema = {
+      textArea: {
+        'ui:widget': 'textarea',
+      },
+    };
+    const { asFragment } = render((
+      <Form
+        theme={THEMES.ASTRO}
+        onChange={onChange}
+        schema={schema}
+        uiSchema={uiSchema}
+        formData={[]}
+      />
+    ));
+    expect(asFragment().querySelectorAll('label.is-required')).toHaveLength(5);
+    await act(() => promise);
+  });
 });

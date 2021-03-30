@@ -133,6 +133,7 @@ export const toAstroInputProps = (props) => {
     },
     formContext,
     isDisabled: disabled,
+    isRequired: required,
     label: inputLabel,
     helperText,
     labelMode,
