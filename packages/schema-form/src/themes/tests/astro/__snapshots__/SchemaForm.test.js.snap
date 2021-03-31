@@ -608,6 +608,48 @@ exports[`single fields string field format email 1`] = `
 </DocumentFragment>
 `;
 
+exports[`single fields string field format uri 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1qe3vap-PageWrapper"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="field-container css-15nhbbq"
+        >
+          <label
+            class="is-default css-dzfozd"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-1vjef0r"
+          >
+            <input
+              class="is-default css-zad3la"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" css-fl4xzn"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`single fields string field regular 1`] = `
 <DocumentFragment>
   <div

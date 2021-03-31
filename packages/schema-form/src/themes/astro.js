@@ -32,6 +32,7 @@ export const AstroComponents = {
   select: Dropdown,
   successMessage: SuccessMessage,
   textinput: TextField,
+  url: TextField,
   textarea: TextAreaField,
   wrapper: Box,
 };

@@ -10,6 +10,7 @@ const widgets = {
   SelectWidget: ThemedWidget('select'),
   TextWidget: ThemedWidget('textinput'),
   TextareaWidget: ThemedWidget('textarea'),
+  URLWidget: ThemedWidget('url'),
   passwordWithRequirements: ThemedWidget('passwordWithRequirements'),
   recaptchaV2: RecaptchaV2,
 };
