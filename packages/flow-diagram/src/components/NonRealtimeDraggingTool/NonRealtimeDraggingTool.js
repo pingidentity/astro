@@ -4,6 +4,8 @@ import * as go from 'gojs';
 * @extends DraggingTool
 * @class
 */
+/* istanbul ignore file */
+
 export default function NonRealtimeDraggingTool() {
     go.DraggingTool.call(this);
     this._duration = 0; // duration of movement animation; <= 0 to disable

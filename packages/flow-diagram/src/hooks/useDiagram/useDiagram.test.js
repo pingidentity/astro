@@ -13,13 +13,15 @@ import useDiagram, {
 import { COLORS } from '../../utils/constants';
 
 jest.mock('../../components/ZoomSlider/ZoomSlider.js');
+jest.mock('../../components/NonRealtimeDraggingTool/NonRealtimeDraggingTool.js');
 
 jest.mock('gojs', (replacements) => {
-    const paletteObjectProps = {
+    const diagramObjectProps = {
         ...replacements,
         model: {
             findNodeDataForKey: jest.fn(() => 'node data'),
             setDataProperty: jest.fn(),
+            mergeNodeDataArray: jest.fn(),
         },
         groupTemplateMap: {
             add: jest.fn(),
@@ -40,15 +42,17 @@ jest.mock('gojs', (replacements) => {
             },
         },
     };
+    const Diagram = () => {};
+    Diagram.inherit = () => {};
     return ({
         Binding: jest.fn(() => ({
             ofModel: jest.fn(),
             ofObject: jest.fn(),
         })),
-        Diagram: () => {},
+        Diagram,
         DraggingTool: () => ({ computeEffectiveCollection: () => {} }),
         GraphObject: {
-            make: jest.fn(() => paletteObjectProps),
+            make: jest.fn(() => diagramObjectProps),
         },
         Link: () => {},
         List: jest.fn(() => ({
@@ -86,7 +90,7 @@ describe('useDiagram', () => {
 
     it('useDiagram returns correct props', () => {
         // TODO: Flesh out this test more and set up GoJS mock
-        const { result: { current: { diagramProps } } } = renderHook(() => useDiagram({
+        const { result } = renderHook(() => useDiagram({
             groupTemplates: [],
             linkDataArray: defaultLinks,
             nodeDataArray: defaultNodes,
@@ -96,29 +100,14 @@ describe('useDiagram', () => {
 
         // Get the argument from the first renderContent call
 
-        expect(diagramProps.nodeDataArray).toEqual(defaultNodes);
-        expect(diagramProps.linkDataArray).toEqual(defaultLinks);
-        expect(diagramProps.initDiagram).toBeDefined();
-    });
-
-    it('onModelChange from diagramProps calls onModelChange argument', () => {
-        const onModelChange = jest.fn();
-        const { result: { current: { diagramProps } } } = renderHook(() => useDiagram({
-            groupTemplates: [],
-            linkDataArray: [],
-            nodeDataArray: [],
-            nodeTemplates: [],
-            onModelChange,
-        }));
-
-        expect(onModelChange).not.toHaveBeenCalled();
-        diagramProps.onModelChange();
-        expect(onModelChange).toHaveBeenCalledTimes(1);
+        expect(result.current.diagramProps.nodeDataArray).toEqual(defaultNodes);
+        expect(result.current.diagramProps.linkDataArray).toEqual(defaultLinks);
+        expect(result.current.diagramProps.initDiagram).toBeDefined();
     });
 
     it('useDiagram adds node templates to node template map', () => {
         const diagramObject = go.GraphObject.make();
-        const { result: { current: { diagramProps } } } = renderHook(() => useDiagram({
+        const { result } = renderHook(() => useDiagram({
             groupTemplates: [],
             linkDataArray: defaultLinks,
             nodeDataArray: defaultNodes,
@@ -127,7 +116,7 @@ describe('useDiagram', () => {
         }));
 
         expect(diagramObject.nodeTemplateMap.add).not.toHaveBeenCalled();
-        act(() => { diagramProps.initDiagram(); });
+        act(() => { result.current.diagramProps.initDiagram(); });
 
         expect(diagramObject.nodeTemplateMap.add).toHaveBeenCalledTimes(3);
         expect(diagramObject.nodeTemplateMap.add.mock.calls).toEqual(defaultTemplates);
@@ -135,7 +124,7 @@ describe('useDiagram', () => {
 
     it('useDiagram adds group templates to group template map', () => {
         const diagramObject = go.GraphObject.make();
-        const { result: { current: { diagramProps } } } = renderHook(() => useDiagram({
+        const { result } = renderHook(() => useDiagram({
             groupTemplates: defaultTemplates,
             linkDataArray: defaultLinks,
             nodeDataArray: defaultNodes,
@@ -144,10 +133,58 @@ describe('useDiagram', () => {
         }));
 
         expect(diagramObject.groupTemplateMap.add).not.toHaveBeenCalled();
-        act(() => { diagramProps.initDiagram(); });
+        act(() => { result.current.diagramProps.initDiagram(); });
 
         expect(diagramObject.groupTemplateMap.add).toHaveBeenCalledTimes(3);
         expect(diagramObject.groupTemplateMap.add.mock.calls).toEqual(defaultTemplates);
+    });
+
+    it('onModelChange from diagramProps calls onModelChange argument', () => {
+        const myModelChange = jest.fn();
+        const { result } = renderHook(() => useDiagram({
+            groupTemplates: [],
+            linkDataArray: [],
+            nodeDataArray: [],
+            nodeTemplates: [],
+            onModelChange: myModelChange,
+        }));
+
+        expect(myModelChange).not.toHaveBeenCalled();
+        act(() => { result.current.diagramProps.initDiagram(); });
+        act(() => { result.current.diagramProps.onModelChange(); });
+        expect(myModelChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('onModelChange from diagramProps calls onModelChange argument with correct arguments for droppedOntoLinkKey', () => {
+        const myModelChange = jest.fn();
+        const { result } = renderHook(() => useDiagram({
+            groupTemplates: [],
+            linkDataArray: [],
+            nodeDataArray: [],
+            nodeTemplates: [],
+            onModelChange: myModelChange,
+        }));
+
+        expect(myModelChange).not.toHaveBeenCalled();
+        act(() => { result.current.diagramProps.initDiagram(); });
+        act(() => { result.current.diagramProps.onModelChange({ droppedOntoLinkKey: 'linkKey' }); });
+        expect(myModelChange).toHaveBeenCalledWith({ droppedOntoLinkKey: 'linkKey' });
+    });
+
+    it('onModelChange from diagramProps calls onModelChange argument with correct arguments for droppedOntoNodeKey', () => {
+        const myModelChange = jest.fn();
+        const { result } = renderHook(() => useDiagram({
+            groupTemplates: [],
+            linkDataArray: [],
+            nodeDataArray: [],
+            nodeTemplates: [],
+            onModelChange: myModelChange,
+        }));
+
+        expect(myModelChange).not.toHaveBeenCalled();
+        act(() => { result.current.diagramProps.initDiagram(); });
+        act(() => { result.current.diagramProps.onModelChange({ droppedOntoNodeKey: 'nodeKey' }); });
+        expect(myModelChange).toHaveBeenCalledWith({ droppedOntoNodeKey: 'nodeKey' });
     });
 
     it('addNodes adds nodes with new keys', () => {
