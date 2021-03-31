@@ -132,7 +132,10 @@ export default function useDiagram({
         // Since we're setting skipsDiagramUpdate to true, this is necessary
         // to have existing diagram nodes update.
         diagram.model.mergeNodeDataArray(nodeDataArray);
-        onModelChange({ ...args, ...(droppedOntoLinkKey ? { droppedOntoLinkKey } : {}), ...(droppedOntoNodeKey ? { droppedOntoNodeKey } : {}) });
+        onModelChange({ ...args,
+            ...(droppedOntoLinkKey ? { droppedOntoLinkKey } : {}),
+            ...(droppedOntoNodeKey ? { droppedOntoNodeKey } : {}),
+        });
         setDroppedOntoLinkKey(undefined);
         setDroppedOntoNodeKey(undefined);
     };
