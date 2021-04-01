@@ -7,7 +7,9 @@ import Box from '../Box';
  * Icons will fill the given container, which is '1em' x '1em' by default, and will maintain their
  * aspect ratio.
  * Use SVGR to import SVG files as React components and pass them into this component, and you can
- * use the theme to color the icon.
+ * use the theme to color the icon. But ensure you pass `dimensions: false` in webpack config
+ * (see [SVGR docs](https://react-svgr.com/docs/options/#dimensions)).
+ * Otherwise icon will not be resizable by `size` prop.
  * Icons can also be used from the [Material UI Icon Library](https://materialdesignicons.com/).
  * Built on top of the [Box from Rebass](https://rebassjs.org/box) and uses the
  * available [props from Rebass](https://rebassjs.org/props/).
