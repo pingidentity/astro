@@ -40,6 +40,10 @@ const ThemedWidget = (componentType) => {
         <Component
           {...inputProps}
           onChange={onChange}
+          controlProps={{
+            ...inputProps?.controlProps,
+            onChange,
+          }}
         />
       </Wrapper>
     );

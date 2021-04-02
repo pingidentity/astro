@@ -1,4 +1,9 @@
-import { fireEvent, screen, act } from '@testing-library/react';
+import {
+  fireEvent,
+  screen,
+  act,
+  waitFor,
+} from '@testing-library/react';
 import { THEMES } from '../../themes/utils';
 import { renderSchemaForm } from './utils';
 
@@ -36,12 +41,12 @@ test('it renders a password with requirements popover', async () => {
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 
   // Ensure the popover is inserted into the document and displays when the input is focused
-  await act(async () => fireEvent.focus(input));
+  await waitFor(() => fireEvent.focus(input));
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   expect(screen.queryByRole('tooltip')).toBeVisible();
 
   // Ensure the popover is hidden again when the input is blurred
-  await act(async () => fireEvent.blur(input));
+  await waitFor(() => fireEvent.blur(input));
   expect(screen.queryByRole('tooltip')).not.toBeVisible();
 });
 
