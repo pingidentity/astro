@@ -9,6 +9,8 @@ support teams who need that functionality. If that functionality is not needed o
 be turned off by passing `mode="simplified"` into the Form props. This will return the form to a
 basic wrapper around RJSF while still supporting Ping UX theming out of the box.
 
+This prop cannot be changed run-time - significant differences in internal logic will crash at rendering phase.
+
 <Canvas>
   <Story story={stories.simplified} />
 </Canvas>
