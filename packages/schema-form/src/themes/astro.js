@@ -109,13 +109,6 @@ export const toAstroInputProps = (props) => {
   const isStacked = _.get(custom, 'isStacked', true);
   const isSelected = _.isObject(value) ? false : (value || false);
   const { helperText, status } = getFieldMessageData(props);
-  const onValueChange = (e) => {
-    if (schema?.type === FIELD_TYPES.BOOLEAN) {
-      return onChange(e);
-    }
-
-    return onChange(e.target.value);
-  };
 
   const inputProps = {
     controlProps: {
@@ -125,7 +118,7 @@ export const toAstroInputProps = (props) => {
       isSelected,
       isStacked,
       onBlur,
-      onChange: onValueChange,
+      onChange,
       onFocus,
       placeholder: placeholder || undefined,
       isReadOnly: readonly,

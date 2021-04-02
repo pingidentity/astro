@@ -415,10 +415,10 @@ test('if options.emptyValue is provided it will be used instead of empty value',
     },
   });
   const input = screen.getByRole('textbox');
-  fireEvent.change(input, { target: { value: '123' } });
-  fireEvent.change(input, { target: { value: '' } });
-  await act(() => promise);
-  expect(onChange).toHaveBeenLastCalledWith(
+  await waitFor(() => fireEvent.change(input, { target: { value: '123' } }));
+  await waitFor(() => fireEvent.change(input, { target: { value: '' } }));
+  expect(onChange).toHaveBeenNthCalledWith(
+    2,
     expect.objectContaining({
       formData: {
         value: '-replacement-',
