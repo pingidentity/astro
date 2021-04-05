@@ -16,13 +16,22 @@ export const getIfLengthGreater = (ifTrue, ifFalse, target) => (s) => {
     return s.length > target ? ifTrue : ifFalse;
 };
 
+export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part) => {
+    if (part.isSelected) {
+        return selectedColor;
+    } else if (part.data.errorMessage) {
+        return errorColor;
+    }
+    return defaultColor;
+};
+
 export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
     return (
         $(go.Node, 'Auto',
             {
                 groupable: false,
                 movable: false,
-                selectable: false,
+                selectionAdorned: false,
                 deletable: false,
                 toSpot: go.Spot.Left,
                 fromSpot: go.Spot.Right,
@@ -46,6 +55,10 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
             ),
             $(go.Shape, 'Circle',
                 { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 0), cursor: 'normal' },
+            ),
+            $(go.Shape, 'Circle',
+                { fill: 'transparent', strokeWidth: 1, desiredSize: new go.Size(39, 39), margin: new go.Margin(0, 0, 0, 0), cursor: 'normal' },
+                new go.Binding('stroke', '', getBorderColor(COLORS.BLUE, COLORS.ERROR, 'transparent')).ofObject(''),
             ),
             $(go.Picture, { source: svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />), width: 25, height: 25, margin: new go.Margin(0, -1, 0, 0), cursor: 'normal' }),
             fromNode({ color: COLORS.BLUE }),

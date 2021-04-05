@@ -134,7 +134,7 @@ describe('single fields', () => {
       expect(asFragment()).toMatchSnapshot();
     });
 
-    test.skip('format uri', () => {
+    test('format uri', () => {
       const schema = {
         type: 'string',
         format: 'uri',

@@ -3,7 +3,7 @@
 exports[`form elements form success message 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -25,7 +25,7 @@ exports[`form elements form success message 1`] = `
 exports[`form elements form success title 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -53,7 +53,7 @@ exports[`form elements form success title 1`] = `
 exports[`single fields checkbox field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -67,7 +67,7 @@ exports[`single fields checkbox field 1`] = `
           class="css-uliqdc"
         >
           <div
-            class="css-uliqdc"
+            class="field-container css-1n0hpos"
           >
             <label
               class="is-default css-knfhfe"
@@ -79,7 +79,7 @@ exports[`single fields checkbox field 1`] = `
                   aria-checked="false"
                   class="css-xyotvu"
                   type="checkbox"
-                  value="test"
+                  value=""
                 />
                 <svg
                   aria-hidden="true"
@@ -123,7 +123,7 @@ exports[`single fields checkbox field 1`] = `
 exports[`single fields checkboxes field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -138,7 +138,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="css-uliqdc"
+              class="field-container css-1n0hpos"
             >
               <label
                 class="is-default css-knfhfe"
@@ -183,7 +183,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="css-uliqdc"
+              class="field-container css-1n0hpos"
             >
               <label
                 class="is-default css-knfhfe"
@@ -228,7 +228,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="css-uliqdc"
+              class="field-container css-1n0hpos"
             >
               <label
                 class="is-default css-knfhfe"
@@ -273,7 +273,7 @@ exports[`single fields checkboxes field 1`] = `
             class="css-uliqdc"
           >
             <div
-              class="css-uliqdc"
+              class="field-container css-1n0hpos"
             >
               <label
                 class="is-default css-knfhfe"
@@ -330,7 +330,7 @@ exports[`single fields checkboxes field 1`] = `
 exports[`single fields password field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -341,7 +341,7 @@ exports[`single fields password field 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -373,7 +373,7 @@ exports[`single fields password field 1`] = `
 exports[`single fields select field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -384,7 +384,7 @@ exports[`single fields select field 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -392,13 +392,19 @@ exports[`single fields select field 1`] = `
             Label
           </label>
           <div
-            class="is-default css-uliqdc"
+            aria-hidden="true"
+            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
           >
-            <div
-              class="css-4cffwv"
-            >
+            <input
+              style="font-size: 16px;"
+              tabindex="0"
+              type="text"
+            />
+            <label>
+              Label
               <select
-                class="is-default css-4y926w"
+                size="2"
+                tabindex="-1"
               >
                 <option
                   value="foo"
@@ -411,17 +417,43 @@ exports[`single fields select field 1`] = `
                   bar
                 </option>
               </select>
-              <svg
-                class="css-6ibwe0"
-                fill="currentcolor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            </label>
+          </div>
+          <div
+            class="is-default css-uliqdc"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="is-default css-vhv7r1"
+              type="button"
+            >
+              <span
+                class="css-uliqdc"
               >
-                <path
-                  d="M7 10l5 5 5-5z"
-                />
-              </svg>
-            </div>
+                <div
+                  class="css-vurnku"
+                >
+                  Select an option
+                </div>
+              </span>
+              <span
+                aria-hidden="true"
+                class="css-uliqdc"
+              >
+                <svg
+                  class="mdi-icon css-1bcbcdi"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M7,10L12,15L17,10H7Z"
+                  />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
         <button
@@ -439,7 +471,7 @@ exports[`single fields select field 1`] = `
 exports[`single fields select field with default 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -450,7 +482,7 @@ exports[`single fields select field with default 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -458,13 +490,19 @@ exports[`single fields select field with default 1`] = `
             Label
           </label>
           <div
-            class="is-default css-uliqdc"
+            aria-hidden="true"
+            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
           >
-            <div
-              class="css-4cffwv"
-            >
+            <input
+              style="font-size: 16px;"
+              tabindex="0"
+              type="text"
+            />
+            <label>
+              Label
               <select
-                class="is-default css-4y926w"
+                size="2"
+                tabindex="-1"
               >
                 <option
                   value="foo"
@@ -477,17 +515,43 @@ exports[`single fields select field with default 1`] = `
                   bar
                 </option>
               </select>
-              <svg
-                class="css-6ibwe0"
-                fill="currentcolor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            </label>
+          </div>
+          <div
+            class="is-default css-uliqdc"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="is-default css-vhv7r1"
+              type="button"
+            >
+              <span
+                class="css-uliqdc"
               >
-                <path
-                  d="M7 10l5 5 5-5z"
-                />
-              </svg>
-            </div>
+                <div
+                  class="css-vurnku"
+                >
+                  Select an option
+                </div>
+              </span>
+              <span
+                aria-hidden="true"
+                class="css-uliqdc"
+              >
+                <svg
+                  class="mdi-icon css-1bcbcdi"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M7,10L12,15L17,10H7Z"
+                  />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
         <button
@@ -505,7 +569,7 @@ exports[`single fields select field with default 1`] = `
 exports[`single fields string field format email 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -516,7 +580,7 @@ exports[`single fields string field format email 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -528,7 +592,48 @@ exports[`single fields string field format email 1`] = `
           >
             <input
               class="is-default css-4y926w"
-              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" css-vhv7r1"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field format uri 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
+  >
+    <div
+      class="css-1otsgan-FormWrapper"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="field-container css-1n0hpos"
+        >
+          <label
+            class="is-default css-knfhfe"
+          >
+            Label
+          </label>
+          <div
+            class="is-default css-uliqdc"
+          >
+            <input
+              class="is-default css-4y926w"
               value=""
             />
           </div>
@@ -548,7 +653,7 @@ exports[`single fields string field format email 1`] = `
 exports[`single fields string field regular 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -559,7 +664,7 @@ exports[`single fields string field regular 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -571,7 +676,6 @@ exports[`single fields string field regular 1`] = `
           >
             <input
               class="is-default css-4y926w"
-              type="text"
               value=""
             />
           </div>
@@ -591,7 +695,7 @@ exports[`single fields string field regular 1`] = `
 exports[`single fields string field with custom errors as sentence 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -602,7 +706,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-error css-knfhfe"
@@ -614,7 +718,6 @@ exports[`single fields string field with custom errors as sentence 1`] = `
           >
             <input
               class="is-error css-4y926w"
-              type="text"
               value=""
             />
           </div>
@@ -640,7 +743,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 exports[`single fields string field with help text 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -651,7 +754,7 @@ exports[`single fields string field with help text 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -663,7 +766,6 @@ exports[`single fields string field with help text 1`] = `
           >
             <input
               class="is-default css-4y926w"
-              type="text"
               value=""
             />
           </div>
@@ -689,7 +791,7 @@ exports[`single fields string field with help text 1`] = `
 exports[`single fields string field with markdown errors 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -700,7 +802,7 @@ exports[`single fields string field with markdown errors 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -712,7 +814,6 @@ exports[`single fields string field with markdown errors 1`] = `
           >
             <input
               class="is-default css-4y926w"
-              type="text"
               value=""
             />
           </div>
@@ -732,7 +833,7 @@ exports[`single fields string field with markdown errors 1`] = `
 exports[`single fields string field with placeholder 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -743,7 +844,7 @@ exports[`single fields string field with placeholder 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
         >
           <label
             class="is-default css-knfhfe"
@@ -756,7 +857,6 @@ exports[`single fields string field with placeholder 1`] = `
             <input
               class="is-default css-4y926w"
               placeholder="placeholder"
-              type="text"
               value=""
             />
           </div>
@@ -776,7 +876,7 @@ exports[`single fields string field with placeholder 1`] = `
 exports[`single fields textarea field 1`] = `
 <DocumentFragment>
   <div
-    class="css-1rh97lq-PageWrapper css-uliqdc"
+    class="css-1lfxxz2-PageWrapper css-uliqdc"
   >
     <div
       class="css-1otsgan-FormWrapper"
@@ -787,7 +887,8 @@ exports[`single fields textarea field 1`] = `
         novalidate=""
       >
         <div
-          class="css-uliqdc"
+          class="field-container css-1n0hpos"
+          rows="2"
         >
           <label
             class="is-default css-knfhfe"
@@ -799,6 +900,7 @@ exports[`single fields textarea field 1`] = `
           >
             <textarea
               class="is-default css-4y926w"
+              rows="2"
             />
           </div>
         </div>

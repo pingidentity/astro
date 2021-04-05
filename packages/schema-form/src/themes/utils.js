@@ -1,4 +1,6 @@
+// eslint-disable-next-line
 import { EndUserComponents, toEndUserInputProps } from './end-user';
+// eslint-disable-next-line
 import { AstroComponents, toAstroInputProps } from './astro';
 
 export const THEMES = {

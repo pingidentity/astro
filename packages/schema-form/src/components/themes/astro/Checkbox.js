@@ -4,29 +4,29 @@ import { CheckboxField } from '@pingux/astro';
 
 const Checkbox = ({
   controlProps,
-  labelProps,
   label,
   isDisabled,
   ...props
 }) => (
   <CheckboxField
-    controlProps={controlProps}
-    labelProps={labelProps}
-    label={label}
-    isDisabled={isDisabled}
     {...props}
-  >
-    {label}
-  </CheckboxField>
+    onChange={controlProps.onChange}
+    isSelected={controlProps.isSelected}
+    isDisabled={isDisabled}
+    label={label}
+  />
 );
 
 Checkbox.propTypes = {
-  controlProps: PropTypes.shape({}),
+  controlProps: PropTypes.shape({
+    onChange: PropTypes.func,
+    isSelected: PropTypes.bool,
+  }),
   labelProps: PropTypes.shape({
     variant: PropTypes.string,
   }),
   /** The label for the element. */
-  label: PropTypes.node.isRequired,
+  label: PropTypes.node,
   /** Whether the control and label are disabled. */
   isDisabled: PropTypes.bool,
 };
@@ -34,6 +34,7 @@ Checkbox.propTypes = {
 Checkbox.defaultProps = {
   controlProps: {},
   labelProps: {},
+  label: '',
   isDisabled: false,
 };
 
