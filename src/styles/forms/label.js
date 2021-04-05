@@ -37,7 +37,7 @@ export const label = {
 // Variants below
 
 label.indicator = {
-  color: 'red',
+  color: 'critical.bright',
   ml: 5,
 };
 
