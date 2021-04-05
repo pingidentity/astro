@@ -20,7 +20,7 @@ export const Default = () => {
         <Text>Duplicate</Text>
       </Item>
       <Item key="delete" textValue="Delete">
-        <Text color="red">Delete</Text>
+        <Text color="critical.bright">Delete</Text>
       </Item>
     </Menu>
   );
