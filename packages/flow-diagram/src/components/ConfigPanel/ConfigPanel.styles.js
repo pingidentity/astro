@@ -4,8 +4,8 @@ export const configPanel = {
 
 export const configPanelClose = {
     cursor: 'pointer',
-    right: '2%',
+    right: '7px',
     position: 'absolute',
-    top: '4%',
+    top: '7px',
 };
 

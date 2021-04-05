@@ -453,7 +453,7 @@ const Demo = () => {
                         >
                             <Box alignItems="center">
                                 <TextField label="Step name" controlProps={{ value: selectedNode.stepId }} onChange={e => updateStepId(selectedNode, e.target.value, 'stepId')} width="90%" />
-                                <TextField mt={20} label="Description" controlProps={{ value: selectedNode.description }} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="90%" />
+                                <TextField mt={20} label="Description" value={selectedNode.description || ''} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="90%" />
                             </Box>
                         </ConfigPanel>
                     ) : (

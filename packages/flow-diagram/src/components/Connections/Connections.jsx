@@ -44,6 +44,7 @@ export default function Connections({ links, panels }) {
     return (
         getLinks().map(link => (
             <Xarrow
+                key={`${link.from}-${link.to}`}
                 start={link.from}
                 end={link.to}
                 color="#FF8324"
