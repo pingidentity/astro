@@ -1,19 +1,27 @@
 import React from 'react';
 import Box from '.';
+import { flatColorList } from '../../styles/colors.js';
 
 export default {
   title: 'Box',
   component: Box,
+  argTypes: {
+    bg: {
+      control: {
+        type: 'select',
+        options: flatColorList.map(([colorName]) => colorName),
+      },
+      defaultValue: 'active',
+    },
+  },
 };
 
 
-export const Default = () => (
-  <Box bg="active" width="100%" p="xl">
-    <Box isRow bg="neutral.50">
-      <Box width={30} height={15} m="sm" bg="success.bright" />
-      <Box width={100} height={50} m="sm" bg="critical.bright" />
-      <Box width={190} height={45} m="sm" bg="warning.bright" />
-    </Box>
+export const Default = ({ ...args }) => (
+  <Box bg="active" width="100%" p="xl" {...args}>
+    <Box width={30} height={15} m="sm" bg="success.bright" />
+    <Box width={100} height={50} m="sm" bg="critical.bright" />
+    <Box width={190} height={45} m="sm" bg="warning.bright" />
   </Box>
 );
 

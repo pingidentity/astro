@@ -363,6 +363,48 @@ exports[`single fields string field format email 1`] = `
 </DocumentFragment>
 `;
 
+exports[`single fields string field format uri 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1sgnpj4-FormWrapper"
+  >
+    <form
+      autocomplete="off"
+      class="form"
+      id="rjsf_form"
+      novalidate=""
+    >
+      <div
+        class="float-label placeholder-shown"
+      >
+        <input
+          autocomplete="on"
+          class="text-input float-label__input"
+          data-id="undefined-input"
+          id="rjsf"
+          name="rjsf"
+          type="text"
+          value=""
+        />
+        <label
+          class="float-label__label"
+          for="rjsf"
+        />
+      </div>
+      <div>
+        <button
+          class="button file-input--button button--primary brand-primary-bg"
+          data-id="button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`single fields string field regular 1`] = `
 <DocumentFragment>
   <div

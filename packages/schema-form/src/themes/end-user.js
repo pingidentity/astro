@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import Button from '@pingux/end-user/components/Button';
-import Checkbox from '@pingux/end-user/components/Checkbox';
 import FloatLabelDropdown from '@pingux/end-user/components/FloatLabelDropdown';
 import FloatLabelPasswordInput from '@pingux/end-user/components/FloatLabelPasswordInput';
 import FloatLabelTextArea from '@pingux/end-user/components/FloatLabelTextArea';
@@ -15,6 +14,9 @@ import { FIELD_TYPES } from '../utils/constants';
 import Error from '../components/themes/end-user/Error';
 import FieldLabel from '../components/themes/end-user/FieldLabel';
 import SuccessMessage from '../components/themes/end-user/SuccessMessage';
+import Checkbox from '../components/themes/end-user/Checkbox';
+// eslint-disable-next-line
+import PasswordWithRequirements from '../components/themes/end-user/PasswordWithRequirements';
 
 export const EndUserComponents = {
   button: Button,
@@ -25,10 +27,12 @@ export const EndUserComponents = {
   formTitle: Heading,
   formDescription: FieldLabel,
   password: FloatLabelPasswordInput,
+  passwordWithRequirements: PasswordWithRequirements,
   select: FloatLabelDropdown,
   successMessage: SuccessMessage,
   textinput: FloatLabelTextInput,
   textarea: FloatLabelTextArea,
+  url: FloatLabelTextInput,
   wrapper: FormRow,
 };
 

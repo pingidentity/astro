@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Box, Button, Image, Separator, Text, TextField } from '@pingux/astro';
-import { mdiArrowCollapseLeft, mdiTools, mdiFormSelect, mdiSourceBranch } from '@mdi/js';
+import { mdiArrowCollapseLeft, mdiTools, mdiFormSelect, mdiSourceBranch, mdiFlag } from '@mdi/js';
 import Icon from '@mdi/react';
 import { v4 as uuidV4 } from 'uuid';
 import '../css/main.css';
@@ -80,7 +80,7 @@ const Demo = () => {
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
-        { 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' }]);
+        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START' }]);
 
     const [diagramLinks, setDiagramLinks] = useState([
         { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success', 'category': 'outlet' },
@@ -108,7 +108,7 @@ const Demo = () => {
             ['finished', successNode],
             ['error', failureNode],
             ['branch', branchNode],
-            ['START', nodeTemplateStart()],
+            ['START', nodeTemplateStart({ onClick: onStepClick })],
             // Add a palette item template so that the above node types
             // look correct while dragging into diagram.
             ['palette-item', paletteItemTemplate()],
@@ -441,7 +441,7 @@ const Demo = () => {
                                 <Box>
                                     <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
                                         <Box isRow>
-                                            <Image src={selectedNode.getIconSrc(selectedNode.color)} />
+                                            <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
                                             <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
                                         </Box>
                                     </Box>

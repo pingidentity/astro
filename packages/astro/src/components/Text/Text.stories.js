@@ -1,6 +1,7 @@
 import React from 'react';
 import Text from './Text';
 import { textVariants } from '../../utils/devUtils/constants/variants.js';
+import { flatColorList } from '../../styles/colors.js';
 
 export default {
   title: 'Text',
@@ -19,11 +20,25 @@ export default {
       },
       defaultValue: 'Hi, this is some text!',
     },
+    color: {
+      control: {
+        type: 'select',
+        options: [undefined, ...flatColorList.map(([colorName]) => colorName)],
+      },
+      defaultValue: undefined,
+    },
+    bg: {
+      control: {
+        type: 'select',
+        options: flatColorList.map(([colorName]) => colorName),
+      },
+      defaultValue: 'white',
+    },
   },
 };
 
-export const Default = ({ children, ...args }) => (
-  <Text {...args}>
+export const Default = ({ children, bg, ...args }) => (
+  <Text bg={bg} {...args} p="xl">
     {children}
   </Text>
 );

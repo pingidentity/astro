@@ -349,3 +349,81 @@ test('custom widgets override existing widgets', () => {
 
   expect(screen.getAllByTestId('my-widget')).toHaveLength(2);
 });
+
+test('clearing field does not trigger minLength validation', async () => {
+  const promise = Promise.resolve();
+  const onChange = jest.fn(() => promise);
+
+  renderSchemaForm({
+    theme: THEMES.ASTRO,
+    liveValidate: true,
+    onChange,
+    schema,
+    uiSchema,
+  });
+  const input = screen.getByRole('textbox');
+
+  // Ensure validation fails, length = 2
+  fireEvent.change(input, { target: { value: '123' } });
+
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  fireEvent.change(input, { target: { value: '' } });
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  await act(() => promise);
+});
+
+test('providing value for required field and then clearing will trigger validation error', async () => {
+  const promise = Promise.resolve();
+  const onChange = jest.fn(() => promise);
+
+  renderSchemaForm({
+    theme: THEMES.ASTRO,
+    liveValidate: true,
+    onChange,
+    schema: {
+      ...schema,
+      required: ['value'],
+    },
+    uiSchema,
+  });
+  const input = screen.getByRole('textbox');
+  fireEvent.change(input, { target: { value: '123' } });
+  fireEvent.change(input, { target: { value: '' } });
+  expect(screen.queryByRole('status')).toBeInTheDocument();
+  expect(screen.queryByText('Is a required property')).toBeInTheDocument();
+  await act(() => promise);
+});
+
+test('if options.emptyValue is provided it will be used instead of empty value', async () => {
+  const promise = Promise.resolve();
+  const onChange = jest.fn(() => promise);
+
+  renderSchemaForm({
+    theme: THEMES.ASTRO,
+    liveValidate: true,
+    onChange,
+    schema,
+    uiSchema: {
+      ...uiSchema,
+      value: {
+        ...uiSchema.value,
+        'ui:options': {
+          ...uiSchema.value['ui:options'],
+          emptyValue: '-replacement-',
+        },
+      },
+    },
+  });
+  const input = screen.getByRole('textbox');
+  await waitFor(() => fireEvent.change(input, { target: { value: '123' } }));
+  await waitFor(() => fireEvent.change(input, { target: { value: '' } }));
+  expect(onChange).toHaveBeenNthCalledWith(
+    2,
+    expect.objectContaining({
+      formData: {
+        value: '-replacement-',
+      },
+    }),
+  );
+  await act(() => promise);
+});

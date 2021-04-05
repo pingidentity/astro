@@ -16,6 +16,7 @@ export const Basic = () => {
     exampleTextBox: {
       'ui:options': {
         label: 'Example Label',
+        labelMode: 'float',
       },
     },
   };
@@ -34,16 +35,49 @@ export const PasswordInput = () => {
     properties: {
       exampleTextBox: {
         type: 'string',
-        title: 'Example Password Text Input',
+        title: 'Example Password Input',
       },
     },
   };
   const uischema = {
     exampleTextBox: {
-      'ui:widget': 'passwordWithRequirements',
+      'ui:widget': 'password',
       'ui:options': {
         label: false,
       },
+    },
+  };
+  return (
+    <Form
+      schema={('Schema', schema)}
+      uiSchema={('uiSchema', uischema)}
+    />
+  );
+};
+
+export const PasswordWithRequirements = () => {
+  const schema = {
+    type: 'object',
+    properties: {
+      exampleTextBox: {
+        type: 'string',
+        title: 'Example Password Input w/ Requirements',
+      },
+    },
+  };
+  const uischema = {
+    exampleTextBox: {
+      'ui:options': {
+        label: false,
+        inputType: 'password',
+        requirementsTitle: 'Password Requirements',
+        requirementsData: [
+          { name: 'Foo', status: 'no' },
+          { name: 'Bar', status: 'no' },
+          { name: 'Baz', status: 'yes' },
+        ],
+      },
+      'ui:widget': 'passwordWithRequirements',
     },
   };
   return (
