@@ -2,6 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import RadioField, { RadioContext } from './RadioField';
+import theme from '../../styles/theme';
 
 const testId = 'test-radio';
 const testLabel = 'Test Label';
@@ -61,7 +62,7 @@ test('radio with focus', () => {
 
   userEvent.tab();
   expect(input).toHaveFocus();
-  expect(icon).toHaveStyle({ backgroundColor: 'highlight' });
+  expect(icon).toHaveStyle({ outline: 'none', 'box-shadow': theme.shadows.focus });
 });
 
 test('radio with checked content does not display if not checked', () => {
