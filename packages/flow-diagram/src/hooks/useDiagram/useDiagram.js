@@ -1,7 +1,6 @@
 import * as go from 'gojs';
 import { useEffect, useState } from 'react';
 import { differenceWith } from 'lodash';
-import { generateKey } from '../../utils/diagramUtils';
 import ZoomSlider from '../../components/ZoomSlider';
 import NonRealtimeDraggingTool from '../../components/NonRealtimeDraggingTool';
 import { COLORS } from '../../utils/constants';
@@ -166,8 +165,8 @@ export default function useDiagram({
                     model: $(go.GraphLinksModel,
                         {
                             linkKeyProperty: 'key',
-                            makeUniqueKeyFunction: generateKey,
-                            makeUniqueLinkKeyFunction: generateKey,
+                            makeUniqueKeyFunction: null,
+                            makeUniqueLinkKeyFunction: null,
                         }),
                 });
         nodeTemplates.forEach(([name, template]) => {

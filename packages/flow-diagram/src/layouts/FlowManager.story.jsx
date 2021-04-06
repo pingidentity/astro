@@ -141,7 +141,7 @@ const Demo = () => {
                         ...diagramNodes,
                         // Remove placeholder categories from nodes
                         ...addedNodes.flatMap(({ category, key, loc, ...node }) => {
-                            const replacementKey = uuidV4();
+                            const replacementKey = key;
                             const modifiedNode = {
                                 ...node,
                                 // Remove palette categories so that nodes display correctly in diagram.
@@ -153,7 +153,7 @@ const Demo = () => {
                                 groupKey = replacementKey;
                                 const returnNode = [
                                     modifiedNode,
-                                    ...key === 'login-group' ? [{
+                                    ...key.startsWith('login-group') ? [{
                                         'key': `${replacementKey}-success`,
                                         group: replacementKey,
                                         'category': 'outlet',
@@ -198,7 +198,7 @@ const Demo = () => {
                         return link;
                     });
                     // Adding link from dropped node to previously linked node
-                    if (addedNodes[0].key !== 'login-group') {
+                    if (!addedNodes[0].key.startsWith('login-group')) {
                         setDiagramLinks([
                             ...newLinks,
                             { from: `${groupKey}-step`, to: linkTo },
@@ -223,7 +223,7 @@ const Demo = () => {
                         return link;
                     });
                     // Either adding link from dropped onto node to dropped node, or from dropped node to previously linked node
-                    if (addedNodes[0].key !== 'login-group') {
+                    if (!addedNodes[0].key.startsWith('login-group')) {
                         setDiagramLinks([
                             ...newLinks,
                             linkedFrom ? { from: `${groupKey}-step`, to: linkTo } : { from: droppedOntoNodeKey, to: `${groupKey}-step` },
@@ -236,7 +236,7 @@ const Demo = () => {
                             { from: `${groupKey}-success`, to: linkTo },
                         ]);
                     }
-                } else if (addedNodes[0].key === 'login-group') {
+                } else if (addedNodes[0].key.startsWith('login-group')) {
                     setDiagramLinks([
                         ...diagramLinks,
                         createLinkedNodes(groupKey),
