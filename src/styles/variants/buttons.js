@@ -9,6 +9,7 @@ const base = {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
+  borderRadius: '2px',
   ...text.buttonLabel,
 };
 
