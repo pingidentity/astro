@@ -9,9 +9,9 @@ import { useSingleSelectListState } from '@react-stately/list';
 
 import Box from '../Box';
 import { CollectionTab } from '../Tab';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 export const TabsContext = React.createContext({});
-export const ORIENTATION = { HORIZONTAL: 'horizontal', VERTICAL: 'vertical' };
 
 const Tabs = forwardRef((props, ref) => {
   const {
