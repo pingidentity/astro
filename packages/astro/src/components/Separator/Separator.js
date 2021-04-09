@@ -1,34 +1,30 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSeparator } from '@react-aria/separator';
-import { mergeProps } from '@react-aria/utils';
+
 import Box from '../Box/Box';
+import useStatusClasses from '../../hooks/useStatusClasses';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 /**
  * Basic separator or HR component.
  * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
 */
-
 const Separator = forwardRef((props, ref) => {
-  const {
-    sx,// eslint-disable-line
-  } = props;
+  const { className, orientation, ...others } = props;
   const { separatorProps } = useSeparator(props, ref);
-  const separatorStyles = {
-    bg: 'line.hairline',
-    width: props.orientation === 'vertical' ? '1px' : '100%',
-    height: props.orientation === 'vertical' ? '100%' : '1px',
-    margin: props.orientation === 'vertical' ? '0 5px' : '5px 0',
-  };
+  const { classNames } = useStatusClasses(className, {
+    'is-vertical': orientation === ORIENTATION.VERTICAL,
+    'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
+  });
 
   return (
     <Box
       ref={ref}
-      {...mergeProps(props, separatorProps)}
-      sx={{
-        ...separatorStyles,
-        ...sx,
-      }}
+      className={classNames}
+      variant="separator"
+      {...others}
+      {...separatorProps}
     />
   );
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 import Separator from './Separator';
 
 const testId = 'test-separator';
@@ -23,13 +23,13 @@ test('renders Separator component', () => {
 test('renders correct styles with horizontal prop', () => {
   getComponent({ orientation: 'horizontal' });
   const separator = screen.getByTestId(testId);
-  expect(separator).toHaveStyleRule('width', '100%');
-  expect(separator).toHaveStyleRule('height', '1px');
+  expect(separator).toHaveStyle({ width: '100%' });
+  expect(separator).toHaveStyle({ height: '1px' });
 });
 
 test('renders correct styles with vertical prop', () => {
   getComponent({ orientation: 'vertical' });
   const separator = screen.getByTestId(testId);
-  expect(separator).toHaveStyleRule('width', '1px');
-  expect(separator).toHaveStyleRule('height', '100%');
+  expect(separator).toHaveStyle({ width: '1px' });
+  expect(separator).toHaveStyle({ height: '100%' });
 });
