@@ -4,7 +4,7 @@ import { Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import { encodeSvg } from '../templateUtils';
 import { COLORS } from '../../constants';
-import { toNode, fromNode } from '../nodes';
+import { toNode, fromNode, bottomNode } from '../nodes';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
 const $ = go.GraphObject.make;
@@ -164,5 +164,6 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         ),
         fromNode(),
         toNode(),
+        bottomNode(),
     ),
 );

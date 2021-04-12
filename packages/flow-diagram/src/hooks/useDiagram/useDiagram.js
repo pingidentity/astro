@@ -152,12 +152,25 @@ export default function useDiagram({
                     layout:
                         $(go.LayeredDigraphLayout,
                             {
-                                setsPortSpots: true,
+                                setsPortSpots: false,
                                 columnSpacing: 20,
                                 layerSpacing: 20,
                                 isInitial: true,
                                 isOngoing: true,
                             }),
+                    'linkingTool.insertLink': (fromnode, fromport, tonode, toport) => {
+                        const linkingTool = diagramObject.toolManager.linkingTool;
+                        if (fromport.portId === 'bottom') {
+                            diagramObject.model.setCategoryForLinkData(linkingTool.archetypeLinkData, 'io');
+                        } else {
+                            diagramObject.model.setCategoryForLinkData(linkingTool.archetypeLinkData, '');
+                        }
+                        return go
+                            .LinkingTool
+                            .prototype
+                            .insertLink
+                            .call(linkingTool, fromnode, fromport, tonode, toport);
+                    },
                     'ExternalObjectsDropped': externalObjectsDropped,
                     'InitialAnimationStarting': renderPortCursors,
                     'LinkDrawn': renderPortCursors,
@@ -249,6 +262,29 @@ export default function useDiagram({
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
                 $(go.Shape, { stroke: COLORS.BLUE },
+                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+            ),
+        );
+
+        diagramObject.linkTemplateMap.add('io',
+            $(go.Link,
+                {
+                    routing: go.Link.AvoidsNodes,
+                    curve: go.Link.JumpOver,
+                    corner: 5,
+                    fromShortLength: -10,
+                    toShortLength: -10,
+                    selectable: true,
+                    layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
+                    selectionAdorned: false,
+                    fromPortId: 'bottom',
+                    toPortId: 'bottom',
+                    layerName: 'Background',
+                },
+                new go.Binding('relinkableFrom', 'canRelink').ofModel(),
+                new go.Binding('relinkableTo', 'canRelink').ofModel(),
+                $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
+                $(go.Shape, { isPanelMain: true, stroke: COLORS.ORANGE },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
             ),
         );
