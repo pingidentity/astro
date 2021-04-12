@@ -1,1 +1,1 @@
-export { toNode, fromNode } from './nodes';
+export { toNode, fromNode, bottomNode } from './nodes';
