@@ -104,6 +104,7 @@ export default function useDiagram({
     const [diagram, setDiagram] = useState();
     const [droppedOntoLinkKey, setDroppedOntoLinkKey] = useState(undefined);
     const [droppedOntoNodeKey, setDroppedOntoNodeKey] = useState(undefined);
+    const [selected, setSelected] = useState(null);
 
     useEffect(() => {
         if (diagram?.model) {
@@ -112,6 +113,7 @@ export default function useDiagram({
             addLinks(diagram, linkDataArray);
             removeLinks(diagram, linkDataArray);
             diagram.model.mergeNodeDataArray(nodeDataArray);
+            diagram.model.mergeLinkDataArray(linkDataArray);
         }
     }, [nodeDataArray, linkDataArray]);
 
@@ -121,6 +123,12 @@ export default function useDiagram({
             diagram.allowDelete = !isDisabled;
         }
     }, [isDisabled]);
+
+    useEffect(() => {
+        onModelChange({
+            ...(selected ? { selectedData: selected } : { selectedData: {} }),
+        });
+    }, [selected]);
 
     // Adds link or node that was dropped onto to onModelChange
     const modelChange = (args) => {
@@ -175,6 +183,11 @@ export default function useDiagram({
                     'InitialAnimationStarting': renderPortCursors,
                     'LinkDrawn': renderPortCursors,
                     'SelectionDeleted': renderPortCursors,
+                    'ChangedSelection': (e) => {
+                        if (e.diagram.selection.count === 0) {
+                            setSelected(null);
+                        }
+                    },
                     model: $(go.GraphLinksModel,
                         {
                             linkKeyProperty: 'key',
@@ -184,7 +197,12 @@ export default function useDiagram({
                 });
         nodeTemplates.forEach(([name, template]) => {
             const updatedTemplate = template;
+            const templateClick = template.click;
             updatedTemplate.mouseDrop = (e, node) => setDroppedOntoNodeKey(node.key);
+            updatedTemplate.click = (e, node) => {
+                templateClick();
+                setSelected(node);
+            };
             diagramObject.nodeTemplateMap.add(name, updatedTemplate);
         });
 
@@ -280,7 +298,9 @@ export default function useDiagram({
                     fromPortId: 'bottom',
                     toPortId: 'bottom',
                     layerName: 'Background',
+                    click: (e, link) => setSelected(link),
                 },
+                new go.Binding('visible', 'visible'),
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
                 $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
