@@ -3,4 +3,5 @@ export const leftContainer = {
     borderStyle: 'solid',
     borderColor: '#CACED3',
     backgroundColor: '#FFF',
+    overflow: 'auto',
 };

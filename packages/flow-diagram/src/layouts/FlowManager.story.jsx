@@ -38,10 +38,6 @@ const Demo = () => {
     const [isScrolling, setIsScrolling] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
-    const onStepClick = (e, obj) => {
-        setSelectedNode(obj.part.data);
-    };
-
     const onPanelClose = () => {
         setSelectedNode(null);
     };
@@ -102,13 +98,13 @@ const Demo = () => {
         nodeDataArray: diagramNodes,
         nodeTemplates: [
             // onClick can also be defined per node.
-            ['step', stepTemplate({ onClick: onStepClick })],
+            ['step', stepTemplate()],
             // The outletTemplate can also be defined with a color on its own.
             ['outlet', outletTemplate({ width: 100 })],
             ['finished', successNode],
             ['error', failureNode],
             ['branch', branchNode],
-            ['START', nodeTemplateStart({ onClick: onStepClick })],
+            ['START', nodeTemplateStart()],
             // Add a palette item template so that the above node types
             // look correct while dragging into diagram.
             ['palette-item', paletteItemTemplate()],
@@ -122,10 +118,21 @@ const Demo = () => {
             removedLinkKeys,
             droppedOntoNodeKey,
             droppedOntoLinkKey,
+            selectedData,
         }) => {
             // onModelChange gets called once at the beginning with every node,
             // so ignore key adds that involve too many new keys to have come from
             // the palette.
+
+            if (selectedData) {
+                if (Object.keys(selectedData).length) {
+                    if (selectedData.linksConnected) {
+                        setSelectedNode(selectedData.data);
+                    }
+                } else {
+                    setSelectedNode(null);
+                }
+            }
             if (insertedNodeKeys?.length > 2) {
                 return;
             }
@@ -389,17 +396,6 @@ const Demo = () => {
         ],
         linkDataArray: [],
     });
-
-    // The diagram object is populated after the initial render, so check to see if it's defined
-    // before adding listeners.
-    if (diagramObject) {
-        diagramObject.addDiagramListener('ChangedSelection', (e) => {
-            // If a node is deselected in diagram, clear selected node.
-            if (e.diagram.selection.count === 0) {
-                setSelectedNode(null);
-            }
-        });
-    }
 
     const updateStepId = (selected, id, field) => {
         const currentNode = diagramNodes.find(node => node.key === selected.key);
