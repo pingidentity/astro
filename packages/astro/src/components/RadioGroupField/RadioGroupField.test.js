@@ -5,6 +5,7 @@ import { render, screen } from '../../utils/testUtils/testWrapper';
 import statuses from '../../utils/devUtils/constants/statuses';
 import RadioGroupField from '.';
 import RadioField from '../RadioField';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 const testId = 'test-radio-group';
 const testLabel = 'Test Label';
@@ -29,6 +30,7 @@ test('default radio group', () => {
   expect(label).toBeInstanceOf(HTMLLabelElement);
   expect(group).toBeInTheDocument();
   expect(label).toBeInTheDocument();
+  expect(group).toHaveAttribute('aria-orientation', ORIENTATION.VERTICAL);
 });
 
 test('radio group onChange', () => {
@@ -112,4 +114,10 @@ test('radio group with helper text', () => {
   const fieldHelperText = screen.getByText(helperText);
   expect(fieldHelperText).toBeInTheDocument();
   expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
+});
+
+test('radio group with horizontal orientation', () => {
+  getComponent({ orientation: ORIENTATION.HORIZONTAL });
+  const group = screen.getByRole('radiogroup');
+  expect(group).toHaveAttribute('aria-orientation', ORIENTATION.HORIZONTAL);
 });
