@@ -54,3 +54,11 @@ export const HelperText = () => (
     <RadioField value="C" label="C" />
   </RadioGroupField>
 );
+
+export const HorizontalOrientation = () => (
+  <RadioGroupField label="Pick one" orientation="horizontal">
+    <RadioField value="A" label="A" />
+    <RadioField value="B" label="B" />
+    <RadioField value="C" label="C" />
+  </RadioGroupField>
+);
