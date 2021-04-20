@@ -22,7 +22,11 @@ const content = {
   outline: 'none',
   background: 'white',
   color: 'black',
-  padding: 'lg',
+  pt: 'md',
+  pr: 'lg',
+  pb: 'lg',
+  pl: 'lg',
+  maxWidth: '400px',
   boxShadow: 'standard',
   borderRadius: 3,
   '.is-dark-mode &': {
@@ -35,6 +39,8 @@ const dark = { ...container };
 
 const title = {
   ...text.title,
+  mr: 'sm',
+  fontWeight: 3,
   '.is-dark-mode &': {
     color: 'white',
   },
