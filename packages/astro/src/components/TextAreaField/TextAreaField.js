@@ -1,6 +1,5 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import useField from '../../hooks/useField';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
@@ -20,21 +19,36 @@ const TextAreaField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField({ statusClasses, ...props });
   const textAreaRef = useRef();
+  const labelRef = useRef();
+
   /* istanbul ignore next */
   useImperativeHandle(ref, () => textAreaRef.current);
 
+  /* istanbul ignore next */
+  const resizeFloatLabel = () => {
+    /* istanbul ignore next */
+    labelRef.current.style.width = textAreaRef.current.style.width;
+  };
+
+  useEffect(() => {
+    if (!props.isUnresizable && props.labelMode === 'float') {
+      textAreaRef.current.addEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
+    }
+    return () => {
+      textAreaRef.current.removeEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
+    };
+  }, []);
+
   return (
-    <Box {...fieldContainerProps} variant="forms.input.wrapper">
-      <Label {...fieldLabelProps} />
+    <Box {...fieldContainerProps}>
+      <Label ref={labelRef} {...fieldLabelProps} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} />
       </Box>
-      {
-        helperText &&
+      {helperText &&
         <FieldHelperText status={status}>
           {helperText}
-        </FieldHelperText>
-      }
+        </FieldHelperText>}
     </Box>
   );
 });
@@ -46,6 +60,8 @@ TextAreaField.propTypes = {
   helperText: PropTypes.node,
   /** The unique identifier for the textarea element. */
   id: PropTypes.string,
+  /** A string designating whether or not the label is a float label. */
+  labelMode: PropTypes.string,
   /** Whether the textarea is unable to be resized. */
   isUnresizable: PropTypes.bool,
   /** The name for the textarea element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-name). */
@@ -81,6 +97,10 @@ TextAreaField.propTypes = {
    * Callback fired when focus is lost on the textarea element.
    */
   onFocus: PropTypes.func,
+  /**
+   * Callback fired when textfield is resized.
+   */
+  resizeCallback: PropTypes.func,
   /** The placeholder text to display in the textarea element. */
   placeholder: PropTypes.string,
   /** The number of rows to display for the textarea. Controls the default height. */
