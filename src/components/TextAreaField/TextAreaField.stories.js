@@ -21,6 +21,7 @@ export const FloatLabel = () => (
 
 export const LeftLabel = () => (
   <TextAreaField
+    helperText="Here is some helpful text..."
     label="Example label"
     labelMode="left"
   />
