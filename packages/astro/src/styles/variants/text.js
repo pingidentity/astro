@@ -42,6 +42,10 @@ const fieldHelperText = {
   '&.is-warning': {
     color: 'warning.dark',
   },
+  '.is-left-label > &': {
+    gridRowEnd: 3,
+    gridColumnEnd: 3,
+  },
 };
 
 export const text = {

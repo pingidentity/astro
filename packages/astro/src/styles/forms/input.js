@@ -55,7 +55,9 @@ input.small = {
 
 input.wrapper = {
   '&.is-left-label': {
-    flexDirection: 'row',
+    display: 'inline-grid',
+    gridTemplateColumns: 'fit-content auto',
+    gridTemplateRows: 'auto auto',
   },
   '> .is-default': {
     width: '100%',
