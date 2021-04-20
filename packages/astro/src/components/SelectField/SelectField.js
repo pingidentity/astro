@@ -116,7 +116,7 @@ const SelectField = forwardRef((props, ref) => {
             {
               state.selectedItem
                 ? state.selectedItem.rendered
-                : <Text variant="placeholder">{defaultText}</Text>
+                : <Text variant="placeholder">{props.labelMode === 'float' ? '' : defaultText}</Text>
             }
           </Box>
           <Box as="span" aria-hidden="true" variant="forms.select.arrow">
@@ -169,6 +169,8 @@ SelectField.propTypes = {
   /** The currently selected key in the collection (controlled). */
   selectedKey: PropTypes.string,
   /** Determines the textarea status indicator and helper text styling. */
+  labelMode: PropTypes.string,
+  /** Determines the type of label applied to the component. */
   status: PropTypes.oneOf(Object.values(statuses)),
   /**
    * @ignore
@@ -197,7 +199,7 @@ SelectField.propTypes = {
 };
 
 SelectField.defaultProps = {
-  defaultText: 'Select an option',
+  defaultText: 'Select',
   status: statuses.DEFAULT,
 };
 

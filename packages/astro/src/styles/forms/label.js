@@ -13,6 +13,10 @@ export const label = {
   mb: 'xs',
   alignItems: 'center',
   '&.is-float-label': {
+    textOverflow: 'ellipsis',
+    display: 'block',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
     fontSize: 'md',
     fontWeight: -1,
     position: 'absolute',
@@ -23,6 +27,7 @@ export const label = {
     transformOrigin: 'top left',
     transition: 'all 0.2s ease-out',
     pointerEvents: 'none',
+    paddingRight: '25px',
   },
   '.is-float-label-active &.is-float-label': {
     ...activeFloatLabel,
