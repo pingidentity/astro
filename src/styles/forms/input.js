@@ -15,6 +15,7 @@ export const input = {
   boxSizing: 'border-box',
   lineHeight: '1.25em',
   textOverflow: 'ellipsis',
+  paddingRight: '100px',
   bg: 'white',
   borderWidth: 1,
   borderStyle: 'solid',
