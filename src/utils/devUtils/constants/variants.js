@@ -1,5 +1,6 @@
 import { snakeCase, toUpper, fromPairs } from 'lodash';
 import { text } from '../../../styles/variants/text';
+import { buttons } from '../../../styles/variants/buttons';
 
 /**
  * Converts the given object to a constant mapping.
@@ -10,3 +11,4 @@ import { text } from '../../../styles/variants/text';
 const toConstantObject = obj => fromPairs(Object.keys(obj).map(i => [toUpper(snakeCase(i)), i]));
 
 export const textVariants = toConstantObject(text);
+export const buttonVariants = toConstantObject(buttons);
