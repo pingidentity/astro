@@ -7,6 +7,7 @@ import menuItem from './menuItem';
 import popover from './popover';
 import popoverMenu from './popoverMenu';
 import rockerbutton from './rockerbutton';
+import separator from './separator';
 import * as tabs from './tabs';
 import loader from './loader';
 
@@ -22,5 +23,6 @@ export default {
   popover,
   popoverMenu,
   rockerbutton,
+  separator,
   ...tabs,
 };

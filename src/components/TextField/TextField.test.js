@@ -35,6 +35,12 @@ test('text field with label props', () => {
   expect(label).toHaveStyleRule('color', 'red');
 });
 
+test('text field with left label', () => {
+  getComponent({ labelMode: 'left' });
+  const label = screen.getByText(testLabel);
+  expect(label).toHaveClass('is-left-label');
+});
+
 test('text field with helper text', () => {
   const helperText = 'helper text';
   getComponent({ helperText });

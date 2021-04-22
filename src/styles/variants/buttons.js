@@ -9,6 +9,7 @@ const base = {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
+  borderRadius: '2px',
   ...text.buttonLabel,
 };
 
@@ -102,6 +103,27 @@ export const buttons = {
     border: '1px solid',
     borderColor: 'critical.bright',
     color: 'white',
+  },
+  danger: {
+    ...base,
+    bg: 'white',
+    border: '1px solid',
+    borderColor: 'critical.bright',
+    color: 'critical.bright',
+    '&.is-hovered': {
+      ...defaultHover,
+      color: 'critical.bright',
+      borderColor: 'critical.bright',
+    },
+    '&.is-pressed': {
+      ...defaultActive,
+      bg: 'critical.bright',
+      borderColor: 'critical.bright',
+      color: 'white',
+    },
+    '&.is-focused': {
+      ...defaultFocus,
+    },
   },
   icon: {
     alignSelf: 'flex-start',

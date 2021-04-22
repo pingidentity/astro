@@ -15,6 +15,7 @@ export const input = {
   boxSizing: 'border-box',
   lineHeight: '1.25em',
   textOverflow: 'ellipsis',
+  paddingRight: '100px',
   bg: 'white',
   borderWidth: 1,
   borderStyle: 'solid',
@@ -55,7 +56,9 @@ input.small = {
 
 input.wrapper = {
   '&.is-left-label': {
-    flexDirection: 'row',
+    display: 'inline-grid',
+    gridTemplateColumns: 'fit-content auto',
+    gridTemplateRows: 'auto auto',
   },
   '> .is-default': {
     width: '100%',

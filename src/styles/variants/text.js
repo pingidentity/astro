@@ -13,9 +13,13 @@ const wordWrap = {
 const tabLabel = {
   ...base,
   ...wordWrap,
-  textTransform: 'uppercase',
-  px: 10,
+  fontSize: 'sm',
+  fontWeight: 1,
   mb: 8,
+  color: 'neutral.40',
+  '.is-selected &': {
+    color: 'active',
+  },
   '.is-disabled &': {
     color: 'neutral.80',
   },
@@ -37,6 +41,10 @@ const fieldHelperText = {
   },
   '&.is-warning': {
     color: 'warning.dark',
+  },
+  '.is-left-label > &': {
+    gridRowEnd: 3,
+    gridColumnEnd: 3,
   },
 };
 

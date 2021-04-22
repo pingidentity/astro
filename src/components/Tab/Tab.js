@@ -9,11 +9,12 @@ import { useTab } from '@react-aria/tabs';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import { Item as Tab } from '@react-stately/collections';
-import classnames from 'classnames';
 
 import Box from '../Box';
-import { TabsContext, ORIENTATION } from '../Tabs';
+import { TabsContext } from '../Tabs';
 import Text from '../Text';
+import useStatusClasses from '../../hooks/useStatusClasses';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 export const CollectionTab = forwardRef((props, ref) => {
   const {
@@ -26,23 +27,25 @@ export const CollectionTab = forwardRef((props, ref) => {
   const { icon, isDisabled: tabDisabled, tabLineProps } = itemProps;
   const isDisabled = tabsDisabled || tabDisabled;
   const state = useContext(TabsContext);
+  const isSelected = state.selectedKey === key;
   const { isFocusVisible, focusProps } = useFocusRing();
-  const tabClasses = classnames(className, {
+  const { classNames } = useStatusClasses(className, {
     'is-focused': isFocusVisible,
-    'is-disabled': isDisabled,
+    'is-vertical': orientation === ORIENTATION.VERTICAL,
+    'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
+    isDisabled,
+    isSelected,
   });
 
   const tabRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabRef.current);
   const { tabProps } = useTab({ item, isDisabled }, state, tabRef);
-  const isSelected = state.selectedKey === key;
 
   return (
     <Box
-      className={tabClasses}
+      className={classNames}
       variant="tab"
-      bg={orientation === ORIENTATION.VERTICAL && isSelected && 'accent.95'}
       {...itemProps}
       {...mergeProps(focusProps, tabProps)}
       ref={tabRef}
@@ -69,9 +72,7 @@ CollectionTab.propTypes = {
 const TabLine = props => (
   <Box
     role="presentation"
-    height={2}
-    width="100%"
-    bg="active"
+    variant="tabLine"
     {...props}
   />
 );

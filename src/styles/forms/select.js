@@ -10,6 +10,7 @@ const activeFloatLabel = {
 // Default select
 export const select = {
   ...input,
+  height: '42px',
   display: 'flex',
   alignItems: 'center',
   '&.is-focused': {

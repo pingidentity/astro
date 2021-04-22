@@ -3,10 +3,20 @@ import Box from '../Box';
 import Button from '.';
 import Icon from '../Icon';
 import Text from '../Text';
+import { buttonVariants } from '../../utils/devUtils/constants/variants';
 
 export default {
   title: 'Button',
   component: Button,
+  argTypes: {
+    variant: {
+      control: {
+        type: 'select',
+        options: Object.values(buttonVariants),
+      },
+      defaultValue: Object.values(buttonVariants)[0],
+    },
+  },
 };
 
 export const Default = args => (
