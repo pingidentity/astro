@@ -69,8 +69,8 @@ pipeline {
           container('node-builder') {
             echo "Building & publishing"
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
-              sh "yarn run dist"
-              sh "cd dist && yarn publish"
+              sh "yarn run build"
+              sh "yarn publish"
             }
           }
         }
@@ -118,8 +118,8 @@ pipeline {
   post {
     success {
        slackSend channel: '#ux-deployments', message: ":verynice: Great Success! End-User ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
-       slackSend channel: '#ui-announcements', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
-       slackSend channel: '#ui-end-user', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+      //  slackSend channel: '#ui-announcements', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
+      //  slackSend channel: '#ui-end-user', message: "@here End-User ${env.RELEASE_VERSION} has been released.", color: "#4aba78"
     }
     unsuccessful {
        slackSend channel: '#ux-deployments', message: "@here ${BUILD_URL} failed!", color: "#a31300"

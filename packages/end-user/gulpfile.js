@@ -4,7 +4,7 @@ const del = require('del');
 const debug = require('gulp-debug');
 
 const paths = {
-    dist: 'dist',
+    dist: 'lib',
 };
 
 gulp.task('delete-dist', () => del([paths.dist]));
@@ -28,7 +28,6 @@ gulp.task('transpile-utils', () =>
 gulp.task('move-files', () =>
     gulp
         .src([
-            './package.json',
             './src/css**/**/*',
             './src/icons**/**/*',
         ])
