@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import TextField from '.';
+import Box from '../Box';
 
 export default {
   title: 'Form/TextField',
@@ -32,11 +33,19 @@ export const FloatLabel = () => (
 );
 
 export const LeftLabel = () => (
-  <TextField
-    helperText="Here is some helpful text..."
-    label="Example Label"
-    labelMode="left"
-  />
+  <Box gap="xl" width="fit-content">
+    <TextField
+      label="Example Label"
+      labelMode="left"
+    />
+
+    <TextField
+      status="error"
+      helperText="Here is some helpful text..."
+      label="Example Label"
+      labelMode="left"
+    />
+  </Box>
 );
 
 export const Controlled = () => {
