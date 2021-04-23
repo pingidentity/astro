@@ -17,6 +17,10 @@ jest.mock('gojs', () => {
         Shape: {
             defineFigureGenerator: jest.fn(() => {}),
         },
+        Spot: {},
+        TextBlock: {},
+        Size: () => {},
+        Margin: () => {},
     });
 });
 

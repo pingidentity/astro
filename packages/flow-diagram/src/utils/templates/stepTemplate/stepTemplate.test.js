@@ -16,15 +16,19 @@ jest.mock('gojs', () => {
         Shape: {
             defineFigureGenerator: jest.fn(() => {}),
         },
+        Spot: {},
+        TextBlock: {},
+        Size: () => {},
+        Margin: () => {},
     });
 });
 
 describe('Step Template', () => {
     test('getIfLengthGreater returns correct true value', () => {
-        expect(getIfLengthGreater(true, false, 0)('1')).toBe(true);
+        expect(getIfLengthGreater('1', true, false, 0)).toBe(true);
     });
     test('getIfLengthGreater returns correct false value', () => {
-        expect(getIfLengthGreater(true, false, 2)('1')).toBe(false);
+        expect(getIfLengthGreater('1', true, false, 2)).toBe(false);
     });
     test('getBorderColor returns correct selected value', () => {
         const selected = {
