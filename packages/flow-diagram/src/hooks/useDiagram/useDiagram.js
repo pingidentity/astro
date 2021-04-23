@@ -1,5 +1,5 @@
 import * as go from 'gojs';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { differenceWith } from 'lodash';
 import ZoomSlider from '../../components/ZoomSlider';
 import NonRealtimeDraggingTool from '../../components/NonRealtimeDraggingTool';
@@ -105,6 +105,7 @@ export default function useDiagram({
     const [droppedOntoLinkKey, setDroppedOntoLinkKey] = useState(undefined);
     const [droppedOntoNodeKey, setDroppedOntoNodeKey] = useState(undefined);
     const [selected, setSelected] = useState(null);
+    const first = useRef(true);
 
     useEffect(() => {
         if (diagram?.model) {
@@ -125,6 +126,10 @@ export default function useDiagram({
     }, [isDisabled]);
 
     useEffect(() => {
+        if (first.current) {
+            first.current = false;
+            return;
+        }
         onModelChange({
             ...(selected ? { selectedData: selected } : { selectedData: {} }),
         });

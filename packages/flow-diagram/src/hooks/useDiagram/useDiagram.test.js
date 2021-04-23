@@ -22,6 +22,7 @@ jest.mock('gojs', (replacements) => {
             findNodeDataForKey: jest.fn(() => 'node data'),
             setDataProperty: jest.fn(),
             mergeNodeDataArray: jest.fn(),
+            mergeLinkDataArray: jest.fn(),
         },
         groupTemplateMap: {
             add: jest.fn(),

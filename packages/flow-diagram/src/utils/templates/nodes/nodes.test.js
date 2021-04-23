@@ -11,6 +11,10 @@ jest.mock('gojs', () => {
             make: jest.fn(() => {}),
         },
         Binding: jest.fn(),
+        Spot: {},
+        TextBlock: {},
+        Size: () => {},
+        Margin: () => {},
     });
 });
 

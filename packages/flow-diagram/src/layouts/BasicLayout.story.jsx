@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Box, Button, Image, Separator, Text, TextField } from '@pingux/astro';
-import { mdiArrowCollapseLeft, mdiTools, mdiFormSelect, mdiSourceBranch, mdiFlag } from '@mdi/js';
+import { mdiTools, mdiFormSelect, mdiSourceBranch, mdiFlag } from '@mdi/js';
 import Icon from '@mdi/react';
-import { v4 as uuidV4 } from 'uuid';
 import '../css/main.css';
 
 import {
@@ -29,13 +28,9 @@ import { Palette, PaletteWrapper } from '../components/Palette';
 import usePalette from '../hooks/usePalette';
 import TopPanel from '../components/TopPanel';
 import OuterContainer from '../components/OuterContainer';
-import Panel from '../components/Panel';
-import PanelContainer from '../components/PanelContainer';
-import Connections from '../components/Connections';
 
 const Demo = () => {
     const [selectedNode, setSelectedNode] = useState();
-    const [isScrolling, setIsScrolling] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
     const onPanelClose = () => {
@@ -133,6 +128,7 @@ const Demo = () => {
                     setSelectedNode(null);
                 }
             }
+
             if (insertedNodeKeys?.length > 2) {
                 return;
             }
@@ -402,12 +398,6 @@ const Demo = () => {
         setSelectedNode({ ...currentNode, [field]: id });
         setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ? { ...currentNode, [field]: id } : node)));
     };
-    function onScroll() {
-        setIsScrolling(true);
-        setTimeout(() => {
-            setIsScrolling(false);
-        }, 500);
-    }
 
     return (
         <OuterContainer>
@@ -498,87 +488,6 @@ const Demo = () => {
                 </LeftContainer>
                 <DiagramWrapper>
                     <Diagram {...diagramProps} />
-                    <PanelContainer>
-                        {!isScrolling ? (
-                            <Connections
-                                links={[{ from: 'output4', to: 'input1' }, { from: 'output6', to: 'input4' }, { from: 'output10', to: 'input5' }]}
-                                panels={['outputsPanel', 'inputsPanel']}
-                            />
-                        ) : null}
-                        <Panel
-                            title="User login"
-                            subtitle="Outputs"
-                            id="outputsPanel"
-                            onScroll={() => onScroll()}
-                            icon={<Icon
-                                path={mdiArrowCollapseLeft}
-                                size={1}
-                                color="#253746"
-                            />}
-                        >
-                            <Button variant="inline" mb={10} id="output1">
-                                Here is the first output
-                            </Button>
-                            <Button variant="inline" mb={10} id="output2">
-                                Output 2
-                            </Button>
-                            <Button variant="inline" mb={10} id="output3">
-                                Output 3
-                            </Button>
-                            <Button variant="inline" mb={10} id="output4">
-                                Output 4
-                            </Button>
-                            <Button variant="inline" mb={10} id="output5">
-                                Output 5
-                            </Button>
-                            <Button variant="inline" mb={10} id="output6">
-                                Output 6
-                            </Button>
-                            <Button variant="inline" mb={10} id="output7">
-                                Output 7
-                            </Button>
-                            <Button variant="inline" mb={10} id="output8">
-                                Output 8
-                            </Button>
-                            <Button variant="inline" mb={10} id="output9">
-                                Output 9
-                            </Button>
-                            <Button variant="inline" mb={10} id="output10">
-                                Output 10
-                            </Button>
-                            <Button variant="inline" mb={10} id="output11">
-                                Output 11
-                            </Button>
-                            <Button variant="inline" mb={10} id="output12">
-                                Output 12
-                            </Button>
-                        </Panel>
-                        <Panel
-                            title="Execute flow"
-                            subtitle="Inputs"
-                            id="inputsPanel"
-                            onScroll={() => onScroll()}
-                            icon={<Icon
-                                path={mdiArrowCollapseLeft}
-                                size={1}
-                                color="#253746"
-                            />}
-                        >
-                            <TextField label="Input 1" width="95%" mb={10} id="input1" />
-                            <Button variant="inline" mb={10} id="input2">
-                                Input 2
-                            </Button>
-                            <Button variant="inline" mb={10} id="input3">
-                                Input 3
-                            </Button>
-                            <Button variant="inline" mb={10} id="input4">
-                                Input 4
-                            </Button>
-                            <Button variant="inline" mb={10} id="input5">
-                                Input 5
-                            </Button>
-                        </Panel>
-                    </PanelContainer>
                 </DiagramWrapper>
             </Body>
         </OuterContainer>
@@ -590,6 +499,6 @@ export const Composed = () => (
 );
 
 export default {
-    title: 'Flow Manager Layout',
+    title: 'Basic Layout',
     component: Composed,
 };

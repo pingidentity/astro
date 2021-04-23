@@ -2,14 +2,14 @@ import React from 'react';
 import * as go from 'gojs';
 import { Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
-import { encodeSvg } from '../templateUtils';
+import { encodeSvg, getSize } from '../templateUtils';
 import { COLORS } from '../../constants';
 import { toNode, fromNode, bottomNode } from '../nodes';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
 const $ = go.GraphObject.make;
 
-export const getIfLengthGreater = (ifTrue, ifFalse, target) => (s) => {
+export const getIfLengthGreater = (s, ifTrue, ifFalse, target) => {
     return s.length > target ? ifTrue : ifFalse;
 };
 
@@ -93,6 +93,7 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         movable: false,
         selectable: false,
         deletable: false,
+        resizable: true,
     },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     new go.Binding('click', 'onClick'),
@@ -100,9 +101,9 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         { name: 'BODY' },
         $(go.Shape, 'RoundedRectangle',
             { fill: 'transparent', stroke: 'transparent', strokeWidth: 0 }),
-        new go.Binding('minSize', 'errorMessage', getIfLengthGreater(new go.Size(200, 150), new go.Size(200, 55), 0)),
+        new go.Binding('minSize', '', s => getIfLengthGreater(s.errorMessage, getSize(s, 'errorContainer'), getSize(s, ''), 0)),
         $(go.Panel, 'Vertical', { padding: 15, alignment: go.Spot.Top },
-            new go.Binding('visible', 'errorMessage', getIfLengthGreater(true, false, 0)),
+            new go.Binding('visible', '', s => getIfLengthGreater(s.errorMessage, true, false, 0)),
             $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20 }),
             {
                 mouseHover: getAdornmentOnHover(getNodeHoverAdornment()),
@@ -111,22 +112,24 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         $(go.Panel, 'Position', { position: new go.Point(0, 0) },
             { name: 'BODY' },
             $(go.Shape, 'RoundedRectangle',
-                { fill: 'transparent', desiredSize: new go.Size(218, 55), stroke: 'transparent', parameter1: 3 },
+                { fill: 'transparent', stroke: 'transparent', parameter1: 3 },
+                new go.Binding('desiredSize', '', s => getSize(s, 'transparentContainer')),
             ),
             $(go.Shape, 'RoundedRectangle',
                 {
                     fill: COLORS.WHITE,
-                    desiredSize: new go.Size(200, 55),
                     margin: new go.Margin(0, 0, 0, 10),
                     parameter1: 3,
                     strokeWidth: 0,
                     shadowVisible: true,
                 },
+                new go.Binding('desiredSize', '', s => getSize(s, 'outer')),
             ),
             $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                 $(go.Panel, 'Auto',
                     $(go.Shape, 'StepIconBG',
-                        { stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(60, 55), margin: new go.Margin(0, 0, 0, 10), parameter1: 2 },
+                        { stroke: 'transparent', strokeWidth: 0, margin: new go.Margin(0, 0, 0, 10), parameter1: 2 },
+                        new go.Binding('desiredSize', '', s => getSize(s, 'shape')),
                         new go.Binding('fill', 'color')),
                     $(go.Picture,
                         { source: iconSrc, width: 20, height: 20, margin: new go.Margin(0, 0, 0, -9) },
@@ -136,13 +139,13 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
                 $(go.Panel, 'Vertical', { margin: new go.Margin(0, 0, 0, -5) },
                     $(go.TextBlock,
                         {
-                            stroke: '#253746', font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false,
+                            stroke: '#253746', font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN),
 
                         },
                         new go.Binding('text').makeTwoWay()),
                     $(go.TextBlock,
                         {
-                            stroke: '#68747F', font: 'normal normal normal 12px Helvetica', alignment: go.Spot.Left, editable: false,
+                            stroke: '#68747F', font: 'normal normal normal 12px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN),
 
                         },
                         new go.Binding('text', 'stepId').makeTwoWay()),
@@ -152,11 +155,11 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
                 {
                     name: 'borderRectangle',
                     fill: 'transparent',
-                    desiredSize: new go.Size(199, 54),
                     margin: new go.Margin(0, 0, 0, 10),
                     parameter1: 2,
                     strokeWidth: 1,
                 },
+                new go.Binding('desiredSize', '', s => getSize(s, 'innerBorder')),
                 // Have to bind this to the empty string so that it runs this check on every update,
                 // not just when isSelected changes or just when errorMessage changes.
                 new go.Binding('stroke', '', getBorderColor(COLORS.BLUE, COLORS.ERROR, 'transparent')).ofObject(''),
