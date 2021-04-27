@@ -120,7 +120,14 @@ const SelectField = forwardRef((props, ref) => {
             }
           </Box>
           <Box as="span" aria-hidden="true" variant="forms.select.arrow">
-            <Icon icon={MenuDown} />
+            <Icon
+              icon={MenuDown}
+              sx={
+                state.isOpen
+                  ? { transform: 'rotate(180deg)' }
+                  : null
+              }
+            />
           </Box>
         </Button>
       </Box>
