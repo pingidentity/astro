@@ -167,6 +167,6 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         ),
         fromNode(),
         toNode(),
-        bottomNode(),
+        // bottomNode(),
     ),
 );
