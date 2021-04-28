@@ -1,7 +1,10 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useLayoutEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelectState } from '@react-stately/select';
 import { useSelect, HiddenSelect } from '@react-aria/select';
+import { FocusScope } from '@react-aria/focus';
+import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
+import { useResizeObserver } from '@react-aria/utils';
 import MenuDown from 'mdi-react/MenuDownIcon';
 
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -11,8 +14,9 @@ import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
 import Icon from '../Icon';
 import Label from '../Label';
-import ListBoxPopup from './ListBoxPopup';
 import Text from '../Text';
+import ListBox from '../ListBox';
+import PopoverContainer from '../PopoverContainer';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -23,9 +27,11 @@ import Text from '../Text';
  */
 const SelectField = forwardRef((props, ref) => {
   const {
+    align,
     children,
     defaultSelectedKey,
     defaultText,
+    direction,
     disabledKeys,
     hasNoEmptySelection: disallowEmptySelection,
     helperText,
@@ -74,14 +80,17 @@ const SelectField = forwardRef((props, ref) => {
   // Create state based on the incoming props
   const state = useSelectState(selectProps);
 
-  // Get props for child elements from useSelect
-  const dropdownRef = useRef();
+  const popoverRef = useRef();
+  const triggerRef = useRef();
+  const listBoxRef = useRef();
+
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => dropdownRef.current);
+  useImperativeHandle(ref, () => triggerRef.current);
+  // Get props for child elements from useSelect
   const { labelProps, triggerProps, valueProps, menuProps } = useSelect(
     selectProps,
     state,
-    dropdownRef,
+    triggerRef,
   );
   const {
     fieldContainerProps,
@@ -95,19 +104,95 @@ const SelectField = forwardRef((props, ref) => {
     },
   });
 
+  const { overlayProps, placement, updatePosition } = useOverlayPosition({
+    targetRef: triggerRef,
+    overlayRef: popoverRef,
+    scrollRef: listBoxRef,
+    placement: `${direction} ${align}`,
+    shouldFlip: !isNotFlippable,
+    isOpen: state.isOpen,
+    onClose: state.close,
+  });
+
+  // Update position once the ListBox has rendered. This ensures that
+  // it flips properly when it doesn't fit in the available space.
+  /* istanbul ignore next */
+  useLayoutEffect(() => {
+    if (state.isOpen) {
+      requestAnimationFrame(() => {
+        updatePosition();
+      });
+    }
+  }, [state.isOpen, updatePosition]);
+
+  // Measure the width of the input to inform the width of the listbox (below).
+  const [buttonWidth, setButtonWidth] = useState(null);
+
+  const onResize = useCallback(() => {
+    /* istanbul ignore next */
+    if (triggerRef.current) {
+      setButtonWidth(triggerRef.current.offsetWidth);
+    }
+  }, [triggerRef, setButtonWidth]);
+
+  useResizeObserver({
+    ref: triggerRef,
+    onResize,
+  });
+
+  useLayoutEffect(onResize, [onResize]);
+
+  const style = {
+    ...overlayProps.style,
+    width: buttonWidth,
+    minWidth: buttonWidth,
+  };
+
+  // Wrap in <FocusScope> so that focus is restored back to the
+  // trigger when the popup is closed. In addition, add hidden
+  // <DismissButton> components at the start and end of the list
+  // to allow screen reader users to dismiss the popup easily.
+  const listbox = (
+    <FocusScope restoreFocus>
+      <DismissButton onDismiss={() => state.close()} />
+      <ListBox
+        ref={listBoxRef}
+        hasNoEmptySelection
+        hasAutoFocus={state.focusStrategy || true}
+        state={state}
+        {...menuProps}
+        variant="listBox.selectField"
+      />
+      <DismissButton onDismiss={() => state.close()} />
+    </FocusScope>
+  );
+
+  const overlay = (
+    <PopoverContainer
+      isOpen={state.isOpen}
+      ref={popoverRef}
+      placement={placement}
+      hasNoArrow
+      onClose={state.close}
+      style={style}
+    >
+      {listbox}
+    </PopoverContainer>
+  );
+
   return (
     <Box {...fieldContainerProps}>
       {/* Actual label is applied to the hidden select */}
       <Label {...fieldLabelProps}>{label}</Label>
       <HiddenSelect
         state={state}
-        triggerRef={dropdownRef}
+        triggerRef={triggerRef}
         label={label}
         name={name}
       />
       <Box className={fieldControlProps.className} variant="forms.input.container">
         <Button
-          ref={dropdownRef}
+          ref={triggerRef}
           variant="forms.select"
           className={fieldControlProps.className}
           {...triggerProps}
@@ -124,7 +209,7 @@ const SelectField = forwardRef((props, ref) => {
           </Box>
         </Button>
       </Box>
-      {state.isOpen && <ListBoxPopup {...menuProps} state={state} />}
+      {overlay}
       {
         helperText &&
         <FieldHelperText status={status}>
@@ -136,6 +221,10 @@ const SelectField = forwardRef((props, ref) => {
 });
 
 SelectField.propTypes = {
+  /** Alignment of the popover menu relative to the trigger. */
+  align: PropTypes.oneOf(['start', 'end', 'middle']),
+  /** Where the popover menu opens relative to its trigger. */
+  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /** The initial selected key in the collection (uncontrolled). */
   defaultSelectedKey: PropTypes.string,
   /** Default text rendered if no option is selected. */
@@ -201,6 +290,8 @@ SelectField.propTypes = {
 SelectField.defaultProps = {
   defaultText: 'Select',
   status: statuses.DEFAULT,
+  align: 'start',
+  direction: 'bottom',
 };
 
 SelectField.displayName = 'SelectField';

@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { Box } from '../../index';
-import { Popover } from './Popover';
+import PopoverContainer from './PopoverContainer';
 
 const getComponent = (props = {}) => render((
   <>
-    <Popover {...props}>
+    <PopoverContainer {...props}>
       <Box>I am in a popover</Box>
-    </Popover>
+    </PopoverContainer>
   </>
 ));
 
