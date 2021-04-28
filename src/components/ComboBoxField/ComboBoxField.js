@@ -6,16 +6,17 @@ import React, {
   useImperativeHandle,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useOverlayPosition } from '@react-aria/overlays';
+import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useComboBox } from '@react-aria/combobox';
 import { useComboBoxState } from '@react-stately/combobox';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+import { FocusScope } from '@react-aria/focus';
 
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import ComboBoxInput from '../ComboBox';
-import { Popover } from '../PopoverMenu/Popover';
-import ListBox from '../SelectField/ListBoxPopup';
+import PopoverContainer from '../PopoverContainer';
+import ListBox from '../ListBox';
 
 /**
  * Combines an input with a listbox for a filterable dropdown list.
@@ -122,7 +123,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     targetRef: inputRef,
     overlayRef: popoverRef,
     scrollRef: listBoxRef,
-    placement: `${direction} start`,
+    placement: `${direction} end`,
     shouldFlip: !isNotFlippable,
     isOpen: state.isOpen,
     onClose: state.close,
@@ -151,6 +152,21 @@ const ComboBoxField = forwardRef((props, ref) => {
     minWidth: menuWidth,
   };
 
+  const listbox = (
+    <FocusScope restoreFocus>
+      <DismissButton onDismiss={() => state.close()} />
+      <ListBox
+        ref={listBoxRef}
+        {...listBoxProps}
+        hasNoEmptySelection
+        hasAutoFocus={state.focusStrategy}
+        state={state}
+        hasVirtualFocus
+      />
+      <DismissButton onDismiss={() => state.close()} />
+    </FocusScope>
+  );
+
   return (
     <>
       <ComboBoxInput
@@ -162,7 +178,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         triggerProps={buttonProps}
         triggerRef={buttonRef}
       />
-      <Popover
+      <PopoverContainer
         isOpen={state.isOpen}
         style={style}
         ref={popoverRef}
@@ -170,17 +186,8 @@ const ComboBoxField = forwardRef((props, ref) => {
         hasNoArrow
         isNonModal
       >
-        <ListBox
-          ref={listBoxRef}
-          {...listBoxProps}
-          disallowEmptySelection
-          hasAutoFocus={state.focusStrategy}
-          shouldSelectOnPressUp
-          focusOnPointerEnter
-          state={state}
-          hasVirtualFocus
-        />
-      </Popover>
+        {listbox}
+      </PopoverContainer>
     </>
   );
 });
