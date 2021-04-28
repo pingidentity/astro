@@ -61,7 +61,7 @@ const Option = forwardRef((props, ref) => {
       isRow
       as="li"
       ref={optionRef}
-      variant="forms.select.option"
+      variant="listBox.option"
       className={classNames}
       {...others}
       {...mergeProps(optionProps, focusProps)}

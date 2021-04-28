@@ -6,7 +6,7 @@ import { PressResponder } from '@react-aria/interactions';
 import { useMenuTrigger } from '@react-aria/menu';
 import { useMenuTriggerState } from '@react-stately/menu';
 
-import { Popover } from './Popover';
+import PopoverContainer from '../PopoverContainer';
 import { MenuContext } from '../../context/MenuContext';
 
 /**
@@ -76,7 +76,7 @@ const PopoverMenu = forwardRef((props, ref) => {
         {menuTrigger}
       </PressResponder>
       <MenuContext.Provider value={menuContext}>
-        <Popover
+        <PopoverContainer
           isOpen={state.isOpen}
           ref={menuPopoverRef}
           placement={placement}
@@ -85,7 +85,7 @@ const PopoverMenu = forwardRef((props, ref) => {
           {...menuProps}
         >
           {contents}
-        </Popover>
+        </PopoverContainer>
       </MenuContext.Provider>
     </>
   );

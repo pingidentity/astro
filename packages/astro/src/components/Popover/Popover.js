@@ -1,4 +1,5 @@
-// TODO: popover-deprecate Remove when popover is deprecated in 1.0.0
+// TODO: popover-deprecate Remove when popover is deprecated in 1.0.0.
+// Replace with PopoverContainer
 import React, { forwardRef } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import PropTypes from 'prop-types';

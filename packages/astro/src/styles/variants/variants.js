@@ -1,6 +1,7 @@
 import boxes from './boxes';
 import images from './images';
 import link from './link';
+import listBox from './listBox';
 import modal from './modal';
 import menu from './menu';
 import menuItem from './menuItem';
@@ -17,6 +18,7 @@ export default {
   images,
   loader,
   link,
+  listBox,
   menu,
   menuItem,
   modal,
