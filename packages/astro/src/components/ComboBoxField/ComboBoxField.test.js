@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import { ComboBoxField, Item } from '../../index';
+import { ComboBoxField, Item, OverlayProvider } from '../../index';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -15,9 +15,11 @@ const defaultProps = {
 };
 
 const getComponent = (props = {}) => render((
-  <ComboBoxField {...defaultProps} {...props}>
-    {item => <Item key={item.id}>{item.name}</Item>}
-  </ComboBoxField>
+  <OverlayProvider>
+    <ComboBoxField {...defaultProps} {...props}>
+      {item => <Item key={item.id}>{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
 ));
 
 test('renders ComboBoxField component', () => {
@@ -167,24 +169,35 @@ test('should invoke onOpenChange when isOpen is true', () => {
   expect(listbox).toBeInTheDocument();
   expect(onOpenChange).not.toHaveBeenCalled();
 
-  // Should fire on dismiss button click
+  // Should fire on first dismiss button click
   userEvent.click(buttons[0]);
+  expect(onOpenChange).toHaveBeenCalledTimes(1);
   expect(onOpenChange).toHaveBeenNthCalledWith(1, false);
 
-  // Should fire on outside click
+
+  // Should fire on second dismiss button click
+  userEvent.click(buttons[1]);
+  expect(onOpenChange).toHaveBeenCalledTimes(2);
+  expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
+
+  // Should fire on outside click once the input is focused
+  userEvent.click(input);
   userEvent.click(global.document.body);
+  expect(onOpenChange).toHaveBeenCalledTimes(3);
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
 
   // Should fire on click selection
   userEvent.click(screen.queryAllByRole('option')[0]);
+  expect(onOpenChange).toHaveBeenCalledTimes(4);
   expect(onOpenChange).toHaveBeenNthCalledWith(3, false);
 
   // Should fire on keyboard selection
   userEvent.type(input, '{arrowdown}{enter}');
+  expect(onOpenChange).toHaveBeenCalledTimes(5);
   expect(onOpenChange).toHaveBeenNthCalledWith(4, false);
 
   // Total number of calls
-  expect(onOpenChange).toHaveBeenCalledTimes(4);
+  expect(onOpenChange).toHaveBeenCalledTimes(5);
 });
 
 test('should invoke onOpenChange when isOpen is false', () => {

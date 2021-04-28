@@ -1,3 +1,4 @@
+import { OverlayProvider } from '@react-aria/overlays';
 import React, { useState } from 'react';
 import { SelectField, Item, Separator } from '../../index';
 
@@ -7,11 +8,13 @@ export default {
 };
 
 export const Default = () => (
-  <SelectField label="What's your favorite color?">
-    <Item key="red">Red</Item>
-    <Item key="blue">Blue</Item>
-    <Item key="yellow">Yellow</Item>
-  </SelectField>
+  <OverlayProvider>
+    <SelectField label="What's your favorite color?">
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
 );
 
 export const FloatLabel = () => (
