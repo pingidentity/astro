@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import Tutorial from "./Tutorial";
 import Markup from "../../core/Markup";
 import classnames from "classnames";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormRadioInput from "ui-library/lib/components/forms/FormRadioInput";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 var FormTextField = require("./../../../components/forms/form-text-field").v2,
     Toggle = require("../../../components/forms/form-toggle").v2;
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 class Inputs extends Component {

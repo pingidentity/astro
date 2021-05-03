@@ -1,11 +1,17 @@
 import React from "react";
 import _ from "underscore";
 import DetailsTooltip, { detailsWidths, DetailsTitle, tooltipPlacements }
+//eslint-disable-next-line import/no-extraneous-dependencies
     from "ui-library/lib/components/tooltips/DetailsTooltip";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Anchor from "ui-library/lib/components/general/Anchor";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Padding from "ui-library/lib/components/layout/Padding";
 
 /**

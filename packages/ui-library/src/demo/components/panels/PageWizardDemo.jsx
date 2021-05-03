@@ -1,22 +1,34 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import TileSelector from "ui-library/lib/components/buttons/TileSelector";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormTextField from "ui-library/lib/components/forms/form-text-field";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormTextArea from "ui-library/lib/components/forms/form-text-area";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FileUpload from "ui-library/lib/components/forms/file-upload";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Multivalues from "ui-library/lib/components/forms/Multivalues";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputRow from "ui-library/lib/components/layout/InputRow";
 import _ from "underscore";
 
 import DataTableScreen from "./page-wizard-screens/DataTableScreen";
 import DragScreen from "./page-wizard-screens/DragScreen";
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Utils from "ui-library/lib//util/Utils";
 import fixOrientation from "fix-orientation";
 import readExif from "exif-js";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Spacing, { sizes } from "ui-library/lib/components/layout/Spacing";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**

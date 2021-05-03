@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Modal from "ui-library/lib/components/general/Modal";
+import Modal from "../general/Modal";
 
 const CardModal = ({
     children,

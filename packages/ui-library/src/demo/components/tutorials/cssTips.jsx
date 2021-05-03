@@ -3,13 +3,17 @@ var React = require("react"),
     Markup = require("../../core/Markup"),
     classnames = require("classnames"),
     FormTextField = require("./../../../components/forms/form-text-field").v2,
+    //eslint-disable-next-line import/no-extraneous-dependencies
     FormRadioInput = require("ui-library/lib/components/forms/FormRadioInput"),
+    //eslint-disable-next-line import/no-extraneous-dependencies
     FormCheckbox = require("ui-library/lib/components/forms/FormCheckbox"),
+    //eslint-disable-next-line import/no-extraneous-dependencies
     FormLabel = require("ui-library/lib/components/forms/FormLabel"),
     Layout = require("../../../components/general/ColumnLayout"),
     _ = require("underscore"),
     Color = require("color"),
     Toggle = require("../../../components/forms/form-toggle").v2;
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 const COLORS = [

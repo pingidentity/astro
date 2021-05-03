@@ -112,6 +112,7 @@ export default class RowBuilderDemo extends Component {
                     </p>
                     <p>
                         We provide one alternate function that renders a trash icon as the button.
+ //eslint-disable-next-line import/no-extraneous-dependencies
                         <code>import {`{ renderRemoveIcon }`} from "ui-library/lib/components/rows/RowBuilder"</code>
                         and pass it to <code>renderRemoveButton</code> to use this appearance.
                     </p>

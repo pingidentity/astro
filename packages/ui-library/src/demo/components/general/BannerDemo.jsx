@@ -1,5 +1,6 @@
 import React from "react";
 import Banner from "../../../components/general/Banner";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 import Button, { buttonTypes } from "../../../components/buttons/Button";
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

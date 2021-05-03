@@ -1,8 +1,10 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import MultiDrag from "ui-library/lib/components/panels/multi-drag";
 import update from "re-mutable";
 import keyMirror from "fbjs/lib/keyMirror";
 import data from "./MultiDragData.js";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import dragScroll from "ui-library/lib/util/dragScroll";
 import _ from "underscore";
 

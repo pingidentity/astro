@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Toggle from "ui-library/lib/components/forms/form-toggle";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 import Actions from "../../core/Actions.js";
 

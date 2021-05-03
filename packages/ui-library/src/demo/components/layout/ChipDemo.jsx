@@ -1,6 +1,9 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Chip, { chipColors, chipTypes } from "ui-library/lib/components/layout/Chip";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Icon from "ui-library/lib/components/general/Icon";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputRow from "ui-library/lib/components/layout/InputRow";
 
 /**

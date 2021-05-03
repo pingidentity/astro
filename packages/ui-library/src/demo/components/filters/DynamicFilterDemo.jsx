@@ -1,5 +1,7 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import DynamicFilter from "ui-library/lib/components/filters/DynamicFilter";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormSearchBar from "ui-library/lib/components/forms/FormSearchBar";
 import userOptions from "../forms/data/userOptions";
 import { noop } from "underscore";

@@ -1,6 +1,7 @@
 import Actions from "./Actions.js";
 import _ from "underscore";
 import update from "re-mutable";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Messages from "ui-library/lib/components/general/messages/";
 import { combineReducers } from "redux";
 

@@ -1,5 +1,6 @@
 var React = require("react"),
     Redux = require("redux"),
+    //eslint-disable-next-line import/no-extraneous-dependencies
     ListViewOrdering = require("ui-library/lib/templates/list-view-ordering");
 
 /**

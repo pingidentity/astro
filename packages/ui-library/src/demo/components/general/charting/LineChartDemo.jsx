@@ -1,12 +1,18 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ChartWrapper from "ui-library/lib/components/general/charting/ChartWrapper";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import LineChart from "ui-library/lib/components/general/charting/LineChart";
 import Legend, {
     alignments as legendAlignments,
     boxAlignments
+    //eslint-disable-next-line import/no-extraneous-dependencies
 } from "ui-library/lib/components/general/charting/Legend";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ChartTitle from "ui-library/lib/components/general/charting/ChartTitle";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import RockerButton, { rockerTypes } from "ui-library/lib/components/forms/RockerButton";
 import { generateTheme } from "../../../../util/ChartingUtils";
 

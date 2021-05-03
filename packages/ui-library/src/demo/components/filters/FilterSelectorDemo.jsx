@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FilterSelector, * as FilterSelectorComponents from "ui-library/lib/components/filters/FilterSelector";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow, { justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text, { overflowTypes, textTypes } from "ui-library/lib/components/general/Text";
 
 

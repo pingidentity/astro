@@ -4,6 +4,7 @@ import FormRadioGroup from "./../../../components/forms/FormRadioGroup";
 import _ from "underscore";
 import InputWidths from "../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 const typeOptions = [

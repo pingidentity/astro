@@ -1,7 +1,10 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 import Markup from "../../core/Markup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text, { textTypes, textVariants } from "ui-library/lib/components/general/Text";
 
 const TextStyles = () => (

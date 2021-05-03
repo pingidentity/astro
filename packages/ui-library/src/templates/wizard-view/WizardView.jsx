@@ -13,6 +13,7 @@ import Button from "../../components/buttons/Button";
 import Modal from "../../components/general/Modal";
 import InputWidths from "../../components/forms/InputWidths";
 import PageHeader from "../../components/general/PageHeader";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputRow from "ui-library/lib/components/layout/InputRow";
 
 

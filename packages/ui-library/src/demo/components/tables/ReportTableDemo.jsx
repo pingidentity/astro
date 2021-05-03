@@ -3,7 +3,9 @@ var React = require("react"),
     mockData = require("./mockData.json"),
     _ = require("underscore");
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text from "ui-library/lib/components/general/Text";
 
 /**

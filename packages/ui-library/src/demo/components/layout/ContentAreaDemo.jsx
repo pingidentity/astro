@@ -1,6 +1,9 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text from "ui-library/lib/components/general/Text";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ContentArea from "ui-library/lib/components/layout/ContentArea";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
 
 /**

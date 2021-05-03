@@ -1,7 +1,11 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ScrollBox from "ui-library/lib/components/layout/ScrollBox";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Toggle from "ui-library/lib/components/forms/form-toggle";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ValueItem from "ui-library/lib/components/layout/ValueItem";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow from "ui-library/lib/components/layout/FlexRow";
 
 /**

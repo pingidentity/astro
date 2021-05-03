@@ -1,6 +1,8 @@
 import React from "react";
 import PageGroup from "../../../components/layout/PageGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

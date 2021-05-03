@@ -1,5 +1,7 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
 
 /**
