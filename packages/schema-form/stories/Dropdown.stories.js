@@ -21,7 +21,7 @@ export const Dropdown = () => {
     dropdownExample: {
       'ui:widget': 'select',
       'ui:options': {
-        labelMode: 'float',
+        defaultText: 'Placeholder Text',
       },
     },
   };

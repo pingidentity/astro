@@ -83,6 +83,7 @@ export const toAstroInputProps = (props) => {
     onChange,
     onFocus,
     options: {
+      defaultText,
       enumDisabled,
       enumOptions,
       help: uiHelp,
@@ -125,6 +126,7 @@ export const toAstroInputProps = (props) => {
       isRequired: required,
       ...custom,
     },
+    defaultText,
     formContext,
     isDisabled: disabled,
     isRequired: required,
