@@ -68,6 +68,10 @@ export const DisabledOptions = () => (
   </SelectField>
 );
 
+export const NoOptionsAvailable = () => (
+  <SelectField isDisabled defaultText="No options available" />
+);
+
 export const HelperText = () => (
   <SelectField
     status="error"
