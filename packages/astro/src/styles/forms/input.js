@@ -57,7 +57,7 @@ input.small = {
 input.wrapper = {
   '&.is-left-label': {
     display: 'inline-grid',
-    gridTemplateColumns: 'fit-content auto',
+    gridTemplateColumns: 'auto auto',
     gridTemplateRows: 'auto auto',
   },
   '> .is-default': {

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import TextAreaField from '.';
+import Box from '../Box';
+
 
 export default {
   title: 'Form/TextAreaField',
@@ -20,11 +22,19 @@ export const FloatLabel = () => (
 );
 
 export const LeftLabel = () => (
-  <TextAreaField
-    helperText="Here is some helpful text..."
-    label="Example label"
-    labelMode="left"
-  />
+  <Box gap="xl" width="fit-content">
+    <TextAreaField
+      label="Example label"
+      labelMode="left"
+    />
+
+    <TextAreaField
+      helperText="Here is some helpful text..."
+      label="Example label"
+      labelMode="left"
+      status="error"
+    />
+  </Box>
 );
 
 export const Controlled = () => {

@@ -40,7 +40,7 @@ const TextAreaField = forwardRef((props, ref) => {
   }, []);
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box variant="forms.input.wrapper" {...fieldContainerProps}>
       <Label ref={labelRef} {...fieldLabelProps} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} />
