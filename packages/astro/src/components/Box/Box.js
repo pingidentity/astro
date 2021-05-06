@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Box as RBox } from 'rebass';
 import { propType as stylePropType } from '@styled-system/prop-types';
+import useStatusClasses from '../../hooks/useStatusClasses';
 
 /**
  * Basic flexbox-based layout component for creating rows and columns,
@@ -14,11 +15,15 @@ const Box = forwardRef((props, ref) => {
     flexDirection, // eslint-disable-line
     gap,
     isRow,
+    isDisabled,
+    className,
     sx, // eslint-disable-line
     ...others
   } = props;
   const fd = flexDirection || isRow ? 'row' : 'column';
   const custom = { ...sx };
+
+  const { classNames } = useStatusClasses(className, { isDisabled });
 
   if (gap) {
     custom['& > * + *:not(:first-child) /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */'] = {
@@ -28,6 +33,7 @@ const Box = forwardRef((props, ref) => {
 
   return (
     <RBox
+      className={classNames}
       ref={ref}
       display="flex"
       flexDirection={fd}
@@ -39,6 +45,8 @@ const Box = forwardRef((props, ref) => {
 });
 
 Box.propTypes = {
+  /** Whether the box is disabled. */
+  isDisabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /** The base HTML tag name or React component type to render */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
   /** When true, display as a row rather than a column */
@@ -50,6 +58,7 @@ Box.propTypes = {
 Box.defaultProps = {
   as: 'div',
   isRow: false,
+  isDisabled: false,
 };
 
 Box.displayName = 'Box';
