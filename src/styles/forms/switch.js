@@ -30,19 +30,19 @@ export const thumbContainer = {
 };
 
 export const thumb = {
-  ml: -1,
   width: 20,
   height: 22,
   borderRadius: 9999,
   border: '1px solid',
   borderColor: 'neutral.80',
   bg: 'white',
+  boxShadow: 'standard',
   transitionProperty: 'transform',
   transitionTimingFunction: 'ease-out',
   transitionDuration: '0.1s',
   transform: 'translateX(0)',
   '.is-selected &': {
-    transform: 'translateX(21px)',
+    transform: 'translateX(20px)',
     borderColor: 'active',
   },
 };
