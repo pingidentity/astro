@@ -14,6 +14,7 @@ export const tab = {
   '&.is-selected.is-vertical': {
     bg: 'accent.95',
   },
+  transform: 'translateY(1px)',
 };
 
 export const tabLine = {
