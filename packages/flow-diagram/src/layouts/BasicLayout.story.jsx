@@ -100,9 +100,6 @@ const Demo = () => {
             ['error', failureNode],
             ['branch', branchNode],
             ['START', nodeTemplateStart()],
-            // Add a palette item template so that the above node types
-            // look correct while dragging into diagram.
-            ['palette-item', paletteItemTemplate()],
         ],
         onModelChange: ({
             insertedNodeKeys,
@@ -309,9 +306,6 @@ const Demo = () => {
                 'category': 'palette-group',
                 'text': 'User Login',
                 getIconSrc: (color = '#028CFF') => svgComponentToBase64(<Desktop fill={color} />),
-                color: '#028CFF',
-                stepId: 'newLogin',
-                name: 'User Login',
             },
             {
                 group: 'login-group',
@@ -321,7 +315,6 @@ const Demo = () => {
                 getIconSrc: (color = '#028CFF') => svgComponentToBase64(<Desktop fill={color} />),
                 color: '#028CFF',
                 stepId: 'newLogin',
-                name: 'User Login',
             },
             {
                 'key': 'execute-flow-group',
@@ -329,8 +322,6 @@ const Demo = () => {
                 isGroup: true,
                 'text': 'Execute Flow',
                 getIconSrc: (color = '#228C22') => svgComponentToBase64(<Walkthrough fill={color} />),
-                color: '#228C22',
-                stepId: 'newLogin',
             },
             {
                 'key': 'execute-flow',
@@ -347,14 +338,11 @@ const Demo = () => {
                 isGroup: true,
                 'text': 'Complete',
                 getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
-                color: '#228C22',
-                stepId: 'newLogin',
             },
             {
                 'key': 'finished',
                 'category': 'finished',
                 group: 'finished-group',
-                'text': 'Complete',
                 getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
@@ -363,30 +351,24 @@ const Demo = () => {
                 isGroup: true,
                 'text': 'Failure',
                 getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
-                color: '#228C22',
-                stepId: 'newLogin',
             },
             {
                 'key': 'error',
                 'category': 'error',
                 group: 'error-group',
-                'text': 'Failure',
                 getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
             },
             {
                 'key': 'branch-group',
                 'category': 'palette-group',
                 isGroup: true,
-                'text': 'Execute Flow',
+                'text': 'Branch',
                 getIconSrc: (color = COLORS.ORANGE) => svgComponentToBase64(<Icon path={mdiSourceBranch} color={color} width="20px" height="20px" />),
-                color: '#228C22',
-                stepId: 'newLogin',
             },
             {
                 'key': 'branch',
                 'category': 'branch',
                 group: 'branch-group',
-                'text': 'Branch',
                 getIconSrc: (color = COLORS.ORANGE) => svgComponentToBase64(<Icon path={mdiSourceBranch} color={color} width="20px" height="20px" />),
             },
         ],

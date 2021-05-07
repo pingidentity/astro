@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Desktop } from '@pingux/icons';
 import '../css/main.css';
 
@@ -8,17 +9,12 @@ import {
     failureNode,
     nodeTemplateStart,
     outletTemplate,
-    paletteGroupTemplate,
-    paletteItemTemplate,
     stepTemplate,
     successNode,
     svgComponentToBase64,
 } from '../utils/templates';
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
-import LeftContainer from '../components/LeftContainer';
-import { Palette, PaletteWrapper } from '../components/Palette';
-import usePalette from '../hooks/usePalette';
 
 export const Branch = () => {
     const [diagramNodes, setDiagramNodes] = useState([
@@ -157,48 +153,6 @@ export const Outlet = () => {
     );
 };
 
-export const PaletteNodes = () => {
-    const { paletteProps, paletteObject } = usePalette({
-        groupTemplates: [
-            ['', paletteGroupTemplate()],
-        ],
-        nodeTemplates: [
-            ['', paletteItemTemplate()],
-        ],
-        nodeDataArray: [
-            {
-                isGroup: true,
-                'key': 'login-group',
-                'category': 'palette-group',
-                'text': 'User Login',
-                getIconSrc: (color = '#028CFF') => svgComponentToBase64(<Desktop fill={color} />),
-                color: '#028CFF',
-                stepId: 'newLogin',
-                name: 'User Login',
-            },
-            {
-                group: 'login-group',
-                'key': 'login',
-                'category': 'step',
-                'text': 'User Login',
-                getIconSrc: (color = '#028CFF') => svgComponentToBase64(<Desktop fill={color} />),
-                color: '#028CFF',
-                stepId: 'newLogin',
-                name: 'User Login',
-            },
-        ],
-        linkDataArray: [],
-    });
-
-    return (
-        <LeftContainer styles={{ height: 50, width: 360 }}>
-            <PaletteWrapper>
-                <Palette {...paletteProps} />
-            </PaletteWrapper>
-        </LeftContainer>
-    );
-};
-
 export const Start = () => {
     const [diagramNodes, setDiagramNodes] = useState([
         { 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' },
@@ -295,44 +249,29 @@ export const Success = () => {
     );
 };
 
+Branch.defaultProps = {
+    isGroup: false,
+};
+
+Branch.propTypes = {
+    /** Node category. Corresponds to name of desired template */
+    category: PropTypes.string,
+    /** Error message displayed on hover action on error icon above node */
+    errorMessage: PropTypes.string,
+    /** Group that contains node. Nodes can only move when they are part of a group.
+     * Grouped nodes move together. */
+    group: PropTypes.string,
+    /** Determines whether element is node or group */
+    isGroup: PropTypes.bool,
+    /** Node/Group key */
+    key: PropTypes.string,
+    /** Subtitle of step node */
+    stepId: PropTypes.string,
+    /** Main text of node */
+    text: PropTypes.string,
+};
+
 export default {
-    title: 'Nodes',
+    title: 'Diagram Nodes',
     component: Branch,
-    argTypes: {
-        category: {
-            description: 'Node category. Corresponds to name of desired template',
-            control: {
-                type: null,
-            },
-            type: { summary: 'string' },
-        },
-        group: {
-            description: 'Group that contains node. Nodes can only move when they are part of a group. Grouped nodes move together.',
-            control: {
-                type: null,
-            },
-            type: { summary: 'string' },
-        },
-        isGroup: {
-            description: 'Determines whether element is node or group',
-            control: {
-                type: null,
-            },
-            type: { summary: 'bool' },
-        },
-        key: {
-            description: 'Node/Group key',
-            control: {
-                type: null,
-            },
-            type: { summary: 'string' },
-        },
-        stepId: {
-            description: 'Subtitle of step node',
-            control: {
-                type: null,
-            },
-            type: { summary: 'string' },
-        },
-    },
 };

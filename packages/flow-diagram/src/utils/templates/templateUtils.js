@@ -55,7 +55,7 @@ export const getSize = (s, element) => {
 
     switch (element) {
         case 'innerBorder':
-            return new go.Size(width < 181 ? width + 70 : 250, height + 26);
+            return new go.Size(width < 181 ? width + 68 : 250, height + 26);
         case 'errorContainer':
             return new go.Size(width < 181 ? width + 69 : 250, height + 127);
         case 'shape':

@@ -156,7 +156,7 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
                     name: 'borderRectangle',
                     fill: 'transparent',
                     margin: new go.Margin(0, 0, 0, 10),
-                    parameter1: 2,
+                    parameter1: 1,
                     strokeWidth: 1,
                 },
                 new go.Binding('desiredSize', '', s => getSize(s, 'innerBorder')),
