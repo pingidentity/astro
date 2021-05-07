@@ -1,16 +1,16 @@
+
+import colors from '@pingux/astro/src/styles/colors';
+
 export const COLORS = {
-    BLACK: '#000',
-    BLUE: '#4462ED',
-    ERROR: '#a31300',
-    ERROR_LIGHT: '#eddad9',
-    GRAY: '#EBECEC',
-    GREEN: '#0bbf01',
-    PINK: '#FF00FF',
-    PURPLE: '#D033FF',
-    RED: '#ce0808',
-    WHITE: '#fff',
-    YELLOW: '#E58E05',
-    ORANGE: '#FF8324',
-    OUTLETNODE: '#4262ed',
-    TRANSLUCENTPURPLE: 'rgba(208, 51, 255, 0.5)',
+    BLACK: colors.black,
+    BLUE: colors.active,
+    ERROR: colors.critical.bright,
+    ERROR_LIGHT: colors.critical.light,
+    GRAY: colors.neutral[90],
+    GREEN: colors.success.bright,
+    PURPLE: colors.decorative[0],
+    RED: colors.decorative[8],
+    WHITE: colors.white,
+    ORANGE: colors.decorative[1],
+    TRANSLUCENTPURPLE: `${colors.decorative[0]}80`,
 };
