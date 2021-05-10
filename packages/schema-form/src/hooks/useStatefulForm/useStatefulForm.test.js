@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 import useStatefulForm from './useStatefulForm';
 import { FORM_MODE } from '../../utils/constants';
 
@@ -21,7 +21,7 @@ const uiSchema = {
 };
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  jest.restoreAllMocks();
 });
 
 test('should return props object for default mode', () => {
@@ -42,6 +42,34 @@ test('should return props object for default mode', () => {
       FormComponent: expect.any(Object),
     }),
   }));
+});
+
+test('should return valid JSON on submit', async () => {
+  window.fetch = jest.fn(() => Promise.resolve({
+    ok: true,
+    clone: jest.fn(() => ({ json: () => ({ status: 200 }) })),
+  }));
+  const newFetch = jest.spyOn(window, 'fetch');
+
+  const { result } = renderHook(() => useStatefulForm({
+    extraErrors: {},
+    schema,
+    uiSchema,
+    endpoint: '/test',
+    rules: [],
+    onServerSuccess: jest.fn(),
+  }));
+
+  const formData = { foo: 'bar' };
+
+  await act(async () => result.current.statefulProps.onSubmit({
+    formData,
+  }));
+
+  expect(newFetch).toHaveBeenCalledWith('/test', {
+    body: JSON.stringify(formData),
+    method: 'post',
+  });
 });
 
 test('should return empty object for simplified mode', () => {
