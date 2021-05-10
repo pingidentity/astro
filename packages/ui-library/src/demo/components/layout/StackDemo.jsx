@@ -1,6 +1,9 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Stack from "ui-library/lib/components/layout/Stack";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

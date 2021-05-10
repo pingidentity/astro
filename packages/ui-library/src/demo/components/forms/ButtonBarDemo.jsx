@@ -1,6 +1,8 @@
 
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ButtonBar, { buttonAlignments } from "ui-library/lib/components/forms/ButtonBar";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
 
 /**

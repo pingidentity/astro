@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import { AboutModal, AboutLogo, AboutVersion } from "ui-library/lib/components/general/About";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 import pingCentralDark from "../../images/PingCentral.svg";
 import { partial } from "underscore";

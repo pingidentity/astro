@@ -1,6 +1,9 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HeatmapCard from "ui-library/lib/components/general/charting/HeatmapCard";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Layout from "ui-library/lib/components/general/ColumnLayout";
 
 /**

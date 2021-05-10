@@ -5,6 +5,7 @@ import uuid from "uuid";
 
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 import Toggle from "../../../components/forms/form-toggle";
 import ValueItem from "../../../components/layout/ValueItem";

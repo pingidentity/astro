@@ -4,6 +4,7 @@ import FlexItem, { flexPositions } from "../../../components/layout/FlexItem";
 import InputRow from "../../../components/layout/InputRow";
 import Text from "../../../components/general/Text";
 import Padding from "../../../components/layout/Padding";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**
@@ -180,7 +181,7 @@ export default function FlexItemDemo() {
                 </FlexRow>
             </InputRow>
         </div>
-           
+
     );
 }
 

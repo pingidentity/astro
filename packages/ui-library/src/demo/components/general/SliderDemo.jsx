@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Slider from "../../../components/general/Slider";
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Label from "ui-library/lib/components/forms/FormLabel";
 import tinygradient from "tinygradient";
 

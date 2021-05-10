@@ -24,6 +24,7 @@ const React = require("react"),
     format = require("../util/format.js"),
     _ = require("underscore");
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ContentArea from "ui-library/lib/components/layout/ContentArea";
 
 // the SCSS files will be compiled by a webpack plugin
@@ -122,6 +123,7 @@ class DemoApp extends React.Component {
         if (path) {
             const pathString = (typeof path === "string") ? path : path[0];
             if (pathString && pathString.replace) {
+                //eslint-disable-next-line import/no-extraneous-dependencies
                 return `ui-library/lib/${pathString
                     .replace(/_/g, "/")
                     .replace(/\.jsx\.html$/, "")

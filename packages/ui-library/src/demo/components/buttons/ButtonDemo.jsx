@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Button, { buttonTypes } from "../../../components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text from "ui-library/lib/components/general/Text";
 
 /**

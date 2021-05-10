@@ -2,6 +2,7 @@ import React from "react";
 import TimePicker from "./../../../components/general/TimePicker";
 import Calendar from "./../../../components/calendars/Calendar";
 import InputRow from "../../../components/layout/InputRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
 
 /**

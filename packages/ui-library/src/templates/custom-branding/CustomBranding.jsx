@@ -1,18 +1,33 @@
 import React, { Component } from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ColorPicker from "ui-library/lib/components/general/ColorPicker";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormRadioGroup from "ui-library/lib/components/forms/FormRadioGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormTextField from "ui-library/lib/components/forms/form-text-field";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FileUpload from "ui-library/lib/components/forms/FileUpload";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Layout from "ui-library/lib/components/general/ColumnLayout";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Stack from "ui-library/lib/components/layout/Stack";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputRow from "ui-library/lib/components/layout/InputRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Image from "ui-library/lib/components/general/Image";
 
 

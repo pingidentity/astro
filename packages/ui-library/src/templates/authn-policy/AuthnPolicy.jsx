@@ -1,17 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import EditSection from "ui-library/lib/components/layout/EditSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormTextField from "ui-library/lib/components/forms//form-text-field";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Layout from "ui-library/lib/components/general/ColumnLayout";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Messages from "ui-library/lib/components/general/messages/";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PolicyNode from "ui-library/lib/components/layout/PolicyNode";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import EditablePolicyNode from "ui-library/lib/components/layout/EditablePolicyNode";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PolicySettingsList from "ui-library/lib/components/layout/PolicySettingsList";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import _ from "underscore";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Actions from "ui-library/lib/templates/authn-policy/Actions";
 
 const conditionTypes = {

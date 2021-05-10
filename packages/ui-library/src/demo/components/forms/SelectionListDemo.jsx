@@ -1,9 +1,13 @@
 import React from "react";
 import _ from "underscore";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import SelectionList, { listWidths } from "ui-library/lib/components/forms/selection-list/index";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import SelectionFilterLabel from "ui-library/lib/components/forms/SelectionFilterLabel";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
 
 const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString.length) === littleString);

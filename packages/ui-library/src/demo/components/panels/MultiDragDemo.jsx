@@ -16,7 +16,9 @@ import data from "./MultiDragData.js";
 import dragScroll from "../../../util/dragScroll";
 import _ from "underscore";
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Image, { imageSizes } from "ui-library/lib/components/general/Image";
 
 /**
@@ -211,7 +213,7 @@ class MultiDragDemo extends React.Component {
      * unfiltered list should look like. We have to do some logic to covert back the indexes
      * relative to the unfiltered rows.
      */
-    
+
     _handleDropStateless = (desc) => {
         var convertedDesc = MultiDrag.convertFilteredIndexes(this.props.drag.columns, desc);
 
@@ -350,7 +352,7 @@ class MultiDragDemo extends React.Component {
                     </Disabled>
                 );
             }
-                
+
             if (props.id === 3) {
                 return (
                     <MultiDragRow

@@ -1,5 +1,6 @@
 import React from "react";
 import Spacing from "../../../components/layout/Spacing";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

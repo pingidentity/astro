@@ -1,5 +1,7 @@
 var React = require("react");
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Link, { linkTypes, linkSizes, iconColors } from "ui-library/lib/components/general/Link";
 
 /**

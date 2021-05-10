@@ -1,14 +1,23 @@
 import React from "react";
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InlineMessage, { MessageTypes } from "ui-library/lib/components/general/InlineMessage";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Link from "ui-library/lib/components/general/Link";
 import { noop } from "underscore";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import RockerButton from "ui-library/lib/components/forms/RockerButton";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Toggle from "ui-library/lib/components/forms/form-toggle/v2";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Table from "ui-library/lib/components/tables/Table";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ValueItem from "ui-library/lib/components/layout/ValueItem";
 
 /**

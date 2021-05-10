@@ -1,20 +1,37 @@
 import React, { Component } from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ExpandableRow from "ui-library/lib/components/rows/ExpandableRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow, { alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormTextField from "ui-library/lib/components/forms/form-text-field";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputWidths from "ui-library/lib/components/forms/InputWidths";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Link from "ui-library/lib/components/general/Link";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import { linkTypes } from "ui-library/lib/components/general/Anchor";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import MappedAttributes from "ui-library/lib/components/layout/MappedAttributes";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageHeader from "ui-library/lib/components/general/PageHeader";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PopoverMenu from "ui-library/lib/components/tooltips/PopoverNavMenu";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import RowBuilder, { Separator } from "ui-library/lib/components/rows/RowBuilder";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import SearchBox from "ui-library/lib/components/forms/FormSearchBox";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import { TabSet, TabContent } from "ui-library/lib/components/layout/TabSet";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Toggle from "ui-library/lib/components/forms/form-toggle";
 import { v4 as uuidV4 } from "uuid";
 
@@ -23,9 +40,9 @@ import { v4 as uuidV4 } from "uuid";
  * @desc OicoAccess Token Template
  */
 
- 
+
 export default class OicoAccessToken extends Component {
-   
+
     state = {
         showingAddResource: false,
         selectedIndex: 2,
@@ -37,11 +54,11 @@ export default class OicoAccessToken extends Component {
             id: uuidV4(),
         }],
     }
-    
+
     _setSearchTerm = searchTerm => this.setState({
         searchTerm: searchTerm.toLowerCase()
     })
-  
+
     toggleAddResource = () => this.setState((prevState) => ({ showingAddResource: !prevState.showingAddResource }));
 
     setDropDown = dropDownName => opt => this.setState({
@@ -150,7 +167,7 @@ export default class OicoAccessToken extends Component {
             input2: "",
             id: uuidV4(),
         };
-      
+
 
         this.setState (({ data }) => { return { data: [...data, newRow] };});
 
@@ -162,7 +179,7 @@ export default class OicoAccessToken extends Component {
 
 
     render() {
-        
+
         const { showingAddResource } = this.state;
         if (showingAddResource)
         {

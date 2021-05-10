@@ -1,5 +1,7 @@
 var React = require("react");
+//eslint-disable-next-line import/no-extraneous-dependencies
 var MaskedValue = require("ui-library/lib/components/general/MaskedValue");
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**
