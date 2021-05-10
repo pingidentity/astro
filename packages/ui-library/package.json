@@ -1,6 +1,6 @@
 {
   "name": "ui-library",
-  "version": "4.37.0",
+  "version": "4.38.0",
   "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons).",
   "author": "UX Front-End Development Team",
   "license": "ISC",
@@ -165,13 +165,13 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "scripts": {
-    "pack": "webpack --progress --colors --config webpack.prod.js",
-    "package-library": "gulp package-lib",
+    "demo": "webpack --progress --colors --config webpack.prod.js",
+    "build": "gulp package-lib",
     "pack-landing": "webpack --progress --colors --config webpack.landing.js",
     "webpack-start-landing": "webpack-dev-server --content-base hosting/ -d --hot --port 8082 --host 0.0.0.0 --inline --progress --colors --config webpack.landing.js",
     "webpack-start": "webpack-dev-server -d --hot --host 0.0.0.0 --port 8080 --inline --progress --colors --config webpack.dev.js",
-    "start": "yarn run doc & yarn run webpack-start",
-    "start-w-doc": "yarn run doc && yarn run webpack-start",
+    "start": "yarn run demo & yarn run webpack-start",
+    "start-w-demo": "yarn run demo && yarn run webpack-start",
     "doc": "jsdoc -c ./jsdoc.json",
     "test-w-docker": "./node_modules/.bin/wdio wdio.dev.conf.js",
     "jslint": "eslint --ext .js,.jsx .",
@@ -193,7 +193,8 @@
     "backstop-ci": "mkdir build-doc && rm -rf ./backstop.json && node ./runBackstopTests.js --ci",
     "backstop-approve": "rm -rf ./backstop.json && node ./runBackstopTests.js --approve",
     "backstop-test": "rm -rf ./backstop.json && node ./runBackstopTests.js",
-    "append-version": "node ../../append_current_version.js"
+    "append-version": "node ../../append_current_version.js",
+    "postversion": "yarn build && make LIB_VERSION=$(node -p -e \"require('./package.json').version\") build-cdn-assets"
   },
   "csrfDataSourceApiConfig": {}
 }

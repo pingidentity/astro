@@ -7,7 +7,7 @@ module.exports = merge(prod, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist',
+    contentBase: './lib',
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),

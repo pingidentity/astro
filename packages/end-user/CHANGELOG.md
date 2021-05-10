@@ -1,0 +1,27 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.1.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.1.0...@pingux/end-user@1.1.1) (2021-04-29)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
+# [1.1.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@0.37.0...@pingux/end-user@1.1.0) (2021-04-29)
+
+
+### Reverts
+
+* Revert "Publish" ([dd81edb](https://gitlab.corp.pingidentity.com/ux/end-user/commit/dd81edb94a8dc22c8df2033bb4a7193ef6ae0660))
+
+
+
+
+
+# 0.37.0 (2021-04-27)
+
+**Note:** Version bump only for package @pingux/end-user

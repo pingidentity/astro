@@ -68,7 +68,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'lib'),
     filename: 'ping-schema-form.js',
     library: 'pingSchemaForm',
     libraryTarget: 'umd',
