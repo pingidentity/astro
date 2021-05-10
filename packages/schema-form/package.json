@@ -1,6 +1,6 @@
 {
   "name": "@pingux/schema-form",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "Create component forms from JSON Schema",
   "author": "<uxdev@pingidentity.com>",
   "homepage": "",
