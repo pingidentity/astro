@@ -18,14 +18,14 @@
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "rm -rf lib && npm-run-all build:*",
     "build:css": "node-sass --output-style 'compressed' src/ -o lib",
     "build:move-files": "gulp move-files",
     "build:components": "svgr -d lib/ui-library/components src/ui-library/svg --icon && create-index lib/ui-library/components -i",
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js lib/ui-library/components --out-dir lib/ui-library/cjs",
     "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js lib/ui-library/components --out-dir lib/ui-library/components",
-    "build:cdn": "rm -rf cdn && gulp cdn"
+    "build:cdn": "rm -rf cdn && gulp cdn",
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

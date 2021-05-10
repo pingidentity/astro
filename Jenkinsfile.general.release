@@ -2,9 +2,35 @@
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
 
-def prodCdnDeploy = libraryResource 'podTemplates/prod-cdn-deploy.yaml';
+def ortCdnDeploy = libraryResource 'podTemplates/central-only/ort-cdn-deploy.yaml';
+def prodCdnDeploy = libraryResource 'podTemplates/central-only/prod-cdn-deploy.yaml';
 def uiPipelineShared = libraryResource 'podTemplates/ui-pipeline-shared.yaml';
-def centralCluster = 'central-us-east-2-k8s'
+def centralCluster = 'central-us-east-2-k8s';
+
+// Schema Form NPM publish stuff
+def configuration = [
+  vaultUrl: 'https://prod-vault-us-east-2.awscloud.pingidentity.net',
+  vaultCredentialId: 'jenkins-icecream-pipeline',
+  engineVersion: 2
+]
+def secrets = [
+  [
+    path: 'secret/central/jenkins-icecream/ux/pingux',
+    engineVersion: 2,
+    secretValues: [
+      [envVar: 'NPM_TOKEN', vaultKey: 'NPM_TOKEN']
+    ]
+  ]
+]
+
+// Logic utils
+def globalCdnMap = [
+  'ui-library': 'packages/ui-library/cdn',
+  '@pingux/end-user': 'packages/end-user/cdn',
+  '@pingux/icons': 'packages/icons/cdn',
+  '@pingux/branding-templates': 'packages/branding-themes/build/cdn'
+];
+def updatedPackagesMap = [:];
 
 pipeline {
   agent {
@@ -13,104 +39,245 @@ pipeline {
       yaml uiPipelineShared
     }
   }
+  parameters {
+    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --yes', description: 'Flags applied to the `lerna version` command.')
+    string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --yes', description: 'Flags applied to the `lerna publish` command.')
+  }
   environment {
-    PATH_TO_PACKAGE_JSON = "packages/branding-themes"
     PING_TEAM_NAME = "ux"
-    PING_SERVICE_NAME = "${params.PACKAGE}"
   }
   stages {
-    stage('yarn install') {
-        steps {
-            container('node-builder') {
-                sh "yarn --ignore-engines"
-            }
+    stage('install and link') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('node-builder') {
+            echo "Installing and linking packages"
+            sh "yarn --frozen-lockfile --ignore-engines"
+            sh "yarn lerna run build --ignore ui-library"
+          }
         }
+        stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
+      }
     }
+
+    stage('lint') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('node-builder') {
+            echo "Linting packages"
+            sh 'yarn lerna run lint'
+          }
+        }
+      }
+    }
+
     stage('test') {
       steps {
+        dir("${env.WORKSPACE}") {
           container('node-builder') {
-            echo "Running linting and tests"
-            // sh "lerna run --scope ${params.PACKAGE} test"
+            echo "Running tests for packages"
+            sh 'yarn lerna run coverage-ci'
           }
+        }
       }
     }
-    stage('version, tag and commit') {
+
+    stage('version') {
       steps {
-        dir ("${env.WORKSPACE}/packages/${params.PACKAGE}") {
+        dir("${env.WORKSPACE}") {
           container('node-builder') {
-            echo "Incrementing the version: ${params.VERSION_TYPE}"
-            sh "npm version ${params.VERSION_TYPE} --no-git-tag-version"
-            script {
-              env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
-              env.GIT_RELEASE_TAG = "${params.PACKAGE}-${env.RELEASE_VERSION}"
-            }
-            echo """
-              release version: ${env.RELEASE_VERSION}
-              git tag: ${env.GIT_RELEASE_TAG}
-            """
+            echo "Versioning packages"
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
-            ]){
-              sh  """
-                git add package.json
+            ]) {
+              // Lerna changed for debugging purposes
+              sh """
+                yarn lerna changed
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
-                git commit -m '${params.PACKAGE}-${params.VERSION_TYPE}: ${env.RELEASE_VERSION}'
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin ${params.RELEASE_BRANCH}
-
-                git tag ${env.GIT_RELEASE_TAG}
-                GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}" git push origin ${env.GIT_RELEASE_TAG}
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${LERNA_VERSION_FLAGS} > lerna_version.txt
               """
+              script {
+                def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
+                env.RELEASE_JSON = json;
+                def lazyMap = new groovy.json.JsonSlurper().parseText(json);
+                for (prop in lazyMap) {
+                  updatedPackagesMap[prop.key] = prop.value;
+                }
+              }
             }
           }
         }
       }
     }
-    stage('yarn-publish') {
+
+    stage('publish') {
       steps {
-        dir("${env.WORKSPACE}/packages/${params.PACKAGE}") {
+        dir("${env.WORKSPACE}") {
           container('node-builder') {
-            echo "Building & publishing"
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
-              sh "yarn run build"
-              sh "yarn publish"
+              withVault([configuration: configuration, vaultSecrets: secrets]) {
+                sh """
+                  echo "Publishing Schema Form to NPM registry"
+                  cd packages/schema-form
+                  echo \"registry=https://registry.npmjs.org/\" >> .npmrc
+                  echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> .npmrc
+                """
+                echo "Publishing changed packages"
+                sh 'yarn lerna publish ${LERNA_PUBLISH_FLAGS}'
+              }
             }
           }
         }
-        // stash includes: packages/${params.PACKAGE}/**/*', name: 'package'
       }
     }
-    // stage('cdn deploy prod') {
-    //   agent {
-    //     kubernetes {
-    //       cloud centralCluster
-    //       yaml prodCdnDeploy
-    //     }
-    //   }
-    //   environment{
-    //     ENVIRONMENT = "production"
-    //     CDN_SOURCE = "packages/${params.PACKAGE}/cdn/${env.RELEASE_VERSION}"
-    //     UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
-    //   }
-    //   steps {
-    //     container('cdn-deploy') {
-    //       checkout scm
-    //       unstash 'package'
-    //       sh 'upload_ui'
-    //     }
-    //   }
-    // }
+
+    stage('update demos') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('node-builder') {
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              script {
+                def packageKeys = updatedPackagesMap.keySet() as List;
+                if (packageKeys.size() > 0) {
+                  // Update those demos using their Makefile
+                  packageKeys.each() {
+                    def packagePath = it.replaceAll("@pingux/", "");
+                    echo "updated package ${it}: path ${packagePath}"
+                    sh "cd packages/${packagePath} && make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${updatedPackagesMap[it]} package-and-upload-for-hosting"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('cdn deploy test') {
+      agent { label 'test-cdn-deploy' }
+      environment {
+        ENVIRONMENT = "test"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'packages'
+          script {
+            def cdnKeys = globalCdnMap.keySet() as List;
+            def packageKeys = updatedPackagesMap.keySet() as List;
+            // Get list of updated packages with cdn deployments
+            def cdnDeployments = cdnKeys.intersect(packageKeys);
+            if (cdnDeployments.size() > 0) {
+              // Update each package's cdn deployment
+              cdnDeployments.each() {
+                def releaseVersion = updatedPackagesMap[it];
+                env.PING_SERVICE_NAME = it.replaceAll("@pingux/", "");
+                env.CDN_SOURCE =  "${globalCdnMap[it]}/${releaseVersion}"
+                env.UNIQUE_CDN_FOLDER = "${releaseVersion}"
+                echo "test upload CDN_SOURCE: ${CDN_SOURCE} UNIQUE_CDN_FOLDER: ${UNIQUE_CDN_FOLDER}"
+                sh "echo ${env.GIT_COMMIT} >> ${CDN_SOURCE}/VERSION.txt"
+                sh 'upload_ui'
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('cdn deploy ort') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml ortCdnDeploy
+        }
+      }
+      environment {
+        ENVIRONMENT = "staging"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'packages'
+          script {
+            def cdnKeys = globalCdnMap.keySet() as List;
+            def packageKeys = updatedPackagesMap.keySet() as List;
+            // Get list of updated packages with cdn deployments
+            def cdnDeployments = cdnKeys.intersect(packageKeys);
+            if (cdnDeployments.size() > 0) {
+              // Update each package's cdn deployment
+              cdnDeployments.each() {
+                def releaseVersion = updatedPackagesMap[it];
+                env.PING_SERVICE_NAME = it.replaceAll("@pingux/", "");
+                env.CDN_SOURCE =  "${globalCdnMap[it]}/${releaseVersion}"
+                env.UNIQUE_CDN_FOLDER = "${releaseVersion}"
+                echo "ort upload CDN_SOURCE: ${CDN_SOURCE} UNIQUE_CDN_FOLDER: ${UNIQUE_CDN_FOLDER}"
+                sh 'upload_ui'
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('cdn deploy prod') {
+      agent {
+        kubernetes {
+          cloud centralCluster
+          yaml prodCdnDeploy
+        }
+      }
+      environment {
+        ENVIRONMENT = "production"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'packages'
+          script {
+            def cdnKeys = globalCdnMap.keySet() as List;
+            def packageKeys = updatedPackagesMap.keySet() as List;
+            // Get list of updated packages with cdn deployments
+            def cdnDeployments = cdnKeys.intersect(packageKeys);
+            if (cdnDeployments.size() > 0) {
+              // Update each package's cdn deployment
+              cdnDeployments.each() {
+                def releaseVersion = updatedPackagesMap[it];
+                env.PING_SERVICE_NAME = it.replaceAll("@pingux/", "");
+                env.CDN_SOURCE =  "${globalCdnMap[it]}/${releaseVersion}"
+                env.UNIQUE_CDN_FOLDER = "${releaseVersion}"
+                echo "prod upload CDN_SOURCE: ${CDN_SOURCE} UNIQUE_CDN_FOLDER: ${UNIQUE_CDN_FOLDER}"
+                sh 'upload_ui'
+              }
+            }
+          }
+        }
+      }
+    }
   }
+
   post {
     success {
-       slackSend channel: '#ux-deployments', message: ":verynice: Great Success! ${params.PACKAGE} ${env.RELEASE_VERSION} has been released ${BUILD_URL}.", color: "#4aba78"
+      script {
+        def message = """
+          :tada: Release success!
+          Release details: `${env.RELEASE_JSON}`
+          Build details: <${env.BUILD_URL}/console|See in web console>
+        """.stripIndent()
+        slackSend channel: 'ux-deployments', message: "${message}", color: "#4aba78"
+      }
     }
     unsuccessful {
-       slackSend channel: '#ux-deployments', message: "@here ${params.PACKAGE} ${BUILD_URL} failed!", color: "#a31300"
+      script {
+        def message = """
+          :x: Release failure...
+          Build details: <${env.BUILD_URL}/console|See in web console>
+        """.stripIndent()
+        slackSend channel: 'ux-deployments', message: "${message}", color: "#a31300"
+      }
     }
-
     cleanup {
-        cleanWs()
+      cleanWs()
     }
   }
 }

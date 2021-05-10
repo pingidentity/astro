@@ -1,25 +1,31 @@
 {
   "name": "@pingux/schema-form",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "description": "Create component forms from JSON Schema",
-  "author": "Tyler Grove <tgrove@pingidentity.com>",
+  "author": "<uxdev@pingidentity.com>",
   "homepage": "",
   "license": "UNLICENSED",
-  "main": "ping-schema-form.js",
+  "main": "lib/ping-schema-form.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
   },
   "scripts": {
-    "build:end-user": "cd ../end-user && yarn dist",
+    "build": "webpack",
     "build:astro": "cd ../astro && yarn build",
+    "build:end-user": "cd ../end-user && yarn build",
     "coverage": "jest --coverage",
     "coverage-ci": "jest --coverage --ci",
-    "dist": "webpack && cp package.json dist/package.json && cp README_DIST.md dist/README.md",
+    "demo": "build-storybook",
     "lint": "eslint .",
-    "start": "yarn && yarn watch",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "sample": "yarn && yarn watch",
+    "start": "start-storybook -p 6006",
     "test": "jest",
     "watch": "webpack-dev-server --config webpack.dev.js --watch"
   },
@@ -31,6 +37,7 @@
     "@babel/preset-react": "^7.10.4",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.34",
+    "@emotion/jest": "^11.2.1",
     "@pingux/astro": "0.5.1",
     "@pingux/end-user": "0.30.0",
     "@rjsf/core": "2.0.0",
