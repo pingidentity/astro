@@ -53,7 +53,7 @@ pipeline {
           container('node-builder') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
-            sh "yarn lerna run build --ignore ui-library"
+            sh "yarn lerna run build"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
