@@ -166,7 +166,7 @@
   },
   "scripts": {
     "demo": "webpack --progress --colors --config webpack.prod.js",
-    "build": "gulp package-lib",
+    "build": "gulp package-lib && yarn run cdn",
     "pack-landing": "webpack --progress --colors --config webpack.landing.js",
     "webpack-start-landing": "webpack-dev-server --content-base hosting/ -d --hot --port 8082 --host 0.0.0.0 --inline --progress --colors --config webpack.landing.js",
     "webpack-start": "webpack-dev-server -d --hot --host 0.0.0.0 --port 8080 --inline --progress --colors --config webpack.dev.js",
@@ -194,7 +194,7 @@
     "backstop-approve": "rm -rf ./backstop.json && node ./runBackstopTests.js --approve",
     "backstop-test": "rm -rf ./backstop.json && node ./runBackstopTests.js",
     "append-version": "node ../../append_current_version.js",
-    "postversion": "yarn build && make LIB_VERSION=$(node -p -e \"require('./package.json').version\") build-cdn-assets"
+    "cdn": "make LIB_VERSION=$(node -p -e \"require('./package.json').version\") build-cdn-assets"
   },
   "csrfDataSourceApiConfig": {}
 }
