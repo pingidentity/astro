@@ -1,0 +1,9 @@
+
+Changes:
+ - @pingux/astro: 0.9.0 => 0.10.0
+ - @pingux/branding-themes: 0.21.0 => 0.22.0
+ - @pingux/charting: 0.6.0 => 0.8.0
+ - @pingux/end-user: 1.1.0 => 1.2.0
+ - @pingux/icons: 0.2.0 => 0.4.0
+ - @pingux/schema-form: 1.12.0 => 1.14.0
+ - ui-library: 4.37.0 => 4.39.0
