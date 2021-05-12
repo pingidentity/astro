@@ -35,6 +35,7 @@ const PasswordInput = ({
     onKeyPress,
     onKeyDown,
     onMouseDown,
+    ...others
 }) => {
     const [isHidden, setIsHidden] = useState(true);
     const classNames = classnames('text-input--pasword', className);
@@ -65,6 +66,7 @@ const PasswordInput = ({
             onMouseDown={onMouseDown}
             placeholder={placeholder}
             inputProps={{
+                ...others,
                 key: 'passwordinput',
                 type: isHidden ? 'password' : 'text',
             }}
