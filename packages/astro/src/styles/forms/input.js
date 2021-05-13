@@ -14,6 +14,7 @@ export const input = {
   appearance: 'none',
   boxSizing: 'border-box',
   lineHeight: '1.25em',
+  height: '40px',
   textOverflow: 'ellipsis',
   paddingRight: '100px',
   bg: 'white',
@@ -28,6 +29,9 @@ export const input = {
   '&.is-focused': {
     borderColor: 'accent.80',
     boxShadow: 'focus',
+  },
+  '.is-float-label &': {
+    height: '45px',
   },
   '.is-float-label-active &': {
     ...activeFloatLabel,
