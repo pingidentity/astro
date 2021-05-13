@@ -3706,6 +3706,13 @@
     through2 "^2.0.1"
     vinyl "^2.0.1"
 
+"@pingux/icons@^0.2.0":
+  version "0.2.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@pingux/icons/-/@pingux/icons-0.2.0.tgz#0b1cb602be04e62553f870906f393c5f48333775"
+  integrity sha1-Cxy2Ar4E5iVT+HCQbzk8X0gzN3U=
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+
 "@pmmmwh/react-refresh-webpack-plugin@^0.4.2":
   version "0.4.3"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.4.3.tgz#1eec460596d200c0236bf195b078a5d1df89b766"
