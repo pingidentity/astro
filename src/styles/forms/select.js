@@ -9,13 +9,13 @@ const activeFloatLabel = {
 // Default select
 export const select = {
   ...input,
-  height: '42px',
   display: 'flex',
   alignItems: 'center',
   '&.is-focused': {
     boxShadow: 'focus',
   },
   '.is-float-label &': {
+    height: '45px',
     ...activeFloatLabel,
   },
 };
