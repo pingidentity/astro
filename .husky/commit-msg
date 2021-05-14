@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+branch=$(git symbolic-ref --short HEAD)
+if [ $branch == "master" ]; then
+  npx --no-install commitlint --edit "$1"
+else
+  echo "Branch is not master, skipping commitlint"
+fi

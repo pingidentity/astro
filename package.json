@@ -15,6 +15,9 @@
     "@babel/preset-react": "^7.9.4",
     "@babel/runtime": "^7.9.2",
     "@babel/runtime-corejs3": "^7.11.2",
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/config-lerna-scopes": "^12.1.1",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
     "@storybook/addon-a11y": "^6.0.21",
@@ -28,6 +31,11 @@
     "@storybook/addon-viewport": "^6.0.21",
     "@storybook/react": "^6.0.21",
     "@storybook/source-loader": "^6.0.21",
+    "@testing-library/dom": "^7.24.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/react-hooks": "^3.4.1",
+    "@testing-library/user-event": "^12.1.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.4.2",
@@ -35,12 +43,8 @@
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-es2015-spread": "^6.22.0",
-    "@testing-library/dom": "^7.24.3",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.0.4",
-    "@testing-library/react-hooks": "^3.4.1",
-    "@testing-library/user-event": "^12.1.5",
     "babel-plugin-transform-node-env-inline": "^0.4.3",
+    "cz-conventional-changelog": "^3.3.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.5.1",
@@ -48,6 +52,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "git-branch-is": "^4.0.0",
+    "husky": "^6.0.0",
     "jest": "^26.0.1",
     "jest-cli": "^26.0.1",
     "jest-emotion": "^10.0.32",
@@ -56,8 +62,11 @@
     "mutationobserver-shim": "^0.3.7",
     "react": "^16.8.6",
     "react-dom": "^16.13.1",
-    "whatwg-fetch": "^3.4.1",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "whatwg-fetch": "^3.4.1"
+  },
+  "scripts": {
+    "postinstall": "husky install"
   },
   "resolutions": {
     "minimist": "^1.2.5",
@@ -66,5 +75,10 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
