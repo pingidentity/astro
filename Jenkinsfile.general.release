@@ -71,16 +71,16 @@ pipeline {
       }
     }
 
-    // stage('test') {
-    //   steps {
-    //     dir("${env.WORKSPACE}") {
-    //       container('node-builder') {
-    //         echo "Running tests for packages"
-    //         sh 'yarn lerna run coverage-ci'
-    //       }
-    //     }
-    //   }
-    // }
+    stage('test') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('node-builder') {
+            echo "Running tests for packages"
+            sh 'yarn lerna run test'
+          }
+        }
+      }
+    }
 
     stage('version') {
       steps {

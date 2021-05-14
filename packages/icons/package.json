@@ -24,8 +24,7 @@
     "build:components": "svgr -d lib/ui-library/components src/ui-library/svg --icon && create-index lib/ui-library/components -i",
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js lib/ui-library/components --out-dir lib/ui-library/cjs",
     "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js lib/ui-library/components --out-dir lib/ui-library/components",
-    "build:cdn": "rm -rf cdn && gulp cdn",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build:cdn": "rm -rf cdn && gulp cdn"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
