@@ -28,7 +28,7 @@ def globalCdnMap = [
   'ui-library': 'packages/ui-library/cdn',
   '@pingux/end-user': 'packages/end-user/cdn',
   '@pingux/icons': 'packages/icons/cdn',
-  '@pingux/branding-templates': 'packages/branding-themes/build/cdn'
+  '@pingux/branding-themes': 'packages/branding-themes/build/cdn'
 ];
 def updatedPackagesMap = [:];
 
