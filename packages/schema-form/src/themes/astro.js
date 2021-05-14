@@ -83,7 +83,6 @@ export const toAstroInputProps = (props) => {
     onChange,
     onFocus,
     options: {
-      defaultText,
       enumDisabled,
       enumOptions,
       help: uiHelp,
@@ -91,6 +90,7 @@ export const toAstroInputProps = (props) => {
       hasMarkdownLabel: hasMarkdown,
       hasMarkdownErrors,
       labelMode,
+      defaultText,
       ...custom
     },
     placeholder,
