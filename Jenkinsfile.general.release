@@ -28,7 +28,7 @@ def globalCdnMap = [
   'ui-library': 'packages/ui-library/cdn',
   '@pingux/end-user': 'packages/end-user/cdn',
   '@pingux/icons': 'packages/icons/cdn',
-  '@pingux/branding-themes': 'packages/branding-themes/build/cdn'
+  '@pingux/branding-templates': 'packages/branding-themes/build/cdn'
 ];
 def updatedPackagesMap = [:];
 
@@ -91,12 +91,12 @@ pipeline {
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]) {
               // Lerna changed for debugging purposes
-              // sh """
-              //   yarn lerna changed
-              //   git config --global user.email 'devtools+jenkins@pingidentity.com'
-              //   git config --global user.name 'devtools-jenkins'
-              //   GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${LERNA_VERSION_FLAGS} > lerna_version.txt
-              // """
+              sh """
+                yarn lerna changed
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${LERNA_VERSION_FLAGS} > lerna_version.txt
+              """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
                 env.RELEASE_JSON = json;
@@ -111,26 +111,26 @@ pipeline {
       }
     }
 
-    // stage('publish') {
-    //   steps {
-    //     dir("${env.WORKSPACE}") {
-    //       container('node-builder') {
-    //         configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
-    //           withVault([configuration: configuration, vaultSecrets: secrets]) {
-    //             sh """
-    //               echo "Publishing Schema Form to NPM registry"
-    //               cd packages/schema-form
-    //               echo \"registry=https://registry.npmjs.org/\" >> .npmrc
-    //               echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> .npmrc
-    //             """
-    //             echo "Publishing changed packages"
-    //             sh 'yarn lerna publish ${LERNA_PUBLISH_FLAGS}'
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    stage('publish') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('node-builder') {
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
+              withVault([configuration: configuration, vaultSecrets: secrets]) {
+                sh """
+                  echo "Publishing Schema Form to NPM registry"
+                  cd packages/schema-form
+                  echo \"registry=https://registry.npmjs.org/\" >> .npmrc
+                  echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> .npmrc
+                """
+                echo "Publishing changed packages"
+                sh 'yarn lerna publish ${LERNA_PUBLISH_FLAGS}'
+              }
+            }
+          }
+        }
+      }
+    }
 
     stage('update demos') {
       steps {
