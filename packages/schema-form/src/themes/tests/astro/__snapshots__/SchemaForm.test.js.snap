@@ -870,7 +870,8 @@ input:focus~.emotion-7 {
 }
 
 input~.emotion-7.is-focused {
-  background-color: highlight;
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
 input:checked~.emotion-8 {
@@ -887,7 +888,8 @@ input:checked~.emotion-8 {
 }
 
 input~.emotion-8.is-focused {
-  background-color: highlight;
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
 input:focus~.emotion-8 {
@@ -974,6 +976,7 @@ input:focus~.emotion-8 {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -1378,7 +1381,8 @@ input:focus~.emotion-7 {
 }
 
 input~.emotion-7.is-focused {
-  background-color: highlight;
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
 input:checked~.emotion-8 {
@@ -1395,7 +1399,8 @@ input:checked~.emotion-8 {
 }
 
 input~.emotion-8.is-focused {
-  background-color: highlight;
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
 input:focus~.emotion-8 {
@@ -1482,6 +1487,7 @@ input:focus~.emotion-8 {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -1929,12 +1935,16 @@ exports[`single fields password field 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -1948,6 +1958,7 @@ exports[`single fields password field 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -1980,7 +1991,7 @@ exports[`single fields password field 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -2081,13 +2092,13 @@ exports[`single fields password field 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -2119,13 +2130,13 @@ exports[`single fields password field 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -2170,13 +2181,13 @@ exports[`single fields password field 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -2227,13 +2238,13 @@ exports[`single fields password field 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -2315,9 +2326,9 @@ exports[`single fields password field 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -2408,6 +2419,7 @@ exports[`single fields password field 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -2715,6 +2727,10 @@ exports[`single fields select field 1`] = `
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -2728,6 +2744,7 @@ exports[`single fields select field 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .is-float-label-active .emotion-3.is-float-label {
@@ -2738,7 +2755,7 @@ exports[`single fields select field 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -2903,17 +2920,18 @@ exports[`single fields select field 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
   outline: none;
+  height: 42px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2966,13 +2984,13 @@ exports[`single fields select field 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -3023,13 +3041,13 @@ exports[`single fields select field 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -3079,13 +3097,13 @@ exports[`single fields select field 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -3128,9 +3146,9 @@ exports[`single fields select field 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -3367,6 +3385,7 @@ exports[`single fields select field 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -3441,7 +3460,7 @@ exports[`single fields select field 1`] = `
                 <div
                   class="emotion-7"
                 >
-                  Select an option
+                  Select
                 </div>
               </span>
               <span
@@ -3705,6 +3724,10 @@ exports[`single fields select field with default 1`] = `
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -3718,6 +3741,7 @@ exports[`single fields select field with default 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .is-float-label-active .emotion-3.is-float-label {
@@ -3728,7 +3752,7 @@ exports[`single fields select field with default 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -3893,17 +3917,18 @@ exports[`single fields select field with default 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
   outline: none;
+  height: 42px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3956,13 +3981,13 @@ exports[`single fields select field with default 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -4013,13 +4038,13 @@ exports[`single fields select field with default 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -4069,13 +4094,13 @@ exports[`single fields select field with default 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -4118,9 +4143,9 @@ exports[`single fields select field with default 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -4357,6 +4382,7 @@ exports[`single fields select field with default 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -4431,7 +4457,7 @@ exports[`single fields select field with default 1`] = `
                 <div
                   class="emotion-7"
                 >
-                  Select an option
+                  Select
                 </div>
               </span>
               <span
@@ -4695,12 +4721,16 @@ exports[`single fields string field format email 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -4714,6 +4744,7 @@ exports[`single fields string field format email 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -4746,7 +4777,7 @@ exports[`single fields string field format email 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -4847,13 +4878,13 @@ exports[`single fields string field format email 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -4885,13 +4916,13 @@ exports[`single fields string field format email 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -4936,13 +4967,13 @@ exports[`single fields string field format email 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -4993,13 +5024,13 @@ exports[`single fields string field format email 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -5081,9 +5112,9 @@ exports[`single fields string field format email 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -5174,6 +5205,7 @@ exports[`single fields string field format email 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -5480,12 +5512,16 @@ exports[`single fields string field format uri 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -5499,6 +5535,7 @@ exports[`single fields string field format uri 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -5531,7 +5568,7 @@ exports[`single fields string field format uri 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -5632,13 +5669,13 @@ exports[`single fields string field format uri 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -5670,13 +5707,13 @@ exports[`single fields string field format uri 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -5721,13 +5758,13 @@ exports[`single fields string field format uri 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -5778,13 +5815,13 @@ exports[`single fields string field format uri 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -5866,9 +5903,9 @@ exports[`single fields string field format uri 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -5959,6 +5996,7 @@ exports[`single fields string field format uri 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -6265,12 +6303,16 @@ exports[`single fields string field regular 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -6284,6 +6326,7 @@ exports[`single fields string field regular 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -6316,7 +6359,7 @@ exports[`single fields string field regular 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -6417,13 +6460,13 @@ exports[`single fields string field regular 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -6455,13 +6498,13 @@ exports[`single fields string field regular 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -6506,13 +6549,13 @@ exports[`single fields string field regular 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -6563,13 +6606,13 @@ exports[`single fields string field regular 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -6651,9 +6694,9 @@ exports[`single fields string field regular 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -6744,6 +6787,7 @@ exports[`single fields string field regular 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -7050,12 +7094,16 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -7069,6 +7117,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -7101,7 +7150,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -7193,9 +7242,9 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   background-color: #eeb91c;
 }
 
-.is-float-label-active .emotion-5 small large {
-  padding-top: 15px;
-  padding-bottom: 5px;
+.emotion-5 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
 }
 
 .emotion-5 {
@@ -7222,13 +7271,13 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -7273,13 +7322,13 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -7330,13 +7379,13 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -7387,13 +7436,13 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -7406,14 +7455,14 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   box-shadow: 0 0 5px #5873bdbf;
 }
 
+.is-float-label-active .emotion-5 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
 .emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
-}
-
-.emotion-5 small large::-webkit-input-placeholder {
-  font-weight: 300;
-  color: #68747f;
 }
 
 .emotion-5 small large::-moz-placeholder {
@@ -7436,9 +7485,9 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -7504,20 +7553,49 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   padding-top: 10px;
 }
 
-.emotion-6.is-default {
-  color: #68747f;
+.is-left-label>.emotion-6 {
+  grid-row-end: 3;
+  grid-column-end: 3;
 }
 
-.emotion-6.is-error {
-  color: #a31300;
+.emotion-6.is-warning {
+  color: #8a690a;
 }
 
 .emotion-6.is-success {
   color: #008512;
 }
 
-.emotion-6.is-warning {
-  color: #8a690a;
+.emotion-6.is-error {
+  color: #a31300;
+}
+
+.emotion-6.is-default {
+  color: #68747f;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
 }
 
 .emotion-7 {
@@ -7559,6 +7637,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -7569,30 +7648,6 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   background-color: #fff;
   border: 1px solid;
   border-color: #4462ED;
-}
-
-.emotion-7.is-hovered {
-  background-color: #f7f8fd;
-  border: 1px solid;
-  border-color: #4660a2;
-  color: #4660a2;
-  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
-}
-
-.emotion-7.is-pressed {
-  background-color: #4462ED;
-  border: 1px solid;
-  border-color: #4462ED;
-  color: #fff;
-}
-
-.emotion-7.is-pressed path {
-  fill: #fff;
-}
-
-.emotion-7.is-focused {
-  outline: none;
-  box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
@@ -7871,12 +7926,16 @@ exports[`single fields string field with help text 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -7890,6 +7949,7 @@ exports[`single fields string field with help text 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -7922,7 +7982,7 @@ exports[`single fields string field with help text 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -8014,9 +8074,9 @@ exports[`single fields string field with help text 1`] = `
   background-color: #eeb91c;
 }
 
-.is-float-label-active .emotion-5 small large {
-  padding-top: 15px;
-  padding-bottom: 5px;
+.emotion-5 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
 }
 
 .emotion-5 {
@@ -8043,13 +8103,13 @@ exports[`single fields string field with help text 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -8094,13 +8154,13 @@ exports[`single fields string field with help text 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -8151,13 +8211,13 @@ exports[`single fields string field with help text 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -8208,13 +8268,13 @@ exports[`single fields string field with help text 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -8227,14 +8287,14 @@ exports[`single fields string field with help text 1`] = `
   box-shadow: 0 0 5px #5873bdbf;
 }
 
+.is-float-label-active .emotion-5 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
 .emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
-}
-
-.emotion-5 small large::-webkit-input-placeholder {
-  font-weight: 300;
-  color: #68747f;
 }
 
 .emotion-5 small large::-moz-placeholder {
@@ -8257,9 +8317,9 @@ exports[`single fields string field with help text 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -8325,20 +8385,49 @@ exports[`single fields string field with help text 1`] = `
   padding-top: 10px;
 }
 
-.emotion-6.is-default {
-  color: #68747f;
+.is-left-label>.emotion-6 {
+  grid-row-end: 3;
+  grid-column-end: 3;
 }
 
-.emotion-6.is-error {
-  color: #a31300;
+.emotion-6.is-warning {
+  color: #8a690a;
 }
 
 .emotion-6.is-success {
   color: #008512;
 }
 
-.emotion-6.is-warning {
-  color: #8a690a;
+.emotion-6.is-error {
+  color: #a31300;
+}
+
+.emotion-6.is-default {
+  color: #68747f;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
 }
 
 .emotion-7 {
@@ -8380,6 +8469,7 @@ exports[`single fields string field with help text 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -8390,30 +8480,6 @@ exports[`single fields string field with help text 1`] = `
   background-color: #fff;
   border: 1px solid;
   border-color: #4462ED;
-}
-
-.emotion-7.is-hovered {
-  background-color: #f7f8fd;
-  border: 1px solid;
-  border-color: #4660a2;
-  color: #4660a2;
-  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
-}
-
-.emotion-7.is-pressed {
-  background-color: #4462ED;
-  border: 1px solid;
-  border-color: #4462ED;
-  color: #fff;
-}
-
-.emotion-7.is-pressed path {
-  fill: #fff;
-}
-
-.emotion-7.is-focused {
-  outline: none;
-  box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
@@ -8692,12 +8758,16 @@ exports[`single fields string field with markdown errors 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -8711,6 +8781,7 @@ exports[`single fields string field with markdown errors 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -8743,7 +8814,7 @@ exports[`single fields string field with markdown errors 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -8844,13 +8915,13 @@ exports[`single fields string field with markdown errors 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -8882,13 +8953,13 @@ exports[`single fields string field with markdown errors 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -8933,13 +9004,13 @@ exports[`single fields string field with markdown errors 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -8990,13 +9061,13 @@ exports[`single fields string field with markdown errors 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -9078,9 +9149,9 @@ exports[`single fields string field with markdown errors 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -9171,6 +9242,7 @@ exports[`single fields string field with markdown errors 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -9477,12 +9549,16 @@ exports[`single fields string field with placeholder 1`] = `
 }
 
 .emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -9496,6 +9572,7 @@ exports[`single fields string field with placeholder 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
 .emotion-3 {
@@ -9528,7 +9605,7 @@ exports[`single fields string field with placeholder 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -9629,13 +9706,13 @@ exports[`single fields string field with placeholder 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -9667,13 +9744,13 @@ exports[`single fields string field with placeholder 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -9718,13 +9795,13 @@ exports[`single fields string field with placeholder 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -9775,13 +9852,13 @@ exports[`single fields string field with placeholder 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -9863,9 +9940,9 @@ exports[`single fields string field with placeholder 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -9956,6 +10033,7 @@ exports[`single fields string field with placeholder 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -10035,8 +10113,13 @@ exports[`single fields string field with placeholder 1`] = `
 
 exports[`single fields textarea field 1`] = `
 <DocumentFragment>
-  .emotion-0 progress {
-  vertical-align: baseline;
+  .emotion-0 legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
 }
 
 .emotion-0 {
@@ -10171,17 +10254,12 @@ exports[`single fields textarea field 1`] = `
   padding: 0.35em 0.75em 0.625em;
 }
 
-.emotion-0 legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
-}
-
 .emotion-0 body {
   margin: 0;
+}
+
+.emotion-0 progress {
+  vertical-align: baseline;
 }
 
 .emotion-0 textarea {
@@ -10248,6 +10326,10 @@ exports[`single fields textarea field 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -10258,17 +10340,11 @@ exports[`single fields textarea field 1`] = `
   flex-direction: column;
 }
 
-.emotion-2>.is-default {
-  width: 100%;
-}
-
-.emotion-2.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
 .emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 300;
   position: absolute;
@@ -10282,29 +10358,14 @@ exports[`single fields textarea field 1`] = `
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   pointer-events: none;
+  padding-right: 25px;
 }
 
-.emotion-3 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 100%;
-  overflow-wrap: break-word;
-  max-width: 100%;
-  word-wrap: break-word;
-  word-break: break-word;
-  font-size: 13px;
-  color: #68747f;
-  display: block;
-  margin-bottom: 5px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+.is-float-label-active .emotion-3.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
 }
 
 .emotion-3.is-left-label {
@@ -10314,7 +10375,7 @@ exports[`single fields textarea field 1`] = `
 }
 
 .emotion-3 indicator {
-  color: red;
+  color: #a31300;
   margin-left: 5px;
 }
 
@@ -10344,25 +10405,27 @@ exports[`single fields textarea field 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-3.is-float-label {
-  font-weight: 400;
-  -webkit-transform: translate(0,-8px) scale(0.75);
-  -ms-transform: translate(0,-8px) scale(0.75);
-  transform: translate(0,-8px) scale(0.75);
-}
-
-.emotion-4 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  position: relative;
+  width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
 }
 
 .emotion-4>input {
@@ -10404,6 +10467,20 @@ exports[`single fields textarea field 1`] = `
 
 .emotion-4.is-warning::after {
   background-color: #eeb91c;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .emotion-5 small::-webkit-input-placeholder {
@@ -10451,13 +10528,13 @@ exports[`single fields textarea field 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -10507,13 +10584,13 @@ exports[`single fields textarea field 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -10564,13 +10641,13 @@ exports[`single fields textarea field 1`] = `
   box-sizing: border-box;
   line-height: 1.25em;
   text-overflow: ellipsis;
+  padding-right: 10px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 10px;
-  padding-right: 10px;
   padding-top: 2px;
   padding-bottom: 2px,;
   width: 100%;
@@ -10620,13 +10697,13 @@ exports[`single fields textarea field 1`] = `
   box-sizing: border-box;
   line-height: 2em;
   text-overflow: ellipsis;
+  padding-right: 15px;
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
   border-color: #caced3;
   border-radius: 2px;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -10669,9 +10746,9 @@ exports[`single fields textarea field 1`] = `
 }
 
 .emotion-5 wrapper.is-left-label {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 }
 
 .emotion-5 wrapper>.is-default {
@@ -10705,23 +10782,6 @@ exports[`single fields textarea field 1`] = `
 
 .emotion-5 container.is-disabled {
   opacity: 1;
-}
-
-.emotion-6.is-hovered {
-  background-color: #f7f8fd;
-  border: 1px solid;
-  border-color: #4660a2;
-  color: #4660a2;
-  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
-}
-
-.emotion-6.is-focused {
-  outline: none;
-  box-shadow: 0 0 5px #5873bdbf;
-}
-
-.emotion-6.is-pressed path {
-  fill: #fff;
 }
 
 .emotion-6.is-pressed {
@@ -10770,6 +10830,7 @@ exports[`single fields textarea field 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  border-radius: 2px;
   overflow-wrap: break-word;
   max-width: 100%;
   word-wrap: break-word;
@@ -10780,6 +10841,23 @@ exports[`single fields textarea field 1`] = `
   background-color: #fff;
   border: 1px solid;
   border-color: #4462ED;
+}
+
+.emotion-6.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-6.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
 <div

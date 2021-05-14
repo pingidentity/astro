@@ -59,6 +59,8 @@ const SchemaForm = (props) => {
     sitekey, // For captcha purposes
     submitText,
     theme,
+    fields,
+    fieldTemplate,
     uiSchema,
     widgets: propWidgets,
   } = props;
@@ -107,13 +109,14 @@ const SchemaForm = (props) => {
         formContext={{ formState, sitekey, theme }}
         noHtml5Validate
         showErrorList={false}
-        FieldTemplate={FieldTemplate}
+        FieldTemplate={fieldTemplate}
         ObjectFieldTemplate={ObjectFieldTemplate}
         id={`${uuid}_form`}
         idPrefix={uuid}
         {...props}
         widgets={{ ...widgets, ...propWidgets }}
         {...statefulProps}
+        fields={{ ...fields }}
       >
         {
           children ?? (
@@ -143,6 +146,10 @@ SchemaForm.propTypes = {
       __errors: PropTypes.arrayOf(PropTypes.string),
     }),
   }),
+  /** Apply custom fields */
+  fields: PropTypes.shape({}),
+  /** Apply custom FieldTemplate */
+  fieldTemplate: PropTypes.func,
   /** Apply any default form data */
   formData: PropTypes.oneOfType([
     PropTypes.object,
@@ -210,6 +217,8 @@ SchemaForm.defaultProps = {
   extraActions: {},
   extraErrors: {},
   endpoint: undefined,
+  fields: {},
+  fieldTemplate: FieldTemplate,
   formData: {},
   formSuccessMessage: '',
   formSuccessTitle: '',

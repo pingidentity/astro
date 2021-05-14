@@ -38,7 +38,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.34",
     "@emotion/jest": "^11.2.1",
-    "@pingux/astro": "0.5.1",
+    "@pingux/astro": "^0.8.1",
     "@pingux/end-user": "0.30.0",
     "@rjsf/core": "2.0.0",
     "@storybook/addon-actions": "^6.0.21",
