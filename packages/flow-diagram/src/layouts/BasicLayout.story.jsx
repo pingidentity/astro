@@ -67,7 +67,7 @@ const Demo = () => {
             color: '#228C22',
             errorMessage: 'Some data is invalid here',
         },
-        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' },
+        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', 'group': 'group' },
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
@@ -95,7 +95,7 @@ const Demo = () => {
             // onClick can also be defined per node.
             ['step', stepTemplate()],
             // The outletTemplate can also be defined with a color on its own.
-            ['outlet', outletTemplate({ width: 100 })],
+            ['outlet', outletTemplate()],
             ['finished', successNode],
             ['error', failureNode],
             ['branch', branchNode],
