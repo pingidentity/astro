@@ -220,7 +220,6 @@ const SocialButton = styled(UnstyledSocialButton)`
         margin-right: auto;
         font-family: "proxima-nova", sans-serif;
         height: 40px;
-        line-height: unset;
         position: relative;
         text-overflow: ellipsis;
         cursor: pointer;
