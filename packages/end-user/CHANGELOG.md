@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.3.0...@pingux/end-user@1.4.0) (2021-05-18)
+
+
+### Features
+
+* UIP-4493: End-user PasswordStrengthMeter ([a86b8af](https://gitlab.corp.pingidentity.com/ux/end-user/commit/a86b8af6f385e094c9d725b84ff725a03c89169a))
+
+
+
+
+
 ## [1.1.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.1.0...@pingux/end-user@1.1.1) (2021-04-29)
 
 **Note:** Version bump only for package @pingux/end-user
