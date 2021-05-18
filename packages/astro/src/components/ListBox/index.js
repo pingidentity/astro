@@ -1,2 +1,2 @@
 export { default } from './ListBox';
-export { Option } from './Option';
+export { default as Option } from './Option';
