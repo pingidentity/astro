@@ -3753,10 +3753,10 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@pingux/astro@0.5.1":
-  version "0.5.1"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@pingux/astro/-/@pingux/astro-0.5.1.tgz#b773bca9376ce4b81f6570fa520e9f4fecc28298"
-  integrity sha1-t3O8qTds5LgfZXD6Ug6fT+zCgpg=
+"@pingux/astro@^0.8.1":
+  version "0.8.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@pingux/astro/-/@pingux/astro-0.8.1.tgz#d96d2e7631f58a5494cd80c8482af31c7d8c5171"
+  integrity sha1-2W0udjH1ilSUzYDISCrzHH2MUXE=
   dependencies:
     "@emotion/core" "^10.0.35"
     "@emotion/react" "^11.1.5"
@@ -3919,7 +3919,7 @@
     "@react-stately/toggle" "^3.2.1"
     "@react-types/checkbox" "^3.2.1"
 
-"@react-aria/combobox@^3.0.0-alpha.1":
+"@react-aria/combobox@3.0.0-alpha.1", "@react-aria/combobox@^3.0.0-alpha.1":
   version "3.0.0-alpha.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/combobox/-/combobox-3.0.0-alpha.1.tgz#08ae80a279383fd3eabdd9974499edc7ee9104bb"
   integrity sha1-CK6Aonk4P9PqvdmXRJntx+6RBLs=
@@ -4160,7 +4160,7 @@
     "@react-stately/toggle" "^3.2.1"
     "@react-types/switch" "^3.1.1"
 
-"@react-aria/tabs@^3.0.0-alpha.1":
+"@react-aria/tabs@3.0.0-alpha.1", "@react-aria/tabs@^3.0.0-alpha.1":
   version "3.0.0-alpha.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/tabs/-/tabs-3.0.0-alpha.1.tgz#67bbab2799dec9a4d95ddaafd3e1885125786ba9"
   integrity sha1-Z7urJ5neyaTZXdqv0+GIUSV4a6k=
@@ -4210,6 +4210,28 @@
     "@react-stately/utils" "^3.2.0"
     "@react-types/shared" "^3.4.0"
     clsx "^1.1.1"
+
+"@react-aria/utils@^3.7.0":
+  version "3.7.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.7.0.tgz#0aab1f682e9f1781cfadd2dd1ef9494bfaca0cbf"
+  integrity sha1-CqsfaC6fF4HPrdLdHvlJS/rKDL8=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/ssr" "^3.0.1"
+    "@react-stately/utils" "^3.2.0"
+    "@react-types/shared" "^3.5.0"
+    clsx "^1.1.1"
+
+"@react-aria/virtualizer@^3.3.2":
+  version "3.3.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/virtualizer/-/virtualizer-3.3.2.tgz#59457fbba1acf685ead8e618610bd01f9549600a"
+  integrity sha1-WUV/u6Gs9oXq2OYYYQvQH5VJYAo=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.2.0"
+    "@react-aria/utils" "^3.7.0"
+    "@react-stately/virtualizer" "^3.1.3"
+    "@react-types/shared" "^3.5.0"
 
 "@react-aria/visually-hidden@3.2.1", "@react-aria/visually-hidden@^3.1.0", "@react-aria/visually-hidden@^3.2.1":
   version "3.2.1"
@@ -4262,6 +4284,17 @@
     "@react-stately/virtualizer" "^3.1.2"
     "@react-types/shared" "^3.3.0"
     "@react-types/table" "3.0.0-rc.6"
+
+"@react-stately/layout@^3.2.1":
+  version "3.2.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/layout/-/layout-3.2.1.tgz#7aaf26104c16f0e648418e090572ad929d196eab"
+  integrity sha1-eq8mEEwW8OZIQY4JBXKtkp0Zbqs=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/virtualizer" "^3.1.3"
+    "@react-types/grid" "3.0.0-alpha.0"
+    "@react-types/shared" "^3.5.0"
+    "@react-types/table" "3.0.0-alpha.0"
 
 "@react-stately/list@^3.2.1", "@react-stately/list@^3.2.2":
   version "3.2.2"
@@ -4374,6 +4407,15 @@
     "@react-aria/utils" "^3.3.0"
     "@react-types/shared" "^3.2.1"
 
+"@react-stately/virtualizer@^3.1.3":
+  version "3.1.3"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/virtualizer/-/virtualizer-3.1.3.tgz#8b335d8f89f2e3cd05c2c8a0cbc891785acb6444"
+  integrity sha1-izNdj4ny480Fwsigy8iReFrLZEQ=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/utils" "^3.7.0"
+    "@react-types/shared" "^3.5.0"
+
 "@react-types/button@^3.2.1", "@react-types/button@^3.3.0", "@react-types/button@^3.3.1":
   version "3.3.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/button/-/button-3.3.1.tgz#4bdd325bc7df19c33911af256f63eae91e2a452e"
@@ -4402,6 +4444,13 @@
   dependencies:
     "@react-types/overlays" "^3.2.1"
     "@react-types/shared" "^3.2.1"
+
+"@react-types/grid@3.0.0-alpha.0":
+  version "3.0.0-alpha.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/grid/-/grid-3.0.0-alpha.0.tgz#76b199e4a9dea7ceae290d6a283d99c12ca442e9"
+  integrity sha1-drGZ5Knep86uKQ1qKD2ZwSykQuk=
+  dependencies:
+    "@react-types/shared" "^3.5.0"
 
 "@react-types/label@^3.2.1":
   version "3.2.1"
@@ -4473,6 +4522,11 @@
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.4.0.tgz#a7cbf8c676b4b3b7b687bcdc8e44828c34d115f4"
   integrity sha1-p8v4xna0s7e2h7zcjkSCjDTRFfQ=
 
+"@react-types/shared@^3.5.0":
+  version "3.5.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.5.0.tgz#dbc90e8fe711967e66d6f3ce0e17d34b24bd6283"
+  integrity sha1-28kOj+cRln5m1vPODhfTSyS9YoM=
+
 "@react-types/switch@^3.1.1":
   version "3.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/switch/-/switch-3.1.1.tgz#7909a8f7c2cb68ab7536efd03af3be3417e0eca3"
@@ -4480,6 +4534,14 @@
   dependencies:
     "@react-types/checkbox" "^3.2.1"
     "@react-types/shared" "^3.2.1"
+
+"@react-types/table@3.0.0-alpha.0":
+  version "3.0.0-alpha.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/table/-/table-3.0.0-alpha.0.tgz#dc4e2b13b9ae178655789fc964cd843f2e19455c"
+  integrity sha1-3E4rE7muF4ZVeJ/JZM2EPy4ZRVw=
+  dependencies:
+    "@react-types/grid" "3.0.0-alpha.0"
+    "@react-types/shared" "^3.5.0"
 
 "@react-types/table@3.0.0-rc.6":
   version "3.0.0-rc.6"
@@ -7630,6 +7692,12 @@
     is-windows "^1.0.0"
     mkdirp-promise "^5.0.1"
     mz "^2.5.0"
+
+CodeMirror@^5.59.4:
+  name codemirror
+  version "5.61.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/codemirror/-/codemirror-5.61.0.tgz#318e5b034a707207948b92ffc2862195e8fdb08e"
+  integrity sha1-MY5bA0pwcgeUi5L/woYhlej9sI4=
 
 JSONStream@^0.8.4:
   version "0.8.4"
@@ -15621,10 +15689,10 @@ highlight.js@^10.1.1, highlight.js@~10.4.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/highlight.js/-/highlight.js-10.4.0.tgz#ef3ce475e5dfa7a48484260b49ea242ddab823a0"
   integrity sha1-7zzkdeXfp6SEhCYLSeokLdq4I6A=
 
-highlight.js@^9.15.10:
-  version "9.18.3"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/highlight.js/-/highlight.js-9.18.3.tgz#a1a0a2028d5e3149e2380f8a865ee8516703d634"
-  integrity sha1-oaCiAo1eMUniOA+Khl7oUWcD1jQ=
+highlight.js@^9.18.5:
+  version "9.18.5"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
+  integrity sha1-0Yo1mGfzeME41oGe38KorNXymCU=
 
 highlight.js@~9.13.0:
   version "9.13.1"
@@ -16911,7 +16979,7 @@ is-ssh@^1.3.0:
   dependencies:
     protocols "^1.1.0"
 
-is-stream@^1.0.1, is-stream@^1.1.0:
+is-stream@^1.1.0:
   version "1.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
   integrity sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
@@ -20097,20 +20165,10 @@ minimist-options@^3.0.1:
     arrify "^1.0.1"
     is-plain-obj "^1.1.0"
 
-minimist@0.0.8:
-  version "0.0.8"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
-  integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
-
-minimist@1.2.5, minimist@^1.1.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5:
+minimist@0.0.8, minimist@1.2.5, minimist@^1.1.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5, minimist@~0.0.1:
   version "1.2.5"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
-
-minimist@~0.0.1:
-  version "0.0.10"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
-  integrity sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
 
 minipass-collect@^1.0.2:
   version "1.0.2"
@@ -20483,15 +20541,7 @@ node-fetch-npm@^2.0.2:
     json-parse-better-errors "^1.0.0"
     safe-buffer "^5.1.1"
 
-node-fetch@^1.0.1:
-  version "1.7.3"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
-  integrity sha1-mA9vcthSEaU0fGsrwYxbhMPrR+8=
-  dependencies:
-    encoding "^0.1.11"
-    is-stream "^1.0.1"
-
-node-fetch@^2.1.2, node-fetch@^2.2.0, node-fetch@^2.5.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
+node-fetch@^1.0.1, node-fetch@^2.1.2, node-fetch@^2.2.0, node-fetch@^2.5.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha1-BFvTI2Mfdu0uK1VXM5RBa2OaAFI=

@@ -29,7 +29,6 @@ export const Default = () => (
       {item => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
-
 );
 
 export const ControlledInput = () => {
@@ -102,7 +101,7 @@ export const ControlledFiltering = () => {
         label="Example label"
         {...actions}
         items={filteredItems}
-        value={filterValue}
+        inputValue={filterValue}
         onInputChange={setFilterValue}
       >
         {item => <Item key={item.name}>{item.name}</Item>}
