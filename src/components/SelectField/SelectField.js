@@ -17,6 +17,7 @@ import Label from '../Label';
 import Text from '../Text';
 import ListBox from '../ListBox';
 import PopoverContainer from '../PopoverContainer';
+import { modes } from '../Label/constants';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -42,6 +43,7 @@ const SelectField = forwardRef((props, ref) => {
     isOpen,
     isReadOnly,
     isRequired,
+    items,
     label,
     name,
     placeholder,
@@ -65,6 +67,7 @@ const SelectField = forwardRef((props, ref) => {
     isOpen,
     isReadOnly,
     isRequired,
+    items,
     label,
     name,
     placeholder,
@@ -98,9 +101,13 @@ const SelectField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField({
     ...props,
-    labelProps,
+    labelProps: {
+      ...props.labelProps,
+      ...labelProps,
+    },
     containerProps: {
-      isFloatLabelActive: true,
+      isFloatLabelActive: state.selectedItem,
+      ...props.containerProps,
     },
   });
 
@@ -175,6 +182,7 @@ const SelectField = forwardRef((props, ref) => {
       hasNoArrow
       onClose={state.close}
       style={style}
+      isNonModal
     >
       {listbox}
     </PopoverContainer>
@@ -201,7 +209,7 @@ const SelectField = forwardRef((props, ref) => {
             {
               state.selectedItem
                 ? state.selectedItem.rendered
-                : <Text variant="placeholder">{props.labelMode === 'float' ? '' : defaultText}</Text>
+                : <Text variant="placeholder">{props.labelMode === modes.FLOAT ? '' : defaultText}</Text>
             }
           </Box>
           <Box as="span" aria-hidden="true" variant="forms.select.arrow">
@@ -256,6 +264,11 @@ SelectField.propTypes = {
   isReadOnly: PropTypes.bool,
   /** Whether user input is required on the input before form submission. */
   isRequired: PropTypes.bool,
+  /**
+   * *For performance reasons, use this prop instead of Array.map when iteratively rendering Items*.
+   * For use with [dynamic collections](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections).
+   */
+  items: PropTypes.arrayOf(PropTypes.any),
   /** The label for the select element. */
   label: PropTypes.node,
   /** The name for the select element, used when submitting a form. */
@@ -292,6 +305,10 @@ SelectField.propTypes = {
    * and/or the visible button representation for the select input.
    */
   controlProps: PropTypes.shape({}),
+  /** Props object passed along to the root container as-is. */
+  containerProps: PropTypes.shape({}),
+  /** Props object passed along to the label as-is. */
+  labelProps: PropTypes.shape({}),
 };
 
 SelectField.defaultProps = {
