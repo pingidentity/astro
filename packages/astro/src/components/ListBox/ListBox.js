@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useListBox } from '@react-aria/listbox';
 import { mergeProps } from '@react-aria/utils';
 
-import Option from './Option';
+import { Option } from './index.js';
 import Box from '../Box';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
