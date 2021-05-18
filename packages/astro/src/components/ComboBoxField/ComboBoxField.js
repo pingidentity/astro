@@ -157,11 +157,11 @@ const ComboBoxField = forwardRef((props, ref) => {
       <DismissButton onDismiss={() => state.close()} />
       <ListBox
         ref={listBoxRef}
-        {...listBoxProps}
         hasNoEmptySelection
         hasAutoFocus={state.focusStrategy}
         state={state}
         hasVirtualFocus
+        {...listBoxProps}
       />
       <DismissButton onDismiss={() => state.close()} />
     </FocusScope>
@@ -180,10 +180,10 @@ const ComboBoxField = forwardRef((props, ref) => {
       />
       <PopoverContainer
         isOpen={state.isOpen}
-        style={style}
         ref={popoverRef}
         placement={placement}
         hasNoArrow
+        style={style}
         isNonModal
       >
         {listbox}
