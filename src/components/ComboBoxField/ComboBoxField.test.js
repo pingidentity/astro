@@ -22,6 +22,44 @@ const getComponent = (props = {}) => render((
   </OverlayProvider>
 ));
 
+const ComboBoxWithCustomFilter = () => {
+  const { startsWith } = useFilter({ sensitivity: 'base' });
+  const [filterValue, setFilterValue] = useState('');
+  const filteredItems = useMemo(
+    () => items.filter(item => startsWith(item.name, filterValue)),
+    [items, filterValue],
+  );
+
+  return (
+    <ComboBoxField
+      {...defaultProps}
+      items={filteredItems}
+      inputValue={filterValue}
+      onInputChange={setFilterValue}
+    >
+      {item => <Item id={item.id}>{item.name}</Item>}
+    </ComboBoxField>
+  );
+};
+
+
+beforeAll(() => {
+  jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
+  jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+  jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 test('renders ComboBoxField component', () => {
   getComponent();
   const input = screen.queryByRole('combobox');
@@ -266,35 +304,18 @@ test('should use default contains filtering', () => {
   expect(screen.queryAllByRole('option')).toHaveLength(0);
 });
 
-test('should be able to use controlled filtering', () => {
-  const ComboBoxWithCustomFilter = () => {
-    const { startsWith } = useFilter({ sensitivity: 'base' });
-    const [filterValue, setFilterValue] = useState('');
-    const filteredItems = useMemo(
-      () => items.filter(item => startsWith(item.name, filterValue)),
-      [items, filterValue],
-    );
-
-    return (
-      <ComboBoxField
-        {...defaultProps}
-        items={filteredItems}
-        value={filterValue}
-        onInputChange={setFilterValue}
-      >
-        {item => <Item id={item.id}>{item.name}</Item>}
-      </ComboBoxField>
-    );
-  };
+test('should be able to use controlled filtering', async () => {
+  let options;
   render(<ComboBoxWithCustomFilter />);
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
   userEvent.type(input, '{arrowdown}');
-  expect(screen.queryAllByRole('option')).toHaveLength(items.length);
+  options = await screen.findAllByRole('option');
+  expect(options).toHaveLength(items.length);
 
   // Should only list the second option
   userEvent.type(input, 'k');
-  const option = screen.queryByRole('option');
-  expect(option).toHaveTextContent(items[1].name);
+  options = await screen.findAllByRole('option');
+  expect(options[0]).toHaveTextContent(items[1].name);
 });

@@ -1,11 +1,36 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useListBox } from '@react-aria/listbox';
 import { mergeProps } from '@react-aria/utils';
+import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
+import { useCollator } from '@react-aria/i18n';
+import { ListLayout } from '@react-stately/layout';
 
+import { ListBoxContext } from './ListBoxContext';
 import { Option } from './index.js';
-import Box from '../Box';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+
+export const collectionTypes = {
+  ITEM: 'item',
+  LOADER: 'loader',
+  PLACEHOLDER: 'placeholder',
+};
+
+export function useListBoxLayout(state) {
+  const collator = useCollator({ usage: 'search', sensitivity: 'base' });
+  const layout = useMemo(() =>
+    new ListLayout({
+      estimatedRowHeight: 32,
+      estimatedHeadingHeight: 26,
+      padding: 4,
+      collator,
+    })
+  , [collator]);
+
+  layout.collection = state.collection;
+  layout.disabledKeys = state.disabledKeys;
+  return layout;
+}
 
 const ListBox = forwardRef((props, ref) => {
   const {
@@ -22,7 +47,9 @@ const ListBox = forwardRef((props, ref) => {
     keyboardDelegate,
     label,
     onLoadMore,
+    onScroll,
     onSelectionChange,
+    renderEmptyState,
     selectedKeys,
     selectionMode,
     state,
@@ -32,10 +59,7 @@ const ListBox = forwardRef((props, ref) => {
     'aria-details': ariaDetails,
     ...others
   } = props;
-  const {
-    collection,
-    focusStrategy,
-  } = state;
+  const { focusStrategy } = state;
   // Object matching React Aria API with all options
   const listBoxOptions = {
     autoFocus: hasAutoFocus || focusStrategy,
@@ -49,7 +73,9 @@ const ListBox = forwardRef((props, ref) => {
     keyboardDelegate,
     label,
     onLoadMore,
+    onScroll,
     onSelectionChange,
+    renderEmptyState,
     selectedKeys,
     selectionMode,
     shouldFocusWrap: hasFocusWrap,
@@ -63,26 +89,58 @@ const ListBox = forwardRef((props, ref) => {
   const listBoxRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => listBoxRef.current);
+  const layout = useListBoxLayout(state);
+  layout.isLoading = props.isLoading;
 
   // Get props for the listbox
-  const { listBoxProps } = useListBox(listBoxOptions, state, listBoxRef);
+  const { listBoxProps } = useListBox({
+    ...listBoxOptions,
+    keyboardDelegate: layout,
+    isVirtualized: true,
+  }, state, listBoxRef);
+
+  const renderWrapper = (parent, reusableView) => (
+    <VirtualizerItem
+      key={reusableView.key}
+      reusableView={reusableView}
+      parent={parent}
+    />
+  );
 
   return (
-    <Box
-      as="ul"
-      variant="listBox"
-      ref={listBoxRef}
-      {...mergeProps(listBoxProps, others)}
-    >
-      {Array.from(collection).map(item => (
-        <Option
-          key={item.key}
-          item={item}
-          state={state}
-          hasVirtualFocus={hasVirtualFocus}
-        />
-      ))}
-    </Box>
+    <ListBoxContext.Provider value={state}>
+      <Virtualizer
+        {...mergeProps(listBoxProps, others)}
+        style={{ outline: 'none' }}
+        ref={listBoxRef}
+        focusedKey={state?.selectionManager?.focusedKey}
+        sizeToFit="height"
+        scrollDirection="vertical"
+        collection={state.collection}
+        renderWrapper={renderWrapper}
+        transitionDuration={0}
+        layout={layout}
+        isLoading={isLoading}
+        onLoadMore={onLoadMore}
+        shouldUseVirtualFocus={hasVirtualFocus}
+        onScroll={onScroll}
+      >
+        {(type, item) => {
+          // Type can be used like so: https://github.com/adobe/react-spectrum/blob/main/packages/%40react-spectrum/listbox/src/ListBoxBase.tsx#L129
+          if (type === collectionTypes.ITEM) {
+            return (
+              <Option
+                key={item.key}
+                item={item}
+                hasVirtualFocus={hasVirtualFocus}
+              />
+            );
+          }
+
+          return null;
+        }}
+      </Virtualizer>
+    </ListBoxContext.Provider>
   );
 });
 
@@ -100,7 +158,9 @@ ListBox.propTypes = {
   keyboardDelegate: PropTypes.any,
   label: PropTypes.node,
   onLoadMore: PropTypes.func,
+  onScroll: PropTypes.func,
   onSelectionChange: PropTypes.func,
+  renderEmptyState: PropTypes.node,
   selectedKeys: isIterableProp,
   selectionMode: PropTypes.any,
   'aria-label': PropTypes.string,
@@ -112,6 +172,9 @@ ListBox.propTypes = {
     collection: PropTypes.shape({}),
     focusStrategy: PropTypes.string,
     isOpen: PropTypes.bool,
+    selectionManager: PropTypes.shape({
+      focusedKey: PropTypes.string,
+    }),
   }),
 };
 
