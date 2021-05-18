@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.11.1...@pingux/astro@0.11.2) (2021-05-18)
+
+
+### Performance Improvements
+
+* [UIP-4470] ListBox virtualization for SelectField and ComboBoxField components ([c27dac3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c27dac3c0e134379b43701020519960001d90216))
+
+
+
+
+
 ## [0.11.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.11.0...@pingux/astro@0.11.1) (2021-05-18)
 
 
