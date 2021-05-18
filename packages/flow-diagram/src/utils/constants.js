@@ -1,5 +1,5 @@
 
-import colors from '@pingux/astro/src/styles/colors';
+import colors from '@pingux/astro/lib/styles/colors';
 
 export const COLORS = {
     BLACK: colors.black,
