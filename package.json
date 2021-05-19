@@ -76,8 +76,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {
-    "mutationobserver-shim": "^0.3.7",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
