@@ -14,8 +14,8 @@ export const bindIfColor = (color) => {
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const toNode = ({ color } = {}) => $(go.Panel, 'Auto',
-    { alignment: go.Spot.Left, portId: 'to', toLinkable: true },
+export const toNode = ({ color } = {}, { margin } = { margin: new go.Margin(0, 0, 0, 0)}) => $(go.Panel, 'Auto',
+    { alignment: go.Spot.Left, portId: 'to', toLinkable: true, margin },
     new go.Binding('visible', 'canLinkTo'),
     $(go.Shape, 'Circle',
         { name: 'toNodeOuter', width: 20, height: 20, stroke: COLORS.WHITE, strokeWidth: 0, fill: 'transparent' },
@@ -35,8 +35,8 @@ export const toNode = ({ color } = {}) => $(go.Panel, 'Auto',
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const fromNode = ({ color } = {}) => $(go.Panel, 'Auto',
-    { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, visible: true, fromMaxLinks: 1 },
+export const fromNode = ({ color } = {}, { margin } = { margin: new go.Margin(0, 0, 0, 0)}) => $(go.Panel, 'Auto',
+    { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, visible: true, fromMaxLinks: 1, margin },
     new go.Binding('visible', 'canLinkFrom'),
     // Same thing as above
     $(go.Shape, 'Circle',

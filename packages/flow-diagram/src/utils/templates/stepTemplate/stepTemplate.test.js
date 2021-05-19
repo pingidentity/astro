@@ -3,7 +3,6 @@ import React from 'react';
 import { Desktop } from '@pingux/icons';
 import { svgComponentToBase64 } from '../templateUtils';
 import {
-    getIfLengthGreater,
     getBorderColor,
     getIcon,
 } from './stepTemplate';
@@ -24,12 +23,6 @@ jest.mock('gojs', () => {
 });
 
 describe('Step Template', () => {
-    test('getIfLengthGreater returns correct true value', () => {
-        expect(getIfLengthGreater('1', true, false, 0)).toBe(true);
-    });
-    test('getIfLengthGreater returns correct false value', () => {
-        expect(getIfLengthGreater('1', true, false, 2)).toBe(false);
-    });
     test('getBorderColor returns correct selected value', () => {
         const selected = {
             data: {

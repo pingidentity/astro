@@ -277,7 +277,7 @@ export default function useDiagram({
             $(go.Link,
                 {
                     curve: go.Link.Bezier,
-                    fromShortLength: -10,
+                    fromShortLength: -12,
                     toShortLength: 0,
                     selectable: false,
                     layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
