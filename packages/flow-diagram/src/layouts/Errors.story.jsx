@@ -12,11 +12,8 @@ import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
 export const Errors = () => {
-    const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+    const diagramNodes = [
+        { isGroup: 'true', 'key': 'group' },
         {
             'key': 'user-login',
             'category': 'step',
@@ -24,6 +21,7 @@ export const Errors = () => {
             'stepId': 'userLogin',
             'group': 'group',
             canLinkFrom: false,
+            hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
             'errorMessage': 'This is a step error',
@@ -36,13 +34,11 @@ export const Errors = () => {
             'id': 'START',
             'errorMessage': 'This is a start error'
         },
-    ]);
+    ];
 
-    const [diagramLinks, setDiagramLinks] = useState([
-        { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
-    ]);
+    const diagramLinks = [{ 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' }];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],

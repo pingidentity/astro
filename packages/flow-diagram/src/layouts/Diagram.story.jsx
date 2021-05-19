@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Desktop } from '@pingux/icons';
 import '../css/main.css';
@@ -18,9 +18,8 @@ import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
 export const DiagramComponent = () => {
-    const [disabled, setDisabled] = useState(false);
-
-    const [diagramNodes, setDiagramNodes] = useState([
+    const disabled = false;
+    const diagramNodes = [
         {
             isGroup: 'true',
             'key': 'group',
@@ -32,6 +31,7 @@ export const DiagramComponent = () => {
             'stepId': 'userLogin',
             'group': 'group',
             canLinkFrom: false,
+            hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
         },
@@ -39,15 +39,15 @@ export const DiagramComponent = () => {
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
-        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START' }]);
+        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START' }];
 
-    const [diagramLinks, setDiagramLinks] = useState([
+    const diagramLinks = [
         { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success', 'category': 'outlet' },
         { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
         { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure', 'category': 'outlet' },
         { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found', 'category': 'outlet' },
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
-    ]);
+    ];
 
     const { diagramProps, diagramObject } = useDiagram({
         isDisabled: disabled,
@@ -73,7 +73,7 @@ export const DiagramComponent = () => {
             removedLinkKeys,
             droppedOntoNodeKey,
             droppedOntoLinkKey,
-            selectedData,
+            selectedNodeData,
         }) => {},
     });
 

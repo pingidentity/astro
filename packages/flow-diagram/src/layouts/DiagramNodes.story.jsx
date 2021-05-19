@@ -17,15 +17,12 @@ import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
 export const Branch = () => {
-    const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+    const diagramNodes = [
+        { isGroup: 'true', 'key': 'group' },
         { 'key': 'branch', 'category': 'branch', 'group': 'group' },
-    ]);
+    ];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],
@@ -45,15 +42,12 @@ export const Branch = () => {
 };
 
 export const Failure = () => {
-    const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+    const diagramNodes = [
+        { isGroup: 'true', 'key': 'group' },
         { 'key': 'failure', 'category': 'failure', 'group': 'group' },
-    ]);
+    ];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],
@@ -73,16 +67,8 @@ export const Failure = () => {
 };
 
 export const Group = () => {
-    const [selectedNode, setSelectedNode] = useState();
-
-    const onStepClick = (e, obj) => {
-        setSelectedNode(obj.part.data);
-    };
-    const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+    const diagramNodes = [
+        { isGroup: 'true', 'key': 'group' },
         {
             'key': 'user-login',
             'category': 'step',
@@ -96,22 +82,22 @@ export const Group = () => {
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' },
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
-    ]);
+    ];
 
-    const [diagramLinks, setDiagramLinks] = useState([
+    const diagramLinks = [
         { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success', 'category': 'outlet' },
         { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure', 'category': 'outlet' },
         { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found', 'category': 'outlet' },
-    ]);
+    ];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],
         linkDataArray: diagramLinks,
         nodeDataArray: diagramNodes,
         nodeTemplates: [
-            ['step', stepTemplate({ onClick: onStepClick })],
+            ['step', stepTemplate()],
             // The outletTemplate can also be defined with a color on its own.
             ['outlet', outletTemplate({ width: 100 })],
         ],
@@ -126,15 +112,12 @@ export const Group = () => {
 };
 
 export const Outlet = () => {
-    const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+    const diagramNodes = [
+        { isGroup: 'true', 'key': 'group' },
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' }
-    ]);
+    ];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],
@@ -154,11 +137,9 @@ export const Outlet = () => {
 };
 
 export const Start = () => {
-    const [diagramNodes, setDiagramNodes] = useState([
-        { 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' },
-    ]);
+    const diagramNodes = [{ 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' }];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],
@@ -178,17 +159,13 @@ export const Start = () => {
 };
 
 export const Step = () => {
-    const [selectedNode, setSelectedNode] = useState();
 
     const onStepClick = (e, obj) => {
-        setSelectedNode(obj.part.data);
+        console.log('clicked');
     };
 
-    const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+    const diagramNodes = [
+        { isGroup: 'true', 'key': 'group' },
         {
             'key': 'user-login',
             'category': 'step',
@@ -199,9 +176,9 @@ export const Step = () => {
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
         },
-    ]);
+    ];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],
@@ -222,15 +199,12 @@ export const Step = () => {
 };
 
 export const Success = () => {
-    const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+    const diagramNodes = [
+        { isGroup: 'true', 'key': 'group' },
         { 'key': 'success', 'category': 'success', 'group': 'group' },
-    ]);
+    ];
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate],
         ],
@@ -250,10 +224,17 @@ export const Success = () => {
 };
 
 Branch.defaultProps = {
+    canLinkFrom: true,
+    canLinkTo: true,
+    hasIO: true,
     isGroup: false,
 };
 
 Branch.propTypes = {
+    /** Step node has "from" port on its right side */
+    canLinkFrom: PropTypes.bool,
+    /** Step node has "to" port on its left side */
+    canLinkTo: PropTypes.bool,
     /** Node category. Corresponds to name of desired template */
     category: PropTypes.string,
     /** Error message displayed on hover action on error icon above node */
@@ -261,6 +242,8 @@ Branch.propTypes = {
     /** Group that contains node. Nodes can only move when they are part of a group.
      * Grouped nodes move together. */
     group: PropTypes.string,
+    /** Step node has input/output port on its bottom */
+    hasIO: PropTypes.bool,
     /** Determines whether element is node or group */
     isGroup: PropTypes.bool,
     /** Node/Group key */

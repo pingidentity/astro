@@ -131,7 +131,7 @@ export default function useDiagram({
             return;
         }
         onModelChange({
-            ...(selected ? { selectedData: selected } : { selectedData: {} }),
+            ...(selected ? { selectedNodeData: selected } : { selectedNodeData: {} }),
         });
     }, [selected]);
 
@@ -205,8 +205,10 @@ export default function useDiagram({
             const templateClick = template.click;
             updatedTemplate.mouseDrop = (e, node) => setDroppedOntoNodeKey(node.key);
             updatedTemplate.click = (e, node) => {
-                templateClick();
-                setSelected(node);
+                if (typeof templateClick === 'function') {
+                    templateClick();
+                }
+                setSelected(node.data);
             };
             diagramObject.nodeTemplateMap.add(name, updatedTemplate);
         });
@@ -259,6 +261,7 @@ export default function useDiagram({
                     },
                     mouseDrop: (e, link) => setDroppedOntoLinkKey(link.key),
                 },
+                new go.Binding('click', 'onClick'),
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
                 $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
@@ -283,6 +286,7 @@ export default function useDiagram({
                     toPortId: 'to',
                     layerName: 'Background',
                 },
+                new go.Binding('click', 'onClick'),
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
                 $(go.Shape, { stroke: COLORS.BLUE },
@@ -296,6 +300,7 @@ export default function useDiagram({
                     routing: go.Link.AvoidsNodes,
                     curve: go.Link.JumpOver,
                     corner: 5,
+                    deletable: false,
                     fromShortLength: -10,
                     toShortLength: -10,
                     selectable: true,
@@ -304,8 +309,8 @@ export default function useDiagram({
                     fromPortId: 'bottom',
                     toPortId: 'bottom',
                     layerName: 'Background',
-                    click: (e, link) => setSelected(link),
                 },
+                new go.Binding('click', 'onClick'),
                 new go.Binding('visible', 'visible'),
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
