@@ -1,34 +1,58 @@
 import React, { useState, useReducer, useCallback } from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageHeader from "ui-library/lib/components/general/PageHeader";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ExpandableRow from "ui-library/lib/components/rows/expandable-row/ExpandableRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Toggle from "ui-library/lib/components/forms/form-toggle";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Link, { linkTypes } from "ui-library/lib/components/general/Link";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Icon, { iconSizes, iconColors } from "ui-library/lib/components/general/Icon";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow, { alignments, spacingOptions } from "ui-library/lib/components/layout/FlexRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InlineMessage, { messageTypes } from "ui-library/lib/components/general/InlineMessage";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormTextField, { inputWidths } from "ui-library/lib/components/forms/form-text-field";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormDropDownList, { optionFromValue } from "ui-library/lib/components/forms/FormDropDownList";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputRow from "ui-library/lib/components/layout/InputRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FileDrop from "ui-library/lib/components/forms/FileDrop";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageWizard, { Step } from "ui-library/lib/components/panels/PageWizard/PageWizard";
 import { partial } from "underscore";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FilterSelector from "ui-library/lib/components/filters/FilterSelector";
 import editForm, { change, isDirty, discard, getRecord, save } from "./util/reducers/editForm";
 import recordList, { updateRecord, deleteRecord } from "./util/reducers/recordList";
 import wizard, { emptyWizard, wizardMove, wizardNext } from "./util/reducers/wizard";
 import { updateMessage, deleteMessage, addMessage } from "./util/content/recordMessages";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormLabel from "ui-library/lib/components/forms/FormLabel";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Table from "ui-library/lib/components/tables/Table";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import CollapsibleLink from "ui-library/lib/components/general/CollapsibleLink";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Stack from "ui-library/lib/components/layout/Stack";
 import { v4 as uuid } from "uuid";
 import Messages, { Actions as messageActions, Reducer as messageReducer }
+//eslint-disable-next-line import/no-extraneous-dependencies
     from "ui-library/lib/components/general/messages/Messages";
 
 const FormDropDownListPassValue = ({ value: selectedValue, onValueChange, ...props }) => (

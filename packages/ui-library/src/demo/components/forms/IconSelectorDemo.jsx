@@ -1,5 +1,7 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import IconSelector from "ui-library/lib/components/forms/IconSelector";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import StateContainer from "ui-library/lib/components/utils/StateContainer";
 
 /**

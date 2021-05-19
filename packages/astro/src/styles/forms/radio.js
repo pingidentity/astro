@@ -15,3 +15,9 @@ export const radio = {
     boxShadow: 'focus',
   },
 };
+
+export const radioField = {
+  '.is-horizontal &': {
+    mr: '15px',
+  },
+};

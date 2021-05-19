@@ -1,4 +1,5 @@
 var keyMirror = require("fbjs/lib/keyMirror");
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Messages from "ui-library/lib/components/general/messages/";
 
 exports.Types = keyMirror({

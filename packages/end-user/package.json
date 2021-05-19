@@ -1,14 +1,19 @@
 {
   "name": "@pingux/end-user",
-  "version": "0.36.1",
+  "version": "1.4.0",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
   "publishConfig": {
-    "directory": "dist",
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
     "@babel/runtime": "^7.4.2",
@@ -108,7 +113,8 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "zxcvbn": "^4.4.2"
   },
   "peerDependencies": {
     "react": "^16.0.0",
@@ -141,12 +147,14 @@
       "/tests/coverage/",
       "/build/",
       "/dist/",
+      "/lib/",
       "commonTests.js?(x)"
     ],
     "modulePathIgnorePatterns": [
       "/node/",
       "/build/",
-      "/dist/"
+      "/dist/",
+      "/lib/"
     ],
     "setupFiles": [
       "<rootDir>/src/util/polyfills.js",
@@ -160,12 +168,13 @@
     }
   },
   "scripts": {
-    "pack": "rm -rf ./build && build-storybook -o build --no-dll",
+    "demo": "rm -rf ./demo && build-storybook -o demo --no-dll",
     "cdn": "rm -rf ./cdn && webpack --config webpack.cdn.js && for dir in ./cdn/*/; do mkdir $dir/icons; mkdir $dir/logos; mkdir $dir/images; done && cp -R ./src/icons/. ./cdn/*/icons/ && cp -R ./src/logos/. ./cdn/*/logos/ && cp -R ./src/images/. ./cdn/*/images",
     "start": "start-storybook -p 6006 --no-dll",
     "lint": "eslint src/** && stylelint src/**/*.scss",
     "doc": "jsdoc -c ./jsdoc.json",
-    "dist": "gulp build-dist && yarn run cdn && cp -R ./cdn/*/. ./dist/",
+    "build": "gulp build-lib && yarn run cdn && cp -R ./cdn/*/. ./lib/",
+    "copy-npm-config-for-end-user": "gulp copy-npm-config",
     "jest": "jest",
     "test": "jest",
     "coverage": "jest --coverage",

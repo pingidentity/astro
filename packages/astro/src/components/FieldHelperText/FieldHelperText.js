@@ -16,6 +16,7 @@ const FieldHelperText = forwardRef((props, ref) => {
   const { classNames } = useStatusClasses(className, {
     [`is-${status}`]: true,
   });
+
   return (
     <Text
       ref={ref}

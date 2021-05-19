@@ -1,9 +1,12 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import * as QuickActions from "ui-library/lib/components/panels/QuickActions";
 import FlexRow, {
     alignments,
     spacingOptions ,
+    //eslint-disable-next-line import/no-extraneous-dependencies
 } from "ui-library/lib/components/layout/FlexRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import NavCard from "ui-library/lib/components/layout/NavCard";
 
 /**

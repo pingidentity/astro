@@ -1,5 +1,7 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import CheckboxGroup, { renderNestedCheckboxes } from "ui-library/lib/components/forms/CheckboxGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 import { partial } from "underscore";
 

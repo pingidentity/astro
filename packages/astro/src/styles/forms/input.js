@@ -14,7 +14,9 @@ export const input = {
   appearance: 'none',
   boxSizing: 'border-box',
   lineHeight: '1.25em',
+  height: '40px',
   textOverflow: 'ellipsis',
+  paddingRight: '100px',
   bg: 'white',
   borderWidth: 1,
   borderStyle: 'solid',
@@ -27,6 +29,9 @@ export const input = {
   '&.is-focused': {
     borderColor: 'accent.80',
     boxShadow: 'focus',
+  },
+  '.is-float-label &': {
+    height: '45px',
   },
   '.is-float-label-active &': {
     ...activeFloatLabel,
@@ -55,7 +60,9 @@ input.small = {
 
 input.wrapper = {
   '&.is-left-label': {
-    flexDirection: 'row',
+    display: 'inline-grid',
+    gridTemplateColumns: 'auto auto',
+    gridTemplateRows: 'auto auto',
   },
   '> .is-default': {
     width: '100%',

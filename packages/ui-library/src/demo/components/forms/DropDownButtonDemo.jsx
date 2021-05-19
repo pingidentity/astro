@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import DropDownButton from "ui-library/lib/components/forms/DropDownButton";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Icon from "ui-library/lib/components/general/Icon";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

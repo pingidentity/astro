@@ -7,9 +7,13 @@ import Table, {
 } from "../../../components/tables/Table";
 import InputRow from "../../../components/layout/InputRow";
 
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FieldSet from "ui-library/lib/components/layout/FieldSet";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ScrollBox from "ui-library/lib/components/layout/ScrollBox";
 
 /**

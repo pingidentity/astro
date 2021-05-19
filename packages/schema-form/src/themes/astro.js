@@ -90,6 +90,7 @@ export const toAstroInputProps = (props) => {
       hasMarkdownLabel: hasMarkdown,
       hasMarkdownErrors,
       labelMode,
+      defaultText,
       ...custom
     },
     placeholder,
@@ -125,6 +126,7 @@ export const toAstroInputProps = (props) => {
       isRequired: required,
       ...custom,
     },
+    defaultText,
     formContext,
     isDisabled: disabled,
     isRequired: required,

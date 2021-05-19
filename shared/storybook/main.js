@@ -25,9 +25,7 @@ module.exports = dirname => ({
 		const fileLoaderRule = rules.find(rule => (rule.test && rule.test.test && rule.test.test('.svg')));
 		fileLoaderRule.exclude = /\@mdi|icons\//;
 
-		// modify storybook's javascript rule to transpile core src
-		const scriptLoaderRule = rules.find(rule => (rule.test && rule.test.test && rule.test.test('.jsx')));
-		scriptLoaderRule.include.push(path.resolve(dirname, '../../compass-core/src'));
+
 
 		rules.push({
 			test: /\.story.jsx$/,

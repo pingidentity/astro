@@ -1,11 +1,17 @@
 # NPM / YARN
 node
+.yarn
 node_modules
 yarn-error.log
 npm-debug.log
 package-lock.json
 #ignore project level lockfiles
 **/*/yarn.lock
+
+# Lerna
+lerna-debug.log
+lerna_version.txt
+lerna_version.json
 
 # Mac
 .DS_Store
@@ -33,3 +39,7 @@ package-lock.json
 
 #project specific
 lib
+demo
+
+# Do not ignore
+!.husky

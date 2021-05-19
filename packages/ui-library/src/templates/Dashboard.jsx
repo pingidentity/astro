@@ -1,18 +1,27 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
 import {
     CardRow,
     DonutCard,
     PlaceHolderCard,
     StatCard,
+    //eslint-disable-next-line import/no-extraneous-dependencies
     StatAreaCard } from "ui-library/lib/components/general/charting/Cards";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import { HorizontalBarCard } from "ui-library/lib/components/general/charting/Cards";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import demoChartData from "ui-library/lib/demo/components/general/charting/demoChartData";
 import _ from "underscore";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import MultiseriesChartCard, { chartTypes } from "ui-library/lib/components/general/charting/MultiseriesChartCard";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HeatmapCard from "ui-library/lib/components/general/charting/HeatmapCard";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FrequencyCard from "ui-library/lib/components/general/charting/FrequencyCard";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import RockerButton from "ui-library/lib/components/forms/RockerButton";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import { toRechartsDataFormat } from "ui-library/lib/util/ChartingUtils";
 
 Math.seed = 123;

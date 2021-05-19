@@ -121,7 +121,8 @@
 					"**/selenium/**",
 					"**/tutorials/**",
 					"**/*Test?(s).js?(x)",
-					"**/devUtil/**"
+					"**/devUtil/**",
+					"**/build/**"
 				],
 				"optionalDependencies": true
 			}

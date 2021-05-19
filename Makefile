@@ -9,16 +9,19 @@ HOSTING_PROJECT_BASE=/var/www/html/
 default:
 	@echo "Make does nothing"
 
+build-cdn-assets:
+	@echo "build-cdn-assets does nothing for ${LIB_VERSION}"
+
 package-and-upload-for-hosting:
 	# PRIVATE_SSH_KEY_PATH, LIB_VERSION variables will be passed in from the command line, see Jenkinsfile.ui-library.build for example
 	set -eo;\
 
 	yarn run doc;\
-	yarn run pack;\
-	cp -rf src build;\
-	cp -rf build-doc build;\
+	yarn run demo;\
+	cp -rf src demo;\
+	cp -rf build-doc demo;\
 	rm -rf ${LIB_VERSION}.tar.gz;\
-	tar -czf ${LIB_VERSION}.tar.gz build;\
+	tar -czf ${LIB_VERSION}.tar.gz demo;\
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f ${HOSTING_PROJECT_BASE}${LIB_VERSION}.tar.gz;\
 	scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} ${LIB_VERSION}.tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE};\
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf ${HOSTING_PROJECT_BASE}${LIB_VERSION};\
@@ -38,3 +41,34 @@ package-and-upload-landing:
 	set -eo;\
 	yarn run pack-landing;\
 	scp -r -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} build-landing/* $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE};\
+
+
+
+initial-upload:
+	# PRIVATE_SSH_KEY_PATH, LIB_NAME variables will be passed in from the command line, see Jenkinsfile.ui-library.build for example
+	set -eo;\
+
+	#tar the demo
+
+	tar -czf ${LIB_NAME}.tar.gz demo;\
+
+	# make the compass folder
+
+	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir ${HOSTING_PROJECT_BASE}${LIB_NAME};\
+
+	# copy it over
+
+	scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} ${LIB_NAME}.tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE};\
+
+	# unzip
+
+	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf ${HOSTING_PROJECT_BASE}${LIB_NAME}.tar.gz --strip 1 -C ${HOSTING_PROJECT_BASE}${LIB_NAME};\
+
+	# remove zip
+
+	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f ${HOSTING_PROJECT_BASE}${LIB_NAME}.tar.gz;\
+
+	# remove local
+
+	rm -f ${LIB_NAME}.tar.gz;\
+

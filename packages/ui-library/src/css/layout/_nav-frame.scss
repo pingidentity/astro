@@ -352,10 +352,13 @@
         }
     }
     .nav-sidebar__sections--group-visible .nav-sidebar__section:not(.nav-sidebar__section--selected):hover .nav-sidebar__section-label {
-        background: #25324f;
-        color: #4462ed;
+        background: #303f5f;
+        color: #fff;
         border-radius: 3px;
+        margin-left: 3px;
         border: 1px solid #e0e0e0;
+        box-shadow: 0 1px 3px rgba(37, 55, 70, 0.25);
+        padding-left: 45px;
     }
     .nav-sidebar__section {
         &--selected {

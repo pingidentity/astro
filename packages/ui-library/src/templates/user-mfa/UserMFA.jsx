@@ -1,12 +1,21 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import RockerButton from "ui-library/lib/components/forms/RockerButton";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Toggle from "ui-library/lib/components/forms/form-toggle";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Table from "ui-library/lib/components/tables/Table";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Anchor from "ui-library/lib/components/general/Anchor";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Popover from "ui-library/lib/components/tooltips/Popover";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ConfirmTooltip from "ui-library/lib/components/tooltips/ConfirmTooltip";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ValueItem from "ui-library/lib/components/layout/ValueItem";
 import PageHeader from "../../components/general/PageHeader";
 

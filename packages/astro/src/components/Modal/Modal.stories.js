@@ -14,16 +14,16 @@ export const Default = () => {
       {
         state.isOpen &&
         <Modal
-          title="Question"
+          title="Delete Group"
           isOpen={state.isOpen}
           onClose={state.close}
           isDismissable
           hasCloseButton
         >
-          <Text variant="subtitle">Would you ever really just click a button?</Text>
-          <Box isRow paddingTop="lg" marginLeft="auto">
-            <Button marginRight="sm" onPress={state.close}>Maybe</Button>
-            <Button variant="critical" onPress={state.close}>No</Button>
+          <Text pt="lg">Are you sure you want to delete this group?</Text>
+          <Box isRow pt="lg" mr="auto">
+            <Button variant="critical" onPress={state.close} mr="md">Delete</Button>
+            <Button onPress={state.close}>Cancel</Button>
           </Box>
         </Modal>
       }
@@ -50,10 +50,10 @@ export const DarkVariant = () => {
           isDismissable
           hasCloseButton
         >
-          <Text variant="subtitle" color="white">Would you ever really just click a button?</Text>
-          <Box isRow paddingTop="lg" marginLeft="auto">
-            <Button variant="text" marginRight="sm" onPress={state.close}>Cancel</Button>
-            <Button variant="primary" onPress={state.close}>Yes</Button>
+          <Text variant="subtitle" color="white" pt="lg">Would you ever really just click a button?</Text>
+          <Box isRow pt="lg" mr="auto">
+            <Button variant="primary" mr="md" onPress={state.close}>Yes</Button>
+            <Button variant="text" onPress={state.close}>Cancel</Button>
           </Box>
         </Modal>
       }

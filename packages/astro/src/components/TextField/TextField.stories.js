@@ -33,6 +33,7 @@ export const FloatLabel = () => (
 
 export const LeftLabel = () => (
   <TextField
+    helperText="Here is some helpful text..."
     label="Example Label"
     labelMode="left"
   />

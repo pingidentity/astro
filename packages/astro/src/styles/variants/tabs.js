@@ -11,6 +11,16 @@ export const tab = {
   '&.is-disabled': {
     cursor: 'default',
   },
+  '&.is-selected.is-vertical': {
+    bg: 'accent.95',
+  },
+  transform: 'translateY(1px)',
+};
+
+export const tabLine = {
+  height: '2px',
+  width: '100%',
+  bg: 'active',
 };
 
 export const tabPanel = {
@@ -20,6 +30,6 @@ export const tabPanel = {
 export const tabs = {
   borderBottomWidth: 1,
   borderBottomStyle: 'solid',
-  borderBottomColor: 'neutral.80',
+  borderBottomColor: 'neutral.40',
   mb: 'lg',
 };

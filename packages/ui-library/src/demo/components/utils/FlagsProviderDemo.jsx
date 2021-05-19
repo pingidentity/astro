@@ -1,7 +1,10 @@
 import React from "react";
 import FlagsProvider from "./../../../components/utils/FlagsProvider";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormTextField from "ui-library/lib/components/forms/form-text-field";
 
 /**

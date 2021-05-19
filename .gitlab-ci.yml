@@ -1,7 +1,11 @@
 stages:
   - build-ci-image
-  - pack
+  - build
   - test
+
+.yarn-install-and-build: &yarn-install-and-build
+  before_script:
+    - yarn --frozen-lockfile
 
 # This has to be done before each script because Gitlab's caching can fail in a
 # number of circumstances.
@@ -23,55 +27,43 @@ build_ci_image:
 
 
 # Do this as a separate stage to make sure everything builds
-pack:
-  stage: pack
+build:
+  <<: *yarn-install-and-build
+  stage: build
   tags:
     - platform-build-docker
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
-    - lerna bootstrap
-    # Building this on its own for now because it doesn't have its own pack command.
-    - lerna run build --scope @pingux/charting
-    - lerna run build --scope @pingux/icons
-    - lerna run build --scope @pingux/astro
-    - lerna run dist --scope @pingux/end-user
-    - lerna run pack
-    - lerna link
-    - lerna run dist --scope @pingux/schema-form
+    - lerna run build
   artifacts:
     paths:
-      - ./packages/ui-library/build
-      - ./packages/icons/lib
-      - ./packages/end-user/dist
-      - ./packages/schema-forms/dist
-      - ./packages/astro/lib
+      - ./packages/**/lib
 
 lint:
+  <<: *yarn-install-and-build
   stage: test
   tags:
     - platform-build-docker
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
-    - lerna bootstrap
-    - lerna link
     - lerna run lint
 
 coverage:
+  <<: *yarn-install-and-build
   stage: test
   tags:
     - platform-build-docker
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
-    - lerna bootstrap
-    - lerna link
     - lerna run coverage-ci
 
 backstop:
+  <<: *yarn-install-and-build
   stage: test
   tags:
     - platform-build-docker
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   script:
-    - lerna bootstrap
+    - lerna run demo --scope ui-library
     - lerna run backstop-ci
 

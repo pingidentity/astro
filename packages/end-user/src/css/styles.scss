@@ -78,8 +78,10 @@
 @import './components/device-selector';
 @import './components/saveable-textinput';
 @import './components/popover-menu';
+@import './components/password-meter';
 
 // Spacing components are after so they take precedence
+
 @import './components/form-aside';
 @import './components/stack';
 

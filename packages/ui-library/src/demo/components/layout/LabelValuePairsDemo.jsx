@@ -1,7 +1,11 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import CopyField from "ui-library/lib/components/utils/CopyField";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text from "ui-library/lib/components/general/Text";
 
 /**

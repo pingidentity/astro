@@ -1,7 +1,11 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import SearchBar from "ui-library/lib/components/forms/FormSearchBar";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

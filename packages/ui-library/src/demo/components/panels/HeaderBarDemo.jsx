@@ -1,9 +1,13 @@
 import React from "react";
 import HeaderBar from "../../../components/panels/header-bar";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 import pingCentralDark from "../../images/PingCentral.svg";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import { AboutModal, AboutLogo, AboutVersion } from "ui-library/lib/components/general/About";
 import pingAccessLogo from "../../images/PingAccess-White.svg";
 

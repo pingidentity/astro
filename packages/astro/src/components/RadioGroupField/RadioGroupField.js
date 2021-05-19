@@ -8,6 +8,8 @@ import Box from '../Box';
 import Label from '../Label';
 import { RadioContext } from '../RadioField';
 import FieldHelperText from '../FieldHelperText';
+import useStatusClasses from '../../hooks/useStatusClasses';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 /**
  * Radio group component for a single-choice list of options.
@@ -18,13 +20,26 @@ import FieldHelperText from '../FieldHelperText';
  * from React Stately.
  */
 const RadioGroupField = forwardRef((props, ref) => {
-  const { children, helperText, isDisabled, isRequired, label, status } = props;
+  const {
+    children,
+    className,
+    helperText,
+    isDisabled,
+    isRequired,
+    label,
+    orientation,
+    status,
+  } = props;
   const state = useRadioGroupState(props);
   const { radioGroupProps, labelProps } = useRadioGroup(props, state);
+  const { classNames } = useStatusClasses(className, {
+    'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
+  });
 
   return (
     <Box
       ref={ref}
+      className={classNames}
       {...radioGroupProps}
     >
       <Label isDisabled={isDisabled} isRequired={isRequired} {...labelProps}>
@@ -36,9 +51,14 @@ const RadioGroupField = forwardRef((props, ref) => {
           {helperText}
         </FieldHelperText>
       }
-      <RadioContext.Provider value={{ isDisabled, ...state }}>
-        {children}
-      </RadioContext.Provider>
+      <Box
+        variant="forms.radioGroupWrapper"
+        isRow={orientation === ORIENTATION.HORIZONTAL}
+      >
+        <RadioContext.Provider value={{ isDisabled, ...state }}>
+          {children}
+        </RadioContext.Provider>
+      </Box>
     </Box>
   );
 });
@@ -52,6 +72,8 @@ RadioGroupField.propTypes = {
   defaultValue: PropTypes.string,
   /** Text to display after the radio group label. Useful for errors or other info. */
   helperText: PropTypes.node,
+  /** Determines the arrangement of the radios. */
+  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   /** Determines the helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
   /**

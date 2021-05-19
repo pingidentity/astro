@@ -1,7 +1,11 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Indent from "ui-library/lib/components/general/Indent";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Link from "ui-library/lib/components/general/Link";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text from "ui-library/lib/components/general/Text";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormattedContent from "ui-library/lib/components/general/FormattedContent";
 
 /**

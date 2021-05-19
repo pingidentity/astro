@@ -188,7 +188,6 @@ body {
     background-color: map-get($colors, 'card');
     padding: 25px 20px;
     max-height: 100px;
-    overflow: scroll;
 
     @media all and (max-width: 600px) {
         position: relative;

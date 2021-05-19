@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "underscore";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow from "ui-library/lib/components/layout/FlexRow";
 
 export const semantics = [

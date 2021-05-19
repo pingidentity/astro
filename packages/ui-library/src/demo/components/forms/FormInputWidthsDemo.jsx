@@ -8,6 +8,7 @@ import FormTextField from "./../../../components/forms/form-text-field";
 import FormCheckbox from "./../../../components/forms/FormCheckbox";
 import FormDropDownList from "./../../../components/forms/FormDropDownList";
 import InputWidths from "./../../../components/forms/InputWidths";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

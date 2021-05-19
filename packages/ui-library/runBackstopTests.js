@@ -11,7 +11,7 @@ const port = 8085;
 
 const startServer = (portNumber) => {
     const server = httpServer.createServer({
-        root: "./build"
+        root: "./demo"
     });
 
     server.listen(portNumber);

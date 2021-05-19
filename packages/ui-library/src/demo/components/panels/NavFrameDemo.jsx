@@ -1,5 +1,7 @@
 import React from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import NavFrame, { Logo, NavLink, NavMenu, NavSearch, Copyright } from "ui-library/lib/components/panels/NavFrame";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import GlobalMessage, { messageTypes } from "ui-library/lib/components/general/GlobalMessage";
 
 

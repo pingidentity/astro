@@ -13,7 +13,6 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import Box from '../Box';
 import Button from '../Button';
 import Icon from '../Icon';
-import Separator from '../Separator';
 import Text from '../Text';
 import useStatusClasses from '../../hooks/useStatusClasses';
 
@@ -88,7 +87,7 @@ const Modal = forwardRef((props, ref) => {
                 <Button
                   variant="icon"
                   onPress={onClose}
-                  sx={{ position: 'absolute', top: 8, right: 10 }}
+                  sx={{ position: 'absolute', top: 14, right: 10 }}
                 >
                   <Icon
                     icon={CloseIcon}
@@ -107,7 +106,6 @@ const Modal = forwardRef((props, ref) => {
                 >
                   {title}
                 </Text>
-                <Separator />
               </>
             }
             {children}

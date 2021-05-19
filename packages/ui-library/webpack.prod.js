@@ -13,7 +13,7 @@ module.exports = merge(common, {
         demo: "./src/demo/Demo",
     },
     output: {
-        path: path.resolve(__dirname, "build"),
+        path: path.resolve(__dirname, "demo"),
         filename: "[name].[hash].js" // Template based on keys in entry above
     },
     module: {

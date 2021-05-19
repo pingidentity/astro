@@ -6,7 +6,6 @@ import {
   Button,
   Menu,
   Item,
-  Separator,
   Text,
 } from '../../index';
 
@@ -21,12 +20,9 @@ export const Default = () => (
   <OverlayProvider>
     <PopoverMenu>
       <Button>Click me</Button>
-      <Menu onAction={action('onAction')} disabledKeys={['-']}>
+      <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
-        <Item key="-" textValue="-" isSeparator>
-          <Separator />
-        </Item>
         <Item key="delete" textValue="delete">
           <Text color="critical.bright">
             Delete
@@ -43,12 +39,9 @@ export const DefaultOpen = () => (
   <OverlayProvider>
     <PopoverMenu isDefaultOpen>
       <Button>Click me</Button>
-      <Menu onAction={action('onAction')} disabledKeys={['-']}>
+      <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
-        <Item key="-" textValue="-" isSeparator>
-          <Separator />
-        </Item>
         <Item key="delete" textValue="delete">
           <Text color="critical.bright">
             Delete
@@ -67,12 +60,9 @@ export const Controlled = () => {
     <OverlayProvider>
       <PopoverMenu isOpen={isOpen} onOpenChange={setIsOpen}>
         <Button>Click me</Button>
-        <Menu onAction={action('onAction')} disabledKeys={['-']}>
+        <Menu onAction={action('onAction')}>
           <Item key="edit">Edit</Item>
           <Item key="duplicate">Duplicate</Item>
-          <Item key="-" textValue="-" isSeparator>
-            <Separator />
-          </Item>
           <Item key="delete" textValue="delete">
             <Text color="critical.bright">
               Delete
@@ -90,12 +80,9 @@ export const Placement = () => (
   <OverlayProvider>
     <PopoverMenu direction="left">
       <Button>Click me</Button>
-      <Menu onAction={action('onAction')} disabledKeys={['-']}>
+      <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
-        <Item key="-" textValue="-" isSeparator>
-          <Separator />
-        </Item>
         <Item key="delete" textValue="delete">
           <Text color="critical.bright">
             Delete
@@ -113,12 +100,9 @@ export const NotFlippable = () => (
     {/* There is no room on the left so it will flip by default. `isNotFlippable` prevents this. */}
     <PopoverMenu direction="left" isNotFlippable>
       <Button>Click me</Button>
-      <Menu onAction={action('onAction')} disabledKeys={['-']}>
+      <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
-        <Item key="-" textValue="-" isSeparator>
-          <Separator />
-        </Item>
         <Item key="delete" textValue="delete">
           <Text color="critical.bright">
             Delete
@@ -135,12 +119,28 @@ export const NotClosedOnSelect = () => (
   <OverlayProvider>
     <PopoverMenu isNotClosedOnSelect>
       <Button>Click me</Button>
-      <Menu onAction={action('onAction')} disabledKeys={['-']}>
+      <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
-        <Item key="-" textValue="-" isSeparator>
-          <Separator />
+        <Item key="delete" textValue="delete">
+          <Text color="critical.bright">
+            Delete
+          </Text>
         </Item>
+      </Menu>
+    </PopoverMenu>
+  </OverlayProvider>
+);
+
+export const DisabledItem = () => (
+  // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+  // readers when an overlay opens.
+  <OverlayProvider>
+    <PopoverMenu>
+      <Button>Click me</Button>
+      <Menu onAction={action('onAction')} disabledKeys={['duplicate']}>
+        <Item key="edit">Edit</Item>
+        <Item key="duplicate">Duplicate</Item>
         <Item key="delete" textValue="delete">
           <Text color="critical.bright">
             Delete

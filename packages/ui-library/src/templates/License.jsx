@@ -1,22 +1,41 @@
 import React, { Component } from "react";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageSection from "ui-library/lib/components/layout/PageSection";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import PageHeader from "ui-library/lib/components/general/PageHeader";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Section from "ui-library/lib/components/general/Section";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow, { spacingOptions, alignments, justifyOptions } from "ui-library/lib/components/layout/FlexRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexItem, { flexPositions } from "ui-library/lib/components/layout/FlexItem";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Padding, { sizes } from "ui-library/lib/components/layout/Padding";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Stack from "ui-library/lib/components/layout/Stack";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FormattedContent from "ui-library/lib/components/general/FormattedContent";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Modal from "ui-library/lib/components/general/Modal";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Icon, { iconSizes, iconTypes } from "ui-library/lib/components/general/Icon";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import InputRow from "ui-library/lib/components/layout/InputRow";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Link from "ui-library/lib/components/general/Link";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import LinkDropDownList from "ui-library/lib/components/forms/LinkDropDownList";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Button, { buttonTypes } from "ui-library/lib/components/buttons/Button";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import ButtonGroup from "ui-library/lib/components/layout/ButtonGroup";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import RowAccessoriesLineChart from "ui-library/lib/components/rows/expandable-row/AccessoriesLineChart";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Table, { columnAlignments } from "ui-library/lib/components/tables/Table";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Text, { textTypes } from "ui-library/lib/components/general/Text";
 
 /**

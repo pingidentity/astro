@@ -5,6 +5,7 @@ import PageGroup from "../../../components/layout/PageGroup";
 import Button from "../../../components/buttons/Button";
 import InputRow from "../../../components/layout/InputRow";
 import Layout from "../../../components/general/ColumnLayout";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
 
 /**

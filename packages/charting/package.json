@@ -1,6 +1,6 @@
 {
     "name": "@pingux/charting",
-    "version": "0.6.0",
+    "version": "0.8.0",
     "description": "Charting components",
     "author": "Ping UX Development Team",
     "homepage": "",
@@ -22,14 +22,14 @@
         "build": "npm-run-all build:*",
         "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/components --out-dir lib/cjs/components",
         "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/components --out-dir lib/components",
-        "coverage": "jest --coverage",
-        "verify": "yarn lint && yarn docs && yarn build-demo && test",
-        "coverage-ci": "yarn coverage",
+        "coverage": "yarn test --coverage",
+        "coverage-ci": "yarn test --coverage --ci",
+        "docs": "gulp docs",
         "lint": "eslint .",
         "start": "start-storybook -p 1339",
         "test": "jest",
         "test-watch": "jest --watch",
-        "docs": "gulp docs"
+        "verify": "yarn lint && yarn docs && yarn build-demo && test"
     },
     "dependencies": {
         "@emotion/core": "^10.0.28",
