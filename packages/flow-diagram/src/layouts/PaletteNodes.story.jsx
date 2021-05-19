@@ -18,7 +18,7 @@ import usePalette from '../hooks/usePalette';
  */
 
 export const PaletteNode = () => {
-    const { paletteProps, paletteObject } = usePalette({
+    const { paletteProps } = usePalette({
         groupTemplates: [
             ['', paletteGroupTemplate()],
         ],

@@ -31,17 +31,14 @@ import OuterContainer from '../components/OuterContainer';
 
 const Demo = () => {
     const [selectedNode, setSelectedNode] = useState();
-    const [disabled, setDisabled] = useState(false);
+    const disabled = false;
 
     const onPanelClose = () => {
         setSelectedNode(null);
     };
 
     const [diagramNodes, setDiagramNodes] = useState([
-        {
-            isGroup: 'true',
-            'key': 'group',
-        },
+        { isGroup: 'true', 'key': 'group' },
         {
             'key': 'user-login',
             'category': 'step',
@@ -49,13 +46,11 @@ const Demo = () => {
             'stepId': 'userLogin',
             'group': 'group',
             canLinkFrom: false,
+            hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
         },
-        {
-            isGroup: 'true',
-            'key': 'execute_group',
-        },
+        { isGroup: 'true', 'key': 'execute_group' },
         {
             'key': 'step',
             'category': 'step',
@@ -63,6 +58,7 @@ const Demo = () => {
             'text': 'Execute Flow',
             'group': 'execute_group',
             canLinkFrom: false,
+            hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#228C22',
             errorMessage: 'Some data is invalid here',
@@ -81,7 +77,7 @@ const Demo = () => {
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ]);
 
-    const { diagramProps, diagramObject } = useDiagram({
+    const { diagramProps } = useDiagram({
         isDisabled: disabled,
         groupTemplates: [
             ['', diagramGroupTemplate],
@@ -110,17 +106,15 @@ const Demo = () => {
             removedLinkKeys,
             droppedOntoNodeKey,
             droppedOntoLinkKey,
-            selectedData,
+            selectedNodeData,
         }) => {
             // onModelChange gets called once at the beginning with every node,
             // so ignore key adds that involve too many new keys to have come from
             // the palette.
 
-            if (selectedData) {
-                if (Object.keys(selectedData).length) {
-                    if (selectedData.linksConnected) {
-                        setSelectedNode(selectedData.data);
-                    }
+            if (selectedNodeData) {
+                if (Object.keys(selectedNodeData).length) {
+                    setSelectedNode(selectedNodeData);
                 } else {
                     setSelectedNode(null);
                 }
@@ -402,7 +396,7 @@ const Demo = () => {
             </TopPanel>
             <Body>
                 <LeftContainer styles={{ width: 360 }}>
-                    {selectedNode ? (
+                    {selectedNode && selectedNode.category === 'step' ? (
                         <ConfigPanel
                             onClose={onPanelClose}
                             topPanel={
