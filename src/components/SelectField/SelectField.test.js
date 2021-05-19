@@ -2,7 +2,6 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import theme from '../../styles/theme';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { SelectField, Item } from '../../index';
 
@@ -24,6 +23,27 @@ const getComponent = (props = {}) => render((
     <Item key="c">c</Item>
   </SelectField>
 ));
+
+
+const onSelectionChange = jest.fn();
+
+beforeAll(() => {
+  jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
+  jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+  jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+  onSelectionChange.mockClear();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
 
 test('default select field', () => {
   getComponent();
@@ -108,17 +128,15 @@ test('clicking on an option then renders its text in the button', () => {
   expect(button).toHaveTextContent(options[0].textContent);
 });
 
-test('hovering an option applies correct styles', async () => {
+test('hovering an option applies correct styles', () => {
   getComponent();
   const button = screen.getByRole('button');
 
   userEvent.click(button);
-  const options = await screen.findAllByRole('option');
+  const options = screen.queryAllByRole('option');
   expect(options[0]).not.toHaveClass('is-focused');
-  expect(options[0]).not.toHaveStyle(`background-color: ${theme.colors.active}`);
   userEvent.hover(options[0]);
   expect(options[0]).toHaveClass('is-focused');
-  expect(options[0]).toHaveStyle(`background-color: ${theme.colors.active}`);
 });
 
 test('onOpenChange prop for field', () => {
@@ -134,7 +152,6 @@ test('onOpenChange prop for field', () => {
 });
 
 test('onSelectionChange prop for field', () => {
-  const onSelectionChange = jest.fn();
   getComponent({ onSelectionChange });
   const button = screen.getByRole('button');
   expect(onSelectionChange).not.toHaveBeenCalled();

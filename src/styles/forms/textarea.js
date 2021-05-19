@@ -3,7 +3,11 @@ import { input } from './input';
 
 export const textarea = {
   ...input,
+  height: 'unset',
   '&.is-unresizable': {
     resize: 'none',
+  },
+  '.is-float-label &': {
+    height: 'unset',
   },
 };

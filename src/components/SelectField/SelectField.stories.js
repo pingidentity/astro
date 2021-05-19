@@ -1,3 +1,4 @@
+import { OverlayProvider } from '@react-aria/overlays';
 import React, { useState } from 'react';
 import { SelectField, Item, Separator } from '../../index';
 
@@ -7,11 +8,13 @@ export default {
 };
 
 export const Default = () => (
-  <SelectField label="What's your favorite color?">
-    <Item key="red">Red</Item>
-    <Item key="blue">Blue</Item>
-    <Item key="yellow">Yellow</Item>
-  </SelectField>
+  <OverlayProvider>
+    <SelectField label="What's your favorite color?">
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
 );
 
 export const FloatLabel = () => (
@@ -65,6 +68,10 @@ export const DisabledOptions = () => (
   </SelectField>
 );
 
+export const NoOptionsAvailable = () => (
+  <SelectField label="Select an option..." isDisabled defaultText="No options available" />
+);
+
 export const HelperText = () => (
   <SelectField
     status="error"
@@ -76,3 +83,22 @@ export const HelperText = () => (
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
+
+const options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
+export const DynamicItems = () => {
+  // options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
+  const [items] = useState(options);
+
+  return (
+    <OverlayProvider>
+      <SelectField label="Select an option..." items={items}>
+        {item => <Item key={item.key}>{item.name}</Item>}
+      </SelectField>
+    </OverlayProvider>
+  );
+};
+DynamicItems.parameters = {
+  docs: {
+    storyDescription: 'If using a long list or one that is dynamically updated, use the `items` prop and a function to render the children. See [the React Stately docs](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections) for more information about this.',
+  },
+};

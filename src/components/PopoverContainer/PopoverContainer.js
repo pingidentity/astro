@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useModal, useOverlay, OverlayContainer } from '@react-aria/overlays';
 import { mergeProps } from '@react-aria/utils';
@@ -6,7 +6,11 @@ import { mergeProps } from '@react-aria/utils';
 import useStatusClasses from '../../hooks/useStatusClasses';
 import Box from '../Box';
 
-export const Popover = forwardRef((props, ref) => {
+/**
+ * PopoverContainer component used for popover on SelectField, ComboBox, and PopoverMenu.
+*/
+
+const PopoverContainer = forwardRef((props, ref) => {
   const {
     children,
     placement,
@@ -38,7 +42,7 @@ export const Popover = forwardRef((props, ref) => {
   );
 });
 
-Popover.propTypes = {
+PopoverContainer.propTypes = {
   placement: PropTypes.string,
   arrowProps: PropTypes.shape({}),
   onClose: PropTypes.func,
@@ -48,7 +52,7 @@ Popover.propTypes = {
   isNonModal: PropTypes.bool,
 };
 
-const PopoverWrapper = forwardRef((props, ref) => {
+export const PopoverWrapper = forwardRef((props, ref) => {
   const {
     children,
     className,
@@ -61,7 +65,10 @@ const PopoverWrapper = forwardRef((props, ref) => {
     isNonModal,
     ...others
   } = props;
-  const { overlayProps } = useOverlay({ ...props, isDismissable: true }, ref);
+  const popoverRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => popoverRef.current);
+  const { overlayProps } = useOverlay({ ...props, isDismissable: true }, popoverRef);
   const { modalProps } = useModal({ isDisabled: isNonModal });
   const { classNames } = useStatusClasses(className, { isOpen });
 
@@ -72,7 +79,7 @@ const PopoverWrapper = forwardRef((props, ref) => {
         <Box
           {...mergeProps(others, overlayProps, modalProps)}
           variant="popoverMenu.container"
-          ref={ref}
+          ref={popoverRef}
           className={classNames}
           role="presentation"
           data-popover-placement={placement}
@@ -83,7 +90,7 @@ const PopoverWrapper = forwardRef((props, ref) => {
             hasNoArrow
             ? null
             : (
-              <Arrow {...arrowProps} />
+              <PopoverArrow {...arrowProps} />
             )
           }
         </Box>
@@ -106,7 +113,7 @@ PopoverWrapper.defaultProps = {
   placement: 'bottom',
 };
 
-const Arrow = (props) => {
+export const PopoverArrow = (props) => {
   const { ...others } = props;
   return (
     <Box
@@ -117,3 +124,5 @@ const Arrow = (props) => {
     />
   );
 };
+
+export default PopoverContainer;

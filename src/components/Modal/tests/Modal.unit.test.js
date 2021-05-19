@@ -17,8 +17,6 @@ const getComponent = (props = {}) => render((
 test('default modal', () => {
   getComponent();
   expect(screen.queryByRole('dialog')).toBeInTheDocument();
-  // Title not rendered by default
-  expect(screen.queryByRole('separator')).not.toBeInTheDocument();
   // Close button not rendered by default
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
 });
@@ -49,7 +47,6 @@ test('should display title for modal', () => {
   const title = 'my title';
   getComponent({ title });
   expect(screen.queryByText(title)).toBeInTheDocument();
-  expect(screen.queryByRole('separator')).toBeInTheDocument();
 });
 
 test('should hide the modal if clicked outside when isDismissable is true', () => {

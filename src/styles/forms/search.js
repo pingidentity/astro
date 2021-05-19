@@ -4,6 +4,7 @@ export const clearButtonIcon = {
 
 export const container = {
   position: 'relative',
+  justifyContent: 'center',
   '> input::-webkit-search-cancel-button, > input::-webkit-search-decoration': {
     WebkitAppearance: 'none',
   },
@@ -11,9 +12,8 @@ export const container = {
 
 export const icon = {
   position: 'absolute',
-  top: 8,
-  left: 10,
   color: 'neutral.40',
+  ml: 'sm',
 };
 
 export default {

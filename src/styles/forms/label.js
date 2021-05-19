@@ -13,6 +13,10 @@ export const label = {
   mb: 'xs',
   alignItems: 'center',
   '&.is-float-label': {
+    textOverflow: 'ellipsis',
+    display: 'block',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
     fontSize: 'md',
     fontWeight: -1,
     position: 'absolute',
@@ -23,6 +27,8 @@ export const label = {
     transformOrigin: 'top left',
     transition: 'all 0.2s ease-out',
     pointerEvents: 'none',
+    paddingRight: '25px',
+    paddingLeft: '1px', // Otherwise, certain characters get cut off on the left from the overflow
   },
   '.is-float-label-active &.is-float-label': {
     ...activeFloatLabel,
@@ -37,7 +43,7 @@ export const label = {
 // Variants below
 
 label.indicator = {
-  color: 'red',
+  color: 'critical.bright',
   ml: 5,
 };
 

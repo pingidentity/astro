@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useState, useRef, useImperativeHandle, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useOption } from '@react-aria/listbox';
 import { mergeProps } from '@react-aria/utils';
@@ -8,11 +8,11 @@ import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 import useStatusClasses from '../../hooks/useStatusClasses';
 import Box from '../Box';
 import Icon from '../Icon';
+import { ListBoxContext } from './ListBoxContext';
 
 const Option = forwardRef((props, ref) => {
   const {
     item,
-    state,
     hasVirtualFocus,
     ...others
   } = props;
@@ -21,6 +21,9 @@ const Option = forwardRef((props, ref) => {
     props: itemProps,
     rendered,
   } = item;
+
+  const state = useContext(ListBoxContext);
+
   const {
     disabledKeys,
     selectionManager,
@@ -40,6 +43,7 @@ const Option = forwardRef((props, ref) => {
       shouldSelectOnPressUp: true,
       shouldFocusOnHover: true,
       shouldUseVirtualFocus: hasVirtualFocus,
+      isVirtualized: true,
       ...others,
     },
     state,
@@ -59,9 +63,8 @@ const Option = forwardRef((props, ref) => {
   return (
     <Box
       isRow
-      as="li"
       ref={optionRef}
-      variant="forms.select.option"
+      variant="listBox.option"
       className={classNames}
       {...others}
       {...mergeProps(optionProps, focusProps)}

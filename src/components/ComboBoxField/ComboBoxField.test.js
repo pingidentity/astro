@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import { ComboBoxField, Item } from '../../index';
+import { ComboBoxField, Item, OverlayProvider } from '../../index';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -15,10 +15,50 @@ const defaultProps = {
 };
 
 const getComponent = (props = {}) => render((
-  <ComboBoxField {...defaultProps} {...props}>
-    {item => <Item key={item.id}>{item.name}</Item>}
-  </ComboBoxField>
+  <OverlayProvider>
+    <ComboBoxField {...defaultProps} {...props}>
+      {item => <Item key={item.id}>{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
 ));
+
+const ComboBoxWithCustomFilter = () => {
+  const { startsWith } = useFilter({ sensitivity: 'base' });
+  const [filterValue, setFilterValue] = useState('');
+  const filteredItems = useMemo(
+    () => items.filter(item => startsWith(item.name, filterValue)),
+    [items, filterValue],
+  );
+
+  return (
+    <ComboBoxField
+      {...defaultProps}
+      items={filteredItems}
+      inputValue={filterValue}
+      onInputChange={setFilterValue}
+    >
+      {item => <Item id={item.id}>{item.name}</Item>}
+    </ComboBoxField>
+  );
+};
+
+
+beforeAll(() => {
+  jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
+  jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+  jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
 
 test('renders ComboBoxField component', () => {
   getComponent();
@@ -167,24 +207,35 @@ test('should invoke onOpenChange when isOpen is true', () => {
   expect(listbox).toBeInTheDocument();
   expect(onOpenChange).not.toHaveBeenCalled();
 
-  // Should fire on dismiss button click
+  // Should fire on first dismiss button click
   userEvent.click(buttons[0]);
+  expect(onOpenChange).toHaveBeenCalledTimes(1);
   expect(onOpenChange).toHaveBeenNthCalledWith(1, false);
 
-  // Should fire on outside click
+
+  // Should fire on second dismiss button click
+  userEvent.click(buttons[1]);
+  expect(onOpenChange).toHaveBeenCalledTimes(2);
+  expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
+
+  // Should fire on outside click once the input is focused
+  userEvent.click(input);
   userEvent.click(global.document.body);
+  expect(onOpenChange).toHaveBeenCalledTimes(3);
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
 
   // Should fire on click selection
   userEvent.click(screen.queryAllByRole('option')[0]);
+  expect(onOpenChange).toHaveBeenCalledTimes(4);
   expect(onOpenChange).toHaveBeenNthCalledWith(3, false);
 
   // Should fire on keyboard selection
   userEvent.type(input, '{arrowdown}{enter}');
+  expect(onOpenChange).toHaveBeenCalledTimes(5);
   expect(onOpenChange).toHaveBeenNthCalledWith(4, false);
 
   // Total number of calls
-  expect(onOpenChange).toHaveBeenCalledTimes(4);
+  expect(onOpenChange).toHaveBeenCalledTimes(5);
 });
 
 test('should invoke onOpenChange when isOpen is false', () => {
@@ -253,35 +304,18 @@ test('should use default contains filtering', () => {
   expect(screen.queryAllByRole('option')).toHaveLength(0);
 });
 
-test('should be able to use controlled filtering', () => {
-  const ComboBoxWithCustomFilter = () => {
-    const { startsWith } = useFilter({ sensitivity: 'base' });
-    const [filterValue, setFilterValue] = useState('');
-    const filteredItems = useMemo(
-      () => items.filter(item => startsWith(item.name, filterValue)),
-      [items, filterValue],
-    );
-
-    return (
-      <ComboBoxField
-        {...defaultProps}
-        items={filteredItems}
-        value={filterValue}
-        onInputChange={setFilterValue}
-      >
-        {item => <Item id={item.id}>{item.name}</Item>}
-      </ComboBoxField>
-    );
-  };
+test('should be able to use controlled filtering', async () => {
+  let options;
   render(<ComboBoxWithCustomFilter />);
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
   userEvent.type(input, '{arrowdown}');
-  expect(screen.queryAllByRole('option')).toHaveLength(items.length);
+  options = await screen.findAllByRole('option');
+  expect(options).toHaveLength(items.length);
 
   // Should only list the second option
   userEvent.type(input, 'k');
-  const option = screen.queryByRole('option');
-  expect(option).toHaveTextContent(items[1].name);
+  options = await screen.findAllByRole('option');
+  expect(options[0]).toHaveTextContent(items[1].name);
 });
