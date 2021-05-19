@@ -70,3 +70,7 @@ export const getSize = (s, element) => {
             return new go.Size(width < 181 ? width + 69 : 250, height + 27);
     }
 };
+
+export const getIfLengthGreater = (ifTrue, ifFalse, target) => (s) => {
+    return s.length > target ? ifTrue : ifFalse;
+};

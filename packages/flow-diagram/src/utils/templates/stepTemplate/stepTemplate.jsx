@@ -5,13 +5,9 @@ import ReactDOMServer from 'react-dom/server';
 import { encodeSvg, getSize } from '../templateUtils';
 import { COLORS } from '../../constants';
 import { toNode, fromNode, bottomNode } from '../nodes';
-import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
+import { getAdornmentOnHover, getNodeHoverAdornment, getIfLengthGreater } from '../hoverAdornment';
 
 const $ = go.GraphObject.make;
-
-export const getIfLengthGreater = (s, ifTrue, ifFalse, target) => {
-    return s.length > target ? ifTrue : ifFalse;
-};
 
 export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part) => {
     if (part.containingGroup.isSelected) {

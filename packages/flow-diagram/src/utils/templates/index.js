@@ -1,4 +1,4 @@
-export { svgComponentToBase64 } from './templateUtils';
+export { svgComponentToBase64, encodeSvg, getSize, getIfLengthGreater } from './templateUtils';
 export { branchNode, failureNode, successNode } from './circleNodes';
 export { diagramGroupTemplate } from './diagramTemplates';
 export { outletTemplate } from './outletTemplate';
