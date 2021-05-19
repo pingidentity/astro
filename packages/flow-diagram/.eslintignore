@@ -1,0 +1,5 @@
+lib
+node_modules
+build-demo
+build-doc
+coverage

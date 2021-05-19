@@ -22,6 +22,7 @@ module.exports = {
       '/dist/',
   ],
   setupFiles: [
+      'jest-canvas-mock',
       '<rootDir>/../../shared/test/enzymeSetup.js',
   ],
   setupFilesAfterEnv: [

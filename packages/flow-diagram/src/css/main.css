@@ -1,0 +1,57 @@
+.gsfBackground {
+    border-color: #b676c7;
+    font-size: 10;
+    margin-bottom: 5;
+}
+
+.zoom-slider {
+    position: absolute;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    top: 2%;
+    right: 1%;
+
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    background: #F7F8FDCC;
+}
+
+.zoom-slider__divider {
+    border-right: 1px solid #68747F;
+    margin: 4px 6px 0px 6px;
+    height: 25px;
+}
+
+.zoom-slider__fit {
+    height: 17px;
+    margin: 3px 0px 0px 15px;
+}
+
+.zoom-slider__percentage {
+    font-size: 13px;
+    margin: 7px 15px 0px 0px;
+    width: 40px;
+    color: #68747F;
+    font-family: Helvetica Neue, Helvetica, Arial;
+    font-weight: 500;
+}
+
+.zoom-slider__range-container {
+    display: none;
+}
+
+.zoom-slider__zoom-button {
+    display: flex;
+    justify-content: center;
+    line-height: 30px;
+    cursor: default;
+    -webkitcur: none;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: transparent;
+    font-size: 26px;
+    color: #253746;
+    outline: 0;
+}
