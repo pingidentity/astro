@@ -1825,6 +1825,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.8.3":
+  version "7.14.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/runtime/-/runtime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
+  integrity sha1-RnlLwgthLF915i3QceJN/ZXxy+Y=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.10.4", "@babel/template@^7.3.3", "@babel/template@^7.4.0":
   version "7.10.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@babel/template/-/template-7.10.4.tgz#3251996c4200ebc71d1a8fc405fba940f36ba278"
@@ -2395,10 +2402,25 @@
     "@babel/runtime" "^7.6.2"
     intl-messageformat "^2.2.0"
 
+"@internationalized/message@^3.0.0":
+  version "3.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@internationalized/message/-/message-3.0.0.tgz#68289d46152a872e7fbbd19fad3ae136e339fa41"
+  integrity sha1-aCidRhUqhy5/u9GfrTrhNuM5+kE=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    intl-messageformat "^2.2.0"
+
 "@internationalized/number@3.0.0-alpha.0":
   version "3.0.0-alpha.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@internationalized/number/-/number-3.0.0-alpha.0.tgz#27190fbc1d73a24ac96dfafdfe7aa4e520090eed"
   integrity sha1-JxkPvB1zokrJbfr9/nqk5SAJDu0=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
+"@internationalized/number@^3.0.0":
+  version "3.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@internationalized/number/-/number-3.0.0.tgz#aa3618ddb82ab0e9a09e8dcc3d5359a6935e6db2"
+  integrity sha1-qjYY3bgqsOmgno3MPVNZppNebbI=
   dependencies:
     "@babel/runtime" "^7.6.2"
 
@@ -3842,6 +3864,60 @@
   dependencies:
     "@types/node" ">= 8"
 
+"@pingux/astro@0.3.0":
+  version "0.3.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@pingux/astro/-/@pingux/astro-0.3.0.tgz#3eea6ed2e8c9127696775d9e73d7f3a2d70bf98e"
+  integrity sha1-Pupu0ujJEnaWd12ec9fzotcL+Y4=
+  dependencies:
+    "@emotion/core" "^10.0.35"
+    "@emotion/react" "^11.1.5"
+    "@pingux/icons" "^0.2.0"
+    "@react-aria/button" "^3.2.1"
+    "@react-aria/checkbox" "^3.2.0"
+    "@react-aria/dialog" "^3.1.2"
+    "@react-aria/focus" "^3.2.3"
+    "@react-aria/interactions" "^3.3.0"
+    "@react-aria/label" "^3.1.0"
+    "@react-aria/link" "^3.1.1"
+    "@react-aria/listbox" "^3.2.3"
+    "@react-aria/menu" "^3.1.4"
+    "@react-aria/overlays" "^3.6.0"
+    "@react-aria/progress" "^3.1.1"
+    "@react-aria/radio" "^3.1.1"
+    "@react-aria/searchfield" "^3.1.1"
+    "@react-aria/select" "^3.2.3"
+    "@react-aria/selection" "^3.3.1"
+    "@react-aria/separator" "^3.1.1"
+    "@react-aria/switch" "3.1.1"
+    "@react-aria/tabs" "^3.0.0-alpha.1"
+    "@react-aria/utils" "^3.2.1"
+    "@react-aria/visually-hidden" "3.2.1"
+    "@react-stately/collections" "^3.2.1"
+    "@react-stately/list" "^3.2.1"
+    "@react-stately/menu" "^3.2.1"
+    "@react-stately/overlays" "^3.1.1"
+    "@react-stately/radio" "^3.2.0"
+    "@react-stately/searchfield" "^3.1.1"
+    "@react-stately/select" "^3.1.1"
+    "@react-stately/toggle" "^3.2.0"
+    "@react-stately/tree" "^3.1.2"
+    "@rebass/forms" "^4.0.6"
+    "@styled-system/prop-types" "^5.1.5"
+    "@styled-system/props" "^5.1.5"
+    "@styled-system/theme-get" "^5.1.2"
+    "@tippyjs/react" "4.2.0"
+    chroma-js "^2.1.0"
+    classnames "^2.2.6"
+    emotion-normalize "^10.1.0"
+    emotion-theming "^10.0.27"
+    lodash "^4.17.20"
+    mdi-react "^7.4.0"
+    prop-types "^15.7.2"
+    rebass "^4.0.7"
+    regenerator-runtime "^0.13.7"
+    styled-system "^5.1.5"
+    tippy.js "6.2.7"
+
 "@pingux/astro@^0.8.1":
   version "0.8.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@pingux/astro/-/@pingux/astro-0.8.1.tgz#d96d2e7631f58a5494cd80c8482af31c7d8c5171"
@@ -4064,6 +4140,18 @@
     "@react-aria/utils" "^3.6.0"
     "@react-types/shared" "^3.4.0"
 
+"@react-aria/i18n@^3.2.0":
+  version "3.3.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/i18n/-/i18n-3.3.1.tgz#6f463cba320ca64c2d0381c97ce76a6695dc9abc"
+  integrity sha1-b0Y8ujIMpkwtA4HJfOdqZpXcmrw=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@internationalized/message" "^3.0.0"
+    "@internationalized/number" "^3.0.0"
+    "@react-aria/ssr" "^3.0.2"
+    "@react-aria/utils" "^3.8.0"
+    "@react-types/shared" "^3.6.0"
+
 "@react-aria/interactions@^3.1.0", "@react-aria/interactions@^3.2.1", "@react-aria/interactions@^3.3.0", "@react-aria/interactions@^3.3.3":
   version "3.3.3"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/interactions/-/interactions-3.3.3.tgz#02852a11530f73d1ae4525cdef7c2595acde2fdc"
@@ -4239,6 +4327,13 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
+"@react-aria/ssr@^3.0.2":
+  version "3.0.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/ssr/-/ssr-3.0.2.tgz#f96a41a7314a60324b6de871cb872039b63be5c0"
+  integrity sha1-+WpBpzFKYDJLbehxy4cgObY75cA=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
 "@react-aria/switch@3.1.1":
   version "3.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/switch/-/switch-3.1.1.tgz#a67239302908426dedc383a05bf7543190bec948"
@@ -4309,6 +4404,17 @@
     "@react-aria/ssr" "^3.0.1"
     "@react-stately/utils" "^3.2.0"
     "@react-types/shared" "^3.5.0"
+    clsx "^1.1.1"
+
+"@react-aria/utils@^3.8.0":
+  version "3.8.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.8.0.tgz#57bdc7cc967773c7f55b29847b187ec45031a620"
+  integrity sha1-V73HzJZ3c8f1WymEexh+xFAxpiA=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/ssr" "^3.0.2"
+    "@react-stately/utils" "^3.2.1"
+    "@react-types/shared" "^3.6.0"
     clsx "^1.1.1"
 
 "@react-aria/virtualizer@^3.3.2":
@@ -4487,6 +4593,13 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
+"@react-stately/utils@^3.2.1":
+  version "3.2.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/utils/-/utils-3.2.1.tgz#1e85861e6963230f80610bd9d1f5f0d33a481273"
+  integrity sha1-HoWGHmljIw+AYQvZ0fXw0zpIEnM=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
 "@react-stately/virtualizer@^3.1.2":
   version "3.1.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/virtualizer/-/virtualizer-3.1.2.tgz#43a68ef1281ffe55d60ec37a1eabfa60f8256b72"
@@ -4505,7 +4618,7 @@
     "@react-aria/utils" "^3.7.0"
     "@react-types/shared" "^3.5.0"
 
-"@react-types/button@^3.2.1", "@react-types/button@^3.3.0", "@react-types/button@^3.3.1":
+"@react-types/button@^3.2.1", "@react-types/button@^3.3.1":
   version "3.3.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/button/-/button-3.3.1.tgz#4bdd325bc7df19c33911af256f63eae91e2a452e"
   integrity sha1-S90yW8ffGcM5Ea8lb2Pq6R4qRS4=
@@ -4615,6 +4728,11 @@
   version "3.5.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.5.0.tgz#dbc90e8fe711967e66d6f3ce0e17d34b24bd6283"
   integrity sha1-28kOj+cRln5m1vPODhfTSyS9YoM=
+
+"@react-types/shared@^3.6.0":
+  version "3.6.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.6.0.tgz#e3f32bdef168de9245648e9f0357930b13795bc2"
+  integrity sha1-4/Mr3vFo3pJFZI6fA1eTCxN5W8I=
 
 "@react-types/switch@^3.1.1":
   version "3.1.1"
@@ -7812,6 +7930,13 @@
   dependencies:
     "@babel/types" "^7.9.5"
 
+"@svgr/hast-util-to-babel-ast@^5.5.0":
+  version "5.5.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/hast-util-to-babel-ast/-/hast-util-to-babel-ast-5.5.0.tgz#5ee52a9c2533f73e63f8f22b779f93cd432a5461"
+  integrity sha1-XuUqnCUz9z5j+PIrd5+TzUMqVGE=
+  dependencies:
+    "@babel/types" "^7.12.6"
+
 "@svgr/plugin-jsx@^4.3.3":
   version "4.3.3"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/plugin-jsx/-/plugin-jsx-4.3.3.tgz#e2ba913dbdfbe85252a34db101abc7ebd50992fa"
@@ -7866,6 +7991,15 @@
   dependencies:
     cosmiconfig "^6.0.0"
     merge-deep "^3.0.2"
+    svgo "^1.2.2"
+
+"@svgr/plugin-svgo@^5.4.0":
+  version "5.5.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@svgr/plugin-svgo/-/plugin-svgo-5.5.0.tgz#02da55d85320549324e201c7b2e53bf431fcc246"
+  integrity sha1-AtpV2FMgVJMk4gHHsuU79DH8wkY=
+  dependencies:
+    cosmiconfig "^7.0.0"
+    deepmerge "^4.2.2"
     svgo "^1.2.2"
 
 "@svgr/webpack@^4.0.3":
@@ -11101,6 +11235,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000864, can
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/caniuse-lite/-/caniuse-lite-1.0.30001192.tgz#b848ebc0ab230cf313d194a4775a30155d50ae40"
   integrity sha1-uEjrwKsjDPMT0ZSkd1owFV1QrkA=
 
+caniuse-lite@^1.0.30001125:
+  version "1.0.30001228"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/caniuse-lite/-/caniuse-lite-1.0.30001228.tgz#bfdc5942cd3326fa51ee0b42fbef4da9d492a7fa"
+  integrity sha1-v9xZQs0zJvpR7gtC++9NqdSSp/o=
+
 capture-exit@^2.0.0:
   version "2.0.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/capture-exit/-/capture-exit-2.0.0.tgz#fb953bfaebeb781f62898239dabb426d08a509a4"
@@ -13939,6 +14078,11 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.247, electron-to-chromium
   version "1.3.570"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/electron-to-chromium/-/electron-to-chromium-1.3.570.tgz#3f5141cc39b4e3892a276b4889980dabf1d29c7f"
   integrity sha1-P1FBzDm044kqJ2tIiZgNq/HSnH8=
+
+electron-to-chromium@^1.3.378, electron-to-chromium@^1.3.564:
+  version "1.3.732"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/electron-to-chromium/-/electron-to-chromium-1.3.732.tgz#2a07a8d61f74f2084b6f6bf2a908605a7a0b2d8d"
+  integrity sha1-Kgeo1h908ghLb2vyqQhgWnoLLY0=
 
 electron-to-chromium@^1.3.591:
   version "1.3.607"
@@ -17206,7 +17350,7 @@ husky@^6.0.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/husky/-/husky-6.0.0.tgz#810f11869adf51604c32ea577edbc377d7f9319e"
   integrity sha1-gQ8RhprfUWBMMupXftvDd9f5MZ4=
 
-hyphenate-style-name@^1.0.0:
+hyphenate-style-name@^1.0.0, hyphenate-style-name@^1.0.3:
   version "1.0.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
   integrity sha1-aRh5r44iCupXUOiCfbTvYqVONh0=
@@ -17908,6 +18052,11 @@ is-hexadecimal@^1.0.0:
   version "1.0.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/is-hexadecimal/-/is-hexadecimal-1.0.4.tgz#cc35c97588da4bd49a8eedd6bc4082d44dcb23a7"
   integrity sha1-zDXJdYjaS9Saju3WvECC1E3LI6c=
+
+is-in-browser@^1.0.2, is-in-browser@^1.1.3:
+  version "1.1.3"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/is-in-browser/-/is-in-browser-1.1.3.tgz#56ff4db683a078c6082eb95dad7dc62e1d04f835"
+  integrity sha1-Vv9NtoOgeMYILrldrX3GLh0E+DU=
 
 is-map@^2.0.1:
   version "2.0.1"
