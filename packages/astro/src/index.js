@@ -83,6 +83,9 @@ export * from './components/RadioField';
 export { default as RadioGroupField } from './components/RadioGroupField';
 export * from './components/RadioGroupField';
 
+export { default as RequirementsList } from './components/RequirementsList';
+export * from './components/RequirementsList';
+
 export { default as RockerButton } from './components/RockerButton';
 export * from './components/RockerButton';
 
