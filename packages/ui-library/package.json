@@ -194,7 +194,7 @@
     "backstop-approve": "rm -rf ./backstop.json && node ./runBackstopTests.js --approve",
     "backstop-test": "rm -rf ./backstop.json && node ./runBackstopTests.js",
     "append-version": "node ../../append_current_version.js",
-    "cdn": "make LIB_VERSION=$(node -p -e \"require('./package.json').version\") build-cdn-assets"
+    "cdn": "rm -rf cdn && make LIB_VERSION=$(node -p -e \"require('./package.json').version\") build-cdn-assets"
   },
   "csrfDataSourceApiConfig": {}
 }

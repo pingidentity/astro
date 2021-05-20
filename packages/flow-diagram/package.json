@@ -1,0 +1,68 @@
+{
+    "name": "@pingux/flow-diagram",
+    "version": "0.14.0",
+    "description": "Flow Diagram library",
+    "author": "Ping UX Development Team",
+    "homepage": "",
+    "license": "UNLICENSED",
+    "main": "lib/cjs/index.js",
+    "module": "lib/index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+    },
+    "publishConfig": {
+        "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+    },
+    "scripts": {
+        "build": "rm -rf lib && npm-run-all build:*",
+        "build:cjs": "BABEL_ENV=cjs NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
+        "build:esm": "BABEL_ENV=esm NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/",
+        "build:assets": "cp -r ./src/img ./lib && cp -r ./src/img ./lib/cjs",
+        "build:css": "mkdir ./lib/css && cp -r ./src/css/*.css ./lib/css/",
+        "coverage": "jest --coverage",
+        "demo": "rm -rf ./demo && build-storybook -o demo",
+        "verify": "yarn lint && yarn coverage",
+        "lint": "eslint .",
+        "start": "yarn build:icons && start-storybook -p 1339",
+        "test": "jest",
+        "test-watch": "jest --watch",
+        "docs": "gulp docs"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.3",
+        "@material-ui/lab": "^4.0.0-alpha.57",
+        "@mdi/js": "^5.8.55",
+        "@mdi/react": "^1.4.0",
+        "@pingux/astro": "0.3.0",
+        "@pingux/icons": "^0.2.0",
+        "gojs": "^2.1.16",
+        "gojs-react": "^1.0.7",
+        "jest-canvas-mock": "^2.3.0",
+        "lodash": "^4.17.20",
+        "prop-types": "^15.7.2",
+        "react-xarrows": "^1.5.2",
+        "uuid": "^7.0.3"
+    },
+    "devDependencies": {
+        "@pingux/astro": "0.11.2",
+        "@storybook/addon-actions": "^6.1.9",
+        "@storybook/addon-docs": "^6.1.9",
+        "@storybook/addon-links": "^6.1.9",
+        "@storybook/addon-storysource": "^6.1.9",
+        "@storybook/react": "^6.1.9",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.0.4",
+        "@testing-library/react-hooks": "^3.4.2"
+    },
+    "peerDependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.13.1"
+    }
+}

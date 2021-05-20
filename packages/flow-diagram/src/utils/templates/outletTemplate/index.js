@@ -1,0 +1,1 @@
+export { outletTemplate } from './outletTemplate';
