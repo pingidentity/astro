@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Desktop, Link } from '@pingux/icons';
+import { Clear, Desktop, Link } from '@pingux/icons';
 import { Box, Chip, Icon as PingIcon, Image, Separator, Popover, Text, TextField } from '@pingux/astro';
 import {
     mdiArrowCollapseLeft,
@@ -28,7 +28,6 @@ import {
 import { COLORS } from '../utils/constants';
 
 import Body from '../components/Body';
-import ConfigPanel from '../components/ConfigPanel';
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 import LeftContainer from '../components/LeftContainer';
@@ -357,22 +356,21 @@ export const InputsOutputs = () => {
             <Body>
                 <LeftContainer styles={{ minWidth: 360 }}>
                     {selectedNode ? (
-                        <ConfigPanel
-                            onClose={onPanelClose}
-                            topPanel={
-                                <Box>
-                                    <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
-                                        <Box isRow>
-                                            <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
-                                            <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
-                                        </Box>
-                                    </Box>
-                                    <Box alignItems="center">
-                                        <Separator width="90%" mb={15} />
+                        <Box sx={{ position: 'relative' }}>
+                            <Box sx={{ cursor: 'pointer', position: 'absolute', top: 7, right: 7 }}>
+                                <Clear onClick={onPanelClose} />
+                            </Box>
+                            <Box>
+                                <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
+                                    <Box isRow>
+                                        <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
+                                        <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
                                     </Box>
                                 </Box>
-                            }
-                        >
+                                <Box alignItems="center">
+                                    <Separator width="90%" mb={15} />
+                                </Box>
+                            </Box>
                             <Box alignItems="center">
                                 <TextField label="Step name" controlProps={{ value: selectedNode.stepId }} onChange={e => updateStepId(selectedNode, e.target.value, 'stepId')} width="90%" />
                                 <TextField mt={20} label="Description" value={selectedNode.description || ''} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="90%" />
@@ -403,7 +401,7 @@ export const InputsOutputs = () => {
                                     </CollapsibleSection>
                                 ) : null}
                             </Box>
-                        </ConfigPanel>
+                        </Box>
                     ) : (
                         <React.Fragment>
                             <Box

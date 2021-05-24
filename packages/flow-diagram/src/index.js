@@ -12,7 +12,5 @@ export { default as useDiagram } from './hooks/useDiagram';
 export { default as usePalette } from './hooks/usePalette';
 
 export { default as Body } from './components/Body';
-export { default as ConfigPanel } from './components/ConfigPanel';
 export { default as LeftContainer } from './components/LeftContainer';
-export { default as TopPanel } from './components/TopPanel';
 export { default as OuterContainer } from './components/OuterContainer';
