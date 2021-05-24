@@ -54,7 +54,10 @@ const ComboBoxInput = forwardRef((props, ref) => {
         ref={triggerRef}
         isDisabled={isDisabled || isReadOnly}
       >
-        <Icon icon={MenuDown} />
+        <Icon
+          icon={MenuDown}
+          sx={isOpen ? { transform: 'rotate(180deg)' } : null}
+        />
       </Button>
     </PressResponder>
   );
