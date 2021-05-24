@@ -51,7 +51,7 @@ export const fromNode = ({ color } = {}, { margin } = { margin: new go.Margin(0,
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
 export const bottomNode = ({ color } = {}) => $(go.Panel, 'Auto',
-    { alignment: go.Spot.Center, portId: 'bottom', fromSpot: go.Spot.Bottom, toSpot: go.Spot.Bottom, fromLinkable: true, toLinkable: true, visible: true, fromMaxLinks: 1 },
+    { alignment: go.Spot.Center, portId: 'bottom', fromSpot: go.Spot.Bottom, toSpot: go.Spot.Bottom, fromLinkable: false, toLinkable: false, visible: true, fromMaxLinks: 1 },
     new go.Binding('margin', '', s => getSize(s, 'bottomNode')),
     new go.Binding('visible', 'hasIO'),
     // Same thing as above

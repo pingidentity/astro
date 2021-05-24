@@ -30,17 +30,18 @@
         "demo": "rm -rf ./demo && build-storybook -o demo",
         "verify": "yarn lint && yarn coverage",
         "lint": "eslint .",
-        "start": "yarn build:icons && start-storybook -p 1339",
+        "start": "start-storybook -p 1339",
         "test": "jest",
         "test-watch": "jest --watch",
-        "docs": "gulp docs"
+        "docs": "gulp docs",
+        "postinstall": "lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
     },
     "dependencies": {
         "@material-ui/core": "^4.11.3",
         "@material-ui/lab": "^4.0.0-alpha.57",
         "@mdi/js": "^5.8.55",
         "@mdi/react": "^1.4.0",
-        "@pingux/astro": "0.3.0",
+        "@pingux/astro": "^0.11.2",
         "@pingux/icons": "^0.2.0",
         "gojs": "^2.1.16",
         "gojs-react": "^1.0.7",
@@ -51,7 +52,6 @@
         "uuid": "^7.0.3"
     },
     "devDependencies": {
-        "@pingux/astro": "0.11.2",
         "@storybook/addon-actions": "^6.1.9",
         "@storybook/addon-docs": "^6.1.9",
         "@storybook/addon-links": "^6.1.9",

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
+import { Clear, Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Box, Button, Image, Separator, Text, TextField } from '@pingux/astro';
 import { mdiTools, mdiFormSelect, mdiSourceBranch, mdiFlag } from '@mdi/js';
 import Icon from '@mdi/react';
@@ -20,13 +20,11 @@ import {
 import { COLORS } from '../utils/constants';
 
 import Body from '../components/Body';
-import ConfigPanel from '../components/ConfigPanel';
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 import LeftContainer from '../components/LeftContainer';
 import { Palette, PaletteWrapper } from '../components/Palette';
 import usePalette from '../hooks/usePalette';
-import TopPanel from '../components/TopPanel';
 import OuterContainer from '../components/OuterContainer';
 
 const Demo = () => {
@@ -113,7 +111,7 @@ const Demo = () => {
             // the palette.
 
             if (selectedNodeData) {
-                if (Object.keys(selectedNodeData).length) {
+                if (Object.keys(selectedNodeData).length && selectedNodeData.category === 'step') {
                     setSelectedNode(selectedNodeData);
                 } else {
                     setSelectedNode(null);
@@ -377,7 +375,7 @@ const Demo = () => {
 
     return (
         <OuterContainer>
-            <TopPanel>
+            <Box sx={{ borderBottom: '1px solid gray' }}>
                 <Box isRow sx={{ alignItems: 'center', backgroundColor: '#F7F8FD', borderTop: '1px solid #CACED3', justifyContent: 'space-between', padding: 10 }}>
                     <Box>
                         <Text color="#68747F" fontSize={14} fontFamily="Helvetica">Flow Manager</Text>
@@ -393,31 +391,30 @@ const Demo = () => {
                         <Button sx={{ background: '#4462ED', color: 'white' }}>Save & Close</Button>
                     </Box>
                 </Box>
-            </TopPanel>
+            </Box>
             <Body>
                 <LeftContainer styles={{ width: 360 }}>
-                    {selectedNode && selectedNode.category === 'step' ? (
-                        <ConfigPanel
-                            onClose={onPanelClose}
-                            topPanel={
-                                <Box>
-                                    <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
-                                        <Box isRow>
-                                            <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
-                                            <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
-                                        </Box>
-                                    </Box>
-                                    <Box alignItems="center">
-                                        <Separator width="90%" mb={15} />
+                    {selectedNode ? (
+                        <Box sx={{ position: 'relative' }}>
+                            <Box sx={{ cursor: 'pointer', position: 'absolute', top: 7, right: 7 }}>
+                                <Clear onClick={onPanelClose} />
+                            </Box>
+                            <Box>
+                                <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
+                                    <Box isRow>
+                                        <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
+                                        <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
                                     </Box>
                                 </Box>
-                            }
-                        >
+                                <Box alignItems="center">
+                                    <Separator width="90%" mb={15} />
+                                </Box>
+                            </Box>
                             <Box alignItems="center">
                                 <TextField label="Step name" controlProps={{ value: selectedNode.stepId }} onChange={e => updateStepId(selectedNode, e.target.value, 'stepId')} width="90%" />
                                 <TextField mt={20} label="Description" value={selectedNode.description || ''} onChange={e => updateStepId(selectedNode, e.target.value, 'description')} width="90%" />
                             </Box>
-                        </ConfigPanel>
+                        </Box>
                     ) : (
                         <React.Fragment>
                             <Box
