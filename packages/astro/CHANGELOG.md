@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.11.2...@pingux/astro@0.12.0) (2021-05-25)
+
+
+### Bug Fixes
+
+* [UIP-4410] Update styling for menu, menu items, and popover menu ([4932b9e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4932b9e297435aa7fd9bbc7078046bade3f34df2))
+
+
+### Features
+
+* [UIP-4464] Arrow recipe ([f096a2a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f096a2a46607fc750e7df514a284b5a86512e847))
+* [UIP-4471] Requirements List Component ([dcd60da](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dcd60dab23d3b46ddffc22a1ecdcc42d1b9e6d80))
+
+
+
+
+
 ## [0.11.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.11.1...@pingux/astro@0.11.2) (2021-05-18)
 
 
