@@ -60,6 +60,20 @@ test('can arrow through menuItems', () => {
   expect(menuItem2).toHaveClass('is-focused');
 });
 
+test('hovering menuItems applies focus class', () => {
+  getComponent();
+  const menuItem1 = screen.getByText(defaultMenuItems[0].children);
+  const menuItem2 = screen.getByText(defaultMenuItems[1].children);
+  expect(menuItem1).not.toHaveClass('is-focused');
+  expect(menuItem2).not.toHaveClass('is-focused');
+
+  userEvent.hover(menuItem1);
+  expect(menuItem1).toHaveClass('is-focused');
+
+  userEvent.hover(menuItem2);
+  expect(menuItem2).toHaveClass('is-focused');
+});
+
 test('disables item with isDisabled applied, does not disable without prop', () => {
   getComponent({ disabledKeys: [defaultMenuItems[0].key] });
   const disabledMenuItem = screen.getByText(defaultMenuItems[0].children);
@@ -77,6 +91,16 @@ test('should change styles according to isSeparator prop', () => {
   const regularItem = screen.getAllByRole('menuitem')[1];
   expect(separatorItem).toHaveStyle({ padding: '0px' });
   expect(regularItem).not.toHaveStyle({ padding: '0px' });
+});
+
+test('should change styles according to isPressed prop', () => {
+  const customItems = Array.from(defaultMenuItems);
+  customItems[0].isPressed = true;
+  getComponent({}, { items: customItems });
+  const pressedItem = screen.getAllByRole('menuitem')[0];
+  const regularItem = screen.getAllByRole('menuitem')[1];
+  expect(pressedItem).toHaveClass('is-pressed');
+  expect(regularItem).not.toHaveClass('is-pressed');
 });
 
 test('applies selected styling with isSelected prop, does not add class without prop', () => {

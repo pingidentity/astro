@@ -3,13 +3,15 @@ const item = {
   padding: '10px 10px',
   outline: 'none',
   cursor: 'pointer',
-  '&.is-hovered': {
-    bg: 'neutral.95',
+  '&.is-focused, &.is-selected, &.is-pressed': {
+    color: 'white',
+    bg: 'active',
+    '> *': {
+      color: 'white',
+    },
   },
-  '&.is-focused, &.is-selected': {
-    borderColor: 'neutral.95',
-    boxShadow: 'focus',
-    bg: 'white',
+  '&.is-pressed': {
+    bg: 'accent.20',
   },
 };
 
