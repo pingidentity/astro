@@ -20,12 +20,20 @@ export default class NavFrameAstroDemo extends React.Component {
     _allEnvironments =
     [
 
-        { id: 0, label: "My Ping" },
-        { id: 1, label: "first" },
-        { id: 2, label: "second" },
-        { id: 3, label: "third" },
-        { id: 4, label: "fourth" },
-        { id: 5, label: "fifth" },
+        { id: 0, label: "My Ping", type: "Sandbox" },
+        { id: 1, label: "first", type: "Production" },
+        { id: 2, label: "second", type: "Sandbox" },
+        {
+            id: 3,
+            label: "third",
+            type: "Very long type. It is here to show that even in this edge case, it wouldn't break anything"
+        },
+        {
+            id: 4,
+            label: "fourth",
+            type: "Very_long_type_with_very_long_words_in_order_to_show_how_it_looks"
+        },
+        { id: 5, label: "fifth", type: null },
         { id: 6, label: "sixth" },
         { id: 7, label: "seventh" },
         { id: 8, label: "8th" },
@@ -180,6 +188,7 @@ export default class NavFrameAstroDemo extends React.Component {
                             <Logo id="pingfed" />
                             <EnvironmentSelectorAstro
                                 searchInputProps={{ placeholder: "Search environments" }}
+                                selectedEnvironmentType={this.state.selectedEnvironment.type}
                                 onSearch={this.onSearch}
                                 searchString={this.state.searchString}
                                 onSearchClear={()=>this.setState({ searchString: "" })}

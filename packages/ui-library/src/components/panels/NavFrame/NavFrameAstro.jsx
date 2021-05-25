@@ -67,6 +67,7 @@ export const EnvironmentSelectorAstro = ({
     renderEnvironment = defaultRender,
     onEnvironmentChange = () => {},
     selectedEnvironment,
+    selectedEnvironmentType,
     showSearch= true,
     onSearch,
     onSearchClear,
@@ -124,7 +125,12 @@ export const EnvironmentSelectorAstro = ({
 
             </a>
 
-
+            <div
+                className="astro-environment-selector__env-type"
+                data-id="astro-environment-selector-selected-environment-type"
+            >
+                {selectedEnvironmentType}
+            </div>
 
             <div
                 style={open ? listStyles : null}
@@ -176,6 +182,7 @@ export const EnvironmentSelectorAstro = ({
 
 EnvironmentSelectorAstro.propTypes = {
     "data-id": PropTypes.string,
+    selectedEnvironmentType: PropTypes.node,
     label: PropTypes.node,
     onEnvironmentChange: PropTypes.func,
     environments: PropTypes.arrayOf(
