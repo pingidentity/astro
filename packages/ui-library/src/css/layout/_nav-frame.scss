@@ -388,8 +388,8 @@
         }
     }
     &__label {
-        font-size: 11px;
-        color: #d4daf3;
+        font-size: 12px;
+        color: $color-neutral-60;
         padding: 0 15px;
     }
     &__selected-title {
@@ -398,11 +398,18 @@
         white-space: nowrap;
         min-width: 0;
     }
-    &__trigger {
+    &__env-type {
         padding: 0 15px 10px;
+        font-size: 11px;
+        color: $color-neutral-80;
+        @include break-word;
+    }
+    &__trigger {
+        padding: 0 15px;
         display: flex;
         position: relative;
         align-items: center;
+        margin-bottom: -3px;
 
         &:after {
             content: $icon-sort-desc;
