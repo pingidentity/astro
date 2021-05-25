@@ -9,6 +9,7 @@ import { useTab } from '@react-aria/tabs';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import { Item as Tab } from '@react-stately/collections';
+import omit from 'lodash/omit';
 
 import Box from '../Box';
 import { TabsContext } from '../Tabs';
@@ -46,7 +47,7 @@ export const CollectionTab = forwardRef((props, ref) => {
     <Box
       className={classNames}
       variant="tab"
-      {...itemProps}
+      {...omit(itemProps.title, itemProps)}
       {...mergeProps(focusProps, tabProps)}
       ref={tabRef}
     >
