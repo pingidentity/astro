@@ -7,7 +7,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { mergeProps } from '@react-aria/utils';
 import { useMenuItem } from '@react-aria/menu';
-import { useFocus, useHover } from '@react-aria/interactions';
+import { useFocus, useHover, usePress } from '@react-aria/interactions';
 
 import { useMenuContext } from '../../context/MenuContext';
 import useStatusClasses from '../../hooks/useStatusClasses';
@@ -23,6 +23,7 @@ const MenuItem = forwardRef((props, ref) => {
   const {
     item,
     isDisabled: propIsDisabled,
+    isFocusVisible,
     className,
     onAction,
     state,
@@ -33,7 +34,7 @@ const MenuItem = forwardRef((props, ref) => {
     closeOnSelect,
   } = useMenuContext();
   const { key, rendered, props: itemProps } = item;
-  const { isSeparator } = itemProps;
+  const { isSeparator, isPressed: propIsPressed } = itemProps;
   const isDisabled = propIsDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectionManager.isSelected(key);
   const menuItemRef = useRef();
@@ -54,13 +55,18 @@ const MenuItem = forwardRef((props, ref) => {
   );
 
   const [isFocused, setFocused] = useState(false);
+  const { pressProps, isPressed } = usePress({
+    ref: menuItemRef,
+    isDisabled,
+    isPressed: propIsPressed,
+  });
   const { focusProps } = useFocus({ onFocusChange: setFocused });
-  const { hoverProps, isHovered } = useHover(props);
+  const { hoverProps, isHovered } = useHover({ isDisabled });
   const { classNames } = useStatusClasses(className, {
-    isHovered,
-    isFocused,
+    isFocused: isFocused || (isHovered && !isFocusVisible),
     isDisabled,
     isSelected,
+    isPressed,
   });
 
   return (
@@ -69,7 +75,7 @@ const MenuItem = forwardRef((props, ref) => {
       className={classNames}
       ref={menuItemRef}
       variant={isSeparator ? 'menuItem.separator' : 'menuItem.item'}
-      {...mergeProps(hoverProps, focusProps, menuItemProps)}
+      {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps)}
     >
       {rendered}
     </Box>
@@ -81,9 +87,15 @@ MenuItem.displayName = 'MenuItem';
 MenuItem.propTypes = {
   /** Whether the item is disabled. */
   isDisabled: PropTypes.bool,
-  /** Whether the menu item is sele
-   * cted. */
+  /** Whether the menu item is selected. */
   isSelected: PropTypes.bool,
+  /** Whether the menu item is currently pressed. */
+  isPressed: PropTypes.bool,
+  /**
+   * Whether the containing menu has keyboard focus.
+   * Used to determine when to present hover vs focus styling.
+   */
+  isFocusVisible: PropTypes.bool,
   /** A screen reader only label for the menu item. */
   'aria-label': PropTypes.string,
   /** Handler that is called when the menu should close after selecting an item. */
@@ -109,6 +121,7 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   isDisabled: false,
+  isPressed: false,
 };
 
 export default MenuItem;

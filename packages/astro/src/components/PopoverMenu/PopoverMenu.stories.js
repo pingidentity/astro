@@ -150,3 +150,22 @@ export const DisabledItem = () => (
     </PopoverMenu>
   </OverlayProvider>
 );
+
+export const isPressed = () => (
+  // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+  // readers when an overlay opens.
+  <OverlayProvider>
+    <PopoverMenu>
+      <Button>Click me</Button>
+      <Menu onAction={action('onAction')} disabledKeys={['duplicate']}>
+        <Item key="edit" isPressed>Edit</Item>
+        <Item key="duplicate">Duplicate</Item>
+        <Item key="delete" textValue="delete">
+          <Text color="critical.bright">
+            Delete
+          </Text>
+        </Item>
+      </Menu>
+    </PopoverMenu>
+  </OverlayProvider>
+);
