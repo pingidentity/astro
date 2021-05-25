@@ -26,7 +26,7 @@ const container = {
     top: 0,
   },
   '&[data-popover-placement^=bottom] > [data-popover-arrow="arrow"]:before': {
-    top: -7,
+    top: '-8px',
     left: '50%',
     transform: 'translateX(-50%)',
     borderWidth: '0 8px 8px',
@@ -37,7 +37,7 @@ const container = {
     right: 0,
   },
   '&[data-popover-placement^=left] > [data-popover-arrow="arrow"]:before': {
-    right: -7,
+    right: '-8px',
     top: '50%',
     transform: 'translateY(-50%)',
     borderWidth: '8px 0 8px 8px',
@@ -48,7 +48,7 @@ const container = {
     left: 0,
   },
   '&[data-popover-placement^=right] > [data-popover-arrow="arrow"]:before': {
-    left: -7,
+    left: '-8px',
     top: '50%',
     transform: 'translateY(-50%)',
     borderWidth: '8px 8px 8px 0',

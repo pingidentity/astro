@@ -4,4 +4,7 @@ export default {
   listStyle: 'none',
   maxWidth: 250,
   outline: 'none',
+  overflow: 'hidden',
+  minWidth: '90px',
+  borderRadius: 4,
 };

@@ -8,6 +8,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { useMenu } from '@react-aria/menu';
 import { useTreeState } from '@react-stately/tree';
+import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
 import { MenuContext } from '../../context/MenuContext';
@@ -37,6 +38,7 @@ const Menu = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => menuRef.current);
   const { menuProps } = useMenu(completeProps, state, menuRef);
+  const { isFocusVisible, focusProps } = useFocusRing({ within: true });
 
   // Sync the refs if needed
   useEffect(() => {
@@ -55,7 +57,7 @@ const Menu = forwardRef((props, ref) => {
       as="ul"
       ref={menuRef}
       variant="menu"
-      {...menuProps}
+      {...mergeProps(focusProps, menuProps)}
     >
       {Array.from(state.collection).map(item => (
         <MenuItem
@@ -64,6 +66,7 @@ const Menu = forwardRef((props, ref) => {
           state={state}
           onAction={onAction}
           isDisabled={isDisabled}
+          isFocusVisible={isFocusVisible}
         />
       ))}
     </Box>
