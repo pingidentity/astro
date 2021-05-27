@@ -37,6 +37,7 @@ export const label = {
     width: 'auto',
     pr: 'sm',
     mb: 0,
+    alignSelf: 'center',
   },
 };
 
