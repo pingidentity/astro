@@ -72,6 +72,7 @@ input.wrapper = {
 // Used to give a blue left border to inputs
 input.container = {
   position: 'relative',
+  height: 'max-content',
   '> input': {
     borderLeftWidth: 0,
   },
