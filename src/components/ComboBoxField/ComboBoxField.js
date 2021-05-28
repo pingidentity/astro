@@ -137,7 +137,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     if (inputRef.current) {
       setMenuWidth(inputRef.current.offsetWidth);
     }
-  }, [inputRef, setMenuWidth]);
+  }, [inputRef, setMenuWidth, state.isOpen]);
 
   useResizeObserver({
     ref: inputRef,
