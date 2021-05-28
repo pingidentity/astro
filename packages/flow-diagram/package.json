@@ -30,11 +30,11 @@
         "demo": "rm -rf ./demo && build-storybook -o demo",
         "verify": "yarn lint && yarn coverage",
         "lint": "eslint .",
-        "start": "start-storybook -p 1339",
+        "start": "yarn installdeps && start-storybook -p 1339",
         "test": "jest",
         "test-watch": "jest --watch",
         "docs": "gulp docs",
-        "postinstall": "lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
+        "installdeps": "lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
     },
     "dependencies": {
         "@material-ui/core": "^4.11.3",
