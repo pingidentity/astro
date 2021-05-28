@@ -15,6 +15,7 @@ describe("HeroChart", function () {
     const Wrapper = TestUtils.UpdatePropsWrapper;
 
     const chartData = [
+        { xaxis: "1/1", yups: 1, nopes: 1, tooltipTopLabel: "Win", tooltipBottomLabel: "Lose" },
         { xaxis: "1/1", yups: 111, nopes: 11 },
         { xaxis: "1/2", yups: 222, nopes: 22 },
         { xaxis: "1/3", yups: 333, nopes: 33 },
@@ -251,17 +252,17 @@ describe("HeroChart", function () {
     it("sets the selected element on mouse over", function () {
         const component = getComponent();
 
-        component._handleBarMouseOver("test", 0)();
+        component._handleBarMouseOver("yups", 0)();
 
-        expect(component.state.barSelected).toEqual("test-0");
+        expect(component.state.barSelected).toEqual("yups-0");
     });
 
     it("clears the selected element on mouse out", function () {
         const component = getComponent();
 
-        component._handleBarMouseOver("test", 0)();
+        component._handleBarMouseOver("yups", 0)();
 
-        expect(component.state.barSelected).toEqual("test-0");
+        expect(component.state.barSelected).toEqual("yups-0");
 
         component._handleBarMouseOut();
 
