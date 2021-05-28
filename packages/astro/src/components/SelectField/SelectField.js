@@ -140,7 +140,7 @@ const SelectField = forwardRef((props, ref) => {
     if (triggerRef.current) {
       setButtonWidth(triggerRef.current.offsetWidth);
     }
-  }, [triggerRef, setButtonWidth]);
+  }, [triggerRef, setButtonWidth, state.isOpen]);
 
   useResizeObserver({
     ref: triggerRef,
@@ -206,6 +206,8 @@ const SelectField = forwardRef((props, ref) => {
           {...triggerProps}
         >
           <Box as="span" variant="forms.select.currentValue" {...valueProps}>
+            {/* Use selectedItem.props.value if item text in selectedfield
+              should differ from the option text */}
             {
               state.selectedItem
                 ? state.selectedItem.rendered

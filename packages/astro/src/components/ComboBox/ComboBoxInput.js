@@ -15,6 +15,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
 const ComboBoxInput = forwardRef((props, ref) => {
   const {
     controlProps,
+    containerProps,
     hasAutoFocus,
     helperText,
     isDisabled,
@@ -76,6 +77,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
         style={style}
         variant="forms.comboBox.container"
         {...hoverProps}
+        {...containerProps}
       >
         <TextField
           {...textFieldProps}
@@ -96,6 +98,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
 
 ComboBoxInput.propTypes = {
   controlProps: PropTypes.shape({}),
+  containerProps: PropTypes.shape({}),
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   inputProps: PropTypes.shape({}),
