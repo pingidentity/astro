@@ -75,6 +75,9 @@ const CustomTooltip = (props) => {
     /* istanbul ignore next  */
     if (!props.selected) { return false; }
 
+    const tooltipTopLabel = payload.tooltipTopLabel || props.tooltipTopLabel;
+    const tooltipBottomLabel = payload.tooltipBottomLabel || props.tooltipBottomLabel;
+
     /* istanbul ignore next  */
     return (
         <div style={{
@@ -85,10 +88,10 @@ const CustomTooltip = (props) => {
         }}>
             <div className="hero-tooltip">
                 <div>
-                    {payload[props.topSeriesKey].toLocaleString("en")} {props.tooltipTopLabel}
+                    {payload[props.topSeriesKey].toLocaleString("en")} {tooltipTopLabel}
                 </div>
                 <div className="hero-tooltip__bottom-value">
-                    {payload[props.bottomSeriesKey].toLocaleString("en")} {props.tooltipBottomLabel}
+                    {payload[props.bottomSeriesKey].toLocaleString("en")} {tooltipBottomLabel}
                 </div>
             </div>
         </div>
