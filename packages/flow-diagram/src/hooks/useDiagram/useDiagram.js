@@ -159,6 +159,7 @@ export default function useDiagram({
                 {
                     hoverDelay: 0,
                     'undoManager.isEnabled': true,
+                    'animationManager.isInitial': false,
                     'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
                         .computeEffectiveCollection),
                     draggingTool: $(NonRealtimeDraggingTool, { duration: 600 }),

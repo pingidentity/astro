@@ -7,11 +7,13 @@ export default function Panel({ children, icon, title, subtitle, styles, ...othe
     return (
         <Card sx={{ ...panel, ...styles }} {...others}>
             <Box isRow sx={panelTop}>
-                <Box>
+                <Box mr={10}>
                     <Text sx={{ color: '#68747F', fontSize: 15 }}>{title}</Text>
                     <Text sx={{ color: '#253746', fontSize: 15, fontWeight: 700 }}>{subtitle}</Text>
                 </Box>
-                {icon}
+                <Box>
+                    {icon}
+                </Box>
             </Box>
             <Box sx={panelBody} p={25} w="100%">
                 {children}

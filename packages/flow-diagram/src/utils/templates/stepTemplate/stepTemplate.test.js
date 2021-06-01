@@ -5,6 +5,7 @@ import { svgComponentToBase64 } from '../templateUtils';
 import {
     getBorderColor,
     getIcon,
+    getIfLengthGreater,
 } from './stepTemplate';
 
 jest.mock('gojs', () => {
@@ -23,6 +24,12 @@ jest.mock('gojs', () => {
 });
 
 describe('Step Template', () => {
+    test('getIfLengthGreater returns correct true value', () => {
+        expect(getIfLengthGreater('1', true, false, 0)).toBe(true);
+    });
+    test('getIfLengthGreater returns correct false value', () => {
+        expect(getIfLengthGreater('1', true, false, 2)).toBe(false);
+    });
     test('getBorderColor returns correct selected value', () => {
         const selected = {
             data: {

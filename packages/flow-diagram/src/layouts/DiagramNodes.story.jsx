@@ -19,7 +19,7 @@ import useDiagram from '../hooks/useDiagram';
 export const Branch = () => {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
-        { 'key': 'branch', 'category': 'branch', 'group': 'group' },
+        { 'key': 'branch', 'category': 'branch', 'group': 'group', 'text': 'Branch' },
     ];
 
     const { diagramProps } = useDiagram({
@@ -29,7 +29,7 @@ export const Branch = () => {
         linkDataArray: [],
         nodeDataArray: diagramNodes,
         nodeTemplates: [
-            ['branch', branchNode],
+            ['branch', branchNode()],
         ],
         onModelChange: () => {},
     });
@@ -44,7 +44,7 @@ export const Branch = () => {
 export const Failure = () => {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
-        { 'key': 'failure', 'category': 'failure', 'group': 'group' },
+        { 'key': 'failure', 'category': 'failure', 'group': 'group', 'text': 'Failure' },
     ];
 
     const { diagramProps } = useDiagram({
@@ -54,7 +54,7 @@ export const Failure = () => {
         linkDataArray: [],
         nodeDataArray: diagramNodes,
         nodeTemplates: [
-            ['failure', failureNode],
+            ['failure', failureNode()],
         ],
         onModelChange: () => {},
     });
@@ -114,7 +114,7 @@ export const Group = () => {
 export const Outlet = () => {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
-        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' }
+        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' },
     ];
 
     const { diagramProps } = useDiagram({
@@ -137,7 +137,7 @@ export const Outlet = () => {
 };
 
 export const Start = () => {
-    const diagramNodes = [{ 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START' }];
+    const diagramNodes = [{ 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START', 'text': 'Start' }];
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
@@ -201,7 +201,7 @@ export const Step = () => {
 export const Success = () => {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
-        { 'key': 'success', 'category': 'success', 'group': 'group' },
+        { 'key': 'success', 'category': 'success', 'group': 'group', 'text': 'Complete' },
     ];
 
     const { diagramProps } = useDiagram({
@@ -211,7 +211,7 @@ export const Success = () => {
         linkDataArray: [],
         nodeDataArray: diagramNodes,
         nodeTemplates: [
-            ['success', successNode],
+            ['success', successNode()],
         ],
         onModelChange: () => {},
     });

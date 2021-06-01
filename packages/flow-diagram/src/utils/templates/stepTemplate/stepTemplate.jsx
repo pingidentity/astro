@@ -5,7 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import { encodeSvg, getSize } from '../templateUtils';
 import { COLORS } from '../../constants';
 import { toNode, fromNode, bottomNode } from '../nodes';
-import { getAdornmentOnHover, getNodeHoverAdornment, getIfLengthGreater } from '../hoverAdornment';
+import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
 const $ = go.GraphObject.make;
 
@@ -20,6 +20,10 @@ export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part
 
 export const getIcon = iconColor => (iconSrc) => {
     return iconSrc(iconColor);
+};
+
+export const getIfLengthGreater = (s, ifTrue, ifFalse, target) => {
+    return s.length > target ? ifTrue : ifFalse;
 };
 
 // Would require mocking node

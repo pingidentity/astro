@@ -47,6 +47,7 @@
         "gojs-react": "^1.0.7",
         "jest-canvas-mock": "^2.3.0",
         "lodash": "^4.17.20",
+        "mdi-react": "^7.5.0",
         "prop-types": "^15.7.2",
         "react-xarrows": "^1.5.2",
         "uuid": "^7.0.3"

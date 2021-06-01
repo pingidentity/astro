@@ -21,6 +21,7 @@ export default function usePalette({
         const paletteObject =
             $(go.Palette,
                 {
+                    'animationManager.isInitial': false,
                     layout: $(go.GridLayout,
                     ),
                     maxSelectionCount: 1,

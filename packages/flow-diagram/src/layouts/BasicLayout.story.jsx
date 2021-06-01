@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Clear, Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
-import { Box, Button, Image, Separator, Text, TextField } from '@pingux/astro';
-import { mdiTools, mdiFormSelect, mdiSourceBranch, mdiFlag } from '@mdi/js';
+import { Box, Button, Image, Separator, Tabs, Tab, Text, TextField } from '@pingux/astro';
+import { mdiSourceBranch, mdiFlag } from '@mdi/js';
 import Icon from '@mdi/react';
 import '../css/main.css';
 
@@ -37,12 +37,15 @@ const Demo = () => {
 
     const [diagramNodes, setDiagramNodes] = useState([
         { isGroup: 'true', 'key': 'group' },
+        { isGroup: 'true', 'key': 'isFinished' },
+        { isGroup: 'true', 'key': 'loginGroup' },
+        { isGroup: 'true', 'key': 'executeGroup' },
         {
             'key': 'user-login',
             'category': 'step',
             'text': 'User login',
+            'group': 'loginGroup',
             'stepId': 'userLogin',
-            'group': 'group',
             canLinkFrom: false,
             hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
@@ -54,24 +57,26 @@ const Demo = () => {
             'category': 'step',
             'stepId': 'registration',
             'text': 'Execute Flow',
-            'group': 'execute_group',
+            'group': 'executeGroup',
             canLinkFrom: false,
             hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#228C22',
             errorMessage: 'Some data is invalid here',
         },
+        { 'key': 'branch', 'category': 'branch', 'group': 'group', 'text': 'Branch' },
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', 'group': 'group' },
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
-        { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
+        { 'key': 'finished', 'category': 'finished', 'stepId': 'finished', 'text': 'Complete', 'group': 'isFinished' },
         { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START' }]);
 
     const [diagramLinks, setDiagramLinks] = useState([
-        { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success', 'category': 'outlet' },
+        { 'from': 'branch', 'to': 'user-login-success', 'key': 'branch_user-login-success', 'category': 'outlet' },
         { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
-        { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure', 'category': 'outlet' },
-        { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found', 'category': 'outlet' },
+        { 'from': 'branch', 'to': 'user-login-failure', 'key': 'branch_user-login-failure', 'category': 'outlet' },
+        { 'from': 'branch', 'to': 'user-login-not_found', 'key': 'branch_user-login-not_found', 'category': 'outlet' },
+        { 'from': 'user-login', 'to': 'branch', 'key': 'user-login_branch'},
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ]);
 
@@ -90,9 +95,9 @@ const Demo = () => {
             ['step', stepTemplate()],
             // The outletTemplate can also be defined with a color on its own.
             ['outlet', outletTemplate()],
-            ['finished', successNode],
-            ['error', failureNode],
-            ['branch', branchNode],
+            ['finished', successNode()],
+            ['error', failureNode()],
+            ['branch', branchNode()],
             ['START', nodeTemplateStart()],
         ],
         onModelChange: ({
@@ -111,7 +116,7 @@ const Demo = () => {
             // the palette.
 
             if (selectedNodeData) {
-                if (Object.keys(selectedNodeData).length && selectedNodeData.category === 'step') {
+                if (Object.keys(selectedNodeData).length && selectedNodeData.category !== 'outlet') {
                     setSelectedNode(selectedNodeData);
                 } else {
                     setSelectedNode(null);
@@ -334,6 +339,7 @@ const Demo = () => {
             {
                 'key': 'finished',
                 'category': 'finished',
+                'text': 'Complete',
                 group: 'finished-group',
                 getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
@@ -348,6 +354,7 @@ const Demo = () => {
                 'key': 'error',
                 'category': 'error',
                 group: 'error-group',
+                'text': 'Failure',
                 getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
             },
             {
@@ -361,6 +368,7 @@ const Demo = () => {
                 'key': 'branch',
                 'category': 'branch',
                 group: 'branch-group',
+                'text': 'Branch',
                 getIconSrc: (color = COLORS.ORANGE) => svgComponentToBase64(<Icon path={mdiSourceBranch} color={color} width="20px" height="20px" />),
             },
         ],
@@ -372,6 +380,21 @@ const Demo = () => {
         setSelectedNode({ ...currentNode, [field]: id });
         setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ? { ...currentNode, [field]: id } : node)));
     };
+
+    const getPanelIcon = (category) => {
+        switch (category) {
+            case 'finished':
+                return <Success height={20} fill={COLORS.GREEN} />;
+            case 'branch':
+                return <Icon path={mdiSourceBranch} height="20px" width="20px" color={COLORS.ORANGE} />;
+            case 'START':
+                return <Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />;
+            case 'error':
+                return <Clear height={20} fill={COLORS.RED} />;
+            default:
+                return <Icon path={mdiSourceBranch} height="20px" width="20px" color={COLORS.ORANGE} />;
+        }
+    }
 
     return (
         <OuterContainer>
@@ -402,7 +425,7 @@ const Demo = () => {
                             <Box>
                                 <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
                                     <Box isRow>
-                                        <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
+                                        <Image src={selectedNode.key !== 'step' ? svgComponentToBase64(getPanelIcon(selectedNode.category)) : selectedNode.getIconSrc(selectedNode.color)} />
                                         <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
                                     </Box>
                                 </Box>
@@ -420,42 +443,21 @@ const Demo = () => {
                             <Box
                                 isRow
                                 sx={{
-                                    borderBottom: '1px solid #E1DDFD',
                                     justifyContent: 'center',
-                                    margin: '30px 15px 20px 15px',
+                                    margin: '15px 0px 20px 0px',
                                 }}
                             >
-                                <Box sx={{
-                                    alignItems: 'center',
-                                    borderBottom: '2px solid transparent',
-                                    paddingBottom: 5,
-                                }}
-                                >
-                                    <Icon
-                                        path={mdiFormSelect}
-                                        size={1}
-                                        color="#68747F"
-                                    />
-                                    <Text color="#68747F" fontSize={13} fontFamily="Helvetica" mt="5px">PROPERTIES</Text>
-                                </Box>
-                                <Box width={25} />
-                                <Box sx={{
-                                    alignItems: 'center',
-                                    borderBottom: '2px solid #4462ED',
-                                    paddingBottom: 5,
-                                }}
-                                >
-                                    <Icon
-                                        path={mdiTools}
-                                        size={1}
-                                        color="#526BDB"
-                                    />
-                                    <Text color="#526BDB" fontSize={13} fontFamily="Helvetica" mt="5px">TOOLBOX</Text>
-                                </Box>
+                                <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
+                                    <Tab key="properties" title="Properties" />
+                                    <Tab key="toolbox" title="Toolbox">
+                                        <Box sx={{ height: 300 }}>
+                                            <PaletteWrapper>
+                                                <Palette {...paletteProps} />
+                                            </PaletteWrapper>
+                                        </Box>
+                                    </Tab>
+                                </Tabs>
                             </Box>
-                            <PaletteWrapper>
-                                <Palette {...paletteProps} />
-                            </PaletteWrapper>
                         </React.Fragment>
                     )}
                 </LeftContainer>

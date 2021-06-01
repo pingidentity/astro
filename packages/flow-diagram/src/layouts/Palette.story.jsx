@@ -67,6 +67,7 @@ export const PaletteComponent = () => {
                 'key': 'finished',
                 'category': 'finished',
                 group: 'finished-group',
+                'text': 'Complete',
                 getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
@@ -80,6 +81,7 @@ export const PaletteComponent = () => {
                 'key': 'error',
                 'category': 'error',
                 group: 'error-group',
+                'text': 'Failure',
                 getIconSrc: (color = COLORS.RED) => svgComponentToBase64(<Close fill={color} />),
             },
             {
@@ -93,6 +95,7 @@ export const PaletteComponent = () => {
                 'key': 'branch',
                 'category': 'branch',
                 group: 'branch-group',
+                'text': 'Branch',
                 getIconSrc: (color = COLORS.ORANGE) => svgComponentToBase64(<Icon path={mdiSourceBranch} color={color} width="20px" height="20px" />),
             },
         ],
