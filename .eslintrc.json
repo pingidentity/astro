@@ -27,7 +27,6 @@
         "no-underscore-dangle": 0,
         "no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 0, "maxEOF": 0 }],
         "prefer-destructuring": 0,
-        "react/forbid-prop-types": 0,
         "react/jsx-filename-extension": 0,
         "react/prop-types": ["error", { "ignore": ["children", "className"]}],
         "react/require-default-props": 0,

@@ -57,7 +57,7 @@ Popover.propTypes = {
   trigger: PropTypes.string,
   /** Delay in ms once a trigger event is fired before a popover shows or hides.
    * [More information on delay](https://atomiks.github.io/tippyjs/v6/all-props/#delay) */
-  delay: PropTypes.array,
+  delay: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf([PropTypes.number])]),
 };
 
 Popover.defaultProps = {
