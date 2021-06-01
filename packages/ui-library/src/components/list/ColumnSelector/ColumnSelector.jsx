@@ -6,6 +6,7 @@ import ColumnSelectorColumn from "./ColumnSelectorColumn";
 import ColumnSelectorFrame from "./ColumnSelectorFrame";
 import ColumnSelectorRow, { buttonTypes } from "./ColumnSelectorRow";
 import DragDrop from "../../rows/DragDrop";
+import { defaultRender } from "../../../util/PropUtils";
 
 const baseClassName = "column-selector";
 
@@ -135,6 +136,8 @@ export default class ColumnSelector extends Component {
             titleIcon: PropTypes.string
         })).isRequired,
         optionsTitle: PropTypes.node,
+        renderOptionsColumn: PropTypes.func,
+        renderSelectedColumn: PropTypes.func,
         searchPlaceHolder: PropTypes.string,
         selectedOptions: PropTypes.arrayOf(PropTypes.shape({
             all: PropTypes.bool,
@@ -169,6 +172,8 @@ export default class ColumnSelector extends Component {
         onSearch: noop,
         onToggleOption: noop,
         openParentOnMove: true,
+        renderOptionsColumn: defaultRender,
+        renderSelectedColumn: defaultRender,
         selectedOptions: []
     };
 
@@ -369,6 +374,8 @@ export default class ColumnSelector extends Component {
             onSearch,
             options,
             optionsTitle,
+            renderOptionsColumn,
+            renderSelectedColumn,
             searchPlaceHolder,
             selectedTitle,
             selectedOptions,
@@ -384,28 +391,28 @@ export default class ColumnSelector extends Component {
                 onSearch={onSearch}
                 searchPlaceHolder={searchPlaceHolder}
             >
-                {() => [
-                    <ColumnSelectorColumn
-                        data-id={`${dataId}-options`}
-                        key="options"
-                        title={optionsTitle}
-                    >
-                        {[
+                {
+                    renderOptionsColumn({
+                        "data-id": `${dataId}-options`,
+                        key: "options",
+                        title: optionsTitle,
+                        children: [
                             ...sortedOptions.map(this.renderBaseOption),
                             this.renderDropPlaceholder(false)
-                        ]}
-                    </ColumnSelectorColumn>,
-                    <ColumnSelectorColumn
-                        data-id={`${dataId}-selected`}
-                        key="selected"
-                        title={selectedTitle}
-                    >
-                        {[
+                        ]
+                    }, ColumnSelectorColumn)
+                }
+                {
+                    renderSelectedColumn({
+                        "data-id": `${dataId}-selected`,
+                        key: "selected",
+                        title: selectedTitle,
+                        children: [
                             ...sortedSelected.map(this.renderSelectedOption),
                             this.renderDropPlaceholder(true)
-                        ]}
-                    </ColumnSelectorColumn>
-                ]}
+                        ]
+                    }, ColumnSelectorColumn)
+                }
             </ColumnSelectorFrame>
         );
     }

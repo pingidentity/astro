@@ -121,7 +121,7 @@ describe("ColumnSelector", () => {
             component
                 .find(ColumnSelectorFrame)
                 .props()
-                .children();
+                .children;
         const renderedColumn = shallow(firstColumn);
 
         expect(renderedColumn.exists()).toEqual(true);
@@ -141,7 +141,7 @@ describe("ColumnSelector", () => {
             component
                 .find(ColumnSelectorFrame)
                 .props()
-                .children();
+                .children;
 
         const [firstRow] =
             shallow(firstColumn)
@@ -167,7 +167,7 @@ describe("ColumnSelector", () => {
             component
                 .find(ColumnSelectorFrame)
                 .props()
-                .children();
+                .children;
 
         const [firstRow] =
             shallow(firstColumn)
@@ -193,7 +193,7 @@ describe("ColumnSelector", () => {
             component
                 .find(ColumnSelectorFrame)
                 .props()
-                .children();
+                .children;
 
         const [firstRow] =
             shallow(firstColumn)
