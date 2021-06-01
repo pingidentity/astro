@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Clear, Desktop, Link } from '@pingux/icons';
-import { Box, Chip, Icon as PingIcon, Image, Separator, Popover, Text, TextField } from '@pingux/astro';
+import { Box, Button, Chip, Icon, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
 import {
-    mdiArrowCollapseLeft,
-    mdiArrowCollapseRight,
     mdiDragVertical,
     mdiText,
-    mdiTools,
-    mdiFormSelect,
     mdiFlag,
     mdiMenuDown,
     mdiMenuUp,
     mdiMinusBoxOutline,
     mdiPlusBoxOutline,
 } from '@mdi/js';
-import Icon from '@mdi/react';
+import ArrowCollapseLeftIcon from 'mdi-react/ArrowCollapseLeftIcon';
+import ArrowCollapseRightIcon from 'mdi-react/ArrowCollapseRightIcon';
+import { Icon as MDIcon } from '@mdi/react';
 import { TreeItem, TreeView } from '@material-ui/lab';
-import { v4 as uuidV4 } from 'uuid';
 import '../css/main.css';
 
 import {
@@ -46,7 +43,6 @@ function IOItem({ label, id }) {
             sx={{
                 alignItems: 'center',
             }}
-            id={id}
         >
             <Box
                 isRow
@@ -60,8 +56,9 @@ function IOItem({ label, id }) {
                     borderColor: 'neutral.60',
                     justifyContent: 'center',
                 }}
+                id={id}
             >
-                <Icon path={mdiDragVertical} height="15px" width="15px" />
+                <MDIcon path={mdiDragVertical} height="15px" width="15px" />
                 <Text fontSize={13}>{label}</Text>
             </Box>
         </Box>
@@ -81,9 +78,9 @@ function Outputs() {
     return (
         <TreeView
             defaultExpanded={['1', '3', '6']}
-            defaultCollapseIcon={<Icon path={mdiMinusBoxOutline} height="20px" width="20px" />}
-            defaultExpandIcon={<Icon path={mdiPlusBoxOutline} height="20px" width="20px" />}
-            defaultEndIcon={<Icon path={mdiText} height="20px" width="20px" />}
+            defaultCollapseIcon={<MDIcon path={mdiMinusBoxOutline} height="20px" width="20px" />}
+            defaultExpandIcon={<MDIcon path={mdiPlusBoxOutline} height="20px" width="20px" />}
+            defaultEndIcon={<MDIcon path={mdiText} height="20px" width="20px" />}
         >
             <TreeItem nodeId="1" label={label('Submit')}>
                 <TreeItem nodeId="3" label={label('formData')}>
@@ -117,16 +114,17 @@ function CollapsibleSection({ defaultExpanded, title, children, status, onClick,
                 <Box flex="1 1 0" sx={{ minWidth: 0, alignItems: 'center' }} isRow onClick={() => setIsExpanded(flag => !flag)}>
                     {title}
                     <Box flex="0 0 auto" ml={5}>
-                        {isExpanded && <Icon path={mdiMenuUp} height="20px" width="20px" />}
-                        {!isExpanded && <Icon path={mdiMenuDown} height="20px" width="20px" />}
+                        {isExpanded && <MDIcon path={mdiMenuUp} height="20px" width="20px" />}
+                        {!isExpanded && <MDIcon path={mdiMenuDown} height="20px" width="20px" />}
                     </Box>
                 </Box>
-                <Box flex="0 0 auto" onClick={onClick}>
-                    <Icon
-                        path={mdiArrowCollapseRight}
-                        size={1}
-                        color="#253746"
-                    />
+                <Box>
+                    <Button
+                        onPress={onClick}
+                        variant="icon"
+                    >
+                        <Icon icon={ArrowCollapseRightIcon} color="#253746" size={25} alignSelf="center" mr="xs" />
+                    </Button>
                 </Box>
             </Box>
             <Box
@@ -155,7 +153,7 @@ function ChipInputTall({ label, text, id }) {
                             width={70}
                             label={
                                 <Box isRow justifyContent="center">
-                                    <PingIcon icon={Link} color="#253746" size={10} alignSelf="center" mr="xs" />
+                                    <Icon icon={Link} color="#253746" size={10} alignSelf="center" mr="xs" />
                                     <Text color="#253746" sx={{ textTransform: 'lowercase' }}>{text}</Text>
                                 </Box>
                             }
@@ -183,7 +181,7 @@ function ChipInputShort({ label, text, border, chipWidth, color, id }) {
                             }}
                             label={
                                 <Box isRow justifyContent="center">
-                                    <PingIcon icon={Link} color="#253746" size={10} alignSelf="center" mr="xs" />
+                                    <Icon icon={Link} color="#253746" size={10} alignSelf="center" mr="xs" />
                                     <Text color="#253746" sx={{ textTransform: 'lowercase' }}>{text}</Text>
                                 </Box>
                             }
@@ -219,7 +217,7 @@ function Inputs() {
             <ChipInputShort label="firstName:" text="user.firstName" border="1px solid #CACED3" chipWidth={135} color="transparent" id="firstNameOutput" />
             <ChipInputShort label="lastName:" text="user.lastName" border="1px solid #CACED3" chipWidth={135} color="transparent" id="lastNameOutput" />
         </Box>
-    )
+    );
 }
 
 export const InputsOutputs = () => {
@@ -363,7 +361,7 @@ export const InputsOutputs = () => {
                             <Box>
                                 <Box m="35px 0px 6px 5%" justifyContent="space-between" alignItems="center" isRow>
                                     <Box isRow>
-                                        <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
+                                        <Image src={selectedNode.key === 'START' ? svgComponentToBase64(<MDIcon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />) : selectedNode.getIconSrc(selectedNode.color)} />
                                         <Text ml="12px" variant="bodyStrong">{selectedNode.text}</Text>
                                     </Box>
                                 </Box>
@@ -407,42 +405,21 @@ export const InputsOutputs = () => {
                             <Box
                                 isRow
                                 sx={{
-                                    borderBottom: '1px solid #E1DDFD',
                                     justifyContent: 'center',
-                                    margin: '30px 15px 20px 15px',
+                                    margin: '15px 0px 20px 0px',
                                 }}
                             >
-                                <Box sx={{
-                                    alignItems: 'center',
-                                    borderBottom: '2px solid transparent',
-                                    paddingBottom: 5,
-                                }}
-                                >
-                                    <Icon
-                                        path={mdiFormSelect}
-                                        size={1}
-                                        color="#68747F"
-                                    />
-                                    <Text color="#68747F" fontSize={13} fontFamily="Helvetica" mt="5px">PROPERTIES</Text>
-                                </Box>
-                                <Box width={25} />
-                                <Box sx={{
-                                    alignItems: 'center',
-                                    borderBottom: '2px solid #4462ED',
-                                    paddingBottom: 5,
-                                }}
-                                >
-                                    <Icon
-                                        path={mdiTools}
-                                        size={1}
-                                        color="#526BDB"
-                                    />
-                                    <Text color="#526BDB" fontSize={13} fontFamily="Helvetica" mt="5px">TOOLBOX</Text>
-                                </Box>
+                                <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
+                                    <Tab key="properties" title="Properties" />
+                                    <Tab key="toolbox" title="Toolbox">
+                                        <Box sx={{ height: 300 }}>
+                                            <PaletteWrapper>
+                                                <Palette {...paletteProps} />
+                                            </PaletteWrapper>
+                                        </Box>
+                                    </Tab>
+                                </Tabs>
                             </Box>
-                            <PaletteWrapper>
-                                <Palette {...paletteProps} />
-                            </PaletteWrapper>
                         </React.Fragment>
                     )}
                 </LeftContainer>
@@ -461,13 +438,14 @@ export const InputsOutputs = () => {
                                 subtitle="Outputs"
                                 id="outputsPanel"
                                 onScroll={() => onScroll()}
-                                icon={<Icon
-                                    path={mdiArrowCollapseLeft}
-                                    size={1}
-                                    color="#253746"
-                                    onClick={() => setOutputsDocked(true)}
-                                    style={{ cursor: 'pointer' }}
-                                />}
+                                icon={
+                                    <Button
+                                        onPress={() => setOutputsDocked(true)}
+                                        variant="icon"
+                                    >
+                                        <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" mr="xs" />
+                                    </Button>
+                                }
                             >
                                 <Outputs />
                             </Panel>
@@ -478,13 +456,13 @@ export const InputsOutputs = () => {
                                 subtitle="Inputs"
                                 id="inputsPanel"
                                 onScroll={() => onScroll()}
-                                onClick={() => setInputsDocked(true)}
-                                icon={<Icon
-                                    path={mdiArrowCollapseLeft}
-                                    size={1}
-                                    color="#253746"
-                                    style={{ cursor: 'pointer' }}
-                                />}
+                                icon={
+                                    <Button
+                                        onPress={() => setInputsDocked(true)}
+                                        variant="icon"
+                                    >
+                                        <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" mr="xs" />
+                                    </Button>}
                             >
                                 <Inputs />
                             </Panel>

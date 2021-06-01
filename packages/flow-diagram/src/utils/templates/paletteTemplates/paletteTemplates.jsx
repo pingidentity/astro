@@ -10,7 +10,7 @@ const $ = go.GraphObject.make;
 const isDraggingItem = node => node.part.layerName === 'Tool';
 
 export const getDraggedColor = (isActive, activeColor, staticColor) => (isBeingDragged, node) => {
-    if (isActive(node) || !isBeingDragged) {
+    if (isActive(node) || isBeingDragged) {
         return activeColor;
     }
     return staticColor;
@@ -34,8 +34,6 @@ export const paletteItemTemplate = ({ iconSrc } = {}) => $(go.Node, 'Spot',
         $(
             go.Shape, 'RoundedRectangle',
             { fill: COLORS.WHITE, stroke: '#98A0A8', desiredSize: new go.Size(250, 35), parameter1: 1 },
-            new go.Binding('fill', 'isBeingDragged', getDraggedColor(isDraggingItem, COLORS.WHITE, '#E5E9F8')),
-            new go.Binding('stroke', 'isBeingDragged', getDraggedColor(isDraggingItem, '#98A0A8', '#E5E9F8')),
         ),
         $(go.Panel, 'Horizontal', { alignment: go.Spot.Left, visible: true },
             new go.Binding('visible', 'isBeingDragged', checkIfDragged),
@@ -73,10 +71,9 @@ export const paletteGroupTemplate = ({ iconSrc } = {}) =>
             { name: 'BODY' },
             $(
                 go.Shape, 'RoundedRectangle',
-                { fill: COLORS.WHITE, stroke: '#98A0A8', parameter1: 1 },
+                { fill: COLORS.WHITE, stroke: COLORS.GRAY_LIGHT, parameter1: 1 },
                 new go.Binding('desiredSize', '', s => getSize(s, 'paletteContainer')),
-                new go.Binding('fill', 'isBeingDragged', getDraggedColor(isDraggingItem, COLORS.WHITE, '#E5E9F8')),
-                new go.Binding('stroke', 'isBeingDragged', getDraggedColor(isDraggingItem, '#98A0A8', '#E5E9F8')),
+                new go.Binding('stroke', 'isBeingDragged', getDraggedColor(isDraggingItem, COLORS.PURPLE, COLORS.GRAY_LIGHT)),
             ),
             $(go.Panel, 'Horizontal', { alignment: go.Spot.Left, visible: true },
                 new go.Binding('visible', 'isBeingDragged', checkIfDragged),

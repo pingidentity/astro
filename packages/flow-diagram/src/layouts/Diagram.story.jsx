@@ -35,10 +35,11 @@ export const DiagramComponent = () => {
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
         },
+        { isGroup: 'true', 'key': 'isFinished' },
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' },
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
-        { 'key': 'finished', 'category': 'finished', 'stepId': 'finished' },
+        { 'key': 'finished', 'category': 'finished', 'stepId': 'finished', 'group': 'isFinished' },
         { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START' }];
 
     const diagramLinks = [
@@ -59,9 +60,9 @@ export const DiagramComponent = () => {
         nodeTemplates: [
             ['step', stepTemplate()],
             ['outlet', outletTemplate({ width: 100 })],
-            ['finished', successNode],
-            ['error', failureNode],
-            ['branch', branchNode],
+            ['finished', successNode()],
+            ['error', failureNode()],
+            ['branch', branchNode()],
             ['START', nodeTemplateStart()],
         ],
         onModelChange: ({

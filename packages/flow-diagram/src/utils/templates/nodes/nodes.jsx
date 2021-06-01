@@ -35,7 +35,7 @@ export const toNode = ({ color } = {}, { margin } = { margin: new go.Margin(0, 0
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const fromNode = ({ color } = {}, { margin } = { margin: new go.Margin(0, 0, 0, 0)}) => $(go.Panel, 'Auto',
+export const fromNode = ({ color } = COLORS.BLUE, { margin } = { margin: new go.Margin(0, 0, 0, 0)}) => $(go.Panel, 'Auto',
     { alignment: go.Spot.Right, portId: 'from', fromLinkable: true, visible: true, fromMaxLinks: 1, margin },
     new go.Binding('visible', 'canLinkFrom'),
     // Same thing as above
