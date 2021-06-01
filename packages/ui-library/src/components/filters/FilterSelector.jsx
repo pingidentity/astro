@@ -131,8 +131,11 @@ export const useFilterSelector = ({
     };
 };
 
+const defaultListRender = (listProps, Component) => <Component {...listProps} renderOption={renderNestedCheckboxes()}/>;
+
 export const Content = ({
     onSearch,
+    renderList,
     search,
     searchPlaceholder,
     selected,
@@ -148,9 +151,7 @@ export const Content = ({
                     onSearch(value);
                 }}
                 queryString={stateSearch}
-                renderList={
-                    (listProps, Component) => <Component {...listProps} renderOption={renderNestedCheckboxes()} />
-                }
+                renderList={renderList}
                 searchPlaceholder={searchPlaceholder}
                 selectedItemIds={selected}
                 showSearchBox
@@ -175,7 +176,8 @@ Content.propTypes = {
 
 Content.defaultProps = {
     searchPlaceholder: "...Search",
-    type: SelectionList.ListType.MULTI
+    type: SelectionList.ListType.MULTI,
+    renderList: defaultListRender,
 };
 
 /**
@@ -222,6 +224,7 @@ const FilterSelectorBase = ({
     labelText,
     label,
     placeholder,
+    renderList,
     required,
     selected,
     onSearch,
@@ -311,6 +314,7 @@ const FilterSelectorBase = ({
                     }}
                     onValueChange={onValueChange}
                     requiredText={requiredText}
+                    renderList={renderList}
                     search={search}
                     searchPlaceholder="Search..."
                     selectedItemIds={selected}
@@ -340,6 +344,7 @@ FilterSelectorBase.propTypes = {
         label: PropTypes.string,
     })),
     optionsNote: PropTypes.node,
+    renderList: PropTypes.func,
     requiredText: PropTypes.string,
     selected: PropTypes.arrayOf(PropTypes.string),
     type: PropTypes.oneOf([
