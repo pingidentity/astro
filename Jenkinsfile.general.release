@@ -132,6 +132,18 @@ pipeline {
       }
     }
 
+    stage('cdn build') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('node-builder') {
+            echo "Run Lerna CDN command"
+            sh "yarn lerna run cdn"
+          }
+        }
+        stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
+      }
+    }
+
     stage('update demos') {
       steps {
         dir("${env.WORKSPACE}") {

@@ -7,6 +7,7 @@
     "build:tokens": "node ./buildTokens.js",
     "build:css": "node-sass --recursive --output-style 'compressed' themes/ -o build/cdn/$(node -p -e 'require(`./package.json`).version') ",
     "build:images": "gulp move-images",
+    "cdn": "yarn run build",
     "watch": "npm-run-all watch:* --parallel",
     "watch:tokens": "yarn build:tokens && onchange 'themes/**/*.theme.json' -v -- yarn build:tokens",
     "watch:css": "yarn build:css && yarn build:css --watch"
