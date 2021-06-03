@@ -12,6 +12,24 @@ const container = {
   'MozBoxShadow': '0px 0px 12px 2px rgba(0,0,0,0.18)',
   'boxShadow': '0px 0px 12px 2px rgba(0,0,0,0.18)',
 
+  '&.is-dark-mode': {
+    color: 'white',
+    bg: 'accent.20',
+    p: 'sm',
+    '&[data-popover-placement^=top] > [data-popover-arrow="arrow"]:before': {
+      borderTopColor: 'accent.20',
+    },
+    '&[data-popover-placement^=bottom] > [data-popover-arrow="arrow"]:before': {
+      borderBottomColor: 'accent.20',
+    },
+    '&[data-popover-placement^=left] > [data-popover-arrow="arrow"]:before': {
+      borderLeftColor: 'accent.20',
+    },
+    '&[data-popover-placement^=right] > [data-popover-arrow="arrow"]:before': {
+      borderRightColor: 'accent.20',
+    },
+  },
+
   '&[data-popover-placement^=top] > [data-popover-arrow="arrow"]': {
     bottom: 0,
   },
