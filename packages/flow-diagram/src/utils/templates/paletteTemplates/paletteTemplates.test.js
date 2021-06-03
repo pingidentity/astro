@@ -51,7 +51,7 @@ describe('Step Template', () => {
                 layerName: 'layer',
             },
         };
-        expect(getDraggedColor(isDraggingItem, COLORS.WHITE, '#E5E9F8')(false, node)).toEqual(COLORS.WHITE);
+        expect(getDraggedColor(isDraggingItem, COLORS.WHITE, '#E5E9F8')(false, node)).toEqual('#E5E9F8');
     });
     test('getDraggedColor returns correct value for isBeingDragged and !isDraggingItem', () => {
         const node = {
@@ -59,7 +59,7 @@ describe('Step Template', () => {
                 layerName: 'layer',
             },
         };
-        expect(getDraggedColor(isDraggingItem, COLORS.WHITE, '#E5E9F8')(true, node)).toEqual('#E5E9F8');
+        expect(getDraggedColor(isDraggingItem, COLORS.WHITE, '#E5E9F8')(true, node)).toEqual(COLORS.WHITE);
     });
 
     test('getIcon returns correct color and icon', () => {
