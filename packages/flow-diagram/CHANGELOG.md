@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.15.0...@pingux/flow-diagram@0.16.0) (2021-06-03)
+
+
+### Bug Fixes
+
+* [UIP-4522] Fix Flow postinstall hook ([61ec6bc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/61ec6bc2fdcfcf1d1b7f56252f8ee7f07bae8053))
+* Fix Flow Diagram tests ([25d03b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/25d03b7c1a8c2920abb815545369d8e369a69b09))
+
+
+### Features
+
+* [UIP-4506] Flow diagram updates ([bffe07c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bffe07c6c4e0e5a3cf4a18cb80637f6ac6cf9c17))
+
+
+
+
+
 # 0.15.0 (2021-05-25)
 
 

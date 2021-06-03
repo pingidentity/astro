@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.41.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.40.1...ui-library@4.41.0) (2021-06-03)
+
+
+### Features
+
+* UIP-4505 "Render props for infinite scroll" ([03cd889](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/03cd889682af249801652b9709870b4cae118a78))
+
+
+
+
+
 ## [4.40.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.40.0...ui-library@4.40.1) (2021-05-25)
 
 **Note:** Version bump only for package ui-library
