@@ -1,6 +1,6 @@
 import { snakeCase, toUpper, fromPairs } from 'lodash';
 import { text } from '../../../styles/variants/text';
-import { buttons } from '../../../styles/variants/buttons';
+import buttons from '../../../styles/variants/buttons';
 
 /**
  * Converts the given object to a constant mapping.
