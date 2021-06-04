@@ -37,6 +37,9 @@ export * from './components/FieldHelperText';
 export { default as Icon } from './components/Icon';
 export * from './components/Icon';
 
+export { default as IconButton } from './components/IconButton';
+export * from './components/IconButton';
+
 export { default as Image } from './components/Image';
 export * from './components/Image';
 

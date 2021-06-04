@@ -7,7 +7,7 @@ import CloseIcon from 'mdi-react/CloseIcon';
 
 import useField from '../../hooks/useField';
 import Box from '../Box';
-import Button from '../Button';
+import IconButton from '../IconButton';
 import Icon from '../Icon';
 import Input from '../Input';
 import Label from '../Label';
@@ -80,17 +80,18 @@ const SearchField = forwardRef((props, ref) => {
         {
           !hasNoClearButton &&
           state.value !== '' &&
-          <Button
-            variant="icon"
-            sx={{ position: 'absolute', top: 8, right: 10 }}
+          <IconButton
+            icon={CloseIcon}
+            sx={{
+              position: 'absolute',
+              top: 8,
+              right: 10,
+              path: {
+                fill: 'text.secondary',
+              },
+            }}
             {...clearButtonProps}
-          >
-            <Icon
-              icon={CloseIcon}
-              variant="forms.search.clearButtonIcon"
-              size={22}
-            />
-          </Button>
+          />
         }
       </Box>
     </Box>
