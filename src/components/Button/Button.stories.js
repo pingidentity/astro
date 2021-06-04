@@ -5,6 +5,12 @@ import Icon from '../Icon';
 import Text from '../Text';
 import { buttonVariants } from '../../utils/devUtils/constants/variants';
 
+// removing the iconButton variants from this story.
+const variants = buttonVariants;
+delete variants.ICON;
+delete variants.ICON_BUTTON;
+delete variants.INVERTED;
+
 export default {
   title: 'Button',
   component: Button,
@@ -12,9 +18,9 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: Object.values(buttonVariants),
+        options: Object.values(variants),
       },
-      defaultValue: Object.values(buttonVariants)[0],
+      defaultValue: Object.values(variants)[0],
     },
   },
 };
@@ -28,18 +34,6 @@ export const Default = args => (
 export const Disabled = () => (
   <Button isDisabled>
     Button Text
-  </Button>
-);
-
-const EditIcon = props => (
-  <svg viewBox="0 0 24 24" {...props}>
-    <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-  </svg>
-);
-
-export const IconButton = args => (
-  <Button {...args} variant="icon">
-    <Icon icon={EditIcon} size={20} />
   </Button>
 );
 
@@ -61,5 +55,11 @@ export const TextIconButton = () => (
 export const TextButton = () => (
   <Button mb="sm" variant="text">
     <Text variant="label" color="active"> + Add Option</Text>
+  </Button>
+);
+
+export const InlineButton = () => (
+  <Button mb="sm" variant="inline">
+    Inline
   </Button>
 );

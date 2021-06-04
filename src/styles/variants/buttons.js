@@ -1,4 +1,4 @@
-import { text } from './text';
+import { text as textVariants } from './text';
 
 const base = {
   cursor: 'pointer',
@@ -10,7 +10,7 @@ const base = {
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '2px',
-  ...text.buttonLabel,
+  ...textVariants.buttonLabel,
 };
 
 const defaultActive = {
@@ -36,7 +36,216 @@ const defaultFocus = {
   boxShadow: 'focus',
 };
 
-export const buttons = {
+const iconButton = {
+  appearance: 'none',
+  alignItems: 'center',
+  alignSelf: 'baseline',
+  display: 'inline-flex !important',
+  flexGrow: 0,
+  flexShrink: 0,
+  borderRadius: '100%',
+  cursor: 'pointer',
+  bg: 'transparent',
+  p: '3px',
+  path: {
+    fill: 'active',
+  },
+  outline: 'none',
+  '&.is-hovered': {
+    bg: 'accent.90',
+  },
+  '&.is-pressed': {
+    'path': {
+      fill: 'white',
+    },
+    bg: 'active',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+// TODO: Remove this variant in Astro-UI 1.0.0
+const icon = {
+  p: '3px',
+  alignSelf: 'flex-start',
+  flexGrow: 0,
+  borderRadius: '100%',
+  cursor: 'pointer',
+  bg: 'transparent',
+  'path': {
+    fill: 'text.secondary',
+  },
+  outline: 'none',
+  color: 'white',
+  '&.is-hovered': {
+    bg: 'accent.90',
+  },
+  '&.is-pressed': {
+    'path': {
+      fill: 'white',
+    },
+    bg: 'active',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const primary = {
+  ...base,
+  bg: 'active',
+  border: '1px solid',
+  borderColor: 'active',
+  color: 'white',
+  '&.is-hovered': {
+    bg: 'accent.40',
+    border: '1px solid',
+    borderColor: 'accent.40',
+    color: 'white',
+    boxShadow: 'standard',
+  },
+  '&.is-pressed': {
+    bg: 'accent.20',
+    border: '1px solid',
+    borderColor: 'accent.20',
+    color: 'white',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const success = {
+  ...base,
+  bg: 'success.bright',
+  border: '1px solid',
+  borderColor: 'success.bright',
+  color: 'white',
+};
+
+const critical = {
+  ...base,
+  bg: 'critical.bright',
+  border: '1px solid',
+  borderColor: 'critical.bright',
+  color: 'white',
+};
+
+const inverted = {
+  ...iconButton,
+  bg: 'active',
+  borderColor: 'active',
+  'path': {
+    fill: 'white',
+  },
+  '&.is-hovered': {
+    bg: 'accent.40',
+    borderColor: 'accent.40',
+    color: 'white',
+    boxShadow: 'standard',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-pressed': {
+    bg: 'accent.20',
+    borderColor: 'accent.20',
+    color: 'white',
+  },
+};
+
+const inline = {
+  ...base,
+  bg: 'white',
+  height: '26px',
+  lineHeight: '26px',
+  fontSize: '14px',
+  borderRadius: '15px',
+  border: '1px solid',
+  borderColor: 'active',
+  alignSelf: 'center',
+  paddingTop: '0px',
+  paddingBottom: '0px',
+  '&.is-hovered': {
+    ...defaultHover,
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const text = {
+  ...base,
+  bg: 'transparent',
+  border: '1px solid',
+  borderColor: 'transparent',
+  color: 'active',
+  height: 'auto',
+  padding: '0',
+  '&.is-hovered': {
+    textDecoration: 'underline',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const rocker = {
+  ...base,
+  height: '26px',
+  lineHeight: '26px',
+  fontSize: '14px',
+  borderRadius: '15px',
+  alignSelf: 'center',
+  paddingTop: '0px',
+  paddingBottom: '0px',
+  textTransform: 'uppercase',
+  bg: 'accent.95',
+  '&.is-selected': {
+    color: 'white',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const comboBox = {
+  position: 'absolute',
+  bg: 'transparent',
+  color: 'black',
+  padding: 0,
+  right: 'sm',
+  top: '50%',
+  transform: 'translateY(-50%)',
+};
+
+const danger = {
+  ...base,
+  bg: 'white',
+  border: '1px solid',
+  borderColor: 'critical.bright',
+  color: 'critical.bright',
+  '&.is-hovered': {
+    ...defaultHover,
+    color: 'critical.bright',
+    borderColor: 'critical.bright',
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+    bg: 'critical.bright',
+    borderColor: 'critical.bright',
+    color: 'white',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+export default {
   default: {
     ...base,
     bg: 'white',
@@ -52,151 +261,15 @@ export const buttons = {
       ...defaultFocus,
     },
   },
-  primary: {
-    ...base,
-    bg: 'active',
-    border: '1px solid',
-    borderColor: 'active',
-    color: 'white',
-    '&.is-hovered': {
-      bg: 'accent.40',
-      border: '1px solid',
-      borderColor: 'accent.40',
-      color: 'white',
-      boxShadow: 'standard',
-    },
-    '&.is-pressed': {
-      bg: 'accent.20',
-      border: '1px solid',
-      borderColor: 'accent.20',
-      color: 'white',
-    },
-    '&.is-focused': {
-      ...defaultFocus,
-    },
-  },
-  text: {
-    ...base,
-    bg: 'transparent',
-    border: '1px solid',
-    borderColor: 'transparent',
-    color: 'active',
-    height: 'auto',
-    padding: '0',
-    '&.is-hovered': {
-      textDecoration: 'underline',
-    },
-    '&.is-focused': {
-      ...defaultFocus,
-    },
-  },
-  success: {
-    ...base,
-    bg: 'success.bright',
-    border: '1px solid',
-    borderColor: 'success.bright',
-    color: 'white',
-  },
-  critical: {
-    ...base,
-    bg: 'critical.bright',
-    border: '1px solid',
-    borderColor: 'critical.bright',
-    color: 'white',
-  },
-  danger: {
-    ...base,
-    bg: 'white',
-    border: '1px solid',
-    borderColor: 'critical.bright',
-    color: 'critical.bright',
-    '&.is-hovered': {
-      ...defaultHover,
-      color: 'critical.bright',
-      borderColor: 'critical.bright',
-    },
-    '&.is-pressed': {
-      ...defaultActive,
-      bg: 'critical.bright',
-      borderColor: 'critical.bright',
-      color: 'white',
-    },
-    '&.is-focused': {
-      ...defaultFocus,
-    },
-  },
-  icon: {
-    alignSelf: 'flex-start',
-    flexGrow: 0,
-    borderRadius: '100%',
-    cursor: 'pointer',
-    bg: 'transparent',
-    'path': {
-      fill: 'text.secondary',
-    },
-    outline: 'none',
-    color: 'white',
-    '&.is-hovered': {
-      bg: 'accent.90',
-    },
-    '&.is-pressed': {
-      'path': {
-        fill: 'white',
-      },
-      bg: 'active',
-    },
-    '&.is-focused': {
-      ...defaultFocus,
-    },
-  },
-  inline: {
-    ...base,
-    bg: 'white',
-    height: '26px',
-    lineHeight: '26px',
-    fontSize: '14px',
-    borderRadius: '15px',
-    border: '1px solid',
-    borderColor: 'active',
-    alignSelf: 'center',
-    paddingTop: '0px',
-    paddingBottom: '0px',
-    '&.is-hovered': {
-      ...defaultHover,
-    },
-    '&.is-pressed': {
-      ...defaultActive,
-    },
-    '&.is-focused': {
-      ...defaultFocus,
-    },
-  },
-  rocker: {
-    ...base,
-    height: '26px',
-    lineHeight: '26px',
-    fontSize: '14px',
-    borderRadius: '15px',
-    alignSelf: 'center',
-    paddingTop: '0px',
-    paddingBottom: '0px',
-    textTransform: 'uppercase',
-    bg: 'accent.95',
-    '&.is-selected': {
-      color: 'white',
-    },
-    '&.is-focused': {
-      ...defaultFocus,
-    },
-  },
-};
-
-buttons.comboBox = {
-  position: 'absolute',
-  bg: 'transparent',
-  color: 'black',
-  padding: 0,
-  right: 'sm',
-  top: '50%',
-  transform: 'translateY(-50%)',
+  iconButton,
+  icon,
+  comboBox,
+  rocker,
+  inline,
+  inverted,
+  critical,
+  success,
+  text,
+  danger,
+  primary,
 };

@@ -46,7 +46,7 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-  size: '22',
+  size: '20px',
 };
 Icon.displayName = 'Icon';
 
