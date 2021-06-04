@@ -3,7 +3,7 @@ import colors, { accent, line, shadow, focus } from './colors';
 import { fontSizes, fontWeights, textColors } from './text';
 import breakpoints from './breakpoints';
 import forms from './forms';
-import variants, { buttons, text } from './variants';
+import { variants, buttons, text } from './variants';
 
 export default {
   name: 'Astro',
