@@ -1,7 +1,7 @@
 {
-  "name": "@pingux/branding-templates",
+  "name": "@pingux/branding-themes",
   "version": "0.22.1",
-  "description": "Branding templates for end-user projects",
+  "description": "Branding themes for end-user projects",
   "scripts": {
     "build": "rm -rf ./build && npm-run-all build:*",
     "build:tokens": "node ./buildTokens.js",
