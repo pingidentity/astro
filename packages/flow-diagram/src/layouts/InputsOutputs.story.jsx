@@ -255,7 +255,7 @@ export const InputsOutputs = () => {
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#228C22',
         },
-        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START' }]);
+        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false }]);
 
     const [diagramLinks, setDiagramLinks] = useState([
         { 'from': 'START', 'to': 'registration', 'key': 'START_registration' },

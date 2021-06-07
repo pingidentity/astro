@@ -32,7 +32,8 @@ export const Errors = () => {
             'text': 'Start',
             'loc': '0 60',
             'id': 'START',
-            'errorMessage': 'This is a start error'
+            'errorMessage': 'This is a start error',
+            hasIO: false,
         },
     ];
 

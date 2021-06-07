@@ -5,7 +5,7 @@ import Icon from '@mdi/react';
 import { mdiSourceBranch } from '@mdi/js';
 import ReactDOMServer from 'react-dom/server';
 import { COLORS } from '../../constants';
-import { toNode } from '../nodes';
+import { toNode, bottomNode } from '../nodes';
 import { svgComponentToBase64, encodeSvg, getIfLengthGreater } from '../templateUtils';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
@@ -61,6 +61,7 @@ export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height} = {})
             new go.Binding('source', 'iconSrc'),
         ),
         toNode({ color }, { margin: new go.Margin(0, 0, 0, 6) }),
+        bottomNode({ margin: new go.Margin(38, 0, 0, 6) }),
         )
     );
 };

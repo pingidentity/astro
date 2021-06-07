@@ -5,7 +5,7 @@ import { mdiFlag } from '@mdi/js';
 import { Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import { COLORS } from '../../constants';
-import { fromNode } from '../nodes';
+import { fromNode, bottomNode } from '../nodes';
 import { svgComponentToBase64, encodeSvg, getIfLengthGreater } from '../templateUtils';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
@@ -91,6 +91,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
             ),
             $(go.Picture, { source: svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />), width: 25, height: 25, margin: new go.Margin(0, 0, 0, 0), cursor: 'normal' }),
             fromNode({ color: COLORS.BLUE }, { margin: new go.Margin(0, 4, 0, 0) }),
+            bottomNode({ margin: new go.Margin(38, 0, 0, 0) }),
         )
     );
 };
