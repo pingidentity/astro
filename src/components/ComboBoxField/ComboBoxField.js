@@ -14,6 +14,7 @@ import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { FocusScope } from '@react-aria/focus';
 
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import ComboBoxInput from '../ComboBox';
 import PopoverContainer from '../PopoverContainer';
 import ListBox from '../ListBox';
@@ -52,6 +53,8 @@ const ComboBoxField = forwardRef((props, ref) => {
     isDefaultOpen,
     isOpen,
     onOpenChange,
+    loadingState,
+    onLoadMore,
     defaultInputValue,
     onInputChange,
     inputValue,
@@ -84,6 +87,8 @@ const ComboBoxField = forwardRef((props, ref) => {
     defaultOpen: isDefaultOpen,
     isOpen,
     onOpenChange,
+    loadingState,
+    onLoadMore,
     defaultInputValue,
     onInputChange,
     inputValue,
@@ -161,6 +166,8 @@ const ComboBoxField = forwardRef((props, ref) => {
         hasAutoFocus={state.focusStrategy}
         state={state}
         hasVirtualFocus
+        isLoading={loadingState === loadingStates.LOADING_MORE}
+        onLoadMore={onLoadMore}
         {...listBoxProps}
       />
       <DismissButton onDismiss={() => state.close()} />
@@ -235,6 +242,8 @@ ComboBoxField.propTypes = {
    * `(isOpen: boolean) => void`
    */
   onOpenChange: PropTypes.func,
+  loadingState: PropTypes.oneOf(Object.values(loadingStates)),
+  onLoadMore: PropTypes.func,
   /** The default value of the ComboBox input (uncontrolled). */
   defaultInputValue: PropTypes.string,
   /** The value of the ComboBox input (controlled). */

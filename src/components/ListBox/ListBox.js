@@ -9,6 +9,7 @@ import { ListLayout } from '@react-stately/layout';
 import { ListBoxContext } from './ListBoxContext';
 import { Option } from './index.js';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import Loader from '../Loader';
 
 export const collectionTypes = {
   ITEM: 'item',
@@ -135,6 +136,8 @@ const ListBox = forwardRef((props, ref) => {
                 hasVirtualFocus={hasVirtualFocus}
               />
             );
+          } else if (type === collectionTypes.LOADER) {
+            return <Loader variant="loader.withinListbox" aria-label="Loading more..." />;
           }
 
           return null;

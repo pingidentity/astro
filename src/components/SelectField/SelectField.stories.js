@@ -1,5 +1,6 @@
-import { OverlayProvider } from '@react-aria/overlays';
 import React, { useState } from 'react';
+import { OverlayProvider } from '@react-aria/overlays';
+import { useAsyncList } from '@react-stately/data';
 import { SelectField, Item, Separator } from '../../index';
 
 export default {
@@ -101,4 +102,33 @@ DynamicItems.parameters = {
   docs: {
     storyDescription: 'If using a long list or one that is dynamically updated, use the `items` prop and a function to render the children. See [the React Stately docs](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections) for more information about this.',
   },
+};
+
+export const AsyncLoading = () => {
+  // This example uses `useAsyncList` from "@react-stately/data"
+  const list = useAsyncList({
+    async load({ signal, cursor }) {
+      const res = await fetch(cursor || 'https://pokeapi.co/api/v2/pokemon', { signal });
+      const json = await res.json();
+      // The API is too fast sometimes, so make it take longer so we can see the spinner
+      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+      return {
+        items: json.results,
+        cursor: json.next,
+      };
+    },
+  });
+
+  return (
+    <OverlayProvider>
+      <SelectField
+        label="Pick a Pokemon"
+        items={list.items}
+        isLoading={list.isLoading}
+        onLoadMore={list.loadMore}
+      >
+        {item => <Item key={item.name}>{item.name}</Item>}
+      </SelectField>
+    </OverlayProvider>
+  );
 };
