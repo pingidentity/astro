@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.13.0...@pingux/astro@0.14.0) (2021-06-07)
+
+
+### Features
+
+* [UIP-4147] Icon button independent component ([1341a66](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1341a665c0e0c2b1b8f81c3f7b49216d4939a0e2))
+* [UIP-4411] ListItem selected state ([022356f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/022356f0a1ad10fd8f2ce060e46b91174f788bb0))
+* [UIP-4500] Scroll callbacks for listbox and add loaders to async state for SelectField and ComboBoxField ([8344638](https://gitlab.corp.pingidentity.com/ux/pingux/commit/83446382baac7514e8fee22cc2976e2fd7ed32ac))
+
+
+
+
+
 # [0.13.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.12.0...@pingux/astro@0.13.0) (2021-06-03)
 
 
