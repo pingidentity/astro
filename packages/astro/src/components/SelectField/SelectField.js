@@ -18,6 +18,7 @@ import Text from '../Text';
 import ListBox from '../ListBox';
 import PopoverContainer from '../PopoverContainer';
 import { modes } from '../Label/constants';
+import Loader from '../Loader';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -155,6 +156,9 @@ const SelectField = forwardRef((props, ref) => {
     minWidth: buttonWidth,
   };
 
+  const isLoadingInitial = props.isLoading && state.collection.size === 0;
+  const isLoadingMore = props.isLoading && state.collection.size > 0;
+
   // Wrap in <FocusScope> so that focus is restored back to the
   // trigger when the popup is closed. In addition, add hidden
   // <DismissButton> components at the start and end of the list
@@ -167,8 +171,10 @@ const SelectField = forwardRef((props, ref) => {
         hasNoEmptySelection
         hasAutoFocus={state.focusStrategy || true}
         state={state}
-        {...menuProps}
         variant="listBox.selectField"
+        isLoading={isLoadingMore}
+        onLoadMore={onLoadMore}
+        {...menuProps}
       />
       <DismissButton onDismiss={() => state.close()} />
     </FocusScope>
@@ -214,6 +220,7 @@ const SelectField = forwardRef((props, ref) => {
                 : <Text variant="placeholder">{props.labelMode === modes.FLOAT ? '' : defaultText}</Text>
             }
           </Box>
+          {isLoadingInitial && <Loader variant="loader.withinInput" />}
           <Box as="span" aria-hidden="true" variant="forms.select.arrow">
             <Icon
               icon={MenuDown}
@@ -256,7 +263,7 @@ SelectField.propTypes = {
   isDefaultOpen: PropTypes.bool,
   /** Whether the input is disabled. */
   isDisabled: PropTypes.bool,
-  /** @ignore Whether the items are currently loading. */
+  /** Whether the items are currently loading. */
   isLoading: PropTypes.bool,
   /** @ignore Whether the menu should automatically flip direction when space is limited. */
   isNotFlippable: PropTypes.bool,
@@ -284,7 +291,6 @@ SelectField.propTypes = {
   /** Determines the type of label applied to the component. */
   status: PropTypes.oneOf(Object.values(statuses)),
   /**
-   * @ignore
    * Handler that is called when more items should be loaded, e.g. while scrolling near the bottom.
    *
    * () => any

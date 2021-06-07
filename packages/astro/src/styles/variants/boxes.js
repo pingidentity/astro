@@ -67,12 +67,21 @@ const chip = {
   borderRadius: '5px',
 };
 
+const inputInContainerSlot = {
+  position: 'absolute',
+  bg: 'transparent',
+  right: 'sm',
+  top: '50%',
+  transform: 'translateY(-50%)',
+};
+
 export default {
   base,
-  panel,
-  radioContainer,
-  radioCheckedContent,
-  listItem,
-  chip,
   card,
+  chip,
+  inputInContainerSlot,
+  listItem,
+  panel,
+  radioCheckedContent,
+  radioContainer,
 };

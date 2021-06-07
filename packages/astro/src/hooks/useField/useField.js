@@ -45,6 +45,7 @@ const useField = (props = {}) => {
     onClear,
     onFocus,
     onFocusChange,
+    onLoadMore,
     onOpenChange,
     onSelectionChange,
     placeholder,
