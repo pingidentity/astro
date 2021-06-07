@@ -214,13 +214,9 @@ const rocker = {
 };
 
 const comboBox = {
-  position: 'absolute',
   bg: 'transparent',
   color: 'black',
   padding: 0,
-  right: 'sm',
-  top: '50%',
-  transform: 'translateY(-50%)',
 };
 
 const danger = {

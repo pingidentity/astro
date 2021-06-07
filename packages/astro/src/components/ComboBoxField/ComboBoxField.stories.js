@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { action } from '@storybook/addon-actions';
 import { useFilter } from '@react-aria/i18n';
+import { useAsyncList } from '@react-stately/data';
 import { Item, OverlayProvider } from '../../index';
 import ComboBoxField from './ComboBoxField';
 
@@ -21,6 +22,7 @@ const actions = {
   onSelectionChange: action('onSelectionChange'),
   onBlur: action('onBlur'),
   onFocus: action('onFocus'),
+  onLoadMore: action('onLoadMore'),
 };
 
 export const Default = () => (
@@ -30,6 +32,52 @@ export const Default = () => (
     </ComboBoxField>
   </OverlayProvider>
 );
+
+export const AsyncLoading = () => {
+  // This example uses `useAsyncList` from "@react-stately/data"
+  const list = useAsyncList({
+    async load({ signal, cursor, filterText }) {
+      if (cursor) {
+        // eslint-disable-next-line
+        cursor = cursor.replace(/^http:\/\//i, 'https://');
+      }
+
+      // If no cursor is available, then we're loading the first page,
+      // filtering the results returned via a query string that
+      // mirrors the ComboBox input text.
+      // Otherwise, the cursor is the next URL to load,
+      // as returned from the previous page.
+      const res = await fetch(
+        cursor || `https://swapi.dev/api/people/?search=${filterText}`,
+        { signal },
+      );
+      const json = await res.json();
+      // The API is too fast sometimes, so make it take longer so we can see the loader
+      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+
+      return {
+        items: json.results,
+        cursor: json.next,
+      };
+    },
+  });
+
+  return (
+    <OverlayProvider>
+      <ComboBoxField
+        {...actions}
+        label="Example label"
+        items={list.items}
+        inputValue={list.filterText}
+        onInputChange={list.setFilterText}
+        loadingState={list.loadingState}
+        onLoadMore={list.loadMore}
+      >
+        {item => <Item key={item.name}>{item.name}</Item>}
+      </ComboBoxField>
+    </OverlayProvider>
+  );
+};
 
 export const ControlledInput = () => {
   const [inputValue, setInputValue] = useState('');

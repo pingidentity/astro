@@ -1,10 +1,15 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { SelectField, Item } from '../../index';
 
+const items = [
+  { name: 'a' },
+  { name: 'b' },
+  { name: 'c' },
+];
 const testId = 'test-dropdown';
 const controlTestId = `${testId}-input`;
 const testValue = 'test';
@@ -15,12 +20,11 @@ const defaultProps = {
     'data-testid': controlTestId,
   },
   value: testValue,
+  items,
 };
-const getComponent = (props = {}) => render((
+const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <SelectField {...defaultProps} {...props}>
-    <Item key="a">a</Item>
-    <Item key="b">b</Item>
-    <Item key="c">c</Item>
+    {item => <Item key={item.name}>{item.name}</Item>}
   </SelectField>
 ));
 
@@ -203,4 +207,42 @@ test('clicking outside of the listbox popup closes it', () => {
 
   userEvent.click(global.document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+});
+
+
+describe('async loading', () => {
+  test('displays a loader while loading', () => {
+    const { rerender } = getComponent({ items: [], isLoading: true });
+
+    const button = screen.getByRole('button');
+    const loader = within(button).getByRole('progressbar');
+    expect(loader).toHaveAttribute('aria-label', 'Loading...');
+    expect(loader).not.toHaveAttribute('aria-valuenow');
+
+    getComponent({ items: [] }, { renderFn: rerender });
+
+    expect(loader).not.toBeInTheDocument();
+  });
+
+  test('displays a loader inside the listbox when loading more', () => {
+    const newItems = [{ name: 'Foo' }, { name: 'Bar' }];
+    const { rerender } = getComponent({ items: newItems, isLoading: true });
+
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+
+    const listbox = screen.getByRole('listbox');
+    let options = within(listbox).getAllByRole('option');
+    expect(options.length).toBe(2);
+
+    const loader = within(listbox).getByRole('progressbar');
+    expect(loader).toHaveAttribute('aria-label', 'Loading more...');
+    expect(loader).not.toHaveAttribute('aria-valuenow');
+
+    getComponent({ items: newItems }, { renderFn: rerender });
+
+    options = within(listbox).getAllByRole('option');
+    expect(options.length).toBe(2);
+    expect(loader).not.toBeInTheDocument();
+  });
 });

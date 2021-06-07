@@ -1,29 +1,45 @@
 import { keyframes } from '@emotion/react';
 
 const container = {
-  flexDirection: 'row',
+  color: 'currentColor',
+  fontSize: '1em',
+};
+
+const withinInput = {
+  color: 'neutral.60',
+  fontSize: '6px',
+  alignItems: 'center',
+  marginRight: 'xs',
+};
+
+const withinListbox = {
+  color: 'neutral.60',
+  fontSize: '6px',
+  padding: 'md',
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
 const pulse = keyframes`
-    0% {
+  \ 0% {
         opacity: 0;
     }
 
-    50% {
+  \ 50% {
         opacity: 0;
     }
-    80% {
+  \ 80% {
         opacity: 1;
     }
-    100% {
+  \ 100% {
         opacity: 0;
     }
 
 `;
 
 const wait = keyframes`
-    0% { opacity: 0; }
-    100% { opacity: 0; }
+  \ 0% { opacity: 0; }
+  \ 100% { opacity: 0; }
 `;
 
 const animationSettings = '1s ease-out infinite';
@@ -59,4 +75,6 @@ export default {
   dotCenter,
   dotRight,
   container,
+  withinInput,
+  withinListbox,
 };

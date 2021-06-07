@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+
+import { render, screen, act, within } from '../../utils/testUtils/testWrapper';
 import { ComboBoxField, Item, OverlayProvider } from '../../index';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -14,7 +16,7 @@ const defaultProps = {
   label: 'Test Label',
 };
 
-const getComponent = (props = {}) => render((
+const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <ComboBoxField {...defaultProps} {...props}>
       {item => <Item key={item.id}>{item.name}</Item>}
@@ -41,7 +43,6 @@ const ComboBoxWithCustomFilter = () => {
     </ComboBoxField>
   );
 };
-
 
 beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
@@ -318,4 +319,149 @@ test('should be able to use controlled filtering', async () => {
   userEvent.type(input, 'k');
   options = await screen.findAllByRole('option');
   expect(options[0]).toHaveTextContent(items[1].name);
+});
+
+describe('loadingState', () => {
+  it('combobox should not render a loader if menu is not open', () => {
+    const { rerender } = getComponent({ loadingState: loadingStates.LOADING });
+    act(() => { jest.advanceTimersByTime(500); });
+    // First time load will show progress bar so user can know that items are being fetched
+    expect(screen.getByRole('progressbar')).toBeTruthy();
+
+    getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender });
+
+    expect(() => screen.getByRole('progressbar')).toThrow();
+  });
+
+  test('it renders a loader if menu is not open but menuTrigger is "manual"', () => {
+    const { rerender } = getComponent({ loadingState: loadingStates.LOADING, menuTrigger: 'manual' });
+    const input = screen.getByRole('combobox');
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    act(() => { jest.advanceTimersByTime(500); });
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+
+    getComponent({ loadingState: loadingStates.FILTERING, menuTrigger: 'manual' }, { renderFn: rerender });
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+
+    getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+  });
+
+  test('it should not render a loader until a delay of 500ms passes (loadingState: loading)', () => {
+    getComponent({ loadingState: loadingStates.LOADING });
+    const input = screen.getByRole('combobox');
+
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+
+    const button = screen.getByRole('button');
+
+    userEvent.click(button);
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+  });
+
+  test('it should not render a loader until a delay of 500ms passes and the menu is open (loadingState: filtering)', () => {
+    getComponent({ loadingState: loadingStates.FILTERING });
+    const input = screen.getByRole('combobox');
+
+    act(() => { jest.advanceTimersByTime(500); });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    const button = screen.getByRole('button');
+
+    userEvent.click(button);
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+  });
+
+  test('hides the loader when loadingState changes to a non-loading state', () => {
+    const { rerender } = getComponent({ loadingState: loadingStates.FILTERING });
+    const input = screen.getByRole('combobox');
+    const button = screen.getByRole('button');
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    userEvent.click(button);
+    act(() => { jest.advanceTimersByTime(500); });
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+
+    getComponent({ loadingState: loadingStates.IDLE }, { renderFn: rerender });
+    const listbox = screen.getByRole('listbox');
+    expect(listbox).toBeVisible();
+    expect(() => screen.getByRole('progressbar')).toThrow();
+  });
+
+  test('combobox should hide the loader when if the menu closes', () => {
+    getComponent({ loadingState: loadingStates.FILTERING });
+    const input = screen.getByRole('combobox');
+    const button = screen.getByRole('button');
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    userEvent.click(button);
+    act(() => { jest.advanceTimersByTime(500); });
+    const listbox = screen.getByRole('listbox');
+    expect(listbox).toBeVisible();
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+
+    userEvent.click(button);
+    expect(() => screen.getByRole('progressbar')).toThrow();
+    expect(() => screen.getByRole('listbox')).toThrow();
+  });
+
+  test('cancels the 500ms loader delay timer if the loading finishes first', () => {
+    const { rerender } = getComponent({ loadingState: loadingStates.LOADING, menuTrigger: 'manual' });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    getComponent({ loadingState: loadingStates.IDLE }, { renderFn: rerender });
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+  });
+
+  test('should not reset the 500ms loader delay timer when loadingState changes from loading to filtering', () => {
+    const { rerender } = getComponent({ loadingState: loadingStates.LOADING, menuTrigger: 'manual' });
+    const input = screen.getByRole('combobox');
+
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    getComponent({ loadingState: loadingStates.FILTERING, menuTrigger: 'manual' }, { renderFn: rerender });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+  });
+
+  test('combobox should reset the 500ms loader delay timer when input text changes', () => {
+    getComponent({ loadingState: loadingStates.LOADING, menuTrigger: 'manual' });
+    const input = screen.getByRole('combobox');
+
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    userEvent.type(input, 'O');
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    act(() => { jest.advanceTimersByTime(250); });
+    expect(() => within(input).getByRole('progressbar')).toBeTruthy();
+  });
+
+  test('should render the loader in the listbox when loadingState="loadingMore"', () => {
+    getComponent({ loadingState: loadingStates.LOADING_MORE });
+    const button = screen.getByRole('button');
+
+    expect(() => screen.getByRole('progressbar')).toThrow();
+
+    userEvent.click(button);
+
+    const listbox = screen.getByRole('listbox');
+    expect(listbox).toBeVisible();
+
+    const loader = within(listbox).getByRole('progressbar');
+    expect(loader).toBeTruthy();
+    expect(loader).toHaveAttribute('aria-label', 'Loading more...');
+  });
 });
