@@ -28,8 +28,8 @@ const DotsVerticalIcon = props => (
   </svg>
 );
 
-export const Default = () => (
-  <ListItem>
+export const Default = args => (
+  <ListItem {...args}>
     <Box isRow mr="auto" alignSelf="center" >
       <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
       <Text variant="itemTitle" alignSelf="center">Form 1</Text>
