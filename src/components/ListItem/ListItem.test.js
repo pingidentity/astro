@@ -16,3 +16,9 @@ test('renders ListItem component title', () => {
   const title = screen.getByRole('listitem');
   expect(title).toBeInTheDocument();
 });
+
+test('renders ListItem component with selected state', () => {
+  getComponent({ isSelected: true });
+  const title = screen.getByRole('listitem');
+  expect(title).toHaveClass('is-selected');
+});

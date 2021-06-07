@@ -47,7 +47,10 @@ const listItem = {
   minHeight: '80px',
   justifyContent: 'center',
   bg: 'accent.99',
-  '&:hover': {
+  '&.is-selected': {
+    bg: 'white',
+  },
+  '&.is-hovered': {
     bg: 'white',
   },
 };
