@@ -2,6 +2,30 @@ import React, { useState } from 'react';
 import RockerButtonGroup from '../RockerButtonGroup';
 import RockerButton from '../RockerButton';
 
+export default {
+  title: 'RockerButtonGroup',
+  component: RockerButtonGroup,
+  argTypes: {
+    isDisabled: {
+      defaultValue: false,
+    },
+    defaultSelectedKey: {},
+    selectedKey: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
+};
+
+export const Default = ({ ...args }) => (
+  <RockerButtonGroup {...args}>
+    <RockerButton name="and" key="and">And</RockerButton>
+    <RockerButton name="or" key="or" >Or</RockerButton>
+    <RockerButton name="maybe" key="maybe" >Maybe</RockerButton>
+  </RockerButtonGroup>
+);
+
 export const Uncontrolled = () => (
   <RockerButtonGroup>
     <RockerButton name="and" key="and">And</RockerButton>

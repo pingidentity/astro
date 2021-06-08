@@ -83,7 +83,8 @@ DropdownField.propTypes = {
   id: PropTypes.string,
   /** Whether the Dropdown is required. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/required). */
   isRequired: PropTypes.bool,
-  /** Whether the Dropdown can be interacted with but cannot have its selection state changed. */
+  /** @ignore Whether the Dropdown can be interacted
+   * with but cannot have its selection state changed. */
   isReadOnly: PropTypes.bool,
   /** Whether the element should receive focus on render. */
   hasAutoFocus: PropTypes.bool,

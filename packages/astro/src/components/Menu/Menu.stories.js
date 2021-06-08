@@ -8,11 +8,55 @@ export default {
   title: 'Menu',
   component: Menu,
   parameters: { actions: { argTypesRegex: '^on.*' } },
+  argTypes: {
+    selectionMode: {},
+    isDisabled: {},
+    'aria-label': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-labelledby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-describedby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-details': {
+      control: {
+        type: 'text',
+      },
+    },
+    isSelected: {
+      control: {
+        type: 'none',
+      },
+    },
+    disabledKeys: {
+      control: {
+        type: 'none',
+      },
+    },
+    defaultSelectedKeys: {
+      control: {
+        type: 'none',
+      },
+    },
+    selectedKeys: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => {
+export const Default = ({ ...args }) => {
   return (
-    <Menu aria-label="Example Menu">
+    <Menu aria-label="Example Menu" {...args}>
       <Item key="edit" textValue="Edit">
         <Text>Edit</Text>
       </Item>

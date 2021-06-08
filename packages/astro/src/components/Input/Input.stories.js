@@ -4,10 +4,18 @@ import Input from '.';
 export default {
   title: 'Form/Base Components/Input',
   component: Input,
+  argTypes: {
+    placeholder: {
+      defaultValue: 'This is a basic input',
+    },
+    type: {},
+    name: {},
+    id: {},
+  },
 };
 
 export const Default = args => (
-  <Input placeholder="This is a basic input" {...args} />
+  <Input {...args} />
 );
 
 export const Password = args => (

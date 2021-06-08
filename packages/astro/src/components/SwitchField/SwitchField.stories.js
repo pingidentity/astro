@@ -1,15 +1,74 @@
 import React, { useState } from 'react';
 import SwitchField from '.';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/SwitchField',
   component: SwitchField,
+  argTypes: {
+    label: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Example Label',
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      defaultValue: 'my-switch',
+    },
+    name: {},
+    className: {},
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    isDisabled: {},
+    isRequired: {},
+    isReadOnly: {},
+    isDefaultSelected: {},
+    hasAutoFocus: {},
+    containerProps: {},
+    labelProps: {},
+    controlProps: {},
+    id: {},
+    'aria-label': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-labelledby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-describedby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-details': {
+      control: {
+        type: 'text',
+      },
+    },
+    isSelected: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => (
+export const Default = args => (
   <SwitchField
-    label="Example label"
-    value="my-switch"
+    {...args}
   />
 );
 

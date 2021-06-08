@@ -43,6 +43,7 @@ Panel.propTypes = {
 
 Panel.defaultProps = {
   width: '100%',
+  isVisible: false,
 };
 
 Panel.displayName = 'Panel';

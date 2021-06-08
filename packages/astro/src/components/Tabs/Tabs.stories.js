@@ -7,6 +7,26 @@ import Icon from '../Icon';
 export default {
   title: 'Tabs',
   component: Tabs,
+  argTypes: {
+    isDisabled: {},
+    orientation: {},
+    defaultSelectedKey: {},
+    selectedKey: {
+      control: {
+        type: 'none',
+      },
+    },
+    tabListProps: {
+      control: {
+        type: 'none',
+      },
+    },
+    tabPanelProps: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
 const tabs = [
@@ -15,8 +35,8 @@ const tabs = [
   { name: 'Tab 3', children: 'Tab 3 body' },
 ];
 
-export const Uncontrolled = () => (
-  <Tabs>
+export const Uncontrolled = args => (
+  <Tabs {...args}>
     {tabs.map(tab => (
       <Tab key={tab.name} title={tab.name}>
         {tab.children}

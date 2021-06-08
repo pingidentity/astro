@@ -1,14 +1,31 @@
 import React from 'react';
 import faker from 'faker';
 import Image from '.';
+import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 
 export default {
   title: 'Image',
   component: Image,
+  argTypes: {
+    isDisabled: {},
+    as: {
+      control: {
+        type: 'none',
+        options: htmlElements,
+      },
+      defaultValue: 'img',
+    },
+    src: {
+      control: {
+        type: 'none',
+      },
+      defaultValue: faker.image.imageUrl(150, 150, 'animals'),
+    },
+  },
 };
 
-export const Default = () => (
-  <Image src={faker.image.imageUrl(150, 150, 'animals')} />
+export const Default = ({ ...args }) => (
+  <Image {...args} />
 );
 
 export const Avatar = () => (

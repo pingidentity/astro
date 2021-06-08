@@ -122,7 +122,8 @@ test('clicking on the visible button opens the popuplist', () => {
 
 test('clicking on an option then renders its text in the button', () => {
   const defaultText = 'click me';
-  getComponent({ defaultText });
+  const placeholder = null;
+  getComponent({ defaultText, placeholder });
   const button = screen.getByRole('button');
   expect(button).toHaveTextContent(defaultText);
 

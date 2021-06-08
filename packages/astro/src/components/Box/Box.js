@@ -45,13 +45,15 @@ const Box = forwardRef((props, ref) => {
 });
 
 Box.propTypes = {
+  /** The background color of the box. */
+  bg: PropTypes.string,
   /** Whether the box is disabled. */
   isDisabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /** The base HTML tag name or React component type to render */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
-  /** When true, display as a row rather than a column */
+  /** When true, display as a row rather than a column. */
   isRow: PropTypes.bool,
-  /** Gap between items, whether in a row or column */
+  /** Gap between items, whether in a row or column. */
   gap: stylePropType,
 };
 
