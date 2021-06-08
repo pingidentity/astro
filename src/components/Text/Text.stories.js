@@ -12,12 +12,19 @@ export default {
         type: 'select',
         options: Object.values(textVariants),
       },
+      description: 'Text variant.',
       defaultValue: Object.values(textVariants)[0],
     },
     children: {
       control: {
         type: 'text',
       },
+      table: {
+        type: {
+          summary: 'string',
+        },
+      },
+      description: 'Text value.',
       defaultValue: 'Hi, this is some text!',
     },
     color: {
@@ -25,13 +32,25 @@ export default {
         type: 'select',
         options: [undefined, ...flatColorList.map(([colorName]) => colorName)],
       },
-      defaultValue: undefined,
+      table: {
+        type: {
+          summary: 'string',
+        },
+      },
+      description: 'Text color.',
+      defaultValue: 'black',
     },
     bg: {
       control: {
         type: 'select',
         options: flatColorList.map(([colorName]) => colorName),
       },
+      table: {
+        type: {
+          summary: 'string',
+        },
+      },
+      description: 'Background color.',
       defaultValue: 'white',
     },
   },

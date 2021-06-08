@@ -12,13 +12,26 @@ import {
 export default {
   title: 'PopoverMenu',
   component: PopoverMenu,
+  argTypes: {
+    align: {},
+    direction: {},
+    isDefaultOpen: {},
+    isNotClosedOnSelect: {},
+    isNotFlippable: {},
+    isOpen: {
+      onClick: { action: 'clicked' },
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => (
+export const Default = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
-    <PopoverMenu>
+    <PopoverMenu {...args}>
       <Button>Click me</Button>
       <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>

@@ -23,10 +23,10 @@ export default {
       defaultValue: 'white',
     },
     label: {
+      defaultValue: 'Label',
       control: {
         type: 'text',
       },
-      defaultValue: 'Label',
     },
   },
 };

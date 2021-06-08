@@ -25,6 +25,6 @@ PageHeader.displayName = 'PageHeader';
 export default PageHeader;
 
 PageHeader.propTypes = {
-  /** Title for the Page Header */
+  /** Title for the Page Header. */
   title: PropTypes.string,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '.';
 import { SelectField, Item, TextField } from '../../index';
 import { flatColorList } from '../../styles/colors.js';
+import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 
 export default {
   title: 'Box',
@@ -13,6 +14,20 @@ export default {
         options: flatColorList.map(([colorName]) => colorName),
       },
       defaultValue: 'active',
+    },
+    gap: {
+      control: {
+        type: 'text',
+      },
+      description: 'Gap between items, whether in a row or column. Numeric value paired with a unit. https://www.w3schools.com/cssref/css_units.asp',
+      defaultValue: '10px',
+    },
+    as: {
+      control: {
+        type: 'select',
+        options: htmlElements,
+      },
+      defaultValue: 'div',
     },
   },
 };

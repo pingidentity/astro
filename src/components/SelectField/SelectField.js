@@ -6,6 +6,8 @@ import { FocusScope } from '@react-aria/focus';
 import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useResizeObserver } from '@react-aria/utils';
 import MenuDown from 'mdi-react/MenuDownIcon';
+import useDeprecationWarning from '../../hooks/useDeprecationWarning';
+
 
 import statuses from '../../utils/devUtils/constants/statuses';
 import useField from '../../hooks/useField';
@@ -89,6 +91,11 @@ const SelectField = forwardRef((props, ref) => {
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => triggerRef.current);
+
+  if (defaultText) {
+    useDeprecationWarning('The "defaultText" prop for `SelectField` will be deprecated in Astro-UI 1.0.0, use the "placeholder" prop instead.');
+  }
+
   // Get props for child elements from useSelect
   const { labelProps, triggerProps, valueProps, menuProps } = useSelect(
     selectProps,
@@ -211,7 +218,7 @@ const SelectField = forwardRef((props, ref) => {
             {
               state.selectedItem
                 ? state.selectedItem.rendered
-                : <Text variant="placeholder">{props.labelMode === modes.FLOAT ? '' : defaultText}</Text>
+                : <Text variant="placeholder">{props.labelMode === modes.FLOAT ? '' : placeholder || defaultText}</Text>
             }
           </Box>
           <Box as="span" aria-hidden="true" variant="forms.select.arrow">
@@ -244,7 +251,7 @@ SelectField.propTypes = {
   direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /** The initial selected key in the collection (uncontrolled). */
   defaultSelectedKey: PropTypes.string,
-  /** Default text rendered if no option is selected. */
+  /** Default text rendered if no option is selected. Deprecated. */
   defaultText: PropTypes.string,
   /** Array of keys to disable within the options list. */
   disabledKeys: PropTypes.arrayOf(PropTypes.string),
@@ -279,7 +286,7 @@ SelectField.propTypes = {
   placeholder: PropTypes.string,
   /** The currently selected key in the collection (controlled). */
   selectedKey: PropTypes.string,
-  /** Determines the textarea status indicator and helper text styling. */
+  /** Determines the textarea status indicator and helper text styling. Eg. float. */
   labelMode: PropTypes.string,
   /** Determines the type of label applied to the component. */
   status: PropTypes.oneOf(Object.values(statuses)),
@@ -314,7 +321,7 @@ SelectField.propTypes = {
 };
 
 SelectField.defaultProps = {
-  defaultText: 'Select',
+  placeholder: 'Select',
   status: statuses.DEFAULT,
   align: 'start',
   direction: 'bottom',
