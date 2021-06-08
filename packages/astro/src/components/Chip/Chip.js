@@ -33,11 +33,11 @@ const Chip = React.forwardRef((props, ref) => {
 });
 
 Chip.propTypes = {
-  /** The text color of the chip */
+  /** The text color of the chip. */
   textColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** The background color of the chip */
+  /** The background color of the chip. */
   bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** The label of the chip */
+  /** The label of the chip. */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 

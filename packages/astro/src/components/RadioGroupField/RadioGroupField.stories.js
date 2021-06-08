@@ -1,14 +1,73 @@
 import React, { useState } from 'react';
 import RadioGroupField from '.';
 import RadioField from '../RadioField';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/RadioGroupField',
   component: RadioGroupField,
+  argTypes: {
+    label: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Pick one',
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    defaultValue: {
+      defaultValue: 'A',
+    },
+    orientation: {},
+    isDisabled: {},
+    isRequired: {},
+    name: {},
+    id: {},
+    'aria-label': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-labelledby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-describedby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-details': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-errormessage': {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => (
-  <RadioGroupField label="Pick one" defaultValue="A">
+export const Default = args => (
+  <RadioGroupField {...args}>
     <RadioField value="A" label="A" />
     <RadioField value="B" label="B" />
     <RadioField value="C" label="C" />

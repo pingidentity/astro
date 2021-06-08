@@ -1,6 +1,5 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
-
 import useField from '../../hooks/useField';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';

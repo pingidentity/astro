@@ -4,13 +4,13 @@ import { useSearchField } from '@react-aria/searchfield';
 import { useSearchFieldState } from '@react-stately/searchfield';
 import SearchIcon from 'mdi-react/SearchIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
-
 import useField from '../../hooks/useField';
 import Box from '../Box';
 import Button from '../Button';
 import Icon from '../Icon';
 import Input from '../Input';
 import Label from '../Label';
+
 
 /**
  * Renders a search field with associated controls including visual elements and keyboard

@@ -1,16 +1,58 @@
 import React, { useState } from 'react';
 import TextAreaField from '.';
 import Box from '../Box';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 
 export default {
   title: 'Form/TextAreaField',
   component: TextAreaField,
+  argTypes: {
+    label: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Example Label',
+    },
+    labelMode: {},
+    defaultValue: {},
+    placeholder: {},
+    name: {},
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    rows: {},
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    isDisabled: {},
+    isRequired: {},
+    isReadOnly: {},
+    hasAutoFocus: {},
+    isUnresizable: {},
+    id: {},
+    autocomplete: {},
+    className: {},
+    containerProps: {},
+    labelProps: {},
+    controlProps: {},
+    value: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => (
+export const Default = args => (
   <TextAreaField
-    label="Example label"
+    {...args}
   />
 );
 

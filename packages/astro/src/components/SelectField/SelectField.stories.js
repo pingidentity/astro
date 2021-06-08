@@ -1,15 +1,55 @@
 import { OverlayProvider } from '@react-aria/overlays';
 import React, { useState } from 'react';
 import { SelectField, Item, Separator } from '../../index';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/SelectField',
   component: SelectField,
+  argTypes: {
+    label: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'What\'s your favourite color?',
+    },
+    placeholder: {},
+    defaultText: {},
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    labelMode: {},
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    defaultSelectedKey: {},
+    disabledKeys: {},
+    name: {},
+    align: {},
+    direction: {},
+    hasNoEmptySelection: {},
+    isDefaultOpen: {},
+    isDisabled: {},
+    isOpen: {},
+    isRequired: {},
+    controlProps: {},
+    selectedKey: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => (
+export const Default = args => (
   <OverlayProvider>
-    <SelectField label="What's your favorite color?">
+    <SelectField {...args}>
       <Item key="red">Red</Item>
       <Item key="blue">Blue</Item>
       <Item key="yellow">Yellow</Item>

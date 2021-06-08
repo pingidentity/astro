@@ -4,11 +4,6 @@ import { useFilter } from '@react-aria/i18n';
 import { Item, OverlayProvider } from '../../index';
 import ComboBoxField from './ComboBoxField';
 
-export default {
-  title: 'Form/ComboBoxField',
-  component: ComboBoxField,
-};
-
 const items = [
   { name: 'Aardvark', id: '1' },
   { name: 'Kangaroo', id: '2' },
@@ -23,9 +18,62 @@ const actions = {
   onFocus: action('onFocus'),
 };
 
-export const Default = () => (
+export default {
+  title: 'Form/ComboBoxField',
+  component: ComboBoxField,
+  argTypes: {
+    label: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Example label',
+    },
+    placeholder: {},
+    id: {},
+    defaultItems: {
+      defaultValue: items,
+    },
+    defaultSelectedKey: {},
+    defaultInputValue: {},
+    disabledKeys: {
+      defaultValue: ['Snake'],
+    },
+    direction: {},
+    menuTrigger: {},
+    isRequired: {},
+    isDefaultOpen: {},
+    hasCustomValue: {},
+    hasNoEmptySelection: {},
+    isNotFlippable: {},
+    hasAutoFocus: {},
+    isReadOnly: {},
+    isDisabled: {},
+    selectedKey: {
+      control: {
+        type: 'none',
+      },
+    },
+    inputValue: {
+      control: {
+        type: 'none',
+      },
+    },
+    items: {
+      control: {
+        type: 'none',
+      },
+    },
+    isOpen: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
+};
+
+export const Default = args => (
   <OverlayProvider>
-    <ComboBoxField label="Example label" defaultItems={items} {...actions}>
+    <ComboBoxField {...actions} {...args}>
       {item => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>

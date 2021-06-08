@@ -6,7 +6,17 @@ export default {
   title: 'Card',
   component: Card,
   argTypes: {
-    children: { control: 'text' },
+    children: {
+      description: 'Card content.',
+      defaultValue: 'Card Children',
+      table: {
+        type: {
+        },
+      },
+      control: {
+        type: 'text',
+      },
+    },
   },
 };
 
@@ -21,7 +31,3 @@ export const CardRow = () => (
     <Card>Third</Card>
   </Box>
 );
-
-Default.args = {
-  children: 'Card Children',
-};

@@ -1,10 +1,59 @@
 import React, { useState } from 'react';
 import DropdownField from '.';
 import Box from '../Box/Box';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/DropdownField',
   component: DropdownField,
+  argTypes: {
+    defaultValue: {},
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    firstLabel: {},
+    noneLabel: {},
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    hasNoneOption: {},
+    hasDisabledFirstOption: {},
+    isRequired: {},
+    hasAutoFocus: {},
+    controlProps: {},
+    id: {},
+    'aria-label': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-labelledby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-describedby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-details': {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
 export const Default = args => (
