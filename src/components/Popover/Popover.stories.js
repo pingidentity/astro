@@ -10,11 +10,18 @@ import Link from '../Link/Link';
 export default {
   title: 'Popover',
   component: Popover,
-  argTypes: { onPress: { action: 'clicked' } },
+  argTypes: {
+    content: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Hi, I\'m a popover!',
+    },
+  },
 };
 
-export const Default = () => (
-  <Popover content="Hello">
+export const Default = ({ ...args }) => (
+  <Popover {...args}>
     <Button>Hover over button</Button>
   </Popover>
 );

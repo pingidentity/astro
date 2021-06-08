@@ -2,15 +2,95 @@ import React from 'react';
 import CheckboxField from './CheckboxField';
 import Link from '../Link';
 import Text from '../Text';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/CheckboxField',
   component: CheckboxField,
+  argTypes: {
+    label: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Click me!',
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    name: {},
+    id: {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {},
+    isRequired: {},
+    isDisabled: {},
+    isReadOnly: {},
+    hasAutoFocus: {},
+    isIndeterminate: {},
+    isDefaultSelected: {},
+    isSelected: {},
+    'aria-label': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-labelledby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-describedby': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-details': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-controls': {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-errormessage': {
+      control: {
+        type: 'text',
+      },
+    },
+    containerProps: {
+      control: {
+        type: 'none',
+      },
+    },
+    controlProps: {
+      control: {
+        type: 'none',
+      },
+    },
+    labelProps: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => (
+export const Default = args => (
   <CheckboxField
-    label="Click me"
+    {...args}
   />
 );
 

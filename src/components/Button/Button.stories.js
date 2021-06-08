@@ -22,13 +22,23 @@ export default {
       },
       defaultValue: Object.values(variants)[0],
     },
+    children: {
+      description: 'Button text.',
+      defaultValue: 'Button Text',
+      table: {
+        type: {
+          summary: 'string',
+        },
+      },
+      control: {
+        type: 'text',
+      },
+    },
   },
 };
 
 export const Default = args => (
-  <Button {...args}>
-    Button Text
-  </Button>
+  <Button {...args} />
 );
 
 export const Disabled = () => (

@@ -1,13 +1,40 @@
 import React from 'react';
-import { Earth } from '@pingux/icons';
+import SearchIcon from 'mdi-react/SearchIcon';
 import Icon from '.';
+import { flatColorList } from '../../styles/colors';
 
 export default {
   title: 'Icon',
   component: Icon,
+  argTypes: {
+    icon: {
+      control: {
+        type: 'none',
+      },
+      defaultValue: SearchIcon,
+      description: 'The icon to render. List of icons at https://materialdesignicons.com/',
+    },
+    size: {
+      control: {
+        type: 'text',
+      },
+      description: 'The size of the icon container. If given a number value, it will be converted to pixels. ' +
+          'Standard icon sizes are 15, 22, and 40. ' +
+          'Numeric value and/or paired with a unit. https://www.w3schools.com/cssref/css_units.asp',
+    },
+    color: {
+      control: {
+        type: 'select',
+        options: flatColorList.map(([colorName]) => colorName),
+      },
+      defaultValue: 'active',
+    },
+  },
 };
 
-export const Default = () => <Icon icon={Earth} color="active" />;
+export const Default = args => (
+  <Icon {...args} />
+);
 
 export const SVGIcons = () => {
   // SVGR can used to convert .svg files to components instead of doing this manually
