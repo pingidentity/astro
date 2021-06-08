@@ -133,47 +133,45 @@ const Demo = () => {
                     modifiedNodeData.filter(node => insertedNodeKeys.includes(node.key));
 
                 let groupKey;
-                if (droppedOntoLinkKey || droppedOntoNodeKey) {
-                    setDiagramNodes([
-                        ...diagramNodes,
-                        // Remove placeholder categories from nodes
-                        ...addedNodes.flatMap(({ category, key, loc, ...node }) => {
-                            const replacementKey = key;
-                            const modifiedNode = {
-                                ...node,
-                                // Remove palette categories so that nodes display correctly in diagram.
-                                category: category === 'palette-group' ? '' : category,
-                                key: replacementKey,
+                setDiagramNodes([
+                    ...diagramNodes,
+                    // Remove placeholder categories from nodes
+                    ...addedNodes.flatMap(({ category, key, loc, ...node }) => {
+                        const replacementKey = key;
+                        const modifiedNode = {
+                            ...node,
+                            // Remove palette categories so that nodes display correctly in diagram.
+                            category: category === 'palette-group' ? '' : category,
+                            key: replacementKey,
+                        };
+
+                        if (node.isGroup) {
+                            groupKey = replacementKey;
+                            const returnNode = [
+                                modifiedNode,
+                                ...key.startsWith('login-group') ? [{
+                                    'key': `${replacementKey}-success`,
+                                    group: replacementKey,
+                                    'category': 'outlet',
+                                    color: '#D5DCF3',
+                                    'text': 'On Success',
+                                }] : [],
+                            ];
+                            return returnNode;
+                        } else if (node.group) {
+                            const returnNode = {
+                                ...modifiedNode,
+                                key: `${groupKey}-step`,
+                                group: groupKey,
                             };
-
-                            if (node.isGroup) {
-                                groupKey = replacementKey;
-                                const returnNode = [
-                                    modifiedNode,
-                                    ...key.startsWith('login-group') ? [{
-                                        'key': `${replacementKey}-success`,
-                                        group: replacementKey,
-                                        'category': 'outlet',
-                                        color: '#D5DCF3',
-                                        'text': 'On Success',
-                                    }] : [],
-                                ];
-                                return returnNode;
-                            } else if (node.group) {
-                                const returnNode = {
-                                    ...modifiedNode,
-                                    key: `${groupKey}-step`,
-                                    group: groupKey,
-                                };
-                                return returnNode;
-                            }
+                            return returnNode;
+                        }
 
 
 
-                            return modifiedNode;
-                        }),
-                    ]);
-                }
+                        return modifiedNode;
+                    }),
+                ]);
 
                 const createLinkedNodes = (key) => {
                     return {
