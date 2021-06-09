@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import { modes } from '../Button/constants';
 import useAriaLabelWarning from '../../hooks/useAriaLabelWarning';
+import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
 /**
  * Convenience wrapper for a Button + Icon. This component applies specific styles necessary for
@@ -14,23 +15,27 @@ import useAriaLabelWarning from '../../hooks/useAriaLabelWarning';
  * `Button` component.
  */
 const IconButton = forwardRef((props, ref) => {
-  const {
-    children,
-    'aria-label': ariaLabel,
-    ...others
-  } = props;
+  const { children, title, ...others } = props;
 
+  const ariaLabel = props['aria-label'] || title;
   useAriaLabelWarning('IconButton', ariaLabel);
 
-  return (
-    <Button
-      ref={ref}
-      mode={modes.ICON}
-      {...others}
-    >
+  const button = (
+    <Button ref={ref} mode={modes.ICON} aria-label={ariaLabel} {...others}>
       {children}
     </Button>
   );
+
+  if (title) {
+    return (
+      <TooltipTrigger isDisabled={!title}>
+        {button}
+        {title && <Tooltip>{title}</Tooltip>}
+      </TooltipTrigger>
+    );
+  }
+
+  return button;
 });
 
 IconButton.propTypes = {
@@ -38,6 +43,8 @@ IconButton.propTypes = {
   variant: PropTypes.string,
   /** Defines a string value that labels the current element. */
   'aria-label': PropTypes.string,
+  /** Content will be displayed in a tooltip on hover or focus. */
+  title: PropTypes.string,
 };
 
 IconButton.defaultProps = {

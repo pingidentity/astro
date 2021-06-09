@@ -23,3 +23,9 @@ export const Inverted = () => (
     <Icon icon={EditIcon} />
   </IconButton>
 );
+
+export const WithTooltip = () => (
+  <IconButton aria-label="my-label" title="Edit">
+    <Icon icon={EditIcon} />
+  </IconButton>
+);
