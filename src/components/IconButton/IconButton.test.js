@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import IconButton from '.';
 
 const iconTestId = 'test-icon';
@@ -15,9 +15,8 @@ const defaultProps = {
   'data-testid': testId,
   icon: EditIcon,
 };
-const getComponent = (props = {}) => render((
-  <IconButton {...defaultProps} {...props} />
-));
+const getComponent = (props = {}) =>
+  render(<IconButton {...defaultProps} {...props} />);
 
 test('default icon button', () => {
   getComponent();
@@ -86,4 +85,41 @@ test('button focus', () => {
   userEvent.tab();
   expect(button).toHaveFocus();
   expect(button).toHaveClass('is-focused');
+});
+
+test('tooltip is shown on focus when the prop is passed and not show by default', () => {
+  getComponent({
+    title: 'Test Tooltip',
+  });
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  userEvent.tab();
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+});
+
+test('tooltip is shown on hover when the prop is passed and not show by default', () => {
+  getComponent({
+    title: 'Test Tooltip',
+  });
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  const button = screen.getByRole('button');
+  fireEvent.mouseMove(button);
+  fireEvent.mouseEnter(button);
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+});
+
+test('tooltip is not shown on hover or focus when prop is not passed', () => {
+  getComponent();
+  const button = screen.getByRole('button');
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  userEvent.tab();
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  fireEvent.mouseMove(button);
+  fireEvent.mouseEnter(button);
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+});
+
+test('the button should be getting aria label attribute', () => {
+  const testLabel = 'test label';
+  getComponent({ 'aria-label': testLabel });
+  expect(screen.getByLabelText(testLabel)).toBeInTheDocument();
 });
