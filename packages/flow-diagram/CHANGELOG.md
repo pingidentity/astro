@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.16.1...@pingux/flow-diagram@0.17.0) (2021-06-11)
+
+
+### Bug Fixes
+
+* [UIP-4532] Textfield console error ([6e5a64f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6e5a64f65058b2c350ee4b58e77246c93e878f72))
+
+
+### Features
+
+* [UIP-4526] Adding IO ports to circle and start nodes ([daa70a2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/daa70a271bd5c2681e6128b0fe5330d964ccfd72))
+
+
+
+
+
 ## [0.16.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.16.0...@pingux/flow-diagram@0.16.1) (2021-06-07)
 
 **Note:** Version bump only for package @pingux/flow-diagram
