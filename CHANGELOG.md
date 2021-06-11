@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.14.0...@pingux/astro@0.15.0) (2021-06-11)
+
+
+### Features
+
+* [UIP-4441] Add Storybook controls for all astro components ([7456a31](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7456a3163e9ced8142c7741d81b96efbed43bbc2))
+* UIP-4414 IconButton needs title prop (tooltip) ([e9f16f9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e9f16f98059c64fe68fb32509bd92dded65148ff))
+
+
+
+
+
 # [0.14.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.13.0...@pingux/astro@0.14.0) (2021-06-07)
 
 
