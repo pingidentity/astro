@@ -1,0 +1,39 @@
+.multivalues {
+    &__control {
+        background-color: #ffffff !important;
+        border: 1px solid #c2c6ca !important;
+        border-radius: 0 !important;
+        padding: 8px 0 !important;
+
+        label {
+            margin-left: 10px;
+        }
+
+        &:hover {
+            border-color: #c2c6ca !important;
+        }
+
+        &--is-focused {
+            border-color: #2996cc !important;
+        }
+    }
+
+    &__multi-value {
+        border: 1px solid #c2c6ca !important;
+        background: #fff !important;
+        max-width: 100% !important;
+        padding: 2px 5px 2px 5px !important;
+        text-overflow: ellipsis !important;
+        box-sizing: border-box !important;
+        border-radius: 2px !important;
+        color: #4b637c !important;
+
+        &__remove {
+            color: #c2c6ca !important;
+
+            &:hover {
+                background-color: unset !important;
+            }
+        }
+    }
+}
