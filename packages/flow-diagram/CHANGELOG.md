@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.17.0...@pingux/flow-diagram@0.18.0) (2021-06-16)
+
+
+### Bug Fixes
+
+* [UIP-4516] Straighten links ([27e3fcf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/27e3fcf7977daf05571a713c9a4ec9f66643ef01))
+
+
+### Features
+
+* [UIP-4553] Node can be dropped onto canvas ([8e9e97f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8e9e97f3efdd0c074db10cd8bc7b5bf2546a4374))
+
+
+
+
+
 # [0.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.16.1...@pingux/flow-diagram@0.17.0) (2021-06-11)
 
 

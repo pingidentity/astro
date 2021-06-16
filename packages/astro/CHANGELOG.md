@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.15.0...@pingux/astro@0.16.0) (2021-06-16)
+
+
+### Features
+
+* UIP-4427 "Astro accordion component" ([92313ed](https://gitlab.corp.pingidentity.com/ux/pingux/commit/92313ed4f7e983dd2f76e435be8a37e786274c22))
+
+
+
+
+
 # [0.15.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.14.0...@pingux/astro@0.15.0) (2021-06-11)
 
 
