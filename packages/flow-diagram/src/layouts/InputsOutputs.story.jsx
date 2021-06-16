@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Clear, Desktop, Link } from '@pingux/icons';
-import { Box, Button, Chip, Icon, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
+import { Box, Button, Chip, Icon, IconButton, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
 import {
     mdiDragVertical,
     mdiText,
@@ -119,12 +119,12 @@ function CollapsibleSection({ defaultExpanded, title, children, status, onClick,
                     </Box>
                 </Box>
                 <Box>
-                    <Button
+                    <IconButton
                         onPress={onClick}
                         variant="icon"
                     >
                         <Icon icon={ArrowCollapseRightIcon} color="#253746" size={25} alignSelf="center" mr="xs" />
-                    </Button>
+                    </IconButton>
                 </Box>
             </Box>
             <Box
@@ -439,12 +439,12 @@ export const InputsOutputs = () => {
                                 id="outputsPanel"
                                 onScroll={() => onScroll()}
                                 icon={
-                                    <Button
+                                    <IconButton
                                         onPress={() => setOutputsDocked(true)}
                                         variant="icon"
                                     >
                                         <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" mr="xs" />
-                                    </Button>
+                                    </IconButton>
                                 }
                             >
                                 <Outputs />
@@ -457,12 +457,12 @@ export const InputsOutputs = () => {
                                 id="inputsPanel"
                                 onScroll={() => onScroll()}
                                 icon={
-                                    <Button
+                                    <IconButton
                                         onPress={() => setInputsDocked(true)}
                                         variant="icon"
                                     >
                                         <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" mr="xs" />
-                                    </Button>}
+                                    </IconButton>}
                             >
                                 <Inputs />
                             </Panel>
