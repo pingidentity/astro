@@ -60,6 +60,22 @@ const iconButton = {
     },
     bg: 'active',
   },
+};
+
+const accordionHeader = {
+  ...base,
+  bg: 'white',
+  color: 'neutral.10',
+  paddingLeft: '5px',
+  paddingRight: '5px',
+  flexGrow: 0,
+  fontWeight: 700,
+  '&.is-hovered': {
+    bg: 'button.hoverBackground',
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+  },
   '&.is-focused': {
     ...defaultFocus,
   },
@@ -268,4 +284,5 @@ export default {
   text,
   danger,
   primary,
+  accordionHeader,
 };

@@ -4004,6 +4004,21 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@react-aria/accordion@3.0.0-alpha.1":
+  version "3.0.0-alpha.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/accordion/-/accordion-3.0.0-alpha.1.tgz#f3b56b2346f2a40b790943162df955de3072740c"
+  integrity sha1-87VrI0bypAt5CUMWLflV3jBydAw=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/button" "^3.3.2"
+    "@react-aria/interactions" "^3.4.0"
+    "@react-aria/selection" "^3.4.1"
+    "@react-aria/utils" "^3.8.0"
+    "@react-stately/tree" "^3.1.4"
+    "@react-types/accordion" "3.0.0-alpha.0"
+    "@react-types/button" "^3.3.1"
+    "@react-types/shared" "^3.6.0"
+
 "@react-aria/button@^3.2.1":
   version "3.2.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/button/-/button-3.2.2.tgz#b10c1700e6b085a48b5a2ff4ffa46feb9931c34c"
@@ -4016,6 +4031,18 @@
     "@react-aria/utils" "^3.3.0"
     "@react-stately/toggle" "^3.2.1"
     "@react-types/button" "^3.2.1"
+
+"@react-aria/button@^3.3.2":
+  version "3.3.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/button/-/button-3.3.2.tgz#bb62e3d06ddbe7c448895af322755b5023b6a1aa"
+  integrity sha1-u2Lj0G3b58RIiVrzInVbUCO2oao=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.3.0"
+    "@react-aria/interactions" "^3.4.0"
+    "@react-aria/utils" "^3.8.0"
+    "@react-stately/toggle" "^3.2.2"
+    "@react-types/button" "^3.3.1"
 
 "@react-aria/checkbox@^3.2.0":
   version "3.2.1"
@@ -4292,6 +4319,20 @@
     "@react-stately/selection" "^3.3.0"
     "@react-types/shared" "^3.4.0"
 
+"@react-aria/selection@^3.4.1":
+  version "3.4.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/selection/-/selection-3.4.1.tgz#92f09e5bf236feafb16fd5d6be7a043cfc43ba8e"
+  integrity sha1-kvCeW/I2/q+xb9XWvnoEPPxDuo4=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.3.0"
+    "@react-aria/i18n" "^3.3.1"
+    "@react-aria/interactions" "^3.4.0"
+    "@react-aria/utils" "^3.8.0"
+    "@react-stately/collections" "^3.3.2"
+    "@react-stately/selection" "^3.5.0"
+    "@react-types/shared" "^3.6.0"
+
 "@react-aria/separator@^3.1.1":
   version "3.1.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/separator/-/separator-3.1.1.tgz#bfcd71bb5ab50dc04a7f307b84bd77955f08002f"
@@ -4461,6 +4502,14 @@
     "@babel/runtime" "^7.6.2"
     "@react-types/shared" "^3.2.1"
 
+"@react-stately/collections@^3.3.2":
+  version "3.3.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/collections/-/collections-3.3.2.tgz#35faeb24671a4782603ba9a6403ac36836d5a34a"
+  integrity sha1-NfrrJGcaR4JgO6mmQDrDaDbVo0o=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-types/shared" "^3.6.0"
+
 "@react-stately/combobox@3.0.0-alpha.1", "@react-stately/combobox@^3.0.0-alpha.1":
   version "3.0.0-alpha.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/combobox/-/combobox-3.0.0-alpha.1.tgz#d3240ba528b021965998950a615e715c2eccbcee"
@@ -4587,6 +4636,16 @@
     "@react-stately/utils" "^3.1.1"
     "@react-types/shared" "^3.3.0"
 
+"@react-stately/selection@^3.5.0":
+  version "3.5.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/selection/-/selection-3.5.0.tgz#a6232ee12299c525635a0ed8622eb68e575f823f"
+  integrity sha1-piMu4SKZxSVjWg7YYi62jldfgj8=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/collections" "^3.3.2"
+    "@react-stately/utils" "^3.2.1"
+    "@react-types/shared" "^3.6.0"
+
 "@react-stately/toggle@^3.2.0", "@react-stately/toggle@^3.2.1":
   version "3.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/toggle/-/toggle-3.2.1.tgz#8b10b5eb99c3c4df2c36d17a5f23b77773ed7722"
@@ -4596,6 +4655,16 @@
     "@react-stately/utils" "^3.1.1"
     "@react-types/checkbox" "^3.2.1"
     "@react-types/shared" "^3.2.1"
+
+"@react-stately/toggle@^3.2.2":
+  version "3.2.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/toggle/-/toggle-3.2.2.tgz#d5ee9494eb23a937dee3399af007d7d058585cb0"
+  integrity sha1-1e6UlOsjqTfe4zma8AfX0FhYXLA=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.2.1"
+    "@react-types/checkbox" "^3.2.1"
+    "@react-types/shared" "^3.6.0"
 
 "@react-stately/tooltip@^3.0.4":
   version "3.0.4"
@@ -4617,6 +4686,17 @@
     "@react-stately/selection" "^3.2.1"
     "@react-stately/utils" "^3.1.1"
     "@react-types/shared" "^3.2.1"
+
+"@react-stately/tree@^3.1.4":
+  version "3.1.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/tree/-/tree-3.1.4.tgz#58b55af38743fa1d903a07e16684c8df8fb2d011"
+  integrity sha1-WLVa84dD+h2QOgfhZoTI34+y0BE=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/collections" "^3.3.2"
+    "@react-stately/selection" "^3.5.0"
+    "@react-stately/utils" "^3.2.1"
+    "@react-types/shared" "^3.6.0"
 
 "@react-stately/utils@^3.1.1", "@react-stately/utils@^3.2.0":
   version "3.2.0"
@@ -4648,6 +4728,13 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
     "@react-aria/utils" "^3.7.0"
+    "@react-types/shared" "^3.5.0"
+
+"@react-types/accordion@3.0.0-alpha.0":
+  version "3.0.0-alpha.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/accordion/-/accordion-3.0.0-alpha.0.tgz#4db2585f255e08d01155a4ca92f4793498bb26fe"
+  integrity sha1-TbJYXyVeCNARVaTKkvR5NJi7Jv4=
+  dependencies:
     "@react-types/shared" "^3.5.0"
 
 "@react-types/button@^3.2.1", "@react-types/button@^3.3.1":
