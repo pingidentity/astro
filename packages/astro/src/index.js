@@ -5,6 +5,12 @@
 export { default as AstroWrapper } from './components/AstroWrapper';
 export * from './components/AstroWrapper';
 
+export { default as AccordionGroup } from './components/AccordionGroup';
+export * from './components/AccordionGroup';
+
+export { default as AccordionItem } from './components/AccordionItem';
+export * from './components/AccordionItem';
+
 export { default as Box } from './components/Box';
 export * from './components/Box';
 

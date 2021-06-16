@@ -1,3 +1,4 @@
+import accordion from './accordion';
 import boxes from './boxes';
 import images from './images';
 import link from './link';
@@ -14,6 +15,7 @@ import loader from './loader';
 
 
 export default {
+  accordion,
   boxes,
   images,
   loader,
