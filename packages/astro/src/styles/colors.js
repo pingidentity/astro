@@ -95,8 +95,7 @@ export const text = {
   active,
 };
 
-const rgbaString = rgba => `rgba(${rgba.join(', ')})`;
-export const shadow = rgbaString(chroma(neutral[10]).alpha(0.25).rgba());
+export const shadow = chroma(neutral[10]).alpha(0.25).hex();
 
 const allColors = {
   black,
