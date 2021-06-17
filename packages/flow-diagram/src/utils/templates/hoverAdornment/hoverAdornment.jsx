@@ -9,7 +9,7 @@ export const adornmentMouseLeave = (e, obj) => {
 };
 
 export const selectFromAdornment = (e, obj) => {
-    const node = obj.part.adornedPart;
+    const node = obj.part;
     node.diagram.select(node);
 };
 
@@ -25,15 +25,16 @@ export const getAdornmentOnHover = adornment => (e, obj) => {
 export const getNodeHoverAdornment = () => {
     return $(go.Adornment, 'Spot',
         {
+            height: 38,
             background: 'transparent',
             mouseLeave: adornmentMouseLeave,
+            click: selectFromAdornment,
         },
         $(go.Placeholder,
             {
                 margin: new go.Margin(10, 10, 10, 10),
                 background: 'transparent',
                 isActionable: true,
-                click: selectFromAdornment,
             }),
         $(go.Panel, 'Auto', { alignment: go.Spot.Top },
             { name: 'BODY' },

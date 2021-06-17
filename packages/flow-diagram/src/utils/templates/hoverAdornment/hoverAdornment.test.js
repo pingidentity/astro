@@ -40,14 +40,12 @@ describe('Hover Adornment', () => {
         };
         const obj = {
             part: {
-                adornedPart: {
-                    diagram: {
-                        select,
-                    },
+                diagram: {
+                    select,
                 },
             },
         };
-        const node = obj.part.adornedPart;
+        const node = obj.part;
         selectFromAdornment(e, obj);
         expect(select).toHaveBeenCalledWith(node);
     });
