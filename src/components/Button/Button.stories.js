@@ -1,4 +1,5 @@
 import React from 'react';
+import AddCircleIcon from 'mdi-react/AddCircleIcon';
 import Box from '../Box';
 import Button from '.';
 import Icon from '../Icon';
@@ -47,16 +48,10 @@ export const Disabled = () => (
   </Button>
 );
 
-const PlusIcon = props => (
-  <svg viewBox="0 0 24 24" {...props}>
-    <path fill="currentColor" d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
-  </svg>
-);
-
 export const TextIconButton = () => (
   <Button mb="sm">
     <Box isRow alignItems="center">
-      <Icon icon={PlusIcon} mr="sm" color="active" size={20} />
+      <Icon icon={AddCircleIcon} mr="sm" color="active" size={20} />
       Add a Form
     </Box>
   </Button>
