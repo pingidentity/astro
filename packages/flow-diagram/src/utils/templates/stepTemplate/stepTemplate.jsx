@@ -104,10 +104,12 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
         new go.Binding('minSize', '', s => getIfLengthGreater(s.errorMessage, getSize(s, 'errorContainer'), getSize(s, ''), 0)),
         $(go.Panel, 'Vertical', { padding: 15, alignment: go.Spot.Top },
             new go.Binding('visible', '', s => getIfLengthGreater(s.errorMessage, true, false, 0)),
-            $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20 }),
-            {
+            $(go.Picture, {
+                source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`,
+                width: 20,
+                height: 20,
                 mouseHover: getAdornmentOnHover(getNodeHoverAdornment()),
-            },
+            }),
         ),
         $(go.Panel, 'Position', { position: new go.Point(0, 0) },
             { name: 'BODY' },
