@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useModalState } from '../../hooks';
-import { OverlayProvider, Box, Button, Text, Modal } from '../../index';
+import {
+  OverlayProvider,
+  Box,
+  Button,
+  Text,
+  Modal,
+  TextField,
+} from '../../index';
 
 export default {
   title: 'Modal',
@@ -67,26 +74,40 @@ export default {
 
 export const Default = (args) => {
   const state = useModalState();
+  const [inputValue, setInputValue] = useState('');
+  const onTextFieldChange = useCallback(({ target: { value } }) => {
+    setInputValue(value.toUpperCase());
+  }, []);
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
     <OverlayProvider>
       <Button onPress={state.open}>Open Modal</Button>
-      {
-        state.isOpen &&
-        <Modal
-          {...args}
-          isOpen={state.isOpen}
-          onClose={state.close}
-        >
-          <Text pt="lg">Are you sure you want to delete this group?</Text>
+      {state.isOpen && (
+        <Modal {...args} isOpen={state.isOpen} onClose={state.close}>
+          <Text pt="lg">
+            Deleting a group{' '}
+            <strong>&quot;Marketing&quot;</strong>{' '}
+            cannot be undone. Users will lose access to the applications.
+          </Text>
+          <Text pt="lg">
+            Type the word DELETE to confirm deletion of this group
+          </Text>
+          <TextField value={inputValue} onChange={onTextFieldChange} />
           <Box isRow pt="lg" mr="auto">
-            <Button variant="critical" onPress={state.close} mr="md">Delete</Button>
+            <Button
+              variant="critical"
+              onPress={state.close}
+              mr="md"
+              isDisabled={Boolean(inputValue !== 'DELETE')}
+            >
+              Delete
+            </Button>
             <Button onPress={state.close}>Cancel</Button>
           </Box>
         </Modal>
-      }
+      )}
     </OverlayProvider>
   );
 };
@@ -100,8 +121,7 @@ export const DarkVariant = () => {
     <OverlayProvider>
       <Button onPress={state.open}>Open Modal</Button>
 
-      {
-        state.isOpen &&
+      {state.isOpen && (
         <Modal
           variant="modal.dark"
           title="Question"
@@ -110,13 +130,19 @@ export const DarkVariant = () => {
           isDismissable
           hasCloseButton
         >
-          <Text variant="subtitle" color="white" pt="lg">Would you ever really just click a button?</Text>
+          <Text variant="subtitle" color="white" pt="lg">
+            Would you ever really just click a button?
+          </Text>
           <Box isRow pt="lg" mr="auto">
-            <Button variant="primary" mr="md" onPress={state.close}>Yes</Button>
-            <Button variant="text" onPress={state.close}>Cancel</Button>
+            <Button variant="primary" mr="md" onPress={state.close}>
+              Yes
+            </Button>
+            <Button variant="text" onPress={state.close}>
+              Cancel
+            </Button>
           </Box>
         </Modal>
-      }
+      )}
     </OverlayProvider>
   );
 };
