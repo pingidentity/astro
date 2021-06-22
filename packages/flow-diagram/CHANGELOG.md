@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.18.0...@pingux/flow-diagram@0.18.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* [UIP-4568] Icon Button Circle ([1e2b3a6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1e2b3a65aed04312db5722ea16e8f314d2570c09))
+* [UIP-4581] Hover adornment click ([dd60a58](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dd60a58ce6a628acbe640b6a031476423bf0e2ec))
+
+
+
+
+
 # [0.18.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.17.0...@pingux/flow-diagram@0.18.0) (2021-06-16)
 
 

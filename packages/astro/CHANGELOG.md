@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.16.0...@pingux/astro@0.16.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* UIP-4587: Add useSyncRef util from React Aria to address ref syncing issue ([00fae9c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/00fae9ce5e57b681f522302bada3f98717f84212))
+
+
+
+
+
 # [0.16.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.15.0...@pingux/astro@0.16.0) (2021-06-16)
 
 
