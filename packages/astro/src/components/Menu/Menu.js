@@ -3,13 +3,12 @@ import React, {
   useContext,
   useImperativeHandle,
   useRef,
-  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import { useMenu } from '@react-aria/menu';
 import { useTreeState } from '@react-stately/tree';
 import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
+import { useSyncRef, mergeProps } from '@react-aria/utils';
 
 import { MenuContext } from '../../context/MenuContext';
 import MenuItem from '../MenuItem';
@@ -40,17 +39,8 @@ const Menu = forwardRef((props, ref) => {
   const { menuProps } = useMenu(completeProps, state, menuRef);
   const { isFocusVisible, focusProps } = useFocusRing({ within: true });
 
-  // Sync the refs if needed
-  useEffect(() => {
-    if (contextProps && contextProps.ref) {
-      contextProps.ref.current = menuRef.current;
-      return () => {
-        contextProps.ref.current = null;
-      };
-    }
-
-    return undefined;
-  }, [contextProps, menuRef]);
+  // Sync the refs between context and local instance for overlay positioning
+  useSyncRef(contextProps, menuRef);
 
   return (
     <Box
