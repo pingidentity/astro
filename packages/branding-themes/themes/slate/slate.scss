@@ -101,6 +101,10 @@ $images: getThemeImages($THEME_NAME);
     border-radius: 0;
 }
 
+.text-input--error, .text-input--error:focus {
+    background-color: transparent;
+}
+
 .branding-template-primary-button {
     width: 60%;
     font-size: 18px;
