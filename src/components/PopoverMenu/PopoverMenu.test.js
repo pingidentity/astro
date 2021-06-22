@@ -29,6 +29,7 @@ test('renders a popover menu when trigger is clicked', () => {
   userEvent.click(button);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
   expect(screen.queryByRole('presentation')).toBeVisible();
+  expect(screen.queryByRole('presentation')).toHaveStyle({ top: '15px' });
   // Should have two accessible dismiss buttons applied (in addition to the trigger button)
   expect(screen.queryAllByRole('button')).toHaveLength(3);
   expect(screen.queryByRole('menu')).toBeInTheDocument();
