@@ -13,6 +13,7 @@ import PasswordInput from '../components/themes/astro/PasswordInput';
 import Dropdown from '../components/themes/astro/Dropdown';
 import Error from '../components/themes/astro/Error';
 import FieldLabel from '../components/themes/astro/FieldLabel';
+import RadioGroup from '../components/themes/astro/RadioGroup';
 import SuccessMessage from '../components/themes/astro/SuccessMessage';
 import SectionTitle from '../components/themes/astro/SectionTitle';
 // eslint-disable-next-line
@@ -29,6 +30,7 @@ export const AstroComponents = {
   formDescription: FieldLabel,
   password: PasswordInput,
   passwordWithRequirements: PasswordWithRequirements,
+  radiogroup: RadioGroup,
   select: Dropdown,
   successMessage: SuccessMessage,
   textinput: TextField,
