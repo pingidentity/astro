@@ -393,7 +393,7 @@ describe('loadingState', () => {
     expect(() => screen.getByRole('progressbar')).toThrow();
   });
 
-  test('combobox should hide the loader when if the menu closes', () => {
+  test('combobox should hide the loader when the menu closes', () => {
     getComponent({ loadingState: loadingStates.FILTERING });
     const input = screen.getByRole('combobox');
     const button = screen.getByRole('button');
