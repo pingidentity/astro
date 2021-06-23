@@ -15,7 +15,7 @@ export default function Panel({ children, icon, title, subtitle, styles, ...othe
                     {icon}
                 </Box>
             </Box>
-            <Box sx={panelBody} p={25} w="100%">
+            <Box sx={panelBody} p={25}>
                 {children}
             </Box>
         </Card>

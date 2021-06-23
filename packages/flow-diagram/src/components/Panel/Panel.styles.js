@@ -16,4 +16,5 @@ export const panelTop = {
 
 export const panelBody = {
     overflowY: 'auto',
+    width: '100%',
 };
