@@ -19,6 +19,7 @@ const Tabs = forwardRef((props, ref) => {
     isDisabled,
     onSelectionChange,
     orientation,
+    mode,
     tabListProps,
     tabPanelProps,
     ...others
@@ -32,11 +33,18 @@ const Tabs = forwardRef((props, ref) => {
     tabPanelProps: raTabPanelProps,
   } = useTabs(props, state, tabListRef);
 
+  const panelContent = (
+    state.selectedItem
+      ? (state.selectedItem.props.content || state.selectedItem.props.children)
+      : null
+  );
+
   return (
     <TabsContext.Provider value={state}>
       <Box {...others}>
         <Box
           variant="tabs"
+          gap="20px"
           isRow={orientation === ORIENTATION.HORIZONTAL}
           {...tabListProps}
           {...raTabListProps}
@@ -48,6 +56,7 @@ const Tabs = forwardRef((props, ref) => {
               item={item}
               isDisabled={isDisabled}
               orientation={orientation}
+              mode={mode}
             />
           ))}
         </Box>
@@ -56,7 +65,7 @@ const Tabs = forwardRef((props, ref) => {
           {...tabPanelProps}
           {...raTabPanelProps}
         >
-          {state.selectedItem && state.selectedItem.props.children}
+          {panelContent}
         </Box>
       </Box>
     </TabsContext.Provider>
@@ -68,12 +77,19 @@ Tabs.propTypes = {
   defaultSelectedKey: PropTypes.string,
   /** The tab key that is currently selected. (controlled) */
   selectedKey: PropTypes.string,
+  /** Determines the arrangement of the tablist. */
+  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+  /** Determines the behavior model for the tabs. */
+  mode: PropTypes.oneOf(['default', 'tooltip']),
+  /**
+   * *For performance reasons, use this prop instead of Array.map when iteratively rendering Items*.
+   * For use with [dynamic collections](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections).
+  */
+  items: PropTypes.arrayOf(PropTypes.shape({})),
   /** Whether the entire tablist is disabled. */
   isDisabled: PropTypes.bool,
   /** Handler that is called when the selected tab has changed. */
   onSelectionChange: PropTypes.func,
-  /** Determines the arrangement of the tablist. */
-  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   /** A props object that is subsequently spread into the rendered tablist. */
   tabListProps: PropTypes.shape({}),
   /** Props object that is spread directly into all of the tab panel wrapper elements. */
@@ -83,6 +99,7 @@ Tabs.propTypes = {
 Tabs.defaultProps = {
   isDisabled: false,
   orientation: 'horizontal',
+  mode: 'default',
 };
 
 Tabs.displayName = 'Tabs';

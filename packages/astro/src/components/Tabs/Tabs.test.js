@@ -215,7 +215,6 @@ test('vertical tabs style', () => {
   testSingleTab(tabs, tab0, 'toHaveStyle', [{ backgroundColor: theme.colors.accent[95] }]);
 });
 
-
 test('accepts tabPanelProps and applies them to tabpanel only', () => {
   getComponent({ tabPanelProps: { color: 'green' } });
   const tabPanel = screen.getByRole('tabpanel');
@@ -223,4 +222,19 @@ test('accepts tabPanelProps and applies them to tabpanel only', () => {
 
   const tabList = screen.getByRole('tablist');
   expect(tabList).not.toHaveStyleRule('color', 'green');
+});
+
+test('tooltip renders on tab\'s hover in `tooltip` mode', () => {
+  getComponent({ mode: 'tooltip' });
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+  const { tab0 } = getTabs();
+  fireEvent.mouseMove(tab0);
+  fireEvent.mouseEnter(tab0);
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+});
+
+test('tabs without selected keys show null tab panel content', () => {
+  getComponent({ defaultSelectedKey: undefined });
+  expect(screen.queryByRole('tabpanel')).not.toHaveTextContent();
 });
