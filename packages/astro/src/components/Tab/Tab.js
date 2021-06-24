@@ -9,13 +9,14 @@ import { useTab } from '@react-aria/tabs';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import { Item as Tab } from '@react-stately/collections';
-import omit from 'lodash/omit';
 
 import Box from '../Box';
 import { TabsContext } from '../Tabs';
 import Text from '../Text';
 import useStatusClasses from '../../hooks/useStatusClasses';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
+import Button from '../Button';
 
 export const CollectionTab = forwardRef((props, ref) => {
   const {
@@ -23,9 +24,20 @@ export const CollectionTab = forwardRef((props, ref) => {
     item,
     isDisabled: tabsDisabled,
     orientation,
+    mode,
+    tooltipTriggerProps,
   } = props;
   const { key, rendered, props: itemProps } = item;
-  const { icon, isDisabled: tabDisabled, tabLineProps } = itemProps;
+
+  const {
+    icon,
+    isDisabled: tabDisabled,
+    separator,
+    tabLabelProps,
+    tabLineProps,
+    content,
+    ...otherItemProps
+  } = itemProps;
   const isDisabled = tabsDisabled || tabDisabled;
   const state = useContext(TabsContext);
   const isSelected = state.selectedKey === key;
@@ -43,19 +55,37 @@ export const CollectionTab = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => tabRef.current);
   const { tabProps } = useTab({ item, isDisabled }, state, tabRef);
 
-  return (
+  const tab = (
     <Box
       className={classNames}
       variant="tab"
-      {...omit(itemProps.title, itemProps)}
       {...mergeProps(focusProps, tabProps)}
+      {...otherItemProps}
       ref={tabRef}
     >
       {icon}
-      <Text variant="tabLabel">{rendered}</Text>
+      <Text variant="tabLabel" {...tabLabelProps}>{rendered}</Text>
       {isSelected && !isDisabled && <TabLine {...tabLineProps} />}
     </Box>
   );
+
+  if (mode === 'tooltip') {
+    return (
+      <>
+        {separator}
+        <TooltipTrigger {...tooltipTriggerProps}>
+          <Button variant="quiet">
+            {tab}
+          </Button>
+          <Tooltip>
+            {itemProps.textValue || itemProps.title}
+          </Tooltip>
+        </TooltipTrigger>
+      </>
+    );
+  }
+
+  return tab;
 });
 
 CollectionTab.displayName = 'CollectionTab';
@@ -67,7 +97,9 @@ CollectionTab.propTypes = {
     rendered: PropTypes.node,
     tabLineProps: PropTypes.shape({}),
   }),
+  mode: PropTypes.oneOf(['default', 'tooltip']),
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+  tooltipTriggerProps: PropTypes.shape({}),
 };
 
 const TabLine = props => (

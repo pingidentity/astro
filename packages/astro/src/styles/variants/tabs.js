@@ -1,10 +1,10 @@
 export const tab = {
-  mr: 20,
   pt: 10,
   cursor: 'pointer',
   alignItems: 'center',
-  display: 'flex',
+  display: 'inline-flex',
   outline: 'none',
+  transform: 'translateY(1px)',
   '&.is-focused': {
     boxShadow: 'focus',
   },
@@ -14,7 +14,6 @@ export const tab = {
   '&.is-selected.is-vertical': {
     bg: 'accent.95',
   },
-  transform: 'translateY(1px)',
 };
 
 export const tabLine = {
