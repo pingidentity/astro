@@ -100,7 +100,7 @@ const card = {
   p: 'xl',
 };
 const shadows = {
-  overlay: '0 1px 4px 1px rgba(121, 128, 135, 0.35)',
+  overlay: '0 1px 4px 1px #79808759',
 };
 const buttons = {
   default: {
