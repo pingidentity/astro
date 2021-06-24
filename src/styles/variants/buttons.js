@@ -210,6 +210,11 @@ const text = {
   },
 };
 
+const quiet = {
+  all: 'unset',
+  display: 'flex',
+};
+
 const rocker = {
   ...base,
   height: '26px',
@@ -258,6 +263,10 @@ const danger = {
 };
 
 export default {
+  accordionHeader,
+  comboBox,
+  critical,
+  danger,
   default: {
     ...base,
     bg: 'white',
@@ -275,14 +284,11 @@ export default {
   },
   iconButton,
   icon,
-  comboBox,
-  rocker,
   inline,
   inverted,
-  critical,
+  primary,
+  quiet,
+  rocker,
   success,
   text,
-  danger,
-  primary,
-  accordionHeader,
 };

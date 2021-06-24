@@ -10,6 +10,7 @@ import popover from './popover';
 import popoverMenu from './popoverMenu';
 import rockerbutton from './rockerbutton';
 import separator from './separator';
+import stepper from './stepper';
 import * as tabs from './tabs';
 import loader from './loader';
 
@@ -28,5 +29,6 @@ export default {
   popoverMenu,
   rockerbutton,
   separator,
+  stepper,
   ...tabs,
 };

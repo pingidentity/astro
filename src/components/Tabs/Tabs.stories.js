@@ -3,6 +3,7 @@ import { Earth } from '@pingux/icons';
 import Tabs from './Tabs';
 import Tab from '../Tab';
 import Icon from '../Icon';
+import Text from '../Text';
 
 export default {
   title: 'Tabs',
@@ -27,6 +28,13 @@ export default {
       },
     },
   },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const tabs = [
@@ -36,101 +44,122 @@ const tabs = [
 ];
 
 export const Uncontrolled = args => (
-  <Tabs {...args}>
-    {tabs.map(tab => (
-      <Tab key={tab.name} title={tab.name}>
-        {tab.children}
-      </Tab>
-    ))}
+  <Tabs items={tabs} {...args}>
+    <Tab key="tab1" title="Tab 1">
+      <Text>This is content for Tab 1</Text>
+    </Tab>
+    <Tab key="tab2" title="Tab 2">
+      <Text>This is content for Tab 2</Text>
+    </Tab>
   </Tabs>
 );
 
 export const Controlled = () => {
   const [currentTab, setCurrentTab] = useState(tabs[0].name);
   return (
-    <Tabs selectedKey={currentTab} onSelectionChange={setCurrentTab}>
-      {tabs.map(tab => (
-        <Tab key={tab.name} title={tab.name}>
-          {tab.children}
+    <Tabs selectedKey={currentTab} onSelectionChange={setCurrentTab} items={tabs}>
+      {item => (
+        <Tab
+          key={item.name}
+          title={item.name}
+          textValue={item.name}
+        >
+          {item.children}
         </Tab>
-      ))}
+      )}
     </Tabs>
   );
 };
 
 export const WithIcon = () => (
-  <Tabs>
-    {tabs.map(tab => (
+  <Tabs items={tabs}>
+    {item => (
       <Tab
-        key={tab.name}
-        title={tab.name}
+        key={item.name}
+        title={item.name}
         icon={<Icon icon={Earth} size={20} color="active" mb={10} />}
       >
-        {tab.children}
+        {item.children}
       </Tab>
-    ))}
+    )}
   </Tabs>
 );
 
+export const WithTooltips = () => {
+  return (
+    <Tabs mode="tooltip" items={tabs}>
+      {item => (
+        <Tab
+          key={item.name}
+          title={item.name}
+          textValue={item.name}
+        >
+          {item.children}
+        </Tab>
+      )}
+    </Tabs>
+  );
+};
+
 export const Centered = () => (
-  <Tabs tabListProps={{ justifyContent: 'center' }}>
-    {tabs.map(tab => (
+  <Tabs tabListProps={{ justifyContent: 'center' }} items={tabs}>
+    {item => (
       <Tab
-        key={tab.name}
-        title={tab.name}
+        key={item.name}
+        title={item.name}
       >
-        {tab.children}
+        {item.children}
       </Tab>
-    ))}
+    )}
   </Tabs>
 );
 
 export const DisabledSingleTab = () => (
-  <Tabs defaultSelectedKey="Tab 2">
-    {tabs.map(tab => (
-      <Tab key={tab.name} title={tab.name} isDisabled={tab.name === 'Tab 1'}>
-        {tab.children}
+  <Tabs defaultSelectedKey="Tab 2" items={tabs}>
+    {item => (
+      <Tab key={item.name} title={item.name} isDisabled={item.name === 'Tab 1'}>
+        {item.children}
       </Tab>
-    ))}
+    )}
   </Tabs>
 );
 
 export const DisabledAllTabs = () => (
-  <Tabs isDisabled>
-    {tabs.map(tab => (
-      <Tab key={tab.name} title={tab.name}>
-        {tab.children}
+  <Tabs isDisabled items={tabs}>
+    {item => (
+      <Tab key={item.name} title={item.name}>
+        {item.children}
       </Tab>
-    ))}
+    )}
   </Tabs>
 );
 
 export const CustomTabLine = () => (
-  <Tabs>
-    {tabs.map(tab => (
-      <Tab key={tab.name} title={tab.name} tabLineProps={{ bg: 'red' }}>
-        {tab.children}
+  <Tabs items={tabs}>
+    {item => (
+      <Tab key={item.name} title={item.name} tabLineProps={{ bg: 'red' }}>
+        {item.children}
       </Tab>
-    ))}
+    )}
   </Tabs>
 );
 
 export const Orientation = () => (
-  <Tabs orientation="vertical">
-    {tabs.map(tab => (
-      <Tab key={tab.name} title={tab.name}>
-        {tab.children}
+  <Tabs orientation="vertical" items={tabs}>
+    {item => (
+      <Tab key={item.name} title={item.name}>
+        {item.children}
       </Tab>
-    ))}
+    )}
   </Tabs>
 );
 
 export const TabPanelProps = () => (
-  <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }}>
-    {tabs.map(tab => (
-      <Tab key={tab.name} title={tab.name}>
-        {tab.children}
+  <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
+    {item => (
+      <Tab key={item.name} title={item.name}>
+        {item.children}
       </Tab>
-    ))}
+    )}
   </Tabs>
 );
