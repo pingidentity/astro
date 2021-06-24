@@ -27,6 +27,7 @@ const TooltipTrigger = forwardRef((props, ref) => {
     className,
     isNotFlippable,
     isDarkMode,
+    hasNoArrow,
   } = props;
 
   const [trigger, tooltip] = React.Children.toArray(children);
@@ -66,6 +67,7 @@ const TooltipTrigger = forwardRef((props, ref) => {
       placement={placement}
       arrowProps={arrowProps}
       className={classNames}
+      hasNoArrow={hasNoArrow}
       {...positionProps}
       {...tooltipProps}
     >
@@ -108,6 +110,10 @@ TooltipTrigger.propTypes = {
      * available for the given `direction` placement.
      */
   isNotFlippable: PropTypes.bool,
+  /**
+   * Allows to add an arrow to popover container
+   */
+  hasNoArrow: PropTypes.bool,
   /** Tooltip offset relative to its trigger. */
   offset: PropTypes.number,
   /** The placement of the element with respect to its anchor element. */
@@ -123,6 +129,7 @@ TooltipTrigger.defaultProps = {
   direction: 'bottom',
   isNotFlippable: false,
   isDarkMode: true,
+  hasNoArrow: false,
   offset: 10,
 };
 

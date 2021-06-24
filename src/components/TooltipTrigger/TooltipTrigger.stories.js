@@ -7,8 +7,8 @@ export default {
   component: TooltipTrigger,
 };
 
-export const Default = () => (
-  <TooltipTrigger>
+export const Default = args => (
+  <TooltipTrigger {...args}>
     {/* First child is the trigger element, second child is the content of tooltip */}
     <Button>Hover Over Me!</Button>
     <Tooltip>Tooltip Content</Tooltip>
