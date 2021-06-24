@@ -11,7 +11,7 @@ const container = {
   left: 0,
   bottom: 0,
   right: 0,
-  background: 'rgba(0, 0, 0, 0.25)',
+  background: '#00000040',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

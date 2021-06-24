@@ -8,9 +8,9 @@ const container = {
   lineHeight: 1.4,
   outline: 'none',
   transitionProperty: 'transform,visibility,opacity',
-  'WebkitBoxShadow': '0px 0px 12px 2px rgba(0,0,0,0.18)',
-  'MozBoxShadow': '0px 0px 12px 2px rgba(0,0,0,0.18)',
-  'boxShadow': '0px 0px 12px 2px rgba(0,0,0,0.18)',
+  'WebkitBoxShadow': '0px 0px 12px 2px #0000002e',
+  'MozBoxShadow': '0px 0px 12px 2px #0000002e',
+  'boxShadow': '0px 0px 12px 2px #0000002e',
 
   '&.is-dark-mode': {
     color: 'white',
