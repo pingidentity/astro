@@ -28,6 +28,7 @@ const PopoverMenu = forwardRef((props, ref) => {
     isDefaultOpen,
     isNotFlippable,
     isNotClosedOnSelect,
+    hasNoArrow,
   } = props;
 
   const [menuTrigger, menu] = React.Children.toArray(children);
@@ -81,6 +82,7 @@ const PopoverMenu = forwardRef((props, ref) => {
           ref={menuPopoverRef}
           placement={placement}
           onClose={state.close}
+          hasNoArrow={hasNoArrow}
           {...positionProps}
           {...menuProps}
         >
@@ -108,6 +110,10 @@ PopoverMenu.propTypes = {
    */
   isNotFlippable: PropTypes.bool,
   /**
+   * Allows to add an arrow to popover container
+   */
+  hasNoArrow: PropTypes.bool,
+  /**
    * Handler that is called when the overlay's open state changes.
    *
    * `(isOpen: boolean) => void`
@@ -120,6 +126,7 @@ PopoverMenu.defaultProps = {
   direction: 'bottom',
   isNotClosedOnSelect: false,
   isNotFlippable: false,
+  hasNoArrow: true,
 };
 
 PopoverMenu.displayName = 'PopoverMenu';
