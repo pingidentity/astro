@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.16.1...@pingux/astro@0.17.0) (2021-06-25)
+
+
+### Features
+
+* [UIP-4468] Stepper component ([b58afb4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b58afb4730c4b6387c1a3c02d9ba310c958f9035))
+
+
+
+
+
 ## [0.16.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.16.0...@pingux/astro@0.16.1) (2021-06-22)
 
 
