@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.4.1...@pingux/end-user@1.5.0) (2021-06-25)
+
+
+### Features
+
+* UIP-4549 Add Multivalues to End-User ([30423ef](https://gitlab.corp.pingidentity.com/ux/end-user/commit/30423ef796a5deb2bfd668cd90be34db3aeb2169))
+
+
+
+
+
 ## [1.4.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.4.0...@pingux/end-user@1.4.1) (2021-06-03)
 
 **Note:** Version bump only for package @pingux/end-user

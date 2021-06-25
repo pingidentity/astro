@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.18.1...@pingux/flow-diagram@0.18.2) (2021-06-25)
+
+
+### Bug Fixes
+
+* [UIP-4591] flow-diagram's pop-out panel did not stretch its body to full width ([af2ceec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/af2ceecc919971ca7a1ba7c068b7b6a7c173ba60))
+
+
+
+
+
 ## [0.18.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.18.0...@pingux/flow-diagram@0.18.1) (2021-06-22)
 
 
