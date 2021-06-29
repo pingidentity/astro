@@ -6,6 +6,7 @@ import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Input from '../Input';
 import Label from '../Label';
+import useLabelHeight from '../../hooks/useLabelHeight';
 
 /**
  * Combines a text input, label, and helper text for a complete, form-ready solution.
@@ -18,12 +19,16 @@ const TextField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField(props);
   const inputRef = useRef();
+  const labelRef = useRef();
+
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 
+  const { isLabelHigher } = useLabelHeight({ labelRef, inputRef });
+
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps}>
-      <Label {...fieldLabelProps} />
+      <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <Input ref={inputRef} {...fieldControlProps} />
         {slots?.inContainer}
