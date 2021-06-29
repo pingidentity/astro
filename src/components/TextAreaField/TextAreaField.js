@@ -6,6 +6,7 @@ import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
 import TextArea from '../TextArea';
+import useLabelHeight from '../../hooks/useLabelHeight';
 
 /**
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
@@ -30,6 +31,8 @@ const TextAreaField = forwardRef((props, ref) => {
     labelRef.current.style.width = textAreaRef.current.style.width;
   };
 
+  const { isLabelHigher } = useLabelHeight({ labelRef, inputRef: textAreaRef });
+
   useEffect(() => {
     if (!props.isUnresizable && props.labelMode === 'float') {
       textAreaRef.current.addEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
@@ -41,7 +44,7 @@ const TextAreaField = forwardRef((props, ref) => {
 
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps}>
-      <Label ref={labelRef} {...fieldLabelProps} />
+      <Label ref={labelRef} {...fieldLabelProps} sx={isLabelHigher && { gridRow: '1/5' }} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} />
       </Box>
