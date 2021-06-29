@@ -78,7 +78,7 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(go.Node, 'Spot',
+export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, 'Spot',
     {
         mouseDragEnter: dragEnter,
         mouseDragLeave: dragLeave(COLORS.BLUE, COLORS.ERROR, 'transparent'),
@@ -134,7 +134,7 @@ export const stepTemplate = ({ color, iconSrc, onClick = () => {} } = {}) => $(g
                         new go.Binding('desiredSize', '', s => getSize(s, 'shape')),
                         new go.Binding('fill', 'color')),
                     $(go.Picture,
-                        { source: iconSrc, width: 20, height: 20, margin: new go.Margin(0, 0, 0, -9) },
+                        { width: 20, height: 20, margin: new go.Margin(0, 0, 0, -9) },
                         new go.Binding('source', 'getIconSrc', getIcon(color || COLORS.WHITE)),
                     ),
                 ),
