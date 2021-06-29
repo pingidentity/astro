@@ -63,3 +63,18 @@ test('mousemove calls resize event', () => {
   fireEvent.mouseMove(textArea);
   expect(mockfunction).toHaveBeenCalledTimes(2);
 });
+
+test('label will receive gridRow attribute if it will be higher than textarea', () => {
+  const originalOffsetHeight = Object.getOwnPropertyDescriptor(
+    HTMLElement.prototype,
+    'offsetHeight',
+  );
+  Object.defineProperties(window.HTMLElement.prototype, {
+    offsetHeight: {
+      get() { return this.tagName === 'LABEL' ? 500 : 100; },
+    },
+  });
+  getComponent();
+  expect(screen.getByText(defaultProps.label)).toHaveStyle('grid-row: 1/5');
+  Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight);
+});
