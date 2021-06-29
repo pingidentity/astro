@@ -27,6 +27,8 @@
         "no-underscore-dangle": 0,
         "no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 0, "maxEOF": 0 }],
         "prefer-destructuring": 0,
+        // See UIP-4486 for more info on why instanceOf is forbidden
+        "react/forbid-prop-types": ["error", { "forbid": ["any", "array", "object", "instanceOf"] }],
         "react/jsx-filename-extension": 0,
         "react/prop-types": ["error", { "ignore": ["children", "className"]}],
         "react/require-default-props": 0,
