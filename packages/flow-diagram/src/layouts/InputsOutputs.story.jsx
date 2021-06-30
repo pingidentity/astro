@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Clear, Desktop, Link } from '@pingux/icons';
-import { Box, Button, Chip, Icon, IconButton, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
+import { Box, Chip, Icon, IconButton, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
 import {
     mdiDragVertical,
     mdiText,
@@ -434,8 +434,23 @@ export const InputsOutputs = () => {
                         ) : null}
                         {!outputsDocked ? (
                             <Panel
-                                title="Standard Registration"
-                                subtitle="Outputs"
+                                title={(
+                                    <React.Fragment>
+                                        <Text
+                                            sx={{
+                                                color: '#68747F',
+                                                fontSize: 15,
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                                maxWidth: 200,
+                                                whiteSpace: 'nowrap',
+                                            }}
+                                        >
+                                            Standard Registration With Long Title
+                                        </Text>
+                                        <Text sx={{ color: '#253746', fontSize: 15, fontWeight: 700 }}>Outputs</Text>
+                                    </React.Fragment>
+                                )}
                                 id="outputsPanel"
                                 onScroll={() => onScroll()}
                                 icon={
@@ -452,8 +467,12 @@ export const InputsOutputs = () => {
                         ) : null}
                         {!inputsDocked ? (
                             <Panel
-                                title="Create User"
-                                subtitle="Inputs"
+                                title={(
+                                    <React.Fragment>
+                                        <Text sx={{ color: '#68747F', fontSize: 15 }}>Create User</Text>
+                                        <Text sx={{ color: '#253746', fontSize: 15, fontWeight: 700 }}>Inputs</Text>
+                                    </React.Fragment>
+                                )}
                                 id="inputsPanel"
                                 onScroll={() => onScroll()}
                                 icon={
