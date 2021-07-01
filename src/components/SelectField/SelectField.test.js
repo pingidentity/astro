@@ -210,6 +210,32 @@ test('clicking outside of the listbox popup closes it', () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
+test('two listbox can not be open at the same time', () => {
+  getComponent({ items: [{ name: 'Alpha' }, { name: 'Bravo' }] });
+  getComponent({ items: [{ name: 'Whiskey' }, { name: 'Tango' }, { name: 'Foxtrot' }] });
+  const selectfields = screen.getAllByTestId(testId);
+  expect(selectfields).toHaveLength(2);
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const [button1, button2] = screen.getAllByRole('button');
+
+  userEvent.click(button1);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(2);
+  expect(screen.queryByRole('option', { name: 'Alpha' })).toBeInTheDocument();
+
+  userEvent.click(button2);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  userEvent.click(button2);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  expect(screen.queryByRole('option', { name: 'Whiskey' })).toBeInTheDocument();
+});
+
 
 describe('async loading', () => {
   test('displays a loader while loading', () => {
