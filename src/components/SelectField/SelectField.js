@@ -196,6 +196,7 @@ const SelectField = forwardRef((props, ref) => {
       onClose={state.close}
       style={style}
       isNonModal
+      isDismissable
     >
       {listbox}
     </PopoverContainer>

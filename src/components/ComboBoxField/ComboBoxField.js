@@ -50,8 +50,6 @@ const ComboBoxField = forwardRef((props, ref) => {
     onSelectionChange,
     defaultItems,
     items,
-    isDefaultOpen,
-    isOpen,
     onOpenChange,
     loadingState,
     onLoadMore,
@@ -84,8 +82,6 @@ const ComboBoxField = forwardRef((props, ref) => {
     onSelectionChange,
     defaultItems,
     items,
-    defaultOpen: isDefaultOpen,
-    isOpen,
     onOpenChange,
     loadingState,
     onLoadMore,
@@ -106,12 +102,10 @@ const ComboBoxField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => inputRef.current);
 
   const { contains } = useFilter({ sensitivity: 'base' });
-  const state = useComboBoxState(
-    {
-      ...comboBoxOptions,
-      defaultFilter: contains,
-    },
-  );
+  const state = useComboBoxState({
+    ...comboBoxOptions,
+    defaultFilter: contains,
+  });
 
   const { buttonProps, inputProps, listBoxProps, labelProps } = useComboBox(
     {
@@ -159,7 +153,7 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   const listbox = (
     <FocusScope restoreFocus>
-      <DismissButton onDismiss={() => state.close()} />
+      <DismissButton onDismiss={state.close} />
       <ListBox
         ref={listBoxRef}
         hasNoEmptySelection
@@ -170,7 +164,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         onLoadMore={onLoadMore}
         {...listBoxProps}
       />
-      <DismissButton onDismiss={() => state.close()} />
+      <DismissButton onDismiss={state.close} />
     </FocusScope>
   );
 
@@ -192,6 +186,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         hasNoArrow
         style={style}
         isNonModal
+        isDismissable={false}
       >
         {listbox}
       </PopoverContainer>
@@ -232,14 +227,11 @@ ComboBoxField.propTypes = {
   defaultItems: isIterableProp,
   /** The list of ComboBox items (controlled). */
   items: isIterableProp,
-  /** Sets the default open state of the menu (uncontrolled). */
-  isDefaultOpen: PropTypes.bool,
-  /** Sets the open state of the menu (controlled). */
-  isOpen: PropTypes.bool,
   /**
    * Method that is called when the open state of the menu changes.
+   * Returns the new open state and the action that caused the opening of the menu.
    *
-   * `(isOpen: boolean) => void`
+   * `(isOpen: boolean, menuTrigger: MenuTriggerAction) => void`
    */
   onOpenChange: PropTypes.func,
   loadingState: PropTypes.oneOf(Object.values(loadingStates)),
