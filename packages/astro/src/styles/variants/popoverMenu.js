@@ -15,7 +15,6 @@ const container = {
   '&.is-dark-mode': {
     color: 'white',
     bg: 'accent.20',
-    p: 'sm',
     '&[data-popover-placement^=top] > [data-popover-arrow="arrow"]:before': {
       borderTopColor: 'accent.20',
     },
