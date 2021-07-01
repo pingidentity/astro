@@ -126,6 +126,8 @@ test('should be able to open and navigate through the listbox by click', () => {
   userEvent.click(button);
   const options = screen.queryAllByRole('option');
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  // Both dismiss buttons should be available, but the dropdown button should be inaccessible
+  expect(screen.queryAllByRole('button')).toHaveLength(2);
   expect(options).toHaveLength(items.length);
   expect(input).not.toHaveAttribute('aria-activedescendant', options[0].id);
   options.forEach(opt => expect(opt).not.toHaveClass('is-focused'));
@@ -198,51 +200,9 @@ test('should invoke onInputChange', () => {
   expect(input).not.toHaveValue(newValue);
 });
 
-test('should invoke onOpenChange when isOpen is true', () => {
+test('should invoke onOpenChange on button click', () => {
   const onOpenChange = jest.fn();
-  getComponent({ isOpen: true, onOpenChange });
-  const input = screen.queryByRole('combobox');
-  const buttons = screen.queryAllByRole('button');
-  const listbox = screen.queryByRole('listbox');
-  expect(buttons).toHaveLength(2); // Two dismiss buttons (the combobox button is aria hidden)
-  expect(listbox).toBeInTheDocument();
-  expect(onOpenChange).not.toHaveBeenCalled();
-
-  // Should fire on first dismiss button click
-  userEvent.click(buttons[0]);
-  expect(onOpenChange).toHaveBeenCalledTimes(1);
-  expect(onOpenChange).toHaveBeenNthCalledWith(1, false);
-
-
-  // Should fire on second dismiss button click
-  userEvent.click(buttons[1]);
-  expect(onOpenChange).toHaveBeenCalledTimes(2);
-  expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
-
-  // Should fire on outside click once the input is focused
-  userEvent.click(input);
-  userEvent.click(global.document.body);
-  expect(onOpenChange).toHaveBeenCalledTimes(3);
-  expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
-
-  // Should fire on click selection
-  userEvent.click(screen.queryAllByRole('option')[0]);
-  expect(onOpenChange).toHaveBeenCalledTimes(4);
-  expect(onOpenChange).toHaveBeenNthCalledWith(3, false);
-
-  // Should fire on keyboard selection
-  userEvent.type(input, '{arrowdown}{enter}');
-  expect(onOpenChange).toHaveBeenCalledTimes(5);
-  expect(onOpenChange).toHaveBeenNthCalledWith(4, false);
-
-  // Total number of calls
-  expect(onOpenChange).toHaveBeenCalledTimes(5);
-});
-
-test('should invoke onOpenChange when isOpen is false', () => {
-  const onOpenChange = jest.fn();
-  getComponent({ isOpen: false, onOpenChange });
-  const input = screen.queryByRole('combobox');
+  getComponent({ onOpenChange });
   const button = screen.queryByRole('button');
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
@@ -250,18 +210,46 @@ test('should invoke onOpenChange when isOpen is false', () => {
 
   // Should fire on button click
   userEvent.click(button);
-  expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
+  expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
+});
+
+test('should invoke onOpenChange on input change', () => {
+  const onOpenChange = jest.fn();
+  getComponent({ onOpenChange });
+  const input = screen.queryByRole('combobox');
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).not.toBeInTheDocument();
+  expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on input change (default menuTrigger)
   userEvent.type(input, 'a');
-  expect(onOpenChange).toHaveBeenNthCalledWith(2, true);
+  expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'input');
+});
+
+test('should invoke onOpenChange on keyboard arrow down', () => {
+  const onOpenChange = jest.fn();
+  getComponent({ onOpenChange });
+  const input = screen.queryByRole('combobox');
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).not.toBeInTheDocument();
+  expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on keyboard interaction
   userEvent.type(input, '{arrowdown}');
-  expect(onOpenChange).toHaveBeenNthCalledWith(3, true);
+  expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
+});
 
-  // Total number of calls
-  expect(onOpenChange).toHaveBeenCalledTimes(3);
+test('should invoke onOpenChange on keyboard arrow up', () => {
+  const onOpenChange = jest.fn();
+  getComponent({ onOpenChange });
+  const input = screen.queryByRole('combobox');
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).not.toBeInTheDocument();
+  expect(onOpenChange).not.toHaveBeenCalled();
+
+  // Should fire on keyboard interaction
+  userEvent.type(input, '{arrowup}');
+  expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
 });
 
 test('should invoke onSelectionChange when selection is made', () => {
@@ -464,4 +452,24 @@ describe('loadingState', () => {
     expect(loader).toBeTruthy();
     expect(loader).toHaveAttribute('aria-label', 'Loading more...');
   });
+});
+
+test('two listbox can not be open at the same time', () => {
+  getComponent();
+  getComponent({ items: [{ name: 'Tango', id: '4' }, { name: 'Foxtrot', id: '5' }] });
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const [button1, button2] = screen.getAllByRole('button');
+
+  userEvent.click(button1);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
+
+  userEvent.click(button2);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(2);
+  expect(screen.queryByRole('option', { name: 'Tango' })).toBeInTheDocument();
 });
