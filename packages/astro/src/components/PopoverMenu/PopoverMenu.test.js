@@ -115,3 +115,46 @@ test('should respond to onOpenChange', () => {
   userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
 });
+
+test('two menus can not be open at the same time', () => {
+  render((
+    <>
+      <PopoverMenu>
+        <Button>Mock Button</Button>
+        <Menu>
+          <Item key="a">A</Item>
+          <Item key="b">B</Item>
+        </Menu>
+      </PopoverMenu>
+      <PopoverMenu>
+        <Button>Mock Button 2</Button>
+        <Menu>
+          <Item key="c">C</Item>
+          <Item key="d">D</Item>
+          <Item key="e">E</Item>
+        </Menu>
+      </PopoverMenu>
+    </>
+  ));
+
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+
+  const [button1, button2] = screen.getAllByRole('button');
+
+  userEvent.click(button1);
+  expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  expect(screen.queryByRole('menu')).toBeInTheDocument();
+  expect(screen.queryAllByRole('menuitem')).toHaveLength(2);
+  expect(screen.queryByRole('menuitem', { name: 'A' })).toBeInTheDocument();
+
+  userEvent.click(button2);
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+
+  userEvent.click(button2);
+  expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  expect(screen.queryByRole('menu')).toBeInTheDocument();
+  expect(screen.queryAllByRole('menuitem')).toHaveLength(3);
+  expect(screen.queryByRole('menuitem', { name: 'C' })).toBeInTheDocument();
+});

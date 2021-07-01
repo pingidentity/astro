@@ -20,6 +20,7 @@ const PopoverContainer = forwardRef((props, ref) => {
     hasNoArrow,
     isKeyboardDismissDisabled,
     isNonModal,
+    isDismissable = true,
     ...others
   } = props;
 
@@ -34,6 +35,7 @@ const PopoverContainer = forwardRef((props, ref) => {
         isKeyboardDismissDisabled={isKeyboardDismissDisabled}
         hasNoArrow={hasNoArrow}
         isNonModal={isNonModal}
+        isDismissable={isDismissable}
         {...others}
       >
         {children}
@@ -50,6 +52,7 @@ PopoverContainer.propTypes = {
   hasNoArrow: PropTypes.bool,
   isKeyboardDismissDisabled: PropTypes.bool,
   isNonModal: PropTypes.bool,
+  isDismissable: PropTypes.bool,
 };
 
 export const PopoverWrapper = forwardRef((props, ref) => {
@@ -63,12 +66,16 @@ export const PopoverWrapper = forwardRef((props, ref) => {
     isNotClosedOnBlur,
     isKeyboardDismissDisabled,
     isNonModal,
+    isDismissable,
     ...others
   } = props;
   const popoverRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => popoverRef.current);
-  const { overlayProps } = useOverlay({ ...props, isDismissable: true }, popoverRef);
+  const { overlayProps } = useOverlay(
+    { ...props, isDismissable: isDismissable && isOpen },
+    popoverRef,
+  );
   const { modalProps } = useModal({ isDisabled: isNonModal });
   const { classNames } = useStatusClasses(className, { isOpen });
 
@@ -107,6 +114,7 @@ PopoverWrapper.propTypes = {
   isNotClosedOnBlur: PropTypes.bool,
   isKeyboardDismissDisabled: PropTypes.bool,
   isNonModal: PropTypes.bool,
+  isDismissable: PropTypes.bool,
 };
 
 PopoverWrapper.defaultProps = {
