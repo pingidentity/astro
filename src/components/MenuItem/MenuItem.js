@@ -12,6 +12,7 @@ import { useFocus, useHover, usePress } from '@react-aria/interactions';
 import { useMenuContext } from '../../context/MenuContext';
 import useStatusClasses from '../../hooks/useStatusClasses';
 import Box from '../Box';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
 /**
  * Menu Item component intended to be used within Menu or PopupMenu.
@@ -112,7 +113,7 @@ MenuItem.propTypes = {
     isDisabled: PropTypes.bool,
   }),
   state: PropTypes.shape({
-    disabledKeys: PropTypes.instanceOf(Set),
+    disabledKeys: isIterableProp,
     selectionManager: PropTypes.shape({
       isSelected: PropTypes.func,
     }),

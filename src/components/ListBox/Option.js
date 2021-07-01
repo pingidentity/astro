@@ -9,6 +9,7 @@ import useStatusClasses from '../../hooks/useStatusClasses';
 import Box from '../Box';
 import Icon from '../Icon';
 import { ListBoxContext } from './ListBoxContext';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
 const Option = forwardRef((props, ref) => {
   const {
@@ -83,7 +84,7 @@ Option.propTypes = {
     rendered: PropTypes.node,
   }),
   state: PropTypes.shape({
-    disabledKeys: PropTypes.instanceOf(Set),
+    disabledKeys: isIterableProp,
     selectionManager: PropTypes.shape({
       focusedKey: PropTypes.string,
       isSelected: PropTypes.func,
