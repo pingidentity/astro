@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.17.0...@pingux/astro@0.17.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* UIP-4535 Helphint Placement with Left Label Mode ([5adb869](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5adb8698f34f244e8f0e94c0588aa5092cea4ff8))
+
+
+
+
+
 # [0.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.16.1...@pingux/astro@0.17.0) (2021-06-25)
 
 
