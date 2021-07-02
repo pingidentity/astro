@@ -43,7 +43,7 @@ test('disabled prop disables dropdown input', () => {
 test('input is not disabled without disabled prop', () => {
   getComponent();
   const dropdown = document.querySelector('select');
-  expect(dropdown).not.toBeDisabled();
+  expect(dropdown).toBeEnabled();
 });
 
 test('displays helper text when helperText prop is passed', () => {
