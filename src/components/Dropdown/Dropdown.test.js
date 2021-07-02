@@ -24,7 +24,7 @@ test('dropdown renders', () => {
 
 test('hasNoneOption prop renders none option', () => {
   getComponent({ hasNoneOption: true, noneLabel: 'None' });
-  expect(within(document).getByText('None')).toBeTruthy();
+  expect(within(document).getByText('None')).toBeInTheDocument();
 });
 
 test('dropdown has focus styles', () => {
@@ -42,7 +42,7 @@ test('default option is first one', () => {
   const firstOption = dropdown.querySelector('option');
   expect(firstOption.value).toEqual('');
   expect(firstOption).toHaveAttribute('selected', '');
-  expect(firstOption).not.toBeDisabled();
+  expect(firstOption).toBeEnabled();
 });
 
 test('default option is disabled when hasDisabledFirstOption is passed in', () => {

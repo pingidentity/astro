@@ -175,7 +175,7 @@ test('should open list on focus when menuTrigger is set to use focus', () => {
   // blur
   userEvent.tab();
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
-  expect(screen.queryAllByRole('option')).toHaveLength(0);
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   // focus with click
   userEvent.click(input);
@@ -302,7 +302,7 @@ test('should use default contains filtering', () => {
 
   // Should list no options when none match
   userEvent.type(input, 'z');
-  expect(screen.queryAllByRole('option')).toHaveLength(0);
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
 
 test('should be able to use controlled filtering', async () => {
@@ -326,7 +326,7 @@ describe('loadingState', () => {
     const { rerender } = getComponent({ loadingState: loadingStates.LOADING });
     act(() => { jest.advanceTimersByTime(500); });
     // First time load will show progress bar so user can know that items are being fetched
-    expect(screen.getByRole('progressbar')).toBeTruthy();
+    expect(screen.getByRole('progressbar')).toBeInTheDocument();
 
     getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender });
 
@@ -461,7 +461,7 @@ describe('loadingState', () => {
     expect(listbox).toBeVisible();
 
     const loader = within(listbox).getByRole('progressbar');
-    expect(loader).toBeTruthy();
+    expect(loader).toBeInTheDocument();
     expect(loader).toHaveAttribute('aria-label', 'Loading more...');
   });
 });

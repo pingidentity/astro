@@ -68,7 +68,7 @@ test('allows users to open and close accordion item with enter / space key', () 
   const selectedItem = buttons[0];
   expect(selectedItem).toHaveAttribute('aria-expanded', 'false');
   act(() => { selectedItem.focus(); });
-  expect(document.activeElement).toBe(selectedItem);
+  expect(selectedItem).toHaveFocus();
 
   fireEvent.keyDown(selectedItem, { key: 'Enter' });
   fireEvent.keyUp(selectedItem, { key: 'Enter' });
@@ -85,17 +85,17 @@ test('allows users to naviagte accordion headers through arrow keys', () => {
   const [firstItem, secondItem, thirdItem] = buttons;
   act(() => { firstItem.focus(); });
 
-  expect(document.activeElement).toBe(firstItem);
+  expect(firstItem).toHaveFocus();
   fireEvent.keyDown(firstItem, { key: 'ArrowUp' });
-  expect(document.activeElement).toBe(firstItem);
+  expect(firstItem).toHaveFocus();
   fireEvent.keyDown(firstItem, { key: 'ArrowDown' });
-  expect(document.activeElement).toBe(secondItem);
+  expect(secondItem).toHaveFocus();
   fireEvent.keyDown(secondItem, { key: 'ArrowDown' });
-  expect(document.activeElement).toBe(thirdItem);
+  expect(thirdItem).toHaveFocus();
   fireEvent.keyDown(thirdItem, { key: 'ArrowDown' });
-  expect(document.activeElement).toBe(thirdItem);
+  expect(thirdItem).toHaveFocus();
   fireEvent.keyDown(thirdItem, { key: 'ArrowUp' });
-  expect(document.activeElement).toBe(secondItem);
+  expect(secondItem).toHaveFocus();
 });
 
 test('allows users to navigate accordion headers through the tab key', () => {
@@ -103,21 +103,21 @@ test('allows users to navigate accordion headers through the tab key', () => {
   const buttons = screen.getAllByRole('button');
   const [firstItem, secondItem, thirdItem] = buttons;
   act(() => { firstItem.focus(); });
-  expect(document.activeElement).toBe(firstItem);
+  expect(firstItem).toHaveFocus();
   userEvent.tab();
-  expect(document.activeElement).toBe(secondItem);
+  expect(secondItem).toHaveFocus();
   userEvent.tab({ shift: true });
-  expect(document.activeElement).toBe(firstItem);
+  expect(firstItem).toHaveFocus();
   userEvent.tab();
-  expect(document.activeElement).toBe(secondItem);
+  expect(secondItem).toHaveFocus();
   userEvent.tab();
-  expect(document.activeElement).toBe(thirdItem);
+  expect(thirdItem).toHaveFocus();
   userEvent.tab();
-  expect(document.activeElement).not.toBe(firstItem);
-  expect(document.activeElement).not.toBe(secondItem);
-  expect(document.activeElement).not.toBe(thirdItem);
+  expect(firstItem).not.toHaveFocus();
+  expect(secondItem).not.toHaveFocus();
+  expect(thirdItem).not.toHaveFocus();
   userEvent.tab({ shift: true });
-  expect(document.activeElement).toBe(thirdItem);
+  expect(thirdItem).toHaveFocus();
 });
 
 test('disabled keys prop disables an accordion item', () => {
