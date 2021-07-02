@@ -38,7 +38,7 @@ test('renders rocker container with buttons', () => {
 test('buttonGroup is not disabled by default', () => {
   getComponent();
   const rockerContainer = document.querySelector("[data-id='test-container']");
-  expect(rockerContainer).not.toBeDisabled();
+  expect(rockerContainer).toBeEnabled();
 
   testButtons.forEach((button) => {
     const buttonKey = screen.getByText(button.key);
