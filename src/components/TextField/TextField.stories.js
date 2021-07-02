@@ -7,11 +7,12 @@ export default {
   component: TextField,
 };
 
-export const Default = () => (
+export const Default = args => (
   <TextField
     id="custom-id"
     name="custom-name"
     label="Example Label"
+    {...args}
   />
 );
 
