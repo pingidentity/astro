@@ -5,7 +5,7 @@
         "jasmine": true
     },
     "parser": "babel-eslint",
-    "extends": "airbnb",
+    "extends": ["airbnb", "plugin:testing-library/react", "plugin:jest-dom/recommended"],
     "rules": {
         "arrow-body-style": 0,
         "import/extensions": 0,
@@ -34,7 +34,8 @@
         "react/boolean-prop-naming": 2,
         "function-paren-newline": 0,
         "quote-props": 0,
-        "object-curly-newline": ["error", { "consistent": true }]
+        "object-curly-newline": ["error", { "consistent": true }],
+        "testing-library/no-node-access": 1
     },
     "settings": {
         "import/resolver": {
@@ -53,5 +54,6 @@
                 "react/prop-types": 0
             }
         }
-    ]
+    ],
+    "plugins": ["testing-library", "jest-dom"]
 }

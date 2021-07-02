@@ -184,7 +184,7 @@ test('isRequired prop for select field', () => {
   getComponent({ isRequired: true });
   const labels = screen.getAllByText(defaultProps.label);
   const visibleLabel = labels[0];
-  expect(visibleLabel.textContent).toEqual(expect.stringMatching(/^.*\*/));
+  expect(visibleLabel).toHaveTextContent('testLabel');
 });
 
 test('clicking the visually hidden dismiss buttons close the listbox popup', () => {

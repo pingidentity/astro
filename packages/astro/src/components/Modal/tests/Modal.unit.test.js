@@ -104,13 +104,13 @@ test('should only hide the top-most overlay', () => {
   const onCloseFirst = jest.fn();
   const onCloseSecond = jest.fn();
   getComponent({ isOpen: true, onClose: onCloseFirst, isDismissable: true });
-  const second = getComponent({ isOpen: true, onClose: onCloseSecond, isDismissable: true });
+  const { unmount } = getComponent({ isOpen: true, onClose: onCloseSecond, isDismissable: true });
 
   userEvent.click(document.body);
   expect(onCloseSecond).toHaveBeenCalledTimes(1);
   expect(onCloseFirst).not.toHaveBeenCalled();
 
-  second.unmount();
+  unmount();
 
   userEvent.click(document.body);
   expect(onCloseFirst).toHaveBeenCalledTimes(1);
