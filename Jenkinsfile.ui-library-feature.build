@@ -2,8 +2,8 @@
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
 
-def ortCdnDeploy = libraryResource 'podTemplates/ort-cdn-deploy.yaml';
-def prodCdnDeploy = libraryResource 'podTemplates/prod-cdn-deploy.yaml';
+def ortCdnDeploy = libraryResource 'podTemplates/central-only/ort-cdn-deploy.yaml';
+def prodCdnDeploy = libraryResource 'podTemplates/central-only/prod-cdn-deploy.yaml';
 def uiPipelineShared = libraryResource 'podTemplates/ui-pipeline-shared.yaml';
 def centralCluster = 'central-us-east-2-k8s'
 
@@ -140,4 +140,3 @@ pipeline {
     }
   }
 }
-
