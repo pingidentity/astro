@@ -84,16 +84,7 @@ test('click should fire `onStepChange` handler', () => {
   getComponent({ onStepChange });
   const { tab1 } = getTabs();
   userEvent.click(tab1);
-  expect(onStepChange).toHaveBeenCalled();
-});
-
-test('`onStepChange` get as first arg number of clicked step', () => {
-  const onStepChange = jest.fn();
-
-  getComponent({ onStepChange });
-  const { tab2 } = getTabs();
-  userEvent.click(tab2);
-  expect(onStepChange).toHaveBeenCalledWith(3);
+  expect(onStepChange).toHaveBeenCalledWith(2);
 });
 
 test('tooltip renders expected content based on props', () => {
