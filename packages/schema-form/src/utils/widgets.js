@@ -12,6 +12,7 @@ const widgets = {
   TextareaWidget: ThemedWidget('textarea'),
   URLWidget: ThemedWidget('url'),
   passwordWithRequirements: ThemedWidget('passwordWithRequirements'),
+  radiogroup: ThemedWidget('radiogroup'),
   recaptchaV2: RecaptchaV2,
 };
 
