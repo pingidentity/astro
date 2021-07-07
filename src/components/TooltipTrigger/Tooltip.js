@@ -11,7 +11,7 @@ const Tooltip = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tooltipRef.current);
 
-  return <Box ref={tooltipRef} {...tooltipProps} {...props} />;
+  return <Box ref={tooltipRef} sx={{ p: 'sm' }} {...tooltipProps} {...props} />;
 });
 
 export default Tooltip;
