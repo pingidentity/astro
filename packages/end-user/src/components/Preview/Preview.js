@@ -10,7 +10,7 @@ const cleanStyles = (styles) => {
         .trim(); // Clean up extra spaces on ends
 };
 
-export const applyStyles = (colors, bgImg) => {
+export const applyStyles = (colors, bgImg, template) => {
     const cssTemplate = `
         ${(bgImg || colors.background || colors.bodyText) ? `
             .page {
@@ -34,12 +34,29 @@ export const applyStyles = (colors, bgImg) => {
             }
         ` : ''}
 
-        ${colors.card ? `
+        ${colors.card && template.toLowerCase() !== 'split' ? `
             .card {
                 background: ${colors.card};
             }
 
             .branding-template-footer-container {
+                background: ${colors.card};
+            }
+        ` : ''}
+
+        ${ // this override allows a background image to be visible between the logo and form containers for the Split template
+        colors.card && template.toLowerCase() === 'split' ? `
+            .card {
+                background: transparent;
+            }
+
+            .branding-template-logo-container {
+                background: ${colors.card};
+                margin-right: 10px;
+                border-right-width: 0;
+            }
+
+            .branding-template-form-container {
                 background: ${colors.card};
             }
         ` : ''}
@@ -108,8 +125,9 @@ export const ThemeStyles = ({
     styles,
     onLoad,
     bgImg,
+    template,
 }) => {
-    const userStyleElem = React.createElement('style', null, applyStyles(styles, bgImg));
+    const userStyleElem = React.createElement('style', null, applyStyles(styles, bgImg, template));
 
     return (
         <>
@@ -132,6 +150,7 @@ ThemeStyles.propTypes = {
     themeStyleSheet: PropTypes.string,
     userStyles: PropTypes.shape({}),
     onLoad: PropTypes.func,
+    template: PropTypes.string,
 };
 
 ThemeStyles.defaultProps = {
