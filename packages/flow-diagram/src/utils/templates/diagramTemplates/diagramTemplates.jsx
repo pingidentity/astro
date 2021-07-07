@@ -2,7 +2,7 @@ import * as go from 'gojs';
 
 const $ = go.GraphObject.make;
 
-export const diagramGroupTemplate =
+export const diagramGroupTemplate = ({ comparer } = {}) =>
     $(go.Group, go.Panel.Auto,
         {
             isSubGraphExpanded: true,
@@ -12,13 +12,13 @@ export const diagramGroupTemplate =
             selectable: true,
             handlesDragDropForMembers: true,
             resizable: false,
-            layout: $(go.LayeredDigraphLayout,
+            layout: $(go.TreeLayout,
                 {
-                    setsPortSpots: true,
-                    columnSpacing: 20,
                     layerSpacing: 20,
                     isInitial: true,
                     isOngoing: true,
+                    comparer,
+                    sorting: comparer ? go.TreeLayout.SortingAscending : go.TreeLayout.SortingForwards,
                 },
             ),
         },

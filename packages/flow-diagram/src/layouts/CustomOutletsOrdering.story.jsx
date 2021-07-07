@@ -17,9 +17,19 @@ import {
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
+const customComparer = (a, b) => {
+    // "no such user" will be the latest, others will maintain insertion order
+    if (a.node.data.text === 'no such user') return 1;
+    if (b.node.data.text === 'no such user') return -1;
+    /* for newly created nodes we may not provide explicit `.data.index`
+    but they still will go in insertion order when `undefined` is returned from comparer function
+     */
+    return a.node.data.index - b.node.data.index;
+};
+
 export const DiagramComponent = () => {
     const disabled = false;
-    const diagramNodes = [
+    const [diagramNodes, setDiagramNodes] = React.useState([
         {
             isGroup: 'true',
             'key': 'group',
@@ -36,24 +46,47 @@ export const DiagramComponent = () => {
             color: '#028CFF',
         },
         { isGroup: 'true', 'key': 'isFinished' },
-        { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' },
-        { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
+        { 'key': 'user-login-d', 'category': 'outlet', color: '#E4E7E9', 'text': 'd', 'group': 'group', index: 0 },
+        { 'key': 'user-login-b', 'category': 'outlet', color: '#E4E7E9', 'text': 'b', 'group': 'group', index: 1 },
+        { 'key': 'user-login-a', 'category': 'outlet', color: '#D5DCF3', 'text': 'a', width: 100, 'group': 'group', index: 2 },
+        { 'key': 'user-login-c', 'category': 'outlet', color: '#E4E7E9', 'text': 'c', 'group': 'group', index: 3 },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished', 'group': 'isFinished', hasIO: false },
-        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false }];
+        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false }]);
 
-    const diagramLinks = [
-        { 'from': 'user-login', 'to': 'user-login-success', 'key': 'user-login_user-login-success', 'category': 'outlet' },
-        { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
-        { 'from': 'user-login', 'to': 'user-login-failure', 'key': 'user-login_user-login-failure', 'category': 'outlet' },
+    const [diagramLinks, setDiagramLinks] = React.useState([
+        { 'from': 'user-login', 'to': 'user-login-a', 'key': 'user-login_user-login-a', 'category': 'outlet' },
+        { 'from': 'user-login', 'to': 'user-login-b', 'key': 'user-login_user-login-b', 'category': 'outlet' },
+        { 'from': 'user-login', 'to': 'user-login-c', 'key': 'user-login_user-login-c', 'category': 'outlet' },
+        { 'from': 'user-login', 'to': 'user-login-d', 'key': 'user-login_user-login-d', 'category': 'outlet' },
+        { 'from': 'user-login-a', 'to': 'finished', 'key': 'user-login-success_finished' },
         { 'from': 'user-login', 'to': 'user-login-not_found', 'key': 'user-login_user-login-not_found', 'category': 'outlet' },
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
-    ];
+    ]);
+
+    const counter = React.useRef(1);
+    React.useEffect(() => {
+        if (counter.current > 4) return;
+        const timerId = setTimeout(() => {
+            counter.current += 1;
+            const key = String(Math.random());
+            setDiagramNodes(oldNodes => [
+                ...oldNodes,
+                { key, category: 'outlet', group: 'group', text: key, color: '#E4E7E9' },
+            ]);
+            setDiagramLinks(oldLinks => [
+                ...oldLinks,
+                { from: 'user-login', to: key, category: 'outlet' },
+            ]);
+        }, 2000);
+        return () => clearTimeout(timerId);
+    });
+
 
     const { diagramProps, diagramObject } = useDiagram({
         isDisabled: disabled,
         groupTemplates: [
-            ['', diagramGroupTemplate()],
+            ['', diagramGroupTemplate({ comparer: customComparer })],
         ],
         linkDataArray: diagramLinks,
         nodeDataArray: diagramNodes,
@@ -79,7 +112,7 @@ export const DiagramComponent = () => {
     });
 
     return (
-        <DiagramWrapper style={{ width: 600, height: 300 }}>
+        <DiagramWrapper style={{ width: 600, height: 600 }}>
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
@@ -106,6 +139,6 @@ DiagramComponent.propTypes = {
 };
 
 export default {
-    title: 'Diagram',
+    title: 'Custom ordering for outlets',
     component: DiagramComponent,
 };

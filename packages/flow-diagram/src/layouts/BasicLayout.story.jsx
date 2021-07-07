@@ -83,7 +83,7 @@ const Demo = () => {
     const { diagramProps } = useDiagram({
         isDisabled: disabled,
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
             // Add a template for groups dragged from palette so that they look correct
             // when dragging.
             ['palette-group', paletteGroupTemplate()],

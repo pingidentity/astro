@@ -46,7 +46,7 @@ export const Default = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: diagramLinks,
         nodeDataArray: diagramNodes,
@@ -98,7 +98,7 @@ export const IO = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: diagramLinks,
         nodeDataArray: diagramNodes,
@@ -142,7 +142,7 @@ export const Outlet = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: diagramLinks,
         nodeDataArray: diagramNodes,
