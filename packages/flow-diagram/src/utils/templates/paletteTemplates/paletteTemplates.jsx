@@ -26,7 +26,7 @@ export const checkIfDragged = (isBeingDragged, node) => {
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const paletteItemTemplate = ({ iconSrc } = {}) => $(go.Node, 'Spot',
+export const paletteItemTemplate = () => $(go.Node, 'Spot',
     { selectionAdorned: false, textEditable: true, locationObjectName: 'BODY' },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     $(go.Panel, 'Auto',
@@ -41,7 +41,7 @@ export const paletteItemTemplate = ({ iconSrc } = {}) => $(go.Node, 'Spot',
                 $(go.Picture, { source: svgComponentToBase64(React.cloneElement(<Grip />, { fill: '#98A0A8' })), width: 15, height: 15, margin: new go.Margin(0, 7, 0, 5) }),
                 $(
                     go.Picture,
-                    { source: iconSrc, width: 18, height: 18 },
+                    { width: 18, height: 18 },
                     new go.Binding('source', 'getIconSrc', getIcon),
                 ),
             ),
@@ -59,7 +59,7 @@ export const paletteItemTemplate = ({ iconSrc } = {}) => $(go.Node, 'Spot',
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const paletteGroupTemplate = ({ iconSrc } = {}) =>
+export const paletteGroupTemplate = () =>
     $(go.Group,
         {
             isSubGraphExpanded: false,
@@ -81,7 +81,7 @@ export const paletteGroupTemplate = ({ iconSrc } = {}) =>
                     $(go.Picture, { source: svgComponentToBase64(React.cloneElement(<Grip />, { fill: '#98A0A8' })), width: 15, height: 15, margin: new go.Margin(0, 5, 0, 5) }),
                     $(
                         go.Picture,
-                        { source: iconSrc, width: 18, height: 18 },
+                        { width: 18, height: 18 },
                         new go.Binding('source', 'getIconSrc', getIcon),
                     ),
                 ),
