@@ -7,6 +7,7 @@ import modal from './modal';
 import menu from './menu';
 import menuItem from './menuItem';
 import popover from './popover';
+import overlayPanel from './overlayPanel';
 import popoverMenu from './popoverMenu';
 import rockerbutton from './rockerbutton';
 import separator from './separator';
@@ -29,6 +30,7 @@ export default {
   popoverMenu,
   rockerbutton,
   separator,
+  overlayPanel,
   stepper,
   ...tabs,
 };
