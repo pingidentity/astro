@@ -122,6 +122,21 @@ export * from './components/SwitchField';
 export { default as Tab } from './components/Tab';
 export * from './components/Tab';
 
+export { default as Table } from './components/Table';
+export * from './components/Table';
+
+export { default as TableBody } from './components/TableBody';
+export * from './components/TableBody';
+
+export { default as TableCell } from './components/TableCell';
+export * from './components/TableCell';
+
+export { default as TableHead } from './components/TableHead';
+export * from './components/TableHead';
+
+export { default as TableRow } from './components/TableRow';
+export * from './components/TableRow';
+
 export { default as Tabs } from './components/Tabs';
 export * from './components/Tabs';
 

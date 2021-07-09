@@ -14,6 +14,7 @@ import separator from './separator';
 import stepper from './stepper';
 import * as tabs from './tabs';
 import loader from './loader';
+import table from './table';
 
 
 export default {
@@ -30,6 +31,7 @@ export default {
   popoverMenu,
   rockerbutton,
   separator,
+  table,
   overlayPanel,
   stepper,
   ...tabs,
