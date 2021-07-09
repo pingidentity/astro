@@ -37,6 +37,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
     onLoadMore,
     onOpenChange,
     onSelectionChange,
+    wrapperProps,
     ...others
   } = props;
   const textFieldProps = {
@@ -122,9 +123,10 @@ const ComboBoxInput = forwardRef((props, ref) => {
         style={style}
         variant="forms.comboBox.container"
         {...hoverProps}
-        {...containerProps}
+        {...wrapperProps}
       >
         <TextField
+          {...containerProps}
           {...textFieldProps}
           controlProps={{
             variant: 'forms.comboBox.input',
@@ -144,6 +146,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
 ComboBoxInput.propTypes = {
   controlProps: PropTypes.shape({}),
   containerProps: PropTypes.shape({}),
+  wrapperProps: PropTypes.shape({}),
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   inputProps: PropTypes.shape({
