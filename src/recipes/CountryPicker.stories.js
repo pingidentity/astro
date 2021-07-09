@@ -63,7 +63,7 @@ export const Default = () => {
         width="100%"
         isOpen={isOpen}
         onOpenChange={setIsOpen}
-        containerProps={{ sx: { position: 'absolute', transition: '0.2s width ease', width: isOpen ? '100%' : 110 } }}
+        wrapperProps={{ sx: { position: 'absolute', transition: '0.2s width ease', width: isOpen ? '100%' : 110 } }}
         controlProps={{ 'aria-label': 'Country Picker' }}
         defaultItems={Object.entries(countriesObj)}
         inputValue={getInputValue()}
