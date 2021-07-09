@@ -24,7 +24,7 @@ export const Branch = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: [],
         nodeDataArray: diagramNodes,
@@ -49,7 +49,7 @@ export const Failure = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: [],
         nodeDataArray: diagramNodes,
@@ -92,7 +92,7 @@ export const Group = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: diagramLinks,
         nodeDataArray: diagramNodes,
@@ -119,7 +119,7 @@ export const Outlet = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: [],
         nodeDataArray: diagramNodes,
@@ -141,7 +141,7 @@ export const Start = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: [],
         nodeDataArray: diagramNodes,
@@ -159,7 +159,6 @@ export const Start = () => {
 };
 
 export const Step = () => {
-
     const onStepClick = (e, obj) => {
         console.log('clicked');
     };
@@ -180,7 +179,7 @@ export const Step = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: [],
         nodeDataArray: diagramNodes,
@@ -206,7 +205,7 @@ export const Success = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: [],
         nodeDataArray: diagramNodes,

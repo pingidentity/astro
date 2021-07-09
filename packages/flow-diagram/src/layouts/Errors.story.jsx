@@ -41,7 +41,7 @@ export const Errors = () => {
 
     const { diagramProps } = useDiagram({
         groupTemplates: [
-            ['', diagramGroupTemplate],
+            ['', diagramGroupTemplate()],
         ],
         linkDataArray: diagramLinks,
         nodeDataArray: diagramNodes,
