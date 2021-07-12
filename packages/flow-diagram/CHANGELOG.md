@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.18.3...@pingux/flow-diagram@0.19.0) (2021-07-12)
+
+
+### Bug Fixes
+
+* [UIP-4599] Image url undefined error ([01e28d9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/01e28d92b98b567376a53cd4df1008fa0f384990))
+
+
+* feat!: [UIP-4597] diagramGroupTemplate allows custom outlets ordering ([c54d7e3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c54d7e3350ae3dcbb801827990043e4616c456dc))
+* feat!: [UIP-4605] Pop-out panels takes any JSX as a title ([a615954](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a6159548bd1555e754f603cfad6536850d8a636b))
+
+
+### BREAKING CHANGES
+
+* diagramGroupTemplate been converted from constant to a function
+* no subtitle prop, title prop should include all the styles
+
+
+
+
+
 ## [0.18.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.18.2...@pingux/flow-diagram@0.18.3) (2021-07-01)
 
 **Note:** Version bump only for package @pingux/flow-diagram
