@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.17.1...@pingux/astro@0.18.0) (2021-07-12)
+
+
+### Bug Fixes
+
+* [UIP-4478] Multiple Overlays Open Simultaneously ([3352bc9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3352bc9a6a2fd7c174dff397571e130a4ce60ef0))
+* [UIP-4486] Fix prop type to expect an iterable and forbid instanceOf ([6b7a6f8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6b7a6f870db018380f41febde6c5ded463069c9f))
+* [UIP-4557] Add Field Container Props to Combo box ([9a01d42](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9a01d42b13c44e4e1dea5977671e7936a39e8332))
+
+
+### Features
+
+* [UIP-4429] Array input recipe ([72872d3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/72872d358f9a6da5ec85ceeb19f7343a368da305))
+* [UIP-4430] Table component ([4dc52ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4dc52aecb3007113bee4126c40fc0ea453a7aaf8))
+* [UIP-4539] Overlay panel component ([e46811d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e46811db3cbd087607c64ad8093a90f4ef313116))
+
+
+
+
+
 ## [0.17.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.17.0...@pingux/astro@0.17.1) (2021-07-01)
 
 
