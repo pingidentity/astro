@@ -36,13 +36,13 @@ test('default dropdownfield', () => {
 
 test('disabled prop disables dropdown input', () => {
   getComponent({ isDisabled: true });
-  const dropdown = document.querySelector('select');
+  const dropdown = screen.getByRole('combobox');
   expect(dropdown).toBeDisabled();
 });
 
 test('input is not disabled without disabled prop', () => {
   getComponent();
-  const dropdown = document.querySelector('select');
+  const dropdown = screen.getByRole('combobox');
   expect(dropdown).toBeEnabled();
 });
 

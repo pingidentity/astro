@@ -8,13 +8,16 @@ const testId = 'test-text';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(
-  <ThemeProvider theme={testTheme}>
-    <Text {...defaultProps} {...props}>
-      {props.children}
-    </Text>
-  </ThemeProvider>,
-);
+const getComponent = (props = {}) => {
+  const { children } = props;
+  return render(
+    <ThemeProvider theme={testTheme}>
+      <Text {...defaultProps} {...props}>
+        {children}
+      </Text>
+    </ThemeProvider>,
+  );
+};
 
 test('default text', () => {
   getComponent();
