@@ -35,7 +35,8 @@ test('renders menu with menu items', () => {
 
 test('applies focus when tabbed to', () => {
   getComponent();
-  const menuItem = screen.getByText(defaultMenuItems[0].children);
+  const { children: itemText } = defaultMenuItems[0];
+  const menuItem = screen.getByText(itemText);
   expect(menuItem).not.toHaveFocus();
   expect(menuItem).not.toHaveClass('is-focused');
 
@@ -46,8 +47,11 @@ test('applies focus when tabbed to', () => {
 
 test('can arrow through menuItems', () => {
   getComponent();
-  const menuItem1 = screen.getByText(defaultMenuItems[0].children);
-  const menuItem2 = screen.getByText(defaultMenuItems[1].children);
+
+  const { children: itemText1 } = defaultMenuItems[0];
+  const { children: itemText2 } = defaultMenuItems[1];
+  const menuItem1 = screen.getByText(itemText1);
+  const menuItem2 = screen.getByText(itemText2);
   expect(menuItem1).not.toHaveFocus();
   expect(menuItem1).not.toHaveClass('is-focused');
 
@@ -62,8 +66,11 @@ test('can arrow through menuItems', () => {
 
 test('hovering menuItems applies focus class', () => {
   getComponent();
-  const menuItem1 = screen.getByText(defaultMenuItems[0].children);
-  const menuItem2 = screen.getByText(defaultMenuItems[1].children);
+
+  const { children: itemText1 } = defaultMenuItems[0];
+  const { children: itemText2 } = defaultMenuItems[1];
+  const menuItem1 = screen.getByText(itemText1);
+  const menuItem2 = screen.getByText(itemText2);
   expect(menuItem1).not.toHaveClass('is-focused');
   expect(menuItem2).not.toHaveClass('is-focused');
 
@@ -76,10 +83,12 @@ test('hovering menuItems applies focus class', () => {
 
 test('disables item with isDisabled applied, does not disable without prop', () => {
   getComponent({ disabledKeys: [defaultMenuItems[0].key] });
-  const disabledMenuItem = screen.getByText(defaultMenuItems[0].children);
+  const { children: disbaledItemText } = defaultMenuItems[0];
+  const disabledMenuItem = screen.getByText(disbaledItemText);
   expect(disabledMenuItem).toHaveClass('is-disabled');
 
-  const menuItem = screen.getByText(defaultMenuItems[1].children);
+  const { children: menuItemText } = defaultMenuItems[1];
+  const menuItem = screen.getByText(menuItemText);
   expect(menuItem).not.toHaveClass('is-disabled');
 });
 
@@ -108,9 +117,11 @@ test('applies selected styling with isSelected prop, does not add class without 
     selectionMode: 'single',
     defaultSelectedKeys: [defaultMenuItems[0].key],
   });
-  const selectedMenuItem = screen.getByText(defaultMenuItems[0].children);
+  const { children: selectedItemText } = defaultMenuItems[0];
+  const selectedMenuItem = screen.getByText(selectedItemText);
   expect(selectedMenuItem).toHaveClass('is-selected');
 
-  const menuItem = screen.getByText(defaultMenuItems[1].children);
+  const { children: menuItemText } = defaultMenuItems[1];
+  const menuItem = screen.getByText(menuItemText);
   expect(menuItem).not.toHaveClass('is-selected');
 });

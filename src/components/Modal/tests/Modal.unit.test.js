@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '../../../utils/testUtils/testWrapper';
+import { render, screen, queryByAttribute } from '../../../utils/testUtils/testWrapper';
 import { OverlayProvider, Modal } from '../../../index';
 
 // For testing the modal alone
@@ -23,7 +23,7 @@ test('default modal', () => {
 
 test('should spread undocumented props to the container element', () => {
   getComponent({ 'data-prop': 'test' });
-  const container = document.querySelector('[data-prop="test"]');
+  const container = queryByAttribute('data-prop', document, 'test');
   const modal = screen.getByRole('dialog');
   expect(container).toContainElement(modal);
   expect(modal).not.toHaveAttribute('data-prop', 'test');
@@ -31,7 +31,7 @@ test('should spread undocumented props to the container element', () => {
 
 test('should spread container props to the container element even if documented', () => {
   getComponent({ containerProps: { id: 'test' } });
-  const container = document.querySelector('#test');
+  const container = queryByAttribute('id', document, 'test');
   const modal = screen.getByRole('dialog');
   expect(container).toContainElement(modal);
   expect(modal).not.toHaveAttribute('id', 'test');

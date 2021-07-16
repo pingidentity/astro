@@ -22,12 +22,12 @@ const defaultProps = {
   value: testValue,
   items,
 };
+
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <SelectField {...defaultProps} {...props}>
     {item => <Item key={item.name}>{item.name}</Item>}
   </SelectField>
 ));
-
 
 const onSelectionChange = jest.fn();
 
@@ -71,10 +71,12 @@ test('default select field', () => {
   expect(visibleLabel).toBeInTheDocument();
 
   // jest-dom .toBeVisible does not take into account aria-hidden
+  /* eslint-disable testing-library/no-node-access */
   expect(hiddenInput.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleInput.closest('[aria-hidden="true"]')).toBeNull();
   expect(hiddenLabel.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleLabel.closest('[aria-hidden="true"]')).toBeNull();
+  /* eslint-enable testing-library/no-node-access */
 });
 
 test('control props work for visible button control', () => {
@@ -192,13 +194,13 @@ test('clicking the visually hidden dismiss buttons close the listbox popup', () 
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
   // Click first dismiss button
-  userEvent.click(document.querySelector('button[aria-label="Dismiss"]'));
+  userEvent.click(screen.getAllByLabelText('Dismiss')[0]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Click second dismiss button
   getComponent({ isDefaultOpen: true });
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  userEvent.click(document.querySelectorAll('button[aria-label="Dismiss"]')[1]);
+  userEvent.click(screen.getAllByLabelText('Dismiss')[1]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 

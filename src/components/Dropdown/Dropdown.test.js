@@ -9,11 +9,14 @@ const testId = 'test-box';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(
-  <Dropdown {...defaultProps} {...props}>
-    {props.children}
-  </Dropdown>,
-);
+const getComponent = (props = {}) => {
+  const { children } = props;
+  return render(
+    <Dropdown {...defaultProps} {...props}>
+      {children}
+    </Dropdown>,
+  );
+};
 
 test('dropdown renders', () => {
   getComponent();
@@ -38,8 +41,7 @@ test('dropdown has focus styles', () => {
 
 test('default option is first one', () => {
   getComponent();
-  const dropdown = screen.getByTestId(testId);
-  const firstOption = dropdown.querySelector('option');
+  const firstOption = screen.getByRole('option');
   expect(firstOption.value).toEqual('');
   expect(firstOption).toHaveAttribute('selected', '');
   expect(firstOption).toBeEnabled();
@@ -47,8 +49,7 @@ test('default option is first one', () => {
 
 test('default option is disabled when hasDisabledFirstOption is passed in', () => {
   getComponent({ hasDisabledFirstOption: true });
-  const dropdown = screen.getByTestId(testId);
-  const firstOption = dropdown.querySelector('option');
+  const firstOption = screen.getByRole('option');
   expect(firstOption.value).toEqual('');
   expect(firstOption).toHaveAttribute('selected', '');
   expect(firstOption).toBeDisabled();
@@ -56,7 +57,6 @@ test('default option is disabled when hasDisabledFirstOption is passed in', () =
 
 test('default option is not first one when custom defaultValue is passed in', () => {
   getComponent({ defaultValue: '1' });
-  const dropdown = screen.getByTestId(testId);
-  const firstOption = dropdown.querySelector('option');
+  const firstOption = screen.getByRole('option');
   expect(firstOption).not.toHaveAttribute('selected', '');
 });

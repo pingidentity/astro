@@ -124,7 +124,8 @@ test('disabled keys prop disables an accordion item', () => {
   getComponent({ disabledKeys: ['first'] });
   const buttons = screen.getAllByRole('button');
   const selectedItem = buttons[0];
-  expect(selectedItem.parentElement).toHaveClass('is-disabled');
+  const { parentElement } = selectedItem;
+  expect(parentElement).toHaveClass('is-disabled');
 });
 
 test('default expanded keys expands an accordion item', () => {
