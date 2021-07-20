@@ -120,8 +120,10 @@ pipeline {
                 sh "echo 'Publishing Schema Form to NPM registry'"
                 sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
                 sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
-                echo "Publishing changed packages"
+                echo "Publishing changed packages to Artifactory"
                 sh 'yarn lerna publish ${LERNA_PUBLISH_FLAGS}'
+                echo 'Publishing specified packages to npm'
+                sh 'cd packages/schema-form/ && npm publish'
               }
             }
           }
