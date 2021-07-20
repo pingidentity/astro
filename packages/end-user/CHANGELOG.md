@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.0...@pingux/end-user@1.5.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* **schema-form:** [UIP-4620] Allow props to be spread through to End User PasswordWithRequirements ([f801909](https://gitlab.corp.pingidentity.com/ux/end-user/commit/f801909d38b1cd5bdd23822ed520f2f23d116574))
+
+
+
+
+
 # [1.5.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.4.1...@pingux/end-user@1.5.0) (2021-06-25)
 
 
