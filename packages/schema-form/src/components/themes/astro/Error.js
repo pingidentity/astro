@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@pingux/astro';
-import Markdown from '@pingux/end-user/components/Markdown';
+import Markdown from '@pingux/end-user/lib/components/Markdown';
 
 /* istanbul ignore next */
 const Error = (props) => {

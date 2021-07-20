@@ -1,13 +1,13 @@
 import React from 'react';
 import _ from 'lodash';
-import Button from '@pingux/end-user/components/Button';
-import FloatLabelDropdown from '@pingux/end-user/components/FloatLabelDropdown';
-import FloatLabelPasswordInput from '@pingux/end-user/components/FloatLabelPasswordInput';
-import FloatLabelTextArea from '@pingux/end-user/components/FloatLabelTextArea';
-import FloatLabelTextInput from '@pingux/end-user/components/FloatLabelTextInput';
-import FormRow from '@pingux/end-user/components/FormRow';
-import Heading from '@pingux/end-user/components/Heading';
-import Markdown from '@pingux/end-user/components/Markdown';
+import Button from '@pingux/end-user/lib/components/Button';
+import FloatLabelDropdown from '@pingux/end-user/lib/components/FloatLabelDropdown';
+import FloatLabelPasswordInput from '@pingux/end-user/lib/components/FloatLabelPasswordInput';
+import FloatLabelTextArea from '@pingux/end-user/lib/components/FloatLabelTextArea';
+import FloatLabelTextInput from '@pingux/end-user/lib/components/FloatLabelTextInput';
+import FormRow from '@pingux/end-user/lib/components/FormRow';
+import Heading from '@pingux/end-user/lib/components/Heading';
+import Markdown from '@pingux/end-user/lib/components/Markdown';
 
 import { getDisabledEnumOptions } from '../utils/props';
 import { FIELD_TYPES } from '../utils/constants';
@@ -122,7 +122,7 @@ export const toEndUserInputProps = (props) => {
 
   const inputProps = {
     ...custom,
-    autofocus,
+    autoFocus: autofocus,
     checked: _.isObject(value) ? false : (value || false),
     defaultValue: getDefaultValue(),
     disabled,

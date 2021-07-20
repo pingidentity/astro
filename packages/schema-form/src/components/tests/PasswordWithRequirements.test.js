@@ -55,3 +55,16 @@ test('it fires onchange event', async () => {
   expect(input.value).toBe('Hello');
   expect(onChange).toHaveBeenCalled();
 });
+
+test('it fires validate requirements events', async () => {
+  const newUISchema = JSON.parse(JSON.stringify(uiSchema)); // make deep copy
+  const validateRequirements = jest.fn();
+  newUISchema.password['ui:options'].validateRequirements = validateRequirements;
+  renderSchemaForm({ schema, uiSchema: newUISchema });
+  const input = screen.queryByLabelText(name);
+  expect(input).toBeInTheDocument();
+
+  await act(async () => fireEvent.change(input, { target: { value: 'Hello' } }));
+  expect(input.value).toBe('Hello');
+  expect(validateRequirements).toHaveBeenCalledTimes(1);
+});

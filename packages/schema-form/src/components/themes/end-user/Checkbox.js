@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CheckboxField from '@pingux/end-user/components/Checkbox';
+import CheckboxField from '@pingux/end-user/lib/components/Checkbox';
 import { noop } from 'lodash';
 
 const Checkbox = ({

@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react';
 import { noop } from 'lodash';
 import { Global, css } from '@emotion/core';
-import { TextField, Text, PageWrapper } from '@pingux/astro';
+import { Text, PageWrapper } from '@pingux/astro';
 import tippyStyles from 'tippy.js/dist/tippy.css';
 
-import Requirements from '@pingux/end-user/components/Requirements';
+import Requirements from '@pingux/end-user/lib/components/Requirements';
 
 // eslint-disable-next-line
 import { getThemedProps } from '../../../themes/utils';
+import PasswordInput from './PasswordInput';
 
 const PasswordWithRequirements = (props) => {
   const { onChange: onChangeCb, controlProps } = props;
@@ -77,11 +78,10 @@ const PasswordWithRequirements = (props) => {
     // state.
     <>
       <div ref={ref}>
-        <TextField
+        <PasswordInput
           {...props}
-          type="password"
           controlProps={{
-            controlProps,
+            ...controlProps,
             onChange,
             onFocus: focus,
             onBlur: blur,
