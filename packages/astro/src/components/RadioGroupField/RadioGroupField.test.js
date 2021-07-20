@@ -61,7 +61,7 @@ test('radio group only allows one checked option', async () => {
   expect(labelA).not.toHaveClass('is-checked');
   expect(radioB).toBeChecked();
   expect(labelB).toHaveClass('is-checked');
-  expect(document.querySelectorAll('input:checked')).toHaveLength(1);
+  expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);
 });
 
 test('value for controlled radio group', () => {
@@ -73,7 +73,7 @@ test('value for controlled radio group', () => {
   userEvent.click(radios[1]);
   expect(radios[0]).toBeChecked();
   expect(radios[1]).not.toBeChecked();
-  expect(document.querySelectorAll('input:checked')).toHaveLength(1);
+  expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);
 });
 
 test('defaultValue for uncontrolled radio group', () => {
@@ -85,7 +85,7 @@ test('defaultValue for uncontrolled radio group', () => {
   userEvent.click(radios[1]);
   expect(radios[0]).not.toBeChecked();
   expect(radios[1]).toBeChecked();
-  expect(document.querySelectorAll('input:checked')).toHaveLength(1);
+  expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);
 });
 
 test('disabled radio group disables all radios and the group label', () => {

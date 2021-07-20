@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { fireEvent, queryByAttribute, render, screen } from '../../utils/testUtils/testWrapper';
 import RockerButtonGroup from './RockerButtonGroup';
 import RockerButton from '../RockerButton';
 
@@ -29,7 +29,7 @@ const getComponent = (props = {}, { buttons = testButtons, renderFn = render } =
 
 test('renders rocker container with buttons', () => {
   getComponent();
-  const rockerContainer = document.querySelector("[data-id='test-container']");
+  const rockerContainer = queryByAttribute('data-id', document, 'test-container');
   expect(rockerContainer).toBeInTheDocument();
   const buttons = screen.getAllByRole('button');
   expect(buttons).toHaveLength(3);
@@ -37,7 +37,7 @@ test('renders rocker container with buttons', () => {
 
 test('buttonGroup is not disabled by default', () => {
   getComponent();
-  const rockerContainer = document.querySelector("[data-id='test-container']");
+  const rockerContainer = queryByAttribute('data-id', document, 'test-container');
   expect(rockerContainer).toBeEnabled();
 
   testButtons.forEach((button) => {

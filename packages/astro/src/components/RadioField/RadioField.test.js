@@ -33,7 +33,7 @@ test('default radio', () => {
   const container = screen.getByTestId(testId);
   const input = screen.getByLabelText(testLabel);
   const label = screen.getByText(testLabel);
-  const icon = document.querySelector('svg');
+  const { nextSibling: icon } = input;
   expect(container).toBeInstanceOf(HTMLDivElement);
   expect(input).toBeInstanceOf(HTMLInputElement);
   expect(label).toBeInstanceOf(HTMLLabelElement);
@@ -46,7 +46,8 @@ test('default radio', () => {
 test('disabled radio', () => {
   getComponent({ isDisabled: true });
   const label = screen.getByText(testLabel);
-  const icon = document.querySelector('svg');
+  const input = screen.getByLabelText(testLabel);
+  const { nextSibling: icon } = input;
 
   expect(label).toHaveClass('is-disabled');
   expect(icon).toHaveClass('is-disabled');
@@ -58,7 +59,7 @@ test('disabled radio', () => {
 test('radio with focus', () => {
   getComponent();
   const input = screen.getByLabelText(testLabel);
-  const icon = document.querySelector('svg');
+  const { nextSibling: icon } = input;
 
   userEvent.tab();
   expect(input).toHaveFocus();

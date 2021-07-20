@@ -16,7 +16,7 @@ test('default checkbox', () => {
   getComponent();
   const input = screen.getByRole('checkbox');
   const label = screen.getByText(testLabel);
-  const icon = document.querySelector('svg');
+  const { nextSibling: icon } = input;
   expect(input).toBeInstanceOf(HTMLInputElement);
   expect(label).toBeInstanceOf(HTMLLabelElement);
   expect(input).toBeInTheDocument();
@@ -26,7 +26,8 @@ test('default checkbox', () => {
 
 test('checkbox with focus', () => {
   getComponent();
-  const icon = document.querySelector('svg');
+  const input = screen.getByRole('checkbox');
+  const { nextSibling: icon } = input;
 
   userEvent.tab();
   expect(icon).toHaveStyle({ outline: 'none', 'box-shadow': theme.shadows.focus });

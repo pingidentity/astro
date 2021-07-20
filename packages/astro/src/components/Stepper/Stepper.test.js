@@ -34,15 +34,18 @@ const defaultProps = {
   items: steps,
 };
 
-const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
-  <Stepper {...defaultProps} {...props}>
-    {item => (
-      <Step key={item.name} textValue={item.name}>
-        <Text>{item.children}</Text>
-      </Step>
-    )}
-  </Stepper>,
-);
+const getComponent = (props = {}, { renderFn = render } = {}) => {
+  const { children } = props;
+  return renderFn(
+    <Stepper {...defaultProps} {...props}>
+      {item => (
+        <Step key={item.name} textValue={item.name}>
+          <Text>{children}</Text>
+        </Step>
+      )}
+    </Stepper>,
+  );
+};
 
 test('renders Stepper component in the default state', () => {
   getComponent();

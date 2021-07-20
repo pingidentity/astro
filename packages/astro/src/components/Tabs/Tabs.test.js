@@ -17,9 +17,9 @@ const defaultProps = {
 };
 const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}) => renderFn((
   <Tabs {...defaultProps} {...props}>
-    {tabs.map(tab => (
-      <Tab key={tab.name} title={tab.name} {...tab.props}>
-        {tab.children}
+    {tabs.map(({ name, props: tabProps, children }) => (
+      <Tab key={name} title={name} {...tabProps}>
+        {children}
       </Tab>
     ))}
   </Tabs>
@@ -31,10 +31,10 @@ const getTabs = () => {
   return { tabs, tab0, tab1, tab2 };
 };
 
-const testTabPanel = expectedTabIndex => defaultTabs.forEach((tab, index) => (
+const testTabPanel = expectedTabIndex => defaultTabs.forEach(({ children }, index) => (
   index === expectedTabIndex
-    ? expect(screen.queryByText(tab.children)).toBeInTheDocument()
-    : expect(screen.queryByText(tab.children)).not.toBeInTheDocument()
+    ? expect(screen.queryByText(children)).toBeInTheDocument()
+    : expect(screen.queryByText(children)).not.toBeInTheDocument()
 ));
 
 const testSingleTab = (tabs, tab, thisTest, testParams = []) => {
@@ -125,7 +125,8 @@ test('disabled all tabs', () => {
   // Tabs cannot be DOM disabled so must check visuals
   defaultTabs.forEach((tab) => {
     const tabText = screen.getByText(tab.name);
-    expect(tabText.parentElement).toHaveClass('is-disabled');
+    const { parentElement } = tabText;
+    expect(parentElement).toHaveClass('is-disabled');
     expect(tabText).toHaveStyleRule(
       'color',
       theme.colors.neutral[80],
