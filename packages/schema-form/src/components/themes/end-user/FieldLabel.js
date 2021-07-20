@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Heading from '@pingux/end-user/components/Heading';
+import Heading from '@pingux/end-user/lib/components/Heading';
 
 const FieldLabel = (props) => {
   const { children } = props;

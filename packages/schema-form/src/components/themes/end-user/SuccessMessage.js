@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@pingux/end-user/components/Card';
-import Heading from '@pingux/end-user/components/Heading';
-import TextBlock from '@pingux/end-user/components/TextBlock';
+import Card from '@pingux/end-user/lib/components/Card';
+import Heading from '@pingux/end-user/lib/components/Heading';
+import TextBlock from '@pingux/end-user/lib/components/TextBlock';
 
 const SuccessMessage = (props) => {
   const { formSuccessMessage, formSuccessTitle } = props;

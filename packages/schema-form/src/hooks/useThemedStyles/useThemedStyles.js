@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import endUserStyles from '@pingux/end-user/end-user.css';
+import endUserStyles from '@pingux/end-user/lib/end-user.css';
 import { THEMES } from '../../themes/utils';
 
 /**

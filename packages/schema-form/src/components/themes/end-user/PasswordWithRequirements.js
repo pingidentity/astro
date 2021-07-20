@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react';
 import { noop } from 'lodash';
 import { Global, css } from '@emotion/core';
-import endUserStyles from '@pingux/end-user/end-user.css';
+import endUserStyles from '@pingux/end-user/lib/end-user.css';
 import tippyStyles from 'tippy.js/dist/tippy.css';
 
-import FloatLabelPasswordInput from '@pingux/end-user/components/FloatLabelPasswordInput';
-import Heading from '@pingux/end-user/components/Heading';
-import Requirements from '@pingux/end-user/components/Requirements';
+import FloatLabelPasswordInput from '@pingux/end-user/lib/components/FloatLabelPasswordInput';
+import Heading from '@pingux/end-user/lib/components/Heading';
+import Requirements from '@pingux/end-user/lib/components/Requirements';
 
 const PasswordWithRequirements = (props) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,6 +21,7 @@ const PasswordWithRequirements = (props) => {
     validateRequirements,
     tippyProps,
     onChange: onChangeCb,
+    ...others
   } = props;
   const [reqs, setReqs] = useState(requirementsData);
 
@@ -47,7 +48,7 @@ const PasswordWithRequirements = (props) => {
     <>
       <div ref={ref}>
         <FloatLabelPasswordInput
-          {...props}
+          {...others}
           onChange={onChange}
           onFocus={focus}
           onBlur={blur}
@@ -86,6 +87,9 @@ const PasswordWithRequirements = (props) => {
 };
 
 PasswordWithRequirements.propTypes = {
+  label: PropTypes.node,
+  id: PropTypes.string.isRequired,
+  inputProps: PropTypes.shape({}),
   formContext: PropTypes.shape({
     theme: PropTypes.string.isRequired,
   }).isRequired,
@@ -101,6 +105,8 @@ PasswordWithRequirements.defaultProps = {
   validateRequirements: (e, data) => data,
   tippyProps: {},
   onChange: noop,
+  label: undefined,
+  inputProps: {},
 };
 
 export default PasswordWithRequirements;

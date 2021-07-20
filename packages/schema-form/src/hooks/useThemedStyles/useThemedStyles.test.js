@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks';
-import EndUserStyles from '@pingux/end-user/end-user.css';
+import EndUserStyles from '@pingux/end-user/lib/end-user.css';
 import useThemedStyles from './useThemedStyles';
 import { THEMES } from '../../themes/utils';
 
-jest.mock('@pingux/end-user/end-user.css', () => ({ theme: 'end-user' }));
+jest.mock('@pingux/end-user/lib/end-user.css', () => ({ theme: 'end-user' }));
 
 test('should use end-user as default theme style object', () => {
   const { result } = renderHook(() => useThemedStyles());

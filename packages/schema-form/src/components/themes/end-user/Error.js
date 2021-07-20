@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Feedback from '@pingux/end-user/components/Feedback';
-import Markdown from '@pingux/end-user/components/Markdown';
+import Feedback from '@pingux/end-user/lib/components/Feedback';
+import Markdown from '@pingux/end-user/lib/components/Markdown';
 
 const Error = (props) => {
   const { error, hasMarkdown } = props;

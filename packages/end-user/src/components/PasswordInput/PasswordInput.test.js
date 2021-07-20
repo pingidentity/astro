@@ -70,10 +70,10 @@ describe('PasswordInput', () => {
         expect(field).toHaveAttribute('type', 'password');
     });
 
-    it('passes props through to underlying component', () =>{
-        const props = { 'testprop':'test' };
-        const wrapper = getComponent(props);
+    it('passes props through to underlying input', () =>{
+        const inputProps = { testprop: 'test' };
+        const wrapper = getComponent({ inputProps });
         const input = wrapper.find(`input[data-id="${defaultProps['data-id']}"]`);
-        expect(input.props()).toEqual(expect.objectContaining(props));
+        expect(input.props()).toEqual(expect.objectContaining(inputProps));
     });
 });
