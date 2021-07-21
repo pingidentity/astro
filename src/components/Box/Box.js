@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Box as RBox } from 'rebass';
 import { propType as stylePropType } from '@styled-system/prop-types';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 
 /**
  * Basic flexbox-based layout component for creating rows and columns,

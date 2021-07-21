@@ -4,7 +4,7 @@ import omit from 'lodash/omit';
 import { useToggleState } from '@react-stately/toggle';
 import { useSwitch } from '@react-aria/switch';
 
-import useField from '../../hooks/useField';
+import { useField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';

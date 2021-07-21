@@ -8,7 +8,7 @@ import Box from '../Box';
 import Label from '../Label';
 import { RadioContext } from '../RadioField';
 import FieldHelperText from '../FieldHelperText';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 /**

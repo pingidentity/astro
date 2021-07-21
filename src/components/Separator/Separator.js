@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSeparator } from '@react-aria/separator';
 
 import Box from '../Box/Box';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 /**

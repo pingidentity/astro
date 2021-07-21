@@ -4,7 +4,7 @@ import { useSearchField } from '@react-aria/searchfield';
 import { useSearchFieldState } from '@react-stately/searchfield';
 import SearchIcon from 'mdi-react/SearchIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
-import useField from '../../hooks/useField';
+import { useField } from '../../hooks';
 import Box from '../Box';
 import IconButton from '../IconButton';
 import Icon from '../Icon';

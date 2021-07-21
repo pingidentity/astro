@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Select as RSelect } from '@rebass/forms';
 import { useFocusRing } from '@react-aria/focus';
 
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 
 /**
  * Basic dropdown menu input.

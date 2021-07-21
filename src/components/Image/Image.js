@@ -2,7 +2,7 @@ import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { Image as RImage } from 'rebass';
 import { useHover } from '@react-aria/interactions';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 
 /**
  * Basic image component.
