@@ -83,3 +83,11 @@ export const ControlledStepper = () => {
     </Stepper>
   );
 };
+
+export const WithoutContent = () => (
+  <Stepper>
+    <Step key="step1" textValue="Step 1" />
+    <Step key="step2" textValue="Step 2" />
+    <Step key="step3" textValue="Step 3" />
+  </Stepper>
+);

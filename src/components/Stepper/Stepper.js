@@ -68,11 +68,10 @@ const Stepper = forwardRef((props, ref) => {
         tabLineProps={{ display: 'none' }}
         tabLabelProps={{ variant: 'stepper.tabLabel' }}
         textValue={textValue}
+        title={step}
         content={item.rendered}
         separator={!isFirst && line}
-      >
-        {step}
-      </Tab>
+      />
     );
 
     isFirst = isFirst && !container;
