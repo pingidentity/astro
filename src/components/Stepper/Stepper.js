@@ -19,6 +19,7 @@ const Stepper = forwardRef((props, ref) => {
   const {
     activeStep,
     onStepChange,
+    tabListProps,
     ...others
   } = props;
 
@@ -83,7 +84,8 @@ const Stepper = forwardRef((props, ref) => {
   return (
     <Tabs
       ref={ref}
-      tabListProps={{ variant: 'stepper.tabs', gap: '0' }}
+      variant="stepper.wrapper"
+      tabListProps={{ variant: 'stepper.tabs', gap: '0', ...tabListProps }}
       onSelectionChange={onStepChangeHandler}
       selectedKey={activeStep?.toString()}
       mode="tooltip"
@@ -112,6 +114,8 @@ Stepper.propTypes = {
   * `(index: number) => void`
   */
   onStepChange: PropTypes.func,
+  /** A props object that is subsequently spread into the rendered tablist. */
+  tabListProps: PropTypes.shape({}),
 };
 
 Stepper.defaultProps = {

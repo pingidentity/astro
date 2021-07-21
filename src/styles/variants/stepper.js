@@ -1,8 +1,13 @@
 /** Tabs styles */
+const wrapper = {
+  width: '100%',
+};
+
 const tabs = {
   outline: 'none',
   borderBottom: 'none',
   mb: 0,
+  width: '100%',
 };
 
 const tab = {
@@ -81,6 +86,7 @@ const line = {
 };
 
 export default {
+  wrapper,
   tabs,
   tab,
   tabLabel,
