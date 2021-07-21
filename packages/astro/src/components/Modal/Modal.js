@@ -14,7 +14,7 @@ import Box from '../Box';
 import Button from '../Button';
 import Icon from '../Icon';
 import Text from '../Text';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 
 const Modal = forwardRef((props, ref) => {
   const {

@@ -10,7 +10,7 @@ import { useButton } from '@react-aria/button';
 
 import { useFocusRing } from '@react-aria/focus';
 import { Text, Icon, Box } from '../../index';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import { AccordionContext } from '../../context/AccordionContext';
 
 const AccordionItem = forwardRef((props, ref) => {

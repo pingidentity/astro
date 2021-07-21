@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useModal, useOverlay, OverlayContainer } from '@react-aria/overlays';
 import { mergeProps } from '@react-aria/utils';
 
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 
 /**
@@ -95,10 +95,10 @@ export const PopoverWrapper = forwardRef((props, ref) => {
           {children}
           {
             hasNoArrow
-            ? null
-            : (
-              <PopoverArrow {...arrowProps} />
-            )
+              ? null
+              : (
+                <PopoverArrow {...arrowProps} />
+              )
           }
         </Box>
       }

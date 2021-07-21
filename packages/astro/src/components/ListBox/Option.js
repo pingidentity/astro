@@ -5,7 +5,7 @@ import { mergeProps } from '@react-aria/utils';
 import { useFocus } from '@react-aria/interactions';
 import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import Icon from '../Icon';
 import { ListBoxContext } from './ListBoxContext';

@@ -1,5 +1,5 @@
 import React from 'react';
-import useOverlayPanelState from '../../hooks/useOverlayPanelState';
+import { useOverlayPanelState } from '../../hooks';
 import Button from '../Button/Button';
 import OverlayPanel from './OverlayPanel';
 import { OverlayProvider } from '../../index';

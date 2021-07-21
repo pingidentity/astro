@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import PropTypes from 'prop-types';
 import Box from '../Box';
-import useDeprecationWarning from '../../hooks/useDeprecationWarning';
+import { useDeprecationWarning } from '../../hooks';
 
 /**
  * **WARNING: Will be deprecated in Astro 1.0.0, use `PopoverMenu` instead.**
