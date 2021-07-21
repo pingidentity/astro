@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import TextField from '.';
 import { modes as labelModes } from '../Label/constants';
+import statuses from '../../utils/devUtils/constants/statuses.js';
 
 export default {
   title: 'Form/TextField',
@@ -18,6 +19,13 @@ export default {
       control: {
         type: 'text',
       },
+    },
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
     },
   },
 };
