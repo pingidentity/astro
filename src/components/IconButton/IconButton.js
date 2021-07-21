@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import { modes } from '../Button/constants';
-import useAriaLabelWarning from '../../hooks/useAriaLabelWarning';
+import { useAriaLabelWarning } from '../../hooks';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
 /**

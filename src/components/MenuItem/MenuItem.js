@@ -10,7 +10,7 @@ import { useMenuItem } from '@react-aria/menu';
 import { useFocus, useHover, usePress } from '@react-aria/interactions';
 
 import { useMenuContext } from '../../context/MenuContext';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 

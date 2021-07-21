@@ -7,7 +7,7 @@ import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
 import statuses from '../../utils/devUtils/constants/statuses';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import { modes as labelModes } from '../../components/Label/constants';
 
 /**

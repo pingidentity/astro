@@ -2,8 +2,7 @@ import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 
 // TODO: Deprecate this component in Astro-UI 1.0.0
-import useDeprecationWarning from '../../hooks/useDeprecationWarning';
-import useField from '../../hooks/useField';
+import { useDeprecationWarning, useField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import Dropdown from '../Dropdown';

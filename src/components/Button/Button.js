@@ -7,8 +7,7 @@ import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
 import { modes } from './constants';
-import useStatusClasses from '../../hooks/useStatusClasses';
-import useDeprecationWarning from '../../hooks/useDeprecationWarning';
+import { useStatusClasses, useDeprecationWarning } from '../../hooks';
 import Loader from '../Loader';
 import Box from '../Box';
 

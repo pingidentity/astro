@@ -5,7 +5,7 @@ import { useLink } from '@react-aria/link';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 
 const Link = forwardRef((props, ref) => {
   const { className, isDisabled, ...others } = props;

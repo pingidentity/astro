@@ -13,7 +13,7 @@ import { Item as Tab } from '@react-stately/collections';
 import Box from '../Box';
 import { TabsContext } from '../Tabs';
 import Text from '../Text';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 import Button from '../Button';

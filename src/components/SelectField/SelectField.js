@@ -6,11 +6,9 @@ import { FocusScope } from '@react-aria/focus';
 import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useResizeObserver } from '@react-aria/utils';
 import MenuDown from 'mdi-react/MenuDownIcon';
-import useDeprecationWarning from '../../hooks/useDeprecationWarning';
 
-
+import { useDeprecationWarning, useField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import useField from '../../hooks/useField';
 import Box from '../Box';
 import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
