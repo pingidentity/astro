@@ -8,10 +8,9 @@ import PropTypes from 'prop-types';
 import { Item } from '@react-stately/collections';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
-import useRockerButton from '../../hooks/useRockerButton';
+import { useRockerButton, useStatusClasses } from '../../hooks';
 import Button from '../Button';
 import { RockerContext } from '../RockerButtonGroup';
-import useStatusClasses from '../../hooks/useStatusClasses';
 
 export const CollectionRockerButton = forwardRef((props, ref) => {
   const {

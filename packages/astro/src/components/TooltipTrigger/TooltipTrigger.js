@@ -5,7 +5,7 @@ import { useOverlayPosition } from '@react-aria/overlays';
 import { useTooltipTrigger } from '@react-aria/tooltip';
 import { useTooltipTriggerState } from '@react-stately/tooltip';
 
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import { TooltipContext } from '../../context/TooltipContext/index';
 import PopoverContainer from '../PopoverContainer';
 

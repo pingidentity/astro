@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useFocusRing } from '@react-aria/focus';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 
 const Panel = forwardRef((props, ref) => {

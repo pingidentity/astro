@@ -1,12 +1,11 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
-import useField from '../../hooks/useField';
+import { useField, useLabelHeight } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Input from '../Input';
 import Label from '../Label';
-import useLabelHeight from '../../hooks/useLabelHeight';
 
 /**
  * Combines a text input, label, and helper text for a complete, form-ready solution.

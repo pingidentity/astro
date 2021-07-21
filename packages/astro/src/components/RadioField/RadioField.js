@@ -8,7 +8,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { useRadio } from '@react-aria/radio';
 
-import useField from '../../hooks/useField';
+import { useField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import Radio from '../Radio';

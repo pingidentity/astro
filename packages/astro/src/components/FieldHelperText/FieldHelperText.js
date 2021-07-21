@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Text from '../Text';
 

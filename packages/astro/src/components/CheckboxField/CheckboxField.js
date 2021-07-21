@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useToggleState } from '@react-stately/toggle';
 import { useCheckbox } from '@react-aria/checkbox';
 
-import useField from '../../hooks/useField';
+import { useField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import Checkbox from '../Checkbox';

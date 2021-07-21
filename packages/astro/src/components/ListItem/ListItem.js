@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useHover } from '@react-aria/interactions';
 import Box from '../Box/Box';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 
 /**
  * List Item component.
