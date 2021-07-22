@@ -3,6 +3,7 @@ import { OverlayProvider } from '@react-aria/overlays';
 import { useAsyncList } from '@react-stately/data';
 import { SelectField, Item, Separator } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { modes as labelModes } from '../Label/constants';
 
 export default {
   title: 'Form/SelectField',
@@ -21,7 +22,13 @@ export default {
         type: 'text',
       },
     },
-    labelMode: {},
+    labelMode: {
+      control: {
+        type: 'select',
+        options: Object.values(labelModes),
+      },
+      defaultValue: Object.values(labelModes)[0],
+    },
     status: {
       control: {
         type: 'select',

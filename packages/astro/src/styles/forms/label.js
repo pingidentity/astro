@@ -14,7 +14,7 @@ export const label = {
   alignItems: 'center',
   '&.is-float-label': {
     textOverflow: 'ellipsis',
-    display: 'block',
+    display: 'flex',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     fontSize: 'md',

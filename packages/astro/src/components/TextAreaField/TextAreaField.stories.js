@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextAreaField from '.';
 import Box from '../Box';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { modes as labelModes } from '../Label/constants';
 
 
 export default {
@@ -14,7 +15,13 @@ export default {
       },
       defaultValue: 'Example Label',
     },
-    labelMode: {},
+    labelMode: {
+      control: {
+        type: 'select',
+        options: Object.values(labelModes),
+      },
+      defaultValue: Object.values(labelModes)[0],
+    },
     defaultValue: {},
     placeholder: {},
     name: {},
