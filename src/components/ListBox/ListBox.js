@@ -21,9 +21,11 @@ export function useListBoxLayout(state) {
   const collator = useCollator({ usage: 'search', sensitivity: 'base' });
   const layout = useMemo(() =>
     new ListLayout({
-      estimatedRowHeight: 32,
+      estimatedRowHeight: 41,
       estimatedHeadingHeight: 26,
       padding: 4,
+      loaderHeight: 41,
+      placeholderHeight: 41,
       collator,
     })
   , [collator]);
@@ -43,6 +45,8 @@ const ListBox = forwardRef((props, ref) => {
     hasVirtualFocus,
     id,
     isLoading,
+    isFocusedOnHover,
+    isSelectedOnPressUp,
     isVirtualized,
     items,
     keyboardDelegate,
@@ -79,7 +83,9 @@ const ListBox = forwardRef((props, ref) => {
     renderEmptyState,
     selectedKeys,
     selectionMode,
+    shouldFocusOnHover: isFocusedOnHover,
     shouldFocusWrap: hasFocusWrap,
+    shouldSelectOnPressUp: isSelectedOnPressUp,
     shouldUseVirtualFocus: hasVirtualFocus,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
@@ -137,7 +143,9 @@ const ListBox = forwardRef((props, ref) => {
               />
             );
           } else if (type === collectionTypes.LOADER) {
-            return <Loader variant="loader.withinListbox" aria-label="Loading more..." />;
+            return (
+              <Loader variant="loader.withinListbox" aria-label="Loading more..." />
+            );
           }
 
           return null;
@@ -155,7 +163,9 @@ ListBox.propTypes = {
   hasNoEmptySelection: PropTypes.bool,
   hasVirtualFocus: PropTypes.bool,
   id: PropTypes.string,
+  isFocusedOnHover: PropTypes.bool,
   isLoading: PropTypes.bool,
+  isSelectedOnPressUp: PropTypes.bool,
   isVirtualized: PropTypes.bool,
   items: isIterableProp,
   keyboardDelegate: PropTypes.shape({}),
