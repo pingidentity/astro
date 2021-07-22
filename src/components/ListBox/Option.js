@@ -1,8 +1,6 @@
-import React, { forwardRef, useState, useRef, useImperativeHandle, useContext } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useOption } from '@react-aria/listbox';
-import { mergeProps } from '@react-aria/utils';
-import { useFocus } from '@react-aria/interactions';
 import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 
 import { useStatusClasses } from '../../hooks';
@@ -24,23 +22,14 @@ const Option = forwardRef((props, ref) => {
   } = item;
 
   const state = useContext(ListBoxContext);
-
-  const {
-    disabledKeys,
-    selectionManager,
-  } = state;
   const { isSeparator } = itemProps;
   // Get props for the option element
   const optionRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => optionRef.current);
-  const isDisabled = disabledKeys.has(key) || isSeparator;
-  const isSelected = selectionManager.isSelected(key);
-  const { optionProps } = useOption(
+  const { optionProps, isDisabled, isSelected, isFocused } = useOption(
     {
       key,
-      isDisabled,
-      isSelected,
       shouldSelectOnPressUp: true,
       shouldFocusOnHover: true,
       shouldUseVirtualFocus: hasVirtualFocus,
@@ -51,12 +40,8 @@ const Option = forwardRef((props, ref) => {
     optionRef,
   );
 
-  // Handle focus events so we can apply highlighted
-  // style to the focused option
-  const [isFocused, setFocused] = useState(false);
-  const { focusProps } = useFocus({ onFocusChange: setFocused });
   const { classNames } = useStatusClasses(null, {
-    isDisabled,
+    isDisabled: isDisabled || isSeparator,
     isFocused: isFocused || state?.selectionManager?.focusedKey === item.key,
     isSelected,
   });
@@ -67,8 +52,8 @@ const Option = forwardRef((props, ref) => {
       ref={optionRef}
       variant="listBox.option"
       className={classNames}
+      {...optionProps}
       {...others}
-      {...mergeProps(optionProps, focusProps)}
     >
       {isSelected && <Icon icon={CircleSmallIcon} />}
       {rendered}
