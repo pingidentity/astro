@@ -117,6 +117,11 @@ const ComboBoxField = forwardRef((props, ref) => {
     },
     state,
   );
+  const {
+    shouldFocusOnHover,
+    shouldSelectOnPressUp,
+    ...otherListBoxProps
+  } = listBoxProps;
 
   const { overlayProps, placement } = useOverlayPosition({
     targetRef: inputRef,
@@ -162,7 +167,9 @@ const ComboBoxField = forwardRef((props, ref) => {
         hasVirtualFocus
         isLoading={loadingState === loadingStates.LOADING_MORE}
         onLoadMore={onLoadMore}
-        {...listBoxProps}
+        isFocusedOnHover={shouldFocusOnHover}
+        isSelectedOnPressUp={shouldSelectOnPressUp}
+        {...otherListBoxProps}
       />
       <DismissButton onDismiss={state.close} />
     </FocusScope>
