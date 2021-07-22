@@ -1,17 +1,41 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import TextField from '.';
+import { modes as labelModes } from '../Label/constants';
+import statuses from '../../utils/devUtils/constants/statuses.js';
 
 export default {
   title: 'Form/TextField',
   component: TextField,
+  argTypes: {
+    labelMode: {
+      control: {
+        type: 'select',
+        options: Object.values(labelModes),
+      },
+      defaultValue: Object.values(labelModes)[0],
+    },
+    variant: {
+      control: {
+        type: 'text',
+      },
+    },
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+  },
 };
 
-export const Default = args => (
+export const Default = ({ variant, ...args }) => (
   <TextField
     id="custom-id"
     name="custom-name"
     label="Example Label"
+    {...variant && { controlProps: { variant } }}
     {...args}
   />
 );
