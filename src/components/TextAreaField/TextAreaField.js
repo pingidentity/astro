@@ -85,6 +85,8 @@ TextAreaField.propTypes = {
   defaultValue: PropTypes.string,
   /** Whether the textarea element is automatically focused when loaded onto the page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-autofocus). */
   hasAutoFocus: PropTypes.bool,
+  /** Whether the field has a status indicator. */
+  hasNoStatusIndicator: PropTypes.bool,
   /** Whether the field is disabled. */
   isDisabled: PropTypes.bool,
   /** Whether the input can be selected, but not changed by the user. */
