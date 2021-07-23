@@ -260,6 +260,8 @@ ComboBoxField.propTypes = {
   id: PropTypes.string,
   /** Whether the element should receive focus on render. */
   hasAutoFocus: PropTypes.bool,
+  /** Whether the field has a status indicator. */
+  hasNoStatusIndicator: PropTypes.bool,
   /**
    * Handler that is called when the element receives focus.
    *

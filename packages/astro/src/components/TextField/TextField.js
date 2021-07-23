@@ -68,6 +68,8 @@ TextField.propTypes = {
   defaultValue: PropTypes.string,
   /** Whether the input element is automatically focused when loaded onto the page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautofocus). */
   hasAutoFocus: PropTypes.bool,
+  /** Whether the field has a status indicator. */
+  hasNoStatusIndicator: PropTypes.bool,
   /** Whether the field is disabled. */
   isDisabled: PropTypes.bool,
   /** Whether the input can be selected, but not changed by the user. */

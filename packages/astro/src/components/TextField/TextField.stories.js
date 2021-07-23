@@ -114,3 +114,10 @@ export const Warning = () => (
     status="warning"
   />
 );
+
+export const WithoutStatusIndicator = () => (
+  <TextField
+    label="Example Label"
+    hasNoStatusIndicator
+  />
+);

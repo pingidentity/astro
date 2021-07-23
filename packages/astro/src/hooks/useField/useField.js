@@ -29,6 +29,7 @@ const useField = (props = {}) => {
     direction,
     disabledKeys,
     hasAutoFocus,
+    hasNoStatusIndicator,
     helperText,
     id,
     isDefaultSelected,
@@ -84,6 +85,7 @@ const useField = (props = {}) => {
   } = useLabel({ ...props, ...controlProps });
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
+    hasNoStatusIndicator,
     isFocused: isFocusVisible,
     isDisabled,
     [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.

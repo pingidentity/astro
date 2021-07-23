@@ -48,6 +48,7 @@ export default {
     hasNoEmptySelection: {},
     isNotFlippable: {},
     hasAutoFocus: {},
+    hasNoStatusIndicator: {},
     isReadOnly: {},
     isDisabled: {},
     selectedKey: {
@@ -265,6 +266,14 @@ export const HelperText = () => (
 export const Required = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} isRequired {...actions}>
+      {item => <Item key={item.name}>{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
+);
+
+export const WithoutStatusIndicator = () => (
+  <OverlayProvider>
+    <ComboBoxField label="Example label" defaultItems={items} hasNoStatusIndicator {...actions}>
       {item => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
