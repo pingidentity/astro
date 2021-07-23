@@ -109,3 +109,10 @@ input.container = {
     bg: 'warning.bright',
   },
 };
+
+input.containedIcon = {
+  position: 'absolute',
+  right: 0,
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+};

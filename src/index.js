@@ -78,6 +78,9 @@ export * from './components/PageHeader';
 export { default as Panel } from './components/Panel';
 export * from './components/Panel';
 
+export { default as PasswordField } from './components/PasswordField';
+export * from './components/PasswordField';
+
 export { default as Popover } from './components/Popover';
 export * from './components/Popover';
 
