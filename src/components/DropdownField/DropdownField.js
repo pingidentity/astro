@@ -87,6 +87,8 @@ DropdownField.propTypes = {
   isReadOnly: PropTypes.bool,
   /** Whether the element should receive focus on render. */
   hasAutoFocus: PropTypes.bool,
+  /** Whether the field has a status indicator. */
+  hasNoStatusIndicator: PropTypes.bool,
   /** Text to display after the radio group label. Useful for errors or other info. */
   helperText: PropTypes.node,
   /** Determines the helper text styling. */

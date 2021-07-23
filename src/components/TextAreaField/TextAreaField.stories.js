@@ -150,3 +150,10 @@ export const Warning = () => (
     status="warning"
   />
 );
+
+export const WithoutStatusIndicator = () => (
+  <TextAreaField
+    label="Example Label"
+    hasNoStatusIndicator
+  />
+);

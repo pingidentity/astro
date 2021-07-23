@@ -263,6 +263,8 @@ SelectField.propTypes = {
   disabledKeys: PropTypes.arrayOf(PropTypes.string),
   /** Whether the collection allows empty selection. */
   hasNoEmptySelection: PropTypes.bool,
+  /** Whether the field has a status indicator. */
+  hasNoStatusIndicator: PropTypes.bool,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
   /** Sets the default open state of the menu. */
