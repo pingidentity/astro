@@ -44,7 +44,7 @@ const Tabs = forwardRef((props, ref) => {
       <Box {...others}>
         <Box
           variant="tabs"
-          gap="20px"
+          gap="25px"
           isRow={orientation === ORIENTATION.HORIZONTAL}
           {...tabListProps}
           {...raTabListProps}
