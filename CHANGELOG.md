@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.18.0...@pingux/astro@0.19.0) (2021-07-23)
+
+
+### Bug Fixes
+
+* [UIP-4542] Required mark was misplaced for Float Label Mode ([64d938e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/64d938e8fa1d273035e4ba44b94c8ff51950d32c))
+* [UIP-4604] Optional side status line ([1f0f8b5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1f0f8b52aec4ef5cc7039c6c7281e189ffdb4ae4))
+* [UIP-4626] Stepper broken layout ([6127042](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6127042f6999b26c9c161c2669ceec2c46866ef6))
+* [UIP-4630] Add all hooks to index.js ([60515ea](https://gitlab.corp.pingidentity.com/ux/pingux/commit/60515ea1a8a15faae5be74bb81b107aeeff0492c))
+* [UIP-4642] Combobox dependency and loader height issues ([86631db](https://gitlab.corp.pingidentity.com/ux/pingux/commit/86631db0884a577fd21cc52b4b8c946834aa8051))
+
+
+### Features
+
+* [UIP-4200] Password field component ([4d364dc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d364dcb7b4f915397bd279fceea179e4f94abe0))
+* [UIP-4533] Logo Tabs Recipe ([b126981](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b126981a89de4f1843ec4e2d2e38e46be0e78d38))
+
+
+
+
+
 # [0.18.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.17.1...@pingux/astro@0.18.0) (2021-07-12)
 
 
