@@ -29,6 +29,6 @@ export const tabPanel = {
 export const tabs = {
   borderBottomWidth: 1,
   borderBottomStyle: 'solid',
-  borderBottomColor: 'neutral.40',
+  borderBottomColor: 'neutral.90',
   mb: 'lg',
 };

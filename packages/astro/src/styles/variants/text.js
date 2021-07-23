@@ -13,12 +13,13 @@ const wordWrap = {
 const tabLabel = {
   ...base,
   ...wordWrap,
-  fontSize: 'sm',
+  fontSize: 'md',
   fontWeight: 1,
-  mb: 8,
+  mb: 6,
   color: 'neutral.40',
   '.is-selected &': {
     color: 'active',
+    mb: 5,
   },
   '.is-disabled &': {
     color: 'neutral.80',
