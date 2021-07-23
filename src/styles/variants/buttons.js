@@ -37,6 +37,7 @@ const defaultFocus = {
 };
 
 const iconButton = {
+  justifyContent: 'center',
   appearance: 'none',
   alignItems: 'center',
   alignSelf: 'baseline',
