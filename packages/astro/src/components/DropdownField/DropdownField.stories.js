@@ -168,3 +168,11 @@ export const Transparent = args => (
     </DropdownField>
   </Box>
 );
+
+export const WithoutStatusIndicator = args => (
+  <DropdownField {...args} label="Select one" hasNoStatusIndicator>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </DropdownField>
+);

@@ -91,6 +91,15 @@ input.container = {
     left: 0,
     bottom: 0,
   },
+  '&.has-no-status-indicator > input': {
+    borderLeftWidth: 1,
+  },
+  '&.has-no-status-indicator > button': {
+    borderLeftWidth: 1,
+  },
+  '&.has-no-status-indicator:after': {
+    width: 0,
+  },
   '&.is-disabled': {
     // Override global opacity for disabled items because the children will handle their own opacity
     // and it will otherwise stack the opacity effect.

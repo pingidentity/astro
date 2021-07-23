@@ -179,3 +179,11 @@ export const AsyncLoading = () => {
     </OverlayProvider>
   );
 };
+export const WithoutStatusIndicator = () => (
+  <SelectField label="What's your favorite color?" hasNoStatusIndicator>
+    <Item key="none">None</Item>
+    <Item key="red">Red</Item>
+    <Item key="blue">Blue</Item>
+    <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
