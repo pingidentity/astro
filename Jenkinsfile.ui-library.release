@@ -1,18 +1,16 @@
-@Library(['mpl-library', 'jenkins-ci-library']) _
-// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+#!/usr/bin/env groovy
+@Library(['jenkins-ci-library']) _
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
 
-def ortCdnDeploy = libraryResource 'podTemplates/central-only/ort-cdn-deploy.yaml';
-def prodCdnDeploy = libraryResource 'podTemplates/central-only/prod-cdn-deploy.yaml';
-def uiPipelineShared = libraryResource 'podTemplates/ui-pipeline-shared.yaml';
-def centralCluster = 'central-us-east-2-k8s'
+def centralCluster = 'central'
+def testCluster = 'test'
 
 pipeline {
   agent {
-    kubernetes {
-      cloud centralCluster
-      yaml uiPipelineShared
-    }
+    kubernetes(agentDefinition(
+      name: 'ui-pipeline-shared',
+      cloud: centralCluster
+    ))
   }
   environment {
     JIRA_CREDS = credentials('jira-creds')
@@ -110,7 +108,12 @@ pipeline {
 
     }
     stage('cdn deploy test') {
-      agent { label 'test-cdn-deploy' }
+      agent {
+        kubernetes(agentDefinition(
+          name: 'test-cdn-deploy',
+          cloud: testCluster
+        ))
+      }
       environment{
         ENVIRONMENT = "test"
         CDN_SOURCE = "packages/ui-library/cdn/${env.RELEASE_VERSION}"
@@ -127,10 +130,10 @@ pipeline {
 
     stage('cdn deploy ort') {
       agent {
-        kubernetes {
-          cloud centralCluster
-          yaml ortCdnDeploy
-        }
+        kubernetes(agentDefinition(
+          name: 'ort-cdn-deploy',
+          cloud: centralCluster
+        ))
       }
       environment{
         ENVIRONMENT = "staging"
@@ -148,10 +151,10 @@ pipeline {
 
     stage('cdn deploy prod') {
       agent {
-        kubernetes {
-          cloud centralCluster
-          yaml prodCdnDeploy
-        }
+        kubernetes(agentDefinition(
+          name: 'prod-cdn-deploy',
+          cloud: centralCluster
+        ))
       }
       environment{
         ENVIRONMENT = "production"

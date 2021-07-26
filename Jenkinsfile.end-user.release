@@ -1,17 +1,15 @@
-@Library(['mpl-library', 'jenkins-ci-library']) _
-// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-mpl-library
+#!/usr/bin/env groovy
+@Library(['jenkins-ci-library']) _
 // https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
 
-def prodCdnDeploy = libraryResource 'podTemplates/central-only/prod-cdn-deploy.yaml';
-def uiPipelineShared = libraryResource 'podTemplates/ui-pipeline-shared.yaml';
-def centralCluster = 'central-us-east-2-k8s'
+def centralCluster = 'central'
 
 pipeline {
   agent {
-    kubernetes {
-      cloud centralCluster
-      yaml uiPipelineShared
-    }
+    kubernetes(agentDefinition(
+      name: 'ui-pipeline-shared',
+      cloud: centralCluster
+    ))
   }
   environment {
     PATH_TO_PACKAGE_JSON = "packages/end-user"
@@ -84,12 +82,12 @@ pipeline {
     }
     stage('cdn deploy prod') {
       agent {
-        kubernetes {
-          cloud centralCluster
-          yaml prodCdnDeploy
-        }
+        kubernetes(agentDefinition(
+          name: 'prod-cdn-deploy',
+          cloud: centralCluster
+        ))
       }
-      environment{
+      environment {
         ENVIRONMENT = "production"
         CDN_SOURCE = "packages/end-user/cdn/${env.RELEASE_VERSION}"
         UNIQUE_CDN_FOLDER = "${env.RELEASE_VERSION}"
