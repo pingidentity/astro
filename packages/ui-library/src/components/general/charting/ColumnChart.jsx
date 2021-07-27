@@ -239,7 +239,7 @@ export default class ColumnChart extends React.Component {
             selectedY !== null
                 ? this.props.legend.find(({ id }) => selectedY.label === id)
                 : null;
-        return selectedYItem
+        return selectedYItem && selectedYItem.yAxisId
             ? selectedYItem.yAxisId
             : this.props.baseYAxisId;
     }
