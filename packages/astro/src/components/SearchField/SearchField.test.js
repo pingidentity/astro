@@ -159,3 +159,8 @@ test('search id', () => {
   const search = screen.getByLabelText(testLabel);
   expect(search).toHaveAttribute('id', 'test');
 });
+
+test('check that only 1 data-testid is present', () => {
+  getComponent();
+  expect(screen.getAllByTestId(testId).length).toBe(1);
+});
