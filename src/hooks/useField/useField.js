@@ -143,7 +143,7 @@ const useField = (props = {}) => {
     value,
     ...ariaProps,
     ...raFieldProps,
-    ...mergeProps({ onBlur, onFocus }, controlProps, focusProps),
+    ...mergeProps({ onBlur, onFocus }, omit(controlProps, 'data-testid'), focusProps),
   };
 
   const fieldLabelProps = {
