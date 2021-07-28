@@ -17,6 +17,11 @@ import { isIterableProp } from '../../utils/devUtils/props/isIterable';
  */
 
 const AccordionGroup = forwardRef((props, ref) => {
+  const {
+    onPress,
+    onExpandedChange,
+    ...others
+  } = props;
   const state = useTreeState(props);
   const accordionRef = useRef();
   const { accordionProps } = useAccordion(props, state, accordionRef);
@@ -26,7 +31,7 @@ const AccordionGroup = forwardRef((props, ref) => {
 
   return (
     <AccordionContext.Provider value={state} >
-      <Box ref={accordionRef} {...accordionProps}>
+      <Box ref={accordionRef} {...accordionProps} {...others}>
         {Array.from(state.collection).map(item => (
           <AccordionItem key={item.key} item={item}>
             {item.props.children}
@@ -40,6 +45,8 @@ const AccordionGroup = forwardRef((props, ref) => {
 AccordionGroup.propTypes = {
   /** Handler that is called when items are expanded or collapsed. */
   onExpandedChange: PropTypes.func,
+  /**  Handler that is called when the press is released over the target. */
+  onPress: PropTypes.func,
   /** Item objects in the collection. */
   items: isIterableProp,
   /**
