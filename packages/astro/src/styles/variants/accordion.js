@@ -21,7 +21,8 @@ const accordion = {
 
 const accordionBody = {
   display: 'none !important',
-  m: 'md',
+  p: 'md',
+  width: '100%',
   '.is-open &': {
     display: 'flex !important',
   },
