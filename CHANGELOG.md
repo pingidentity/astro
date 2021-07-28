@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.19.0...@pingux/astro@0.19.1) (2021-07-28)
+
+
+### Bug Fixes
+
+* [UIP-4563] searchField data-id-props doubled ([0363f38](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0363f38bd2f160630117fe0556e645f623e1be55))
+* [UIP-4664] Accordion does not accept styled system props ([f5a3fda](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f5a3fda613d6b981beda9b016e6c8b23eff064ab))
+
+
+
+
+
 # [0.19.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.18.0...@pingux/astro@0.19.0) (2021-07-23)
 
 
