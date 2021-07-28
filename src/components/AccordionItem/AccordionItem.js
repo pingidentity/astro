@@ -15,10 +15,22 @@ import { AccordionContext } from '../../context/AccordionContext';
 
 const AccordionItem = forwardRef((props, ref) => {
   const { className, item } = props;
+  const {
+    label,
+    children,
+    textValue,
+    containerProps = {},
+    buttonProps = {},
+    regionProps = {},
+    ...others
+  } = item.props;
 
   const state = useContext(AccordionContext);
   const buttonRef = useRef();
-  const { buttonProps, regionProps } = useAccordionItem(props, state, buttonRef);
+  const {
+    buttonProps: accordionButtonProps,
+    regionProps: accordionRegionProps,
+  } = useAccordionItem(props, state, buttonRef);
   const { hoverProps, isHovered } = useHover(props);
   const { focusProps, isFocusVisible } = useFocusRing();
   const isOpen = state.expandedKeys.has(item.key);
@@ -27,10 +39,7 @@ const AccordionItem = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
-  const buttonObject = useButton(
-    props,
-    buttonRef);
-  const { isPressed } = buttonObject;
+  const { isPressed, buttonProps: raButtonProps } = useButton(props, buttonRef);
 
   const { classNames: itemClasses } = useStatusClasses(className, {
     isOpen,
@@ -45,12 +54,12 @@ const AccordionItem = forwardRef((props, ref) => {
   });
 
   return (
-    <Box variant="accordion.accordion" className={itemClasses}>
+    <Box variant="accordion.accordion" className={itemClasses} {...others} {...containerProps}>
       <RButton
         ref={buttonRef}
         variant="accordionHeader"
         className={buttonClasses}
-        {...mergeProps(hoverProps, focusProps, buttonProps, buttonObject.buttonProps)}
+        {...mergeProps(hoverProps, focusProps, accordionButtonProps, raButtonProps, buttonProps)}
       >
         <Text className={buttonClasses} variant="accordion.accordionTitle">
           {item.props.label}
@@ -59,7 +68,7 @@ const AccordionItem = forwardRef((props, ref) => {
           <Icon icon={isOpen ? MenuUp : MenuDown} />
         </Box>
       </RButton>
-      <Box variant="accordion.accordionBody" {...regionProps}>
+      <Box variant="accordion.accordionBody" {...accordionRegionProps} {...regionProps}>
         {item.rendered}
       </Box>
     </Box>
@@ -72,6 +81,11 @@ AccordionItem.propTypes = {
     rendered: PropTypes.node,
     props: PropTypes.shape({
       label: PropTypes.string,
+      children: PropTypes.node,
+      textValue: PropTypes.string,
+      containerProps: PropTypes.shape({}),
+      buttonProps: PropTypes.shape({}),
+      regionProps: PropTypes.shape({}),
     }),
   }),
 };
