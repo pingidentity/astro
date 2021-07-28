@@ -20,6 +20,6 @@ const object = lines.reduce((acc, cur) => {
     return { ...acc };
   }
 }, {});
-fs.writeFile('lerna_version.json', JSON.stringify(object), 'utf8', (err) => {
+fs.writeFile('lerna_version.json', JSON.stringify(object, null, 2), 'utf8', (err) => {
   if (err) {  console.error(err);  return; };
 });
