@@ -230,6 +230,8 @@ Branch.defaultProps = {
 };
 
 Branch.propTypes = {
+    /** Border color of outlet node */
+    borderColor: PropTypes.string,
     /** Step node has "from" port on its right side */
     canLinkFrom: PropTypes.bool,
     /** Step node has "to" port on its left side */
