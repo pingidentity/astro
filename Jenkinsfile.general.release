@@ -32,6 +32,14 @@ def globalCdnMap = [
 ];
 def updatedPackagesMap = [:];
 
+def generateSlackMessage(packageName, packagePathName, packageVersion) {
+  return """
+    :tada: ${packageName} ${packageVersion} has been released!
+    
+    <https://gitlab.corp.pingidentity.com/ux/pingux/-/blob/master/packages/${packagePathName}/CHANGELOG.md|See the CHANGELOG for more details>
+  """.stripIndent()
+}
+
 pipeline {
   agent {
     kubernetes(agentDefinition(
@@ -279,58 +287,59 @@ pipeline {
   post {
     success {
       script {
-        def formattedJson = JsonOutput.toJson(env.RELEASE_JSON);
-        def prettyJson = JsonOutput.prettyPrint(formattedJson);
         def message = """
           :tada: Release success!
           
           ```
-          ${prettyJson}
+          ${env.RELEASE_JSON}
           ```
 
           Build details: <${env.BUILD_URL}/console|See in web console>
         """.stripIndent()
         slackSend channel: '#ux-deployments', message: "${message}", color: "#4aba78"
 
-        // Send a message to each updated package's channel
-        for (prop in updatedPackagesMap) {
-          if (prop.key == "@pingux/astro") {
-            def astroMessage = """
-              :tada: Astro ${prop.value} has been released!
-              
-              <https://gitlab.corp.pingidentity.com/ux/pingux/-/blob/master/packages/astro/CHANGELOG.md|See the CHANGELOG for more details>
-            """.stripIndent()
-            slackSend channel: '#ui-astro', message: "${astroMessage}", color: "#4aba78"
-          } else if (prop.key == "@pingux/end-user") {
-            def endUserMessage = """
-              :tada: End User ${prop.value} has been released!
-              
-              <https://gitlab.corp.pingidentity.com/ux/pingux/-/blob/master/packages/end-user/CHANGELOG.md|See the CHANGELOG for more details>
-            """.stripIndent()
-            slackSend channel: '#ui-end-user', message: "${endUserMessage}", color: "#4aba78"
-          } else if (prop.key == "@pingux/flow-diagram") {
-            def flowDiagramMessage = """
-              :tada: Flow Diagram ${prop.value} has been released!
-              
-              <https://gitlab.corp.pingidentity.com/ux/pingux/-/blob/master/packages/flow-diagram/CHANGELOG.md|See the CHANGELOG for more details>
-            """.stripIndent()
-            slackSend channel: '#ui-flow-diagram', message: "${flowDiagramMessage}", color: "#4aba78"
-          } else if (prop.key == "@pingux/schema-form") {
-            def schemaFormMessage = """
-              :tada: Schema Form ${prop.value} has been released!
-              
-              <https://gitlab.corp.pingidentity.com/ux/pingux/-/blob/master/packages/schema-form/CHANGELOG.md|See the CHANGELOG for more details>
-            """.stripIndent()
-            slackSend channel: '#ui-schema-forms', message: "${schemaFormMessage}", color: "#4aba78"
-          } else if (prop.key == "ui-library") {
-            def uiLibraryMessage = """
-              :tada: UI Library ${prop.value} has been released!
-              
-              <https://gitlab.corp.pingidentity.com/ux/pingux/-/blob/master/packages/ui-library/CHANGELOG.md|See the CHANGELOG for more details>
-            """.stripIndent()
-            slackSend channel: '#ui-library', message: "${uiLibraryMessage}", color: "#4aba78"
+        def packageKeys = updatedPackagesMap.keySet() as List;
+        if (packageKeys.size() > 0) {
+          // Send a message to each updated package's channel
+          packageKeys.each() {
+            if (it == "@pingux/astro") {
+              def astroMessage = generateSlackMessage(
+                "Astro",
+                "astro",
+                "${updatedPackagesMap[it]}"
+              );
+              slackSend channel: '#ui-astro', message: "${astroMessage}", color: "#4aba78"
+            } else if (it == "@pingux/end-user") {
+              def endUserMessage = generateSlackMessage(
+                "End User",
+                "end-user",
+                "${updatedPackagesMap[it]}"
+              );
+              slackSend channel: '#ui-end-user', message: "${endUserMessage}", color: "#4aba78"
+            } else if (it == "@pingux/flow-diagram") {
+              def flowDiagramMessage = generateSlackMessage(
+                "Flow Diagram",
+                "flow-diagram",
+                "${updatedPackagesMap[it]}"
+              );
+              slackSend channel: '#ui-flow-diagram', message: "${flowDiagramMessage}", color: "#4aba78"
+            } else if (it == "@pingux/schema-form") {
+              def schemaFormMessage = generateSlackMessage(
+                "Schema Form",
+                "schema-form",
+                "${updatedPackagesMap[it]}"
+              );
+              slackSend channel: '#ui-schema-forms', message: "${schemaFormMessage}", color: "#4aba78"
+            } else if (it == "ui-library") {
+              def uiLibraryMessage = generateSlackMessage(
+                "UI Library",
+                "ui-library",
+                "${updatedPackagesMap[it]}"
+              );
+              slackSend channel: '#ui-library', message: "${uiLibraryMessage}", color: "#4aba78"
+            }
+            // don't do anything with packages that don't have their own channel
           }
-          // don't do anything with packages that don't have their own channel
         }
       }
     }
