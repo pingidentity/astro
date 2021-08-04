@@ -10,7 +10,8 @@ const cleanStyles = (styles) => {
         .trim(); // Clean up extra spaces on ends
 };
 
-export const applyStyles = (colors, bgImg, template) => {
+export const applyStyles = (colors, bgImg, stylesheet) => {
+    const isSplit = (stylesheet || '').toLowerCase().includes('split/split.css');
     const cssTemplate = `
         ${(bgImg || colors.background || colors.bodyText) ? `
             .page {
@@ -34,7 +35,7 @@ export const applyStyles = (colors, bgImg, template) => {
             }
         ` : ''}
 
-        ${colors.card && template.toLowerCase() !== 'split' ? `
+        ${colors.card && !isSplit ? `
             .card {
                 background: ${colors.card};
             }
@@ -45,7 +46,7 @@ export const applyStyles = (colors, bgImg, template) => {
         ` : ''}
 
         ${ // this override allows a background image to be visible between the logo and form containers for the Split template
-        colors.card && template.toLowerCase() === 'split' ? `
+        colors.card && isSplit ? `
             .card {
                 background: transparent;
             }
@@ -125,9 +126,8 @@ export const ThemeStyles = ({
     styles,
     onLoad,
     bgImg,
-    template,
 }) => {
-    const userStyleElem = React.createElement('style', null, applyStyles(styles, bgImg, template));
+    const userStyleElem = React.createElement('style', null, applyStyles(styles, bgImg, stylesheet));
 
     return (
         <>
@@ -150,7 +150,6 @@ ThemeStyles.propTypes = {
     themeStyleSheet: PropTypes.string,
     userStyles: PropTypes.shape({}),
     onLoad: PropTypes.func,
-    template: PropTypes.string,
 };
 
 ThemeStyles.defaultProps = {
