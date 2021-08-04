@@ -295,21 +295,22 @@ export default function useDiagram({
             ),
         );
 
+        const curveSize = 160;
         diagramObject.linkTemplateMap.add('io',
-            $(go.Link,
+            $(go.Link, go.Link.Bezier,
                 {
-                    routing: go.Link.AvoidsNodes,
-                    curve: go.Link.JumpOver,
-                    corner: 5,
                     deletable: false,
                     fromShortLength: -10,
                     toShortLength: -10,
                     selectable: true,
-                    layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
                     selectionAdorned: false,
                     fromPortId: 'bottom',
                     toPortId: 'bottom',
                     layerName: 'Background',
+                    curviness: curveSize,
+                    fromEndSegmentLength: curveSize,
+                    toEndSegmentLength: curveSize,
+                    isLayoutPositioned: false,
                 },
                 new go.Binding('click', 'onClick'),
                 new go.Binding('visible', 'visible'),
