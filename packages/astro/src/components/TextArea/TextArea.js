@@ -1,16 +1,16 @@
 import React, { forwardRef } from 'react';
-import { Textarea as RTextArea } from '@rebass/forms';
+import { Textarea as ThemeUITextArea } from 'theme-ui';
 
 /**
  * Basic textarea input.
- * Built on top of the [TextArea from Rebass Forms](https://rebassjs.org/forms/textarea) and
- * uses the available [props from Rebass](https://rebassjs.org/props/).
+ * Built on top of the [TextArea from Theme-UI Forms](https://theme-ui.com/components/textarea and
+ * uses the available [props from Them-UI](https://theme-ui.com/sx-prop).
  *
  * **Note: Requires a label. It's recommended to use `TextAreaField` for a complete solution.**
  */
 
 const TextArea = forwardRef((props, ref) => (
-  <RTextArea
+  <ThemeUITextArea
     ref={ref}
     {...props}
   />

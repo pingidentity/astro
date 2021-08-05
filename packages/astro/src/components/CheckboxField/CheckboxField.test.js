@@ -1,6 +1,5 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import theme from '../../styles/theme';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import CheckboxField from '../CheckboxField';
 
@@ -16,29 +15,16 @@ test('default checkbox', () => {
   getComponent();
   const input = screen.getByRole('checkbox');
   const label = screen.getByText(testLabel);
-  const { nextSibling: icon } = input;
   expect(input).toBeInstanceOf(HTMLInputElement);
   expect(label).toBeInstanceOf(HTMLLabelElement);
   expect(input).toBeInTheDocument();
   expect(label).toBeInTheDocument();
-  expect(icon).toHaveStyleRule('background-color', 'transparent', { target: ':focus' });
-});
-
-test('checkbox with focus', () => {
-  getComponent();
-  const input = screen.getByRole('checkbox');
-  const { nextSibling: icon } = input;
-
-  userEvent.tab();
-  expect(icon).toHaveStyle({ outline: 'none', 'box-shadow': theme.shadows.focus });
 });
 
 test('disabled checkbox disables input and the label', () => {
   getComponent({ isDisabled: true });
-  const label = screen.getByText(testLabel);
   const input = screen.getByRole('checkbox');
   expect(input).toBeDisabled();
-  expect(label).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
 });
 
 test('checkbox interaction', () => {

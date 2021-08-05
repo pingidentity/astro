@@ -83,9 +83,9 @@ export const Default = () => {
       <Button
         variant="text"
         onPress={onFieldAdd}
-        width="fit-content"
         role="button"
         title="Add Field Button"
+        sx={{ width: 'fit-content' }}
       >
         <Text variant="label" color="active">
           + Add

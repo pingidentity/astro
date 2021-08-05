@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.10.4",
     "@emotion/babel-preset-css-prop": "^10.0.27",
-    "@emotion/core": "^10.0.34",
+    "@emotion/eslint-plugin":"^11.2.0",
     "@emotion/jest": "^11.2.1",
     "@pingux/astro": "^0.8.1",
     "@pingux/end-user": "^1.5.2",
@@ -92,7 +92,6 @@
     "react": ">=16"
   },
   "dependencies": {
-    "@emotion/react": "^11.1.1",
-    "emotion-theming": "^11.0.0"
+    "@emotion/react": "^11.1.5"
   }
 }

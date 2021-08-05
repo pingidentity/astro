@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeProvider } from 'emotion-theming';
-import { render, screen } from '@testing-library/react';
+import { ThemeProvider } from 'theme-ui';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 import Text from '.';
 import testTheme from '../../utils/testUtils/testTheme';
 
@@ -22,12 +22,6 @@ const getComponent = (props = {}) => {
 test('default text', () => {
   getComponent();
   const text = screen.getByTestId(testId);
-  expect(text).toBeInstanceOf(HTMLDivElement);
+  expect(text).toBeInstanceOf(HTMLSpanElement);
   expect(text).toBeInTheDocument();
-});
-
-test('text with a variant', () => {
-  getComponent({ variant: 'title' });
-  const text = screen.getByTestId(testId);
-  expect(text).toHaveStyleRule('font-weight', '500');
 });

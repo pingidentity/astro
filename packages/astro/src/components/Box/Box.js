@@ -1,14 +1,17 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { Box as RBox } from 'rebass';
+import styled from '@emotion/styled';
+import { layout, flexbox } from 'styled-system';
+import { Box as ThemeUIBox } from 'theme-ui';
 import { propType as stylePropType } from '@styled-system/prop-types';
 import { useStatusClasses } from '../../hooks';
 
+const ExtendedBox = styled(ThemeUIBox)(layout, flexbox);
 /**
  * Basic flexbox-based layout component for creating rows and columns,
  * while controlling sizes and spacing.
  * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
- * Built on top of the [Box from Rebass.js](https://rebassjs.org/box).
+ * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/).
  */
 const Box = forwardRef((props, ref) => {
   const {
@@ -30,9 +33,8 @@ const Box = forwardRef((props, ref) => {
       [fd === 'row' ? 'marginLeft' : 'marginTop']: gap,
     };
   }
-
   return (
-    <RBox
+    <ExtendedBox
       className={classNames}
       ref={ref}
       display="flex"

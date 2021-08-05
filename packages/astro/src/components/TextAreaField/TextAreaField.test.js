@@ -2,7 +2,6 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
 import { screen, render } from '../../utils/testUtils/testWrapper';
-import theme from '../../styles/theme';
 import TextAreaField from '.';
 
 const testId = 'test-textAreaField';
@@ -29,14 +28,12 @@ test('text area field has focus', () => {
   userEvent.tab();
   expect(textArea).toHaveFocus();
   expect(textArea).toHaveClass('is-focused');
-  expect(textArea).toHaveStyle({ borderColor: theme.colors.accent[80] });
 });
 
 test('disabled prop disables text field label', () => {
   getComponent({ isDisabled: true });
   const label = screen.getByText(defaultProps.label);
   expect(label).toHaveClass('is-disabled');
-  expect(label).toHaveStyle({ opacity: 0.5 });
 });
 
 test('text area field with helper text', () => {

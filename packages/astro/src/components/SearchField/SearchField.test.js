@@ -59,7 +59,6 @@ test('search isDisabled', () => {
   const search = screen.getByLabelText(testLabel);
 
   expect(search).toBeDisabled();
-  expect(search).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
 });
 
 test('search isReadOnly', () => {
@@ -109,8 +108,6 @@ test('search keyboard events', () => {
   expect(onKeyUp).not.toHaveBeenCalled();
 
   userEvent.type(screen.getByLabelText(testLabel), testLabel);
-  // FIXME: Not being triggered -- bug in React Aria?
-  // expect(onKeyDown).toHaveBeenCalled();
   expect(onKeyUp).toHaveBeenCalled();
 });
 

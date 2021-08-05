@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeProvider } from 'emotion-theming';
-import { Global, css } from '@emotion/core';
+import { ThemeProvider } from 'theme-ui';
+import { Global, css } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
 import Box from '../Box';
 import theme from '../../styles/theme';
@@ -9,6 +9,7 @@ export const GlobalStyles = () => (
   <Global
     styles={
       css`
+        @import url("https://use.typekit.net/icz8cni.css");
         ${emotionNormalize}
         * {
           box-sizing: border-box;
@@ -21,13 +22,9 @@ export const GlobalStyles = () => (
           min-height: 100%;
           font-family: "Helvetica Neue", Helvetica, sans-serif;
         }
-        @import url("https://use.typekit.net/icz8cni.css");
         .is-disabled {
           opacity: 0.5;
           pointer-events: none;
-        }
-        [data-tippy-root] {
-          max-width:calc(100vw - 10px)
         }
       `
     }

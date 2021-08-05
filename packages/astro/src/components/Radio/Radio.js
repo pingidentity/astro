@@ -1,16 +1,16 @@
 import React, { forwardRef } from 'react';
-import { Radio as RRadio } from '@rebass/forms';
+import { Radio as ThemeUIRadio } from 'theme-ui';
 
 /**
  * Basic radio input wrapped in a label.
- * Built on top of the [Radio from Rebass Forms](https://rebassjs.org/forms/radio) and uses the
+ * Built on top of the [Radio from Theme-UI](https://theme-ui.com/components/radio/o) and uses the
  * available [props from Rebass](https://rebassjs.org/props/).
  *
  * **Note: Requires a label. It's recommended to use `RadioGroupField` with `RadioField` for a**
  * **solution.**
  */
 const Radio = forwardRef((props, ref) => (
-  <RRadio
+  <ThemeUIRadio
     ref={ref}
     {...props}
   />

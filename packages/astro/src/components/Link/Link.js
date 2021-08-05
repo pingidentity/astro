@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
-import { Link as RLink } from 'rebass';
+import { Link as ThemeUILink } from 'theme-ui';
 import { useLink } from '@react-aria/link';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
@@ -23,7 +23,7 @@ const Link = forwardRef((props, ref) => {
   });
 
   return (
-    <RLink
+    <ThemeUILink
       className={classNames}
       ref={linkRef}
       role="link"

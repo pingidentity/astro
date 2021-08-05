@@ -19,17 +19,3 @@ test('renders Separator component', () => {
   expect(separator).toBeInstanceOf(HTMLDivElement);
   expect(separator).toBeInTheDocument();
 });
-
-test('renders correct styles with horizontal prop', () => {
-  getComponent({ orientation: 'horizontal' });
-  const separator = screen.getByTestId(testId);
-  expect(separator).toHaveStyle({ width: '100%' });
-  expect(separator).toHaveStyle({ height: '1px' });
-});
-
-test('renders correct styles with vertical prop', () => {
-  getComponent({ orientation: 'vertical' });
-  const separator = screen.getByTestId(testId);
-  expect(separator).toHaveStyle({ width: '1px' });
-  expect(separator).toHaveStyle({ height: '100%' });
-});

@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text as RText } from 'rebass';
+import styled from '@emotion/styled';
+import { layout, flexbox } from 'styled-system';
+import { Text as ThemeUIText } from 'theme-ui';
 
 import { textVariants } from '../../utils/devUtils/constants/variants';
 
+const ExtendedText = styled(ThemeUIText)(layout, flexbox);
+
 const Text = React.forwardRef((props, ref) => (
-  <RText variant="base" {...props} ref={ref} />
+  <ExtendedText variant="base" {...props} ref={ref} />
 ));
 
 Text.propTypes = {

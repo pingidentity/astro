@@ -23,18 +23,6 @@ test('default text field', () => {
   expect(control).toBeInTheDocument();
 });
 
-test('text field with control props', () => {
-  getComponent({ controlProps: { color: 'red' } });
-  const control = screen.getByLabelText(testLabel);
-  expect(control).toHaveStyleRule('color', 'red');
-});
-
-test('text field with label props', () => {
-  getComponent({ labelProps: { color: 'red' } });
-  const label = screen.getByText(testLabel);
-  expect(label).toHaveStyleRule('color', 'red');
-});
-
 test('text field with left label', () => {
   getComponent({ labelMode: 'left' });
   const label = screen.getByText(testLabel);

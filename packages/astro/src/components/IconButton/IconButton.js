@@ -1,8 +1,11 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
+import { IconButton as ThemeUIIconButton } from 'theme-ui';
+import { useFocusRing } from '@react-aria/focus';
+import { Pressable, useHover, usePress } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
+import useStatusClasses from '../../hooks/useStatusClasses';
 
-import Button from '../Button';
-import { modes } from '../Button/constants';
 import { useAriaLabelWarning } from '../../hooks';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
@@ -15,21 +18,49 @@ import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
  * `Button` component.
  */
 const IconButton = forwardRef((props, ref) => {
-  const { children, title, ...others } = props;
+  const { children,
+    className,
+    title,
+    onPress,
+    onPressStart,
+    onPressEnd,
+    onPressChange,
+    onPressUp, ...others } = props;
+
+  const buttonRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => buttonRef.current);
+
+  const { isPressed, pressProps } = usePress({ ref: buttonRef, ...props });
+  const { hoverProps, isHovered } = useHover(props);
+  const { isFocusVisible, focusProps } = useFocusRing();
+
+  const { classNames } = useStatusClasses(className, {
+    isHovered,
+    isPressed,
+    isFocused: isFocusVisible,
+  });
 
   const ariaLabel = props['aria-label'] || title;
   useAriaLabelWarning('IconButton', ariaLabel);
 
   const button = (
-    <Button ref={ref} mode={modes.ICON} aria-label={ariaLabel} {...others}>
+    <ThemeUIIconButton
+      tabIndex={0}
+      ref={buttonRef}
+      className={classNames}
+      aria-label={ariaLabel}
+      {...others}
+      {...mergeProps(hoverProps, focusProps, pressProps)}
+    >
       {children}
-    </Button>
+    </ThemeUIIconButton>
   );
 
   if (title) {
     return (
       <TooltipTrigger isDisabled={!title}>
-        {button}
+        <Pressable>{button}</Pressable>
         {title && <Tooltip>{title}</Tooltip>}
       </TooltipTrigger>
     );
@@ -45,6 +76,33 @@ IconButton.propTypes = {
   'aria-label': PropTypes.string,
   /** Content will be displayed in a tooltip on hover or focus. */
   title: PropTypes.string,
+  /**
+   * Handler that is called when the press is released over the target.
+   * (e: PressEvent) => void
+   */
+  onPress: PropTypes.func,
+  /**
+   * Handler that is called when a press interaction starts.
+   * (e: PressEvent) => void
+   */
+  onPressStart: PropTypes.func,
+  /**
+   * Handler that is called when a press interaction ends, either over the target or when the
+   * pointer leaves the target.
+   * (e: PressEvent) => void
+   */
+  onPressEnd: PropTypes.func,
+  /**
+   * Handler that is called when the press state changes.
+   * (isPressed: boolean) => void
+   */
+  onPressChange: PropTypes.func,
+  /**
+   * Handler that is called when a press is released over the target, regardless of whether it
+   * started on the target or not.
+   * (e: PressEvent) => void
+   */
+  onPressUp: PropTypes.func,
 };
 
 IconButton.defaultProps = {

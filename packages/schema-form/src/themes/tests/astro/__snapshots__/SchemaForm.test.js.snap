@@ -202,6 +202,10 @@ exports[`form elements form success message 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -211,7 +215,9 @@ exports[`form elements form success message 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  margin: xl;
+  font-size: 15px;
+  color: #253746;
+  margin: 40px;
 }
 
 <div
@@ -436,6 +442,10 @@ exports[`form elements form success title 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -445,6 +455,10 @@ exports[`form elements form success title 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -462,7 +476,14 @@ exports[`form elements form success title 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  margin-bottom: md;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 23px;
+  font-weight: 500;
+  color: #253746;
+  margin-bottom: 15px;
 }
 
 <div
@@ -493,10 +514,9 @@ exports[`form elements form success title 1`] = `
 
 exports[`single fields checkbox field 1`] = `
 <DocumentFragment>
-  .emotion-0 [type="checkbox"],
-.emotion-0 [type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
+  .emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
 }
 
 .emotion-0 html {
@@ -636,8 +656,10 @@ exports[`single fields checkbox field 1`] = `
   overflow: auto;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 [type="checkbox"],
+.emotion-0 [type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
 }
 
 .emotion-0 [type="number"]::-webkit-inner-spin-button,
@@ -654,9 +676,8 @@ exports[`single fields checkbox field 1`] = `
   -webkit-appearance: none;
 }
 
-.emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
+.emotion-0 body {
+  margin: 0;
 }
 
 .emotion-0 details {
@@ -693,6 +714,10 @@ exports[`single fields checkbox field 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -702,6 +727,10 @@ exports[`single fields checkbox field 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -717,6 +746,18 @@ exports[`single fields checkbox field 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -743,6 +784,23 @@ exports[`single fields checkbox field 1`] = `
   overflow: hidden;
 }
 
+input:checked~.emotion-8 {
+  color: primary;
+}
+
+input:checked~.emotion-8 {
+  display: block;
+}
+
+input~.emotion-8.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+input:focus~.emotion-8 {
+  background-color: transparent;
+}
+
 input:focus~.emotion-8 {
   color: primary;
   background-color: highlight;
@@ -758,17 +816,11 @@ input:focus~.emotion-8 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  margin-right: 8px;
+  margin-right: 2px;
   border-radius: 4px;
   color: gray;
-}
-
-input:checked~.emotion-8 {
-  display: block;
-}
-
-input:checked~.emotion-8 {
-  color: primary;
+  color: #4462ED;
+  margin-right: 10px;
 }
 
 .emotion-9 {
@@ -781,22 +833,57 @@ input:checked~.emotion-8 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  margin-right: 8px;
+  margin-right: 2px;
   border-radius: 4px;
   color: gray;
+  color: #4462ED;
+  margin-right: 10px;
+}
+
+input~.emotion-9.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+input:focus~.emotion-9 {
+  background-color: transparent;
+}
+
+input:focus~.emotion-9 {
+  color: primary;
+  background-color: highlight;
+}
+
+input:checked~.emotion-9 {
+  color: primary;
 }
 
 input:checked~.emotion-9 {
   display: none;
 }
 
-input:checked~.emotion-9 {
-  color: primary;
+.emotion-10.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
-input:focus~.emotion-9 {
-  color: primary;
-  background-color: highlight;
+.emotion-10.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-10.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-10.is-pressed path {
+  fill: #fff;
 }
 
 .emotion-10 {
@@ -812,14 +899,43 @@ input:focus~.emotion-9 {
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
 }
 
 <div
@@ -892,10 +1008,9 @@ input:focus~.emotion-9 {
 
 exports[`single fields checkboxes field 1`] = `
 <DocumentFragment>
-  .emotion-0 [type="checkbox"],
-.emotion-0 [type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
+  .emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
 }
 
 .emotion-0 html {
@@ -1035,8 +1150,10 @@ exports[`single fields checkboxes field 1`] = `
   overflow: auto;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 [type="checkbox"],
+.emotion-0 [type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
 }
 
 .emotion-0 [type="number"]::-webkit-inner-spin-button,
@@ -1053,9 +1170,8 @@ exports[`single fields checkboxes field 1`] = `
   -webkit-appearance: none;
 }
 
-.emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
+.emotion-0 body {
+  margin: 0;
 }
 
 .emotion-0 details {
@@ -1092,6 +1208,10 @@ exports[`single fields checkboxes field 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -1101,6 +1221,10 @@ exports[`single fields checkboxes field 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1116,6 +1240,18 @@ exports[`single fields checkboxes field 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1142,6 +1278,23 @@ exports[`single fields checkboxes field 1`] = `
   overflow: hidden;
 }
 
+input:checked~.emotion-8 {
+  color: primary;
+}
+
+input:checked~.emotion-8 {
+  display: block;
+}
+
+input~.emotion-8.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+input:focus~.emotion-8 {
+  background-color: transparent;
+}
+
 input:focus~.emotion-8 {
   color: primary;
   background-color: highlight;
@@ -1157,17 +1310,11 @@ input:focus~.emotion-8 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  margin-right: 8px;
+  margin-right: 2px;
   border-radius: 4px;
   color: gray;
-}
-
-input:checked~.emotion-8 {
-  display: block;
-}
-
-input:checked~.emotion-8 {
-  color: primary;
+  color: #4462ED;
+  margin-right: 10px;
 }
 
 .emotion-9 {
@@ -1180,22 +1327,57 @@ input:checked~.emotion-8 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  margin-right: 8px;
+  margin-right: 2px;
   border-radius: 4px;
   color: gray;
+  color: #4462ED;
+  margin-right: 10px;
+}
+
+input~.emotion-9.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+input:focus~.emotion-9 {
+  background-color: transparent;
+}
+
+input:focus~.emotion-9 {
+  color: primary;
+  background-color: highlight;
+}
+
+input:checked~.emotion-9 {
+  color: primary;
 }
 
 input:checked~.emotion-9 {
   display: none;
 }
 
-input:checked~.emotion-9 {
-  color: primary;
+.emotion-31.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
-input:focus~.emotion-9 {
-  color: primary;
-  background-color: highlight;
+.emotion-31.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-31.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-31.is-pressed path {
+  fill: #fff;
 }
 
 .emotion-31 {
@@ -1211,14 +1393,43 @@ input:focus~.emotion-9 {
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
 }
 
 <div
@@ -1428,20 +1639,13 @@ input:focus~.emotion-9 {
 
 exports[`single fields password field 1`] = `
 <DocumentFragment>
-  .emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
+  .emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
 }
 
 .emotion-0 h1 {
@@ -1544,8 +1748,11 @@ exports[`single fields password field 1`] = `
   padding: 0;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
 }
 
 .emotion-0 fieldset {
@@ -1565,8 +1772,8 @@ exports[`single fields password field 1`] = `
   vertical-align: baseline;
 }
 
-.emotion-0 textarea {
-  overflow: auto;
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 [type="checkbox"],
@@ -1620,6 +1827,10 @@ exports[`single fields password field 1`] = `
   pointer-events: none;
 }
 
+.emotion-0 body {
+  margin: 0;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
@@ -1628,9 +1839,23 @@ exports[`single fields password field 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
 }
 
 .emotion-3 {
@@ -1652,10 +1877,165 @@ exports[`single fields password field 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
 }
 
 .emotion-6 {
@@ -1664,7 +2044,7 @@ exports[`single fields password field 1`] = `
   min-width: 0;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 2px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -1674,6 +2054,262 @@ exports[`single fields password field 1`] = `
   border-radius: default;
   color: inherit;
   background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
 }
 
 .emotion-7 {
@@ -1689,14 +2325,67 @@ exports[`single fields password field 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
@@ -1719,7 +2408,7 @@ exports[`single fields password field 1`] = `
             Label
           </label>
           <div
-            class="is-default emotion-1"
+            class="is-default emotion-5"
           >
             <input
               class="is-default emotion-6"
@@ -1742,17 +2431,17 @@ exports[`single fields password field 1`] = `
 
 exports[`single fields select field 1`] = `
 <DocumentFragment>
-  .emotion-0 fieldset {
-  padding: 0.35em 0.75em 0.625em;
+  .emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
 }
 
 .emotion-0 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
 }
 
 .emotion-0 h1 {
@@ -1847,12 +2536,8 @@ exports[`single fields select field 1`] = `
   -webkit-appearance: button;
 }
 
-.emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 button:-moz-focusring,
@@ -1860,756 +2545,6 @@ exports[`single fields select field 1`] = `
 .emotion-0 [type="reset"]:-moz-focusring,
 .emotion-0 [type="submit"]:-moz-focusring {
   outline: 1px dotted ButtonText;
-}
-
-.emotion-0 body {
-  margin: 0;
-}
-
-.emotion-0 legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
-}
-
-.emotion-0 progress {
-  vertical-align: baseline;
-}
-
-.emotion-0 textarea {
-  overflow: auto;
-}
-
-.emotion-0 [type="checkbox"],
-.emotion-0 [type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.emotion-0 [type="number"]::-webkit-inner-spin-button,
-.emotion-0 [type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-.emotion-0 [type="search"] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-.emotion-0 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-.emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-.emotion-0 details {
-  display: block;
-}
-
-.emotion-0 summary {
-  display: list-item;
-}
-
-.emotion-0 template {
-  display: none;
-}
-
-.emotion-0 [hidden] {
-  display: none;
-}
-
-.emotion-0 * {
-  box-sizing: border-box;
-  font-family: "Helvetica Neue",Helvetica,sans-serif;
-}
-
-.emotion-0 * .is-disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-4 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-6 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-}
-
-.emotion-8 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-}
-
-.emotion-10 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 22px;
-  height: 22px;
-  min-width: 22;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 22;
-  height: 22;
-}
-
-<div
-    class="emotion-0 emotion-1"
-  >
-    <div
-      class="emotion-2"
-    >
-      <form
-        autocomplete="off"
-        class="form"
-        novalidate=""
-      >
-        <div
-          class="field-container emotion-3"
-        >
-          <label
-            class="is-default emotion-4"
-          >
-            Label
-          </label>
-          <div
-            aria-hidden="true"
-            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
-          >
-            <input
-              style="font-size: 16px;"
-              tabindex="0"
-              type="text"
-            />
-            <label>
-              Label
-              <select
-                size="2"
-                tabindex="-1"
-              >
-                <option
-                  value="foo"
-                >
-                  foo
-                </option>
-                <option
-                  value="bar"
-                >
-                  bar
-                </option>
-              </select>
-            </label>
-          </div>
-          <div
-            class="is-default emotion-1"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="listbox"
-              class="is-default emotion-6"
-              type="button"
-            >
-              <span
-                class="emotion-1"
-              >
-                <div
-                  class="emotion-8"
-                >
-                  Select
-                </div>
-              </span>
-              <span
-                aria-hidden="true"
-                class="emotion-1"
-              >
-                <svg
-                  class="mdi-icon emotion-10"
-                  fill="currentColor"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path
-                    d="M7,10L12,15L17,10H7Z"
-                  />
-                </svg>
-              </span>
-            </button>
-          </div>
-        </div>
-        <button
-          class=" emotion-6"
-          type="primary"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`single fields select field with default 1`] = `
-<DocumentFragment>
-  .emotion-0 fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
-}
-
-.emotion-0 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-.emotion-0 hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-
-.emotion-0 pre {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 a {
-  background-color: transparent;
-}
-
-.emotion-0 abbr[title] {
-  border-bottom: none;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-
-.emotion-0 b,
-.emotion-0 strong {
-  font-weight: bolder;
-}
-
-.emotion-0 code,
-.emotion-0 kbd,
-.emotion-0 samp {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 small {
-  font-size: 80%;
-}
-
-.emotion-0 sub,
-.emotion-0 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-.emotion-0 sub {
-  bottom: -0.25em;
-}
-
-.emotion-0 sup {
-  top: -0.5em;
-}
-
-.emotion-0 img {
-  border-style: none;
-}
-
-.emotion-0 button,
-.emotion-0 input,
-.emotion-0 optgroup,
-.emotion-0 select,
-.emotion-0 textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-.emotion-0 button,
-.emotion-0 input {
-  overflow: visible;
-}
-
-.emotion-0 button,
-.emotion-0 select {
-  text-transform: none;
-}
-
-.emotion-0 button,
-.emotion-0 [type="button"],
-.emotion-0 [type="reset"],
-.emotion-0 [type="submit"] {
-  -webkit-appearance: button;
-}
-
-.emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-.emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-.emotion-0 body {
-  margin: 0;
-}
-
-.emotion-0 legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
-}
-
-.emotion-0 progress {
-  vertical-align: baseline;
-}
-
-.emotion-0 textarea {
-  overflow: auto;
-}
-
-.emotion-0 [type="checkbox"],
-.emotion-0 [type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.emotion-0 [type="number"]::-webkit-inner-spin-button,
-.emotion-0 [type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-.emotion-0 [type="search"] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-.emotion-0 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-.emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-.emotion-0 details {
-  display: block;
-}
-
-.emotion-0 summary {
-  display: list-item;
-}
-
-.emotion-0 template {
-  display: none;
-}
-
-.emotion-0 [hidden] {
-  display: none;
-}
-
-.emotion-0 * {
-  box-sizing: border-box;
-  font-family: "Helvetica Neue",Helvetica,sans-serif;
-}
-
-.emotion-0 * .is-disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-4 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-6 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-}
-
-.emotion-8 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-}
-
-.emotion-10 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 22px;
-  height: 22px;
-  min-width: 22;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 22;
-  height: 22;
-}
-
-<div
-    class="emotion-0 emotion-1"
-  >
-    <div
-      class="emotion-2"
-    >
-      <form
-        autocomplete="off"
-        class="form"
-        novalidate=""
-      >
-        <div
-          class="field-container emotion-3"
-        >
-          <label
-            class="is-default emotion-4"
-          >
-            Label
-          </label>
-          <div
-            aria-hidden="true"
-            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
-          >
-            <input
-              style="font-size: 16px;"
-              tabindex="0"
-              type="text"
-            />
-            <label>
-              Label
-              <select
-                size="2"
-                tabindex="-1"
-              >
-                <option
-                  value="foo"
-                >
-                  foo
-                </option>
-                <option
-                  value="bar"
-                >
-                  bar
-                </option>
-              </select>
-            </label>
-          </div>
-          <div
-            class="is-default emotion-1"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="listbox"
-              class="is-default emotion-6"
-              type="button"
-            >
-              <span
-                class="emotion-1"
-              >
-                <div
-                  class="emotion-8"
-                >
-                  Select
-                </div>
-              </span>
-              <span
-                aria-hidden="true"
-                class="emotion-1"
-              >
-                <svg
-                  class="mdi-icon emotion-10"
-                  fill="currentColor"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path
-                    d="M7,10L12,15L17,10H7Z"
-                  />
-                </svg>
-              </span>
-            </button>
-          </div>
-        </div>
-        <button
-          class=" emotion-6"
-          type="primary"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`single fields string field format email 1`] = `
-<DocumentFragment>
-  .emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
-}
-
-.emotion-0 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-.emotion-0 hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-
-.emotion-0 pre {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 a {
-  background-color: transparent;
-}
-
-.emotion-0 abbr[title] {
-  border-bottom: none;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-
-.emotion-0 b,
-.emotion-0 strong {
-  font-weight: bolder;
-}
-
-.emotion-0 code,
-.emotion-0 kbd,
-.emotion-0 samp {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 small {
-  font-size: 80%;
-}
-
-.emotion-0 sub,
-.emotion-0 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-.emotion-0 sub {
-  bottom: -0.25em;
-}
-
-.emotion-0 sup {
-  top: -0.5em;
-}
-
-.emotion-0 img {
-  border-style: none;
-}
-
-.emotion-0 button,
-.emotion-0 input,
-.emotion-0 optgroup,
-.emotion-0 select,
-.emotion-0 textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-.emotion-0 button,
-.emotion-0 input {
-  overflow: visible;
-}
-
-.emotion-0 button,
-.emotion-0 select {
-  text-transform: none;
-}
-
-.emotion-0 button,
-.emotion-0 [type="button"],
-.emotion-0 [type="reset"],
-.emotion-0 [type="submit"] {
-  -webkit-appearance: button;
-}
-
-.emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-.emotion-0 body {
-  margin: 0;
 }
 
 .emotion-0 fieldset {
@@ -2684,10 +2619,18 @@ exports[`single fields string field format email 1`] = `
   pointer-events: none;
 }
 
+.emotion-0 body {
+  margin: 0;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2701,6 +2644,10 @@ exports[`single fields string field format email 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2711,36 +2658,172 @@ exports[`single fields string field format email 1`] = `
   flex-direction: column;
 }
 
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 .emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.emotion-6 {
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  display: block;
-  width: 100%;
-  padding: 8px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font-size: inherit;
-  line-height: inherit;
-  border: 1px solid;
-  border-radius: default;
-  color: inherit;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 arrow {
+  margin-left: auto;
+}
+
+.emotion-6 transparent>div:after {
   background-color: transparent;
 }
 
-.emotion-7 {
+.emotion-6 transparent select {
+  background-color: transparent;
+}
+
+.emotion-6 option.is-focused {
+  color: #fff;
+  background-color: #4462ED;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -2753,14 +2836,498 @@ exports[`single fields string field format email 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 42px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-6.is-focused {
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label .emotion-6 arrow {
+  margin-top: -10px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.is-float-label .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 currentValue {
+  text-align: left;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline!important;
+}
+
+.emotion-6 listBoxPopup {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  border: none;
+  background: white;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.emotion-6 option {
+  font-size: 15px;
+  color: #253746;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  outline: none;
+  word-break: break-word;
+  cursor: pointer;
+}
+
+.emotion-6 option.is-selected {
+  font-weight: 500;
+  color: #253746;
+  padding-left: 0;
+}
+
+.emotion-7 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  text-align: left;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline!important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-8 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-9 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  margin-left: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.is-float-label .emotion-9 {
+  margin-top: -10px;
+}
+
+.emotion-10 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 22px;
+  height: 22px;
+  min-width: 22;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 22;
+  height: 22;
+}
+
+.emotion-11.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-11.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-11.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-11.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-11 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
 }
 
 <div
@@ -2783,7 +3350,1851 @@ exports[`single fields string field format email 1`] = `
             Label
           </label>
           <div
-            class="is-default emotion-1"
+            aria-hidden="true"
+            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
+          >
+            <input
+              style="font-size: 16px;"
+              tabindex="0"
+              type="text"
+            />
+            <label>
+              Label
+              <select
+                size="2"
+                tabindex="-1"
+              >
+                <option
+                  value="foo"
+                >
+                  foo
+                </option>
+                <option
+                  value="bar"
+                >
+                  bar
+                </option>
+              </select>
+            </label>
+          </div>
+          <div
+            class="is-default emotion-5"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="is-default emotion-6"
+              type="button"
+            >
+              <span
+                class="emotion-7"
+              >
+                <div
+                  class="emotion-8"
+                >
+                  Select
+                </div>
+              </span>
+              <span
+                aria-hidden="true"
+                class="emotion-9"
+              >
+                <svg
+                  class="mdi-icon emotion-10"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M7,10L12,15L17,10H7Z"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+        <button
+          class=" emotion-11"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields select field with default 1`] = `
+<DocumentFragment>
+  .emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+.emotion-0 h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.emotion-0 hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+.emotion-0 pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 a {
+  background-color: transparent;
+}
+
+.emotion-0 abbr[title] {
+  border-bottom: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.emotion-0 b,
+.emotion-0 strong {
+  font-weight: bolder;
+}
+
+.emotion-0 code,
+.emotion-0 kbd,
+.emotion-0 samp {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 small {
+  font-size: 80%;
+}
+
+.emotion-0 sub,
+.emotion-0 sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.emotion-0 sub {
+  bottom: -0.25em;
+}
+
+.emotion-0 sup {
+  top: -0.5em;
+}
+
+.emotion-0 img {
+  border-style: none;
+}
+
+.emotion-0 button,
+.emotion-0 input,
+.emotion-0 optgroup,
+.emotion-0 select,
+.emotion-0 textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.emotion-0 button,
+.emotion-0 input {
+  overflow: visible;
+}
+
+.emotion-0 button,
+.emotion-0 select {
+  text-transform: none;
+}
+
+.emotion-0 button,
+.emotion-0 [type="button"],
+.emotion-0 [type="reset"],
+.emotion-0 [type="submit"] {
+  -webkit-appearance: button;
+}
+
+.emotion-0 main {
+  display: block;
+}
+
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+.emotion-0 fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+.emotion-0 legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+.emotion-0 progress {
+  vertical-align: baseline;
+}
+
+.emotion-0 textarea {
+  overflow: auto;
+}
+
+.emotion-0 [type="checkbox"],
+.emotion-0 [type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.emotion-0 [type="number"]::-webkit-inner-spin-button,
+.emotion-0 [type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+.emotion-0 [type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+.emotion-0 [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+.emotion-0 details {
+  display: block;
+}
+
+.emotion-0 summary {
+  display: list-item;
+}
+
+.emotion-0 template {
+  display: none;
+}
+
+.emotion-0 [hidden] {
+  display: none;
+}
+
+.emotion-0 * {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue",Helvetica,sans-serif;
+}
+
+.emotion-0 * .is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.emotion-0 body {
+  margin: 0;
+}
+
+.emotion-1 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-3 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 arrow {
+  margin-left: auto;
+}
+
+.emotion-6 transparent>div:after {
+  background-color: transparent;
+}
+
+.emotion-6 transparent select {
+  background-color: transparent;
+}
+
+.emotion-6 option.is-focused {
+  color: #fff;
+  background-color: #4462ED;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 42px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-6.is-focused {
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label .emotion-6 arrow {
+  margin-top: -10px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.is-float-label .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 currentValue {
+  text-align: left;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline!important;
+}
+
+.emotion-6 listBoxPopup {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  border: none;
+  background: white;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.emotion-6 option {
+  font-size: 15px;
+  color: #253746;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  outline: none;
+  word-break: break-word;
+  cursor: pointer;
+}
+
+.emotion-6 option.is-selected {
+  font-weight: 500;
+  color: #253746;
+  padding-left: 0;
+}
+
+.emotion-7 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  text-align: left;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline!important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-8 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-9 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  margin-left: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.is-float-label .emotion-9 {
+  margin-top: -10px;
+}
+
+.emotion-10 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 22px;
+  height: 22px;
+  min-width: 22;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 22;
+  height: 22;
+}
+
+.emotion-11.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-11.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-11.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-11.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-11 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="field-container emotion-3"
+        >
+          <label
+            class="is-default emotion-4"
+          >
+            Label
+          </label>
+          <div
+            aria-hidden="true"
+            style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
+          >
+            <input
+              style="font-size: 16px;"
+              tabindex="0"
+              type="text"
+            />
+            <label>
+              Label
+              <select
+                size="2"
+                tabindex="-1"
+              >
+                <option
+                  value="foo"
+                >
+                  foo
+                </option>
+                <option
+                  value="bar"
+                >
+                  bar
+                </option>
+              </select>
+            </label>
+          </div>
+          <div
+            class="is-default emotion-5"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="is-default emotion-6"
+              type="button"
+            >
+              <span
+                class="emotion-7"
+              >
+                <div
+                  class="emotion-8"
+                >
+                  Select
+                </div>
+              </span>
+              <span
+                aria-hidden="true"
+                class="emotion-9"
+              >
+                <svg
+                  class="mdi-icon emotion-10"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M7,10L12,15L17,10H7Z"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+        <button
+          class=" emotion-11"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field format email 1`] = `
+<DocumentFragment>
+  .emotion-0 textarea {
+  overflow: auto;
+}
+
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+.emotion-0 h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.emotion-0 hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+.emotion-0 pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 a {
+  background-color: transparent;
+}
+
+.emotion-0 abbr[title] {
+  border-bottom: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.emotion-0 b,
+.emotion-0 strong {
+  font-weight: bolder;
+}
+
+.emotion-0 code,
+.emotion-0 kbd,
+.emotion-0 samp {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 small {
+  font-size: 80%;
+}
+
+.emotion-0 sub,
+.emotion-0 sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.emotion-0 sub {
+  bottom: -0.25em;
+}
+
+.emotion-0 sup {
+  top: -0.5em;
+}
+
+.emotion-0 img {
+  border-style: none;
+}
+
+.emotion-0 button,
+.emotion-0 input,
+.emotion-0 optgroup,
+.emotion-0 select,
+.emotion-0 textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.emotion-0 button,
+.emotion-0 input {
+  overflow: visible;
+}
+
+.emotion-0 button,
+.emotion-0 select {
+  text-transform: none;
+}
+
+.emotion-0 button,
+.emotion-0 [type="button"],
+.emotion-0 [type="reset"],
+.emotion-0 [type="submit"] {
+  -webkit-appearance: button;
+}
+
+.emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+.emotion-0 fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+.emotion-0 legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+.emotion-0 progress {
+  vertical-align: baseline;
+}
+
+.emotion-0 main {
+  display: block;
+}
+
+.emotion-0 [type="checkbox"],
+.emotion-0 [type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.emotion-0 [type="number"]::-webkit-inner-spin-button,
+.emotion-0 [type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+.emotion-0 [type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+.emotion-0 [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+.emotion-0 details {
+  display: block;
+}
+
+.emotion-0 summary {
+  display: list-item;
+}
+
+.emotion-0 template {
+  display: none;
+}
+
+.emotion-0 [hidden] {
+  display: none;
+}
+
+.emotion-0 * {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue",Helvetica,sans-serif;
+}
+
+.emotion-0 * .is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.emotion-0 body {
+  margin: 0;
+}
+
+.emotion-1 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
+}
+
+.emotion-3 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: block;
+  width: 100%;
+  padding: 2px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid;
+  border-radius: default;
+  color: inherit;
+  background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-7 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="field-container emotion-3"
+        >
+          <label
+            class="is-default emotion-4"
+          >
+            Label
+          </label>
+          <div
+            class="is-default emotion-5"
           >
             <input
               class="is-default emotion-6"
@@ -2805,643 +5216,13 @@ exports[`single fields string field format email 1`] = `
 
 exports[`single fields string field format uri 1`] = `
 <DocumentFragment>
-  .emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
-}
-
-.emotion-0 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-.emotion-0 hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-
-.emotion-0 pre {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 a {
-  background-color: transparent;
-}
-
-.emotion-0 abbr[title] {
-  border-bottom: none;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-
-.emotion-0 b,
-.emotion-0 strong {
-  font-weight: bolder;
-}
-
-.emotion-0 code,
-.emotion-0 kbd,
-.emotion-0 samp {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 small {
-  font-size: 80%;
-}
-
-.emotion-0 sub,
-.emotion-0 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-.emotion-0 sub {
-  bottom: -0.25em;
-}
-
-.emotion-0 sup {
-  top: -0.5em;
-}
-
-.emotion-0 img {
-  border-style: none;
-}
-
-.emotion-0 button,
-.emotion-0 input,
-.emotion-0 optgroup,
-.emotion-0 select,
-.emotion-0 textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-.emotion-0 button,
-.emotion-0 input {
-  overflow: visible;
-}
-
-.emotion-0 button,
-.emotion-0 select {
-  text-transform: none;
-}
-
-.emotion-0 button,
-.emotion-0 [type="button"],
-.emotion-0 [type="reset"],
-.emotion-0 [type="submit"] {
-  -webkit-appearance: button;
-}
-
-.emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-.emotion-0 body {
-  margin: 0;
-}
-
-.emotion-0 fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-.emotion-0 legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
-}
-
-.emotion-0 progress {
-  vertical-align: baseline;
-}
-
-.emotion-0 textarea {
+  .emotion-0 textarea {
   overflow: auto;
 }
 
-.emotion-0 [type="checkbox"],
-.emotion-0 [type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.emotion-0 [type="number"]::-webkit-inner-spin-button,
-.emotion-0 [type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-.emotion-0 [type="search"] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-.emotion-0 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-.emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-.emotion-0 details {
-  display: block;
-}
-
-.emotion-0 summary {
-  display: list-item;
-}
-
-.emotion-0 template {
-  display: none;
-}
-
-.emotion-0 [hidden] {
-  display: none;
-}
-
-.emotion-0 * {
-  box-sizing: border-box;
-  font-family: "Helvetica Neue",Helvetica,sans-serif;
-}
-
-.emotion-0 * .is-disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-4 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-6 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: block;
-  width: 100%;
-  padding: 8px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font-size: inherit;
-  line-height: inherit;
-  border: 1px solid;
-  border-radius: default;
-  color: inherit;
-  background-color: transparent;
-}
-
-.emotion-7 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-}
-
-<div
-    class="emotion-0 emotion-1"
-  >
-    <div
-      class="emotion-2"
-    >
-      <form
-        autocomplete="off"
-        class="form"
-        novalidate=""
-      >
-        <div
-          class="field-container emotion-3"
-        >
-          <label
-            class="is-default emotion-4"
-          >
-            Label
-          </label>
-          <div
-            class="is-default emotion-1"
-          >
-            <input
-              class="is-default emotion-6"
-              value=""
-            />
-          </div>
-        </div>
-        <button
-          class=" emotion-7"
-          type="primary"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`single fields string field regular 1`] = `
-<DocumentFragment>
-  .emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
 .emotion-0 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
-}
-
-.emotion-0 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-.emotion-0 hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-
-.emotion-0 pre {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 a {
-  background-color: transparent;
-}
-
-.emotion-0 abbr[title] {
-  border-bottom: none;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
-
-.emotion-0 b,
-.emotion-0 strong {
-  font-weight: bolder;
-}
-
-.emotion-0 code,
-.emotion-0 kbd,
-.emotion-0 samp {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.emotion-0 small {
-  font-size: 80%;
-}
-
-.emotion-0 sub,
-.emotion-0 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-.emotion-0 sub {
-  bottom: -0.25em;
-}
-
-.emotion-0 sup {
-  top: -0.5em;
-}
-
-.emotion-0 img {
-  border-style: none;
-}
-
-.emotion-0 button,
-.emotion-0 input,
-.emotion-0 optgroup,
-.emotion-0 select,
-.emotion-0 textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-.emotion-0 button,
-.emotion-0 input {
-  overflow: visible;
-}
-
-.emotion-0 button,
-.emotion-0 select {
-  text-transform: none;
-}
-
-.emotion-0 button,
-.emotion-0 [type="button"],
-.emotion-0 [type="reset"],
-.emotion-0 [type="submit"] {
-  -webkit-appearance: button;
-}
-
-.emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-.emotion-0 body {
-  margin: 0;
-}
-
-.emotion-0 fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-.emotion-0 legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
-}
-
-.emotion-0 progress {
-  vertical-align: baseline;
-}
-
-.emotion-0 textarea {
-  overflow: auto;
-}
-
-.emotion-0 [type="checkbox"],
-.emotion-0 [type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.emotion-0 [type="number"]::-webkit-inner-spin-button,
-.emotion-0 [type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-.emotion-0 [type="search"] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-.emotion-0 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-.emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-.emotion-0 details {
-  display: block;
-}
-
-.emotion-0 summary {
-  display: list-item;
-}
-
-.emotion-0 template {
-  display: none;
-}
-
-.emotion-0 [hidden] {
-  display: none;
-}
-
-.emotion-0 * {
-  box-sizing: border-box;
-  font-family: "Helvetica Neue",Helvetica,sans-serif;
-}
-
-.emotion-0 * .is-disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-4 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-6 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: block;
-  width: 100%;
-  padding: 8px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font-size: inherit;
-  line-height: inherit;
-  border: 1px solid;
-  border-radius: default;
-  color: inherit;
-  background-color: transparent;
-}
-
-.emotion-7 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-}
-
-<div
-    class="emotion-0 emotion-1"
-  >
-    <div
-      class="emotion-2"
-    >
-      <form
-        autocomplete="off"
-        class="form"
-        novalidate=""
-      >
-        <div
-          class="field-container emotion-3"
-        >
-          <label
-            class="is-default emotion-4"
-          >
-            Label
-          </label>
-          <div
-            class="is-default emotion-1"
-          >
-            <input
-              class="is-default emotion-6"
-              value=""
-            />
-          </div>
-        </div>
-        <button
-          class=" emotion-7"
-          type="primary"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`single fields string field with custom errors as sentence 1`] = `
-<DocumentFragment>
-  .emotion-0 fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
 }
 
 .emotion-0 h1 {
@@ -3551,8 +5332,8 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   outline: 1px dotted ButtonText;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 fieldset {
+  padding: 0.35em 0.75em 0.625em;
 }
 
 .emotion-0 legend {
@@ -3568,8 +5349,8 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   vertical-align: baseline;
 }
 
-.emotion-0 textarea {
-  overflow: auto;
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 [type="checkbox"],
@@ -3623,6 +5404,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   pointer-events: none;
 }
 
+.emotion-0 body {
+  margin: 0;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
@@ -3631,9 +5416,23 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
 }
 
 .emotion-3 {
@@ -3655,10 +5454,165 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
 }
 
 .emotion-6 {
@@ -3667,7 +5621,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   min-width: 0;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 2px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -3677,13 +5631,1903 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-radius: default;
   color: inherit;
   background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
 }
 
 .emotion-7 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  padding-top: sm;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="field-container emotion-3"
+        >
+          <label
+            class="is-default emotion-4"
+          >
+            Label
+          </label>
+          <div
+            class="is-default emotion-5"
+          >
+            <input
+              class="is-default emotion-6"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" emotion-7"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field regular 1`] = `
+<DocumentFragment>
+  .emotion-0 textarea {
+  overflow: auto;
+}
+
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+.emotion-0 h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.emotion-0 hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+.emotion-0 pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 a {
+  background-color: transparent;
+}
+
+.emotion-0 abbr[title] {
+  border-bottom: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.emotion-0 b,
+.emotion-0 strong {
+  font-weight: bolder;
+}
+
+.emotion-0 code,
+.emotion-0 kbd,
+.emotion-0 samp {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 small {
+  font-size: 80%;
+}
+
+.emotion-0 sub,
+.emotion-0 sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.emotion-0 sub {
+  bottom: -0.25em;
+}
+
+.emotion-0 sup {
+  top: -0.5em;
+}
+
+.emotion-0 img {
+  border-style: none;
+}
+
+.emotion-0 button,
+.emotion-0 input,
+.emotion-0 optgroup,
+.emotion-0 select,
+.emotion-0 textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.emotion-0 button,
+.emotion-0 input {
+  overflow: visible;
+}
+
+.emotion-0 button,
+.emotion-0 select {
+  text-transform: none;
+}
+
+.emotion-0 button,
+.emotion-0 [type="button"],
+.emotion-0 [type="reset"],
+.emotion-0 [type="submit"] {
+  -webkit-appearance: button;
+}
+
+.emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+.emotion-0 fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+.emotion-0 legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+.emotion-0 progress {
+  vertical-align: baseline;
+}
+
+.emotion-0 main {
+  display: block;
+}
+
+.emotion-0 [type="checkbox"],
+.emotion-0 [type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.emotion-0 [type="number"]::-webkit-inner-spin-button,
+.emotion-0 [type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+.emotion-0 [type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+.emotion-0 [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+.emotion-0 details {
+  display: block;
+}
+
+.emotion-0 summary {
+  display: list-item;
+}
+
+.emotion-0 template {
+  display: none;
+}
+
+.emotion-0 [hidden] {
+  display: none;
+}
+
+.emotion-0 * {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue",Helvetica,sans-serif;
+}
+
+.emotion-0 * .is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.emotion-0 body {
+  margin: 0;
+}
+
+.emotion-1 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
+}
+
+.emotion-3 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: block;
+  width: 100%;
+  padding: 2px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid;
+  border-radius: default;
+  color: inherit;
+  background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-7 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2"
+    >
+      <form
+        autocomplete="off"
+        class="form"
+        novalidate=""
+      >
+        <div
+          class="field-container emotion-3"
+        >
+          <label
+            class="is-default emotion-4"
+          >
+            Label
+          </label>
+          <div
+            class="is-default emotion-5"
+          >
+            <input
+              class="is-default emotion-6"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class=" emotion-7"
+          type="primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`single fields string field with custom errors as sentence 1`] = `
+<DocumentFragment>
+  .emotion-0 textarea {
+  overflow: auto;
+}
+
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+.emotion-0 h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.emotion-0 hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+.emotion-0 pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 a {
+  background-color: transparent;
+}
+
+.emotion-0 abbr[title] {
+  border-bottom: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.emotion-0 b,
+.emotion-0 strong {
+  font-weight: bolder;
+}
+
+.emotion-0 code,
+.emotion-0 kbd,
+.emotion-0 samp {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.emotion-0 small {
+  font-size: 80%;
+}
+
+.emotion-0 sub,
+.emotion-0 sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.emotion-0 sub {
+  bottom: -0.25em;
+}
+
+.emotion-0 sup {
+  top: -0.5em;
+}
+
+.emotion-0 img {
+  border-style: none;
+}
+
+.emotion-0 button,
+.emotion-0 input,
+.emotion-0 optgroup,
+.emotion-0 select,
+.emotion-0 textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.emotion-0 button,
+.emotion-0 input {
+  overflow: visible;
+}
+
+.emotion-0 button,
+.emotion-0 select {
+  text-transform: none;
+}
+
+.emotion-0 button,
+.emotion-0 [type="button"],
+.emotion-0 [type="reset"],
+.emotion-0 [type="submit"] {
+  -webkit-appearance: button;
+}
+
+.emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+.emotion-0 fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+.emotion-0 legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+.emotion-0 progress {
+  vertical-align: baseline;
+}
+
+.emotion-0 main {
+  display: block;
+}
+
+.emotion-0 [type="checkbox"],
+.emotion-0 [type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.emotion-0 [type="number"]::-webkit-inner-spin-button,
+.emotion-0 [type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+.emotion-0 [type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+.emotion-0 [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+.emotion-0 details {
+  display: block;
+}
+
+.emotion-0 summary {
+  display: list-item;
+}
+
+.emotion-0 template {
+  display: none;
+}
+
+.emotion-0 [hidden] {
+  display: none;
+}
+
+.emotion-0 * {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue",Helvetica,sans-serif;
+}
+
+.emotion-0 * .is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.emotion-0 body {
+  margin: 0;
+}
+
+.emotion-1 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
+}
+
+.emotion-3 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: block;
+  width: 100%;
+  padding: 2px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid;
+  border-radius: default;
+  color: inherit;
+  background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-7 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  font-size: 13px;
+  color: #253746;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.is-left-label>.emotion-7 {
+  grid-row-end: 3;
+  grid-column-end: 3;
+}
+
+.emotion-7.is-warning {
+  color: #8a690a;
+}
+
+.emotion-7.is-success {
+  color: #008512;
+}
+
+.emotion-7.is-error {
+  color: #a31300;
+}
+
+.emotion-7.is-default {
+  color: #68747f;
+}
+
+.emotion-8.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-8.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-8.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-8.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
 }
 
 .emotion-8 {
@@ -3699,14 +7543,43 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
 }
 
 <div
@@ -3729,7 +7602,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
             Label
           </label>
           <div
-            class="is-error emotion-1"
+            class="is-error emotion-5"
           >
             <input
               class="is-error emotion-6"
@@ -3757,17 +7630,13 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 
 exports[`single fields string field with help text 1`] = `
 <DocumentFragment>
-  .emotion-0 fieldset {
-  padding: 0.35em 0.75em 0.625em;
+  .emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
 }
 
 .emotion-0 h1 {
@@ -3877,8 +7746,8 @@ exports[`single fields string field with help text 1`] = `
   outline: 1px dotted ButtonText;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 fieldset {
+  padding: 0.35em 0.75em 0.625em;
 }
 
 .emotion-0 legend {
@@ -3894,8 +7763,8 @@ exports[`single fields string field with help text 1`] = `
   vertical-align: baseline;
 }
 
-.emotion-0 textarea {
-  overflow: auto;
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 [type="checkbox"],
@@ -3949,6 +7818,10 @@ exports[`single fields string field with help text 1`] = `
   pointer-events: none;
 }
 
+.emotion-0 body {
+  margin: 0;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
@@ -3957,9 +7830,23 @@ exports[`single fields string field with help text 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
 }
 
 .emotion-3 {
@@ -3981,10 +7868,147 @@ exports[`single fields string field with help text 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
 }
 
 .emotion-6 {
@@ -3993,7 +8017,7 @@ exports[`single fields string field with help text 1`] = `
   min-width: 0;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 2px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -4003,13 +8027,339 @@ exports[`single fields string field with help text 1`] = `
   border-radius: default;
   color: inherit;
   background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
 }
 
 .emotion-7 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  padding-top: sm;
+  font-size: 13px;
+  color: #253746;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.is-left-label>.emotion-7 {
+  grid-row-end: 3;
+  grid-column-end: 3;
+}
+
+.emotion-7.is-warning {
+  color: #8a690a;
+}
+
+.emotion-7.is-success {
+  color: #008512;
+}
+
+.emotion-7.is-error {
+  color: #a31300;
+}
+
+.emotion-7.is-default {
+  color: #68747f;
+}
+
+.emotion-8.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-8.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-8.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-8.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
 }
 
 .emotion-8 {
@@ -4025,14 +8375,43 @@ exports[`single fields string field with help text 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
 }
 
 <div
@@ -4055,7 +8434,7 @@ exports[`single fields string field with help text 1`] = `
             Label
           </label>
           <div
-            class="is-default emotion-1"
+            class="is-default emotion-5"
           >
             <input
               class="is-default emotion-6"
@@ -4083,20 +8462,13 @@ exports[`single fields string field with help text 1`] = `
 
 exports[`single fields string field with markdown errors 1`] = `
 <DocumentFragment>
-  .emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
+  .emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
 }
 
 .emotion-0 h1 {
@@ -4199,8 +8571,11 @@ exports[`single fields string field with markdown errors 1`] = `
   padding: 0;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
 }
 
 .emotion-0 fieldset {
@@ -4220,8 +8595,8 @@ exports[`single fields string field with markdown errors 1`] = `
   vertical-align: baseline;
 }
 
-.emotion-0 textarea {
-  overflow: auto;
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 [type="checkbox"],
@@ -4275,6 +8650,10 @@ exports[`single fields string field with markdown errors 1`] = `
   pointer-events: none;
 }
 
+.emotion-0 body {
+  margin: 0;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
@@ -4283,9 +8662,23 @@ exports[`single fields string field with markdown errors 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
 }
 
 .emotion-3 {
@@ -4307,10 +8700,165 @@ exports[`single fields string field with markdown errors 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
 }
 
 .emotion-6 {
@@ -4319,7 +8867,7 @@ exports[`single fields string field with markdown errors 1`] = `
   min-width: 0;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 2px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -4329,6 +8877,262 @@ exports[`single fields string field with markdown errors 1`] = `
   border-radius: default;
   color: inherit;
   background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
 }
 
 .emotion-7 {
@@ -4344,14 +9148,67 @@ exports[`single fields string field with markdown errors 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
@@ -4374,7 +9231,7 @@ exports[`single fields string field with markdown errors 1`] = `
             Test
           </label>
           <div
-            class="is-default emotion-1"
+            class="is-default emotion-5"
           >
             <input
               class="is-default emotion-6"
@@ -4396,20 +9253,13 @@ exports[`single fields string field with markdown errors 1`] = `
 
 exports[`single fields string field with placeholder 1`] = `
 <DocumentFragment>
-  .emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
+  .emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
 }
 
 .emotion-0 h1 {
@@ -4512,8 +9362,11 @@ exports[`single fields string field with placeholder 1`] = `
   padding: 0;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
 }
 
 .emotion-0 fieldset {
@@ -4533,8 +9386,8 @@ exports[`single fields string field with placeholder 1`] = `
   vertical-align: baseline;
 }
 
-.emotion-0 textarea {
-  overflow: auto;
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 [type="checkbox"],
@@ -4588,6 +9441,10 @@ exports[`single fields string field with placeholder 1`] = `
   pointer-events: none;
 }
 
+.emotion-0 body {
+  margin: 0;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
@@ -4596,9 +9453,23 @@ exports[`single fields string field with placeholder 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.emotion-3.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3>.is-default {
+  width: 100%;
 }
 
 .emotion-3 {
@@ -4620,10 +9491,165 @@ exports[`single fields string field with placeholder 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
 }
 
 .emotion-6 {
@@ -4632,7 +9658,7 @@ exports[`single fields string field with placeholder 1`] = `
   min-width: 0;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 2px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -4642,6 +9668,262 @@ exports[`single fields string field with placeholder 1`] = `
   border-radius: default;
   color: inherit;
   background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
 }
 
 .emotion-7 {
@@ -4657,14 +9939,67 @@ exports[`single fields string field with placeholder 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
@@ -4687,7 +10022,7 @@ exports[`single fields string field with placeholder 1`] = `
             Label
           </label>
           <div
-            class="is-default emotion-1"
+            class="is-default emotion-5"
           >
             <input
               class="is-default emotion-6"
@@ -4710,20 +10045,13 @@ exports[`single fields string field with placeholder 1`] = `
 
 exports[`single fields textarea field 1`] = `
 <DocumentFragment>
-  .emotion-0 button:-moz-focusring,
-.emotion-0 [type="button"]:-moz-focusring,
-.emotion-0 [type="reset"]:-moz-focusring,
-.emotion-0 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
 .emotion-0 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-}
-
-.emotion-0 main {
-  display: block;
 }
 
 .emotion-0 h1 {
@@ -4826,8 +10154,11 @@ exports[`single fields textarea field 1`] = `
   padding: 0;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 button:-moz-focusring,
+.emotion-0 [type="button"]:-moz-focusring,
+.emotion-0 [type="reset"]:-moz-focusring,
+.emotion-0 [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
 }
 
 .emotion-0 fieldset {
@@ -4843,8 +10174,8 @@ exports[`single fields textarea field 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 textarea {
@@ -4902,10 +10233,18 @@ exports[`single fields textarea field 1`] = `
   pointer-events: none;
 }
 
+.emotion-0 body {
+  margin: 0;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4919,6 +10258,10 @@ exports[`single fields textarea field 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -4934,10 +10277,163 @@ exports[`single fields textarea field 1`] = `
   margin: 0;
   min-width: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 13px;
+  color: #68747f;
+  display: block;
+  margin-bottom: 5px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.emotion-4.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.is-float-label-active .emotion-4.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-4.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-4 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-4 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-4 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.emotion-5>input {
+  border-left-width: 0;
+}
+
+.emotion-5>button {
+  border-left-width: 0;
+}
+
+.emotion-5:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-5.is-disabled {
+  opacity: 1;
+}
+
+.emotion-5.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-5.is-error::after {
+  background-color: #a31300;
+}
+
+.emotion-5.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-5.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-5 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-6 small::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6.is-unresizable {
+  resize: none;
+}
+
+.emotion-6 container.is-warning::after {
+  background-color: #eeb91c;
+}
+
+.emotion-6 container.is-success::after {
+  background-color: #00af18;
+}
+
+.emotion-6 container.is-error::after {
+  background-color: #a31300;
 }
 
 .emotion-6 {
@@ -4946,7 +10442,7 @@ exports[`single fields textarea field 1`] = `
   min-width: 0;
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 2px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -4956,6 +10452,275 @@ exports[`single fields textarea field 1`] = `
   border-radius: default;
   color: inherit;
   background-color: transparent;
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.emotion-6.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6::-ms-expand {
+  display: none;
+}
+
+.emotion-6 large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px,;
+  width: 100%;
+  outline: none;
+  height: 28px;
+}
+
+.emotion-6 small.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 container.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-6 small::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small::-ms-expand {
+  display: none;
+}
+
+.emotion-6 small large {
+  font-weight: 500;
+  color: #253746;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  line-height: 2em;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #caced3;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  outline: none;
+  height: 4em;
+}
+
+.emotion-6 small large.is-focused {
+  border-color: #b3bee8;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.is-float-label-active .emotion-6 small large {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.emotion-6 small large::-webkit-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-moz-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large:-ms-input-placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::placeholder {
+  font-weight: 300;
+  color: #68747f;
+}
+
+.emotion-6 small large::-ms-expand {
+  display: none;
+}
+
+.emotion-6 wrapper.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-6 wrapper>.is-default {
+  width: 100%;
+}
+
+.emotion-6 container {
+  position: relative;
+}
+
+.emotion-6 container>input {
+  border-left-width: 0;
+}
+
+.emotion-6 container>button {
+  border-left-width: 0;
+}
+
+.emotion-6 container:after {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  content: "";
+  position: absolute;
+  background-color: #4462ED;
+  width: 3px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-6 container.is-disabled {
+  opacity: 1;
+}
+
+.emotion-7.is-pressed {
+  background-color: #4462ED;
+  border: 1px solid;
+  border-color: #4462ED;
+  color: #fff;
 }
 
 .emotion-7 {
@@ -4971,14 +10736,60 @@ exports[`single fields textarea field 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #fff;
   background-color: primary;
   border: 0;
   border-radius: 4px;
+  cursor: pointer;
+  height: 36px;
+  inline-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c5080;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #4462ED;
+}
+
+.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-7.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-7.is-hovered {
+  background-color: #f7f8fd;
+  border: 1px solid;
+  border-color: #4660a2;
+  color: #4660a2;
+  box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
 <div
@@ -5002,7 +10813,7 @@ exports[`single fields textarea field 1`] = `
             Label
           </label>
           <div
-            class="is-default emotion-1"
+            class="is-default emotion-5"
           >
             <textarea
               class="is-default emotion-6"
