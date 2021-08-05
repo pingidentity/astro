@@ -8,6 +8,13 @@ import { modes as labelModes } from '../Label/constants';
 export default {
   title: 'Form/SelectField',
   component: SelectField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     label: {
       control: {

@@ -5,6 +5,13 @@ import RockerButton from '../RockerButton';
 export default {
   title: 'RockerButtonGroup',
   component: RockerButtonGroup,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     isDisabled: {
       defaultValue: false,

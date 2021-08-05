@@ -11,6 +11,7 @@ export default {
   argTypes: {
     isDisabled: {},
     orientation: {},
+    mode: {},
     defaultSelectedKey: {},
     selectedKey: {
       control: {
@@ -23,6 +24,11 @@ export default {
       },
     },
     tabPanelProps: {
+      control: {
+        type: 'none',
+      },
+    },
+    items: {
       control: {
         type: 'none',
       },
