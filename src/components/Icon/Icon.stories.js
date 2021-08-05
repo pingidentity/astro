@@ -6,6 +6,13 @@ import { flatColorList } from '../../styles/colors';
 export default {
   title: 'Icon',
   component: Icon,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     icon: {
       control: {

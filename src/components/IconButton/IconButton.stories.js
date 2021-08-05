@@ -6,6 +6,37 @@ import Icon from '../Icon';
 export default {
   title: 'Icon Button',
   component: IconButton,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
+  argTypes: {
+    icon: {
+      control: {
+        type: 'none',
+      },
+      defaultValue: CreateIcon,
+      description: 'The icon to render. List of icons at https://materialdesignicons.com/',
+    },
+    title: {
+      control: {
+        type: 'text',
+      },
+    },
+    'aria-label': {
+      control: {
+        type: 'text',
+      },
+    },
+    variant: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
 export const Default = () => (

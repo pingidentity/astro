@@ -12,6 +12,13 @@ import {
 export default {
   title: 'PopoverMenu',
   component: PopoverMenu,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     align: {},
     direction: {},

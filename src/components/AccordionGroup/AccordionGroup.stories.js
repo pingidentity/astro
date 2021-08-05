@@ -18,12 +18,42 @@ const itemArrayDisabled = [
 export default {
   title: 'Accordion',
   component: AccordionGroup,
-  parameters: { actions: { argTypesRegex: '^on.*' } },
+  parameters: {
+    actions: {
+      argTypesRegex: '^on.*',
+    },
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
+  argTypes: {
+    id: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabledKeys: {
+      description: 'The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. Array of keys.',
+    },
+    defaultExpandedKeys: {},
+    expandedKeys: {
+      control: {
+        type: 'none',
+      },
+    },
+    items: {
+      control: {
+        type: 'none',
+      },
+    },
+  },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <AccordionGroup >
+    <AccordionGroup {...args}>
       <Item key="accordionKey" textValue="accordionKey" label="Accordion Label">
         <Text>Render me!</Text>
       </Item>

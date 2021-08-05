@@ -7,7 +7,16 @@ import Text from '../Text';
 export default {
   title: 'Menu',
   component: Menu,
-  parameters: { actions: { argTypesRegex: '^on.*' } },
+  parameters: {
+    actions: {
+      argTypesRegex: '^on.*',
+    },
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     selectionMode: {},
     isDisabled: {},
