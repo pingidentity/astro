@@ -15,5 +15,4 @@ test('image shows disabled status', () => {
   getComponent({ isDisabled: true });
   const img = screen.getByRole('img');
   expect(img).toHaveClass('is-disabled');
-  expect(img).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
 });

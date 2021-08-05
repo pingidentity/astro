@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useImperativeHandle, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Button as RButton } from 'rebass';
+import { Button as ThemeUIButton } from 'theme-ui';
 import { useButton } from '@react-aria/button';
 import { useHover } from '@react-aria/interactions';
 import { useFocusRing } from '@react-aria/focus';
@@ -29,7 +29,7 @@ const Button = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
-  const ButtonBase = useMemo(() => (mode === modes.ICON ? Box : RButton), [mode]);
+  const ButtonBase = useMemo(() => (mode === modes.ICON ? Box : ThemeUIButton), [mode]);
   const elementType = useMemo(() => {
     if (mode === modes.ICON) return 'div';
     return 'button';

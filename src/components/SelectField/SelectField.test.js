@@ -95,12 +95,7 @@ test('isDefaultOpen prop', () => {
 test('should disable the label and control when isDisabled is true', () => {
   getComponent({ isDisabled: true });
   expect(screen.getAllByText(defaultProps.label)[0]).toHaveClass('is-disabled');
-  expect(screen.getAllByText(defaultProps.label)[0]).toHaveStyle({
-    opacity: 0.5,
-    pointerEvents: 'none',
-  });
   expect(screen.getByTestId(controlTestId)).toHaveClass('is-disabled');
-  expect(screen.getByTestId(controlTestId)).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
 });
 
 test('select field with helper text', () => {

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import themeGet from '@styled-system/theme-get';
 import merge from 'lodash/merge'; // need deep merging
 import StylePropTypes from '@styled-system/prop-types';

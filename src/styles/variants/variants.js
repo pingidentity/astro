@@ -1,6 +1,5 @@
 import accordion from './accordion';
 import boxes from './boxes';
-import images from './images';
 import link from './link';
 import listBox from './listBox';
 import modal from './modal';
@@ -20,7 +19,6 @@ import table from './table';
 export default {
   accordion,
   boxes,
-  images,
   loader,
   link,
   listBox,

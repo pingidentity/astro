@@ -7,6 +7,7 @@
     "parser": "babel-eslint",
     "extends": ["airbnb", "plugin:testing-library/react", "plugin:jest-dom/recommended"],
     "rules": {
+        "@emotion/pkg-renaming": "error",
         "arrow-body-style": 0,
         "import/extensions": 0,
         "import/no-extraneous-dependencies": ["error", {
@@ -56,5 +57,5 @@
             }
         }
     ],
-    "plugins": ["testing-library", "jest-dom"]
+    "plugins": ["@emotion", "testing-library", "jest-dom"]
 }

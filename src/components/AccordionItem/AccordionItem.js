@@ -2,7 +2,7 @@ import React, { forwardRef, useRef, useContext, useImperativeHandle } from 'reac
 import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
-import { Button as RButton } from 'rebass';
+import { Button as ThemeUIButton } from 'theme-ui';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { useAccordionItem } from '@react-aria/accordion';
@@ -55,8 +55,9 @@ const AccordionItem = forwardRef((props, ref) => {
 
   return (
     <Box variant="accordion.accordion" className={itemClasses} {...others} {...containerProps}>
-      <RButton
+      <ThemeUIButton
         ref={buttonRef}
+        sx={{ display: 'flex' }}
         variant="accordionHeader"
         className={buttonClasses}
         {...mergeProps(hoverProps, focusProps, accordionButtonProps, raButtonProps, buttonProps)}
@@ -67,7 +68,7 @@ const AccordionItem = forwardRef((props, ref) => {
         <Box as="span" ml="5px">
           <Icon icon={isOpen ? MenuUp : MenuDown} />
         </Box>
-      </RButton>
+      </ThemeUIButton>
       <Box variant="accordion.accordionBody" {...accordionRegionProps} {...regionProps}>
         {item.rendered}
       </Box>

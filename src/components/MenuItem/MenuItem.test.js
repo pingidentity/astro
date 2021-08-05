@@ -92,16 +92,6 @@ test('disables item with isDisabled applied, does not disable without prop', () 
   expect(menuItem).not.toHaveClass('is-disabled');
 });
 
-test('should change styles according to isSeparator prop', () => {
-  const customItems = Array.from(defaultMenuItems);
-  customItems[0].isSeparator = true;
-  getComponent({}, { items: customItems });
-  const separatorItem = screen.getAllByRole('menuitem')[0];
-  const regularItem = screen.getAllByRole('menuitem')[1];
-  expect(separatorItem).toHaveStyle({ padding: '0px' });
-  expect(regularItem).not.toHaveStyle({ padding: '0px' });
-});
-
 test('should change styles according to isPressed prop', () => {
   const customItems = Array.from(defaultMenuItems);
   customItems[0].isPressed = true;
