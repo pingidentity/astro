@@ -58,19 +58,6 @@ test('rockerButton renders selectedStyles prop when selected', () => {
   getComponent();
   const buttonColorKey = screen.getByText(testButtons[0].key);
   expect(buttonColorKey).toHaveClass('is-selected');
-  expect(buttonColorKey).toHaveStyle({ backgroundColor: '#640099' });
-});
-
-test('rockerButton renders defaultSelected prop, only default selected button has selected styling', () => {
-  getComponent();
-  const buttonSelectedKey = screen.getByText(testButtons[0].key);
-  expect(buttonSelectedKey).toHaveStyle({ backgroundColor: '#640099' });
-
-  // unselected buttons should have inactive grey background
-  const button1 = screen.getByText(testButtons[1].key);
-  expect(button1).toHaveStyle({ backgroundColor: '#e5e9f8' });
-  const button2 = screen.getByText(testButtons[2].key);
-  expect(button2).toHaveStyle({ backgroundColor: '#e5e9f8' });
 });
 
 test('selected button can be changed by keyboard interaction', () => {

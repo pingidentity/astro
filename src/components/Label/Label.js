@@ -1,10 +1,13 @@
+import styled from '@emotion/styled';
+import { flexbox, layout } from 'styled-system';
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { Label as RLabel } from '@rebass/forms';
-
+import { Label as ThemeUILabel } from 'theme-ui';
 import { useStatusClasses } from '../../hooks';
 import { modes } from './constants';
 import Box from '../Box';
+
+const ExtendedLabel = styled(ThemeUILabel)(layout, flexbox);
 
 const defaultIndicator = (
   <Box variant="forms.label.indicator">
@@ -40,8 +43,9 @@ const Label = forwardRef((props, ref) => {
   });
 
   return (
-    <RLabel
+    <ExtendedLabel
       ref={ref}
+      display="flex"
       className={classNames}
       {...others}
     >
@@ -50,7 +54,7 @@ const Label = forwardRef((props, ref) => {
         isRequired
         && requiredIndicator
       }
-    </RLabel>
+    </ExtendedLabel>
   );
 });
 

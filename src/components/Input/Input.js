@@ -1,18 +1,18 @@
 import React, { forwardRef } from 'react';
-import { Input as RInput } from '@rebass/forms';
+import { Input as ThemeUIInput } from 'theme-ui';
 import PropTypes from 'prop-types';
 
 /**
  * Base input component.
  *
  * Accepts relevant styling props from [styled-system](https://styled-system.com/table).
- * Built on top of [Input from Rebass Forms](https://rebassjs.org/forms/input/).
+ * Built on top of [Input from Theme-UI](https://theme-ui.com/components/input/).
  *
  * **Note**: It's recommended to use a more specific field component when possible.
  */
 
 const Input = forwardRef((props, ref) => (
-  <RInput
+  <ThemeUIInput
     ref={ref}
     {...props}
   />

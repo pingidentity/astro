@@ -1,5 +1,4 @@
 export { default as useAriaLabelWarning } from './useAriaLabelWarning';
-export { default as useBoxStyles } from './useBoxStyles';
 export { default as useDeprecationWarning } from './useDeprecationWarning';
 export { default as useField } from './useField';
 export { default as useLabelHeight } from './useLabelHeight';

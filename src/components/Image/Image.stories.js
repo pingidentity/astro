@@ -8,6 +8,11 @@ export default {
   component: Image,
   argTypes: {
     isDisabled: {},
+    variant: {
+      control: {
+        type: 'none',
+      },
+    },
     as: {
       control: {
         type: 'none',

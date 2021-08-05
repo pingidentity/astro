@@ -18,12 +18,3 @@ test('default icon', () => {
   expect(icon).toBeInstanceOf(SVGSVGElement);
   expect(icon).toBeInTheDocument();
 });
-
-test('icon styling', () => {
-  getComponent({ bg: 'red', color: 'blue', size: 50 });
-  const icon = screen.getByTestId(testId);
-  expect(icon).toHaveStyleRule('width', '50px');
-  expect(icon).toHaveStyleRule('height', '50px');
-  expect(icon).toHaveStyleRule('fill', 'blue');
-  expect(icon).toHaveStyleRule('background-color', 'red');
-});

@@ -37,6 +37,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/eslint-plugin": "^11.2.0",
     "@storybook/addon-a11y": "^6.1.16",
     "@storybook/addon-actions": "^6.1.16",
     "@storybook/addon-docs": "^6.1.16",
@@ -66,8 +67,8 @@
     "react-dom": "^16.13.1"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.35",
     "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
     "@pingux/icons": "^0.5.0",
     "@react-aria/accordion": "3.0.0-alpha.1",
     "@react-aria/button": "^3.2.1",
@@ -114,14 +115,14 @@
     "@tippyjs/react": "4.2.0",
     "chroma-js": "^2.1.0",
     "classnames": "^2.2.6",
-    "emotion-normalize": "^10.1.0",
-    "emotion-theming": "^10.0.27",
+    "emotion-normalize": "^11.0.1",
     "lodash": "^4.17.20",
     "mdi-react": "^7.4.0",
     "prop-types": "^15.7.2",
     "rebass": "^4.0.7",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",
+    "theme-ui": "^0.10.0",
     "tippy.js": "6.2.7",
     "uuid": "^8.3.2"
   }

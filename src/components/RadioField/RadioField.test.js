@@ -1,8 +1,6 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import RadioField, { RadioContext } from './RadioField';
-import theme from '../../styles/theme';
 
 const testId = 'test-radio';
 const testLabel = 'Test Label';
@@ -33,14 +31,12 @@ test('default radio', () => {
   const container = screen.getByTestId(testId);
   const input = screen.getByLabelText(testLabel);
   const label = screen.getByText(testLabel);
-  const { nextSibling: icon } = input;
   expect(container).toBeInstanceOf(HTMLDivElement);
   expect(input).toBeInstanceOf(HTMLInputElement);
   expect(label).toBeInstanceOf(HTMLLabelElement);
   expect(container).toBeInTheDocument();
   expect(input).toBeInTheDocument();
   expect(label).toBeInTheDocument();
-  expect(icon).toHaveStyleRule('background-color', 'transparent', { target: ':focus' });
 });
 
 test('disabled radio', () => {
@@ -51,19 +47,6 @@ test('disabled radio', () => {
 
   expect(label).toHaveClass('is-disabled');
   expect(icon).toHaveClass('is-disabled');
-
-  expect(label).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
-  expect(icon).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
-});
-
-test('radio with focus', () => {
-  getComponent();
-  const input = screen.getByLabelText(testLabel);
-  const { nextSibling: icon } = input;
-
-  userEvent.tab();
-  expect(input).toHaveFocus();
-  expect(icon).toHaveStyle({ outline: 'none', 'box-shadow': theme.shadows.focus });
 });
 
 test('radio with checked content does not display if not checked', () => {

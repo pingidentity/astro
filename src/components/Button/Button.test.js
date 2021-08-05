@@ -19,7 +19,7 @@ test('default button', () => {
   expect(button).toBeInTheDocument();
 });
 
-test('icon button hover', () => {
+test('button hover', () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(button).not.toHaveClass('is-hovered');
@@ -33,6 +33,7 @@ test('icon button press', () => {
   const onPress = jest.fn();
   getComponent({ onPress });
   const button = screen.getByRole('button');
+  expect(button).not.toHaveClass('is-pressed');
   expect(onPress).not.toHaveBeenCalled();
 
   // Hold down the button to see pressed styles
@@ -57,17 +58,6 @@ test('keyboard icon button press', () => {
   fireEvent.keyUp(button, { key: 'Enter', code: 13 });
   expect(button).not.toHaveClass('is-pressed');
   expect(onPress).toHaveBeenCalledTimes(1);
-});
-
-test('button focus', () => {
-  getComponent();
-  const button = screen.getByRole('button');
-  expect(button).not.toHaveFocus();
-  expect(button).not.toHaveClass('is-focused');
-
-  userEvent.tab();
-  expect(button).toHaveFocus();
-  expect(button).toHaveClass('is-focused');
 });
 
 test('button loading hides children and shows loader', () => {
