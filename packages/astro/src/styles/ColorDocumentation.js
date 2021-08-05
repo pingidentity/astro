@@ -162,7 +162,6 @@ function rgbToHsl(rgb) {
   return [h, s, l];
 }
 
-
 const matchers = {
   'RGB Average Diff': referenceValue => (entry) => {
     const rgb1 = hexToRgb(entry);

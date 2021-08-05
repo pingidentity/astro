@@ -90,9 +90,7 @@ test('defaultValue for uncontrolled radio group', () => {
 
 test('disabled radio group disables all radios and the group label', () => {
   getComponent({ isDisabled: true });
-  const groupLabel = screen.getByText(testLabel);
   const radios = screen.getAllByRole('radio');
-  expect(groupLabel).toHaveStyle({ opacity: 0.5, pointerEvents: 'none' });
   radios.forEach(radio => expect(radio).toBeDisabled());
 });
 

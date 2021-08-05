@@ -1,9 +1,11 @@
 const base = {
+  display: 'block',
   fontSize: 'md',
   color: 'text.primary',
 };
 
 const wordWrap = {
+  display: 'block',
   overflowWrap: 'break-word',
   maxWidth: '100%',
   wordWrap: 'break-word',

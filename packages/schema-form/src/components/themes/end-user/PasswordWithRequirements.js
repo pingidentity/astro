@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react';
 import { noop } from 'lodash';
-import { Global, css } from '@emotion/core';
+import { Global, css } from '@emotion/react';
 import endUserStyles from '@pingux/end-user/lib/end-user.css';
 import tippyStyles from 'tippy.js/dist/tippy.css';
 

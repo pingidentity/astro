@@ -48,6 +48,8 @@ const iconButton = {
   cursor: 'pointer',
   bg: 'transparent',
   p: '3px',
+  width: 'inherit',
+  height: 'inherit',
   path: {
     fill: 'active',
   },

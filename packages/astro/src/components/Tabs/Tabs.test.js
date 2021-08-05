@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Tabs from './Tabs';
 import Tab from '../Tab';
-import theme from '../../styles/theme';
 
 const testId = 'testId';
 const defaultTabs = [
@@ -127,11 +126,6 @@ test('disabled all tabs', () => {
     const tabText = screen.getByText(tab.name);
     const { parentElement } = tabText;
     expect(parentElement).toHaveClass('is-disabled');
-    expect(tabText).toHaveStyleRule(
-      'color',
-      theme.colors.neutral[80],
-      { target: '.is-disabled' },
-    );
   });
   expect(tabLine).not.toBeInTheDocument();
 
@@ -167,18 +161,6 @@ test('controlled tabs', () => {
   testTabPanel(0);
 });
 
-test('tab list props', () => {
-  const { rerender } = getComponent({ tabListProps: { bg: 'red' } });
-  const tabList = screen.getByRole('tablist');
-
-  // Expect the tab list to have a red background
-  expect(tabList).toHaveStyleRule('background-color', 'red');
-
-  // Expect the tab list to be updated with a blue background
-  getComponent({ tabListProps: { bg: 'blue' } }, { renderFn: rerender });
-  expect(tabList).toHaveStyleRule('background-color', 'blue');
-});
-
 test('tab line props', () => {
   const newTabs = Array.from(defaultTabs);
   newTabs[0].props = { tabLineProps: { bg: 'red' } };
@@ -188,13 +170,11 @@ test('tab line props', () => {
 
   // Expect the tab line to have a red background
   testSingleTab(tabs, tab0, 'toContainElement', [tabLine]);
-  expect(tabLine).toHaveStyleRule('background-color', 'red');
 
   // Expect the tab line to be updated with a blue background
   newTabs[0].props = { tabLineProps: { bg: 'blue' } };
   getComponent({}, { tabs: newTabs, renderFn: rerender });
   testSingleTab(tabs, tab0, 'toContainElement', [tabLine]);
-  expect(tabLine).toHaveStyle({ backgroundColor: 'blue' });
 });
 
 test('tab with icon', () => {
@@ -206,23 +186,6 @@ test('tab with icon', () => {
 
   // Expect the tab to have the given icon element
   testSingleTab(tabs, tab0, 'toContainElement', [icon]);
-});
-
-test('vertical tabs style', () => {
-  getComponent({ orientation: 'vertical' });
-  const { tabs, tab0 } = getTabs();
-
-  // Expect the tab to have the given icon element
-  testSingleTab(tabs, tab0, 'toHaveStyle', [{ backgroundColor: theme.colors.accent[95] }]);
-});
-
-test('accepts tabPanelProps and applies them to tabpanel only', () => {
-  getComponent({ tabPanelProps: { color: 'green' } });
-  const tabPanel = screen.getByRole('tabpanel');
-  expect(tabPanel).toHaveStyleRule('color', 'green');
-
-  const tabList = screen.getByRole('tablist');
-  expect(tabList).not.toHaveStyleRule('color', 'green');
 });
 
 test('tooltip renders on tab\'s hover in `tooltip` mode', () => {

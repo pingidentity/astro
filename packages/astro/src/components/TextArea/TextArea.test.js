@@ -8,7 +8,6 @@ const defaultProps = {
 };
 const getComponent = (props = {}) => render(
   <TextArea {...defaultProps} {...props} />,
-
 );
 
 test('TextArea renders', () => {

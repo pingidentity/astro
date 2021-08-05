@@ -1,12 +1,12 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
-import { Image as RImage } from 'rebass';
+import { Image as ThemeUIImage } from 'theme-ui';
 import { useHover } from '@react-aria/interactions';
 import { useStatusClasses } from '../../hooks';
 
 /**
  * Basic image component.
- * Built on top of [Image from Rebass.js](https://rebassjs.org/image).
+ * Built on top of [Image from Theme-UI](https://theme-ui.com/components/image/).
  * If you are looking to add an icon please use [Icon component](/icon--default).
  */
 
@@ -23,7 +23,7 @@ const Image = forwardRef((props, ref) => {
   });
 
   return (
-    <RImage
+    <ThemeUIImage
       className={classNames}
       ref={imgRef}
       role="img"
@@ -34,6 +34,8 @@ const Image = forwardRef((props, ref) => {
 });
 
 Image.propTypes = {
+  /** The styling variation of the image. */
+  variant: PropTypes.string,
   /** Whether the image is disabled; applies disabled styling. */
   isDisabled: PropTypes.bool,
   /**  The HTML element used to render the image. */

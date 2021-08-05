@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { v4 as v4uuid } from 'uuid';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import JSONSchemaV4 from 'ajv/lib/refs/json-schema-draft-04.json';
 import Form from '@rjsf/core';
 import { PageWrapper } from '@pingux/astro';

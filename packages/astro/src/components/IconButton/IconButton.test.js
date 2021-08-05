@@ -22,18 +22,9 @@ test('default icon button', () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(button).toHaveAttribute('data-testid', testId);
-  expect(button).toBeInstanceOf(HTMLDivElement);
+  expect(button).toBeInstanceOf(HTMLButtonElement);
   expect(button).toHaveAttribute('tabindex', '0');
   expect(button).toBeInTheDocument();
-});
-
-test('iconProps size prop changes button size', () => {
-  const props = {
-    size: '22px',
-  };
-  getComponent(props);
-  const button = screen.getByRole('button');
-  expect(button).toHaveStyleRule('width', props.size);
 });
 
 test('icon button hover', () => {
