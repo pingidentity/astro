@@ -43,7 +43,6 @@ export default {
     direction: {},
     menuTrigger: {},
     isRequired: {},
-    isDefaultOpen: {},
     hasCustomValue: {},
     hasNoEmptySelection: {},
     isNotFlippable: {},
@@ -51,6 +50,7 @@ export default {
     hasNoStatusIndicator: {},
     isReadOnly: {},
     isDisabled: {},
+    loadingState: {},
     selectedKey: {
       control: {
         type: 'none',
