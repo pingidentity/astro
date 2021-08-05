@@ -272,7 +272,7 @@ export class Frame extends React.Component {
                 }}
             >
                 <iframe
-                    sandbox="allow-same-origin allow-scripts"
+                    sandbox="allow-same-origin allow-scripts allow-popups"
                     title={title}
                     onLoad={this.renderPartials}
                     ref={this.frame}
