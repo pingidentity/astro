@@ -43,13 +43,13 @@ export default {
     direction: {},
     menuTrigger: {},
     isRequired: {},
-    isDefaultOpen: {},
     hasCustomValue: {},
     hasNoEmptySelection: {},
     isNotFlippable: {},
     hasAutoFocus: {},
     isReadOnly: {},
     isDisabled: {},
+    loadingState: {},
     selectedKey: {
       control: {
         type: 'none',
