@@ -17,6 +17,8 @@ const tableData = {
 const tableBody = {
   borderTop: '1px solid',
   borderTopColor: 'neutral.40',
+  borderBottom: '1px solid',
+  borderBottomColor: 'neutral.80',
   '&& > tr:nth-of-type(odd) ': {
     backgroundColor: 'neutral.95',
   },
