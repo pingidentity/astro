@@ -202,3 +202,12 @@ test('tabs without selected keys show null tab panel content', () => {
   getComponent({ defaultSelectedKey: undefined });
   expect(screen.queryByRole('tabpanel')).not.toHaveTextContent();
 });
+
+test('hover tab style', () => {
+  getComponent();
+
+  const { tab0 } = getTabs();
+  expect(tab0).not.toHaveClass('is-hovered');
+  userEvent.hover(tab0);
+  expect(tab0).toHaveClass('is-hovered');
+});
