@@ -27,7 +27,6 @@ const ListItem = forwardRef((props, ref) => {
       as="li"
       variant="boxes.listItem"
       isRow
-      p="md"
       {...hoverProps}
       {...others}
     >

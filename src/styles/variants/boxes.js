@@ -44,7 +44,11 @@ const listItem = {
   ...base,
   flex: '1 1 0px',
   cursor: 'pointer',
-  minHeight: '80px',
+  height: '64px',
+  pl: 'md',
+  pr: 'sm',
+  pt: 16,
+  pb: 16,
   justifyContent: 'center',
   bg: 'accent.99',
   '&.is-selected': {
