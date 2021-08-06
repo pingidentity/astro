@@ -17,6 +17,11 @@ export default {
         type: 'text',
       },
     },
+    hintText: {
+      control: {
+        type: 'text',
+      },
+    },
     value: {
       defaultValue: 'my-switch',
     },

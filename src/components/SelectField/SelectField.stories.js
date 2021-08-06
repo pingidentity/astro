@@ -29,6 +29,11 @@ export default {
         type: 'text',
       },
     },
+    hintText: {
+      control: {
+        type: 'text',
+      },
+    },
     labelMode: {
       control: {
         type: 'select',

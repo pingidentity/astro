@@ -95,6 +95,8 @@ RadioField.propTypes = {
   hasAutoFocus: PropTypes.bool,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText: PropTypes.string,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
   /**
