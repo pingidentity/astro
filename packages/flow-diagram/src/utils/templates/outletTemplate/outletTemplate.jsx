@@ -36,6 +36,7 @@ export const outletTemplate = ({ color = COLORS.BLACK } = {}) => $(go.Node, 'Spo
         $(go.Shape, 'RoundedRectangle',
             { fill: color, height: 24, strokeWidth: 1, stroke: '#98A0A8', parameter1: 2 },
             new go.Binding('fill', 'color'),
+            new go.Binding('stroke', 'borderColor'),
             new go.Binding('minSize', '', s => getSize(s, 'outlet')),
         ),
         $(go.Panel, 'Horizontal',
