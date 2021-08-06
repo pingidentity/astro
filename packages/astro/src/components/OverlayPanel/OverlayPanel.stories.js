@@ -9,11 +9,26 @@ import Text from '../Text';
 export default {
   title: 'OverlayPanel',
   component: OverlayPanel,
+  argTypes: {
+    children: {
+      description: 'Overlay panel content.',
+      control: 'none',
+    },
+  },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
-export const Default = ({ ...args }) => {
+export const Default = (args) => {
   const state = useOverlayPanelState();
   return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
     <OverlayProvider>
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
